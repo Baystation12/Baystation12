@@ -16235,6 +16235,13 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
+"bcp" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/machinery/washing_machine,
+/turf/simulated/floor/tiled/white,
+/area/medical/locker)
 "bdb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/window/phoronreinforced{
@@ -16378,6 +16385,13 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
+"bjQ" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/machinery/vending/medical/torch,
+/turf/simulated/floor/tiled/white,
+/area/medical/locker)
 "bkb" = (
 /obj/machinery/hologram/holopad,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -22538,13 +22552,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
-"jSW" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 9
-	},
-/obj/machinery/washing_machine,
-/turf/simulated/floor/tiled/white,
-/area/medical/locker)
 "jTb" = (
 /obj/effect/floor_decal/corner/purple{
 	dir = 4
@@ -23335,13 +23342,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/chargebay)
-"lbN" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 6
-	},
-/obj/machinery/vending/medical/torch,
-/turf/simulated/floor/tiled/white,
-/area/medical/locker)
 "lcb" = (
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -51349,7 +51349,7 @@ dqb
 dEb
 dQb
 aeY
-jSW
+bcp
 afZ
 fab
 fSb
@@ -52157,7 +52157,7 @@ dpb
 dHb
 dVb
 elb
-lbN
+bjQ
 afZ
 fib
 fUb
