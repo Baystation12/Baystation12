@@ -14,6 +14,8 @@
 
 /obj/structure/closet/secure_closet/pathfinder/WillContain()
 	return list(
+		/obj/item/solbanner,
+		/obj/item/solbanner,
 		/obj/item/device/radio,
 		/obj/item/device/tape/random,
 		/obj/item/device/gps,
