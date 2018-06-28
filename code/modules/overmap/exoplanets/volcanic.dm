@@ -146,10 +146,9 @@
 			victims -= W
 			continue
 		var/datum/gas_mixture/environment = return_air()
-		if(isliving(AM))
-			var/mob/living/M = AM
-			M.FireBurn(0.4*vsc.fire_firelevel_multiplier, 1000 + environment.temperature, environment.return_pressure())
-		AM.fire_act(environment, 1000 + environment.temperature)
+		var/pressure = environment.return_pressure()
+		if(AM.lava_act(environment, 5000 + environment.temperature, pressure))
+			victims -= W
 	if(!LAZYLEN(victims))
 		return PROCESS_KILL
 

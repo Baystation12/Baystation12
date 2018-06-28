@@ -1856,3 +1856,7 @@
 */
 /obj/mecha/fall_damage()
 	return 550
+
+/obj/mecha/lava_act(datum/gas_mixture/air, temperature, pressure)
+	fire_act(air, temperature)
+	. = (health <= 0) ? ..() : FALSE

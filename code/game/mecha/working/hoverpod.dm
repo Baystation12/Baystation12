@@ -100,3 +100,6 @@
 	ME.attach(src)
 	ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
 	ME.attach(src)
+
+/obj/mecha/working/hoverpod/is_burnable()
+	return FALSE

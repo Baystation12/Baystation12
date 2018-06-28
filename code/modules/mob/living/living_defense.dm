@@ -401,3 +401,8 @@
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle
+
+/mob/living/lava_act(datum/gas_mixture/air, temperature, pressure)
+	fire_act(air, temperature)
+	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
+	. =  (health <= 0) ? ..() : FALSE
