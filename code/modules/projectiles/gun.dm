@@ -171,7 +171,7 @@
 
 /obj/item/weapon/gun/dropped(var/mob/living/user)
 	if(istype(user))
-		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && special_check(user))
 			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
 			var/list/targets = list(user)
 			targets += trange(2, src)
