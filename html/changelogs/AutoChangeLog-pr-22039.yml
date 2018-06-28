@@ -1,6 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "MMIs cannot be inserted into non-synthetic mobs."
-  - tweak: "Flesh limbs cannot be attached to synthetic mobs."
-  - tweak: "Robotic limb attachment now uses the devices skill."
