@@ -168,8 +168,17 @@ var/list/possible_cable_coil_colours
 
 
 	else if(W.edge)
-		visible_message("<span class='warning'>[user] begins to cut away at the cable with \the [W].</span>")
-		if(user.do_skilled(3 SECONDS, SKILL_ELECTRICAL, src))
+
+		var/delay_holder
+
+		if(W.force < 5)
+			visible_message("<span class='warning'>[user] starts sawing away roughly at the cable with \the [W].</span>")
+			delay_holder = 8 SECONDS
+		else
+			visible_message("<span class='warning'>[user] begins to cut through the cable with \the [W].</span>")
+			delay_holder = 3 SECONDS
+
+		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src))
 			cut_wire(W, user)
 			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 				shock(user, 66, 0.7)
@@ -198,10 +207,11 @@ var/list/possible_cable_coil_colours
 
 	visible_message("<span class='warning'>[user] cuts the cable.</span>")
 
-	if(HasBelow(z)) for(var/turf/turf in GetBelow(src))
-		for(var/obj/structure/cable/c in turf)
-			if(c.d1 == UP || c.d2 == UP)
-				qdel(c)
+	if(HasBelow(z))
+		for(var/turf/turf in GetBelow(src))
+			for(var/obj/structure/cable/c in turf)
+				if(c.d1 == UP || c.d2 == UP)
+					qdel(c)
 
 	investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
 
