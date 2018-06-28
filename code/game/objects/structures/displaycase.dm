@@ -60,9 +60,9 @@
 		icon_state = "glassboxb"
 	else
 		icon_state = "glassbox"
-		underlays.Cut()
-		for(var/atom/movable/AM in contents)
-			underlays += AM.appearance
+	underlays.Cut()
+	for(var/atom/movable/AM in contents)
+		underlays += AM.appearance
 
 /obj/structure/displaycase/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

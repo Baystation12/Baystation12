@@ -70,9 +70,9 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if(!..())
 		return
-	if(!skillset.owner.skill_check(SKILL_MANAGEMENT, SKILL_BASIC))
-		return
-	return 1
+	for(var/decl/hierarchy/skill/S in GLOB.skills)
+		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
+			return 1
 
 /mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
 	set category = "IC"
@@ -93,8 +93,6 @@ Robots and antags can instruct.
 
 	var/options = list()
 	for(var/decl/hierarchy/skill/S in GLOB.skills)
-		if(istype(S, SKILL_MANAGEMENT))
-			continue
 		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 			options[S.name] = S
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
@@ -102,14 +100,14 @@ Robots and antags can instruct.
 		return
 	var/decl/hierarchy/skill/skill = options[choice]
 
-	if(!do_skilled(6 SECONDS, SKILL_MANAGEMENT, target))
+	if(!do_skilled(6 SECONDS, skill.type, target))
 		return
 	if(incapacitated() || target.incapacitated())
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
 		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
 		return
-	if(!target.skill_check(skill.type, SKILL_BASIC) && skill_check(skill.type, SKILL_EXPERT))
+	if(target.skill_check(skill.type, SKILL_BASIC) || !skill_check(skill.type, SKILL_EXPERT))
 		return
 
 	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
@@ -125,3 +123,59 @@ Robots and antags can instruct.
 	if(!ishuman(target))
 		return
 	return 1
+/*
+The Appraise verb. Used on objects to estimate their value.
+*/
+/datum/skill_verb/appraise
+	the_verb = /mob/proc/appraise
+
+/datum/skill_verb/appraise/should_have_verb(datum/skillset/given_skillset)
+	if(!..())
+		return
+	if(!isliving(given_skillset.owner))
+		return
+	return 1
+
+/datum/skill_verb/appraise/should_see_verb()
+	if(!..())
+		return
+	if(!skillset.owner.skill_check(SKILL_FINANCE, SKILL_BASIC))
+		return
+	return 1
+
+/mob/proc/appraise(obj/item as obj in get_equipped_items(1))
+	set category = "IC"
+	set name = "Appraise"
+	set src = usr
+	set popup_menu = 0
+
+	if(incapacitated() || !istype(item))
+		return
+	var/value = get_value(item)
+	var/message
+	if(!value)
+		message = "\The [item] seems worthless."
+	else
+		var/multiple = round(log(10, value))
+		if(multiple < 0)
+			message = "\The [item] seems worthless."
+		else
+			var/level = get_appraise_level(get_skill_value(SKILL_FINANCE))
+			level *= 10 ** (max(multiple - 1, 0))
+			var/low = level * round(value/level)  //low and high bracket the value between multiples of level
+			var/high = low + level
+			if(!low && multiple >= 2)
+				low = 10 ** (multiple - 1) //Adjusts the lowball estimate away from 0 if the item has a high upper estimate.
+			message = "You appraise the item to be worth between [low] and [high] thaler."
+	to_chat(src, message)
+
+/proc/get_appraise_level(skill)
+	switch(skill)
+		if(SKILL_MAX)
+			return 5
+		if(SKILL_EXPERT)
+			return 10
+		if(SKILL_ADEPT)
+			return 20
+		else
+			return 50

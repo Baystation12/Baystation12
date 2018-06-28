@@ -64,16 +64,18 @@ atom/var/var/fingerprintslast = null
 			else if(prob(75))
 				return 0
 			H.gloves.add_fingerprint(M)
-
+	var/additional_chance = 0
+	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+		additional_chance = 10
 	// Add the fingerprints
-	add_partial_print(full_print)
+	add_partial_print(full_print, additional_chance)
 	return 1
 
-/atom/proc/add_partial_print(full_print)
+/atom/proc/add_partial_print(full_print, bonus)
 	if(!fingerprints[full_print])
-		fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
-		switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+		switch(max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
 			if(28 to 32)
 				if(prob(1))
 					fingerprints[full_print] = full_print 		// You rolled a one buddy.

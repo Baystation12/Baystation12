@@ -1,4 +1,0 @@
-author: "Miraviel"
-delete-after: True
-changes: 
-  - rscdel: "Removed the time restriction on the following jobs: Explorer, Corpsman, Deck Technician, and Scientist."

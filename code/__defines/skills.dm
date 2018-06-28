@@ -12,7 +12,6 @@
 #define SKILL_AVERAGE  2
 #define SKILL_HARD     4
 
-#define SKILL_MANAGEMENT    /decl/hierarchy/skill/organizational/management
 #define SKILL_BUREAUCRACY   /decl/hierarchy/skill/organizational/bureaucracy
 #define SKILL_FINANCE       /decl/hierarchy/skill/organizational/finance
 #define SKILL_EVA           /decl/hierarchy/skill/general/EVA

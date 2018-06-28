@@ -158,5 +158,5 @@
 	icon_state = "bluespacecrystal[rand(1,3)]"
 	set_light(0.7, 1, 5, l_color = "#0066ff")
 
-/turf/unsimulated/wall/supermatter/no_spread/process()
+/turf/unsimulated/wall/supermatter/no_spread/Process()
 	return PROCESS_KILL

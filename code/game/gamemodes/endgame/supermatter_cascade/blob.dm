@@ -11,32 +11,29 @@
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = SUPERMATTER_WALL_LAYER
 
-	var/next_check=0
 	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
 /turf/unsimulated/wall/supermatter/New()
 	..()
-	processing_turfs.Add(src)
-	next_check = world.time + 5 SECONDS
+	START_PROCESSING(SSturf, src)
 
 	// Nom.
 	for(var/atom/movable/A in src)
 		Consume(A)
 
 /turf/unsimulated/wall/supermatter/Destroy()
-	processing_turfs.Remove(src)
-	..()
+	STOP_PROCESSING(SSturf, src)	
+	. = ..()
 
-/turf/unsimulated/wall/supermatter/process()
+/turf/unsimulated/wall/supermatter/Process(wait, times_fired)
 	// Only check infrequently.
-	if(next_check>world.time) return
+	var/how_often = max(round(5 SECONDS/wait), 1)
+	if(times_fired % how_often)
+		return
 
-	// No more available directions? Shut down process().
+	// No more available directions? Stop processing.
 	if(!avail_dirs.len)
 		return PROCESS_KILL
-
-	// We're checking, reset the timer.
-	next_check = world.time + 5 SECONDS
 
 	// Choose a direction.
 	var/pdir = pick(avail_dirs)

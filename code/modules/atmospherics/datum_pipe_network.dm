@@ -16,6 +16,8 @@
 		normal_member.reassign_network(src, null)
 	gases.Cut()  // Do not qdel the gases, we don't own them
 	leaks.Cut()
+	normal_members.Cut()
+	line_members.Cut()
 	return ..()
 
 /datum/pipe_network/Process()
@@ -35,7 +37,6 @@
 	if(!start_normal)
 		qdel(src)
 		return
-
 	start_normal.network_expand(src, reference)
 
 	update_network_gases()

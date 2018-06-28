@@ -8,6 +8,8 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/
 	can_infect = 0
+	core_skill = SKILL_DEVICES
+
 /datum/surgery_step/robotics/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!istype(target))
 		return 0
@@ -19,6 +21,21 @@
 	if (affected.robotic < ORGAN_ROBOT)
 		return 0
 	return 1
+
+/datum/surgery_step/robotics/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	
+	//Compensating for anatomy skill req in base proc
+	. += 10
+
+	if(!user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+		. -= 20
+
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		. += 10
+
+	if(user.skill_check(SKILL_DEVICES, SKILL_PROF))
+		. += 20
 
 //////////////////////////////////////////////////////////////////
 //	 unscrew robotic limb hatch surgery step
@@ -173,6 +190,11 @@
 	min_duration = 50
 	max_duration = 60
 
+/datum/surgery_step/robotics/repair_brute/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC))
+		. += 10
+
 /datum/surgery_step/robotics/repair_brute/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -211,6 +233,12 @@
 
 	min_duration = 50
 	max_duration = 60
+
+/datum/surgery_step/robotics/repair_burn/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		. += 10
 
 /datum/surgery_step/robotics/repair_burn/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
@@ -457,7 +485,7 @@
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
 		return SURGERY_FAILURE
 
-	if(!(affected.robotic >= ORGAN_ROBOT))
+	if(!target.isSynthetic())
 		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat body.</span>")
 		return SURGERY_FAILURE
 

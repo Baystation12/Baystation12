@@ -483,21 +483,29 @@
 			health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
 			lastcycle = world.time
 
+			var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+			if(prob(user.skill_fail_chance(SKILL_BOTANY, 40, needed_skill)))
+				dead = 1
+				health = 0
 			qdel(O)
 
 			check_health()
 
 		else
-			to_chat(user, "<span class='danger'>\The [src] already has seeds in it!</span>")
+			to_chat(user, "<span class='warning'>\The [src] already has seeds in it!</span>")
 
 	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
-			user.visible_message("<span class='danger'>[user] starts uprooting the weeds.</span>", "<span class='danger'>You remove the weeds from the [src].</span>")
+			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")
 			weedlevel = 0
-			update_icon()
+			if(seed)
+				var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+				if(!user.skill_check(SKILL_BOTANY, needed_skill))
+					health -= rand(40,60)
+					check_health(1)
 		else
-			to_chat(user, "<span class='danger'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
+			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
 	else if (istype(O, /obj/item/weapon/storage/plants))
 
@@ -572,15 +580,16 @@
 	to_chat(usr, "Water: [round(waterlevel,0.1)]/100")
 	to_chat(usr, "Nutrient: [round(nutrilevel,0.1)]/10")
 
-	if(weedlevel >= 5)
-		to_chat(usr, "\The [src] is <span class='danger'>infested with weeds</span>!")
-	if(pestlevel >= 5)
-		to_chat(usr, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
+	if(usr.skill_check(SKILL_BOTANY, SKILL_BASIC))
+		if(weedlevel >= 5)
+			to_chat(usr, "\The [src] is <span class='danger'>infested with weeds</span>!")
+		if(pestlevel >= 5)
+			to_chat(usr, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
 
-	if(dead)
-		to_chat(usr, "<span class='danger'>The plant is dead.</span>")
-	else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-		to_chat(usr, "The plant looks <span class='danger'>unhealthy</span>.")
+		if(dead)
+			to_chat(usr, "<span class='danger'>The plant is dead.</span>")
+		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
+			to_chat(usr, "The plant looks <span class='danger'>unhealthy</span>.")
 
 	if(mechanical)
 		var/turf/T = loc

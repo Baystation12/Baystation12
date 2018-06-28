@@ -271,9 +271,10 @@
 			return
 		var/value = text2num(href_list["newvalue"])
 		update_skill_value(J, S, value)
-		pref.ShowChoices(user) //Manual refresh to foreground/background windows.
+		pref.ShowChoices(user) //Manual refresh to allow us to focus the panel, not the main window.
 		panel.set_content(generate_skill_content(J))
 		panel.open()
+		winset(user, panel.window_id, "focus=1") //Focuses the panel.
 
 	else if(href_list["skillinfo"])
 		var/decl/hierarchy/skill/S = locate(href_list["skillinfo"])

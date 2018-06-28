@@ -28,18 +28,22 @@
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-/obj/item/device/radio
+	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device
+	var/power_usage = 2800
+
 	var/datum/radio_frequency/radio_connection
 	var/list/datum/radio_frequency/secure_radio_connections = new
 
-	proc/set_frequency(new_frequency)
-		radio_controller.remove_object(src, frequency)
-		frequency = new_frequency
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
+/obj/item/device/radio/proc/set_frequency(new_frequency)
+	radio_controller.remove_object(src, frequency)
+	frequency = new_frequency
+	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/device/radio/Initialize()
 	. = ..()
 	wires = new(src)
+	if(ispath(cell))
+		cell = new(src)
 	internal_channels = GLOB.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
@@ -79,7 +83,9 @@
 	data["speaker"] = listening
 	data["freq"] = format_frequency(frequency)
 	data["rawfreq"] = num2text(frequency)
-
+	if(cell)
+		var/charge = round(cell.percent())
+		data["charge"] = charge ? "[charge]%" : "NONE"
 	data["mic_cut"] = (wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
@@ -140,6 +146,8 @@
 		return wires.GetInteractWindow()
 	return
 
+/obj/item/device/radio/get_cell()
+	return cell
 
 /obj/item/device/radio/proc/text_sec_channel(var/chan_name, var/chan_stat)
 	var/list = !!(chan_stat&FREQ_LISTENING)!=0
@@ -201,6 +209,14 @@
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return 1
 
+	if(href_list["remove_cell"])
+		if(cell)
+			var/mob/user = usr
+			user.put_in_hands(cell)
+			to_chat(user, "<span class='notice'>You remove [cell] from \the [src].</span>")
+			cell = null
+		return 1
+
 	if(.)
 		GLOB.nanomanager.update_uis(src)
 
@@ -253,6 +269,17 @@
 
 	if(!radio_connection)
 		set_frequency(frequency)
+
+
+	if(power_usage)
+		if(!cell)
+			return 0
+		if(!cell.checked_use(power_usage * CELLRATE))
+			return 0
+
+	if(loc == M)
+		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
+
 
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally
@@ -424,7 +451,8 @@
 		"verb" = verb
 	)
 	signal.frequency = connection.frequency // Quick frequency set
-
+	if(cell && cell.percent() < 20)
+		signal.data["compression"] = max(0, 80 - cell.percent()*3)
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
@@ -517,15 +545,18 @@
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	user.set_machine(src)
-	if (!( isScrewdriver(W) ))
-		return
-	b_stat = !( b_stat )
-	if(!istype(src, /obj/item/device/radio/beacon))
-		if (b_stat)
-			user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
-		else
-			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
-		updateDialog()
+	if(isScrewdriver(W))
+		b_stat = !b_stat
+		if(!istype(src, /obj/item/device/radio/beacon))
+			if (b_stat)
+				user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
+			else
+				user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
+			updateDialog()
+			return
+	if(!cell && power_usage && istype(W, /obj/item/weapon/cell/device) && user.unEquip(W, target = src))
+		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
+		cell = W
 		return
 
 /obj/item/device/radio/emp_act(severity)
@@ -533,6 +564,8 @@
 	listening = 0
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
+	if(cell)
+		cell.emp_act(severity)
 	..()
 
 /obj/item/device/radio/proc/recalculateChannels()
@@ -551,6 +584,8 @@
 	icon_state = "radio"
 	canhear_range = 0
 	subspace_transmission = 1
+	cell = null
+	power_usage = 0
 
 /obj/item/device/radio/borg/ert
 	keyslot = /obj/item/device/encryptionkey/ert
@@ -740,6 +775,7 @@
 	anchored = 1
 	simulated = 0
 	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1)
+	cell = null
 
 /obj/item/device/radio/announcer/Destroy()
 	crash_with("attempt to delete a [src.type] detected, and prevented.")

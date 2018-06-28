@@ -38,7 +38,7 @@ var/list/possible_cable_coil_colours
 	plane = ABOVE_TURF_PLANE
 	layer = EXPOSED_WIRE_LAYER
 
-	color = COLOR_RED
+	color = COLOR_MAROON
 	var/obj/machinery/power/breakerbox/breaker_box
 
 
@@ -53,25 +53,25 @@ var/list/possible_cable_coil_colours
 	return PN.draw_power(amount)
 
 /obj/structure/cable/yellow
-	color = COLOR_YELLOW
+	color = COLOR_AMBER
 
 /obj/structure/cable/green
-	color = COLOR_LIME
+	color = COLOR_GREEN
 
 /obj/structure/cable/blue
-	color = COLOR_BLUE
+	color = COLOR_CYAN_BLUE
 
 /obj/structure/cable/pink
-	color = COLOR_PINK
+	color = COLOR_PURPLE
 
 /obj/structure/cable/orange
 	color = COLOR_ORANGE
 
 /obj/structure/cable/cyan
-	color = COLOR_CYAN
+	color = COLOR_SKY_BLUE
 
 /obj/structure/cable/white
-	color = COLOR_WHITE
+	color = COLOR_SILVER
 
 /obj/structure/cable/New()
 	..()
@@ -470,7 +470,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	randpixel = 2
 	amount = MAXCOIL
 	max_amount = MAXCOIL
-	color = COLOR_RED
+	color = COLOR_MAROON
 	desc = "A coil of wiring, for delicate electronics use aswell as the more basic cable laying."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
@@ -800,25 +800,25 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	update_wclass()
 
 /obj/item/stack/cable_coil/yellow
-	color = COLOR_YELLOW
+	color = COLOR_AMBER
 
 /obj/item/stack/cable_coil/blue
-	color = COLOR_BLUE
+	color = COLOR_CYAN_BLUE
 
 /obj/item/stack/cable_coil/green
-	color = COLOR_LIME
+	color = COLOR_GREEN
 
 /obj/item/stack/cable_coil/pink
-	color = COLOR_PINK
+	color = COLOR_PURPLE
 
 /obj/item/stack/cable_coil/orange
 	color = COLOR_ORANGE
 
 /obj/item/stack/cable_coil/cyan
-	color = COLOR_CYAN
+	color = COLOR_SKY_BLUE
 
 /obj/item/stack/cable_coil/white
-	color = COLOR_WHITE
+	color = COLOR_SILVER
 
 /obj/item/stack/cable_coil/random/New()
 	color = possible_cable_coil_colours[pick(possible_cable_coil_colours)]

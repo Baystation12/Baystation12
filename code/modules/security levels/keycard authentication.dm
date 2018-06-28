@@ -164,10 +164,10 @@
 			security_state.set_security_level(security_state.stored_security_level)
 			feedback_inc("alert_keycard_revert_red",1)
 		if("Grant Emergency Maintenance Access")
-			make_maint_all_access()
+			GLOB.using_map.make_maint_all_access()
 			feedback_inc("alert_keycard_auth_maintGrant",1)
 		if("Revoke Emergency Maintenance Access")
-			revoke_maint_all_access()
+			GLOB.using_map.revoke_maint_all_access()
 			feedback_inc("alert_keycard_auth_maintRevoke",1)
 		if("Emergency Response Team")
 			if(is_ert_blocked())
@@ -189,16 +189,6 @@
 	return ticker.mode && ticker.mode.ert_disabled
 
 var/global/maint_all_access = 0
-
-/proc/make_maint_all_access()
-	maint_all_access = 1
-	to_world("<font size=4 color='red'>Attention!</font>")
-	to_world("<font color='red'>The maintenance access requirement has been revoked on all airlocks.</font>")
-
-/proc/revoke_maint_all_access()
-	maint_all_access = 0
-	to_world("<font size=4 color='red'>Attention!</font>")
-	to_world("<font color='red'>The maintenance access requirement has been readded on all maintenance airlocks.</font>")
 
 /obj/machinery/door/airlock/allowed(mob/M)
 	if(maint_all_access && src.check_access_list(list(access_maint_tunnels)))

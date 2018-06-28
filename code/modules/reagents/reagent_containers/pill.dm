@@ -314,6 +314,15 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	reagents.add_reagent(/datum/reagent/hyronalin, 7)
 	color = reagents.get_color()
 
+/obj/item/weapon/reagent_containers/pill/antirad
+	name = "AntiRad"
+	desc = "Used to treat radiation poisoning."
+	icon_state = "yellow"
+/obj/item/weapon/reagent_containers/pill/antirad/New()
+	..()
+	reagents.add_reagent(/datum/reagent/hyronalin, 5)
+	reagents.add_reagent(/datum/reagent/dylovene, 10)
+
 
 /obj/item/weapon/reagent_containers/pill/sugariron
 	name = "Sugar-Iron (10u)"

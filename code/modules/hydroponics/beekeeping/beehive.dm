@@ -1,7 +1,8 @@
 /obj/machinery/beehive
-	name = "beehive"
+	name = "apiary"
 	icon = 'icons/obj/beekeeping.dmi'
-	icon_state = "beehive"
+	icon_state = "beehive-0"
+	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
 	density = 1
 	anchored = 1
 
@@ -12,9 +13,13 @@
 	var/frames = 0
 	var/maxFrames = 5
 
+/obj/machinery/beehive/Initialize()
+	. = ..()
+	update_icon()
+
 /obj/machinery/beehive/update_icon()
 	overlays.Cut()
-	icon_state = "beehive"
+	icon_state = "beehive-[closed]"
 	if(closed)
 		overlays += "lid"
 	if(frames)
@@ -23,12 +28,16 @@
 		overlays += "full[round(honeycombs / 100)]"
 	if(!smoked)
 		switch(bee_count)
-			if(1 to 40)
+			if(1 to 20)
 				overlays += "bees1"
-			if(41 to 80)
+			if(21 to 40)
 				overlays += "bees2"
-			if(81 to 100)
+			if(41 to 60)
 				overlays += "bees3"
+			if(61 to 80)
+				overlays += "bees4"
+			if(81 to 100)
+				overlays += "bees5"
 
 /obj/machinery/beehive/examine(var/mob/user)
 	. = ..()

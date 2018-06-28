@@ -48,7 +48,7 @@
 	GLOB.silicon_mob_list -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
-	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
+	for(var/datum/alarm_handler/AH in SSalarm.all_handlers)
 		AH.unregister_alarm(src)
 	return ..()
 
@@ -72,10 +72,11 @@
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
-			src.take_organ_damage(0,20,emp=1)
-			Stun(rand(5,10))
+			src.take_organ_damage(0,16,emp=1)
+			if(prob(50)) Stun(rand(5,10))
+			else confused = (min(confused + 2, 40))
 		if(2)
-			src.take_organ_damage(0,10,emp=1)
+			src.take_organ_damage(0,7,emp=1)
 			confused = (min(confused + 2, 30))
 	flash_eyes(affect_silicon = 1)
 	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")

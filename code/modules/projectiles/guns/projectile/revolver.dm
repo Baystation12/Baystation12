@@ -10,6 +10,8 @@
 	fire_delay = 6.75 //Revolvers are naturally slower-firing
 	ammo_type = /obj/item/ammo_casing/a357
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
+	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
+	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
 
 /obj/item/weapon/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
