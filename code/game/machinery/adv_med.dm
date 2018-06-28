@@ -112,6 +112,9 @@
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	if(!do_after(user, 30, src))
 		return
+	if (src.occupant)
+		to_chat(usr, "<span class='warning'>The scanner is already occupied!</span>")
+		return
 	var/mob/M = target
 	M.forceMove(src)
 	src.occupant = M
@@ -367,7 +370,7 @@
 		subdat += jointext(row, null)
 	if(skill_level < SKILL_BASIC)
 		pick_n_take(subdat)
-	else 
+	else
 		if(skill_level <= SKILL_ADEPT)
 			table += shuffle(subdat)
 		else table += subdat
