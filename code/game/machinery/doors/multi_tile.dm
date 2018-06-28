@@ -20,15 +20,12 @@
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/multi_tile
 
-/obj/machinery/door/airlock/multi_tile/New()
-	..()
-	SetBounds()
 
 /obj/machinery/door/airlock/multi_tile/Move()
 	. = ..()
 	SetBounds()
 
-/obj/machinery/door/airlock/multi_tile/proc/SetBounds()
+/obj/machinery/door/airlock/multi_tile/SetBounds()
 	if(dir in list(NORTH, SOUTH))
 		bound_width = width * world.icon_size
 		bound_height = world.icon_size

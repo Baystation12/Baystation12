@@ -52,22 +52,15 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New()
-	. = ..()
+/obj/machinery/door/Initialize()
 	if(density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
 	else
 		layer = open_layer
 
-
 	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
+		SetBounds()
 
 	health = maxhealth
 	update_connections(1)
@@ -75,9 +68,16 @@
 
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/machinery/door/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	. = ..()
+
+/obj/machinery/door/proc/SetBounds()
+	if(dir in list(EAST, WEST))
+		bound_width = width * world.icon_size
+		bound_height = world.icon_size
+	else
+		bound_width = world.icon_size
+		bound_height = width * world.icon_size
 
 /obj/machinery/door/Destroy()
 	set_density(0)
