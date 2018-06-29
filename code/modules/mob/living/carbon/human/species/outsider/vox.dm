@@ -17,7 +17,7 @@
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
 	taste_sensitivity = TASTE_DULL
-
+	eye_icon = "vox_eyes_s"
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
