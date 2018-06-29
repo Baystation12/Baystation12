@@ -291,6 +291,7 @@
 	holographic_objs = A.copy_contents_to(linkedholodeck , 1)
 	for(var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
+		holo_obj.holographic = TRUE
 
 	if(HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience
