@@ -53,14 +53,8 @@
 /obj/structure/iv_drip/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))
 		return
-
 	if(attached)
-		if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
-			rip_out()
-			STOP_PROCESSING(SSobj,src)
-		else
-			visible_message("\The [attached] is taken off \the [src]")
-			attached = null
+		drip_detach()
 	else if(ishuman(over_object))
 		hook_up(over_object, usr)
 	update_icon()
@@ -123,7 +117,9 @@
 			update_icon()
 
 /obj/structure/iv_drip/attack_hand(mob/user as mob)
-	if(beaker)
+	if(attached)
+		drip_detach()
+	else if(beaker)
 		beaker.dropInto(loc)
 		beaker = null
 		update_icon()
@@ -134,6 +130,26 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
+/obj/structure/iv_drip/verb/drip_detach()
+	set category = "Object"
+	set name = "Detach IV Drip"
+	set src in range(1)
+	
+	if(!attached)
+		return
+		
+	if(!usr.Adjacent(attached))
+		to_chat(usr, "<span class='warning'>You are too far away from the [attached]!</span>")
+		return
+		
+	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		rip_out()
+		STOP_PROCESSING(SSobj,src)
+	else
+		visible_message("\The [attached] is taken off \the [src]")
+		attached = null
+		update_icon()
+		
 /obj/structure/iv_drip/verb/toggle_mode()
 	set category = "Object"
 	set name = "Toggle IV Mode"
