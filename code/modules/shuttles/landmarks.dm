@@ -22,9 +22,8 @@
 	//If set, will set base area and turf type to same as where it was spawned at
 	var/autoset
 
-/obj/effect/shuttle_landmark/New()
-	..()
-	tag = landmark_tag //since tags cannot be set at compile time
+/obj/effect/shuttle_landmark/Initialize()
+	. = ..()
 	if(autoset)
 		base_area = get_area(src)
 		var/turf/T = get_turf(src)
@@ -32,10 +31,9 @@
 			base_turf = T.type
 	else
 		base_area = locate(base_area || world.area)
-	name = name + " ([x],[y])"
 
-/obj/effect/shuttle_landmark/Initialize()
-	. = ..()
+	SetName(name + " ([x],[y])")
+
 	if(docking_controller)
 		var/docking_tag = docking_controller
 		docking_controller = locate(docking_tag)
@@ -45,7 +43,11 @@
 			var/obj/effect/overmap/location = map_sectors["[z]"]
 			if(location && location.docking_codes)
 				docking_controller.docking_codes = location.docking_codes
-	shuttle_controller.register_landmark(tag, src)
+
+	SSshuttle.register_landmark(landmark_tag, src)
+
+//Called when the landmark is added to an overmap sector.
+/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O)
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
@@ -75,30 +77,19 @@
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
-	tag = landmark_tag+"-[x]-[y]-[z]"
-	. = ..()
-	base_area = get_area(src)
-	if(!GLOB.using_map.use_overmap)
-		return
-	add_to_sector(map_sectors["[z]"])
+	landmark_tag += "-[x]-[y]-[z]"
+	return ..()
 
-/obj/effect/shuttle_landmark/automatic/proc/add_to_sector(var/obj/effect/overmap/O, var/tag_only)
-	if(!istype(O))
-		return
+/obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/O)
+	..()
 	SetName("[O.name] - [name]")
-	if(shuttle_restricted)
-		if(!O.restricted_waypoints[shuttle_restricted])
-			O.restricted_waypoints[shuttle_restricted] = list()
-		O.restricted_waypoints[shuttle_restricted] += tag_only ? tag : src
-	else
-		O.generic_waypoints += tag_only ? tag : src
 
 //Subtype that calls explosion on init to clear space for shuttles
 /obj/effect/shuttle_landmark/automatic/clearing
 	var/radius = 10
 
 /obj/effect/shuttle_landmark/automatic/clearing/Initialize()
-	. = ..()
+	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()

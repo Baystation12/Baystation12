@@ -14,7 +14,7 @@
 	if(given_shuttle.logging_home_tag)
 		shuttle_name = given_shuttle.name
 		home_base = given_shuttle.logging_home_tag
-		shuttle_controller.shuttle_logs[given_shuttle] = src
+		SSshuttle.shuttle_logs[given_shuttle] = src
 
 /datum/shuttle_log/Destroy()
 	update_registred()
@@ -117,7 +117,7 @@
 			return mission
 
 /datum/shuttle_log/proc/handle_move(obj/effect/shuttle_landmark/origin, obj/effect/shuttle_landmark/destination)
-	var/obj/effect/shuttle_landmark/home = shuttle_controller.get_landmark(home_base)
+	var/obj/effect/shuttle_landmark/home = SSshuttle.get_landmark(home_base)
 	if(origin == home)
 		shuttle_launched()
 	if(destination == home)
