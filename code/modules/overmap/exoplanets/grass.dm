@@ -7,7 +7,8 @@
 							 /datum/map_template/ruin/exoplanet/oasis,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
-							 /datum/map_template/ruin/exoplanet/fountain)
+							 /datum/map_template/ruin/exoplanet/fountain,
+							 /datum/map_template/ruin/exoplanet/lodge)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
 	if(prob(40))
