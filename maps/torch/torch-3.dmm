@@ -5502,6 +5502,7 @@
 "kQ" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/storage/firstaid/toxin,
+/obj/item/weapon/storage/med_pouch/radiation,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
 "kR" = (
@@ -7480,6 +7481,7 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
+/obj/item/weapon/storage/med_pouch/radiation,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/hallway)
 "pH" = (
@@ -8806,7 +8808,6 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/item/device/boombox,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
 "sl" = (
@@ -11064,7 +11065,6 @@
 	req_access = list(3)
 	},
 /obj/structure/window/reinforced,
-/obj/item/device/boombox,
 /turf/simulated/floor/plating,
 /area/vacant/armory)
 "yd" = (
@@ -14348,7 +14348,6 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/device/boombox,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5

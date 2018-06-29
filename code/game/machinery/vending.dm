@@ -914,7 +914,8 @@
 		/obj/item/weapon/storage/med_pouch/trauma,
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/med_pouch/oxyloss,
-		/obj/item/weapon/storage/med_pouch/toxin = 2
+		/obj/item/weapon/storage/med_pouch/toxin,
+		/obj/item/weapon/storage/med_pouch/radiation
 		)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3, /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 2)
 
