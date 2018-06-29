@@ -30,7 +30,7 @@ obj/effect/icarus/irradiate/Initialize()
 	S.decay = FALSE
 	S.source_turf = get_turf(src)
 	S.update_rad_power(radiation_power)
-	radiation_repository.add_source(S)
+	SSradiation.add_source(S)
 
 obj/effect/icarus/irradiate/Destroy()
 	. = ..()

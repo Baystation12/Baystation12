@@ -374,7 +374,7 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/uranium/Process()
 	if(world.time > last_event+20)
 		if(prob(50))
-			radiation_repository.radiate(src, rad_power)
+			SSradiation.radiate(src, rad_power)
 		last_event = world.time
 	..()
 

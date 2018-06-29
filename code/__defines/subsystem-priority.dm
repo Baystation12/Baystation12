@@ -15,6 +15,7 @@
 #define SS_PRIORITY_ALARM          20   // Alarm processing.
 #define SS_PRIORITY_EVENT          20   // Event processing and queue handling.
 #define SS_PRIORITY_SHUTTLE        20   // Shuttle movement.
+#define SS_PRIORITY_RADIATION      20   // Radiation processing and cache updates.
 #define SS_PRIORITY_AIRFLOW        15	// Object movement from ZAS airflow.
 #define SS_PRIORITY_INACTIVITY     10	// Idle kicking.
 
