@@ -17,7 +17,9 @@
 /spell/aoe_turf/blink/cast(var/list/targets, mob/user)
 	if(!targets.len)
 		return
-	if(user.incapacitated())
+
+	if(user.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT))
+		to_chat(user, "<span class='warning'>You can't cast this spell while incapacitated!</span>")
 		return
 
 	var/turf/T = pick(targets)

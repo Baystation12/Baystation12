@@ -20,7 +20,8 @@
 		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
 			continue
 
-		if(target.incapacitated())
+		if(target.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT))
+			to_chat(target, "<span class='warning'>You can't cast this spell while incapacitated!</span>")
 			return
 
 		if(target.buckled)

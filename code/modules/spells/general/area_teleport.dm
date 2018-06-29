@@ -38,7 +38,8 @@
 	if(!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
-	if(user.incapacitated())
+	if(user.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT))
+		to_chat(user, "<span class='warning'>You can't cast this spell while incapacitated!</span>")
 		return
 	return
 
