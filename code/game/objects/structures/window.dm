@@ -197,14 +197,17 @@
 							"You hear a knocking sound.")
 	return
 
-/obj/structure/window/attack_generic(var/mob/user, var/damage)
+/obj/structure/window/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
 	if(istype(user))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 	if(!damage)
 		return
 	if(damage >= 10)
-		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
+		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
