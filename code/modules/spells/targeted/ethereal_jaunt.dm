@@ -20,6 +20,9 @@
 		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
 			continue
 
+		if(target.incapacitated())
+			return
+
 		if(target.buckled)
 			target.buckled.unbuckle_mob()
 		spawn(0)

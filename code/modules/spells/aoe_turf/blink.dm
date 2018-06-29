@@ -17,6 +17,8 @@
 /spell/aoe_turf/blink/cast(var/list/targets, mob/user)
 	if(!targets.len)
 		return
+	if(user.incapacitated())
+		return
 
 	var/turf/T = pick(targets)
 	var/turf/starting = get_turf(user)
