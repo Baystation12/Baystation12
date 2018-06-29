@@ -24,7 +24,6 @@ var/global/list/minevendor_list = list( //keep in order of price
 	new /datum/data/mining_equipment("Mining Drill",				/obj/item/weapon/pickaxe,									10,					200),
 	new /datum/data/mining_equipment("Deep Ore Scanner",			/obj/item/weapon/mining_scanner,							10,					250),
 	new /datum/data/mining_equipment("Magboots",					/obj/item/clothing/shoes/magboots,							10,					300),
-	new /datum/data/mining_equipment("Sculpting Block for Autochisel",/obj/structure/sculpting_block,							-1,					10000),
 	new /datum/data/mining_equipment("Autochisel",					/obj/item/weapon/autochisel,								10,					400),
 	new /datum/data/mining_equipment("Jetpack",						/obj/item/weapon/tank/jetpack,								10,					400),
 	new /datum/data/mining_equipment("Industrial Drill Brace",		/obj/machinery/mining/brace,								-1,					500,	1),
@@ -35,10 +34,14 @@ var/global/list/minevendor_list = list( //keep in order of price
 	new /datum/data/mining_equipment("Minecart",					/obj/structure/closet/crate/miningcar,						-1,					600,	1),
 	new /datum/data/mining_equipment("Resonator",					/obj/item/weapon/resonator,									10,					700),
 	new /datum/data/mining_equipment("Mining RIG",					/obj/item/weapon/rig/industrial,							5,					750),
-	new /datum/data/mining_equipment("Ore Summoner",					/obj/item/weapon/oreportal,									3,					800),
+	new /datum/data/mining_equipment("KA Range Increase",			/obj/item/borg/upgrade/modkit/range,						10,					750),
+	new /datum/data/mining_equipment("Kinetic Accelerator",			/obj/item/weapon/gun/energy/kinetic_accelerator,			10,					750),
+	new /datum/data/mining_equipment("Ore Summoner",					/obj/item/weapon/oreportal,								3,					800),
+	new /datum/data/mining_equipment("KA Cooldown Decrease",		/obj/item/borg/upgrade/modkit/cooldown,						15,					1000),
 	new /datum/data/mining_equipment("Lazarus Injector",			/obj/item/weapon/lazarus_injector,							25,					1000),
 	new /datum/data/mining_equipment("Industrial Drill Head",		/obj/machinery/mining/drill,								-1,					1000,	1),
 	new /datum/data/mining_equipment("Super Resonator",				/obj/item/weapon/resonator/upgraded,						10,					1250),
+	new /datum/data/mining_equipment("KA AoE Damage",				/obj/item/borg/upgrade/modkit/aoe/turfs,					15,					1500),
 	new /datum/data/mining_equipment("Diamond Pickaxe",				/obj/item/weapon/pickaxe/diamond,							10,					1500),
 	new /datum/data/mining_equipment("Plasmacutter",				/obj/item/weapon/gun/energy/plasmacutter,					1,					3750)
 	)

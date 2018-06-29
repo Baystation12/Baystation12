@@ -413,7 +413,7 @@
 	w_class = 3
 	force = 15
 	throwforce = 10
-	var/burst_time = 30
+	var/burst_time = 50
 	var/fieldlimit = 4
 	var/list/fields = list()
 	var/quick_burst_mod = 0.8
@@ -427,7 +427,7 @@
 	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 4, TECH_POWER = 2, TECH_ENGINEERING = 3)
 	fieldlimit = 8
 	quick_burst_mod = 1
-	burst_time = 15
+	burst_time = 30
 
 /obj/item/weapon/resonator/proc/CreateResonance(target, creator)
 	var/turf/T = get_turf(target)
@@ -463,7 +463,7 @@
 	layer = 5
 	anchored = TRUE
 	mouse_opacity = 0
-	var/resonance_damage = 20
+	var/resonance_damage = 10
 	var/creator
 	var/obj/item/weapon/resonator/res
 
@@ -478,7 +478,7 @@
 	var/pressure = environment.return_pressure()
 	if(pressure < 50)
 		name = "strong resonance field"
-		resonance_damage = 60
+		resonance_damage = 30
 
 	addtimer(CALLBACK(src, .proc/burst, loc), timetoburst)
 

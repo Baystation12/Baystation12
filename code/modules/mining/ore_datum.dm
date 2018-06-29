@@ -58,7 +58,7 @@ var/global/list/ores_by_type = list()
 		)
 	xarch_source_mineral = "potassium"
 	origin_tech = list(TECH_MATERIAL = 5)
-	worth = 25
+	worth = 15
 
 /ore/hematite
 	name = "iron"
@@ -69,7 +69,7 @@ var/global/list/ores_by_type = list()
 	spread_chance = 25
 	ore = /obj/item/weapon/ore/iron
 	scan_icon = "mineral_common"
-	worth = 4
+	worth = 2
 
 /ore/coal
 	name = "carbon"
@@ -81,7 +81,7 @@ var/global/list/ores_by_type = list()
 	spread_chance = 25
 	ore = /obj/item/weapon/ore/coal
 	scan_icon = "mineral_common"
-	worth = 2
+	worth = 1
 
 /ore/glass
 	name = "sand"
@@ -110,7 +110,7 @@ var/global/list/ores_by_type = list()
 		)
 	xarch_source_mineral = "phoron"
 	origin_tech = list(TECH_MATERIAL = 2)
-	worth = 8
+	worth = 4
 
 /ore/silver
 	name = "silver"
@@ -121,7 +121,7 @@ var/global/list/ores_by_type = list()
 	ore = /obj/item/weapon/ore/silver
 	scan_icon = "mineral_uncommon"
 	origin_tech = list(TECH_MATERIAL = 3)
-	worth = 20
+	worth = 10
 
 /ore/gold
 	smelts_to = "gold"
@@ -138,7 +138,7 @@ var/global/list/ores_by_type = list()
 		"billion_lower" = 3
 		)
 	origin_tech = list(TECH_MATERIAL = 4)
-	worth = 30
+	worth = 15
 
 /ore/diamond
 	name = "diamond"
@@ -150,7 +150,7 @@ var/global/list/ores_by_type = list()
 	scan_icon = "mineral_rare"
 	xarch_source_mineral = "nitrogen"
 	origin_tech = list(TECH_MATERIAL = 6)
-	worth = 50
+	worth = 25
 
 /ore/platinum
 	name = "platinum"
@@ -162,7 +162,7 @@ var/global/list/ores_by_type = list()
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/osmium
 	scan_icon = "mineral_rare"
-	worth = 15
+	worth = 8
 
 /ore/hydrogen
 	name = "mhydrogen"
@@ -171,4 +171,4 @@ var/global/list/ores_by_type = list()
 	compresses_to = "mhydrogen"
 	ore = /obj/item/weapon/ore/hydrogen //Technically not needed since there's no hydrogen ore vein, but consistency is nice
 	scan_icon = "mineral_rare"
-	worth = 30
+	worth = 15

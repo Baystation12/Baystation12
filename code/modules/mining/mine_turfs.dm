@@ -278,6 +278,24 @@ var/list/mining_floors = list()
 				geologic_data.UpdateNearbyArtifactInfo(src)
 				O.geologic_data = geologic_data
 
+	if (istype(W, /obj/item/weapon/autochisel))
+
+		if(last_act + 80 > world.time)//prevents message spam
+			return
+		last_act = world.time
+
+		user << "<span class='warning'>You start chiselling [src] into a sculptable block.</span>"
+
+		if(!do_after(user,80))
+			return
+
+		if (!istype(src, /turf/simulated/mineral))
+			return
+
+		user << "<span class='notice'>You finish chiselling [src] into a sculptable block.</span>"
+		new /obj/structure/sculpting_block(src)
+		GetDrilled(1)
+
 	else
 		return ..()
 
