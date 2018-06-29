@@ -295,3 +295,51 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	construction_time = 200
 	construction_cost = list(DEFAULT_WALL_MATERIAL=15000)*/
+
+///////// Hrunting
+
+/obj/item/mecha_parts/chassis/hrunting
+	name = "HRUNTING/YGGDRASIL Mark I ADS Chassis"
+
+	New()
+		..()
+		construct = new /datum/construction/mecha/gygax_chassis(src)
+
+/obj/item/mecha_parts/part/hrunting_torso
+	name="HRUNTING Mark I Torso"
+	desc="A torso part of HRUNTING/YGGDRASIL Mark I ADS. Contains power unit, processing core and life support systems. Has an additional equipment slot."
+	icon_state = "Hrunting_harness"
+	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ENGINEERING = 3)
+
+/obj/item/mecha_parts/part/hrunting_head
+	name="HRUNTING Mark I Head"
+	desc="A HRUNTING/YGGDRASIL Mark I ADS head. Houses advanced surveilance and targeting sensors."
+	icon_state = "gygax_head"
+	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 3)
+
+/obj/item/mecha_parts/part/hrunting_left_arm
+	name="HRUNTING Mark I Left Arm"
+	desc="A HRUNTING/YGGDRASIL Mark I ADS left arm. Data and power sockets are compatible with most exosuit tools and weapons."
+	icon_state = "gygax_l_arm"
+	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 3)
+
+/obj/item/mecha_parts/part/hrunting_right_arm
+	name="HRUNTING Mark I Right Arm"
+	desc="A HRUNTING/YGGDRASIL Mark I ADS right arm. Data and power sockets are compatible with most exosuit tools and weapons."
+	icon_state = "gygax_r_arm"
+	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 3)
+
+/obj/item/mecha_parts/part/hrunting_left_leg
+	name="HRUNTING Mark I Left Leg"
+	icon_state = "gygax_l_leg"
+	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 3)
+
+/obj/item/mecha_parts/part/hrunting_right_leg
+	name="HRUNTING Mark I Right Leg"
+	icon_state = "gygax_r_leg"
+	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 3)
+
+/obj/item/mecha_parts/part/hrunting_armour
+	name="HRUNTING Mark I Armour Plates"
+	icon_state = "gygax_armour"
+	origin_tech = list(TECH_MATERIAL = 6, TECH_COMBAT = 4, TECH_ENGINEERING = 5)
