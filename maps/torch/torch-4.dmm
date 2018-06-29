@@ -5742,7 +5742,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(11, 24)
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -12397,7 +12397,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(11, 24)
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
@@ -13275,7 +13275,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(11, 24)
 	},
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/dark,
