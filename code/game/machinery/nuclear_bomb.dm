@@ -496,7 +496,7 @@ var/global/orion_password = null
 
 /obj/item/weapon/folder/envelope/project_orion
 	name= "Top-Secret"
-	desc = "A thick envelope. The UNSC logo is stamped in the corner, along with 'TOP-SECRET'."
+	desc = "A thick envelope. The UNSC logo is stamped in the corner, along with 'TOP-SECRET-ORION'."
 //Project Orion Envelope for researchers
 /obj/item/weapon/folder/envelope/project_orion/Initialize()
 	. = ..()
@@ -512,12 +512,13 @@ var/global/orion_password = null
 	We have determined to institute Project Orion and attempt to create genetically modified supersoldiers to aid in UNSC operations.<br>\
 	Seeing as how your research station is relatively remote and little to nothing happens there we have decided it best you spearhead this project at this current time. This may change at a later date however.<br><br>\
 	Due to the nature of Project Orion, you will be required to requisition volunteers from stationed infantry forces in the system, or if necessary, 'borrow' a specimen you deem to be capable from a nearby colony as a test subject for the augmentation process. We advise you only pick subjects with a military background who are especially gifted or talented in the use of a wide range of weaponry, and are capable and willing to follow orders. The confidentialy of this Project is paramount to your continued employment, and life expectancy within the ONI research division.<br><br>\
-	We have placed the required assets into a surgery room located west of the Weapons Testing Lab. We feel these items will be sufficient as the final product will be considered a living weapon and is likely to be a highly lethal and decisive utlility on the battlefield.<br><br>\
+	We have placed the required surgical assets into the surgery rooms located east of the Weapons Testing Lab. We feel these items will be sufficient as the final product will be considered a living weapon and is likely to be a highly lethal and decisive utlility on the battlefield.<br>\
+	The required armor and equipment have been stored inside of the weapons testing lab in the corresponding lockers.<br><br>\
 	We are expecting great results from this project as it's successful implementation will immensely bolster our military assets on the ground, when you are done reading this document be sure to burn it in order to eliminate any trace of this project's paper trail. You have full authority to destroy the Project Orion Laboratory should it be discovered, as well as any assets attached to Project Orion.<br><br>\
 	If you are successful in enabling Project Orion then you will be tasked with procedurally testing Project Orion in live military operations at your descretion.<br><br>\
 	You will have limited authority to request transport for Project Orion utilizing local military vessels in the system via the following clearance phrase.<br><br>\
 	'[get_orion_password()]'<br><br>\
-	Any high command aboard local military vessels within the sector should be directed towards documents kept in their personal quarters to verify this code and should allow Project Orion limited use of their facilites and armory during active operations.<br><br>\
+	Any high command aboard local military vessels within the sector should be directed towards documents kept in their personal quarters or abord their bridge to verify this code and should allow Project Orion limited use of their facilites and armory during active operations.<br><br>\
 	If the Project Orion subject is designate as AWOL, Unstable, Unusable, or a threat to UNSC or ONI personel you are granted the authority to initate a man hunt or, if needed, order the execution of the Project Orion Specimen. In these cases all Project Orion assets should be reclaimed if possible, or destroyed on-site ASAP.<br><br>\
 	Do not disappoint us.<br><br><br>\
 	<i>I.N.G.</i></tt>")
