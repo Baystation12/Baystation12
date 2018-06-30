@@ -226,8 +226,12 @@
 	mob.moving = 1
 
 	// Crawling: slower and can be interrupted
-	if(mob.lying && !do_after(mob, 8 + (mob.weakened * 2) , incapacitation_flags = INCAPACITATION_CANCRAWL))
-		return
+	if(mob.lying)
+		var/crawl_delay = 8 + (mob.weakened * 2)
+		mob.move_delay += crawl_delay
+		if(!do_after(mob, crawl_delay, incapacitation_flags = INCAPACITATION_CANCRAWL))
+			mob.moving = 0
+			return
 
 	direction = mob.AdjustMovementDirection(direction)
 	step(mob, direction)
