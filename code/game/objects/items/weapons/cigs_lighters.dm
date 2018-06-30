@@ -79,6 +79,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A match. This one has seen better days."
 	STOP_PROCESSING(SSobj, src)
 
+/obj/item/weapon/flame/match/is_hot()
+	if(lit)
+		return 1000
+
 //////////////////
 //FINE SMOKABLES//
 //////////////////
@@ -1044,6 +1048,10 @@ obj/item/clothing/mask/chewable/Destroy()
 	set_light(0)
 	STOP_PROCESSING(SSobj, src)
 
+/obj/item/weapon/flame/lighter/is_hot()
+	if(lit)
+		return 1200
+
 /obj/item/weapon/flame/lighter/proc/shutoff_effects(mob/user)
 	user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
 
@@ -1053,6 +1061,9 @@ obj/item/clothing/mask/chewable/Destroy()
 	icon_state = "zippo"
 	item_state = "zippo"
 	max_fuel = 10
+/obj/item/weapon/flame/lighter/zippo/is_hot()
+	if(lit)
+		return 1500
 
 /obj/item/weapon/flame/lighter/zippo/light_effects(mob/user)
 	user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")

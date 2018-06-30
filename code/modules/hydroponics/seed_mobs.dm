@@ -12,4 +12,4 @@
 			var/obj/item/seeds/S = new(get_turf(host))
 			S.seed_type = name
 			S.update_seed()
-			host.visible_message("<span class='notice'>\The [host] is malformed and unable to survive. It expires pitifully, leaving behind \an [S].</span>")
+			host.visible_message("<span class='notice'>\The [host] is malformed and unable to survive. It expires pitifully, leaving behind \a [S].</span>")

@@ -481,4 +481,8 @@
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
 
-
+/obj/item/projectile/is_hot()
+	if(damage_type == BURN)
+		return 100 * damage
+	else
+		return 0

@@ -18,19 +18,12 @@
 	var/harvest_time
 	var/min_explode_time = 2 MINUTES
 	var/global/total_mushrooms = 0
-	var/first_login = FALSE
 
 /mob/living/simple_animal/mushroom/New()
 	..()
 	harvest_time = world.time
 	total_mushrooms++
 	verbs += /mob/living/proc/ventcrawl
-
-/mob/living/simple_animal/mushroom/Login()
-	. = ..()
-	if(!first_login) //So it's hard to camp mushrooms on spawn.
-		first_login = !first_login
-		health += 10
 
 /mob/living/simple_animal/mushroom/attack_ghost(mob/user)
 	if(!client)
