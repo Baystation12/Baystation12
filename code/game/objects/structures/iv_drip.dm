@@ -57,7 +57,6 @@
 		drip_detach()
 	else if(ishuman(over_object))
 		hook_up(over_object, usr)
-	queue_icon_update()
 
 /obj/structure/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/reagent_containers))
@@ -147,8 +146,8 @@
 	else
 		visible_message("\The [attached] is taken off \the [src]")
 		attached = null
-		queue_icon_update()
-		
+	
+	queue_icon_update()
 	STOP_PROCESSING(SSobj,src)
 		
 /obj/structure/iv_drip/verb/toggle_mode()
@@ -189,7 +188,6 @@
 	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
 	attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
 	attached = null
-	queue_icon_update()
 
 /obj/structure/iv_drip/proc/hook_up(mob/living/carbon/human/target, mob/user)
 	to_chat(user, "<span class='notice'>You start to hook up \the [target] to \the [src].</span>")
