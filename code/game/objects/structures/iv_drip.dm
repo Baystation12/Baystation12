@@ -144,7 +144,7 @@
 	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		rip_out()
 	else
-		visible_message("\The [attached] is taken off \the [src]")
+		visible_message("\The [attached] is taken off \the [src].")
 		attached = null
 	
 	queue_icon_update()
