@@ -9,6 +9,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	var/helptext = ""
 	var/isVerb = 1 	// Is it an active power, or passive?
 	var/verbpath // Path to a verb that contains the effects.
+	var/enhancedtext = ""
 
 /datum/power/changeling
 	var/allowduringlesserform = 0
@@ -160,6 +161,64 @@ var/list/datum/power/changeling/powerinstances = list()
 	helptext = "Heals a moderate amount of damage every tick."
 	genomecost = 7
 	verbpath = /mob/proc/changeling_rapidregen
+
+
+/datum/power/changeling/self_respiration
+	name = "Self Respiration"
+	desc = "We evolve our body to no longer require drawing oxygen from the atmosphere."
+	helptext = "We will no longer require internals, and we cannot inhale any gas, including harmful ones."
+	genomecost = 0
+	verbpath = /mob/proc/changeling_self_respiration
+
+
+/datum/power/changeling/visible_camouflage
+	name = "Camouflage"
+	desc = "We rapidly shape the color of our skin and secrete easily reversible dye on our clothes, to blend in with our surroundings.  \
+	We are undetectable, so long as we move slowly.(Toggle)"
+	helptext = "Running, and performing most acts will reveal us.  Our chemical regeneration is halted while we are hidden."
+	enhancedtext = "Can run while hidden."
+	genomecost = 10
+	verbpath = /mob/proc/changeling_visible_camouflage
+
+
+
+/datum/power/changeling/electric_lockpick
+	name = "Electric Lockpick"
+	desc = "We discreetly evolve a finger to be able to send a small electric charge.  \
+	We can open most electrical locks, but it will be obvious when we do so."
+	helptext = "Use the ability, then touch something that utilizes an electrical locking system, to open it.  Each use costs 10 chemicals."
+	genomecost = 10
+	verbpath = /mob/proc/changeling_electric_lockpick
+
+
+
+/datum/power/changeling/arm_blade
+	name = "Arm Blade"
+	desc = "We reform one of our arms into a deadly blade."
+	helptext = "We may retract our armblade by dropping it.  It can deflect projectiles."
+	enhancedtext = "The blade will have armor peneratration."
+	genomecost = 8
+	verbpath = /mob/proc/changeling_arm_blade
+
+//Grows a scary, and powerful arm blade.
+
+//Claws
+/datum/power/changeling/claw
+	name = "Claw"
+	desc = "We reform one of our arms into a deadly claw."
+	helptext = "We may retract our claw by dropping it."
+	enhancedtext = "The claw will have armor peneratration."
+	genomecost = 6
+	verbpath = /mob/proc/changeling_claw
+
+
+/datum/power/changeling/recursive_enhancement
+	name = "Recursive Enhancement"
+	desc = "We cause our abilities to have increased or additional effects."
+	helptext = "To check the effects for each ability, check the blue text underneath the ability in the evolution menu."
+	genomecost = 3
+	verbpath = /mob/proc/changeling_recursive_enhancement
+
 
 
 
