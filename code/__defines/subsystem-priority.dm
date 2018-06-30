@@ -27,6 +27,7 @@
 #define SS_PRIORITY_GARBAGE       25	// Garbage collection.
 #define SS_PRIORITY_VINES         25	// Spreading vine effects.
 #define SS_PRIORITY_TURF          20    // Radioactive walls/blob.
+#define SS_PRIORITY_EVAC          20    // Processes the evac controller.
 #define SS_PRIORITY_WIRELESS      10	// Wireless connection setup.
 
 

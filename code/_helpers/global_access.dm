@@ -43,6 +43,8 @@
 			return global.SSantags;
 		if("SSatoms")
 			return global.SSatoms;
+		if("SSevac")
+			return global.SSevac;
 		if("SSevent")
 			return global.SSevent;
 		if("SSfastprocess")
@@ -1030,6 +1032,8 @@
 			global.SSantags=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
+		if("SSevac")
+			global.SSevac=newval;
 		if("SSevent")
 			global.SSevent=newval;
 		if("SSfastprocess")
@@ -1995,6 +1999,7 @@
 	"SSalarm",
 	"SSantags",
 	"SSatoms",
+	"SSevac",
 	"SSevent",
 	"SSfastprocess",
 	"SSgarbage",
