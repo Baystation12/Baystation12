@@ -111,3 +111,26 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)
+
+GLOBAL_LIST_INIT(possible_cable_colours, SetupCableColors())
+
+/proc/SetupCableColors()
+	. = list()
+
+	var/invalid_cable_coils = list(
+		/obj/item/stack/cable_coil/single,
+		/obj/item/stack/cable_coil/cut,
+		/obj/item/stack/cable_coil/cyborg,
+		/obj/item/stack/cable_coil/random
+	)
+
+	var/special_name_mappings = list(/obj/item/stack/cable_coil = "Red")
+
+	for(var/coil_type in (typesof(/obj/item/stack/cable_coil) - invalid_cable_coils))
+		var/name = special_name_mappings[coil_type] || capitalize(copytext_after_last("[coil_type]", "/"))
+
+		var/obj/item/stack/cable_coil/C = coil_type
+		var/color = initial(C.color)
+
+		.[name] = color
+	. = sortAssoc(.)
