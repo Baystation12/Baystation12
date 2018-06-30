@@ -132,7 +132,7 @@
 	icon_off = "smartfridge_food-off"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks) || istype(O,/obj/item/weapon/material/kitchen/utensil/))
+	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks) || istype(O,/obj/item/weapon/material/kitchen/utensil))
 		return 1
 
 /obj/machinery/smartfridge/drying_rack
