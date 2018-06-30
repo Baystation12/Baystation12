@@ -30,70 +30,16 @@
 		</table>
 	{{/if}}
 {{else data.screen == 2}}
-	<div class="item">
-		<div class="itemLabel">
-			Generated today:
+	{{for data.point_breakdown}}
+		<div class="item">
+			<div class="itemLabel">
+				{{:value.desc}}: 
+			</div>
+			<div class="itemContent">
+				{{:value.points}} {{:data.currency_short}}
+			</div>
 		</div>
-		<div class="itemContent">
-			{{:data.total_credits}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Standard allocation:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_passive}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			{{:data.currency}} from recycled crates:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_crates}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			{{:data.currency}} from phoron exports:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_phoron}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			{{:data.currency}} from platinum exports:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_platinum}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			{{:data.currency}} from uploaded antibody data:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_virology}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			{{:data.currency}} from uploaded good explorer points:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_gep}} {{:data.currency_short}}
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Point bonus for paperwork handling:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_paperwork}} {{:data.currency_short}}
-		</div>
-	</div>
+	{{/for}}
 	<div class="item">
 		<div class="itemLabel">
 			Options:

@@ -18,6 +18,7 @@
 #define SS_PRIORITY_RADIATION      20   // Radiation processing and cache updates.
 #define SS_PRIORITY_AIRFLOW        15	// Object movement from ZAS airflow.
 #define SS_PRIORITY_INACTIVITY     10	// Idle kicking.
+#define SS_PRIORITY_SUPPLY         10   // Supply point accumulation.
 
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       60	// processing_objects processing.

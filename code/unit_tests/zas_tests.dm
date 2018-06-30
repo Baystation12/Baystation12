@@ -124,12 +124,12 @@ datum/unit_test/zas_supply_shuttle_moved/start_test()
 		skip("No shuttles have been setup for this map.")
 		return 1
 
-	shuttle = supply_controller.shuttle
+	shuttle = SSsupply.shuttle
 	if(isnull(shuttle))
 		return 1
 
 	// Initiate the Move.
-	supply_controller.movetime = 5 // Speed up the shuttle movement.
+	SSsupply.movetime = 5 // Speed up the shuttle movement.
 	shuttle.short_jump(shuttle.get_location_waypoint(!shuttle.location)) //TODO
 
 	return 1

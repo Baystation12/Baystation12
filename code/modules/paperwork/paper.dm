@@ -418,6 +418,10 @@
 	add_fingerprint(user)
 	return
 
+//For supply.
+/obj/item/weapon/paper/manifest
+	name = "supply manifest"
+	var/is_copy = 1
 /*
  * Premade paper
  */

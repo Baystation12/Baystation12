@@ -79,6 +79,8 @@
 			return global.SSskybox;
 		if("SSsun")
 			return global.SSsun;
+		if("SSsupply")
+			return global.SSsupply;
 		if("SStimer")
 			return global.SStimer;
 		if("SSturf")
@@ -557,8 +559,6 @@
 			return global.maze_cell_count;
 		if("mechas_list")
 			return global.mechas_list;
-		if("mechtoys")
-			return global.mechtoys;
 		if("merged")
 			return global.merged;
 		if("message_delay")
@@ -833,8 +833,6 @@
 			return global.string_part_flags;
 		if("string_slot_flags")
 			return global.string_slot_flags;
-		if("supply_controller")
-			return global.supply_controller;
 		if("supply_drop")
 			return global.supply_drop;
 		if("supply_methods_")
@@ -1066,6 +1064,8 @@
 			global.SSskybox=newval;
 		if("SSsun")
 			global.SSsun=newval;
+		if("SSsupply")
+			global.SSsupply=newval;
 		if("SStimer")
 			global.SStimer=newval;
 		if("SSturf")
@@ -1544,8 +1544,6 @@
 			global.maze_cell_count=newval;
 		if("mechas_list")
 			global.mechas_list=newval;
-		if("mechtoys")
-			global.mechtoys=newval;
 		if("merged")
 			global.merged=newval;
 		if("message_delay")
@@ -1820,8 +1818,6 @@
 			global.string_part_flags=newval;
 		if("string_slot_flags")
 			global.string_slot_flags=newval;
-		if("supply_controller")
-			global.supply_controller=newval;
 		if("supply_drop")
 			global.supply_drop=newval;
 		if("supply_methods_")
@@ -2013,6 +2009,7 @@
 	"SSshuttle",
 	"SSskybox",
 	"SSsun",
+	"SSsupply",
 	"SStimer",
 	"SSturf",
 	"SSvines",
@@ -2252,7 +2249,6 @@
 	"matchmaker",
 	"maze_cell_count",
 	"mechas_list",
-	"mechtoys",
 	"merged",
 	"message_delay",
 	"message_servers",
@@ -2390,7 +2386,6 @@
 	"stored_shock_by_ref",
 	"string_part_flags",
 	"string_slot_flags",
-	"supply_controller",
 	"supply_drop",
 	"supply_methods_",
 	"surgery_steps",
