@@ -58,7 +58,7 @@
 "bf" = (/turf/simulated/floor/plating,/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/floor/plating{tag = "icon-dmg3"; icon_state = "dmg3"},/area/om_ships/comet)
 "bg" = (/obj/structure/closet/cabinet,/obj/random/handgun,/obj/random/tool,/turf/simulated/floor/tiled,/area/om_ships/comet)
 "bh" = (/turf/simulated/floor/tiled,/area/om_ships/comet)
-"bi" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/obj/effect/landmark/ship_captain_ghost_spawn,/turf/simulated/floor/tiled,/area/om_ships/comet)
+"bi" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/turf/simulated/floor/tiled,/area/om_ships/comet)
 "bj" = (/turf/simulated/floor/plating{tag = "icon-dmg4"; icon_state = "dmg4"},/area/om_ships/comet)
 "bk" = (/turf/simulated/floor/plating{tag = "icon-dmg1"; icon_state = "dmg1"},/area/om_ships/comet)
 "bl" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/comet)
