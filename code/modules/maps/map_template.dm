@@ -5,12 +5,10 @@
 	var/tallness = 0
 	var/list/mappaths = null
 	var/loaded = 0 // Times loaded this round
-	var/allow_duplicates = TRUE
 	var/list/shuttles_to_initialise = list()
 	var/base_turf_for_zs = null
 	var/accessibility_weight = 0
-	var/spawn_guaranteed = FALSE
-	var/clear_contents = FALSE  //if it should destroy objects it spawns on top of
+	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
 	if(paths && !islist(paths))
@@ -26,7 +24,7 @@
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/z_offset = 1 // needed to calculate z-bounds correctly
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE, clear_contents=clear_contents)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE, clear_contents= template_flags & TEMPLATE_FLAG_CLEAR_CONTENTS)
 		if(M)
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
 			z_offset++
@@ -122,7 +120,7 @@
 	var/list/atoms_to_initialise = list()
 
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), T.x, T.y, T.z, cropMap=TRUE, clear_contents=clear_contents)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), T.x, T.y, T.z, cropMap=TRUE, clear_contents= template_flags & TEMPLATE_FLAG_CLEAR_CONTENTS)
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else

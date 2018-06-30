@@ -551,7 +551,7 @@
 	waypoint_station = "nav_cargo_station"
 
 /obj/effect/shuttle_landmark/supply/centcom
-	name = "Centcom"
+	name = "Offsite"
 	landmark_tag = "nav_cargo_start"
 
 /obj/effect/shuttle_landmark/supply/station

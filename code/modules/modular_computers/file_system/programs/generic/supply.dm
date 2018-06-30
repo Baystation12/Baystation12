@@ -36,6 +36,8 @@
 	data["is_admin"] = is_admin
 	data["screen"] = screen
 	data["credits"] = "[supply_controller.points]"
+	data["currency"] = GLOB.using_map.supply_currency_name
+	data["currency_short"] = GLOB.using_map.supply_currency_name_short
 	switch(screen)
 		if(1)// Main ordering menu
 			data["categories"] = category_names
@@ -56,6 +58,7 @@
 
 		if(3)// Shuttle monitoring and control
 			var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+			data["shuttle_name"] = shuttle.name
 			if(istype(shuttle))
 				data["shuttle_location"] = shuttle.at_station() ? GLOB.using_map.name : "Remote location"
 			else

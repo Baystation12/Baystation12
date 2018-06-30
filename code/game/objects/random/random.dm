@@ -174,6 +174,7 @@
 				/obj/item/weapon/storage/med_pouch/trauma = 2,
 				/obj/item/weapon/storage/med_pouch/burn = 2,
 				/obj/item/weapon/storage/med_pouch/toxin = 2,
+				/obj/item/weapon/storage/med_pouch/radiation = 2,
 				/obj/item/weapon/storage/med_pouch/oxyloss = 2)
 
 /obj/random/firstaid

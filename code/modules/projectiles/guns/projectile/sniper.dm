@@ -27,17 +27,29 @@
 	else
 		icon_state = "heavysniper"
 
+/obj/item/weapon/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+	..()
+	if(user && user.skill_check(SKILL_WEAPONS, SKILL_PROF))
+		to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
+		unload_shell()
+
+/obj/item/weapon/gun/projectile/heavysniper/proc/unload_shell()
+	if(chambered)
+		if(!bolt_open)
+			playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
+			bolt_open = 1
+		chambered.dropInto(src.loc)
+		loaded -= chambered
+		chambered = null
+
 /obj/item/weapon/gun/projectile/heavysniper/attack_self(mob/user as mob)
 	bolt_open = !bolt_open
 	if(bolt_open)
 		if(chambered)
 			to_chat(user, "<span class='notice'>You work the bolt open, ejecting [chambered]!</span>")
-			chambered.dropInto(loc)
-			loaded -= chambered
-			chambered = null
+			unload_shell()
 		else
 			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
-		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
 	else
 		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
 		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)

@@ -3,9 +3,8 @@
 	id = "exoplanet_hydrobase"
 	description = "hydroponics base with random plants and a lot of enemies"
 	suffixes = list("hydrobase/hydrobase.dmm")
-	cost = 1
-	allow_duplicates = FALSE
-	clear_contents = 1
+	cost = 2
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 
 // Areas //
 /area/map_template/hydrobase

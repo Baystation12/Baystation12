@@ -113,7 +113,7 @@ var/list/flooring_types
 	desc = "Scuffed from the passage of countless greyshirts."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "tiled"
-	color = COLOR_GUNMETAL
+	color = COLOR_DARK_GUNMETAL
 	has_damage_range = 4
 	damage_temperature = T0C+1400
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
@@ -129,10 +129,12 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/mono/dark
 
 /decl/flooring/tiling/mono/white
+	icon_base = "monotile_light"
 	color = COLOR_OFF_WHITE
 	build_type = /obj/item/stack/tile/mono/white
 
 /decl/flooring/tiling/white
+	icon_base = "tiled_light"
 	desc = "How sterile."
 	color = COLOR_OFF_WHITE
 	build_type = /obj/item/stack/tile/floor_white

@@ -402,7 +402,10 @@
 
 		. = "<html><head><title>Voting Panel</title></head><body>"
 		if(mode)
-			if(config.vote_no_dead_crew_transfer && current_vote_type == "crew_transfer" && !isliving(C.mob))
+			var/is_transfer = current_vote_type == "crew_transfer"
+			var/no_dead_votes = config.vote_no_dead_crew_transfer
+			var/is_dead = !isliving(C.mob) || ismouse(C.mob) || is_drone(C.mob)
+			if (no_dead_votes && is_transfer && is_dead)
 				. += "<h2>You can't participate in this vote unless you're participating in the round.</h2><br>"
 			else
 				if(question)	. += "<h2>Vote: '[question]'</h2>"

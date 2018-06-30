@@ -15,7 +15,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
 "ae" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growX)
@@ -47,16 +47,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
-"aj" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
-/turf/template_noop,
-/area/map_template/hydrobase/station/growA)
 "ak" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
 "al" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
@@ -134,7 +130,7 @@
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/growD)
 "au" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
@@ -196,33 +192,26 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "aF" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -38;
+	pixel_y = 0
+	},
+/mob/living/simple_animal/hostile/retaliate/goat/king/hydro,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aG" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aH" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/hydrobase/station/goatzone)
 "aI" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/disposaloutlet,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/water/shallow,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aJ" = (
 /obj/structure/disposalpipe/segment{
@@ -311,35 +300,26 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "aU" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/dogbed{
-	desc = "An oversized pet bed.";
-	name = "goat bed"
-	},
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -38;
-	pixel_y = 0
-	},
-/mob/living/simple_animal/hostile/retaliate/goat/king/hydro,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aV" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	layer = 2.4;
 	level = 2
 	},
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/hydrobase/station/goatzone)
 "aW" = (
-/turf/simulated/floor/exoplanet/water/shallow,
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/structure/catwalk,
+/obj/item/seeds/whitebeetseed,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/goatzone)
 "aX" = (
 /obj/structure/disposalpipe/segment{
@@ -361,7 +341,6 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -399,7 +378,6 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
 "bc" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/power/apc{
 	dir = 2;
 	name = "south bump";
@@ -409,35 +387,26 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/ppflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "bd" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/yellow{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "be" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/yellow{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/brflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "bf" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growF)
@@ -490,11 +459,6 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "bm" = (
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "goatzone";
-	name = "Containment Zone"
-	},
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
@@ -502,9 +466,11 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/artifact_scanpad{
-	desc = "It looks like some kind of force field generator. It obviously isn't working.";
-	name = "Containment Field Generator"
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id = "goatzone";
+	name = "Containment Zone"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/goatzone)
@@ -836,7 +802,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/hydrobase/station/growF)
 "ca" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
@@ -983,7 +949,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cv" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growC)
@@ -1363,7 +1329,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1771,7 +1736,6 @@
 /area/map_template/hydrobase/station/processing)
 "el" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/item/weapon/shreddedp,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
 "em" = (
@@ -2158,10 +2122,6 @@
 /obj/item/weapon/cigbutt/woodbutt,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
-"eV" = (
-/obj/item/weapon/shreddedp,
-/turf/simulated/floor/tiled,
-/area/map_template/hydrobase/station/processing)
 "eW" = (
 /obj/structure/catwalk,
 /obj/structure/closet/crate,
@@ -2256,7 +2216,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fd" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/solarlock)
 "fe" = (
@@ -2417,7 +2377,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fw" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
@@ -2456,7 +2416,8 @@
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/shipaccess)
 "fC" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/map_template/hydrobase/station/shipaccess)
 "fD" = (
@@ -2709,14 +2670,6 @@
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
 "gc" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/map_template/hydrobase/station/growA)
-"gd" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
 	dir = 8;
@@ -2727,11 +2680,11 @@
 /obj/item/seeds/towermycelium,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
-"ge" = (
+"gd" = (
 /obj/item/weapon/cigbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growB)
-"gf" = (
+"ge" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -2740,7 +2693,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/shipaccess)
-"gg" = (
+"gf" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4;
 	icon_state = "map"
@@ -2758,7 +2711,7 @@
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/shipaccess)
-"gh" = (
+"gg" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -2770,7 +2723,7 @@
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/shipaccess)
-"gi" = (
+"gh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2783,7 +2736,7 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gj" = (
+"gi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
@@ -2794,7 +2747,7 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gk" = (
+"gj" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -2805,7 +2758,7 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gl" = (
+"gk" = (
 /obj/structure/curtain/open/shower,
 /obj/machinery/shower{
 	icon_state = "shower";
@@ -2813,20 +2766,20 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gm" = (
+"gl" = (
 /obj/structure/lattice,
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/shower)
-"gn" = (
+"gm" = (
 /obj/structure/catwalk,
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/chantermycelium,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
-"go" = (
+"gn" = (
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/dockport)
-"gp" = (
+"go" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1391;
@@ -2843,18 +2796,18 @@
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
-"gq" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+"gp" = (
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/map_template/hydrobase/station/dockport)
-"gr" = (
+"gq" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gs" = (
+"gr" = (
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
@@ -2867,19 +2820,19 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gt" = (
+"gs" = (
 /obj/structure/catwalk,
 /obj/machinery/light,
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/chantermycelium,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
-"gu" = (
+"gt" = (
 /obj/machinery/mech_recharger,
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growB)
-"gv" = (
+"gu" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -2902,7 +2855,7 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
-"gw" = (
+"gv" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -2918,7 +2871,7 @@
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
-"gx" = (
+"gw" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -2931,13 +2884,13 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
-"gy" = (
+"gx" = (
 /obj/item/clothing/under/overalls,
 /obj/item/clothing/shoes/desertboots,
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gz" = (
+"gy" = (
 /obj/item/clothing/accessory/toggleable/hawaii/random,
 /obj/item/clothing/under/casual_pants/greyjeans,
 /obj/item/clothing/head/bowlerhat,
@@ -2945,14 +2898,14 @@
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gA" = (
+"gz" = (
 /obj/item/clothing/under/skirt_c/dress/black,
 /obj/item/clothing/head/beret/purple,
 /obj/item/clothing/shoes/dress,
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
-"gB" = (
+"gA" = (
 /obj/machinery/oxygen_pump{
 	pixel_x = -32
 	},
@@ -2964,11 +2917,11 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
-"gC" = (
+"gB" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
-"gD" = (
+"gC" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
 	frequency = 1391;
@@ -2989,7 +2942,7 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
-"gE" = (
+"gD" = (
 /obj/machinery/power/solar{
 	id = "hydrosolar"
 	},
@@ -3001,7 +2954,7 @@
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
-"gF" = (
+"gE" = (
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 8;
@@ -3009,7 +2962,7 @@
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
-"gG" = (
+"gF" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/light/small{
 	dir = 8
@@ -3022,13 +2975,13 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
-"gH" = (
+"gG" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
-"gI" = (
+"gH" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/light/small{
 	dir = 4
@@ -3041,18 +2994,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
-"gJ" = (
+"gI" = (
 /obj/machinery/light,
 /obj/structure/catwalk,
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/finetobaccoseed,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
-"gK" = (
+"gJ" = (
 /obj/structure/sign/warning/smoking,
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/dockport)
-"gL" = (
+"gK" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1391;
 	icon_state = "door_locked";
@@ -3063,7 +3016,7 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/dockport)
-"gM" = (
+"gL" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
 	frequency = 1391;
@@ -3099,7 +3052,7 @@ aa
 aa
 aa
 aa
-cv
+aa
 aa
 aa
 aa
@@ -3272,7 +3225,7 @@ fh
 fx
 fJ
 fS
-gd
+gc
 eN
 eN
 aa
@@ -3314,7 +3267,7 @@ fi
 fi
 fi
 fj
-gn
+gm
 eN
 eN
 aa
@@ -3356,7 +3309,7 @@ fx
 fi
 fj
 fj
-gt
+gs
 eN
 aa
 aa
@@ -3438,7 +3391,7 @@ fy
 fi
 fx
 fi
-gn
+gm
 fw
 aa
 aa
@@ -3479,7 +3432,7 @@ fi
 fi
 fx
 fi
-gn
+gm
 fw
 aa
 aa
@@ -3520,7 +3473,7 @@ fy
 fj
 fx
 fj
-gt
+gs
 eN
 aa
 aa
@@ -3559,9 +3512,9 @@ fl
 fz
 fi
 fU
-ge
+gd
 fi
-gu
+gt
 eN
 aa
 aa
@@ -3739,7 +3692,7 @@ aa
 aa
 aa
 aa
-aj
+aa
 al
 ao
 aq
@@ -3769,9 +3722,9 @@ ef
 aE
 av
 aq
-gJ
+gI
 al
-al
+aa
 "}
 (18,1,1) = {"
 aa
@@ -3929,11 +3882,11 @@ fB
 fB
 fB
 fB
-go
-go
-go
-go
-gK
+gn
+gn
+gn
+gn
+gJ
 aa
 aa
 "}
@@ -3969,12 +3922,12 @@ fp
 fC
 fM
 fW
-gf
-go
-gv
-gB
-gG
-gq
+ge
+gn
+gu
+gA
+gF
+gp
 aa
 aa
 "}
@@ -4010,13 +3963,13 @@ fq
 fD
 fN
 fX
-gg
-gp
-gw
-gC
-gH
+gf
+go
+gv
+gB
+gG
+gK
 gL
-gM
 aa
 "}
 (24,1,1) = {"
@@ -4031,7 +3984,7 @@ aa
 aa
 aa
 aw
-aH
+aG
 aV
 be
 bm
@@ -4046,17 +3999,17 @@ aK
 dM
 ej
 ex
-eV
+ez
 ep
 fC
 fO
 fY
-gh
-gq
-gx
-gD
-gI
-go
+gg
+gp
+gw
+gC
+gH
+gn
 aa
 aa
 "}
@@ -4073,7 +4026,7 @@ aa
 aa
 ax
 aI
-aW
+aG
 aW
 aw
 bA
@@ -4092,12 +4045,12 @@ fr
 fE
 fE
 fE
-gi
-go
-go
-go
-go
-go
+gh
+gn
+gn
+gn
+gn
+gn
 aa
 aa
 "}
@@ -4133,9 +4086,9 @@ eX
 fE
 fP
 fZ
-gj
-gr
-gy
+gi
+gq
+gx
 fE
 aa
 aa
@@ -4174,9 +4127,9 @@ fs
 fF
 fQ
 ga
-gk
+gj
 gb
-gz
+gy
 fE
 aa
 aa
@@ -4215,9 +4168,9 @@ ez
 fE
 fR
 gb
-gl
-gs
-gA
+gk
+gr
+gz
 fE
 aa
 aa
@@ -4256,7 +4209,7 @@ ft
 fE
 fE
 fE
-gm
+gl
 fE
 fE
 fE
@@ -4378,7 +4331,7 @@ er
 dJ
 dJ
 dg
-gc
+fH
 dg
 fH
 dg
@@ -4423,7 +4376,7 @@ fG
 dg
 fG
 dg
-gE
+gD
 aa
 aa
 aa
@@ -4505,7 +4458,7 @@ fG
 dg
 fG
 dg
-gE
+gD
 aa
 aa
 aa
@@ -4546,7 +4499,7 @@ fI
 dh
 fI
 dh
-gF
+gE
 aa
 aa
 aa

@@ -16,8 +16,20 @@
 					/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 					/obj/item/weapon/storage/box/syringes,
 					/obj/item/weapon/storage/box/autoinjectors)
-	cost = 20
+	cost = 70
 	containername = "\improper Medical crate"
+
+/decl/hierarchy/supply_pack/medical/atk
+	name = "Advanced trauma crate"
+	contains = list(/obj/item/stack/medical/advanced/bruise_pack = 6)
+	cost = 30
+	containername = "\improper Advanced trauma crate"
+
+/decl/hierarchy/supply_pack/medical/abk
+	name = "Advanced burn crate"
+	contains = list(/obj/item/stack/medical/advanced/ointment = 6)
+	cost = 30
+	containername = "\improper Advanced burn crate"
 
 /decl/hierarchy/supply_pack/medical/trauma
 	name = "Trauma pouch crate"

@@ -804,3 +804,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
+
+/obj/item/is_burnable()
+	return simulated
+
+/obj/item/lava_act()
+	. = (!throwing) ? ..() : FALSE

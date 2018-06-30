@@ -75,9 +75,6 @@
 /turf/simulated/floor/usedup
 	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
 
-/turf/simulated/floor/wood/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
 /turf/simulated/floor/tiled/usedup
 	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
 

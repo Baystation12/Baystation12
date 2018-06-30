@@ -9,6 +9,8 @@
 	canhear_range = 0 // can't hear headsets from very far away
 
 	slot_flags = SLOT_EARS
+	cell = null
+	power_usage = 0
 	var/translate_binary = 0
 	var/translate_hive = 0
 	var/list/encryption_keys = list()

@@ -166,8 +166,6 @@
 				node2 = target
 				break
 
-	build_network()
-
 	update_icon()
 	update_underlays()
 

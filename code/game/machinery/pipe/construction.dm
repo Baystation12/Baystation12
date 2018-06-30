@@ -313,7 +313,7 @@ Buildable meters
 	set name = "Rotate Pipe"
 	set src in view(1)
 
-	if ( usr.stat || usr.restrained() )
+	if (usr.stat || usr.restrained() || !Adjacent(usr) || usr.incapacitated())
 		return
 
 	src.set_dir(turn(src.dir, -90))
@@ -327,6 +327,9 @@ Buildable meters
 		set_dir(2)
 	//src.pipe_set_dir(get_pipe_dir())
 	return
+
+/obj/item/pipe/AltClick()
+	rotate()
 
 /obj/item/pipe/Move()
 	..()

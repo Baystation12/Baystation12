@@ -41,18 +41,16 @@
 	possible_features.Cut()
 	for(var/T in feature_types)
 		var/datum/map_template/ruin/exoplanet/ruin = new T
-		possible_features[ruin.id] = ruin
+		possible_features += ruin
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()
-	spawn()
-		generate_atmosphere()
-		generate_map()
-		create_lighting_overlays_zlevel(z) //Creates overlays, if not created already.
-		generate_features()
-		generate_landing(4)		//try making 4 landmarks
-		update_biome()
-		START_PROCESSING(SSobj, src)
+	generate_atmosphere()
+	generate_map()
+	generate_features()
+	generate_landing(2)		//try making 4 landmarks
+	update_biome()
+	START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/sector/exoplanet/proc/get_engravings()
@@ -183,11 +181,12 @@
 //Tries to generate num landmarks, but avoids repeats.
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing(num = 1)
 	var/places = list()
-	var/attempts = 5*num
+	var/attempts = 10*num
+	var/new_type = landmark_type
 	while(num)
 		attempts--
 		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
-		if(!T || (T in places))
+		if(!T || (T in places)) // Two landmarks on one turf is forbidden as the landmark code doesn't work with it.
 			continue
 		if(attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
 			var/valid = 1
@@ -196,11 +195,18 @@
 				if(!istype(get_area(check), /area/exoplanet) || check.turf_flags & TURF_FLAG_NORUINS)
 					valid = 0
 					break
+			if(attempts >= 10)
+				if(check_collision(T.loc, block_to_check)) //While we have lots of patience, ensure landability
+					valid = 0
+			else //Running out of patience, but would rather not clear ruins, so switch to clearing landmarks and bypass landability check
+				new_type = /obj/effect/shuttle_landmark/automatic/clearing
+
 			if(!valid)
 				continue
+
 		num--
 		places += T
-		new landmark_type(T)
+		new new_type(T) 
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new

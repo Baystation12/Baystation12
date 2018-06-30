@@ -8,6 +8,8 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/
 	can_infect = 0
+	core_skill = SKILL_DEVICES
+
 /datum/surgery_step/robotics/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!istype(target))
 		return 0
@@ -483,7 +485,7 @@
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
 		return SURGERY_FAILURE
 
-	if(!(affected.robotic >= ORGAN_ROBOT))
+	if(!target.isSynthetic())
 		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat body.</span>")
 		return SURGERY_FAILURE
 
