@@ -58,18 +58,19 @@
 
 /turf/simulated/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
+	base_icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "white"
-	plane = SPACE_PLANE
+
+/turf/simulated/floor/holofloor/space/update_icon()
+	. = ..()
+	plane = SPACE_PLANE //Setting this at compiletime does nothing due to how floors are created.
 
 /turf/simulated/floor/holofloor/reinforced
 	icon = 'icons/turf/flooring/tiles.dmi'
 	initial_flooring = /decl/flooring/reinforced
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
-
-/turf/simulated/floor/holofloor/space/New()
-	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/beach
 	desc = "Uncomfortably gritty for a hologram."
