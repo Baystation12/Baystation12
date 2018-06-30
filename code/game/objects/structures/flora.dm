@@ -80,6 +80,34 @@
 	icon_state = "plant-26"
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
+	var/dead = FALSE
+
+/obj/structure/flora/pottedplant/proc/death()
+	if (!dead)
+		icon_state = "plant-dead"
+		name = "dead [name]"
+		desc = "This is the dried up remains of a dead plant. Someone should replace it."
+		dead = TRUE
+
+//No complex interactions, just make them fragile
+/obj/structure/flora/pottedplant/ex_act()
+	death()
+
+/obj/structure/flora/pottedplant/fire_act()
+	death()
+
+/obj/structure/flora/pottedplant/attackby(obj/item/weapon/W, mob/user)
+	if (W.edge)
+		user.visible_message("<span class='warning'>\The [user] cuts down the [src]!</span>")
+		death()
+		return 1
+	return ..()
+
+/obj/structure/flora/pottedplant/bullet_act(var/obj/item/projectile/Proj)
+	if (prob(Proj.damage*2))
+		death()
+		return 1
+	return ..()
 
 //newbushes
 
@@ -330,13 +358,67 @@
 	desc = "This is some kind of tropical plant. It hasn't begun to flower yet."
 	icon_state = "plant-24"
 
-/obj/structure/flora/pottedplant/dead
-	name = "dead potted plant"
-	desc = "This is the dried up remains of a dead plant. Someone should replace it."
+/obj/structure/flora/pottedplant/flowerbushblue
+	name = "flower potted bush"
+	desc = "This is a flower bush. It has blue flowers."
 	icon_state = "plant-25"
+
+/obj/structure/flora/pottedplant/flowerbushred
+	name = "flower potted bush"
+	desc = "This is a flower bush. It has red flowers."
+	icon_state = "plant-27"
+
+/obj/structure/flora/pottedplant/largeleaves
+	name = "potted plant with large leaves"
+	desc = "This is plant with large leaves. They are really huge."
+	icon_state = "plant-28"
+
+/obj/structure/flora/pottedplant/overgrownbush
+	name = "overgrown potted bush"
+	desc = "This is a overgrown bush. It needs to be cut."
+	icon_state = "plant-29"
+
+/obj/structure/flora/pottedplant/tropicaltree
+	name = "tropical potted tree"
+	desc = "This is tropical tree. Someday it will grow."
+	icon_state = "plant-30"
+
+/obj/structure/flora/pottedplant/tropicalflowers
+	name = "tropical potted flowers"
+	desc = "This is tropical flowers. It has white big flowers."
+	icon_state = "plant-31"
+
+/obj/structure/flora/pottedplant/faketree
+	name = "potted tree"
+	desc = "This is tree. In fact it is a badly growling bush."
+	icon_state = "plant-32"
+
+/obj/structure/flora/pottedplant/autumn
+	name = "potted autumn tree"
+	desc = "This is autumn tree. It thinks that now it's autumn."
+	icon_state = "plant-33"
+
+/obj/structure/flora/pottedplant/pink
+	name = "potted pink tree"
+	desc = "This is pink tree. It tries to look like sakura."
+	icon_state = "plant-34"
+
+/obj/structure/flora/pottedplant/ugly
+	name = "potted ugly plant"
+	desc = "This is ugly tree. Someday it becomes a white swan."
+	icon_state = "plant-35"
+
+/obj/structure/flora/pottedplant/eye
+	name = "potted plant with eye"
+	desc = "This is plant with eye. It stares into your soul."
+	icon_state = "plant-36"
 
 /obj/structure/flora/pottedplant/decorative
 	name = "decorative potted plant"
 	desc = "This is a decorative shrub. It's been trimmed into the shape of an apple."
 	icon_state = "applebush"
 
+/obj/structure/flora/pottedplant/dead
+	name = "dead potted plant"
+	desc = "This is the dried up remains of a dead plant. Someone should replace it."
+	icon_state = "plant-dead"

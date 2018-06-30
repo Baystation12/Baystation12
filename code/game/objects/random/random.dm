@@ -562,8 +562,6 @@ obj/random/obstruction //Large objects to block things off in maintenance
 obj/random/obstruction/spawn_choices()
 	return list(/obj/structure/barricade,
 				/obj/structure/girder,
-				/obj/structure/girder/displaced,
-				/obj/structure/girder/reinforced,
 				/obj/structure/grille,
 				/obj/structure/grille/broken,
 				/obj/structure/foamedmetal,
@@ -571,6 +569,47 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/caution/cone,
 				/obj/structure/inflatable/wall,
 				/obj/structure/inflatable/door)
+
+/obj/random/pottedplant
+	name = "random potted plant"
+	desc = "This is a random potted plant."
+	icon = 'icons/obj/plants.dmi'
+	icon_state = "plant-36"
+
+/obj/random/pottedplant/spawn_choices()
+	return list(/obj/structure/flora/pottedplant = 3,
+				/obj/structure/flora/pottedplant/large = 3,
+				/obj/structure/flora/pottedplant/fern = 3,
+				/obj/structure/flora/pottedplant/overgrown = 3,
+				/obj/structure/flora/pottedplant/bamboo = 3,
+				/obj/structure/flora/pottedplant/largebush = 3,
+				/obj/structure/flora/pottedplant/thinbush = 3,
+				/obj/structure/flora/pottedplant/mysterious = 3,
+				/obj/structure/flora/pottedplant/smalltree = 3,
+				/obj/structure/flora/pottedplant/unusual = 3,
+				/obj/structure/flora/pottedplant/orientaltree = 3,
+				/obj/structure/flora/pottedplant/tall = 3,
+				/obj/structure/flora/pottedplant/sticky = 3,
+				/obj/structure/flora/pottedplant/smelly = 3,
+				/obj/structure/flora/pottedplant/aquatic = 3,
+				/obj/structure/flora/pottedplant/flower = 3,
+				/obj/structure/flora/pottedplant/crystal = 3,
+				/obj/structure/flora/pottedplant/subterranean = 3,
+				/obj/structure/flora/pottedplant/minitree = 3,
+				/obj/structure/flora/pottedplant/stoutbush = 3,
+				/obj/structure/flora/pottedplant/tropical = 3,
+				/obj/structure/flora/pottedplant/flowerbushblue = 3,
+				/obj/structure/flora/pottedplant/flowerbushred = 3,
+				/obj/structure/flora/pottedplant/largeleaves = 3,
+				/obj/structure/flora/pottedplant/overgrownbush = 3,
+				/obj/structure/flora/pottedplant/tropicaltree = 3,
+				/obj/structure/flora/pottedplant/tropicalflowers = 3,
+				/obj/structure/flora/pottedplant/faketree = 3,
+				/obj/structure/flora/pottedplant/autumn = 3,
+				/obj/structure/flora/pottedplant/pink = 3,
+				/obj/structure/flora/pottedplant/ugly = 2,
+				/obj/structure/flora/pottedplant/dead = 2,
+				/obj/structure/flora/pottedplant/eye = 1)
 
 /obj/random/assembly
 	name = "random assembly"
