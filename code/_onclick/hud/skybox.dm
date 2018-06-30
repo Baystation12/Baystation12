@@ -37,7 +37,7 @@
 /obj/skybox/proc/DoRotate()
 	var/matrix/rotation = matrix()
 	rotation.TurnTo(SSskybox.BGrot)
-	appearance = rotation
+	transform = rotation
 
 /obj/skybox/Destroy()
 	owner = null
