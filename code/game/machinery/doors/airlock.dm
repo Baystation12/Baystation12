@@ -1162,9 +1162,9 @@ About the new airlock wires panel:
 	qdel(src)
 
 	return da
-/obj/machinery/door/airlock/phoron/attackby(var/obj/C, mob/user as mob)
+/obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
 	if(C)
-		ignite(C.is_hot())
+		ignite(is_hot(C))
 	..()
 
 /obj/machinery/door/airlock/set_broken()

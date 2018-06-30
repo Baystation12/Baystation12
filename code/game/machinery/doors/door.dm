@@ -53,8 +53,8 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New() //Don't migrate this to Initialize(), it will break multi-tile door collision.
-	..()
+/obj/machinery/door/Initialize()
+	. = ..()
 	if(density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
@@ -62,12 +62,7 @@
 		layer = open_layer
 
 	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
+		SetBounds()
 		if(!glass) //Glass multiturfs don't need a dummy.
 			create_dummy()
 	health = maxhealth
@@ -79,7 +74,6 @@
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	if(glass)
 		set_opacity(0)
-	. = ..()
 
 /obj/machinery/door/proc/SetBounds()
 	if(dir in list(EAST, WEST))
@@ -561,5 +555,3 @@
 		if(success)
 			dirs |= direction
 	connections = dirs
-
-#undef ADJUST_DUMMY
