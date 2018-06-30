@@ -6,6 +6,7 @@
 	total_health = 220 //Slightly more health then a normal human
 	metabolism_mod = 1.15 //Slightly faster metabolism
 	darksight = 3 //Slightly better night vision!
+	slowdown = -1 //Increased move speed
 
 	//Spartan 1's have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes
@@ -19,7 +20,7 @@
 	cold_level_2 = 190 //-83C
 	cold_level_3 = 114 //-159C
 
-//Orion Attack Procs
+//Custom Orion Attack Procs
 /mob/living/carbon/human/orion/proc/orion_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
 	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if(u_attack.is_usable(src, target, hit_zone))

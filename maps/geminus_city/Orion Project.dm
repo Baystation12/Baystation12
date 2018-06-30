@@ -27,7 +27,6 @@
 	species_restricted = list("Orion")
 	armor_thickness = 50
 	flags_inv = 29
-	slowdown_general = -1
 	breach_threshold = 100
 	flags_inv = HIDESHOES
 
@@ -61,7 +60,7 @@
 	min_broken_damage = 60
 
 //Testing out New Gun for Theta Project, may not end up using this.
-/obj/item/weapon/gun/projectile/automatic/z8/theta
+/obj/item/weapon/gun/projectile/ma5b_ar/theta
 	name = "M98 All Purpose Carbine"
 	desc = "This weapon was produced and funded by the UNSC for the Orion Project subjects operational use. Designed with high accuracy and easy maneuverability in combat situations, it was quickly discontinued because of it's high price range and extravagant material costs to create. It is highly versatile being capable of utilizing any and all 7.62 magazines found in the field. If attachments can be found, this carbine is capable of using them. It can be fired one handed with an accuracy penalty."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -89,7 +88,7 @@
 
 	attachment_slots = list("sight","stock","barrel")
 
-/obj/item/weapon/gun/projectile/automatic/z8/theta/update_icon()
+/obj/item/weapon/gun/projectile/ma5b_ar/theta/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA9"
