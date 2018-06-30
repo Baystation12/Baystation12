@@ -8,14 +8,20 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 
 /obj/aura/New(var/mob/living/target)
 	..()
-	user = target
-	user.add_aura(src)
+	if(target)
+		user = target
+		user.add_aura(src)
 
 /obj/aura/Destroy()
 	if(user)
 		user.remove_aura(src)
-		user = null
 	return ..()
+
+/obj/aura/proc/added_to(var/mob/living/target)
+	user = target
+
+/obj/aura/proc/removed()
+	user = null
 
 /obj/aura/proc/life_tick()
 	return 0
