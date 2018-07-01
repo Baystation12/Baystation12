@@ -78,8 +78,9 @@
 /datum/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
-	icobase = 'icons/mob/human_races/r_tajaran.dmi'
-	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
+	icobase = 'icons/mob/human_races/species/tajara/body.dmi'
+	deform =  'icons/mob/human_races/species/tajara/deformed_body.dmi'
+	preview_icon = 'icons/mob/human_races/species/tajara/preview.dmi'
 	tail = "tajtail"
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	default_h_style = "Tajaran Ears"
@@ -124,7 +125,7 @@
 	flesh_color = "#afa59e"
 	base_color = "#333333"
 	blood_color = "#862a51"
-	organs_icon = 'icons/mob/human_races/organs/tajaran.dmi'
+	organs_icon = 'icons/mob/human_races/species/tajara/organs.dmi'
 	reagent_tag = IS_TAJARA
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
@@ -147,8 +148,9 @@
 /datum/species/skrell
 	name = SPECIES_SKRELL
 	name_plural = SPECIES_SKRELL
-	icobase = 'icons/mob/human_races/r_skrell.dmi'
-	deform = 'icons/mob/human_races/r_def_skrell.dmi'
+	icobase = 'icons/mob/human_races/species/skrell/body.dmi'
+	deform = 'icons/mob/human_races/species/skrell/deformed_body.dmi'
+	preview_icon = 'icons/mob/human_races/species/skrell/preview.dmi'
 	eye_icon = "skrell_eyes_s"
 	primitive_form = "Neaera"
 	unarmed_types = list(/datum/unarmed_attack/punch)
@@ -186,7 +188,7 @@
 	flesh_color = "#8cd7a3"
 	blood_color = "#1d2cbf"
 	base_color = "#006666"
-	organs_icon = 'icons/mob/human_races/organs/skrell.dmi'
+	organs_icon = 'icons/mob/human_races/species/skrell/organs.dmi'
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -215,8 +217,9 @@
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
-	icobase = 'icons/mob/human_races/r_diona.dmi'
-	deform = 'icons/mob/human_races/r_def_plant.dmi'
+	icobase = 'icons/mob/human_races/species/diona/body.dmi'
+	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
+	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
 	language = LANGUAGE_ROOTLOCAL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"

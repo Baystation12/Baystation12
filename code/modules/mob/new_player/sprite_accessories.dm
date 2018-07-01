@@ -746,7 +746,7 @@
 /datum/sprite_accessory/hair/buzzcut2
 	name = "Buzzcut 2"
 	icon_state = "hair_buzzcut2"
-	
+
 /datum/sprite_accessory/hair/sideundercut
 	name = "Side Undercut"
 	icon_state = "hair_sideundercut"
@@ -1070,7 +1070,7 @@
 //going to have to re-integrate this with surgery
 //let the icon_state hold an icon preview for now
 /datum/sprite_accessory/skin
-	icon = 'icons/mob/human_races/r_human.dmi'
+	icon = 'icons/mob/human_races/species/human/body.dmi'
 
 /datum/sprite_accessory/skin/human
 	name = "Default human skin"
@@ -1085,19 +1085,19 @@
 /datum/sprite_accessory/skin/tajaran
 	name = "Default tajaran skin"
 	icon_state = "default"
-	icon = 'icons/mob/human_races/r_tajaran.dmi'
+	icon = 'icons/mob/human_races/species/tajara/body.dmi'
 	species_allowed = list(SPECIES_TAJARA)
 
 /datum/sprite_accessory/skin/unathi
 	name = "Default Unathi skin"
 	icon_state = "default"
-	icon = 'icons/mob/human_races/r_lizard.dmi'
+	icon = 'icons/mob/human_races/species/unathi/body.dmi'
 	species_allowed = list(SPECIES_UNATHI)
 
 /datum/sprite_accessory/skin/skrell
 	name = "Default skrell skin"
 	icon_state = "default"
-	icon = 'icons/mob/human_races/r_skrell.dmi'
+	icon = 'icons/mob/human_races/species/skrell/body.dmi'
 	species_allowed = list(SPECIES_SKRELL)
 
 /*

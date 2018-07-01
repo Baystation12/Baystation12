@@ -1,9 +1,11 @@
 /datum/species/unathi
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
-	icon_template = 'icons/mob/human_races/r_template_tall.dmi'
-	icobase = 'icons/mob/human_races/r_lizard.dmi'
-	deform = 'icons/mob/human_races/r_def_lizard.dmi'
+	icon_template = 'icons/mob/human_races/species/template_tall.dmi'
+	icobase = 'icons/mob/human_races/species/unathi/body.dmi'
+	deform = 'icons/mob/human_races/species/unathi/deformed_body.dmi'
+	husk_icon = 'icons/mob/human_races/species/unathi/husk.dmi'
+	preview_icon = 'icons/mob/human_races/species/unathi/preview.dmi'
 	tail = "sogtail"
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
 	limb_blend = ICON_MULTIPLY
@@ -53,7 +55,7 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 	blood_color = "#f24b2e"
-	organs_icon = 'icons/mob/human_races/organs/unathi.dmi'
+	organs_icon = 'icons/mob/human_races/species/unathi/organs.dmi'
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
