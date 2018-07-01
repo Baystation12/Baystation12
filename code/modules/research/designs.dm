@@ -2217,3 +2217,13 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 4, TECH_ILLEGAL = 2, TECH_MATERIAL = 6)
 	build_path = /obj/item/weapon/aiModule/tyrant
 	sort_string = "XACAD"
+
+/datum/design/item/party
+	name = "Uncertified module: PRTY"
+	desc = "Schematics for a robotic module, scraped from seedy parts of the net. Who knows what it does."
+	id = "borg_party_module"
+	req_tech = list(TECH_DATA = 2, TECH_ILLEGAL = 2)
+	build_type = MECHFAB
+	materials = list(DEFAULT_WALL_MATERIAL = 10000, "diamond" = 2000)
+	build_path = /obj/item/borg/upgrade/uncertified/party
+	category = "Cyborg Upgrade Modules"

@@ -38,8 +38,8 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/item/device/boombox/attack_ai(mob/user)
-	return //silicons have no groove
+/obj/item/device/boombox/Topic(href, href_list, state = GLOB.physical_state)
+	. = .. ()
 
 /obj/item/device/boombox/CouldUseTopic(var/mob/user)
 	..()
