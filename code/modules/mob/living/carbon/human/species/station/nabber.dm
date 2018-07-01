@@ -38,12 +38,7 @@
 	preview_icon = 'icons/mob/human_races/species/nabber/preview.dmi'
 	blood_mask = 'icons/mob/human_races/species/nabber/blood_mask.dmi'
 
-	eye_icon = "eyes_nabber"
-	eye_icon_location = 'icons/mob/nabber_face.dmi'
-
 	limb_blend = ICON_MULTIPLY
-
-	has_floating_eyes = 1
 
 	darksight_range = 8
 	darksight_tint = DARKTINT_GOOD
@@ -141,24 +136,6 @@
 	equip_adjust = list(
 		slot_back_str = list(NORTH = list("x" = 0, "y" = 7), EAST = list("x" = 0, "y" = 8), SOUTH = list("x" = 0, "y" = 8), WEST = list("x" = 0, "y" = 8))
 			)
-
-/datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
-	var/obj/item/organ/internal/eyes/nabber/O = H.internal_organs_by_name[BP_EYES]
-	if(!O || !istype(O))
-		return
-	var/store_string = "[O.eyes_shielded] [H.is_cloaked()] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"
-	var/image/eye_overlay = eye_overlays[store_string]
-	if(!eye_overlay)
-		var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
-		I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
-		if(O.eyes_shielded)
-			I.Blend(rgb(125, 125, 125), ICON_MULTIPLY)
-		eye_overlay = image(I)
-		if(H.is_cloaked())
-			eye_overlay.alpha = 100
-
-		eye_overlays[store_string] = eye_overlay
-	return(eye_overlay)
 
 /datum/species/nabber/get_blood_name()
 	return "haemolymph"

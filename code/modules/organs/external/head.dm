@@ -1,4 +1,3 @@
-
 /obj/item/organ/external/head
 	organ_tag = BP_HEAD
 	icon_name = "head"
@@ -17,14 +16,42 @@
 	artery_name = "cartoid artery"
 	cavity_name = "cranial"
 
+	var/glowing_eyes = FALSE
 	var/can_intake_reagents = 1
-	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_races/species/eyes.dmi'
-
+	var/eye_icon_location = 'icons/mob/human_races/species/default_eyes.dmi'
 	var/has_lips = 1
-
 	var/forehead_graffiti
 	var/graffiti_style
+	var/tmp/last_cached_eye_colour
+	var/tmp/last_eye_cache_key
+
+/obj/item/organ/external/head/proc/get_eye_cache_key()
+	last_cached_eye_colour = rgb(128,0,0)
+	if(owner)
+		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
+		if(eyes) last_cached_eye_colour = rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])
+	return "[type]-[eye_icon_location]-[last_cached_eye_colour]"
+
+/obj/item/organ/external/head/proc/get_eye_overlay()
+	if(glowing_eyes)
+		var/icon/I = get_eyes()
+		if(I)
+			var/cache_key = "[last_eye_cache_key]-glow"
+			if(!human_icon_cache[cache_key])
+				var/image/eye_glow = image(I)
+				eye_glow.layer = EYE_GLOW_LAYER
+				eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+				human_icon_cache[cache_key] = eye_glow
+			return human_icon_cache[cache_key]
+
+/obj/item/organ/external/head/proc/get_eyes()
+	if(eye_icon_location)
+		var/cache_key = get_eye_cache_key()
+		if(!human_icon_cache[cache_key])
+			var/icon/eyes_icon = icon(icon = eye_icon_location, icon_state = "")
+			eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
+			human_icon_cache[cache_key] = eyes_icon
+		return human_icon_cache[cache_key]
 
 /obj/item/organ/external/head/examine(mob/user)
 	. = ..()
@@ -64,11 +91,6 @@
 			forehead_graffiti = graffiti
 			graffiti_style = style
 
-/obj/item/organ/external/head/set_dna(var/datum/dna/new_dna)
-	..()
-	eye_icon = species.eye_icon
-	eye_icon_location = species.eye_icon_location
-
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
@@ -77,7 +99,7 @@
 		var/datum/robolimb/R = all_robolimbs[company]
 		if(R)
 			can_intake_reagents = R.can_eat
-			eye_icon = R.use_eye_icon
+			eye_icon_location = R.has_eyes ? initial(eye_icon_location) : null
 	. = ..(company, skip_prosthetics, 1)
 	has_lips = null
 
@@ -103,22 +125,22 @@
 			disfigure("burn")
 
 /obj/item/organ/external/head/no_eyes
-	eye_icon = "blank_eyes"
+	eye_icon_location = null
 
 /obj/item/organ/external/head/update_icon()
 
 	..()
 
 	if(owner)
-		if(eye_icon)
-			var/icon/eyes_icon = new/icon(eye_icon_location, eye_icon)
-			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
-			if(eyes)
-				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
-			else
-				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
-			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-			overlays |= eyes_icon
+		// Base eye icon.
+		var/icon/I = get_eyes()
+		if(I)
+			overlays |= I
+			mob_icon.Blend(I, ICON_OVERLAY)
+
+		// Floating eyes or other effects.
+		var/image/eye_glow = get_eye_overlay()
+		if(eye_glow) overlays |= eye_glow
 
 		if(owner.lip_style && robotic < ORGAN_ROBOT && (species && (species.appearance_flags & HAS_LIPS)))
 			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")

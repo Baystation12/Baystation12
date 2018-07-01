@@ -20,8 +20,6 @@
 	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
 	var/blood_mask =      'icons/mob/human_races/species/human/blood_mask.dmi'
 
-	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
-
 	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
 	var/flesh_color = "#ffc896"               // Pink.
 	var/blood_oxy = 1
@@ -34,9 +32,6 @@
 
 	var/list/hair_styles
 	var/list/facial_hair_styles
-
-	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_races/species/eyes.dmi'
 
 	var/organs_icon		//species specific internal organs icons
 
