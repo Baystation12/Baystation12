@@ -185,7 +185,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		overlays |= auras
 
 	var/matrix/M = matrix()
-	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
+	if(lying)
 		M.Turn(90)
 		M.Scale(size_multiplier)
 		M.Translate(1,-6)

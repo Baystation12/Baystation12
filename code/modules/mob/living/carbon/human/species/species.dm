@@ -20,7 +20,6 @@
 	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
 	var/blood_mask =      'icons/mob/human_races/species/human/blood_mask.dmi'
 
-	var/prone_icon                            // If set, draws this from icobase when mob is prone.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
 
 	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
