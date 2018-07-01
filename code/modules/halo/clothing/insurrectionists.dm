@@ -92,6 +92,20 @@
 	armor = list(melee = 80, bullet = 75, laser = 70, energy = 70, bomb = 80, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
 
+/obj/item/weapon/storage/briefcase/colossuscase
+	name = "Collosus Case"
+	desc = "This is a hardy metal bound breifcase which seems larger then your normal carry on."
+	icon_state = "briefcase"
+	item_state = "colossuscase"
+	flags = CONDUCT
+	force = 8.0
+	throw_speed = 1
+	throw_range = 4
+	w_class = ITEM_SIZE_HUGE
+	max_w_class = ITEM_SIZE_NORMAL
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	allowed = list(/obj/item/clothing/head/bomb_hood/security/colossus, /obj/item/clothing/suit/bomb_suit/security/colossus)
+	slowdown_general = 0
 
 
 #undef INNIE_OVERRIDE

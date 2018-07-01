@@ -280,6 +280,7 @@
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel = 4,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2,
+				/obj/item/weapon/gun/projectile/heavysniper = 1,
 				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4)
 
 /obj/random/projectile/rifle/spawn_choices()
@@ -289,13 +290,12 @@
 				/obj/item/weapon/gun/projectile/automatic/wt550 = 3,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel = 4,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn = 3,
-				/obj/item/weapon/gun/projectile/heavysniper = 1,
 				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2,
 				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4,
 				/obj/item/weapon/gun/projectile/m392_dmr/innie= 3,
 				/obj/item/weapon/gun/projectile/m739_lmg= 3,
 				/obj/item/weapon/gun/projectile/m739_lmg= 1,
-				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 2)
+				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 3)
 
 /obj/random/handgun
 	name = "Random Handgun"
