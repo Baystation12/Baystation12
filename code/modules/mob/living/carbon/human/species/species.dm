@@ -10,13 +10,15 @@
 	var/blurb = "A completely nondescript species."      // A brief lore summary for use in the chargen screen.
 
 	// Icon/appearance vars.
-	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
-	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
+	var/deform =       'icons/mob/human_races/species/human/deformed_body.dmi' // Mutated icon set.
+	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
+	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
 
 	// Damage overlay and masks.
-	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
-	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
-	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
+	var/damage_overlays = 'icons/mob/human_races/species/human/damage_overlay.dmi'
+	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
+	var/blood_mask =      'icons/mob/human_races/species/human/blood_mask.dmi'
 
 	var/prone_icon                            // If set, draws this from icobase when mob is prone.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
@@ -43,7 +45,7 @@
 	var/default_f_style = "Shaved"
 
 	var/race_key = 0                          // Used for mob icon cache string.
-	var/icon/icon_template = 'icons/mob/human_races/r_template.dmi' // Used for mob icon generation for non-32x32 species.
+	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.
 	var/pixel_offset_y = 0                    // Used for offsetting large icons.
 	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
@@ -635,8 +637,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	dat += "<tr>"
 	dat += "<td width = 400>[blurb]</td>"
 	dat += "<td width = 200 align='center'>"
-	if("preview" in icon_states(get_icobase()))
-		usr << browse_rsc(icon(get_icobase(),"preview"), "species_preview_[name].png")
+	if(preview_icon)
+		usr << browse_rsc(icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
 		dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
 	dat += "<b>Language:</b> [language]<br/>"
 	dat += "<small>"

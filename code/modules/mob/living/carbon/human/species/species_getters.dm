@@ -92,3 +92,6 @@
 
 /datum/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
 	return vision_flags
+
+/datum/species/proc/get_husk_icon(var/mob/living/carbon/human/H)
+	return husk_icon
