@@ -161,7 +161,6 @@
 	if(prob(50) && spawn_diona_nymph(get_turf(src)))
 		qdel(src)
 
-// Copypaste due to eye code, RIP.
 /obj/item/organ/external/head/no_eyes/diona
 	can_intake_reagents = 0
 	cannot_break = 1

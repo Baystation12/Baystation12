@@ -178,8 +178,11 @@ Please contact me on #coderbus IRC. ~Carn x
 				for(var/image/overlay in entry)
 					overlay.transform = M
 					overlays += overlay
-		if(species.has_floating_eyes)
-			overlays |= species.get_eyes(src)
+
+		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
+		if(istype(head) && !head.is_stump())
+			var/image/I = head.get_eye_overlay()
+			if(I) overlays |= I
 
 	if(auras)
 		overlays |= auras

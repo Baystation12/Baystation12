@@ -96,8 +96,8 @@
 
 // Xenomorph limbs.
 /obj/item/organ/external/head/unbreakable/xeno
-	eye_icon = "eyes"
 	eye_icon_location = 'icons/mob/human_races/species/xenos/eyes.dmi'
+	glowing_eyes = TRUE
 	encased = "carapace"
 
 /obj/item/organ/external/chest/unbreakable/xeno
