@@ -61,7 +61,7 @@
 
 /obj/item/clothing/suit/bomb_suit/security/colossus
 	name = "Colossus Armor"
-	desc = "When desperation reaches a breaking point humans will create things which are far scarier then they are practical. The collossus armor is a perfect example of this, with thick heavy layers of armor fitted all across the exterior of the body suit.Inside this armored suit the wearer becomes a walking tank provided they are wielding enough firepower to emulate such a vehicle. Even without a hand held rocket launcher any foe will be hard pressed to pierce through the robust alloys protecting its user. Though, don't expect to be able to get around the battle field with any kind of speed, the key word of being a walking tank is 'walking'."
+	desc = "When desperation reaches a breaking point humans will create things which are far scarier then they are practical. The collossus armor is a perfect example of this, with thick heavy layers of armor fitted all across the exterior of the body suit. Inside this armored suit the wearer becomes a walking tank provided they are wielding enough firepower to emulate such a vehicle. Even without a hand held rocket launcher any foe will be hard pressed to pierce through the robust alloys protecting its user. Though, don't expect to be able to get around the battle field with any kind of speed, the key word of being a walking tank is 'walking'."
 	icon_state = "bombsuitsec"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	item_flags = THICKMATERIAL
@@ -94,7 +94,7 @@
 
 /obj/item/weapon/storage/briefcase/colossuscase
 	name = "Collosus Case"
-	desc = "This is a hardy metal bound breifcase which seems larger then your normal carry on."
+	desc = "This is a hardy metal bound briefcase which seems larger then your normal carry on."
 	icon_state = "briefcase"
 	item_state = "colossuscase"
 	flags = CONDUCT
