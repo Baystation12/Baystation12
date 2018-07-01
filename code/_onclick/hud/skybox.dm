@@ -28,7 +28,10 @@
 	update()
 
 /obj/skybox/proc/update()
-	if(isnull(owner) || isnull(owner.client))
+	if(isnull(owner))
+		qdel(src)
+		return
+	if(isnull(owner.client))
 		qdel(src)
 	else
 		var/turf/T = get_turf(owner.client.eye)
@@ -42,6 +45,8 @@
 /obj/skybox/Destroy()
 	owner = null
 	SSskybox.skyboxes -= src
+	QDEL_NULL(image)
+	QDEL_NULL(stars)
 	return ..()
 
 /mob
