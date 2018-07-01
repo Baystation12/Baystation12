@@ -4,10 +4,14 @@
 	var/last_near_structure = 0
 	var/mob/living/deity/linked
 
-/obj/item/weapon/material/sword/blazing/New(var/newloc, var/material, var/deity)
-	..()
-	START_PROCESSING(SSobj,src)
+/obj/item/weapon/material/sword/blazing/Initialize(var/maploading, var/material, var/deity)
+	. = ..()
+	START_PROCESSING(SSobj, src)
 	linked = deity
+
+/obj/item/weapon/material/sword/blazing/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/item/weapon/material/sword/blazing/Process()
 	if(!linked || last_near_structure + 10 SECONDS > world.time)
