@@ -1,3 +1,5 @@
+#define INCAPACITATION_CANCRAWL (INCAPACITATION_DISABLED & ~INCAPACITATION_FORCELYING)
+
 // Admin object possession
 /datum/movement_handler/mob/admin_possess/DoMove(var/direction)
 	if(QDELETED(mob.control_object))
@@ -149,7 +151,7 @@
 // Along with more physical checks
 /datum/movement_handler/mob/physically_capable/MayMove(var/mob/mover)
 	// We only check physical capability if the host mob tried to do the moving
-	return ((mover && mover != mob) || !mob.incapacitated(INCAPACITATION_DISABLED & ~INCAPACITATION_FORCELYING)) ? MOVEMENT_PROCEED : MOVEMENT_STOP
+	return ((mover && mover != mob) || !mob.incapacitated(INCAPACITATION_CANCRAWL)) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 // Is anything physically preventing movement?
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
@@ -217,17 +219,19 @@
 			mob.move_delay += 7 + config.walk_speed
 	mob.move_delay += mob.movement_delay()
 
-	//Crawling, it's slower
-	if(mob.lying)
-		mob.move_delay += 8 + (mob.weakened * 2)
-
 	if(mob.check_slipmove())
 		return
 
 	//We are now going to move
 	mob.moving = 1
 
-
+	// Crawling: slower and can be interrupted
+	if(mob.lying)
+		var/crawl_delay = 8 + (mob.weakened * 2)
+		mob.move_delay += crawl_delay
+		if(!do_after(mob, crawl_delay, incapacitation_flags = INCAPACITATION_CANCRAWL))
+			mob.moving = 0
+			return
 
 	direction = mob.AdjustMovementDirection(direction)
 	step(mob, direction)
@@ -299,3 +303,5 @@
 				return
 
 	return prob(50) ? GLOB.cw_dir[.] : GLOB.ccw_dir[.]
+
+#undef INCAPACITATION_CANCRAWL
