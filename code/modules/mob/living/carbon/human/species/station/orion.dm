@@ -20,6 +20,5 @@
 	cold_level_2 = 190 //-83C
 	cold_level_3 = 114 //-159C
 	//Custom Defines for the race as follows
-	DEFAULT_ATTACK_COOLDOWN = 5
 	strength = STR_HIGH
 	unarmed_types = /datum/unarmed_attack/orionpunch
