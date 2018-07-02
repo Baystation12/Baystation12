@@ -72,7 +72,7 @@
 	wielded_item_state = "ma5b"
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
-	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 5, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_COMBAT = 7, TECH_MATERIAL = 5, TECH_ILLEGAL = 4)
 	ammo_type = /obj/item/ammo_casing/a762
 	magazine_type = /obj/item/ammo_magazine/m762_ap
 	allowed_magazines = list(/obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/m762_ap, /obj/item/ammo_magazine/c762)
