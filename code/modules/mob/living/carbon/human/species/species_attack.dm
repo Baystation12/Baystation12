@@ -138,14 +138,3 @@
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
-
-	/datum/unarmed_attack/orionpunch
-	var/attack_verb = list("attacked, punched, assaulted")	// Empty hand hurt intent verb.
-	var/attack_noun = list("fist")
-	var/damage = 8						// Extra empty hand attack damage.
-	var/attack_sound = "punch"
-	var/miss_sound = 'sound/weapons/punchmiss.ogg'
-	var/delay = 1
-	var/sparring_variant_type = /datum/unarmed_attack/light_strike
-	eye_attack_text = "gouges"
-	eye_attack_text_victim = "digits"
