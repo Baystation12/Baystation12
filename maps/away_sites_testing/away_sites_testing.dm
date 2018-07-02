@@ -9,7 +9,6 @@
 	#include "../away/derelict/derelict.dm"
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/lost_supply_base/lost_supply_base.dm"
-	#include "../away/marooned/marooned.dm"
 	#include "../away/smugglers/smugglers.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/magshield/magshield.dm"
