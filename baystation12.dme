@@ -1723,6 +1723,7 @@
 #include "code\modules\mob\living\carbon\human\species\species.dm"
 #include "code\modules\mob\living\carbon\human\species\species_attack.dm"
 #include "code\modules\mob\living\carbon\human\species\species_getters.dm"
+#include "code\modules\mob\living\carbon\human\species\species_grab.dm"
 #include "code\modules\mob\living\carbon\human\species\species_helpers.dm"
 #include "code\modules\mob\living\carbon\human\species\species_hud.dm"
 #include "code\modules\mob\living\carbon\human\species\species_random.dm"

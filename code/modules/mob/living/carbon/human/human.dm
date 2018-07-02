@@ -564,7 +564,7 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation && !nabbing)
+	if(species.has_fine_manipulation(src))
 		return 1
 	if(!silent)
 		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
@@ -1303,14 +1303,10 @@
 	return 0
 
 /mob/living/carbon/human/verb/pull_punches()
-	set name = "Pull Punches"
+	set name = "Switch Stance"
 	set desc = "Try not to hurt them."
 	set category = "IC"
-
-	if(incapacitated() || species.species_flags & SPECIES_FLAG_CAN_NAB) return
-	pulling_punches = !pulling_punches
-	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
-	return
+	species.toggle_stance(src)
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
