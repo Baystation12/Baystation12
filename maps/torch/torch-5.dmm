@@ -12474,7 +12474,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(11, 24)
 	},
 /obj/structure/bed/chair{
 	dir = 8
@@ -13499,7 +13499,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_one_access = list(11, 24)
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";

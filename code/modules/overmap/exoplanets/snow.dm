@@ -10,7 +10,8 @@
 							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
 							 /datum/map_template/ruin/exoplanet/fountain,
-							 /datum/map_template/ruin/exoplanet/hydrobase)
+							 /datum/map_template/ruin/exoplanet/hydrobase,
+							 /datum/map_template/ruin/exoplanet/lodge)
 
 /obj/effect/overmap/sector/exoplanet/snow/generate_map()
 	for(var/zlevel in map_z)

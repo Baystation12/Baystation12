@@ -32,6 +32,7 @@
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
 	#include "items/rigs.dm"
+	#include "items/solbanner.dm"
 
 	#include "items/clothing/clothing.dm"
 	#include "items/clothing/solgov-accessory.dm"

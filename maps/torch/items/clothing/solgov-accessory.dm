@@ -73,6 +73,9 @@ medals
 	icon_state = "torchpatch"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/solgov/fleet_patch
 	name = "\improper First Fleet patch"
@@ -240,6 +243,9 @@ armbands
 	name = "master solgov armband"
 	icon = 'maps/torch/icons/obj/solgov-accessory.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/armband/solgov/mp
 	name = "military police brassard"
@@ -301,6 +307,9 @@ department tags
 	on_rolled = list("down" = "none", "rolled" = "dept_exped_sleeves")
 	slot = ACCESSORY_SLOT_DEPT
 	removable = FALSE
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/solgov/department/command
 	name = "command insignia"
@@ -440,6 +449,9 @@ ranks - ec
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
 	high_visibility = 1
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/solgov/rank/get_fibers()
 	return null

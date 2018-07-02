@@ -135,8 +135,7 @@
 		return
 	if(get_dist(src, usr) > 1 && !issilicon(usr))
 		return
-
-	src.locked = L[desc]
+	set_target(L[desc])
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
 	return
@@ -152,6 +151,21 @@
 	if (t)
 		src.id = t
 	return
+
+/obj/machinery/computer/teleporter/proc/clear_target()
+	if(src.locked)
+		GLOB.destroyed_event.unregister(locked, src, .proc/clear_target)
+	src.locked = null
+	if(station)
+		station.disengage()
+
+/obj/machinery/computer/teleporter/proc/set_target(var/obj/O)
+	src.locked = O
+	GLOB.destroyed_event.register(locked, src, .proc/clear_target)
+
+/obj/machinery/computer/teleporter/Destroy()
+	clear_target()
+	return ..()
 
 /proc/find_loc(obj/R as obj)
 	if (!R)	return null
