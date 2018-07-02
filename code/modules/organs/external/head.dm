@@ -30,7 +30,8 @@
 	if(owner)
 		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 		if(eyes) last_cached_eye_colour = rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])
-	return "[type]-[eye_icon_location]-[last_cached_eye_colour]"
+	last_eye_cache_key = "[type]-[eye_icon_location]-[last_cached_eye_colour]"
+	return last_eye_cache_key
 
 /obj/item/organ/external/head/proc/get_eye_overlay()
 	if(glowing_eyes)
