@@ -258,74 +258,6 @@
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 	qdel(src)
 
-
-/************
- nabber verbs
-************/
-/mob/living/carbon/human/proc/can_nab(var/mob/living/target)
-	if(QDELETED(src))
-		return FALSE
-
-	if(last_special > world.time)
-		to_chat(src, "<span class='warning'>It is too soon to make another nab attempt.</span>")
-		return FALSE
-
-	if(incapacitated())
-		to_chat(src, "<span class='warning'>You cannot nab in your current state.</span>")
-		return FALSE
-
-	if(!is_cloaked() || pulling_punches)
-		to_chat(src, "<span class='warning'>You can only nab people when you are well hidden and ready to hunt.</span>")
-		return FALSE
-
-	if(target)
-		if(!istype(target) || issilicon(target))
-			return FALSE
-		if(!Adjacent(target))
-			to_chat(src, "<span class='warning'>\The [target] has to be adjacent to you.</span>")
-			return FALSE
-
-	return TRUE
-
-/mob/living/carbon/human/proc/nab()
-	set category = "Abilities"
-	set name = "Nab"
-	set desc = "Nab someone."
-
-	if(!can_nab())
-		return
-
-	var/list/choices = list()
-	for(var/mob/living/M in view(1,src))
-		if(!istype(M,/mob/living/silicon) && Adjacent(M))
-			choices += M
-	choices -= src
-
-	var/mob/living/T = input(src, "Who do you wish to nab?") as null|anything in choices
-	if(!T || !can_nab(T))
-		return
-
-	last_special = world.time + 50
-
-	if(l_hand) unEquip(l_hand)
-	if(r_hand) unEquip(r_hand)
-	to_chat(src, "<span class='warning'>You drop everything as you spring out to nab someone!.</span>")
-
-	playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
-	remove_cloaking_source(species)
-
-	if(prob(90) && src.make_grab(src, T, GRAB_NAB_SPECIAL))
-		T.Weaken(rand(1,3))
-		visible_message("<span class='danger'>\The [src] suddenly lunges out and grabs \the [T]!</span>")
-		LAssailant = src
-
-		src.do_attack_animation(T)
-		playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-		return 1
-
-	else
-		visible_message("<span class='danger'>\The [src] suddenly lunges out, almost grabbing \the [T]!</span>")
-
 /mob/living/carbon/human/proc/active_camo()
 	set category = "Abilities"
 	set name = "Active Camo"
@@ -336,53 +268,6 @@
 	else
 		add_cloaking_source(species)
 		apply_effect(2, STUN, 0)
-
-/mob/living/carbon/human/proc/switch_stance()
-	set category = "Abilities"
-	set name = "Switch Stance"
-	set desc = "Toggle between your hunting and manipulation stance"
-
-	if(stat) return
-
-	to_chat(src, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
-	var/hidden = is_cloaked()
-	if(!hidden)
-		visible_message("[src] shifts \his arms.")
-
-	if(l_hand) unEquip(l_hand)
-	if(r_hand) unEquip(r_hand)
-
-	if(do_after(src, 30))
-		arm_swap()
-	else
-		to_chat(src, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
-
-/mob/living/carbon/human/proc/arm_swap(var/forced = FALSE)
-	if(l_hand) unEquip(l_hand)
-	if(r_hand) unEquip(r_hand)
-	var/hidden = is_cloaked()
-	pulling_punches = !pulling_punches
-	nabbing = !pulling_punches
-
-	if(pulling_punches)
-		current_grab_type = all_grabobjects[GRAB_NORMAL]
-		if(forced)
-			to_chat(src, "<span class='notice'>You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms.</span>")
-			if(!hidden)
-				visible_message("<span class='notice'>[src] falters, hunting arms failing.</span>")
-		else
-			to_chat(src, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax.\
-			You reach out with your manipulation arms, ready to use complex items.</span>")
-			if(!hidden)
-				visible_message("<span class='notice'>[src] seems to relax as \he folds \his massive curved arms to \his thorax and reaches out \
-				with \his small handlike limbs.</span>")
-	else
-		current_grab_type = all_grabobjects[GRAB_NAB]
-		to_chat(src, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
-		if(!hidden)
-			visible_message("<span class='warning'>[src] tenses as \he brings \his smaller arms in close to \his body. \His two massive spiked arms reach \
-			out. \He looks ready to attack.</span>")
-
 
 /mob/living/carbon/human/proc/change_colour()
 	set category = "Abilities"

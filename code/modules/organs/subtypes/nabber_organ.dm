@@ -181,12 +181,14 @@
 			lowblood_tally = 6
 			if(prob(15))
 				to_chat(owner, "<span class='warning'>You're almost unable to move!</span>")
-				if(owner.nabbing)
-					owner.arm_swap(TRUE)
+				if(!owner.pulling_punches)
+					var/datum/species/nabber/nab = species
+					nab.arm_swap(owner, TRUE)
 		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
 			lowblood_tally = 10
-			if(prob(30) && owner.nabbing)
-				owner.arm_swap(TRUE)
+			if(prob(30) && !owner.pulling_punches)
+				var/datum/species/nabber/nab = species
+				nab.arm_swap(owner, TRUE)
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
 				owner.Paralyse(1)
