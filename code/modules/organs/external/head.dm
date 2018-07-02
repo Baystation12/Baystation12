@@ -19,7 +19,7 @@
 
 	var/can_intake_reagents = 1
 	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_face.dmi'
+	var/eye_icon_location = 'icons/mob/human_races/species/eyes.dmi'
 
 	var/has_lips = 1
 

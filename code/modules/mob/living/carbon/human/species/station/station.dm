@@ -220,6 +220,8 @@
 	icobase = 'icons/mob/human_races/species/diona/body.dmi'
 	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
+	eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
+
 	language = LANGUAGE_ROOTLOCAL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"

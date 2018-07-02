@@ -15,6 +15,8 @@
 	natural_armour_values = list(melee = 30, bullet = 15, laser = 25, energy = 30, bomb = 30, bio = 100, rad = 100)
 
 	icon_template = 'icons/mob/human_races/species/xenos/template.dmi'
+	eye_icon_location = 'icons/mob/human_races/species/xenos/eyes.dmi'
+
 	has_floating_eyes = TRUE
 
 	// temp until someone who isn't me makes some for this icon set

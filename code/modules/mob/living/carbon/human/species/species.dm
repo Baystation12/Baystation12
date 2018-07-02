@@ -37,7 +37,7 @@
 	var/list/facial_hair_styles
 
 	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_face.dmi'
+	var/eye_icon_location = 'icons/mob/human_races/species/eyes.dmi'
 
 	var/organs_icon		//species specific internal organs icons
 
