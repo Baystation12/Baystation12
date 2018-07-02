@@ -190,6 +190,8 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
+
 	// The list for the bioprinter to print based on species
 	var/list/bioprint_products = list(
 		BP_HEART    = list(/obj/item/organ/internal/heart,      25),
@@ -249,10 +251,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	you use the _str version of the slot.
 */
 
-/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
-	return
-
 /datum/species/New()
+
 	if(hud_type)
 		hud = new hud_type()
 	else
@@ -268,6 +268,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+	// Modify organ lists if necessary.
+	if(islist(override_limb_types))
+		for(var/ltag in override_limb_types)
+			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
 	//Build organ descriptors
 	for(var/limb_type in has_limbs)
