@@ -96,6 +96,9 @@
 	else
 		icon_state = "MA9_unloaded"
 
+/obj/item/weapon/gun/projectile/ma5b_ar/theta/add_flashlight()
+	return
+
 /obj/structure/closet/syndicate/orioncloset
 	name = "Orion Armory Closet"
 	desc = "Looks High Tech even for a closet..."
