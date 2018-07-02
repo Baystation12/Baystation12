@@ -526,7 +526,7 @@
 		if (show_alert)
 			alert(client, "You are currently not whitelisted to play [client.prefs.species].")
 		return 0
-	if (jobban_isbanned(src, "SPECIES"))
+	if (jobban_isbanned(src, "SPECIES") && S.name != SPECIES_HUMAN)
 		if (show_alert)
 			alert(client, "You are currently banned to play species!")
 		return 0
