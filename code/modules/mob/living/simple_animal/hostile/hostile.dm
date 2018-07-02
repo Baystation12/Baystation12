@@ -19,9 +19,6 @@
 	var/shuttletarget = null
 	var/enroute = 0
 
-	var/damtype = BRUTE
-	var/defense = "melee" //what armor protects against its attacks
-
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
 		return null

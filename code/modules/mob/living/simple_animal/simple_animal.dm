@@ -56,6 +56,8 @@
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
+	var/damtype = BRUTE
+	var/defense = "melee" //what armor protects against its attacks
 
 	//Null rod stuff
 	var/supernatural = 0
