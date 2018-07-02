@@ -59,7 +59,6 @@
 	min_bruised_damage = 35
 	min_broken_damage = 60
 
-//Testing out New Gun for Theta Project, may not end up using this.
 /obj/item/weapon/gun/projectile/ma5b_ar/theta
 	name = "M98 All Purpose Carbine"
 	desc = "This weapon was produced and funded by the UNSC for the Orion Project subjects operational use. Designed with high accuracy and easy maneuverability in combat situations, it was quickly discontinued because of it's high price range and extravagant material costs to create. It is highly versatile being capable of utilizing any and all 7.62 magazines found in the field. If attachments can be found, this carbine is capable of using them. It can be fired one handed with an accuracy penalty."
@@ -87,6 +86,7 @@
 		)
 
 	attachment_slots = list("sight","stock","barrel")
+	//This is Here because the MA5B spawns with a stock.
 	attachments_on_spawn = null
 
 /obj/item/weapon/gun/projectile/ma5b_ar/theta/update_icon()
