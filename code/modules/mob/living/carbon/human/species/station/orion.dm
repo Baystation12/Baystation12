@@ -19,6 +19,7 @@
 	cold_level_1 = 247 //-26C
 	cold_level_2 = 190 //-83C
 	cold_level_3 = 114 //-159C
+	blood_volume = 600 // Normal Human has 560
 	//Custom Defines for the race as follows
 	strength = STR_HIGH
-	unarmed_types = /datum/unarmed_attack/orionpunch
+	unarmed_types = list(/datum/unarmed_attack/orionpunch)
