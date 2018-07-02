@@ -87,6 +87,7 @@
 		)
 
 	attachment_slots = list("sight","stock","barrel")
+	attachments_on_spawn = null
 
 /obj/item/weapon/gun/projectile/ma5b_ar/theta/update_icon()
 	. = ..()
