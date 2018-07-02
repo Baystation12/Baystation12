@@ -94,15 +94,15 @@
 
 /obj/item/weapon/storage/briefcase/colossuscase
 	name = "Collosus Case"
-	desc = "This is a hardy metal bound briefcase which seems larger then your normal carry on."
-	icon_state = "briefcase"
+	desc = "This is a hardy metal bound briefcase which seems larger then your normal carry on. Inside of this enourmous case you can see there are two molded slots which seem perfectly fitted for both the Colossus Armor and Helmet in their entirety. You should silently thank whatever various diety you believe in that this case even exists in the first place."
+	icon_state = "colossuscase"
 	item_state = "colossuscase"
 	flags = CONDUCT
-	force = 8.0
+	force = 10.0
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
-	max_w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	allowed = list(/obj/item/clothing/head/bomb_hood/security/colossus, /obj/item/clothing/suit/bomb_suit/security/colossus)
 	slowdown_general = 0
