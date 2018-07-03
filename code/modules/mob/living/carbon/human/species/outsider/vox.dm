@@ -1,8 +1,9 @@
 /datum/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	icobase = 'icons/mob/human_races/r_vox.dmi'
-	deform = 'icons/mob/human_races/r_def_vox.dmi'
+	icobase = 'icons/mob/human_races/species/vox/body.dmi'
+	deform = 'icons/mob/human_races/species/vox/body.dmi'
+	husk_icon = 'icons/mob/human_races/species/vox/husk.dmi'
 	default_language = "Vox-pidgin"
 	language = LANGUAGE_GALCOM
 	num_alternate_languages = 1
@@ -16,7 +17,7 @@
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
 	taste_sensitivity = TASTE_DULL
-
+	eye_icon = "vox_eyes_s"
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 

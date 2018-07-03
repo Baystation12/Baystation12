@@ -34,7 +34,6 @@
 
 	// merging bundles
 	else if(istype(W, /obj/item/weapon/paper_bundle))
-		user.drop_from_inventory(W)
 		for(var/obj/O in W)
 			O.loc = src
 			O.add_fingerprint(usr)
@@ -60,10 +59,8 @@
 		to_chat(user, "<span class='notice'>You add [(sheet.name == "paper") ? "the paper" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
 	else if(istype(sheet, /obj/item/weapon/photo))
 		to_chat(user, "<span class='notice'>You add [(sheet.name == "photo") ? "the photo" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
-
-	user.drop_from_inventory(sheet)
-	sheet.loc = src
-
+	else if(!user.unEquip(sheet, src))
+		return
 	pages.Insert(index, sheet)
 
 	if(index <= page)
@@ -207,9 +204,7 @@
 		O.dropInto(usr.loc)
 		O.reset_plane_and_layer()
 		O.add_fingerprint(usr)
-	usr.drop_from_inventory(src)
 	qdel(src)
-	return
 
 
 /obj/item/weapon/paper_bundle/update_icon()

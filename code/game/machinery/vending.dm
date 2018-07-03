@@ -199,8 +199,8 @@
 		power_change()
 		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
-		user.drop_item()
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		coin = W
 		categories |= CAT_COIN
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
@@ -236,7 +236,6 @@
 	cashmoney.worth -= currently_vending.price
 
 	if(cashmoney.worth <= 0)
-		usr.drop_from_inventory(cashmoney)
 		qdel(cashmoney)
 	else
 		cashmoney.update_icon()
@@ -914,7 +913,8 @@
 		/obj/item/weapon/storage/med_pouch/trauma,
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/med_pouch/oxyloss,
-		/obj/item/weapon/storage/med_pouch/toxin = 2
+		/obj/item/weapon/storage/med_pouch/toxin,
+		/obj/item/weapon/storage/med_pouch/radiation
 		)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3, /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 2)
 
@@ -1172,20 +1172,21 @@
 					/obj/item/weapon/soap/nanotrasen = 4,
 					/obj/item/weapon/soap/deluxe = 4,
 					/obj/item/weapon/mirror = 8,
-					/obj/item/weapon/haircomb = 8,
-					/obj/item/weapon/towel = 6
+					/obj/item/weapon/haircomb/random = 8,
+					/obj/item/weapon/haircomb/brush = 4,
+					/obj/item/weapon/towel/random = 6
 					)
 	premium = list(/obj/item/weapon/soap/gold = 1)
 	contraband = list(/obj/item/weapon/soap/syndie = 4,
-					/obj/item/weapon/inflatable_duck = 1)
+					  /obj/item/weapon/inflatable_duck = 1)
 	prices = list(/obj/item/weapon/soap = 20,
-					/obj/item/weapon/soap/nanotrasen = 30,
-					/obj/item/weapon/soap/deluxe = 60,
-					/obj/item/weapon/soap/syndie = 10,
-					/obj/item/weapon/soap/gold = 1000,
-					/obj/item/weapon/mirror = 40,
-					/obj/item/weapon/haircomb = 40,
-					/obj/item/weapon/towel = 50
+				  /obj/item/weapon/soap/nanotrasen = 30,
+				  /obj/item/weapon/soap/deluxe = 60,
+				  /obj/item/weapon/soap/syndie = 10,
+				  /obj/item/weapon/mirror = 40,
+				  /obj/item/weapon/haircomb/random = 40,
+				  /obj/item/weapon/haircomb/brush = 80,
+				  /obj/item/weapon/towel/random = 50
 					)
 
 //a food variant of the boda machine, only has one item currently.

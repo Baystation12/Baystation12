@@ -276,6 +276,21 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/map_info(var/client/victim)
 	return
+
+/datum/map/proc/bolt_saferooms()
+	return // overriden by torch
+
+/datum/map/proc/unbolt_saferooms()
+	return // overriden by torch
+	
+/datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
+	maint_all_access = 1
+	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
+
+/datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
+	maint_all_access = 0
+	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
+
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
 // This list needs to be purged but people insist on adding more cruft to the radio.
 /datum/map/proc/default_internal_channels()

@@ -56,6 +56,14 @@
 	if(!is_jammed && prob(jam_chance))
 		src.visible_message("<span class='danger'>\The [src] jams!</span>")
 		is_jammed = 1
+		var/mob/user = loc
+		if(istype(user))
+			if(prob(user.skill_fail_chance(SKILL_WEAPONS, 100, SKILL_PROF)))
+				return null
+			else
+				to_chat(user, "<span class='notice'>You reflexively clear the jam on \the [src].</span>")
+				is_jammed = 0
+				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 	if(is_jammed)
 		return null
 	//get the next casing
@@ -117,8 +125,8 @@
 					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>")//already a magazine here
 
 					return
-				user.remove_from_mob(AM)
-				AM.forceMove(src)
+				if(!user.unEquip(AM, src))
+					return
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
 				playsound(loc, mag_insert_sound, 50, 1)
@@ -146,9 +154,8 @@
 		if(loaded.len >= max_shells)
 			to_chat(user, "<span class='warning'>[src] is full.</span>")
 			return
-
-		user.remove_from_mob(C)
-		C.forceMove(src)
+		if(!user.unEquip(C, src))
+			return
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 		playsound(loc, load_sound, 50, 1)
@@ -221,11 +228,12 @@
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
 	. = ..(user)
-	if(is_jammed)
+	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		to_chat(user, "<span class='warning'>It looks jammed.</span>")
 	if(ammo_magazine)
 		to_chat(user, "It has \a [ammo_magazine] loaded.")
-	to_chat(user, "Has [getAmmo()] round\s remaining.")
+	if(user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		to_chat(user, "Has [getAmmo()] round\s remaining.")
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()

@@ -235,8 +235,8 @@ var/bomb_set
 		else
 			var/obj/item/I = usr.get_active_hand()
 			if(istype(I, /obj/item/weapon/disk/nuclear))
-				usr.drop_item()
-				I.forceMove(src)
+				if(!usr.unEquip(I, src))
+					return 1
 				auth = I
 	if(is_auth(usr))
 		if(href_list["type"])
@@ -461,8 +461,8 @@ var/bomb_set
 	var/last_turf_state
 
 	var/announced = 0
+	var/time_to_explosion = 0
 	var/self_destruct_cutoff = 60 SECONDS 
-	var/last_explode = 0
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
@@ -532,32 +532,29 @@ var/bomb_set
 	flash_tiles.Cut()
 	return ..()
 
-/obj/machinery/nuclearbomb/station/Process()
+/obj/machinery/nuclearbomb/station/Process(var/wait = 1 SECONDS)
 	..()
 	var/range
 	var/high_intensity
 	var/low_intensity
-	if(timing > 0 || ticker.current_state != GAME_STATE_FINISHED)
+	if(timing > 0 && ticker.current_state != GAME_STATE_FINISHED)
 		if(timeleft <= self_destruct_cutoff && !announced)
 			priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
 			announced = 1
-		if(timeleft in 0 to self_destruct_cutoff/2)
+		if(timeleft in 0 to self_destruct_cutoff/2 && world.time >= time_to_explosion)
 			range = rand(2, 3)
 			high_intensity = rand(5,8)
 			low_intensity = rand(7,10)
-		else
+			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
+			explosion(T, range, high_intensity, low_intensity)
+			time_to_explosion = world.time + 4 SECONDS
+		else if(timeleft in self_destruct_cutoff/2 + 1 to self_destruct_cutoff && world.time >= time_to_explosion)
 			range = rand(1, 2)
 			high_intensity = rand(3, 6)
 			low_intensity = rand(5, 8)
-		if(timeleft in 0 to self_destruct_cutoff/2 && world.time >= last_explode)
 			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
 			explosion(T, range, high_intensity, low_intensity)
-			last_explode = world.time + 4 SECONDS
-			
-		else if(timeleft in self_destruct_cutoff/2 + 1 to self_destruct_cutoff && world.time >= last_explode)
-			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
-			explosion(T, range, high_intensity, low_intensity)
-			last_explode = world.time + 7 SECONDS
+			time_to_explosion = world.time + 7 SECONDS
 
 /obj/machinery/nuclearbomb/station/secure_device()
 	..()

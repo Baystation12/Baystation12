@@ -161,3 +161,18 @@
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
 	breathed_product = /datum/reagent/water
+
+/decl/xgm_gas/sulfurdioxide
+	id = "sulfurdioxide"
+	name = "Sulfur Dioxide"
+
+	specific_heat = 30	// J/(mol*K)
+	molar_mass = 0.044	// kg/mol
+
+/decl/xgm_gas/ammonia
+	id = "ammonia"
+	name = "Ammonia"
+
+	specific_heat = 20	// J/(mol*K)
+	molar_mass = 0.017	// kg/mol
+	breathed_product = /datum/reagent/ammonia

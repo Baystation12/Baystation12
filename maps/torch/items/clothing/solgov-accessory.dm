@@ -71,12 +71,17 @@ medals
 	name = "\improper Torch mission patch"
 	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
 	icon_state = "torchpatch"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/solgov/fleet_patch
 	name = "\improper First Fleet patch"
 	desc = "A fancy shoulder patch carrying insignia of First Fleet, the Sol Guard, stationed in Sol."
 	icon_state = "fleetpatch1"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/solgov/fleet_patch/second
@@ -106,6 +111,7 @@ ribbons
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_MEDAL
 	icon = 'maps/torch/icons/obj/solgov-accessory.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
@@ -237,6 +243,9 @@ armbands
 	name = "master solgov armband"
 	icon = 'maps/torch/icons/obj/solgov-accessory.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/armband/solgov/mp
 	name = "military police brassard"
@@ -298,6 +307,9 @@ department tags
 	on_rolled = list("down" = "none", "rolled" = "dept_exped_sleeves")
 	slot = ACCESSORY_SLOT_DEPT
 	removable = FALSE
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/solgov/department/command
 	name = "command insignia"
@@ -437,6 +449,9 @@ ranks - ec
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
 	high_visibility = 1
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
+		)
 
 /obj/item/clothing/accessory/solgov/rank/get_fibers()
 	return null

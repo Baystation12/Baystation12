@@ -56,10 +56,12 @@
 		return
 
 	if(user)
-		user.drop_from_inventory(C)
-		to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
+		if(user.unEquip(C))
+			to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
+		else
+			return
 
-	C.loc = src
+	C.forceMove(src)
 	cartridges[C.label] = C
 	cartridges = sortAssoc(cartridges)
 	GLOB.nanomanager.update_uis(src)

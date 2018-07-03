@@ -29,15 +29,12 @@
 
 /obj/machinery/disease2/isolator/attackby(var/obj/O as obj, var/mob/user)
 	if(!istype(O,/obj/item/weapon/reagent_containers/syringe)) return
-	var/obj/item/weapon/reagent_containers/syringe/S = O
-
 	if(sample)
 		to_chat(user, "\The [src] is already loaded.")
 		return
-
-	sample = S
-	user.drop_item()
-	S.forceMove(src)
+	if(!user.unEquip(O, src))
+		return
+	sample = O
 
 	user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
 	GLOB.nanomanager.update_uis(src)

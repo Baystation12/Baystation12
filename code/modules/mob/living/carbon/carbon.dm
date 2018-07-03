@@ -299,8 +299,8 @@
 		var/obj/item/I = item
 		itemsize = I.w_class
 
-	src.drop_from_inventory(item)
-	
+	if(!unEquip(item))
+		return	
 	if(!item || !isturf(item.loc))
 		return
 	

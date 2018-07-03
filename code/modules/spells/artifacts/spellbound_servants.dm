@@ -48,7 +48,7 @@
 	spells = list(/spell/noclothes)
 
 /datum/spellbound_type/apprentice/set_antag(var/datum/mind/M, var/mob/master)
-	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! You’re just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher’s orders!</b>")
+	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! Youï¿½re just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacherï¿½s orders!</b>")
 
 /datum/spellbound_type/servant
 	var/spiel = "You don't do anything in particular."
@@ -82,7 +82,7 @@
 /datum/spellbound_type/servant/familiar
 	name = "Familiar"
 	desc = "A friend! Or are they a pet? They can transform into animals, and take some particular traits from said creatures."
-	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly won’t pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
+	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly wonï¿½t pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
 	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head,
 					/obj/item/clothing/under/familiargarb = slot_w_uniform)
 
@@ -112,7 +112,7 @@
 /datum/spellbound_type/servant/fiend
 	name = "Fiend"
 	desc = "A practitioner of dark and evil magics, almost certainly a demon, and possibly a lawyer."
-	spiel = "The Summoning Ritual has bound you to this world with limited access to your infernal powers; you’ll have to be strategic in how you use them. Follow your Master’s orders as well as you can!"
+	spiel = "The Summoning Ritual has bound you to this world with limited access to your infernal powers; youï¿½ll have to be strategic in how you use them. Follow your Masterï¿½s orders as well as you can!"
 	spells = list(/spell/targeted/projectile/dumbfire/fireball/firebolt,
 				/spell/targeted/ethereal_jaunt,
 				/spell/targeted/torment,
@@ -153,7 +153,7 @@
 /datum/spellbound_type/servant/overseer
 	name = "Overseer"
 	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
-	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can’t fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
+	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you canï¿½t fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
 	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform,
 					/obj/item/clothing/shoes/sandals/grimboots = slot_shoes,
 					/obj/item/weapon/contract/wizard/xray = slot_l_hand,
@@ -233,8 +233,6 @@
 	onclose(user,"summoning")
 
 /obj/item/weapon/summoning_stone/proc/use_type(var/type, var/mob/user)
-	user.drop_from_inventory(src)
-
 	new /obj/effect/cleanable/spellbound(get_turf(src),type)
 	if(prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro

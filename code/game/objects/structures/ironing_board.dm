@@ -73,18 +73,16 @@
 			to_chat(user, "<span class='notice'>[buckled_mob] is already on the ironing table!</span>")
 			return
 
-		if(user.drop_item())
+		if(user.unEquip(I, src))
 			cloth = I
-			I.forceMove(src)
 			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
 		return
 	else if(istype(I,/obj/item/weapon/ironingiron))
 		var/obj/item/weapon/ironingiron/R = I
 
-		if(!holding && !R.enabled && user.drop_item())
+		if(!holding && !R.enabled && user.unEquip(I, src))
 			holding = R
-			I.forceMove(src)
 			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
 			return

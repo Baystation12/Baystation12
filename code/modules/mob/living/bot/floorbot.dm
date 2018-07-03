@@ -263,7 +263,6 @@
 		B.boxtype = icon_state
 		user.put_in_hands(B)
 		to_chat(user, "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>")
-		user.drop_from_inventory(src)
 		qdel(src)
 	else
 		to_chat(user, "<span class='warning'>You need 10 floor tiles for a floorbot.</span>")
@@ -290,7 +289,6 @@
 		B.created_name = created_name
 		user.put_in_hands(B)
 		to_chat(user, "<span class='notice'>You add the sensor to the toolbox and tiles!</span>")
-		user.drop_from_inventory(src)
 		B.boxtype = src.boxtype
 		qdel(src)
 	else if (istype(W, /obj/item/weapon/pen))
@@ -323,7 +321,6 @@
 		A.SetName(created_name)
 		to_chat(user, "<span class='notice'>You add the robot arm to the odd looking toolbox assembly! Boop beep!</span>")
 		A.boxtype = src.boxtype
-		user.drop_from_inventory(src)
 		qdel(src)
 	else if(istype(W, /obj/item/weapon/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)

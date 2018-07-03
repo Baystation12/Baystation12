@@ -186,7 +186,7 @@ steam.start() -- spawns the effect
 		affect(M)
 
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
-	if (istype(M))
+	if (!istype(M))
 		return 0
 	if (M.internal != null)
 		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
@@ -228,7 +228,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/bad/affect(var/mob/living/carbon/M)
 	if (!..())
 		return 0
-	M.drop_item()
+	M.unequip_item()
 	M.adjustOxyLoss(1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
@@ -257,7 +257,7 @@ steam.start() -- spawns the effect
 	if (!..())
 		return 0
 
-	M.drop_item()
+	M.unequip_item()
 	M:sleeping += 1
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
@@ -322,7 +322,6 @@ steam.start() -- spawns the effect
 		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/smoke_spread/spread(var/i)
-	set waitfor = 0
 	if(holder)
 		src.location = get_turf(holder)
 	var/obj/effect/effect/smoke/smoke = new smoke_type(location)
@@ -335,15 +334,12 @@ steam.start() -- spawns the effect
 			direction = pick(GLOB.alldirs)
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
+		if(QDELETED(smoke))
+			total_smoke--
+			return
 		step(smoke,direction)
-		var/obj/effect/effect/smoke/not_us = locate() in get_turf(src)
-		if(not_us && not_us != smoke)
-			step(not_us,direction)
-	addtimer(CALLBACK(src, .proc/spread_callback),0)
-
-/datum/effect/effect/system/smoke_spread/proc/spread_callback(var/obj/effect/effect/smoke/smoke, var/datum/effect/effect/system/smoke_spread/parent, var/time)
-	QDEL_IN(src, smoke.time_to_live*0.75+rand(10,30))
-	parent.total_smoke--
+	QDEL_IN(smoke, smoke.time_to_live*0.75+rand(10,30))
+	total_smoke--
 
 /datum/effect/effect/system/smoke_spread/bad
 	smoke_type = /obj/effect/effect/smoke/bad

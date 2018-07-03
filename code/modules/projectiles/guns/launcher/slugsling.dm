@@ -15,7 +15,6 @@
 	return ..()
 
 /obj/item/weapon/slugegg/attack_self(var/mob/living/user)
-	user.drop_from_inventory(src)
 	squish()
 
 /obj/item/weapon/slugegg/HasProximity(var/atom/movable/AM)

@@ -174,11 +174,11 @@
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
 			to_chat(user, "<span class='notice'>You'll need [src] in your hands to do that.</span>")
 			return
-		user.drop_item()
+		if(!user.unEquip(I, src))
+			return//put the silencer into the gun
 		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
 		silenced = I	//dodgy?
-		w_class = ITEM_SIZE_NORMAL
-		I.forceMove(src)		//put the silencer into the gun
+		w_class = ITEM_SIZE_NORMAL		
 		update_icon()
 		return
 	..()
@@ -207,6 +207,7 @@
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
+	has_safety = FALSE
 
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
@@ -221,6 +222,9 @@
 		/obj/item/ammo_casing/a762              = "7.62mm",
 		/obj/item/ammo_casing/a556              = "5.56mm"
 		)
+
+/obj/item/weapon/gun/projectile/pirate/toggle_safety(var/mob/user)
+	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
 /obj/item/weapon/gun/projectile/pirate/New()
 	ammo_type = pick(ammo_types)
@@ -251,7 +255,6 @@
 
 /obj/item/weapon/zipgunframe/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/pipe) && buildstate == 0)
-		user.drop_from_inventory(thing)
 		qdel(thing)
 		user.visible_message("<span class='notice'>\The [user] fits \the [thing] to \the [src] as a crude barrel.</span>")
 		add_fingerprint(user)
@@ -265,7 +268,6 @@
 		update_icon()
 		return
 	else if(istype(thing,/obj/item/device/assembly/mousetrap) && buildstate == 2)
-		user.drop_from_inventory(thing)
 		qdel(thing)
 		user.visible_message("<span class='notice'>\The [user] takes apart \the [thing] and uses the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
 		add_fingerprint(user)

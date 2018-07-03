@@ -30,6 +30,5 @@
 
 /obj/item/weapon/material/lock_construct/proc/create_lock(var/atom/target, var/mob/user)
 	. = new /datum/lock(target,lock_data)
-	user.drop_item(src)
 	user.visible_message("\The [user] attaches \the [src] to \the [target]")
 	qdel(src)
