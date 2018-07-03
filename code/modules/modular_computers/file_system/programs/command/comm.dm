@@ -140,6 +140,7 @@
 				if(!input || !can_still_topic())
 					return 1
 				crew_announcement.Announce(input)
+				log_say("[key_name(usr)] has made an announcement: [input]")
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
