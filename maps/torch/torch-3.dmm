@@ -2226,7 +2226,8 @@
 /area/maintenance/seconddeck/aftstarboard)
 "ew" = (
 /obj/structure/sign/warning/hot_exhaust,
-/turf/simulated/wall/r_wall/hull,
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
 /area/engineering/engine_room)
 "ex" = (
 /obj/random/closet,
@@ -3295,6 +3296,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 10
 	},
+/obj/effect/paint/red,
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/engine_room)
 "gE" = (
@@ -7125,7 +7127,8 @@
 	icon_state = "securearea";
 	dir = 4
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
 /area/space)
 "oK" = (
 /obj/effect/floor_decal/techfloor{
@@ -8454,6 +8457,11 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"rq" = (
+/obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
+/area/engineering/engine_room)
 "rs" = (
 /obj/structure/railing/mapped,
 /obj/structure/sign/deck/second{
@@ -14721,6 +14729,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"Hz" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
+/area/engineering/engine_room)
 "HC" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -15990,6 +16002,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
+"OC" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
+/area/space)
 "OL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -17259,7 +17275,8 @@
 	icon_state = "fire";
 	dir = 1
 	},
-/turf/simulated/wall/r_wall/hull,
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
 /area/engineering/engine_room)
 "VL" = (
 /obj/structure/sign/warning/radioactive{
@@ -18083,6 +18100,13 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
+"ZW" = (
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	dir = 9
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
+/area/engineering/engine_room)
 
 (1,1,1) = {"
 aa
@@ -44832,7 +44856,7 @@ ag
 aa
 Zs
 Zs
-Zs
+Hz
 Jb
 Jb
 gD
@@ -44845,9 +44869,9 @@ ii
 ii
 Pk
 nL
-hv
+rq
 Wo
-hv
+rq
 nL
 hv
 ii
@@ -44857,10 +44881,10 @@ Vl
 ii
 ii
 hv
-hr
+ZW
 Jb
 Jb
-Zs
+Hz
 Zs
 Zs
 aa
@@ -45037,7 +45061,7 @@ Zs
 ew
 fc
 fc
-fT
+OC
 fT
 ij
 jh
@@ -45059,7 +45083,7 @@ ij
 jh
 ij
 fT
-fT
+OC
 fc
 fc
 VC
@@ -45236,10 +45260,10 @@ aa
 ag
 ag
 Zs
-Zs
+Hz
 aa
 aa
-fT
+OC
 fT
 ik
 ji
@@ -45261,10 +45285,10 @@ ik
 ji
 ik
 fT
-fT
+OC
 aa
 aa
-Zs
+Hz
 Zs
 ag
 ag
@@ -45438,10 +45462,10 @@ aa
 aa
 ag
 ag
-Zs
+Hz
 aa
 aa
-fT
+OC
 fT
 ik
 ik
@@ -45463,10 +45487,10 @@ ik
 ik
 ik
 fT
-fT
+OC
 aa
 aa
-Zs
+Hz
 ag
 ag
 aa
@@ -45643,7 +45667,7 @@ ag
 ag
 aa
 ag
-fT
+OC
 fT
 ik
 ji
@@ -45665,7 +45689,7 @@ ik
 ji
 ik
 fT
-fT
+OC
 ag
 aa
 ag
