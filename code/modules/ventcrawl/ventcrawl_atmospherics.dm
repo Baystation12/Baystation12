@@ -42,7 +42,7 @@
 			user.remove_ventcrawl()
 			user.forceMove(src.loc)
 			user.visible_message("You hear something squeezing through the pipes.", "You climb out the ventilation system.")
-	user.setMoveCooldown(user.movement_delay())
+	user.SetMoveCooldown(user.movement_delay())
 
 /obj/machinery/atmospherics/proc/can_crawl_through()
 	return 1

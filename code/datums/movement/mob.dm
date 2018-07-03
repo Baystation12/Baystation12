@@ -117,15 +117,18 @@
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover)
 	if(IS_NOT_SELF(mover))
 		return
-	next_move = world.time + max(1, mob.move_delay)
+	next_move = world.time + max(1, mob.movement_delay())
 
 /datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
 	if(IS_NOT_SELF(mover) && is_external)
 		return MOVEMENT_PROCEED
 	return ((mover && mover != mob) ||  world.time >= next_move) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
-/datum/movement_handler/mob/delay/proc/AddDelay(var/delay)
+/datum/movement_handler/mob/delay/proc/SetDelay(var/delay)
 	next_move = max(next_move, world.time + delay)
+
+/datum/movement_handler/mob/delay/proc/AddDelay(var/delay)
+	next_move += max(0, delay)
 
 // Stop effect
 /datum/movement_handler/mob/stop_effect/DoMove()
@@ -206,34 +209,18 @@
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
 
-	mob.move_delay = 0 //set move delay
-
-	switch(mob.m_intent)
-		if(M_RUN)
-			if(mob.drowsyness > 0)
-				mob.move_delay += 6
-			mob.move_delay += 1 + config.run_speed
-		if(M_WALK)
-			mob.move_delay += 7 + config.walk_speed
-	mob.move_delay += mob.movement_delay()
-
-	//Crawling, it's slower
-	if(mob.lying)
-		mob.move_delay += 8 + (mob.weakened * 2)
-
 	if(mob.check_slipmove())
 		return
 
 	//We are now going to move
 	mob.moving = 1
 
-
-
 	direction = mob.AdjustMovementDirection(direction)
 	step(mob, direction)
 
 	// Something with pulling things
-	HandleGrabs(direction)
+	var/extra_delay = HandleGrabs(direction)
+	mob.ExtraMoveCooldown(extra_delay)
 
 	for (var/obj/item/grab/G in mob)
 		if (G.assailant_reverse_facing())
@@ -248,9 +235,10 @@
 	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
 
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction)
+	. = 0
 	// TODO: Look into making grabs use movement events instead, this is a mess.
 	for (var/obj/item/grab/G in mob)
-		mob.move_delay = max(mob.move_delay, G.grab_slowdown())
+		. = max(., G.grab_slowdown())
 		var/list/L = mob.ret_grab()
 		if(istype(L, /list))
 			if(L.len == 2)
@@ -290,12 +278,8 @@
 	if(!confused)
 		return
 
-	switch(m_intent)
-		if(M_RUN)
-			if(prob(25))
-				return
-		if(M_WALK)
-			if(prob(75))
-				return
+	var/stability = MOVING_DELIBERATELY(src) ? 75 : 25
+	if(prob(stability))
+		return
 
 	return prob(50) ? GLOB.cw_dir[.] : GLOB.ccw_dir[.]
