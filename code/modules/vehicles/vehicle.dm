@@ -172,7 +172,7 @@
 	if(powered && cell.charge < (charge_use * CELLRATE))
 		return 0
 	on = 1
-	set_light(initial(light_max_bright), 1, 5)
+	set_light(0.8, 1, 5)
 	update_icon()
 	return 1
 
