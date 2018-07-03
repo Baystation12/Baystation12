@@ -84,7 +84,7 @@
 		if(armed)
 			if(ishuman(AM))
 				var/mob/living/carbon/H = AM
-				if(H.m_intent == M_RUN)
+				if(!MOVING_DELIBERATELY(H))
 					triggered(H)
 					H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \
 									  "<span class='warning'>You accidentally step on [src]</span>")
