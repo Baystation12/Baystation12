@@ -24,7 +24,6 @@ var/bomb_set
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
 	var/decl/security_level/original_level
-	var/self_destruct_cutoff = 60 //In seconds. Only affects station subtype.
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -48,8 +47,8 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
 	if(isScrewdriver(O))
-		src.add_fingerprint(user)
-		if(src.auth)
+		add_fingerprint(user)
+		if(auth)
 			if(panel_open == 0)
 				panel_open = 1
 				overlays |= "panel_open"
@@ -74,15 +73,15 @@ var/bomb_set
 	if(panel_open && isMultitool(O) || isWirecutter(O))
 		return attack_hand(user)
 
-	if(src.extended)
+	if(extended)
 		if(istype(O, /obj/item/weapon/disk/nuclear))
-			usr.drop_item()
-			O.forceMove(src)
-			src.auth = O
-			src.add_fingerprint(user)
+			if(!user.unEquip(O, src))
+				return
+			auth = O
+			add_fingerprint(user)
 			return attack_hand(user)
 
-	if(src.anchored)
+	if(anchored)
 		switch(removal_stage)
 			if(0)
 				if(isWelder(O))
@@ -209,12 +208,12 @@ var/bomb_set
 	if(usr.incapacitated())
 		return
 
-	if(src.deployable)
+	if(deployable)
 		to_chat(usr, "<span class='warning'>You close several panels to make [src] undeployable.</span>")
-		src.deployable = 0
+		deployable = 0
 	else
 		to_chat(usr, "<span class='warning'>You adjust some panels to make [src] deployable.</span>")
-		src.deployable = 1
+		deployable = 1
 	return
 
 /obj/machinery/nuclearbomb/proc/is_auth(var/mob/user)
@@ -292,16 +291,11 @@ var/bomb_set
 					timing = 1
 					log_and_message_admins("activated the detonation countdown of \the [src]")
 					bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-					visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
 					var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 					original_level = security_state.current_security_level
 					security_state.set_security_level(security_state.severe_security_level, TRUE)
 					update_icon()
-					ship_blasts()
 				else 
-					if(timeleft <= self_destruct_cutoff)
-						visible_message("<span class='warning'>Self-destruct abort is no longer possible.</span>")
-						return
 					secure_device()
 
 			if(href_list["safety"])
@@ -345,18 +339,15 @@ var/bomb_set
 
 #define NUKERANGE 80
 /obj/machinery/nuclearbomb/proc/explode()
-	if (src.safety)
+	if (safety)
 		timing = 0
 		return
-	src.timing = -1
-	src.yes_code = 0
-	src.safety = 1
+	timing = -1
+	yes_code = 0
+	safety = 1
 	update_icon()
 
 	SetUniversalState(/datum/universal_state/nuclear_explosion, arguments=list(src))
-
-/obj/machinery/nuclearbomb/proc/ship_blasts()
-	return
 
 /obj/machinery/nuclearbomb/update_icon()
 	if(lighthack)
@@ -466,8 +457,12 @@ var/bomb_set
 	extended = 1
 
 	var/list/flash_tiles = list()
-	var/last_turf_state
 	var/list/inserters = list()
+	var/last_turf_state
+
+	var/announced = 0
+	var/self_destruct_cutoff = 60 SECONDS 
+	var/last_explode = 0
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
@@ -499,17 +494,50 @@ var/bomb_set
 		timeleft += time
 		timeleft = Clamp(timeleft, 300, 900)
 		return 1
+	if(href_list["timer"])
+		if(timing == -1)
+			return 1
+		if(!anchored)
+			to_chat(usr, "<span class='warning'>\The [src] needs to be anchored.</span>")
+			return 1
+		if(safety)
+			to_chat(usr, "<span class='warning'>The safety is still on.</span>")
+			return 1
+		if(wires.IsIndexCut(NUCLEARBOMB_WIRE_TIMING))
+			to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
+			return 1
+		if(!timing && !safety)
+			if(istype(src, /obj/machinery/nuclearbomb/station))
+				var/obj/machinery/nuclearbomb/station/B = src
+				for(var/inserter in B.inserters)
+					var/obj/machinery/self_destruct/sd = inserter
+					if(!istype(sd) || !sd.armed)
+						to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
+						return
+			timing = 1
+			log_and_message_admins("activated the detonation countdown of \the [src]")
+			bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
+			visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
+			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+			original_level = security_state.current_security_level
+			security_state.set_security_level(security_state.severe_security_level, TRUE)
+			update_icon()
+		else 
+			if(timeleft <= self_destruct_cutoff)
+				visible_message("<span class='warning'>Self-destruct abort is no longer possible.</span>")
+				return
+			secure_device()
 
 /obj/machinery/nuclearbomb/station/Destroy()
 	flash_tiles.Cut()
 	return ..()
 
-/obj/machinery/nuclearbomb/station/ship_blasts()
-	var/announced = 0
+/obj/machinery/nuclearbomb/station/Process()
+	..()
 	var/range
 	var/high_intensity
 	var/low_intensity
-	while(timing > 0 || !ticker.current_state == GAME_STATE_FINISHED)
+	if(timing > 0 || ticker.current_state != GAME_STATE_FINISHED)
 		if(timeleft <= self_destruct_cutoff && !announced)
 			priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
 			announced = 1
@@ -521,15 +549,19 @@ var/bomb_set
 			range = rand(1, 2)
 			high_intensity = rand(3, 6)
 			low_intensity = rand(5, 8)
-		if(timeleft in 0 to self_destruct_cutoff/2)
+		if(timeleft in 0 to self_destruct_cutoff/2 && world.time >= last_explode)
 			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
 			explosion(T, range, high_intensity, low_intensity)
-			sleep(30)
-		else if(timeleft in self_destruct_cutoff/2 + 1 to self_destruct_cutoff)
+			last_explode = world.time + 4 SECONDS
+			
+		else if(timeleft in self_destruct_cutoff/2 + 1 to self_destruct_cutoff && world.time >= last_explode)
 			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
 			explosion(T, range, high_intensity, low_intensity)
-			sleep(60)
-		sleep(10)
+			last_explode = world.time + 7 SECONDS
+
+/obj/machinery/nuclearbomb/station/secure_device()
+	..()
+	announced = 0
 
 /obj/machinery/nuclearbomb/station/update_icon()
 	var/target_icon_state
