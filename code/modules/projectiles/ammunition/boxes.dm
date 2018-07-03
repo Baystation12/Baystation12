@@ -1,7 +1,4 @@
 /obj/item/ammo_magazine/a357
-	//name = "ammo box (.357)"
-	//desc = "A box of .357 ammo"
-	//icon_state = "357"
 	name = "speed loader (.357)"
 	desc = "A speed loader for revolvers."
 	icon_state = "38"
@@ -207,6 +204,10 @@
 /obj/item/ammo_magazine/mc9mmt/practice
 	name = "top mounted magazine (9mm, practice)"
 	ammo_type = /obj/item/ammo_casing/c9mm/practice
+
+/obj/item/ammo_magazine/mc9mmt/flash
+	name = "top mounted magazine (9mm, flash)"
+	ammo_type = /obj/item/ammo_casing/c9mm/flash
 
 /obj/item/ammo_magazine/box/c45
 	name = "ammunition box (.45)"
