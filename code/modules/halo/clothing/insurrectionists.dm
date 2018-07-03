@@ -72,8 +72,8 @@
 	siemens_coefficient = 0
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	armor = list(melee = 70, bullet = 70, laser = 60, energy = 60, bomb = 80, bio = 20, rad = 15)
-	armor_thickness= 120
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 60, bomb = 80, bio = 20, rad = 15)
+	armor_thickness= 80
 	slowdown_general = 2
 	siemens_coefficient = 0.7
 
@@ -88,8 +88,8 @@
 	permeability_coefficient = 0.01
 	slowdown_general = 1
 	siemens_coefficient = 0.7
-	armor_thickness = 85
-	armor = list(melee = 70, bullet = 70, laser = 60, energy = 60, bomb = 80, bio = 20, rad = 15)
+	armor_thickness = 60
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 60, bomb = 80, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
