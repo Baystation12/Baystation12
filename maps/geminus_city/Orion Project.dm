@@ -23,7 +23,7 @@
 	name = "Orion Armor"
 	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
-	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
+	armor = list("melee" = 50, "bullet" = 50, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
 	species_restricted = list("Orion")
 	armor_thickness = 50
 	flags_inv = 29
