@@ -94,8 +94,8 @@
 		if(scanned_item)
 			to_chat(user, "<span class=warning>\The [src] already has \a [scanned_item] inside!</span>")
 			return
-		user.drop_item()
-		I.loc = src
+		if(!user.unEquip(I, src))
+			return
 		scanned_item = I
 		to_chat(user, "<span class=notice>You put \the [I] into \the [src].</span>")
 

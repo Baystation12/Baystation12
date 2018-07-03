@@ -167,5 +167,4 @@
 	var/turf/T = get_turf(src.loc)
 	new /mob/living/bot/remotebot(T)
 	new /obj/item/device/bot_controller(T)
-	user.drop_from_inventory(src)
 	qdel(src)

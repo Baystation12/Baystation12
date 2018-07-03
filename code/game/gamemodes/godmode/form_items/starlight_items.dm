@@ -26,9 +26,6 @@
 			if(prob(5))
 				to_chat(loc, "<span class='warning'>\The [src] begins to fade, its power dimming this far away from a shrine.</span>")
 		else if(last_near_structure + 1800 < world.time)
-			if(istype(loc, /mob/living))
-				var/mob/living/L = loc
-				L.drop_from_inventory(src)
 			visible_message("<span class='warning'>\The [src] disintegrates into a pile of ash!</span>")
 			new /obj/effect/decal/cleanable/ash(get_turf(src))
 			qdel(src)

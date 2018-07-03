@@ -61,15 +61,11 @@
 				return
 			else
 				// insert cell
-				var/obj/item/weapon/cell/C = usr.get_active_hand()
-				if(istype(C))
-					user.drop_item()
-					cell = C
-					C.forceMove(src)
-					C.add_fingerprint(usr)
-
-					user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
-					power_change()
+				if(!user.unEquip(I, src))
+					return
+				cell = I
+				user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
+				power_change()
 		else
 			to_chat(user, "The hatch must be open to insert a power cell.")
 			return
@@ -146,9 +142,9 @@
 			if(panel_open && !cell)
 				var/obj/item/weapon/cell/C = usr.get_active_hand()
 				if(istype(C))
-					usr.drop_item()
+					if(!usr.unEquip(C, src))
+						return
 					cell = C
-					C.forceMove(src)
 					C.add_fingerprint(usr)
 					power_change()
 					usr.visible_message("<span class='notice'>[usr] inserts \the [C] into \the [src].</span>", "<span class='notice'>You insert \the [C] into \the [src].</span>")

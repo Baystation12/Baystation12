@@ -198,10 +198,9 @@ var/list/mob_hat_cache = list()
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
-			return
-		user.unEquip(W)
-		wear_hat(W)
-		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
+		else if(user.unEquip(W))
+			wear_hat(W)
+			user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
 		return
 	else if(istype(W, /obj/item/borg/upgrade/))
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")

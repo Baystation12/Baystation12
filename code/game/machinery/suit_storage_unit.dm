@@ -586,80 +586,30 @@
 			update_icon()
 			return
 		return
-	if( istype(I,/obj/item/clothing/suit/space) )
-		if(!isopen)
-			return
-		var/obj/item/clothing/suit/space/S = I
-		if(suit)
-			to_chat(user, "<span class='notice'>The unit already contains a suit.</span>")
-			return
-		to_chat(user, "You load the [S.name] into the storage compartment.")
-		user.drop_item()
-		S.forceMove(src)
-		suit = S
-		update_icon()
-		updateUsrDialog()
-		return
-	if( istype(I,/obj/item/clothing/head/helmet/space) )
-		if(!isopen)
-			return
-		var/obj/item/clothing/head/helmet/H = I
-		if(helmet )
-			to_chat(user, "<span class='notice'>The unit already contains a helmet.</span>")
-			return
-		to_chat(user, "You load the [H.name] into the storage compartment.")
-		user.drop_item()
-		H.forceMove(src)
-		helmet  = H
-		update_icon()
-		updateUsrDialog()
-		return
-	if( istype(I,/obj/item/clothing/shoes/magboots) )
-		if(!isopen)
-			return
-		var/obj/item/clothing/shoes/magboots/B = I
-		if(boots)
-			to_chat(user, "<span class='notice'>The unit already contains a pair of magboots.</span>")
-			return
-		to_chat(user, "You load the [B.name] into the storage compartment.")
-		user.drop_item()
-		B.forceMove(src)
-		boots = B
-		update_icon()
-		updateUsrDialog()
-		return
-	if( istype(I,/obj/item/weapon/tank) )
-		if(!isopen)
-			return
-		var/obj/item/weapon/tank/T = I
-		if(tank)
-			to_chat(user, "<span class='notice'>The unit already contains an air tank.</span>")
-			return
-		to_chat(user, "You load the [T.name] into the storage compartment.")
-		user.drop_item()
-		T.forceMove(src)
-		tank = T
-		update_icon()
-		updateUsrDialog()
-		return
-	if( istype(I,/obj/item/clothing/mask) )
-		if(!isopen)
-			return
-		var/obj/item/clothing/mask/M = I
-		if(mask)
-			to_chat(user, "<span class='notice'>The unit already contains a mask.</span>")
-			return
-		to_chat(user, "You load the [M.name] into the storage compartment.")
-		user.drop_item()
-		M.forceMove(src)
-		mask = M
-		update_icon()
-		updateUsrDialog()
-		return
+
+#define TRY_INSERT_SUIT_PIECE(slot, path)\
+	if(istype(I, /obj/item/##path)){\
+		if(!isopen) return;\
+		if(##slot){\
+			to_chat(user, "<span class='notice'>The unit already contains \a [slot].</span>");\
+			return\
+		};\
+		if(!user.unEquip(I, src)) return;\
+		to_chat(user, "You load the [I.name] into the storage compartment.");\
+		##slot = I;\
+		update_icon();\
+		updateUsrDialog();\
+		return\
+	}
+
+	TRY_INSERT_SUIT_PIECE(suit, clothing/suit/space)
+	TRY_INSERT_SUIT_PIECE(helmet, clothing/head/helmet/space)
+	TRY_INSERT_SUIT_PIECE(boots, clothing/shoes/magboots)
+	TRY_INSERT_SUIT_PIECE(tank, weapon/tank)
+	TRY_INSERT_SUIT_PIECE(mask, clothing/mask)
 	update_icon()
 	updateUsrDialog()
-	return
-
+#undef TRY_INSERT_SUIT_PIECE
 
 /obj/machinery/suit_storage_unit/attack_ai(mob/user as mob)
 	return attack_hand(user)
@@ -833,10 +783,9 @@
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
-
+		if(!user.unEquip(I, src))
+			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
-		user.drop_item()
-		I.loc = src
 		helmet = I
 
 		update_icon()
@@ -856,10 +805,9 @@
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
-
+		if(!user.unEquip(I, src))
+			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
-		user.drop_item()
-		I.loc = src
 		suit = I
 
 		update_icon()

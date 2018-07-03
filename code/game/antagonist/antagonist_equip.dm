@@ -6,9 +6,7 @@
 	// This could use work.
 	if(flags & ANTAG_CLEAR_EQUIPMENT)
 		for(var/obj/item/thing in player.contents)
-			player.drop_from_inventory(thing)
-			if(thing.loc != player)
-				qdel(thing)
+			qdel(thing)
 		//mainly for vox antag compatibility. Should not effect item spawning.
 		player.species.equip_survival_gear(player)
 	return 1

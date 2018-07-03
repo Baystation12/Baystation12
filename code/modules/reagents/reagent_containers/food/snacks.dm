@@ -43,7 +43,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
-		user.drop_from_inventory(src)
 		qdel(src)
 		return 0
 
@@ -158,9 +157,10 @@
 		if (hide_item)
 			if (W.w_class >= src.w_class || is_robot_module(W))
 				return
+			if(!user.unEquip(W, src))
+				return
 
 			to_chat(user, "<span class='warning'>You slip \the [W] inside \the [src].</span>")
-			user.drop_from_inventory(W, src)
 			add_fingerprint(user)
 			contents += W
 			return
@@ -274,7 +274,6 @@
 		return
 	to_chat(user, "You crack \the [src] into \the [O].")
 	reagents.trans_to(O, reagents.total_volume)
-	user.drop_from_inventory(src)
 	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
@@ -2808,9 +2807,8 @@
 				boxestoadd += i
 
 			if( (boxes.len+1) + boxestoadd.len <= 5 )
-				user.drop_item()
-
-				box.loc = src
+				if(!user.unEquip(box, src))
+					return
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
 				src.boxes.Add( boxestoadd )
 
@@ -2825,11 +2823,11 @@
 
 		return
 
-	if( istype(I, /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/) )// Long ass fucking object name
+	if( istype(I, /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/) )
 
 		if( src.open )
-			user.drop_item()
-			I.loc = src
+			if(!user.unEquip(I, src))
+				return
 			src.pizza = I
 
 			update_icon()

@@ -68,10 +68,10 @@
 		return
 	..()
 
-/obj/item/weapon/implanter/compressed/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/weapon/implanter/compressed/afterattack(obj/item/A, mob/user as mob, proximity)
 	if(!proximity)
 		return
-	if(istype(A,/obj/item) && imp)
+	if(istype(A) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
 			if (!istype(A,/obj/item/weapon/storage))
@@ -81,14 +81,15 @@
 			if (!istype(A,/obj/item/weapon/storage))
 				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
 			return
-		c.scanned = A
 		if(istype(A.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = A.loc
-			H.remove_from_mob(A)
+			if(!H.unEquip(A))
+				return
 		else if(istype(A.loc,/obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = A.loc
 			S.remove_from_storage(A)
-		A.loc.contents.Remove(A)
+		c.scanned = A
+		A.forceMove(src)  //Store it inside
 		safe = 2
 		desc = "It currently contains some matter."
 		update_icon()

@@ -78,7 +78,6 @@
 
 	src.receptacle_value += bling.worth
 	to_chat(user, "<span class='notice'>You load [bling] into [src].</span>")
-	user.drop_from_inventory(bling)
 	qdel(bling)
 
 /obj/item/weapon/gun/launcher/money/consume_next_projectile(mob/user=null)

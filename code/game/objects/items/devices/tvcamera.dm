@@ -93,7 +93,6 @@
 	qdel(S)
 	user.put_in_hands(A)
 	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
-	user.drop_from_inventory(src)
 	qdel(src)
 
 /* Using camcorder icon as I can't sprite.
@@ -111,17 +110,13 @@ Using robohead because of restricting to roboticist */
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))
-				var/obj/item/robot_parts/robot_component/camera/CA = W
 				to_chat(user, "<span class='notice'>You add the camera module to [src]</span>")
-				user.drop_item()
-				qdel(CA)
+				qdel(W)
 				desc = "This TV camera assembly has a camera module."
 				buildstep++
 		if(1)
 			if(istype(W, /obj/item/device/taperecorder))
-				var/obj/item/device/taperecorder/T = W
-				user.drop_item()
-				qdel(T)
+				qdel(W)
 				buildstep++
 				to_chat(user, "<span class='notice'>You add the tape recorder to [src]</span>")
 				desc = "This TV camera assembly has a camera and audio module."
@@ -152,7 +147,6 @@ Using robohead because of restricting to roboticist */
 				to_chat(user, "<span class='notice'>You encase the assembly.</span>")
 				var/turf/T = get_turf(src)
 				new /obj/item/device/tvcamera(T)
-				user.drop_from_inventory(src)
 				qdel(src)
 				return
 

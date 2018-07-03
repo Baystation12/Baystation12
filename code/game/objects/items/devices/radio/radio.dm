@@ -653,8 +653,8 @@
 			return
 
 		if(!keyslot)
-			user.drop_item()
-			W.loc = src
+			if(!user.unEquip(W, src))
+				return
 			keyslot = W
 
 		recalculateChannels()

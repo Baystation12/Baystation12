@@ -19,11 +19,10 @@
 /obj/structure/deity/altar/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
-		if(G.force_danger())
+		if(G.force_danger() && user.unEquip(G))
 			G.affecting.forceMove(get_turf(src))
 			G.affecting.Weaken(1)
 			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")
-			user.drop_from_inventory(G)
 	else ..()
 
 /obj/structure/deity/altar/Process()

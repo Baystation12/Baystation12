@@ -63,8 +63,8 @@
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return
-		user.drop_item()
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		beaker = W
 		to_chat(user, "You attach \the [W] to \the [src].")
 		queue_icon_update()

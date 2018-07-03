@@ -51,9 +51,9 @@ obj/structure/closet/crate
 			return
 	else if(istype(W, /obj/item/device/assembly_holder) || istype(W, /obj/item/device/assembly))
 		if(rigged)
+			if(!user.unEquip(W, src))
+				return
 			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
-			user.drop_item()
-			W.forceMove(src)
 			return
 	else if(isWirecutter(W))
 		if(rigged)

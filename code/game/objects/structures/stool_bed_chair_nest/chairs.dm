@@ -15,7 +15,8 @@
 		if(!SK.status)
 			to_chat(user, "<span class='notice'>\The [SK] is not ready to be attached!</span>")
 			return
-		user.drop_item()
+		if(!user.unEquip(SK))
+			return
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)

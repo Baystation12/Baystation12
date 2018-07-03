@@ -79,9 +79,7 @@
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
-		else
-			user.remove_from_mob(O)
-			O.forceMove(src)
+		else if(user.unEquip(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
@@ -108,9 +106,7 @@
 
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
-	else
-		user.remove_from_mob(O)
-		O.forceMove(src)
+	else if(user.unEquip(O, src))
 		ingredients++
 		to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()

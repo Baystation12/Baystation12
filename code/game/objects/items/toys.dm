@@ -159,7 +159,8 @@
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
 			if(bullets <= 4)
-				user.drop_item()
+				if(!user.unEquip(I))
+					return
 				qdel(I)
 				bullets++
 				to_chat(user, "<span class='notice'>You load the foam dart into the crossbow.</span>")
