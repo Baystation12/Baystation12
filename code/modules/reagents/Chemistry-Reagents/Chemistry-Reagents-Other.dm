@@ -193,7 +193,7 @@
 					to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[src];deconvert=\ref[M]'>Give Into Purity</a>\]")
 
 /datum/reagent/water/holywater/Topic(href, href_list)
-	..()
+	. = ..()
 	if(href_list["deconvert"])
 		var/mob/living/carbon/C = locate(href_list["deconvert"])
 		if(C.mind)
