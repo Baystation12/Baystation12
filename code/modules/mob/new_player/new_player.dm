@@ -381,6 +381,10 @@
 			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
+
+	if(character.cannot_stand())
+		equip_wheelchair(character)
+
 	qdel(src)
 
 

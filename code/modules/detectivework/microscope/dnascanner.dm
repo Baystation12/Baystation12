@@ -27,9 +27,9 @@
 
 	var/obj/item/weapon/forensics/swab/swab = W
 	if(istype(swab) && swab.is_used())
-		user.unEquip(W)
+		if(!user.unEquip(W, src))
+			return
 		src.bloodsamp = swab
-		swab.loc = src
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")

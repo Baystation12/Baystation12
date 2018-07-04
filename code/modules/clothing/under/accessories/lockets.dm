@@ -38,9 +38,9 @@
 		if(held)
 			to_chat(usr, "\The [src] already has something inside it.")
 		else
+			if(!user.unEquip(O, src))
+				return
 			to_chat(usr, "You slip [O] into [src].")
-			user.drop_item()
-			O.loc = src
 			src.held = O
 		return
 	..()

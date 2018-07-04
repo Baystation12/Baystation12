@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "The teleporters will no longer send people to nullspace when the beacon does no longer exist."

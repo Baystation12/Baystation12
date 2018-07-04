@@ -32,16 +32,16 @@
 
 	reagent_tag = IS_NABBER
 
-	icon_template = 'icons/mob/human_races/r_template_tall.dmi'
-	icobase = 'icons/mob/human_races/r_nabber.dmi'
-	deform = 'icons/mob/human_races/r_nabber.dmi'
+	icon_template = 'icons/mob/human_races/species/template_tall.dmi'
+	icobase = 'icons/mob/human_races/species/nabber/body.dmi'
+	deform = 'icons/mob/human_races/species/nabber/body.dmi'
+	preview_icon = 'icons/mob/human_races/species/nabber/preview.dmi'
+	blood_mask = 'icons/mob/human_races/species/nabber/blood_mask.dmi'
 
 	eye_icon = "eyes_nabber"
 	eye_icon_location = 'icons/mob/nabber_face.dmi'
 
 	limb_blend = ICON_MULTIPLY
-
-	blood_mask = 'icons/mob/human_races/masks/blood_nabber.dmi'
 
 	has_floating_eyes = 1
 
@@ -270,7 +270,7 @@
 			var/image/threat_image = skin_overlays[image_key]
 			if(!threat_image)
 				var/icon/base_icon = icon(H.stand_icon)
-				var/icon/I = new('icons/mob/human_races/r_nabber_threat.dmi', "threat")
+				var/icon/I = new('icons/mob/human_races/species/nabber/threat.dmi', "threat")
 				base_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
 				base_icon.Blend(I, ICON_ADD)
 				threat_image  = image(base_icon)

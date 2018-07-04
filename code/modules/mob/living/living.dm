@@ -681,8 +681,20 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
+/mob/living/carbon/human/canUnEquip(obj/item/I)
+	if(!..())
+		return
+	if(I in internal_organs)
+		return
+	if(I in organs)
+		return
+	return 1
+
+//Organs should not be removed via inventory procs.
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
+		return
+	if(W in organs)
 		return
 	. = ..()
 

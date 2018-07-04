@@ -139,7 +139,7 @@
 					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
-				M.drop_item()
+				M.unequip_item()
 		else
 			handle_click_empty(user)
 		return 0

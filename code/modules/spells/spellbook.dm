@@ -70,7 +70,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			if(S.amount < S.max_amount)
 				to_chat(usr, "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>")
 				return
-		user.remove_from_mob(I)
 		qdel(I)
 	to_chat(user, "<span class='notice'>Your sacrifice was accepted!</span>")
 	has_sacrificed = 1

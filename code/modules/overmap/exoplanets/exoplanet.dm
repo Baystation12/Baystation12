@@ -331,12 +331,16 @@
 
 /datum/random_map/noise/exoplanet/apply_to_turf(var/x,var/y)
 	var/turf/T = ..()
-	if(T && limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
+	if(!T)
+		return
+	if(limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
 		T.set_density(1)
 		T.set_opacity(1)
 		if(istype(T, /turf/simulated))
-			var/turf/simulated/S = T
+			var/turf/simulated/S = T 
 			S.blocks_air = 1
+	if(T.x <= TRANSITIONEDGE || T.x >= (limit_x - TRANSITIONEDGE + 1) || T.y <= TRANSITIONEDGE || T.y >= (limit_y - TRANSITIONEDGE + 1))
+		new/obj/effect/fogofwar(T)
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -467,3 +471,13 @@
 
 /turf/simulated/floor/exoplanet/water/update_dirt()
 	return	// Water doesn't become dirty
+
+/obj/effect/fogofwar
+	name = "fog of war"
+	desc = "Thar be dragons"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "smoke"
+	opacity = 0
+	anchored = 1
+	mouse_opacity = 0
+	simulated = 0

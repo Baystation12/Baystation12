@@ -75,11 +75,10 @@ Note: Must be placed within 3 tiles of the R&D Console
 			if(O.origin_tech.len == 0 || O.holographic)
 				to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
 				return
-
+		if(!user.unEquip(O, src))
+			return
 		busy = 1
 		loaded_item = O
-		user.drop_item()
-		O.loc = src
 		to_chat(user, "<span class='notice'>You add \the [O] to \the [src].</span>")
 		flick("d_analyzer_la", src)
 		spawn(10)

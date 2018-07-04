@@ -184,8 +184,6 @@
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
-			if(usr)
-				usr.remove_from_mob(src)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 		return 1
 	else

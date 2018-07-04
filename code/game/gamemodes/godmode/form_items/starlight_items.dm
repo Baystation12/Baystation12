@@ -111,10 +111,14 @@
 	var/last_near_structure = 0
 	var/mob/living/deity/linked
 
-/obj/item/weapon/material/sword/blazing/New(var/newloc, var/material, var/deity)
-	..()
-	START_PROCESSING(SSobj,src)
+/obj/item/weapon/material/sword/blazing/Initialize(var/maploading, var/material, var/deity)
+	. = ..()
+	START_PROCESSING(SSobj, src)
 	linked = deity
+
+/obj/item/weapon/material/sword/blazing/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/item/weapon/material/sword/blazing/Process()
 	if(!linked || last_near_structure + 10 SECONDS > world.time)
@@ -129,9 +133,6 @@
 			if(prob(5))
 				to_chat(loc, "<span class='warning'>\The [src] begins to fade, its power dimming this far away from a shrine.</span>")
 		else if(last_near_structure + 1800 < world.time)
-			if(istype(loc, /mob/living))
-				var/mob/living/L = loc
-				L.drop_from_inventory(src)
 			visible_message("<span class='warning'>\The [src] disintegrates into a pile of ash!</span>")
 			new /obj/effect/decal/cleanable/ash(get_turf(src))
 			qdel(src)

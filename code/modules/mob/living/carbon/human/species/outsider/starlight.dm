@@ -32,8 +32,9 @@
 /datum/species/starlight/starborn
 	name = "Starborn"
 	name_plural = "Starborn"
-	icobase = 'icons/mob/human_races/r_starborn.dmi'
-	deform = 'icons/mob/human_races/r_starborn.dmi'
+	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
+	deform = 'icons/mob/human_races/species/starborn/body.dmi'
+	husk_icon = 'icons/mob/human_races/species/starborn/husk.dmi'
 	blurb = "Beings of fire and light, split off from a sun deity of unbelievable power."
 
 	blood_color = "#ffff00"
@@ -86,8 +87,8 @@
 /datum/species/starlight/blueforged
 	name = "Blueforged"
 	name_plural = "Blueforged"
-	icobase = 'icons/mob/human_races/r_blueforged.dmi'
-	deform = 'icons/mob/human_races/r_blueforged.dmi'
+	icobase = 'icons/mob/human_races/species/blueforged/body.dmi'
+	deform = 'icons/mob/human_races/species/blueforged/body.dmi'
 	blurb = "Living chunks of Bluespace, carved out of the original dimension and given life by a being of unbelievable power."
 
 	blood_color = "#2222ff"

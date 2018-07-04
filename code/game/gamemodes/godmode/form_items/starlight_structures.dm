@@ -49,6 +49,11 @@
 	var/charge = 0
 	var/charging = 0 //Charging, dispersing, etc.
 
+/obj/structure/deity/radiant_statue/Destroy()
+	if(charging)
+		STOP_PROCESSING(SSobj, src)
+	. = ..()
+
 /obj/structure/deity/radiant_statue/proc/get_followers_nearby()
 	. = list()
 	if(linked_god)

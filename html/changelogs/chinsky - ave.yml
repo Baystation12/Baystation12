@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Adds deployable SCG flags to Pathfinder lockers. They require Pathfinder access to pop up. Don't do anything, just fluff."
