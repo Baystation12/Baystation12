@@ -55,14 +55,15 @@
 	return
 
 /obj/item/weapon/paper_bundle/proc/insert_sheet_at(mob/user, var/index, obj/item/weapon/sheet)
-	if(istype(sheet, /obj/item/weapon/paper))
-		to_chat(user, "<span class='notice'>You add [(sheet.name == "paper") ? "the paper" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
-	else if(istype(sheet, /obj/item/weapon/photo))
-		to_chat(user, "<span class='notice'>You add [(sheet.name == "photo") ? "the photo" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
-	else if(!user.unEquip(sheet, src))
+	if (!user.unEquip(sheet, src))
 		return
+	var/bundle_name = "paper bundle"
+	var/sheet_name = istype(sheet, /obj/item/weapon/photo) ? "photo" : "sheet of paper"
+	bundle_name = (bundle_name == name) ? "the [bundle_name]" : name
+	sheet_name = (sheet_name == sheet.name) ? "the [sheet_name]" : sheet.name
+	
+	to_chat(user, "<span class='notice'>You add [sheet_name] to [bundle_name].</span>")
 	pages.Insert(index, sheet)
-
 	if(index <= page)
 		page++
 
