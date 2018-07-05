@@ -349,8 +349,14 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_smg_rubber
-	name = "ammunition (9mm rubber top mounted)"
+	name = "ammunition (9mm rubber) top mounted"
 	path = /obj/item/ammo_magazine/mc9mmt/rubber
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_smg_flash
+	name = "ammunition (9mm, flash) top mounted"
+	path = /obj/item/ammo_magazine/mc9mmt/flash
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -515,7 +521,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/magazine_stetchkin_flash
+/datum/autolathe/recipe/magazine_9mmds_flash
 	name = "ammunition (9mm, flash) double-stack"
 	path = /obj/item/ammo_magazine/mc9mmds/flash
 	hidden = 1
@@ -534,7 +540,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_smg
-	name = "ammunition (9mm top mounted)"
+	name = "ammunition (9mm) top mounted"
 	path = /obj/item/ammo_magazine/mc9mmt
 	hidden = 1
 	category = "Arms and Ammunition"
