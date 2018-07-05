@@ -13,17 +13,11 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 */
 
 /decl/sound_player
-	var/channel_ceiling = 1024
-
-	var/datum/stack/available_channels
 	var/list/taken_channels // taken_channels and source_id_uses can be merged into one but would then require a meta-object to store the different values I desire.
 	var/list/sound_tokens_by_sound_id
 
-	var/static/list/reserved_channels = list(1,2,3,123) // The following channels have been found to be in use at various locations in the codebase
-
 /decl/sound_player/New()
 	..()
-	available_channels = new()
 	taken_channels = list()
 	sound_tokens_by_sound_id = list()
 
@@ -55,7 +49,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	if(length(sound_tokens))
 		return
 
-	available_channels.Push(channel)
+	GLOB.sound_channels.ReleaseChannel(channel)
 	taken_channels -= sound_id
 	sound_tokens_by_sound_id -= sound_id
 
@@ -63,14 +57,10 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/sound_id = sound_token.sound_id
 
 	. = taken_channels[sound_id] // Does this sound_id already have an assigned channel?
-	if(!.)
-		. = available_channels.Pop() // If not, check if someone else has released their channel.
-		if(!.)
-			do // Finally attempt to locate a fresh, non-reserved channel
-				. = channel_ceiling--
-			while(. && (. in reserved_channels))
-			if(. <= 0) // Should never be negative but never say never.
-				return
+	if(!.) // If not, request a new one.
+		. = GLOB.sound_channels.RequestChannel(sound_id)
+		if(!.) // Oh no, still no channel. Abort
+			return
 		taken_channels[sound_id] = .
 
 	var/sound_tokens = sound_tokens_by_sound_id[sound_id]
@@ -116,7 +106,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
 		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
-		if(!channel)
+		if(!isnum(channel))
 			CRASH("All available sound channels are in active use.")
 		sound.channel = channel
 	else

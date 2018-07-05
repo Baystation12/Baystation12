@@ -335,6 +335,7 @@
 #include "code\datums\repositories\mobs.dm"
 #include "code\datums\repositories\radiation.dm"
 #include "code\datums\repositories\repository.dm"
+#include "code\datums\repositories\sound_channels.dm"
 #include "code\datums\repositories\unique.dm"
 #include "code\datums\repositories\uplink_purchases.dm"
 #include "code\datums\repositories\~defines.dm"
