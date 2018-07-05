@@ -1183,6 +1183,14 @@
 	has_gravity = 0
 	sound_env = SPACE
 
+/area/holodeck/source_cafe
+	name = "\improper Holodeck - Cafe"
+	sound_env = PLAIN
+
+/area/holodeck/source_volleyball
+	name = "\improper Holodeck - Volleyball"
+	sound_env = PLAIN
+
 // Engineering
 
 /area/engineering/atmos/storage
