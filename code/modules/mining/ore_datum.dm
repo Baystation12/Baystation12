@@ -151,8 +151,19 @@ var/global/list/ores_by_type = list()
 	alloy = 1
 	result_amount = 5
 	spread_chance = 10
-	ore = /obj/item/weapon/ore/osmium
+	ore = /obj/item/weapon/ore/platinum
 	scan_icon = "mineral_rare"
+
+/ore/osmium
+	name = "osmium"
+	smelts_to = "osmium"
+	alloy = 1
+	display_name = "osmium crystal"
+	result_amount = 5
+	spread_chance = 10
+	scan_icon = "mineral_rare"
+	ore = /obj/item/weapon/ore/osmium
+
 
 /ore/hydrogen
 	name = "mhydrogen"
