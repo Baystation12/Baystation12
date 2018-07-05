@@ -807,6 +807,14 @@ var/list/floor_decals = list()
 	name = "random asteroid rubble"
 	icon_state = "asteroid0"
 
+/obj/effect/floor_decal/beach
+	name = "sandy border"
+	icon = 'icons/misc/beach.dmi'
+	icon_state = "beachborder"
+
+/obj/effect/floor_decal/beach/corner
+	icon_state = "beachbordercorner"
+
 /obj/effect/floor_decal/asteroid/New()
 	icon_state = "asteroid[rand(0,9)]"
 	..()
