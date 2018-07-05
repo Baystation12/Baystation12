@@ -194,7 +194,7 @@
 
 /datum/reagent/water/holywater/Topic(href, href_list)
 	. = ..()
-	if(href_list["deconvert"])
+	if(!. && href_list["deconvert"])
 		var/mob/living/carbon/C = locate(href_list["deconvert"])
 		if(C.mind)
 			GLOB.godcult.remove_antagonist(C.mind,1)
