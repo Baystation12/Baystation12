@@ -1,5 +1,5 @@
 /obj/item/weapon/paper/carbon
-	name = "paper"
+	name = "sheet of paper"
 	icon_state = "paper_stack"
 	item_state = "paper"
 	var/copied = 0
