@@ -281,23 +281,9 @@ var/bomb_set
 					to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
 					return 1
 				if(!timing && !safety)
-					if(istype(src, /obj/machinery/nuclearbomb/station))
-						var/obj/machinery/nuclearbomb/station/B = src
-						for(var/inserter in B.inserters)
-							var/obj/machinery/self_destruct/sd = inserter
-							if(!istype(sd) || !sd.armed)
-								to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
-								return
-					timing = 1
-					log_and_message_admins("activated the detonation countdown of \the [src]")
-					bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-					var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-					original_level = security_state.current_security_level
-					security_state.set_security_level(security_state.severe_security_level, TRUE)
-					update_icon()
+					start_bomb()
 				else 
-					secure_device()
-
+					check_cutoff()
 			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))
 					to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
@@ -322,6 +308,18 @@ var/bomb_set
 				else
 					to_chat(usr, "<span class='warning'>There is nothing to anchor to!</span>")
 	return 1
+
+/obj/machinery/nuclearbomb/proc/start_bomb()
+	timing = 1
+	log_and_message_admins("activated the detonation countdown of \the [src]")
+	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	original_level = security_state.current_security_level
+	security_state.set_security_level(security_state.severe_security_level, TRUE)
+	update_icon()
+
+/obj/machinery/nuclearbomb/proc/check_cutoff()
+	secure_device()
 
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
@@ -489,44 +487,25 @@ var/bomb_set
 		if(timing)
 			to_chat(usr, "<span class='warning'>Cannot alter the timing during countdown.</span>")
 			return
-
 		var/time = text2num(href_list["time"])
 		timeleft += time
 		timeleft = Clamp(timeleft, 300, 900)
 		return 1
-	if(href_list["timer"])
-		if(timing == -1)
-			return 1
-		if(!anchored)
-			to_chat(usr, "<span class='warning'>\The [src] needs to be anchored.</span>")
-			return 1
-		if(safety)
-			to_chat(usr, "<span class='warning'>The safety is still on.</span>")
-			return 1
-		if(wires.IsIndexCut(NUCLEARBOMB_WIRE_TIMING))
-			to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
-			return 1
-		if(!timing && !safety)
-			if(istype(src, /obj/machinery/nuclearbomb/station))
-				var/obj/machinery/nuclearbomb/station/B = src
-				for(var/inserter in B.inserters)
-					var/obj/machinery/self_destruct/sd = inserter
-					if(!istype(sd) || !sd.armed)
-						to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
-						return
-			timing = 1
-			log_and_message_admins("activated the detonation countdown of \the [src]")
-			bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-			visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
-			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-			original_level = security_state.current_security_level
-			security_state.set_security_level(security_state.severe_security_level, TRUE)
-			update_icon()
-		else 
-			if(timeleft <= self_destruct_cutoff)
-				visible_message("<span class='warning'>Self-destruct abort is no longer possible.</span>")
-				return
-			secure_device()
+
+/obj/machinery/nuclearbomb/station/start_bomb()
+	for(var/inserter in inserters)
+		var/obj/machinery/self_destruct/sd = inserter
+		if(!istype(sd) || !sd.armed)
+			to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
+			return
+	visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
+	..()
+
+/obj/machinery/nuclearbomb/station/check_cutoff()
+	if(timeleft <= self_destruct_cutoff)
+		visible_message("<span class='warning'>Self-Destruct abort is no longer possible.</span>")
+		return
+	..()
 
 /obj/machinery/nuclearbomb/station/Destroy()
 	flash_tiles.Cut()
