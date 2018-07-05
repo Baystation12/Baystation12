@@ -198,7 +198,7 @@
 					radiation = rand() * 15 + 85
 					if(!rad_shield)
 						//irradiate nearby mobs
-						radiation_repository.radiate(src, radiation / 25)
+						SSradiation.radiate(src, radiation / 25)
 				else
 					t_left_radspike = pick(10,15,25)
 

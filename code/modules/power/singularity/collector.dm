@@ -31,7 +31,7 @@ var/global/list/rad_collectors = list()
 	last_power_new = 0
 
 	if(P && active)
-		var/rads = radiation_repository.get_rads_at_turf(get_turf(src))
+		var/rads = SSradiation.get_rads_at_turf(get_turf(src))
 		if(rads)
 			receive_pulse(rads * 5) //Maths is hard
 

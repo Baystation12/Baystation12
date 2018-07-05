@@ -30,8 +30,8 @@
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
 		if(D.z in zlevels)
 			var/shuttleside = 0
-			for(var/sname in shuttle_controller.shuttles) //do not touch shuttle-side ones
-				var/datum/shuttle/autodock/S = shuttle_controller.shuttles[sname]
+			for(var/sname in SSshuttle.shuttles) //do not touch shuttle-side ones
+				var/datum/shuttle/autodock/S = SSshuttle.shuttles[sname]
 				if(istype(S) && S.shuttle_docking_controller)
 					if(S.shuttle_docking_controller.id_tag == D.docking_program.id_tag)
 						shuttleside = 1
