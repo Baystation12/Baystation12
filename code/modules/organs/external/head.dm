@@ -125,9 +125,6 @@
 		if (burn_dam > 40)
 			disfigure("burn")
 
-/obj/item/organ/external/head/no_eyes
-	eye_icon_location = null
-
 /obj/item/organ/external/head/update_icon()
 
 	..()
@@ -174,3 +171,6 @@
 				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
 			res.overlays |= hair_s
 	return res
+
+/obj/item/organ/external/head/no_eyes
+	eye_icon_location = null

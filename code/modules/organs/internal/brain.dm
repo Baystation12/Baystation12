@@ -37,12 +37,6 @@
 		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
 		tmp_owner = null
 
-/obj/item/organ/internal/brain/xeno
-	name = "thinkpan"
-	desc = "It looks kind of like an enormous wad of purple bubblegum."
-	icon = 'icons/mob/alien.dmi'
-	icon_state = "chitin"
-
 /obj/item/organ/internal/brain/robotize()
 	. = ..()
 	icon_state = "brain-prosthetic"
@@ -121,30 +115,6 @@
 
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
-
-/obj/item/organ/internal/brain/slime
-	name = "slime core"
-	desc = "A complex, organic knot of jelly and crystalline particles."
-	icon = 'icons/mob/slimes.dmi'
-	icon_state = "green slime extract"
-
-/obj/item/organ/internal/brain/slime/can_recover()
-	return 0
-
-/obj/item/organ/internal/brain/golem
-	name = "chem"
-	desc = "A tightly furled roll of paper, covered with indecipherable runes."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "scroll"
-
-/obj/item/organ/internal/brain/golem/can_recover()
-	return 0
-
-/obj/item/organ/internal/brain/starlight
-	name = "essence of fire"
-	desc = "A fancy name for ash. Still, it does look a bit different from the regular stuff."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "ash"
 
 /obj/item/organ/internal/brain/proc/get_current_damage_threshold()
 	return round(damage / damage_threshold_value)

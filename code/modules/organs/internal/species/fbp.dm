@@ -11,7 +11,6 @@
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
 	var/servo_cost = 0.8
 
-
 /obj/item/organ/internal/cell/New()
 	robotize()
 	if(ispath(cell))
