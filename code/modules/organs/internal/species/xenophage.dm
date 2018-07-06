@@ -1,3 +1,9 @@
+/obj/item/organ/internal/brain/xeno
+	name = "thinkpan"
+	desc = "It looks kind of like an enormous wad of purple bubblegum."
+	icon = 'icons/mob/alien.dmi'
+	icon_state = "chitin"
+
 //XENOMORPH ORGANS
 /obj/item/organ/internal/xeno
 	name = "xeno organ"
@@ -93,39 +99,3 @@
 			GLOB.xenomorphs.add_antagonist_mind(H.mind,1, GLOB.xenomorphs.faction_role_text, GLOB.xenomorphs.faction_welcome)
 
 	return 1
-
-// Xenomorph limbs.
-/obj/item/organ/external/head/unbreakable/xeno
-	eye_icon_location = 'icons/mob/human_races/species/xenos/eyes.dmi'
-	glowing_eyes = TRUE
-	encased = "carapace"
-
-/obj/item/organ/external/chest/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/groin/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/arm/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/arm/right/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/leg/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/leg/right/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/foot/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/foot/right/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/hand/unbreakable/xeno
-	encased = "carapace"
-
-/obj/item/organ/external/hand/right/unbreakable/xeno
-	encased = "carapace"

@@ -26,10 +26,6 @@
 /obj/item/organ/internal/stack/getToxLoss()
 	return 0
 
-/obj/item/organ/internal/stack/vox
-	name = "cortical stack"
-	invasive = 1
-
 /obj/item/organ/internal/stack/proc/do_backup()
 	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
 		languages = owner.languages.Copy()
@@ -61,14 +57,6 @@
 
 /obj/item/organ/internal/stack/removed()
 	do_backup()
-	..()
-
-/obj/item/organ/internal/stack/vox/removed()
-	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
-	owner.visible_message("<span class='danger'>\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!</span>")
-	head.take_damage(rand(15,20))
-	for(var/obj/item/organ/O in head.contents)
-		O.take_damage(rand(30,70))
 	..()
 
 /obj/item/organ/internal/stack/proc/overwrite()

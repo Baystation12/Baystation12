@@ -290,6 +290,25 @@
 	reagent_tag = IS_DIONA
 	genders = list(PLURAL)
 
+/proc/spawn_diona_nymph(var/turf/target)
+	if(!istype(target))
+		return 0
+
+	//This is a terrible hack and I should be ashamed.
+	var/datum/seed/diona = plant_controller.seeds["diona"]
+	if(!diona)
+		return 0
+
+	spawn(1) // So it has time to be thrown about by the gib() proc.
+		var/mob/living/carbon/alien/diona/D = new(target)
+		var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
+		P.request_player(D, "A diona nymph has split off from its gestalt. ")
+		spawn(60)
+			if(D)
+				if(!D.ckey || !D.client)
+					D.death()
+		return 1
+
 #define DIONA_LIMB_DEATH_COUNT 9
 /datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)
 	var/lost_limb_count = has_limbs.len - H.organs.len
