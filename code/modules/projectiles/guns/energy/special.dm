@@ -168,8 +168,9 @@
 /obj/item/weapon/gun/energy/staff/animate
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
+	max_shots = 5
+	recharge_time = 5 SECONDS
 	projectile_type = /obj/item/projectile/animate
-	max_shots = 10
 
 obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
@@ -177,20 +178,7 @@ obj/item/weapon/gun/energy/staff/focus
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "focus"
 	item_state = "focus"
-	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = ITEM_SIZE_LARGE
 	projectile_type = /obj/item/projectile/forcebolt
-	/*
-	attack_self(mob/living/user as mob)
-		if(projectile_type == /obj/item/projectile/forcebolt)
-			charge_cost = 400
-			to_chat(user, "<span class='warning'>The [src.name] will now strike a small area.</span>")
-			projectile_type = /obj/item/projectile/forcebolt/strong
-		else
-			charge_cost = 200
-			to_chat(user, "<span class='warning'>The [src.name] will now strike only a single person.</span>")
-			projectile_type = /obj/item/projectile/forcebolt"
-	*/
 
 /obj/item/weapon/gun/energy/plasmacutter
 	name = "plasma cutter"
