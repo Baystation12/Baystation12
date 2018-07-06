@@ -5,6 +5,7 @@ var/list/organ_cache = list()
 	icon = 'icons/obj/surgery.dmi'
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
+	default_action_type = /datum/action/item_action/organ
 
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
@@ -35,6 +36,12 @@ var/list/organ_cache = list()
 	species = null
 
 	return ..()
+
+/obj/item/organ/proc/refresh_action_button()
+	return action
+
+/obj/item/organ/attack_hand(var/mob/user)
+	return (owner && loc == owner && owner == user)
 
 /obj/item/organ/proc/update_health()
 	return
@@ -218,7 +225,7 @@ var/list/organ_cache = list()
 		germ_level = 0	//cure instantly
 	else if (germ_level < INFECTION_LEVEL_TWO)
 		germ_level -= 5	//at germ_level == 500, this should cure the infection in 5 minutes
-	else 
+	else
 		germ_level -= 3 //at germ_level == 1000, this will cure the infection in 10 minutes
 	if(owner && owner.lying)
 		germ_level -= 2
@@ -262,6 +269,8 @@ var/list/organ_cache = list()
 	if(!istype(owner))
 		return
 
+	action_button_name = null
+
 	if(drop_organ)
 		dropInto(owner.loc)
 
@@ -281,6 +290,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
 	owner = target
+	action_button_name = initial(action_button_name)
 	forceMove(owner) //just in case
 	if(isrobotic())
 		set_dna(owner.dna)
