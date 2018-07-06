@@ -31,10 +31,10 @@
 
 	//Split X+Pixel_X up into list(X, Pixel_X)
 	var/list/screen_loc_X = splittext(screen_loc_params[1],":")
-	screen_loc_X[1] = encode_screen_X(text2num(screen_loc_X[1]))
+	screen_loc_X[1] = encode_screen_X(text2num(screen_loc_X[1]), usr)
 	//Split Y+Pixel_Y up into list(Y, Pixel_Y)
 	var/list/screen_loc_Y = splittext(screen_loc_params[2],":")
-	screen_loc_Y[1] = encode_screen_Y(text2num(screen_loc_Y[1]))
+	screen_loc_Y[1] = encode_screen_Y(text2num(screen_loc_Y[1]), usr)
 
 	if(snap2grid) //Discard Pixel Values
 		screen_loc = "[screen_loc_X[1]],[screen_loc_Y[1]]"
@@ -44,8 +44,8 @@
 		var/pix_Y = text2num(screen_loc_Y[2]) - 16
 		screen_loc = "[screen_loc_X[1]]:[pix_X],[screen_loc_Y[1]]:[pix_Y]"
 
-/obj/screen/movable/proc/encode_screen_X(X)
-	var/view = usr.client ? usr.client.view : world.view
+/obj/screen/movable/proc/encode_screen_X(var/X, var/mob/viewer)
+	var/view = viewer.client ? viewer.client.view : world.view
 	if(X > view+1)
 		. = "EAST-[view*2 + 1-X]"
 	else if(X < view+1)
@@ -53,8 +53,8 @@
 	else
 		. = "CENTER"
 
-/obj/screen/movable/proc/decode_screen_X(X)
-	var/view = usr.client ? usr.client.view : world.view
+/obj/screen/movable/proc/decode_screen_X(var/X, var/mob/viewer)
+	var/view = viewer.client ? viewer.client.view : world.view
 	//Find EAST/WEST implementations
 	if(findtext(X,"EAST-"))
 		var/num = text2num(copytext(X,6)) //Trim EAST-
@@ -69,17 +69,17 @@
 	else if(findtext(X,"CENTER"))
 		. = view+1
 
-/obj/screen/movable/proc/encode_screen_Y(Y)
-	var/view = usr.client ? usr.client.view : world.view
+/obj/screen/movable/proc/encode_screen_Y(var/Y, var/mob/viewer)
+	var/view = viewer.client ? viewer.client.view : world.view
 	if(Y > view+1)
 		. = "NORTH-[view*2 + 1-Y]"
-	else if(Y < usr.client.view+1)
+	else if(Y < viewer.client.view+1)
 		. = "SOUTH+[Y-1]"
 	else
 		. = "CENTER"
 
-/obj/screen/movable/proc/decode_screen_Y(Y)
-	var/view = usr.client ? usr.client.view : world.view
+/obj/screen/movable/proc/decode_screen_Y(var/Y, var/mob/viewer)
+	var/view = viewer.client ? viewer.client.view : world.view
 	if(findtext(Y,"NORTH-"))
 		var/num = text2num(copytext(Y,7)) //Trim NORTH-
 		if(!num)
