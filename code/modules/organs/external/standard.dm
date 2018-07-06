@@ -24,6 +24,9 @@
 	artery_name = "aorta"
 	cavity_name = "thoracic"
 
+/obj/item/organ/external/chest/proc/get_current_skin()
+	return
+
 /obj/item/organ/external/chest/robotize()
 	if(..())
 		// Give them a new cell.
