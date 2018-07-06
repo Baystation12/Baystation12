@@ -2,6 +2,7 @@
 #define AB_SPELL 2
 #define AB_INNATE 3
 #define AB_GENERIC 4
+#define AB_ITEM_USE_ICON 5
 
 #define AB_CHECK_RESTRAINED 1
 #define AB_CHECK_STUNNED 2
@@ -31,6 +32,9 @@
 	if(owner)
 		Remove(owner)
 
+/datum/action/proc/SetTarget(var/atom/Target)
+	target = Target
+
 /datum/action/proc/Grant(mob/living/T)
 	if(owner)
 		if(owner == T)
@@ -56,7 +60,7 @@
 	if(!Checks())
 		return
 	switch(action_type)
-		if(AB_ITEM)
+		if(AB_ITEM, AB_ITEM_USE_ICON)
 			if(target)
 				var/obj/item/item = target
 				item.ui_action_click()
@@ -217,6 +221,16 @@
 
 /datum/action/item_action/hands_free
 	check_flags = AB_CHECK_ALIVE|AB_CHECK_INSIDE
+
+/datum/action/item_action/organ
+	action_type = AB_ITEM_USE_ICON
+	button_icon = 'icons/obj/action_buttons/organs.dmi'
+
+/datum/action/item_action/organ/SetTarget(var/atom/Target)
+	. = ..()
+	var/obj/item/organ/O = target
+	if(istype(O))
+		O.refresh_action_button()
 
 #undef AB_WEST_OFFSET
 #undef AB_NORTH_OFFSET
