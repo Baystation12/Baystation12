@@ -6,6 +6,9 @@
 	opacity = 0
 	glass = 1
 
+/obj/machinery/door/airlock/halo_lifepod
+	name = "Specialty Armor Storage"
+
 /obj/machinery/door/airlock/halo_maint
 	name = "Maintenance Airlock"
 	icon = 'code/modules/halo/doors/airlockmaint.dmi'
