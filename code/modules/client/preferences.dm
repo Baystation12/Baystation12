@@ -313,5 +313,7 @@ datum/preferences
 	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
+	if(panel)
+		panel.close()
+		panel = null
 	user << browse(null, "window=saves")
-	panel.close()
