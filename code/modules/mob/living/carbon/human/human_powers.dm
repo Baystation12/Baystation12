@@ -258,17 +258,6 @@
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 	qdel(src)
 
-/mob/living/carbon/human/proc/active_camo()
-	set category = "Abilities"
-	set name = "Active Camo"
-	set desc = "Camouflage yourself"
-
-	if(is_cloaked_by(species))
-		remove_cloaking_source(species)
-	else
-		add_cloaking_source(species)
-		apply_effect(2, STUN, 0)
-
 /mob/living/carbon/human/proc/change_colour()
 	set category = "Abilities"
 	set name = "Change Colour"
@@ -276,35 +265,3 @@
 
 	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", rgb(r_skin, g_skin, b_skin)) as color|null
 	change_skin_color(hex2num(copytext(new_skin, 2, 4)), hex2num(copytext(new_skin, 4, 6)), hex2num(copytext(new_skin, 6, 8)))
-
-/mob/living/carbon/human/proc/threat_display()
-	set category = "Abilities"
-	set name = "Threat Display"
-	set desc = "Toggle between scary or not."
-
-	if(stat)
-		to_chat(src, "<span class='warning'>You can't do a threat display in your current state.</span>")
-		return
-
-	switch(skin_state)
-		if(SKIN_NORMAL)
-			if(pulling_punches)
-				to_chat(src, "<span class='warning'>You must be in your hunting stance to do a threat display.</span>")
-				return
-			var/message = alert("Would you like to show a scary message?",,"Cancel","Yes", "No")
-			switch(message)
-				if("Yes")
-					visible_message("<span class='warning'>[src]'s skin shifts to a deep red colour with dark chevrons running down in an almost hypnotic \
-						pattern. Standing tall, \he strikes, sharp spikes aimed at those threatening \him, claws whooshing through the air past them.</span>")
-				if("Cancel")
-					return
-			playsound(src, 'sound/effects/angrybug.ogg', 60, 0)
-			skin_state = SKIN_THREAT
-			spawn(100)
-				if(skin_state == SKIN_THREAT)
-					skin_state = SKIN_NORMAL
-					update_skin(1)
-		if(SKIN_THREAT)
-			skin_state = SKIN_NORMAL
-	update_skin(1)
-
