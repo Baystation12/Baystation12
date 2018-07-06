@@ -225,6 +225,15 @@
 	containername = "\improper 9mm rubber ammunition crate"
 	access = access_security
 
+
+/decl/hierarchy/supply_pack/security/pdwammoflash
+	name = "Ammunition - 9mm top mounted flash"
+	contains = list(/obj/item/ammo_magazine/mc9mmt/flash = 4)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper 9mm stun ammunition crate"
+	access = access_security
+
 /decl/hierarchy/supply_pack/security/pdwammopractice
 	name = "Ammunition - 9mm top mounted practice"
 	contains = list(/obj/item/ammo_magazine/mc9mmt/practice = 8)

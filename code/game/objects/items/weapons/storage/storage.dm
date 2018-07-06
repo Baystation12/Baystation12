@@ -176,7 +176,8 @@
 		return 0
 	if(istype(W.loc, /mob))
 		var/mob/M = W.loc
-		M.remove_from_mob(W)
+		if(!M.unEquip(W))
+			return
 	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)

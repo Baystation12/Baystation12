@@ -47,7 +47,7 @@
 
 /obj/machinery/atmospherics/pipe/proc/update_sound(var/playing)
 	if(playing && !sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/hiss.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 

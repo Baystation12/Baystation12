@@ -67,7 +67,7 @@
 		using = new /obj/screen()
 		using.SetName("mov_intent")
 		using.icon = ui_style
-		using.icon_state = (mymob.m_intent == M_RUN ? "running" : "walking")
+		using.icon_state = mymob.move_intent.hud_icon_state
 		using.screen_loc = ui_movi
 		using.color = ui_color
 		using.alpha = ui_alpha

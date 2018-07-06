@@ -71,8 +71,8 @@
 /obj/vehicle/bike/proc/load_engine(var/obj/item/weapon/engine/E, var/mob/user)
 	if(engine)
 		return
-	if(user)
-		user.drop_from_inventory(E)
+	if(user && !user.unEquip(E))
+		return
 	engine = E
 	engine.forceMove(src)
 	if(trail)

@@ -1,8 +1,9 @@
 /datum/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	icobase = 'icons/mob/human_races/r_vox.dmi'
-	deform = 'icons/mob/human_races/r_def_vox.dmi'
+	icobase = 'icons/mob/human_races/species/vox/body.dmi'
+	deform = 'icons/mob/human_races/species/vox/body.dmi'
+	husk_icon = 'icons/mob/human_races/species/vox/husk.dmi'
 	default_language = "Vox-pidgin"
 	language = LANGUAGE_GALCOM
 	num_alternate_languages = 1
@@ -16,7 +17,6 @@
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
 	taste_sensitivity = TASTE_DULL
-
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
@@ -47,20 +47,10 @@
 		/mob/living/carbon/human/proc/leap
 		)
 
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/vox),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/vox),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
+	override_limb_types = list(
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_HEAD = /obj/item/organ/external/head/vox
 		)
-
 
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart/vox,

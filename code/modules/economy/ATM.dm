@@ -80,8 +80,8 @@
 
 		var/obj/item/weapon/card/id/idcard = I
 		if(!held_card)
-			usr.drop_item()
-			idcard.loc = src
+			if(!user.unEquip(idcard, src))
+				return
 			held_card = idcard
 			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
 				authenticated_account = null
@@ -422,8 +422,8 @@
 					else
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/weapon/card/id))
-							usr.drop_item()
-							I.loc = src
+							if(!usr.unEquip(I, src))
+								return
 							held_card = I
 				else
 					release_held_id(usr)

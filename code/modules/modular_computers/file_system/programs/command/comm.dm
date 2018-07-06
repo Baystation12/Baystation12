@@ -362,5 +362,5 @@ var/last_message_id = 0
 	if(.)
 		//delay events in case of an autotransfer
 		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
-		GLOB.event_manager.delay_events(EVENT_LEVEL_MODERATE, delay)
-		GLOB.event_manager.delay_events(EVENT_LEVEL_MAJOR, delay)
+		SSevent.delay_events(EVENT_LEVEL_MODERATE, delay)
+		SSevent.delay_events(EVENT_LEVEL_MAJOR, delay)

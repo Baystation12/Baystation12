@@ -18,9 +18,9 @@
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/explorer,
-						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
+						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
-						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist,
+						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist, /datum/job/medical_trainee,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
@@ -65,7 +65,8 @@
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/captain/get_description_blurb()
 	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its space exploration mission. Delegate to your Executive Officer, your department heads, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
@@ -115,7 +116,8 @@
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/hop/get_description_blurb()
 	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
@@ -146,7 +148,8 @@
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/aidiag,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
 	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring Nanotrasen's interests along with your Nanotrasen Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to find things to benefit NT. Don’t put NT’s position on board in jeopardy.  Advise the CO on science matters."
@@ -184,7 +187,8 @@
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/cmo/get_description_blurb()
 	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
@@ -233,7 +237,8 @@
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor,
-							 /datum/computer_file/program/shields_monitor)
+							 /datum/computer_file/program/shields_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/chief_engineer/get_description_blurb()
 	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
@@ -270,7 +275,8 @@
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/digitalwarrant,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/hos/get_description_blurb()
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
@@ -302,6 +308,8 @@
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
 
+	software_on_spawn = list(/datum/computer_file/program/reports)
+
 /datum/job/liaison/get_description_blurb()
 	return "You are the Nanotrasen Liaison. You are a civilian employee of Nanotrasen assigned to the vessel to promote, protect and ensure the interests of the corporation on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on NT matters and try to push NT interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
 
@@ -328,6 +336,8 @@
 
 	access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
+
+	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/representative/get_description_blurb()
 	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and Nanotrasen interests on board. Send faxes back to Sol on mission progress and important events."
@@ -364,7 +374,8 @@
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
 			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
 
-	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
+	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
 
 /datum/job/sea/get_description_blurb()
 	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and “advising” them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
@@ -406,7 +417,9 @@
 							 /datum/computer_file/program/supermatter_monitor,
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/camera_monitor,
-							 /datum/computer_file/program/shields_monitor)
+							 /datum/computer_file/program/shields_monitor,
+							 /datum/computer_file/program/reports,
+							 /datum/computer_file/program/deck_management)
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
@@ -437,6 +450,9 @@
 
 	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
 
+	software_on_spawn = list(/datum/computer_file/program/deck_management,
+							 /datum/computer_file/program/reports)
+
 /datum/job/pathfinder/get_description_blurb()
 	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if NT doesn’t provide their pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
 
@@ -459,6 +475,8 @@
 	min_skill = list(	SKILL_EVA = SKILL_BASIC)
 
 	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+
+	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
 /datum/job/explorer/get_description_blurb()
 	return "You are an Explorer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully."
@@ -605,6 +623,54 @@
 
 /datum/job/engineer_contractor/get_description_blurb()
 	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the rest of the engineering team."
+
+/datum/job/engineer_trainee
+	title = "Engineer Trainee"
+	department = "Engineering"
+	department_flag = ENG
+
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief Engineer and Engineering Personnel"
+	selection_color = "#5b4d20"
+	ideal_character_age = 20
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/fleet/e2,
+	)
+
+	skill_points = 4
+	no_skill_buffs = TRUE
+
+	min_skill = list(	SKILL_COMPUTER     = SKILL_BASIC,
+						SKILL_HAULING      = SKILL_ADEPT,
+						SKILL_EVA          = SKILL_ADEPT,
+						SKILL_CONSTRUCTION = SKILL_ADEPT,
+						SKILL_ELECTRICAL   = SKILL_ADEPT,
+						SKILL_ATMOS        = SKILL_ADEPT,
+						SKILL_ENGINES      = SKILL_ADEPT)
+
+	access = list(access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_eva, access_tech_storage, access_janitor, access_construction,
+			            access_solgov_crew, access_hangar)
+
+	software_on_spawn = list(/datum/computer_file/program/power_monitor,
+							 /datum/computer_file/program/supermatter_monitor,
+							 /datum/computer_file/program/alarm_monitor,
+							 /datum/computer_file/program/atmos_control,
+							 /datum/computer_file/program/rcon_console,
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
+
+/datum/job/engineer_trainee/get_description_blurb()
+	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
+
 
 /datum/job/roboticist
 	title = "Roboticist"
@@ -849,6 +915,44 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/medical_trainee
+	title = "Corpsman Trainee"
+	department = "Medical"
+	department_flag = MED
+
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief Medical Officer and Medical Personnel"
+	selection_color = "#013d3b"
+	ideal_character_age = 20
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/fleet/e2
+	)
+
+	skill_points = 4
+	no_skill_buffs = TRUE
+
+	min_skill = list(	SKILL_EVA     = SKILL_ADEPT,
+						SKILL_HAULING = SKILL_ADEPT,
+						SKILL_MEDICAL = SKILL_EXPERT,
+						SKILL_ANATOMY = SKILL_BASIC)
+
+	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_surgery, access_medical_equip, access_solgov_crew)
+
+	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
+							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/medical_trainee/get_description_blurb()
+	return "You are a Corpsman Trainee. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
+
 /datum/job/chemist
 	title = "Chemist"
 	department = "Medical"
@@ -937,7 +1041,9 @@
 						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
 	minimal_access = list()
 
-	software_on_spawn = list(/datum/computer_file/program/supply)
+	software_on_spawn = list(/datum/computer_file/program/supply,
+							 /datum/computer_file/program/deck_management,
+							 /datum/computer_file/program/reports)
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
@@ -966,7 +1072,10 @@
 						access_cargo_bot, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
 	minimal_access = list()
 
-	software_on_spawn = list(/datum/computer_file/program/supply)
+	software_on_spawn = list(/datum/computer_file/program/supply,
+							 /datum/computer_file/program/deck_management,
+							 /datum/computer_file/program/reports)
+
 
 /datum/job/cargo_contractor
 	title = "Supply Assistant"
@@ -987,7 +1096,9 @@
 
 	access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_solgov_crew)
 
-	software_on_spawn = list(/datum/computer_file/program/supply)
+	software_on_spawn = list(/datum/computer_file/program/supply,
+							 /datum/computer_file/program/deck_management,
+							 /datum/computer_file/program/reports)
 
 /datum/job/janitor
 	title = "Sanitation Technician"
@@ -1075,10 +1186,6 @@
 	supervisors = "the Executive Officer and SolGov Personnel"
 	selection_color = "#515151"
 	ideal_character_age = 20
-	alt_titles = list(
-		"Engineer Trainee",
-		"Corpsman Trainee",
-		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,

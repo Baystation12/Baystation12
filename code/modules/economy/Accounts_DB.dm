@@ -48,8 +48,8 @@
 		return ..()
 
 	if(!held_card)
-		user.drop_item()
-		O.loc = src
+		if(!user.unEquip(O, src))
+			return
 		held_card = O
 
 		GLOB.nanomanager.update_uis(src)
@@ -169,10 +169,9 @@
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card/id))
-						var/obj/item/weapon/card/id/C = I
-						usr.drop_item()
-						C.loc = src
-						held_card = C
+						if(!usr.unEquip(I, src))
+							return
+						held_card = I
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])

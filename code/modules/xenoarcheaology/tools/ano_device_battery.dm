@@ -39,9 +39,9 @@
 /obj/item/weapon/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/anobattery))
 		if(!inserted_battery)
+			if(!user.unEquip(I, src))
+				return
 			to_chat(user, "<span class='notice'>You insert the battery.</span>")
-			user.drop_item()
-			I.loc = src
 			inserted_battery = I
 			UpdateSprite()
 	else

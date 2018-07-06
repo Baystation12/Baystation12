@@ -143,6 +143,5 @@
 			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
 			return
 		if(contents.len == 0)
-			user.drop_from_inventory(W)
-			W.forceMove(src)
+			user.unEquip(W, src)
 	update_icon()

@@ -319,9 +319,7 @@
 	user.visible_message("<span class='notice'>[user] has transplanted \the [tool] into [target]'s [affected.name].</span>", \
 	"<span class='notice'>You have transplanted \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
-	if(istype(O))
-		user.remove_from_mob(O)
-		O.forceMove(target)
+	if(istype(O) && user.unEquip(O, target))
 		affected.implants |= O //move the organ into the patient. The organ is properly reattached in the next step
 		if(!(O.status & ORGAN_CUT_AWAY))
 			log_debug("[user] ([user.ckey]) replaced organ [O], which didn't have ORGAN_CUT_AWAY set, in [target] ([target.ckey])")

@@ -55,11 +55,11 @@
 			if(!det.secured)
 				to_chat(user, "<span class='warning'>Assembly must be secured with screwdriver.</span>")
 				return
+			if(!user.unEquip(det, src))
+				return
 			path = 1
 			to_chat(user, "<span class='notice'>You add [W] to the metal casing.</span>")
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
-			user.remove_from_mob(det)
-			det.loc = src
 			detonator = det
 			if(istimer(detonator.a_left))
 				var/obj/item/device/assembly/timer/T = detonator.a_left
@@ -102,9 +102,9 @@
 				return
 			else
 				if(W.reagents.total_volume)
+					if(!user.unEquip(W, src))
+						return
 					to_chat(user, "<span class='notice'>You add \the [W] to the assembly.</span>")
-					user.drop_item()
-					W.loc = src
 					beakers += W
 					stage = 1
 					SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")

@@ -161,10 +161,9 @@
 
 	if(internal_cells.len >= max_cells)
 		return 0
-
+	if(user && !user.unEquip(C))
+		return 0
 	internal_cells.Add(C)
-	if(user)
-		user.drop_from_inventory(C)
 	C.forceMove(src)
 	RefreshParts()
 	update_maxcharge()

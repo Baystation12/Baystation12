@@ -139,7 +139,7 @@
 					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
-				M.drop_item()
+				M.unequip_item()
 		else
 			handle_click_empty(user)
 		return 0
@@ -200,7 +200,7 @@
 	last_safety_check = world.time
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
-	user.setMoveCooldown(shoot_time) //no moving while shooting either
+	user.SetMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
@@ -231,7 +231,7 @@
 
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	user.setMoveCooldown(move_delay)
+	user.SetMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
 
 //obtains the next projectile to fire
@@ -345,7 +345,7 @@
 			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
 
 	if(burst > 1 && !user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
-		acc_mod -= 1 
+		acc_mod -= 1
 		disp_mod += 0.5
 
 	//Accuracy modifiers
@@ -478,7 +478,7 @@
 	var/next_mode = get_next_firemode()
 	if(!next_mode || next_mode == sel_mode)
 		return null
-	
+
 	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)

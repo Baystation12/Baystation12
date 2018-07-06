@@ -78,8 +78,9 @@
 /datum/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
-	icobase = 'icons/mob/human_races/r_tajaran.dmi'
-	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
+	icobase = 'icons/mob/human_races/species/tajara/body.dmi'
+	deform =  'icons/mob/human_races/species/tajara/deformed_body.dmi'
+	preview_icon = 'icons/mob/human_races/species/tajara/preview.dmi'
 	tail = "tajtail"
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	default_h_style = "Tajaran Ears"
@@ -124,7 +125,7 @@
 	flesh_color = "#afa59e"
 	base_color = "#333333"
 	blood_color = "#862a51"
-	organs_icon = 'icons/mob/human_races/organs/tajaran.dmi'
+	organs_icon = 'icons/mob/human_races/species/tajara/organs.dmi'
 	reagent_tag = IS_TAJARA
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
@@ -147,9 +148,9 @@
 /datum/species/skrell
 	name = SPECIES_SKRELL
 	name_plural = SPECIES_SKRELL
-	icobase = 'icons/mob/human_races/r_skrell.dmi'
-	deform = 'icons/mob/human_races/r_def_skrell.dmi'
-	eye_icon = "skrell_eyes_s"
+	icobase = 'icons/mob/human_races/species/skrell/body.dmi'
+	deform = 'icons/mob/human_races/species/skrell/deformed_body.dmi'
+	preview_icon = 'icons/mob/human_races/species/skrell/preview.dmi'
 	primitive_form = "Neaera"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
@@ -186,7 +187,7 @@
 	flesh_color = "#8cd7a3"
 	blood_color = "#1d2cbf"
 	base_color = "#006666"
-	organs_icon = 'icons/mob/human_races/organs/skrell.dmi'
+	organs_icon = 'icons/mob/human_races/species/skrell/organs.dmi'
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -198,25 +199,15 @@
 
 	reagent_tag = IS_SKRELL
 
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
-		)
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/skrell)
 
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
-	icobase = 'icons/mob/human_races/r_diona.dmi'
-	deform = 'icons/mob/human_races/r_def_plant.dmi'
+	icobase = 'icons/mob/human_races/species/diona/body.dmi'
+	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
+	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
+
 	language = LANGUAGE_ROOTLOCAL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
@@ -298,6 +289,25 @@
 
 	reagent_tag = IS_DIONA
 	genders = list(PLURAL)
+
+/proc/spawn_diona_nymph(var/turf/target)
+	if(!istype(target))
+		return 0
+
+	//This is a terrible hack and I should be ashamed.
+	var/datum/seed/diona = plant_controller.seeds["diona"]
+	if(!diona)
+		return 0
+
+	spawn(1) // So it has time to be thrown about by the gib() proc.
+		var/mob/living/carbon/alien/diona/D = new(target)
+		var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
+		P.request_player(D, "A diona nymph has split off from its gestalt. ")
+		spawn(60)
+			if(D)
+				if(!D.ckey || !D.client)
+					D.death()
+		return 1
 
 #define DIONA_LIMB_DEATH_COUNT 9
 /datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)

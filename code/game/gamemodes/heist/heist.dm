@@ -16,7 +16,7 @@
 	antag_tags = list(MODE_RAIDER)
 
 /datum/game_mode/heist/check_finished()
-	var/datum/shuttle/autodock/multi/antag/skipjack = shuttle_controller.shuttles["Skipjack"]
+	var/datum/shuttle/autodock/multi/antag/skipjack = SSshuttle.shuttles["Skipjack"]
 	if (skipjack && skipjack.return_warning && skipjack.home_waypoint == skipjack.current_location)
 		return 1
 	return ..()

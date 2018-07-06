@@ -176,11 +176,10 @@
 						if( !istype(item_to_add,  /obj/item/device/radio/headset) )
 							to_chat(usr, "<span class='warning'>This object won't fit.</span>")
 							return
-
+						if(!usr.unEquip(item_to_add, src))
+							return
 						var/obj/item/device/radio/headset/headset_to_add = item_to_add
 
-						usr.drop_item()
-						headset_to_add.loc = src
 						src.ears = headset_to_add
 						to_chat(usr, "You fit the headset onto [src].")
 
@@ -603,10 +602,8 @@
 		if(C.r_hand && C.r_hand.w_class <= ITEM_SIZE_SMALL)
 			stolen_item = C.r_hand
 
-		if(stolen_item)
-			C.remove_from_mob(stolen_item)
+		if(stolen_item && C.unEquip(stolen_item, src))
 			held_item = stolen_item
-			stolen_item.loc = src
 			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "<span class='warning'>You snag the [held_item] out of [C]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
 			return held_item
 

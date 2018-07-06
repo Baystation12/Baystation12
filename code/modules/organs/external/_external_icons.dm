@@ -81,13 +81,13 @@ var/list/limb_icon_cache = list()
 	if(force_icon)
 		icon = force_icon
 	else if (robotic >= ORGAN_ROBOT)
-		icon = 'icons/mob/human_races/robotic.dmi'
+		icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 	else if (!dna)
-		icon = 'icons/mob/human_races/r_human.dmi'
+		icon = 'icons/mob/human_races/species/human/body.dmi'
 	else if (status & ORGAN_MUTATED)
 		icon = species.deform
 	else if (owner && (SKELETON in owner.mutations))
-		icon = 'icons/mob/human_races/r_skeleton.dmi'
+		icon = 'icons/mob/human_races/species/human/skeleton.dmi'
 	else
 		icon = species.get_icobase(owner)
 

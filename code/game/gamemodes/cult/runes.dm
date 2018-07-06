@@ -372,22 +372,17 @@
 	visible_message("<span class='warning'>\The [src] disappears with a flash of red light, and a set of armor appears on \the [user].</span>", "<span class='warning'>You are blinded by the flash of red light. After you're able to see again, you see that you are now wearing a set of armor.</span>")
 
 	var/obj/O = user.get_equipped_item(slot_head) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
-	if(O && !istype(O, /obj/item/clothing/head/culthood))
-		user.unEquip(O)
+	if(O && !istype(O, /obj/item/clothing/head/culthood) && user.unEquip(O))
+		user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
 	O = user.get_equipped_item(slot_wear_suit)
-	if(O && !istype(O, /obj/item/clothing/suit/cultrobes))
-		user.unEquip(O)
+	if(O && !istype(O, /obj/item/clothing/suit/cultrobes) && user.unEquip(O))
+		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)	
 	O = user.get_equipped_item(slot_shoes)
-	if(O && !istype(O, /obj/item/clothing/shoes/cult))
-		user.unEquip(O)
-
-	user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
-	user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)
-	user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
+	if(O && !istype(O, /obj/item/clothing/shoes/cult) && user.unEquip(O))
+		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)	
 
 	O = user.get_equipped_item(slot_back)
-	if(istype(O, /obj/item/weapon/storage) && !istype(O, /obj/item/weapon/storage/backpack/cultpack)) // We don't want to make the vox drop their nitrogen tank, though
-		user.unEquip(O)
+	if(istype(O, /obj/item/weapon/storage) && !istype(O, /obj/item/weapon/storage/backpack/cultpack) && user.unEquip(O)) // We don't want to make the vox drop their nitrogen tank, though
 		var/obj/item/weapon/storage/backpack/cultpack/C = new /obj/item/weapon/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back)
 		if(C)

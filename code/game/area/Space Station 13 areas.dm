@@ -207,7 +207,7 @@ area/space/atmosalert()
 	S.file = 'sound/ambience/shore.ogg'
 	S.repeat = 1
 	S.wait = 0
-	S.channel = 123
+	S.channel = GLOB.sound_channels.RequestChannel(/area/beach)
 	S.volume = 100
 	S.priority = 255
 	S.status = SOUND_UPDATE

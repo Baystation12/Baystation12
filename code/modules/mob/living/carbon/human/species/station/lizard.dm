@@ -1,16 +1,15 @@
 /datum/species/unathi
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
-	icon_template = 'icons/mob/human_races/r_template_tall.dmi'
-	icobase = 'icons/mob/human_races/r_lizard.dmi'
-	deform = 'icons/mob/human_races/r_def_lizard.dmi'
+	icon_template = 'icons/mob/human_races/species/template_tall.dmi'
+	icobase = 'icons/mob/human_races/species/unathi/body.dmi'
+	deform = 'icons/mob/human_races/species/unathi/deformed_body.dmi'
+	husk_icon = 'icons/mob/human_races/species/unathi/husk.dmi'
+	preview_icon = 'icons/mob/human_races/species/unathi/preview.dmi'
 	tail = "sogtail"
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
 	limb_blend = ICON_MULTIPLY
 	tail_blend = ICON_MULTIPLY
-
-	eye_icon = "eyes_lizard"
-	eye_icon_location = 'icons/mob/lizard_face.dmi'
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
@@ -53,7 +52,7 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 	blood_color = "#f24b2e"
-	organs_icon = 'icons/mob/human_races/organs/unathi.dmi'
+	organs_icon = 'icons/mob/human_races/species/unathi/organs.dmi'
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
@@ -81,6 +80,8 @@
 		)
 
 	prone_overlay_offset = list(-4, -4)
+
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unathi)
 
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()

@@ -229,7 +229,7 @@
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
-		else if(user.unEquip(G, target = src))
+		else if(user.unEquip(G, src))
 			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
 			attach_grenade(G)
 	else
@@ -354,10 +354,9 @@
 		to_chat(user, "<span class='warning'>There is already a card in there!</span>")
 		return
 	var/mob/living/L = locate(/mob/living) in card.contents
-	if(L && L.key)
+	if(L && L.key && user.unEquip(card))
 		L.forceMove(src)
 		controlling = L
-		user.drop_from_inventory(card)
 		card.dropInto(src)
 		aicard = card
 		user.visible_message("\The [user] loads \the [card] into \the [src]'s device slot")

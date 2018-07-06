@@ -78,8 +78,8 @@
 
 /obj/item/weapon/paper_bin/attackby(obj/item/weapon/i as obj, mob/user as mob)
 	if(istype(i, /obj/item/weapon/paper))
-		user.drop_item()
-		i.forceMove(src)
+		if(!user.unEquip(i, src))
+			return
 		to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
 		papers.Add(i)
 		update_icon()
@@ -96,11 +96,9 @@
 				was_there_a_photo = 1
 				bundleitem.dropInto(user.loc)
 				bundleitem.reset_plane_and_layer()
-		user.drop_from_inventory(i)
 		qdel(i)
 		if(was_there_a_photo)
 			to_chat(user, "<span class='notice'>The photo cannot go into \the [src].</span>")
-	return
 
 
 /obj/item/weapon/paper_bin/examine(mob/user)

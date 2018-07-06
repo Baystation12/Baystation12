@@ -745,9 +745,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		return
 
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
+		if(!user.unequip_item(src))
+			return
 		var/obj/item/photo = user.get_active_hand()
-		user.drop_item()
-		photo.loc = src
 		photo_data = new(photo, 0)
 	else if(istype(user,/mob/living/silicon))
 		var/mob/living/silicon/tempAI = user

@@ -6,10 +6,11 @@
 	var/moving_status = SHUTTLE_IDLE
 
 	var/area/shuttle_area //can be both single area type or a list of areas
-	var/obj/effect/shuttle_landmark/current_location
+	var/obj/effect/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
-	var/flags = SHUTTLE_FLAGS_PROCESS
+	var/flags = 0
+	var/process_state = IDLE_STATE //Used with SHUTTLE_FLAGS_PROCESS, as well as to store current state.
 	var/category = /datum/shuttle
 
 	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
@@ -19,7 +20,8 @@
 
 	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
 
-	var/defer_initialisation = FALSE //this shuttle will/won't be initialised by something after roundstart
+	var/defer_initialisation = FALSE //this shuttle will/won't be initialised automatically. If set to true, you are responsible for initialzing the shuttle manually.
+	                                 //Useful for shuttles that are initialed by map_template loading, or shuttles that are created in-game or not used.
 	var/logging_home_tag   //Whether in-game logs will be generated whenever the shuttle leaves/returns to the landmark with this landmark_tag.
 	var/logging_access     //Controls who has write access to log-related stuff; should correlate with pilot access.
 
@@ -41,30 +43,30 @@
 	if(initial_location)
 		current_location = initial_location
 	else
-		current_location = locate(current_location)
+		current_location = SSshuttle.get_landmark(current_location)
 	if(!istype(current_location))
 		CRASH("Shuttle \"[name]\" could not find its starting location.")
 
-	if(src.name in shuttle_controller.shuttles)
+	if(src.name in SSshuttle.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
-	shuttle_controller.shuttles[src.name] = src
+	SSshuttle.shuttles[src.name] = src
 	if(logging_home_tag)
 		new /datum/shuttle_log(src)
 	if(flags & SHUTTLE_FLAGS_PROCESS)
-		shuttle_controller.process_shuttles += src
+		SSshuttle.process_shuttles += src
 	if(flags & SHUTTLE_FLAGS_SUPPLY)
-		if(supply_controller.shuttle)
+		if(SSsupply.shuttle)
 			CRASH("A supply shuttle is already defined.")
-		supply_controller.shuttle = src
+		SSsupply.shuttle = src
 
 /datum/shuttle/Destroy()
 	current_location = null
 
-	shuttle_controller.shuttles -= src.name
-	shuttle_controller.process_shuttles -= src
-	shuttle_controller.shuttle_logs -= src
-	if(supply_controller.shuttle == src)
-		supply_controller.shuttle = null
+	SSshuttle.shuttles -= src.name
+	SSshuttle.process_shuttles -= src
+	SSshuttle.shuttle_logs -= src
+	if(SSsupply.shuttle == src)
+		SSsupply.shuttle = null
 
 	. = ..()
 
@@ -181,7 +183,7 @@
 		for(var/obj/structure/cable/C in A)
 			powernets |= C.powernet
 	if(logging_home_tag)
-		var/datum/shuttle_log/s_log = shuttle_controller.shuttle_logs[src]
+		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
 	translate_turfs(turf_translation, current_location.base_area, current_location.base_turf)

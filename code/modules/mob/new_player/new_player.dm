@@ -121,7 +121,7 @@
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
-			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
+			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
 
 
 			observer.started_as_observer = 1
@@ -324,7 +324,7 @@
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
 		spawn_turf = get_turf(S)
-	var/radlevel = radiation_repository.get_rads_at_turf(spawn_turf)
+	var/radlevel = SSradiation.get_rads_at_turf(spawn_turf)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus || radlevel > 0 )
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable conditions. \
@@ -381,6 +381,10 @@
 			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
+
+	if(character.cannot_stand())
+		equip_wheelchair(character)
+
 	qdel(src)
 
 
@@ -470,7 +474,7 @@
 	else
 		client.prefs.copy_to(new_character)
 
-	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
+	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
 
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually

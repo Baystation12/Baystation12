@@ -97,11 +97,9 @@
 	if(!ispath(gift_type,/obj/item))	return
 
 	var/obj/item/I = new gift_type(M)
-	M.remove_from_mob(src)
 	M.put_in_hands(I)
 	I.add_fingerprint(M)
 	qdel(src)
-	return
 
 /*
  * Wrapping Paper and Gifts
@@ -168,7 +166,7 @@
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/weapon/gift)) //No gift wrapping gifts!
 					return
 
-				if(user.drop_from_inventory(W))
+				if(user.unEquip(W))
 					var/obj/item/weapon/gift/G = new /obj/item/weapon/gift( src.loc, W )
 					G.add_fingerprint(user)
 					W.add_fingerprint(user)

@@ -24,11 +24,9 @@
 		if(pinned_target)
 			return // get rid of that pinned target first!
 
-		if(istype(W, /obj/item/target))
+		if(istype(W, /obj/item/target) && user.unEquip(W, loc))
 			set_density(0)
 			W.set_density(1)
-			user.remove_from_mob(W)
-			W.forceMove(loc)
 			W.layer = ABOVE_OBJ_LAYER
 			pinned_target = W
 			to_chat(user, "You slide the target into the stake.")
