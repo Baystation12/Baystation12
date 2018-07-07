@@ -91,18 +91,22 @@
 	for(var/m in mobs)
 		var/mob/M = m
 		if(isghost(M))
-			var/speaker_name = name
-			
-			if(speaker_name != real_name && real_name)
-				speaker_name = "[real_name]/([speaker_name])"
-			
-			speaker_name = speaker_name 
-			
-			var/track = "([ghost_follow_link(src, M)])"
+
 			var/remote = ""
 			if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+				if(!client)
+					continue
 				remote = "\[R\]"
-			
+
+			var/speaker_name = name
+
+			if(speaker_name != real_name && real_name)
+				speaker_name = "[real_name]/([speaker_name])"
+
+			speaker_name = speaker_name
+
+			var/track = "([ghost_follow_link(src, M)])"
+
 			message = track + remote + " " + speaker_name + ": " + message
 
 		if(self_message && M == src)
@@ -141,6 +145,27 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		
+		if(isghost(M))
+
+			var/remote = ""
+			if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+				if(!client)
+					continue
+				remote = "\[R\]"
+
+			var/speaker_name = name
+			
+			if(speaker_name != real_name && real_name)
+				speaker_name = "[real_name]/([speaker_name])"
+			
+			speaker_name = speaker_name 
+			
+			var/track = "([ghost_follow_link(src, M)])"
+			
+			message = track + remote + " " + speaker_name + ": " + message
+
+		
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else if(M.see_invisible >= invisibility || narrate) // Cannot view the invisible
