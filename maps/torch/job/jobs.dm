@@ -439,7 +439,6 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/ec/o1
 	)
 	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
