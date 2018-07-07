@@ -98,6 +98,13 @@ nanoui is used to open and update nano browser uis
 	var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
 	assets.send(user, ntemplate_filename)
 
+//Do not qdel nanouis. Use close() instead.
+/datum/nanoui/Destroy()
+	user = null
+	src_object = null
+	state = null
+	. = ..()
+
  /**
   * Use this proc to add assets which are common to (and required by) all nano uis
   *
@@ -405,17 +412,15 @@ nanoui is used to open and update nano browser uis
 	if(!user.client)
 		return
 
-	// An attempted fix to UIs sometimes locking up spamming runtime errors due to src_object being null for whatever reason.
-	// This hard-deletes the UI, preventing the device that uses the UI from being locked up permanently.
 	if(!src_object)
-		qdel(src)
+		close()
 
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
 	update_status(0)
 	if(status == STATUS_CLOSE)
-		return
+		return // Will be closed by update_status().
 
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
@@ -449,6 +454,7 @@ nanoui is used to open and update nano browser uis
 	children.Cut()
 	state = null
 	master_ui = null
+	qdel(src)
 
  /**
   * Set the UI window to call the nanoclose verb when the window is closed
@@ -511,13 +517,12 @@ nanoui is used to open and update nano browser uis
 
  /**
   * Process this UI, updating the entire UI or just the status (aka visibility)
-  * This process proc is called by the master_controller
   *
   * @param update string For this UI to update
   *
   * @return nothing
   */
-/datum/nanoui/proc/process(update = 0)
+/datum/nanoui/proc/try_update(update = 0)
 	if (!src_object || !user)
 		close()
 		return
@@ -526,6 +531,13 @@ nanoui is used to open and update nano browser uis
 		update() // Update the UI (update_status() is called whenever a UI is updated)
 	else
 		update_status(1) // Not updating UI, so lets check here if status has changed
+
+ /**
+  * This Process proc is called by SSnano.
+  * Use try_update() to make manual updates.
+  */
+/datum/nanoui/Process()
+	try_update(0)
 
  /**
   * Update the UI

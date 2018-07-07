@@ -67,6 +67,8 @@
 			return global.SSmisc_late;
 		if("SSmobs")
 			return global.SSmobs;
+		if("SSnano")
+			return global.SSnano;
 		if("SSobj")
 			return global.SSobj;
 		if("SSopen_space")
@@ -1054,6 +1056,8 @@
 			global.SSmisc_late=newval;
 		if("SSmobs")
 			global.SSmobs=newval;
+		if("SSnano")
+			global.SSnano=newval;
 		if("SSobj")
 			global.SSobj=newval;
 		if("SSopen_space")
@@ -2007,6 +2011,7 @@
 	"SSmapping",
 	"SSmisc_late",
 	"SSmobs",
+	"SSnano",
 	"SSobj",
 	"SSopen_space",
 	"SSprocessing",
