@@ -90,6 +90,21 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		if(isghost(M))
+			var/speaker_name = name
+			
+			if(speaker_name != real_name && real_name)
+				speaker_name = "[real_name]/([speaker_name])"
+			
+			speaker_name = speaker_name 
+			
+			var/track = "([ghost_follow_link(src, M)])"
+			var/remote = ""
+			if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+				remote = "\[R\]"
+			
+			message = track + remote + " " + speaker_name + ": " + message
+
 		if(self_message && M == src)
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
