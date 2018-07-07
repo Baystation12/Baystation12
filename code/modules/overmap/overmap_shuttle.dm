@@ -9,7 +9,7 @@
 
 	category = /datum/shuttle/autodock/overmap
 	var/skill_needed = SKILL_BASIC
-	var/pilot_skill = SKILL_MIN
+	var/operator_skill = SKILL_MIN
 
 /datum/shuttle/autodock/overmap/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
 	..(_name, start_waypoint)
@@ -46,11 +46,11 @@
 
 /datum/shuttle/autodock/overmap/get_travel_time()
 	var/distance_mod = get_dist(waypoint_sector(current_location),waypoint_sector(next_location))
-	var/skill_mod = 0.2*(skill_needed - pilot_skill)
+	var/skill_mod = 0.2*(skill_needed - operator_skill)
 	return move_time * (1 + distance_mod + skill_mod)
 
 /datum/shuttle/autodock/overmap/process_launch()
-	if(prob(10*max(0, pilot_skill - skill_needed)))
+	if(prob(10*max(0, operator_skill - skill_needed)))
 		var/places = get_possible_destinations()
 		var/place = pick(places)
 		set_destination(places[place])
