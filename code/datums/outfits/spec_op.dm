@@ -56,7 +56,7 @@
 	uniform = /obj/item/clothing/under/syndicate
 	shoes = /obj/item/clothing/shoes/combat
 	l_ear = /obj/item/device/radio/headset/syndicate/alt
-	belt = /obj/item/weapon/storage/belt/security
+	belt = /obj/item/weapon/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
 

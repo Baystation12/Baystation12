@@ -232,6 +232,7 @@
 #include "code\datums\extensions\appearance\appearance.dm"
 #include "code\datums\extensions\appearance\base_icon_state.dm"
 #include "code\datums\extensions\appearance\cardborg.dm"
+#include "code\datums\extensions\holster\holster.dm"
 #include "code\datums\extensions\multitool\_multitool.dm"
 #include "code\datums\extensions\multitool\multitool.dm"
 #include "code\datums\extensions\multitool\store.dm"

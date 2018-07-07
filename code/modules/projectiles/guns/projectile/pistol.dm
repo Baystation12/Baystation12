@@ -178,7 +178,7 @@
 			return//put the silencer into the gun
 		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
 		silenced = I	//dodgy?
-		w_class = ITEM_SIZE_NORMAL		
+		w_class = ITEM_SIZE_NORMAL
 		update_icon()
 		return
 	..()
@@ -208,6 +208,7 @@
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
 	has_safety = FALSE
+	w_class = ITEM_SIZE_NORMAL
 
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",

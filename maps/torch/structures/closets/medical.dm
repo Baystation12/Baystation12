@@ -33,6 +33,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/storage/firstaid/adv,
 		/obj/item/weapon/storage/box/armband/med,
+		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
 		RANDOM_SCRUBS

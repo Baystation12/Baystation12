@@ -128,7 +128,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
-	var/obj/item/clothing/accessory/holster/holster
+	var/obj/item/clothing/accessory/storage/holster/holster
 
 /obj/item/clothing/suit/armor/tactical/New()
 	..()

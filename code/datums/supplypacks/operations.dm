@@ -64,7 +64,7 @@
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Webbing crate"
 	num_contained = 4
-	contains = list(/obj/item/clothing/accessory/holster,
+	contains = list(/obj/item/clothing/accessory/storage/holster,
 					/obj/item/clothing/accessory/storage/black_vest,
 					/obj/item/clothing/accessory/storage/brown_vest,
 					/obj/item/clothing/accessory/storage/white_vest,
