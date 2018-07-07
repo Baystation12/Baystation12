@@ -65,6 +65,10 @@
 		do_pull_click(user, src)
 	return 1
 
+/turf/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
+
 turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
