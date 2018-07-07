@@ -104,6 +104,7 @@
 		/obj/item/taperoll/research,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
+		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel_tox)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
 	)
@@ -161,7 +162,7 @@
 		/obj/item/weapon/folder,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
-		/obj/item/weapon/storage/belt/security,
+		/obj/item/weapon/storage/belt/holster/security,
 		/obj/item/device/flash,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/melee/baton/loaded,
@@ -173,7 +174,6 @@
 		/obj/item/taperoll/research,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/accessory/badge/holo/NT,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen,

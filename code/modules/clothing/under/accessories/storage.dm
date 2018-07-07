@@ -157,6 +157,6 @@
 
 /obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
 	. = ..()
-	
+
 	for(var/i = 0, i < slots, i++)
 		new /obj/item/weapon/net_shell(hold)
