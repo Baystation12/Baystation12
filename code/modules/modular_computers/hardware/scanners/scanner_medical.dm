@@ -20,6 +20,6 @@
 	var/dat = medical_scan_results(target, 1)
 	if(driver && driver.using_scanner)
 		driver.data_buffer = html2pencode(dat)
-		GLOB.nanomanager.update_uis(driver.NM)
+		SSnano.update_uis(driver.NM)
 	user.visible_message("<span class='notice'>\The [user] runs \the [src] on \the [holder2] over \the [target].</span>")
 	to_chat(user, "<hr>[dat]<hr>")

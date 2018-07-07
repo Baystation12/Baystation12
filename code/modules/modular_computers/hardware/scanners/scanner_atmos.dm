@@ -21,7 +21,7 @@
 		return
 	if(driver && driver.using_scanner)
 		driver.data_buffer = html2pencode(data)
-		GLOB.nanomanager.update_uis(driver.NM)
+		SSnano.update_uis(driver.NM)
 	to_chat(user, data)
 
 /obj/item/weapon/computer_hardware/scanner/atmos/proc/scan_data(mob/user, atom/target, proximity = TRUE)
