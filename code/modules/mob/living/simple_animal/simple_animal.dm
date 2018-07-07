@@ -85,6 +85,8 @@
 	if(health > maxHealth)
 		health = maxHealth
 
+	eye_blurry = max(eye_blurry-2, 0)
+	confused = max(0, confused - 1)
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
