@@ -194,7 +194,7 @@
 "dL" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dM" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/obj/machinery/button/remote/blast_door{_wifi_id = "ODST4"; id = "ODST4"; name = "Privacy Shutter Control"; pixel_x = 32; pixel_y = 0; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dN" = (/turf/simulated/wall,/area/unscfrigate/odstcountry)
-"dO" = (/obj/structure/drop_pods/overmap/SOEIV{tag = "icon-SOEIV_open"; icon_state = "SOEIV_open"},/turf/simulated/floor/plating,/area/unscfrigate/odstcountry)
+"dO" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/plating,/area/unscfrigate/odstcountry)
 "dP" = (/obj/structure/sign/halo_floorsign/armory,/turf/simulated/floor/tiled,/area/unscfrigate/marine_dorms)
 "dQ" = (/obj/machinery/door/blast/atmos_close/regular{id = "marinehallway1"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/unscfrigate/marine_dorms)
 "dR" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "marinehallway1"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/tiled,/area/unscfrigate/marine_dorms)

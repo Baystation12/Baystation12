@@ -46,7 +46,7 @@
 	occupant_image.pixel_y = offsets[2]
 	overlays += occupant_image
 
-/obj/structure/drop_pods/proc/parse_offsets(var/mob/living/carbon/human/h)
+/obj/vehicles/drop_pod/proc/parse_offsets(var/mob/living/carbon/human/h)
 	var/list/offsets = splittext(species_offsets[h.species.name],",")
 	for(var/i in offsets)
 		offsets -= i
@@ -76,13 +76,20 @@
 		return
 	return pick(valid_points)
 
-/obj/vehicles/drop_pod/proc/launch_pod()
+/obj/vehicles/drop_pod/proc/is_on_launchbay()
+	for(var/obj/structure/drop_pod_launchbay/lb in loc.contents)
+		return 1
+	return 0
+
+/obj/vehicles/drop_pod/verb/launch_pod()
 	set name = "Launch Pod"
 	set src in range(1)
 	set category = "Vehicle"
 
+	if(!is_on_launchbay()) to_chat(usr,"<span class = 'notice'>[src] needs to be in a drop-bay to be launched.</span>"); return
+
 	if(launched)
-		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
+		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>"); return
 
 	var/turf/drop_turf = get_drop_turf(get_drop_point())
 	if(isnull(drop_turf)) return
@@ -110,6 +117,9 @@
 	set src in range(1)
 	set category = "Vehicle"
 
+	if(!is_on_launchbay()) to_chat(usr,"<span class = 'notice'>[src] needs to be in a drop-bay to be launched.</span>"); return
+	if(launched) to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>"); return
+
 	var/list/potential_om_targ
 	for(var/obj/effect/overmap/o in range(map_sectors["[z]"],pod_range) - map_sectors["[z]"])
 		potential_om_targ["[o.name]"] = o
@@ -136,10 +146,19 @@
 	vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
 	cargo_capacity = 8 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
 
+/obj/item/vehicle_component/health_manager/drop_pod
+	integrity = 100
+	coverage = 100
+	resistances = list("brute"= 100.0,"burn"= 100.0,"emp"= 100.0,"explosion" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
+
 /obj/structure/drop_pod_launchbay
 	name = "Drop Pod Launch Bay"
 	desc = "Machinery to secure and launch a drop pod."
+	icon = 'code/modules/halo/structures/ODST_Droppod.dmi'
+	icon_state = "launch_bay"
 
+	density = 0
+	anchored = 1
 
 /obj/effect/landmark/drop_pod_landing
 	name = "Drop Pod landing Marker"
