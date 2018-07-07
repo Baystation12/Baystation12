@@ -130,9 +130,8 @@
 	if(!I)
 		return
 
-	user.drop_item()
-	if(I)
-		I.forceMove(src)
+	if(!user.unEquip(I, src))
+		return
 
 	to_chat(user, "You place \the [I] into the [src].")
 	for(var/mob/M in viewers(src))

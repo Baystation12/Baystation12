@@ -1,6 +1,6 @@
 /obj/structure/bed/chair/wheelchair
 	name = "wheelchair"
-	desc = "You sit in this. Either by will or force."
+	desc = "Now we're getting somewhere."
 	icon_state = "wheelchair"
 	anchored = 0
 	buckle_movable = 1
@@ -189,3 +189,7 @@
 		pulling = null
 		usr.pulledby = null
 	..()
+
+/proc/equip_wheelchair(mob/living/carbon/human/H) //Proc for spawning in a wheelchair if a new character has no legs. Used in new_player.dm
+	var/obj/structure/bed/chair/wheelchair/W = new(H.loc)
+	W.buckle_mob(H)

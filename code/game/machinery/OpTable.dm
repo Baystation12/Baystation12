@@ -82,10 +82,10 @@
 
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return
-	user.drop_item()
+	if(!user.unequip_item())
+		return
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
-	return
 
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)

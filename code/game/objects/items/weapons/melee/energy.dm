@@ -212,7 +212,6 @@
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)
-	QDEL_IN(src, 0)
 
 /obj/item/weapon/melee/energy/blade/dropped()
 	..()

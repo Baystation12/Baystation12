@@ -3,11 +3,12 @@
 	name_plural = "Monkeys"
 	blurb = "Ook."
 
-	icobase = 'icons/mob/human_races/monkeys/r_monkey.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_monkey.dmi'
-	damage_overlays = 'icons/mob/human_races/masks/dam_monkey.dmi'
-	damage_mask = 'icons/mob/human_races/masks/dam_mask_monkey.dmi'
-	blood_mask = 'icons/mob/human_races/masks/blood_monkey.dmi'
+	icobase =         'icons/mob/human_races/species/monkey/monkey_body.dmi'
+	deform =          'icons/mob/human_races/species/monkey/monkey_body.dmi'
+	damage_overlays = 'icons/mob/human_races/species/monkey/damage_overlays.dmi'
+	damage_mask =     'icons/mob/human_races/species/monkey/damage_mask.dmi'
+	blood_mask =      'icons/mob/human_races/species/monkey/blood_mask.dmi'
+
 	language = null
 	default_language = "Chimpanzee"
 	greater_form = SPECIES_HUMAN
@@ -38,19 +39,7 @@
 
 	pass_flags = PASS_FLAG_TABLE
 	holder_type = /obj/item/weapon/holder
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/no_eyes),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
-		)
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/no_eyes)
 
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
@@ -84,8 +73,8 @@
 	name_plural = "Farwa"
 	health_hud_intensity = 2
 
-	icobase = 'icons/mob/human_races/monkeys/r_farwa.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_farwa.dmi'
+	icobase = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
+	deform = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
 
 	greater_form = "Tajaran"
 	default_language = "Farwa"
@@ -98,8 +87,8 @@
 	name_plural = "Neaera"
 	health_hud_intensity = 1.75
 
-	icobase = 'icons/mob/human_races/monkeys/r_neaera.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_neaera.dmi'
+	icobase = 'icons/mob/human_races/species/monkey/neaera_body.dmi'
+	deform = 'icons/mob/human_races/species/monkey/neaera_body.dmi'
 
 	greater_form = SPECIES_SKRELL
 	default_language = "Neaera"
@@ -113,8 +102,8 @@
 	name_plural = "Stok"
 	health_hud_intensity = 1.5
 
-	icobase = 'icons/mob/human_races/monkeys/r_stok.dmi'
-	deform = 'icons/mob/human_races/monkeys/r_stok.dmi'
+	icobase = 'icons/mob/human_races/species/monkey/stok_body.dmi'
+	deform = 'icons/mob/human_races/species/monkey/stok_body.dmi'
 
 	tail = "stoktail"
 	greater_form = SPECIES_UNATHI

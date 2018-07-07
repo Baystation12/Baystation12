@@ -1,6 +1,6 @@
 /mob/Logout()
 	GLOB.nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
-	tgui_process && tgui_process.on_logout(src)
+	SStgui && SStgui.on_logout(src)
 	GLOB.player_list -= src
 	log_access("Logout: [key_name(src)]")
 	handle_admin_logout()

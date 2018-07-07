@@ -16,10 +16,10 @@
 
 /datum/artifact_effect/radiate/DoEffectAura()
 	if(holder)
-		radiation_repository.radiate(holder, radiation_strength)
+		SSradiation.radiate(holder, radiation_strength)
 		return 1
 
 /datum/artifact_effect/radiate/DoEffectPulse()
 	if(holder)
-		radiation_repository.radiate(holder, radiation_strength * rand(5, 10)) //Need to get feedback on this
+		SSradiation.radiate(holder, radiation_strength * rand(5, 10)) //Need to get feedback on this
 		return 1

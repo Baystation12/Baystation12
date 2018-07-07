@@ -11,13 +11,13 @@ var/datum/robolimb/basic_robolimb
 			chargen_robolimbs[R.company] = R
 
 /datum/robolimb
-	var/company = "Unbranded"                            // Shown when selecting the limb.
-	var/desc = "A generic unbranded robotic prosthesis." // Seen when examining a limb.
-	var/icon = 'icons/mob/human_races/robotic.dmi'       // Icon base to draw from.
-	var/unavailable_at_chargen                           // If set, not available at chargen.
-	var/unavailable_at_fab                               // If set, cannot be fabricated.
+	var/company = "Unbranded"                                 // Shown when selecting the limb.
+	var/desc = "A generic unbranded robotic prosthesis."      // Seen when examining a limb.
+	var/icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi' // Icon base to draw from.
+	var/unavailable_at_chargen                                // If set, not available at chargen.
+	var/unavailable_at_fab                                    // If set, cannot be fabricated.
 	var/can_eat
-	var/use_eye_icon = "eyes_s"
+	var/has_eyes = TRUE
 	var/can_feel_pain
 	var/skintone
 	var/list/species_cannot_use = list()
@@ -128,15 +128,14 @@ var/datum/robolimb/basic_robolimb
 	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_mantis.dmi'
 	unavailable_at_fab = 1
-	use_eye_icon = "blank_eyes"
-
+	has_eyes = FALSE
 
 /datum/robolimb/morpheus/monitor
 	company = "Morpheus Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_monitor.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
-	use_eye_icon = "blank_eyes"
+	has_eyes = FALSE
 	restricted_to = list(SPECIES_IPC)
 
 /datum/robolimb/veymed

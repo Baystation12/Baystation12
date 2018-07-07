@@ -1,6 +1,5 @@
 /mob
-	var/move_delay		= 1
-	var/moving			= FALSE
+	var/moving           = FALSE
 
 /mob/proc/SelfMove(var/direction)
 	if(DoMove(direction, src) & MOVEMENT_HANDLED)
@@ -18,7 +17,12 @@
 		return (!mover.density || !density || lying)
 	return
 
-/mob/proc/setMoveCooldown(var/timeout)
+/mob/proc/SetMoveCooldown(var/timeout)
+	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
+	if(delay)
+		delay.SetDelay(timeout)
+
+/mob/proc/ExtraMoveCooldown(var/timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
 	if(delay)
 		delay.AddDelay(timeout)
@@ -60,7 +64,7 @@
 	if(!get_active_hand())
 		to_chat(usr, "<span class='warning'>You have nothing to drop in your hand.</span>")
 	else
-		drop_item()
+		unequip_item()
 
 //This gets called when you press the delete button.
 /client/verb/delete_key_pressed()
@@ -102,7 +106,7 @@
 /client/verb/drop_item()
 	set hidden = 1
 	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
-		return mob.drop_item()
+		return mob.unequip_item()
 	return
 
 
@@ -223,7 +227,7 @@
 		return 0
 	if(Check_Shoegrip())
 		return 0
-	if(m_intent == M_WALK)
+	if(MOVING_DELIBERATELY(src))
 		prob_slip *= 0.5
 	return prob_slip
 

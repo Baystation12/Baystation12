@@ -33,7 +33,6 @@
 				to_chat(user, "<span class='warning'>\The [src] is full; please empty it before you continue.</span>")
 				return
 			paperamount += paper_result
-			user.drop_from_inventory(W)
 			qdel(W)
 			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
 			if(paperamount > max_paper)
@@ -120,9 +119,6 @@
 	FireBurn()
 
 /obj/item/weapon/shreddedp/proc/FireBurn()
-	var/mob/living/M = loc
-	if(istype(M))
-		M.drop_from_inventory(src)
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	qdel(src)
 

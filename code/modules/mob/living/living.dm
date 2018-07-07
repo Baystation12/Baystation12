@@ -129,7 +129,7 @@ default behaviour is:
 		spawn(0)
 			..()
 			if (!istype(AM, /atom/movable) || AM.anchored)
-				if(confused && prob(50) && m_intent==M_RUN)
+				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
 					Weaken(2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
@@ -681,8 +681,20 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
+/mob/living/carbon/human/canUnEquip(obj/item/I)
+	if(!..())
+		return
+	if(I in internal_organs)
+		return
+	if(I in organs)
+		return
+	return 1
+
+//Organs should not be removed via inventory procs.
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
+		return
+	if(W in organs)
 		return
 	. = ..()
 

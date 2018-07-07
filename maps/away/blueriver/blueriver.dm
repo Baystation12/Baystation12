@@ -5,7 +5,7 @@
 	desc = "Sensor array detects an arctic planet with a small vessle on the planet's surface. Scans further indicate strange energy levels below the planet's surface."
 	in_space = 0
 	icon_state = "globe"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_blueriv_1",
 		"nav_blueriv_2",
 		"nav_blueriv_3",

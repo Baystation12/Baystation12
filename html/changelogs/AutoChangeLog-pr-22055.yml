@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - balance: "Blink, teleport and ethereal jaunt can no longer be cast while incapacitated."
-  - tweak: "Holographic items created by the holodeck can no longer be deconstructed."

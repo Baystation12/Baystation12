@@ -9,6 +9,7 @@
 	size = 6
 	available_on_ntnet = 1
 	requires_ntnet = 0
+	usage_flags = PROGRAM_ALL
 
 /datum/nano_module/program/reports
 	name = "Report Editor"

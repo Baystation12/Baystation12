@@ -47,6 +47,7 @@
 /mob/Initialize()
 	. = ..()
 	skillset = new skillset(src)
+	move_intent = decls_repository.get_decl(move_intent)
 	START_PROCESSING(SSmobs, src)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -147,6 +148,12 @@
 	if(istype(loc, /turf))
 		var/turf/T = loc
 		. += T.movement_delay
+
+	if ((drowsyness > 0) && !MOVING_DELIBERATELY(src))
+		. += 6
+	if(lying) //Crawling, it's slower
+		. += 8 + (weakened * 2)
+	. += move_intent.move_delay
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
 //How much the stuff the mob is pulling contributes to its movement delay.
@@ -740,7 +747,7 @@
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	setMoveCooldown(movement_delay())
+	SetMoveCooldown(movement_delay())
 	return 1
 
 
@@ -963,8 +970,10 @@
 
 	return 0
 
+// A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
+// It should not use both.
 /mob/update_icon()
-	return
+	return update_icons()
 
 /mob/verb/face_direction()
 

@@ -64,7 +64,8 @@
 /obj/item/clothing/shoes/orange/proc/attach_cuffs(var/obj/item/weapon/handcuffs/cuffs, mob/user as mob)
 	if (src.chained) return
 
-	user.drop_item()
+	if(!user.unequip_item())
+		return
 	cuffs.loc = src
 	src.chained = cuffs
 	src.slowdown_per_slot[slot_shoes] += 15

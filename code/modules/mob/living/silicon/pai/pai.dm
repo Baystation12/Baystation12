@@ -324,9 +324,8 @@
 	if(istype(H))
 		var/mob/living/M = H.loc
 		if(istype(M))
-			M.drop_from_inventory(H)
-		H.loc = get_turf(src)
-		src.loc = get_turf(H)
+			M.drop_from_inventory(H, get_turf(src))
+		src.forceMove(get_turf(src))
 
 	// Move us into the card and move the card to the ground.
 	src.loc = card

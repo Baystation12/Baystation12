@@ -4,16 +4,16 @@
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
 
-	var/obj/effect/shuttle_landmark/waypoint_station
-	var/obj/effect/shuttle_landmark/waypoint_offsite
+	var/obj/effect/shuttle_landmark/waypoint_station  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
+	var/obj/effect/shuttle_landmark/waypoint_offsite  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 
 	category = /datum/shuttle/autodock/ferry
 
 /datum/shuttle/autodock/ferry/New(_name)
 	if(waypoint_station)
-		waypoint_station = locate(waypoint_station)
+		waypoint_station = SSshuttle.get_landmark(waypoint_station)
 	if(waypoint_offsite)
-		waypoint_offsite = locate(waypoint_offsite)
+		waypoint_offsite = SSshuttle.get_landmark(waypoint_offsite)
 
 	..(_name, get_location_waypoint(location))
 

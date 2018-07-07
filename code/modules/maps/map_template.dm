@@ -68,7 +68,7 @@
 
 /datum/map_template/proc/init_shuttles()
 	for (var/shuttle_type in shuttles_to_initialise)
-		shuttle_controller.initialise_shuttle(shuttle_type)
+		SSshuttle.initialise_shuttle(shuttle_type)
 
 /datum/map_template/proc/load_new_z()
 
