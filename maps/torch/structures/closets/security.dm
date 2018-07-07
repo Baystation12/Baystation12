@@ -65,7 +65,7 @@
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/small/secure,
 		/obj/item/device/hailer,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/red,
@@ -73,6 +73,7 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/device/taperecorder,
+		/obj/item/weapon/hand_labeler,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
