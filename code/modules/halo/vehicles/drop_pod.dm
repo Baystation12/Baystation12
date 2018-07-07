@@ -27,6 +27,7 @@
 	var/pod_range = 1 //Range of pod in overmap tiles
 
 /obj/vehicles/drop_pod/update_object_sprites()
+	overlays.Cut()
 	var/mob/living/carbon/human/h
 	for(var/mob/m in occupants)
 		if(occupants[m] == "driver")
@@ -92,7 +93,7 @@
 		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>"); return
 
 	var/turf/drop_turf = get_drop_turf(get_drop_point())
-	if(isnull(drop_turf)) return
+	if(isnull(drop_turf)) to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>"); return
 
 	proc_launch_pod(usr,drop_turf)
 
@@ -121,14 +122,14 @@
 	if(launched) to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>"); return
 
 	var/list/potential_om_targ
-	for(var/obj/effect/overmap/o in range(map_sectors["[z]"],pod_range) - map_sectors["[z]"])
+	for(var/obj/effect/overmap/o in range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"])
 		potential_om_targ["[o.name]"] = o
 	var/om_user_choice = input("Select Target Object","Target Object Selection","Cancel") in potential_om_targ + list("Cancel")
 	if(om_user_choice == "Cancel") return
 	var/obj/effect/overmap/om_targ = potential_om_targ[om_user_choice]
 
 	var/turf/drop_turf = get_drop_turf(get_drop_point(om_targ.map_z))
-	if(isnull(drop_turf)) return
+	if(isnull(drop_turf)) to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>"); return
 
 	proc_launch_pod(usr,drop_turf)
 
@@ -142,7 +143,7 @@
 /datum/component_profile/drop_pod
 
 	gunner_weapons = list()
-	pos_to_check = "driver" //Allows for overriding position checks for equip/firing of mounted weapon.
+	pos_to_check = "gunner" //Allows for overriding position checks for equip/firing of mounted weapon.
 	vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
 	cargo_capacity = 8 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
 
