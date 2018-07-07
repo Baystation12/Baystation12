@@ -185,7 +185,7 @@
 
 	idle_threads.Add(active_program)
 	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
-	GLOB.nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
+	SSnano.close_uis(active_program.NM ? active_program.NM : active_program)
 	active_program = null
 	update_icon()
 	if(istype(user))
@@ -230,11 +230,11 @@
 
 /obj/item/modular_computer/proc/update_uis()
 	if(active_program) //Should we update program ui or computer ui?
-		GLOB.nanomanager.update_uis(active_program)
+		SSnano.update_uis(active_program)
 		if(active_program.NM)
-			GLOB.nanomanager.update_uis(active_program.NM)
+			SSnano.update_uis(active_program.NM)
 	else
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 
 /obj/item/modular_computer/proc/check_update_ui_need()
 	var/ui_update_needed = 0

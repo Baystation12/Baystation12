@@ -80,7 +80,7 @@
 			data["requests"] = requests
 			data["done"] = done
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "supply.tmpl", name, 1050, 800, state = state)
 		ui.set_auto_update(1)

@@ -109,7 +109,7 @@
 
 		data["ai_laws"] = all_laws
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "aidiag.tmpl", "AI Maintenance Utility", 600, 400, state = state)
 		if(host.update_layout())

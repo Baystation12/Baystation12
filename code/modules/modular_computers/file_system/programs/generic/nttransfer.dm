@@ -124,7 +124,7 @@ var/global/nttransfer_uid = 0
 			)))
 		data["servers"] = all_servers
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_transfer.tmpl", "NTNet P2P Transfer Client", 575, 700, state = state)
 		ui.auto_update_layout = 1

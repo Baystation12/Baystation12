@@ -426,7 +426,7 @@ nanoui is used to open and update nano browser uis
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()
 	//onclose(user, window_id)
-	GLOB.nanomanager.ui_opened(src)
+	SSnano.ui_opened(src)
 
  /**
   * Reinitialise this UI, potentially with a different template and/or initial data
@@ -447,7 +447,7 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/close()
 	is_auto_updating = 0
-	GLOB.nanomanager.ui_closed(src)
+	SSnano.ui_closed(src)
 	show_browser(user, null, "window=[window_id]")
 	for(var/datum/nanoui/child in children)
 		child.close()
@@ -513,7 +513,7 @@ nanoui is used to open and update nano browser uis
 			return
 
 	if ((src_object && src_object.Topic(href, href_list, state)) || map_update)
-		GLOB.nanomanager.update_uis(src_object) // update all UIs attached to src_object
+		SSnano.update_uis(src_object) // update all UIs attached to src_object
 
  /**
   * Process this UI, updating the entire UI or just the status (aka visibility)

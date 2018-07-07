@@ -138,7 +138,7 @@
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0))
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "portpump.tmpl", "Portable Pump", 480, 410, state = GLOB.physical_state)
 		ui.set_initial_data(data)

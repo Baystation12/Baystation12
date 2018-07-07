@@ -186,7 +186,7 @@
 		data["co2"] = 0
 		data["o2"] = 0
 		// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "oxyregenerator.tmpl", "Oxygen Regeneration System", 440, 300)
 		ui.set_initial_data(data)

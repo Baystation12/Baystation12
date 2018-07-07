@@ -27,7 +27,7 @@
 	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
 	data["online"] = active == 2 ? 1 : 0
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "shield.tmpl", "Shielding", 800, 500, state = state)
 		ui.set_initial_data(data)

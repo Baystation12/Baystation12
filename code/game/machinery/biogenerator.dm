@@ -144,7 +144,7 @@
 				"type_name" = type_name,
 				"products" = listed_products)))
 		data["types"] = listed_types
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "biogenerator.tmpl", "Biogenerator", 440, 600)
 		ui.set_initial_data(data)
@@ -196,7 +196,7 @@
 		qdel(I)
 	if(S)
 		state = BG_PROCESSING
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 		update_icon()
 		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 		use_power(S * 30)
@@ -212,7 +212,7 @@
 	var/cost = products[type][path]
 	cost = round(cost/build_eff)
 	points -= cost
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 	update_icon()
 	sleep(30)
 	var/atom/movable/result = new path

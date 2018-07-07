@@ -40,7 +40,7 @@
 		"name" = docking_program.get_name()
 	)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "docking_airlock_console.tmpl", name, 470, 290, state = state)

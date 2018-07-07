@@ -53,7 +53,7 @@
 				for(var/i in 1 to T.trading_items.len)
 					trades += T.print_trading_items(i)
 			data["trades"] = trades
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "merchant.tmpl", "Merchant List", 575, 700, state = state)
 		ui.auto_update_layout = 1

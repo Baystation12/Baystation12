@@ -74,7 +74,7 @@
 			shields_info.Add(temp)
 		data["shields"] = shields_info
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "shields_monitor.tmpl", "Shield Generators Monitoring", 400, 500, state = state)
 		if(host.update_layout())
@@ -107,4 +107,4 @@
 	GLOB.destroyed_event.unregister(active, src)
 	active = null
 	if(source) // source is only set if called by the shield destroyed event, which is the only time we want to update the UI
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)

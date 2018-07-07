@@ -116,7 +116,7 @@
 			data["mission_data"] = generate_mission_data(selected_mission)
 			data["view_only"] = can_view_only
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "deck_management.tmpl", name, 700, 800, state = state)
 		ui.auto_update_layout = 1
