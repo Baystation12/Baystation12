@@ -8,6 +8,7 @@
 	var/obj/item/stack/tile/mono/plated_tile
 	plane = ABOVE_TURF_PLANE
 	layer = CATWALK_LAYER
+	var/hatch_open = FALSE
 	footstep_sounds= list(
 		'sound/effects/footstep/catwalk1.ogg',
 		'sound/effects/footstep/catwalk2.ogg',
@@ -41,9 +42,10 @@
 	overlays.Cut()
 	icon_state = ""
 	var/image/I
-	for(var/i = 1 to 4)
-		I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = 1<<(i-1))
-		overlays += I
+	if(!hatch_open)
+		for(var/i = 1 to 4)
+			I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = 1<<(i-1))
+			overlays += I
 	if(plated_tile)
 		I = image('icons/obj/catwalks.dmi', "plated")
 		I.color = plated_tile.color
@@ -70,7 +72,7 @@
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>Slicing catwalk joints ...</span>")
+			to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
 			new /obj/item/stack/rods(src.loc)
 			new /obj/item/stack/rods(src.loc)
 			//Lattice would delete itself, but let's save ourselves a new obj
@@ -80,6 +82,16 @@
 				new plated_tile.build_type(src.loc)
 			qdel(src)
 		return
+	if(isCrowbar(C) && plated_tile)
+		hatch_open = !hatch_open
+		if(hatch_open)
+			playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
+			to_chat(user, "<span class='notice'>You pry open \the [src]'s maintenance hatch.</span>")
+		else
+			playsound(src, 'sound/items/Deconstruct.ogg', 100, 2)
+			to_chat(user, "<span class='notice'>You shut \the [src]'s maintenance hatch.</span>")
+		update_icon()
+		return
 	if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
 		var/obj/item/stack/tile/floor/ST = C
 		if(!ST.in_use)
@@ -88,7 +100,7 @@
 			if (!do_after(user, 10))
 				ST.in_use = 0
 				return
-			to_chat(user, "<span class='notice'>You plate the catwalk</span>")
+			to_chat(user, "<span class='notice'>You plate \the [src]</span>")
 			name = "plated catwalk"
 			ST.in_use = 0
 			src.add_fingerprint(user)
