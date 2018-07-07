@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(processing)
 	var/debug_original_process_proc // initial() does not work with procs
 
 /datum/controller/subsystem/processing/stat_entry()
-	..(processing.len)
+	..("P:[processing.len]")
 
 /datum/controller/subsystem/processing/fire(resumed = 0)
 	if (!resumed)
