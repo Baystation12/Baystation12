@@ -270,7 +270,8 @@ datum/unit_test/ladder_check/start_test()
 		if(L.allowed_directions & UP)
 			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
 		if(L.allowed_directions & DOWN)
-			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
+			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded 
+			succeeded = check_open_space(L) && succeeded
 	if(succeeded)
 		pass("All ladders are correctly setup.")
 	else
@@ -290,6 +291,13 @@ datum/unit_test/ladder_check/start_test()
 		log_bad("The ladder in the direction [dir2text(check_direction)] is not allowed to connect to [log_info_line(L)]")
 		return FALSE
 	return TRUE
+
+/datum/unit_test/ladder_check/proc/check_open_space(var/obj/structure/ladder/L)
+	if(!istype(get_turf(L), /turf/simulated/open))
+		log_bad("There is a non-open turf blocking the way for [log_info_line(L)]")
+		return FALSE
+	return TRUE
+
 
 //=======================================================================================
 
