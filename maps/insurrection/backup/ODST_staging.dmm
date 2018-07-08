@@ -1,7 +1,7 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/turf/simulated/shuttle/wall,/area/space)
 "ac" = (/turf/simulated/shuttle/wall,/area/UNSC_Staging)
-"ad" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/SOEIV,/turf/simulated/floor/plating,/area/UNSC_Staging)
+"ad" = (/obj/structure/drop_pods/SOEIV,/turf/simulated/floor/plating,/area/UNSC_Staging)
 "ae" = (/obj/machinery/vending/armory/police,/turf/simulated/floor/tiled,/area/UNSC_Staging)
 "af" = (/turf/simulated/floor/tiled,/area/UNSC_Staging)
 "ag" = (/obj/structure/closet{name = "gear locker"},/obj/item/weapon/material/knife/combat_knife,/obj/item/weapon/material/knife/combat_knife,/obj/item/weapon/material/knife/combat_knife,/obj/item/weapon/material/knife/combat_knife,/obj/item/weapon/material/knife/combat_knife,/obj/item/weapon/material/knife/combat_knife,/turf/simulated/floor/tiled,/area/UNSC_Staging)
