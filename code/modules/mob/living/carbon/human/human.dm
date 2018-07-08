@@ -1313,7 +1313,7 @@
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
 	if(!H)
-		return
+		return "0"
 	if(H.open && !method)
 		return "muddled and unclear; you can't seem to find a vein"
 
