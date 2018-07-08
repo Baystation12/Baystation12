@@ -18,7 +18,7 @@
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
-			sponge.take_damage(amount)
+			sponge.take_internal_damage(amount)
 
 /mob/living/carbon/human/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -211,7 +211,8 @@
 		pick_organs -= brain
 		pick_organs += brain
 
-	for(var/obj/item/organ/internal/I in pick_organs)
+	for(var/internal in pick_organs)
+		var/obj/item/organ/internal/I = internal
 		if(amount <= 0)
 			break
 		if(heal)
@@ -224,10 +225,10 @@
 		else
 			var/cap_dam = I.max_damage - I.damage
 			if(amount >= cap_dam)
-				I.take_damage(cap_dam, silent=TRUE)
+				I.take_internal_damage(cap_dam, silent=TRUE)
 				amount -= cap_dam
 			else
-				I.take_damage(amount, silent=TRUE)
+				I.take_internal_damage(amount, silent=TRUE)
 				amount = 0
 
 /mob/living/carbon/human/proc/can_autoheal(var/dam_type)
@@ -285,7 +286,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/obj/item/organ/external/picked = pick(parts)
 	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
 
-	if(picked.take_damage(brute, burn, damage_flags))
+	if(picked.take_external_damage(brute, burn, damage_flags))
 		BITSET(hud_updateflag, HEALTH_HUD)
 
 	updatehealth()
@@ -393,10 +394,10 @@ This function restores all organs.
 	switch(damagetype)
 		if(BRUTE)
 			damage = damage*species.brute_mod
-			created_wound = organ.take_damage(damage, 0, damage_flags, used_weapon)
+			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
 		if(BURN)
 			damage = damage*species.burn_mod
-			created_wound = organ.take_damage(0, damage, damage_flags, used_weapon)
+			created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
 		if(PAIN)
 			organ.add_pain(damage)
 		if(CLONE)

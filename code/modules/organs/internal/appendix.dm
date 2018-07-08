@@ -22,7 +22,7 @@
 					owner.visible_message("<B>\The [owner]</B> winces slightly.")
 		if(inflamed > 200)
 			if(prob(3))
-				take_damage(0.1)
+				take_internal_damage(0.1)
 				if(owner.can_feel_pain())
 					owner.visible_message("<B>\The [owner]</B> winces painfully.")
 				owner.adjustToxLoss(1)

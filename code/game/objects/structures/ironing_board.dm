@@ -92,14 +92,14 @@
 			var/mob/living/carbon/human/H = buckled_mob
 			var/zone = user.zone_sel.selecting
 			var/parsed = parse_zone(zone)
-		
+
 			visible_message("<span class='danger'>[user] begins ironing [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You begin ironing [buckled_mob]'s [parsed]!</span>")
 			if(!do_after(user, 40, src))
 				return
 			visible_message("<span class='danger'>[user] irons [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You iron [buckled_mob]'s [parsed]!</span>")
 
 			var/obj/item/organ/external/affecting = H.get_organ(zone)
-			affecting.take_damage(0, 15, used_weapon = "Hot metal")
+			affecting.take_external_damage(0, 15, used_weapon = "Hot metal")
 
 			return
 

@@ -81,7 +81,7 @@
 				if(affecting)
 					if(affecting.robotic >= ORGAN_ROBOT)
 						return
-					affecting.take_damage(5, 0)
+					affecting.take_external_damage(5, 0)
 					H.updatehealth()
 					if(affecting.can_feel_pain())
 						H.Weaken(3)

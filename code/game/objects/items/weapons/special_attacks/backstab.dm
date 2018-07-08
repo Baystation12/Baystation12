@@ -83,7 +83,7 @@ Proc returns a boolean if successful.
 				var/obj/item/organ/internal/damaged_organ = pick(stabbed_part.internal_organs) //This could be improved by checking the size of an internal organ.
 
 				var/organ_damage = damage * 0.20
-				damaged_organ.take_damage(organ_damage)
+				damaged_organ.take_internal_damage(organ_damage)
 				to_chat(user, "<span class = 'danger'>You stab [target] in the back of \His [stabbed_part]!</span>")
 				H.custom_pain("<span class = 'danger' font size='10'>You feel a stabbing pain in the back of your [stabbed_part]!</span>") //Only the stabber and stabbed should know how bad this is.
 

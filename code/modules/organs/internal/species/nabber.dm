@@ -198,5 +198,5 @@
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
 				owner.Paralyse(1)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
-				I.take_damage(5)
+				I.take_internal_damage(5)
 	..()

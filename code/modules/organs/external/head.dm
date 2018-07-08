@@ -116,7 +116,7 @@
 			owner.update_hair()
 	..()
 
-/obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon = null)
+/obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon = null)
 	. = ..()
 	if (!disfigured)
 		if (brute_dam > 40)

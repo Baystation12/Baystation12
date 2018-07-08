@@ -46,7 +46,7 @@
 		hand = user.get_organ(BP_L_HAND)
 	else
 		hand = user.get_organ(BP_R_HAND)
-	hand.take_damage(burn=2 * burn_power)
+	hand.take_external_damage(burn=2 * burn_power)
 	if(burn_power > 5)
 		user.fire_stacks += 15
 		user.IgniteMob()
