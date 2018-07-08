@@ -16,8 +16,6 @@
 	if(!psupply)
 		create_powersupply()
 
-	eye_blurry = max(eye_blurry-2, 0)
-	confused = max(0, confused - 1)
 	handle_stunned()	// Handle EMP-stun
 	lying = 0			// Handle lying down
 
@@ -35,8 +33,10 @@
 			spawn(0)
 				handle_power_failure()
 
+	handle_impaired_vision()
 	update_power_usage()
 	handle_power_oxyloss()
+	handle_confused()
 	update_sight()
 
 	process_queued_alarms()

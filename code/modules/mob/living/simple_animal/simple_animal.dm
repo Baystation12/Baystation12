@@ -85,12 +85,13 @@
 	if(health > maxHealth)
 		health = maxHealth
 
-	eye_blurry = max(eye_blurry-2, 0)
-	confused = max(0, confused - 1)
+
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
+	handle_confused()
 	handle_supernatural()
+	handle_impaired_vision()
 
 	if(buckled && can_escape)
 		if(istype(buckled, /obj/effect/energy_net))

@@ -101,7 +101,7 @@
 		else	//Not stunned.
 			src.set_stat(CONSCIOUS)
 
-		confused = max(0, confused - 1)
+		handle_confused()
 
 	else //Dead.
 		src.blinded = 1
