@@ -30,9 +30,9 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 		handle_blood()
 	..()
 
