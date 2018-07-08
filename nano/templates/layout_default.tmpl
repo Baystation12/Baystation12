@@ -1,40 +1,6 @@
-{{if data.PC_hasheader}}
-	<div style="float: left">
-		<div class='item'>
-			<table><tr>
-			{{if data.PC_batteryicon && data.PC_showbatteryicon}}
-				<td><img src='{{:data.PC_batteryicon}}'>
-			{{/if}}
-			{{if data.PC_batterypercent && data.PC_showbatteryicon}}
-				<td><b>{{:data.PC_batterypercent}}</b>
-			{{/if}}
-			{{if data.PC_ntneticon}}
-				<td><img src='{{:data.PC_ntneticon}}'>
-			{{/if}}
-			{{if data.PC_apclinkicon}}
-				<td><img src='{{:data.PC_apclinkicon}}'>
-			{{/if}}
-			{{if data.PC_stationtime}}
-				<td><b>{{:data.PC_stationtime}}<b>
-			{{/if}}
-			{{for data.PC_programheaders}}
-				<td><img src='{{:value.icon}}'>
-			{{/for}}
-			</table>
-		</div>
-	</div>
-	<div style="float: right">
-		<table><tr>
-			<td>{{:helper.link('Shutdown', null, {'PC_shutdown' : 1})}}
-			{{if data.PC_showexitprogram}}
-				<td>{{:helper.link('Exit Program', null, {'PC_exit' : 1})}}
-				<td>{{:helper.link('Minimize Program', null, {'PC_minimize' : 1})}}
-			{{/if}}
-		</table>
-	</div>
-	<div style="clear: both">
-{{/if}}
-
+<div id='uiHeaderContent' unselectable="on">
+	<!-- Add a template with the key "headerContent" to have it rendered here -->
+</div>
 <div id='uiTitleWrapper' unselectable="on"><div id='uiStatusIcon' class='icon24 uiStatusGood' unselectable="on"></div><div id='uiTitleText' unselectable="on">{{:config.title}}</div><div id='uiTitleFluff' unselectable="on"></div></div>
 <div id='uiMapWrapper' class="hidden" unselectable="on">
     <div id='uiMapHeader' unselectable="on">
