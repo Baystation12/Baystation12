@@ -250,8 +250,8 @@
 /obj/machinery/teleport/station/attackby(var/obj/item/weapon/W)
 	src.attack_hand()
 
-/obj/machinery/teleport/station/attack_ai()
-	src.attack_hand()
+/obj/machinery/teleport/station/attack_ai(var/mob/user)
+	src.attack_hand(user)
 
 /obj/machinery/teleport/station/attack_hand()
 	. = ..()
