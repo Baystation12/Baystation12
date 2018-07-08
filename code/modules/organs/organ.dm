@@ -61,7 +61,10 @@ var/list/organ_cache = list()
 		else
 			log_debug("[src] spawned in [holder] without a proper DNA.")
 
-	given_dna ? set_dna(given_dna) : (species = all_species[SPECIES_HUMAN])
+	if (given_dna)
+		set_dna(given_dna)
+	if (!species)
+		species = all_species[SPECIES_HUMAN]
 
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/datum/reagent/nutriment/protein, reagents.maximum_volume)
@@ -75,7 +78,9 @@ var/list/organ_cache = list()
 			blood_DNA = list()
 		blood_DNA.Cut()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
-		species = all_species[new_dna.species]
+		species = all_species[dna.species]
+		if (!species)
+			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 
 /obj/item/organ/proc/die()
 	damage = max_damage

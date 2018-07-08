@@ -974,12 +974,12 @@
 	else
 		if(!new_species)
 			new_species = dna.species
-		else
-			dna.species = new_species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!all_species[new_species])
 		new_species = SPECIES_HUMAN
+	if(dna)
+		dna.species = new_species
 
 	if(species)
 
