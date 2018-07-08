@@ -1,26 +1,33 @@
-/*********
- *Binary *
-*********/
-
+/* Binary */
 /crew_sensor_modifier/binary/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
-	crew_data["dead"] = H.stat > UNCONSCIOUS
+	crew_data["alert"] = FALSE
+	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
+		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
+		if (!O || O.robotic < ORGAN_ROBOT) // Don't make medical freak out over prosthetic hearts
+			var/pulse = H.pulse()
+			if(pulse == PULSE_NONE || pulse == PULSE_THREADY)
+				crew_data["alert"] = TRUE
+		if(H.get_blood_oxygenation() < BLOOD_VOLUME_SAFE)
+			crew_data["alert"] = TRUE
 	return ..()
 
-/**********
- *Jamming *
-**********/
-
+/* Jamming */
 /crew_sensor_modifier/binary/jamming
 	priority = 5
 
 /crew_sensor_modifier/binary/jamming/alive/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
-	crew_data["dead"] = FALSE
-	return MOD_SUIT_SENSORS_HANDLED
+	if (crew_data["sensor_type"] == SUIT_SENSOR_BINARY )
+		crew_data["alert"] = FALSE
+		return MOD_SUIT_SENSORS_HANDLED
+	return ..()
 
 /crew_sensor_modifier/binary/jamming/dead/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
-	crew_data["dead"] = TRUE
-	return MOD_SUIT_SENSORS_HANDLED
+	if (crew_data["sensor_type"] == SUIT_SENSOR_BINARY )
+		crew_data["alert"] = TRUE
+		return MOD_SUIT_SENSORS_HANDLED
+	return ..()
 
+/* Random */
 /crew_sensor_modifier/binary/jamming/random
 	var/error_prob = 25
 
@@ -33,4 +40,4 @@
 /crew_sensor_modifier/binary/jamming/random/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	. = ..()
 	if(prob(error_prob))
-		crew_data["dead"] = pick(TRUE, FALSE)
+		crew_data["alert"] = pick(TRUE, FALSE)

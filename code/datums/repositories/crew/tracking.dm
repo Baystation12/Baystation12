@@ -1,7 +1,4 @@
-/*********
- *Vital *
-*********/
-
+/* Tracking */
 /crew_sensor_modifier/tracking/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	if(pos)
 		var/area/A = get_area(pos)
@@ -11,10 +8,7 @@
 		crew_data["z"] = pos.z
 	return ..()
 
-/**********
- *Jamming *
-**********/
-
+/* Random */
 /crew_sensor_modifier/tracking/jamming
 	priority = 5
 

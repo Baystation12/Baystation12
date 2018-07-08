@@ -16,3 +16,4 @@
 		computer.visible_message("<span class='warning'>\The [computer]'s screen displays an error: \"Network connectivity lost - process [filename].[filetype] (PID [rand(100,999)]) terminated.\"</span>", range = 1)
 	else
 		computer.visible_message("<span class='warning'>\The [computer]'s screen briefly freezes and then shows: \"FATAL NETWORK ERROR - NTNet connection lost. Please try again later. If problem persists, please contact your system administrator.\"</span>", range = 1)
+		computer.update_icon()
