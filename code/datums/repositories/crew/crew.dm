@@ -1,14 +1,12 @@
 var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew
-	var/list/cache_data
-	var/list/cache_data_alert
+	var/list/cache_data = list()
+	var/list/cache_data_alert = list()
 	var/list/modifier_queues
 	var/list/modifier_queues_by_type
 
 /datum/repository/crew/New()
-	cache_data = list()
-	cache_data_alert = list()
 	var/PriorityQueue/general_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/binary_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/vital_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
