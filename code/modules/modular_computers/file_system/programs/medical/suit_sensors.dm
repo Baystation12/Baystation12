@@ -15,19 +15,18 @@
 
 /datum/computer_file/program/suit_sensors/process_tick()
 	..()
+
 	var/datum/nano_module/crew_monitor/NMC = NM
-	if(istype(NMC) && NMC.has_alerts())
+	if(istype(NMC) && (NMC.has_alerts() != has_alert))
 		if(!has_alert)
 			program_icon_state = "crew-red"
 			ui_header = "crew_red.gif"
-			update_computer_icon()
-			has_alert = 1
-	else
-		if(has_alert)
+		else
 			program_icon_state = "crew"
 			ui_header = "crew_green.gif"
-			update_computer_icon()
-			has_alert = 0
+		update_computer_icon()
+		has_alert = !has_alert
+
 	return 1
 
 /datum/nano_module/crew_monitor
@@ -67,7 +66,6 @@
 		// adding a template with the key "mapHeader" replaces the map header content
 		ui.add_template("mapHeader", "crew_monitor_map_header.tmpl")
 
-		// ui.auto_update_layout = 1 // Disabled as with camera monitor - breaks the UI map. Re-enable once it's fixed somehow.
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
