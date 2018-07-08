@@ -24,7 +24,7 @@
 
 /datum/surgery_step/robotics/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	
+
 	//Compensating for anatomy skill req in base proc
 	. += 10
 
@@ -346,9 +346,10 @@
 	target.adjustToxLoss(5)
 	affected.createwound(CUT, 5)
 
-	for(var/obj/item/organ/I in affected.internal_organs)
+	for(var/internal in affected.internal_organs)
+		var/obj/item/organ/internal/I = internal
 		if(I)
-			I.take_damage(rand(3,5),0)
+			I.take_internal_damage(rand(3,5))
 
 //////////////////////////////////////////////////////////////////
 //	robotic organ detachment surgery step

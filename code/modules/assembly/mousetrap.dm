@@ -36,7 +36,7 @@
 						affecting = H.get_organ(type)
 						H.Stun(3)
 			if(affecting)
-				affecting.take_damage(1, 0)
+				affecting.take_external_damage(1, 0)
 				H.updatehealth()
 		else if(ismouse(target))
 			var/mob/living/simple_animal/mouse/M = target
