@@ -1,12 +1,15 @@
 var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew
-	var/list/cache_data = list()
-	var/list/cache_data_alert = list()
+	var/list/cache_data
+	var/list/cache_data_alert
 	var/list/modifier_queues
 	var/list/modifier_queues_by_type
 
 /datum/repository/crew/New()
+	cache_data = list()
+	cache_data_alert = list()
+	
 	var/PriorityQueue/general_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/binary_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/vital_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
@@ -44,7 +47,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	if(world.time < cache_entry.timestamp)
 		return cache_entry.data
 
-	cache_data_alert[num2text(z_level)] = 0
+	cache_data_alert[num2text(z_level)] = FALSE
 	var/tracked = scan()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
@@ -58,7 +61,7 @@ var/global/datum/repository/crew/crew_repository = new()
 				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
 					crewmembers[++crewmembers.len] = crewmemberData
 					if (crewmemberData["alert"])
-						cache_data_alert[num2text(z_level)] = 1
+						cache_data_alert[num2text(z_level)] = TRUE
 
 	crewmembers = sortByKey(crewmembers, "name")
 	cache_entry.timestamp = world.time + 5 SECONDS
@@ -69,7 +72,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	return crewmembers
 
 /datum/repository/crew/proc/has_health_alert(var/z_level)
-	. = 0
+	. = FALSE
 	if(!z_level)
 		return
 	health_data(z_level) // Make sure cache doesn't get stale
