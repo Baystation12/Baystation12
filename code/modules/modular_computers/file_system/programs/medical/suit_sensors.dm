@@ -11,7 +11,7 @@
 	requires_ntnet = 1
 	network_destination = "crew lifesigns monitoring system"
 	size = 11
-	var/has_alert = 0
+	var/has_alert = FALSE
 
 /datum/computer_file/program/suit_sensors/process_tick()
 	..()
@@ -35,8 +35,8 @@
 /datum/nano_module/crew_monitor/proc/has_alerts()
 	for(var/z_level in GLOB.using_map.map_levels)
 		if (crew_repository.has_health_alert(z_level))
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /datum/nano_module/crew_monitor/Topic(href, href_list)
 	if(..()) return 1
