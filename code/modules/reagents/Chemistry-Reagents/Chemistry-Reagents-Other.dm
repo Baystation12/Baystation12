@@ -185,6 +185,19 @@
 			if(prob(2))
 				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
+		else if(M.mind && GLOB.godcult.is_antagonist(M.mind))
+			if(volume > 5)
+				M.adjustHalLoss(5)
+				M.adjustBruteLoss(1)
+				if(prob(10)) //Only annoy them a /bit/
+					to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[src];deconvert=\ref[M]'>Give Into Purity</a>\]")
+
+/datum/reagent/water/holywater/Topic(href, href_list)
+	. = ..()
+	if(!. && href_list["deconvert"])
+		var/mob/living/carbon/C = locate(href_list["deconvert"])
+		if(C.mind)
+			GLOB.godcult.remove_antagonist(C.mind,1)
 
 /datum/reagent/water/holywater/touch_turf(var/turf/T)
 	if(volume >= 5)

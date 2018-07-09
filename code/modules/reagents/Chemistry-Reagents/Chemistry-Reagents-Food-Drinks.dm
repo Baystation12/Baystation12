@@ -1913,9 +1913,9 @@
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (L && istype(L))
 			if(M.chem_doses[type] < 120)
-				L.take_damage(10 * removed, 0)
+				L.take_internal_damage(10 * removed, 0)
 			else
-				L.take_damage(100, 0)
+				L.take_internal_damage(100, 0)
 
 /datum/reagent/ethanol/red_mead
 	name = "Red Mead"
