@@ -9,21 +9,21 @@
 	name = "Torment"
 	desc = "Gives a follower the ability to cause mass hysteria and pain."
 	category = "Dark Spells"
-	base_cost = 30
+	base_cost = 50
 	boon_path = /spell/targeted/torment
 
 /datum/deity_item/boon/blood_shard
 	name = "Blood Shard"
 	desc = "Lets a follower cause a target's blood to literally explode out of their skin into dangerous projectiles."
 	category = "Dark Spells"
-	base_cost = 40
+	base_cost = 75
 	boon_path = /spell/hand/charges/blood_shard
 
 /datum/deity_item/boon/drain_blood
 	name = "Drain Blood"
 	desc = "Lets a follower drain blood from all those around them."
 	category = "Dark Spells"
-	base_cost = 60
+	base_cost = 110
 	boon_path = /spell/aoe_turf/drain_blood
 
 /datum/deity_item/phenomena/exhude_blood
