@@ -126,11 +126,6 @@
 
 	unarmed_types = list(/datum/unarmed_attack/nabber)
 
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/active_camo,
-		/mob/living/carbon/human/proc/threat_display
-		)
-
 	equip_adjust = list(
 		slot_back_str = list(NORTH = list("x" = 0, "y" = 7), EAST = list("x" = 0, "y" = 8), SOUTH = list("x" = 0, "y" = 8), WEST = list("x" = 0, "y" = 8))
 			)

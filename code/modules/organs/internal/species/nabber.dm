@@ -19,33 +19,38 @@
 	icon_state = "eyes-compound"
 	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	phoron_guard = 1
+	action_button_name = "Toggle Eye Shields"
 
 	var/eyes_shielded
 
 /obj/item/organ/internal/eyes/nabber/additional_flash_effects(var/intensity)
-	if(is_usable())
+	if(!eyes_shielded)
 		take_internal_damage(max(0, 4 * (intensity)))
 		return 1
 	else
 		return -1
 
-/obj/item/organ/internal/eyes/nabber/verb/shield_eyes()
-	set category = "Abilities"
-	set name = "Toggle Eyeshields"
-	set src in usr
+/obj/item/organ/internal/eyes/nabber/refresh_action_button()
+	. = ..()
+	if(.)
+		action.button_icon_state = "nabber-shield-[eyes_shielded ? 1 : 0]"
+		if(action.button) action.button.UpdateIcon()
 
-	eyes_shielded = !eyes_shielded
-
-	if(eyes_shielded)
-		to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
-		innate_flash_protection = FLASH_PROTECTION_MAJOR
-		owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
-		owner.update_icons()
-	else
-		to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
-		innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-		addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
-		owner.update_icons()
+/obj/item/organ/internal/eyes/nabber/attack_self(var/mob/user)
+	. = ..()
+	if(.)
+		eyes_shielded = !eyes_shielded
+		if(eyes_shielded)
+			to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
+			innate_flash_protection = FLASH_PROTECTION_MAJOR
+			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
+			owner.update_icons()
+		else
+			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
+			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
+			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
+			owner.update_icons()
+		refresh_action_button()
 
 /obj/item/organ/internal/eyes/nabber/proc/remove_shield()
 	owner.clear_fullscreen("eyeshield")
