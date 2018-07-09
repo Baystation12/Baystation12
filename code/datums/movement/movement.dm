@@ -75,12 +75,16 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 		if(H.type == handler_path)
 			return H
 
-/atom/movable/proc/DoMove(var/direction, var/mob/mover)
+// If is_external is explicitly set then use that, otherwise if the mover isn't the host assume it's external
+#define SET_IS_EXTERNAL(X) is_external = isnull(is_external) ? IS_NOT_SELF(X) : is_external
+
+/atom/movable/proc/DoMove(var/direction, var/mob/mover, var/is_external)
 	INIT_MOVEMENT_HANDLERS
+	SET_IS_EXTERNAL(mover)
 
 	for(var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
-		if(movement_handler.MayMove(mover, FALSE) & MOVEMENT_STOP)
+		if(movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
 			return MOVEMENT_HANDLED
 
 		. = movement_handler.DoMove(direction, mover)
@@ -93,9 +97,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 // This for example includes mobs bumping into each other
 /atom/movable/proc/MayMove(var/mob/mover, var/is_external)
 	INIT_MOVEMENT_HANDLERS
-
-	// If is_external is explicitly set then use that, otherwise if the mover isn't the host assume it's external
-	is_external = isnull(is_external) ? IS_NOT_SELF(mover) : is_external
+	SET_IS_EXTERNAL(mover)
 
 	for(var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
@@ -106,6 +108,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 			return TRUE
 	return TRUE
 
+#undef SET_IS_EXTERNAL
 #undef INIT_MOVEMENT_HANDLERS
 #undef REMOVE_AND_QDEL
 

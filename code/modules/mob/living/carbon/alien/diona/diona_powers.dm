@@ -5,37 +5,39 @@
 	set name = "Merge with gestalt"
 	set desc = "Merge with another diona."
 
-	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+	if(incapacitated())
 		return
 
-	if(istype(src.loc,/mob/living/carbon))
-		src.verbs -= /mob/living/carbon/alien/diona/proc/merge
+	if(istype(loc,/mob/living/carbon))
+		verbs -= /mob/living/carbon/alien/diona/proc/merge
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/carbon/C in view(1,src))
-
-		if(!(src.Adjacent(C)) || !(C.client)) continue
-
+	for(var/mob/living/carbon/C in view(1, src))
+		if(!(Adjacent(C)) || !(C.client))
+			continue
 		if(istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/D = C
 			if(D.species && D.species.name == SPECIES_DIONA)
 				choices += C
 
+	if(!choices.len)
+		to_chat(src, "<span class='notice'>There is nothing nearby to merge with.</span>")
+
 	var/mob/living/M = input(src,"Who do you wish to merge with?") in null|choices
 
 	if(!M)
-		to_chat(src, "There is nothing nearby to merge with.")
-	else if(!do_merge(M))
-		to_chat(src, "You fail to merge with \the [M]...")
+		return
+	if(!do_merge(M))
+		to_chat(src, "<span class='warning'>You fail to merge with \the [M]...</span>")
 
 /mob/living/carbon/alien/diona/proc/do_merge(var/mob/living/carbon/human/H)
-	if(!istype(H) || !src || !(src.Adjacent(H)))
+	if(!istype(H) || !H.client || QDELETED(src) || incapacitated() || !Adjacent(H))
 		return 0
 	to_chat(H, "You feel your being twine with that of \the [src] as it merges with your biomass.")
 	H.status_flags |= PASSEMOTES
 	to_chat(src, "You feel your being twine with that of \the [H] as you merge with its biomass.")
-	loc = H
+	forceMove(H)
 	verbs += /mob/living/carbon/alien/diona/proc/split
 	verbs -= /mob/living/carbon/alien/diona/proc/merge
 	return 1
@@ -46,7 +48,7 @@
 	set name = "Split from gestalt"
 	set desc = "Split away from your gestalt as a lone nymph."
 
-	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+	if(incapacitated())
 		return
 
 	if(!(istype(src.loc,/mob/living/carbon)))
@@ -58,7 +60,7 @@
 
 	var/mob/living/M = src.loc
 
-	src.loc = get_turf(src)
+	dropInto(loc)
 	src.verbs -= /mob/living/carbon/alien/diona/proc/split
 	src.verbs += /mob/living/carbon/alien/diona/proc/merge
 
