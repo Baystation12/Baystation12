@@ -470,6 +470,7 @@
 "bk" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
+	req_access = list(12)
 	req_one_access = list(73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -2345,7 +2346,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = list(93)
+	req_access = list(12,93)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/aft)
@@ -2617,6 +2618,7 @@
 "fC" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition EVA Maintenance";
+	req_access = list(12);
 	req_one_access = list(48,65)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -3665,7 +3667,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = list(93)
+	req_access = list(12,93)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -8250,7 +8252,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,73)
+	req_access = list(12,73)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -11427,7 +11429,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,73)
+	req_access = list(12,73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/aft)
@@ -16713,7 +16715,7 @@
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(31)
+	req_access = list(12,31)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -17713,7 +17715,7 @@
 "Iv" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(31)
+	req_access = list(12,31)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/techfloor/corner{
@@ -17781,7 +17783,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_one_access = list(73)
+	req_access = list(12,73)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -17974,7 +17976,7 @@
 "IX" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_one_access = list(73)
+	req_access = list(12,73)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -19612,7 +19614,7 @@
 "WI" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Laundry Maintenance";
-	req_access = list(14)
+	req_access = list(12,14)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/laundry)

@@ -1678,7 +1678,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,5,39)
+	req_access = list(12)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -4112,7 +4112,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Crematorium Maintenance";
-	req_access = list(27)
+	req_access = list(12,27)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -4608,7 +4608,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
 	name = "Synthetic Storage";
-	req_one_access = list(16)
+	req_access = list(12,16)
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -10062,7 +10062,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "First Deck Teleporter Access";
-	req_access = list(17)
+	req_access = list(12,17)
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/teleporter/firstdeck)
@@ -10364,6 +10364,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Auxiliary Cryogenic Storage Maintenance"
+	req_access = list(12)
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/sleep/cryo/aux)
@@ -17123,7 +17124,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,5,39)
+	req_access = list(12)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -17193,7 +17194,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/maintenance{
 	name = "Morgue Maintenance";
-	req_access = list(6)
+	req_access = list(6,12)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -17389,7 +17390,7 @@
 "cGb" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Infirmary Maintenance Access";
-	req_one_access = list(66)
+	req_access = list(12,66)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/white/monotile,
@@ -17660,7 +17661,7 @@
 "ddb" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Infirmary Maintenance Access";
-	req_one_access = list(66)
+	req_access = list(12,66)
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/sleeper)
@@ -22188,7 +22189,7 @@
 "jtb" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Research Maintenance Access";
-	req_one_access = list(47)
+	req_access = list(12,47)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -23001,8 +23002,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Robotics Maintenance";
-	req_access = list(82);
-	req_one_access = newlist()
+	req_access = list(12,82)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics)
@@ -27738,7 +27738,7 @@
 "seb" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Xenoflora Lab Maintenance";
-	req_access = list(55)
+	req_access = list(12,55)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/white,
