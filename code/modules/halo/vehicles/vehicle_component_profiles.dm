@@ -103,7 +103,8 @@
 	else if(prob(100 - max_comp_coverage))
 		comps_to_dam = vital_components
 	for(var/obj/item/vehicle_component/component in comps_to_dam)
-		component.damage_integrity(initial(component.integrity)/2 /(ex_severity),)
+		var/comp_resistance = component.get_resistance_for("explosion")
+		component.damage_integrity((initial(component.integrity)/2 /(ex_severity)) * (1- comp_resistance/100),)
 
 /datum/component_profile/proc/give_gunner_weapons(var/obj/vehicles/source_vehicle)
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)
@@ -131,7 +132,7 @@
 
 	var/integrity = 100
 	var/coverage = 10
-	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0) //Functions as a percentage reduction of damage of the type taken.
+	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"explosion" = 0.0) //Functions as a percentage reduction of damage of the type taken.
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)
 	var/resistance = resistances[damage_type]

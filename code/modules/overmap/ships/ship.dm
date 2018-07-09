@@ -118,6 +118,8 @@
 /obj/effect/overmap/ship/proc/break_umbilicals()
 	for(var/obj/docking_umbilical/umbi in connectors)
 		if(umbi.current_connected)
+			if(map_sectors["[umbi.current_connected.z]"] in range(1,map_sectors["[z]"])) //If the umbilical is still near us, let's not do anything.
+				continue
 			umbi.current_connected.umbi_rip()
 			umbi.umbi_rip()
 
