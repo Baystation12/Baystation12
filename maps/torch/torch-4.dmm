@@ -2181,7 +2181,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "aet" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/thruster/d1starboard)
 "aeu" = (
 /obj/machinery/camera/network/first_deck{
@@ -12434,7 +12434,7 @@
 /obj/item/stack/material/plasteel{
 	amount = 20
 	},
-/obj/item/stack/material/ocp{
+/obj/item/stack/material/duranium{
 	amount = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -13251,7 +13251,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "aPq" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/thruster/d1port)
 "aPs" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,

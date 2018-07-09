@@ -79,8 +79,8 @@
 /obj/item/weapon/ore/platinum
 	ore = /ore/platinum
 
-/obj/item/weapon/ore/osmium
-	ore = /ore/osmium
+/obj/item/weapon/ore/titanium
+	ore = /ore/titanium
 
 /obj/item/weapon/ore/hydrogen
 	ore = /ore/hydrogen

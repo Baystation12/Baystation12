@@ -26,7 +26,7 @@
 		"diamond" = /obj/item/weapon/ore/diamond,
 		"phoron" = /obj/item/weapon/ore/phoron,
 		"platinum" = /obj/item/weapon/ore/platinum,
-		"osmium" = /obj/item/weapon/ore/osmium,
+		"titanium" = /obj/item/weapon/ore/titanium,
 		"hydrogen" = /obj/item/weapon/ore/hydrogen,
 		"silicates" = /obj/item/weapon/ore/glass,
 		"carbonaceous rock" = /obj/item/weapon/ore/coal
