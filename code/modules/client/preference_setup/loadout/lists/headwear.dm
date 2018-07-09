@@ -29,22 +29,16 @@
 /datum/gear/head/cap
 	display_name = "cap selection"
 	path = /obj/item/clothing/head
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/cap/New()
 	..()
 	var/caps = list()
-	caps["black cap"] = /obj/item/clothing/head/soft/black
-	caps["blue cap"] = /obj/item/clothing/head/soft/blue
+	caps["cap"] = /obj/item/clothing/head/soft/black
 	caps["flat cap"] = /obj/item/clothing/head/flatcap
-	caps["green cap"] = /obj/item/clothing/head/soft/green
-	caps["grey cap"] = /obj/item/clothing/head/soft/grey
 	caps["mailman cap"] = /obj/item/clothing/head/mailman
-	caps["orange cap"] = /obj/item/clothing/head/soft/orange
-	caps["purple cap"] = /obj/item/clothing/head/soft/purple
 	caps["rainbow cap"] = /obj/item/clothing/head/soft/rainbow
-	caps["red cap"] = /obj/item/clothing/head/soft/red
 	caps["white cap"] = /obj/item/clothing/head/soft/mime
-	caps["yellow cap"] = /obj/item/clothing/head/soft/yellow
 	caps["major bill's shipping cap"] = /obj/item/clothing/head/soft/mbill
 	gear_tweaks += new/datum/gear_tweak/path(caps)
 
