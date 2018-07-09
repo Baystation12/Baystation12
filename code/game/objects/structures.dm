@@ -55,6 +55,12 @@
 	spawn(1) qdel(src)
 	return 1
 
+/obj/structure/proc/can_visually_connect()
+	return anchored
+
+/obj/structure/proc/can_visually_connect_to(var/obj/structure/S)
+	return istype(S, src)
+
 /obj/structure/proc/update_connections(propagate = 0)
 	var/list/dirs = list()
 	var/list/other_dirs = list()
@@ -63,8 +69,8 @@
 		return
 
 	for(var/obj/structure/S in orange(src, 1))
-		if(istype(S, src))
-			if(S.anchored)
+		if(can_visually_connect_to(S))
+			if(S.can_visually_connect())
 				if(propagate)
 					S.update_connections()
 					S.update_icon()
