@@ -1,0 +1,7 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Diona nymph and diona gestalt eyes glow in the dark."
+  - rscadd: "Diona nymphs can no longer grow into adults by themselves. Instead, they need to merge with two other nymphs, then call a vote with Call Gestalt Vote."
+  - rscadd: "Diona nymphs are now capable of headbutting seeds out of seed vendors, planting them, harvesting them, removing dead plants, eating pests and refilling water. Chirp."
+  - rscadd: "Diona nymphs now have a proper UI."

@@ -142,13 +142,16 @@
 	if(prob(50) && spawn_diona_nymph(get_turf(src)))
 		qdel(src)
 
-/obj/item/organ/external/head/no_eyes/diona
+/obj/item/organ/external/head/diona
 	can_intake_reagents = 0
 	cannot_break = 1
 	max_damage = 50
 	min_broken_damage = 25
+	glowing_eyes = TRUE
+	eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
+	apply_eye_colour = FALSE
 
-/obj/item/organ/external/head/no_eyes/diona/removed()
+/obj/item/organ/external/head/diona/removed()
 	if(robotic >= ORGAN_ROBOT)
 		return ..()
 	var/mob/living/carbon/human/H = owner

@@ -24,6 +24,7 @@
 	var/graffiti_style
 	var/tmp/last_cached_eye_colour
 	var/tmp/last_eye_cache_key
+	var/apply_eye_colour = TRUE
 
 /obj/item/organ/external/head/proc/get_eye_cache_key()
 	last_cached_eye_colour = rgb(128,0,0)
@@ -50,7 +51,8 @@
 		var/cache_key = get_eye_cache_key()
 		if(!human_icon_cache[cache_key])
 			var/icon/eyes_icon = icon(icon = eye_icon_location, icon_state = "")
-			eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
+			if(apply_eye_colour)
+				eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
 			human_icon_cache[cache_key] = eyes_icon
 		return human_icon_cache[cache_key]
 
