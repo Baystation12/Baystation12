@@ -307,11 +307,19 @@
 
 /obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
 	var/changed = 0
+	var/static/list/size_to_icon = list(
+			"3" = 'icons/effects/96x96.dmi', 
+			"5" = 'icons/effects/160x160.dmi', 
+			"7" = 'icons/effects/224x224.dmi', 
+			"9" = 'icons/effects/288x288.dmi', 
+			"11" = 'icons/effects/352x352.dmi', 
+			"13" = 'icons/effects/416x416.dmi'
+			)
 
 	if( ((newsize-1)%2==0) && (newsize<=13) )
 		icon = 'icons/obj/machines/power/fusion.dmi'
 		if(newsize>1)
-			icon = "icons/effects/[newsize*32]x[newsize*32].dmi"
+			icon = size_to_icon["[newsize]"]
 		icon_state = "emfield_s[newsize]"
 		pixel_x = ((newsize-1) * -16) * PIXEL_MULTIPLIER
 		pixel_y = ((newsize-1) * -16) * PIXEL_MULTIPLIER
