@@ -28,6 +28,7 @@
 	assailant = attacker
 	affecting = victim
 	target_zone = attacker.zone_sel.selecting
+	attacker.remove_cloaking_source(attacker.species)
 	var/obj/item/O = get_targeted_organ()
 	SetName("[name] ([O.name])")
 
@@ -130,7 +131,7 @@
 
 /obj/item/grab/proc/init()
 	last_target = assailant.zone_sel.selecting
-	affecting.update_canmove()
+	affecting.UpdateLyingBuckledAndVerbStatus()
 	adjust_position()
 	update_icons()
 	action_used()
@@ -146,6 +147,7 @@
 		return 0
 
 /obj/item/grab/proc/action_used()
+	assailant.remove_cloaking_source(assailant.species)
 	last_action = world.time
 
 /obj/item/grab/proc/check_action_cooldown()

@@ -4,7 +4,7 @@
 	feedback = "TM"
 	school = "illusion"
 	charge_max = 150
-	spell_flags = 0
+	spell_flags = NOFACTION
 	invocation = "Rai Di-Kaal!"
 	invocation_type = SpI_SHOUT
 	range = 5

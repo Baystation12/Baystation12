@@ -199,8 +199,8 @@
 		power_change()
 		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
-		user.drop_item()
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		coin = W
 		categories |= CAT_COIN
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
@@ -236,7 +236,6 @@
 	cashmoney.worth -= currently_vending.price
 
 	if(cashmoney.worth <= 0)
-		usr.drop_from_inventory(cashmoney)
 		qdel(cashmoney)
 	else
 		cashmoney.update_icon()
@@ -914,7 +913,8 @@
 		/obj/item/weapon/storage/med_pouch/trauma,
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/med_pouch/oxyloss,
-		/obj/item/weapon/storage/med_pouch/toxin = 2
+		/obj/item/weapon/storage/med_pouch/toxin,
+		/obj/item/weapon/storage/med_pouch/radiation
 		)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3, /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 2)
 
@@ -1054,7 +1054,7 @@
 	//req_access = list(access_maint_tunnels) //Maintenance access
 	products = list(/obj/item/stack/cable_coil/random = 10,/obj/item/weapon/crowbar = 5,/obj/item/weapon/weldingtool = 3,/obj/item/weapon/wirecutters = 5,
 					/obj/item/weapon/wrench = 5,/obj/item/device/analyzer = 5,/obj/item/device/t_scanner = 5,/obj/item/weapon/screwdriver = 5,
-					/obj/item/device/flashlight/glowstick = 3, /obj/item/device/flashlight/glowstick/red = 3)
+					/obj/item/device/flashlight/flare/glowstick = 3, /obj/item/device/flashlight/flare/glowstick/red = 3)
 	contraband = list(/obj/item/weapon/weldingtool/hugetank = 2,/obj/item/clothing/gloves/insulated/cheap = 2)
 	premium = list(/obj/item/clothing/gloves/insulated = 1)
 
@@ -1121,7 +1121,7 @@
 	name = "Smashing Fashions"
 	desc = "For all your cheap knockoff needs."
 	product_slogans = "Look smashing for your darling!;Be rich! Dress rich!"
-	icon_state = "Theater"
+	icon_state = "theater"
 	vend_delay = 15
 	vend_reply = "Absolutely smashing!"
 	product_ads = "Impress the love of your life!;Don't look poor, look rich!;100% authentic designers!;All sales are final!;Lowest prices guaranteed!"
@@ -1158,3 +1158,64 @@
 	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/spinningtoy = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
 	premium = list(/obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
+
+//Cajoes/Kyos/BloodyMan's Lavatory Articles Dispensiary
+
+/obj/machinery/vending/lavatory
+	name = "Lavatory Essentials"
+	desc = "Vends things that make you less reviled in the work-place!"
+	vend_delay = 15
+	product_slogans = "Take a shower you hippie.;Get a haircut, hippie!;Reeking of vox taint? Take a shower!"
+
+	icon_state = "lavatory"
+	products = list(/obj/item/weapon/soap = 4,
+					/obj/item/weapon/soap/nanotrasen = 4,
+					/obj/item/weapon/soap/deluxe = 4,
+					/obj/item/weapon/mirror = 8,
+					/obj/item/weapon/haircomb/random = 8,
+					/obj/item/weapon/haircomb/brush = 4,
+					/obj/item/weapon/towel/random = 6
+					)
+	premium = list(/obj/item/weapon/soap/gold = 1)
+	contraband = list(/obj/item/weapon/soap/syndie = 4,
+					  /obj/item/weapon/inflatable_duck = 1)
+	prices = list(/obj/item/weapon/soap = 20,
+				  /obj/item/weapon/soap/nanotrasen = 30,
+				  /obj/item/weapon/soap/deluxe = 60,
+				  /obj/item/weapon/soap/syndie = 10,
+				  /obj/item/weapon/mirror = 40,
+				  /obj/item/weapon/haircomb/random = 40,
+				  /obj/item/weapon/haircomb/brush = 80,
+				  /obj/item/weapon/towel/random = 50
+					)
+
+//a food variant of the boda machine, only has one item currently.
+/obj/machinery/vending/snix
+	name = "Snix"
+	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"
+	vend_delay = 30
+	product_slogans = "Snix!"
+
+	icon_state = "snix"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/caviar = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 4
+					)
+
+
+/obj/machinery/vending/hotfood
+	name = "Hot Foods"
+	desc = "An old vending machine promising 'hot foods'. You doubt any of its contents are still edible."
+	vend_delay = 40
+
+	icon_state = "hotfood"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/old/pizza = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/burger = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/hamburger = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/fries = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/hotdog = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/taco = 1
+					)

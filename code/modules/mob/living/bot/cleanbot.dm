@@ -37,9 +37,10 @@
 			ignore_list -= g
 
 /mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view + 1)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
+	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
 		if(confirmTarget(D))
 			target = D
+			playsound(src, 'sound/machines/boop1.ogg', 30)
 			return
 
 /mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
@@ -77,6 +78,7 @@
 		qdel(D)
 		if(D == target)
 			target = null
+	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
 	update_icons()
 
@@ -171,13 +173,11 @@
 /obj/item/weapon/bucket_sensor/attackby(var/obj/item/O, var/mob/user)
 	..()
 	if(istype(O, /obj/item/robot_parts/l_arm) || istype(O, /obj/item/robot_parts/r_arm))
-		user.drop_item()
 		qdel(O)
 		var/turf/T = get_turf(loc)
 		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
 		A.SetName(created_name)
 		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
-		user.drop_from_inventory(src)
 		qdel(src)
 
 	else if(istype(O, /obj/item/weapon/pen))

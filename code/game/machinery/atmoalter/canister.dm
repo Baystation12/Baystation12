@@ -120,7 +120,7 @@
 	if(connected_port)
 		update_flag |= 2
 
-	var/tank_pressure = air_contents.return_pressure()
+	var/tank_pressure = return_pressure()
 	if(tank_pressure < 10)
 		update_flag |= 4
 	else if(tank_pressure < ONE_ATMOSPHERE)
@@ -464,3 +464,38 @@ update_flag
 	..()
 	src.air_contents.adjust_gas("hydrogen", MolesForPressure())
 	src.update_icon()
+
+// Spawn debug tanks.
+/obj/machinery/portable_atmospherics/canister/helium
+	name = "\improper Canister \[He\]"
+	icon_state = "black"
+	canister_color = "black"
+	can_label = 0
+
+/obj/machinery/portable_atmospherics/canister/helium/New()
+	..()
+	air_contents.adjust_gas("helium", MolesForPressure())
+	update_icon()
+
+/obj/machinery/portable_atmospherics/canister/methyl_bromide
+	name = "\improper Canister \[CH3Br\]"
+	icon_state = "black"
+	canister_color = "black"
+	can_label = 0
+
+/obj/machinery/portable_atmospherics/canister/methyl_bromide/New()
+	..()
+	air_contents.adjust_gas("methyl_bromide", MolesForPressure())
+	update_icon()
+
+/obj/machinery/portable_atmospherics/canister/chlorine
+	name = "\improper Canister \[Cl\]"
+	icon_state = "black"
+	canister_color = "black"
+	can_label = 0
+
+/obj/machinery/portable_atmospherics/canister/chlorine/New()
+	..()
+	air_contents.adjust_gas("chlorine", MolesForPressure())
+	update_icon()
+// End debug tanks.

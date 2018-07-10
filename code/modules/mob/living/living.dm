@@ -17,7 +17,7 @@
 
 //mob verbs are faster than object verbs. See above.
 /mob/living/pointed(atom/A as mob|obj|turf in view())
-	if(src.stat || !src.canmove || src.restrained())
+	if(incapacitated())
 		return 0
 	if(src.status_flags & FAKEDEATH)
 		return 0
@@ -129,7 +129,7 @@ default behaviour is:
 		spawn(0)
 			..()
 			if (!istype(AM, /atom/movable) || AM.anchored)
-				if(confused && prob(50) && m_intent=="run")
+				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
 					Weaken(2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
@@ -173,7 +173,7 @@ default behaviour is:
 	//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
 	if(!(tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())))
 		return 0
-	if(!tmob.canmove || !canmove)
+	if(!tmob.MayMove(src) || incapacitated())
 		return 0
 
 	if(swap_density_check(src, tmob))
@@ -230,17 +230,13 @@ default behaviour is:
 
 	return temperature
 
-
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
-// Stop! ... Hammertime! ~Carn
-// I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
-
 /mob/living/proc/getBruteLoss()
 	return maxHealth - health
 
 /mob/living/proc/adjustBruteLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	health = max(health-amount, 0)
+	if (status_flags & GODMODE)
+		return
+	health = Clamp(health - amount, 0, maxHealth)
 
 /mob/living/proc/getOxyLoss()
 	return 0
@@ -492,7 +488,7 @@ default behaviour is:
 		for(var/mob/living/M in range(src, 1))
 			if ((M.pulling == src && M.stat == 0 && !( M.restrained() )))
 				t7 = null
-	if ((t7 && (pulling && ((get_dist(src, pulling) <= 1 || pulling.loc == loc) && (client && client.moving)))))
+	if ((t7 && (pulling && ((get_dist(src, pulling) <= 1 || pulling.loc == loc) && (moving)))))
 		var/turf/T = loc
 		. = ..()
 
@@ -685,8 +681,20 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
+/mob/living/carbon/human/canUnEquip(obj/item/I)
+	if(!..())
+		return
+	if(I in internal_organs)
+		return
+	if(I in organs)
+		return
+	return 1
+
+//Organs should not be removed via inventory procs.
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
+		return
+	if(W in organs)
 		return
 	. = ..()
 
@@ -780,6 +788,8 @@ default behaviour is:
 		. += 15
 	if(confused)
 		. += 30
+	if(CLUMSY in mutations)
+		. += 40
 
 /mob/living/proc/ranged_accuracy_mods()
 	. = 0
@@ -791,3 +801,5 @@ default behaviour is:
 		. -= 5
 	if(eye_blurry)
 		. -= 1
+	if(CLUMSY in mutations)
+		. -= 3

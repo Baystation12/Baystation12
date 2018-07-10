@@ -1,5 +1,4 @@
 /obj/item/weapon/card/id/syndicate
-	name = "agent card"
 	icon_state = "syndicate"
 	assignment = "Agent"
 	origin_tech = list(TECH_ILLEGAL = 3)
@@ -119,7 +118,6 @@
 				if(!isnull(new_job) && CanUseTopic(user, state))
 					src.assignment = new_job
 					to_chat(user, "<span class='notice'>Occupation changed to '[new_job]'.</span>")
-					update_name()
 					. = 1
 			if("Blood Type")
 				var/default = blood_type
@@ -158,7 +156,6 @@
 				var/new_name = sanitizeName(input(user,"What name would you like to put on this card?","Agent Card Name", registered_name) as null|text, allow_numbers=TRUE)
 				if(!isnull(new_name) && CanUseTopic(user, state))
 					src.registered_name = new_name
-					update_name()
 					to_chat(user, "<span class='notice'>Name changed to '[new_name]'.</span>")
 					. = 1
 			if("Photo")

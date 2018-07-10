@@ -3,14 +3,13 @@
 	icon = 'icons/mob/AI.dmi'//
 	icon_state = "ai"
 	anchored = 1 // -- TLE
-	canmove = 0
+	movement_handlers = list(/datum/movement_handler/no_move)
 
 /mob/living/silicon/decoy/New()
 	src.icon = 'icons/mob/AI.dmi'
 	src.icon_state = "ai"
 	src.anchored = 1
-	src.canmove = 0
 
 /mob/living/silicon/decoy/Initialize()
-	initialized = TRUE
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_NORMAL

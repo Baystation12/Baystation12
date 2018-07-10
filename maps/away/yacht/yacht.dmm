@@ -7,7 +7,7 @@
 /turf/space,
 /area/space)
 "ac" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/yacht/bridge)
 "ad" = (
@@ -37,8 +37,10 @@
 /turf/simulated/floor/wood,
 /area/yacht/bridge)
 "aj" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/sensors{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/wood,
 /area/yacht/bridge)
 "ak" = (
@@ -49,8 +51,10 @@
 /turf/simulated/floor/wood,
 /area/yacht/bridge)
 "al" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/simulated/floor/wood,
 /area/yacht/bridge)
 "am" = (
@@ -424,7 +428,7 @@
 /turf/simulated/wall/wood,
 /area/yacht/living)
 "bk" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/yacht/living)
 "bl" = (
@@ -1108,8 +1112,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "dj" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "dk" = (

@@ -6,7 +6,10 @@
 
 	tally += species.handle_movement_delay_special(src)
 
-	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
+	if (istype(loc, /turf/space)) // It's hard to be slowed down in space by... anything
+		if(skill_check(SKILL_EVA, SKILL_PROF))
+			return -2
+		return -1 
 
 	if(embedded_flag || (stomach_contents && stomach_contents.len))
 		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
@@ -43,10 +46,8 @@
 				item_slowdown += I.slowdown_accessory
 
 				if(item_slowdown >= 0)
-					var/size_mod = 0
-					if(!(mob_size == MOB_MEDIUM))
-						size_mod = log(2, mob_size / MOB_MEDIUM)
-					if(species.strength + size_mod + 1 > 0)
+					var/size_mod = size_strength_mod()
+					if(size_mod + 1 > 0)
 						item_slowdown = item_slowdown / (species.strength + size_mod + 1)
 					else
 						item_slowdown = item_slowdown - species.strength - size_mod
@@ -80,10 +81,14 @@
 
 	return (tally+config.human_delay)
 
-/mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
-	//Can we act?
-	if(restrained())	return 0
+/mob/living/carbon/human/size_strength_mod()
+	. = ..()
+	. += species.strength
 
+/mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
+	. = ..()
+	if(.)
+		return
 	//Do we have a working jetpack?
 	var/obj/item/weapon/tank/jetpack/thrust
 	if(back)
@@ -95,14 +100,15 @@
 				thrust = module.jets
 				break
 
-	if(thrust)
+	if(thrust && thrust.on)
+		if(prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
+			to_chat(src, "<span class='warning'>You fumble with [thrust] controls!</span>")
+			inertia_dir = pick(GLOB.cardinal)
+			return 0
+
 		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.allow_thrust(0.01, src)))
 			inertia_dir = 0
 			return 1
-
-	//If no working jetpack then use the other checks
-	. = ..()
-
 
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)
 	if(!..())
@@ -122,3 +128,20 @@
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0
+
+/mob/living/carbon/human/Move()
+	. = ..()
+	if(.) //We moved
+		handle_exertion()
+
+/mob/living/carbon/human/proc/handle_exertion()
+	if(isSynthetic())
+		return
+	var/lac_chance =  10 * encumbrance()
+	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
+		make_reagent(1, /datum/reagent/lactate)
+		switch(rand(1,20))
+			if(1)
+				visible_message("<span class='notice'>\The [src] is sweating heavily!</span>", "<span class='notice'>You are sweating heavily!</span>")
+			if(2)
+				visible_message("<span class='notice'>\The [src] looks out of breath!</span>", "<span class='notice'>You are out of breath!</span>")

@@ -6,7 +6,6 @@
 	randpixel = 5
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
-	atom_flags = null
 
 	var/plantname
 	var/datum/seed/seed
@@ -245,7 +244,6 @@
 		if(prob(35))
 			if(user)
 				to_chat(user, "<span class='danger'>\The [src] has fallen to bits.</span>")
-				user.drop_from_inventory(src)
 			qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack_self(mob/user as mob)

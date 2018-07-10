@@ -15,6 +15,7 @@
 	var/damtype = "brute"
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
+	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -157,3 +158,6 @@
 	if(Adjacent(user))
 		add_fingerprint(user)
 	..()
+
+/obj/proc/get_cell()
+	return

@@ -5,7 +5,6 @@
 /obj/item/organ/external
 	name = "external"
 	min_broken_damage = 30
-	max_damage = 0
 	dir = SOUTH
 	organ_tag = "limb"
 	appearance_flags = PIXEL_SCALE
@@ -19,6 +18,7 @@
 	var/brute_ratio = 0                // Ratio of current brute damage to max damage.
 	var/burn_dam = 0                   // Actual current burn damage.
 	var/burn_ratio = 0                 // Ratio of current burn damage to max damage.
+	var/can_heal_overkill = 0          // Whether organ can be still healed once past max_damage in brute/burn.
 	var/last_dam = -1                  // used in healing/processing calculations.
 	var/pain = 0                       // How much the limb hurts.
 	var/pain_disability_threshold      // Point at which a limb becomes unusable due to pain.
@@ -148,7 +148,7 @@
 
 	if(burn_damage)
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
-		take_damage(0, burn_damage, 0, used_weapon = "Hot metal")
+		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 
 /obj/item/organ/external/attack_self(var/mob/user)
 	if(!contents.len)
@@ -442,7 +442,7 @@ This function completely restores a damaged organ to perfect condition.
 		switch(type)
 			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
 			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
-		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume * fluid_loss_severity
+		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
@@ -472,7 +472,7 @@ This function completely restores a damaged organ to perfect condition.
 	var/wound_type = get_wound_type(type, damage)
 
 	if(wound_type)
-		var/datum/wound/W = new wound_type(damage)
+		var/datum/wound/W = new wound_type(damage, src)
 
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
@@ -564,16 +564,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 		handle_germ_effects()
 
 /obj/item/organ/external/proc/handle_germ_sync()
-	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
+	var/turf/simulated/T = get_turf(owner)
 	for(var/datum/wound/W in wounds)
 		//Open wounds can become infected
-		if (owner.germ_level > W.germ_level && W.infection_check())
+		if(max(istype(T) && T.dirt*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
 			W.germ_level++
 
-	if (antibiotics < 5)
+	var/antibiotics = owner.chem_effects[CE_ANTIBIOTIC]
+	if (!antibiotics)
 		for(var/datum/wound/W in wounds)
 			//Infected wounds raise the organ's germ level
-			if (W.germ_level > germ_level)
+			if (W.germ_level > germ_level || prob(min(W.germ_level, 30)))
 				germ_level++
 				break	//limit increase to a maximum of one per second
 
@@ -783,6 +784,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(parent_organ)
 		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
 		if(clean)
+			W.parent_organ = parent_organ
 			parent_organ.wounds |= W
 			parent_organ.update_damages()
 		else
@@ -793,6 +795,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			stump.add_pain(max_damage)
 			if(robotic >= ORGAN_ROBOT)
 				stump.robotize()
+			W.parent_organ = stump
 			stump.wounds |= W
 			victim.organs |= stump
 			if(disintegrate != DROPLIMB_BURN)
@@ -923,6 +926,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 	for(var/datum/wound/W in wounds)
 		if(W.clamped)
 			return 1
+
+obj/item/organ/external/proc/remove_clamps()
+	var/rval = 0
+	for(var/datum/wound/W in wounds)
+		rval |= W.clamped
+		W.clamped = 0
+	return rval
 
 // open incisions and expose implants
 // this is the retract step of surgery
@@ -1211,8 +1221,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return
 	if(internal_organs.len && prob(brute_dam + force))
 		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
-		var/obj/item/organ/I = pick(internal_organs)
-		I.take_damage(rand(3,5))
+		var/obj/item/organ/internal/I = pick(internal_organs)
+		I.take_internal_damage(rand(3,5))
 
 /obj/item/organ/external/proc/get_wounds_desc()
 	if(robotic >= ORGAN_ROBOT)

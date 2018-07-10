@@ -7,8 +7,12 @@
 	var/active = 0
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("patted", "tapped")
+	force = 3
+	edge = 0
+	sharp = 0
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	attack_cooldown_modifier = -1
 
 /obj/item/weapon/material/butterfly/update_force()
 	if(active)
@@ -21,13 +25,19 @@
 		w_class = ITEM_SIZE_NORMAL
 		attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	else
-		force = 3
-		edge = 0
-		sharp = 0
+		force = initial(force)
+		edge = initial(edge)
+		sharp = initial(sharp)
 		hitsound = initial(hitsound)
 		icon_state = initial(icon_state)
 		w_class = initial(w_class)
 		attack_verb = initial(attack_verb)
+
+/obj/item/weapon/material/butterfly/attack(mob/living/M, mob/user, var/target_zone)
+	..()
+	if(ismob(M))
+		backstab(M, user, 60, BRUTE, DAM_SHARP, target_zone, TRUE)
+
 
 /obj/item/weapon/material/butterfly/switchblade
 	name = "switchblade"

@@ -14,6 +14,7 @@
 /turf/unsimulated/beach/water
 	name = "Water"
 	icon_state = "water"
+	turf_flags = TURF_IS_WET
 
 /turf/unsimulated/beach/water/New()
 	..()

@@ -51,9 +51,9 @@ obj/structure/closet/crate
 			return
 	else if(istype(W, /obj/item/device/assembly_holder) || istype(W, /obj/item/device/assembly))
 		if(rigged)
+			if(!user.unEquip(W, src))
+				return
 			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
-			user.drop_item()
-			W.forceMove(src)
 			return
 	else if(isWirecutter(W))
 		if(rigged)
@@ -317,10 +317,18 @@ obj/structure/closet/crate
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS
+	
+	storage_capacity = 2 * MOB_LARGE
+	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
-	return list(/mob/living/carbon/human/blank, /obj/item/usedcryobag)
+	return list(/obj/structure/closet/body_bag/cryobag/blank)
+
+/obj/structure/closet/crate/secure/biohazard/blanks/can_close()
+	for(var/obj/structure/closet/closet in get_turf(src))
+		if(closet != src && !(istype(closet, /obj/structure/closet/body_bag/cryobag)))
+			return 0
+	return 1
 
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"

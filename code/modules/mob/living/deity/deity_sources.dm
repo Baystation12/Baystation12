@@ -9,6 +9,13 @@
 	C.set_connected_god(src)
 	if(form)
 		L.faction = form.faction
+	update_followers()
+	GLOB.destroyed_event.register(L,src, .proc/dead_follower)
+	GLOB.death_event.register(L,src, .proc/update_followers)
+
+/mob/living/deity/proc/dead_follower(var/mob/living/L)
+	GLOB.death_event.unregister(L,src)
+	GLOB.destroyed_event.unregister(L,src)
 
 /mob/living/deity/proc/remove_follower_spells(var/datum/mind/M)
 	if(M.learned_spells)
@@ -27,22 +34,11 @@
 	L.faction = "neutral"
 	if(L.mind)
 		remove_follower_spells(L.mind)
-
-/mob/living/deity/proc/adjust_power(var/amount, var/silent = 0, var/msg)
-	power_min = max(0, power_min + amount)
-	if(!silent)
-		var/feel = ""
-		if(abs(amount) > 20)
-			feel = " immensely"
-		else if(abs(amount) > 10)
-			feel = " greatly"
-		if(abs(amount) >= 5)
-			var/class = amount > 0 ? "notice" : "warning"
-			to_chat(src, "<span class='[class]'>You feel your power [amount > 0 ? "increase" : "decrease"][feel][msg ? " [msg]" : ""]</span>")
+	update_followers()
 
 
 /mob/living/deity/proc/adjust_source(var/amount, var/atom/source, var/silent = 0, var/msg)
-	adjust_power(amount, silent, msg)
+	adjust_power_min(amount, silent, msg)
 	if(!ismovable(source))
 		return
 	if(amount > 0)
@@ -71,6 +67,7 @@
 		to_chat(minion.current, "Your master is now known as [new_name]")
 		minion.special_role = "Servant of [new_name]"
 	eyeobj.SetName("[src] ([eyeobj.name_sufix])")
+	nano_data["name"] = new_name
 	return 1
 
 //Whether we are near an important structure.
@@ -85,9 +82,3 @@
 		if(get_dist(T, s) <= 3)
 			return 1
 	return 0
-
-/mob/living/deity/proc/take_cost(var/amount)
-	if(amount)
-		GLOB.nanomanager.update_uis(mob_uplink)
-		mob_uplink.uses -= amount
-		mob_uplink.used_TC += amount

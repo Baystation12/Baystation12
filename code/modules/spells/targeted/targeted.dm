@@ -30,6 +30,10 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	var/amt_eye_blind = 0
 	var/amt_eye_blurry = 0
 
+	var/effect_state = null //What effect to show on each, if any
+	var/effect_duration = 0
+	var/effect_color = "#ffffff"
+
 	var/list/compatible_mobs = list()
 
 
@@ -56,6 +60,10 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 
 			for(var/mob/living/M in starting_targets)
 				if(!(spell_flags & INCLUDEUSER) && M == user)
+					continue
+				if((spell_flags & NOFACTION) && user.faction == M.faction)
+					continue
+				if((spell_flags & NONONFACTION) && user.faction != M.faction)
 					continue
 				if(compatible_mobs && compatible_mobs.len)
 					if(!is_type_in_list(M, compatible_mobs)) continue
@@ -157,3 +165,6 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	target.dizziness += amt_dizziness
 	target.confused += amt_confused
 	target.stuttering += amt_stuttering
+	if(effect_state)
+		var/obj/o = new /obj/effect/temporary(get_turf(target), effect_duration, 'icons/effects/effects.dmi', effect_state)
+		o.color = effect_color

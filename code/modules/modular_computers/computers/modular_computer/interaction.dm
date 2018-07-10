@@ -187,12 +187,11 @@
 			to_chat(user, "You try to insert [I] into [src], but its ID card slot is occupied.")
 			return
 
-		user.drop_from_inventory(I)
+		if(!user.unEquip(I, src))
+			return
 		card_slot.stored_card = I
-		I.forceMove(src)
 		update_uis()
 		update_verbs()
-		update_name()
 		to_chat(user, "You insert [I] into [src].")
 
 		return
@@ -200,16 +199,20 @@
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
 			return
-		user.drop_from_inventory(W)
+		if(!user.unEquip(W, src))
+			return
 		stored_pen = W
-		W.forceMove(src)
 		update_verbs()
 		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
 		return
-	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
-		if(!nano_printer)
+	if(istype(W, /obj/item/weapon/paper))
+		var/obj/item/weapon/paper/paper = W
+		if(scanner && paper.info)
+			scanner.do_on_attackby(user, W)
 			return
-		nano_printer.attackby(W, user)
+	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
+		if(nano_printer)
+			nano_printer.attackby(W, user)
 	if(istype(W, /obj/item/weapon/aicard))
 		if(!ai_slot)
 			return
@@ -282,8 +285,16 @@
 
 	if(enabled && .)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
+		
+	if(card_slot && card_slot.stored_card)
+		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
 
 /obj/item/modular_computer/MouseDrop(var/atom/over_object)
 	var/mob/M = usr
 	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
 		return attack_self(M)
+
+/obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(scanner)
+		scanner.do_on_afterattack(user, target, proximity)

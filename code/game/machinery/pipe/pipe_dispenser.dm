@@ -79,13 +79,11 @@
 	onclose(user, "pipedispenser")
 	return
 
-/obj/machinery/pipedispenser/Topic(href, href_list)
-	if(..())
-		return
-	if(unwrenched || !usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
+/obj/machinery/pipedispenser/Topic(href, href_list, state = GLOB.physical_state)
+	if((. = ..()) || unwrenched)
 		usr << browse(null, "window=pipedispenser")
 		return
-	usr.set_machine(src)
+
 	if(href_list["make"])
 		if(!wait)
 			var/p_type = text2num(href_list["make"])
@@ -101,12 +99,12 @@
 			wait = 1
 			spawn(15)
 				wait = 0
-	return
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
+		if(!user.unEquip(W))
+			return
 		to_chat(usr, "<span class='notice'>You put \the [W] back into \the [src].</span>")
-		user.drop_item()
 		add_fingerprint(usr)
 		qdel(W)
 		return
@@ -157,11 +155,11 @@ Nah
 */
 
 //Allow you to drag-drop disposal pipes into it
-/obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/usr as mob)
-	if(!usr.canmove || usr.stat || usr.restrained())
+/obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
+	if(!CanPhysicallyInteract(user))
 		return
 
-	if (!istype(pipe) || get_dist(usr, src) > 1 || get_dist(src,pipe) > 1 )
+	if (!istype(pipe) || get_dist(src,pipe) > 1 )
 		return
 
 	if (pipe.anchored)
@@ -201,14 +199,12 @@ Nah
 // 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk
 
 
-/obj/machinery/pipedispenser/disposal/Topic(href, href_list)
-	if(..())
+/obj/machinery/pipedispenser/disposal/Topic(href, href_list, state = GLOB.physical_state)
+	if((. = ..()) || unwrenched)
+		usr << browse(null, "window=pipedispenser")
 		return
-	usr.set_machine(src)
+
 	if(href_list["dmake"])
-		if(unwrenched || !usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-			usr << browse(null, "window=pipedispenser")
-			return
 		if(!wait)
 			var/p_type = text2num(href_list["dmake"])
 			if(p_type == 15)

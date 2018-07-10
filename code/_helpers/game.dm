@@ -1,14 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-/proc/dopage(src,target)
-	var/href_list
-	var/href
-	href_list = params2list("src=\ref[src]&[target]=1")
-	href = "src=\ref[src];[target]=1"
-	src:temphtml = null
-	src:Topic(href, href_list)
-	return null
-
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
@@ -28,9 +19,10 @@
 
 /proc/living_observers_present(var/list/zlevels)
 	if(LAZYLEN(zlevels))
-		for(var/client/C in GLOB.clients) //if a tree ticks on the empty zlevel does it really tick
-			if(isliving(C.mob)) //(no it doesn't)
-				var/turf/T = get_turf(C.mob)
+		for(var/A in GLOB.player_list) //if a tree ticks on the empty zlevel does it really tick
+			var/mob/M = A
+			if(M.stat != DEAD) //(no it doesn't)
+				var/turf/T = get_turf(M)
 				if(T && (T.z in zlevels))
 					return TRUE
 	return FALSE

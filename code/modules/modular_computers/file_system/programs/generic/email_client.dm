@@ -228,11 +228,14 @@
 				data["cur_attachment_size"] = current_message.attachment.size
 		else
 			data["label_inbox"] = "Inbox ([current_account.inbox.len])"
+			data["label_outbox"] = "Sent ([current_account.outbox.len])"
 			data["label_spam"] = "Spam ([current_account.spam.len])"
 			data["label_deleted"] = "Deleted ([current_account.deleted.len])"
 			var/list/message_source
 			if(folder == "Inbox")
 				message_source = current_account.inbox
+			else if(folder == "Sent")
+				message_source = current_account.outbox
 			else if(folder == "Spam")
 				message_source = current_account.spam
 			else if(folder == "Deleted")

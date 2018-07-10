@@ -78,7 +78,8 @@
 									/obj/machinery/computer,			/obj/machinery/telecomms, \
 									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
 									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
-									/obj/machinery/suit_storage_unit,	/obj/structure/showcase)
+									/obj/machinery/suit_storage_unit,	/obj/structure/showcase, \
+									/obj/item/modular_computer/console, /obj/structure/fountain)
 
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
@@ -130,10 +131,8 @@
 	onclose(user, "mob[real_name]")
 	return
 
-/mob/living/simple_animal/parrot/Topic(href, href_list)
-
-	//Can the usr physically do this?
-	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
+/mob/living/simple_animal/parrot/Topic(href, href_list, state = GLOB.physical_state)
+	if((. = ..()))
 		return
 
 	//Is the usr's mob type able to do this?
@@ -177,11 +176,10 @@
 						if( !istype(item_to_add,  /obj/item/device/radio/headset) )
 							to_chat(usr, "<span class='warning'>This object won't fit.</span>")
 							return
-
+						if(!usr.unEquip(item_to_add, src))
+							return
 						var/obj/item/device/radio/headset/headset_to_add = item_to_add
 
-						usr.drop_item()
-						headset_to_add.loc = src
 						src.ears = headset_to_add
 						to_chat(usr, "You fit the headset onto [src].")
 
@@ -275,8 +273,8 @@
 	if(client || stat)
 		return //Lets not force players or dead/incap parrots to move
 
-	if(!isturf(src.loc) || !canmove || buckled)
-		return //If it can't move, dont let it move. (The buckled check probably isn't necessary thanks to canmove)
+	if(!isturf(src.loc))
+		return // Let's not bother in nullspace
 
 
 //-----SPEECH
@@ -354,7 +352,7 @@
 		//Wander around aimlessly. This will help keep the loops from searches down
 		//and possibly move the mob into a new are in view of something they can use
 		if(prob(90))
-			step(src, pick(GLOB.cardinal))
+			SelfMove(pick(GLOB.cardinal))
 			return
 
 		if(!held_item && !parrot_perch) //If we've got nothing to do.. look for something to do.
@@ -604,10 +602,8 @@
 		if(C.r_hand && C.r_hand.w_class <= ITEM_SIZE_SMALL)
 			stolen_item = C.r_hand
 
-		if(stolen_item)
-			C.remove_from_mob(stolen_item)
+		if(stolen_item && C.unEquip(stolen_item, src))
 			held_item = stolen_item
-			stolen_item.loc = src
 			visible_message("[src] grabs the [held_item] out of [C]'s hand!", "<span class='warning'>You snag the [held_item] out of [C]'s hand!</span>", "You hear the sounds of wings flapping furiously.")
 			return held_item
 

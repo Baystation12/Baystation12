@@ -39,28 +39,8 @@ datum/track/proc/GetTrack()
 	var/datum/sound_token/sound_token
 
 	var/datum/track/current_track
-	var/list/datum/track/tracks = list(
-		new/datum/track("Beyond", /music_track/ambispace),
-		new/datum/track("Clouds of Fire", /music_track/clouds_of_fire),
-		new/datum/track("Stage Three", /music_track/dilbert),
-		new/datum/track("Asteroids", /music_track/df_theme),
-		new/datum/track("Floating", /music_track/floating),
-		new/datum/track("Endless Space", /music_track/endless_space),
-		new/datum/track("Fleet Party Theme", /music_track/one_loop),
-		new/datum/track("Scratch", /music_track/level3_mod),
-		new/datum/track("Absconditus", /music_track/absconditus),
-		new/datum/track("lasers rip apart the bulkhead", /music_track/lasers),
-		new/datum/track("Maschine Klash", /music_track/digit_one),
-		new/datum/track("Comet Halley", /music_track/comet_haley),
-		new/datum/track("Please Come Back Any Time", /music_track/elevator),
-		new/datum/track("Human", /music_track/human),
-		new/datum/track("Memories of Lysendraa", /music_track/lysendraa),
-		new/datum/track("Marhaba", /music_track/marhaba),
-		new/datum/track("Space Oddity", /music_track/space_oddity),
-		new/datum/track("THUNDERDOME", /music_track/thunderdome),
-		new/datum/track("Torch: A Light in the Darkness", /music_track/torch),
-		new/datum/track("Treacherous Voyage", /music_track/treacherous_voyage),
-	)
+	var/list/datum/track/tracks
+
 
 /obj/machinery/media/jukebox/old
 	name = "space jukebox"
@@ -75,6 +55,10 @@ datum/track/proc/GetTrack()
 	..()
 	update_icon()
 	sound_id = "[/obj/machinery/media/jukebox]_[sequential_id(/obj/machinery/media/jukebox)]"
+
+/obj/machinery/media/jukebox/Initialize()
+	. = ..()
+	tracks = setup_music_tracks(tracks)
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
@@ -122,7 +106,7 @@ datum/track/proc/GetTrack()
 	return ..()
 
 /obj/machinery/media/jukebox/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_default_state)
-	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "jukebox", "Your Media Library", 340, 440, master_ui, state)
 		ui.open()

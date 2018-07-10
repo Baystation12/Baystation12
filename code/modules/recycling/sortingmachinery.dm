@@ -447,7 +447,7 @@
 
 			var/obj/item/organ/external/E = pick(crush)
 
-			E.take_damage(45, used_weapon = "Blunt Trauma")
+			E.take_external_damage(45, used_weapon = "Blunt Trauma")
 			to_chat(L, "\The [src]'s mechanisms crush your [E.name]!")
 
 	H.init(src)	// copy the contents of disposer to holder

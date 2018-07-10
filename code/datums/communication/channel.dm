@@ -9,6 +9,20 @@
 	var/mute_setting
 	var/show_preference_setting
 
+/decl/communication_channel/proc/can_ignore_OOC(var/client/C)
+	if (!C)
+		return TRUE
+	if (C.get_preference_value(show_preference_setting) == GLOB.PREF_SHOW)
+		return FALSE
+	// I suppose the host is more equal than others
+	if (check_rights(R_HOST, 0, C))
+		return TRUE
+	// Admins without ban permissions may ignore OOC
+	if (check_rights(R_ADMIN, 0, C) && (!check_rights(R_BAN, 0, C)))
+		return TRUE
+	// Anyone else with investigation status may not ignore OOC
+	return !check_rights(R_INVESTIGATE, 0, C)
+
 /*
 * Procs for handling sending communication messages
 */
@@ -32,8 +46,8 @@
 
 	var/client/C = communicator.get_client()
 
-	if(C && show_preference_setting && C.get_preference_value(show_preference_setting) == GLOB.PREF_HIDE && !check_rights(R_INVESTIGATE,0,C))
-		to_chat(communicator, "<span class='warning'>You have [name] muted.</span>")
+	if(can_ignore_OOC(C))
+		to_chat(communicator, "<span class='warning'>Couldn't send message - you have [name] muted.</span>")
 		return FALSE
 
 	if(C && mute_setting && (C.prefs.muted & mute_setting))
@@ -69,8 +83,7 @@
 /decl/communication_channel/proc/can_receive_communication(var/datum/receiver)
 	if(show_preference_setting)
 		var/client/C = receiver.get_client()
-		// Admins (investigators) are expected to monitor channels. They can deadmin if they don't wish to see everything.
-		if(C && C.get_preference_value(show_preference_setting) == GLOB.PREF_HIDE && !check_rights(R_INVESTIGATE, 0 , C))
+		if(can_ignore_OOC(C))
 			return FALSE
 	return TRUE
 

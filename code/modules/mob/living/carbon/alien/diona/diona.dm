@@ -69,14 +69,14 @@
 /mob/living/carbon/alien/diona/proc/handle_npc(var/mob/living/carbon/alien/diona/D)
 	if(D.stat != CONSCIOUS)
 		return
-	if(prob(33) && D.canmove && isturf(D.loc) && !D.pulledby) //won't move if being pulled
-		step(D, pick(GLOB.cardinal))
+	if(prob(33) && isturf(D.loc) && !D.pulledby) //won't move if being pulled
+		SelfMove(pick(GLOB.cardinal))
 	if(prob(1))
 		D.emote(pick("scratch","jump","chirp","tail"))
 
 /mob/living/carbon/alien/diona/hotkey_drop()
 	if(holding_item || hat)
-		drop_item()
+		unequip_item()
 	else
 		to_chat(usr, "<span class='warning'>You have nothing to drop.</span>")
 

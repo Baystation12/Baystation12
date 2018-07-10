@@ -32,12 +32,13 @@
 
 /obj/item/weapon/excalibur
 	name = "champion's blade"
-	desc = "‘For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.’"
+	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "excalibur"
 	item_icons = list(
 					slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',
-					slot_r_hand_str = 'icons/mob/onmob/items/righthand.dmi'
+					slot_r_hand_str = 'icons/mob/onmob/items/righthand.dmi',
+					slot_belt_str = 'icons/mob/onmob/belt.dmi'
 					)
 	item_state = "excalibur"
 	edge = 1
@@ -64,7 +65,7 @@
 			if(H.l_hand == src)
 				hand = BP_L_HAND
 			var/obj/item/organ/external/E = H.get_organ(hand)
-			E.take_damage(burn=2,used_weapon="stovetop")
+			E.take_external_damage(burn=2,used_weapon="stovetop")
 		else
 			var/mob/living/M = loc
 			M.adjustFireLoss(2)

@@ -207,13 +207,3 @@
 	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/solgov/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
-
-/decl/hierarchy/mil_uniform/ec/offduty
-	name = "EC off-duty"
-	departments = CIV
-	min_rank = 11
-
-	utility_under = null
-	utility_shoes = null
-	utility_hat = null
-	utility_extra = null

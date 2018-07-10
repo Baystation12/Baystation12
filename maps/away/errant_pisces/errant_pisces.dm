@@ -132,7 +132,7 @@ obj/structure/net/Initialize(var/mapload)
 		visible_message("<span class='warning'>\The [src] is torn apart!</span>")
 		qdel(src)
 
-/obj/structure/net/proc/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
+/obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
 	overlays.Cut()
 	var/turf/T = get_turf(src)
 	for (var/turf/AT in T.CardinalTurfs(FALSE))

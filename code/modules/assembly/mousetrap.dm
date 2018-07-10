@@ -36,7 +36,7 @@
 						affecting = H.get_organ(type)
 						H.Stun(3)
 			if(affecting)
-				affecting.take_damage(1, 0)
+				affecting.take_external_damage(1, 0)
 				H.updatehealth()
 		else if(ismouse(target))
 			var/mob/living/simple_animal/mouse/M = target
@@ -84,7 +84,7 @@
 		if(armed)
 			if(ishuman(AM))
 				var/mob/living/carbon/H = AM
-				if(H.m_intent == "run")
+				if(!MOVING_DELIBERATELY(H))
 					triggered(H)
 					H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \
 									  "<span class='warning'>You accidentally step on [src]</span>")

@@ -17,3 +17,6 @@
 
 /datum/computer_file/data/logfile
 	filetype = "LOG"
+
+/datum/computer_file/data/text
+	filetype = "TXT"

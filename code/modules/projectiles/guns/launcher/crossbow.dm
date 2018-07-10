@@ -56,13 +56,17 @@
 	fire_sound_text = "a solid thunk"
 	fire_delay = 25
 	slot_flags = SLOT_BACK
+	has_safety = FALSE
 
 	var/obj/item/bolt
 	var/tension = 0                         // Current draw on the bow.
-	var/max_tension = 5                     // Highest possible tension.
-	var/release_speed = 5                   // Speed per unit of tension.
+	var/max_tension = 3                     // Highest possible tension.
+	var/release_speed = 10                  // Speed per unit of tension.
 	var/obj/item/weapon/cell/cell = null    // Used for firing superheated rods.
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
+
+/obj/item/weapon/gun/launcher/crossbow/toggle_safety(var/mob/user)
+	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
 /obj/item/weapon/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
@@ -108,7 +112,7 @@
 	tension = 1
 
 	while(bolt && tension && loc == current_user)
-		if(!do_after(user, 25, src)) //crossbow strings don't just magically pull back on their own.
+		if(!do_after(user, 20, src)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
 			update_icon()
@@ -136,8 +140,7 @@
 
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
 	if(!bolt)
-		if (istype(W,/obj/item/weapon/arrow))
-			user.drop_from_inventory(W, src)
+		if (istype(W,/obj/item/weapon/arrow) && user.unEquip(W, src))
 			bolt = W
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			update_icon()
@@ -155,9 +158,9 @@
 
 	if(istype(W, /obj/item/weapon/cell))
 		if(!cell)
-			user.drop_item()
+			if(!user.unEquip(W, src))
+				return
 			cell = W
-			cell.loc = src
 			to_chat(user, "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>")
 			superheat_rod(user)
 		else

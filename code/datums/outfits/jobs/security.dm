@@ -34,7 +34,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	r_hand = /obj/item/weapon/storage/briefcase/crimekit
 	id_type = /obj/item/weapon/card/id/security/detective
-	pda_type = /obj/item/modular_computer/pda/security
+	pda_type = /obj/item/modular_computer/pda/forensics
 	backpack_contents = list(/obj/item/weapon/storage/box/evidence = 1)
 
 /decl/hierarchy/outfit/job/security/detective/New()

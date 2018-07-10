@@ -23,8 +23,8 @@
 	if(chambered)
 		to_chat(user, "<span class='warning'>\The [src] already has a shell loaded.</span>")
 		return
-
-	user.drop_from_inventory(S, src)
+	if(!user.unEquip(S, src))
+		return
 	chambered = S
 	user.visible_message("\The [user] inserts \a [S] into \the [src].", "<span class='notice'>You insert \a [S] into \the [src].</span>")
 

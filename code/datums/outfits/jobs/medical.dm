@@ -67,7 +67,7 @@
 	uniform = /obj/item/clothing/under/rank/chemist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
 	id_type = /obj/item/weapon/card/id/medical/chemist
-	pda_type = /obj/item/modular_computer/pda/medical
+	pda_type = /obj/item/modular_computer/pda/chemistry
 
 /decl/hierarchy/outfit/job/medical/chemist/New()
 	..()

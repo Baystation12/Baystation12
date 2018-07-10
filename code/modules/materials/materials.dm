@@ -73,6 +73,7 @@ var/list/name_to_material
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
+	var/list/chem_products				  //Used with the grinder to produce chemicals.
 
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
@@ -172,10 +173,6 @@ var/list/name_to_material
 /material/proc/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 	return 0
 
-// Weapons handle applying a divisor for this value locally.
-/material/proc/get_blunt_damage()
-	return weight //todo
-
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
@@ -186,9 +183,20 @@ var/list/name_to_material
 		temp_matter[name] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
+// Weapons handle applying a divisor for this value locally.
+/material/proc/get_blunt_damage()
+	return weight //todo
+
 // As above.
 /material/proc/get_edge_damage()
 	return hardness //todo
+
+/material/proc/get_attack_cooldown()
+	if(weight < 19)
+		return FAST_WEAPON_COOLDOWN
+	if(weight > 23)
+		return SLOW_WEAPON_COOLDOWN
+	return DEFAULT_WEAPON_COOLDOWN
 
 // Snowflakey, only checked for alien doors at the moment.
 /material/proc/can_open_material_door(var/mob/living/user)
@@ -244,6 +252,9 @@ var/list/name_to_material
 	icon_colour = "#007a00"
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	chem_products = list(
+				/datum/reagent/uranium = 20
+				)
 
 /material/diamond
 	name = "diamond"
@@ -270,6 +281,9 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	chem_products = list(
+				/datum/reagent/gold = 20
+				)
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -284,6 +298,9 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	chem_products = list(
+				/datum/reagent/silver = 20
+				)
 
 /material/phoron
 	name = "phoron"
@@ -299,6 +316,9 @@ var/list/name_to_material
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
+	chem_products = list(
+				/datum/reagent/toxin/phoron = 20
+				)
 
 /material/phoron/supermatter
 	name = "supermatter"
@@ -359,6 +379,10 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 	hitsound = 'sound/weapons/smash.ogg'
+	chem_products = list(
+				/datum/reagent/iron = 15,
+				/datum/reagent/carbon = 5
+				)
 
 /material/diona
 	name = "biomass"
@@ -406,6 +430,7 @@ var/list/name_to_material
 	burn_armor = 8
 	integrity = 200
 	melting_point = 3000
+	weight = 18
 	stack_type = null
 	icon_base = "metal"
 	door_icon_base = "metal"
@@ -588,6 +613,9 @@ var/list/name_to_material
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	conductive = 0
+	chem_products = list(
+				/datum/reagent/toxin/plasticide = 20
+				)
 
 /material/plastic/holographic
 	name = "holoplastic"
@@ -627,6 +655,9 @@ var/list/name_to_material
 	icon_colour = "#e6c5de"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
 	is_fusion_fuel = 1
+	chem_products = list(
+				/datum/reagent/hydrazine = 20
+				)
 
 /material/platinum
 	name = "platinum"
@@ -645,6 +676,9 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
+	chem_products = list(
+				/datum/reagent/iron = 20
+				)
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -688,6 +722,10 @@ var/list/name_to_material
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
+	chem_products = list(
+				/datum/reagent/carbon = 10,
+				/datum/reagent/water = 5
+				)
 
 /material/wood/holographic
 	name = "holowood"
@@ -768,7 +806,7 @@ var/list/name_to_material
 	sheet_plural_name = "chunks"
 
 /material/aliumium/New()
-	icon_base = pick("jaggy","curvy")
+	icon_base = "metal"
 	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
 	brute_armor = rand(10,20)

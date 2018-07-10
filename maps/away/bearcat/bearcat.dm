@@ -65,16 +65,14 @@
 	coverlocked = 0
 
 /obj/machinery/door/airlock/autoname/command
-	icon = 'icons/obj/doors/Doorhatchele.dmi'
+	door_color = COLOR_COMMAND_BLUE
 	req_access = list(access_heads)
 
 /obj/machinery/door/airlock/autoname/engineering
+	door_color = COLOR_AMBER
 	req_access = list(access_engine)
 
 /turf/simulated/floor/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/wood/usedup
 	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/usedup

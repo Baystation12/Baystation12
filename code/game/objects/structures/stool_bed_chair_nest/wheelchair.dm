@@ -1,6 +1,6 @@
 /obj/structure/bed/chair/wheelchair
 	name = "wheelchair"
-	desc = "You sit in this. Either by will or force."
+	desc = "Now we're getting somewhere."
 	icon_state = "wheelchair"
 	anchored = 0
 	buckle_movable = 1
@@ -8,6 +8,8 @@
 	var/driving = 0
 	var/mob/living/pulling = null
 	var/bloodiness
+
+	movement_handlers = list(/datum/movement_handler/delay = list(2), /datum/movement_handler/move_relay_self)
 
 /obj/structure/bed/chair/wheelchair/update_icon()
 	return
@@ -144,11 +146,11 @@
 		if (pulling && (pulling.a_intent == I_HURT))
 			occupant.throw_at(A, 3, 3, pulling)
 		else if (propelled)
-			occupant.throw_at(A, 3, propelled)
+			occupant.throw_at(A, 3, 3, propelled)
 
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
-		occupant.throw_at(A, 3, propelled)
+		occupant.throw_at(A, 3, 3, propelled)
 		occupant.apply_effect(6, STUN, blocked)
 		occupant.apply_effect(6, WEAKEN, blocked)
 		occupant.apply_effect(6, STUTTER, blocked)
@@ -187,3 +189,7 @@
 		pulling = null
 		usr.pulledby = null
 	..()
+
+/proc/equip_wheelchair(mob/living/carbon/human/H) //Proc for spawning in a wheelchair if a new character has no legs. Used in new_player.dm
+	var/obj/structure/bed/chair/wheelchair/W = new(H.loc)
+	W.buckle_mob(H)

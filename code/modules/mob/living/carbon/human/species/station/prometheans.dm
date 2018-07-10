@@ -24,7 +24,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	spawn_flags =      SPECIES_IS_RESTRICTED
 
 	breath_type = null
-	poison_type = null
+	poison_types = null
 
 	gluttonous =          GLUT_TINY | GLUT_SMALLER | GLUT_ITEM_ANYTHING | GLUT_PROJECTILE_VOMIT
 	virus_immune =        1
@@ -79,9 +79,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	H.apply_stored_shock_to(target)
 
 /datum/species/shapeshifter/promethean/handle_death(var/mob/living/carbon/human/H)
-	spawn(1)
-		if(H)
-			H.gib()
+	addtimer(CALLBACK(H, /mob/proc/gib),0)
 
 /datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/carbon/human/H)
 

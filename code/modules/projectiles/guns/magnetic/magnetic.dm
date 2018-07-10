@@ -4,7 +4,8 @@
 	icon_state = "coilgun"
 	item_state = "coilgun"
 	icon = 'icons/obj/railgun.dmi'
-	one_hand_penalty = 1
+	one_hand_penalty = 5
+	fire_delay = 20
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ILLEGAL = 2, TECH_MAGNET = 4)
 	w_class = ITEM_SIZE_LARGE
 	combustion = 1
@@ -35,6 +36,9 @@
 	QDEL_NULL(loaded)
 	QDEL_NULL(capacitor)
 	. = ..()
+
+/obj/item/weapon/gun/magnetic/get_cell()
+	return cell
 
 /obj/item/weapon/gun/magnetic/Process()
 	if(capacitor)
@@ -94,9 +98,9 @@
 			if(cell)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
 				return
+			if(!user.unEquip(cell, src))
+				return
 			cell = thing
-			user.drop_from_inventory(cell)
-			cell.forceMove(src)
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
 			update_icon()
@@ -118,9 +122,9 @@
 			if(capacitor)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
 				return
+			if(!user.unEquip(capacitor, src))
+				return
 			capacitor = thing
-			user.drop_from_inventory(capacitor)
-			capacitor.forceMove(src)
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			power_per_tick = (power_cost*0.15) * capacitor.rating
 			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
@@ -136,9 +140,9 @@
 			if(loaded)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
 				return
+			if(!user.unEquip(thing, src))
+				return
 			loaded = thing
-			user.drop_from_inventory(thing)
-			thing.forceMove(src)
 		else if(load_sheet_max > 1)
 			var ammo_count = 0
 			var/obj/item/stack/loaded_ammo = loaded

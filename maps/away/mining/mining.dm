@@ -5,7 +5,7 @@
 	name = "asteroid cluster"
 	desc = "Large group of asteroids. Mineral content detected."
 	icon_state = "sector"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_cluster_1",
 		"nav_cluster_2",
 		"nav_cluster_3",
@@ -15,6 +15,8 @@
 		"nav_cluster_7"
 	)
 	known = 0
+	start_x = 4
+	start_y = 5
 
 /datum/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
@@ -23,6 +25,7 @@
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
+	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -59,7 +62,7 @@
 	name = "faint signal from an asteroid"
 	desc = "Faint signal detected, originating from the human-made structures on the site's surface."
 	icon_state = "sector"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_away_1",
 		"nav_away_2",
 		"nav_away_3",
@@ -114,7 +117,7 @@
 	name = "monolithic asteroid"
 	desc = "Substantial mineral resources detected."
 	icon_state = "sector"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_orb_1",
 		"nav_orb_2",
 		"nav_orb_3",
@@ -124,8 +127,6 @@
 		"nav_orb_7"
 	)
 	known = 0
-	start_x = 4
-	start_y = 5
 
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
@@ -134,7 +135,6 @@
 	suffixes = list("mining/mining-orb.dmm")
 	cost = 1
 	accessibility_weight = 10
-	spawn_guaranteed = TRUE
 	base_turf_for_zs = /turf/simulated/floor/asteroid
 
 /obj/effect/shuttle_landmark/orb/nav1
@@ -189,24 +189,28 @@
 
 /mob/living/simple_animal/parrot/space/Initialize()
 	. = ..()
-	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang")
+	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang", "Roc of Ages")
 	var/matrix/M = new
 	M.Scale(2)
 	transform = M
 	color = get_random_colour(lower = 190)
 
 
-/obj/structure/showcase/totem
+/obj/structure/totem
 	name = "totem"
 	desc = "Some kind of post, pillar, plinth, column, or totem."
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "totem"
+	density = 1
+	anchored = 1
+	unacidable = 1
 	var/number
 
-/obj/structure/showcase/totem/Initialize()
+/obj/structure/totem/Initialize()
 	. = ..()
 	number = rand(10,99)
 
-/obj/structure/showcase/totem/examine()
+/obj/structure/totem/examine()
 	..()
 	to_chat(usr, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
 

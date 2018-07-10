@@ -8,7 +8,7 @@
 	var/list/breathgas = list()	//list of gases animals/plants require to survive
 	var/badgas					//id of gas that is toxic to life here
 
-	var/lightlevel
+	var/lightlevel = 0 //This default makes turfs not generate light. Adjust to have exoplanents be lit.
 	in_space = 0
 	var/maxx
 	var/maxy
@@ -21,7 +21,9 @@
 	var/repopulate_types = list() // animals which have died that may come back
 
 	var/features_budget = 2
-	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith) //pre-defined list of features templates to pick from
+	//pre-defined list of features templates to pick from
+	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+									  /datum/map_template/ruin/exoplanet/hydrobase)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -39,18 +41,16 @@
 	possible_features.Cut()
 	for(var/T in feature_types)
 		var/datum/map_template/ruin/exoplanet/ruin = new T
-		possible_features[ruin.id] = ruin
+		possible_features += ruin
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()
-	spawn()
-		generate_atmosphere()
-		generate_map()
-		generate_features()
-		for(var/i = 0 to 3)
-			generate_landing()
-		update_biome()
-		START_PROCESSING(SSobj, src)
+	generate_atmosphere()
+	generate_map()
+	generate_features()
+	generate_landing(2)		//try making 4 landmarks
+	update_biome()
+	START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/sector/exoplanet/proc/get_engravings()
@@ -178,11 +178,35 @@
 			A.verbs -= /mob/living/simple_animal/proc/name_species
 	return TRUE
 
-/obj/effect/overmap/sector/exoplanet/proc/generate_landing()
-	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
-	if(T)
-		new landmark_type(T)
-	return T
+//Tries to generate num landmarks, but avoids repeats.
+/obj/effect/overmap/sector/exoplanet/proc/generate_landing(num = 1)
+	var/places = list()
+	var/attempts = 10*num
+	var/new_type = landmark_type
+	while(num)
+		attempts--
+		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
+		if(!T || (T in places)) // Two landmarks on one turf is forbidden as the landmark code doesn't work with it.
+			continue
+		if(attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
+			var/valid = 1
+			var/list/block_to_check = block(locate(T.x - 10, T.y - 10, T.z), locate(T.x + 10, T.y + 10, T.z))
+			for(var/turf/check in block_to_check)
+				if(!istype(get_area(check), /area/exoplanet) || check.turf_flags & TURF_FLAG_NORUINS)
+					valid = 0
+					break
+			if(attempts >= 10)
+				if(check_collision(T.loc, block_to_check)) //While we have lots of patience, ensure landability
+					valid = 0
+			else //Running out of patience, but would rather not clear ruins, so switch to clearing landmarks and bypass landability check
+				new_type = /obj/effect/shuttle_landmark/automatic/clearing
+
+			if(!valid)
+				continue
+
+		num--
+		places += T
+		new new_type(T) 
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
@@ -307,12 +331,16 @@
 
 /datum/random_map/noise/exoplanet/apply_to_turf(var/x,var/y)
 	var/turf/T = ..()
-	if(T && limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
+	if(!T)
+		return
+	if(limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
 		T.set_density(1)
 		T.set_opacity(1)
 		if(istype(T, /turf/simulated))
-			var/turf/simulated/S = T
+			var/turf/simulated/S = T 
 			S.blocks_air = 1
+	if(T.x <= TRANSITIONEDGE || T.x >= (limit_x - TRANSITIONEDGE + 1) || T.y <= TRANSITIONEDGE || T.y >= (limit_y - TRANSITIONEDGE + 1))
+		new/obj/effect/fogofwar(T)
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -377,7 +405,7 @@
 			if(color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems["woodpulp"] = 1
+			S.chems[/datum/reagent/woodpulp] = 1
 			big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
@@ -410,9 +438,8 @@
 			if(E.atmosphere)
 				initial_gas = E.atmosphere.gas.Copy()
 				temperature = E.atmosphere.temperature
-			if(E.lightlevel)
-				light_max_bright = E.lightlevel
-				light_outer_range = 2
+			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+			set_light(E.lightlevel, 0.1, 2)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
@@ -444,3 +471,13 @@
 
 /turf/simulated/floor/exoplanet/water/update_dirt()
 	return	// Water doesn't become dirty
+
+/obj/effect/fogofwar
+	name = "fog of war"
+	desc = "Thar be dragons"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "smoke"
+	opacity = 0
+	anchored = 1
+	mouse_opacity = 0
+	simulated = 0

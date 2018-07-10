@@ -503,9 +503,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bT" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -577,8 +576,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -617,9 +615,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ck" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -683,15 +680,13 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cu" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cv" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -873,7 +868,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cW" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cX" = (
@@ -1143,9 +1138,6 @@
 /area/icarus/vessel)
 "dP" = (
 /obj/machinery/optable,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = 30
-	},
 /turf/simulated/floor/tiled/white,
 /area/icarus/open)
 "dQ" = (

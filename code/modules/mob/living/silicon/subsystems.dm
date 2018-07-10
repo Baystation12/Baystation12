@@ -2,7 +2,8 @@
 	var/list/silicon_subsystems_by_name = list()
 	var/list/silicon_subsystems = list(
 		/datum/nano_module/alarm_monitor/all,
-		/datum/nano_module/law_manager
+		/datum/nano_module/law_manager,
+		/datum/nano_module/email_client
 	)
 
 /mob/living/silicon/ai/New()
@@ -15,7 +16,8 @@
 
 /mob/living/silicon/robot/syndicate
 	silicon_subsystems = list(
-		/datum/nano_module/law_manager
+		/datum/nano_module/law_manager,
+		/datum/nano_module/email_client
 	)
 
 /mob/living/silicon/Destroy()
@@ -29,7 +31,7 @@
 		init_subsystem(subsystem_type)
 
 	if(/datum/nano_module/alarm_monitor/all in silicon_subsystems)
-		for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
+		for(var/datum/alarm_handler/AH in SSalarm.all_handlers)
 			AH.register_alarm(src, /mob/living/silicon/proc/receive_alarm)
 			queued_alarms[AH] = list()	// Makes sure alarms remain listed in consistent order
 
@@ -81,6 +83,14 @@
 	for(var/subsystem_type in silicon_subsystems)
 		var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
 		stat(SSS)
+
+/mob/living/silicon/proc/get_subsystem_from_path(subsystem_type)
+	var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
+	if(!istype(SSS))
+		return 0
+	if(!istype(SSS.subsystem, subsystem_type))
+		return 0
+	return SSS.subsystem
 
 /stat_silicon_subsystem
 	parent_type = /atom/movable

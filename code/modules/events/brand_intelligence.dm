@@ -29,7 +29,6 @@
 
 /datum/event/brand_intelligence/tick()
 	if(!vendingMachines.len || !originMachine || originMachine.shut_up || !originMachine.shoot_inventory)	//if every machine is infected, or if the original vending machine is missing or has it's voice switch flipped or fixed
-		end()
 		kill()
 		return
 

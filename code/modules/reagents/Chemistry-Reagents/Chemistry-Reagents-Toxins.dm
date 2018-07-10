@@ -23,10 +23,10 @@
 				var/can_damage = I.max_damage - I.damage
 				if(can_damage > 0)
 					if(dam > can_damage)
-						I.take_damage(can_damage, silent=TRUE)
+						I.take_internal_damage(can_damage, silent=TRUE)
 						dam -= can_damage
 					else
-						I.take_damage(dam, silent=TRUE)
+						I.take_internal_damage(dam, silent=TRUE)
 						dam = 0
 		if(dam)
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
@@ -56,6 +56,15 @@
 	target_organ = BP_BRAIN
 	strength = 10
 
+/datum/reagent/toxin/chlorine
+	name = "Chlorine"
+	description = "A highly poisonous liquid. Smells strongly of bleach."
+	reagent_state = LIQUID
+	taste_description = "bleach"
+	color = "#707c13"
+	strength = 15
+	metabolism = REM
+
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	description = "Phoron in its liquid form."
@@ -65,15 +74,6 @@
 	strength = 30
 	touch_met = 5
 	var/fire_mult = 5
-
-/datum/reagent/toxin/chlorine
-	name = "Chlorine"
-	description = "A highly poisonous liquid. Smells strongly of bleach."
-	reagent_state = LIQUID
-	taste_description = "bleach"
-	color = "#707c13"
-	strength = 15
-	metabolism = REM
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -412,8 +412,8 @@
 		drug_strength = drug_strength * 0.8
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-		step(M, pick(GLOB.cardinal))
+	if(prob(10))
+		M.SelfMove(pick(GLOB.cardinal))
 	if(prob(7))
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
@@ -465,7 +465,7 @@
 		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	if(prob(80))
-		M.adjustBrainLoss(0.1 * removed)
+		M.adjustBrainLoss(5.25 * removed)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
@@ -590,11 +590,10 @@
 	color = "#13bc5e"
 
 /datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
-	if(M.transforming)
+	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 		return
 	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
-	M.transforming = 1
-	M.canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
 	M.icon = null
 	M.overlays.Cut()
 	M.set_invisibility(101)
@@ -642,31 +641,60 @@
 	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
 	remove_self(volume)
 
-/datum/reagent/toxin/corrupting
-	name = "Corruption"
-	description = "a loyalty changing liquid."
-	taste_description = "blood"
-	color = "#ffffff"
+/datum/reagent/toxin/zombie
+	name = "Liquid Corruption"
+	description = "A filthy, oily substance which slowly churns of its own accord."
+	taste_description = "decaying blood"
+	color = "#800000"
 	taste_mult = 5
 	strength = 10
 	metabolism = REM * 5
 	overdose = 30
 
-/datum/reagent/toxin/corrupting/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M,alien,removed*0.5)
+/datum/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed * 0.5)
 
-/datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(prob(M.chem_doses[type]*10))
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			H.zombieze()
-		else
-			to_chat(M, "<span class='danger'>Your insides are melting!!!</span>")
-			M.adjustToxLoss(100)
+	if (istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/true_dose = H.chem_doses[type] + volume
+		if (true_dose >= 5)
+			H.zombify()
+		else if (true_dose > 1 && prob(20))
+			H.zombify()
+		else if (prob(10))
+			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
+
+/datum/reagent/toxin/bromide
+	name = "Bromide"
+	description = "A dark, nearly opaque, red-orange, toxic element."
+	taste_description = "pestkiller"
+	reagent_state = LIQUID
+	color = "#4c3b34"
+	strength = 3
+
+/datum/reagent/toxin/methyl_bromide
+	name = "Methyl Bromide"
+	description = "A fumigant derived from bromide."
+	taste_description = "pestkiller"
+	reagent_state = LIQUID
+	color = "#4c3b34"
+	strength = 5
+
+/datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
+	if(istype(T))
+		T.assume_gas("methyl_bromide", volume, T20C)
 		remove_self(volume)
-	else if(prob(5))
-		if(M.chem_doses[type] < 5)
-			to_chat(M, "<span class='warning'>You feel funny...</span>")
-		else
-			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+
+/datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	. = ..()
+	if(istype(M))
+		for(var/obj/item/organ/external/E in M.organs)
+			if(LAZYLEN(E.implants))
+				for(var/obj/effect/spider/spider in E.implants)
+					if(prob(25))
+						E.implants -= spider
+						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
+						qdel(spider)
+						break

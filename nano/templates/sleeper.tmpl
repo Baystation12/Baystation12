@@ -15,12 +15,14 @@
 			<div class="statusDisplay">
 				{{:data.occupant}}
 			</div>
-			<div class="itemContent">
-			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : !data.filtering})}}
-			</div>
-			<div class="itemContent">
-			{{:helper.link(data.pump ? "Stomach pump active" : "Stomach pump inactive", null, {'pump' : !data.pump})}}
-			</div>
+			{{if data.skill_check}}
+				<div class="itemContent">
+				{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : !data.filtering})}}
+				</div>
+				<div class="itemContent">
+				{{:helper.link(data.pump ? "Stomach pump active" : "Stomach pump inactive", null, {'pump' : !data.pump})}}
+				</div>
+			{{/if}}
 			<div class="itemContent">
 				{{:helper.link("Eject occupant", null, {'eject' : 0})}}
 			</div>

@@ -64,6 +64,8 @@
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
+	if(scanner)
+		scanner.do_after_install(null, src)
 	update_icon()
 	update_verbs()
 	update_name()
@@ -172,9 +174,7 @@
 	// Autorun feature
 	var/datum/computer_file/data/autorun = hard_drive ? hard_drive.find_file_by_name("autorun") : null
 	if(istype(autorun))
-		var/list/autorun_data = splittext(autorun.stored_data, ":")
-		if(autorun_data.len >= 2)
-			run_program(autorun_data[1], text2num(autorun_data[2]))
+		run_program(autorun.stored_data)
 
 	if(user)
 		ui_interact(user)
@@ -292,3 +292,7 @@
 		return card_slot.stored_card
 
 /obj/item/modular_computer/proc/update_name()
+
+/obj/item/modular_computer/get_cell()
+	if(battery_module)
+		return battery_module.get_cell()

@@ -10,16 +10,15 @@
 	var/blurb = "A completely nondescript species."      // A brief lore summary for use in the chargen screen.
 
 	// Icon/appearance vars.
-	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
-	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
+	var/deform =       'icons/mob/human_races/species/human/deformed_body.dmi' // Mutated icon set.
+	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
+	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
 
 	// Damage overlay and masks.
-	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
-	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
-	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
-
-	var/prone_icon                            // If set, draws this from icobase when mob is prone.
-	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
+	var/damage_overlays = 'icons/mob/human_races/species/human/damage_overlay.dmi'
+	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
+	var/blood_mask =      'icons/mob/human_races/species/human/blood_mask.dmi'
 
 	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
 	var/flesh_color = "#ffc896"               // Pink.
@@ -34,18 +33,17 @@
 	var/list/hair_styles
 	var/list/facial_hair_styles
 
-	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_face.dmi'
-
 	var/organs_icon		//species specific internal organs icons
 
 	var/default_h_style = "Bald"
 	var/default_f_style = "Shaved"
 
 	var/race_key = 0                          // Used for mob icon cache string.
-	var/icon/icon_template = 'icons/mob/human_races/r_template.dmi' // Used for mob icon generation for non-32x32 species.
+	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.
 	var/pixel_offset_y = 0                    // Used for offsetting large icons.
+	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
+	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
 
 	var/mob_size	= MOB_MEDIUM
 	var/strength    = STR_MEDIUM
@@ -53,7 +51,7 @@
 	var/virus_immune
 	var/short_sighted                         // Permanent weldervision.
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
-	var/blood_volume = 560                    // Initial blood volume.
+	var/blood_volume = SPECIES_BLOOD_DEFAULT  // Initial blood volume.
 	var/hunger_factor = DEFAULT_HUNGER_FACTOR // Multiplier for hunger.
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 
@@ -106,27 +104,27 @@
 
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
-	var/reagent_tag                                   //Used for metabolizing reagents.
-	var/breath_pressure = 16                          // Minimum partial pressure safe for breathing, kPa
-	var/breath_type = "oxygen"                        // Non-oxygen gas breathed, if any.
-	var/poison_type = "phoron"                        // Poisonous air.
-	var/exhale_type = "carbon_dioxide"                // Exhaled gas type.
-	var/cold_level_1 = 243                           // Cold damage level 1 below this point. -30 Celsium degrees
-	var/cold_level_2 = 200                            // Cold damage level 2 below this point.
-	var/cold_level_3 = 120                            // Cold damage level 3 below this point.
-	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
-	var/heat_level_2 = 400                            // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                           // Heat damage level 3 above this point.
-	var/passive_temp_gain = 0		                  // Species will gain this much temperature every second
-	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
-	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
-	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
-	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
-	var/body_temperature = 310.15	                  // Species will try to stabilize at this temperature.
-	                                                  // (also affects temperature processing)
-
-	var/heat_discomfort_level = 315                   // Aesthetic messages about feeling warm.
-	var/cold_discomfort_level = 285                   // Aesthetic messages about feeling chilly.
+	var/reagent_tag                                             // Used for metabolizing reagents.
+	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
+	var/breath_type = "oxygen"                                  // Non-oxygen gas breathed, if any.
+	var/poison_types = list("phoron" = TRUE, "chlorine" = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/exhale_type = "carbon_dioxide"                          // Exhaled gas type.
+	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
+	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
+	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
+	var/cold_level_3 = 120                                      // Cold damage level 3 below this point.
+	var/heat_level_1 = 360                                      // Heat damage level 1 above this point.
+	var/heat_level_2 = 400                                      // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000                                     // Heat damage level 3 above this point.
+	var/passive_temp_gain = 0		                            // Species will gain this much temperature every second
+	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE             // Dangerously high pressure.
+	var/warning_high_pressure = WARNING_HIGH_PRESSURE           // High pressure warning.
+	var/warning_low_pressure = WARNING_LOW_PRESSURE             // Low pressure warning.
+	var/hazard_low_pressure = HAZARD_LOW_PRESSURE               // Dangerously low pressure.
+	var/body_temperature = 310.15	                            // Species will try to stabilize at this temperature.
+	                                                            // (also affects temperature processing)
+	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
+	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
 	var/list/heat_discomfort_strings = list(
 		"You feel sweat drip down your neck.",
 		"You feel uncomfortably warm.",
@@ -192,6 +190,26 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
+
+	// The list for the bioprinter to print based on species
+	var/list/bioprint_products = list(
+		BP_HEART    = list(/obj/item/organ/internal/heart,      25),
+		BP_LUNGS    = list(/obj/item/organ/internal/lungs,      25),
+		BP_KIDNEYS  = list(/obj/item/organ/internal/kidneys,    20),
+		BP_EYES     = list(/obj/item/organ/internal/eyes,       20),
+		BP_LIVER    = list(/obj/item/organ/internal/liver,      25),
+		BP_GROIN    = list(/obj/item/organ/external/groin,      80),
+		BP_L_ARM    = list(/obj/item/organ/external/arm,        65),
+		BP_R_ARM    = list(/obj/item/organ/external/arm/right,  65),
+		BP_L_LEG    = list(/obj/item/organ/external/leg,        65),
+		BP_R_LEG    = list(/obj/item/organ/external/leg/right,  65),
+		BP_L_FOOT   = list(/obj/item/organ/external/foot,       40),
+		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 40),
+		BP_L_HAND   = list(/obj/item/organ/external/hand,       40),
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40)
+		)
+
 	// The basic skin colours this species uses
 	var/list/base_skin_colours
 
@@ -233,10 +251,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	you use the _str version of the slot.
 */
 
-/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
-	return
-
 /datum/species/New()
+
 	if(hud_type)
 		hud = new hud_type()
 	else
@@ -252,6 +268,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+	// Modify organ lists if necessary.
+	if(islist(override_limb_types))
+		for(var/ltag in override_limb_types)
+			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
 	//Build organ descriptors
 	for(var/limb_type in has_limbs)
@@ -523,7 +544,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				target.visible_message("<span class='danger'>[target]'s [W] goes off during the struggle!</span>")
 				return W.afterattack(shoot_to,target)
 
-	var/randn = rand(1, 100)
+	var/skill_mod = 10 * attacker.get_skill_difference(SKILL_COMBAT, target)
+	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()
+
+	var/randn = rand(1, 100) - skill_mod + state_mod
 	if(!(species_flags & SPECIES_FLAG_NO_SLIP) && randn <= 25)
 		var/armor_check = target.run_armor_check(affecting, "melee")
 		target.apply_effect(3, WEAKEN, armor_check)
@@ -542,8 +566,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 		//Actually disarm them
 		for(var/obj/item/I in holding)
-			if(I)
-				target.drop_from_inventory(I)
+			if(I && target.unEquip(I))
 				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
@@ -598,6 +621,72 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			facial_hair_style_by_gender[facialhairstyle] = S
 
 	return facial_hair_style_by_gender
+
+/datum/species/proc/get_description()
+	var/list/damage_types = list(
+		"physical trauma" = brute_mod,
+		"burns" = burn_mod,
+		"lack of air" = oxy_mod,
+		"poison" = toxins_mod
+	)
+	var/dat = list()
+	dat += "<center><h2>[name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
+	dat += "<table padding='8px'>"
+	dat += "<tr>"
+	dat += "<td width = 400>[blurb]</td>"
+	dat += "<td width = 200 align='center'>"
+	if(preview_icon)
+		usr << browse_rsc(icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
+		dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
+	dat += "<b>Language:</b> [language]<br/>"
+	dat += "<small>"
+	if(spawn_flags & SPECIES_CAN_JOIN)
+		dat += "</br><b>Often present among humans.</b>"
+	if(spawn_flags & SPECIES_IS_WHITELISTED)
+		dat += "</br><b>Whitelist restricted.</b>"
+	if(!has_organ[BP_HEART])
+		dat += "</br><b>Does not have blood.</b>"
+	if(!has_organ[breathing_organ])
+		dat += "</br><b>Does not breathe.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SCAN)
+		dat += "</br><b>Does not have DNA.</b>"
+	if(species_flags & SPECIES_FLAG_NO_PAIN)
+		dat += "</br><b>Does not feel pain.</b>"
+	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
+		dat += "</br><b>Has thick skin/scales.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SLIP)
+		dat += "</br><b>Has excellent traction.</b>"
+	if(species_flags & SPECIES_FLAG_NO_POISON)
+		dat += "</br><b>Immune to most poisons.</b>"
+	if(appearance_flags & HAS_A_SKIN_TONE)
+		dat += "</br><b>Has a variety of skin tones.</b>"
+	if(appearance_flags & HAS_SKIN_COLOR)
+		dat += "</br><b>Has a variety of skin colours.</b>"
+	if(appearance_flags & HAS_EYE_COLOR)
+		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(species_flags & SPECIES_FLAG_IS_PLANT)
+		dat += "</br><b>Has a plantlike physiology.</b>"
+	if(slowdown)
+		dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
+	for(var/kind in damage_types)
+		if(damage_types[kind] > 1)
+			dat += "</br><b>Vulnerable to [kind].</b>"
+		else if(damage_types[kind] < 1)
+			dat += "</br><b>Resistant to [kind].</b>"
+	dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
+	dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
+	dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
+	dat += "</small></td>"
+	dat += "</tr>"
+	dat += "</table><hr/>"
+	return jointext(dat, null)
+
+/mob/living/carbon/human/verb/check_species()
+	set name = "Check Species Information"
+	set category = "IC"
+	set src = usr
+
+	show_browser(src, species.get_description(), "window=species;size=700x400")
 
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)

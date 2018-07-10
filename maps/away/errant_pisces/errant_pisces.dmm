@@ -1423,7 +1423,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "dB" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
@@ -1436,7 +1436,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "dC" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
@@ -1569,12 +1569,12 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "dP" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "dQ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -2332,7 +2332,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fm" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -2341,7 +2341,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "fn" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "fo" = (
@@ -2532,12 +2532,12 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fE" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fF" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -2669,12 +2669,14 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fS" = (
-/obj/machinery/power/solar_control{
-	id = "XynergySolarPort"
-	},
 /obj/structure/cable/yellow,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/machinery/power/solar_control{
+	icon_state = "solar";
+	dir = 1;
+	id = "XynergySolarPort"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
@@ -2886,7 +2888,9 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gr" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gs" = (
@@ -2924,7 +2928,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gx" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/rooms)
@@ -2955,7 +2959,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/hallway)
 "gB" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/dorms)
@@ -3371,9 +3375,6 @@
 /area/errant_pisces/infirmary)
 "hJ" = (
 /obj/machinery/optable,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_x = -25
-	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
 "hK" = (
@@ -3431,7 +3432,10 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "hT" = (
-/obj/machinery/computer/operating,
+/obj/machinery/computer/operating{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
 "hU" = (
@@ -3493,7 +3497,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "if" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
@@ -3602,7 +3606,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "iA" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "iB" = (
@@ -4965,7 +4969,10 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/computer/operating,
+/obj/machinery/computer/operating{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/science_wing)
 "mp" = (
@@ -5092,7 +5099,9 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "mI" = (
@@ -6246,7 +6255,9 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oY" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oZ" = (
@@ -6317,11 +6328,16 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pi" = (
-/obj/machinery/computer/navigation,
+/obj/machinery/computer/navigation{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pj" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pk" = (
@@ -6343,7 +6359,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "po" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/bridge)
@@ -6601,7 +6617,10 @@
 /turf/space,
 /area/space)
 "qa" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/sensors{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qb" = (
@@ -6633,11 +6652,17 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qg" = (
-/obj/machinery/computer/helm,
+/obj/machinery/computer/helm{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qh" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qi" = (
@@ -7007,6 +7032,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
+"Ti" = (
+/obj/item/modular_computer/console{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/errant_pisces/science_wing)
 
 (1,1,1) = {"
 aa
@@ -24887,7 +24918,7 @@ jj
 jC
 hq
 jz
-kf
+Ti
 kh
 lx
 lQ

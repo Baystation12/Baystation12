@@ -12,7 +12,7 @@
 
 /datum/nano_module/records
 	name = "Crew Records"
-	var/datum/computer_file/crew_record/active_record
+	var/datum/computer_file/report/crew_record/active_record
 	var/message = null
 
 /datum/nano_module/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
@@ -24,22 +24,11 @@
 		user << browse_rsc(active_record.photo_front, "front_[active_record.uid].png")
 		user << browse_rsc(active_record.photo_side, "side_[active_record.uid].png")
 		data["pic_edit"] = check_access(user, access_heads) || check_access(user, access_security)
-		data["uid"] = active_record.uid
-		var/list/fields = list()
-		for(var/record_field/F in active_record.fields)
-			if(F.can_see(user_access))
-				fields.Add(list(list(
-					"key" = F.type,
-					"name" = F.name,
-					"val" = F.get_display_value(),
-					"editable" = F.can_edit(user_access),
-					"large" = (F.valtype == EDIT_LONGTEXT)
-				)))
-		data["fields"] = fields
+		data += active_record.generate_nano_data(user_access)
 	else
 		var/list/all_records = list()
 
-		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
+		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			all_records.Add(list(list(
 				"name" = R.get_name(),
 				"rank" = R.get_job(),
@@ -69,37 +58,17 @@
 
 	return user_access
 
-/datum/nano_module/records/proc/edit_field(var/mob/user, var/field)
-	var/datum/computer_file/crew_record/R = active_record
+/datum/nano_module/records/proc/edit_field(var/mob/user, var/field_ID)
+	var/datum/computer_file/report/crew_record/R = active_record
 	if(!R)
 		return
-	var/record_field/F = locate(field) in R.fields
+	var/datum/report_field/F = R.field_from_ID(field_ID)
 	if(!F)
 		return
-
-	if(!F.can_edit(get_record_access(user)))
+	if(!F.verify_access_edit(get_record_access(user)))
 		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
 		return
-
-	var/newValue
-	switch(F.valtype)
-		if(EDIT_SHORTTEXT)
-			newValue = input(user, "Enter [F.name]:", "Record edit", html_decode(F.get_value())) as null|text
-		if(EDIT_LONGTEXT)
-			newValue = replacetext(input(user, "Enter [F.name]. You may use HTML paper formatting tags:", "Record edit", replacetext(html_decode(F.get_value()), "\[br\]", "\n")) as null|message, "\n", "\[br\]")
-		if(EDIT_NUMERIC)
-			newValue = input(user, "Enter [F.name]:", "Record edit", F.get_value()) as null|num
-		if(EDIT_LIST)
-			var/options = F.get_options()
-			newValue = input(user,"Pick [F.name]:", "Record edit", F.get_value()) as null|anything in options
-
-	if(active_record != R)
-		return
-	if(!F.can_edit(get_record_access(user)))
-		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
-		return
-	if(newValue)
-		return F.set_value(newValue)
+	F.ask_value(user)
 
 /datum/nano_module/records/Topic(href, href_list)
 	if(..())
@@ -112,7 +81,7 @@
 		return 1
 	if(href_list["set_active"])
 		var/ID = text2num(href_list["set_active"])
-		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
+		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			if(R.uid == ID)
 				active_record = R
 				break
@@ -121,7 +90,7 @@
 		if(!check_access(usr, access_heads))
 			to_chat(usr, "Access Denied.")
 			return
-		active_record = new/datum/computer_file/crew_record()
+		active_record = new/datum/computer_file/report/crew_record()
 		GLOB.all_crew_records.Add(active_record)
 		return 1
 	if(href_list["print_active"])
@@ -130,18 +99,19 @@
 		print_text(record_to_html(active_record, get_record_access(usr)), usr)
 		return 1
 	if(href_list["search"])
-		var/field = text2path("/record_field/"+href_list["search"])
+		var/field_name = href_list["search"]
 		var/search = sanitize(input("Enter the value for search for.") as null|text)
 		if(!search)
 			return
-		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
-			if(lowertext(R.get_field(field)) == lowertext(search))
+		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
+			var/datum/report_field/field = R.field_from_name(field_name)
+			if(lowertext(field.get_value()) == lowertext(search))
 				active_record = R
 				return 1
 		message = "Unable to find record containing '[search]'"
 		return 1
 
-	var/datum/computer_file/crew_record/R = active_record
+	var/datum/computer_file/report/crew_record/R = active_record
 	if(!istype(R))
 		return 1
 	if(href_list["edit_photo_front"])
@@ -155,7 +125,7 @@
 			active_record.photo_side = photo
 		return 1
 	if(href_list["edit_field"])
-		edit_field(usr, text2path(href_list["edit_field"]))
+		edit_field(usr, text2num(href_list["edit_field"]))
 		return 1
 
 /datum/nano_module/records/proc/get_photo(var/mob/user)

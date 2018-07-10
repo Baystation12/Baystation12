@@ -63,10 +63,10 @@
 	if(!enabled)
 		return 0
 	// Too damaged to work at all.
-	if(damage > damage_failure)
+	if(damage >= damage_failure)
 		return 0
 	// Still working. Well, sometimes...
-	if(damage > damage_malfunction)
+	if(damage >= damage_malfunction)
 		if(prob(malfunction_probability))
 			return 0
 	// Good to go.

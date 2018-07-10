@@ -93,11 +93,11 @@
 		if(!loaded_vial)
 			if(!do_after(user,10) || loaded_vial || !(W in user))
 				return 0
+			if(!user.unEquip(W, src))
+				return
 			if(W.is_open_container())
 				W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 				W.update_icon()
-			user.drop_item()
-			W.forceMove(src)
 			loaded_vial = W
 			reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 			loaded_vial.reagents.trans_to_holder(reagents,volume)
@@ -162,6 +162,11 @@
 	name = "autoinjector (oxycodone)"
 	icon_state = "black"
 	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad
+	name = "autoinjector (anti-rad)"
+	icon_state = "yellow"
+	starts_with = list(/datum/reagent/hyronalin = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"

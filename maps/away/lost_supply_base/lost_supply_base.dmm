@@ -439,7 +439,9 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aU" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aV" = (
@@ -496,7 +498,7 @@
 /area/lost_supply_base)
 "bb" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 5
 	},
 /turf/simulated/floor/airless,
@@ -573,12 +575,12 @@
 	},
 /obj/item/stack/material/steel,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
 /area/lost_supply_base/office)
 "bn" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
 /area/lost_supply_base/office)
 "bo" = (
@@ -622,7 +624,7 @@
 /area/lost_supply_base)
 "bt" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken4"
+	icon_state = "steel_broken4"
 	},
 /area/lost_supply_base)
 "bu" = (
@@ -738,26 +740,16 @@
 /area/lost_supply_base/office)
 "bG" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken4"
+	icon_state = "steel_broken4"
 	},
 /area/lost_supply_base/office)
 "bH" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken1"
+	icon_state = "steel_broken1"
 	},
 /area/lost_supply_base/office)
 "bI" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base/office)
 "bJ" = (
@@ -785,7 +777,7 @@
 /area/lost_supply_base)
 "bL" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 6
 	},
 /turf/simulated/floor/airless,
@@ -820,17 +812,7 @@
 /turf/space,
 /area/lost_supply_base/office)
 "bR" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base)
 "bS" = (
@@ -859,7 +841,7 @@
 /area/lost_supply_base)
 "bW" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken1"
+	icon_state = "steel_broken1"
 	},
 /area/lost_supply_base)
 "bX" = (
@@ -882,7 +864,7 @@
 /area/lost_supply_base/office)
 "cb" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken0"
+	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base/office)
 "cc" = (
@@ -917,7 +899,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken4"
+	icon_state = "steel_broken4"
 	},
 /area/lost_supply_base)
 "ch" = (
@@ -943,7 +925,7 @@
 /area/lost_supply_base/common)
 "cl" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 1
 	},
 /turf/simulated/floor/airless,
@@ -951,12 +933,12 @@
 "cm" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken1"
+	icon_state = "steel_broken1"
 	},
 /area/lost_supply_base)
 "cn" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 5
 	},
 /obj/random/trash,
@@ -1058,7 +1040,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base/common)
 "cB" = (
@@ -1094,7 +1076,7 @@
 /area/lost_supply_base)
 "cI" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken0"
+	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base)
 "cJ" = (
@@ -1106,7 +1088,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base)
 "cK" = (
@@ -1114,20 +1096,11 @@
 /area/lost_supply_base/common)
 "cL" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base/common)
 "cM" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/space,
 /area/lost_supply_base/common)
 "cN" = (
@@ -1181,7 +1154,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
 /area/lost_supply_base)
 "cV" = (
@@ -1189,14 +1162,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "cW" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base/common)
 "cX" = (
@@ -1237,7 +1203,7 @@
 "db" = (
 /obj/machinery/door/window/southleft,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base/common)
 "dc" = (
@@ -1327,7 +1293,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base)
 "dq" = (
@@ -1357,7 +1323,7 @@
 /area/lost_supply_base)
 "du" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 6
 	},
 /obj/item/weapon/storage/backpack/dufflebag,
@@ -1398,7 +1364,7 @@
 "dB" = (
 /obj/item/weapon/material/kitchen/utensil/fork,
 /obj/structure/bed/chair{
-	 icon_state = "chair_preview";
+	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1406,7 +1372,7 @@
 "dC" = (
 /obj/random/trash,
 /obj/machinery/light{
-	 icon_state = "tube1";
+	icon_state = "tube1";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1480,23 +1446,13 @@
 /area/lost_supply_base)
 "dO" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
 /area/lost_supply_base)
 "dP" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
-/area/lost_supply_base/common)
-"dQ" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/space,
 /area/lost_supply_base/common)
 "dR" = (
 /turf/simulated/shuttle/wall{
@@ -1583,14 +1539,14 @@
 /area/lost_supply_base/common)
 "ef" = (
 /obj/structure/bed/chair{
-	 icon_state = "chair_preview";
+	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eg" = (
 /obj/structure/shuttle/engine/propulsion{
-	 icon_state = "propulsion_r";
+	icon_state = "propulsion_r";
 	dir = 8
 	},
 /turf/space,
@@ -1674,23 +1630,12 @@
 /area/lost_supply_base/common)
 "et" = (
 /obj/machinery/light{
-	 icon_state = "tube1";
+	icon_state = "tube1";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
-/area/lost_supply_base/common)
-"eu" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/turf/space,
 /area/lost_supply_base/common)
 "ev" = (
 /obj/machinery/portable_atmospherics/canister,
@@ -1718,7 +1663,7 @@
 /area/lost_supply_base)
 "eA" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken4"
+	icon_state = "steel_broken4"
 	},
 /area/lost_supply_base/common)
 "eB" = (
@@ -1897,7 +1842,7 @@
 "fb" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken0"
+	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base)
 "fc" = (
@@ -1993,7 +1938,7 @@
 /area/lost_supply_base)
 "fn" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2019,7 +1964,7 @@
 /area/lost_supply_base/supply)
 "fr" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned0"
+	icon_state = "steel_burned0"
 	},
 /area/lost_supply_base/supply)
 "fs" = (
@@ -2047,7 +1992,7 @@
 /area/lost_supply_base)
 "fx" = (
 /obj/machinery/atmospherics/unary/vent_scrubber{
-	 icon_state = "map_scrubber_off";
+	icon_state = "map_scrubber_off";
 	dir = 1
 	},
 /turf/simulated/floor/airless,
@@ -2148,7 +2093,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base)
 "fN" = (
@@ -2220,24 +2165,24 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken0"
+	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base/supply)
 "fV" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_burned1"
+	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base/supply)
 "fW" = (
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken0"
+	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base/supply)
 "fX" = (
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /obj/effect/landmark/corpse/syndicate,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken4"
+	icon_state = "steel_broken4"
 	},
 /area/lost_supply_base/supply)
 "fY" = (
@@ -2293,7 +2238,7 @@
 /area/lost_supply_base)
 "gd" = (
 /obj/effect/floor_decal/industrial/warning{
-	 icon_state = "warning";
+	icon_state = "warning";
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -2389,7 +2334,7 @@
 /area/lost_supply_base/supply)
 "gr" = (
 /obj/machinery/shower{
-	 icon_state = "shower";
+	icon_state = "shower";
 	dir = 8
 	},
 /obj/random/soap,
@@ -2425,9 +2370,15 @@
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/airless{
-	 icon_state = "steel_broken0"
+	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base/supply)
+"Jd" = (
+/obj/item/modular_computer/console{
+	dir = 1
+	},
+/turf/simulated/floor/shuttle/blue,
+/area/space)
 
 (1,1,1) = {"
 aa
@@ -7064,7 +7015,7 @@ dI
 dW
 ej
 ex
-ej
+Jd
 eO
 eP
 aa
@@ -10018,9 +9969,9 @@ cW
 ck
 ck
 cM
-dQ
-dQ
-eu
+cM
+cM
+cM
 ck
 ck
 ck

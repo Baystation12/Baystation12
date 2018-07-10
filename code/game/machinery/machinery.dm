@@ -115,6 +115,8 @@ Class Procs:
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/clicksound			// sound played on succesful interface use by a carbon lifeform
 	var/clickvol = 40		// sound played on succesful interface use
+	var/core_skill = SKILL_DEVICES //The skill used for skill checks for this machine (mostly so subtypes can use different skills).
+	var/operator_skill      // Machines often do all operations on Process(). This caches the user's skill while the operations are running.
 
 /obj/machinery/Initialize(mapload, d=0)
 	. = ..()

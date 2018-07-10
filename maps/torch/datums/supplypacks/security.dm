@@ -55,9 +55,18 @@
 	containername = "\improper NanoTrasen light armor crate"
 	access = access_nanotrasen
 
+/decl/hierarchy/supply_pack/security/pistol
+	name = "Weapons - Ballistic sidearms"
+	contains = list(/obj/item/weapon/gun/projectile/military = 4)
+	cost = 40
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper Ballistic sidearms crate"
+	access = access_armory
+	security_level = SUPPLY_SECURITY_ELEVATED
+
 /decl/hierarchy/supply_pack/security/laser
 	name = "Weapons - Laser carbines"
-	contains = list(/obj/item/weapon/gun/energy/secure/laser = 4)
+	contains = list(/obj/item/weapon/gun/energy/laser/secure = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Laser carbines crate"
@@ -109,6 +118,31 @@
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
+/decl/hierarchy/supply_pack/security/pistolammo
+	name = "Ammunition - .45 magazines"
+	contains = list(/obj/item/ammo_magazine/c45mds = 4)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper .45 ammunition crate"
+	access = access_security
+	security_level = SUPPLY_SECURITY_ELEVATED
+
+/decl/hierarchy/supply_pack/security/pistolammorubber
+	name = "Ammunition - .45 rubber"
+	contains = list(/obj/item/ammo_magazine/c45mds/rubber = 4)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper .45 rubber ammunition crate"
+	access = access_security
+
+/decl/hierarchy/supply_pack/security/pistolammopractice
+	name = "Ammunition - .45 practice"
+	contains = list(/obj/item/ammo_magazine/c45mds/practice = 8)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper .45 practice ammunition crate"
+	access = access_security
+
 /decl/hierarchy/supply_pack/security/holster
 	name = "Misc - Holster crate"
 	contains = list(/obj/item/clothing/accessory/holster/hip = 4)
@@ -154,17 +188,6 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Practice laser carbine crate"
 	access = access_solgov_crew
-
-/decl/hierarchy/supply_pack/security/pistolammorubber //overriding standard pack
-	name = "Ammo - Assorted Non-Lethal, Pistol"
-	contains = list(/obj/item/ammo_magazine/c45m/rubber = 2, /obj/item/ammo_magazine/c45m/flash = 2, /obj/item/ammo_magazine/c44/rubber = 2)
-	cost = 25
-	containername = "\improper Non-lethal ammunition crate"
-	access = access_heads //only heads get these
-
-/decl/hierarchy/supply_pack/security/pistolammo //overriding standard pack
-	cost = 30
-	access = access_heads
 
 /decl/hierarchy/supply_pack/security/magnum_ammo
 	name = "Ammo - .44 Magnum"

@@ -56,6 +56,8 @@
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
+	var/damtype = BRUTE
+	var/defense = "melee" //what armor protects against its attacks
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -63,7 +65,6 @@
 
 	// contained in a cage
 	var/in_stasis = 0
-
 /mob/living/simple_animal/Life()
 	..()
 	if(!living_observers_present(GetConnectedZlevels(z)))
@@ -84,10 +85,13 @@
 	if(health > maxHealth)
 		health = maxHealth
 
+
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
+	handle_confused()
 	handle_supernatural()
+	handle_impaired_vision()
 
 	if(buckled && can_escape)
 		if(istype(buckled, /obj/effect/energy_net))
@@ -100,14 +104,11 @@
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
-		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move)
-				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
-					moving_to = pick(GLOB.cardinal)
-					set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
-					Move(get_step(src,moving_to))
+				if(!(stop_automated_movement_when_pulled && pulledby)) //Some animals don't move when pulled
+					SelfMove(pick(GLOB.cardinal))
 					turns_since_move = 0
 
 	//Speaking
@@ -190,6 +191,7 @@
 		damage = (Proj.damage / 8)
 
 	adjustBruteLoss(damage)
+	Proj.on_hit(src)
 	return 0
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
@@ -372,3 +374,6 @@
 	return
 /mob/living/simple_animal/ExtinguishMob()
 	return
+
+/mob/living/simple_animal/is_burnable()
+	return heat_damage_per_tick

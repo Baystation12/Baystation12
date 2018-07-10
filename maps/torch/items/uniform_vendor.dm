@@ -64,7 +64,7 @@
 			selected_outfit.Cut()
 		else
 			var/obj/item/weapon/card/id/I = user.get_active_hand()
-			if(I && user.unEquip(I, FALSE, src))
+			if(I && user.unEquip(I, src))
 				ID = I
 		. = TOPIC_REFRESH
 	if(href_list["get_all"])
@@ -99,10 +99,9 @@
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
-	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, FALSE, src))
+	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, src))
 		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
 		ID = W
-		user.drop_from_inventory(W, src)
 		attack_hand(user)
 	else
 		..()
@@ -141,14 +140,12 @@
 			if(child.departments & tmp_department)
 				user_outfit = child
 				break
-
-		if(user_rank.sort_order >= 11) //user is an officer
-			if(user_outfit.children[1]) // officer outfit exists
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+			if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
+				user_outfit = child
+		if(department & COM) //user is in command of their department
+			if(user_outfit.children[1])// Command outfit exists
 				user_outfit = user_outfit.children[1]
-
-				if(department & COM) //user is in command of their department
-					if(user_outfit.children[1])// Command outfit exists
-						user_outfit = user_outfit.children[1]
 
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 

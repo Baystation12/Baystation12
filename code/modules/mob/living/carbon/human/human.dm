@@ -59,7 +59,7 @@
 	. = ..()
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
-		stat("Move Mode:", "[m_intent]")
+		stat("Move Mode:", "[move_intent.name]")
 
 		if(evacuation_controller)
 			var/eta_status = evacuation_controller.get_status_panel_eta()
@@ -138,7 +138,7 @@
 
 	// focus most of the blast on one organ
 	var/obj/item/organ/external/take_blast = pick(organs)
-	take_blast.take_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
+	take_blast.take_external_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
 
 	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
 	b_loss *= 0.3
@@ -153,7 +153,7 @@
 			loss_val = 0.4
 		else
 			loss_val = 0.05
-		temp.take_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
+		temp.take_external_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
@@ -407,7 +407,7 @@
 			else
 				perpname = name
 
-			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 			if(R)
 				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) in GLOB.security_statuses as null|text
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
@@ -435,12 +435,12 @@
 				perpname = id.registered_name
 			else
 				perpname = src.name
-			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
 				if(hasHUD(usr, HUD_SECURITY))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_criminalStatus())]")
+					to_chat(usr, "<b>Details:</b> [E.get_secRecord()]")
 					read = 1
 
 			if(!read)
@@ -456,7 +456,7 @@
 			else
 				perpname = src.name
 
-			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
 				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) in GLOB.physical_statuses as null|text
 				if(hasHUD(usr, HUD_MEDICAL) && setmedical)
@@ -484,14 +484,14 @@
 			else
 				perpname = src.name
 
-			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
 				if(hasHUD(usr, HUD_MEDICAL))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
 					to_chat(usr, "<b>Species:</b> [E.get_species()]")
 					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
-					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_medRecord())]")
+					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
 					read = 1
 			if(!read)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
@@ -564,7 +564,7 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation && !nabbing)
+	if(species.has_fine_manipulation(src))
 		return 1
 	if(!silent)
 		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
@@ -899,7 +899,7 @@
 				else if(prob(5))
 					jossle_internal_object(groin,O)
 
-/mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/organ, var/obj/item/O)
+/mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/external/organ, var/obj/item/O)
 	// All kinds of embedded objects cause bleeding.
 	if(!can_feel_pain())
 		to_chat(src, "<span class='warning'>You feel [O] moving inside your [organ.name].</span>")
@@ -910,7 +910,7 @@
 			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
 		custom_pain(msg,40,affecting = organ)
 
-	organ.take_damage(rand(1,3), 0, 0)
+	organ.take_external_damage(rand(1,3), 0, 0)
 	if(!(organ.robotic >= ORGAN_ROBOT) && (should_have_organ(BP_HEART))) //There is no blood in protheses.
 		organ.status |= ORGAN_BLEEDING
 		src.adjustToxLoss(rand(1,3))
@@ -967,19 +967,19 @@
 		to_chat(src, "<span class='notice'>You can't look up right now.</span>")
 	return
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
 	if(!dna)
 		if(!new_species)
 			new_species = SPECIES_HUMAN
 	else
 		if(!new_species)
 			new_species = dna.species
-		else
-			dna.species = new_species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!all_species[new_species])
 		new_species = SPECIES_HUMAN
+	if(dna)
+		dna.species = new_species
 
 	if(species)
 
@@ -1040,6 +1040,9 @@
 	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
+
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		QDEL_NULL_LIST(worn_underwear)
 
 	spawn(0)
 		regenerate_icons()
@@ -1278,11 +1281,6 @@
 		to_chat(S, "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>")
 	current_limb.undislocate()
 
-/mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
-	if(W in organs)
-		return
-	. = ..()
-
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
 	..()
 	if(update_hud)
@@ -1300,14 +1298,10 @@
 	return 0
 
 /mob/living/carbon/human/verb/pull_punches()
-	set name = "Pull Punches"
+	set name = "Switch Stance"
 	set desc = "Try not to hurt them."
 	set category = "IC"
-
-	if(incapacitated() || species.species_flags & SPECIES_FLAG_CAN_NAB) return
-	pulling_punches = !pulling_punches
-	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
-	return
+	species.toggle_stance(src)
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
@@ -1399,7 +1393,7 @@
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
-	if(H)
+	if(H && !H.open)
 		. *= (H.robotic < ORGAN_ROBOT) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
@@ -1487,10 +1481,10 @@
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 
-/mob/living/carbon/human/proc/make_adrenaline(amount)
+/mob/living/carbon/human/proc/make_reagent(amount, reagent_type)
 	if(stat == CONSCIOUS)
-		var/limit = max(0, reagents.get_overdose(/datum/reagent/adrenaline) - reagents.get_reagent_amount(/datum/reagent/adrenaline))
-		reagents.add_reagent(/datum/reagent/adrenaline, min(amount, limit))
+		var/limit = max(0, reagents.get_overdose(reagent_type) - reagents.get_reagent_amount(reagent_type))
+		reagents.add_reagent(reagent_type, min(amount, limit))
 
 //Get fluffy numbers
 /mob/living/carbon/human/proc/get_blood_pressure()
@@ -1514,9 +1508,17 @@
 
 /mob/living/carbon/human/ranged_accuracy_mods()
 	. = ..()
+	if(get_shock() > 10 && !skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		. -= 1
 	if(get_shock() > 50)
 		. -= 1
 	if(shock_stage > 10)
 		. -= 1
 	if(shock_stage > 30)
 		. -= 1
+	if(skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		. += 1
+	if(skill_check(SKILL_WEAPONS, SKILL_EXPERT))
+		. += 1
+	if(skill_check(SKILL_WEAPONS, SKILL_PROF))
+		. += 2

@@ -65,15 +65,34 @@
 
 
 				<h2><a name="Modules">Cyborg Modules</h2>
-				When a cyborg is created it picks out of an array of modules to designate its purpose. There are 6 different cyborg modules.
+				When a cyborg is created it picks out of an array of modules to designate its purpose. There are 11 different cyborg modules.<br>
+				All cyborg modules carry a flash.
 
 				<h3>Standard Cyborg</h3>
 				The standard cyborg module is a multi-purpose cyborg. It is equipped with various modules, allowing it to do basic tasks.<br>A Standard Cyborg comes with:
 				<ul>
 				  <li>Crowbar</li>
+				  <li>Wrench</li>
 				  <li>Stun Baton</li>
 				  <li>Health Analyzer</li>
 				  <li>Fire Extinguisher</li>
+				</ul>
+
+				<h3>Research Cyborg</h3>
+				The research cyborg module is an effective researching machine. It is equipped with tools to effectively run RnD.<be>A Research Cyborg comes with:
+				<ul>
+				  <li>Portable Destructive Analyzer</li>
+				  <li>Research Gripper</li>
+				  <li>Sheet Loader</li>
+				  <li>Robot Analyzer</li>
+				  <li>Robot Card</li>
+				  <li>Set of Engineering Tools</li>
+				  <li>Laser Scalpel</li>
+				  <li>Circular Saw</li>
+				  <li>Fire Extinguisher</li>
+				  <li>Syringe</li>
+				  <li>Chemistry Gripper</li>
+				  <li>Nanopaste</li>
 				</ul>
 
 				<h3>Engineering Cyborg</h3>
@@ -81,28 +100,34 @@
 				<ul>
 				  <li>A basic set of engineering tools</li>
 				  <li>Metal Synthesizer</li>
+				  <li>Plasteel Synthesizer</li>
 				  <li>Reinforced Glass Synthesizer</li>
-				  <li>An RCD</li>
 				  <li>Wire Synthesizer</li>
 				  <li>Fire Extinguisher</li>
+				  <li>Roll of Tape</li>
 				  <li>Built-in Optical Meson Scanners</li>
 				</ul>
 
 				<h3>Mining Cyborg</h3>
 				The Mining Cyborg module comes equipped with the latest in mining equipment. They are efficient at mining due to no need for oxygen, but their power cells limit their time in the mines.<br>A Mining Cyborg comes with:
 				<ul>
-				  <li>Jackhammer</li>
-				  <li>Shovel</li>
-				  <li>Mining Satchel</li>
-				  <li>Built-in Optical Meson Scanners</li>
+				  <li>Wrench</li>
+				  <li>Scredriver</li>
+				  <li>Crowbar</li>
+				  <li>Ore Satchel</li>
+				  <li>Borg Drill</li>
+				  <li>Mining Gripper</li>
+				  <li>Ore Scanner</li>
 				</ul>
 
 				<h3>Security Cyborg</h3>
-				The Security Cyborg module is equipped with effective security measures used to apprehend and arrest criminals without harming them a bit.<br>A Security Cyborg comes with:
+				The Security Cyborg module is equipped with effective security measures used to apprehend and arrest criminals.<br>A Security Cyborg comes with:
 				<ul>
 				  <li>Stun Baton</li>
 				  <li>Handcuffs</li>
-				  <li>Taser</li>
+				  <li>Energy Gun</li>
+				  <li>Megaphone</li>
+				  <li>Roll of Tape</li>
 				</ul>
 
 				<h3>Janitor Cyborg</h3>
@@ -111,18 +136,71 @@
 				  <li>Mop</li>
 				  <li>Hand Bucket</li>
 				  <li>Cleaning Spray Synthesizer and Spray Nozzle</li>
+				  <li>Light Replacer</li>
+				  <li>Trash Bag</li>
 				</ul>
 
 				<h3>Service Cyborg</h3>
 				The service cyborg module comes ready to serve your human needs. It includes various entertainment and refreshment devices. Occasionally some service cyborgs may have been referred to as "Bros."<br>A Service Cyborg comes with:
 				<ul>
-				  <li>Shaker</li>
-				  <li>Industrial Dropper</li>
-				  <li>Platter</li>
-				  <li>Beer Synthesizer</li>
+				  <li>Service Gripper</li>
+				  <li>Bucket</li>
+				  <li>Hoe</li>
+				  <li>Hatchet</li>
 				  <li>Zippo Lighter</li>
 				  <li>Rapid-Service-Fabricator (Produces various entertainment and refreshment objects)</li>
+				  <li>Plant Analyzer</li>
+				  <li>Robot Harvester</li>
+				  <li>Rolling Pin</li>
+				  <li>Knife</li>
+				</ul>
+
+				<h3>Clerical Cyborg</h3>
+				The clerical cyborg module is prepared to run the supply department, including a vareity of stamps.<br>A clerical cyborg comes with:
+				<ul>
 				  <li>Pen</li>
+				  <li>Paper Dispenser</li>
+				  <li>Clerical Gripper</li>
+				  <li>Hand Labeler</li>
+				  <li>Generic Stamp</li>
+				  <li>Denied Stamp</li>
+				  <li>Package Wrapper</li>
+				  <li>Destination Tagger</li>
+				</ul>
+				
+				<h3>Crisis Cyborg</h3>
+				The crisis cyborg module is prepared to handle a variety of non-surgical medical emergencies.<br>A medical cyborg comes with:
+				<ul>
+				  <li>Crowbar</li>
+				  <li>Health Analyzer</li>
+				  <li>Reagent Scanner</li>
+				  <li>Roller Bed Rack</li>
+				  <li>Body Bag Rack</li>
+				  <li>Hypospray</li>
+				  <li>Automatic Defibrillator</li>
+				  <li>Industrial Dropper</li>
+				  <li>Syringe</li>
+				  <li>Chemistry Gripper</li>
+				  <li>Fire Extinguisher</li>
+				  <li>Inflatables Dispenser</li>
+				  <li>Roll of Tape</li>
+				</ul>
+
+				<h3>Surgeon Cyborg</h3>
+				The surgeon cyborg modules is prepared to handle a variety of surgical medical emergencies.<br>A medical cyborg comes with:
+				<ul>
+				  <li>Set of Surgery Tools</li>
+				  <li>Health Analyzer</li>
+				  <li>Roller Bed Rack</li>
+				  <li>Body Bag Rack</li>
+				  <li>Hypospray</li>
+				  <li>Automatic Defibrillator</li>
+				  <li>Industrial Dropper</li>
+				  <li>Syringe</li>
+				  <li>Chemistry Gripper</li>
+				  <li>Fire Extinguisher</li>
+				  <li>Inflatables Dispenser</li>
+				  <li>Roll of Tape</li>
 				</ul>
 
 				<h2><a name="Construction">Cyborg Construction</h2>
@@ -332,9 +410,11 @@
 				<br>
 				<h2>STARTUP PROCEDURE</h2>
 				<ol>
-				<li>Fill reactor loop and radiator loop with two (2) standard canisters of nitrogen gas each.</li>
+				<li>Fill reactor loop and radiator loop with two (2) standard canisters of carbon dioxide gas each.</li>
 				<li>Ensure that pumps and filters are on and operating at maximum power.</li>
-				<li>Fire <del>5</del> <del>15</del> <del>2</del> <del>UNKNOWN</del> 8-12 pulses from emitter at supermatter crystal. Reactor blast doors must be open for this procedure.</li>
+				<li><i>IMPORTANT: </i>Ensure the filters are configured for carbon dioxide instead of hydrogen.
+				<li>Ensure the pump to the phoron canister is set to max.</li>
+				<li>Fire <del>5</del> <del>15</del> <del>2</del> <del>UNKNOWN</del> 12-16 pulses from emitter at supermatter crystal, or until the EER reaches about 200. Reactor blast doors must be open for this procedure.</li>
 				</ol>
 				<br>
 				<h2>OPERATION AND MAINTENANCE</h2>
@@ -343,14 +423,14 @@
 				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
 				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
 				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
-				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, see EMERGENCY COOLING PROCEDURE.</li>
+				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, either pump in more gas to cool the engine, or see EMERGENCY COOLING PROCEDURE.</li>
 				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>
 				<h2>EMERGENCY COOLING PROCEDURE</h2>
 				<ol>
-				<li>Open Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
-				<li>When reactor temperature returns to safe operating levels, close Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
+				<li>Open the Emergency Cooling Valve and the TEG bypass valve.</li>
+				<li>When reactor temperature returns to safe operating levels, close the Emergency Cooling Valve and TEG Bypass Valve.</li>
 				<li>If reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>

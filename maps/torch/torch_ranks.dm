@@ -16,7 +16,7 @@
 		/datum/species/nabber  = list(/datum/mil_branch/civilian),
 		/datum/species/tajaran = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/skrell  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/unathi  = list(/datum/mil_branch/civilian),
+		/datum/species/unathi  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/vox     = list()
 	)
 
@@ -48,6 +48,12 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
 				/datum/mil_rank/ec/o1
+			)
+		),
+		/datum/species/unathi = list(
+			/datum/mil_branch/expeditionary_corps = list(
+				/datum/mil_rank/ec/e3,
+				/datum/mil_rank/ec/e5
 			)
 		)
 	)
@@ -85,8 +91,8 @@
 
 	assistant_job = "Crewman"
 
-	min_skill = list(	/decl/hierarchy/skill/research/science				= SKILL_BASIC,
-						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC)
+	min_skill = list(	SKILL_SCIENCE = SKILL_BASIC,
+						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/fleet
 	name = "Fleet"
@@ -143,9 +149,9 @@
 	)
 
 	assistant_job = "Crewman"
-	min_skill = list(	/decl/hierarchy/skill/general/hauling				= SKILL_BASIC,
-						/decl/hierarchy/skill/security/weapons				= SKILL_BASIC,
-						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC)
+	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
+						SKILL_WEAPONS = SKILL_BASIC,
+						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/civilian
 	name = "Civilian"
@@ -156,6 +162,7 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/marshal,
 		/datum/mil_rank/civ/synthetic
 	)
@@ -164,6 +171,7 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/marshal,
 		/datum/mil_rank/civ/synthetic
 	)

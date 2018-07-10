@@ -4,7 +4,7 @@
 	feedback = "SJ"
 	school = "illusion"
 	charge_max = 500
-	spell_flags = 0
+	spell_flags = NOFACTION
 	invocation = "Dii Oda Baji."
 	invocation_type = SpI_WHISPER
 

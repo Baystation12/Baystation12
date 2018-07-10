@@ -57,7 +57,7 @@
 #define GETPULSE_HAND 0 // Less accurate. (hand)
 #define GETPULSE_TOOL 1 // More accurate. (med scanner, sleeper, etc.)
 
-//intent flags, why wasn't this done the first time?
+//intent flags
 #define I_HELP		"help"
 #define I_DISARM	"disarm"
 #define I_GRAB		"grab"
@@ -96,6 +96,9 @@
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
 #define DEFAULT_QUICK_COOLDOWN  4
 
+#define FAST_WEAPON_COOLDOWN 3
+#define DEFAULT_WEAPON_COOLDOWN 5
+#define SLOW_WEAPON_COOLDOWN 7
 
 #define MIN_SUPPLIED_LAW_NUMBER 15
 #define MAX_SUPPLIED_LAW_NUMBER 50
@@ -190,6 +193,7 @@
 #define BP_POLYP    "polyp segment"
 #define BP_ANCHOR   "anchoring ligament"
 #define BP_PHORON   "phoron filter"
+#define BP_ACETONE  "acetone reactor"
 
 // Robo Organs.
 #define BP_POSIBRAIN	"posibrain"
@@ -257,11 +261,10 @@
 #define SPECIES_IPC         "Machine"
 #define SPECIES_UNATHI      "Unathi"
 #define SPECIES_SKRELL      "Skrell"
-#define SPECIES_NABBER      "Giant Armoured Serpentid"
+#define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
-#define SPECIES_BOGANI      "Bogani"
-#define SPECIES_EGYNO       "Egyno"
 #define SPECIES_XENO        "Xenophage"
+#define SPECIES_ALIEN       "Humanoid"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
@@ -278,3 +281,5 @@
 #define AURA_TYPE_WEAPON "Weapon"
 #define AURA_TYPE_THROWN "Thrown"
 #define AURA_TYPE_LIFE   "Life"
+
+#define SPECIES_BLOOD_DEFAULT 560

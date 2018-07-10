@@ -52,7 +52,6 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 		return
 	if(istype(O,/obj/item/integrated_circuit))
 		to_chat(user, "<span class='notice'>You insert the circuit into [src]. </span>")
-		user.unEquip(O)
 		qdel(O)
 		metal = min(metal+1,maxMetal)
 		return 1
@@ -60,14 +59,15 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 
 /obj/machinery/integrated_circuit_printer/attack_hand(var/mob/user)
 	user.set_machine(src)
-	var/dat = "<center><b>Integrated Circuit Printer<br>\
+	var/dat = list()
+	dat += "<center><b>Integrated Circuit Printer<br>\
 				Metal: [metal]/[maxMetal]</b><br>\
 				<a href='?src=\ref[src];mode=Circuits'>Circuits</a>	<a href='?src=\ref[src];mode=Assemblies'>Assemblies</a></center><br><br>"
 	for(var/type in recipe_list[mode])
 		var/obj/O = type
-		dat += "<A href='?src=\ref[src];build=[type]'>[initial(O.name)]</A>: [initial(O.desc)]<br>"
+		dat += "<A href='?src=\ref[src];build=\ref[type]'>[initial(O.name)]</A>: [initial(O.desc)]<br>"
 
-	show_browser(user,dat,"window=integrated")
+	show_browser(user, JOINTEXT(dat),"window=integrated")
 
 /obj/machinery/integrated_circuit_printer/Topic(href, href_list)
 	if(..())
@@ -78,8 +78,8 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 	if(href_list["mode"])
 		mode = href_list["mode"]
 	else
-		var/build_type = text2path(href_list["build"])
-		if(!build_type || !ispath(build_type))
+		var/build_type = locate(href_list["build"]) in recipe_list[mode]
+		if(!build_type)
 			return 1
 		var/cost = 1
 		if(ispath(build_type, /obj/item/device/electronic_assembly))

@@ -44,7 +44,8 @@
 			if(common_antibodies.len)
 				V.dead = 1
 
-	immunity = min(immunity + 0.25, immunity_norm)
+	if(immunity > 0.2 * immunity_norm && immunity < immunity_norm)
+		immunity = min(immunity + 0.25, immunity_norm)
 
 	if(life_tick % 5 && immunity < 15 && chem_effects[CE_ANTIVIRAL] < VIRUS_COMMON && !virus2.len)
 		var/infection_prob = 15 - immunity

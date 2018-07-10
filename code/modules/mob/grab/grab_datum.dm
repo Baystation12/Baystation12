@@ -114,10 +114,10 @@
 	if(can_throw)
 		. = affecting
 		var/mob/thrower = G.loc
-		
+
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1)
 		qdel(G)
-		
+
 		// check if we're grabbing with our inactive hand
 		G = thrower.get_inactive_hand()
 		if(!istype(G))	return
@@ -272,8 +272,8 @@
 
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
 		to_chat(G.assailant, "<span class='warning'>You can't resist in your current state!</span>")
-
-	var/break_strength = breakability + size_difference(affecting, assailant)
+	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
+	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 
 	if(affecting.incapacitated(INCAPACITATION_ALL))
 		break_strength--
@@ -298,10 +298,3 @@
 	return mob_size_difference(A.mob_size, B.mob_size)
 
 /datum/grab/proc/moved_effect(var/obj/item/grab/G)
-
-/client/proc/Process_Grab()
-	//if we are being grabbed
-	if(isliving(mob))
-		var/mob/living/L = mob
-		if(!L.canmove && L.grabbed_by.len)
-			L.resist() //shortcut for resisting grabs

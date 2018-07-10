@@ -16,6 +16,7 @@
 	var/created = 0
 	var/amount = 1             // number of wounds of this type
 	var/germ_level = 0         // amount of germs in the wound
+	var/obj/item/organ/external/parent_organ	// the organ the wound is on, if on an organ
 
 	/*  These are defined by the wound type and should not be changed */
 	var/list/stages            // stages such as "cut", "deep cut", etc.
@@ -28,7 +29,7 @@
 	var/tmp/list/desc_list = list()
 	var/tmp/list/damage_list = list()
 
-/datum/wound/New(var/damage)
+/datum/wound/New(var/damage, var/obj/item/organ/external/organ = null)
 
 	created = world.time
 
@@ -44,6 +45,13 @@
 	src.init_stage(damage)
 
 	bleed_timer += damage
+
+	if(istype(organ))
+		parent_organ = organ
+
+/datum/wound/Destroy()
+	parent_organ = null
+	. = ..()
 
 // returns 1 if there's a next stage, 0 otherwise
 /datum/wound/proc/init_stage(var/initial_damage)
@@ -84,6 +92,7 @@
 	if (!(other.clamped) != !(src.clamped)) return 0
 	if (!(other.salved) != !(src.salved)) return 0
 	if (!(other.disinfected) != !(src.disinfected)) return 0
+	if (!(other.parent_organ) != parent_organ) return 0
 	return 1
 
 /datum/wound/proc/merge_wound(var/datum/wound/other)
@@ -113,9 +122,9 @@
 		if (BRUISE)
 			return prob(dam_coef*5)
 		if (BURN)
-			return prob(dam_coef*10)
+			return prob(dam_coef*25)
 		if (CUT)
-			return prob(dam_coef*20)
+			return prob(dam_coef*10)
 
 	return 0
 
@@ -133,6 +142,12 @@
 /datum/wound/proc/heal_damage(amount)
 	if(embedded_objects.len)
 		return amount // heal nothing
+	if(parent_organ)
+		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || parent_organ.can_heal_overkill))
+			return amount	//We don't want to heal wounds on irreparable organs.
+		else if(!(parent_organ.brute_ratio < 1 || parent_organ.can_heal_overkill))
+			return amount
+
 	var/healed_damage = min(src.damage, amount)
 	amount -= healed_damage
 	src.damage -= healed_damage

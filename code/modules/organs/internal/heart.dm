@@ -12,6 +12,9 @@
 	max_damage = 45
 	var/open
 
+/obj/item/organ/internal/heart/open
+	open = 1
+
 /obj/item/organ/internal/heart/die()
 	if(dead_icon)
 		icon_state = dead_icon
@@ -27,9 +30,9 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 		handle_blood()
 	..()
 
@@ -42,6 +45,8 @@
 
 	if(owner.shock_stage > 30)
 		pulse_mod++
+	if(owner.shock_stage > 80)
+		pulse_mod++
 
 	var/oxy = owner.get_blood_oxygenation()
 	if(oxy < BLOOD_VOLUME_OKAY) //brain wants us to get MOAR OXY
@@ -52,15 +57,14 @@
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
-	
+
 	//If heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
 	else //and if it's beating, let's see if it should
 		var/should_stop = prob(80) && owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
 		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
-		should_stop = should_stop || (prob(10) && owner.shock_stage >= 120) //traumatic shock
-		should_stop = should_stop || (prob(10) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
+		should_stop = should_stop || (prob(5) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
 			pulse = PULSE_NONE

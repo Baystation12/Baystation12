@@ -110,9 +110,9 @@
 		violent = ""
 	admin_attack_log(attacker,
 	                 victim,
-	                 "used \the [weapon] to [violent]inject - [reagents] - [amount_transferred]u transferred",
+	                 "used \the [weapon] - [reagents] - to [violent]inject [amount_transferred]u transferred",
 	                 "was [violent]injected with \the [weapon] - [reagents] - [amount_transferred]u transferred",
-	                 "used \the [weapon] to [violent]inject [reagents] ([amount_transferred]u transferred) into")
+	                 "used \the [weapon] - [reagents] - to [violent]inject [amount_transferred]u into")
 
 /proc/append_admin_tools(var/message, var/mob, var/turf/location)
 	if(location)

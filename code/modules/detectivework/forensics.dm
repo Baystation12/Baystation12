@@ -57,21 +57,25 @@ atom/var/var/fingerprintslast = null
 	if(!ignoregloves && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if (H.gloves && H.gloves.body_parts_covered & HANDS && H.gloves != src)
-			H.gloves.add_fingerprint(M)
-			if(!istype(H.gloves, /obj/item/clothing/gloves/latex))
-				return 0
+			if(istype(H.gloves, /obj/item/clothing/gloves)) //Don't add prints if you are wearing gloves.
+				var/obj/item/clothing/gloves/G = H.gloves
+				if(!G.clipped) //Fingerless gloves leave prints.
+					return 0
 			else if(prob(75))
 				return 0
-
+			H.gloves.add_fingerprint(M)
+	var/additional_chance = 0
+	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+		additional_chance = 10
 	// Add the fingerprints
-	add_partial_print(full_print)
+	add_partial_print(full_print, additional_chance)
 	return 1
 
-/atom/proc/add_partial_print(full_print)
+/atom/proc/add_partial_print(full_print, bonus)
 	if(!fingerprints[full_print])
-		fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
-		switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+		switch(max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
 			if(28 to 32)
 				if(prob(1))
 					fingerprints[full_print] = full_print 		// You rolled a one buddy.
@@ -172,6 +176,8 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		return H.get_fingerprint()
 
 /obj/item/organ/external/hand/get_fingerprint()
+	if(robotic >= ORGAN_ROBOT)
+		return null
 	if(dna && !is_stump())
 		return md5(dna.uni_identity)
 

@@ -1,7 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Tweaks to some medicines' OD effects."
-  - tweak: "Paracetamol and cold medicine now do not apply organ damage, but still prevent natural healing when you OD."
-  - tweak: "Inaprovaline, being brain soothy chem, makes you slower and sometimes slur and get drowsy when you OD (60u folks)."
-  - tweak: "Bicaridine, on top of usual toxic effects, now has a chance to heal arterial bleedings! But at the same time it blocks blood flow, lowering blood circulation by 20+% (depends on how much did you go past the OD threshold)."

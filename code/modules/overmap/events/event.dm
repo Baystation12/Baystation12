@@ -128,9 +128,6 @@
 	var/continuous = TRUE //if it should form continous blob, or can have gaps
 
 /datum/overmap_event/proc/enter(var/obj/effect/overmap/ship/victim)
-	if(!GLOB.event_manager)
-		log_error("Event manager not setup.")
-		return
 	if(victim in victims)
 		log_error("Multiple attempts to trigger the same event by [victim] detected.")
 		return
@@ -181,11 +178,12 @@
 
 /datum/overmap_event/ion
 	name = "ion cloud"
-	event = /datum/event/ionstorm
+	event = /datum/event/ionstorm/overmap
 	count = 8
 	radius = 3
 	opacity = 0
 	event_icon_states = list("ion1", "ion2", "ion3", "ion4")
+	difficulty = EVENT_LEVEL_MAJOR
 
 /datum/overmap_event/carp
 	name = "carp shoal"

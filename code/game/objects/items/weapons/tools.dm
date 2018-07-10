@@ -128,7 +128,7 @@
 	. = ..()
 
 /obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
-	if(user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
+	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
@@ -207,8 +207,7 @@
 		var/obj/item/weapon/weldpack/wp = over
 		if(wp.welder)
 			to_chat(usr, "\The [wp] already has \a [wp.welder] attached.")
-		else
-			usr.drop_from_inventory(src, wp)
+		else if(usr.unEquip(src, wp))
 			wp.welder = src
 			usr.visible_message("[usr] attaches \the [src] to \the [wp].", "You attach \the [src] to \the [wp].")
 			wp.update_icon()
@@ -234,21 +233,10 @@
 		var/obj/item/stack/rods/R = W
 		R.use(1)
 		var/obj/item/weapon/flamethrower/F = new/obj/item/weapon/flamethrower(user.loc)
-		src.loc = F
+		user.drop_from_inventory(src, F)
 		F.weldtool = src
-		if (user.client)
-			user.client.screen -= src
-		if (user.r_hand == src)
-			user.remove_from_mob(src)
-		else
-			user.remove_from_mob(src)
-		src.master = F
-		src.reset_plane_and_layer()
-		user.remove_from_mob(src)
-		if (user.client)
-			user.client.screen -= src
-		src.loc = F
-		src.add_fingerprint(user)
+		master = F
+		add_fingerprint(user)
 		return
 
 	if(istype(W, /obj/item/weapon/welder_tank))
@@ -260,7 +248,8 @@
 			to_chat(user, "\The [W] is too large to fit in \the [src].")
 			return
 
-		user.drop_from_inventory(W, src)
+		if(!user.unEquip(W, src))
+			return
 		tank = W
 		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
 		update_icon()

@@ -15,7 +15,8 @@
 		if(!SK.status)
 			to_chat(user, "<span class='notice'>\The [SK] is not ready to be attached!</span>")
 			return
-		user.drop_item()
+		if(!user.unEquip(SK))
+			return
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
@@ -212,7 +213,11 @@
 	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings_preview"
 
-/obj/structure/bed/chair/bogani
-	desc = "A strange chair, not from around here."
-	base_icon = "bogchair"
-	icon_state = "bogchair_preview"
+/obj/structure/bed/chair/shuttle
+	name = "shuttle seat"
+	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
+	base_icon = "shuttle_chair"
+	icon_state = "shuttle_chair_preview"
+
+/obj/structure/bed/chair/shuttle/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")

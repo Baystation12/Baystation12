@@ -16,6 +16,7 @@
 /area/icarus/vessel)
 "af" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ag" = (
@@ -104,13 +105,14 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ay" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "az" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "aA" = (
@@ -461,9 +463,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bE" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -527,12 +528,6 @@
 /obj/machinery/suit_storage_unit/security/alt,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
-"bQ" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
-/area/icarus/open)
 "bR" = (
 /obj/structure/table/steel,
 /obj/random/tool,
@@ -929,8 +924,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cX" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1096,9 +1090,11 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dt" = (
-/obj/item/modular_computer/console,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
+	},
+/obj/item/modular_computer/console{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1191,11 +1187,13 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
-/obj/item/modular_computer/console,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
 	req_one_access = list(24,11)
+	},
+/obj/item/modular_computer/console{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1210,7 +1208,6 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dM" = (
-/obj/item/modular_computer/console,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";
@@ -1218,6 +1215,9 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/item/modular_computer/console{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1515,7 +1515,9 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eJ" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/open)
 "eK" = (
@@ -1903,6 +1905,45 @@
 /obj/effect/landmark/random_gen/asteroid,
 /turf/unsimulated/mineral,
 /area/space)
+"kT" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/white,
+/area/icarus/open)
+"le" = (
+/obj/item/modular_computer/console{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
+"mg" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/open)
+"Bd" = (
+/obj/structure/wall_frame,
+/turf/simulated/floor/plating,
+/area/icarus/vessel)
+"Fo" = (
+/obj/item/weapon/ore/slag,
+/obj/structure/wall_frame,
+/turf/simulated/floor/plating,
+/area/icarus/vessel)
+"RQ" = (
+/obj/item/modular_computer/console{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
+"Vb" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
 
 (1,1,1) = {"
 gb
@@ -19534,7 +19575,7 @@ ac
 ac
 ac
 ao
-bQ
+ay
 ao
 ao
 ao
@@ -21745,9 +21786,9 @@ ad
 ad
 ad
 ap
-aj
+RQ
 az
-aj
+RQ
 ap
 ap
 ap
@@ -22146,7 +22187,7 @@ ad
 ad
 ad
 ae
-ah
+Fo
 aq
 at
 ar
@@ -22548,8 +22589,8 @@ ad
 ad
 ae
 ae
-ah
-ag
+Fo
+Bd
 ak
 ar
 ai
@@ -22750,7 +22791,7 @@ ad
 ad
 ae
 af
-ag
+Bd
 ai
 ai
 ai
@@ -23380,7 +23421,7 @@ aM
 ak
 ak
 dz
-aj
+le
 cL
 ac
 ac
@@ -23760,7 +23801,7 @@ ad
 ad
 ae
 ae
-ag
+Bd
 ak
 am
 ak
@@ -23963,7 +24004,7 @@ ad
 ad
 ae
 ae
-ah
+Fo
 ai
 ak
 ak
@@ -23986,7 +24027,7 @@ aM
 ak
 ak
 dz
-aj
+le
 cL
 cL
 dQ
@@ -24573,9 +24614,9 @@ ad
 ac
 ac
 ao
-aj
-az
-aj
+Vb
+mg
+Vb
 ap
 ap
 ap
@@ -25604,7 +25645,7 @@ ap
 cX
 dn
 ap
-bQ
+ay
 dW
 cL
 dR
@@ -26082,7 +26123,7 @@ ag
 ap
 er
 ey
-eJ
+kT
 ey
 eY
 fd
@@ -26404,7 +26445,7 @@ ap
 bP
 ap
 aR
-aj
+le
 ap
 dg
 dp
@@ -27013,14 +27054,14 @@ ao
 ao
 ao
 ao
-bQ
-bQ
-bQ
+ay
+ay
+ay
 ao
 ao
-bQ
-bQ
-bQ
+ay
+ay
+ay
 cL
 ac
 ac

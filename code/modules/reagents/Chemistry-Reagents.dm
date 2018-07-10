@@ -21,6 +21,15 @@
 	var/glass_desc = "It's a glass of... what, exactly?"
 	var/list/glass_special = null // null equivalent to list()
 
+	// GAS DATA, generic values copied from base XGM datum type.
+	var/gas_specific_heat = 20
+	var/gas_molar_mass =    0.032
+	var/gas_overlay_limit = 0.7
+	var/gas_flags =         0
+	var/gas_burn_product
+	var/gas_overlay = "generic"
+	// END GAS DATA
+
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))
 		CRASH("Invalid reagents holder: [log_info_line(holder)]")
@@ -57,7 +66,6 @@
 	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
 	removed = M.get_adjusted_metabolism(removed)
-
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed

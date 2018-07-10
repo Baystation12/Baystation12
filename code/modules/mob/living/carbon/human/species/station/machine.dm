@@ -8,8 +8,7 @@
 	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
 	inhuman in outlook and perspective."
 
-	icobase = 'icons/mob/human_races/r_machine.dmi'
-	deform = 'icons/mob/human_races/r_machine.dmi'
+	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
 
 	language = LANGUAGE_EAL
 	unarmed_types = list(/datum/unarmed_attack/punch)
@@ -53,19 +52,7 @@
 
 	vision_organ = BP_OPTICS
 
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/no_eyes),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
-		)
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/no_eyes)
 
 	heat_discomfort_level = 373.15
 	heat_discomfort_strings = list(

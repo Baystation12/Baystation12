@@ -79,3 +79,58 @@ GLOBAL_LIST_INIT(numbers_as_words, list("One", "Two", "Three", "Four",
 	"Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
 	"Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
 	"Eighteen", "Nineteen"))
+
+GLOBAL_LIST_INIT(music_tracks, list(
+	"Beyond" = /music_track/ambispace,
+	"Clouds of Fire" = /music_track/clouds_of_fire,
+	"Stage Three" = /music_track/dilbert,
+	"Asteroids" = /music_track/df_theme,
+	"Floating" = /music_track/floating,
+	"Endless Space" = /music_track/endless_space,
+	"Fleet Party Theme" = /music_track/one_loop,
+	"Scratch" = /music_track/level3_mod,
+	"Absconditus" = /music_track/absconditus,
+	"lasers rip apart the bulkhead" = /music_track/lasers,
+	"Maschine Klash" = /music_track/digit_one,
+	"Comet Halley" = /music_track/comet_haley,
+	"Please Come Back Any Time" = /music_track/elevator,
+	"Human" = /music_track/human,
+	"Memories of Lysendraa" = /music_track/lysendraa,
+	"Marhaba" = /music_track/marhaba,
+	"Space Oddity" = /music_track/space_oddity,
+	"THUNDERDOME" = /music_track/thunderdome,
+	"Torch: A Light in the Darkness" = /music_track/torch,
+	"Treacherous Voyage" = /music_track/treacherous_voyage,
+	"Wake" = /music_track/wake,
+	"phoron will make us rich" = /music_track/pwmur
+))
+
+/proc/setup_music_tracks(var/list/tracks)
+	. = list()
+	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.music_tracks
+	for(var/track_name in track_list)
+		var/track_path = track_list[track_name]
+		. += new/datum/track(track_name, track_path)
+
+GLOBAL_LIST_INIT(possible_cable_colours, SetupCableColors())
+
+/proc/SetupCableColors()
+	. = list()
+
+	var/invalid_cable_coils = list(
+		/obj/item/stack/cable_coil/single,
+		/obj/item/stack/cable_coil/cut,
+		/obj/item/stack/cable_coil/cyborg,
+		/obj/item/stack/cable_coil/random
+	)
+
+	var/special_name_mappings = list(/obj/item/stack/cable_coil = "Red")
+
+	for(var/coil_type in (typesof(/obj/item/stack/cable_coil) - invalid_cable_coils))
+		var/name = special_name_mappings[coil_type] || capitalize(copytext_after_last("[coil_type]", "/"))
+
+		var/obj/item/stack/cable_coil/C = coil_type
+		var/color = initial(C.color)
+
+		.[name] = color
+	. = sortAssoc(.)

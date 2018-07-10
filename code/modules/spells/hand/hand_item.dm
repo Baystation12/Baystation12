@@ -45,11 +45,9 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	if(hand_spell.cast_hand(A,user))
 		next_spell_time = world.time + hand_spell.spell_delay
 		if(hand_spell.move_delay)
-			user.setMoveCooldown(hand_spell.move_delay)
+			user.ExtraMoveCooldown(hand_spell.move_delay)
 		if(hand_spell.click_delay)
 			user.setClickCooldown(hand_spell.move_delay)
-	else
-		user.drop_from_inventory(src)
 
 /obj/item/magic_hand/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(hand_spell)

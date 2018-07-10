@@ -47,8 +47,7 @@
 
 /obj/item/weapon/sample/attackby(var/obj/O, var/mob/user)
 	if(O.type == src.type)
-		user.unEquip(O)
-		if(merge_evidence(O, user))
+		if(user.unEquip(O) && merge_evidence(O, user))
 			qdel(O)
 		return 1
 	return ..()
@@ -147,7 +146,7 @@
 /obj/item/weapon/forensics/sample_kit/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
-	if(can_take_sample(user, A))
+	if(user.skill_check(SKILL_FORENSICS, SKILL_ADEPT) && can_take_sample(user, A))
 		take_sample(user,A)
 		. = 1
 	else

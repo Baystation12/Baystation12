@@ -76,12 +76,10 @@
 	..()
 	if (istype(W, /obj/item/weapon/flamethrower))
 		var/obj/item/weapon/flamethrower/F = W
-		if (!F.status||F.ptank)	return
+		if (!F.status || F.ptank || user.unEquip(src, F))
+			return
 		master = F
 		F.ptank = src
-		user.remove_from_mob(src)
-		forceMove(F)
-
 /*
  * Emergency Oxygen
  */

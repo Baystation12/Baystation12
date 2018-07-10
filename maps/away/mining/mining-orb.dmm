@@ -51,61 +51,31 @@
 /turf/simulated/wall/sandstone,
 /area/mine/explored)
 "aq" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/airless/stone,
-/area/mine/explored)
-"ar" = (
-/obj/item/weapon/stool/stone,
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/fixed/alium/airless,
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "as" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/airless/stone,
-/area/mine/explored)
-"at" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	tag = "icon-spline_fancy (NORTHEAST)";
+	icon_state = "spline_fancy";
+	dir = 5
+	},
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
-/turf/simulated/floor/airless/stone,
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "au" = (
 /obj/effect/shuttle_landmark/orb/nav4,
 /turf/space,
 /area/space)
-"av" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
-/turf/simulated/floor/airless/stone,
-/area/mine/explored)
-"aw" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
 "ax" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
-"ay" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 8
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
-"az" = (
-/obj/item/weapon/stool/stone,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/mine/explored)
-"aA" = (
-/obj/item/weapon/stool/stone,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
-/turf/simulated/floor/fixed/alium/airless,
 /area/mine/explored)
 "aB" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -113,20 +83,9 @@
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
-"aC" = (
-/obj/structure/showcase/totem,
-/mob/living/simple_animal/parrot/space,
-/turf/simulated/floor/fixed/alium/airless,
-/area/mine/explored)
 "aD" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
-"aE" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 1
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
@@ -137,42 +96,9 @@
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
-"aG" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 4
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
-"aH" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
-/turf/simulated/floor/airless/stone,
-/area/mine/explored)
 "aI" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
-	},
-/turf/simulated/floor/airless/stone,
-/area/mine/explored)
-"aJ" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
-	dir = 1
-	},
-/turf/simulated/floor/airless/stone,
-/area/mine/explored)
-"aK" = (
-/obj/item/weapon/stool/stone,
-/obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
-	dir = 1
-	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/mine/explored)
-"aL" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 4
 	},
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)
@@ -186,10 +112,6 @@
 	name = "engraved door"
 	},
 /turf/simulated/floor/airless/stone,
-/area/mine/explored)
-"aO" = (
-/obj/structure/showcase/totem,
-/turf/simulated/floor/fixed/alium/airless,
 /area/mine/explored)
 "aP" = (
 /turf/simulated/floor/exoplanet/water/shallow,
@@ -304,9 +226,150 @@
 /obj/effect/landmark/random_gen/asteroid,
 /turf/space,
 /area/space)
+"cf" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"eM" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"fA" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 9
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner,
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"ma" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"pz" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 10
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
 "st" = (
 /obj/effect/shuttle_landmark/orb/nav7,
 /turf/simulated/floor/asteroid,
+/area/mine/explored)
+"vc" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 10
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"wM" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"yQ" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"yR" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/floor/asteroid,
+/area/mine/explored)
+"Aj" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner,
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"DJ" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"EM" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 10
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"Gl" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"Le" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"LT" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/explored)
+"MX" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"NQ" = (
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"Ol" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/wall/sandstone,
+/area/mine/explored)
+"Rr" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/mine/unexplored)
+"SY" = (
+/obj/structure/fountain,
+/mob/living/simple_animal/parrot/space,
+/turf/simulated/floor/airless/stone,
+/area/mine/explored)
+"TP" = (
+/obj/structure/totem,
+/turf/simulated/floor/fixed/alium/airless,
 /area/mine/explored)
 
 (1,1,1) = {"
@@ -17770,9 +17833,9 @@ an
 an
 an
 an
-an
-an
-an
+ao
+ao
+ao
 an
 an
 an
@@ -17782,15 +17845,15 @@ an
 ap
 aj
 ao
-aO
+TP
 ao
-aO
+TP
 ao
-aO
+TP
 ao
-aO
+TP
 ao
-aO
+TP
 ao
 aj
 ap
@@ -17971,11 +18034,11 @@ an
 an
 an
 an
-an
-an
-an
-an
-an
+ao
+ao
+aj
+ao
+ao
 an
 an
 an
@@ -18172,13 +18235,13 @@ an
 an
 an
 an
-an
 ao
 ao
+aj
+aj
+aj
 ao
-an
-an
-an
+ao
 an
 ah
 an
@@ -18373,15 +18436,15 @@ an
 an
 an
 an
-an
 ao
 ao
-ak
+aj
+aM
+aM
+aj
+aj
 ao
 ao
-an
-an
-an
 an
 an
 an
@@ -18576,14 +18639,14 @@ an
 an
 an
 ao
+aj
+aj
+fA
+aZ
+pz
+aj
+aj
 ao
-ak
-aO
-ak
-ao
-ao
-an
-an
 an
 an
 an
@@ -18776,16 +18839,16 @@ an
 an
 an
 an
-ao
+am
 ao
 aj
-aj
+fA
+wM
 ak
-aj
-aj
+as
+pz
+aM
 ao
-ao
-an
 an
 an
 an
@@ -18977,18 +19040,18 @@ an
 an
 an
 an
-an
+am
+ao
 ao
 aM
-aj
 aq
-av
-aI
-aj
+ak
+TP
+ak
+aq
 aM
 ao
-an
-an
+ao
 an
 an
 an
@@ -19178,21 +19241,21 @@ an
 an
 an
 an
-an
-an
+am
 ao
+ao
+aj
 aM
-ak
 as
-aP
-aJ
+pz
 ak
-aM
+fA
+wM
+aj
+aj
 ao
-an
-an
-an
-an
+ao
+ao
 an
 an
 an
@@ -19379,22 +19442,22 @@ an
 an
 an
 an
-an
-an
-an
+am
 ao
 ao
-aM
+aj
+aj
+aj
+aj
 as
-aP
-aJ
-aM
+aY
+wM
+aj
+aj
+aj
+aj
+ae
 ao
-ao
-ao
-an
-an
-an
 ah
 an
 an
@@ -19580,23 +19643,23 @@ an
 an
 an
 an
-an
-an
-an
-ao
-ao
-ao
-ao
-at
-aH
-aL
-ao
+am
+am
 ao
 ae
+aj
+ap
+aj
+aj
+aj
+aM
+aM
+aj
+aj
+ap
+aj
+ae
 ao
-ao
-an
-an
 an
 ah
 an
@@ -19776,29 +19839,29 @@ an
 an
 an
 ah
-ah
 an
 an
 an
 an
 an
-an
-an
+am
+am
+am
 ao
-ao
-aM
-aM
-ao
-ao
+ae
 aj
-ao
-ao
+aj
+aj
 ae
+aj
+aj
+aj
 ae
+aj
+aj
+aj
 ae
 ao
-ao
-an
 an
 an
 an
@@ -19982,25 +20045,25 @@ an
 an
 an
 an
-an
-an
-an
+am
+am
+NQ
+am
 ao
-ao
-ap
-aj
-aj
-aj
-ao
-aQ
-ao
-aj
-aj
-ap
 ae
-ap
+ae
+ae
+ae
+ae
+aj
+aj
+aj
+ae
+ae
+ae
+ae
+ae
 ao
-an
 an
 an
 an
@@ -20180,29 +20243,29 @@ ah
 ah
 an
 an
-ah
 an
 an
 an
-an
-ao
-ao
-ao
+am
+am
+Aj
+cf
+DJ
 ao
 ao
 ae
 ae
-ae
+ao
 ae
 aj
-ae
-ae
-ae
-ae
-ae
+Ol
 aj
+ae
 ao
-an
+ae
+ae
+ae
+ao
 an
 ah
 an
@@ -20384,26 +20447,26 @@ an
 an
 an
 an
-an
-an
-ao
-ao
-aj
-aj
-aj
+am
+am
+Aj
+eM
+ap
+aV
+DJ
 ao
 ao
 ae
-ap
-aj
-aj
-aj
-ap
-ae
-ap
 ae
 aj
-ao
+aj
+aj
+aj
+aj
+ae
+ae
+ae
+ae
 ao
 an
 an
@@ -20585,26 +20648,26 @@ an
 an
 ah
 an
-an
-an
+am
+am
+Aj
+eM
+aM
+aM
+aM
+aV
+DJ
 ao
 ao
 aj
 aj
-ap
+aU
+aD
+bc
 aj
 aj
-ao
-ao
 ae
 ae
-aj
-ae
-ae
-ae
-aj
-ae
-aj
 ae
 ao
 ao
@@ -20786,27 +20849,27 @@ ah
 ah
 ah
 an
-ah
-an
-ao
-ao
-aj
-aq
-av
-aA
-aA
-aI
-aj
-ao
-ao
-ae
-aj
-ae
+am
+am
+Aj
+eM
 ap
-ae
+aj
+aj
+aj
+ap
+aV
+DJ
+ao
+ao
+ap
+aF
+ao
+ax
+ap
 aj
 ae
-aj
+ao
 ae
 ae
 ao
@@ -20987,28 +21050,28 @@ ah
 ah
 an
 an
-ah
-an
-an
-ao
+am
+am
+Aj
+eM
+aM
 aj
 aj
-ar
-aw
+aj
+aj
+aj
+aj
+aV
 aB
-aE
-aJ
-aj
-aj
 ao
-ae
+aj
+aV
+aB
+bd
+aj
 aj
 ae
-aj
 ae
-aj
-ae
-aj
 ae
 ae
 ae
@@ -21188,19 +21251,19 @@ ah
 ah
 ah
 an
-an
-an
-an
-an
-ao
+am
+am
+NQ
+Rr
+ap
+aM
 aj
-ap
-ar
-ax
-aC
-aF
-aK
-ap
+aj
+SY
+aj
+aj
+aj
+aj
 aj
 aN
 aj
@@ -21391,28 +21454,28 @@ an
 an
 an
 an
-ah
-an
-an
-ao
+am
+am
+NQ
+vc
+aM
 aj
 aj
-as
-ay
+aj
+aj
+aj
+aj
+aU
 aD
-aG
-aK
-aj
-aj
 ao
-ae
+aj
+aU
+aD
+bc
+aj
 aj
 ae
-aj
 ae
-aj
-ae
-aj
 ae
 ae
 ae
@@ -21594,27 +21657,27 @@ an
 an
 an
 an
-an
-an
-ao
-ao
-aj
-at
-az
-az
-aH
-aL
-aj
-ao
-ao
-ae
-aj
-ae
+am
+am
+MX
+vc
 ap
-ae
+aj
+aj
+aj
+ap
+aU
+yQ
+ao
+ao
+ap
+aF
+ao
+ax
+ap
 aj
 ae
-aj
+ao
 ae
 ae
 ao
@@ -21797,26 +21860,26 @@ an
 an
 an
 an
-an
-an
+am
+am
+MX
+vc
+aM
+aM
+aM
+aU
+yQ
 ao
 ao
 aj
 aj
-ap
-aj
-aj
-ao
-ao
-ae
-ae
+aV
+aB
+bd
+aI
 aj
 ae
 ae
-ae
-aj
-ae
-aj
 ae
 ao
 ao
@@ -21998,28 +22061,28 @@ ae
 ae
 an
 an
-ah
 an
 an
-an
-ao
-ao
-aj
-aj
-aj
+am
+am
+MX
+vc
+ap
+aU
+yQ
 ao
 ao
 ae
-ap
-aj
-aj
-aj
-ap
-ae
-ap
 ae
 aj
-ao
+aj
+aj
+aj
+aj
+ae
+ae
+ae
+ae
 ao
 an
 an
@@ -22200,29 +22263,29 @@ ad
 ae
 ae
 an
-an
 ah
 an
 an
-an
-ao
-ao
-ao
+am
+am
+MX
+ma
+Le
 ao
 ao
 ae
 ae
-ae
+ao
 ae
 aj
-ae
-ae
-ae
-ae
-ae
+ap
 aj
+yR
 ao
-an
+ae
+ae
+ae
+ao
 an
 an
 an
@@ -22406,25 +22469,25 @@ an
 an
 an
 an
-an
-an
-an
+am
+am
+NQ
+am
 ao
-ao
-ap
-aj
-aj
-aj
-ao
-aQ
-ao
-aj
-aj
-ap
 ae
-ap
+ae
+ae
+ae
+ae
+aj
+aj
+aj
+ae
+ae
+ae
+ae
+ae
 ao
-an
 an
 an
 an
@@ -22609,24 +22672,24 @@ an
 an
 an
 an
-an
-an
-an
+am
+am
+am
 ao
-ao
-aM
-aM
-ao
-ao
+ae
 aj
-ao
-ao
+aj
+aj
 ae
+aj
+aj
+aj
 ae
+aj
+aj
+aj
 ae
 ao
-ao
-an
 an
 an
 ah
@@ -22812,23 +22875,23 @@ an
 an
 an
 an
-an
-an
-an
-ao
-ao
-ao
-ao
-aq
-av
-aI
-ao
+am
+am
 ao
 ae
+aj
+ap
+aj
+aj
+aj
+aM
+aM
+aj
+aj
+ap
+aj
+ae
 ao
-ao
-an
-an
 ah
 an
 an
@@ -23015,22 +23078,22 @@ an
 an
 an
 an
-an
-an
-an
+am
 ao
 ao
-aM
-as
-aP
-aJ
-aM
+aj
+aj
+aj
+aj
+fA
+aY
+EM
+aj
+aj
+aj
+aj
+ae
 ao
-ao
-ao
-an
-an
-an
 an
 an
 an
@@ -23218,21 +23281,21 @@ an
 an
 an
 an
-an
-an
+am
 ao
+ao
+aj
 aM
+fA
+wM
 ak
 as
-aP
-aJ
-ak
-aM
+pz
+aj
+aj
 ao
-an
-an
-an
-an
+ao
+ao
 an
 an
 an
@@ -23421,18 +23484,18 @@ an
 an
 an
 an
-an
+am
+ao
 ao
 aM
-aj
-at
-aH
-aL
-aj
+aq
+ak
+TP
+ak
+LT
 aM
 ao
-an
-an
+ao
 an
 an
 an
@@ -23624,16 +23687,16 @@ an
 an
 an
 an
-ao
+am
 ao
 aj
-aj
+as
+pz
 ak
-aj
-aj
+fA
+wM
+aM
 ao
-ao
-an
 an
 an
 an
@@ -23828,14 +23891,14 @@ an
 an
 an
 ao
+aj
+aj
+as
+aY
+Gl
+aj
+aj
 ao
-ak
-aO
-ak
-ao
-ao
-an
-an
 an
 an
 an
@@ -24029,15 +24092,15 @@ an
 an
 an
 an
-an
 ao
 ao
-ak
+aj
+aM
+aM
+aj
+aj
 ao
 ao
-an
-an
-an
 an
 an
 an
@@ -24232,13 +24295,13 @@ an
 an
 an
 an
-an
 ao
 ao
+aj
+aj
+aj
 ao
-an
-an
-an
+ao
 an
 an
 an
@@ -24435,12 +24498,12 @@ an
 an
 an
 an
+ao
+ao
+aj
+ao
+ao
 an
-an
-an
-an
-an
-ah
 an
 an
 an
@@ -24638,10 +24701,10 @@ an
 an
 an
 an
+ao
+ao
+ao
 an
-an
-an
-ah
 an
 an
 an
@@ -24650,15 +24713,15 @@ an
 ap
 aj
 ao
-aO
+TP
 ao
-aO
+TP
 ao
-aO
+TP
 ao
-aO
+TP
 ao
-aO
+TP
 ao
 aj
 ap

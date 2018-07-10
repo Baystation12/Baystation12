@@ -6,25 +6,15 @@
 	icon_state_unpowered = "pda"
 	hardware_flag = PROGRAM_PDA
 	max_hardware_size = 1
-	modifiable = FALSE
 	w_class = ITEM_SIZE_SMALL
-	light_strength = 5
+	light_strength = 2
 	slot_flags = SLOT_ID | SLOT_BELT
 	stores_pen = TRUE
 	stored_pen = /obj/item/weapon/pen
 
-/obj/item/modular_computer/pda/update_name()
-	var/obj/item/weapon/card/id/id
-	if(card_slot && istype(card_slot.stored_card))
-		id = card_slot.stored_card
-	else
-		var/mob/living/L = get_holder_of_type(src, /mob/living)
-		if(istype(L) && L.GetIdCard())
-			id = L.GetIdCard()
-		else
-			return
-
-	SetName("[id.get_display_name()]'s PDA")
+/obj/item/modular_computer/pda/Initialize()
+	. = ..()
+	enable_computer()
 
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -33,7 +23,7 @@
 		eject_id()
 	else
 		..()
-	
+
 // PDA box
 /obj/item/weapon/storage/box/PDAs
 	name = "box of spare PDAs"
@@ -55,6 +45,10 @@
 	icon_state = "pda-m"
 	icon_state_unpowered = "pda-m"
 
+/obj/item/modular_computer/pda/chemistry
+	icon_state = "pda-m"
+	icon_state_unpowered = "pda-m"
+
 /obj/item/modular_computer/pda/engineering
 	icon_state = "pda-e"
 	icon_state_unpowered = "pda-e"
@@ -63,11 +57,16 @@
 	icon_state = "pda-s"
 	icon_state_unpowered = "pda-s"
 
+/obj/item/modular_computer/pda/forensics
+	icon_state = "pda-s"
+	icon_state_unpowered = "pda-s"
+
 /obj/item/modular_computer/pda/science
 	icon_state = "pda-nt"
 	icon_state_unpowered = "pda-nt"
 
 /obj/item/modular_computer/pda/heads
+	name = "command PDA"
 	icon_state = "pda-h"
 	icon_state_unpowered = "pda-h"
 

@@ -129,7 +129,7 @@
 	var/mob/living/M = A
 
 	if(M.stat != DEAD)
-		if(M.transforming)
+		if(M.HasMovementHandler(/datum/movement_handler/mob/transformation))
 			return
 		if(M.has_brain_worms())
 			return //Borer stuff - RR
@@ -137,8 +137,7 @@
 		if(iscultist(M)) return
 		if(!ishuman(M) && !isrobot(M)) return
 
-		M.transforming = 1
-		M.canmove = 0
+		M.AddMovementHandler(/datum/movement_handler/mob/transformation)
 		M.icon = null
 		M.overlays.len = 0
 		M.set_invisibility(101)
@@ -149,10 +148,9 @@
 				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
+				M.drop_from_inventory(W)
 				if(istype(W, /obj/item/weapon/implant))
 					qdel(W)
-					continue
-				M.drop_from_inventory(W)
 
 		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)
 		new_mob.a_intent = I_HURT

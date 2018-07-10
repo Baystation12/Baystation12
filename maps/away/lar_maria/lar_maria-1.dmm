@@ -287,7 +287,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aJ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aK" = (
@@ -380,7 +380,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "aZ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -583,7 +583,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bD" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -1024,9 +1024,6 @@
 	dir = 4
 	},
 /obj/machinery/optable,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = -25
-	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cH" = (
@@ -1044,9 +1041,6 @@
 	},
 /obj/machinery/optable,
 /obj/effect/landmark/corpse/lar_maria/test_subject,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = -25
-	},
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -1364,7 +1358,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "du" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dv" = (
@@ -1542,7 +1536,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/sec_wing)
 "dW" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
@@ -1946,7 +1940,10 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "eW" = (
-/obj/machinery/computer/diseasesplicer,
+/obj/machinery/computer/diseasesplicer{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eX" = (
@@ -2300,15 +2297,16 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "fK" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/effect/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -3163,7 +3161,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hB" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -3633,7 +3631,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iv" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 2;

@@ -71,6 +71,7 @@
 
 //Blood levels. These are percentages based on the species blood_volume far.
 #define BLOOD_VOLUME_SAFE    85
-#define BLOOD_VOLUME_OKAY    75
+#define BLOOD_VOLUME_OKAY    70
 #define BLOOD_VOLUME_BAD     60
-#define BLOOD_VOLUME_SURVIVE 40
+#define BLOOD_VOLUME_SURVIVE 30
+

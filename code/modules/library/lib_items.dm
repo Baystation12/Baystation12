@@ -28,8 +28,8 @@
 
 /obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/weapon/book))
-		user.drop_item()
-		O.loc = src
+		if(!user.unEquip(O, src))
+			return
 		update_icon()
 	else if(istype(O, /obj/item/weapon/pen))
 		var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
@@ -55,7 +55,7 @@
 	if(contents.len)
 		var/obj/item/weapon/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
 		if(choice)
-			if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
+			if(!CanPhysicallyInteract(user))
 				return
 			if(ishuman(user))
 				if(!user.get_active_hand())
@@ -168,8 +168,8 @@
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
-				user.drop_item()
-				W.loc = src
+				if(!user.unEquip(W, src))
+					return
 				store = W
 				to_chat(user, "<span class='notice'>You put [W] in [title].</span>")
 				return

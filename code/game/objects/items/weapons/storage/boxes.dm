@@ -75,8 +75,9 @@
 					/obj/item/weapon/tank/emergency/oxygen = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
+					/obj/item/device/flashlight/flare/glowstick = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1,
+					/obj/item/device/oxycandle = 1)
 
 /obj/item/weapon/storage/box/vox/
 	name = "vox survival kit"
@@ -85,7 +86,7 @@
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/engineer/
@@ -95,10 +96,11 @@
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
-					/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
+					/obj/item/device/flashlight/flare/glowstick = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1,
+					/obj/item/device/oxycandle = 1)
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of sterile gloves"
@@ -393,6 +395,12 @@
 	startswith = list(/obj/item/weapon/light/tube = 17,
 					/obj/item/weapon/light/tube/large = 4)
 
+/obj/item/weapon/storage/box/lights/tubes/random
+	name = "box of replacement tubes -- party pack"
+	icon_state = "lighttube"
+	startswith = list(/obj/item/weapon/light/tube/party = 17,
+					/obj/item/weapon/light/tube/large/party = 4)
+
 /obj/item/weapon/storage/box/lights/tubes/empty
 	startswith = null
 
@@ -409,14 +417,14 @@
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"
 	icon_state = "box"
-	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
-					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
-					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
+	startswith = list(/obj/item/device/flashlight/flare/glowstick = 1, /obj/item/device/flashlight/flare/glowstick/red = 1,
+					/obj/item/device/flashlight/flare/glowstick/blue = 1, /obj/item/device/flashlight/flare/glowstick/orange = 1,
+					/obj/item/device/flashlight/flare/glowstick/yellow = 1, /obj/item/device/flashlight/flare/glowstick/random = 1)
 
 /obj/item/weapon/storage/box/greenglowsticks
 	name = "box of green glowsticks"
 	icon_state = "box"
-	startswith = list(/obj/item/device/flashlight/glowstick = 6)
+	startswith = list(/obj/item/device/flashlight/flare/glowstick = 6)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"

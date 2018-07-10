@@ -1,5 +1,6 @@
 /obj/item/weapon/grenade/flashbang
 	name = "flashbang"
+	desc = "A grenade designed to blind, stun and disorient by means of an extremely bright flash and loud explosion."
 	icon_state = "flashbang"
 	item_state = "flashbang"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
@@ -22,7 +23,7 @@
 		B.update_icon()
 
 	new/obj/effect/sparks(src.loc)
-	new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=30, color="#ffffff")
+	new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=1, color="#ffffff")
 	qdel(src)
 	return
 

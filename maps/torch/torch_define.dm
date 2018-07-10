@@ -42,12 +42,82 @@
 
 	away_site_budget = 3
 
+	citizenship_choices = list(
+		"Earth",
+		"Luna",
+		"Mars",
+		"Terra",
+		"Gaia",
+		"Moghes",
+		"Ahdomai",
+		"Qerrbalak",
+		"Tersten",
+		"Avalon",
+		"Yuklid",
+		"Venus",
+		"Cinu",
+		"Tau-Wilo",
+		"Ceres",
+		"Galilei"
+	)
+
+	home_system_choices = list(
+		"Sol",
+		"Nyx",
+		"Tau Ceti",
+		"Epsilon Ursae Minoris",
+		"Zamsiin-lr",
+		"Gilgamesh",
+		"Gavil",
+		"Uuoea-Esa",
+		"Kernel",
+		"Gessshire",
+		"Galilei"
+		)
+
+	faction_choices = list(
+		"Sol Central Government",
+		"Terran Colonial Confederation",
+		"Vey Med",
+		"Einstein Engines",
+		"Free Trade Union",
+		"NanoTrasen",
+		"Ward-Takahashi GMB",
+		"Gilthari Exports",
+		"Grayson Manufactories Ltd.",
+		"Aether Atmospherics",
+		"Zeng-Hu Pharmaceuticals",
+		"Hephaestus Industries",
+		"Commonwealth of Ahdomai",
+		"Xynergy",
+		"Positronic Union"
+		)
+
+	religion_choices = list(
+		"Jewish",
+		"Hinduism",
+		"Buddhist",
+		"Islamic",
+		"Christian",
+		"Agnostic",
+		"Deist",
+		"Athiest",
+		"Thelema",
+		"Spiritualist"
+		)
+
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
 	minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
+
+/datum/map/torch/map_info(victim)
+	to_chat(victim, "<h2>Current map information</h2>")
+	to_chat(victim, "You're aboard the <b>[station_name]</b>, an Expeditionary Corps vessel. Its primary mission is looking for undiscovered sapient alien species, and general exploration along the way.")
+	to_chat(victim, "The vessel is staffed with a mix of SCG government personnel, hired contractors and NanoTrasen employees.")
+	to_chat(victim, "This area of space is uncharted, away from SCG territory. You might encounter remote outposts or drifting hulks, but no recognized government holds claim on this sector.")
 
 /datum/map/torch/send_welcome()
 	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><hr />"

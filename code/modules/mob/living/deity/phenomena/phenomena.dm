@@ -1,9 +1,10 @@
 /datum/phenomena
 	var/name = "Phenomena"
+	var/desc = "This has no desc."
 	var/cost = 0
 	var/mob/living/deity/linked
 	var/flags = 0
-	var/cooldown = 0
+	var/cooldown = 10
 	var/refresh_time = 0
 	var/expected_type
 
@@ -17,7 +18,7 @@
 
 /datum/phenomena/proc/Click(var/atom/target)
 	if(can_activate(target))
-		linked.take_cost(cost)
+		linked.adjust_power(-cost)
 		refresh_time = world.time + cooldown
 		activate(target)
 
@@ -55,8 +56,8 @@
 				to_chat(linked, "<span class='warning'>You can't use [name] on non-believers.</span>")
 				return 0
 
-	if(cost > linked.mob_uplink.uses)
-		to_chat(linked, "<span class='warning'>You need more power to use [name] (Need [cost] power, have [linked.mob_uplink.uses])!</span>")
+	if(cost > linked.power)
+		to_chat(linked, "<span class='warning'>You need more power to use [name] (Need [cost] power, have [linked.power])!</span>")
 		return 0
 
 	return 1
@@ -64,3 +65,10 @@
 /datum/phenomena/proc/activate(var/target)
 	to_chat(linked, "<span class='notice'>You use the phenomena [name] on \the [target]</span>")
 	return
+
+/datum/phenomena/proc/get_desc()
+	. = desc
+	if(cooldown)
+		. = "<b>Cooldown: [cooldown/10] seconds.</b> [.]"
+	if(cost)
+		. = "<b>Cost: [cost] power.</b> [.]"

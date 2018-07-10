@@ -47,13 +47,9 @@
 		return 1
 	return ..()
 
-/mob/living/carbon/brain/update_canmove()
+/mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
 	if(in_contents_of(/obj/mecha) || istype(loc, /obj/item/device/mmi))
-		canmove = 1
 		use_me = 1
-	else
-		canmove = 0
-	return canmove
 
 /mob/living/carbon/brain/isSynthetic()
 	return istype(loc, /obj/item/device/mmi/digital)

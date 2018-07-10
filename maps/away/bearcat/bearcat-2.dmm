@@ -151,7 +151,10 @@
 	layer = 2.4;
 	level = 2
 	},
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "an" = (
@@ -162,7 +165,10 @@
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ao" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/sensors{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ap" = (
@@ -230,9 +236,12 @@
 	pixel_y = -32
 	},
 /obj/machinery/light,
-/obj/item/modular_computer/console/preset/engineering,
 /obj/item/device/radio/intercom{
 	pixel_x = -32
+	},
+/obj/item/modular_computer/console/preset/engineering{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
@@ -249,7 +258,10 @@
 /obj/machinery/newscaster{
 	pixel_y = -32
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "aB" = (
@@ -540,7 +552,10 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/computer/message_monitor,
+/obj/machinery/computer/message_monitor{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/comms)
 "aY" = (
@@ -1788,7 +1803,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch{
 	name = "Bathrooms";
 	normalspeed = 0
 	},
@@ -1922,7 +1937,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch{
 	name = "Cryo Storage";
 	normalspeed = 0
 	},
@@ -2770,7 +2785,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch{
 	name = "Medical Bay";
 	normalspeed = 0
 	},
@@ -3053,9 +3068,6 @@
 /obj/machinery/optable,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/britcup,
 /obj/item/weapon/reagent_containers/glass/rag,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = -32
-	},
 /turf/simulated/floor/tiled/white/usedup,
 /area/ship/scrap/crew/medbay)
 "eQ" = (
@@ -3363,7 +3375,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch{
 	name = "Laundry";
 	normalspeed = 0
 	},
@@ -4068,7 +4080,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch{
 	name = "Firefighting Equipment";
 	normalspeed = 0
 	},
@@ -4974,7 +4986,10 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hV" = (
@@ -5003,11 +5018,14 @@
 	dir = 10
 	},
 /obj/machinery/light/small,
-/obj/item/modular_computer/console/preset/engineering,
 /obj/machinery/button/remote/blast_door{
 	id = "scram";
 	name = "CORE SCRAM";
 	pixel_y = -26
+	},
+/obj/item/modular_computer/console/preset/engineering{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)

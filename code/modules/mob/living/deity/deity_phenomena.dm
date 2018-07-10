@@ -1,4 +1,5 @@
 /mob/living/deity
+	var/silenced = 0
 	var/list/phenomenas = list()
 	var/list/intent_phenomenas = list()
 	var/static/list/control_types = list("control", "controlshift", "shift")
@@ -13,6 +14,25 @@
 	set_phenomena(add_phenomena(/datum/phenomena/point), I_HELP, "controlshift")
 	set_phenomena(add_phenomena(/datum/phenomena/conversion), I_GRAB, "shift")
 	set_phenomena(add_phenomena(/datum/phenomena/forced_conversion), I_GRAB, "control")
+
+/mob/living/deity/proc/silence(var/amount)
+	if(!silenced)
+		to_chat(src, "<span class='warning'>You've been silenced! Your phenomenas are disabled!</span>")
+		var/obj/screen/intent/deity/SD = hud_used.action_intent
+		SD.color = "#ff0000"
+	silenced += amount
+	for(var/phenom in phenomenas) //Also make it so that you don't do cooldowns.
+		var/datum/phenomena/P = phenomenas[phenom]
+		if(P.refresh_time)
+			P.refresh_time += amount
+
+/mob/living/deity/Life()
+	. = ..()
+	if(. && silenced)
+		if(!--silenced)
+			to_chat(src, "<span class='notice'>You are no longer silenced.</span>")
+			var/obj/screen/intent/deity/SD = hud_used.action_intent
+			SD.color = null
 
 /mob/living/deity/Destroy()
 	for(var/phenom in phenomenas)
@@ -29,19 +49,21 @@
 	phenomenas[P.name] = P
 	return P
 
-/mob/living/deity/proc/remove_phenomena_from_intent(var/datum/phenomena/to_remove)
+/mob/living/deity/proc/remove_phenomena_from_intent(var/intent, var/modifier, var/update = 1)
+	var/list/intent_list = intent_phenomenas[intent]
+	intent_list[modifier] = null
+	if(update)
+		update_phenomena_bindings()
+
+/mob/living/deity/proc/remove_phenomena(var/to_remove)
+	var/datum/phenomena/P = phenomenas[to_remove]
+	phenomenas -= to_remove
 	for(var/intent in intent_phenomenas)
 		var/list/intent_list = intent_phenomenas[intent]
-		for(var/modifier in intent_list)
-			if(intent_list[modifier] == to_remove)
-				intent_list[modifier] = null
-				break
-
-/mob/living/deity/proc/remove_phenomena(var/datum/phenomena/to_remove)
-	phenomenas[to_remove.name] = null
-	phenomenas -= to_remove.name
-	remove_phenomena_from_intent(to_remove)
-	qdel(to_remove)
+		for(var/mod in intent_list)
+			if(intent_list[mod] == P)
+				intent_list[mod] = null
+	qdel(P)
 
 /mob/living/deity/proc/populate_intent(var/intent)
 	if(!intent_phenomenas[intent])
@@ -65,20 +87,3 @@
 		if(intent_list[type])
 			return intent_list[type]
 	return null
-
-/mob/living/deity/verb/configure_phenomenas()
-	set name = "Configure Phenomena"
-	set category = "Godhood"
-
-	var/dat = "<h3>Phenomena Configuration</h3><br><br>"
-	for(var/intent in intents)
-		dat += "<b>[capitalize(intent)]</b><br>"
-		var/list/intent_list = intent_phenomenas[intent]
-		if(!intent_list)
-			continue
-		dat += "<table border='1' style='width:100%;border-collapse:collapse;'><tr><th>Modifier</th><th>Linked Phenomena</th></tr>"
-		for(var/modifier in intent_list)
-			var/datum/phenomena/P = intent_list[modifier]
-			dat += "<tr><td><A href='?src=\ref[src];intent=[intent];modifier=[modifier]'>[modifier]</a></td><td>[P ? "[P.name] ([P.cost] Power)" : "None"]</td>"
-		dat += "</table><br><br>"
-	show_browser(src, dat, "window=phenomena")

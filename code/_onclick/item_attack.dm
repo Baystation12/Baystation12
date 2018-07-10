@@ -71,8 +71,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(!no_attack_log)
 		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
 	/////////////////////////
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(attack_cooldown + w_class)
 	user.do_attack_animation(M)
 	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
 		return 0

@@ -83,6 +83,14 @@
 	taste_description = "egg"
 	color = "#ffffaa"
 
+//vegetamarian alternative that is safe for skrell to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
+
+/datum/reagent/nutriment/softtofu
+	name = "plant protein"
+	description = "A gooey pale bean paste."
+	taste_description = "healthy sadness"
+	color = "#ffffff"
+
 /datum/reagent/nutriment/honey
 	name = "Honey"
 	description = "A golden yellow syrup, loaded with sugary sweetness."
@@ -1905,9 +1913,9 @@
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (L && istype(L))
 			if(M.chem_doses[type] < 120)
-				L.take_damage(10 * removed, 0)
+				L.take_internal_damage(10 * removed, 0)
 			else
-				L.take_damage(100, 0)
+				L.take_internal_damage(100, 0)
 
 /datum/reagent/ethanol/red_mead
 	name = "Red Mead"

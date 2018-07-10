@@ -17,14 +17,12 @@
 		return ..(I,user)
 
 	if(istype(I,/obj/item/weapon/virusdish))
-		var/mob/living/carbon/c = user
 		if (dish)
 			to_chat(user, "\The [src] is already loaded.")
 			return
-
+		if(!user.unEquip(I, src))
+			return
 		dish = I
-		c.drop_item()
-		I.loc = src
 
 	if(istype(I,/obj/item/weapon/diseasedisk))
 		to_chat(user, "You upload the contents of the disk onto the buffer.")
@@ -123,7 +121,11 @@
 			ping("\The [src] pings, \"Backup disk saved.\"")
 			GLOB.nanomanager.update_uis(src)
 
-/obj/machinery/computer/diseasesplicer/OnTopic(user, href_list)
+	if((scanning || splicing || burning) && dish && dish.virus2)
+		infect_nearby(dish.virus2, 40, SKILL_PROF)
+
+/obj/machinery/computer/diseasesplicer/OnTopic(mob/user, href_list)
+	operator_skill = user.get_skill_value(core_skill)
 	if (href_list["close"])
 		GLOB.nanomanager.close_user_uis(user, src, "main")
 		return TOPIC_HANDLED

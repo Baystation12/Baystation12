@@ -25,7 +25,7 @@
 
 	//blind and confuse adjacent people
 	for (var/mob/living/carbon/M in viewers(T, flash_range))
-		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
+		if(M.eyecheck() < FLASH_PROTECTION_MAJOR)
 			M.flash_eyes()
 			M.eye_blurry += (brightness / 2)
 			M.confused += (brightness / 2)
@@ -148,23 +148,23 @@
 				ear_safety += 1
 			if(istype(H.head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
-	if(ear_safety == 1)
-		M.make_dizzy(120)
-	else if (ear_safety > 1)
-		M.make_dizzy(60)
-	else if (!ear_safety)
-		M.make_dizzy(300)
-		M.ear_damage += rand(1, 10)
-		M.ear_deaf = max(M.ear_deaf,15)
-	if (M.ear_damage >= 15)
-		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
-		if (prob(M.ear_damage - 5))
-			to_chat(M, "<span class='danger'>You can't hear anything!</span>")
-			M.sdisabilities |= DEAF
-	else
-		if (M.ear_damage >= 5)
-			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
-	M.update_icons()
+		if(ear_safety == 1)
+			M.make_dizzy(120)
+		else if (ear_safety > 1)
+			M.make_dizzy(60)
+		else if (!ear_safety)
+			M.make_dizzy(300)
+			M.ear_damage += rand(1, 10)
+			M.ear_deaf = max(M.ear_deaf,15)
+		if (M.ear_damage >= 15)
+			to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+			if (prob(M.ear_damage - 5))
+				to_chat(M, "<span class='danger'>You can't hear anything!</span>")
+				M.sdisabilities |= DEAF
+		else
+			if (M.ear_damage >= 5)
+				to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+		M.update_icons()
 
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
 	bang(target)

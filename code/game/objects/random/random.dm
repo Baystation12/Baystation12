@@ -39,7 +39,7 @@
 	var/spawn_object = null
 
 /obj/random/single/spawn_choices()
-	return list(ispath(spawn_object) ? spawn_object : text2path(spawn_object))
+	return list(spawn_object)
 
 /obj/random/tool
 	name = "random tool"
@@ -174,6 +174,7 @@
 				/obj/item/weapon/storage/med_pouch/trauma = 2,
 				/obj/item/weapon/storage/med_pouch/burn = 2,
 				/obj/item/weapon/storage/med_pouch/toxin = 2,
+				/obj/item/weapon/storage/med_pouch/radiation = 2,
 				/obj/item/weapon/storage/med_pouch/oxyloss = 2)
 
 /obj/random/firstaid
@@ -274,6 +275,7 @@
 				/obj/item/weapon/gun/projectile/automatic/c20r = 2,
 				/obj/item/weapon/gun/projectile/automatic/sts35 = 2,
 				/obj/item/weapon/gun/projectile/automatic/z8 = 2,
+				/obj/item/weapon/gun/projectile/beretta = 4,
 				/obj/item/weapon/gun/projectile/colt = 4,
 				/obj/item/weapon/gun/projectile/sec = 4,
 				/obj/item/weapon/gun/projectile/sec/wood = 3,
@@ -297,6 +299,7 @@
 /obj/random/handgun/spawn_choices()
 	return list(/obj/item/weapon/gun/projectile/sec = 3,
 				/obj/item/weapon/gun/energy/gun = 2,
+				/obj/item/weapon/gun/projectile/beretta = 2,
 				/obj/item/weapon/gun/projectile/colt = 2,
 				/obj/item/weapon/gun/projectile/pistol = 2,
 				/obj/item/weapon/gun/energy/retro = 1,
@@ -609,8 +612,10 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/modular_computer/pda,
 				/obj/item/weapon/card/emag_broken,
 				/obj/item/device/radio/headset,
-				/obj/item/device/flashlight/glowstick/yellow,
-				/obj/item/device/flashlight/glowstick/orange)
+				/obj/item/device/flashlight/flare/glowstick/yellow,
+				/obj/item/device/flashlight/flare/glowstick/orange,
+				/obj/item/weapon/grenade/light,
+				/obj/item/device/oxycandle)
 
 /obj/random/smokes
 	name = "random smokeable"

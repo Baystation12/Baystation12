@@ -4,6 +4,7 @@
 	icon_state = "caretakerhood"
 	armor = list(melee = 15, bullet = 10, laser = 20,energy = 25, bomb = 0, bio = 0, rad = 100)
 	species_restricted = list(SPECIES_HUMAN)
+	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/caretakercloak
 	name = "holy cloak"
@@ -11,7 +12,7 @@
 	icon_state = "caretakercloak"
 	armor = list(melee = 30, bullet = 25, laser = 50,energy = 55, bomb = 0, bio = 0, rad = 100)
 
-/obj/item/clothing/under/rank/chaplain/caretaker
+/obj/item/clothing/under/caretaker
 	name = "caretaker's jumpsuit"
 	desc = "A holy jumpsuit. Treat it well."
 	icon_state = "caretaker"

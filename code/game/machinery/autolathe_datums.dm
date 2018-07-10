@@ -324,6 +324,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_rubber_45ds
+	name = "ammunition (.45, rubber) double-stack"
+	path = /obj/item/ammo_magazine/c45mds/rubber
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/speedloader_44_rubber
 	name = "speed loader (.44 magnum, rubber)"
 	path = /obj/item/ammo_magazine/c44/rubber
@@ -336,9 +342,21 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_flash_45ds
+	name = "ammunition (.45, flash) double-stack"
+	path = /obj/item/ammo_magazine/c45mds/flash
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_smg_rubber
-	name = "ammunition (9mm rubber top mounted)"
+	name = "ammunition (9mm rubber) top mounted"
 	path = /obj/item/ammo_magazine/mc9mmt/rubber
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_smg_flash
+	name = "ammunition (9mm, flash) top mounted"
+	path = /obj/item/ammo_magazine/mc9mmt/flash
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -461,6 +479,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_45ds
+	name = "ammunition (.45) double-stack"
+	path = /obj/item/ammo_magazine/c45mds
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/speedloader_44
 	name = "speed loader (.44 magnum)"
 	path = /obj/item/ammo_magazine/c44
@@ -491,6 +515,18 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_9mmds
+	name = "ammunition (9mm) double-stack"
+	path = /obj/item/ammo_magazine/mc9mmds
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_9mmds_flash
+	name = "ammunition (9mm, flash) double-stack"
+	path = /obj/item/ammo_magazine/mc9mmds/flash
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_c20r
 	name = "ammunition (10mm)"
 	path = /obj/item/ammo_magazine/a10mm
@@ -504,7 +540,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_smg
-	name = "ammunition (9mm top mounted)"
+	name = "ammunition (9mm) top mounted"
 	path = /obj/item/ammo_magazine/mc9mmt
 	hidden = 1
 	category = "Arms and Ammunition"

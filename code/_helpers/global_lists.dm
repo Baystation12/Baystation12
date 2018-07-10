@@ -21,9 +21,6 @@ var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playa
 
 var/list/mannequins_
 
-// Posters
-var/global/list/poster_designs = list()
-
 // Grabs
 var/global/list/all_grabstates[0]
 var/global/list/all_grabobjects[0]
@@ -87,19 +84,6 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
-
-/hook/global_init/proc/populateGlobalLists()
-	possible_cable_coil_colours = sortAssoc(list(
-		"Yellow" = COLOR_YELLOW,
-		"Green" = COLOR_LIME,
-		"Pink" = COLOR_PINK,
-		"Blue" = COLOR_BLUE,
-		"Orange" = COLOR_ORANGE,
-		"Cyan" = COLOR_CYAN,
-		"Red" = COLOR_RED,
-		"White" = COLOR_WHITE
-	))
-	return 1
 
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)
@@ -173,12 +157,6 @@ var/global/list/string_slot_flags = list(
 			playable_species += S.name
 		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
 			whitelisted_species += S.name
-
-	//Posters
-	paths = typesof(/datum/poster) - /datum/poster
-	for(var/T in paths)
-		var/datum/poster/P = new T
-		poster_designs += P
 
 	//Grabs
 	paths = typesof(/datum/grab) - /datum/grab

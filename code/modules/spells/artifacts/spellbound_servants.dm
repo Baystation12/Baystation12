@@ -48,7 +48,7 @@
 	spells = list(/spell/noclothes)
 
 /datum/spellbound_type/apprentice/set_antag(var/datum/mind/M, var/mob/master)
-	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! You’re just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher’s orders!</b>")
+	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! Youï¿½re just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacherï¿½s orders!</b>")
 
 /datum/spellbound_type/servant
 	var/spiel = "You don't do anything in particular."
@@ -59,8 +59,8 @@
 /datum/spellbound_type/servant/caretaker
 	name = "Caretaker"
 	desc = "A healer, a medic, a shoulder to cry on. This servant will heal you, even from near death."
-	spiel = "'The last enemy that will be destroyed is death.’ You can perceive any injuries with simple sight, and heal them with Trance; potentially even reversing death itself! However, this comes at a price; Trance will become increasingly harder to use as you use it, until you can use it no longer. Be cautious, and aid your Master in any way possible!"
-	equipment = list(/obj/item/clothing/under/rank/chaplain/caretaker = slot_w_uniform,
+	spiel = "<i>'The last enemy that will be destroyed is death.'</i> You can perceive any injuries with simple sight, and heal them with the Trance spell; potentially even reversing death itself! However, this comes at a price; Trance will become increasingly harder to use as you use it, until you can use it no longer. Be cautious, and aid your Master in any way possible!"
+	equipment = list(/obj/item/clothing/under/caretaker = slot_w_uniform,
 					/obj/item/clothing/shoes/dress/caretakershoes = slot_shoes)
 	spells = list(/spell/toggle_armor/caretaker,
 				/spell/targeted/heal_target/touch,
@@ -72,7 +72,7 @@
 
 /datum/spellbound_type/servant/champion
 	name = "Champion"
-	desc = "Your knight in shining armor, a protector, a warrior, and a damn good friend."
+	desc = "A knight in shining armor; a warrior, a protector, and a loyal friend."
 	spiel = "Your sword and armor are second to none, but you have no unique supernatural powers beyond summoning the sword to your hands. Protect your Master with your life!"
 	equipment = list(/obj/item/clothing/under/bluetunic = slot_w_uniform,
 					/obj/item/clothing/shoes/jackboots/medievalboots = slot_shoes)
@@ -81,8 +81,8 @@
 
 /datum/spellbound_type/servant/familiar
 	name = "Familiar"
-	desc = "A friend, and a pet, all in one! They can transform into animals and take some particular traits from said creatures."
-	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly won’t pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
+	desc = "A friend! Or are they a pet? They can transform into animals, and take some particular traits from said creatures."
+	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly wonï¿½t pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
 	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head,
 					/obj/item/clothing/under/familiargarb = slot_w_uniform)
 
@@ -111,8 +111,8 @@
 
 /datum/spellbound_type/servant/fiend
 	name = "Fiend"
-	desc = "A practitioner of dark and evil magics, and probably a lawyer to boot."
-	spiel = "The Summoning Ritual has bound you to this world with limited access to your infernal powers; you’ll have to be strategic in how you use them. Follow your Master’s orders as well as you can!"
+	desc = "A practitioner of dark and evil magics, almost certainly a demon, and possibly a lawyer."
+	spiel = "The Summoning Ritual has bound you to this world with limited access to your infernal powers; youï¿½ll have to be strategic in how you use them. Follow your Masterï¿½s orders as well as you can!"
 	spells = list(/spell/targeted/projectile/dumbfire/fireball/firebolt,
 				/spell/targeted/ethereal_jaunt,
 				/spell/targeted/torment,
@@ -133,7 +133,7 @@
 
 /datum/spellbound_type/servant/infiltrator
 	name = "Infiltrator"
-	desc = "Hiding in plain sight with a quick grin and a sweet hat."
+	desc = "A spy and a manipulator to the end, capable of hiding in plain sight and falsifying information to your heart's content."
 	spiel = "On the surface, you are a completely normal person, but is that really all you are? People are so easy to fool, do as your Master says, and do it with style!"
 	spells = list(/spell/toggle_armor/infil_items,
 				/spell/targeted/exhude_pleasantness,
@@ -152,8 +152,8 @@
 
 /datum/spellbound_type/servant/overseer
 	name = "Overseer"
-	desc = "Like a ghost, or a imaginary friend, the overseer cannot help you physically. That doesn't stop them from helping you in other ways."
-	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can’t fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
+	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
+	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you canï¿½t fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
 	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform,
 					/obj/item/clothing/shoes/sandals/grimboots = slot_shoes,
 					/obj/item/weapon/contract/wizard/xray = slot_l_hand,
@@ -233,8 +233,6 @@
 	onclose(user,"summoning")
 
 /obj/item/weapon/summoning_stone/proc/use_type(var/type, var/mob/user)
-	user.drop_from_inventory(src)
-
 	new /obj/effect/cleanable/spellbound(get_turf(src),type)
 	if(prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro

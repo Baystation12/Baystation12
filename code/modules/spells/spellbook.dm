@@ -45,17 +45,17 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	desc = spellbook.desc
 
 /obj/item/weapon/spellbook/attack_self(mob/user as mob)
-	if(user.mind)
-		if(!GLOB.wizards.is_antagonist(user.mind))
+	if(!user.mind)
+		return
+	if (user.mind.special_role != ANTAG_WIZARD)
+		if (user.mind.special_role != ANTAG_APPRENTICE)
 			to_chat(user, "You can't make heads or tails of this book.")
 			return
-		if(spellbook.book_flags & LOCKED)
-			if(user.mind.special_role == ANTAG_APPRENTICE)
-				to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>")
-				return
-			else
-				to_chat(user, "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways.")
-
+		if (spellbook.book_flags & LOCKED)
+			to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice-proof lock is on!</span>")
+			return
+	else if (spellbook.book_flags & LOCKED)
+		to_chat(user, "You notice the apprentice-proof lock is on. Luckily you are beyond such things.")
 	interact(user)
 
 /obj/item/weapon/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
@@ -70,7 +70,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			if(S.amount < S.max_amount)
 				to_chat(usr, "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>")
 				return
-		user.remove_from_mob(I)
 		qdel(I)
 	to_chat(user, "<span class='notice'>Your sacrifice was accepted!</span>")
 	has_sacrificed = 1

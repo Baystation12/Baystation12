@@ -2,8 +2,9 @@
 	name = "Golem"
 	name_plural = "golems"
 
-	icobase = 'icons/mob/human_races/r_golem.dmi'
-	deform = 'icons/mob/human_races/r_golem.dmi'
+	icobase = 'icons/mob/human_races/species/golem/body.dmi'
+	deform = 'icons/mob/human_races/species/golem/body.dmi'
+	husk_icon = 'icons/mob/human_races/species/golem/husk.dmi'
 
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
@@ -12,7 +13,7 @@
 	siemens_coefficient = 0
 
 	breath_type = null
-	poison_type = null
+	poison_types = null
 
 	blood_color = "#515573"
 	flesh_color = "#137e8f"

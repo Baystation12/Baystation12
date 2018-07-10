@@ -95,7 +95,7 @@ var/list/ventcrawl_machinery = list(
 		pipe = pipes[1]
 	else
 		pipe = input("Crawl Through Vent", "Pick a pipe") as null|anything in pipes
-	if(canmove && pipe)
+	if(!is_physically_disabled() && pipe)
 		return pipe
 
 /mob/living/carbon/alien/ventcrawl_carry()

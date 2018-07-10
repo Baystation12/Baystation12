@@ -22,7 +22,7 @@
 
 /atom/movable/lighting_overlay/Initialize()
 	// doesn't need special init
-	initialized = TRUE
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_NORMAL
 
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
@@ -124,8 +124,7 @@
 
 /atom/movable/lighting_overlay/Destroy()
 	total_lighting_overlays--
-	global.lighting_update_overlays     -= src
-	global.lighting_update_overlays_old -= src
+	SSlighting.overlay_queue -= src
 
 	var/turf/T = loc
 	if(istype(T))

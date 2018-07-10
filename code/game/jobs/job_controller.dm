@@ -15,6 +15,8 @@ var/global/datum/controller/occupations/job_master
 	var/list/unassigned = list()
 		//Debug info
 	var/list/job_debug = list()
+		//Cache of icons for job info window
+	var/list/job_icons = list()
 
 	proc/SetupOccupations(var/setup_titles = 0)
 		occupations = list()
@@ -362,39 +364,21 @@ var/global/datum/controller/occupations/job_master
 		if(job)
 
 			// Transfers the skill settings for the job to the mob
-			if(job in H.client.prefs.skills_allocated)
-				H.skillset.obtain_from_allocation(job, H.client.prefs.skills_allocated[job])
-			else H.skillset.obtain_from_allocation(job)
+			H.skillset.obtain_from_client(job, H.client)
 
 			//Equip job items.
 			job.setup_account(H)
 
 			// EMAIL GENERATION
-			var/domain
-			if(H.char_branch && H.char_branch.email_domain)
-				domain = H.char_branch.email_domain
-			else
-				domain = "freemail.nt"
-			var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
-			var/complete_login = "[sanitized_name]@[domain]"
-
-			// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
-			// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
-			if(ntnet_global.does_email_exist(complete_login))
-				complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
-
-			// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
-			if(ntnet_global.does_email_exist(complete_login))
-				to_chat(H, "You were not assigned an email address.")
-				H.mind.store_memory("You were not assigned an email address.")
-			else
-				var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
-				EA.password = GenerateKey()
-				EA.login = 	complete_login
-				to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
-				H.mind.initial_email_login["login"] = EA.login
-				H.mind.initial_email_login["password"] = EA.password
-				H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+			if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
+				var/domain
+				var/desired_name
+				if(H.char_branch && H.char_branch.email_domain)
+					domain = H.char_branch.email_domain
+				else
+					domain = "freemail.nt"
+				desired_name = H.real_name
+				ntnet_global.create_email(H, desired_name, domain)
 			// END EMAIL GENERATION
 
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
@@ -406,19 +390,27 @@ var/global/datum/controller/occupations/job_master
 				for(var/thing in H.client.prefs.Gear())
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
-						var/permitted
-						if(G.allowed_roles)
-							for(var/job_type in G.allowed_roles)
-								if(job.type == job_type)
-									permitted = 1
+						var/permitted = 0
+						if(G.allowed_branches)
+							if(H.char_branch.type in G.allowed_branches)
+								permitted = 1
 						else
 							permitted = 1
+		
+						if(permitted)
+							if(G.allowed_roles)
+								if(job.type in G.allowed_roles)
+									permitted = 1
+								else
+									permitted = 0
+							else
+								permitted = 1
 
 						if(G.whitelisted && (!(H.species.name in G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
-							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+							to_chat(H, "<span class='warning'>Your current species, job, branch or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
 
 						if(!G.slot || G.slot == slot_tie || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
@@ -495,7 +487,7 @@ var/global/datum/controller/occupations/job_master
 			if(!l_foot || !r_foot)
 				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
 				H.buckled = W
-				H.update_canmove()
+				H.UpdateLyingBuckledAndVerbStatus()
 				W.set_dir(H.dir)
 				W.buckled_mob = H
 				W.add_fingerprint(H)

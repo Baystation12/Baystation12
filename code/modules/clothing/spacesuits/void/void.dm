@@ -15,15 +15,11 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
 		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
-		SPECIES_BOGANI = 'icons/mob/species/bogani/helmet.dmi',
-		SPECIES_EGYNO  = 'icons/mob/species/bogani/helmet.dmi',
 		)
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/hats.dmi',
 		SPECIES_TAJARA = 'icons/obj/clothing/species/tajaran/hats.dmi',
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/hats.dmi',
-		SPECIES_BOGANI = 'icons/obj/clothing/species/bogani/hats.dmi',
-		SPECIES_EGYNO  = 'icons/obj/clothing/species/bogani/hats.dmi',
 		)
 
 	light_overlay = "helmet_light"
@@ -45,16 +41,11 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
 		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
-		SPECIES_BOGANI = 'icons/mob/species/bogani/suits.dmi',
-		SPECIES_EGYNO  = 'icons/mob/species/bogani/suits.dmi',
 		)
-
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/suits.dmi',
 		SPECIES_TAJARA = 'icons/obj/clothing/species/tajaran/suits.dmi',
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/suits.dmi',
-		SPECIES_BOGANI = 'icons/obj/clothing/species/bogani/suits.dmi',
-		SPECIES_EGYNO  = 'icons/obj/clothing/species/bogani/suits.dmi',
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
@@ -146,16 +137,14 @@ else if(##equipment_var) {\
 		H = helmet.loc
 		if(istype(H))
 			if(helmet && H.head == helmet)
-				H.drop_from_inventory(helmet)
-				helmet.forceMove(src)
+				H.drop_from_inventory(helmet, src)
 
 	if(boots)
 		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
 			if(boots && H.shoes == boots)
-				H.drop_from_inventory(boots)
-				boots.forceMove(src)
+				H.drop_from_inventory(boots, src)
 
 	if(tank)
 		tank.canremove = 1
@@ -182,8 +171,7 @@ else if(##equipment_var) {\
 	if(H.head == helmet)
 		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
 		helmet.canremove = 1
-		H.drop_from_inventory(helmet)
-		helmet.forceMove(src)
+		H.drop_from_inventory(helmet, src)
 	else
 		if(H.head)
 			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
@@ -252,18 +240,18 @@ else if(##equipment_var) {\
 		if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
 		else
+			if(!user.unEquip(W, src))
+				return
 			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
-			user.drop_item()
-			W.forceMove(src)
 			src.helmet = W
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
 		if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
 		else
+			if(!user.unEquip(W, src))
+				return
 			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
-			user.drop_item()
-			W.forceMove(src)
 			boots = W
 		return
 	else if(istype(W,/obj/item/weapon/tank))
@@ -272,9 +260,9 @@ else if(##equipment_var) {\
 		else if(istype(W,/obj/item/weapon/tank/phoron))
 			to_chat(user, "\The [W] cannot be inserted into \the [src]'s storage compartment.")
 		else
+			if(!user.unEquip(W, src))
+				return
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
-			user.drop_item()
-			W.forceMove(src)
 			tank = W
 		return
 

@@ -1,6 +1,7 @@
 /datum/phenomena/dimensional_locker
 	name = "Dimensional Locker"
 	cost = 10
+	desc = "Summon a trans-dimensional locker anywhere within your influence. You may transport objects and things, but not people in it."
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	var/obj/structure/closet/cabinet
 	var/cabinet_type = /obj/structure/closet/cabinet
@@ -37,7 +38,8 @@
 
 /datum/phenomena/portals
 	name = "Portals"
-	cost = 15
+	desc = "Summon a portal linked to the last portal you've created. The portal will be destroyed if it is not linked when someone crosses it."
+	cost = 30
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /atom
 	var/list/portals = list()
@@ -68,7 +70,8 @@
 
 /datum/phenomena/banishing_smite
 	name = "Banishing Smite"
-	cost = 25
+	desc = "Deal a terrible blow to a mortal. If they are hurt enough ,they will find themselves trapped in a rift for 30 seconds."
+	cost = 70
 	cooldown = 300
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living

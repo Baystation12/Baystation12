@@ -35,7 +35,7 @@
 	if(!canremove)
 		return
 
-	if ((ishuman(usr) || issmall(usr)) && !usr.incapacitated())
+	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
 			src.open(usr)
 			return TRUE
@@ -81,6 +81,10 @@
 /obj/item/weapon/storage/proc/open(mob/user as mob)
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
+	if (isrobot(user) && user.hud_used)
+		var/mob/living/silicon/robot/robot = user
+		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
+			robot.hud_used.toggle_show_robot_modules()
 
 	prepare_ui()
 	storage_ui.on_open(user)
@@ -172,7 +176,8 @@
 		return 0
 	if(istype(W.loc, /mob))
 		var/mob/M = W.loc
-		M.remove_from_mob(W)
+		if(!M.unEquip(W))
+			return
 	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
@@ -182,7 +187,7 @@
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					to_chat(usr, "<span class='notice'>You put \the [W] into [src].</span>")
-				else if (M in range(1)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
+				else if (M in range(1, src)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
@@ -223,43 +228,25 @@
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
-	update_icon()
+	if(!NoUpdate)
+		update_icon()
 	return 1
+
+//Run once after using remove_from_storage with NoUpdate = 1
+/obj/item/weapon/storage/proc/finish_bulk_removal()
+	update_ui_after_item_removal()
+	update_icon()
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 
-	if(isrobot(user))
-		return //Robots can't interact with storage items.
-
-	if(istype(W, /obj/item/device/lightreplacer))
-		var/obj/item/device/lightreplacer/LP = W
-		var/amt_inserted = 0
-		var/turf/T = get_turf(user)
-		for(var/obj/item/weapon/light/L in src.contents)
-			if(L.status == 0)
-				if(LP.uses < LP.max_uses)
-					LP.AddUses(1)
-					amt_inserted++
-					remove_from_storage(L, T)
-					qdel(L)
-		if(amt_inserted)
-			to_chat(user, "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining.")
-			return
+	if(isrobot(user) && (W == user.get_active_hand()))
+		return //Robots can't store their modules.
 
 	if(!can_be_inserted(W, user))
 		return
 
-	if(istype(W, /obj/item/weapon/tray))
-		var/obj/item/weapon/tray/T = W
-		if(T.calc_carry() > 0)
-			if(prob(85))
-				to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
-				return
-			else
-				if(user.unEquip(W))
-					to_chat(user, "<span class='warning'>God damnit!</span>")
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
 
@@ -324,7 +311,7 @@
 	hide_from(usr)
 	for(var/obj/item/I in contents)
 		remove_from_storage(I, T, 1)
-	update_ui_after_item_removal()
+	finish_bulk_removal()
 
 /obj/item/weapon/storage/Initialize()
 	. = ..()
