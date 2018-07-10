@@ -190,7 +190,7 @@
 	display_name = "black UBAC shirt"
 	path = /obj/item/clothing/accessory/ubac
 	allowed_roles = ARMORED_ROLES
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/ubac/blue
 	display_name = "navy blue UBAC shirt"
@@ -214,12 +214,11 @@
 	path = /obj/item/clothing/accessory/storage/pouches
 	cost = 2
 	allowed_roles = ARMORED_ROLES
-	allowed_branches = UNIFORMED_BRANCHES
 
 /datum/gear/tactical/armor_pouches/navy
 	display_name = "navy armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/navy
-	allowed_branches = list(/datum/mil_branch/fleet)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/armor_pouches/misc
 	display_name = "miscellaneous armor pouches selection"
@@ -238,12 +237,11 @@
 	path = /obj/item/clothing/accessory/storage/pouches/large
 	cost = 5
 	allowed_roles = ARMORED_ROLES
-	allowed_branches = UNIFORMED_BRANCHES
 
 /datum/gear/tactical/large_pouches/navy
 	display_name = "navy large armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/large/navy
-	allowed_branches = list(/datum/mil_branch/fleet)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/large_pouches/misc
 	display_name = "miscellaneous large armor pouches selection"
