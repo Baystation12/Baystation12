@@ -9,7 +9,7 @@
 // Movement relay
 /datum/movement_handler/move_relay/DoMove(var/direction, var/mover)
 	var/atom/movable/AM = host.loc
-	if(!istype(AM))
+	if(!istype(AM) || ismob(AM)) // For now mobs have to be moved in other ways even if you are inside them
 		return
 	. = AM.DoMove(direction, mover)
 	if(!(. & MOVEMENT_HANDLED))
