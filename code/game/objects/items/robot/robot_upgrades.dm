@@ -55,8 +55,8 @@
 	new_module = "Party"
 
 /obj/item/borg/upgrade/uncertified/party/Initialize()
-	description_fluff += "<br><br>Inscribed into the cheap-feeling chipboard is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
 	. = ..()
+	description_fluff += "<br><br>Inscribed into the cheap-feeling chipboard is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
 
 /obj/item/borg/upgrade/uncertified/combat
 	name = "ancient module"
@@ -64,8 +64,8 @@
 	new_module = "Combat"
 
 /obj/item/borg/upgrade/uncertified/combat/Initialize()
-	description_fluff += "<br><br>The chipboard is stamped with an insignia: a gun protruding from a stylized fist."
 	. = ..()
+	description_fluff += "<br><br>The chipboard is stamped with an insignia: a gun protruding from a stylized fist."
 
 /obj/item/borg/upgrade/rename
 	name = "robot reclassification board"
