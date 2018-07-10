@@ -23,11 +23,10 @@
 	name = "Orion Armor"
 	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
-	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
+	armor = list("melee" = 50, "bullet" = 50, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
 	species_restricted = list("Orion")
 	armor_thickness = 50
 	flags_inv = 29
-	slowdown_general = -1
 	breach_threshold = 100
 	flags_inv = HIDESHOES
 
@@ -60,7 +59,6 @@
 	min_bruised_damage = 35
 	min_broken_damage = 60
 
-//Testing out New Gun for Theta Project, may not end up using this.
 /obj/item/weapon/gun/projectile/automatic/z8/theta
 	name = "M98 All Purpose Carbine"
 	desc = "This weapon was produced and funded by the UNSC for the Orion Project subjects operational use. Designed with high accuracy and easy maneuverability in combat situations, it was quickly discontinued because of it's high price range and extravagant material costs to create. It is highly versatile being capable of utilizing any and all 7.62 magazines found in the field. If attachments can be found, this carbine is capable of using them. It can be fired one handed with an accuracy penalty."
@@ -73,10 +71,10 @@
 	wielded_item_state = "ma5b"
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
-	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 5, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_COMBAT = 7, TECH_MATERIAL = 5, TECH_ILLEGAL = 4)
 	ammo_type = /obj/item/ammo_casing/a762
 	magazine_type = /obj/item/ammo_magazine/m762_ap
-	allowed_magazines = list(/obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/m762_ap, /obj/item/ammo_magazine/c762)
+	allowed_magazines = list(/obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/m762_ap, /obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/m762_ap/MA5B/TTR)
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -88,13 +86,18 @@
 		)
 
 	attachment_slots = list("sight","stock","barrel")
+	//This is Here because the MA5B spawns with a stock.
+	attachments_on_spawn = null
 
-/obj/item/weapon/gun/projectile/automatic/z8/theta/update_icon()
+/obj/item/weapon/gun/projectile/ma5b_ar/theta/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA9"
 	else
 		icon_state = "MA9_unloaded"
+
+/obj/item/weapon/gun/projectile/ma5b_ar/theta/add_flashlight()
+	return
 
 /obj/structure/closet/syndicate/orioncloset
 	name = "Orion Armory Closet"
