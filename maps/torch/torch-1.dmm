@@ -18850,7 +18850,7 @@
 	},
 /obj/machinery/door/airlock/mining{
 	name = "Expedition Storage";
-	req_one_access = list(48,65)
+	req_one_access = list(48,65,93)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/techfloor/corner,
