@@ -87,13 +87,18 @@
 	set src in range(1)
 	set category = "Vehicle"
 
-	if(!is_on_launchbay()) to_chat(usr,"<span class = 'notice'>[src] needs to be in a drop-bay to be launched.</span>"); return
+	if(!is_on_launchbay())
+		to_chat(usr,"<span class = 'notice'>[src] needs to be in a drop-bay to be launched.</span>")
+		return
 
 	if(launched)
-		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>"); return
+		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
+		return
 
 	var/turf/drop_turf = get_drop_turf(get_drop_point())
-	if(isnull(drop_turf)) to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>"); return
+	if(isnull(drop_turf))
+		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
+		return
 
 	proc_launch_pod(usr,drop_turf)
 
@@ -118,18 +123,25 @@
 	set src in range(1)
 	set category = "Vehicle"
 
-	if(!is_on_launchbay()) to_chat(usr,"<span class = 'notice'>[src] needs to be in a drop-bay to be launched.</span>"); return
-	if(launched) to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>"); return
+	if(!is_on_launchbay())
+		to_chat(usr,"<span class = 'notice'>[src] needs to be in a drop-bay to be launched.</span>")
+		return
+	if(launched)
+		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
+		return
 
 	var/list/potential_om_targ
 	for(var/obj/effect/overmap/o in range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"])
 		potential_om_targ["[o.name]"] = o
 	var/om_user_choice = input("Select Target Object","Target Object Selection","Cancel") in potential_om_targ + list("Cancel")
-	if(om_user_choice == "Cancel") return
+	if(om_user_choice == "Cancel")
+		return
 	var/obj/effect/overmap/om_targ = potential_om_targ[om_user_choice]
 
 	var/turf/drop_turf = get_drop_turf(get_drop_point(om_targ.map_z))
-	if(isnull(drop_turf)) to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>"); return
+	if(isnull(drop_turf))
+		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
+		return
 
 	proc_launch_pod(usr,drop_turf)
 
