@@ -3322,14 +3322,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/substation/seconddeck)
 "gG" = (
-/obj/structure/bed/chair,
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "gH" = (
-/obj/structure/bed/chair,
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "gI" = (
@@ -4235,23 +4235,29 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/aftport)
 "io" = (
-/obj/structure/bed/chair{
+/obj/machinery/light/small,
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "ip" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/machinery/status_display{
 	pixel_y = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "iq" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -4386,7 +4392,8 @@
 /area/maintenance/seconddeck/central)
 "iE" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -5456,7 +5463,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -6241,7 +6249,7 @@
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_monitoring)
 "mu" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/bed/chair/padded/yellow,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_monitoring)
 "mv" = (
@@ -7065,7 +7073,8 @@
 /turf/simulated/floor/plating,
 /area/engineering/engine_monitoring)
 "ov" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -7893,15 +7902,17 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/vacant/prototype/control)
 "ql" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
 /obj/machinery/light/small,
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
@@ -10474,9 +10485,6 @@
 /turf/simulated/floor/plating,
 /area/engineering/engine_room)
 "wh" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
@@ -10487,24 +10495,29 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = 32
 	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "wi" = (
-/obj/structure/bed/chair,
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wj" = (
-/obj/structure/bed/chair,
 /obj/machinery/status_display{
 	pixel_y = 32
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wk" = (
-/obj/structure/bed/chair,
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wl" = (
@@ -11016,14 +11029,18 @@
 	},
 /area/shuttle/escape_pod10/station)
 "xW" = (
-/obj/structure/bed/chair{
+/obj/machinery/light/small,
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "xX" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -14565,9 +14582,6 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/structure/bed/chair/office/dark{
-	dir = 4
-	},
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2";
@@ -14576,6 +14590,10 @@
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
+	},
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/vacant/prototype/control)
@@ -16627,7 +16645,8 @@
 /turf/simulated/wall/ocp_wall,
 /area/vacant/prototype/engine)
 "Sf" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
