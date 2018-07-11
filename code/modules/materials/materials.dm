@@ -835,7 +835,7 @@ var/list/name_to_material
 	name = "carpet"
 	display_name = "comfy"
 	use_name = "red upholstery"
-	icon_colour = "#da020a"
+	icon_colour = "#9d2300"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -852,11 +852,20 @@ var/list/name_to_material
 	melting_point = T0C+300
 	conductive = 0
 
+/material/cloth_yellow
+	name = "yellow"
+	display_name ="yellow"
+	icon_colour = "#ffbf00"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	conductive = 0
+
 /material/cloth_teal
 	name = "teal"
 	display_name ="teal"
 	use_name = "teal cloth"
-	icon_colour = "#00eafa"
+	icon_colour = "#00e1ff"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -876,7 +885,7 @@ var/list/name_to_material
 	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
-	icon_colour = "#01c608"
+	icon_colour = "#b7f27d"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -886,7 +895,7 @@ var/list/name_to_material
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
-	icon_colour = "#9c56c4"
+	icon_colour = "#9933ff"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -896,7 +905,7 @@ var/list/name_to_material
 	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
-	icon_colour = "#6b6fe3"
+	icon_colour = "#46698c"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -906,7 +915,7 @@ var/list/name_to_material
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
-	icon_colour = "#e8e7c8"
+	icon_colour = "#ceb689"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300

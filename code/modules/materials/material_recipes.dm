@@ -14,7 +14,18 @@
 
 	if(integrity>50)
 		recipes += new/datum/stack_recipe("[display_name] chair", /obj/structure/bed/chair, one_per_turf = 1, on_floor = 1, supplied_material = "[name]") //NOTE: the wood material has it's own special chair recipe
-
+		recipes += new/datum/stack_recipe_list("padded [display_name] chairs", list( \
+		new/datum/stack_recipe("beige padded [display_name] chair", /obj/structure/bed/chair/padded/beige, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black padded [display_name] chair", /obj/structure/bed/chair/padded/black, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("brown padded [display_name] chair", /obj/structure/bed/chair/padded/brown, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime padded [display_name] chair", /obj/structure/bed/chair/padded/lime, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal padded [display_name] chair", /obj/structure/bed/chair/padded/teal, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("red padded [display_name] chair", /obj/structure/bed/chair/padded/red, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue padded [display_name] chair", /obj/structure/bed/chair/padded/blue, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple padded [display_name] chair", /obj/structure/bed/chair/padded/purp, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green padded [display_name] chair", /obj/structure/bed/chair/padded/green, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("yellow padded [display_name] chair", /obj/structure/bed/chair/padded/green, 2, one_per_turf = 1, on_floor = 1), \
+		))
 	if(integrity>=50)
 		recipes += new/datum/stack_recipe("[display_name] door", /obj/machinery/door/unpowered/simple, 10, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
 		recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/barricade, 5, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
@@ -35,16 +46,39 @@
 		new/datum/stack_recipe("dark office chair", /obj/structure/bed/chair/office/dark, 5, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("light office chair", /obj/structure/bed/chair/office/light, 5, one_per_turf = 1, on_floor = 1) \
 		))
+	recipes += new/datum/stack_recipe_list("comfy office chairs",list( \
+		new/datum/stack_recipe("beige comfy office chair", /obj/structure/bed/chair/office/comfy/beige, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black comfy office chair", /obj/structure/bed/chair/office/comfy/black, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("brown comfy office chair", /obj/structure/bed/chair/office/comfy/brown, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime comfy office chair", /obj/structure/bed/chair/office/comfy/lime, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal comfy office chair", /obj/structure/bed/chair/office/comfy/teal, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("red comfy office chair", /obj/structure/bed/chair/office/comfy/red, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue comfy office chair", /obj/structure/bed/chair/office/comfy/blue, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple comfy office chair", /obj/structure/bed/chair/office/comfy/purp, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green comfy office chair", /obj/structure/bed/chair/office/comfy/green, 7, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("yellow comfy office chair", /obj/structure/bed/chair/office/comfy/yellow, 7, one_per_turf = 1, on_floor = 1), \
+		))
 	recipes += new/datum/stack_recipe_list("comfy chairs", list( \
-		new/datum/stack_recipe("beige comfy chair", /obj/structure/bed/chair/comfy/beige, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("black comfy chair", /obj/structure/bed/chair/comfy/black, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("brown comfy chair", /obj/structure/bed/chair/comfy/brown, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("lime comfy chair", /obj/structure/bed/chair/comfy/lime, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("teal comfy chair", /obj/structure/bed/chair/comfy/teal, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("red comfy chair", /obj/structure/bed/chair/comfy/red, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("blue comfy chair", /obj/structure/bed/chair/comfy/blue, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("purple comfy chair", /obj/structure/bed/chair/comfy/purp, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("green comfy chair", /obj/structure/bed/chair/comfy/green, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("beige comfy chair", /obj/structure/bed/chair/comfy/beige, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black comfy chair", /obj/structure/bed/chair/comfy/black, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("brown comfy chair", /obj/structure/bed/chair/comfy/brown, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime comfy chair", /obj/structure/bed/chair/comfy/lime, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal comfy chair", /obj/structure/bed/chair/comfy/teal, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("red comfy chair", /obj/structure/bed/chair/comfy/red, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue comfy chair", /obj/structure/bed/chair/comfy/blue, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple comfy chair", /obj/structure/bed/chair/comfy/purp, 3, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green comfy chair", /obj/structure/bed/chair/comfy/green, 3, one_per_turf = 1, on_floor = 1), \
+		))
+	recipes += new/datum/stack_recipe_list("armchairs", list( \
+		new/datum/stack_recipe("beige armchair", /obj/structure/bed/chair/armchair/beige, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black armchair", /obj/structure/bed/chair/armchair/black, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("brown armchair", /obj/structure/bed/chair/armchair/brown, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime armchair", /obj/structure/bed/chair/armchair/lime, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal armchair", /obj/structure/bed/chair/armchair/teal, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("red armchair", /obj/structure/bed/chair/armchair/red, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue armchair", /obj/structure/bed/chair/armchair/blue, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple armchair", /obj/structure/bed/chair/armchair/purp, 4, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green armchair", /obj/structure/bed/chair/armchair/green, 4, one_per_turf = 1, on_floor = 1), \
 		))
 	recipes += new/datum/stack_recipe("key", /obj/item/weapon/key, 1, time = 10, one_per_turf = 0, on_floor = 1)
 	recipes += new/datum/stack_recipe("table frame", /obj/structure/table, 1, time = 10, one_per_turf = 1, on_floor = 1)

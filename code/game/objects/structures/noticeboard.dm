@@ -6,6 +6,7 @@
 	density = 0
 	anchored = 1
 	var/notices = 0
+	layer = ABOVE_WINDOW_LAYER
 
 /obj/structure/noticeboard/Initialize()
 	for(var/obj/item/I in loc)
