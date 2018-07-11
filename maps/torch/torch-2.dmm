@@ -3300,9 +3300,11 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -3322,7 +3324,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/weapon/stool,
+/obj/structure/bed/chair,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "hx" = (
@@ -4259,17 +4261,16 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/stool/padded,
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Mess Hall - Center"
 	},
+/obj/structure/bed/chair/padded,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "jg" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/stool/padded,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -4277,6 +4278,7 @@
 /obj/item/modular_computer/telescreen/preset/generic{
 	pixel_y = 24
 	},
+/obj/structure/bed/chair/padded,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "jh" = (
@@ -4330,6 +4332,18 @@
 "jm" = (
 /turf/simulated/floor/tiled,
 /area/security/brig)
+"jn" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "jo" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -5465,7 +5479,9 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/stool,
+/obj/structure/bed/chair{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "lz" = (
@@ -6364,8 +6380,10 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/bed/chair{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -6428,9 +6446,6 @@
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage/lower)
 "ns" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -6442,6 +6457,10 @@
 	icon_state = "alarm0";
 	pixel_x = -22;
 	pixel_y = 0
+	},
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -7062,9 +7081,6 @@
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage/lower)
 "or" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -7074,6 +7090,10 @@
 /obj/item/device/radio/intercom/department/security{
 	dir = 4;
 	pixel_x = -21
+	},
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -7568,11 +7588,12 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 9
+	},
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -8080,7 +8101,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
 "qn" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/bed/chair/padded/red,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "qo" = (
@@ -8659,7 +8680,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/weapon/stool,
+/obj/structure/bed/chair,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "rN" = (
@@ -10508,7 +10529,9 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/obj/item/weapon/stool,
+/obj/structure/bed/chair{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "us" = (
@@ -11500,7 +11523,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
 "wy" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -11889,7 +11913,8 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "xo" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -11950,10 +11975,11 @@
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "xv" = (
-/obj/structure/bed/chair/office/dark{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/structure/bed/chair/office/comfy/red{
+	icon_state = "comfyofficechair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -13301,6 +13327,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
+"AA" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "AB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -14083,7 +14118,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/weapon/stool/padded,
+/obj/structure/bed/chair/padded{
+	icon_state = "chair_preview";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "Ci" = (
@@ -14097,7 +14135,10 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/item/weapon/stool/padded,
+/obj/structure/bed/chair/padded{
+	icon_state = "chair_preview";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "Cj" = (
@@ -16114,7 +16155,7 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
 "Hb" = (
-/obj/structure/bed/chair/comfy/beige,
+/obj/structure/bed/chair/comfy/brown,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Hc" = (
@@ -16208,13 +16249,13 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/aftstarboard)
 "Hs" = (
-/obj/structure/bed/chair/comfy/beige{
+/obj/structure/bed/chair/comfy/brown{
 	dir = 8
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Ht" = (
-/obj/structure/bed/chair/comfy/beige{
+/obj/structure/bed/chair/comfy/brown{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
@@ -18878,7 +18919,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/center)
 "OK" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/office/comfy/red{
+	icon_state = "comfyofficechair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -19406,12 +19448,12 @@
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
 "Rk" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
-	},
 /obj/item/device/radio/intercom/entertainment{
 	dir = 4;
 	pixel_x = -22
+	},
+/obj/structure/bed/chair/comfy/brown{
+	dir = 4
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
@@ -20126,12 +20168,12 @@
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
 "Uk" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 8
-	},
 /obj/item/device/radio/intercom/entertainment{
 	dir = 8;
 	pixel_x = 22
+	},
+/obj/structure/bed/chair/comfy/brown{
+	dir = 8
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
@@ -20451,6 +20493,12 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/hardstorage/lower)
+"Vy" = (
+/obj/structure/bed/chair/comfy/brown{
+	dir = 8
+	},
+/turf/simulated/floor/wood,
+/area/crew_quarters/lounge)
 "VA" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/cable/green{
@@ -20905,6 +20953,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/aft)
+"XO" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "XR" = (
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
@@ -38514,9 +38571,9 @@ ht
 is
 TH
 jW
-ly
-ly
-ly
+AA
+AA
+AA
 ni
 RN
 jc
@@ -39121,9 +39178,9 @@ lz
 ly
 Tx
 hv
-ly
-ly
-ni
+XO
+XO
+jn
 RN
 fu
 qb
@@ -40153,7 +40210,7 @@ yp
 CE
 Ex
 Gf
-Oj
+Vy
 xk
 Ok
 Hb
