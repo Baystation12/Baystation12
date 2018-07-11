@@ -150,11 +150,14 @@
 	origin_tech = null
 	self_recharge = 1
 	charge_meter = 0
+	var/required_antag_type = MODE_WIZARD
 
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
-	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
-		to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
-		return 0
+	if(required_antag_type)
+		var/datum/antagonist/antag = get_antag_data(required_antag_type)
+		if(user.mind && !antag.is_antagonist(user.mind))
+			to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
+			return 0
 
 	return ..()
 
@@ -172,7 +175,7 @@
 	recharge_time = 5 SECONDS
 	projectile_type = /obj/item/projectile/animate
 
-obj/item/weapon/gun/energy/staff/focus
+/obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
 	icon = 'icons/obj/wizard.dmi'
