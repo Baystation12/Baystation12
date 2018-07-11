@@ -95,6 +95,7 @@
 "aq" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "ar" = (
@@ -4989,6 +4990,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bridgecheck)
 "ly" = (
@@ -11207,6 +11209,7 @@
 "xJ" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xK" = (
@@ -12474,7 +12477,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11, 24)
+	req_one_access = list(11,24)
 	},
 /obj/structure/bed/chair{
 	dir = 8
@@ -13499,7 +13502,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_one_access = list(11, 24)
+	req_one_access = list(11,24)
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";

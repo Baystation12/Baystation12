@@ -1409,6 +1409,7 @@
 "dn" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
 "do" = (
@@ -5423,6 +5424,7 @@
 "lt" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/updown,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "lu" = (
@@ -11283,6 +11285,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 6
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/thirddeck/center)
 "wf" = (
@@ -12349,6 +12352,7 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/thirddeck/center)
 "ym" = (
@@ -15414,6 +15418,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/tiled,
 /area/maintenance/thirddeck/port)
 "Ff" = (
@@ -16059,6 +16064,7 @@
 "GR" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
 "GS" = (
@@ -17295,7 +17301,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11, 24)
+	req_one_access = list(11,24)
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -17516,7 +17522,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11, 24)
+	req_one_access = list(11,24)
 	},
 /obj/machinery/light{
 	dir = 1
@@ -18564,7 +18570,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11, 24)
+	req_one_access = list(11,24)
 	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
@@ -19493,6 +19499,7 @@
 	icon_state = "deck-3";
 	pixel_x = 32
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/thirddeck/center)
 "RM" = (
@@ -19586,7 +19593,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11, 24)
+	req_one_access = list(11,24)
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/gym)
