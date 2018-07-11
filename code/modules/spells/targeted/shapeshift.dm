@@ -187,13 +187,18 @@
 	feedback = "FA"
 	possible_transformations = list()
 	drop_items = 0
-	share_damage = 0
 	invocation_type = SpI_EMOTE
 	invocation = "'s body dissipates into a pale mass of light, then reshapes!"
 	range = -1
 	spell_flags = INCLUDEUSER
 	duration = 0
-	charge_max = 100
+	charge_max = 2 MINUTES
 	toggle = 1
 
 	hud_state = "wiz_carp"
+
+/spell/targeted/shapeshift/familiar/cast(var/list/targets, mob/user)
+	if(user.incapacitated())
+		to_chat(user, "<span class='warning'>You can't cast spells right now.</span>")
+		return
+	..()
