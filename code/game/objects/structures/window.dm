@@ -384,6 +384,13 @@
 		verbs += /obj/structure/window/proc/rotate
 		verbs += /obj/structure/window/proc/revrotate
 
+// Visually connect with every type of window as long as it's full-tile.
+/obj/structure/window/can_visually_connect()
+	return ..() && is_fulltile()
+
+/obj/structure/window/can_visually_connect_to(var/obj/structure/S)
+	return istype(S, /obj/structure/window)
+
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
 /obj/structure/window/update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
@@ -395,24 +402,23 @@
 		layer = SIDE_WINDOW_LAYER
 		icon_state = "[basestate]"
 		return
+
+	var/image/I
+	icon_state = ""
+	if(on_frame)
+		for(var/i = 1 to 4)
+			if(other_connections[i] != "0")
+				I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
+			else
+				I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
+			overlays += I
 	else
-		var/image/I
-		icon_state = ""
-		if(on_frame)
-			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
-				else
-					I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
-				overlays += I
-		else
-			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
-				else
-					I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
-				overlays += I
-	return
+		for(var/i = 1 to 4)
+			if(other_connections[i] != "0")
+				I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
+			else
+				I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
+			overlays += I
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > maximal_heat)
