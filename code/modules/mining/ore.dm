@@ -26,7 +26,7 @@
 	if(!ore)
 		return
 	var/material/M
-	if(ore.smelts_to) 
+	if(ore.smelts_to)
 		M = get_material_by_name(ore.smelts_to)
 	else if (ore.compresses_to)
 		M = get_material_by_name(ore.compresses_to)
@@ -60,8 +60,8 @@
 		to_chat(H, "<span class='danger'>Some of \the [src] gets in your eyes!</span>")
 		H.eye_blind += 5
 		H.eye_blurry += 10
-		spawn(1)
-			if(istype(loc, /turf/)) qdel(src)
+		if(istype(loc, /turf/))
+			QDEL_IN(src, 0)
 
 
 /obj/item/weapon/ore/phoron
@@ -76,8 +76,11 @@
 /obj/item/weapon/ore/diamond
 	ore = /ore/diamond
 
-/obj/item/weapon/ore/osmium
+/obj/item/weapon/ore/platinum
 	ore = /ore/platinum
+
+/obj/item/weapon/ore/titanium
+	ore = /ore/titanium
 
 /obj/item/weapon/ore/hydrogen
 	ore = /ore/hydrogen

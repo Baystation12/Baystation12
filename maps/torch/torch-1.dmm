@@ -2837,7 +2837,7 @@
 	icon_state = "fire";
 	dir = 1
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/shuttle/petrov/ship)
 "fX" = (
 /obj/machinery/door/blast/regular{
@@ -3340,7 +3340,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/shuttle/petrov/ship)
 "gU" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
@@ -3368,7 +3368,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/ship)
 "gX" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/shuttle/petrov/ship)
 "gY" = (
 /obj/structure/closet/l3closet/general,
@@ -3733,7 +3733,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/shuttle/petrov/ship)
 "hL" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
@@ -4321,7 +4321,7 @@
 	icon_state = "intact";
 	dir = 9
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/shuttle/petrov/ship)
 "iT" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -18653,7 +18653,7 @@
 	icon_state = "fire";
 	dir = 1
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/shuttle/petrov/ship)
 "Lo" = (
 /obj/effect/floor_decal/industrial/warning{

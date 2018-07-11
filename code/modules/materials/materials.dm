@@ -426,30 +426,30 @@ var/list/name_to_material
 
 /material/plasteel/titanium
 	name = "titanium"
+	stack_type = /obj/item/stack/material/titanium
 	brute_armor = 10
 	burn_armor = 8
 	integrity = 200
 	melting_point = 3000
 	weight = 18
-	stack_type = null
 	icon_base = "metal"
 	door_icon_base = "metal"
 	icon_colour = "#d1e6e3"
 	icon_reinf = "reinf_metal"
 
-/material/plasteel/ocp
-	name = "osmium-carbide plasteel"
-	stack_type = /obj/item/stack/material/ocp
+/material/plasteel/duranium //Plasteel-titanium alloy.
+	name = "duranium"
+	stack_type = /obj/item/stack/material/duranium
 	integrity = 200
 	melting_point = 12000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#9bc6f2"
+	icon_colour = "#b2c1bf"
 	brute_armor = 4
 	burn_armor = 20
-	weight = 27
+	weight = 25
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-	composite_material = list("plasteel" = 7500, "osmium" = 3750)
+	composite_material = list("plasteel" = 7500, "titanium" = 3750)
 
 
 /material/glass

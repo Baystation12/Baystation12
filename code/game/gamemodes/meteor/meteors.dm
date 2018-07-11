@@ -298,7 +298,7 @@
 	name = "conducting meteor"
 	icon_state = "glowing_blue"
 	desc = "Hide your floppies!"
-	meteordrop = /obj/item/weapon/ore/osmium
+	meteordrop = /obj/item/weapon/ore/platinum
 	dropamt = 2
 
 /obj/effect/meteor/emp/meteor_effect()

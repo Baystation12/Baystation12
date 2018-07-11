@@ -38,11 +38,11 @@
 	cost = 80
 	containername = "\improper Plasteel sheets crate"
 
-/decl/hierarchy/supply_pack/materials/ocp50
-	name = "50 osmium carbide plasteel sheets"
-	contains = list(/obj/item/stack/material/ocp/fifty)
+/decl/hierarchy/supply_pack/materials/duranium50
+	name = "50 duranium sheets"
+	contains = list(/obj/item/stack/material/duranium/fifty)
 	cost = 100
-	containername = "\improper Osmium carbide plasteel sheets crate"
+	containername = "\improper duranium sheets crate"
 
 // Material sheets (10 - Smaller amounts, less cost efficient)
 /decl/hierarchy/supply_pack/materials/marble10
@@ -57,11 +57,11 @@
 	cost = 25
 	containername = "\improper Plasteel sheets crate"
 
-/decl/hierarchy/supply_pack/materials/ocp10
-	name = "10 osmium carbide plasteel sheets"
-	contains = list(/obj/item/stack/material/ocp/ten)
+/decl/hierarchy/supply_pack/materials/duranium10
+	name = "10 duranium sheets"
+	contains = list(/obj/item/stack/material/duranium/ten)
 	cost = 30
-	containername = "\improper Osmium carbide plasteel sheets crate"
+	containername = "\improper duranium sheets crate"
 
 // Material sheets of expensive materials. These are very expensive and therefore pretty hard
 // to get without mining crew that would bring materials to sell in exchange.

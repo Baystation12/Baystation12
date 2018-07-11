@@ -18,16 +18,16 @@
 	product_mod = 0.3
 	product = /obj/item/stack/material/plasteel
 
-/datum/alloy/ocp
-	metaltag = "osmium-carbide plasteel"
+/datum/alloy/duranium
+	metaltag = "duranium"
 	requires = list(
 		"platinum" = 1,
 		"carbon" = 3,
 		"iron" = 2,
-		"osmium" = 2
+		"titanium" = 2
 		)
 	product_mod = 0.3
-	product = /obj/item/stack/material/ocp
+	product = /obj/item/stack/material/duranium
 
 /datum/alloy/steel
 	metaltag = DEFAULT_WALL_MATERIAL

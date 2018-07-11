@@ -8999,7 +8999,7 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/stack/material/ocp/fifty,
+/obj/item/stack/material/duranium/fifty,
 /obj/item/stack/material/plasteel{
 	amount = 10
 	},
@@ -12284,7 +12284,7 @@
 /area/maintenance/seconddeck/foreport)
 "Bh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/maintenance/incinerator)
 "Bi" = (
 /obj/machinery/door/airlock/glass{
@@ -12782,7 +12782,7 @@
 "Cn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/meter,
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/maintenance/incinerator)
 "Co" = (
 /obj/machinery/door/airlock/glass{
@@ -13993,11 +13993,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
 "EU" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/maintenance/incinerator)
 "EV" = (
 /obj/structure/sign/warning/fire,
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/maintenance/incinerator)
 "EW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -16633,7 +16633,7 @@
 /turf/simulated/floor/plating,
 /area/engineering/engine_smes)
 "Se" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/vacant/prototype/engine)
 "Sf" = (
 /obj/structure/bed/chair/office/dark{

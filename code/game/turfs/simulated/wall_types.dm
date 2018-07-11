@@ -4,11 +4,11 @@
 /turf/simulated/wall/r_wall/New(var/newloc)
 	..(newloc, "plasteel","plasteel") //3strong
 
-/turf/simulated/wall/ocp_wall
+/turf/simulated/wall/duranium
 	icon_state = "rgeneric"
 
-/turf/simulated/wall/ocp_wall/New(var/newloc)
-	..(newloc, "osmium-carbide plasteel", "osmium-carbide plasteel")
+/turf/simulated/wall/duranium/New(var/newloc)
+	..(newloc, "duranium", "duranium")
 
 /turf/simulated/wall/r_wall/rglass_wall/New(var/newloc) //Structural, but doesn't impede line of sight. Fairly pretty anyways.
 	..(newloc, "rglass", "steel")

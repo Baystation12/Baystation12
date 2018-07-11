@@ -17826,7 +17826,7 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "KP" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/thruster/d3starboard)
 "KT" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -17863,7 +17863,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "La" = (
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/duranium,
 /area/thruster/d3port)
 "Lb" = (
 /obj/effect/wallframe_spawn/reinforced,

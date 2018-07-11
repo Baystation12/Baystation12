@@ -197,17 +197,24 @@
 /obj/item/stack/material/osmium/ten
 	amount = 10
 
-/obj/item/stack/material/ocp
-	name = "osmium-carbide plasteel"
-	icon_state = "sheet-plasteel"
+/obj/item/stack/material/titanium
+	name = "duranium"
+	icon_state = "sheet-titanium"
 	item_state = "sheet-metal"
-	default_type = "osmium-carbide plasteel"
-	apply_colour = 1
+	default_type = "titanium"
+	apply_colour = 0
 
-/obj/item/stack/material/ocp/ten
+/obj/item/stack/material/duranium
+	name = "duranium"
+	icon_state = "sheet-duranium"
+	item_state = "sheet-metal"
+	default_type = "duranium"
+	apply_colour = 0
+
+/obj/item/stack/material/duranium/ten
 	amount = 10
 
-/obj/item/stack/material/ocp/fifty
+/obj/item/stack/material/duranium/fifty
 	amount = 50
 
 // Fusion fuel.
