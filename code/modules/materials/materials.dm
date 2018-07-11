@@ -796,7 +796,8 @@ var/list/name_to_material
 	return 0
 
 /material/aliumium
-	name = "alien alloy"
+	name = "aliumium"
+	display_name = "alien alloy"
 	stack_type = null
 	icon_base = "jaggy"
 	door_icon_base = "metal"
@@ -804,6 +805,7 @@ var/list/name_to_material
 	hitsound = 'sound/weapons/smash.ogg'
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
+	stack_type = /obj/item/stack/material/aliumium
 
 /material/aliumium/New()
 	icon_base = "metal"
