@@ -1,0 +1,8 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - rscadd: "Belts have been overhauled to have holster slots on certain belts. These holsters function the exact same way as uniform holsters do.
+imgadd: Certain belts now show what their contents are on their icons."
+  - rscadd: "Added general and general holster belts, used by command, bridge officers, and supply. Holds general office supplies, tablets, and stamps as well as other various supply equipment."
+  - maptweak: "Uniform holsters have been removed in favor of belt holsters, however they can still be found within the loadout menu."
+  - tweak: "Uniform holsters have been modified to use the same slot as webbings to counter being able to carry two holstered weapons."
