@@ -16,3 +16,4 @@
 	melee_damage_upper = 15
 	melee_damage_lower = 10
 	attacktext = "mauled"
+	pass_flags = PASS_FLAG_TABLE

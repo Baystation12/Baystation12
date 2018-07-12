@@ -32,6 +32,7 @@
 	var/mob/living/carbon/human/gripping = null
 	var/blood_per_tick = 4.25
 	var/health_per_tick = 0.8
+	pass_flags = PASS_FLAG_TABLE
 
 /mob/living/simple_animal/hostile/vagrant/Initialize()
 	. = ..()
