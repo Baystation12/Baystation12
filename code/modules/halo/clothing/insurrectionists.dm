@@ -61,7 +61,7 @@
 
 /obj/item/clothing/suit/bomb_suit/security/colossus
 	name = "Colossus Armor"
-	desc = "When desperation reaches a breaking point humans will create things which are far scarier then they are practical. The collossus armor is a perfect example of this, with multiple layers of heavy impact plating armor fitted all across the exterior of the body suit, inside this, the wearer becomes a walking tank provided they are wielding enough firepower to emulate such a vehicle. Even without a hand held rocket launcher any foe will be hard pressed to pierce through the robust alloys protecting its user. Though, don't expect to be able to get around the battle field with any kind of speed, the key word of being a walking tank is 'walking'."
+	desc = "When desperation reaches a breaking point humans will create things which are far scarier then they are practical. The collossus armor is a perfect example of this, with multiple layers of heavy impact plating fitted all across the exterior of the body suit, inside this, the wearer becomes a walking tank provided they are wielding enough firepower to emulate such a vehicle. Even without a hand held rocket launcher any foe will be hard pressed to pierce through the robust alloys protecting its user. Though, don't expect to be able to get around the battle field with any kind of speed, the key word of being a walking tank is 'walking'."
 	icon_state = "bombsuitsec"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	item_flags = THICKMATERIAL
@@ -87,7 +87,7 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	slowdown_general = 1
-	siemens_coefficient = 0.7
+	siemens_coefficient = 1.5
 	armor_thickness = 60
 	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 80, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
@@ -119,6 +119,7 @@
 	flags_inv = 29|HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/gun)
 	slowdown_general = 1
+	siemens_coefficient = 1.5
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 
 /obj/item/clothing/suit/justice/zeal/New()
