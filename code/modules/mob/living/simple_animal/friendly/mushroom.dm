@@ -18,6 +18,7 @@
 	var/harvest_time
 	var/min_explode_time = 1200
 	var/global/total_mushrooms = 0
+	pass_flags = PASS_FLAG_TABLE
 
 /mob/living/simple_animal/mushroom/New()
 	..()

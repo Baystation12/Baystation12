@@ -22,6 +22,7 @@
 	var/obj/item/inventory_mask
 	possession_candidate = 1
 	can_escape = 1 //snip snip
+	pass_flags = PASS_FLAG_TABLE
 
 /mob/living/simple_animal/crab/Life()
 	..()

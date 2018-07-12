@@ -40,6 +40,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("beeps","clicks","chirps")
 
+	pass_flags = PASS_FLAG_TABLE
+
 /mob/living/simple_animal/spiderbot/New()
 	..()
 	add_language(LANGUAGE_GALCOM)

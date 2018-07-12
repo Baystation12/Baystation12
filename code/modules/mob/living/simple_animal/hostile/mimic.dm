@@ -48,6 +48,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	var/weakref/creator // the creator
 	var/destroy_objects = 0
 	var/knockdown_people = 0
+	pass_flags = PASS_FLAG_TABLE
 
 /mob/living/simple_animal/hostile/mimic/New(newloc, var/obj/o, var/mob/living/creator)
 	..()

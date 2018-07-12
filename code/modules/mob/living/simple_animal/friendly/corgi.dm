@@ -23,6 +23,7 @@
 	holder_type = /obj/item/weapon/holder/corgi
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
+	pass_flags = PASS_FLAG_TABLE
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian

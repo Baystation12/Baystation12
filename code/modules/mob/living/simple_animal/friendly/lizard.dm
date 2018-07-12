@@ -17,3 +17,4 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 	can_escape = 1
+	pass_flags = PASS_FLAG_TABLE
