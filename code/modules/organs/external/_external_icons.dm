@@ -51,8 +51,10 @@ var/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/removed()
 	update_icon(1)
+	if(owner)
+		SetName("[owner.real_name]'s head")
+		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
 	..()
-
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
