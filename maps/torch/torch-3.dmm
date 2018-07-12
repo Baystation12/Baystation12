@@ -6567,6 +6567,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
+	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/central)
@@ -7201,9 +7205,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/multi_tile/maintenance{
-	req_access = list(14)
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/central)
