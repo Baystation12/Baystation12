@@ -1,4 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - rscadd: "A ping button for checking your ping has been added to the \"file\" tab."

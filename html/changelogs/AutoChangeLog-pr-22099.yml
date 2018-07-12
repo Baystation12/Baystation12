@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Reconfigured access requirements for tactical equipment in the loadout."
-  - tweak: "Sol personnel may no longer select green or tan plate carriers, UBACs or pouches."
-  - tweak: "Expeditionary Corps personnel additionally may no longer select navy blue equipment."

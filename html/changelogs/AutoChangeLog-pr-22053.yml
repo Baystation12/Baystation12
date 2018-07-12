@@ -1,8 +1,0 @@
-author: "Miraviel"
-delete-after: True
-changes: 
-  - rscadd: "Added the \"Detach IV Drip\" verb under the Object tab."
-  - tweak: "Left-clicking an attached drip will now first detach the patient and only then it will remove the beaker. Drag and drop still works!"
-  - tweak: "The Hot Foods Display machine now accepts and dispenses utensils."
-  - imageadd: "IV drips now have a slightly bigger container sprite and a wider warning light, for better visibility."
-  - imageadd: "Advanced first-aid kits are now purple in hands too, as opposed to being red."

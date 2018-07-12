@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Added functionality for edged weapons to cut wires after a short delay. Any conductive objects will also shock you!"
-  - tweak: "At the same time, clicking wires with ordinary conductive objects will no longer shock you."

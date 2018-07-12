@@ -1,7 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "The King of Goats group encounter has been updated."
-  - rscadd: "The King of Goats can now imbue his attacks with elemental damage for a short time."
-  - rscadd: "The King of Goats can now rarely knock over its enemies with its attack."
-  - tweak: "The King of Goats will now only yield the golden fleece to those who slay it in its final form."

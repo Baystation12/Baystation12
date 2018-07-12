@@ -1,4 +1,0 @@
-author: "Orelbon"
-delete-after: True
-changes: 
-  - rscadd: "The self-destruct will now begin detonating explosions randomly on the ship when it reaches its cutoff point."

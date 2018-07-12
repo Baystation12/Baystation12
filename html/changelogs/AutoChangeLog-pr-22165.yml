@@ -1,6 +1,0 @@
-author: "Alex6511"
-delete-after: True
-changes: 
-  - balance: "The CoS Locker no longer contains a taser"
-  - balance: "The Brig Officer Locker no longer contains a small energy gun."
-  - tweak: "The CoS locker now has a hand labeler in line with the Brig Officer."

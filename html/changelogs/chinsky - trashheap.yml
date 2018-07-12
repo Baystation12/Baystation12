@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Drastically lowers amount of loot-having junk piles on garbge planets. They have visual cues though so you don't need to try and rummage though literally every pile."
-  - tweak: "Xenoarch finds no longer yield sheets of steel and claim it's a mysterious thing. They now mostly drop alium alloy, that has random material properties each round. Any material weapons you find will be made of it too."
-  - rscadd: "Garbage planets now have radiation sources scattered around."
