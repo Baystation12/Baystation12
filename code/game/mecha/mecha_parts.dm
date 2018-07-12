@@ -303,12 +303,12 @@
 
 	New()
 		..()
-		construct = new /datum/construction/mecha/gygax_chassis(src)
+		construct = new /datum/construction/mecha/hrunting_chassis(src)
 
 /obj/item/mecha_parts/part/hrunting_torso
 	name="HRUNTING Mark I Torso"
 	desc="A torso part of HRUNTING/YGGDRASIL Mark I ADS. Contains power unit, processing core and life support systems. Has an additional equipment slot."
-	icon_state = "Hrunting_harness"
+	icon_state = "gygax_harness"
 	origin_tech = list(TECH_DATA = 2, TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ENGINEERING = 3)
 
 /obj/item/mecha_parts/part/hrunting_head
