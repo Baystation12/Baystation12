@@ -14,8 +14,6 @@
 	#include "geminus_city_jobs.dm"
 	#include "geminus_city_spawns.dm"
 
-	#include "../insurrection/unsc_staging_areas.dm"
-
 	#include "geminuscity_2.dmm"
 	#include "geminuscity_3.dmm"
 	#include "geminuscity_4.dmm"

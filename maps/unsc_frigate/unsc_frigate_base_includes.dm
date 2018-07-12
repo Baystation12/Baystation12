@@ -11,4 +11,3 @@
 
 #include "jobs/unsc_jobs_includes.dm"
 
-#include "outfits/unsc_outfit_includes.dm"
