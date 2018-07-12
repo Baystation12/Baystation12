@@ -1,7 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Piloting skill now has ingame effects."
-  - rscadd: "Taking Torch's helm without at least Trained skill can make Torch go not exactly where you want it to go. At Professional, passing meteor fields is less painful."
-  - rscadd: "Shuttles require different level of skill. Guppy is no-skill, Charon and Aquila need at least Basic. For purposes of skill, pilot is whoever tells it to move in console."
-  - rscadd: "If pilot's skill is insufficient, you can end up in wrong place. Also travel time is affected by skill."

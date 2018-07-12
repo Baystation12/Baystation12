@@ -1,6 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - tweak: "The Pull Punches verb has been renamed to Switch Stance."
-  - tweak: "Nabber stance switching behavior now replaces pulling punches for them."
-  - tweak: "Nabber nabbing is now achieved by trying to grab someone rather than a verb."

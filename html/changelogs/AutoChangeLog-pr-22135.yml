@@ -1,5 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Paper bundles bundle correctly."
-  - tweak: "Carbon copy paper is now default named \"sheet of paper\" instead of \"paper\", the same as regular paper."

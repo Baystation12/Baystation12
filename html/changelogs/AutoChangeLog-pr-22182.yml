@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - bugfix: "Fixes being unable to ignore OOC."

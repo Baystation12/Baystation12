@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - balance: "Wizard familiar transform spell recharge time increased to two minutes from ten seconds."
-  - balance: "Wizard familiars can no longer transform while incapacitated."
-  - balance: "A percentage of damage taken in a familiar animal form is now mirrored to the familiar's human form."

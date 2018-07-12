@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - bugfix: "Simple animals controlled by a client can once again damage humans. Don't kick that suspicious goat."
