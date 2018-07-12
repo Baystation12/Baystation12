@@ -33,10 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Added in random clothes sets in Innibase3 Laundry room and Eastern Storage."
-  - tweak: "Added in a small assortment of old guns with a bit of ammo into the ammo crates Inniebase3 north storage. Added in a few sets of armor vests."
-  - tweak: "Added in randomised misc items to Eastern and Northern Storage in Inniebase2. Should help with blending in with civies if they want to go incognito. Added in a emergency rations freezer as well."
-  - tweak: "Added in a few old style guns to the weapons crates in Northern Storage Inniebase2."
-  - tweak: "Added in some merc armor and helmets into northern Storage Inniebase2."
-  - tweak: "Added in a secure briefcase with money inside of it in the hidden office in eastern maint in Inniebase2. Also added in a case of cigars."
-  - tweak: "Added barricades over the grills on Inniebase1 to make it more difficult to enter through vents."
+  - imageadd: "New floorsigns for medical."
