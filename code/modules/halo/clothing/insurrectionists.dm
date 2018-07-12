@@ -112,7 +112,7 @@
 	slowdown_general = 0
 
 /obj/item/clothing/suit/justice/zeal
-	name = "Zeal Scout Suit"
+	name = "Shade Scout Suit"
 	desc = "The Zeal suit was initially designed by URF research efforts to create a scout suit which their forces could utilize on a large scale across multiple systems. Geminus Colony scientists were contracted for the project so that suspicion wouldn't be drawn to the scattered URF bases near Sol due to technological requirements of the initial design. When it was finished the URF had on their hands an advanced uniform which also provided moderate defense for the wearer. The armor is carefully constructed with nano-kinetic motors built into the joints between the small segments of armor provide enhanced speed by continuously storing and releasing kinetic energy from the users natural movements. Though it is a powerful addition to the URF's compliment of existing equipment the rare minerals required to power and store this kind of energy meant that the URF was only initially capable of small scale production. In the end only the largest URF bases ended up recieving any number of these suits to help in their efforts of liberation. Because of its light weight the suit has no storage capacity to speak of, only being capable of holding a single weapon on its magnetic harness. Due to the nature of the armor's abilities excess weight taken on by the user can lead to overtaxing the motors and a loss of speed very quickly."
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
