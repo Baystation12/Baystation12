@@ -23009,7 +23009,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Robotics Maintenance";
-	req_access = list(12,82)
+	req_access = list(82)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics)
