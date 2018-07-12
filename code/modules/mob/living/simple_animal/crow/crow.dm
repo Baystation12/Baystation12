@@ -30,6 +30,7 @@
 	response_harm   = "swats"
 	stop_automated_movement = TRUE
 	universal_speak = TRUE
+	pass_flags = PASS_FLAG_TABLE
 
 	var/obj/item/weapon/storage/messenger/messenger_bag
 	var/obj/item/weapon/card/id/access_card
