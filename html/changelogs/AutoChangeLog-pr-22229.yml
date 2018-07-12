@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - tweak: "Roboticist now has access to their own maintenance airlock again."
