@@ -234,15 +234,23 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	return pain-last_pain
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)
-	if(agony_amount > 5 && owner && vital && get_pain() > 0.5 * max_damage)
-		owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
-		if(has_genitals() || get_pain() + agony_amount > max_damage)
-			owner.Weaken(6)
-		else
-			owner.Stun(6)
-			owner.drop_l_hand()
-			owner.drop_r_hand()
-		return 1
+	if(agony_amount > 5 && owner)
+
+		if(can_grasp && prob(25))
+			owner.grasp_damage_disarm(src)
+
+		if(can_stand && prob(min(agony_amount * ((body_part == LEG_LEFT || body_part == LEG_RIGHT)? 2 : 4),70)))
+			owner.stance_damage_prone(src)
+
+		if(vital && get_pain() > 0.5 * max_damage)
+			owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
+			if(has_genitals() || get_pain() + agony_amount > max_damage)
+				owner.Weaken(6)
+			else
+				owner.Stun(6)
+				owner.drop_l_hand()
+				owner.drop_r_hand()
+			return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()
 	return has_genitals() ? 2 : 1
