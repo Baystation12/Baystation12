@@ -119,6 +119,7 @@
 	flags_inv = 29|HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/gun)
 	slowdown_general = 1
+	armor_thickness = 10 //Should be able to take 5-6 bullets before shattering.
 	siemens_coefficient = 1.5
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 
