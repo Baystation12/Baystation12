@@ -3,7 +3,7 @@
 	name = "Unknown Vessel"
 	desc = "The sillhouette of this ship matches no known ship signatures"
 
-	icon = 'maps/covenant_ships/kig_yar_pirates/pirate.dmi'
+	icon = 'maps/first_contact/maps/kig_yar_pirates/pirate.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 

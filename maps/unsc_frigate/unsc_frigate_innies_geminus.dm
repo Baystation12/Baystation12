@@ -15,7 +15,7 @@
 	#include "../geminus_city/geminus_city_jobs.dm"
 	#include "../geminus_city/geminus_city_spawns.dm"
 
-	#include "../Exoplanet Research/includes.dm"
+	#include "../first_contact/maps/Exoplanet Research/includes.dm"
 
 	#include "../geminus_city/geminuscity_2.dmm"
 	#include "../geminus_city/geminuscity_3.dmm"
@@ -26,9 +26,9 @@
 	#include "../insurrection/insurrection_jobs.dm"
 	#include "../insurrection/insurrection_spawns.dm"
 
-	#include "../Asteroid Listening Post/includes.dm"
+	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
 
-	#include "../Exoplanet Icy/includes.dm"
+	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
 
 	#include "../insurrection/innie_base_areas.dm"
 	#include "../insurrection/innie_base4.dmm"
@@ -38,13 +38,13 @@
 
 	#include "unsc_frigate_spawndefs_innies_geminus.dm"
 
-	#include "../Exoplanet Mining/includes.dm"
+	#include "../first_contact/maps/Exoplanet Mining/includes.dm"
 
 	#include "../odst_prowler/ODST_Ship.dmm"
 
 	#include "../first_contact/overall_overmap.dm"
 
-	#include "../covenant_ships/kig_yar_pirates/includes.dm"
+	#include "../first_contact/maps/kig_yar_pirates/includes.dm""
 
 
 	#include "../first_contact/maps/corvette_spawns.dm"
