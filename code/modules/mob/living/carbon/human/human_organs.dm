@@ -146,6 +146,17 @@
 		if(((E.is_broken() || E.is_dislocated()) && !E.splinted) || E.is_malfunctioning())
 			grasp_damage_disarm(E)
 
+/mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
+
+	if(affected)
+		switch(affected.body_part)
+			if(FOOT_LEFT, FOOT_RIGHT)
+				to_chat(src, "<span class='warning'>You lose your footing as your [affected.name] spasms!</span>")
+			if(LEG_LEFT, LEG_RIGHT)
+				to_chat(src, "<span class='warning'>Your [affected.name] buckles from the shock!</span>")
+			else
+				return
+	Weaken(5)
 
 /mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
 	var/disarm_slot
