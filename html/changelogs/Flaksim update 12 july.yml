@@ -35,3 +35,5 @@ delete-after: True
 changes: 
   - maptweak: "Fixed gravity and power issues on Geminus (Someone forgot areas when mapping new things in...)"
   - rscdel: "Cleaned up map folders to get rid of outdated and horribly broken maps."
+  - bugfix: "Implemented XO-11's movement fix."
+  - tweak: "Rounded out items here and there, nothing major, this update is mostly fixing little things and step 1 in src reorganization."

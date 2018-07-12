@@ -1,6 +1,13 @@
 #define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
 
+/obj/item/clothing/suit/armor/odst
+	var/obj/item/weapon/storage/internal/pockets/pockets
+
+/obj/item/clothing/suit/armor/odst/New()
+	..()
+	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 2, slot_size = 2) //two slots, fit only pocket sized items
+
 /obj/item/clothing/under/unsc/odst_jumpsuit
 	name = "ODST jumpsuit"
 	desc = "standard issue ODST jumpsuits, padded to provide a slight edge."
@@ -26,16 +33,17 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 0, rad = 5)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+	armor_thickness = 20
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
-	brightness_on = 4
+	brightness_on = 5
 	on = 0
 
 /obj/item/clothing/suit/armor/odst
@@ -51,90 +59,34 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
 	armor_thickness = 20
-	allowed = list(/obj/item/weapon/tank)
-	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
-/obj/item/clothing/suit/space/void/equipped(mob/M)
+	pockets = new/obj/item/weapon/storage/internal/pockets(                  slots = 3, slot_size = 2)
+
+/obj/item/clothing/suit/armor/odst/Destroy()
+	QDEL_NULL(pockets)
+	. = ..()
+
+/obj/item/clothing/suit/armor/odst/attack_hand(mob/user as mob)
+	if (pockets.handle_attack_hand(user))
+		..(user)
+
+/obj/item/clothing/suit/armor/odst/MouseDrop(obj/over_object as obj)
+	if (pockets.handle_mousedrop(usr, over_object))
+		..(over_object)
+
+/obj/item/clothing/suit/armor/odst/attackby(obj/item/W as obj, mob/user as mob)
 	..()
+	if(!(W in accessories))		//Make sure that an accessory wasn't successfully attached to suit.
+		pockets.attackby(W, user)
 
-	var/mob/living/carbon/human/H = M
-
-	if(!istype(H)) return
-
-	if(H.wear_suit != src)
-		return
-
-	if(tank)
-		if(H.s_store) //In case someone finds a way.
-			to_chat(M, "Alarmingly, the valve on your suit's installed tank fails to engage.")
-		else if (H.equip_to_slot_if_possible(tank, slot_s_store))
-			to_chat(M, "The valve on your suit's installed tank safely engages.")
-			tank.canremove = 0
-
-/obj/item/clothing/suit/armor/odst/verb/eject_tank()
-
-	set name = "Eject Oxygen Tank"
-	set category = "Object"
-	set src in usr
-
-	if(!istype(src.loc,/mob/living)) return
-
-	if(!tank)
-		to_chat(usr, "There is no oxygen tank inserted.")
-		return
-
-	var/mob/living/carbon/human/H = usr
-
-	if(!istype(H)) return
-	if(H.incapacitated()) return
-	if(H.wear_suit != src) return
-
-	to_chat(H, "<span class='info'>You press the release, ejecting \the [tank] from your suit.</span>")
-	tank.canremove = 1
-	H.drop_from_inventory(tank)
-	src.tank = null
-
-/obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
-
-	if(!istype(user,/mob/living)) return
-
-	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/weapon/hand_labeler))
-		return ..()
-
-	if(istype(src.loc,/mob/living))
-		to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-		return
-
-	if(istype(W,/obj/item/weapon/screwdriver))
-		if(helmet || boots || tank)
-			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
-			if(!choice) return
-
-			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
-				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
-				tank.forceMove(get_turf(src))
-				src.tank = null
-		else
-			to_chat(user, "\The [src] does not have anything installed.")
-		return
-	else if(istype(W,/obj/item/weapon/tank))
-		if(tank)
-			to_chat(user, "\The [src] already has an airtank installed.")
-		else if(istype(W,/obj/item/weapon/tank/phoron))
-			to_chat(user, "\The [W] cannot be inserted into \the [src]'s storage compartment.")
-		else
-			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
-			user.drop_item()
-			W.forceMove(src)
-			tank = W
-		return
-
+/obj/item/clothing/suit/armor/odst/emp_act(severity)
+	pockets.emp_act(severity)
 	..()
 
 
