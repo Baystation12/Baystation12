@@ -18,6 +18,8 @@
 	icon = 'code/modules/halo/vehicles/ghost.dmi'
 	icon_state = "base"
 
+	vehicle_size = 16
+
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 300
 	resistances = list("brute"=35,"burn"=20,"emp"=15)

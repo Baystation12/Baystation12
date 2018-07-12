@@ -46,16 +46,16 @@
 		to_chat(i,"[faction]:[message]")
 
 /datum/game_mode/insurrection/proc/obtain_all_pods()
-	for(var/obj/structure/drop_pods/p in world)
+	for(var/obj/vehicles/drop_pod/p in world)
 		remaining_pods += p
 
 /datum/game_mode/insurrection/proc/update_pod_status()
-	for(var/obj/structure/drop_pods/p in remaining_pods)
+	for(var/obj/vehicles/drop_pod/p in remaining_pods)
 		if(p.launched)
 			remaining_pods -= p
 
 /datum/game_mode/insurrection/proc/modify_pod_launch(var/modify_to)
-	for(var/obj/structure/drop_pods/p in remaining_pods)
+	for(var/obj/vehicles/drop_pod/p in remaining_pods)
 		p.launched = modify_to
 
 /datum/game_mode/insurrection/proc/inform_start_round()
@@ -163,7 +163,7 @@
 	if(autolaunchtime < world.time && !pods_launched)
 		message_faction("UNSC","<span class = 'danger'>Assault pods auto-locked..</span>")
 		pods_launched = 1
-		for(var/obj/structure/drop_pods/p in remaining_pods)
+		for(var/obj/vehicles/drop_pod/p in remaining_pods)
 			p.launched = 1
 			remaining_pods -= p
 			update_pod_status()

@@ -23,6 +23,8 @@
 
 	exposed_positions = list()//No-one can get hit when inside this.
 
+	vehicle_size = 128
+
 /obj/vehicles/air/spirit_dropship/proc/update_pixel_xy()
 	pixel_x = 0
 	pixel_y = 0
