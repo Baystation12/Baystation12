@@ -2221,7 +2221,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/dutyboots,
-/obj/item/clothing/accessory/holster/thigh,
+/obj/item/weapon/storage/belt/holster/general,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/structure/window/reinforced{
 	dir = 8
@@ -2237,7 +2237,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/dutyboots,
-/obj/item/clothing/accessory/holster/thigh,
+/obj/item/weapon/storage/belt/holster/general,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/structure/window/reinforced{
 	dir = 8
@@ -10109,7 +10109,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/dutyboots,
-/obj/item/clothing/accessory/holster/thigh,
+/obj/item/weapon/storage/belt/holster/general,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/item/clothing/suit/armor/pcarrier/blue/sol,
 /obj/item/clothing/head/helmet/solgov,
@@ -10853,7 +10853,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/dutyboots,
-/obj/item/clothing/accessory/holster/thigh,
+/obj/item/weapon/storage/belt/holster/general,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/item/clothing/suit/armor/pcarrier/blue/sol,
 /obj/structure/window/reinforced{
