@@ -1,0 +1,5 @@
+author: "ChaosAlpha"
+delete-after: True
+changes: 
+  - tweak: "Engineering robots can now collect cables regardless of the currently selected color of their synthesizer"
+  - tweak: "Robots can now pull-drag (by clicking on an adjacent turf while pulling something)"
