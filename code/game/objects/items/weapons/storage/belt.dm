@@ -172,7 +172,9 @@
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll,
-		/obj/item/weapon/extinguisher/mini
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/weapon/storage/med_pouch,
+		/obj/item/bodybag
 		)
 
 /obj/item/weapon/storage/belt/medical/emt
