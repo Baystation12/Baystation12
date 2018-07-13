@@ -66,7 +66,7 @@
 		)
 	armor_thickness = 20
 
-	pockets = new/obj/item/weapon/storage/internal/pockets(                  slots = 3, slot_size = 2)
+	pockets = new/obj/item/weapon/storage/internal/pockets(slots = 3, slot_size = 2)
 
 /obj/item/clothing/suit/armor/odst/Destroy()
 	QDEL_NULL(pockets)
