@@ -1,0 +1,7 @@
+author: Ithalan
+
+delete-after: True
+
+changes: 
+  - bugfix: "PDA medical scanner now works on body bags and stasis bags like the regular health analyzer, and uses user medicine skill level"
+  - rscadd: "Medical belts can now also hold body bags, stasis bag and emergency medical pouches"
