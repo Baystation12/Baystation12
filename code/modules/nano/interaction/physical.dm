@@ -14,5 +14,5 @@ GLOBAL_DATUM_INIT(physical_state, /datum/topic_state/physical, new)
 /mob/living/check_physical_distance(var/src_object)
 	return shared_living_nano_distance(src_object)
 
-/mob/living/silicon/check_physical_distance(var/src_object)
+/mob/living/silicon/ai/check_physical_distance(var/src_object)
 	return max(STATUS_UPDATE, shared_living_nano_distance(src_object))
