@@ -143,6 +143,7 @@
 	recipes += new/datum/stack_recipe("white floor tile", /obj/item/stack/tile/floor_white, 1, 4, 20)
 	recipes += new/datum/stack_recipe("freezer floor tile", /obj/item/stack/tile/floor_freezer, 1, 4, 20)
 	recipes += new/datum/stack_recipe("hazard cone", /obj/item/weapon/caution/cone, 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("plastic flaps", /obj/structure/plasticflaps, 30, time = 5 SECONDS, one_per_turf = 1, on_floor = 1)
 
 
 /material/wood/generate_recipes()
