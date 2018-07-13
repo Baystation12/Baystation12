@@ -73,7 +73,7 @@
 			to_chat(usr, "Scan save failed.")
 
 	if(.)
-		GLOB.nanomanager.update_uis(NM)
+		SSnano.update_uis(NM)
 
 /datum/nano_module/program/scanner
 	name = "Scanner"
@@ -92,7 +92,7 @@
 	data["check_scanning"] = prog.check_scanning()
 	data["data_buffer"] = pencode2html(prog.data_buffer)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "scanner.tmpl", name, 575, 700, state = state)
 		ui.auto_update_layout = 1

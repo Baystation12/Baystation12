@@ -26,6 +26,7 @@
 #define SS_PRIORITY_PROCESSING    30	// Generic datum processor. Replaces objects processor.
 #define SS_PRIORITY_GARBAGE       25	// Garbage collection.
 #define SS_PRIORITY_VINES         25	// Spreading vine effects.
+#define SS_PRIORITY_NANO          20    // Updates to nanoui uis.
 #define SS_PRIORITY_TGUI          20    // Updates to tgui uis.
 #define SS_PRIORITY_TURF          20    // Radioactive walls/blob.
 #define SS_PRIORITY_EVAC          20    // Processes the evac controller.

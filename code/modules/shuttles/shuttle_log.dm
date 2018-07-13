@@ -32,7 +32,7 @@
 
 /datum/shuttle_log/proc/update_registred()
 	for(var/datum/nano_module/module in registered)
-		GLOB.nanomanager.update_uis(module)
+		SSnano.update_uis(module)
 
 /datum/shuttle_log/proc/submit_report(datum/shuttle_mission/mission, datum/computer_file/report/report, mob/user)
 	if(!report.submit(user))
