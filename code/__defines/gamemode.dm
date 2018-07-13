@@ -69,6 +69,7 @@
 //End split flags
 #define CONSTRUCT_CHECK	0x100	//used by construct spells - checks for nullrods
 #define NO_BUTTON		0x200	//spell won't show up in the HUD with this
+#define NO_SOMATIC		0x400	//spell will go off if the person is incapacitated (kind of like STATALLOWED but w/ handcuffs n junk)
 
 //invocation
 #define SpI_SHOUT	"shout"
