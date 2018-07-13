@@ -10367,7 +10367,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	name = "Auxiliary Cryogenic Storage Maintenance"
+	name = "Auxiliary Cryogenic Storage Maintenance";
 	req_access = list(12)
 	},
 /turf/simulated/floor/tiled/white,
@@ -17014,6 +17014,16 @@
 /obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod15/station)
+"bWA" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "bXb" = (
 /obj/machinery/status_display{
 	pixel_x = -32;
@@ -17302,13 +17312,13 @@
 /obj/machinery/vending/wallmed1{
 	pixel_y = 32
 	},
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
 /obj/machinery/cell_charger,
+/obj/machinery/light/spot{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "czb" = (
@@ -17353,9 +17363,6 @@
 /obj/item/weapon/reagent_containers/spray/cleaner{
 	pixel_x = -5
 	},
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
 	dir = 9
@@ -17375,6 +17382,9 @@
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -18047,6 +18057,7 @@
 	dir = 4;
 	pixel_x = 21
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "dEb" = (
@@ -18143,9 +18154,6 @@
 /area/hallway/primary/firstdeck/aft)
 "dNb" = (
 /obj/structure/bed/roller,
-/obj/machinery/light{
-	dir = 4
-	},
 /obj/machinery/button/remote/blast_door{
 	desc = "A remote control-switch for shutters.";
 	id = "virologyquar";
@@ -18173,6 +18181,9 @@
 	icon_state = "sink";
 	pixel_x = 11;
 	pixel_y = 0
+	},
+/obj/machinery/light/spot{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
@@ -22007,6 +22018,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/purple/half,
+/obj/machinery/light,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "jbb" = (
@@ -25100,10 +25112,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nQb" = (
-/obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -25617,6 +25625,13 @@
 /obj/structure/bed/chair/office/light,
 /turf/simulated/floor/carpet/red,
 /area/rnd/breakroom)
+"oAp" = (
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "oAx" = (
 /obj/structure/sign/warning/pods/south{
 	icon_state = "podssouth";
@@ -49386,7 +49401,7 @@ gJb
 arK
 jiq
 hnN
-oox
+oAp
 aAD
 nAb
 nIb
@@ -51406,7 +51421,7 @@ avk
 awq
 axy
 hib
-oox
+oAp
 haT
 hJb
 dob
@@ -53020,7 +53035,7 @@ atf
 atg
 avr
 awu
-hiD
+bWA
 ayB
 nWl
 aAO
