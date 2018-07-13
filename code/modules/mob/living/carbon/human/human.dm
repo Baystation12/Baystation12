@@ -88,11 +88,6 @@
 			if(suit.cell) cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
 			stat(null, "Suit charge: [cell_status]")
 
-		if(mind)
-			if(mind.changeling)
-				stat("Chemical Storage", mind.changeling.chem_charges)
-				stat("Genetic Damage Time", mind.changeling.geneticdamage)
-
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
 		flash_eyes()

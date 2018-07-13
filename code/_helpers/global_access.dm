@@ -465,8 +465,6 @@
 			return global.hadevent;
 		if("hazard_overlays")
 			return global.hazard_overlays;
-		if("hivemind_bank")
-			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
 			return global.holder_mob_icon_cache;
 		if("host")
@@ -681,14 +679,8 @@
 			return global.plant_seed_sprites;
 		if("playable_species")
 			return global.playable_species;
-		if("possible_changeling_IDs")
-			return global.possible_changeling_IDs;
 		if("power_alarm")
 			return global.power_alarm;
-		if("powerinstances")
-			return global.powerinstances;
-		if("powers")
-			return global.powers;
 		if("preferences_datums")
 			return global.preferences_datums;
 		if("priority_air_alarms")
@@ -985,7 +977,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1452,8 +1444,6 @@
 			global.hadevent=newval;
 		if("hazard_overlays")
 			global.hazard_overlays=newval;
-		if("hivemind_bank")
-			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
 			global.holder_mob_icon_cache=newval;
 		if("host")
@@ -1668,14 +1658,8 @@
 			global.plant_seed_sprites=newval;
 		if("playable_species")
 			global.playable_species=newval;
-		if("possible_changeling_IDs")
-			global.possible_changeling_IDs=newval;
 		if("power_alarm")
 			global.power_alarm=newval;
-		if("powerinstances")
-			global.powerinstances=newval;
-		if("powers")
-			global.powers=newval;
 		if("preferences_datums")
 			global.preferences_datums=newval;
 		if("priority_air_alarms")
@@ -1972,7 +1956,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2206,7 +2190,6 @@
 	"gzn_check",
 	"hadevent",
 	"hazard_overlays",
-	"hivemind_bank",
 	"holder_mob_icon_cache",
 	"host",
 	"href_logfile",
@@ -2314,10 +2297,7 @@
 	"plant_controller",
 	"plant_seed_sprites",
 	"playable_species",
-	"possible_changeling_IDs",
 	"power_alarm",
-	"powerinstances",
-	"powers",
 	"preferences_datums",
 	"priority_air_alarms",
 	"priority_announcement",
