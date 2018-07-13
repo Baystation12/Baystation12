@@ -470,7 +470,7 @@
 "bk" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = list(12)
+	req_access = list(12);
 	req_one_access = list(73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
