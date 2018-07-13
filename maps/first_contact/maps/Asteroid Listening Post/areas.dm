@@ -1,5 +1,5 @@
 /area/asteroid_listening
-	name = "KS7-535 Facility"
+	name = "Listening Post Facility"
 	dynamic_lighting = 0
 
 /area/asteroid_listening/Interiorlevel1

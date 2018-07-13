@@ -98,3 +98,107 @@
 
 /area/exo_research_facility/roof/exterior/northeastr
 	name = "VT9-042 Rooftop Exterior"
+
+/area/exo_research_facility/sublevel1/interior
+	name = "Crescent Base sublevel 1 interior"
+	dynamic_lighting = 0
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 1
+
+/area/exo_research_facility/sublevel1/interior/Hallways
+	name = "Crescent Base Sublevel 1 Hallways"
+
+/area/exo_research_facility/sublevel1/interior/security
+	name = "Crescent Base Security Checkpoint"
+
+/area/exo_research_facility/sublevel1/interior/mech
+	name = "Crescent Base Mech Lab"
+
+/area/exo_research_facility/sublevel1/interior/mechtest
+	name = "Crescent Base Mech Testing Range"
+
+/area/exo_research_facility/sublevel1/interior/weapons
+	name = "Crescent Base Weapons Lab"
+
+/area/exo_research_facility/sublevel1/interior/storage
+	name = "Crescent Base Sublevel 1 Storage bay"
+
+/area/exo_research_facility/sublevel1/interior/destruct
+	name = "Crescent Base Selfdestruct"
+
+/area/exo_research_facility/sublevel1/interior/holdingpen
+	name = "Crescent Base Holding Pen"
+
+/area/exo_research_facility/sublevel1/interior/Offices
+	name = "Crescent Base Administrative Offices"
+
+/area/exo_research_facility/sublevel1/interior/cryodorm
+	name = "Crescent Base Cryodorms"
+
+/area/exo_research_facility/sublevel1/interior/breakr
+	name = "Crescent Base Sublevel 1 Break Room"
+
+/area/exo_research_facility/sublevel1/interior/autopsy
+	name = "Crescent Base Autopsy Lab"
+
+/area/exo_research_facility/sublevel1/interior/Hangarb
+	name = "Crescent Base Hangar Basement"
+
+/area/exo_research_facility/sublevel1/interior/southwestb
+	name = "Crescent Base Southwest Tower Basement"
+
+/area/exo_research_facility/sublevel1/interior/southeastb
+	name = "Crescent Base Southeast Tower Basement"
+
+/area/exo_research_facility/sublevel1/interior/comms
+	name = "Crescent Base Communications Station Basement"
+
+/area/exo_research_facility/sublevel1/exterior/Caves
+	name = "VT9-042 Lower Caves"
+	dynamic_lighting = 1
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 0
+
+/area/exo_research_facility/sublevel2/interior
+	name = "Crescent Base sublevel 2 interior"
+	dynamic_lighting = 0
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 1
+
+/area/exo_research_facility/sublevel2/interior/Hallways
+	name = "Crescent Base Sublevel 2 Hallways"
+
+
+/area/exo_research_facility/sublevel2/interior/Breakr
+	name = "Crescent Base Sublevel 2 Break Room"
+
+/area/exo_research_facility/sublevel2/interior/adminoffice
+	name = "Crescent Base Administrative Office"
+
+/area/exo_research_facility/sublevel2/interior/weaponsdev
+	name = "Crescent Base Sublevel 2 Weapons Development"
+
+/area/exo_research_facility/sublevel2/interior/Recovery
+	name = "Crescent Base Sublevel 2 Recover Ward"
+
+/area/exo_research_facility/sublevel2/interior/Surgery
+	name = "Crescent Base Sublevel 2 Surgery Ward"
+
+/area/exo_research_facility/sublevel2/interior/Chemistry
+	name = "Crescent Base Sublevel 2 Chemistry Lab"
+
+/area/exo_research_facility/sublevel2/interior/testingr
+	name = "Crescent Base Sublevel 2 Testing Range"
+
+/area/exo_research_facility/sublevel2/interior/cryodormr
+	name = "Crescent Base Sublevel 2 Cryodorms"
+
+/area/exo_research_facility/sublevel2/exterior/Caves
+	name = "VT9-042 Extremely Deep Caves"
+	dynamic_lighting = 1
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 0
