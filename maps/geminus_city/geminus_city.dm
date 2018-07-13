@@ -2,12 +2,12 @@
 #if !defined(using_map_DATUM)
 
 	#include "areas.dm"
-	#include "citymapturfs.dm"
-	#include "cityprops.dm"
-	#include "interiorobjs.dm"
-	#include "interiorstructures.dm"
-	#include "signs.dm"
-	#include "streetobjs.dm"
+	#include "../../code/modules/halo/turfs/citymapturfs.dm"
+	#include "../../code/modules/halo/turfs/cityprops.dm"
+	#include "../../code/modules/halo/turfs/interiorobjs.dm"
+	#include "../../code/modules/halo/turfs/interiorstructures.dm"
+	#include "../../code/modules/halo/turfs/signs.dm"
+	#include "../../code/modules/halo/turfs/streetobjs.dm"
 
 	#include "unit_tests.dm"
 	#include "geminus_city_outfits.dm"
