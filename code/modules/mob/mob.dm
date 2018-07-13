@@ -90,6 +90,12 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+
+		if(isghost(M))
+			if(ghost_skip_message(M))
+				continue
+			message = add_ghost_track(message, M)
+
 		if(self_message && M == src)
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
@@ -105,13 +111,6 @@
 	if(shadow)
 		shadow.visible_message(message, self_message, blind_message)
 
-// Returns an amount of power drawn from the object (-1 if it's not viable).
-// If drain_check is set it will not actually drain power, just return a value.
-// If surge is set, it will destroy/damage the recipient and not return any power.
-// Not sure where to define this, so it can sit here for the rest of time.
-/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
-	return -1
-
 // Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.
@@ -126,6 +125,12 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+
+		if(isghost(M))
+			if(ghost_skip_message(M))
+				continue
+			message = add_ghost_track(message, M)
+
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else if(M.see_invisible >= invisibility || narrate) // Cannot view the invisible
@@ -136,6 +141,39 @@
 	for(var/o in objs)
 		var/obj/O = o
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+
+/mob/proc/add_ghost_track(var/message, var/mob/observer/ghost/M)
+	ASSERT(istype(M))
+
+	var/remote = ""
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+		remote = "\[R\]"
+
+	var/speaker_name = name
+
+	if(speaker_name != real_name && real_name)
+		speaker_name = "[real_name]/([speaker_name])"
+
+	speaker_name = speaker_name
+
+	var/track = "([ghost_follow_link(src, M)])"
+
+	message = track + remote + " " + speaker_name + ": " + message
+	return message
+
+/mob/proc/ghost_skip_message(var/mob/observer/ghost/M)
+	ASSERT(istype(M))
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+		if(!client)
+			return TRUE
+	return FALSE
+
+// Returns an amount of power drawn from the object (-1 if it's not viable).
+// If drain_check is set it will not actually drain power, just return a value.
+// If surge is set, it will destroy/damage the recipient and not return any power.
+// Not sure where to define this, so it can sit here for the rest of time.
+/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
+	return -1
 
 /mob/proc/findname(msg)
 	for(var/mob/M in SSmobs.mob_list)
