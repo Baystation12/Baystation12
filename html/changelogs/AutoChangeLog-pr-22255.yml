@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Visible & audible messages should no longer stack an extra prefix for every connected ghost"
