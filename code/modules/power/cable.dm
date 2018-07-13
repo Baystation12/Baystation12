@@ -615,7 +615,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
 	if(!istype(S))
 		return
-	if(!can_merge(S))
+	if(!(can_merge(S) || S.can_merge(src)))
 		return
 
 	..()
