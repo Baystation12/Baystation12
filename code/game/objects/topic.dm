@@ -1,6 +1,10 @@
-/obj/Topic(var/href, var/href_list = list(), var/datum/topic_state/state = GLOB.default_state)
+/obj/proc/DefaultTopicState()
+	return GLOB.default_state
+
+/obj/Topic(var/href, var/href_list = list(), var/datum/topic_state/state)
 	if((. = ..()))
 		return
+	state = state || DefaultTopicState() || GLOB.default_state
 	if(CanUseTopic(usr, state, href_list) == STATUS_INTERACTIVE)
 		CouldUseTopic(usr)
 		return OnTopic(usr, href_list, state)
