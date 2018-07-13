@@ -2,6 +2,12 @@
 	var/metabolism_class //CHEM_TOUCH, CHEM_INGEST, or CHEM_BLOOD
 	var/mob/living/carbon/parent
 
+/datum/reagents/metabolism/del_reagent(var/reagent_type)
+	var/datum/reagent/current = locate(reagent_type) in reagent_list
+	if(current)
+		current.on_leaving_metabolism(parent, metabolism_class)
+	. = ..()
+
 /datum/reagents/metabolism/New(var/max = 100, mob/living/carbon/parent_mob, var/met_class)
 	..(max, parent_mob)
 

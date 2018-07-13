@@ -19,7 +19,9 @@
 		if(submerged(depth))
 			extinguish(no_message = TRUE)
 
-/proc/isflamesource(A)
+/proc/isflamesource(var/atom/A)
+	if(!istype(A))
+		return FALSE
 	if(isWelder(A))
 		var/obj/item/weapon/weldingtool/WT = A
 		return (WT.isOn())
@@ -30,8 +32,8 @@
 		var/obj/item/clothing/mask/smokable/S = A
 		return (S.lit)
 	else if(istype(A, /obj/item/device/assembly/igniter))
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 ///////////
 //MATCHES//

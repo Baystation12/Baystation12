@@ -1145,5 +1145,5 @@
 
 /mob/living/carbon/human/update_living_sight()
 	..()
-	if(MUTATION_XRAY in mutations)
+	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

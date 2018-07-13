@@ -33,7 +33,7 @@
 	if(istype(O, /obj/item/weapon/virusdish))
 
 		if(dish)
-			to_chat(user, "The dish tray is aleady full!")
+			to_chat(user, "The dish tray is already full!")
 			return
 		if(!user.unEquip(O, src))
 			return

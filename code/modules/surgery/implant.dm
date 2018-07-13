@@ -207,11 +207,7 @@
 		if (prob(find_prob))
 			user.visible_message("<span class='notice'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool].</span>", \
 			"<span class='notice'>You take [obj] out of incision on [target]'s [affected.name]s with \the [tool].</span>" )
-			affected.implants -= obj
-			for(var/datum/wound/wound in affected.wounds)
-				if(obj in wound.embedded_objects)
-					wound.embedded_objects -= obj
-					break
+			target.remove_implant(obj, TRUE, affected)
 
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 
@@ -222,13 +218,8 @@
 					target.release_control()
 				worm.detatch()
 				worm.leave_host()
-			else
-				obj.dropInto(target.loc)
-				obj.add_blood(target)
-				obj.update_icon()
-				if(istype(obj,/obj/item/weapon/implant))
-					var/obj/item/weapon/implant/imp = obj
-					imp.removed()
+
+
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \

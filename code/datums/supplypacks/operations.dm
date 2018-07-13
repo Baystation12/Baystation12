@@ -27,6 +27,7 @@
 	contains = list(/obj/item/seeds/bloodtomatoseed,
 					/obj/item/weapon/storage/pill_bottle/zoom,
 					/obj/item/weapon/storage/pill_bottle/happy,
+					/obj/item/weapon/storage/pill_bottle/three_eye,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "UNLISTED - Contraband crate"

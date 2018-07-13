@@ -26,6 +26,12 @@
 	description_antag = "These codes seem very odd for an exploration vessel: a lot of them are SCG blacksites, covered up. You've never even heard of most of these."
 	icon_state = "docs_verified"
 
+/obj/item/documents/scg/brains
+	name = "secret medical documents"
+	desc = "Heavily classified medical documentation of brain scans and exploratory surgery conducted across the entire length of the Torch project. It seems like they have been documenting how deep-space living has altered the structure of the brain."
+	description_antag = "These studies were conducted, without consent, while the patients were under anaesthesia for some other routine medical concern. They detail some very unusual deformities within the deepest parts of the brain, correlating them with the people and places visited by the Torch 'for later assessment'. The findings, and any 'viable specimens', are to be delivered to a black site on S/2004 N 1."
+	icon_state = "docs_verified"
+
 /obj/item/documents/scg/red
 	name = "red secret documents"
 	desc = "\"Top Secret\" protocols on what to do if the ship passes into TCC sectors. The writing mostly goes over the diplomatic process, while constantly shaming the Terrans for their idiocy and needless aggression."

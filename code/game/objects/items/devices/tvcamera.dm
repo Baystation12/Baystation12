@@ -113,7 +113,7 @@ Using robohead because of restricting to roboticist */
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
 
-/obj/item/weapon/TVAssembly/attackby(W, mob/user)
+/obj/item/weapon/TVAssembly/attackby(var/obj/item/W, var/mob/user)
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))

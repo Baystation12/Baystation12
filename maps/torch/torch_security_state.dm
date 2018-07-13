@@ -1,3 +1,19 @@
+#ifndef PSI_IMPLANT_AUTOMATIC
+#define PSI_IMPLANT_AUTOMATIC "Security Level Derived"
+#endif
+#ifndef PSI_IMPLANT_SHOCK
+#define PSI_IMPLANT_SHOCK     "Issue Neural Shock"
+#endif
+#ifndef PSI_IMPLANT_WARN
+#define PSI_IMPLANT_WARN      "Issue Reprimand"
+#endif
+#ifndef PSI_IMPLANT_LOG
+#define PSI_IMPLANT_LOG       "Log Incident"
+#endif
+#ifndef PSI_IMPLANT_DISABLED
+#define PSI_IMPLANT_DISABLED  "Disabled"
+#endif
+
 /datum/map/torch // setting the map to use this list
 	security_state = /decl/security_state/default/torchdept
 
@@ -36,6 +52,8 @@
 	light_color_alarm = COLOR_VIOLET
 	light_color_status_display = COLOR_VIOLET
 
+	psionic_control_level = PSI_IMPLANT_LOG
+
 	overlay_alarm = "alarm_violet"
 	overlay_status_display = "status_display_violet"
 
@@ -53,6 +71,8 @@
 	overlay_alarm = "alarm_orange"
 	overlay_status_display = "status_display_orange"
 
+	psionic_control_level = PSI_IMPLANT_LOG
+
 	up_description = "A major engineering emergency has developed. Engineering personnel are required to report to their supervisor for orders, and non-engineering personnel are required to evacuate any affected areas and obey relevant instructions from engineering staff."
 	down_description = "Code orange procedures are now in effect; Engineering personnel are required to report to their supervisor for orders, and non-engineering personnel are required to evacuate any affected areas and obey relevant instructions from engineering staff."
 
@@ -68,6 +88,8 @@
 	light_color_status_display = COLOR_BLUE
 	overlay_alarm = "alarm_blue"
 	overlay_status_display = "status_display_blue"
+
+	psionic_control_level = PSI_IMPLANT_LOG
 
 	up_description = "A major security emergency has developed. Security personnel are to report to their supervisor for orders, are permitted to search staff and facilities, and may have weapons visible on their person."
 	down_description = "Code blue procedures are now in effect. Security personnel are to report to their supervisor for orders, are permitted to search staff and facilities, and may have weapons visible on their person."
@@ -85,6 +107,7 @@
 	overlay_status_display = "status_display_red"
 
 	up_description = "A severe emergency has occurred. All staff are to report to their supervisor for orders. All crew should obey orders from relevant emergency personnel. Security personnel are permitted to search staff and facilities, and may have weapons unholstered at any time. Saferooms have been unbolted."
+	psionic_control_level = PSI_IMPLANT_DISABLED
 
 	var/static/datum/announcement/priority/security/security_announcement_red = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/redalert1.ogg'))
 
@@ -96,3 +119,9 @@
 /decl/security_level/default/torchdept/code_red/switching_down_to()
 	security_announcement_red.Announce("The self-destruct mechanism has been deactivated. All staff are to report to their supervisor for orders. All crew should obey orders from relevant emergency personnel. Security personnel are permitted to search staff and facilities, and may have weapons unholstered at any time.", "Attention! Code red alert procedures now in effect!")
 	notify_station()
+
+#undef PSI_IMPLANT_AUTOMATIC
+#undef PSI_IMPLANT_SHOCK
+#undef PSI_IMPLANT_WARN
+#undef PSI_IMPLANT_LOG
+#undef PSI_IMPLANT_DISABLED

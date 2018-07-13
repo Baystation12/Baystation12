@@ -2232,6 +2232,27 @@
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
+// psi-altering drug
+/datum/chemical_reaction/three_eye
+	name = "Three Eye"
+	result = /datum/reagent/three_eye
+	result_amount = 2
+	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
+	minimum_temperature = 100 CELCIUS
+	reaction_sound = 'sound/effects/psi/power_used.ogg'
+	hidden_from_codex = TRUE
+
+	catalysts = list(
+		/datum/reagent/toxin/carpotoxin = 1,
+		/datum/reagent/enzyme = 1
+	)
+
+	required_reagents = list(
+		/datum/reagent/mindbreaker = 2,
+		/datum/reagent/toxin/phoron = 1,
+		/datum/reagent/blood = 1
+		)
+
 // tea expansion pack content - black tea drinks
 /datum/chemical_reaction/icetea
 	name = "Iced Tea"

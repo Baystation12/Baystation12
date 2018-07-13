@@ -886,9 +886,12 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "docs_generic"
 
 /obj/random/documents/spawn_choices()
-	return list (/obj/item/documents/scg/verified = 10,
-	/obj/item/documents/scg/red = 10,
-	/obj/item/documents/scg/blue = 10)
+	return list (
+		/obj/item/documents/scg/verified = 7,
+		/obj/item/documents/scg/red =      7,
+		/obj/item/documents/scg/blue =     7,
+		/obj/item/documents/scg/brains =   7
+	)
 
 /obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"
