@@ -833,7 +833,7 @@ var/list/name_to_material
 
 /material/carpet
 	name = "carpet"
-	display_name = "comfy"
+	display_name = "red"
 	use_name = "red upholstery"
 	icon_colour = "#9d2300"
 	flags = MATERIAL_PADDING
@@ -845,7 +845,7 @@ var/list/name_to_material
 
 /material/cotton
 	name = "cotton"
-	display_name ="cotton"
+	display_name ="grey"
 	icon_colour = "#ffffff"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232

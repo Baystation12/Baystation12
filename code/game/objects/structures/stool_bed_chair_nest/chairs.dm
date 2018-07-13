@@ -315,7 +315,7 @@
 
 // Chair types
 /obj/structure/bed/chair/wood
-	name = "wooden chair"
+	name = "classic chair"
 	desc = "Old is never too old to not be in fashion."
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
@@ -329,7 +329,7 @@
 	..(newloc, "wood")
 
 /obj/structure/bed/chair/wood/wings
-	name = "winged wooden chair"
+	name = "winged chair"
 	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings_preview"
 
