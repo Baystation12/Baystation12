@@ -236,7 +236,7 @@
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
 
-		if (custom_sprite == 1)
+		if (custom_sprite == 1 && CUSTOM_ITEM_SYNTH)
 			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
 			if("[ckey]-[modtype]" in valid_states)
 				module_sprites["Custom"] = "[src.ckey]-[modtype]"

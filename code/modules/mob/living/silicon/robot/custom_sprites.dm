@@ -23,7 +23,7 @@ var/list/robot_custom_icons
 
 /mob/living/silicon/robot/proc/set_custom_sprite()
 	var/rname = robot_custom_icons[ckey]
-	if(rname && rname == real_name)
+	if(rname && rname == real_name && CUSTOM_ITEM_SYNTH)
 		custom_sprite = 1
 		icon = CUSTOM_ITEM_SYNTH
 		var/list/valid_states = icon_states(icon)
