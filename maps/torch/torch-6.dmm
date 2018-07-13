@@ -6199,7 +6199,6 @@
 /obj/structure/closet,
 /obj/item/clothing/under/psysuit,
 /obj/item/clothing/suit/wizrobe/psypurple,
-/obj/item/clothing/head/wizard/amp,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

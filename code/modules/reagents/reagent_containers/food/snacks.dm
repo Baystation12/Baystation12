@@ -688,7 +688,7 @@
 	name = "roburger"
 	desc = "The lettuce is the only organic component. Beep."
 	icon_state = "roburger"
-	filling_color = "#cccccc"
+	filling_color = COLOR_GRAY80
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2, "metal" = 3)
 	nutriment_amt = 2
@@ -702,7 +702,7 @@
 	name = "roburger"
 	desc = "This massive patty looks like poison. Beep."
 	icon_state = "roburger"
-	filling_color = "#cccccc"
+	filling_color = COLOR_GRAY80
 	volume = 100
 	center_of_mass = "x=16;y=11"
 	bitesize = 0.1

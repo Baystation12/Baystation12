@@ -230,6 +230,15 @@
 	reagents.add_reagent(/datum/reagent/hyperzine, 5)
 	color = reagents.get_color()
 
+/obj/item/weapon/reagent_containers/pill/three_eye
+	name = "strange pill"
+	desc = "The surface of this unlabelled pill crawls against your skin."
+	icon_state = "pill2"
+
+/obj/item/weapon/reagent_containers/pill/three_eye/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/three_eye, 10)
+	color = reagents.get_color()
 
 /obj/item/weapon/reagent_containers/pill/spaceacillin
 	name = "Spaceacillin (10u)"

@@ -391,11 +391,17 @@
 		if("r_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.activate_hand("r")
+				if(C.hand)
+					C.activate_hand("r")
+				else
+					C.attack_empty_hand(BP_R_HAND)
 		if("l_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.activate_hand("l")
+				if(!C.hand)
+					C.activate_hand("l")
+				else
+					C.attack_empty_hand(BP_L_HAND)
 		if("swap")
 			usr:swap_hand()
 		if("hand")

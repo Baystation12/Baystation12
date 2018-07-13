@@ -49,6 +49,7 @@
 #define MATERIAL_CLOTH                   "cloth"
 #define MATERIAL_CARPET                  "carpet"
 #define MATERIAL_ALUMINIUM               "aluminium"
+#define MATERIAL_NULLGLASS               "nullglass"
 
 //woods
 #define MATERIAL_WOOD                    "wood"

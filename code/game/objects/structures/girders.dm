@@ -61,7 +61,7 @@
 	if(reinf_material)
 		reinforce_girder()
 
-/obj/structure/girder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/girder/attackby(var/obj/item/W, var/mob/user)
 	if(isWrench(W) && state == 0)
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -77,7 +77,7 @@
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
 		if(do_after(user,30,src))
 			if(!src) return

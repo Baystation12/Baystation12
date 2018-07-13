@@ -99,6 +99,8 @@
 			return global.SSplants;
 		if("SSprocessing")
 			return global.SSprocessing;
+		if("SSpsi")
+			return global.SSpsi;
 		if("SSradiation")
 			return global.SSradiation;
 		if("SSshuttle")
@@ -1052,6 +1054,8 @@
 			global.SSplants=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
+		if("SSpsi")
+			global.SSpsi=newval;
 		if("SSradiation")
 			global.SSradiation=newval;
 		if("SSshuttle")
@@ -1955,6 +1959,7 @@
 	"SSpersistence",
 	"SSplants",
 	"SSprocessing",
+	"SSpsi",
 	"SSradiation",
 	"SSshuttle",
 	"SSskybox",
