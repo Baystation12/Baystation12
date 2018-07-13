@@ -65,8 +65,6 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !InStasis())
-		//Updates the number of stored chemicals for powers
-		handle_changeling()
 
 		//Organs and blood
 		handle_organs()
@@ -870,9 +868,6 @@
 						M.adjustBruteLoss(5)
 					nutrition += 10
 
-/mob/living/carbon/human/proc/handle_changeling()
-	if(mind && mind.changeling)
-		mind.changeling.regenerate()
 
 /mob/living/carbon/human/proc/handle_shock()
 	..()
