@@ -250,6 +250,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 				to_chat(user, "Mmmf mrrfff!")
 				return 0
 
+	if(!(spell_flags & NO_SOMATIC) && holder == user)
+		var/mob/living/L = user
+		if(L.incapacitated())
+			to_chat(user, "<span class='warning'>You can't cast spells while incapacitated!</span>")
+			return 0
+
 	var/spell/noclothes/spell = locate() in user.mind.learned_spells
 	if((spell_flags & NEEDSCLOTHES) && !(spell && istype(spell)) && holder == user)//clothes check
 		if(!user.wearing_wiz_garb())

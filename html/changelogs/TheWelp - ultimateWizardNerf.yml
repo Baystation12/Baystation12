@@ -1,0 +1,4 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Spells without the NO_SOMATIC flag now require you to not be incapacitated (handcuffed, stunned, etc). This currently means all spells."

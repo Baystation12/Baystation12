@@ -196,9 +196,3 @@
 	toggle = 1
 
 	hud_state = "wiz_carp"
-
-/spell/targeted/shapeshift/familiar/cast(var/list/targets, mob/user)
-	if(user.incapacitated())
-		to_chat(user, "<span class='warning'>You can't cast spells right now.</span>")
-		return
-	..()
