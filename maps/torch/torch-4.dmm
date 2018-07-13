@@ -10367,7 +10367,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	name = "Auxiliary Cryogenic Storage Maintenance"
+	name = "Auxiliary Cryogenic Storage Maintenance";
 	req_access = list(12)
 	},
 /turf/simulated/floor/tiled/white,
@@ -16850,7 +16850,7 @@
 	dir = 1
 	},
 /obj/machinery/firealarm{
-	dir = 1;
+	dir = 2;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white,

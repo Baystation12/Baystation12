@@ -35,6 +35,7 @@
 	maxHealth = 750
 	melee_damage_lower = 40
 	melee_damage_upper = 60
+	default_pixel_y = 5
 	var/spellscast = 0
 	var/phase3 = FALSE
 	var/datum/sound_token/boss_theme
@@ -134,6 +135,7 @@
 		var/matrix/M = new
 		M.Scale(1.5)
 		transform = M
+		default_pixel_y = 10
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
 	if(prob(85))
