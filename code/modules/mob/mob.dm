@@ -90,18 +90,19 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		var/mob_message = message
 
 		if(isghost(M))
 			if(ghost_skip_message(M))
 				continue
-			message = add_ghost_track(message, M)
+			mob_message = add_ghost_track(mob_message, M)
 
 		if(self_message && M == src)
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
 		if(!is_invisible_to(M) || narrate)
-			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
 		if(blind_message)
@@ -125,18 +126,19 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		var/mob_message = message
 
 		if(isghost(M))
 			if(ghost_skip_message(M))
 				continue
-			message = add_ghost_track(message, M)
+			mob_message = add_ghost_track(mob_message, M)
 
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else if(M.see_invisible >= invisibility || narrate) // Cannot view the invisible
-			M.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+			M.show_message(mob_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else
-			M.show_message(message, AUDIBLE_MESSAGE)
+			M.show_message(mob_message, AUDIBLE_MESSAGE)
 
 	for(var/o in objs)
 		var/obj/O = o
