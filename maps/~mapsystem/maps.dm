@@ -22,7 +22,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
-	var/path
+	var/path = "example"
 
 	var/list/station_levels = list() // Z-levels the station exists on
 	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
