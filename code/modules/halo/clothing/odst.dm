@@ -66,6 +66,7 @@
 		)
 	armor_thickness = 20
 
+
 //Defines for armour subtypes//
 
 /obj/effect/odst_armour_set
