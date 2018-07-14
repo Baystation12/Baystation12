@@ -43,7 +43,7 @@
 	if(!..())
 		return 0
 
-	spell_flags = STATALLOWED|NO_SOMATIC
+	spell_flags = NO_SOMATIC
 
 	return "You will always be able to cast this spell, even unconscious or handcuffed."
 

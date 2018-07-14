@@ -55,7 +55,7 @@
 #define NEEDSCLOTHES	0x2		//does it need the wizard garb to cast? Nonwizard spells should not have this
 #define NEEDSHUMAN		0x4		//does it require the caster to be human?
 #define Z2NOCAST		0x8		//if this is added, the spell can't be cast at centcomm
-#define STATALLOWED		0x10	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define NO_SOMATIC		0x10	//spell will go off if the person is incapacitated or stunned
 #define IGNOREPREV		0x20	//if set, each new target does not overlap with the previous one
 //The following flags only affect different types of spell, and therefore overlap
 //Targeted spells
@@ -69,7 +69,6 @@
 //End split flags
 #define CONSTRUCT_CHECK	0x100	//used by construct spells - checks for nullrods
 #define NO_BUTTON		0x200	//spell won't show up in the HUD with this
-#define NO_SOMATIC		0x400	//spell will go off if the person is incapacitated (kind of like STATALLOWED but w/ handcuffs n junk)
 
 //invocation
 #define SpI_SHOUT	"shout"
