@@ -42,13 +42,13 @@
 	if(organ_mult)
 		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
 			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
-			if (D.disfigured)
-				D.disfigured = 0
+			if (D.status & ORGAN_DISFIGURED)
+				D.status &= ~ORGAN_DISFIGURED
 				H.nutrition -= 20
 
 		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
 			var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
-			if(regen_organ.robotic >= ORGAN_ROBOT)
+			if(BP_IS_ROBOTIC(regen_organ))
 				continue
 			if(istype(regen_organ))
 				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))

@@ -13,7 +13,7 @@
 	max_damage = 45
 
 /obj/item/organ/internal/eyes/optics
-	robotic = ORGAN_ROBOT
+	status = ORGAN_ROBOTIC
 	organ_tag = BP_OPTICS
 
 /obj/item/organ/internal/eyes/optics/New()

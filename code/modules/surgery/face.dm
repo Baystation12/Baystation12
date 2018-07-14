@@ -14,7 +14,7 @@
 	if (!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if (!affected || (affected.robotic >= ORGAN_ROBOT))
+	if (!affected || BP_IS_ROBOTIC(affected))
 		return 0
 	return target_zone == BP_MOUTH
 
@@ -141,7 +141,7 @@
 	"<span class='notice'>You cauterize the incision on [target]'s face and neck with \the [tool].</span>")
 	if (target.op_stage.face == 3)
 		var/obj/item/organ/external/head/h = affected
-		h.disfigured = 0
+		h.status &= ~ORGAN_DISFIGURED
 	target.op_stage.face = 0
 
 /datum/surgery_step/face/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

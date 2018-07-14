@@ -188,7 +188,6 @@ datum/preferences
 		if(!O)
 			continue
 		O.status = 0
-		O.robotic = 0
 		O.model = null
 		if(status == "amputated")
 			character.organs_by_name[O.organ_tag] = null

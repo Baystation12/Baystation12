@@ -1,18 +1,15 @@
 /obj/item/organ/internal/voicebox/nabber
-	robotic = ORGAN_ROBOT
-	status = 0
+	status = ORGAN_ROBOTIC
 	name = "vocal synthesiser"
 	icon_state = "voicebox"
 	parent_organ = BP_CHEST
 	organ_tag = BP_VOICE
 	will_assist_languages = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
 
-
 /obj/item/organ/internal/voicebox/nabber/New()
 	for(var/L in will_assist_languages)
 		assists_languages += all_languages[L]
 	robotize()
-
 
 /obj/item/organ/internal/eyes/nabber
 	name = "compound eyes"
