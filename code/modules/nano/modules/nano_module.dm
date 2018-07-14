@@ -10,6 +10,11 @@
 	src.host = host.nano_host()
 	src.topic_manager = topic_manager
 
+/datum/nano_module/Destroy()
+	host = null
+	QDEL_NULL(topic_manager)
+	. = ..()
+
 /datum/nano_module/nano_host()
 	return host ? host : src
 

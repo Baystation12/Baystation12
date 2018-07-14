@@ -11,7 +11,6 @@
 /datum/skill_buff/Destroy()
 	if(skillset)
 		LAZYREMOVE(skillset.skill_buffs, src)
-		skillset.update_verbs()
 		skillset = null
 	. = ..()
 
@@ -39,6 +38,7 @@
 	qdel(src)
 	if(my_skillset)
 		my_skillset.update_verbs()
+		my_skillset.refresh_uis()
 
 //returns a list of buffs of the given type.
 /mob/proc/fetch_buffs_of_type(buff_type, subtypes = 1)
@@ -58,6 +58,7 @@
 	LAZYADD(skillset.skill_buffs, buff)
 	buff.skillset = skillset
 	skillset.update_verbs()
+	skillset.refresh_uis()
 	if(duration)
 		addtimer(CALLBACK(buff, /datum/skill_buff/proc/remove), duration)
 	return 1
