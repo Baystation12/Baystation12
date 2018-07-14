@@ -79,13 +79,6 @@
 		if(d.z in GetConnectedZlevels(z))
 			d.toggle_door()
 
-/obj/machinery/button/toggle/tranq_hangar/proc/toggle_landing_points()
-	for(var/obj/effect/landmark/dropship_land_point/insurrection_hangar/point in world)
-		if(point.faction == initial(point.faction))
-			point.faction = "Civilian"
-		else
-			point.faction = initial(point.faction)
-
 /obj/machinery/button/toggle/tranq_hangar/activate(mob/living/user)
 	if(operating || !istype(wifi_sender))
 		return

@@ -2651,7 +2651,7 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\area_holders\overmap_ship_area_holder.dmm"
-#include "maps\example\example.dm"
+#include "maps\geminus_city\geminus_city.dm"
 #include "maps\odst_prowler\odst_ship_overmap.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\slayer\__death_asteroid_map.dm"

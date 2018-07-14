@@ -44,7 +44,7 @@
 
 	#include "../first_contact/overall_overmap.dm"
 
-	#include "../first_contact/maps/kig_yar_pirates/includes.dm""
+	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
 
 
 	#include "../first_contact/maps/corvette_spawns.dm"
