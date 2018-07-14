@@ -23,9 +23,7 @@
 		return 0
 	if (affected.is_stump())
 		return 0
-	if (affected.robotic >= ORGAN_ROBOT)
-		return 0
-	return 1
+	return !BP_IS_ROBOTIC(affected)
 
 //////////////////////////////////////////////////////////////////
 //	laser scalpel surgery step
@@ -260,7 +258,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!affected)
 		return FALSE
-	if(affected.robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(affected))
 		return FALSE
 	if(!affected.get_incision(1))
 		to_chat(user, "<span class='warning'>There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!</span>")
@@ -320,7 +318,7 @@
 	if (affected.how_open())
 		to_chat(user,"<span class='warning'>You can't get a clean cut with incisions getting in the way.</span>")
 		return SURGERY_FAILURE
-	return !affected.cannot_amputate
+	return (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
 
 /datum/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

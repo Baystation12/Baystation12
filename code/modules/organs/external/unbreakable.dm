@@ -1,63 +1,55 @@
 // Slime/xeno limbs.
 /obj/item/organ/external/chest/unbreakable
-	cannot_break = 1
 	dislocated = -1
 	arterial_bleed_severity = 0
+	limb_flags = 0
 
 /obj/item/organ/external/groin/unbreakable
-	cannot_break = 1
 	dislocated = -1
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/arm/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP
 
 /obj/item/organ/external/arm/right/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/leg/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND
 
 /obj/item/organ/external/leg/right/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/foot/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND
 
 /obj/item/organ/external/foot/right/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/hand/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP
 
 /obj/item/organ/external/hand/right/unbreakable
-	cannot_break = 1
 	dislocated = -1
-	has_tendon = FALSE
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/head/unbreakable
-	cannot_break = 1
 	dislocated = -1
 	arterial_bleed_severity = 0
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
