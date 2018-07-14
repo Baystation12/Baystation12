@@ -15,6 +15,8 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/mat_efficiency = 1
 	var/speed = 1
 
+	var/list/item_type = list("Misc", "Machine Boards", "Console Boards", "Mecha Boards", "Module Boards", "Engineering Boards")
+
 	use_power = 1
 	idle_power_usage = 30
 	active_power_usage = 2500

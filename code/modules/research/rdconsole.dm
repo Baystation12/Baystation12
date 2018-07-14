@@ -42,6 +42,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/obj/machinery/r_n_d/protolathe/linked_lathe = null				//Linked Protolathe
 	var/obj/machinery/r_n_d/circuit_imprinter/linked_imprinter = null	//Linked Circuit Imprinter
 
+	var/list/filtered = list( //Filters categories in menu
+		"protolathe" = list(),
+		"imprinter" = list()
+	)
+
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
@@ -320,7 +325,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					being_built = D
 					break
 			if(being_built)
-				linked_lathe.addToQueue(being_built)
+				var/n
+				if (href_list["customamt"])
+					n = round(input("Queue how many?", "Protolathe Queue") as num|null)
+					if (!linked_lathe)
+						return //in case the 'lathe gets unlinked or destroyed or someshit while the popup is open
+				else
+					n = text2num(href_list["n"])
+				for(var/i=1;i<=n;i++)
+					linked_lathe.addToQueue(being_built)
 
 		screen = 3.1
 		. = TOPIC_REFRESH
@@ -405,6 +418,30 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			spawn(20)
 				screen = 1.6
 				attack_hand(user)
+
+	else if(href_list["toggleCategory"]) //Filter or unfilter a category
+		var/cat = href_list["toggleCategory"]
+		var/machine = href_list["machine"]
+		if (cat in filtered[machine])
+			filtered[machine] -= cat
+		else
+			filtered[machine] += cat
+		. = TOPIC_REFRESH
+
+	else if(href_list["toggleAllCategories"]) //Filter all categories, if all are filtered, clear filter.
+		var/machine = href_list["machine"]
+		var/list/tempfilter = filtered[machine] //t-thanks BYOND
+		if(tempfilter.len == (machine == "protolathe" ? linked_lathe.item_type.len : linked_imprinter.item_type.len))
+			filtered[machine] = list()
+		else
+			filtered[machine] = list()
+			if (machine == "protolathe")
+				for(var/name_set in linked_lathe.item_type)
+					filtered[machine] += name_set
+			else
+				for(var/name_set in linked_imprinter.item_type)
+					filtered[machine] += name_set
+		. = TOPIC_REFRESH
 
 	else if (href_list["print"]) //Print research information
 		screen = 0.5
@@ -660,22 +697,38 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Protolathe Menu:<BR><BR>"
 			dat += "<B>Material Amount:</B> [linked_lathe.TotalMaterials()] cm<sup>3</sup> (MAX: [linked_lathe.max_material_storage])<BR>"
 			dat += "<B>Chemical Volume:</B> [linked_lathe.reagents.total_volume] (MAX: [linked_lathe.reagents.maximum_volume])<HR>"
-			dat += "<UL>"
-			for(var/datum/design/D in files.known_designs)
-				if(!D.build_path || !(D.build_type & PROTOLATHE))
-					continue
-				var/temp_dat
-				for(var/M in D.materials)
-					temp_dat += ", [D.materials[M]] [CallMaterialName(M)]"
-				for(var/T in D.chemicals)
-					temp_dat += ", [D.chemicals[T]*linked_imprinter.mat_efficiency] [CallReagentName(T)]"
-				if(temp_dat)
-					temp_dat = " \[[copytext(temp_dat, 3)]\]"
-				if(linked_lathe.canBuild(D))
-					dat += "<LI><B><A href='?src=\ref[src];build=[D.id]'>[D.name]</A></B>[temp_dat]"
+			dat += "Filter: "
+			for(var/name_set in linked_lathe.item_type)
+				if (name_set in filtered["protolathe"])
+					dat += "<A href='?src=\ref[src];toggleCategory=[name_set];machine=["protolathe"]' style='color: #A66300'>[name_set]</a> / "
 				else
-					dat += "<LI><B>[D.name]</B>[temp_dat]"
-			dat += "</UL>"
+					dat += "<A href='?src=\ref[src];toggleCategory=[name_set];machine=["protolathe"]' style='color: #0066CC'>[name_set]</a> / "
+			dat += "<A href='?src=\ref[src];toggleAllCategories=1;machine=["protolathe"]' style='color: #0066CC'>Filter All</a><HR>"
+
+			for(var/name_set in linked_lathe.item_type)
+				if(name_set in filtered["protolathe"])
+					continue
+				dat += "<H2>[name_set]</H2><UL>"
+				for(var/datum/design/D in files.known_designs)
+					if(!D.build_path || !(D.build_type & PROTOLATHE) || D.category_items != name_set)
+						continue
+					var/temp_dat
+					for(var/M in D.materials)
+						temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [CallMaterialName(M)]"
+					for(var/T in D.chemicals)
+						temp_dat += ", [D.chemicals[T]*linked_imprinter.mat_efficiency] [CallReagentName(T)]"
+					if(temp_dat)
+						temp_dat = " \[[copytext(temp_dat, 3)]\]"
+					if(linked_lathe.canBuild(D, 1))
+						dat += "<LI><B><A href='?src=\ref[src];build=[D.id];n=1'>[D.name]</A></B>[temp_dat] Queue: "
+						if(linked_lathe.canBuild(D, 5))
+							dat += "<A href='?src=\ref[src];build=[D.id];n=5'>(&times;5)</A>"
+						if(linked_lathe.canBuild(D, 10))
+							dat += "<A href='?src=\ref[src];build=[D.id];n=10'>(&times;10)</A>"
+						dat += "<A href='?src=\ref[src];build=[D.id];customamt=1'>(Custom)</A>"
+					else
+						dat += "<LI><B>[D.name]</B>[temp_dat]"
+				dat += "</UL>"
 
 		if(3.2) //Protolathe Material Storage Sub-menu
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
@@ -736,22 +789,33 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Circuit Imprinter Menu:<BR><BR>"
 			dat += "Material Amount: [linked_imprinter.TotalMaterials()] cm<sup>3</sup><BR>"
 			dat += "Chemical Volume: [linked_imprinter.reagents.total_volume]<HR>"
-			dat += "<UL>"
-			for(var/datum/design/D in files.known_designs)
-				if(!D.build_path || !(D.build_type & IMPRINTER))
-					continue
-				var/temp_dat
-				for(var/M in D.materials)
-					temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [CallMaterialName(M)]"
-				for(var/T in D.chemicals)
-					temp_dat += ", [D.chemicals[T]*linked_imprinter.mat_efficiency] [CallReagentName(T)]"
-				if(temp_dat)
-					temp_dat = " \[[copytext(temp_dat,3)]\]"
-				if(linked_imprinter.canBuild(D))
-					dat += "<LI><B><A href='?src=\ref[src];imprint=[D.id]'>[D.name]</A></B>[temp_dat]"
+			dat += "Filter: "
+			for(var/name_set in linked_imprinter.item_type)
+				if (name_set in filtered["imprinter"])
+					dat += "<A href='?src=\ref[src];toggleCategory=[name_set];machine=["imprinter"]' style='color: #A66300'>[name_set]</a> / "
 				else
-					dat += "<LI><B>[D.name]</B>[temp_dat]"
-			dat += "</UL>"
+					dat += "<A href='?src=\ref[src];toggleCategory=[name_set];machine=["imprinter"]' style='color: #0066CC'>[name_set]</a> / "
+			dat += "<A href='?src=\ref[src];toggleAllCategories=1;machine=["imprinter"]' style='color: #0066CC'>Filter All</a><HR>"
+
+			for(var/name_set in linked_imprinter.item_type)
+				if(name_set in filtered["imprinter"])
+					continue
+				dat += "<H2>[name_set]</H2><UL>"
+				for(var/datum/design/D in files.known_designs)
+					if(!D.build_path || !(D.build_type & IMPRINTER) || D.category_items != name_set)
+						continue
+					var/temp_dat
+					for(var/M in D.materials)
+						temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [CallMaterialName(M)]"
+					for(var/T in D.chemicals)
+						temp_dat += ", [D.chemicals[T]*linked_imprinter.mat_efficiency] [CallReagentName(T)]"
+					if(temp_dat)
+						temp_dat = " \[[copytext(temp_dat,3)]\]"
+					if(linked_imprinter.canBuild(D))
+						dat += "<LI><B><A href='?src=\ref[src];imprint=[D.id]'>[D.name]</A></B>[temp_dat]"
+					else
+						dat += "<LI><B>[D.name]</B>[temp_dat]"
+				dat += "</UL>"
 
 		if(4.2)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "

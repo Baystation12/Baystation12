@@ -15,6 +15,9 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
+	var/list/item_type = list("Stock Parts", "Bluespace", "Data", "Engineering", "Medical", "Surgery",
+	"Mining", "Robotics", "Weapons", "Misc", "Device", "PDA", "RIG")
+
 /obj/machinery/r_n_d/protolathe/New()
 	materials = default_material_composition.Copy()
 	..()
@@ -137,9 +140,9 @@
 	queue.Cut(index, index + 1)
 	return
 
-/obj/machinery/r_n_d/protolathe/proc/canBuild(var/datum/design/D)
+/obj/machinery/r_n_d/protolathe/proc/canBuild(var/datum/design/D, var/amount_build)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] < D.materials[M] * mat_efficiency * amount_build)
 			return 0
 	for(var/C in D.chemicals)
 		if(!reagents.has_reagent(C, D.chemicals[C]))
