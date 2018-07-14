@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - maptweak: "Added some lights to dark spots in hallways around research, chemistry and the D3 ladders, the main hallway through D2 maint from the stairs/elevator, and the medbay."
-  - maptweak: "The greedy NT guards are now only provided with one chair for their window desk.
-imgadd: Changed the intercom icon to be more in line with what it used to be. Dark frame, green console."
