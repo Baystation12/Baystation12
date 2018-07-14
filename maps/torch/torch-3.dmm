@@ -14752,6 +14752,14 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/storage/cargo)
+"HE" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "HR" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 10
@@ -15416,6 +15424,10 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos)
+"LL" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "LY" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -16960,6 +16972,22 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/locker_room)
+"TY" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "Ub" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -33565,7 +33593,7 @@ ix
 ix
 pc
 pe
-pe
+HE
 pe
 pl
 Zl
@@ -34979,7 +35007,7 @@ iy
 jr
 fp
 nf
-ni
+LL
 jV
 jV
 jV
@@ -36800,7 +36828,7 @@ ph
 ph
 ph
 ph
-ph
+TY
 Lm
 Pm
 Pm
