@@ -71,7 +71,7 @@
 		return 0 //organs don't work very well in the body when they aren't properly attached
 
 	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	if(robotic >= ORGAN_ROBOT || !species)
+	if(BP_IS_ROBOTIC(src) || !species)
 		species = target.species
 
 	..()
@@ -107,7 +107,7 @@
 	min_broken_damage += 10
 
 /obj/item/organ/internal/proc/getToxLoss()
-	if(isrobotic())
+	if(BP_IS_ROBOTIC(src))
 		return damage * 0.5
 	return damage
 
@@ -129,7 +129,7 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
-	if(isrobotic())
+	if(BP_IS_ROBOTIC(src))
 		damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
 		damage = between(0, src.damage + amount, max_damage)
@@ -166,7 +166,7 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	handle_regeneration()
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || isrobotic() || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
+	if(!damage || BP_IS_ROBOTIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
 		return
 	if(damage < 0.1*max_damage)
 		heal_damage(0.1)
@@ -191,7 +191,7 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 		. += "[get_wound_severity(get_scarring_level())] scarring"
 
 /obj/item/organ/internal/emp_act(severity)
-	if(!(robotic >= ORGAN_ROBOT))
+	if(!BP_IS_ROBOTIC(src))
 		return
 	switch (severity)
 		if (1)

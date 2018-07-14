@@ -37,6 +37,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	total_health =        240
 	siemens_coefficient = -1
 	rarity_value =        5
+	limbs_are_nonsolid =  TRUE
 
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
 	has_organ =     list(BP_BRAIN = /obj/item/organ/internal/brain/slime) // Slime core.

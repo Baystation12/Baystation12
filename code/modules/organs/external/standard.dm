@@ -13,16 +13,14 @@
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	body_part = UPPER_TORSO
 	vital = 1
-	can_heal_overkill = 1
 	amputation_point = "spine"
 	joint = "neck"
 	dislocated = -1
-	gendered_icon = 1
-	cannot_amputate = 1
 	parent_organ = null
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
+	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL
 
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
@@ -52,9 +50,9 @@
 	amputation_point = "lumbar"
 	joint = "hip"
 	dislocated = -1
-	gendered_icon = 1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -67,11 +65,10 @@
 	parent_organ = BP_CHEST
 	joint = "left elbow"
 	amputation_point = "left shoulder"
-	can_grasp = 1
-	has_tendon = TRUE
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_HAS_TENDON
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -93,11 +90,10 @@
 	parent_organ = BP_GROIN
 	joint = "left knee"
 	amputation_point = "left hip"
-	can_stand = 1
-	has_tendon = TRUE
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -120,10 +116,9 @@
 	parent_organ = BP_L_LEG
 	joint = "left ankle"
 	amputation_point = "left ankle"
-	can_stand = 1
-	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON
 
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
@@ -146,11 +141,9 @@
 	parent_organ = BP_L_ARM
 	joint = "left wrist"
 	amputation_point = "left wrist"
-	can_grasp = 1
-	has_tendon = TRUE
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-	can_fingerprint = TRUE
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON
 
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND

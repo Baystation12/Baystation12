@@ -550,7 +550,7 @@
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
-		if(!E.is_stump() && E.robotic < ORGAN_ROBOT && E.species.name != SPECIES_PROMETHEAN)
+		if(!E.is_stump() && !BP_IS_ROBOTIC(E) && E.species.name != SPECIES_PROMETHEAN)
 			meatchunks += E
 	if(!meatchunks.len)
 		if(prob(10))
@@ -571,14 +571,13 @@
 		E.s_col_blend = ICON_ADD
 		E.status &= ~ORGAN_BROKEN
 		E.status |= ORGAN_MUTATED
-		E.cannot_break = 1
+		E.limb_flags &= ~ORGAN_FLAG_CAN_BREAK
 		E.dislocated = -1
-		E.nonsolid = 1
 		E.max_damage = 5
 		E.update_icon(1)
 	O.max_damage = 15
 	if(prob(10))
-		to_chat(H, "<span class='danger'>Your slimy [O.name]'s plops off!</span>")
+		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
 		O.droplimb()
 	H.update_body()
 

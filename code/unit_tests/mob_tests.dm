@@ -558,7 +558,7 @@ datum/unit_test/species_base_skin/start_test()
 				var/list/paths = S.has_limbs[tag]
 				var/obj/item/organ/external/E = paths["path"]
 				var/list/gender_test = list("")
-				if(initial(E.gendered_icon))
+				if(initial(E.limb_flags) & ORGAN_FLAG_GENDERED_ICON)
 					gender_test = list("_m", "_f")
 				var/icon_name = initial(E.icon_name)
 

@@ -297,7 +297,7 @@
 		return 0 //unsuitable weapon
 
 	var/obj/item/organ/external/O = G.get_targeted_organ()
-	if(!O || O.is_stump() || !O.has_tendon || (O.status & ORGAN_TENDON_CUT))
+	if(!O || O.is_stump() || !(O.limb_flags & ORGAN_FLAG_HAS_TENDON) || (O.status & ORGAN_TENDON_CUT))
 		return FALSE
 
 	user.visible_message("<span class='danger'>\The [user] begins to cut \the [affecting]'s [O.tendon_name] with \the [W]!</span>")

@@ -142,7 +142,7 @@
 	//Disfigured face
 	if(!skipface) //Disfigurement only matters for the head currently.
 		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
-		if(E && E.disfigured) //Check to see if we even have a head and if the head's disfigured.
+		if(E && (E.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
 			if(E.species) //Check to make sure we have a species
 				msg += E.species.disfigure_msg(src)
 			else //Just in case they lack a species for whatever reason.
@@ -234,7 +234,7 @@
 				if(E.wounds.len && E.parent)
 					wound_flavor_text[E.name] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
 			else
-				if(!is_synth && E.robotic >= ORGAN_ROBOT && (E.parent && E.parent.robotic < ORGAN_ROBOT))
+				if(!is_synth && BP_IS_ROBOTIC(E) && (E.parent && !BP_IS_ROBOTIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
 					wound_flavor_text[E.name] = "[T.He] [T.has] a [E.name].\n"
 				var/wounddesc = E.get_wounds_desc()
 				if(wounddesc != "nothing")

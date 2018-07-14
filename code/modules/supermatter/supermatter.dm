@@ -376,7 +376,7 @@
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
 		var/obj/item/organ/internal/eyes/E = l.internal_organs_by_name[BP_EYES]
-		if(E && !E.isrobotic() && !istype(l.glasses, /obj/item/clothing/glasses/meson)) //Synthetics eyes stop evil hallucination rays
+		if(E && !BP_IS_ROBOTIC(E) && !istype(l.glasses, /obj/item/clothing/glasses/meson)) //Synthetics eyes stop evil hallucination rays
 			var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)))) )
 			l.adjust_hallucination(effect, 0.25*effect)
 

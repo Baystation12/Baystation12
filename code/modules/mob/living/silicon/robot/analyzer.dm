@@ -72,7 +72,7 @@
 			to_chat(user, "<span class='notice'>External prosthetics:</span>")
 			var/organ_found
 			for(var/obj/item/organ/external/E in H.organs)
-				if(E.robotic < ORGAN_ROBOT)
+				if(!BP_IS_ROBOTIC(E))
 					continue
 				organ_found = 1
 				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#ffa500'>[E.burn_dam]</font>")
@@ -82,7 +82,7 @@
 			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
 			organ_found = null
 			for(var/obj/item/organ/O in H.internal_organs)
-				if(O.robotic < ORGAN_ROBOT)
+				if(!BP_IS_ROBOTIC(O))
 					continue
 				organ_found = 1
 				to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")

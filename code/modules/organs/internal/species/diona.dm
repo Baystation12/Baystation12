@@ -5,7 +5,7 @@
 	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
 
 /obj/item/organ/internal/diona/removed(var/mob/living/user, var/skip_nymph)
-	if(robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(src))
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()

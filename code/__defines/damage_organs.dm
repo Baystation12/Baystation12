@@ -38,7 +38,22 @@
 #define ORGAN_MUTATED    (1<<4)
 #define ORGAN_ARTERY_CUT (1<<6)
 #define ORGAN_TENDON_CUT (1<<7)
+#define ORGAN_DISFIGURED (1<<8)
+#define ORGAN_SABOTAGED  (1<<9)
+#define ORGAN_ASSISTED   (1<<10)
+#define ORGAN_ROBOTIC    (1<<11)
 
+// Organ flag defines.
+#define ORGAN_FLAG_CAN_AMPUTATE   (1<<0)
+#define ORGAN_FLAG_CAN_BREAK      (1<<1)
+#define ORGAN_FLAG_CAN_GRASP      (1<<2)
+#define ORGAN_FLAG_CAN_STAND      (1<<3)
+#define ORGAN_FLAG_HAS_TENDON     (1<<4)
+#define ORGAN_FLAG_FINGERPRINT    (1<<5)
+#define ORGAN_FLAG_GENDERED_ICON  (1<<6)
+#define ORGAN_FLAG_HEALS_OVERKILL (1<<7)
+
+// Droplimb types.
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1
 #define DROPLIMB_BURN 2
@@ -57,9 +72,6 @@
 
 // Damage above this value must be repaired with surgery.
 #define ROBOLIMB_SELF_REPAIR_CAP 30
-
-#define ORGAN_ASSISTED 1
-#define ORGAN_ROBOT    2
 
 //Germs and infections.
 #define GERM_LEVEL_AMBIENT  275 // Maximum germ level you can reach by standing still.

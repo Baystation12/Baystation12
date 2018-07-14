@@ -77,7 +77,7 @@
 
 /datum/species/machine/handle_limbs_setup(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/E in H.organs)
-		if(E.robotic < ORGAN_ROBOT)
+		if(!BP_IS_ROBOTIC(E))
 			E.robotize("Morpheus")
 	return
 

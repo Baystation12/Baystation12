@@ -102,6 +102,7 @@
 	var/halloss_message = "slumps over, too weak to continue fighting..."
 	var/halloss_message_self = "The pain is too severe for you to keep going..."
 
+	var/limbs_are_nonsolid
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                             // Used for metabolizing reagents.

@@ -392,7 +392,7 @@ datum/objective/harm
 					return 1
 
 			var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD)
-			if(!head || head.disfigured)
+			if(!head || (head.status & ORGAN_DISFIGURED))
 				return 1
 		return 0
 

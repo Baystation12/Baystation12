@@ -557,7 +557,7 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
 
-		if(!S || !(S.robotic >= ORGAN_ROBOT) || user.a_intent != I_HELP)
+		if(!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
 			return ..()
 
 		if(!welding)
