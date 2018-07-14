@@ -49,4 +49,4 @@
 		var/alert_desc = ""
 		if(SL.up_description)
 			alert_desc = SL.up_description
-		to_chat(usr, "<span class='notice'>The alert level on the [station_name()] is currently elevated to <font color=[SL.light_color_alarm]><B>[SL.name]</B></font>. [alert_desc]</span>")
+		to_chat(usr, "<span class='notice'>The alert level on the [station_name()] is currently: <font color=[SL.light_color_alarm]><B>[SL.name]</B></font>. [alert_desc]</span>")
