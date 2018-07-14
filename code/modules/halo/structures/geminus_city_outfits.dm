@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/job/marine
-	name = "Marine"
+	name = "Geminus Garrisson Marine"
 
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	suit = /obj/item/clothing/suit/storage/marine
