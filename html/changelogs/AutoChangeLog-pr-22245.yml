@@ -1,0 +1,4 @@
+author: "PsiOmegaDelta"
+delete-after: True
+changes: 
+  - rscadd: "It is now possible to adjust the playspeed of boomboxes using a screwdriver."
