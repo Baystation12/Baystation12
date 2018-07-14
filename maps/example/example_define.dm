@@ -4,7 +4,7 @@
 	full_name = "The Example"
 	path = "example"
 
-	lobby_icon = 'example_lobby.dmi'
+	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 
 	station_levels = list(1,2)
 	contact_levels = list(1,2)

@@ -66,30 +66,6 @@
 		)
 	armor_thickness = 20
 
-	pockets = new/obj/item/weapon/storage/internal/pockets(slots = 3, slot_size = 2)
-
-/obj/item/clothing/suit/armor/odst/Destroy()
-	QDEL_NULL(pockets)
-	. = ..()
-
-/obj/item/clothing/suit/armor/odst/attack_hand(mob/user as mob)
-	if (pockets.handle_attack_hand(user))
-		..(user)
-
-/obj/item/clothing/suit/armor/odst/MouseDrop(obj/over_object as obj)
-	if (pockets.handle_mousedrop(usr, over_object))
-		..(over_object)
-
-/obj/item/clothing/suit/armor/odst/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(!(W in accessories))		//Make sure that an accessory wasn't successfully attached to suit.
-		pockets.attackby(W, user)
-
-/obj/item/clothing/suit/armor/odst/emp_act(severity)
-	pockets.emp_act(severity)
-	..()
-
-
 //Defines for armour subtypes//
 
 /obj/effect/odst_armour_set
