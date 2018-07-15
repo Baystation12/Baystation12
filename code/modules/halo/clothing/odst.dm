@@ -1,46 +1,5 @@
 #define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
-
-
-/obj/item/clothing/head/helmet/odst
-	var/specials = list() //Don't edit these during runtime unless you really need too. If edited during runtime, manually run the item's New() proc.
-
-/obj/item/clothing/head/helmet/odst/New()
-	..()
-	for(var/i in specials)
-		specials -= i
-		specials += new i (src)
-
-/obj/item/clothing/head/helmet/odst/equipped(mob/user)
-	for(var/datum/armourspecials/i in specials)
-		i.user = user
-		i.on_equip(src)
-
-/obj/item/clothing/head/helmet/odst/emp_act(severity)
-	for(var/datum/armourspecials/i in specials)
-		i.tryemp(severity)
-
-/obj/item/clothing/head/helmet/odst/dropped()
-	for(var/datum/armourspecials/i in specials)
-		i.on_drop(src)
-		i.user = null
-
-/obj/item/clothing/head/helmet/odst/ui_action_click()
-	var/mob/living/carbon/human/h = usr
-	if(!istype(h))
-		return
-	if(h.wear_suit != src)
-		to_chat(h,"<span class = 'notice'>You need to wear [src.name] to do that!</span>")
-		return
-	for(var/datum/armourspecials/special in specials)
-		special.try_item_action()
-
-/obj/item/clothing/head/helmet/odst/Destroy()
-	GLOB.processing_objects -= src
-	for(var/item in specials)
-		qdel(item)
-	..()
-
 /obj/item/clothing/suit/armor/odst/New()
 	..()
 
@@ -71,7 +30,6 @@
 	heat_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	specials = list(/datum/armourspecials/internal_air_tank/odst)
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 0, rad = 5)
 	item_icons = list(
 		slot_l_hand_str = null,
