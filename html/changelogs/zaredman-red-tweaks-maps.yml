@@ -36,3 +36,4 @@ changes:
   - rscadd: "Fixed incorrect req_access for E-Arm lockdown shutter."
   - rscdel: "Removed biohazard locker in D1/Medical Locker room. The multi-suit locker in the basement, the two in maint, and the one in viro remain."
   - rscadd: "Added additional Medical Contractor locker in D1/Medical Locker room."
+  - rscadd: "Adjustments to Contractor Locker contents to bring them more in line with Corpsman Lockers."
