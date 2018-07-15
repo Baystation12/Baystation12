@@ -1,0 +1,4 @@
+author: "Heptagon49"
+delete-after: True
+changes: 
+  - bugfix: "Dionaea can now regrow limbs again."
