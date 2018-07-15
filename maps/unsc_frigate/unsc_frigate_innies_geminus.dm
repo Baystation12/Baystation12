@@ -1,5 +1,5 @@
 #if !defined(using_map_DATUM)
-
+	#include "../overmap_ships/om_ship_areas.dm"
 	#include "unsc_frigate_base_includes.dm"
 
 	#include "../geminus_city/areas.dm"
