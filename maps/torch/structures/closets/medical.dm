@@ -110,14 +110,18 @@
 
 /obj/structure/closet/secure_closet/medical_contractor/WillContain()
 	return list(
+		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/head/soft/mime,
 		/obj/item/clothing/under/rank/orderly,
-		/obj/item/clothing/accessory/storage/webbing,
+		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/taperoll/medical,
 		/obj/item/weapon/storage/belt/medical/emt,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/storage/firstaid/adv,
