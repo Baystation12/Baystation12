@@ -93,7 +93,7 @@
 	gas_transfer_coefficient = 0.90
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
-	brightness_on = 5
+	brightness_on = 4
 	on = 0
 
 /obj/item/weapon/storage/briefcase/colossuscase

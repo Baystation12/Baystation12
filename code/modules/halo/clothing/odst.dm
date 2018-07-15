@@ -1,12 +1,48 @@
 #define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
 
-/obj/item/clothing/suit/armor/odst
-	var/obj/item/weapon/storage/internal/pockets/pockets
+
+/obj/item/clothing/head/helmet/odst
+	var/specials = list() //Don't edit these during runtime unless you really need too. If edited during runtime, manually run the item's New() proc.
+
+/obj/item/clothing/head/helmet/odst/New()
+	..()
+	for(var/i in specials)
+		specials -= i
+		specials += new i (src)
+
+/obj/item/clothing/head/helmet/odst/equipped(mob/user)
+	for(var/datum/armourspecials/i in specials)
+		i.user = user
+		i.on_equip(src)
+
+/obj/item/clothing/head/helmet/odst/emp_act(severity)
+	for(var/datum/armourspecials/i in specials)
+		i.tryemp(severity)
+
+/obj/item/clothing/head/helmet/odst/dropped()
+	for(var/datum/armourspecials/i in specials)
+		i.on_drop(src)
+		i.user = null
+
+/obj/item/clothing/head/helmet/odst/ui_action_click()
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.wear_suit != src)
+		to_chat(h,"<span class = 'notice'>You need to wear [src.name] to do that!</span>")
+		return
+	for(var/datum/armourspecials/special in specials)
+		special.try_item_action()
+
+/obj/item/clothing/head/helmet/odst/Destroy()
+	GLOB.processing_objects -= src
+	for(var/item in specials)
+		qdel(item)
+	..()
 
 /obj/item/clothing/suit/armor/odst/New()
 	..()
-	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 2, slot_size = 2) //two slots, fit only pocket sized items
 
 /obj/item/clothing/under/unsc/odst_jumpsuit
 	name = "ODST jumpsuit"
@@ -28,23 +64,26 @@
 	icon_override = ODST_OVERRIDE
 	item_state = "Odst Helmet"
 	icon_state = "Helmet"
-	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
+	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	cold_protection = HEAD
+	heat_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	specials = list(/datum/armourspecials/internal_air_tank/odst)
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 0, rad = 5)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
-	armor_thickness = 20
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
-	brightness_on = 5
+	brightness_on = 4
 	on = 0
+	armor_thickness = 20
+
 
 /obj/item/clothing/suit/armor/odst
 	name = "ODST Armour"
@@ -58,6 +97,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	item_icons = list(
