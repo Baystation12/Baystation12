@@ -2,18 +2,12 @@
 	#include "../overmap_ships/om_ship_areas.dm"
 	#include "unsc_frigate_base_includes.dm"
 
-	#include "../geminus_city/areas.dm"
-	#include "../geminus_city/citymapturfs.dm"
-	#include "../geminus_city/cityprops.dm"
-	#include "../geminus_city/interiorobjs.dm"
-	#include "../geminus_city/interiorstructures.dm"
-	#include "../geminus_city/signs.dm"
-	#include "../geminus_city/streetobjs.dm"
+	#include "..//geminus_city/areas.dm"
 
 	#include "../geminus_city/unit_tests.dm"
-	#include "../geminus_city/geminus_city_outfits.dm"
 	#include "../geminus_city/geminus_city_jobs.dm"
 	#include "../geminus_city/geminus_city_spawns.dm"
+	#include "../geminus_city/geminus_city_overmap.dm"
 
 	#include "../first_contact/maps/Exoplanet Research/includes.dm"
 
@@ -25,6 +19,8 @@
 	#include "../insurrection/insurrection_outfits.dm"
 	#include "../insurrection/insurrection_jobs.dm"
 	#include "../insurrection/insurrection_spawns.dm"
+	#include "../insurrection/insurrection_gm.dm"
+	#include "../insurrection/innie_base_overmap.dm"
 
 	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
 
