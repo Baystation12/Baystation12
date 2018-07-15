@@ -50,8 +50,8 @@
 
 /obj/item/device/radio/headset/heads/cos/alt
 	name = "chief of security's bowman headset"
-	icon_state = "sec_headset_alt"
-	item_state = "sec_headset_alt"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/headset_deckofficer
 	name = "deck officer's radio headset"
