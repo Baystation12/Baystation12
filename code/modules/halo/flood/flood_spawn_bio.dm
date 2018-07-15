@@ -55,3 +55,9 @@
 /obj/item/flood_spore_growing/New()
 	..()
 	icon_state = "animated[rand(1,6)]"
+
+/obj/structure/biomass/tiny
+	icon = 'flood_bio.dmi'
+	icon_state = "pulsating"
+	max_flood = 3
+	respawn_delay = 300
