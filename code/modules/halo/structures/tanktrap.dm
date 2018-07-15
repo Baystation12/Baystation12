@@ -89,3 +89,54 @@
 			to_chat(user, "<span class='warning'>There is not enough fuel to salvage the tank trap!</span>")
 	else
 		..()
+
+/obj/structure/doorwreckage
+	name = "wrecked airlock"
+	desc = "An airlock. Something strong pried it open."
+	icon = 'icons/obj/doors/door_assembly.dmi'
+	icon_state = "door_as_0"
+	density = 1
+	opacity = 0
+	throwpass = 1
+	anchored = 1
+
+/obj/structure/doorwreckage/Bumped(atom/movable/AM)
+	if(isliving(AM) && AM:a_intent == I_HELP)
+		if(istype(AM, /mob/living/simple_animal/))
+			return
+		if(istype(AM, /mob/living/simple_animal/hostile))
+			var/mob/living/simple_animal/hostile/H = AM
+			if(!H.assault_target && !H.target_mob)
+				return
+		var/turf/T = get_step(AM, AM.dir)
+		if(T.CanPass(AM, T))
+			if(ismob(AM))
+				var/mob/moving = AM
+				moving.show_message("<span class='notice'>You start maneuvring past [src]...</span>")
+			spawn(0)
+				if(do_after(AM, 30))
+					src.visible_message("<span class='info'>[AM] slips past [src].</span>")
+					AM.loc = T
+		else if(ismob(AM))
+			var/mob/moving = AM
+			moving.show_message("<span class='warning'>Something is blocking you from maneuvering past [src].</span>")
+	..()
+
+/obj/structure/doorwreckage/attackby(obj/item/W as obj, mob/user as mob)
+	user.visible_message("[user] begins cutting through the wrecked airlock.", "You start to slice through the wrecked airlock.")
+	playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(do_after(user, 80) && WT.remove_fuel(5, user))
+			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+			user.visible_message("<span class='info'>You slice through the wrecked airlock!</span>")
+			new /obj/item/metalscrap(src.loc)
+			new /obj/item/metalscrap(src.loc)
+			new /obj/item/metalscrap(src.loc)
+			new /obj/item/stack/cable_coil/cut(src.loc)
+			new /obj/item/stack/cable_coil/cut(src.loc)
+			qdel(src)
+		else
+			to_chat(user, "<span class='warning'>There is not enough fuel to slice through!</span>")
+	else
+		..()

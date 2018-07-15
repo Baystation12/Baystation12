@@ -35,3 +35,25 @@
 	respawn_delay = 400
 	bound_width = 128
 	bound_height = 128
+
+/obj/structure/flood_spore
+	icon = 'flood_bio.dmi'
+	icon_state = "spore1"
+	mouse_opacity = 0
+	pixel_x = rand(-9,0)
+	pixel_y = rand(0,-9)
+
+/obj/structure/flood_spore/New()
+	..()
+	icon_state = "spore[rand(1,8)]"
+
+/obj/structure/flood_spore_growing
+	icon = 'flood_bio.dmi'
+	icon_state = "animated"
+	mouse_opacity = 0
+	pixel_x = rand(-9,0)
+	pixel_y = rand(0,-9)
+
+/obj/structure/flood_spore_growing/New()
+	..()
+	icon_state = "animated[rand(1,6)]"
