@@ -100,6 +100,14 @@
 	throwpass = 1
 	anchored = 1
 
+/obj/structure/doorwreckage/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(air_group || (height==0))
+		return 1
+	if(istype(mover) && mover.checkpass(PASSTABLE))
+		return 1
+	else
+		return 0
+
 /obj/structure/doorwreckage/Bumped(atom/movable/AM)
 	if(isliving(AM) && AM:a_intent == I_HELP)
 		if(istype(AM, /mob/living/simple_animal/))
@@ -112,14 +120,14 @@
 		if(T.CanPass(AM, T))
 			if(ismob(AM))
 				var/mob/moving = AM
-				moving.show_message("<span class='notice'>You start maneuvring past [src]...</span>")
+				moving.show_message("<span class='notice'>You start maneuvring through [src]...</span>")
 			spawn(0)
 				if(do_after(AM, 30))
-					src.visible_message("<span class='info'>[AM] slips past [src].</span>")
+					src.visible_message("<span class='info'>[AM] slips through [src].</span>")
 					AM.loc = T
 		else if(ismob(AM))
 			var/mob/moving = AM
-			moving.show_message("<span class='warning'>Something is blocking you from maneuvering past [src].</span>")
+			moving.show_message("<span class='warning'>Something is blocking you from maneuvering through [src].</span>")
 	..()
 
 /obj/structure/doorwreckage/attackby(obj/item/W as obj, mob/user as mob)

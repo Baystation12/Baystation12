@@ -320,4 +320,4 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	maxHealth = 125
 	melee_damage_lower = 25
 	melee_damage_upper = 35
-	attacktext = "bashed"
+	attacktext = list("bashed","slashed","stabbed")
