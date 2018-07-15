@@ -66,6 +66,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/emergency_shuttle_docked_message
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_recall_message
+	var/jump_fail
+	var/jump_critical_fail
 
 	var/list/station_networks = list() 		// Camera networks that will show up on the console.
 
@@ -99,6 +101,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/num_exoplanets = 0
 	var/list/planet_size  //dimensions of planet zlevel, defaults to world size. Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/away_site_budget = 0
+	var/requires_bluespace_drive = 0 //Does this station/ship require a bluespace drive onboard in order to autotransfer?
 
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
 
@@ -282,7 +285,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/unbolt_saferooms()
 	return // overriden by torch
-	
+
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
 	maint_all_access = 1
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")

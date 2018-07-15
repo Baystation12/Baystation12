@@ -67,3 +67,22 @@
 /datum/evacuation_controller/proc/is_departing()
 	if(state == EVAC_LAUNCHING)
 		return 1
+
+/datum/evacuation_controller/proc/is_drive_needed()
+	if(GLOB.using_map.requires_bluespace_drive == 1)
+		return 1
+	return 0
+
+/datum/evacuation_controller/proc/drive_check()
+	var/obj/structure/bluespace_drive/B
+	if(!B)
+		return 0
+	for(B)
+		if(B.level && is_station_area(B.level))
+			return 1
+	return 0
+
+/datum/evacuation_controller/proc/is_emergency_evac()
+	if(emergency_evacuation == 1)
+		return 1
+	return 0

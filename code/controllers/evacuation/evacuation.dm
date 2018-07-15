@@ -97,7 +97,7 @@ var/datum/evacuation_controller/evacuation_controller
 
 	return 1
 
-/datum/evacuation_controller/proc/cancel_evacuation()
+/datum/evacuation_controller/proc/cancel_evacuation(var/drive_fail)
 
 	if(!can_cancel())
 		return 0
@@ -112,14 +112,22 @@ var/datum/evacuation_controller/evacuation_controller
 	evac_launch_time =  null
 	auto_recall_time =  null
 
+	var/fail_message = GLOB.using_map.emergency_shuttle_recall_message
+
 	if(emergency_evacuation)
-		evac_recalled.Announce(GLOB.using_map.emergency_shuttle_recall_message)
+		evac_recalled.Announce(fail_message)
 		for(var/area/A in world)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		emergency_evacuation = 0
 	else
-		priority_announcement.Announce(GLOB.using_map.shuttle_recall_message)
+		if(drive_fail == 1)
+			fail_message = "[GLOB.using_map.jump_fail]\ [GLOB.using_map.emergency_shuttle_recall_message]"
+		else if(drive_fail == 2)
+			fail_message = "[GLOB.using_map.jump_critical_fail]\ [GLOB.using_map.emergency_shuttle_recall_message]"
+			priority_announcement.Announce(fail_message, newsound = sound('sound/machines/apc_nopower.ogg', volume = 30))
+			return 1
+		priority_announcement.Announce(fail_message)
 
 	return 1
 
@@ -158,9 +166,19 @@ var/datum/evacuation_controller/evacuation_controller
 		return
 
 	if(state == EVAC_PREPPING)
+		if(is_drive_needed() && !is_emergency_evac())
+			if(!drive_check())
+				spawn(30)
+				cancel_evacuation(drive_fail = 1)
+				return
 		if(world.time >= evac_ready_time)
 			finish_preparing_evac()
 	else if(state == EVAC_LAUNCHING)
+		if(is_drive_needed() && !is_emergency_evac())
+			if(!drive_check())
+				spawn(30)
+				cancel_evacuation(drive_fail = 2)
+				return
 		if(world.time >= evac_launch_time)
 			launch_evacuation()
 	else if(state == EVAC_IN_TRANSIT)
