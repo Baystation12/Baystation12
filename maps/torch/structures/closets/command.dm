@@ -80,6 +80,7 @@
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,
+		/obj/item/device/radio/headset/heads/torchxo/alt,
 		/obj/item/weapon/gun/energy/gun/secure,
 		/obj/item/weapon/storage/belt/holster/general,
 		/obj/item/weapon/melee/telebaton,
