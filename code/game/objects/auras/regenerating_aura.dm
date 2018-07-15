@@ -102,6 +102,8 @@
 	nutrition_damage_mult = 2
 	organ_mult = 2
 	regen_message = "<span class='warning'>You sense your nymphs shifting internally to regenerate your ORGAN..</span>"
+	grow_chance = 5
+	grow_threshold = 100
 
 /obj/aura/regenerating/human/diona/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/carbon/human/H)
 	to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
