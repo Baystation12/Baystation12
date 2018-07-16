@@ -23,6 +23,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/next_escape = 0	// world.time when the ling can next use Escape Restraints
 	var/readapts = 1
 	var/max_readapts = 2
+	var/true_dead = FALSE
 
 /datum/changeling/New()
 	..()
@@ -67,6 +68,16 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
+
+	var/mob/living/carbon/Z = src
+	if(ishuman(Z))
+		var/obj/item/organ/internal/brain/B = Z.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/biostructure/Bio = Z.internal_organs_by_name[BP_CHANG]
+		if(B)
+			B.vital = 0
+		if(!Bio)
+			var/new_organ = /obj/item/organ/internal/biostructure
+			new new_organ(Z)
 
 	if(!powerinstances.len)
 		for(var/P in powers)
@@ -313,9 +324,12 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/newSpecies = chosen_dna.speciesName
+		var/obj/item/organ/internal/brain/B = H.internal_organs_by_name[BP_BRAIN]
 		H.set_species(newSpecies,1)
 		H.b_type = chosen_dna.dna.b_type
 		H.sync_organ_dna()
+		if(B)
+			B.vital = 0
 
 	domutcheck(src, null)
 	src.UpdateAppearance()
@@ -344,6 +358,15 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.geneticdamage = 30
 	to_chat(H, "<span class='warning'>Our genes cry out!</span>")
 	H = H.monkeyize()
+	if(ishuman(H))
+		var/obj/item/organ/internal/brain/B = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/biostructure/Bio = H.internal_organs_by_name[BP_CHANG]
+		if(B)
+			B.vital = 0
+		if(!Bio)
+			var/new_organ = /obj/item/organ/internal/biostructure
+			new new_organ(H)
+
 	feedback_add_details("changeling_powers","LF")
 	return 1
 
@@ -436,6 +459,11 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!changeling)	return
 
 	var/mob/living/carbon/C = src
+
+	if(C.mind.changeling.true_dead)
+		to_chat(C, "<span class='notice'>We can not do this. We are really dead.</span>")
+		return
+
 	if(!C.stat && alert("Are we sure we wish to fake our death?",,"Yes","No") == "No")//Confirmation for living changelings if they want to fake their death
 		return
 	to_chat(C, "<span class='notice'>We will attempt to regenerate our form.</span>")
@@ -461,6 +489,11 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set name = "Revive"
 
 	var/mob/living/carbon/C = src
+
+	if(C.mind.changeling.true_dead)
+		to_chat(C, "<span class='notice'>We can not do this. We are really dead.</span>")
+		return
+
 	// restore us to health
 	C.revive()
 	// remove our fake death flag
@@ -797,7 +830,9 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
-	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 40)
+	if(T.reagents)
+		spawn(5)
+			T.reagents.add_reagent(/datum/reagent/toxin/cyanide, 3)
 	feedback_add_details("changeling_powers","DTHS")
 	return 1
 
@@ -1137,17 +1172,20 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 /mob/proc/changeling_arm_blade()
 	set category = "Changeling"
 	set name = "Arm Blade (20)"
+	visible_message("<span class='warning'>The flesh is torn around the [loc.name]\'s arm!</span>",
+		"<span class='warning'>The flesh of our hand is transformed.</span>",
+		"<span class='italics'>You hear organic matter ripping and tearing!</span>")
+	spawn(30)
+		if(src.mind.changeling.recursive_enhancement)
+			if(changeling_generic_weapon(/obj/item/weapon/melee/changeling/arm_blade/greater))
+				to_chat(src, "<span class='notice'>We prepare an extra sharp blade.</span>")
 
-	if(src.mind.changeling.recursive_enhancement)
-		if(changeling_generic_weapon(/obj/item/weapon/melee/changeling/arm_blade/greater))
-			to_chat(src, "<span class='notice'>We prepare an extra sharp blade.</span>")
+				return 1
 
-			return 1
-
-	else
-		if(changeling_generic_weapon(/obj/item/weapon/melee/changeling/arm_blade))
-			return 1
-		return 0
+		else
+			if(changeling_generic_weapon(/obj/item/weapon/melee/changeling/arm_blade))
+				return 1
+			return 0
 
 //Increases macimum chemical storage
 /mob/proc/changeling_recursive_enhancement()
