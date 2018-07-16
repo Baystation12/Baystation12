@@ -1320,7 +1320,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/bed/chair/office/dark,
+/obj/structure/bed/chair/padded/purp,
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
 "acF" = (
@@ -2006,10 +2006,11 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "aed" = (
-/obj/structure/bed/chair/office/dark{
+/obj/effect/floor_decal/corner/mauve/mono,
+/obj/structure/bed/chair/office/comfy/purp{
+	icon_state = "comfyofficechair_preview";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/command/pathfinder)
 "aee" = (
