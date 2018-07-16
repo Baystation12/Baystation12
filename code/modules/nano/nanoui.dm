@@ -149,14 +149,18 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	var/atom/host = src_object.nano_host()
+	var/atom/host = src_object && src_object.nano_host()
+	if(!host)
+		close()
+		return
 	var/new_status = host.CanUseTopic(user, state)
 	if(master_ui)
 		new_status = min(new_status, master_ui.status)
 
-	set_status(new_status, push_update)
 	if(new_status == STATUS_CLOSE)
 		close()
+		return
+	set_status(new_status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -468,6 +472,8 @@ nanoui is used to open and update nano browser uis
 	var/params = "\ref[src]"
 
 	spawn(2)
+		if(!user || !user.client)
+			return
 		winset(user, window_id, "on-close=\"nanoclose [params]\"")
 
  /**
