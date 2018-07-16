@@ -8,3 +8,4 @@
 	mouse_opacity = 0
 	density = 0
 	opacity = 0
+	simulated = 0
