@@ -28,24 +28,28 @@
 	aggro_vision_range = 9
 	idle_vision_range = 5
 	var/pre_attack = 0
+	var/dead = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/goliath/Life()
 	..()
 	handle_preattack()
+	if(dead && icon_state != icon_dead)
+		icon_state = icon_dead
 
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/handle_preattack()
 	if(ranged_cooldown <= 2 && !pre_attack)
 		pre_attack++
 	if(!pre_attack || stat || stance == HOSTILE_STANCE_IDLE)
 		return
-	icon_state = "Goliath_preattack"
+	if(!dead)
+		icon_state = "Goliath_preattack"
 
 /mob/living/simple_animal/hostile/asteroid/goliath/OpenFire()
 	var/tturf = get_turf(target_mob)
 	if(get_dist(src, target_mob) <= 7)//Screen range check, so you can't get tentacle'd offscreen
 		visible_message("<span class='warning'>The [src.name] digs its tentacles under [target_mob.name]!</span>")
 		new /obj/effect/goliath_tentacle/original(tturf)
-			ranged_cooldown = ranged_cooldown_cap
+		ranged_cooldown = ranged_cooldown_cap
 		icon_state = icon_aggro
 		pre_attack = 0
 	return
@@ -64,7 +68,7 @@
 
 /obj/effect/goliath_tentacle
 	name = "Goliath tentacle"
-	icon = 'icons/mob/animal.dmi'
+	icon = 'icons/mob/asteroid/goliath.dmi'
 	icon_state = "Goliath_tentacle"
 
 /obj/effect/goliath_tentacle/New()
@@ -99,6 +103,7 @@
 	..()
 
 /mob/living/simple_animal/hostile/asteroid/goliath/death(gibbed)
+	dead = TRUE
 	var/obj/item/asteroid/goliath_hide/G = new /obj/item/asteroid/goliath_hide(src.loc)
 	G.layer = 4.1
 	..(gibbed)

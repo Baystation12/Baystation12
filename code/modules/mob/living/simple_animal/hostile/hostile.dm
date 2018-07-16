@@ -113,7 +113,8 @@
 			else
 				Goto(target_mob, move_to_delay, minimum_distance)//Otherwise, get to our minimum distance so we chase them
 		else
-			stance = HOSTILE_STANCE_ATTACKING
+			if(!ranged)
+				stance = HOSTILE_STANCE_ATTACKING
 			Goto(target_mob, move_to_delay, minimum_distance)
 	if(target_mob.loc != null && get_dist(src, target_mob.loc) <= vision_range)//We can't see our target, but he's in our vision range still
 		Goto(target_mob, move_to_delay, minimum_distance)

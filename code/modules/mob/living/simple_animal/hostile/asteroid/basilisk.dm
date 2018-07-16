@@ -82,6 +82,9 @@
 	maxHealth = 300
 	health = 300
 	ranged_cooldown_cap = 3
+	harm_intent_damage = 15
+	melee_damage_lower = 20
+	melee_damage_upper = 20
 	var/list/projectiletypes = list(/obj/item/projectile/temp/basilisk,
 									/obj/item/projectile/ion/small,
 									/obj/item/projectile/energy/plasmastun,
