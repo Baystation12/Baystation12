@@ -45,7 +45,7 @@
 
 	spell_flags = NO_SOMATIC
 
-	return "You will always be able to cast this spell, even unconscious or handcuffed."
+	return "You will always be able to cast this spell, even while unconscious or handcuffed."
 
 /obj/effect/cleanable/wizard_mark
 	name = "\improper Mark of the Wizard"
