@@ -15,7 +15,12 @@
 	if(!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
+	if(!affected)
+		return FALSE
+	if(affected.robotic < ORGAN_ROBOT)
+		return affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
+	else
+		return affected.hatch_state == HATCH_OPENED
 
 /datum/surgery_step/cavity/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
