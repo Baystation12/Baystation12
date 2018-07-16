@@ -531,6 +531,18 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/modular_computer/pda/explorer
 	l_ear = /obj/item/device/radio/headset/exploration
 
+/decl/hierarchy/outfit/job/torch/crew/exploration/pilot
+	name = OUTFIT_JOB_NAME("Shuttle Pilot - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/pilot
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/headset_pilot
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
+	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet
+
 //Passenger Outfits
 
 /decl/hierarchy/outfit/job/torch/passenger/research
@@ -556,16 +568,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/workboots
 	l_ear = /obj/item/device/radio/headset/headset_pilot
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
-	head = /obj/item/clothing/head/helmet/nt/pilot
 
 /decl/hierarchy/outfit/job/torch/passenger/pilot
 	name = OUTFIT_JOB_NAME("Shuttle Pilot")
 	uniform = /obj/item/clothing/under/color/black
-	suit = /obj/item/clothing/suit/storage/hazardvest/blue
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/headset_pilot
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
-	head = /obj/item/clothing/head/helmet/pilot
+	head = /obj/item/clothing/head/helmet/solgov/pilot
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Torch")

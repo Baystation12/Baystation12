@@ -175,5 +175,5 @@
 
 /obj/item/clothing/head/helmet/nt/pilot
 	name = "nanotrasen pilot's helmet"
-	desc = "A nanotrasen pilot's helmet for operating the cockpit in style. For when you want to protect your noggin AND look stylish."
+	desc = "A nanotrasen pilot's helmet for operating the cockpit in style. This one is worn by members of Nanotrasen."
 	icon_state = "pilotnt"

@@ -133,6 +133,9 @@
 /obj/item/weapon/card/id/torch/crew/explorer
 	job_access_type = /datum/job/explorer
 
+/obj/item/weapon/card/id/torch/crew/pilot
+	job_access_type = /datum/job/nt_pilot
+
 //NanoTrasen and Passengers
 
 /obj/item/weapon/card/id/torch/passenger

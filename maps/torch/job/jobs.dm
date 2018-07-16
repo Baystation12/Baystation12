@@ -465,15 +465,21 @@
 	minimal_player_age = 4
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
-	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet
+	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot
+		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/ec/e7 = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot,
+		/datum/mil_rank/fleet/e7 = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 
 	access = list(access_mining_office,
 						access_mining_station, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
-						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
+						access_hangar, access_guppy_helm, access_mining, access_pilot, access_solgov_crew)
 	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
 						SKILL_PILOT = SKILL_ADEPT)
 

@@ -135,6 +135,12 @@
 	desc = "Pathfinder"
 	region = ACCESS_REGION_RESEARCH
 
+/var/const/access_pilot = 95
+/datum/access/pilot
+	id = access_pilot
+	desc = "Pilot"
+	region = ACCESS_REGION_GENERAL
+
 
 /************
 * SEV Torch *
