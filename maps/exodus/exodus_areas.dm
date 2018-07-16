@@ -211,7 +211,6 @@
 /area/rescue_base/start
 	name = "\improper Response Team Base"
 	icon_state = "shuttlered"
-	base_turf = /turf/unsimulated/floor/rescue_base
 
 /area/rescue_base/southwest
 	name = "south-west of SS13"
