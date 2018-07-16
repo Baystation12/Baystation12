@@ -203,6 +203,10 @@
 /datum/armourspecials/internal_air_tank/unggoy
 	internal_air_tank = /obj/item/weapon/tank/methane/unggoy_internal
 
+/datum/armourspecials/internal_air_tank/human
+	internal_air_tank = /obj/item/weapon/tank/oxygen
+	equip_slot = null
+
 /datum/armourspecials/cloaking
 	var/cloak_active = 0
 	var/min_alpha = 10 //The minimum level of alpha to reach.

@@ -1,7 +1,5 @@
 #define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
-/obj/item/clothing/suit/armor/odst/New()
-	..()
 
 /obj/item/clothing/under/unsc/odst_jumpsuit
 	name = "ODST jumpsuit"
@@ -40,10 +38,17 @@
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
+
+	action_button_name = "Toggle Helmet Light"
+	icon_state = "Odst Helmet Transparent"
+
+
 	armor_thickness = 20
 
 
-/obj/item/clothing/suit/armor/odst
+
+
+/obj/item/clothing/suit/armor/special/odst
 	name = "ODST Armour"
 	desc = "Lightweight, durable armour issued to Orbital Drop Shock Troopers for increased survivability in the field."
 	icon = ITEM_INHAND
@@ -51,6 +56,7 @@
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
 	armor = list(melee = 55, bullet = 45, laser = 55, energy = 45, bomb = 45, bio = 30, rad = 25)
+	specials = list(/datum/armourspecials/internal_air_tank/human)
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
@@ -69,7 +75,7 @@
 
 /obj/effect/odst_armour_set
 	var/obj/helmet = /obj/item/clothing/head/helmet/odst
-	var/obj/armour = /obj/item/clothing/suit/armor/odst
+	var/obj/armour = /obj/item/clothing/suit/armor/special/odst
 
 /obj/effect/odst_armour_set/New()
 	.=..()
@@ -82,9 +88,9 @@
 
 /obj/effect/odst_armour_set/cqb
 	helmet = /obj/item/clothing/head/helmet/odst/cqb
-	armour = /obj/item/clothing/suit/armor/odst/cqb
+	armour = /obj/item/clothing/suit/armor/special/odst/cqb
 
-/obj/item/clothing/suit/armor/odst/cqb
+/obj/item/clothing/suit/armor/special/odst/cqb
 	name = "ODST CQB Armour"
 
 	icon_state = "Odst Armour CQB"
@@ -97,9 +103,9 @@
 
 /obj/effect/odst_armour_set/sharpshooter
 	helmet = /obj/item/clothing/head/helmet/odst/sharpshooter
-	armour = /obj/item/clothing/suit/armor/odst/sharpshooter
+	armour = /obj/item/clothing/suit/armor/special/odst/sharpshooter
 
-/obj/item/clothing/suit/armor/odst/sharpshooter
+/obj/item/clothing/suit/armor/special/odst/sharpshooter
 	name = "ODST Sharpshooter Armour"
 
 	icon_state = "Odst Armour Sharpshooter"
@@ -112,9 +118,9 @@
 
 /obj/effect/odst_armour_set/medic
 	helmet = /obj/item/clothing/head/helmet/odst/medic
-	armour = /obj/item/clothing/suit/armor/odst/medic
+	armour = /obj/item/clothing/suit/armor/special/odst/medic
 
-/obj/item/clothing/suit/armor/odst/medic
+/obj/item/clothing/suit/armor/special/odst/medic
 	name = "ODST Medic Armour"
 
 	icon_state = "Odst Armour Medic"
@@ -127,7 +133,7 @@
 
 /obj/effect/odst_armour_set/engineer
 	helmet = /obj/item/clothing/head/helmet/odst/engineer
-	armour = /obj/item/clothing/suit/armor/odst/engineer
+	armour = /obj/item/clothing/suit/armor/special/odst/engineer
 
 /obj/item/clothing/head/helmet/odst/engineer
 	name = "ODST Engineer Helmet"
@@ -135,14 +141,14 @@
 	item_state = "Odst Helmet Engineer"
 	icon_state = "Helmet Engineer"
 
-/obj/item/clothing/suit/armor/odst/engineer
+/obj/item/clothing/suit/armor/special/odst/engineer
 	name = "ODST Engineer Armour"
 
 	icon_state = "Odst Armour Engineer"
 
 /obj/effect/odst_armour_set/squadleader
 	helmet = /obj/item/clothing/head/helmet/odst/squadleader
-	armour = /obj/item/clothing/suit/armor/odst/squadleader
+	armour = /obj/item/clothing/suit/armor/special/odst/squadleader
 
 /obj/item/clothing/head/helmet/odst/squadleader
 	name = "ODST Squad Leader Helmet"
@@ -150,7 +156,7 @@
 	item_state = "Odst Helmet Squad Leader"
 	icon_state = "Helmet Squad Leader"
 
-/obj/item/clothing/suit/armor/odst/squadleader
+/obj/item/clothing/suit/armor/special/odst/squadleader
 	name = "ODST Squad Leader Armour"
 
 	icon_state = "Odst Armor Squad Leader"
