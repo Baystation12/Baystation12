@@ -112,8 +112,6 @@
 	else
 		activate_strobe()
 
-	update_icon()
-
 /obj/item/weapon/party_light/update_icon()
 	if (activated)
 		icon_state = "partylight-on"
@@ -133,12 +131,16 @@
 	// Make the light effect follow this party light object.
 	GLOB.moved_event.register(src, L, /atom/movable/proc/move_to_turf_or_null)
 
+	update_icon()
+
 /obj/item/weapon/party_light/proc/deactivate_strobe()
 	activated = 0
 
 	// Cause the party light effect to stop following this object, and then delete it.
 	GLOB.moved_event.unregister(src, strobe_effect, /atom/movable/proc/move_to_turf_or_null)
 	QDEL_NULL(strobe_effect)
+
+	update_icon()
 
 /obj/item/weapon/party_light/Destroy()
 	deactivate_strobe()
