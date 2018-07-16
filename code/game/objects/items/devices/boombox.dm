@@ -34,7 +34,7 @@
 	dat += "<A href='?src=\ref[src];tracknum=-1;'>PREV</a>"
 	dat += "<A href='?src=\ref[src];start=1;'>PLAY</a>"
 	dat += "<A href='?src=\ref[src];stop=1;'>STOP</a>"
-	var/datum/browser/popup = new(user, "boombox", "BOOMTASTIC 3000", 120, 30)
+	var/datum/browser/popup = new(user, "boombox", "BOOMTASTIC 3000", 220, 130)
 	popup.set_content(dat)
 	popup.open()
 
