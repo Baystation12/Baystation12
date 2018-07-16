@@ -27,17 +27,19 @@
 
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
-	if(.)
-		if(src.nutrition && src.stat != 2)
-			src.nutrition -= DEFAULT_HUNGER_FACTOR/10
-			if(src.m_intent == M_RUN)
-				src.nutrition -= DEFAULT_HUNGER_FACTOR/10
-		if((FAT in src.mutations) && src.m_intent == M_RUN && src.bodytemperature <= 360)
-			src.bodytemperature += 2
+	if(!.)
+		return
 
-		// Moving around increases germ_level faster
-		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
-			germ_level++
+	if (src.nutrition && src.stat != 2)
+		src.nutrition -= DEFAULT_HUNGER_FACTOR/10
+		if (move_intent.flags & MOVE_INTENT_EXERTIVE)
+			src.nutrition -= DEFAULT_HUNGER_FACTOR/10
+	if((FAT in src.mutations) && (move_intent.flags & MOVE_INTENT_EXERTIVE) && src.bodytemperature <= 360)
+		src.bodytemperature += 2
+
+	// Moving around increases germ_level faster
+	if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
+		germ_level++
 
 /mob/living/carbon/relaymove(var/mob/living/user, direction)
 	if((user in src.stomach_contents) && istype(user))
@@ -51,7 +53,7 @@
 					var/mob/living/carbon/human/H = src
 					var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
 					if (istype(organ))
-						organ.take_damage(d, 0)
+						organ.take_external_damage(d, 0)
 					H.updatehealth()
 				else
 					src.take_organ_damage(d)
@@ -299,11 +301,11 @@
 		var/obj/item/I = item
 		itemsize = I.w_class
 
-	src.drop_from_inventory(item)
-	
+	if(!unEquip(item))
+		return
 	if(!item || !isturf(item.loc))
 		return
-	
+
 	var/message = "\The [src] has thrown \the [item]."
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
@@ -312,7 +314,7 @@
 			message = "\The [src] barely manages to throw \the [item], and is knocked off-balance!"
 	else
 		skill_mod += 0.2
-	
+
 	skill_mod += 0.8 * (get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 	throw_range *= skill_mod
 

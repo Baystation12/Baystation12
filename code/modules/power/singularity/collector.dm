@@ -31,7 +31,7 @@ var/global/list/rad_collectors = list()
 	last_power_new = 0
 
 	if(P && active)
-		var/rads = radiation_repository.get_rads_at_turf(get_turf(src))
+		var/rads = SSradiation.get_rads_at_turf(get_turf(src))
 		if(rads)
 			receive_pulse(rads * 5) //Maths is hard
 
@@ -65,9 +65,9 @@ var/global/list/rad_collectors = list()
 		if(src.P)
 			to_chat(user, "<span class='warning'>There's already a phoron tank loaded.</span>")
 			return 1
-		user.drop_item()
+		if(!user.unEquip(W, src))
+			return
 		src.P = W
-		W.loc = src
 		update_icons()
 		return 1
 	else if(isCrowbar(W))

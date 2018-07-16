@@ -4,7 +4,7 @@
 	var/cost = 0
 	var/mob/living/deity/linked
 	var/flags = 0
-	var/cooldown = 0
+	var/cooldown = 10
 	var/refresh_time = 0
 	var/expected_type
 

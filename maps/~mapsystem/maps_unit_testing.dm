@@ -58,12 +58,10 @@
 		/area/syndicate_mothership/elite_squad,
 		/area/wizard_station,
 		/area/template_noop,
-		/area/map_template,
-		/area/map_template/little_house
 	)
 
 	var/list/area_usage_test_exempted_root_areas = list(
-		/area/map_template/hydrobase,
+		/area/map_template,
 		/area/exoplanet
 	)
 

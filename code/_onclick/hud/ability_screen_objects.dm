@@ -18,7 +18,7 @@
 		my_mob = owner
 		update_abilities(0, owner)
 	else
-		message_admins("ERROR: ability_master's New() was not given an owner argument.  This is a bug.")
+		CRASH("ERROR: ability_master's New() was not given an owner argument.  This is a bug.")
 	..()
 
 /obj/screen/movable/ability_master/Destroy()
@@ -67,19 +67,19 @@
 
 	//Create list of X offsets
 	var/list/screen_loc_X = splittext(screen_loc_xy[1],":")
-	var/x_position = decode_screen_X(screen_loc_X[1])
+	var/x_position = decode_screen_X(screen_loc_X[1], my_mob)
 	var/x_pix = screen_loc_X[2]
 
 	//Create list of Y offsets
 	var/list/screen_loc_Y = splittext(screen_loc_xy[2],":")
-	var/y_position = decode_screen_Y(screen_loc_Y[1])
+	var/y_position = decode_screen_Y(screen_loc_Y[1], my_mob)
 	var/y_pix = screen_loc_Y[2]
 
 	for(var/i = 1; i <= ability_objects.len; i++)
 		var/obj/screen/ability/A = ability_objects[i]
 		var/xpos = x_position + (x_position < 8 ? 1 : -1)*(i%7)
 		var/ypos = y_position + (y_position < 8 ? round(i/7) : -round(i/7))
-		A.screen_loc = "[encode_screen_X(xpos)]:[x_pix],[encode_screen_Y(ypos)]:[y_pix]"
+		A.screen_loc = "[encode_screen_X(xpos, my_mob)]:[x_pix],[encode_screen_Y(ypos, my_mob)]:[y_pix]"
 		if(my_mob && my_mob.client)
 			my_mob.client.screen += A
 //			A.handle_icon_updates = 1

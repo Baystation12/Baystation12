@@ -481,8 +481,8 @@
 			to_chat(user, "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
 			return
 
-		user.drop_item()
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		cell = W
 		user.visible_message(\
 			"<span class='warning'>[user.name] has inserted the power cell to [src.name]!</span>",\
@@ -815,7 +815,7 @@
 	)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

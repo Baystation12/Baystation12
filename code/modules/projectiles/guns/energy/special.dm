@@ -150,11 +150,14 @@
 	origin_tech = null
 	self_recharge = 1
 	charge_meter = 0
+	var/required_antag_type = MODE_WIZARD
 
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
-	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
-		to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
-		return 0
+	if(required_antag_type)
+		var/datum/antagonist/antag = get_antag_data(required_antag_type)
+		if(user.mind && !antag.is_antagonist(user.mind))
+			to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
+			return 0
 
 	return ..()
 
@@ -168,29 +171,17 @@
 /obj/item/weapon/gun/energy/staff/animate
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
+	max_shots = 5
+	recharge_time = 5 SECONDS
 	projectile_type = /obj/item/projectile/animate
-	max_shots = 10
 
-obj/item/weapon/gun/energy/staff/focus
+/obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "focus"
 	item_state = "focus"
-	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = ITEM_SIZE_LARGE
 	projectile_type = /obj/item/projectile/forcebolt
-	/*
-	attack_self(mob/living/user as mob)
-		if(projectile_type == /obj/item/projectile/forcebolt)
-			charge_cost = 400
-			to_chat(user, "<span class='warning'>The [src.name] will now strike a small area.</span>")
-			projectile_type = /obj/item/projectile/forcebolt/strong
-		else
-			charge_cost = 200
-			to_chat(user, "<span class='warning'>The [src.name] will now strike only a single person.</span>")
-			projectile_type = /obj/item/projectile/forcebolt"
-	*/
 
 /obj/item/weapon/gun/energy/plasmacutter
 	name = "plasma cutter"

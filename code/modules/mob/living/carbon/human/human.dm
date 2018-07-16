@@ -59,7 +59,7 @@
 	. = ..()
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
-		stat("Move Mode:", "[m_intent]")
+		stat("Move Mode:", "[move_intent.name]")
 
 		if(evacuation_controller)
 			var/eta_status = evacuation_controller.get_status_panel_eta()
@@ -138,7 +138,7 @@
 
 	// focus most of the blast on one organ
 	var/obj/item/organ/external/take_blast = pick(organs)
-	take_blast.take_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
+	take_blast.take_external_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
 
 	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
 	b_loss *= 0.3
@@ -153,7 +153,7 @@
 			loss_val = 0.4
 		else
 			loss_val = 0.05
-		temp.take_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
+		temp.take_external_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
@@ -564,7 +564,7 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation && !nabbing)
+	if(species.has_fine_manipulation(src))
 		return 1
 	if(!silent)
 		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
@@ -899,7 +899,7 @@
 				else if(prob(5))
 					jossle_internal_object(groin,O)
 
-/mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/organ, var/obj/item/O)
+/mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/external/organ, var/obj/item/O)
 	// All kinds of embedded objects cause bleeding.
 	if(!can_feel_pain())
 		to_chat(src, "<span class='warning'>You feel [O] moving inside your [organ.name].</span>")
@@ -910,7 +910,7 @@
 			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
 		custom_pain(msg,40,affecting = organ)
 
-	organ.take_damage(rand(1,3), 0, 0)
+	organ.take_external_damage(rand(1,3), 0, 0)
 	if(!(organ.robotic >= ORGAN_ROBOT) && (should_have_organ(BP_HEART))) //There is no blood in protheses.
 		organ.status |= ORGAN_BLEEDING
 		src.adjustToxLoss(rand(1,3))
@@ -974,12 +974,12 @@
 	else
 		if(!new_species)
 			new_species = dna.species
-		else
-			dna.species = new_species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!all_species[new_species])
 		new_species = SPECIES_HUMAN
+	if(dna)
+		dna.species = new_species
 
 	if(species)
 
@@ -1281,11 +1281,6 @@
 		to_chat(S, "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>")
 	current_limb.undislocate()
 
-/mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
-	if(W in organs)
-		return
-	. = ..()
-
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
 	..()
 	if(update_hud)
@@ -1303,14 +1298,10 @@
 	return 0
 
 /mob/living/carbon/human/verb/pull_punches()
-	set name = "Pull Punches"
+	set name = "Switch Stance"
 	set desc = "Try not to hurt them."
 	set category = "IC"
-
-	if(incapacitated() || species.species_flags & SPECIES_FLAG_CAN_NAB) return
-	pulling_punches = !pulling_punches
-	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
-	return
+	species.toggle_stance(src)
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate

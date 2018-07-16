@@ -140,8 +140,7 @@
 
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
 	if(!bolt)
-		if (istype(W,/obj/item/weapon/arrow))
-			user.drop_from_inventory(W, src)
+		if (istype(W,/obj/item/weapon/arrow) && user.unEquip(W, src))
 			bolt = W
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			update_icon()
@@ -159,9 +158,9 @@
 
 	if(istype(W, /obj/item/weapon/cell))
 		if(!cell)
-			user.drop_item()
+			if(!user.unEquip(W, src))
+				return
 			cell = W
-			cell.loc = src
 			to_chat(user, "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>")
 			superheat_rod(user)
 		else

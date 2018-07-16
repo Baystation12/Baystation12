@@ -70,7 +70,6 @@
 			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
 			return
 		stored_matter += cartridge.remaining
-		user.drop_from_inventory(W)
 		qdel(W)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")

@@ -106,9 +106,7 @@
 	else if(istype(thing, /obj/item/weapon/reagent_containers))
 		if(container)
 			to_chat(user, "<span class='warning'>\The [src] is already loaded with \the [container].</span>")
-		else
-			user.drop_from_inventory(thing)
-			thing.forceMove(src)
+		else if(user.unEquip(thing, src))
 			container = thing
 			user.visible_message("<span class='notice'>\The [user] loads \the [thing] into \the [src].</span>")
 			verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container

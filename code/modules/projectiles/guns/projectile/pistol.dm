@@ -174,11 +174,11 @@
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
 			to_chat(user, "<span class='notice'>You'll need [src] in your hands to do that.</span>")
 			return
-		user.drop_item()
+		if(!user.unEquip(I, src))
+			return//put the silencer into the gun
 		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
 		silenced = I	//dodgy?
 		w_class = ITEM_SIZE_NORMAL
-		I.forceMove(src)		//put the silencer into the gun
 		update_icon()
 		return
 	..()
@@ -208,6 +208,7 @@
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
 	has_safety = FALSE
+	w_class = ITEM_SIZE_NORMAL
 
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
@@ -255,7 +256,6 @@
 
 /obj/item/weapon/zipgunframe/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/pipe) && buildstate == 0)
-		user.drop_from_inventory(thing)
 		qdel(thing)
 		user.visible_message("<span class='notice'>\The [user] fits \the [thing] to \the [src] as a crude barrel.</span>")
 		add_fingerprint(user)
@@ -269,7 +269,6 @@
 		update_icon()
 		return
 	else if(istype(thing,/obj/item/device/assembly/mousetrap) && buildstate == 2)
-		user.drop_from_inventory(thing)
 		qdel(thing)
 		user.visible_message("<span class='notice'>\The [user] takes apart \the [thing] and uses the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
 		add_fingerprint(user)

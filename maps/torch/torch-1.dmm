@@ -470,6 +470,7 @@
 "bk" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
+	req_access = list(12)
 	req_one_access = list(73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -495,9 +496,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "bq" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -507,6 +505,11 @@
 	},
 /obj/machinery/computer/cryopod{
 	pixel_x = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
@@ -527,9 +530,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/center)
 "bt" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -539,6 +539,11 @@
 	},
 /obj/machinery/computer/cryopod{
 	pixel_x = 32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
@@ -858,7 +863,6 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "cl" = (
-/obj/structure/bed/chair,
 /obj/structure/cable/cyan{
 	d2 = 2;
 	icon_state = "0-2"
@@ -874,10 +878,10 @@
 	pixel_y = 24;
 	req_access = list(11)
 	},
+/obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cm" = (
-/obj/structure/bed/chair,
 /obj/effect/floor_decal/corner/green{
 	icon_state = "corner_white";
 	dir = 1
@@ -889,22 +893,15 @@
 /obj/structure/sign/ecplaque{
 	pixel_y = 30
 	},
+/obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cn" = (
-/obj/structure/bed/chair,
 /obj/effect/floor_decal/corner/green{
 	icon_state = "corner_white";
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/exploration_shuttle/crew)
-"co" = (
-/obj/effect/floor_decal/corner/green{
-	icon_state = "corner_white";
-	dir = 1
-	},
-/obj/structure/bed/chair,
+/obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cp" = (
@@ -964,20 +961,24 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "cx" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "cy" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
@@ -998,20 +999,24 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/center)
 "cB" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
 "cC" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
@@ -1129,8 +1134,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
+/obj/structure/bed/chair/shuttle/blue{
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -1310,31 +1314,39 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "dj" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "dk" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/status_display{
 	pixel_x = 32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "dl" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/status_display{
 	pixel_x = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
 "dm" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -1470,12 +1482,13 @@
 	icon_state = "alarm0";
 	pixel_y = -22
 	},
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/machinery/camera/network/exploration_shuttle{
 	icon_state = "camera";
 	dir = 1
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
@@ -1601,7 +1614,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "dM" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -1636,7 +1651,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/center)
 "dP" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2211,11 +2228,12 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/structure/sign/warning/nosmoking_burned{
 	pixel_y = 32
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/airlock)
@@ -2345,7 +2363,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = list(93)
+	req_access = list(12,93)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/aft)
@@ -2617,6 +2635,7 @@
 "fC" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition EVA Maintenance";
+	req_access = list(12);
 	req_one_access = list(48,65)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -2757,7 +2776,8 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/airlock)
 "fM" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -3227,7 +3247,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -3665,7 +3686,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = list(93)
+	req_access = list(12,93)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4938,12 +4959,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "kh" = (
-/obj/structure/bed/chair/comfy/red{
-	icon_state = "comfychair_preview";
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
+	},
+/obj/structure/bed/chair/comfy/brown{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
@@ -8250,7 +8270,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,73)
+	req_access = list(12,73)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -11039,6 +11059,9 @@
 	pixel_y = -30
 	},
 /obj/machinery/light,
+/obj/structure/bed/chair{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/storage/primary)
 "vx" = (
@@ -11213,7 +11236,8 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Supply Office";
-	req_access = list(31)
+	req_access = newlist();
+	req_one_access = list(31,76,77)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -11427,7 +11451,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,73)
+	req_access = list(12,73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/aft)
@@ -11590,11 +11614,12 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/fore)
 "wz" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/bed/chair/padded/blue{
+	icon_state = "chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/fore)
@@ -11845,11 +11870,12 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/bed/chair/office/dark{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
+	},
+/obj/structure/bed/chair/office/comfy/brown{
+	icon_state = "comfyofficechair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
@@ -12550,12 +12576,12 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "ye" = (
-/obj/structure/bed/chair/office/dark{
-	icon_state = "officechair_dark";
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
+	dir = 8
+	},
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -12581,7 +12607,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
 "yh" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/red{
+	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -14155,7 +14182,8 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Supply Office";
-	req_access = list(31)
+	req_access = newlist();
+	req_one_access = list(31,76,77)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14249,7 +14277,8 @@
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = -24;
-	req_access = list(31)
+	req_access = newlist();
+	req_one_access = list(31,76,77)
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -15190,7 +15219,8 @@
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = 24;
-	req_access = list(31)
+	req_access = newlist();
+	req_one_access = list(31,76,77)
 	},
 /obj/machinery/light_switch{
 	pixel_x = 6;
@@ -15984,7 +16014,8 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Warehouse";
-	req_access = list(31)
+	req_access = newlist();
+	req_one_access = list(31,76,77)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16031,7 +16062,8 @@
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = -6;
-	req_access = list(31)
+	req_access = newlist();
+	req_one_access = list(31,76,77)
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/monotile,
@@ -16046,7 +16078,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = -24;
 	pixel_y = -6;
-	req_access = list(31)
+	req_one_access = list(31,76,77)
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/hangar)
@@ -16713,7 +16745,8 @@
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(31)
+	req_access = list(12);
+	req_one_access = list(31,76,77)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16872,7 +16905,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "GJ" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -16965,7 +17000,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
 "GS" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -17071,9 +17108,6 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
@@ -17083,6 +17117,10 @@
 	dir = 2;
 	pixel_x = 0;
 	pixel_y = 23
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
@@ -17162,7 +17200,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "Hr" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -17194,7 +17234,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/center)
 "Hu" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -17477,11 +17519,13 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/shield/fourthdeck)
 "HU" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/status_display{
 	pixel_x = 32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
@@ -17490,11 +17534,13 @@
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/power)
 "HX" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/status_display{
 	pixel_x = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
@@ -17567,12 +17613,13 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/storage)
 "Ih" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
@@ -17583,9 +17630,6 @@
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Ij" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/power/apc/hyper{
 	dir = 4;
@@ -17593,6 +17637,10 @@
 	pixel_x = 24
 	},
 /obj/structure/cable/cyan,
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Ik" = (
@@ -17675,45 +17723,54 @@
 /turf/simulated/floor/plating,
 /area/shield/fourthdeck)
 "Ir" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
 "Is" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
 "It" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
 "Iu" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
 "Iv" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(31)
+	req_access = list(12);
+	req_one_access = list(31,76,77)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/techfloor/corner{
@@ -17746,7 +17803,7 @@
 	req_access = list(89);
 	req_one_access = newlist()
 	},
-/obj/structure/bed/chair/shuttle,
+/obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Iy" = (
@@ -17781,7 +17838,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_one_access = list(73)
+	req_access = list(12,73)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -17943,8 +18000,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "IT" = (
-/obj/structure/bed/chair/office/dark,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/bed/chair/office/comfy/blue,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "IU" = (
@@ -17955,26 +18012,27 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "IV" = (
-/obj/structure/bed/chair/office/dark{
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/bed/chair/office/comfy/brown{
+	icon_state = "comfyofficechair_preview";
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "IW" = (
-/obj/structure/bed/chair/office/light{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	pixel_y = 24
+	},
+/obj/structure/bed/chair/office/light{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "IX" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_one_access = list(73)
+	req_access = list(12,73)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -18034,7 +18092,6 @@
 	},
 /area/shuttle/escape_pod8/station)
 "Ji" = (
-/obj/structure/bed/chair,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -18045,6 +18102,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_x = -32
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
 "Jj" = (
@@ -18070,7 +18128,6 @@
 	},
 /area/shuttle/escape_pod9/station)
 "Jm" = (
-/obj/structure/bed/chair,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -18081,6 +18138,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_x = 32
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
 "Jn" = (
@@ -18850,7 +18908,7 @@
 	},
 /obj/machinery/door/airlock/mining{
 	name = "Expedition Storage";
-	req_one_access = list(48,65)
+	req_one_access = list(48,65,93)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/techfloor/corner,
@@ -19612,7 +19670,7 @@
 "WI" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Laundry Maintenance";
-	req_access = list(14)
+	req_access = list(12,14)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/laundry)
@@ -42327,7 +42385,7 @@ Qd
 aE
 Ui
 bF
-co
+cn
 cW
 dC
 ec

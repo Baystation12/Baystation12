@@ -1,4 +1,5 @@
 /mob/living/deity
+	var/silenced = 0
 	var/list/phenomenas = list()
 	var/list/intent_phenomenas = list()
 	var/static/list/control_types = list("control", "controlshift", "shift")
@@ -13,6 +14,25 @@
 	set_phenomena(add_phenomena(/datum/phenomena/point), I_HELP, "controlshift")
 	set_phenomena(add_phenomena(/datum/phenomena/conversion), I_GRAB, "shift")
 	set_phenomena(add_phenomena(/datum/phenomena/forced_conversion), I_GRAB, "control")
+
+/mob/living/deity/proc/silence(var/amount)
+	if(!silenced)
+		to_chat(src, "<span class='warning'>You've been silenced! Your phenomenas are disabled!</span>")
+		var/obj/screen/intent/deity/SD = hud_used.action_intent
+		SD.color = "#ff0000"
+	silenced += amount
+	for(var/phenom in phenomenas) //Also make it so that you don't do cooldowns.
+		var/datum/phenomena/P = phenomenas[phenom]
+		if(P.refresh_time)
+			P.refresh_time += amount
+
+/mob/living/deity/Life()
+	. = ..()
+	if(. && silenced)
+		if(!--silenced)
+			to_chat(src, "<span class='notice'>You are no longer silenced.</span>")
+			var/obj/screen/intent/deity/SD = hud_used.action_intent
+			SD.color = null
 
 /mob/living/deity/Destroy()
 	for(var/phenom in phenomenas)
@@ -35,15 +55,15 @@
 	if(update)
 		update_phenomena_bindings()
 
-/mob/living/deity/proc/remove_phenomena(var/datum/phenomena/to_remove)
-	phenomenas[to_remove.name] = null
-	phenomenas -= to_remove.name
+/mob/living/deity/proc/remove_phenomena(var/to_remove)
+	var/datum/phenomena/P = phenomenas[to_remove]
+	phenomenas -= to_remove
 	for(var/intent in intent_phenomenas)
 		var/list/intent_list = intent_phenomenas[intent]
 		for(var/mod in intent_list)
-			if(intent_list[mod] == to_remove)
+			if(intent_list[mod] == P)
 				intent_list[mod] = null
-	qdel(to_remove)
+	qdel(P)
 
 /mob/living/deity/proc/populate_intent(var/intent)
 	if(!intent_phenomenas[intent])

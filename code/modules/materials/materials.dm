@@ -796,7 +796,8 @@ var/list/name_to_material
 	return 0
 
 /material/aliumium
-	name = "alien alloy"
+	name = "aliumium"
+	display_name = "alien alloy"
 	stack_type = null
 	icon_base = "jaggy"
 	door_icon_base = "metal"
@@ -804,6 +805,7 @@ var/list/name_to_material
 	hitsound = 'sound/weapons/smash.ogg'
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
+	stack_type = /obj/item/stack/material/aliumium
 
 /material/aliumium/New()
 	icon_base = "metal"
@@ -831,9 +833,9 @@ var/list/name_to_material
 
 /material/carpet
 	name = "carpet"
-	display_name = "comfy"
+	display_name = "red"
 	use_name = "red upholstery"
-	icon_colour = "#da020a"
+	icon_colour = "#9d2300"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -843,8 +845,17 @@ var/list/name_to_material
 
 /material/cotton
 	name = "cotton"
-	display_name ="cotton"
+	display_name ="grey"
 	icon_colour = "#ffffff"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	conductive = 0
+
+/material/cloth_yellow
+	name = "yellow"
+	display_name ="yellow"
+	icon_colour = "#ffbf00"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -854,7 +865,7 @@ var/list/name_to_material
 	name = "teal"
 	display_name ="teal"
 	use_name = "teal cloth"
-	icon_colour = "#00eafa"
+	icon_colour = "#00e1ff"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -874,7 +885,7 @@ var/list/name_to_material
 	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
-	icon_colour = "#01c608"
+	icon_colour = "#b7f27d"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -884,7 +895,7 @@ var/list/name_to_material
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
-	icon_colour = "#9c56c4"
+	icon_colour = "#9933ff"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -894,7 +905,7 @@ var/list/name_to_material
 	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
-	icon_colour = "#6b6fe3"
+	icon_colour = "#46698c"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
@@ -904,7 +915,7 @@ var/list/name_to_material
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
-	icon_colour = "#e8e7c8"
+	icon_colour = "#ceb689"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300

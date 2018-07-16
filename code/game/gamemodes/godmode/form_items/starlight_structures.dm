@@ -1,3 +1,46 @@
+/obj/structure/deity/gateway
+	name = "gateway"
+	desc = "A gateway into the unknown."
+	power_adjustment = 0
+	var/weakref/target_ref
+	var/start_time = 0
+	var/active_souls = 0
+	var/power_drain = 15
+
+/obj/structure/deity/gateway/New()
+	..()
+	if(linked_god)
+		linked_god.power_per_regen -= power_drain
+	START_PROCESSING(SSobj, src)
+
+/obj/structure/deity/gateway/Process()
+	var/mob/living/carbon/human/target = target_ref.resolve()
+	if(target)
+		if(get_turf(target) != get_turf(src))
+			target = null
+			start_time = 0
+		else if(prob(5))
+			to_chat(target,"<span class='danger'>\The [src] sucks at your lifeforce!</span>")
+	if(start_time && world.time > start_time + 3000)
+		start_time = 0
+		to_chat(target,"<span class='danger'>You have been sucked into \the [src], your soul used to fuel \the [linked_god]'s minions.</span>")
+		target.dust()
+		active_souls++
+		if(linked_god && power_drain < 5)
+			linked_god.power_per_regen += 3
+			power_drain += 3
+	else
+		//Get new target
+		var/mob/living/carbon/human/T = locate() in get_turf(src)
+		if(T)
+			target_ref = weakref(T)
+			start_time = world.time
+			to_chat(T, "<span class='danger'>You feel your lifeforce begin to drain into \the [src]!</span>")
+
+/obj/structure/deity/gateway/Destroy()
+	linked_god.power_per_regen += power_drain
+	. = ..()
+
 /obj/structure/deity/radiant_statue
 	name = "radiant statue"
 	build_cost = 750
@@ -5,6 +48,11 @@
 	deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT|DEITY_STRUCTURE_ALONE
 	var/charge = 0
 	var/charging = 0 //Charging, dispersing, etc.
+
+/obj/structure/deity/radiant_statue/Destroy()
+	if(charging)
+		STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/structure/deity/radiant_statue/proc/get_followers_nearby()
 	. = list()

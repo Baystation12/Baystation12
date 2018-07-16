@@ -97,9 +97,9 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 	var/list/raider_holster = list(
-		/obj/item/clothing/accessory/holster/armpit,
-		/obj/item/clothing/accessory/holster/waist,
-		/obj/item/clothing/accessory/holster/hip
+		/obj/item/clothing/accessory/storage/holster/armpit,
+		/obj/item/clothing/accessory/storage/holster/waist,
+		/obj/item/clothing/accessory/storage/holster/hip
 		)
 
 /datum/antagonist/raider/update_access(var/mob/living/player)
@@ -236,21 +236,23 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	var/turf/T = get_turf(player)
 
 	var/obj/item/primary = new new_gun(T)
-	var/obj/item/clothing/accessory/holster/holster = null
+	var/obj/item/clothing/accessory/storage/holster/holster = null
 
 	//Give some of the raiders a pirate gun as a secondary
 	if(prob(60))
 		var/obj/item/secondary = new /obj/item/weapon/gun/projectile/pirate(T)
 		if(!(primary.slot_flags & SLOT_HOLSTER))
 			holster = new new_holster(T)
-			holster.holstered = secondary
+			var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
+			H.holstered = secondary
 			secondary.forceMove(holster)
 		else
 			player.equip_to_slot_or_del(secondary, slot_belt)
 
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
-		holster.holstered = primary
+		var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
+		H.holstered = primary
 		primary.forceMove(holster)
 	else if(!player.belt && (primary.slot_flags & SLOT_BELT))
 		player.equip_to_slot_or_del(primary, slot_belt)

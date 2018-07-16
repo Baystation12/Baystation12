@@ -64,7 +64,6 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
 			if(!T.place_handcuffs(H, user))
-				user.unEquip(T)
 				qdel(T)
 
 		else if(user.zone_sel.selecting == BP_CHEST)
@@ -80,9 +79,8 @@
 		return 1
 
 /obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user)
-	if(!istype(W, /obj/item/weapon/paper))
+	if(!istype(W, /obj/item/weapon/paper) || !user.unEquip(W))
 		return
-	user.drop_from_inventory(W)
 	var/obj/item/weapon/ducttape/tape = new(get_turf(src))
 	tape.attach(W)
 	user.put_in_hands(tape)
@@ -121,7 +119,6 @@
 		return
 
 	to_chat(user, "You remove \the [initial(name)] from [stuck].")
-	user.drop_from_inventory(src)
 	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
 	stuck = null
@@ -143,9 +140,9 @@
 			to_chat(user, "You cannot reach that from here.")// can only place stuck papers in cardinal directions, to
 			return											// reduce papers around corners issue.
 
-	user.drop_from_inventory(src)
+	if(!user.unEquip(src, source_turf))
+		return
 	playsound(src, 'sound/effects/tape.ogg',25)
-	forceMove(source_turf)
 
 	if(params)
 		var/list/mouse_control = params2list(params)

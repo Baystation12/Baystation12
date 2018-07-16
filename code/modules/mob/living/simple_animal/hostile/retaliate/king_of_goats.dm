@@ -17,7 +17,6 @@
 	response_help  = "placates"
 	response_harm   = "assaults"
 	attacktext = "brutalized"
-	turns_per_move = 10
 	health = 500
 	maxHealth = 500
 	melee_damage_lower = 35
@@ -36,15 +35,20 @@
 	maxHealth = 750
 	melee_damage_lower = 40
 	melee_damage_upper = 60
+	default_pixel_y = 5
 	var/spellscast = 0
-	var/phase3 = 0
+	var/phase3 = FALSE
 	var/datum/sound_token/boss_theme
 	var/sound_id = "goat"
+	var/special_attacks = 0
 
 //alright let's get stupid
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Initialize()
 	. = ..()
 	boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Battle.ogg', volume = 10, range = 7, falloff = 4, prefer_mute = TRUE)
+	var/matrix/M = new
+	M.Scale(1.25)
+	transform = M
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
@@ -53,6 +57,7 @@
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"
 	health = 125
+	maxHealth = 125
 	turns_per_move = 8
 	melee_damage_lower = 10
 	melee_damage_upper = 15
@@ -61,6 +66,7 @@
 	name = "master of the guard"
 	desc = "A very handsome and noble beast - the most trusted of all the king's men."
 	health = 200
+	maxHealth = 200
 	turns_per_move = 10
 	melee_damage_lower = 15
 	melee_damage_upper = 20
@@ -73,14 +79,14 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Retaliate()
 	..()
 	if(spellscast < 5)
-		if(prob(5) && turns_per_move != 25) //speed buff
+		if(prob(5) && speed == 0) //speed buff
 			spellscast++
 			visible_message("<span class='cult'>\The [src] shimmers and seems to phase in and out of reality itself!</span>")
-			turns_per_move = 25
+			speed = -1
 
 		else if(prob(5) && melee_damage_lower != 50) //damage buff
 			spellscast++
-			visible_message("<span class='cult'>\The [src]' horns glimmer with holy light!</span>")
+			visible_message("<span class='cult'>\The [src]' horns grow larger and more menacing!</span>")
 			melee_damage_lower = 50
 
 		else if(prob(5)) //stun move
@@ -100,19 +106,36 @@
 			visible_message("<span class='cult'>\The [src] disrupts nearby electrical equipment!</span>")
 			empulse(get_turf(src), 5, 2, 0)
 
+		else if(prob(5) && damtype == BRUTE && !special_attacks) //elemental attacks
+			spellscast++
+			if(prob(50))
+				visible_message("<span class='cult'>\The [src]' horns flicker with holy white flame!</span>")
+				damtype = BURN
+			else
+				visible_message("<span class='cult'>\The [src]' horns glimmer, electricity arcing between them!</span>")
+				damtype = ELECTROCUTE
+
 		else return
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Life() //begin phase 3, reset spell limit and heal
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Life()
 	..()
-	if(health <= 150 && !phase3 && spellscast == 5)
-		phase3 = 1
+	if(special_attacks >= 3 && damtype != BRUTE)
+		visible_message("<span class='cult'>The energy surrounding \the [src]'s horns dissipates.</span>")
+		damtype = BRUTE
+
+	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
+		phase3 = TRUE
 		spellscast = 0
 		health = 500
 		icon_state = "king_goat3"
 		icon_living = "king_goat3"
-		visible_message("<span class='cult'>\The [src]' wounds close with a flash and he shines even brighter than before!</span>")
+		visible_message("<span class='cult'>\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!</span>")
 		QDEL_NULL(boss_theme)
 		boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
+		var/matrix/M = new
+		M.Scale(1.5)
+		transform = M
+		default_pixel_y = 10
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
 	if(prob(85))
@@ -123,9 +146,10 @@
 		Destroy()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
-	visible_message("<span class='cult'>\The [src] shrieks as the seal on his power breaks and his wool sheds off!</span>")
 	QDEL_NULL(boss_theme)
-	new /obj/item/weapon/towel/fleece(src.loc)
+	if(phase3)
+		visible_message("<span class='cult'>\The [src] shrieks as the seal on his power breaks and his wool sheds off!</span>")
+		new /obj/item/weapon/towel/fleece(src.loc)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/death()
 	..()
@@ -134,3 +158,15 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Destroy()
 	QDEL_NULL(boss_theme)
 	. = ..()
+
+/mob/living/simple_animal/hostile/retaliate/goat/king/UnarmedAttack(mob/living/L)
+	..()
+	if(prob(5))
+		L.Weaken(0.5)
+		L.confused += 1
+		visible_message("<span class='warning'>\The [L] is bowled over by the impact of [src]'s attack!</span>")
+
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/UnarmedAttack(mob/living/L)
+	..()
+	if(damtype != BRUTE)
+		special_attacks++

@@ -19,11 +19,9 @@
 		underlays += syringe.filling
 
 /obj/item/weapon/syringe_cartridge/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
+	if(istype(I, /obj/item/weapon/reagent_containers/syringe) && user.unEquip(I, src))
 		syringe = I
 		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
-		user.remove_from_mob(syringe)
-		syringe.loc = src
 		sharp = 1
 		name = "syringe dart"
 		update_icon()
@@ -123,8 +121,8 @@
 		if(darts.len >= max_darts)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
-		user.remove_from_mob(C)
-		C.loc = src
+		if(!user.unEquip(C, src))
+			return
 		darts += C //add to the end
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 	else

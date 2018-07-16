@@ -407,7 +407,7 @@
 	new /obj/item/clothing/head/helmet/tactical(src)
 	new /obj/item/clothing/mask/balaclava/tactical(src)
 	new /obj/item/clothing/glasses/tacgoggles(src)
-	new /obj/item/weapon/storage/belt/security/tactical(src)
+	new /obj/item/weapon/storage/belt/holster/security/tactical(src)
 	new /obj/item/clothing/shoes/tactical(src)
 	new /obj/item/clothing/gloves/tactical(src)
 	return

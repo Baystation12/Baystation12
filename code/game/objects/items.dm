@@ -29,7 +29,7 @@
 
 	var/datum/action/item_action/action = null
 	var/action_button_name //It is also the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. If it's not set, there'll be no button.
-	var/action_button_is_hands_free = 0 //If 1, bypass the restrained, lying, and stunned checks action buttons normally test for
+	var/default_action_type = /datum/action/item_action // Specify the default type and behavior of the action button for this atom.
 
 	//This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
 	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
@@ -554,7 +554,7 @@ var/list/global/slot_flags_enumeration = list(
 			if(prob(50))
 				if(M.stat != 2)
 					to_chat(M, "<span class='warning'>You drop what you're holding and clutch at your eyes!</span>")
-					M.drop_item()
+					M.unequip_item()
 				M.eye_blurry += 10
 				M.Paralyse(1)
 				M.Weaken(4)
@@ -563,7 +563,7 @@ var/list/global/slot_flags_enumeration = list(
 					to_chat(M, "<span class='warning'>You go blind!</span>")
 
 		var/obj/item/organ/external/affecting = H.get_organ(eyes.parent_organ)
-		affecting.take_damage(7)
+		affecting.take_external_damage(7)
 	else
 		M.take_organ_damage(7)
 	M.eye_blurry += rand(3,4)

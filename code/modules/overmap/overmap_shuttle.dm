@@ -8,6 +8,8 @@
 	var/list/obj/structure/fuel_port/fuel_ports //the fuel ports of the shuttle (but usually just one)
 
 	category = /datum/shuttle/autodock/overmap
+	var/skill_needed = SKILL_BASIC
+	var/operator_skill = SKILL_MIN
 
 /datum/shuttle/autodock/overmap/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
 	..(_name, start_waypoint)
@@ -42,10 +44,21 @@
 /datum/shuttle/autodock/overmap/can_force()
 	return ..() && can_go()
 
+/datum/shuttle/autodock/overmap/get_travel_time()
+	var/distance_mod = get_dist(waypoint_sector(current_location),waypoint_sector(next_location))
+	var/skill_mod = 0.2*(skill_needed - operator_skill)
+	return move_time * (1 + distance_mod + skill_mod)
+
+/datum/shuttle/autodock/overmap/process_launch()
+	if(prob(10*max(0, operator_skill - skill_needed)))
+		var/places = get_possible_destinations()
+		var/place = pick(places)
+		set_destination(places[place])
+	..()
+
 /datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
 	if(A != current_location)
 		next_location = A
-		move_time = initial(move_time) * (1 + get_dist(waypoint_sector(current_location),waypoint_sector(next_location)))
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
@@ -143,6 +156,5 @@
 			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
 			return
 		if(contents.len == 0)
-			user.drop_from_inventory(W)
-			W.forceMove(src)
+			user.unEquip(W, src)
 	update_icon()

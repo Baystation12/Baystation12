@@ -18,11 +18,10 @@
 
 	if(istype(W, /obj/item/weapon/forensics/swab)|| istype(W, /obj/item/weapon/sample/fibers) || istype(W, /obj/item/weapon/sample/print))
 		to_chat(user, "<span class='notice'>You insert \the [W] into the microscope.</span>")
-		user.unEquip(W)
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		sample = W
 		update_icon()
-		return
 
 /obj/machinery/microscope/attack_hand(mob/user)
 

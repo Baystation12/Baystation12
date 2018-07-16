@@ -145,7 +145,7 @@
 
 /decl/hierarchy/supply_pack/security/holster
 	name = "Misc - Holster crate"
-	contains = list(/obj/item/clothing/accessory/holster/hip = 4)
+	contains = list(/obj/item/clothing/accessory/storage/holster/hip = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Holster crate"
@@ -153,7 +153,7 @@
 
 /decl/hierarchy/supply_pack/security/securityextragear
 	name = "Misc - Security equipment"
-	contains = list(/obj/item/weapon/storage/belt/security = 2,
+	contains = list(/obj/item/weapon/storage/belt/holster/security = 2,
 					/obj/item/device/radio/headset/headset_sec = 2,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 2,
 					/obj/item/taperoll/police = 2,
@@ -171,7 +171,7 @@
 	contains = list(/obj/item/device/radio/headset/heads/cos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
-					/obj/item/weapon/storage/belt/security,
+					/obj/item/weapon/storage/belt/holster/security,
 					/obj/item/device/hailer,
 					/obj/item/device/holowarrant,
 					/obj/item/clothing/gloves/thick,
@@ -188,17 +188,6 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Practice laser carbine crate"
 	access = access_solgov_crew
-
-/decl/hierarchy/supply_pack/security/pistolammorubber //overriding standard pack
-	name = "Ammo - Assorted Non-Lethal, Pistol"
-	contains = list(/obj/item/ammo_magazine/c45m/rubber = 2, /obj/item/ammo_magazine/c45m/flash = 2, /obj/item/ammo_magazine/c44/rubber = 2)
-	cost = 25
-	containername = "\improper Non-lethal ammunition crate"
-	access = access_heads //only heads get these
-
-/decl/hierarchy/supply_pack/security/pistolammo //overriding standard pack
-	cost = 30
-	access = access_heads
 
 /decl/hierarchy/supply_pack/security/magnum_ammo
 	name = "Ammo - .44 Magnum"

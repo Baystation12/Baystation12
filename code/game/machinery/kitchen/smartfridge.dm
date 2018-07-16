@@ -132,7 +132,7 @@
 	icon_off = "smartfridge_food-off"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks))
+	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks) || istype(O,/obj/item/weapon/material/kitchen/utensil))
 		return 1
 
 /obj/machinery/smartfridge/drying_rack
@@ -208,7 +208,7 @@
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, icon_panel)
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 		return
 
 	if(isMultitool(O) || isWirecutter(O))
@@ -221,7 +221,7 @@
 		return
 
 	if(accept_check(O))
-		if(!user.remove_from_mob(O))
+		if(!user.unEquip(O))
 			return
 		stock_item(O)
 		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -262,7 +262,7 @@
 
 /obj/machinery/smartfridge/proc/stock(var/datum/stored_items/I, var/obj/item/O)
 	I.add_product(O)
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
 	attack_hand(user)
@@ -297,7 +297,7 @@
 	if(items.len > 0)
 		data["contents"] = items
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "smartfridge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -307,7 +307,7 @@
 	if(..()) return 0
 
 	var/mob/user = usr
-	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
+	var/datum/nanoui/ui = SSnano.get_open_ui(user, src, "main")
 
 	if(href_list["close"])
 		user.unset_machine()

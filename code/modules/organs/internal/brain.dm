@@ -37,12 +37,6 @@
 		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
 		tmp_owner = null
 
-/obj/item/organ/internal/brain/xeno
-	name = "thinkpan"
-	desc = "It looks kind of like an enormous wad of purple bubblegum."
-	icon = 'icons/mob/alien.dmi'
-	icon_state = "chitin"
-
 /obj/item/organ/internal/brain/robotize()
 	. = ..()
 	icon_state = "brain-prosthetic"
@@ -122,30 +116,6 @@
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
 
-/obj/item/organ/internal/brain/slime
-	name = "slime core"
-	desc = "A complex, organic knot of jelly and crystalline particles."
-	icon = 'icons/mob/slimes.dmi'
-	icon_state = "green slime extract"
-
-/obj/item/organ/internal/brain/slime/can_recover()
-	return 0
-
-/obj/item/organ/internal/brain/golem
-	name = "chem"
-	desc = "A tightly furled roll of paper, covered with indecipherable runes."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "scroll"
-
-/obj/item/organ/internal/brain/golem/can_recover()
-	return 0
-
-/obj/item/organ/internal/brain/starlight
-	name = "essence of fire"
-	desc = "A fancy name for ash. Still, it does look a bit different from the regular stuff."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "ash"
-
 /obj/item/organ/internal/brain/proc/get_current_damage_threshold()
 	return round(damage / damage_threshold_value)
 
@@ -195,12 +165,12 @@
 						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
 					damprob = owner.chem_effects[CE_STABLE] ? 30 : 60
 					if(!past_damage_threshold(2) && prob(damprob))
-						take_damage(1)
+						take_internal_damage(1)
 				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 40 : 80
 					if(!past_damage_threshold(4) && prob(damprob))
-						take_damage(1)
+						take_internal_damage(1)
 					if(!owner.paralysis && prob(10))
 						owner.Paralyse(rand(1,3))
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
@@ -208,7 +178,7 @@
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 60 : 100
 					if(!past_damage_threshold(6) && prob(damprob))
-						take_damage(1)
+						take_internal_damage(1)
 					if(!owner.paralysis && prob(15))
 						owner.Paralyse(3,5)
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
@@ -216,12 +186,12 @@
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 80 : 100
 					if(prob(damprob))
-						take_damage(1)
+						take_internal_damage(1)
 					if(prob(damprob))
-						take_damage(1)
+						take_internal_damage(1)
 	..()
 
-/obj/item/organ/internal/brain/take_damage(var/damage)
+/obj/item/organ/internal/brain/take_internal_damage(var/damage, var/silent)
 	set waitfor = 0
 	..()
 	if(damage >= 10) //This probably won't be triggered by oxyloss or mercury. Probably.
@@ -267,7 +237,7 @@
 		owner.eye_blurry = 10
 	if(damage >= 0.5*max_damage && prob(1) && owner.get_active_hand())
 		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
-		owner.drop_item()
+		owner.unequip_item()
 	if(damage >= 0.6*max_damage)
 		owner.slurring = max(owner.slurring, 2)
 	if(is_broken())

@@ -1,7 +1,7 @@
 /obj/aura/personal_shield
 	name = "personal shield"
 
-/obj/aura/personal_shield/New(var/mob/living/user)
+/obj/aura/personal_shield/added_to(var/mob/living/L)
 	..()
 	playsound(user,'sound/weapons/flash.ogg',35,1)
 	to_chat(user,"<span class='notice'>You feel your body prickle as \the [src] comes online.</span>")
@@ -12,10 +12,10 @@
 	playsound(user,'sound/effects/basscannon.ogg',35,1)
 	return AURA_FALSE|AURA_CANCEL
 
-/obj/aura/personal_shield/Destroy()
+/obj/aura/personal_shield/removed()
 	to_chat(user,"<span class='warning'>\The [src] goes offline!</span>")
 	playsound(user,'sound/mecha/internaldmgalarm.ogg',25,1)
-	return ..()
+	..()
 
 /obj/aura/personal_shield/device
 	var/obj/item/device/personal_shield/shield

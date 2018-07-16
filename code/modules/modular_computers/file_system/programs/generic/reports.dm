@@ -36,7 +36,7 @@
 				L += list(M)
 			data["reports"] = L
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "reports.tmpl", name, 700, 800, state = state)
 		ui.auto_update_layout = 1

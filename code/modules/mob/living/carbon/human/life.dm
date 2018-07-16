@@ -180,7 +180,7 @@
 	..()
 	if(stat != DEAD)
 		if ((disabilities & COUGHING) && prob(5) && paralysis <= 1)
-			drop_item()
+			unequip_item()
 			spawn(0)
 				emote("cough")
 
@@ -627,8 +627,6 @@
 					if(stat == CONSCIOUS)
 						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
 					Sleeping(5)
-
-		confused = max(0, confused - 1)
 
 		// If you're dirty, your gloves will become dirty, too.
 		if(gloves && germ_level > gloves.germ_level && prob(10))
@@ -1104,7 +1102,7 @@
 
 	for(var/obj/item/organ/external/E in organs)
 		if(!(E.body_part & protected_limbs) && prob(20))
-			E.take_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = fire)
+			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = fire)
 
 /mob/living/carbon/human/rejuvenate()
 	restore_blood()

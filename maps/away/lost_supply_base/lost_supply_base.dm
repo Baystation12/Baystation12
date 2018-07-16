@@ -7,7 +7,7 @@
 	icon_state = "object"
 	known = 0
 
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_lost_supply_base_1",
 		"nav_lost_supply_base_2",
 		"nav_lost_supply_base_3",

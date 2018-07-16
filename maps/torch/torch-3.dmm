@@ -641,6 +641,10 @@
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
 /obj/structure/catwalk,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
 /turf/simulated/floor/plating,
 /area/storage/medical)
 "bn" = (
@@ -1198,7 +1202,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Medical Storage Maintenance";
-	req_access = list(5)
+	req_access = list(5,12)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/medical)
@@ -1450,6 +1454,7 @@
 "cY" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
+	req_access = list(12);
 	req_one_access = list(48,65)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -2038,6 +2043,7 @@
 "ef" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/storage/expedition)
 "eg" = (
@@ -2222,6 +2228,7 @@
 "ev" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "ew" = (
@@ -2805,6 +2812,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
+	req_access = list(12);
 	req_one_access = list(48,65)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -3011,7 +3019,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Auxiliary Docking Port";
-	req_access = list(13)
+	req_access = list(12,13)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -3316,14 +3324,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/substation/seconddeck)
 "gG" = (
-/obj/structure/bed/chair,
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "gH" = (
-/obj/structure/bed/chair,
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "gI" = (
@@ -3677,6 +3685,7 @@
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/industrial/warning,
+/obj/structure/catwalk,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
 "hp" = (
@@ -4229,23 +4238,29 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/aftport)
 "io" = (
-/obj/structure/bed/chair{
+/obj/machinery/light/small,
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "ip" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/machinery/status_display{
 	pixel_y = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "iq" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -4380,7 +4395,8 @@
 /area/maintenance/seconddeck/central)
 "iE" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -5156,6 +5172,7 @@
 "kg" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
+	req_access = list(12);
 	req_one_access = list(48,65)
 	},
 /obj/structure/cable{
@@ -5186,7 +5203,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Second Deck Teleporter";
-	req_access = list(17)
+	req_access = list(12,17)
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/teleporter/seconddeck)
@@ -5376,7 +5393,7 @@
 "kC" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Second Deck Teleporter";
-	req_access = list(17)
+	req_access = list(12,17)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/corner_techfloor_grid{
@@ -5449,7 +5466,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -6234,7 +6252,7 @@
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_monitoring)
 "mu" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/bed/chair/padded/yellow,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_monitoring)
 "mv" = (
@@ -7058,7 +7076,8 @@
 /turf/simulated/floor/plating,
 /area/engineering/engine_monitoring)
 "ov" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -7170,6 +7189,7 @@
 "pc" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/maintenance{
+	req_access = list(12);
 	req_one_access = list(14,23)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -7242,9 +7262,7 @@
 "pl" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/maintenance{
-	req_one_access = newlist()
-	},
+/obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/foreport)
 "pm" = (
@@ -7254,9 +7272,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/maintenance{
-	req_one_access = newlist()
-	},
+/obj/machinery/door/airlock/maintenance,
 /obj/structure/catwalk,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/forestarboard)
@@ -7889,15 +7905,17 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/vacant/prototype/control)
 "ql" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
 /obj/machinery/light/small,
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
@@ -8547,7 +8565,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = list(14)
+	req_access = list(12,14)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/foreport)
@@ -9247,6 +9265,7 @@
 /obj/machinery/status_display{
 	pixel_x = -32
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/foyer)
 "tw" = (
@@ -9544,6 +9563,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/foyer)
 "uk" = (
@@ -10470,9 +10490,6 @@
 /turf/simulated/floor/plating,
 /area/engineering/engine_room)
 "wh" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
@@ -10483,24 +10500,29 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = 32
 	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "wi" = (
-/obj/structure/bed/chair,
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wj" = (
-/obj/structure/bed/chair,
 /obj/machinery/status_display{
 	pixel_y = 32
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wk" = (
-/obj/structure/bed/chair,
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wl" = (
@@ -11012,14 +11034,18 @@
 	},
 /area/shuttle/escape_pod10/station)
 "xW" = (
-/obj/structure/bed/chair{
+/obj/machinery/light/small,
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "xX" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -11635,8 +11661,7 @@
 "zJ" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Incinerator";
-	req_access = list(12);
-	req_one_access = newlist()
+	req_access = list(12)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -12149,7 +12174,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Storage Maintenance";
-	req_access = list(31)
+	req_access = list(12,31)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/cargo)
@@ -12348,6 +12373,7 @@
 "Bs" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/storage/cargo)
 "Bt" = (
@@ -12513,6 +12539,7 @@
 "BJ" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "BK" = (
@@ -12725,7 +12752,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Research Storage Maintenance";
-	req_access = list(47)
+	req_access = list(12,47)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/research)
@@ -13932,6 +13959,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/foyer)
 "EP" = (
@@ -14562,9 +14590,6 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/structure/bed/chair/office/dark{
-	dir = 4
-	},
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2";
@@ -14573,6 +14598,10 @@
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
+	},
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/vacant/prototype/control)
@@ -14679,9 +14708,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/catwalk,
-/obj/machinery/door/airlock/maintenance{
-	req_one_access = newlist()
-	},
+/obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/foreport)
 "Hn" = (
@@ -14725,6 +14752,14 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/storage/cargo)
+"HE" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "HR" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 10
@@ -15389,6 +15424,10 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos)
+"LL" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "LY" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -16211,11 +16250,18 @@
 	dir = 4;
 	pixel_x = -32
 	},
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/foyer)
 "PC" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/disposal)
+"PD" = (
+/obj/structure/catwalk,
+/obj/structure/table/rack,
+/obj/structure/bedsheetbin,
+/turf/simulated/floor/plating,
+/area/storage/medical)
 "PK" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Fuel Bay";
@@ -16620,7 +16666,8 @@
 /turf/simulated/wall/ocp_wall,
 /area/vacant/prototype/engine)
 "Sf" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/padded/yellow{
+	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -16925,6 +16972,22 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/locker_room)
+"TY" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "Ub" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -33530,7 +33593,7 @@ ix
 ix
 pc
 pe
-pe
+HE
 pe
 pl
 Zl
@@ -34944,7 +35007,7 @@ iy
 jr
 fp
 nf
-ni
+LL
 jV
 jV
 jV
@@ -36765,7 +36828,7 @@ ph
 ph
 ph
 ph
-ph
+TY
 Lm
 Pm
 Pm
@@ -38365,8 +38428,8 @@ aa
 aB
 bn
 bq
-bq
 db
+PD
 ee
 Ge
 eR

@@ -30,8 +30,8 @@
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
 		if(D.z in zlevels)
 			var/shuttleside = 0
-			for(var/sname in shuttle_controller.shuttles) //do not touch shuttle-side ones
-				var/datum/shuttle/autodock/S = shuttle_controller.shuttles[sname]
+			for(var/sname in SSshuttle.shuttles) //do not touch shuttle-side ones
+				var/datum/shuttle/autodock/S = SSshuttle.shuttles[sname]
 				if(istype(S) && S.shuttle_docking_controller)
 					if(S.shuttle_docking_controller.id_tag == D.docking_program.id_tag)
 						shuttleside = 1
@@ -55,7 +55,7 @@
 				"codes" = P.docking_codes ? P.docking_codes : "Unset"
 				)))
 	data["docks"] = docks
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "docking.tmpl", name, 600, 450, state = state)
 		ui.set_auto_update(1)

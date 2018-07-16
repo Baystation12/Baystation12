@@ -35,7 +35,7 @@
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/tacgoggles,
-					/obj/item/weapon/storage/belt/security/tactical,
+					/obj/item/weapon/storage/belt/holster/security/tactical,
 					/obj/item/clothing/shoes/tactical,
 					/obj/item/clothing/gloves/tactical)
 	cost = 45
@@ -223,6 +223,15 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper 9mm rubber ammunition crate"
+	access = access_security
+
+
+/decl/hierarchy/supply_pack/security/pdwammoflash
+	name = "Ammunition - 9mm top mounted flash"
+	contains = list(/obj/item/ammo_magazine/mc9mmt/flash = 4)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper 9mm stun ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/pdwammopractice

@@ -2,6 +2,9 @@
 	name = "lush exoplanet"
 	desc = "Planet with abundant flora and fauna."
 	color = "#538224"
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+									  /datum/map_template/ruin/exoplanet/hydrobase,
+									  /datum/map_template/ruin/exoplanet/marooned)
 
 	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
 							 /datum/map_template/ruin/exoplanet/oasis,
@@ -51,7 +54,7 @@
 	..()
 	if(!L.ear_deaf && L.client && !L.client.ambience_playing)
 		L.client.ambience_playing = 1
-		L.playsound_local(get_turf(L),sound('sound/ambience/jungle.ogg', repeat = 1, wait = 0, volume = 25, channel = 2))
+		L.playsound_local(get_turf(L),sound('sound/ambience/jungle.ogg', repeat = 1, wait = 0, volume = 25, channel = GLOB.ambience_sound_channel))
 
 /datum/random_map/noise/exoplanet/grass
 	descriptor = "grass exoplanet"

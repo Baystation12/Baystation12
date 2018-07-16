@@ -47,6 +47,7 @@
 /mob/Initialize()
 	. = ..()
 	skillset = new skillset(src)
+	move_intent = decls_repository.get_decl(move_intent)
 	START_PROCESSING(SSmobs, src)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -89,12 +90,19 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		var/mob_message = message
+
+		if(isghost(M))
+			if(ghost_skip_message(M))
+				continue
+			mob_message = add_ghost_track(mob_message, M)
+
 		if(self_message && M == src)
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
 		if(!is_invisible_to(M) || narrate)
-			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
 		if(blind_message)
@@ -103,13 +111,6 @@
 	//Multiz, have shadow do same
 	if(shadow)
 		shadow.visible_message(message, self_message, blind_message)
-
-// Returns an amount of power drawn from the object (-1 if it's not viable).
-// If drain_check is set it will not actually drain power, just return a value.
-// If surge is set, it will destroy/damage the recipient and not return any power.
-// Not sure where to define this, so it can sit here for the rest of time.
-/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
-	return -1
 
 // Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
@@ -125,16 +126,56 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		var/mob_message = message
+
+		if(isghost(M))
+			if(ghost_skip_message(M))
+				continue
+			mob_message = add_ghost_track(mob_message, M)
+
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else if(M.see_invisible >= invisibility || narrate) // Cannot view the invisible
-			M.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+			M.show_message(mob_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else
-			M.show_message(message, AUDIBLE_MESSAGE)
+			M.show_message(mob_message, AUDIBLE_MESSAGE)
 
 	for(var/o in objs)
 		var/obj/O = o
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+
+/mob/proc/add_ghost_track(var/message, var/mob/observer/ghost/M)
+	ASSERT(istype(M))
+
+	var/remote = ""
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+		remote = "\[R\]"
+
+	var/speaker_name = name
+
+	if(speaker_name != real_name && real_name)
+		speaker_name = "[real_name]/([speaker_name])"
+
+	speaker_name = speaker_name
+
+	var/track = "([ghost_follow_link(src, M)])"
+
+	message = track + remote + " " + speaker_name + ": " + message
+	return message
+
+/mob/proc/ghost_skip_message(var/mob/observer/ghost/M)
+	ASSERT(istype(M))
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+		if(!client)
+			return TRUE
+	return FALSE
+
+// Returns an amount of power drawn from the object (-1 if it's not viable).
+// If drain_check is set it will not actually drain power, just return a value.
+// If surge is set, it will destroy/damage the recipient and not return any power.
+// Not sure where to define this, so it can sit here for the rest of time.
+/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
+	return -1
 
 /mob/proc/findname(msg)
 	for(var/mob/M in SSmobs.mob_list)
@@ -147,6 +188,12 @@
 	if(istype(loc, /turf))
 		var/turf/T = loc
 		. += T.movement_delay
+
+	if ((drowsyness > 0) && !MOVING_DELIBERATELY(src))
+		. += 6
+	if(lying) //Crawling, it's slower
+		. += 8 + (weakened * 2)
+	. += move_intent.move_delay
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
 //How much the stuff the mob is pulling contributes to its movement delay.
@@ -740,7 +787,7 @@
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	setMoveCooldown(movement_delay())
+	SetMoveCooldown(movement_delay())
 	return 1
 
 
@@ -928,7 +975,7 @@
 			wound.embedded_objects -= selection
 
 		H.shock_stage+=20
-		affected.take_damage((selection.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
+		affected.take_external_damage((selection.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
 
 		if(prob(selection.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50, affecting = affected)
@@ -963,8 +1010,10 @@
 
 	return 0
 
+// A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
+// It should not use both.
 /mob/update_icon()
-	return
+	return update_icons()
 
 /mob/verb/face_direction()
 

@@ -27,9 +27,9 @@
 
 	var/obj/item/weapon/forensics/swab/swab = W
 	if(istype(swab) && swab.is_used())
-		user.unEquip(W)
+		if(!user.unEquip(W, src))
+			return
 		src.bloodsamp = swab
-		swab.loc = src
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")
@@ -45,7 +45,7 @@
 	data["bloodsamp_desc"] = (bloodsamp ? (bloodsamp.desc ? bloodsamp.desc : "No information on record.") : "")
 	data["lidstate"] = closed
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		ui = new(user, src, ui_key, "dnaforensics.tmpl", "QuikScan DNA Analyzer", 540, 326)
 		ui.set_initial_data(data)

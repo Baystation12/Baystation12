@@ -41,6 +41,6 @@
 
 /datum/map/overmap_example/setup_map()
 	..()
-	GLOB.traders += new /datum/trader/xeno_shop
-	GLOB.traders += new /datum/trader/medical
-	GLOB.traders += new /datum/trader/mining
+	SStrade.traders += new /datum/trader/xeno_shop
+	SStrade.traders += new /datum/trader/medical
+	SStrade.traders += new /datum/trader/mining

@@ -129,7 +129,7 @@ default behaviour is:
 		spawn(0)
 			..()
 			if (!istype(AM, /atom/movable) || AM.anchored)
-				if(confused && prob(50) && m_intent==M_RUN)
+				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
 					Weaken(2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
@@ -618,8 +618,8 @@ default behaviour is:
 			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
-	else if(istype(H.loc,/obj/item/clothing/accessory/holster))
-		var/obj/item/clothing/accessory/holster/holster = H.loc
+	else if(istype(H.loc,/obj/item/clothing/accessory/storage/holster) || istype(H.loc,/obj/item/weapon/storage/belt/holster))
+		var/datum/extension/holster/holster = get_extension(src, /datum/extension/holster)
 		if(holster.holstered == H)
 			holster.clear_holster()
 		to_chat(src, "<span class='warning'>You extricate yourself from \the [holster].</span>")
@@ -681,8 +681,20 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
+/mob/living/carbon/human/canUnEquip(obj/item/I)
+	if(!..())
+		return
+	if(I in internal_organs)
+		return
+	if(I in organs)
+		return
+	return 1
+
+//Organs should not be removed via inventory procs.
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
+		return
+	if(W in organs)
 		return
 	. = ..()
 

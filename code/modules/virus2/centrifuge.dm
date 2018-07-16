@@ -18,13 +18,12 @@
 		if(sample)
 			to_chat(user, "\The [src] is already loaded.")
 			return
-
+		if(!user.unEquip(O, src))
+			return
 		sample = O
-		user.drop_item()
-		O.forceMove(src)
 
 		user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 
 	src.attack_hand(user)
 
@@ -72,7 +71,7 @@
 					data["antibodies"] = antigens2string(A.data["antibodies"], none=null)
 				data["is_antibody_sample"] = 1
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "isolation_centrifuge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -97,7 +96,7 @@
 
 /obj/machinery/computer/centrifuge/OnTopic(mob/user, href_list)
 	if (href_list["close"])
-		GLOB.nanomanager.close_user_uis(user, src, "main")
+		SSnano.close_user_uis(user, src, "main")
 		return TOPIC_HANDLED
 
 	if (href_list["print"])
@@ -159,7 +158,7 @@
 	sample.reagents.add_reagent(/datum/reagent/antibodies, amt, data)
 	operator_skill = null
 
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 	update_icon()
 	ping("\The [src] pings, \"Antibody isolated.\"")
 
@@ -170,7 +169,7 @@
 	virus2 = null
 	operator_skill = null
 
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 	update_icon()
 	ping("\The [src] pings, \"Pathogen isolated.\"")
 

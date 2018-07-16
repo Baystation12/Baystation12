@@ -94,8 +94,8 @@
 		if(scanned_item)
 			to_chat(user, "<span class=warning>\The [src] already has \a [scanned_item] inside!</span>")
 			return
-		user.drop_item()
-		I.loc = src
+		if(!user.unEquip(I, src))
+			return
 		scanned_item = I
 		to_chat(user, "<span class=notice>You put \the [I] into \the [src].</span>")
 
@@ -150,7 +150,7 @@
 	data["rad_shield_on"] = rad_shield
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -198,7 +198,7 @@
 					radiation = rand() * 15 + 85
 					if(!rad_shield)
 						//irradiate nearby mobs
-						radiation_repository.radiate(src, radiation / 25)
+						SSradiation.radiate(src, radiation / 25)
 				else
 					t_left_radspike = pick(10,15,25)
 

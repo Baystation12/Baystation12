@@ -125,3 +125,8 @@
 /obj/item/device/encryptionkey/entertainment
 	name = "entertainment radio key"
 	channels = list("Entertainment" = 1)
+
+/obj/item/device/encryptionkey/headset_mining
+	name = "prospector radio encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Supply" = 1)

@@ -162,8 +162,8 @@
 		if(cell)
 			to_chat(user, "The drill already has a cell installed.")
 		else
-			user.drop_item()
-			O.loc = src
+			if(!user.unEquip(O, src))
+				return
 			cell = O
 			component_parts += O
 			to_chat(user, "You install \the [O].")

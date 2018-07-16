@@ -144,43 +144,8 @@ By design, d1 is the smallest direction and d2 is the highest
 //
 
 /obj/structure/cable/attackby(obj/item/W, mob/user)
-
-	var/turf/T = src.loc
-	if(!T.is_plating())
-		return
-
 	if(isWirecutter(W))
-		if(d1 == UP || d2 == UP)
-			to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
-			return
-
-		if(breaker_box)
-			to_chat(user, "<span class='warning'>This cable is connected to nearby breaker box. Use breaker box to interact with it.</span>")
-			return
-
-		if (shock(user, 50))
-			return
-
-		if(src.d1)	// 0-X cables are 1 unit, X-X cables are 2 units long
-			new/obj/item/stack/cable_coil(T, 2, color)
-		else
-			new/obj/item/stack/cable_coil(T, 1, color)
-
-		for(var/mob/O in viewers(src, null))
-			O.show_message("<span class='warning'>[user] cuts the cable.</span>", 1)
-
-		if(d1 == DOWN || d2 == DOWN)
-			var/turf/turf = GetBelow(src)
-			if(turf)
-				for(var/obj/structure/cable/c in turf)
-					if(c.d1 == UP || c.d2 == UP)
-						qdel(c)
-
-		investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
-
-		qdel(src)
-		return
-
+		cut_wire(W, user)
 
 	else if(isCoil(W))
 		var/obj/item/stack/cable_coil/coil = W
@@ -199,11 +164,56 @@ By design, d1 is the smallest direction and d2 is the highest
 
 		shock(user, 5, 0.2)
 
-	else
-		if (W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
-			shock(user, 50, 0.7)
+
+	else if(W.edge)
+
+		var/delay_holder
+
+		if(W.force < 5)
+			visible_message("<span class='warning'>[user] starts sawing away roughly at the cable with \the [W].</span>")
+			delay_holder = 8 SECONDS
+		else
+			visible_message("<span class='warning'>[user] begins to cut through the cable with \the [W].</span>")
+			delay_holder = 3 SECONDS
+
+		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src))
+			cut_wire(W, user)
+			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
+				shock(user, 66, 0.7)
+		else
+			visible_message("<span class='warning'>[user] stops cutting before any damage is done.</span>")
 
 	src.add_fingerprint(user)
+
+/obj/structure/cable/proc/cut_wire(obj/item/W, mob/user)
+	var/turf/T = get_turf(src)
+	if(!T || !T.is_plating())
+		return
+
+	if(d1 == UP || d2 == UP)
+		to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
+		return
+
+	if(breaker_box)
+		to_chat(user, "<span class='warning'>This cable is connected to a nearby breaker box. Use the breaker box to interact with it.</span>")
+		return
+
+	if (shock(user, 50))
+		return
+
+	new/obj/item/stack/cable_coil(T, (src.d1 ? 2 : 1), color)
+
+	visible_message("<span class='warning'>[user] cuts the cable.</span>")
+
+	if(HasBelow(z))
+		for(var/turf/turf in GetBelow(src))
+			for(var/obj/structure/cable/c in turf)
+				if(c.d1 == UP || c.d2 == UP)
+					qdel(c)
+
+	investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
+
+	qdel(src)
 
 // shock the user with probability prb
 /obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1.0)
@@ -605,7 +615,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
 	if(!istype(S))
 		return
-	if(!can_merge(S))
+	if(!(can_merge(S) || S.can_merge(src)))
 		return
 
 	..()

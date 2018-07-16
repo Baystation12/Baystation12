@@ -70,7 +70,7 @@
 		return ..()
 	if(isrobot(user))
 		return
-	user.drop_item()
+	user.unequip_item()
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
 	return
@@ -119,11 +119,9 @@
 		return
 
 	// Placing stuff on tables
-	if(user.drop_from_inventory(W, src.loc))
+	if(user.unEquip(W, src.loc))
 		auto_align(W, click_params)
 		return 1
-
-	return
 
 /*
 Automatic alignment of items to an invisible grid, defined by CELLS and CELLSIZE, defined in code/__defines/misc.dm.

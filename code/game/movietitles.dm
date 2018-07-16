@@ -24,8 +24,8 @@ client
 		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
 
 		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
-			sound_to(mob, sound(null, channel = 1))
-			sound_to(mob, sound('sound/music/THUNDERDOME.ogg', wait = 0, volume = 40, channel = 1))
+			sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
+			sound_to(mob, sound('sound/music/THUNDERDOME.ogg', wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
 	sleep(50)
 	var/list/_credits = credits
 	verbs += /client/proc/ClearCredits
@@ -48,7 +48,7 @@ client
 	QDEL_NULL_LIST(credits)
 	mob.clear_fullscreen("fishbed")
 	mob.clear_fullscreen("fadeout")
-	sound_to(mob, sound(null, channel = 1))
+	sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
 
 /obj/screen/credit
 	icon_state = "blank"

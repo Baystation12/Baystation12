@@ -20,9 +20,6 @@
 	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
 	var/blood_mask =      'icons/mob/human_races/species/human/blood_mask.dmi'
 
-	var/prone_icon                            // If set, draws this from icobase when mob is prone.
-	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
-
 	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
 	var/flesh_color = "#ffc896"               // Pink.
 	var/blood_oxy = 1
@@ -35,9 +32,6 @@
 
 	var/list/hair_styles
 	var/list/facial_hair_styles
-
-	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_face.dmi'
 
 	var/organs_icon		//species specific internal organs icons
 
@@ -196,6 +190,8 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
+
 	// The list for the bioprinter to print based on species
 	var/list/bioprint_products = list(
 		BP_HEART    = list(/obj/item/organ/internal/heart,      25),
@@ -255,10 +251,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	you use the _str version of the slot.
 */
 
-/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
-	return
-
 /datum/species/New()
+
 	if(hud_type)
 		hud = new hud_type()
 	else
@@ -274,6 +268,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+	// Modify organ lists if necessary.
+	if(islist(override_limb_types))
+		for(var/ltag in override_limb_types)
+			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
 	//Build organ descriptors
 	for(var/limb_type in has_limbs)
@@ -567,8 +566,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 		//Actually disarm them
 		for(var/obj/item/I in holding)
-			if(I)
-				target.drop_from_inventory(I)
+			if(I && target.unEquip(I))
 				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return

@@ -40,13 +40,9 @@
 			else if (cig.lit == 0)
 				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
 
-		user.remove_from_mob(W, src)
-
-		visible_message("[user] places [W] in [src].")
-		user.update_inv_l_hand()
-		user.update_inv_r_hand()
-		add_fingerprint(user)
-		update_icon()
+		if(user.unEquip(W, src))
+			visible_message("[user] places [W] in [src].")
+			update_icon()
 	else
 		..()
 		health = max(0,health - W.force)

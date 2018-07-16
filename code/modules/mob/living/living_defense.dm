@@ -263,7 +263,7 @@
 	adjustBruteLoss(damage)
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
-	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
+	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()
 	return 1
@@ -340,12 +340,9 @@
 	for(var/obj/item/I in src)
 		if(I.action_button_name)
 			if(!I.action)
-				if(I.action_button_is_hands_free)
-					I.action = new/datum/action/item_action/hands_free
-				else
-					I.action = new/datum/action/item_action
-				I.action.name = I.action_button_name
-				I.action.target = I
+				I.action = new I.default_action_type
+			I.action.name = I.action_button_name
+			I.action.SetTarget(I)
 			I.action.Grant(src)
 	return
 

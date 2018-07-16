@@ -38,12 +38,7 @@
 	preview_icon = 'icons/mob/human_races/species/nabber/preview.dmi'
 	blood_mask = 'icons/mob/human_races/species/nabber/blood_mask.dmi'
 
-	eye_icon = "eyes_nabber"
-	eye_icon_location = 'icons/mob/nabber_face.dmi'
-
 	limb_blend = ICON_MULTIPLY
-
-	has_floating_eyes = 1
 
 	darksight_range = 8
 	darksight_tint = DARKTINT_GOOD
@@ -67,7 +62,7 @@
 	heat_level_2 = 440 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_CAN_NAB | SPECIES_FLAG_NO_BLOCK | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NEED_DIRECT_ABSORB
+	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_BLOCK | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NEED_DIRECT_ABSORB
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_SKIN_TONE_NORMAL | HAS_BASE_SKIN_COLOURS
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
@@ -131,34 +126,9 @@
 
 	unarmed_types = list(/datum/unarmed_attack/nabber)
 
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/nab,
-		/mob/living/carbon/human/proc/active_camo,
-		/mob/living/carbon/human/proc/switch_stance,
-		/mob/living/carbon/human/proc/threat_display
-		)
-
 	equip_adjust = list(
 		slot_back_str = list(NORTH = list("x" = 0, "y" = 7), EAST = list("x" = 0, "y" = 8), SOUTH = list("x" = 0, "y" = 8), WEST = list("x" = 0, "y" = 8))
 			)
-
-/datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
-	var/obj/item/organ/internal/eyes/nabber/O = H.internal_organs_by_name[BP_EYES]
-	if(!O || !istype(O))
-		return
-	var/store_string = "[O.eyes_shielded] [H.is_cloaked()] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"
-	var/image/eye_overlay = eye_overlays[store_string]
-	if(!eye_overlay)
-		var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
-		I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
-		if(O.eyes_shielded)
-			I.Blend(rgb(125, 125, 125), ICON_MULTIPLY)
-		eye_overlay = image(I)
-		if(H.is_cloaked())
-			eye_overlay.alpha = 100
-
-		eye_overlays[store_string] = eye_overlay
-	return(eye_overlay)
 
 /datum/species/nabber/get_blood_name()
 	return "haemolymph"
@@ -201,9 +171,9 @@
 		var/pressure = mixture.return_pressure()
 		if(pressure > 50)
 			if(istype(landing, /turf/simulated/open))
-				H.visible_message("\The [src] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
+				H.visible_message("\The [H] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
 			else
-				H.visible_message("\The [src] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")
+				H.visible_message("\The [H] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")
 
 			return TRUE
 
@@ -306,5 +276,73 @@
 /datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
 	H.pulling_punches = TRUE
-	H.nabbing = FALSE
 
+/datum/species/nabber/has_fine_manipulation(var/mob/living/carbon/human/H)
+	return (..() && (H && H.pulling_punches))
+
+/datum/species/nabber/attempt_grab(var/mob/living/carbon/human/grabber, var/mob/living/target)
+
+	if(grabber.pulling_punches)
+		return ..()
+	grabber.unEquip(grabber.l_hand)
+	grabber.unEquip(grabber.r_hand)
+	to_chat(grabber, "<span class='warning'>You drop everything as you spring out to nab \the [target]!.</span>")
+	playsound(grabber.loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
+
+	if(!grabber.is_cloaked())
+		return ..(grabber, target, GRAB_NAB)
+
+	if(grabber.last_special > world.time)
+		to_chat(grabber, "<span class='warning'>It is too soon to make another nab attempt.</span>")
+		return
+
+	grabber.last_special = world.time + 50
+
+	grabber.remove_cloaking_source(src)
+	if(prob(90) && grabber.make_grab(grabber, target, GRAB_NAB_SPECIAL))
+		target.Weaken(rand(1,3))
+		target.LAssailant = grabber
+		grabber.visible_message("<span class='danger'>\The [grabber] suddenly lunges out and grabs \the [target]!</span>")
+		grabber.do_attack_animation(target)
+		playsound(grabber.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		return 1
+	else
+		grabber.visible_message("<span class='danger'>\The [grabber] suddenly lunges out, almost grabbing \the [target]!</span>")
+
+/datum/species/nabber/toggle_stance(var/mob/living/carbon/human/H)
+	if(H.incapacitated())
+		return FALSE
+	to_chat(H, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
+	var/hidden = H.is_cloaked()
+	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts \his arms.</span>")
+	H.unEquip(H.l_hand)
+	H.unEquip(H.r_hand)
+	if(do_after(H, 30))
+		arm_swap(H)
+	else
+		to_chat(H, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
+	return TRUE
+
+/datum/species/nabber/proc/arm_swap(var/mob/living/carbon/human/H, var/forced)
+	H.unEquip(H.l_hand)
+	H.unEquip(H.r_hand)
+	var/hidden = H.is_cloaked()
+	H.pulling_punches = !H.pulling_punches
+	if(H.pulling_punches)
+		H.current_grab_type = all_grabobjects[GRAB_NORMAL]
+		if(forced)
+			to_chat(H, "<span class='notice'>You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms.</span>")
+			if(!hidden)
+				H.visible_message("<span class='notice'>[H] falters, hunting arms failing.</span>")
+		else
+			to_chat(H, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax.\
+			You reach out with your manipulation arms, ready to use complex items.</span>")
+			if(!hidden)
+				H.visible_message("<span class='notice'>[H] seems to relax as \he folds \his massive curved arms to \his thorax and reaches out \
+				with \his small handlike limbs.</span>")
+	else
+		H.current_grab_type = all_grabobjects[GRAB_NAB]
+		to_chat(H, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
+		if(!hidden)
+			H.visible_message("<span class='warning'>[H] tenses as \he brings \his smaller arms in close to \his body. \His two massive spiked arms reach \
+			out. \He looks ready to attack.</span>")

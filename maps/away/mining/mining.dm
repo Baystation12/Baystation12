@@ -5,7 +5,7 @@
 	name = "asteroid cluster"
 	desc = "Large group of asteroids. Mineral content detected."
 	icon_state = "sector"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_cluster_1",
 		"nav_cluster_2",
 		"nav_cluster_3",
@@ -62,7 +62,7 @@
 	name = "faint signal from an asteroid"
 	desc = "Faint signal detected, originating from the human-made structures on the site's surface."
 	icon_state = "sector"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_away_1",
 		"nav_away_2",
 		"nav_away_3",
@@ -117,7 +117,7 @@
 	name = "monolithic asteroid"
 	desc = "Substantial mineral resources detected."
 	icon_state = "sector"
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_orb_1",
 		"nav_orb_2",
 		"nav_orb_3",

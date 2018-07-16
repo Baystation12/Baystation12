@@ -1,7 +1,6 @@
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle/autodock
-	var/process_state = IDLE_STATE
 	var/in_use = null	//tells the controller whether this shuttle needs processing, also attempts to prevent double-use
 	var/last_dock_attempt_time = 0
 	var/current_dock_target
@@ -10,13 +9,14 @@
 	var/datum/computer/file/embedded_program/docking/shuttle_docking_controller
 	var/docking_codes
 
-	var/obj/effect/shuttle_landmark/next_location
+	var/obj/effect/shuttle_landmark/next_location  //This is only used internally.
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
-	var/obj/effect/shuttle_landmark/landmark_transition
+	var/obj/effect/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 	var/move_time = 240		//the time spent in the transition area
 
 	category = /datum/shuttle/autodock
+	flags = SHUTTLE_FLAGS_PROCESS
 
 /datum/shuttle/autodock/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
 	..(_name, start_waypoint)
@@ -34,7 +34,7 @@
 
 	//Optional transition area
 	if(landmark_transition)
-		landmark_transition = locate(landmark_transition)
+		landmark_transition = SSshuttle.get_landmark(landmark_transition)
 
 /datum/shuttle/autodock/Destroy()
 	next_location = null
@@ -88,7 +88,7 @@
 	Please ensure that long_jump() and short_jump() are only called from here. This applies to subtypes as well.
 	Doing so will ensure that multiple jumps cannot be initiated in parallel.
 */
-/datum/shuttle/autodock/proc/process()
+/datum/shuttle/autodock/Process()
 	switch(process_state)
 		if (WAIT_LAUNCH)
 			if(check_undocked())
@@ -119,14 +119,16 @@
 	next_location = null
 	in_use = null	//release lock
 
+/datum/shuttle/autodock/proc/get_travel_time()
+	return move_time
 
 /datum/shuttle/autodock/proc/process_launch()
 	if(!next_location.is_valid(src))
 		process_state = IDLE_STATE
 		in_use = null
 		return
-	if (move_time && landmark_transition)
-		. = long_jump(next_location, landmark_transition, move_time)
+	if (get_travel_time() && landmark_transition)
+		. = long_jump(next_location, landmark_transition, get_travel_time())
 	else
 		. = short_jump(next_location)
 	process_state = WAIT_ARRIVE

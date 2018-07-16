@@ -56,6 +56,8 @@
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
+	var/damtype = BRUTE
+	var/defense = "melee" //what armor protects against its attacks
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -83,10 +85,13 @@
 	if(health > maxHealth)
 		health = maxHealth
 
+
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
+	handle_confused()
 	handle_supernatural()
+	handle_impaired_vision()
 
 	if(buckled && can_escape)
 		if(istype(buckled, /obj/effect/energy_net))

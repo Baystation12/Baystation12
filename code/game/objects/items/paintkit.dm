@@ -15,7 +15,6 @@
 	uses -= amt
 	playsound(get_turf(user), 'sound/items/Screwdriver.ogg', 50, 1)
 	if(uses<1)
-		user.drop_item()
 		qdel(src)
 
 // Root hardsuit kit defines.

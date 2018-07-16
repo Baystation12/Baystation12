@@ -23,8 +23,6 @@
 		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT,
-		/area/marooned/marooned_snow = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/marooned/marooned_hut = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/lost_supply_base/solar = NO_SCRUBBER,
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
@@ -39,6 +37,7 @@
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase/station = NO_SCRUBBER,
 		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
 //		/area/icarus/vessel = NO_APC,
 //		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
@@ -47,7 +46,6 @@
 		/area/space,
 		/area/mine/explored,
 		/area/mine/unexplored,
-		/area/marooned/marooned_snow,
 //		/area/icarus/open,
 //		/area/icarus/vessel,
 	)

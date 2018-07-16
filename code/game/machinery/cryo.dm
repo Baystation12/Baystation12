@@ -131,7 +131,7 @@
 		data["beakerVolume"] = beaker.reagents.total_volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -177,10 +177,9 @@
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
-
+		if(!user.unEquip(G, src))
+			return
 		beaker =  G
-		user.drop_item()
-		G.forceMove(src)
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 	else if(istype(G, /obj/item/grab))
 		if(!ismob(G:affecting))

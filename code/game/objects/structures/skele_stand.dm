@@ -65,9 +65,8 @@
 		if(slot)
 			if(swag[slot])
 				to_chat(user,"<span class='notice'>There is already that kind of clothing on \the [src].</span>")
-			else
+			else if(user.unEquip(W, src))
 				swag[slot] = W
-				user.drop_from_inventory(W,src)
 				update_icon()
 				return 1
 	else

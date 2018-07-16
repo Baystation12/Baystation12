@@ -33,7 +33,7 @@
 	if(download_progress >= loaded_article.size)
 		downloading = 0
 		requires_ntnet = 0 // Turn off NTNet requirement as we already loaded the file into local memory.
-	GLOB.nanomanager.update_uis(NM)
+	SSnano.update_uis(NM)
 
 /datum/computer_file/program/newsbrowser/kill_program()
 	..()
@@ -83,7 +83,7 @@
 		. = 1
 		show_archived = !show_archived
 	if(.)
-		GLOB.nanomanager.update_uis(NM)
+		SSnano.update_uis(NM)
 
 
 /datum/nano_module/program/computer_newsbrowser
@@ -123,7 +123,7 @@
 		data["all_articles"] = all_articles
 		data["showing_archived"] = PRG.show_archived
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "news_browser.tmpl", "NTNet/ExoNet News Browser", 575, 750, state = state)
 		ui.auto_update_layout = 1

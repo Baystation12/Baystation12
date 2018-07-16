@@ -171,9 +171,8 @@ obj/structure/windoor_assembly/Destroy()
 
 				if(do_after(user, 40,src))
 					if(!src) return
-
-					user.drop_item()
-					W.loc = src
+					if(!user.unEquip(W, src))
+						return
 					to_chat(user, "<span class='notice'>You've installed the airlock electronics!</span>")
 					src.SetName("Near finished Windoor Assembly")
 					src.electronics = W

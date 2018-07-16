@@ -40,8 +40,6 @@
 	blood_color = "#ffff00"
 	flesh_color = "#ffff00"
 
-	eye_icon = null //No eyes.
-
 	unarmed_types = list(/datum/unarmed_attack/punch/starborn)
 
 	cold_discomfort_level = 300
@@ -94,8 +92,6 @@
 	blood_color = "#2222ff"
 	flesh_color = "#2222ff"
 
-	eye_icon = "eyes_blueforged_s"
-
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 	hunger_factor = 0
@@ -110,6 +106,7 @@
 
 	secondary_langs = list(LANGUAGE_CULT,LANGUAGE_OCCULT)
 
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unbreakable/blueforged)
 
 /datum/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
 	..()
