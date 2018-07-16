@@ -132,7 +132,7 @@ CIRCUITS BELOW
 	materials = list("glass" = 2000)
 	chemicals = list(/datum/reagent/acid = 20)
 	time = 5
-
+	category_items = "Machine Boards"
 
 /datum/design/circuit/AssembleDesignName()
 	..()
