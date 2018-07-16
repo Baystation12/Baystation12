@@ -2243,7 +2243,6 @@
 #include "code\modules\research\designs\circuitprinter\dc-engineering_boards.dm"
 #include "code\modules\research\designs\circuitprinter\dc-machine_boards.dm"
 #include "code\modules\research\designs\circuitprinter\dc-mecha_boards.dm"
-#include "code\modules\research\designs\circuitprinter\dc-misc.dm"
 #include "code\modules\research\designs\circuitprinter\dc-module_boards.dm"
 #include "code\modules\research\designs\protolathe\dp-bluespace.dm"
 #include "code\modules\research\designs\protolathe\dp-data.dm"

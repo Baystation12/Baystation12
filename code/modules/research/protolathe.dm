@@ -145,7 +145,7 @@
 		if(materials[M] < D.materials[M] * mat_efficiency * amount_build)
 			return 0
 	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C]))
+		if(!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency * amount_build))
 			return 0
 	return 1
 
