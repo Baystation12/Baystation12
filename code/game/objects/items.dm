@@ -740,12 +740,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_state = icon_state
 	return mob_state
 
-/obj/item/proc/dir_shift(var/icon/given_icon, var/dir_given, var/x = 0, var/y = 0)
-	var/icon/I = new(given_icon, dir = dir_given)
-	I.Shift(EAST, x)
-	I.Shift(NORTH, y)
-	given_icon.Insert(I, dir = dir_given)
-	return given_icon
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
@@ -776,25 +770,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else
 		mob_icon = default_onmob_icons[slot]
 
-	var/image/ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
-	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
-		var/list/equip_adjusts = user_human.species.equip_adjust
-		if(equip_adjusts[slot])
-			var/image_key = "[user_human.species] [mob_icon] [mob_state] [color]"
-			ret_overlay = user_human.species.equip_overlays[image_key]
-			if(!ret_overlay)
-				var/icon/final_I = new(mob_icon, icon_state = mob_state)
-				var/list/shifts = equip_adjusts[slot]
-				if(shifts && shifts.len)
-					var/shift_facing
-					for(shift_facing in shifts)
-						var/list/facing_list = shifts[shift_facing]
-						final_I = dir_shift(final_I, text2dir(shift_facing), facing_list["x"], facing_list["y"])
-				ret_overlay = overlay_image(final_I, color, flags = RESET_COLOR)
-
-				user_human.species.equip_overlays[image_key] = ret_overlay
-
-	return ret_overlay
+	if(user_human)
+		return user_human.species.get_offset_overlay_image(spritesheet, mob_icon, mob_state, color, slot)
+	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /obj/item/proc/get_examine_line()
 	if(blood_DNA)
