@@ -435,7 +435,7 @@
 	color = "#cccccc"
 
 /datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX || alien == IS_BOGANI)
+	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
 
 /datum/reagent/carbon_dioxide
