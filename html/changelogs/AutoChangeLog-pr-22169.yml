@@ -1,0 +1,6 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - rscadd: "The shuttle pilot role has been moved to Exploration."
+  - rscadd: "The prospector role has been moved to Supply."
+  - rscadd: "Two new pilot helmets have been added to the game, one generic and one NT variation (Sprited by Chinsky)."
