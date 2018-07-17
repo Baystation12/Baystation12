@@ -527,6 +527,7 @@
 #include "code\game\gamemodes\mixed\lizard.dm"
 #include "code\game\gamemodes\mixed\paranoia.dm"
 #include "code\game\gamemodes\mixed\siege.dm"
+#include "code\game\gamemodes\mixed\spyvspy.dm"
 #include "code\game\gamemodes\mixed\traitorling.dm"
 #include "code\game\gamemodes\mixed\unity.dm"
 #include "code\game\gamemodes\mixed\uprising.dm"
