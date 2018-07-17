@@ -271,6 +271,11 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
 
+/material/diamond/crystal
+	name = "crystal"
+	hardness = 80
+	stack_type = null
+
 /material/gold
 	name = "gold"
 	stack_type = /obj/item/stack/material/gold

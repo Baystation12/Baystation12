@@ -486,6 +486,10 @@
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
 		return SURGERY_FAILURE
 
+	if(BP_IS_CRYSTAL(affected))
+		to_chat(user, "<span class='danger'>The crystalline interior of \the [affected] is incompatible with \the [M].</span>")
+		return SURGERY_FAILURE
+
 	if(!target.isSynthetic())
 		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat body.</span>")
 		return SURGERY_FAILURE

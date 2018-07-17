@@ -12,6 +12,7 @@
 #define BRUISE    "bruise"
 #define PIERCE    "pierce"
 #define LASER     "laser"
+#define SHATTER   "shatter"
 
 #define STUN      "stun"
 #define WEAKEN    "weaken"
@@ -42,6 +43,8 @@
 #define ORGAN_SABOTAGED  (1<<9)
 #define ORGAN_ASSISTED   (1<<10)
 #define ORGAN_ROBOTIC    (1<<11)
+#define ORGAN_BRITTLE    (1<<12)
+#define ORGAN_CRYSTAL    (1<<13)
 
 // Organ flag defines.
 #define ORGAN_FLAG_CAN_AMPUTATE   (1<<0)
