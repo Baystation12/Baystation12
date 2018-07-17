@@ -10363,7 +10363,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	name = "Auxiliary Cryogenic Storage Maintenance"
+	name = "Auxiliary Cryogenic Storage Maintenance";
 	req_access = list(12)
 	},
 /turf/simulated/floor/tiled/white,
@@ -21115,7 +21115,12 @@
 /obj/item/device/integrated_electronics/wirer,
 /obj/item/device/integrated_electronics/analyzer,
 /obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
 /turf/simulated/floor/tiled/dark,
+/area/assembly/robotics)
+"hMH" = (
+/obj/structure/bed/chair/office/light,
+/turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "hNb" = (
 /obj/machinery/autolathe,
@@ -47322,7 +47327,7 @@ kib
 ksb
 kzb
 atK
-apo
+hMH
 oJb
 amA
 koX
