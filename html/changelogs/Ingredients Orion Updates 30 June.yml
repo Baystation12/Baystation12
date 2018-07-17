@@ -33,4 +33,10 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - imageadd: "New floorsigns for medical."
+  - tweak: "Added in Orion Datum so admins can easily change the race in game"
+  - tweak: "Slightly improved Orion unarmed damage and block factor"
+  - tweak: "Orion race buffs give 20 additional hp, slight pain tolerance, and temperature tolerance."
+  - tweak: "Replaced dufflebags with normal ODST backpacks for the time being as the previous ones were not usable."
+  - tweak: "Added in a few medical storage belts in chem storage in exoresearch3."
+  - tweak: "Replaced pinpointers with GPS for tracking implants."
+  - tweak: "Added in three cash briefcases for Oni to use to procure additional materials for labs."
