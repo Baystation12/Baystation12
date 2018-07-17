@@ -46,8 +46,8 @@
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
 		var/species_name = "\improper "
-		if(is_synth && species.type != /datum/species/machine)
-			species_name += "Cyborg "
+		if(is_synth && species.cyborg_noun)
+			species_name += "[species.cyborg_noun] "
 		species_name += "[species.name]"
 		msg += ", <b><font color='[species.get_flesh_colour(src)]'> \a [species_name]!</font></b>"
 	var/extra_species_text = species.get_additional_examine_text(src)

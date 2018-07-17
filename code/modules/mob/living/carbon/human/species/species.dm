@@ -8,6 +8,7 @@
 	var/name                                             // Species name.
 	var/name_plural                                      // Pluralized name (since "[name]s" is not always valid)
 	var/blurb = "A completely nondescript species."      // A brief lore summary for use in the chargen screen.
+	var/cyborg_noun = "Cyborg"
 
 	// Icon/appearance vars.
 	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
