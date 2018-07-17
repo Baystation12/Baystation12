@@ -25,6 +25,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	faction_indicator = "hudloyalist"
 	faction_invisible = 1
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
+	skill_setter = /datum/antag_skill_setter/station
 
 	faction = "loyalist"
 

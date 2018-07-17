@@ -56,9 +56,9 @@
 		if(only_offstation_roles && !(antag.flags & ANTAG_OVERRIDE_JOB))
 			continue
 		if(player in antag.current_antagonists)
-			return 1
+			return antag
 		if(player in antag.pending_antagonists)
-			return 1
+			return antag
 	return 0
 
 GLOBAL_LIST_EMPTY(all_antag_types_)

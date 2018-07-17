@@ -9,9 +9,9 @@
 
 /datum/preferences/proc/get_min_skill(datum/job/job, decl/hierarchy/skill/S)
 	var/datum/mil_branch/branch = mil_branches.get_branch(char_branch)
-	if(branch && branch.min_skill)
-		return job.min_skill[S.type] || branch.min_skill[S.type] || SKILL_MIN
-	return job.min_skill[S.type] || SKILL_MIN
+	var/job_min_skill = job && job.min_skill && job.min_skill[S.type]
+	var/branch_min_skill = branch && branch.min_skill && branch.min_skill[S.type]
+	return job_min_skill || branch_min_skill || SKILL_MIN
 
 /datum/preferences/proc/get_spent_points(datum/job/job, decl/hierarchy/skill/S)
 	if(!(job in skills_allocated))

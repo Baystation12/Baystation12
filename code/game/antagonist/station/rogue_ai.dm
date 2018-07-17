@@ -16,6 +16,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 	initial_spawn_target = 1
 	antaghud_indicator = "hudmalai"
 	min_player_age = 18
+	skill_setter = /datum/antag_skill_setter/ai
 
 /datum/antagonist/rogue_ai/can_become_antag(var/datum/mind/player, var/ignore_role)
 	. = ..(player, ignore_role)
