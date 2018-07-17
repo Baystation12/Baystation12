@@ -2617,7 +2617,7 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/l3closet/general/multi,
+/obj/structure/closet/secure_closet/medical_torchsenior,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "afb" = (
@@ -11228,7 +11228,8 @@
 	id = "armory_lock";
 	name = "Armory Lockdown Shutter Control";
 	pixel_x = 24;
-	pixel_y = -6
+	pixel_y = -6;
+	req_one_access = list(83,19)
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "armory_entrylock";
@@ -18062,11 +18063,11 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "dEb" = (
-/obj/structure/closet/secure_closet/medical_torchsenior,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
+/obj/structure/closet/secure_closet/medical_contractor,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dFb" = (
