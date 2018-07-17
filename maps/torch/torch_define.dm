@@ -32,6 +32,8 @@
 	shuttle_leaving_dock = "Attention all hands: Jump initiated, exiting bluespace in %ETA%."
 	shuttle_called_message = "Attention all hands: Jump sequence initiated. Transit procedures are now in effect. Jump in %ETA%."
 	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
+	jump_fail = "Warning: there is no working bluespace drive onboard."
+	jump_critical_fail = "Warning: the bluespace drive has been destroyed!"
 
 	evac_controller_type = /datum/evacuation_controller/starship
 
@@ -41,6 +43,8 @@
 	planet_size = list(129,129)
 
 	away_site_budget = 3
+
+	requires_bluespace_drive = 1
 
 	citizenship_choices = list(
 		"Earth",
