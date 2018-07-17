@@ -63,6 +63,7 @@
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
 	var/cavity_name = "cavity"
+	var/brittle = FALSE // Temp, replace with bitflag when organ PR is merged.
 
 	// Surgery vars.
 	var/cavity_max_w_class = 0
@@ -141,6 +142,11 @@
 	s_base = new_dna.s_base
 
 /obj/item/organ/external/emp_act(severity)
+
+
+	if(robotic <= 0)
+		return
+
 	var/burn_damage = 0
 	switch (severity)
 		if (1)
