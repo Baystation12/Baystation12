@@ -509,6 +509,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/timedifference = world.time - timeofdeath
 	if(!client.holder && respawn_time && timeofdeath && timedifference < respawn_time MINUTES)
+		if(started_as_observer)
+			var/timedifference_text = time2text((respawn_time * 2) MINUTES - timedifference,"mm:ss")
+			to_chat(src, "<span class='warning'>You must have been dead for [respawn_time * 2] minute\s to respawn. You have [timedifference_text] left.</span>")
+			return 0
 		var/timedifference_text = time2text(respawn_time MINUTES - timedifference,"mm:ss")
 		to_chat(src, "<span class='warning'>You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left.</span>")
 		return 0
