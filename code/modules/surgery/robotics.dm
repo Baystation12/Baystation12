@@ -202,7 +202,7 @@
 			var/obj/item/weapon/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return 0
-		return affected && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.brute_dam > 0) && target_zone != BP_MOUTH
+		return affected && !BP_IS_BRITTLE(affected) && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.brute_dam > 0) && target_zone != BP_MOUTH
 
 /datum/surgery_step/robotics/repair_brute/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -244,7 +244,7 @@
 	if(..())
 		var/obj/item/stack/cable_coil/C = tool
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		var/limb_can_operate = ((affected && affected.hatch_state == HATCH_OPENED) && ((affected.status & ORGAN_DISFIGURED) || affected.burn_dam > 0) && target_zone != BP_MOUTH)
+		var/limb_can_operate = ((affected && !BP_IS_BRITTLE(affected) && affected.hatch_state == HATCH_OPENED) && ((affected.status & ORGAN_DISFIGURED) || affected.burn_dam > 0) && target_zone != BP_MOUTH)
 		if(limb_can_operate)
 			if(istype(C))
 				if(!C.get_amount() >= 3)
@@ -301,7 +301,7 @@
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected) return
+	if(!affected || BP_IS_BRITTLE(affected)) return
 
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(BP_IS_ROBOTIC(I) && I.damage > 0)

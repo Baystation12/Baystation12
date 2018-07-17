@@ -560,6 +560,10 @@
 		if(!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
 			return ..()
 
+		if(BP_IS_BRITTLE(S))
+			to_chat(user, "<span class='warning'>\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it.</span>")
+			return 1
+
 		if(!welding)
 			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>")
 			return 1

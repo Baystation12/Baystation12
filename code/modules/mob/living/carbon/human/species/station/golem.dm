@@ -31,4 +31,7 @@
 		H.mind.special_role = "Golem"
 	H.real_name = "adamantine golem ([rand(1, 1000)])"
 	H.SetName(H.real_name)
+	for(var/thing in H.organs)
+		var/obj/item/organ/external/E = thing
+		E.brittle = TRUE
 	..()
