@@ -1,5 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Antag skills are now chosen in-game. Off-station antags get basic in everything and can select 4 skills at trained, 2 at expert, and 1 at master. On-station antags get their selection from jobs, and in addition get 3 at trained and 1 at expert. (malf is unchanged). Once the skill selection is submitted, it can't be undone without admin intervention."
-  - tweak: "The Show Own Skills verb looks a little different now. Antags can use it to select skills."
