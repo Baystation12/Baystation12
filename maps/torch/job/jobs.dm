@@ -324,9 +324,6 @@
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
-	alt_titles = list(
-		"Inspector General"
-		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
@@ -334,7 +331,7 @@
 						SKILL_FINANCE     = SKILL_BASIC)
 	skill_points = 20
 
-	access = list(access_representative, access_security,access_medical, access_engine,
+	access = list(access_representative, access_security, access_medical,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
