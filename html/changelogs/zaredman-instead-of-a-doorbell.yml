@@ -1,0 +1,6 @@
+author: za_redman
+
+delete-after: True
+
+changes: 
+  - rscadd: "Gives Security access to the Hangar."
