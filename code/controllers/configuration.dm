@@ -59,6 +59,7 @@ var/list/gamemode_cache = list()
 	var/allow_ai = 1					// allow ai job
 	var/hostedby = null
 	var/respawn_delay = 30
+	var/no_obs_delay = 18000			//players cannot observe until this amount of time elapses (in deciseconds)
 	var/guest_jobban = 1
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
@@ -401,6 +402,9 @@ var/list/gamemode_cache = list()
 				if ("respawn_delay")
 					config.respawn_delay = text2num(value)
 					config.respawn_delay = config.respawn_delay > 0 ? config.respawn_delay : 0
+
+				if ("no_obs_delay")
+					config.no_obs_delay = text2num(value)
 
 				if ("servername")
 					config.server_name = value

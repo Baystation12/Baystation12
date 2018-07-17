@@ -116,6 +116,10 @@
 			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
 			return
 
+		if(config.no_obs_delay && !client.holder && (round_duration_in_ticks <= config.no_obs_delay))
+			to_chat(src, "<span class='warning'>[config.no_obs_delay/600] minute(s) must pass after round start before players may observe. You must wait [(config.no_obs_delay-round_duration_in_ticks)/600] more minute(s).</span>")
+			return
+
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
 			var/mob/observer/ghost/observer = new()
