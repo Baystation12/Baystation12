@@ -2656,7 +2656,6 @@
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\overmap_ships\om_ship_areas.dm"
 #include "maps\slayer\__death_asteroid_map.dm"
-#include "maps\unsc_frigate\unsc_frigate_base_includes.dm"
 #include "maps\unsc_frigate\outfits\unsc_outfit_includes.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
