@@ -18,16 +18,21 @@
 	update_icon()
 
 /obj/structure/diona_gestalt/proc/shed_nymph(var/mob/living/carbon/alien/diona/nymph, var/silent, var/forcefully)
-	if(!nymph && nymphs && nymphs.len)
+	if(!nymph && LAZYLEN(nymphs))
 		nymph = pick(nymphs)
 	if(nymph)
 		nymphs -= nymph // unsure if pick_n_take() works on assoc lists.
 		nymph.dropInto(loc)
-		if(!silent)    visible_message("<span class='danger'>\The [nymph] is split away from \the [src]!</span>")
+		if(!silent)    visible_message("<span class='danger'>\The [nymph] splits away from \the [src]!</span>")
 		if(forcefully) nymph.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),rand(3,5))
-		check_nymphs()
+	check_nymphs()
 
+// If there are less than two nymphs (or if none of the nymphs have players), it isn't a viable gestalt.
 /obj/structure/diona_gestalt/proc/check_nymphs()
-	if(!nymphs || LAZYLEN(nymphs.len <= 1))
-		visible_message("<span class='danger'>\The [src] has been completely torn apart!</span>")
-		qdel(src)
+	if(LAZYLEN(nymphs.len) >= 2)
+		for(var/nimp in nymphs)
+			var/mob/living/carbon/alien/diona/chirp = nimp
+			if(chirp.client)
+				return
+	visible_message("<span class='danger'>\The [src] has completely split apart!</span>")
+	qdel(src)
