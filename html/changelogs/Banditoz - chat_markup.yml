@@ -1,0 +1,4 @@
+author: "tlc2013 & Banditoz"
+delete-after: True
+changes: 
+  - rscadd: "Ported over Aurora's markup system, for use in IC, actions, dsay, and admin narrates only. Wrap your text in / for italicized text, and * for bold!"

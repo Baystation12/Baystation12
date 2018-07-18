@@ -146,6 +146,8 @@ proc/get_radio_key_from_channel(var/channel)
 			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
 			return
 
+	message = process_chat_markup(message, list("~", "_"))
+
 	if(stat)
 		if(stat == 2)
 			return say_dead(message)
@@ -212,16 +214,16 @@ proc/get_radio_key_from_channel(var/channel)
 	var/sound/speech_sound = handle_v[1]
 	var/sound_vol = handle_v[2]
 
-	var/italics = 0
+	var/grey = 0
 	var/message_range = world.view
 
 	if(whispering)
-		italics = 1
+		grey = 1
 		message_range = 1
 
 	//speaking into radios
 	if(used_radios.len)
-		italics = 1
+		grey = 1
 		message_range = 1
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
@@ -256,7 +258,7 @@ proc/get_radio_key_from_channel(var/channel)
 			message_range = 1
 
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
-			italics = 1
+			grey = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
 		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
@@ -281,7 +283,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
 		if(M)
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+			M.hear_say(message, verb, speaking, alt_name, grey, src, speech_sound, sound_vol)
 			if(M.client)
 				speech_bubble_recipients += M.client
 
@@ -302,7 +304,7 @@ proc/get_radio_key_from_channel(var/channel)
 		for(var/mob/M in eavesdroping)
 			if(M)
 				show_image(M, speech_bubble)
-				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+				M.hear_say(stars(message), verb, speaking, alt_name, grey, src, speech_sound, sound_vol)
 
 		for(var/obj/O in eavesdroping)
 			spawn(0)

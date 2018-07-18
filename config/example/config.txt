@@ -403,3 +403,6 @@ RADIATION_MATERIAL_RESISTANCE_DIVISOR 2
 
 ## Below this point, radiation is ignored
 RADIATION_LOWER_LIMIT 0.15
+
+## Uncomment to enable simple Skype/Discord style markup over say, dsay, actions, and admin narrate.
+# ALLOW_CHAT_MARKUP

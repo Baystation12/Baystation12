@@ -218,6 +218,8 @@ var/list/gamemode_cache = list()
 
 	var/max_gear_cost = 10 // Used in chargen for accessory loadout limit. 0 disables loadout, negative allows infinite points.
 
+	var/allow_chat_markup = 0 // Enable the markup matcher for chat.
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -728,6 +730,8 @@ var/list/gamemode_cache = list()
 					player_limit = text2num(value)
 				if("hub")
 					world.update_hub_visibility()
+				if("allow_chat_markup")
+					config.allow_chat_markup = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

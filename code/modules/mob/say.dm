@@ -19,7 +19,8 @@
 	set category = "IC"
 
 	message = sanitize(message)
-
+	message = process_chat_markup(message, list("~", "_"))
+	
 	if(typing_indicator)
 		qdel(typing_indicator)
 	if(use_me)
