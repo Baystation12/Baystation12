@@ -3,11 +3,12 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 /datum/antagonist/renegade
 	role_text = "Renegade"
 	role_text_plural = "Renegades"
+	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/captain)
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
 	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
-		try to protect yourself and what's important to you. You aren't here to cause trouble, \
-		you're just more willing (and equipped) to go to extremes to stop it than others are. \
-		Your job is to somewhat oppose the other antagonists, should they threaten you, in ways that aren't quite legal themselves. \
+		try to protect yourself and what's important to you. You aren't here to <i>cause</i> trouble, \
+		you're just willing (and equipped) to go to extremes to <b>stop</b> it. \
+		Your job is to oppose the other antagonists, should they threaten you, in ways that aren't quite legal. \
 		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
@@ -33,12 +34,13 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
 		/obj/item/weapon/gun/projectile/automatic/c20r,
 		/obj/item/weapon/gun/projectile/automatic/wt550,
-		/obj/item/weapon/gun/projectile/colt/detective,
-		/obj/item/weapon/gun/projectile/sec/wood,
+		/obj/item/weapon/gun/projectile/colt,
+		/obj/item/weapon/gun/projectile/sec/wood/lethal,
 		/obj/item/weapon/gun/projectile/silenced,
 		/obj/item/weapon/gun/projectile/beretta,
 		/obj/item/weapon/gun/projectile/pistol,
 		/obj/item/weapon/gun/projectile/revolver,
+		/obj/item/weapon/gun/projectile/revolver/webley,
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
 		/obj/item/weapon/gun/projectile/magnum_pistol,
 		list(/obj/item/weapon/gun/projectile/revolver/detective, /obj/item/weapon/gun/projectile/revolver/deckard)
