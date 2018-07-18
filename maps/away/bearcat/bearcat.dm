@@ -1,4 +1,17 @@
 #include "bearcat_areas.dm"
+#include "bearcat_jobs.dm"
+
+/obj/effect/submap_landmark/joinable_submap/bearcat
+	name = "FTV Bearcat"
+	archetype = /decl/submap_archetype/derelict/bearcat
+
+/decl/submap_archetype/derelict/bearcat
+	descriptor = "derelict"
+	map = "Bearcat Wreck"
+	crew_jobs = list(
+		/datum/job/submap/bearcat_captain,
+		/datum/job/submap/bearcat_crewman
+	)
 
 /obj/effect/overmap/ship/bearcat
 	name = "light freighter"

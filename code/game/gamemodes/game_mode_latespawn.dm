@@ -24,6 +24,9 @@
 /datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
 	return 0
 
+/datum/game_mode/proc/handle_offsite_latejoin(var/mob/living/carbon/human/character)
+	return 0
+
 /datum/game_mode/proc/process_autoantag()
 	message_admins("[uppertext(name)]: Attempting autospawn.")
 
