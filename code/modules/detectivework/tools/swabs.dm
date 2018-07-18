@@ -55,6 +55,9 @@
 		if(!has_hand)
 			to_chat(user, "<span class='warning'>They don't have any hands.</span>")
 			return
+		if(H.gloves)
+			afterattack(H.gloves, user, 1) //Lazy but this would work
+			return
 		user.visible_message("[user] swabs [H]'s palm for a sample.")
 		sample_type = "GSR"
 		gsr = H.gunshot_residue
