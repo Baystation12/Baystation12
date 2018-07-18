@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "SCGR no longer has an unfitting alt title that implies they do something they don't."
+  - tweak: "SCGR can no longer download and use power RCON."
