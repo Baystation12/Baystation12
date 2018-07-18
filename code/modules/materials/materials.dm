@@ -384,22 +384,6 @@ var/list/name_to_material
 				/datum/reagent/carbon = 5
 				)
 
-/material/diona
-	name = "biomass"
-	icon_colour = null
-	stack_type = null
-	integrity = 600
-	icon_base = "diona"
-	icon_reinf = "noreinf"
-	hitsound = 'sound/effects/attackblob.ogg'
-	conductive = 0
-
-/material/diona/place_dismantled_product()
-	return
-
-/material/diona/place_dismantled_girder(var/turf/target)
-	spawn_diona_nymph(target)
-
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
 	display_name = DEFAULT_WALL_MATERIAL
