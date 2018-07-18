@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Plastic flaps can now be constructed with plastic sheets."
+  - rscadd: "Plastic flaps can now be unsecured with a wrench, and then destroyed with a screwdriver. Use a wrench to re-bolt them."
