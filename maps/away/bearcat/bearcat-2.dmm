@@ -390,6 +390,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/weapon/gun/projectile/pistol,
 /obj/structure/bed/padded,
+/obj/effect/submap_landmark/spawnpoint/captain,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "aM" = (
@@ -405,6 +406,7 @@
 	pixel_y = 25
 	},
 /obj/random/action_figure,
+/obj/item/weapon/storage/belt/utility/full,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "aN" = (
@@ -617,10 +619,13 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc/derelict{
+	cell_type = /obj/item/weapon/cell;
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/one,
+/obj/item/weapon/tank/oxygen,
+/obj/item/clothing/mask/breath/emergency,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "bd" = (
@@ -829,6 +834,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/submap_landmark/joinable_submap/bearcat,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bs" = (
@@ -1713,7 +1719,18 @@
 /obj/structure/sign/poster{
 	pixel_y = 32
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/obj/item/clothing/mask/breath/emergency,
+/obj/item/clothing/mask/breath/emergency,
+/obj/item/clothing/mask/breath/emergency,
+/obj/item/weapon/crowbar,
+/obj/item/weapon/tank/oxygen,
+/obj/item/weapon/tank/oxygen,
+/obj/item/weapon/tank/oxygen,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "cO" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1721,7 +1738,8 @@
 	layer = 2.4;
 	level = 2
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/obj/effect/submap_landmark/spawnpoint/crewman,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "cP" = (
 /obj/machinery/alarm{
@@ -1730,7 +1748,7 @@
 	pixel_x = 24
 	},
 /obj/machinery/cryopod,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "cQ" = (
 /obj/structure/grille,
@@ -1962,7 +1980,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "df" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1972,11 +1990,12 @@
 	dir = 9;
 	pixel_y = 0
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/obj/effect/submap_landmark/spawnpoint/crewman,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "dg" = (
 /obj/machinery/cryopod,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "dh" = (
 /obj/structure/grille,
@@ -2163,13 +2182,15 @@
 	},
 /obj/structure/closet/wardrobe/mixed,
 /obj/item/weapon/storage/backpack/dufflebag/med,
-/turf/simulated/floor/tiled/white/usedup,
+/obj/item/weapon/storage/belt/utility/full,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "du" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/obj/effect/submap_landmark/spawnpoint/crewman,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "dv" = (
 /turf/simulated/wall/r_wall,
@@ -2218,7 +2239,7 @@
 /area/ship/scrap/crew/medbay)
 "dC" = (
 /obj/machinery/door/airlock/autoname,
-/turf/simulated/floor/tiled/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "dD" = (
 /turf/simulated/wall/r_wall,
@@ -2309,6 +2330,7 @@
 "dL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/air,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "dM" = (
@@ -2318,6 +2340,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
+/obj/machinery/portable_atmospherics/canister/air,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "dN" = (
@@ -2331,11 +2354,15 @@
 	pixel_y = 28
 	},
 /obj/structure/closet/walllocker/emerglocker/west,
-/turf/simulated/floor/tiled/white/usedup,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "dP" = (
 /obj/item/roller,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "dQ" = (
 /obj/item/device/radio/intercom{
@@ -2350,7 +2377,7 @@
 /obj/structure/curtain/open/privacy,
 /obj/structure/bed/padded,
 /obj/item/clothing/accessory/stethoscope,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "dR" = (
 /turf/simulated/wall/r_wall,
@@ -2482,6 +2509,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
+/obj/machinery/portable_atmospherics/canister/air,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "ec" = (
@@ -2509,7 +2537,7 @@
 	pixel_x = -13;
 	pixel_y = 0
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "ef" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2517,7 +2545,7 @@
 	layer = 2.4;
 	level = 2
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eg" = (
 /obj/structure/iv_drip,
@@ -2529,7 +2557,7 @@
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/antitox,
 /obj/item/weapon/storage/pill_bottle/kelotane,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eh" = (
 /turf/simulated/wall/r_wall,
@@ -2815,7 +2843,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "ex" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2831,7 +2859,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "ey" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2846,7 +2874,7 @@
 /obj/item/weapon/glass_extra/straw,
 /obj/item/toy/therapy_blue,
 /obj/item/weapon/reagent_containers/spray/cleaner,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "ez" = (
 /obj/structure/grille,
@@ -3050,6 +3078,7 @@
 /obj/structure/table/standard,
 /obj/structure/cable,
 /obj/machinery/power/apc/derelict{
+	cell_type = /obj/item/weapon/cell;
 	name = "Medical Bay APC"
 	},
 /obj/machinery/light_switch{
@@ -3061,14 +3090,14 @@
 /obj/item/weapon/tape_roll,
 /obj/item/weapon/retractor,
 /obj/item/weapon/scalpel,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eP" = (
 /obj/machinery/light,
 /obj/machinery/optable,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/britcup,
 /obj/item/weapon/reagent_containers/glass/rag,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eQ" = (
 /obj/structure/table/standard,
@@ -3086,7 +3115,11 @@
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/device/healthanalyzer,
-/turf/simulated/floor/tiled/white/usedup,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eR" = (
 /obj/item/device/radio,
@@ -3823,6 +3856,7 @@
 /area/ship/scrap/unused)
 "gc" = (
 /obj/machinery/power/apc/derelict{
+	cell_type = /obj/item/weapon/cell;
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable,
@@ -5986,6 +6020,14 @@
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/toilets)
+"oa" = (
+/obj/machinery/cryopod,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/ship/scrap/crew/cryo)
 "uf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	icon_state = "intact";
@@ -6064,6 +6106,7 @@
 /area/ship/scrap/hidden)
 "PP" = (
 /obj/machinery/power/apc/derelict{
+	cell_type = /obj/item/weapon/cell;
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable{
@@ -14219,7 +14262,7 @@ aa
 cD
 cP
 dg
-dg
+oa
 dB
 dQ
 eg

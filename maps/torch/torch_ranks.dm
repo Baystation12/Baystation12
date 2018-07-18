@@ -1,3 +1,7 @@
+/datum/job/submap
+	branch = /datum/mil_branch/civilian
+	rank =   /datum/mil_rank/civ/civ
+
 /datum/map/torch
 	branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
