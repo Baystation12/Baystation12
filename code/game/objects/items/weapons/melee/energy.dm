@@ -52,6 +52,11 @@
 		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
+/obj/item/weapon/melee/energy/is_hot()
+	if(active)
+		return 3500
+	else
+		return 0
 /*
  * Energy Axe
  */
@@ -90,7 +95,6 @@
  * Energy Sword
  */
 /obj/item/weapon/melee/energy/sword
-	color
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
@@ -114,18 +118,23 @@
 		deactivate(user)
 
 /obj/item/weapon/melee/energy/sword/New()
+	..()
 	blade_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/melee/energy/sword/green/New()
+	..()
 	blade_color = "green"
 
 /obj/item/weapon/melee/energy/sword/red/New()
+	..()
 	blade_color = "red"
 
 /obj/item/weapon/melee/energy/sword/blue/New()
+	..()
 	blade_color = "blue"
 
 /obj/item/weapon/melee/energy/sword/purple/New()
+	..()
 	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)

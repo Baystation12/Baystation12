@@ -7,6 +7,7 @@
 	dynamic_lighting = 0
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	var/base_state = "white" //icon_state to show at runtime.
 	var/static/list/dust_cache
 
 /turf/space/proc/build_dust_cache()
@@ -21,7 +22,7 @@
 
 /turf/space/Initialize()
 	. = ..()
-	icon_state = "white"
+	icon_state = base_state
 	update_starlight()
 	if (!dust_cache)
 		build_dust_cache()

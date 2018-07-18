@@ -25,7 +25,7 @@
 
 /obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(is_hot(W))
+	if(W.is_hot())
 		light()
 
 /obj/item/weapon/flame/candle/resolve_attackby(var/atom/A, mob/user)
@@ -60,3 +60,7 @@
 		lit = 0
 		update_icon()
 		set_light(0)
+
+/obj/item/weapon/flame/candle/is_hot()
+	if(lit)
+		return 1250

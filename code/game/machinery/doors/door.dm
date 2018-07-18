@@ -35,6 +35,7 @@
 	//Multi-tile doors
 	dir = SOUTH
 	var/width = 1
+	var/obj/effect/opacity_dummy/dummy
 
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
@@ -52,7 +53,7 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New()
+/obj/machinery/door/Initialize()
 	. = ..()
 	if(density)
 		layer = closed_layer
@@ -60,28 +61,32 @@
 	else
 		layer = open_layer
 
-
 	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
-
+		SetBounds()
+		if(!glass) //Glass multiturfs don't need a dummy.
+			create_dummy()
 	health = maxhealth
 	update_connections(1)
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/machinery/door/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
-	. = ..()
+	if(glass)
+		set_opacity(0)
+
+/obj/machinery/door/proc/SetBounds()
+	if(dir in list(EAST, WEST))
+		bound_width = width * world.icon_size
+		bound_height = world.icon_size
+	else
+		bound_width = world.icon_size
+		bound_height = width * world.icon_size
 
 /obj/machinery/door/Destroy()
 	set_density(0)
 	update_nearby_tiles()
+	QDEL_NULL(dummy)
 	. = ..()
 
 /obj/machinery/door/Process()
@@ -102,11 +107,37 @@
 		return 0
 	return 1
 
+//Opacity dummy related stuff starts.
+/obj/machinery/door/proc/create_dummy() //Create our opacity dummy for when we open and close ourselves.
+	dummy = new //Only supports 2x2 walls atm.
+	dummy.set_opacity(opacity)
+	adjust_dummy()
+	GLOB.dir_set_event.register(src, src, /obj/machinery/door/proc/adjust_dummy)//This is a stupid way to do this, but it's cleaner.
+	GLOB.moved_event.register(src, src, /obj/machinery/door/proc/adjust_dummy)
+	GLOB.opacity_set_event.register(src, src, /obj/machinery/door/proc/set_dummy_opacity)
+
+#define ADJUSTIT(A) dummy.forceMove(get_step(src, A))
+/obj/machinery/door/proc/adjust_dummy()//Special proc because dir doesn't adjust the object's origin point.
+	if(!isnull(dummy))
+		switch(dir)
+			if(SOUTH)
+				ADJUSTIT(EAST)
+			if(WEST)
+				ADJUSTIT(NORTH)
+#undef ADJUSTIT
+
+/obj/machinery/door/proc/set_dummy_opacity(var/atom/A, var/old_opacity, var/new_opacity)
+	. = ..()
+	if(!isnull(dummy))
+		dummy.set_opacity(new_opacity)
+
+//Opacity dummy related stuff ends.
+
 /obj/machinery/door/Bumped(atom/AM)
 	if(p_open || operating) return
 	if(ismob(AM))
 		var/mob/M = AM
-		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
+		if(world.time - M.last_bumped <= 1 SECOND) return	//Can bump-open one airlock per second. This is to prevent shock spam.
 		M.last_bumped = world.time
 		if(!M.restrained() && (!issmall(M) || ishuman(M)))
 			bumpopen(M)
@@ -524,4 +555,3 @@
 		if(success)
 			dirs |= direction
 	connections = dirs
-

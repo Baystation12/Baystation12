@@ -7,7 +7,7 @@
 	mob_size = MOB_SMALL
 	speak_chance = 0
 	turns_per_move = 1
-	maxHealth = 5
+	maxHealth = 15
 	health = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/hugemushroomslice
 	response_help  = "pets"
@@ -16,13 +16,18 @@
 	harm_intent_damage = 5
 	var/datum/seed/seed
 	var/harvest_time
-	var/min_explode_time = 1200
+	var/min_explode_time = 2 MINUTES
 	var/global/total_mushrooms = 0
 
 /mob/living/simple_animal/mushroom/New()
 	..()
 	harvest_time = world.time
 	total_mushrooms++
+	verbs += /mob/living/proc/ventcrawl
+
+/mob/living/simple_animal/mushroom/attack_ghost(mob/user)
+	if(!client)
+		user.mind.transfer_to(src)
 
 /mob/living/simple_animal/mushroom/verb/spawn_spores()
 
@@ -31,7 +36,7 @@
 	set desc = "Spread your spores!"
 	set src = usr
 
-	if(stat == 2)
+	if(stat == DEAD)
 		to_chat(usr, "<span class='danger'>You are dead; it is too late for that.</span>")
 		return
 
@@ -49,7 +54,7 @@
 	. = ..(gibbed, deathmessage, show_dead_message)
 	if(.)
 		total_mushrooms--
-		if(total_mushrooms < config.maximum_mushrooms && prob(30))
+		if(total_mushrooms < config.maximum_mushrooms && (prob(30) || (src.client && (world.time < harvest_time + min_explode_time))))
 			spore_explode()
 
 /mob/living/simple_animal/mushroom/proc/spore_explode()
@@ -62,5 +67,4 @@
 			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
 	death(0)
 	seed.thrown_at(src,get_turf(src),1)
-	if(src)
-		qdel(src)
+	QDEL_IN(src, 0)
