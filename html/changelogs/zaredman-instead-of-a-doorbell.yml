@@ -3,4 +3,5 @@ author: za_redman
 delete-after: True
 
 changes: 
-  - rscadd: "Gives Security access to the Hangar."
+  - rscadd: "Gives Chef of Security access to the Hangar."
+  - rscadd: "Adds exit button to hangar door."

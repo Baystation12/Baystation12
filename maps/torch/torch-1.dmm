@@ -470,7 +470,7 @@
 "bk" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = list(12)
+	req_access = list(12);
 	req_one_access = list(73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -9647,7 +9647,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/mining{
-	id_tag = null;
+	id_tag = "hangarexit";
 	name = "Hangar Bay";
 	req_access = list(73)
 	},
@@ -10602,6 +10602,12 @@
 	dir = 1
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/button/remote/airlock{
+	id = "hangarexit";
+	name = "Hangar Door Control";
+	pixel_x = -24;
+	pixel_y = -23
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "uF" = (
@@ -11350,12 +11356,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
 "wb" = (
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -32;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/valve/shutoff,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -12849,10 +12849,6 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/hallway/primary/fourthdeck/aft)
-"yG" = (
-/obj/machinery/status_display/supply_display,
-/turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
 "yH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -18841,12 +18837,25 @@
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
+"MO" = (
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
 "MR" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/center)
 "MS" = (
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
+"Nc" = (
+/obj/machinery/status_display/supply_display,
+/turf/simulated/wall/prepainted,
+/area/quartermaster/exploration)
 "Nd" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -39976,13 +39985,13 @@ hw
 hw
 hw
 hw
-cq
+Nc
 rE
 sY
 uD
 wa
 wa
-yG
+wa
 wa
 wa
 Cr
@@ -40184,7 +40193,7 @@ sZ
 uE
 wb
 xj
-kD
+MO
 Aa
 Uk
 kD
