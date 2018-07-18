@@ -67,10 +67,11 @@
 		D.forceMove(humanoid_gestalt)
 		to_chat(D, "<span class='notice'>\The [caller] has shaped the gestalt into a humanoid form.</span>")
 	owner.nymphs.Cut()
+	var/caller_instance_num = caller.instance_num
 	spawn
 		var/newname = sanitize(input(humanoid_gestalt, "You have become a humanoid gestalt. Choose a name for yourself.", "Gestalt Name") as null|text, MAX_NAME_LEN)
 		if(!newname)
-			humanoid_gestalt.fully_replace_character_name("diona gestalt ([caller.instance_num])")
+			humanoid_gestalt.fully_replace_character_name("diona gestalt ([caller_instance_num])")
 		else
 			humanoid_gestalt.fully_replace_character_name(newname)
 	QDEL_NULL(owner)
