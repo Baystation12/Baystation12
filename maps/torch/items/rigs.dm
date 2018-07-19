@@ -24,7 +24,7 @@
 	light_overlay = "helmet_light_dual"
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
-	camera = /obj/machinery/camera/network/security
+	camera = /obj/machinery/camera/network/command
 	species_restricted = list(SPECIES_HUMAN) //no available icons for aliens
 
 /obj/item/clothing/suit/space/rig/command
@@ -214,3 +214,10 @@
 		/obj/item/rig_module/device/anomaly_scanner,
 		/obj/item/rig_module/grenade_launcher/light,
 		/obj/item/rig_module/cooling_unit)
+
+/*
+ Overrides for standard mapset rig items
+ */
+
+/obj/item/clothing/head/helmet/space/rig/industrial
+	camera = /obj/machinery/camera/network/supply
