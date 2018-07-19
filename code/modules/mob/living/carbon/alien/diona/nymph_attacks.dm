@@ -66,6 +66,10 @@
 			collect(A)
 			return
 
+	if(istype(A, /mob))
+		visible_message("<span class='notice'>\The [src] butts its head into \the [A].</span>")
+		return
+
 	. = ..()
 
 /mob/living/carbon/alien/diona/RangedAttack(atom/A)
@@ -75,7 +79,7 @@
 		var/atom/movable/temp = holding_item
 		unEquip(holding_item)
 		if(temp)
-			temp.throw_at(A, 10, rand(8,12), src)
+			temp.throw_at(A, 10, rand(3,5), src)
 
 /mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 
