@@ -43,3 +43,10 @@
 			handle_privacy_poll()
 			client.playtitlemusic()
 			maybe_send_staffwarns("connected as new player")
+
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/decl/security_level/SL = security_state.current_security_level
+		var/alert_desc = ""
+		if(SL.up_description)
+			alert_desc = SL.up_description
+		to_chat(usr, "<span class='notice'>The alert level on the [station_name()] is currently: <font color=[SL.light_color_alarm]><B>[SL.name]</B></font>. [alert_desc]</span>")
