@@ -1,0 +1,638 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/mineral/random/high_chance,/area/mining_colony/exterior/Asteroid)
+"ac" = (/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"ad" = (/turf/simulated/floor/asteroid/planet,/area/space)
+"ae" = (/turf/simulated/mineral/random/high_chance,/area/space)
+"af" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"ag" = (/turf/simulated/wall,/area/mining_colony/interior/comms)
+"ah" = (/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"ai" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"aj" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"ak" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"al" = (/turf/simulated/wall,/area/mining_colony/interior/northe)
+"am" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"an" = (/obj/structure/table/reinforced,/obj/item/weapon/wrench,/obj/item/weapon/screwdriver,/obj/item/weapon/crowbar,/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"ao" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"ap" = (/obj/machinery/mining/drill,/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"aq" = (/obj/structure/ore_box,/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"ar" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"as" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"at" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/plating,/area/mining_colony/interior/comms)
+"au" = (/turf/space,/area/mining_colony/exterior/Asteroid)
+"av" = (/obj/structure/table/reinforced,/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"aw" = (/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"ax" = (/obj/machinery/mining/brace,/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"ay" = (/obj/structure/table/reinforced,/obj/machinery/cell_charger,/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"az" = (/obj/machinery/floodlight,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"aA" = (/obj/machinery/suit_storage_unit/mining,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aB" = (/obj/machinery/suit_storage_unit/mining,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aC" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/tank/jetpack/void,/obj/item/weapon/tank/jetpack/void,/obj/item/weapon/tank/jetpack/void,/obj/item/weapon/tank/jetpack/void,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aD" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/pickaxe/drill,/obj/item/weapon/pickaxe/drill,/obj/item/weapon/pickaxe/drill,/obj/item/weapon/pickaxe/drill,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aE" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"aF" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aG" = (/turf/simulated/wall,/area/mining_colony/interior/northw)
+"aH" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"aI" = (/obj/structure/closet/secure_closet/miner,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aJ" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/plating,/area/mining_colony/interior/northe)
+"aK" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"aL" = (/obj/structure/table/reinforced,/obj/item/weapon/wrench,/obj/item/weapon/screwdriver,/obj/item/weapon/crowbar,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aM" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aN" = (/obj/machinery/mining/drill,/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aO" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aP" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"aQ" = (/obj/structure/table/reinforced,/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aR" = (/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aS" = (/obj/machinery/mining/brace,/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aT" = (/obj/structure/closet/secure_closet/miner,/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aU" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lantern,/obj/item/device/flashlight/lantern,/obj/item/device/flashlight/lantern,/obj/item/device/flashlight/lantern,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aV" = (/obj/structure/dispenser/oxygen,/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/northe)
+"aW" = (/obj/structure/table/reinforced,/obj/machinery/cell_charger,/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aX" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"aY" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/hallway)
+"aZ" = (/obj/machinery/door/airlock/multi_tile/glass{tag = "icon-door_closed (WEST)"; icon_state = "door_closed"; dir = 8},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"ba" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"bb" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/plating,/area/mining_colony/interior/northw)
+"bc" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"bd" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/ore_box,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"be" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"bf" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/pickaxe/drill,/obj/item/weapon/pickaxe/drill,/obj/item/weapon/pickaxe/drill,/obj/item/weapon/pickaxe/drill,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bg" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bh" = (/obj/structure/dispenser/oxygen,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bi" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/tank/jetpack/void,/obj/item/weapon/tank/jetpack/void,/obj/item/weapon/tank/jetpack/void,/obj/item/weapon/tank/jetpack/void,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bj" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bk" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lantern,/obj/item/device/flashlight/lantern,/obj/item/device/flashlight/lantern,/obj/item/device/flashlight/lantern,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bl" = (/obj/machinery/door/airlock/multi_tile/glass{name = "Airlock"},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"bm" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/floor_decal/industrial/loading,/turf/simulated/floor/asteroid/planet,/area/mining_colony/interior/refinery)
+"bn" = (/obj/machinery/light,/turf/simulated/floor/asteroid/planet,/area/mining_colony/exterior/Asteroid)
+"bo" = (/obj/machinery/suit_storage_unit/mining,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bp" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"bq" = (/obj/machinery/conveyor{dir = 2; id = "mining_internal"},/turf/simulated/floor/asteroid/planet,/area/mining_colony/interior/refinery)
+"br" = (/turf/simulated/mineral/random/high_chance,/area/mining_colony/interior/refinery)
+"bs" = (/obj/machinery/door/airlock/multi_tile/glass{tag = "icon-door_closed"; icon_state = "door_closed"; dir = 2},/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bt" = (/obj/machinery/door/airlock/multi_tile/glass{tag = "icon-door_closed (NORTH)"; icon_state = "door_closed"; dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"bu" = (/turf/simulated/wall,/area/mining_colony/interior/minerals)
+"bv" = (/turf/simulated/wall,/area/mining_colony/interior/refinery)
+"bw" = (/obj/machinery/conveyor{dir = 2; id = "mining_internal"},/obj/structure/plasticflaps/mining,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bx" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"by" = (/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bz" = (/obj/structure/closet/crate{name = "ammunition crate"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bA" = (/obj/structure/closet/crate,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bB" = (/obj/structure/closet/crate,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bC" = (/obj/machinery/conveyor{tag = "icon-conveyor0 (SOUTHEAST)"; icon_state = "conveyor0"; dir = 6; id = "anolaser"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bD" = (/obj/machinery/mineral/input,/obj/machinery/door/firedoor/border_only{dir = 2},/obj/machinery/conveyor{dir = 4; id = "mining_internal"},/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bE" = (/obj/machinery/mineral/unloading_machine,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bF" = (/obj/machinery/conveyor{dir = 4; id = "mining_internal"},/obj/machinery/mineral/output,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bG" = (/obj/machinery/conveyor{dir = 4; id = "mining_internal"},/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bH" = (/obj/machinery/conveyor{dir = 4; id = "mining_internal"},/obj/structure/plasticflaps/mining,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bI" = (/obj/machinery/conveyor{dir = 9; id = "mining_internal"},/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bJ" = (/obj/machinery/suit_storage_unit/mining,/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bK" = (/obj/structure/closet/secure_closet/miner,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bL" = (/obj/structure/closet/secure_closet/miner,/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/northw)
+"bM" = (/obj/machinery/autolathe/ammo_fabricator,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bN" = (/obj/machinery/conveyor_switch/oneway{id = "mining_internal"; name = "mining conveyor"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bO" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bP" = (/obj/machinery/conveyor{dir = 2; id = "mining_internal"},/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"bQ" = (/obj/effect/floor_decal/industrial/loading{tag = "icon-loadingarea (NORTH)"; icon_state = "loadingarea"; dir = 1},/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bR" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bS" = (/obj/structure/noticeboard{pixel_y = 27},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bT" = (/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bU" = (/obj/structure/window/reinforced{dir = 8},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bV" = (/obj/structure/extinguisher_cabinet{pixel_x = -5; pixel_y = 30},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bW" = (/obj/machinery/status_display{layer = 4; pixel_x = 0; pixel_y = 32},/obj/machinery/light_construct/small{tag = "icon-bulb-construct-stage1 (NORTH)"; icon_state = "bulb-construct-stage1"; dir = 1},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bX" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"bY" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (NORTHWEST)"; icon_state = "warning"; dir = 9},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"bZ" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (NORTH)"; icon_state = "warning"; dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ca" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (NORTHEAST)"; icon_state = "warning"; dir = 5},/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cb" = (/obj/machinery/door/window/westright{name = "Production Area"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cc" = (/obj/machinery/mineral/input,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"cd" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHWEST)"; icon_state = "warning"; dir = 10},/obj/machinery/camera{c_tag = "Cargo Office"; dir = 4; network = list("SS13")},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ce" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cf" = (/obj/effect/floor_decal/industrial/warning/corner{tag = "icon-warningcorner (WEST)"; icon_state = "warningcorner"; dir = 8},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cg" = (/obj/effect/landmark{name = "JoinLateCyborg"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ch" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (EAST)"; icon_state = "warning"; dir = 4},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ci" = (/mob/living/simple_animal/npc/colonist/mineral_trader,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cj" = (/obj/machinery/door/window/westleft{name = "Production Area"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"ck" = (/obj/machinery/mineral/processing_unit_console,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cl" = (/obj/machinery/mineral/processing_unit,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"cm" = (/obj/effect/floor_decal/industrial/loading,/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cn" = (/obj/structure/closet/crate{name = "ammunition crate"},/obj/item/stack/material/steel/ten,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"co" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (WEST)"; icon_state = "warning"; dir = 8},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cp" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/closet/crate,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cq" = (/obj/structure/closet/crate,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cr" = (/obj/machinery/conveyor{dir = 2; id = "mining_internal"},/obj/machinery/mineral/output,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"cs" = (/obj/machinery/mineral/stacking_unit_console,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"ct" = (/turf/simulated/wall,/area/mining_colony/interior/living)
+"cu" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Housing4"; density = 0; icon_state = "pdoor0"; id = "Housing4"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/living)
+"cv" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cw" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHWEST)"; icon_state = "warning"; dir = 10},/obj/machinery/button/remote/blast_door{id = "qm_warehouse"; name = "factory shutters"; pixel_x = 0; pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cx" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHEAST)"; icon_state = "warning"; dir = 6},/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cy" = (/obj/machinery/door/airlock/mining,/turf/simulated/floor/tiled,/area/mining_colony/interior/refinery)
+"cz" = (/obj/machinery/light,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cA" = (/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/obj/structure/plasticflaps,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cB" = (/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cC" = (/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/obj/machinery/mineral/output,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/refinery)
+"cD" = (/obj/machinery/mineral/stacking_machine,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"cE" = (/obj/machinery/conveyor{icon_state = "conveyor0"; dir = 10; id = "mining_internal"},/obj/machinery/mineral/input,/turf/simulated/floor/plating,/area/mining_colony/interior/refinery)
+"cF" = (/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"cG" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"cH" = (/obj/structure/sofa/left{tag = "icon-sofaend_left (EAST)"; icon_state = "sofaend_left"; dir = 4},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"cI" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"cJ" = (/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"cK" = (/obj/structure/closet,/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"cL" = (/obj/machinery/door/blast/shutters{dir = 2; id = "qm_warehouse"; name = "Factory Shutters"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cM" = (/obj/structure/device/piano,/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"cN" = (/obj/item/weapon/stool,/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"cO" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"cP" = (/obj/structure/sofa/right{tag = "icon-sofaend_right (EAST)"; icon_state = "sofaend_right"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"cQ" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"cR" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Housing3"; density = 0; icon_state = "pdoor0"; id = "Housing3"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/living)
+"cS" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/ore_box,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cT" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/ore_box,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cU" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cV" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cW" = (/obj/vehicle/train/cargo/engine,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cX" = (/obj/machinery/button/remote/blast_door{id = "qm_warehouse"; name = "factory shutters"; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"cY" = (/turf/simulated/wall,/area/mining_colony/interior/hallway)
+"cZ" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"da" = (/obj/machinery/door/airlock{name = "105 Candlelight Drive"},/turf/simulated/floor/plating,/area/mining_colony/interior/living)
+"db" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"dc" = (/obj/machinery/media/jukebox,/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"dd" = (/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"de" = (/obj/structure/sofa/right{tag = "icon-sofaend_right (WEST)"; icon_state = "sofaend_right"; dir = 8},/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"df" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"dg" = (/obj/machinery/door/airlock/glass{name = "Dining Room"},/turf/simulated/floor/plating,/area/mining_colony/interior/living)
+"dh" = (/obj/machinery/button/remote/blast_door{_wifi_id = "House4"; name = "Privacy Shutter Control"; pixel_y = -32},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"di" = (/obj/structure/table/rack{icon = 'icons/obj/coatrack.dmi'; icon_state = "coatrack0"; name = "wooden coat rack"},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"dj" = (/obj/machinery/door/airlock/glass_atmos{name = "Bedroom"},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"dk" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"dl" = (/obj/structure/table/woodentable,/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"dm" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/obj/machinery/light{dir = 4},/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"dn" = (/obj/machinery/door/airlock/glass{name = "Bedroom"},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"do" = (/obj/machinery/door/airlock/silver{name = "Kitchen"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dp" = (/obj/structure/closet/cabinet{name = "Wardrobe"},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"dq" = (/obj/structure/sofa/left{tag = "icon-sofaend_left (WEST)"; icon_state = "sofaend_left"; dir = 8},/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"dr" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/ore_box,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ds" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"dt" = (/obj/machinery/navbeacon{location = "QM #1"},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light{dir = 4},/mob/living/bot/mulebot,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"du" = (/obj/structure/closet,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"dv" = (/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"dw" = (/obj/machinery/button/remote/blast_door{_wifi_id = "House4"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"dx" = (/obj/effect/floor_decal/corner/lime/three_quarters{tag = "icon-corner_white_three_quarters (WEST)"; icon_state = "corner_white_three_quarters"; dir = 8},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dy" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dz" = (/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dA" = (/obj/effect/floor_decal/corner/lime/three_quarters{tag = "icon-corner_white_three_quarters (NORTH)"; icon_state = "corner_white_three_quarters"; dir = 1},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dB" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/lino,/area/mining_colony/interior/living)
+"dC" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dD" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"dE" = (/obj/machinery/navbeacon{location = "QM #2"},/obj/effect/floor_decal/industrial/outline/yellow,/mob/living/bot/mulebot,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"dF" = (/turf/simulated/wall,/area/mining_colony/interior/storage)
+"dG" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/mime,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"dH" = (/obj/effect/floor_decal/corner/lime/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dI" = (/obj/effect/floor_decal/corner/lime/diagonal,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dJ" = (/obj/structure/table/rack{icon = 'icons/obj/coatrack.dmi'; icon_state = "coatrack0"; name = "wooden coat rack"},/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"dK" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/obj/machinery/light{dir = 1},/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"dL" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dM" = (/obj/machinery/navbeacon{location = "QM #3"},/obj/effect/floor_decal/industrial/outline/yellow,/mob/living/bot/mulebot,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"dN" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/electrical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/weapon/storage/toolbox/electrical,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dO" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dP" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/emergency,/obj/item/weapon/storage/toolbox/emergency,/obj/item/weapon/storage/toolbox/emergency,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dQ" = (/obj/structure/closet/excavation,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dR" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/weldingtool,/obj/item/weapon/weldingtool,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dS" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dT" = (/obj/structure/reagent_dispensers/fueltank,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"dU" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"dV" = (/obj/structure/closet/cabinet{name = "Wardrobe"},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"dW" = (/obj/effect/floor_decal/corner/lime/three_quarters,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dX" = (/obj/structure/table/standard,/obj/item/weapon/material/knife/butch,/obj/item/weapon/material/kitchen/rollingpin,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dY" = (/obj/structure/table/standard,/obj/machinery/microwave,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"dZ" = (/obj/effect/floor_decal/corner/lime/three_quarters{tag = "icon-corner_white_three_quarters (EAST)"; icon_state = "corner_white_three_quarters"; dir = 4},/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"ea" = (/obj/machinery/door/airlock{name = "102 Candlelight Drive"},/turf/simulated/floor/plating,/area/mining_colony/interior/living)
+"eb" = (/obj/structure/curtain/black,/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"ec" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/ore_box,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ed" = (/obj/machinery/navbeacon{location = "QM #4"},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light,/mob/living/bot/mulebot,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"ee" = (/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"ef" = (/obj/machinery/door/airlock/multi_tile/glass,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/minerals)
+"eg" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"eh" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"ei" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; tag = "icon-densecrate"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"ej" = (/obj/structure/closet/crate/medical{name = "Biofoam Canisters Crate"},/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"ek" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"el" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"em" = (/obj/machinery/door/airlock/multi_tile/glass{tag = "icon-door_closed"; icon_state = "door_closed"; dir = 2},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"en" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"eo" = (/obj/machinery/door/airlock/multi_tile/glass{dir = 2; icon_state = "door_closed"; name = "Storage"; tag = "icon-door_closed"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"ep" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; name = "Cardboard Supplies"; tag = "icon-densecrate"},/obj/item/stack/material/cardboard/ten,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"eq" = (/obj/structure/closet/crate/large{tag = "icon-secgearcrate"; icon_state = "secgearcrate"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"er" = (/obj/machinery/door/airlock{name = "100 Candlelight Drive"},/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"es" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Housing2"; density = 0; icon_state = "pdoor0"; id = "Housing2"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/hallway)
+"et" = (/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/hallway)
+"eu" = (/turf/simulated/wall,/area/mining_colony/interior/medical)
+"ev" = (/turf/simulated/shuttle/wall,/area/mining_colony/interior/medical)
+"ew" = (/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/mining_colony/interior/medical)
+"ex" = (/obj/machinery/door/airlock/multi_tile/glass,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"ey" = (/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"ez" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; tag = "icon-densecrate"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"eA" = (/turf/simulated/floor/wood,/area/mining_colony/interior/hallway)
+"eB" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/mining_colony/interior/hallway)
+"eC" = (/obj/structure/sofa/left{tag = "icon-sofaend_left (EAST)"; icon_state = "sofaend_left"; dir = 4},/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"eD" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"eE" = (/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"eF" = (/obj/structure/closet,/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"eG" = (/obj/structure/closet/secure_closet/medical_wall{pixel_y = 32},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eH" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/table/standard,/obj/random/firstaid,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eI" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eJ" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"eK" = (/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eL" = (/obj/machinery/oxygen_pump/anesthetic{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"eM" = (/obj/structure/sink{name = "interior sink"; pixel_y = 32},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"eN" = (/obj/machinery/button/remote/blast_door{id = "surgery"; name = "Surgery Shutters"; pixel_y = 32},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"eO" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eP" = (/obj/item/weapon/reagent_containers/food/snacks/popcorn,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eQ" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"eR" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs"; tag = "icon-phoroncrate"},/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"eS" = (/obj/structure/closet/crate/medical{name = "Medical Kits Crate"},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"eT" = (/obj/machinery/door/airlock/silver{name = "Bedroom"},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"eU" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Housing1"; density = 0; icon_state = "pdoor0"; id = "Housing1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/living)
+"eV" = (/obj/structure/device/piano,/turf/simulated/floor/wood,/area/mining_colony/interior/hallway)
+"eW" = (/obj/item/weapon/stool,/turf/simulated/floor/wood,/area/mining_colony/interior/hallway)
+"eX" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/wood,/area/mining_colony/interior/hallway)
+"eY" = (/obj/structure/sofa/right{tag = "icon-sofaend_right (EAST)"; icon_state = "sofaend_right"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"eZ" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"fa" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fb" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/computer/med_data,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fc" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"fd" = (/obj/item/weapon/stool,/obj/structure/sign/warning/nosmoking_2{pixel_x = 32},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"fe" = (/obj/structure/table/steel,/obj/item/weapon/FixOVein,/obj/item/weapon/surgicaldrill,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"ff" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fg" = (/obj/effect/wingrille_spawn/reinforced/full,/obj/machinery/door/blast/shutters/open{dir = 8; icon_state = "shutter1"; id = "surgery"; name = "Surgery Shutters"; pixel_y = 0; req_access = list(45); tag = "icon-shutter1 (WEST)"},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fh" = (/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fi" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"fj" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Plasteel Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"fk" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"fl" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Replacment Lights Crate"; tag = "icon-secgearcrate"},/obj/item/device/lightreplacer,/obj/item/weapon/storage/box/lights,/obj/item/weapon/storage/box/lights,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/storage)
+"fm" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/blue,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/living)
+"fn" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/wood,/area/mining_colony/interior/living)
+"fo" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"fp" = (/obj/machinery/door/airlock{name = "105 Candlelight Drive"},/turf/simulated/floor/plating,/area/mining_colony/interior/hallway)
+"fq" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (EAST)"; icon_state = "officechair_white_preview"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fr" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fs" = (/obj/structure/table/marble,/obj/item/weapon/storage/box/cups,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"ft" = (/obj/structure/table/steel,/obj/item/weapon/circular_saw{pixel_y = 8},/obj/item/weapon/scalpel,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fu" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"fv" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/table/steel,/obj/item/clothing/mask/surgical,/obj/item/clothing/head/surgery/blue,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fw" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fx" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fy" = (/obj/machinery/door/airlock/glass{name = "Dining Room"},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"fz" = (/obj/machinery/door/airlock/glass{name = "Dining Room"},/turf/simulated/floor/wood,/area/mining_colony/interior/hallway)
+"fA" = (/obj/machinery/button/remote/blast_door{_wifi_id = "House2"; name = "Privacy Shutter Control"; pixel_y = -32},/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"fB" = (/obj/structure/table/rack{icon = 'icons/obj/coatrack.dmi'; icon_state = "coatrack0"; name = "wooden coat rack"},/turf/simulated/floor/carpet,/area/mining_colony/interior/hallway)
+"fC" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/computer/crew,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fD" = (/obj/machinery/atm{name = "ATM"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"fE" = (/obj/structure/table/steel,/obj/item/stack/medical/advanced/bruise_pack,/obj/item/weapon/retractor,/obj/item/weapon/bonegel,/obj/item/weapon/bonesetter,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fF" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"fG" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"fH" = (/obj/machinery/button/remote/blast_door{_wifi_id = "House1"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"fI" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"fJ" = (/obj/machinery/door/airlock/glass{name = "Bedroom"},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"fK" = (/obj/machinery/door/airlock/silver{name = "Kitchen"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"fL" = (/obj/structure/window/reinforced{dir = 4},/obj/random/firstaid,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fM" = (/obj/structure/reagent_dispensers/water_cooler,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fN" = (/obj/structure/table/steel,/obj/item/weapon/hemostat,/obj/item/weapon/cautery,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fO" = (/obj/machinery/vending/wallmed1{pixel_y = -32},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"fP" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/bodybags,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"fQ" = (/obj/machinery/computer/med_data,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"fR" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"fS" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"fT" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (WEST)"; icon_state = "wooden_chair_preview"; dir = 8},/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"fU" = (/obj/structure/closet,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"fV" = (/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"fW" = (/obj/machinery/button/remote/blast_door{_wifi_id = "House2"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"fX" = (/obj/effect/floor_decal/corner/lime/three_quarters{tag = "icon-corner_white_three_quarters (WEST)"; icon_state = "corner_white_three_quarters"; dir = 8},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"fY" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"fZ" = (/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"ga" = (/obj/effect/floor_decal/corner/lime/three_quarters{tag = "icon-corner_white_three_quarters (NORTH)"; icon_state = "corner_white_three_quarters"; dir = 1},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gb" = (/obj/machinery/door/airlock/medical{name = "Hospital Reception"; req_access = newlist()},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gc" = (/obj/machinery/door/airlock/multi_tile/glass{name = "Hospital Foyer"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gd" = (/obj/machinery/door/airlock/medical{name = "Operating Theatre"; req_access = newlist()},/obj/machinery/holosign/surgery{id = "surgery"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"ge" = (/obj/machinery/door/airlock/medical{name = "Observation Room"},/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gf" = (/obj/structure/table/standard,/obj/machinery/reagentgrinder,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"gg" = (/obj/machinery/door/airlock/medical{name = "Kitchen"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"gh" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/candle,/turf/simulated/floor/carpet,/area/mining_colony/interior/living)
+"gi" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/mime,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"gj" = (/obj/effect/floor_decal/corner/lime/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gk" = (/obj/effect/floor_decal/corner/lime/diagonal,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gl" = (/obj/machinery/vending/medical,/turf/simulated/shuttle/wall,/area/mining_colony/interior/medical)
+"gm" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gn" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/living)
+"go" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"gp" = (/obj/structure/closet/cabinet{name = "Wardrobe"},/turf/simulated/floor/carpet/blue,/area/mining_colony/interior/hallway)
+"gq" = (/obj/effect/floor_decal/corner/lime/three_quarters,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gr" = (/obj/structure/table/standard,/obj/item/weapon/material/knife/butch,/obj/item/weapon/material/kitchen/rollingpin,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gs" = (/obj/structure/table/standard,/obj/machinery/microwave,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gt" = (/obj/effect/floor_decal/corner/lime/three_quarters{tag = "icon-corner_white_three_quarters (EAST)"; icon_state = "corner_white_three_quarters"; dir = 4},/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/hallway)
+"gu" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gv" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gw" = (/obj/machinery/door/airlock/multi_tile/glass{name = "Medical Storage"; req_access = newlist()},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gx" = (/obj/structure/curtain{color = "#72AFED"; name = "blue curtain"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gy" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gz" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gA" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gB" = (/obj/machinery/chemical_dispenser/full,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gC" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gD" = (/obj/structure/closet/secure_closet/personal/patient,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gE" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gF" = (/obj/machinery/smartfridge/chemistry,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gG" = (/obj/item/weapon/bedsheet/medical,/obj/machinery/vending/wallmed1{name = "NanoMed Wall"; pixel_x = 25; pixel_y = 0},/obj/structure/bed/padded,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gH" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gI" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gJ" = (/obj/item/weapon/storage/box/beakers,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gK" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/structure/closet/secure_closet/medical3{locked = 0},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gL" = (/obj/structure/table/steel,/obj/machinery/computer/med_data/laptop,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gM" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gN" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gO" = (/obj/structure/closet/wardrobe/chemistry_white,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gP" = (/obj/item/weapon/storage/box/autoinjectors,/obj/item/weapon/storage/box/autoinjectors,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gQ" = (/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gR" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gS" = (/obj/structure/table/standard,/obj/item/weapon/pen,/obj/item/weapon/hand_labeler,/turf/simulated/floor/tiled,/area/mining_colony/interior/medical)
+"gT" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gU" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/effect/floor_decal/corner/lime,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gV" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gW" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gX" = (/obj/structure/sign/greencross,/turf/simulated/shuttle/wall,/area/mining_colony/interior/medical)
+"gY" = (/obj/machinery/door/airlock/medical{name = "Emergency Room"; req_access = newlist()},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"gZ" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"ha" = (/obj/structure/table/steel,/obj/item/weapon/wrench,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hb" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{pixel_x = 7; pixel_y = 1},/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{pixel_x = -4; pixel_y = 0},/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{pixel_x = -4; pixel_y = 0},/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{pixel_x = -4; pixel_y = 0},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hc" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hd" = (/obj/structure/table/steel,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"he" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hf" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hg" = (/obj/structure/closet/firecloset,/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hh" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hi" = (/obj/machinery/atmospherics/pipe/manifold4w/visible,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hj" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHWEST)"; icon_state = "intact"; dir = 10},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hk" = (/obj/structure/closet/secure_closet/paramedic,/obj/structure/sign/warning/nosmoking_2{pixel_x = 32},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hl" = (/obj/machinery/light/small,/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hm" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hn" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer"},/obj/machinery/light/small,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"ho" = (/obj/machinery/sleeper{dir = 4; icon_state = "sleeper_0"; tag = "icon-sleeper_0 (WEST)"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hp" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hq" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hr" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/medical)
+"hs" = (/turf/simulated/wall,/area/mining_colony/interior/bar)
+"ht" = (/turf/simulated/wall,/area/mining_colony/interior/sushi)
+"hu" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"hv" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/storage/pill_bottle/happy,/obj/item/weapon/storage/pill_bottle/zoom,/obj/item/weapon/paper{info = "Zoom<br><br>impedrezene, hyperzine, synaptizine<br><br>Happiness<br>space drugs, sugar"; name = "recipes"},/obj/item/weapon/hand_labeler,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hw" = (/obj/machinery/cooker/grill,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hx" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hy" = (/obj/machinery/chem_master,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hz" = (/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hA" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_alc/full,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hB" = (/obj/machinery/smartfridge/drinks,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hC" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hD" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled,/area/mining_colony/interior/sushi)
+"hE" = (/obj/structure/table/reinforced,/turf/simulated/floor/tiled,/area/mining_colony/interior/sushi)
+"hF" = (/obj/machinery/light{dir = 1},/mob/living/simple_animal/npc/colonist/mineral_trader,/turf/simulated/floor/tiled,/area/mining_colony/interior/sushi)
+"hG" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hH" = (/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hI" = (/obj/machinery/door/airlock{name = "Bar Backroom"},/turf/simulated/floor/tiled/dark,/area/mining_colony/interior/bar)
+"hJ" = (/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hK" = (/obj/machinery/door/airlock{name = "Bar Backroom"},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hL" = (/obj/structure/table/woodentable,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hM" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/sushi)
+"hN" = (/obj/machinery/atmospherics/pipe/tank/nitrous_oxide,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hO" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hP" = (/obj/structure/table/standard,/obj/item/clothing/suit/surgicalapron,/obj/item/clothing/suit/surgicalapron,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hQ" = (/obj/machinery/light/small{dir = 4},/obj/structure/table/standard,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"hR" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hS" = (/obj/effect/landmark/costume/butler,/obj/effect/landmark/costume/maid,/obj/effect/landmark/costume/waiter,/obj/structure/closet/cabinet,/obj/item/clothing/under/sl_suit,/obj/item/clothing/under/waiter,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hT" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/tiled,/area/mining_colony/interior/sushi)
+"hU" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hV" = (/obj/structure/table/standard,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hW" = (/obj/structure/table/standard,/obj/machinery/button/windowtint{id = "barwindow"},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hX" = (/obj/structure/table/standard,/obj/random/smokes,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hY" = (/obj/structure/table/woodentable,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"hZ" = (/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"ia" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"ib" = (/obj/machinery/light/small{dir = 1},/obj/machinery/media/jukebox,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"ic" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"id" = (/obj/structure/window/reinforced/polarized/full{id = "barwindow"},/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"ie" = (/obj/structure/sign/poster,/turf/simulated/wall,/area/mining_colony/interior/sushi)
+"if" = (/obj/item/weapon/stool/bar,/turf/simulated/floor/pavement/empty,/area/mining_colony/interior/sushi)
+"ig" = (/obj/structure/grille,/obj/structure/window/reinforced/polarized/full{id = "barwindow"},/turf/simulated/floor/plating,/area/mining_colony/interior/bar)
+"ih" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"ii" = (/obj/structure/bed/chair{tag = "icon-chair_preview (NORTH)"; icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"ij" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Sushi Bar Shutters"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"ik" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Sushi Bar Shutters"},/obj/random/smokes,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"il" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Sushi Bar Shutters"},/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"im" = (/obj/effect/landmark/start/mining_asteroid,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"in" = (/obj/machinery/door/airlock{name = "The Drunk Deckhand"},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"io" = (/obj/machinery/button/remote/blast_door{id = "sushi"; name = "sushi bar shutters"; pixel_x = 0; pixel_y = 32},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"ip" = (/obj/effect/floor_decal/corner/grey{tag = "icon-corner_white (EAST)"; icon_state = "corner_white"; dir = 4},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"iq" = (/obj/effect/floor_decal/corner/grey{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"ir" = (/obj/machinery/cooker/fryer,/obj/effect/floor_decal/corner/grey{tag = "icon-corner_white (NORTH)"; icon_state = "corner_white"; dir = 1},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"is" = (/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"it" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"iu" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"iv" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"iw" = (/obj/machinery/smartfridge/drying_rack,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"ix" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/mining_colony/interior/sushi)
+"iy" = (/obj/machinery/light/small{dir = 8},/obj/structure/bed/chair,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"iz" = (/obj/structure/bed/chair,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"iA" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"iB" = (/obj/machinery/door/airlock{name = "Kitchen"},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/sushi)
+"iC" = (/obj/machinery/door/airlock,/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"iD" = (/obj/structure/table/gamblingtable,/turf/simulated/floor/wood,/area/mining_colony/interior/bar)
+"iE" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/obj/item/weapon/reagent_containers/food/snacks/carpmeat,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/sushi)
+"iF" = (/turf/simulated/floor/tiled/white,/area/mining_colony/interior/sushi)
+"iG" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"iH" = (/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"iI" = (/mob/living/simple_animal/familiar/pet/mouse,/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"iJ" = (/obj/item/weapon/material/knife/butch,/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/turf/simulated/floor/tiled/white,/area/mining_colony/interior/sushi)
+"iK" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/tiled/white,/area/mining_colony/interior/sushi)
+"iL" = (/obj/structure/closet/crate/trashcart,/obj/random/junk,/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"iM" = (/obj/random/junk,/turf/simulated/floor/plating,/area/mining_colony/interior/sushi)
+"iN" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled,/area/mining_colony/interior/hallway)
+"iO" = (/turf/simulated/wall,/area/mining_colony/interior/cryodorms)
+"iP" = (/obj/machinery/door/airlock/multi_tile/glass{name = "Cryodorms"},/turf/simulated/floor/tiled,/area/mining_colony/interior/cryodorms)
+"iQ" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/cryodorms)
+"iR" = (/turf/simulated/wall,/area/mining_colony/interior/visitor)
+"iS" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled,/area/mining_colony/interior/visitor)
+"iT" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled,/area/mining_colony/interior/cryodorms)
+"iU" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"iV" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"iW" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/visitor)
+"iX" = (/obj/machinery/cryopod/unsc{tag = "icon-off"; icon_state = "off"; dir = 2},/turf/simulated/floor/tiled,/area/mining_colony/interior/cryodorms)
+"iY" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"iZ" = (/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"ja" = (/obj/machinery/door/airlock/glass_atmos{name = "Bedroom"},/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"jb" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"jc" = (/obj/structure/closet,/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"jd" = (/obj/structure/closet/cabinet{name = "Wardrobe"},/turf/simulated/floor/carpet,/area/mining_colony/interior/visitor)
+"je" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/mining_colony/interior/docking)
+"jf" = (/turf/simulated/floor/tiled,/area/mining_colony/interior/docking)
+"jg" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/mining_colony/interior/docking)
+"jh" = (/turf/simulated/wall,/area/mining_colony/interior/docking)
+"ji" = (/obj/docking_umbilical/north{name = "PYK-248 Docking Umbilical 1"},/turf/simulated/floor/plating,/area/mining_colony/interior/docking)
+"jj" = (/obj/docking_umbilical/north{name = "PYK-248 Docking Umbilical 2"},/turf/simulated/floor/plating,/area/mining_colony/interior/docking)
+"jk" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/mining_colony/interior/docking)
+"jl" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/mining_colony/interior/docking)
+"jm" = (/obj/machinery/door/airlock/multi_tile/glass{tag = "icon-door_closed"; icon_state = "door_closed"; dir = 2},/turf/simulated/floor/tiled,/area/mining_colony/interior/docking)
+"jn" = (/obj/docking_umbilical/south{name = "PYK-248 Docking Umbilical 3"},/turf/simulated/floor/plating,/area/mining_colony/interior/docking)
+"jo" = (/obj/docking_umbilical/south{name = "PYK-248 Docking Umbilical 4"},/turf/simulated/floor/plating,/area/mining_colony/interior/docking)
+"jp" = (/obj/effect/overmap/sector/exo_mining,/turf/space,/area/space)
+"jq" = (/obj/effect/landmark/map_data,/turf/space,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaababaaaaaaaaaaababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaaaaaaababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaacacacacacaaaaaaaaaaaaaaacacacacacacacacaaadaaaaaaacacacacacacacacacacacacababacacacacacacabacabababababacacacacabababababababababababababacacacacacaaaaaaacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaababaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaacacacacacacaaaaacacacacacacababacacacaaaaaaacacacacacacacacacacacacacacacabacacacacacacacacacababababacacacacabababababababababababababacacacacacacacadaaacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaababaaaaaaaaaaaaabababaaaaababaaaaacacacacacacacacacacacacacacacacababababababacacacacacacacacacacacacacacacacacacababababababacacacacabababacacabacacabababababababacacacacababacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababaaabababacababababababababababababababababacabacacacacacacababababababababacacacabababababababacacacacabababacacabacacacababababababacacacacabababacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaeaaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacababababababababacacacababababababababacacacacabababacacacababababacacacacacacacafacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacabababababababababababababababababababacacacacababacacacacabacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacabababababababababababababababababacacacacacabababacacacacabababababacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacababababababababacacacacacacabababacacacacacacababababababacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaeaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacabacabababacacacacababababababacacacacacacacacababababacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacafacacacacacacacacacacacabacacacacacacacacababacacacacacacacacacacababacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacabababababacacacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacacacacacacababababababacacacacacacacacacacacacacacacacacacacacacacacaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacacacacacacabababababacacacacacacacababacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacacababababababacacacacacacababababababacacacacacacacacacacacababababacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacababababababacacacacacacababababababababacacacacacacacacababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacababababababacacacacacacababacacacabababacacacacacacacacababababababacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacabacacacacacacacacacacacacacacabababababacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababacacacabababababababababababababababababababababababababababacacacacacacacacacacacacacafacacacacacacacacababababababababababababababababababababacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababacacacacacacacabababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababacacacacacacababababababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacababababababababababababababababababababacacacafacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababacacacacacacacacabababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacacababababababababababababababababababababababacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababababacacacacacabababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacacababababababababababababababababababababababacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababacacacacabababababababababababababababababababababababababacacacacacababacacacacacacacacacacacacagagagagagagabababababababababababababababacacacacacacacacacacacacacafacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababacacacababababababababababababababababababababababababababacacacacacabacacacacacacacacacacagagagahaiajakagababababababababababababababababababababacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababababababababababababababababacacababababababababababababacabababalalalalalalalabababababacacacacabacacacacacacacacacacamahamahahahahagabababababababababababababababababababababababacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaabaaababababababababababababababababababababababababababababababababababababababababacacabababababababababababababababalanaoapapaqalacacacacabacacacacabacacacacacacacacacacagagagaharasatagababababababababababababababababababababababacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaauaaabababababababababababababababababababababababababababababababababacacacacacacacacacacacacacacacacababababababababalavawaxaxawalacacacacababababababacacacacacacacacacacacacagagagagagagabababababababababababababababababababababacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababacacacacacacacababacacacacacababababababababababalayawaxaxawalacacacacacacacababacacacacacacacacacacacacacabababababababababababababababababababababababacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababacacabababababababacacacacacabalalalalalalalalabalawawawawawalacacacafacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababacacacazacacabalaAaBaBaBaCaDalabalacacacacacaEacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabacacacacacababababababababacacacacacacafacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababacacacacacacabababalaFaFaFaFaFaFalalalacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacabababababababababababababababababababaGaGaGaGaGaGaHacacacababababalaIaFaFaFaFaFaJawaJacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaKacacacacacacacacacacafacabacacabababababababacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacabababababababababababababababababababaGaLaMaNaNaMacacacacababababalaIaFaFaFaOaFalalalacacacacacabababacacacabacaKacabacacacacacacaPacacacacacacacacacacacacacacacacacacacacacacababababababacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababababababababababababababababababaGaQaRaSaSaRacacacacababababalaTaFaFaFaUaValababacacacacazababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababababababababababababababababababaGaWaRaSaSaRacacacabababababalalalaFaFalalalabababacacacacababababababacacacacacacacacacacacacacacacacacacacacacacacaKacacacacacacacacacacacababababababababababacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababababababababababababababababababaGaXaRaRaRaRacacacabababacabacacaYaZbaaYacababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabacacabababacababababacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacaaacacacacacacabababababababababababababababaGaGaGaGaGaGaGbbaGababacacacacacaYbabaaYacacacacacacacacacacabacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababacacacacacacacacacacacacacacacababababacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacaaaaaaaaaaacacabababababababababababababababababababababaGaRaGababacacacacacaYbabcaYacacacacacacababacacacacacacacacacacacacacacacacbdbebdacafacacacacacacacacacacababababacacaKacacacacacacacacacacacacacababababacacacacacaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacaaacacabababababababababababababababababababaGaGaGbbaGaGaGacacacacacaYbabaaYacacacacacacababacacabababacacacacacacacacacacacacacacacacazacacaKacacacacacacababababacacacacacacacacacacacacacacacacababababacacafacacaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacaaacabababababababababababababababacabababaGbfbgbgbgbhaGacacacacacaYbabaaYacacacacacacabababababababacacacacacacacacacacacbebdbeacacacacabacacacacacacacacabababacacacacacacacacacacacacacacacacababababacacacacacauacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaacababababababababababababababacacacabacaGbibgbgbjbkaGaYaYaYaYaYaYblbaaYacacacacababababababababababacacacacacacacacacacacacacbmacacbnacacacabacacacacacacacacacacacacacacababababacabacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaacababababababababababacacacacacacacabacaGbobgbgbgbgbgbpbababpbabababcaYacacacacabababababababababababacacacacacacacacbnbdbdbdbqacacbracacacacabababababacacacacacacacacacabababababababacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacababababababababababacacacacacacacacacaGbobgbgbgbgbsbababababtbababaaYacacacabababbububububububububububububububububububububvbwbvbvbvbvbvbvbvbvbvababababacacacacacacacacabababababababacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababababababababababacacacacacacacacacacaGbobgbgbgbgaGaYaYaYaYaYaYblbaaYacacacacababbububububxbybybybybybybybybzbzbAbBbubububvbCbDbEbFbGbGbHbGbIbvababababacacacacacacacacabababababababacacacacacacabacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababacacabababacacacacacacacacacacaGbJbgbKbKbLaGacacacacacaYbabaaYacacacacababbububububybMbybMbybMbybMbybzbzbAbAbubububvbNbvbvbvbvbvbvbObPbvabababababacacacacacacacacacacacababababacacacacababababacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabababababacacacacacacacacacacacacacacacacaGaGaGaGaGaGaGacacacacacaYbabcaYacacacacababbububububybQbybQbybQbybQbybzbzbAbAbubububvbRbSbTbUbVbWbXbObPbvabababababacacacacafacacacacacacacacacacacacacababababababacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacabababacacacacacacacacacacacacacacacacacacacacacacababacacacacacaYbabaaYacacacacababbububububYbZbZbZbZbZbZbZbZbZbZbZcabubububvbTbTbTcbbTbTbTbOccbvababababababacacacacacacacacacacacacacacacacabababababababacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacababacacacacacacacacacacacacacacacacacacacacacacacababacacacacacaYbabaaYacacacabababbubububucdcececececececececfbycgchbubububvbTcibTcjbTbTbTckclbvababababababacacacacacacacacacacacacacacacacababababababacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababacacacacaYbabaaYacacacabababbububububycmbycmbycmbybzcncobybychbubububvbRbTbTcpcqbTbTbOcrbvababababababacacacabacacacacabacacacacacacababababaaaaaaaaaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababacacacacaYbabcaYacacacabababbububububybMbybMbybMbycnbzcobycgchbubububvbTbTbTbObObOcsbObPbvabababababababacacabacacacacababacacacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacctctctctctctctcucuctctacacacacacacacacacacacacacababababacacacacaYbabaaYacacacacababbubububucvbybybybybybycnbzcwcececxbubabacyczbTbTczcAcBcCcDcEbvababababababababababacacacabababacacacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacctcFcGcFcFctcHcIcJcKctacacacacacacacacacacacacacabababababacacacaYbabaaYacacacacababbubububububububububububububucLbubububabcbvbvbvbvbvbvbvbvbvbvbvababababababababababacacababababacacacabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacaucucFcMcNcOctcPcIcJcQctctctctctctctctctctcRcRctctacacababababacacaYbabaaYacacababababbucScTcTcTbxbybybycUcUcVcWbybycXbxbubabacYcYabababababababababababababababababababacacababababacacacabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaucucFcZcFcFctcJcJcJcJdababactcJdbcIctdcdddddddectacacababababacacaYbabcaYacacacabababbucTcTcTcTbybybybybybybybybybybybydfbabacYcYabababababababababababababababababababacacabababacacacacacababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaaaaaaccucFcFcFcFdgdhcJcJdictbabacRcJcJcJdjdddkdddldmctacacababacacacacaYbabaaYacacacabababbubybybybybybybybycTcTcTcTbybybybybubabacYcYababababababababababababababababababacacacabababacacacacacabababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacctctctdnctctctctdoctctbabactcJcKdpctdddddddddqcRacacacacacacacacaYbabaaYacacacacababbudrcTcTcTbybybybybybybybybybydsdtbubabccYcYababababababababababababababababababacacacabababacacacacacabababacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacctdudvdvdwctdxdydzdActbabcctctctctctdBdddCdCdCcRacacacacacacacacaYbabaaYacacacacacabbucTcTcTcTbydDbybycUcUcUcWbybydsdEbubabadFdFdFdFdFdFdFdFdFdFabababababababababababacacababacacacabacacabababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccudGdvdvdvctdzdHdIdzcubabactdJdKcGctdddddzdzdLctacacacacacacacacaYbabcaYacacacacacacbubybybybybybybybybybybybybybydsdMbubabadFdFdNdOdPdQdRdSdTdFababababababababababacacacabababacacababababababacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacctdUdvdVdvctdWdXdYdZctbabaeacFcFcFebdddddYdXdyctacacacacacacacacaYbabaaYacacacacacacbueccTcTcTbybycvbycTcTeccTbybydsedbubabadFdFeeeeeeeeeeeeeedFabababababababababacacacacababababacacabababababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacctctctctctctctctctctctbabactctctctctctctcRcRctctcYcYcYaYaYaYaYaYaYblbaaYaYaYaYaYaYaYbububububuefbybubububububububububububabcdFdFegeeeeeeeeeeehdFabababababababacacacacacacababababacacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacctbpbabababpbabababpbabababpbabababpbababababpbabababababpbabababpbababpbabababpbabababababababababababababababababababababaeeeeeeeeeiejeeekeldFabababababababacacacacacacabababacacacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacctbababababababababababababababababababababababababaembababababababababababababababaembaenbababababaenbabababaenbababaenbabaeoeeeeeeeiepeeeeeqdFabababababababacacacacacacabababacacacacabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacctctctctctctctcterctctbabccYcYcYescYcYcYesescYcYbabacYaYaYaYaYaYaYaYaYaYaYeteteteteteuevevevewexeyeweveveveveveveveveveveveveudFezeeeeeeeeeeehdFababababababababacacacacacababacacacacacababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaaacctctctdVdvdvctdJcFcOctbabacYeAeBeAeAcYeCeDeEeFcYbabacYacacacacacacacacacacacacacacaceueveGeHeIeyeJeIeveKeLeMeNeOevePeQeQeveveudFeeeeeeeeeReeeSdFababababababababacacacacabababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaacacctctctdvdvdveTcFcFcFeUbabacYeAeVeWeXcYeYeDeEeZcYbabccYacacacacacacacacacacacacacacabeuevfafbfcfafafdevfeeyeyeyfffgfhfafaeveveudFfifjfkeReReefldFabababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaaaacctctctdufmdUctfncFcFctbabacYeAeAeAeAcYeEeEfoeEfpbabacYabababacacacacacacacacacabababeuevfqfreyfafafsevfteyfueyfvfgfhfwfxeveveudFdFdFdFdFdFdFdFdFabababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaaaacctctctctctctctctfyctctbabacYeAeAeAeAfzfAeEeEfBcYcYcYcYacababacacacababacacacacabababeuevfafCeJfafafDevfEeyeyeyfafgfhfafaeveveueuababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaacacctfFfGdYctfHcJfIcJcJctbabccYcYcYfJcYcYcYcYfKcYcYacacacacacacacacacabababacacacabababeuevfafLfaeyeyfMevfNfOeyfPfQevfrfafaeveveueuabababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacaceUdXdzdzctfRfScIcIfTeUbabacYfUfVfVfWcYfXfYfZgacYacacacacacacacacacacacabababababababeuevgbevevgceyevevevevgdevevevevgeeveveveveuabababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaceUgfdzdzggcJfScIghfTeUbabacYgifVfVfVcYfZgjgkfZesacacacacacababababacacacacacababababeugleyeyeyeyeyeyeyeyeyeyeyeyeyeyeyeyeygmeveuababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaaaaacctdygndzctcJcJcJcJcQctbabacYgofVgpfVcYgqgrgsgtcYacacacabababacacacacacacacacababababeuevgueyeyeyeyeyeyeyeyeyeyeyeyeyeyeyeyeyeveuabababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaacacctctctctctctcteUeUctctblbacYcYescYcYcYcYcYcYcYcYababababababababababababababababababeueveyeygvfafafafagvfafafagvfafafagveyeyeveuababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacauacacacacacacacacacacaYbabcaYacacacacababababababababababababababababababababababababeuevgweyevevevevevevevgxgxevevgxgxeveyeyeveuababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacaYbabaaYacacacacacacababababababababababababababababababababababeuevgygzgAgBgBgCevevgDeyeyevgDeyeyeveygmeveuababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabababacacacacacaYbabaaYacacacacabacacacababababababababababababababababababababeuevgEeyeyeyeygFevevfceygGevfceygGeveyeyeveuababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabababababababacaYbabaaYacacababacacacacababababababababababababababababababababeuevgHeygIgJeygKevevgLgMgNevgLgMgNeveyeyeveuababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabababababababacaYbabcaYacacababacacacacababababababababababababababababababababeuevgOeygPgQeygKeveveveveveveveveveveyeyeveuabababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabababababacacacaYbabaaYacacacacacacacabababababababababababababababababababababeuevgReygSgSeygTevgueyeyeyeyeyeyeyeyeygmeveuabababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacabababababacacacaYbabaaYacacacacacacacabababababababababababababababababababababeuevgUgVgVgVgVgWeveyeyeygMeyeyeyeyeygMeyeveuabababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacabababacacaYbabaaYacabababacacacabababababababababababababababababababababeuevevevevevevevevevevevevevgXgYgXeveveveveuabababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacabababacacaYbabcaYacabababacacacabababababababababababababababababababababeueueueueueueueuevgZgZhahbhceyeyhdeveueueueuababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacabababacacaYbabaaYacacabababacacabababababababababababababababababababababeueueueueueueueuevhehfeyeyeyeyeyhgeveueueueuababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacabacacacaYbabaaYacacacacacacacacababababababababababababababababababababeueueueueueueueuevhhhihjeyeyeyeyhkeveueueueuababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacabababacacabacacacaYbabaaYacacacacacacacacacacababababababababababababababababababeueueueueueueueuevhlhmhnhohphqeyhreveueueueuabababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacababababacacacacacacaYbabaaYacacacabababacacacacababababababababababababababababababeueueueueueueueueveveveveveveveveveveueueueuabababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacababababababacacacacacaYbabcaYacacacacacacacacacacababababababababababababababababababeueueueueueueueueueueueueueueueueueueueueueuabababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacaYbabaaYacacacacacacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacachshshshshshshshshshshshshshshsblbacYhthththuhuhththuhuhtababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacachshvhwhxhyhshzhAhBhChshshshshsbabacYhthththDhEhFhDhEhEhtababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacachshGhHhHhHhIhJhJhJhJhKhChLhshsbabccYhthththDhEhMhMhDhDhtabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacachshNhOhPhQhshJhJhRhJhshJhShshsbababahMhMhMhMhMhMhThMhMhuabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauhshshshshshshUhVhWhXhshKhshshsbababahMhMhMhMhMhMhMhMhMhuababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauhshYhZhJiaibhRhRhRhRhChJichZidbababaiehthtifififhthththtababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaauigihhJhJhJhJhJhJhJhJhJhJiihJidbababahththtijikilhthththtabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacighJhJhJhJhJimhJhJhJhJhJhJhJinbababahtioipiqiqiqirishthtababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacachsihhJhJhJhJhJhJhJhJhJhJhJhJhsitbabahtiuisiviwisixishthtabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacachshshshshsiyizizhJhJimhJhJiAhsbababahthtiBhthtiChthththtababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacachsicicichJhJhJhJiDiDhsbababahtiEiFhtiGiHiIhththtabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacachsiiiiiihJhJhJhJhJhJhsbababahtiJiKhtiLiHiMhththtabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacachshsidididididinhshshsitbabaiCiFiFhtiMiHiHhththtababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaccYitbababababababaiNiNbababahththththtiChthththtabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaccYbabababababababababababababababababababababacYababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaccYbababaenbababaenbababababababaenbababaenbabacYabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccYitbaiOiOiOiOiOiOiOiOiPiQiOiOiRiRiRiSiRiRiRiRiRabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaccYbabaiOiQiQiQiQiQiQiTiQiQiQiOiUiViRiWiWiRiUiViRababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaccYbabaiOiXiXiXiXiXiQiQiQiQiQiOiYiZjaiWiWjaiZjbiRababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaccYbabaiOiQiQiQiQiQiQiQiQiQiQiOjcjdiRiWiWiRjcjdiRabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacaccYblbaiOiOiOiOiOiOiOiOiOiOiOiOiRiRiRiRiRiRiRiRiRabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacjejfjfjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacjejfjgjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacjejfjfjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacjejfjfjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacjejfjfjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacjejfjgjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaajhjhjhjhjhjhjhjhjhaaacacacacacacjejfjfjeacacacacacababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaajhjfjijfjhjfjjjfjhjejejejejejejejejfjfjeacacacacacababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaajejfjfjfjkjfjfjfjfjfjfjfjfjfjfjfjfjfjfjeacacacacacababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaabaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaajejfjfjfjljfjfjfjmjfjfjljfjfjfjljfjfjgjeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaajhjejnjfjhjfjojfjhjejejejejejejejejejejeacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaajhjhjhjhjhjhjhjhjhaaacacacacacacacacacacacacacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacababababababababababababababababababababababababababababaaaaaaaaababababababaaaaaaaaaaabababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacababababababababababaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaabababaaaaaaabababababaaaaababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaababaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aeaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aeaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+jpaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+jqaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

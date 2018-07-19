@@ -72,6 +72,14 @@
 	name = "\improper Hotel"
 	icon_state = "yellow"
 
+/area/planets/Geminus/indoor/gamebar
+	name = "game Bar"
+	icon_state = "yellow"
+
+/area/planets/Geminus/indoor/grocery
+	name = "grocery Store"
+	icon_state = "kitchen"
+
 /area/planets/Geminus/indoor/courtroom
 	name = "\improper Courtroom"
 	icon_state = "courtroom"

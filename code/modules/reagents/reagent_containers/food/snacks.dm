@@ -3263,7 +3263,7 @@
 	filling_color = "#A8A8A8"
 	center_of_mass = "x=16;y=15"
 	nutriment_desc = list("chalk" = 6)
-	nutriment_amt = 20
+	nutriment_amt = 30
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/iron, 3)

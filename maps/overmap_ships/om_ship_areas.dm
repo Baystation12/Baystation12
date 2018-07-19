@@ -49,15 +49,99 @@
 
 /area/om_ships/unscpatrol
 	name = "UNSC Patrol Vessel"
+	has_gravity = 1
+	power_environ = 1
+	power_light = 1
+	poweralm = 1
+	requires_power = 0
+
+/area/om_ships/unscpatrol/Bridge
+	name = "UNSC Thorin Bridge"
+
+/area/om_ships/unscpatrol/Porthallway
+	name = "UNSC Thorin Port Hallway"
+
+/area/om_ships/unscpatrol/Centralhallway
+	name = "UNSC Thorin Central Hallway"
+
+/area/om_ships/unscpatrol/Starboardhallway
+	name = "Starboard Hallway"
+
+/area/om_ships/unscpatrol/Hangarbay
+	name = "UNSC Thorin Hangar Bay"
+
+/area/om_ships/unscpatrol/Portsoeiv
+	name = "UNSC Thorin Port SOEIV Bay"
+
+/area/om_ships/unscpatrol/starboardsoeiv
+	name = "UNSC Thorin Starboard SOEIV Bay"
+
+/area/om_ships/unscpatrol/fuelstorage
+	name = "UNSC Thorin Fuel Storage"
+
+/area/om_ships/unscpatrol/medicalbay
+	name = "UNSC Thorin Medical Bay"
+
+/area/om_ships/unscpatrol/oxystorage
+	name = "UNSC Thorin Oxygen Storage"
+
+/area/om_ships/unscpatrol/portengine
+	name = "UNSC Thorin Port Engine"
+
+/area/om_ships/unscpatrol/starboardengine
+	name = "UNSC Thorin Starboard Engine"
+
+/area/om_ships/unscpatrol/crewbathroom
+	name = "UNSC Thorin Crew Bathrooms"
+
+/area/om_ships/unscpatrol/cryodorm
+	name = "UNSC Thorin Cryodorms"
+
+/area/om_ships/unscpatrol/cells
+	name = "UNSC Thorin Holding Cells"
+
+/area/om_ships/unscpatrol/janitorial
+	name = "UNSC Thorin Janitorial Closet"
+
+/area/om_ships/unscpatrol/storageroom
+	name = "UNSC Thorin Storage Room"
+
+/area/om_ships/unscpatrol/portbatterycontrol
+	name = "UNSC Thorin Port Battery Control"
+
+/area/om_ships/unscpatrol/starboardbatterycontrol
+	name = "UNSC Thorin Starboard Battery Control"
+
+/area/om_ships/unscpatrol/portcrew
+	name = "UNSC Thorin Port Crew Quarters"
+
+/area/om_ships/unscpatrol/starboardcrew
+	name = "UNSC Thorin Starboard Crew Quarters"
+
+/area/om_ships/unscpatrol/Messhall
+	name = "UNSC Thorin Mess Hall"
+
+/area/om_ships/unscpatrol/captainroom
+	name = "UNSC Thorin Captains Quarters"
+
+/area/om_ships/unscpatrol/Armory
+	name = "UNSC Thorin Armory"
+
+/area/om_ships/unscpatrol/odstsection
+	name = "UNSC Thorin ODST Section"
+
+/area/om_ships/unscpatrol/powercore
+	name = "UNSC Thorin Power Core"
 
 /area/om_ships/unscpatrol/starboardbattery
-	name = "UNSC Corvette Starboard Gun Battery"
+	name = "UNSC Thorin Starboard Gun Battery"
 
 /area/om_ships/unscpatrol/portbattery
-	name = "UNSC Corvette Port Gun Battery"
+	name = "UNSC Thorin Port Gun Battery"
 
 /area/om_ships/unscpatrol/portrockets
- 	name = "UNSC Corvette Port Rocket Pods"
+ 	name = "UNSC Thorin Port Rocket Pods"
 
 /area/om_ships/unscpatrol/starboardrockets
- 	name = "UNSC Corvette Starboard Rocket Pods"
+ 	name = "UNSC Thorin Starboard Rocket Pods"
+
