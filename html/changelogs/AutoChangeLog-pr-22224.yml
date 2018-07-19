@@ -1,0 +1,4 @@
+author: "Heptagon49"
+delete-after: True
+changes: 
+  - rscadd: "A short blurb on the current alert level now appears on the title screen."
