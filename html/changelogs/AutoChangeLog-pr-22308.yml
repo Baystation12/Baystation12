@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added spy v. spy (autotraitors and renegades) to game mode selection and secret."
+  - tweak: "Law enforcement (security officer, warden, HoS) and the Captain may no longer be renegades at round start."
+  - tweak: "Reduced the force of the magnum pistol's melee attack from 14 to 9."
