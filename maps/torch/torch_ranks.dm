@@ -437,8 +437,8 @@
 	name = "Off-Duty Personnel"
 
 /datum/mil_rank/civ/agent
-	name = "OCIE Special Agent"
-	name_short = "SA"
+	name = "OCIE Agent"
+	name_short = "AGT"
 	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
 
 /datum/mil_rank/civ/synthetic

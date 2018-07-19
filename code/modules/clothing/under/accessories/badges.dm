@@ -171,7 +171,7 @@
 	badge_string = "NanoTrasen Corporate"
 
 /obj/item/clothing/accessory/badge/ocieagent
-	name = "Special Agent's badge"
+	name = "\improper OCIE Agent's badge"
 	desc = "A leather-backed gold badge displaying the crest of the Office of Civil Investigation and Enforcement."
 	icon_state = "agentbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
@@ -179,7 +179,7 @@
 	badge_string = "Office of Civil Investigation and Enforcement"
 
 /obj/item/clothing/accessory/badge/tracker
-	name = "Tracker's badge"
+	name = "\improper Tracker's badge"
 	desc = "A blue leather-backed gold badge displaying the crest of the Office of Civil Investigation and Enforcement."
 	icon_state = "trackerbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE

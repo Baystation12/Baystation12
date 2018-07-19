@@ -265,7 +265,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
-	name = OUTFIT_JOB_NAME("Forensic Technician - Special Agent")
+	name = OUTFIT_JOB_NAME("Forensic Technician - OCIE Agent")
 	uniform = /obj/item/clothing/under/det/grey
 	suit = /obj/item/clothing/suit/storage/toggle/agent_jacket
 	shoes = /obj/item/clothing/shoes/dress
