@@ -1,0 +1,6 @@
+author: zaredman
+delete-after: True
+
+changes: 
+  - rscadd: "Introduces Office of Civil Investigation and Enforcement agents to replace Colonial Marshals."
+  - rscdel: "Removes all references to Colonial Marshals and replaces it with the Office of Civil Investigation and Enforcement."
