@@ -68,12 +68,12 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 2
 	melee_damage_upper = 2
-	attacktext = "slashes"
+	attacktext = "burns"
 	throw_message = "falls right through the strange body of the"
 	environment_smash = 0
 	damtype = BURN
 	pass_flags = PASS_FLAG_TABLE
-	var/lifetime = 100
+	var/lifetime = 5
 
 /mob/living/simple_animal/hostile/asteroid/p_anomaly/Life()
 	..()

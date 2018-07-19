@@ -113,14 +113,13 @@
 			else
 				Goto(target_mob, move_to_delay, minimum_distance)//Otherwise, get to our minimum distance so we chase them
 		else
-			if(!ranged)
-				stance = HOSTILE_STANCE_ATTACKING
+			stance = HOSTILE_STANCE_ATTACKING
 			Goto(target_mob, move_to_delay, minimum_distance)
 	if(target_mob.loc != null && get_dist(src, target_mob.loc) <= vision_range)//We can't see our target, but he's in our vision range still
 		Goto(target_mob, move_to_delay, minimum_distance)
 
 /mob/living/simple_animal/hostile/proc/Goto(target_mob, delay, minimum_distance)
-        walk_to(src , target_mob, minimum_distance, delay)
+        walk_to(src, target_mob, minimum_distance, delay)
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
@@ -137,6 +136,9 @@
 			return 0
 	if(next_move >= world.time)
 		return 0
+	if(ranged)
+		if(get_dist(src, target_mob) >= 2 && ranged_cooldown <= 0)
+			OpenFire(target_mob)
 	if(get_dist(src, target_mob) <= 1)	//Attacking
 		AttackingTarget()
 		return 1
