@@ -10,7 +10,7 @@
 
 /datum/medical_effect/proc/manifest(mob/living/carbon/human/H)
 	for(var/R in cures)
-		if(H.reagents.has_reagent(R))
+		if(!H.reagents || H.reagents.has_reagent(R))
 			return 0
 	for(var/R in triggers)
 		if(H.reagents.get_reagent_amount(R) >= triggers[R])
