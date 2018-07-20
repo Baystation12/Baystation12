@@ -19,7 +19,7 @@
 	skillset = null
 	. = ..()
 
-/datum/nano_module/skill_ui/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/skill_ui/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.self_state)
 	if(!skillset)
 		return
 	var/list/data = skillset.get_nano_data()
@@ -190,7 +190,7 @@ Admin version, with debugging options.
 /datum/nano_module/skill_ui/admin
 	template = "skill_ui_admin.tmpl"
 
-/datum/nano_module/skill_ui/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.admin_state)
+/datum/nano_module/skill_ui/admin/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.admin_state)
 	..() //Uses different default state.
 
 /datum/nano_module/skill_ui/admin/get_data()
