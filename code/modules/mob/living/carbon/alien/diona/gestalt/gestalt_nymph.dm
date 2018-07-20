@@ -1,6 +1,3 @@
-/mob/living/carbon/alien/diona/attack_generic(var/mob/user, var/damage, var/attack_message)
-	if(!gestalt_with(user)) . = ..()
-
 /mob/living/carbon/alien/diona/proc/gestalt_with(var/mob/living/carbon/alien/diona/chirp)
 	if(!istype(chirp) || chirp == src || istype(chirp.loc, /obj/structure/diona_gestalt) || istype(loc, /obj/structure/diona_gestalt))
 		return FALSE
