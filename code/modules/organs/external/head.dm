@@ -14,7 +14,7 @@
 	artery_name = "cartoid artery"
 	cavity_name = "cranial"
 
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 	var/glowing_eyes = FALSE
 	var/can_intake_reagents = 1

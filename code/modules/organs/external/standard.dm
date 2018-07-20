@@ -20,7 +20,7 @@
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
-	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL
+	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
@@ -52,7 +52,7 @@
 	dislocated = -1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -68,7 +68,7 @@
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_HAS_TENDON
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -93,7 +93,7 @@
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -118,7 +118,7 @@
 	amputation_point = "left ankle"
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
@@ -143,7 +143,7 @@
 	amputation_point = "left wrist"
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND
