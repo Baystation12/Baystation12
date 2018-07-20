@@ -67,7 +67,8 @@
 			return
 
 	if(istype(A, /mob))
-		visible_message("<span class='notice'>\The [src] butts its head into \the [A].</span>")
+		if(src != A && !gestalt_with(A))
+			visible_message("<span class='notice'>\The [src] butts its head into \the [A].</span>")
 		return
 
 	. = ..()
