@@ -64,7 +64,7 @@
 			selected_outfit.Cut()
 		else
 			var/obj/item/weapon/card/id/I = user.get_active_hand()
-			if(I && user.unEquip(I, src))
+			if(istype(I) && user.unEquip(I, src))
 				ID = I
 		. = TOPIC_REFRESH
 	if(href_list["get_all"])
