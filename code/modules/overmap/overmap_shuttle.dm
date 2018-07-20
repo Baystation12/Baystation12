@@ -50,7 +50,7 @@
 	return move_time * (1 + distance_mod + skill_mod)
 
 /datum/shuttle/autodock/overmap/process_launch()
-	if(prob(10*max(0, operator_skill - skill_needed)))
+	if(prob(10*max(0, skill_needed - operator_skill)))
 		var/places = get_possible_destinations()
 		var/place = pick(places)
 		set_destination(places[place])
