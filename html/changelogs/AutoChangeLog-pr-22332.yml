@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Command rig suit helmet cameras are now found on the Command network."
-  - tweak: "Mining rig suit helmet cameras are now found on the Supply network."
