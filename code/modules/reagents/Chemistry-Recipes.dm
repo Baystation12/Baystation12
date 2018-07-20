@@ -96,6 +96,12 @@
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/carbon = 1, /datum/reagent/sugar = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/pervitin
+	name = "Pervitin"
+	result = "pervitin"
+	required_reagents = list("lithium" = 1, "acetone" = 1, "carbon" = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/dylovene
 	name = "Dylovene"
 	result = /datum/reagent/dylovene

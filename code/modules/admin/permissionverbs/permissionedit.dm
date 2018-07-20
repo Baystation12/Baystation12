@@ -15,7 +15,7 @@
 <script type='text/javascript' src='search.js'></script>
 <link rel='stylesheet' type='text/css' href='panels.css'>
 </head>
-<body onload='selectTextField();updateSearch();'>
+<body onload='selectTextField();'>
 <div id='main'><table id='searchable' cellspacing='0'>
 <tr class='title'>
 <th style='width:125px;text-align:right;'>CKEY <a class='small' href='?src=\ref[src];editrights=add'>\[+\]</a></th>

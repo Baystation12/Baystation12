@@ -100,7 +100,6 @@
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
 
-
 /obj/item/weapon/reagent_containers/pill/adminordrazine
 	name = "Adminordrazine pill"
 	desc = "It's magic. We don't have to explain it."
@@ -313,3 +312,11 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	..()
 	reagents.add_reagent(/datum/reagent/paroxetine, 10)
 	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pervitin
+	name = "Pervitine pill"
+	desc = "Pill with powerfull stimulant. Don't eat two of these, one will be enough for you."
+	icon_state = "pill16"
+	New()
+		..()
+		reagents.add_reagent("pervitin", REAGENTS_OVERDOSE*0.45) // slightly less than an OD

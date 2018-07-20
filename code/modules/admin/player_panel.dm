@@ -185,7 +185,7 @@
 	"}
 
 	//body tag start + onload and onkeypress (onkeyup) javascript event calls
-	dat += "<body onload='selectTextField(); updateSearch();' onkeyup='updateSearch();'>"
+	dat += "<body onload='selectTextField();' onkeyup='updateSearch();'>"
 
 	//title + search bar
 	dat += {"
