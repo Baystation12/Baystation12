@@ -8,7 +8,7 @@
 	w_class = TRUE//Packed very effective
 	icon_state = "pill_pack"
 	var/pill_type = null
-	//var/pop_sound = 'sound/effects/pop_pill.ogg'
+	var/pop_sound = 'sound/effects/pop_pill.ogg'
 
 /obj/item/weapon/pill_pack/New()
 	..()
@@ -22,8 +22,8 @@
 /obj/item/weapon/pill_pack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
 		if (contents.len > 0)
-			//if (pop_sound)
-			//	playsound(loc, pop_sound, 50, TRUE)
+			if (pop_sound)
+				playsound(loc, pop_sound, 50, TRUE)
 			var/obj/item/weapon/reagent_containers/pill/pill = contents[1]
 			user << "<span class='notice'>You take one [pill.name] from [name].</span>"
 			user.put_in_active_hand(pill)
@@ -37,8 +37,8 @@
 	if (contents.len > 0)
 		var/obj/item/weapon/reagent_containers/pill/pill = contents[1]
 		if (prob(70))
-			//if (pop_sound)
-			//	playsound(loc, pop_sound, 50, TRUE)
+			if (pop_sound)
+				playsound(loc, pop_sound, 50, TRUE)
 			user << "<span class='notice'>You take one [pill.name] from [name].</span>"
 			pill.loc = user.loc
 			update_icon()
@@ -99,7 +99,7 @@
 	icon = 'icons/vietnam/usable/medical.dmi'
 	w_class = TRUE //Packed very effective
 	var/packed = TRUE
-	//var/rip_sound = 'sound/effects/rip_pack.ogg'
+	var/rip_sound = 'sound/effects/rip_pack.ogg'
 
 /obj/item/weapon/gauze_pack/New()
 	..()
@@ -112,8 +112,8 @@
 /obj/item/weapon/gauze_pack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src && packed)
 		packed = FALSE
-	//	if (rip_sound)
-		//	playsound(loc, rip_sound, 50, TRUE)
+		if (rip_sound)
+			playsound(loc, rip_sound, 50, TRUE)
 		if (contents.len)
 			var/obj/O = contents[1]
 			user.put_in_active_hand(O)
@@ -129,8 +129,8 @@
 	if (packed)
 		if (prob(50))
 			packed = FALSE
-			//if (rip_sound)
-			//	playsound(loc, rip_sound, 50, TRUE)
+			if (rip_sound)
+				playsound(loc, rip_sound, 50, TRUE)
 			if (contents.len)
 				var/obj/O = contents[1]
 				O.loc = user.loc
