@@ -12,6 +12,10 @@
 	name = "Xion Alt. Optics (IPC)"
 	icon_state = "xion_alt_optics"
 
+/datum/sprite_accessory/marking/ipc/hephaestus
+	name = "Hephaestus Alt. Optics (IPC)"
+	icon_state = "hephaestus_alt_optics"
+
 /datum/sprite_accessory/marking/ipc/morpheus
 	name = "Morpheus Optics (IPC)"
 	icon_state = "morpheus_optics"
