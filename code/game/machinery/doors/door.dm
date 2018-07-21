@@ -41,9 +41,12 @@
 
 	atmos_canpass = CANPASS_PROC
 
-/obj/machinery/door/attack_generic(var/mob/user, var/damage)
+/obj/machinery/door/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
 	if(damage >= 10)
-		visible_message("<span class='danger'>\The [user] smashes into \the [src]!</span>")
+		visible_message("<span class='danger'>\The [user] [attack_verb] into \the [src]!</span>")
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
@@ -368,7 +371,7 @@
 		icon_state = "door1"
 	else
 		icon_state = "door0"
-	radiation_repository.resistance_cache.Remove(get_turf(src))
+	SSradiation.resistance_cache.Remove(get_turf(src))
 	return
 
 

@@ -569,7 +569,6 @@
 	custom_action(step, atom/used_atom, mob/user)
 		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
 		holder.overlays += used_atom.icon_state+"+o"
-		user.drop_item()
 		qdel(used_atom)
 		return 1
 

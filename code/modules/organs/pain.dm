@@ -21,7 +21,7 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 			affecting.add_pain(ceil(power/2))
 		else
 			adjustHalLoss(ceil(power/2))
-	
+
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
@@ -58,7 +58,7 @@ mob/living/carbon/human/proc/handle_pain()
 		if(maxdam > 10 && paralysis)
 			paralysis = max(0, paralysis - round(maxdam/10))
 		if(maxdam > 50 && prob(maxdam / 5))
-			drop_item()
+			unequip_item()
 		var/burning = damaged_organ.burn_dam > damaged_organ.brute_dam
 		var/msg
 		switch(maxdam)
@@ -71,7 +71,7 @@ mob/living/carbon/human/proc/handle_pain()
 		custom_pain(msg, maxdam, prob(10), damaged_organ, TRUE)
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(prob(1) && !((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) && I.damage > 5)
+		if(prob(1) && !((I.status & ORGAN_DEAD) || BP_IS_ROBOTIC(I)) && I.damage > 5)
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
 			var/pain = 10
 			var/message = "You feel a dull pain in your [parent.name]"

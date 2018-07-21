@@ -121,7 +121,7 @@
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
-			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
+			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
 
 
 			observer.started_as_observer = 1
@@ -166,16 +166,8 @@
 	if(href_list["SelectedJob"])
 		var/datum/job/job = job_master.GetJob(href_list["SelectedJob"])
 
-		if(!job)
-			to_chat(usr, "<span class='danger'>The job '[href_list["SelectedJob"]]' doesn't exist!</span>")
-			return
-
-		if(!config.enter_allowed)
-			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
-			return
-		if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
-			to_chat(usr, "<span class='danger'>The [station_name()] is currently exploding. Joining would go poorly.</span>")
-			return
+		if(!job_master.CheckGeneralJoinBlockers(src, job))
+			return FALSE
 
 		var/datum/species/S = all_species[client.prefs.species]
 		if(!check_species_allowed(S))
@@ -287,14 +279,6 @@
 					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
 						vote_on_poll(pollid, optionid, 1)
 
-/mob/new_player/proc/IsJobAvailable(var/datum/job/job)
-	if(!job)	return 0
-	if(!job.is_position_available()) return 0
-	if(jobban_isbanned(src, job.title))	return 0
-	if(!job.player_old_enough(src.client))	return 0
-
-	return 1
-
 /mob/new_player/proc/get_branch_pref()
 	if(client)
 		return client.prefs.char_branch
@@ -304,6 +288,7 @@
 		return client.prefs.char_rank
 
 /mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
+
 	if(src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
@@ -313,7 +298,7 @@
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
 
-	if(!IsJobAvailable(job))
+	if(!job || !job.is_available(client))
 		alert("[job.title] is not available. Please try another.")
 		return 0
 	if(job.is_restricted(client.prefs, src))
@@ -324,22 +309,14 @@
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
 		spawn_turf = get_turf(S)
-	var/radlevel = radiation_repository.get_rads_at_turf(spawn_turf)
-	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
-	if(airstatus || radlevel > 0 )
-		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable conditions. \
-		You may die shortly after spawning. \
-		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Bq", "Atmosphere warning", "Abort", "Spawn anyway")
-		if(reply == "Abort")
-			return 0
-		else
-			// Let the staff know, in case the person complains about dying due to this later. They've been warned.
-			log_and_message_admins("User [src] spawned at spawn point with dangerous atmosphere.")
 
-		// Just in case someone stole our position while we were waiting for input from alert() proc
-		if(!IsJobAvailable(job))
-			to_chat(src, alert("[job.title] is not available. Please try another."))
-			return 0
+	if(!job_master.CheckUnsafeSpawn(src, spawn_turf))
+		return
+
+	// Just in case someone stole our position while we were waiting for input from alert() proc
+	if(!job || !job.is_available(client))
+		to_chat(src, alert("[job.title] is not available. Please try another."))
+		return 0
 
 	job_master.AssignRole(src, job.title, 1)
 
@@ -355,7 +332,7 @@
 
 		character = character.AIize(move=0) // AIize the character, but don't move them yet
 
-			// IsJobAvailable for AI checks that there is an empty core available in this list
+		// is_available for AI checks that there is an empty core available in this list
 		var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
 		empty_playable_ai_cores -= C
 
@@ -381,6 +358,10 @@
 			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
+
+	if(character.cannot_stand())
+		equip_wheelchair(character)
+
 	qdel(src)
 
 
@@ -409,21 +390,36 @@
 	dat += "Choose from the following open/valid positions:<br>"
 	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs.</a><br>"
 	dat += "<table>"
+	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
+
+	// TORCH JOBS
+	var/list/job_summaries = list()
 	for(var/datum/job/job in job_master.occupations)
-		if(job && IsJobAvailable(job))
-			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
-				continue
+		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
+		if(summary && summary != "")
+			job_summaries += summary
+	if(LAZYLEN(job_summaries))
+		dat += job_summaries
+	else
+		dat += "No available positions."
+	// END TORCH JOBS
 
-			var/active = 0
-			// Only players with the job assigned and AFK for less than 10 minutes count as active
-			for(var/mob/M in GLOB.player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
-				active++
-
-			if(job.is_restricted(client.prefs))
-				if(show_invalid_jobs)
-					dat += "<tr><td><a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title]</a></td><td>[job.current_positions]</td><td>(Active: [active])</td></tr>"
+	// SUBMAP JOBS
+	for(var/thing in SSmapping.submaps)
+		var/datum/submap/submap = thing
+		if(submap && submap.available())
+			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
+			job_summaries = list()
+			for(var/otherthing in submap.jobs)
+				var/datum/job/job = submap.jobs[otherthing]
+				var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
+				if(summary && summary != "")
+					job_summaries += summary
+			if(LAZYLEN(job_summaries))
+				dat += job_summaries
 			else
-				dat += "<tr><td><a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title]</a></td><td>[job.current_positions]</td><td>(Active: [active])</td></tr>"
+				dat += "No available positions."
+	// END SUBMAP JOBS
 
 	dat += "</table></center>"
 	src << browse(jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
@@ -470,7 +466,7 @@
 	else
 		client.prefs.copy_to(new_character)
 
-	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
+	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
 
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually

@@ -36,7 +36,7 @@
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
 	var/hud_icon						  //icon used for Sec HUD overlay
-	
+
 	var/min_skill = list()				  //Minimum skills allowed for the job. List should contain skill (as in /decl/hierarchy/skill path), with values which are numbers.
 	var/max_skill = list()				  //Maximum skills allowed for the job.
 	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
@@ -92,6 +92,8 @@
 	var/species_modifier = economic_species_modifier[H.species.type]
 
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier * GLOB.using_map.salary_modifier
+	money_amount *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
+	money_amount = round(money_amount)
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
 	if(H.mind)
 		var/remembered_info = ""
@@ -150,6 +152,11 @@
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
 /datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+
+	if(minimum_character_age && (prefs.age < minimum_character_age))
+		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age].</span>")
+		return TRUE
+
 	if(!is_branch_allowed(prefs.char_branch))
 		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
 		return TRUE
@@ -164,6 +171,26 @@
 		return TRUE
 
 	return FALSE
+
+/datum/job/proc/get_join_link(var/client/caller, var/href_string, var/show_invalid_jobs)
+	if(is_available(caller))
+		if(is_restricted(caller.prefs))
+			if(show_invalid_jobs)
+				return "<tr><td><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
+		else
+			return "<tr><td><a href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
+	return ""
+
+// Only players with the job assigned and AFK for less than 10 minutes count as active
+/datum/job/proc/check_is_active(var/mob/M)
+	return (M.mind && M.client && M.mind.assigned_role == title && M.client.inactivity <= 10 * 60 * 10)
+
+/datum/job/proc/get_active_count()
+	var/active = 0
+	for(var/mob/M in GLOB.player_list)
+		if(check_is_active(M))
+			active++
+	return active
 
 /datum/job/proc/is_species_allowed(var/datum/species/S)
 	return !GLOB.using_map.is_species_job_restricted(S, src)
@@ -254,3 +281,12 @@
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)
 	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
+
+/datum/job/proc/is_available(var/client/caller)
+	if(!is_position_available())
+		return FALSE
+	if(jobban_isbanned(caller, title))
+		return FALSE
+	if(!player_old_enough(caller))
+		return FALSE
+	return TRUE

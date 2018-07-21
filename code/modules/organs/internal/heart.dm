@@ -12,6 +12,9 @@
 	max_damage = 45
 	var/open
 
+/obj/item/organ/internal/heart/open
+	open = 1
+
 /obj/item/organ/internal/heart/die()
 	if(dead_icon)
 		icon_state = dead_icon
@@ -27,14 +30,14 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 		handle_blood()
 	..()
 
 /obj/item/organ/internal/heart/proc/handle_pulse()
-	if(robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(src))
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 
@@ -54,7 +57,7 @@
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
-	
+
 	//If heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
@@ -99,13 +102,13 @@
 	if(!owner || owner.InStasis() || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
-	if(pulse != PULSE_NONE || robotic >= ORGAN_ROBOT)
+	if(pulse != PULSE_NONE || BP_IS_ROBOTIC(src))
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
 		for(var/obj/item/organ/external/temp in owner.organs)
 
-			if(temp.robotic >= ORGAN_ROBOT)
+			if(BP_IS_ROBOTIC(temp))
 				continue
 
 			var/open_wound
@@ -165,10 +168,10 @@
 	if(!is_usable())
 		return FALSE
 
-	return pulse > PULSE_NONE || robotic == ORGAN_ROBOT || (owner.status_flags & FAKEDEATH)
+	return pulse > PULSE_NONE || BP_IS_ROBOTIC(src) || (owner.status_flags & FAKEDEATH)
 
 /obj/item/organ/internal/heart/listen()
-	if(robotic == ORGAN_ROBOT && is_working())
+	if(BP_IS_ROBOTIC(src) && is_working())
 		if(is_bruised())
 			return "sputtering pump"
 		else

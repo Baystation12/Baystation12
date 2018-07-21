@@ -94,10 +94,12 @@
 		if(!G.force_danger())
 			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 			return
+		if(!user.unEquip(W))
+			return
 		move_into_gibber(user,G.affecting)
-		user.drop_from_inventory(G)
 	else if(istype(W, /obj/item/organ))
-		user.drop_from_inventory(W)
+		if(!user.unEquip(W))
+			return
 		qdel(W)
 		user.visible_message("<span class='danger'>\The [user] feeds \the [W] into \the [src], obliterating it.</span>")
 	else

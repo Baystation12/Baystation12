@@ -9,7 +9,7 @@
 	parent_organ = BP_HEAD
 	icon_state = "cortical-stack"
 	organ_tag = BP_STACK
-	robotic = ORGAN_ROBOT
+	status = ORGAN_ROBOTIC
 	vital = 1
 	origin_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4, TECH_MAGNET = 2, TECH_DATA = 3)
 	relative_size = 10
@@ -25,10 +25,6 @@
 
 /obj/item/organ/internal/stack/getToxLoss()
 	return 0
-
-/obj/item/organ/internal/stack/vox
-	name = "cortical stack"
-	invasive = 1
 
 /obj/item/organ/internal/stack/proc/do_backup()
 	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
@@ -61,14 +57,6 @@
 
 /obj/item/organ/internal/stack/removed()
 	do_backup()
-	..()
-
-/obj/item/organ/internal/stack/vox/removed()
-	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
-	owner.visible_message("<span class='danger'>\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!</span>")
-	head.take_damage(rand(15,20))
-	for(var/obj/item/organ/O in head.contents)
-		O.take_damage(rand(30,70))
 	..()
 
 /obj/item/organ/internal/stack/proc/overwrite()

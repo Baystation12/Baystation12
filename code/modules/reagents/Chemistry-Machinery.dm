@@ -51,9 +51,9 @@
 		if(src.beaker)
 			to_chat(user, "A beaker is already loaded into the machine.")
 			return
+		if(!user.unEquip(B, src))
+			return
 		src.beaker = B
-		user.drop_item()
-		B.loc = src
 		to_chat(user, "You add the beaker to the machine!")
 		src.updateUsrDialog()
 		icon_state = "mixer1"
@@ -63,10 +63,9 @@
 		if(src.loaded_pill_bottle)
 			to_chat(user, "A pill bottle is already loaded into the machine.")
 			return
-
+		if(!user.unEquip(B, src))
+			return
 		src.loaded_pill_bottle = B
-		user.drop_item()
-		B.loc = src
 		to_chat(user, "You add the pill bottle into the dispenser slot!")
 		src.updateUsrDialog()
 
@@ -358,9 +357,9 @@
 		if (beaker)
 			return 1
 		else
+			if(!user.unEquip(O, src))
+				return
 			src.beaker =  O
-			user.drop_item()
-			O.loc = src
 			update_icon()
 			src.updateUsrDialog()
 			return 0
@@ -407,8 +406,8 @@
 		to_chat(user, "\The [O] is not suitable for blending.")
 		return 1
 
-	user.remove_from_mob(O)
-	O.loc = src
+	if(!user.unEquip(O, src))
+		return
 	holdingitems += O
 	src.updateUsrDialog()
 	return 0
@@ -557,7 +556,10 @@
 				break
 
 /obj/machinery/reagentgrinder/proc/hurt_hand(mob/living/carbon/human/user)
-	if(!istype(user) || !prob(user.skill_fail_chance(SKILL_CHEMISTRY, 50, SKILL_BASIC)))
+	var/skill_to_check = SKILL_CHEMISTRY
+	if(user.get_skill_value(SKILL_COOKING) > user.get_skill_value(SKILL_CHEMISTRY))
+		skill_to_check = SKILL_COOKING
+	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return
 	var/hand = pick(BP_L_HAND, BP_R_HAND)
 	var/obj/item/organ/external/hand_organ = user.get_organ(hand)
@@ -567,7 +569,7 @@
 	var/dam = rand(10, 15)
 	user.visible_message("<span class='danger'>\The [user]'s hand gets caught in \the [src]!</span>", "<span class='danger'>Your hand gets caught in \the [src]!</span>")
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
-	if(hand_organ.robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(hand_organ))
 		beaker.reagents.add_reagent(/datum/reagent/iron, dam)
 	else
 		user.take_blood(beaker, dam)

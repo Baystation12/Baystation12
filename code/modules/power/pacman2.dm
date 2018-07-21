@@ -71,9 +71,9 @@
 			if(P)
 				to_chat(user, "<span class='warning'>The generator already has a phoron tank loaded!</span>")
 				return
+			if(!user.unEquip(O, src))
+				return
 			P = O
-			user.drop_item()
-			O.loc = src
 			to_chat(user, "<span class='notice'>You add the phoron tank to the generator.</span>")
 		else if(!active)
 			if(isWrench(O))

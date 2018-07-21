@@ -9,7 +9,8 @@ var/global/list/robot_modules = list(
 	"Security" 		= /obj/item/weapon/robot_module/security/general,
 	"Combat" 		= /obj/item/weapon/robot_module/security/combat,
 	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
-	"Janitor" 		= /obj/item/weapon/robot_module/janitor
+	"Janitor" 		= /obj/item/weapon/robot_module/janitor,
+	"Party"         = /obj/item/weapon/robot_module/uncertified/party
 	)
 
 /obj/item/weapon/robot_module
@@ -792,3 +793,23 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	..()
 	return
+
+/obj/item/weapon/robot_module/uncertified
+	name = "uncertified robot module"
+	sprites = list(	"Roller" = "omoikane"
+			  )
+
+/obj/item/weapon/robot_module/uncertified/party/Initialize()
+	name = "Madhouse Productions Official Party Module"
+	channels = list("Service" = 1, "Entertainment" = 1)
+	networks = list(NETWORK_THUNDER)
+	modules += new /obj/item/device/boombox(src)
+	modules += new /obj/item/weapon/bikehorn/airhorn(src)
+	modules += new /obj/item/weapon/party_light(src)
+
+	var/obj/item/weapon/gun/launcher/money/MC = new (src)
+	MC.receptacle_value = 5000
+	MC.dispensing = 100
+	modules += MC
+
+	. = ..()

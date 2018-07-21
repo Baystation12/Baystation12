@@ -9,7 +9,7 @@
 	desc = "Give your follower a sliver of soulstone to capture a life in."
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
-	base_cost = 10
+	base_cost = 20
 	boon_path = /obj/item/device/soulstone
 
 /datum/deity_item/boon/blood_zombie
@@ -17,7 +17,7 @@
 	desc = "Give a vessel to a follower filled with infection so vile, it turns all sapient creatures into mindless husks."
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
-	base_cost = 200 //End game shit.
+	base_cost = 300
 	boon_path = /obj/item/weapon/reagent_containers/food/drinks/zombiedrink
 
 /datum/deity_item/boon/tear_veil
@@ -25,7 +25,7 @@
 	desc = "Grant your follower the ability to literally rip a hole in this reality, allowing things to pass through."
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
-	base_cost = 50
+	base_cost = 100
 	boon_path = /spell/tear_veil
 
 /datum/deity_item/phenomena/hellscape
@@ -33,5 +33,5 @@
 	desc = "You show a non-believer what their future will be like."
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
-	base_cost = 50
+	base_cost = 110
 	phenomena_path = /datum/phenomena/hellscape

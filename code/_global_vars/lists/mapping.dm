@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(cw_dir, list( // cw_dir[dir] = clockwise rotation of dir. Unlik
 	48, 52, 56, 40, 50, 54, 58, 62, 49, 53, 57, 61, 51, 55, 59, 63  // UP+DOWN - Same as first line but +48
 ))
 
-GLOBAL_LIST_INIT(cww_dir, list( // cww_dir[dir] = counter-clockwise rotation of dir. Unlike reverse_dir, UP remains UP & DOWN remains DOWN.
+GLOBAL_LIST_INIT(ccw_dir, list( // ccw_dir[dir] = counter-clockwise rotation of dir. Unlike reverse_dir, UP remains UP & DOWN remains DOWN.
 	     8,  4, 12,  1,  9,  5, 13,  2, 10,  6, 14,  3, 11,  7, 15,
 	16, 24, 20, 28, 17, 25, 21, 29, 18, 26, 22, 30, 19, 27, 23, 31, // UP - Same as first line but +16
 	32, 40, 36, 44, 33, 41, 37, 45, 34, 42, 38, 46, 35, 43, 39, 47, // DOWN - Same as first line but +32

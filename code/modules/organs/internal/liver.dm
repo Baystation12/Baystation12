@@ -38,7 +38,7 @@
 	if(is_broken())
 		filter_effect -= 2
 	// Robotic organs filter better but don't get benefits from dylovene for filtering.
-	if(robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(src))
 		filter_effect += 1
 	else if(owner.chem_effects[CE_ANTITOX])
 		filter_effect += 1
@@ -50,7 +50,7 @@
 			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (owner.chem_effects[CE_ALCOHOL_TOXIC] + 0.5 * owner.chem_effects[CE_ALCOHOL]))
 
 	if(owner.chem_effects[CE_ALCOHOL_TOXIC])
-		take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
+		take_internal_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
 
 	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
 	if(!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && damage > 0)

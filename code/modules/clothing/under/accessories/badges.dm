@@ -170,13 +170,21 @@
 	icon_state = "ntbadge"
 	badge_string = "NanoTrasen Corporate"
 
-/obj/item/clothing/accessory/badge/marshal
-	name = "colonial marshal's badge"
-	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
-	icon_state = "marshalbadge"
+/obj/item/clothing/accessory/badge/ocieagent
+	name = "\improper OCIE Agent's badge"
+	desc = "A leather-backed gold badge displaying the crest of the Office of Civil Investigation and Enforcement."
+	icon_state = "agentbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	badge_string = "Colonial Marshal Bureau"
+	badge_string = "Office of Civil Investigation and Enforcement"
+
+/obj/item/clothing/accessory/badge/tracker
+	name = "\improper Tracker's badge"
+	desc = "A blue leather-backed gold badge displaying the crest of the Office of Civil Investigation and Enforcement."
+	icon_state = "trackerbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = "Office of Civil Investigation and Enforcement"
 
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"

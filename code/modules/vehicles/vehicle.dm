@@ -172,7 +172,7 @@
 	if(powered && cell.charge < (charge_use * CELLRATE))
 		return 0
 	on = 1
-	set_light(initial(light_max_bright), 1, 5)
+	set_light(0.8, 1, 5)
 	update_icon()
 	return 1
 
@@ -239,9 +239,8 @@
 		return
 	if(!istype(C))
 		return
-
-	H.drop_from_inventory(C)
-	C.forceMove(src)
+	if(!H.unEquip(C, src))
+		return
 	cell = C
 	powercheck()
 	to_chat(usr, "<span class='notice'>You install [C] in [src].</span>")

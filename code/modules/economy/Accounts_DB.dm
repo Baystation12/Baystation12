@@ -48,11 +48,11 @@
 		return ..()
 
 	if(!held_card)
-		user.drop_item()
-		O.loc = src
+		if(!user.unEquip(O, src))
+			return
 		held_card = O
 
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 
 	attack_hand(user)
 
@@ -106,7 +106,7 @@
 	if (accounts.len > 0)
 		data["accounts"] = accounts
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "accounts_terminal.tmpl", src.name, 400, 640)
 		ui.set_initial_data(data)
@@ -116,7 +116,7 @@
 	if(..())
 		return 1
 
-	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(usr, src, "main")
+	var/datum/nanoui/ui = SSnano.get_open_ui(usr, src, "main")
 
 	if(href_list["choice"])
 		switch(href_list["choice"])
@@ -169,10 +169,9 @@
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card/id))
-						var/obj/item/weapon/card/id/C = I
-						usr.drop_item()
-						C.loc = src
-						held_card = C
+						if(!usr.unEquip(I, src))
+							return
+						held_card = I
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])

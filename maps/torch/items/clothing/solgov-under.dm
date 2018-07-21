@@ -19,6 +19,9 @@
 	desc = "A baggy shirt bearing the seal of the SCG Expeditionary Corps and some dorky looking blue shorts."
 	icon_state = "expeditionpt"
 	worn_state = "expeditionpt"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		)
 
 /obj/item/clothing/under/solgov/pt/fleet
 	name = "fleet pt uniform"
@@ -42,7 +45,8 @@
 	item_state = "bl_suit"
 	worn_state = "blackutility"
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary
@@ -51,7 +55,8 @@
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt
@@ -60,7 +65,8 @@
 	icon_state = "blackservicef"
 	worn_state = "blackservicef"
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
@@ -160,6 +166,8 @@
 /obj/item/clothing/under/solgov/utility/fleet/combat/medical
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
 
+/obj/item/clothing/under/solgov/utility/fleet/combat/command
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
 
 /obj/item/clothing/under/solgov/utility/marine
 	name = "marine fatigues"
@@ -221,6 +229,9 @@
 	desc = "The service uniform of the SCG Expeditionary Corps in silver trim."
 	icon_state = "greydress"
 	worn_state = "greydress"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		)
 
 /obj/item/clothing/under/solgov/service/expeditionary/skirt
 	name = "expeditionary service skirt"

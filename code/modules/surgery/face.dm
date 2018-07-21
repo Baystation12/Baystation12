@@ -14,7 +14,7 @@
 	if (!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if (!affected || (affected.robotic >= ORGAN_ROBOT))
+	if (!affected || BP_IS_ROBOTIC(affected))
 		return 0
 	return target_zone == BP_MOUTH
 
@@ -48,7 +48,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, slicing [target]'s throat wth \the [tool]!</span>" , \
 	"<span class='warning'>Your hand slips, slicing [target]'s throat wth \the [tool]!</span>" )
-	affected.take_damage(40, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(40, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	target.losebreath += 10
 
 //////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing skin on [target]'s face with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, tearing skin on [target]'s face with \the [tool]!</span>")
-	affected.take_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	facial skin cauterization surgery step
@@ -141,11 +141,11 @@
 	"<span class='notice'>You cauterize the incision on [target]'s face and neck with \the [tool].</span>")
 	if (target.op_stage.face == 3)
 		var/obj/item/organ/external/head/h = affected
-		h.disfigured = 0
+		h.status &= ~ORGAN_DISFIGURED
 	target.op_stage.face = 0
 
 /datum/surgery_step/face/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, leaving a small burn on [target]'s face with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, leaving a small burn on [target]'s face with \the [tool]!</span>")
-	affected.take_damage(0, 4, used_weapon = tool)
+	affected.take_external_damage(0, 4, used_weapon = tool)

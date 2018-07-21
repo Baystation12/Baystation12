@@ -82,16 +82,12 @@
 /obj/item/device/powersink/pwr_drain()
 	if(!attached)
 		return 0
-
 	if(drained_this_tick)
 		return 1
 	drained_this_tick = 1
-
 	var/drained = 0
-
 	if(!PN)
 		return 1
-
 	set_light(0.5, 0.1, 12)
 	PN.trigger_warning()
 	// found a powernet, so drain up to max power from it

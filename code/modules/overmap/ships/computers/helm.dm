@@ -6,6 +6,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	icon_screen = "helm"
 	light_color = "#7faaff"
 	circuit = /obj/item/weapon/circuitboard/helm
+	core_skill = SKILL_PILOT
 	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
@@ -69,6 +70,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if(!isAI(user))
 		user.set_machine(src)
+		operator_skill = user.get_skill_value(core_skill)
 		if(linked)
 			user.reset_view(linked)
 
@@ -115,7 +117,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	data["locations"] = locations
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 380, 530)
 		ui.set_initial_data(data)
@@ -190,6 +192,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
+		var/mob/M = usr
+		if(istype(M) && prob(M.skill_fail_chance(SKILL_PILOT, 50, SKILL_ADEPT, factor = 1)))
+			ndir = turn(ndir,pick(90,-90))
 		linked.relaymove(usr, ndir)
 
 	if (href_list["brake"])
@@ -237,7 +242,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	else
 		data["ETAnext"] = "N/A"
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Navigation Screen", 380, 530)
 		ui.set_initial_data(data)

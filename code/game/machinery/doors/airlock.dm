@@ -374,7 +374,7 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/uranium/Process()
 	if(world.time > last_event+20)
 		if(prob(50))
-			radiation_repository.radiate(src, rad_power)
+			SSradiation.radiate(src, rad_power)
 		last_event = world.time
 	..()
 
@@ -780,7 +780,7 @@ About the new airlock wires panel:
 
 	data["commands"] = commands
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "door_control.tmpl", "Door Controls", 450, 350, state = state)
 		ui.set_initial_data(data)
@@ -1017,18 +1017,16 @@ About the new airlock wires panel:
 	if(!brace && istype(C, /obj/item/weapon/airlock_brace))
 		var/obj/item/weapon/airlock_brace/A = C
 		if(!density)
-			to_chat(user, "You must close \the [src] before installing \the [A]!")
+			to_chat(user, "<span class='warning'>You must close \the [src] before installing \the [A]!</span>")
 			return
 
 		if((!A.req_access.len && !A.req_one_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
 			return
 
-		if(do_after(user, 50, src) && density)
-			to_chat(user, "You successfully install \the [A]. \The [src] has been locked.")
+		if(do_after(user, 50, src) && density && A && user.unEquip(A, src))
+			to_chat(user, "<span class='notice'>You successfully install \the [A].</span>")
 			brace = A
 			brace.airlock = src
-			user.drop_from_inventory(brace)
-			brace.forceMove(src)
 			update_icon()
 		return
 
@@ -1123,7 +1121,7 @@ About the new airlock wires panel:
 				else
 					to_chat(user, "<span class='warning'>You need to be wielding \the [C] to do that.</span>")
 
-	if(istype(C, /obj/item/device/floor_painter))
+	else if(istype(C, /obj/item/device/floor_painter))
 		return
 
 	else

@@ -61,6 +61,12 @@ var/list/wrapped_species_by_ref = list()
 	var/datum/species/S = all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_tail_hair(H)
 
+/datum/species/shapeshifter/get_husk_icon(var/mob/living/carbon/human/H)
+	if(H)
+		var/datum/species/S = all_species[wrapped_species_by_ref["\ref[H]"]]
+		if(S) return S.get_husk_icon(H)
+	 return ..()
+
 /datum/species/shapeshifter/handle_pre_spawn(var/mob/living/carbon/human/H)
 	..()
 	wrapped_species_by_ref["\ref[H]"] = default_form

@@ -59,6 +59,15 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_faction(H ? html_decode(H.personal_faction) : "Unset")
 	set_religion(H ? html_decode(H.religion) : "Unset")
 
+	if(H)
+		var/skills = list()
+		for(var/decl/hierarchy/skill/S in GLOB.skills)
+			var/level = H.get_skill_value(S.type)
+			if(level > SKILL_NONE)
+				skills += "[S.name], [S.levels[level]]"
+
+		set_skillset(jointext(skills,"\n"))
+
 	// Antag record
 	set_antagRecord(H && H.exploit_record && !jobban_isbanned(H, "Records") ? html_decode(H.exploit_record) : "")
 
@@ -142,6 +151,7 @@ FIELD_LIST("Rank", rank, record_ranks(), null)
 // MEDICAL RECORDS
 FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, null)
 FIELD_LONG("Medical Record", medRecord, access_medical)
+FIELD_SHORT("Religion", religion, access_medical)
 
 // SECURITY RECORDS
 FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security)
@@ -154,7 +164,7 @@ FIELD_LONG("Employment Record", emplRecord, access_heads)
 FIELD_SHORT("Home System", homeSystem, access_heads)
 FIELD_SHORT("Citizenship", citizenship, access_heads)
 FIELD_SHORT("Faction", faction, access_heads)
-FIELD_SHORT("Religion", religion, access_heads)
+FIELD_LONG("Qualifications", skillset, access_heads)
 
 // ANTAG RECORDS
 FIELD_LONG("Exploitable Information", antagRecord, access_syndicate)

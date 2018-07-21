@@ -65,7 +65,6 @@
 		return 0
 
 	to_chat(user, "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>")
-	user.drop_from_inventory(input_device)
 	qdel(input_device)
 	accepted_item.charges++
 	return 1
@@ -263,7 +262,6 @@
 		return
 
 	for(var/obj/item/weapon/melee/energy/blade/blade in M.contents)
-		M.drop_from_inventory(blade)
 		qdel(blade)
 
 /obj/item/rig_module/fabricator

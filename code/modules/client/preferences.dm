@@ -188,7 +188,6 @@ datum/preferences
 		if(!O)
 			continue
 		O.status = 0
-		O.robotic = 0
 		O.model = null
 		if(status == "amputated")
 			character.organs_by_name[O.organ_tag] = null
@@ -313,5 +312,7 @@ datum/preferences
 	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
+	if(panel)
+		panel.close()
+		panel = null
 	user << browse(null, "window=saves")
-	panel.close()

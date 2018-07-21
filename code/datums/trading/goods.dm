@@ -157,7 +157,7 @@
 	possible_origins = list("Baldie's Hats and Accessories", "The Right Fit", "Like a Glove", "Space Fashion")
 	possible_trading_items = list(/obj/item/clothing/accessory            = TRADER_ALL,
 								/obj/item/clothing/accessory/badge        = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/accessory/holster      = TRADER_BLACKLIST_ALL,
+								/obj/item/clothing/accessory/storage/holster      = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/accessory/medal        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/accessory/storage      = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/gloves                 = TRADER_SUBTYPES_ONLY,

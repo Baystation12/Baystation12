@@ -26,19 +26,19 @@
 
 /datum/nano_module/deck_management/New()
 	..()
-	for(var/shuttle in shuttle_controller.shuttle_logs) //Registering to get shuttle updates.
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[shuttle]
+	for(var/shuttle in SSshuttle.shuttle_logs) //Registering to get shuttle updates.
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.register(src)
 
 /datum/nano_module/deck_management/Destroy()
-	for(var/shuttle in shuttle_controller.shuttle_logs) //Unregistering; important for garbage collection.
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[shuttle]
+	for(var/shuttle in SSshuttle.shuttle_logs) //Unregistering; important for garbage collection.
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.unregister(src)
 	. = ..()
 
 /datum/nano_module/deck_management/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
-	var/logs = shuttle_controller.shuttle_logs
+	var/logs = SSshuttle.shuttle_logs
 
 	data["prog_state"] = prog_state
 	data["default_access"] = get_default_access(user)
@@ -74,7 +74,7 @@
 				return
 			data["shuttle_access"] = get_shuttle_access(user, selected_shuttle)
 			data["shuttle_name"] = selected_shuttle.name
-			var/datum/shuttle_log/log = shuttle_controller.shuttle_logs[selected_shuttle]
+			var/datum/shuttle_log/log = SSshuttle.shuttle_logs[selected_shuttle]
 			var/missions = list()
 			for(var/datum/shuttle_mission/M in log.missions)
 				missions += list(generate_mission_data(M))
@@ -116,7 +116,7 @@
 			data["mission_data"] = generate_mission_data(selected_mission)
 			data["view_only"] = can_view_only
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "deck_management.tmpl", name, 700, 800, state = state)
 		ui.auto_update_layout = 1
@@ -125,7 +125,7 @@
 
 //Checks that the selected shuttle is valid, and resets to home screen if not.
 /datum/nano_module/deck_management/proc/ensure_valid_shuttle()
-	if(!(selected_shuttle in shuttle_controller.shuttle_logs))
+	if(!(selected_shuttle in SSshuttle.shuttle_logs))
 		selected_mission = null
 		selected_shuttle = null
 		prog_state = DECK_HOME
@@ -136,7 +136,7 @@
 /datum/nano_module/deck_management/proc/ensure_valid_mission()
 	if(!ensure_valid_shuttle())
 		return 0
-	var/datum/shuttle_log/log = shuttle_controller.shuttle_logs[selected_shuttle]
+	var/datum/shuttle_log/log = SSshuttle.shuttle_logs[selected_shuttle]
 	if(!(selected_mission in (log.missions + log.queued_missions)) || (selected_mission.shuttle_name != selected_shuttle.name))
 		selected_mission = null
 		prog_state = DECK_ALL_MISSIONS
@@ -160,7 +160,7 @@
 			mission_data["status"] = "Mission Complete."
 	mission_data["ID"] = mission.ID
 	if(selected_shuttle)
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(my_log.current_mission == mission)
 			mission_data["is_current"] = 1
 		if(mission in my_log.queued_missions)
@@ -177,7 +177,7 @@
 
 /datum/nano_module/deck_management/proc/set_shuttle(mob/user, shuttle_name, need_access = 1)
 	var/datum/shuttle/shuttle
-	if(!(shuttle = shuttle_controller.shuttles[shuttle_name]))
+	if(!(shuttle = SSshuttle.shuttles[shuttle_name]))
 		return 0
 	if(need_access && !get_shuttle_access(user, shuttle))
 		return 0
@@ -195,7 +195,7 @@
 	return 1
 
 /datum/nano_module/deck_management/proc/set_mission(mission_ID)
-	var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+	var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 	var/datum/shuttle_mission/mission = my_log.mission_from_ID(mission_ID)
 	if(!mission)
 		return 0
@@ -229,7 +229,7 @@
 		var/shuttle_name = href_list["new_mission"]
 		if(!set_shuttle(user, shuttle_name, 1))
 			return 1
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		var/input = input(user, "Mission Name:", "Mission Creation") as null|text
 		selected_mission = my_log.create_mission(sanitize(input, 50))
 		prog_state = DECK_MISSION_DETAILS
@@ -239,7 +239,7 @@
 		var/mission_ID = text2num(href_list["mission"])
 		var/function = href_list["modify"]
 		if(set_shuttle(user, shuttle_name, 1) && set_mission(mission_ID))
-			var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+			var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 			switch(function)
 				if("rename")
 					var/input = input(user, "Mission Name:", "Rename Mission") as null|text
@@ -300,7 +300,7 @@
 			return 1
 		if(!selected_report.verify_access_edit(get_access(user)))
 			return 1
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(my_log.submit_report(selected_mission, selected_report, user))
 			selected_report = null
 			prog_state = DECK_MISSION_DETAILS
@@ -332,7 +332,7 @@
 				place = A
 		if(alert(user, "This will make a radio announcement summoning all mission crew to the [place]. Are you sure you want to do this?",, "Yes.", "No.") == "No.")
 			return 1
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(world.time - my_log.last_spam >= 1 MINUTE) //Slow down with that spam button
 			GLOB.global_announcer.autosay("The [selected_shuttle.name] is planning to depart on a mission promptly at [time]. The following crew members are to make their way to \the [place] immediately: [crew].", "Hangar Announcement System")
 			my_log.last_spam = world.time

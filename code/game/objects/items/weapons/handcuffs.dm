@@ -86,6 +86,12 @@
 	if(!can_place(target, user)) // victim may have resisted out of the grab in the meantime
 		return 0
 
+	var/obj/item/weapon/handcuffs/cuffs = src
+	if(dispenser)
+		cuffs = new(get_turf(user))
+	else if(!user.unEquip(cuffs))
+		return 0
+
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
 	feedback_add_details("handcuffs","H")
 
@@ -95,11 +101,6 @@
 	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
 
 	// Apply cuffs.
-	var/obj/item/weapon/handcuffs/cuffs = src
-	if(dispenser)
-		cuffs = new(get_turf(user))
-	else
-		user.drop_from_inventory(cuffs)
 	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 
@@ -121,7 +122,7 @@ var/last_chew = 0
 	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
-	O.take_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
 
 	last_chew = world.time
 
@@ -135,28 +136,28 @@ var/last_chew = 0
 	elastic = 1
 
 /obj/item/weapon/handcuffs/cable/red
-	color = "#dd0000"
+	color = COLOR_MAROON
 
 /obj/item/weapon/handcuffs/cable/yellow
-	color = "#dddd00"
+	color = COLOR_AMBER
 
 /obj/item/weapon/handcuffs/cable/blue
-	color = "#0000dd"
+	color = COLOR_CYAN_BLUE
 
 /obj/item/weapon/handcuffs/cable/green
-	color = "#00dd00"
+	color = COLOR_GREEN
 
 /obj/item/weapon/handcuffs/cable/pink
-	color = "#dd00dd"
+	color = COLOR_PURPLE
 
 /obj/item/weapon/handcuffs/cable/orange
-	color = "#dd8800"
+	color = COLOR_ORANGE
 
 /obj/item/weapon/handcuffs/cable/cyan
-	color = "#00dddd"
+	color = COLOR_SKY_BLUE
 
 /obj/item/weapon/handcuffs/cable/white
-	color = "#ffffff"
+	color = COLOR_SILVER
 
 /obj/item/weapon/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob)
 	..()

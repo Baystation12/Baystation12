@@ -64,7 +64,7 @@
 
 /mob/proc/AIize(move=1)
 	if(client)
-		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// stop the jams for AIs
+		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// stop the jams for AIs
 
 
 	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
@@ -307,22 +307,25 @@
 	return 0
 
 
-//This is barely a transformation but probably best file for it.
-/mob/living/carbon/human/proc/zombieze()
+/mob/living/carbon/human/proc/zombify()
 	ChangeToHusk()
-	mutations |= CLUMSY //cause zombie
-	src.visible_message("<span class='danger'>\The [src]'s flesh decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You... hunger. Not only for flesh, but to spread your disease.</span>")
-	if(src.mind)
+	mutations |= CLUMSY
+	src.visible_message("<span class='danger'>\The [src]'s skin decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift.</span>")
+	if (src.mind)
+		if (src.mind.special_role == "Zombie")
+			return
 		src.mind.special_role = "Zombie"
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	Weaken(5)
-	if(should_have_organ(BP_HEART))
-		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
-	for(var/o in organs)
+	if (should_have_organ(BP_HEART))
+		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
+	for (var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0
-		organ.rejuvenate(1)
-		organ.max_damage *= 5
-		organ.min_broken_damage *= 5
+		if (!BP_IS_ROBOTIC(organ))
+			organ.rejuvenate(1)
+			organ.max_damage *= 3
+			organ.min_broken_damage = Floor(organ.max_damage * 0.75)
 	verbs += /mob/living/proc/breath_death
 	verbs += /mob/living/proc/consume
+	playsound(get_turf(src), 'sound/hallucinations/wail.ogg', 20, 1)

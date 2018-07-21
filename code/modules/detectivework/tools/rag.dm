@@ -39,9 +39,8 @@
 	. = ..()
 
 /obj/item/weapon/reagent_containers/glass/rag/attack_self(mob/user as mob)
-	if(on_fire)
+	if(on_fire && user.unEquip(src))
 		user.visible_message("<span class='warning'>\The [user] stamps out [src].</span>", "<span class='warning'>You stamp out [src].</span>")
-		user.unEquip(src)
 		extinguish()
 	else
 		remove_contents(user)
@@ -100,9 +99,13 @@
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
 		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
 		update_name()
-		if(do_after(user,30, progress = 0))
+		if(do_after(user,30, progress = 1))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
-			A.clean_blood()
+			if(isturf(A))
+				var/turf/T = A
+				T.clean(src, user)
+			else
+				A.clean_blood()
 
 /obj/item/weapon/reagent_containers/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
 	if(isliving(target))

@@ -21,6 +21,7 @@
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	core_skill = SKILL_CHEMISTRY
+	var/can_contaminate = TRUE
 
 /obj/machinery/chemical_dispenser/New()
 	..()
@@ -55,18 +56,20 @@
 		return
 
 	if(user)
-		user.drop_from_inventory(C)
-		to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
+		if(user.unEquip(C))
+			to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
+		else
+			return
 
-	C.loc = src
+	C.forceMove(src)
 	cartridges[C.label] = C
 	cartridges = sortAssoc(cartridges)
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 
 /obj/machinery/chemical_dispenser/proc/remove_cartridge(label)
 	. = cartridges[label]
 	cartridges -= label
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 
 /obj/machinery/chemical_dispenser/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/reagent_containers/chem_disp_cartridge))
@@ -100,7 +103,7 @@
 		RC.loc = src
 		update_icon()
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
-		GLOB.nanomanager.update_uis(src) // update all UIs attached to src
+		SSnano.update_uis(src) // update all UIs attached to src
 
 	else
 		..()
@@ -132,7 +135,7 @@
 	data["chemicals"] = chemicals
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "chem_disp.tmpl", ui_title, 390, 680)
 		ui.set_initial_data(data)
@@ -150,7 +153,7 @@
 			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[label]
 			var/mult = 1 + (-0.5 + round(rand(), 0.1))*(user.skill_fail_chance(core_skill, 0.3, SKILL_ADEPT))
 			C.reagents.trans_to(container, amount*mult)
-			var/contaminants_left = rand(0, max(SKILL_ADEPT - user.get_skill_value(core_skill), 0))
+			var/contaminants_left = rand(0, max(SKILL_ADEPT - user.get_skill_value(core_skill), 0)) * can_contaminate
 			var/choices = cartridges.Copy()
 			while(length(choices) && contaminants_left)
 				var/chosen_label = pick_n_take(choices)

@@ -253,7 +253,7 @@ var/list/global/tank_gauge_cache = list()
 					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -539,9 +539,11 @@ var/list/global/tank_gauge_cache = list()
 	if(isigniter(S.a_left) == isigniter(S.a_right))		//Check if either part of the assembly has an igniter, but if both parts are igniters, then fuck it
 		return
 
-	M.drop_item()			//Remove the assembly from your hands
-	M.remove_from_mob(src)	//Remove the tank from your character,in case you were holding it
-	M.put_in_hands(src)		//Equips the bomb if possible, or puts it on the floor.
+	if(!M.unequip_item())
+		return					//Remove the assembly from your hands
+	if(!M.unEquip(src))
+		return					//Remove the tank from your character,in case you were holding it
+	M.put_in_hands(src)			//Equips the bomb if possible, or puts it on the floor.
 
 	proxyassembly.assembly = S	//Tell the bomb about its assembly part
 	S.master = proxyassembly	//Tell the assembly about its new owner

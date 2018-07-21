@@ -58,7 +58,7 @@
 		to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
 		return
 
-	if(user != victim) // Skip checks if you're doing it to yourself, this is an anti-griefing mechanic more than anything.
+	if(user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
 		user.visible_message("<span class='warning'>\The [user] begins switching on \the [src]'s neural suppressor.</span>")
 		if(!do_after(user, 30, src) || !user || !src || user.incapacitated() || !user.Adjacent(src))
 			return
@@ -82,10 +82,10 @@
 
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return
-	user.drop_item()
+	if(!user.unequip_item())
+		return
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
-	return
 
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)

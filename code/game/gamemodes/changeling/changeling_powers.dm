@@ -187,7 +187,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				to_chat(src, "<span class='notice'>We stab [T] with the proboscis.</span>")
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				to_chat(T, "<span class='danger'>You feel a sharp stabbing pain!</span>")
-				affecting.take_damage(39, 0, DAM_SHARP, "large organic needle")
+				affecting.take_external_damage(39, 0, DAM_SHARP, "large organic needle")
 
 		feedback_add_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
@@ -346,7 +346,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/changeling/changeling = changeling_power(1,1,0)
 	if(!changeling)	return
-	
+
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 
@@ -724,7 +724,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 			to_chat(src, "<span class='warning'>[T]'s armor has protected them.</span>")
 			return //thick clothes will protect from the sting
 
-	if(T.isSynthetic() || target_limb.isrobotic()) return
+	if(T.isSynthetic() || BP_IS_ROBOTIC(target_limb)) return
 	if(!T.mind || !T.mind.changeling) return T	//T will be affected by the sting
 	to_chat(T, "<span class='warning'>You feel a tiny prick.</span>")
 	return

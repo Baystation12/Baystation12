@@ -19,6 +19,7 @@
 				)
 
 	possible_trading_items = list(/obj/item/weapon/gun/projectile/pistol    = TRADER_ALL,
+								/obj/item/weapon/gun/projectile/beretta     = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/colt        = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/magnum_pistol= TRADER_ALL,
 								/obj/item/weapon/gun/projectile/sec         = TRADER_ALL,
@@ -29,14 +30,16 @@
 								/obj/item/ammo_magazine/a762/empty          = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/a75/empty           = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/c45m/empty          = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/c45mds/empty        = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/mc9mm/empty         = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/mc9mmds/empty       = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/box/c9mm/empty      = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/box/c45/empty       = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/box/a556/empty      = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/c45uzi/empty        = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/mc9mmt/empty        = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/a50/empty           = TRADER_BLACKLIST,
-								/obj/item/clothing/accessory/holster        = TRADER_ALL)
+								/obj/item/clothing/accessory/storage/holster        = TRADER_ALL)
 
 /datum/trader/ship/egunshop
 	name = "Energy Gun Shop Employee"
@@ -68,7 +71,7 @@
 								/obj/item/weapon/cell/high                               = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/super                              = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/hyper                              = TRADER_THIS_TYPE,
-								/obj/item/clothing/accessory/holster                     = TRADER_ALL)
+								/obj/item/clothing/accessory/storage/holster                     = TRADER_ALL)
 
 /datum/trader/dogan
 	name = "Dogan"
@@ -96,4 +99,4 @@
 								/obj/item/weapon/gun/projectile/heavysniper/ant         = TRADER_THIS_TYPE,
 								/obj/item/weapon/gun/energy/laser/dogan                 = TRADER_THIS_TYPE,
 								/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi  = TRADER_THIS_TYPE,
-								/obj/item/clothing/accessory/holster                    = TRADER_ALL)
+								/obj/item/clothing/accessory/storage/holster                    = TRADER_ALL)

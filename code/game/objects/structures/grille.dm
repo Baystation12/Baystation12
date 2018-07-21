@@ -12,7 +12,7 @@
 	var/destroyed = 0
 	var/on_frame = FALSE
 
-	blend_objects = list(/obj/machinery/door) // Objects which to blend with
+	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
 /obj/structure/grille/New()
@@ -267,17 +267,6 @@
 	health = 40 //Make it strong enough to avoid people breaking in too easily
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
-	if(air_group)
-		return 0 //Make sure air doesn't drain
-	..()
-
-/obj/structure/grille/bogani
-	name = "alien grate"
-	desc = "This matrice is fashioned out of some exotic, strange material. Its strength allows it to function as a prison-like walling."
-	icon_state = "alien_grate"
-	health = 150 //hella strong
-
-/obj/structure/grille/bogani/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
 	if(air_group)
 		return 0 //Make sure air doesn't drain
 	..()

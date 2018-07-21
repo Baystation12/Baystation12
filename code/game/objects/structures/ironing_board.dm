@@ -73,18 +73,16 @@
 			to_chat(user, "<span class='notice'>[buckled_mob] is already on the ironing table!</span>")
 			return
 
-		if(user.drop_item())
+		if(user.unEquip(I, src))
 			cloth = I
-			I.forceMove(src)
 			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
 		return
 	else if(istype(I,/obj/item/weapon/ironingiron))
 		var/obj/item/weapon/ironingiron/R = I
 
-		if(!holding && !R.enabled && user.drop_item())
+		if(!holding && !R.enabled && user.unEquip(I, src))
 			holding = R
-			I.forceMove(src)
 			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
 			return
@@ -94,14 +92,14 @@
 			var/mob/living/carbon/human/H = buckled_mob
 			var/zone = user.zone_sel.selecting
 			var/parsed = parse_zone(zone)
-		
+
 			visible_message("<span class='danger'>[user] begins ironing [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You begin ironing [buckled_mob]'s [parsed]!</span>")
 			if(!do_after(user, 40, src))
 				return
 			visible_message("<span class='danger'>[user] irons [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You iron [buckled_mob]'s [parsed]!</span>")
 
 			var/obj/item/organ/external/affecting = H.get_organ(zone)
-			affecting.take_damage(0, 15, used_weapon = "Hot metal")
+			affecting.take_external_damage(0, 15, used_weapon = "Hot metal")
 
 			return
 

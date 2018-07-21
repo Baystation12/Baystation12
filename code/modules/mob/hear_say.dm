@@ -70,7 +70,7 @@
 		if(language)
 			var/nverb = null
 			if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
-				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+				on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, verb)]</span>")
 			else //Check if the client WANTS to see language names.
 				switch(src.get_preference_value(/datum/client_preference/language_display))
 					if(GLOB.PREF_FULL) // Full language name
@@ -82,7 +82,7 @@
 				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, nverb)]</span>")
 
 		else
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
@@ -98,6 +98,10 @@
 
 	if(!client)
 		return
+	
+	if(last_radio_sound + 0.5 SECOND > world.time)
+		playsound(loc, 'sound/effects/radio_chatter.ogg', 10, 0, -1, falloff = -3)
+		last_radio_sound = world.time
 
 	if(sleeping || stat==1) //If unconscious or sleeping
 		hear_sleep(message)

@@ -1,3 +1,5 @@
+#define SOUND_ID "pipe_leakage"
+
 /obj/machinery/atmospherics/pipe
 
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
@@ -13,6 +15,7 @@
 	can_buckle = 1
 	buckle_require_restraints = 1
 	buckle_lying = -1
+	var/datum/sound_token/sound_token
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
@@ -34,6 +37,7 @@
 			if(parent.network)
 				parent.network.leaks |= src
 	else if (!new_leaking && leaking)
+		update_sound(0)
 		STOP_PROCESSING(SSmachines, src)
 		leaking = FALSE
 		if(parent)
@@ -41,6 +45,11 @@
 			if(parent.network)
 				parent.network.leaks -= src
 
+/obj/machinery/atmospherics/pipe/proc/update_sound(var/playing)
+	if(playing && !sound_token)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
+	else if(!playing && sound_token)
+		QDEL_NULL(sound_token)
 
 /obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
 	return null
@@ -81,6 +90,7 @@
 
 /obj/machinery/atmospherics/pipe/Destroy()
 	QDEL_NULL(parent)
+	QDEL_NULL(sound_token)
 	if(air_temporary)
 		loc.assume_air(air_temporary)
 
@@ -211,6 +221,10 @@
 		..()
 	else if(leaking)
 		parent.mingle_with_turf(loc, volume)
+		if(!sound_token && parent.air.return_pressure())
+			update_sound(1)
+		else if(sound_token && !parent.air.return_pressure())
+			update_sound(0)
 	else
 		. = PROCESS_KILL
 
@@ -255,8 +269,7 @@
 		node1 = null
 	if(node2)
 		node2.disconnect(src)
-		node1 = null
-
+		node2 = null
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/simple/pipeline_expansion()
@@ -1449,3 +1462,5 @@
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
 	else
 		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "retracted" + icon_connect_type)
+
+#undef SOUND_ID

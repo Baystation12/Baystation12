@@ -36,7 +36,8 @@
 		/obj/item/device/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/weapon/clipboard
+		/obj/item/weapon/clipboard,
+		/obj/item/weapon/storage/belt/general
 	)
 
 /obj/structure/closet/secure_closet/RD

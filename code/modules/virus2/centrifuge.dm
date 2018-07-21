@@ -8,6 +8,7 @@
 
 	var/obj/item/weapon/reagent_containers/glass/beaker/vial/sample = null
 	var/datum/disease2/disease/virus2 = null
+	core_skill = SKILL_VIROLOGY
 
 /obj/machinery/computer/centrifuge/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(isScrewdriver(O))
@@ -17,13 +18,12 @@
 		if(sample)
 			to_chat(user, "\The [src] is already loaded.")
 			return
-
+		if(!user.unEquip(O, src))
+			return
 		sample = O
-		user.drop_item()
-		O.loc = src
 
 		user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
-		GLOB.nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 
 	src.attack_hand(user)
 
@@ -71,7 +71,7 @@
 					data["antibodies"] = antigens2string(A.data["antibodies"], none=null)
 				data["is_antibody_sample"] = 1
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "isolation_centrifuge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -91,9 +91,12 @@
 		if(isolating == 0)
 			isolate()
 
-/obj/machinery/computer/centrifuge/OnTopic(user, href_list)
+	if(virus2)
+		infect_nearby(virus2)
+
+/obj/machinery/computer/centrifuge/OnTopic(mob/user, href_list)
 	if (href_list["close"])
-		GLOB.nanomanager.close_user_uis(user, src, "main")
+		SSnano.close_user_uis(user, src, "main")
 		return TOPIC_HANDLED
 
 	if (href_list["print"])
@@ -107,6 +110,7 @@
 			virus2 = virus.getcopy()
 			isolating = 40
 			update_icon()
+			operator_skill = user.get_skill_value(core_skill)
 		return TOPIC_REFRESH
 
 	switch(href_list["action"])
@@ -117,6 +121,12 @@
 				state("\The [src] buzzes, \"No antibody carrier detected.\"", "blue")
 				return TOPIC_HANDLED
 
+			var/list/viruses = B.data["virus2"]
+			if(length(viruses))
+				var/ID = pick(viruses)
+				var/datum/disease2/disease/V = viruses[ID]
+				virus2 = V.getcopy()
+			operator_skill = user.get_skill_value(core_skill)
 			var/has_toxins = locate(/datum/reagent/toxin) in sample.reagents.reagent_list
 			var/has_radium = sample.reagents.has_reagent(/datum/reagent/radium)
 			if (has_toxins || has_radium)
@@ -146,8 +156,9 @@
 	var/amt= sample.reagents.get_reagent_amount(/datum/reagent/blood)
 	sample.reagents.remove_reagent(/datum/reagent/blood, amt)
 	sample.reagents.add_reagent(/datum/reagent/antibodies, amt, data)
+	operator_skill = null
 
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 	update_icon()
 	ping("\The [src] pings, \"Antibody isolated.\"")
 
@@ -156,8 +167,9 @@
 	var/obj/item/weapon/virusdish/dish = new/obj/item/weapon/virusdish(loc)
 	dish.virus2 = virus2
 	virus2 = null
+	operator_skill = null
 
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 	update_icon()
 	ping("\The [src] pings, \"Pathogen isolated.\"")
 

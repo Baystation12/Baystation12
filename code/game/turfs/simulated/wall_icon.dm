@@ -23,7 +23,7 @@
 
 	set_opacity(material.opacity >= 0.5)
 
-	radiation_repository.resistance_cache.Remove(src)
+	SSradiation.resistance_cache.Remove(src)
 	update_connections(1)
 	update_icon()
 
@@ -76,6 +76,15 @@
 				I.color = reinf_color
 				overlays += I
 
+	if(stripe_color)
+		for(var/i = 1 to 4)
+			if(other_connections[i] != "0")
+				I = image('icons/turf/wall_masks.dmi', "stripe_other[wall_connections[i]]", dir = 1<<(i-1))
+			else
+				I = image('icons/turf/wall_masks.dmi', "stripe[wall_connections[i]]", dir = 1<<(i-1))
+			I.color = stripe_color
+			overlays += I
+
 	if(damage != 0)
 		var/integrity = material.integrity
 		if(reinf_material)
@@ -121,7 +130,7 @@
 		var/success = 0
 		for(var/obj/O in T)
 			for(var/b_type in blend_objects)
-				if( istype(O, b_type))
+				if(istype(O, b_type))
 					success = 1
 				for(var/nb_type in noblend_objects)
 					if(istype(O, nb_type))
@@ -132,8 +141,9 @@
 				break
 
 		if(success)
-			wall_dirs += get_dir( src, T )
-			other_dirs += get_dir( src, T )
+			wall_dirs += get_dir(src, T)
+			if(get_dir(src, T) in GLOB.cardinal)
+				other_dirs += get_dir(src, T)
 
 	wall_connections = dirs_to_corner_states(wall_dirs)
 	other_connections = dirs_to_corner_states(other_dirs)

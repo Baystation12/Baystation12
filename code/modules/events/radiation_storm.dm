@@ -12,7 +12,7 @@
 	command_announcement.Announce("High levels of radiation detected in proximity of the [location_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
 
 /datum/event/radiation_storm/start()
-	make_maint_all_access()
+	GLOB.using_map.make_maint_all_access(1)
 
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
@@ -32,7 +32,7 @@
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)
 	for(var/z in GLOB.using_map.station_levels)
-		radiation_repository.z_radiate(locate(1, 1, z), radiation_level, 1)
+		SSradiation.z_radiate(locate(1, 1, z), radiation_level, 1)
 
 	for(var/mob/living/carbon/C in GLOB.living_mob_list_)
 		var/area/A = get_area(C)
@@ -51,7 +51,7 @@
 					domutcheck(H,null,MUTCHK_FORCED)
 
 /datum/event/radiation_storm/end()
-	revoke_maint_all_access()
+	GLOB.using_map.revoke_maint_all_access(1)
 
 /datum/event/radiation_storm/syndicate/radiate()
 	return

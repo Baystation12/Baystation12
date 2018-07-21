@@ -246,7 +246,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/mob/living/M = loc
 			if (!nomessage)
 				to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
-			M.remove_from_mob(src) //un-equip it so the overlays can update
 		qdel(src)
 
 /obj/item/clothing/mask/smokable/cigarette/menthol
@@ -875,7 +874,6 @@ obj/item/clothing/mask/chewable/Destroy()
 			var/mob/living/M = loc
 			if (!nomessage)
 				to_chat(M, "<span class='notice'>You spit out the [name].</span>")
-			M.remove_from_mob(src) //un-equip it so the overlays can update
 		qdel(src)
 
 /obj/item/clothing/mask/chewable/tobacco/lenni

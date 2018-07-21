@@ -6,7 +6,9 @@
 	load_type = /obj/item/weapon/rcd_ammo
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_MAGNET = 4)
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
+	one_hand_penalty = 6
 	power_cost = 300
+	fire_delay = 35
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	loaded = /obj/item/weapon/rcd_ammo/large // ~30 shots
@@ -14,9 +16,9 @@
 
 	var/initial_cell_type = /obj/item/weapon/cell/hyper
 	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
-	var/slowdown_held = 2
-	var/slowdown_worn = 1
 	gun_unreliable = 0
+	var/slowdown_held = 3
+	var/slowdown_worn = 2
 
 /obj/item/weapon/gun/magnetic/railgun/Initialize()
 
@@ -75,10 +77,11 @@
 	power_cost = 280 // Same number of shots, but it'll seem to recharge slightly faster
 
 	loaded = /obj/item/stack/rods
-	load_type = /obj/item/stack/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges
-	load_sheet_max = 10 // Fewer shots per "magazine", but more abundant than matter cartridges.
+	load_type = /obj/item/stack/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges - actually they dont
+	projectile_type = /obj/item/projectile/bullet/magnetic
+	load_sheet_max = 6 // Fewer shots per "magazine", but more abundant than matter cartridges.
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3, TECH_MAGNET = 5)
-	slowdown_worn = 2 // Little slower when worn
+	slowdown_worn = 3 // Little slower when worn
 
 /obj/item/weapon/gun/magnetic/railgun/tcc/show_ammo(var/mob/user)
 	var/obj/item/stack/rods/ammo = loaded
@@ -111,8 +114,10 @@
 	initial_cell_type = /obj/item/weapon/cell/infinite
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/super
 
-	slowdown_held = 3
-	slowdown_worn = 2
+	fire_delay =  8
+	slowdown_held = 4
+
+	slowdown_worn = 3
 
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_NO_CONTAINER
@@ -138,12 +143,12 @@
 	desc = "The MI-12 Skadi is a burst fire capable railgun that fires flechette rounds at high velocity. Deadly against armour, but much less effective against soft targets."
 	icon_state = "flechette_gun"
 	item_state = "z8carbine"
+	one_hand_penalty = 2
+	fire_delay = 8
 	removable_components = FALSE
 	initial_cell_type = /obj/item/weapon/cell/hyper
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
 	slot_flags = SLOT_BACK
-	slowdown_held = 0
-	slowdown_worn = 0
 	power_cost = 100
 	load_type = /obj/item/weapon/magnetic_ammo
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette

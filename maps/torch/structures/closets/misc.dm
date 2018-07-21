@@ -22,7 +22,7 @@
 		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
-		/obj/item/device/radio/headset/heads/torchntcommand/alt,
+		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50),
 		/obj/item/weapon/storage/fakebook
@@ -49,7 +49,6 @@
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/device/radio/headset/headset_com,
-		/obj/item/device/radio/headset/headset_com/alt,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
@@ -93,7 +92,7 @@
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/WillContain()
 	return list(
-			/obj/item/clothing/accessory/holster/thigh = 2,
+			/obj/item/clothing/accessory/storage/holster/thigh = 2,
 			/obj/item/weapon/gun/energy/gun/secure = 3,
 	)
 
@@ -109,7 +108,7 @@
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined/WillContain()
 	return list(
 		/obj/item/weapon/gun/energy/gun/small/secure = 2,
-		/obj/item/clothing/accessory/holster/thigh = 2,
+		/obj/item/weapon/storage/belt/holster/general = 2,
 		/obj/item/weapon/gun/energy/gun/secure = 2,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/gun/energy/gun/secure, /obj/item/weapon/gun/energy/gun/small/secure))
 	)

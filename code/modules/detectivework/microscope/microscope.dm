@@ -18,11 +18,10 @@
 
 	if(istype(W, /obj/item/weapon/forensics/swab)|| istype(W, /obj/item/weapon/sample/fibers) || istype(W, /obj/item/weapon/sample/print))
 		to_chat(user, "<span class='notice'>You insert \the [W] into the microscope.</span>")
-		user.unEquip(W)
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		sample = W
 		update_icon()
-		return
 
 /obj/machinery/microscope/attack_hand(mob/user)
 
@@ -32,8 +31,12 @@
 
 	to_chat(user, "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>")
 
-	if(!do_after(user, 25, src) || !sample)
+	if(!user.do_skilled(25, SKILL_FORENSICS, src) || !sample)
 		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
+		return
+
+	if(!user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
+		to_chat(user, "<span class='warning'>You can't figure out what it means...</span>")
 		return
 
 	to_chat(user, "<span class='notice'>Printing findings now...</span>")

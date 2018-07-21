@@ -379,7 +379,7 @@
 			log_vote(text)
 			to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[src]'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>")
 
-			to_world(sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3))
+			to_world(sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
 
 			if(mode == "gamemode" && round_progressing)
 				round_progressing = 0
@@ -402,7 +402,10 @@
 
 		. = "<html><head><title>Voting Panel</title></head><body>"
 		if(mode)
-			if(config.vote_no_dead_crew_transfer && current_vote_type == "crew_transfer" && !isliving(C.mob))
+			var/is_transfer = current_vote_type == "crew_transfer"
+			var/no_dead_votes = config.vote_no_dead_crew_transfer
+			var/is_dead = !isliving(C.mob) || ismouse(C.mob) || is_drone(C.mob)
+			if (no_dead_votes && is_transfer && is_dead)
 				. += "<h2>You can't participate in this vote unless you're participating in the round.</h2><br>"
 			else
 				if(question)	. += "<h2>Vote: '[question]'</h2>"

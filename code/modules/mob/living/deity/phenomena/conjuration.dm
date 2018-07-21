@@ -39,7 +39,7 @@
 /datum/phenomena/portals
 	name = "Portals"
 	desc = "Summon a portal linked to the last portal you've created. The portal will be destroyed if it is not linked when someone crosses it."
-	cost = 15
+	cost = 30
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /atom
 	var/list/portals = list()
@@ -71,7 +71,7 @@
 /datum/phenomena/banishing_smite
 	name = "Banishing Smite"
 	desc = "Deal a terrible blow to a mortal. If they are hurt enough ,they will find themselves trapped in a rift for 30 seconds."
-	cost = 25
+	cost = 70
 	cooldown = 300
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living

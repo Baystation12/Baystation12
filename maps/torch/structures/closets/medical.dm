@@ -33,6 +33,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/storage/firstaid/adv,
 		/obj/item/weapon/storage/box/armband/med,
+		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
 		RANDOM_SCRUBS
@@ -109,14 +110,18 @@
 
 /obj/structure/closet/secure_closet/medical_contractor/WillContain()
 	return list(
+		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/head/soft/mime,
 		/obj/item/clothing/under/rank/orderly,
-		/obj/item/clothing/accessory/storage/webbing,
+		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/taperoll/medical,
 		/obj/item/weapon/storage/belt/medical/emt,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/storage/firstaid/adv,

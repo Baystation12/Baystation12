@@ -159,7 +159,8 @@
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
 			if(bullets <= 4)
-				user.drop_item()
+				if(!user.unEquip(I))
+					return
 				qdel(I)
 				bullets++
 				to_chat(user, "<span class='notice'>You load the foam dart into the crossbow.</span>")
@@ -322,7 +323,7 @@
 /obj/item/toy/snappop/Crossed(H as mob|obj)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
-		if(M.m_intent == M_RUN)
+		if(!MOVING_DELIBERATELY(M))
 			to_chat(M, "<span class='warning'>You step on the snap pop!</span>")
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

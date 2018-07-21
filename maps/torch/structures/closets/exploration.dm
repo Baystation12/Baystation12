@@ -14,6 +14,8 @@
 
 /obj/structure/closet/secure_closet/pathfinder/WillContain()
 	return list(
+		/obj/item/solbanner,
+		/obj/item/solbanner,
 		/obj/item/device/radio,
 		/obj/item/device/tape/random,
 		/obj/item/device/gps,
@@ -21,7 +23,7 @@
 		/obj/item/device/radio/beacon,
 		/obj/item/taperoll/research,
 		/obj/item/weapon/material/hatchet/machete/deluxe,
-		/obj/item/clothing/accessory/holster/machete,
+		/obj/item/weapon/storage/belt/holster/machete,
 		/obj/item/device/spaceflare,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/device/taperecorder,
@@ -50,7 +52,7 @@
 		/obj/item/device/radio,
 		/obj/item/device/gps,
 		/obj/item/taperoll/research,
-		/obj/item/clothing/accessory/holster/machete,
+		/obj/item/weapon/storage/belt/holster/machete,
 		/obj/item/device/spaceflare,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/device/analyzer,

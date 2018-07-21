@@ -1,0 +1,27 @@
+<center><h2>Skills for {{:data.name}}</h2></center>
+<h3>Current assignment: {{:data.job}}</h3>
+<table style="width:100%">
+{{for data.skills_by_cat}}
+	<tr>
+	<th>
+		{{:value.name}}
+	</th>
+	</tr>
+	{{for value.skills :skill_value:skill_key}}
+		<tr>
+		<td>
+		<div class="itemLabel">
+			{{:skill_value.name}}:
+		</div>
+		</td>
+		{{for skill_value.levels :level_value:level_key}}
+			<td>
+			<div class={{if level_value.selected}}'selected'{{else}}'null'{{/if}}>
+				{{:level_value.name}}
+			</div>
+			</td>
+		{{/for}}
+		</tr>
+	{{/for}}
+{{/for}}
+</table>

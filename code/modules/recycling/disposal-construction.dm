@@ -121,7 +121,7 @@
 	set name = "Rotate Pipe"
 	set src in view(1)
 
-	if(usr.incapacitated())
+	if(usr.stat || usr.restrained() || !Adjacent(usr) || usr.incapacitated())
 		return
 
 	if(anchored)
@@ -130,6 +130,9 @@
 
 	set_dir(turn(dir, -90))
 	update()
+
+/obj/structure/disposalconstruct/AltClick()
+	rotate()
 
 /obj/structure/disposalconstruct/proc/flip()
 	set category = "Object"

@@ -8,14 +8,19 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
-/obj/item/weapon/gun/projectile/colt/officer
+/obj/item/weapon/gun/projectile/military
 	name = "military .45 pistol"
-	desc = "The WT45 - a mass produced kinetic sidearm well-known in films and entertainment programming for being the daily carry choice issued to officers of the Sol Central Government Defense Forces. Uses .45 rounds."
+	desc = "The WT45 - a mass produced kinetic sidearm in widespread service with the SCGDF. Uses .45 rounds."
+	magazine_type = /obj/item/ammo_magazine/c45mds/flash
+	allowed_magazines = /obj/item/ammo_magazine/c45mds
 	icon_state = "usp"
+	caliber = ".45"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	load_method = MAGAZINE
 	accuracy = 0.35
 	fire_delay = 6.5
 
-/obj/item/weapon/gun/projectile/colt/officer/update_icon()
+/obj/item/weapon/gun/projectile/military/update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "usp"
@@ -57,6 +62,9 @@
 	else
 		icon_state = "secgundark-e"
 
+/obj/item/weapon/gun/projectile/sec/wood/lethal
+	magazine_type = /obj/item/ammo_magazine/c45m
+
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
 	desc = "A handgun with an integral silencer. Uses .45 rounds."
@@ -71,16 +79,18 @@
 
 /obj/item/weapon/gun/projectile/magnum_pistol
 	name = ".50 magnum pistol"
-	desc = "The HelTek Magnus, a robust terran handgun that uses .50 AE ammo."
+	desc = "The HelTek Magnus, a robust Terran handgun that uses .50 AE ammo."
 	icon_state = "magnum"
 	item_state = "revolver"
-	force = 14.0
+	force = 9
 	caliber = ".50"
 	fire_delay = 12
 	screen_shake = 2
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	allowed_magazines = /obj/item/ammo_magazine/a50
+	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
+	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 
 /obj/item/weapon/gun/projectile/magnum_pistol/update_icon()
 	..()
@@ -102,6 +112,8 @@
 	fire_delay = 25
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
+	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 
 /obj/item/weapon/gun/projectile/gyropistol/update_icon()
 	..()
@@ -109,6 +121,24 @@
 		icon_state = "gyropistolloaded"
 	else
 		icon_state = "gyropistol"
+
+/obj/item/weapon/gun/projectile/beretta
+	name = "9mm combat pistol"
+	desc = "The Lumoco Arms P9 Brigadier. A robust sidearm designed for military duty. Uses 9mm rounds."
+	magazine_type = /obj/item/ammo_magazine/mc9mmds
+	allowed_magazines = /obj/item/ammo_magazine/mc9mmds
+	icon_state = "92fs"
+	caliber = "9mm"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	load_method = MAGAZINE
+	accuracy = 0.35
+
+/obj/item/weapon/gun/projectile/beretta/update_icon()
+	..()
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		icon_state = "92fs"
+	else
+		icon_state = "92fs-e"
 
 /obj/item/weapon/gun/projectile/pistol
 	name = "holdout pistol"
@@ -147,11 +177,11 @@
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
 			to_chat(user, "<span class='notice'>You'll need [src] in your hands to do that.</span>")
 			return
-		user.drop_item()
+		if(!user.unEquip(I, src))
+			return//put the silencer into the gun
 		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
 		silenced = I	//dodgy?
 		w_class = ITEM_SIZE_NORMAL
-		I.forceMove(src)		//put the silencer into the gun
 		update_icon()
 		return
 	..()
@@ -180,6 +210,8 @@
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
+	has_safety = FALSE
+	w_class = ITEM_SIZE_NORMAL
 
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
@@ -194,6 +226,9 @@
 		/obj/item/ammo_casing/a762              = "7.62mm",
 		/obj/item/ammo_casing/a556              = "5.56mm"
 		)
+
+/obj/item/weapon/gun/projectile/pirate/toggle_safety(var/mob/user)
+	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
 /obj/item/weapon/gun/projectile/pirate/New()
 	ammo_type = pick(ammo_types)
@@ -224,7 +259,6 @@
 
 /obj/item/weapon/zipgunframe/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/pipe) && buildstate == 0)
-		user.drop_from_inventory(thing)
 		qdel(thing)
 		user.visible_message("<span class='notice'>\The [user] fits \the [thing] to \the [src] as a crude barrel.</span>")
 		add_fingerprint(user)
@@ -238,7 +272,6 @@
 		update_icon()
 		return
 	else if(istype(thing,/obj/item/device/assembly/mousetrap) && buildstate == 2)
-		user.drop_from_inventory(thing)
 		qdel(thing)
 		user.visible_message("<span class='notice'>\The [user] takes apart \the [thing] and uses the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
 		add_fingerprint(user)

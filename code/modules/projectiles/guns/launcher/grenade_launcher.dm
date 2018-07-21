@@ -58,7 +58,8 @@
 	if(grenades.len >= max_grenades)
 		to_chat(user, "<span class='warning'>\The [src] is full.</span>")
 		return
-	user.drop_from_inventory(G, src)
+	if(!user.unEquip(G, src))
+		return
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
 	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
 
@@ -142,7 +143,8 @@
 	if(chambered)
 		to_chat(user, "<span class='warning'>\The [src] is already loaded.</span>")
 		return
-	user.drop_from_inventory(G, src)
+	if(!user.unEquip(G, src))
+		return
 	chambered = G
 	user.visible_message("\The [user] load \a [G] into \the [src].", "<span class='notice'>You load \a [G] into \the [src].</span>")
 

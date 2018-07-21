@@ -25,7 +25,6 @@
 #define MODE_BORER "borer"
 #define MODE_XENOMORPH "xeno"
 #define MODE_LOYALIST "loyalist"
-#define MODE_MUTINEER "mutineer"
 #define MODE_COMMANDO "commando"
 #define MODE_DEATHSQUAD "deathsquad"
 #define MODE_ERT "ert"
@@ -39,7 +38,6 @@
 #define MODE_MONKEY "monkey"
 #define MODE_RENEGADE "renegade"
 #define MODE_REVOLUTIONARY "revolutionary"
-#define MODE_LOYALIST "loyalist"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
 #define MODE_DEITY "deity"
@@ -57,7 +55,7 @@
 #define NEEDSCLOTHES	0x2		//does it need the wizard garb to cast? Nonwizard spells should not have this
 #define NEEDSHUMAN		0x4		//does it require the caster to be human?
 #define Z2NOCAST		0x8		//if this is added, the spell can't be cast at centcomm
-#define STATALLOWED		0x10	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
+#define NO_SOMATIC		0x10	//spell will go off if the person is incapacitated or stunned
 #define IGNOREPREV		0x20	//if set, each new target does not overlap with the previous one
 //The following flags only affect different types of spell, and therefore overlap
 //Targeted spells

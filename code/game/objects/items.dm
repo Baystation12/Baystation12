@@ -20,6 +20,7 @@
 	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
+	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -28,7 +29,7 @@
 
 	var/datum/action/item_action/action = null
 	var/action_button_name //It is also the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. If it's not set, there'll be no button.
-	var/action_button_is_hands_free = 0 //If 1, bypass the restrained, lying, and stunned checks action buttons normally test for
+	var/default_action_type = /datum/action/item_action // Specify the default type and behavior of the action button for this atom.
 
 	//This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
 	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
@@ -548,12 +549,12 @@ var/list/global/slot_flags_enumeration = list(
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)
-				if(eyes.robotic < ORGAN_ROBOT) //robot eyes bleeding might be a bit silly
+				if(!BP_IS_ROBOTIC(eyes)) //robot eyes bleeding might be a bit silly
 					to_chat(M, "<span class='danger'>Your eyes start to bleed profusely!</span>")
 			if(prob(50))
 				if(M.stat != 2)
 					to_chat(M, "<span class='warning'>You drop what you're holding and clutch at your eyes!</span>")
-					M.drop_item()
+					M.unequip_item()
 				M.eye_blurry += 10
 				M.Paralyse(1)
 				M.Weaken(4)
@@ -562,7 +563,7 @@ var/list/global/slot_flags_enumeration = list(
 					to_chat(M, "<span class='warning'>You go blind!</span>")
 
 		var/obj/item/organ/external/affecting = H.get_organ(eyes.parent_organ)
-		affecting.take_damage(7)
+		affecting.take_external_damage(7)
 	else
 		M.take_organ_damage(7)
 	M.eye_blurry += rand(3,4)
@@ -739,12 +740,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_state = icon_state
 	return mob_state
 
-/obj/item/proc/dir_shift(var/icon/given_icon, var/dir_given, var/x = 0, var/y = 0)
-	var/icon/I = new(given_icon, dir = dir_given)
-	I.Shift(EAST, x)
-	I.Shift(NORTH, y)
-	given_icon.Insert(I, dir = dir_given)
-	return given_icon
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
@@ -775,25 +770,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else
 		mob_icon = default_onmob_icons[slot]
 
-	var/image/ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
-	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
-		var/list/equip_adjusts = user_human.species.equip_adjust
-		if(equip_adjusts[slot])
-			var/image_key = "[user_human.species] [mob_icon] [mob_state] [color]"
-			ret_overlay = user_human.species.equip_overlays[image_key]
-			if(!ret_overlay)
-				var/icon/final_I = new(mob_icon, icon_state = mob_state)
-				var/list/shifts = equip_adjusts[slot]
-				if(shifts && shifts.len)
-					var/shift_facing
-					for(shift_facing in shifts)
-						var/list/facing_list = shifts[shift_facing]
-						final_I = dir_shift(final_I, text2dir(shift_facing), facing_list["x"], facing_list["y"])
-				ret_overlay = overlay_image(final_I, color, flags = RESET_COLOR)
-
-				user_human.species.equip_overlays[image_key] = ret_overlay
-
-	return ret_overlay
+	if(user_human)
+		return user_human.species.get_offset_overlay_image(spritesheet, mob_icon, mob_state, color, slot)
+	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /obj/item/proc/get_examine_line()
 	if(blood_DNA)
@@ -803,3 +782,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
+
+/obj/item/is_burnable()
+	return simulated
+
+/obj/item/lava_act()
+	. = (!throwing) ? ..() : FALSE

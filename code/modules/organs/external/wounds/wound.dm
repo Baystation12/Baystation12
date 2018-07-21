@@ -122,9 +122,9 @@
 		if (BRUISE)
 			return prob(dam_coef*5)
 		if (BURN)
-			return prob(dam_coef*30)
+			return prob(dam_coef*25)
 		if (CUT)
-			return prob(dam_coef*20)
+			return prob(dam_coef*10)
 
 	return 0
 
@@ -143,9 +143,9 @@
 	if(embedded_objects.len)
 		return amount // heal nothing
 	if(parent_organ)
-		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || parent_organ.can_heal_overkill))
+		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
-		else if(!(parent_organ.brute_ratio < 1 || parent_organ.can_heal_overkill))
+		else if(!(parent_organ.brute_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount
 
 	var/healed_damage = min(src.damage, amount)

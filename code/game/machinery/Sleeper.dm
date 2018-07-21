@@ -90,7 +90,7 @@
 	data["stasis"] = stasis
 	data["skill_check"] = user.skill_check(SKILL_MEDICAL, SKILL_BASIC)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "sleeper.tmpl", "Sleeper UI", 600, 600, state = state)
 		ui.set_initial_data(data)
@@ -136,9 +136,9 @@
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		add_fingerprint(user)
 		if(!beaker)
+			if(!user.unEquip(I, src))
+				return
 			beaker = I
-			user.drop_item()
-			I.forceMove(src)
 			user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>\The [src] has a beaker already.</span>")

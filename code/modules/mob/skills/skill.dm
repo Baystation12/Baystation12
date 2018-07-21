@@ -70,16 +70,6 @@ GLOBAL_LIST_EMPTY(skills)
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
 
-/decl/hierarchy/skill/organizational/management
-	ID = "management"
-	name = "Leadership"
-	desc = "Your ability to manage and command other crew members."
-	levels = list( "Unskilled"			= "You know a little about management, but you have a lot of flaws and little experience. You are likely to micromanage, lose track of people, or generally muck things up. Handling a major crisis is probably beyond your ability.",
-						"Basic"				= "You have recieved basic leadership training, but have little experience actually managing people. You can come up with good organizational strategies, but won't know what to do when they fall apart in a crisis.",
-						"Trained"			= "You're a good commander. You know how to coordinate the efforts of a large group of people effectively. You'll still be thrown off in a crisis, but you'll probably get through it.",
-						"Experienced"		= "You're a highly experienced commander. In addition to just doing your job, you know how to inspire love, loyalty or fear, and you handle crises smoothly and efficiently.",
-						"Master"		= "You are an excellent commander. You are listened to instinctively, and can navigate your people through anything thrown at you.")
-
 /decl/hierarchy/skill/organizational/bureaucracy
 	ID = "bureaucracy"
 	name = "Bureaucracy"
@@ -87,14 +77,14 @@ GLOBAL_LIST_EMPTY(skills)
 	levels = list( "Unskilled"			= "You can usually fill out basic paperwork, if with a few errors. You have a vague understanding of the law, gleaned mostly from the news and personal experience.",
 						"Basic"				= "You are familiar with the paperwork needed to do your job, and can navigate it well. You have some understanding of the law as it applies to you and those around you.",
 						"Trained"			= "You can navigate most paperwork thrown at you, even if you are unfamiliar with it. You have a good working understanding of the law and any regulations or procedures relevant to you.",
-						"Experienced"		= "With your experience, you can easily create paperwork for any eventuality, and write reports which are clear and understandable. Your have an excellent knowledge of the law, possibly including formal legal training.",
+						"Experienced"		= "With your experience, you can easily create paperwork for any eventuality, and write reports which are clear and understandable. You have an excellent knowledge of the law, possibly including formal legal training.",
 						"Master"		= "You can make paperwork dance to your bidding, and navigate the most byzantine bureaucratic structures with ease and familiarity. Your reports are works of literature. Your knowledge of the law is both broad and intimate, and you may be certified to practice law.")
 
 /decl/hierarchy/skill/organizational/finance
 	ID = "finance"
 	name = "Finance"
 	desc = "Your ability to manage money and investments."
-	levels = list( "Unskilled"			= "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occation.",
+	levels = list( "Unskilled"			= "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occasion.",
 						"Basic"				= "You have some limited understanding of financial transactions, and will generally be able to keep accurate records. You have little experience with investment, and managing large sums of money will likely go poorly for you.",
 						"Trained"			= "You are good at managing accounts, keeping records, and arranging transactions. You have some familiarity with mortgages, insurance, stocks, and bonds, but may be stumped when facing more complicated financial devices.",
 						"Experienced"		= "With your experience, you are familiar with any financial entities you may run across, and are a shrewd judge of value. More often than not, investments you make will pan out well.",
@@ -129,8 +119,8 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Describes your experience and understanding of piloting spacecraft, from small and short-range pods to corvette sized vessels."
 	levels = list( "Unskilled"			= "You know what a spacecraft is, and you might have an abstract understanding of the differences between various ships. If your department is involved in the use of spacecraft, you know roughly what their capabilities are. You might be able to fly a spacecraft in a videogame. If you were to take the Helm of a smaller vessel, you might be able to move it with proper guidance.",
 						"Basic"				= "You can pilot a small, short-range craft safely, but larger ships are out of your area of expertise. You are by no means an expert, and probably don't have much training. Skills of this level are typical for deck crew.",
-						"Trained"			= "You are a trained pilot, and can safely operate anything from a small craft to a corvette. You can spend extended periods of time piloting a spacecraft, and you're versed in the abilities of different ships, and what makes them function. You can do basic maintenance on smaller vessels, and perform most basic maneuvers. You can use armed spacecraft. You can make basic calculations relating to piloting. Skills of this level are typical for newer pilots. You have probably recieved formal piloting training.",
-						"Experienced"		= "You are an experienced pilot, and can safely take the helm of many types of craft. You could probably live in a spacecraft, and you're very well versed in essentially everything related to space-faring vessels. Not only can you fly a ship, but you can perform difficult maneuvers, and make most calculations related to piloting a spacecraft. You can maintain a ship. Skills of this level are typical for very experienced pilots. You have recieved formal piloting training.",
+						"Trained"			= "You are a trained pilot, and can safely operate anything from a small craft to a corvette. You can spend extended periods of time piloting a spacecraft, and you're versed in the abilities of different ships, and what makes them function. You can do basic maintenance on smaller vessels, and perform most basic maneuvers. You can use armed spacecraft. You can make basic calculations relating to piloting. Skills of this level are typical for newer pilots. You have probably received formal piloting training.",
+						"Experienced"		= "You are an experienced pilot, and can safely take the helm of many types of craft. You could probably live in a spacecraft, and you're very well versed in essentially everything related to space-faring vessels. Not only can you fly a ship, but you can perform difficult maneuvers, and make most calculations related to piloting a spacecraft. You can maintain a ship. Skills of this level are typical for very experienced pilots. You have received formal piloting training.",
 						"Master"		= "Not only are you an exceptional pilot, but you have mastered peripheral functions such as stellar navigation and bluespace jump plotting. You have experience performing complex maneuvers, managing squadrons of small craft, and operating in hostile environments.")
 	difficulty = SKILL_AVERAGE
 
@@ -140,7 +130,7 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
 	levels = list( "Unskilled"			= "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.",
 						"Basic"				= "You have some familiarity with manual labor, and are in reasonable physical shape. Tasks requiring great dexterity or strength may still elude you.",
-						"Trained"			= "You have suffient strength and dexterity for even very strenuous tasks, and can work for a long time without tiring.",
+						"Trained"			= "You have sufficient strength and dexterity for even very strenuous tasks, and can work for a long time without tiring.",
 						"Experienced"		= "You have experience with heavy work in trying physical conditions, and are in excellent shape. You visit the gym frequently.",
 						"Master"		= "In addition to your excellent strength and endurance, you have a lot of experience with the specific physical demands of your job. You may have competitive experience with some form of athletics.")
 
@@ -162,9 +152,9 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Describes how good a character is at growing and maintaining plants."
 	levels = list( "Unskilled"			= "You know next to nothing about plants. While you can attempt to plant, weed, or harvest, you are just as likely to kill the plant instead.",
 						"Basic"				= "You've done some gardening. You can water, weed, fertilize, plant, and harvest, and you can recognize and deal with pests. You may be a hobby gardener.",
-						"Trained"			= "You are proficient at botony, and can grow plants for food or oxygen production. Your plants will generally survive and prosper, though you are unfamilliar with more exotic varieties.",
-						"Experienced"		= "You're a botanist or farmer, growing crops on large scales or doing botanical research. You know the basics of manipulating plant genes.",
-						"Master"		= "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants, and you can create custom hybrids and modified strains.")
+						"Trained"			= "You are proficient at botany, and can grow plants for food or oxygen production. Your plants will generally survive and prosper. You know the basics of manipulating plant genes.",
+						"Experienced"		= "You're a botanist or farmer, capable of running a facility's hydroponics farms or doing botanical research. You are adept at creating custom hybrids and modified strains.",
+						"Master"		= "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants. You can use gene manipulation machinery with precision, and are often able to avoid the degradation of samples.")
 
 /decl/hierarchy/skill/service/cooking
 	ID = "cooking"
@@ -192,21 +182,32 @@ GLOBAL_LIST_EMPTY(skills)
 	ID = "weapons"
 	name = "Weapons Expertise"
 	desc = "This skill describes your expertise with and knowledge of weapons. A low level in this skill implies knowledge of simple weapons, for example flashes. A high level in this skill implies knowledge of complex weapons, such as unconfigured grenades, riot shields, pulse rifles or bombs. A low-medium level in this skill is typical for security officers, a high level of this skill is typical for special agents and soldiers."
-	levels = list( "Unskilled"			= "You know how to recognize a weapon when you see one. You can probably use pepper spray or a flash, though you might fumble and turn them on yourself by mistake. You're likely to shoot yourself in the foot or forget to take the safety off. Your lack of training may make you more dangerous to your allies than your enemies.",
+	levels = list( "Unskilled"			= "You know how to recognize a weapon when you see one. You can point a gun and shoot it, though results vary wildly. You might forget the safety, you can't control burst recoil well, and you don't have trained reflexes for gun fighting.",
 						"Basic"				= "You know how to handle weapons safely, and you're comfortable using simple weapons. Your aim is decent and you can usually be trusted not to do anything stupid with a weapon you are familiar with, but your training isn't automatic yet and your performance will degrade in high-stress situations.",
-						"Trained"			= "You have had extnensive weapons training, or have used weapons in combat. You are familiar with most types of weapons and can use them in a pinch. You have an understanding of tactics, and can be trusted to stay calm under fire.",
-						"Experienced"		= "You've used firearms and other ranged weapons in a high-stress situation, and your skills have become automatic. You spend time practicing at the firing range. Your aim is good. You can maintain and repair your weaponry. You may have military or police experience and you probably carry a weapon on the job.",
-						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You can depend on hitting not just your target, but a specific part of your target, such as shooting someone in the leg. You use a weapon as naturally as though it were a part of your own body. You may be a professional marksman of some kind. You probably know a good deal about tactics, and you may have designed or modified your own weaponry.")
+						"Trained"			= "You have had extensive weapons training, or have used weapons in combat. Your aim is better now. You are familiar with most types of weapons and can use them in a pinch. You have an understanding of tactics, and can be trusted to stay calm under fire. You may have military or police experience and you probably carry a weapon on the job.",
+						"Experienced"		= "You've used firearms and other ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.",
+						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.")
+
+/decl/hierarchy/skill/security/weapons/get_cost(var/level)
+	switch(level)
+		if(SKILL_BASIC)
+			return difficulty
+		if(SKILL_ADEPT)
+			return 2*difficulty
+		if(SKILL_EXPERT, SKILL_PROF)
+			return 4*difficulty
+		else
+			return 0
 
 /decl/hierarchy/skill/security/forensics
 	ID = "forensics"
 	name = "Forensics"
 	desc = "Describes your skill at performing forensic examinations and identifying vital evidence. Does not cover analytical abilities, and as such isn't the only indicator for your investigation skill. Note that in order to perform autopsy, the surgery skill is also required."
 	levels = list( "Unskilled"			= "You know that detectives solve crimes. You may have some idea that it's bad to contaminate a crime scene, but you're not too clear on the details.",
-						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to use the tools of the trade (scanner, computer database, and so forth), and you can conduct an interview with a witness or a suspect.",
-						"Trained"			= "You have had training in policework, and have some experience in the field. You can follow procedure and process evidence, though your lack of practice may make it difficult to arrive at a definitive conclusion.",
-						"Experienced"		= "You're a police officer, pathologist, or detective. You can secure a crime scene, gather evidence, interview witnesses, and put two and two together to get an arrest. If you're trained in anatomy, you can perform an autopsy.",
-						"Master"		= "You specialize in criminal investigations. Your ability to gather and analyze evidence has been honed through intensive schooling, years of practice, or most likely both. You can organize a manhunt or draw a criminal into a trap, and though you're behind the scenes and may never even see the criminal, your skills make the difference between an unsolved crime and a convicted criminal.")
+						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to bag the evidence without contaminating it unduly.",
+						"Trained"			= "You are trained in collecting forensic evidence - fibers, fingerprints, the works. You know how autopsies are done, and might've assisted performing one.",
+						"Experienced"		= "You're a pathologist, or detective. You've seen your share of bizarre cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.",
+						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.")
 	difficulty = SKILL_HARD
 
 // Category: Engineering
@@ -293,7 +294,7 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Gives you a detailed insight of the human body. A high skill in this is required to perform surgery. This skill may also help in examining alien biology."
 	levels = list( "Unskilled"			= "You know what organs, bones, and such are, and you know roughly where they are. You know that someone who's badly hurt or sick may need surgery.",
 						"Basic"				= "You've taken an anatomy class and you've spent at least some time poking around inside actual people. You know where everything is, more or less. You could assist in surgery, if you have the required medical skills. If you have the forensics knowledge, you could perform an autopsy. If you really had to, you could probably perform basic surgery such as an appendectomy, but you're not yet a qualified surgeon and you really shouldn't--not unless it's an emergency. If you're a xenobiologist, you know how to take out slime cores.",
-						"Trained"			= "You have some training in anatomy. Diagnosing broken bones, damaged ligaments, shrapnel wounds, and other trauma is straightforward for you. You can splint limbs with a good chance of success, operate a defibrilator competently, and perform CPR well. Surgery is still outside your training.",
+						"Trained"			= "You have some training in anatomy. Diagnosing broken bones, damaged ligaments, shrapnel wounds, and other trauma is straightforward for you. You can splint limbs with a good chance of success, operate a defibrillator competently, and perform CPR well. Surgery is still outside your training.",
 						"Experienced"		= "You're a surgical resident, or an experienced medical doctor. You can put together broken bones, fix a damaged lung, patch up a liver, or remove an appendix without problems. But tricky surgeries, with an unstable patient or delicate manipulation of vital organs like the heart and brain, are at the edge of your ability, and you prefer to leave them to specialized surgeons. You can recognize when someone's anatomy is noticeably unusual. You're trained in working with several species, but you're probably better at surgery on your own species.",
 						"Master"		= "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged into the OR, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--even a changeling probably wouldn't slip by your notice, provided you could get one on the operating table.")
 

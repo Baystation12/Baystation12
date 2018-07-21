@@ -64,7 +64,7 @@
 			selected_outfit.Cut()
 		else
 			var/obj/item/weapon/card/id/I = user.get_active_hand()
-			if(I && user.unEquip(I, FALSE, src))
+			if(I && user.unEquip(I, src))
 				ID = I
 		. = TOPIC_REFRESH
 	if(href_list["get_all"])
@@ -99,10 +99,9 @@
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
-	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, FALSE, src))
+	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, src))
 		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
 		ID = W
-		user.drop_from_inventory(W, src)
 		attack_hand(user)
 	else
 		..()

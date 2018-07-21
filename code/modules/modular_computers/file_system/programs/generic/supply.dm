@@ -35,7 +35,9 @@
 
 	data["is_admin"] = is_admin
 	data["screen"] = screen
-	data["credits"] = "[supply_controller.points]"
+	data["credits"] = "[SSsupply.points]"
+	data["currency"] = GLOB.using_map.supply_currency_name
+	data["currency_short"] = GLOB.using_map.supply_currency_name_short
 	switch(screen)
 		if(1)// Main ordering menu
 			data["categories"] = category_names
@@ -44,18 +46,18 @@
 				data["possible_purchases"] = category_contents[selected_category]
 
 		if(2)// Statistics screen with credit overview
-			data["total_credits"] = supply_controller.point_sources["total"] ? supply_controller.point_sources["total"] : 0
-			data["credits_passive"] = supply_controller.point_sources["time"] ? supply_controller.point_sources["time"] : 0
-			data["credits_crates"] = supply_controller.point_sources["crate"] ? supply_controller.point_sources["crate"] : 0
-			data["credits_phoron"] = supply_controller.point_sources["phoron"] ? supply_controller.point_sources["phoron"] : 0
-			data["credits_platinum"] = supply_controller.point_sources["platinum"] ? supply_controller.point_sources["platinum"] : 0
-			data["credits_paperwork"] = supply_controller.point_sources["manifest"] ? supply_controller.point_sources["manifest"] : 0
-			data["credits_virology"] = supply_controller.point_sources["virology"] ? supply_controller.point_sources["virology"] : 0
-			data["credits_gep"] = supply_controller.point_sources["gep"] ? supply_controller.point_sources["gep"] : 0
+			var/list/point_breakdown = list()
+			for(var/tag in SSsupply.point_source_descriptions)
+				var/entry = list()
+				entry["desc"] = SSsupply.point_source_descriptions[tag]
+				entry["points"] = SSsupply.point_sources[tag] || 0
+				point_breakdown += list(entry) //Make a list of lists, don't flatten
+			data["point_breakdown"] = point_breakdown
 			data["can_print"] = can_print()
 
 		if(3)// Shuttle monitoring and control
-			var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+			var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
+			data["shuttle_name"] = shuttle.name
 			if(istype(shuttle))
 				data["shuttle_location"] = shuttle.at_station() ? GLOB.using_map.name : "Remote location"
 			else
@@ -68,17 +70,17 @@
 			var/list/cart[0]
 			var/list/requests[0]
 			var/list/done[0]
-			for(var/datum/supply_order/SO in supply_controller.shoppinglist)
+			for(var/datum/supply_order/SO in SSsupply.shoppinglist)
 				cart.Add(order_to_nanoui(SO))
-			for(var/datum/supply_order/SO in supply_controller.requestlist)
+			for(var/datum/supply_order/SO in SSsupply.requestlist)
 				requests.Add(order_to_nanoui(SO))
-			for(var/datum/supply_order/SO in supply_controller.donelist)
+			for(var/datum/supply_order/SO in SSsupply.donelist)
 				done.Add(order_to_nanoui(SO))
 			data["cart"] = cart
 			data["requests"] = requests
 			data["done"] = done
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "supply.tmpl", name, 1050, 800, state = state)
 		ui.set_auto_update(1)
@@ -99,7 +101,7 @@
 		return 1
 
 	if(href_list["order"])
-		var/decl/hierarchy/supply_pack/P = locate(href_list["order"]) in supply_controller.master_supply_list
+		var/decl/hierarchy/supply_pack/P = locate(href_list["order"]) in SSsupply.master_supply_list
 		if(!istype(P) || P.is_category())
 			return 1
 
@@ -119,16 +121,16 @@
 		else if(issilicon(user))
 			idname = user.real_name
 
-		supply_controller.ordernum++
+		SSsupply.ordernum++
 
 		var/datum/supply_order/O = new /datum/supply_order()
-		O.ordernum = supply_controller.ordernum
+		O.ordernum = SSsupply.ordernum
 		O.object = P
 		O.orderedby = idname
 		O.reason = reason
 		O.orderedrank = idrank
 		O.comment = "#[O.ordernum]"
-		supply_controller.requestlist += O
+		SSsupply.requestlist += O
 
 		if(can_print() && alert(user, "Would you like to print a confirmation receipt?", "Print receipt?", "Yes", "No") == "Yes")
 			print_order(O, user)
@@ -144,7 +146,7 @@
 		return 1
 
 	if(href_list["launch_shuttle"])
-		var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+		var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 		if(!shuttle)
 			to_chat(user, "<span class='warning'>Error connecting to the shuttle.</span>")
 			return
@@ -168,40 +170,40 @@
 
 	if(href_list["approve_order"])
 		var/id = text2num(href_list["approve_order"])
-		for(var/datum/supply_order/SO in supply_controller.requestlist)
+		for(var/datum/supply_order/SO in SSsupply.requestlist)
 			if(SO.ordernum != id)
 				continue
-			if(SO.object.cost > supply_controller.points)
+			if(SO.object.cost > SSsupply.points)
 				to_chat(usr, "<span class='warning'>Not enough points to purchase \the [SO.object.name]!</span>")
 				return 1
-			supply_controller.requestlist -= SO
-			supply_controller.shoppinglist += SO
-			supply_controller.points -= SO.object.cost
+			SSsupply.requestlist -= SO
+			SSsupply.shoppinglist += SO
+			SSsupply.points -= SO.object.cost
 			break
 		return 1
 
 	if(href_list["deny_order"])
 		var/id = text2num(href_list["deny_order"])
-		for(var/datum/supply_order/SO in supply_controller.requestlist)
+		for(var/datum/supply_order/SO in SSsupply.requestlist)
 			if(SO.ordernum == id)
-				supply_controller.requestlist -= SO
+				SSsupply.requestlist -= SO
 				break
 		return 1
 
 	if(href_list["cancel_order"])
 		var/id = text2num(href_list["cancel_order"])
-		for(var/datum/supply_order/SO in supply_controller.shoppinglist)
+		for(var/datum/supply_order/SO in SSsupply.shoppinglist)
 			if(SO.ordernum == id)
-				supply_controller.shoppinglist -= SO
-				supply_controller.points += SO.object.cost
+				SSsupply.shoppinglist -= SO
+				SSsupply.points += SO.object.cost
 				break
 		return 1
 
 	if(href_list["delete_order"])
 		var/id = text2num(href_list["delete_order"])
-		for(var/datum/supply_order/SO in supply_controller.donelist)
+		for(var/datum/supply_order/SO in SSsupply.donelist)
 			if(SO.ordernum == id)
-				supply_controller.donelist -= SO
+				SSsupply.donelist -= SO
 				break
 		return 1
 
@@ -223,7 +225,7 @@
 			category_contents[sp.name] = category
 
 /datum/nano_module/supply/proc/get_shuttle_status()
-	var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 	if(!istype(shuttle))
 		return "No Connection"
 
@@ -269,6 +271,6 @@
 /datum/nano_module/supply/proc/print_summary(var/mob/user)
 	var/t = ""
 	t += "<center><BR><b><large>[GLOB.using_map.station_name]</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
-	for(var/source in point_source_descriptions)
-		t += "[point_source_descriptions[source]]: [supply_controller.point_sources[source] || 0]<br>"
+	for(var/source in SSsupply.point_source_descriptions)
+		t += "[SSsupply.point_source_descriptions[source]]: [SSsupply.point_sources[source] || 0]<br>"
 	print_text(t, user)

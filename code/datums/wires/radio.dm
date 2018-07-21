@@ -12,6 +12,12 @@ var/const/WIRE_TRANSMIT = 4
 		return 1
 	return 0
 
+/datum/wires/radio/GetInteractWindow()
+	var/obj/item/device/radio/R = holder
+	. += ..()
+	if(R.cell)
+		. += "<BR><A href='?src=\ref[R];remove_cell=1'>Remove cell</A><BR>"
+
 /datum/wires/radio/UpdatePulsed(var/index)
 	var/obj/item/device/radio/R = holder
 	switch(index)
@@ -24,7 +30,7 @@ var/const/WIRE_TRANSMIT = 4
 
 		if(WIRE_TRANSMIT)
 			R.broadcasting = !R.broadcasting && !IsIndexCut(WIRE_SIGNAL)
-	GLOB.nanomanager.update_uis(holder)
+	SSnano.update_uis(holder)
 
 /datum/wires/radio/UpdateCut(var/index, var/mended)
 	var/obj/item/device/radio/R = holder
@@ -38,4 +44,4 @@ var/const/WIRE_TRANSMIT = 4
 
 		if(WIRE_TRANSMIT)
 			R.broadcasting = mended && !IsIndexCut(WIRE_SIGNAL)
-	GLOB.nanomanager.update_uis(holder)
+	SSnano.update_uis(holder)

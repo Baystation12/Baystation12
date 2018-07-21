@@ -330,6 +330,9 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Uncomment to disable the OOC channel by default.
 #DISABLE_OOC
 
+## Uncomment to disable the LOOC channel by default.
+#DISABLE_LOOC
+
 ## Uncomment to disable the dead OOC channel by default.
 #DISABLE_DEAD_OOC
 

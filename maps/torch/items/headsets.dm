@@ -50,8 +50,8 @@
 
 /obj/item/device/radio/headset/heads/cos/alt
 	name = "chief of security's bowman headset"
-	icon_state = "sec_headset_alt"
-	item_state = "sec_headset_alt"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/headset_deckofficer
 	name = "deck officer's radio headset"
@@ -62,13 +62,9 @@
 
 /obj/item/device/radio/headset/headset_deckofficer/alt
 	name = "deck officer's bowman headset"
-	icon_state = "cargo_headset_alt"
 	item_state = "cargo_headset_alt"
-
-/obj/item/weapon/storage/box/headset/torchxo
-	name = "box of spare executive officer headsets"
-	desc = "A box full of executive officer headsets."
-	startswith = list(/obj/item/device/radio/headset/heads/torchxo = 7)
+	icon_state = "cargo_headset_alt"
+	max_keys = 3
 
 /obj/item/device/radio/headset/bridgeofficer
 	name = "bridge officer's headset"
@@ -81,6 +77,7 @@
 	name = "bridge officer's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
+	max_keys = 4
 
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
@@ -137,4 +134,4 @@
 	desc = "A headset for cool-tempered smugglers, cocky flyboys, and bus-drivers like you. It has an inbuilt subspace antenna for better reception."
 	icon_state = "pilot_headset_alt"
 	item_state = "pilot_headset_alt"
-	ks1type = /obj/item/device/encryptionkey/headset_sci
+	ks1type = /obj/item/device/encryptionkey/headset_pilot

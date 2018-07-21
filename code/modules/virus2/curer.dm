@@ -11,11 +11,10 @@
 
 /obj/machinery/computer/curer/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I,/obj/item/weapon/reagent_containers))
-		var/mob/living/carbon/C = user
 		if(!container)
+			if(!user.unEquip(I, src))
+				return
 			container = I
-			C.drop_item()
-			I.loc = src
 		return
 	if(istype(I,/obj/item/weapon/virusdish))
 		if(virusing)

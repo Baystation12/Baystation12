@@ -76,15 +76,9 @@
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
 	if(!istype(G))
 		return ..()
-	if (!ismob(G.affecting))
-		return
-	if (src.occupant)
-		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
-		return
-	if (G.affecting.abiotic())
-		to_chat(user, "<span class='warning'>Subject cannot have abiotic items on.</span>")
-		return
 	var/mob/M = G.affecting
+	if(!user_can_move_target_inside(M, user))
+		return
 	M.forceMove(src)
 	src.occupant = M
 	update_use_power(2)
@@ -94,23 +88,30 @@
 	src.add_fingerprint(user)
 	qdel(G)
 
+/obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
+	if(!istype(user) || !istype(target))
+		return FALSE
+	if(!CanMouseDrop(target, user))
+		return FALSE
+	if(occupant)
+		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
+		return FALSE
+	if(target.abiotic())
+		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
+		return FALSE
+	if(target.buckled)
+		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		return FALSE
+	return TRUE
+
 //Like grap-put, but for mouse-drop.
 /obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
-	if(!istype(target))
-		return
-	if (!CanMouseDrop(target, user))
-		return
-	if (src.occupant)
-		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
-		return
-	if (target.abiotic())
-		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
-		return
-	if (target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+	if(!user_can_move_target_inside(target, user))
 		return
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	if(!do_after(user, 30, src))
+		return
+	if(!user_can_move_target_inside(target, user))
 		return
 	var/mob/M = target
 	M.forceMove(src)
@@ -358,16 +359,16 @@
 		else
 			row += "<td>"
 			if(E.brute_dam)
-				row += "[capitalize(get_wound_severity(E.brute_ratio, E.can_heal_overkill))] physical trauma"
+				row += "[capitalize(get_wound_severity(E.brute_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma"
 			if(E.burn_dam)
-				row += " [capitalize(get_wound_severity(E.burn_ratio, E.can_heal_overkill))] burns"
+				row += " [capitalize(get_wound_severity(E.burn_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))] burns"
 			if(E.brute_dam + E.burn_dam == 0)
 				row += "None"
 			row += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"
 		subdat += jointext(row, null)
 	if(skill_level < SKILL_BASIC)
 		pick_n_take(subdat)
-	else 
+	else
 		if(skill_level <= SKILL_ADEPT)
 			table += shuffle(subdat)
 		else table += subdat

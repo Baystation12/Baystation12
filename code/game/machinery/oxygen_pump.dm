@@ -35,7 +35,7 @@
 	if(tank)
 		qdel(tank)
 	if(breather)
-		breather.remove_from_mob(contained)
+		breather.drop_from_inventory(contained)
 		src.visible_message("<span class='notice'>The mask rapidly retracts just before /the [src] is destroyed!</span>")
 	qdel(contained)
 	contained = null
@@ -96,8 +96,7 @@
 /obj/machinery/oxygen_pump/proc/detach_mask(mob/user)
 	if(tank)
 		tank.forceMove(src)
-	breather.remove_from_mob(contained)
-	contained.forceMove(src)
+	breather.drop_from_inventory(contained, src)
 	if(user)
 		visible_message("<span class='notice'>\The [user] detaches \the [contained] and it rapidly retracts back into \the [src]!</span>")
 	else
@@ -155,8 +154,8 @@
 		if(tank)
 			to_chat(user, "<span class='warning'>\The [src] already has a tank installed!</span>")
 		else
-			user.drop_item()
-			W.forceMove(src)
+			if(!user.unEquip(W, src))
+				return
 			tank = W
 			user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
 			src.add_fingerprint(user)
@@ -213,7 +212,7 @@
 
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

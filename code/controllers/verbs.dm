@@ -14,7 +14,7 @@
 		usr.client.debug_variables(antag)
 		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 
-/client/proc/debug_controller(controller as null|anything in list("Master","Ticker","Ticker Process","Air","Jobs","Sun","Radio","Supply","Shuttles","Evacuation","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm","Nano","Wireless","Observation","Alt Appearance Manager","Datacore","Military Branches"))
+/client/proc/debug_controller(controller as null|anything in list("Master","Ticker","Ticker Process","Jobs","Sun","Radio","Evacuation","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Plants","Wireless","Observation","Alt Appearance Manager","Datacore","Military Branches"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
@@ -38,12 +38,6 @@
 		if("Radio")
 			debug_variables(radio_controller)
 			feedback_add_details("admin_verb","DRadio")
-		if("Supply")
-			debug_variables(supply_controller)
-			feedback_add_details("admin_verb","DSupply")
-		if("Shuttles")
-			debug_variables(shuttle_controller)
-			feedback_add_details("admin_verb","DShuttles")
 		if("Evacuation")
 			debug_variables(evacuation_controller)
 			feedback_add_details("admin_verb","DEmergency")
@@ -62,15 +56,9 @@
 		if("Gas Data")
 			debug_variables(gas_data)
 			feedback_add_details("admin_verb","DGasdata")
-		if("Event")
-			debug_variables(GLOB.event_manager)
-			feedback_add_details("admin_verb", "DEvent")
 		if("Plants")
 			debug_variables(plant_controller)
 			feedback_add_details("admin_verb", "DPlants")
-		if("Nano")
-			debug_variables(GLOB.nanomanager)
-			feedback_add_details("admin_verb", "DNano")
 		if("Alt Appearance Manager")
 			debug_variables(appearance_manager)
 			feedback_add_details("admin_verb", "DAltAppearanceManager")

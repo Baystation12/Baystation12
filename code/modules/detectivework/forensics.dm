@@ -64,16 +64,18 @@ atom/var/var/fingerprintslast = null
 			else if(prob(75))
 				return 0
 			H.gloves.add_fingerprint(M)
-
+	var/additional_chance = 0
+	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+		additional_chance = 10
 	// Add the fingerprints
-	add_partial_print(full_print)
+	add_partial_print(full_print, additional_chance)
 	return 1
 
-/atom/proc/add_partial_print(full_print)
+/atom/proc/add_partial_print(full_print, bonus)
 	if(!fingerprints[full_print])
-		fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
-		switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+		switch(max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
 			if(28 to 32)
 				if(prob(1))
 					fingerprints[full_print] = full_print 		// You rolled a one buddy.
@@ -165,21 +167,3 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
 	if(E)
 		return E.get_fingerprint()
-
-/obj/item/organ/external/proc/get_fingerprint()
-	return
-
-/obj/item/organ/external/arm/get_fingerprint()
-	for(var/obj/item/organ/external/hand/H in children)
-		return H.get_fingerprint()
-
-/obj/item/organ/external/hand/get_fingerprint()
-	if(robotic >= ORGAN_ROBOT)
-		return null
-	if(dna && !is_stump())
-		return md5(dna.uni_identity)
-
-/obj/item/organ/external/afterattack(atom/A, mob/user, proximity)
-	..()
-	if(proximity && get_fingerprint())
-		A.add_partial_print(get_fingerprint())

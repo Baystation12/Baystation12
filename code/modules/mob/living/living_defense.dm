@@ -263,7 +263,7 @@
 	adjustBruteLoss(damage)
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
-	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
+	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()
 	return 1
@@ -271,7 +271,7 @@
 /mob/living/proc/IgniteMob()
 	if(fire_stacks > 0 && !on_fire)
 		on_fire = 1
-		set_light(0.6, 0.1, 4)
+		set_light(0.6, 0.1, 4, l_color = COLOR_ORANGE)
 		update_fire()
 
 /mob/living/proc/ExtinguishMob()
@@ -340,12 +340,9 @@
 	for(var/obj/item/I in src)
 		if(I.action_button_name)
 			if(!I.action)
-				if(I.action_button_is_hands_free)
-					I.action = new/datum/action/item_action/hands_free
-				else
-					I.action = new/datum/action/item_action
-				I.action.name = I.action_button_name
-				I.action.target = I
+				I.action = new I.default_action_type
+			I.action.name = I.action_button_name
+			I.action.SetTarget(I)
 			I.action.Grant(src)
 	return
 
@@ -401,3 +398,8 @@
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle
+
+/mob/living/lava_act(datum/gas_mixture/air, temperature, pressure)
+	fire_act(air, temperature)
+	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
+	. =  (health <= 0) ? ..() : FALSE

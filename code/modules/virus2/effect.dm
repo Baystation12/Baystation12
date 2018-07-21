@@ -32,6 +32,16 @@
 	var/hold_until		//can only fire after this worldtime
 	var/allow_multiple	//allow to have more than 1 effect of this type in the same virus
 
+/datum/disease2/effect/proc/get_effect_info(verbose = 1)
+	. = list()
+	if(verbose)
+		. += "([stage]) [name]    "
+		. += "<small><u>Strength:</u> [multiplier >= 3 ? "Severe" : multiplier > 1 ? "Above Average" : "Average"]    "
+		. += "<u>Verosity:</u> [chance * 15]</small><br>"
+	else
+		. += name
+	return JOINTEXT(.)
+
 /datum/disease2/effect/proc/fire(var/mob/living/carbon/human/mob,var/current_stage)
 	if(oneshot == -1)
 		return
@@ -143,15 +153,17 @@
 	stage = 4
 	badness = VIRUS_ENGINEERED
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		for (var/obj/item/organ/external/E in mob.organs)
+		for (var/external in mob.organs)
+			var/obj/item/organ/external/E = external
 			if (E.status & ORGAN_BROKEN && prob(30))
 				to_chat(mob, "<span class='notice'>Your [E.name] suddenly feels much better!</span>")
 				E.status ^= ORGAN_BROKEN
 				break
-		for (var/obj/item/organ/internal/I in mob.internal_organs)
+		for (var/internal in mob.internal_organs)
+			var/obj/item/organ/internal/I = internal
 			if (I.damage && prob(30))
 				to_chat(mob, "<span class='notice'>Your [mob.get_organ(I.parent_organ)] feels a bit warm...</span>")
-				I.take_damage(-2*multiplier)
+				I.take_internal_damage(-2*multiplier)
 				break
 		var/heal_amt = -5*multiplier
 		mob.apply_damages(heal_amt,heal_amt,heal_amt,heal_amt)
@@ -205,7 +217,7 @@
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
 		var/obj/item/organ/internal/brain/B = mob.internal_organs_by_name[BP_BRAIN]
 		if (B && B.damage < B.min_broken_damage)
-			B.take_damage(5)
+			B.take_internal_damage(5)
 
 /datum/disease2/effect/deaf
 	name = "Hard of Hearing Syndrome"

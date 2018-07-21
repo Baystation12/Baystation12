@@ -110,7 +110,6 @@
 			usr.drop_from_inventory(S, src)
 			if(!S.amount)
 				qdel(S)
-			usr.update_icons()	//update our overlays
 
 		prepare_ui(usr)
 		update_icon()

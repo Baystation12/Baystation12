@@ -173,3 +173,8 @@
 	if(istype(A,/turf/unsimulated/map/edge))
 		handle_wraparound()
 	..()
+
+/obj/effect/overmap/ship/proc/get_helm_skill()
+	. = SKILL_MIN
+	if(nav_control)
+		. = nav_control.operator_skill || .

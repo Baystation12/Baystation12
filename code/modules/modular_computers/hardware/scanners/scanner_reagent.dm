@@ -15,5 +15,5 @@
 	var/dat = reagent_scan_results(target)
 	if(driver && driver.using_scanner)
 		driver.data_buffer = jointext(dat, "\[br\]")
-		GLOB.nanomanager.update_uis(driver.NM)
+		SSnano.update_uis(driver.NM)
 	to_chat(user, "<span class = 'notice'>[jointext(dat, "<br>")]</span>")

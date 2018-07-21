@@ -27,10 +27,19 @@
 	use_power = 1
 	idle_power_usage = 100
 
-	var/seeds_initialized = 0 // Map-placed ones break if seeds are loaded right at the start of the round, so we do it on the first interaction
 	var/list/datum/seed_pile/piles = list()
 	var/list/starting_seeds = list()
 	var/list/scanner = list() // What properties we can view
+
+/obj/machinery/seed_storage/Initialize(var/mapload)
+	. = ..()
+	for(var/typepath in starting_seeds)
+		var/amount = starting_seeds[typepath]
+		if(isnull(amount))
+			amount = 1
+		for (var/i = 1 to amount)
+			var/O = new typepath
+			add(O)
 
 /obj/machinery/seed_storage/random // This is mostly for testing, but I guess admins could spawn it
 	name = "Random seed storage"
@@ -152,16 +161,6 @@
 /obj/machinery/seed_storage/interact(mob/user as mob)
 	if (..())
 		return
-
-	if (!seeds_initialized)
-		for(var/typepath in starting_seeds)
-			var/amount = starting_seeds[typepath]
-			if(isnull(amount)) amount = 1
-
-			for (var/i = 1 to amount)
-				var/O = new typepath
-				add(O)
-		seeds_initialized = 1
 
 	var/dat = "<center><h1>Seed storage contents</h1></center>"
 	if (piles.len == 0)
@@ -309,7 +308,9 @@
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
 			++loaded
-			add(G)
+			P.remove_from_storage(G, src, 1)
+			add(G, 1)
+		P.finish_bulk_removal()
 		if (loaded)
 			user.visible_message("[user] puts the seeds from \the [O.name] into \the [src].", "You put the seeds from \the [O.name] into \the [src].")
 		else
@@ -320,15 +321,17 @@
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 
-/obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O as obj)
-	if (istype(O.loc, /mob))
-		var/mob/user = O.loc
-		user.remove_from_mob(O)
-	else if(istype(O.loc,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = O.loc
-		S.remove_from_storage(O, src)
+/obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O, bypass_removal = 0)
+	if(!bypass_removal)
+		if (istype(O.loc, /mob))
+			var/mob/user = O.loc
+			if(!user.unEquip(O, src))
+				return
+		else if(istype(O.loc,/obj/item/weapon/storage))
+			var/obj/item/weapon/storage/S = O.loc
+			S.remove_from_storage(O, src)
 
-	O.loc = src
+	O.forceMove(src)
 	var/newID = 0
 
 	for (var/datum/seed_pile/N in piles)

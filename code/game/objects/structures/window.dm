@@ -8,7 +8,7 @@
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_CHECKS_BORDER
-	alpha = 122
+	alpha = 180
 	var/maxhealth = 14.0
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
 	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
@@ -23,7 +23,7 @@
 	var/silicate = 0 // number of units of silicate
 	var/on_frame = FALSE
 	var/material_color
-	blend_objects = list(/obj/machinery/door) // Objects which to blend with
+	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
 	atmos_canpass = CANPASS_PROC
@@ -197,14 +197,17 @@
 							"You hear a knocking sound.")
 	return
 
-/obj/structure/window/attack_generic(var/mob/user, var/damage)
+/obj/structure/window/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
 	if(istype(user))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 	if(!damage)
 		return
 	if(damage >= 10)
-		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
+		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
@@ -381,6 +384,13 @@
 		verbs += /obj/structure/window/proc/rotate
 		verbs += /obj/structure/window/proc/revrotate
 
+// Visually connect with every type of window as long as it's full-tile.
+/obj/structure/window/can_visually_connect()
+	return ..() && is_fulltile()
+
+/obj/structure/window/can_visually_connect_to(var/obj/structure/S)
+	return istype(S, /obj/structure/window)
+
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
 /obj/structure/window/update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
@@ -392,24 +402,23 @@
 		layer = SIDE_WINDOW_LAYER
 		icon_state = "[basestate]"
 		return
+
+	var/image/I
+	icon_state = ""
+	if(on_frame)
+		for(var/i = 1 to 4)
+			if(other_connections[i] != "0")
+				I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
+			else
+				I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
+			overlays += I
 	else
-		var/image/I
-		icon_state = ""
-		if(on_frame)
-			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
-				else
-					I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
-				overlays += I
-		else
-			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
-				else
-					I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
-				overlays += I
-	return
+		for(var/i = 1 to 4)
+			if(other_connections[i] != "0")
+				I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
+			else
+				I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
+			overlays += I
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > maximal_heat)
@@ -428,6 +437,10 @@
 	material_color = GLASS_COLOR
 	color = GLASS_COLOR
 
+/obj/structure/window/basic/full
+	dir = 5
+	icon_state = "window_full"
+
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	desc = "A borosilicate alloy window. It seems to be quite strong."
@@ -442,7 +455,7 @@
 
 /obj/structure/window/phoronbasic/full
 	dir = 5
-	icon_state = "phoronwindow0"
+	icon_state = "window_full"
 
 /obj/structure/window/phoronreinforced
 	name = "reinforced borosilicate window"
@@ -460,7 +473,7 @@
 
 /obj/structure/window/phoronreinforced/full
 	dir = 5
-	icon_state = "phoronwindow0"
+	icon_state = "window_full"
 
 /obj/structure/window/reinforced
 	name = "reinforced window"

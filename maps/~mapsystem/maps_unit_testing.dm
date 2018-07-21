@@ -5,11 +5,11 @@
 
 	// Unit test vars
 	var/list/apc_test_exempt_areas = list(
-		/area/exoplanet          = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/desert   = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/garbage  = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/exoplanet             = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/desert      = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/grass       = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/snow        = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/garbage     = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	var/list/area_coherency_test_exempt_areas = list(
@@ -57,16 +57,12 @@
 		/area/syndicate_mothership,
 		/area/syndicate_mothership/elite_squad,
 		/area/wizard_station,
-		/area/exoplanet,
-		/area/exoplanet/desert,
-		/area/exoplanet/grass,
-		/area/exoplanet/snow,
-		/area/exoplanet/garbage,
 		/area/template_noop,
-		/area/map_template,
-		/area/map_template/little_house,
 	)
 
-	var/list/area_usage_test_exempted_root_areas = list()
+	var/list/area_usage_test_exempted_root_areas = list(
+		/area/map_template,
+		/area/exoplanet
+	)
 
 	var/list/area_purity_test_exempt_areas = list()

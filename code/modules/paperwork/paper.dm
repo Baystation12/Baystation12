@@ -250,10 +250,7 @@
 				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
-
-				new /obj/effect/decal/cleanable/ash(src.loc)
+				new /obj/effect/decal/cleanable/ash(get_turf(src))
 				qdel(src)
 
 			else
@@ -351,11 +348,9 @@
 		else if (P.name != "paper" && P.name != "photo")
 			B.SetName(P.name)
 
-		user.drop_from_inventory(P)
-		user.drop_from_inventory(src)
+		if(!user.unEquip(P, B) || !user.unEquip(src, B))
+			return
 		user.put_in_hands(B)
-		src.forceMove(B)
-		P.forceMove(B)
 
 		to_chat(user, "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>")
 
@@ -423,6 +418,10 @@
 	add_fingerprint(user)
 	return
 
+//For supply.
+/obj/item/weapon/paper/manifest
+	name = "supply manifest"
+	var/is_copy = 1
 /*
  * Premade paper
  */

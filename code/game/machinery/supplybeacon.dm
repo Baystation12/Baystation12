@@ -15,9 +15,10 @@
 	user.visible_message("<span class='notice'>\The [user] begins setting up \the [src].</span>")
 	if(!do_after(user, deploy_time, src))
 		return
+	if(!user.unEquip(src))
+		return
 	var/obj/S = new deploy_path(get_turf(user))
 	user.visible_message("<span class='notice'>\The [user] deploys \the [S].</span>")
-	user.unEquip(src)
 	qdel(src)
 
 /obj/machinery/power/supply_beacon

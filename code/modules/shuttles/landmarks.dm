@@ -22,9 +22,8 @@
 	//If set, will set base area and turf type to same as where it was spawned at
 	var/autoset
 
-/obj/effect/shuttle_landmark/New()
-	..()
-	tag = landmark_tag //since tags cannot be set at compile time
+/obj/effect/shuttle_landmark/Initialize()
+	. = ..()
 	if(autoset)
 		base_area = get_area(src)
 		var/turf/T = get_turf(src)
@@ -32,10 +31,9 @@
 			base_turf = T.type
 	else
 		base_area = locate(base_area || world.area)
-	name = name + " ([x],[y])"
 
-/obj/effect/shuttle_landmark/Initialize()
-	. = ..()
+	SetName(name + " ([x],[y])")
+
 	if(docking_controller)
 		var/docking_tag = docking_controller
 		docking_controller = locate(docking_tag)
@@ -45,23 +43,27 @@
 			var/obj/effect/overmap/location = map_sectors["[z]"]
 			if(location && location.docking_codes)
 				docking_controller.docking_codes = location.docking_codes
-	shuttle_controller.register_landmark(tag, src)
+
+	SSshuttle.register_landmark(landmark_tag, src)
+
+//Called when the landmark is added to an overmap sector.
+/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O)
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
 		return FALSE
 	for(var/area/A in shuttle.shuttle_area)
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
-		if(check_collision(translation))
+		if(check_collision(base_area, list_values(translation)))
 			return FALSE
 	return TRUE
 
-/obj/effect/shuttle_landmark/proc/check_collision(var/list/turf_translation)
-	for(var/source in turf_translation)
-		var/turf/target = turf_translation[source]
+/proc/check_collision(area/target_area, list/target_turfs)
+	for(var/target_turf in target_turfs)
+		var/turf/target = target_turf
 		if(!target)
 			return TRUE //collides with edge of map
-		if(target.loc != base_area)
+		if(target.loc != target_area)
 			return TRUE //collides with another area
 		if(target.density)
 			return TRUE //dense turf
@@ -75,35 +77,23 @@
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
-	tag = landmark_tag+"-[x]-[y]-[z]"
-	. = ..()
-	base_area = get_area(src)
-	if(!GLOB.using_map.use_overmap)
-		return
-	add_to_sector(map_sectors["[z]"])
+	landmark_tag += "-[x]-[y]-[z]"
+	return ..()
 
-/obj/effect/shuttle_landmark/automatic/proc/add_to_sector(var/obj/effect/overmap/O, var/tag_only)
-	if(!istype(O))
-		return
+/obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/O)
+	..()
 	SetName("[O.name] - [name]")
-	if(shuttle_restricted)
-		if(!O.restricted_waypoints[shuttle_restricted])
-			O.restricted_waypoints[shuttle_restricted] = list()
-		O.restricted_waypoints[shuttle_restricted] += tag_only ? tag : src
-	else
-		O.generic_waypoints += tag_only ? tag : src
 
 //Subtype that calls explosion on init to clear space for shuttles
 /obj/effect/shuttle_landmark/automatic/clearing
 	var/radius = 10
 
 /obj/effect/shuttle_landmark/automatic/clearing/Initialize()
-	. = ..()
+	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
-	var/list/victims = circlerangeturfs(get_turf(src),radius)
-	for(var/turf/T in victims)
+	for(var/turf/T in range(radius, src))
 		if(T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
 
@@ -122,14 +112,16 @@
 /obj/item/device/spaceflare/proc/activate()
 	if(active)
 		return
-	active = 1
 	var/turf/T = get_turf(src)
+	var/mob/M = loc
+	if(istype(M) && !M.unEquip(src, T))
+		return
+
+	active = 1
+	anchored = 1
+
 	var/obj/effect/shuttle_landmark/automatic/mark = new(T)
 	mark.SetName("Beacon signal ([T.x],[T.y])")
-	if(ismob(loc))
-		var/mob/M = loc
-		M.drop_from_inventory(src,T)
-	anchored = 1
 	T.hotspot_expose(1500, 5)
 	update_icon()
 

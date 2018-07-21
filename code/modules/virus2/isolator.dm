@@ -29,18 +29,15 @@
 
 /obj/machinery/disease2/isolator/attackby(var/obj/O as obj, var/mob/user)
 	if(!istype(O,/obj/item/weapon/reagent_containers/syringe)) return
-	var/obj/item/weapon/reagent_containers/syringe/S = O
-
 	if(sample)
 		to_chat(user, "\The [src] is already loaded.")
 		return
-
-	sample = S
-	user.drop_item()
-	S.loc = src
+	if(!user.unEquip(O, src))
+		return
+	sample = O
 
 	user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 	update_icon()
 
 	src.attack_hand(user)
@@ -101,7 +98,7 @@
 					"name" = entry.fields["name"], \
 					"description" = replacetext(desc, "\n", ""))
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "pathogenic_isolator.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -110,6 +107,8 @@
 /obj/machinery/disease2/isolator/Process()
 	if (isolating > 0)
 		isolating -= 1
+		if(virus2)
+			infect_nearby(virus2)
 		if (isolating == 0)
 			if (virus2)
 				var/obj/item/weapon/virusdish/d = new /obj/item/weapon/virusdish(src.loc)
@@ -117,12 +116,12 @@
 				virus2 = null
 				ping("\The [src] pings, \"Viral strain isolated.\"")
 
-			GLOB.nanomanager.update_uis(src)
+			SSnano.update_uis(src)
 			update_icon()
 
-/obj/machinery/disease2/isolator/OnTopic(user, href_list)
+/obj/machinery/disease2/isolator/OnTopic(mob/user, href_list)
 	if (href_list["close"])
-		GLOB.nanomanager.close_user_uis(user, src, "main")
+		SSnano.close_user_uis(user, src, "main")
 		return TOPIC_HANDLED
 
 	if (href_list[HOME])
@@ -147,6 +146,7 @@
 	if(!sample) return TOPIC_HANDLED
 
 	if (href_list["isolate"])
+		operator_skill = user.get_skill_value(core_skill)
 		var/datum/disease2/disease/V = locate(href_list["isolate"])
 		if (V)
 			virus2 = V

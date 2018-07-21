@@ -23,10 +23,10 @@
 				var/can_damage = I.max_damage - I.damage
 				if(can_damage > 0)
 					if(dam > can_damage)
-						I.take_damage(can_damage, silent=TRUE)
+						I.take_internal_damage(can_damage, silent=TRUE)
 						dam -= can_damage
 					else
-						I.take_damage(dam, silent=TRUE)
+						I.take_internal_damage(dam, silent=TRUE)
 						dam = 0
 		if(dam)
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
@@ -550,7 +550,7 @@
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
-		if(!E.is_stump() && E.robotic < ORGAN_ROBOT && E.species.name != SPECIES_PROMETHEAN)
+		if(!E.is_stump() && !BP_IS_ROBOTIC(E) && E.species.name != SPECIES_PROMETHEAN)
 			meatchunks += E
 	if(!meatchunks.len)
 		if(prob(10))
@@ -571,14 +571,13 @@
 		E.s_col_blend = ICON_ADD
 		E.status &= ~ORGAN_BROKEN
 		E.status |= ORGAN_MUTATED
-		E.cannot_break = 1
+		E.limb_flags &= ~ORGAN_FLAG_CAN_BREAK
 		E.dislocated = -1
-		E.nonsolid = 1
 		E.max_damage = 5
 		E.update_icon(1)
 	O.max_damage = 15
 	if(prob(10))
-		to_chat(H, "<span class='danger'>Your slimy [O.name]'s plops off!</span>")
+		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
 		O.droplimb()
 	H.update_body()
 
@@ -641,34 +640,30 @@
 	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
 	remove_self(volume)
 
-/datum/reagent/toxin/corrupting
-	name = "Corruption"
-	description = "A loyalty changing liquid."
-	taste_description = "blood"
-	color = "#ffffff"
+/datum/reagent/toxin/zombie
+	name = "Liquid Corruption"
+	description = "A filthy, oily substance which slowly churns of its own accord."
+	taste_description = "decaying blood"
+	color = "#800000"
 	taste_mult = 5
 	strength = 10
 	metabolism = REM * 5
 	overdose = 30
 
-/datum/reagent/toxin/corrupting/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M,alien,removed*0.5)
+/datum/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed * 0.5)
 
-/datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(prob(M.chem_doses[type]*10))
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			H.zombieze()
-		else
-			to_chat(M, "<span class='danger'>Your insides are melting!!!</span>")
-			M.adjustToxLoss(100)
-		remove_self(volume)
-	else if(prob(5))
-		if(M.chem_doses[type] < 5)
-			to_chat(M, "<span class='warning'>You feel funny...</span>")
-		else
-			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+	if (istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/true_dose = H.chem_doses[type] + volume
+		if (true_dose >= 5)
+			H.zombify()
+		else if (true_dose > 1 && prob(20))
+			H.zombify()
+		else if (prob(10))
+			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
 
 /datum/reagent/toxin/bromide
 	name = "Bromide"

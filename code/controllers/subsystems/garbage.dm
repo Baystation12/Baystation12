@@ -277,7 +277,7 @@ SUBSYSTEM_DEF(garbage)
 
 #ifdef TESTING
 /proc/qdel_and_find_ref_if_fail(datum/D, force = FALSE)
-	SSgarbage.reference_find_on_fail[REF(D)] = TRUE
+	SSgarbage.reference_find_on_fail["\ref[D]"] = TRUE
 	qdel(D, force)
 #endif
 
@@ -342,7 +342,7 @@ SUBSYSTEM_DEF(garbage)
 			if (QDEL_HINT_IFFAIL_FINDREFERENCE)
 				SSgarbage.PreQueue(D)
 				#ifdef TESTING
-				SSgarbage.reference_find_on_fail[REF(D)] = TRUE
+				SSgarbage.reference_find_on_fail["\ref[D]"] = TRUE
 				#endif
 			else
 				#ifdef TESTING
@@ -423,6 +423,13 @@ SUBSYSTEM_DEF(garbage)
 	set src in world
 
 	qdel_and_find_ref_if_fail(src, TRUE)
+
+//Byond type ids
+#define TYPEID_NULL "0"
+#define TYPEID_NORMAL_LIST "f"
+//helper macros
+#define GET_TYPEID(ref) ( ( (lentext(ref) <= 10) ? "TYPEID_NULL" : copytext(ref, 4, lentext(ref)-6) ) )
+#define IS_NORMAL_LIST(L) (GET_TYPEID("\ref[L]") == TYPEID_NORMAL_LIST)
 
 /datum/proc/DoSearchVar(X, Xname, recursive_limit = 64)
 	if(usr && usr.client && !usr.client.running_find_references)

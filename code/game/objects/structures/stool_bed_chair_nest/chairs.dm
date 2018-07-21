@@ -15,7 +15,8 @@
 		if(!SK.status)
 			to_chat(user, "<span class='notice'>\The [SK] is not ready to be attached!</span>")
 			return
-		user.drop_item()
+		if(!user.unEquip(SK))
+			return
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
@@ -59,16 +60,26 @@
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 
-	if(buckled_mob && padding_material)
+	if(buckled_mob)
 		cache_key = "[base_icon]-armrest-[padding_material.name]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.plane = ABOVE_HUMAN_PLANE
 			I.layer = ABOVE_HUMAN_LAYER
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
-				I.color = padding_material.icon_colour
+				I.color = material.icon_colour
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
+		if(padding_material)
+			cache_key = "[base_icon]-padding-armrest-[padding_material.name]"
+			if(isnull(stool_cache[cache_key]))
+				var/image/I = image(icon, "[base_icon]_padding_armrest")
+				I.plane = ABOVE_HUMAN_PLANE
+				I.layer = ABOVE_HUMAN_LAYER
+				if(material_alteration & MATERIAL_ALTERATION_COLOR)
+					I.color = padding_material.icon_colour
+				stool_cache[cache_key] = I
+			overlays |= stool_cache[cache_key]
 
 /obj/structure/bed/chair/set_dir()
 	..()
@@ -96,10 +107,42 @@
 	src.set_dir(turn(src.dir, 90))
 	return
 
+/obj/structure/bed/chair/padded/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+
+/obj/structure/bed/chair/padded/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+
+/obj/structure/bed/chair/padded/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/padded/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/padded/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+
+/obj/structure/bed/chair/padded/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/padded/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/padded/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/padded/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/padded/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
+	name = "comfy chair"
 	desc = "It's a chair. It looks comfy."
 	icon_state = "comfychair_preview"
+	base_icon = "comfychair"
 
 /obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","leather")
@@ -128,6 +171,9 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
 	desc = "It's a chair. Only for the highest ranked asses."
@@ -135,18 +181,58 @@
 	base_icon = "capchair"
 	buckle_movable = 1
 
+/obj/structure/bed/chair/comfy/captain/update_icon()
+	..()
+	var/image/I = image(icon, "[base_icon]_special")
+	I.plane = ABOVE_HUMAN_PLANE
+	I.layer = ABOVE_HUMAN_LAYER
+	overlays |= I
+
 /obj/structure/bed/chair/comfy/captain/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/armchair
+	name = "armchair"
+	desc = "It's an armchair. It looks comfy."
+	icon_state = "armchair_preview"
+	base_icon = "armchair"
+
+/obj/structure/bed/chair/armchair/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+
+/obj/structure/bed/chair/armchair/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+
+/obj/structure/bed/chair/armchair/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/armchair/black/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","black")
 
+/obj/structure/bed/chair/armchair/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+
+/obj/structure/bed/chair/armchair/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/armchair/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/armchair/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/armchair/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/armchair/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
 /obj/structure/bed/chair/office
+	name = "office chair"
+	icon_state = "officechair_preview"
+	base_icon = "officechair"
 	anchored = 0
 	buckle_movable = 1
-	material_alteration = MATERIAL_ALTERATION_NONE
-
-/obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || isWirecutter(W))
-		return
-	..()
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()
@@ -185,20 +271,54 @@
 			victim.apply_damage(10, BRUTE, def_zone, blocked)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
-/obj/structure/bed/chair/office/light
-	base_icon = "officechair_white"
-	icon_state = "officechair_white_preview"
+/obj/structure/bed/chair/office/light/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","cotton")
 
-/obj/structure/bed/chair/office/dark
-	base_icon = "officechair_dark"
-	icon_state = "officechair_dark_preview"
+/obj/structure/bed/chair/office/dark/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/office/comfy
+	name = "comfy office chair"
+	desc = "It's an office chair. It looks comfy."
+	icon_state = "comfyofficechair_preview"
+	base_icon = "comfyofficechair"
+
+/obj/structure/bed/chair/office/comfy/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+
+/obj/structure/bed/chair/office/comfy/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+
+/obj/structure/bed/chair/office/comfy/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/office/comfy/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/office/comfy/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+
+/obj/structure/bed/chair/office/comfy/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/office/comfy/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/office/comfy/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/office/comfy/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/office/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
 
 // Chair types
 /obj/structure/bed/chair/wood
+	name = "classic chair"
 	desc = "Old is never too old to not be in fashion."
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
-	material_alteration = MATERIAL_ALTERATION_NAME
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
@@ -209,5 +329,38 @@
 	..(newloc, "wood")
 
 /obj/structure/bed/chair/wood/wings
+	name = "winged chair"
 	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings_preview"
+
+/obj/structure/bed/chair/shuttle
+	name = "shuttle seat"
+	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
+	base_icon = "shuttle_chair"
+	icon_state = "shuttle_chair_preview"
+
+/obj/structure/bed/chair/shuttle/post_buckle_mob()
+	if(buckled_mob)
+		base_icon = "shuttle_chair-b"
+	else
+		base_icon = "shuttle_chair"
+	..()
+
+/obj/structure/bed/chair/shuttle/update_icon()
+	..()
+	if(!buckled_mob)
+		var/image/I = image(icon, "[base_icon]_special")
+		I.plane = ABOVE_HUMAN_PLANE
+		I.layer = ABOVE_HUMAN_LAYER
+		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			I.color = material.icon_colour
+		overlays |= I
+
+/obj/structure/bed/chair/shuttle/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/shuttle/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/shuttle/white/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","cotton")

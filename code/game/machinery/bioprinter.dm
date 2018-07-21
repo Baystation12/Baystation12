@@ -201,9 +201,13 @@
 	var/obj/item/organ/O
 	var/weakref/R = loaded_dna["donor"]
 	var/mob/living/carbon/human/H = R.resolve()
+	var/new_organ
 	if(loaded_species.has_organ[choice])
-		var/new_organ = loaded_species.has_organ[choice]
-		O = new new_organ(get_turf(src), given_dna = H.dna)
+		new_organ = loaded_species.has_organ[choice]
+	else if(loaded_species.has_limbs[choice])
+		new_organ = loaded_species.has_limbs[choice]["path"]
+	if(new_organ)
+		O = new new_organ(get_turf(src), H.dna)
 		O.status |= ORGAN_CUT_AWAY
 	else
 		O = ..()
@@ -234,11 +238,11 @@
 			if(max_stored_matter == stored_matter)
 				to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
 				return
+			if(!user.unEquip(W))
+				return
 			stored_matter += min(amount_list[path], max_stored_matter - stored_matter)
-			user.drop_item()
 			to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>")
 			qdel(W)
-			return
 
 	// DNA sample from syringe.
 	if(istype(W,/obj/item/weapon/reagent_containers/syringe))

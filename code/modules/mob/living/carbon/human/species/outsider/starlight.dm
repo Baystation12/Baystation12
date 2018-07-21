@@ -32,14 +32,13 @@
 /datum/species/starlight/starborn
 	name = "Starborn"
 	name_plural = "Starborn"
-	icobase = 'icons/mob/human_races/r_starborn.dmi'
-	deform = 'icons/mob/human_races/r_starborn.dmi'
+	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
+	deform = 'icons/mob/human_races/species/starborn/body.dmi'
+	husk_icon = 'icons/mob/human_races/species/starborn/husk.dmi'
 	blurb = "Beings of fire and light, split off from a sun deity of unbelievable power."
 
 	blood_color = "#ffff00"
 	flesh_color = "#ffff00"
-
-	eye_icon = null //No eyes.
 
 	unarmed_types = list(/datum/unarmed_attack/punch/starborn)
 
@@ -86,14 +85,12 @@
 /datum/species/starlight/blueforged
 	name = "Blueforged"
 	name_plural = "Blueforged"
-	icobase = 'icons/mob/human_races/r_blueforged.dmi'
-	deform = 'icons/mob/human_races/r_blueforged.dmi'
+	icobase = 'icons/mob/human_races/species/blueforged/body.dmi'
+	deform = 'icons/mob/human_races/species/blueforged/body.dmi'
 	blurb = "Living chunks of Bluespace, carved out of the original dimension and given life by a being of unbelievable power."
 
 	blood_color = "#2222ff"
 	flesh_color = "#2222ff"
-
-	eye_icon = "eyes_blueforged_s"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -109,6 +106,7 @@
 
 	secondary_langs = list(LANGUAGE_CULT,LANGUAGE_OCCULT)
 
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unbreakable/blueforged)
 
 /datum/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
 	..()

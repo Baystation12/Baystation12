@@ -10,6 +10,11 @@
 	var/list/blend_objects = newlist() // Objects which to blend with
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
 
+	var/list/footstep_sounds	//footstep sounds when stepped on
+
+/obj/structure/proc/get_footstep_sound()
+	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
+
 /obj/structure/Destroy()
 	if(parts)
 		new parts(loc)
@@ -50,6 +55,12 @@
 	spawn(1) qdel(src)
 	return 1
 
+/obj/structure/proc/can_visually_connect()
+	return anchored
+
+/obj/structure/proc/can_visually_connect_to(var/obj/structure/S)
+	return istype(S, src)
+
 /obj/structure/proc/update_connections(propagate = 0)
 	var/list/dirs = list()
 	var/list/other_dirs = list()
@@ -58,8 +69,8 @@
 		return
 
 	for(var/obj/structure/S in orange(src, 1))
-		if(istype(S, src))
-			if(S.anchored)
+		if(can_visually_connect_to(S))
+			if(S.can_visually_connect())
 				if(propagate)
 					S.update_connections()
 					S.update_icon()
@@ -68,14 +79,19 @@
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
-		var/turf/simulated/wall/W = T
-		if(istype(W))
-			if(propagate)
-				W.update_connections(1)
-				W.update_icon()
-			dirs += get_dir(src, T)
-			other_dirs += get_dir(src, T)
-		else
+		for(var/b_type in blend_objects)
+			if(istype(T, b_type))
+				success = 1
+				if(propagate)
+					var/turf/simulated/wall/W = T
+					if(istype(W))
+						W.update_connections(1)
+						W.update_icon()
+				if(success)
+					break
+			if(success)
+				break
+		if(!success)
 			for(var/obj/O in T)
 				for(var/b_type in blend_objects)
 					if(istype(O, b_type))
@@ -92,9 +108,9 @@
 				if(success)
 					break
 
-			if(success)
-				dirs += get_dir(src, T)
-				other_dirs += get_dir(src, T)
+		if(success)
+			dirs += get_dir(src, T)
+			other_dirs += get_dir(src, T)
 
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)

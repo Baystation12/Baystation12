@@ -52,7 +52,6 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 		return
 	if(istype(O,/obj/item/integrated_circuit))
 		to_chat(user, "<span class='notice'>You insert the circuit into [src]. </span>")
-		user.unEquip(O)
 		qdel(O)
 		metal = min(metal+1,maxMetal)
 		return 1

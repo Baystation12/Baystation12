@@ -33,9 +33,6 @@
 
 /spell/hand/proc/cancel_hand()
 	if(current_hand)
-		if(istype(current_hand.loc, /mob/living))
-			var/mob/living/L = current_hand.loc
-			L.drop_from_inventory(current_hand)
 		QDEL_NULL(current_hand)
 
 /spell/hand/Destroy()

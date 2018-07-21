@@ -1,13 +1,14 @@
 /datum/species/alium
-	name = "Humanoid"
+	name = SPECIES_ALIEN
 	name_plural = "Humanoids"
 	blurb = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
 
 	species_flags = SPECIES_FLAG_NO_SCAN
+	spawn_flags = SPECIES_IS_RESTRICTED
 
-	icobase = 'icons/mob/human_races/r_humanoid.dmi'
-	deform = 'icons/mob/human_races/r_humanoid.dmi'
+	icobase = 'icons/mob/human_races/species/humanoid/body.dmi'
+	deform = 'icons/mob/human_races/species/humanoid/body.dmi'
 	appearance_flags = HAS_SKIN_COLOR
 	limb_blend = ICON_MULTIPLY
 
@@ -85,6 +86,9 @@
 	..()
 #undef RANDOM_COEF
 
+/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
+	return SPECIES_HUMAN
+
 /datum/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
 	var/temp_comfort_shift = atmosphere.temperature - body_temperature
 
@@ -120,3 +124,29 @@
 		poison_types = list(pick_n_take(newgases))
 	if(newgases.len)
 		exhale_type = pick_n_take(newgases)
+
+/obj/structure/aliumizer
+	name = "alien monolith"
+	desc = "Your true form is calling. Use this to become an alien humanoid."
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "ano51"
+	anchored = 1
+
+/obj/structure/aliumizer/attack_hand(mob/living/carbon/human/user)
+	if(!istype(user))
+		to_chat(user, "You got no business touching this.")
+		return
+	if(user.species.name == SPECIES_ALIEN)
+		to_chat(user, "You're already a [SPECIES_ALIEN].")
+		return
+	if(alert("Are you sure you want to be an alien?", "Mom Look I'm An Alien!", "Yes", "No") == "No")
+		to_chat(user, "Okie dokie.")
+		return
+	if(user && user.species.name == SPECIES_ALIEN) //no spamming it to get free implants
+		return
+	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
+	to_chat(user, "You can't speak GalCom or any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
+	new/obj/item/weapon/implanter/translator(get_turf(src))
+	user.set_species(SPECIES_ALIEN)
+	user.fully_replace_character_name(user.species.get_random_name(user.gender))
+	user.rename_self("Humanoid Alien", 1)

@@ -264,10 +264,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marshal
-	name = OUTFIT_JOB_NAME("Forensic Technician - Colonial Marshal")
+/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
+	name = OUTFIT_JOB_NAME("Forensic Technician - OCIE Agent")
 	uniform = /obj/item/clothing/under/det/grey
-	suit = /obj/item/clothing/suit/storage/toggle/marshal_jacket
+	suit = /obj/item/clothing/suit/storage/toggle/agent_jacket
 	shoes = /obj/item/clothing/shoes/dress
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa
@@ -554,8 +554,18 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/ntpilot
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	shoes = /obj/item/clothing/shoes/workboots
+	l_ear = /obj/item/device/radio/headset/headset_pilot
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
-	l_ear = /obj/item/device/radio/headset/headset_pilot/
+	head = /obj/item/clothing/head/helmet/nt/pilot
+
+/decl/hierarchy/outfit/job/torch/passenger/pilot
+	name = OUTFIT_JOB_NAME("Shuttle Pilot")
+	uniform = /obj/item/clothing/under/color/black
+	suit = /obj/item/clothing/suit/storage/hazardvest/blue
+	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_pilot
+	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
+	head = /obj/item/clothing/head/helmet/pilot
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Torch")
@@ -652,3 +662,18 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	..()
 	var/obj/item/weapon/card/id/torch/stowaway/ID = new(H.loc)
 	H.put_in_hands(ID)
+
+/decl/hierarchy/outfit/job/torch/ert
+	name = OUTFIT_JOB_NAME("ERT - Torch")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat
+	head = /obj/item/clothing/head/beret/solgov/fleet
+	gloves = /obj/item/clothing/gloves/thick
+	id_type = /obj/item/weapon/card/id/centcom/ERT
+	pda_type = /obj/item/modular_computer/pda/ert
+	l_ear = /obj/item/device/radio/headset/ert
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/ert/leader
+	name = OUTFIT_JOB_NAME("ERT Leader - Torch")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/command
+	head = /obj/item/clothing/head/beret/solgov/fleet/command

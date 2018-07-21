@@ -43,9 +43,9 @@
 	if(!..())
 		return 0
 
-	spell_flags = STATALLOWED
+	spell_flags = NO_SOMATIC
 
-	return "You no longer have to be conscious to activate this spell."
+	return "You will always be able to cast this spell, even while unconscious or handcuffed."
 
 /obj/effect/cleanable/wizard_mark
 	name = "\improper Mark of the Wizard"
