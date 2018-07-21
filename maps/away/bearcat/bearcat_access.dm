@@ -2,11 +2,13 @@
 /datum/access/bearcat
 	id = access_bearcat
 	desc = "FTU Crewman"
+	region = ACCESS_REGION_NONE
 
 /var/const/access_bearcat_captain = 999
 /datum/access/bearcat_captain
 	id = access_bearcat_captain
 	desc = "FTU Captain"
+	region = ACCESS_REGION_NONE
 
 /obj/item/weapon/card/id/bearcat
 	access = list(access_bearcat)
