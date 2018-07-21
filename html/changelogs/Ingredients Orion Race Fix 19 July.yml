@@ -35,5 +35,5 @@ delete-after: True
 changes: 
   - tweak: "Fixed Orion Species Path so they can now wear their armor properly."
   - tweak: "Deleted three spare undersuits in orion closets as they were redundant."
-  - tweak: "Changed the name of the Colossus Case to help it blend in better while holding it."
+  - tweak: "Changed the name of the Colossus Case to help it blend in better while holding it. Changed wrong code to make it so it can only hold colossus armor inside."
   - tweak: "Removed custom attack code for Orions."
