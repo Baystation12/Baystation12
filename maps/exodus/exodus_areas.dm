@@ -887,7 +887,6 @@
 /area/crew_quarters
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
-	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/crew_quarters/locker
 	name = "\improper Locker Room"
