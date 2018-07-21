@@ -383,15 +383,15 @@
 "aaN" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/box/monkeycubes,
-/obj/item/weapon/storage/box/monkeycubes,
-/obj/item/weapon/storage/box/monkeycubes,
-/obj/item/weapon/storage/box/monkeycubes,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/item/weapon/storage/box/monkeycubes/farwacubes,
+/obj/item/weapon/storage/box/monkeycubes/neaeracubes,
+/obj/item/weapon/storage/box/monkeycubes/stokcubes,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
 "aaO" = (
