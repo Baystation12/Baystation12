@@ -35,7 +35,7 @@
 		return 0
 	if(target.isSynthetic())
 		var/obj/item/organ/external/using = tool
-		if(using.robotic < ORGAN_ROBOT)
+		if(!BP_IS_ROBOTIC(using))
 			to_chat(user, "<span class='danger'>You cannot attach a flesh part to a robotic body.</span>")
 			return SURGERY_FAILURE
 	return 1
@@ -141,7 +141,7 @@
 			var/obj/item/organ/external/new_limb = new new_limb_type(target)
 			new_limb.robotize(L.model_info)
 			if(L.sabotaged)
-				new_limb.sabotaged = 1
+				new_limb.status |= ORGAN_SABOTAGED
 
 	target.update_body()
 	target.updatehealth()

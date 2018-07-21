@@ -7,14 +7,14 @@
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_NORMAL
 	body_part = HEAD
-	can_heal_overkill = 1
 	parent_organ = BP_CHEST
 	joint = "jaw"
 	amputation_point = "neck"
-	gendered_icon = 1
 	encased = "skull"
 	artery_name = "cartoid artery"
 	cavity_name = "cranial"
+
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 	var/glowing_eyes = FALSE
 	var/can_intake_reagents = 1
@@ -24,6 +24,7 @@
 	var/graffiti_style
 	var/tmp/last_cached_eye_colour
 	var/tmp/last_eye_cache_key
+	var/apply_eye_colour = TRUE
 
 /obj/item/organ/external/head/proc/get_eye_cache_key()
 	last_cached_eye_colour = rgb(128,0,0)
@@ -50,7 +51,8 @@
 		var/cache_key = get_eye_cache_key()
 		if(!human_icon_cache[cache_key])
 			var/icon/eyes_icon = icon(icon = eye_icon_location, icon_state = "")
-			eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
+			if(apply_eye_colour)
+				eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
 			human_icon_cache[cache_key] = eyes_icon
 		return human_icon_cache[cache_key]
 
@@ -104,21 +106,9 @@
 	. = ..(company, skip_prosthetics, 1)
 	has_lips = null
 
-/obj/item/organ/external/head/removed()
-	if(owner)
-		SetName("[owner.real_name]'s head")
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
-		spawn(1)
-			owner.update_hair()
-	..()
-
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon = null)
 	. = ..()
-	if (!disfigured)
+	if (!(status & ORGAN_DISFIGURED))
 		if (brute_dam > 40)
 			if (prob(50))
 				disfigure("brute")
@@ -140,7 +130,7 @@
 		var/image/eye_glow = get_eye_overlay()
 		if(eye_glow) overlays |= eye_glow
 
-		if(owner.lip_style && robotic < ORGAN_ROBOT && (species && (species.appearance_flags & HAS_LIPS)))
+		if(owner.lip_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
 			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)

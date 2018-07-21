@@ -145,6 +145,9 @@
 	var/overlay_alarm
 	var/overlay_status_display
 
+	var/up_description
+	var/down_description
+
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()
 	return
@@ -169,8 +172,6 @@
 
 /decl/security_level/default
 	icon = 'icons/misc/security_state.dmi'
-	var/up_description
-	var/down_description
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 	var/static/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))

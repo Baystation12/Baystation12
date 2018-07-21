@@ -14,6 +14,7 @@ REAGENT SCANNER
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon_state = "health"
 	item_state = "analyzer"
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 3
@@ -27,35 +28,58 @@ REAGENT SCANNER
 /obj/item/device/healthanalyzer/do_surgery(mob/living/M, mob/living/user)
 	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
 		return ..()
-	scan_mob(M, user) //default surgery behaviour is just to scan as usual
+	medical_scan_action(M, user, src, mode) //default surgery behaviour is just to scan as usual
 	return 1
 
-/obj/item/device/healthanalyzer/attack(mob/living/M, mob/living/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	scan_mob(M, user)
+/obj/item/device/healthanalyzer/afterattack(atom/target, mob/user, proximity)
+	if(!proximity)
+		return
 
-/obj/item/device/healthanalyzer/proc/scan_mob(var/mob/living/carbon/human/H, var/mob/living/user)
+	medical_scan_action(target, user, src, mode)
 
+/proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You are not nimble enough to use this device.</span>")
 		return
 
 	if ((CLUMSY in user.mutations) && prob(50))
-		user.visible_message("<span class='notice'>\The [user] runs \the [src] over the floor.")
+		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over the floor.")
 		to_chat(user, "<span class='notice'><b>Scan results for the floor:</b></span>")
 		to_chat(user, "Overall Status: Healthy</span>")
 		return
 
-	if (!istype(H) || H.isSynthetic())
-		to_chat(user, "<span class='warning'>\The [src] is designed for organic humanoid patients only.</span>")
+	var/mob/living/carbon/human/scan_subject = null
+	if (istype(target, /mob/living/carbon/human))
+		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over \the [target].</span>")
+		scan_subject = target
+	else if (istype(target, /obj/structure/closet/body_bag))
+		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over \the [target].</span>")
+		var/obj/structure/closet/body_bag/B = target
+		if(!B.opened)
+			var/list/scan_content = list()
+			for(var/mob/living/L in B.contents)
+				scan_content.Add(L)
+
+			if (scan_content.len == 1)
+				for(var/mob/living/carbon/human/L in scan_content)
+					scan_subject = L
+			else if (scan_content.len > 1)
+				to_chat(user, "<span class='warning'>\The [scanner] picks up multiple readings inside \the [target], too close together to scan properly.</span>")
+				return
+			else
+				to_chat(user, "\The [scanner] does not detect anyone inside \the [target].")
+				return
+	else
 		return
 
-	user.visible_message("<span class='notice'>\The [user] runs \the [src] over \the [H].</span>")
-	to_chat(user, "<hr>")
-	to_chat(user, medical_scan_results(H, mode, user.get_skill_value(SKILL_MEDICAL)))
-	to_chat(user, "<hr>")
+	if (scan_subject.isSynthetic())
+		to_chat(user, "<span class='warning'>\The [scanner] is designed for organic humanoid patients only.</span>")
+		return
 
-proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_level = SKILL_DEFAULT)
+	. = medical_scan_results(scan_subject, verbose, user.get_skill_value(SKILL_MEDICAL))
+	to_chat(user, "<hr>[.]<hr>")
+
+/proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_level = SKILL_DEFAULT)
 	. = list()
 	var/header = list()
 	var/b
@@ -113,6 +137,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_
 
 	// Pulse rate.
 	var/pulse_result = "normal"
+	var/pulse_suffix = "bpm"
 	if(H.should_have_organ(BP_HEART))
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
@@ -120,13 +145,16 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_
 			pulse_result = H.get_pulse(1)
 	else
 		pulse_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
-
-	dat += "<span class='scan_notice'>Pulse rate: [pulse_result]bpm.</span>"
+		pulse_suffix = ""
+	dat += "<span class='scan_notice'>Pulse rate: [pulse_result][pulse_suffix].</span>"
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
-	if(H.get_blood_volume() <= 70)
-		dat += "<span class='scan_danger'>Severe blood loss detected.</span>"
-	dat += "[b]Blood pressure:[endb] [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+	if(H.should_have_organ(BP_HEART))
+		if(H.get_blood_volume() <= 70)
+			dat += "<span class='scan_danger'>Severe blood loss detected.</span>"
+		dat += "[b]Blood pressure:[endb] [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+	else
+		dat += "[b]Blood pressure:[endb] N/A"
 
 	// Body temperature.
 	dat += "<span class='scan_notice'>Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)</span>"
@@ -210,11 +238,11 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_
 		var/list/damaged = H.get_damaged_organs(1,1)
 		if(damaged.len)
 			for(var/obj/item/organ/external/org in damaged)
-				var/limb_result = "[capitalize(org.name)][(org.robotic >= ORGAN_ROBOT) ? " (Cybernetic)" : ""]:"
+				var/limb_result = "[capitalize(org.name)][BP_IS_ROBOTIC(org) ? " (Cybernetic)" : ""]:"
 				if(org.brute_dam > 0)
-					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.can_heal_overkill)] physical trauma</b></font>\]"
+					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, (org.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, org.can_heal_overkill)] burns</b></font>\]"
+					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, (org.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='scan_danger'>bleeding</span>\]"
 				dat += limb_result

@@ -270,7 +270,7 @@
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun, access_emergency_armory)
+			            access_solgov_crew, access_gun, access_emergency_armory, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -324,9 +324,6 @@
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
-	alt_titles = list(
-		"Inspector General"
-		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
@@ -334,7 +331,7 @@
 						SKILL_FINANCE     = SKILL_BASIC)
 	skill_points = 20
 
-	access = list(access_representative, access_security,access_medical, access_engine,
+	access = list(access_representative, access_security, access_medical,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
@@ -789,7 +786,7 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
-		/datum/mil_rank/civ/marshal = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marshal
+		/datum/mil_rank/civ/agent = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
 	)
 	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
 						SKILL_COMPUTER    = SKILL_BASIC,

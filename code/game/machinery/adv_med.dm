@@ -359,9 +359,9 @@
 		else
 			row += "<td>"
 			if(E.brute_dam)
-				row += "[capitalize(get_wound_severity(E.brute_ratio, E.can_heal_overkill))] physical trauma"
+				row += "[capitalize(get_wound_severity(E.brute_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma"
 			if(E.burn_dam)
-				row += " [capitalize(get_wound_severity(E.burn_ratio, E.can_heal_overkill))] burns"
+				row += " [capitalize(get_wound_severity(E.burn_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))] burns"
 			if(E.brute_dam + E.burn_dam == 0)
 				row += "None"
 			row += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"

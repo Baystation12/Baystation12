@@ -1,3 +1,7 @@
+/datum/job/submap
+	branch = /datum/mil_branch/civilian
+	rank =   /datum/mil_rank/civ/civ
+
 /datum/map/torch
 	branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -163,7 +167,7 @@
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/offduty,
-		/datum/mil_rank/civ/marshal,
+		/datum/mil_rank/civ/agent,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -172,7 +176,7 @@
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/offduty,
-		/datum/mil_rank/civ/marshal,
+		/datum/mil_rank/civ/agent,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -436,10 +440,10 @@
 /datum/mil_rank/civ/offduty
 	name = "Off-Duty Personnel"
 
-/datum/mil_rank/civ/marshal
-	name = "Colonial Marshal"
-	name_short = "CMar"
-	accessory = list(/obj/item/clothing/accessory/badge/marshal)
+/datum/mil_rank/civ/agent
+	name = "OCIE Agent"
+	name_short = "AGT"
+	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"

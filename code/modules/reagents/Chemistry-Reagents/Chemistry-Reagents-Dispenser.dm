@@ -360,7 +360,7 @@
 				if(!screamed && affecting.can_feel_pain())
 					screamed = 1
 					H.emote("scream")
-				affecting.disfigured = 1
+				affecting.status |= ORGAN_DISFIGURED
 
 /datum/reagent/acid/touch_obj(var/obj/O)
 	if(O.unacidable)

@@ -24,6 +24,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
+	assisted_langs = list(LANGUAGE_NABBER)
 	health_hud_intensity = 2
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
 

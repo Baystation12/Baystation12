@@ -282,7 +282,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/unbolt_saferooms()
 	return // overriden by torch
-	
+
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
 	maint_all_access = 1
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")

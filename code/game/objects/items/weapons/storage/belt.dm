@@ -34,8 +34,15 @@
 /obj/item/weapon/storage/belt/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 	if(slot == slot_belt_str && contents.len)
+		var/list/ret_overlays = list()
 		for(var/obj/item/I in contents)
-			ret.overlays += image("icon" = 'icons/mob/onmob/belt.dmi', "icon_state" = "[I.item_state ? I.item_state : I.icon_state]")
+			var/use_state = (I.item_state ? I.item_state : I.icon_state)
+			if(ishuman(user_mob))
+				var/mob/living/carbon/human/H = user_mob
+				ret_overlays += H.species.get_offset_overlay_image(FALSE, 'icons/mob/onmob/belt.dmi', use_state, I.color, slot)
+			else
+				ret_overlays += overlay_image('icons/mob/onmob/belt.dmi', use_state, I.color, RESET_COLOR)
+			ret.overlays += ret_overlays
 	return ret
 
 /obj/item/weapon/storage/belt/holster
@@ -172,7 +179,9 @@
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll,
-		/obj/item/weapon/extinguisher/mini
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/weapon/storage/med_pouch,
+		/obj/item/bodybag
 		)
 
 /obj/item/weapon/storage/belt/medical/emt

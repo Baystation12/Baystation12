@@ -10,6 +10,7 @@
 	worlds tumultous at best."
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SOL_COMMON)
+	assisted_langs = list(LANGUAGE_NABBER)
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 17
 	max_age = 100
@@ -65,7 +66,7 @@
 				H.custom_emote("rubs [T.his] [damaged_organ.name] carefully.")
 
 		for(var/obj/item/organ/I in H.internal_organs)
-			if((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) continue
+			if((I.status & ORGAN_DEAD) || BP_IS_ROBOTIC(I)) continue
 			if(I.damage > 2) if(prob(2))
 				var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
 				H.custom_emote("clutches [T.his] [parent.name]!")
@@ -95,6 +96,7 @@
 	num_alternate_languages = 1
 	language = LANGUAGE_SIIK_MAAS
 	additional_langs = list(LANGUAGE_SIIK_TAJR)
+	assisted_langs = list(LANGUAGE_NABBER)
 	//secondary_langs =
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
@@ -160,6 +162,7 @@
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SKRELLIAN)
+	assisted_langs = list(LANGUAGE_NABBER)
 	name_language = null
 	health_hud_intensity = 1.75
 
@@ -219,6 +222,7 @@
 	num_alternate_languages = 2
 	strength = STR_VHIGH
 	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
+	assisted_langs = list(LANGUAGE_NABBER)
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
@@ -247,7 +251,7 @@
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/diona/chest),
 		BP_GROIN =  list("path" = /obj/item/organ/external/diona/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/no_eyes/diona),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/diona),
 		BP_L_ARM =  list("path" = /obj/item/organ/external/diona/arm),
 		BP_R_ARM =  list("path" = /obj/item/organ/external/diona/arm/right),
 		BP_L_LEG =  list("path" = /obj/item/organ/external/diona/leg),
@@ -263,7 +267,6 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_split_nymph,
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
@@ -333,9 +336,25 @@
 	else
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
 
+// Dionaea spawned by hand or by joining will not have any
+// nymphs passed to them. This should take care of that.
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
-	return ..()
+	. = ..()
+	addtimer(CALLBACK(src, .proc/fill_with_nymphs, H), 0)
+
+/datum/species/diona/proc/fill_with_nymphs(var/mob/living/carbon/human/H)
+
+	if(!H || H.species.name != name) return
+
+	var/nymph_count = 0
+	for(var/mob/living/carbon/alien/diona/nymph in H)
+		nymph_count++
+		if(nymph_count >= 3) return
+
+	while(nymph_count < 3)
+		new /mob/living/carbon/alien/diona/sterile(H)
+		nymph_count++
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
 
@@ -347,7 +366,7 @@
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
 		return
 	else
-		H.diona_split_nymph()
+		split_into_nymphs(H)
 
 /datum/species/diona/get_blood_name()
 	return "sap"

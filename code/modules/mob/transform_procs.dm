@@ -322,7 +322,7 @@
 	for (var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0
-		if (!organ.isrobotic())
+		if (!BP_IS_ROBOTIC(organ))
 			organ.rejuvenate(1)
 			organ.max_damage *= 3
 			organ.min_broken_damage = Floor(organ.max_damage * 0.75)

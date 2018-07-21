@@ -152,19 +152,18 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
 
-	var/list/visible_overlays = overlays_standing
-
+	var/list/overlays_to_apply = list()
 	if (icon_update)
-		if(is_cloaked())
 
+		var/list/visible_overlays
+		if(is_cloaked())
 			icon = 'icons/mob/human.dmi'
 			icon_state = "blank"
-
 			visible_overlays = list(visible_overlays[R_HAND_LAYER], visible_overlays[L_HAND_LAYER])
-
 		else
 			icon = stand_icon
 			icon_state = null
+			visible_overlays = overlays_standing
 
 		var/matrix/M = matrix()
 		if(lying && (species.prone_overlay_offset[1] || species.prone_overlay_offset[2]))
@@ -173,19 +172,21 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(istype(entry, /image))
 				var/image/overlay = entry
 				overlay.transform = M
-				overlays += overlay
+				overlays_to_apply += overlay
 			else if(istype(entry, /list))
 				for(var/image/overlay in entry)
 					overlay.transform = M
-					overlays += overlay
+					overlays_to_apply += overlay
 
 		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
 		if(istype(head) && !head.is_stump())
 			var/image/I = head.get_eye_overlay()
-			if(I) overlays |= I
+			if(I) overlays_to_apply += I
 
 	if(auras)
-		overlays |= auras
+		overlays_to_apply += auras
+
+	overlays = overlays_to_apply
 
 	var/matrix/M = matrix()
 	if(lying)
@@ -230,7 +231,7 @@ var/global/list/damage_icon_parts = list()
 		O.update_icon()
 		if(O.damage_state == "00") continue
 		var/icon/DI
-		var/use_colour = ((O.robotic >= ORGAN_ROBOT) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
+		var/use_colour = (BP_IS_ROBOTIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.get_bodytype(src)]"
 		if(damage_icon_parts[cache_index] == null)
 			DI = new /icon(species.get_damage_overlays(src), O.damage_state)			// the damage icon for whole human
@@ -301,7 +302,7 @@ var/global/list/damage_icon_parts = list()
 				icon_key += "#000000"
 			for(var/M in part.markings)
 				icon_key += "[M][part.markings[M]["color"]]"
-		if(part.robotic >= ORGAN_ROBOT)
+		if(BP_IS_ROBOTIC(part))
 			icon_key += "2[part.model ? "-[part.model]": ""]"
 		else if(part.status & ORGAN_DEAD)
 			icon_key += "3"
@@ -777,7 +778,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[SURGERY_LEVEL] = null
 	var/image/total = new
 	for(var/obj/item/organ/external/E in organs)
-		if(E.robotic < ORGAN_ROBOT && E.how_open())
+		if(!BP_IS_ROBOTIC(E) && E.how_open())
 			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.icon_name][round(E.how_open())]", "layer"=-SURGERY_LEVEL)
 			total.overlays += I
 	total.appearance_flags = RESET_COLOR

@@ -40,6 +40,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 	antaghud_indicator = "hudcultist"
+	skill_setter = /datum/antag_skill_setter/station
 
 	var/allow_narsie = 1
 	var/powerless = 0

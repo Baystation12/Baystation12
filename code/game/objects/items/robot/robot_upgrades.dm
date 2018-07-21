@@ -2,7 +2,7 @@
 // Contains various borg upgrades.
 
 /obj/item/borg/upgrade
-	name = "borg upgrade module."
+	name = "robot upgrade module"
 	desc = "Protected by FRM."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cyborg_upgrade"
@@ -24,18 +24,48 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/reset/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
-	R.uneq_all()
-	R.modtype = initial(R.modtype)
-	R.hands.icon_state = initial(R.hands.icon_state)
+	if((. = ..())) return 0
 
-	R.notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, R.module.name)
-	R.module.Reset(R)
-	qdel(R.module)
-	R.module = null
-	R.updatename("Default")
-
+	R.reset_module()
 	return 1
+
+/obj/item/borg/upgrade/uncertified
+	name = "uncertified robotic module"
+	desc = "You shouldn't be seeing this!"
+	description_info = "This special chip will forcibly change a robot's module to a new one. In most cases, this is the only way for the robot to obtain these modules. Once you've unlocked the robot's maintenance hatch with an ID card and opened it with a crowbar, click the bot to install this chip."
+	description_fluff = "No TSC, industrial concern, or military organization worth their salt would dare install uncertified hardware on their robotic platforms. Nevertheless, in backwater sectors of the universe, there is a thriving grey market for third-party modular configurations such as this one."
+	icon_state = "cyborg_upgrade5"
+	require_module = 0
+	var/new_module = null
+
+/obj/item/borg/upgrade/uncertified/action(var/mob/living/silicon/robot/R)
+	if((. = ..())) return 0
+	if(!new_module)
+		to_chat(usr, "<span class='warning'>[R]'s error lights strobe repeatedly - something seems to be wrong with the chip.</span>")
+		return 0
+
+	// Suppress the alert so the AI doesn't see a reset message.
+	R.reset_module(TRUE)
+	R.pick_module(new_module)
+	return 1
+
+/obj/item/borg/upgrade/uncertified/party
+	name = "\improper Madhouse Productions Official Party Module"
+	desc = "A weird-looking chip with third-party additions crudely soldered in. It feels cheap and chintzy in the hand."
+	new_module = "Party"
+
+/obj/item/borg/upgrade/uncertified/party/Initialize()
+	. = ..()
+	description_fluff += "<br><br>Inscribed into the cheap-feeling circuit is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
+
+/obj/item/borg/upgrade/uncertified/combat
+	name = "ancient module"
+	desc = "A well-made but somewhat archaic looking bit of circuitry."
+	new_module = "Combat"
+
+/obj/item/borg/upgrade/uncertified/combat/Initialize()
+	. = ..()
+	description_fluff += "<br><br>The chip is stamped with an insignia: a gun protruding from a stylized fist."
 
 /obj/item/borg/upgrade/rename
 	name = "robot reclassification board"

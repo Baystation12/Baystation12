@@ -97,6 +97,69 @@
 		flick("portable_analyzer_load", src)
 		icon_state = "portable_analyzer_full"
 
+/obj/item/weapon/party_light
+	name = "party light"
+	desc = "An array of LEDs in tons of colors."
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "partylight-off"
+	item_state = "partylight-off"
+	var/activated = 0
+	var/strobe_effect = null
+
+/obj/item/weapon/party_light/attack_self()
+	if (activated)
+		deactivate_strobe()
+	else
+		activate_strobe()
+
+/obj/item/weapon/party_light/update_icon()
+	if (activated)
+		icon_state = "partylight-on"
+		set_light(1, 1, 7)
+	else
+		icon_state = "partylight_off"
+		set_light(0)
+
+/obj/item/weapon/party_light/proc/activate_strobe()
+	activated = 1
+
+	// Create the party light effect and place it on the turf of who/whatever has it.
+	var/turf/T = get_turf(src)
+	var/obj/effect/party_light/L = new(T)
+	strobe_effect = L
+
+	// Make the light effect follow this party light object.
+	GLOB.moved_event.register(src, L, /atom/movable/proc/move_to_turf_or_null)
+
+	update_icon()
+
+/obj/item/weapon/party_light/proc/deactivate_strobe()
+	activated = 0
+
+	// Cause the party light effect to stop following this object, and then delete it.
+	GLOB.moved_event.unregister(src, strobe_effect, /atom/movable/proc/move_to_turf_or_null)
+	QDEL_NULL(strobe_effect)
+
+	update_icon()
+
+/obj/item/weapon/party_light/Destroy()
+	deactivate_strobe()
+	. = .. ()
+
+/obj/effect/party_light
+	name = "party light"
+	desc = "This is probably bad for your eyes."
+	icon = 'icons/effects/lens_flare.dmi'
+	icon_state = "party_strobe"
+	simulated = 0
+	anchored = 1
+	pixel_x = -30
+	pixel_y = -4
+
+/obj/effect/party_light/Initialize()
+	update_icon()
+	. = ..()
+
 //This is used to unlock other borg covers.
 /obj/item/weapon/card/robot //This is not a child of id cards, as to avoid dumb typechecks on computers.
 	name = "access code transmission device"

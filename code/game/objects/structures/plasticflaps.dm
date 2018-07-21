@@ -8,6 +8,9 @@
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
+
+	obj_flags = OBJ_FLAG_ANCHORABLE
+
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
 		/mob/living/carbon/slime,
@@ -37,6 +40,14 @@
 
 	return ..()
 
+/obj/structure/plasticflaps/attackby(obj/item/W, mob/user)
+	if(isScrewdriver(W) && !anchored)
+		user.visible_message("<span class='notice'>\The [user] begins deconstructing \the [src].</span>", "<span class='notice'>You start deconstructing \the [src].</span>")
+		if(user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))
+			user.visible_message("<span class='warning'>\The [user] deconstructs \the [src].</span>", "<span class='warning'>You deconstruct \the [src].</span>")
+			qdel(src)
+	else ..()
+
 /obj/structure/plasticflaps/ex_act(severity)
 	switch(severity)
 		if (1)
@@ -53,14 +64,27 @@
 	desc = "Heavy duty, airtight, plastic flaps."
 
 /obj/structure/plasticflaps/mining/Initialize() //set the turf below the flaps to block air
+	become_airtight()
+	. = ..()
+
+/obj/structure/plasticflaps/mining/wrench_floor_bolts(user)
+	..()
+	if(!anchored)
+		clear_airtight()
+	else
+		become_airtight()
+
+/obj/structure/plasticflaps/mining/Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
+	clear_airtight()
+	. = ..()
+
+/obj/structure/plasticflaps/mining/proc/become_airtight()
 	var/turf/T = get_turf(loc)
 	if(T)
 		T.blocks_air = 1
-	. = ..()
 
-/obj/structure/plasticflaps/mining/Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
+/obj/structure/plasticflaps/mining/proc/clear_airtight()
 	var/turf/T = get_turf(loc)
 	if(T)
 		if(istype(T, /turf/simulated/floor))
 			T.blocks_air = 0
-	. = ..()

@@ -9596,7 +9596,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/mining{
-	id_tag = null;
+	id_tag = "hangarexit";
 	name = "Hangar Bay";
 	req_access = list(73)
 	},
@@ -10559,6 +10559,12 @@
 	dir = 1
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/button/remote/airlock{
+	id = "hangarexit";
+	name = "Hangar Door Control";
+	pixel_x = -24;
+	pixel_y = -23
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "uF" = (
@@ -11194,7 +11200,6 @@
 	id_tag = null;
 	name = "Supply Office";
 	req_access = list(31);
-	req_one_access = newlist()
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -11307,12 +11312,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
 "wb" = (
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -32;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/valve/shutoff,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -11971,6 +11970,7 @@
 /area/quartermaster/office)
 "xe" = (
 /obj/item/modular_computer/console/preset/supply{
+	dir = 2;
 	pixel_y = 0
 	},
 /obj/machinery/pager/cargo{
@@ -12815,10 +12815,6 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/hallway/primary/fourthdeck/aft)
-"yG" = (
-/obj/machinery/status_display/supply_display,
-/turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
 "yH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -14149,7 +14145,6 @@
 	id_tag = null;
 	name = "Supply Office";
 	req_access = list(31);
-	req_one_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14244,7 +14239,6 @@
 	pixel_x = -6;
 	pixel_y = -24;
 	req_access = list(31);
-	req_one_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -15186,7 +15180,6 @@
 	pixel_x = -6;
 	pixel_y = 24;
 	req_access = list(31);
-	req_one_access = newlist()
 	},
 /obj/machinery/light_switch{
 	pixel_x = 6;
@@ -15981,7 +15974,6 @@
 	id_tag = null;
 	name = "Warehouse";
 	req_access = list(31);
-	req_one_access = newlist()
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16029,7 +16021,6 @@
 	pixel_x = 24;
 	pixel_y = -6;
 	req_access = list(31);
-	req_one_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/monotile,
@@ -16712,8 +16703,7 @@
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(12);
-	req_one_access = list(31)
+	req_access = list(12,31);
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -18806,12 +18796,25 @@
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
+"MO" = (
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
 "MR" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/center)
 "MS" = (
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
+"Nc" = (
+/obj/machinery/status_display/supply_display,
+/turf/simulated/wall/prepainted,
+/area/quartermaster/exploration)
 "Nd" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -40000,13 +40003,13 @@ hw
 cq
 hw
 hw
-cq
+Nc
 rE
 sY
 uD
 wa
 wa
-yG
+wa
 wa
 wa
 Cr
@@ -40208,7 +40211,7 @@ sZ
 uE
 wb
 xj
-kD
+MO
 Aa
 Uk
 kD

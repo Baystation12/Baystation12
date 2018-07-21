@@ -14,7 +14,6 @@ var/list/organ_cache = list()
 	// Status tracking.
 	var/status = 0                    // Various status flags (such as robotic)
 	var/vital                         // Lose a vital limb, die immediately.
-	var/robotic = 0
 
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
@@ -109,7 +108,7 @@ var/list/organ_cache = list()
 	if(is_preserved())
 		return
 	//Process infections
-	if ((robotic >= ORGAN_ROBOT) || (owner && owner.species && (owner.species.species_flags & SPECIES_FLAG_IS_PLANT)))
+	if (BP_IS_ROBOTIC(src) || (owner && owner.species && (owner.species.species_flags & SPECIES_FLAG_IS_PLANT)))
 		germ_level = 0
 		return
 
@@ -181,7 +180,7 @@ var/list/organ_cache = list()
 	// immunosuppressant that changes transplant data to make it match.
 	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
 		return
-	if(isrobotic())
+	if(BP_IS_ROBOTIC(src))
 		return
 	if(dna)
 		if(!rejecting)
@@ -244,13 +243,10 @@ var/list/organ_cache = list()
 
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
-	robotic = ORGAN_ROBOT
-	status = 0
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	status = 0
-	robotic = ORGAN_ASSISTED
-	min_broken_damage += 5
+	status = ORGAN_ASSISTED
 
 /**
  *  Remove an organ
@@ -269,7 +265,7 @@ var/list/organ_cache = list()
 
 	START_PROCESSING(SSobj, src)
 	rejecting = null
-	if(robotic < ORGAN_ROBOT)
+	if(!BP_IS_ROBOTIC(src))
 		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror
 		if(!organ_blood || !organ_blood.data["blood_DNA"])
 			owner.vessel.trans_to(src, 5, 1, 1)
@@ -285,13 +281,13 @@ var/list/organ_cache = list()
 	owner = target
 	action_button_name = initial(action_button_name)
 	forceMove(owner) //just in case
-	if(isrobotic())
+	if(BP_IS_ROBOTIC(src))
 		set_dna(owner.dna)
 	return 1
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 
-	if(robotic >= ORGAN_ROBOT || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(status & ORGAN_ROBOTIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
@@ -314,7 +310,7 @@ var/list/organ_cache = list()
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return (robotic < ORGAN_ROBOT && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
+	return (!BP_IS_ROBOTIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
@@ -324,10 +320,11 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/get_scan_results()
 	. = list()
-	if(robotic == ORGAN_ASSISTED)
+	if(BP_IS_ASSISTED(src))
 		. += "Assisted"
-	else if(robotic == ORGAN_ROBOT)
+	else if(BP_IS_ROBOTIC(src))
 		. += "Mechanical"
+
 	if(status & ORGAN_CUT_AWAY)
 		. += "Severed"
 	if(status & ORGAN_MUTATED)
@@ -354,9 +351,6 @@ var/list/organ_cache = list()
 			. +=  "Septic"
 	if(rejecting)
 		. += "Genetic Rejection"
-
-/obj/item/organ/proc/isrobotic()
-	return robotic >= ORGAN_ROBOT
 
 //used by stethoscope
 /obj/item/organ/proc/listen()
