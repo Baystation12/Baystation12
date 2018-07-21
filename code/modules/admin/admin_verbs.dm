@@ -71,7 +71,8 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
-	/client/proc/free_slot,			//frees slot for chosen job,
+	/client/proc/free_slot_submap,
+	/client/proc/free_slot_crew,			//frees slot for chosen job,
 	/client/proc/cmd_admin_change_custom_event,
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleghostwriters,
@@ -873,8 +874,32 @@ var/list/admin_verbs_mentor = list(
 		holder.PlayerNotes()
 	return
 
-/client/proc/free_slot()
-	set name = "Free Job Slot"
+/client/proc/free_slot_submap()
+	set name = "Free Job Slot (Submap)"
+	set category = "Admin"
+	if(!holder) return
+
+	var/list/jobs = list()
+	for(var/thing in SSmapping.submaps)
+		var/datum/submap/submap = thing
+		for(var/otherthing in submap.jobs)
+			var/datum/job/submap/job = submap.jobs[otherthing]
+			if(job.current_positions >= job.total_positions && job.total_positions != -1)
+				jobs["[job.title] - [submap.name]"] = job
+
+	if(!LAZYLEN(jobs))
+		to_chat(usr, "There are no fully staffed offsite jobs.")
+		return
+
+	var/job_name = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
+	if(job_name)
+		var/datum/job/submap/job = jobs[job_name]
+		if(istype(job) && job.current_positions >= job.total_positions && job.total_positions != -1)
+			job.total_positions++
+			message_admins("An offsite job slot for [job_name] has been opened by [key_name_admin(usr)]")
+
+/client/proc/free_slot_crew()
+	set name = "Free Job Slot (Crew)"
 	set category = "Admin"
 	if(holder)
 		var/list/jobs = list()
