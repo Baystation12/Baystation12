@@ -108,7 +108,7 @@
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 32
-	allowed = list(/obj/item/clothing/head/bomb_hood/security/colossus, /obj/item/clothing/suit/bomb_suit/security/colossus)
+	can_hold = list(/obj/item/clothing/head/bomb_hood/security/colossus, /obj/item/clothing/suit/bomb_suit/security/colossus)
 	slowdown_general = 0
 
 /obj/item/clothing/suit/justice/zeal
