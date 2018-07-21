@@ -11242,8 +11242,7 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Supply Office";
-	req_access = newlist();
-	req_one_access = list(31,76,77)
+	req_access = list(31)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -12014,6 +12013,7 @@
 /area/quartermaster/office)
 "xe" = (
 /obj/item/modular_computer/console/preset/supply{
+	dir = 2;
 	pixel_y = 0
 	},
 /obj/machinery/pager/cargo{
@@ -14178,8 +14178,7 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Supply Office";
-	req_access = newlist();
-	req_one_access = list(31,76,77)
+	req_access = list(31)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14273,8 +14272,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = -24;
-	req_access = newlist();
-	req_one_access = list(31,76,77)
+	req_access = list(31)
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -15215,8 +15213,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = 24;
-	req_access = newlist();
-	req_one_access = list(31,76,77)
+	req_access = list(31)
 	},
 /obj/machinery/light_switch{
 	pixel_x = 6;
@@ -16010,8 +16007,7 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Warehouse";
-	req_access = newlist();
-	req_one_access = list(31,76,77)
+	req_access = list(31)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16058,8 +16054,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = -6;
-	req_access = newlist();
-	req_one_access = list(31,76,77)
+	req_access = list(31)
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/monotile,
@@ -16074,7 +16069,8 @@
 	name = "Warehouse Door Control";
 	pixel_x = -24;
 	pixel_y = -6;
-	req_one_access = list(31,76,77)
+	req_access = list(31);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/hangar)
@@ -16741,8 +16737,8 @@
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(12);
-	req_one_access = list(31,76,77)
+	req_access = list(12,31);
+	req_one_access = newlist()
 	},
 /obj/structure/cable/green{
 	d1 = 1;
