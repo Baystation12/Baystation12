@@ -118,9 +118,6 @@
 	job_access_type = /datum/job/bartender
 
 
-/obj/item/weapon/card/id/torch/crew/representative
-	job_access_type = /datum/job/representative
-
 /obj/item/weapon/card/id/torch/crew/sea
 	job_access_type = /datum/job/sea
 

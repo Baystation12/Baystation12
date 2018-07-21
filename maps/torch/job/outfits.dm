@@ -139,16 +139,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
-/decl/hierarchy/outfit/job/torch/crew/representative
-	name = OUTFIT_JOB_NAME("SolGov Representative")
-	l_ear = /obj/item/device/radio/headset/headset_com
-	uniform = /obj/item/clothing/under/rank/internalaffairs/plain/solgov
-	suit = /obj/item/clothing/suit/storage/toggle/suit/black
-	shoes = /obj/item/clothing/shoes/laceup
-	id_type = /obj/item/weapon/card/id/torch/crew/representative
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
-	backpack_contents = list(/obj/item/clothing/accessory/badge/solgov/representative = 1)
-
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
