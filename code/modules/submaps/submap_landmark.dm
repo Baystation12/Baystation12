@@ -22,7 +22,7 @@
 		else
 			to_chat(world.log, "Submap error - mapped landmark had invalid archetype.")
 	return INITIALIZE_HINT_QDEL
-machinery
+
 /obj/effect/submap_landmark/spawnpoint
 	icon_state = "x3"
 
