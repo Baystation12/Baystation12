@@ -74,13 +74,6 @@
 	region = ACCESS_REGION_COMMAND
 	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter
 
-/var/const/access_representative = 85
-/datum/access/representative
-	id = access_representative
-	desc = "SolGov Representative"
-	region = ACCESS_REGION_COMMAND
-	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter
-
 /var/const/access_sec_guard = 86
 /datum/access/sec_guard
 	id = access_sec_guard
