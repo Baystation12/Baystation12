@@ -146,8 +146,8 @@
 		return
 
 	if(owner && BP_IS_CRYSTAL(src)) // Crystalline robotics == piezoelectrics.
-		owner.Weaken(5 - severity)
-		owner.confused = max(owner.confused, 10 - (severity * 2))
+		owner.Weaken(4 - severity)
+		owner.confused = max(owner.confused, 6 - (severity * 2))
 		return
 
 	var/burn_damage = 0
@@ -456,7 +456,8 @@ This function completely restores a damaged organ to perfect condition.
 		// damage is handled currently that isn't really possible without an infinite feedback loop.
 		if(type == LASER)
 			owner.bodytemperature += ceil(damage/10)
-			owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
+			if(prob(25))
+				owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
 			return
 		damage = Floor(damage * 0.8)
 		type = SHATTER
