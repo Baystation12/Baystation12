@@ -17,6 +17,7 @@
 	self_recharge = 1
 	use_external_power = 1
 	one_hand_penalty = 0 //just in case
+	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser carbine"
@@ -94,6 +95,7 @@ obj/item/weapon/gun/energy/retro
 	recharge_time = 10
 	accuracy = 0 //mounted laser cannons don't need any help, thanks
 	one_hand_penalty = 0
+	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/xray
 	name = "x-ray laser carbine"
