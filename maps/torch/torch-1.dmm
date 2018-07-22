@@ -17070,7 +17070,7 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock{
-	start_pressure = 911.925
+	start_pressure = 303.975
 	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
