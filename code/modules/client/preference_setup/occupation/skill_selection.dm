@@ -5,7 +5,8 @@
 
 /datum/preferences/proc/get_max_skill(datum/job/job, decl/hierarchy/skill/S)
 	var/min = get_min_skill(job, S)
-	return max(min, job.max_skill[S.type] || SKILL_MAX)
+	var/job_max_skill = job && job.max_skill[S.type]
+	return max(min, job_max_skill || S.default_max || SKILL_MAX)
 
 /datum/preferences/proc/get_min_skill(datum/job/job, decl/hierarchy/skill/S)
 	var/datum/mil_branch/branch = mil_branches.get_branch(char_branch)
