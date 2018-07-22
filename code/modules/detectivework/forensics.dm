@@ -167,3 +167,27 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
 	if(E)
 		return E.get_fingerprint()
+
+
+
+//on examination get hints of evidence
+/mob/examinate(atom/A as mob|obj|turf in view())
+	if(..())
+		return 1 //I'll admit I am just imitating examine.dm
+
+
+	//Detective is on the case
+	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT)
+		if(A.suit_fibers && A.suit_fibers.len > 0)
+			to_chat(src, "<span class='notice'>You notice some fibers embedded to \the [A]</span>")
+		if(A.fingerprints && A.fingerprints.len > 0)
+			to_chat(src, "<span class='notice'>You notice a partial print in \the [A]</span>")
+		var/obj/item/clothing/O = A
+		if(istype(O) && O.gunshot_residue)
+			to_chat(src, "<span class='notice'>You notice a faint acrid smell coming from \the [A]</span>")
+		//Noticing wiped blood is a bit harder
+		if(get_skill_value(SKILL_FORENSICS) >= SKILL_PROF)
+			if(A.blood_DNA)
+				to_chat(src, "<span class='warning'>You notice faint blood traces on \The [A]</span>")
+
+
