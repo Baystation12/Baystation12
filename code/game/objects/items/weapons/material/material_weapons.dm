@@ -49,7 +49,6 @@
 	//spawn(1)
 //		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
 
-
 /obj/item/weapon/material/proc/set_material(var/new_material)
 	material = get_material_by_name(new_material)
 	if(!material)
@@ -73,12 +72,17 @@
 
 /obj/item/weapon/material/apply_hit_effect()
 	. = ..()
-	if(!unbreakable)
-		if(!prob(material.hardness))
-			if(material.is_brittle())
-				health = 0
-			else
-				health--
+	check_shatter()
+
+/obj/item/weapon/material/on_parry()
+	check_shatter()
+
+/obj/item/weapon/material/proc/check_shatter()
+	if(!unbreakable && prob(material.hardness))
+		if(material.is_brittle())
+			health = 0
+		else
+			health--
 		check_health()
 
 /obj/item/weapon/material/proc/check_health(var/consumed)

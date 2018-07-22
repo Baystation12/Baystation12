@@ -26,7 +26,7 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
-	var/wielded_parry_chance = 15
+	var/wielded_parry_bonus = 15
 
 /obj/item/weapon/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
@@ -52,8 +52,10 @@
 	..()
 	update_icon()
 
-/obj/item/weapon/material/twohanded/get_parry_chance()
-	return wielded ? wielded_parry_chance : base_parry_chance
+/obj/item/weapon/material/twohanded/get_parry_chance(mob/user)
+	. = ..()
+	if(wielded) 
+		. += wielded_parry_bonus
 
 /obj/item/weapon/material/twohanded/update_icon()
 	icon_state = "[base_icon][wielded]"
