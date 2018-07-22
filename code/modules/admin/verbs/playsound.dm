@@ -13,8 +13,7 @@ var/list/sounds_cache = list()
 	if(alert("Do you ready?\nSong: [S]\nNow you can also play this sound using \"Play Server Sound\".", "Confirmation request" ,"Play", "Cancel") == "Cancel")
 		return
 
-	log_admin("[key_name(src)] played sound [S]")
-	message_admins("[key_name_admin(src)] played sound [S]", 1)
+	log_admin("[key_name(src)] played sound [S]", notify_admin = TRUE)
 	for(var/mob/M in GLOB.player_list)
 		if(M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
 			sound_to(M, uploaded_sound)
@@ -26,8 +25,7 @@ var/list/sounds_cache = list()
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUNDS))	return
 
-	log_admin("[key_name(src)] played a local sound [S]")
-	message_admins("[key_name_admin(src)] played a local sound [S]", 1)
+	log_admin("[key_name(src)] played a local sound [S]", location = src.mob, notify_admin = TRUE)
 	playsound(get_turf(src.mob), S, 50, 0, 0)
 	feedback_add_details("admin_verb","PLS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

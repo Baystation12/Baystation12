@@ -133,8 +133,7 @@ var/global/Holiday = null
 	world.update_status()
 	Holiday_Game_Start()
 
-	message_admins("<span class='notice'>ADMIN: Event: [key_name(src)] force-set Holiday to \"[Holiday]\"</span>")
-	log_admin("[key_name(src)] force-set Holiday to \"[Holiday]\"")
+	log_admin("[key_name(src)] force-set Holiday to \"[Holiday]\"", notify_admin = TRUE)
 
 
 //Run at the  start of a round

@@ -35,8 +35,7 @@ var/can_call_ert
 		to_chat(usr, "<span class='danger'>Looks like somebody beat you to it!</span>")
 		return
 
-	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
-	log_admin("[key_name(usr)] used Dispatch Response Team.")
+	log_admin("[key_name(usr)] used Dispatch Response Team.", notify_admin = TRUE)
 	trigger_armed_response_team(1)
 
 client/verb/JoinResponseTeam()

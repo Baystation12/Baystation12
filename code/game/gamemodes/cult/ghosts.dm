@@ -104,7 +104,7 @@
 		else
 			W.visible_message("<span class='warning'>Blood appears out of nowhere as invisible fingers crudely paint something on \the [T].</span>")
 
-		log_admin("[src] ([src.key]) used ghost magic to write '[message]' - [x]-[y]-[z]")
+		log_admin("[src] ([src.key]) used ghost magic to write '[message]'", src)
 
 	ghost_magic_cd = world.time + 30 SECONDS
 

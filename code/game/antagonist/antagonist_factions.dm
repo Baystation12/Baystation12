@@ -30,8 +30,7 @@
 		return
 
 	to_chat(src, "<span class='danger'>You are attempting to convert \the [player.current]...</span>")
-	log_admin("[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.")
-	message_admins("<span class='danger'>[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.</span>")
+	log_admin("[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.", notify_admin = TRUE)
 
 	player.rev_cooldown = world.time+100
 	var/choice = alert(player.current,"Asked by [src]: Do you want to join the [faction.faction_descriptor]?","Join the [faction.faction_descriptor]?","No!","Yes!")

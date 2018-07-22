@@ -33,83 +33,75 @@
 /proc/testing(msg)
 	to_world_log("## TESTING: [msg][log_end]")
 
-/proc/game_log(category, text)
-	diary << "\[[time_stamp()]\] [game_id] [category]: [text][log_end]"
+/proc/log_generic(var/type, var/message, var/location, var/log_to_diary = TRUE, var/notify_admin = FALSE)//, var/req_toggles = 0)
+	var/turf/T = get_turf(location)
+	if(location && T)
+		if(log_to_diary)
+			diary << "\[[time_stamp()]] [game_id] [type]: [message] ([T.x],[T.y],[T.z])[log_end]"
+		if(notify_admin)
+			message += " (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)"
+	else if(log_to_diary)
+		diary << "\[[time_stamp()]] [game_id] [type]: [message][log_end]"
 
-/proc/log_admin(text)
-	GLOB.admin_log.Add(text)
-	if (config.log_admin)
-		game_log("ADMIN", text)
+	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">[type] LOG:</span> <span class=\"message\">[message]</span></span>"
+	if(notify_admin)
+		for(var/client/C in GLOB.admins)
+			//if(!req_toggles || (C.prefs.chat_toggles & req_toggles))
+			C << rendered
 
-/proc/log_debug(text)
-	if (config.log_debug)
-		game_log("DEBUG", text)
-	to_debug_listeners(text)
+/proc/log_admin(text, location, notify_admin)
+	log_generic("ADMIN", text, location, config.log_admin, notify_admin)
 
-/proc/log_error(text)
-	error(text)
-	to_debug_listeners(text, "ERROR")
+/proc/log_debug(text, location)
+	log_generic("DEBUG", text, location, config.log_debug, TRUE)//, CHAT_DEBUGLOGS)
+	//to_debug_listeners(text)
 
-/proc/log_warning(text)
-	warning(text)
-	to_debug_listeners(text, "WARNING")
-
-/proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in GLOB.admins)
-		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
-			to_chat(C, "[prefix]: [text]")
-
-/proc/log_game(text)
-	if (config.log_game)
-		game_log("GAME", text)
+/proc/log_game(text, location, notify_admin)
+	log_generic("GAME", text, location, config.log_game, notify_admin)
 
 /proc/log_vote(text)
-	if (config.log_vote)
-		game_log("VOTE", text)
+	log_generic("VOTE", text, null, config.log_vote)
 
-/proc/log_access(text)
-	if (config.log_access)
-		game_log("ACCESS", text)
+/proc/log_access(text, notify_admin)
+	log_generic("ACCESS", text, null, config.log_vote, notify_admin)
 
 /proc/log_say(text)
-	if (config.log_say)
-		game_log("SAY", text)
+	log_generic("SAY", text, null, config.log_say)
 
 /proc/log_ooc(text)
-	if (config.log_ooc)
-		game_log("OOC", text)
+	log_generic("OOC", text, null, config.log_ooc)
 
 /proc/log_whisper(text)
-	if (config.log_whisper)
-		game_log("WHISPER", text)
+	log_generic("WHISPER", text, null, config.log_whisper)
 
 /proc/log_emote(text)
-	if (config.log_emote)
-		game_log("EMOTE", text)
+	log_generic("EMOTE", text, null, config.log_emote)
 
-/proc/log_attack(text)
-	if (config.log_attack)
-		game_log("ATTACK", text)
+/proc/log_attack(text, location, notify_admin)
+	log_generic("ATTACK", text, location, config.log_attack, notify_admin)//, CHAT_ATTACKLOGS)
 
 /proc/log_adminsay(text)
-	if (config.log_adminchat)
-		game_log("ADMINSAY", text)
+	log_generic("ADMINSAY", text, null, config.log_adminchat)
 
-/proc/log_adminwarn(text)
-	if (config.log_adminwarn)
-		game_log("ADMINWARN", text)
+/proc/log_adminwarn(text, location, notify_admin)
+	log_generic("ADMINWARN", text, location, config.log_adminwarn, notify_admin)
 
 /proc/log_pda(text)
-	if (config.log_pda)
-		game_log("PDA", text)
+	log_generic("PDA", text, null, config.log_pda)
+
+/proc/log_misc(text) //Replace with log_game ?
+	log_generic("MISC", text)
+
+/proc/log_DB(text, notify_admin)
+	log_generic("DATABASE", text, notify_admin = notify_admin)
+
+/proc/game_log(category, text)
+	diary << "\[[time_stamp()]\] [game_id] [category]: [text][log_end]"
 
 /proc/log_to_dd(text)
 	to_world_log(text) //this comes before the config check because it can't possibly runtime
 	if(config.log_world_output)
 		game_log("DD_OUTPUT", text)
-
-/proc/log_misc(text)
-	game_log("MISC", text)
 
 /proc/log_unit_test(text)
 	to_world_log("## UNIT_TEST ##: [text]")
@@ -125,6 +117,19 @@
 		to_world_log(text)
 	to_world_log(null)
 	to_world_log(text)
+
+/proc/log_error(text)
+	error(text)
+	to_debug_listeners(text, "ERROR")
+
+/proc/log_warning(text)
+	warning(text)
+	to_debug_listeners(text, "WARNING")
+
+/proc/to_debug_listeners(text, prefix = "DEBUG")
+	for(var/client/C in GLOB.admins)
+		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
+			to_chat(C, "[prefix]: [text]")
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)
