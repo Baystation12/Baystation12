@@ -223,19 +223,15 @@
 				to_chat(user, "<span class='notice'>That [MED] won't help \the [src] at all!</span>")
 				return
 			if(health < maxHealth)
-				if(MED.amount >= 1)
+				if(MED.can_use(1))
 					adjustBruteLoss(-MED.animal_heal)
-					MED.amount -= 1
-					if(MED.amount <= 0)
-						qdel(MED)
-					for(var/mob/M in viewers(src, null))
-						if ((M.client && !( M.blinded )))
-							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
+					visible_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
+					MED.use(1)
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
 		return
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
+		if(O.edge)
 			harvest(user)
 	else
 		if(!O.force)
