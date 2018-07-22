@@ -5,7 +5,7 @@
 	crew_data["pulse_span"] = "neutral"
 	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
 		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
-		if (!O || O.robotic < ORGAN_ROBOT) // Don't make medical freak out over prosthetic hearts
+		if (!O || !BP_IS_ROBOTIC(O)) // Don't make medical freak out over prosthetic hearts
 			crew_data["true_pulse"] = H.pulse()
 			crew_data["pulse"] = H.get_pulse(1)
 			switch(crew_data["true_pulse"])
