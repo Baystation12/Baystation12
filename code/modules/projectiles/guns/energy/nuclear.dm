@@ -35,6 +35,7 @@
 	name = "mounted energy gun"
 	self_recharge = 1
 	use_external_power = 1
+	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
