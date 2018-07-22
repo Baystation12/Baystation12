@@ -1067,6 +1067,7 @@
 #include "code\modules\admin\species_ingame_whitelist.dm"
 #include "code\modules\admin\ticket.dm"
 #include "code\modules\admin\topic.dm"
+#include "code\modules\admin\watchlist.dm"
 #include "code\modules\admin\buildmode\advance.dm"
 #include "code\modules\admin\buildmode\basic.dm"
 #include "code\modules\admin\buildmode\build_mode.dm"

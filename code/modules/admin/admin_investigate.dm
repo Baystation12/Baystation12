@@ -26,7 +26,7 @@
 	to_chat(F, "<small>[time_stamp()] \ref[src] ([x],[y],[z])</small> || [src] [message]<br>")
 
 //ADMINVERBS
-/client/proc/investigate_show( subject in list("hrefs","notes","singulo","telesci") )
+/client/proc/investigate_show( subject in list("hrefs","notes","watchlist","singulo","telesci") )
 	set name = "Investigate"
 	set category = "Admin"
 	if(!holder)	return
@@ -48,3 +48,5 @@
 			else
 				to_chat(src, "<span class='warning'>Error: admin_investigate: Href Logging is not on.</span>")
 				return
+		if("watchlist")
+			watchlist_show()
