@@ -52,19 +52,20 @@
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/accessory/ntaward
-	display_name = "NanoTrasen award selection"
-	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
+/datum/gear/accessory/corpaward
+	display_name = "corporate award selection"
+	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
 
-/datum/gear/accessory/ntaward/New()
+/datum/gear/accessory/corpaward/New()
 	..()
-	var/ntawards = list()
-	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	ntawards["nanotrasen service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
-	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
-	gear_tweaks += new/datum/gear_tweak/path(ntawards)
+	var/corpawards = list()
+	corpawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/corporate
+	corpawards["service medal"] = /obj/item/clothing/accessory/medal/silver/corporate
+	corpawards["command medal"] = /obj/item/clothing/accessory/medal/gold/corporate
+	corpawards["merit medal"] = /obj/item/clothing/accessory/medal/iron/corporate
+	gear_tweaks += new/datum/gear_tweak/path(corpawards)
 
 //have to break up armbands to restrict access
 /datum/gear/accessory/armband_security

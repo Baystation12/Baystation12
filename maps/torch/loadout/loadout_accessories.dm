@@ -3,7 +3,8 @@
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory
 	cost = 8
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/representative, /datum/job/pathfinder, /datum/job/explorer, /datum/job/engineer_trainee, /datum/job/medical_trainee, /datum/job/psychiatrist)
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -23,7 +24,9 @@
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
 	path = /obj/item/clothing/accessory
 	cost = 5
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/representative, /datum/job/pathfinder, /datum/job/explorer, /datum/job/engineer_trainee, /datum/job/medical_trainee, /datum/job/psychiatrist)
+
 
 /datum/gear/accessory/solawardminor/New()
 	..()
@@ -61,7 +64,7 @@
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
 	path = /obj/item/clothing/accessory/armband/bluegold
-	allowed_roles = SOLGOV_ROLES
+	allowed_branches = list(/datum/mil_branch/fleet)
 
 /datum/gear/accessory/armband_security
 	allowed_roles = SECURITY_ROLES
@@ -89,8 +92,8 @@
 /datum/gear/accessory/armband_nt
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/accessory/ntaward
-	allowed_roles = NANOTRASEN_ROLES
+/datum/gear/accessory/corpaward
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/tie
 	allowed_branches = CIVILIAN_BRANCHES
