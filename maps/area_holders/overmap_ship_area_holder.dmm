@@ -1,20 +1,46 @@
 "a" = (/turf/space,/area/space)
-"b" = (/turf/space,/area/om_ships/NiflheimXBlock)
-"c" = (/turf/space,/area/om_ships/NiflheimDBlock)
-"d" = (/turf/space,/area/om_ships/NiflheimCommand)
-"e" = (/turf/space,/area/om_ships/unscpatrol)
-"f" = (/turf/space,/area/om_ships/star)
-"g" = (/turf/space,/area/om_ships/caelum)
-"h" = (/turf/space,/area/om_ships/NiflheimCBlock)
-"i" = (/turf/space,/area/om_ships/unscpatrol/portbattery)
-"j" = (/turf/space,/area/om_ships/hauler)
-"k" = (/turf/space,/area/om_ships/comet)
-"l" = (/turf/space,/area/om_ships/Niflheim)
-"m" = (/turf/space,/area/om_ships/Elivagar)
-"n" = (/turf/space,/area/om_ships/unscpatrol/starboardbattery)
-"u" = (/turf/space,/area/om_ships/comet/cometrockets)
-"y" = (/turf/space,/area/om_ships/unscpatrol/portrockets)
-"X" = (/turf/space,/area/om_ships/unscpatrol/starboardrockets)
+"b" = (/turf/space,/area/om_ships/unscpatrol/storageroom)
+"c" = (/turf/space,/area/om_ships/unscpatrol/starboardsoeiv)
+"d" = (/turf/space,/area/om_ships/unscpatrol/starboardrockets)
+"e" = (/turf/space,/area/om_ships/unscpatrol/starboardengine)
+"f" = (/turf/space,/area/om_ships/unscpatrol/starboardcrew)
+"g" = (/turf/space,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"h" = (/turf/space,/area/om_ships/unscpatrol/odstsection)
+"i" = (/turf/space,/area/om_ships/unscpatrol/oxystorage)
+"j" = (/turf/space,/area/om_ships/unscpatrol/portbattery)
+"k" = (/turf/space,/area/om_ships/unscpatrol/portbatterycontrol)
+"l" = (/turf/space,/area/om_ships/unscpatrol/portcrew)
+"m" = (/turf/space,/area/om_ships/unscpatrol/portengine)
+"n" = (/turf/space,/area/om_ships/unscpatrol/portrockets)
+"o" = (/turf/space,/area/om_ships/unscpatrol/powercore)
+"p" = (/turf/space,/area/om_ships/unscpatrol/starboardbattery)
+"q" = (/turf/space,/area/om_ships/unscpatrol/medicalbay)
+"r" = (/turf/space,/area/om_ships/unscpatrol/janitorial)
+"s" = (/turf/space,/area/om_ships/unscpatrol/fuelstorage)
+"t" = (/turf/space,/area/om_ships/unscpatrol/cryodorm)
+"u" = (/turf/space,/area/om_ships/unscpatrol/crewbathroom)
+"v" = (/turf/space,/area/om_ships/unscpatrol/cells)
+"w" = (/turf/space,/area/om_ships/unscpatrol/captainroom)
+"x" = (/turf/space,/area/om_ships/unscpatrol/Starboardhallway)
+"y" = (/turf/space,/area/om_ships/unscpatrol/Portsoeiv)
+"z" = (/turf/space,/area/om_ships/comet)
+"A" = (/turf/space,/area/om_ships/comet/cometrockets)
+"B" = (/turf/space,/area/om_ships/unscpatrol)
+"C" = (/turf/space,/area/om_ships/unscpatrol/Armory)
+"D" = (/turf/space,/area/om_ships/unscpatrol/Bridge)
+"E" = (/turf/space,/area/om_ships/unscpatrol/Centralhallway)
+"F" = (/turf/space,/area/om_ships/unscpatrol/Hangarbay)
+"G" = (/turf/space,/area/om_ships/unscpatrol/Messhall)
+"H" = (/turf/space,/area/om_ships/unscpatrol/Porthallway)
+"I" = (/turf/space,/area/om_ships/Elivagar)
+"J" = (/turf/space,/area/om_ships/Niflheim)
+"K" = (/turf/space,/area/om_ships/NiflheimCBlock)
+"L" = (/turf/space,/area/om_ships/NiflheimCommand)
+"M" = (/turf/space,/area/om_ships/NiflheimDBlock)
+"N" = (/turf/space,/area/om_ships/NiflheimXBlock)
+"O" = (/turf/space,/area/om_ships/caelum)
+"P" = (/turf/space,/area/om_ships/hauler)
+"Q" = (/turf/space,/area/om_ships/star)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -267,10 +293,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-uaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bcdeXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-fghiyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-jklmnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabcdefgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+hijklmnopaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+qrstuvwxyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+zABCDEFGHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+IJKLMNOPQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

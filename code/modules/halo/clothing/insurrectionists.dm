@@ -61,7 +61,7 @@
 
 /obj/item/clothing/suit/bomb_suit/security/colossus
 	name = "Colossus Armor"
-	desc = "When desperation reaches a breaking point humans will create things which are far scarier then they are practical. The collossus armor is a perfect example of this, with multiple layers of heavy impact plating armor fitted all across the exterior of the body suit, inside this, the wearer becomes a walking tank provided they are wielding enough firepower to emulate such a vehicle. Even without a hand held rocket launcher any foe will be hard pressed to pierce through the robust alloys protecting its user. Though, don't expect to be able to get around the battle field with any kind of speed, the key word of being a walking tank is 'walking'."
+	desc = "When desperation reaches a breaking point humans will create things which are far scarier then they are practical. The collossus armor is a perfect example of this, with multiple layers of heavy impact plating fitted all across the exterior of the body suit, inside this, the wearer becomes a walking tank provided they are wielding enough firepower to emulate such a vehicle. Even without a hand held rocket launcher any foe will be hard pressed to pierce through the robust alloys protecting its user. Though, don't expect to be able to get around the battle field with any kind of speed, the key word of being a walking tank is 'walking'."
 	icon_state = "bombsuitsec"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	item_flags = THICKMATERIAL
@@ -87,13 +87,13 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	slowdown_general = 1
-	siemens_coefficient = 0.7
+	siemens_coefficient = 1.5
 	armor_thickness = 60
 	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 80, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
-	brightness_on = 5
+	brightness_on = 4
 	on = 0
 
 /obj/item/weapon/storage/briefcase/colossuscase
@@ -113,16 +113,18 @@
 
 /obj/item/clothing/suit/justice/zeal
 	name = "Zeal Scout Suit"
-	desc = "The Zeal suit was initially designed by URF research efforts to create a scout suit which their forces could utilize on a large scale across multiple systems. Geminus Colony scientists were contracted for the project so that suspicion wouldn't be drawn to the scattered URF bases near Sol due to technological requirements of the initial design. When it was finished the URF had on their hands an advanced uniform which also provided moderate defense for the wearer. The armor is carefully constructed with nano-kinetic motors built into the joints between the small segments of armor which provide enhanced speed by continuously storing and releasing kinetic energy from the users natural movements. Though it is a powerful addition to the URF's compliment of existing equipment the rare minerals required to power and store this kind of energy meant that the URF was only initially capable of small scale production. In the end only the largest URF bases ended up recieving any number of these suits to help in their efforts of liberation. Because of its light weight the suit has no storage capacity to speak of, only being capable of holding a single weapon on its magnetic harness. Due to the nature of the armor's abilities excess weight taken on by the user can lead to overtaxing the motors and a loss of speed very quickly."
-	w_class = ITEM_SIZE_NORMAL
+	desc = "The Zeal suit was initially designed by URF research efforts to create a scout suit which their forces could utilize on a large scale across multiple systems. Geminus Colony scientists were contracted for the project so that suspicion wouldn't be drawn to the scattered URF bases near Sol due to technological requirements of the initial design. When it was finished the URF had on their hands an advanced uniform which also provided moderate defense for the wearer. The armor is carefully constructed with nano-kinetic motors built into the joints between the small segments of armor provide enhanced speed by continuously storing and releasing kinetic energy from the users natural movements. Though it is a powerful addition to the URF's compliment of existing equipment the rare minerals required to power and store this kind of energy meant that the URF was only initially capable of small scale production. In the end only the largest URF bases ended up recieving any number of these suits to help in their efforts of liberation. Because of its light weight the suit has no storage capacity to speak of, only being capable of holding a single weapon on its magnetic harness. Due to the nature of the armor's abilities excess weight taken on by the user can lead to overtaxing the motors and a loss of speed very quickly."
+	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 	flags_inv = 29|HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/gun)
-	slowdown_general = -2
+	slowdown_general = 1
+	armor_thickness = 10 //Should be able to take 5-6 bullets before shattering.
+	siemens_coefficient = 1.5
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 
 /obj/item/clothing/suit/justice/zeal/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 1
+	slowdown_per_slot[slot_wear_suit] = -2
 
 #undef INNIE_OVERRIDE
