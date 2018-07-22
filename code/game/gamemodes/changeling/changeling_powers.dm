@@ -70,7 +70,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/lesser_form = !ishuman(src)
 
 	var/mob/living/carbon/Z = src
-	if(ishuman(Z))
+	if(istype(Z))
 		var/obj/item/organ/internal/brain/B = Z.internal_organs_by_name[BP_BRAIN]
 		var/obj/item/organ/internal/biostructure/Bio = Z.internal_organs_by_name[BP_CHANG]
 		if(B)
@@ -324,12 +324,16 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/newSpecies = chosen_dna.speciesName
-		var/obj/item/organ/internal/brain/B = H.internal_organs_by_name[BP_BRAIN]
 		H.set_species(newSpecies,1)
 		H.b_type = chosen_dna.dna.b_type
 		H.sync_organ_dna()
+		var/obj/item/organ/internal/brain/B = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/biostructure/Bio = H.internal_organs_by_name[BP_CHANG]
 		if(B)
 			B.vital = 0
+		if(!Bio)
+			var/new_organ = /obj/item/organ/internal/biostructure
+			new new_organ(H)
 
 	domutcheck(src, null)
 	src.UpdateAppearance()
@@ -358,7 +362,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.geneticdamage = 30
 	to_chat(H, "<span class='warning'>Our genes cry out!</span>")
 	H = H.monkeyize()
-	if(ishuman(H))
+	if(istype(H))
 		var/obj/item/organ/internal/brain/B = H.internal_organs_by_name[BP_BRAIN]
 		var/obj/item/organ/internal/biostructure/Bio = H.internal_organs_by_name[BP_CHANG]
 		if(B)
