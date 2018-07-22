@@ -3,7 +3,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 /datum/antagonist/renegade
 	role_text = "Renegade"
 	role_text_plural = "Renegades"
-	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/captain)
+	restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/captain)
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
 	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
 		try to protect yourself and what's important to you. You aren't here to <i>cause</i> trouble, \
