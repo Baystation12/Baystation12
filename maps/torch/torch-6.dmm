@@ -17006,6 +17006,9 @@
 "aMD" = (
 /obj/structure/table/woodentable,
 /obj/random/plushie,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
 "aME" = (
@@ -17158,6 +17161,9 @@
 "aMY" = (
 /obj/structure/table/woodentable,
 /obj/random/action_figure,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
 "aMZ" = (
@@ -17170,9 +17176,15 @@
 	spawn_object = /obj/item/weapon/flame/lighter
 	},
 /obj/random/toy,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNa" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNb" = (
@@ -17362,16 +17374,20 @@
 	req_access = list(201)
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aNv" = (
 /obj/item/weapon/storage/secure/safe{
 	pixel_x = -25
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNw" = (
 /obj/structure/undies_wardrobe,
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNx" = (
@@ -17547,10 +17563,19 @@
 	req_access = list(201)
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aNY" = (
 /obj/structure/flora/pottedplant/minitree,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNZ" = (
@@ -17567,6 +17592,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aOa" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /mob/living/simple_animal/tindalos{
 	name = "Eddy"
 	},
@@ -17846,6 +17872,7 @@
 "aOE" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/glasses/pint,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aOF" = (
@@ -17868,6 +17895,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aOH" = (
@@ -18076,6 +18104,8 @@
 	icon_state = "tube1";
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aPl" = (
@@ -18110,6 +18140,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aPq" = (
@@ -18459,12 +18490,11 @@
 "aQe" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aQf" = (
@@ -18509,6 +18539,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQj" = (
@@ -18517,6 +18548,7 @@
 	icon_state = "pipe-j2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQk" = (
@@ -18764,10 +18796,8 @@
 /area/merchant_station)
 "aQL" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQM" = (
@@ -18801,6 +18831,8 @@
 	req_access = list(201)
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
 "aQQ" = (
@@ -19029,16 +19061,6 @@
 /obj/structure/sign/warning/docking_area,
 /turf/simulated/wall/prepainted,
 /area/merchant_station)
-"aRo" = (
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
-/area/merchant_station)
 "aRp" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -19188,14 +19210,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRH" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -21003,7 +21026,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/vending/engivend{
-	req_access = list(201)
+	req_access = list(201);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/plating,
 /area/merchant_station)
@@ -22708,6 +22732,17 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
+"bXq" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled,
+/area/merchant_station)
+"cmF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/carpet,
+/area/merchant_station)
 "cqu" = (
 /obj/structure/holostool,
 /obj/effect/floor_decal/beach{
@@ -22716,6 +22751,15 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
+"cIc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/carpet/blue,
+/area/merchant_station)
 "cMP" = (
 /obj/structure/flora/ausbushes/genericbush,
 /obj/effect/floor_decal/spline/plain/grey{
@@ -22823,6 +22867,14 @@
 	},
 /turf/simulated/floor/airless,
 /area/syndicate_station/start)
+"fcv" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/beach{
+	icon_state = "beachborder";
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/source_volleyball)
 "fuX" = (
 /obj/structure/table/reinforced,
 /turf/unsimulated/floor{
@@ -22836,14 +22888,6 @@
 	icon_state = "dark"
 	},
 /area/rescue_base/base)
-"fcv" = (
-/obj/structure/holostool,
-/obj/effect/floor_decal/beach{
-	icon_state = "beachborder";
-	dir = 8
-	},
-/turf/simulated/floor/holofloor/concrete,
-/area/holodeck/source_volleyball)
 "fxB" = (
 /obj/structure/bed/chair/wood{
 	dir = 4;
@@ -22878,13 +22922,6 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
-"hMS" = (
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "glo" = (
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
@@ -22898,6 +22935,22 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"heI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/merchant_station)
+"hMS" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "isk" = (
 /obj/effect/floor_decal/snow,
 /obj/structure/aliumizer,
@@ -23071,6 +23124,15 @@
 	dir = 6
 	},
 /area/syndicate_station/start)
+"ljJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/wood,
+/area/merchant_station)
 "lES" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -23081,27 +23143,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/syndicate_station/start)
-"lSB" = (
-/obj/structure/table/reinforced,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
-	},
-/area/rescue_base/base)
-"mgq" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"mEw" = (
-/obj/structure/table/reinforced,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/pen,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/rescue_base/base)
 "lRq" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -23111,6 +23152,13 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"lSB" = (
+/obj/structure/table/reinforced,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/rescue_base/base)
 "lSD" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -23121,6 +23169,12 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"mgq" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "mlL" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/weapon/flame/candle{
@@ -23128,6 +23182,14 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"mEw" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/paper_bin,
+/obj/item/weapon/pen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/rescue_base/base)
 "mRm" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert1"
@@ -23174,12 +23236,58 @@
 /obj/structure/table/holo_woodentable,
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"nzu" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/merchant_station)
+"nSm" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/merchant_station)
 "nUi" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
+"occ" = (
+/obj/effect/floor_decal/spline/plain{
+	icon_state = "spline_plain";
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/source_volleyball)
+"olJ" = (
+/obj/effect/floor_decal/beach{
+	icon_state = "beachborder";
+	dir = 4
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/source_volleyball)
+"oql" = (
+/obj/structure/bed/chair/wood{
+	dir = 1;
+	holographic = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_cafe)
+"ovj" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/wood,
+/area/merchant_station)
 "owz" = (
 /obj/structure/closet{
 	icon_closed = "syndicate1";
@@ -23219,31 +23327,6 @@
 	dir = 1
 	},
 /area/rescue_base/base)
-"occ" = (
-/obj/effect/floor_decal/spline/plain{
-	icon_state = "spline_plain";
-	dir = 6
-	},
-/turf/simulated/floor/holofloor/beach/sand,
-/area/holodeck/source_volleyball)
-"olJ" = (
-/obj/effect/floor_decal/beach{
-	icon_state = "beachborder";
-	dir = 4
-	},
-/obj/structure/holostool,
-/turf/simulated/floor/holofloor/concrete,
-/area/holodeck/source_volleyball)
-"oql" = (
-/obj/structure/bed/chair/wood{
-	dir = 1;
-	holographic = 1
-	},
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
-/turf/simulated/floor/holofloor/carpet,
-/area/holodeck/source_cafe)
 "piR" = (
 /obj/structure/flora/pottedplant{
 	icon_state = "plant-22"
@@ -23264,6 +23347,13 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership)
+"pMs" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/merchant_station)
 "pWv" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/weapon/reagent_containers/glass/rag{
@@ -23285,6 +23375,12 @@
 	},
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
+"qvJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/merchant_station)
 "qRm" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert3"
@@ -23395,6 +23491,11 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"sTp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/merchant_station)
 "sWJ" = (
 /obj/effect/floor_decal/beach{
 	icon_state = "beachborder";
@@ -23419,6 +23520,21 @@
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
+"twU" = (
+/obj/effect/floor_decal/beach{
+	icon_state = "beachborder";
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/source_volleyball)
+"tQu" = (
+/obj/structure/flora/ausbushes/brflowers,
+/obj/effect/floor_decal/spline/plain/grey{
+	icon_state = "spline_plain";
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/source_cafe)
 "uGj" = (
 /obj/structure/table/rack,
 /obj/item/clothing/head/helmet/riot,
@@ -23438,21 +23554,6 @@
 	dir = 8
 	},
 /area/rescue_base/base)
-"twU" = (
-/obj/effect/floor_decal/beach{
-	icon_state = "beachborder";
-	dir = 4
-	},
-/turf/simulated/floor/holofloor/concrete,
-/area/holodeck/source_volleyball)
-"tQu" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/effect/floor_decal/spline/plain/grey{
-	icon_state = "spline_plain";
-	dir = 8
-	},
-/turf/simulated/floor/holofloor/grass,
-/area/holodeck/source_cafe)
 "uJY" = (
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
@@ -23463,10 +23564,23 @@
 /obj/structure/window/holowindow/full,
 /turf/simulated/floor/holofloor,
 /area/holodeck/source_cafe)
+"wIt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled,
+/area/merchant_station)
 "wIu" = (
 /obj/structure/aliumizer,
 /turf/simulated/floor/carpet,
 /area/wizard_station)
+"wJJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/carpet,
+/area/merchant_station)
 "xqW" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -50717,10 +50831,10 @@ aLG
 aLW
 aMf
 aMt
-aMC
-aMC
+wJJ
+cmF
 aNu
-aNU
+ovj
 aOE
 aPk
 aQe
@@ -50922,7 +51036,7 @@ aMu
 aMD
 aMY
 aMf
-aNU
+ljJ
 aOw
 aOw
 aQf
@@ -51124,7 +51238,7 @@ aMf
 aMf
 aMf
 aMf
-aNU
+ljJ
 aOF
 aPc
 aQg
@@ -51528,7 +51642,7 @@ aMf
 aMF
 aNa
 aNv
-aNa
+cIc
 aMf
 aPm
 aPc
@@ -52138,7 +52252,7 @@ aNZ
 aMf
 aMf
 aQi
-aQK
+wIt
 aPc
 aOw
 avD
@@ -52341,7 +52455,7 @@ aOG
 aPp
 aQj
 aQL
-aRo
+aQh
 aOw
 avD
 aRW
@@ -53757,14 +53871,14 @@ aQo
 aNC
 aRt
 aRH
-aPc
+nzu
 aPc
 aSS
 aTq
 aTK
 aPc
-aPc
-aRH
+bXq
+qvJ
 aPc
 aVu
 aVu
@@ -53954,11 +54068,11 @@ aLW
 aNC
 aOf
 aOf
-aPq
+nSm
 aQp
 aNC
 aRu
-aQN
+aQK
 aPc
 aSq
 aMf
@@ -53966,7 +54080,7 @@ aTq
 aMf
 aUc
 aPc
-aQN
+aPc
 aUX
 aVv
 aVQ
@@ -54156,11 +54270,11 @@ aLW
 aNC
 aOg
 aOM
-aPq
-aPq
+pMs
+sTp
 aQP
-aPc
-aPc
+aPd
+heI
 aPc
 aPc
 aST

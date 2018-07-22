@@ -70,14 +70,14 @@
 /turf/simulated/floor/plating,
 /area/command/pathfinder)
 "aak" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
 /obj/machinery/alarm{
 	pixel_y = 24
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
@@ -2053,9 +2053,6 @@
 	pixel_x = -21;
 	pixel_y = 0
 	},
-/obj/machinery/light{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "aej" = (
@@ -2116,6 +2113,9 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
+	},
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
@@ -5775,6 +5775,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "aoT" = (
@@ -6737,11 +6740,6 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
-	},
 /obj/item/device/radio/intercom/department/medbay{
 	dir = 4;
 	pixel_x = -21
@@ -7307,6 +7305,9 @@
 	req_access = list(5)
 	},
 /obj/machinery/mech_recharger,
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "avl" = (
@@ -7340,6 +7341,9 @@
 	pixel_x = 24
 	},
 /obj/item/weapon/defibrillator/compact/loaded,
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "avq" = (
@@ -17370,6 +17374,9 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/paleblue,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "cCb" = (
@@ -17384,9 +17391,6 @@
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
-	},
-/obj/machinery/light{
-	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -17411,6 +17415,9 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "cFb" = (
@@ -17606,9 +17613,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -17618,6 +17622,9 @@
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
@@ -18006,6 +18013,7 @@
 	c_tag = "Infirmary - Operating Theatre";
 	dir = 1
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "dBa" = (
@@ -18376,6 +18384,9 @@
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "eeM" = (
@@ -18455,7 +18466,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "ekb" = (
-/obj/machinery/light/small,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
@@ -18464,6 +18474,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "elb" = (
@@ -18594,6 +18605,9 @@
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
@@ -19186,6 +19200,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fhb" = (
@@ -19303,6 +19320,9 @@
 "fpb" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
+	},
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -19435,6 +19455,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/effect/floor_decal/corner/paleblue,
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fAb" = (
@@ -19751,6 +19772,9 @@
 	dir = 4
 	},
 /obj/machinery/cell_charger,
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "fYb" = (
@@ -20425,7 +20449,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "gSb" = (
-/obj/machinery/light/small,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	layer = 2.4;
@@ -20435,6 +20458,7 @@
 	pixel_x = 6;
 	pixel_y = -24
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "gTb" = (
@@ -20539,9 +20563,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/light{
-	dir = 1
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
@@ -21406,9 +21427,6 @@
 /area/hallway/primary/firstdeck/center)
 "ieb" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 1
-	},
-/obj/machinery/light{
 	dir = 1
 	},
 /obj/structure/cable/green{
@@ -23901,7 +23919,7 @@
 "lRp" = (
 /obj/machinery/door/airlock{
 	name = "Emergency Storage";
-	req_access = list(14)
+	req_access = list(82)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -24979,6 +24997,9 @@
 	pixel_x = 21
 	},
 /obj/random/medical/lite,
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "nDb" = (
@@ -25577,6 +25598,9 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "owb" = (
@@ -25600,7 +25624,6 @@
 	dir = 8;
 	pixel_x = 21
 	},
-/obj/machinery/light,
 /obj/machinery/bodyscanner{
 	icon_state = "body_scanner_0";
 	dir = 4
@@ -25611,6 +25634,9 @@
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
+	},
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
@@ -26036,7 +26062,7 @@
 	},
 /obj/structure/closet/medical_wall/filled{
 	pixel_x = 0;
-	pixel_y = 32
+	pixel_y = -26
 	},
 /obj/machinery/camera/network/research{
 	c_tag = "Research - Hallway";

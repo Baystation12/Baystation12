@@ -11450,7 +11450,8 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = list(12,73)
+	req_access = newlist();
+	req_one_access = list(12,73,74)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/aft)
@@ -17068,7 +17069,9 @@
 	icon_state = "map_connector";
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/portable_atmospherics/canister/air/airlock{
+	start_pressure = 911.925
+	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "He" = (
@@ -17830,7 +17833,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = list(12,73)
+	req_one_access = newlist()
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19214,6 +19217,21 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor,
 /area/hallway/primary/fourthdeck/fore)
+"QD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated,
+/obj/machinery/camera/network/hangar{
+	c_tag = "Hangar - Fuel Bay";
+	dir = 1;
+	icon_state = "camera"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "QH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -43639,7 +43657,7 @@ Um
 Um
 Um
 tg
-Kf
+QD
 Qd
 Qd
 Qd
