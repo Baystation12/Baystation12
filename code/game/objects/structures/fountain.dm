@@ -24,7 +24,7 @@
 	if(used)
 		to_chat(user, "\The [src] is still and lifeless...")
 		return
-	if(!ishuman(user))
+	if(!ishuman(user) || user.isSynthetic())
 		to_chat(user, "Try as you might to touch the fountain, some force prevents you from doing so.")
 		return
 
