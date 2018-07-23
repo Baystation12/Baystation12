@@ -1,0 +1,5 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Forensics skill now allows for the detection of possible evidence on examination."
+  - tweak: "Forensics skill is now cheaper at higher levels."
