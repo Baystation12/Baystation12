@@ -281,10 +281,7 @@
 		related_accounts_cid += "[query_cid.item[1]], "
 		break
 
-	var/DBQuery/query_staffwarn = dbcon.NewQuery("SELECT staffwarn FROM erro_player WHERE ckey = '[sql_ckey]' AND !ISNULL(staffwarn)")
-	query_staffwarn.Execute()
-	if(query_staffwarn.NextRow())
-		src.staffwarn = query_staffwarn.item[1]
+	watchlist.OnLogin(src)
 
 	//Just the standard check to see if it's actually a number
 	if(sql_id)
@@ -296,9 +293,6 @@
 	var/admin_rank = "Player"
 	if(src.holder)
 		admin_rank = src.holder.rank
-		for(var/client/C in GLOB.clients)
-			if(C.staffwarn)
-				C.mob.send_staffwarn(src, "is connected", 0)
 
 	var/sql_ip = sql_sanitize_text(src.address)
 	var/sql_computerid = sql_sanitize_text(src.computer_id)

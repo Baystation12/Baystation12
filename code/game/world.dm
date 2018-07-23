@@ -91,6 +91,8 @@
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
 		log = runtime_log
 
+	watchlist = new /datum/watchlist
+
 	callHook("startup")
 	//Emergency Fix
 	load_mods()

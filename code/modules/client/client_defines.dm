@@ -19,7 +19,7 @@
 
 	var/adminhelped = 0
 
-	var/staffwarn = null
+	var/watchlist_warn = null
 
 	var/datum/eams_info/eams_info = new
 	var/species_ingame_whitelisted = FALSE

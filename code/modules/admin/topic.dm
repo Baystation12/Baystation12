@@ -1975,7 +1975,7 @@
 			show_player_info(ckey)
 		return
 
-	Watchlist_AdminTopicProcess(src, href_list)
+	watchlist.AdminTopicProcess(src, href_list)
 	EAMS_AdminTopicProcess(src, href_list)
 	SpeciesIngameWhitelist_AdminTopicProcess(src, href_list)
 

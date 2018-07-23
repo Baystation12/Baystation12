@@ -41,4 +41,3 @@
 	spawn(40)
 		if(client)
 			client.playtitlemusic()
-			maybe_send_staffwarns("connected as new player")
