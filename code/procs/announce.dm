@@ -37,7 +37,7 @@
 
 	if(!msg_sanitized)
 		message = sanitize(message, extra = 0)
-	message_title = rhtml_encode(message_title)
+	message_title = sanitize(message_title)
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in GLOB.player_list)
@@ -50,8 +50,7 @@
 		NewsCast(message, message_title)
 
 	if(log)
-		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
-		message_admins("[key_name_admin(usr)] has made \a [announcement_type].", 1)
+		log_game("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]", notify_admin = TRUE)
 
 datum/announcement/proc/FormMessage(message as text, message_title as text)
 	. = "<h2 class='alert'>[message_title]</h2>"

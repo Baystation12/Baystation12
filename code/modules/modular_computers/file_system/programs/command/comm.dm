@@ -32,7 +32,7 @@
 	var/msg_line2 = ""
 	var/centcomm_message_cooldown = 0
 	var/announcment_cooldown = 0
-	var/datum/announcement/priority/crew_announcement = new
+	var/datum/announcement/priority/crew_announcement = new(do_log = TRUE)
 	var/current_viewing_message_id = 0
 	var/current_viewing_message = null
 
@@ -140,7 +140,6 @@
 				if(!input || !can_still_topic())
 					return 1
 				crew_announcement.Announce(input)
-				log_say("[key_name(usr)] has made an announcement: [input]")
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
