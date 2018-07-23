@@ -174,7 +174,7 @@
 	if (check_rights((R_ADMIN|R_MOD), 0, C))
 		for(var/client/player in GLOB.clients)
 			if (player.watchlist_warn)
-				to_chat(C, "<span class=\"log_message\"><font color='red'><B>WATCHLIST: </B></font><font color='blue'>[key_name_admin(player)] is playing - Reason: [C.watchlist_warn]</font></span>")
+				to_chat(C, "<span class=\"log_message\"><font color='red'><B>WATCHLIST: </B></font><font color='blue'>[key_name_admin(player)] is playing - Reason: [player.watchlist_warn]</font></span>")
 
 /datum/watchlist/proc/AdminTopicProcess(var/datum/admins/source, var/list/href_list)
 	if(href_list["watchadd"])
