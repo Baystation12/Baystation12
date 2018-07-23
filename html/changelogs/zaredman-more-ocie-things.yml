@@ -1,5 +1,4 @@
 author: zaredman
 delete-after: True
 changes: 
-  - rscadd: "Allows OCIE Agents to be MAA."
   - rscdel: "Removes mention of Colonial Marshals in holowarrants and replaces it with OCIE; format change."
