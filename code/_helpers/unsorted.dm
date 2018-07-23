@@ -1112,3 +1112,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
+
+//Workaround by Ginja due to the fact initial(parent_type) does not work.
+
+#define PARENT(x) text2path(replacetext("[x]", regex("/\[^/\]+$"), ""))
