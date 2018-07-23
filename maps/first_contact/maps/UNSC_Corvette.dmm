@@ -369,35 +369,35 @@
 "he" = (/obj/structure/table/standard,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
 "hf" = (/obj/structure/bed/chair,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
 "hg" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/structure/table/standard,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hh" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hi" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hj" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/cryobay{tag = "icon-cryobay (EAST)"; icon_state = "cryobay"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"hk" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/closet/walllocker/emerglocker/north,/obj/item/weapon/tank/emergency/oxygen/unsc,/obj/item/weapon/tank/emergency/oxygen/unsc,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/suit/space/void/unsc/prepared,/obj/item/clothing/suit/space/void/unsc/prepared,/obj/item/weapon/storage/toolbox/emergency,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hl" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hm" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/cryobay{tag = "icon-cryobay (NORTH)"; icon_state = "cryobay"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hn" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/engineering{tag = "icon-engineering (EAST)"; icon_state = "engineering"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"ho" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hp" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hq" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hr" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hs" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{tag = "icon-map_on (NORTH)"; icon_state = "map_on"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardengine)
-"ht" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hu" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvetteport,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hv" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hw" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hx" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hy" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
-"hz" = (/obj/structure/sign/halo_floorsign/airlock,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hA" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"hB" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hC" = (/obj/structure/sign/halo_floorsign/cargobay,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hD" = (/obj/structure/sign/halo_floorsign/engineering{tag = "icon-engineering (EAST)"; icon_state = "engineering"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
-"hE" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Starboard Engine Room"; req_access = list(142)},/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hF" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hG" = (/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{tag = "icon-map_on (EAST)"; icon_state = "map_on"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hH" = (/obj/machinery/door/airlock/halo,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
-"hI" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardengine)
-"hJ" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hh" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hi" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hj" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hk" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/cryobay{tag = "icon-cryobay (EAST)"; icon_state = "cryobay"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"hl" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/closet/walllocker/emerglocker/north,/obj/item/weapon/tank/emergency/oxygen/unsc,/obj/item/weapon/tank/emergency/oxygen/unsc,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/suit/space/void/unsc/prepared,/obj/item/clothing/suit/space/void/unsc/prepared,/obj/item/weapon/storage/toolbox/emergency,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hm" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hn" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/cryobay{tag = "icon-cryobay (NORTH)"; icon_state = "cryobay"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"ho" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/engineering{tag = "icon-engineering (EAST)"; icon_state = "engineering"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hp" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hq" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hr" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hs" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"ht" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{tag = "icon-map_on (NORTH)"; icon_state = "map_on"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardengine)
+"hu" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hv" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvetteport,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hw" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hx" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hy" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hz" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
+"hA" = (/obj/structure/sign/halo_floorsign/airlock,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hB" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"hC" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hD" = (/obj/structure/sign/halo_floorsign/cargobay,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hE" = (/obj/structure/sign/halo_floorsign/engineering{tag = "icon-engineering (EAST)"; icon_state = "engineering"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"hF" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Starboard Engine Room"; req_access = list(142)},/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hG" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hH" = (/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{tag = "icon-map_on (EAST)"; icon_state = "map_on"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hI" = (/obj/machinery/door/airlock/halo,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
+"hJ" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardengine)
 "hK" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
 "hL" = (/obj/machinery/light,/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
 "hM" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardbatterycontrol)
@@ -519,10 +519,10 @@ aaaaaaaaaaaaaaaaaaaQaBaBaBaBaBaBaBfSfgfgfvgpfvfgfLfigfgqgrgsgtgugvflgcfFfFfFfFgd
 aaaaaaaaaaaaaaaaaaaQfSfSfSfSfSfSfSfSfgfgfgfgfgfgfxfigfgygygygygygzflfFfFfFfFfFfFfFfmfQfIfQfIfQfIfQfogegigjgwgjgxgjgkgogAgAgAgAgAgAgBgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaQfSfSfSfSfSfSfSfSgDgDgEgDgDgFfLfigfgGgugygygzgHflgIfFfFfFfFgdgJfmfHfIfHfIfHfIfHfogegigKgkgjgxgKgwgwgAgLgMgNgOgAgPgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaagQfSfSgDgRgSgTgTgUgTgTgTgTgTgVfXfigfgfgfgWgfgfgfflflflflgXflflflfmfnfofnfofnfofnfogegwgwgwgwgYgwgwgwgAgZgMhahbgAgPgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaagQfSfShchdhehfhgfSgDgDhfgDgDgFhhhihjhihkhlhihihihihihihihmhihihihihihihihihihihihihihihihihihlhihihnhohpgLhqhrgAhsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaagQfSfShehthehuhefShvhwhehxhygFfihzhAhBfifififihBfifififihBfififihBfififihBfififihBfififihBfihCfihBhDhEhFhGhahGhHhIgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaagQfSfSfSfSfSfSfSfShJhKhLhMhefShNhOhPhQhQhQhQhQhQhQhQhQhQhRhShRhRhRhRhRhThUhUhUhUhUhUhUhUhUhUhUhUhUhUgAhVgLhqgLgAgPgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaQfSfSfSfSfSfSfSfSfSfSfSfSfSfShWfihAhQhQhQhQhQhQhQhQhQhQhRhXhYhRhRhRhRhZiaibicidieifighZhUihiiijikilgAimgLhqgLgAinaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagQfSfShchdhehfhgfShhgDhfgDgDgFhihjhkhjhlhmhjhjhjhjhjhjhjhnhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhmhjhjhohphqgLhrhsgAhtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagQfSfShehuhehvhefShwhxhehyhzgFfihAhBhCfifififihCfifififihCfififihCfififihCfififihCfififihCfihDfihChEhFhGhHhahHhIhJgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagQfSfSfSfSfSfSfSfShehKhLhMhefShNhOhPhQhQhQhQhQhQhQhQhQhQhRhShRhRhRhRhRhThUhUhUhUhUhUhUhUhUhUhUhUhUhUgAhVgLhrgLgAgPgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaQfSfSfSfSfSfSfSfSfSfSfSfSfSfShWfihBhQhQhQhQhQhQhQhQhQhQhRhXhYhRhRhRhRhZiaibicidieifighZhUihiiijikilgAimgLhrgLgAinaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaQaBaBaBaBaBaBaBaBaBaBaBaBaBhQhQiohQhQhQhQhQhQhQhQhQhQhQhRhXhXipiqirhRisiaitichZhZhZhZhZiuhZhZhZhZhZgAgZgMhahbgAgPgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaBaBaBaBaBaBaBaBaBaBaBaBaBhQhQhQhQhQhQhQhQhQhQhQhQhQhQhRhXhXiviwixhRhZhZiyhZhZhZiyhZhZhUiyhZiziziAgAgLgMiBgOgAgPgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiCiChRiDiEhRhRhRhRhUiFhUhUiFhUhUiFhUhUhUhUhUhUhUgAgAgAgAgAgAiGgCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
