@@ -71,8 +71,9 @@
 	if(active.fields["arrestsearch"] == "arrest")
 		var/output = {"
 		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
-		<BODY bgcolor='#ffffff'><center><large><b>Sol Central Government Colonial Marshal Bureau</b></large></br>
-		in the jurisdiction of the</br>
+		<BODY bgcolor='#ffffff'><center><large><b>SCG OCIE Warrant Tracker System</b></large></br>
+		</br>
+		Issued in the jurisdiction of the</br>
 		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
 		</br>
 		<b>ARREST WARRANT</b></center></br>
@@ -89,19 +90,12 @@
 	if(active.fields["arrestsearch"] ==  "search")
 		var/output= {"
 		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
-		<BODY bgcolor='#ffffff'><center>in the jurisdiction of the</br>
+		<BODY bgcolor='#ffffff'><center><large><b>SCG OCIE Warrant Tracker System</b></large></br>
+		</br>
+		Issued in the jurisdiction of the</br>
 		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
 		</br>
 		<b>SEARCH WARRANT</b></center></br>
-		</br>
-		<small><i>The Security Officer(s) bearing this Warrant are hereby authorized by the Issuer </br>
-		to conduct a one time lawful search of the Suspect's person/belongings/premises and/or Department </br>
-		for any items and materials that could be connected to the suspected criminal act described below, </br>
-		pending an investigation in progress. The Security Officer(s) are obligated to remove any and all</br>
-		such items from the Suspects posession and/or Department and file it as evidence. The Suspect/Department </br>
-		staff is expected to offer full co-operation. In the event of the Suspect/Department staff attempting </br>
-		to resist/impede this search or flee, they must be taken into custody immediately! </br>
-		All confiscated items must be filed and taken to Evidence!</small></i></br>
 		</br>
 		<b>Suspect's/location name: </b>[active.fields["namewarrant"]]</br>
 		</br>
@@ -110,6 +104,16 @@
 		<b>Warrant issued by: </b> [active.fields ["auth"]]</br>
 		</br>
 		Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
+		</br>
+		<center><small><i>The Security Officer(s) bearing this Warrant are hereby authorized by the Issuer to conduct a one time lawful search of the Suspect's person/belongings/premises and/or Department for any items and materials that could be connected to the suspected criminal act described below, pending an investigation in progress.</br>
+		</br>
+		The Security Officer(s) are obligated to remove any and all such items from the Suspects posession and/or Department and file it as evidence.</br>
+		</br>
+		The Suspect/Department staff is expected to offer full co-operation.</br>
+		</br>
+		In the event of the Suspect/Department staff attempting to resist/impede this search or flee, they must be taken into custody immediately! </br>
+		</br>
+		All confiscated items must be filed and taken to Evidence!</small></i></center></br>
 		</BODY></HTML>
 		"}
 		show_browser(user, output, "window=Search warrant for [active.fields["namewarrant"]]")
