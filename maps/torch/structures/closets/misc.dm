@@ -10,12 +10,8 @@
 /obj/structure/closet/secure_closet/liaison/WillContain()
 	return list(
 		/obj/item/device/flash,
-		/obj/item/weapon/hand_labeler,
-		/obj/item/device/camera,
-		/obj/item/device/camera_film = 2,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder,
-		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/clothing/shoes/laceup,
@@ -40,12 +36,9 @@
 /obj/structure/closet/secure_closet/representative/WillContain()
 	return list(
 		/obj/item/device/flash,
-		/obj/item/weapon/hand_labeler,
-		/obj/item/device/camera,
 		/obj/item/device/camera_film = 2,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder,
-		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/device/radio/headset/headset_com,
