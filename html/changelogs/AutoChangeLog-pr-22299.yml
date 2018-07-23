@@ -1,0 +1,6 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - tweak: "EC and Fleet crew may now fill in as shuttle pilots."
+  - maptweak: "Added a pilots locker within the expedition prep room. Pilots now have access to both supply and the expedition prep room."
+  - tweak: "Added a pilot-specific access type."
