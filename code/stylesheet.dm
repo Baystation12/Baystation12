@@ -101,6 +101,7 @@ h1.alert, h2.alert		{color: #000000;}
 .terran					{color: #9c250b;}
 .moon					{color: #422863;}
 .spacer					{color: #ff6600;}
+.adherent				{color: #526c7a;}
 
 .interface				{color: #330033;}
 
