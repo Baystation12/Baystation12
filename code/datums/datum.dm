@@ -2,6 +2,8 @@
 	var/tmp/gc_destroyed //Time when this object was destroyed.
 	var/tmp/is_processing = FALSE
 	var/list/active_timers  //for SStimer
+	var/list/datum_components //for /datum/components
+	var/list/comp_lookup //for /datum/components
 
 #ifdef TESTING
 	var/tmp/running_find_references
