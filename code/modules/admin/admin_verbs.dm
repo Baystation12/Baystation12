@@ -884,7 +884,7 @@ var/list/admin_verbs_mentor = list(
 		var/datum/submap/submap = thing
 		for(var/otherthing in submap.jobs)
 			var/datum/job/submap/job = submap.jobs[otherthing]
-			if(job.current_positions >= job.total_positions && job.total_positions != -1)
+			if(!job.is_position_available())
 				jobs["[job.title] - [submap.name]"] = job
 
 	if(!LAZYLEN(jobs))
@@ -894,8 +894,8 @@ var/list/admin_verbs_mentor = list(
 	var/job_name = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
 	if(job_name)
 		var/datum/job/submap/job = jobs[job_name]
-		if(istype(job) && job.current_positions >= job.total_positions && job.total_positions != -1)
-			job.total_positions++
+		if(istype(job) && !job.is_position_available())
+			job.make_position_available()
 			message_admins("An offsite job slot for [job_name] has been opened by [key_name_admin(usr)]")
 
 /client/proc/free_slot_crew()
@@ -904,7 +904,7 @@ var/list/admin_verbs_mentor = list(
 	if(holder)
 		var/list/jobs = list()
 		for (var/datum/job/J in job_master.occupations)
-			if (J.current_positions >= J.total_positions && J.total_positions != -1)
+			if(!J.is_position_available())
 				jobs += J.title
 		if (!jobs.len)
 			to_chat(usr, "There are no fully staffed jobs.")

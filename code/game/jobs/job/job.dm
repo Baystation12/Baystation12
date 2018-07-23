@@ -290,3 +290,6 @@
 	if(!player_old_enough(caller))
 		return FALSE
 	return TRUE
+
+/datum/job/proc/make_position_available()
+	total_positions++
