@@ -368,7 +368,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if(z in GLOB.using_map.station_levels)
 		idle_power_usage = 2.5 KILOWATTS
 	else
-		idle_power_usage = 30 KILOWATTS
+		idle_power_usage = 100 KILOWATTS
 
 /obj/machinery/telecomms/relay/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
