@@ -208,7 +208,16 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "You are trained in collecting forensic evidence - fibers, fingerprints, the works. You know how autopsies are done, and might've assisted performing one.",
 						"Experienced"		= "You're a pathologist, or detective. You've seen your share of bizarre cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.",
 						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.")
-	difficulty = SKILL_HARD
+
+
+/decl/hierarchy/skill/security/forensics/get_cost(var/level)
+	switch(level)
+		if(SKILL_BASIC, SKILL_ADEPT, SKILL_EXPERT)
+			return difficulty * 2
+		if(SKILL_PROF)
+			return 3 * difficulty
+		else
+			return 0
 
 // Category: Engineering
 
