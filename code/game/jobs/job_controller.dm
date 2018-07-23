@@ -95,7 +95,7 @@ var/global/datum/controller/occupations/job_master
 		if(!istype(job))
 			log_debug("Job assignment error for [joining] - job does not exist or is of the incorrect type.")
 			return FALSE
-		if(job.total_positions != -1 && job.current_positions >= job.total_positions)
+		if(!job.is_position_available())
 			to_chat(joining, "<span class='warning'>Unfortunately, that job is no longer available.</span>")
 			return FALSE
 		if(!config.enter_allowed)
@@ -164,8 +164,8 @@ var/global/datum/controller/occupations/job_master
 
 	proc/FreeRole(var/rank)	//making additional slot on the fly
 		var/datum/job/job = GetJob(rank)
-		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
-			job.total_positions++
+		if(job && !job.is_position_available())
+			job.make_position_available()
 			return 1
 		return 0
 
