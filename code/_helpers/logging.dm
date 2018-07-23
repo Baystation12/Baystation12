@@ -119,11 +119,9 @@
 
 /proc/log_error(text)
 	error(text)
-	to_debug_listeners(text, "ERROR")
 
 /proc/log_warning(text)
 	warning(text)
-	to_debug_listeners(text, "WARNING")
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)
