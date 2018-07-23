@@ -155,12 +155,12 @@
 //DIONA
 /spell/aoe_turf/conjure/grove/gestalt
 	name = "Convert Gestalt"
-	desc = "Converts the surrounding area into a Dionaea gestalt."
+	desc = "Converts the surrounding area into a diona gestalt."
 
 	school = "racial"
 	spell_flags = 0
 	invocation_type = SpI_EMOTE
-	invocation = "rumbles as green alien plants grow quickly along the floor."
+	invocation = "rumbles as strange alien growth quickly overtakes their surroundings."
 
 	charge_type = Sp_HOLDVAR
 	holder_var_type = "bruteloss"

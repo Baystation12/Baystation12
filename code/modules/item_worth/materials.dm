@@ -22,9 +22,6 @@
 /material/steel
 	value = 4
 
-/material/diona
-	value = 5
-
 /material/steel/holographic
 	value = 0
 
