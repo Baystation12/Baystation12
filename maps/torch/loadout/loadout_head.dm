@@ -37,7 +37,6 @@
 	display_name = "EC cap"
 	path = /obj/item/clothing/head/soft/solgov/expedition
 	cost = 0
-	allowed_roles = SOLGOV_ROLES
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 /datum/gear/head/surgical
@@ -51,7 +50,7 @@
 
 /datum/gear/mask/bandana
 	allowed_branches = CIVILIAN_BRANCHES
-	
+
 /datum/gear/head/bandana
 	allowed_branches = CIVILIAN_BRANCHES
 

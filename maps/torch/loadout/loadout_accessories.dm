@@ -45,7 +45,7 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/speciality/pilot
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot)
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"

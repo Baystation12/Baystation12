@@ -532,7 +532,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/pilot
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Expeditionary Corps")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/pilot
 	pda_type = /obj/item/modular_computer/pda/explorer

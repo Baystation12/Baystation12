@@ -2280,7 +2280,8 @@
 	},
 /obj/machinery/door/airlock/glass/science{
 	name = "Ready Room";
-	req_access = list(93)
+	req_access = newlist();
+	req_one_access = list(93,95)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/unused)
