@@ -33,7 +33,7 @@
 /proc/testing(msg)
 	to_world_log("## TESTING: [msg][log_end]")
 
-/proc/log_generic(var/type, var/message, var/location, var/log_to_diary = TRUE, var/notify_admin = FALSE)//, var/req_toggles = 0)
+/proc/log_generic(var/type, var/message, var/location, var/log_to_diary = TRUE, var/notify_admin = FALSE, var/req_pref = null)
 	var/turf/T = get_turf(location)
 	if(location && T)
 		if(log_to_diary)
@@ -46,15 +46,14 @@
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">[type] LOG:</span> <span class=\"message\">[message]</span></span>"
 	if(notify_admin)
 		for(var/client/C in GLOB.admins)
-			//if(!req_toggles || (C.prefs.chat_toggles & req_toggles))
-			C << rendered
+			if(!req_pref || (C.get_preference_value(req_pref) == GLOB.PREF_SHOW))
+				C << rendered
 
 /proc/log_admin(text, location, notify_admin)
 	log_generic("ADMIN", text, location, config.log_admin, notify_admin)
 
 /proc/log_debug(text, location)
-	log_generic("DEBUG", text, location, config.log_debug, TRUE)//, CHAT_DEBUGLOGS)
-	//to_debug_listeners(text)
+	log_generic("DEBUG", text, location, config.log_debug, TRUE, /datum/client_preference/staff/show_debug_logs)
 
 /proc/log_game(text, location, notify_admin)
 	log_generic("GAME", text, location, config.log_game, notify_admin)
@@ -78,7 +77,7 @@
 	log_generic("EMOTE", text, null, config.log_emote)
 
 /proc/log_attack(text, location, notify_admin)
-	log_generic("ATTACK", text, location, config.log_attack, notify_admin)//, CHAT_ATTACKLOGS)
+	log_generic("ATTACK", text, location, config.log_attack, notify_admin, /datum/client_preference/staff/show_attack_logs)
 
 /proc/log_adminsay(text)
 	log_generic("ADMINSAY", text, null, config.log_adminchat)
@@ -125,11 +124,6 @@
 /proc/log_warning(text)
 	warning(text)
 	to_debug_listeners(text, "WARNING")
-
-/proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in GLOB.admins)
-		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
-			to_chat(C, "[prefix]: [text]")
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)
