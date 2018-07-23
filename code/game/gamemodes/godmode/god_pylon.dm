@@ -69,4 +69,4 @@
 		for(var/minion in linked_god.minions)
 			var/datum/mind/mind = minion
 			if(mind.current && mind.current.eyeobj) //If it is currently having a vision of some sort
-				to_chat(mind.current,"\icon[src] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[src];vision_jump=\ref[src];'>J</A>) [verb], <span class='message'<span class='body'>\"[text]\"</span></span></span>")
+				to_chat(mind.current,"\icon[src] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[src];vision_jump=\ref[src];'>J</A>) [verb], <span class='message'<span class='body'>\"[text]\"</span></span>")
