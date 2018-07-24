@@ -23,7 +23,7 @@
 		return 0
 	if (affected.is_stump())
 		return 0
-	return !BP_IS_ROBOTIC(affected)
+	return !(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 
 //////////////////////////////////////////////////////////////////
 //	laser scalpel surgery step

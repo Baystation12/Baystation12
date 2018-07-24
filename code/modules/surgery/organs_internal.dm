@@ -42,7 +42,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!affected)
 		return FALSE
-	if(BP_IS_ROBOTIC(affected))
+	if(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 		return FALSE
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(I.damage > 0)
@@ -141,7 +141,7 @@
 	if(!affected)
 		return 0
 
-	if(BP_IS_ROBOTIC(affected))
+	if(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 		return 0
 
 	target.op_stage.current_organ = null
@@ -278,8 +278,12 @@
 	if(!istype(O))
 		return 0
 
+	if(!(BP_IS_CRYSTAL(affected) && BP_IS_CRYSTAL(O)))
+		to_chat(user, "<span class='warning'>You cannot install a crystalline organ into a non-crystalline bodypart.</span>")
+		return SURGERY_FAILURE
+
 	if(BP_IS_ROBOTIC(affected) && !BP_IS_ROBOTIC(O))
-		to_chat(user, "<span class='danger'>You cannot install a naked organ into a robotic body.</span>")
+		to_chat(user, "<span class='warning'>You cannot install a naked organ into a robotic body.</span>")
 		return SURGERY_FAILURE
 
 	if(!target.species)
@@ -355,7 +359,7 @@
 	target.op_stage.current_organ = null
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || BP_IS_ROBOTIC(affected))
+	if(!affected || BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 		// robotic attachment handled via screwdriver
 		return 0
 
@@ -435,7 +439,7 @@
 	if(!affected)
 		return 0
 
-	if(BP_IS_ROBOTIC(affected))
+	if(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 		return 0
 
 	target.op_stage.current_organ = null
