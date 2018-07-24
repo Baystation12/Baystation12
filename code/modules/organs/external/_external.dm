@@ -141,6 +141,15 @@
 	s_base = new_dna.s_base
 
 /obj/item/organ/external/emp_act(severity)
+
+	if(!BP_IS_ROBOTIC(src))
+		return
+
+	if(owner && BP_IS_CRYSTAL(src)) // Crystalline robotics == piezoelectrics.
+		owner.Weaken(4 - severity)
+		owner.confused = max(owner.confused, 6 - (severity * 2))
+		return
+
 	var/burn_damage = 0
 	switch (severity)
 		if (1)
@@ -419,6 +428,9 @@ This function completely restores a damaged organ to perfect condition.
 					robotize()
 		owner.updatehealth()
 
+	if(!QDELETED(src) && species)
+		species.post_organ_rejuvenate(src)
+
 /obj/item/organ/external/remove_rejuv()
 	if(owner)
 		owner.organs -= src
@@ -435,8 +447,26 @@ This function completely restores a damaged organ to perfect condition.
 
 /obj/item/organ/external/proc/createwound(var/type = CUT, var/damage, var/surgical)
 
-	if(damage == 0)
+	// Handle some status-based damage multipliers.
+	if(type == BRUISE && BP_IS_BRITTLE(src))
+		damage = Floor(damage * 1.5)
+
+	if(BP_IS_CRYSTAL(src))
+		// this needs to cover type == BURN because lasers don't use LASER, but with the way bodytemp
+		// damage is handled currently that isn't really possible without an infinite feedback loop.
+		if(type == LASER)
+			owner.bodytemperature += ceil(damage/10)
+			if(prob(25))
+				owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
+			return
+		damage = Floor(damage * 0.8)
+		type = SHATTER
+
+	if(damage <= 0)
 		return
+
+	if(loc && type == SHATTER)
+		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
@@ -473,12 +503,16 @@ This function completely restores a damaged organ to perfect condition.
 				var/datum/wound/W = pick(compatible_wounds)
 				W.open_wound(damage)
 				if(prob(25))
-					if(BP_IS_ROBOTIC(src))
-						owner.visible_message("<span class='danger'>The damage to [owner.name]'s [name] worsens.</span>",\
+					if(BP_IS_CRYSTAL(src))
+						owner.visible_message("<span class='danger'>The cracks in \the [owner]'s [name] spread.</span>",\
+						"<span class='danger'>The cracks in your [name] spread.</span>",\
+						"<span class='danger'>You hear the cracking of crystal.</span>")
+					else if(BP_IS_ROBOTIC(src))
+						owner.visible_message("<span class='danger'>The damage to \the [owner]'s [name] worsens.</span>",\
 						"<span class='danger'>The damage to your [name] worsens.</span>",\
 						"<span class='danger'>You hear the screech of abused metal.</span>")
 					else
-						owner.visible_message("<span class='danger'>The wound on [owner.name]'s [name] widens with a nasty ripping noise.</span>",\
+						owner.visible_message("<span class='danger'>The wound on \the [owner]'s [name] widens with a nasty ripping noise.</span>",\
 						"<span class='danger'>The wound on your [name] widens with a nasty ripping noise.</span>",\
 						"<span class='danger'>You hear a nasty ripping noise, as if flesh is being torn apart.</span>")
 				return W
@@ -695,13 +729,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H = owner
 
 	//update damage counts
+	var/bleeds = (!BP_IS_ROBOTIC(src) && !BP_IS_CRYSTAL(src))
 	for(var/datum/wound/W in wounds)
 		if(W.damage_type == BURN)
 			burn_dam += W.damage
 		else
 			brute_dam += W.damage
 
-		if(!BP_IS_ROBOTIC(src) && W.bleeding() && (H && H.should_have_organ(BP_HEART)))
+		if(bleeds && W.bleeding() && (H && H.should_have_organ(BP_HEART)))
 			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
@@ -754,30 +789,39 @@ Note that amputating the affected organ does in fact remove the infection from t
 			   DISMEMBERMENT
 ****************************************************/
 /obj/item/organ/external/proc/get_droplimb_messages_for(var/droptype, var/clean)
-	switch(droptype)
-		if(DROPLIMB_EDGE)
-			if(!clean)
-				var/gore_sound = "[BP_IS_ROBOTIC(src) ? "tortured metal" : "ripping tendons and flesh"]"
+
+	if(BP_IS_CRYSTAL(src))
+		playsound(src, "shatter", 70, 1)
+		return list(
+			"\The [owner]'s [src.name] shatters into a thousand pieces!",
+			"Your [src.name] shatters into a thousand pieces!",
+			"You hear the sound of something shattering!"
+		)
+	else
+		switch(droptype)
+			if(DROPLIMB_EDGE)
+				if(!clean)
+					var/gore_sound = "[BP_IS_ROBOTIC(src) ? "tortured metal" : "ripping tendons and flesh"]"
+					return list(
+						"\The [owner]'s [src.name] flies off in an arc!",
+						"Your [src.name] goes flying off!",
+						"You hear a terrible sound of [gore_sound]."
+						)
+			if(DROPLIMB_BURN)
+				var/gore = "[BP_IS_ROBOTIC(src) ? "": " of burning flesh"]"
 				return list(
-					"\The [owner]'s [src.name] flies off in an arc!",\
-					"Your [src.name] goes flying off!",\
-					"You hear a terrible sound of [gore_sound]." \
+					"\The [owner]'s [src.name] flashes away into ashes!",
+					"Your [src.name] flashes away into ashes!",
+					"You hear a crackling sound[gore]."
 					)
-		if(DROPLIMB_BURN)
-			var/gore = "[BP_IS_ROBOTIC(src) ? "": " of burning flesh"]"
-			return list(
-				"\The [owner]'s [src.name] flashes away into ashes!",\
-				"Your [src.name] flashes away into ashes!",\
-				"You hear a crackling sound[gore]." \
-				)
-		if(DROPLIMB_BLUNT)
-			var/gore = "[BP_IS_ROBOTIC(src) ? "": " in shower of gore"]"
-			var/gore_sound = "[BP_IS_ROBOTIC(src) ? "rending sound of tortured metal" : "sickening splatter of gore"]"
-			return list(
-				"\The [owner]'s [src.name] explodes[gore]!",\
-				"Your [src.name] explodes[gore]!",\
-				"You hear the [gore_sound]." \
-				)
+			if(DROPLIMB_BLUNT)
+				var/gore = "[BP_IS_ROBOTIC(src) ? "": " in shower of gore"]"
+				var/gore_sound = "[BP_IS_ROBOTIC(src) ? "rending sound of tortured metal" : "sickening splatter of gore"]"
+				return list(
+					"\The [owner]'s [src.name] explodes[gore]!",
+					"Your [src.name] explodes[gore]!",
+					"You hear the [gore_sound]."
+					)
 
 //Handles dismemberment
 /obj/item/organ/external/proc/droplimb(var/clean, var/disintegrate = DROPLIMB_EDGE, var/ignore_children, var/silent)
@@ -785,7 +829,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!(limb_flags & ORGAN_FLAG_CAN_AMPUTATE) || !owner)
 		return
 
-	if(disintegrate == DROPLIMB_EDGE && species.limbs_are_nonsolid)
+	if(BP_IS_CRYSTAL(src) || (disintegrate == DROPLIMB_EDGE && species.limbs_are_nonsolid))
 		disintegrate = DROPLIMB_BLUNT //splut
 
 	var/list/organ_msgs = get_droplimb_messages_for(disintegrate, clean)
@@ -817,8 +861,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 			stump.artery_name = "mangled [artery_name]"
 			stump.arterial_bleed_severity = arterial_bleed_severity
 			stump.add_pain(max_damage)
-			if(BP_IS_ROBOTIC(src))
-				stump.robotize()
 			W.parent_organ = stump
 			stump.wounds |= W
 			victim.organs |= stump
@@ -851,15 +893,18 @@ Note that amputating the affected organ does in fact remove the infection from t
 					I.loc = get_turf(src)
 			qdel(src)
 		if(DROPLIMB_BLUNT)
-			var/obj/effect/decal/cleanable/blood/gibs/gore
-			if(BP_IS_ROBOTIC(src))
+			var/obj/gore
+			if(BP_IS_CRYSTAL(src))
+				gore = new /obj/item/weapon/material/shard(get_turf(victim), "crystal")
+			else if(BP_IS_ROBOTIC(src))
 				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
 			else
 				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
 				if(species)
-					gore.fleshcolor = use_flesh_colour
-					gore.basecolor =  use_blood_colour
-					gore.update_icon()
+					var/obj/effect/decal/cleanable/blood/gibs/G = gore
+					G.fleshcolor = use_flesh_colour
+					G.basecolor =  use_blood_colour
+					G.update_icon()
 
 			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 

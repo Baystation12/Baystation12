@@ -29,6 +29,10 @@
 	if(H.mind)
 		H.mind.assigned_role = "Golem"
 		H.mind.special_role = "Golem"
-	H.real_name = "adamantine golem ([rand(1, 1000)])"
+	H.real_name = "golem ([rand(1, 1000)])"
 	H.SetName(H.real_name)
 	..()
+
+/datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org)
+	org.status |= ORGAN_BRITTLE
+	org.status |= ORGAN_CRYSTAL

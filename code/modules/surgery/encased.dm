@@ -18,7 +18,7 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && !BP_IS_ROBOTIC(affected) && affected.encased && affected.how_open() >= SURGERY_RETRACTED
+	return affected && !BP_IS_ROBOTIC(affected) && !BP_IS_CRYSTAL(affected) && affected.encased && affected.how_open() >= SURGERY_RETRACTED
 
 //////////////////////////////////////////////////////////////////
 //	ribcage sawing surgery step
@@ -26,7 +26,7 @@
 /datum/surgery_step/open_encased/saw
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100,
-	/obj/item/weapon/material/knife = 50, \
+	/obj/item/weapon/material/knife = 50,
 	/obj/item/weapon/material/hatchet = 75
 	)
 

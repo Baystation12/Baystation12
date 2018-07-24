@@ -18,7 +18,7 @@
 		return 0
 	if (affected.status & ORGAN_CUT_AWAY)
 		return 0
-	if (!BP_IS_ROBOTIC(affected))
+	if (!BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 		return 0
 	return 1
 
@@ -201,8 +201,16 @@
 		if(isWelder(tool))
 			var/obj/item/weapon/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
-				return 0
-		return affected && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.brute_dam > 0) && target_zone != BP_MOUTH
+				return SURGERY_FAILURE
+
+		if(!affected)
+			return SURGERY_FAILURE
+
+		if(BP_IS_BRITTLE(affected))
+			to_chat(user, "<span class='warning'>\The [target]'s [affected.name] is too brittle to be repaired normally.</span>")
+			return SURGERY_FAILURE
+
+		return affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.brute_dam > 0) && target_zone != BP_MOUTH
 
 /datum/surgery_step/robotics/repair_brute/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -222,6 +230,41 @@
 	user.visible_message("<span class='warning'>[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>",
 	"<span class='warning'>Your [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>")
 	target.apply_damage(rand(5,10), BURN, affected)
+
+//////////////////////////////////////////////////////////////////
+//	robotic limb brittleness repair surgery step
+//////////////////////////////////////////////////////////////////
+/datum/surgery_step/robotics/repair_brittle
+	allowed_tools = list(/obj/item/stack/nanopaste = 100)
+	min_duration = 50
+	max_duration = 60
+
+/datum/surgery_step/robotics/repair_brittle/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		. += 10
+
+/datum/surgery_step/robotics/repair_brittle/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	return ..() && affected && BP_IS_BRITTLE(affected) && affected.hatch_state == HATCH_OPENED && target_zone != BP_MOUTH
+
+/datum/surgery_step/robotics/repair_brittle/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("[user] begins to repair the brittle metal inside \the [target]'s [affected.name]." , \
+	"You begin to repair the brittle metal inside \the [target]'s [affected.name].")
+	..()
+
+/datum/surgery_step/robotics/repair_brittle/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("<span class='notice'>[user] finishes repairing the brittle interior of \the [target]'s [affected.name].</span>", \
+	"<span class='notice'>You finish repairing the brittle interior of \the [target]'s [affected.name].</span>")
+	affected.status &= ~ORGAN_BRITTLE
+
+/datum/surgery_step/robotics/repair_brittle/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("<span class='warning'>[user] causes some of \the [target]'s [affected.name] to crumble!</span>",
+	"<span class='warning'>You cause some of \the [target]'s [affected.name] to crumble!</span>")
+	target.apply_damage(rand(5,10), BRUTE, affected)
 
 //////////////////////////////////////////////////////////////////
 //	robotic limb burn damage repair surgery step
@@ -244,7 +287,12 @@
 	if(..())
 		var/obj/item/stack/cable_coil/C = tool
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		var/limb_can_operate = ((affected && affected.hatch_state == HATCH_OPENED) && ((affected.status & ORGAN_DISFIGURED) || affected.burn_dam > 0) && target_zone != BP_MOUTH)
+		if(!affected)
+			return SURGERY_FAILURE
+		if(BP_IS_BRITTLE(affected))
+			to_chat(user, "<span class='warning'>\The [target]'s [affected.name] is too brittle for this kind of repair.</span>")
+			return SURGERY_FAILURE
+		var/limb_can_operate = ((affected.hatch_state == HATCH_OPENED) && ((affected.status & ORGAN_DISFIGURED) || affected.burn_dam > 0) && target_zone != BP_MOUTH)
 		if(limb_can_operate)
 			if(istype(C))
 				if(!C.get_amount() >= 3)
@@ -304,7 +352,7 @@
 	if(!affected) return
 
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(BP_IS_ROBOTIC(I) && I.damage > 0)
+		if(BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
 			if(I.surface_accessible)
 				return TRUE
 			if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED) || affected.hatch_state == HATCH_OPENED)
@@ -377,7 +425,7 @@
 	var/list/attached_organs = list()
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
-		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
+		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
 			attached_organs |= organ
 
 	var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
@@ -418,7 +466,7 @@
 
 /datum/surgery_step/robotics/attach_organ_robotic/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!(affected && (BP_IS_ROBOTIC(affected))))
+	if(!affected || !BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
 		return 0
 	if(affected.hatch_state != HATCH_OPENED)
 		return 0
@@ -427,7 +475,7 @@
 
 	var/list/removable_organs = list()
 	for(var/obj/item/organ/I in affected.implants)
-		if ((I.status & ORGAN_CUT_AWAY) && (BP_IS_ROBOTIC(I)) && (I.parent_organ == target_zone))
+		if ((I.status & ORGAN_CUT_AWAY) && BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && (I.parent_organ == target_zone))
 			removable_organs |= I.organ_tag
 
 	var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs
@@ -484,6 +532,10 @@
 
 	if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
+		return SURGERY_FAILURE
+
+	if(BP_IS_CRYSTAL(affected))
+		to_chat(user, "<span class='danger'>The crystalline interior of \the [affected] is incompatible with \the [M].</span>")
 		return SURGERY_FAILURE
 
 	if(!target.isSynthetic())
