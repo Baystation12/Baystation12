@@ -256,8 +256,8 @@
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
-/obj/item/weapon/holo/esword/get_parry_chance()
-	return active ? base_parry_chance : 0
+/obj/item/weapon/holo/esword/get_parry_chance(mob/user)
+	return active ? ..() : 0
 
 /obj/item/weapon/holo/esword/New()
 	item_color = pick("red","blue","green","purple")
