@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Having Trained or above Close Combat skill gives bonus to parry chance with weapons (even ones that don't parry normally)."
-  - tweak: "Melee accuracy is now affected by size of the weapon - smaller than 'normal sized' weapons are more accurate, bigger are less accurate. Some weapons have individual bonuses/penalties (e.g. swords are bit more accurate for their size, toolboxes are less)"
-  - tweak: "Material weapons now get damaged on parry much like when attacking, and can shatter depending on material."
