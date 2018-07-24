@@ -125,6 +125,8 @@ var/list/name_to_material
 	var/stack_type
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
+	// Modifies skill checks when constructing with this material.
+	var/construction_difficulty = 0
 
 // Placeholders for light tiles and rglass.
 /material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
@@ -255,6 +257,7 @@ var/list/name_to_material
 	chem_products = list(
 				/datum/reagent/uranium = 20
 				)
+	construction_difficulty = 2
 
 /material/diamond
 	name = "diamond"
@@ -270,6 +273,7 @@ var/list/name_to_material
 	burn_armor = 50		// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
+	construction_difficulty = 2
 
 /material/diamond/crystal
 	name = "crystal"
@@ -289,10 +293,12 @@ var/list/name_to_material
 	chem_products = list(
 				/datum/reagent/gold = 20
 				)
+	construction_difficulty = 1
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
 	icon_colour = "#edd12f"
+	construction_difficulty = 1
 
 /material/silver
 	name = "silver"
@@ -306,6 +312,7 @@ var/list/name_to_material
 	chem_products = list(
 				/datum/reagent/silver = 20
 				)
+	construction_difficulty = 1
 
 /material/phoron
 	name = "phoron"
@@ -324,6 +331,7 @@ var/list/name_to_material
 	chem_products = list(
 				/datum/reagent/toxin/phoron = 20
 				)
+	construction_difficulty = 2
 
 /material/phoron/supermatter
 	name = "supermatter"
@@ -332,7 +340,6 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 6, TECH_PHORON = 4)
 	stack_type = null
 	luminescence = 3
-
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
@@ -365,6 +372,7 @@ var/list/name_to_material
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0
+	construction_difficulty = 1
 
 /material/stone/marble
 	name = "marble"
@@ -412,6 +420,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 	hitsound = 'sound/weapons/smash.ogg'
+	construction_difficulty = 1
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -425,6 +434,7 @@ var/list/name_to_material
 	door_icon_base = "metal"
 	icon_colour = "#d1e6e3"
 	icon_reinf = "reinf_metal"
+	construction_difficulty = 1
 
 /material/plasteel/ocp
 	name = "osmium-carbide plasteel"
@@ -439,7 +449,7 @@ var/list/name_to_material
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	composite_material = list("plasteel" = 7500, "osmium" = 3750)
-
+	construction_difficulty = 2
 
 /material/glass
 	name = "glass"
@@ -558,6 +568,7 @@ var/list/name_to_material
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null
+	construction_difficulty = 1
 
 /material/glass/phoron
 	name = "phglass"
@@ -573,6 +584,7 @@ var/list/name_to_material
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
+	construction_difficulty = 2
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
@@ -619,6 +631,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	construction_difficulty = 1
 
 /material/tritium
 	name = "tritium"
@@ -628,6 +641,7 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	is_fusion_fuel = 1
+	construction_difficulty = 2
 
 /material/deuterium
 	name = "deuterium"
@@ -637,6 +651,7 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	is_fusion_fuel = 1
+	construction_difficulty = 2
 
 /material/mhydrogen
 	name = "mhydrogen"
@@ -647,6 +662,7 @@ var/list/name_to_material
 	chem_products = list(
 				/datum/reagent/hydrazine = 20
 				)
+	construction_difficulty = 2
 
 /material/platinum
 	name = "platinum"
@@ -656,6 +672,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	construction_difficulty = 1
 
 /material/iron
 	name = "iron"
@@ -680,12 +697,14 @@ var/list/name_to_material
 	explosion_resistance = 200 // Hull plating.
 	hardness = 500
 	weight = 500
+	construction_difficulty = 1
 
 // Likewise.
 /material/voxalloy/elevatorium
 	name = "elevatorium"
 	display_name = "elevator panelling"
 	icon_colour = "#666666"
+	construction_difficulty = 2
 
 /material/wood
 	name = "wood"
@@ -760,6 +779,7 @@ var/list/name_to_material
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0
+	construction_difficulty = 1
 
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
@@ -795,6 +815,7 @@ var/list/name_to_material
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
 	stack_type = /obj/item/stack/material/aliumium
+	construction_difficulty = 2
 
 /material/aliumium/New()
 	icon_base = "metal"

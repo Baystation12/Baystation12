@@ -122,7 +122,7 @@
 /obj/structure/bed/chair/padded/green/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","green")
 
-/obj/structure/bed/chair/padded/purp/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/padded/purple/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","purple")
 
 /obj/structure/bed/chair/padded/blue/New(var/newloc,var/newmaterial)
@@ -159,7 +159,7 @@
 /obj/structure/bed/chair/comfy/green/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","green")
 
-/obj/structure/bed/chair/comfy/purp/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/comfy/purple/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","purple")
 
 /obj/structure/bed/chair/comfy/blue/New(var/newloc,var/newmaterial)
@@ -212,7 +212,7 @@
 /obj/structure/bed/chair/armchair/green/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","green")
 
-/obj/structure/bed/chair/armchair/purp/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/armchair/purple/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","purple")
 
 /obj/structure/bed/chair/armchair/blue/New(var/newloc,var/newmaterial)
@@ -298,7 +298,7 @@
 /obj/structure/bed/chair/office/comfy/green/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","green")
 
-/obj/structure/bed/chair/office/comfy/purp/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/office/comfy/purple/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","purple")
 
 /obj/structure/bed/chair/office/comfy/blue/New(var/newloc,var/newmaterial)
