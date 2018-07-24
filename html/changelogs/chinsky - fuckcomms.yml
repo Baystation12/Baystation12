@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Telecomms relays power usage is upper /considerably/ when used off-ship. Expect to drain Charon in 10 minutes when you switch it on."
