@@ -57,6 +57,9 @@ var/datum/evacuation_controller/evacuation_controller
 
 /datum/evacuation_controller/proc/call_evacuation(var/mob/user, var/_emergency_evac, var/forced, var/skip_announce, var/autotransfer)
 
+	if(state != EVAC_IDLE)
+		return 0
+
 	if(!can_evacuate(user, forced))
 		return 0
 
@@ -181,3 +184,5 @@ var/datum/evacuation_controller/evacuation_controller
 /datum/evacuation_controller/proc/get_evac_option(var/option_target)
 	return null
 
+/datum/evacuation_controller/proc/should_call_autotransfer_vote()
+	return (state == EVAC_IDLE)
