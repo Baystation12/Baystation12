@@ -322,6 +322,8 @@
 						additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 					gamemode_names["secret"] = "Secret"
 				if("crew_transfer")
+					if(!evacuation_controller || !evacuation_controller.should_call_autotransfer_vote())
+						return 0
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Extend the Round ([config.vote_autotransfer_interval / 600] minutes)")
