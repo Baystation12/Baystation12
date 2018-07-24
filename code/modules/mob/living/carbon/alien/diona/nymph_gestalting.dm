@@ -46,3 +46,21 @@
 	set src = usr.contents
 	if(ishuman(loc))
 		split_into_nymphs(loc)
+
+/mob/living/carbon/alien/diona/verb/jump_to_next_nymph()
+	set name = "Jump to next nymph"
+	set desc = "Switch control to another nymph from your last gestalt."
+	set category = "Abilities"
+
+	if (next_nymph && next_nymph.stat != DEAD && !next_nymph.client)
+
+		var/mob/living/carbon/alien/diona/S = next_nymph
+		transfer_languages(src, S)
+
+		if(mind)
+			to_chat(src, "<span class='info'>You're now in control of [S].</span>")
+			mind.transfer_to(S)
+			message_admins("\The [src] has transfered to another nymph; player now controls [key_name_admin(S)]")
+			log_admin("\The [src] has transfered to another nymph; player now controls [key_name(S)]")
+	else
+		to_chat(src, "<span class='info'>There are no appropriate nymphs for you to jump into.</span>")
