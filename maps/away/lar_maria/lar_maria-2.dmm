@@ -1223,7 +1223,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "cY" = (
-/obj/structure/bed/chair/comfy/purp{
+/obj/structure/bed/chair/comfy/purple{
 	dir = 1
 	},
 /turf/simulated/floor/wood,
