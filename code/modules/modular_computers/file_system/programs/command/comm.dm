@@ -355,6 +355,7 @@ var/last_message_id = 0
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
 /proc/init_autotransfer()
+
 	if (!ticker || !evacuation_controller)
 		return
 
