@@ -1,6 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "Check your skill loadout; it may have been reset!"
-  - tweak: "Skills outside your job and not in the general, organizational, or service categories (minus pilot) are no longer selectable above \"Trained\" level."
-  - tweak: "Some head roles had skill point allocations reduced. Engineers' skill points have been brought in line with contractors (increased). Brig Officers' starting skills brought in line with MaA."
