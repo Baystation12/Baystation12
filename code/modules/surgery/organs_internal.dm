@@ -278,8 +278,12 @@
 	if(!istype(O))
 		return 0
 
-	if(!(BP_IS_CRYSTAL(affected) && BP_IS_CRYSTAL(O)))
+	if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
 		to_chat(user, "<span class='warning'>You cannot install a crystalline organ into a non-crystalline bodypart.</span>")
+		return SURGERY_FAILURE
+
+	if(!BP_IS_CRYSTAL(O) && BP_IS_CRYSTAL(affected))
+		to_chat(user, "<span class='warning'>You cannot install a non-crystalline organ into a crystalline bodypart.</span>")
 		return SURGERY_FAILURE
 
 	if(BP_IS_ROBOTIC(affected) && !BP_IS_ROBOTIC(O))
