@@ -505,7 +505,6 @@
 "aY" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/circuitboard/crew,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -513,6 +512,7 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/item/weapon/circuitboard/teleporter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "aZ" = (
