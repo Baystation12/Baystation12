@@ -21146,7 +21146,12 @@
 /obj/item/device/integrated_electronics/wirer,
 /obj/item/device/integrated_electronics/analyzer,
 /obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
 /turf/simulated/floor/tiled/dark,
+/area/assembly/robotics)
+"hMH" = (
+/obj/structure/bed/chair/office/light,
+/turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "hNb" = (
 /obj/machinery/autolathe,
@@ -47378,7 +47383,7 @@ kib
 ksb
 kzb
 atK
-apo
+hMH
 oJb
 amA
 koX
