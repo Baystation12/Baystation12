@@ -1,6 +1,0 @@
-author: sick trigger
-
-delete-after: True
-
-changes: 
-- rscadd: "Diona can now 'Jump-to-next-nymph' to cycle between their nymphs after splitting."
