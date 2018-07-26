@@ -265,6 +265,7 @@
 #include "code\datums\music_tracks\df_theme.dm"
 #include "code\datums\music_tracks\dilbert.dm"
 #include "code\datums\music_tracks\elevator.dm"
+#include "code\datums\music_tracks\elibao.dm"
 #include "code\datums\music_tracks\endless_space.dm"
 #include "code\datums\music_tracks\floating.dm"
 #include "code\datums\music_tracks\human.dm"

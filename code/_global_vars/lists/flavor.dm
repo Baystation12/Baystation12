@@ -102,7 +102,8 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"Torch: A Light in the Darkness" = /music_track/torch,
 	"Treacherous Voyage" = /music_track/treacherous_voyage,
 	"Wake" = /music_track/wake,
-	"phoron will make us rich" = /music_track/pwmur
+	"phoron will make us rich" = /music_track/pwmur,
+	"every light is blinking at once" = /music_track/elibao
 ))
 
 /proc/setup_music_tracks(var/list/tracks)
