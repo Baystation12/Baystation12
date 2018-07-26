@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Constructing things with stacks of material now uses the construction skill. Higher skill is needed to use more advanced materials or to make more elaborate items."
+  - tweak: "Construction time is modified by construction skill."
