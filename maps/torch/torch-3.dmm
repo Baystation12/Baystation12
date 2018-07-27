@@ -2198,6 +2198,10 @@
 	dir = 6
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/forestarboard)
 "et" = (
@@ -2493,9 +2497,9 @@
 	dir = 9
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/multi_tile/maintenance{
-	dir = 8;
-	req_access = list(14)
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/forestarboard)
@@ -4235,6 +4239,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/aftport)
 "io" = (
@@ -7184,9 +7192,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/multi_tile/engineering{
+/obj/machinery/door/airlock/glass/engineering{
 	name = "Engineering Hard Storage";
-	req_access = list(11)
+	req_access = list(11);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
@@ -7294,6 +7303,11 @@
 /area/crew_quarters/safe_room/seconddeck)
 "po" = (
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Engineering Hard Storage";
+	req_access = list(11);
+	req_one_access = newlist()
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
 "pp" = (
@@ -8490,8 +8504,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/multi_tile/maintenance{
-	req_access = list(14)
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/forestarboard)
@@ -8502,6 +8517,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/forestarboard)
 "ry" = (
@@ -17645,8 +17664,9 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/multi_tile/maintenance{
-	req_access = list(14)
+/obj/machinery/door/airlock/maintenance{
+	req_access = newlist();
+	req_one_access = list(14,23)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/aftport)

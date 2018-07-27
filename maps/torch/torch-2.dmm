@@ -237,17 +237,14 @@
 "aQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/starboard)
-"aR" = (
-/obj/machinery/door/airlock/multi_tile/security{
-	name = "Old Brig"
-	},
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
 "aS" = (
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/security{
+	name = "Old Brig"
 	},
 /turf/simulated/floor/tiled,
 /area/vacant/brig)
@@ -42406,7 +42403,7 @@ ag
 az
 ag
 ag
-aR
+aE
 RS
 MI
 MI
