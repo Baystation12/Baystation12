@@ -357,8 +357,9 @@
 		difficulty += material.construction_difficulty
 
 /datum/stack_recipe/proc/display_name()
-	var/material = material_display_name(use_material)
-	return material ? "[material] [title]" : title
+	if(!use_material)
+		return title
+	return "[material_display_name(use_material)] [title]"
 
 /*
  * Recipe list datum
