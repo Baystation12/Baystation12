@@ -34,7 +34,6 @@
 		var/new_channel_len = round(src.song_channels.len / GLOB.musical_config.usage_info_channel_resolution)
 		var/new_event_len = round(src.event_manager_events.len / GLOB.musical_config.usage_info_event_resolution)
 		if (cur_channels != new_channel_len || cur_events != new_event_len)
-			GLOB.nanomanager.update_uis(src)
 			cur_channels = src.song_channels.len
 			cur_events = src.event_manager_events.len
 		sleep(2*world.tick_lag) // Every two ticks

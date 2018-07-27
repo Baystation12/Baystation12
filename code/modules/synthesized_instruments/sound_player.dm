@@ -8,7 +8,7 @@
 	var/forced_sound_in = 4
 	var/falloff = 2
 	var/apply_echo = 0
-	var/virtual_environment_selected = -1
+	var/virtual_environment_selected = 0
 	var/env[23]
 	var/echo[18]
 
@@ -44,7 +44,6 @@
 	src.stored_locations.Cut()
 	src.actual_instrument = null
 	src.instrument = null
-	song = null
 	QDEL_NULL(song)
 	. = ..()
 
@@ -59,6 +58,14 @@
 	return
 
 /datum/sound_player/proc/shouldStopPlaying(mob/user)
-	return actual_instrument:shouldStopPlaying(user)
+	var/obj/structure/synthesized_instrument/S = actual_instrument
+	var/obj/item/device/synthesized_instrument/D = actual_instrument
+	if(istype(S))
+		return S.shouldStopPlaying(user)
+	if(istype(D))
+		return D.shouldStopPlaying(user)
+
+	return 1 //Well if you got this far you did something very wrong
+
 
 #undef REFRESH_FREQUENCY

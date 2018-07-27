@@ -240,6 +240,6 @@ Bit flags that modify the behavior of above properties
 	var/sample
 	var/deviation = 0
 
-	New(sample_file, deviation)
-		src.sample = sample_file
-		src.deviation = deviation
+/datum/sample_pair/New(sample_file, deviation)
+	src.sample = sample_file
+	src.deviation = deviation

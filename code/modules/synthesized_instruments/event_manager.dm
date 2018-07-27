@@ -17,6 +17,7 @@ datum/musical_event
 /datum/musical_event/Destroy()
 	source = null
 	token = null
+	return ..()
 
 
 /datum/musical_event/proc/tick()
@@ -28,12 +29,10 @@ datum/musical_event
 
 
 /datum/musical_event/proc/update_sound()
-	src.token.PrivUpdateStatus(SOUND_UPDATE)
 	src.token.SetVolume(new_volume)
 
 
 /datum/musical_event/proc/destroy_sound()
-	token.Stop()
 	QDEL_NULL(token)
 
 
