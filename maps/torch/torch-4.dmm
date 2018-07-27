@@ -5724,7 +5724,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "aoo" = (
-/obj/structure/closet/crate/mechabeacons,
 /obj/random/maintenance/solgov,
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,

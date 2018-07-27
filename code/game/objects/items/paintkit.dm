@@ -79,36 +79,6 @@
 	for(var/exotype in allowed_types)
 		to_chat(usr, "- [capitalize(exotype)]")
 
-/obj/mecha/attackby(var/obj/item/weapon/W, var/mob/user)
-	if(istype(W, /obj/item/device/kit/paint))
-		if(occupant)
-			to_chat(user, "You can't customize a mech while someone is piloting it - that would be unsafe!")
-			return
-
-		var/obj/item/device/kit/paint/P = W
-		var/found = null
-
-		for(var/type in P.allowed_types)
-			if(type==src.initial_icon)
-				found = 1
-				break
-
-		if(!found)
-			to_chat(user, "That kit isn't meant for use on this class of exosuit.")
-			return
-
-		user.visible_message("[user] opens [P] and spends some quality time customising [src].")
-		src.SetName(P.new_name)
-		src.desc = P.new_desc
-		src.initial_icon = P.new_icon
-		if(P.new_icon_file)
-			src.icon = P.new_icon_file
-		src.reset_icon()
-		P.use(1, user)
-		return 1
-	else
-		return ..()
-
 //Ripley APLU kits.
 /obj/item/device/kit/paint/ripley
 	name = "\"Classic\" APLU customisation kit"

@@ -54,13 +54,6 @@
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
 
-/decl/hierarchy/supply_pack/operations/hoverpod
-	name = "Hoverpod Shipment"
-	contains = list()
-	cost = 80
-	containertype = /obj/structure/largecrate/hoverpod
-	containername = "\improper Hoverpod Crate"
-
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Webbing crate"
 	num_contained = 4

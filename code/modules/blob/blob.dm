@@ -97,11 +97,6 @@
 	if(V)
 		V.ex_act(2)
 		return
-	var/obj/mecha/M = locate() in T
-	if(M)
-		M.visible_message("<span class='danger'>The blob attacks \the [M]!</span>")
-		M.take_damage(40)
-		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)
 		CA.take_damage(30)

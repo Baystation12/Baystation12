@@ -128,11 +128,6 @@ var/list/mining_floors = list()
 		if(istype(R.module_active,/obj/item/weapon/pickaxe))
 			attackby(R.module_active,R)
 
-	else if(istype(AM,/obj/mecha))
-		var/obj/mecha/M = AM
-		if(istype(M.selected,/obj/item/mecha_parts/mecha_equipment/tool/drill))
-			M.selected.action(src)
-
 /turf/simulated/mineral/proc/MineralSpread()
 	if(mineral && mineral.spread)
 		for(var/trydir in GLOB.cardinal)

@@ -21,11 +21,6 @@
 /obj/random/loot,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
-"ai" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/mecha_parts/part/durand_right_arm,
-/turf/simulated/floor/holofloor/tiled/dark,
-/area/outpost/abandoned)
 "aj" = (
 /obj/machinery/porta_turret/stationary,
 /turf/simulated/floor/holofloor/tiled/dark,
@@ -59,7 +54,6 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/mecha_parts/chassis/durand,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "ao" = (
@@ -102,12 +96,6 @@
 "ax" = (
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
-/turf/simulated/floor/tiled/white,
-/area/outpost/abandoned)
-"ay" = (
-/obj/structure/table,
-/obj/effect/floor_decal/corner/paleblue/diagonal,
-/obj/item/mecha_parts/part/durand_right_leg,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "az" = (
@@ -200,11 +188,6 @@
 /area/outpost/abandoned)
 "aQ" = (
 /obj/machinery/mech_recharger,
-/turf/simulated/floor/tiled,
-/area/outpost/abandoned)
-"aR" = (
-/obj/machinery/mech_recharger,
-/obj/effect/decal/mecha_wreckage/ripley,
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "aS" = (
@@ -1331,7 +1314,6 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/mecha_parts/part/durand_left_arm,
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "es" = (
@@ -1759,16 +1741,6 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fF" = (
-/obj/effect/floor_decal/corner/paleblue{
-	icon_state = "corner_white";
-	dir = 10
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/white/airless,
-/area/outpost/abandoned)
-"fG" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
 /obj/effect/floor_decal/corner/paleblue{
 	icon_state = "corner_white";
 	dir = 10
@@ -12509,7 +12481,7 @@ dW
 et
 eO
 fo
-fG
+fF
 cG
 aa
 aa
@@ -15319,7 +15291,7 @@ aa
 aa
 aa
 af
-ay
+aJ
 az
 az
 bg
@@ -17135,7 +17107,7 @@ aa
 aa
 aa
 af
-ai
+al
 ao
 aj
 af
@@ -19158,7 +19130,7 @@ aa
 aa
 aa
 af
-aR
+aQ
 aI
 aI
 bo

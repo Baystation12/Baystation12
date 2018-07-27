@@ -4211,9 +4211,6 @@
 /area/rescue_base/base)
 "aka" = (
 /obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
-/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
-/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4221,11 +4218,6 @@
 /area/rescue_base/base)
 "akb" = (
 /obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/teleporter,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/item/mecha_parts/mecha_tracking,
 /obj/item/device/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
@@ -4347,7 +4339,6 @@
 /area/rescue_base/base)
 "akp" = (
 /obj/machinery/mech_recharger,
-/obj/mecha/medical/odysseus/loaded,
 /turf/space,
 /area/rescue_base/base)
 "akq" = (
@@ -4395,11 +4386,6 @@
 	icon_state = "vault";
 	dir = 1
 	},
-/area/rescue_base/base)
-"akw" = (
-/obj/machinery/mech_recharger,
-/obj/mecha/working/ripley/firefighter,
-/turf/space,
 /area/rescue_base/base)
 "akx" = (
 /obj/structure/flora/tree/pine,
@@ -4671,11 +4657,6 @@
 	dir = 1
 	},
 /area/rescue_base/base)
-"akK" = (
-/obj/machinery/mech_recharger,
-/obj/mecha/working/hoverpod,
-/turf/space,
-/area/rescue_base/base)
 "akL" = (
 /obj/item/device/radio/intercom/specops{
 	dir = 2;
@@ -4683,15 +4664,6 @@
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
-	},
-/area/rescue_base/base)
-"akM" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster,
-/obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
 	},
 /area/rescue_base/base)
 "akN" = (
@@ -4741,11 +4713,6 @@
 	dir = 8
 	},
 /area/rescue_base/base)
-"akR" = (
-/obj/mecha/combat/gygax/dark,
-/obj/machinery/mech_recharger,
-/turf/space,
-/area/rescue_base/base)
 "akS" = (
 /obj/structure/flora/tree/dead,
 /turf/unsimulated/floor{
@@ -4760,66 +4727,6 @@
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
-	},
-/area/rescue_base/base)
-"akU" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
-/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/rescue_base/base)
-"akV" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/rescue_base/base)
-"akW" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill,
-/obj/item/mecha_parts/mecha_equipment/tool/cable_layer,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/rescue_base/base)
-"akX" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tool/extinguisher,
-/obj/item/mecha_parts/mecha_equipment/tool/rcd,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/rescue_base/base)
-"akY" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tool/passenger,
-/obj/item/mecha_parts/mecha_equipment/tool/passenger,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/rescue_base/base)
-"akZ" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/weapon/energy/ion,
-/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
 	},
 /area/rescue_base/base)
 "ala" = (
@@ -9719,7 +9626,6 @@
 	},
 /area/syndicate_mothership)
 "awW" = (
-/obj/mecha/combat/gygax/dark,
 /obj/machinery/camera/network/ert{
 	c_tag = "Assault Armor North"
 	},
@@ -9816,10 +9722,6 @@
 /area/centcom/specops)
 "axj" = (
 /obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/weapon/energy/ion,
-/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
-/obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster,
-/obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -10064,7 +9966,6 @@
 	},
 /area/syndicate_mothership)
 "axQ" = (
-/obj/mecha/medical/odysseus/loaded,
 /obj/machinery/mech_recharger,
 /turf/unsimulated/floor{
 	icon_state = "plating";
@@ -10072,9 +9973,6 @@
 	},
 /area/centcom/specops)
 "axR" = (
-/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
-/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
-/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun,
 /obj/structure/table/steel_reinforced,
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -10381,18 +10279,6 @@
 	icon_state = "lino"
 	},
 /area/syndicate_mothership)
-"ayn" = (
-/obj/item/mecha_parts/mecha_equipment/teleporter,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/item/mecha_parts/mecha_tracking,
-/obj/structure/table/steel_reinforced,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/centcom/specops)
 "ayo" = (
 /obj/machinery/vending/engineering,
 /turf/unsimulated/floor{
@@ -10641,17 +10527,7 @@
 	dir = 8
 	},
 /area/syndicate_mothership)
-"ayM" = (
-/obj/mecha/working/ripley/firefighter,
-/obj/machinery/mech_recharger,
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/centcom/specops)
 "ayN" = (
-/obj/item/mecha_parts/mecha_equipment/tool/extinguisher,
-/obj/item/mecha_parts/mecha_equipment/tool/rcd,
 /obj/item/weapon/pickaxe/diamonddrill,
 /obj/structure/table/steel_reinforced,
 /turf/unsimulated/floor{
@@ -10909,15 +10785,6 @@
 	dir = 1
 	},
 /area/syndicate_mothership)
-"azn" = (
-/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill,
-/obj/item/mecha_parts/mecha_equipment/tool/cable_layer,
-/obj/structure/table/steel_reinforced,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/centcom/specops)
 "azo" = (
 /obj/structure/table/rack,
 /obj/item/weapon/rig/military/equipped,
@@ -11135,29 +11002,6 @@
 	dir = 8
 	},
 /area/syndicate_mothership)
-"azO" = (
-/obj/mecha/working/hoverpod,
-/obj/machinery/mech_recharger,
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/centcom/specops)
-"azP" = (
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/item/mecha_parts/mecha_equipment/repair_droid,
-/obj/structure/table/steel_reinforced,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/centcom/specops)
 "azQ" = (
 /obj/structure/table/rack,
 /obj/item/rig_module/mounted/taser,
@@ -11775,17 +11619,6 @@
 	dir = 8
 	},
 /area/syndicate_mothership)
-"aAY" = (
-/obj/structure/table/reinforced,
-/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
-/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
-/obj/item/mecha_parts/mecha_equipment/tool/passenger,
-/obj/item/mecha_parts/mecha_equipment/tool/passenger,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
-	},
-/area/centcom/specops)
 "aAZ" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Medical Special Operations";
@@ -15832,12 +15665,6 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/elite_squad)
-"aJV" = (
-/obj/mecha/combat/marauder/mauler,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/syndicate_mothership/elite_squad)
 "aJW" = (
 /obj/machinery/door/airlock/centcom{
 	name = "General Access";
@@ -16954,15 +16781,6 @@
 "aMv" = (
 /turf/unsimulated/floor{
 	icon_state = "dark"
-	},
-/area/syndicate_mothership/raider_base)
-"aMw" = (
-/obj/mecha/working/ripley/mining{
-	internals_req_access = list(150)
-	},
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
 	},
 /area/syndicate_mothership/raider_base)
 "aMx" = (
@@ -26661,9 +26479,9 @@ axi
 avY
 axQ
 axi
-ayM
+axQ
 axi
-azO
+axQ
 aAl
 avY
 avY
@@ -27266,13 +27084,13 @@ awY
 axj
 avY
 axR
-ayn
+axR
 ayN
-azn
-azP
+axR
+axR
 awY
 awY
-aAY
+axj
 avY
 aab
 aab
@@ -30641,7 +30459,7 @@ aaL
 aaL
 aaL
 aaL
-akU
+aka
 aae
 adB
 alH
@@ -30843,7 +30661,7 @@ aaL
 aaL
 aaL
 aaL
-akV
+aka
 aae
 adC
 alH
@@ -31045,7 +30863,7 @@ aaL
 aaL
 aaL
 aaL
-akW
+aka
 aae
 adA
 alI
@@ -31247,7 +31065,7 @@ aaL
 aaL
 aaL
 aaL
-akX
+aka
 aae
 adA
 adB
@@ -31446,10 +31264,10 @@ aad
 aae
 akc
 akp
-akw
-akK
+akp
+akp
 aaL
-akY
+aka
 aae
 adB
 adC
@@ -32053,9 +31871,9 @@ aad
 aad
 aad
 aae
-akM
-akR
-akZ
+aka
+akp
+aka
 aae
 aad
 aad
@@ -59840,7 +59658,7 @@ aLH
 aLM
 aLM
 aLM
-aMw
+aMi
 aMv
 aMv
 aLN
@@ -63059,13 +62877,13 @@ aab
 aab
 aab
 aIP
-aJV
 aJT
-aJV
 aJT
-aJV
 aJT
-aJV
+aJT
+aJT
+aJT
+aJT
 aIP
 ajF
 aLH
