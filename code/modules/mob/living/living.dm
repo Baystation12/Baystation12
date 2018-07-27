@@ -61,6 +61,7 @@ default behaviour is:
 	spawn(0)
 		if ((!( yes ) || now_pushing) || !loc)
 			return
+
 		now_pushing = 1
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM

@@ -144,12 +144,18 @@
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*130 //so that a rig with default powercell can build ~2.5x the stuff a fully-loaded RCD can.
+	var/obj/item/weapon/cell/cell
 	if(istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
 		if(module.holder && module.holder.cell)
-			if(module.holder.cell.charge >= cost)
-				module.holder.cell.use(cost)
-				return 1
+			cell = module.holder.cell
+	else if(istype(user, /mob/living/heavy_vehicle))
+		var/mob/living/heavy_vehicle/mech = user
+		if(mech.body && mech.body)
+			cell = mech.body.cell
+	if(cell && cell.charge >= cost)
+		cell.use(cost)
+		return 1
 	return 0
 
 /obj/item/weapon/rcd/mounted/attackby()

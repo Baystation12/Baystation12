@@ -98,13 +98,13 @@
 	name = "\"Firestarter\" APLU customisation kit"
 	new_name = "APLU \"Firestarter\""
 	new_desc = "A standard APLU exosuit with stylish orange flame decals."
-	new_icon = "ripley_flames_red"
+	new_icon = "flames_red"
 
 /obj/item/device/kit/paint/ripley/flames_blue
 	name = "\"Burning Chrome\" APLU customisation kit"
 	new_name = "APLU \"Burning Chrome\""
 	new_desc = "A standard APLU exosuit with stylish blue flame decals."
-	new_icon = "ripley_flames_blue"
+	new_icon = "flames_blue"
 
 // Durand kits.
 /obj/item/device/kit/paint/durand
