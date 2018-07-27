@@ -2280,7 +2280,8 @@
 	},
 /obj/machinery/door/airlock/glass/science{
 	name = "Ready Room";
-	req_access = list(93)
+	req_access = newlist();
+	req_one_access = list(93,95)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/unused)
@@ -11199,7 +11200,7 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Supply Office";
-	req_access = list(31);
+	req_access = list(31)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -14144,7 +14145,7 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Supply Office";
-	req_access = list(31);
+	req_access = list(31)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14238,7 +14239,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = -24;
-	req_access = list(31);
+	req_access = list(31)
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -15179,7 +15180,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = 24;
-	req_access = list(31);
+	req_access = list(31)
 	},
 /obj/machinery/light_switch{
 	pixel_x = 6;
@@ -15973,7 +15974,7 @@
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
 	name = "Warehouse";
-	req_access = list(31);
+	req_access = list(31)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16020,7 +16021,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = -6;
-	req_access = list(31);
+	req_access = list(31)
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/monotile,
@@ -16703,7 +16704,7 @@
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance";
-	req_access = list(12,31);
+	req_access = list(12,31)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
