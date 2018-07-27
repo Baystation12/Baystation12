@@ -25,7 +25,6 @@
 		to_chat(usr, "Non-numeric value was given")
 		return 0
 
-	owner.add_fingerprint(usr)
 
 	switch (target)
 		if ("tempo") src.player.song.tempo = src.player.song.sanitize_tempo(src.player.song.tempo + value*world.tick_lag)
@@ -40,11 +39,13 @@
 			var/t = ""
 			do
 				t = html_encode(input(usr, "Please paste the entire song, formatted:", text("[]", owner.name), t)  as message)
-				if(!in_range(owner, usr))
+				if(!CanInteractWith(usr, owner, GLOB.physical_state))
 					return
 
 				if(length(t) >= 2*src.maximum_lines*src.maximum_line_length)
 					var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
+					if(!CanInteractWith(usr, owner, GLOB.physical_state))
+						return
 					if(cont == "no")
 						break
 			while(length(t) > 2*src.maximum_lines*src.maximum_line_length)
@@ -91,6 +92,8 @@
 			src.player.song.sustain_timer = max(min(player.song.sustain_timer+value, GLOB.musical_config.longest_sustain_timer), 1)
 		if ("soft_coeff")
 			var/new_coeff = input(usr, "from [GLOB.musical_config.gentlest_drop] to [GLOB.musical_config.steepest_drop]") as num
+			if(!CanInteractWith(usr, owner, GLOB.physical_state))
+				return
 			new_coeff = round(min(max(new_coeff, GLOB.musical_config.gentlest_drop), GLOB.musical_config.steepest_drop), 0.001)
 			src.player.song.soft_coeff = new_coeff
 		if ("instrument")
@@ -100,6 +103,8 @@
 				categories |= instrument.category
 
 			var/category = input(usr, "Choose a category") in categories as text|null
+			if(!CanInteractWith(usr, owner, GLOB.physical_state))
+				return
 			var/list/instruments_available = list()
 			for (var/key in instruments)
 				var/datum/instrument/instrument = instruments[key]
@@ -107,6 +112,8 @@
 					instruments_available += key
 
 			var/new_instrument = input(usr, "Choose an instrument") in instruments_available as text|null
+			if(!CanInteractWith(usr, owner, GLOB.physical_state))
+				return
 			if (new_instrument)
 				src.player.song.instrument_data = instruments[new_instrument]
 		if ("autorepeat") src.player.song.autorepeat = value

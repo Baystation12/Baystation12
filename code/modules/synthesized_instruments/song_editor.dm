@@ -7,7 +7,7 @@
 
 
 /datum/nano_module/song_editor/New(var/host, var/topic_manager, datum/synthesized_song/song)
-	. = ..()
+	..()
 	src.host = host
 	src.song = song
 
@@ -82,6 +82,8 @@
 			if(num > src.song.lines.len || num < 1)
 				return
 			var/content = html_encode(input(usr, "Enter your line: ", "Edit line", src.song.lines[num]) as text|null)
+			if(num > src.song.lines.len || num < 1)
+				return
 			if(!content)
 				return
 			if(length(content) > GLOB.musical_config.max_line_length)
