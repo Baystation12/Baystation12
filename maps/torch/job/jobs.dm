@@ -23,7 +23,7 @@
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist, /datum/job/medical_trainee,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor, /datum/job/mining,
-						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
+						/datum/job/janitor, /datum/job/chef, /datum/job/bartender, /datum/job/chaplain,
 						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
@@ -285,7 +285,7 @@
 	                    SKILL_COMBAT      = SKILL_BASIC,
 	                    SKILL_WEAPONS     = SKILL_ADEPT,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
-	
+
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX,
 	                    SKILL_FORENSICS   = SKILL_MAX)
@@ -1119,8 +1119,7 @@
 	economic_modifier = 5
 	supervisors = "the Chief Medical Officer"
 	alt_titles = list(
-		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist,
-		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain,
+		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
 	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	allowed_branches = list(
@@ -1137,11 +1136,12 @@
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX)
 
-	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew)
+	access = list(access_medical, access_psychiatrist, access_solgov_crew)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/records)
 
 /datum/job/qm
 	title = "Deck Officer"
@@ -1374,6 +1374,37 @@
 
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
+
+/datum/job/chaplain
+	title = "Chaplain"
+	department = "Service"
+	department_flag = SRV
+
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Executive Officer"
+	alt_titles = list()
+	selection_color = "#515151"
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+	)
+
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC)
+
+
+	access = list(access_solgov_crew, access_medical, access_chapel_office, access_morgue, access_crematorium) // Medical access is so they can access post-mortem instructions in records
+
+	software_on_spawn = list(/datum/computer_file/program/records)
 
 /datum/job/senior_scientist
 	title = "Senior Researcher"

@@ -383,10 +383,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Psychiatrist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain
-	name = OUTFIT_JOB_NAME("Chaplain - Torch")
-	uniform = /obj/item/clothing/under/rank/chaplain
-
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
 	name = OUTFIT_JOB_NAME("Counselor - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
@@ -505,6 +501,24 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
 	name = OUTFIT_JOB_NAME("Crewman - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	name = OUTFIT_JOB_NAME("Chaplain - Torch")
+	uniform = /obj/item/clothing/under/rank/chaplain
+	shoes = /obj/item/clothing/shoes/black
+	id_type = /obj/item/weapon/card/id/torch/contractor/service/chaplain
+	pda_type = /obj/item/modular_computer/pda
+	backpack_contents = list(/obj/item/weapon/storage/bible = 1)
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec
+	name = OUTFIT_JOB_NAME("Chaplain - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/fleet
+	name = OUTFIT_JOB_NAME("Chaplain - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Exploration Outfits
