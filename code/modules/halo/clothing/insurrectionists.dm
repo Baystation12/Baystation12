@@ -97,7 +97,7 @@
 	on = 0
 
 /obj/item/weapon/storage/briefcase/colossuscase
-	name = "Colossus Case"
+	name = "Thick Brief Case"
 	desc = "This is a hardy metal bound briefcase which seems larger then your normal carry on. Inside of this enourmous case you can see there are two molded slots which seem perfectly fitted for both the Colossus Armor and Helmet in their entirety. You should silently thank whatever various diety you believe in that this case even exists in the first place."
 	icon_state = "colossuscase"
 	item_state = "colossuscase"
@@ -108,7 +108,7 @@
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 32
-	allowed = list(/obj/item/clothing/head/bomb_hood/security/colossus, /obj/item/clothing/suit/bomb_suit/security/colossus)
+	can_hold = list(/obj/item/clothing/head/bomb_hood/security/colossus, /obj/item/clothing/suit/bomb_suit/security/colossus)
 	slowdown_general = 0
 
 /obj/item/clothing/suit/justice/zeal
