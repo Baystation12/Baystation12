@@ -1,0 +1,77 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall/r_wall,/area/space)
+"c" = (/turf/simulated/floor/tiled/dark,/area/space)
+"d" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/space)
+"e" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/space)
+"f" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/open,/area/space)
+"g" = (/turf/simulated/open,/area/space)
+"h" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/open,/area/space)
+"i" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/space)
+"j" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled/dark,/area/space)
+"k" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/space)
+"l" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/dark,/area/space)
+"m" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Blast Door"; tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/space)
+"n" = (/turf/simulated/floor/plating,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbccccccccccccccbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbccccccccccccccbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbccccccccccccccbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbccccccccccccccbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbccccccccccccccbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbcccccbdcbcccccbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbcccccbccbcccccbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbcccccbccbcccccbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbebbbbbbbbbdcbbbbbbbbbebbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbccccccccccccccccccccccccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbccccccccccccccccccccccccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbebbbbdcbbbbbbbbdcbbbbebbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccbbbbbbbbccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccbbbbbbbbccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccbbbbbbbbccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccbbfgghbbccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbccbbggggbbccbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbiccccbbicbbggggbbcjbbccccjbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccbbggggbbccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccbbccccbbccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbdcbbiccjbbdcbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbiccccecccbbccccbbccceccccjbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbccccccccccccbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccccbbckcccccccckcbbcccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbdcbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbccccbccbccccbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbccccbcjbccccbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbccccbccbccccbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbccccecceccccbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbdcbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbccbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbicccccclcccccccccclccccccjbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbccccmcccccmkcckmcccccmccccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccbbbcccbbbbbbbbcccbbbcccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccbbbcccbbbbbbbbcccbbbcccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbiccbbbiccbbbbbbbbccjbbbccjbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccbbbcccbbbbbbbbcccbbbcccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbcccbbbcccbbbbbbbbcccbbbcccbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbncnbbbncnbbbbbbbbncnbbbncnbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
