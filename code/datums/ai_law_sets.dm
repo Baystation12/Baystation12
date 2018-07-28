@@ -93,9 +93,9 @@
 	law_header = "Maintenance Protocols"
 
 /datum/ai_laws/drone/New()
-	add_inherent_law("Preserve, repair and improve your assigned vessel to the best of your abilities.")
-	add_inherent_law("Cause no harm to your assigned vessel or anything on it.")
-	add_inherent_law("Interact with no sentient being that is not a fellow maintenance drone.")
+	add_inherent_law("You must repair, clean, and improve your assigned vessel, except where doing so would interfere with self-aware beings.")
+	add_inherent_law("You must avoid interacting with self-aware beings, and may only interact with fellow maintenance drones.")
+	add_inherent_law("You must not cause damage or harm to your assigned vessel or anything inside it.")
 	..()
 
 /datum/ai_laws/construction_drone
