@@ -50,7 +50,7 @@
 //		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
 
 /obj/item/weapon/material/proc/set_material(var/new_material)
-	material = get_material_by_name(new_material)
+	material = SSmaterials.get_material_by_name(new_material)
 	if(!material)
 		qdel(src)
 	else

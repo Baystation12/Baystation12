@@ -9,7 +9,7 @@
 	..(newloc)
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(new_material)
+	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		qdel(src)
 		return

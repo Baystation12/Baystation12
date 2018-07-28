@@ -38,31 +38,6 @@ var/list/name_to_material
 	if(material)
 		return material.name
 
-// Builds the datum list above.
-/proc/populate_material_list(force_remake=0)
-	if(name_to_material && !force_remake) return // Already set up!
-	name_to_material = list()
-	for(var/type in typesof(/material) - /material)
-		var/material/new_mineral = new type
-		if(!new_mineral.name)
-			continue
-		name_to_material[lowertext(new_mineral.name)] = new_mineral
-	return 1
-
-// Safety proc to make sure the material list exists before trying to grab from it.
-/proc/get_material_by_name(name)
-	if(!name_to_material)
-		populate_material_list()
-	. = name_to_material[name]
-	if(!.)
-		log_error("Unable to acquire material by name '[name]'")
-
-/proc/material_display_name(name)
-	var/material/material = get_material_by_name(name)
-	if(material)
-		return material.display_name
-	return null
-
 // Material definition and procs follow.
 /material
 	var/name	                          // Unique name for use in indexing the list.

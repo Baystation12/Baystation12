@@ -18,7 +18,7 @@
 	. = ..()
 	if(!default_type)
 		default_type = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name("[default_type]")
+	material = SSmaterials.get_material_by_name("[default_type]")
 	if(!material)
 		return INITIALIZE_HINT_QDEL
 
@@ -314,7 +314,7 @@
 
 /obj/item/stack/material/glass/phoronrglass/ten
 	amount = 10
-	
+
 /obj/item/stack/material/aliumium
 	name = "aliumium chunks"
 	icon_state = "sheet-torn"

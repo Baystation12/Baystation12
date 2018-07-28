@@ -23,7 +23,7 @@
 	return material.value * amount
 
 /obj/item/weapon/ore/Value()
-	var/material/mat = get_material_by_name(ore.material)
+	var/material/mat = SSmaterials.get_material_by_name(ore.material)
 	if(mat)
 		return mat.value
 	return 0

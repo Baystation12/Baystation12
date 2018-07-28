@@ -37,7 +37,7 @@
 	. = ..()
 
 	if(!isnull(material) && !istype(material))
-		material = get_material_by_name(material)
+		material = SSmaterials.get_material_by_name(material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 
