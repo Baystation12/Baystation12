@@ -46,50 +46,57 @@
 		"Earth",
 		"Luna",
 		"Mars",
+		"Pluto",
+		"Ceti Epsilon",
+		"Eos",
+		"Tiamat",
 		"Terra",
+		"Novaya Zemlya",
 		"Gaia",
 		"Moghes",
 		"Ahdomai",
 		"Qerrbalak",
-		"Tersten",
-		"Avalon",
-		"Yuklid",
-		"Venus",
-		"Cinu",
 		"Tau-Wilo",
-		"Ceres",
-		"Galilei"
-	)
+		"Avalon",
+		"Tersten",
+		"Magnitka",
+		"Yuklid V",
+		"Cinu"
+		)
 
 	home_system_choices = list(
 		"Sol",
-		"Nyx",
 		"Tau Ceti",
-		"Epsilon Ursae Minoris",
-		"Zamsiin-lr",
+		"Helios",
+		"Alpha Centuri",
 		"Gilgamesh",
-		"Gavil",
+		"Galilei",
 		"Uuoea-Esa",
-		"Kernel",
-		"Gessshire",
-		"Galilei"
+		"Zamsiin-lr",
+		"Qerr'Valis",
+		"XX-168",
+		"Klaudof",
+		"Gavil",
+		"Ursa",
+		"Yuklid",
+		"Lucinaer"
 		)
 
 	faction_choices = list(
 		"Sol Central Government",
 		"Terran Colonial Confederation",
+		"NanoTrasen",
+		"Xynergy",
 		"Vey Med",
 		"Einstein Engines",
-		"Free Trade Union",
-		"NanoTrasen",
 		"Ward-Takahashi GMB",
 		"Gilthari Exports",
 		"Grayson Manufactories Ltd.",
 		"Aether Atmospherics",
 		"Zeng-Hu Pharmaceuticals",
 		"Hephaestus Industries",
+		"Free Trade Union",
 		"Commonwealth of Ahdomai",
-		"Xynergy",
 		"Positronic Union"
 		)
 
