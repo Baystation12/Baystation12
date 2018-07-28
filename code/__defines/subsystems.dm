@@ -43,7 +43,8 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
-#define SS_INIT_GARBAGE          7
+#define SS_INIT_GARBAGE          8
+#define SS_INIT_MATERIALS        7
 #define SS_INIT_ANTAGS           6
 #define SS_INIT_SKYBOX           5
 #define SS_INIT_MAPPING          4

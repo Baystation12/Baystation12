@@ -11,6 +11,7 @@ SUBSYSTEM_DEF(materials)
 
 /datum/controller/subsystem/materials/Initialize()
 	build_material_lists()
+	. = ..()
 
 /datum/controller/subsystem/materials/proc/build_material_lists()
 
@@ -35,7 +36,7 @@ SUBSYSTEM_DEF(materials)
 				for(var/component in new_mineral.composite_material)
 					processable_ores[component] = TRUE
 					alloy_components[component] = TRUE
-		CHECK_TICK
+
 	. = ..()
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(name)
@@ -50,3 +51,9 @@ SUBSYSTEM_DEF(materials)
 	if(material)
 		return material.display_name
 	return null
+
+/client/verb/ore_spam()
+	set name = "SPAM ORE"
+	for(var/oretype in subtypesof(/obj/item/weapon/ore))
+		for(var/i = 1 to rand(15,20))
+			new oretype(get_turf(mob))
