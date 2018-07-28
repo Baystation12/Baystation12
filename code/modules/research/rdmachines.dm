@@ -23,7 +23,7 @@ var/list/default_material_composition = list("steel" = 0, "glass" = 0, "gold" = 
 			reagents.trans_to_obj(I, reagents.total_volume)
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
-			var/path = get_material_by_name(f)
+			var/path = SSmaterials.get_material_by_name(f)
 			if(path)
 				var/obj/item/stack/S = new f(loc)
 				S.amount = round(materials[f] / SHEET_MATERIAL_AMOUNT)
@@ -33,7 +33,7 @@ var/list/default_material_composition = list("steel" = 0, "glass" = 0, "gold" = 
 /obj/machinery/r_n_d/proc/eject(var/material, var/amount)
 	if(!(material in materials))
 		return
-	var/material/mat = get_material_by_name(material)
+	var/material/mat = SSmaterials.get_material_by_name(material)
 	var/obj/item/stack/material/sheetType = mat.stack_type
 	var/perUnit = initial(sheetType.perunit)
 	var/eject = round(materials[material] / perUnit)

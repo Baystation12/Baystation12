@@ -295,7 +295,7 @@
 /obj/machinery/autolathe/dismantle()
 
 	for(var/mat in stored_material)
-		var/material/M = get_material_by_name(mat)
+		var/material/M = SSmaterials.get_material_by_name(mat)
 		if(!istype(M))
 			continue
 		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
