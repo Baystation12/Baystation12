@@ -172,26 +172,18 @@
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
-	req_access = list(access_psychiatrist,access_chapel_office)
-	icon_state = "chaplainsecure1"
-	icon_closed = "chaplainsecure"
-	icon_locked = "chaplainsecure1"
-	icon_opened = "chaplainsecureopen"
-	icon_off = "chaplainsecureoff"
+	req_access = list(access_psychiatrist)
+	icon_state = "medical1"
+	icon_closed = "medical"
+	icon_locked = "medical1"
+	icon_opened = "medicalopen"
+	icon_off = "medicaloff"
 
 /obj/structure/closet/secure_closet/counselor/WillContain()
 	return list(
 		/obj/item/clothing/under/rank/psych,
 		/obj/item/clothing/under/rank/psych/turtleneck,
-		/obj/item/clothing/under/rank/chaplain,
-		/obj/item/clothing/shoes/black,
-		/obj/item/clothing/suit/chaplain_hoodie,
-		/obj/item/weapon/storage/fancy/candle_box = 2,
-		/obj/item/weapon/deck/tarot,
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
-		/obj/item/weapon/nullrod,
-		/obj/item/weapon/storage/bible,
-		/obj/item/clothing/suit/straight_jacket,
+		/obj/item/clothing/shoes/white,
 		/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/storage/pill_bottle/citalopram,

@@ -117,6 +117,9 @@
 /obj/item/weapon/card/id/torch/contractor/service/bartender
 	job_access_type = /datum/job/bartender
 
+/obj/item/weapon/card/id/torch/contractor/service/chaplain
+	job_access_type = /datum/job/chaplain
+
 
 /obj/item/weapon/card/id/torch/crew/representative
 	job_access_type = /datum/job/representative

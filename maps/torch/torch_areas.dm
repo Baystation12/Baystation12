@@ -1420,8 +1420,8 @@
 
 // Chapel
 
-/area/chapel/main
-	name = "\improper Chapel"
+/area/chapel/office
+	name = "\improper Chaplain's Office"
 	icon_state = "chapel"
 	ambience = list('sound/ambience/ambicha1.ogg','sound/ambience/ambicha2.ogg','sound/ambience/ambicha3.ogg','sound/ambience/ambicha4.ogg','sound/music/traitor.ogg')
 	sound_env = LARGE_ENCLOSED
