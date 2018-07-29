@@ -236,7 +236,7 @@
 		return M
 	user.visible_message("<span class='notice'>\The [user] removes the [M.display_name] [what] from \the [src].</span>",
 	                              "<span class='notice'>You remove the [M.display_name] [what] from \the [src].</span>")
-	new M.stack_type(src.loc)
+	new M.stack_type(src.loc, 1, M.name)
 	manipulating = 0
 	return null
 

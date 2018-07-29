@@ -7,6 +7,9 @@
 	var/material/material
 	var/datum/geosample/geologic_data
 
+/obj/item/weapon/ore/get_material()
+	return material
+
 /obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/C = W

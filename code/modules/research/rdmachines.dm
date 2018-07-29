@@ -40,7 +40,7 @@ var/list/default_material_composition = list("steel" = 0, "glass" = 0, "gold" = 
 	eject = amount == -1 ? eject : min(eject, amount)
 	if(eject < 1)
 		return
-	new sheetType(loc, eject)
+	new sheetType(loc, eject, mat.name)
 	materials[material] -= eject * perUnit
 
 /obj/machinery/r_n_d/proc/TotalMaterials()

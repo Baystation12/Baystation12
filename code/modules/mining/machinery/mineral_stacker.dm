@@ -29,7 +29,7 @@
 		for(var/sheet in stacks)
 			if(stacks[sheet] >= stack_amt)
 				var/material/stackmat = SSmaterials.get_material_by_name(sheet)
-				new stackmat.stack_type(output_turf, amount = stack_amt)
+				new stackmat.stack_type(output_turf, amount = stack_amt, stackmat.name)
 				stacks[sheet] -= stack_amt
 
 /obj/machinery/mineral/stacking_machine/get_console_data()
@@ -52,7 +52,7 @@
 			. = TRUE
 		else if(href_list["release_stack"] && stacks[href_list["release_stack"]] > 0)
 			var/material/stackmat = SSmaterials.get_material_by_name(href_list["release_stack"])
-			new stackmat.stack_type(output_turf, amount = stacks[href_list["release_stack"]])
+			new stackmat.stack_type(output_turf, amount = stacks[href_list["release_stack"]], stackmat.name)
 			stacks[href_list["release_stack"]] = 0
 			. = TRUE
 		if(. && console)

@@ -1,6 +1,6 @@
 /material/pitchblende
 	name = "pitchblende"
-	stack_type = null
+	ore_compresses_to = "pitchblende"
 	icon_colour = "#917d1a"
 	ore_smelts_to = "uranium"
 	ore_result_amount = 5
@@ -14,10 +14,14 @@
 		)
 	xarch_source_mineral = "potassium"
 	ore_icon_overlay = "nugget"
+	chem_products = list(
+		/datum/reagent/radium = 10,
+		/datum/reagent/uranium = 10
+		)
 
 /material/graphene
 	name = "graphene"
-	stack_type = null
+	ore_compresses_to = "graphene"
 	icon_colour = "#444444"
 	ore_smelts_to = "plastic"
 	ore_name = "graphene"
@@ -26,6 +30,163 @@
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
+	chem_products = list(
+		/datum/reagent/carbon = 15,
+		/datum/reagent/acetone = 5
+		)
+
+/material/quartz
+	name = "quartz"
+	ore_compresses_to = "quartz"
+	ore_name = "quartz"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#effffe"
+	chem_products = list(
+		/datum/reagent/silicon = 20
+		)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+
+/material/pyrite
+	name = "pyrite"
+	ore_name = "pyrite"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#ccc9a3"
+	chem_products = list(
+		/datum/reagent/sulfur = 15,
+		/datum/reagent/iron = 5
+		)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+	ore_compresses_to = "pyrite"
+
+/material/spodumene
+	name = "spodumene"
+	ore_compresses_to = "spodumene"
+	ore_name = "spodumene"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#e5becb"
+	chem_products = list(
+		/datum/reagent/lithium = 20
+		)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+
+/material/cinnabar
+	name = "cinnabar"
+	ore_compresses_to = "cinnabar"
+	ore_name = "cinnabar"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#e54e4e"
+	chem_products = list(
+		/datum/reagent/mercury  = 20
+	)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+
+/material/phosphorite
+	name = "phosophorite"
+	ore_compresses_to = "phosphorite"
+	ore_name = "phosphorite"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#acad95"
+	chem_products = list(
+		/datum/reagent/phosphorus = 20
+	)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+
+/material/rocksalt
+	name = "rock salt"
+	ore_compresses_to = "rock salt"
+	ore_name = "rock salt"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#d1c0bc"
+	chem_products = list(
+		/datum/reagent/sodium = 20
+	)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+
+/material/potash
+	name = "potash"
+	ore_compresses_to = "potash"
+	ore_name = "potash"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#b77464"
+	chem_products = list(
+		/datum/reagent/potassium = 20
+		)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+
+/material/bauxite
+	name = "bauxite"
+	ore_name = "bauxite"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	icon_colour = "#d8ad97"
+	chem_products = list(
+		/datum/reagent/aluminum = 20
+		)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+	ore_compresses_to = "bauxite"
 
 /material/sand
 	name = "sand"
@@ -35,6 +196,9 @@
 	ore_compresses_to = "sandstone"
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
+	chem_products = list(
+		/datum/reagent/silicon = 20
+		)
 
 /material/phoron
 	name = "phoron"
@@ -51,8 +215,8 @@
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
 	chem_products = list(
-				/datum/reagent/toxin/phoron = 20
-				)
+		/datum/reagent/toxin/phoron = 20
+		)
 	construction_difficulty = 2
 	ore_name = "phoron"
 	ore_compresses_to = "phoron"

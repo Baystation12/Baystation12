@@ -95,14 +95,14 @@
 				making = min(sheets_per_tick-sheets, making)
 				for(var/otherthing in M.composite_material)
 					ores_stored[otherthing] -= making * M.composite_material[otherthing]
-				new M.stack_type(output_turf, amount = max(1, making))
+				new M.stack_type(output_turf, amount = max(1, making), M.name)
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/material/metal, var/max_result)
 	. = Clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	ores_stored[metal.name] -= . * metal.units_per_sheet
 	var/material/M = SSmaterials.get_material_by_name(metal.ore_smelts_to)
 	if(istype(M))
-		new M.stack_type(output_turf, amount = .)
+		new M.stack_type(output_turf, amount = ., M.name)
 	else
 		. = -(.)
 
@@ -113,7 +113,7 @@
 		. = Floor(making * 0.5)
 		var/material/M = SSmaterials.get_material_by_name(metal.ore_compresses_to)
 		if(istype(M))
-			new M.stack_type(output_turf, amount = .)
+			new M.stack_type(output_turf, amount = ., M.name)
 		else
 			. = -(.)
 	else
