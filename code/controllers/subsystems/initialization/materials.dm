@@ -51,15 +51,3 @@ SUBSYSTEM_DEF(materials)
 	if(material)
 		return material.display_name
 	return null
-
-/client/verb/ore_spam()
-	set name = "SPAM ORE"
-	for(var/oretype in SSmaterials.processable_ores)
-		for(var/i = 1 to rand(15,20))
-			new /obj/item/weapon/ore(get_turf(mob), oretype)
-
-/client/verb/coin_spam()
-	set name = "SPAM COINS"
-	for(var/mat in SSmaterials.materials_by_name)
-		for(var/i = 1 to rand(1,3))
-			new /obj/item/weapon/material/coin(get_turf(mob), mat)
