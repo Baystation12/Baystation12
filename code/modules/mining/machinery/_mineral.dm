@@ -29,9 +29,16 @@
 	output_turf = _dir ? get_step(loc, _dir) : null
 
 /obj/machinery/mineral/proc/get_console_data()
-	. = list("=== <a href='?src=\ref[src];configure_input_output=1'>Configure input/output.</a>")
-	if(ispath(console))
-		. += "=== <a href='?src=\ref[src];scan_for_console=1'>Scan for console.</a>"
+	. = list("<h1>Input/Output</h1>")
+	if(input_turf)
+		. += "<b>Input</b>: [dir2text(get_dir(src, input_turf))]."
+	else
+		. += "<b>Input</b>: disabled."
+	if(output_turf)
+		. += "<b>Output</b>: [dir2text(get_dir(src, output_turf))]."
+	else
+		. += "<b>Output</b>: disabled."
+	. += "<br><a href='?src=\ref[src];configure_input_output=1'>Configure.</a>"
 
 /obj/machinery/mineral/proc/can_use(var/mob/user)
 	return (user && (istype(usr, /mob/living/silicon) || usr.Adjacent(src) || (console && usr.Adjacent(console))))

@@ -54,6 +54,6 @@ SUBSYSTEM_DEF(materials)
 
 /client/verb/ore_spam()
 	set name = "SPAM ORE"
-	for(var/oretype in subtypesof(/obj/item/weapon/ore))
+	for(var/oretype in SSmaterials.processable_ores)
 		for(var/i = 1 to rand(15,20))
-			new oretype(get_turf(mob))
+			new /obj/item/weapon/ore(get_turf(mob), oretype)

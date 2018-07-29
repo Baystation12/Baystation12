@@ -98,7 +98,7 @@ var/list/name_to_material
 	// Noise made when you hit structure made of this material.
 	var/hitsound = 'sound/weapons/genhit.ogg'
 	// Path to resulting stacktype. Todo remove need for this.
-	var/stack_type = /obj/item/stack/material
+	var/stack_type = /obj/item/stack/material/generic
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
@@ -213,13 +213,11 @@ var/list/name_to_material
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
 /material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	for(var/x=1;x<(is_devastated?2:3);x++)
-		place_sheet(target)
+	place_sheet(target, is_devastated ? 2 : 3)
 
 // Debris product. Used ALL THE TIME.
-/material/proc/place_sheet(var/turf/target)
-	if(stack_type)
-		return new stack_type(target, 1, name)
+/material/proc/place_sheet(var/turf/target, var/amount = 1)
+	return stack_type ? new stack_type(target, amount, name) : null
 
 // As above.
 /material/proc/place_shard(var/turf/target)

@@ -95,14 +95,14 @@
 				making = min(sheets_per_tick-sheets, making)
 				for(var/otherthing in M.composite_material)
 					ores_stored[otherthing] -= making * M.composite_material[otherthing]
-				new M.stack_type(output_turf, amount = max(1, making), M.name)
+				M.place_sheet(output_turf, max(1, making))
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/material/metal, var/max_result)
 	. = Clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	ores_stored[metal.name] -= . * metal.units_per_sheet
 	var/material/M = SSmaterials.get_material_by_name(metal.ore_smelts_to)
 	if(istype(M))
-		new M.stack_type(output_turf, amount = ., M.name)
+		M.place_sheet(output_turf, .)
 	else
 		. = -(.)
 
@@ -113,35 +113,36 @@
 		. = Floor(making * 0.5)
 		var/material/M = SSmaterials.get_material_by_name(metal.ore_compresses_to)
 		if(istype(M))
-			new M.stack_type(output_turf, amount = ., M.name)
+			M.place_sheet(output_turf, .)
 		else
 			. = -(.)
 	else
 		. = 0
 
 /obj/machinery/mineral/processing_unit/get_console_data()
-	. = ..()
+	. = ..() + "<h1>Mineral Processing</h1>"
+	var/result = ""
 	for(var/ore in ores_processing)
 		if(!ores_stored[ore] && !report_all_ores) continue
 		var/material/M = SSmaterials.get_material_by_name(ore)
-		var/line = "=== [Floor(ores_stored[ore] / M.units_per_sheet)] x [capitalize(M.display_name)] ([ores_stored[ore]]u) "
-		while(length(line) < 30) line += "="
+		var/line = "[capitalize(M.display_name)]</td><td>[Floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"
+		var/status_string
 		if(ores_processing[ore])
 			switch(ores_processing[ore])
 				if(ORE_DISABLED)
-					line = "[line] <font color='red'>not processing</font> "
+					status_string = "<font color='red'>not processing</font>"
 				if(ORE_SMELT)
-					line = "[line] <font color='orange'>smelting</font> "
+					status_string = "<font color='orange'>smelting</font>"
 				if(ORE_COMPRESS)
-					line = "[line] <font color='blue'>compressing</font> "
+					status_string = "<font color='blue'>compressing</font>"
 				if(ORE_ALLOY)
-					line = "[line] <font color='gray'>alloying</font> "
+					status_string = "<font color='gray'>alloying</font>"
 		else
-			line = "[line] <font color='red'>not processing</font> "
-		while(length(line) < 50) line += "="
-		. += "[line] <a href='?src=\ref[src];toggle_smelting=[ore]'>\[change\]</a>"
-	. += "Currently displaying [report_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>\[[report_all_ores ? "show less" : "show more"]\]</a>"
-	. += "The ore processor is currently <A href='?src=\ref[src];toggle_power=1'>[(active ? "<font color='green'>processing</font>" : "<font color='red'>disabled</font>")]</a>."
+			status_string = "<font color='red'>not processing</font>"
+		result += "<tr><td>[line]</td><td><a href='?src=\ref[src];toggle_smelting=[ore]'>[status_string]</a></td></tr>"
+	. += "<table>[result]</table>"
+	. += "Currently displaying [report_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>[report_all_ores ? "Show less." : "Show more."]</a>"
+	. += "The ore processor is currently <A href='?src=\ref[src];toggle_power=1'>[(active ? "enabled" : "disabled")].</a>"
 
 /obj/machinery/mineral/processing_unit/Topic(href, href_list)
 	. = ..()
