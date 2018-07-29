@@ -18,7 +18,7 @@
 		/obj/item/device/flashlight/pen,
 		/obj/item/device/flashlight/slime,
 		/obj/item/seeds,
-		/obj/item/weapon/coin,
+		/obj/item/weapon/material/coin,
 		/obj/item/weapon/dice,
 		/obj/item/weapon/disk,
 		/obj/item/weapon/implant,
@@ -92,7 +92,7 @@
 	var/item2_type
 	if(prob(50))
 		item2_type = pick( /obj/item/weapon/spacecash/bundle/c10,/obj/item/weapon/spacecash/bundle/c100,/obj/item/weapon/spacecash/bundle/c1000,/obj/item/weapon/spacecash/bundle/c20,/obj/item/weapon/spacecash/bundle/c200,/obj/item/weapon/spacecash/bundle/c50, /obj/item/weapon/spacecash/bundle/c500)
-	var/item3_type = pick( /obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/gold, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron )
+	var/item3_type = pick( /obj/item/weapon/material/coin/silver, /obj/item/weapon/material/coin/silver, /obj/item/weapon/material/coin/gold, /obj/item/weapon/material/coin/iron, /obj/item/weapon/material/coin/iron, /obj/item/weapon/material/coin/iron )
 
 	spawn(2)
 		if(item1_type)

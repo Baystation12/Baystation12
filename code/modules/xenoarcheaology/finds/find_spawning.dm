@@ -208,7 +208,7 @@
 	apply_image_decorations = 1
 
 /obj/item/weapon/archaeological_find/coin/spawn_item()
-	var/obj/item/weapon/coin/C = pick(subtypesof(/obj/item/weapon/coin))
+	var/obj/item/weapon/material/coin/C = pick(subtypesof(/obj/item/weapon/material/coin))
 	C = new C(loc)
 	return C
 

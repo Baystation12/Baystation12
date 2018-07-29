@@ -459,13 +459,13 @@ obj/random/closet/spawn_choices()
 	icon_state = "coin"
 
 /obj/random/coin/spawn_choices()
-	return list(/obj/item/weapon/coin/gold = 3,
-				/obj/item/weapon/coin/silver = 4,
-				/obj/item/weapon/coin/diamond = 2,
-				/obj/item/weapon/coin/iron = 4,
-				/obj/item/weapon/coin/uranium = 3,
-				/obj/item/weapon/coin/platinum = 1,
-				/obj/item/weapon/coin/phoron = 1)
+	return list(/obj/item/weapon/material/coin/gold = 3,
+				/obj/item/weapon/material/coin/silver = 4,
+				/obj/item/weapon/material/coin/diamond = 2,
+				/obj/item/weapon/material/coin/iron = 4,
+				/obj/item/weapon/material/coin/uranium = 3,
+				/obj/item/weapon/material/coin/platinum = 1,
+				/obj/item/weapon/material/coin/phoron = 1)
 
 /obj/random/toy
 	name = "random toy"

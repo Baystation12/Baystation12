@@ -24,6 +24,14 @@
 	on_floor = 1
 	send_material_data = 1
 
+/datum/stack_recipe/coin
+	title = "coin"
+	result_type = /obj/item/weapon/material/coin
+	req_amount = 2
+	one_per_turf = 1
+	on_floor = 1
+	send_material_data = 1
+
 /datum/stack_recipe/ring
 	title = "ring"
 	result_type = /obj/item/clothing/ring/material

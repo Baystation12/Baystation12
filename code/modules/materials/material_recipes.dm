@@ -14,6 +14,7 @@
 	// If is_brittle() returns true, these are only good for a single strike.
 	recipes += new/datum/stack_recipe/baseball_bat(src)
 	recipes += new/datum/stack_recipe/ashtray(src)
+	recipes += new/datum/stack_recipe/coin(src)
 	recipes += new/datum/stack_recipe/spoon(src)
 	recipes += new/datum/stack_recipe/ring(src)
 

@@ -16312,7 +16312,7 @@
 	health = 1e+006
 	},
 /obj/structure/closet/secure_closet/decktech,
-/obj/item/weapon/coin/silver{
+/obj/item/weapon/material/coin/silver{
 	pixel_x = -3;
 	pixel_y = 3
 	},
@@ -16321,7 +16321,7 @@
 /area/quartermaster/office)
 "FF" = (
 /obj/structure/closet/secure_closet/decktech,
-/obj/item/weapon/coin/silver{
+/obj/item/weapon/material/coin/silver{
 	pixel_x = -3;
 	pixel_y = 3
 	},
