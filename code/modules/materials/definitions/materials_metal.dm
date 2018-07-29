@@ -48,6 +48,26 @@
 	ore_smelts_to = null
 	ore_compresses_to = null
 
+/material/copper
+	name = "copper"
+	icon_colour = "#b87333"
+	weight = 15
+	hardness = 30
+	stack_origin_tech = list(TECH_MATERIAL = 2)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	chem_products = list(
+		/datum/reagent/copper = 12,
+		/datum/reagent/silver = 8
+		)
+	construction_difficulty = 1
+	ore_smelts_to = "copper"
+	ore_result_amount = 5
+	ore_spread_chance = 10
+	ore_name = "tetrahedrite"
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "shiny"
+
 /material/silver
 	name = "silver"
 	stack_type = /obj/item/stack/material/silver

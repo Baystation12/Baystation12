@@ -42,6 +42,9 @@
 	sheet_plural_name = "bricks"
 	conductive = 0
 	construction_difficulty = 1
+	chem_products = list(
+		/datum/reagent/silicon = 20
+		)
 
 /material/stone/marble
 	name = "marble"
@@ -51,3 +54,4 @@
 	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
+	chem_products = null

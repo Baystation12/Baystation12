@@ -98,7 +98,7 @@ var/list/name_to_material
 	// Noise made when you hit structure made of this material.
 	var/hitsound = 'sound/weapons/genhit.ogg'
 	// Path to resulting stacktype. Todo remove need for this.
-	var/stack_type
+	var/stack_type = /obj/item/stack/material
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
@@ -219,7 +219,7 @@ var/list/name_to_material
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target)
 	if(stack_type)
-		return new stack_type(target)
+		return new stack_type(target, 1, name)
 
 // As above.
 /material/proc/place_shard(var/turf/target)

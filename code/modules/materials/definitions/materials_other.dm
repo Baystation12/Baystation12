@@ -34,6 +34,7 @@
 	sheet_singular_name = "blob"
 	sheet_plural_name = "blobs"
 	conductive = 0
+	stack_type = null
 
 /material/resin/can_open_material_door(var/mob/living/user)
 	var/mob/living/carbon/M = user

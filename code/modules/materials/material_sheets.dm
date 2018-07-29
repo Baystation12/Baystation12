@@ -14,10 +14,15 @@
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
 
-/obj/item/stack/material/Initialize()
-	. = ..()
+/obj/item/stack/material/New(var/loc, var/amount, var/_material)
+	if(_material)
+		default_type = _material
 	if(!default_type)
 		default_type = DEFAULT_WALL_MATERIAL
+	..()
+
+/obj/item/stack/material/Initialize()
+	. = ..()
 	material = SSmaterials.get_material_by_name("[default_type]")
 	if(!material)
 		return INITIALIZE_HINT_QDEL
