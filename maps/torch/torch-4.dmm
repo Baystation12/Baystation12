@@ -1888,10 +1888,6 @@
 "adK" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/firstdeck)
-"adL" = (
-/obj/random/closet,
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/forestarboard)
 "adM" = (
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
@@ -3487,10 +3483,6 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
-"ahJ" = (
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/forestarboard)
 "ahK" = (
 /obj/structure/table/rack,
 /obj/random/single{
@@ -3500,6 +3492,7 @@
 	spawn_nothing_percentage = 50;
 	spawn_object = /obj/item/weapon/deck
 	},
+/obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "ahL" = (
@@ -4390,21 +4383,8 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "ajW" = (
-/obj/structure/toilet{
-	pixel_y = 12
-	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "ajX" = (
@@ -4412,16 +4392,31 @@
 	dir = 8;
 	pixel_x = -24
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "ajY" = (
 /obj/item/weapon/soap/nanotrasen,
 /obj/machinery/light/small,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "ajZ" = (
 /obj/machinery/shower{
 	icon_state = "shower";
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4784,6 +4779,8 @@
 /obj/machinery/door/airlock/civilian{
 	name = "Shower"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "akZ" = (
@@ -5150,30 +5147,41 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "ame" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "amf" = (
 /obj/machinery/light/small{
-	dir = 1
+	dir = 1;
+	pixel_y = 32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/alarm{
-	pixel_y = 24
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/urinal{
+	pixel_x = 0;
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "amg" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
@@ -5473,12 +5481,14 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "ang" = (
-/obj/structure/urinal{
-	pixel_x = 32
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
@@ -5656,38 +5666,35 @@
 	operating = 1;
 	pixel_y = -28
 	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "aob" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "aoc" = (
-/obj/structure/toilet{
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = 24
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "aod" = (
 /obj/random/smokes,
+/obj/random/closet,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "aoe" = (
@@ -20041,6 +20048,31 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
+"gux" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "gvb" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -20499,6 +20531,25 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/infirmreception)
+"gVR" = (
+/obj/structure/toilet{
+	pixel_y = 12
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "gWb" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "exam_windows"
@@ -21627,6 +21678,14 @@
 	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
+"isR" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Stall"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "itb" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -26648,6 +26707,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
+"qgw" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Stall"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "qhb" = (
 /obj/machinery/atmospherics/binary/pump,
 /obj/effect/floor_decal/industrial/warning/corner,
@@ -40499,10 +40570,10 @@ adV
 aeL
 adS
 agF
-ahJ
-ahL
+adS
+gVR
 ajW
-akX
+isR
 ame
 kqb
 fYv
@@ -41111,7 +41182,7 @@ ajY
 ahL
 akX
 ahL
-akX
+qgw
 ahL
 fDJ
 mjb
@@ -41515,7 +41586,7 @@ aka
 aka
 aka
 aka
-ahL
+gux
 ahL
 qDP
 art
@@ -41717,7 +41788,7 @@ aka
 akZ
 ami
 aka
-adL
+adS
 afI
 aqg
 aru
