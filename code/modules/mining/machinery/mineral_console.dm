@@ -3,6 +3,7 @@
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
 	req_access = list(access_cargo)
+	circuit = /obj/item/weapon/circuitboard/mineral_processing
 	var/obj/machinery/mineral/connected
 
 /obj/machinery/computer/mining/attack_hand(var/mob/user)

@@ -7,6 +7,14 @@
 	var/stack_amt = 50
 	var/list/stacks
 
+/obj/machinery/mineral/stacking_machine/New()
+	..()
+	component_parts = list(
+		new /obj/item/weapon/stock_parts/matter_bin(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/circuitboard/mining_stacker(src)
+		)
+
 /obj/machinery/mineral/stacking_machine/Initialize()
 	stacks = list()
 	. = ..()
@@ -35,7 +43,7 @@
 /obj/machinery/mineral/stacking_machine/get_console_data()
 	. = ..()
 	. += "<h1>Sheet Stacking</h1>"
-	. += "Stacking: [stack_amt] <a href='?src=\ref[src];change_stack=1'>\[change\]</a>"
+	. += "Stacking: [stack_amt] <a href='?srcsay =\ref[src];change_stack=1'>\[change\]</a>"
 	var/line = ""
 	for(var/stacktype in stacks)
 		if(stacks[stacktype] > 0)

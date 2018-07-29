@@ -4,6 +4,14 @@
 	input_turf =  WEST
 	output_turf = EAST
 
+/obj/machinery/mineral/unloading_machine/New()
+	..()
+	component_parts = list(
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/circuitboard/mining_unloader(src)
+		)
+
 /obj/machinery/mineral/unloading_machine/Process()
 	if(input_turf && output_turf)
 		var/ore_this_tick = 25
