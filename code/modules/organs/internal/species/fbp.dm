@@ -57,7 +57,7 @@
 				drop = 1
 	if(drop)
 		if(standing)
-			to_chat(owner, "<span class='warning'>You don't have enough energy to stand!</span>")
+			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
 		owner.Weaken(2)
 
 /obj/item/organ/internal/cell/emp_act(severity)
