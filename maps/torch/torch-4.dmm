@@ -26586,9 +26586,12 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "qab" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume,
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/outlet_injector{
+	injecting = 1;
+	use_power = 1
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
