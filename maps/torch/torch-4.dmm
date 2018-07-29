@@ -27614,6 +27614,7 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
+	locked = 0;
 	pixel_x = -22;
 	pixel_y = 0
 	},
