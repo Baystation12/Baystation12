@@ -39,7 +39,7 @@
 	var/title = "Sheet-[used_stack.name] ([used_stack.get_amount()] sheet\s left)"
 	var/choice = input(title, "What would you like to construct?") as null|anything in window_options
 
-	if(!choice || !used_stack || !user || used_stack.loc != user || user.stat || user.loc != T)
+	if(!choice || !used_stack || QDELETED(user) || used_stack.loc != user || user.incapacitated() || user.loc != T)
 		return 1
 
 	// Get data for building windows here.

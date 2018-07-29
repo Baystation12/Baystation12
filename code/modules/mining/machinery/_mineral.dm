@@ -40,8 +40,8 @@
 		. += "<b>Output</b>: disabled."
 	. += "<br><a href='?src=\ref[src];configure_input_output=1'>Configure.</a>"
 
-/obj/machinery/mineral/proc/can_use(var/mob/user)
-	return (user && (istype(usr, /mob/living/silicon) || usr.Adjacent(src) || (console && usr.Adjacent(console))))
+/obj/machinery/mineral/CanUseTopic(var/mob/user)
+	return max(..(), (console && console.CanUseTopic(user)))
 
 /obj/machinery/mineral/proc/find_console()
 	if(ispath(console))
@@ -55,17 +55,17 @@
 					break
 
 /obj/machinery/mineral/Topic(href, href_list)
-	. = ..()
-	if(can_use(usr))
-		if(href_list["configure_input_output"])
-			interact(usr)
-			. = TRUE
-		else if(href_list["scan_for_console"])
-			find_console()
-			. = TRUE
-		if(console && usr.Adjacent(console))
-			usr.set_machine(console)
-			console.add_fingerprint(usr)
+	if((. = ..()))
+		return
+	if(href_list["configure_input_output"])
+		interact(usr)
+		. = TRUE
+	else if(href_list["scan_for_console"])
+		find_console()
+		. = TRUE
+	if(console && usr.Adjacent(console))
+		usr.set_machine(console)
+		console.add_fingerprint(usr)
 
 /obj/machinery/mineral/attack_ai(var/mob/user)
 	interact(user)

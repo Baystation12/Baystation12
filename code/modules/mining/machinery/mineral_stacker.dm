@@ -51,17 +51,17 @@
 	. += "<table>[line]</table>"
 
 /obj/machinery/mineral/stacking_machine/Topic(href, href_list)
-	. = ..()
-	if(can_use(usr))
-		if(href_list["change_stack"])
-			var/choice = input("What would you like to set the stack amount to?") as null|anything in list(1,5,10,20,50)
-			if(!choice) return
-			stack_amt = choice
-			. = TRUE
-		else if(href_list["release_stack"] && stacks[href_list["release_stack"]] > 0)
-			var/material/stackmat = SSmaterials.get_material_by_name(href_list["release_stack"])
-			stackmat.place_sheet(output_turf, stacks[href_list["release_stack"]])
-			stacks[href_list["release_stack"]] = 0
-			. = TRUE
-		if(. && console)
-			console.updateUsrDialog()
+	if((. = ..()))
+		return
+	if(href_list["change_stack"])
+		var/choice = input("What would you like to set the stack amount to?") as null|anything in list(1,5,10,20,50)
+		if(!choice) return
+		stack_amt = choice
+		. = TRUE
+	else if(href_list["release_stack"] && stacks[href_list["release_stack"]] > 0)
+		var/material/stackmat = SSmaterials.get_material_by_name(href_list["release_stack"])
+		stackmat.place_sheet(output_turf, stacks[href_list["release_stack"]])
+		stacks[href_list["release_stack"]] = 0
+		. = TRUE
+	if(. && console)
+		console.updateUsrDialog()

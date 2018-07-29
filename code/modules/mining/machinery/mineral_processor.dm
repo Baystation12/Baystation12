@@ -47,7 +47,6 @@
 					if(!isnull(ores_stored[o_material]))
 						ores_stored[o_material] += I.matter[o_material]
 			qdel(I)
-			CHECK_TICK
 
 	//Process our stored ores and spit out sheets.
 	if(output_turf)
@@ -154,26 +153,26 @@
 	. += "The ore processor is currently <A href='?src=\ref[src];toggle_power=1'>[(active ? "enabled" : "disabled")].</a>"
 
 /obj/machinery/mineral/processing_unit/Topic(href, href_list)
-	. = ..()
-	if(can_use(usr))
-		if(href_list["toggle_smelting"])
-			var/choice = input("What setting do you wish to use for processing [href_list["toggle_smelting"]]?") as null|anything in list("Smelting","Compressing","Alloying","Nothing")
-			if(!choice) return
-			switch(choice)
-				if("Nothing")     choice = ORE_DISABLED
-				if("Smelting")    choice = ORE_SMELT
-				if("Compressing") choice = ORE_COMPRESS
-				if("Alloying")    choice = ORE_ALLOY
-			ores_processing[href_list["toggle_smelting"]] = choice
-			. = TRUE
-		else if(href_list["toggle_power"])
-			active = !active
-			. = TRUE
-		else if(href_list["toggle_ores"])
-			report_all_ores = !report_all_ores
-			. = TRUE
-		if(. && console)
-			console.updateUsrDialog()
+	if((. = ..()))
+		return
+	if(href_list["toggle_smelting"])
+		var/choice = input("What setting do you wish to use for processing [href_list["toggle_smelting"]]?") as null|anything in list("Smelting","Compressing","Alloying","Nothing")
+		if(!choice) return
+		switch(choice)
+			if("Nothing")     choice = ORE_DISABLED
+			if("Smelting")    choice = ORE_SMELT
+			if("Compressing") choice = ORE_COMPRESS
+			if("Alloying")    choice = ORE_ALLOY
+		ores_processing[href_list["toggle_smelting"]] = choice
+		. = TRUE
+	else if(href_list["toggle_power"])
+		active = !active
+		. = TRUE
+	else if(href_list["toggle_ores"])
+		report_all_ores = !report_all_ores
+		. = TRUE
+	if(. && console)
+		console.updateUsrDialog()
 
 #undef ORE_DISABLED
 #undef ORE_SMELT

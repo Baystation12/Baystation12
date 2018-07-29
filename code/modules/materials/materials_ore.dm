@@ -48,8 +48,7 @@
 			H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
 			H.eye_blind += 5
 			H.eye_blurry += 10
-			spawn(1)
-				if(istype(loc, /turf/)) qdel(src)
+			QDEL_IN(src, 1)
 
 // Map definitions.
 /obj/item/weapon/ore/uranium/New(var/newloc)

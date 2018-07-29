@@ -8,7 +8,6 @@
 	throwforce = 1
 	w_class = 1
 	slot_flags = SLOT_EARS
-	var/string_attached
 	var/string_colour
 
 /obj/item/weapon/material/coin/New()
@@ -16,7 +15,7 @@
 	..()
 
 /obj/item/weapon/material/coin/update_icon()
-	if(string_attached)
+	if(!isnull(string_colour))
 		var/image/I = image(icon = icon, icon_state = "coin_string_overlay")
 		I.appearance_flags |= RESET_COLOR
 		I.color = string_colour
@@ -25,19 +24,15 @@
 		overlays.Cut()
 
 /obj/item/weapon/material/coin/attackby(var/obj/item/W, var/mob/user)
-	if(isCoil(W) && !string_attached)
+	if(isCoil(W) && isnull(string_colour))
 		var/obj/item/stack/cable_coil/CC = W
 		if(CC.use(1))
-			string_attached = TRUE
 			string_colour = CC.color
 			to_chat(user, "<span class='notice'>You attach a string to the coin.</span>")
 			update_icon()
 			return
-	else if(isWirecutter(W) && string_attached)
-		var/obj/item/stack/cable_coil/CC = new(get_turf(user))
-		CC.amount = 1
-		CC.update_icon()
-		string_attached = null
+	else if(isWirecutter(W) && !isnull(string_colour))
+		new /obj/item/stack/cable_coil/single(get_turf(user))
 		string_colour = null
 		to_chat(user, "<span class='notice'>You detach the string from the coin.</span>")
 		update_icon()
