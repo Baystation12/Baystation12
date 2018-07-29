@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(weighted_minerals_sparse, \
 		"pyrite" =       3, \
 		"spodumene" =    3, \
 		"cinnabar" =     3, \
-		"phosophorite" = 3, \
+		"phosphorite" =  3, \
 		"rock salt" =    3, \
 		"potash" =       3, \
 		"bauxite" =      3  \
@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		"pyrite" =       1, \
 		"spodumene" =    1, \
 		"cinnabar" =     1, \
-		"phosophorite" = 1, \
+		"phosphorite" =  1, \
 		"rock salt" =    1, \
 		"potash" =       1, \
 		"bauxite" =      1  \

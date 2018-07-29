@@ -18,6 +18,8 @@
 		/datum/reagent/radium = 10,
 		/datum/reagent/uranium = 10
 		)
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
 
 /material/graphene
 	name = "graphene"
@@ -40,7 +42,7 @@
 	ore_compresses_to = "quartz"
 	ore_name = "quartz"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#effffe"
@@ -58,7 +60,7 @@
 	name = "pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#ccc9a3"
@@ -79,7 +81,7 @@
 	ore_compresses_to = "spodumene"
 	ore_name = "spodumene"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#e5becb"
@@ -98,7 +100,7 @@
 	ore_compresses_to = "cinnabar"
 	ore_name = "cinnabar"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#e54e4e"
@@ -113,11 +115,11 @@
 	icon_reinf = "reinf_stone"
 
 /material/phosphorite
-	name = "phosophorite"
+	name = "phosphorite"
 	ore_compresses_to = "phosphorite"
 	ore_name = "phosphorite"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#acad95"
@@ -136,7 +138,7 @@
 	ore_compresses_to = "rock salt"
 	ore_name = "rock salt"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#d1c0bc"
@@ -155,7 +157,7 @@
 	ore_compresses_to = "potash"
 	ore_name = "potash"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#b77464"
@@ -173,7 +175,7 @@
 	name = "bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
-	ore_spread_chance = 5
+	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"

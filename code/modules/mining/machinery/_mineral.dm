@@ -22,6 +22,8 @@
 	find_console()
 	. = ..()
 
+/obj/machinery/mineral/attackby
+
 /obj/machinery/mineral/proc/set_input(var/_dir)
 	input_turf = _dir ? get_step(loc, _dir) : null
 
