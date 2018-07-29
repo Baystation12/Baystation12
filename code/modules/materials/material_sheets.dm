@@ -43,6 +43,10 @@
 	matter = material.get_matter()
 	update_strings()
 
+/obj/item/stack/material/proc/set_amount(var/_amount)
+	amount = max(1, min(_amount, max_amount))
+	update_strings()
+
 /obj/item/stack/material/get_material()
 	return material
 
@@ -328,3 +332,10 @@
 
 /obj/item/stack/material/aliumium/ten
 	amount = 10
+
+/obj/item/stack/material/generic
+	icon_state = "sheet-silver"
+
+/obj/item/stack/material/generic/Initialize()
+	. = ..()
+	if(material) color = material.icon_colour
