@@ -95,7 +95,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];sendmob=\ref[M]'>Send To</A>
 		<br><br>
 		[check_rights(R_ADMIN|R_MOD,0) ? "<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> | " : "" ]
-		[check_rights(R_ADMIN,0) ? "<A href='?src=\ref[src];skillpanel=\ref[M]'>Skill panel</A> | " : "" ]
+		[check_rights(R_INVESTIGATE,0) ? "<A href='?src=\ref[src];skillpanel=\ref[M]'>Skill panel</A> | " : "" ]
 		<A href='?src=\ref[src];narrateto=\ref[M]'>Narrate to</A> |
 		<A href='?src=\ref[src];subtlemessage=\ref[M]'>Subtle message</A>
 	"}
@@ -1248,7 +1248,10 @@ var/global/floorIsLava = 0
 		M = input("Select mob.", "Select mob.") as null|anything in GLOB.player_list
 	if(!istype(M))
 		return
-	var/datum/nano_module/skill_ui/admin/NM = new(usr, override = M.skillset)
+	var/datum/nano_module/skill_ui/NM = /datum/nano_module/skill_ui
+	if(is_admin(usr))
+		NM = /datum/nano_module/skill_ui/admin //They get the fancy version that lets you change skills and debug stuff.
+	NM = new NM(usr, override = M.skillset)
 	NM.ui_interact(usr)
 
 /client/proc/update_mob_sprite(mob/living/carbon/human/H as mob)
