@@ -44,97 +44,100 @@
 "aR" = (/obj/docking_umbilical/north{name = "KS7-535 Space Elevator 1"},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/ground/exterior/south)
 "aS" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/ground/exterior/south)
 "aT" = (/mob/living/simple_animal/hostile/bear,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
-"aU" = (/obj/machinery/door/airlock/halo{name = "Expeditionary Supplies"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"aV" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"aW" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior)
-"aX" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/south)
-"aY" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow5"; icon_state = "snow5"},/area/exo_Ice_facility/ground/exterior/south)
-"aZ" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow8"; icon_state = "snow8"},/area/exo_Ice_facility/ground/exterior/south)
-"ba" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/south)
-"bb" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow3"; icon_state = "snow3"},/area/exo_Ice_facility/ground/exterior/south)
-"bc" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bd" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"be" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bf" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow10"; icon_state = "snow10"},/area/exo_Ice_facility/ground/exterior/south)
-"bg" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bh" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bi" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bj" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bk" = (/obj/effect/landmark/dropship_land_point/covenant{name = "KS7-535 Spirit Land Point"},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/ground/exterior/south)
-"bl" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bm" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bn" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bo" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bp" = (/obj/item/weapon/stool,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bq" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"br" = (/obj/machinery/door/airlock/halo{name = "Armory"; req_access = list(110)},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
-"bs" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/hangar)
-"bt" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow7"; icon_state = "snow7"},/area/exo_Ice_facility/ground/exterior/south)
-"bu" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bv" = (/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"bw" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"bx" = (/obj/structure/ladder{name = "Hangar Sublevel 1"},/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"by" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
-"bz" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bA" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bB" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bC" = (/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"bD" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"bE" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
-"bF" = (/obj/machinery/light,/obj/machinery/power/apc/super{pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"aU" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/turbolift/KS7535/lifts/lift_1_second)
+"aV" = (/obj/machinery/door/airlock/halo{name = "Expeditionary Supplies"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"aW" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"aX" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior)
+"aY" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/south)
+"aZ" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow5"; icon_state = "snow5"},/area/exo_Ice_facility/ground/exterior/south)
+"ba" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow8"; icon_state = "snow8"},/area/exo_Ice_facility/ground/exterior/south)
+"bb" = (/turf/simulated/open,/area/turbolift/KS7535/lifts/lift_1_second)
+"bc" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/south)
+"bd" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow3"; icon_state = "snow3"},/area/exo_Ice_facility/ground/exterior/south)
+"be" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bf" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bg" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bh" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow10"; icon_state = "snow10"},/area/exo_Ice_facility/ground/exterior/south)
+"bi" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bj" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bk" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/sublevel1/interior/mech)
+"bl" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bm" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bn" = (/obj/effect/landmark/dropship_land_point/covenant{name = "KS7-535 Spirit Land Point"},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/ground/exterior/south)
+"bo" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bp" = (/obj/machinery/door/airlock/halo{name = "Armory"; req_access = list(110)},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
+"bq" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/hangar)
+"br" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow7"; icon_state = "snow7"},/area/exo_Ice_facility/ground/exterior/south)
+"bs" = (/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
+"bt" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
+"bu" = (/obj/structure/ladder{name = "Hangar Sublevel 1"},/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
+"bv" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
+"bw" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bx" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"by" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bz" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bA" = (/obj/item/weapon/stool,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bB" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bC" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bD" = (/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
+"bE" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
+"bF" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
 "bG" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/control)
 "bH" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Flight Operations"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
 "bI" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
 "bJ" = (/turf/simulated/open,/area/exo_Ice_facility/ground/interior/hangar)
 "bK" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior)
-"bL" = (/obj/machinery/door/airlock/halo{name = "Break Room"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bL" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
 "bM" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
 "bN" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
 "bO" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"bP" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"bQ" = (/obj/machinery/vending/wallmed1,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/control)
-"bR" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow1"; icon_state = "snow1"},/area/exo_Ice_facility/ground/exterior/south)
-"bS" = (/obj/machinery/door/airlock/halo{name = "Living Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"bT" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"bU" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/interior/control)
-"bV" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/living)
-"bW" = (/obj/machinery/door/airlock/halo{name = "Sleeping Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"bX" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"bY" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"bZ" = (/obj/structure/table/steel,/obj/machinery/photocopier/faxmachine{department = "KS7-535 Fuel Depot"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"ca" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow12"; icon_state = "snow12"},/area/exo_Ice_facility/ground/exterior/south)
-"cb" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid4"; icon_state = "asteroid4"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
-"cc" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"cd" = (/obj/effect/landmark/start/ice_staff,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"ce" = (/obj/structure/bed,/obj/item/weapon/bedsheet{tag = "icon-sheetblue"; icon_state = "sheetblue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"cf" = (/obj/structure/toilet,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"cg" = (/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"ch" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"ci" = (/obj/structure/closet/secure_closet/personal,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"cj" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"ck" = (/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"cl" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"cm" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"cn" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"co" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"cp" = (/obj/structure/mirror{pixel_x = 32},/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "bathroom sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"cq" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"cr" = (/obj/structure/table/steel,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"cs" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"ct" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
-"cu" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
-"cv" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"cw" = (/obj/machinery/door/airlock/halo_lifepod{name = "Interior Airlock"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
-"cx" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
-"cy" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/cryodorm)
-"cz" = (/obj/machinery/door/airlock/halo{name = "Cryodorms"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
-"cA" = (/obj/effect/overmap/sector/exo_depot,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
-"cB" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
-"cC" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
-"cD" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
-"cE" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
-"cF" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
-"cG" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data Fuel Depot"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
+"bP" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bQ" = (/obj/machinery/light,/obj/machinery/power/apc/super{pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bR" = (/obj/machinery/door/airlock/halo{name = "Break Room"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/hallway)
+"bS" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"bT" = (/obj/machinery/vending/wallmed1,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/control)
+"bU" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow1"; icon_state = "snow1"},/area/exo_Ice_facility/ground/exterior/south)
+"bV" = (/obj/machinery/door/airlock/halo{name = "Living Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"bW" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"bX" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/interior/control)
+"bY" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/living)
+"bZ" = (/obj/machinery/door/airlock/halo{name = "Sleeping Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"ca" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cb" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cc" = (/obj/structure/table/steel,/obj/machinery/photocopier/faxmachine{department = "KS7-535 Fuel Depot"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cd" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow12"; icon_state = "snow12"},/area/exo_Ice_facility/ground/exterior/south)
+"ce" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid4"; icon_state = "asteroid4"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
+"cf" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"cg" = (/obj/effect/landmark/start/ice_staff,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"ch" = (/obj/structure/bed,/obj/item/weapon/bedsheet{tag = "icon-sheetblue"; icon_state = "sheetblue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"ci" = (/obj/structure/toilet,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"cj" = (/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"ck" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cl" = (/obj/structure/closet/secure_closet/personal,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"cm" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"cn" = (/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"co" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"cp" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cq" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cr" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cs" = (/obj/structure/mirror{pixel_x = 32},/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "bathroom sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"ct" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cu" = (/obj/structure/table/steel,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cv" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cw" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/control)
+"cx" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/cave/cavenorthw)
+"cy" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"cz" = (/obj/machinery/door/airlock/halo_lifepod{name = "Interior Airlock"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/living)
+"cA" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility/ground/interior/living)
+"cB" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/cryodorm)
+"cC" = (/obj/machinery/door/airlock/halo{name = "Cryodorms"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
+"cD" = (/obj/effect/overmap/sector/exo_depot,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
+"cE" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
+"cF" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
+"cG" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
+"cH" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
+"cI" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
+"cJ" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data Fuel Depot"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -215,26 +218,26 @@ ababababababapauapababababababababababababababababababababababababababababababab
 abababababapapapababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaaaaaaasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 abababapapapapapababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaCaDaBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 abababapapapapabababaEaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaEaaaaaaaaaaaaasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaBaGaHaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaa
-abababapapabababababaEaFaJaFaFaFaFaFaFaFaFaFaFaKaKaFaFaFaFaFaFaFaFaFaFaFaKaKaKaKaFaFaFaFaFaKaKaKaFaEaaaaaaaaaaaaasasasasasazasasasaaaaaaaaaaaaaaaaaaaaaaaaaBaLaLaIaMaNaOaPaQaIaaaaaaaaaaaaaaaaaaaaaaaaaa
-abababapapaFaFaFaFaFaFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaFaRaFaFaFaFaKaKaKaKaKaKaKaKaKaSaKaKaKaKaKaFaEaaaaaaaaaaaaaaasasaTasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaBaLaLaUaVaVaVaVaVaIaaaaaaaaaaaaaaaaaaaaaaaaaa
-aEaEaEaWaXaFaFaFaFaFaFaFaKaKaKaKaKaKaKaKaKaYaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaZaKaFaEaaaaaaaaaaaaaaasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaBaGaLaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaa
-aEaEaEbaaXaFaFaFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbbbbbbbbbbbbaKaKaKaKaKaKaKaKaKaFaaaaaaaaaaaaaaaaasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaBaLaLaIbcbdbeaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aFaFaFaXaKaKaKaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbfaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaaaaaaaaaaaaaaaaasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaBaLaLaIbgaVbhaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbbaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaEaaaaaaaaaaaaaaaaaaasataaaaaaaaaaaaaaaaaaaaaBaBaBaBaBaBaBaGaLaIbiaVbjaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aFaKaYaKaKaKaKaKaKaKaKaYaKaKaKaKaKaKaKaKaKaKaKaKaKaKbkaKaKaKaKbbaKaKaKaKaKaKaKaKaKbbbbaKaKaKaKaKaKaEaaaaaaaaaaaaaaaaaaasasaaaaaaaaaaaaaaaaaaaaaBblbmbnbobpaBbqaLaIaIbraIaIaBbsbsbsbsbsbsbsbsbsbsbsbsbsaa
-aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbtaKaKaKbbaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaEaaaaaaaaaaaaaaasaaasasaaaaaaaaaaaaaaaaaaaaaBaLaLbubobuaBaGaLaLaLaLaLaLaLbvbwbvbxbvbvbwbvbvbxbvbwbsaa
-aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbbbbaKaKaKaKaKbbaKaKaKaKbtaSaKaEaaaaaaaabyasasasasasasaaaaaaaaaaaaaaaaaaaaaBbzaLaLaLaLaBaLaLaLaLaLaLbAbBbvbvbvbvbvbvbvbvbCbDbvbvbsaa
-aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEasasaaasasasaaasasasaaaaaaaaaaaaaaaaaaaaaaaBbEaLaLaLbFaBaBaBbGbHbIbGbGbGbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKbbaKaKaKaKaKaKaKaKbfaKaKaKaKaZaZaKaKaKaKaKaKaKaKaKbtaKaKaKaKaKaKaKaFaEbKasasasaaasaaaaasasasaaaaaaaaaaaaaaaaaaaaaBaBbLaBaBaBaBaBaBbGbIbIbMbIbGbNbvbJbJbJbJbJbJbJbJbvbObsaa
-aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbbbbaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaXaXaWaWasaaasasaaaaaaasasasaaaaaaaaaaaaaaaaaaaaaBblaLaLaLblaLaLblbGbIbIbIbPbQbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaFaFaKaKaKaKaKaKaKaYaKaKaKaKaKaKaKaKaKbRaKaKaKaKaKaKaKaKaKaKaKaKaYaKaKaKaKaKaKbfaKaKaKaKaKaKaKaXaEaaasaaaaaaaaaaaaaaasasaaaaaaaaaaaaaaaaaaaaaBaLaLaLaLaLaLaLaLbSbIbIbIbTbUbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbbaKaKaKaKaKaKaKaKaKaKaKaKaKbtaKaKaKaKaKaKaKbfaKbtaKaKaKaKaKaKaEasaaaaaaaaaaaaaaasasasasasaaaaaaaaaaaaaaaabVbVbWbVbVbVbVbVbVbGbXbIbYbZbUbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaKaKaKaKcaaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaEaaaaaaaaaaaaaaaaascbasasasasaaaaaaaaaaaaaabVcccdcebVcfbVcgcgbGbIbIbIchbUbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKcaaKaKaKaKaKaKaKaKaKaKaKaKaKbbaKaKaKaKaKaKaEaaaaaaaaaaaaaaasasasasasasasaaaaaaaaaaaaaabVcicdcebVcjbVckclbGbIcmcncobGbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEaaaaaaaaaaasasasasasasasaxasaaaaaaaaaaaaaabVcccdcebVcpbVcjcjbGcqcrcsctbGbNbvbJbJbJbJbJbJbJbJbvbObsaa
-aFaFaKaKaKaKaKaKaKaKaKaKbbaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaZaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEaaaaaaaaaaaaaaaaasasascuasaaaaaaaaaaaaaaaabVcvcvcvcwckcxckckbGbGbGbGbGbGbvbvbJbJbJbJbJbJbJbJbvbvbsaa
-aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbtbRaKaKaKaKaKaKaKaKaKaKaKaKaKbfaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEaaaaaaaaaaaaaaasasasasasasaaaaaaaaaaaaaacycycyczcycycybVbVbVbGaaaaaaaabsbvbvbvbvbvbvbvbvbvbvbvbvbsaa
-cAaFaFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaKaKaKaKaKaKaKaKaKaKaKaFaKaKaKaKaKaKaZaZaKaKaFaFaFaEaaaaaaaaaaaaasasaxasasasasaaaaaaaaaaaaaacycBcCcBcBcBcyaaaaaaaaaaaaaaaabsbvcDbCbvbvbvcDbvbvbvbvcDbsaa
-aFaFaFaFaFaKaKaKaKaKaKaFaFaKaKaKaKaFaKaKaKaKaKaFaFaFaKaKaKaKaKaKaKaKaFaFaFaFaKaKaKaKaKaFaFaFaFaFaFaEaaaaaaaaaaaaasasasaaaaaaasaaaaaaaaaaaaaacycEcBcBcFcBcyaaaaaaaaaaaaaaaabsbsbsbsbsbsbsbsbsbsbsbsbsbsaa
-cGaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacycycycycycycyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abababapapabababababaEaFaJaFaFaFaFaFaFaFaFaFaFaKaKaFaFaFaFaFaFaFaFaFaFaFaKaKaKaKaFaFaFaFaFaKaKaKaFaEaaaaaaaaaaaaasasasasasazasasasaaaaaaaaaaaaaBaBaBaBaBaBaBaLaLaIaMaNaOaPaQaIaaaaaaaaaaaaaaaaaaaaaaaaaa
+abababapapaFaFaFaFaFaFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaFaRaFaFaFaFaKaKaKaKaKaKaKaKaKaSaKaKaKaKaKaFaEaaaaaaaaaaaaaaasasaTasasasasasaaaaaaaaaaaaaBaUaUaUaUaUaBaLaLaVaWaWaWaWaWaIaaaaaaaaaaaaaaaaaaaaaaaaaa
+aEaEaEaXaYaFaFaFaFaFaFaFaKaKaKaKaKaKaKaKaKaZaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbaaKaFaEaaaaaaaaaaaaaaasasasasasasasaaaaaaaaaaaaaaaBbbbbbbbbbbaBaGaLaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaa
+aEaEaEbcaYaFaFaFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbdbdbdbdbdbdaKaKaKaKaKaKaKaKaKaFaaaaaaaaaaaaaaaaasasasasasaaaaaaaaaaaaaaaBbbbbbbbbbbaBaLaLaIbebfbgaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aFaFaFaYaKaKaKaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbhaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaaaaaaaaaaaaaaaaasasasasasaaaaaaaaaaaaaaaBbbbbbbbbbbaBaLaLaIbiaWbjaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbdaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaEaaaaaaaaaaaaaaaaaaasataaaaaabkaaaaaaaaaaaaaBbbbbbbbbbbaBaGaLaIblaWbmaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aFaKaZaKaKaKaKaKaKaKaKaZaKaKaKaKaKaKaKaKaKaKaKaKaKaKbnaKaKaKaKbdaKaKaKaKaKaKaKaKaKbdbdaKaKaKaKaKaKaEaaaaaaaaaaaaaaaaaaasasaaaaaabkaaaaaaaaaaaaaBaLaLaLaLaLaBboaLaIaIbpaIaIaBbqbqbqbqbqbqbqbqbqbqbqbqbqaa
+aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbraKaKaKbdaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaEaaaaaaaaaaaaaaasaaasasaaaaaaaaaBaBaBaBaBaBaBaLaLaLaLaLaLaLaLaLaLaLaLaLaLbsbtbsbubsbsbtbsbsbubsbtbqaa
+aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbdbdaKaKaKaKaKbdaKaKaKaKbraSaKaEaaaaaaaabvasasasasasasaaaaaaaaaBbwbxbybzbAaBaLaLaLaLaLaLaLaLaLaLaLaLbBbCbsbsbsbsbsbsbsbsbDbEbsbsbqaa
+aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEasasaaasasasaaasasasaaaaaaaaaaaBaLaLbFbzbFaBaBaBaBaBaBaBaBaBbGbHbIbGbGbGbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKbdaKaKaKaKaKaKaKaKbhaKaKaKaKbabaaKaKaKaKaKaKaKaKaKbraKaKaKaKaKaKaKaFaEbKasasasaaasaaaaasasasaaaaaaaaaBbLaLaLaLaLaBaBaBaBaBaBaBaBaBbGbIbIbMbIbGbNbsbJbJbJbJbJbJbJbJbsbObqaa
+aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbdbdaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaYaYaXaXasaaasasaaaaaaasasasaaaaaaaaaBbPaLaLaLbQbRbwaLaLaLbwaLaLbwbGbIbIbIbSbTbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaFaFaKaKaKaKaKaKaKaZaKaKaKaKaKaKaKaKaKbUaKaKaKaKaKaKaKaKaKaKaKaKaZaKaKaKaKaKaKbhaKaKaKaKaKaKaKaYaEaaasaaaaaaaaaaaaaaasasaaaaaaaaaBaBaBaBaBaBaBaLaLaLaLaLaLaLaLbVbIbIbIbWbXbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbdaKaKaKaKaKaKaKaKaKaKaKaKaKbraKaKaKaKaKaKaKbhaKbraKaKaKaKaKaKaEasaaaaaaaaaaaaaaasasasasasaaaaaaaaaaaaaaaabYbYbZbYbYbYbYbYbYbGcabIcbccbXbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaKaKaKaKcdaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaEaaaaaaaaaaaaaaaaasceasasasasaaaaaaaaaaaaaabYcfcgchbYcibYcjcjbGbIbIbIckbXbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKcdaKaKaKaKaKaKaKaKaKaKaKaKaKbdaKaKaKaKaKaKaEaaaaaaaaaaaaaaasasasasasasasaaaaaaaaaaaaaabYclcgchbYcmbYcncobGbIcpcqcrbGbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEaaaaaaaaaaasasasasasasasaxasaaaaaaaaaaaaaabYcfcgchbYcsbYcmcmbGctcucvcwbGbNbsbJbJbJbJbJbJbJbJbsbObqaa
+aFaFaKaKaKaKaKaKaKaKaKaKbdaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbaaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEaaaaaaaaaaaaaaaaasasascxasaaaaaaaaaaaaaaaabYcycycyczcncAcncnbGbGbGbGbGbGbsbsbJbJbJbJbJbJbJbJbsbsbqaa
+aFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKbrbUaKaKaKaKaKaKaKaKaKaKaKaKaKbhaKaKaKaKaKaKaKaKaKaKaKaKaKaFaEaaaaaaaaaaaaaaasasasasasasaaaaaaaaaaaaaacBcBcBcCcBcBcBbYbYbYbGaaaaaaaabqbsbsbsbsbsbsbsbsbsbsbsbsbqaa
+cDaFaFaFaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaKaFaKaKaKaKaKaKaKaKaKaKaKaFaKaKaKaKaKaKbabaaKaKaFaFaFaEaaaaaaaaaaaaasasaxasasasasaaaaaaaaaaaaaacBcEcFcEcEcEcBaaaaaaaaaaaaaaaabqbscGbDbsbsbscGbsbsbsbscGbqaa
+aFaFaFaFaFaKaKaKaKaKaKaFaFaKaKaKaKaFaKaKaKaKaKaFaFaFaKaKaKaKaKaKaKaKaFaFaFaFaKaKaKaKaKaFaFaFaFaFaFaEaaaaaaaaaaaaasasasaaaaaaasaaaaaaaaaaaaaacBcHcEcEcIcEcBaaaaaaaaaaaaaaaabqbqbqbqbqbqbqbqbqbqbqbqbqbqaa
+cJaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaFaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacBcBcBcBcBcBcBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
