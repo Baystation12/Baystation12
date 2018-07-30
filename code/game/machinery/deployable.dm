@@ -24,7 +24,7 @@ for reference:
 	access_ai_upload = 16
 	access_teleporter = 17
 	access_eva = 18
-	access_heads = 19
+	access_bridge = 19
 	access_captain = 20
 	access_all_personal_lockers = 21
 	access_chapel_office = 22
