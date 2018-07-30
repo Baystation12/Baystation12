@@ -70,7 +70,7 @@
 		)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
-	prone_overlay_offset = list(0, -8)
+	prone_overlay_offset = list(-8, -4)
 
 	var/list/original_name_cache = list()
 
