@@ -101,18 +101,18 @@
 
 	skill_points = 30
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
+	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
+			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_bridge,
 			            access_all_personal_lockers, access_chapel_office, access_tech_storage, access_atmospherics, access_bar, access_janitor, access_crematorium, access_robotics,
 			            access_kitchen, access_cargo, access_construction, access_chemistry, access_cargo_bot, access_hydroponics, access_library, access_virology,
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
 			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder)
-	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
+	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
+			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_bridge,
 			            access_all_personal_lockers, access_chapel_office, access_tech_storage, access_atmospherics, access_bar, access_janitor, access_crematorium,
 			            access_kitchen, access_cargo, access_construction, access_chemistry, access_cargo_bot, access_hydroponics, access_library, access_virology,
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
@@ -151,9 +151,9 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 30
 
-	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
+	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard,
+						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 	minimal_access = list()
 
@@ -195,7 +195,7 @@
 	skill_points = 32
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_heads,
+			            access_teleporter, access_eva, access_bridge, access_heads,
 			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
 			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_senmed, access_hangar)
@@ -240,12 +240,12 @@
 	skill_points = 30
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_heads,
+			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
 			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
 			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_heads,
+			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
 			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
 			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
@@ -285,7 +285,7 @@
 	                    SKILL_COMBAT      = SKILL_BASIC,
 	                    SKILL_WEAPONS     = SKILL_ADEPT,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
-	
+
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX,
 	                    SKILL_FORENSICS   = SKILL_MAX)
@@ -293,7 +293,7 @@
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_heads,
+			            access_teleporter, access_eva, access_bridge, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
 			            access_solgov_crew, access_gun, access_emergency_armory, access_hangar)
 	minimal_access = list()
@@ -328,7 +328,7 @@
 	                    SKILL_FINANCE		= SKILL_BASIC)
 	skill_points = 20
 
-	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
+	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
@@ -400,7 +400,7 @@
 
 
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_heads, access_all_personal_lockers, access_janitor,
+			            access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
 			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
 
@@ -484,7 +484,7 @@
 	                    SKILL_WEAPONS     = SKILL_EXPERT)
 	skill_points = 22
 
-	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
 
 	software_on_spawn = list(/datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
@@ -1176,7 +1176,7 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 18
 
-	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
+	access = list(access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
 						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
 	minimal_access = list()
 
