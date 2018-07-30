@@ -46,6 +46,7 @@
 	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
+	pixel_offset_y = -4
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),
@@ -70,7 +71,6 @@
 		)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
-	prone_overlay_offset = list(-8, -4)
 
 	var/list/original_name_cache = list()
 
