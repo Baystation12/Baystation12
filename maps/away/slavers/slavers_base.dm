@@ -151,7 +151,7 @@
 	maxHealth = 100
 	health = 100
 	harm_intent_damage = 5
-	melee_damage_lower = 30
+	melee_damage_lower = 10
 	melee_damage_upper = 30
 	can_escape = 1
 	unsuitable_atoms_damage = 15
@@ -159,7 +159,6 @@
 	var/weapon = /obj/item/weapon/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
-	rapid = 1
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
 
