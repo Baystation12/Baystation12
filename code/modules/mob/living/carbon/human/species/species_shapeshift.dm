@@ -72,7 +72,6 @@ var/list/wrapped_species_by_ref = list()
 	wrapped_species_by_ref["\ref[H]"] = default_form
 
 /datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
-	..()
 	if(monochromatic)
 		H.r_hair =   H.r_skin
 		H.g_hair =   H.g_skin
@@ -80,8 +79,11 @@ var/list/wrapped_species_by_ref = list()
 		H.r_facial = H.r_skin
 		H.g_facial = H.g_skin
 		H.b_facial = H.b_skin
+	..()
 
-	for(var/obj/item/organ/external/E in H.organs)
+/datum/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+	var/obj/item/organ/external/E = org
+	if(H && istype(E))
 		E.sync_colour_to_human(H)
 
 // Verbs follow.

@@ -70,7 +70,7 @@
 		)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
-	prone_overlay_offset = list(-8, 0)
+	prone_overlay_offset = list(0, -8)
 
 	var/list/original_name_cache = list()
 
@@ -145,5 +145,5 @@
 		"belt" =  list("loc" = ui_belt,      "name" = "Belt",     "slot" = slot_belt,    "state" = "belt")
 	)
 
-/datum/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org)
+/datum/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL|ORGAN_ROBOTIC)

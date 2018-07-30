@@ -33,6 +33,5 @@
 	H.SetName(H.real_name)
 	..()
 
-/datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org)
-	org.status |= ORGAN_BRITTLE
-	org.status |= ORGAN_CRYSTAL
+/datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
