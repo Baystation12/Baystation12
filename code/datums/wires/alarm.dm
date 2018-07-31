@@ -15,7 +15,7 @@ var/const/AALARM_WIRE_AALARM = 16
 		return 1
 	return 0
 
-/datum/wires/alarm/GetInteractWindow()
+/datum/wires/alarm/GetInteractWindow(mob/user)
 	var/obj/machinery/alarm/A = holder
 	. += ..()
 	. += text("<br>\n[(A.locked ? "The Air Alarm is locked." : "The Air Alarm is unlocked.")]<br>\n[((A.shorted || (A.stat & (NOPOWER|BROKEN))) ? "The Air Alarm is offline." : "The Air Alarm is working properly!")]<br>\n[(A.aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
@@ -100,3 +100,20 @@ var/const/AALARM_WIRE_AALARM = 16
 			if (A.alarm_area.atmosalert(0, A))
 				A.post_alert(0)
 			A.update_icon()
+
+/datum/wires/alarm/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(AALARM_WIRE_IDSCAN)
+				. = "This wire is connected to the ID scanning panel."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(AALARM_WIRE_AI_CONTROL)
+				. = "This wire connects to automated control systems."
+			if(AALARM_WIRE_POWER)
+				. = "This wire seems to be carrying a heavy current."
+			if(AALARM_WIRE_SYPHON)
+				. = "This wire runs to atmospherics logic circuits of some sort."
+			if(AALARM_WIRE_AALARM)
+				. = "This wire gives power to the actual alarm mechanism."

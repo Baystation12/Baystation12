@@ -12,7 +12,7 @@ var/const/WIRE_TRANSMIT = 4
 		return 1
 	return 0
 
-/datum/wires/radio/GetInteractWindow()
+/datum/wires/radio/GetInteractWindow(mob/user)
 	var/obj/item/device/radio/R = holder
 	. += ..()
 	if(R.cell)
@@ -45,3 +45,16 @@ var/const/WIRE_TRANSMIT = 4
 		if(WIRE_TRANSMIT)
 			R.broadcasting = mended && !IsIndexCut(WIRE_SIGNAL)
 	SSnano.update_uis(holder)
+
+/datum/wires/radio/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(WIRE_RECEIVE)
+				. = "This wire runs to the radio reciever."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(WIRE_SIGNAL)
+				. = "This wire connects several radio components."
+			if(WIRE_TRANSMIT)
+				. = "This wire runs to the radio transmitter."

@@ -33,7 +33,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 		return 1
 	return 0
 
-/datum/wires/airlock/GetInteractWindow()
+/datum/wires/airlock/GetInteractWindow(mob/user)
 	var/obj/machinery/door/airlock/A = holder
 	var/haspower = A.arePowerSystemsOn() //If there's no power, then no lights will be on.
 
@@ -174,3 +174,26 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 		if(AIRLOCK_WIRE_LIGHT)
 			A.lights = !A.lights
 			A.update_icon()
+
+/datum/wires/airlock/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(AIRLOCK_WIRE_IDSCAN)
+				. = "This wire is connected to the ID scanning panel."
+			if(AIRLOCK_WIRE_LIGHT)
+				. = "This wire powers the airlock's built-in lighting."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(AIRLOCK_WIRE_AI_CONTROL)
+				. = "This wire connects to automated control systems."
+			if(AIRLOCK_WIRE_MAIN_POWER1, AIRLOCK_WIRE_MAIN_POWER2, AIRLOCK_WIRE_BACKUP_POWER1, AIRLOCK_WIRE_BACKUP_POWER2, AIRLOCK_WIRE_ELECTRIFY)
+				. = "This wire seems to be carrying a heavy current."
+			if(AIRLOCK_WIRE_DOOR_BOLTS)
+				. = "This wire runs down to the very base of the airlock."
+			if(AIRLOCK_WIRE_SPEED)
+				. = "This wire appears to connect to the airlock's proximity detector modules."
+			if(AIRLOCK_WIRE_OPEN_DOOR)
+				. = "This wire connects to the door motors."
+			if(AIRLOCK_WIRE_SAFETY)
+				. = "This wire connects to a safety override."

@@ -7,7 +7,7 @@
 #define APC_WIRE_MAIN_POWER2 4
 #define APC_WIRE_AI_CONTROL 8
 
-/datum/wires/apc/GetInteractWindow()
+/datum/wires/apc/GetInteractWindow(mob/user)
 	var/obj/machinery/power/apc/A = holder
 	. += ..()
 	. += text("<br>\n[(A.locked ? "The APC is locked." : "The APC is unlocked.")]<br>\n[(A.shorted ? "The APCs power has been shorted." : "The APC is working properly!")]<br>\n[(A.aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
@@ -70,3 +70,16 @@
 			else
 				if (A.aidisabled == 1)
 					A.aidisabled = 0
+
+/datum/wires/apc/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(APC_WIRE_IDSCAN)
+				. = "This wire is connected to the ID scanning panel."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(APC_WIRE_AI_CONTROL)
+				. = "This wire connects to automated control systems."
+			if(APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
+				. = "This wire seems to be carrying a heavy current."
