@@ -1,0 +1,4 @@
+author: zaredman
+delete-after: True
+changes: 
+  - rscadd: "Added a MIA (Missing in Action) option to crewmember status choices."
