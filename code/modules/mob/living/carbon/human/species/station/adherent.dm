@@ -12,6 +12,7 @@
 	additional_langs =        list(LANGUAGE_GALCOM)
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
+	silent_steps =            TRUE // Antigravity squids.
 
 	icon_template =           'icons/mob/human_races/species/adherent/template.dmi'
 	icobase =                 'icons/mob/human_races/species/adherent/body.dmi'
@@ -63,11 +64,12 @@
 	)
 
 	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/brain/adherent,
-		BP_EYES =  /obj/item/organ/internal/eyes/adherent,
-		BP_JETS =  /obj/item/organ/internal/powered/jets,
-		BP_FLOAT = /obj/item/organ/internal/powered/float,
-		BP_CELL =  /obj/item/organ/internal/cell/adherent
+		BP_BRAIN =        /obj/item/organ/internal/brain/adherent,
+		BP_EYES =         /obj/item/organ/internal/eyes/adherent,
+		BP_JETS =         /obj/item/organ/internal/powered/jets,
+		BP_FLOAT =        /obj/item/organ/internal/powered/float,
+		BP_CELL =         /obj/item/organ/internal/cell/adherent,
+		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
