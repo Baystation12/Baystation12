@@ -97,19 +97,19 @@
 	difficulty = 2
 
 /datum/stack_recipe/apc
-	title = "small light fixture frame"
+	title = "APC frame"
 	result_type = /obj/item/frame/apc
 	req_amount = 2
 	difficulty = 2
 
 /datum/stack_recipe/air_alarm
-	title = "small light fixture frame"
+	title = "air alarm frame"
 	result_type = /obj/item/frame/air_alarm
 	req_amount = 2
 	difficulty = 2
 
 /datum/stack_recipe/fire_alarm
-	title = "small light fixture frame"
+	title = "fire alarm frame"
 	result_type = /obj/item/frame/fire_alarm
 	req_amount = 2
 	difficulty = 2
