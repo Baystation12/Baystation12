@@ -30,6 +30,9 @@
 	hazard_low_pressure =     -1
 	strength =                STR_HIGH
 
+	speech_sounds = list('sound/voice/chime.ogg')
+	speech_chance = 25
+
 	cold_level_1 = SYNTH_COLD_LEVEL_1
 	cold_level_2 = SYNTH_COLD_LEVEL_2
 	cold_level_3 = SYNTH_COLD_LEVEL_3
