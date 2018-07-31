@@ -20,7 +20,7 @@ var/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 		return 1
 	return 0
 
-/datum/wires/smartfridge/GetInteractWindow()
+/datum/wires/smartfridge/GetInteractWindow(mob/user)
 	var/obj/machinery/smartfridge/S = holder
 	. += ..()
 	. += "<BR>The orange light is [S.seconds_electrified ? "off" : "on"].<BR>"
@@ -49,3 +49,16 @@ var/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 				S.seconds_electrified = -1
 		if(SMARTFRIDGE_WIRE_IDSCAN)
 			S.scan_id = 1
+
+/datum/wires/smartfridge/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(SMARTFRIDGE_WIRE_IDSCAN)
+				. = "This wire is connected to the ID scanning panel."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(SMARTFRIDGE_WIRE_THROW)
+				. = "This wire leads to the item dispensor force controls."
+			if(SMARTFRIDGE_WIRE_ELECTRIFY)
+				. = "This wire seems to be carrying a heavy current."

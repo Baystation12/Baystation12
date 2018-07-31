@@ -37,10 +37,25 @@ var/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have any spe
 		if(SHIELDGEN_WIRE_HACK)
 			S.hacked = 1
 
-/datum/wires/shield_generator/GetInteractWindow()
+/datum/wires/shield_generator/GetInteractWindow(mob/user)
 	var/obj/machinery/power/shield_generator/S = holder
 	. += ..()
 	. += "<BR>A red light labeled \"Safety Override\" is [S.hacked ? "blinking" : "off"]."
 	. += "<BR>A green light labeled \"Power Connection\" is [S.input_cut ? "off" : "on"]."
 	. += "<BR>A blue light labeled \"Network Control\" is [S.ai_control_disabled ? "off" : "on"]."
 	. += "<BR>A yellow light labeled \"Interface Connection\" is [S.mode_changes_locked ? "off" : "on"].<BR>"
+
+/datum/wires/shield_generator/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(SHIELDGEN_WIRE_POWER)
+				. = "This wire seems to be carrying a heavy current."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(SHIELDGEN_WIRE_HACK)
+				. = "This wire seems designed to enable a manual override."
+			if(SHIELDGEN_WIRE_CONTROL)
+				. = "This wire connects to the main control panel."
+			if(SHIELDGEN_WIRE_AICONTROL)
+				. = "This wire connects to automated control systems."

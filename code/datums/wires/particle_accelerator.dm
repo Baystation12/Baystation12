@@ -50,3 +50,18 @@ var/const/PARTICLE_LIMIT_POWER_WIRE = 8 // Determines how strong the PA can be.
 			C.strength_upper_limit = (mended ? 2 : 3)
 			if(C.strength_upper_limit < C.strength)
 				C.remove_strength()
+
+/datum/wires/particle_acc/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(PARTICLE_TOGGLE_WIRE)
+				. = "This wire seems to connect to the main power toggle."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(PARTICLE_STRENGTH_WIRE)
+				. = "This wire connects to the primary magnets."
+			if(PARTICLE_INTERFACE_WIRE)
+				. = "This wire appears connected to the user panel."
+			if(PARTICLE_LIMIT_POWER_WIRE)
+				. = "This wire connects to the primary magnets."

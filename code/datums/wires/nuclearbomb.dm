@@ -11,7 +11,7 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 	var/obj/machinery/nuclearbomb/N = holder
 	return N.panel_open
 
-/datum/wires/nuclearbomb/GetInteractWindow()
+/datum/wires/nuclearbomb/GetInteractWindow(mob/user)
 	var/obj/machinery/nuclearbomb/N = holder
 	. += ..()
 	. += "<BR>The device is [N.timing ? "shaking!" : "still."]<BR>"
@@ -56,3 +56,16 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 		if(NUCLEARBOMB_WIRE_LIGHT)
 			N.lighthack = !mended
 			N.update_icon()
+
+/datum/wires/nuclearbomb/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(NUCLEARBOMB_WIRE_LIGHT)
+				. = "This wire seems to connect to the small light on the device."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(NUCLEARBOMB_WIRE_TIMING)
+				. = "This wire connects to the time display."
+			if(NUCLEARBOMB_WIRE_SAFETY)
+				. = "This wire connects to a safety override."

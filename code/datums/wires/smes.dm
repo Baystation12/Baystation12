@@ -16,7 +16,7 @@ var/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to reenable
 	return 0
 
 
-/datum/wires/smes/GetInteractWindow()
+/datum/wires/smes/GetInteractWindow(mob/user)
 	var/obj/machinery/power/smes/buildable/S = holder
 	. += ..()
 	. += "The green light is [(S.input_cut || S.input_pulsed || S.output_cut || S.output_pulsed) ? "off" : "on"]<br>"
@@ -58,3 +58,20 @@ var/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to reenable
 				S.safeties_enabled = 0
 				spawn(10)
 					S.safeties_enabled = 1
+
+/datum/wires/smes/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(SMES_WIRE_GROUNDING)
+				. = "This wire appeas to connect directly to the floor."
+			if(SMES_WIRE_INPUT)
+				. = "This seems to be the primary input."
+			if(SMES_WIRE_OUTPUT)
+				. = "This seems to be the primary output."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(SMES_WIRE_RCON)
+				. = "This wire runs to a remote signaling mechanism."
+			if(SMES_WIRE_FAILSAFES)
+				. = "This wire appears to connect to a failsafe mechanism."

@@ -19,7 +19,7 @@ var/const/VENDING_WIRE_IDSCAN = 8
 		return 1
 	return 0
 
-/datum/wires/vending/GetInteractWindow()
+/datum/wires/vending/GetInteractWindow(mob/user)
 	var/obj/machinery/vending/V = holder
 	. += ..()
 	. += "<BR>The orange light is [V.seconds_electrified ? "off" : "on"].<BR>"
@@ -53,3 +53,18 @@ var/const/VENDING_WIRE_IDSCAN = 8
 				V.seconds_electrified = -1
 		if(VENDING_WIRE_IDSCAN)
 			V.scan_id = 1
+
+/datum/wires/vending/examine(index, mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
+		switch(index)
+			if(VENDING_WIRE_IDSCAN)
+				. = "This wire is connected to the ID scanning panel."
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
+		switch(index)
+			if(VENDING_WIRE_THROW)
+				. = "This wire leads to the item dispensor force controls."
+			if(VENDING_WIRE_CONTRABAND)
+				. = "This wire appears connected to a reserve inventory compartment."
+			if(VENDING_WIRE_ELECTRIFY)
+				. = "This wire seems to be carrying a heavy current."
