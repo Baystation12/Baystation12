@@ -30,6 +30,7 @@
 
 	var/_wifi_id
 	var/datum/wifi/receiver/button/emitter/wifi_receiver
+	core_skill = SKILL_ENGINES
 
 /obj/machinery/power/emitter/anchored
 	anchored = 1
@@ -86,6 +87,8 @@
 				investigate_log("turned <font color='red'>off</font> by [user.key]","singulo")
 			else
 				src.active = 1
+				operator_skill = user.get_skill_value(core_skill)
+				update_efficiency()
 				to_chat(user, "You turn on \the [src].")
 				src.shot_number = 0
 				src.fire_delay = get_initial_fire_delay()
@@ -98,6 +101,12 @@
 		to_chat(user, "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>")
 		return 1
 
+/obj/machinery/power/emitter/proc/update_efficiency()
+	efficiency = initial(efficiency)
+	if(!operator_skill)
+		return
+	var/skill_modifier = 0.8 * (SKILL_MAX - operator_skill)/(SKILL_MAX - SKILL_MIN) //How much randomness is added
+	efficiency *= 1 + (rand() - 1) * skill_modifier //subtract off between 0.8 and 0, depending on skill and luck.
 
 /obj/machinery/power/emitter/emp_act(var/severity)
 	return 1
