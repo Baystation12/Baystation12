@@ -1,6 +1,6 @@
 /datum/species/golem
-	name = "Golem"
-	name_plural = "golems"
+	name = SPECIES_GOLEM
+	name_plural = "Golems"
 
 	icobase = 'icons/mob/human_races/species/golem/body.dmi'
 	deform = 'icons/mob/human_races/species/golem/body.dmi'
@@ -17,6 +17,14 @@
 
 	blood_color = "#515573"
 	flesh_color = "#137e8f"
+
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
+
+	heat_level_1 = SYNTH_HEAT_LEVEL_1
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem

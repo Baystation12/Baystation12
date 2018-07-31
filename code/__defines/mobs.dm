@@ -275,6 +275,7 @@
 #define SPECIES_XENO        "Xenophage"
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
+#define SPECIES_GOLEM       "Golem"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
