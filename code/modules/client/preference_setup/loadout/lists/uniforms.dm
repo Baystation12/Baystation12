@@ -163,6 +163,7 @@
 	corps += /obj/item/clothing/under/aether
 	corps += /obj/item/clothing/under/hephaestus
 	corps += /obj/item/clothing/under/pcrc
+	corps += /obj/item/clothing/under/pcrcsuit
 	corps += /obj/item/clothing/under/wardt
 	corps += /obj/item/clothing/under/grayson
 	corps += /obj/item/clothing/under/focal
