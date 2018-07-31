@@ -22,6 +22,16 @@
 	find_console()
 	. = ..()
 
+/obj/machinery/mineral/attackby(var/obj/item/O, var/mob/user)
+	if(default_deconstruction_screwdriver(user, O))
+		updateUsrDialog()
+		return
+	if(default_deconstruction_crowbar(user, O))
+		return
+	if(default_part_replacement(user, O))
+		return
+	. = ..()
+
 /obj/machinery/mineral/proc/set_input(var/_dir)
 	input_turf = _dir ? get_step(loc, _dir) : null
 

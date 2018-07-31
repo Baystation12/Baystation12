@@ -106,9 +106,10 @@
 				/datum/reagent/iron = 15,
 				/datum/reagent/carbon = 5
 				)
-	composite_material = list("hematite" = 1875, "graphene" = 1875)
+	alloy_materials = list("hematite" = 1875, "graphene" = 1875)
 	alloy_product = TRUE
 	sale_price = 1
+	ore_smelts_to = "steel"
 
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
@@ -116,7 +117,7 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
-	composite_material = null
+	alloy_materials = null
 	alloy_product = FALSE
 	sale_price = null
 
@@ -134,12 +135,12 @@
 	hardness = 80
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = 1
-	composite_material = list("hematite" = 1250, "graphene" = 1250, "platinum" = 1250)
+	alloy_materials = list("steel" = 2500, "platinum" = 1250)
 	alloy_product = TRUE
 	sale_price = 2
+	ore_smelts_to = "plasteel"
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -154,7 +155,7 @@
 	icon_colour = "#d1e6e3"
 	icon_reinf = "reinf_metal"
 	construction_difficulty = 1
-	composite_material = null
+	alloy_materials = null
 	alloy_product = FALSE
 
 /material/plasteel/ocp
@@ -169,7 +170,7 @@
 	burn_armor = 20
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-	composite_material = list("plasteel" = 7500, "osmium" = 3750)
+	alloy_materials = list("plasteel" = 7500, "osmium" = 3750)
 	construction_difficulty = 2
 	alloy_product = TRUE
 	sale_price = 3
@@ -183,6 +184,7 @@
 	sheet_plural_name = "ingots"
 	construction_difficulty = 1
 	sale_price = 3
+	ore_smelts_to = "osmium"
 
 /material/tritium
 	name = "tritium"
