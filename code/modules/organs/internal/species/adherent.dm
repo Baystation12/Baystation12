@@ -84,6 +84,7 @@
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
+	phoron_guard = TRUE
 
 /obj/item/organ/internal/cell/adherent
 	name = "piezoelectric core"

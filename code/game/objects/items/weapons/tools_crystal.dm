@@ -16,7 +16,8 @@
 
 /obj/item/weapon/weldingtool/crystal/afterattack(var/obj/O, var/mob/user, var/proximity)
 	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))
-		to_chat(user, "<span class='warning'>\The [src] runs on the wielder's internal charge and does not need to be refuelled.</span>")
+		if(!welding)
+			to_chat(user, "<span class='warning'>\The [src] runs on the wielder's internal charge and does not need to be refuelled.</span>")
 		return
 	. = ..()
 
