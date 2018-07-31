@@ -61,8 +61,8 @@
 				continue
 
 			var/material/M = SSmaterials.get_material_by_name(metal)
-			var/result = 0
-
+			var/result = 0 // For reference: a positive result indicates sheets were produced,
+			               // and a negative result indicates slag was produced.
 			var/ore_mode = ores_processing[metal]
 			if(ore_mode == ORE_ALLOY)
 				if(SSmaterials.alloy_components[metal])
@@ -97,13 +97,16 @@
 			for(var/thing in making_alloys)
 				if(sheets >= sheets_per_tick) break
 				var/material/M = thing
-				var/making = 0
+				var/making
 				for(var/otherthing in M.composite_material)
-					making = Floor(ores_stored[otherthing] / M.composite_material[otherthing])
+					var/_make = Floor(ores_stored[otherthing] / M.composite_material[otherthing])
+					if(isnull(making) || making > _make)
+						making = _make
 				making = min(sheets_per_tick-sheets, making)
 				for(var/otherthing in M.composite_material)
 					ores_stored[otherthing] -= making * M.composite_material[otherthing]
-				M.place_sheet(output_turf, max(1, making))
+				if(making > 0)
+					M.place_sheet(output_turf, making)
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/material/metal, var/max_result)
 	. = Clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)

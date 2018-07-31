@@ -20,6 +20,7 @@
 		)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
+	sale_price = 2
 
 /material/graphene
 	name = "graphene"
@@ -36,6 +37,7 @@
 		/datum/reagent/carbon = 15,
 		/datum/reagent/acetone = 5
 		)
+	sale_price = 1
 
 /material/quartz
 	name = "quartz"
@@ -55,6 +57,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	sale_price = 2
 
 /material/pyrite
 	name = "pyrite"
@@ -75,6 +78,7 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	ore_compresses_to = "pyrite"
+	sale_price = 2
 
 /material/spodumene
 	name = "spodumene"
@@ -94,6 +98,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	sale_price = 2
 
 /material/cinnabar
 	name = "cinnabar"
@@ -113,6 +118,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	sale_price = 2
 
 /material/phosphorite
 	name = "phosphorite"
@@ -132,6 +138,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	sale_price = 2
 
 /material/rocksalt
 	name = "rock salt"
@@ -151,6 +158,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	sale_price = 2
 
 /material/potash
 	name = "potash"
@@ -170,6 +178,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	sale_price = 2
 
 /material/bauxite
 	name = "bauxite"
@@ -189,6 +198,7 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	ore_compresses_to = "bauxite"
+	sale_price = 2
 
 /material/sand
 	name = "sand"
@@ -233,6 +243,7 @@
 		)
 	xarch_source_mineral = "phoron"
 	ore_icon_overlay = "gems"
+	sale_price = 5
 
 /material/phoron/supermatter
 	name = "supermatter"
@@ -242,6 +253,7 @@
 	stack_type = null
 	luminescence = 3
 	ore_compresses_to = null
+	sale_price = null
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)

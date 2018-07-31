@@ -9,10 +9,6 @@ SUBSYSTEM_DEF(supply)
 	var/points = 50
 	var/points_per_process = 1
 	var/points_per_slip = 2
-	var/material_buy_prices = list(
-		/material/platinum = 5,
-		/material/phoron = 5
-	) //Should only contain material datums, with values the profit per sheet sold.
 	var/point_sources = list()
 	var/pointstotalsum = 0
 	var/pointstotal = 0
@@ -25,7 +21,6 @@ SUBSYSTEM_DEF(supply)
 	//shuttle movement
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
-	//Material descriptions are added automatically; add to material_buy_prices instead.
 	var/list/point_source_descriptions = list(
 		"time" = "Base station supply",
 		"manifest" = "From exported manifests",
@@ -45,10 +40,9 @@ SUBSYSTEM_DEF(supply)
 			for(var/decl/hierarchy/supply_pack/spc in sp.children)
 				master_supply_list += spc
 
-	for(var/material_type in material_buy_prices)
-		var/material/material = material_type //False typing
-		var/material_name = initial(material.name)
-		point_source_descriptions[material_name] = "From exported [material_name]"
+	for(var/material/mat in SSmaterials.materials)
+		if(mat.sale_price > 0)
+			point_source_descriptions[mat.display_name] = "From exported [mat.display_name]"
 
 // Just add points over time.
 /datum/controller/subsystem/supply/fire()
@@ -107,8 +101,8 @@ SUBSYSTEM_DEF(supply)
 					if(istype(A, /obj/item/stack))
 						var/obj/item/stack/P = A
 						var/material/material = P.get_material()
-						if(material_buy_prices[material.type])
-							material_count[material.type] += P.get_amount()
+						if(material.sale_price > 0)
+							material_count[material.display_name] += P.get_amount() * material.sale_price
 						continue
 
 					// Must sell ore detector disks in crates
@@ -119,9 +113,7 @@ SUBSYSTEM_DEF(supply)
 
 	if(material_count.len)
 		for(var/material_type in material_count)
-			var/profit = material_count[material_type] * material_buy_prices[material_type]
-			var/material/material = material_type //False typing.
-			add_points_from_source(profit, initial(material.name))
+			add_points_from_source(material_count[material_type], material_type)
 
 //Buyin
 /datum/controller/subsystem/supply/proc/buy()

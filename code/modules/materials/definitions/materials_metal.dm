@@ -13,6 +13,7 @@
 				/datum/reagent/uranium = 20
 				)
 	construction_difficulty = 2
+	sale_price = 2
 
 /material/gold
 	name = "gold"
@@ -40,6 +41,7 @@
 		"billion_lower" = 3
 		)
 	ore_icon_overlay = "nugget"
+	sale_price = 3
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -47,6 +49,7 @@
 	construction_difficulty = 1
 	ore_smelts_to = null
 	ore_compresses_to = null
+	sale_price = null
 
 /material/copper
 	name = "copper"
@@ -67,6 +70,7 @@
 	ore_name = "tetrahedrite"
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "shiny"
+	sale_price = 1
 
 /material/silver
 	name = "silver"
@@ -87,7 +91,7 @@
 	ore_name = "native silver"
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "shiny"
-
+	sale_price = 2
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -104,6 +108,7 @@
 				)
 	composite_material = list("hematite" = 1875, "graphene" = 1875)
 	alloy_product = TRUE
+	sale_price = 1
 
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL
@@ -113,6 +118,7 @@
 	conductive = 0
 	composite_material = null
 	alloy_product = FALSE
+	sale_price = null
 
 /material/plasteel
 	name = "plasteel"
@@ -133,6 +139,7 @@
 	construction_difficulty = 1
 	composite_material = list("hematite" = 1250, "graphene" = 1250, "platinum" = 1250)
 	alloy_product = TRUE
+	sale_price = 2
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -165,6 +172,7 @@
 	composite_material = list("plasteel" = 7500, "osmium" = 3750)
 	construction_difficulty = 2
 	alloy_product = TRUE
+	sale_price = 3
 
 /material/osmium
 	name = "osmium"
@@ -174,6 +182,7 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = 1
+	sale_price = 3
 
 /material/tritium
 	name = "tritium"
@@ -211,6 +220,7 @@
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"
+	sale_price = 5
 
 /material/platinum
 	name = "platinum"
@@ -228,6 +238,7 @@
 	ore_name = "raw platinum"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "shiny"
+	sale_price = 5
 
 /material/iron
 	name = "iron"
@@ -240,6 +251,7 @@
 	chem_products = list(
 				/datum/reagent/iron = 20
 				)
+	sale_price = 1
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -299,3 +311,4 @@
 	ore_scan_icon = "mineral_common"
 	ore_name = "hematite"
 	ore_icon_overlay = "lump"
+	sale_price = 1

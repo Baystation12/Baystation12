@@ -13,12 +13,14 @@
 	chem_products = list(
 				/datum/reagent/toxin/plasticide = 20
 				)
+	sale_price = 1
 
 /material/plastic/holographic
 	name = "holoplastic"
 	display_name = "plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
+	sale_price = null
 
 /material/wood
 	name = "wood"
@@ -48,12 +50,14 @@
 				/datum/reagent/carbon = 10,
 				/datum/reagent/water = 5
 				)
+	sale_price = 1
 
 /material/wood/holographic
 	name = "holowood"
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
+	sale_price = null
 
 /material/cardboard
 	name = "cardboard"

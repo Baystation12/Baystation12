@@ -111,6 +111,7 @@
 	var/ore_spread_chance
 	var/ore_scan_icon
 	var/ore_icon_overlay
+	var/sale_price
 
 	// Xenoarch behavior.
 	var/list/xarch_ages = list("thousand" = 999, "million" = 999)
