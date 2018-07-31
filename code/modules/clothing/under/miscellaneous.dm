@@ -564,6 +564,13 @@
 	item_state = "jensensuit"
 	worn_state = "pcrc"
 
+/obj/item/clothing/under/pcrcsuit
+	name = "\improper PCRC suit"
+	desc = "A suit belonging to Proxima Centauri Risk Control, a private security firm. This one looks more formal than its utility counterpart."
+	icon_state = "pcrcsuit"
+	item_state = "jensensuit"
+	worn_state = "pcrcsuit"
+
 /obj/item/clothing/under/grayson
 	name = "\improper Grayson overalls"
 	desc = "A set of overalls belonging to Grayson Manufactories, a manufacturing and mining company."
