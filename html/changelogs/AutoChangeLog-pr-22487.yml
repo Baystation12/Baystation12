@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "APC, fire alarm, and air alarm frames should once again show up as buildable."
