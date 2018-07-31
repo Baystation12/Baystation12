@@ -73,7 +73,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 	var/html = null
 	if(holder && CanUse(user))
-		html = GetInteractWindow()
+		html = GetInteractWindow(user)
 	if(html)
 		user.set_machine(holder)
 	else
@@ -87,12 +87,19 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	popup.set_title_image(user.browse_rsc_icon(holder.icon, holder.icon_state))
 	popup.open()
 
-/datum/wires/proc/GetInteractWindow()
-	var/html = "<div class='block'>"
+/datum/wires/proc/GetInteractWindow(mob/user)
+	var/html = list()
+	html += "<div class='block'>"
 	html += "<h3>Exposed Wires</h3>"
 	html += "<table[table_options]>"
 
+	var/list/wires_used = list()
 	for(var/colour in wires)
+		wires_used += prob(user.skill_fail_chance(SKILL_ELECTRICAL, 20, SKILL_EXPERT)) ? pick(wires) : colour
+	if(!user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		wires_used = shuffle(wires_used)
+
+	for(var/colour in wires_used)
 		html += "<tr>"
 		html += "<td[row_options1]><font color='[colour]'>&#9724;</font>[capitalize(colour)]</td>"
 		html += "<td[row_options2]>"
@@ -105,7 +112,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	if (random)
 		html += "<i>\The [holder] appears to have tamper-resistant electronics installed.</i><br><br>" //maybe this could be more generic?
 
-	return html
+	return JOINTEXT(html)
 
 /datum/wires/Topic(href, href_list)
 	..()
@@ -119,16 +126,33 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 				if(isWirecutter(I))
 					var/colour = href_list["cut"]
 					CutWireColour(colour)
+					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 20, SKILL_ADEPT)))
+						RandomCut()
+						to_chat(L, "<span class='warning'>You accidentally nick another wire!</span>")
+					else if(!L.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+						RandomCutAll(10)
+						to_chat(L, "<span class='warning'>You think you might have nicked some of the other wires!</span>")
 				else
 					to_chat(L, "<span class='error'>You need wirecutters!</span>")
 			else if(href_list["pulse"])
 				if(isMultitool(I))
 					var/colour = href_list["pulse"]
 					PulseColour(colour)
+					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 30, SKILL_PROF)))
+						RandomPulse()
+						to_chat(L, "<span class='warning'>You accidentally pulse another wire!</span>")
+						if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 60, SKILL_ADEPT)))
+							RandomPulse() //or two
+					else if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 50, SKILL_BASIC)))
+						wires = shuffle(wires) //Leaves them in a different order for anyone else.
+						to_chat(L, "<span class='warning'>You get the wires all tangled up!</span>")
 				else
 					to_chat(L, "<span class='error'>You need a multitool!</span>")
 			else if(href_list["attach"])
 				var/colour = href_list["attach"]
+				if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 80, SKILL_PROF)))
+					colour = pick(wires)
+					to_chat(L, "<span class='warning'>Are you sure you got the right wire?</span>")
 				// Detach
 				if(IsAttached(colour))
 					var/obj/item/O = Detach(colour)
