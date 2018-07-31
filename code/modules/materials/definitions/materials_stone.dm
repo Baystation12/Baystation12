@@ -19,12 +19,14 @@
 	ore_scan_icon = "mineral_rare"
 	xarch_source_mineral = "nitrogen"
 	ore_icon_overlay = "gems"
+	sale_price = 5
 
 /material/diamond/crystal
 	name = "crystal"
 	hardness = 80
 	stack_type = null
 	ore_compresses_to = null
+	sale_price = null
 
 /material/stone
 	name = "sandstone"
@@ -45,6 +47,7 @@
 	chem_products = list(
 		/datum/reagent/silicon = 20
 		)
+	sale_price = 1
 
 /material/stone/marble
 	name = "marble"

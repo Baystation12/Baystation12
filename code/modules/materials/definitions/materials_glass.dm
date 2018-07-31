@@ -21,6 +21,7 @@
 	rod_product = /obj/item/stack/material/glass/reinforced
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
+	sale_price = 1
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
@@ -135,6 +136,7 @@
 	construction_difficulty = 2
 	alloy_product = TRUE
 	composite_material = list("sand" = 2500, "platinum" = 1250)
+	sale_price = 2
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
