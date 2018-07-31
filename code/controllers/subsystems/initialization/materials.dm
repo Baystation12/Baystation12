@@ -31,9 +31,9 @@ SUBSYSTEM_DEF(materials)
 			materials_by_name[lowertext(new_mineral.name)] = new_mineral
 			if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
 				processable_ores[new_mineral.name] = TRUE
-			if(new_mineral.alloy_product && LAZYLEN(new_mineral.composite_material))
+			if(new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
 				alloy_products[new_mineral] = TRUE
-				for(var/component in new_mineral.composite_material)
+				for(var/component in new_mineral.alloy_materials)
 					processable_ores[component] = TRUE
 					alloy_components[component] = TRUE
 

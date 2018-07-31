@@ -75,7 +75,7 @@
 	var/explosion_resistance = 5 // Only used by walls currently.
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
 	var/luminescence
-	var/list/composite_material  // If set, object matter var will be a list containing these values.
+	var/list/alloy_materials     // If set, material can be produced via alloying these materials in these amounts.
 	var/units_per_sheet = SHEET_MATERIAL_AMOUNT
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
@@ -167,11 +167,7 @@
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
-	if(islist(composite_material))
-		for(var/material_string in composite_material)
-			temp_matter[material_string] = composite_material[material_string]
-	else if(SHEET_MATERIAL_AMOUNT)
-		temp_matter[name] = SHEET_MATERIAL_AMOUNT
+	temp_matter[name] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
 // Weapons handle applying a divisor for this value locally.

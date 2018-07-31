@@ -23,11 +23,11 @@
 	var/list/datum/matter_synth/synths = null
 
 /obj/item/stack/New(var/loc, var/amount=null)
-	..()
 	if (!stacktype)
 		stacktype = type
 	if (amount >= 1)
 		src.amount = amount
+	..()
 
 /obj/item/stack/Destroy()
 	if(uses_charge)

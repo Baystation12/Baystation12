@@ -40,7 +40,6 @@
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
-	matter = material.get_matter()
 	update_strings()
 
 /obj/item/stack/material/proc/set_amount(var/_amount)
@@ -53,6 +52,10 @@
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
 	singular_name = material.sheet_singular_name
+
+	matter = material.get_matter()
+	for(var/mat in matter)
+		matter[mat] *= amount
 
 	if(amount>1)
 		SetName("[material.use_name] [material.sheet_plural_name]")

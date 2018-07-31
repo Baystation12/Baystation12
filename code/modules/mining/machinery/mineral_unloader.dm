@@ -19,6 +19,7 @@
 			for(var/obj/item/weapon/ore/_ore in unloading)
 				_ore.dropInto(output_turf)
 				if(--ore_this_tick<=0) return
-		for(var/obj/item/weapon/_ore in input_turf)
-			_ore.dropInto(output_turf)
-			if(--ore_this_tick<=0) return
+		for(var/obj/item/_ore in input_turf)
+			if(_ore.simulated && !_ore.anchored)
+				_ore.dropInto(output_turf)
+				if(--ore_this_tick<=0) return

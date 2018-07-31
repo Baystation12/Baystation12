@@ -35,8 +35,6 @@
 
 /obj/machinery/mineral/processing_unit/Process()
 
-	if(!active) return
-
 	//Grab some more ore to process this tick.
 	if(input_turf)
 		for(var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))
@@ -47,6 +45,9 @@
 					if(!isnull(ores_stored[o_material]))
 						ores_stored[o_material] += I.matter[o_material]
 			qdel(I)
+
+	if(!active)
+		return
 
 	//Process our stored ores and spit out sheets.
 	if(output_turf)
@@ -88,8 +89,8 @@
 			for(var/thing in SSmaterials.alloy_products)
 				var/material/M = thing
 				var/failed = FALSE
-				for(var/otherthing in M.composite_material)
-					if(!attempt_to_alloy[otherthing] || ores_stored[otherthing] < M.composite_material[otherthing])
+				for(var/otherthing in M.alloy_materials)
+					if(!attempt_to_alloy[otherthing] || ores_stored[otherthing] < M.alloy_materials[otherthing])
 						failed = TRUE
 						break
 				if(!failed) making_alloys += M
@@ -98,15 +99,16 @@
 				if(sheets >= sheets_per_tick) break
 				var/material/M = thing
 				var/making
-				for(var/otherthing in M.composite_material)
-					var/_make = Floor(ores_stored[otherthing] / M.composite_material[otherthing])
+				for(var/otherthing in M.alloy_materials)
+					var/_make = Floor(ores_stored[otherthing] / M.alloy_materials[otherthing])
 					if(isnull(making) || making > _make)
 						making = _make
 				making = min(sheets_per_tick-sheets, making)
-				for(var/otherthing in M.composite_material)
-					ores_stored[otherthing] -= making * M.composite_material[otherthing]
+				for(var/otherthing in M.alloy_materials)
+					ores_stored[otherthing] -= making * M.alloy_materials[otherthing]
 				if(making > 0)
 					M.place_sheet(output_turf, making)
+					break
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/material/metal, var/max_result)
 	. = Clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
