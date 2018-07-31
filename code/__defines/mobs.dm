@@ -202,6 +202,8 @@
 #define BP_OPTICS		"optics"
 #define BP_FLOAT		"floatation disc"
 #define BP_JETS			"maneuvering jets"
+#define BP_COOLING_FINS "cooling fins"
+
 // Limbs.
 #define BP_L_FOOT "l_foot"
 #define BP_R_FOOT "r_foot"
