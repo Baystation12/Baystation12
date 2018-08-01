@@ -860,13 +860,14 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/virology)
 "abC" = (
-/obj/machinery/door/airlock/multi_tile/virology{
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/virology{
 	frequency = 1379;
 	id_tag = "virology_airlock_interior";
-	name = "Virology Airlock Interior";
+	locked = 1;
+	name = "Virology Internal Airlock";
 	req_access = list(39)
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
 "abE" = (
@@ -1109,10 +1110,11 @@
 /area/space)
 "ace" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/multi_tile/virology{
+/obj/machinery/door/airlock/virology{
 	frequency = 1379;
 	id_tag = "virology_airlock_exterior";
-	name = "Virology Airlock Exterior";
+	locked = 1;
+	name = "Virology External Airlock";
 	req_access = list(39)
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -1127,6 +1129,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/virology{
+	frequency = 1379;
+	id_tag = "virology_airlock_exterior";
+	locked = 1;
+	name = "Virology External Airlock";
+	req_access = list(39)
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virologyaccess)
 "acg" = (
@@ -6001,6 +6010,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/door/airlock/sol{
+	name = "Conference Room"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/conference)
 "apY" = (
@@ -6309,8 +6321,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/multi_tile/sol{
-	dir = 8;
+/obj/machinery/door/airlock/sol{
 	name = "Conference Room"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -15244,13 +15255,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aUb" = (
-/obj/machinery/door/airlock/multi_tile/research{
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/research{
 	frequency = 1379;
 	id_tag = "xeno_airlock_exterior";
+	locked = 1;
 	name = "Xenobiology External Airlock";
 	req_access = list(55)
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
 "aUc" = (
@@ -15263,6 +15275,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/research{
+	frequency = 1379;
+	id_tag = "xeno_airlock_exterior";
+	locked = 1;
+	name = "Xenobiology External Airlock";
+	req_access = list(55)
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
 "aUd" = (
@@ -15552,13 +15571,14 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/xenobiology)
 "aUF" = (
-/obj/machinery/door/airlock/multi_tile/research{
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/research{
 	frequency = 1379;
 	id_tag = "xeno_airlock_interior";
+	locked = 1;
 	name = "Xenobiology Internal Airlock";
 	req_access = list(55)
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology)
 "aUG" = (
@@ -15571,6 +15591,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/research{
+	frequency = 1379;
+	id_tag = "xeno_airlock_interior";
+	locked = 1;
+	name = "Xenobiology Internal Airlock";
+	req_access = list(55)
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology)
 "aUH" = (
@@ -21996,9 +22023,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/multi_tile/research{
+/obj/machinery/door/airlock/glass/research{
 	id_tag = "researchdoor_interior";
 	name = "Research Division Access";
+	req_access = newlist();
 	req_one_access = list(47,81)
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -22013,6 +22041,12 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/glass/research{
+	id_tag = "researchdoor_interior";
+	name = "Research Division Access";
+	req_access = newlist();
+	req_one_access = list(47,81)
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/entry)
 "iRb" = (
@@ -28999,6 +29033,13 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/virology{
+	frequency = 1379;
+	id_tag = "virology_airlock_interior";
+	locked = 1;
+	name = "Virology Internal Airlock";
+	req_access = list(39)
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
 "vHB" = (
