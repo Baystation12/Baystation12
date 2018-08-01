@@ -5295,7 +5295,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/space,
+/turf/simulated/floor/plating,
 /area/command/pathfinder)
 "lh" = (
 /obj/structure/disposalpipe/segment,
@@ -15670,7 +15670,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "pathfinder_office"
 	},
-/turf/space,
+/turf/simulated/floor/plating,
 /area/command/pathfinder)
 "Ep" = (
 /obj/structure/cable/cyan{
