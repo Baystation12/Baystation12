@@ -33,6 +33,6 @@ var/list/stored_shock_by_ref = list()
 				var/icon/canvas = new(icon_template)
 				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
 				final_I.Insert(canvas, dir = use_dir)
-			equip_overlays[image_key] = overlay_image(final_I, color, flags = RESET_COLOR)
+			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
 		return equip_overlays[image_key]
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)

@@ -384,7 +384,8 @@ BLIND     // can't see anything
 
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(on && slot == slot_head)
+	ret.overlays.Cut()
+	if(on && slot == slot_head_str)
 		if(ishuman(user_mob))
 			var/mob/living/carbon/human/user_human = user_mob
 			if(sprite_sheets)

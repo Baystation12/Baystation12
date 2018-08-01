@@ -49,8 +49,17 @@
 				var/spending = min(amount, cell.get_charge())
 				cell.use(spending)
 				amount -= spending
-	var/turf/location = loc
-	if(istype(location)) location.hotspot_expose(700, 5)
+
+	var/turf/location
+	if(isturf(loc))
+		location = loc
+	else if(isliving(loc))
+		var/mob/living/M = loc
+		if(isturf(M.loc) && (M.l_hand == src || M.r_hand == src))
+			location = M.loc
+
+	if(location)
+		location.hotspot_expose(700, 5)
 
 /obj/item/weapon/wirecutters/crystal
 	name = "crystalline shears"
@@ -119,8 +128,7 @@
 	icon_state = "vigil"
 	item_state = "vigil"
 
-/obj/item/weapon/storage/belt/utility/vigil/New()
-	..()
+/obj/item/weapon/storage/belt/utility/vigil/Initialize()
 	new /obj/item/device/multitool/crystal(src)
 	new /obj/item/weapon/wrench/crystal(src)
 	new /obj/item/weapon/crowbar/crystal(src)
@@ -128,3 +136,4 @@
 	new /obj/item/weapon/wirecutters/crystal(src)
 	new /obj/item/weapon/weldingtool/crystal(src)
 	update_icon()
+	. = ..()

@@ -28,6 +28,7 @@
 	antaghud_offset_y =       14
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1
+	mob_size =                MOB_LARGE
 	strength =                STR_HIGH
 
 	speech_sounds = list('sound/voice/chime.ogg')
@@ -81,13 +82,13 @@
 
 /datum/species/adherent/New()
 	equip_adjust = list(
-		"[slot_l_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_r_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_back_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_belt_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_head_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_l_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_r_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14))
+		"[slot_l_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_r_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_back_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_belt_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_head_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 3, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = -3, "y" = 14)),
+		"[slot_l_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_r_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14))
 	)
 	..()
 
