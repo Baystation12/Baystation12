@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "Brig cell timers will notify Security over Sec HUDs when expiring."
