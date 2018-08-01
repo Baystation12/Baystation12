@@ -1,3 +1,24 @@
+// Movement relayed to self handling
+/datum/movement_handler/mob/relayed_movement
+	var/prevent_host_move = FALSE
+	var/list/allowed_movers
+
+/datum/movement_handler/mob/relayed_movement/MayMove(var/mob/mover, var/is_external)
+	if(is_external)
+		return MOVEMENT_PROCEED
+	if(mover == mob && !(prevent_host_move && LAZYLEN(allowed_movers) && !LAZYISIN(allowed_movers, mover)))
+		return MOVEMENT_PROCEED
+	if(LAZYISIN(allowed_movers, mover))
+		return MOVEMENT_PROCEED
+
+	return MOVEMENT_STOP
+
+/datum/movement_handler/mob/relayed_movement/proc/AddAllowedMover(var/mover)
+	LAZYDISTINCTADD(allowed_movers, mover)
+
+/datum/movement_handler/mob/relayed_movement/proc/RemoveAllowedMover(var/mover)
+	LAZYREMOVE(allowed_movers, mover)
+
 // Admin object possession
 /datum/movement_handler/mob/admin_possess/DoMove(var/direction)
 	if(QDELETED(mob.control_object))
@@ -107,15 +128,15 @@
 
 /datum/movement_handler/mob/buckle_relay/MayMove(var/mover)
 	if(mob.buckled)
-		return mob.buckled.MayMove(mover) ? (MOVEMENT_PROCEED|MOVEMENT_HANDLED) : MOVEMENT_STOP
+		return mob.buckled.MayMove(mover, FALSE) ? (MOVEMENT_PROCEED|MOVEMENT_HANDLED) : MOVEMENT_STOP
 	return MOVEMENT_PROCEED
 
 // Movement delay
 /datum/movement_handler/mob/delay
 	var/next_move
 
-/datum/movement_handler/mob/delay/DoMove(var/direction, var/mover)
-	if(IS_NOT_SELF(mover))
+/datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
+	if(is_external)
 		return
 	next_move = world.time + max(1, mob.movement_delay())
 

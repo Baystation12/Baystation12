@@ -76,10 +76,12 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 			return H
 
 // If is_external is explicitly set then use that, otherwise if the mover isn't the host assume it's external
-#define SET_IS_EXTERNAL(X) is_external = isnull(is_external) ? IS_NOT_SELF(X) : is_external
+#define SET_MOVER(X) X = X || src
+#define SET_IS_EXTERNAL(X) is_external = isnull(is_external) ? (mover != src) : is_external
 
 /atom/movable/proc/DoMove(var/direction, var/mob/mover, var/is_external)
 	INIT_MOVEMENT_HANDLERS
+	SET_MOVER(mover)
 	SET_IS_EXTERNAL(mover)
 
 	for(var/mh in movement_handlers)
@@ -87,16 +89,17 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 		if(movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
 			return MOVEMENT_HANDLED
 
-		. = movement_handler.DoMove(direction, mover)
+		. = movement_handler.DoMove(direction, mover, is_external)
 		if(. & MOVEMENT_REMOVE)
 			REMOVE_AND_QDEL(movement_handler)
 		if(. & MOVEMENT_HANDLED)
 			return
 
-// is_external means that something else is asking if we may move
+// is_external means that something else (not inside us) is asking if we may move
 // This for example includes mobs bumping into each other
 /atom/movable/proc/MayMove(var/mob/mover, var/is_external)
 	INIT_MOVEMENT_HANDLERS
+	SET_MOVER(mover)
 	SET_IS_EXTERNAL(mover)
 
 	for(var/mh in movement_handlers)
@@ -108,6 +111,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 			return TRUE
 	return TRUE
 
+#undef SET_MOVER
 #undef SET_IS_EXTERNAL
 #undef INIT_MOVEMENT_HANDLERS
 #undef REMOVE_AND_QDEL
@@ -131,12 +135,11 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	host = null
 	. = ..()
 
-// If mover is unset then assume the host attempted to move itself (or asked if it may do so)
-/datum/movement_handler/proc/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/proc/DoMove(var/direction, var/mob/mover, var/is_external)
 	return
 
 // Asks the handlers if the mob may move, ignoring destination, if attempting a DoMove()
-/datum/movement_handler/proc/MayMove(var/mob/mover)
+/datum/movement_handler/proc/MayMove(var/mob/mover, var/is_external)
 	return MOVEMENT_PROCEED
 
 /*******
