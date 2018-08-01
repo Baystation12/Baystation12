@@ -849,9 +849,6 @@
 		return 0
 	return 1
 
-/obj/item/weapon/rig/check_access(obj/item/I)
-	return TRUE
-
 /obj/item/weapon/rig/proc/force_rest(var/mob/user)
 	if(!ai_can_move_suit(user, check_user_module = 1))
 		return
