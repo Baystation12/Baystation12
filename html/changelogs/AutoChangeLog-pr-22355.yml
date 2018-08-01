@@ -1,0 +1,8 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - maptweak: "The brig has been moved to deck one. Deck three has been adjusted to be further enforce it being the habitation deck."
+  - maptweak: "Added the Commissary, an on-ship store run by supply and service crew."
+  - maptweak: "Moved the pathfinder's office to deck four."
+  - maptweak: "Moved the bluespace drive to deck two."
+  - maptweak: "Moved the observation bubble, diplomatic quarters and vacant office to deck three."
