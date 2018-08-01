@@ -126,3 +126,6 @@
 	if(prob(explosion_resistance))
 		return
 	..()
+
+/turf/simulated/wall/crystal/New(var/newloc)
+	..(newloc,"crystal")
