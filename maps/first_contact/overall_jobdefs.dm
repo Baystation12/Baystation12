@@ -38,6 +38,7 @@
 
 /datum/job/unsc_ship_crew
 	title = "UNSC Corvette Ship Crew"
+	alt_titles = list("UNSC Thorin Doctor","UNSC Thorin Engineer","UNSC Thorin Bridge Crew","UNSC Thorin Dropship Pilot","UNSC Thorin Janitor")
 	total_positions = 8
 	spawn_positions = 8
 	outfit_type = /decl/hierarchy/outfit/job/unsc_corvette/crewmember
