@@ -2652,7 +2652,6 @@
 #include "maps\_map_include.dm"
 #include "maps\area_holders\overmap_ship_area_holder.dmm"
 #include "maps\first_contact\all_includes.dm"
-#include "maps\first_contact\maps\Exoplanet Research\ExoResearch_Umbilical.dmm"
 #include "maps\odst_prowler\odst_ship_overmap.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\overmap_ships\om_ship_areas.dm"
