@@ -8,6 +8,10 @@
 	opacity = FALSE
 	var/mob/living/occupant
 
+/obj/structure/adherent_bath/Destroy()
+	eject_occupant()
+	. = ..()
+
 /obj/structure/adherent_bath/return_air()
 	var/datum/gas_mixture/venus = new(CELL_VOLUME, SYNTH_HEAT_LEVEL_1 - 10)
 	venus.adjust_multi("chlorine", MOLES_N2STANDARD, "phoron", MOLES_O2STANDARD)
@@ -26,20 +30,24 @@
 	if(!istype(patient))
 		return FALSE
 
-	if(!user.Adjacent(src))
+	var/self_drop = (user == patient)
+
+	if(!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
 		return FALSE
 
 	if(occupant)
 		to_chat(user, "<span class='warning'>\The [src] is occupied.</span>")
 		return FALSE
 
-	var/self_drop = (user == patient)
 	if(self_drop)
 		user.visible_message("<span class='notice'>\The [user] begins climbing into \the [src].</span>")
 	else
 		user.visible_message("<span class='notice'>\The [user] begins pushing \the [patient] into \the [src].</span>")
 
 	if(!do_after(user, 3 SECONDS, src))
+		return FALSE
+
+	if(!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
 		return FALSE
 
 	if(occupant)

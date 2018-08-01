@@ -8,7 +8,8 @@
 	opacity = FALSE
 
 /obj/structure/adherent_pylon/attack_ai(var/mob/living/user)
-	attack_hand(user)
+	if(Adjacent(user))
+		attack_hand(user)
 
 /obj/structure/adherent_pylon/attack_hand(var/mob/living/user)
 	var/mob/living/carbon/human/H = user
