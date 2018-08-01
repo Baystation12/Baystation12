@@ -970,6 +970,14 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/clamp
 	sort_string = "VAGAE"
 
+/datum/design/item/tool/inducer
+	name = "inducer"
+	desc = "An electromagnetic inducer that can transfer power from one cell into another."
+	id = "inducer"
+	req_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
+	build_path = /obj/item/inducer
+
 /datum/design/item/tool/price_scanner
 	name = "price scanner"
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
