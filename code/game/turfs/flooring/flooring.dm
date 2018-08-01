@@ -101,12 +101,17 @@ var/list/flooring_types
 
 /decl/flooring/linoleum
 	name = "linoleum"
-	desc = "It's like the 2390's all over again."
+	desc = "The fake tile of choice for rebel bases and black-site SCG dungeons."
 	icon = 'icons/turf/flooring/linoleum.dmi'
-	icon_base = "lino"
+	icon_base = "dingy"
 	can_paint = 1
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
+
+/decl/flooring/linoleum/eatery
+	name = "eatery linoleum"
+	desc = "It's like the 2390's all over again."
+	icon_base = "eatery"
 
 /decl/flooring/tiling
 	name = "floor"

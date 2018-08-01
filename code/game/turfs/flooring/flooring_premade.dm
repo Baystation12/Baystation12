@@ -237,8 +237,14 @@
 /turf/simulated/floor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'
-	icon_state = "lino"
+	icon_state = "dingy"
 	initial_flooring = /decl/flooring/linoleum
+
+/turf/simulated/floor/lino/eatery
+	name = "eatery_lino"
+	icon = 'icons/turf/flooring/linoleum.dmi'
+	icon_state = "eatery"
+	initial_flooring = /decl/flooring/linoleum/eatery
 
 //ATMOS PREMADES
 /turf/simulated/floor/reinforced/airless
