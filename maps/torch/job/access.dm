@@ -141,6 +141,11 @@
 	desc = "Pilot"
 	region = ACCESS_REGION_GENERAL
 
+/var/const/access_commissary = 96
+/datum/access/commissary
+	id = access_commissary
+	desc = "Commissary"
+	region = ACCESS_REGION_GENERAL
 
 /************
 * SEV Torch *
