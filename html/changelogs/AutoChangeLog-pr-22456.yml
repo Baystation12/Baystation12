@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "All Heads are now able to authorize warrants using the holowarrant projector regardless of their Security access."
