@@ -234,6 +234,11 @@
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
 
+	var/list/descriptors = list(
+		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/build
+	)
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
@@ -259,6 +264,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		hud = new hud_type()
 	else
 		hud = new()
+
+	if(LAZYLEN(descriptors))
+		var/list/descriptor_datums = list()
+		for(var/desctype in descriptors)
+			var/datum/mob_descriptor/descriptor = new desctype
+			descriptor_datums[descriptor.name] = descriptor
+		descriptors = descriptor_datums
 
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[BP_EYES])

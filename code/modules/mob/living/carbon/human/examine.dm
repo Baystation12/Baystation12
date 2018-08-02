@@ -318,6 +318,9 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "[T.He] [pose]"
 
+	var/show_descs = show_descriptors_to(user)
+	if(show_descs)
+		msg += "<span class='notice'>[jointext(show_descs, "<br>")]</span>"
 	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
@@ -331,7 +334,6 @@
 		for(var/obj/item/borg/sight/sight in list(R.module_state_1, R.module_state_2, R.module_state_3))
 			if(istype(sight) && (sight.hud_type & hudtype))
 				return TRUE
-
 	return FALSE
 
 /mob/living/carbon/human/verb/pose()

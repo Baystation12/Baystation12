@@ -1047,6 +1047,15 @@
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
 
+	if(LAZYLEN(descriptors))
+		descriptors = null
+
+	if(LAZYLEN(species.descriptors))
+		descriptors = list()
+		for(var/desctype in species.descriptors)
+			var/datum/mob_descriptor.descriptor = species.descriptors[desctype]
+			descriptors[desctype] = descriptor.default_value
+
 	if(!(species.appearance_flags & HAS_UNDERWEAR))
 		QDEL_NULL_LIST(worn_underwear)
 
