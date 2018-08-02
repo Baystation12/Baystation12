@@ -1,16 +1,16 @@
 #define ONI_OVERRIDE 'code/modules/halo/clothing/oni_guard.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/item_oni.dmi'
-/*
-/obj/item/clothing/under/unsc/oni_uniform
+
+/*/obj/item/clothing/under/unsc/oni_uniform
 	desc = "Standard issue uniform for ONI security guards."
 	name = "ONI uniform"
 	icon = ITEM_INHAND
 	icon_override = ONI_OVERRIDE
-	item_state = "uniform"
-	icon_state = "uniform"
-	worn_state = "Oniform"
-	starting_accessories = /obj/item/clothing/accessory/badge/tags
-	*/
+	item_state = "uniformoni"
+	icon_state = "uniformoni"
+	worn_state = "Oni_form"
+	starting_accessories = /obj/item/clothing/accessory/badge/tags */
+
 
 /obj/item/clothing/head/helmet/oni_guard
 	name = "CH252 Helmet"
@@ -86,6 +86,14 @@
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/weapon/storage/belt/marine_ammo
+	name = "ONI Ammunition Storage Belt"
+	desc = "A belt with many various pouches to hold ammunition."
+	icon = 'code/modules/halo/clothing/item_oni.dmi'
+	icon_state = "Oni_Ammo_Belt"
+	item_state = "Oni Belt"
+	storage_slots = 6
 
 
 #undef ONI_OVERRIDE
