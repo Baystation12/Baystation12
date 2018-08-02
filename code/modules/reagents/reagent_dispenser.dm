@@ -1,6 +1,6 @@
 
 /obj/structure/reagent_dispensers
-	name = "Dispenser"
+	name = "dispenser"
 	desc = "..."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
@@ -73,7 +73,7 @@
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
-	name = "watertank"
+	name = "water tank"
 	desc = "A tank containing water."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
@@ -84,8 +84,8 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/fueltank
-	name = "fueltank"
-	desc = "A tank containing fuel."
+	name = "fuel tank"
+	desc = "A tank containing welding fuel."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
@@ -98,12 +98,13 @@
 	if(!..(user, 2))
 		return
 	if (modded)
-		to_chat(user, "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>")
+		to_chat(user, "<span class='warning'>The faucet is wrenched open, leaking fuel!</span>")
 	if(rig)
 		to_chat(user, "<span class='notice'>There is some kind of device rigged to the tank.</span>")
+
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
-		usr.visible_message("<span class='notice'>\The [usr] begins to detach [rig] from \the [src].</span>", "<span class='notice'>You begin to detach [rig] from \the [src].</span>")
+		usr.visible_message("<span class='notice'>\The [usr] begins to detach \the [rig] from \the [src].</span>", "<span class='notice'>You begin to detach \the [rig] from \the [src].</span>")
 		if(do_after(usr, 20, src))
 			usr.visible_message("<span class='notice'>\The [usr] detaches \the [rig] from \the [src].</span>", "<span class='notice'>You detach [rig] from \the [src]</span>")
 			rig.loc = get_turf(usr)
@@ -113,28 +114,25 @@
 /obj/structure/reagent_dispensers/fueltank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (istype(W,/obj/item/weapon/wrench))
-		user.visible_message("[user] wrenches [src]'s faucet [modded ? "closed" : "open"].", \
+		user.visible_message("\The [user] wrenches \the [src]'s faucet [modded ? "closed" : "open"].", \
 			"You wrench [src]'s faucet [modded ? "closed" : "open"]")
 		modded = modded ? 0 : 1
 		if (modded)
-			message_admins("[key_name_admin(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
-			log_game("[key_name(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel.")
+			log_and_message_admins("opened a fuel tank at [loc.loc.name], leaking fuel.")
 			leak_fuel(amount_per_transfer_from_this)
 	else if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
-			to_chat(user, "<span class='warning'>There is another device in the way.</span>")
+			to_chat(user, "<span class='warning'>There is another device already in the way.</span>")
 			return ..()
-		user.visible_message("\The [user] begins rigging [W] to \the [src].", "You begin rigging [W] to \the [src]")
+		user.visible_message("\The [user] begins rigging \the [W] to \the [src].", "You begin rigging \the [W] to \the [src]")
 		if(do_after(user, 20, src))
 			if(!user.unEquip(W, src))
 				return
-			user.visible_message("<span class='notice'>The [user] rigs [W] to \the [src].</span>", "<span class='notice'>You rig [W] to \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] rigs \the [W] to \the [src].</span>", "<span class='notice'>You rig \the [W] to \the [src].</span>")
 
 			var/obj/item/device/assembly_holder/H = W
 			if (istype(H.a_left,/obj/item/device/assembly/igniter) || istype(H.a_right,/obj/item/device/assembly/igniter))
-				message_admins("[key_name_admin(user)] rigged fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) for explosion. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
-				log_game("[key_name(user)] rigged fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) for explosion.")
-
+				log_and_message_admins("rigged a fuel tank for explosion at [loc.loc.name].")
 			rig = W
 			var/icon/test = getFlatIcon(W)
 			test.Shift(NORTH,1)
@@ -143,13 +141,13 @@
 
 	else if(isflamesource(W))
 		if(user.a_intent != I_HURT)
-			to_chat(user, "<span class='warning'>You almost got [W] too close to [src]! That could have ended very badly for you.</span>")
+			to_chat(user, "<span class='warning'>You almost got \the [W] too close to [src]! That could have ended very badly for you.</span>")
 			return
 
-		user.visible_message("<span class='warning'>[user] draws closer to the fueltank with [W].</span>", "<span class='warning'>You draw closer to the fueltank with [W].</span>")
+		user.visible_message("<span class='warning'>\The [user] draws closer to the fuel tank with \the [W].</span>", "<span class='warning'>You draw closer to the fuel tank with \the [W].</span>")
 		if(do_after(user, 50, src))
-			log_and_message_admins("triggered a fueltank explosion with [W].")
-			user.visible_message("<span class='danger'>[user] puts [W] to [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+			log_and_message_admins("triggered a fuel tank explosion with \the [W].")
+			user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
 			src.explode()
 
 		return
@@ -163,11 +161,9 @@
 			var/turf/turf = get_turf(src)
 			if(turf)
 				var/area/area = turf.loc || "*unknown area*"
-				message_admins("[key_name_admin(Proj.firer)] shot a fueltank in \the [area] ([turf.x],[turf.y],[turf.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[turf.x];Y=[turf.y];Z=[turf.z]'>JMP</a>).")
-				log_game("[key_name(Proj.firer)] shot a fueltank in \the [area] ([turf.x],[turf.y],[turf.z]).")
+				log_and_message_admins("[key_name_admin(Proj.firer)] shot a fuel tank in \the [area].")
 			else
-				message_admins("[key_name_admin(Proj.firer)] shot a fueltank outside the world.")
-				log_game("[key_name(Proj.firer)] shot a fueltank outside the world.")
+				log_and_message_admins("shot a fuel tank outside the world.")
 
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
@@ -205,7 +201,7 @@
 	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank
-	name = "Pepper Spray Refiller"
+	name = "pepper spray refiller"
 	desc = "Refills pepper spray canisters."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "peppertank"
@@ -216,8 +212,8 @@
 
 
 /obj/structure/reagent_dispensers/water_cooler
-	name = "Water-Cooler"
-	desc = "A machine that dispenses water to drink."
+	name = "water cooler"
+	desc = "A machine that dispenses cool water to drink."
 	amount_per_transfer_from_this = 5
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "water_cooler"
@@ -252,7 +248,7 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/virusfood
-	name = "Virus Food Dispenser"
+	name = "virus food dispenser"
 	desc = "A dispenser of virus food."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "virusfoodtank"
@@ -261,7 +257,7 @@
 	initial_reagent_types = list(/datum/reagent/nutriment/virus_food = 1)
 
 /obj/structure/reagent_dispensers/acid
-	name = "Sulphuric Acid Dispenser"
+	name = "sulphuric acid dispenser"
 	desc = "A dispenser of acid for industrial processes."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "acidtank"

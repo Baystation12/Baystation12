@@ -185,5 +185,4 @@
 			gases += ", [gas]"
 		else
 			gases = gas
-	log_admin("[usr] ([usr.ckey]) opened '[src.name]' containing [gases].")
-	message_admins("[usr] ([usr.ckey]) opened '[src.name]' containing [gases].")
+	log_and_message_admins("opened [src.name], containing [gases].")
