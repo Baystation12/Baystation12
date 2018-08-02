@@ -14468,7 +14468,9 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "aGx" = (
 /obj/effect/landmark{
@@ -14570,7 +14572,9 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "aGL" = (
 /obj/structure/computerframe,
@@ -14655,17 +14659,23 @@
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_l"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "aGW" = (
 /obj/structure/shuttle/engine/propulsion,
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "aGX" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_r"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "aHb" = (
 /obj/machinery/camera/network/crescent{
@@ -22639,7 +22649,9 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "fcv" = (
 /obj/structure/holostool,
@@ -22685,7 +22697,9 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "fXG" = (
 /obj/machinery/porta_turret/crescent{
@@ -22734,7 +22748,9 @@
 	icon_state = "propulsion_l";
 	dir = 1
 	},
-/turf/space,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "iPk" = (
 /obj/machinery/body_scanconsole,
@@ -22804,7 +22820,9 @@
 	icon_state = "propulsion_l";
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "jVW" = (
 /obj/structure/closet{
@@ -22866,7 +22884,9 @@
 	icon_state = "heater";
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "kBK" = (
 /obj/structure/mopbucket,
@@ -22902,7 +22922,9 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "lRq" = (
 /obj/structure/bed/chair/wood{
@@ -22978,7 +23000,9 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
 /area/syndicate_station/start)
 "mXz" = (
 /obj/machinery/computer/pod{
