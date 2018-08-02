@@ -84,6 +84,17 @@
 
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unathi)
 
+	descriptors = list(
+		/datum/mob_descriptor/height/unathi,
+		/datum/mob_descriptor/build/unathi
+		)
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
+
+/datum/mob_descriptor/height/unathi
+	comparison_offset = 2
+
+/datum/mob_descriptor/build/unathi
+	comparison_offset = 2
