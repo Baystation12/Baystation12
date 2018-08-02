@@ -1439,6 +1439,7 @@
 #include "code\modules\halo\clothing\jumpsuits.dm"
 #include "code\modules\halo\clothing\marine.dm"
 #include "code\modules\halo\clothing\odst.dm"
+#include "code\modules\halo\clothing\oni_guard.dm"
 #include "code\modules\halo\clothing\pilot.dm"
 #include "code\modules\halo\clothing\spartan.dm"
 #include "code\modules\halo\clothing\special_armour.dm"

@@ -19,3 +19,9 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
+code/modules/clothing/spacesuits/alien.dm
+code/modules/halo/flood/flood.dm
+code/modules/halo/flood/flood.dm
+code/modules/halo/flood/flood.dm
+code/modules/halo/flood/flood.dm
+code/modules/mob/living/simple_animal/hostile/hostile.dm
