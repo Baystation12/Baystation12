@@ -118,9 +118,9 @@
 	desc = "EVA"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_heads = 19
-/datum/access/heads
-	id = access_heads
+/var/const/access_bridge = 19
+/datum/access/bridge
+	id = access_bridge
 	desc = "Bridge"
 	region = ACCESS_REGION_COMMAND
 
@@ -383,6 +383,12 @@
 	id = access_medical_equip
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
+
+/var/const/access_heads = 67
+/datum/access/heads
+	id = access_heads
+	desc = "Command"
+	region = ACCESS_REGION_COMMAND
 
 /******************
 * Central Command *
