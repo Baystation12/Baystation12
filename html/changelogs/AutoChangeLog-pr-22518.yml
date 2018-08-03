@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "The mercenary shuttle is now less easily vented by destroying a single r-window."
