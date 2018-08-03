@@ -92,6 +92,17 @@
 	containername = "\improper Chicken meat crate"
 	cost = 20
 
+/decl/hierarchy/supply_pack/hospitality/seafood
+	name = "Seafood crate"
+	contains = list(
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 2,
+		/obj/item/weapon/reagent_containers/food/snacks/fish/shark = 2,
+		/obj/item/weapon/reagent_containers/food/snacks/fish/octopus = 2
+		)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "\improper Seafood crate"
+	cost = 20
+
 /decl/hierarchy/supply_pack/hospitality/eggs
 	name = "Eggs crate"
 	contains = list(/obj/item/weapon/storage/fancy/egg_box = 2)

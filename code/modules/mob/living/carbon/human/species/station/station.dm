@@ -165,6 +165,7 @@
 	assisted_langs = list(LANGUAGE_NABBER)
 	name_language = null
 	health_hud_intensity = 1.75
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
 
 	min_age = 19
 	max_age = 90

@@ -193,9 +193,9 @@
 				display_name = "Turnovers"
 				items_measures[display_name] = "turnover"
 				items_measures_p[display_name] = "turnovers"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/carpmeat))
-				items_measures[display_name] = "fillet of meat"
-				items_measures_p[display_name] = "fillets of meat"
+			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/fish))
+				items_measures[display_name] = "fillet of fish"
+				items_measures_p[display_name] = "fillets of fish"
 			items_counts[display_name]++
 		for (var/O in items_counts)
 			var/N = items_counts[O]
