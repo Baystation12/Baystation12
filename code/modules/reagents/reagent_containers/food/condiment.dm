@@ -232,3 +232,16 @@
 /obj/item/weapon/reagent_containers/food/condiment/salt/New()
 	..()
 	reagents.add_reagent(/datum/reagent/sodiumchloride, 500)
+
+/obj/item/weapon/reagent_containers/food/condiment/mint
+	name = "mint essential oil"
+	desc = "A small bottle of the essential oil of some kind of mint plant."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "coldsauce"
+
+/obj/item/weapon/reagent_containers/food/condiment/mint/on_reagent_change()
+	return
+
+/obj/item/weapon/reagent_containers/food/condiment/mint/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/mint, 15)

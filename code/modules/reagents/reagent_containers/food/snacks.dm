@@ -1936,7 +1936,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/mint
 	name = "mint"
-	desc = "it is only wafer thin."
+	desc = "A tasty after-dinner mint. It is only wafer thin."
 	icon_state = "mint"
 	filling_color = "#f2f2f2"
 	center_of_mass = "x=16;y=14"
