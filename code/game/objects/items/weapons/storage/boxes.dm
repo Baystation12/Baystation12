@@ -465,7 +465,7 @@
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is chicken flavored."
 	icon_state = "mealpack"
 	w_class = 1
-	max_storage_space = 4
+	max_storage_space = 8
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chicken,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chickenside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/peanuts)
 
 /obj/item/weapon/storage/box/MRE/Pizza
@@ -473,7 +473,7 @@
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is pizza flavored."
 	icon_state = "mealpack"
 	w_class = 1
-	max_storage_space = 4
+	max_storage_space = 8
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Pizza,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/meatballs,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/sugarcookie)
 
 /obj/item/weapon/storage/box/MRE/Spaghetti
@@ -481,5 +481,5 @@
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is spaghetti flavored."
 	icon_state = "mealpack"
 	w_class = 1
-	max_storage_space = 4
+	max_storage_space = 8
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghetti,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/cocobar)

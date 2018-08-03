@@ -3377,7 +3377,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged_meal/cocobar
 	name = "\improper MRE component Coco Bar"
-	icon_state = "coco"
+	icon_state = "coco bar"
 	nutriment_amt = 1
 	New()
 		..()
