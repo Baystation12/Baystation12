@@ -8685,6 +8685,12 @@
 /obj/effect/floor_decal/corner/red,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"tT" = (
+/obj/structure/closet/medical_wall/filled{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/crew_quarters/gym)
 "tU" = (
 /obj/machinery/atmospherics/valve/shutoff{
 	dir = 4
@@ -8834,6 +8840,19 @@
 /obj/machinery/disposal,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"up" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "hab_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green,
+/turf/simulated/floor/plating,
+/area/security/habcheck)
 "us" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -9010,6 +9029,11 @@
 	name = "Security Checkpoint";
 	req_access = list(1);
 	secured_wires = 1
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/habcheck)
@@ -9349,6 +9373,11 @@
 	},
 /obj/machinery/door/window/westright{
 	name = "Checkpoint Desk"
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
@@ -10406,6 +10435,14 @@
 	id = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
@@ -13406,6 +13443,11 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "FB" = (
@@ -15909,6 +15951,10 @@
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
 "LW" = (
@@ -17271,11 +17317,26 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "Qx" = (
 /obj/item/modular_computer/console/preset/security,
 /obj/effect/floor_decal/corner/red/mono,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "Qz" = (
@@ -17301,6 +17362,11 @@
 /obj/item/device/binoculars,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
@@ -17758,6 +17824,11 @@
 	pixel_x = 24
 	},
 /obj/effect/floor_decal/corner/red/mono,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "Sn" = (
@@ -18422,6 +18493,26 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"UA" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id = "hab_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/security/habcheck)
 "UB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -33916,7 +34007,7 @@ tt
 uK
 xU
 vL
-xU
+up
 Vx
 Ur
 yJ
@@ -34317,7 +34408,7 @@ pT
 Xn
 sj
 tv
-LV
+UA
 Qv
 jQ
 nI
@@ -39962,7 +40053,7 @@ Wb
 Rf
 Rf
 Ap
-WB
+tT
 eL
 Qd
 Nd
@@ -46632,7 +46723,7 @@ aT
 aI
 aI
 aI
-aU
+aI
 QP
 aI
 Su
@@ -46642,7 +46733,7 @@ Su
 Su
 aI
 aI
-aU
+aI
 aI
 aI
 aI

@@ -4611,7 +4611,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck - Teleporter"
+	c_tag = "Second Deck - Custodial Closet"
 	},
 /obj/item/device/radio/intercom{
 	dir = 8;

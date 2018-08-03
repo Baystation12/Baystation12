@@ -6096,6 +6096,14 @@
 	name = "Security Blast Door";
 	opacity = 0
 	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/plating,
 /area/security/brig)
 "asx" = (
@@ -6880,7 +6888,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Observation Bubble Entrance";
+	c_tag = "First Deck Hallway - Emergency Armory Entrance";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/mono,
@@ -8289,6 +8297,11 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "aAe" = (
@@ -8579,6 +8592,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_grid,
 /area/command/armoury/access)
 "aAY" = (
@@ -8638,6 +8652,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_grid,
 /area/command/armoury)
 "aBb" = (
@@ -8648,6 +8663,10 @@
 /area/command/armoury/tactical)
 "aBd" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "aBf" = (
@@ -10447,12 +10466,22 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aIf" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/weapon/deck/cards,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aIg" = (
@@ -10807,6 +10836,11 @@
 	dir = 6
 	},
 /obj/structure/catwalk,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aJL" = (
@@ -15724,6 +15758,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod14/station)
+"bSz" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 1;
+	icon_state = "pdoor0";
+	id = "Secure Gate";
+	name = "Security Blast Door";
+	opacity = 0
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/security/brig)
 "bTb" = (
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -19923,6 +19973,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/armoury)
 "hcb" = (
@@ -20365,7 +20416,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/space,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "hAb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -21422,6 +21474,15 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
+"iKf" = (
+/obj/structure/catwalk,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/firstdeck/foreport)
 "iLb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -22800,6 +22861,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "ktb" = (
@@ -23489,8 +23551,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/closet/shipping_wall/filled{
-	pixel_x = 0;
+/obj/structure/extinguisher_cabinet{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
@@ -26283,7 +26344,7 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/structure/extinguisher_cabinet{
+/obj/structure/closet/shipping_wall/filled{
 	pixel_x = 26;
 	pixel_y = 0
 	},
@@ -26543,7 +26604,7 @@
 	},
 /obj/structure/closet/medical_wall/filled{
 	pixel_x = 0;
-	pixel_y = 32
+	pixel_y = -32
 	},
 /obj/machinery/camera/network/research{
 	c_tag = "Research - Hallway";
@@ -27632,6 +27693,15 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
+"qEq" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/structure/cable/green,
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/firstdeck/fore)
 "qFb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -30863,6 +30933,14 @@
 	opacity = 0
 	},
 /obj/structure/disposalpipe/segment,
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/plating,
 /area/security/brig)
 "xqk" = (
@@ -41226,7 +41304,7 @@ awU
 axM
 ayQ
 aAd
-aBd
+qEq
 aJr
 aDG
 aEK
@@ -43049,7 +43127,7 @@ axR
 axR
 obZ
 aFV
-asv
+bSz
 sTT
 xCn
 eVQ
@@ -46080,7 +46158,7 @@ ahL
 adq
 aee
 ahL
-uKa
+iKf
 aJK
 aKT
 aLP
