@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - bugfix: "Hardsuit rig modules now check properly access for those attempting to use them."
