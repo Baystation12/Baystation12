@@ -87,7 +87,7 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/weapon/storage/belt/marine_ammo
+/obj/item/weapon/storage/belt/marine_ammo/oni
 	name = "ONI Ammunition Storage Belt"
 	desc = "A belt with many various pouches to hold ammunition."
 	icon = 'code/modules/halo/clothing/item_oni.dmi'

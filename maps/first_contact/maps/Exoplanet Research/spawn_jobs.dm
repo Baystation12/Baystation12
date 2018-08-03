@@ -101,9 +101,9 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	gloves = /obj/item/clothing/gloves/thick/unsc
-	shoes = /obj/item/clothing/shoes/marine
-	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/oni_guard
+	shoes = /obj/item/clothing/shoes/oni_guard
+	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
@@ -115,9 +115,9 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	gloves = /obj/item/clothing/gloves/thick/unsc
-	shoes = /obj/item/clothing/shoes/marine
-	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/oni_guard
+	shoes = /obj/item/clothing/shoes/oni_guard
+	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
 	l_pocket = /obj/item/clothing/accessory/badge/onib
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
@@ -130,9 +130,9 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	gloves = /obj/item/clothing/gloves/thick/unsc
-	shoes = /obj/item/clothing/shoes/marine
-	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/oni_guard
+	shoes = /obj/item/clothing/shoes/oni_guard
+	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
 	l_pocket = /obj/item/clothing/accessory/badge/onib
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e7, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
