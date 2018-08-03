@@ -15,13 +15,6 @@
 
 	var/timer_id
 
-/turf/simulated/post_change()
-	..()
-	var/turf/T = GetAbove(src)
-	if(istype(T,/turf/space) || (density && istype(T,/turf/simulated/open)))
-		var/new_turf_type = density ? (istype(T.loc, /area/space) ? /turf/simulated/floor/airless : /turf/simulated/floor/plating) : /turf/simulated/open
-		T.ChangeTurf(new_turf_type)
-
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 	if(wet_val < wet && !overwrite)
