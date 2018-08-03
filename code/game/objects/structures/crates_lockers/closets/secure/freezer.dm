@@ -23,7 +23,7 @@
 /obj/structure/closet/secure_closet/freezer/meat/WillContain()
 	return list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 8,
-		/obj/item/weapon/reagent_containers/food/snacks/carpmeat/safe = 4
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 4
 	)
 
 /obj/structure/closet/secure_closet/freezer/fridge
