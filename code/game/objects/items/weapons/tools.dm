@@ -155,6 +155,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	center_of_mass = "x=14;y=15"
+	var/welding_resource = "welding fuel"
 
 	//Amount of OUCH when it's thrown
 	force = 3.0
@@ -194,10 +195,13 @@
 
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))
-		if(tank)
-			to_chat(user, "\icon[tank] \The [tank] contains [get_fuel()]/[tank.max_fuel] units of fuel!")
-		else
-			to_chat(user, "There is no tank attached.")
+		show_fuel(user)
+
+/obj/item/weapon/weldingtool/proc/show_fuel(var/mob/user)
+	if(tank)
+		to_chat(user, "\icon[tank] \The [tank] contains [get_fuel()]/[tank.max_fuel] units of [welding_resource]!")
+	else
+		to_chat(user, "There is no tank attached.")
 
 /obj/item/weapon/weldingtool/MouseDrop(atom/over)
 	if(!CanMouseDrop(over, usr))
@@ -309,7 +313,6 @@
 /obj/item/weapon/weldingtool/proc/get_fuel()
 	return tank ? tank.reagents.get_reagent_amount(/datum/reagent/fuel) : 0
 
-
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weapon/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
 	if(!welding)
@@ -321,7 +324,7 @@
 		return 1
 	else
 		if(M)
-			to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(M, "<span class='notice'>You need more [welding_resource] to complete this task.</span>")
 		return 0
 
 /obj/item/weapon/weldingtool/proc/burn_fuel(var/amount)
@@ -394,7 +397,7 @@
 			START_PROCESSING(SSobj, src)
 		else
 			if(M)
-				to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+				to_chat(M, "<span class='notice'>You need more [welding_resource] to complete this task.</span>")
 			return
 	//Otherwise
 	else if(!set_welding && welding)

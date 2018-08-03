@@ -12,6 +12,7 @@
 	additional_langs =        list(LANGUAGE_GALCOM)
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
+	silent_steps =            TRUE // Antigravity squids.
 
 	icon_template =           'icons/mob/human_races/species/adherent/template.dmi'
 	icobase =                 'icons/mob/human_races/species/adherent/body.dmi'
@@ -27,7 +28,11 @@
 	antaghud_offset_y =       14
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1
+	mob_size =                MOB_LARGE
 	strength =                STR_HIGH
+
+	speech_sounds = list('sound/voice/chime.ogg')
+	speech_chance = 25
 
 	cold_level_1 = SYNTH_COLD_LEVEL_1
 	cold_level_2 = SYNTH_COLD_LEVEL_2
@@ -46,6 +51,7 @@
 	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
+	pixel_offset_y = -4
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),
@@ -62,27 +68,27 @@
 	)
 
 	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/brain/adherent,
-		BP_EYES =  /obj/item/organ/internal/eyes/adherent,
-		BP_JETS =  /obj/item/organ/internal/powered/jets,
-		BP_FLOAT = /obj/item/organ/internal/powered/float,
-		BP_CELL =  /obj/item/organ/internal/cell/adherent
+		BP_BRAIN =        /obj/item/organ/internal/brain/adherent,
+		BP_EYES =         /obj/item/organ/internal/eyes/adherent,
+		BP_JETS =         /obj/item/organ/internal/powered/jets,
+		BP_FLOAT =        /obj/item/organ/internal/powered/float,
+		BP_CELL =         /obj/item/organ/internal/cell/adherent,
+		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
-	prone_overlay_offset = list(-8, 0)
 
 	var/list/original_name_cache = list()
 
 /datum/species/adherent/New()
 	equip_adjust = list(
-		"[slot_l_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_r_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_back_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_belt_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_head_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_l_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14)),
-		"[slot_r_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0, "y" = 14))
+		"[slot_l_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_r_hand_str]" = list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_back_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_belt_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_head_str]" =   list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 3, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = -3, "y" = 14)),
+		"[slot_l_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14)),
+		"[slot_r_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14))
 	)
 	..()
 
@@ -145,5 +151,5 @@
 		"belt" =  list("loc" = ui_belt,      "name" = "Belt",     "slot" = slot_belt,    "state" = "belt")
 	)
 
-/datum/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org)
+/datum/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL|ORGAN_ROBOTIC)

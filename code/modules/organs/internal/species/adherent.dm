@@ -43,6 +43,7 @@
 /obj/item/organ/internal/powered/attack_self(var/mob/user)
 	. = ..()
 	if(.)
+		sound_to(user, sound('sound/effects/ding2.ogg'))
 		if(is_broken())
 			to_chat(owner, "<span class='warning'>\The [src] [gender == PLURAL ? "are" : "is"] too damaged to function.</span>")
 			active = FALSE
@@ -83,8 +84,36 @@
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
+	phoron_guard = TRUE
 
 /obj/item/organ/internal/cell/adherent
 	name = "piezoelectric core"
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
 	icon_state = "cell"
+
+/obj/item/organ/internal/powered/cooling_fins
+	name = "cooling fins"
+	gender = PLURAL
+	desc = "A lacy filligree of heat-radiating fins."
+	action_button_name = "Toggle Cooling"
+	organ_tag = BP_COOLING_FINS
+	parent_organ = BP_GROIN
+	icon_state = "fins"
+	maintenance_cost = 0
+	use_descriptor = "radiate heat"
+	base_action_state = "adherent-fins"
+	var/max_cooling = 10
+	var/target_temp = T20C
+
+/obj/item/organ/internal/powered/cooling_fins/Process()
+	if(owner)
+		var/temp_diff = min(owner.bodytemperature - target_temp, max_cooling)
+		if(temp_diff >= 1)
+			maintenance_cost = max(temp_diff, 1)
+			. = ..()
+			if(active)
+				owner.bodytemperature -= temp_diff
+		else
+			maintenance_cost = 0
+	else
+		. = ..()

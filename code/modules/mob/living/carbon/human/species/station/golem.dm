@@ -1,6 +1,6 @@
 /datum/species/golem
-	name = "Golem"
-	name_plural = "golems"
+	name = SPECIES_GOLEM
+	name_plural = "Golems"
 
 	icobase = 'icons/mob/human_races/species/golem/body.dmi'
 	deform = 'icons/mob/human_races/species/golem/body.dmi'
@@ -18,6 +18,14 @@
 	blood_color = "#515573"
 	flesh_color = "#137e8f"
 
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
+
+	heat_level_1 = SYNTH_HEAT_LEVEL_1
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
+
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem
 		)
@@ -33,6 +41,5 @@
 	H.SetName(H.real_name)
 	..()
 
-/datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org)
-	org.status |= ORGAN_BRITTLE
-	org.status |= ORGAN_CRYSTAL
+/datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)

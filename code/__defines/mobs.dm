@@ -202,6 +202,8 @@
 #define BP_OPTICS		"optics"
 #define BP_FLOAT		"floatation disc"
 #define BP_JETS			"maneuvering jets"
+#define BP_COOLING_FINS "cooling fins"
+
 // Limbs.
 #define BP_L_FOOT "l_foot"
 #define BP_R_FOOT "r_foot"
@@ -273,6 +275,7 @@
 #define SPECIES_XENO        "Xenophage"
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
+#define SPECIES_GOLEM       "Golem"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

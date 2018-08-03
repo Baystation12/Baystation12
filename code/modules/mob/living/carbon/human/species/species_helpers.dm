@@ -22,19 +22,17 @@ var/list/stored_shock_by_ref = list()
 		var/image_key = "[mob_icon]-[mob_state]-[color]"
 		if(!equip_overlays[image_key])
 
-			var/icon/final_I = new(mob_icon, icon_state = mob_state)
+			var/icon/final_I = new(icon_template)
 			var/list/shifts = equip_adjust[slot]
 
 			// Apply all pixel shifts for each direction.
 			for(var/shift_facing in shifts)
 				var/list/facing_list = shifts[shift_facing]
 				var/use_dir = text2dir(shift_facing)
-
-				var/icon/shifting = new(final_I, dir = use_dir)
-				shifting.Shift(EAST, facing_list["x"])
-				shifting.Shift(NORTH, facing_list["y"])
-				final_I.Insert(shifting, dir = use_dir)
-
-			equip_overlays[image_key] = overlay_image(final_I, color, flags = RESET_COLOR)
+				var/icon/equip = new(mob_icon, icon_state = mob_state, dir = use_dir)
+				var/icon/canvas = new(icon_template)
+				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
+				final_I.Insert(canvas, dir = use_dir)
+			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
 		return equip_overlays[image_key]
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
