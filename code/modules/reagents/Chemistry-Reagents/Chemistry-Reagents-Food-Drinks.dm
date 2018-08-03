@@ -256,7 +256,7 @@
 /datum/reagent/nutriment/mint
 	name = "Mint"
 	description = "Also known as Mentha."
-	taste_description = "mint"
+	taste_description = "sweet mint"
 	reagent_state = LIQUID
 	color = "#cf3600"
 
@@ -300,10 +300,10 @@
 /datum/reagent/frostoil
 	name = "Frost Oil"
 	description = "A special oil that noticably chills the body. Extracted from Ice Peppers."
-	taste_description = "mint"
+	taste_description = "arctic mint"
 	taste_mult = 1.5
 	reagent_state = LIQUID
-	color = "#b31008"
+	color = "#07aab2"
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
