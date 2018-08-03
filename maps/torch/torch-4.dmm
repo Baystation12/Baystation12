@@ -21848,10 +21848,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "jpb" = (
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Teleporter";
-	dir = 1
-	},
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_x = 0;

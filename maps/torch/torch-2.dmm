@@ -8644,7 +8644,7 @@
 /area/hallway/primary/thirddeck/center)
 "tL" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Holodeck";
+	c_tag = "Third Deck Hallway - Officer's Mess Hall Entrance";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -9197,13 +9197,13 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/lime/three_quarters,
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Observation Bubble";
-	dir = 4
-	},
 /obj/item/device/radio/intercom/entertainment{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Observation Bubble";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
