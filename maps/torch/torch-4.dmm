@@ -4598,7 +4598,6 @@
 	dir = 2
 	},
 /obj/structure/lattice,
-/obj/structure/catwalk,
 /turf/simulated/open,
 /area/maintenance/substation/firstdeck)
 "ali" = (
