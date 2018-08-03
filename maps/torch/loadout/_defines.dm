@@ -72,3 +72,5 @@
 #define UNIFORMED_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet)
 
 #define CIVILIAN_BRANCHES list(/datum/mil_branch/civilian)
+
+#define SOLGOV_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/solgov)
