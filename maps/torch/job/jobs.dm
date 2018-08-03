@@ -350,8 +350,8 @@
 	economic_modifier = 15
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	allowed_branches = list(/datum/mil_branch/solgov)
+	allowed_ranks = list(/datum/mil_rank/sol/gov)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERT,
 	                    SKILL_FINANCE     = SKILL_BASIC)
 	skill_points = 20
@@ -855,7 +855,7 @@
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
-		/datum/mil_branch/civilian
+		/datum/mil_branch/solgov = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
@@ -864,7 +864,7 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
-		/datum/mil_rank/civ/agent = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
+		/datum/mil_rank/sol/agent
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
