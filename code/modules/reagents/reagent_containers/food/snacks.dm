@@ -3294,3 +3294,107 @@
 	New()
 		..()
 		bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chicken
+	name = "\improper MRE component Grilled Chicken"
+	icon_state = "grilled chicken"
+	nutriment_amt = 10
+	New()
+		..()
+		bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Pizza
+	name = "\improper MRE component Pizza Square"
+	icon_state = "pizza square"
+	nutriment_amt = 5
+	New()
+		..()
+		bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghetti
+	name = "\improper MRE component Spaghetti"
+	icon_state = "spaghetti chunks"
+	nutriment_amt = 5
+	New()
+		..()
+		bitesize = 4
+
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chickenside
+	name = "\improper MRE component Risotto"
+	icon_state = "cheese spread"
+	nutriment_amt = 3
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Pizzaside
+	name = "\improper MRE component Mashed Potatoes"
+	icon_state = "mashed potatoes"
+	nutriment_amt = 3
+	New()
+		..()
+		bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside
+	name = "\improper MRE component Cracker"
+	icon_state = "cracker"
+	nutriment_amt = 3
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/biscuit
+	name = "\improper MRE component Biscuit"
+	icon_state = "biscuit"
+	nutriment_amt = 2
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/meatballs
+	name = "\improper MRE component Meatballs"
+	icon_state = "meatballs"
+	nutriment_amt = 2
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels
+	name = "\improper MRE component Pretzels"
+	icon_state = "pretzels"
+	nutriment_amt = 2
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/peanuts
+	name = "\improper MRE component Peanuts"
+	icon_state = "peanuts"
+	nutriment_amt = 2
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/cocobar
+	name = "\improper MRE component Coco Bar"
+	icon_state = "coco bar"
+	nutriment_amt = 1
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/sugarcookie
+	name = "\improper MRE component Sugar Cookie"
+	icon_state = "sugar cookie"
+	nutriment_amt = 1
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/spicedapples
+	name = "\improper MRE component Spiced Apples"
+	icon_state = "spiced apples"
+	nutriment_amt = 1
+	New()
+		..()
+		bitesize = 2

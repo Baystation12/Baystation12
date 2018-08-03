@@ -297,7 +297,7 @@
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
-	
+
 /obj/item/weapon/storage/box/mousetraps/empty
 	startswith = null
 
@@ -355,7 +355,7 @@
 
 /obj/item/weapon/storage/box/lights/bulbs
 	startswith = list(/obj/item/weapon/light/bulb = 21)
-	
+
 /obj/item/weapon/storage/box/lights/bulbs/empty
 	startswith = null
 
@@ -364,7 +364,7 @@
 	icon_state = "lighttube"
 	startswith = list(/obj/item/weapon/light/tube = 17,
 					/obj/item/weapon/light/tube/large = 4)
-					
+
 /obj/item/weapon/storage/box/lights/tubes/empty
 	startswith = null
 
@@ -374,7 +374,7 @@
 	startswith = list(/obj/item/weapon/light/tube = 12,
 					/obj/item/weapon/light/tube/large = 4,
 					/obj/item/weapon/light/bulb = 5)
-					
+
 /obj/item/weapon/storage/box/lights/mixed/empty
 	startswith = null
 
@@ -452,3 +452,38 @@
 	name = "box of spare medical armbands"
 	desc = "A box full of medical armbands. For use in emergencies when provisional medical personnel are needed."
 	startswith = list(/obj/item/clothing/accessory/armband/med = 5)
+
+/obj/item/weapon/storage/box/MRE
+	name = "\improper MRE"
+	desc = "Meal Ready-to-Eat. Meant to be consumed in the field."
+	icon_state = "mealpack"
+	w_class = 1
+	max_storage_space = 8
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
+
+/obj/item/weapon/storage/box/MRE/Chicken
+	name = "\improper MRE 'Chicken'"
+	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is chicken flavored."
+	icon_state = "mealpack"
+	w_class = 1
+	max_storage_space = 8
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chicken,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chickenside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/peanuts)
+
+/obj/item/weapon/storage/box/MRE/Pizza
+	name = "\improper MRE 'Pizza'"
+	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is pizza flavored."
+	icon_state = "mealpack"
+	w_class = 1
+	max_storage_space = 8
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Pizza,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/meatballs,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/sugarcookie)
+
+/obj/item/weapon/storage/box/MRE/Spaghetti
+	name = "\improper MRE 'Spaghetti'"
+	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is spaghetti flavored."
+	icon_state = "mealpack"
+	w_class = 1
+	max_storage_space = 8
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghetti,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/cocobar)
