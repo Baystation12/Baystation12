@@ -2,7 +2,7 @@
 	display_name = "SolGov beret selection"
 	description = "A beret denoting service in an organization within SolGov."
 	path = /obj/item/clothing/head/beret/solgov
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = SOLGOV_BRANCHES
 
 /datum/gear/head/solberet/New()
 	..()
@@ -25,7 +25,7 @@
 /datum/gear/head/solhat
 	display_name = "sol central government hat"
 	path = /obj/item/clothing/head/soft/solgov
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = SOLGOV_BRANCHES
 
 /datum/gear/head/fleethat
 	display_name = "fleet cap"
