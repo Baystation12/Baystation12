@@ -48,7 +48,7 @@
 	name = "Crescent Base Medical Bay"
 
 /area/exo_research_facility/ground/interior/sciencecrew
-	name = "Crescent Base Science Crew Quarters"
+	name = "Crescent Base Main Compound Entrance"
 
 /area/exo_research_facility/ground/interior/sciencelabs
 	name = "Crescent Base Science Labs"
@@ -70,6 +70,19 @@
 
 /area/exo_research_facility/ground/interior/commsg
 	name = "Crescent Base Communications Station"
+
+/area/exo_research_facility/roof/interior
+	name = "Crescent Base sublevel 1 interior"
+	dynamic_lighting = 0
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 1
+
+/area/exo_research_facility/roof/interior/Lunchhall
+	name = "Crescent Base Lunch Hall"
+
+/area/exo_research_facility/roof/interior/Livingquar
+	name = "Crescent Base Living Quarters"
 
 /area/exo_research_facility/roof/exterior
 	name = "Crescent Base Rooftop Level Exterior"

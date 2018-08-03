@@ -15,6 +15,24 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	..()
 	GLOB.facil_researcher_spawns += loc
 
+GLOBAL_LIST_EMPTY(facil_director_spawns)
+
+/datum/spawnpoint/facil_director
+	display_name =  "Research Facility Director Spawn"
+	restrict_job = list("Research Director")
+
+/datum/spawnpoint/facil_director/New()
+	..()
+	turfs = GLOB.facil_director_spawns
+
+/obj/effect/landmark/start/facil_director
+	name = "Research Director Spawn"
+
+/obj/effect/landmark/start/facil_director/New()
+	..()
+	GLOB.facil_director_spawns += loc
+
+
 
 GLOBAL_LIST_EMPTY(facil_security_spawns)
 
@@ -57,7 +75,20 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	name = "Researcher"
 
 	l_ear = /obj/item/device/radio/headset/unsc
+	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	l_pocket = /obj/item/clothing/accessory/badge/onib
+	pda_slot = null
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/researchdirector
+	name = "Research Director"
+
+	l_ear = /obj/item/device/radio/headset/unsc
+	uniform = /obj/item/clothing/under/rank/research_director/rdalt
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	l_pocket = /obj/item/clothing/accessory/badge/onib
 	pda_slot = null
 	flags = 0
@@ -80,7 +111,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ONIGUARD
-	name = "Communications Operator"
+	name = "ONI Security Guard"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -95,7 +126,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ONIGUARDS
-	name = "Communications Operator"
+	name = "ONI Security Squad Leader"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -115,16 +146,26 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	total_positions = 6
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
-	alt_titles = list("Physicist","Botanist","Chemist","Weapons Researcher","Artifact Analyser")
+	alt_titles = list("Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Spawn"
+
+/datum/job/researchdirector
+	title = "Research Director"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/researchdirector
+	selection_color = "#008000"
+	access = list(310,311)
+	spawnpoint_override = "Research Facility Director Spawn"
+
 
 /datum/job/ONIGUARD
 	title = "ONI Security Guard"
 	total_positions = 7
 	spawn_positions = 7
-	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
+	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Spawn"
