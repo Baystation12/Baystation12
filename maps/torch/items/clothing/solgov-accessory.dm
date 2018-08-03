@@ -190,7 +190,7 @@ specialty pins
 
 /obj/item/clothing/accessory/solgov/speciality/pilot
 	name = "pilot's qualification pin"
-	desc = "An iron pin denoting the qualification to fly in the SGDF."
+	desc = "An iron pin denoting the qualification to fly SCG spacecraft."
 	icon_state = "pin_pilot"
 
 /*****
