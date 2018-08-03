@@ -663,14 +663,6 @@
 	name = "\improper Marine Armory"
 	icon_state = "Tactical"
 
-/area/vacant/cabin
-	name = "\improper Vacant Cabins"
-	icon_state = "crew_quarters"
-
-/area/vacant/mess
-	name = "\improper Old Mess"
-	icon_state = "bar"
-
 /area/vacant/chapel
 	name = "\improper Unused Chapel"
 	icon_state = "chapel"
@@ -843,6 +835,10 @@
 	name = "\improper Lounge"
 	icon_state = "crew_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
+
+/area/crew_quarters/garden
+	name = "\improper Garden"
+	icon_state = "crew_quarters"
 
 /area/crew_quarters/safe_room
 	name = "\improper Safe Room"
@@ -1437,6 +1433,10 @@
 	icon_state = "chapel"
 	ambience = list('sound/ambience/ambicha1.ogg','sound/ambience/ambicha2.ogg','sound/ambience/ambicha3.ogg','sound/ambience/ambicha4.ogg','sound/music/traitor.ogg')
 	sound_env = LARGE_ENCLOSED
+
+/area/chapel/office
+	name = "\improper Chaplain's Office"
+	icon_state = "chapel"
 
 // Merchant
 

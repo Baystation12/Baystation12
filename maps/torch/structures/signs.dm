@@ -70,3 +70,18 @@
 
 /obj/structure/sign/double/solgovflag/right
 	icon_state = "solgovflag-right"
+
+/obj/structure/sign/floorplaque/attackby(var/obj/item/weapon/W, var/mob/user)
+	var/obj/item/clothing/accessory/badge/solgov/tags/T = W
+	if(istype(W))
+		if(T.stored_name in fallen)
+			to_chat(user, SPAN_WARNING("The name '[T.stored_name]' is already on the plaque."))
+		else
+			to_chat(user, "You add the name '[T.stored_name]' to \the [src].")
+			LAZYADD(fallen, T.stored_name)
+			return TRUE
+	return ..()
+
+/obj/structure/sign/floorplaque/examine(var/mob/user)
+	if((. = ..()) && LAZYLEN(fallen))
+		to_chat(user, "In memory of: [english_list(fallen)]")

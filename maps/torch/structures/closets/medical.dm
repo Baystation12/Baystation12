@@ -129,6 +129,34 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
 
+/obj/structure/closet/secure_closet/psychiatrist
+	name = "psychiatrist's locker"
+	req_access = list(access_psychiatrist)
+	icon_state = "medical1"
+	icon_closed = "medical"
+	icon_locked = "medical1"
+	icon_opened = "medicalopen"
+	icon_off = "medicaloff"
+
+/obj/structure/closet/secure_closet/psychiatrist/WillContain()
+	return list(
+		/obj/item/clothing/under/rank/psych,
+		/obj/item/clothing/under/rank/psych/turtleneck,
+		/obj/item/clothing/suit/straight_jacket,
+		/obj/item/clothing/shoes/white,
+		/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
+		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/storage/pill_bottle/citalopram,
+		/obj/item/weapon/reagent_containers/pill/methylphenidate,
+		/obj/item/weapon/clipboard,
+		/obj/item/weapon/folder/white,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape/random = 3,
+		/obj/item/device/camera,
+		/obj/item/toy/therapy_blue,
+		/obj/item/weapon/storage/belt/general
+	)
+
 /obj/structure/closet/wardrobe/medic_torch
 	name = "medical wardrobe"
 	icon_state = "white"

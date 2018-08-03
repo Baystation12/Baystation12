@@ -77,3 +77,28 @@
 		/obj/item/clothing/shoes/laceup
 	)
 
+/obj/structure/closet/secure_closet/chaplain
+	name = "chaplain's locker"
+	req_access = list(access_chapel_office)
+	icon_state = "chaplainsecure1"
+	icon_closed = "chaplainsecure"
+	icon_locked = "chaplainsecure1"
+	icon_opened = "chaplainsecureopen"
+	icon_off = "chaplainsecureoff"
+
+/obj/structure/closet/secure_closet/chaplain/WillContain()
+	return list(
+		/obj/item/clothing/under/rank/chaplain,
+		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/head/chaplain_hood,
+		/obj/item/clothing/suit/chaplain_hoodie,
+		/obj/item/weapon/storage/fancy/candle_box = 2,
+		/obj/item/weapon/deck/tarot,
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
+		/obj/item/weapon/nullrod,
+		/obj/item/weapon/clipboard,
+		/obj/item/weapon/folder/white,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape/random = 3,
+		/obj/item/weapon/storage/belt/general
+	)
