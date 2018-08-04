@@ -91,3 +91,6 @@
 
 /obj/effect/paint_stripe/white
 	color = COLOR_SILVER
+
+/obj/effect/paint/brown
+	color = COLOR_DARK_BROWN
