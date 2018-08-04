@@ -122,9 +122,9 @@
 		if (BRUISE)
 			return prob(dam_coef*5)
 		if (BURN)
-			return prob(dam_coef*80)
+			return prob(dam_coef*25)
 		if (CUT)
-			return prob(dam_coef*20)
+			return prob(dam_coef*10)
 
 	return 0
 
