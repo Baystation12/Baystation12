@@ -15,15 +15,12 @@
 	if(!T)
 		return
 
-	var/clear_contents = (alert(usr, "Do you want to delete everything in the way of the template? \
-		May take a few seconds, particularly on  larger templates!", "Clear Contents", "No", "Yes") == "Yes")
-
 	var/list/preview = list()
 	for(var/S in template.get_affected_turfs(T,centered = TRUE))
 		preview += image('icons/turf/overlays.dmi',S,"greenOverlay")
 	usr.client.images += preview
 	if(alert(usr,"Confirm location.","Template Confirm","Yes","No") == "Yes")
-		if(template.load(T, centered = TRUE, clear_contents=clear_contents))
+		if(template.load(T, centered = TRUE))
 			log_and_message_admins("has placed a map template ([template.name]).")
 		else
 			to_chat(usr, "Failed to place map")

@@ -120,7 +120,7 @@
 	var/list/atoms_to_initialise = list()
 
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), T.x, T.y, T.z, cropMap=TRUE, clear_contents= template_flags & TEMPLATE_FLAG_CLEAR_CONTENTS)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), T.x, T.y, T.z, cropMap=TRUE, clear_contents=(template_flags & TEMPLATE_FLAG_CLEAR_CONTENTS))
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
