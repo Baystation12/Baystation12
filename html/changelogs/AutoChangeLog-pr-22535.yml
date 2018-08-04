@@ -1,5 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Bridge Officers can once again access their lockers."
-  - bugfix: "SCGR can once again access the bridge."
