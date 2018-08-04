@@ -17737,15 +17737,15 @@
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/diplomat)
 "Se" = (
-/obj/machinery/door/airlock/glass/civilian{
-	name = "Commissary Counter";
-	req_access = list(96)
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/door/airlock/glass/civilian{
+	name = "Commissary Counter";
+	req_one_access = list(67,96)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/commissary)
