@@ -112,6 +112,6 @@
 	comparative_value_descriptors_larger = list(
 		"slightly larger than you in build",
 		"built larger than you",
-		"build much larger than you",
+		"built much larger than you",
 		"dwarfing you"
 		)
