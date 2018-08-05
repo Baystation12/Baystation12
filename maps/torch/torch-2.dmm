@@ -8644,7 +8644,7 @@
 /area/hallway/primary/thirddeck/center)
 "tL" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Holodeck";
+	c_tag = "Third Deck Hallway - Officer's Mess Hall Entrance";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -9197,13 +9197,13 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/lime/three_quarters,
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Observation Bubble";
-	dir = 4
-	},
 /obj/item/device/radio/intercom/entertainment{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Observation Bubble";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -17737,15 +17737,15 @@
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/diplomat)
 "Se" = (
-/obj/machinery/door/airlock/glass/civilian{
-	name = "Commissary Counter";
-	req_access = list(96)
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/door/airlock/glass/civilian{
+	name = "Commissary Counter";
+	req_one_access = list(67,96)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/commissary)
