@@ -204,6 +204,13 @@
 
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/skrell)
 
+	descriptors = list(
+		/datum/mob_descriptor/height/skrell
+		)
+/datum/mob_descriptor/height/skrell
+	comparison_offset = 1.2
+
+
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
