@@ -285,10 +285,12 @@ datum/preferences
 	character.personal_faction = faction
 	character.religion = religion
 
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
+
 	if(!character.isSynthetic())
 		character.nutrition = rand(140,360)
-
-	return
 
 
 /datum/preferences/proc/open_load_dialog(mob/user)
