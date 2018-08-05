@@ -72,7 +72,7 @@ var/global/ntnet_card_uid = 1
 	if(!check_functionality() || !ntnet_global || is_banned())
 		return 0
 
-	if(ethernet) // Computer is connected via wired connection.
+	if(ethernet && !specific_action) // Computer is connected via wired connection and we're not using a specific service.
 		return 3
 
 	if(!ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
