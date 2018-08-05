@@ -531,8 +531,8 @@
 	title = "Explorer"
 	department = "Exploration"
 	department_flag = EXP
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
 	ideal_character_age = 20
@@ -1247,8 +1247,8 @@
 	title = "Prospector"
 	department = "Supply"
 	department_flag = SUP
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Deck Officer and Executive Officer"
 	selection_color = "#515151"
 	economic_modifier = 7
