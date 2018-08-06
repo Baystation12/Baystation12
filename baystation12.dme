@@ -1750,6 +1750,7 @@
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_generic.dm"
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_nabber.dm"
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_skrell.dm"
+#include "code\modules\mob\living\carbon\human\descriptors\descriptors_vox.dm"
 #include "code\modules\mob\living\carbon\human\species\species.dm"
 #include "code\modules\mob\living\carbon\human\species\species_attack.dm"
 #include "code\modules\mob\living\carbon\human\species\species_getters.dm"
