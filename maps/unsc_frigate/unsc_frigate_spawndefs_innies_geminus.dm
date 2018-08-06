@@ -10,7 +10,7 @@
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,\
 /datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician,\
 /datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,\
-/datum/job/IGUARD,/datum/job/LISTENG,\
+/datum/job/IGUARD,/datum/job/Asteroidinnie,\
 /datum/job/ship_crew_innie,/datum/job/ship_cap_innie,\
 /datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
 	allowed_spawns = list("UNSC Frigate","Colony Arrival Shuttle","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Mining Asteroid Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
