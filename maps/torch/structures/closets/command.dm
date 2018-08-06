@@ -95,7 +95,7 @@
 
 /obj/structure/closet/secure_closet/bridgeofficer
 	name = "bridge officer's locker"
-	req_access = list(access_heads)
+	req_access = list(access_bridge)
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"

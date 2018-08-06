@@ -24,7 +24,7 @@
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !istype(below,/turf/space))
-			N = below.density ? /turf/simulated/floor/airless : /turf/simulated/open
+			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire
 	var/old_opacity = opacity

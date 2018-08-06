@@ -4899,8 +4899,8 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Pathfinder's Office";
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Pathfinder's Office";
 	dir = 1;
 	network = list("First Deck","Exploration")
 	},

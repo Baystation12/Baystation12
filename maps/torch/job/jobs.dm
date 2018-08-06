@@ -5,13 +5,13 @@
 		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
-#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/warden
+#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder
 	species_to_job_blacklist = list(
-		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison), //Other jobs unavailable via branch restrictions,
+		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
-		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
+		/datum/species/tajaran = list(HUMAN_ONLY_JOBS, /datum/job/warden),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
-		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/rd, /datum/job/liaison),	//Other jobs unavailable via branch restrictions,
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/rd, /datum/job/liaison, /datum/job/warden),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 
@@ -350,14 +350,14 @@
 	economic_modifier = 15
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	allowed_branches = list(/datum/mil_branch/solgov)
+	allowed_ranks = list(/datum/mil_rank/sol/gov)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERT,
 	                    SKILL_FINANCE     = SKILL_BASIC)
 	skill_points = 20
 
 	access = list(access_representative, access_security, access_medical,
-			            access_heads, access_cargo, access_solgov_crew, access_hangar)
+			            access_bridge, access_cargo, access_solgov_crew, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
@@ -855,7 +855,7 @@
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
-		/datum/mil_branch/civilian
+		/datum/mil_branch/solgov = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
@@ -864,7 +864,7 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
-		/datum/mil_rank/civ/agent = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
+		/datum/mil_rank/sol/agent
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -1177,7 +1177,7 @@
 	skill_points = 18
 
 	access = list(access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
+						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/supply,

@@ -20,6 +20,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/b_eyes = 0						//Eye color
 	var/s_base = ""						//Base skin colour
 	var/list/body_markings = list()
+	var/list/body_descriptors = list()
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
@@ -61,6 +62,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	from_file(S["rlimb_data"], pref.rlimb_data)
 	from_file(S["has_cortical_stack"], pref.has_cortical_stack)
 	from_file(S["body_markings"], pref.body_markings)
+	from_file(S["body_descriptors"], pref.body_descriptors)
 	pref.preview_icon = null
 	from_file(S["bgstate"], pref.bgstate)
 
@@ -88,6 +90,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	to_file(S["rlimb_data"], pref.rlimb_data)
 	to_file(S["has_cortical_stack"], pref.has_cortical_stack)
 	to_file(S["body_markings"], pref.body_markings)
+	to_file(S["body_descriptors"], pref.body_descriptors)
 	to_file(S["bgstate"], pref.bgstate)
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
@@ -127,6 +130,21 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.body_markings = list()
 	else
 		pref.body_markings &= GLOB.body_marking_styles_list
+
+	var/list/last_descriptors = list()
+	if(islist(pref.body_descriptors))
+		last_descriptors = pref.body_descriptors.Copy()
+	pref.body_descriptors = list()
+
+	if(LAZYLEN(mob_species.descriptors))
+		for(var/entry in mob_species.descriptors)
+			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
+			if(istype(descriptor))
+				if(isnull(last_descriptors[entry]))
+					pref.body_descriptors[entry] = descriptor.default_value // Species datums have initial default value.
+				else
+					pref.body_descriptors[entry] = Clamp(last_descriptors[entry], 1, LAZYLEN(descriptor.standalone_value_descriptors))
+
 	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
 		pref.bgstate = "000"
 
@@ -248,6 +266,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else
 		. += "<br><br>"
 
+	if(LAZYLEN(pref.body_descriptors))
+		. += "<table>"
+		for(var/entry in pref.body_descriptors)
+			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
+			. += "<tr><td><b>[capitalize(entry)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
+		. += "</table><br>"
+
 	. += "</td><td><b>Preview</b><br>"
 	. += "<div class='statusDisplay'><center><img src=previewicon.png width=[pref.preview_icon.Width()] height=[pref.preview_icon.Height()]></center></div>"
 	. += "<br><a href='?src=\ref[src];cycle_bg=1'>Cycle background</a>"
@@ -290,6 +315,16 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(href_list["random"])
 		pref.randomize_appearance_and_body_for()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["change_descriptor"])
+		if(mob_species.descriptors)
+			var/desc_id = href_list["change_descriptor"]
+			if(pref.body_descriptors[desc_id])
+				var/datum/mob_descriptor/descriptor = mob_species.descriptors[desc_id]
+				var/choice = input("Please select a descriptor.", "Descriptor") as null|anything in descriptor.standalone_value_descriptors
+				if(choice && mob_species.descriptors[desc_id]) // Check in case they sneakily changed species.
+					pref.body_descriptors[desc_id] = descriptor.standalone_value_descriptors.Find(choice)
+					return TOPIC_REFRESH
 
 	else if(href_list["toggle_stack"])
 		pref.has_cortical_stack = !pref.has_cortical_stack
