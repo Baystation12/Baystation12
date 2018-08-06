@@ -1,11 +1,12 @@
 /obj/item/modular_computer/laptop
 	anchored = TRUE
 	name = "laptop computer"
-	desc = "A portable computer."
+	desc = "A portable clamshell computer."
 	hardware_flag = PROGRAM_LAPTOP
 	icon_state_unpowered = "laptop-open"
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-open"
+	w_class = ITEM_SIZE_NORMAL
 	base_idle_power_usage = 25
 	base_active_power_usage = 200
 	max_hardware_size = 2
