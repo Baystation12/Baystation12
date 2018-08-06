@@ -63,7 +63,19 @@
 	                    SKILL_PILOT       = SKILL_ADEPT)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+						SKILL_DEVICES     = SKILL_MAX,
+	                    SKILL_SCIENCE     = SKILL_MAX,
+	                    SKILL_MEDICAL     = SKILL_MAX,
+	                    SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_CHEMISTRY   = SKILL_MAX,
+	                    SKILL_VIROLOGY    = SKILL_MAX,
+	                    SKILL_COMBAT      = SKILL_MAX,
+	                    SKILL_WEAPONS     = SKILL_MAX,
+	                    SKILL_FORENSICS   = SKILL_MAX,
+	                    SKILL_CONSTRUCTION= SKILL_MAX,
+	                    SKILL_ELECTRICAL  = SKILL_MAX,
+	                    SKILL_ATMOS       = SKILL_MAX,
+	                    SKILL_ENGINES     = SKILL_MAX)
 	skill_points = 30
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -97,7 +109,19 @@
 	                    SKILL_PILOT       = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	                    SKILL_SCIENCE     = SKILL_MAX,
+						SKILL_DEVICES     = SKILL_MAX,
+	                    SKILL_MEDICAL     = SKILL_MAX,
+	                    SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_CHEMISTRY   = SKILL_MAX,
+	                    SKILL_VIROLOGY    = SKILL_MAX,
+	                    SKILL_COMBAT      = SKILL_MAX,
+	                    SKILL_WEAPONS     = SKILL_MAX,
+	                    SKILL_FORENSICS   = SKILL_MAX,
+	                    SKILL_CONSTRUCTION= SKILL_MAX,
+	                    SKILL_ELECTRICAL  = SKILL_MAX,
+	                    SKILL_ATMOS       = SKILL_MAX,
+	                    SKILL_ENGINES     = SKILL_MAX)
 
 	skill_points = 30
 
