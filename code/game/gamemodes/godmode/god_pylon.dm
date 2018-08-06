@@ -39,20 +39,20 @@
 	intuned -= L
 	GLOB.destroyed_event.unregister(L, src)
 
-/obj/structure/deity/pylon/OnTopic(var/user, var/href_list)
+/obj/structure/deity/pylon/OnTopic(var/mob/living/carbon/human/user, var/href_list)
 	if(href_list["vision_jump"])
-		if(istype(user, /mob/living/carbon/human))
+		if(istype(user))
 			to_chat(user,"<span class='warning'>You feel your body lurch uncomfortably as your consciousness jumps to \the [src]</span>")
 			if(prob(5))
-				var/mob/living/carbon/human/H = user
-				H.vomit()
+				user.vomit()
 		else
 			to_chat(user, "<span class='notice'>You jump to \the [src]</span>")
-		var/mob/M = user
-		if(M.eyeobj)
-			M.eyeobj.setLoc(locate(href_list["vision_jump"]))
+		if(user.eyeobj)
+			user.eyeobj.setLoc(locate(href_list["vision_jump"]))
 		else
 			CRASH("[user] does not have an eyeobj")
+		. = TOPIC_REFRESH
+	. = ..()
 
 /obj/structure/deity/pylon/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(!linked_god)
