@@ -74,26 +74,25 @@
 	popup.open()
 	user.set_machine(src)
 
-/obj/machinery/computer/fusion_fuel_control/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/computer/fusion_fuel_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	if(href_list["toggle_injecting"])
 		var/obj/machinery/fusion_fuel_injector/I = locate(href_list["toggle_injecting"])
 		if(I.id_tag != id_tag || get_dist(src, I) > scan_range)
-			return
+			return TOPIC_NOACTION
 
 		if(istype(I))
 			if(I.injecting)
 				I.StopInjecting()
+				return TOPIC_REFRESH
 			else
 				I.BeginInjecting()
+				return TOPIC_REFRESH
 
 	if( href_list["close"] )
-		usr << browse(null, "window=fuel_control")
-		usr.unset_machine()
+		user << browse(null, "window=fuel_control")
+		user.unset_machine()
 
-	updateDialog()
+	return TOPIC_REFRESH
 
 
 /obj/machinery/computer/fusion_fuel_control/attackby(var/obj/item/W, var/mob/user)
