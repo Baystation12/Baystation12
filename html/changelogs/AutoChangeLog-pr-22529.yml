@@ -1,5 +1,0 @@
-author: "Devildabeast"
-delete-after: True
-changes: 
-  - rscadd: "Adds a new branch known as \"SolGov Employee\"; the SolGov Representative and OCIE Agent have been moved under it as ranks."
-  - tweak: "SolGov loadout items, including SolGov berets, awards, and hat, can now be worn by all SolGov-affiliated branches.."
