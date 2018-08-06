@@ -121,6 +121,7 @@ What is the naming convention for planes or layers?
 	#define SIDE_WINDOW_LAYER           3.04
 	#define FULL_WINDOW_LAYER           3.05
 	#define ABOVE_WINDOW_LAYER          3.06
+	#define HOLOMAP_OVERLAY_LAYER       3.061
 	//LYING MOB AND HUMAN
 	#define LYING_MOB_LAYER             3.07
 	#define LYING_HUMAN_LAYER           3.08
