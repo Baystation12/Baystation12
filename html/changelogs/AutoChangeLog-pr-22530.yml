@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - maptweak: "Removes a catwalk from the Utility Down in the deck 1 substation room."
+  - maptweak: "Adds scrubbers to the toilet stalls on deck 3 to prevent CO2 buildup."
