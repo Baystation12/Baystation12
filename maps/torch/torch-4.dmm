@@ -7173,6 +7173,7 @@
 	opacity = 0
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/weapon/material/bell,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "awz" = (
@@ -9357,6 +9358,7 @@
 	id = "bo_pshutters";
 	name = "Privacy Shutters"
 	},
+/obj/item/weapon/material/bell,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
 "aDK" = (
@@ -9751,6 +9753,7 @@
 	dir = 8;
 	name = "Fabricator Lab Desk"
 	},
+/obj/item/weapon/material/bell,
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
 "aFd" = (

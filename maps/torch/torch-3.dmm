@@ -15066,6 +15066,7 @@
 	name = "Engineering Desk Shutters";
 	opacity = 0
 	},
+/obj/item/weapon/material/bell,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engineering_monitoring)
 "Jl" = (
