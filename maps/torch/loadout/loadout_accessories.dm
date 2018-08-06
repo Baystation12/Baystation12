@@ -3,7 +3,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory
 	cost = 8
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = AWARD_BRANCHES
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -23,7 +23,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
 	path = /obj/item/clothing/accessory
 	cost = 5
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = AWARD_BRANCHES
 
 /datum/gear/accessory/solawardminor/New()
 	..()
