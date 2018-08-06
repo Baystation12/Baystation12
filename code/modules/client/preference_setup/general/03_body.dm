@@ -270,7 +270,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "<table>"
 		for(var/entry in pref.body_descriptors)
 			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
-			. += "<tr><td><b>[capitalize(entry)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
+			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
 		. += "</table><br>"
 
 	. += "</td><td><b>Preview</b><br>"
@@ -321,9 +321,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/desc_id = href_list["change_descriptor"]
 			if(pref.body_descriptors[desc_id])
 				var/datum/mob_descriptor/descriptor = mob_species.descriptors[desc_id]
-				var/choice = input("Please select a descriptor.", "Descriptor") as null|anything in descriptor.standalone_value_descriptors
+				var/choice = input("Please select a descriptor.", "Descriptor") as null|anything in descriptor.chargen_value_descriptors
 				if(choice && mob_species.descriptors[desc_id]) // Check in case they sneakily changed species.
-					pref.body_descriptors[desc_id] = descriptor.standalone_value_descriptors.Find(choice)
+					pref.body_descriptors[desc_id] = descriptor.chargen_value_descriptors[choice]
 					return TOPIC_REFRESH
 
 	else if(href_list["toggle_stack"])
