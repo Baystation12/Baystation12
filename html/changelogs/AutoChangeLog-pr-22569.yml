@@ -1,0 +1,7 @@
+author: "nearlyNon"
+delete-after: True
+changes: 
+  - maptweak: "Moves notice board between main mess hall doors, removing the window. RIP."
+  - maptweak: "Adds a holopad to the holodeck, so the AI can hang out there."
+  - maptweak: "Expands holodeck door to be two tiles wide, to prevent bottlenecking."
+  - maptweak: "Adds a newscaster to the vacant office."
