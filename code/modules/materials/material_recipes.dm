@@ -32,6 +32,7 @@
 	if(hardness>50)
 		recipes += new/datum/stack_recipe/fork(src)
 		recipes += new/datum/stack_recipe/knife(src)
+		recipes += new/datum/stack_recipe/bell(src)
 		recipes += new/datum/stack_recipe/blade(src)
 
 /material/steel/generate_recipes()

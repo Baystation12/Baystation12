@@ -9,6 +9,13 @@
 	difficulty = 2
 	send_material_data = 1
 
+/datum/stack_recipe/bell
+	title = "bell"
+	result_type = /obj/item/weapon/material/bell
+	req_amount = 5
+	time = 20
+	send_material_data = 1
+
 /datum/stack_recipe/ashtray
 	title = "ashtray"
 	result_type = /obj/item/weapon/material/ashtray
