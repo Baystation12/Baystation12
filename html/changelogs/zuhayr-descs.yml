@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Skrell now appear neutrally gendered to non-Skrell. Use the headtail length descriptor to specify your secret squid gender."
+  - rscadd: "Vox now have neck markings to show importance to other vox."

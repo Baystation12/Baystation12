@@ -166,6 +166,7 @@
 	name_language = null
 	health_hud_intensity = 1.75
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
+	genders = list(PLURAL)
 
 	min_age = 19
 	max_age = 90
@@ -204,6 +205,12 @@
 	reagent_tag = IS_SKRELL
 
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/skrell)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = 1.2,
+		/datum/mob_descriptor/build = 0,
+		/datum/mob_descriptor/headtail_length = 0
+	)
 
 /datum/species/diona
 	name = SPECIES_DIONA
