@@ -686,14 +686,9 @@
 	name = "\improper Prototype Fusion Reactor Chamber"
 	icon_state = "firingrange"
 
-
 /area/vacant/cargo
 	name = "\improper Requisitions Office"
 	icon_state = "quart"
-
-/area/vacant/mess
-	name = "\improper Officer's Mess"
-	icon_state = "bar"
 
 /area/vacant/missile
 	name = "\improper Third Deck Port Missile Pod"

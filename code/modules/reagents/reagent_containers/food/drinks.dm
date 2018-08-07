@@ -256,8 +256,8 @@
 	center_of_mass = "x=17;y=7"
 
 /obj/item/weapon/reagent_containers/food/drinks/pitcher
-	name = "pitcher"
-	desc = "Everyone's best friend in the morning."
+	name = "insulated pitcher"
+	desc = "A stainless steel insulated pitcher. Everyone's best friend in the morning."
 	icon_state = "pitcher"
 	volume = 120
 	amount_per_transfer_from_this = 10
