@@ -199,6 +199,10 @@
 			if(istype(I, /obj/item/organ))
 				continue
 			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
+		var/ouchies = get_wounds_desc()
+		if(ouchies != "nothing")
+			to_chat(usr, "<span class='notice'>There is [ouchies] visible on it.</span>")
+
 	return
 
 /obj/item/organ/external/show_decay_status(mob/user)
