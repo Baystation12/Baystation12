@@ -15,7 +15,22 @@ GLOBAL_LIST_EMPTY(listen_staff_spawns)
 	..()
 	GLOB.listen_staff_spawns += loc
 
+GLOBAL_LIST_EMPTY(listen_staffl_spawns)
 
+/datum/spawnpoint/listen_staffl
+	display_name =  "Listening Post Commander Spawn"
+	restrict_job = list("Insurrectionist Commander")
+
+/datum/spawnpoint/listen_staffl/New()
+	..()
+	turfs = GLOB.listen_staffl_spawns
+
+/obj/effect/landmark/start/listen_staffl
+	name = "Listening Post Commander"
+
+/obj/effect/landmark/start/listen_staffl/New()
+	..()
+	GLOB.listen_staffl_spawns += loc
 
 
 /decl/hierarchy/outfit/job/Asteroidinnie
@@ -46,3 +61,14 @@ GLOBAL_LIST_EMPTY(listen_staff_spawns)
 	announced = FALSE
 	is_whitelisted = 0
 	alt_titles = list("Insurrectionist Pilot","Insurrectionist Machine Gunner","Insurrectionist Engineer","Insurrectionist Sharpshooter")
+
+/datum/job/Asteroidinnieleader
+	title = "Insurrectionist Commander"
+	total_positions = 1
+	spawn_positions = 1
+	access = list(667)
+	outfit_type = /decl/hierarchy/outfit/job/Asteroidinnie
+	selection_color = "#008000"
+	spawnpoint_override = "Listening Post Commander Spawn"
+	announced = FALSE
+	is_whitelisted = 0

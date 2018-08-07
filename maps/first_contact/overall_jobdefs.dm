@@ -21,7 +21,7 @@
 			GLOB.ship_cap_civ_spawns -= spawnpos.loc
 
 /datum/job/ship_crew_innie
-	title = "Innie Ship Crew"
+	title = "Insurrectionist Ship Crew"
 	total_positions = 6
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
@@ -29,7 +29,7 @@
 	spawnpoint_override = "Innie Crew"
 
 /datum/job/ship_cap_innie
-	title = "Innie Ship Captain"
+	title = "Insurrectionist Ship Captain"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
@@ -77,8 +77,8 @@
 	is_whitelisted = 1
 
 /datum/map/first_contact
-	allowed_jobs = list(/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/unsc_ship_crew,/datum/job/unsc_ship_cap,/datum/job/ODST,/datum/job/ODSTO,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
-	allowed_spawns = list("Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
+	allowed_jobs = list(/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/unsc_ship_crew,/datum/job/unsc_ship_cap,/datum/job/ODST,/datum/job/ODSTO,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
+	allowed_spawns = list("Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
 
 	species_to_job_whitelist = list(/datum/species/kig_yar = list(/datum/job/covenant/kigyarpirate,/datum/job/covenant/kigyarpirate/captain),/datum/species/unggoy = list(/datum/job/covenant/unggoy_deacon))
 
