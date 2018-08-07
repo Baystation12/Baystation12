@@ -1,6 +1,0 @@
-author: "nearlyNon"
-delete-after: True
-changes: 
-  - rscadd: "Eight balls, able to be bought from the vending machine in the mess. Ported from TG. \"Will the CMO be useful today?\" \"Not likely.\""
-  - rscadd: "Add bells; can be made with any material. Ring by clicking with intents other than grab; grab picks up. Shatters if you hit someone with it!"
-  - maptweak: "Distribute bells throughout desks."
