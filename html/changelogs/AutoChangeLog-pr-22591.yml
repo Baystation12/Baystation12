@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - bugfix: "Allows FT to be played as Contractor again."
+  - bugfix: "SCGR can now wear most loadout items again."
