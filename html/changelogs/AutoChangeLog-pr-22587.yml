@@ -1,0 +1,5 @@
+author: "Nearlynon"
+delete-after: True
+changes: 
+  - bugfix: "Fixed missing pipes + wires in holodeck."
+  - maptweak: "Adds 2 paperbins to deck 3 in the mess and lounge respectively."
