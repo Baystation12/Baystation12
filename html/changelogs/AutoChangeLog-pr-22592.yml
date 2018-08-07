@@ -1,0 +1,4 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - bugfix: "Allows FT to be contractor again for real this time."
