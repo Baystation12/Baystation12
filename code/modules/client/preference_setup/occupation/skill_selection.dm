@@ -5,13 +5,23 @@
 
 /datum/preferences/proc/get_max_skill(datum/job/job, decl/hierarchy/skill/S)
 	var/min = get_min_skill(job, S)
-	return max(min, job.max_skill[S.type] || SKILL_MAX)
+	if(job && job.max_skill)
+		. = job.max_skill[S.type]
+	if(!.)
+		. = S.default_max
+	if(!.)
+		. = SKILL_MAX
+	. = max(min, .)
 
 /datum/preferences/proc/get_min_skill(datum/job/job, decl/hierarchy/skill/S)
-	var/datum/mil_branch/branch = mil_branches.get_branch(char_branch)
-	var/job_min_skill = job && job.min_skill && job.min_skill[S.type]
-	var/branch_min_skill = branch && branch.min_skill && branch.min_skill[S.type]
-	return job_min_skill || branch_min_skill || SKILL_MIN
+	if(job && job.min_skill)
+		. = job.min_skill[S.type]
+	if(!.)
+		var/datum/mil_branch/branch = mil_branches.get_branch(char_branch)
+		if(branch && branch.min_skill)
+			. = branch.min_skill[S.type]
+	if(!.)
+		. = SKILL_MIN
 
 /datum/preferences/proc/get_spent_points(datum/job/job, decl/hierarchy/skill/S)
 	if(!(job in skills_allocated))

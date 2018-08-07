@@ -148,17 +148,21 @@ nanoui is used to open and update nano browser uis
   *
   * @param push_update int (bool) Push an update to the ui to update it's status. This is set to 0/false if an update is going to be pushed anyway (to avoid unnessary updates)
   *
-  * @return nothing
+  * @return 1 if closed, null otherwise.
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	var/atom/host = src_object.nano_host()
+	var/atom/host = src_object && src_object.nano_host()
+	if(!host)
+		close()
+		return 1
 	var/new_status = host.CanUseTopic(user, state)
 	if(master_ui)
 		new_status = min(new_status, master_ui.status)
 
-	set_status(new_status, push_update)
 	if(new_status == STATUS_CLOSE)
 		close()
+		return 1
+	set_status(new_status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -422,8 +426,7 @@ nanoui is used to open and update nano browser uis
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
-	update_status(0)
-	if(status == STATUS_CLOSE)
+	if(update_status(0))
 		return // Will be closed by update_status().
 
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
@@ -472,6 +475,8 @@ nanoui is used to open and update nano browser uis
 	var/params = "\ref[src]"
 
 	spawn(2)
+		if(!user || !user.client)
+			return
 		winset(user, window_id, "on-close=\"nanoclose [params]\"")
 
  /**
@@ -480,7 +485,8 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/push_data(data, force_push = 0)
-	update_status(0)
+	if(update_status(0))
+		return // Closed
 	if (status == STATUS_DISABLED && !force_push)
 		return // Cannot update UI, no visibility
 

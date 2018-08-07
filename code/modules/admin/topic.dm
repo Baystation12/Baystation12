@@ -1553,7 +1553,8 @@
 		show_traitor_panel(M)
 
 	else if(href_list["skillpanel"])
-		if(!check_rights(R_ADMIN))	return
+		if(!check_rights(R_INVESTIGATE))
+			return
 
 		if(!ticker || !ticker.mode)
 			alert("The game hasn't started yet!")

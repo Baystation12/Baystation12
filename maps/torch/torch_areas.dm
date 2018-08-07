@@ -199,6 +199,10 @@
 	name = "\improper Second Deck Safe Room"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
+/area/maintenance/bluespace
+	name = "Bluespace Drive"
+	icon_state = "engineering"
+
 
 //First Deck (Z-4)
 /area/maintenance/firstdeck
@@ -537,7 +541,7 @@
 	name = "lift (upper deck)"
 	lift_floor_label = "Deck 1"
 	lift_floor_name = "Operations Deck"
-	lift_announce_str = "Arriving at Operations Deck: Infirmary. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory. Diplomatic Quarters. Captain's Mess. Pathfinder's Office."
+	lift_announce_str = "Arriving at Operations Deck: Infirmary. Security Wing. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory."
 
 /area/turbolift/torch_second
 	name = "lift (maintenance)"
@@ -549,13 +553,13 @@
 	name = "lift (second deck)"
 	lift_floor_label = "Deck 3"
 	lift_floor_name = "Habitation Deck"
-	lift_announce_str = "Arriving at Habitation Deck: EVA. Security Wing. Telecommunications. Mess Hall. Hydroponics. Cryogenic Storage. Holodeck."
+	lift_announce_str = "Arriving at Habitation Deck: EVA. Telecommunications. Mess Hall. Officer's Mess. Diplomatic Quarters. Hydroponics. Cryogenic Storage. Holodeck. Gym."
 
 /area/turbolift/torch_ground
 	name = "lift (lower deck)"
 	lift_floor_label = "Deck 4"
 	lift_floor_name = "Hangar Deck"
-	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Cargo Storage. Main Hangar. Supply Office. Expedition Preparation. Mineral Processing."
+	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Pathfinder's Office. Cargo Storage. Main Hangar. Supply Office. Expedition Preparation. Mineral Processing."
 	base_turf = /turf/simulated/floor
 
 // Command
@@ -565,7 +569,7 @@
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/command/captainmess
-	name = "Captain's Mess"
+	name = "Officer's Mess"
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
 
@@ -831,6 +835,10 @@
 	name = "\improper Galley Cold Storage"
 	icon_state = "kitchen"
 
+/area/crew_quarters/commissary
+	name = "\improper Commissary"
+	icon_state = "crew_quarters"
+
 /area/crew_quarters/lounge
 	name = "\improper Lounge"
 	icon_state = "crew_quarters"
@@ -892,11 +900,19 @@
 	icon_state = "security"
 
 /area/security/bridgecheck
-	name = "\improper Bridge Security Checkpoint"
+	name = "\improper Bridge Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
 /area/security/opscheck
-	name = "\improper First Deck Security Office"
+	name = "\improper First Deck Security Checkpoint"
+	icon_state = "checkpoint"
+
+/area/security/habcheck
+	name = "\improper Third Deck Security Checkpoint"
+	icon_state = "checkpoint"
+
+/area/security/hangcheck
+	name = "\improper Fourth Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
 // AI
@@ -1334,10 +1350,6 @@
 /area/security/armoury
 	name = "\improper Security - Armory"
 	icon_state = "Warden"
-
-/area/security/checkpoint2
-	name = "\improper Security - Checkpoint"
-	icon_state = "checkpoint1"
 
 /area/security/detectives_office
 	name = "\improper Security - Forensic Office"

@@ -9,7 +9,7 @@
 
 /datum/computer_file/report/flight_plan/New()
 	..()
-	set_access(null, access_heads)
+	set_access(null, access_bridge)
 
 /datum/computer_file/report/flight_plan/Destroy()
 	leader = null
@@ -21,7 +21,7 @@
 	add_field(/datum/report_field/instruction, "These fields are required:")
 	leader = add_field(/datum/report_field/people/from_manifest, "Leader", required = 1)
 	planned_depart = add_field(/datum/report_field/time, "Planned Departure", required = 1)
-	add_field(/datum/report_field/instruction, "These fields are optional:")	
+	add_field(/datum/report_field/instruction, "These fields are optional:")
 	manifest = add_field(/datum/report_field/people/list_from_manifest, "Manifest")
 	add_field(/datum/report_field/pencode_text, "Objective")
 	add_field(/datum/report_field/time, "Expected Return/Contact Time")
@@ -35,7 +35,7 @@
 
 /datum/computer_file/report/recipient/shuttle/New()
 	..()
-	set_access(null, access_heads)
+	set_access(null, access_bridge)
 
 /datum/computer_file/report/recipient/shuttle/Destroy()
 	shuttle = null
@@ -79,7 +79,7 @@
 	add_field(/datum/report_field/simple_text, "Current fuel level")
 	add_field(/datum/report_field/time, "Time of refueling")
 	add_field(/datum/report_field/pencode_text, "Additional notes")
-	
+
 /datum/computer_file/report/recipient/shuttle/atmos
 	form_name = "DC245"
 	title = "Post-flight Atmospherics Assessment"

@@ -10,6 +10,8 @@
 	icon_state = "nymph"
 	item_state = "nymph"
 	death_msg = "expires with a pitiful chirrup..."
+	health = 60
+	maxHealth = 60
 
 	language = LANGUAGE_ROOTLOCAL
 	species_language = LANGUAGE_ROOTLOCAL
@@ -32,7 +34,7 @@
 	var/obj/item/hat
 	var/obj/item/holding_item
 	var/mob/living/carbon/alien/diona/next_nymph
-	var/mob/living/carbon/alien/diona/last_nymph
+	var/mob/living/carbon/alien/diona/previous_nymph
 	var/tmp/image/flower
 	var/tmp/image/eyes
 	var/tmp/last_glow
@@ -98,41 +100,43 @@
 	if(!donor || donor.species.name != SPECIES_DIONA)
 		return
 
-	// Ensure we have enough nymphs.
-	var/list/nymphs = list()
-	for(var/mob/living/carbon/alien/diona/D in donor.contents)
-		nymphs += D
-	if(!nymphs.len)
-		nymphs += new /mob/living/carbon/alien/diona/sterile(donor)
-
-	// Work out where the mob client is going.
-	var/mob/living/carbon/alien/diona/master_nymph
-	for(var/thing in shuffle(nymphs))
-		var/mob/living/carbon/alien/diona/check_nymph = thing
-		if(!check_nymph.client) master_nymph = check_nymph
-	if(!master_nymph)
-		master_nymph = new /mob/living/carbon/alien/diona/sterile(donor)
-
-	master_nymph.set_dir(donor.dir)
-	transfer_languages(donor, master_nymph)
-	if(donor.mind)
-		donor.mind.transfer_to(master_nymph)
-	else
-		master_nymph.key = donor.key
-
-	log_and_message_admins("has split into nymphs; player now controls [key_name_admin(master_nymph)]", donor)
-
-	var/mob/living/carbon/alien/diona/last_nymph
-	for(var/thing in nymphs)
-		var/mob/living/carbon/alien/diona/nymph = thing
+	// Run through our nymphs and spit them out
+	var/list/available_nymphs = list()
+	for(var/mob/living/carbon/alien/diona/nymph in donor.contents)
 		nymph.dropInto(donor.loc)
 		transfer_languages(donor, nymph, (WHITELISTED|RESTRICTED))
 		nymph.set_dir(pick(NORTH, SOUTH, EAST, WEST))
-		if(!nymph.client)
-			if(last_nymph)
-				nymph.set_last_nymph(last_nymph)
-				last_nymph.set_next_nymph(nymph)
-			last_nymph = nymph
+		// Collect any available nymphs
+		if(!nymph.client && nymph.stat != DEAD)
+			available_nymphs += nymph
+
+	// Make sure there's a home for the player
+	if(!available_nymphs.len)
+		available_nymphs += new /mob/living/carbon/alien/diona/sterile(donor.loc)
+
+	// Link availalbe nymphs together
+	var/mob/living/carbon/alien/diona/first_nymph
+	var/mob/living/carbon/alien/diona/last_nymph
+	for(var/mob/living/carbon/alien/diona/nymph in available_nymphs)
+		if(!first_nymph)
+			first_nymph = nymph
+		else
+			nymph.set_previous_nymph(last_nymph)
+			last_nymph.set_next_nymph(nymph)
+		last_nymph = nymph
+	if(available_nymphs.len > 1)
+		first_nymph.set_previous_nymph(last_nymph)
+		last_nymph.set_next_nymph(first_nymph)
+
+	// Transfer player over
+	first_nymph.set_dir(donor.dir)
+	transfer_languages(donor, first_nymph)
+	if(donor.mind)
+		donor.mind.transfer_to(first_nymph)
+	else
+		first_nymph.key = donor.key
+
+	log_and_message_admins("has split into nymphs; player now controls [key_name_admin(first_nymph)]", donor)
 
 	for(var/obj/item/W in donor)
 		donor.drop_from_inventory(W)

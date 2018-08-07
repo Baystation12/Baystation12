@@ -95,5 +95,5 @@
 	desc = "Gain the ability to transform your followers into beings of rock and stone."
 	base_cost = 75
 	category = DEITY_TREE_TRANSMUTATION
-	requirements = list(DEITY_LEVELED_TRANSMUTATION = 3)
+	requirements = list(DEITY_TREE_TRANSMUTATION = 3)
 	phenomena_path = /datum/phenomena/rock_form

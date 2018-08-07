@@ -7,6 +7,7 @@
 	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
 	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
 	inhuman in outlook and perspective."
+	cyborg_noun = null
 
 	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
 
@@ -70,16 +71,10 @@
 /datum/species/machine/sanitize_name(var/new_name)
 	return sanitizeName(new_name, allow_numbers = 1)
 
-/datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
-	if(!H)
-		return
-	handle_limbs_setup(H)
-
-/datum/species/machine/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/obj/item/organ/external/E in H.organs)
-		if(!BP_IS_ROBOTIC(E))
-			E.robotize("Morpheus")
-	return
+/datum/species/machine/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+	var/obj/item/organ/external/E = org
+	if(istype(E) && !BP_IS_ROBOTIC(E))
+		E.robotize("Morpheus")
 
 /datum/species/machine/get_blood_name()
 	return "oil"

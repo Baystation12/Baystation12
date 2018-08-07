@@ -320,7 +320,9 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/get_scan_results()
 	. = list()
-	if(BP_IS_ASSISTED(src))
+	if(BP_IS_CRYSTAL(src))
+		. += "Crystalline"
+	else if(BP_IS_ASSISTED(src))
 		. += "Assisted"
 	else if(BP_IS_ROBOTIC(src))
 		. += "Mechanical"
@@ -334,6 +336,9 @@ var/list/organ_cache = list()
 			. += "Decaying"
 		else
 			. += "Necrotic"
+	if(BP_IS_BRITTLE(src))
+		. += "Brittle"
+
 	switch (germ_level)
 		if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
 			. +=  "Mild Infection"

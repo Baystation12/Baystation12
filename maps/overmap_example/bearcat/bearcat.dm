@@ -97,9 +97,6 @@
 /decl/flooring/tiling
 	name = "deck"
 
-/obj/effect/paint/brown
-	color = COLOR_DARK_BROWN
-
 /turf/simulated/wall/r_wall/hull
 	color = COLOR_DARK_BROWN
 

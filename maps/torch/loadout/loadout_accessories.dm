@@ -3,7 +3,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory
 	cost = 8
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = SOLGOV_BRANCHES
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -23,7 +23,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
 	path = /obj/item/clothing/accessory
 	cost = 5
-	allowed_branches = UNIFORMED_BRANCHES
+	allowed_branches = SOLGOV_BRANCHES
 
 /datum/gear/accessory/solawardminor/New()
 	..()
@@ -45,7 +45,7 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/speciality/pilot
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot)
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"

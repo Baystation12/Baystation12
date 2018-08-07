@@ -10,6 +10,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 20
 	attack_cooldown = 21
+	melee_accuracy_bonus = -20
 	throwforce = 10
 	throw_speed = 1
 	throw_range = 7

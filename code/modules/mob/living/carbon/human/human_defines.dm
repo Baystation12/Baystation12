@@ -115,3 +115,5 @@
 	//vars for fountain of youth examine lines
 	var/became_older
 	var/became_younger
+
+	var/list/descriptors

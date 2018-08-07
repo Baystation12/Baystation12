@@ -72,11 +72,12 @@ var/global/ntnet_card_uid = 1
 	if(!check_functionality() || !ntnet_global || is_banned())
 		return 0
 
+	if(!ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
+		if(!ethernet || specific_action) // Wired connection ensures a basic connection to NTNet, however no usage of disabled network services.
+			return 0
+
 	if(ethernet) // Computer is connected via wired connection.
 		return 3
-
-	if(!ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
-		return 0
 
 	if(holder2)
 		var/turf/T = get_turf(holder2)

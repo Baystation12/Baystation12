@@ -527,6 +527,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
 			return ..()
 
+		if(BP_IS_BRITTLE(S))
+			to_chat(user, "<span class='warning'>\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it.</span>")
+			return 1
+
 		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
 		if(can_use(use_amt))
 			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))

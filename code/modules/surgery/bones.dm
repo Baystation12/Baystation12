@@ -26,7 +26,7 @@
 	if (!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && !BP_IS_ROBOTIC(affected) && affected.how_open() >= 2 && affected.stage == 0
+	return affected && !BP_IS_ROBOTIC(affected) && !BP_IS_CRYSTAL(affected) && affected.how_open() >= 2 && (BP_IS_BRITTLE(affected) || affected.stage == 0)
 
 /datum/surgery_step/glue_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -42,7 +42,9 @@
 	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
 	user.visible_message("<span class='notice'>[user] applies some [tool.name] to [bone]</span>", \
 		"<span class='notice'>You apply some [tool.name] to [bone].</span>")
-	affected.stage = 1
+	if(affected.stage == 0)
+		affected.stage = 1
+	affected.status &= ~ORGAN_BRITTLE
 
 /datum/surgery_step/glue_bone/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -68,7 +70,7 @@
 	if (!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.organ_tag != BP_HEAD && !BP_IS_ROBOTIC(affected) && affected.how_open() >= SURGERY_RETRACTED && affected.stage == 1
+	return affected && affected.organ_tag != BP_HEAD && !BP_IS_CRYSTAL(affected) && !BP_IS_ROBOTIC(affected) && affected.how_open() >= SURGERY_RETRACTED && affected.stage == 1
 
 /datum/surgery_step/set_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

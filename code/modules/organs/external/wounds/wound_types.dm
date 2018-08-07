@@ -45,6 +45,19 @@
 					return /datum/wound/burn/large
 				if(0 to 15)
 					return /datum/wound/burn/moderate
+		if(SHATTER)
+			switch(damage)
+				if(50 to INFINITY)
+					return /datum/wound/shatter/smashed
+				if(40 to 50)
+					return /datum/wound/shatter/wide
+				if(30 to 40)
+					return /datum/wound/shatter/narrow
+				if(15 to 30)
+					return /datum/wound/shatter/cracked
+				if(0 to 15)
+					return /datum/wound/shatter/chipped
+
 	return null //no wound
 
 /** CUTS **/
@@ -260,17 +273,26 @@ datum/wound/puncture/massive
 	switch(losstype)
 		if(DROPLIMB_EDGE, DROPLIMB_BLUNT)
 			damage_type = CUT
-			max_bleeding_stage = 3 //clotted stump and above can bleed.
-			stages = list(
-				"ripped stump" = damage_amt*1.3,
-				"bloody stump" = damage_amt,
-				"clotted stump" = damage_amt*0.5,
-				"scarred stump" = 0
+			if(BP_IS_ROBOTIC(lost_limb))
+				max_bleeding_stage = -1
+				bleed_threshold = INFINITY
+				stages = list("mangled robotic socket" = 0)
+			else if(BP_IS_CRYSTAL(lost_limb))
+				max_bleeding_stage = -1
+				bleed_threshold = INFINITY
+				stages = list("shattered stump" = 0)
+			else
+				max_bleeding_stage = 3 //clotted stump and above can bleed.
+				stages = list(
+					"ripped stump" = damage_amt*1.3,
+					"bloody stump" = damage_amt,
+					"clotted stump" = damage_amt*0.5,
+					"scarred stump" = 0
 				)
 		if(DROPLIMB_BURN)
 			damage_type = BURN
 			stages = list(
-				"ripped charred stump" = damage_amt*1.3,
+				"mangled charred stump" = damage_amt*1.3,
 				"charred stump" = damage_amt,
 				"scarred stump" = damage_amt*0.5,
 				"scarred stump" = 0
@@ -280,3 +302,33 @@ datum/wound/puncture/massive
 
 /datum/wound/lost_limb/can_merge(var/datum/wound/other)
 	return 0 //cannot be merged
+
+/** CRYSTALLINE WOUNDS **/
+/datum/wound/shatter
+	bleed_threshold = INFINITY
+	damage_type = SHATTER
+	max_bleeding_stage = -1
+
+/datum/wound/shatter/bleeding()
+	return FALSE
+
+/datum/wound/shatter/can_autoheal()
+	return FALSE
+
+/datum/wound/shatter/infection_check()
+	return FALSE
+
+/datum/wound/shatter/smashed
+	stages = list("shattered hole" = 0)
+
+/datum/wound/shatter/wide
+	stages = list("gaping crack" = 0)
+
+/datum/wound/shatter/narrow
+	stages = list("wide crack" = 0)
+
+/datum/wound/shatter/cracked
+	stages = list("narrow crack" = 0)
+
+/datum/wound/shatter/chipped
+	stages = list("chip" = 0)

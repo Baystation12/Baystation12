@@ -400,26 +400,6 @@
 	..()
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat
-	desc = "A fillet of space carp meat."
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
-	src.bitesize = 6
-
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/safe
-	name = "carp fillet"
-	desc = "A fillet of carp meat. Synthesized from ancient Earth genetic archives."
-	icon_state = "fishfillet"
-	filling_color = "#ffdefe"
-	center_of_mass = "x=17;y=13"
-
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/safe/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-	src.bitesize = 6
-
 /obj/item/weapon/reagent_containers/food/snacks/fishfingers
 	name = "fish fingers"
 	desc = "A finger of fish."
@@ -1741,7 +1721,8 @@
 	filling_color = "#fffbdb"
 	center_of_mass = "x=17;y=11"
 	nutriment_desc = list("rice" = 2)
-	nutriment_amt = 2
+	nutriment_amt = 6
+
 /obj/item/weapon/reagent_containers/food/snacks/boiledrice/New()
 	..()
 	bitesize = 2
@@ -1936,7 +1917,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/mint
 	name = "mint"
-	desc = "it is only wafer thin."
+	desc = "A tasty after-dinner mint. It is only wafer thin."
 	icon_state = "mint"
 	filling_color = "#f2f2f2"
 	center_of_mass = "x=16;y=14"

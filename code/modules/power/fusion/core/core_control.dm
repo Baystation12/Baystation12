@@ -132,30 +132,27 @@
 	popup.open()
 	user.set_machine(src)
 
-/obj/machinery/computer/fusion_core_control/Topic(href, href_list)
-	if((. = ..()))
-		return
-
+/obj/machinery/computer/fusion_core_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	if(href_list["access_device"])
 		var/idx = Clamp(text2num(href_list["toggle_active"]), 1, connected_devices.len)
 		cur_viewed_device = connected_devices[idx]
 		updateUsrDialog()
-		return 1
+		return TOPIC_REFRESH
 
 	//All HREFs from this point on require a device anyways.
 	if(!cur_viewed_device || !check_core_status(cur_viewed_device) || cur_viewed_device.id_tag != id_tag || get_dist(src, cur_viewed_device) > scan_range)
-		return
+		return TOPIC_NOACTION
 
 	if(href_list["goto_scanlist"])
 		cur_viewed_device = null
 		updateUsrDialog()
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["toggle_active"])
 		if(!cur_viewed_device.Startup()) //Startup() whilst the device is active will return null.
 			cur_viewed_device.Shutdown()
 		updateUsrDialog()
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["str"])
 		var/val = text2num(href_list["str"])
@@ -164,7 +161,7 @@
 		else
 			cur_viewed_device.set_strength(cur_viewed_device.field_strength + val)
 		updateUsrDialog()
-		return 1
+		return TOPIC_REFRESH
 
 //Returns 1 if the machine can be interacted with via this console.
 /obj/machinery/computer/fusion_core_control/proc/check_core_status(var/obj/machinery/power/fusion_core/C)
