@@ -1,0 +1,4 @@
+author: "Flatty"
+delete-after: True
+changes: 
+  - rscadd: "You can now change icon scaling method in the \"Icon\" menu on top left!"
