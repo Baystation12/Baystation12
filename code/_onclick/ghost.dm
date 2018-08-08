@@ -32,6 +32,10 @@
 	// Not all of them require checking, see below
 	var/list/modifiers = params2list(params)
 	if(modifiers["alt"])
+		// I'd rather call ..() but who knows what will break if we do that
+		var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
+		if(alt && alt.on_click(src))
+			return
 		var/target_turf = get_turf(A)
 		if(target_turf)
 			AltClickOn(target_turf)
