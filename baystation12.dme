@@ -241,6 +241,8 @@
 #include "code\datums\extensions\multitool\items\cable.dm"
 #include "code\datums\extensions\multitool\items\clothing.dm"
 #include "code\datums\extensions\multitool\items\items.dm"
+#include "code\datums\extensions\on_click\on_alt_click.dm"
+#include "code\datums\extensions\on_click\on_click.dm"
 #include "code\datums\helper_datums\construction_datum.dm"
 #include "code\datums\helper_datums\dist_check.dm"
 #include "code\datums\helper_datums\events.dm"
