@@ -161,6 +161,28 @@
 
 	icon_state = "Odst Armor Squad Leader"
 
+/obj/item/clothing/head/helmet/odst/donator/flaksim
+	name = "Kashada's ODST Helmet"
+
+	item_state = "Odst Helmet Flaksim"
+	icon_state = "Odst Helmet Flaksim"
+
+/obj/item/clothing/suit/armor/special/odst/donator/flaksim
+	name = "Kashada's ODST Armour"
+
+	icon_state = "Odst Armor Flaksim"
+
+/obj/item/clothing/head/helmet/odst/donator/spartan
+	name = "ODST Medic Helmet"
+
+	item_state = "Odst Helmet Spartan"
+	icon_state = "Odst Helmet Spartan"
+
+/obj/item/clothing/suit/armor/special/odst/donator/spartan
+	name = "ODST Squad Leader Armour"
+
+	icon_state = "Odst Armor Spartan"
+
 /obj/effect/random_ODST_set/New()
 	.=..()
 	var/obj/armour_set = pick(list(/obj/effect/odst_armour_set/medic,/obj/effect/odst_armour_set/sharpshooter,/obj/effect/odst_armour_set/cqb,/obj/effect/odst_armour_set,/obj/effect/odst_armour_set/engineer))
@@ -221,6 +243,19 @@
 	item_state = "odst_sl"
 	icon_state = "odst_sla"
 
+/obj/item/weapon/storage/backpack/odst/donator/flaksim
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Kashada's Backpack"
+	item_state = "Odst Flaksim Backpack"
+	icon_state = "Odst Flaksim Backpack"
+
+/obj/item/weapon/storage/backpack/odst/donator/spartan
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Spartan's Backpack"
+	item_state = "Odst Spartan Backpack"
+	icon_state = "Odst Spartan Backpack"
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND

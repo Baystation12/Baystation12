@@ -143,7 +143,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 /datum/job/researcher
 	title = "Researcher"
-	total_positions = 6
+	total_positions = 10
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	alt_titles = list("Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")

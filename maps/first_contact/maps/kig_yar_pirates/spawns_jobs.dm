@@ -131,8 +131,8 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 
 /datum/job/covenant/unggoy_deacon
 	title = "Kig-Yar Ship - Unggoy Crewmember"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 6
+	spawn_positions = 6
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/unggoy
 	access = list(230,250)

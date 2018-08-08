@@ -1,106 +1,314 @@
-"aa" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/Interiorlevel2)
-"ab" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ac" = (/obj/item/modular_computer/telescreen,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ad" = (/obj/structure/filingcabinet,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ae" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"af" = (/obj/structure/closet{name = "Sandbags Closet"},/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/weapon/shovel,/obj/item/weapon/shovel,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ag" = (/obj/structure/closet{name = "Barbed Wire Closet"},/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ah" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; name = "Marine Armor"; tag = "icon-densecrate"},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ai" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; name = "Marine Boots"; tag = "icon-densecrate"},/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aj" = (/obj/structure/table/steel_reinforced,/obj/machinery/photocopier/faxmachine{department = "UEG Listening Post Sierra Golf Charlie 048"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ak" = (/obj/machinery/computer/telecomms/server,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"al" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/clipboard,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"am" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"an" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ao" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ap" = (/obj/structure/table/steel_reinforced,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced{tag = "icon-laptop-closed"; icon_state = "laptop-closed"},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aq" = (/obj/structure/filingcabinet,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ar" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"as" = (/obj/machinery/light{dir = 8},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"at" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs"; tag = "icon-phoroncrate"},/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"au" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"av" = (/obj/structure/table/steel_reinforced,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced{tag = "icon-laptop-closed"; icon_state = "laptop-closed"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aw" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ax" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/clipboard,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ay" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"az" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs"; tag = "icon-phoroncrate"},/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aA" = (/obj/machinery/photocopier,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aB" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aC" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Replacment Lights Crate"; tag = "icon-secgearcrate"},/obj/item/device/lightreplacer,/obj/item/weapon/storage/box/lights,/obj/item/weapon/storage/box/lights,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aD" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aE" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Communications Center"; req_access = list(110)},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aF" = (/obj/machinery/door/airlock/halo{name = "Archive"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aG" = (/obj/machinery/door/airlock/halo{name = "Storage"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aH" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aI" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Communications Center Acces"; req_access = list(110); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aJ" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Hangar"; req_access = list(110); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aK" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Server Room"; req_access = list(110)},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aL" = (/obj/machinery/door/airlock/halo{name = "Weapons Locker"; req_access = list(110)},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aM" = (/obj/machinery/door/airlock/halo{name = "Acces Ladder"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aN" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aO" = (/obj/machinery/telecomms/hub,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aP" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aQ" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aR" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aS" = (/obj/structure/ladder/up,/obj/machinery/light{tag = "icon-bulb0 (EAST)"; icon_state = "bulb0"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aT" = (/obj/machinery/telecomms/server,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aU" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aV" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/gloves/thick/unsc,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aW" = (/obj/machinery/telecomms/relay/ship_relay{name = "Signal Relay"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aX" = (/obj/machinery/telecomms/processor,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aY" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"aZ" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"ba" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
+"aa" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/Hallways)
+"ab" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/controlroom)
+"ac" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/storagearea)
+"ad" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/MAC)
+"ae" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/MAC)
+"af" = (/obj/item/modular_computer/telescreen,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/controlroom)
+"ag" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"ah" = (/obj/structure/closet{name = "Sandbags Closet"},/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/weapon/shovel,/obj/item/weapon/shovel,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"ai" = (/obj/structure/closet{name = "Barbed Wire Closet"},/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aj" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"ak" = (/obj/structure/table/steel_reinforced,/obj/random/tech_supply,/obj/random/tool,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"al" = (/obj/machinery/mac_cannon/capacitor,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"am" = (/obj/machinery/mac_cannon/accelerator,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"an" = (/obj/structure/table/steel_reinforced,/obj/machinery/photocopier/faxmachine{department = "Abandoned Listening Post"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"ao" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"ap" = (/obj/machinery/computer/telecomms/server,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aq" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"ar" = (/obj/random/trash,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"as" = (/obj/structure/table/steel_reinforced,/obj/machinery/photocopier/faxmachine{department = "Abandoned Listening Post"},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"at" = (/obj/machinery/autolathe/ammo_fabricator,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"au" = (/obj/machinery/mac_cannon/accelerator,/obj/machinery/mac_cannon/accelerator,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"av" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aw" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"ax" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"ay" = (/obj/machinery/overmap_weapon_console/npc_comms_console/innie,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"az" = (/obj/structure/table/steel_reinforced,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced{tag = "icon-laptop-closed"; icon_state = "laptop-closed"},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aA" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aB" = (/obj/random/trash,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aC" = (/obj/structure/table/steel_reinforced,/obj/random/tech_supply,/obj/random/tool,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aD" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/commanderroom)
+"aE" = (/obj/structure/table/steel_reinforced,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced{tag = "icon-laptop-closed"; icon_state = "laptop-closed"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aF" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aG" = (/obj/structure/table/steel_reinforced,/obj/machinery/button/remote/blast_door{_wifi_id = 19; id = 19},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aH" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/clipboard,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aI" = (/obj/structure/closet/crate{name = "Replacement lights"},/obj/item/weapon/storage/box/lights,/obj/item/weapon/storage/box/lights,/obj/item/device/lightreplacer,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aJ" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/commanderroom)
+"aK" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/toilet,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/commanderroom)
+"aL" = (/obj/machinery/photocopier,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aM" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aN" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Spaghetti''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aO" = (/obj/item/weapon/grenade/chem_grenade,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aP" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aQ" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/commanderroom)
+"aR" = (/obj/structure/mirror,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/commanderroom)
+"aS" = (/obj/machinery/door/blast/shutters{_wifi_id = 19; begins_closed = 0; id = 19},/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Communications Center"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aT" = (/obj/machinery/door/blast/shutters{_wifi_id = 19; begins_closed = 0; id = 19},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlroom)
+"aU" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/controlroom)
+"aV" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aW" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Chicken''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"aX" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"aY" = (/obj/structure/bed/chair/comfy/captain{tag = "icon-capchair_preview (EAST)"; name = "Comfy Office chair"; icon_state = "capchair_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"aZ" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"ba" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"bb" = (/obj/structure/closet/crate/large{icon_state = "hydro_crate_large"; name = "Welding Tools Crate"; tag = "icon-hydro_crate_large"},/obj/item/weapon/weldingtool,/obj/item/weapon/weldpack,/obj/item/clothing/head/welding,/obj/item/weapon/weldingtool,/obj/item/weapon/weldingtool,/obj/item/clothing/head/welding,/obj/item/clothing/head/welding,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bc" = (/obj/structure/closet/crate/trashcart,/obj/item/weapon/storage/bag/trash,/obj/item/weapon/storage/bag/trash,/obj/item/weapon/storage/bag/trash,/obj/item/weapon/storage/bag/trash,/obj/item/weapon/storage/bag/trash,/obj/item/weapon/storage/bag/trash,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bd" = (/obj/item/weapon/storage/briefcase/colossuscase,/obj/item/clothing/suit/justice/zeal,/obj/structure/table/woodentable,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"be" = (/obj/effect/landmark/start/listen_staffl,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"bf" = (/obj/structure/table/woodentable,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"bg" = (/obj/machinery/door/airlock/halo{name = "Commanding Officer Quarters"; req_access = list(667)},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"bh" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bi" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hop,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"bj" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/commanderroom)
+"bk" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Plasteel Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bl" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Replacment Lights Crate"; tag = "icon-secgearcrate"},/obj/item/device/lightreplacer,/obj/item/weapon/storage/box/lights,/obj/item/weapon/storage/box/lights,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bm" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/storagearea)
+"bn" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hallways)
+"bo" = (/obj/machinery/door/airlock/halo{name = "Storage"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bp" = (/obj/effect/decal/cleanable/cobweb,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bq" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"br" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bs" = (/obj/random/trash,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bt" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bu" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bv" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Blast doors"; tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bw" = (/obj/machinery/door/blast/shutters{_wifi_id = 25; begins_closed = 0; id = 25},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/MAC)
+"bx" = (/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"by" = (/obj/machinery/button/remote/blast_door{_wifi_id = 25; id = 25; pixel_y = 32},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bz" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/overmap_weapon_console/mac,/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bA" = (/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bB" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/mac_cannon/ammo_loader,/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bC" = (/obj/machinery/power/apc/super{dir = 1; name = "MAC Power Controller"; pixel_y = 24},/obj/structure/cable/orange{icon_state = "0-4"},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bD" = (/obj/structure/cable/orange{tag = "icon-2-8"; icon_state = "2-8"},/obj/machinery/light{dir = 1},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bE" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bF" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/living)
+"bG" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/living)
+"bH" = (/obj/machinery/door/airlock/halo{name = "Archive"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bI" = (/obj/machinery/door/airlock/halo{name = "Storage"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bJ" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bK" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "MAC Control"; tag = "icon-door_closed (NORTH)"},/obj/machinery/door/blast/shutters{_wifi_id = 25; begins_closed = 0; id = 25},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/MAC)
+"bL" = (/obj/machinery/power/terminal{dir = 4},/obj/structure/cable/orange{icon_state = "0-2"},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bM" = (/obj/machinery/power/smes/buildable{charge = 1e+006; input_attempt = 1; inputting = 0; output_attempt = 1; outputting = 0},/obj/structure/cable/orange{icon_state = "1-2"},/obj/structure/cable/orange{icon_state = "0-2"},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bN" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"bO" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bP" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bQ" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"bR" = (/obj/machinery/atmospherics/portables_connector{dir = 2},/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"bS" = (/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bT" = (/obj/machinery/camera/autoname{dir = 8},/turf/simulated/floor/reinforced,/area/asteroid_listening/ground/interior/MAC)
+"bU" = (/obj/structure/mirror,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/living)
+"bV" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/table/woodentable,/obj/item/weapon/towel,/obj/item/weapon/towel,/obj/item/weapon/towel,/obj/item/weapon/towel,/obj/item/weapon/towel,/obj/item/weapon/towel,/obj/item/weapon/towel,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"bW" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/table/woodentable,/obj/structure/bedsheetbin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"bX" = (/obj/structure/filingcabinet,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"bY" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"bZ" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 8},/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"ca" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"cb" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cc" = (/obj/structure/sink{dir = 1; icon_state = "sink"; pixel_x = 0; pixel_y = 2; tag = "icon-sink (NORTH)"},/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cd" = (/obj/structure/toilet,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"ce" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/bed,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cf" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (EAST)"; icon_state = "officechair_white_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cg" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"ch" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"ci" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (WEST)"; icon_state = "officechair_white_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cj" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/structure/bed,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"ck" = (/obj/machinery/light{dir = 4},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cl" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cm" = (/obj/effect/floor_decal/industrial/outline,/obj/machinery/portable_atmospherics/canister/phoron/engine_setup,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/storagearea)
+"cn" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/machinery/light{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"co" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cp" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cq" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cr" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/obj/structure/window/reinforced/treated{dir = 4},/obj/structure/window/reinforced/treated{dir = 8},/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cs" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (EAST)"; icon_state = "cooling_manifold"; dir = 4},/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"ct" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cu" = (/obj/machinery/shower{dir = 4; icon_state = "shower"; pixel_x = 0; pixel_y = -3},/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cv" = (/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cw" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cx" = (/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cy" = (/obj/machinery/door/airlock/halo{name = "Living Quarters"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cz" = (/obj/machinery/shower{tag = "icon-shower (WEST)"; icon_state = "shower"; dir = 8; pixel_x = 0; pixel_y = -3},/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cA" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cB" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cC" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cD" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cE" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cF" = (/obj/machinery/porta_turret/stationary{req_access = list(1)},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cG" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cH" = (/obj/structure/cable/orange{icon_state = "1-4"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cI" = (/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cJ" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/orange{icon_state = "0-8"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cK" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cL" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"cM" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cN" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cO" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cP" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cQ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cR" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cS" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"cT" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"cU" = (/obj/structure/closet{name = "Sandbags Closet"},/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/weapon/shovel,/obj/item/weapon/shovel,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cV" = (/obj/structure/closet{name = "Barbed Wire Closet"},/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cW" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; name = "Marine Armor"; tag = "icon-densecrate"},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cX" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; name = "Marine Boots"; tag = "icon-densecrate"},/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"cY" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"cZ" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/MAC)
+"da" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"db" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"dc" = (/obj/random/trash,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"dd" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"de" = (/obj/machinery/light{dir = 4},/obj/structure/filingcabinet,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"df" = (/obj/machinery/light{dir = 8},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"dg" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs"; tag = "icon-phoroncrate"},/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"dh" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/darkbasement)
+"di" = (/obj/structure/sink{dir = 1; icon_state = "sink"; pixel_x = 0; pixel_y = 2; tag = "icon-sink (NORTH)"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/freezer,/area/asteroid_listening/ground/interior/living)
+"dj" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (EAST)"; icon_state = "officechair_white_preview"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"dk" = (/obj/structure/table/woodentable,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"dl" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"dm" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs"; tag = "icon-phoroncrate"},/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/obj/item/weapon/reagent_containers/food/snacks/liquidfood,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"dn" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Replacment Lights Crate"; tag = "icon-secgearcrate"},/obj/item/device/lightreplacer,/obj/item/weapon/storage/box/lights,/obj/item/weapon/storage/box/lights,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"do" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/storagearea)
+"dp" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Living Quarters"},/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/living)
+"dq" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"dr" = (/obj/machinery/light{dir = 1},/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"ds" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"dt" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Communications Center Acces"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"du" = (/obj/random/trash,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"dv" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/serverroom)
+"dw" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Server Room"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dx" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dy" = (/obj/machinery/door/airlock/halo{name = "Weapons Locker"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dz" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dA" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dB" = (/obj/machinery/telecomms/hub,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dC" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dD" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dE" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dF" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dG" = (/obj/structure/stairs/west,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hallways)
+"dH" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hallways)
+"dI" = (/obj/machinery/telecomms/server,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dJ" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dK" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dL" = (/obj/structure/table/rack,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dM" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"dN" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/cryodorm)
+"dO" = (/obj/machinery/telecomms/relay/ship_relay{name = "Signal Relay"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dP" = (/obj/machinery/telecomms/processor,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dQ" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dR" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dS" = (/obj/structure/table/rack,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dT" = (/obj/structure/table/rack,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/serverroom)
+"dU" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"dV" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"dW" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"dX" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"dY" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/medical)
+"dZ" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ea" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eb" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ec" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ed" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ee" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ef" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eg" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/effect/decal/cleanable/dirt,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/storage/box/syringes,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eh" = (/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ei" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ej" = (/obj/machinery/chemical_dispenser/ert,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ek" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"el" = (/obj/structure/sign/bluecross_1,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/medical)
+"em" = (/obj/structure/curtain/medical,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"en" = (/obj/structure/table/steel_reinforced,/obj/item/clothing/suit/surgicalapron,/obj/item/clothing/suit/surgicalapron,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eo" = (/obj/machinery/space_heater,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ep" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"eq" = (/obj/machinery/door/airlock/halo{name = "Cryodorms"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"er" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/medical)
+"es" = (/obj/machinery/light/spot{dir = 1},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/medical)
+"et" = (/obj/effect/floor_decal/sign/m,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eu" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ev" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
+"ew" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Medical Bay"; tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"ex" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/janitor)
+"ey" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/janitor)
+"ez" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/janitor)
+"eA" = (/obj/structure/curtain/medical,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eB" = (/obj/structure/closet/crate/freezer,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eC" = (/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eD" = (/obj/machinery/door/airlock/halo{name = "Janitorial Supplies"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/asteroid_listening/ground/interior/janitor)
+"eE" = (/obj/machinery/organ_printer,/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eF" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eG" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eH" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eI" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = 8},/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"eJ" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eK" = (/obj/machinery/atmospherics/valve/digital{dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/closet/l3closet/janitor,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eL" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 10},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eM" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eN" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eO" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eP" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/machinery/door/blast/shutters{id = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/medical)
+"eQ" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/darkbasement)
+"eR" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eS" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eT" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eU" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eV" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/space)
+"eW" = (/turf/space,/area/space)
+"eX" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 1},/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eY" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"eZ" = (/obj/machinery/atmospherics/pipe/tank/empty{dir = 1; icon_state = "air_map"; tag = "icon-air_map (NORTH)"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
+"fa" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaababacacacacacacacababababababadadadaeabafagahaiabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabajaeaeaeakaeaeaeajabababababaeaeaeaeabaeaeaeaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabalamanaeaeaeaoamapabababababaqadadarabasaeaeatabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabauavawaeaeaeauawaxabababababaeaeaeaeabayaeaeazabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabaAaeaBaeaeaeaeaBaAabababababadadadaeabaCaeaeaDabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabababababaEaeabababababababababababaFabababaGababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabaeaeaeaHaeaeaHaeaeaeaeaHaeaeaeaHaeaeaeaHaeaeaHabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabaeaeaeaeaeaeaeaeaeaIaeaeaeaJaeaeaeaeaeaeaeaeaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabababababaKaeabababababababababaLabababaMababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabauaNaOaPaeaeaeaHaeabababababaQaeaRababaSabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabaTaeaeaeaeaeaeaeaeabababababaUaeaVababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabauaWaXaYaeaeaeaBaeabababababaZaBbaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabababababababababababacacacacacacacacacacacadadadadadadadadadadaeaeaeaeaeadadadad
+aaaaaaaaaaaaaaaaaaababafafafafafafafababacagahaiajajajajajakacadadadadadadadadadadaealamalaeadadadad
+aaaaaaaaaaaaaaaaaaabanaoaoaoapaqaraqasabacajajajajatajatajakacadadadadadadadadadadaealaualaeadadadad
+aaaaaaaaaaaaaaaaaaabavawaxaoaoaoayawazabacaAajajajaBajajajaCacadadadadadadadadadadaealamalaeadadadad
+aaaaaaaaaaaDaDaDaDabavaEaFaqaraoaGaFaHabacaIajajajatajatajakacadadadadadadadadadadaealamalaeadadadad
+aaaaaaaaaaaDaJaDaKabaLaoaMaoaoaqaoaMaLabacaNajajajaOajajajaPacadadadadadadadadadadaealaualaeadadadad
+aaaaaaaaaaaDaQaRaQabababababaSaTaUabababacaVajajajajajajajaWacadadadadadadadadadadaealamalaeadadadad
+aaaaaaaaaaaDaXaXaXaDaYaZbaabaoaoabaaaaaaacbbajaBajajajajajbcacadadadadadadadadadadaealamalaeadadadad
+aaaaaaaaaaaDbdbeaXaDaXbfaXbgaoaoabaaaaaaacajajajbhajajajaBajacadadadadadadadadadadaealamalaeadadadad
+aaaaaaaaaaaDbibjaXbgaXaXbjabaqaqabaaaaaaacajajaIbkbhblajajajacbmbmbmbmbmbmadadadadaealaualaeadadadad
+aaaaaaaabnbnbnbnbnbnbnbnbnabaSaTabbnbnbnacboacacacacacacacboacacacacacacacbnbnaeaeaealamalaeadadadad
+aaaaaaaabnbpbqbqbqbqbqbqbrbsbqbqbtbqbqbqbqbrbqbtbqbqbqbqbqbqbtbububububububqbqaeaeaealamalaeaeaeadad
+aaaaaaaabnbqbqbrbqbqbqbqbqbqbqbrbrbrbqbqbqbqbqbqbrbqbqbqbqbqbqbubububububvbqbqbwbxbybzbAbBbCbDaeadad
+aaaaaaaabnbEbqbFbFbFbGbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFacacbHacacbIacacacacbJbqbKbxbxbxbxbxbLbMaeadad
+aaaaaaaabnbNbqbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbububOacbPbububQbQacbqbqaebRbxbxbxbxbSbTaeaeae
+aaaaaaaabnbqbqbFbFbUbFbFbFbFbFbFbVbWbFbFbFbFbFbFbUbFbFbXbXbuacbubububQbQacbqbqaebYbZbxbxbxbSbxbxbxae
+aaaaaaaabncabqbFcbcccdbFcecfcgbFchchbFcgcicjbFcdccckbFbubuclaccmcmbubububIbqbqaecncocpcqcqcrcqcsctae
+aaaaaaaabnbqbqbFcucvcvcwchcxchcychchcychcxchcwcvcvczbFcAbXbXaccmcmbubucBacbqbqaecCcDcEcFcGcHcIcJcKae
+aaaaaaaabncLbqbFbFbFbFbFbFbFbFbFchchbFbFbFbFbFbFbFbFbFbububuacacacacacacacbJbqaeaeaecMcNcNcNcOcPcQae
+aaaaaaaabnbqbqbFcbcccdbFcecfcgbFcRcSbFcgcicjbFcdcccTbFbXbXbuaccUcVcWcXacacbqbqaeaeaecYcYcYcZcGcGcGae
+aaaaaaaabnbqbqbFcudacvcwchcxchcychchcychcxchcwcvcvczbFdbbubuacbubububuacacbqbqaeaeaeaeaeaeaeaeaeaeae
+aaaaaaaabnbqbqbFbFbFbFbFbFbFbFbFdcddbFbFbFbFbFbFbFbFbFbubXdeacdfdbbudgacacbqbqbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabnbqbqbFcbdicdbFcedjdkbFchcxbFcgcicjbFcddicTbFbububuacdlbubudmacacbqbqbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabncLbqbGcucvcvcwchcxchcychchcychcxchcwdacvczbFbXbXbuacdnbubudoacacbJbqbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabnbEbqbFbFbFbFbFbFbFbFbFdpchbFbFbFbFbGbFbFbGbFacacbHacacacbIacacacbqbqbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabnbqbqdqbqbqbqbqbqbqbqbtbqbqbtbqbqbrbrbtbqbqbqdrbqbqbqbtbqbqbtbqbqbqbqbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabnbqbqbqbqbrbqbqbqbrbqdsbqbqbqbrbqdtbqdubqbqbqbqbqdqbqbqdtbqbqdtbqbqbqbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabnbEbqbnbnbnbndvdvdvdvdvdwdxdvdvdvdvdvdvdvdvdvdydvdvbnbnbnbqbqbnbnbnbnbndhdhdhdhdhdhdhdhdhdh
+aaaaaaaabnbqbqbnaaaaaadvdzdAdBdCdxdxdxdDdxdvdvdvdvdvdEdxdFdvdGbqbqbqbqbndhdhdhdhdhdhdhdhdhdhdhdhdhdh
+aaaaaaaadHbqbqbnaaaaaadvdIdxdxdxdxdJdxdxdxdvdvdvdvdvdKdxdLdvdGbqbqbqdMbndhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdNdNdNdNcLbqbnaaaaaadvdzdOdPdQdxdxdxdRdxdvdvdvdvdvdSdRdTdvbnbnbnbnbnbndhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdUdVdWdNbqbqdHaaaaaadvdvdvdvdvdvdvdvdvdvdvdvdvdvdvdvdvdvdvdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdXdVdVdNbqbqbnaaaaaadYdYdYdYdYdYdYdYdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdVdVdVdNbqbqbnaaaaaadYdZeaebecedeeefdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdXdVdVdNbqbqbnaaaaaadYegeeebeheiehejdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdVdVdVdNekdVdYdYdYeldYdYemdYeneheeeodYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNepdVdVeqdVdVererereseheteeeheeeheeeudYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+dNdNdNdNdNevdVererererewehehehehehehehdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+exexexexeyezezeydYdYeldYemeAememeAememdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+exexexexeyezezeydYdYdYdYeBeheheheeeeeCdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+exexeyeyeyeDeyeyeyeydYdYeEeFeGeHeGeheIdYdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+exexeyeJeKeLeMeNeOeydYdYdYePePePePePdYdYeQdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdhdh
+exexeyeReSeTeMeMeUeyeVeVeVeWeWeWeWeWeVeVeVeVeVeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+exexeyeXeYeZeMeMfaeyeVeVeVeWeWeWeWeWeWeVeVeVeVeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+exexeyeyeyeyeyeyeyeyeVeVeVeVeWeWeWeWeWeWeVeVeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+exexexexexexexexexexexeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+eVeVeVeVeVeVeVeVeVeVeVeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+eVeVeVeVeVeVeVeVeVeVeVeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+eVeVeVeVeVeVeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
+eWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeWeW
 "}

@@ -9,8 +9,6 @@
 
 	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
 
-	#include "../first_contact/maps/Exoplanet Mining/includes.dm"
-
 	#include "../overmap_ships/nh_overmap.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 	#include "maps/corvette_spawns.dm"
