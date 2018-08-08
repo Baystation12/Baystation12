@@ -46,6 +46,7 @@
 	baseline, with no appendix and fewer inherited genetic disabilities, but a weakened metabolism."
 	icobase =     'icons/mob/human_races/species/human/subspecies/vatgrown_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/vatgrown_preview.dmi'
+	min_age = 18
 
 	toxins_mod =   1.1
 	has_organ = list(

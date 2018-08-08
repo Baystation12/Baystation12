@@ -707,3 +707,45 @@
 	icon_state = "kimono"
 	worn_state = "kimono"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
+/obj/item/clothing/under/yamakari
+	name = "yamakari jumpsuit"
+	desc = "A plain black jumpsuit intended for Yamakari Fleshworks' vat-grown clone rental workers. Offers no protection against hostile robots."
+	icon_state = "yamakari"
+	worn_state = "yamakari"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
+/obj/item/clothing/under/yamakari/medical
+	name = "yamakari medical jumpsuit"
+	desc = "A white jumpsuit with blue patterns intended for Yamakari Fleshworks' vat-grown clone rental workers."
+	icon_state = "yamakari_med"
+	worn_state = "yamakari_med"
+	permeability_coefficient = 0.50
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 30, rad = 0)
+
+/obj/item/clothing/under/yamakari/engineering
+	name = "yamakari engineering jumpsuit"
+	desc = "An orange jumpsuit with yellow hazard stripes intended for Yamakari Fleshworks' vat-grown clone rental workers."
+	icon_state = "yamakari_eng"
+	worn_state = "yamakari_eng"
+	siemens_coefficient = 0.8
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/under/yamakari/security
+	name = "yamakari security jumpsuit"
+	desc = "A black jumpsuit with red stripes intended for Yamakari Fleshworks' vat-grown clone rental workers. Suitable for purging futuristic samurai."
+	icon_state = "yamakari_sec"
+	worn_state = "yamakari_sec"
+	siemens_coefficient = 0.9
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/under/yamakari/science
+	name = "yamakari science jumpsuit"
+	desc = "A white jumpsuit with purple decals intended for Yamakari Fleshworks' vat-grown clone rental workers. The manufacturing date reads '2559'"
+	icon_state = "yamakari_purple"
+	worn_state = "yamakari_purple"
+	permeability_coefficient = 0.50
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
+
+

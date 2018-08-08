@@ -108,3 +108,4 @@
 	desc = "A pin denoting employment in the Free Trade Union, a trading company."
 	icon_state = "ftupin"
 	high_visibility = 1
+
