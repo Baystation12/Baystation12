@@ -50,6 +50,22 @@ GLOBAL_LIST_EMPTY(listen_staffl_spawns)
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
+/decl/hierarchy/outfit/job/Asteroidinnieleader
+	name = "Insurrectionist Commander"
+
+	head = /obj/item/clothing/head/helmet/tactical/mirania
+	glasses =/obj/item/clothing/glasses/hud/tactical
+	mask = /obj/item/clothing/mask/balaclava/tactical
+	suit = /obj/item/clothing/suit/storage/vest/tactical/mirania
+	uniform = /obj/item/clothing/under/tactical
+	shoes = /obj/item/clothing/shoes/tactical
+	l_ear = /obj/item/device/radio/headset/insurrection
+	gloves = /obj/item/clothing/gloves/tactical
+	pda_slot = null
+	l_pocket = /obj/item/squad_manager
+	r_pocket = /obj/item/device/spy_monitor
+
+	flags = 0
 
 /datum/job/Asteroidinnie
 	title = "Insurrectionist"
@@ -67,7 +83,7 @@ GLOBAL_LIST_EMPTY(listen_staffl_spawns)
 	total_positions = 1
 	spawn_positions = 1
 	access = list(667)
-	outfit_type = /decl/hierarchy/outfit/job/Asteroidinnie
+	outfit_type = /decl/hierarchy/outfit/job/Asteroidinnieleader
 	selection_color = "#008000"
 	spawnpoint_override = "Listening Post Commander Spawn"
 	announced = FALSE
