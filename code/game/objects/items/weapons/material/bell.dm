@@ -20,6 +20,6 @@
 		user.visible_message("<span class='notice'>\The [user] rings \the [src].</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 20)
 
-/obj/item/weapon/material/apply_hit_effect()
+/obj/item/weapon/material/bell/apply_hit_effect()
 	. = ..()
 	shatter()
