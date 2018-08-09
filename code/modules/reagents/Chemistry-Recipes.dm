@@ -1427,8 +1427,14 @@
 /datum/chemical_reaction/icetea
 	name = "Iced Tea"
 	result = /datum/reagent/drink/tea/icetea
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea = 2)
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea = 2, /datum/reagent/sugar = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/sweettea
+	name = "Sweet Tea"
+	result = /datum/reagent/drink/tea/icetea
+	required_reagents = list(/datum/chemical_reaction/icetea = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
 
 /datum/chemical_reaction/icecoffee
 	name = "Iced Coffee"

@@ -723,14 +723,21 @@
 
 /datum/reagent/drink/tea/icetea
 	name = "Iced Tea"
-	description = "No relation to a certain rap artist/ actor."
-	taste_description = "sweet tea"
-	color = "#104038" // rgb: 16, 64, 56
+	description = "It's the tea you know and love, but now it's cold."
+	taste_description = "cold black tea"
 	adj_temp = -5
 
 	glass_name = "iced tea"
-	glass_desc = "No relation to a certain rap artist/ actor."
+	glass_desc = "It's the tea you know and love, but now it's cold."
 	glass_special = list(DRINK_ICE)
+
+/datum/reagent/drink/tea/icetea/sweet
+	name = "Sweet Tea"
+	description = "It's the tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet tea"
+
+	glass_name = "sweet tea"
+	glass_desc = "It's the tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/coffee
 	name = "Coffee"
@@ -1666,7 +1673,7 @@
 /datum/reagent/ethanol/gintonic
 	name = "Gin and Tonic"
 	description = "An all time classic, mild cocktail."
-	taste_description = "mild and tart"
+	taste_description = "mild tartness" //???
 	color = "#0064c8"
 	strength = 50
 
