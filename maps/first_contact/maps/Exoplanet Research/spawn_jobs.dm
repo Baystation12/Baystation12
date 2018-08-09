@@ -15,6 +15,8 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	..()
 	GLOB.facil_researcher_spawns += loc
 
+
+
 GLOBAL_LIST_EMPTY(facil_director_spawns)
 
 /datum/spawnpoint/facil_director
@@ -55,20 +57,21 @@ GLOBAL_LIST_EMPTY(facil_security_spawns)
 
 GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
-/datum/spawnpoint/facil_comms_spawns
-	display_name = "Research Facility Comms Spawn"
-	restrict_job = list("Communications Operator")
+/datum/spawnpoint/facil_comms
+	display_name =  "Research Facility Security Spawn"
+	restrict_job = list("ONI Security Guard","ONI Security Squad Leader")
 
 /datum/spawnpoint/facil_comms/New()
 	..()
 	turfs = GLOB.facil_comms_spawns
 
 /obj/effect/landmark/start/facil_comms
-	name = "Research Facility comms Spawn"
+	name = "Research Facility Comms Spawn"
 
 /obj/effect/landmark/start/facil_comms/New()
 	..()
 	GLOB.facil_comms_spawns += loc
+
 
 
 /decl/hierarchy/outfit/job/facil_researcher
