@@ -97,5 +97,6 @@
 
 	area_usage_test_exempted_root_areas = list(
 		/area/exoplanet,
-		/area/map_template
+		/area/map_template,
+		/area/unishi
 	)
