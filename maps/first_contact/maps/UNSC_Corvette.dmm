@@ -454,7 +454,7 @@
 "iL" = (/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
 "iM" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
 "iN" = (/obj/machinery/vending/odstvend2,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
-"iO" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"iO" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/defibrillator/compact/combat/loaded,/obj/item/weapon/defibrillator/compact/combat/loaded,/obj/item/weapon/defibrillator/compact/combat/loaded,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
 "iP" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
 "iQ" = (/obj/machinery/portable_atmospherics/canister/oxygen{anchored = 1},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
 "iR" = (/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardengine)
