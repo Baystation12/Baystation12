@@ -63,6 +63,11 @@
 		)
 
 	genders = list(NEUTER)
+	descriptors = list(
+		/datum/mob_descriptor/height = -1,
+		/datum/mob_descriptor/build = 1,
+		/datum/mob_descriptor/vox_markings = 0
+		)
 
 /datum/species/vox/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[default_language]

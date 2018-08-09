@@ -235,8 +235,8 @@
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
 
 	var/list/descriptors = list(
-		/datum/mob_descriptor/height,
-		/datum/mob_descriptor/build
+		/datum/mob_descriptor/height = 0,
+		/datum/mob_descriptor/build = 0
 	)
 
 /*
@@ -269,6 +269,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/list/descriptor_datums = list()
 		for(var/desctype in descriptors)
 			var/datum/mob_descriptor/descriptor = new desctype
+			descriptor.comparison_offset = descriptors[desctype]
 			descriptor_datums[descriptor.name] = descriptor
 		descriptors = descriptor_datums
 
