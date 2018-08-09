@@ -232,19 +232,10 @@
 			icon_state = "water_cup_e"
 
 
-//////////////////////////drinkingglass and shaker//
+//////////////////////////pitchers, pots, flasks and cups //
 //Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink
 //	itself), in Chemistry-Recipes.dm (for the reaction that changes the components into the drink), and here (for the drinking glass
 //	icon states.
-
-/obj/item/weapon/reagent_containers/food/drinks/shaker
-	name = "shaker"
-	desc = "A metal shaker to mix drinks in."
-	icon_state = "shaker"
-	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25;30;60" //Professional bartender should be able to transfer as much as needed
-	volume = 120
-	center_of_mass = "x=17;y=10"
 
 /obj/item/weapon/reagent_containers/food/drinks/teapot
 	name = "teapot"

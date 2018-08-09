@@ -1914,6 +1914,7 @@
 /obj/machinery/door/airlock/glass/civilian{
 	name = "Hydroponics Bay"
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hydroponics)
 "eE" = (
@@ -3908,7 +3909,6 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/item/weapon/book/manual/sol_sop,
 /obj/item/weapon/paper_bin,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -6309,11 +6309,6 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/machinery/door/window{
-	dir = 4;
-	name = "Bar";
-	req_access = list(25)
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -6327,6 +6322,10 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/door/window/brigdoor/eastleft{
+	name = "Bar";
+	req_access = list(25)
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
@@ -12509,6 +12508,14 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"CV" = (
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 25;
+	pixel_y = 0
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/command/captainmess)
 "CX" = (
 /obj/structure/curtain/open/bed,
 /obj/effect/floor_decal/techfloor{
@@ -17707,15 +17714,19 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
 "RF" = (
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = -24
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/blue,
+/obj/machinery/button/windowtint{
+	id = "offmess_windows";
+	pixel_x = -4;
+	pixel_y = -24
+	},
+/obj/machinery/light_switch{
+	pixel_x = 4;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "RH" = (
@@ -18157,13 +18168,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/light_switch{
-	pixel_x = 4;
-	pixel_y = -24
-	},
-/obj/machinery/button/windowtint{
-	id = "offmess_windows";
-	pixel_x = -4;
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/dark,
@@ -19246,6 +19253,7 @@
 	req_access = list(12);
 	req_one_access = list(19,28,91)
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/captainmess)
 "WO" = (
@@ -39828,7 +39836,7 @@ UV
 JA
 LR
 XN
-XN
+CV
 TX
 SZ
 Ot
