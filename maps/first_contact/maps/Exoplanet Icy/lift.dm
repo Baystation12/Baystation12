@@ -1,8 +1,13 @@
 /area/turbolift/KS7535/lifts/lift_1_ground
 	name = "Sublevel 1"
+	requires_power= 0
+	has_gravity = 1
+
 
 /area/turbolift/KS7535/lifts/lift_1_second
 	name = "Ground Level"
+	requires_power= 0
+	has_gravity = 1
 
 
 /obj/turbolift_map_holder/cargolift/KS7535/front

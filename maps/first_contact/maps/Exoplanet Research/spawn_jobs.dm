@@ -58,8 +58,8 @@ GLOBAL_LIST_EMPTY(facil_security_spawns)
 GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 /datum/spawnpoint/facil_comms
-	display_name =  "Research Facility Security Spawn"
-	restrict_job = list("ONI Security Guard","ONI Security Squad Leader")
+	display_name =  "Research Facility Comms Spawn"
+	restrict_job = list("Communications Operator")
 
 /datum/spawnpoint/facil_comms/New()
 	..()
