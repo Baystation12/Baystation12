@@ -93,3 +93,28 @@
 
 /datum/gear/uniform/frontier
 	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/uniform/yamakari
+	display_name = "yamakari jumpsuit"
+	path = /obj/item/clothing/under/yamakari
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/uniform/yamakari/sec
+	display_name = "yamakari jumpsuit, security"
+	path = /obj/item/clothing/under/yamakari/security
+	allowed_roles = list(/datum/job/detective, /datum/job/guard)
+
+/datum/gear/uniform/yamakari/eng
+	display_name = "yamakari jumpsuit, engineering"
+	path = /obj/item/clothing/under/yamakari/engineering
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist)
+
+/datum/gear/uniform/yamakari/med
+	display_name = "yamakari jumpsuit, medical"
+	path = /obj/item/clothing/under/yamakari/medical
+	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/roboticist)
+
+/datum/gear/uniform/yamakari/sci
+	display_name = "yamakari jumpsuit, science"
+	path = /obj/item/clothing/under/yamakari/science
+	allowed_roles = NANOTRASEN_ROLES

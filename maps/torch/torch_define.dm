@@ -61,7 +61,8 @@
 		"Tersten",
 		"Magnitka",
 		"Yuklid V",
-		"Cinu"
+		"Cinu",
+		"Taphao Kaew"
 		)
 
 	home_system_choices = list(
@@ -79,7 +80,8 @@
 		"Gavil",
 		"Ursa",
 		"Yuklid",
-		"Lucinaer"
+		"Lucinaer",
+		"Chalawan"
 		)
 
 	faction_choices = list(
@@ -97,7 +99,8 @@
 		"Hephaestus Industries",
 		"Free Trade Union",
 		"Commonwealth of Ahdomai",
-		"Positronic Union"
+		"Positronic Union",
+		"Yamakari Fleshworks"
 		)
 
 	religion_choices = list(

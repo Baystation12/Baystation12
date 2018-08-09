@@ -104,6 +104,31 @@
 	icon_state = "necklace"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
+/obj/item/clothing/accessory/necklace/collar/
+	name = "Holo-collar"
+	desc = "An expensive holo-collar for the modern day rentie."
+	icon_state = "holocollar"
+	item_state = "holocollar"
+	overlay_state = "holocollar"
+	w_class = ITEM_SIZE_SMALL
+	slot_flags = SLOT_MASK | SLOT_TIE
+	body_parts_covered = 0
+	high_visibility = 1
+
+/obj/item/clothing/accessory/necklace/collar/attack_self(mob/user as mob)
+	to_chat(user,"<span class='notice'>[name]'s interface is projected onto your hand.</span>")
+
+	var/str = copytext(reject_bad_text(input(user,"Tag text?","Set tag","")),1,MAX_NAME_LEN)
+
+	if(!str || !length(str))
+		to_chat(user,"<span class='notice'>[name]'s tag set to be blank.</span>")
+		name = initial(name)
+		desc = initial(desc)
+	else
+		to_chat(user,"<span class='notice'>You set the [name]'s tag to '[str]'.</span>")
+		name = initial(name) + " ([str])"
+		desc = initial(desc) + " The tag says \"[str]\"."
+
 //Misc
 /obj/item/clothing/accessory/kneepads
 	name = "kneepads"

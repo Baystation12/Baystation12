@@ -101,3 +101,7 @@
 	display_name = "Free Trade Union pin"
 	path = /obj/item/clothing/accessory/ftupin
 
+/datum/gear/accessory/collar
+	display_name = "Vat-Grown Collar"
+	path = /obj/item/clothing/accessory/necklace/collar
+
