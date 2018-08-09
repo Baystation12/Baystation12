@@ -77,6 +77,16 @@ medals
 		SPECIES_UNATHI = 'icons/mob/species/unathi/solgov_accessory.dmi'
 		)
 
+/obj/item/clothing/accessory/solgov/torch_patch/observatory
+	name = "\improper Observatory patch"
+	desc = "A laminated shoulder patch, carrying the symbol of the Sol Central Government Expeditionary Corpss Observatory, or SCGEO for short, the eyes and ears of the Expeditionary Corps' missions."
+	icon_state = "ecpatch1"
+
+/obj/item/clothing/accessory/solgov/torch_patch/fieldops
+	name = "\improper Field Operations patch"
+	desc = "A radiation-shielded shoulder patch, carrying the symbol of the Sol Central Government Expeditionary Corps Field Operations, or SCGECFO for short, the hands-on workers of every Expeditionary Corps mission."
+	icon_state = "ecpatch2"
+
 /obj/item/clothing/accessory/solgov/fleet_patch
 	name = "\improper First Fleet patch"
 	desc = "A fancy shoulder patch carrying insignia of First Fleet, the Sol Guard, stationed in Sol."
