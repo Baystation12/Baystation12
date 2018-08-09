@@ -1,0 +1,482 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/wall/titanium,/area/unishi/library)
+"ac" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/unishi/library)
+"ad" = (/turf/simulated/wall/titanium,/area/space)
+"ae" = (/obj/structure/table/woodentable,/obj/random/advdevice,/obj/item/device/flashlight/lamp,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"af" = (/obj/structure/bed/chair/comfy/brown{icon_state = "comfychair_preview"; dir = 8},/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ag" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/obj/item/device/flashlight/lamp,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ah" = (/obj/structure/bed/chair/comfy/brown{icon_state = "comfychair_preview"; dir = 8},/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ai" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"aj" = (/obj/machinery/vending/coffee,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ak" = (/turf/simulated/wall,/area/unishi/library)
+"al" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/carpet/red,/area/unishi/library)
+"am" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/carpet/red,/area/unishi/library)
+"an" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ao" = (/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ap" = (/obj/machinery/bookbinder,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"aq" = (/obj/structure/bookcase,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ar" = (/obj/structure/bookcase/manuals/engineering,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"as" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/carpet/red,/area/unishi/library)
+"at" = (/obj/structure/bookcase/manuals/medical,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"au" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/carpet/red,/area/unishi/library)
+"av" = (/obj/structure/bookcase/manuals/research_and_development,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"aw" = (/obj/structure/bookcase/manuals/xenoarchaeology,/turf/simulated/floor/carpet/red,/area/unishi/library)
+"ax" = (/turf/simulated/wall/titanium,/area/unishi/chem)
+"ay" = (/turf/simulated/wall,/area/unishi/chem)
+"az" = (/obj/machinery/door/airlock/glass/research,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/unishi/library)
+"aA" = (/obj/structure/closet/secure_closet/chemical,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aB" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aC" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aD" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/chem)
+"aE" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"aF" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/effect/floor_decal/cti,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"aG" = (/turf/simulated/wall/r_wall,/area/unishi/common)
+"aH" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/solar_control,/obj/item/weapon/circuitboard/roboprinter,/obj/item/device/bot_kit,/turf/simulated/floor,/area/unishi/common)
+"aI" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/mecha/gygax/main,/obj/item/integrated_circuit/sensor/proximity/proximity,/obj/item/integrated_circuit/converter/text2num,/turf/simulated/floor,/area/unishi/common)
+"aJ" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/roboprinter,/obj/item/weapon/circuitboard/rdserver,/obj/item/weapon/circuitboard/helm,/turf/simulated/floor,/area/unishi/common)
+"aK" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/robotics,/obj/item/weapon/circuitboard/protolathe,/obj/item/weapon/circuitboard/helm,/turf/simulated/floor,/area/unishi/common)
+"aL" = (/obj/machinery/smartfridge/chemistry,/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aM" = (/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aN" = (/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,/obj/item/weapon/reagent_containers/chem_disp_cartridge/copper,/obj/item/weapon/reagent_containers/chem_disp_cartridge/imidazoline,/obj/structure/table/rack,/obj/item/weapon/reagent_containers/syringe/antitoxin,/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aO" = (/obj/structure/sign/chemistry{icon_state = "chemistry"; dir = 4},/turf/simulated/wall/r_wall,/area/unishi/chem)
+"aP" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"aQ" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"aR" = (/obj/structure/closet/crate/secure/biohazard,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor,/area/unishi/common)
+"aS" = (/turf/simulated/floor,/area/unishi/common)
+"aT" = (/obj/structure/closet/secure_closet/xenoarchaeologist,/turf/simulated/floor,/area/unishi/common)
+"aU" = (/obj/machinery/chemical_dispenser,/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aV" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"aW" = (/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/dropper,/turf/simulated/floor/tiled/dark,/area/unishi/chem)
+"aX" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"aY" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"aZ" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/turf/simulated/floor,/area/unishi/common)
+"ba" = (/obj/structure/closet/crate/secure/phoron,/turf/simulated/floor,/area/unishi/common)
+"bb" = (/obj/structure/closet/secure_closet/scientist,/turf/simulated/floor,/area/unishi/common)
+"bc" = (/obj/structure/bed/chair/office/dark{dir = 1},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"bd" = (/turf/simulated/wall/r_wall,/area/unishi/chem)
+"be" = (/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bf" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bg" = (/obj/structure/closet/crate/hydroponics,/turf/simulated/floor,/area/unishi/common)
+"bh" = (/obj/structure/closet/crate/hydroponics/beekeeping,/turf/simulated/floor,/area/unishi/common)
+"bi" = (/obj/structure/closet/crate/rcd,/turf/simulated/floor,/area/unishi/common)
+"bj" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"bk" = (/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/glass/beaker/large,/obj/item/weapon/reagent_containers/glass/beaker/bluespace,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/turf/simulated/floor/tiled/white,/area/unishi/chem)
+"bl" = (/turf/simulated/wall,/area/unishi/common)
+"bm" = (/turf/simulated/wall,/area/unishi/classroom)
+"bn" = (/turf/simulated/wall/r_wall,/area/unishi/classroom)
+"bo" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bp" = (/obj/structure/stairs/east,/turf/simulated/floor,/area/unishi/common)
+"bq" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor,/area/unishi/common)
+"br" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/turf/simulated/floor,/area/unishi/common)
+"bs" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bt" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bu" = (/obj/structure/bed/chair,/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bv" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/wall/r_wall,/area/unishi/classroom)
+"bw" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bx" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"by" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bz" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/common)
+"bA" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor,/area/unishi/common)
+"bB" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/ladder,/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor,/area/unishi/common)
+"bC" = (/obj/structure/table/standard,/obj/item/weapon/pen/blue,/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bD" = (/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bE" = (/obj/structure/table/standard,/obj/item/weapon/pen/crayon/green,/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bF" = (/obj/structure/closet/firecloset,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bG" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bH" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bI" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bJ" = (/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{color = "#ff0000"; dir = 1},/obj/machinery/atmospherics/pipe/zpipe/up/supply{color = "#0000ff"; dir = 1},/obj/structure/cable/yellow{d1 = 16; d2 = 0; icon_state = "16-0"},/obj/structure/cable/yellow,/turf/simulated/floor,/area/unishi/common)
+"bK" = (/obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{color = "#ff0000"; dir = 1},/obj/machinery/atmospherics/pipe/zpipe/down/supply{color = "#0000ff"; dir = 1},/obj/structure/cable/yellow{d1 = 32; d2 = 1; icon_state = "32-1"},/turf/simulated/open,/area/unishi/common)
+"bL" = (/obj/structure/bed/chair,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bM" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bN" = (/obj/machinery/floodlight,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bO" = (/obj/item/device/flashlight/upgraded,/turf/simulated/floor,/area/unishi/common)
+"bP" = (/obj/structure/table/standard,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bR" = (/obj/structure/table/standard,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bS" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bT" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/unishi/classroom)
+"bU" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"bV" = (/obj/machinery/portable_atmospherics/canister/hydrogen,/turf/simulated/floor,/area/unishi/common)
+"bW" = (/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/turf/simulated/floor,/area/unishi/common)
+"bX" = (/obj/machinery/portable_atmospherics/canister/sleeping_agent,/turf/simulated/floor,/area/unishi/common)
+"bY" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"bZ" = (/obj/structure/table/standard,/obj/random/powercell,/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"ca" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"cb" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"cc" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor,/area/unishi/common)
+"cd" = (/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor,/area/unishi/common)
+"ce" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor,/area/unishi/common)
+"cf" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"cg" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"ch" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/unishi/common)
+"ci" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/unishi/common)
+"cj" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor,/area/unishi/common)
+"ck" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor,/area/unishi/common)
+"cl" = (/obj/item/modular_computer/telescreen/preset/generic{dir = 1; pixel_y = -28},/obj/structure/table/glass,/obj/item/weapon/pen/green,/obj/item/weapon/paper_bin,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"cm" = (/obj/item/modular_computer/telescreen/preset/generic{dir = 1; pixel_y = -28},/turf/simulated/floor/tiled/dark,/area/unishi/classroom)
+"cn" = (/obj/machinery/portable_atmospherics/canister/phoron,/turf/simulated/floor,/area/unishi/common)
+"co" = (/obj/structure/dispenser,/turf/simulated/floor,/area/unishi/common)
+"cp" = (/turf/simulated/wall/titanium,/area/unishi/meeting)
+"cq" = (/turf/simulated/wall,/area/unishi/meeting)
+"cr" = (/turf/simulated/wall/r_wall,/area/unishi/meeting)
+"cs" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"ct" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"cu" = (/turf/simulated/wall/r_wall,/area/unishi/toxins)
+"cv" = (/turf/simulated/wall/ocp_wall,/area/unishi/toxins)
+"cw" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cx" = (/obj/structure/bed/chair/office/comfy/black,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cy" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cz" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/meeting)
+"cA" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"cB" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"cC" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/door/blast/regular/open{dir = 4; icon_state = "pdoor0"; id = "prototype_chamber_blast"},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/toxins)
+"cD" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"cE" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"cF" = (/obj/machinery/atmospherics/pipe/simple/visible/red{icon_state = "intact"; dir = 4},/turf/simulated/wall/ocp_wall,/area/unishi/toxins)
+"cG" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/reinforced,/area/unishi/toxins)
+"cH" = (/obj/machinery/door/blast/regular{icon_state = "pdoor1"; dir = 8},/turf/simulated/floor/reinforced,/area/unishi/toxins)
+"cI" = (/obj/machinery/door/blast/regular{icon_state = "pdoor1"; dir = 8},/turf/simulated/floor/reinforced,/area/space)
+"cJ" = (/obj/structure/bed/chair/office/comfy/black{dir = 4},/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cK" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/fancy,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cL" = (/obj/structure/table/woodentable,/obj/item/weapon/pen/fancy,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cM" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/yellow,/obj/item/weapon/pen/green,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cN" = (/obj/effect/floor_decal/cti,/turf/simulated/floor/tiled/white/monotile,/area/unishi/meeting)
+"cO" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/turf/simulated/floor,/area/unishi/meeting)
+"cP" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/door/blast/regular/open{dir = 4; icon_state = "pdoor0"; id = "prototype_chamber_blast"},/turf/simulated/floor,/area/unishi/toxins)
+"cQ" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"cR" = (/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"cS" = (/obj/machinery/atmospherics/unary/vent_pump/siphon/on{icon_state = "map_vent_in"; dir = 8},/turf/simulated/floor/reinforced,/area/unishi/toxins)
+"cT" = (/obj/structure/bed/chair/office/comfy/black{dir = 4},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cU" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/item/weapon/clipboard,/obj/item/weapon/folder/white,/obj/item/weapon/pen/reagent/sleepy,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cV" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/item/weapon/folder/yellow,/obj/item/weapon/pen/green,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cW" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/item/weapon/folder/yellow,/obj/item/weapon/pen/green,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cX" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/unishi/meeting)
+"cY" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/unishi/meeting)
+"cZ" = (/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"da" = (/obj/machinery/vending/phoronresearch,/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"db" = (/obj/machinery/door/airlock/glass/science,/turf/simulated/floor/reinforced,/area/unishi/toxins)
+"dc" = (/obj/structure/bed/chair/office/comfy/black{icon_state = "comfyofficechair_preview"; dir = 1},/turf/simulated/floor/tiled,/area/unishi/meeting)
+"dd" = (/turf/simulated/floor/tiled,/area/unishi/meeting)
+"de" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/unishi/meeting)
+"df" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"dg" = (/obj/machinery/door/blast/regular/open{dir = 4; icon_state = "pdoor0"; id = "prototype_chamber_blast"},/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/unishi/toxins)
+"dh" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"di" = (/obj/structure/closet/bombcloset,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"dj" = (/obj/item/device/transfer_valve,/obj/item/device/transfer_valve,/obj/structure/table/glass,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled/techmaint,/area/unishi/toxins)
+"dk" = (/turf/simulated/floor/tiled/techmaint,/area/unishi/toxins)
+"dl" = (/turf/simulated/wall/titanium,/area/unishi/toxins)
+"dm" = (/turf/simulated/wall/titanium,/area/unishi/rnd)
+"dn" = (/turf/simulated/wall,/area/unishi/rnd)
+"do" = (/obj/machinery/door/blast/regular/open{dir = 4; icon_state = "pdoor0"; id = "prototype_chamber_blast"},/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/unishi/toxins)
+"dp" = (/obj/machinery/light,/turf/simulated/floor/tiled/steel_grid,/area/unishi/toxins)
+"dq" = (/obj/effect/shuttle_landmark/nav_unishi/nav2,/turf/space,/area/space)
+"dr" = (/obj/item/modular_computer/console/preset/research,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"ds" = (/obj/item/modular_computer/console/preset/research,/obj/random/smokes,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dt" = (/obj/machinery/autolathe,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"du" = (/obj/machinery/computer/rdconsole/core,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dv" = (/obj/structure/closet/secure_closet/crew/research,/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/item/device/flash/advanced,/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dw" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/rnd)
+"dx" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"dy" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"dz" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 6},/turf/simulated/wall/r_wall,/area/unishi/toxins)
+"dA" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 4},/turf/simulated/wall/r_wall,/area/unishi/toxins)
+"dB" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 1},/turf/simulated/wall/r_wall,/area/unishi/toxins)
+"dC" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 10},/turf/simulated/wall/titanium,/area/unishi/toxins)
+"dD" = (/turf/simulated/wall/titanium,/area/unishi/hydro)
+"dE" = (/obj/structure/bed/chair/office{dir = 1},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dF" = (/obj/structure/bed/chair/office{dir = 1},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dG" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dH" = (/obj/structure/bed/chair/office{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dI" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dJ" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/unishi/rnd)
+"dK" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"dL" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/hydro)
+"dM" = (/obj/machinery/atmospherics/valve,/obj/machinery/vending/hydroseeds,/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"dN" = (/obj/effect/vine,/obj/machinery/vending/hydronutrients,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"dO" = (/obj/effect/vine,/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"dP" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"dQ" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor,/area/unishi/hydro)
+"dR" = (/obj/machinery/r_n_d/circuit_imprinter,/obj/item/weapon/circuitboard/mecha/gygax/peripherals,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dS" = (/obj/machinery/r_n_d/destructive_analyzer,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dT" = (/obj/machinery/r_n_d/protolathe,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dU" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/obj/item/weapon/reagent_containers/glass/bottle/Tericadone,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dV" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled,/area/unishi/rnd)
+"dW" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/unishi/rnd)
+"dX" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"dY" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"dZ" = (/obj/machinery/smartfridge,/turf/simulated/floor,/area/unishi/hydro)
+"ea" = (/obj/effect/vine,/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 8},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eb" = (/obj/machinery/atmospherics/valve{icon_state = "map_valve0"; dir = 8},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"ec" = (/obj/effect/vine,/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 1},/obj/item/seeds/bluespacetomatoseed,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"ed" = (/obj/effect/vine,/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 1},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"ee" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 10},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"ef" = (/turf/simulated/wall/titanium,/area/unishi/xenobio)
+"eg" = (/turf/simulated/wall/r_wall,/area/unishi/xenobio)
+"eh" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"ei" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/unishi/hydro)
+"ej" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 8},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"ek" = (/obj/effect/vine,/obj/machinery/atmospherics/unary/freezer{icon_state = "freezer"; dir = 8},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"el" = (/mob/living/carbon/slime,/mob/living/carbon/slime,/mob/living/carbon/human/monkey,/mob/living/carbon/human/monkey,/mob/living/carbon/human/monkey,/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"em" = (/obj/structure/window/phoronreinforced{dir = 4},/mob/living/carbon/slime,/mob/living/carbon/human/monkey,/mob/living/carbon/human/monkey,/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"en" = (/obj/structure/reagent_dispensers/watertank,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eo" = (/obj/structure/table/glass,/obj/item/device/slime_scanner,/obj/item/weapon/storage/box/monkeycubes,/obj/random/smokes,/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"ep" = (/obj/structure/table/glass,/obj/item/weapon/extinguisher,/obj/item/weapon/extinguisher,/obj/item/weapon/extinguisher,/obj/item/weapon/storage/box/monkeycubes,/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eq" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor,/area/unishi/xenobio)
+"er" = (/obj/item/seeds/random,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"es" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/unishi/hydro)
+"et" = (/obj/machinery/atmospherics/valve{icon_state = "map_valve0"; dir = 8},/obj/item/seeds/random,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eu" = (/mob/living/carbon/slime,/mob/living/carbon/human/monkey,/mob/living/carbon/human/monkey,/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"ev" = (/obj/structure/window/phoronreinforced{dir = 4},/mob/living/carbon/human/monkey,/mob/living/carbon/human/monkey,/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"ew" = (/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"ex" = (/obj/machinery/smartfridge/secure/extract,/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"ey" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/sign/xenobio_3,/turf/simulated/floor,/area/unishi/xenobio)
+"ez" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"eA" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/unishi/hydro)
+"eB" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{icon_state = "map"; dir = 8},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eC" = (/obj/effect/vine,/obj/machinery/atmospherics/unary/heater{icon_state = "heater_0"; dir = 8},/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eD" = (/obj/item/sign/medipolma,/turf/simulated/wall/titanium,/area/unishi/xenobio)
+"eE" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"eF" = (/obj/structure/window/phoronreinforced{dir = 4},/obj/structure/window/phoronreinforced,/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"eG" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eH" = (/obj/machinery/optable,/obj/item/weapon/scalpel,/obj/item/weapon/circular_saw,/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eI" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/sign/xenobio_1{icon_state = "xenobio"; dir = 4},/turf/simulated/floor,/area/unishi/xenobio)
+"eJ" = (/obj/effect/vine,/obj/machinery/atmospherics/binary/pump{dir = 8},/obj/item/seeds/random,/obj/item/seeds/random,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eK" = (/obj/effect/vine,/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eL" = (/obj/effect/vine,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eM" = (/obj/machinery/botany/editor,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eN" = (/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"eO" = (/obj/machinery/door/window/eastleft,/obj/machinery/door/window/westleft,/turf/simulated/floor/reinforced,/area/unishi/xenobio)
+"eP" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eR" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/white,/area/unishi/xenobio)
+"eS" = (/obj/machinery/door/airlock/glass/research{icon_state = "closed"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/unishi/xenobio)
+"eT" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"eU" = (/obj/effect/vine,/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 5},/obj/machinery/seed_extractor,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eV" = (/obj/effect/vine,/obj/machinery/atmospherics/binary/pump{dir = 4},/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eW" = (/obj/effect/vine,/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eX" = (/obj/effect/vine,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/obj/item/seeds/random,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eY" = (/obj/machinery/botany/extractor,/turf/simulated/floor/tiled,/area/unishi/hydro)
+"eZ" = (/turf/simulated/wall/titanium,/area/unishi/common)
+"fa" = (/obj/structure/flora/pottedplant/overgrown,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fb" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fc" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fd" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 1},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fe" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"ff" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fg" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fh" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/unishi/common)
+"fi" = (/obj/machinery/door/airlock/science,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/unishi/common)
+"fj" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/unishi/common)
+"fk" = (/obj/machinery/door/airlock/science,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/unishi/common)
+"fl" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/space)
+"fm" = (/obj/structure/flora/pottedplant/aquatic,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fn" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fo" = (/obj/machinery/computer/prof1,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fp" = (/obj/structure/table/woodentable,/obj/item/weapon/circuitboard/mecha/gygax/targeting,/obj/random/snack,/obj/item/device/flashlight/lamp,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fq" = (/obj/machinery/computer/prof2,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fr" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/item/weapon/plantspray/weeds,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fs" = (/obj/structure/bed/chair/office/comfy/black{dir = 4},/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"ft" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/device/flashlight/lamp,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fu" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fv" = (/obj/structure/bed/chair/office/comfy/black{icon_state = "comfyofficechair_preview"; dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fw" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fx" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/floor_decal/cti,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white/monotile,/area/unishi/common)
+"fy" = (/obj/structure/bed/chair/office/comfy/black{icon_state = "comfyofficechair_preview"; dir = 1},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fz" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fA" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/item/weedkiller,/turf/simulated/floor/tiled/dark,/area/unishi/common)
+"fB" = (/turf/simulated/wall/titanium,/area/unishi/smresearch)
+"fC" = (/turf/simulated/wall/r_wall,/area/unishi/smresearch)
+"fD" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "Biohazard"; name = "Biohazard Shutter"; opacity = 0},/obj/machinery/door/airlock/hatch,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/unishi/smresearch)
+"fE" = (/turf/simulated/wall/ocp_wall,/area/unishi/smresearch)
+"fF" = (/obj/structure/closet/radiation,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/dark,/area/unishi/smresearch)
+"fG" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/smresearch)
+"fH" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/unishi/smresearch)
+"fI" = (/obj/structure/closet/radiation,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/unishi/smresearch)
+"fJ" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unishi/smresearch)
+"fK" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/unishi/smresearch)
+"fL" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"fM" = (/obj/machinery/atmospherics/pipe/tank/phoron,/obj/structure/window/phoronreinforced{dir = 8},/turf/simulated/floor,/area/unishi/smresearch)
+"fN" = (/obj/machinery/atmospherics/portables_connector,/obj/structure/window/phoronreinforced{dir = 4},/turf/simulated/floor,/area/unishi/smresearch)
+"fO" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/techfloor/grid,/area/unishi/smresearch)
+"fP" = (/obj/machinery/atmospherics/pipe/tank/air,/obj/structure/window/phoronreinforced{dir = 8},/turf/simulated/floor,/area/unishi/smresearch)
+"fQ" = (/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,/turf/simulated/floor,/area/unishi/smresearch)
+"fR" = (/obj/machinery/atmospherics/pipe/tank/hydrogen,/obj/machinery/light/small,/turf/simulated/floor,/area/unishi/smresearch)
+"fS" = (/obj/machinery/atmospherics/pipe/tank/nitrogen,/turf/simulated/floor,/area/unishi/smresearch)
+"fT" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor,/area/unishi/smresearch)
+"fU" = (/obj/structure/closet/crate/secure/phoron/experimentalsm,/turf/simulated/floor,/area/unishi/smresearch)
+"fV" = (/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "Biohazard"; name = "Biohazard Shutter"; opacity = 0},/turf/simulated/floor,/area/unishi/smresearch)
+"fW" = (/obj/effect/decal/remains,/obj/item/clothing/under/rank/chief_engineer,/obj/random/shoes,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"fX" = (/obj/machinery/atmospherics/binary/pump/high_power,/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{dir = 8},/turf/simulated/floor,/area/unishi/smresearch)
+"fY" = (/obj/machinery/atmospherics/binary/pump/high_power,/obj/machinery/door/window,/obj/structure/window/phoronreinforced{dir = 4},/turf/simulated/floor,/area/unishi/smresearch)
+"fZ" = (/obj/machinery/atmospherics/binary/pump/high_power,/obj/machinery/door/window,/obj/structure/window/phoronreinforced{dir = 8},/turf/simulated/floor,/area/unishi/smresearch)
+"ga" = (/obj/machinery/atmospherics/binary/pump/high_power,/obj/structure/window/phoronreinforced,/turf/simulated/floor,/area/unishi/smresearch)
+"gb" = (/obj/machinery/atmospherics/binary/pump/high_power/on{target_pressure = 15000},/turf/simulated/floor,/area/unishi/smresearch)
+"gc" = (/turf/space,/area/unishi/smresearch)
+"gd" = (/obj/effect/decal/cleanable/vomit,/obj/item/weapon/defibrillator,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"ge" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 5},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gf" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow,/obj/effect/decal/remains,/obj/item/clothing/suit/storage/toggle/labcoat,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gg" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gh" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gi" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/yellow,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gj" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 9},/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gk" = (/obj/machinery/atmospherics/pipe/vent/high_volume{dir = 4},/turf/space,/area/unishi/smresearch)
+"gl" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/wall/titanium,/area/unishi/smresearch)
+"gm" = (/obj/structure/closet/crate/secure/phoron/experimentalsm,/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor,/area/unishi/smresearch)
+"gn" = (/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "Biohazard"; name = "Biohazard Shutter"; opacity = 0},/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor,/area/unishi/smresearch)
+"go" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/effect/decal/remains,/obj/effect/decal/cleanable/blood,/obj/item/clothing/suit/storage/toggle/labcoat,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gp" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gq" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gr" = (/obj/machinery/atmospherics/pipe/manifold/visible/black{icon_state = "map"; dir = 1},/obj/item/remains,/obj/random/shoes,/obj/item/clothing/suit/storage/toggle/labcoat,/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gs" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/effect/decal/cleanable/vomit,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gt" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/light/small,/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gu" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/machinery/atmospherics/binary/pump/high_power/on{target_pressure = 15000},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gv" = (/obj/machinery/power/emitter/anchored/on,/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gw" = (/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gx" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{dir = 4},/turf/simulated/wall/titanium,/area/unishi/smresearch)
+"gy" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 4},/turf/space,/area/space)
+"gz" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 10},/turf/space,/area/space)
+"gA" = (/obj/effect/decal/cleanable/ash,/obj/effect/decal/cleanable/blood,/obj/item/clothing/under/blazer,/obj/item/modular_computer/console/preset/engineering{icon_state = "console"; dir = 4},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gB" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/remains,/obj/random/shoes,/obj/item/clothing/under/bluepyjamas,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gC" = (/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gD" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gE" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/turf/simulated/floor,/area/unishi/smresearch)
+"gF" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,/turf/simulated/floor,/area/unishi/smresearch)
+"gG" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 6},/turf/space,/area/space)
+"gH" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 9},/turf/space,/area/space)
+"gI" = (/obj/item/weapon/paper/crumpled/bloody{info = "I FUCKING KNEW that piece of shit was no good. To whoever finds this, his name is Robert Moreno. He is one of the undergrads here, or at least his story went. The fucker lured us here on the pretense of a huge emergency, and the second we came in, the shutters closed behind us. We have been hearing gunshots through the ship throughout. The emitter was locked and on, and kept hitting that rock thing that one of the profs was studying, and we cant get the damn thing to stop. It chewed through everything we put in front of it and it doesnt look like it's stopping any time soon. The grad student in charge of this monstrosity is screaming and telling us that it's all over. We've been vomiting non stop, and I think our time here is running out."},/obj/item/usedcryobag,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gJ" = (/obj/item/device/geiger,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gK" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gL" = (/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 6},/obj/item/weapon/book/manual/engineering_construction,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gM" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal{icon_state = "map_universal"; dir = 4},/obj/machinery/door/airlock/hatch{dir = 8},/turf/simulated/floor,/area/unishi/smresearch)
+"gN" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"gO" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 6},/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"gP" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 10},/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"gQ" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 5},/turf/space,/area/space)
+"gR" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/remains,/obj/item/clothing/suit/storage/toggle/labcoat,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gS" = (/obj/effect/decal/cleanable/blood,/obj/item/clothing/suit/storage/toggle/labcoat,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gT" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gU" = (/obj/machinery/atmospherics/trinary/filter/m_filter{dir = 8},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gV" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"gW" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/obj/machinery/atmospherics/pipe/simple/hidden/universal{icon_state = "map_universal"; dir = 4},/turf/simulated/floor,/area/unishi/smresearch)
+"gX" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/obj/machinery/power/supermatter/inert{color = ""},/obj/machinery/mass_driver,/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"gY" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"gZ" = (/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "Biohazard"; name = "Biohazard Shutter"; opacity = 0},/obj/effect/decal/remains,/obj/random/shoes,/turf/simulated/floor,/area/unishi/smresearch)
+"ha" = (/obj/item/modular_computer/console/preset/engineering{dir = 1},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"hb" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/effect/decal/remains,/obj/random/shoes,/obj/machinery/light/small,/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"hc" = (/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 5},/turf/simulated/floor/tiled/techfloor,/area/unishi/smresearch)
+"hd" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 5},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"he" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 9},/turf/simulated/floor/reinforced/nitrogen/engine,/area/unishi/smresearch)
+"hf" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/wall/titanium,/area/unishi/smresearch)
+"hg" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor,/area/unishi/smresearch)
+"hh" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/reinforced/nitrogen,/area/unishi/smresearch)
+"hi" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/turf/simulated/wall/ocp_wall,/area/unishi/smresearch)
+"hj" = (/turf/simulated/floor,/area/unishi/smresearch)
+"hk" = (/obj/structure/window/phoronreinforced{dir = 4},/turf/simulated/floor,/area/unishi/smresearch)
+"hl" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/turf/simulated/wall/titanium,/area/unishi/smresearch)
+"hm" = (/obj/machinery/atmospherics/unary/engine{dir = 1},/turf/simulated/wall/titanium,/area/unishi/smresearch)
+"hn" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 5},/turf/space,/area/unishi/smresearch)
+"ho" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 4},/turf/space,/area/unishi/smresearch)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadabaeafagahaiafajabadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakalamamanaoaoapakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakaqaqarasataqaqakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakauaoaoasaoaoaoakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakavavawasataqaqakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxaxayayayakazacacacakadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxaAaBaCaDaEaFaGaHaIaJaKadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaxaLaMaNaOaPaQaGaRaSaSaTadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaxaUaMaVaWaXaYaZaSaSbabbadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaybcaMaMbdbebfaGbgbhbibbadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaybjbjbkbdbebfaGaGaGblbladadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbnbnbnbnbobfaSbpaGbqbradadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbsbtbubvbwbxbybybzbAbBadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbCbDbEbnbFbGbHbIblbJbKadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbLbDbsbnbnbMbebNblaSbOadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbPbQbRbSbTbUbeaGblblbladadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbsbDbsbDbnbfbeaGbVbWbXadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbYbDbZcabncbbeaGcccdceadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbmbDbDbDbDbncfcgchcicjckadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadbmclcmcmcmbnbfbeaGcncncoadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadcpcqcrcrcrcrcrcsctcucucvcvcvcvadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadcpcwcxcxcxcyczcAcBcCcDcEcFcGcHcIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadcpcJcKcLcMcNcObfbecPcQcRcFcScvadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadcpcTcUcVcWcXcYbUbecPcZdacvdbcvadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadcpcwdcdcdcdddecfdfdgdhdidjdkdladaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddmdndndndndndncbbedocZdpdkdkdladaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddmdrdsdtdudvdwdxdycudzdAdBdBdCdDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddmdEdFdGdHdIdJdKbwdLdMdNdOdOdPdQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddmdRdSdTdUdVdWdXdYdZeaebecedeedQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadefegegegegegegcseheiejekdOdOdPdQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadefelemeneoepeqdxereseaetededeedQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadefeuevewewexeycfezeAeBeCdOdOdPdQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadeDeEeFeGeweHeIbfbeeseaeJeKeLeMdQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadefeNeOePeQeReSbUeTeseUeVeWeXeYdQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadefegegegegegegbfaGaGaGaGaGaGeZeZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadeZfafbdffcfdaEfedfdfffdffgcteZeZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadeZfhfiblfhfiblbfblfhfiblfjfkeZeZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflfmbefnblfofnblbfblfpfnblfqbefrfhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflfsftfublfvfwblfxblfvfwblfyfzfAfhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafBfBfCfCfCfCfCfCfDfCfCfCfCfCfCfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafBfBfEfEfEfEfEfFfGfHfEfEfEfEfEfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafBfBfEfEfEfEfEfIfJfKfEfEfEfEfEfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafBfBfCfCfCfCfCfCfDfCfCfCfCfCfCfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafBfBfBfCfCfLfMfNfOfPfQfRfSfTfBfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafBfBfBfUfVfWfXfYfOfZgagagbgafBfBadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfCfCgdgegfggghghgighgjfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagkglglgmgngogpgqgrgsgtgugvgwglgxgygygygygygygygygygygygygygygygygygygzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfCfCgAgBgCgDgCgEgFgEgEfEfBgGgygygygygygygygygygygygygygygygygygHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfUfVgCgIgJgKgLgMgNgOgPfEfBgQgygygygygygygygygygygygygygygygygygzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfCfCgRgSgTgUgVgWgNgXgYfEfBgGgygygygygygygygygygygygygygygygygygHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfUgZgChahahbhcgWhdhegYfEfBgQgygygygygygygygygygygygygygygygygygzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfBfBfBfBfBhfhgfEhghhhifEfBgGgygygygygygygygygygygygygygygygygygHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcfBfBfBfBfBfBfBhfhjhjhkhhhlfBfBgQgygygygygygygygygygygygygygygygygygzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcgcgcgcfBfBfBfBhmfBfBfBhhhnhohogygygygygygygygygygygygygygygygygygygHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
