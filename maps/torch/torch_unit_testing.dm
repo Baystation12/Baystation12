@@ -132,6 +132,7 @@
 		/area/errant_pisces,
 		/area/lar_maria,
 		/area/map_template,
+		/area/unishi,
 		/area/exoplanet
 	)
 
