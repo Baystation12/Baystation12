@@ -69,3 +69,6 @@
 
 /area/asteroid_listening/ground/interior/commanderroom
 	name = "Listening Post Commanding Officer Quarters"
+
+/area/asteroid_listening/ground/interior/commsequipment
+	name = "Listening Post Communications Array"

@@ -248,7 +248,7 @@
 "eN" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
 "eO" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
 "eP" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
-"eQ" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/machinery/door/blast/shutters{id = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/medical)
+"eQ" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/machinery/door/blast/shutters{begins_closed = 0; id = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/medical)
 "eR" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/darkbasement)
 "eS" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
 "eT" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/janitor)
