@@ -63,7 +63,7 @@
 // Seed noun datums
 #define SEED_NOUN_SPORES          "spores"
 #define SEED_NOUN_PITS            "pits"
-#define SEED_NOUN_NODES           "notes"
+#define SEED_NOUN_NODES           "nodes"
 #define SEED_NOUN_CUTTINGS        "cuttings"
 #define SEED_NOUN_SEEDS           "seeds"
 
