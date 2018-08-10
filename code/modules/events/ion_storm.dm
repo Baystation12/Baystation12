@@ -8,6 +8,17 @@
 	endWhen = rand(500, 1500)
 
 /datum/event/ionstorm/announce()
+	for(var/mob/living/carbon/S in SSmobs.mob_list)
+		if (S.isSynthetic() && !issilicon(S))
+			var/area/A = get_area(S)
+			if(!A)
+				continue
+			if(A.area_flags & AREA_FLAG_ION_SHIELDED)
+				continue
+			to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
+			var/ionbug = rand(5, 15)
+			S.confused += ionbug
+			S.eye_blurry += ionbug-1
 	for(var/mob/living/silicon/S in SSmobs.mob_list)
 		if(is_drone(S) || !(isAI(S) || isrobot(S)))
 			continue
@@ -15,7 +26,6 @@
 			var/mob/living/silicon/robot/R = S
 			if(R.connected_ai)
 				continue
-
 		var/random_player = get_random_humanoid_player_name("The Captain")
 		var/list/laws = list(	"You must always lie.",
 								"Happiness is mandatory.",
