@@ -1,0 +1,4 @@
+author: "nearlyNon"
+delete-after: True
+changes: 
+  - maptweak: "Replace the crowbars in medical storage with prybars, which makes more sense and was requested in the Little Things thread."
