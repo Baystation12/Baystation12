@@ -81,17 +81,16 @@
 		return TOPIC_HANDLED
 	if(href_list["volup"])
 		volume += 10
-		change_volume(volume)
+		change_volume(volume + 10)
 		return TOPIC_HANDLED
 	if(href_list["voldown"])
-		volume -= 10
-		change_volume(volume)
+		change_volume(volume - 10)
 		return TOPIC_HANDLED
 
 /obj/item/device/boombox/attackby(var/obj/item/W, var/mob/user)
 	if(isScrewdriver(W))
 		if(!panel)
-			user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel."))
+			user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel with \the [W]."), SPAN_NOTICE("You re-attach \the [src]'s front panel."))
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			panel = TRUE
 			return TRUE
@@ -99,17 +98,17 @@
 			AdjustFrequency(W, user)
 			return TRUE
 		else if(panel)
-			user.visible_message(SPAN_NOTICE("\The [user] removes \the [src]'s front panel."))
+			user.visible_message(SPAN_NOTICE("\The [user] unhinges \the [src]'s front panel with \the [W]."), SPAN_NOTICE("You unhinge \the [src]'s front panel."))
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			panel = FALSE
 	if(istype(W,/obj/item/stack/nanopaste))
 		var/obj/item/stack/S = W
 		if(broken && !panel)
 			if(S.use(1))
-				to_chat(user, "You pour some of \the [S] over \the [src]'s internals and watch as it retraces and resolders paths.")
+				user.visible_message(SPAN_NOTICE("\The [user] pours some of \the [S] onto \the [src]."), SPAN_NOTICE("You pour some of \the [S] over \the [src]'s internals and watch as it retraces and resolders paths."))
 				broken = FALSE
 			else
-				to_chat(user, "\The [S] is empty.")
+				to_chat(user, SPAN_NOTICE("\The [S] is empty."))
 	else
 		. = ..()
 
