@@ -7,8 +7,9 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
 	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
 		try to protect yourself and what's important to you. You aren't here to <i>cause</i> trouble, \
-		you're just willing (and equipped) to go to extremes to <b>stop</b> it. \
-		Your job is to oppose the other antagonists, should they threaten you, in ways that aren't quite legal. \
+		you're just willing (and equipped) to go to extremes to stop it. \
+		Your job is to oppose the other antagonists, <b>only if</b> they threaten you, in ways that aren't quite legal. \
+		<b>You are a REACTIVE force, not an ACTIVE one. Antagonizing the crew or actively hunting antagonists will result in punitive action.</b> \
 		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
