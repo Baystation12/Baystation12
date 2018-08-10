@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Boomboxes now have adjustable volume."
-  - tweak: "Boomboxes can no longer be placed in backpacks."
-  - tweak: "Boomboxes now have a chance to break each time they're turned on."
