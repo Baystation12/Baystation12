@@ -80,7 +80,6 @@
 		start()
 		return TOPIC_HANDLED
 	if(href_list["volup"])
-		volume += 10
 		change_volume(volume + 10)
 		return TOPIC_HANDLED
 	if(href_list["voldown"])
