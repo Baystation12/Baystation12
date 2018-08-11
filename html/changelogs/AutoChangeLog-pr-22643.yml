@@ -1,0 +1,4 @@
+author: "Cajoes"
+delete-after: True
+changes: 
+  - rscadd: "Added flood lamps (portable) to supply offerings."
