@@ -4,6 +4,12 @@
 	random = 1
 	holder_type = /obj/machinery/camera
 	wire_count = 6
+	descriptions = list(
+		new /datum/wire_description(CAMERA_WIRE_FOCUS, "This wire runs to the camera's lens adjustment motors."),
+		new /datum/wire_description(CAMERA_WIRE_POWER, "This wire seems to be carrying a heavy current."),
+		new /datum/wire_description(CAMERA_WIRE_LIGHT, "This wire seems connected to the built-in light.", SKILL_EXPERT),
+		new /datum/wire_description(CAMERA_WIRE_ALARM, "This wire is connected to a remote signaling device of some sort.")
+	)
 
 /datum/wires/camera/GetInteractWindow(mob/user)
 
@@ -69,18 +75,3 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 		return 1
 	else
 		return 0
-
-/datum/wires/camera/examine(index, mob/user)
-	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
-		switch(index)
-			if(CAMERA_WIRE_LIGHT)
-				. = "This wire seems connected to the built-in light."
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
-		switch(index)
-			if(CAMERA_WIRE_POWER)
-				. = "This wire seems to be carrying a heavy current."
-			if(CAMERA_WIRE_ALARM)
-				. = "This wire is connected to a remote signaling device of some sort."
-			if(CAMERA_WIRE_FOCUS)
-				. = "This wire runs to the camera's lens adjustment motors."

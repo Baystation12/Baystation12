@@ -1,6 +1,11 @@
 /datum/wires/radio
 	holder_type = /obj/item/device/radio
 	wire_count = 3
+	descriptions = list(
+		new /datum/wire_description(WIRE_SIGNAL, "This wire connects several radio components."),
+		new /datum/wire_description(WIRE_RECEIVE, "This wire runs to the radio reciever.", SKILL_EXPERT),
+		new /datum/wire_description(WIRE_TRANSMIT, "This wire runs to the radio transmitter.")
+	)
 
 var/const/WIRE_SIGNAL = 1
 var/const/WIRE_RECEIVE = 2
@@ -45,16 +50,3 @@ var/const/WIRE_TRANSMIT = 4
 		if(WIRE_TRANSMIT)
 			R.broadcasting = mended && !IsIndexCut(WIRE_SIGNAL)
 	SSnano.update_uis(holder)
-
-/datum/wires/radio/examine(index, mob/user)
-	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
-		switch(index)
-			if(WIRE_RECEIVE)
-				. = "This wire runs to the radio reciever."
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
-		switch(index)
-			if(WIRE_SIGNAL)
-				. = "This wire connects several radio components."
-			if(WIRE_TRANSMIT)
-				. = "This wire runs to the radio transmitter."

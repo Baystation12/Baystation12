@@ -1,6 +1,11 @@
 /datum/wires/suit_storage_unit
 	holder_type = /obj/machinery/suit_cycler
 	wire_count = 3
+	descriptions = list(
+		new /datum/wire_description(SUIT_STORAGE_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
+		new /datum/wire_description(SUIT_STORAGE_WIRE_SAFETY, "This wire seems connected to a safety override", SKILL_EXPERT),
+		new /datum/wire_description(SUIT_STORAGE_WIRE_LOCKED, "This wire is connected to the ID scanning panel.")
+	)
 
 var/const/SUIT_STORAGE_WIRE_ELECTRIFY	= 1
 var/const/SUIT_STORAGE_WIRE_SAFETY		= 2
@@ -45,16 +50,3 @@ var/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 				S.electrified = 0
 			else
 				S.electrified = -1
-
-/datum/wires/suit_storage_unit/examine(index, mob/user)
-	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
-		switch(index)
-			if(SUIT_STORAGE_WIRE_SAFETY)
-				. = "This wire seems connected to a safety override"
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
-		switch(index)
-			if(SUIT_STORAGE_WIRE_ELECTRIFY)
-				. = "This wire seems to be carrying a heavy current."
-			if(SUIT_STORAGE_WIRE_LOCKED)
-				. = "This wire is connected to the ID scanning panel."

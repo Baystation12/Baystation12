@@ -2,6 +2,11 @@
 	holder_type = /obj/machinery/nuclearbomb
 	random = 1
 	wire_count = 7
+	descriptions = list(
+		new /datum/wire_description(NUCLEARBOMB_WIRE_LIGHT, "This wire seems to connect to the small light on the device.", SKILL_EXPERT),
+		new /datum/wire_description(NUCLEARBOMB_WIRE_TIMING, "This wire connects to the time display."),
+		new /datum/wire_description(NUCLEARBOMB_WIRE_SAFETY, "This wire connects to a safety override.")
+	)
 
 var/const/NUCLEARBOMB_WIRE_LIGHT		= 1
 var/const/NUCLEARBOMB_WIRE_TIMING		= 2
@@ -56,16 +61,3 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 		if(NUCLEARBOMB_WIRE_LIGHT)
 			N.lighthack = !mended
 			N.update_icon()
-
-/datum/wires/nuclearbomb/examine(index, mob/user)
-	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
-		switch(index)
-			if(NUCLEARBOMB_WIRE_LIGHT)
-				. = "This wire seems to connect to the small light on the device."
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
-		switch(index)
-			if(NUCLEARBOMB_WIRE_TIMING)
-				. = "This wire connects to the time display."
-			if(NUCLEARBOMB_WIRE_SAFETY)
-				. = "This wire connects to a safety override."
