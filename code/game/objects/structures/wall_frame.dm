@@ -76,7 +76,7 @@
 					return
 
 			var/wtype = ST.material.created_window
-			if (ST.use(1))
+			if (ST.use(4))
 				var/obj/structure/window/WD = new wtype(loc, 5, 1)
 				to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
 				WD.update_connections(1)
