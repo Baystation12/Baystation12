@@ -1,6 +1,11 @@
 /datum/wires/smartfridge
 	holder_type = /obj/machinery/smartfridge
 	wire_count = 3
+	descriptions = list(
+		new /datum/wire_description(SMARTFRIDGE_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
+		new /datum/wire_description(SMARTFRIDGE_WIRE_THROW, "This wire leads to the item dispensor force controls."),
+		new /datum/wire_description(SMARTFRIDGE_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT)
+	)
 
 /datum/wires/smartfridge/secure
 	random = 1
@@ -49,16 +54,3 @@ var/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 				S.seconds_electrified = -1
 		if(SMARTFRIDGE_WIRE_IDSCAN)
 			S.scan_id = 1
-
-/datum/wires/smartfridge/examine(index, mob/user)
-	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
-		switch(index)
-			if(SMARTFRIDGE_WIRE_IDSCAN)
-				. = "This wire is connected to the ID scanning panel."
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
-		switch(index)
-			if(SMARTFRIDGE_WIRE_THROW)
-				. = "This wire leads to the item dispensor force controls."
-			if(SMARTFRIDGE_WIRE_ELECTRIFY)
-				. = "This wire seems to be carrying a heavy current."

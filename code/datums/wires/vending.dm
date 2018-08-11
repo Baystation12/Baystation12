@@ -3,6 +3,12 @@
 /datum/wires/vending
 	holder_type = /obj/machinery/vending
 	wire_count = 4
+	descriptions = list(
+		new /datum/wire_description(VENDING_WIRE_THROW, "This wire leads to the item dispensor force controls."),
+		new /datum/wire_description(VENDING_WIRE_CONTRABAND, "This wire appears connected to a reserve inventory compartment."),
+		new /datum/wire_description(VENDING_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
+		new /datum/wire_description(VENDING_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT)
+	)
 
 var/const/VENDING_WIRE_THROW = 1
 var/const/VENDING_WIRE_CONTRABAND = 2
@@ -53,18 +59,3 @@ var/const/VENDING_WIRE_IDSCAN = 8
 				V.seconds_electrified = -1
 		if(VENDING_WIRE_IDSCAN)
 			V.scan_id = 1
-
-/datum/wires/vending/examine(index, mob/user)
-	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERT))
-		switch(index)
-			if(VENDING_WIRE_IDSCAN)
-				. = "This wire is connected to the ID scanning panel."
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_PROF))
-		switch(index)
-			if(VENDING_WIRE_THROW)
-				. = "This wire leads to the item dispensor force controls."
-			if(VENDING_WIRE_CONTRABAND)
-				. = "This wire appears connected to a reserve inventory compartment."
-			if(VENDING_WIRE_ELECTRIFY)
-				. = "This wire seems to be carrying a heavy current."
