@@ -40,10 +40,16 @@
 
 /datum/gear/accessory/ec_patch
 	display_name = "Expeditionary Corps patch"
-	path = /obj/item/clothing/accessory/solgov/torch_patch
+	path = /obj/item/clothing/accessory/solgov/ec_patch
 	description = "A shoulder patch representing the Expeditionary Corps."
 	flags = GEAR_HAS_TYPE_SELECTION
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+/datum/gear/accessory/torch_patch
+	display_name = "Torch mission patch"
+	path = /obj/item/clothing/accessory/solgov/torch_patch
+	description = "A shoulder patch representing the SEV Torch and its mission. Given to all the oddjobs pulled from various branches to work on the Torch."
+	allowed_branches = SOLGOV_BRANCHES
 
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
