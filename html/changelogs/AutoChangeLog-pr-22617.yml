@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "The diffuser bypass mode on the shield generator will now work on already active diffusers."
