@@ -13,8 +13,8 @@
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
 
 /obj/item/clothing/suit/storage/vest/solgov/security
-	name = "master at arms heavy armored vest"
-	desc = "A synthetic armor vest with MASTER AT ARMS printed in silver lettering on the chest. This one has added webbing and ballistic plates."
+	name = "police heavy armored vest"
+	desc = "A synthetic armor vest with POLICE printed in silver lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "secwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov/command
