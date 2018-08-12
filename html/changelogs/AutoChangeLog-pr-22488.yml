@@ -1,0 +1,6 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "The SM monitor readings will fluctuate with some errors at Trained in Engines skill and below (max 40%, 20%, and 5% at Untrained, Basic, and Trained). At master they'll be like previously."
+  - rscadd: "Turning on the emitter will recompute its efficiency (i.e. power) to a lower random value, depending on skill."
+  - rscadd: "Examining the SM at Expert skill will give some information about its integrity. At Master, it will give a guesstimate for the EER."
