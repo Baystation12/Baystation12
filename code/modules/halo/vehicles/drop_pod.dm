@@ -133,7 +133,6 @@
 
 	var/list/potential_om_targ = list()
 	for(var/obj/effect/overmap/o in (range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"]))
-		//potential_om_targ.Add("[o.name]")
 		potential_om_targ["[o.name]"] = o
 	if(isnull(potential_om_targ) || potential_om_targ.len == 0)
 		to_chat(usr,"<span class = 'notice'>No valid overmap targets in range.</span>")
