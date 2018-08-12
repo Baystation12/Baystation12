@@ -1,0 +1,4 @@
+author: "PsiOmegaDelta"
+delete-after: True
+changes: 
+  - rscadd: "Admins can now alt-click possessed mobs to efficiently kill them."
