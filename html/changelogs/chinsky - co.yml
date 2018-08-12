@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "CO2 poisoning now takes much longer to set in, around 10 times of breathing it compared to before.."
