@@ -4515,6 +4515,10 @@
 	icon_state = "techfloor_corners";
 	dir = 1
 	},
+/obj/machinery/light_switch{
+	pixel_x = -32;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/crew_quarters/safe_room/bridge)
 "kx" = (
@@ -9278,6 +9282,8 @@
 	icon_state = "techfloor_edges";
 	dir = 9
 	},
+/obj/item/weapon/deck/cards,
+/obj/item/modular_computer/laptop/preset/custom_loadout/standard,
 /turf/simulated/floor/tiled/techmaint,
 /area/crew_quarters/safe_room/bridge)
 "tX" = (

@@ -2976,14 +2976,8 @@
 /area/thruster/d1starboard)
 "agz" = (
 /obj/structure/table/standard,
-/obj/random/single{
-	icon = 'icons/obj/playing_cards.dmi';
-	icon_state = "deck";
-	name = "randomly spawned deck of cards";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/deck/cards
-	},
 /obj/random_multi/single_item/boombox,
+/obj/item/weapon/deck/cards,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "agA" = (
@@ -27682,6 +27676,10 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/machinery/light_switch{
+	pixel_x = -24;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "qEb" = (

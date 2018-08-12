@@ -9222,6 +9222,7 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/item/weapon/deck/cards,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
 "tq" = (
@@ -9234,6 +9235,7 @@
 	pixel_y = -28
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/item/modular_computer/laptop,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
 "tr" = (
@@ -16381,6 +16383,9 @@
 /obj/machinery/camera/network/second_deck{
 	c_tag = "Second Deck - Safe Room Atomspherics";
 	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/seconddeck)
