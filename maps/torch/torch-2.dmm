@@ -4163,6 +4163,10 @@
 	req_access = newlist();
 	specialfunctions = 4
 	},
+/obj/machinery/light_switch{
+	pixel_x = 24;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "jQ" = (
@@ -12705,13 +12709,8 @@
 /area/maintenance/thirddeck/foreport)
 "DI" = (
 /obj/structure/table/standard,
-/obj/random/single{
-	icon = 'icons/obj/playing_cards.dmi';
-	icon_state = "deck";
-	name = "randomly spawned deck of cards";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/deck
-	},
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
+/obj/item/weapon/deck/cards,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "DJ" = (
@@ -14168,7 +14167,7 @@
 	pixel_x = -22
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
+/obj/item/modular_computer/laptop/preset/custom_loadout/cheap,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "Hx" = (
@@ -18645,9 +18644,8 @@
 /obj/machinery/button/remote/airlock{
 	id = "civsafedoorport";
 	name = "safe room door-control";
-	pixel_x = 0;
+	pixel_x = -32;
 	pixel_y = -32;
-	req_access = newlist();
 	specialfunctions = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
