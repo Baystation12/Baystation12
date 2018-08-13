@@ -51,9 +51,9 @@
 	fire_delay = 10
 	projectile_type = /obj/item/projectile/beam/stun/heavy
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy, modifystate="energyrevolverstun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy, modifystate="energyrevolvershock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/midlaser, modifystate="energyrevolverkill"),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energyrevolverstun"),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyrevolvershock"),
+		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energyrevolverkill"),
 		)
 	req_one_access = list(access_brig, access_heads)
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
