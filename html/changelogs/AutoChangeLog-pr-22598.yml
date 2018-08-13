@@ -1,7 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "The shaker now really acts like a shaker, and must be interacted with to mix its contents (click it in hand)."
-  - maptweak: "The bar, mess hall, captain's mess, and cold storage rooms have been redesigned."
-  - tweak: "Iced tea is no longer sweet."
-  - tweak: "Added sweet tea. 3 measures of iced tea + 1 measure of sugar."
