@@ -153,7 +153,7 @@
 
 	var/track = "([ghost_follow_link(src, M)])"
 
-	message = track + remote + ": " + message
+	message = track + remote + " " + message
 	return message
 
 /mob/proc/ghost_skip_message(var/mob/observer/ghost/M)
