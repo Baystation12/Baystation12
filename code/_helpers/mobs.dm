@@ -1,9 +1,6 @@
 /atom/movable/proc/get_mob()
 	return
 
-/obj/mecha/get_mob()
-	return occupant
-
 /obj/vehicle/train/get_mob()
 	return buckled_mob
 
@@ -114,8 +111,12 @@ proc/age2agedescription(age)
 
 //checks whether this item is a module of the robot it is located in.
 /proc/is_robot_module(var/obj/item/thing)
-	if (!thing || !istype(thing.loc, /mob/living/silicon/robot))
-		return 0
+	if(!thing)
+		return FALSE
+	if(istype(thing.loc, /mob/living/heavy_vehicle))
+		return FALSE
+	if(!istype(thing.loc, /mob/living/silicon/robot))
+		return FALSE
 	var/mob/living/silicon/robot/R = thing.loc
 	return (thing in R.module.modules)
 

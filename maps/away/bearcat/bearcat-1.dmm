@@ -813,7 +813,6 @@
 /area/ship/scrap/cargo/lower)
 "bG" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/decal/mecha_wreckage/ripley,
 /obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)

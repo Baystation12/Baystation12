@@ -88,7 +88,6 @@
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/mecha_parts,
 		/obj/item/weapon/computer_hardware,
 		/obj/item/device/transfer_valve,
 		/obj/item/device/assembly/signaler,

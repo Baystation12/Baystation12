@@ -1228,7 +1228,6 @@
 /area/constructionsite/teleporter)
 "ec" = (
 /obj/machinery/mech_recharger,
-/obj/effect/decal/mecha_wreckage/mauler,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ed" = (
@@ -2277,7 +2276,6 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "hk" = (
-/obj/effect/decal/mecha_wreckage/odysseus,
 /obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
@@ -2476,10 +2474,6 @@
 "ib" = (
 /turf/space,
 /area/constructionsite/medical)
-"ic" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
-/turf/simulated/floor/airless,
-/area/constructionsite/atmospherics)
 "id" = (
 /obj/structure/closet/secure_closet/atmos_personal{
 	icon_state = "secureatmbroken";
@@ -24622,7 +24616,7 @@ hr
 hs
 hr
 hr
-ic
+hr
 hr
 hs
 hr

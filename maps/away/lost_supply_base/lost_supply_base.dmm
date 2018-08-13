@@ -1253,11 +1253,6 @@
 /obj/random/ammo,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
-"dk" = (
-/obj/effect/decal/mecha_wreckage/ripley,
-/obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/airless,
-/area/lost_supply_base)
 "dl" = (
 /obj/machinery/light_construct,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -8437,7 +8432,7 @@ cp
 cG
 cP
 cf
-dk
+fI
 dv
 dv
 dv

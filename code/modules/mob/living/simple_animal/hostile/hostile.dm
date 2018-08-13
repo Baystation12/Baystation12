@@ -49,13 +49,6 @@
 					stance = HOSTILE_STANCE_ATTACK
 					T = L
 					break
-
-		else if(istype(A, /obj/mecha)) // Our line of sight stuff was already done in ListTargets().
-			var/obj/mecha/M = A
-			if (M.occupant)
-				stance = HOSTILE_STANCE_ATTACK
-				T = M
-				break
 	return T
 
 
@@ -103,10 +96,6 @@
 		var/mob/living/L = target_mob
 		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense)
 		return L
-	if(istype(target_mob,/obj/mecha))
-		var/obj/mecha/M = target_mob
-		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
-		return M
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -120,11 +109,6 @@
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = hearers(src, dist)
-
-	for (var/obj/mecha/M in mechas_list)
-		if (M.z == src.z && get_dist(src, M) <= dist)
-			L += M
-
 	return L
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
