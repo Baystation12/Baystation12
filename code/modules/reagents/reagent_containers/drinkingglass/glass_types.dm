@@ -10,6 +10,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks
 	name = "rocks glass"
+	desc = "A robust tumbler with a thick, weighted bottom."
 	base_name = "glass"
 	base_icon = "rocks"
 	filling_states = "25;50;75;100"
@@ -18,7 +19,8 @@
 	rim_pos = "y=21;x_left=10;x_right=23"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shake
-	name = "tall cocktail glass"
+	name = "sherry glass"
+	desc = "Stemware with an untapered conical bowl."
 	base_name = "glass"
 	base_icon = "shake"
 	filling_states = "25;50;75;100"
@@ -28,6 +30,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail
 	name = "cocktail glass"
+	desc = "Fragile stemware with a stout conical bowl. Don't spill."
 	base_name = "glass"
 	base_icon = "cocktail"
 	filling_states = "33;66;100"
@@ -37,6 +40,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shot
 	name = "shot glass"
+	desc = "A small glass, designed so that its contents can be consumed in one gulp."
 	base_name = "shot"
 	base_icon = "shot"
 	filling_states = "33;66;100"
@@ -56,6 +60,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/mug
 	name = "glass mug"
+	desc = "A heavy mug with thick walls."
 	base_name = "mug"
 	base_icon = "mug"
 	filling_states = "25;50;75;100"
@@ -65,6 +70,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/wine
 	name = "wine glass"
+	desc = "A piece of elegant stemware."
 	base_name = "glass"
 	base_icon = "wine"
 	filling_states = "20;40;60;80;100"
@@ -73,8 +79,9 @@
 	rim_pos = "y=25;x_left=12;x_right=21"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/carafe
-	name = "carafe"
-	base_name = "carafe"
+	name = "pitcher"
+	desc = "A handled glass pitcher."
+	base_name = "pitcher"
 	base_icon = "carafe"
 	filling_states = "10;20;30;40;50;60;70;80;90;100"
 	volume = 120

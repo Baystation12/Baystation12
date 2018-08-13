@@ -61,7 +61,8 @@
 		overlays |= stool_cache[padding_cache_key]
 
 	if(buckled_mob)
-		cache_key = "[base_icon]-armrest-[padding_material.name]"
+		if(padding_material)
+			cache_key = "[base_icon]-armrest-[padding_material.name]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.plane = ABOVE_HUMAN_PLANE
