@@ -1456,6 +1456,7 @@
 #include "code\modules\halo\covenant\prophet.dm"
 #include "code\modules\halo\covenant\ramp.dm"
 #include "code\modules\halo\covenant\shadow.dm"
+#include "code\modules\halo\covenant\shipnames.dm"
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\flood\flood.dm"
 #include "code\modules\halo\flood\flood_npc.dm"
