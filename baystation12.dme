@@ -1450,6 +1450,7 @@
 #include "code\modules\halo\covenant\bed.dm"
 #include "code\modules\halo\covenant\drone.dm"
 #include "code\modules\halo\covenant\energybarricade.dm"
+#include "code\modules\halo\covenant\engineer.dm"
 #include "code\modules\halo\covenant\food_nipple.dm"
 #include "code\modules\halo\covenant\multitile_airlocks.dm"
 #include "code\modules\halo\covenant\ramp.dm"
