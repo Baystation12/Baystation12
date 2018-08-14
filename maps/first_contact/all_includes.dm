@@ -13,6 +13,7 @@
 	#include "../overmap_ships/om_ship_areas.dm"
 	#include "maps/corvette_spawns.dm"
 	#include "maps/UNSC_Corvette.dmm"
+	#include "maps/UNSC_Corvette2.dmm"
 
 	#include "maps/ccv_star_spawns.dm"
 	#include "maps/CCV_Star.dmm"
