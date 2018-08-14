@@ -203,6 +203,9 @@
 	dir = SOUTH
 	depth = 2
 	lift_size_x = 2
-	lift_size_y = 2
+	lift_size_y = 1
+	floor_type = /turf/simulated/floor/tiled/dark
+	wall_type = /turf/simulated/floor/tiled/dark
+
 
 	areas_to_use = list(/area/turbolift/corvette/lifts/lift_1_ground,/area/turbolift/corvette/lifts/lift_1_second)
