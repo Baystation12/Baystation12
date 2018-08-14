@@ -1,0 +1,8 @@
+ 
+author: CaelAislinn
+
+delete-after: True
+
+changes: 
+  - rscadd: "Adds Covenant features: Prophets, Drones, Engineers, multitile airlocks (2, 3 and 4 tile), energy barricades, gravity lifts."
+  - wip: "Adds placeholder Covenant features: Banshee, Shadow APC, antimatter bomb, elite bed, pinch fusion reactor."
