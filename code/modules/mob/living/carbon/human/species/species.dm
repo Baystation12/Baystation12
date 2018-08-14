@@ -601,6 +601,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		return 100
 	if(appearance_flags & HAS_SKIN_TONE_SPCR)
 		return 165
+	if(appearance_flags & HAS_SKIN_TONE_TRITON)
+		return 80
 	return 220
 
 /datum/species/proc/get_hair_styles()

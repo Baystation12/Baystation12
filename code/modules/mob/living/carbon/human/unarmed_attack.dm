@@ -120,6 +120,11 @@ var/global/list/sparring_attack_cache = list()
 	sharp = 0
 	edge = 0
 
+/datum/unarmed_attack/bite/sharp
+	attack_verb = list("bit", "chomped")
+	sharp = 1
+	edge = 1
+
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
 	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
