@@ -1,8 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Numerous new ores spawn on the asteroid. They can be compressed into bricks and ground up for reagents."
-  - tweak: "The ore processor has been rewritten and will happily eat anything containing metal or other substances, and can then fart them out as sheets."
-  - rscadd: "All material sheets now fetch a price from the supply drone, not just plat and phoron."
-  - tweak: "As a result, the prices of all materials have gone up to a minimum of their resale cost. Steel is 60 credits now, for example."
-  - tweak: "The recipe of plasteel is now steel + platinum (put the steel back through the unloader) and the recipe for osmium-carbide plasteel is plasteel + osmium."
