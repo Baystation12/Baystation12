@@ -2119,8 +2119,8 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/item/weapon/coin/gold,
-/obj/item/weapon/coin/silver,
+/obj/item/weapon/material/coin/gold,
+/obj/item/weapon/material/coin/silver,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;

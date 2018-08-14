@@ -20,7 +20,7 @@
 	..()
 	if(!material_name)
 		material_name = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(material_name)
+	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
 		qdel(src)
 		return
