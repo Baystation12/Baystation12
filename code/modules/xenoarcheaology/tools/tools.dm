@@ -149,7 +149,7 @@
 			D.coords = "[M.x]:[M.y]:[M.z]"
 			D.time = stationtime2text()
 			D.record_index = positive_locations.len + 1
-			D.material = M.mineral ? M.mineral.display_name : "Rock"
+			D.material = M.mineral ? M.mineral.ore_name : "Rock"
 
 			//find the first artifact and store it
 			if(M.finds.len)

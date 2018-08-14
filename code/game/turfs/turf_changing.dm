@@ -107,6 +107,11 @@
 		other.zone.remove(other)
 	return 1
 
+/turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)
+	if(!..())
+		return 0
+	paint_color = other.paint_color
+	return 1
 
 //No idea why resetting the base appearence from New() isn't enough, but without this it doesn't work
 /turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)

@@ -67,7 +67,7 @@
 	var/shooting_chance = 2 //The chance that items are being shot per tick
 
 	var/scan_id = 1
-	var/obj/item/weapon/coin/coin
+	var/obj/item/weapon/material/coin/coin
 	var/datum/wires/vending/wires = null
 
 /obj/machinery/vending/New()
@@ -198,7 +198,7 @@
 		wrench_floor_bolts(user)
 		power_change()
 		return
-	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
+	else if(istype(W, /obj/item/weapon/material/coin) && premium.len > 0)
 		if(!user.unEquip(W, src))
 			return
 		coin = W
@@ -453,7 +453,7 @@
 		if(!coin)
 			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
 			return
-		if(coin.string_attached)
+		if(!isnull(coin.string_colour))
 			if(prob(50))
 				to_chat(user, "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>")
 			else

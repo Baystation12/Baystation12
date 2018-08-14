@@ -1,6 +1,11 @@
 /datum/wires/suit_storage_unit
 	holder_type = /obj/machinery/suit_cycler
 	wire_count = 3
+	descriptions = list(
+		new /datum/wire_description(SUIT_STORAGE_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
+		new /datum/wire_description(SUIT_STORAGE_WIRE_SAFETY, "This wire seems connected to a safety override", SKILL_EXPERT),
+		new /datum/wire_description(SUIT_STORAGE_WIRE_LOCKED, "This wire is connected to the ID scanning panel.")
+	)
 
 var/const/SUIT_STORAGE_WIRE_ELECTRIFY	= 1
 var/const/SUIT_STORAGE_WIRE_SAFETY		= 2
@@ -16,7 +21,7 @@ var/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 		return 1
 	return 0
 
-/datum/wires/suit_storage_unit/GetInteractWindow()
+/datum/wires/suit_storage_unit/GetInteractWindow(mob/user)
 	var/obj/machinery/suit_cycler/S = holder
 	. += ..()
 	. += "<BR>The orange light is [S.electrified ? "off" : "on"].<BR>"

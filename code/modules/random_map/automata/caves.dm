@@ -1,19 +1,64 @@
+GLOBAL_LIST_INIT(weighted_minerals_sparse, \
+	list(                   \
+		"pitchblende" =  8, \
+		"platinum" =     8, \
+		"hematite" =    35, \
+		"graphene" =    35, \
+		"diamond" =      5, \
+		"gold" =         8, \
+		"silver" =       8, \
+		"phoron" =      10, \
+		"quartz" =       3, \
+		"pyrite" =       3, \
+		"spodumene" =    3, \
+		"cinnabar" =     3, \
+		"phosphorite" =  3, \
+		"rock salt" =    3, \
+		"potash" =       3, \
+		"bauxite" =      3  \
+	))
+
+GLOBAL_LIST_INIT(weighted_minerals_rich, \
+	list(                   \
+		"pitchblende" = 10, \
+		"platinum" =    10, \
+		"hematite" =    20, \
+		"graphene" =    20, \
+		"diamond" =      5, \
+		"gold" =        10, \
+		"silver" =      10, \
+		"phoron" =      20, \
+		"quartz" =       1, \
+		"pyrite" =       1, \
+		"spodumene" =    1, \
+		"cinnabar" =     1, \
+		"phosphorite" =  1, \
+		"rock salt" =    1, \
+		"potash" =       1, \
+		"bauxite" =      1  \
+	))
+
 /datum/random_map/automata/cave_system
 	iterations = 5
 	descriptor = "moon caves"
 	wall_type =  /turf/simulated/mineral
 	floor_type = /turf/simulated/floor/asteroid
 	target_turf_type = /turf/unsimulated/mask
-	var/mineral_sparse =  /turf/simulated/mineral/random
-	var/mineral_rich = /turf/simulated/mineral/random/high_chance
+
+	var/mineral_turf = /turf/simulated/mineral/random
 	var/list/ore_turfs = list()
+	var/list/minerals_sparse
+	var/list/minerals_rich
+
+/datum/random_map/automata/cave_system/New()
+	if(!minerals_sparse) minerals_sparse = GLOB.weighted_minerals_sparse
+	if(!minerals_rich)   minerals_rich =   GLOB.weighted_minerals_rich
+	..()
 
 /datum/random_map/automata/cave_system/get_appropriate_path(var/value)
 	switch(value)
-		if(DOOR_CHAR)
-			return mineral_sparse
-		if(EMPTY_CHAR)
-			return mineral_rich
+		if(DOOR_CHAR, EMPTY_CHAR)
+			return mineral_turf
 		if(FLOOR_CHAR)
 			return floor_type
 		if(WALL_CHAR)
@@ -75,11 +120,14 @@
 
 		tmp_cell = TRANSLATE_COORD(T.x, T.y)
 
+		var/minerals
 		switch (map[tmp_cell])
 			if(DOOR_CHAR)
-				new_path = mineral_sparse
+				new_path = mineral_turf
+				minerals = pickweight(minerals_sparse)
 			if(EMPTY_CHAR)
-				new_path = mineral_rich
+				new_path = mineral_turf
+				minerals = pickweight(minerals_rich)
 			if(FLOOR_CHAR)
 				new_path = floor_type
 			if(WALL_CHAR)
@@ -89,7 +137,7 @@
 			continue
 
 		num_applied += 1
-		T.ChangeTurf(new_path)
+		T.ChangeTurf(new_path, minerals)
 
 		CHECK_TICK
 

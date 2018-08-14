@@ -1,19 +1,23 @@
 /obj/item/device/boombox
 	name = "boombox"
-	desc = "A device used to emit rhythmical sounds, colloquialy refered to as a 'boombox'."
+	desc = "A device used to emit rhythmic sounds, colloquialy refered to as a 'boombox'. It's in a retro style (massive), and absolutely unwieldy."
 	icon = 'icons/obj/boombox.dmi'
 	icon_state = "off"
 	item_state = "boombox"
-	force = 5
-	w_class = ITEM_SIZE_LARGE
+	force = 7
+	w_class = ITEM_SIZE_HUGE //forbid putting something that emits loud sounds forever into a backpack
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 	var/playing = 0
 	var/track_num = 1
-	var/volume = 40
+	var/volume = 20
+	var/max_volume = 40
 	var/frequency = 1
 	var/datum/sound_token/sound_token
 	var/list/datum/track/tracks
 	var/sound_id
+	var/break_chance = 3
+	var/broken
+	var/panel = TRUE
 
 /obj/item/device/boombox/attack_self(var/mob/user)
 	interact(user)
@@ -22,6 +26,17 @@
 	. = ..()
 	sound_id = "[type]_[sequential_id(type)]"
 	tracks = setup_music_tracks(tracks)
+
+/obj/item/device/boombox/emp_act(severity)
+	boombox_break()
+
+/obj/item/device/boombox/examine(mob/user)
+	if(!(. = ..(user)))
+		return
+	if(!panel)
+		to_chat(user, SPAN_NOTICE("The front panel is unhinged."))
+	if(broken)
+		to_chat(user, SPAN_WARNING("It's broken."))
 
 /obj/item/device/boombox/Destroy()
 	stop()
@@ -34,7 +49,9 @@
 	dat += "<A href='?src=\ref[src];tracknum=-1;'>PREV</a>"
 	dat += "<A href='?src=\ref[src];start=1;'>PLAY</a>"
 	dat += "<A href='?src=\ref[src];stop=1;'>STOP</a>"
-	var/datum/browser/popup = new(user, "boombox", "BOOMTASTIC 3000", 220, 130)
+	dat += "<A href='?src=\ref[src];voldown=1;'>VOL -</a>"
+	dat += "<A href='?src=\ref[src];volup=1;'>VOL +</a>"
+	var/datum/browser/popup = new(user, "boombox", "BOOMTASTIC 3000", 290, 110)
 	popup.set_content(dat)
 	popup.open()
 
@@ -59,14 +76,38 @@
 	if(href_list["stop"])
 		stop()
 		return TOPIC_HANDLED
-	if(href_list["start"])
+	if(href_list["start"] && !broken)
 		start()
+		return TOPIC_HANDLED
+	if(href_list["volup"])
+		change_volume(volume + 10)
+		return TOPIC_HANDLED
+	if(href_list["voldown"])
+		change_volume(volume - 10)
 		return TOPIC_HANDLED
 
 /obj/item/device/boombox/attackby(var/obj/item/W, var/mob/user)
 	if(isScrewdriver(W))
-		AdjustFrequency(W, user)
-		return TRUE
+		if(!panel)
+			user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel with \the [W]."), SPAN_NOTICE("You re-attach \the [src]'s front panel."))
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			panel = TRUE
+			return TRUE
+		if(!broken)
+			AdjustFrequency(W, user)
+			return TRUE
+		else if(panel)
+			user.visible_message(SPAN_NOTICE("\The [user] unhinges \the [src]'s front panel with \the [W]."), SPAN_NOTICE("You unhinge \the [src]'s front panel."))
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			panel = FALSE
+	if(istype(W,/obj/item/stack/nanopaste))
+		var/obj/item/stack/S = W
+		if(broken && !panel)
+			if(S.use(1))
+				user.visible_message(SPAN_NOTICE("\The [user] pours some of \the [S] onto \the [src]."), SPAN_NOTICE("You pour some of \the [S] over \the [src]'s internals and watch as it retraces and resolders paths."))
+				broken = FALSE
+			else
+				to_chat(user, SPAN_NOTICE("\The [S] is empty."))
 	else
 		. = ..()
 
@@ -135,6 +176,19 @@
 	sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, T.GetTrack(), volume = volume, frequency = frequency, range = 7, falloff = 4, prefer_mute = TRUE)
 	playing = 1
 	update_icon()
+	if(prob(break_chance))
+		boombox_break()
+
+/obj/item/device/boombox/proc/boombox_break()
+	audible_message(SPAN_WARNING("\The [src]'s speakers pop with a sharp crack!"))
+	playsound(src.loc, 'sound/effects/snap.ogg', 100, 1)
+	broken = TRUE
+	stop()
+
+/obj/item/device/boombox/proc/change_volume(var/new_volume)
+	volume = Clamp(new_volume, 0, max_volume)
+	if(sound_token)
+		sound_token.SetVolume(volume)
 
 /obj/random_multi/single_item/boombox
 	name = "boombox spawnpoint"

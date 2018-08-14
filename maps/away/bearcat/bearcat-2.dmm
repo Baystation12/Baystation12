@@ -40,18 +40,6 @@
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
-"ae" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/usedup,
-/area/ship/scrap/command/bridge)
 "ag" = (
 /obj/item/modular_computer/console/preset/command,
 /turf/simulated/floor/bluegrid/airless,
@@ -195,9 +183,6 @@
 /area/ship/scrap/command/bridge)
 "aA" = (
 /obj/machinery/light,
-/obj/machinery/newscaster{
-	pixel_y = -32
-	},
 /obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 1
@@ -1316,9 +1301,6 @@
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
 	dir = 9
-	},
-/obj/machinery/newscaster{
-	pixel_x = -32
 	},
 /obj/machinery/media/jukebox,
 /turf/simulated/floor/tiled/usedup,
@@ -2890,8 +2872,8 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/item/weapon/coin/gold,
-/obj/item/weapon/coin/silver,
+/obj/item/weapon/material/coin/gold,
+/obj/item/weapon/material/coin/silver,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -13364,7 +13346,7 @@ aa
 aa
 aa
 aa
-ae
+ab
 ab
 ab
 ab

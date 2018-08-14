@@ -423,6 +423,9 @@
 /obj/item/device/flashlight/floodlamp/AltClick()
 	rotate()
 
+/obj/item/device/flashlight/lamp/floodlamp/green
+	icon_state = "greenfloodlamp"
+
 //Lava Lamps: Because we're already stuck in the 70ies with those fax machines.
 /obj/item/device/flashlight/lamp/lava
 	name = "lava lamp"

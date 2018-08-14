@@ -39,6 +39,20 @@
 	intuned -= L
 	GLOB.destroyed_event.unregister(L, src)
 
+/obj/structure/deity/pylon/OnTopic(var/mob/living/carbon/human/user, var/href_list)
+	if(href_list["vision_jump"])
+		if(istype(user))
+			to_chat(user,"<span class='warning'>You feel your body lurch uncomfortably as your consciousness jumps to \the [src]</span>")
+			if(prob(5))
+				user.vomit()
+		else
+			to_chat(user, "<span class='notice'>You jump to \the [src]</span>")
+		if(user.eyeobj)
+			user.eyeobj.setLoc(locate(href_list["vision_jump"]))
+		else
+			CRASH("[user] does not have an eyeobj")
+		. = TOPIC_REFRESH
+	. = ..()
 
 /obj/structure/deity/pylon/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(!linked_god)
@@ -51,3 +65,8 @@
 				continue
 			P.audible_message("<b>\The [P]</b> resonates, \"[text]\"")
 	to_chat(linked_god, "\icon[src] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[linked_god];jump=\ref[src];'>P</A>) [verb], [linked_god.pylon == src ? "<b>" : ""]<span class='message'><span class='body'>\"[text]\"</span></span>[linked_god.pylon == src ? "</b>" : ""]</span>")
+	if(linked_god.minions.len)
+		for(var/minion in linked_god.minions)
+			var/datum/mind/mind = minion
+			if(mind.current && mind.current.eyeobj) //If it is currently having a vision of some sort
+				to_chat(mind.current,"\icon[src] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[src];vision_jump=\ref[src];'>J</A>) [verb], <span class='message'<span class='body'>\"[text]\"</span></span>")

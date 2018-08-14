@@ -37,7 +37,7 @@
 	. = ..()
 
 	if(!isnull(material) && !istype(material))
-		material = get_material_by_name(material)
+		material = SSmaterials.get_material_by_name(material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 
@@ -245,8 +245,7 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 20, src))
 			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
-			material.place_sheet(loc)
-			material.place_sheet(loc)
+			material.place_sheet(loc, 2)
 			qdel(src)
 		return
 
