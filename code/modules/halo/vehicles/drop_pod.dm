@@ -60,10 +60,11 @@
 		return
 	var/list/valid_points = list()
 	for(var/turf/t in view(drop_point,drop_accuracy))
-		if(istype(t,/turf/simulated/floor))
-			valid_points += t
-		if(istype(t,/turf/unsimulated/floor))
-			valid_points += t
+		if(istype(t,/turf/simulated/wall))
+			continue
+		if(istype(t,/turf/unsimulated/wall))
+			continue
+		valid_points += t
 	if(isnull(valid_points))
 		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
 		return

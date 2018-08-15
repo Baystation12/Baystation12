@@ -1,8 +1,4 @@
 
-#define ESCAPE_POD_DAMAGE_CHANCE 50
-#define ESCAPE_POD_DAMAGE_MAX 20
-#define ESCAPE_POD_DAMAGE_MIN 5
-
 /obj/vehicles/drop_pod/escape_pod
 	name = "Escape Pod"
 	desc = "An emergency escape pod of unknown make, model or origin."
