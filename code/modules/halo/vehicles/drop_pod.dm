@@ -72,7 +72,7 @@
 	var/list/valid_points = list()
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		valid_points += l
-	if(isnull(valid_points))
+	if(isnull(valid_points) || valid_points.len == 0)
 		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
 		return
 	return pick(valid_points)
