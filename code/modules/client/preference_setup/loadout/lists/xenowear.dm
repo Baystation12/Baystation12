@@ -50,22 +50,16 @@
 
 //Skrell Cloth
 /datum/gear/ears/skrell/cloth/male
-	display_name = "men's headtail cloth (Skrell)"
+	display_name = "male headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_male
+	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/ears/skrell/cloth/male/New()
-	..()
-	var/list/valid_colors = list("#c20c00", "#0227f7", "#6262ff", "#454545", "#009900", "#e17291")
-	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
 /datum/gear/ears/skrell/cloth/female
-	display_name = "women's headtail cloth (Skrell)"
+	display_name = "female headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
+	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/ears/skrell/cloth/female/New()
-	..()
-	var/list/valid_colors = list("#c20c00", "#0227f7", "#6262ff", "#454545", "#009900", "#e17291")
-	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
 // IPC clothing
 /datum/gear/mask/ipc_monitor
