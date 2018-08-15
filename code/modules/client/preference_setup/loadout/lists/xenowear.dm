@@ -50,13 +50,13 @@
 
 //Skrell Cloth
 /datum/gear/ears/skrell/cloth/male
-	display_name = "Male headtail cloth (Skrell)"
+	display_name = "male headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_male
 	flags = GEAR_HAS_COLOR_SELECTION
 
 
 /datum/gear/ears/skrell/cloth/female
-	display_name = "Female headtail cloth (Skrell)"
+	display_name = "female headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	flags = GEAR_HAS_COLOR_SELECTION
 
