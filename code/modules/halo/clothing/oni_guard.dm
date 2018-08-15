@@ -1,15 +1,15 @@
 #define ONI_OVERRIDE 'code/modules/halo/clothing/oni_guard.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/item_oni.dmi'
 
-/*/obj/item/clothing/under/unsc/oni_uniform
+/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	desc = "Standard issue uniform for ONI security guards."
 	name = "ONI uniform"
 	icon = ITEM_INHAND
 	icon_override = ONI_OVERRIDE
 	item_state = "uniformoni"
 	icon_state = "uniformoni"
-	worn_state = "Oni_form"
-	starting_accessories = /obj/item/clothing/accessory/badge/tags */
+	worn_state = "oniform"
+	starting_accessories = /obj/item/clothing/accessory/badge/tags
 
 
 /obj/item/clothing/head/helmet/oni_guard

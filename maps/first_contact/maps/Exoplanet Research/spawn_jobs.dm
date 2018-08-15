@@ -59,7 +59,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 /datum/spawnpoint/facil_comms
 	display_name =  "Research Facility Comms Spawn"
-	restrict_job = list("Communications Operator")
+	restrict_job = list("ONI Communications Operator")
 
 /datum/spawnpoint/facil_comms/New()
 	..()
@@ -100,10 +100,10 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 
 /decl/hierarchy/outfit/job/facil_COMMO
-	name = "Communications Operator"
+	name = "ONI Communications Operator"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
-	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	gloves = /obj/item/clothing/gloves/thick/oni_guard
 	shoes = /obj/item/clothing/shoes/oni_guard
 	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
@@ -117,7 +117,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	name = "ONI Security Guard"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
-	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	gloves = /obj/item/clothing/gloves/thick/oni_guard
 	shoes = /obj/item/clothing/shoes/oni_guard
 	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
@@ -132,7 +132,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	name = "ONI Security Squad Leader"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
-	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	gloves = /obj/item/clothing/gloves/thick/oni_guard
 	shoes = /obj/item/clothing/shoes/oni_guard
 	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
