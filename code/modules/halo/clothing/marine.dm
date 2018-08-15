@@ -29,6 +29,15 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+/obj/item/clothing/head/helmet/marine/medic
+	name = "CH252 Helmet Medic"
+	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Visor Helmet Medic"
+	icon_state = "helmet_novisor_medic"
+	body_parts_covered = HEAD|EYES
+
 /obj/item/clothing/head/helmet/marine/visor
 	name = "CH252-V Helmet"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
@@ -53,6 +62,15 @@
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/medic
+	name = "M52B Body Armor Medic"
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "M52B Body Armor Medic"
+	icon_state = "M52B Body Armor Medic"
+	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/shoes/marine
 	name = "VZG7 Armored Boots"

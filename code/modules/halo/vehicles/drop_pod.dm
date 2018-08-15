@@ -24,7 +24,7 @@
 
 	var/launch_arm_time = 5 SECONDS
 
-	var/pod_range = 1 //Range of pod in overmap tiles
+	var/pod_range = 3 //Range of pod in overmap tiles
 
 /obj/vehicles/drop_pod/update_object_sprites()
 	overlays.Cut()

@@ -1,0 +1,320 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/wall,/area/om_ships/unscpatrol/portumbilical)
+"ac" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/portumbilical)
+"ad" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Porthallway2)
+"ae" = (/turf/simulated/floor/plating,/area/space)
+"af" = (/obj/effect/floor_decal/industrial/hatch,/turf/simulated/floor/plating,/area/space)
+"ag" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Hangarbayport)
+"ah" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"ai" = (/obj/docking_umbilical/north{name = "Port Docking Umbilical"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"aj" = (/obj/machinery/alarm,/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Porthallway2)
+"ak" = (/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"al" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"am" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"an" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"ao" = (/obj/machinery/door/firedoor,/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/portumbilical)
+"ap" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"aq" = (/obj/structure/sign/halo_floorsign/airlock{tag = "icon-airlock (NORTH)"; icon_state = "airlock"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"ar" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"as" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"at" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"au" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbayport)
+"av" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"aw" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"ax" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"ay" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"az" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"aA" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"aB" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/stairs,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"aC" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Port Hangar"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbayport)
+"aD" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"aE" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"aF" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Port Airlock"; req_access = list(142)},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"aG" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"aH" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/odstsection)
+"aI" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(142)},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"aJ" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/deckacces)
+"aK" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"aL" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"aM" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/portumbilical)
+"aN" = (/obj/machinery/vending/odstvend2,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aO" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/box/handcuffs,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aP" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/defibrillator,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/defibrillator/compact/combat/loaded,/obj/item/weapon/defibrillator/compact/combat/loaded,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aQ" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/pen,/obj/item/weapon/folder,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aR" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aS" = (/obj/structure/closet/secure_closet/personal/empty,/obj/item/squad_manager,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/device/radio/headset/unsc/odsto,/obj/item/clothing/suit/armor/special/odst/squadleader,/obj/item/clothing/suit/armor/special/odst/squadleader,/obj/item/clothing/suit/armor/special/odst/squadleader,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aT" = (/obj/effect/landmark/start/corvette_odst,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aU" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"aV" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"aW" = (/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"aX" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"aY" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"aZ" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UNSC Corvette Deck 2  Port Hangar"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"ba" = (/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bb" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bc" = (/obj/effect/landmark/start/corvette_odsto,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bd" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/obj/machinery/button/remote/blast_door{_wifi_id = "5259"; id = "5259"; name = "Blast Door Control"; pixel_x = 0; pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"be" = (/obj/effect/landmark/start/corvette_odst,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bf" = (/obj/structure/ladder/up,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"bg" = (/obj/vehicles/air/overmap/pelican/unsc{dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"bh" = (/turf/simulated/wall,/area/om_ships/unscpatrol/observation)
+"bi" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/observation)
+"bj" = (/turf/simulated/wall,/area/om_ships/unscpatrol/Porthallway2)
+"bk" = (/obj/machinery/door/airlock/halo{name = "ODST Bunks"; req_access = list(309)},/obj/machinery/door/firedoor,/obj/machinery/door/blast/regular{_wifi_id = "5259"; id = "5259"; name = "Officer Quarters Blast Door"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bl" = (/obj/machinery/door/airlock/halo{name = "ODST Bunks"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bm" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"bn" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"bo" = (/obj/machinery/portable_atmospherics/canister/oxygen{anchored = 1},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bp" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bq" = (/obj/machinery/door/airlock/halo{name = "ODST Armory"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"br" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bs" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bt" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bu" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bv" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"bw" = (/turf/simulated/floor/tiled/dark,/area/turbolift/corvette/lifts/lift_1_ground)
+"bx" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"by" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"bz" = (/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"bA" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbayport)
+"bB" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bC" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{name = "Port Hangar"; req_access = list(142)},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbayport)
+"bD" = (/obj/machinery/door/blast/regular{_wifi_id = "5258"; id = "5258"; name = "Observation Deck Blast Doors"},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/grille,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bE" = (/obj/machinery/light{dir = 1},/obj/machinery/food_replicator,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bF" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bG" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bH" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bI" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bJ" = (/obj/machinery/light{dir = 1},/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bK" = (/obj/structure/sign/halo_floorsign/armory{tag = "icon-armory (EAST)"; icon_state = "armory"; dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"bL" = (/obj/structure/table/standard,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol/odstsection)
+"bM" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bN" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bO" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bP" = (/turf/simulated/wall,/area/om_ships/unscpatrol/deckacces)
+"bQ" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Centralhallway2)
+"bR" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"bS" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bT" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"bU" = (/obj/structure/toilet{dir = 4},/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol/odstsection)
+"bV" = (/obj/structure/curtain/open,/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol/odstsection)
+"bW" = (/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol/odstsection)
+"bX" = (/obj/machinery/door/airlock/halo{name = "Bathroom"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bY" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"bZ" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"ca" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"cb" = (/obj/machinery/vending/coffee,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"cc" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"cd" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"ce" = (/obj/machinery/light/spot{dir = 8},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"cf" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"cg" = (/obj/turbolift_map_holder/cargolift/corvette/front{luminosity = 1; wall_type = /turf/simulated/floor/tiled/dark},/turf/simulated/floor/tiled/dark,/area/turbolift/corvette/lifts/lift_1_ground)
+"ch" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"ci" = (/obj/machinery/button/remote/blast_door{_wifi_id = "5258"; id = "5258"; name = "Observation Deck Blast Door Control"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"cj" = (/obj/machinery/door/airlock/multi_tile/halo,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/multi_tile,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Porthallway2)
+"ck" = (/obj/machinery/door/airlock/halo{health = 3000; maxhealth = 3000; name = "ODST Bunks"; req_access = list(309)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/odstsection)
+"cl" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/deckacces)
+"cm" = (/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Centralhallway2)
+"cn" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"co" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cp" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cq" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cr" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cs" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"ct" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"cu" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cv" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cw" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cx" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cy" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Airlock"; req_access = list(142)},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cz" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cA" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cB" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Centralhallway2)
+"cC" = (/turf/simulated/wall,/area/om_ships/unscpatrol/Starboardhallway2)
+"cD" = (/obj/machinery/door/airlock/multi_tile/halo,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/multi_tile,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"cE" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"cF" = (/turf/simulated/wall,/area/om_ships/unscpatrol/Portsoeiv)
+"cG" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{name = "Drop Pod Bay 1"; req_access = list(309)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"cH" = (/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"cI" = (/turf/simulated/wall,/area/om_ships/unscpatrol/starboardsoeiv)
+"cJ" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{name = "Drop Pod Bay 2"; req_access = list(309)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"cK" = (/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"cL" = (/turf/simulated/wall,/area/om_ships/unscpatrol/powercoreaux)
+"cM" = (/obj/machinery/door/airlock/halo{name = "Auxiliary Power Core"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/powercoreaux)
+"cN" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/powercoreaux)
+"cO" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"cP" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Portsoeiv)
+"cQ" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Portsoeiv)
+"cR" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "SOEIV Deployment Rack"; req_access = list(309)},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Portsoeiv)
+"cS" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"cT" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardsoeiv)
+"cU" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardsoeiv)
+"cV" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "SOEIV Deployment Rack"; req_access = list(309)},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardsoeiv)
+"cW" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"cX" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"cY" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"cZ" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"da" = (/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"db" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"dc" = (/obj/machinery/light,/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"dd" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"de" = (/obj/machinery/light,/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/observation)
+"df" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"dg" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"dh" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"di" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"dj" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"dk" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dl" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{name = "Starboard Hangar"; req_access = list(142)},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dm" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dn" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"do" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"dp" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"dq" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"dr" = (/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"ds" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dt" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Starboardhallway)
+"du" = (/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dv" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dw" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Portsoeiv)
+"dx" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/starboardsoeiv)
+"dy" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/power/terminal{tag = "icon-term (EAST)"; icon_state = "term"; dir = 4},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"dz" = (/obj/machinery/power/smes/advanced{charge = 1e+007; outputting = 1},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/powercoreaux)
+"dA" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dB" = (/turf/simulated/wall,/area/om_ships/unscpatrol/starboardumbilical)
+"dC" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/starboardumbilical)
+"dD" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"dE" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"dF" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"dG" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"dH" = (/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"dI" = (/obj/machinery/door/firedoor,/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/starboardumbilical)
+"dJ" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"dK" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{name = "Drop Pod Bay 1"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/Portsoeiv)
+"dL" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{name = "Drop Pod Bay 2"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol/starboardsoeiv)
+"dM" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dN" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UNSC Corvette Deck 2  Starboard Hangar"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dO" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dP" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"dQ" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Starboard Airlock"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"dR" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"dS" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"dT" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway)
+"dU" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"dV" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"dW" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dX" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dY" = (/obj/vehicles/air/overmap/pelican/unsc,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"dZ" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"ea" = (/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"eb" = (/obj/structure/sign/halo_floorsign/airlock,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"ec" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"ed" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"ee" = (/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Starboardhallway2)
+"ef" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Starboard Hangar"; req_access = list(142)},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/Hangarbaystarboard)
+"eg" = (/obj/docking_umbilical/south{name = "Starboard Docking Umbilical"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol/starboardumbilical)
+"eh" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol/Starboardhallway2)
+"ei" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/om_ships/unscpatrol/Hangarbaystarboard)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaeaeaeafafaeaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadagaeaeaeafafaeaeaeagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacacacacacacacadadadadadadadadadadadadadadadadadadadadadadadadadadadagahahahahahahahahagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacacacaiacacacadadadadadadadadadadajadadadadadadadadadadadadadadadadagakakakakakakakakagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacalamamamanaoapaqarasararararasararatarasararararasararararasararapauakakakakakakakakagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacamamamamavawaxayazazazazazazazazazaAazazazazazazaBaBazazazazazazazaCaDakakakakakakakagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacaEamamamamaFaGaraHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaIaJaJaJaJaJaJaJaJaJaKakakakakakakaLagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacaMamamamamaoaGaraHaNaOaPaHaQaRaSaHaTaUaHaTaUaHaHaVaWaXaWaWaWaWaXaWaIaYakakaZakakakakagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababacababababababaGaraHbababaaHbbbcbdaHbeaUaHbeaUaHaHaWaWaJaJbfaJaJaJaJaJaYakbgakakakakakagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabhbhbhbhbibhbhbhbjbjbjaGaraHbababaaHaHbkaHaHblaHaHblaHaHaHbmbnaJaJaJaJaJaJaJaJaYakakakakakakakagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabhbhbhbhbibhbhbhbjbjbjaGaraHbobpbabqaRbabababrbsbtbabuaHaHaVbvaJaJaJbwbwbwaJaJbxbybzakakakbybAagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabhbhbhbhbibhbhbhbjbjbjaGaraHaHaHaHaHbababababababababBaHaHaWbvbfaJaJbwbwbwaJaJagagagbCauagagagagagagagaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbEbFbGbHbIbJbhbjbjbjaGbKaHaHaHbLaHbabababMbNbObababBaHaHaWbvaJbPaJbwbwbwaJaJbQbQbQbRbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbSbSbSbHbIbTbhbjbjbjaGaraHbUbVbWbXbYbabZbMcabOcbcccdaHaHcecfbfbPaJcgbwbwaJaJbQbQbQchbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbSbSbSbSbScibhbjbjbjcjaraHaHaHaHaHaHaHaHaHaHaHaHckaHaHaHclaJaJaJaJcmcmcmaJaJbQbQbQbRbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbScnbTbSbSbSbSapbRbRcocpcqapbRbRbRcqbRbRbRbRcqbRcobRbRbRcobRcobRcqbRbRbRbRcqapcrbRbRcsbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbSbIbTbSbSbSctbRbRbRcucvcvcvcvcvcwcvcvcvcvcvcvcvcxcvcvcvcxcycxcvcvczcvcvcvcvcvcAcBbRbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbSbSbSbSbScibhcCcCcCcDcEcFcFcFcFcGcHcFcFcFcIcIcIcIcJcKcIcIcIcLcLcLcMcLcLcNcNbQbQbQbRbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDbSbSbSbHbIbTbhcCcCcCcOcEcFcPcQcRcScHcRcQcPcIcTcUcVcWcKcVcUcTcLcXcYcZdadadbcNbQbQbQchbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabDdcddbSbHcndebhcCcCcCcOcEcFcFcFcFdfdgcFcFcFcIcIcIcIdhdicIcIcIcLdadadjdadadacNbQbQbQbRbRbQbQbQbQbQbQbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabhbhbhbhbibhbhbhcCcCcCcOcEcFcPcQcRcScHcRcQcPcIcTcUcVcWcKcVcUcTcLdadadjdadadacNdkdkdkdldmdkdkdkdkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabhbhbhbhbibhbhbhcCcCcCcOcEcFcFcFcFdndocFcFcFcIcIcIcIdpdqcIcIcIcLdadadjdadadacNdrdsdtdudududsdvdkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabhbhbhbhbibhbhbhcCcCcCcOcEdwcPcQcRcHcHcRcQcPdxcTcUcVcKcKcVcUcTcLdadadydzdadacNdAdudududududududkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdBdBdBdBdBdBcOcEcFcFcFcFdDdgcFcFcFcIcIcIcIdEdicIcIcIcLdadadjdadadacNdAdudududududududkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdFdGdHdGdGdIcOcEcFcPcQcRcHcHcRcQcPcIcTcUcVcKcKcVcUcTcLdadadjdadadacNdAdudududududududkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdJdGdGdGdGdGcOcEdwcFcFcFdKcHcFcFcFdxcIcIcIdLcKcIcIcIcLcLcLcMcLcLcNcNdMdududNdudududOdkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdGdGdGdGdPdQdRdSdSdTdSdSdSdSdSdSdSdUdSdSdSdSdSdSdSdSdSdTdSdVdSdSdSdWdXdudYdudududududkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdZdGdGdGeadIcEebcEeccEcEcEcEeccEedeecEeccEcEcEcEeccEcEcEcEeccEcEcEefdududududududududkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdCdCegdCdCdCehehehehehehehehehehehehehehehehehehehehehehehehehehehdkdududududududududkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdCdCdCdCdCdCdCehehehehehehehehehehehehehehehehehehehehehehehehehehehdkeieieieieieieieidkdkdkdkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdBdBdBdBdBdBdCehehehehehehehehehehehehehehehehehehehehehehehehehehehdkaeaeaeafafaeaeaedkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaadBdBdBdBdBdBdBdBdBdCehehehehehehehehehehehehehehehehehehehehehehehehehehehaaaeaeaeafafaeaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

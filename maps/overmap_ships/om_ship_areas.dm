@@ -59,22 +59,37 @@
 	name = "UNSC Thorin Bridge"
 
 /area/om_ships/unscpatrol/Porthallway
-	name = "UNSC Thorin Port Hallway"
+	name = "UNSC Thorin Deck 1 Port Hallway"
+
+/area/om_ships/unscpatrol/Porthallway2
+	name = "UNSC Thorin Deck 2 Port Hallway"
 
 /area/om_ships/unscpatrol/Centralhallway
-	name = "UNSC Thorin Central Hallway"
+	name = "UNSC Thorin Deck 1 Central Hallway"
+
+/area/om_ships/unscpatrol/Centralhallway2
+	name = "UNSC Thorin Deck 2 Central Hallway"
 
 /area/om_ships/unscpatrol/Starboardhallway
-	name = "Starboard Hallway"
+	name = "UNSC Thorin Deck 1 Starboard Hallway"
+
+/area/om_ships/unscpatrol/Starboardhallway2
+	name = "UNSC Thorin Deck 2 Starboard Hallway"
 
 /area/om_ships/unscpatrol/Hangarbay
-	name = "UNSC Thorin Hangar Bay"
+	name = "UNSC Thorin Deck 1 Rear Hangar Bay"
+
+/area/om_ships/unscpatrol/Hangarbayport
+	name = "UNSC Thorin Port Hangar Bay"
+
+/area/om_ships/unscpatrol/Hangarbaystarboard
+	name = "UNSC Thorin Starboard Hangar Bay"
 
 /area/om_ships/unscpatrol/Portsoeiv
-	name = "UNSC Thorin Port SOEIV Bay"
+	name = "UNSC Thorin SOEIV Bay 1"
 
 /area/om_ships/unscpatrol/starboardsoeiv
-	name = "UNSC Thorin Starboard SOEIV Bay"
+	name = "UNSC Thorin SOEIV Bay 2"
 
 /area/om_ships/unscpatrol/fuelstorage
 	name = "UNSC Thorin Fuel Storage"
@@ -127,11 +142,35 @@
 /area/om_ships/unscpatrol/Armory
 	name = "UNSC Thorin Armory"
 
+/area/om_ships/unscpatrol/Troopbunks
+	name = "UNSC Thorin Troop Bunks"
+
+/area/om_ships/unscpatrol/PortGenerator
+	name = "UNSC Thorin Port Generator"
+
+/area/om_ships/unscpatrol/StarboardGenerator
+	name = "UNSC Thorin Starboard Generator"
+
 /area/om_ships/unscpatrol/odstsection
 	name = "UNSC Thorin ODST Section"
 
 /area/om_ships/unscpatrol/powercore
 	name = "UNSC Thorin Power Core"
+
+/area/om_ships/unscpatrol/powercoreaux
+	name = "UNSC Thorin Auxiliary Power Core"
+
+/area/om_ships/unscpatrol/portumbilical
+	name = "UNSC Thorin Port Docking Umbilical"
+
+/area/om_ships/unscpatrol/starboardumbilical
+	name = "UNSC Thorin Starboard Docking Umbilical"
+
+/area/om_ships/unscpatrol/deckacces
+	name = "UNSC Thorin Deck 1 Access"
+
+/area/om_ships/unscpatrol/observation
+	name = "UNSC Thorin Observation Deck"
 
 /area/om_ships/unscpatrol/starboardbattery
 	name = "UNSC Thorin Starboard Gun Battery"
@@ -145,3 +184,28 @@
 /area/om_ships/unscpatrol/starboardrockets
  	name = "UNSC Thorin Starboard Rocket Pods"
 
+/area/turbolift/corvette/lifts
+	name = "UNSC Thorin Lifts"
+	has_gravity = 1
+	power_environ = 1
+	power_light = 1
+	poweralm = 1
+	requires_power = 0
+
+/area/turbolift/corvette/lifts/lift_1_ground
+	name = "UNSC Thorin Deck 2"
+
+/area/turbolift/corvette/lifts/lift_1_second
+	name = "UNSC Thorin Deck 1"
+
+
+/obj/turbolift_map_holder/cargolift/corvette/front
+	dir = SOUTH
+	depth = 2
+	lift_size_x = 2
+	lift_size_y = 1
+	floor_type = /turf/simulated/floor/tiled/dark
+	wall_type = /turf/simulated/floor/tiled/dark
+
+
+	areas_to_use = list(/area/turbolift/corvette/lifts/lift_1_ground,/area/turbolift/corvette/lifts/lift_1_second)

@@ -36,7 +36,7 @@
 	icon_state = "ship"
 	fore_dir = WEST
 
-	map_bounds = list(7,70,53,31)
+	map_bounds = list(5,73,72,33)
 
 //Overmap Weapon Console Defines//
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport

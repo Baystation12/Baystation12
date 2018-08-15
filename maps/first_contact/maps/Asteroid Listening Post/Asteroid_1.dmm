@@ -44,123 +44,124 @@
 "aR" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "solar_xeno_airlock"; pixel_x = 0; pixel_y = 32; tag_airpump = "Listen_Airlock_Pump"; tag_chamber_sensor = "Listen_Airlock_Sensor"; tag_exterior_door = "Listen_Airlock_Outer"; tag_interior_door = "Listen_Airlock_Inner"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
 "aS" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
 "aT" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
-"aU" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "UNSC Hardsuit"},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "UNSC Hardsuit"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
+"aU" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "Salvaged Antique Hardsuit"},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "Salvaged Antique Hardsuit"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
 "aV" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid8"; icon_state = "asteroid8"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
-"aW" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
-"aX" = (/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
-"aY" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox/mechanical,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
-"aZ" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
-"ba" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/breakroom)
-"bb" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bc" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bd" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"be" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bf" = (/obj/item/weapon/stool,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bg" = (/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
-"bh" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hangar)
-"bi" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bj" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bk" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bl" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bm" = (/obj/machinery/light/spot{dir = 8},/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bn" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bo" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hangar)
-"bp" = (/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"bq" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"br" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/observation)
-"bs" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bt" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bu" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/breakroom)
-"bv" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bw" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bx" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Hangar"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hangar)
-"by" = (/obj/structure/lattice,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"bz" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"bA" = (/obj/structure/flora/pottedplant/subterranean,/obj/machinery/light/spot{dir = 1},/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bB" = (/obj/structure/flora/pottedplant/stoutbush,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bC" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bD" = (/obj/structure/flora/pottedplant/minitree,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bE" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bF" = (/obj/machinery/light,/obj/machinery/power/apc/super{pixel_y = -32},/obj/structure/cable,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bG" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/controlhangar)
-"bH" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Flight Operations"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bI" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"bJ" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"bK" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (WEST)"; icon_state = "warningcorner_dust"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"bL" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"bM" = (/obj/structure/flora/pottedplant/aquatic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bN" = (/obj/effect/decal/cleanable/blood/gibs/limb{tag = "icon-gibbearcore"; icon_state = "gibbearcore"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bO" = (/obj/machinery/door/airlock/halo{name = "Break Room"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
-"bP" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bQ" = (/turf/simulated/open,/area/asteroid_listening/ground/interior/controlhangar)
-"bR" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/open,/area/asteroid_listening/ground/interior/controlhangar)
-"bS" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"bT" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"bU" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"bV" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"bW" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bX" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"bY" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"bZ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"ca" = (/obj/effect/decal/cleanable/mucus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cb" = (/obj/machinery/vending/wallmed1,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hangar)
-"cc" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cd" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/observation)
-"ce" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Observation Deck"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"cf" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"cg" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"ch" = (/obj/machinery/door/airlock/halo{name = "Hangar Control Room"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"ci" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cj" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"ck" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cl" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (WEST)"; icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"cm" = (/obj/effect/decal/cleanable/mucus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"cn" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"co" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/docking)
-"cp" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cq" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cr" = (/obj/machinery/door/airlock/halo{name = "Weapons Locker"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cs" = (/obj/machinery/light/spot{dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"ct" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cu" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cv" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"cw" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
-"cx" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cy" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cz" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cA" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cB" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UEG Listening Post Hangar"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cC" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cD" = (/obj/structure/grille,/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/observation)
-"cE" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cF" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cG" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cH" = (/obj/structure/table/rack,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cI" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cJ" = (/obj/structure/bed/chair/office/dark,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cK" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cL" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cM" = (/obj/structure/table/rack,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cN" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cO" = (/obj/structure/table/rack,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cP" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cQ" = (/obj/structure/table/steel,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cR" = (/obj/item/modular_computer/console/preset/sysadmin,/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
-"cS" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cT" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cU" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cV" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
-"cW" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cX" = (/obj/machinery/door/blast/regular,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"cY" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cZ" = (/turf/simulated/floor/asteroid/planet{tag = "icon-asteroid_dug"; icon_state = "asteroid_dug"},/area/asteroid_listening)
-"da" = (/obj/docking_umbilical/south{name = "Asteroid Docking Umbilical"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"db" = (/turf/simulated/floor/holofloor/space,/area/asteroid_listening/dark)
-"dc" = (/turf/simulated/floor/holofloor/space,/area/asteroid_listening/ground/interior/docking)
-"dd" = (/turf/space,/area/asteroid_listening/ground/interior/docking)
-"de" = (/obj/effect/overmap/sector/exo_listen,/turf/space,/area/asteroid_listening/dark)
-"df" = (/turf/space,/area/space)
-"dg" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data listen"},/turf/space,/area/asteroid_listening/dark)
+"aW" = (/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "Salvaged Antique Hardsuit"},/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/EVA)
+"aX" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
+"aY" = (/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
+"aZ" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox/mechanical,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
+"ba" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
+"bb" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/breakroom)
+"bc" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bd" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"be" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bf" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bg" = (/obj/item/weapon/stool,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bh" = (/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/EVA)
+"bi" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hangar)
+"bj" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bk" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bl" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bm" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bn" = (/obj/machinery/light/spot{dir = 8},/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"bo" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"bp" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hangar)
+"bq" = (/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"br" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"bs" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/observation)
+"bt" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bu" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bv" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/breakroom)
+"bw" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"bx" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"by" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Hangar"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hangar)
+"bz" = (/obj/structure/lattice,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"bA" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"bB" = (/obj/structure/flora/pottedplant/subterranean,/obj/machinery/light/spot{dir = 1},/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bC" = (/obj/structure/flora/pottedplant/stoutbush,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bD" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bE" = (/obj/structure/flora/pottedplant/minitree,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bF" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bG" = (/obj/machinery/light,/obj/machinery/power/apc/super{pixel_y = -32},/obj/structure/cable,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bH" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/controlhangar)
+"bI" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Flight Operations"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"bJ" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"bK" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"bL" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (WEST)"; icon_state = "warningcorner_dust"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"bM" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"bN" = (/obj/structure/flora/pottedplant/aquatic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bO" = (/obj/effect/decal/cleanable/blood/gibs/limb{tag = "icon-gibbearcore"; icon_state = "gibbearcore"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bP" = (/obj/machinery/door/airlock/halo{name = "Break Room"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/breakroom)
+"bQ" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"bR" = (/turf/simulated/open,/area/asteroid_listening/ground/interior/controlhangar)
+"bS" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/open,/area/asteroid_listening/ground/interior/controlhangar)
+"bT" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"bU" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"bV" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"bW" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"bX" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bY" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"bZ" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"ca" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cb" = (/obj/effect/decal/cleanable/mucus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cc" = (/obj/machinery/vending/wallmed1,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/Hangar)
+"cd" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"ce" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/observation)
+"cf" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; name = "Observation Deck"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"cg" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"ch" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"ci" = (/obj/machinery/door/airlock/halo{name = "Hangar Control Room"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cj" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"ck" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cl" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cm" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (WEST)"; icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"cn" = (/obj/effect/decal/cleanable/mucus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"co" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"cp" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/docking)
+"cq" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cr" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cs" = (/obj/machinery/door/airlock/halo{name = "Weapons Locker"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"ct" = (/obj/machinery/light/spot{dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cu" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cv" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cw" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"cx" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
+"cy" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cz" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cA" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/obj/item/clothing/suit/storage/vest/tactical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cB" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cC" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UEG Listening Post Hangar"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cD" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cE" = (/obj/structure/grille,/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/observation)
+"cF" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cG" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cH" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cI" = (/obj/structure/table/rack,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/obj/item/clothing/head/helmet/innie,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cJ" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cK" = (/obj/structure/bed/chair/office/dark,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cL" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cM" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cN" = (/obj/structure/table/rack,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cO" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cP" = (/obj/structure/table/rack,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cQ" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cR" = (/obj/structure/table/steel,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cS" = (/obj/item/modular_computer/console/preset/sysadmin,/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
+"cT" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cU" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cV" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cW" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hangar)
+"cX" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cY" = (/obj/machinery/door/blast/regular,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"cZ" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"da" = (/turf/simulated/floor/asteroid/planet{tag = "icon-asteroid_dug"; icon_state = "asteroid_dug"},/area/asteroid_listening)
+"db" = (/obj/docking_umbilical/south{name = "Asteroid Docking Umbilical"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"dc" = (/turf/simulated/floor/holofloor/space,/area/asteroid_listening/dark)
+"dd" = (/turf/simulated/floor/holofloor/space,/area/asteroid_listening/ground/interior/docking)
+"de" = (/turf/space,/area/asteroid_listening/ground/interior/docking)
+"df" = (/obj/effect/overmap/sector/exo_listen,/turf/space,/area/asteroid_listening/dark)
+"dg" = (/turf/space,/area/space)
+"dh" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data listen"},/turf/space,/area/asteroid_listening/dark)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -183,34 +184,34 @@ aaaaaaaaaaaaamababacacacacacababayaAayayayaBaCaDayaEayababababababababababababab
 aaaaaaaaaaaaaaacabagacacacabababayaFaGaGaHaGaIaJaKaLayabababababababababacacagacababababacacabababab
 aaaaaaaaaaaaaaacacacacacacabababayayayayayaDaDaDayaMayayayayayabababababacacacacacacacacacababababab
 aaaaaaaaaaaaaaacacabababababababababababayaNaOaDaPaQaRaSaTaUayabababacagababacacabababababababababab
-aaaaaaaaaaaaaaaVacabababababababababababayayayayayaQaTaTaTaWayabababacawacacacacabababababababababab
-aaaaaaaaaaaaaaacababababababababababababababababayaXaTaTaTaYayababababacabababababababababababababab
-aaaaaaaaaaacacacababababababababababababababababayaQaTaTaTaZayababababacabababababababababababababab
-aaaaaaaaaaaqacabababababababababababbababababababaaQaTayayayayababababababababababababababababababab
-aaaaaaaaaaaaaaabababababababababababbabbbcbdbebfbabgaTayayayayaybhbhbhbhbhbhbhbhbhbhbhbhbhbhabababab
-aaaaaaaaaaaaaaabababababababababababbabibjbkblbkbabmbnbnbnbnbnbnbobpbqbpbpbpbpbqbpbpbpbpbqbhabababab
-aaaaaaaaaaaaaaaabrbrbrbrbrbrababababbabsbibibibtbubvbnbnbnbnbnbwbxbpbpbpbpbpbpbpbpbybzbpbpbhabababab
-aaaaaaaaaaaaaaaabrbAbBbCbDbrababababbabEbibibibFbabGbGbGbHbnbGbGbhbpbpbIbJbJbJbJbJbJbKbLbpbhabababab
-aaaaaaaaaaaaaaaabrbMbCbCbNbrbrbrbrbrbababObababababGbGbGbPbnbQbRbhbSbpbTbLbLbLbLbLbLbUbLbVbhabababab
-aaaaaaaaaaaaaaaabrbCbCbCbCbCbCbWbXbCbCbYbnbnbnbYbnbZbYbGcabnbQbQcbbpbzbTbLbLbLccbLbLbUbLbpbhabababab
-aaaaaaaaaaaaaaaacdbCbCbCbCcebCcfbCbCcebncgbnbnbnbZbnbnchbZbncicjckbpbpbTbLbLbLbLbLbLbUbLbpbhabababab
-aaaaaaaaaaaaaaaacdclcmcnbBbrbrbrbrbrcocpcqcococobGcrbGbGcsbZctcuckbpbpbTbLccbLbLbLbLbUbLbpbhabababab
-aaaaaaaaaaaaaaaacdcvbCbCcwcdaaabababcocqcqcxcococybnczbGbnbnbncAckbpbpbTbLbLcBbLbLbLcCbLbpbhabababab
-aaaaaaaaaaaaaaaacDcdcdcdcdcDaaaaababcocEcqcFcococGbZcHbGbncIcJcKbhbpbpbTccbLbLbLbLbLbUbLbpbhabababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababcocLcLcqcococMcNcObGcPcQcRcubhbSbpcScTcTcUcUcUcUcVbLbVbhabababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababcocqcqcqcocobGbGbGbGbGbGbGbGbhbpbpbpbpbpbpbpbpbpbpbpbpbhabababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababcocpcqcococobGbGbGbGababababbhbpbpbpbpbpbpbpbpbpbpbpbpbhabababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababcocLcqcWcocoababababababababbhbpbpbpbpbpbpbpbpbpbpbpbpbhabababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaacacababcocEcLcFcocoababababababababbhcXcXcXcXcXcXcXcXcXcXcXcXbhabababab
-aaaaaaaaaaaaaaaaaaaaaaaaababababababcocqcYcqcocoabababababababababamcZamamamamamamamamamacababababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaabababababcocLcqcLcocoabababababababacacamamamamamamamamamcZaaacacacacacac
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababcocqdacqcocoababababababacacacaaaaaacZaaaaaacZaaaaaaaaaaacacacac
-aaaaaaaaaaaaaaaaaaaaaaaaaadbacacababcocococococoababababacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaacocococococoabababacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaaadcdcdddcdcdcacacacacaaaaaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-ababdbdbdbdbdbdbdbdbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-deabdfdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-adabdfdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-dgabdfdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaVacabababababababababababayayayaWayaQaTaTaTaXayabababacawacacacacabababababababababab
+aaaaaaaaaaaaaaacababababababababababababababababayaYaTaTaTaZayababababacabababababababababababababab
+aaaaaaaaaaacacacababababababababababababababababayaQaTaTaTbaayababababacabababababababababababababab
+aaaaaaaaaaaqacabababababababababababbbbbbbbbbbbbbbaQaTayayayayababababababababababababababababababab
+aaaaaaaaaaaaaaabababababababababababbbbcbdbebfbgbbbhaTayayayayaybibibibibibibibibibibibibibiabababab
+aaaaaaaaaaaaaaabababababababababababbbbjbkblbmblbbbnbobobobobobobpbqbrbqbqbqbqbrbqbqbqbqbrbiabababab
+aaaaaaaaaaaaaaaabsbsbsbsbsbsababababbbbtbjbjbjbubvbwbobobobobobxbybqbqbqbqbqbqbqbqbzbAbqbqbiabababab
+aaaaaaaaaaaaaaaabsbBbCbDbEbsababababbbbFbjbjbjbGbbbHbHbHbIbobHbHbibqbqbJbKbKbKbKbKbKbLbMbqbiabababab
+aaaaaaaaaaaaaaaabsbNbDbDbObsbsbsbsbsbbbbbPbbbbbbbbbHbHbHbQbobRbSbibTbqbUbMbMbMbMbMbMbVbMbWbiabababab
+aaaaaaaaaaaaaaaabsbDbDbDbDbDbDbXbYbDbDbZbobobobZbocabZbHcbbobRbRccbqbAbUbMbMbMcdbMbMbVbMbqbiabababab
+aaaaaaaaaaaaaaaacebDbDbDbDcfbDcgbDbDcfbochbobobocabobocicabocjckclbqbqbUbMbMbMbMbMbMbVbMbqbiabababab
+aaaaaaaaaaaaaaaacecmcncobCbsbsbsbsbscpcqcrcpcpcpbHcsbHbHctcacucvclbqbqbUbMcdbMbMbMbMbVbMbqbiabababab
+aaaaaaaaaaaaaaaacecwbDbDcxceaaabababcpcrcrcycpcpczbocAbHbobobocBclbqbqbUbMbMcCbMbMbMcDbMbqbiabababab
+aaaaaaaaaaaaaaaacEcececececEaaaaababcpcFcrcGcpcpcHcacIbHbocJcKcLbibqbqbUcdbMbMbMbMbMbVbMbqbiabababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababcpcMcMcrcpcpcNcOcPbHcQcRcScvbibTbqcTcUcUcVcVcVcVcWbMbWbiabababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababcpcrcrcrcpcpbHbHbHbHbHbHbHbHbibqbqbqbqbqbqbqbqbqbqbqbqbiabababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababcpcqcrcpcpcpbHbHbHbHababababbibqbqbqbqbqbqbqbqbqbqbqbqbiabababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababcpcMcrcXcpcpababababababababbibqbqbqbqbqbqbqbqbqbqbqbqbiabababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaacacababcpcFcMcGcpcpababababababababbicYcYcYcYcYcYcYcYcYcYcYcYbiabababab
+aaaaaaaaaaaaaaaaaaaaaaaaababababababcpcrcZcrcpcpabababababababababamdaamamamamamamamamamacababababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaabababababcpcMcrcMcpcpabababababababacacamamamamamamamamamdaaaacacacacacac
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababcpcrdbcrcpcpababababababacacacaaaaaadaaaaaaadaaaaaaaaaaaacacacac
+aaaaaaaaaaaaaaaaaaaaaaaaaadcacacababcpcpcpcpcpcpababababacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaadcdcaaaaaaaacpcpcpcpcpcpabababacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaadcdcaaaaaaaaaadddddeddddddacacacacaaaaaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaadcdcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ababdcdcdcdcdcdcdcdcdcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dfabdgdgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+adabdgdgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dhabdgdgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
