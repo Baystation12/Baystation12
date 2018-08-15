@@ -1274,7 +1274,6 @@
 "cC" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/circuitboard/integrated_printer,
 /obj/item/weapon/circuitboard/rdserver,
 /obj/item/weapon/circuitboard/protolathe,
 /obj/item/weapon/circuitboard/destructive_analyzer,

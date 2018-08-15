@@ -677,3 +677,22 @@ proc/is_blind(A)
 			if(!mob.mind)
 				return
 			return mob.mind.initial_email_login["login"]
+
+//This gets an input while also checking a mob for whether it is incapacitated or not.
+/mob/proc/get_input(var/message, var/title, var/default, var/choice_type, var/obj/required_item)
+	if(src.incapacitated() || (required_item && required_item.CanUseTopic(src)))
+		return null
+	var/choice
+	if(islist(choice_type))
+		choice = input(src, message, title, default) as null|anything in choice_type
+	else
+		switch(choice_type)
+			if(MOB_INPUT_TEXT)
+				choice = input(src, message, title, default) as null|text
+			if(MOB_INPUT_NUM)
+				choice = input(src, message, title, default) as null|num
+			if(MOB_INPUT_MESSAGE)
+				choice = input(src, message, title, default) as null|message
+	if(!choice || src.incapacitated() || (required_item && required_item.CanUseTopic(src)))
+		return null
+	return choice
