@@ -9,13 +9,20 @@
 	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
 
 /obj/item/projectile/overmap/boarding_beacon
+	icon = 'code/modules/halo/machinery/boarding_beacon_proj.dmi'
+	icon_state = "beacon"
 	ship_damage_projectile = /obj/item/projectile/boarding_beacon
+
+/obj/item/projectile/boarding_beacon
+	name = "boarding beacon"
+	icon = 'code/modules/halo/machinery/boarding_beacon_proj.dmi'
+	icon_state = "beacon"
 
 /obj/item/projectile/boarding_beacon/on_impact(var/atom/impacted)
 	new /obj/structure/boarding_beacon (loc,null)
 	qdel()
 
-#define BOARDING_BEACON_DESTROYDELAY 5 SECONDS
+#define BOARDING_BEACON_DESTROYDELAY 10 SECONDS
 
 /obj/structure/boarding_beacon
 	name = "Location Beacon"
