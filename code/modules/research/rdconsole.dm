@@ -89,9 +89,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				D.linked_console = src
 	return
 
-/obj/machinery/computer/rdconsole/proc/add_ic_design(var/obj/item/device/electronic_assembly/assembly)
-	files.AddDesign2Known(new /datum/design/prefab(files,create_prefab_from_assembly(assembly)))
-
 /obj/machinery/computer/rdconsole/proc/griefProtection() //Have it automatically push research to the centcomm server so wild griffins can't fuck up R&D's work
 	for(var/obj/machinery/r_n_d/server/centcom/C in SSmachines.machinery)
 		for(var/datum/tech/T in files.known_tech)
@@ -239,11 +236,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 							to_chat(usr, "<span class='notice'>The destructive analyzer appears to be empty.</span>")
 							screen = 1.0
 							return
-						if(istype(linked_destroy.loaded_item, /obj/item/device/electronic_assembly))
-							add_ic_design(linked_destroy.loaded_item)
-						else
-							for(var/T in linked_destroy.loaded_item.origin_tech)
-								files.UpdateTech(T, linked_destroy.loaded_item.origin_tech[T])
+						for(var/T in linked_destroy.loaded_item.origin_tech)
+							files.UpdateTech(T, linked_destroy.loaded_item.origin_tech[T])
 						if(linked_lathe && linked_destroy.loaded_item.matter) // Also sends salvaged materials to a linked protolathe, if any.
 							for(var/t in linked_destroy.loaded_item.matter)
 								if(t in linked_lathe.materials)
@@ -631,19 +625,16 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "Deconstruction Menu<HR>"
 			dat += "Name: [linked_destroy.loaded_item.name]<BR>"
-			if(istype(linked_destroy.loaded_item, /obj/item/device/electronic_assembly))
-				dat += "Assembly Detected. Prepared for blueprint download."
-				dat += "Warning: Assemblies manafactured this way will not have removable circuits."
-			else
-				dat += "Origin Tech:"
-				dat += "<UL>"
-				for(var/T in linked_destroy.loaded_item.origin_tech)
-					dat += "<LI>[CallTechName(T)] [linked_destroy.loaded_item.origin_tech[T]]"
-					for(var/datum/tech/F in files.known_tech)
-						if(F.name == CallTechName(T))
-							dat += " (Current: [F.level])"
-							break
-				dat += "</UL>"
+
+			dat += "Origin Tech:"
+			dat += "<UL>"
+			for(var/T in linked_destroy.loaded_item.origin_tech)
+				dat += "<LI>[CallTechName(T)] [linked_destroy.loaded_item.origin_tech[T]]"
+				for(var/datum/tech/F in files.known_tech)
+					if(F.name == CallTechName(T))
+						dat += " (Current: [F.level])"
+						break
+			dat += "</UL>"
 			dat += "<HR><A href='?src=\ref[src];deconstruct=1'>Deconstruct Item</A> || "
 			dat += "<A href='?src=\ref[src];eject_item=1'>Eject Item</A> || "
 

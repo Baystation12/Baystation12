@@ -121,7 +121,7 @@
 	AIproc = 1
 	var/addedDelay = 0
 
-	if(amount_grown >= 10 && !Target)
+	if(amount_grown >= SLIME_EVOLUTION_THRESHOLD && !Target)
 		if(is_adult)
 			Reproduce()
 		else

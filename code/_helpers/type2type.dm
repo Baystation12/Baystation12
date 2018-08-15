@@ -235,3 +235,27 @@
 //Splits the text of a file at seperator and returns them in a list.
 /world/proc/file2list(filename, seperator="\n")
 	return splittext(file2text(filename), seperator)
+
+/proc/str2hex(str)
+	if(!istext(str)||!str)
+		return
+	var/r
+	var/c
+	for(var/i = 1 to length(str))
+		c= text2ascii(str,i)
+		r+= num2hex(c)
+	return r
+
+// Decodes hex to raw byte string.
+// If safe=TRUE, returns null on incorrect input strings instead of CRASHing
+/proc/hex2str(str, safe=FALSE)
+	if(!istext(str)||!str)
+		return
+	var/r
+	var/c
+	for(var/i = 1 to length(str)/2)
+		c = hex2num(copytext(str,i*2-1,i*2+1), safe)
+		if(isnull(c))
+			return null
+		r += ascii2text(c)
+	return r
