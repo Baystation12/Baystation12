@@ -20,7 +20,7 @@
 		env_data["real"] = GLOB.musical_config.env_params_bounds[i][3]
 		data["env_params"] += list(env_data)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new (user, src, ui_key, "env_editor.tmpl", "Environment Editor", 300, 800)
 		ui.set_initial_data(data)

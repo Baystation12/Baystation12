@@ -9,8 +9,6 @@
 	var/datum/sound_player/player // Not a physical thing
 	var/datum/instrument/instrument_data
 
-	var/list/free_channels = list()
-
 	var/linear_decay = 1
 	var/sustain_timer = 1
 	var/soft_coeff = 2.0
@@ -21,6 +19,8 @@
 
 	var/sound_id
 
+	var/available_channels //Alright, this basically starts as the max config value and we will decrease and increase at runtime
+
 
 /datum/synthesized_song/New(datum/sound_player/playing_object, datum/instrument/instrument)
 	src.player = playing_object
@@ -30,37 +30,14 @@
 
 	instrument.create_full_sample_deviation_map()
 
-	src.sound_id = "[type]_[sequential_id(type)]"
+
+
+	available_channels = GLOB.musical_config.channels_per_instrument
 
 
 /datum/synthesized_song/proc/sanitize_tempo(new_tempo) // Identical to datum/song
 	new_tempo = abs(new_tempo)
 	return max(round(new_tempo, world.tick_lag), world.tick_lag)
-
-
-/datum/synthesized_song/proc/occupy_channels()
-	if (!GLOB.musical_config.free_channels_populated)
-		for (var/i=1 to 1024) // Currently only 1024 channels are allowed
-			GLOB.musical_config.free_channels += i
-		GLOB.musical_config.free_channels_populated = 1 // Only once
-
-	for (var/i=1 to GLOB.musical_config.channels_per_instrument)
-		if (GLOB.musical_config.free_channels.len)
-			src.free_channel(pick_n_take(GLOB.musical_config.free_channels))
-
-
-/datum/synthesized_song/proc/take_any_channel()
-	return pick_n_take(src.free_channels)
-
-
-/datum/synthesized_song/proc/free_channel(channel)
-	if (channel in src.free_channels) return
-	src.free_channels += channel
-
-
-/datum/synthesized_song/proc/return_all_channels()
-	GLOB.musical_config.free_channels |= src.free_channels
-	src.free_channels.Cut()
 
 
 /datum/synthesized_song/proc/play_synthesized_note(note, acc, oct, duration, where, which_one)
@@ -84,18 +61,29 @@
 
 
 /datum/synthesized_song/proc/play(what, duration, frequency, which, where, which_one)
+	if(available_channels <= 0) //Ignore requests for new channels if we go over limit
+		return
+	available_channels -= 1
+	src.sound_id = "[type]_[sequential_id(type)]"
+
+
 	var/sound/sound_copy = sound(what)
 	sound_copy.wait = 0
 	sound_copy.repeat = 0
 	sound_copy.frequency = frequency
 
 	player.apply_modifications(sound_copy, which, where, which_one)
-	//Technically no environment is possible, but our procs are not designed to handle it
-	sound_copy.environment = isnum(sound_copy.environment) ? Clamp(sound_copy.environment, 0, 25) : sound_copy.environment
+	//Environment, anything other than -1 means override
+	var/use_env = 0
+
+	if(isnum(sound_copy.environment) && sound_copy.environment <= -1)
+		sound_copy.environment = 0 // set it to 0 and just not set use env
+	else
+		use_env = 1
 
 	var/current_volume = Clamp(sound_copy.volume, 0, 100)
 	sound_copy.volume = current_volume //Sanitize volume
-	var/datum/sound_token/token = GLOB.sound_player.PlaySoundDatum(src.player.actual_instrument, src.sound_id, sound_copy, src.player.range, prefer_mute = FALSE)
+	var/datum/sound_token/token = new /datum/sound_token/instrument(src.player.actual_instrument, src.sound_id, sound_copy, src.player.range, FALSE, use_env)
 	#if DM_VERSION < 511
 	sound_copy.frequency = 1
 	#endif
@@ -140,7 +128,7 @@
 			var/obj/structure/synthesized_instrument/S = src.player.actual_instrument
 			var/datum/real_instrument/R = S.real_instrument
 			if (R.song_editor)
-				GLOB.nanomanager.update_uis(R.song_editor)
+				SSnano.update_uis(R.song_editor)
 		for (var/notes in splittext(lowertext(line), ","))
 			var/list/components = splittext(notes, "/")
 			var/duration = sanitize_tempo(src.tempo)
