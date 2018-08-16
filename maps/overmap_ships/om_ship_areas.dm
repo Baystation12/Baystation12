@@ -169,6 +169,9 @@
 /area/om_ships/unscpatrol/deckacces
 	name = "UNSC Thorin Deck 1 Access"
 
+/area/om_ships/unscpatrol/boardingpods
+	name = "UNSC Thorin Boarding Pods"
+
 /area/om_ships/unscpatrol/observation
 	name = "UNSC Thorin Observation Deck"
 
@@ -199,11 +202,11 @@
 	name = "UNSC Thorin Deck 1"
 
 
-/obj/turbolift_map_holder/cargolift/corvette/front
+/obj/turbolift_map_holder/cargolift/unsc_frigate/corvette/front
 	dir = SOUTH
 	depth = 2
 	lift_size_x = 2
-	lift_size_y = 1
+	lift_size_y = 2
 	floor_type = /turf/simulated/floor/tiled/dark
 	wall_type = /turf/simulated/floor/tiled/dark
 
