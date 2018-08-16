@@ -2657,7 +2657,6 @@
 #include "maps\area_holders\overmap_ship_area_holder.dmm"
 #include "maps\first_contact\all_includes.dm"
 #include "maps\first_contact\overall_overmap.dm"
-#include "maps\first_contact\maps\UNSC_Thorin\includes.dm"
 #include "maps\odst_prowler\odst_ship_overmap.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\overmap_ships\om_ship_areas.dm"
