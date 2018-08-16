@@ -1,7 +1,0 @@
-author: "Cajoes"
-delete-after: True
-changes: 
-  - tweak: "flood lamps now start in the off position"
-  - tweak: "green ink pens are now greener"
-  - tweak: "washing machines now more in line with graphic style of server"
-  - tweak: "toys and plants now use less unused animation frames, reducing overhead"
