@@ -13,7 +13,7 @@
 "am" = (/turf/simulated/floor/asteroid/planet,/area/asteroid_listening)
 "an" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
 "ao" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"ap" = (/obj/machinery/door/airlock/halo{name = "Communications Equipment"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/commsequipment)
+"ap" = (/obj/machinery/door/airlock/halo{name = "Communications Equipment"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
 "aq" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "ar" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
 "as" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)

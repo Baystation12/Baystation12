@@ -36,20 +36,20 @@
 	icon_state = "ship"
 	fore_dir = WEST
 
-	map_bounds = list(5,73,72,33)
+	map_bounds = list(2,76,76,36)
 
 //Overmap Weapon Console Defines//
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport
-	deck_gun_area = /area/om_ships/unscpatrol/portbattery
+	deck_gun_area = /area/corvette/unscthorin/portbattery
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvetteport
-	deck_gun_area = /area/om_ships/unscpatrol/portrockets
+	deck_gun_area = /area/corvette/unscthorin/portrockets
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvettestarboard
-	deck_gun_area = /area/om_ships/unscpatrol/starboardrockets
+	deck_gun_area = /area/corvette/unscthorin/starboardrockets
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvettestarboard
-	deck_gun_area = /area/om_ships/unscpatrol/starboardbattery
+	deck_gun_area = /area/corvette/unscthorin/starboardbattery
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
 	deck_gun_area = /area/om_ships/comet
