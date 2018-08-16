@@ -72,7 +72,7 @@
 	return INITIALIZE_HINT_QDEL
 
 /obj/machinery/button/toggle/alarm_button/corvette
-	area_base = /area/om_ships/unscpatrol
+	area_base = /area/corvette/unscthorin
 
 /obj/machinery/button/toggle/alarm_button/corvette/v2
 	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j1.ogg'
