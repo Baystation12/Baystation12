@@ -60,10 +60,11 @@
 		return
 	var/list/valid_points = list()
 	for(var/turf/t in view(drop_point,drop_accuracy))
-		if(istype(t,/turf/simulated/floor))
-			valid_points += t
-		if(istype(t,/turf/unsimulated/floor))
-			valid_points += t
+		if(istype(t,/turf/simulated/wall))
+			continue
+		if(istype(t,/turf/unsimulated/wall))
+			continue
+		valid_points += t
 	if(isnull(valid_points))
 		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
 		return
@@ -73,7 +74,7 @@
 	var/list/valid_points = list()
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		valid_points += l
-	if(isnull(valid_points))
+	if(isnull(valid_points) || valid_points.len == 0)
 		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
 		return
 	return pick(valid_points)
