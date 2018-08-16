@@ -41,7 +41,7 @@
 	data["page_num"] = current_page
 	data["page_offset"] = GLOB.musical_config.song_editor_lines_per_page * (current_page-1)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui =  SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new (user, src, ui_key, "song_editor.tmpl", "Song Editor", 550, 600)
 		ui.set_initial_data(data)

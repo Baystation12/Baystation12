@@ -21,7 +21,7 @@
 		echo_data["real"] = GLOB.musical_config.echo_params_bounds[i][3]
 		data["echo_params"] += list(echo_data)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new (user, src, ui_key, "echo_editor.tmpl", "Echo Editor", 300, 600)
 		ui.set_initial_data(data)

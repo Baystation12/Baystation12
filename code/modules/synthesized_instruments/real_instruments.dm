@@ -175,7 +175,7 @@
 			"env_settings" = GLOB.musical_config.env_settings_available
 		),
 		"status" = list(
-			"channels" = src.player.song.free_channels.len,
+			"channels" = src.player.song.available_channels,
 			"events" = src.player.event_manager.events.len,
 			"max_channels" = GLOB.musical_config.channels_per_instrument,
 			"max_events" = GLOB.musical_config.max_events,
@@ -183,7 +183,7 @@
 	)
 
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui =  SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new (user, src.owner, ui_key, "synthesizer.tmpl", owner.name, 600, 800)
 		ui.set_initial_data(data)

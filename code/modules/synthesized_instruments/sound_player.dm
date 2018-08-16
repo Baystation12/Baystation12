@@ -1,4 +1,4 @@
-#define REFRESH_FREQUENCY 5
+
 /datum/sound_player
 	// Virtual object
 	// It's the one used to modify shit
@@ -16,18 +16,6 @@
 	var/datum/instrument/instrument
 	var/obj/actual_instrument
 
-	var/list/mob/present_listeners = list()
-	var/list/turf/stored_locations = list()
-
-	/*
-	This needs an explanation.
-	This is beyond dumb, this is fucking retarded.
-	Basically when you send a sound with a non-minus-one environment to a client, it sets their _global_ environment value to whatever you sent to them
-	So ALL sounds will have this environment setting assigned afterwards.
-	You could sort of hear it if you were standing in a hallway and got a PM or something.
-	*/
-	var/last_updated_listeners = 0
-
 	var/datum/musical_event_manager/event_manager = new
 
 
@@ -40,8 +28,6 @@
 
 /datum/sound_player/Destroy()
 	src.song.playing = 0
-	src.present_listeners.Cut()
-	src.stored_locations.Cut()
 	src.actual_instrument = null
 	src.instrument = null
 	QDEL_NULL(song)
@@ -68,4 +54,4 @@
 	return 1 //Well if you got this far you did something very wrong
 
 
-#undef REFRESH_FREQUENCY
+

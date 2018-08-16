@@ -2501,6 +2501,7 @@
 #include "code\modules\synthesized_instruments\song.dm"
 #include "code\modules\synthesized_instruments\song_editor.dm"
 #include "code\modules\synthesized_instruments\sound_player.dm"
+#include "code\modules\synthesized_instruments\sound_token.dm"
 #include "code\modules\synthesized_instruments\usage_info.dm"
 #include "code\modules\synthesized_instruments\instrument_data\brass.dm"
 #include "code\modules\synthesized_instruments\instrument_data\chromatic_percussion.dm"

@@ -33,6 +33,7 @@ datum/musical_event
 
 
 /datum/musical_event/proc/destroy_sound()
+	source.song.available_channels += 1
 	QDEL_NULL(token)
 
 
