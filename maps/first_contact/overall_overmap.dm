@@ -36,7 +36,7 @@
 	icon_state = "ship"
 	fore_dir = WEST
 
-	map_bounds = list(2,76,76,36)
+	map_bounds = list(2,76,76,26)
 
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
