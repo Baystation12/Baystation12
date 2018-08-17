@@ -60,7 +60,7 @@
 /area/exo_Ice_facility/ground/exterior/emsvilleexterior
 	name = "Emsville Outpost Exterior"
 
-/area/exo_Ice_facility/ground/exterior/north
+/area/exo_Ice_facility/ground/exterior/emsvillepads
 	name = "Emsville Pelican Landing Pads"
 
 /area/exo_Ice_facility/ground/exterior/cave
@@ -92,29 +92,29 @@
 /area/exo_Ice_facility/basement/interior/grocery
 	name = "Emsville Grocery Store"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emsmedical
 	name = "Emsville Medical Facility"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emslivingb
 	name = "Emsville Living Quarters"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emscorridorb
 	name = "Emsville Central Access Corridor"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emsmselterb
 	name = "Emsville Smelter"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emsminigprep
 	name = "Emsville Mining Prep"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emspark
 	name = "Emsville Park"
 
-/area/exo_Ice_facility/basement/interior/grocery
+/area/exo_Ice_facility/basement/interior/emsdisco
 	name = "Emsville Disco"
 
-/area/exo_Ice_facility/basement/interior/grocery
-	name = "Emsville Smelter"
+/area/exo_Ice_facility/basement/interior/emssmelter
+	name = "Emsville Storage"
 
 
 /area/exo_Ice_facility/basement/exterior/cave

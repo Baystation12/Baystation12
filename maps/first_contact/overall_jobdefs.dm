@@ -52,7 +52,7 @@
 	spawn_positions = 8
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine
 	selection_color = "#008000"
-	access = list(142)
+	access = list(142,144)
 	spawnpoint_override = "Corvette Marine Spawn"
 
 /datum/job/unsc_ship_cap
@@ -71,7 +71,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
 	alt_titles = list("ODST Medic","ODST CQC Specialist","ODST Sharpshooter","ODST Combat Engineer")
 	selection_color = "#008000"
-	access = list(142,110,309,311)
+	access = list(142,144,110,309,311)
 	spawnpoint_override = "ODST Rifleman Spawn"
 	is_whitelisted = 1
 
@@ -81,7 +81,7 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
 	selection_color = "#008000"
-	access = list(142,110,300,306,309,310,311)
+	access = list(142,144,110,300,306,309,310,311)
 	spawnpoint_override = "ODST Squad Leader Spawn"
 	is_whitelisted = 1
 
