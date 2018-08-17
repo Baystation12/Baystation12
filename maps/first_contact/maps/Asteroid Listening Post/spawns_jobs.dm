@@ -71,6 +71,7 @@ GLOBAL_LIST_EMPTY(listen_staffl_spawns)
 	title = "Insurrectionist"
 	total_positions = 7
 	spawn_positions = 7
+	access = list(668)
 	outfit_type = /decl/hierarchy/outfit/job/Asteroidinnie
 	selection_color = "#008000"
 	spawnpoint_override = "Listening Post Spawn"
@@ -82,7 +83,7 @@ GLOBAL_LIST_EMPTY(listen_staffl_spawns)
 	title = "Insurrectionist Commander"
 	total_positions = 1
 	spawn_positions = 1
-	access = list(667)
+	access = list(667,668)
 	outfit_type = /decl/hierarchy/outfit/job/Asteroidinnieleader
 	selection_color = "#008000"
 	spawnpoint_override = "Listening Post Commander Spawn"

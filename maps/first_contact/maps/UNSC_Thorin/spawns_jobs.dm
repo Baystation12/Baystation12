@@ -67,3 +67,20 @@ GLOBAL_LIST_EMPTY(corvette_odsto_spawns)
 /obj/effect/landmark/start/corvette_odsto/New()
 	..()
 	GLOB.corvette_odsto_spawns += loc
+
+GLOBAL_LIST_EMPTY(corvette_marine_spawns)
+
+/datum/spawnpoint/corvette_marine
+	display_name = "Corvette Marine Spawn"
+	restrict_job = list("UNSC Marine")
+
+/datum/spawnpoint/corvette_marine/New()
+	..()
+	turfs = GLOB.corvette_marine_spawns
+
+/obj/effect/landmark/start/corvette_marine
+	name = "Corvette Marine Spawn"
+
+/obj/effect/landmark/start/corvette_marine/New()
+	..()
+	GLOB.corvette_marine_spawns += loc
