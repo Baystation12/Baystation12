@@ -6158,7 +6158,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "asL" = (
-/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/assembly/chargebay)
 "asZ" = (
@@ -7063,7 +7062,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
 "awg" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wingrille_spawn/reinforced/polarized{
+	id = "robotics_external_windows"
+	},
 /turf/simulated/floor/plating,
 /area/assembly/robotics)
 "awn" = (
@@ -26242,6 +26243,10 @@
 	dir = 4;
 	pixel_x = 21
 	},
+/obj/machinery/button/windowtint{
+	id = "robotics_external_windows";
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "oKb" = (
@@ -30955,6 +30960,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
+"xsG" = (
+/obj/effect/wingrille_spawn/reinforced/polarized{
+	id = "robotics_external_windows"
+	},
+/turf/simulated/floor/plating,
+/area/assembly/chargebay)
 "xuW" = (
 /obj/structure/morgue,
 /obj/item/device/radio/intercom{
@@ -49783,7 +49794,7 @@ kAb
 kIb
 kQb
 hPt
-asL
+xsG
 dRf
 dkJ
 knu
@@ -50389,7 +50400,7 @@ kCb
 kLb
 kTb
 lcb
-asL
+xsG
 axh
 ayi
 azn
