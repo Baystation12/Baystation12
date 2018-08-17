@@ -122,6 +122,9 @@
 /area/exo_Ice_facility/basement/interior/emssecurity
 	name = "Emsville Marshall's Office"
 
+/area/exo_Ice_facility/basement/interior/emshydroponics
+	name = "Emsville Hydroponics Bay"
+
 /area/exo_Ice_facility/basement/exterior/cave
 	name = "KS7-535 Lower Caves"
 	dynamic_lighting = 1

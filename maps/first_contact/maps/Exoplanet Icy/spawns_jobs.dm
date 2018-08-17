@@ -123,7 +123,7 @@ GLOBAL_LIST_EMPTY(emsville_marshall_spawns)
 	outfit_type = /decl/hierarchy/outfit/job/Outer_Colonist
 	selection_color = "#000000"
 	spawnpoint_override = "Emsville Spawn"
-	alt_titles = list("Miner","Doctor","Nurse","Sushi Chef","Warehouse Worker","Librarian","Surgeon","Bartender","Nightclub Owner")
+	alt_titles = list("Miner","Doctor","Nurse","Sushi Chef","Hydroponics Technician","Warehouse Worker","Librarian","Surgeon","Bartender","Nightclub Owner")
 	is_whitelisted = 0
 
 /datum/job/Emsville_Marshall
