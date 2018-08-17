@@ -351,7 +351,7 @@
 "gM" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/janitorial)
 "gN" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/janitorial)
 "gO" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 4},/turf/simulated/floor/plating,/area/corvette/unscthorin/janitorial)
-"gP" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/turf/simulated/floor/plating,/area/corvette/unscthorin/janitorial)
+"gP" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/obj/item/weapon/reagent_containers/glass/bucket,/obj/item/weapon/reagent_containers/glass/bucket,/turf/simulated/floor/plating,/area/corvette/unscthorin/janitorial)
 "gQ" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/cryodorm)
 "gR" = (/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/cryodorm)
 "gS" = (/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/cryodorm)
