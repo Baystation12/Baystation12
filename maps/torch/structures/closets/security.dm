@@ -3,7 +3,7 @@
  */
 
 /obj/structure/closet/secure_closet/security_torch
-	name = "master at arms' locker"
+	name = "sentinel officer locker"
 	req_access = list(access_brig)
 	icon_state = "sec1"
 	icon_closed = "sec"

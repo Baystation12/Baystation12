@@ -215,7 +215,7 @@ badges
 
 /obj/item/clothing/accessory/badge/solgov/security
 	name = "security forces badge"
-	desc = "A silver law enforcement badge. Stamped with the words 'Master at Arms'."
+	desc = "A silver law enforcement badge. Stamped with the words 'POLICE'."
 	icon_state = "silverbadge"
 	slot_flags = SLOT_TIE
 	badge_string = "Sol Central Government"
@@ -260,8 +260,8 @@ armbands
 		)
 
 /obj/item/clothing/accessory/armband/solgov/mp
-	name = "military police brassard"
-	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is black with white letters MP."
+	name = "sentinel brassard"
+	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is black with white letter S."
 	icon_state = "mpband"
 
 /obj/item/clothing/accessory/armband/solgov/ma
@@ -270,8 +270,8 @@ armbands
 	icon_state = "maband"
 
 /obj/item/weapon/storage/box/armband
-	name = "box of spare military police armbands"
-	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
+	name = "box of spare sentinel armbands"
+	desc = "A box full of sentinel armbands. For use in emergencies when provisional security personnel are needed."
 	startswith = list(/obj/item/clothing/accessory/armband/solgov/mp = 5)
 
 /*****************

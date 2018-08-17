@@ -304,7 +304,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hos/get_description_blurb()
-	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
+	return "You are the Chief of Security. You manage ship security. The Sentinels, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
@@ -888,7 +888,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/officer
-	title = "Master at Arms"
+	title = "Sentinel"
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief of Security"

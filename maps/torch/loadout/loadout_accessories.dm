@@ -61,9 +61,9 @@
 	flags = GEAR_HAS_TYPE_SELECTION
 	allowed_branches = list(/datum/mil_branch/fleet)
 
-/datum/gear/accessory/armband_ma
-	display_name = "master at arms brassard"
-	path = /obj/item/clothing/accessory/armband/solgov/ma
+/datum/gear/accessory/armband_mp
+	display_name = "sentinel brassard"
+	path = /obj/item/clothing/accessory/armband/solgov/mp
 	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_solgov
