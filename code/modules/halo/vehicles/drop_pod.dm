@@ -20,7 +20,7 @@
 
 	var/launched = 0
 
-	var/drop_accuracy = 2 //The accuracy in tiles (+ or - from drop point)
+	var/drop_accuracy = 3 //The accuracy in tiles (+ or - from drop point)
 
 	var/launch_arm_time = 5 SECONDS
 
@@ -108,7 +108,7 @@
 	visible_message("<span class = 'danger'>[user] starts arming [src]'s launch mechanism.</span>")
 	if(!do_after(user, launch_arm_time, src)) return
 	visible_message("<span class = 'danger'>[user] arms [src]'s launch mechanism.</span>")
-	spawn(10) //For drama's sake.
+	spawn(5) //For drama's sake.
 		forceMove(drop_turf)
 		launched = 1
 		spawn(5) //Slight delay so player clients can update.
