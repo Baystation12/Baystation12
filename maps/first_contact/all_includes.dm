@@ -11,9 +11,8 @@
 
 	#include "../overmap_ships/nh_overmap.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
-	#include "maps/corvette_spawns.dm"
-	#include "maps/UNSC_Corvette2.dmm"
-	#include "maps/UNSC_Corvette.dmm"
+
+	#include "../first_contact/maps/UNSC_Thorin/includes.dm"
 
 	#include "maps/ccv_star_spawns.dm"
 	#include "maps/CCV_Star.dmm"

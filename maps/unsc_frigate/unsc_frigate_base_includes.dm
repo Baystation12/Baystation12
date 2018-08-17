@@ -3,9 +3,10 @@
 #include "../area_holders/overmap_ship_area_holder.dmm"
 #include "lifts.dm"
 #include "unsc_frigate_spawns.dm"
+#include "unsc_frigate_areas.dm"
 #include "unsc_frigate_overmap.dm"
 #include "unsc_frigate_map.dm"
-#include "../first_contact/maps/corvette_spawns.dm"
+#include "../first_contact/maps/UNSC_Thorin/spawns_jobs.dm"
 
 #include "unsc_frigate-4.dmm"
 #include "unsc_frigate-3.dmm"

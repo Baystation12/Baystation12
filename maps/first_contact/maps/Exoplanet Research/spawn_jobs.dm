@@ -184,7 +184,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 
 /datum/job/COMMO
-	title = "Communications Operator"
+	title = "ONI Communications Operator"
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/facil_COMMO

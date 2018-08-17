@@ -20,7 +20,7 @@
 
 	var/launched = 0
 
-	var/drop_accuracy = 5 //The accuracy in tiles (+ or - from drop point)
+	var/drop_accuracy = 2 //The accuracy in tiles (+ or - from drop point)
 
 	var/launch_arm_time = 5 SECONDS
 

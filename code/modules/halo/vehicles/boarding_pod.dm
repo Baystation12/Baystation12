@@ -5,7 +5,7 @@
 	density = 1
 	anchored = 1
 	launch_arm_time = 10 SECONDS
-	drop_accuracy = 10
+	drop_accuracy = 5
 	occupants = list(8,0)
 	pod_range = 5
 
