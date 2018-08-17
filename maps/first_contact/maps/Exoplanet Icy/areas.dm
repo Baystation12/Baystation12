@@ -25,6 +25,18 @@
 /area/exo_Ice_facility/ground/interior/control
 	name = "KS7-535 Facility Control Room"
 
+/area/exo_Ice_facility/ground/interior/bar
+	name = "Emsville Bar"
+
+/area/exo_Ice_facility/ground/interior/livingtop
+	name = "Emsville Topside Living Quarters"
+
+/area/exo_Ice_facility/ground/interior/library
+	name = "Emsville Library"
+
+/area/exo_Ice_facility/ground/interior/corridorentrance
+	name = "Emsville Entrance Acces Corridor"
+
 /area/exo_Ice_facility/ground/interior/cryodorm
 	name = "KS7-535 Facility Cryodorms"
 
@@ -44,6 +56,12 @@
 
 /area/exo_Ice_facility/ground/exterior/north
 	name = "KS7-535 Northern Wilderness"
+
+/area/exo_Ice_facility/ground/exterior/emsvilleexterior
+	name = "Emsville Outpost Exterior"
+
+/area/exo_Ice_facility/ground/exterior/emsvillepads
+	name = "Emsville Pelican Landing Pads"
 
 /area/exo_Ice_facility/ground/exterior/cave
 	name = "KS7-535 Caves"
@@ -70,6 +88,34 @@
 
 /area/exo_Ice_facility/basement/interior/hangar
 	name = "KS7-535 Facility Basement Hangar"
+
+/area/exo_Ice_facility/basement/interior/grocery
+	name = "Emsville Grocery Store"
+
+/area/exo_Ice_facility/basement/interior/emsmedical
+	name = "Emsville Medical Facility"
+
+/area/exo_Ice_facility/basement/interior/emslivingb
+	name = "Emsville Living Quarters"
+
+/area/exo_Ice_facility/basement/interior/emscorridorb
+	name = "Emsville Central Access Corridor"
+
+/area/exo_Ice_facility/basement/interior/emsmselterb
+	name = "Emsville Smelter"
+
+/area/exo_Ice_facility/basement/interior/emsminigprep
+	name = "Emsville Mining Prep"
+
+/area/exo_Ice_facility/basement/interior/emspark
+	name = "Emsville Park"
+
+/area/exo_Ice_facility/basement/interior/emsdisco
+	name = "Emsville Disco"
+
+/area/exo_Ice_facility/basement/interior/emssmelter
+	name = "Emsville Storage"
+
 
 /area/exo_Ice_facility/basement/exterior/cave
 	name = "KS7-535 Lower Caves"
