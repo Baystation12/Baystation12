@@ -1,0 +1,4 @@
+author: "IsdatAfamas"
+delete-after: True
+changes: 
+  - maptweak: "Added polarized windows to robotics."
