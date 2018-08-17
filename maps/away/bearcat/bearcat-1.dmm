@@ -197,7 +197,8 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
-	pixel_x = -24
+	pixel_x = -24;
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/escape_port)
@@ -320,7 +321,8 @@
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
-	pixel_x = 24
+	pixel_x = 24;
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/escape_star)
@@ -780,7 +782,8 @@
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
-	pixel_x = 24
+	pixel_x = 24;
+	req_one_access = newlist()
 	},
 /obj/item/weapon/hand/missing_card,
 /obj/item/weapon/hand/missing_card,
@@ -802,7 +805,8 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
-	pixel_x = -24
+	pixel_x = -24;
+	req_one_access = newlist()
 	},
 /obj/structure/closet/crate,
 /obj/random/soap,
@@ -867,7 +871,8 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
-	pixel_x = -24
+	pixel_x = -24;
+	req_one_access = newlist()
 	},
 /obj/structure/closet,
 /obj/random/clothing,
@@ -1339,7 +1344,8 @@
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
-	pixel_x = 24
+	pixel_x = 24;
+	req_one_access = newlist()
 	},
 /obj/item/stack/cable_coil/random,
 /turf/simulated/floor/usedup,
@@ -1359,7 +1365,8 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
-	pixel_x = -24
+	pixel_x = -24;
+	req_one_access = newlist()
 	},
 /obj/structure/closet,
 /obj/random/gloves,
@@ -1810,7 +1817,8 @@
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
-	pixel_x = 24
+	pixel_x = 24;
+	req_one_access = newlist()
 	},
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1847,7 +1855,8 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
-	pixel_x = -24
+	pixel_x = -24;
+	req_one_access = newlist()
 	},
 /obj/structure/closet,
 /obj/random/clothing,
@@ -2104,7 +2113,8 @@
 	dir = 5
 	},
 /obj/machinery/alarm{
-	pixel_y = 32
+	pixel_y = 32;
+	req_one_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/usedup,
@@ -2128,7 +2138,8 @@
 /obj/item/device/t_scanner,
 /obj/item/weapon/cell/high,
 /obj/machinery/alarm{
-	pixel_y = 32
+	pixel_y = 32;
+	req_one_access = newlist()
 	},
 /obj/item/weapon/tape_roll,
 /obj/machinery/light_switch{
@@ -2676,7 +2687,8 @@
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
-	pixel_x = 24
+	pixel_x = 24;
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)
