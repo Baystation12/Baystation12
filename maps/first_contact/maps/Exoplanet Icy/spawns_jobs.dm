@@ -118,8 +118,8 @@ GLOBAL_LIST_EMPTY(emsville_marshall_spawns)
 
 /datum/job/Emsville_Colonist
 	title = "Emsville Colonist"
-	total_positions = 10
-	spawn_positions = 10
+	total_positions = 15
+	spawn_positions = 15
 	outfit_type = /decl/hierarchy/outfit/job/Outer_Colonist
 	selection_color = "#000000"
 	spawnpoint_override = "Emsville Spawn"
