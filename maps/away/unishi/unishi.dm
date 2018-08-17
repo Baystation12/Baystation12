@@ -30,7 +30,7 @@
 	name = "University Ship"
 	id = "awaysite_unishi"
 	description = "CTI research ship.."
-	suffixes = list("unishi/unish-1.dmm", "unishi/unish-2.dmm", "unishi/unish-3.dmm")
+	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
 	cost = 2
 
 
@@ -80,11 +80,11 @@
 	active = 1
 	powered = 1
 
-/obj/structure/closet/crate/secure/phoron/experimentalsm
+/obj/structure/closet/crate/secure/large/phoron/experimentalsm
 	name = "experimental SM crate"
 	desc = "Are you sure you want to open this?"
 
-/obj/structure/closet/crate/secure/phoron/experimentalsm/WillContain()
+/obj/structure/closet/crate/secure/large/phoron/experimentalsm/WillContain()
 	return list(/obj/machinery/power/supermatter/randomsample)
 
 obj/item/weapon/paper/prof1
