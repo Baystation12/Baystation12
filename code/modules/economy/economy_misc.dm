@@ -52,6 +52,7 @@
 												/datum/species/human/gravworlder = 10,
 												/datum/species/human/spacer      = 10,
 												/datum/species/human/vatgrown    = 10, //now lore-friendly,
+												/datum/species/human/tritonian   = 10,
 												/datum/species/skrell            = 12,
 												/datum/species/tajaran           = 7,
 												/datum/species/unathi            = 7,
