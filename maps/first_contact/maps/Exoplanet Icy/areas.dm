@@ -28,6 +28,9 @@
 /area/exo_Ice_facility/ground/interior/bar
 	name = "Emsville Bar"
 
+/area/exo_Ice_facility/ground/interior/sushiems
+	name = "Sushi Stall"
+
 /area/exo_Ice_facility/ground/interior/livingtop
 	name = "Emsville Topside Living Quarters"
 
@@ -116,6 +119,8 @@
 /area/exo_Ice_facility/basement/interior/emssmelter
 	name = "Emsville Storage"
 
+/area/exo_Ice_facility/basement/interior/emssecurity
+	name = "Emsville Marshall's Office"
 
 /area/exo_Ice_facility/basement/exterior/cave
 	name = "KS7-535 Lower Caves"
