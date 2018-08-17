@@ -39,6 +39,18 @@
 	map_bounds = list(2,76,76,36)
 
 //Overmap Weapon Console Defines//
+/area/corvette/unscthorin/starboardbattery
+	name = "UNSC Thorin Starboard Gun Battery"
+
+/area/corvette/unscthorin/portbattery
+	name = "UNSC Thorin Port Gun Battery"
+
+/area/corvette/unscthorin/portrockets
+ 	name = "UNSC Thorin Port Rocket Pods"
+
+/area/corvette/unscthorin/starboardrockets
+ 	name = "UNSC Thorin Starboard Rocket Pods"
+
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport
 	deck_gun_area = /area/corvette/unscthorin/portbattery
 

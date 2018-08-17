@@ -126,14 +126,3 @@
 /area/corvette/unscthorin/observation
 	name = "UNSC Thorin Observation Deck"
 
-/area/corvette/unscthorin/starboardbattery
-	name = "UNSC Thorin Starboard Gun Battery"
-
-/area/corvette/unscthorin/portbattery
-	name = "UNSC Thorin Port Gun Battery"
-
-/area/corvette/unscthorin/portrockets
- 	name = "UNSC Thorin Port Rocket Pods"
-
-/area/corvette/unscthorin/starboardrockets
- 	name = "UNSC Thorin Starboard Rocket Pods"
