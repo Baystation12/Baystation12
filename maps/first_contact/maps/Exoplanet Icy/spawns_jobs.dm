@@ -49,6 +49,11 @@ GLOBAL_LIST_EMPTY(emsville_staff_spawns)
 	C.assignment = "Outer_Colonist"
 	H.set_id_info(C)
 
+/decl/hierarchy/outfit/job/Outer_Colonist/proc/equip_special(mob/living/carbon/human/H)
+	if(prob(30))
+		var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/colt
+		G.ammo_magazine = new /obj/item/ammo_magazine/c45m
+		H.equip_to_slot_or_del(G,slot_belt)
 
 /decl/hierarchy/outfit/job/Outer_Colonist/equip_base(mob/living/carbon/human/H)
 
