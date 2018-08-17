@@ -92,6 +92,7 @@
 	toxins_mod =        1.15
 	radiation_mod =     1.15
 	body_temperature =  302
+	slowdown =          1
 
 	heat_level_1 = 350
 	heat_level_2 = 380
