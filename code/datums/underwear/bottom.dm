@@ -84,9 +84,9 @@
 	name = "PT shorts, Fleet"
 	icon_state = "fleet_shorts"
 
-/datum/category_item/underwear/bottom/marine_pt_shorts
-	name = "PT shorts, Marine Corps"
-	icon_state = "marine_shorts"
+/datum/category_item/underwear/bottom/army_pt_shorts
+	name = "PT shorts, Army"
+	icon_state = "army_shorts"
 
 /datum/category_item/underwear/bottom/longjon
 	name = "Long John Bottoms"
