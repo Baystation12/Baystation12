@@ -2374,9 +2374,6 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
@@ -3219,6 +3216,7 @@
 	dir = 1
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/light,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "hz" = (
@@ -3652,6 +3650,8 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/border_only,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "iG" = (
@@ -4899,29 +4899,19 @@
 /area/ai_monitored/storage/eva)
 "lZ" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/weapon/tank/jetpack/carbondioxide,
-/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "ma" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "mb" = (
@@ -6462,6 +6452,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage/lower)
+"pn" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "hab_hallway_shutters";
+	name = "Habitation Deck Hallway Shutters";
+	opacity = 0
+	},
+/obj/effect/floor_decal/corner/red/mono,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/thirddeck/center)
 "pp" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -7372,6 +7378,14 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor,
 /area/ai_monitored/storage/eva)
+"rL" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "rM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -8549,11 +8563,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -22
-	},
-/obj/machinery/light,
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -10009,6 +10018,22 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"xb" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id = "hab_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/security/habcheck)
 "xc" = (
 /obj/effect/floor_decal/corner/yellow{
 	dir = 9
@@ -10470,8 +10495,9 @@
 	icon_state = "0-4"
 	},
 /obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
@@ -11454,11 +11480,11 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -11573,15 +11599,13 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "AC" = (
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
 /obj/machinery/light/spot{
 	dir = 1
 	},
+/obj/machinery/vending/fitness,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "AD" = (
@@ -16494,13 +16518,14 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/light_switch{
-	pixel_x = 24;
-	pixel_y = 4
-	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
 	dir = 4
+	},
+/obj/item/device/radio/intercom/department/security{
+	dir = 8;
+	icon_state = "intercom";
+	pixel_x = 21
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
@@ -16517,6 +16542,13 @@
 	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/gym)
+"NA" = (
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/thirddeck/center)
 "NB" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -17447,9 +17479,6 @@
 /area/vacant/brig)
 "QE" = (
 /obj/structure/table/rack,
-/obj/item/device/radio/intercom{
-	pixel_y = 21
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -17937,6 +17966,10 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = 26
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "Sn" = (
@@ -17969,9 +18002,6 @@
 /obj/structure/disposalpipe/segment{
 	dir = 2;
 	icon_state = "pipe-c"
-	},
-/obj/structure/bed/chair{
-	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -18188,12 +18218,10 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
+/obj/machinery/vending/coffee,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "Tc" = (
@@ -18639,8 +18667,14 @@
 	icon_state = "0-2"
 	},
 /obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
 	d2 = 8;
-	icon_state = "0-8"
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
@@ -19493,14 +19527,14 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "XJ" = (
-/obj/machinery/hologram/holopad,
-/obj/effect/floor_decal/corner/red/half,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/camera/network/security{
 	c_tag = "Checkpoint - Deck Three";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "XK" = (
 /obj/structure/disposalpipe/segment{
@@ -19794,6 +19828,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"YE" = (
+/obj/machinery/hologram/holopad,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark,
+/area/security/habcheck)
 "YF" = (
 /obj/effect/floor_decal/corner/green{
 	icon_state = "corner_white";
@@ -20098,19 +20137,10 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/sleep/bunk)
 "ZK" = (
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/item/modular_computer/console/preset/civilian,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "ZN" = (
@@ -34791,7 +34821,7 @@ pT
 qQ
 sk
 tw
-Vx
+xb
 QE
 jQ
 XJ
@@ -34995,7 +35025,7 @@ sj
 tx
 Vx
 Fz
-jQ
+YE
 TS
 Ga
 Bq
@@ -35192,7 +35222,7 @@ lu
 lu
 lu
 kK
-YW
+NA
 VW
 OI
 uN
@@ -35396,7 +35426,7 @@ kK
 pU
 YP
 sl
-YP
+pn
 Vx
 Vx
 Vx
@@ -38212,7 +38242,7 @@ bA
 ZK
 Aq
 rM
-jc
+rL
 AA
 dF
 jc

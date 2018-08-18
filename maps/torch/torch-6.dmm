@@ -8826,12 +8826,12 @@
 	},
 /area/centcom/living)
 "auQ" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/shutters{
-	dir = 2;
+	dir = 4;
 	id = "supply_shuttle";
 	name = "Supply Drone Shutters"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/supply/dock)
 "auR" = (
