@@ -86,6 +86,7 @@
 	it difficult to move quickly on land due to their bulk."
 	icobase =     'icons/mob/human_races/species/human/subspecies/tritonian_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/tritonian_preview.dmi'
+	slowdown = 1
 
 	oxy_mod =           0.5
 	brute_mod =         0.8
