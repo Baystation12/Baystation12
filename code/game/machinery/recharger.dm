@@ -101,6 +101,15 @@ obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to 
 	else
 		icon_state = icon_state_idle
 
+obj/machinery/recharger/examine(mob/user)
+	. = ..()
+	if(!. || isnull(charging))
+		return
+
+	else
+		var/obj/item/weapon/cell/C = charging.get_cell()
+		if(!isnull(C))
+			to_chat(user, "Item's charge at [round(C.percent())]%.")
 
 obj/machinery/recharger/wallcharger
 	name = "wall recharger"
