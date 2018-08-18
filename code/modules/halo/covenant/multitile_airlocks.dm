@@ -3,7 +3,6 @@
 	icon = 'door64.dmi'
 	dir = NORTH
 	width = 2
-	Height = 1
 
 /obj/machinery/door/airlock/multi_tile/covenant/allowed(var/mob/m) //Covenant doors don't run on usual access cards. Internal tech scans the accesser.
 	var/mob/living/carbon/human/h = m
@@ -17,7 +16,6 @@
 	icon = 'door64ew.dmi'
 	dir = EAST
 	width = 2
-	Height = 1
 
 
 
@@ -26,13 +24,12 @@
 	icon = 'door96.dmi'
 	dir = NORTH
 	width = 3
-	Height = 1
+
 
 /obj/machinery/door/airlock/multi_tile/covenant/three/eastwest
 	icon = 'door96ew.dmi'
 	dir = EAST
 	width = 3
-	Height = 1
 
 
 /obj/machinery/door/airlock/multi_tile/covenant/four
@@ -40,10 +37,10 @@
 	icon = 'door128.dmi'
 	dir = NORTH
 	width = 4
-	Height = 1
+
 
 /obj/machinery/door/airlock/multi_tile/covenant/four/eastwest
 	icon = 'door128ew.dmi'
 	dir = EAST
 	width = 4
-	Height = 1
+
