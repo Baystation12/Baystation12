@@ -1,0 +1,11 @@
+ 
+author: CaelAislinn
+
+delete-after: True
+
+changes: 
+  - rscadd: "Adds Covenant features: Prophets, Drones, Engineers, multitile airlocks (2, 3 and 4 tile), energy barricades, gravity lifts and much more."
+  - wip: "Adds placeholder Covenant features: Banshee, Shadow APC, antimatter bomb, elite bed, pinch fusion reactor."
+  - bugfix: "NPCs can be interacted with after the first time."
+  - tweak: "Elite energy swords now have a toggleable failsafe. If they are dropped while active, they will self destruct."
+  - bugfix: "Multitile airlocks now block sight properly."

@@ -8,6 +8,8 @@
 
 /mob/living/simple_animal/npc/attack_hand(var/mob/living/user)
 	if(user && istype(user) && can_use(user))
+		if(interacting_mob && !can_use(interacting_mob))
+			interacting_mob = null
 		if(interacting_mob && interacting_mob != user)
 			to_chat(user, "[src] is already dealing with [interacting_mob]!")
 		else
