@@ -68,7 +68,7 @@
 "bp" = (/obj/item/modular_computer/console,/turf/simulated/floor/airless/ceiling,/area/om_ships/caelum)
 "bq" = (/obj/structure/oxy_dispenser/large{pixel_x = 32},/turf/simulated/floor/airless/ceiling,/area/om_ships/caelum)
 "br" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/airless/ceiling,/area/om_ships/caelum)
-"bs" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/airless/ceiling,/area/om_ships/caelum)
+"bs" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/turf/simulated/floor/airless/ceiling,/area/om_ships/caelum)
 "bt" = (/obj/machinery/door/airlock/glass_external,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "bu" = (/obj/machinery/computer/navigation,/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "bv" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/caelum)
