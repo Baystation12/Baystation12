@@ -92,7 +92,7 @@
 
 		var/L = list()
 		var/sum = 0
-		
+
 		for(var/decl/hierarchy/skill/skill in GLOB.skills)
 			if(skill in input_skills)
 				var/min = get_min_skill(job, skill)
@@ -154,7 +154,7 @@
 	dat += "<b>Skill points remaining: [pref.points_by_job[job]].</b><hr>"
 	dat += "<hr>"
 	dat += "</center></tt>"
-	
+
 	dat += "<table>"
 	var/decl/hierarchy/skill/skill = decls_repository.get_decl(/decl/hierarchy/skill)
 	for(var/decl/hierarchy/skill/cat in skill.children)

@@ -9,7 +9,7 @@
 	supervisors = "the captain"
 	selection_color = "#7f6e2c"
 	req_admin_notify = 1
-	economic_modifier = 10
+	economic_power = 10
 
 	ideal_character_age = 50
 
@@ -34,7 +34,7 @@
 	spawn_positions = 7
 	supervisors = "the chief engineer"
 	selection_color = "#5b4d20"
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 7
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
@@ -51,7 +51,7 @@
 	spawn_positions = 0
 	supervisors = "the chief engineer"
 	selection_color = "#5b4d20"
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 7
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
