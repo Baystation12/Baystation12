@@ -147,9 +147,9 @@
 "cQ" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Pod Bay Acces"},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
 "cR" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
 "cS" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
-"cT" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/lifepods{tag = "icon-lifepods (NORTH)"; icon_state = "lifepods"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
-"cU" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
-"cV" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cT" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cU" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/lifepods{tag = "icon-lifepods (NORTH)"; icon_state = "lifepods"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cV" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "cW" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "cX" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "cY" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
@@ -325,7 +325,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaabObObObObPbObObObsbsbsaOayaPaPaPaPaPbkbkbkbkbkbkbkbkbQ
 aaaaaaaaaaaaaaaaaaaaaaaaaabTbUbVbWbXbYbZbObsbsbsbjcaaPaPaPcbaPbkbkbkcccdcebkbkbQaPaQbebGaQaQcfcfcfcfcfcfcfcfcfcgchbNcicjbNckclclcmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaabTcncncnbXcocpbObsbsbsaOayaPcqcrcsctcubkcvcccwcecxcyczaPaQcAcBbpaQcgcgcfcfcfcfcfcfcfcCcDbNcEcFbNcGclclcmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaabTcncncncncHcIbOcJcJcJcKayaPaPaPaPaPaPaPaPaPaPaPaPcLaPaPaQcMaQaQaQcNcNcfcfcfcfcfcfcfcgcDbNcOcPcQcPcPcPbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaabTcncRcpcncHcncncScgcgcTcUcVcScgcgcgcVcgcgcgcgcVcgcWcgcgcgcXcgcWcVcYcYcgcgcgcVcScZcgcgcDdacOcPbNckclclcmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabTcncRcpcncHcncncScTcgcUcVcTcScgcgcgcTcgcgcgcgcTcgcWcgcgcTcXcgcWcTcYcYcgcgcgcTcScZcgcgcDdacOcPbNckclclcmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaabTcndbcpcndcdddedfdgdgdhdidgdgdgdgdjdgdgdgdgdgdgdgdkdgdgdgdkdldkdgdgdmdgdgdgdgdgdndodgdpdqdrcPbNcGclclcmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaabTcncncncncncIbOdsdtdtdudvdwdwdwdwdxdydwdwdwdzdzdzdzdAdBdzdzdzdCdCdCdDdCdCdEdEdEdEdEcgcDbNcPcPcQcPcPcPbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaabTcncncnbXdbcpbOdFdtdtdGdvdwdHdIdJdKdydJdIdHdzdLdMdNdOdBdNdMdLdCdPdQdRdSdSdTdEdEdEdEcCcDbNdUcPbNclclclcmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
