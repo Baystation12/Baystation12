@@ -27,6 +27,7 @@
 	assisted_langs = list(LANGUAGE_NABBER)
 	health_hud_intensity = 2
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
+	economic_modifier = 7
 
 	min_age = 18
 	max_age = 260

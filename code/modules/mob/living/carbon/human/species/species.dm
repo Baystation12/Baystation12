@@ -239,6 +239,8 @@
 		/datum/mob_descriptor/build = 0
 	)
 
+	var/economic_modifier
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify

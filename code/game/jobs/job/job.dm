@@ -86,10 +86,10 @@
 			if(COMPANY_OPPOSED)		loyalty = 0.70
 
 	//give them an account in the station database
-	if(!(H.species && (H.species.type in economic_species_modifier)))
+	if(!H.species || isnull(H.species.economic_modifier))
 		return //some bizarre species like shadow, slime, or monkey? You don't get an account.
 
-	var/species_modifier = economic_species_modifier[H.species.type]
+	var/species_modifier = H.species.economic_modifier
 
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier * GLOB.using_map.salary_modifier
 	money_amount *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)

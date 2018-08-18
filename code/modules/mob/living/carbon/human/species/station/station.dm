@@ -14,6 +14,8 @@
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 17
 	max_age = 100
+	economic_modifier = 10
+
 	gluttonous = GLUT_TINY
 
 	spawn_flags = SPECIES_CAN_JOIN
@@ -100,6 +102,7 @@
 	//secondary_langs =
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
+	economic_modifier = 7
 
 	min_age = 19
 	max_age = 140
@@ -211,6 +214,7 @@
 		/datum/mob_descriptor/build = 0,
 		/datum/mob_descriptor/headtail_length = 0
 	)
+	economic_modifier = 12
 
 /datum/species/diona
 	name = SPECIES_DIONA
@@ -235,6 +239,7 @@
 	spawns_with_stack = 0
 	health_hud_intensity = 2
 	hunger_factor = 3
+	economic_modifier = 5
 
 	min_age = 1
 	max_age = 300
