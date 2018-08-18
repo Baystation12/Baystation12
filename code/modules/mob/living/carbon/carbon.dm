@@ -404,10 +404,6 @@
 	if(default_language && can_speak(default_language))
 		return default_language
 
-	if(!species)
-		return null
-	return species.default_language ? all_languages[species.default_language] : null
-
 /mob/living/carbon/show_inv(mob/user as mob)
 	user.set_machine(src)
 	var/dat = {"

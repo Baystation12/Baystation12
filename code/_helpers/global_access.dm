@@ -43,6 +43,10 @@
 			return global.SSantags;
 		if("SSatoms")
 			return global.SSatoms;
+		if("SScircuit")
+			return global.SScircuit;
+		if("SSculture")
+			return global.SSculture;
 		if("SSevac")
 			return global.SSevac;
 		if("SSevent")
@@ -1024,6 +1028,10 @@
 			global.SSantags=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
+		if("SScircuit")
+			global.SScircuit=newval;
+		if("SSculture")
+			global.SSculture=newval;
 		if("SSevac")
 			global.SSevac=newval;
 		if("SSevent")
@@ -1983,6 +1991,8 @@
 	"SSalarm",
 	"SSantags",
 	"SSatoms",
+	"SScircuit",
+	"SSculture",
 	"SSevac",
 	"SSevent",
 	"SSfastprocess",
@@ -2205,7 +2215,6 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
-	"integrated_circuit_blacklist",
 	"intents",
 	"intercom_range_display_status",
 	"invalid_zone",
