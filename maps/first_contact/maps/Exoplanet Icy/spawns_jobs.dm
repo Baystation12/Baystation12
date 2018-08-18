@@ -32,6 +32,22 @@ GLOBAL_LIST_EMPTY(emsville_staff_spawns)
 	..()
 	GLOB.emsville_staff_spawns += loc
 
+GLOBAL_LIST_EMPTY(emsville_marshall_spawns)
+
+/datum/spawnpoint/emsville_marshall
+	display_name =  "Emsville Spawn Marshall"
+	restrict_job = list("Emsville Marshall")
+
+/datum/spawnpoint/emsville_marshall/New()
+	..()
+	turfs = GLOB.emsville_marshall_spawns
+
+/obj/effect/landmark/start/emsville_marshall
+	name = "Emsville Spawn Marshall"
+
+/obj/effect/landmark/start/emsville_marshall/New()
+	..()
+	GLOB.emsville_marshall_spawns += loc
 
 /decl/hierarchy/outfit/job/Outer_Colonist
 	name = "Outer_Colonist"
@@ -95,17 +111,27 @@ GLOBAL_LIST_EMPTY(emsville_staff_spawns)
 	spawn_positions = 3
 	outfit_type = /decl/hierarchy/outfit/job/IGUARD
 	selection_color = "#008000"
-	access = list(110)
+	access = list(532,110)
 	spawnpoint_override = "Depot Guard Spawn"
 	is_whitelisted = 0
 
 
 /datum/job/Emsville_Colonist
 	title = "Emsville Colonist"
-	total_positions = 10
-	spawn_positions = 10
+	total_positions = 15
+	spawn_positions = 15
 	outfit_type = /decl/hierarchy/outfit/job/Outer_Colonist
 	selection_color = "#000000"
 	spawnpoint_override = "Emsville Spawn"
-	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Sushi Cook","Surgeon","Bartender")
+	alt_titles = list("Miner","Doctor","Nurse","Sushi Chef","Hydroponics Technician","Warehouse Worker","Librarian","Surgeon","Bartender","Nightclub Owner")
+	is_whitelisted = 0
+
+/datum/job/Emsville_Marshall
+	title = "Emsville Marshall"
+	total_positions = 2
+	spawn_positions = 2
+	outfit_type = /decl/hierarchy/outfit/job/marshall
+	selection_color = "#000000"
+	access = list(532)
+	spawnpoint_override = "Emsville Spawn Marshall"
 	is_whitelisted = 0
