@@ -8,10 +8,6 @@
 	icon = 'grav128.dmi'
 	icon_state = "elevator"
 
-/area/gravlift
-	name = "Gravity lift chute"
-	has_gravity = 0
-
 /obj/structure/grav_lift
 	name = "Gravity lift pad"
 	desc = "A mysterious antigravity field that enables vertical travel through the air."
@@ -22,7 +18,7 @@
 	layer = 2.9
 	var/list/base_turfs = list()
 	var/list/connected_field = list()
-	var/area/gravlift/my_area
+	var/area/my_area
 
 /obj/structure/grav_lift/New()
 	. = ..()
@@ -42,6 +38,8 @@
 			my_area = G.my_area
 	if(!my_area)
 		my_area = new()
+		my_area.name = "Gravity lift chute"
+		my_area.has_gravity = 0
 
 	for(var/turf/T in base_turfs)
 		do
