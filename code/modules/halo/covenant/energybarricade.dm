@@ -43,7 +43,7 @@
 
 		//movement in front of the shield
 		if(front_turf == T)
-			A << "<span class='warning'>[src] blocks your way.</span>"
+			to_chat(A,"<span class='warning'>[src] blocks your way.</span>")
 			return 0
 
 /obj/structure/energybarricade/CheckExit(atom/movable/O as mob|obj, target as turf)
