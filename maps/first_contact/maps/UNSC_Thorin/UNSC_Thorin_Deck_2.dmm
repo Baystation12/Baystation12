@@ -158,7 +158,7 @@
 "db" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
 "dc" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
 "dd" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
-"de" = (/obj/machinery/door/firedoor/multi_tile{dir = 4; icon_state = "door_open"; tag = "icon-door_open (NORTH)"},/obj/machinery/door/airlock/multi_tile/halo{dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"de" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
 "df" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/maint,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "dg" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "dh" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/lifepods,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
