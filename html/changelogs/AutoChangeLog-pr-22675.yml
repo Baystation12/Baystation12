@@ -1,0 +1,6 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - tweak: "All Marine Corps uniforms and items have been renamed to reflect the SCG Army, removing all references of the Marines."
+  - rscadd: "Adds an array of Army outfits, spawnable by admins."
+  - tweak: "The Marine (now Army) PT uniform is now black instead of green."
