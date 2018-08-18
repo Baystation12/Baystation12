@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/hostile/retaliate/done
-	name = "Yan'me"
+	name = "Yanme'e"
 	desc = "A flying insect like creature covered in hard chitin."
 	icon = 'drone.dmi'
 	icon_state = "drone"

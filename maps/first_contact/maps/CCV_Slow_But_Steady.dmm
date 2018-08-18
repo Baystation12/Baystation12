@@ -88,7 +88,7 @@
 "bJ" = (/obj/item/modular_computer/console,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "bK" = (/obj/structure/oxy_dispenser/large{pixel_x = 32},/obj/machinery/light{tag = "icon-bulb0 (EAST)"; icon_state = "bulb0"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/caelum)
 "bL" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bM" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bM" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/turf/simulated/floor/plating,/area/om_ships/caelum)
 "bN" = (/obj/machinery/computer/navigation,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "bO" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "bP" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/vending/wallmed1{pixel_x = 28},/turf/simulated/floor/tiled,/area/om_ships/caelum)
