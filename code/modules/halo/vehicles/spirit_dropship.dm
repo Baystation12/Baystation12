@@ -1,5 +1,5 @@
 /obj/vehicles/air/spirit_dropship
-	name = "Type-25 Troop Carrier"
+	name = "Type-25 \"Spirit\" Troop Carrier"
 	desc = "A large, tuning fork shaped ship with a underslung heavy plasma cannon."
 
 	icon = 'code/modules/halo/vehicles/spirit.dmi'
