@@ -41,6 +41,11 @@
 	holder_type = /obj/item/weapon/holder
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/no_eyes)
 
+	descriptors = list(
+		/datum/mob_descriptor/height = -2,
+		/datum/mob_descriptor/build = -2
+	)
+
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
