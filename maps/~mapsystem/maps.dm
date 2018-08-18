@@ -111,51 +111,51 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/supply_currency_name = "Credits"
 	var/supply_currency_name_short = "Cr."
 
-	//Factions prefs stuff
-	var/list/citizenship_choices = list(
-		"Earth",
-		"Mars",
-		"Terra",
-		"Gaia",
-		"Moghes",
-		"Ahdomai",
-		"Qerrbalak"
+	var/list/available_cultural_info = list(
+		TAG_HOMEWORLD = list(
+			HOME_SYSTEM_EARTH,
+			HOME_SYSTEM_LUNA,
+			HOME_SYSTEM_MARS,
+			HOME_SYSTEM_VENUS,
+			HOME_SYSTEM_CERES,
+			HOME_SYSTEM_PLUTO,
+			HOME_SYSTEM_TAU_CETI,
+			HOME_SYSTEM_OTHER
+		),
+		TAG_FACTION = list(
+			FACTION_SOL_CENTRAL,
+			FACTION_TERRAN_CONFED,
+			FACTION_NANOTRASEN,
+			FACTION_FREETRADE,
+			FACTION_XYNERGY,
+			FACTION_EXPEDITIONARY,
+			FACTION_OTHER
+		),
+		TAG_CULTURE = list(
+			CULTURE_HUMAN,
+			CULTURE_OTHER
+		),
+		TAG_RELIGION = list(
+			RELIGION_OTHER,
+			RELIGION_JUDAISM,
+			RELIGION_HINDUISM,
+			RELIGION_BUDDHISM,
+			RELIGION_ISLAM,
+			RELIGION_CHRISTIANITY,
+			RELIGION_AGNOSTICISM,
+			RELIGION_DEISM,
+			RELIGION_ATHEISM,
+			RELIGION_THELEMA,
+			RELIGION_SPIRITUALISM
+		)
 	)
 
-	var/list/home_system_choices = list(
-		"Sol",
-		"Nyx",
-		"Tau Ceti",
-		"Epsilon Ursae Minoris",
-		"Zamsiin-lr",
-		"Gilgamesh"
-		)
-
-	var/list/faction_choices = list(
-		"Sol Central Government",
-		"Terran Colonial Confederation",
-		"Vey Med",
-		"Einstein Engines",
-		"Free Trade Union",
-		"NanoTrasen",
-		"Ward-Takahashi GMB",
-		"Gilthari Exports",
-		"Grayson Manufactories Ltd.",
-		"Aether Atmospherics",
-		"Zeng-Hu Pharmaceuticals",
-		"Hephaestus Industries",
-		"Commonwealth of Ahdomai"
-		)
-
-	var/list/religion_choices = list(
-		"Unitarianism",
-		"Hinduism",
-		"Buddhist",
-		"Islamic",
-		"Christian",
-		"Agnostic",
-		"Deist"
-		)
+	var/list/default_cultural_info = list(
+		TAG_HOMEWORLD = HOME_SYSTEM_MARS,
+		TAG_FACTION =   FACTION_SOL_CENTRAL,
+		TAG_CULTURE =   CULTURE_HUMAN,
+		TAG_RELIGION =  RELIGION_AGNOSTICISM
+	)
 
 /datum/map/New()
 	if(!map_levels)

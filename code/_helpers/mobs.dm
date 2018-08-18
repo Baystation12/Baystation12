@@ -39,34 +39,20 @@ proc/random_hair_style(gender, species = SPECIES_HUMAN)
 
 proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
-
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
 	if(valid_facialhairstyles.len)
 		f_style = pick(valid_facialhairstyles)
-
 		return f_style
 
-proc/sanitize_name(name, species = SPECIES_HUMAN)
-	var/datum/species/current_species
-	if(species)
-		current_species = all_species[species]
-
-	return current_species ? current_species.sanitize_name(name) : sanitizeName(name)
-
 proc/random_name(gender, species = SPECIES_HUMAN)
-
-	var/datum/species/current_species
 	if(species)
-		current_species = all_species[species]
-
-	if(!current_species)
-		if(gender==FEMALE)
-			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
-		else
-			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
-	else
-		return current_species.get_random_name(gender)
+		var/datum/species/current_species = all_species[species]
+		if(current_species)
+			var/decl/cultural_info/current_culture = SSculture.get_culture(current_species.default_cultural_info[TAG_CULTURE])
+			if(current_culture)
+				return current_culture.get_random_name(gender)
+	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
 proc/random_skin_tone(var/datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185

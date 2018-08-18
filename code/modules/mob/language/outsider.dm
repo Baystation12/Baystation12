@@ -1,5 +1,5 @@
 /datum/language/xenocommon
-	name = "Xenophage"
+	name = LANGUAGE_XENOPHAGE
 	colour = "alien"
 	desc = "The common tongue of the xenophages."
 	speech_verb = "hisses"
@@ -12,7 +12,7 @@
 	shorthand = "Xeno"
 
 /datum/language/xenos
-	name = "Hivemind"
+	name = LANGUAGE_XENOPHAGE_HIVE
 	desc = "Xenophages have the strange ability to commune over a psychic hivemind."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
@@ -74,7 +74,7 @@
 	..(speaker,message,speaker_mask)
 
 /datum/language/vox
-	name = "Vox-pidgin"
+	name = LANGUAGE_VOX
 	desc = "The common tongue of the various Vox ships making up the Shoal. It sounds like chaotic shrieking to everyone else."
 	speech_verb = "shrieks"
 	ask_verb = "creels"

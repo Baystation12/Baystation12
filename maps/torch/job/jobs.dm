@@ -49,7 +49,7 @@
 	title = "Commanding Officer"
 	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
 	minimal_player_age = 7
-	economic_modifier = 15
+	economic_power = 15
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/CO
 	allowed_branches = list(
@@ -80,7 +80,7 @@
 	department = "Command"
 	department_flag = COM
 	minimal_player_age = 7
-	economic_modifier = 10
+	economic_power = 10
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/XO
 	allowed_branches = list(
@@ -132,7 +132,7 @@
 /datum/job/rd
 	title = "Research Director"
 	supervisors = "NanoTrasen and the Commanding Officer"
-	economic_modifier = 20
+	economic_power = 20
 	minimal_player_age = 7
 	ideal_character_age = 60
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
@@ -168,7 +168,7 @@
 /datum/job/cmo
 	title = "Chief Medical Officer"
 	supervisors = "the Commanding Officer and the Executive Officer"
-	economic_modifier = 10
+	economic_power = 10
 	minimal_player_age = 7
 	ideal_character_age = 48
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/cmo
@@ -212,7 +212,7 @@
 /datum/job/chief_engineer
 	title = "Chief Engineer"
 	supervisors = "the Commanding Officer and the Executive Officer"
-	economic_modifier = 9
+	economic_power = 9
 	ideal_character_age = 40
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
@@ -267,7 +267,7 @@
 /datum/job/hos
 	title = "Chief of Security"
 	supervisors = "the Commanding Officer and the Executive Officer"
-	economic_modifier = 8
+	economic_power = 8
 	minimal_player_age = 7
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/cos
@@ -315,7 +315,7 @@
 	spawn_positions = 1
 	supervisors = "NanoTrasen and Corporate Regulations"
 	selection_color = "#2f2f7f"
-	economic_modifier = 15
+	economic_power = 15
 	minimal_player_age = 0
 	alt_titles = list(
 		"NanoTrasen Representative",
@@ -347,7 +347,7 @@
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
 	selection_color = "#2f2f7f"
-	economic_modifier = 15
+	economic_power = 15
 	minimal_player_age = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/solgov)
@@ -374,7 +374,7 @@
 	supervisors = "the Commanding Officer and the Executive Officer"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 7
-	economic_modifier = 8
+	economic_power = 8
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	allowed_branches = list(
@@ -420,7 +420,7 @@
 	supervisors = "the Commanding Officer and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
-	economic_modifier = 7
+	economic_power = 7
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	allowed_branches = list(
@@ -466,7 +466,7 @@
 	supervisors = "the Commanding Officer and the Executive Officer"
 	selection_color = "#68099e"
 	minimal_player_age = 1
-	economic_modifier = 7
+	economic_power = 7
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
@@ -501,7 +501,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#68099e"
-	economic_modifier = 10
+	economic_power = 10
 	minimal_player_age = 0
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
@@ -566,7 +566,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
-	economic_modifier = 6
+	economic_power = 6
 	minimal_player_age = 3
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer
@@ -613,7 +613,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief Engineer"
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 0
 	ideal_character_age = 30
 	alt_titles = list(
@@ -777,7 +777,7 @@
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer and the Chief Medical Officer"
 	selection_color = "#5b4d20"
-	economic_modifier = 6
+	economic_power = 6
 	alt_titles = list(
 		"Biomechanical Engineer",
 		"Mechsuit Technician")
@@ -807,7 +807,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
@@ -845,7 +845,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
 	skill_points = 14
@@ -893,7 +893,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief of Security"
-	economic_modifier = 4
+	economic_power = 4
 	minimal_player_age = 7
 	ideal_character_age = 25
 	alt_titles = list()
@@ -937,7 +937,7 @@
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
-	economic_modifier = 8
+	economic_power = 8
 	alt_titles = list(
 		"Surgeon",
 		"Trauma Surgeon")
@@ -975,7 +975,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Chief Medical Officer"
-	economic_modifier = 7
+	economic_power = 7
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
@@ -1021,7 +1021,7 @@
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
-	economic_modifier = 3
+	economic_power = 3
 	ideal_character_age = 30
 	alt_titles = list(
 		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
@@ -1099,7 +1099,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
-	economic_modifier = 4
+	economic_power = 4
 	ideal_character_age = 30
 	minimal_player_age = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
@@ -1120,7 +1120,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	alt_titles = list(
@@ -1155,7 +1155,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Executive Officer"
-	economic_modifier = 5
+	economic_power = 5
 	minimal_player_age = 0
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
@@ -1256,7 +1256,7 @@
 	spawn_positions = 4
 	supervisors = "the Deck Officer and Executive Officer"
 	selection_color = "#515151"
-	economic_modifier = 7
+	economic_power = 7
 	ideal_character_age = 25
 	alt_titles = list(
 		"Drill Technician",
@@ -1389,7 +1389,7 @@
 	spawn_positions = 1
 	supervisors = "the Research Director"
 	selection_color = "#633d63"
-	economic_modifier = 12
+	economic_power = 12
 	minimal_player_age = 3
 	ideal_character_age = 50
 	alt_titles = list(
@@ -1419,7 +1419,7 @@
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "the Research Director"
-	economic_modifier = 10
+	economic_power = 10
 	ideal_character_age = 45
 	minimal_player_age = 0
 	alt_titles = list(
@@ -1457,7 +1457,7 @@
 	spawn_positions = 2
 	supervisors = "the Research Director and NanoTrasen Personnel"
 	selection_color = "#633d63"
-	economic_modifier = 6
+	economic_power = 6
 	minimal_player_age = 0
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/guard
@@ -1484,7 +1484,7 @@
 	spawn_positions = 4
 	supervisors = "the Research Director and NanoTrasen Personnel"
 	selection_color = "#633d63"
-	economic_modifier = 3
+	economic_power = 3
 	ideal_character_age = 30
 	alt_titles = list(
 		"Custodian" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor,
@@ -1511,7 +1511,7 @@
 	spawn_positions = 12
 	supervisors = "the Executive Officer"
 	selection_color = "#515151"
-	economic_modifier = 6
+	economic_power = 6
 	announced = FALSE
 	alt_titles = list(
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,

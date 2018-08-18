@@ -1,7 +1,7 @@
 /datum/trader/ship/vox
 	typical_duration = 15
 	origin = "UNREGISTERED VESSEL"
-	name_language = "Vox-pidgin"
+	name_language = LANGUAGE_VOX
 	compliment_increase = 0
 	trade_flags = TRADER_GOODS
 	var/hailed_vox = 0 //Whether we have been hailed by a vox. negatives mean pariah, positives mean regular.

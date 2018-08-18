@@ -99,7 +99,11 @@
 		else
 			M.randomize_eye_color()
 
-	M.SetName((CORPSE_SPAWNER_RANDOM_NAME & spawn_flags) ? M.species.get_random_name(M.gender) : name)
+	var/decl/cultural_info/culture = M.get_cultural_value(TAG_CULTURE)
+	if(culture && CORPSE_SPAWNER_RANDOM_NAME & spawn_flags)
+		M.SetName(culture.get_random_name(M.gender))
+	else
+		M.SetName(name)
 	M.real_name = M.name
 
 #undef HEX_COLOR_TO_RGB_ARGS

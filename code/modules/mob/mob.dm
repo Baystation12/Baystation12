@@ -1151,3 +1151,6 @@
 
 /mob/proc/has_chem_effect(chem, threshold)
 	return FALSE
+
+/mob/proc/has_admin_rights()
+	return check_rights(R_ADMIN, 0, src)

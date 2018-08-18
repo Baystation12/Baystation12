@@ -239,7 +239,9 @@ badges
 /obj/item/clothing/accessory/badge/solgov/tags/set_desc(var/mob/living/carbon/human/H)
 	if(!istype(H))
 		return
-	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [H.religion]\nBlood type: [H.b_type]"
+	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
+	var/religion = culture ? culture.name : "Unset"
+	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
 
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"

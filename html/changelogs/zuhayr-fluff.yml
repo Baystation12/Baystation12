@@ -1,0 +1,6 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "The General character generation tab has been split between Background and Physical."
+  - rscadd: "The faction/species/homeworld backend has been completely rewritten."
+  - tweak: "Check your species, faction and homeworld settings as well as the new 'culture' option under Background."

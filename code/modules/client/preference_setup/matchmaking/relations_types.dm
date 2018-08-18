@@ -16,7 +16,7 @@
 /datum/relation/kid_friend/get_candidates()
 	var/list/creche = ..()
 	var/mob/living/carbon/human/holdermob = holder.current
-	
+
 	if(istype(holdermob))
 		for(var/datum/relation/kid in creche)
 			var/mob/living/carbon/human/kidmob = kid.holder.current
@@ -25,7 +25,9 @@
 			if(abs(holdermob.age - kidmob.age) > 3)
 				creche -= kid		//No creepers please, it's okay if the pool is small.
 				continue
-			if(holdermob.home_system && kidmob.home_system && (holdermob.home_system != kidmob.home_system))
+			var/kidhome =    kidmob.get_cultural_value(TAG_HOMEWORLD)
+			var/holderhome = holdermob.get_cultural_value(TAG_HOMEWORLD)
+			if(kidhome && holderhome && kidhome != holderhome)
 				creche -= kid		//No trans-galactic shennanigans either.
 	return creche
 

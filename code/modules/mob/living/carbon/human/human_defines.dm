@@ -39,11 +39,7 @@
 
 	var/datum/backpack_setup/backpack_setup
 
-	// General information
-	var/home_system = ""
-	var/citizenship = ""
-	var/personal_faction = ""
-	var/religion = ""
+	var/list/cultural_info = list()
 
 	//Equipment slots
 	var/obj/item/wear_suit = null
