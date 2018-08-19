@@ -239,6 +239,8 @@
 		/datum/mob_descriptor/build = 0
 	)
 
+	var/economic_modifier
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
@@ -601,6 +603,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		return 100
 	if(appearance_flags & HAS_SKIN_TONE_SPCR)
 		return 165
+	if(appearance_flags & HAS_SKIN_TONE_TRITON)
+		return 80
 	return 220
 
 /datum/species/proc/get_hair_styles()

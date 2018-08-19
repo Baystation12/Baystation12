@@ -6157,10 +6157,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
-"asL" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/assembly/chargebay)
 "asZ" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -7063,7 +7059,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
 "awg" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "robotics_external_windows"
+	},
 /turf/simulated/floor/plating,
 /area/assembly/robotics)
 "awn" = (
@@ -26236,12 +26234,17 @@
 /obj/item/weapon/pen,
 /obj/machinery/light,
 /obj/machinery/light_switch{
-	pixel_x = -12;
+	pixel_x = -4;
 	pixel_y = -24
 	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 21
+	},
+/obj/machinery/button/windowtint{
+	id = "robotics_external_windows";
+	pixel_x = 4;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
@@ -49580,7 +49583,7 @@ iGb
 mbb
 arH
 kHb
-asL
+arH
 arH
 arH
 axe
@@ -49784,7 +49787,7 @@ kAb
 kIb
 kQb
 hPt
-asL
+arH
 dRf
 dkJ
 knu
@@ -50390,7 +50393,7 @@ kCb
 kLb
 kTb
 lcb
-asL
+arH
 axh
 ayi
 azn
