@@ -12,7 +12,7 @@
 	title = "Researcher"
 	supervisors = "the crew"
 	total_positions = 2
-	outfit_type = /decl/hierarchy/outfit/job/unishi/crew
+	outfit_type = /decl/hierarchy/outfit/job/unishi/researcher
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
 	you away, knocking you cold unconcious. Before this happened, you were a researcher, aboard SRV Verne."
 
