@@ -9883,6 +9883,7 @@
 /area/security/opscheck)
 "aFK" = (
 /obj/effect/floor_decal/corner/red/mono,
+/obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/opscheck)
 "aFL" = (
@@ -18227,13 +18228,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
-"eYS" = (
-/obj/structure/bed/chair/office/light{
-	dir = 4
-	},
-/obj/machinery/light,
-/turf/simulated/floor/carpet/red,
-/area/rnd/breakroom)
 "eZb" = (
 /obj/machinery/power/apc{
 	dir = 4;
@@ -30843,6 +30837,9 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/opscheck)
@@ -55436,7 +55433,7 @@ aAP
 pSA
 ozb
 ozb
-eYS
+pSA
 aGG
 jSb
 peb
