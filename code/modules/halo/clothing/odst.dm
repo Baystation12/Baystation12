@@ -178,6 +178,18 @@
 	item_state = "Odst Helmet Spartan"
 	icon_state = "Odst Helmet Spartan"
 
+/obj/item/clothing/head/helmet/odst/donator/spartan
+	name = "Mann's ODST Helmet"
+
+	item_state = "Odst Helmet Mann"
+	icon_state = "Odst Helmet Mann"
+
+
+/obj/item/clothing/suit/armor/special/odst/donator/spartan
+	name = "Mann's ODST Armour"
+
+	icon_state = "Odst Armor Mann"
+
 /obj/item/clothing/suit/armor/special/odst/donator/spartan
 	name = "ODST Squad Leader Armour"
 
