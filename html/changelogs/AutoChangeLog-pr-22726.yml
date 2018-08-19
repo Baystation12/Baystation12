@@ -1,0 +1,4 @@
+author: "IsdatAfamas"
+delete-after: True
+changes: 
+  - bugfix: "Various fixes implemented for SRV Verne. Overall should be far less deadly as an away mission."
