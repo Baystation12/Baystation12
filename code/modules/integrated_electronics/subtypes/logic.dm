@@ -162,6 +162,15 @@
 /obj/item/integrated_circuit/logic/binary/and/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.data && B.data
 
+/obj/item/integrated_circuit/logic/binary/nand
+	name = "nand gate"
+	desc = "This gate will only output FALSE if both inputs evaluate to true."
+	icon_state = "nand"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/logic/binary/nand/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
+	return !(A.data && B.data)
+
 /obj/item/integrated_circuit/logic/binary/or
 	name = "or gate"
 	desc = "This gate will output TRUE if one of the inputs evaluate to true."
@@ -170,6 +179,15 @@
 
 /obj/item/integrated_circuit/logic/binary/or/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.data || B.data
+
+/obj/item/integrated_circuit/logic/binary/xor
+	name = "xor gate"
+	desc = "This gate will output TRUE if only one input evaluates to true."
+	icon_state = "xor"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/logic/binary/xor/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
+	return (A.data && !B.data) || (B.data && !A.data)
 
 /obj/item/integrated_circuit/logic/binary/less_than
 	name = "less than gate"
