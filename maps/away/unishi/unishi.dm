@@ -17,8 +17,8 @@
 	name = "SRV Verne"
 	desc = "Sensor array detects unknown class medium size vessel. The vessel appears unarmed.\
 	A small amount of radiation has been detected at the aft of the ship"
-	vessel_mass = 300
-	default_delay = 35 SECONDS
+	vessel_mass = 80
+	default_delay = 15 SECONDS
 	speed_mod = 10 SECONDS
 	initial_generic_waypoints = list(
 		"nav_unishi_1",
@@ -74,7 +74,7 @@
 	thermal_release_modifier = 0 //Basically inert
 	phoron_release_modifier = 100000000000
 	oxygen_release_modifier = 100000000000
-	radiation_release_modifier = 3.5
+	radiation_release_modifier = 1
 
 /obj/machinery/power/emitter/anchored/on
 	active = 1
