@@ -616,6 +616,20 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
 		jobs += "</tr></table>"
+
+	// Channels
+		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
+		var/list/channels = decls_repository.get_decls_of_subtype(/decl/communication_channel)
+		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(channels)]'>Channel Bans</th></tr><tr align='center'>"
+		for(var/channel_type in channels)
+			var/decl/communication_channel/channel = channels[channel_type]
+			if(jobban_isbanned(M, channel.name))
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[channel.name];jobban4=\ref[M]'><font color=red>[channel.name]</font></a></td>"
+			else
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[channel.name];jobban4=\ref[M]'>[channel.name]</a></td>"
+		jobs += "</tr></table>"
+
+	// Finalize and display.
 		body = "<body>[jobs]</body>"
 		dat = "<tt>[header][body]</tt>"
 		usr << browse(dat, "window=jobban2;size=800x490")

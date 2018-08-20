@@ -37,6 +37,7 @@
 	return FALSE
 
 /decl/communication_channel/proc/can_communicate(var/datum/communicator, var/message)
+
 	if(!message)
 		return FALSE
 
@@ -49,6 +50,10 @@
 		return FALSE
 
 	var/client/C = communicator.get_client()
+
+	if(jobban_isbanned(C.mob, name))
+		to_chat(communicator, "<span class='danger'>You cannot use [name] (banned).</span>")
+		return FALSE
 
 	if(can_ignore(C))
 		to_chat(communicator, "<span class='warning'>Couldn't send message - you have [name] muted.</span>")
