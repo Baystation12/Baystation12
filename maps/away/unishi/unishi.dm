@@ -12,6 +12,7 @@
 		/datum/job/submap/unishi_crew,
 		/datum/job/submap/unishi_researcher
 	)
+	whitelisted_species = list(SPECIES_HUMAN)
 
 /obj/effect/overmap/ship/unishi
 	name = "SRV Verne"
@@ -102,8 +103,8 @@ obj/item/weapon/paper/prof2
 	var/logtype
 	var/used = 0
 
-/obj/machinery/computer/log_printer/attack_hand(mob/user as mob)
-	if(!used)
+/obj/machinery/computer/log_printer/attack_hand(mob/living/user as mob)
+	if(!used && !isghost(usr))
 		to_chat(usr, "Default Boot Device File Integrity Damaged. Startup aborted. Error log printing.")
 		new logtype(loc)
 		used = 1
