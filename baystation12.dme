@@ -1475,8 +1475,6 @@
 #include "code\modules\events\infestation.dm"
 #include "code\modules\events\ion_storm.dm"
 #include "code\modules\events\meteors.dm"
-#include "code\modules\events\money_hacker.dm"
-#include "code\modules\events\money_lotto.dm"
 #include "code\modules\events\prison_break.dm"
 #include "code\modules\events\radiation_storm.dm"
 #include "code\modules\events\random_antagonist.dm"
