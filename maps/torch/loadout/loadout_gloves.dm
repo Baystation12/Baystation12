@@ -16,10 +16,6 @@
 /datum/gear/gloves/botany
 	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chef, /datum/job/bartender, /datum/job/assistant, /datum/job/merchant)
 
-/datum/gear/gloves/dress
-	display_name = "gloves, dress"
-	path = /obj/item/clothing/gloves/color/white
-
 /datum/gear/gloves/duty
 	display_name = "gloves, duty"
 	path = /obj/item/clothing/gloves/duty

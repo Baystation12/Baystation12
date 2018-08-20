@@ -24,4 +24,4 @@
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/shoes/sandal
-	allowed_branches = CIVILIAN_BRANCHES
+
