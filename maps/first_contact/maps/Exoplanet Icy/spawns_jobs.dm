@@ -128,8 +128,8 @@ GLOBAL_LIST_EMPTY(emsville_marshall_spawns)
 
 /datum/job/Emsville_Marshall
 	title = "Emsville Marshall"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 4
+	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/marshall
 	selection_color = "#000000"
 	access = list(532)
