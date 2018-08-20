@@ -119,8 +119,6 @@
 			return global._client_preferences_by_key;
 		if("_client_preferences_by_type")
 			return global._client_preferences_by_type;
-		if("account_hack_attempted")
-			return global.account_hack_attempted;
 		if("additional_antag_types")
 			return global.additional_antag_types;
 		if("admin_datums")
@@ -981,7 +979,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1102,8 +1100,6 @@
 			global._client_preferences_by_key=newval;
 		if("_client_preferences_by_type")
 			global._client_preferences_by_type=newval;
-		if("account_hack_attempted")
-			global.account_hack_attempted=newval;
 		if("additional_antag_types")
 			global.additional_antag_types=newval;
 		if("admin_datums")
@@ -1964,7 +1960,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
