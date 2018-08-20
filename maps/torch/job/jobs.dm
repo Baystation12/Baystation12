@@ -59,7 +59,6 @@
 
 /datum/job/hop
 	title = "Executive Officer"
-	supervisors = "the Commanding Officer"
 	department = "Command"
 	department_flag = COM
 	minimal_player_age = 7
@@ -105,7 +104,6 @@
 
 /datum/job/rd
 	title = "Research Director"
-	supervisors = "NanoTrasen and the Commanding Officer"
 	economic_modifier = 20
 	minimal_player_age = 7
 	ideal_character_age = 60
@@ -139,7 +137,6 @@
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
-	supervisors = "the Commanding Officer and the Executive Officer"
 	economic_modifier = 10
 	minimal_player_age = 7
 	ideal_character_age = 48
@@ -173,7 +170,6 @@
 
 /datum/job/chief_engineer
 	title = "Chief Engineer"
-	supervisors = "the Commanding Officer and the Executive Officer"
 	economic_modifier = 9
 	ideal_character_age = 40
 	minimal_player_age = 7
@@ -225,7 +221,6 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Sol Central Government and the SCG Charter"
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 0
@@ -249,7 +244,6 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Commanding Officer and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
 	economic_modifier = 7
@@ -287,7 +281,6 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Commanding Officer and the Executive Officer"
 	selection_color = "#68099e"
 	minimal_player_age = 1
 	economic_modifier = 7
@@ -314,7 +307,6 @@
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
-	supervisors = "the Pathfinder"
 	department = "Exploration"
 	department_flag = EXP
 
@@ -340,7 +332,6 @@
 	department_flag = EXP
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
@@ -365,7 +356,6 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
 	economic_modifier = 6
 	minimal_player_age = 3
@@ -403,7 +393,6 @@
 	title = "Engineer"
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Chief Engineer"
 	economic_modifier = 5
 	minimal_player_age = 0
 	ideal_character_age = 30
@@ -453,7 +442,6 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Engineer and Engineering Personnel"
 	selection_color = "#5b4d20"
 	ideal_character_age = 20
 
@@ -499,7 +487,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	minimal_player_age = 0
-	supervisors = "the Chief Engineer and the Chief Medical Officer"
 	selection_color = "#5b4d20"
 	economic_modifier = 6
 	alt_titles = list(
@@ -619,7 +606,6 @@
 	ideal_character_age = 45
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_modifier = 8
 	alt_titles = list(
@@ -649,7 +635,6 @@
 	title = "EMT"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the Chief Medical Officer"
 	economic_modifier = 7
 	ideal_character_age = 40
 	minimal_player_age = 0
@@ -682,7 +667,6 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
 	ideal_character_age = 20
 
@@ -717,7 +701,6 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_modifier = 4
 	ideal_character_age = 30
@@ -813,7 +796,6 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Deck Officer and Supply Personnel"
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
@@ -835,7 +817,6 @@
 	department_flag = SUP
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Deck Officer and Executive Officer"
 	selection_color = "#515151"
 	economic_modifier = 7
 	ideal_character_age = 25
@@ -861,7 +842,6 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Executive Officer"
 	ideal_character_age = 20
 	alt_titles = list(
 		"Janitor")
@@ -909,7 +889,6 @@
 
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the Executive Officer and SolGov Personnel"
 	selection_color = "#515151"
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
@@ -924,7 +903,6 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Research Director"
 	selection_color = "#633d63"
 	economic_modifier = 12
 	minimal_player_age = 3
@@ -952,7 +930,6 @@
 	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Research Director"
 	economic_modifier = 10
 	ideal_character_age = 45
 	minimal_player_age = 0
@@ -986,7 +963,6 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Research Director and NanoTrasen Personnel"
 	selection_color = "#633d63"
 	economic_modifier = 6
 	minimal_player_age = 0
@@ -1011,7 +987,6 @@
 
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Research Director and NanoTrasen Personnel"
 	selection_color = "#633d63"
 	economic_modifier = 3
 	ideal_character_age = 30
@@ -1035,7 +1010,6 @@
 	title = "Passenger"
 	total_positions = 12
 	spawn_positions = 12
-	supervisors = "the Executive Officer"
 	selection_color = "#515151"
 	economic_modifier = 6
 	announced = FALSE
@@ -1087,13 +1061,11 @@
 
 /datum/job/stowaway
 	title = "Stowaway"
-	department = "Civilian"
 	department_flag = CIV
 
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 20
-	supervisors = "yourself"
 	selection_color = "#515151"
 	ideal_character_age = 30
 	minimal_player_age = 0
