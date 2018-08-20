@@ -53,8 +53,7 @@
 /obj/item/weapon/card/id/torch/crew/medical/senior
 	job_access_type = /datum/job/senior_doctor
 
-/obj/item/weapon/card/id/torch/contractor/medical
-	job_access_type = /datum/job/doctor_contractor
+
 
 /obj/item/weapon/card/id/torch/contractor/chemist
 	job_access_type = /datum/job/chemist
@@ -85,8 +84,6 @@
 /obj/item/weapon/card/id/torch/crew/engineering/senior
 	job_access_type = /datum/job/senior_engineer
 
-/obj/item/weapon/card/id/torch/contractor/engineering
-	job_access_type = /datum/job/engineer_contractor
 
 /obj/item/weapon/card/id/torch/contractor/engineering/roboticist
 	job_access_type = /datum/job/roboticist
@@ -121,8 +118,6 @@
 /obj/item/weapon/card/id/torch/crew/representative
 	job_access_type = /datum/job/representative
 
-/obj/item/weapon/card/id/torch/crew/sea
-	job_access_type = /datum/job/sea
 
 /obj/item/weapon/card/id/torch/crew/bridgeofficer
 	job_access_type = /datum/job/bridgeofficer
@@ -167,7 +162,7 @@
 	job_access_type = /datum/job/guard
 
 /obj/item/weapon/card/id/torch/passenger/research/liaison
-	job_access_type = /datum/job/liaison
+
 
 
 //Merchant

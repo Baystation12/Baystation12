@@ -1,8 +1,8 @@
 /datum/gear/suit/blueapron
-	allowed_branches = CIVILIAN_BRANCHES
+
 
 /datum/gear/suit/overalls
-	allowed_branches = CIVILIAN_BRANCHES
+
 
 /datum/gear/suit/medcoat
 	allowed_roles = MEDICAL_ROLES
@@ -17,10 +17,10 @@
 	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
 
 /datum/gear/suit/medical_poncho
-	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list( /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/suit/engineering_poncho
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/suit/science_poncho
 	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant, /datum/job/merchant)
@@ -44,10 +44,10 @@
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/suit/coat
-	allowed_branches = CIVILIAN_BRANCHES
+
 
 /datum/gear/suit/leather
-	allowed_branches = CIVILIAN_BRANCHES
+
 
 /datum/gear/suit/wintercoat
 	allowed_roles = RESTRICTED_ROLES
@@ -65,12 +65,12 @@
 /datum/gear/tactical/pcarrier/navy
 	display_name = "navy blue plate carrier"
 	path = /obj/item/clothing/suit/armor/pcarrier/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
+
 
 /datum/gear/tactical/pcarrier/misc
 	display_name = "miscellaneous plate carrier selection"
 	allowed_roles = ARMORED_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
+
 
 /datum/gear/tactical/pcarrier/misc/New()
 	..()
