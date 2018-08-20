@@ -367,8 +367,6 @@
 			return global.dreams;
 		if("dummy_lighting_corner")
 			return global.dummy_lighting_corner;
-		if("economic_species_modifier")
-			return global.economic_species_modifier;
 		if("empty_playable_ai_cores")
 			return global.empty_playable_ai_cores;
 		if("endgame_exits")
@@ -1352,8 +1350,6 @@
 			global.dreams=newval;
 		if("dummy_lighting_corner")
 			global.dummy_lighting_corner=newval;
-		if("economic_species_modifier")
-			global.economic_species_modifier=newval;
 		if("empty_playable_ai_cores")
 			global.empty_playable_ai_cores=newval;
 		if("endgame_exits")
@@ -2153,7 +2149,6 @@
 	"doppler_arrays",
 	"dreams",
 	"dummy_lighting_corner",
-	"economic_species_modifier",
 	"empty_playable_ai_cores",
 	"endgame_exits",
 	"endgame_safespawns",

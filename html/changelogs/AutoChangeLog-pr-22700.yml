@@ -1,4 +1,0 @@
-author: "IsdatAfamas"
-delete-after: True
-changes: 
-  - bugfix: "CTI ship should spawn correctly now."
