@@ -2,7 +2,6 @@
 	name = "Torch"
 	full_name = "SEV Torch"
 	path = "torch"
-	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
