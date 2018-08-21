@@ -118,7 +118,7 @@
 				use_power(power_draw)
 				if(network1)
 					network1.update = 1
-		if (air1.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= 10 * ONE_ATMOSPHERE)//if pipe is good as empty or tank is full
+		if (air1.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
 			phase = "processing"
 
 	if (phase == "processing")//processing CO2 in tank
@@ -133,8 +133,8 @@
 			carbon_stored += co2_intake * carbon_efficiency
 			while (carbon_stored >= carbon_moles_per_piece)
 				carbon_stored -= carbon_moles_per_piece
-				var/atom/movable/product = new/obj/item/weapon/ore/coal
-				product.dropInto(loc)
+				var/material/M = SSmaterials.get_material_by_name("graphene")
+				M.place_sheet(get_turf(src), 1, M.name)
 			power_draw = power_rating * co2_intake
 			last_power_draw = power_draw
 			use_power(power_draw)
@@ -154,7 +154,7 @@
 					network2.update = 1
 		else//can't push outside harder than target pressure. Device is not intended to be used as a pump after all
 			phase = "filling"
-		if (inner_tank.return_pressure() <= 0)
+		if (inner_tank.return_pressure() <= 0.1)
 			phase = "filling"
 
 /obj/machinery/atmospherics/binary/oxyregenerator/update_icon()
