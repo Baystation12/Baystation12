@@ -666,6 +666,10 @@
 	name = "\improper Vacant Cabins"
 	icon_state = "crew_quarters"
 
+/area/vacant/mess
+	name = "\improper Old Mess"
+	icon_state = "bar"
+
 /area/vacant/chapel
 	name = "\improper Unused Chapel"
 	icon_state = "chapel"
