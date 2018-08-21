@@ -438,15 +438,15 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
 
-/datum/reagent/carbon_dioxide
-	name = "Carbon Dioxide"
-	description = "A byproduct of human respiration."
+/datum/reagent/carbon_monoxide
+	name = "Carbon Monoxide"
+	description = "A dangerous carbon comubstion byproduct."
 	taste_description = "stale air"
 	reagent_state = LIQUID
 	color = "#cccccc"
 	metabolism = 0.05 // As with helium.
 
-/datum/reagent/carbon_dioxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+/datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!istype(M) || alien == IS_DIONA)
 		return
 	var/warning_message
