@@ -14,6 +14,17 @@
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
+/obj/machinery/bodyscanner/Initialize()
+	. = ..()
+	component_parts = list(
+		new /obj/item/weapon/circuitboard/bodyscanner(src),
+		new /obj/item/weapon/stock_parts/scanning_module(src),
+		new /obj/item/weapon/stock_parts/scanning_module(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/console_screen(src))
+	RefreshParts()
+
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	if (user.stat)
 		return
@@ -35,7 +46,6 @@
 	set src in oview(1)
 	set category = "Object"
 	set name = "Enter Body Scanner"
-
 	if (usr.stat != 0)
 		return
 	if (src.occupant)
@@ -51,7 +61,7 @@
 	src.occupant = usr
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	for(var/obj/O in src)
+	for(var/obj/O in (contents - component_parts))
 		//O = null
 		qdel(O)
 		//Foreach goto(124)
@@ -61,7 +71,7 @@
 /obj/machinery/bodyscanner/proc/go_out()
 	if ((!( src.occupant ) || src.locked))
 		return
-	for(var/obj/O in src)
+	for(var/obj/O in (src.contents - component_parts))
 		O.dropInto(loc)
 		//Foreach goto(30)
 	if (src.occupant.client)
@@ -75,16 +85,24 @@
 
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
 	if(!istype(G))
-		return ..()
+		if(default_deconstruction_screwdriver(user, G))
+			updateUsrDialog()
+			return
+		if(default_deconstruction_crowbar(user, G))
+			return
+		if(default_part_replacement(user, G))
+			return
 	var/mob/M = G.affecting
 	if(!user_can_move_target_inside(M, user))
 		return
 	M.forceMove(src)
 	src.occupant = M
+
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	for(var/obj/O in src)
+	for(var/obj/O in (contents - component_parts))
 		O.forceMove(loc)
+
 	src.add_fingerprint(user)
 	qdel(G)
 
@@ -118,7 +136,7 @@
 	src.occupant = M
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	for(var/obj/O in src)
+	for(var/obj/O in (contents - component_parts))
 		O.forceMove(loc)
 	src.add_fingerprint(user)
 
@@ -168,6 +186,8 @@
 		else
 	return
 
+
+
 /obj/machinery/body_scanconsole/update_icon()
 	if(stat & BROKEN)
 		icon_state = "body_scannerconsole-p"
@@ -187,13 +207,19 @@
 	density = 0
 	anchored = 1
 
-
 /obj/machinery/body_scanconsole/Initialize()
+	. = ..()
+	component_parts = list(
+		new /obj/item/weapon/circuitboard/body_scanconsole(src),
+		new /obj/item/weapon/stock_parts/console_screen(src))
+	RefreshParts()
+	FindScanner()
+
+/obj/machinery/body_scanconsole/proc/FindScanner()
 	for(var/D in GLOB.cardinal)
 		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if(src.connected)
 			break
-	return ..()
 
 /obj/machinery/body_scanconsole/attack_ai(user as mob)
 	return src.attack_hand(user)
@@ -268,6 +294,15 @@
 	dat += "<BR><HR><A href='?src=\ref[src];scan_refresh=1'>Refresh</A>"
 	dat += "<BR><HR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>"
 	show_browser(user, jointext(dat, null), "window=scanconsole;size=430x600")
+
+/obj/machinery/body_scanconsole/attackby(var/obj/item/O, user as mob)
+	if(default_deconstruction_screwdriver(user, O))
+		updateUsrDialog()
+		return
+	if(default_deconstruction_crowbar(user, O))
+		return
+	if(default_part_replacement(user, O))
+		return
 
 /mob/living/carbon/human/proc/get_medical_data(skill_level = SKILL_DEFAULT)
 	var/mob/living/carbon/human/H = src
