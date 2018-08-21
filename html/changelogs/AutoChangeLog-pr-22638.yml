@@ -1,4 +1,0 @@
-author: "nearlyNon"
-delete-after: True
-changes: 
-  - rscadd: "IPCs and FBPs are now adversely affected by ion storms. They will be confused and have blurry vision as their system partially resets to remove ionospheric corruption. To avoid this, hide out in a saferoom or shuttle, or the dorms or such."

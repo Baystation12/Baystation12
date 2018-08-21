@@ -1,9 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Hacking without the electrical skill is harder now."
-  - rscadd: "If you are unskilled in electrical, hacking will randomize the wire positions (not meanings) each time you open the screen. If you are basic, you'll get some possible duplicate colors/omitted colors, with smaller probabilities."
-  - rscadd: "If you pulse a wire below trained skill, you have (progressively smaller) chances of pulsing the wrong wire. If you are untrained, you may randomize wire positions for everyone else trying to hack the thing."
-  - rscadd: "If you cut/mend wires below trained skill, you may cut/mend some extra wires by accident."
-  - rscadd: "If you try to place a remote signaler with low skill (trained or lower), you might place it on the wrong wire, and then have a hard time removing it."
-  - rscadd: "A new \"Examine\" option has been added to the hacking menu. Below experienced it doesn't do much. On experienced one or two wires will be identifiable on examine, while at master most will be. Less effective for \"secure\" objects with randomized wiring."

@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Imports TG's circuit updates: ICs now requires power to operate. IC printer is now hand-held and can copy & print assemblies fully."
-  - rscadd: "Adds new ICs."
