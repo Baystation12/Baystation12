@@ -548,18 +548,29 @@
 
 	holder.clear_reagents()
 
-/datum/chemical_reaction/napalm
-	name = "Napalm"
+/datum/chemical_reaction/phlogiston
+	name = "Phlogiston"
 	result = null
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
 
-/datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/phlogiston/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0,location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
-	holder.del_reagent("napalm")
+
+/datum/chemical_reaction/napalm
+	name = "Napalm"
+	result = /datum/reagent/napalm
+	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
+	result_amount = 2
+
+/datum/chemical_reaction/napalmb
+	name = "Napalm B"
+	result = /datum/reagent/napalm/b
+	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/fuel = 1 )
+	result_amount = 2
 
 /datum/chemical_reaction/chemsmoke
 	name = "Chemsmoke"
