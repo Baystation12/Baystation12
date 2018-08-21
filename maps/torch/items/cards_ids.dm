@@ -186,7 +186,7 @@
 	..()
 	var/species = SPECIES_HUMAN
 	if(prob(10))
-		species = pick(SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_IPC)
+		species = pick(SPECIES_SKRELL,SPECIES_IPC)
 	var/datum/species/S = all_species[species]
 	var/gender = pick(MALE,FEMALE)
 	registered_name = S.get_random_name(gender)
