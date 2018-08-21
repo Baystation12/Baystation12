@@ -7,6 +7,7 @@
 	var/obj/effect/overmap/ship/linked
 	var/obj/machinery/shipsensors/sensors
 	var/viewing = 0
+	var/list/viewers
 
 /obj/machinery/computer/sensors/Initialize()
 	. = ..()
@@ -15,6 +16,11 @@
 
 /obj/machinery/computer/sensors/Destroy()
 	sensors = null
+	if(LAZYLEN(viewers))
+		for(var/weakref/W in viewers)
+			var/M = W.resolve()
+			if(M)
+				unlook(M)
 	. = ..()
 
 /obj/machinery/computer/sensors/proc/find_sensors()
@@ -58,24 +64,42 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/sensors/check_eye(var/mob/user as mob)
-	if (!viewing)
-		return -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
 		viewing = 0
+	if (!viewing)
 		return -1
-	return 0
+	else
+		return 0
 
 /obj/machinery/computer/sensors/attack_hand(var/mob/user as mob)
 	if(..())
 		user.unset_machine()
 		viewing = 0
+		unlook(user)
 		return
 
 	if(!isAI(user))
 		user.set_machine(src)
-		if(linked)
-			user.reset_view(linked)
+		if(viewing)
+			look(user)
 	ui_interact(user)
+
+/obj/machinery/computer/sensors/proc/look(var/mob/user)
+	if(linked)
+		user.reset_view(linked)
+	if(user.client)
+		user.client.view = world.view + 4
+	GLOB.moved_event.register(user, src, /obj/machinery/computer/sensors/proc/unlook)
+	GLOB.stat_set_event.register(user, src, /obj/machinery/computer/sensors/proc/unlook)
+	LAZYDISTINCTADD(viewers, weakref(user))
+
+/obj/machinery/computer/sensors/proc/unlook(var/mob/user)
+	user.reset_view()
+	if(user.client)
+		user.client.view = world.view
+	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/sensors/proc/unlook)
+	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/sensors/proc/unlook)
+	LAZYREMOVE(viewers, weakref(user))
 
 /obj/machinery/computer/sensors/Topic(href, href_list, state)
 	if(..())
@@ -86,8 +110,8 @@
 
 	if (href_list["viewing"])
 		viewing = !viewing
-		if(viewing && usr && !isAI(usr))
-			usr.reset_view(linked)
+		if(usr && !isAI(usr))
+			viewing ? look(usr) : unlook(usr)
 		return 1
 
 	if (href_list["link"])
@@ -111,7 +135,8 @@
 	if(!linked)
 		return
 	if(sensors && sensors.use_power && sensors.powered())
-		linked.set_light(1, sensors.range, sensors.range+1)
+		var/sensor_range = round(sensors.range*1.5) + 1
+		linked.set_light(1, sensor_range, sensor_range+1)
 	else
 		linked.set_light(0)
 

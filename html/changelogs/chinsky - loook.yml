@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Sensor console now grants much further viewrange on the map."
