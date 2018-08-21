@@ -117,7 +117,6 @@
 	icon_state = "swathelm"
 	valid_accessory_slots = null
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi'
 		)
 

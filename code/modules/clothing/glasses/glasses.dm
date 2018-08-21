@@ -460,103 +460,103 @@
 	overlay = GLOB.global_hud.meson
 
 
-/*---Tajaran-specific Eyewear---*/
+/*---Misc Eyewear---*/
 
-/obj/item/clothing/glasses/tajblind
+/obj/item/clothing/glasses/veil
 	name = "embroidered veil"
-	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes."
-	icon_state = "tajblind"
-	item_state = "tajblind"
+	desc = "An alien made veil that allows the user to see while obscuring their eyes."
+	icon_state = "xenoblind"
+	item_state = "xenoblind"
 	prescription = 5
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/hud/health/tajblind
+/obj/item/clothing/glasses/hud/health/veil
 	name = "lightweight veil"
-	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
-	icon_state = "tajblind_med"
-	item_state = "tajblind_med"
+	desc = "An alien made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
+	icon_state = "xenoblind_med"
+	item_state = "xenoblind_med"
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/sunglasses/sechud/tajblind
+/obj/item/clothing/glasses/sunglasses/sechud/veil
 	name = "sleek veil"
-	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
-	icon_state = "tajblind_sec"
-	item_state = "tajblind_sec"
+	desc = "An alien made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
+	icon_state = "xenoblind_sec"
+	item_state = "xenoblind_sec"
 	prescription = 5
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/meson/prescription/tajblind
+/obj/item/clothing/glasses/meson/prescription/veil
 	name = "industrial veil"
-	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
-	icon_state = "tajblind_meson"
-	item_state = "tajblind_meson"
-	off_state = "tajblind_meson"
+	desc = "An alien made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
+	icon_state = "xenoblind_meson"
+	item_state = "xenoblind_meson"
+	off_state = "xenoblind_meson"
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/hud/health/tajvisor
+/obj/item/clothing/glasses/hud/health/visor
 	name = "lightweight visor"
-	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
-	icon_state = "tajvisor_med"
-	item_state = "tajvisor_med"
+	desc = "A modern alien made visor that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
+	icon_state = "xenovisor_med"
+	item_state = "xenovisor_med"
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/sunglasses/sechud/tajvisor
+/obj/item/clothing/glasses/sunglasses/sechud/visor
 	name = "sleek visor"
-	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
-	icon_state = "tajvisor_sec"
-	item_state = "tajvisor_sec"
+	desc = "A modern alien made visor that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
+	icon_state = "xenovisor_sec"
+	item_state = "xenovisor_sec"
 	prescription = 5
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/meson/prescription/tajvisor
+/obj/item/clothing/glasses/meson/prescription/visor
 	name = "industrial visor"
-	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has installed mesons."
-	icon_state = "tajvisor_mes"
-	item_state = "tajvisor_mes"
-	off_state = "tajvisor_mes"
+	desc = "A modern alien made visor that allows the user to see while obscuring their eyes. This one has installed mesons."
+	icon_state = "xenovisor_mes"
+	item_state = "xenovisor_mes"
+	off_state = "xenovisor_mes"
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/tajvisor
-	name = "tajaran master visor object, not used"
-	desc = "An Ahdominian made eyeguard."
+/obj/item/clothing/glasses/visor
+	name = "xenoaran master visor object, not used"
+	desc = "An alien made eyeguard."
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/tajvisor/a
+/obj/item/clothing/glasses/visor/a
 	name = "visor"
-	icon_state = "tajvisor_a"
-	item_state = "tajvisor_a"
+	icon_state = "xenovisor_a"
+	item_state = "xenovisor_a"
 
-/obj/item/clothing/glasses/tajvisor/b
+/obj/item/clothing/glasses/visor/b
 	name = "visor"
-	icon_state = "tajvisor_b"
-	item_state = "tajvisor_b"
+	icon_state = "xenovisor_b"
+	item_state = "xenovisor_b"
 
-/obj/item/clothing/glasses/tajvisor/c
+/obj/item/clothing/glasses/visor/c
 	name = "visor"
-	icon_state = "tajvisor_c"
-	item_state = "tajvisor_c"
+	icon_state = "xenovisor_c"
+	item_state = "xenovisor_c"
 
-/obj/item/clothing/glasses/tajvisor/d
+/obj/item/clothing/glasses/visor/d
 	name = "visor"
-	icon_state = "tajvisor_d"
-	item_state = "tajvisor_d"
+	icon_state = "xenovisor_d"
+	item_state = "xenovisor_d"
 
-/obj/item/clothing/glasses/tajvisor/d
+/obj/item/clothing/glasses/visor/d
 	name = "visor"
-	icon_state = "tajvisor_d"
-	item_state = "tajvisor_d"
+	icon_state = "xenovisor_d"
+	item_state = "xenovisor_d"
 
-/obj/item/clothing/glasses/tajvisor/e
+/obj/item/clothing/glasses/visor/e
 	name = "visor"
-	icon_state = "tajvisor_e"
-	item_state = "tajvisor_e"
+	icon_state = "xenovisor_e"
+	item_state = "xenovisor_e"
 
-/obj/item/clothing/glasses/tajvisor/f
+/obj/item/clothing/glasses/visor/f
 	name = "visor"
-	icon_state = "tajvisor_f"
-	item_state = "tajvisor_f"
+	icon_state = "xenovisor_f"
+	item_state = "xenovisor_f"
 
-/obj/item/clothing/glasses/tajvisor/g
+/obj/item/clothing/glasses/visor/g
 	name = "visor"
-	icon_state = "tajvisor_g"
-	item_state = "tajvisor_g"
+	icon_state = "xenovisor_g"
+	item_state = "xenovisor_g"

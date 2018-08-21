@@ -14,7 +14,7 @@
 			P.desc = "An autographed Spaceball Jones card!!"
 			P.card_icon = "spaceball_jones"
 		else
-			var/language_type = pick(/datum/language/human,/datum/language/diona,/datum/language/tajaran,/datum/language/unathi)
+			var/language_type = pick(/datum/language/human,/datum/language/diona,/datum/language/unathi)
 			var/datum/language/L = new language_type()
 			var/team = pick("Brickburn Galaxy Trekers","Mars Rovers", "Qerrbalak Saints", "Moghes Rockets", "Ahdomai Lightening")
 			P.name = "[L.get_random_name(pick(MALE,FEMALE))], [year - rand(0,50)] [team]"
