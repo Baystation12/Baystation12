@@ -1654,6 +1654,41 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/operating
 	sort_string = "FACAA"
 
+/datum/design/circuit/optable
+	name = "operating table"
+	id = "optable"
+	req_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/optable
+	sort_string = "FACAB"
+
+/datum/design/circuit/bodyscanner
+	name = "body scanner"
+	id = "bodyscanner"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_BIO = 4, TECH_DATA = 4)
+	build_path = /obj/item/weapon/circuitboard/bodyscanner
+	sort_string = "FACAC"
+
+/datum/design/circuit/body_scanconsole
+	name = "body scanner console"
+	id = "bodyscannerconsole"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_BIO = 4, TECH_DATA = 4)
+	build_path = /obj/item/weapon/circuitboard/body_scanconsole
+	sort_string = "FACAD"
+
+/datum/design/circuit/sleeper
+	name = "sleeper"
+	id = "sleeper"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/sleeper
+	sort_string = "FACAE"
+
+/datum/design/circuit/cryo_cell
+	name = "cryo cell"
+	id = "cryo_cell"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/cryo_cell
+	sort_string = "FACAF"
+
 /datum/design/circuit/resleever
 	name = "neural lace resleever"
 	id = "resleever"
