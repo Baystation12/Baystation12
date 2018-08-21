@@ -18675,7 +18675,8 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/integrated_circuit_printer,
+/obj/structure/table/standard,
+/obj/item/device/integrated_circuit_printer,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "fCb" = (
@@ -20604,8 +20605,8 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
 "hLb" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/integrated_circuit_printer,
+/obj/structure/table/standard,
+/obj/item/device/integrated_circuit_printer,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "hLf" = (

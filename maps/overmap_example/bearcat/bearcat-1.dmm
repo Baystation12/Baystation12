@@ -2976,7 +2976,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/item/weapon/storage/bag/circuits/basic,
+/obj/item/device/integrated_circuit_printer,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},

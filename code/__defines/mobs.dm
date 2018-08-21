@@ -294,3 +294,10 @@
 #define AURA_TYPE_LIFE   "Life"
 
 #define SPECIES_BLOOD_DEFAULT 560
+
+#define SLIME_EVOLUTION_THRESHOLD 10
+
+//Used in mob/proc/get_input
+#define MOB_INPUT_TEXT "text"
+#define MOB_INPUT_MESSAGE "message"
+#define MOB_INPUT_NUM "num"

@@ -260,12 +260,12 @@
 
 	if(closed_system)
 		if(user) to_chat(user, "You can't harvest from the plant while the lid is shut.")
-		return FALSE
+		return
 
 	if(user)
-		seed.harvest(user,yield_mod)
+		. = seed.harvest(user,yield_mod)
 	else
-		seed.harvest(get_turf(src),yield_mod)
+		. = seed.harvest(get_turf(src),yield_mod)
 	// Reset values.
 	harvest = 0
 	lastproduce = age
@@ -279,7 +279,6 @@
 		mutation_mod = 0
 
 	check_health()
-	return TRUE
 
 //Clears out a dead plant.
 /obj/machinery/portable_atmospherics/hydroponics/proc/remove_dead(var/mob/user, var/silent)
