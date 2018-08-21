@@ -1,5 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes cable coils spawning in tool belts having old vibrant color."
-  - tweak: "Tool belt cable colors are now completely random."
