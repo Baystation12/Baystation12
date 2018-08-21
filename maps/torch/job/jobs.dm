@@ -36,7 +36,6 @@
 
 /datum/job/captain
 	title = "Commanding Officer"
-	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
 	minimal_player_age = 7
 	economic_modifier = 15
 	ideal_character_age = 50
@@ -642,7 +641,7 @@
 		"Field Medic" = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic,
 		"Medical Technician",
 		"Nursing Assistant")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
 	                    SKILL_MEDICAL = SKILL_BASIC,
 	                    SKILL_ANATOMY = SKILL_BASIC)
@@ -724,10 +723,10 @@
 	economic_modifier = 5
 	minimal_player_age = 0
 	alt_titles = list(
-		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist,
+		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec,
 		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain,
 	)
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_BASIC)
 
@@ -845,7 +844,7 @@
 	ideal_character_age = 20
 	alt_titles = list(
 		"Janitor")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor/ec
 	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
@@ -1017,13 +1016,11 @@
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
 		"Historian",
 		"Botanist",
-		"Investor" = /decl/hierarchy/outfit/job/torch/passenger/passenger/investor,
 		"Naturalist",
 		"Ecologist",
 		"Entertainer",
 		"Independent Observer",
 		"Sociologist",
-		"Off-Duty",
 		"Trainer")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
 
