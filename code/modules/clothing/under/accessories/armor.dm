@@ -90,7 +90,7 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/modular_armor.dmi')
 	icon_state = "armguards"
 	gender = PLURAL
-	body_parts_covered = ARMS
+	body_parts_covered = ARMS|HANDS
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_A
 
@@ -146,7 +146,7 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/modular_armor.dmi')
 	icon_state = "legguards"
 	gender = PLURAL
-	body_parts_covered = LEGS
+	body_parts_covered = LEGS|FEET
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_L
 
