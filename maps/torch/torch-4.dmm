@@ -22960,10 +22960,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "kAb" = (
-/obj/machinery/cryopod/robot{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/adherent_bath,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "kBb" = (
@@ -23067,12 +23065,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCyborg"
-	},
-/obj/effect/landmark/start{
-	name = "Cyborg"
-	},
 /turf/simulated/floor/tiled,
 /area/assembly/chargebay)
 "kJb" = (
@@ -23105,12 +23097,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCyborg"
-	},
-/obj/effect/landmark/start{
-	name = "Cyborg"
-	},
 /turf/simulated/floor/tiled,
 /area/assembly/chargebay)
 "kLb" = (
@@ -23127,7 +23113,12 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/structure/adherent_bath,
+/obj/effect/landmark{
+	name = "JoinLateCyborg"
+	},
+/obj/effect/landmark/start{
+	name = "Cyborg"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "kMb" = (
