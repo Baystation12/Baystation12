@@ -4,12 +4,19 @@
 	item_flags = ITEM_FLAG_NO_PRINT
 	w_class = ITEM_SIZE_TINY
 	var/list/evidence = list()
+	var/object
 
 /obj/item/weapon/sample/New(var/newloc, var/atom/supplied)
 	..(newloc)
 	if(supplied)
 		copy_evidence(supplied)
 		name = "[initial(name)] (\the [supplied])"
+		object = "[supplied], [get_area(supplied)]"
+
+/obj/item/weapon/sample/examine(var/user)
+	. = ..(user, 1)
+	if(. && object)
+		to_chat(user, "The label says: '[object]'")
 
 /obj/item/weapon/sample/print/New(var/newloc, var/atom/supplied)
 	..(newloc, supplied)
@@ -26,6 +33,7 @@
 		return 0
 	evidence |= supplied.evidence
 	SetName("[initial(name)] (combined)")
+	object = supplied.object + ", " + object
 	to_chat(user, "<span class='notice'>You transfer the contents of \the [supplied] into \the [src].</span>")
 	return 1
 
@@ -38,6 +46,7 @@
 		else
 			evidence[print] = supplied.evidence[print]
 	SetName("[initial(name)] (combined)")
+	object = supplied.object + ", " + object
 	to_chat(user, "<span class='notice'>You overlay \the [src] and \the [supplied], combining the print records.</span>")
 	return 1
 
