@@ -261,7 +261,7 @@
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant.resting = 1
-	return ..()
+	. = ..()
 
 /obj/machinery/cryopod/Initialize()
 	. = ..()
@@ -328,7 +328,7 @@
 		qdel(I)
 	qdel(R.module)
 
-	return ..()
+	. = ..()
 
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
@@ -427,6 +427,33 @@
 	qdel(occupant)
 	set_occupant(null)
 
+/obj/machinery/cryopod/proc/attempt_enter(var/mob/target, var/mob/user)
+	if(target.client)
+		if(target != user)
+			if(alert(target,"Would you like to enter long-term storage?",,"Yes","No") != "Yes")
+				return
+	if(!user.incapacitated() && user.Adjacent(src) && user.Adjacent(target))
+		visible_message("[user] starts putting [target] into \the [src].", 3)
+		if(!do_after(user, 20, src)|| QDELETED(target))
+			return
+		set_occupant(target)
+
+		// Book keeping!
+		log_and_message_admins("has entered a stasis pod")
+
+		//Despawning occurs when process() is called with an occupant without a client.
+		src.add_fingerprint(target)
+
+//Like grap-put, but for mouse-drop.
+/obj/machinery/cryopod/MouseDrop_T(var/mob/target, var/mob/user)
+	if(!check_occupant_allowed(target))
+		return
+	if(occupant)
+		to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
+		return
+
+	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	attempt_enter(target, user)
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 
@@ -442,32 +469,8 @@
 		if(!check_occupant_allowed(grab.affecting))
 			return
 
-		var/willing = null //We don't want to allow people to be forced into despawning.
 		var/mob/M = G:affecting
-
-		if(M.client)
-			if(alert(M,"Would you like to enter long-term storage?",,"Yes","No") == "Yes")
-				if(!M || !grab || !grab.affecting) return
-				willing = 1
-		else
-			willing = 1
-
-		if(willing)
-
-			visible_message("[user] starts putting [grab.affecting:name] into \the [src].", 3)
-
-			if(do_after(user, 20, src))
-				if(!M || !grab || !grab.affecting) return
-
-			set_occupant(M)
-
-			// Book keeping!
-			var/turf/location = get_turf(src)
-			log_admin("[key_name_admin(M)] has entered a stasis pod. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-			message_admins("<span class='notice'>[key_name_admin(M)] has entered a stasis pod.</span>")
-
-			//Despawning occurs when process() is called with an occupant without a client.
-			src.add_fingerprint(M)
+		attempt_enter(M, user)
 
 /obj/machinery/cryopod/verb/eject()
 	set name = "Eject Pod"
