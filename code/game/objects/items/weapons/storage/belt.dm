@@ -120,6 +120,7 @@
 		/obj/item/device/t_scanner,
 		/obj/item/device/analyzer,
 		/obj/item/taperoll/engineering,
+		/obj/item/inducer/,
 		/obj/item/device/robotanalyzer,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
@@ -139,7 +140,7 @@
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
+	new /obj/item/stack/cable_coil/random(src, 30)
 	update_icon()
 
 

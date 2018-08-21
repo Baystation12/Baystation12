@@ -1,0 +1,4 @@
+author: "nearlyNon"
+delete-after: True
+changes: 
+  - rscadd: "Prescription science goggles can now be selected from loadout."
