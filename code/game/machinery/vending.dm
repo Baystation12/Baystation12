@@ -682,7 +682,6 @@
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3, /obj/item/weapon/reagent_containers/food/drinks/tea = 3, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3)
 
 
 
@@ -702,12 +701,6 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 6)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6, /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 3)
-	prices = list(/obj/item/clothing/mask/chewable/candy/lolli = 2,
-					/obj/item/weapon/storage/chewables/candy/gum = 4,
-					/obj/item/weapon/storage/chewables/candy/cookies = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/candy = 1,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 2)
 
 
 
@@ -724,10 +717,6 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/liquidfood = 6)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/fitness
@@ -746,16 +735,6 @@
 					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 8,
 					/obj/item/weapon/reagent_containers/pill/diet = 8,
 					/obj/item/weapon/towel/random = 8)
-
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 3,
-					/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate = 3,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 20,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 5,
-					/obj/item/weapon/reagent_containers/pill/diet = 25,
-					/obj/item/weapon/towel/random = 40)
-
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
 
 /obj/machinery/vending/cigarette
@@ -817,40 +796,6 @@
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4,
 					/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5)
-
-	prices = list(
-					/obj/item/weapon/storage/chewables/tobacco = 40,
-					/obj/item/weapon/storage/chewables/tobacco2 = 50,
-					/obj/item/weapon/storage/chewables/tobacco3 = 60,
-					/obj/item/weapon/storage/cigpaper/filters = 5,
-					/obj/item/weapon/storage/cigpaper = 8,
-					/obj/item/weapon/storage/cigpaper/fancy = 12,
-					/obj/item/weapon/storage/chewables/rollable/bad = 20,
-					/obj/item/weapon/storage/chewables/rollable/generic = 40,
-					/obj/item/weapon/storage/chewables/rollable/fine = 60,
-					/obj/item/weapon/storage/fancy/cigarettes = 45,
-					/obj/item/weapon/storage/fancy/cigarettes/luckystars = 50,
-					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 65,
-					/obj/item/weapon/storage/fancy/cigarettes/menthols = 55,
-					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 65,
-					/obj/item/weapon/storage/fancy/cigarettes/professionals = 70,
-					/obj/item/weapon/storage/fancy/cigarettes/cigarello = 85,
-					/obj/item/weapon/storage/fancy/cigarettes/cigarello/mint = 85,
-					/obj/item/weapon/storage/fancy/cigarettes/cigarello/variety = 85,
-					/obj/item/weapon/storage/box/matches = 2,
-					/obj/item/weapon/flame/lighter/random = 5,
-					/obj/item/clothing/mask/smokable/ecig/simple = 50,
-					/obj/item/clothing/mask/smokable/ecig/util = 100,
-					/obj/item/clothing/mask/smokable/ecig/deluxe = 250,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 15,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 15)
 
 
 /obj/machinery/vending/medical
@@ -1137,16 +1082,6 @@
 					/obj/item/weapon/storage/wallet/poly = 2)
 	contraband = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
 	premium = list(/obj/item/clothing/mask/smokable/pipe = 3)
-	prices = list(/obj/item/weapon/mirror = 60,
-					/obj/item/weapon/haircomb = 40,
-					/obj/item/clothing/glasses/monocle = 700,
-					/obj/item/clothing/glasses/sunglasses = 500,
-					/obj/item/weapon/lipstick = 100,
-					/obj/item/weapon/lipstick/black = 100,
-					/obj/item/weapon/lipstick/purple = 100,
-					/obj/item/weapon/lipstick/jade = 100,
-					/obj/item/weapon/storage/wallet/poly = 600
-					)
 // eliza's attempt at a new vending machine
 /obj/machinery/vending/games
 	name = "Good Clean Fun"
@@ -1156,7 +1091,6 @@
 	product_ads = "Elves and dwarves!;Totally not satanic!;Fun times forever!"
 	icon_state = "games"
 	products = list(/obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/weapon/deck/cards = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2)
-	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
 	premium = list(/obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
 
@@ -1170,7 +1104,6 @@
 
 	icon_state = "lavatory"
 	products = list(/obj/item/weapon/soap = 4,
-					/obj/item/weapon/soap/nanotrasen = 4,
 					/obj/item/weapon/soap/deluxe = 4,
 					/obj/item/weapon/mirror = 8,
 					/obj/item/weapon/haircomb/random = 8,
@@ -1180,15 +1113,6 @@
 	premium = list(/obj/item/weapon/soap/gold = 1)
 	contraband = list(/obj/item/weapon/soap/syndie = 4,
 					  /obj/item/weapon/inflatable_duck = 1)
-	prices = list(/obj/item/weapon/soap = 20,
-				  /obj/item/weapon/soap/nanotrasen = 30,
-				  /obj/item/weapon/soap/deluxe = 60,
-				  /obj/item/weapon/soap/syndie = 10,
-				  /obj/item/weapon/mirror = 40,
-				  /obj/item/weapon/haircomb/random = 40,
-				  /obj/item/weapon/haircomb/brush = 80,
-				  /obj/item/weapon/towel/random = 50
-					)
 
 //a food variant of the boda machine, only has one item currently.
 /obj/machinery/vending/snix
