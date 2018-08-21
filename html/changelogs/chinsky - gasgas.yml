@@ -1,0 +1,6 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "CO2 is no longer poisonous. Just non-breathable. Should make Bearcat a walk in the park."
+  - tweak: "Added CO, which /is/ poisonous."
+  - tweak: "PACMANs that run on plasma now produce some CO, around a mole per 40 seconds, so make sure you open the window (or turn on scrubbers) before using."

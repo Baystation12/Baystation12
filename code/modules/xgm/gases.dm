@@ -17,7 +17,6 @@
 	name = "Carbon Dioxide"
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol
-	breathed_product = /datum/reagent/carbon_dioxide
 
 /decl/xgm_gas/methyl_bromide
 	id = "methyl_bromide"
@@ -176,3 +175,10 @@
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
 	breathed_product = /datum/reagent/ammonia
+	
+/decl/xgm_gas/carbon_monoxide
+	id = "carbon_monoxide"
+	name = "Carbon Monoxide"
+	specific_heat = 30	// J/(mol*K)
+	molar_mass = 0.028	// kg/mol
+	breathed_product = /datum/reagent/carbon_monoxide
