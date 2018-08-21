@@ -75,10 +75,8 @@
 		BP_CELL =         /obj/item/organ/internal/cell/adherent,
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
-
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
-
-	var/list/original_name_cache = list()
+	max_players = 3
 
 /datum/species/adherent/New()
 	equip_adjust = list(
@@ -91,17 +89,6 @@
 		"[slot_r_ear_str]" =  list(NORTH = list("x" = 0, "y" = 14), EAST = list("x" = 0, "y" = 14), SOUTH = list("x" = 0, "y" = 14), WEST = list("x" = 0,  "y" = 14))
 	)
 	..()
-
-/datum/species/adherent/proc/sync_ident_to_role(var/mob/living/carbon/human/H)
-	if(H)
-		if(!original_name_cache[H]) original_name_cache[H] = H.real_name
-		H.real_name = (H.job ? "[H.job] Unit [original_name_cache[H]]" : original_name_cache[H])
-		if(H.mind) H.mind.name = H.real_name
-		H.SetName(H.real_name)
-
-/datum/species/adherent/handle_post_spawn(var/mob/living/carbon/human/H)
-	. = ..()
-	if(H) addtimer(CALLBACK(src, .proc/sync_ident_to_role, H), 3 SECONDS)
 
 /datum/species/adherent/get_random_name(var/gender)
 	return "[uppertext("[pick(GLOB.full_alphabet)][pick(GLOB.full_alphabet)]-[pick(GLOB.full_alphabet)] [rand(1000,9999)]")]"
