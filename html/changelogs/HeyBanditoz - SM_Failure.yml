@@ -1,0 +1,4 @@
+ author: Banditoz
+delete-after: True
+changes: 
+  - tweak: "There is now a slight chance to accidently break the core eject button when attempting to eject the supermatter. Don't hit it so hard next time!"
