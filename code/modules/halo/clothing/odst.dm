@@ -161,6 +161,12 @@
 
 	icon_state = "Odst Armor Squad Leader"
 
+
+
+
+
+//DONATOR GEAR
+
 /obj/item/clothing/head/helmet/odst/donator/flaksim
 	name = "Kashada's ODST Helmet"
 
@@ -172,28 +178,30 @@
 
 	icon_state = "Odst Armor Flaksim"
 
-/obj/item/clothing/head/helmet/odst/donator/spartan
-	name = "ODST Medic Helmet"
-
-	item_state = "Odst Helmet Spartan"
-	icon_state = "Odst Helmet Spartan"
-
-/obj/item/clothing/head/helmet/odst/donator/spartan
+/obj/item/clothing/head/helmet/odst/donator/mann
 	name = "Mann's ODST Helmet"
 
 	item_state = "Odst Helmet Mann"
 	icon_state = "Odst Helmet Mann"
 
 
-/obj/item/clothing/suit/armor/special/odst/donator/spartan
+/obj/item/clothing/suit/armor/special/odst/donator/mann
 	name = "Mann's ODST Armour"
 
 	icon_state = "Odst Armor Mann"
 
+/obj/item/clothing/head/helmet/odst/donator/spartan
+	name = "ODST Medic Helmet"
+
+	item_state = "Odst Helmet Spartan"
+	icon_state = "Odst Helmet Spartan"
+
 /obj/item/clothing/suit/armor/special/odst/donator/spartan
-	name = "ODST Squad Leader Armour"
+	name = "Customized ODST CQB Armour"
 
 	icon_state = "Odst Armor Spartan"
+
+//END DONATOR GEAR
 
 /obj/effect/random_ODST_set/New()
 	.=..()
@@ -255,6 +263,9 @@
 	item_state = "odst_sl"
 	icon_state = "odst_sla"
 
+
+//DONATOR GEAR
+
 /obj/item/weapon/storage/backpack/odst/donator/flaksim
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
@@ -269,5 +280,6 @@
 	item_state = "Odst Spartan Backpack"
 	icon_state = "Odst Spartan Backpack"
 
+//END DONATOR GEAR
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND

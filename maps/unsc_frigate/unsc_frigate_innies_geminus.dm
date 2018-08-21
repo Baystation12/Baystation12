@@ -34,8 +34,6 @@
 
 	#include "unsc_frigate_spawndefs_innies_geminus.dm"
 
-	#include "../first_contact/maps/Exoplanet Mining/includes.dm"
-
 	#include "../odst_prowler/ODST_Ship.dmm"
 
 	#include "../first_contact/overall_overmap.dm"
@@ -43,7 +41,7 @@
 	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
 
 
-	#include "../first_contact/maps/corvette_spawns.dm"
+	#include "../first_contact/maps/UNSC_Thorin/spawns_jobs.dm"
 
 
 
