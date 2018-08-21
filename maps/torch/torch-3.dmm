@@ -8783,6 +8783,7 @@
 /area/engineering/engine_eva)
 "sh" = (
 /obj/machinery/button/remote/driver{
+	chance_to_fail = 20;
 	id = "enginecore";
 	name = "Emergency Core Eject";
 	pixel_x = 0;

@@ -164,39 +164,54 @@
 	desc = "A remote control switch for a mass driver."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
+	var/chance_to_fail = 0
+	var/failed = 0
 
 /obj/machinery/button/remote/driver/trigger(mob/user as mob)
-	set waitfor = 0
-	active = 1
-	update_icon()
+	if(failed)
+		to_chat(user, SPAN_WARNING("You press the [src] but it doesn't seem to respond."))
+		return
 
-	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
-		if (M.id == src.id)
-			spawn( 0 )
-				M.open()
-				return
+	else
+		if(prob(chance_to_fail))
+			to_chat(user, SPAN_WARNING("You somehow break the [src]. Good job, you may have just killed everyone."))
+			failed = 1
+			update_icon()
+			return
+			
+		else
+			set waitfor = 0
+			active = 1
+			update_icon()
 
-	sleep(20)
+			for(var/obj/machinery/door/blast/M in SSmachines.machinery)
+				if (M.id == src.id)
+					spawn( 0 )
+						M.open()
+						return
 
-	for(var/obj/machinery/mass_driver/M in SSmachines.machinery)
-		if(M.id == src.id)
-			M.drive()
+			sleep(20)
 
-	sleep(50)
+			for(var/obj/machinery/mass_driver/M in SSmachines.machinery)
+				if(M.id == src.id)
+					M.drive()
+					return
 
-	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
-		if (M.id == src.id)
-			spawn(0)
-				M.close()
-				return
+			sleep(50)
 
-	icon_state = "launcherbtt"
-	update_icon()
+			for(var/obj/machinery/door/blast/M in SSmachines.machinery)
+				if (M.id == src.id)
+					spawn(0)
+						M.close()
+						return
 
-	return
+			icon_state = "launcherbtt"
+			update_icon()
+
+			return
 
 /obj/machinery/button/remote/driver/update_icon()
-	if(!active || (stat & NOPOWER))
+	if(!active || (stat & NOPOWER) || failed)
 		icon_state = "launcherbtt"
 	else
 		icon_state = "launcheract"
