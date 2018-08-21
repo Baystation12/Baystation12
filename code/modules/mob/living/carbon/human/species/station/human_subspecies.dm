@@ -16,6 +16,11 @@
 	brute_mod =     0.85
 	slowdown =      1
 
+	descriptors = list(
+		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/build = 1
+		)
+
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/spacer
@@ -35,6 +40,10 @@
 	darksight_range = 6
 	darksight_tint = DARKTINT_MODERATE
 
+	descriptors = list(
+		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/build = -1
+		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
@@ -109,4 +118,9 @@
 		/datum/unarmed_attack/bite/sharp
 	)
 
+	descriptors = list(
+		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/build = 1
+		)
+	
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
