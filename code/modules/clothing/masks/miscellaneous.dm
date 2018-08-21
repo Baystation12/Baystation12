@@ -42,9 +42,6 @@
 	down_body_parts_covered = null
 	down_icon_state = "steriledown"
 	pull_mask = 1
-	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
-		)
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
@@ -236,11 +233,10 @@
 	if(istype(S))
 		visible_name = S.get_random_name(pick(MALE,FEMALE))
 
-/obj/item/clothing/mask/rubber/species/tajaran
-	name = "tajara mask"
-	desc = "A rubber tajara mask."
+/obj/item/clothing/mask/rubber/species/cat
+	name = "cat mask"
+	desc = "A rubber cat mask."
 	icon_state = "catmet"
-	species = SPECIES_TAJARA
 
 /obj/item/clothing/mask/rubber/species/unathi
 	name = "unathi mask"
@@ -280,8 +276,6 @@
 			flags_inv = initial(flags_inv)
 			body_parts_covered = initial(body_parts_covered)
 			icon_state = initial(icon_state)
-			sprite_sheets = list(SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi')
-
 		if(slot_head)
 			flags_inv = 0
 			body_parts_covered = HEAD
