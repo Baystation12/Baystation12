@@ -30,6 +30,13 @@
 	name = "\improper Geminus City - West"
 	icon_state = "red"
 
+/area/planets/Geminus/outdoor/level1
+	name = "\improper Geminus City - level 1 exterior"
+	icon_state = "red"
+
+/area/planets/Geminus/outdoor/level2
+	name = "\improper Geminus City - level 2 exterior"
+	icon_state = "red"
 
 /area/planets/Geminus/outdoor/central
 	name = "\improper Geminus City - Central"
@@ -84,6 +91,35 @@
 	name = "\improper Courtroom"
 	icon_state = "courtroom"
 
+/area/planets/Geminus/indoor/living1nw
+	name = "\improper Northwest Appartment Level 1"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living1ne
+	name = "\improper Northeast Appartment Level 1"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living1sw
+	name = "\improper Southwest Appartment Level 1"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living2nw
+	name = "\improper Northwest Appartment Level 2"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living2ne
+	name = "\improper Northeast Appartment Level 2"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living2sw
+	name = "\improper Southwest Appartment Level 2"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/labs1
+	name = "\improper Research and development level 1"
+	icon_state = "courtroom"
+
+
 /area/planets/Geminus/indoor/chapel
 	name = "\improper Chapel"
 	icon_state = "chapel"
@@ -106,6 +142,10 @@
 
 /area/planets/Geminus/indoor/city_hall
 	name = "\improper City Hall"
+	icon_state = "dk_yellow"
+
+/area/planets/Geminus/indoor/city_hall1
+	name = "\improper City Hall Level 1"
 	icon_state = "dk_yellow"
 
 /area/planets/Geminus/indoor/mayor
@@ -162,6 +202,10 @@
 
 /area/planets/Geminus/indoor/hospital
 	name = "\improper City Hospital"
+	icon_state = "medbay"
+
+/area/planets/Geminus/indoor/hospital1
+	name = "\improper City Hospital Level 1"
 	icon_state = "medbay"
 
 /area/planets/Geminus/indoor/cmo

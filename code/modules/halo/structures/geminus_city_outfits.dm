@@ -117,13 +117,14 @@
 	name = "Emsville Marshall"
 
 	head = /obj/item/clothing/head/soft/sec/corp
-	uniform = /obj/item/clothing/under/police
+	uniform = /obj/item/clothing/under/marshall
+
 	belt = /obj/item/weapon/gun/projectile/m7_smg/rubber
 	shoes = /obj/item/clothing/shoes/dutyboots
 	pda_slot = null
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/warden
-
+	starting_accessories = list (/obj/item/clothing/accessory/badge/security, /obj/item/clothing/accessory/holster/thigh)
 	flags = 0
 
 /obj/item/clothing/suit/armor/vest/police
@@ -140,6 +141,14 @@
 	icon_state = "blackutility_com"
 	worn_state = "blackutility_com"
 	starting_accessories = list(/obj/item/clothing/accessory/department/medical, /obj/item/clothing/accessory/holster/thigh)
+	armor = list(melee = 20, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
+
+/obj/item/clothing/under/marshall
+	name = "Marshall's uniform"
+	desc = "A black uniform worn by the Emsville Marshalls."
+	icon_state = "blackutility_com"
+	worn_state = "blackutility_com"
+	starting_accessories = list(/obj/item/clothing/accessory/holster/thigh)
 	armor = list(melee = 20, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
 
 /decl/hierarchy/outfit/job/cop
