@@ -50,12 +50,18 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
 				/datum/mil_rank/ec/o1
+			),
+			/datum/mil_branch/solgov = list(
+				/datum/mil_rank/sol/offduty
 			)
 		),
 		/datum/species/unathi = list(
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5
+			),
+			/datum/mil_branch/solgov = list(
+				/datum/mil_rank/sol/offduty
 			)
 		)
 	)
@@ -200,7 +206,6 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -208,7 +213,7 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/offduty,
+		/datum/mil_rank/sol/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -221,12 +226,14 @@
 
 	rank_types = list(
 		/datum/mil_rank/sol/gov,
-		/datum/mil_rank/sol/agent
+		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/offduty
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/sol/gov,
-		/datum/mil_rank/sol/agent
+		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/offduty
 	)
 
 /datum/mil_rank/grade()
@@ -626,9 +633,6 @@
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
 
-/datum/mil_rank/civ/offduty
-	name = "Off-Duty Personnel"
-
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
 
@@ -645,3 +649,6 @@
 	name = "OCIE Agent"
 	name_short = "AGT"
 	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
+
+/datum/mil_rank/sol/offduty
+	name = "Off-Duty Personnel"

@@ -34,6 +34,22 @@
 	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
+/datum/gear/accessory/militaryid
+	display_name = "SolGov uniformed service ID"
+	description = "A plastic badge with a variety of personal information printed on it. Belongs to an off-duty or veteran member of the SCG Uniformed Services."
+	path = /obj/item/clothing/accessory/badge/solgov/military
+	cost = 3
+	allowed_branches = SOLGOV_BRANCHES
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/militaryid/New()
+	..()
+	var/militaryids = list()
+	militaryids["expeditionary corps ID"] = /obj/item/clothing/accessory/badge/solgov/military
+	militaryids["fleet ID"] = /obj/item/clothing/accessory/badge/solgov/military/fleet
+	militaryids["retired army ID"] = /obj/item/clothing/accessory/badge/solgov/military/army/retired
+	gear_tweaks += new/datum/gear_tweak/path(militaryids)
+
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
@@ -53,7 +69,7 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/speciality/pilot
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/pilot)
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"
@@ -111,7 +127,7 @@
 
 /datum/gear/storage/brown_vest
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/nt_pilot)
+						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/pilot)
 
 /datum/gear/storage/black_vest
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)

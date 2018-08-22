@@ -17,7 +17,7 @@
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
-						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer,
+						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/pilot, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist, /datum/job/medical_trainee,
@@ -101,23 +101,23 @@
 
 	skill_points = 30
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads,
+	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_officer,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_bridge,
 			            access_all_personal_lockers, access_chapel_office, access_tech_storage, access_atmospherics, access_bar, access_janitor, access_crematorium, access_robotics,
 			            access_kitchen, access_cargo, access_construction, access_chemistry, access_cargo_bot, access_hydroponics, access_library, access_virology,
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
+			            access_medical_equip, access_torch_workers, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
 			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder)
-	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads,
+	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_officer,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_bridge,
 			            access_all_personal_lockers, access_chapel_office, access_tech_storage, access_atmospherics, access_bar, access_janitor, access_crematorium,
 			            access_kitchen, access_cargo, access_construction, access_chemistry, access_cargo_bot, access_hydroponics, access_library, access_virology,
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
+			            access_medical_equip, access_torch_workers, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
 			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder,
 			            access_expedition_shuttle_helm)
 
@@ -195,10 +195,10 @@
 	skill_points = 32
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_bridge, access_heads,
+			            access_teleporter, access_eva, access_bridge, access_heads, access_officer,
 			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
 			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_senmed, access_hangar)
+			            access_medical_equip, access_torch_workers, access_senmed, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -240,15 +240,15 @@
 	skill_points = 30
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
+			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads, access_officer,
 			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
+			            access_torch_workers, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
+			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads, access_officer,
 			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
+			            access_torch_workers, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/ntnetmonitor,
@@ -293,9 +293,9 @@
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_bridge, access_heads,
+			            access_teleporter, access_eva, access_bridge, access_heads, access_officer,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun, access_emergency_armory, access_hangar)
+			            access_torch_workers, access_gun, access_emergency_armory, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -357,7 +357,7 @@
 	skill_points = 20
 
 	access = list(access_representative, access_security, access_medical,
-			            access_bridge, access_cargo, access_solgov_crew, access_hangar)
+			            access_bridge, access_cargo, access_torch_workers, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
@@ -402,7 +402,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
+			            access_torch_workers, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
@@ -438,9 +438,9 @@
 	skill_points = 20
 
 
-	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
+	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage, access_officer,
 			            access_bridge, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
-			            access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
+			            access_torch_workers, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
 			            access_eva, access_hangar, access_cent_creed, access_explorer)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -484,7 +484,9 @@
 	                    SKILL_WEAPONS     = SKILL_EXPERT)
 	skill_points = 22
 
-	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_officer,
+						access_emergency_storage, access_tech_storage, access_guppy_helm, access_torch_workers, access_expedition_shuttle,
+						access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
 
 	software_on_spawn = list(/datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
@@ -492,7 +494,7 @@
 /datum/job/pathfinder/get_description_blurb()
 	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if NT doesn’t provide their pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
 
-/datum/job/nt_pilot
+/datum/job/pilot
 	title = "Shuttle Pilot"
 	supervisors = "the Pathfinder"
 	department = "Exploration"
@@ -504,15 +506,15 @@
 	economic_modifier = 10
 	minimal_player_age = 0
 	ideal_character_age = 25
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/ec,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/exploration/pilot,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7
@@ -520,7 +522,7 @@
 
 	access = list(access_mining_office,
 						access_mining_station, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
-						access_hangar, access_guppy_helm, access_mining, access_pilot, access_solgov_crew, access_eva)
+						access_hangar, access_guppy_helm, access_mining, access_pilot, access_eva)
 	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
 						SKILL_PILOT = SKILL_ADEPT)
 
@@ -550,7 +552,7 @@
 	                    SKILL_COMBAT      = SKILL_EXPERT,
 	                    SKILL_WEAPONS     = SKILL_EXPERT)
 
-	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_torch_workers, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
 
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
@@ -595,7 +597,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar)
+			            access_tcomsat, access_torch_workers, access_seneng, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
@@ -652,7 +654,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew, access_hangar)
+			            access_torch_workers, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
@@ -701,7 +703,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew, access_hangar)
+			            access_torch_workers, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
@@ -753,7 +755,7 @@
 
 	access = list(access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_tech_storage, access_janitor, access_construction,
-			            access_solgov_crew, access_hangar)
+			            access_torch_workers, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
@@ -796,7 +798,7 @@
 	                    SKILL_ANATOMY      = SKILL_MAX,
 	                    SKILL_MEDICAL      = SKILL_MAX)
 
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_torch_workers)
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()
@@ -834,7 +836,7 @@
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew, access_gun)
+			            access_eva, access_sec_doors, access_torch_workers, access_gun)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -857,6 +859,7 @@
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
 		/datum/mil_branch/solgov = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
 	)
 	allowed_ranks = list(
@@ -882,7 +885,7 @@
 
 	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
-			            access_sec_doors, access_solgov_crew, access_morgue)
+			            access_sec_doors, access_torch_workers, access_morgue)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -920,7 +923,7 @@
 
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew)
+			            access_eva, access_sec_doors, access_torch_workers)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -965,7 +968,7 @@
 
 	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
-			            access_medical_equip, access_solgov_crew, access_senmed)
+			            access_medical_equip, access_torch_workers, access_senmed, access_officer)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
@@ -1005,7 +1008,7 @@
 	                    SKILL_VIROLOGY    = SKILL_MAX)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
+			            access_eva, access_surgery, access_medical_equip, access_torch_workers, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
@@ -1041,7 +1044,7 @@
 	                    SKILL_VIROLOGY    = SKILL_MAX)
 	skill_points = 32
 
-	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
+	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_torch_workers,
 		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
@@ -1082,7 +1085,7 @@
 	                    SKILL_VIROLOGY    = SKILL_MAX)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_surgery, access_medical_equip, access_solgov_crew)
+			            access_surgery, access_medical_equip, access_torch_workers)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
@@ -1112,7 +1115,7 @@
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
 	skill_points = 26
 
-	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
+	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_torch_workers, access_chemistry)
 	minimal_access = list()
 
 /datum/job/psychiatrist
@@ -1142,7 +1145,7 @@
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX)
 
-	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew)
+	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_torch_workers)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
@@ -1165,8 +1168,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o1 = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet/commissioned,
+		/datum/mil_rank/fleet/o2 = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet/commissioned,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e7,
@@ -1182,7 +1185,7 @@
 	skill_points = 18
 
 	access = list(access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
+						access_cargo_bot, access_qm, access_mailsorting, access_torch_workers, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/supply,
@@ -1215,7 +1218,7 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
+						access_cargo_bot, access_mailsorting, access_torch_workers, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/supply,
@@ -1242,7 +1245,7 @@
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 
-	access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_solgov_crew, access_commissary)
+	access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_torch_workers, access_commissary)
 
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
@@ -1272,7 +1275,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/nt,
-		/datum/mil_rank/civ/contractor
+		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/research/prospector
 	)
 
 	access = list(access_mining, access_mining_office, access_mining_station,
@@ -1305,7 +1308,7 @@
 	)
 	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
+	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_torch_workers)
 	minimal_access = list()
 
 /datum/job/chef
@@ -1336,10 +1339,11 @@
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
 
-	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar, access_commissary)
+	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_torch_workers, access_bar, access_commissary)
 	minimal_access = list()
 
 /datum/job/bartender
+	title = "Bartender"
 	department = "Service"
 	department_flag = SRV
 	supervisors = "the Executive Officer"
@@ -1349,7 +1353,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen, access_commissary)
+	access = list(access_hydroponics, access_bar, access_torch_workers, access_kitchen, access_commissary)
 	minimal_access = list()
 	min_skill = list(   SKILL_COOKING   = SKILL_BASIC,
 	                    SKILL_BOTANY    = SKILL_BASIC,
@@ -1378,7 +1382,7 @@
 	)
 
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
+	access = list(access_maint_tunnels, access_emergency_storage, access_torch_workers)
 
 /datum/job/senior_scientist
 	title = "Senior Researcher"
@@ -1462,7 +1466,9 @@
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/guard
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
+	allowed_ranks = list(/datum/mil_rank/civ/nt,
+		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/research/guard
+	)
 	min_skill = list(   SKILL_COMBAT  = SKILL_BASIC,
 	                    SKILL_WEAPONS = SKILL_BASIC)
 
@@ -1472,7 +1478,7 @@
 	                    SKILL_DEVICES     = SKILL_MAX)
 
 	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
+						access_xenoarch, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
 
 
 /datum/job/scientist_assistant
@@ -1526,11 +1532,13 @@
 		"Off-Duty",
 		"Trainer")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
-	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/civilian,
+		/datum/mil_branch/solgov
+	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/offduty,
-		/datum/mil_rank/civ/nt
+		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/passenger/nt,
+		/datum/mil_rank/sol/offduty
 	)
 
 /datum/job/cyborg
@@ -1561,6 +1569,9 @@
 	latejoin_at_spawnpoints = 1
 	access = list(access_merchant)
 	announced = FALSE
+	alt_titles = list("Trader",
+		"Salesperson"
+	)
 	min_skill = list(   SKILL_FINANCE = SKILL_ADEPT,
 	                    SKILL_PILOT	  = SKILL_BASIC)
 

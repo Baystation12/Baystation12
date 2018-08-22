@@ -248,6 +248,22 @@ badges
 	slot_flags = SLOT_TIE
 	badge_string = "Sol Central Government"
 
+/obj/item/clothing/accessory/badge/solgov/military
+	name = "uniformed services ID"
+	desc = "A plastic badge with a variety of personal information printed on it. Belongs to an off-duty or veteran member of the SCG Uniformed Services."
+	icon_state = "milbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Sol Central Government Expeditionary Corps"
+
+/obj/item/clothing/accessory/badge/solgov/military/fleet
+	badge_string = "Sol Central Government Fleet"
+
+/obj/item/clothing/accessory/badge/solgov/military/army
+	badge_string = "Sol Central Government Army"
+
+/obj/item/clothing/accessory/badge/solgov/military/army/retired
+	desc = "A plastic badge with a variety of personal information printed on it. Belongs to an off-duty or veteran member of the SCG Uniformed Services. This one is past its expiration date."
+
 /*******
 armbands
 *******/

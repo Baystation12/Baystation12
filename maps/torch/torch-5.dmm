@@ -15179,7 +15179,7 @@
 "Tj" = (
 /obj/machinery/door/airlock/sol{
 	name = "Disciplinary Board Room";
-	req_access = list(19);
+	req_one_access = list(84,85,92,97);
 	secured_wires = 0
 	},
 /obj/structure/cable/green{
