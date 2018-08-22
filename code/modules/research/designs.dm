@@ -1685,7 +1685,7 @@ CIRCUITS BELOW
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"
 	id = "teleconsole"
-	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 4)
+	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 5)
 	build_path = /obj/item/weapon/circuitboard/teleporter
 	sort_string = "HAAAA"
 
