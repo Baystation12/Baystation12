@@ -48,6 +48,9 @@
 
 	return
 
+/obj/structure/girder/CanFluidPass(var/coming_from)
+	return TRUE
+
 /obj/structure/girder/proc/reset_girder()
 	anchored = 1
 	cover = initial(cover)

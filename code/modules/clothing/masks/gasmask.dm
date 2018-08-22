@@ -10,9 +10,28 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
+	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 75, rad = 0)
+	var/clogged
+	var/filter_water
 	var/gas_filter_strength = 1			//For gas mask filters
 	var/list/filtered_gases = list("phoron", "sleeping_agent")
-	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 75, rad = 0)
+
+/obj/item/clothing/mask/gas/examine(var/mob/user)
+	. = ..()
+	if(clogged)
+		to_chat(user, "<span class='warning'>The intakes are clogged with [clogged]!</span>")
+
+/obj/item/clothing/mask/gas/filters_water()
+	return (filter_water && !clogged)
+
+/obj/item/clothing/mask/gas/attack_self(var/mob/user)
+	if(clogged)
+		user.visible_message("<span class='notice'>\The [user] begins unclogging the intakes of \the [src].</span>")
+		if(do_after(user, 100, progress = 1) && clogged)
+			user.visible_message("<span class='notice'>\The [user] has unclogged \the [src].</span>")
+			clogged = FALSE
+		return
+	. = ..()
 
 /obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
 	var/datum/gas_mixture/filtered = new
@@ -153,3 +172,11 @@
 	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
 	species_restricted = list(SPECIES_VOX)
 	filtered_gases = list("phoron", "sleeping_agent", "oxygen")
+
+/obj/item/clothing/mask/gas/aquabreather
+	name = "aquabreather"
+	desc = "A compact CO2 scrubber and breathing apparatus that draws oxygen from water."
+	icon_state = "halfgas"
+	filter_water = TRUE
+	body_parts_covered = FACE
+	w_class = 2

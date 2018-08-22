@@ -53,6 +53,8 @@
 			return global.SSevent;
 		if("SSfastprocess")
 			return global.SSfastprocess;
+		if("SSfluids")
+			return global.SSfluids;
 		if("SSgarbage")
 			return global.SSgarbage;
 		if("SSicon_update")
@@ -481,6 +483,8 @@
 			return global.href_logfile;
 		if("human_icon_cache")
 			return global.human_icon_cache;
+		if("hygiene_props")
+			return global.hygiene_props;
 		if("id_card_states")
 			return global.id_card_states;
 		if("image_repository")
@@ -1038,6 +1042,8 @@
 			global.SSevent=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
+		if("SSfluids")
+			global.SSfluids=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
 		if("SSicon_update")
@@ -1466,6 +1472,8 @@
 			global.href_logfile=newval;
 		if("human_icon_cache")
 			global.human_icon_cache=newval;
+		if("hygiene_props")
+			global.hygiene_props=newval;
 		if("id_card_states")
 			global.id_card_states=newval;
 		if("image_repository")
@@ -1996,6 +2004,7 @@
 	"SSevac",
 	"SSevent",
 	"SSfastprocess",
+	"SSfluids",
 	"SSgarbage",
 	"SSicon_update",
 	"SSinactivity",
@@ -2210,6 +2219,7 @@
 	"host",
 	"href_logfile",
 	"human_icon_cache",
+	"hygiene_props",
 	"id_card_states",
 	"image_repository",
 	"inactive_keys",

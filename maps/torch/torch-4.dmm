@@ -689,7 +689,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 6
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -880,7 +880,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/medical/virologyaccess)
 "abH" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -962,7 +962,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/centralstarboard)
 "abQ" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -1519,7 +1519,7 @@
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -1536,7 +1536,7 @@
 	},
 /area/shuttle/escape_pod14/station)
 "adn" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -1567,7 +1567,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "adp" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -1929,7 +1929,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "aee" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -1992,7 +1992,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "aek" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -10173,7 +10173,7 @@
 /area/security/brig)
 "aGX" = (
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/machinery/light{
@@ -10494,7 +10494,7 @@
 /area/security/brig)
 "aIm" = (
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 8;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -10782,7 +10782,7 @@
 /area/security/brig)
 "aJE" = (
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 8;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -11951,7 +11951,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "aOI" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -12058,7 +12058,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "aPv" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/red{
@@ -14103,7 +14103,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -14212,7 +14212,7 @@
 	tag_exterior_door = "xeno_airlock_exterior";
 	tag_interior_door = "xeno_airlock_interior"
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -15060,7 +15060,7 @@
 /turf/simulated/floor/plating,
 /area/security/equipment)
 "bhL" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
@@ -17253,7 +17253,7 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -23307,7 +23307,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = -16
 	},
 /obj/machinery/light_switch{
@@ -23646,7 +23646,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -24429,7 +24429,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "mwy" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/red{
@@ -26191,7 +26191,7 @@
 /turf/simulated/floor/carpet/red,
 /area/rnd/breakroom)
 "oGG" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -27426,7 +27426,7 @@
 /area/rnd/xenobiology/xenoflora)
 "qib" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -27825,7 +27825,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "qKU" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/alarm{
@@ -27897,7 +27897,7 @@
 /area/rnd/misc_lab)
 "qRE" = (
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -29484,7 +29484,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},

@@ -67,7 +67,9 @@
 /decl/flooring/reinforced/footstep_type = FOOTSTEP_PLATING
 
 /turf/simulated/floor/proc/get_footstep_sound()
-	if(is_plating())
+	if(check_fluid_depth(10) && !is_flooded(TRUE))
+		return safepick(footstep_sounds[FOOTSTEP_WATER])
+	else if(is_plating())
 		return safepick(footstep_sounds[FOOTSTEP_PLATING])
 	else if(!flooring || !flooring.footstep_type)
 		return safepick(footstep_sounds[FOOTSTEP_BLANK])

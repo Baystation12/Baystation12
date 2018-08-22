@@ -29,6 +29,11 @@
 
 	var/movement_delay
 
+	var/fluid_can_pass
+	var/obj/effect/flood/flood_object
+	var/fluid_blocked_dirs = 0
+	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
@@ -41,8 +46,20 @@
 	else
 		luminosity = 1
 
+/turf/update_icon()
+	update_flood_overlay()
+
+/turf/proc/update_flood_overlay()
+	if(is_flooded(absolute = TRUE))
+		if(!flood_object)
+			flood_object = new(src)
+	else if(flood_object)
+		QDEL_NULL(flood_object)
+
 /turf/Destroy()
 	remove_cleanables()
+	fluid_update()
+	REMOVE_ACTIVE_FLUID_SOURCE(src)
 	..()
 	return QDEL_HINT_IWILLGC
 

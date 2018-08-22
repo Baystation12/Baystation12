@@ -201,7 +201,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "aO" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -249,7 +249,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aX" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -833,7 +833,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "cd" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
@@ -1152,7 +1152,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cP" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/item/trash/liquidfood,
@@ -1432,7 +1432,7 @@
 /area/slavers_base/med)
 "dz" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/airless,
@@ -4027,7 +4027,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jX" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -4065,7 +4065,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/slavers_base/dorms)
 "ke" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/random/junk,
@@ -4329,7 +4329,7 @@
 /turf/space,
 /area/space)
 "lb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
 /obj/item/weapon/storage/mirror{
@@ -4340,7 +4340,7 @@
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "mb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
 /obj/item/weapon/storage/mirror{

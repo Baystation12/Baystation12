@@ -956,7 +956,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/smugglers/dorms)
 "cq" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -1058,7 +1058,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 15
 	},
 /obj/item/weapon/storage/mirror{
