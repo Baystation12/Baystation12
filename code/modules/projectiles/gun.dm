@@ -185,7 +185,7 @@
 
 	add_fingerprint(user)
 
-	if(!special_check(user))
+	if((!waterproof && submerged()) || !special_check(user))
 		return
 
 	if(safety())

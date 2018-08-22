@@ -106,4 +106,7 @@
 #define COLOR_ASSEMBLY_BLUE    "#38559e"
 #define COLOR_ASSEMBLY_PURPLE  "#6f6192"
 
+// Used by fluid system.
+#define COLOR_OCEAN "#99f5ff"
+
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

@@ -113,8 +113,8 @@ What is the naming convention for planes or layers?
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 
-	#define HIDING_MOB_LAYER 0
-
+	#define HIDING_MOB_LAYER    0
+	#define SHALLOW_WATER_LAYER 1
 #define OBJ_PLANE                     -15 // For objects which appear below humans.
 	#define BELOW_DOOR_LAYER        0.25
 	#define OPEN_DOOR_LAYER         0.5

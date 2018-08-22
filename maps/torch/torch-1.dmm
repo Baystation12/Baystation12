@@ -14773,7 +14773,7 @@
 /turf/simulated/floor/tiled/white,
 /area/vacant/infirmary)
 "CD" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_x = 32
 	},
 /obj/structure/filingcabinet/chestdrawer,

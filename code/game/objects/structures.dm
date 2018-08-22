@@ -16,9 +16,23 @@
 	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
 
 /obj/structure/Destroy()
-	if(parts)
-		new parts(loc)
+	var/turf/T = get_turf(src)
+	if(T && parts)
+		new parts(T)
 	. = ..()
+	if(istype(T))
+		T.fluid_update()
+
+/obj/structure/Initialize()
+	. = ..()
+	if(!CanFluidPass())
+		fluid_update()
+
+/obj/structure/Move()
+	. = ..()
+	if(. && !CanFluidPass())
+		fluid_update()
+
 
 /obj/structure/attack_hand(mob/user)
 	..()

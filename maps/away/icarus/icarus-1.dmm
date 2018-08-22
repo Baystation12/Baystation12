@@ -390,7 +390,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bC" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -407,7 +407,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bF" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -417,7 +417,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bH" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0
@@ -426,7 +426,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bI" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -536,7 +536,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bZ" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0
@@ -2673,7 +2673,7 @@
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "mb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -2687,7 +2687,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = 30
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -2699,7 +2699,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = -30
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;

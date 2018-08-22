@@ -432,13 +432,13 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bs" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 24
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /obj/random/soap,
