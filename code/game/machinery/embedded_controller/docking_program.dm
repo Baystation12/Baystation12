@@ -1,15 +1,4 @@
 
-#define STATE_UNDOCKED		0
-#define STATE_DOCKING		1
-#define STATE_UNDOCKING		2
-#define STATE_DOCKED		3
-
-#define MODE_NONE			0
-#define MODE_SERVER			1
-#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking, and is the one responsible for deciding to accept a docking request and signals when docking and undocking is complete. (Think server == station, client == shuttle)
-
-#define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
-
 /*
 	*** STATE TABLE ***
 	
@@ -79,10 +68,10 @@
 		tag = id_tag //set tags for initialization
 
 /datum/computer/file/embedded_program/docking/receive_user_command(command)
-	if(command == "dock")
+	if(command == "dock" || command == "undock")
 		var/datum/signal/signal = new()
 		signal.data["tag"] = tag_target
-		signal.data["command"] = "request_dock"
+		signal.data["command"] = "request_[command]"
 		signal.data["recipient"] = id_tag
 		signal.data["code"] = docking_codes
 		receive_signal(signal)
@@ -300,12 +289,3 @@
 
 /datum/computer/file/embedded_program/docking/proc/get_name()
 	return display_name ? display_name : "[get_area(master)] ([master.x], [master.y])"
-
-#undef STATE_UNDOCKED
-#undef STATE_DOCKING
-#undef STATE_UNDOCKING
-#undef STATE_DOCKED
-
-#undef MODE_NONE
-#undef MODE_SERVER
-#undef MODE_CLIENT
