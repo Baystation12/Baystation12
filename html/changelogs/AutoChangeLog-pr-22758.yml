@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - bugfix: "Oxygen regenerators should no longer get stuck trying to get or output gas."
