@@ -1264,7 +1264,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "dt" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/light{
@@ -1504,7 +1504,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "ee" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2768,7 +2768,7 @@
 /turf/simulated/wall,
 /area/casino/casino_kitchen)
 "hp" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
@@ -3559,7 +3559,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "jq" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 30
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -4603,7 +4603,7 @@
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_patron_bathroom)
 "lT" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -4834,7 +4834,7 @@
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_patron_bathroom)
 "mD" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -5898,7 +5898,7 @@
 /turf/simulated/floor/shuttle/yellow,
 /area/casino/casino_cutter)
 "Uc" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -5932,7 +5932,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "Vc" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -5976,7 +5976,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "Wc" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;

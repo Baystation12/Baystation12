@@ -1,6 +1,10 @@
 /obj/effect/decal/cleanable
 	var/list/random_icon_states
 
+/obj/effect/decal/cleanable/water_act(var/depth)
+	..()
+	qdel(src)
+
 /obj/effect/decal/cleanable/clean_blood(var/ignore = 0)
 	if(!ignore)
 		qdel(src)

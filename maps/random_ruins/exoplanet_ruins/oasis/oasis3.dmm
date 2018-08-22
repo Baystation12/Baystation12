@@ -11,7 +11,7 @@
 /turf/template_noop,
 /area/template_noop)
 "d" = (
-/obj/structure/sink/puddle,
+/obj/structure/hygiene/sink/puddle,
 /turf/template_noop,
 /area/template_noop)
 "e" = (

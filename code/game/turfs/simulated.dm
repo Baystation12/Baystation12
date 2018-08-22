@@ -166,3 +166,8 @@
 		coil.turf_place(src, user)
 		return
 	return ..()
+
+/turf/simulated/Initialize()
+	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+		fluid_update()
+	. = ..()

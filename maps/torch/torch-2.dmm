@@ -105,7 +105,7 @@
 /turf/simulated/floor/tiled,
 /area/vacant/brig)
 "as" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -3837,7 +3837,7 @@
 	name = "south bump";
 	pixel_y = -24
 	},
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white,
@@ -4750,7 +4750,7 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "lx" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 28
 	},
 /turf/simulated/floor/lino,
@@ -5454,7 +5454,7 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "ng" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -5927,7 +5927,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "of" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -9503,7 +9503,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/aft)
 "vY" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	pixel_y = 8
 	},
 /obj/machinery/light/small{
@@ -10789,7 +10789,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/diplomat)
 "yE" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -11569,7 +11569,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "Ay" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_x = 0;
 	pixel_y = 32
 	},
@@ -11640,7 +11640,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "AF" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -11653,7 +11653,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "AG" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 8;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -11970,7 +11970,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "Bx" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -11983,7 +11983,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "By" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 8;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -15471,7 +15471,7 @@
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/syringe,
 /obj/machinery/light,
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/corner/green,
@@ -15586,7 +15586,7 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "KB" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/alarm{
@@ -15953,7 +15953,7 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Lv" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -18984,7 +18984,7 @@
 /area/maintenance/thirddeck/aftport)
 "VB" = (
 /obj/structure/curtain/open/shower,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 8;
 	icon_state = "shower";
 	pixel_x = -6;

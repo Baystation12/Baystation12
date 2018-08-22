@@ -278,10 +278,13 @@
 	else
 		..()
 
+/obj/item/weapon/weldingtool/water_act()
+	if(welding && !waterproof)
+		setWelding(0)
 
 /obj/item/weapon/weldingtool/Process()
 	if(welding)
-		if(!remove_fuel(0.05))
+		if((!waterproof && submerged()) || !remove_fuel(0.05))
 			setWelding(0)
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
@@ -303,7 +306,6 @@
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return
-
 
 /obj/item/weapon/weldingtool/attack_self(mob/user as mob)
 	setWelding(!welding, usr)
@@ -381,6 +383,11 @@
 //so that the welding tool updates accordingly
 /obj/item/weapon/weldingtool/proc/setWelding(var/set_welding, var/mob/M)
 	if(!status)	return
+
+	if(!welding && !waterproof && submerged())
+		if(M)
+			to_chat(M, "<span class='warning'>You cannot light \the [src] underwater.</span>")
+		return
 
 	var/turf/T = get_turf(src)
 	//If we're turning it on

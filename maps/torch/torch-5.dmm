@@ -743,7 +743,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "bH" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -3541,14 +3541,14 @@
 /area/hallway/primary/bridge/aft)
 "it" = (
 /obj/random/soap,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/aquila/head)
 "iu" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4277,7 +4277,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -8484,7 +8484,7 @@
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "st" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -12669,7 +12669,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "GW" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -14371,7 +14371,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "Oi" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -16035,7 +16035,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "Zj" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;

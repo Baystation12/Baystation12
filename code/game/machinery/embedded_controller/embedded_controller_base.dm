@@ -3,7 +3,7 @@
 
 	name = "Embedded Controller"
 	anchored = 1
-
+	waterproof = TRUE
 	use_power = 1
 	idle_power_usage = 10
 

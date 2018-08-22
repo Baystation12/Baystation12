@@ -2567,7 +2567,7 @@
 /area/map_template/hydrobase/station/shower)
 "fR" = (
 /obj/structure/curtain/open/shower,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -2760,7 +2760,7 @@
 /area/map_template/hydrobase/station/shower)
 "gk" = (
 /obj/structure/curtain/open/shower,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},

@@ -1783,7 +1783,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
 "ep" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -1853,7 +1853,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -2014,7 +2014,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "eI" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -2140,7 +2140,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
 "eU" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 8;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2631,7 +2631,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "fO" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/white,
@@ -6087,7 +6087,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "oA" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -6504,7 +6504,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "pO" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -6988,7 +6988,7 @@
 /turf/space,
 /area/space)
 "sb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -7000,7 +7000,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
 "tb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -7012,7 +7012,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
 "ub" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;

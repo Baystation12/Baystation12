@@ -1154,3 +1154,18 @@
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
+
+/mob/proc/handle_drowning()
+	return FALSE
+
+/mob/proc/can_drown()
+	return 0
+
+/mob/is_fluid_pushable(var/amt)
+	if(..() && !buckled && (lying || !Check_Shoegrip()) && (amt >= mob_size * (lying ? 5 : 10)))
+		if(!lying)
+			Weaken(1)
+			if(lying)
+				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
+		return TRUE
+	return FALSE
