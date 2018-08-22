@@ -115,6 +115,7 @@
 /material/cotton
 	name = "cotton"
 	display_name ="grey"
+	use_name = "grey cloth"
 	icon_colour = "#ffffff"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
@@ -125,6 +126,7 @@
 /material/cloth_yellow
 	name = "yellow"
 	display_name ="yellow"
+	use_name = "yellow cloth"
 	icon_colour = "#ffbf00"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
