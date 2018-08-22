@@ -78,3 +78,6 @@
 	armors["green plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/green
 	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
 	gear_tweaks += new/datum/gear_tweak/path(armors)
+
+/datum/gear/suit/cloak
+	allowed_branches = CIVILIAN_BRANCHES
