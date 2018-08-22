@@ -89,14 +89,14 @@
 	//This is Here because the MA5B spawns with a stock.
 	attachments_on_spawn = null
 
-/obj/item/weapon/gun/projectile/ma5b_ar/theta/update_icon()
+/obj/item/weapon/gun/projectile/automatic/z8/theta/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA9"
 	else
 		icon_state = "MA9_unloaded"
 
-/obj/item/weapon/gun/projectile/ma5b_ar/theta/add_flashlight()
+/obj/item/weapon/gun/projectile/automatic/z8/theta/add_flashlight()
 	return
 
 /obj/structure/closet/syndicate/orioncloset
