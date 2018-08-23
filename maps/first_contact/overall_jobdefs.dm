@@ -66,8 +66,8 @@
 
 /datum/job/ODST
 	title = "Orbital Drop Shock Trooper"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 5
+	spawn_positions = 5
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
 	alt_titles = list("Private First Class"= /decl/hierarchy/outfit/job/ODSTCQC,
 	"Lance Corporal"= /decl/hierarchy/outfit/job/ODSTengineer,
