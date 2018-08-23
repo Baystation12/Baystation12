@@ -65,18 +65,18 @@
 	spawnpoint_override = "Corvette Crew Captain"
 
 /datum/job/ODST
-	title = "ODST Rifleman"
+	title = "Rifleman"
 	total_positions = 4
 	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
-	alt_titles = list("ODST Medic","ODST CQC Specialist","ODST Sharpshooter","ODST Combat Engineer")
+	alt_titles = list("Field Medic","CQC Specialist","Sharpshooter","Combat Engineer")
 	selection_color = "#008000"
 	access = list(142,144,110,309,311)
 	spawnpoint_override = "ODST Rifleman Spawn"
 	is_whitelisted = 1
 
 /datum/job/ODSTO
-	title = "ODST Officer"
+	title = "Second Lieutenant"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
