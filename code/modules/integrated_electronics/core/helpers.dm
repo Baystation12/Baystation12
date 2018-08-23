@@ -47,15 +47,15 @@
 /obj/item/integrated_circuit/proc/get_pin_ref(pin_type, pin_number)
 	switch(pin_type)
 		if(IC_INPUT)
-			if(pin_number > inputs.len)
+			if(!inputs || pin_number > inputs.len)
 				return
 			return inputs[pin_number]
 		if(IC_OUTPUT)
-			if(pin_number > outputs.len)
+			if(!outputs || pin_number > outputs.len)
 				return
 			return outputs[pin_number]
 		if(IC_ACTIVATOR)
-			if(pin_number > activators.len)
+			if(!activators || pin_number > activators.len)
 				return
 			return activators[pin_number]
 	return

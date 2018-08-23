@@ -74,7 +74,7 @@
 	.=..()
 	if(istype(AM, /obj/machinery/door/airlock) ||  istype(AM, /obj/machinery/door/window))
 		var/obj/machinery/door/D = AM
-		if(D.check_access(GetAccess()))
+		if(D.check_access(src))
 			D.open()
 
 /obj/item/device/electronic_assembly/Initialize()
@@ -97,6 +97,12 @@
 		if(IC.power_draw_idle)
 			if(!draw_power(IC.power_draw_idle))
 				IC.power_fail()
+
+/obj/item/device/electronic_assembly/MouseDrop_T(atom/dropping, mob/user)
+	if(user == dropping)
+		interact(user)
+	else
+		..()
 
 /obj/item/device/electronic_assembly/interact(mob/user)
 	if(!check_interactivity(user))

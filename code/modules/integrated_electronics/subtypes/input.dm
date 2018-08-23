@@ -692,22 +692,23 @@
 		code = new_code
 
 
-/obj/item/integrated_circuit/input/signaler/do_work() // Sends a signal.
-	if(!radio_connection)
+/obj/item/integrated_circuit/input/signaler/do_work(var/ord) // Sends a signal.
+	if(!radio_connection || ord != 1)
 		return
 
 	radio_connection.post_signal(src, create_signal())
 	activate_pin(2)
 
 /obj/item/integrated_circuit/input/signaler/proc/signal_good(var/datum/signal/signal)
-	if(!signal || signal.source == src || signal.encryption != code)
+	if(!signal || signal.source == src || (signal.encryption && signal.encryption != code))
 		return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
 	signal.source = src
-	signal.encryption = code
+	if(isnum(code))
+		signal.encryption = code
 	signal.data["message"] = "ACTIVATE"
 	return signal
 
@@ -719,18 +720,13 @@
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/integrated_circuit/input/signaler/receive_signal(datum/signal/signal)
-	var/new_code = get_pin_data(IC_INPUT, 2)
-	var/code = 0
+	if(!signal_good(signal))
+		return 0
+	treat_signal(signal)
+	return 1
 
-	if(isnum(new_code))
-		code = new_code
-	if(!signal)
-		return 0
-	if(signal.data["code"] != code)
-		return 0
-	if(signal.source == src) // Don't trigger ourselves.
-		return 0
-
+//This only procs when a signal is valid.
+/obj/item/integrated_circuit/input/signaler/proc/treat_signal(var/datum/signal/signal)
 	activate_pin(3)
 	audible_message("\icon[src] *beep* *beep* *beep*", null, 1)
 	playsound(get_turf(src), 'sound/machines/triple_beep.ogg', 50)
@@ -743,19 +739,19 @@
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
 	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message received."
 	complexity = 8
-	inputs = list("frequency" = IC_PINTYPE_NUMBER, "id tag" = IC_PINTYPE_STRING, "command" = IC_PINTYPE_STRING)
+	inputs = list("frequency" = IC_PINTYPE_NUMBER, "command" = IC_PINTYPE_STRING, "id tag" = IC_PINTYPE_STRING)
 	outputs = list("received command" = IC_PINTYPE_STRING)
-	var/id_tag = "Integrated_Circuit"
-	var/command = "ACTIVATE"
+	var/id_tag = null
+	code = "ACTIVATE"
 
 /obj/item/integrated_circuit/input/signaler/advanced/on_data_written()
 	..()
-	var/new_tag = get_pin_data(IC_INPUT,2)
-	var/new_command = get_pin_data(IC_INPUT,3)
+	var/new_command = get_pin_data(IC_INPUT,2)
+	var/new_tag = get_pin_data(IC_INPUT,3)
 	if(istext(new_tag))
 		id_tag = new_tag
 	if(istext(new_command))
-		command = new_command
+		code = new_command
 
 /obj/item/integrated_circuit/input/signaler/advanced/signal_good(var/datum/signal/signal)
 	var/results = ..()
@@ -766,9 +762,14 @@
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
 	var/datum/signal/signal = ..()
 	signal.data["tag"] = id_tag
-	signal.data["command"] = command
+	signal.data["command"] = code
 	signal.encryption = null
 	return signal
+
+/obj/item/integrated_circuit/input/signaler/advanced/treat_signal(var/datum/signal/signal)
+	set_pin_data(IC_OUTPUT,1,signal.data["command"])
+	push_data()
+	..()
 
 /obj/item/integrated_circuit/input/teleporter_locator
 	name = "teleporter locator"
