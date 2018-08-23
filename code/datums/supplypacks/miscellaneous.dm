@@ -2,7 +2,7 @@
 	name = "Miscellaneous"
 
 /decl/hierarchy/supply_pack/miscellaneous/flamps
-	num_contained = 6
+	num_contained = 3
 	contains = list(/obj/item/device/flashlight/lamp/floodlamp,
 					/obj/item/device/flashlight/lamp/floodlamp/green)
 	name = "Flood lamps"
