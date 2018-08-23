@@ -249,6 +249,26 @@
 /datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
 
+/datum/reagent/napalm
+	name = "Napalm"
+	description = "A sticky volatile substance made from mixing quick burning goo with slow burning goo, to make a viscous average burning goo that sticks to everything."
+	taste_description = "burnt corn"
+	reagent_state = LIQUID
+	color = "#673910"
+	touch_met = 50
+
+/datum/reagent/napalm/touch_turf(var/turf/T)
+	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
+	remove_self(volume)
+
+/datum/reagent/napalm/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 100)
+
+/datum/reagent/napalm/b
+	name = "Napalm B"
+	taste_description = "burnt plastic and metal"
+
 /datum/reagent/space_cleaner
 	name = "Space cleaner"
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
@@ -438,15 +458,15 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
 
-/datum/reagent/carbon_dioxide
-	name = "Carbon Dioxide"
-	description = "A byproduct of human respiration."
+/datum/reagent/carbon_monoxide
+	name = "Carbon Monoxide"
+	description = "A dangerous carbon comubstion byproduct."
 	taste_description = "stale air"
 	reagent_state = LIQUID
 	color = "#cccccc"
 	metabolism = 0.05 // As with helium.
 
-/datum/reagent/carbon_dioxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+/datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!istype(M) || alien == IS_DIONA)
 		return
 	var/warning_message

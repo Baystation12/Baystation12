@@ -18675,7 +18675,8 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/integrated_circuit_printer,
+/obj/structure/table/standard,
+/obj/item/device/integrated_circuit_printer,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "fCb" = (
@@ -20604,8 +20605,8 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
 "hLb" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/integrated_circuit_printer,
+/obj/structure/table/standard,
+/obj/item/device/integrated_circuit_printer,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "hLf" = (
@@ -22933,10 +22934,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "kAb" = (
-/obj/machinery/cryopod/robot{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/adherent_bath,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "kBb" = (
@@ -23040,12 +23039,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCyborg"
-	},
-/obj/effect/landmark/start{
-	name = "Cyborg"
-	},
 /turf/simulated/floor/tiled,
 /area/assembly/chargebay)
 "kJb" = (
@@ -23090,12 +23083,12 @@
 	name = "east bump";
 	pixel_x = 24
 	},
-/obj/effect/landmark{
-	name = "JoinLateCyborg"
-	},
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
+	},
+/obj/effect/landmark{
+	name = "JoinLateCyborg"
 	},
 /obj/effect/landmark/start{
 	name = "Cyborg"

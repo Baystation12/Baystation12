@@ -1,5 +1,0 @@
-author: "nearlyNon"
-delete-after: True
-changes: 
-  - rscadd: "Inducers. Make them in science. They're a TGstation item, you can charge anything that uses a battery with them. Almost. Screwdriver to remove and replace its battery."
-  - rscadd: "Cyborg integrated version of the above, using the borg's internal battery, and a failsafe on it."

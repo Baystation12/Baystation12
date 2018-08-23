@@ -153,6 +153,12 @@
 	to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
 	if(IsBroken()) to_chat(user, "<span class='warning'>\The [src] seems to have broken down.</span>")
 	if(overheating) to_chat(user, "<span class='danger'>\The [src] is overheating!</span>")
+
+/obj/machinery/power/port_gen/pacman/proc/process_exhaust()
+	var/datum/gas_mixture/environment = loc.return_air()
+	if(environment)
+		environment.adjust_gas("carbon_monoxide", 0.05*power_output)
+
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
 	if(sheets >= needed_sheets - sheet_left)
@@ -215,6 +221,7 @@
 		overheat()
 	else if (overheating > 0)
 		overheating--
+	process_exhaust()
 
 /obj/machinery/power/port_gen/pacman/handleInactive()
 	var/cooling_temperature = 20
@@ -410,6 +417,10 @@
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
 	board_path = /obj/item/weapon/circuitboard/pacman/super
 	var/rad_power = 2
+
+//nuclear energy is green energy!
+/obj/machinery/power/port_gen/pacman/super/process_exhaust()
+	return
 
 /obj/machinery/power/port_gen/pacman/super/UseFuel()
 	//produces a tiny amount of radiation when in use

@@ -15174,8 +15174,7 @@
 /area/maintenance/thirddeck/aftstarboard)
 "JH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
-	dir = 8
+	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/thirddeck/aft)

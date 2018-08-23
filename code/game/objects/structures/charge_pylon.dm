@@ -22,6 +22,7 @@
 		var/mob/living/silicon/robot/robot = user
 		power_cell = robot.cell
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(power_cell)
 		user.visible_message("<span class='notice'>There is a loud crack and the smell of ozone as \the [user] caresses \the [src].</span>")
 		power_cell.charge = power_cell.maxcharge

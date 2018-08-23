@@ -32,7 +32,7 @@
 "aF" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/effect/floor_decal/cti,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled/white/monotile,/area/unishi/common)
 "aG" = (/turf/simulated/wall/r_wall,/area/unishi/common)
 "aH" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/solar_control,/obj/item/weapon/circuitboard/roboprinter,/obj/item/device/bot_kit,/turf/simulated/floor,/area/unishi/common)
-"aI" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/mecha/gygax/main,/obj/item/integrated_circuit/sensor/proximity/proximity,/obj/item/integrated_circuit/converter/text2num,/turf/simulated/floor,/area/unishi/common)
+"aI" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/mecha/gygax/main,/obj/item/integrated_circuit/converter/text2num,/turf/simulated/floor,/area/unishi/common)
 "aJ" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/roboprinter,/obj/item/weapon/circuitboard/rdserver,/obj/item/weapon/circuitboard/helm,/turf/simulated/floor,/area/unishi/common)
 "aK" = (/obj/structure/table/standard,/obj/item/weapon/circuitboard/robotics,/obj/item/weapon/circuitboard/protolathe,/obj/item/weapon/circuitboard/helm,/turf/simulated/floor,/area/unishi/common)
 "aL" = (/obj/machinery/smartfridge/chemistry,/turf/simulated/floor/tiled/white,/area/unishi/chem)
