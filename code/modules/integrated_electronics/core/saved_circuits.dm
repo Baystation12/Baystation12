@@ -23,8 +23,6 @@
 			var/datum/integrated_io/input = inputs[index]
 
 			// Don't waste space saving the default values
-			if(input.data == inputs_default["[index]"])
-				continue
 			if(input.data == initial(input.data))
 				continue
 
