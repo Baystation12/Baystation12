@@ -39,7 +39,9 @@
 		"crt" =      "ipc_crt",
 		"scroll" =   "ipc_scroll",
 		"console" =  "ipc_console",
-		"rgb" =      "ipc_rgb"
+		"rgb" =      "ipc_rgb",
+		"tetris" =   "ipc_tetris",
+		"doom" =     "ipc_doom"
 		)
 
 /obj/item/clothing/mask/monitor/set_dir()
