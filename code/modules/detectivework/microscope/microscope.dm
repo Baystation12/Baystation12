@@ -59,17 +59,17 @@
 	else if(istype(sample, /obj/item/weapon/sample/fibers))
 		var/obj/item/weapon/sample/fibers/fibers = sample
 		report.SetName("Fiber report #[++report_num]: [fibers.name]")
-		report.info = "<b>Scanned item:</b><br>[fibers.name]<br><br>"
+		report.info = "<b>Scanned item:</b><br>[fibers.object]<br><br>"
 		if(fibers.evidence)
-			report.info = "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
+			report.info += "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
 			for(var/fiber in fibers.evidence)
 				report.info += "<span class='notice'>Most likely match for fibers: [fiber]</span><br><br>"
 		else
 			report.info += "No fibers found."
 	else if(istype(sample, /obj/item/weapon/sample/print))
 		report.SetName("Fingerprint report #[report_num]: [sample.name]")
-		report.info = "<b>Fingerprint analysis report #[report_num]</b>: [sample.name]<br>"
 		var/obj/item/weapon/sample/print/card = sample
+		report.info = "<b>Fingerprint analysis report #[report_num]</b>: [card.object ? card.object : card.name]<br>"
 		if(card.evidence && card.evidence.len)
 			report.info += "Surface analysis has determined unique fingerprint strings:<br><br>"
 			for(var/prints in card.evidence)
