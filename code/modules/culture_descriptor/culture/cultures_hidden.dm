@@ -10,7 +10,7 @@
 /decl/cultural_info/culture/hidden/shadow
 	name =             CULTURE_STARLIGHT
 	language =         LANGUAGE_GALCOM
-	additional_langs = list(LANGUAGE_CULT,LANGUAGE_OCCULT)
+	additional_langs = list(LANGUAGE_CULT, LANGUAGE_OCCULT)
 
 /decl/cultural_info/culture/hidden/cultist
 	name =   CULTURE_CULTIST
