@@ -3,14 +3,16 @@
 {{else}}
 	<h2>Docking ports:</h2>
 	<table style="width:100%">
-	<tr><td style="width:40%">Location<th>Status<th>Docking code<th>Docking requests
+	<tr><td style="width:40%">Location<th>Status<th>Docking code<th>Docking control
 	{{for data.docks}}
 		<tr class="candystripe">
 		<td>{{:value.location}}
 		<td>{{:value.status}}
 		<td>{{:helper.link(value.codes, '', {'edit_code' : value.tag})}}
 		{{if value.docking_attempt}}
-			<td>{{:helper.link('GRANT', '', {'dock' : value.tag})}}
+			<td>{{:helper.link('GRANT DOCK', '', {'dock' : value.tag})}}
+		{{else value.docked}}
+			<td>{{:helper.link('UNDOCK', '', {'undock' : value.tag})}}
 		{{else}}
 			<td>
 		{{/if}}
