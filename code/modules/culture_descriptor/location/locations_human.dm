@@ -124,7 +124,7 @@
 	Descendants of a Penal Colony, they have lived on the planet for 117 years.  While much of the planet lacks education and infrastructure, it is common to see Northern Tersteners onboard Sol vessels. \
 	Many cultures developed on the planet. Primarily, these are Urban Tersteners, known as Pinascs; and Rural Tersteners, known as 'Nevokies'.  Many Martian and Earthling enclaves exist on the planet. \
 	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their very loud sense of justice, they are considered the cowboys of Sol Central. \
-    Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
+	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
 	capital = "Tersten City"
 	economic_power = 1.0
 	language = LANGUAGE_GALCOM
