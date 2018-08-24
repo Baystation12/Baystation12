@@ -64,6 +64,12 @@
 	playsound(src, "switch", 30)
 	set_state(!on)
 
+/obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
+	if(istype(tool, /obj/item/weapon/screwdriver))
+		new /obj/item/frame/light_switch(user.loc, 1)
+		qdel(src)
+
+
 /obj/machinery/light_switch/powered()
 	. = ..(power_channel, connected_area) //tie our powered status to the connected area
 
