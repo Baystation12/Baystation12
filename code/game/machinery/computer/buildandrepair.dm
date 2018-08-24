@@ -110,6 +110,20 @@
 			if(isScrewdriver(P))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
-				var/B = new src.circuit.build_path ( src.loc )
+				var/atom/B = new src.circuit.build_path ( src.loc )
 				src.circuit.construct(B)
+				B.dir = src.dir
 				qdel(src)
+
+/obj/structure/computerframe/verb/rotate()
+	set category = "Object"
+	set name = "Rotate Computer Frame"
+	set src in oview(1)
+
+	if (!Adjacent(usr) || usr.incapacitated() || src.state != 0)
+		return
+
+	src.set_dir(turn(src.dir, 90))
+
+/obj/structure/computerframe/AltClick()
+	rotate()
