@@ -111,6 +111,18 @@
 	result_type = /obj/item/frame/light/small
 	difficulty = 2
 
+/datum/stack_recipe/light_switch
+	title = "light switch"
+	result_type = /obj/item/frame/light_switch
+	req_amount = 1
+	difficulty = 2
+
+/datum/stack_recipe/light_switch/windowtint
+	title = "window tint switch"
+	result_type = /obj/item/frame/light_switch/windowtint
+	req_amount = 1
+	difficulty = 2
+
 /datum/stack_recipe/apc
 	title = "APC frame"
 	result_type = /obj/item/frame/apc

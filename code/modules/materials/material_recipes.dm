@@ -62,6 +62,8 @@
 	recipes += new/datum/stack_recipe/grenade(src)
 	recipes += new/datum/stack_recipe/light(src)
 	recipes += new/datum/stack_recipe/light_small(src)
+	recipes += new/datum/stack_recipe/light_switch(src)
+	recipes += new/datum/stack_recipe/light_switch/windowtint(src)
 	recipes += new/datum/stack_recipe/apc(src)
 	recipes += new/datum/stack_recipe/air_alarm(src)
 	recipes += new/datum/stack_recipe/fire_alarm(src)
