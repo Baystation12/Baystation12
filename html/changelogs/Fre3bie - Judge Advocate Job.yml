@@ -1,9 +1,0 @@
-author: Fre3bie
-delete-after: True
-changes: 
-  - rscadd: "Added the new job Judge Advocate."
-  - rscadd: "New admin fax destination: Judge Advocate General."
-  - maptweak: "Added Legal Office for Judge Advocate on deck three."
-  - maptweak: "Vacant office size reduced."
-  - maptweak: "Fixed disposals junctions near holodeck sending trash the wrong direction."
-  - maptweak: "Fixed observation bubble disposal chute not being connected to any pipes."
