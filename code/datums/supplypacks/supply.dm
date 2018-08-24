@@ -16,9 +16,16 @@
 
 /decl/hierarchy/supply_pack/supply/toner
 	name = "Toner cartridges"
-	contains = list(/obj/item/device/toner = 6)
+	contains = list(/obj/item/device/toner = 3)
 	cost = 10
 	containername = "\improper Toner cartridges"
+
+/decl/hierarchy/supply_pack/supply/wpaper
+	name = "Wrapping paper"
+	contains = list(/obj/item/stack/package_wrap/twenty_five = 3)
+	cost = 10
+	containername = "\improper Wrapping paper"
+
 
 /decl/hierarchy/supply_pack/supply/janitor
 	name = "Janitorial supplies"
