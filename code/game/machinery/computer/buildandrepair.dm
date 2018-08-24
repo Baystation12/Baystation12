@@ -112,7 +112,7 @@
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 				var/atom/B = new src.circuit.build_path ( src.loc )
 				src.circuit.construct(B)
-				B.dir = src.dir
+				B.set_dir(src.dir)
 				qdel(src)
 
 /obj/structure/computerframe/verb/rotate()
