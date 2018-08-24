@@ -102,3 +102,14 @@
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."
 	subversive_potential = 25
 	language = LANGUAGE_GALCOM
+
+
+/decl/cultural_info/faction/remote/hephaestus
+	name = FACTION_HEPHAESTUS
+	description = "Hephaestus industries, commonly referred to as simply Hephaestus, is the oldest human megacorporation still in business.\
+	Hephaestus is the leading market share in small arms, armed vehicles and defense systems and is known for selling weapons to both sides of a \
+	conflict or to their own competitors. Their research efforts focus on alien technology, specially Unathi artifacts and Skrell tech, while phoron research \
+	is pratically non existent. Despite constant scrutiny and being considered a necessary evil by the more peaceful systems, Hephaestus Industries' pay rates \
+	and retirement benefits make it a sought employer and ensure a loyal workforce. "
+	economic_power = 1.2 //Lore says they pay well, but I also don't want to make everyone go this for monies
+	subversive_potential = 15
