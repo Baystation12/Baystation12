@@ -6,7 +6,7 @@
 		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
-#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder
+#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/jag, /datum/job/pathfinder
 	species_to_job_blacklist = list(
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
@@ -16,7 +16,7 @@
 #undef HUMAN_ONLY_JOBS
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
-						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
+						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/jag,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
@@ -455,6 +455,39 @@
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+
+/datum/job/jag
+	title = "Judge Advocate"
+	department = "Support"
+	department_flag = SPT
+
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer, Executive Officer, and Judge Advocate General"
+	selection_color = "#2f2f7f"
+	minimal_player_age = 7
+	economic_power = 10
+	ideal_character_age = 28
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/jag/fleet
+	allowed_branches = list(
+		/datum/mil_branch/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o2
+	)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_BUREAUCRACY = SKILL_MAX)
+	skill_points = 20
+
+
+	access = list(access_maint_tunnels, access_bridge, access_RC_announce, access_solgov_crew, access_cent_creed)
+
+	software_on_spawn = list(/datum/computer_file/program/reports)
+
+/datum/job/jag/get_description_blurb()
+	return "You are a Judge Advocate. You are a military lawyer assigned to provide legal counsel to uniformed personnel and advise command staff on matters of SCUJ. While on [GLOB.using_map.full_name] you are subordinate to the CO and XO, but ultimately answer to the Judge Advocate General. You may be called upon to assist in hearings and courts-martial as legal representation."
 
 /datum/job/pathfinder
 	title = "Pathfinder"

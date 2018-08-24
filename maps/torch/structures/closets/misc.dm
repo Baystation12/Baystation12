@@ -50,6 +50,30 @@
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
 	)
 
+/obj/structure/closet/secure_closet/JAG
+	name = "\improper Judge Advocate's locker"
+	req_access = list(access_bridge)
+	icon_state = "sol1"
+	icon_closed = "sol"
+	icon_locked = "sol1"
+	icon_opened = "solopen"
+	icon_off = "soloff"
+
+/obj/structure/closet/secure_closet/JAG/WillContain()
+	return list(
+		/obj/item/device/flash,
+		/obj/item/device/camera,
+		/obj/item/device/camera_film = 2,
+		/obj/item/weapon/clipboard,
+		/obj/item/weapon/folder/red,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape/random = 3,
+		/obj/item/weapon/storage/secure/briefcase,
+		/obj/item/device/radio/headset/jag,
+		/obj/item/weapon/storage/belt/general,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
+	)
 //equipment closets that everyone on the crew or in research can access, for storing things securely
 
 /obj/structure/closet/secure_closet/crew

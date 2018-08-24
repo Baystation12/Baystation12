@@ -168,6 +168,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/command/jag/fleet
+	name = OUTFIT_JOB_NAME("Judge Advocate - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/jag
+	pda_type = /obj/item/modular_computer/pda/heads
+	l_ear = /obj/item/device/radio/headset/jag
+
 //Engineering Outfits
 
 /decl/hierarchy/outfit/job/torch/crew/engineering
