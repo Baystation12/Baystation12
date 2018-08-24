@@ -14,13 +14,21 @@
 	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
 
-/obj/machinery/optable/New()
-	..()
+/obj/machinery/optable/Initialize()
+	. = ..()
+	component_parts = list(
+		new /obj/item/weapon/circuitboard/optable(src),
+		new /obj/item/weapon/stock_parts/scanning_module(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/capacitor(src))
+	RefreshParts()
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
 			computer.table = src
 			break
+
 
 /obj/machinery/optable/examine(var/mob/user)
 	. = ..()
@@ -42,6 +50,21 @@
 			if (prob(25))
 				src.set_density(0)
 
+/obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
+	if(default_deconstruction_screwdriver(user, O))
+		updateUsrDialog()
+		return
+	if(default_deconstruction_crowbar(user, O))
+		return
+	if(default_part_replacement(user, O))
+		return
+	if (istype(O, /obj/item/grab))
+		var/obj/item/grab/G = O
+		if(iscarbon(G.affecting) && check_table(G.affecting))
+			take_victim(G.affecting,usr)
+			qdel(O)
+			return
+	return ..()
 
 /obj/machinery/optable/attack_ai(var/mob/user)
 	attack_hand(user)
@@ -69,6 +92,7 @@
 	suppressing = !suppressing
 	user.visible_message("<span class='notice'>\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor.</span>")
 
+
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
@@ -79,7 +103,6 @@
 
 
 /obj/machinery/optable/MouseDrop_T(obj/O as obj, mob/user as mob)
-
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return
 	if(!user.unequip_item())
@@ -116,8 +139,6 @@
 		C.client.eye = src
 	C.resting = 1
 	C.dropInto(loc)
-	for(var/obj/O in src)
-		O.dropInto(loc)
 	src.add_fingerprint(user)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
@@ -127,7 +148,6 @@
 		icon_state = "table2-idle"
 
 /obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
-
 	var/mob/living/M = user
 	if(user.stat || user.restrained() || !check_table(user) || !iscarbon(target))
 		return
@@ -141,14 +161,6 @@
 		return
 
 	take_victim(usr,usr)
-
-/obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
-	if (istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		if(iscarbon(G.affecting) && check_table(G.affecting))
-			take_victim(G.affecting,usr)
-			qdel(W)
-			return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
 	check_victim()

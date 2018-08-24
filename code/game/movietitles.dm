@@ -123,11 +123,10 @@ client
 			if(rank.name_short)
 				used_name = "[rank.name_short] [used_name]"
 		if(prob(90))
-			var/actor_name = H.species.get_random_name(H.gender)
-			if(!(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10)) //sometimes can't get actor of thos species
-				var/datum/species/S = all_species["Human"]
-				actor_name = S.get_random_name(H.gender)
-			chunk += "[actor_name]\t \t \t \t[uppertext(used_name)][job]"
+			var/decl/cultural_info/actor_culture = SSculture.get_culture(H.get_cultural_value(TAG_CULTURE))
+			if(!actor_culture || !(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10))
+				actor_culture = SSculture.get_culture(CULTURE_HUMAN)
+			chunk += "[actor_culture.get_random_name(H.gender)]\t \t \t \t[uppertext(used_name)][job]"
 		else
 			var/datum/gender/G = gender_datums[H.gender]
 			chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
@@ -163,9 +162,8 @@ client
 		if(!C.holder)
 			continue
 		if(C.holder.rights & (R_DEBUG|R_ADMIN))
-			var/datum/species/S = all_species[pick(all_species)]
-			var/g = prob(50) ? MALE : FEMALE
-			staff += "[uppertext(pick(staffjobs))] - [S.get_random_name(g)] a.k.a. '[C.key]'"
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
 		else if(C.holder.rights & R_MOD)
 			goodboys += "[C.key]"
 

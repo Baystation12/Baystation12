@@ -47,11 +47,13 @@
 		var/datum/computer/file/embedded_program/docking/P = locate(docktag)
 		if(P)
 			var/docking_attempt = P.tag_target && !P.dock_state
+			var/docked = P.tag_target && (P.dock_state == STATE_DOCKED)
 			docks.Add(list(list(
 				"tag"=P.id_tag,
 				"location" = P.get_name(),
 				"status" = capitalize(P.get_docking_status()),
 				"docking_attempt" = docking_attempt,
+				"docked" = docked,
 				"codes" = P.docking_codes ? P.docking_codes : "Unset"
 				)))
 	data["docks"] = docks
@@ -78,4 +80,9 @@
 		var/datum/computer/file/embedded_program/docking/P = locate(href_list["dock"])
 		if(P)
 			P.receive_user_command("dock")
+		return 1
+	if(href_list["undock"])
+		var/datum/computer/file/embedded_program/docking/P = locate(href_list["undock"])
+		if(P)
+			P.receive_user_command("undock")
 		return 1
