@@ -199,9 +199,10 @@
 	name = HOME_SYSTEM_KINGSTON
 	distance = "40 light years"
 	description = "Kingston is an occupied ocean world made of various archipelagos, inhabiting the Lordania system. The planet's surface is 90% water, and much of the popluation live around the equator. \
-	The planet is a humid sub-tropical world, and a huge tourist destination for Sol citizens.  Kingston is extremely multicultural, and many old human cultures still hold an enclave.  An estimated 15 million tourists \
-	visit annually.  While a highway and magnetic train system link many of the islands, boats are incredibly popular amongst tourists and workers alike. Many of the islands on the planet have been created via tectonic plates \
-	or volcanic eruption, making the planet more geologically active than Earth. Despite this, technology of the 26th century has developed enough to mitigate most structural damage done in the event of earthquakes or tsunamis. \
+	The planet is a humid sub-tropical world, and a huge tourist destination for Sol citizens.  Kingston is extremely multicultural, and many old human cultures still hold an enclave. It also contains a large \
+	number of Tritonians, both as tourists and residents. An estimated 15 million tourists visit annually.  While a highway and magnetic train system link many of the islands, boats are incredibly popular amongst \
+	tourists and workers alike. Many of the islands on the planet have been created via tectonic plates or volcanic eruption, making the planet more geologically active than Earth. \
+	Despite this, technology of the 26th century has developed enough to mitigate most structural damage done in the event of earthquakes or tsunamis. \
 	Formally the United Nations of Kingston, the planet is made up of multiple island nations and several planetary representatives.<br><br>The people of Kingston are relatively unassuming. They have much in common with \
 	their Sol brothers, and are usually seen onboard most SCG Vessels.  Growing up on a waterworld, most Kingstonians can sail a boat, something rare in the 26th Century.  Typically dark in skin due to the planet's proximity to it's sun, \
 	Kingstonians come in various forms, and are usually different from one another."
