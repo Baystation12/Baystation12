@@ -52,6 +52,9 @@
 	spawn_positions = 8
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine
 	selection_color = "#008000"
+	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
+	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
+	"EVA Combat Marine")
 	access = list(142,144)
 	spawnpoint_override = "Corvette Marine Spawn"
 
