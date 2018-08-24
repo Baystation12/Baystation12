@@ -4594,7 +4594,7 @@
 	pixel_x = -24
 	},
 /obj/machinery/light/spot,
-/obj/structure/table/standard,
+/obj/machinery/vending/fashionvend,
 /turf/simulated/floor/tiled/dark,
 /area/holocontrol)
 "kY" = (
