@@ -120,6 +120,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_CERES,
 			HOME_SYSTEM_PLUTO,
 			HOME_SYSTEM_TAU_CETI,
+			HOME_SYSTEM_MAGNITKA,
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
@@ -129,6 +130,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			FACTION_FREETRADE,
 			FACTION_XYNERGY,
 			FACTION_EXPEDITIONARY,
+			FACTION_HEPHAESTUS,
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(

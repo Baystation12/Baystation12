@@ -20,6 +20,7 @@
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
+#define FACTION_HEPHAESTUS     "Hephaestus Industries"
 
 #define HOME_SYSTEM_EARTH      "Earth"
 #define HOME_SYSTEM_LUNA       "Luna"
@@ -31,6 +32,7 @@
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
 #define HOME_SYSTEM_DEEP_SPACE "Deep Space"
+#define HOME_SYSTEM_MAGNITKA   "Magnitka"
 
 #define CULTURE_OTHER          "Other Culture"
 #define CULTURE_HUMAN          "Humankind"

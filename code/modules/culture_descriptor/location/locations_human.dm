@@ -110,3 +110,18 @@
 	the cutting edge, most Episoloners are tech-savvy, at the very least and are usually well educated, with a focus on the sciences. The people \
 	of Ceti Episilon have developed a reputation for being some of the best and brightest that Sol has to offer."
 	capital = "Verlize"
+
+
+/decl/cultural_info/location/human/magnitka
+	name = HOME_SYSTEM_MAGNITKA
+	ruling_body = FACTION_OTHER
+	distance = "24.3 light years"
+	description = "Magnitka is an independent colony on the remote Ursa system. A cold and red iron-rich planet, covered in reddish-brown weeds and bushes, \
+	It's home to a significant number of mining and metalurgy operations and are also known for renting land to less reputable corporations and individuals. \
+	Originally founded by German corporations searching for iron, colonists descend from the corporate employees and the slavic workforce brought in for cheap labor. \
+	The planet is still recovering from the rebellion and subsequent civil war following a viral leak from corporate research labs. Thus, Magnitkans are subject to strict ID checks \
+	mass surveilance and to the constant vigilance of the state security services."
+	capital = "Labortown"
+	economic_power = 0.9
+	language = LANGUAGE_GALCOM
+	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_INDEPENDENT)
