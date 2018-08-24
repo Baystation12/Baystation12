@@ -1,0 +1,386 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/portumbilical)
+"ac" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"ad" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Porthallway2)
+"ae" = (/turf/simulated/wall,/area/corvette/unscthorin/portumbilical)
+"af" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"ag" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"ah" = (/turf/simulated/floor/plating,/area/space)
+"ai" = (/obj/effect/floor_decal/industrial/hatch,/turf/simulated/floor/plating,/area/space)
+"aj" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"ak" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/drop_pod_launchbay,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"al" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Hangarbayport)
+"am" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/north,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"an" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"ao" = (/obj/docking_umbilical/north{name = "Port Docking Umbilical"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"ap" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Escape Pod"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway2)
+"aq" = (/obj/machinery/alarm,/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Porthallway2)
+"ar" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"as" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"at" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"au" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"av" = (/obj/machinery/door/firedoor,/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/corvette/unscthorin/portumbilical)
+"aw" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"ax" = (/obj/structure/sign/halo_floorsign/airlock{tag = "icon-airlock (NORTH)"; icon_state = "airlock"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"ay" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"az" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aA" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aB" = (/obj/structure/sign/halo_floorsign/lifepods{tag = "icon-lifepods (NORTH)"; icon_state = "lifepods"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aC" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbayport)
+"aD" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"aE" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"aF" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aG" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aH" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aI" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aJ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/maint,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aK" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Port Hangar"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbayport)
+"aL" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"aM" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"aN" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Port Airlock"; req_access = list(142)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"aO" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"aP" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/odstsection)
+"aQ" = (/obj/machinery/door/airlock/halo{name = "ODST Officer Bunk"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"aR" = (/obj/machinery/door/airlock/halo{name = "ODST Bunks"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"aS" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/deckacces)
+"aT" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(142)},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"aU" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"aV" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"aW" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/portumbilical)
+"aX" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/pen,/obj/item/weapon/folder,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"aY" = (/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"aZ" = (/obj/structure/closet/secure_closet/personal/empty,/obj/item/squad_manager,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/device/radio/headset/unsc/odsto,/obj/item/clothing/suit/armor/special/odst/squadleader,/obj/item/clothing/suit/armor/special/odst/squadleader,/obj/item/clothing/suit/armor/special/odst/squadleader,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"ba" = (/obj/effect/landmark/start/corvetteodst_odst,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bb" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bc" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"bd" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"be" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"bf" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(142)},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bg" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bh" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UNSC Corvette Deck 2  Port Hangar"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bi" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"bj" = (/obj/structure/bed/chair/office/dark{dir = 1},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bk" = (/obj/effect/landmark/start/corvetteodst_officer,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bl" = (/obj/machinery/button/remote/blast_door{_wifi_id = "5259"; id = "5259"; name = "Blast Door Control"; pixel_x = 0; pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bm" = (/obj/effect/landmark/start/corvetteodst_odst,/turf/simulated/floor/tiled/dark,/area/space)
+"bn" = (/obj/structure/ladder/up,/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"bo" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bp" = (/obj/vehicles/air/overmap/pelican/unsc{dir = 1},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bq" = (/turf/simulated/wall,/area/corvette/unscthorin/Porthallway2)
+"br" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bs" = (/obj/machinery/light,/obj/effect/landmark/start/corvetteodst_odst,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bt" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"bu" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"bv" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/storageroom2)
+"bw" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bx" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"by" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/closet/crate{icon_state = "phoroncrate"; name = "14.5mm Ammunition Crate"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/m145_ap,/obj/item/weapon/storage/box/m145_ap,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bz" = (/obj/structure/closet/crate{icon_state = "phoroncrate"; name = "14.5mm Ammunition Crate"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/m145_ap,/obj/item/weapon/storage/box/m145_ap,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bA" = (/obj/structure/closet/crate{tag = "icon-phoroncrate"; name = "M5 Ammunition Crate"; icon_state = "phoroncrate"},/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bB" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/item/weapon/gun/launcher/rocket/m41_ssr,/obj/item/weapon/gun/launcher/rocket/m41_ssr,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bC" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bD" = (/obj/machinery/light,/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bE" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bF" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bG" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bH" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbayport)
+"bI" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/boardingpods)
+"bJ" = (/turf/simulated/wall,/area/corvette/unscthorin/observation)
+"bK" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/observation)
+"bL" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bM" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/box/handcuffs,/obj/item/weapon/storage/box/handcuffs,/obj/item/weapon/storage/box/handcuffs,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bN" = (/obj/machinery/vending/odstvend2,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bO" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bP" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bQ" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bR" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bS" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/compact/combat/loaded,/obj/item/weapon/defibrillator/compact/combat/loaded,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bT" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"bU" = (/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/srs99_sniper,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bV" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bW" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"bX" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Port Hangar"; req_access = list(142)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbayport)
+"bY" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbayport)
+"bZ" = (/obj/machinery/door/blast/regular{_wifi_id = "5258"; id = "5258"; name = "Observation Deck Blast Doors"},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/grille,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"ca" = (/obj/machinery/light{dir = 1},/obj/machinery/food_replicator,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cb" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cc" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cd" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"ce" = (/obj/structure/table/steel_reinforced,/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cf" = (/obj/machinery/light{dir = 1},/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cg" = (/obj/structure/sign/halo_floorsign/armory{tag = "icon-armory (EAST)"; icon_state = "armory"; dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"ch" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"ci" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Centralhallway2)
+"cj" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"ck" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"cl" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"cm" = (/obj/structure/closet/crate{icon_state = "phoroncrate"; name = "Flashbang's Crate"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/flashbangs,/obj/item/weapon/storage/box/flashbangs,/obj/item/weapon/storage/box/flashbangs,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"cn" = (/obj/structure/closet/crate{icon_state = "phoroncrate"; name = "Frag Grenades Crate"; tag = "icon-phoroncrate"},/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/item/weapon/storage/box/frags,/obj/item/weapon/storage/box/frags,/obj/item/weapon/storage/box/frags,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"co" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cp" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cq" = (/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cr" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher,/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cs" = (/obj/structure/drop_pod_launchbay,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"ct" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cu" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cv" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cw" = (/obj/structure/table/steel_reinforced,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cx" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cy" = (/obj/machinery/portable_atmospherics/canister/oxygen{anchored = 1},/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"cz" = (/obj/machinery/portable_atmospherics/canister/oxygen{anchored = 1},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"cA" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"cB" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"cC" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/closet/crate/bin,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"cD" = (/obj/machinery/light/spot{dir = 8},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"cE" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"cF" = (/obj/machinery/button/remote/blast_door{_wifi_id = "5279"; id = "5279"; name = "Blast Door Control"; pixel_x = 0; pixel_y = -32},/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"cG" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/launcher/grenade,/obj/item/weapon/gun/launcher/grenade,/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"cH" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cI" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cJ" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cK" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cL" = (/obj/vehicles/drop_pod/overmap/boarding_pod/east,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cM" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cN" = (/obj/machinery/button/remote/blast_door{_wifi_id = "5258"; id = "5258"; name = "Observation Deck Blast Door Control"; pixel_x = 32},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cO" = (/turf/simulated/wall,/area/corvette/unscthorin/Centralhallway2)
+"cP" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1},/obj/machinery/door/firedoor/multi_tile,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway2)
+"cQ" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "ODST Armory"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/odstsection)
+"cR" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/deckacces)
+"cS" = (/obj/structure/stairs{tag = "icon-default (NORTH)"; icon_state = ""; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cT" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Heavy Weapons Storage Bay"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/door/blast/regular{_wifi_id = "5279"; id = "5279"; name = "Heavy Weapons Storage Bay"},/turf/simulated/floor/plating,/area/corvette/unscthorin/storageroom2)
+"cU" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cV" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cW" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Pod Bay Acces"},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"cX" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"cY" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"cZ" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"da" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/lifepods{tag = "icon-lifepods (NORTH)"; icon_state = "lifepods"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"db" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dc" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dd" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"de" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"df" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/machinery/button/remote/blast_door{_wifi_id = "5279"; id = "5279"; name = "Blast Door Control"; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dg" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dh" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/boardingpods)
+"di" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"dj" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"dk" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"dl" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"dm" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/maint,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dn" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"do" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/lifepods,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dp" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dq" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dr" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"ds" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Airlock"; req_access = list(142)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dt" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"du" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dv" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dw" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"dx" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Boarding Pods Access"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/boardingpods)
+"dy" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"dz" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"dA" = (/turf/simulated/wall,/area/corvette/unscthorin/Starboardhallway2)
+"dB" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1},/obj/machinery/door/firedoor/multi_tile,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"dC" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"dD" = (/turf/simulated/wall,/area/corvette/unscthorin/Portsoeiv)
+"dE" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Drop Pod Bay 1"; req_access = list(309)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"dF" = (/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"dG" = (/turf/simulated/wall,/area/corvette/unscthorin/starboardsoeiv)
+"dH" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Drop Pod Bay 2"; req_access = list(309)},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"dI" = (/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"dJ" = (/turf/simulated/wall,/area/corvette/unscthorin/powercoreaux)
+"dK" = (/obj/machinery/door/airlock/halo{name = "Auxiliary Power Core"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/corvette/unscthorin/powercoreaux)
+"dL" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/powercoreaux)
+"dM" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"dN" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"dO" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/plating,/area/corvette/unscthorin/Portsoeiv)
+"dP" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscthorin/Portsoeiv)
+"dQ" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "SOEIV Deployment Rack"; req_access = list(309)},/turf/simulated/floor/plating,/area/corvette/unscthorin/Portsoeiv)
+"dR" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"dS" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/plating,/area/corvette/unscthorin/starboardsoeiv)
+"dT" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscthorin/starboardsoeiv)
+"dU" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "SOEIV Deployment Rack"; req_access = list(309)},/turf/simulated/floor/plating,/area/corvette/unscthorin/starboardsoeiv)
+"dV" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"dW" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"dX" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"dY" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"dZ" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"ea" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"eb" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"ec" = (/obj/machinery/light,/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"ed" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"ee" = (/obj/machinery/light,/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)
+"ef" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"eg" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"eh" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"ei" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"ej" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"ek" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"el" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"em" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"en" = (/obj/vehicles/drop_pod/overmap/boarding_pod/east,/obj/structure/drop_pod_launchbay,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/corvette/unscthorin/boardingpods)
+"eo" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Hangarbaystarboard)
+"ep" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Starboard Hangar"; req_access = list(142)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbaystarboard)
+"eq" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbaystarboard)
+"er" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Starboardhallway2)
+"es" = (/obj/structure/ladder/up,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"et" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"eu" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"ev" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"ew" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"ex" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"ey" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"ez" = (/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eA" = (/obj/machinery/light{dir = 1},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eB" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eC" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eD" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eE" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eF" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eG" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eH" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Portsoeiv)
+"eI" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/starboardsoeiv)
+"eJ" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/power/terminal{tag = "icon-term (EAST)"; icon_state = "term"; dir = 4},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"eK" = (/obj/machinery/power/smes/advanced{charge = 1e+007; outputting = 1},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercoreaux)
+"eL" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eM" = (/turf/simulated/wall,/area/corvette/unscthorin/starboardumbilical)
+"eN" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/starboardumbilical)
+"eO" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"eP" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"eQ" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eR" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"eS" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"eT" = (/obj/machinery/door/firedoor,/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/corvette/unscthorin/starboardumbilical)
+"eU" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"eV" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Drop Pod Bay 1"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Portsoeiv)
+"eW" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Drop Pod Bay 2"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/starboardsoeiv)
+"eX" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eY" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UNSC Corvette Deck 2  Starboard Hangar"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"eZ" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"fa" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"fb" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Starboard Airlock"; req_access = list(142)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"fc" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fd" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fe" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"ff" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fg" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fh" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbaystarboard)
+"fi" = (/obj/vehicles/air/overmap/pelican/unsc,/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"fj" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"fk" = (/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"fl" = (/obj/structure/sign/halo_floorsign/lifepods,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fm" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fn" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fo" = (/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Starboardhallway2)
+"fp" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Starboard Hangar"; req_access = list(142)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbaystarboard)
+"fq" = (/obj/docking_umbilical/south{name = "Starboard Docking Umbilical"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardumbilical)
+"fr" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Escape Pod"},/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"fs" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"ft" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbaystarboard)
+"fu" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"fv" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+"fw" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacacadadadadadadadadadadacacadadadadadadadadadacacadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeabafafagadadadadadadadadadafafagadadadadadadadadafafagadaaahahahaiaiahahahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeaeabajafagadadadadadadadadadakafagadadadadadadadadajafagadalahahahaiaiahahahalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabababababababamafagadadadadadadadadadamafagadadadadadadadadamafagadalananananananananalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabababaoabababadadapadadadadadadadaqadadadapadadadadadadadadadadapadalararararararararalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabasatatatauavawaxayazayayayayazayayaAayazaBayayayazayayayayayazaBawaCararararararararalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabatatatataDaEaFaGaHaHaHaHaHaHaHaHaHaIaHaHaHaHaHaHaJaHaHaHaHaHaHaHaHaKaLarararararararalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabaMatatatataNaOayaPaPaQaPaPaPaQaPaPaRaPaPaRaPaPaSaTaSaSaSaSaSaSaSaSalaUararararararaValalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabaWatatatatavaOayaPaXaYaZaPaXaYaZaPbabbaPbabbaPaSbcbdbebdbdbdbdbebdbfbgararbhararararalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeabaeaeaeaeaeaebiayaPbjbkblaPbjbkblaPbmbbaPbabbaPaSbdbdaSaSbnaSaSaSaSalboarbparararararalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabqbqbqbqadbqbqbqbqbqbqaOayaPaYbrbbaPaYbrbbaPbsbbaPbsbbaPaSbtbuaSbvbvbvbvbvbvalbwaLararararararalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabqbqbqbqadbqbqbqbqbqbqaOayaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaSbcbxaSbvbybzbAbAbBalbCbDbEbFaLarbGbHalbIbIbIbIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabJbJbJbJbKbJbJbJbqbqbqaOayaPbLbMbNbObPbNbQbPbNbRbSbNbTaPaSbdbxbnbvbUbVbVbVbWalalalalbXbYalalalalbIbIbIbIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcacbcccdcecfbJbqbqbqbicgaPaYaYaYaYaYaYaYaYaYaYaYaYchaPaSbdbxaSaScicicicjckclcmcncicocpbIcqcrbIcsctctcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcvcvcvcdcwcxbJbqbqbqaOayaPcyaYaYaYczaYcAczaYaYaYcBcCaPaScDcEbnaScococicFckclclcGcicHcIbIcJcKbIcLctctcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcvcvcvcvcMcNbJcOcOcOcPayaPaPcQaYaPaPaPaPaPaPaPcQchaPaPaScRaSaSaScScScicicTcicicicicocIbIcUcVcWcVcVcVbIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcvcXcxcvcMcvcvcYcZcodadbcZcYcocococZcococococZcodccococZddcodccZdedecocodcdfcYdgcococIdhcUcVbIcsctctcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcvdicxcvdjdkdldmdndndodpdndndndndqdndndndndndndndrdndndndrdsdrdndndtdndndrdndndudvdndwdxdycVbIcLctctcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcvcvcvcvcvcNbJdzdAdAdBdCdDdDdDdDdEdFdDdDdDdGdGdGdGdHdIdGdGdGdJdJdJdKdJdJdLdLdLdLdLcocIbIcVcVcWcVcVcVbIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZcvcvcvcddicxbJdMdAdAdNdCdDdOdPdQdRdFdQdPdOdGdSdTdUdVdIdUdTdSdJdWdXdYdZdZeadLdLdLdLcHcIbIebcVbIctctctcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabZecedcvcdcXeebJdMdAdAefdCdDdDdDdDegehdDdDdDdGdGdGdGeiejdGdGdGdJekdZeldZdZemdLdLdLdLcocIbIcVcVbIenctctcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabJbJbJbJbKbJbJbJdMdAdAdNdCdDdOdPdQdRdFdQdPdOdGdSdTdUdVdIdUdTdSdJdZdZeldZdZdZeoeoeoeoepeqeoeoeoeobIbIbIbIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadAdAdAdAeresdMdMetdMdzeudCdDdDdDdDevewdDdDdDdGdGdGdGexeydGdGdGdJdZdZeldZdZdZeoezeAeBeCeDeEeFeGeobIbIbIbIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaadAdAdAdAerdAdAdAdAdAdAdNdCeHdOdPdQdFdFdQdPdOeIdSdTdUdIdIdUdTdSdJdZdZeJeKdZdZeoeLeDeEeEeEeEeEeEeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNeMeMeMeMeMeMefdCdDdDdDdDeOehdDdDdDdGdGdGdGePejdGdGdGdJekdZeldZdZemeoeQeEeEeEeEeEeEeEeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNeReSeSeSeSeTdNdCdDdOdPdQdFdFdQdPdOdGdSdTdUdIdIdUdTdSdJdZdZeldZdZdZeoeQeEeEeEeEeEeEeEeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNeUeSeSeSeSeSdNdCeHdDdDdDeVdFdDdDdDeIdGdGdGeWdIdGdGdGdJdJdJdKdJdJdLeoeXeEeEeYeEeEeEeZeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNeSeSeSeSfafbfcfdfdfefdfdfdfdfdfdfdfffdfdfdfdfdfdfdfdfdfefdfgfdfdfdfheDeEfieEeEeEeEeEeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNfjeSeSeSfkeTdCdCflfmdCdCdCdCfmdCfnfodCfmfldCdCdCfmdCdCdCdCdCfmfldCfpeEeEeEeEeEeEeEeEeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNeNeNfqeNeNeNererfrerererererererererererfrererererererererererfrereoeEeEeEeEeEeEeEeEeoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeNeNeNeNeNeNeNfsfsdMerererererererererfsfsdMererererererererfsfsdMereoftftftftftftftfteoeoeoeoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeMeMeMeMeMeMeNfufsdMerererererererererfufsdMererererererererfufsdMereoahahahaiaiahahaheoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaeMeMeMeMeMeMeMeMeMeNfvfsdMerererererererererfvfsdMererererererererfvfsdMeraaahahahaiaiahahahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeNeNeNeNeNeNeNeNeNfwfwererererererererererfwfwerererererererererfwfwereraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
