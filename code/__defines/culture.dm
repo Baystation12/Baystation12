@@ -28,9 +28,17 @@
 #define HOME_SYSTEM_CERES      "Ceres"
 #define HOME_SYSTEM_PLUTO      "Pluto"
 #define HOME_SYSTEM_TAU_CETI   "Ceti Epsilon"
+#define HOME_SYSTEM_TERSTEN    "Tersten"
+#define HOME_SYSTEM_LORRIMAN   "Lorriman"
+#define HOME_SYSTEM_CINU	   "Cinu"
+#define HOME_SYSTEM_YUKLID	   "Yuklid V"
+#define HOME_SYSTEM_LORDANIA   "Lordania"
+#define HOME_SYSTEM_KINGSTON   "Kingston"
+#define HOME_SYSTEM_GAIA       "Gaia"
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
 #define HOME_SYSTEM_DEEP_SPACE "Deep Space"
+
 
 #define CULTURE_OTHER          "Other Culture"
 #define CULTURE_HUMAN          "Humankind"
