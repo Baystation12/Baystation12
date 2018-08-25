@@ -56,8 +56,13 @@
 	. = ..()
 
 /datum/category_item/player_setup_item/background/languages/proc/rebuild_language_cache(var/mob/user)
+
 	allowed_languages = list()
 	free_languages = list()
+
+	if(!user)
+		return
+
 	for(var/thing in pref.cultural_info)
 		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[thing])
 		if(istype(culture))
