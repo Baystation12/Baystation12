@@ -100,7 +100,7 @@
 
 /obj/item/organ/internal/powered/float/Process()
 	. = ..()
-	if(active && owner.floatiness <= 5)
+	if(active && owner && owner.floatiness <= 5)
 		owner.make_floating(5)
 
 /obj/item/organ/internal/eyes/adherent
