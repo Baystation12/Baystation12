@@ -75,7 +75,7 @@ var/global/datum/controller/gameticker/ticker
 				else
 					var/additional_time = 20
 					to_world("<B><FONT color='blue'>Waiting an additional [additional_time] seconds for initializations to complete...</FONT></B>")
-					log_warning("Master initializations were not complete by the time the round was due to start! Waiting an additional [additional_time] seconds...")
+					log_world("Master initializations were not complete by the time the round was due to start! Waiting an additional [additional_time] seconds...")
 					pregame_timeleft += additional_time // yeah, this will repeat, but it's not good to go into a round with stuff not initialized!
 
 	while (!setup())
