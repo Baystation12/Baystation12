@@ -61,7 +61,7 @@
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
-	return CanUseTopic(user)
+	return !user.incapacitated() && CanUseTopic(user)
 
 /obj/item/device/electronic_assembly/GetAccess()
 	. = list()
