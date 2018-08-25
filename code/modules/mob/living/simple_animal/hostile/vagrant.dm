@@ -100,6 +100,7 @@
 		var/mob/living/carbon/human/H = .
 		if(gripping == H)
 			H.Weaken(3)
+			H.Stun(3)
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
@@ -108,6 +109,7 @@
 			cloaked = 0
 			update_icon()
 			H.Weaken(3)
+			H.Stun(3)
 			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
 			if(carried && length(gripping.virus2) == 0)
 				infect_virus2(gripping, carried, 1)
