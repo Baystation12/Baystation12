@@ -116,13 +116,13 @@
 	distance = "52 light years"
 	description = "Tersten is a large plains world in the Gavil system.  With vast mountain ranges, prairie, mesas, forests and deserts, it is a diverse planet. \
 	It is the 4th largest producer of food in the Sol Central Government. Much of the planet is used for food production, and farming is a profitable life. \
-	The planet's population is primarily divided into Urban Tersteners who often are seen in the military; and Nevokies, with wide hats and wider smiles, making up the rural population. \
-	While much of the North has been developed, large parts of the South remain undeveloped.  It's Capital City is Tersten City, and the planet is a Federal Republic. It's President is Robert Mackenzie. \
+	The planet's population is primarily divided into northern Tersteners who often are seen in the military; and southern Tersteners, with wide hats and wider smiles, making up the rural population. \
+	While much of the North has been developed, large parts of the South remain undeveloped.  It's Capital City is Tersten City, and the planet is a federal republic. It's President is Robert Mackenzie. \
 	Tersten is an isolated border world, with little influence in the larger community. Still, it is a proud member of the SCG, and Tersten City has become a haunt for Third Fleet forces on shore leave. \
 	The OCIE maintain an office on the planet, and 'Goin Cowboy' is common slang for Defence Force personnel travelling to the planet on shoreleave. \
 	<br><br>The Tersten people are a proud, headstrong group. Living on a Desert Planet has weathered them, and years of hard work have instilled a sense of duty in most. \
-	Descendants of a Penal Colony, they have lived on the planet for 117 years.  While much of the planet lacks education and infrastructure, it is common to see Northern Tersteners onboard Sol vessels. \
-	Many cultures developed on the planet. Primarily, these are Urban Tersteners, known as Pinascs; and Rural Tersteners, known as 'Nevokies'.  Many Martian and Earthling enclaves exist on the planet. \
+	Descendants of a penal colony, they have lived on the planet for 117 years.  While much of the planet lacks education and infrastructure, it is common to see northern Tersteners onboard Sol vessels. \
+	Many cultures developed on the planet. Primarily, these are urban Tersteners, known as 'Pinascs'; and rural Tersteners, known as 'Nevokies'.  Many Martian and Earthling enclaves exist on the planet. \
 	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their very loud sense of justice, they are considered the cowboys of Sol Central. \
 	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
 	capital = "Tersten City"
@@ -133,13 +133,14 @@
 /decl/cultural_info/location/human/lorriman
 	name = HOME_SYSTEM_LORRIMAN
 	distance = "44 light years"
-	description = "Lorriman is an arctic wasteland with winds reaching 200mph. It's average temperature is -50°C. Because of this, the planet's cities are either domed or built into mountains.  \
-	Its economy is built around a technological backbone, providing the technology and the people skilled to use them.  Its infrastructure is developed enough to support mass transit across the planet. \
-	Its capital city is called The Hub, a massive domed structure that serves both as a spaceport, administrative hub, and habitation zone. It remains the only place on the planet accessible to non-Lorrimanians. \
-	Despite its isolation, the Scientific Institute remains amicable with Sol Central.  The Institute is a Technocratic Republic led by Dr. Johan Montgomery. It is known by most Defence Forces personnel to act begrudgingly \
-	towards any requests given, and only a select few have visited the planet itself.<br><br> Lorrimanians are a quiet, unassuming, academically-driven bunch. \
-	They are often sought as Researchers or other scientifically-driven career.  It is rare for anyone to immigrate to the planet, but exceptions have been made. \
-	A scientifically driven people, they have served many organisations loyally."
+	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50°C. \
+	Because of this, the planet's cities are either domed or built into mountains. Its economy is built around a technological backbone, providing the technology \
+	and the people skilled to use them.  Its infrastructure is developed enough to support mass transit across the planet. Its capital city is called The Hub, a massive domed structure \
+	that serves both as a spaceport, administrative hub, and habitation zone. It remains the only place on the planet accessible to non-Lorrimanians. \
+	Despite its isolation, the Scientific Institute of Gessshire remains amicable with Sol Central.  The Institute is a technocratic republic led by Dr. Johan Montgomery. \
+	It is known by most Defence Forces personnel to act begrudgingly towards any requests given, and only a select few have visited the planet itself.<br><br>\
+	Lorrimanians are a quiet, unassuming, academically-driven bunch. They are often sought as researchers or other scientifically-driven career.  It is rare for anyone to immigrate \
+	to the planet, but exceptions have been made. A scientifically driven people, they have served many organisations loyally."
 	capital = "The Hub"
 	economic_power = 1.0
 	secondary_langs = list(LANGUAGE_SIGN)
@@ -151,12 +152,12 @@
 	Twice the size of Earth, much of its surface is unoccupied desert, with the vast majority of population living around either the various oases, or in the less \
 	harsh northern regions.  Home to around 20 Million people, it welcomes nearly 50,000 immigrants yearly. Cinu's capital, 'Al-Mular', is home to several major \
 	Peacekeeping Forces offices, with nearly 30,000 Cinuans serving every year.  The Republic of Cinu is comprised of seven political regions, and maintained by \
-	the Congress of the Cinuan People.A direct democracy, it's people vote directly on matters related to their state. Because of this, Cinu exerts little influence \
+	the Congress of the Cinuan People. A direct democracy, its people vote directly on matters related to their state. Because of this, Cinu exerts little influence \
 	on the rest of space. Cinu's population are overall well off, with a stable economy and decent education.  This varies by region however, with some of the population \
 	falling well below the standard poverty line. Cinu is considered one of the most developed democratic systems in space, with relatively little internal conflict. \
 	<br><br>The Cinuan people ethnically range from Martian Tharseese to Old Earth Arabic, West Asian and Central Asian cultures. From a harsh, duned desert planet, they \
-	are known for characteristic firmness disguising fierce friendliness. It's people have suffered in the past, but today look towards a bright future. They are known to be pacifist,\
-	with many refusing to participate in the Defence Forces.  Instead, they serve as peacekeepers and diplomats.  The Cinuan People were controvertially non-aligned during the Gaian Conflict."
+	are known for characteristic firmness disguising fierce friendliness. Its people have suffered in the past, but today look towards a bright future. They are known to be pacifist,\
+	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were contraversially non-aligned during the Gaian Conflict."
 	capital = "Al-Mular"
 	economic_power = 1.0
 	language = LANGUAGE_GALCOM
