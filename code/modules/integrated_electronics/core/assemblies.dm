@@ -305,6 +305,12 @@
 	if(opened)
 		interact(user)
 
+//This only happens when this EA is loaded via the printer
+/obj/item/device/electronic_assembly/proc/post_load()
+	for(var/I in assembly_components)
+		var/obj/item/integrated_circuit/IC = I
+		IC.on_data_written()
+
 /obj/item/device/electronic_assembly/proc/return_total_complexity()
 	. = 0
 	var/obj/item/integrated_circuit/part

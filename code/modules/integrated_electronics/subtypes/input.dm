@@ -688,8 +688,7 @@
 	var/new_code = get_pin_data(IC_INPUT, 2)
 	if(isnum(new_freq) && new_freq > 0)
 		set_frequency(new_freq)
-	if(isnum(new_code))
-		code = new_code
+	code = new_code
 
 
 /obj/item/integrated_circuit/input/signaler/do_work(var/ord) // Sends a signal.
@@ -700,12 +699,22 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/input/signaler/proc/signal_good(var/datum/signal/signal)
-	if(!signal || signal.source == src || (signal.encryption && signal.encryption != code))
+	if(!signal || signal.source == src)
 		return FALSE
+	if(code)
+		var/real_code = 0
+		if(isnum(code))
+			real_code = code
+		var/rec = 0
+		if(signal.encryption)
+			rec = signal.encryption
+		if(real_code != rec)
+			return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
+	signal.transmission_method = 1
 	signal.source = src
 	if(isnum(code))
 		signal.encryption = code
@@ -739,31 +748,26 @@
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
 	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message received."
 	complexity = 8
-	inputs = list("frequency" = IC_PINTYPE_NUMBER, "command" = IC_PINTYPE_STRING, "id tag" = IC_PINTYPE_STRING)
+	inputs = list("frequency" = IC_PINTYPE_NUMBER, "id tag" = IC_PINTYPE_STRING, "command" = IC_PINTYPE_STRING)
 	outputs = list("received command" = IC_PINTYPE_STRING)
-	var/id_tag = null
-	code = "ACTIVATE"
+	var/command
+	code = "Integrated_Circuits"
 
 /obj/item/integrated_circuit/input/signaler/advanced/on_data_written()
 	..()
-	var/new_command = get_pin_data(IC_INPUT,2)
-	var/new_tag = get_pin_data(IC_INPUT,3)
-	if(istext(new_tag))
-		id_tag = new_tag
-	if(istext(new_command))
-		code = new_command
+	command = get_pin_data(IC_INPUT,3)
 
 /obj/item/integrated_circuit/input/signaler/advanced/signal_good(var/datum/signal/signal)
-	var/results = ..()
-	if(!results || signal.data["tag"] != id_tag)
+	if(!..() || signal.data["tag"] != code)
 		return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
-	var/datum/signal/signal = ..()
-	signal.data["tag"] = id_tag
-	signal.data["command"] = code
-	signal.encryption = null
+	var/datum/signal/signal = new()
+	signal.transmission_method = 1
+	signal.data["tag"] = code
+	signal.data["command"] = command
+	signal.encryption = 0
 	return signal
 
 /obj/item/integrated_circuit/input/signaler/advanced/treat_signal(var/datum/signal/signal)
