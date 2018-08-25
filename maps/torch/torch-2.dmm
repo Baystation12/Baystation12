@@ -8896,15 +8896,16 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "ua" = (
-/obj/effect/floor_decal/corner/green{
-	dir = 10
-	},
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -16185,15 +16186,16 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "LS" = (
-/obj/effect/floor_decal/corner/green{
-	dir = 10
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -17725,6 +17727,10 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"QQ" = (
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/aft)
 "QR" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/blue{
@@ -43309,7 +43315,7 @@ pk
 om
 lc
 sF
-je
+QQ
 EU
 wp
 xu
