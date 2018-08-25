@@ -362,5 +362,6 @@
 			IO.connect_pin(IO2)
 
 	assembly.forceMove(loc)
+	assembly.post_load()
 	return assembly
 
