@@ -860,7 +860,7 @@
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M as mob, text, verb, datum/language/speaking)
 	var/translated = TRUE
 	if(M && text)
-		if(!speaking.machine_understands)
+		if(speaking && !speaking.machine_understands)
 			text = speaking.scramble(text)
 			translated = FALSE
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
