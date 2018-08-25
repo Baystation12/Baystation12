@@ -214,15 +214,18 @@ SUBSYSTEM_DEF(unit_tests)
 		return //Have to wait for the old Master.
 	log_unit_test("Master process setup.")
 
+	if (ticker.current_state == GAME_STATE_FINISHED)
+		log_unit_test("Unable to start testing - game is finished!")
+		del world
+		return
+
 	if (ticker.current_state == GAME_STATE_PREGAME)
 		ticker.current_state = GAME_STATE_SETTING_UP
 		Master.SetRunLevel(RUNLEVEL_SETUP)
-		stage++
-		log_unit_test("Round has been started.  Waiting 10 seconds to start tests.")
-		postpone(5)
-	else
-		log_unit_test("Unable to start testing; ticker.current_state=[ticker.current_state]!")
-		del world
+
+	stage++
+	log_unit_test("Round has been started.  Waiting 10 seconds to start tests.")
+	postpone(5)
 
 /datum/controller/subsystem/unit_tests/proc/handle_tests()
 	var/list/curr = queue
