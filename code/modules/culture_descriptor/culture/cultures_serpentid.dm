@@ -1,6 +1,7 @@
 /decl/cultural_info/culture/nabber
 	name = CULTURE_SERPENTID
 	language = LANGUAGE_NABBER
+	name_language = LANGUAGE_NABBER
 	additional_langs = list(LANGUAGE_GALCOM)
 	name_language = LANGUAGE_NABBER
 	description = "Giant armoured serpentids are born and raised on their home planet, and live in colonies of between around 30 and 120 \
