@@ -1,5 +1,0 @@
-author: "Heptagon49"
-delete-after: True
-changes: 
-  - rscadd: "You can now rotate unwrenched computer frames via context menu or alt-click."
-  - imageadd: "Added directional icons for computer frames."
