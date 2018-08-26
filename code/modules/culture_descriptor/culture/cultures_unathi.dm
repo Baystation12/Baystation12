@@ -2,6 +2,7 @@
 	name =                    CULTURE_UNATHI
 	secondary_langs =         list(LANGUAGE_UNATHI)
 	name_language =           LANGUAGE_UNATHI
+	name_language =           LANGUAGE_UNATHI
 	economic_power =          0.8
 	description = "A proud people with a deep passion for their traditions, the Unathi come from a world not suited for easy life. Their \
 	society is a fractured mess divided by region, faith, and what clan a Unathi is in, leaving them unable to truly reach the height of \

@@ -5,6 +5,7 @@
 	the expansion of the Union, mostly revolve around freeing other synthetics from organic ownership. \
 	They can be viewed as dangerous radicals by lawed synthetics, though most begrudgingly accept their aid."
 	language = LANGUAGE_EAL
+	name_language = LANGUAGE_EAL
 	additional_langs = list(LANGUAGE_GALCOM)
 
 /decl/cultural_info/culture/ipc/sanitize_name(var/new_name)

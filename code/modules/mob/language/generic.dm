@@ -29,6 +29,10 @@
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 	shorthand = "GC"
 
+// Otherwise we end up with Blahblehmeh Nehnahwahblah, Captain.
+/datum/language/common/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
+	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+
 //TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.
 /datum/language/common/get_spoken_verb(var/msg_end)
 	switch(msg_end)
