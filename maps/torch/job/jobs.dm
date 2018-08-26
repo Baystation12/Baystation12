@@ -931,8 +931,8 @@
 	department = "Security"
 	department_flag = SEC
 
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the Chief of Security and SCG Security Personnel"
 	selection_color = "#601c1c"
 	ideal_character_age = 20
