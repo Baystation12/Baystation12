@@ -123,6 +123,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini
+		/obj/item/weapon/storage/firstaid/unsc)
 		)
 
 /obj/item/weapon/storage/belt/medical/emt
