@@ -528,7 +528,7 @@
 "kh" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/tiled,/area/corvette/unscthorin/cells)
 "ki" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
 "kj" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Thorin Map Data"},/turf/space,/area/space)
-"kk" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
+"kk" = (/obj/effect/overmap/ship/odst_corvette,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
