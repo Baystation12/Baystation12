@@ -66,7 +66,7 @@ GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 	"Master Sergeant" = /decl/hierarchy/outfit/job/ODSTFireteamLead)
 
 	selection_color = "#008000"
-	access = list(142,144,110,309,311)
+	access = list(142,144,110,309)
 	spawnpoint_override = "ODST Rifleman Spawn"
 	is_whitelisted = 1
 
@@ -82,7 +82,7 @@ GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/ODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/ODSTcolonel)
 	selection_color = "#008000"
-	access = list(142,144,110,300,306,309,310,311)
+	access = list(142,144,110,300,306,309)
 	spawnpoint_override = "ODST Squad Leader Spawn"
 	is_whitelisted = 1
 
