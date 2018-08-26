@@ -16,5 +16,6 @@
 	A.visible_message("<span class = 'danger'>[src.name] sticks to [L.name]!</span>")
 
 /obj/item/weapon/grenade/plasma/detonate()
-	explosion(src.loc, -1, 1, 3, 2, 0)
+	explosion(src.loc, -1, 1, 3, 5, 0)
+	loc.contents -= src
 	qdel(src)
