@@ -131,5 +131,14 @@
 
 	rebreath_efficiency = 70
 
+/obj/item/clothing/shoes/grunt_boots
+	name = "Natural Armor"
+	desc = "The natural armor on your legs provides a small amount of protection against the elements."
+	icon = 'code/modules/halo/clothing/grunt_leg_armor.dmi'
+	icon_state = "naturalarmor"
+	item_state = " "
+
+	canremove = 0
+
 
 #undef GRUNT_GEAR_ICON
