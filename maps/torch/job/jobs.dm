@@ -11,7 +11,7 @@
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
-		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/rd, /datum/job/liaison, /datum/job/warden),	//Other jobs unavailable via branch restrictions,
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/cadet, /datum/job/rd, /datum/job/liaison, /datum/job/warden),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 
@@ -19,7 +19,7 @@
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee,
-						/datum/job/officer, /datum/job/warden, /datum/job/detective,
+						/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/cadet,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist, /datum/job/medical_trainee,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor, /datum/job/mining,
@@ -925,6 +925,43 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/cadet
+	title = "Security Cadet"
+	department = "Security"
+	department_flag = SEC
+
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief of Security and SCG Security Personnel"
+	selection_color = "#601C1C"
+	ideal_character_age = 20
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet,
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/fleet/e2,
+	)
+
+	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
+						SKILL_EVA		  = SKILL_BASIC,
+						SKILL_COMBAT	  = SKILL_ADEPT,
+						SKILL_WEAPONS	  = SKILL_ADEPT,
+						SKILL_FORENSICS	  = SKILL_BASIC)
+
+
+	access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_sec_doors, access_solgov_crew)
+	minimal_access = list()
+
+	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
+
+datum/job/cadet/get_description_blurb()
+	return "You are a Security Cadet. You are observing and learning security procedures from security staff on board by assisting them in their day-to-day tasks."
 
 /datum/job/senior_doctor
 	title = "Physician"
