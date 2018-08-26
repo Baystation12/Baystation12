@@ -937,7 +937,7 @@
 	selection_color = "#601C1C"
 	ideal_character_age = 20
 
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet,
