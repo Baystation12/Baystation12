@@ -7,6 +7,7 @@
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
+		/datum/mil_branch/nabber,
 		/datum/mil_branch/solgov,
 		/datum/mil_branch/army
 	)
@@ -15,15 +16,26 @@
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
+		/datum/mil_branch/nabber,
 		/datum/mil_branch/solgov
 	)
 
 	species_to_branch_whitelist = list(
-		/datum/species/diona   = list(/datum/mil_branch/civilian),
-		/datum/species/nabber  = list(/datum/mil_branch/civilian),
-		/datum/species/skrell  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/unathi  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/vox     = list()
+		/datum/species/diona    = list(/datum/mil_branch/civilian),
+		/datum/species/adherent = list(/datum/mil_branch/civilian),
+		/datum/species/nabber   = list(/datum/mil_branch/nabber),
+		/datum/species/skrell   = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/unathi   = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/vox      = list()
+	)
+
+	species_to_branch_blacklist = list(
+		/datum/species/human    = list(/datum/mil_branch/nabber),
+		/datum/species/skrell   = list(/datum/mil_branch/nabber),
+		/datum/species/unathi   = list(/datum/mil_branch/nabber),
+		/datum/species/machine  = list(/datum/mil_branch/nabber),
+		/datum/species/vox      = list(/datum/mil_branch/nabber),
+		/datum/species/adherent = list(/datum/mil_branch/nabber),
 	)
 
 	species_to_rank_whitelist = list(
@@ -645,3 +657,73 @@
 	name = "OCIE Agent"
 	name_short = "AGT"
 	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
+
+	/*
+ *  Species Specific
+ *  =========
+ */
+/datum/mil_branch/nabber
+	name = "Xynergy GAS"
+	name_short = "GAS"
+	email_domain = "nabmail.xy"
+
+	rank_types = list(
+		/datum/mil_rank/nabber/Cm,
+		/datum/mil_rank/nabber/C,
+		/datum/mil_rank/nabber/Cp,
+		/datum/mil_rank/nabber/Bm,
+		/datum/mil_rank/nabber/B,
+		/datum/mil_rank/nabber/Bp,
+		/datum/mil_rank/nabber/Am,
+		/datum/mil_rank/nabber/A,
+		/datum/mil_rank/nabber/Ap
+	)
+
+	spawn_rank_types = list(
+		/datum/mil_rank/nabber/C,
+		/datum/mil_rank/nabber/Cp,
+		/datum/mil_rank/nabber/Bm,
+		/datum/mil_rank/nabber/B,
+		/datum/mil_rank/nabber/Bp,
+		/datum/mil_rank/nabber/Am,
+		/datum/mil_rank/nabber/A,
+		/datum/mil_rank/nabber/Ap	)
+
+	assistant_job = "Passenger"
+
+/datum/mil_rank/nabber/Cm
+	name = "Grade C-"
+	name_short = "C-"
+
+/datum/mil_rank/nabber/C
+	name = "Grade C"
+	name_short = "C"
+
+/datum/mil_rank/nabber/Cp
+	name = "Grade C+"
+	name_short = "C+"
+
+/datum/mil_rank/nabber/Bm
+	name = "Grade B-"
+	name_short = "B-"
+
+/datum/mil_rank/nabber/B
+	name = "Grade B"
+	name_short = "B"
+
+/datum/mil_rank/nabber/Bp
+	name = "Grade B+"
+	name_short = "B+"
+
+/datum/mil_rank/nabber/Am
+	name = "Grade A-"
+	name_short = "A-"
+
+/datum/mil_rank/nabber/A
+	name = "Grade A"
+	name_short = "A"
+
+/datum/mil_rank/nabber/Ap
+	name = "Grade A+"
+	name_short = "A+"
+
