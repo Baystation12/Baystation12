@@ -934,7 +934,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief of Security and SCG Security Personnel"
-	selection_color = "#601C1C"
+	selection_color = "#601c1c"
 	ideal_character_age = 20
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
