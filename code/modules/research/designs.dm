@@ -1966,6 +1966,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/unary_atmos/cooler
 	sort_string = "JCAAB"
 
+/datum/design/circuit/oxyregenerator
+	name = "oxygen regenerator"
+	id = "oxyregen"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/oxyregenerator
+	sort_string = "JCAAC"
+
 /datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
 	desc =  "Allows for the construction of a tamper-resistant airlock electronics."
