@@ -133,3 +133,8 @@
 	trenchcoats += /obj/item/clothing/suit/storage/det_trench/grey
 	trenchcoats += /obj/item/clothing/suit/leathercoat
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(trenchcoats)
+
+/datum/gear/suit/cloak
+	display_name = "cloak, color selection"
+	path = /obj/item/clothing/suit/cloak
+	flags = GEAR_HAS_COLOR_SELECTION

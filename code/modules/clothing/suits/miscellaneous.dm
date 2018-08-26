@@ -478,6 +478,14 @@
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
 
+/obj/item/clothing/suit/cloak
+	name = "cloak"
+	desc = "A full-body cloak that tapers at one side. Does not make you invisible."
+	icon_state = "cloak"
+	item_state = "cloak"
+	body_parts_covered = UPPER_TORSO|ARMS
+
+
 /*
  * Track Jackets
  */
