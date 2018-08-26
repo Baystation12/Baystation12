@@ -947,6 +947,9 @@
 		/datum/mil_rank/fleet/e2,
 	)
 
+	skill_points = 6
+	no_skill_buffs = TRUE
+
 	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
 						SKILL_EVA		  = SKILL_BASIC,
 						SKILL_COMBAT	  = SKILL_BASIC,
