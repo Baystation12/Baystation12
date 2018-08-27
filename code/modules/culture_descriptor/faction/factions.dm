@@ -12,6 +12,7 @@
 	its massive bureaucracy and the distance between worlds. Through its member states, the SCG governs as one of the \
 	most advanced and powerful civilisations in the known galaxy."
 	language = LANGUAGE_SOL_COMMON
+	secondary_langs = list(LANGUAGE_SPACER)
 
 /decl/cultural_info/faction/scg/fleet
 	name = FACTION_FLEET
@@ -39,6 +40,7 @@
 	economic_power = 0.9
 	subversive_potential = 50
 	language = LANGUAGE_INDEPENDENT
+	secondary_langs = list(LANGUAGE_SPACER)
 
 /decl/cultural_info/faction/remote
 	name = FACTION_EXPEDITIONARY
@@ -102,3 +104,4 @@
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."
 	subversive_potential = 25
 	language = LANGUAGE_GALCOM
+	secondary_langs = list(LANGUAGE_SPACER)

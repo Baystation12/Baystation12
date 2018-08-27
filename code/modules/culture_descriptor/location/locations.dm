@@ -13,6 +13,7 @@
 	capital = "Various"
 	economic_power = 1
 	ruling_body = "Various"
+	secondary_langs = list(LANGUAGE_SPACER)
 
 /decl/cultural_info/location/deep_space
 	name = HOME_SYSTEM_DEEP_SPACE
