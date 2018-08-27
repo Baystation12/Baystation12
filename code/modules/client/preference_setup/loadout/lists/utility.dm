@@ -47,6 +47,10 @@
 	path = /obj/item/weapon/pen/multi
 	cost = 2
 
+/datum/gear/utility/hand_labeler
+	path = /obj/item/weapon/hand_labeler
+	cost = 2
+
 /****************
 modular computers
 ****************/
