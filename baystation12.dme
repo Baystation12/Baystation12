@@ -225,7 +225,7 @@
 #include "code\datums\communication\aooc.dm"
 #include "code\datums\communication\channel.dm"
 #include "code\datums\communication\dsay.dm"
-#include "code\datums\communication\looc.dm"
+#include "code\datums\communication\help.dm"
 #include "code\datums\communication\ooc.dm"
 #include "code\datums\communication\pray.dm"
 #include "code\datums\communication\~defines.dm"
