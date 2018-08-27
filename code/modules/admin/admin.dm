@@ -730,21 +730,21 @@ var/global/floorIsLava = 0
 	log_and_message_admins("toggled AOOC.")
 	feedback_add_details("admin_verb","TAOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/togglelooc()
+/datum/admins/proc/togglehelp()
 	set category = "Server"
-	set desc="Globally Toggles LOOC"
-	set name="Toggle LOOC"
+	set desc="Globally Toggles Help Channel"
+	set name="Toggle Help Channel"
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	config.looc_allowed = !(config.looc_allowed)
-	if (config.looc_allowed)
-		to_world("<B>The LOOC channel has been globally enabled!</B>")
+	config.help_channel_allowed = !(config.help_channel_allowed)
+	if (config.help_channel_allowed)
+		to_world("<B>The Help channel has been globally enabled!</B>")
 	else
-		to_world("<B>The LOOC channel has been globally disabled!</B>")
-	log_and_message_admins("toggled LOOC.")
-	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		to_world("<B>The Help channel has been globally disabled!</B>")
+	log_and_message_admins("toggled HELP.")
+	feedback_add_details("admin_verb","THELP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /datum/admins/proc/toggledsay()

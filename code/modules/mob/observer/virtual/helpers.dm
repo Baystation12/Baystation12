@@ -82,7 +82,7 @@
 			. |= host
 
 // This proc returns all hosts of virtual mobs in the given atom's view range (using its turf), ignoring invisibility, VIRUAL_ABILITY_SEE, and most other restrictions.
-// In most cases you actually want the all_* procs above. This helper was designed with LOOC in mind.
+// In most cases you actually want the all_* procs above. This helper was designed with local OOC channels in mind.
 /proc/hosts_in_view_range(var/atom/movable/viewing_atom)
 	. = list()
 

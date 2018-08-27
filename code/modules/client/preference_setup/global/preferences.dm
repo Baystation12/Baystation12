@@ -154,9 +154,9 @@ var/list/_client_preferences_by_type
 	key = "CHAT_AOOC"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/show_looc
-	description ="LOOC chat"
-	key = "CHAT_LOOC"
+/datum/client_preference/show_help
+	description ="Help chat"
+	key = "CHAT_HELP"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_dsay
@@ -222,9 +222,9 @@ var/list/_client_preferences_by_type
 	key = "SOUND_ADMINHELP"
 	options = list(GLOB.PREF_HEAR, GLOB.PREF_SILENT)
 
-/datum/client_preference/staff/show_rlooc
-	description ="Remote LOOC chat"
-	key = "CHAT_RLOOC"
+/datum/client_preference/staff/show_rhelp
+	description ="Remote Help chat"
+	key = "CHAT_RHELP"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /********************
