@@ -470,15 +470,15 @@
 	ideal_character_age = 28
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/jag/fleet
 	allowed_branches = list(
-		/datum/mil_branch/fleet
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/command/jag/ec
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o2
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/ec/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT)
-
-	max_skill = list(   SKILL_BUREAUCRACY = SKILL_MAX)
 	skill_points = 20
 
 
