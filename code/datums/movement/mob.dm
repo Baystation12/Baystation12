@@ -230,9 +230,6 @@
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
 
-	if(mob.check_slipmove())
-		return
-
 	//We are now going to move
 	mob.moving = 1
 
