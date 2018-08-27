@@ -150,3 +150,7 @@
 /datum/gear/head/tankccap
 	display_name = "padded cap"
 	path = /obj/item/clothing/head/tank
+
+/datum/gear/tactical/balaclava
+	display_name = "balaclava"
+	path = /obj/item/clothing/mask/balaclava

@@ -74,3 +74,8 @@
 
 /datum/gear/head/welding
 	allowed_roles = TECHNICAL_ROLES
+
+/datum/gear/tactical/balaclava
+	display_name = "balaclava"
+	path = /obj/item/clothing/mask/balaclava
+	allowed_roles = ARMORED_ROLES
