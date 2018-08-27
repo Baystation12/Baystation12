@@ -74,3 +74,6 @@
 
 /datum/gear/head/welding
 	allowed_roles = TECHNICAL_ROLES
+
+/datum/gear/tactical/balaclava
+	allowed_roles = ARMORED_ROLES
