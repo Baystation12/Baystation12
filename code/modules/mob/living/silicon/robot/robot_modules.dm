@@ -533,6 +533,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/tray/robotray(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/service(src)
 	src.emag = new /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer(src)
+	src.emag  += new /obj/item/device/boombox(src)
 
 	var/datum/reagents/R = src.emag.create_reagents(50)
 	R.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
