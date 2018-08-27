@@ -357,12 +357,6 @@
 	gender = FEMALE
 	flags = HAIR_TIEABLE
 
-/datum/sprite_accessory/hair/braid
-	name = "Floorlength Braid"
-	icon_state = "hair_braid"
-	gender = FEMALE
-	flags = HAIR_TRIPPABLE | HAIR_TIEABLE
-
 /datum/sprite_accessory/hair/odango
 	name = "Odango"
 	icon_state = "hair_odango"
