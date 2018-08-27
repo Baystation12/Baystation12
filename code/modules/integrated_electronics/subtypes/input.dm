@@ -781,7 +781,7 @@
 	icon_state = "gps"
 	complexity = 5
 	inputs = list()
-	outputs = list("teleporter")
+	outputs = list("teleporter" = IC_PINTYPE_REF)
 	activators = list("on selected" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
@@ -803,6 +803,7 @@
 	if(href_list["tport"])
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
+		push_data()
 		activate_pin(1)
 		return IC_TOPIC_REFRESH
 
