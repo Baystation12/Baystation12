@@ -99,7 +99,7 @@
 /decl/cultural_info/location/human/cetiepsilon
 	name = HOME_SYSTEM_TAU_CETI
 	distance = "11.9 light years"
-	description = "Ceti Episolon, the only habitable planet in the Tau Ceti system, is home to its largest population centre. \
+	description = "Ceti Epsilon, the only habitable planet in the Tau Ceti system, is home to its largest population centre. \
 	The planet itself is effectively covered in one large city with a few 'green' areas dispersed throughout. The most urban location \
 	in the wider SCG, the planet attracts many to its glittering neon lights and easy to get lost in streets. More importantly, \
 	Ceti Epsilon is home to the Ceti Institute of Technology, the premier learning location in Sol and, arguably, all of humanity. \
@@ -115,15 +115,16 @@
 	name = HOME_SYSTEM_TERSTEN
 	distance = "52 light years"
 	description = "Tersten is a large plains world in the Gavil system.  With vast mountain ranges, prairie, mesas, forests and deserts, it is a diverse planet. \
-	It is the 4th largest producer of food in the Sol Central Government. Much of the planet is used for food production, and farming is a profitable life. \
-	The planet's population is primarily divided into northern Tersteners who often are seen in the military; and southern Tersteners, with wide hats and wider smiles, making up the rural population. \
-	While much of the North has been developed, large parts of the South remain undeveloped.  It's Capital City is Tersten City, and the planet is a federal republic. It's President is Robert Mackenzie. \
+	The capital city is known as Tersten City, or locally as Freetown. Originally founded as a penal colony, the planet abolished this system in 2480. \
+	It is the 4th largest producer of food in the Sol Central Government. Additional exports include building materials and electronics. \
+	The planet's population is primarily divided into northern, urban Tersteners who often are seen in the military; and southern, rural Tersteners, who make up the farmers and ranchers of the planet. \
+	While much of the North has been developed, large parts of the South remain undeveloped. \
 	Tersten is an isolated border world, with little influence in the larger community. Still, it is a proud member of the SCG, and Tersten City has become a haunt for Third Fleet forces on shore leave. \
-	The OCIE maintain an office on the planet, and 'Goin Cowboy' is common slang for Defence Force personnel travelling to the planet on shoreleave. \
-	<br><br>The Tersten people are a proud, headstrong group. Living on a Desert Planet has weathered them, and years of hard work have instilled a sense of duty in most. \
-	Descendants of a penal colony, they have lived on the planet for 117 years.  While much of the planet lacks education and infrastructure, it is common to see northern Tersteners onboard Sol vessels. \
-	Many cultures developed on the planet. Primarily, these are urban Tersteners, known as 'Pinascs'; and rural Tersteners, known as 'Nevokies'.  Many Martian and Earthling enclaves exist on the planet. \
-	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their very loud sense of justice, they are considered the cowboys of Sol Central. \
+	The OCIE maintain an office in the city of Moore, and various Trans-Stellar Corporations have a foothold in the city of South Harelstone. \
+	<br><br>The Tersten people are separated into various cultures. For example, urban Tersteners, known as 'Pinascs', live around Tersten City, and are often seen in the defence forces.  \
+	Rural Tersteners, known as 'Nevokies', live in the south central region around the city of Nevada.  Many Martian and Earthling enclaves exist on the planet, significantly in South Harelstone. \
+	The divide between north and south could also be considered a divide between rich and poor. Even the poorest city dweller will likely be richer than most farmers. \
+	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their community and attitudes to strangers, they are considered the cowboys of Sol Central. \
 	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
 	capital = "Tersten City"
 	economic_power = 1.0
@@ -157,7 +158,7 @@
 	falling well below the standard poverty line. Cinu is considered one of the most developed democratic systems in space, with relatively little internal conflict. \
 	<br><br>The Cinuan people ethnically range from Martian Tharseese to Old Earth Arabic, West Asian and Central Asian cultures. From a harsh, duned desert planet, they \
 	are known for characteristic firmness disguising fierce friendliness. Its people have suffered in the past, but today look towards a bright future. They are known to be pacifist,\
-	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were contraversially non-aligned during the Gaian Conflict."
+	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were controversially non-aligned during the Gaian Conflict."
 	capital = "Al-Mular"
 	economic_power = 1.0
 	language = LANGUAGE_GALCOM
@@ -178,35 +179,33 @@
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
-
 /decl/cultural_info/location/human/lordania
 	name = HOME_SYSTEM_LORDANIA
 	distance = "40 light years"
 	description = "Lordania is a heavily developed plains world in the Lordania system.  The planet has developed five large mega-cities, connected by various suburban developments. \
-	Heavy use of dams and nature reserves have allowed the people to terraform parts of the planet.  Hisorically, the planet has had a large wealth gap, \
+	Heavy use of dams and nature reserves have allowed the people to terraform parts of the planet.  Historically, the planet has had a large wealth gap, \
 	which recent years have only made worse.  The planet's economy has been rebuilt from the ground up around entertainment and the arts. The New Ares Metroplex is the entertainment, \
 	and fashion capital of the outer rim of the SCG.  Numerous TSCs bought up parts of the planet during the economic depression, and now fully exploit the success.  It is not a city planet, but \
-	it could become one in the next 300 years. The planet enjoys warm relations with it's neighbor, Kingston. Lordania can be described as an aristocratic republic, and have historical \
-	ties with the political families of Luna. <br><br>  The people of Lordania are divided into two parts, Upper and Lower Lordanians.  Upper Lordanians are filthy rich, and are \
-	only seen on the planet, or in entertainment medias. Lower Lordanians are more common, being described as average. Historically, Lordanians have a superiority complex, \
+	it could become one in the next 300 years. The planet enjoys warm relations with its neighbor Kingston. Lordania can be described as an aristocratic republic, and have historical \
+	ties with the political families of Luna. <br><br>  The people of Lordania are divided into two parts, Upper and Lower Lordanians.  Upper Lordanians are wealthy, and are \
+	typically only seen on the planet, or in entertainment medias. Lower Lordanians are more common, and many opt leave their home planet. Historically, Lordanians have a superiority complex, \
 	and often see themselves as better. Most Lordanians are seen as untrustworthy, or selfish. As such, they are rarely seen within Sol's Defence Forces."
 	capital = "New Ares"
 	economic_power = 1.2
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
 
-
 /decl/cultural_info/location/human/kingston
 	name = HOME_SYSTEM_KINGSTON
 	distance = "40 light years"
-	description = "Kingston is an occupied ocean world made of various archipelagos, inhabiting the Lordania system. The planet's surface is 90% water, and much of the popluation live around the equator. \
-	The planet is a humid sub-tropical world, and a huge tourist destination for Sol citizens.  Kingston is extremely multicultural, and many old human cultures still hold an enclave. It also contains a large \
+	description = "Kingston is an occupied ocean world made of various archipelagos, within the Lordania system. The planet's surface is 90% water, and much of the population live around the equator. \
+	The planet is a humid subtropical world, and a huge tourist destination for Sol citizens.  Kingston is extremely multicultural, and many old human cultures still hold an enclave. It also contains a large \
 	number of Tritonians, both as tourists and residents. An estimated 15 million tourists visit annually.  While a highway and magnetic train system link many of the islands, boats are incredibly popular amongst \
 	tourists and workers alike. Many of the islands on the planet have been created via tectonic plates or volcanic eruption, making the planet more geologically active than Earth. \
 	Despite this, technology of the 26th century has developed enough to mitigate most structural damage done in the event of earthquakes or tsunamis. \
 	Formally the United Nations of Kingston, the planet is made up of multiple island nations and several planetary representatives.<br><br>The people of Kingston are relatively unassuming. They have much in common with \
-	their Sol brothers, and are usually seen onboard most SCG Vessels.  Growing up on a waterworld, most Kingstonians can sail a boat, something rare in the 26th Century.  Typically dark in skin due to the planet's proximity to it's sun, \
-	Kingstonians come in various forms, and are usually different from one another."
+	their Sol brothers, and are usually seen onboard most SCG Vessels.  Growing up on a waterworld, most Kingstonians can sail a boat, something rare in the 26th Century.  \
+	Typically dark in skin due to the planet's proximity to it's sun, Kingstonians come in various forms."
 	capital = "New Havana"
 	economic_power = 1.1
 	language = LANGUAGE_SOL_COMMON
