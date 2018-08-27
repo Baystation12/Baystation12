@@ -141,8 +141,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	var/table_edge_width = "30%"
 	var/table_middle_width = "40%"
-
-	var/HTML = ""
+	var/list/HTML = list()
 	HTML += "<html><head><title>[src.displayed_name]</title></head><body>"
 	HTML += "<div align='center'>"
 	HTML += "<table border='1' style='undefined;table-layout: fixed; width: 80%'>"
@@ -238,10 +237,11 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	HTML += "<br><font color='0000AA'>[extended_desc]</font>"
 
 	HTML += "</body></html>"
+	var/HTML_merged = jointext(HTML, null)
 	if(assembly)
-		show_browser(user, HTML, "window=assembly-\ref[assembly];size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
+		show_browser(user, HTML_merged, "window=assembly-\ref[assembly];size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
 	else
-		show_browser(user, HTML, "window=circuit-\ref[src];size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
+		show_browser(user, HTML_merged, "window=circuit-\ref[src];size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
 
 	onclose(user, "assembly-\ref[src.assembly]")
 
