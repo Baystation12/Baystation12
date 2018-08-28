@@ -223,7 +223,8 @@
 				/obj/item/clothing/under/syndicate = 2,
 				/obj/item/weapon/reagent_containers/syringe = 3,
 				/obj/item/weapon/reagent_containers/syringe/steroid = 2,
-				/obj/item/weapon/reagent_containers/syringe/drugs = 1)
+				/obj/item/weapon/reagent_containers/syringe/drugs = 1,
+				/obj/item/weapon/reagent_containers/food/snacks/egg/lizard = 3)
 
 /obj/random/drinkbottle
 	name = "random drink"
