@@ -6,6 +6,9 @@
 	poweralm = 1
 	requires_power = 0
 
+
+
+//deck 1 areas
 /area/corvette/unscbertels/deck1/Bridge
 	name = "UNSC Bertels Bridge"
 
@@ -39,6 +42,108 @@
 /area/corvette/unscbertels/deck1/starboardhallway
 	name = "UNSC Bertels Deck 1 Starboard Hallway"
 
+/area/corvette/unscbertels/deck1/auxpowercore
+	name = "UNSC Bertels Deck 1 Auxiliary Power Core"
+
+
+
+//deck 2 areas
+/area/corvette/unscbertels/deck2/MAC
+	name = "UNSC Bertels Deck 2 MAC Gun"
+
+/area/corvette/unscbertels/deck2/Briefingroom
+	name = "UNSC Bertels Deck 2 Briefing Room"
+
+/area/corvette/unscbertels/deck2/marinebunks
+	name = "UNSC Bertels Deck 2 Marine Bunks"
+
+/area/corvette/unscbertels/deck2/marinebathrooms
+	name = "UNSC Bertels Deck 2 Marine Bathrooms"
+
+/area/corvette/unscbertels/deck2/portforehallway
+	name = "UNSC Bertels Deck 2 Port Fore Hallway"
+
+/area/corvette/unscbertels/deck2/starboardforehallway
+	name = "UNSC Bertels Deck 2 Starboard Fore Hallway"
+
+/area/corvette/unscbertels/deck2/marinearmory
+	name = "UNSC Bertels Deck 2 Marine Armory"
+
+/area/corvette/unscbertels/deck2/marinemesshall
+	name = "UNSC Bertels Deck 2 Marine Mess Hall"
+
+/area/corvette/unscbertels/deck2/porthangar
+	name = "UNSC Bertels Deck 2 Port Hangar"
+
+/area/corvette/unscbertels/deck2/starboardhangar
+	name = "UNSC Bertels Deck 2 Starboard Hangar"
+
+/area/corvette/unscbertels/deck2/portmedbay
+	name = "UNSC Bertels Deck 2 Port Medical Bay"
+
+/area/corvette/unscbertels/deck2/starboardbay
+	name = "UNSC Bertels Deck 2 Starboard Medical Bay"
+
+/area/corvette/unscbertels/deck2/cells
+	name = "UNSC Bertels Deck 2 Holding Cells"
+
+/area/corvette/unscbertels/deck2/porthallwaycentral
+	name = "UNSC Bertels Deck 2 Central Port Hallway"
+
+/area/corvette/unscbertels/deck2/starboardhallwaycentral
+	name = "UNSC Bertels Deck 2 Central Starboard Hallway"
+
+/area/corvette/unscbertels/deck2/janitorialcloset
+	name = "UNSC Bertels Deck 2 Janitorial Closet"
+
+/area/corvette/unscbertels/deck2/chemistrylab
+	name = "UNSC Bertels Deck 2 Chemistry Lab"
+
+/area/corvette/unscbertels/deck2/cargo1
+	name = "UNSC Bertels Deck 2 Cargo Bay 1"
+
+/area/corvette/unscbertels/deck2/cargo2
+	name = "UNSC Bertels Deck 2 Cargo Bay 2"
+
+/area/corvette/unscbertels/deck2/Reactorcore
+	name = "UNSC Bertels Deck 2 Main Reactor Core"
+
+/area/corvette/unscbertels/deck2/portengine
+	name = "UNSC Bertels Deck 2 Port Engine"
+
+/area/corvette/unscbertels/deck2/starboardengine
+	name = "UNSC Bertels Deck 2 Starboard Engine"
+
+
+
+//deck 3 areas
+/area/corvette/unscbertels/deck3/forehallway
+	name = "UNSC Bertels Deck 3 Fore Hallway"
+
+/area/corvette/unscbertels/deck3/soeiv
+	name = "UNSC Bertels Deck 3 SOEIV Bay"
+
+/area/corvette/unscbertels/deck3/odstarmory
+	name = "UNSC Bertels Deck 3 ODST Armory"
+
+/area/corvette/unscbertels/deck3/odstquarters
+	name = "UNSC Bertels Deck 3 ODST Quarters"
+
+/area/corvette/unscbertels/deck3/odstbathroom
+	name = "UNSC Bertels Deck 3 ODST Bathrooms"
+
+/area/corvette/unscbertels/deck3/cargo1
+	name = "UNSC Bertels Deck 3 Cargo Bay 1"
+
+/area/corvette/unscbertels/deck3/cargo2
+	name = "UNSC Bertels Deck 3 Cargo Bay 2"
+
+/area/corvette/unscbertels/deck3/centralhallway
+	name = "UNSC Bertels Deck 3 Central Hallway"
+
+
+
+//ship weapon areas
 /area/corvette/unscbertels/portbatterycontrol
 	name = "UNSC Bertels Port Battery Control"
 

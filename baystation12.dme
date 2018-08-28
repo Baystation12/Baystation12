@@ -2675,7 +2675,6 @@
 #include "maps\first_contact\maps\UNSC_Thorin\includes.dm"
 #include "maps\odst_prowler\odst_ship_overmap.dm"
 #include "maps\odst_training\all_includes.dm"
-#include "maps\odst_training\maps\UNSC_Thorin ODST\UNSC_Bertels_Deck_1.dmm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\overmap_ships\om_ship_areas.dm"
 #include "maps\slayer\__death_asteroid_map.dm"
