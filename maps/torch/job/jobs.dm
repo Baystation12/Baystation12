@@ -72,7 +72,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/captain/get_description_blurb()
-	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its space exploration mission. Delegate to your Executive Officer, your department heads, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
+	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfills its space exploration mission. Delegate to your Executive Officer, your department heads, your Bridge Officers, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
 
 /datum/job/hop
 	title = "Executive Officer"
@@ -163,7 +163,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring Nanotrasen's interests along with your Nanotrasen Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to find things to benefit NT. Don’t put NT’s position on board in jeopardy.  Advise the CO on science matters."
+	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring Nanotrasen's interests along with your Nanotrasen Liaison. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit NT. Don't put NT's position on board in jeopardy. Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -207,7 +207,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cmo/get_description_blurb()
-	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
+	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked, and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
 
 /datum/job/chief_engineer
 	title = "Chief Engineer"
@@ -262,7 +262,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/chief_engineer/get_description_blurb()
-	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
+	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior Engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched, and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
 
 /datum/job/hos
 	title = "Chief of Security"
@@ -304,7 +304,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hos/get_description_blurb()
-	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
+	return "You are the Chief of Security. You manage ship security with the help of the Brig Officer, the Masters at Arms, and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the Sol Central Government Law, the SCUJ, and the Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
@@ -336,7 +336,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Nanotrasen Liaison. You are a civilian employee of Nanotrasen assigned to the vessel to promote, protect and ensure the interests of the corporation on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on NT matters and try to push NT interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
+	return "You are the Nanotrasen Liaison. You are a civilian employee of Nanotrasen assigned to the vessel to promote, protect, and ensure the interests of the corporation on board. You are not internal affairs. You assume command of the Research Department in the absence of the Research Diriecotr and the Senior Researcher. You advise the RD on NT matters and try to push NT interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -362,7 +362,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/representative/get_description_blurb()
-	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and Nanotrasen interests on board. Send faxes back to Sol on mission progress and important events."
+	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law, or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and Nanotrasen interests on board. Send faxes back to Sol on mission progress and important events."
 
 /datum/job/sea
 	title = "Senior Enlisted Advisor"
@@ -454,7 +454,7 @@
 							 /datum/computer_file/program/deck_management)
 
 /datum/job/bridgeofficer/get_description_blurb()
-	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the Bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor Bridge computer programs and communications and report relevant information to command."
 
 /datum/job/pathfinder
 	title = "Pathfinder"
@@ -490,7 +490,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/pathfinder/get_description_blurb()
-	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if NT doesn’t provide their pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
+	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC's Primary Mission. You command the Explorers and the Shuttle Pilot. You make sure that expedition has the supplies and personnel it needs. You can pilot the Charon if there is no pilot awake. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab. Keep your team alive."
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
@@ -527,6 +527,9 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
+/datum/job/nt_pilot/get_description_blurb()
+	return "You are the Shuttle Pilot. Your job is to fly the Charon or the GUP to away sites and to make sure they can return to the Hangar as well. Monitor their SMES and make sure the air cycler works at all times. Contact the Torch via the long-range holopads in case of an emergency."
+	
 /datum/job/explorer
 	title = "Explorer"
 	department = "Exploration"
@@ -555,7 +558,7 @@
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
 /datum/job/explorer/get_description_blurb()
-	return "You are an Explorer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully."
+	return "You are an Explorer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife, or malfunctioning defense systems, so tread carefully."
 
 /datum/job/senior_engineer
 	title = "Senior Engineer"
@@ -766,7 +769,6 @@
 /datum/job/engineer_trainee/get_description_blurb()
 	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
 
-
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
@@ -800,7 +802,7 @@
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()
-	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics as well as the repair of all synthetic crew on board. You are also responsible for placing brains into MMI’s and giving them bodies and the production of exosuits(mechs) for various departments. You answer to the Chief Engineer."
+	return "You are the Roboticist. You are responsible for repairing, upgrading, and handling ship synthetics as well as the repair of all synthetic crew on board. You are also responsible for placing brains into MMI's and giving them bodies and the production of exosuits for various departments. You often work together with the medical staff."
 
 /datum/job/warden
 	title = "Brig Officer"
@@ -840,6 +842,9 @@
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/warden/get_description_blurb()
+	return "You are the Brig Officer. You are responsible for the processing, handling, care, and security of the prisoners apprehended by the ship's Masters at Arms. Assist the Chief of Security in coordinating the MAAs and the Forensic Technician, overwatch the ship through cameras, and make sure brigged people stay at the brig. You are expected to know the Sol Central Government Law, the SCUJ, and the Alert Procedure to a high degree along with general regulations."
+	
 /datum/job/detective
 	title = "Forensic Technician"
 	total_positions = 1
@@ -888,6 +893,9 @@
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/detective/get_description_blurb()
+	return "You are the Forensic Technician. Your job is to find out who committed a crime and compile all the available evidence for easy access by the rest of the department. Remember that you are not a Master At Arms, you should not be pursuiting and apprehending criminals."
+	
 /datum/job/officer
 	title = "Master at Arms"
 	total_positions = 4
@@ -925,6 +933,9 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/officer/get_description_blurb()
+	return "You are a Master At Arms. Your job is to uphold the law, to chase down criminals, and to protect the ship from hostile xenoforms. You are expected to know the Sol Central Government Law, the SCUJ, and the Alert Procedure to a reasonable degree."
 
 /datum/job/senior_doctor
 	title = "Physician"
@@ -970,6 +981,9 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/senior_doctor/get_description_blurb()
+	return "You are a Physician. Your job is to coordinate corpsmen and paramedics and to perform intensive medicine on a regular basis, ranging from checkups with the crew to surgery. In the absence of a chemist or a virologist, you might have to to carry out their duties. As a junior officer, you are also expected to know general and uniform regulations and the drill."
+	
 /datum/job/doctor
 	title = "Corpsman"
 	total_positions = 3
@@ -1012,6 +1026,9 @@
 							 /datum/computer_file/program/camera_monitor)
 	skill_points = 26
 
+/datum/job/doctor/get_description_blurb()
+	return "You are a Corpsman. Your job is to fetch patients, bring them to the Infirmary, and to keep them alive. Help the physicians and contractors with triaging, keep your eyes on the suit sensors, and make sure everyone makes it to the end of the day. While you are expected to treat minor to moderate injuries alone and to act as a surgical assistant, you should not conduct surgeries on your own as you are not a doctor."
+	
 /datum/job/doctor_contractor
 	title = "Medical Contractor"
 	department = "Medical"
@@ -1047,6 +1064,9 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/doctor_contractor/get_description_blurb()
+	return "You are a Medical Contractor. In case you are specialized, you are either a paramedic, a surgeon, a virologist, or an orderly. Help out wherever the Infirmary needs you and make sure no patient is left untreated."
+	
 /datum/job/medical_trainee
 	title = "Corpsman Trainee"
 	department = "Medical"
@@ -1088,7 +1108,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/medical_trainee/get_description_blurb()
-	return "You are a Corpsman Trainee. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
+	return "You are a Corpsman Trainee. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team. You will be likely assigned to a corpsman willing to teach you. Make sure you ask questions and watch them closely during work."
 
 /datum/job/chemist
 	title = "Chemist"
@@ -1115,6 +1135,9 @@
 	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
 	minimal_access = list()
 
+/datum/job/chemist/get_description_blurb()
+	return "You are the Chemist. Your job is to prepare life-saving medicine and to keep the Smartfridge stocked for your colleagues. In case you run out of a cartridge, you can always order more from Supply."
+	
 /datum/job/psychiatrist
 	title = "Counselor"
 	total_positions = 1
@@ -1148,6 +1171,9 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/psychiatrist/get_description_blurb()
+	return "You are the Counselor. Your job is to take care of the mental health and well-being of all personnel aboard. From time to time you might be expected to perform funeral rites or religious services as well."
+	
 /datum/job/qm
 	title = "Deck Officer"
 	department = "Supply"
@@ -1189,6 +1215,9 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 
+/datum/job/qm/get_description_blurb()
+	return "You are the Deck Officer. Your job is to run the Cargo Bay by ensuring that your Deck Technicians and Supply Assistants are doing their job and that every order is received, catalogued, and shipped out to their proper destinations. You are also responsible for stocking, manning, and operating the commissary on Deck 3 and that both shuttles in the Hangar are fueled and ready to fly."
+	
 /datum/job/cargo_tech
 	title = "Deck Technician"
 	department = "Supply"
@@ -1223,6 +1252,9 @@
 							 /datum/computer_file/program/reports)
 
 
+/datum/job/cargo_tech/get_description_blurb()
+	return "You are a Deck Technician. You are responsible for sending mail, receiving cargo, and generally ensuring that all the deliveries to the Supply department get where they need to go. You also have to make sure that both ships in the Hangar are fueled and able to fly."
+	
 /datum/job/cargo_contractor
 	title = "Supply Assistant"
 	department = "Supply"
@@ -1248,6 +1280,9 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 
+/datum/job/cargo_contractor/get_description_blurb()
+	return "You are a Supply Assistant. You have the exact same tasks as Deck Technicians though technically they are your superiors."
+	
 /datum/job/mining
 	title = "Prospector"
 	department = "Supply"
@@ -1279,6 +1314,9 @@
 						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm)
 	minimal_access = list()
 
+/datum/job/mining/get_description_blurb()
+	return "You are a Prospector. Your job is to accompany away mission teams and to retrieve valuable minerals for science, supply, engineering, and robotics. For this, you can either use the mining rig suit, a hand drill, the big mining drill, or even a Ripley if you ask for one from robotics."
+	
 /datum/job/janitor
 	title = "Sanitation Technician"
 	department = "Service"
@@ -1308,6 +1346,9 @@
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 	minimal_access = list()
 
+/datum/job/janitor/get_description_blurb()
+	return "You are a Sanitation Technician. Your job is to keep the ship clean and tidy. Try not slipping the crew."
+	
 /datum/job/chef
 	title = "Cook"
 	department = "Service"
@@ -1339,6 +1380,9 @@
 	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar, access_commissary)
 	minimal_access = list()
 
+/datum/job/chef/get_description_blurb()
+	return "You are the Cook. Your job is to make sure there is food prepared at all times and that there is a dish appropriate for every race aboard. You have access both to the bar and to the hydroponics bay. Try not to serve anything poisonous."
+	
 /datum/job/bartender
 	department = "Service"
 	department_flag = SRV
@@ -1355,6 +1399,9 @@
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
 
+/datum/job/bartender/get_description_blurb()
+	return "You are the Bartender. Your job is to serve drinks to the crew and to make sure they get medical attention when they inevitably drink too much. You have access both to the kitchen and the hydroponics bay."
+	
 /datum/job/crew
 	title = "Crewman"
 	department = "Service"
@@ -1380,6 +1427,9 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
 
+/datum/job/crew/get_description_blurb()
+	return "You are a Crewman. By default, you have no responsibilities but you can always ask for some. Depending on your skills, you can try to help out in an understaffed department."
+	
 /datum/job/senior_scientist
 	title = "Senior Researcher"
 	department = "Science"
@@ -1414,6 +1464,9 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 20
 
+/datum/job/senior_scientist/get_description_blurb()
+	return "You are the Senior Researcher. Your job is to translate the Research Director's orders into actions and to oversee the day-to-day operations of the department to be certain that everything is done correctly. You are expected to be experienced in most if not all areas in science and to be familiar with the corporate regulations."
+	
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6
@@ -1448,6 +1501,9 @@
 	minimal_access = list()
 	skill_points = 20
 
+/datum/job/scientist/get_description_blurb()
+	return "You are a Scientist. Depending on your specialization, you can be doing anything from chemistry to xenoarchaeology. You have access to most parts of the Research department and to NanoTrasen's own ship, the Petrov."
+	
 /datum/job/guard
 	title = "Security Guard"
 	department = "Science"
@@ -1475,6 +1531,9 @@
 						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
 
 
+/datum/job/guard/get_description_blurb()
+	return "You are a Security Guard. Your job is to keep the Research department safe from any and all threats, both external and internal. You are not concerned with law enforcement, your only task is to protect NanoTrasen equipment, personnel, or other assets."
+	
 /datum/job/scientist_assistant
 	title = "Research Assistant"
 	department = "Science"
@@ -1504,7 +1563,9 @@
 
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
 
-
+/datum/job/scientist_assistant/get_description_blurb()
+	return "You are a Research Assistant. Your job is to help out whichever scientist needs a hand and, in the meantime, to learn from them. You have access to most areas of research but you should probably not touch anything unless you know what it does."
+	
 /datum/job/assistant
 	title = "Passenger"
 	total_positions = 12
@@ -1532,16 +1593,25 @@
 		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/nt
 	)
-
+	
+/datum/job/assistant/get_description_blurb()
+	return "You are a Passenger. You boarded this ship either out of curiosity, for your job, or just because you had too much money on your hands. You are not expected to do anything other than listening to orders during emergencies. Feel free to explore the ship and enjoy your ride!"
+	
 /datum/job/cyborg
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "your laws"
 	minimal_player_age = 0
 
+/datum/job/cyborg/get_description_blurb()
+	return "You are a Cyborg. Your job is to obey your laws at all times. By default you should be serving the crew with or without the AI's assistance."
+	
 /datum/job/ai
 	minimal_player_age = 3
 
+/datum/job/ai/get_description_blurb()
+	return "You are the AI. Your job is to obey your laws at all times. You overwatch the entire ship through cameras and consoles. As you have access to every electrical device, you are expected to know every department to some extent. In case you have cyborgs slaved to you, it is your responsibility to overwatch, to coordinate, and to keep them safe."
+	
 /datum/job/merchant
 	title = "Merchant"
 	department = "Civilian"
@@ -1567,6 +1637,9 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 24
 
+/datum/job/merchant/get_description_blurb()
+	return "You are a Merchant. You have a small trade vessel but a huge cargo, ready to be sold to anyone who has the cash for it. Profit and self-preservation should be your guiding principles most of the time."
+	
 /datum/job/stowaway
 	title = "Stowaway"
 	department = "Civilian"
@@ -1586,3 +1659,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
 	announced = FALSE
+
+/datum/job/stowaway/get_description_blurb()
+	return "You are the Stowaway. For some reason or another, you boarded the ship without authorization. Depending on your background, you might want to stay out of sight as your mere presence aboard is law-breaking."
