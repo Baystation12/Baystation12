@@ -139,7 +139,7 @@
 
 	var/total_part_size = return_total_size()
 	var/total_complexity = return_total_complexity()
-	var/HTML = ""
+	var/list/HTML = list()
 
 	HTML += "<html><head><title>[name]</title></head><body>"
 
@@ -188,7 +188,7 @@
 			HTML += "<br>"
 
 	HTML += "</body></html>"
-	show_browser(user, HTML, "window=assembly-\ref[src];size=655x350;border=1;can_resize=1;can_close=1;can_minimize=1")
+	show_browser(user, jointext(HTML, null), "window=assembly-\ref[src];size=655x350;border=1;can_resize=1;can_close=1;can_minimize=1")
 
 /obj/item/device/electronic_assembly/Topic(href, href_list)
 	if(href_list["ghostscan"])
