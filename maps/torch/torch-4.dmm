@@ -4742,8 +4742,9 @@
 /area/medical/mentalhealth)
 "alQ" = (
 /obj/machinery/requests_console{
-	department = "Chapel";
-	departmentType = 2;
+	announcementConsole = 1;
+	department = "Security";
+	departmentType = 5;
 	pixel_y = 30
 	},
 /obj/structure/closet/secure_closet/counselor,
@@ -5408,6 +5409,10 @@
 	icon_state = "pipe-c"
 	},
 /obj/structure/filingcabinet/chestdrawer,
+/obj/machinery/camera/network/security{
+	c_tag = "Security Wing - Forensics";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "apf" = (
@@ -19004,7 +19009,7 @@
 "fVb" = (
 /obj/machinery/door/airlock/medical{
 	name = "Autopsy";
-	req_access = list(5)
+	req_access = list(6)
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -21518,6 +21523,16 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/entry)
+"iPj" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "Briefing Room";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/conference)
 "iQb" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -22572,7 +22587,7 @@
 	dir = 8;
 	id_tag = null;
 	name = "Infirmary Wing";
-	req_one_access = list(5,8)
+	req_one_access = list(5,8,6)
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -25845,10 +25860,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "ogv" = (
-/obj/item/modular_computer/console/preset/security{
-	icon_state = "console";
-	dir = 4
-	},
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Security";
@@ -25860,6 +25871,8 @@
 	icon_state = "bordercolorhalf";
 	dir = 8
 	},
+/obj/structure/table/steel,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/opscheck)
 "ohb" = (
@@ -26952,6 +26965,10 @@
 	pixel_y = -24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/camera/network/security{
+	c_tag = "Security Wing - Evidence Storage";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -43692,7 +43709,7 @@ njj
 alZ
 kCl
 iEb
-iEb
+iPj
 iEb
 kCl
 dzG
