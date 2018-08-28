@@ -11,7 +11,7 @@
 *******/
 /obj/item/device/camera_film
 	name = "film cartridge"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/photography.dmi'
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state = "film"
 	item_state = "electropack"
@@ -25,7 +25,7 @@ var/global/photo_count = 0
 
 /obj/item/weapon/photo
 	name = "photo"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/photography.dmi'
 	icon_state = "photo"
 	item_state = "paper"
 	randpixel = 10
@@ -101,7 +101,7 @@ var/global/photo_count = 0
 **************/
 /obj/item/weapon/storage/photo_album
 	name = "Photo album"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/photography.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
 	w_class = ITEM_SIZE_NORMAL //same as book
@@ -137,7 +137,7 @@ var/global/photo_count = 0
 *********/
 /obj/item/device/camera
 	name = "camera"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/photography.dmi'
 	desc = "A polaroid camera."
 	icon_state = "camera"
 	item_state = "electropack"
@@ -221,9 +221,6 @@ var/global/photo_count = 0
 
 	on = 0
 	update_icon()
-	spawn(64)
-		on = 1
-		update_icon()
 
 /obj/item/device/camera/examine(mob/user)
 	if(!..(user))
