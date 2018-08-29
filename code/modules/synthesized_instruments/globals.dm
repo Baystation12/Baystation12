@@ -21,7 +21,6 @@ GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 	var/usage_info_event_resolution = 8
 
 	var/env_settings_available = 1
-	// Keep disabled until I figure out how to preserve environment settings
 
 	var/list/env_default = list(7.5, 1.0, -1000, -100, 0, 1.49, 0.83, 1.0, -2602, 0.0007, 200, 0.011, 0.25, 0.0, 0.25, 0.0, -5.0, 5000, 250.0, 0.0, 100, 100, 63)
 	var/list/list/env_params_bounds = list(
@@ -198,8 +197,6 @@ Bit flags that modify the behavior of above properties
 			•4 - Automatic setting of 'RoomHF' due to distance from listener"})
 
 	var/list/n2t_int = list() // Instead of num2text it is used for faster access in n2t
-	var/list/free_channels = list() // Used to take up some channels and avoid istruments cancelling each other
-	var/free_channels_populated = 0
 	var/list/nn2no = list(0,2,4,5,7,9,11) // Maps note num onto note offset
 
 

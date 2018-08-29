@@ -198,9 +198,26 @@
 
 /obj/structure/synthesized_instrument
 	var/datum/real_instrument/real_instrument
+	icon = 'icons/obj/musician.dmi'
+	//Initialization data
+	var/datum/instrument/instruments = list()
+	var/path = /datum/instrument
+	var/sound_player = /datum/sound_player
+
+/obj/structure/synthesized_instrument/Initialize()
+	..()
+	for (var/type in typesof(path))
+		var/datum/instrument/new_instrument = new type
+		if (!new_instrument.id) continue
+		new_instrument.create_full_sample_deviation_map()
+		src.instruments[new_instrument.name] = new_instrument
+	src.real_instrument = new /datum/real_instrument(src, new sound_player(src, instruments[pick(instruments)]), instruments)
 
 /obj/structure/synthesized_instrument/Destroy()
 	QDEL_NULL(src.real_instrument)
+	for(var/key in instruments)
+		qdel(instruments[key])
+	instruments = null
 	. = ..()
 
 
@@ -227,18 +244,36 @@
 	return real_instrument.Topic_call(href, href_list, usr)
 
 
-
+////////////////////////
+//DEVICE VERSION
+////////////////////////
 
 
 /obj/item/device/synthesized_instrument
 	var/datum/real_instrument/real_instrument
+	icon = 'icons/obj/musician.dmi'
+	var/datum/instrument/instruments = list()
+	var/path = /datum/instrument
+	var/sound_player //Need path here
+
+/obj/item/device/synthesized_instrument/Initialize()
+	..()
+	for (var/type in typesof(path))
+		var/datum/instrument/new_instrument = new type
+		if (!new_instrument.id) continue
+		new_instrument.create_full_sample_deviation_map()
+		src.instruments[new_instrument.name] = new_instrument
+	src.real_instrument = new /datum/real_instrument(src, new sound_player(src, instruments[pick(instruments)]), instruments)
 
 /obj/item/device/synthesized_instrument/Destroy()
 	QDEL_NULL(src.real_instrument)
+	for(var/key in instruments)
+		qdel(instruments[key])
+	instruments = null
 	. = ..()
 
 
-/obj/item/device/synthesized_instrument/attack_hand(mob/user)
+/obj/item/device/synthesized_instrument/attack_self(mob/user as mob)
 	src.interact(user)
 
 
@@ -247,8 +282,7 @@
 
 
 /obj/item/device/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", var/datum/nanoui/ui = null, var/force_open = 0)
-	if(real_instrument)
-		real_instrument.ui_call(user,ui_key,ui,force_open)
+	real_instrument.ui_call(user,ui_key,ui,force_open)
 
 
 /obj/item/device/synthesized_instrument/proc/shouldStopPlaying(mob/user)
@@ -259,5 +293,4 @@
 	if (..())
 		return 1
 
-	if(real_instrument)
-		return real_instrument.Topic_call(href, href_list)
+	return real_instrument.Topic_call(href, href_list, usr)
