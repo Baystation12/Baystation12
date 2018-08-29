@@ -43,10 +43,10 @@
 	desc = "Aquila Helm"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_solgov_crew = 80
-/datum/access/solgov_crew
-	id = access_solgov_crew
-	desc = "SolGov Crew"
+/var/const/access_torch_workers = 80
+/datum/access/torch_workers
+	id = access_torch_workers
+	desc = "SEV Torch Workers"
 	region = ACCESS_REGION_GENERAL
 
 /var/const/access_nanotrasen = 81
@@ -145,6 +145,12 @@
 /datum/access/commissary
 	id = access_commissary
 	desc = "Commissary"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_officer = 97
+/datum/access/officer
+	id = access_officer
+	desc = "Commissioned Officer"
 	region = ACCESS_REGION_GENERAL
 
 /************

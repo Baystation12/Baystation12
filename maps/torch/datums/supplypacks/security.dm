@@ -149,7 +149,7 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Holster crate"
-	access = access_solgov_crew
+	access = access_torch_workers
 
 /decl/hierarchy/supply_pack/security/securityextragear
 	name = "Misc - Security equipment"
@@ -187,7 +187,7 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Practice laser carbine crate"
-	access = access_solgov_crew
+	access = access_torch_workers
 
 /decl/hierarchy/supply_pack/security/magnum_ammo
 	name = "Ammo - .44 Magnum"

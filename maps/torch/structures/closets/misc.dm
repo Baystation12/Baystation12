@@ -54,7 +54,7 @@
 
 /obj/structure/closet/secure_closet/crew
 	name = "crew equipment locker"
-	req_access = list(access_solgov_crew)
+	req_access = list(access_torch_workers)
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"

@@ -43,6 +43,11 @@
 	icon_state = "civ"
 	job_access_type = /datum/job/assistant
 
+/obj/item/weapon/card/id/torch/agent
+	desc = "An identification card issued to Agents of the Office of Civil Investigation & Enforcement."
+	icon_state = "civGold"
+	job_access_type = /datum/job/detective
+
 
 /obj/item/weapon/card/id/torch/silver/medical
 	job_access_type = /datum/job/cmo
@@ -52,6 +57,10 @@
 
 /obj/item/weapon/card/id/torch/crew/medical/senior
 	job_access_type = /datum/job/senior_doctor
+
+/obj/item/weapon/card/id/torch/crew/medical/counselor
+	job_access_type = /datum/job/psychiatrist
+	access = list(access_officer)
 
 /obj/item/weapon/card/id/torch/contractor/medical
 	job_access_type = /datum/job/doctor_contractor
@@ -75,6 +84,9 @@
 /obj/item/weapon/card/id/torch/crew/security/forensic
 	job_access_type = /datum/job/detective
 
+/obj/item/weapon/card/id/torch/contractor/security
+	job_access_type = /datum/job/detective
+
 
 /obj/item/weapon/card/id/torch/silver/engineering
 	job_access_type = /datum/job/chief_engineer
@@ -95,6 +107,9 @@
 /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	job_access_type = /datum/job/qm
 
+/obj/item/weapon/card/id/torch/crew/supply/deckofficer/commissioned
+	access = list(access_officer)
+
 /obj/item/weapon/card/id/torch/crew/supply
 	job_access_type = /datum/job/cargo_tech
 
@@ -113,6 +128,12 @@
 
 /obj/item/weapon/card/id/torch/contractor/service //unused
 	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/contractor/service/janitor
+	job_access_type = /datum/job/janitor
+
+/obj/item/weapon/card/id/torch/contractor/service/chef
+	job_access_type = /datum/job/chef
 
 /obj/item/weapon/card/id/torch/contractor/service/bartender
 	job_access_type = /datum/job/bartender
@@ -134,7 +155,10 @@
 	job_access_type = /datum/job/explorer
 
 /obj/item/weapon/card/id/torch/crew/pilot
-	job_access_type = /datum/job/nt_pilot
+	job_access_type = /datum/job/pilot
+
+/obj/item/weapon/card/id/torch/contractor/pilot
+	job_access_type = /datum/job/pilot
 
 //NanoTrasen and Passengers
 
@@ -142,6 +166,9 @@
 	desc = "A card issued to passengers and off-duty personnel aboard the SEV Torch."
 	icon_state = "id"
 	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/passenger/nt
+	access = list(access_nanotrasen)
 
 /obj/item/weapon/card/id/torch/passenger/research
 	desc = "A card issued to NanoTrasen personnel aboard the SEV Torch."
@@ -154,8 +181,9 @@
 /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
 	job_access_type = /datum/job/senior_scientist
 
-/obj/item/weapon/card/id/torch/passenger/research/nt_pilot
-	job_access_type = /datum/job/nt_pilot
+/obj/item/weapon/card/id/torch/passenger/research/pilot
+	job_access_type = /datum/job/pilot
+	access = list(access_nanotrasen)
 
 /obj/item/weapon/card/id/torch/passenger/research/scientist
 	job_access_type = /datum/job/scientist
@@ -165,9 +193,18 @@
 
 /obj/item/weapon/card/id/torch/passenger/research/guard
 	job_access_type = /datum/job/guard
+	access = list(access_nanotrasen)
 
 /obj/item/weapon/card/id/torch/passenger/research/liaison
 	job_access_type = /datum/job/liaison
+
+/obj/item/weapon/card/id/torch/contractor/research/mining
+	job_access_type = /datum/job/mining
+	access = list(access_torch_workers)
+
+/obj/item/weapon/card/id/torch/contractor/research/guard
+	job_access_type = /datum/job/guard
+	access = list(access_torch_workers)
 
 
 //Merchant

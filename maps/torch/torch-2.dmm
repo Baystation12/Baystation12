@@ -9738,7 +9738,7 @@
 "wD" = (
 /obj/machinery/door/airlock/command{
 	name = "Officer's Mess";
-	req_one_access = list(19,28,91)
+	req_one_access = list(19,28,91,97)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
