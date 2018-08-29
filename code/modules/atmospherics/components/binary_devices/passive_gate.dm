@@ -25,6 +25,10 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_type = PIPE_PASSIVE_GATE
+	build_icon_state = "passivegate"
+
 /obj/machinery/atmospherics/binary/passive_gate/on
 	unlocked = 1
 	icon_state = "map_on"
@@ -257,7 +261,7 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
 #undef REGULATE_NONE

@@ -1021,7 +1021,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
 "cE" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -1199,7 +1199,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
 "cZ" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -3026,7 +3026,7 @@
 	},
 /turf/template_noop,
 /area/template_noop)
-"TT" = (
+"NL" = (
 /mob/living/simple_animal/hostile/retaliate/goat/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
@@ -3986,7 +3986,7 @@ aa
 aa
 aa
 aw
-TT
+NL
 aV
 be
 bm

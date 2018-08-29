@@ -585,7 +585,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
 "bO" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
