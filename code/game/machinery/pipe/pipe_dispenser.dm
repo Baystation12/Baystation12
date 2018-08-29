@@ -9,7 +9,7 @@
 	var/list/recipes = list()
 
 /obj/machinery/pipedispenser/Initialize()
-	..()
+	. = ..()
 	for(var/D in typesof(/datum/pipe/pipe_dispenser) - /datum/pipe/pipe_dispenser)
 		recipes += new D(src)
 
@@ -95,8 +95,6 @@
 		new_item.color = D.pipe_color
 		new_item.name = D.name
 		new_item.desc = D.desc
-	return
-
 
 /obj/machinery/pipedispenser/Topic(href, href_list, state = GLOB.physical_state)
 	if((. = ..()) || unwrenched)
