@@ -33,6 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - maptweak: "Added missing cameras to forensics, evidence storage and briefing room"
-  - maptweak: "Added a charger to d4 security checkpoint"
-  - maptweak: "Forensic technician can now access the front morgue doors"
+  - maptweak: "Added missing cameras to forensics office, evidence storage and briefing room"
+  - maptweak: "Added a recharger on d4 security checkpoint"
+  - maptweak: "Forensic technician can now access morgue from the front door"
