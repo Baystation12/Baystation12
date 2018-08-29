@@ -195,9 +195,9 @@
 	return FALSE
 
 
-/datum/species/nabber/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
+/datum/species/nabber/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 	if(!H.handcuffed || H.buckled)
-		return ..()
+		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
 
