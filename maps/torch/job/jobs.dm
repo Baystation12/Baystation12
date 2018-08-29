@@ -927,7 +927,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/cadet
-	title = "Security Cadet"
+	title = "Master at Arms Trainee"
 	department = "Security"
 	department_flag = SEC
 
