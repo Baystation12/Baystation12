@@ -6,7 +6,11 @@
 	poweralm = 1
 	requires_power = 0
 
-
+/area/corvette/unscbertels/exterior
+	name = "UNSC Bertels Exterior"
+	dynamic_lighting = 0
+	luminosity = 1
+	requires_power = 0
 
 //deck 1 areas
 /area/corvette/unscbertels/deck1/Bridge
@@ -114,6 +118,8 @@
 /area/corvette/unscbertels/deck2/starboardengine
 	name = "UNSC Bertels Deck 2 Starboard Engine"
 
+/area/corvette/unscbertels/deck2/cryodorms
+	name = "UNSC Bertels Deck 2 Cryodorms"
 
 
 //deck 3 areas
@@ -129,14 +135,41 @@
 /area/corvette/unscbertels/deck3/odstquarters
 	name = "UNSC Bertels Deck 3 ODST Quarters"
 
-/area/corvette/unscbertels/deck3/odstbathroom
-	name = "UNSC Bertels Deck 3 ODST Bathrooms"
+/area/corvette/unscbertels/deck3/odstbathroomport
+	name = "UNSC Bertels Deck 3 ODST Port Bathrooms"
+
+/area/corvette/unscbertels/deck3/odstbathroomstarboard
+	name = "UNSC Bertels Deck 3 ODST Starboard Bathrooms"
+
+/area/corvette/unscbertels/deck3/portumbilical
+	name = "UNSC Bertels Deck 3 Port Docking Umbilical"
+
+/area/corvette/unscbertels/deck3/starboardumbilical
+	name = "UNSC Bertels Deck 3 Starboard Docking Umbilical"
+
+/area/corvette/unscbertels/deck3/cargo1
+	name = "UNSC Bertels Deck 3 Port Central Hallway"
+
+/area/corvette/unscbertels/deck3/cargo1
+	name = "UNSC Bertels Deck 3 Starboard Central Hallway"
+
+/area/corvette/unscbertels/deck3/auxpowercore
+	name = "UNSC Bertels Deck 3 Auxiliary Power Core"
 
 /area/corvette/unscbertels/deck3/cargo1
 	name = "UNSC Bertels Deck 3 Cargo Bay 1"
 
 /area/corvette/unscbertels/deck3/cargo2
 	name = "UNSC Bertels Deck 3 Cargo Bay 2"
+
+/area/corvette/unscbertels/deck3/cargo3
+	name = "UNSC Bertels Deck 3 Cargo Bay 3"
+
+/area/corvette/unscbertels/deck3/cargo4
+	name = "UNSC Bertels Deck 3 Cargo Bay 4"
+
+/area/corvette/unscbertels/deck3/cargo5
+	name = "UNSC Bertels Deck 3 Cargo Bay 5"
 
 /area/corvette/unscbertels/deck3/centralhallway
 	name = "UNSC Bertels Deck 3 Central Hallway"

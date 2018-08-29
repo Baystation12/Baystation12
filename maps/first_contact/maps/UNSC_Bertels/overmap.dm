@@ -6,4 +6,4 @@
 	icon_state = "ship"
 	fore_dir = WEST
 
-	map_bounds = list(2,76,76,26)
+	map_bounds = list(5,56,142,93)
