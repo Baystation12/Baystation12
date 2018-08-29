@@ -1300,35 +1300,3 @@ Buildable meters
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You have fastened the meter to the pipe</span>")
 	qdel(src)
-//not sure why these are necessary
-#undef PIPE_SIMPLE_STRAIGHT
-#undef PIPE_SIMPLE_BENT
-#undef PIPE_HE_STRAIGHT
-#undef PIPE_HE_BENT
-#undef PIPE_CONNECTOR
-#undef PIPE_MANIFOLD
-#undef PIPE_JUNCTION
-#undef PIPE_UVENT
-#undef PIPE_MVALVE
-#undef PIPE_DVALVE
-#undef PIPE_SVALVE
-#undef PIPE_PUMP
-#undef PIPE_SCRUBBER
-#undef PIPE_GAS_FILTER
-#undef PIPE_GAS_MIXER
-#undef PIPE_PASSIVE_GATE
-#undef PIPE_VOLUME_PUMP
-#undef PIPE_OUTLET_INJECT
-#undef PIPE_MTVALVE
-#undef PIPE_MTVALVEM
-#undef PIPE_GAS_FILTER_M
-#undef PIPE_GAS_MIXER_T
-#undef PIPE_GAS_MIXER_M
-#undef PIPE_SUPPLY_STRAIGHT
-#undef PIPE_SUPPLY_BENT
-#undef PIPE_SCRUBBERS_STRAIGHT
-#undef PIPE_SCRUBBERS_BENT
-#undef PIPE_SUPPLY_MANIFOLD
-#undef PIPE_SCRUBBERS_MANIFOLD
-#undef PIPE_UNIVERSAL
-//#undef PIPE_MANIFOLD4W

@@ -6,6 +6,12 @@
 	anchored = 1
 	var/unwrenched = 0
 	var/wait = 0
+	var/list/recipes = list()
+
+/obj/machinery/pipedispenser/Initialize()
+	..()
+	for(var/D in typesof(/datum/pipe/pipe_dispenser) - /datum/pipe/pipe_dispenser)
+		recipes += new D(src)
 
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	if(..())
@@ -100,12 +106,12 @@
 	if(href_list["make"])
 		if(!wait)
 			var/p_type = text2num(href_list["make"])
-			/var/datum/pipe/D = null
+			var/datum/pipe/D = null
 			if(p_type == 0)
-				D = new /datum/pipe/straight
+				D = new /datum/pipe/pipe_dispenser/straight
 				build(D)
 			else if (p_type == 29)
-				D = new /datum/pipe/straight/supply
+				D = new /datum/pipe/pipe_dispenser/straight/supply
 				build(D)
 			else
 				var/p_dir = text2num(href_list["dir"])
