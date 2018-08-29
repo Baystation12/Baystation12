@@ -35,5 +35,5 @@ delete-after: True
 changes: 
   - maptweak: "Adds Various areas to UNSC Bertels based on player feedback."
   - maptweak: "Adds self contained spawnpoints for UNSC Bertels."
-  -rscadd: "Adds documentation to UNSC Bertels map folder on how to implement the vessel in different scenario's."
-  -rscadd: "Adds self contained job datums and outfit lists for UNSC Bertel."
+  - rscadd: "Adds documentation to UNSC Bertels map folder on how to implement the vessel in different scenarios."
+  - rscadd: "Adds self contained job datums and outfit lists for UNSC Bertel."
