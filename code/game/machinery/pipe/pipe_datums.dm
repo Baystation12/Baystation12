@@ -34,7 +34,7 @@
 	return new build_path(newloc)
 
 /datum/pipe/pipe_dispenser/straight
-	name = "\improper pipe fitting"
+	name = "pipe fitting"
 	desc = "a straight pipe segment."
 	item_id = "straightpipe"
 	build_path = /obj/item/pipe
@@ -43,7 +43,7 @@
 	pipe_color = null
 
 /datum/pipe/pipe_dispenser/straight/supply
-	name = "\improper supply pipe fitting"
+	name = "supply pipe fitting"
 	desc = "a straight supply pipe segment."
 	item_id = "straightsupplypipe"
 	build_path = /obj/item/pipe
@@ -52,13 +52,13 @@
 	pipe_color = PIPE_COLOR_BLUE
 
 /datum/pipe/pipe_dispenser/straight/scrubber
-	name = "\improper scrubber pipe fitting"
+	name = "scrubber pipe fitting"
 	desc = "a straight scrubber pipe segment"
 	item_id = "straightscrubberpipe"
 	build_path = /obj/item/pipe
 
 /datum/pipe/pipe_dispenser/straight/fuel
-	name = "\improper fuel pipe fitting"
+	name = "fuel pipe fitting"
 	desc = "a striaght fuel pipe segment"
 	item_id = "straightfuelpipe"
 	build_path = /obj/item/pipe
