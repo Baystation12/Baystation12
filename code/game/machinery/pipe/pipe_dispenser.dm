@@ -79,6 +79,19 @@
 	onclose(user, "pipedispenser")
 	return
 
+
+/obj/machinery/pipedispenser/proc/build(var/datum/pipe/D)
+	if(D.build_path)
+		var/obj/item/pipe/new_item = D.Fabricate(src)
+		new_item.loc = loc
+		new_item.pipe_type = D.pipe_type
+		new_item.connect_types = D.connect_types
+		new_item.color = D.pipe_color
+		new_item.name = D.name
+		new_item.desc = D.desc
+	return
+
+
 /obj/machinery/pipedispenser/Topic(href, href_list, state = GLOB.physical_state)
 	if((. = ..()) || unwrenched)
 		usr << browse(null, "window=pipedispenser")
@@ -87,11 +100,19 @@
 	if(href_list["make"])
 		if(!wait)
 			var/p_type = text2num(href_list["make"])
-			var/p_dir = text2num(href_list["dir"])
-			var/obj/item/pipe/P = new (/*usr.loc*/ src.loc, pipe_type=p_type, dir=p_dir)
-			P.update()
-			wait = 1
-			spawn(10)
+			/var/datum/pipe/D = null
+			if(p_type == 0)
+				D = new /datum/pipe/straight
+				build(D)
+			else if (p_type == 29)
+				D = new /datum/pipe/straight/supply
+				build(D)
+			else
+				var/p_dir = text2num(href_list["dir"])
+				var/obj/item/pipe/P = new (/*usr.loc*/ src.loc, pipe_type=p_type, dir=p_dir)
+				P.update()
+				wait = 1
+				spawn(10)
 				wait = 0
 	if(href_list["makemeter"])
 		if(!wait)
