@@ -669,7 +669,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/shuttle/outgoing)
 "cs" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/plating,
 /area/ship/scrap/shuttle/outgoing)
 "ct" = (
@@ -3821,7 +3821,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 25
 	},
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "jg" = (

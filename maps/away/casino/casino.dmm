@@ -763,7 +763,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "bT" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen,
+/obj/machinery/atmospherics/unary/tank/nitrogen,
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
 "bU" = (
@@ -3291,7 +3291,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "iI" = (
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -3383,7 +3383,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "iX" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -3597,7 +3597,7 @@
 /turf/simulated/wall/r_wall,
 /area/casino/casino_crew_atmos)
 "jw" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -3712,7 +3712,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jL" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -5009,7 +5009,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "nc" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen{
+/obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
