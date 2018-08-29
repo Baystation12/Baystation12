@@ -48,6 +48,7 @@
 	opacity = 1
 	density = 1
 	atmos_canpass = CANPASS_DENSITY
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	var/on = 1
 	var/datum/ship_engine/gas_thruster/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust

@@ -1037,24 +1037,28 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftstarboard)
 "abV" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_tag = "d1sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1sh_out";
+	sensor_name = "First Deck Starboard Nacelle Hydrogen Tank";
+	sensor_tag = "d1sh_sensor";
 	sensors = list("d1sh_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "abW" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_tag = "d1so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1so2_out";
+	sensor_name = "First Deck Starboard Nacelle Oxygen Tank";
+	sensor_tag = "d1so2_sensor";
 	sensors = list("d1so2_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -11009,7 +11013,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aLT" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -11299,7 +11303,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aNa" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -13756,24 +13760,28 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
 "aUu" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d1ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1ph_out";
+	sensor_name = "First Deck Port Nacelle Hydrogen Tank";
+	sensor_tag = "d1ph_sensor";
 	sensors = list("d1ph_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUv" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d1po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1po2_out";
+	sensor_name = "First Deck Port Nacelle Oxygen Tank";
+	sensor_tag = "d1po2_sensor";
 	sensors = list("d1po2_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -14549,8 +14557,7 @@
 "bdz" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1po2_sensor";
-	output = 127
+	id_tag = "d1po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
@@ -15989,8 +15996,7 @@
 "cHm" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1sh_sensor";
-	output = 127
+	id_tag = "d1sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1starboard)
@@ -20074,8 +20080,7 @@
 "hml" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1so2_sensor";
-	output = 127
+	id_tag = "d1so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
@@ -23668,8 +23673,7 @@
 "lom" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1ph_sensor";
-	output = 127
+	id_tag = "d1ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
@@ -26332,8 +26336,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber1s";
-	output = 127
+	id_tag = "cChamber1s"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
@@ -27331,8 +27334,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber1p";
-	output = 127
+	id_tag = "cChamber1p"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -27580,10 +27582,12 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "pSb" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	input_tag = "test_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "test_out";
+	sensor_name = "Test Chamber";
+	sensor_tag = "testchamber_sensor";
 	sensors = list("testchamber_sensor" = "Test Chamber")
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -27714,8 +27718,7 @@
 "qbb" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "xenobot_sensor";
-	output = 63
+	id_tag = "xenobot_sensor"
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
@@ -28462,9 +28465,11 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
 "rab" = (
-/obj/machinery/computer/general_air_control{
+/obj/machinery/computer/air_control{
 	frequency = 1441;
 	name = "Xenoflora Gas Monitor";
+	sensor_name = "Xenoflora Environment";
+	sensor_tag = "xenobot_sensor";
 	sensors = list("xenobot_sensor" = "Xenoflora Environment")
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -29635,8 +29640,7 @@
 "sqb" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "testchamber_sensor";
-	output = 63
+	id_tag = "testchamber_sensor"
 	},
 /obj/effect/landmark{
 	name = "bluespacerift"

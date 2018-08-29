@@ -19,6 +19,10 @@
 	buckle_require_restraints = 1
 	buckle_lying = -1
 	var/datum/sound_token/sound_token
+	build_icon_state = "simple"
+	build_icon = 'icons/obj/pipe-item.dmi'
+	pipe_type = PIPE_SIMPLE_STRAIGHT
+	pipe_class = PIPE_CLASS_BINARY
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
@@ -100,7 +104,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (istype(src, /obj/machinery/atmospherics/pipe/tank))
+	if (istype(src, /obj/machinery/atmospherics/unary/tank))
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
 		return ..()
@@ -108,31 +112,36 @@
 	if(istype(W,/obj/item/device/pipe_painter))
 		return 0
 
-	if(!isWrench(W))
-		return ..()
-	var/turf/T = src.loc
-	if (level==1 && isturf(T) && !T.is_plating())
-		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
-		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		for (var/obj/machinery/meter/meter in T)
-			if (meter.target == src)
-				new /obj/item/pipe_meter(T)
-				qdel(meter)
-		qdel(src)
+	if(isWrench(W))		
+		var/turf/T = src.loc
+		if (level==1 && isturf(T) && !T.is_plating())
+			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
+			return 1
+		
+		var/datum/gas_mixture/int_air = return_air()
+		var/datum/gas_mixture/env_air = loc.return_air()
+		
+		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
+			add_fingerprint(user)
+			return 1
+		
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+
+		if (do_after(user, 40, src))
+			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
+		
+			var/obj/item/pipe/P = new /obj/item/pipe(loc, src)
+
+			for (var/obj/machinery/meter/meter in T)
+				if (meter.target == src)
+					new /obj/item/pipe_meter(T)
+					qdel(meter)
+
+			P.dir = dir
+
+			qdel(src)
 
 /obj/machinery/atmospherics/proc/change_color(var/new_color)
 	//only pass valid pipe colors please ~otherwise your pipe will turn invisible
@@ -142,23 +151,8 @@
 	pipe_color = new_color
 	update_icon()
 
-/*
-/obj/machinery/atmospherics/pipe/add_underlay(var/obj/machinery/atmospherics/node, var/direction)
-	if(istype(src, /obj/machinery/atmospherics/pipe/tank))	//todo: move tanks to unary devices
-		return ..()
-
-	if(node)
-		var/temp_dir = get_dir(src, node)
-		underlays += icon_manager.get_atmos_icon("pipe_underlay_intact", temp_dir, color_cache_name(node))
-		return temp_dir
-	else if(direction)
-		underlays += icon_manager.get_atmos_icon("pipe_underlay_exposed", direction, pipe_color)
-	else
-		return null
-*/
-
 /obj/machinery/atmospherics/pipe/color_cache_name(var/obj/machinery/atmospherics/node)
-	if(istype(src, /obj/machinery/atmospherics/pipe/tank))
+	if(istype(src, /obj/machinery/atmospherics/unary/tank))
 		return ..()
 
 	if(istype(node, /obj/machinery/atmospherics/pipe/manifold) || istype(node, /obj/machinery/atmospherics/pipe/manifold4w))
@@ -187,6 +181,8 @@
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
 	level = 1
+
+	pipe_type = PIPE_SIMPLE_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/New()
 	..()
@@ -237,6 +233,7 @@
 	var/pressure_difference = pressure - environment.return_pressure()
 
 	if(pressure_difference > maximum_pressure)
+		log_and_message_admins("Notice: [src] has burst at [src.loc]. Pressure difference: [pressure_difference]")
 		burst()
 
 	else if(pressure_difference > fatigue_pressure)
@@ -294,7 +291,7 @@
 
 	if(!node1 && !node2)
 		var/turf/T = get_turf(src)
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
@@ -310,7 +307,7 @@
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
 
-/obj/machinery/atmospherics/pipe/simple/atmos_init()
+/obj/machinery/atmospherics/pipe/simple/atmos_init(var/debug = FALSE)
 	..()
 	normalize_dir()
 	var/node1_dir
@@ -318,20 +315,38 @@
 
 	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
-			if (!node1_dir)
+			if (!node1_dir)				
 				node1_dir = direction
 			else if (!node2_dir)
 				node2_dir = direction
+	if(debug)
+		log_and_message_admins("dir1 = [node1_dir]")
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+		if(debug)
+			log_and_message_admins("dir1: [target] detected.")
+			log_and_message_admins("dir1: [target].initialize directions: [target.initialize_directions]")
+			log_and_message_admins("dir1: get_dir([target],[src]): [get_dir(target,src)]")
 		if(target.initialize_directions & get_dir(target,src))
+			if(debug)
+				log_and_message_admins("dir1: node [target] detected in dir [get_dir(target,src)]")
 			if (check_connect_types(target,src))
+				if(debug)
+					log_and_message_admins("dir1: connection types compatible.")
 				node1 = target
+				if(debug)
+					log_and_message_admins("dir1: node1 is now [node1]")
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
+			if(debug)
+				log_and_message_admins("dir2: node [target] detected in dir [get_dir(target,src)]")
 			if (check_connect_types(target,src))
+				if(debug)
+					log_and_message_admins("dir2: connection types compatible.")
 				node2 = target
+				if(debug)
+					log_and_message_admins("dir2: node2 is now [node2]")
 				break
 
 	if(!node1 && !node2)
@@ -368,6 +383,7 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
+	pipe_type = PIPE_SCRUBBERS_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/visible/supply
 	name = "Air supply pipe"
@@ -376,6 +392,7 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+	pipe_type = PIPE_SUPPLY_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/visible/yellow
 	color = PIPE_COLOR_YELLOW
@@ -401,6 +418,8 @@
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
+	connect_types = CONNECT_TYPE_FUEL
+	pipe_type = PIPE_FUEL_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/hidden
 	icon_state = "intact"
@@ -414,6 +433,7 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
+	pipe_type = PIPE_SCRUBBERS_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
 	name = "Air supply pipe"
@@ -422,6 +442,7 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+	pipe_type = PIPE_SUPPLY_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow
 	color = PIPE_COLOR_YELLOW
@@ -447,21 +468,25 @@
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
+	connect_types = CONNECT_TYPE_FUEL
+	pipe_type = PIPE_FUEL_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
 	icon_state = ""
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes."
-
+	pipe_type = PIPE_MANIFOLD
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
 
 	dir = SOUTH
 	initialize_directions = EAST|NORTH|WEST
 
 	var/obj/machinery/atmospherics/node3
-
+	build_icon_state = "manifold"
 	level = 1
+
+	pipe_class = PIPE_CLASS_TRINARY
 
 /obj/machinery/atmospherics/pipe/manifold/New()
 	..()
@@ -546,7 +571,7 @@
 
 	if(!node1 && !node2 && !node3)
 		var/turf/T = get_turf(src)
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
@@ -666,7 +691,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel
 	name = "Fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
-
+	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold/hidden
 	icon_state = "map"
@@ -710,13 +735,14 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
 	name = "Fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
+	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/atmos/manifold.dmi'
 	icon_state = ""
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes."
-
+	pipe_type = PIPE_MANIFOLD4W
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
 
 	dir = SOUTH
@@ -724,8 +750,10 @@
 
 	var/obj/machinery/atmospherics/node3
 	var/obj/machinery/atmospherics/node4
-
+	build_icon_state = "manifold4w"
 	level = 1
+
+	pipe_class = PIPE_CLASS_QUATERNARY
 
 /obj/machinery/atmospherics/pipe/manifold4w/New()
 	..()
@@ -805,7 +833,7 @@
 
 	if(!node1 && !node2 && !node3 && !node4)
 		var/turf/T = get_turf(src)
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
@@ -932,6 +960,7 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel
 	name = "4-way fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
+	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden
 	icon_state = "map_4way"
@@ -975,7 +1004,7 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
 	name = "4-way fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
-
+	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
@@ -983,11 +1012,12 @@
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = ""
 	level = 2
-
+	pipe_type = PIPE_CAP
 	volume = 35
 
 	dir = SOUTH
 	initialize_directions = SOUTH
+	build_icon_state = "cap"
 
 	var/obj/machinery/atmospherics/node
 
@@ -1062,6 +1092,7 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
+	pipe_type = PIPE_SCRUBBERS_CAP
 
 /obj/machinery/atmospherics/pipe/cap/visible/supply
 	name = "supply pipe endcap"
@@ -1070,11 +1101,14 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+	pipe_type = PIPE_SUPPLY_CAP
 
 /obj/machinery/atmospherics/pipe/cap/visible/fuel
 	name = "fuel pipe endcap"
 	desc = "An endcap for fuel pipes."
 	color = PIPE_COLOR_ORANGE
+	connect_types = CONNECT_TYPE_FUEL
+	pipe_type = PIPE_FUEL_CAP
 
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
@@ -1088,6 +1122,7 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
+	pipe_type = PIPE_SCRUBBERS_CAP
 
 /obj/machinery/atmospherics/pipe/cap/hidden/supply
 	name = "supply pipe endcap"
@@ -1096,13 +1131,14 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+	pipe_type = PIPE_SUPPLY_CAP
 
 /obj/machinery/atmospherics/pipe/cap/hidden/fuel
 	name = "fuel pipe endcap"
 	desc = "An endcap for fuel pipes."
 	color = PIPE_COLOR_ORANGE
-
-
+	connect_types = CONNECT_TYPE_FUEL
+	pipe_type = PIPE_FUEL_CAP
 
 /obj/machinery/atmospherics/pipe/tank
 	icon = 'icons/atmos/tank.dmi'
@@ -1297,6 +1333,9 @@
 	initialize_directions = SOUTH
 
 	var/build_killswitch = 1
+	pipe_type = PIPE_UVENT
+	build_icon_state = "uvent"
+
 
 /obj/machinery/atmospherics/pipe/vent/New()
 	initialize_directions = dir
@@ -1367,9 +1406,11 @@
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal
 	name="Universal pipe adapter"
-	desc = "An adapter for regular, supply and scrubbers pipes."
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
+	desc = "An adapter for regular, supply, scrubbers, and fuel pipes."
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	icon_state = "map_universal"
+	pipe_type = PIPE_UNIVERSAL
+	build_icon_state = "universal"
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(var/safety = 0)
 	if(!check_icon_cache())

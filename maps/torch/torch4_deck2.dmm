@@ -2941,7 +2941,7 @@
 /area/hallway/primary/seconddeck)
 "go" = (
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/machinery/atmospherics/pipe/tank/hydrogen,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "gp" = (
@@ -3131,7 +3131,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod11/station)
 "gJ" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod11/station)
 "gK" = (
@@ -4622,10 +4622,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "jY" = (
-/obj/machinery/computer/general_air_control{
+/obj/machinery/computer/air_control{
 	frequency = 1441;
-	name = "Tank Monitor";
-	sensors = list("n2_sensor" = "Nitrogen", "o2_sensor" = "Oxygen", "co2_sensor" = "Carbon Dioxide", "tox_sensor" = "Toxins", "n2o_sensor" = "Nitrous Oxide", "waste_sensor" = "Gas Mix Tank")
+	name = "Waste Tank Monitor";
+	sensor_tag = "waste_sensor";
+	sensor_name = "Waste Tank"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -7235,15 +7236,17 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/computer/general_air_control/supermatter_core{
-	name = "Engine Cooling Control";
-	icon_state = "computer";
+/obj/machinery/computer/air_control/supermatter_core{
 	dir = 8;
 	frequency = 1438;
-	sensors = list("engine_sensor" = "Engine Core");
+	icon_state = "computer";
 	input_tag = "cooling_in";
+	name = "Engine Cooling Control";
 	output_tag = "cooling_out";
-	pressure_setting = 100
+	pressure_setting = 100;
+	sensor_name = "Engine Core";
+	sensor_tag = "engine_sensor";
+	sensors = list("engine_sensor" = "Engine Core")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 4;
@@ -9141,8 +9144,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "co2_sensor";
-	output = 127
+	id_tag = "co2_sensor"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/engineering/atmos)
@@ -9468,14 +9470,16 @@
 	dir = 2;
 	icon_state = "intact"
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
-	name = "Carbon Dioxide Supply Control";
-	icon_state = "computer";
+/obj/machinery/computer/air_control{
 	dir = 8;
 	frequency = 1441;
-	sensors = list("co2_sensor" = "Tank");
+	icon_state = "computer";
 	input_tag = "co2_in";
-	output_tag = "co2_out"
+	name = "Carbon Dioxide Supply Control";
+	output_tag = "co2_out";
+	sensor_name = "Carbon Dioxide Supply Tank";
+	sensor_tag = "co2_sensor";
+	sensors = list("co2_sensor" = "Tank")
 	},
 /obj/machinery/light/spot{
 	dir = 1
@@ -10318,7 +10322,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod10/station)
 "xZ" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -10484,8 +10488,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "n2_sensor";
-	output = 127
+	id_tag = "n2_sensor"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/engineering/atmos)
@@ -10654,7 +10657,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "yU" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 2;
 	volume = 3200
 	},
@@ -10903,8 +10906,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "n2o_sensor";
-	output = 127
+	id_tag = "n2o_sensor"
 	},
 /turf/simulated/floor/reinforced/n20,
 /area/engineering/atmos)
@@ -10941,7 +10943,18 @@
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "zE" = (
-/obj/machinery/atmospherics/trinary/mixer,
+/obj/machinery/atmospherics/omni/mixer{
+	active_power_usage = 7500;
+	tag_east = 0;
+	tag_east_con = null;
+	tag_north = 1;
+	tag_north_con = 0.5;
+	tag_south = 2;
+	tag_south_con = null;
+	tag_west = 1;
+	tag_west_con = 0.5;
+	use_power = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "zF" = (
@@ -11213,7 +11226,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "Ai" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -11306,12 +11319,14 @@
 	dir = 2;
 	icon_state = "intact"
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 8;
 	frequency = 1441;
 	input_tag = "h2_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "h2_out";
+	sensor_name = "Hydrogen Supply Tank";
+	sensor_tag = "tox_sensor";
 	sensors = list("tox_sensor" = "Tank")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -11789,8 +11804,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "o2_sensor";
-	output = 127
+	id_tag = "o2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/engineering/atmos)
@@ -12785,13 +12799,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "DZ" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 4;
 	frequency = 1441;
 	input_tag = "waste_in";
 	name = "Waste Tank Control";
 	output_tag = "waste_out";
-	sensors = list("waste_sensor" = "Tank")
+	sensor_tag = "waste_sensor";
+	sensor_name = "Waste Tank"
 	},
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -13362,8 +13377,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "waste_sensor";
-	output = 127
+	id_tag = "waste_sensor"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/wastetank)
@@ -13572,16 +13586,20 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "FD" = (
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/ship/engines{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/fuelbay)
 "FE" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control/fuel_injection{
+	dir = 1;
 	frequency = 1441;
 	input_tag = "fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "fuel_out";
-	sensors = list("fuel_sensor" = "Tank")
+	sensor_tag = "fuel_sensor";
+	sensor_name = "Fuel Tank"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/fuelbay)
@@ -14107,12 +14125,14 @@
 	dir = 2;
 	icon_state = "intact"
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 8;
 	frequency = 1441;
 	input_tag = "n2o_in";
 	name = "Nitrous Oxide Supply Control";
 	output_tag = "n2o_out";
+	sensor_name = "Nitrous Oxide Supply Tank";
+	sensor_tag = "n2o_sensor";
 	sensors = list("n2o_sensor" = "Tank")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -16446,8 +16466,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "tox_sensor";
-	output = 127
+	id_tag = "tox_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/engineering/atmos)
@@ -16624,12 +16643,14 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/green,
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "o2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "o2_out";
+	sensor_name = "Oxygen Supply Tank";
+	sensor_tag = "o2_sensor";
 	sensors = list("o2_sensor" = "Tank")
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -17002,12 +17023,14 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 26
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 4;
 	frequency = 1441;
 	input_tag = "n2_in";
 	name = "Nitrogen Supply Control";
 	output_tag = "n2_out";
+	sensor_name = "Nitrogen Supply Tank";
+	sensor_tag = "n2_sensor";
 	sensors = list("n2_sensor" = "Tank")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -17584,8 +17607,7 @@
 "To" = (
 /obj/machinery/air_sensor{
 	frequency = 1438;
-	id_tag = "engine_sensor";
-	output = 127
+	id_tag = "engine_sensor"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4

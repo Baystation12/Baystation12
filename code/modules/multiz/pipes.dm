@@ -233,6 +233,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/fuel
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
+	connect_types = CONNECT_TYPE_FUEL
 
 obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	name = "downwards fuel pipe"
@@ -240,3 +241,4 @@ obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
+	connect_types = CONNECT_TYPE_FUEL

@@ -891,9 +891,11 @@
 	icon_state = "camera";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control{
+/obj/machinery/computer/air_control{
 	dir = 8;
 	name = "Atmospheric Sensors";
+	sensor_name = "External Air Sensor";
+	sensor_tag = "calypso_out";
 	sensors = list("calypso_out")
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -1286,6 +1288,7 @@
 /obj/item/device/spaceflare,
 /obj/item/device/spaceflare,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/airlock)
 "cT" = (
@@ -6308,7 +6311,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "ok" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "ol" = (
@@ -12895,7 +12898,6 @@
 /obj/machinery/air_sensor{
 	frequency = 1441;
 	id_tag = "phoron_sensor";
-	output = 63
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
@@ -16990,11 +16992,13 @@
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "Wz" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	input_tag = "phoron_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "phoron_out";
+	sensor_name = "Test Chamber";
+	sensor_tag = "phoron_sensor";
 	sensors = list("phoron_sensor" = "Test Chamber")
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -17779,11 +17783,13 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 8;
 	input_tag = "toxins_in";
 	name = "Toxins Gas Monitor";
 	output_tag = "toxins_out";
+	sensor_name = "Toxins Test Chamber";
+	sensor_tag = "toxins_sensor";
 	sensors = list("toxins_sensor" = "Toxins Test Chamber")
 	},
 /turf/simulated/floor/tiled/white,
