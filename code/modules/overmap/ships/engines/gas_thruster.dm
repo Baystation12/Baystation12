@@ -51,6 +51,7 @@
 	var/datum/ship_engine/gas_thruster/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/moles_per_burn = 5
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()

@@ -6280,7 +6280,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoy" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -6308,7 +6308,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoB" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -12886,7 +12886,7 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "aDK" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -21022,7 +21022,7 @@
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aXe" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -21229,7 +21229,7 @@
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aXK" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	icon_state = "air_map";
 	dir = 1;
 	start_pressure = 740.5
@@ -21238,7 +21238,7 @@
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aXL" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	icon_state = "air_map";
 	dir = 1;
 	start_pressure = 740.5

@@ -667,12 +667,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
 "bO" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_tag = "d3so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d3so2_out";
+	sensor_name = "Third Deck Starboard Nacelle Oxygen Tank";
+	sensor_tag = "d3so2_sensor";
 	sensors = list("d3so2_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -1882,7 +1884,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "er" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos/aux)
@@ -4338,9 +4340,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
-"jo" = (
-/turf/simulated/floor/bluegrid,
-/area/tcommsat/chamber)
 "jq" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5786,6 +5785,9 @@
 	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
+"mD" = (
+/turf/simulated/floor/bluegrid,
+/area/tcommsat/chamber)
 "mE" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -8525,8 +8527,7 @@
 "si" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3sh_sensor";
-	output = 127
+	id_tag = "d3sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d3starboard)
@@ -10373,8 +10374,7 @@
 "wm" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3ph_sensor";
-	output = 127
+	id_tag = "d3ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d3port)
@@ -12453,8 +12453,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber3s";
-	output = 2
+	id_tag = "cChamber3s"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3starboard)
@@ -16337,12 +16336,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "KA" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d3po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d3po2_out";
+	sensor_name = "Third Deck Port Nacelle Oxygen Tank";
+	sensor_tag = "d3po2_sensor";
 	sensors = list("d3po2_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -16823,13 +16824,15 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "LE" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_info = null;
 	input_tag = "d3sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d3sh_out";
+	sensor_name = "Third Deck Starboard Nacelle Hydrogen Tank";
+	sensor_tag = "d3sh_sensor";
 	sensors = list("d3sh_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
@@ -17240,8 +17243,7 @@
 "MR" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3po2_sensor";
-	output = 127
+	id_tag = "d3po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
@@ -17406,14 +17408,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
-"Nt" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/tcommsat/chamber)
 "Nu" = (
 /obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
@@ -17790,14 +17784,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/diplomat)
-"OM" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/tcommsat/chamber)
 "OO" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -18528,6 +18514,14 @@
 /obj/effect/shuttle_landmark/torch/deck2/guppy,
 /turf/space,
 /area/space)
+"Re" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tcommsat/chamber)
 "Rf" = (
 /turf/simulated/floor/wood,
 /area/crew_quarters/gym)
@@ -19029,8 +19023,7 @@
 "SJ" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3so2_sensor";
-	output = 127
+	id_tag = "d3so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
@@ -19587,6 +19580,14 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
+"Uy" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tcommsat/chamber)
 "UA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
@@ -20259,12 +20260,14 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d3ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d3ph_out";
+	sensor_name = "Third Deck Port Nacelle Hydrogen Tank";
+	sensor_tag = "d3ph_sensor";
 	sensors = list("d3ph_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
@@ -20275,8 +20278,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber3p";
-	output = 2
+	id_tag = "cChamber3p"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
@@ -30447,7 +30449,7 @@ Wi
 eS
 gb
 gY
-jo
+mD
 Xi
 aM
 aM
@@ -30650,7 +30652,7 @@ eT
 gc
 gZ
 hS
-Nt
+Re
 jx
 ku
 ll
@@ -30852,7 +30854,7 @@ eU
 gd
 ha
 hT
-OM
+Uy
 jy
 kv
 ll
@@ -31054,7 +31056,7 @@ eV
 gd
 hb
 hU
-OM
+Uy
 jz
 kw
 ll

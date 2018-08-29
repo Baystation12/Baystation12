@@ -28,6 +28,9 @@
 	var/radio_filter_in
 
 	var/welded = 0
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
+	pipe_type = PIPE_SCRUBBER
+	build_icon_state = "scrubber"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on
 	use_power = POWER_USE_IDLE
@@ -278,7 +281,7 @@
 				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 				"<span class='notice'>You have unfastened \the [src].</span>", \
 				"You hear a ratchet.")
-			new /obj/item/pipe(loc, make_from=src)
+			new /obj/item/pipe(loc, src)
 			qdel(src)
 		return 1
 

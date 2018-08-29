@@ -10,6 +10,10 @@
 	var/obj/machinery/atmospherics/unary/heat_exchanger/partner = null
 	var/update_cycle
 
+	connect_types = CONNECT_TYPE_REGULAR
+	pipe_type = PIPE_HEAT_EXCHANGE
+	build_icon_state = "heunary"
+
 	update_icon()
 		if(node)
 			icon_state = "intact"
@@ -86,5 +90,5 @@
 				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 				"<span class='notice'>You have unfastened \the [src].</span>", \
 				"You hear a ratchet.")
-			new /obj/item/pipe(loc, make_from=src)
+			new /obj/item/pipe(loc, src)
 			qdel(src)

@@ -9,6 +9,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	var/initialize_directions_he
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
+	build_icon_state = "he"
 
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -109,7 +110,9 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon_state = "intact"
 	pipe_icon = "hejunction"
 	level = 2
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE|CONNECT_TYPE_FUEL
+	build_icon_state = "junction"
+	pipe_type = PIPE_JUNCTION
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/New()

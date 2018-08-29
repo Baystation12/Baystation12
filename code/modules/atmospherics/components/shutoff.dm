@@ -6,8 +6,9 @@
 	desc = "An automatic valve with control circuitry and pipe integrity sensor, capable of automatically isolating damaged segments of the pipe network."
 	var/close_on_leaks = TRUE	// If false it will be always open
 	level = 1
-	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR
-
+	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
+	pipe_type = PIPE_SVALVE
+	build_icon_state = "svalve"
 
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[open]"

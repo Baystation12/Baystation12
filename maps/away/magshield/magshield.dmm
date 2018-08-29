@@ -251,7 +251,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "aG" = (
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "aH" = (
@@ -2117,7 +2117,7 @@
 /turf/simulated/wall,
 /area/magshield/east)
 "ff" = (
-/obj/machinery/atmospherics/pipe/tank,
+/obj/machinery/atmospherics/unary/tank,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
@@ -2226,7 +2226,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "fx" = (
-/obj/machinery/atmospherics/pipe/tank,
+/obj/machinery/atmospherics/unary/tank,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},

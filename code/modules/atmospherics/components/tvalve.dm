@@ -18,9 +18,17 @@
 	var/datum/pipe_network/network_node2
 	var/datum/pipe_network/network_node3
 
-/obj/machinery/atmospherics/tvalve/bypass
-	icon_state = "map_tvalve1"
-	state = 1
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	
+	pipe_type = PIPE_MTVALVE
+	pipe_class = PIPE_CLASS_TRINARY
+
+	build_icon = 'icons/atmos/tvalve.dmi'
+	build_icon_state = "map_tvalve0"
+
+/obj/machinery/atmospherics/tvalve/New()
+	initialize_directions()
+	..()
 
 /obj/machinery/atmospherics/tvalve/on_update_icon(animation)
 	if(animation)
@@ -46,20 +54,21 @@
 /obj/machinery/atmospherics/tvalve/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/tvalve/New()
-	initialize_directions()
-	..()
-
 /obj/machinery/atmospherics/tvalve/proc/initialize_directions()
+	log_and_message_admins("Tvalve init_directions started.")
 	switch(dir)
 		if(NORTH)
 			initialize_directions = SOUTH|NORTH|EAST
+			log_and_message_admins("North. Value: [initialize_directions]")
 		if(SOUTH)
 			initialize_directions = NORTH|SOUTH|WEST
+			log_and_message_admins("South. Value: [initialize_directions]")
 		if(EAST)
 			initialize_directions = WEST|EAST|SOUTH
+			log_and_message_admins("East. Value: [initialize_directions]")
 		if(WEST)
 			initialize_directions = EAST|WEST|NORTH
+			log_and_message_admins("West. Value: [initialize_directions]")
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -180,12 +189,13 @@
 /obj/machinery/atmospherics/tvalve/Process()
 	..()
 	. = PROCESS_KILL
-	//machines.Remove(src)
-
 	return
 
 /obj/machinery/atmospherics/tvalve/atmos_init()
 	..()
+	initialize_directions()
+	log_and_message_admins("Initialize_directions: [initialize_directions]")
+
 	var/node1_dir
 	var/node2_dir
 	var/node3_dir
@@ -194,6 +204,9 @@
 	node2_dir = turn(dir, -90)
 	node3_dir = dir
 
+	init_nodes(node1_dir, node2_dir, node3_dir)
+
+/obj/machinery/atmospherics/tvalve/proc/init_nodes(var/node1_dir, var/node2_dir, var/node3_dir)
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
@@ -214,7 +227,7 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/build_network()
-	if(!network_node1 && node1)				
+	if(!network_node1 && node1)
 		network_node1 = new /datum/pipe_network()
 		network_node1.normal_members += src
 		network_node1.build_network(node1, src)
@@ -274,27 +287,94 @@
 
 	return null
 
+/obj/machinery/atmospherics/tvalve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(!isWrench(W))
+		return ..()
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		to_chat(user, "<span class='warnng'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>")
+		add_fingerprint(user)
+		return 1
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+	if (do_after(user, 40, src))
+		user.visible_message( \
+			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+			"<span class='notice'>You have unfastened \the [src].</span>", \
+			"You hear a ratchet.")
+		new /obj/item/pipe(loc, src)
+		qdel(src)
+
+//Mirrored editions		
+/obj/machinery/atmospherics/tvalve/mirrored
+	icon_state = "map_tvalvem0"
+	
+	pipe_type =  PIPE_MTVALVEM
+	build_icon_state = "map_tvalvem0"
+
+/obj/machinery/atmospherics/tvalve/mirrored/atmos_init()
+	..()
+	initialize_directions()
+
+	var/node1_dir
+	var/node2_dir
+	var/node3_dir
+
+	node1_dir = turn(dir, 180)
+	node2_dir = turn(dir, 90)
+	node3_dir = dir
+
+	init_nodes(node1_dir, node2_dir, node3_dir)
+
+/obj/machinery/atmospherics/tvalve/mirrored/initialize_directions()
+	switch(dir)
+		if(NORTH)
+			initialize_directions = SOUTH|NORTH|WEST
+		if(SOUTH)
+			initialize_directions = NORTH|SOUTH|EAST
+		if(EAST)
+			initialize_directions = WEST|EAST|NORTH
+		if(WEST)
+			initialize_directions = EAST|WEST|SOUTH
+
+/obj/machinery/atmospherics/tvalve/mirrored/on_update_icon(animation)
+	if(animation)
+		flick("tvalvem[src.state][!src.state]",src)
+	else
+		icon_state = "tvalvem[state]"
+
 /obj/machinery/atmospherics/tvalve/digital		// can be controlled by AI
 	name = "digital switching valve"
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_tvalve.dmi'
+	icon_state = "map_tvalve0"
 
-	var/frequency = 0
+	var/frequency = 1441
 	var/id = null
 	var/datum/radio_frequency/radio_connection
+	
+	pipe_type =  PIPE_DTVALVE
+	build_icon = 'icons/atmos/digital_tvalve.dmi'
+	build_icon_state = "map_tvalve0"
 
-/obj/machinery/atmospherics/tvalve/digital/bypass
-	icon_state = "map_tvalve1"
-	state = 1
+/obj/machinery/atmospherics/tvalve/digital/New()
+	..()
+	initialize_directions()
+
+/obj/machinery/atmospherics/tvalve/digital/Initialize()
+	. = ..()
+	if(frequency)
+		set_frequency(frequency)
 
 /obj/machinery/atmospherics/tvalve/digital/on_update_icon()
 	..()
 	if(!powered())
 		icon_state = "tvalvenopower"
-
+		
 /obj/machinery/atmospherics/tvalve/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
-
+	
 /obj/machinery/atmospherics/tvalve/digital/attack_hand(mob/user as mob)
 	if(!powered())
 		return
@@ -303,20 +383,11 @@
 		return
 	..()
 
-//Radio remote control
-
 /obj/machinery/atmospherics/tvalve/digital/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
-
-
-
-/obj/machinery/atmospherics/tvalve/digital/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
 
 /obj/machinery/atmospherics/tvalve/digital/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || signal.data["tag"] != id)
@@ -337,95 +408,40 @@
 			else
 				go_to_side()
 
-/obj/machinery/atmospherics/tvalve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!isWrench(W))
-		return ..()
-	if (istype(src, /obj/machinery/atmospherics/tvalve/digital))
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it's too complicated.</span>")
-		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warnng'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
-
-/obj/machinery/atmospherics/tvalve/mirrored
-	icon_state = "map_tvalvem0"
-
-/obj/machinery/atmospherics/tvalve/mirrored/bypass
-	icon_state = "map_tvalvem1"
-	state = 1
-
-/obj/machinery/atmospherics/tvalve/mirrored/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|WEST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|EAST
-		if(EAST)
-			initialize_directions = WEST|EAST|NORTH
-		if(WEST)
-			initialize_directions = EAST|WEST|SOUTH
-
-/obj/machinery/atmospherics/tvalve/mirrored/atmos_init()
-	..()
-	var/node1_dir
-	var/node2_dir
-	var/node3_dir
-
-	node1_dir = turn(dir, 180)
-	node2_dir = turn(dir, 90)
-	node3_dir = dir
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			node2 = target
-			break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			node3 = target
-			break
-
-	update_icon()
-	update_underlays()
-
-/obj/machinery/atmospherics/tvalve/mirrored/on_update_icon(animation)
-	if(animation)
-		flick("tvalvem[src.state][!src.state]",src)
-	else
-		icon_state = "tvalvem[state]"
-
 /obj/machinery/atmospherics/tvalve/mirrored/digital		// can be controlled by AI
 	name = "digital switching valve"
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_tvalve.dmi'
+	icon_state = "map_tvalvem0"
 
-	var/frequency = 0
+	var/frequency = 1441
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/bypass
-	icon_state = "map_tvalvem1"
-	state = 1
+	pipe_type =  PIPE_DTVALVEM
+
+	build_icon = 'icons/atmos/digital_tvalve.dmi'
+	build_icon_state = "map_tvalvem0"
+
+/obj/machinery/atmospherics/tvalve/mirrored/digital/New()
+	..()
+	initialize_directions()
+
+/obj/machinery/atmospherics/tvalve/mirrored/digital/Initialize()
+	. = ..()
+	if(frequency)
+		set_frequency(frequency)
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/on_update_icon()
 	..()
 	if(!powered())
 		icon_state = "tvalvemnopower"
+
+/obj/machinery/atmospherics/tvalve/mirrored/digital/proc/set_frequency(new_frequency)
+	radio_controller.remove_object(src, frequency)
+	frequency = new_frequency
+	if(frequency)
+		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -437,19 +453,6 @@
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	..()
-
-//Radio remote control -eh?
-
-/obj/machinery/atmospherics/tvalve/mirrored/digital/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
-
-/obj/machinery/atmospherics/tvalve/mirrored/digital/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || signal.data["tag"] != id)
@@ -469,3 +472,21 @@
 				go_straight()
 			else
 				go_to_side()
+
+
+//Bypass editions
+/obj/machinery/atmospherics/tvalve/digital/bypass
+	icon_state = "map_tvalve1"
+	state = 1
+
+/obj/machinery/atmospherics/tvalve/bypass
+	icon_state = "map_tvalve1"
+	state = 1
+
+/obj/machinery/atmospherics/tvalve/mirrored/bypass
+	icon_state = "map_tvalvem1"
+	state = 1
+
+/obj/machinery/atmospherics/tvalve/mirrored/digital/bypass
+	icon_state = "map_tvalvem1"
+	state = 1

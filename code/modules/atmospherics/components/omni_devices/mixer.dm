@@ -22,6 +22,8 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 
 	var/list/mixing_inputs = list()
+	pipe_type = PIPE_OMNI_MIXER
+	build_icon_state = "omni_mixer"
 
 /obj/machinery/atmospherics/omni/mixer/New()
 	..()

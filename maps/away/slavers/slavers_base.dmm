@@ -1204,11 +1204,11 @@
 /turf/space,
 /area/space)
 "cX" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "cY" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -2317,7 +2317,7 @@
 /turf/simulated/wall,
 /area/slavers_base/maint)
 "fK" = (
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "fL" = (
@@ -2457,7 +2457,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "ge" = (
-/obj/machinery/atmospherics/trinary/filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 8
 	},
 /turf/simulated/floor/airless/ceiling,
