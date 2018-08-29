@@ -149,7 +149,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	total_positions = 10
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
-	alt_titles = list("Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
+	alt_titles = list("Doctor","Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Spawn"
@@ -166,8 +166,8 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 /datum/job/ONIGUARD
 	title = "ONI Security Guard"
-	total_positions = 7
-	spawn_positions = 7
+	total_positions = 9
+	spawn_positions = 9
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
 	access = list(311)
