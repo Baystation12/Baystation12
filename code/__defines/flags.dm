@@ -38,6 +38,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ITEM_FLAG_PREMODIFIED            0x0400 // Gloves that are clipped by default
 #define ITEM_FLAG_IS_BELT                0x0800 // Items that can be worn on the belt slot, even with no undersuit equipped
 #define ITEM_FLAG_SILENT                 0x1000 // sneaky shoes
+#define ITEM_FLAG_NOCUFFS                0x2000 // Gloves that have this flag prevent cuffs being applied
 
 // Flags for pass_flags.
 #define PASS_FLAG_TABLE  0x1
