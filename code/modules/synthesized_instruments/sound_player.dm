@@ -4,8 +4,6 @@
 	// It's the one used to modify shit
 	var/range = 15
 	var/volume = 100
-	var/volume_falloff_exponent = 0.9
-	var/forced_sound_in = 4
 	var/falloff = 2
 	var/apply_echo = 0
 	var/virtual_environment_selected = 0
@@ -31,6 +29,7 @@
 	src.actual_instrument = null
 	src.instrument = null
 	QDEL_NULL(song)
+	QDEL_NULL(event_manager)
 	. = ..()
 
 

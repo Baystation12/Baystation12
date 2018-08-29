@@ -44,3 +44,20 @@
 	else
 		var/area/A = get_area(listener)
 		return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
+
+
+datum/sound_token/instrument/PrivAddListener(var/atom/listener)
+	var/mob/m = listener
+	if(istype(m))
+		if(m.get_preference_value(/datum/client_preference/play_instruments) != GLOB.PREF_YES)
+			return
+	return ..()
+
+
+/datum/sound_token/instrument/PrivUpdateListener(var/listener)
+	var/mob/m = listener
+	if(istype(m))
+		if(m.get_preference_value(/datum/client_preference/play_instruments) != GLOB.PREF_YES)
+			PrivRemoveListener(listener)
+			return
+	return ..()
