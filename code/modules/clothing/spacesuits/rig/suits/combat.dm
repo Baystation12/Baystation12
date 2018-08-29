@@ -37,6 +37,7 @@
 		)
 
 /obj/item/clothing/gloves/rig/combat
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi'
@@ -95,6 +96,7 @@
 		)
 
 /obj/item/clothing/gloves/rig/military
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi'
