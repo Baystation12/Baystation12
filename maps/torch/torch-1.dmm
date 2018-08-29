@@ -918,9 +918,6 @@
 	pixel_x = 21
 	},
 /obj/machinery/camera/network/exploration_shuttle,
-/obj/machinery/newscaster{
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cq" = (
@@ -17284,9 +17281,6 @@
 /obj/structure/cable/yellow{
 	d2 = 4;
 	icon_state = "0-4"
-	},
-/obj/machinery/newscaster{
-	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)

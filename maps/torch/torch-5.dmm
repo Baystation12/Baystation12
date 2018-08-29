@@ -2993,9 +2993,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "hk" = (
-/obj/machinery/newscaster{
-	pixel_y = 32
-	},
 /obj/structure/bed/chair/shuttle/blue{
 	icon_state = "shuttle_chair_preview";
 	dir = 4

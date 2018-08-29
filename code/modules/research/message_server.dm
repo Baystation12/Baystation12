@@ -3,20 +3,6 @@
 
 var/global/list/obj/machinery/message_server/message_servers = list()
 
-/datum/data_pda_msg
-	var/recipient = "Unspecified" //name of the person
-	var/sender = "Unspecified" //name of the sender
-	var/message = "Blank" //transferred message
-
-/datum/data_pda_msg/New(var/param_rec = "",var/param_sender = "",var/param_message = "")
-
-	if(param_rec)
-		recipient = param_rec
-	if(param_sender)
-		sender = param_sender
-	if(param_message)
-		message = param_message
-
 /datum/data_rc_msg
 	var/rec_dpt = "Unspecified" //name of the person
 	var/send_dpt = "Unspecified" //name of the sender
@@ -57,7 +43,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	idle_power_usage = 10
 	active_power_usage = 100
 
-	var/list/datum/data_pda_msg/pda_msgs = list()
 	var/list/datum/data_rc_msg/rc_msgs = list()
 	var/active = 1
 	var/power_failure = 0 // Reboot timer after power outage
@@ -98,11 +83,16 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		authmsg += "[id_auth]<br>"
 	if (stamp)
 		authmsg += "[stamp]<br>"
+	. = FALSE
+	var/list/good_z = GetConnectedZlevels(z)
 	for (var/obj/machinery/requests_console/Console in allConsoles)
+		if(!(Console.z in good_z))
+			continue
 		if (ckey(Console.department) == ckey(recipient))
 			if(Console.inoperable())
 				Console.message_log += "<B>Message lost due to console failure.</B><BR>Please contact [station_name()] system administrator or AI for technical assistance.<BR>"
 				continue
+			. = TRUE
 			if(Console.newmessagepriority < priority)
 				Console.newmessagepriority = priority
 				Console.icon_state = "req_comp[priority]"
@@ -115,7 +105,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					Console.audible_message("\icon[Console]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
-		Console.set_light(0.3, 0.1, 2)
+			Console.set_light(0.3, 0.1, 2)
 
 
 /obj/machinery/message_server/attack_hand(user as mob)
@@ -294,8 +284,6 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/rc_msg_amt = 0
 
 	for(var/obj/machinery/message_server/MS in SSmachines.machinery)
-		if(MS.pda_msgs.len > pda_msg_amt)
-			pda_msg_amt = MS.pda_msgs.len
 		if(MS.rc_msgs.len > rc_msg_amt)
 			rc_msg_amt = MS.rc_msgs.len
 

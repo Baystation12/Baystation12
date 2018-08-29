@@ -161,9 +161,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		screen = RCS_SENTFAIL
 		var/obj/machinery/message_server/MS = get_message_server(get_z(src))
 		if(MS)
-			MS.send_rc_message(ckey(href_list["department"]),department,log_msg,msgStamped,msgVerified,priority)
-			screen = RCS_SENTPASS
-			message_log += "<B>Message sent to [recipient]</B><BR>[message]"
+			if(MS.send_rc_message(ckey(href_list["department"]),department,log_msg,msgStamped,msgVerified,priority))
+				screen = RCS_SENTPASS
+				message_log += "<B>Message sent to [recipient]</B><BR>[message]"
 		else
 			audible_message(text("\icon[src] *The Requests Console beeps: 'NOTICE: No server detected!'"),,4)
 
