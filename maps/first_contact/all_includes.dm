@@ -12,8 +12,6 @@
 	#include "../overmap_ships/nh_overmap.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 
-	#include "../first_contact/maps/UNSC_Thorin/spawns_jobs.dm"
-
 	#include "maps/ccv_star_spawns.dm"
 	#include "maps/CCV_Star.dmm"
 

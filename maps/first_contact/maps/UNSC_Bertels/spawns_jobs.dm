@@ -1,8 +1,117 @@
+GLOBAL_LIST_EMPTY(corvetteodst_crewmedical_spawns)
+
+/datum/spawnpoint/corvetteodst_crewmedical
+	display_name = "UNSC Bertels Medical Staff Spawn"
+	restrict_job = list("UNSC Bertels Hospital Corpsman")
+
+/datum/spawnpoint/corvetteodst_crewmedical/New()
+	..()
+	turfs = GLOB.corvetteodst_crewmedical_spawns
+
+/obj/effect/landmark/start/corvetteodst_crewmedical
+	name = "UNSC Bertels Medical Staff Spawn"
+
+/obj/effect/landmark/start/corvetteodst_crewmedical/New()
+	..()
+	GLOB.corvetteodst_crewmedical_spawns += loc
+
+GLOBAL_LIST_EMPTY(corvetteodst_crew_spawns)
+
+/datum/spawnpoint/corvetteodst_crew
+	display_name = "UNSC Bertels Ship Crew Spawn"
+	restrict_job = list("UNSC Bertels Ship Crew")
+
+/datum/spawnpoint/corvetteodst_crew/New()
+	..()
+	turfs = GLOB.corvetteodst_crew_spawns
+
+/obj/effect/landmark/start/corvetteodst_crew
+	name = "UNSC Bertels Ship Crew Spawn"
+
+/obj/effect/landmark/start/corvetteodst_crew/New()
+	..()
+	GLOB.corvetteodst_crew_spawns += loc
+
+
+GLOBAL_LIST_EMPTY(corvetteodst_captain_spawns)
+
+/datum/spawnpoint/corvetteodst_captain
+	display_name = "UNSC Bertels CO Spawn"
+	restrict_job = list("UNSC Bertels Commanding Officer")
+
+/datum/spawnpoint/corvetteodst_captain/New()
+	..()
+	turfs = GLOB.corvetteodst_captain_spawns
+
+/obj/effect/landmark/start/corvetteodst_captain
+	name = "UNSC Bertels CO Spawn"
+
+/obj/effect/landmark/start/corvetteodst_captain/New()
+	..()
+	GLOB.corvetteodst_captain_spawns += loc
+
+GLOBAL_LIST_EMPTY(corvetteodst_xo_spawns)
+
+/datum/spawnpoint/corvetteodst_xo
+	display_name = "UNSC Bertels XO Spawn"
+	restrict_job = list("UNSC Bertels Executive Officer")
+
+/datum/spawnpoint/corvetteodst_xo/New()
+	..()
+	turfs = GLOB.corvetteodst_xo_spawns
+
+/obj/effect/landmark/start/corvetteodst_xo
+	name = "UNSC Bertels XO Spawn"
+
+/obj/effect/landmark/start/corvetteodst_xo/New()
+	..()
+	GLOB.corvetteodst_xo_spawns += loc
+
+
+//UNSC BERTELS Marine Spawnpoints
+
+GLOBAL_LIST_EMPTY(corvetteodst_marine_spawns)
+
+/datum/spawnpoint/corvetteodst_marine
+	display_name = "UNSC Bertels Marine Spawn"
+	restrict_job = list("UNSC Marine")
+
+/datum/spawnpoint/corvetteodst_marine/New()
+	..()
+	turfs = GLOB.corvetteodst_marine_spawns
+
+/obj/effect/landmark/start/corvetteodst_marine
+	name = "UNSC Bertels Marine Spawn"
+
+/obj/effect/landmark/start/corvetteodst_marine/New()
+	..()
+	GLOB.corvetteodst_marine_spawns += loc
+
+GLOBAL_LIST_EMPTY(corvetteodst_marineplatoon_spawns)
+
+/datum/spawnpoint/corvetteodst_marineplatoon
+	display_name = "UNSC Bertels Marine Platoon Leader Spawn"
+	restrict_job = list("UNSC Marine Platoon Leader")
+
+/datum/spawnpoint/corvetteodst_marineplatoon/New()
+	..()
+	turfs = GLOB.corvetteodst_marineplatoon_spawns
+
+/obj/effect/landmark/start/corvetteodst_marineplatoon
+	name = "UNSC Bertels Marine Platoon Leader Spawn"
+
+/obj/effect/landmark/start/corvetteodst_marineplatoon/New()
+	..()
+	GLOB.corvetteodst_marineplatoon_spawns += loc
+
+
+
+//UNSC BERTELS ODST Spawnpoints
 
 GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
 
 /datum/spawnpoint/corvetteodst_odst
-	display_name = "ODST Spawn"
+	display_name = "UNSC Bertels ODST Spawn"
 	restrict_job = list("Orbital Drop Shock Trooper")
 
 /datum/spawnpoint/corvetteodst_odst/New()
@@ -10,7 +119,7 @@ GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
 	turfs = GLOB.corvetteodst_odst_spawns
 
 /obj/effect/landmark/start/corvetteodst_odst
-	name = "ODST Spawn"
+	name = "UNSC Bertels ODST Spawn"
 
 /obj/effect/landmark/start/corvetteodst_odst/New()
 	..()
@@ -19,25 +128,11 @@ GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
 
 GLOBAL_LIST_EMPTY(corvetteodst_ftl_spawns)
 
-/datum/spawnpoint/corvetteodst_ftl
-	display_name = "Fireteam Leader Spawn"
-	restrict_job = list("Fireteam Leader")
-
-/datum/spawnpoint/corvetteodst_ftl/New()
-	..()
-	turfs = GLOB.corvetteodst_ftl_spawns
-
-/obj/effect/landmark/start/corvetteodst_ftl
-	name = "Fireteam Leader Spawn"
-
-/obj/effect/landmark/start/corvetteodst_ftl/New()
-	..()
-	GLOB.corvetteodst_ftl_spawns += loc
 
 GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 
 /datum/spawnpoint/corvetteodst_officer
-	display_name = "Corvette officer ODST Spawn"
+	display_name = "UNSC Bertels ODST Officer Spawn"
 	restrict_job = list("Orbital Drop Shock Trooper Officer")
 
 /datum/spawnpoint/corvetteodst_officer/New()
@@ -45,46 +140,8 @@ GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 	turfs = GLOB.corvetteodst_officer_spawns
 
 /obj/effect/landmark/start/corvetteodst_officer
-	name = "Corvette officer ODST Spawn"
+	name = "UNSC Bertels ODST Officer Spawn"
 
 /obj/effect/landmark/start/corvetteodst_officer/New()
 	..()
 	GLOB.corvetteodst_officer_spawns += loc
-
-/datum/job/ODST
-	title = "Orbital Drop Shock Trooper"
-	total_positions = 15
-	spawn_positions = 15
-	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
-	alt_titles = list("Private First Class"= /decl/hierarchy/outfit/job/ODSTCQC,
-	"Lance Corporal"= /decl/hierarchy/outfit/job/ODSTengineer,
-	"Corporal"= /decl/hierarchy/outfit/job/facil_ODST,
-	"Petty Officer Third Class"= /decl/hierarchy/outfit/job/ODSTMedic,
-	"Sergeant"= /decl/hierarchy/outfit/job/ODSTSharpshooter,
-	"Staff Sergeant"= /decl/hierarchy/outfit/job/ODSTstaffsergeant,
-	"Gunnery Sergeant"= /decl/hierarchy/outfit/job/ODSTgunnerysergeant,
-	"Master Sergeant" = /decl/hierarchy/outfit/job/ODSTFireteamLead)
-
-	selection_color = "#008000"
-	access = list(142,144,110,309)
-	spawnpoint_override = "ODST Rifleman Spawn"
-	is_whitelisted = 1
-
-/datum/job/ODSTO
-	title = "Orbital Drop Shock Trooper Officer"
-	total_positions = 2
-	spawn_positions = 2
-	outfit_type = /decl/hierarchy/outfit/job/ODSTsecondlieutenant
-	alt_titles = list("Second Lieutenant" = /decl/hierarchy/outfit/job/ODSTsecondlieutenant,
-	"First Lieutenant" = /decl/hierarchy/outfit/job/ODSTfirstlieutenant,
-	"Captain" = /decl/hierarchy/outfit/job/ODSTcaptain,
-	"Major" = /decl/hierarchy/outfit/job/ODSTmajor,
-	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/ODSTltcolonel,
-	"Colonel" = /decl/hierarchy/outfit/job/ODSTcolonel)
-	selection_color = "#008000"
-	access = list(142,144,110,300,306,309)
-	spawnpoint_override = "ODST Squad Leader Spawn"
-	is_whitelisted = 1
-
-
-

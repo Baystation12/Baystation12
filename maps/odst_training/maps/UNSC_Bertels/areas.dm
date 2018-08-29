@@ -8,6 +8,7 @@
 
 /area/corvette/unscbertels/exterior
 	name = "UNSC Bertels Exterior"
+	dynamic_lighting = 0
 	luminosity = 1
 	requires_power = 0
 
@@ -53,6 +54,7 @@
 //deck 2 areas
 /area/corvette/unscbertels/deck2/MAC
 	name = "UNSC Bertels Deck 2 MAC Gun"
+	requires_power = 1
 
 /area/corvette/unscbertels/deck2/Briefingroom
 	name = "UNSC Bertels Deck 2 Briefing Room"

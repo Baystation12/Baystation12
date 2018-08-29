@@ -1,4 +1,3 @@
-
 /decl/hierarchy/outfit/job/UNSC_ship/CO
 	name = "Commanding Officer"
 

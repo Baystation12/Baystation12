@@ -75,8 +75,8 @@ GLOBAL_LIST_EMPTY(occupier_spawns)
 
 /datum/job/traininginsurrectionist
 	title = "Insurrectionist"
-	total_positions = 20
-	spawn_positions = 20
+	total_positions = 25
+	spawn_positions = 25
 	outfit_type = /decl/hierarchy/outfit/job/traininginnie
 	selection_color = "#008000"
 	access = list(310,311)
