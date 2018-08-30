@@ -321,6 +321,18 @@
 /obj/item/weapon/reagent_containers/food/snacks/egg/yellow
 	icon_state = "egg-yellow"
 
+/obj/item/weapon/reagent_containers/food/snacks/egg/lizard
+	name = "unathi egg"
+	desc = "Large, slightly elongated egg with a thick shell."
+	icon_state = "lizard_egg"
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/weapon/reagent_containers/food/snacks/egg/lizard/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 5)
+	if(prob(30))	//extra nutriment
+		reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
+
 /obj/item/weapon/reagent_containers/food/snacks/friedegg
 	name = "fried egg"
 	desc = "A fried egg, with a touch of salt and pepper."
