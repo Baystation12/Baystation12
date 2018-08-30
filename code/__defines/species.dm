@@ -42,4 +42,4 @@
 // possible and pure black is none
 #define DARKTINT_NONE      "#ffffff"
 #define DARKTINT_MODERATE  "#f9f9f5"
-#define DARKTINT_GOOD      "#ebebe6"
+#define DARKTINT_GOOD      "#dcdccf"
