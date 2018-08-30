@@ -25,7 +25,9 @@
 	desc += " It has [number_of_pins] input pins."
 	extended_desc += " This multiplexer has a range from 1 to [inputs.len - 1]."
 
-/obj/item/integrated_circuit/transfer/multiplexer/do_work()
+/obj/item/integrated_circuit/transfer/multiplexer/do_work(var/ord)
+	if(ord != 1)
+		return
 	var/input_index = get_pin_data(IC_INPUT, 1)
 
 	if(!isnull(input_index) && (input_index >= 1 && input_index < inputs.len))
@@ -73,7 +75,9 @@
 	desc += " It has [number_of_pins] output pins."
 	extended_desc += " This demultiplexer has a range from 1 to [outputs.len]."
 
-/obj/item/integrated_circuit/transfer/demultiplexer/do_work()
+/obj/item/integrated_circuit/transfer/demultiplexer/do_work(var/ord)
+	if(ord != 1)
+		return
 	var/output_index = get_pin_data(IC_INPUT, 1)
 	if(!isnull(output_index) && (output_index >= 1 && output_index <= outputs.len))
 		for(var/i in 1 to LAZYLEN(outputs)) //Clear everything out
@@ -81,6 +85,7 @@
 		var/datum/integrated_io/O = outputs[output_index]
 		O.data = get_pin_data(IC_INPUT, 2)
 		O.push_data()
+		world << "We pushed here"
 
 	activate_pin(2)
 
