@@ -468,6 +468,10 @@
 	base_turf = /turf/simulated/floor/plating
 */
 
+/area/turbolift/torch_robotics_lift
+	name = "\improper first deck"
+	base_turf = /turf/simulated/open
+
 // Ninja areas
 /area/ninja_dojo
 	name = "\improper Ninja Base"
@@ -1303,6 +1307,10 @@
 
 /area/rnd/research
 	name = "\improper Research and Development"
+	icon_state = "research"
+
+/area/rnd/printing
+	name = "\improper Printing Lab"
 	icon_state = "research"
 
 /area/rnd/breakroom
