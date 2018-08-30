@@ -106,12 +106,9 @@
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(owner.internal_organs_by_name["tracheae"],/obj/item/organ/internal/lungs/nabber))
-		to_chat(owner, "<span class='danger'>You feel air rushing through your trachea!</span>")
-	else
-		if(istype(parent))
-			owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
-		bruise()
+	if(istype(parent))
+		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
+	bruise()
 
 //exposure to extreme pressures can rupture lungs
 /obj/item/organ/internal/lungs/proc/check_rupturing(breath_pressure)
