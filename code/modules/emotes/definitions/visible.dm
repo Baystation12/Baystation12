@@ -146,7 +146,7 @@
 
 /decl/emote/visible/look
 	key = "look"
-	emote_message_3p = "USER looks at TARGET."
+	emote_message_3p_target = "USER looks at TARGET."
 	emote_message_3p = "USER looks."
 
 /decl/emote/visible/point

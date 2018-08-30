@@ -57,7 +57,6 @@
 /decl/emote/audible/whistle
 	key = "whistle"
 	emote_message_1p = "You whistle."
-	emote_message_3p_target = "USER whistles at TARGET."
 	emote_message_3p = "USER whistles."
 
 /decl/emote/audible/boop
