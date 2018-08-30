@@ -1,3 +1,5 @@
+var/SimplePipeColor = "grey"
+
 /obj/machinery/pipedispenser
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
@@ -6,13 +8,12 @@
 	anchored = 1
 	var/unwrenched = 0
 	var/wait = 0
-	var/list/categories = list(simple_recipes = list(),	scrubber_recipes = list(), supply_recipes = list(),	fuel_recipes = list(), device_recipes = list(),	he_recipes = list())
-	//var/list/simple_recipes = list()
-	//var/list/scrubber_recipes = list()
-	//var/list/supply_recipes = list()
-	//var/list/fuel_recipes = list()
-	//var/list/device_recipes = list()
-	//var/list/he_recipes = list()
+	var/list/categories = list(simple_recipes = list(),
+		scrubber_recipes = list(),
+		supply_recipes = list(),
+		fuel_recipes = list(),
+		device_recipes = list(),
+		he_recipes = list())
 
 /obj/machinery/pipedispenser/Initialize()
 	. = ..()
@@ -30,41 +31,42 @@
 		categories["he_recipes"] += new he(src)
 
 /obj/machinery/pipedispenser/proc/get_console_data()
-	. = ..() + "<table><tr><td><h3>Regular Pipes</h3></td></tr>"
+	. = ..() + "<table><tr><td><font color = '#517087'><strong>Regular Pipes</strong></font></td></tr>"
 	var/result = ""
 	for(var/datum/pipe/simple in categories["simple_recipes"])
 		var/line = "[simple.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[simple]'>Dispense</a></td></tr>"
+		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[simple]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[simple]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[simple]'>10x</a></td></tr>"
 	. += "[result]"
+	. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[SimplePipeColor]'>[SimplePipeColor]</font></a></td></tr>"
 	result = ""
-	. += "<tr><td><h3>Supply Pipes</h3></td></tr>"
+	. += "<tr><td><font color = '#517087'><strong>Supply Pipes</strong></font></td></tr>"
 	for(var/datum/pipe/supply in categories["supply_recipes"])
 		var/line = "[supply.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[supply]'>Dispense</a></td></tr>"
+		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[supply]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[supply]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[supply]'>10x</a></td></tr>"
 	. += "[result]"
 	result = ""
-	. += "<tr><td><h3>Scrubber Pipes</h3></td></tr>"
+	. += "<tr><td><font color = '#517087'><strong>Scrubber Pipes</strong></font></td></tr>"
 	for(var/datum/pipe/scrubber in categories["scrubber_recipes"])
 		var/line = "[scrubber.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[scrubber]'>Dispense</a></td></tr>"
+		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[scrubber]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[scrubber]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[scrubber]'>10x</a></td></tr>"
 	. += "[result]"
 	result = ""
-	. += "<tr><td><h3>Fuel Pipes</h3></td></tr>"
+	. += "<tr><td><font color = '#517087'><strong>Fuel Pipes</strong></font></td></tr>"
 	for(var/datum/pipe/fuel in categories["fuel_recipes"])
 		var/line = "[fuel.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[fuel]'>Dispense</a></td></tr>"
+		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[fuel]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[fuel]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[fuel]'>10x</a></td></tr>"
 	. += "[result]"
 	result = ""
-	. += "<tr><td><h3>Heat Exchange</h3></td></tr>"
+	. += "<tr><td><font color = '#517087'><strong>Heat Exchange</strong></font></td></tr>"
 	for(var/datum/pipe/he in categories["he_recipes"])
 		var/line = "[he.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[he]'>Dispense</a></td></tr>"
+		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[he]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[he]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[he]'>10x</a></td></tr>"
 	. += "[result]"
 	result = ""
-	. += "<tr><td><h3>Devices</h3></td></tr>"
+	. += "<tr><td><font color = '#517087'><strong>Devices</strong></font></td></tr>"
 	for(var/datum/pipe/devices in categories["device_recipes"])
 		var/line = "[devices.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[devices]'>Dispense</a></td></tr>"
+		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[devices]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[devices]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[devices]'>10x</a></td></tr>"
 	. += "[result]"
 	.+= "</table>"
 
@@ -74,6 +76,18 @@
 	if(href_list["build"])
 		var/datum/pipe/P = locate(href_list["build"])
 		build(P)
+	if(href_list["buildfive"])
+		var/datum/pipe/P = locate(href_list["buildfive"])
+		for(var/I = 5;I > 0;I -= 1)
+			build(P)
+	if(href_list["buildten"])
+		var/datum/pipe/P = locate(href_list["buildten"])
+		for(var/I = 10;I > 0;I -= 1)
+			build(P)
+	if(href_list["color"])
+		var/choice = input(usr, "What color do you want pipes to have?") as null|anything in pipe_colors
+		SimplePipeColor = choice
+		updateUsrDialog()
 
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
@@ -89,10 +103,14 @@
 		if(D.connect_types != null)
 			new_item.connect_types = D.connect_types
 		if(D.pipe_color != null)
-			new_item.color = D.pipe_color
+			if(new_item.pipe_type == PIPE_SIMPLE_STRAIGHT || new_item.pipe_type == PIPE_SIMPLE_BENT || new_item.pipe_type == PIPE_MANIFOLD || new_item.pipe_type == PIPE_MANIFOLD4W || new_item.pipe_type == PIPE_CAP || new_item.pipe_type == PIPE_UP || new_item.pipe_type == PIPE_DOWN)
+				new_item.color = SimplePipeColor
+			else
+				new_item.color = D.pipe_color
 		new_item.name = D.name
 		new_item.desc = D.desc
 		new_item.dir = D.dir
+		new_item.icon = D.icon
 		new_item.icon_state = D.icon_state
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
