@@ -45,10 +45,11 @@ Buildable meters
 			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/fuel) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/fuel))
 			src.pipe_type = PIPE_FUEL_STRAIGHT + is_bent
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/universal) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/universal))
 			src.pipe_type = PIPE_UNIVERSAL
-			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
+			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple))
 			src.pipe_type = PIPE_SIMPLE_STRAIGHT + is_bent
 		else if(istype(make_from, /obj/machinery/atmospherics/portables_connector))
@@ -65,6 +66,7 @@ Buildable meters
 			src.pipe_type = PIPE_MANIFOLD
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold/visible/fuel) || istype(make_from, /obj/machinery/atmospherics/pipe/manifold/hidden/fuel))
 			src.pipe_type = PIPE_FUEL_MANIFOLD
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/unary/vent_pump))
 			src.pipe_type = PIPE_UVENT
@@ -108,6 +110,7 @@ Buildable meters
 			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel) || istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel))
 			src.pipe_type = PIPE_FUEL_MANIFOLD4W
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w))
 			src.pipe_type = PIPE_MANIFOLD4W
@@ -121,6 +124,7 @@ Buildable meters
 			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap/visible/fuel) || istype(make_from, /obj/machinery/atmospherics/pipe/cap/hidden/fuel))
 			src.pipe_type = PIPE_FUEL_CAP
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap))
 			src.pipe_type = PIPE_CAP
@@ -139,6 +143,7 @@ Buildable meters
 			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up/fuel))
 			src.pipe_type = PIPE_FUEL_UP
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up))
 			src.pipe_type = PIPE_UP
@@ -152,6 +157,7 @@ Buildable meters
 			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down/fuel))
 			src.pipe_type = PIPE_FUEL_DOWN
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down))
 			src.pipe_type = PIPE_DOWN
@@ -159,21 +165,21 @@ Buildable meters
 	else
 		src.pipe_type = pipe_type
 		src.set_dir(dir)
-		if (pipe_type == 29 || pipe_type == 30 || pipe_type == 33 || pipe_type == 35 || pipe_type == 37 || pipe_type == 39 || pipe_type == 41)
+		if (pipe_type == PIPE_SUPPLY_STRAIGHT || pipe_type == PIPE_SUPPLY_BENT || pipe_type == PIPE_SUPPLY_MANIFOLD || pipe_type == PIPE_SUPPLY_MANIFOLD4W || pipe_type == PIPE_SUPPLY_UP || pipe_type == PIPE_SUPPLY_DOWN || pipe_type == PIPE_SUPPLY_CAP)
 			connect_types = CONNECT_TYPE_SUPPLY
 			src.color = PIPE_COLOR_BLUE
-		else if (pipe_type == 31 || pipe_type == 32 || pipe_type == 34 || pipe_type == 36 || pipe_type == 38 || pipe_type == 40 || pipe_type == 42)
+		else if (pipe_type == PIPE_SCRUBBERS_STRAIGHT || pipe_type == PIPE_SCRUBBERS_BENT || pipe_type == PIPE_SCRUBBERS_MANIFOLD || pipe_type == PIPE_SCRUBBERS_MANIFOLD4W || pipe_type == PIPE_SCRUBBERS_UP || pipe_type == PIPE_SCRUBBERS_DOWN || pipe_type == PIPE_SCRUBBERS_CAP)
 			connect_types = CONNECT_TYPE_SCRUBBER
 			src.color = PIPE_COLOR_RED
-		else if (pipe_type == 45 || pipe_type == 46 || pipe_type == 47 || pipe_type == 48 || pipe_type == 49 || pipe_type == 50 || pipe_type == 51)
+		else if (pipe_type == PIPE_FUEL_STRAIGHT || pipe_type == PIPE_FUEL_BENT || pipe_type == PIPE_FUEL_MANIFOLD || pipe_type == PIPE_FUEL_MANIFOLD4W || pipe_type == PIPE_FUEL_UP || pipe_type == PIPE_FUEL_DOWN || pipe_type == PIPE_FUEL_CAP)
+			connect_types = CONNECT_TYPE_FUEL
 			src.color = PIPE_COLOR_ORANGE
-		else if (pipe_type == 2 || pipe_type == 3)
+		else if (pipe_type == PIPE_HE_STRAIGHT || pipe_type == PIPE_HE_BENT)
 			connect_types = CONNECT_TYPE_HE
-		else if (pipe_type == 6)
+		else if (pipe_type == PIPE_JUNCTION)
 			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
-		else if (pipe_type == 28)
-			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
-	//src.pipe_dir = get_pipe_dir()
+		else if (pipe_type == PIPE_UNIVERSAL)
+			connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	update()
 
 //update the name and icon of the pipe item depending on the type
