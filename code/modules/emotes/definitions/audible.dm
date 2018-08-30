@@ -57,6 +57,7 @@
 /decl/emote/audible/whistle
 	key = "whistle"
 	emote_message_1p = "You whistle."
+	emote_message_3p_target = "USER whistles at TARGET."
 	emote_message_3p = "USER whistles."
 
 /decl/emote/audible/boop
@@ -108,6 +109,7 @@
 
 /decl/emote/audible/laugh
 	key = "laugh"
+	emote_message_3p_target = "USER laughs at TARGET."
 	emote_message_3p = "USER laughs."
 
 /decl/emote/audible/mumble
@@ -142,6 +144,7 @@
 
 /decl/emote/audible/bug_hiss
 	key ="hiss"
+	emote_message_3p_target = "USER hisses at TARGET."
 	emote_message_3p = "USER hisses."
 	emote_sound = 'sound/voice/BugHiss.ogg'
 
