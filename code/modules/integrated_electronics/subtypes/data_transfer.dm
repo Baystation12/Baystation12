@@ -85,7 +85,6 @@
 		var/datum/integrated_io/O = outputs[output_index]
 		O.data = get_pin_data(IC_INPUT, 2)
 		O.push_data()
-		world << "We pushed here"
 
 	activate_pin(2)
 
