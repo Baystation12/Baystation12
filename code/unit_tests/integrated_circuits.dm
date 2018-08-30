@@ -83,8 +83,7 @@
 		for(var/input_pin_index = 1 to inputs.len)
 			ic.set_pin_data(IC_INPUT, input_pin_index, inputs[input_pin_index])
 
-		var/activator = ic.activators[activation_pin]
-		ic.do_work(activator)
+		ic.do_work(activation_pin)
 
 		for(var/output_index = 1 to expected_outputs.len)
 			var/actual_output = ic.get_pin_data(IC_OUTPUT, output_index)

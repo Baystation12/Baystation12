@@ -693,6 +693,6 @@ proc/is_blind(A)
 				choice = input(src, message, title, default) as null|num
 			if(MOB_INPUT_MESSAGE)
 				choice = input(src, message, title, default) as null|message
-	if(!choice || src.incapacitated() || (required_item && !GLOB.hands_state.can_use_topic(required_item,src)))
+	if(isnull(choice) || src.incapacitated() || (required_item && !GLOB.hands_state.can_use_topic(required_item,src)))
 		return null
 	return choice
