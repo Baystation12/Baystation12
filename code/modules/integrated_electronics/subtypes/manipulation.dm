@@ -417,6 +417,7 @@
 				if(check_target(AM, exclude_contents = TRUE))
 					set_pin_data(IC_OUTPUT, 1, TRUE)
 					pulling = AM
+					acting_object.visible_message("\The [acting_object] starts pulling \the [AM] around.")
 					GLOB.moved_event.register(AM, src, .proc/check_pull) //Whenever the target moves, make sure we can still pull it!
 					GLOB.destroyed_event.register(AM, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
 					GLOB.moved_event.register(acting_object, src, .proc/pull) //Make sure we actually pull it.
@@ -448,8 +449,10 @@
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/stop_pulling()
+	var/atom/movable/AM = get_object()
 	GLOB.moved_event.unregister(pulling, src)
-	GLOB.moved_event.unregister(get_object(), src)
+	GLOB.moved_event.unregister(AM, src)
+	AM.visible_message("\The [AM] stops pulling \the [pulling]")
 	GLOB.destroyed_event.unregister(pulling, src)
 	pulling = null
 	set_pin_data(IC_OUTPUT, 1, FALSE)

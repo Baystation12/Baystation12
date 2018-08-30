@@ -31,7 +31,7 @@
 		return FALSE
 
 	set_pin_data(IC_OUTPUT, 3, passkey)
-
+	user.visible_message("<span class='notice'>\The [user] swipes \the [I] onto \the [get_object()]'s card reader.</span>")
 	push_data()
 	activate_pin(1)
 	return TRUE
@@ -50,7 +50,12 @@
 	var/list/access
 
 /obj/item/integrated_circuit/output/access_displayer/do_work()
-	access = json_decode(XorEncrypt(hex2str(get_pin_data(IC_INPUT, 1), TRUE), SScircuit.cipherkey))
+	var/result = XorEncrypt(hex2str(get_pin_data(IC_INPUT, 1)), SScircuit.cipherkey)
+	if(length(result) > 1)
+		result = json_decode(result)
+	else
+		result = list(result)
+	access = result
 
 /obj/item/integrated_circuit/output/access_displayer/GetAccess()
 	return access

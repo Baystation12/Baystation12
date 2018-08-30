@@ -61,7 +61,7 @@
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
-	return CanUseTopic(user)
+	return !user.incapacitated() && CanUseTopic(user)
 
 /obj/item/device/electronic_assembly/GetAccess()
 	. = list()
@@ -74,7 +74,7 @@
 	.=..()
 	if(istype(AM, /obj/machinery/door/airlock) ||  istype(AM, /obj/machinery/door/window))
 		var/obj/machinery/door/D = AM
-		if(D.check_access(GetAccess()))
+		if(D.check_access(src))
 			D.open()
 
 /obj/item/device/electronic_assembly/Initialize()
@@ -97,6 +97,12 @@
 		if(IC.power_draw_idle)
 			if(!draw_power(IC.power_draw_idle))
 				IC.power_fail()
+
+/obj/item/device/electronic_assembly/MouseDrop_T(atom/dropping, mob/user)
+	if(user == dropping)
+		interact(user)
+	else
+		..()
 
 /obj/item/device/electronic_assembly/interact(mob/user)
 	if(!check_interactivity(user))
@@ -298,6 +304,12 @@
 			IC.internal_examine(user)
 	if(opened)
 		interact(user)
+
+//This only happens when this EA is loaded via the printer
+/obj/item/device/electronic_assembly/proc/post_load()
+	for(var/I in assembly_components)
+		var/obj/item/integrated_circuit/IC = I
+		IC.on_data_written()
 
 /obj/item/device/electronic_assembly/proc/return_total_complexity()
 	. = 0

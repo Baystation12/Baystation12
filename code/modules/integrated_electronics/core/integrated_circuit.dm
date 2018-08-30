@@ -38,7 +38,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 // This should be used when someone is examining while the case is opened.
 /obj/item/integrated_circuit/proc/internal_examine(mob/user)
-	to_chat(user, "This board has [LAZYLEN(inputs)] input pin\s, [LAZYLEN(outputs)] output pin\s and [LAZYLEN(activators)] activation pin\s.")
+	to_chat(user, "\The [src] has [LAZYLEN(inputs)] input pin\s, [LAZYLEN(outputs)] output pin\s and [LAZYLEN(activators)] activation pin\s.")
 	for(var/k in 1 to LAZYLEN(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		if(I.linked.len)
