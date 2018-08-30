@@ -4,6 +4,7 @@
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1
+	frequency = SEC_I_FREQ
 	w_class = ITEM_SIZE_HUGE
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY

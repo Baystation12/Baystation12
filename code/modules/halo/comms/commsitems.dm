@@ -118,3 +118,4 @@
 #undef CIV_NAME
 #undef SEC_NAME
 #undef ODST_NAME
+#undef BERTELS_NAME

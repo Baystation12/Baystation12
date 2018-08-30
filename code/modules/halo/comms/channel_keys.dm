@@ -11,6 +11,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define CIV_NAME "System"
 #define SEC_NAME "GCPD"
 #define ODST_NAME "TACCOM"
+#define BERTELS_NAME "UNSC Bertels Intercom"
 
 /datum/halo_frequencies
 	var/innie_channel = "INNIECOM"
@@ -18,6 +19,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/shipcom_freq = -1
 	var/teamcom_freq = -1
 	var/odst_freq = -1
+	var/bertels_freq = -1
 	var/squadcom_freq = -1
 	var/fleetcom_freq = -1
 	var/const/eband_freq = 1160
@@ -25,7 +27,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/covenant_battlenet_freq = -1
 	var/police_freq = -1
 	var/list/used_freqs = list()
-	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME,ODST_NAME)
+	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME,ODST_NAME)
 
 /datum/halo_frequencies/New()
 	if(GLOB.using_map.use_global_covenant_comms)
@@ -54,6 +56,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[COV_COMMON_NAME] = covenant_battlenet_freq
 	frequencies[SEC_NAME] = police_freq
 	frequencies[ODST_NAME] = odst_freq
+	frequencies[BERTELS_NAME] = bertels_freq
 	GLOB.default_internal_channels["[eband_freq]"] = list()
 	radiochannels = frequencies
 
@@ -105,6 +108,11 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	while(used_freqs.Find("[odst_freq]"))
 		odst_freq = rand(1001, 9998)
 	used_freqs += "[odst_freq]"
+
+	bertels_freq = rand(1001, 9998)
+	while(used_freqs.Find("[bertels_freq]"))
+		bertels_freq = rand(1471)
+	used_freqs += "[bertels_freq]"
 
 	while(used_freqs.Find("[covenant_battlenet_freq]"))
 		covenant_battlenet_freq = rand(1460, 9998)
