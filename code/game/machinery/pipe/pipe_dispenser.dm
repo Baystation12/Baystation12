@@ -6,62 +6,63 @@
 	anchored = 1
 	var/unwrenched = 0
 	var/wait = 0
-	var/list/simple_recipes = list()
-	var/list/scrubber_recipes = list()
-	var/list/supply_recipes = list()
-	var/list/fuel_recipes = list()
-	var/list/device_recipes = list()
-	var/list/he_recipes = list()
+	var/list/categories = list(simple_recipes = list(),	scrubber_recipes = list(), supply_recipes = list(),	fuel_recipes = list(), device_recipes = list(),	he_recipes = list())
+	//var/list/simple_recipes = list()
+	//var/list/scrubber_recipes = list()
+	//var/list/supply_recipes = list()
+	//var/list/fuel_recipes = list()
+	//var/list/device_recipes = list()
+	//var/list/he_recipes = list()
 
 /obj/machinery/pipedispenser/Initialize()
 	. = ..()
-	for(var/simple in typesof(/datum/pipe/pipe_dispenser/simple) - /datum/pipe/pipe_dispenser/simple)
-		simple_recipes += new simple(src)
-	for(var/scrub in typesof(/datum/pipe/pipe_dispenser/scrubber) - /datum/pipe/pipe_dispenser/scrubber)
-		scrubber_recipes += new scrub(src)
-	for(var/supply in typesof(/datum/pipe/pipe_dispenser/supply) - /datum/pipe/pipe_dispenser/supply)
-		supply_recipes += new supply(src)
-	for(var/fuel in typesof(/datum/pipe/pipe_dispenser/fuel) - /datum/pipe/pipe_dispenser/fuel)
-		fuel_recipes += new fuel(src)
-	for(var/device in typesof(/datum/pipe/pipe_dispenser/device) - /datum/pipe/pipe_dispenser/device)
-		device_recipes += new device(src)
-	for(var/he in typesof(/datum/pipe/pipe_dispenser/he) - /datum/pipe/pipe_dispenser/he)
-		he_recipes += new he(src)
+	for(var/simple in subtypesof(/datum/pipe/pipe_dispenser/simple))
+		categories["simple_recipes"] += new simple(src)
+	for(var/scrub in subtypesof(/datum/pipe/pipe_dispenser/scrubber))
+		categories["scrubber_recipes"] += new scrub(src)
+	for(var/supply in subtypesof(/datum/pipe/pipe_dispenser/supply))
+		categories["supply_recipes"] += new supply(src)
+	for(var/fuel in subtypesof(/datum/pipe/pipe_dispenser/fuel))
+		categories["fuel_recipes"] += new fuel(src)
+	for(var/device in subtypesof(/datum/pipe/pipe_dispenser/device))
+		categories["device_recipes"] += new device(src)
+	for(var/he in subtypesof(/datum/pipe/pipe_dispenser/he))
+		categories["he_recipes"] += new he(src)
 
 /obj/machinery/pipedispenser/proc/get_console_data()
 	. = ..() + "<table><tr><td><h3>Regular Pipes</h3></td></tr>"
 	var/result = ""
-	for(var/datum/pipe/simple in simple_recipes)
+	for(var/datum/pipe/simple in categories["simple_recipes"])
 		var/line = "[simple.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[simple]'>Dispense</a></td></tr>"
 	. += "[result]"
 	result = ""
 	. += "<tr><td><h3>Supply Pipes</h3></td></tr>"
-	for(var/datum/pipe/supply in supply_recipes)
+	for(var/datum/pipe/supply in categories["supply_recipes"])
 		var/line = "[supply.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[supply]'>Dispense</a></td></tr>"
 	. += "[result]"
 	result = ""
 	. += "<tr><td><h3>Scrubber Pipes</h3></td></tr>"
-	for(var/datum/pipe/scrubber in scrubber_recipes)
+	for(var/datum/pipe/scrubber in categories["scrubber_recipes"])
 		var/line = "[scrubber.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[scrubber]'>Dispense</a></td></tr>"
 	. += "[result]"
 	result = ""
 	. += "<tr><td><h3>Fuel Pipes</h3></td></tr>"
-	for(var/datum/pipe/fuel in fuel_recipes)
+	for(var/datum/pipe/fuel in categories["fuel_recipes"])
 		var/line = "[fuel.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[fuel]'>Dispense</a></td></tr>"
 	. += "[result]"
 	result = ""
 	. += "<tr><td><h3>Heat Exchange</h3></td></tr>"
-	for(var/datum/pipe/he in he_recipes)
+	for(var/datum/pipe/he in categories["he_recipes"])
 		var/line = "[he.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[he]'>Dispense</a></td></tr>"
 	. += "[result]"
 	result = ""
 	. += "<tr><td><h3>Devices</h3></td></tr>"
-	for(var/datum/pipe/devices in device_recipes)
+	for(var/datum/pipe/devices in categories["device_recipes"])
 		var/line = "[devices.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[devices]'>Dispense</a></td></tr>"
 	. += "[result]"
