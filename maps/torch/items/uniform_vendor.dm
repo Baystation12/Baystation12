@@ -18,7 +18,6 @@
 	var/obj/item/weapon/card/id/ID
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
-	var/static/decl/hierarchy/mil_uniform/mil_uniforms
 	var/global/list/issued_items = list()
 
 /obj/machinery/uniform_vendor/attack_hand(mob/user)
@@ -33,7 +32,8 @@
 	else
 		var/datum/job/job = job_master.GetJobByType(ID.job_access_type)
 		if(job)
-			uniforms = find_uniforms(ID.military_rank, ID.military_branch, job.department_flag)
+			var/decl/hierarchy/mil_uniform/user_outfit = find_uniforms(ID.military_rank, ID.military_branch, job.department_flag)
+			uniforms = populate_uniforms(user_outfit)
 		for(var/T in uniforms)
 			dat += "<b>[T]</b> <a href='byond://?src=\ref[src];get_all=[T]'>Select All</a>"
 			var/list/uniform = uniforms[T]
@@ -105,49 +105,6 @@
 		attack_hand(user)
 	else
 		..()
-
-/*	Outfit structures
-	branch
-	branch/department
-	branch/department/officer
-	branch/department/officer/command
-
-	The one exception to the above is the command department, due to the fact that you have to be an officer to
-	be in command, and there are no variants as a result. Also no special CO uniform :(
-*/
-/obj/machinery/uniform_vendor/proc/find_uniforms(var/datum/mil_rank/user_rank, var/datum/mil_branch/user_branch, var/department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
-	if(!mil_uniforms)
-		mil_uniforms = new()
-
-	var/decl/hierarchy/mil_uniform/user_outfit = mil_uniforms
-	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-		if(istype(user_branch,child.branch))
-			user_outfit = child
-
-	if(user_outfit == mil_uniforms) //We haven't found a branch
-		return null //Return no uniforms, which will cause the machine to spit out an error.
-
-	// we have found a branch.
-	if(department == COM) //Command only has one variant and they have to be an officer
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-			if(child.departments & COM)
-				user_outfit = child
-	else
-		var/tmp_department = department
-		tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
-
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-			if(child.departments & tmp_department)
-				user_outfit = child
-				break
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-			if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
-				user_outfit = child
-		if(department & COM) //user is in command of their department
-			if(user_outfit.children[1])// Command outfit exists
-				user_outfit = user_outfit.children[1]
-
-	return populate_uniforms(user_outfit) //Generate uniform lists.
 
 /obj/machinery/uniform_vendor/proc/populate_uniforms(var/decl/hierarchy/mil_uniform/user_outfit)
 	var/list/res = list()

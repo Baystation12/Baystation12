@@ -31,6 +31,7 @@
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
+	#include "items/uniform_checker.dm"
 	#include "items/rigs.dm"
 	#include "items/solbanner.dm"
 

@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Added an automated uniform checker to cryo rooms. It will tell you most glaring mistakes with your getup."
