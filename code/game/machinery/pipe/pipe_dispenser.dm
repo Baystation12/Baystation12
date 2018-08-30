@@ -1,5 +1,3 @@
-var/SimplePipeColor = "grey"
-
 /obj/machinery/pipedispenser
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
@@ -14,6 +12,7 @@ var/SimplePipeColor = "grey"
 		fuel_recipes = list(),
 		device_recipes = list(),
 		he_recipes = list())
+	var/SimplePipeColor = "grey"
 
 /obj/machinery/pipedispenser/Initialize()
 	. = ..()
