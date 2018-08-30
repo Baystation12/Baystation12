@@ -464,9 +464,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return FALSE
 
 // Called when using the shredding behavior.
-/datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
+/datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 
 	if((!ignore_intent && H.a_intent != I_HURT) || H.pulling_punches)
+		return 0
+
+	if(!ignore_antag && H.mind && !player_is_antag(H.mind))
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)

@@ -688,26 +688,36 @@
 	var/new_code = get_pin_data(IC_INPUT, 2)
 	if(isnum(new_freq) && new_freq > 0)
 		set_frequency(new_freq)
-	if(isnum(new_code))
-		code = new_code
+	code = new_code
 
 
-/obj/item/integrated_circuit/input/signaler/do_work() // Sends a signal.
-	if(!radio_connection)
+/obj/item/integrated_circuit/input/signaler/do_work(var/ord) // Sends a signal.
+	if(!radio_connection || ord != 1)
 		return
 
 	radio_connection.post_signal(src, create_signal())
 	activate_pin(2)
 
 /obj/item/integrated_circuit/input/signaler/proc/signal_good(var/datum/signal/signal)
-	if(!signal || signal.source == src || signal.encryption != code)
+	if(!signal || signal.source == src)
 		return FALSE
+	if(code)
+		var/real_code = 0
+		if(isnum(code))
+			real_code = code
+		var/rec = 0
+		if(signal.encryption)
+			rec = signal.encryption
+		if(real_code != rec)
+			return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
+	signal.transmission_method = 1
 	signal.source = src
-	signal.encryption = code
+	if(isnum(code))
+		signal.encryption = code
 	signal.data["message"] = "ACTIVATE"
 	return signal
 
@@ -719,18 +729,13 @@
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/integrated_circuit/input/signaler/receive_signal(datum/signal/signal)
-	var/new_code = get_pin_data(IC_INPUT, 2)
-	var/code = 0
+	if(!signal_good(signal))
+		return 0
+	treat_signal(signal)
+	return 1
 
-	if(isnum(new_code))
-		code = new_code
-	if(!signal)
-		return 0
-	if(signal.data["code"] != code)
-		return 0
-	if(signal.source == src) // Don't trigger ourselves.
-		return 0
-
+//This only procs when a signal is valid.
+/obj/item/integrated_circuit/input/signaler/proc/treat_signal(var/datum/signal/signal)
 	activate_pin(3)
 	audible_message("\icon[src] *beep* *beep* *beep*", null, 1)
 	playsound(get_turf(src), 'sound/machines/triple_beep.ogg', 50)
@@ -745,30 +750,30 @@
 	complexity = 8
 	inputs = list("frequency" = IC_PINTYPE_NUMBER, "id tag" = IC_PINTYPE_STRING, "command" = IC_PINTYPE_STRING)
 	outputs = list("received command" = IC_PINTYPE_STRING)
-	var/id_tag = "Integrated_Circuit"
-	var/command = "ACTIVATE"
+	var/command
+	code = "Integrated_Circuits"
 
 /obj/item/integrated_circuit/input/signaler/advanced/on_data_written()
 	..()
-	var/new_tag = get_pin_data(IC_INPUT,2)
-	var/new_command = get_pin_data(IC_INPUT,3)
-	if(istext(new_tag))
-		id_tag = new_tag
-	if(istext(new_command))
-		command = new_command
+	command = get_pin_data(IC_INPUT,3)
 
 /obj/item/integrated_circuit/input/signaler/advanced/signal_good(var/datum/signal/signal)
-	var/results = ..()
-	if(!results || signal.data["tag"] != id_tag)
+	if(!..() || signal.data["tag"] != code)
 		return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
-	var/datum/signal/signal = ..()
-	signal.data["tag"] = id_tag
+	var/datum/signal/signal = new()
+	signal.transmission_method = 1
+	signal.data["tag"] = code
 	signal.data["command"] = command
-	signal.encryption = null
+	signal.encryption = 0
 	return signal
+
+/obj/item/integrated_circuit/input/signaler/advanced/treat_signal(var/datum/signal/signal)
+	set_pin_data(IC_OUTPUT,1,signal.data["command"])
+	push_data()
+	..()
 
 /obj/item/integrated_circuit/input/teleporter_locator
 	name = "teleporter locator"
@@ -776,7 +781,7 @@
 	icon_state = "gps"
 	complexity = 5
 	inputs = list()
-	outputs = list("teleporter")
+	outputs = list("teleporter" = IC_PINTYPE_REF)
 	activators = list("on selected" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
@@ -798,6 +803,7 @@
 	if(href_list["tport"])
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
+		push_data()
 		activate_pin(1)
 		return IC_TOPIC_REFRESH
 
@@ -859,7 +865,7 @@
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M as mob, text, verb, datum/language/speaking)
 	var/translated = TRUE
 	if(M && text)
-		if(!speaking.machine_understands)
+		if(speaking && !speaking.machine_understands)
 			text = speaking.scramble(text)
 			translated = FALSE
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
