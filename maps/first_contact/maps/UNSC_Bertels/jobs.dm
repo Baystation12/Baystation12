@@ -27,7 +27,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
-	access = list(142,143,144)
+	access = list(142,143,144,145)
 	spawnpoint_override = "UNSC Bertels CO Spawn"
 
 /datum/job/unscbertels_xo
@@ -36,7 +36,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
-	access = list(142,144)
+	access = list(142,144,145)
 	spawnpoint_override = "UNSC Bertels XO Spawn"
 
 
@@ -60,7 +60,7 @@
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(142,144)
+	access = list(142,144,145)
 	spawnpoint_override = "UNSC Bertels Marine Platoon Leader Spawn"
 
 

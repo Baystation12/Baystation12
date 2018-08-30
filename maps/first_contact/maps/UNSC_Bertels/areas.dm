@@ -122,6 +122,8 @@
 /area/corvette/unscbertels/deck2/cryodorms
 	name = "UNSC Bertels Deck 2 Cryodorms"
 
+/area/corvette/unscbertels/deck2/morgue
+	name = "UNSC Bertels Deck 2 Morgue"
 
 //deck 3 areas
 /area/corvette/unscbertels/deck3/forehallway
@@ -156,6 +158,15 @@
 
 /area/corvette/unscbertels/deck3/auxpowercore
 	name = "UNSC Bertels Deck 3 Auxiliary Power Core"
+
+/area/corvette/unscbertels/deck3/commsroom
+	name = "UNSC Bertels Communications Room"
+
+/area/corvette/unscbertels/deck3/portfiringrange
+	name = "UNSC Bertels Port Firing Range"
+
+/area/corvette/unscbertels/deck3/starboardfiringrange
+	name = "UNSC Bertels Starboard Firing Range"
 
 /area/corvette/unscbertels/deck3/cargo1
 	name = "UNSC Bertels Deck 3 Cargo Bay 1"
