@@ -366,13 +366,6 @@
 	else
 		set_pin_data(IC_OUTPUT, 1, H.name)
 		set_pin_data(IC_OUTPUT, 2, H.desc)
-
-		if(istype(H, /mob/living))
-			var/mob/living/M = H
-			var/msg = M.examine()
-			if(msg)
-				set_pin_data(IC_OUTPUT, 2, msg)
-
 		set_pin_data(IC_OUTPUT, 3, H.x-T.x)
 		set_pin_data(IC_OUTPUT, 4, H.y-T.y)
 		set_pin_data(IC_OUTPUT, 5, sqrt((H.x-T.x)*(H.x-T.x)+ (H.y-T.y)*(H.y-T.y)))
