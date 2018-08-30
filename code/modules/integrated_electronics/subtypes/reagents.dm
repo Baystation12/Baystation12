@@ -155,8 +155,8 @@
 		return
 	var/atom/movable/acting_object = get_object()
 
-	C.visible_message("<span class='warning'>\The [acting_object] draws blood from you.</span>",
-					"<span class='warning'>\The [acting_object] draws blood from \the [C]</span>"
+	C.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [C]</span>",
+					"<span class='warning'>\The [acting_object] draws blood from you.</span>"
 					)
 	C.take_blood(src, amount)
 	activate_pin(2)
