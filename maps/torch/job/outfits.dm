@@ -372,27 +372,23 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	..()
 	BACKPACK_OVERRIDE_CHEMISTRY
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor
-	name = OUTFIT_JOB_NAME("Counselor")
-	uniform = /obj/item/clothing/under/rank/psych/turtleneck
-	shoes = /obj/item/clothing/shoes/white
-	id_type = /obj/item/weapon/card/id/torch/contractor/medical/counselor
-
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist
 	name = OUTFIT_JOB_NAME("Psychiatrist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
+	shoes = /obj/item/clothing/shoes/white
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/psychiatrist
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain
-	name = OUTFIT_JOB_NAME("Chaplain - Torch")
-	uniform = /obj/item/clothing/under/rank/chaplain
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/psychologist
+	name = OUTFIT_JOB_NAME("Psychologist - Torch")
+	uniform = /obj/item/clothing/under/rank/psych/turtleneck
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
-	name = OUTFIT_JOB_NAME("Counselor - Expeditionary Corps")
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/ec
+	name = OUTFIT_JOB_NAME("Psychiatrist - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet
-	name = OUTFIT_JOB_NAME("Counselor - Fleet")
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/fleet
+	name = OUTFIT_JOB_NAME("Psychiatrist - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
@@ -506,6 +502,24 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	name = OUTFIT_JOB_NAME("Chaplain - Torch")
+	uniform = /obj/item/clothing/under/rank/chaplain
+	shoes = /obj/item/clothing/shoes/black
+	id_type = /obj/item/weapon/card/id/torch/contractor/service/chaplain
+	pda_type = /obj/item/modular_computer/pda
+	backpack_contents = list(/obj/item/weapon/storage/bible = 1)
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec
+	name = OUTFIT_JOB_NAME("Chaplain - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/fleet
+	name = OUTFIT_JOB_NAME("Chaplain - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 //Exploration Outfits
 /decl/hierarchy/outfit/job/torch/crew/exploration/New()
 	..()
@@ -585,10 +599,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/New()
 	..()
 	BACKPACK_OVERRIDE_RESEARCH
-
-/decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
-	name = OUTFIT_JOB_NAME("Psychologist - Torch")
-	uniform = /obj/item/clothing/under/rank/psych
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	name = OUTFIT_JOB_NAME("Prospector")

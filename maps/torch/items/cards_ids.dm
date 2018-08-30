@@ -59,7 +59,7 @@
 /obj/item/weapon/card/id/torch/contractor/chemist
 	job_access_type = /datum/job/chemist
 
-/obj/item/weapon/card/id/torch/contractor/medical/counselor
+/obj/item/weapon/card/id/torch/contractor/medical/psychiatrist
 	job_access_type = /datum/job/psychiatrist
 
 
@@ -116,6 +116,9 @@
 
 /obj/item/weapon/card/id/torch/contractor/service/bartender
 	job_access_type = /datum/job/bartender
+
+/obj/item/weapon/card/id/torch/contractor/service/chaplain
+	job_access_type = /datum/job/chaplain
 
 
 /obj/item/weapon/card/id/torch/crew/representative

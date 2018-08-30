@@ -266,6 +266,7 @@
 	name = "\improper commemorative plaque"
 	desc = "A list of dead explorers who gave their lives in search of the next great discovery. Hope you don't join them."
 	icon_state = "floorplaque"
+	var/list/fallen
 
 /obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
 	name = "The Maltese Falcon"

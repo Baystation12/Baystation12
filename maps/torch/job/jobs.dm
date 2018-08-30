@@ -23,7 +23,7 @@
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist, /datum/job/medical_trainee,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor, /datum/job/mining,
-						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
+						/datum/job/janitor, /datum/job/chef, /datum/job/bartender, /datum/job/chaplain,
 						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
@@ -1116,7 +1116,7 @@
 	minimal_access = list()
 
 /datum/job/psychiatrist
-	title = "Counselor"
+	title = "Psychiatrist"
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40
@@ -1124,29 +1124,31 @@
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	alt_titles = list(
-		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist,
-		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain,
+		"Psychologist" = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/psychologist
 	)
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet)
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/ec,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/ec/o1)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_MEDICAL     = SKILL_BASIC)
+	                    SKILL_MEDICAL     = SKILL_BASIC,
+	                    SKILL_CHEMISTRY   = SKILL_BASIC)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX)
+	skill_points = 20
 
-	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew)
+	access = list(access_medical, access_psychiatrist, access_solgov_crew)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/records)
 
 /datum/job/qm
 	title = "Deck Officer"
@@ -1380,6 +1382,36 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
 
+/datum/job/chaplain
+	title = "Chaplain"
+	department = "Service"
+	department_flag = SRV
+
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Executive Officer"
+	alt_titles = list()
+	selection_color = "#515151"
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+	)
+
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT)
+
+	access = list(access_solgov_crew, access_medical, access_chapel_office, access_morgue, access_crematorium) // Medical access is so they can access the Morgue and Crematorium, as well as post-mortem instructions in medical records
+
+	software_on_spawn = list(/datum/computer_file/program/records)
+
 /datum/job/senior_scientist
 	title = "Senior Researcher"
 	department = "Science"
@@ -1427,8 +1459,8 @@
 		"Anomalist",
 		"Researcher",
 		"Xenobiologist",
-		"Xenobotanist",
-		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
+		"Xenobotanist"
+	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_DEVICES     = SKILL_BASIC,
