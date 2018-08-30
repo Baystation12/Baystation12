@@ -3,7 +3,7 @@
 	#include "overall_overmap.dm"
 
 	#include "../odst_training/maps/Exoplanet Research/includes.dm"
-	#include "../odst_training/maps/UNSC_Thorin ODST/includes.dm"
+	#include "../odst_training/maps/UNSC_Bertels/includes.dm"
 
 	#include "overall_outfits.dm"
 	#include "overall_jobdefs.dm"
