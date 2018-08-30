@@ -20,14 +20,13 @@
 	. = ..()
 
 /obj/item/device/camera/tvcamera/Initialize()
-	. = ..()
 	camera = new(src)
 	camera.c_tag = channel
 	camera.status = FALSE
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
-	update_icon()
+	. = ..()
 
 /obj/item/device/camera/tvcamera/examine()
 	. = ..()
