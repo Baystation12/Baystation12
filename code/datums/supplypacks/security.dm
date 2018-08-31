@@ -2,7 +2,7 @@
 	name = "Security"
 
 /decl/hierarchy/supply_pack/security/specialops
-	name = "Special Ops supplies"
+	name = "Grenades - Special Ops supplies"
 	contains = list(/obj/item/weapon/storage/box/emps,
 					/obj/item/weapon/grenade/smokebomb = 3,
 					/obj/item/weapon/grenade/chem_grenade/incendiary)
@@ -117,16 +117,6 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Ablative suit crate"
 	access = access_armory
-
-/decl/hierarchy/supply_pack/security/voidsuit
-	name = "Armor - Security voidsuit"
-	contains = list(/obj/item/clothing/suit/space/void/security/alt,
-					/obj/item/clothing/head/helmet/space/void/security/alt,
-					/obj/item/clothing/shoes/magboots)
-	cost = 120
-	containername = "\improper Security voidsuit crate"
-	containertype = /obj/structure/closet/crate/secure/large
-	access = access_brig
 
 /decl/hierarchy/supply_pack/security/weapons
 	name = "Weapons - Security basic"
@@ -290,7 +280,7 @@
 	access = access_forensics_lockers
 
 /decl/hierarchy/supply_pack/security/securitybarriers
-	name = "Misc - Barrier crate"
+	name = "Equipment - Barrier crate"
 	contains = list(/obj/machinery/deployable/barrier = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure/large
@@ -298,7 +288,7 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/securitybarriers
-	name = "Misc - Wall shield Generators"
+	name = "Equipment - Wall shield Generators"
 	contains = list(/obj/machinery/shieldwallgen = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure/large
@@ -306,7 +296,7 @@
 	access = access_brig
 
 /decl/hierarchy/supply_pack/security/securitybiosuit
-	name = "Misc - Security biohazard gear"
+	name = "Gear - Security biohazard gear"
 	contains = list(/obj/item/clothing/head/bio_hood/security,
 					/obj/item/clothing/suit/bio_suit/security,
 					/obj/item/clothing/mask/gas,
@@ -316,3 +306,13 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Security biohazard gear crate"
 	access = access_security
+
+/decl/hierarchy/supply_pack/security/voidsuit_security
+	name = "EVA - Security (armored) voidsuit"
+	contains = list(/obj/item/clothing/suit/space/void/security/alt,
+					/obj/item/clothing/head/helmet/space/void/security/alt,
+					/obj/item/clothing/shoes/magboots)
+	cost = 120
+	containername = "\improper Security voidsuit crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_brig

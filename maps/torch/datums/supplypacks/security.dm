@@ -144,7 +144,7 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/holster
-	name = "Misc - Holster crate"
+	name = "Gear - Holster crate"
 	contains = list(/obj/item/clothing/accessory/storage/holster/hip = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -152,7 +152,7 @@
 	access = access_solgov_crew
 
 /decl/hierarchy/supply_pack/security/securityextragear
-	name = "Misc - Security equipment"
+	name = "Gear - Security equipment"
 	contains = list(/obj/item/weapon/storage/belt/holster/security = 2,
 					/obj/item/device/radio/headset/headset_sec = 2,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 2,
@@ -167,7 +167,7 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/cosextragear
-	name = "Misc - Chief of Security equipment"
+	name = "Gear - Chief of Security equipment"
 	contains = list(/obj/item/device/radio/headset/heads/cos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
