@@ -277,21 +277,8 @@
 	dir = 2
 	},
 /area/rescue_base/base)
-"abb" = (
-/obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 4
-	},
-/turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
-	},
-/area/rescue_base/base)
 "abc" = (
 /obj/item/weapon/soap,
-/obj/structure/hygiene/shower{
-	pixel_y = 32
-	},
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2
@@ -624,9 +611,6 @@
 /obj/structure/mopbucket,
 /obj/item/weapon/mop,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/hygiene/sink/kitchen{
-	pixel_y = 21
-	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -688,6 +672,19 @@
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2
+	},
+/area/rescue_base/base)
+"abT" = (
+/obj/machinery/door/airlock/external{
+	dir = 4;
+	frequency = 1331;
+	id_tag = "rescue_base_hatch";
+	name = "Landing Pad";
+	req_access = list(103)
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
 	},
 /area/rescue_base/base)
 "abU" = (
@@ -2601,6 +2598,48 @@
 /obj/structure/window/reinforced/holowindow,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_boxingcourt)
+"agf" = (
+/obj/item/device/flashlight/lantern,
+/turf/unsimulated/floor{
+	icon_state = "asteroidplating"
+	},
+/area/rescue_base/base)
+"agg" = (
+/obj/item/weapon/pickaxe/diamonddrill,
+/turf/unsimulated/floor{
+	icon_state = "asteroidplating"
+	},
+/area/rescue_base/base)
+"agh" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"agi" = (
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"agj" = (
+/obj/structure/closet/l3closet/general,
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"agk" = (
+/obj/structure/bed,
+/obj/item/weapon/bedsheet/orange,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "agl" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/glass{
@@ -3002,6 +3041,32 @@
 	icon_state = "dark"
 	},
 /area/rescue_base/base)
+"ahh" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
+"ahi" = (
+/obj/structure/table/glass,
+/obj/item/weapon/storage/firstaid/surgery,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"ahj" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
+"ahk" = (
+/obj/machinery/door/airlock/external{
+	density = 1;
+	frequency = 1331;
+	id_tag = "rescue_shuttle_outer";
+	name = "Ship External Access";
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "ahl" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/energy/gun,
@@ -3159,6 +3224,29 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_boxingcourt)
+"ahG" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	icon_state = "techfloor_corners";
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 2;
+	frequency = 1331;
+	id_tag = "rescue_shuttle_pump"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1331;
+	id_tag = "rescue_shuttle";
+	pixel_x = -8;
+	pixel_y = 25;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "ahH" = (
 /obj/structure/table/reinforced,
 /obj/item/device/megaphone,
@@ -3328,13 +3416,17 @@
 	},
 /area/rescue_base/base)
 "ahT" = (
-/turf/unsimulated/wall{
-	desc = "A secure airlock. Doesn't look like you can get through easily.";
-	icon = 'icons/obj/doors/centcomm/door.dmi';
-	icon_state = "closed";
-	name = "Foxtrot Barracks"
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 1
 	},
-/area/rescue_base/base)
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 2;
+	frequency = 1331;
+	id_tag = "rescue_shuttle_pump"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "ahU" = (
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
@@ -3352,6 +3444,22 @@
 	icon_state = "floor4"
 	},
 /area/centcom/evac)
+"ahW" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	icon_state = "techfloor_corners";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 2;
+	frequency = 1331;
+	id_tag = "rescue_shuttle_pump"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "ahX" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 9
@@ -3412,6 +3520,33 @@
 	icon_state = "asteroid"
 	},
 /area/rescue_base/base)
+"aii" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_inner";
+	name = "Ship External Access";
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
+"aij" = (
+/obj/effect/floor_decal/techfloor,
+/obj/effect/floor_decal/techfloor/corner{
+	icon_state = "techfloor_corners";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_sensor";
+	pixel_x = -8;
+	pixel_y = -25
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "aik" = (
 /obj/structure/table/reinforced,
 /obj/item/device/paicard,
@@ -3582,25 +3717,16 @@
 	},
 /area/rescue_base/base)
 "aiF" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Echo Barracks";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
-	},
-/area/rescue_base/base)
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/manifold/visible,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "aiG" = (
-/turf/unsimulated/wall{
-	desc = "A secure airlock. Doesn't look like you can get through easily.";
-	icon = 'icons/obj/doors/centcomm/door.dmi';
-	icon_state = "closed";
-	name = "Delta Barracks";
-	dir = 4
-	},
-/area/rescue_base/base)
+/obj/effect/floor_decal/techfloor,
+/obj/effect/floor_decal/techfloor/corner,
+/obj/machinery/atmospherics/pipe/manifold/visible,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "aiH" = (
 /turf/simulated/shuttle/wall{
 	icon_state = "swall_t";
@@ -3871,14 +3997,14 @@
 /area/rescue_base/base)
 "ajl" = (
 /obj/machinery/door/airlock/external{
+	dir = 4;
 	frequency = 1331;
 	id_tag = "rescue_base_hatch";
-	name = "Landing Pad";
 	req_access = list(103)
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	icon_state = "asteroidfloor"
 	},
 /area/rescue_base/base)
 "ajm" = (
@@ -4067,14 +4193,10 @@
 	},
 /area/rescue_base/base)
 "ajI" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/door/airlock/external{
-	frequency = 1331;
-	id_tag = "rescue_base_hatch";
-	req_access = list(103)
-	},
+/obj/effect/floor_decal/industrial/warning,
 /turf/unsimulated/floor{
-	icon_state = "asteroidfloor"
+	icon_state = "vault";
+	dir = 8
 	},
 /area/rescue_base/base)
 "ajJ" = (
@@ -4190,12 +4312,12 @@
 	},
 /area/rescue_base/base)
 "ajY" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning/corner,
-/turf/unsimulated/floor{
-	icon_state = "asteroidfloor"
+/obj/machinery/optable,
+/obj/machinery/light{
+	dir = 1
 	},
-/area/rescue_base/base)
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
 "ajZ" = (
 /obj/machinery/button/remote/blast_door{
 	id = "rescuegarage";
@@ -4325,26 +4447,20 @@
 	},
 /area/rescue_base/base)
 "akn" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning{
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/machinery/light{
 	dir = 4
 	},
-/turf/unsimulated/floor{
-	icon_state = "asteroidfloor"
-	},
-/area/rescue_base/base)
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
 "ako" = (
-/obj/machinery/door/blast/regular{
-	icon_state = "pdoor1";
-	id = "rescuegarage";
-	name = "Garage Exit";
-	p_open = 0
-	},
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
-	},
-/area/rescue_base/base)
+/obj/structure/closet,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "akp" = (
 /obj/machinery/mech_recharger,
 /obj/mecha/medical/odysseus/loaded,
@@ -4451,6 +4567,14 @@
 	icon_state = "cult"
 	},
 /area/rescue_base/base)
+"akB" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "akC" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/backpack/ert/engineer,
@@ -4754,14 +4878,14 @@
 	},
 /area/ninja_dojo/dojo)
 "akT" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
+/obj/structure/hygiene/sink{
+	icon_state = "sink";
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
 	},
-/turf/unsimulated/floor{
-	icon_state = "asteroidfloor"
-	},
-/area/rescue_base/base)
+/turf/simulated/floor/tiled/white,
+/area/rescue_base/start)
 "akU" = (
 /obj/structure/table/reinforced,
 /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
@@ -5182,11 +5306,12 @@
 	},
 /area/rescue_base/base)
 "alV" = (
-/obj/effect/floor_decal/industrial/loading,
-/turf/unsimulated/floor{
-	icon_state = "asteroidfloor"
+/obj/item/weapon/stool,
+/obj/machinery/light{
+	dir = 4
 	},
-/area/rescue_base/base)
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "alW" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -5319,39 +5444,71 @@
 	},
 /area/rescue_base/base)
 "aml" = (
+/obj/effect/paint/red,
 /turf/simulated/wall/titanium,
 /area/rescue_base/start)
 "amm" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
-	opacity = 0
+/obj/machinery/button/remote/blast_door{
+	icon_state = "doorctrl0";
+	id = "rescueinfirm";
+	name = "Window Shutters Control";
+	pixel_x = 24;
+	pixel_y = -4;
+	req_access = list(108)
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/white/monotile,
 /area/rescue_base/start)
-"amr" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescuedock";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"ams" = (
+"amn" = (
 /obj/machinery/door/airlock/external{
-	density = 1;
 	frequency = 1331;
-	id_tag = "rescue_shuttle_outer";
+	id_tag = "rescue_shuttle_inner";
 	name = "Ship External Access";
 	req_access = list(103)
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
+"amo" = (
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"amp" = (
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 1
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"amq" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
+"amr" = (
+/obj/structure/closet,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"ams" = (
+/obj/structure/closet/medical_wall{
+	pixel_x = -32
+	},
+/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
+/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
+/obj/item/weapon/reagent_containers/syringe,
+/obj/item/weapon/tank/anesthetic,
+/obj/item/clothing/mask/breath/medical,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "amt" = (
 /obj/machinery/door/unpowered/simple/wood,
@@ -5437,75 +5594,58 @@
 	},
 /area/ninja_dojo/dojo)
 "amD" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	icon_state = "doorctrl0";
-	id = "rescuebridge";
-	name = "Window Shutters Control";
-	pixel_y = -4;
-	req_access = list(108)
+/obj/machinery/sleeper{
+	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/white/monotile,
 /area/rescue_base/start)
 "amE" = (
-/obj/item/modular_computer/console/preset/command,
-/turf/simulated/floor/tiled/dark,
+/obj/structure/closet,
+/obj/item/weapon/storage/box/sinpockets,
+/obj/item/weapon/storage/box/sinpockets,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/rescue_base/start)
 "amF" = (
-/obj/machinery/computer/shuttle_control/multi/rescue,
-/turf/simulated/floor/tiled/dark,
+/obj/structure/table/glass,
+/obj/item/weapon/reagent_containers/spray/sterilizine,
+/obj/item/weapon/reagent_containers/spray/cleaner,
+/turf/simulated/floor/tiled/white/monotile,
 /area/rescue_base/start)
 "amG" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/recharger{
-	pixel_y = 4
+/obj/structure/table/glass,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/stack/medical/advanced/bruise_pack,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"amH" = (
+/obj/machinery/sleeper{
+	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/white/monotile,
 /area/rescue_base/start)
-"amH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 4;
-	frequency = 1331;
-	id_tag = "rescue_shuttle_pump"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
-	id_tag = "rescue_shuttle_sensor";
-	pixel_x = 8;
-	pixel_y = 25
-	},
+"amI" = (
+/obj/structure/closet,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/closet/emcloset,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"amI" = (
-/obj/machinery/atmospherics/pipe/manifold/visible{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/rescue_base/start)
 "amJ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
-	frequency = 1331;
-	id_tag = "rescue_shuttle_pump"
-	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1331;
-	id_tag = "rescue_shuttle";
-	pixel_x = -8;
-	pixel_y = 25;
-	req_access = list(103)
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
 /area/rescue_base/start)
 "amK" = (
 /obj/effect/overlay/palmtree_r,
@@ -5604,45 +5744,46 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amW" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"amX" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio/intercom/specops{
-	dir = 8;
-	pixel_x = 22;
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"amY" = (
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"amZ" = (
-/obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"ana" = (
 /obj/machinery/button/remote/blast_door{
 	icon_state = "doorctrl0";
-	id = "rescuedock";
+	id = "rescuebridge";
 	name = "Window Shutters Control";
-	pixel_x = 24;
 	pixel_y = -4;
 	req_access = list(108)
 	},
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 8
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"amX" = (
+/obj/machinery/computer/shuttle_control/multi/rescue{
+	icon_state = "computer";
+	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"amY" = (
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"amZ" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+/obj/item/device/radio/intercom/specops{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"ana" = (
+/obj/item/modular_computer/console/preset/medical{
+	icon_state = "console";
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/rescue_base/start)
 "anb" = (
 /obj/effect/landmark{
@@ -5731,33 +5872,31 @@
 	},
 /area/ninja_dojo/dojo)
 "ank" = (
-/obj/item/modular_computer/console/preset/medical{
-	icon_state = "console";
-	dir = 4
+/obj/machinery/door/airlock/centcom{
+	name = "Echo Barracks";
+	opacity = 1;
+	req_access = list(103)
 	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/rescue_base/base)
 "anl" = (
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anm" = (
-/obj/item/modular_computer/console/preset/engineering{
-	icon_state = "console";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
+/obj/item/weapon/stool,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/rescue_base/start)
 "ann" = (
-/obj/item/device/radio/intercom/specops{
-	dir = 8;
-	pixel_x = 22;
-	pixel_y = 0
+/obj/structure/table/steel_reinforced,
+/obj/machinery/flasher{
+	id = "rescueflash";
+	pixel_x = 0;
+	pixel_y = -28
 	},
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 8
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/rescue_base/start)
 "ano" = (
 /obj/structure/table/standard,
@@ -5822,6 +5961,12 @@
 	dir = 2
 	},
 /area/wizard_station)
+"anv" = (
+/obj/machinery/atmospherics/pipe/tank/air{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "anw" = (
 /obj/structure/bed/chair/wood/wings{
 	icon_state = "wooden_chair_wings";
@@ -5955,51 +6100,64 @@
 	},
 /area/ninja_dojo/dojo)
 "anJ" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/machinery/computer/prisoner{
-	dir = 4;
-	name = "Implant Management"
-	},
-/turf/simulated/floor/tiled/dark,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/reinforced,
 /area/rescue_base/start)
 "anK" = (
-/obj/item/modular_computer/console/preset/security{
-	icon_state = "console";
+/turf/unsimulated/floor{
+	icon_state = "vault";
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
+/turf/unsimulated/wall{
+	desc = "A secure airlock. Doesn't look like you can get through easily.";
+	icon = 'icons/obj/doors/centcomm/door.dmi';
+	icon_state = "closed";
+	name = "Delta Barracks";
+	dir = 4
+	},
+/area/rescue_base/base)
 "anL" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 4;
-	frequency = 1331;
-	id_tag = "rescue_shuttle_pump"
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 1;
+	icon_state = "pdoor0";
+	id = "rescueinfirm";
+	name = "Blast Shutters";
+	opacity = 0
 	},
-/obj/machinery/light{
-	dir = 8
-	},
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anM" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible,
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anN" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible,
-/obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anO" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
-	frequency = 1331;
-	id_tag = "rescue_shuttle_pump"
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 1;
+	icon_state = "pdoor0";
+	id = "rescueeva";
+	name = "Blast Shutters";
+	opacity = 0
 	},
-/obj/machinery/light{
-	dir = 4
-	},
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anP" = (
@@ -6115,28 +6273,40 @@
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aof" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Flight Deck";
-	opacity = 1;
-	req_access = list(103)
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 1;
+	icon_state = "pdoor0";
+	id = "rescuebridge";
+	name = "Blast Shutters";
+	opacity = 0
 	},
-/turf/simulated/floor/tiled/dark,
+/obj/effect/paint/hull,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aog" = (
-/obj/machinery/atmospherics/pipe/simple/visible,
-/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aoh" = (
-/obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/door/airlock/external{
-	frequency = 1331;
-	id_tag = "rescue_shuttle_inner";
-	name = "Ship External Access";
-	req_access = list(103)
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
 	},
+/turf/simulated/shuttle/wall{
+	dir = 1;
+	icon_state = "diagonalWall3"
+	},
+/area/supply/dock)
+"aoh" = (
 /turf/simulated/floor/plating,
-/area/rescue_base/start)
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/turf/simulated/shuttle/wall{
+	dir = 8;
+	icon_state = "diagonalWall3"
+	},
+/area/supply/dock)
 "aoi" = (
 /turf/unsimulated/wall/fakeglass,
 /area/wizard_station)
@@ -6260,81 +6430,6 @@
 	icon_state = "asteroidplating"
 	},
 /area/rescue_base/base)
-"aov" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
-	opacity = 0
-	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aow" = (
-/obj/structure/closet,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aox" = (
-/obj/structure/table/rack,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoy" = (
-/obj/machinery/atmospherics/pipe/tank/air{
-	dir = 4;
-	start_pressure = 740.5
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoz" = (
-/obj/machinery/atmospherics/pipe/manifold/visible,
-/obj/machinery/meter,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoA" = (
-/obj/machinery/atmospherics/pipe/manifold/visible,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "rescue_shuttle";
-	name = "interior access button";
-	pixel_x = 25;
-	pixel_y = 25;
-	req_access = list(103)
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoB" = (
-/obj/machinery/atmospherics/pipe/tank/air{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoC" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id = "rescueeva";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "aoD" = (
 /obj/structure/bookcase,
 /obj/item/weapon/book/manual/nuclear,
@@ -6397,33 +6492,29 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"aoM" = (
-/obj/structure/closet,
-/obj/item/weapon/storage/box/sinpockets,
-/obj/item/weapon/storage/box/sinpockets,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoN" = (
-/obj/structure/closet/bombclosetsecurity,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoO" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoP" = (
-/obj/structure/handrai,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aoQ" = (
+"aoL" = (
 /obj/machinery/suit_storage_unit/standard_unit,
-/turf/simulated/floor/tiled/dark,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aoR" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1331;
+	master_tag = "rescue_shuttle";
+	name = "interior access button";
+	pixel_x = -25;
+	pixel_y = 0;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aoS" = (
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/manifold/visible,
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/rescue_base/start)
 "aoT" = (
 /obj/structure/table/woodentable,
@@ -6508,29 +6599,22 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"apd" = (
-/obj/structure/closet,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"ape" = (
+"apc" = (
 /obj/item/device/radio/intercom/specops{
-	dir = 8;
-	pixel_x = 22;
-	pixel_y = 0
+	dir = 1;
+	pixel_y = -22
 	},
-/obj/structure/closet/l3closet/general,
+/obj/structure/table/rack,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/machinery/button/remote/blast_door{
+	icon_state = "doorctrl0";
+	id = "rescueeva";
+	name = "Window Shutters Control";
+	pixel_x = 0;
+	pixel_y = -24;
+	req_access = list(108)
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apf" = (
@@ -6538,6 +6622,9 @@
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/tank/emergency/oxygen/double,
 /turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
+"apg" = (
+/turf/simulated/floor/tiled/white/monotile,
 /area/rescue_base/start)
 "aph" = (
 /obj/structure/bed/chair,
@@ -6615,62 +6702,6 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"aps" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/structure/closet/radiation,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apt" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apu" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apw" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apx" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apy" = (
-/obj/item/device/radio/intercom/specops{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apz" = (
-/obj/structure/table/rack,
-/obj/machinery/light,
-/obj/item/weapon/tank/jetpack/carbondioxide,
-/obj/item/weapon/tank/jetpack/carbondioxide,
-/obj/machinery/button/remote/blast_door{
-	icon_state = "doorctrl0";
-	id = "rescueeva";
-	name = "Window Shutters Control";
-	pixel_x = 24;
-	pixel_y = -4;
-	req_access = list(108)
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "apA" = (
 /obj/item/clothing/head/collectable/paper,
 /turf/unsimulated/beach/sand,
@@ -6692,44 +6723,6 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"apE" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Crew Area";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apF" = (
-/obj/structure/sign/poster/bay_9{
-	pixel_x = -32
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apG" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apH" = (
-/obj/machinery/vending/wallmed1{
-	layer = 3.3;
-	name = "Emergency NanoMed";
-	pixel_x = 28;
-	pixel_y = 0;
-	req_access = newlist()
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apI" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Passageway";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "apK" = (
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
@@ -6843,18 +6836,6 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"apX" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"apY" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "apZ" = (
 /turf/unsimulated/beach/water{
 	density = 1;
@@ -6878,57 +6859,6 @@
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/orange,
 /turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqd" = (
-/obj/machinery/flasher{
-	id = "rescueflash";
-	pixel_x = 0;
-	pixel_y = 28
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqe" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqf" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Storage";
-	opacity = 1;
-	req_access = list(103)
-	},
-/obj/effect/shuttle_landmark/ert/start,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aqg" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Storage";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aqh" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Infirmary";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqi" = (
-/obj/machinery/atmospherics/unary/cryo_cell,
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqj" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
-/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqk" = (
 /obj/structure/table/glass,
@@ -7000,28 +6930,6 @@
 /obj/item/weapon/stool,
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
-"aqt" = (
-/obj/structure/hygiene/toilet{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqu" = (
-/obj/structure/table/rack,
-/obj/random/solgov,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqv" = (
-/obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aqw" = (
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aqx" = (
-/obj/machinery/shieldwallgen,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "aqy" = (
 /obj/structure/closet/secure_closet/chemical,
 /turf/simulated/floor/tiled/white,
@@ -7032,13 +6940,6 @@
 "aqA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
-	icon_state = "intact"
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqB" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
@@ -7118,61 +7019,6 @@
 	name = "water"
 	},
 /area/ninja_dojo/dojo)
-"aqJ" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Cell";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqK" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"aqL" = (
-/obj/structure/closet/secure_closet/medical1,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqM" = (
-/obj/structure/closet/medical_wall{
-	pixel_y = 32
-	},
-/obj/item/weapon/reagent_containers/glass/bottle/antitoxin{
-	pixel_x = -4;
-	pixel_y = 8
-	},
-/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline{
-	pixel_x = 4;
-	pixel_y = 7
-	},
-/obj/item/weapon/reagent_containers/syringe,
-/obj/item/weapon/reagent_containers/syringe/antiviral,
-/obj/item/weapon/reagent_containers/syringe/antiviral,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqN" = (
-/obj/machinery/bodyscanner{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqO" = (
-/obj/machinery/body_scanconsole{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"aqP" = (
-/obj/machinery/sleeper{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
 "aqQ" = (
 /obj/item/remains/human,
 /turf/unsimulated/floor{
@@ -7199,59 +7045,9 @@
 	name = "grass"
 	},
 /area/wizard_station)
-"aqV" = (
-/obj/machinery/recharger/wallcharger{
-	pixel_x = -25
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqX" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Brig";
-	opacity = 1;
-	req_access = list(103)
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqY" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqZ" = (
-/obj/machinery/recharge_station,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"ara" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/structure/closet/crate/secure{
-	req_access = list(103)
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "arb" = (
 /obj/structure/table/glass,
 /obj/item/weapon/defibrillator/loaded,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"arc" = (
-/obj/item/device/radio/intercom/specops{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"ard" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"are" = (
-/obj/item/device/radio/intercom/specops{
-	dir = 8;
-	pixel_x = 22;
-	pixel_y = 0
-	},
 /turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arf" = (
@@ -7315,60 +7111,6 @@
 	icon_state = "dark"
 	},
 /area/ninja_dojo/dojo)
-"arn" = (
-/obj/machinery/button/flasher{
-	id = "rescueflash";
-	name = "Flasher";
-	pixel_x = 27;
-	pixel_y = 0
-	},
-/obj/structure/bed/chair{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aro" = (
-/obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"arp" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/hygiene/sink{
-	icon_state = "sink";
-	dir = 8;
-	pixel_x = -12;
-	pixel_y = 2
-	},
-/obj/structure/closet/medical_wall{
-	pixel_x = -32
-	},
-/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
-/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
-/obj/item/weapon/reagent_containers/syringe,
-/obj/item/weapon/tank/anesthetic,
-/obj/item/clothing/mask/breath/medical,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"arq" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/iv_drip,
-/obj/machinery/button/remote/blast_door{
-	icon_state = "doorctrl0";
-	id = "rescueinfirm";
-	name = "Window Shutters Control";
-	pixel_x = 24;
-	pixel_y = -4;
-	req_access = list(108)
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
 "arr" = (
 /obj/structure/flora/ausbushes/grassybush,
 /turf/unsimulated/floor{
@@ -7463,66 +7205,6 @@
 	icon_state = "dark"
 	},
 /area/ninja_dojo/dojo)
-"arB" = (
-/obj/item/device/flashlight/lantern,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/rescue_base/base)
-"arC" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"arD" = (
-/obj/structure/closet{
-	name = "Prisoner's Locker"
-	},
-/obj/item/clothing/shoes/orange,
-/obj/item/clothing/under/color/orange,
-/obj/item/device/radio/intercom/specops{
-	dir = 8;
-	pixel_x = 22;
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"arE" = (
-/obj/structure/shuttle/engine/heater,
-/obj/structure/window/reinforced/crescent{
-	dir = 1
-	},
-/turf/simulated/floor/airless,
-/area/rescue_base/start)
-"arF" = (
-/obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/spray/sterilizine,
-/obj/item/weapon/reagent_containers/spray/cleaner,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"arG" = (
-/obj/machinery/optable,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"arH" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id = "rescueinfirm";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "arI" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Equipment"
@@ -7540,54 +7222,6 @@
 	icon_state = "dark"
 	},
 /area/ninja_dojo/dojo)
-"arK" = (
-/obj/item/weapon/pickaxe/diamonddrill,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/rescue_base/base)
-"arL" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"arM" = (
-/obj/structure/closet{
-	name = "Prisoner's Locker"
-	},
-/obj/item/clothing/shoes/orange,
-/obj/item/clothing/under/color/orange,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"arN" = (
-/obj/structure/shuttle/engine/propulsion,
-/turf/space,
-/area/rescue_base/start)
-"arO" = (
-/obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/syringe/antiviral,
-/obj/item/weapon/reagent_containers/syringe/antiviral,
-/obj/item/stack/medical/advanced/bruise_pack,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"arP" = (
-/obj/structure/table/glass,
-/obj/item/weapon/storage/firstaid/surgery,
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
-"arQ" = (
-/obj/structure/table/glass,
-/obj/item/clothing/mask/surgical,
-/obj/item/clothing/gloves/latex,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/rescue_base/start)
 "arR" = (
 /obj/structure/flora/pottedplant/unusual,
 /turf/unsimulated/floor{
@@ -9082,17 +8716,6 @@
 	icon_state = "white"
 	},
 /area/centcom/living)
-"avA" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "diagonalWall3"
-	},
-/area/supply/dock)
 "avB" = (
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -9107,16 +8730,13 @@
 /turf/simulated/floor/plating,
 /area/supply/dock)
 "avC" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+/obj/machinery/door/airlock/centcom{
+	name = "Infirmary";
+	opacity = 1;
+	req_access = list(103)
 	},
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "diagonalWall3"
-	},
-/area/supply/dock)
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
 "avD" = (
 /obj/structure/lattice,
 /turf/space,
@@ -10590,14 +10210,6 @@
 	icon_state = "white"
 	},
 /area/syndicate_mothership)
-"ayH" = (
-/obj/structure/hygiene/sink/kitchen{
-	pixel_y = 28
-	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/syndicate_mothership)
 "ayI" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /turf/unsimulated/floor{
@@ -11724,9 +11336,6 @@
 	},
 /area/syndicate_mothership)
 "aAU" = (
-/obj/structure/hygiene/shower{
-	pixel_y = 32
-	},
 /obj/structure/window/basic{
 	dir = 8
 	},
@@ -11736,9 +11345,6 @@
 	},
 /area/syndicate_mothership)
 "aAV" = (
-/obj/structure/hygiene/shower{
-	pixel_y = 32
-	},
 /obj/item/weapon/soap/syndie,
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
@@ -11928,15 +11534,6 @@
 	},
 /area/syndicate_mothership)
 "aBq" = (
-/turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
-	},
-/area/syndicate_mothership)
-"aBr" = (
-/obj/structure/hygiene/shower{
-	dir = 1
-	},
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2
@@ -12673,6 +12270,13 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"aCI" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "aCJ" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
@@ -12689,6 +12293,7 @@
 	opacity = 0
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aCK" = (
@@ -12845,6 +12450,13 @@
 	icon_state = "black"
 	},
 /area/space)
+"aCY" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "aCZ" = (
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
@@ -13173,10 +12785,6 @@
 	pixel_y = -5;
 	req_access = list(150)
 	},
-/turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
-"aDJ" = (
-/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "aDK" = (
@@ -14567,6 +14175,14 @@
 /obj/machinery/optable,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
+"aGJ" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Passageway";
+	opacity = 1;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aGK" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -14714,6 +14330,13 @@
 	icon_state = "steel"
 	},
 /area/centcom/holding)
+"aHf" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/recharger{
+	pixel_y = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aHg" = (
 /obj/structure/bed/chair/wood/wings{
 	icon_state = "wooden_chair_wings";
@@ -14903,6 +14526,10 @@
 	icon_state = "desert1"
 	},
 /area/centcom/holding)
+"aHE" = (
+/obj/item/modular_computer/console/preset/security,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aHF" = (
 /obj/structure/table/woodentable{
 	dir = 5
@@ -15011,6 +14638,13 @@
 	dir = 5
 	},
 /area/shuttle/transport1/centcom)
+"aHT" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aHV" = (
 /obj/structure/table/woodentable{
 	dir = 5
@@ -15100,6 +14734,16 @@
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/transport1/centcom)
+"aIg" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/sign/poster/bay_9{
+	pixel_x = -32
+	},
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aIh" = (
 /obj/structure/closet/secure_closet/bar{
 	req_access = list(25)
@@ -15178,6 +14822,20 @@
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/transport1/centcom)
+"aIr" = (
+/obj/machinery/computer/prisoner{
+	name = "Implant Management";
+	icon_state = "computer";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aIs" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aIt" = (
 /turf/unsimulated/beach/sand{
 	icon_state = "beachcorner"
@@ -15354,6 +15012,10 @@
 	icon_state = "wall3"
 	},
 /area/syndicate_mothership/elite_squad)
+"aIQ" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aIR" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -16831,6 +16493,13 @@
 	name = "plating"
 	},
 /area/acting/backstage)
+"aMc" = (
+/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aMd" = (
 /obj/machinery/atmospherics/pipe/vent,
 /turf/unsimulated/floor{
@@ -16949,7 +16618,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
@@ -17034,7 +16703,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
@@ -17385,14 +17054,26 @@
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNx" = (
-/obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 4
-	},
 /obj/structure/curtain/open/shower,
 /obj/structure/window/reinforced,
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
+"aNy" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Storage";
+	opacity = 1;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aNz" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Flight Deck";
+	opacity = 1;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aNA" = (
 /obj/machinery/door/airlock{
 	name = "Toilet"
@@ -17540,7 +17221,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
@@ -17564,11 +17245,6 @@
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNZ" = (
-/obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0
-	},
 /obj/structure/curtain/open/shower,
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -18546,6 +18222,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
+"aQn" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/rescue_base/start)
 "aQo" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -18573,7 +18259,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
@@ -18590,24 +18276,12 @@
 	icon_state = "asteroid"
 	},
 /area/syndicate_mothership/raider_base)
-"aQt" = (
-/obj/structure/hygiene/shower{
-	dir = 1
+"aQs" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 4
 	},
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/syndicate_mothership/raider_base)
-"aQu" = (
-/obj/structure/hygiene/shower{
-	dir = 1
-	},
-/turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
-	},
-/area/syndicate_mothership/raider_base)
+/turf/simulated/floor/plating,
+/area/rescue_base/start)
 "aQv" = (
 /obj/structure/table/woodentable,
 /obj/effect/floor_decal/carpet{
@@ -18740,7 +18414,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
@@ -18800,7 +18474,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -19285,6 +18959,36 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/raider_base)
+"aRQ" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
+"aRR" = (
+/obj/machinery/atmospherics/pipe/tank/air{
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
+"aRS" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aRT" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/shieldwallgen,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aRU" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -19298,6 +19002,18 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/merchant/home)
+"aRV" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/freezer/rations,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aRW" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aRX" = (
 /obj/machinery/door/airlock/multi_tile/glass{
 	autoclose = 1;
@@ -19346,6 +19062,24 @@
 	icon_state = "wood_broken1"
 	},
 /area/syndicate_mothership/raider_base)
+"aSe" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/secure{
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aSf" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/freezer/rations,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aSg" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aSh" = (
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker";
@@ -19356,6 +19090,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
+"aSi" = (
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aSj" = (
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
@@ -19549,7 +19287,7 @@
 	dir = 1
 	},
 /obj/machinery/door/window/brigdoor/eastright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
@@ -19612,6 +19350,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/merchant/home)
+"aSN" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Brig";
+	opacity = 1;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aSO" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -19714,6 +19460,10 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/raider_base)
+"aTb" = (
+/obj/structure/hygiene/toilet,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aTc" = (
 /obj/machinery/computer/shuttle_control/merchant{
 	icon_state = "computer";
@@ -19742,7 +19492,7 @@
 "aTf" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Cockpit";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/wood,
 /area/shuttle/merchant/home)
@@ -19809,7 +19559,7 @@
 	id_tag = "merchant_ship_interior";
 	locked = 1;
 	name = "Ship Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/merchant/home)
@@ -19869,6 +19619,15 @@
 /obj/item/trash/cheesie,
 /turf/space,
 /area/space)
+"aTu" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/flasher{
+	id = "rescueflash";
+	pixel_x = 0;
+	pixel_y = 28
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aTv" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/paper_bin{
@@ -19921,7 +19680,7 @@
 "aTC" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/brigdoor/eastright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/light,
 /obj/structure/closet/walllocker/emerglocker/south,
@@ -19949,6 +19708,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
+"aTG" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Cell";
+	opacity = 1;
+	req_access = list(103)
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aTH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
@@ -19975,7 +19742,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -20028,14 +19795,28 @@
 /area/shuttle/merchant/home)
 "aTU" = (
 /obj/machinery/door/window/brigdoor/northright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
+"aTV" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aTW" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/rescue_base/start)
 "aTX" = (
 /obj/machinery/door/window/brigdoor/northright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /obj/machinery/light{
@@ -20050,7 +19831,7 @@
 	id_tag = "merchant_ship_exterior";
 	locked = 1;
 	name = "Ship Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -20156,7 +19937,7 @@
 	id_tag = "merchant_station_exterior";
 	locked = 1;
 	name = "Station Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/merchant_station)
@@ -20465,7 +20246,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
@@ -20752,6 +20533,10 @@
 /obj/random/junk,
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
+"aVD" = (
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aVE" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external{
@@ -20855,7 +20640,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -21656,7 +21441,6 @@
 "aXB" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
-/obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aXC" = (
@@ -22046,6 +21830,76 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
+"aYG" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/vending/wallmed1{
+	layer = 3.3;
+	name = "Emergency NanoMed";
+	pixel_x = 0;
+	pixel_y = 28
+	},
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aYH" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
+"aYI" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aYJ" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aYK" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aYL" = (
+/obj/structure/closet/radiation,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aYN" = (
+/obj/structure/closet/bombclosetsecurity,
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22;
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aYZ" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
 "aZb" = (
 /obj/item/modular_computer/console/preset/civilian{
 	icon_state = "console";
@@ -22055,6 +21909,119 @@
 	icon_state = "steel"
 	},
 /area/centcom/control)
+"aZc" = (
+/obj/structure/table/rack,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aZd" = (
+/obj/structure/closet{
+	name = "Prisoner's Locker"
+	},
+/obj/item/clothing/under/color/orange,
+/obj/item/clothing/shoes/orange,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aZe" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"aZg" = (
+/obj/structure/table/glass,
+/obj/structure/closet/medical_wall{
+	pixel_y = 32
+	},
+/obj/item/weapon/reagent_containers/glass/bottle/antitoxin{
+	pixel_x = -4;
+	pixel_y = 8
+	},
+/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline{
+	pixel_x = 4;
+	pixel_y = 7
+	},
+/obj/item/weapon/reagent_containers/syringe,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/turf/simulated/floor/tiled/white,
+/area/rescue_base/start)
+"aZh" = (
+/obj/structure/closet/secure_closet/chemical,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"aZl" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/glass,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"aZp" = (
+/obj/machinery/bodyscanner{
+	dir = 8
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"aZq" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/iv_drip,
+/turf/simulated/floor/tiled/white/monotile,
+/area/rescue_base/start)
+"aZt" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/machinery/body_scanconsole{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/rescue_base/start)
+"aZv" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aZw" = (
+/obj/structure/table/rack,
+/obj/random/solgov,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aZx" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/table/rack,
+/obj/random/solgov,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rescue_base/start)
+"aZz" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "asteroidfloor"
+	},
+/area/rescue_base/base)
 "bab" = (
 /obj/item/weapon/storage/backpack,
 /turf/unsimulated/floor{
@@ -22147,6 +22114,7 @@
 	req_access = list(150)
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
 "bfZ" = (
@@ -22723,13 +22691,6 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
-"hMS" = (
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "ikd" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
@@ -22900,10 +22861,6 @@
 	},
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
-"kRX" = (
-/obj/structure/bed/chair/shuttle,
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "kUL" = (
 /obj/machinery/porta_turret_construct,
 /turf/simulated/floor/shuttle/darkred,
@@ -22952,12 +22909,6 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
-"mgq" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
 "mlL" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/weapon/flame/candle{
@@ -23401,32 +23352,32 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -23602,33 +23553,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -23804,33 +23755,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -24006,33 +23957,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-arK
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -24208,33 +24159,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-adA
-adA
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -24410,33 +24361,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-arB
-adA
-adB
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -24609,36 +24560,36 @@ aae
 aad
 aad
 aad
-adA
-adA
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-adB
-adB
-adA
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -24810,37 +24761,37 @@ aae
 aae
 aad
 aad
-adA
-adA
-adA
-adA
 aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-adB
-adA
-adB
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -25013,36 +24964,36 @@ aad
 aad
 aad
 aad
-adB
-adA
-aad
-adB
-adA
-adC
-adB
-adB
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-adB
-adB
-adB
-adB
-adB
-adB
-aou
-adB
-adB
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -25215,36 +25166,36 @@ aad
 aad
 aad
 aad
-adB
-adB
-adB
-adB
-adB
-adA
-adA
-aou
-adB
-adB
-aad
-aad
-adB
-adB
-adB
-adA
-adC
-adB
-adC
-adB
-adA
-adA
-adB
-adB
-adB
 aad
 aad
 aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -25417,36 +25368,36 @@ aad
 aad
 adB
 adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adA
-adB
-adB
-adB
-adB
-adA
-adB
-adB
 aad
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -25618,37 +25569,37 @@ aad
 aad
 aad
 adB
-alG
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-alT
-asr
+adB
 adB
 aad
 aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -25820,37 +25771,37 @@ aad
 aad
 adB
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-ass
 adB
 adB
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26022,37 +25973,37 @@ aad
 aad
 adB
 adA
-alH
-alU
-amk
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aml
-aml
-aml
-aml
-aml
-arC
-aml
-aml
-aml
-alU
-ass
 adB
 adB
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26224,37 +26175,37 @@ aad
 aad
 aad
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aqc
-aqs
-aoe
-aqV
-aqV
-mgq
-arL
-arE
-arN
-alU
-ass
 adB
 adB
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26426,37 +26377,37 @@ aad
 aad
 aad
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aqd
-anl
-aqJ
-anl
-anl
-anl
-anl
-arE
-arN
-alU
-ass
 adB
-adC
 adB
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26628,37 +26579,37 @@ aad
 aad
 adB
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aqe
-aqt
-aoe
-anl
-arn
-arD
-arM
-arE
-arN
-alU
-ass
 adB
 adB
 adB
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26800,8 +26751,8 @@ aab
 aaa
 aad
 aae
-abb
-abb
+abo
+abo
 bJb
 acu
 aae
@@ -26830,37 +26781,37 @@ adB
 adB
 adB
 adA
-alH
-alU
-aml
-aml
-aml
-aml
-aml
-aml
-aov
-aov
-aov
-aml
-aml
-alU
-aml
-aml
-aml
-aml
-aqX
-aml
-aml
-aml
-aml
-aml
-alU
-ass
+adB
 adB
 adB
 aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27032,37 +26983,37 @@ adA
 adB
 adA
 adB
-alH
-alU
-amm
-amD
-amV
-ank
-anJ
-aoe
-aow
-aoM
-apd
-aow
-aml
-alU
-alU
-alU
-aml
-anl
-anl
-aml
-alU
-alU
-alU
-alU
-alU
-ass
 adB
-adA
+adB
+adB
 aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27234,37 +27185,37 @@ adC
 adB
 adB
 adB
-alH
-alU
-amm
-amE
-amW
-anl
-anl
-aof
-anl
-anl
-anl
-hMS
-aml
-aml
-aml
-aml
-aml
-aoP
-aqY
-aml
-alU
-alU
-alU
-alU
-alU
-ass
 adB
 adB
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27436,37 +27387,37 @@ adB
 adB
 adA
 adB
-alH
-alU
-amm
-amF
-kRX
-anl
-anl
-aoe
-anl
-anl
-anl
-anl
-apE
-anl
-apX
-apI
-anl
-anl
-apy
-aml
-alU
-alU
-alU
-alU
-alU
-ass
-adA
 adB
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27638,37 +27589,37 @@ aae
 adB
 adB
 adB
-alH
-alU
-amm
-amG
-amX
-anm
-anK
-aoe
-aox
-aoN
-ape
-aps
-aoe
-anl
-anl
-aoe
-aqu
-aqu
-aqZ
-aml
-alU
-alU
-alU
-alU
-alU
-ass
-adB
 adB
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27840,37 +27791,37 @@ aae
 adB
 adB
 aih
-alH
-alU
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aoP
-hMS
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-alU
-alU
-alU
-ass
-adB
 adB
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -28042,37 +27993,37 @@ acy
 adB
 adA
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-apt
-apF
-anl
-anl
-aml
-aqv
-aqK
-aqw
-aro
-arE
-arN
-alU
-alU
-alU
-ass
 adB
 aad
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -28244,37 +28195,37 @@ acy
 adB
 adB
 adA
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-apu
-apG
-anl
-anl
-aqf
-aqw
-aqw
-aqw
-aro
-arE
-arN
-alU
-alU
-alU
-ass
-adC
+adB
 aad
 aad
 aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -28446,37 +28397,37 @@ acy
 adB
 adB
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-amV
-apG
-anl
-anl
-aqg
-aqw
-aqw
-aqw
-aqw
-arE
-arN
-alU
-alU
-alU
-ass
-adB
 adB
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asQ
 asQ
@@ -28648,37 +28599,37 @@ acy
 adA
 adC
 adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-apw
-apH
-anl
-anl
-aml
-aqx
-aqx
-ara
-aqw
-arE
-arN
-alU
-alU
-alU
-ass
-adB
-adB
 aad
 aad
-aaa
+aad
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -28847,40 +28798,40 @@ akm
 aaO
 akF
 aae
-adB
-adB
-adB
-alH
-alU
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-aoP
-apy
-aml
-aml
-aml
-aml
-aml
-aml
-aml
-alU
-alU
-alU
-ass
-adB
-adB
+aae
+aae
+aae
 aad
 aad
-aaa
+aad
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -29049,40 +29000,40 @@ akm
 aaO
 akG
 aae
-adB
-adB
-adB
-alH
-alU
-aml
-amH
-amY
-amY
-anL
-aml
-aoy
-aoO
-apf
-apx
-aoe
-anl
-anl
-aoe
-aqy
-aqL
-arb
-aml
-alU
-alU
-alU
-alU
-alU
-ass
-adB
+aaL
+aaL
+aae
 aad
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -29251,40 +29202,40 @@ aaO
 aaO
 akH
 aae
-ajX
-ajX
-ajX
-ajX
-alV
-amr
-amI
-amZ
-amZ
-anM
-aog
-aoz
-anl
-anl
-anl
-apI
-anl
-apY
-aqh
-aqz
-aqz
-arc
-aml
-alU
-alU
-alU
-alU
-alU
-ass
-adB
+aaL
+aaL
+aae
 aad
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -29453,40 +29404,40 @@ aaO
 aaO
 akI
 aae
-ajX
-ajX
-ajX
-ajX
-alV
-ams
-amI
-amZ
-amZ
-anN
-aoh
-aoA
-anl
-anl
-apy
-aml
-aml
-aml
-aml
-aml
-aqM
-ard
-aml
-alU
-alU
-alU
-alU
-alU
-ass
-adB
+aaL
+aaL
+aae
 aad
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asS
@@ -29655,40 +29606,40 @@ ajW
 akv
 akJ
 aae
-ajX
-ajX
-adB
-alH
-alU
-aml
-amJ
-ana
-ann
-anO
-aml
-aoB
-aoQ
-aoQ
-apz
-aml
-alU
-alU
-alU
-aml
-aqN
-aqz
-aml
-alU
-alU
-alU
-alU
-alU
-ass
-adB
-adB
+aaL
+aaL
+aae
 aad
 aad
-aaa
+aad
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -29848,49 +29799,49 @@ aae
 aae
 aae
 aaL
-aiX
+aaL
 aae
 aae
-acy
-acy
-acy
-acy
 aae
 aae
-ajX
-ajX
-adB
-alH
-alU
-aml
-aml
-aml
-aml
-aml
-aml
-aoC
-aoC
-aoC
-aml
-aml
-alU
-aml
-aml
-aml
-aqO
-aqz
-aml
-aml
-aml
-aml
-aml
-alU
-ass
-adB
-adB
-aad
-aad
-aaa
+aae
+aae
+aae
+aae
+anK
+anK
+aae
+aae
+aae
+aae
+aae
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -30051,48 +30002,48 @@ aaL
 aiq
 aaL
 aaL
-ajl
-ajz
-ajI
-ajX
-ajX
-ajX
-ajX
-ajX
-ajX
-ajX
-adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aqi
-aqA
-aqz
-aqz
-arp
-arF
-arO
-arE
-arN
-alU
-ass
-adB
-adB
-aad
-aad
-aaa
+ank
+aaL
+aaL
+aaL
+aaL
+aaL
+aaL
+ank
+aaL
+aaL
+ank
+aaL
+aaL
+aaL
+aaL
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -30253,48 +30204,48 @@ aaL
 aiq
 aaL
 aaL
-ajl
-ajz
-ajI
-ajY
-akn
-akn
-akn
-akn
-akT
-ajX
-adA
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aqj
-aqB
-aqz
-aqz
-aqz
-aqz
-arP
-arE
-arN
-alU
-ass
-adB
-adB
-aad
-aad
-aaa
+ank
+aaL
+aaL
+aaL
+aaL
+aaL
+aaL
+ank
+aaL
+aaL
+ank
+aaL
+aaL
+aaL
+aaL
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -30459,44 +30410,44 @@ aae
 aae
 aae
 aae
-ako
-ako
-ako
-ako
 aae
 aae
-adB
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aqk
-aqz
-aqP
-are
-arq
-arG
-arQ
-arE
-arN
-alU
-ass
-adB
-adB
-aad
-aad
-aaa
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -30658,7 +30609,7 @@ aae
 aaL
 aaL
 aaL
-aaL
+ajI
 ajJ
 ajZ
 aaL
@@ -30667,38 +30618,38 @@ aaL
 aaL
 akU
 aae
-adB
-alH
-alU
-amk
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-aml
-aml
-aml
-aml
-aml
-aml
-arH
-aml
-aml
-aml
-alU
-ass
-adB
-aad
-aad
-aad
-aaa
+aae
+aae
+aae
+aae
+aae
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -30860,7 +30811,7 @@ aae
 abW
 aaL
 aaL
-aaL
+ajI
 ajJ
 aaL
 aaL
@@ -30869,38 +30820,38 @@ aaL
 aaL
 akV
 aae
-adC
-alH
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-alU
-ass
-adB
 aad
 aad
 aad
-aaa
+aad
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -31071,38 +31022,38 @@ aaL
 aaL
 akW
 aae
-adA
-alI
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-alW
-ast
-adB
-adB
 aad
 aad
-aaa
+aad
+aad
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -31273,38 +31224,38 @@ aaL
 aaL
 akX
 aae
-adA
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adA
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adA
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
-adB
 aad
 aad
 aad
-aaa
+aad
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -31463,8 +31414,8 @@ aaL
 aaL
 ahS
 aae
-aiF
-aiF
+aaL
+aaL
 aae
 aad
 aae
@@ -31475,38 +31426,38 @@ akK
 aaL
 akY
 aae
-adB
-adC
-adB
-adA
-adB
-adB
-aad
-aad
-adA
-adB
-adB
-adA
-adB
-adA
-adA
-adB
-adB
-adB
-adB
-aou
-adB
-adA
-adB
-adB
-adB
-adC
-adA
 aad
 aad
 aad
 aad
-aaa
+aad
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asT
@@ -31677,38 +31628,38 @@ aae
 akQ
 aae
 aae
-adA
-adA
 aad
 aad
 aad
 aad
 aad
-aad
-aad
-aad
-adB
-adB
-adA
-adB
-aad
-aad
-adB
-adB
-adB
-adA
-adB
-adB
-adB
-adB
-aad
-adB
-adB
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asU
@@ -31865,8 +31816,8 @@ aae
 aae
 aae
 aae
-ahT
-aaL
+aad
+aae
 aaL
 aaL
 aae
@@ -31879,38 +31830,38 @@ akL
 aaL
 aaO
 aae
-adB
 aad
 aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-adB
-adB
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-adB
-adB
-adB
-adB
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -32066,11 +32017,11 @@ aad
 aad
 aad
 aad
+aad
+aad
 aae
-ahT
 aaL
-aaL
-aaL
+aiX
 aae
 aad
 aad
@@ -32086,33 +32037,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-adB
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -32268,53 +32219,53 @@ aad
 aad
 aad
 aad
-aae
-aae
-aae
-aaL
-aaL
-aae
-aad
-aad
 aad
 aad
 aae
-aae
-aae
-aae
+abT
+abT
 aae
 aad
 aad
 aad
 aad
+aae
+aae
+aae
+aae
+aae
 aad
 aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-adA
-adA
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -32473,8 +32424,8 @@ aad
 aad
 aad
 aae
-aiG
-aiG
+ajz
+ajz
 aae
 aad
 aad
@@ -32490,33 +32441,33 @@ aad
 aad
 aad
 aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aad
-aaa
+aae
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 asP
 asR
 asR
@@ -32656,43 +32607,43 @@ aab
 "}
 (47,1,1) = {"
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+ajl
+ajl
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
 aaa
 aaa
 aaa
@@ -32857,36 +32808,41 @@ aab
 aab
 "}
 (48,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+ajX
+ajX
+adB
+adB
+adB
+adB
+adB
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 ala
 ala
 ala
@@ -32920,11 +32876,6 @@ ala
 ala
 ala
 ala
-aaa
-aab
-aab
-aab
-aab
 ath
 att
 atH
@@ -33059,36 +33010,41 @@ aab
 aab
 "}
 (49,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+aad
+aad
+aad
+adB
+adB
+adB
+adB
+adB
+aou
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+ajX
+ajX
+adB
+aou
+adB
+adB
+adB
+adB
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 ala
 alg
 alg
@@ -33122,11 +33078,6 @@ apZ
 apZ
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
 ath
 atu
 atu
@@ -33261,36 +33212,41 @@ aab
 aab
 "}
 (50,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adC
+adB
+adB
+adB
+adB
+adB
+adB
+ajX
+ajX
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+aad
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -33324,11 +33280,6 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
 ath
 atv
 atu
@@ -33463,36 +33414,41 @@ aab
 aab
 "}
 (51,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alG
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+alT
+ajX
+ajX
+alT
+alT
+alT
+alT
+alT
+alT
+asr
+adB
+aad
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -33526,11 +33482,6 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
 ath
 ath
 atI
@@ -33665,36 +33616,41 @@ aab
 aab
 "}
 (52,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aeB
-aeB
-aeB
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+aZz
+aZz
+alU
+alU
+alU
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -33728,12 +33684,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 ath
 atJ
 atJ
@@ -33867,36 +33818,41 @@ aab
 aab
 "}
 (53,1,1) = {"
-aab
-aab
-aab
-aab
-abw
-aca
-aca
-aca
-adJ
-aab
-aab
-aeB
-aeB
-aeB
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+adB
+alH
+alU
+amk
+alU
+amJ
+amJ
+amJ
+amJ
+amJ
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+amJ
+ahk
+ahk
+amJ
+amJ
+alU
+alU
+amk
+alU
+ass
+adC
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -33930,12 +33886,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 ath
 atK
 atO
@@ -34069,36 +34020,41 @@ aab
 aab
 "}
 (54,1,1) = {"
-aab
-aab
-aab
-aab
-abx
-acb
-acD
-adi
-acO
-adJ
-aab
-aeB
-aeB
-aeB
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+alU
+alU
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+alU
+alU
+alU
+alU
+alU
+amJ
+amJ
+ahG
+aij
+amJ
+amJ
+alU
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -34132,12 +34088,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 ath
 atL
 atL
@@ -34271,36 +34222,41 @@ aab
 aab
 "}
 (55,1,1) = {"
-aab
-aab
-aab
-aab
-aby
-acb
-acE
-adi
-adi
-acd
-aab
-aeB
-aeB
-aeB
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+alU
+amJ
+amJ
+ahi
+akT
+ams
+amF
+amJ
+amJ
+anN
+anN
+anN
+amJ
+amJ
+ahj
+ahT
+aiF
+akB
+amJ
+amJ
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -34334,12 +34290,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 ath
 atM
 atY
@@ -34473,36 +34424,41 @@ aab
 aab
 "}
 (56,1,1) = {"
-aab
-aab
-aab
-aab
-abz
-acb
-acF
-adj
-adK
-acg
-aca
-aca
-aeI
-aca
-acc
-aca
-agK
-aca
-aca
-aca
-adJ
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+adB
+alH
+alU
+alU
+amJ
+amJ
+ajY
+aqz
+aqz
+amG
+amJ
+amJ
+amW
+amX
+amY
+amJ
+amJ
+ahj
+ahT
+aoS
+akB
+amJ
+amJ
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 als
@@ -34536,12 +34492,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 atw
 atN
 atZ
@@ -34675,36 +34626,41 @@ aab
 aab
 "}
 (57,1,1) = {"
-aab
-aab
-aab
-aab
-abA
-acc
-acG
-adk
-adm
-adW
-ael
-aeC
-aeJ
-acH
-acd
-agp
-agL
-ahn
-ahU
-ahn
-aiH
-adJ
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+adC
+alH
+alU
+alU
+amJ
+amJ
+aZq
+aqz
+aqz
+aZl
+amJ
+amJ
+aHf
+aHT
+amZ
+amJ
+amJ
+ahj
+ahW
+aiG
+akB
+amJ
+amJ
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 als
@@ -34738,12 +34694,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 atw
 atL
 atL
@@ -34877,36 +34828,41 @@ aab
 aab
 "}
 (58,1,1) = {"
-aab
-aao
-aao
-aao
-aao
-acd
-acH
-adl
-adm
-adl
-adn
-adl
-adm
-afi
-acd
-agp
-agL
-agL
-agL
-agL
-aiH
-acg
-aca
-aca
-adJ
-aab
-aab
-aab
-aab
 aaa
+aad
+adB
+alH
+alU
+alU
+amJ
+amJ
+aqy
+aqz
+aqz
+arb
+amJ
+amJ
+aMc
+aHT
+ana
+amJ
+amJ
+amJ
+aii
+amn
+aoe
+amJ
+amJ
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 als
@@ -34940,12 +34896,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 atw
 atO
 atO
@@ -35079,36 +35030,41 @@ aab
 aab
 "}
 (59,1,1) = {"
-aab
-aao
-aao
-aao
-aao
-ace
-acI
-adm
-adm
-adm
-adm
-adm
-adm
-adm
-acd
-agq
-agL
-agL
-agL
-agL
-acd
-aiY
-ajm
-ajA
-ajK
-aab
-aab
-aab
-aab
 aaa
+aad
+adB
+alH
+alU
+alU
+amJ
+amJ
+aZh
+apg
+apg
+aZp
+amJ
+amJ
+aHE
+amo
+aIr
+amJ
+amJ
+aoR
+amo
+amp
+anv
+amJ
+amJ
+alU
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -35142,12 +35098,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 atw
 atP
 atO
@@ -35281,36 +35232,41 @@ aab
 aab
 "}
 (60,1,1) = {"
-aab
-aao
-aao
-aao
-aao
-acd
-acJ
-adl
-adm
-adl
-aem
-aem
-adl
-adm
-afS
-agr
-agM
-aho
-agr
-agM
-aiI
-aen
-adl
-ajB
-ajL
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+alU
+amJ
+amJ
+aZg
+aqz
+aqz
+aZt
+amJ
+amJ
+anM
+aNz
+anM
+amJ
+amJ
+aRQ
+anl
+amq
+aRR
+amJ
+amJ
+amJ
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -35344,12 +35300,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 ath
 atQ
 atO
@@ -35483,36 +35434,41 @@ aab
 aab
 "}
 (61,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-acd
-acK
-adn
-adm
-adX
-ael
-ael
-aeK
-adm
-adm
-adm
-adm
-adm
-adm
-adm
-aiJ
-adm
-adX
-ajC
-ajL
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+amJ
+aqk
+aqz
+aqz
+aqz
+anM
+aIg
+aYH
+anl
+aYH
+aYI
+anM
+apf
+anl
+anl
+apc
+amJ
+amJ
+amJ
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 ala
 alg
 als
@@ -35546,12 +35502,7 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
+asP
 ath
 ath
 aua
@@ -35685,36 +35636,41 @@ aab
 aab
 "}
 (62,1,1) = {"
-aab
-aap
-aap
-aap
-aap
-acd
-acL
-adl
-adm
-adX
-ael
-ael
-aeK
-adm
-adl
-adl
-agN
-ahp
-agO
-air
-acd
-aiZ
-adl
-ajD
-ajL
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+aTW
+anL
+aZe
+aqA
+aqz
+aqz
+aqz
+avC
+amo
+aCI
+aCI
+aCI
+amo
+aGJ
+anl
+anl
+anl
+anl
+aoL
+anO
+anJ
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 ala
 alg
 als
@@ -35748,13 +35704,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -35887,36 +35838,41 @@ aab
 aab
 "}
 (63,1,1) = {"
-aab
-aap
-aap
-aap
-aap
-acf
-acM
-adm
-adm
-adl
-aen
-aen
-adl
-adm
-adm
-adm
-agO
-ahq
-ahV
-ahV
-acd
-adl
-ajn
-ajE
-ajM
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+aTW
+anL
+agi
+akn
+amm
+amD
+amH
+anM
+aVD
+aCY
+aCY
+aCY
+aYJ
+anM
+aIs
+amo
+amo
+aIs
+aoL
+anO
+anJ
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 als
@@ -35950,13 +35906,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -36089,36 +36040,41 @@ aab
 aab
 "}
 (64,1,1) = {"
-aab
-aap
-aap
-aap
-aap
-acd
-acH
-adl
-adm
-adm
-adm
-adm
-adm
-adm
-adm
-adm
-agP
-ahr
-ahV
-ahV
-aiH
-acc
-aca
-aca
-adM
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+aYG
+anl
+anl
+anl
+aYK
+amJ
+amJ
+amJ
+aSN
+amJ
+amJ
+amJ
+amJ
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -36152,13 +36108,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -36291,36 +36242,41 @@ aab
 aab
 "}
 (65,1,1) = {"
-aab
-aab
-aab
-aab
-abw
-acg
-acN
-ado
-adm
-adY
-aeo
-acH
-aeL
-adl
-afT
-adl
-agO
-ahs
-bub
-ais
-aiH
-adM
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+aTW
+anL
+agj
+ako
+amr
+amE
+amI
+amJ
+amJ
+aNy
+amJ
+aNy
+amJ
+amJ
+agh
+aCY
+anl
+ahh
+aZd
+aof
+anJ
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -36354,13 +36310,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -36493,36 +36444,41 @@ aab
 aab
 "}
 (66,1,1) = {"
-aab
-aab
-aab
-aab
-abx
-acb
-acO
-adj
-adK
-acc
-aca
-aca
-aeM
-aca
-aca
-ags
-aca
-aca
-aca
-aca
-adM
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+aTW
+anL
+anl
+anl
+anl
+anl
+anl
+aGJ
+amo
+amo
+amo
+amo
+amo
+aSN
+aTV
+anl
+anl
+anl
+aZd
+aof
+anJ
+alU
+alU
+ass
+adB
+adB
+adB
+aad
+aad
+aae
 ala
 alg
 alr
@@ -36556,13 +36512,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -36695,36 +36646,41 @@ aab
 aab
 "}
 (67,1,1) = {"
-aab
-aab
-aab
-aab
-aby
-acb
-acP
-adi
-adi
-acd
-aab
-aeD
-aeD
-aeD
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+anl
+anl
+anl
+anl
+anl
+amJ
+aRW
+aIQ
+anl
+aIQ
+aSf
+amJ
+amJ
+anM
+aTG
+anM
+amJ
+amJ
+amJ
+alU
+alU
+ass
+adB
+adB
+adB
+aad
+aad
+aae
 ala
 alg
 alr
@@ -36758,13 +36714,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -36897,36 +36848,41 @@ aab
 aab
 "}
 (68,1,1) = {"
-aab
-aab
-aab
-aab
-abz
-acb
-acQ
-adi
-adL
-adM
-aab
-aeD
-aeD
-aeD
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+aYL
+aYN
+amo
+aYZ
+aZc
+amJ
+aRS
+aRS
+anl
+aIQ
+aIQ
+amJ
+aTb
+anl
+anl
+aqs
+anm
+amJ
+amJ
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alr
@@ -36960,13 +36916,8 @@ aqa
 aqa
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -37099,36 +37050,41 @@ aab
 aab
 "}
 (69,1,1) = {"
-aab
-aab
-aab
-aab
-abA
-aca
-aca
-aca
-adM
-aab
-aab
-aeD
-aeD
-aeD
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+amJ
+amJ
+aGJ
+amJ
+amJ
+amJ
+aRS
+aIQ
+anl
+aIQ
+aRT
+amJ
+aTu
+anl
+anl
+amV
+ann
+amJ
+amJ
+alU
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 ala
 alg
 alg
@@ -37162,13 +37118,8 @@ apZ
 apZ
 apZ
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-aab
+asP
+asP
 ath
 aub
 aub
@@ -37301,36 +37252,41 @@ aab
 aab
 "}
 (70,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aeD
-aeD
-aeD
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
 aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+aSi
+anl
+anl
+anl
+aZw
+amJ
+aRW
+aSe
+anl
+aRT
+aSg
+amJ
+agk
+aqc
+anl
+alV
+anm
+amJ
+amJ
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 ala
 ala
 ala
@@ -37364,13 +37320,8 @@ ala
 ala
 ala
 ala
-aaa
-aab
-aab
-aab
-aab
-aab
-atx
+asP
+asP
 ath
 aua
 aua
@@ -37503,35 +37454,41 @@ aab
 aab
 "}
 (71,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+alH
+alU
+amJ
+amJ
+aZv
+anl
+anl
+anl
+aZx
+amJ
+aRV
+aIQ
+anl
+aIQ
+aIQ
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+amJ
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 aaa
 aaa
 aaa
@@ -37565,14 +37522,8 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aab
-aab
-aab
-aab
-aab
-atx
+asP
+asP
 atR
 atR
 atR
@@ -37705,41 +37656,41 @@ aab
 aab
 "}
 (72,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+alH
+alU
+alU
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+alU
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -37907,41 +37858,41 @@ aab
 aab
 "}
 (73,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+alH
+alU
+alU
+aml
+aml
+aQn
+aQn
+aQn
+aQn
+aQn
+aml
+aml
+alU
+aml
+aml
+aQn
+aQn
+aQn
+aQn
+aQn
+aml
+aml
+alU
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -38109,41 +38060,41 @@ aab
 aab
 "}
 (74,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+adB
+alH
+alU
+alU
+aml
+aml
+aQs
+aQs
+aQs
+aQs
+aQs
+aml
+alU
+alU
+alU
+aml
+aQs
+aQs
+aQs
+aQs
+aQs
+aml
+aml
+alU
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -38187,7 +38138,7 @@ auz
 auz
 auz
 auz
-avA
+aog
 aup
 atR
 atR
@@ -38311,41 +38262,41 @@ aab
 aab
 "}
 (75,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+adB
+alH
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+ass
+adB
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -38513,41 +38464,41 @@ aab
 aab
 "}
 (76,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+adB
+alH
+alU
+amk
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+amk
+alU
+ass
+adB
+adB
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -38591,7 +38542,7 @@ auz
 auz
 auz
 auz
-avC
+aoh
 aup
 atR
 atR
@@ -38715,41 +38666,41 @@ aab
 aab
 "}
 (77,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+alH
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+alU
+ass
+aou
+adB
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -38917,41 +38868,41 @@ aab
 aab
 "}
 (78,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+alI
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+alW
+ast
+adB
+agg
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -39119,41 +39070,41 @@ aab
 aab
 "}
 (79,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adC
+adB
+adB
+adB
+agf
+adB
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -39321,41 +39272,41 @@ aab
 aab
 "}
 (80,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+adB
+adB
+adB
+adC
+adB
+adB
+adB
+aou
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adC
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+aad
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -39523,41 +39474,41 @@ aab
 aab
 "}
 (81,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+aad
+adB
+adB
+adB
+adB
+adB
+adB
+adB
+adC
+adB
+adB
+adB
+aad
+aad
+aad
+aad
+adB
+adB
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -39725,41 +39676,41 @@ aab
 aab
 "}
 (82,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+adB
+adB
+adB
+adB
+adB
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -39927,41 +39878,41 @@ aab
 aab
 "}
 (83,1,1) = {"
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aaa
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -40129,6 +40080,41 @@ aab
 aab
 "}
 (84,1,1) = {"
+aaa
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -40147,44 +40133,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeB
+aeB
+aeB
 aab
 aab
 aab
@@ -40331,6 +40282,41 @@ aab
 aab
 "}
 (85,1,1) = {"
+aaa
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aad
+aae
 aab
 aab
 aab
@@ -40342,51 +40328,16 @@ aab
 aab
 aab
 aab
+abw
+aca
+aca
+aca
+adJ
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeB
+aeB
+aeB
 aab
 aab
 aab
@@ -40533,6 +40484,41 @@ aab
 aab
 "}
 (86,1,1) = {"
+aaa
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
+aae
 aab
 aab
 aab
@@ -40544,51 +40530,16 @@ aab
 aab
 aab
 aab
+abx
+acb
+acD
+adi
+acO
+adJ
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeB
+aeB
+aeB
 aab
 aab
 aab
@@ -40781,16 +40732,16 @@ aab
 aab
 aab
 aab
+aby
+acb
+acE
+adi
+adi
+acd
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeB
+aeB
+aeB
 aab
 aab
 aab
@@ -40983,23 +40934,23 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+abz
+acb
+acF
+adj
+adK
+acg
+aca
+aca
+aeI
+aca
+acc
+aca
+agK
+aca
+aca
+aca
+adJ
 aab
 aab
 aab
@@ -41185,24 +41136,24 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+abA
+acc
+acG
+adk
+adm
+adW
+ael
+aeC
+aeJ
+acH
+acd
+agp
+agL
+ahn
+ahU
+ahn
+aiH
+adJ
 aab
 aab
 aab
@@ -41384,30 +41335,30 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aao
+aao
+aao
+aao
+acd
+acH
+adl
+adm
+adl
+adn
+adl
+adm
+afi
+acd
+agp
+agL
+agL
+agL
+agL
+aiH
+acg
+aca
+aca
+adJ
 aab
 aab
 aab
@@ -41586,30 +41537,30 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aao
+aao
+aao
+aao
+ace
+acI
+adm
+adm
+adm
+adm
+adm
+adm
+adm
+acd
+agq
+agL
+agL
+agL
+agL
+acd
+aiY
+ajm
+ajA
+ajK
 aab
 aab
 aab
@@ -41788,30 +41739,30 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aao
+aao
+aao
+aao
+acd
+acJ
+adl
+adm
+adl
+aem
+aem
+adl
+adm
+afS
+agr
+agM
+aho
+agr
+agM
+aiI
+aen
+adl
+ajB
+ajL
 aab
 aab
 aab
@@ -41994,26 +41945,26 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+acd
+acK
+adn
+adm
+adX
+ael
+ael
+aeK
+adm
+adm
+adm
+adm
+adm
+adm
+adm
+aiJ
+adm
+adX
+ajC
+ajL
 aab
 aab
 aab
@@ -42192,30 +42143,30 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aap
+aap
+aap
+aap
+acd
+acL
+adl
+adm
+adX
+ael
+ael
+aeK
+adm
+adl
+adl
+agN
+ahp
+agO
+air
+acd
+aiZ
+adl
+ajD
+ajL
 aab
 aab
 aab
@@ -42394,30 +42345,30 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aap
+aap
+aap
+aap
+acf
+acM
+adm
+adm
+adl
+aen
+aen
+adl
+adm
+adm
+adm
+agO
+ahq
+ahV
+ahV
+acd
+adl
+ajn
+ajE
+ajM
 aab
 aab
 aab
@@ -42596,30 +42547,30 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aap
+aap
+aap
+aap
+acd
+acH
+adl
+adm
+adm
+adm
+adm
+adm
+adm
+adm
+adm
+agP
+ahr
+ahV
+ahV
+aiH
+acc
+aca
+aca
+adM
 aab
 aab
 aab
@@ -42801,24 +42752,24 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+abw
+acg
+acN
+ado
+adm
+adY
+aeo
+acH
+aeL
+adl
+afT
+adl
+agO
+ahs
+bub
+ais
+aiH
+adM
 aab
 aab
 aab
@@ -43003,23 +42954,23 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+abx
+acb
+acO
+adj
+adK
+acc
+aca
+aca
+aeM
+aca
+aca
+ags
+aca
+aca
+aca
+aca
+adM
 aab
 aab
 aab
@@ -43205,16 +43156,16 @@ aab
 aab
 aab
 aab
+aby
+acb
+acP
+adi
+adi
+acd
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeD
+aeD
+aeD
 aab
 aab
 aab
@@ -43407,16 +43358,16 @@ aab
 aab
 aab
 aab
+abz
+acb
+acQ
+adi
+adL
+adM
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeD
+aeD
+aeD
 aab
 aab
 aab
@@ -43609,16 +43560,16 @@ aab
 aab
 aab
 aab
+abA
+aca
+aca
+aca
+adM
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+aeD
+aeD
+aeD
 aab
 aab
 aab
@@ -43818,9 +43769,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+aeD
+aeD
+aeD
 aab
 aab
 aab
@@ -56997,7 +56948,7 @@ aAc
 azE
 aDb
 azE
-aDJ
+azE
 azE
 azE
 azE
@@ -57851,7 +57802,7 @@ aLN
 aOj
 aOR
 aMi
-aQt
+aMi
 aLN
 aLM
 aab
@@ -58053,7 +58004,7 @@ aLN
 aOk
 aOQ
 aOQ
-aQu
+aOQ
 aLN
 aLM
 aab
@@ -60418,13 +60369,13 @@ auB
 auB
 auB
 avX
-ayH
+azi
 azi
 azi
 aAh
 avX
 aAU
-aBr
+aBq
 avX
 avX
 aCh
@@ -60626,7 +60577,7 @@ azL
 aAi
 avX
 aAV
-aBr
+aBq
 avX
 aBT
 ayK

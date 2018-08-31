@@ -182,12 +182,15 @@
 /datum/shuttle/autodock/ferry/petrov
 	name = "Petrov"
 	warmup_time = 10
-	shuttle_area = list(/area/shuttle/petrov/ship,/area/shuttle/petrov/cell1,/area/shuttle/petrov/cell2,/area/shuttle/petrov/cell3)
 	dock_target = "petrov_shuttle_airlock"
 	waypoint_station = "nav_petrov_start"
 	waypoint_offsite = "nav_petrov_out"
 	logging_home_tag = "nav_petrov_start"
 	logging_access = access_petrov_helm
+
+/datum/shuttle/autodock/ferry/petrov/New(_name, var/obj/effect/shuttle_landmark/initial_location)
+	shuttle_area = subtypesof(/area/shuttle/petrov)
+	..()
 
 /obj/effect/shuttle_landmark/petrov/start
 	name = "First Deck"

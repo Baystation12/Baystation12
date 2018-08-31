@@ -419,9 +419,6 @@
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
-/area/shuttle/petrov/ship
-	icon_state = "shuttlered"
-
 /area/shuttle/petrov/cell1
 	name = "\improper NSV Petrov - Isolation Cell 1"
 	icon_state = "shuttle"
@@ -431,6 +428,82 @@
 /area/shuttle/petrov/cell3
 	name = "\improper NSV Petrov - Isolation Cell 3"
 	icon_state = "shuttle"
+
+/area/shuttle/petrov/hallwaya
+	name = "\improper NSV Petrov - Lower Hallway"
+	icon_state = "hallA"
+
+/area/shuttle/petrov/hallwayb
+	name = "\improper NSV Petrov - Upper Hallway"
+	icon_state = "hallA"
+
+/area/shuttle/petrov/security
+	name = "\improper NSV Petrov - Security Office"
+	icon_state = "checkpoint1"
+
+/area/shuttle/petrov/rd
+	name = "\improper NSV Petrov - RD's Office"
+	icon_state = "head_quarters"
+
+/area/shuttle/petrov/cockpit
+	name = "\improper NSV Petrov - Cockpit"
+	icon_state = "shuttlered"
+
+/area/shuttle/petrov/maint
+	name = "\improper NSV Petrov - Maintenance"
+	icon_state = "engine"
+
+/area/shuttle/petrov/analysis
+	name = "\improper NSV Petrov - Analysis Lab"
+	icon_state = "devlab"
+
+/area/shuttle/petrov/toxins
+	name = "\improper NSV Petrov - Toxins Lab"
+	icon_state = "toxstorage"
+
+/area/shuttle/petrov/rnd
+	name = "\improper NSV Petrov - Fabricator Lab"
+	icon_state = "devlab"
+
+/area/shuttle/petrov/isolation
+	name = "\improper NSV Petrov - Isolation Lab"
+	icon_state = "xeno_lab"
+
+/area/shuttle/petrov/phoron
+	name = "\improper NSV Petrov - Sublimation Lab"
+	icon_state = "toxstorage"
+
+/area/shuttle/petrov/cryo
+	name = "\improper NSV Petrov - Cryogenics"
+	icon_state = "Sleep"
+
+/area/shuttle/petrov/head
+	name = "\improper NSV Petrov - Head"
+	icon_state = "Sleep"
+
+/area/shuttle/petrov/custodial
+	name = "\improper NSV Petrov - Custodial"
+	icon_state = "decontamination"
+
+/area/shuttle/petrov/medbay
+	name = "\improper NSV Petrov - Medbay"
+	icon_state = "medbay"
+
+/area/shuttle/petrov/equipment
+	name = "\improper NSV Petrov - Equipment Storage"
+	icon_state = "locker"
+
+/area/shuttle/petrov/tool
+	name = "\improper NSV Petrov - Tool Storage"
+	icon_state = "locker"
+
+/area/shuttle/petrov/eva
+	name = "\improper NSV Petrov - EVA Storage"
+	icon_state = "locker"
+
+/area/solar/petrov
+	name = "\improper Petrov Solar Array"
+	icon_state = "panelsS"
 
 //Turbolift
 /area/turbolift
@@ -707,6 +780,10 @@
 	name = "\improper Unused Office"
 	icon_state = "conference"
 
+/area/vacant/room
+	name = "\improper Unused Room"
+	icon_state = "conference"
+
 // Storage
 /area/storage/auxillary/port
 	name = "Port Auxillary Storage"
@@ -776,6 +853,10 @@
 	name = "\improper Canister Storage"
 	icon_state = "toxstorage"
 
+/area/rnd/checkpoint
+	name = "\improper Research Security Checkpoint"
+	icon_state = "security"
+
 /area/rnd/development
 	name = "\improper Fabricator Lab"
 	icon_state = "devlab"
@@ -791,15 +872,6 @@
 /area/rnd/xenobiology/entry
 	name = "\improper Xenobiology Access"
 	icon_state = "xeno_lab"
-
-/area/rnd/checkpoint
-	name = "\improper Research Security Checkpoint"
-	icon_state = "checkpoint1"
-
-/area/rnd/blanks
-	name = "\improper Aux Custodial Supplies"
-	icon_state = "decontamination"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 // Crew areas
 /area/crew_quarters/bar
@@ -1297,17 +1369,9 @@
 	name = "\improper Robotics Operating Theatre"
 	icon_state = "robotics"
 
-/area/rnd/misc_lab
-	name = "\improper Miscellaneous Research"
-	icon_state = "misclab"
-
 /area/rnd/research
 	name = "\improper Research and Development"
 	icon_state = "research"
-
-/area/rnd/breakroom
-	name = "\improper Research Break Room"
-	icon_state = "researchbreak"
 
 /area/alien
 	name = "\improper Alien base"

@@ -27,6 +27,8 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 			return access_hangar
 		if(NETWORK_EXPLO)
 			return access_explorer
+		if(NETWORK_NANOTRASEN)
+			return access_petrov_security
 	return get_shared_network_access(network) || ..()
 
 /datum/map/torch
@@ -48,6 +50,7 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 		NETWORK_EXPEDITION,
 		NETWORK_EXPLO,
 		NETWORK_HANGAR,
+		NETWORK_NANOTRASEN,
 		NETWORK_AQUILA,
 		NETWORK_CALYPSO,
 		NETWORK_POD,

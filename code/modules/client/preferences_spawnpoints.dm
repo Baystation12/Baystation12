@@ -71,6 +71,14 @@ GLOBAL_VAR(spawntypes)
 	..()
 	turfs = GLOB.latejoin_cyborg
 
+/datum/spawnpoint/auxcryo
+	display_name = "Auxiliary Cryogenic Storage"
+	msg = "has completed cryogenic revival"
+
+/datum/spawnpoint/auxcryo/New()
+	..()
+	turfs = GLOB.latejoin_auxcryo
+
 /datum/spawnpoint/default
 	display_name = DEFAULT_SPAWNPOINT_ID
 	msg = "has arrived on the station"

@@ -465,13 +465,13 @@
 	desc = "Synthetic"
 	access_type = ACCESS_TYPE_NONE
 
-/var/const/access_crate_cash = 200
+/var/const/access_crate_cash = 300
 /datum/access/crate_cash
 	id = access_crate_cash
 	desc = "Crate cash"
 	access_type = ACCESS_TYPE_NONE
 
-/var/const/access_merchant = 201
+/var/const/access_merchant = 301
 /datum/access/merchant
 	id = access_merchant
 	desc = "Merchant"

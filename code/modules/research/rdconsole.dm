@@ -797,11 +797,14 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	user << browse("<TITLE>Fabrication Control Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
 
-/obj/machinery/computer/rdconsole/robotics
-	name = "robotics fabrication console"
-	id = 2
-	req_access = list(access_robotics)
-
 /obj/machinery/computer/rdconsole/core
 	name = "core fabricator console"
 	id = 1
+
+/obj/machinery/computer/rdconsole/robotics
+	name = "robotics fabrication console"
+	id = 2
+
+/obj/machinery/computer/rdconsole/petrov
+	name = "petrov fabricator console"
+	id = 3
