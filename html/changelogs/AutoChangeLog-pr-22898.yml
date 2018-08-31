@@ -1,4 +1,0 @@
-author: "Textor"
-delete-after: True
-changes: 
-  - bugfix: "The supermatter monitor no longer cares about delaminating supermatter crystals not on board the Torch. Those other crystals must suffer silently, now."
