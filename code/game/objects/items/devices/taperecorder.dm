@@ -144,6 +144,7 @@
 
 	if(usr.incapacitated())
 		return
+	playsound(src, 'sound/machines/click.ogg', 10, 1)
 	if(!mytape)
 		to_chat(usr, "<span class='notice'>There's no tape!</span>")
 		return
@@ -196,6 +197,7 @@
 
 	if(usr.incapacitated())
 		return
+	playsound(src, 'sound/machines/click.ogg', 10, 1)
 	if(recording)
 		stop_recording()
 		return
@@ -249,6 +251,7 @@
 	playing = 1
 	update_icon()
 	to_chat(usr, "<span class='notice'>Audio playback started.</span>")
+	playsound(src, 'sound/machines/click.ogg', 10, 1)
 	for(var/i=1 , i < mytape.max_capacity , i++)
 		if(!mytape || !playing)
 			break
@@ -266,6 +269,7 @@
 			sleep(10)
 			T = get_turf(src)
 			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: End of recording.</font>")
+			playsound(src, 'sound/machines/click.ogg', 10, 1)
 			break
 		else
 			playsleepseconds = mytape.timestamp[i+1] - mytape.timestamp[i]
@@ -367,11 +371,12 @@
 	var/list/storedinfo = new/list()
 	var/list/timestamp = new/list()
 	var/ruined = 0
+	var/doctored = 0
 
 
 /obj/item/device/tape/update_icon()
 	overlays.Cut()
-	if(ruined)
+	if(ruined && max_capacity)
 		overlays += "ribbonoverlay"
 
 
@@ -381,6 +386,7 @@
 /obj/item/device/tape/attack_self(mob/user)
 	if(!ruined)
 		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
+		get_loose_tape(user, storedinfo.len)
 		ruin()
 
 
@@ -406,14 +412,19 @@
 
 
 /obj/item/device/tape/attackby(obj/item/I, mob/user, params)
+	if(user.incapacitated())
+		return
 	if(ruined && isScrewdriver(I))
+		if(!max_capacity)
+			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
+			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
 		if(do_after(user, 120, target = src))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
 	else if(istype(I, /obj/item/weapon/pen))
-		if(loc == user && !user.incapacitated())
+		if(loc == user)
 			var/new_name = input(user, "What would you like to label the tape?", "Tape labeling") as null|text
 			if(isnull(new_name)) return
 			new_name = sanitizeSafe(new_name)
@@ -424,9 +435,89 @@
 				SetName("tape")
 				to_chat(user, "<span class='notice'>You scratch off the label.</span>")
 		return
+	else if(isWirecutter(I))
+		cut(user)
+	else if(istype(I, /obj/item/device/tape/loose))
+		join(user, I)
 	..()
 
+/obj/item/device/tape/proc/cut(mob/user)
+	if(!LAZYLEN(timestamp))
+		to_chat(user, "<span class='notice'>There's nothing on this tape!</span>")
+		return
+	var/list/output = list("<center>")
+	for(var/i=1, i < timestamp.len, i++)
+		var/time = "\[[time2text(timestamp[i]*10,"mm:ss")]\]"
+		output += "[time]<br><a href='?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
+	output += "</center>"
+
+	var/datum/browser/popup = new(user, "tape_cutting", "Cutting tape", 170, 600)
+	popup.set_content(jointext(output,null))
+	popup.open()
+
+/obj/item/device/tape/proc/join(mob/user, obj/item/device/tape/other)
+	if(max_capacity + other.max_capacity > initial(max_capacity))
+		to_chat(user, "<span class='notice'>You can't fit this much tape in!</span>")
+		return
+	if(user.unEquip(other))
+		to_chat(user, "<span class='notice'>You join ends of the tape together.</span>")
+		max_capacity += other.max_capacity
+		used_capacity = min(used_capacity + other.used_capacity, max_capacity)
+		timestamp += other.timestamp
+		storedinfo += other.storedinfo
+		doctored = 1
+		ruin()
+		update_icon()
+		qdel(other)
+
+/obj/item/device/tape/OnTopic(var/mob/user, var/list/href_list)
+	if(href_list["cut_after"])
+		var/index = text2num(href_list["cut_after"])
+		if(index >= timestamp.len)
+			return
+		
+		to_chat(user, "<span class='notice'>You cut the part of the tape off.</span>")
+		get_loose_tape(user, index)
+		cut(user)
+		return TOPIC_REFRESH
+
+//Spawns new loose tape item, with data starting from [index] entry
+/obj/item/device/tape/proc/get_loose_tape(var/mob/user, var/index)
+	var/obj/item/device/tape/loose/newtape = new()
+	newtape.timestamp = timestamp.Copy(index+1)
+	newtape.storedinfo = storedinfo.Copy(index+1)
+	newtape.max_capacity = max_capacity - index
+	newtape.used_capacity = max(0, used_capacity - max_capacity)
+	newtape.doctored = doctored
+	user.put_in_hands(newtape)
+
+	timestamp.Cut(index+1)
+	storedinfo.Cut(index+1)
+	max_capacity = index
+	used_capacity = min(used_capacity,index)
 
 //Random colour tapes
 /obj/item/device/tape/random/New()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
+
+/obj/item/device/tape/loose
+	name = "magnetic tape"
+	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
+	icon_state = "magtape"
+	ruined = 1
+
+/obj/item/device/tape/loose/fix()
+	return
+
+/obj/item/device/tape/loose/update_icon()
+	return
+
+/obj/item/device/tape/loose/get_loose_tape()
+	return
+
+/obj/item/device/tape/loose/examine(var/mob/user)
+	. = ..(user, 1)
+	if(.)
+		to_chat(user, "<span class='notice'>It looks long enough to hold [max_capacity] seconds worth of recording.</span>")
+		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_PROF))
+			to_chat(user, "<span class='notice'>It has been tampered with...</span>")
