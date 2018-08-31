@@ -1,0 +1,6 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Added ability to manipulate tape recorder tapes."
+  - rscadd: "User wirecutter to cut tape, use tape on tape to join them."
+  - rscadd: "You can get loose tape out by clicking tape inhand. Join them to put back. Master forensics techs will be able to tell if it was tampered with."
