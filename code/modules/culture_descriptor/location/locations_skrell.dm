@@ -10,4 +10,5 @@
 	additional_langs = list(LANGUAGE_GALCOM)
 	capital = "None"
 	ruling_body = "None"
+	economic_power = 1.5
 	distance = "67 light years"
