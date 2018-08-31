@@ -279,6 +279,8 @@
 	icon_state = "donk_kit"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket = 6)
 
+//cubed animals
+
 /obj/item/weapon/storage/box/monkeycubes
 	name = "monkey cube box"
 	desc = "Drymate brand monkey cubes. Just add water!"
@@ -301,6 +303,41 @@
 	name = "neaera cube box"
 	desc = "Drymate brand neaera cubes, shipped from Jargon 4. Just add water!"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube = 5)
+
+//cubed domestics
+
+/obj/item/weapon/storage/box/monkeycubes/catcubes
+	name = "cat cube box"
+	desc = "Drymate brand Instant cats. Just add water!"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/catcube = 2,
+						/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/kcatcube = 3)
+
+/obj/item/weapon/storage/box/monkeycubes/dogcubes
+	name = "corgi cube box"
+	desc = "Drymate brand Instant dogs. Just add water!"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/corgicube = 2,
+						/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/pcorgicube = 3)
+
+/obj/item/weapon/storage/box/monkeycubes/cowcubes
+	name = "cow cube box"
+	desc = "Drymate brand Instant cow. Just add water!"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/cowcube = 2)
+
+/obj/item/weapon/storage/box/monkeycubes/goatcubes
+	name = "goat cube box"
+	desc = "Drymate brand Instant goat. Just add water!"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/goatcube = 2)
+
+/obj/item/weapon/storage/box/monkeycubes/chickencubes
+	name = "chicken cube box"
+	desc = "Drymate brand Instant chicken. Just add water!"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/chickencube = 2,
+						/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/chickcube = 3)
+
+/obj/item/weapon/storage/box/monkeycubes/slimecubes
+	name = "slime cube box"
+	desc = "Drymate brand Instant slime. Just add water! (Caution: Not for recreational use)"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/slimecube = 3)
 
 /obj/item/weapon/storage/box/ids
 	name = "box of spare IDs"
@@ -503,3 +540,75 @@
 	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."
 	icon_state = "detergent"
 	startswith = list(/obj/item/weapon/reagent_containers/pill/detergent = 10)
+
+//cargosia supply boxes - Primarily for restocking
+
+/obj/item/weapon/storage/box/tapes
+	name = "box of spare tapes"
+	desc = "A box full of blank tapes."
+	startswith = list(/obj/item/device/tape/random = 14)
+
+/obj/item/weapon/storage/box/cola
+	name = "box of sodas"
+	desc = "A box full of soda cans."
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 7)
+
+/obj/item/weapon/storage/box/water
+	name = "box of water bottles"
+	desc = "A box full of bottled water."
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 7)
+
+/obj/item/weapon/storage/box/cola/spacewind
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 7)
+
+/obj/item/weapon/storage/box/cola/drgibb
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 7)
+
+/obj/item/weapon/storage/box/cola/starkist
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 7)
+
+/obj/item/weapon/storage/box/cola/spaceup
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 7)
+
+/obj/item/weapon/storage/box/cola/lemonlime
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime = 7)
+
+/obj/item/weapon/storage/box/cola/icedtea
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 7)
+
+/obj/item/weapon/storage/box/cola/grapejuice
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 7)
+
+/obj/item/weapon/storage/box/cola/sodawater
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 7)
+
+/obj/item/weapon/storage/box/snack
+	name = "box of snack food"
+	desc = "A box full of snack foods."
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 7)
+
+/obj/item/weapon/storage/box/snack/jerky
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 7)
+
+/obj/item/weapon/storage/box/snack/noraisin
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 7)
+
+/obj/item/weapon/storage/box/snack/cheesehonks
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 7)
+
+/obj/item/weapon/storage/box/snack/tastybread
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/tastybread = 7)
+
+/obj/item/weapon/storage/box/snack/candy
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 7)
+
+/obj/item/weapon/storage/box/snack/chips
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/chips = 7)
+
+
+
+
+
+
+
+
