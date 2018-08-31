@@ -97,6 +97,6 @@
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/bertelsODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
 	selection_color = "#0A0A95"
-	access = list(142,144,110,192,300,306,309)
+	access = list(142,144,145,110,192,300,306,309)
 	spawnpoint_override = "UNSC Bertels ODST Officer Spawn"
 	is_whitelisted = 1
