@@ -11687,6 +11687,10 @@
 	req_access = list(1)
 	},
 /obj/effect/floor_decal/corner/red/mono,
+/obj/machinery/light_switch{
+	pixel_x = 10;
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wJ" = (
@@ -11707,10 +11711,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/hangcheck)
 "wK" = (
-/obj/machinery/light_switch{
-	pixel_x = -4;
-	pixel_y = 24
-	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 8
@@ -11723,6 +11723,12 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/requests_console{
+	announcementConsole = 1;
+	department = "Security";
+	departmentType = 5;
+	pixel_y = 30
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wL" = (
@@ -11730,13 +11736,14 @@
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/crew)
 "wM" = (
-/obj/item/modular_computer/console/preset/security,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/corner/red/mono,
+/obj/structure/table/steel,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wN" = (
@@ -12531,10 +12538,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/hangcheck)
 "yi" = (
-/obj/structure/table/steel,
-/obj/structure/flora/pottedplant/small{
-	pixel_y = 13
-	},
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
 	dir = 6
@@ -13884,12 +13887,6 @@
 /area/hallway/primary/fourthdeck/fore)
 "AN" = (
 /obj/random/maintenance/solgov/clean,
-/obj/machinery/requests_console{
-	announcementConsole = 1;
-	department = "Security";
-	departmentType = 5;
-	pixel_y = -32
-	},
 /obj/structure/closet/secure_closet{
 	name = "Security Equipment Locker";
 	req_access = list(1)
@@ -19555,10 +19552,6 @@
 "TE" = (
 /obj/machinery/newscaster/security_unit{
 	pixel_y = -32
-	},
-/obj/machinery/recharger/wallcharger{
-	pixel_x = 32;
-	pixel_y = -28
 	},
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/grey,

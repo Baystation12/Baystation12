@@ -55,12 +55,12 @@
 /decl/cultural_info/proc/get_description(var/header, var/append, var/verbose = TRUE)
 	var/list/dat = list()
 	dat += "<table padding='8px'><tr>"
-	dat += "<td width = 55%>"
+	dat += "<td width='210px'>"
 	dat += "[header ? header : "<b>[desc_type]:</b> [name]"]<br>"
 	dat += "<small>"
 	dat += "[jointext(get_text_details(), "<br>")]"
 	dat += "</small></td>"
-	dat += "<td width = 45%>"
+	dat += "<td width>"
 	if(verbose || length(get_text_body()) <= MAX_DESC_LEN)
 		dat += "[get_text_body()]"
 	else

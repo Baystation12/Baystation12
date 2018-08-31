@@ -12,7 +12,7 @@
 
 
 /obj/item/weapon/circuitboard/mecha/ripley
-	origin_tech = list(TECH_DATA = 3)
+	origin_tech = list(TECH_DATA = 1)
 
 /obj/item/weapon/circuitboard/mecha/ripley/peripherals
 	name = T_BOARD_MECHA("Ripley peripherals control")
