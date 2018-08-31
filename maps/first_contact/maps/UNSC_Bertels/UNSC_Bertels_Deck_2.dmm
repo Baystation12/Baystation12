@@ -286,7 +286,7 @@
 "fz" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/sign/halo_floorsign/medbay{tag = "icon-medbay (EAST)"; icon_state = "medbay"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/starboardhangar)
 "fA" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/medbay{tag = "icon-medbay (NORTH)"; icon_state = "medbay"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/starboardhallwaycentral)
 "fB" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/starboardhallwaycentral)
-"fC" = (/turf/simulated/wall,/area/corvette/unscbertels/deck2/janitorialcloset)
+"fC" = (/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck2/janitorialcloset)
 "fD" = (/obj/machinery/door/airlock/halo{name = "Janitorial Supplies"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/janitorialcloset)
 "fE" = (/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck2/chemistrylab)
 "fF" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo_maint{name = "Chemistry Lab"; req_access = list(142)},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/chemistrylab)
