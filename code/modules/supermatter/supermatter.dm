@@ -320,14 +320,14 @@
 
 	if(damage > explosion_point)
 		if(!exploded)
-			if(!istype(L, /turf/space) && L.z in GLOB.using_map.station_levels)
+			if(!istype(L, /turf/space) && (L.z in GLOB.using_map.station_levels))
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!istype(L, /turf/space) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && L.z in GLOB.using_map.station_levels)
+		if(!istype(L, /turf/space) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in GLOB.using_map.station_levels))
 			announce_warning()
 	else
 		shift_light(4,initial(light_color))
