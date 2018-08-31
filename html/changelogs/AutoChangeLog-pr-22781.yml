@@ -1,0 +1,4 @@
+author: "nearlyNonexistent"
+delete-after: True
+changes: 
+  - rscadd: "Ports Polaris's synthetic eye color changing. IPC, synthetic human, and Adherent eyes are now RGB. Properly covered by display monitors too."
