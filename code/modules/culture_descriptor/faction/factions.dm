@@ -74,13 +74,13 @@
 	economic_power = 1.1
 	subversive_potential = 15
 
-/decl/cultural_info/faction/remote/hephastus
-	name = FACTION_HEPHASTUS
-	description = "Hephastus Industries, known simply as Hephastus, is one of the largest corporations in existence today. \
+/decl/cultural_info/faction/remote/hephaestus
+	name = FACTION_HEPHAESTUS
+	description = "Hephaestus Industries, known simply as Hephaestus, is one of the largest corporations in existence today. \
 	The leading manufacturer of military grade personal weapons, assault vehicles, defence systems and security measures, \
-	Hephastus has a somewhat controversial reputation as a result of blatant war profiteering, compounded by their attempts to \
-	exploit Unathi equipment and assets for their own gains. In spite of this Hephastus maintains a reputation for the quality and \
-	reliability of its equipment as well as its general affordability. Internally Hephastus is a desirable employer as a result of its \
+	Hephaestus has a somewhat controversial reputation as a result of blatant war profiteering, compounded by their attempts to \
+	exploit Unathi equipment and assets for their own gains. In spite of this, Hephaestus maintains a reputation for the quality and \
+	reliability of its equipment as well as its general affordability. Internally, Hephaestus is a desirable employer as a result of its \
 	many employee benefits and focus on employee development, though many dread being transferred to one of the 'remote' branches."
 	economic_power = 1.2
 	subversive_potential = 15
