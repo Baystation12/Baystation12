@@ -32,8 +32,7 @@
 	else
 		var/datum/job/job = job_master.GetJobByType(ID.job_access_type)
 		if(job)
-			var/decl/hierarchy/mil_uniform/user_outfit = find_uniforms(ID.military_rank, ID.military_branch, job.department_flag)
-			uniforms = populate_uniforms(user_outfit)
+			uniforms = SSuniforms.get_unform(ID.military_rank, ID.military_branch, job.department_flag)
 		for(var/T in uniforms)
 			dat += "<b>[T]</b> <a href='byond://?src=\ref[src];get_all=[T]'>Select All</a>"
 			var/list/uniform = uniforms[T]
@@ -105,45 +104,6 @@
 		attack_hand(user)
 	else
 		..()
-
-/obj/machinery/uniform_vendor/proc/populate_uniforms(var/decl/hierarchy/mil_uniform/user_outfit)
-	var/list/res = list()
-	res["PT"] = list(
-		user_outfit.pt_under,
-		user_outfit.pt_shoes
-		)
-
-	res["Utility"] = list(
-		user_outfit.utility_under,
-		user_outfit.utility_shoes,
-		user_outfit.utility_hat
-		)
-	if (user_outfit.utility_extra)
-		res["Utility Extras"] = user_outfit.utility_extra
-
-	res["Service"] = list(
-		user_outfit.service_under,
-		user_outfit.service_skirt,
-		user_outfit.service_over,
-		user_outfit.service_shoes,
-		user_outfit.service_hat,
-		user_outfit.service_gloves
-		)
-	if(user_outfit.service_extra)
-		res["Service Extras"] = user_outfit.service_extra
-
-	res["Dress"] = list(
-		user_outfit.dress_under,
-		user_outfit.dress_skirt,
-		user_outfit.dress_over,
-		user_outfit.dress_shoes,
-		user_outfit.dress_hat,
-		user_outfit.dress_gloves
-		)
-	if(user_outfit.dress_extra)
-		res["Dress Extras"] = user_outfit.dress_extra
-
-	return res
 
 /obj/machinery/uniform_vendor/proc/spawn_uniform(var/list/selected_outfit)
 	listclearnulls(selected_outfit)

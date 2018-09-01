@@ -15,9 +15,10 @@
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
 
-	#include "datums/uniforms.dm"
-	#include "datums/uniforms_expedition.dm"
-	#include "datums/uniforms_fleet.dm"
+	#include "datums/uniforms/uniforms.dm"
+	#include "datums/uniforms/uniforms_subsystem.dm"
+	#include "datums/uniforms/uniforms_expedition.dm"
+	#include "datums/uniforms/uniforms_fleet.dm"
 	#include "datums/reports.dm"
 	#include "datums/shackle_law_sets.dm"
 	#include "datums/supplypacks/security.dm"
@@ -27,11 +28,8 @@
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
 	#include "items/items.dm"
-	#include "items/machinery.dm"
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
-	#include "items/uniform_vendor.dm"
-	#include "items/uniform_checker.dm"
 	#include "items/rigs.dm"
 	#include "items/solbanner.dm"
 
@@ -47,6 +45,9 @@
 	#include "job/outfits.dm"
 
 	#include "machinery/keycard authentication.dm"
+	#include "machinery/machinery.dm"
+	#include "machinery/uniform_vendor.dm"
+	#include "machinery/uniform_checker.dm"
 
 	#include "structures/closets.dm"
 	#include "structures/signs.dm"
