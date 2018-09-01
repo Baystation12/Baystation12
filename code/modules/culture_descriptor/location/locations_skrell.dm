@@ -11,3 +11,4 @@
 	capital = "None"
 	ruling_body = "None"
 	distance = "67 light years"
+	economic_power = 1.5
