@@ -114,7 +114,7 @@
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
- /decl/cultural_info/location/human/eos
+/decl/cultural_info/location/human/eos
 	name = HOME_SYSTEM_HELIOS
 	description = "Eos, in the Helios system, is itself a small, hot, dense world. The world itself is of only marginal importance, though it supports a densely packed city, Surya, \
 	which has become known for its banking services. Of more import is the system itself, Helios, and what orbits Eos: The Helios Gateway Installation. The HGI is the largest \
@@ -129,7 +129,7 @@
 	economic_power = 1.3
 	distance = "10 light years"
 
- /decl/cultural_info/location/human/terra
+/decl/cultural_info/location/human/terra
 	name = HOME_SYSTEM_TERRA
 	description = "Terra, in the Gilgamesh system. Is not the planet Earth as some may be lead to believe. No, Terra is the home of the Terran Colonial Confederation, and the capital of that \
 	particular superpower. Terra is one of the many affiliated planets in the TCC and the one that is perhaps the most important. Terra, much like most of the TCC, is isolationist, with a minimal \
