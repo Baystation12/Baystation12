@@ -18,6 +18,10 @@
 	var/datum/pipe_network/network_node2
 	var/datum/pipe_network/network_node3
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_type = PIPE_MTVALVE
+	build_icon_state = "mtvalve"
+
 /obj/machinery/atmospherics/tvalve/bypass
 	icon_state = "map_tvalve1"
 	state = 1
@@ -216,7 +220,7 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/build_network()
-	if(!network_node1 && node1)				
+	if(!network_node1 && node1)
 		network_node1 = new /datum/pipe_network()
 		network_node1.normal_members += src
 		network_node1.build_network(node1, src)
@@ -358,7 +362,7 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
 /obj/machinery/atmospherics/tvalve/mirrored

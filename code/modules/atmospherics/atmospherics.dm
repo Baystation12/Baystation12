@@ -31,6 +31,9 @@ Pipelines + Other Objects -> Pipe network
 	var/obj/machinery/atmospherics/node2
 
 	var/atmos_initalized = FALSE
+	var/pipe_type = PIPE_SIMPLE_STRAIGHT
+	var/build_icon = 'icons/obj/pipe-item.dmi'
+	var/build_icon_state = "buildpipe"
 
 /obj/machinery/atmospherics/New()
 	if(!icon_manager)

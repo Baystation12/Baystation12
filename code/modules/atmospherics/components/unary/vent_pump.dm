@@ -48,6 +48,9 @@
 	var/radio_filter_out
 	var/radio_filter_in
 
+	pipe_type = PIPE_UVENT
+	build_icon_state = "uvent"
+
 /obj/machinery/atmospherics/unary/vent_pump/on
 	use_power = 1
 	icon_state = "map_vent_out"
@@ -399,7 +402,7 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
 #undef DEFAULT_PRESSURE_DELTA

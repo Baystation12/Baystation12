@@ -6,16 +6,21 @@
 	anchored = 1
 	var/unwrenched = 0
 	var/wait = 0
-	var/list/categories = list(simple_recipes = list(),
-		scrubber_recipes = list(),
-		supply_recipes = list(),
-		fuel_recipes = list(),
-		device_recipes = list(),
-		he_recipes = list())
-	var/SimplePipeColor = "grey"
+	var/list/categories = list(
+		/datum/pipe/pipe_dispenser/simple,
+		/datum/pipe/pipe_dispenser/scrubber,
+		/datum/pipe/pipe_dispenser/supply,
+		/datum/pipe/pipe_dispenser/fuel,
+		/datum/pipe/pipe_dispenser/device,
+		/datum/pipe/pipe_dispenser/he)
+	var/pipe_color = "white"
 
 /obj/machinery/pipedispenser/Initialize()
 	. = ..()
+	for(var/category_type in categories)
+		for(var/recipe_type in subtypesof(category_type))
+			LAZYADD(categories[category_type], new recipe_type(src))
+/*
 	for(var/simple in subtypesof(/datum/pipe/pipe_dispenser/simple))
 		categories["simple_recipes"] += new simple(src)
 	for(var/scrub in subtypesof(/datum/pipe/pipe_dispenser/scrubber))
@@ -27,16 +32,24 @@
 	for(var/device in subtypesof(/datum/pipe/pipe_dispenser/device))
 		categories["device_recipes"] += new device(src)
 	for(var/he in subtypesof(/datum/pipe/pipe_dispenser/he))
-		categories["he_recipes"] += new he(src)
+		categories["he_recipes"] += new he(src)*/
 
 /obj/machinery/pipedispenser/proc/get_console_data()
-	. = ..() + "<table><tr><td><font color = '#517087'><strong>Regular Pipes</strong></font></td></tr>"
-	var/result = ""
+	. = list()
+	. += "<table><tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
+	for(var/category in categories)
+		var/datum/pipe/cat = category
+		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
+		for(var/datum/pipe/pipe in categories[category])
+			var/line = "[pipe.name]</td>"
+			. += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[pipe]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[pipe]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[pipe]'>10x</a></td></tr>"
+	//. += "<tr><td><font color = '#517087'><strong>Regular Pipes</strong></font></td></tr>"
+	/*var/result = ""
+
 	for(var/datum/pipe/simple in categories["simple_recipes"])
 		var/line = "[simple.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[simple]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[simple]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[simple]'>10x</a></td></tr>"
 	. += "[result]"
-	. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[SimplePipeColor]'>[SimplePipeColor]</font></a></td></tr>"
 	result = ""
 	. += "<tr><td><font color = '#517087'><strong>Supply Pipes</strong></font></td></tr>"
 	for(var/datum/pipe/supply in categories["supply_recipes"])
@@ -66,51 +79,35 @@
 	for(var/datum/pipe/devices in categories["device_recipes"])
 		var/line = "[devices.name]</td>"
 		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[devices]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[devices]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[devices]'>10x</a></td></tr>"
-	. += "[result]"
+	. += "[result]"*/
 	.+= "</table>"
+	. = JOINTEXT(.)
 
 /obj/machinery/pipedispenser/Topic(href, href_list)
 	if((. = ..()))
 		return
 	if(href_list["build"])
 		var/datum/pipe/P = locate(href_list["build"])
-		build(P)
+		P.Build(P, pipe_color, src.loc)
 	if(href_list["buildfive"])
 		var/datum/pipe/P = locate(href_list["buildfive"])
 		for(var/I = 5;I > 0;I -= 1)
-			build(P)
+			P.Build(P, pipe_color, src.loc)
 	if(href_list["buildten"])
 		var/datum/pipe/P = locate(href_list["buildten"])
 		for(var/I = 10;I > 0;I -= 1)
-			build(P)
+			P.Build(P, pipe_color, src.loc)
 	if(href_list["color"])
 		var/choice = input(usr, "What color do you want pipes to have?") as null|anything in pipe_colors
-		SimplePipeColor = choice
+		if(!choice)
+			return
+		pipe_color = choice
 		updateUsrDialog()
 
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
 	popup.set_content(jointext(get_console_data(),"<br>"))
 	popup.open()
-
-/obj/machinery/pipedispenser/proc/build(var/datum/pipe/D)
-	if(D.build_path)
-		var/obj/item/pipe/new_item = D.Fabricate(src)
-		new_item.loc = loc
-		if(D.pipe_type != null)
-			new_item.pipe_type = D.pipe_type
-		if(D.connect_types != null)
-			new_item.connect_types = D.connect_types
-		if(D.pipe_color != null)
-			if(new_item.pipe_type == PIPE_SIMPLE_STRAIGHT || new_item.pipe_type == PIPE_SIMPLE_BENT || new_item.pipe_type == PIPE_MANIFOLD || new_item.pipe_type == PIPE_MANIFOLD4W || new_item.pipe_type == PIPE_CAP || new_item.pipe_type == PIPE_UP || new_item.pipe_type == PIPE_DOWN)
-				new_item.color = SimplePipeColor
-			else
-				new_item.color = D.pipe_color
-		new_item.name = D.name
-		new_item.desc = D.desc
-		new_item.dir = D.dir
-		new_item.icon = D.icon
-		new_item.icon_state = D.icon_state
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
