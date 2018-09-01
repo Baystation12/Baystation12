@@ -126,28 +126,28 @@
 
 /obj/item/integrated_circuit/input/med_scanner
 	name = "integrated medical analyser"
-	desc = "A very small version of the common medical analyser. This allows the machine to know how healthy someone is."
+	desc = "A very small version of the common medical analyser. This allows the machine to track some vital signs."
 	icon_state = "medscan"
 	complexity = 4
 	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
-		"total health %" = IC_PINTYPE_NUMBER,
-		"total missing health" = IC_PINTYPE_NUMBER
+		"brain activity" = IC_PINTYPE_BOOLEAN,
+		"pulse" = IC_PINTYPE_NUMBER,
+		"is conscious" = IC_PINTYPE_BOOLEAN
 		)
 	activators = list("scan" = IC_PINTYPE_PULSE_IN, "on scanned" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 40
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
-	var/mob/living/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
-		var/total_health = round(H.health/H.getMaxHealth(), 0.01)*100
-		var/missing_health = H.getMaxHealth() - H.health
-
-		set_pin_data(IC_OUTPUT, 1, total_health)
-		set_pin_data(IC_OUTPUT, 2, missing_health)
+		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
+		set_pin_data(IC_OUTPUT, 2, H.get_pulse(1))
+		set_pin_data(IC_OUTPUT, 3, (H.stat == 0))
 
 	push_data()
 	activate_pin(2)
@@ -156,37 +156,60 @@
 	name = "integrated adv. medical analyser"
 	desc = "A very small version of the medbot's medical analyser. This allows the machine to know how healthy someone is. \
 	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer."
+	extended_desc = "Values for damage and pain are 0 to 5 marking severity of the damage"
 	icon_state = "medscan_adv"
 	complexity = 12
 	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
-		"total health %"		= IC_PINTYPE_NUMBER,
-		"total missing health"	= IC_PINTYPE_NUMBER,
+		"brain activity"		= IC_PINTYPE_BOOLEAN,
+		"is conscious"	        = IC_PINTYPE_BOOLEAN,
 		"brute damage"			= IC_PINTYPE_NUMBER,
 		"burn damage"			= IC_PINTYPE_NUMBER,
 		"tox damage"			= IC_PINTYPE_NUMBER,
 		"oxy damage"			= IC_PINTYPE_NUMBER,
-		"clone damage"			= IC_PINTYPE_NUMBER
+		"clone damage"			= IC_PINTYPE_NUMBER,
+		"pulse"                 = IC_PINTYPE_NUMBER,
+		"oxygenation level"     = IC_PINTYPE_NUMBER,
+		"pain level"            = IC_PINTYPE_NUMBER,
+		"radiation"             = IC_PINTYPE_NUMBER
 	)
 	activators = list("scan" = IC_PINTYPE_PULSE_IN, "on scanned" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 80
 
+/obj/item/integrated_circuit/input/adv_med_scanner/proc/damage_to_severity(var/value)
+	if(value < 1)
+		return 0
+	if(value < 25)
+		return 1
+	if(value < 50)
+		return 2
+	if(value < 75)
+		return 3
+	if(value < 100)
+		return 4
+	return 5
+
+
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
-	var/mob/living/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
-		var/total_health = round(H.health/H.getMaxHealth(), 0.01)*100
-		var/missing_health = H.getMaxHealth() - H.health
 
-		set_pin_data(IC_OUTPUT, 1, total_health)
-		set_pin_data(IC_OUTPUT, 2, missing_health)
-		set_pin_data(IC_OUTPUT, 3, H.getBruteLoss())
-		set_pin_data(IC_OUTPUT, 4, H.getFireLoss())
-		set_pin_data(IC_OUTPUT, 5, H.getToxLoss())
-		set_pin_data(IC_OUTPUT, 6, H.getOxyLoss())
-		set_pin_data(IC_OUTPUT, 7, H.getCloneLoss())
+
+		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
+		set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
+		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 8, H.get_pulse(1))
+		set_pin_data(IC_OUTPUT, 9, H.get_blood_oxygenation())
+		set_pin_data(IC_OUTPUT, 10, damage_to_severity(H.get_shock()))
+		set_pin_data(IC_OUTPUT, 11, H.radiation)
 
 	push_data()
 	activate_pin(2)
