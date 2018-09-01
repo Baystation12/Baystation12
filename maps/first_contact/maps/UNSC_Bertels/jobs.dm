@@ -51,7 +51,7 @@
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
 	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
 	"EVA Combat Marine")
-	access = list(142,144)
+	access = list(142,144,192)
 	spawnpoint_override = "UNSC Bertels Marine Spawn"
 
 /datum/job/unsc_ship_marineplatoon
@@ -60,7 +60,7 @@
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(142,144,145)
+	access = list(142,144,145,192)
 	spawnpoint_override = "UNSC Bertels Marine Platoon Leader Spawn"
 
 
@@ -81,7 +81,7 @@
 	"Master Sergeant" = /decl/hierarchy/outfit/job/bertelsODSTFireteamLead)
 
 	selection_color = "#0A0A95"
-	access = list(142,144,110,309)
+	access = list(142,144,110,192,309)
 	spawnpoint_override = "UNSC Bertels ODST Spawn"
 	is_whitelisted = 1
 
@@ -97,6 +97,6 @@
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/bertelsODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
 	selection_color = "#0A0A95"
-	access = list(142,144,110,300,306,309)
+	access = list(142,144,145,110,192,300,306,309)
 	spawnpoint_override = "UNSC Bertels ODST Officer Spawn"
 	is_whitelisted = 1

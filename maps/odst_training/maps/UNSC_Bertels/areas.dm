@@ -15,6 +15,8 @@
 //deck 1 areas
 /area/corvette/unscbertels/deck1/Bridge
 	name = "UNSC Bertels Bridge"
+	dynamic_lighting = 0
+	luminosity = 1
 
 /area/corvette/unscbertels/deck1/Crewquarters
 	name = "UNSC Bertels Crew Quarters"
