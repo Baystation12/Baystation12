@@ -117,12 +117,12 @@
 /decl/cultural_info/location/human/eos
 	name = HOME_SYSTEM_HELIOS
 	description = "Eos, in the Helios system, is itself a small, hot, dense world. The world itself is of only marginal importance, though it supports a densely packed city, Surya, \
-	which has become known for its banking services. Of more import is the system itself, Helios, and what orbits Eos. The Helios Gateway Installation. The HGI is the largest \
+	which has become known for its banking services. Of more import is the system itself, Helios, and what orbits Eos: The Helios Gateway Installation. The HGI is the largest \
 	gateway installation in SCG space and provides vital links to many other SCG systems. Practically a city in space unto itself, the HGI is home to a hodgepodge of private individuals, \
 	Fleet and law enforcement outposts, government services and a wide array of private enterprises all catering to the many hangabouts, travellers, merchants and soldiers who pass through it daily. \
 	This fact alone is what has allowed the Helios system and Eos as a whole to weather multiple economic recessions and has allowed Eos to establish itself as a premier commercial centre of the wider \
-	SCG, with one small speedbump. That being during the Gaia conflict, when the Helios Gateway was destroyed in a suicide action of the Fourth Fleet to stop the TCC advance. It has recovered rapidly \
-	since the occupation, though the memories of that time carry in the collective consciousness of those who remained through it."
+	SCG. This process was hindered during the Gaia conflict, when the Helios Gateway was destroyed in a suicide action of the Fourth Fleet to stop the TCC advance. It has recovered rapidly \
+	since the occupation, though the memories of that event carry in the collective consciousness of those who remained through it."
 	capital = "Surya"
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SPACER)
@@ -167,7 +167,7 @@
 /decl/cultural_info/location/human/lorriman
 	name = HOME_SYSTEM_LORRIMAN
 	distance = "44 light years"
-	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50°C. \
+	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50Â°C. \
 	Because of this, the planet's cities are either domed or built into mountains. Its economy is built around a technological backbone, providing the technology \
 	and the people skilled to use them.  Its infrastructure is developed enough to support mass transit across the planet. Its capital city is called The Hub, a massive domed structure \
 	that serves both as a spaceport, administrative hub, and habitation zone. It remains the only place on the planet accessible to non-Lorrimanians. \
