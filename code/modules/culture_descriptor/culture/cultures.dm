@@ -69,6 +69,7 @@
 	with implications far beyond the squabbles of the prefectures."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
 	economic_power = 1.3
+
 /decl/cultural_info/culture/human/venusian_upper
 	name = CULTURE_HUMAN_VENUSIAN
 	description = "You are from one of the many zones of Venus. Floating high above the ground of the planet on massive platforms, you are one of the many who live on one of the most decadent locations in the \
@@ -76,6 +77,7 @@
 	Those above are exceptionally wealthy, being hotel, casino, resort owners, politicians, bankers or rich retirees."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
 	economic_power = 1.4
+
 /decl/cultural_info/culture/human/venusian_surfacer
 	name = CULTURE_HUMAN_VENUSLOW
 	description = "You are from the surface of Venus, one of many employed in mining, industry and services industries. Venusian Surfacers are fairly poor, especially compared to Zoners and \
@@ -84,6 +86,7 @@
 	match them, and much of the surface of Venus finds itself rife with organised crime, separatist groups and other criminal organisations."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER)
 	economic_power = 0.9
+
 /decl/cultural_info/culture/human/belter
 	name = CULTURE_HUMAN_BELTER
 	description = "You are from Ceres. The people of Ceres and the wider asteroid belt are colloquially known as 'Belters.' Traditionally a people rooted in the mining industry, \
@@ -93,6 +96,7 @@
 	human space."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
 	economic_power = 1
+
 /decl/cultural_info/culture/human/plutonian
 	name = CULTURE_HUMAN_PLUTO
 	description = "You are from Pluto, one of many denizens of this cruel and unforgiving world. For centuries Pluto has been in a slow state of decay and decline, resulting in \
@@ -101,6 +105,7 @@
 	just happy to get off the rock and to healthier locales. Unfortunately, despite the efforts of the wider SCG, many Plutonians tend to maintain criminal ties, even offworld."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER)
 	economic_power = 0.8
+
 /decl/cultural_info/culture/human/earthling
 	name = CULTURE_HUMAN_EARTH
 	description = "You are from Earth, home of humanity. Earth culture is much as it has been for centuries, with the old nation states, while no longer politically important, still \
@@ -110,6 +115,7 @@
 	a content folk who see themselves as close to nature and keepers of the heritage of humanity."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 	economic_power = 1.1
+
 /decl/cultural_info/culture/human/ceti
 	name = CULTURE_HUMAN_CETI
 	description = "You are from Ceti Epsilon, the technical hub of the SCG. As a Cetite you are no stranger to the cutting edge of technology present in Sol space. \
@@ -119,6 +125,7 @@
 	cybernetics culture; it is not uncommon to see many Cetites sporting some chrome."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
 	economic_power = 1.1
+
 /decl/cultural_info/culture/human/spacer_core
 	name = CULTURE_HUMAN_SPACER
 	description = "You are from the void between worlds, though close to home. You are from one of the myriad space stations, orbital platforms, long haul freighters, \
@@ -127,6 +134,7 @@
 	mobile, rarely satisfied with settled life. They almost universally know how to live and work in the void and take to such jobs more readily than their planet-bound counterparts."
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SOL_COMMON)
 	economic_power = 1
+
 /decl/cultural_info/culture/human/spacer_frontier
 	name = CULTURE_HUMAN_SPAFRO
 	description =  "You are from the void between worlds, though you are in the distant, vast frontier of SCG space and beyond. Out here things like national identity and culture mean less; \
@@ -135,6 +143,7 @@
 	technology. An independent sort, people on the frontier are more likely to be isolationist and self-driven."
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
 	economic_power = 0.9
+
 /decl/cultural_info/culture/human/confederate
 	name = CULTURE_HUMAN_CONFED
 	description = "You are from Terra (not Earth), in the Gilgamesh system. The capital world of the Terran Colonial Confederation, your people embody what it means to be a part of the TCC. \
@@ -143,6 +152,7 @@
 	resentful about their loss in the Gaia Conflict. An upbringing on Terra emphasises an odd mix of service to the state, liberalism and militarism."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_INDEPENDENT)
 	economic_power = 0.9
+
 /decl/cultural_info/culture/human/other
 	name = CULTURE_HUMAN_OTHER
 	description = "Some people are from places no one has ever heard of or places too wild and fantastical to make it into Encyclopedia Galactica. You are one of these. "
