@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Makes exterior airlock assemblies buildable (need Basic skill)."
