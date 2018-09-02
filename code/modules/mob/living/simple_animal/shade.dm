@@ -28,6 +28,8 @@
 	supernatural = 1
 	status_flags = CANPUSH
 
+	bleed_colour = "#181933"
+
 /mob/living/simple_animal/shade/cultify()
 	return
 

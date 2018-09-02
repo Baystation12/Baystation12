@@ -63,6 +63,10 @@
 	//Null rod stuff
 	var/supernatural = 0
 	var/purge = 0
+	
+	var/bleed_ticks = 0
+	var/bleed_colour = COLOR_BLOOD_HUMAN
+	var/can_bleed = TRUE
 
 	// contained in a cage
 	var/in_stasis = 0
@@ -93,6 +97,9 @@
 	handle_confused()
 	handle_supernatural()
 	handle_impaired_vision()
+	
+	if(can_bleed && bleed_ticks > 0)
+		handle_bleeding()
 
 	if(buckled && can_escape)
 		if(istype(buckled, /obj/effect/energy_net))
@@ -213,13 +220,16 @@
 			//TODO: Push the mob away or something
 
 		if(I_HURT)
-			var/dealt_damge = harm_intent_damage
+			var/dealt_damage = harm_intent_damage
 			var/harm_verb = response_harm
 			if(ishuman(M) && M.species)
-				dealt_damge += M.species.get_simple_attack_damage(M, src)
-				harm_verb = M.species.get_simple_attack_verb(M, src, response_harm)
+				var/datum/unarmed_attack/attack = M.get_unarmed_attack(src)
+				dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
+				harm_verb = pick(attack.attack_verb)
+				if(attack.sharp || attack.edge)
+					adjustBleedTicks(dealt_damage)
 
-			adjustBruteLoss(dealt_damge)
+			adjustBruteLoss(dealt_damage)
 			M.visible_message("<span class='warning'>[M] [harm_verb] \the [src]!</span>")
 			M.do_attack_animation(src)
 
@@ -266,6 +276,8 @@
 		damage *= 2
 		purge = 3
 	adjustBruteLoss(damage)
+	if(O.edge || O.sharp)
+		adjustBleedTicks(damage)
 
 	return 0
 
@@ -365,7 +377,10 @@
 			meat.SetName("[src.name] [meat.name]")
 		if(issmall(src))
 			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
-			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+			if(can_bleed)
+				var/obj/effect/decal/cleanable/blood/splatter/splat = new(get_turf(src))
+				splat.basecolor = bleed_colour
+				splat.update_icon()
 			qdel(src)
 		else
 			user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
@@ -383,3 +398,22 @@
 
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick
+
+/mob/living/simple_animal/proc/adjustBleedTicks(var/amount)
+	if(!can_bleed)
+		return
+
+	if(amount > 0)
+		bleed_ticks = max(bleed_ticks, amount)
+	else
+		bleed_ticks = max(bleed_ticks + amount, 0)
+		
+	bleed_ticks = round(bleed_ticks)
+	
+/mob/living/simple_animal/proc/handle_bleeding()
+	bleed_ticks--
+	adjustBruteLoss(1)
+	
+	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
+	drip.basecolor = bleed_colour
+	drip.update_icon()

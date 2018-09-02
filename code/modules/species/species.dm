@@ -767,19 +767,3 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				if(player_count >= max_players)
 					return FALSE
 	return TRUE
-
-/datum/species/proc/get_simple_attack_damage(var/mob/living/carbon/human/H, var/mob/living/simple_animal/target)
-	var/simple_damage = 0
-	if(!H.pulling_punches)
-		var/datum/unarmed_attack/attack = H.get_unarmed_attack(target)
-		if(attack)
-			simple_damage = attack.get_simple_damage()
-	return simple_damage
-
-/datum/species/proc/get_simple_attack_verb(var/mob/living/carbon/human/H, var/mob/living/simple_animal/target, var/default_attack_verb)
-	var/simple_attack_verb = default_attack_verb
-	var/datum/unarmed_attack/attack = H.get_unarmed_attack(target)
-	if(attack)
-		simple_attack_verb = pick(attack.attack_verb)
-	return simple_attack_verb
-
