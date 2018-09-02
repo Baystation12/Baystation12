@@ -1,4 +1,6 @@
 
+#define SHIELD_MELEE_BYPASS_DAM_MOD 0.5
+
 /datum/armourspecials
 	var/mob/living/carbon/human/user
 
@@ -54,6 +56,13 @@
 	if(checkshields(damage))
 		user.overlays += shieldoverlay
 		connectedarmour.armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0) //This is needed because shields don't work if armour absorbs the blow instead.
+		var/obj/item/dam_source = damage_source
+		if(istype(dam_source) &&!istype(dam_source,/obj/item/projectile) && dam_source.loc.Adjacent(connectedarmour.loc))
+			dam_source.force *= SHIELD_MELEE_BYPASS_DAM_MOD //Melee damage through shields is reduced.
+			user.visible_message("<span class = 'warning'>[user]'s shields fail to fully absorb the melee attack!</span>")
+			spawn(2)
+				dam_source.force /= SHIELD_MELEE_BYPASS_DAM_MOD//Revert the damage reduction.
+			return 0
 		return 1
 	else
 		connectedarmour.armor =  armourvalue
