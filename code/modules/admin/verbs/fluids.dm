@@ -7,9 +7,8 @@
 	var/mob/user = usr
 	if(istype(user) && user.client)
 		for(var/thing in trange(1, get_turf(user)))
-			var/obj/effect/fluid/F = locate() in thing
-			if(!F) F = new(thing)
-			SET_FLUID_DEPTH(F, 2000)
+			var/turf/T = thing
+			T.add_fluid(2000, /datum/reagent/water)
 
 /datum/admins/proc/jump_to_fluid_source()
 

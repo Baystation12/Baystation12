@@ -14,6 +14,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 //For anything that can light stuff on fire
 /obj/item/weapon/flame
+	waterproof = FALSE
 	var/lit = 0
 
 /obj/item/weapon/flame/proc/extinguish(var/mob/user, var/no_message)
@@ -95,6 +96,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "smokable item"
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
+	waterproof = FALSE
+
 	var/lit = 0
 	var/icon_on
 	var/type_butt = null

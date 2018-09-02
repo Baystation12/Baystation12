@@ -159,7 +159,6 @@ obj/machinery/airlock_sensor
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
-	waterproof = TRUE
 
 	anchored = 1
 	power_channel = ENVIRON

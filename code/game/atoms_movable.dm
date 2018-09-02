@@ -4,7 +4,7 @@
 	appearance_flags = TILE_BOUND
 	glide_size = 8
 
-	var/waterproof
+	var/waterproof = TRUE
 	var/movable_flags
 
 	var/last_move = null

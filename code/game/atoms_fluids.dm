@@ -23,7 +23,7 @@
 	var/turf/T = get_turf(src)
 	return T.is_flooded(lying_mob)
 
-/atom/movable/proc/submerged(depth)
+/atom/proc/submerged(depth)
 	if(isnull(depth))
 		var/turf/T = get_turf(src)
 		if(!istype(T))
@@ -33,6 +33,11 @@
 		return depth >= FLUID_SHALLOW
 	if(istype(loc, /turf))
 		return depth >= 3
+	return depth >= FLUID_OVER_MOB_HEAD
+
+/turf/submerged(depth)
+	if(isnull(depth))
+		depth = get_fluid_depth()
 	return depth >= FLUID_OVER_MOB_HEAD
 
 /atom/proc/fluid_update()
