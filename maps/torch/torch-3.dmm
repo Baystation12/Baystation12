@@ -513,6 +513,9 @@
 	pixel_x = 21
 	},
 /obj/item/weapon/circuitboard/teleporter,
+/obj/item/weapon/circuitboard/protolathe,
+/obj/item/weapon/circuitboard/destructive_analyzer,
+/obj/item/weapon/circuitboard/rdconsole,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "aZ" = (
@@ -1275,9 +1278,6 @@
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/weapon/circuitboard/rdserver,
-/obj/item/weapon/circuitboard/protolathe,
-/obj/item/weapon/circuitboard/destructive_analyzer,
-/obj/item/weapon/circuitboard/rdconsole,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "cD" = (
@@ -2455,8 +2455,12 @@
 "eP" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/aiModule/reset,
 /obj/machinery/light/small,
+/obj/item/weapon/airlock_electronics,
+/obj/item/weapon/airlock_electronics,
+/obj/item/weapon/airlock_electronics,
+/obj/item/weapon/airlock_electronics,
+/obj/item/weapon/airlock_electronics,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "eQ" = (
@@ -2486,9 +2490,7 @@
 /obj/item/weapon/module/power_control,
 /obj/item/weapon/module/power_control,
 /obj/item/weapon/module/power_control,
-/obj/item/weapon/airlock_electronics,
-/obj/item/weapon/airlock_electronics,
-/obj/item/weapon/airlock_electronics,
+/obj/item/weapon/module/power_control,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "eT" = (
@@ -15465,6 +15467,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/item/weapon/aiModule/reset,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "Mc" = (
