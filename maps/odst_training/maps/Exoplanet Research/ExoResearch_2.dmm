@@ -118,7 +118,7 @@
 "cn" = (/obj/structure/table/steel,/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/security)
 "co" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "ONI 23"; begins_closed = 0; closed_layer = 4; icon_state = "pdoor0"; id = "ONI 23"},/turf/simulated/floor/plating,/area/exo_research_facility/sublevel1/interior/security)
 "cp" = (/obj/item/modular_computer/console/preset/sysadmin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/security)
-"cq" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Science Dorm 3"; density = 0; icon_state = "pdoor0"; id = "Secure Gate"; name = "Privacy Shutter"; opacity = 0},/turf/simulated/floor/plating,/area/exo_research_facility/sublevel1/interior/security)
+"cq" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_research_facility/sublevel1/interior/security)
 "cr" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/breakr)
 "cs" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/obj/item/weapon/pack,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/breakr)
 "ct" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/obj/machinery/camera/autoname,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/breakr)
