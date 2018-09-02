@@ -213,8 +213,14 @@
 			//TODO: Push the mob away or something
 
 		if(I_HURT)
-			adjustBruteLoss(harm_intent_damage)
-			M.visible_message("<span class='warning'>[M] [response_harm] \the [src]!</span>")
+			var/dealt_damge = harm_intent_damage
+			var/harm_verb = response_harm
+			if(ishuman(M) && M.species)
+				dealt_damge += M.species.get_simple_attack_damage(M, src)
+				harm_verb = M.species.get_simple_attack_verb(M, src, response_harm)
+
+			adjustBruteLoss(dealt_damge)
+			M.visible_message("<span class='warning'>[M] [harm_verb] \the [src]!</span>")
 			M.do_attack_animation(src)
 
 	return
