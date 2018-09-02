@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - tweak: "Medical circuits now largely inform of severity instead of exposing internal values. Adapted medical integrated circuits to brainmend."
