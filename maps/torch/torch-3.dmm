@@ -8216,6 +8216,9 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/item/modular_computer/telescreen/preset/engineering{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/hallway)
 "qM" = (
