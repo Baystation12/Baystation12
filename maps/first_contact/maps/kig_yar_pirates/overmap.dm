@@ -5,7 +5,7 @@
 
 	icon = 'maps/first_contact/maps/kig_yar_pirates/pirate.dmi'
 	icon_state = "ship"
-	fore_dir = WEST
+	fore_dir = EAST
 
 	//THIS MUST BE SET TO START AND END OUTSIDE THE SHIP OR ELSE THE MISSLES SPONTANEOUSLY APPEAR INSIDE THE HULL
 	map_bounds = list(27,68,79,32) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)

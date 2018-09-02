@@ -36,37 +36,6 @@
 	selection_color = "#ff0000"
 	spawnpoint_override = "Innie Crew"
 
-/datum/job/unsc_ship_crew
-	title = "UNSC Corvette Ship Crew"
-	alt_titles = list("UNSC Thorin Doctor","UNSC Thorin Engineer","UNSC Thorin Bridge Crew","UNSC Thorin Dropship Pilot","UNSC Thorin Janitor")
-	total_positions = 8
-	spawn_positions = 8
-	outfit_type = /decl/hierarchy/outfit/job/unsc_corvette/crewmember
-	selection_color = "#008000"
-	access = list(142)
-	spawnpoint_override = "Corvette Crew"
-
-/datum/job/unsc_ship_marine
-	title = "UNSC Marine"
-	total_positions = 8
-	spawn_positions = 8
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine
-	selection_color = "#008000"
-	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
-	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
-	"EVA Combat Marine")
-	access = list(142,144)
-	spawnpoint_override = "Corvette Marine Spawn"
-
-/datum/job/unsc_ship_cap
-	title = "UNSC Corvette Ship Captain"
-	total_positions = 1
-	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/unsc_corvette/CO
-	selection_color = "#008000"
-	access = list(142,143)
-	spawnpoint_override = "Corvette Crew Captain"
-
 /datum/job/ODST
 	title = "Orbital Drop Shock Trooper"
 	total_positions = 5
@@ -103,8 +72,8 @@
 	is_whitelisted = 1
 
 /datum/map/first_contact
-	allowed_jobs = list(/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/unsc_ship_crew,/datum/job/unsc_ship_marine,/datum/job/unsc_ship_cap,/datum/job/ODST,/datum/job/ODSTO,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
-	allowed_spawns = list("Innie Crew","Corvette Crew","Corvette Marine Spawn","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
+	allowed_jobs = list(/datum/job/unscbertels_co,/datum/job/unscbertels_xo,/datum/job/unscbertels_ship_crew,/datum/job/unscbertels_medical_crew,/datum/job/bertelsunsc_ship_marine,/datum/job/unsc_ship_marineplatoon,/datum/job/bertelsODST,/datum/job/bertelsODSTO,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
+	allowed_spawns = list("UNSC Bertels Ship Crew Spawn","UNSC Bertels Medical Staff Spawn","UNSC Bertels CO Spawn","UNSC Bertels XO Spawn","UNSC Bertels Marine Spawn","UNSC Bertels Marine Platoon Leader Spawn","UNSC Bertels ODST Spawn","UNSC Bertels ODST Officer Spawn","Innie Crew","Civilian Ship Crew","Civ Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn",)
 
 	species_to_job_whitelist = list(/datum/species/kig_yar = list(/datum/job/covenant/kigyarpirate,/datum/job/covenant/kigyarpirate/captain),/datum/species/unggoy = list(/datum/job/covenant/unggoy_deacon))
 

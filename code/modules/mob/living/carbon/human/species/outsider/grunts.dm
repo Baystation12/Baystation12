@@ -12,7 +12,6 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	flags = NO_MINOR_CUT
 	item_icon_offsets = list(0,0)
-	slowdown = -1 //-1 to negate noshoes
 
 	breath_type = "methane"
 	poison_type = "phoron"
@@ -20,6 +19,11 @@
 
 	warning_low_pressure = 25
 	hazard_low_pressure = -1
+
+/datum/species/unggoy/create_organs(var/mob/living/carbon/human/H)
+	. = ..()
+	//I guess their leg-boots are kinda organs.
+	H.equip_to_slot(new /obj/item/clothing/shoes/grunt_boots,slot_shoes)
 
 /datum/species/unggoy/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	H.backbag = 0

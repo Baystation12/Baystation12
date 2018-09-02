@@ -168,7 +168,7 @@
 "dl" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "dm" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "dn" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
-"do" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/machinery/button/remote/blast_door{_wifi_id = "5279"; id = "5279"; name = "Blast Door Control"; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
+"do" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/machinery/button/remote/blast_door{_wifi_id = "5279"; id = "5279"; name = "Blast Door Control"; pixel_x = 0; pixel_y = 32; req_access = list(306)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "dp" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway2)
 "dq" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/boardingpods)
 "dr" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/corvette/unscthorin/observation)

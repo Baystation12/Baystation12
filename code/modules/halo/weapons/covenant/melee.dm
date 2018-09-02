@@ -1,6 +1,6 @@
 #define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan)
-#define LUNGE_DELAY 2 SECONDS
+#define LUNGE_DELAY 3 SECONDS
 
 /obj/effect/esword_path
 	name = "displaced air"
@@ -28,18 +28,18 @@
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
 
 /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
-	set name = "Enable energy sword failsafe"
+	set name = "Enable weapon failsafe"
 	set category = "IC"
 	failsafe = 1
-	to_chat(usr,"<span class='info'>WARNING! You enable the failsafe. [src] will now self destruct if you drop it while active.</span>")
+	to_chat(usr,"<span class='info'>WARNING! You enable [src]'s failsafe. [src] will now self destruct if you drop it while active.</span>")
 	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
 
 /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe()
-	set name = "Disable energy sword failsafe"
+	set name = "Disable weapon failsafe"
 	set category = "IC"
 	failsafe = 0
-	to_chat(usr,"<span class='info'>You disable the failsafe. [src] will no longer self destruct if you drop it.</span>")
+	to_chat(usr,"<span class='info'>You disable [src]'s failsafe. [src] will no longer self destruct if you drop it.</span>")
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
 
