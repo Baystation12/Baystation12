@@ -1,0 +1,7 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "The force authorisation and docking management programs now must be run on suitably powerful equipment, namely a laptop or a console."
+  - tweak: "Increased tech cost of the teleporter console circuitry."
+  - maptweak: "Moved research and development circuit boards into secure storage."
+  - maptweak: "Added more APC and airlock circuits to tech storage."
