@@ -439,7 +439,8 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
-	if(istype(loc, /turf))
+	var/obj/acting_object = get_object()
+	if(istype(acting_object.loc, /turf))
 		step_towards(pulling,src)
 	else
 		stop_pulling()
