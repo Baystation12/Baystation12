@@ -11,7 +11,7 @@
 	origin_tech = list(TECH_ILLEGAL = 4, TECH_MAGNET = 4)
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
-	var/saved_item = /obj/item/weapon/cigbutt
+	var/saved_item = /obj/item/trash/cigbutt
 	var/saved_icon = 'icons/obj/clothing/masks.dmi'
 	var/saved_icon_state = "cigbutt"
 	var/saved_overlays

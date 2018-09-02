@@ -59,6 +59,7 @@
 	center_of_mass = "x=16;y=7"
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
+	sharp = TRUE
 
 /obj/item/weapon/screwdriver/Initialize()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))

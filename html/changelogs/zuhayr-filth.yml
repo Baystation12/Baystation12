@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added the ability to carve graffiti into some walls and floors with sharp objects like screwdrivers."
+  - rscadd: "Being a slog now has long-term consequences."

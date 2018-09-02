@@ -478,7 +478,7 @@
 "bI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "bJ" = (

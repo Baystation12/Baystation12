@@ -27,7 +27,7 @@
 /obj/item/weapon/material/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health <= 0)
 		return
-	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
+	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
 			return
