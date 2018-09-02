@@ -228,7 +228,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	attack_verb = list("burnt", "singed")
-	type_butt = /obj/item/weapon/cigbutt
+	type_butt = /obj/item/trash/cigbutt
 	chem_volume = 5
 	smoketime = 300
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
@@ -276,10 +276,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigmentol"
 	brand = "\improper Temperamento Menthol"
 	color = "#ddffe8"
-	type_butt = /obj/item/weapon/cigbutt/menthol
+	type_butt = /obj/item/trash/cigbutt/menthol
 	filling = list(/datum/reagent/tobacco = 1, /datum/reagent/menthol = 1)
 
-/obj/item/weapon/cigbutt/menthol
+/obj/item/trash/cigbutt/menthol
 	icon_state = "cigbuttmentol"
 
 /obj/item/clothing/mask/smokable/cigarette/luckystars
@@ -290,10 +290,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	brand = "\improper Jericho"
 	icon_state = "cigjer"
 	color = "#dcdcdc"
-	type_butt = /obj/item/weapon/cigbutt/jerichos
+	type_butt = /obj/item/trash/cigbutt/jerichos
 	filling = list(/datum/reagent/tobacco/bad = 1.5)
 
-/obj/item/weapon/cigbutt/jerichos
+/obj/item/trash/cigbutt/jerichos
 	icon_state = "cigbuttjer"
 
 /obj/item/clothing/mask/smokable/cigarette/carcinomas
@@ -305,10 +305,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "thin cigarette"
 	brand = "\improper Professional"
 	icon_state = "cigpro"
-	type_butt = /obj/item/weapon/cigbutt/professionals
+	type_butt = /obj/item/trash/cigbutt/professionals
 	filling = list(/datum/reagent/tobacco/bad = 1)
 
-/obj/item/weapon/cigbutt/professionals
+/obj/item/trash/cigbutt/professionals
 	icon_state = "cigbuttpro"
 
 /obj/item/clothing/mask/smokable/cigarette/killthroat
@@ -325,7 +325,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	item_state = "cigaroff"
 	smoketime = 600
 	chem_volume = 10
-	type_butt = /obj/item/weapon/cigbutt/woodbutt
+	type_butt = /obj/item/trash/cigbutt/woodbutt
 	filling = list(/datum/reagent/tobacco/fine = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/mint
@@ -352,7 +352,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigarelloOr"
 	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/orange = 2)
 
-/obj/item/weapon/cigbutt/woodbutt
+/obj/item/trash/cigbutt/woodbutt
 	name = "wooden tip"
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
 	icon_state = "woodbutt"
@@ -422,7 +422,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
-	type_butt = /obj/item/weapon/cigbutt/cigarbutt
+	type_butt = /obj/item/trash/cigbutt/cigarbutt
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 1500
@@ -449,7 +449,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	chem_volume = 20
 	filling = list(/datum/reagent/tobacco/fine = 10)
 
-/obj/item/weapon/cigbutt
+/obj/item/trash/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
 	icon = 'icons/obj/clothing/masks.dmi'
@@ -459,11 +459,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	slot_flags = SLOT_EARS
 	throwforce = 1
 
-/obj/item/weapon/cigbutt/New()
+/obj/item/trash/cigbutt/New()
 	..()
 	transform = turn(transform,rand(0,360))
 
-/obj/item/weapon/cigbutt/cigarbutt
+/obj/item/trash/cigbutt/cigarbutt
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
@@ -661,7 +661,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A hand rolled cigarette using dried plant matter."
 	icon_state = "cigroll"
 	item_state = "cigoff"
-	type_butt = /obj/item/weapon/cigbutt/rollbutt
+	type_butt = /obj/item/trash/cigbutt/rollbutt
 	chem_volume = 50
 	brand = "handrolled"
 	filling = list()
@@ -679,7 +679,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigoff"
 	brand = "handrolled with a filter"
 
-/obj/item/weapon/cigbutt/rollbutt
+/obj/item/trash/cigbutt/rollbutt
 	name = "cigarette butt"
 	desc = "A cigarette butt."
 	icon_state = "rollbutt"
@@ -693,13 +693,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	item_state = "cigaroff"
 	icon_on = "cigar3on"
-	type_butt = /obj/item/weapon/cigbutt/sausagebutt
+	type_butt = /obj/item/trash/cigbutt/sausagebutt
 	chem_volume = 6
 	smoketime = 5000
 	brand = "sausage... wait what."
 	filling = list(/datum/reagent/nutriment/protein = 6)
 
-/obj/item/weapon/cigbutt/sausagebutt
+/obj/item/trash/cigbutt/sausagebutt
 	name = "sausage butt"
 	desc = "A piece of burnt meat."
 	icon_state = "sausagebutt"
@@ -868,14 +868,14 @@ obj/item/clothing/mask/chewable/Destroy()
 	desc = "A chewy wad of terbecco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
 	throw_speed = 0.5
 	icon_state = "chew"
-	type_butt = /obj/item/weapon/cigbutt/spitwad
+	type_butt = /obj/item/trash/cigbutt/spitwad
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
 	brand = "tobacco"
 
-/obj/item/weapon/cigbutt/spitwad
+/obj/item/trash/cigbutt/spitwad
 	name = "spit wad"
 	desc = "A disgusting spitwad."
 	icon_state = "spit-chew"
@@ -908,7 +908,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	name = "nicotine gum"
 	desc = "A chewy wad of synthetic rubber, laced with nicotine. Possibly the least disgusting method of nicotine delivery."
 	icon_state = "nic_gum"
-	type_butt = /obj/item/weapon/cigbutt/spitgum
+	type_butt = /obj/item/trash/cigbutt/spitgum
 /obj/item/clothing/mask/chewable/tobacco/nico/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 2)
@@ -919,7 +919,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	desc = "A chewy wad of wadding material."
 	throw_speed = 0.5
 	icon_state = "chew"
-	type_butt = /obj/item/weapon/cigbutt/spitgum
+	type_butt = /obj/item/trash/cigbutt/spitgum
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
@@ -928,13 +928,13 @@ obj/item/clothing/mask/chewable/Destroy()
 	filling = list(/datum/reagent/sugar = 2)
 
 
-/obj/item/weapon/cigbutt/spitgum
+/obj/item/trash/cigbutt/spitgum
 	name = "old gum"
 	desc = "A disgusting chewed up wad of gum."
 	icon_state = "spit-gum"
 
 
-/obj/item/weapon/cigbutt/lollibutt
+/obj/item/trash/cigbutt/lollibutt
 	name = "popsicle stick"
 	desc = "A popsicle stick devoid of pop."
 	icon_state = "pop-stick"
@@ -965,7 +965,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli
 	name = "lollipop"
 	desc = "A simple artificially flavored sphere of sugar on a handle. Colloquially known as a sucker. Allegedly one is born every minute."
-	type_butt = /obj/item/weapon/cigbutt/lollibutt
+	type_butt = /obj/item/trash/cigbutt/lollibutt
 	icon_state = "lollipop"
 	item_state = "lollipop"
 //	brand = "unremarkable"
@@ -987,7 +987,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/meds
 	name = "lollipop"
 	desc = "A sucrose sphere on a small handle, it has been infused with medication."
-	type_butt = /obj/item/weapon/cigbutt/lollibutt
+	type_butt = /obj/item/trash/cigbutt/lollibutt
 	icon_state = "lollipop"
 
 /obj/item/clothing/mask/chewable/candy/lolli/meds/New()

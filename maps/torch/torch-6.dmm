@@ -4699,7 +4699,7 @@
 	dir = 5
 	},
 /obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"
@@ -12849,7 +12849,7 @@
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
 "aDa" = (
-/obj/item/weapon/cigbutt,
+/obj/item/trash/cigbutt,
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
 "aDb" = (
@@ -19262,7 +19262,7 @@
 "aRN" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},

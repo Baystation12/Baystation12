@@ -4,22 +4,25 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood
 	name = "blood"
-	var/dryname = "dried blood"
 	desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
-	var/drydesc = "It's dry and crusty. Someone is not doing their job."
 	gender = PLURAL
 	density = 0
 	anchored = 1
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mfloor1"
 	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
+	blood_DNA = list()
+	generic_filth = TRUE
+	persistent = TRUE
+
 	var/base_icon = 'icons/effects/blood.dmi'
 	var/list/viruses = list()
-	blood_DNA = list()
 	var/basecolor=COLOR_BLOOD_HUMAN // Color when wet.
 	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
 	var/drytime
+	var/dryname = "dried blood"
+	var/drydesc = "It's dry and crusty. Someone is not doing their job."
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
 	if(!fluorescent)
@@ -154,7 +157,8 @@ var/global/list/image/splatter_cache=list()
 	drips = list(icon_state)
 
 /obj/effect/decal/cleanable/blood/writing
-	icon_state = "tracks"
+	icon = 'icons/effects/writing.dmi'
+	icon_state = "writing"
 	desc = "It looks like a writing in blood."
 	gender = NEUTER
 	random_icon_states = list("writing1","writing2","writing3","writing4","writing5")
@@ -236,6 +240,8 @@ var/global/list/image/splatter_cache=list()
 	anchored = 1
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mucus"
+	generic_filth = TRUE
+	persistent = TRUE
 
 	var/list/datum/disease2/disease/virus2 = list()
 	var/dry=0 // Keeps the lag down
