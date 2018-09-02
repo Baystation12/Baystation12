@@ -1,4 +1,7 @@
-/mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
+/mob/living/carbon/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
+	if(!hit_zone)
+		hit_zone = zone_sel.selecting
+
 	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if(u_attack.is_usable(src, target, hit_zone))
 			if(pulling_punches)
