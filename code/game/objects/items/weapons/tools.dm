@@ -155,7 +155,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	center_of_mass = "x=14;y=15"
-	var/welding_resource = "welding fuel"
+	waterproof = FALSE
 
 	//Amount of OUCH when it's thrown
 	force = 3.0
@@ -173,7 +173,7 @@
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
-
+	var/welding_resource = "welding fuel"
 	var/obj/item/weapon/welder_tank/tank = /obj/item/weapon/welder_tank // where the fuel is stored
 
 /obj/item/weapon/weldingtool/Initialize()

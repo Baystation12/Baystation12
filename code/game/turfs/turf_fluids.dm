@@ -9,7 +9,7 @@
 				break
 	return fluid_can_pass
 
-/turf/proc/add_fluid(var/fluidtype = "water", var/amount)
+/turf/proc/add_fluid(var/amount, var/fluid)
 	var/obj/effect/fluid/F = locate() in src
 	if(!F) F = new(src)
 	SET_FLUID_DEPTH(F, F.fluid_amount + amount)

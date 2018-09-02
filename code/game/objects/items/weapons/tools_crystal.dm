@@ -8,6 +8,7 @@
 	welding_resource = "stored charge"
 	tank = null
 	matter = list("crystal" = 1250)
+	waterproof = TRUE
 
 /obj/item/weapon/weldingtool/crystal/attackby(var/obj/item/W, var/mob/user)
 	if(isScrewdriver(W) || istype(W,/obj/item/stack/rods) || istype(W, /obj/item/weapon/welder_tank))

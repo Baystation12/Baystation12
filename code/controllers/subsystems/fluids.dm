@@ -2,7 +2,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 
 /datum/controller/subsystem/fluids
 	name = "Fluids"
-	wait = 6
+	wait = 10
 	flags = SS_NO_INIT
 
 	var/next_water_act = 0
@@ -11,6 +11,8 @@ var/datum/controller/subsystem/fluids/SSfluids
 	var/list/active_fluids = list()
 	var/list/water_sources = list()
 	var/list/pushing_atoms = list()
+	var/list/hygiene_props = list()
+
 	var/tmp/list/processing_sources
 	var/tmp/list/processing_fluids
 
@@ -172,6 +174,8 @@ var/datum/controller/subsystem/fluids/SSfluids
 				qdel(F)
 
 			if(F.flow_amount >= 10)
+				if(prob(1))
+					playsound(F.loc, 'sound/effects/slosh.ogg', 25, 1)
 				for(var/atom/movable/AM in F.loc.contents)
 					if(isnull(pushing_atoms[AM]) && AM.is_fluid_pushable(F.flow_amount))
 						pushing_atoms[AM] = TRUE

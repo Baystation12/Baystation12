@@ -10,7 +10,6 @@
 	opacity = 1
 	density = 1
 	layer = CLOSED_DOOR_LAYER
-	waterproof = TRUE
 
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
