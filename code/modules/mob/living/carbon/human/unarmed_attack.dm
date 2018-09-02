@@ -23,12 +23,6 @@ var/global/list/sparring_attack_cache = list()
 		return PAIN
 	return BRUTE
 
-/datum/unarmed_attack/proc/get_simple_damage()
-	var/simple_damage = damage
-	simple_damage += damage * edge
-	simple_damage += damage * sharp
-	return simple_damage
-	
 /datum/unarmed_attack/proc/get_sparring_variant()
 	if(sparring_variant_type)
 		if(!sparring_attack_cache[sparring_variant_type])

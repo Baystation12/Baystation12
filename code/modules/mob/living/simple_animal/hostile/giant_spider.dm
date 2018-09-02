@@ -38,6 +38,8 @@
 	mob_size = MOB_LARGE
 	pass_flags = PASS_FLAG_TABLE
 
+	bleed_colour = "#0d5a71"
+
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."

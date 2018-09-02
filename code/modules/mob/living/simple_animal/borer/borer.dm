@@ -24,6 +24,8 @@
 	mob_size = MOB_SMALL
 	can_escape = 1
 
+	bleed_colour = "#816e12"
+
 	var/generation = 1
 	var/static/list/borer_names = list(
 		"Primary", "Secondary", "Tertiary", "Quaternary", "Quinary", "Senary",
