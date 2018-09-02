@@ -303,6 +303,13 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/clothing/glasses/hud/security
 	sort_string = "GAAAB"
 
+/datum/design/item/hud/janitor
+	name = "filth scanner"
+	id = "janitor_hud"
+	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
+	build_path = /obj/item/clothing/glasses/hud/janitor
+	sort_string = "GAAAC"
+
 /datum/design/item/optical/AssembleDesignName()
 	..()
 	name = "Optical glasses design ([item_name])"
