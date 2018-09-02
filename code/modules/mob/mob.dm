@@ -1165,7 +1165,7 @@
 	if(..() && !buckled && (lying || !Check_Shoegrip()) && (amt >= mob_size * (lying ? 5 : 10)))
 		if(!lying)
 			Weaken(1)
-			if(lying)
+			if(lying && prob(10))
 				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
 		return TRUE
 	return FALSE

@@ -483,8 +483,6 @@
 			return global.href_logfile;
 		if("human_icon_cache")
 			return global.human_icon_cache;
-		if("hygiene_props")
-			return global.hygiene_props;
 		if("id_card_states")
 			return global.id_card_states;
 		if("image_repository")
@@ -1472,8 +1470,6 @@
 			global.href_logfile=newval;
 		if("human_icon_cache")
 			global.human_icon_cache=newval;
-		if("hygiene_props")
-			global.hygiene_props=newval;
 		if("id_card_states")
 			global.id_card_states=newval;
 		if("image_repository")
@@ -2219,7 +2215,6 @@
 	"host",
 	"href_logfile",
 	"human_icon_cache",
-	"hygiene_props",
 	"id_card_states",
 	"image_repository",
 	"inactive_keys",

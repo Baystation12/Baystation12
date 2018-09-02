@@ -1,18 +1,15 @@
 //todo: toothbrushes, and some sort of "toilet-filthinator" for the hos
-var/list/hygiene_props = list()
-
 /obj/structure/hygiene
 	var/next_gurgle = 0
 	var/clogged // -1 = never clog
 
 /obj/structure/hygiene/New()
 	..()
-	hygiene_props[src] = TRUE
+	SSfluids.hygiene_props[src] = TRUE
 
 /obj/structure/hygiene/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
-	hygiene_props[src] = null
-	hygiene_props -= src
+	SSfluids.hygiene_props -= src
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(var/severity)

@@ -17,10 +17,12 @@
 	var/list/flags = list()
 	//Products created when burned. For fuel only for now (not oxidizers)
 	var/list/burn_product = list()
-	//Path of proc to be called by zone when it ticks, should accept zone as the argument
-	var/list/processing = list()
 	// Reagent created when inhaled by lungs.
 	var/list/breathed_product = list()
+	// Temperature in K that the gas will condense.
+	var/list/condensation_points = list()
+	// Reagent path resulting from condesation.
+	var/list/condensation_products = list()
 
 /decl/xgm_gas
 	var/id = ""
@@ -34,7 +36,8 @@
 	var/flags = 0
 	var/burn_product = "carbon_dioxide"
 	var/breathed_product
-	var/processing	
+	var/condensation_point = INFINITY
+	var/condensation_product
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
@@ -55,7 +58,11 @@
 		if(gas.overlay_limit) gas_data.overlay_limit[gas.id] = gas.overlay_limit
 		gas_data.flags[gas.id] = gas.flags
 		gas_data.burn_product[gas.id] = gas.burn_product
-		gas_data.processing[gas.id] = gas.processing
+
+		if(!isnull(gas.condensation_product) && !isnull(gas.condensation_point))
+			gas_data.condensation_points[gas.id] = gas.condensation_point
+			gas_data.condensation_products[gas.id] = gas.condensation_product
+
 		gas_data.breathed_product[gas.id] = gas.breathed_product
 
 	return 1
