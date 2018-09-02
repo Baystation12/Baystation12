@@ -17767,11 +17767,13 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/structure/table/standard,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/item/modular_computer/laptop/preset/records,
+/obj/item/modular_computer/console/preset/medical{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/autopsy)
 "ewb" = (
@@ -18093,7 +18095,6 @@
 /area/assembly/robotics_surgery)
 "eRb" = (
 /obj/structure/table/standard,
-/obj/item/device/mass_spectrometer/adv,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
@@ -18219,7 +18220,6 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 10
 	},
-/obj/item/modular_computer/laptop/preset/records,
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
@@ -18564,6 +18564,9 @@
 	dir = 10
 	},
 /obj/machinery/light,
+/obj/item/modular_computer/telescreen/preset/medical{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fub" = (
@@ -19004,6 +19007,9 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 4
 	},
+/obj/item/modular_computer/telescreen/preset/medical{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fVb" = (
@@ -19394,14 +19400,14 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "gsb" = (
-/obj/item/modular_computer/console/preset/medical,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "gtb" = (
-/obj/structure/table/reinforced,
-/obj/item/modular_computer/laptop/preset/records,
 /obj/structure/window/reinforced{
 	dir = 4
+	},
+/obj/item/modular_computer/console/preset/medical{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
@@ -19579,7 +19585,6 @@
 /area/medical/equipstorage)
 "gFb" = (
 /obj/structure/table/standard,
-/obj/item/device/mass_spectrometer/adv,
 /obj/item/clothing/glasses/science,
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
@@ -19589,6 +19594,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
+/obj/item/device/mass_spectrometer,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "gGb" = (
@@ -24280,7 +24286,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "mnb" = (
-/obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
 /area/medical/infirmary)
 "mob" = (
@@ -25896,7 +25901,6 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/modular_computer/laptop/preset/records,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
