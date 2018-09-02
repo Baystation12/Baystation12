@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - bugfix: "Fixes pulling circuit checking for its own position and not its holders"
