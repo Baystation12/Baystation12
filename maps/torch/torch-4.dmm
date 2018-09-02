@@ -19292,12 +19292,12 @@
 /obj/item/device/radio,
 /obj/item/device/radio,
 /obj/item/device/radio,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
 /turf/simulated/floor/tiled/monotile,
 /area/security/equipment)
 "gob" = (
@@ -24357,6 +24357,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
+"mtk" = (
+/obj/item/weapon/crowbar/prybar,
+/turf/simulated/floor/plating,
+/area/maintenance/firstdeck/foreport)
 "mtF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -42508,7 +42512,7 @@ oVb
 aML
 oWb
 aGP
-aDW
+mtk
 kny
 aRu
 aSs
