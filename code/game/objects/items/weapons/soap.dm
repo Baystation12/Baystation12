@@ -40,6 +40,12 @@
 		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 		var/turf/T = target
 		T.clean(src, user)
+	else if (istype(target, /obj/structure/catwalk))
+		var/turf/T = get_turf(target)
+		if(!T)
+			return
+		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
+		T.clean(src, user)
 	else if(istype(target,/obj/structure/sink))
 		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
 		wet()
