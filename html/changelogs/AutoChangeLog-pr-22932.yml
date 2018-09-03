@@ -1,0 +1,4 @@
+author: "nearlyNonexistent"
+delete-after: True
+changes: 
+  - rscadd: "You can now flip blindfolds up, and start with one from your loadout. Tape ones can't be flipped as they're not made of cloth. Blindfolds from loadout are colorizable."
