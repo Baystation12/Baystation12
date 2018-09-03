@@ -92,6 +92,14 @@ SUBSYSTEM_DEF(shuttle)
 		if((shuttle in shuttles_to_initialize) || !initial(shuttle.defer_initialisation))
 			initialise_shuttle(shuttle_type, TRUE)
 	shuttles_to_initialize = null
+	for(var/datum/shuttle/S in shuttles)
+		if(S.mothershuttle)
+			var/datum/shuttle/mothership = shuttles[S.mothershuttle]
+			if(mothership)
+				S.motherdock = S.current_location.landmark_tag
+				mothership.shuttle_area |= S.shuttle_area
+			else
+				error("Shuttle [S] was unable to find mothership [mothership]!")
 
 /datum/controller/subsystem/shuttle/proc/initialise_shuttle(var/shuttle_type, during_init = FALSE)
 	if(!initialized && !during_init)
