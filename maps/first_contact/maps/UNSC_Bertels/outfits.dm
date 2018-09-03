@@ -336,7 +336,7 @@
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o3, /obj/item/clothing/accessory/ribbon/frontier, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -352,7 +352,7 @@
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o4, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -368,7 +368,7 @@
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o5, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -384,7 +384,7 @@
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o6, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o6, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
