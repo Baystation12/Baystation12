@@ -1720,7 +1720,7 @@ CIRCUITS BELOW
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"
 	id = "teleconsole"
-	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 2)
+	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 5)
 	build_path = /obj/item/weapon/circuitboard/teleporter
 	sort_string = "HAAAA"
 
@@ -1966,6 +1966,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/unary_atmos/cooler
 	sort_string = "JCAAB"
 
+/datum/design/circuit/oxyregenerator
+	name = "oxygen regenerator"
+	id = "oxyregen"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/oxyregenerator
+	sort_string = "JCAAC"
+
 /datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
 	desc =  "Allows for the construction of a tamper-resistant airlock electronics."
@@ -2006,12 +2013,14 @@ CIRCUITS BELOW
 /datum/design/circuit/mecha/ripley_main
 	name = "APLU 'Ripley' central control"
 	id = "ripley_main"
+	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/circuitboard/mecha/ripley/main
 	sort_string = "NAAAA"
 
 /datum/design/circuit/mecha/ripley_peri
 	name = "APLU 'Ripley' peripherals control"
 	id = "ripley_peri"
+	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/circuitboard/mecha/ripley/peripherals
 	sort_string = "NAAAB"
 

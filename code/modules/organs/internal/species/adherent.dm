@@ -100,7 +100,7 @@
 
 /obj/item/organ/internal/powered/float/Process()
 	. = ..()
-	if(active && owner.floatiness <= 5)
+	if(active && owner && owner.floatiness <= 5)
 		owner.make_floating(5)
 
 /obj/item/organ/internal/eyes/adherent
@@ -109,6 +109,10 @@
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
 	phoron_guard = TRUE
+
+/obj/item/organ/internal/eyes/adherent/Initialize()
+	. = ..()
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 
 /obj/item/organ/internal/cell/adherent
 	name = "piezoelectric core"

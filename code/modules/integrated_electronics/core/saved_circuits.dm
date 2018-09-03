@@ -23,8 +23,6 @@
 			var/datum/integrated_io/input = inputs[index]
 
 			// Don't waste space saving the default values
-			if(input.data == inputs_default["[index]"])
-				continue
 			if(input.data == initial(input.data))
 				continue
 
@@ -195,7 +193,10 @@
 
 	for(var/c in assembly.assembly_components)
 		var/obj/item/integrated_circuit/component = c
-		var/list/all_pins = component.inputs + component.outputs + component.activators
+		var/list/all_pins = list()
+		for(var/l in list(component.inputs, component.outputs, component.activators))
+			if(l) //If it isn't null
+				all_pins += l
 
 		for(var/p in all_pins)
 			var/datum/integrated_io/pin = p
@@ -361,5 +362,6 @@
 			IO.connect_pin(IO2)
 
 	assembly.forceMove(loc)
+	assembly.post_load()
 	return assembly
 

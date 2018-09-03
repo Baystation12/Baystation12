@@ -170,6 +170,11 @@
 /datum/species/nabber/can_fall(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
+	//nabbers should not be trying to break their fall on stairs.
+	var/turf/T = GetBelow(H.loc)
+	for(var/obj/O in T)
+		if(istype(O, /obj/structure/stairs))
+			return TRUE
 	if(mixture)
 		var/pressure = mixture.return_pressure()
 		if(pressure > 80)
@@ -181,6 +186,13 @@
 /datum/species/nabber/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 
 	var/datum/gas_mixture/mixture = H.loc.return_air()
+
+	var/turf/T = GetBelow(H.loc)
+
+	//Nabbers should not be trying to break their fall on stairs.
+	for(var/obj/O in T)
+		if(istype(O, /obj/structure/stairs))
+			return FALSE
 
 	if(mixture)
 		var/pressure = mixture.return_pressure()
@@ -195,9 +207,9 @@
 	return FALSE
 
 
-/datum/species/nabber/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
+/datum/species/nabber/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 	if(!H.handcuffed || H.buckled)
-		return ..()
+		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
 

@@ -210,6 +210,10 @@ ARMCHAIR(yellow)
 	title = "high security airlock assembly"
 	result_type = /obj/structure/door_assembly/door_assembly_highsecurity
 
+/datum/stack_recipe/furniture/door_assembly/ext
+	title = "exterior airlock assembly"
+	result_type = /obj/structure/door_assembly/door_assembly_ext
+
 /datum/stack_recipe/furniture/door_assembly/firedoor
 	title = "emergency shutter"
 	result_type = /obj/structure/firedoor_assembly

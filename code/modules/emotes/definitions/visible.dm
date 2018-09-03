@@ -15,6 +15,7 @@
 
 /decl/emote/visible/nod
 	key ="nod"
+	emote_message_3p_target = "USER nods USER_THEIR head at TARGET."
 	emote_message_3p = "USER nods USER_THEIR head."
 
 /decl/emote/visible/sway
@@ -45,6 +46,7 @@
 
 /decl/emote/visible/hiss
 	key ="hiss_"
+	emote_message_3p_target = "USER hisses softly at TARGET."
 	emote_message_3p = "USER hisses softly."
 
 /decl/emote/visible/shiver
@@ -84,7 +86,7 @@
 
 /decl/emote/visible/salute
 	key = "salute"
-	emote_message_3p_target = "USER salutes to TARGET."
+	emote_message_3p_target = "USER salutes TARGET."
 	emote_message_3p = "USER salutes."
 
 /decl/emote/visible/flap
@@ -129,29 +131,29 @@
 
 /decl/emote/visible/wave
 	key = "wave"
-	emote_message_3p = "USER waves."
 	emote_message_3p_target = "USER waves at TARGET."
+	emote_message_3p = "USER waves."
 
 /decl/emote/visible/glare
 	key = "glare"
-	emote_message_3p = "USER glares at TARGET."
+	emote_message_3p_target = "USER glares at TARGET."
 	emote_message_3p = "USER glares."
 
 /decl/emote/visible/stare
 	key = "stare"
-	emote_message_3p = "USER stares at TARGET."
+	emote_message_3p_target = "USER stares at TARGET."
 	emote_message_3p = "USER stares."
 
 /decl/emote/visible/look
 	key = "look"
-	emote_message_3p = "USER looks at TARGET."
+	emote_message_3p_target = "USER looks at TARGET."
 	emote_message_3p = "USER looks."
 
 /decl/emote/visible/point
 	key = "point"
 	check_restraints = TRUE
-	emote_message_3p = "USER points."
 	emote_message_3p_target = "USER points to TARGET."
+	emote_message_3p = "USER points."
 
 /decl/emote/visible/raise
 	key = "raise"
@@ -160,6 +162,7 @@
 
 /decl/emote/visible/grin
 	key = "grin"
+	emote_message_3p_target = "USER grins at TARGET."
 	emote_message_3p = "USER grins."
 
 /decl/emote/visible/shrug
@@ -168,6 +171,7 @@
 
 /decl/emote/visible/smile
 	key = "smile"
+	emote_message_3p_target = "USER smiles at TARGET."
 	emote_message_3p = "USER smiles."
 
 /decl/emote/visible/pale
@@ -180,19 +184,20 @@
 
 /decl/emote/visible/wink
 	key = "wink"
+	emote_message_3p_target = "USER winks at TARGET."
 	emote_message_3p = "USER winks."
 
 /decl/emote/visible/hug
 	key = "hug"
 	check_restraints = TRUE
-	emote_message_3p = "USER hugs USER_THEMself."
 	emote_message_3p_target = "USER hugs TARGET."
+	emote_message_3p = "USER hugs USER_THEMself."
 
 /decl/emote/visible/dap
 	key = "dap"
 	check_restraints = TRUE
-	emote_message_3p = "USER sadly can't find anybody to give daps to, and daps USER_THEMself."
 	emote_message_3p_target = "USER gives daps to TARGET."
+	emote_message_3p = "USER sadly can't find anybody to give daps to, and daps USER_THEMself."
 
 /decl/emote/visible/signal
 	key = "signal"
@@ -225,19 +230,19 @@
 /decl/emote/visible/handshake
 	key = "handshake"
 	check_restraints = TRUE
-	emote_message_3p = "USER shakes hands with USER_THEMself."
 	emote_message_3p_target = "USER shakes hands with TARGET."
+	emote_message_3p = "USER shakes hands with USER_THEMself."
 	message_type = VISIBLE_MESSAGE
 
 /decl/emote/visible/handshake/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
 	if(target && !user.Adjacent(target))
-		return "USER holds out USER_HIS hand out to TARGET."
+		return "USER holds out USER_THEIR hand out to TARGET."
 	return ..()
 
 /decl/emote/visible/signal
 	key = "signal"
-	emote_message_3p = "USER signals."
 	emote_message_3p_target = "USER signals at TARGET."
+	emote_message_3p = "USER signals."
 	message_type = VISIBLE_MESSAGE
 
 /decl/emote/visible/signal/get_emote_message_3p(var/mob/user, var/atom/target, var/extra_params)

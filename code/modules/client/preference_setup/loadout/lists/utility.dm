@@ -37,6 +37,14 @@
 	display_name = "camera"
 	path = /obj/item/device/camera
 
+/datum/gear/utility/photo_album
+	display_name = "photo album"
+	path = /obj/item/weapon/storage/photo_album
+
+/datum/gear/utility/film_roll
+	display_name = "film roll"
+	path = /obj/item/device/camera_film
+
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
@@ -46,6 +54,11 @@
 	display_name = "Multicolored Pen"
 	path = /obj/item/weapon/pen/multi
 	cost = 2
+
+/datum/gear/utility/hand_labeler
+	display_name = "hand labeler"
+	path = /obj/item/weapon/hand_labeler
+	cost = 3
 
 /****************
 modular computers

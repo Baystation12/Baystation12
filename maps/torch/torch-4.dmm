@@ -4742,8 +4742,9 @@
 /area/medical/mentalhealth)
 "alQ" = (
 /obj/machinery/requests_console{
-	department = "Chapel";
-	departmentType = 2;
+	announcementConsole = 1;
+	department = "Security";
+	departmentType = 5;
 	pixel_y = 30
 	},
 /obj/structure/closet/secure_closet/counselor,
@@ -5408,6 +5409,10 @@
 	icon_state = "pipe-c"
 	},
 /obj/structure/filingcabinet/chestdrawer,
+/obj/machinery/camera/network/security{
+	c_tag = "Security Wing - Forensics";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "apf" = (
@@ -17762,11 +17767,13 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/structure/table/standard,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/item/modular_computer/laptop/preset/records,
+/obj/item/modular_computer/console/preset/medical{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/autopsy)
 "ewb" = (
@@ -18088,7 +18095,6 @@
 /area/assembly/robotics_surgery)
 "eRb" = (
 /obj/structure/table/standard,
-/obj/item/device/mass_spectrometer/adv,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
@@ -18214,7 +18220,6 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 10
 	},
-/obj/item/modular_computer/laptop/preset/records,
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
@@ -18559,6 +18564,9 @@
 	dir = 10
 	},
 /obj/machinery/light,
+/obj/item/modular_computer/telescreen/preset/medical{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fub" = (
@@ -18999,12 +19007,15 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 4
 	},
+/obj/item/modular_computer/telescreen/preset/medical{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fVb" = (
 /obj/machinery/door/airlock/medical{
 	name = "Autopsy";
-	req_access = list(5)
+	req_access = list(6)
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -19389,14 +19400,14 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "gsb" = (
-/obj/item/modular_computer/console/preset/medical,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "gtb" = (
-/obj/structure/table/reinforced,
-/obj/item/modular_computer/laptop/preset/records,
 /obj/structure/window/reinforced{
 	dir = 4
+	},
+/obj/item/modular_computer/console/preset/medical{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
@@ -19574,7 +19585,6 @@
 /area/medical/equipstorage)
 "gFb" = (
 /obj/structure/table/standard,
-/obj/item/device/mass_spectrometer/adv,
 /obj/item/clothing/glasses/science,
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
@@ -19584,6 +19594,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
+/obj/item/device/mass_spectrometer,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "gGb" = (
@@ -21518,6 +21529,16 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/entry)
+"iPj" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "Briefing Room";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/conference)
 "iQb" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -22572,7 +22593,7 @@
 	dir = 8;
 	id_tag = null;
 	name = "Infirmary Wing";
-	req_one_access = list(5,8)
+	req_one_access = list(5,8,6)
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -24265,7 +24286,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "mnb" = (
-/obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
 /area/medical/infirmary)
 "mob" = (
@@ -25845,10 +25865,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "ogv" = (
-/obj/item/modular_computer/console/preset/security{
-	icon_state = "console";
-	dir = 4
-	},
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Security";
@@ -25860,6 +25876,8 @@
 	icon_state = "bordercolorhalf";
 	dir = 8
 	},
+/obj/structure/table/steel,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/opscheck)
 "ohb" = (
@@ -25883,7 +25901,6 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/modular_computer/laptop/preset/records,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
@@ -26952,6 +26969,10 @@
 	pixel_y = -24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/camera/network/security{
+	c_tag = "Security Wing - Evidence Storage";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -43692,7 +43713,7 @@ njj
 alZ
 kCl
 iEb
-iEb
+iPj
 iEb
 kCl
 dzG

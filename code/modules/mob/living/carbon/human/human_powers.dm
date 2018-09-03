@@ -130,6 +130,8 @@
 		return
 
 	T.Weaken(3)
+	if(mind && !player_is_antag(mind))
+		Weaken(3)
 
 	if(src.make_grab(src, T))
 		src.visible_message("<span class='warning'><b>\The [src]</b> seizes [T]!</span>")

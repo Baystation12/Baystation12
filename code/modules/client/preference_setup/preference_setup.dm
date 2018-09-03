@@ -13,6 +13,11 @@ var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	sort_order = 2
 	category_item_type = /datum/category_item/player_setup_item/background
 
+/datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
+	. = ""
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. += "[PI.content(user)]<br>"
+
 /datum/category_group/player_setup_category/occupation_preferences
 	name = "Occupation"
 	sort_order = 3

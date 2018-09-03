@@ -138,6 +138,9 @@
 
 	safe_toxins_max = 10
 
+/obj/item/organ/internal/lungs/nabber/rupture()
+	to_chat(owner, "<span class='danger'>You feel air rushing through your trachea!</span>")
+
 /obj/item/organ/internal/lungs/nabber/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 

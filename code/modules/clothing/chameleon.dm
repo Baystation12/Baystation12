@@ -55,14 +55,6 @@
 		var/blocked = list(src.type, /obj/item/clothing/under/cloud, /obj/item/clothing/under/gimmick)//Prevent infinite loops and bad jumpsuits.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under, blocked)
 
-/obj/item/clothing/under/chameleon/emp_act(severity)
-	name = "psychedelic"
-	desc = "Groovy!"
-	icon_state = "psyche"
-	item_state_slots[slot_w_uniform_str] = "psyche"
-	update_icon()
-	update_clothing_icon()
-
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
 	set category = "Chameleon Items"
@@ -91,13 +83,6 @@
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/clothing/head/justice,)//Prevent infinite loops and bad hats.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/head, blocked)
-
-/obj/item/clothing/head/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	update_icon()
-	update_clothing_icon()
 
 /obj/item/clothing/head/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Hat/Helmet Appearance"
@@ -128,13 +113,6 @@
 		var/blocked = list(src.type, /obj/item/clothing/suit/cyborg_suit, /obj/item/clothing/suit/justice, /obj/item/clothing/suit/greatcoat)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/suit, blocked)
 
-/obj/item/clothing/suit/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	update_icon()
-	update_clothing_icon()
-
 /obj/item/clothing/suit/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Oversuit Appearance"
 	set category = "Chameleon Items"
@@ -163,14 +141,6 @@
 		var/blocked = list(src.type, /obj/item/clothing/shoes/syndigaloshes, /obj/item/clothing/shoes/cyborg)//prevent infinite loops and bad shoes.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/shoes, blocked)
 
-/obj/item/clothing/shoes/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-	update_icon()
-	update_clothing_icon()
-
 /obj/item/clothing/shoes/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Footwear Appearance"
 	set category = "Chameleon Items"
@@ -198,16 +168,6 @@
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/weapon/storage/backpack/satchel/grey/withwallet)
 		clothing_choices = generate_chameleon_choices(/obj/item/weapon/storage/backpack, blocked)
-
-/obj/item/weapon/storage/backpack/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-	update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_back()
 
 /obj/item/weapon/storage/backpack/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Backpack Appearance"
@@ -241,14 +201,6 @@
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/gloves, list(src.type))
 
-/obj/item/clothing/gloves/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-	update_icon()
-	update_clothing_icon()
-
 /obj/item/clothing/gloves/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Gloves Appearance"
 	set category = "Chameleon Items"
@@ -277,14 +229,6 @@
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/mask, list(src.type))
 
-/obj/item/clothing/mask/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-	update_icon()
-	update_clothing_icon()
-
 /obj/item/clothing/mask/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Mask Appearance"
 	set category = "Chameleon Items"
@@ -312,14 +256,6 @@
 	..()
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/glasses, list(src.type))
-
-/obj/item/clothing/glasses/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-	update_icon()
-	update_clothing_icon()
 
 /obj/item/clothing/glasses/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Glasses Appearance"
@@ -375,16 +311,6 @@
 		P.tracer_type = initial(copy_projectile.tracer_type)
 		P.impact_type = initial(copy_projectile.impact_type)
 	return P
-
-/obj/item/weapon/gun/energy/chameleon/emp_act(severity)
-	SetName(initial(name))
-	desc = initial(desc)
-	icon_state = initial(icon_state)
-	update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
 
 /obj/item/weapon/gun/energy/chameleon/disguise(var/newtype)
 	var/obj/item/weapon/gun/copy = ..()
