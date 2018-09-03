@@ -94,3 +94,7 @@
 
 /decl/flooring/tiling
 	name = "deck"
+
+//Needs to be referenced in a ticked file because it's a global var
+/datum/controller/subsystem/SSuniforms
+	flags = SS_NO_FIRE

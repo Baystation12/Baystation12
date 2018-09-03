@@ -105,6 +105,8 @@
 			return global.SSturf;
 		if("SSvines")
 			return global.SSvines;
+		if("SSuniforms")
+			return global.SSuniforms;
 		if("SSwireless")
 			return global.SSwireless;
 		if("SSxenoarch")
@@ -1094,6 +1096,8 @@
 			global.SSturf=newval;
 		if("SSvines")
 			global.SSvines=newval;
+		if("SSuniforms")
+			global.SSuniforms=newval;
 		if("SSwireless")
 			global.SSwireless=newval;
 		if("SSxenoarch")
