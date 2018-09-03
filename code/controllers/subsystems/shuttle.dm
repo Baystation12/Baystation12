@@ -92,8 +92,11 @@ SUBSYSTEM_DEF(shuttle)
 		if((shuttle in shuttles_to_initialize) || !initial(shuttle.defer_initialisation))
 			initialise_shuttle(shuttle_type, TRUE)
 	shuttles_to_initialize = null
+	hook_up_motherships()
+
+/datum/controller/subsystem/shuttle/proc/hook_up_motherships()
 	for(var/datum/shuttle/S in shuttles)
-		if(S.mothershuttle)
+		if(S.mothershuttle && !S.motherdock)
 			var/datum/shuttle/mothership = shuttles[S.mothershuttle]
 			if(mothership)
 				S.motherdock = S.current_location.landmark_tag
