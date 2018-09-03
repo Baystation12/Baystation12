@@ -437,7 +437,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
 "bx" = (
-/obj/machinery/seed_storage/garden,
+/obj/machinery/seed_storage/garden{
+	starting_seeds = list(/obj/item/seeds/algaeseed = 30, /obj/item/seeds/ambrosiavulgarisseed = 30, /obj/item/seeds/appleseed = 30, /obj/item/seeds/bananaseed = 30, /obj/item/seeds/berryseed = 30, /obj/item/seeds/blueberryseed = 30, /obj/item/seeds/cabbageseed = 30, /obj/item/seeds/cocoapodseed = 30, /obj/item/seeds/carrotseed = 30, /obj/item/seeds/chantermycelium = 30, /obj/item/seeds/cherryseed = 30, /obj/item/seeds/chiliseed = 30, /obj/item/seeds/cornseed = 30, /obj/item/seeds/replicapod = 30, /obj/item/seeds/eggplantseed = 30, /obj/item/seeds/amanitamycelium = 30, /obj/item/seeds/garlicseed = 30, /obj/item/seeds/glowshroom = 30, /obj/item/seeds/grapeseed = 30, /obj/item/seeds/grassseed = 30, /obj/item/seeds/harebell = 30, /obj/item/seeds/lavenderseed = 30, /obj/item/seeds/lemonseed = 30, /obj/item/seeds/libertymycelium = 30, /obj/item/seeds/limeseed = 30, /obj/item/seeds/mtearseed = 30, /obj/item/seeds/nettleseed = 30, /obj/item/seeds/onionseed = 30, /obj/item/seeds/orangeseed = 30, /obj/item/seeds/peanutseed = 30, /obj/item/seeds/peppercornseed = 30, /obj/item/seeds/plumpmycelium = 30, /obj/item/seeds/poppyseed = 30, /obj/item/seeds/potatoseed = 30, /obj/item/seeds/pumpkinseed = 30, /obj/item/seeds/reishimycelium = 30, /obj/item/seeds/riceseed = 30, /obj/item/seeds/shandseed = 30, /obj/item/seeds/soyaseed = 30, /obj/item/seeds/sugarcaneseed = 30, /obj/item/seeds/sunflowerseed = 30, /obj/item/seeds/tobaccoseed = 30, /obj/item/seeds/tomatoseed = 30, /obj/item/seeds/towermycelium = 30, /obj/item/seeds/watermelonseed = 30, /obj/item/seeds/wheatseed = 30, /obj/item/seeds/whitebeetseed = 30)
+	},
 /obj/effect/floor_decal/corner/green/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
@@ -20034,7 +20036,9 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Zm" = (
-/obj/machinery/seed_storage/garden,
+/obj/machinery/seed_storage/garden{
+	starting_seeds = list(/obj/item/seeds/algaeseed = 30, /obj/item/seeds/ambrosiavulgarisseed = 30, /obj/item/seeds/appleseed = 30, /obj/item/seeds/bananaseed = 30, /obj/item/seeds/berryseed = 30, /obj/item/seeds/blueberryseed = 30, /obj/item/seeds/cabbageseed = 30, /obj/item/seeds/cocoapodseed = 30, /obj/item/seeds/carrotseed = 30, /obj/item/seeds/chantermycelium = 30, /obj/item/seeds/cherryseed = 30, /obj/item/seeds/chiliseed = 30, /obj/item/seeds/cornseed = 30, /obj/item/seeds/replicapod = 30, /obj/item/seeds/eggplantseed = 30, /obj/item/seeds/amanitamycelium = 30, /obj/item/seeds/garlicseed = 30, /obj/item/seeds/glowshroom = 30, /obj/item/seeds/grapeseed = 30, /obj/item/seeds/grassseed = 30, /obj/item/seeds/harebell = 30, /obj/item/seeds/lavenderseed = 30, /obj/item/seeds/lemonseed = 30, /obj/item/seeds/libertymycelium = 30, /obj/item/seeds/limeseed = 30, /obj/item/seeds/mtearseed = 30, /obj/item/seeds/nettleseed = 30, /obj/item/seeds/onionseed = 30, /obj/item/seeds/orangeseed = 30, /obj/item/seeds/peanutseed = 30, /obj/item/seeds/peppercornseed = 30, /obj/item/seeds/plumpmycelium = 30, /obj/item/seeds/poppyseed = 30, /obj/item/seeds/potatoseed = 30, /obj/item/seeds/pumpkinseed = 30, /obj/item/seeds/reishimycelium = 30, /obj/item/seeds/riceseed = 30, /obj/item/seeds/shandseed = 30, /obj/item/seeds/soyaseed = 30, /obj/item/seeds/sugarcaneseed = 30, /obj/item/seeds/sunflowerseed = 30, /obj/item/seeds/tobaccoseed = 30, /obj/item/seeds/tomatoseed = 30, /obj/item/seeds/towermycelium = 30, /obj/item/seeds/watermelonseed = 30, /obj/item/seeds/wheatseed = 30, /obj/item/seeds/whitebeetseed = 30)
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics)
 "Zn" = (
