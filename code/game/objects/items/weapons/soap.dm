@@ -21,9 +21,7 @@
 
 /obj/item/weapon/soap/Crossed(var/mob/living/AM)
 	if (istype(AM))
-		to_chat(usr, "<span class='notice'>AM=[AM], istype(AM) == true</span>")
 		if(AM.pulledby)
-			to_chat(usr, "<span class='notice'>AM.pulledby==true, AM.pulledby = [AM.pulledby]</span>")
 			return
 		AM.slip("the [src.name]",3)
 
