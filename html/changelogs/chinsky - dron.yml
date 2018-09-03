@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Added a new event: Maintenance Drones Uprising."
+  - rscadd: "It spawns hostile versions of maint drones in maintenance. They will not attack anyone they perceive as synth."
