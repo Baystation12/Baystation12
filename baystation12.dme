@@ -788,6 +788,7 @@
 #include "code\game\objects\items\contraband.dm"
 #include "code\game\objects\items\crayons.dm"
 #include "code\game\objects\items\cryobag.dm"
+#include "code\game\objects\items\documents.dm"
 #include "code\game\objects\items\glassjar.dm"
 #include "code\game\objects\items\instruments.dm"
 #include "code\game\objects\items\latexballoon.dm"
