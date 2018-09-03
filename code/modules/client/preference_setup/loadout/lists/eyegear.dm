@@ -107,3 +107,8 @@
 /datum/gear/eyes/hudpatch
 	display_name = "iPatch"
 	path = /obj/item/clothing/glasses/eyepatch/hud
+
+/datum/gear/eyes/blindfold
+	display_name = "blindfold"
+	path = /obj/item/clothing/glasses/sunglasses/blindfold
+	flags = GEAR_HAS_COLOR_SELECTION
