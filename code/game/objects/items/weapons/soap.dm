@@ -19,10 +19,13 @@
 /obj/item/weapon/soap/proc/wet()
 	reagents.add_reagent(/datum/reagent/space_cleaner, 15)
 
-/obj/item/weapon/soap/Crossed(AM as mob|obj)
-	if (istype(AM, /mob/living))
-		var/mob/living/M =	AM
-		M.slip("the [src.name]",3)
+/obj/item/weapon/soap/Crossed(var/mob/living/AM)
+	if (istype(AM))
+		to_chat(usr, "<span class='notice'>AM=[AM], istype(AM) == true</span>")
+		if(AM.pulledby)
+			to_chat(usr, "<span class='notice'>AM.pulledby==true, AM.pulledby = [AM.pulledby]</span>")
+			return
+		AM.slip("the [src.name]",3)
 
 /obj/item/weapon/soap/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
@@ -36,16 +39,18 @@
 	else if(istype(target,/obj/effect/decal/cleanable))
 		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
 		qdel(target)
-	else if(istype(target,/turf))
-		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
-		var/turf/T = target
-		T.clean(src, user)
-	else if (istype(target, /obj/structure/catwalk))
+	else if(istype(target,/turf)|| istype(target, /obj/structure/catwalk))
 		var/turf/T = get_turf(target)
 		if(!T)
 			return
-		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
-		T.clean(src, user)
+		if(!src.reagents.has_reagent(/datum/reagent/space_cleaner, 1)) //need to make the check here, or it	will let the user waste time trying to clean when they can't clean with it.
+			to_chat(user, "<span class='warning'>\The [src] is too dry to wash that.</span>")
+		else
+			user.visible_message("<span class='warning'>[user] gets down on their hands and knees and starts scrubbing \the [T].</span>")
+			if(do_after(user, 80, T))
+				to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
+				if(T)
+					T.clean(src, user)
 	else if(istype(target,/obj/structure/sink))
 		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
 		wet()
