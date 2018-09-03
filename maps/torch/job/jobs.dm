@@ -1185,6 +1185,10 @@
 						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
 	minimal_access = list()
 
+	alt_titles = list(
+		"Logistics Officer"
+	)
+
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
