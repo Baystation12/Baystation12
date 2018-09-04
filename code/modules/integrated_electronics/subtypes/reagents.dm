@@ -176,13 +176,14 @@
 		return
 
 	if(direction_mode == IC_REAGENTS_INJECT)
-		if(!reagents.total_volume || !AM.is_open_container() || !AM.reagents || !AM.reagents.get_free_space())
+		if(!reagents.total_volume || !AM.reagents || !AM.reagents.get_free_space())
 			activate_pin(3)
 			return
 
 		if(isliving(AM))
 			var/mob/living/L = AM
 			var/injection_status = L.can_inject(null, BP_CHEST)
+			log_world("Injection status? [injection_status]")
 			if(!injection_status)
 				activate_pin(3)
 				return
@@ -193,8 +194,12 @@
 			busy = TRUE
 			addtimer(CALLBACK(src, .proc/inject_after, weakref(L)), injection_status * 3 SECONDS)
 			return
-
 		else
+			if(!AM.is_open_container())
+				activate_pin(3)
+				return
+
+
 			reagents.trans_to(AM, transfer_amount)
 
 	if(direction_mode == IC_REAGENTS_DRAW)
