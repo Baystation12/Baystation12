@@ -21260,6 +21260,11 @@
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"ZW" = (
+/obj/structure/table/woodentable_reinforced/mahogany,
+/obj/item/weapon/spirit_board,
+/turf/simulated/floor/wood/maple,
+/area/chapel/main)
 "ZY" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -45417,7 +45422,7 @@ uq
 Mj
 XY
 AW
-BP
+ZW
 BF
 RG
 CU
