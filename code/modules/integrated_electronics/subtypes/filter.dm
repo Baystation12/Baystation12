@@ -80,13 +80,13 @@
 	inputs = list( "input" = IC_PINTYPE_REF, "expected type" = IC_PINTYPE_REF )
 
 /obj/item/integrated_circuit/filter/ref/custom/may_pass(var/weakref/data, var/weakref/typedata)
-    if(!isweakref(data) || !isweakref(typedata))
-        return FALSE
-    var/weakref/wref = data
-    var/weakref/wref2 = typedata
-    var/atom/A = wref.resolve()
-    var/atom/B = wref2.resolve()
-    return (A && B && (istype(A, B.type)))
+	if(!isweakref(data) || !isweakref(typedata))
+		return FALSE
+	var/weakref/wref = data
+	var/weakref/wref2 = typedata
+	var/atom/A = wref.resolve()
+	var/atom/B = wref2.resolve()
+	return (A && B && (istype(A, B.type)))
 
 /obj/item/integrated_circuit/filter/ref/custom/do_work()
 	var/datum/integrated_io/A = inputs[1]
