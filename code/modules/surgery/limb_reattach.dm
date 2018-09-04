@@ -33,6 +33,13 @@
 /datum/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!..())
 		return 0
+	var/obj/item/organ/external/E = tool
+	var/list/organ_tag = list()
+	for(var/obj/item/organ/external/organ in target.organs)
+		organ_tag += organ.organ_tag
+	if(!(E.parent_organ in organ_tag))
+		to_chat(user, "<span class='danger'>The [E.amputation_point] is missing!</span>")
+		return SURGERY_FAILURE
 	if(target.isSynthetic())
 		var/obj/item/organ/external/using = tool
 		if(!BP_IS_ROBOTIC(using))
