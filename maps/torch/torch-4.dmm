@@ -29892,6 +29892,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/item/weapon/spirit_board,
 /turf/simulated/floor/carpet/purple,
 /area/chapel/main)
 "sHN" = (
