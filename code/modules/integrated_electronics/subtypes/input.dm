@@ -753,8 +753,6 @@
 //This only procs when a signal is valid.
 /obj/item/integrated_circuit/input/signaler/proc/treat_signal(var/datum/signal/signal)
 	activate_pin(3)
-	audible_message("\icon[src] *beep* *beep* *beep*", null, 1)
-	playsound(get_turf(src), 'sound/machines/triple_beep.ogg', 50)
 
 /obj/item/integrated_circuit/input/signaler/advanced
 	name = "advanced integrated signaler"
