@@ -86,7 +86,7 @@
     var/weakref/wref2 = typedata
     var/atom/A = wref.resolve()
     var/atom/B = wref2.resolve()
-    return (A && B && (istype(A, B.type) || istype(B, A.type)))
+    return (A && B && (istype(A, B.type)))
 
 /obj/item/integrated_circuit/filter/ref/custom/do_work()
 	var/datum/integrated_io/A = inputs[1]
