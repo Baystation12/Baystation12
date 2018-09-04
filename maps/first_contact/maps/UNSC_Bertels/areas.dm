@@ -114,6 +114,7 @@
 
 /area/corvette/unscbertels/deck2/Reactorcore
 	name = "UNSC Bertels Deck 2 Main Reactor Core"
+	dynamic_lighting = 0
 
 /area/corvette/unscbertels/deck2/portengine
 	name = "UNSC Bertels Deck 2 Port Engine"
