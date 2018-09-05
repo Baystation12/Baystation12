@@ -21,6 +21,18 @@
 	path = /obj/item/clothing/accessory/storage/knifeharness
 	cost = 5
 
+/datum/gear/suit/unathi/savage_hunter
+	display_name = "savage hunter hides (Male, Unathi)"
+	path = /obj/item/clothing/under/savage_hunter
+	slot = slot_w_uniform
+	cost = 2
+
+/datum/gear/suit/unathi/savage_hunter/female
+	display_name = "savage hunter hides (Female, Unathi)"
+	path = /obj/item/clothing/under/savage_hunter/female
+	slot = slot_w_uniform
+	cost = 2
+
 //Skrell Chains
 /datum/gear/ears/skrell/
 	sort_category = "Xenowear"
