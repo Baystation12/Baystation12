@@ -232,6 +232,9 @@
 	if(istype(O))
 		O.refresh_action_button()
 
+/datum/action/item_action/organ/augment
+	button_icon = 'icons/obj/augment.dmi'
+
 #undef AB_WEST_OFFSET
 #undef AB_NORTH_OFFSET
 #undef AB_MAX_COLUMNS
