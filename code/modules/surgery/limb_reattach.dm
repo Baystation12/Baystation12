@@ -34,10 +34,8 @@
 	if(!..())
 		return 0
 	var/obj/item/organ/external/E = tool
-	var/list/organ_tag = list()
-	for(var/obj/item/organ/external/organ in target.organs)
-		organ_tag += organ.organ_tag
-	if(!(E.parent_organ in organ_tag))
+	var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
+	if(!P || P.is_stump())
 		to_chat(user, "<span class='danger'>The [E.amputation_point] is missing!</span>")
 		return SURGERY_FAILURE
 	if(target.isSynthetic())
