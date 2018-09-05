@@ -80,7 +80,7 @@
 	pull_data()
 	var/atom/A = get_pin_data(IC_INPUT, 1)
 	if(A && istype(A))
-		result = str2hex(XorEncrypt("\ref[A]", SScircuit.cipherkey))
+		result = add_data_signature("\ref[A]")
 
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()
@@ -97,7 +97,13 @@
 
 /obj/item/integrated_circuit/converter/refdecode/do_work()
 	pull_data()
-	dec = XorEncrypt(hex2str(get_pin_data(IC_INPUT, 1), TRUE), SScircuit.cipherkey)
+	var/list/signature_and_data = splittext(get_pin_data(IC_INPUT, 1), ":")
+	var/signature = signature_and_data[1]
+	var/dec = signature_and_data[2]
+
+	if(!check_data_signature(signature, dec))
+		return FALSE
+
 	set_pin_data(IC_OUTPUT, 1, weakref(locate(dec)))
 	push_data()
 	activate_pin(2)
