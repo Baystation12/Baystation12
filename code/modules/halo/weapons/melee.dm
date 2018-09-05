@@ -8,6 +8,8 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 30
 	throwforce = 10
+	sharp = 1
+	edge = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/material/machete

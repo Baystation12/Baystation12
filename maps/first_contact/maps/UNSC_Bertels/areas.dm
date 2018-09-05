@@ -4,7 +4,7 @@
 	power_environ = 1
 	power_light = 1
 	poweralm = 1
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscbertels/exterior
 	name = "UNSC Bertels Exterior"
@@ -78,6 +78,7 @@
 
 /area/corvette/unscbertels/deck2/marinemesshall
 	name = "UNSC Bertels Deck 2 Marine Mess Hall"
+	requires_power = 0
 
 /area/corvette/unscbertels/deck2/porthangar
 	name = "UNSC Bertels Deck 2 Port Hangar"
