@@ -12,3 +12,6 @@
 	path = /obj/item/clothing/gloves/duty/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI)
+
+/datum/gear/suit/unathi/savage_hunter
+	allowed_branches = CIVILIAN_BRANCHES
