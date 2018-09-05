@@ -14,6 +14,10 @@
 		"on read" = IC_PINTYPE_PULSE_OUT
 	)
 
+/obj/item/integrated_circuit/input/card_reader/old // adds compatibility for old TG blueprints
+	name = "card reader"
+	spawn_flags = 0
+
 /obj/item/integrated_circuit/input/card_reader/attackby_react(obj/item/I, mob/living/user, intent)
 	var/obj/item/weapon/card/id/card = I.GetIdCard()
 	var/list/access = I.GetAccess()

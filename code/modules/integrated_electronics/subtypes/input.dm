@@ -1178,9 +1178,9 @@
 	)
 
 /obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
-	var/obj/item/weapon/card/data/card = I.GetIdCard()
+	var/obj/item/weapon/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
-	if(card)
+	if(istype(card))
 		if(write_mode == TRUE)
 			card.function = get_pin_data(IC_INPUT, 1)
 			card.data = get_pin_data(IC_INPUT, 2)
