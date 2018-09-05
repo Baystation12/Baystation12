@@ -24,7 +24,7 @@
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
 		if("number")
 			accepting_refs = FALSE
-			new_data = user.get_input("Now type in a string", "[src] string writing", null, MOB_INPUT_NUM, src)
+			new_data = user.get_input("Now type in a number", "[src] number writing", null, MOB_INPUT_NUM, src)
 			if(isnum(new_data) && user.IsAdvancedToolUser())
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [new_data].</span>")

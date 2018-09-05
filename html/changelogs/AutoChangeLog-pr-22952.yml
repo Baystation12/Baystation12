@@ -1,0 +1,4 @@
+author: "nearlyNonexistent"
+delete-after: True
+changes: 
+  - tweak: "Water now lasts a minute on the ground, to make it more useful to have wet floor signs. For reference, space lube is 10 minutes, and the cult spell is 6 minutes."

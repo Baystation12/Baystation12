@@ -22,42 +22,40 @@
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
-	var/atom/T = null
 	stop_automated_movement = 0
 	for(var/atom/A in ListTargets(10))
-
-		if(A == src)
-			continue
-
 		var/atom/F = Found(A)
 		if(F)
-			T = F
-			break
+			return F
 
-		if(isliving(A))
-			var/mob/living/L = A
-			if(L.faction == src.faction && !attack_same)
-				continue
-			else if(weakref(L) in friends)
-				continue
-			else
-				if(!L.stat)
-					if (ishuman(L))
-						var/mob/living/carbon/human/H = L
-						if (H.is_cloaked())
-							continue
-					stance = HOSTILE_STANCE_ATTACK
-					T = L
-					break
+		if(ValidTarget(A))
+			stance = HOSTILE_STANCE_ATTACK
+			return A
 
-		else if(istype(A, /obj/mecha)) // Our line of sight stuff was already done in ListTargets().
-			var/obj/mecha/M = A
-			if (M.occupant)
-				stance = HOSTILE_STANCE_ATTACK
-				T = M
-				break
-	return T
+/mob/living/simple_animal/hostile/proc/ValidTarget(var/atom/A)
+	if(A == src)
+		return FALSE
 
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.faction == src.faction && !attack_same)
+			return FALSE
+		else if(weakref(L) in friends)
+			return FALSE
+		if(L.stat)
+			return FALSE
+
+		if(ishuman(L))
+			var/mob/living/carbon/human/H = L
+			if (H.is_cloaked())
+				return FALSE
+
+	if(istype(A, /obj/mecha))
+		var/obj/mecha/M = A
+		if(!M.occupant)
+			return FALSE
+	
+	return TRUE
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
 	return

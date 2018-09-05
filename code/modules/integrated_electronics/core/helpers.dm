@@ -131,16 +131,14 @@
 
 	return get_pin_ref(parameters[1], parameters[2], parameters[3], components)
 
+// this is for data validation of stuff like ref encodes and more importantly ID access lists
 
+/proc/compute_signature(data)
+	return md5(SScircuit.cipherkey + data)
 
+/proc/add_data_signature(data)
+	var/signature = compute_signature(data)
+	return "[signature]:[data]"
 
-// Used to obfuscate object refs imported/exported as strings.
-// Not very secure, but if someone still finds a way to abuse refs, they deserve it.
-/proc/XorEncrypt(string, key)
-	if(!string || !key ||!istext(string)||!istext(key))
-		return
-	var/r
-	for(var/i = 1 to length(string))
-		r += ascii2text(text2ascii(string,i) ^ text2ascii(key,(i-1)%length(string)+1))
-	return r
-
+/proc/check_data_signature(signature, data)
+	return (compute_signature(data) == signature)

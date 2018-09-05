@@ -2993,9 +2993,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "hk" = (
-/obj/machinery/newscaster{
-	pixel_y = 32
-	},
 /obj/structure/bed/chair/shuttle/blue{
 	icon_state = "shuttle_chair_preview";
 	dir = 4
@@ -10034,6 +10031,7 @@
 	pixel_x = -21
 	},
 /obj/item/weapon/stamp/solgov,
+/obj/item/documents/scgr,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "vy" = (
@@ -14915,6 +14913,7 @@
 	},
 /obj/item/weapon/folder/envelope/blanks,
 /obj/item/weapon/pen/green,
+/obj/item/documents/nanotrasen,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/cl)
 "Sg" = (
@@ -15859,6 +15858,7 @@
 	pixel_x = 0;
 	pixel_y = -3
 	},
+/obj/random/documents,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "Yf" = (

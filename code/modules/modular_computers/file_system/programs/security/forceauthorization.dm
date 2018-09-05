@@ -3,6 +3,7 @@
 	filedesc = "Use of Force Authorization Manager"
 	extended_desc = "Control console used to activate the NT Mk30-S NL authorization chip."
 	size = 4
+	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	program_icon_state = "security"
 	program_menu_icon = "locked"
 	requires_ntnet = 1
@@ -70,7 +71,7 @@
 		var/mode = text2num(href_list["mode"])
 		return isnum(do_authorize) && isnum(mode) && G && G.authorize(mode, do_authorize, usr.name)
 
-	if(href_list["cyborg_gun"] && ("authorize" in href_list) && href_list["mode"]) 
+	if(href_list["cyborg_gun"] && ("authorize" in href_list) && href_list["mode"])
 		var/obj/item/weapon/gun/energy/gun/secure/mounted/M = locate(href_list["cyborg_gun"]) in GLOB.registered_cyborg_weapons
 		var/do_authorize = text2num(href_list["authorize"])
 		var/mode = text2num(href_list["mode"])
