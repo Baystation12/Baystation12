@@ -684,8 +684,13 @@
 		"Reactor Technician",
 		"Life Support Systems Specialist")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian, /datum/mil_branch/nabber)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/Am, 
+		/datum/mil_rank/nabber/A, 
+		/datum/mil_rank/nabber/Ap
+	)
 	min_skill = list(   SKILL_COMPUTER      = SKILL_BASIC,
 	                    SKILL_EVA           = SKILL_BASIC,
 	                    SKILL_CONSTRUCTION	= SKILL_BASIC,
@@ -782,8 +787,14 @@
 		"Biomechanical Engineer",
 		"Mechsuit Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian, /datum/mil_branch/nabber)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/Am, 
+		/datum/mil_rank/nabber/A, 
+		/datum/mil_rank/nabber/Ap
+	)
+	
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_MECH          = SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT)
@@ -1029,8 +1040,11 @@
 		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
 		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian, /datum/mil_branch/nabber)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/Ap
+	)
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
 	                    SKILL_MEDICAL = SKILL_BASIC,
 	                    SKILL_ANATOMY = SKILL_BASIC)
@@ -1103,8 +1117,14 @@
 	ideal_character_age = 30
 	minimal_player_age = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian, /datum/mil_branch/nabber)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/Am, 
+		/datum/mil_rank/nabber/A, 
+		/datum/mil_rank/nabber/Ap
+		)
+	
 	min_skill = list(   SKILL_MEDICAL   = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_ADEPT)
 
@@ -1234,8 +1254,13 @@
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian, /datum/mil_branch/nabber)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/Bm, 
+		/datum/mil_rank/nabber/B, 
+		/datum/mil_rank/nabber/Bp
+		)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
 	                    SKILL_HAULING     = SKILL_BASIC)
@@ -1293,11 +1318,14 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
+		/datum/mil_branch/nabber,
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/janitor/ec,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/C,
+		/datum/mil_rank/nabber/Cp,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e3,
@@ -1323,15 +1351,20 @@
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/cook/ec,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet,
+		/datum/mil_branch/nabber
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/nabber/Bm, 
+		/datum/mil_rank/nabber/B, 
+		/datum/mil_rank/nabber/Bp
 	)
+	
 	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
@@ -1346,9 +1379,13 @@
 	ideal_character_age = 30
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-
+	allowed_branches = list(/datum/mil_branch/civilian, /datum/mil_branch/nabber)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/nabber/Bm, 
+		/datum/mil_rank/nabber/B, 
+		/datum/mil_rank/nabber/Bp
+	)
 	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen, access_commissary)
 	minimal_access = list()
 	min_skill = list(   SKILL_COOKING   = SKILL_BASIC,
