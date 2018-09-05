@@ -1,64 +1,69 @@
-#define PIPE_SIMPLE_STRAIGHT	0
-#define PIPE_SIMPLE_BENT		1
-#define PIPE_HE_STRAIGHT		2
-#define PIPE_HE_BENT			3
-#define PIPE_CONNECTOR			4
-#define PIPE_MANIFOLD			5
-#define PIPE_JUNCTION			6
-#define PIPE_UVENT				7
-#define PIPE_MVALVE				8
-#define PIPE_DVALVE				9
-#define PIPE_PUMP				10
-#define PIPE_SCRUBBER			11
-//#define unsed	12
-#define PIPE_GAS_FILTER			13
-#define PIPE_GAS_MIXER			14
-#define PIPE_PASSIVE_GATE       15
-#define PIPE_VOLUME_PUMP        16
-#define PIPE_HEAT_EXCHANGE      17
-#define PIPE_MTVALVE			18
-#define PIPE_MANIFOLD4W			19
-#define PIPE_CAP				20
-///// Z-Level stuff
-#define PIPE_UP					21
-#define PIPE_DOWN				22
-///// Z-Level stuff
-#define PIPE_GAS_FILTER_M		23
-#define PIPE_GAS_MIXER_T		24
-#define PIPE_GAS_MIXER_M		25
-#define PIPE_OMNI_MIXER			26
-#define PIPE_OMNI_FILTER		27
-///// Supply, scrubbers and universal pipes
-#define PIPE_UNIVERSAL				28
-#define PIPE_SUPPLY_STRAIGHT		29
-#define PIPE_SUPPLY_BENT			30
-#define PIPE_SCRUBBERS_STRAIGHT		31
-#define PIPE_SCRUBBERS_BENT			32
-#define PIPE_SUPPLY_MANIFOLD		33
-#define PIPE_SCRUBBERS_MANIFOLD		34
-#define PIPE_SUPPLY_MANIFOLD4W		35
-#define PIPE_SCRUBBERS_MANIFOLD4W	36
-#define PIPE_SUPPLY_UP				37
-#define PIPE_SCRUBBERS_UP			38
-#define PIPE_SUPPLY_DOWN			39
-#define PIPE_SCRUBBERS_DOWN			40
-#define PIPE_SUPPLY_CAP				41
-#define PIPE_SCRUBBERS_CAP			42
-///// Mirrored T-valve ~ because I couldn't be bothered re-sorting all of the defines
-#define PIPE_MTVALVEM				43
-///// I also couldn't be bothered sorting, so automatic shutoff valve.
-#define PIPE_SVALVE					44
+//Simple pipes. Values: 100-199
+#define PIPE_SIMPLE_STRAIGHT		100
+#define PIPE_SIMPLE_BENT			101
+#define PIPE_MANIFOLD				102
+#define PIPE_MANIFOLD4W				103
+#define PIPE_UP						104
+#define PIPE_DOWN					105
+#define PIPE_CAP					106
 
-#define PIPE_FUEL_STRAIGHT       45
-#define PIPE_FUEL_BENT           46
-#define PIPE_FUEL_MANIFOLD       47
-#define PIPE_FUEL_MANIFOLD4W     48
-#define PIPE_FUEL_UP             49
-#define PIPE_FUEL_DOWN           50
-#define PIPE_FUEL_CAP            51
+//Supply Pipes. Values: 200-299
+#define PIPE_SUPPLY_STRAIGHT		200
+#define PIPE_SUPPLY_BENT			201
+#define PIPE_SUPPLY_MANIFOLD		202
+#define PIPE_SUPPLY_MANIFOLD4W		203
+#define PIPE_SUPPLY_UP				204
+#define PIPE_SUPPLY_DOWN			205
+#define PIPE_SUPPLY_CAP				206
 
-#define CONNECT_TYPE_REGULAR	1
-#define CONNECT_TYPE_SUPPLY		2
-#define CONNECT_TYPE_SCRUBBER	4
-#define CONNECT_TYPE_HE			8
-#define CONNECT_TYPE_FUEL		16
+//Scrubber Pipes. Values: 300-399
+#define PIPE_SCRUBBERS_STRAIGHT		300
+#define PIPE_SCRUBBERS_BENT			301
+#define PIPE_SCRUBBERS_MANIFOLD		302
+#define PIPE_SCRUBBERS_MANIFOLD4W	303
+#define PIPE_SCRUBBERS_UP			304
+#define PIPE_SCRUBBERS_DOWN			305
+#define PIPE_SCRUBBERS_CAP			306
+
+//Fuel Pipes. Values: 400-499
+#define PIPE_FUEL_STRAIGHT			400
+#define PIPE_FUEL_BENT				401
+#define PIPE_FUEL_MANIFOLD			402
+#define PIPE_FUEL_MANIFOLD4W		403
+#define PIPE_FUEL_UP				404
+#define PIPE_FUEL_DOWN				405
+#define PIPE_FUEL_CAP				406
+
+//Heat Exchange Pipes. Values: 500-599
+#define PIPE_HE_STRAIGHT			500
+#define PIPE_HE_BENT				501
+//Reserved for Manifold				502
+//Reserved for Manifold4W			503
+//Reserved for Up					504
+//Reserved for Down					505
+//Reserved for Cap					506
+#define PIPE_JUNCTION				507
+#define PIPE_HEAT_EXCHANGE      	508
+
+//Utility/Equipment Pipes. Values: 600-699
+#define PIPE_CONNECTOR				600
+#define PIPE_UVENT					601
+#define PIPE_MVALVE					602
+#define PIPE_DVALVE					603
+#define PIPE_PUMP					604
+#define PIPE_SCRUBBER				605
+#define PIPE_PASSIVE_GATE       	606
+#define PIPE_VOLUME_PUMP        	607
+#define PIPE_MTVALVE				608
+#define PIPE_OMNI_MIXER				609
+#define PIPE_OMNI_FILTER			610
+#define PIPE_UNIVERSAL				611
+#define PIPE_MTVALVEM				612
+#define PIPE_SVALVE					613
+
+//Connection Type Definitions
+#define CONNECT_TYPE_REGULAR		1
+#define CONNECT_TYPE_SUPPLY			2
+#define CONNECT_TYPE_SCRUBBER		4
+#define CONNECT_TYPE_HE				8
+#define CONNECT_TYPE_FUEL			16

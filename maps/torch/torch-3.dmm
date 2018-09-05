@@ -11588,7 +11588,18 @@
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "zE" = (
-/obj/machinery/atmospherics/trinary/mixer,
+/obj/machinery/atmospherics/omni/mixer{
+	active_power_usage = 7500;
+	tag_east = 0;
+	tag_east_con = null;
+	tag_north = 1;
+	tag_north_con = 0.50;
+	tag_south = 2;
+	tag_south_con = null;
+	tag_west = 1;
+	tag_west_con = 0.50;
+	use_power = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "zF" = (
