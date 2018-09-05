@@ -3,7 +3,7 @@
 
 /obj/machinery/power/fusion_drive
 	name = "Mark II Hanley-Messer Fusion Drive"
-	desc = "A soon to be obselete fusion reactor for powering starships."
+	desc = "A fusion reactor for powering starships."
 	icon = 'fusion_drive.dmi'
 	icon_state = "reactor0"
 

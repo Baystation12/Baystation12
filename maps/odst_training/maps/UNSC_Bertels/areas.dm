@@ -78,6 +78,7 @@
 
 /area/corvette/unscbertels/deck2/marinemesshall
 	name = "UNSC Bertels Deck 2 Marine Mess Hall"
+	requires_power = 0
 
 /area/corvette/unscbertels/deck2/porthangar
 	name = "UNSC Bertels Deck 2 Port Hangar"
@@ -114,6 +115,8 @@
 
 /area/corvette/unscbertels/deck2/Reactorcore
 	name = "UNSC Bertels Deck 2 Main Reactor Core"
+	dynamic_lighting = 0
+	luminosity = 1
 
 /area/corvette/unscbertels/deck2/portengine
 	name = "UNSC Bertels Deck 2 Port Engine"
