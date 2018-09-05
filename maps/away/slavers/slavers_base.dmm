@@ -2457,7 +2457,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "ge" = (
-/obj/machinery/atmospherics/trinary/filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 8
 	},
 /turf/simulated/floor/airless/ceiling,
