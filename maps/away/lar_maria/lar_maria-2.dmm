@@ -1316,7 +1316,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dn" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
+/obj/machinery/atmospherics/omni/mixer{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -1328,13 +1328,13 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dp" = (
-/obj/machinery/atmospherics/trinary/filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dq" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 4
 	},
 /turf/simulated/floor/plating,

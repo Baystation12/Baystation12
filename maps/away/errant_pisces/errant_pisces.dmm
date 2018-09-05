@@ -731,7 +731,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "bX" = (
-/obj/machinery/atmospherics/trinary/filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -816,7 +816,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cl" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -880,7 +880,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cw" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
+/obj/machinery/atmospherics/omni/mixer{
 	dir = 1
 	},
 /turf/simulated/floor/plating,

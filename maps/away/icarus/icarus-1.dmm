@@ -2309,7 +2309,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ht" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
+/obj/machinery/atmospherics/omni/mixer{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
