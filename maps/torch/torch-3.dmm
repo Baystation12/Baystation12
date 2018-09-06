@@ -4898,6 +4898,9 @@
 /obj/item/weapon/storage/box/mousetraps,
 /obj/item/weapon/storage/box/mousetraps,
 /obj/structure/catwalk,
+/obj/item/clothing/mask/plunger,
+/obj/item/clothing/mask/plunger,
+/obj/item/clothing/mask/plunger,
 /turf/simulated/floor/plating,
 /area/janitor)
 "jD" = (
