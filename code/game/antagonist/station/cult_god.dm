@@ -94,7 +94,7 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 	for(var/m in GLOB.deity.current_antagonists)
 		var/datum/mind/mind = m
 		var/mob/living/deity/god = mind.current
-		if(god.is_follower(player.current,1))
+		if(god && god.is_follower(player.current,1))
 			return god
 
 /mob/living/proc/dpray(var/msg as text)
