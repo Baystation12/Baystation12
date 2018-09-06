@@ -629,3 +629,8 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "ecigarette cartridge"
 	path = /obj/item/weapon/reagent_containers/ecig_cartridge/blank
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/plunger
+	name = "plunger"
+	path = /obj/item/clothing/mask/plunger
+	category = "General"
