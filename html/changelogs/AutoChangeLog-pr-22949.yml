@@ -1,4 +1,0 @@
-author: "Textor44"
-delete-after: True
-changes: 
-  - bugfix: "Surgeons  can no longer create magical floating limbs by attaching hands and feet to a patient lacking an arm or leg."
