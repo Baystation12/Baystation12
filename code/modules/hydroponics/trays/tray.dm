@@ -176,7 +176,7 @@
 		yield_mod = min(10,yield_mod+rand(1,2))
 		return
 
-	..()
+	. = ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

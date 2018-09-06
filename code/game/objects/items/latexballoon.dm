@@ -36,6 +36,7 @@
 				qdel(src)
 
 /obj/item/latexballon/bullet_act()
+	. = ..()
 	burst()
 
 /obj/item/latexballon/fire_act(datum/gas_mixture/air, temperature, volume)

@@ -62,7 +62,7 @@
 
 /obj/machinery/shield/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
-	..()
+	. = ..()
 	check_failure()
 	set_opacity(1)
 	spawn(20) if(!QDELETED(src)) set_opacity(0)

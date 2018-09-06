@@ -398,7 +398,7 @@ var/list/turret_icons
 				sleep(60)
 				attacked = 0
 
-	..()
+	. = ..()
 
 	take_damage(damage)
 

@@ -56,7 +56,7 @@
 			shatter()
 		else
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-	..()
+	. = ..()
 
 /obj/item/weapon/storage/mirror/attackby(obj/item/W as obj, mob/user as mob)
 	if(!(. = ..()))

@@ -157,7 +157,7 @@
 	var/proj_damage = Proj.get_structure_damage()
 	var/damage = min(proj_damage, 100)
 	take_damage(damage)
-	return
+	. = ..()
 
 /obj/structure/wall_frame/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
 	..()

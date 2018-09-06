@@ -418,7 +418,7 @@
 		power += proj_damage * config_bullet_energy	* charging_factor / power_factor
 	else
 		damage += proj_damage * config_bullet_energy
-	return 0
+	. = ..()
 
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))

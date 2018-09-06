@@ -41,7 +41,7 @@
 	if(T)
 		for(var/mob/M in T)
 			Proj.on_hit(M,M.bullet_act(Proj, def_zone))
-	return
+	. = ..()
 
 /obj/effect/forcefield/mime
 	icon_state = "empty"

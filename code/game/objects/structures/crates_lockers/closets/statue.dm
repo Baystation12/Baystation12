@@ -89,8 +89,7 @@
 /obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
 	check_health()
-
-	return
+	. = ..()
 
 /obj/structure/closet/statue/attack_generic(var/mob/user, damage, attacktext, environment_smash)
 	if(damage && environment_smash)

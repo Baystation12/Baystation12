@@ -265,11 +265,14 @@
 			passthrough = 1 //so ghosts don't stop bullets
 	else
 		passthrough = (A.bullet_act(src, def_zone) == PROJECTILE_CONTINUE) //backwards compatibility
+		GLOB.bullet_hit_event.raise_event(src,A)
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)
+				GLOB.bullet_hit_event.raise_event(O,A)
 			for(var/mob/living/M in A)
 				attack_mob(M, distance)
+				GLOB.bullet_hit_event.raise_event(M,A)
 
 	//penetrating projectiles can pass through things that otherwise would not let them
 	if(!passthrough && penetrating > 0)

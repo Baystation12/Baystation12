@@ -51,7 +51,7 @@
 		return PROJECTILE_CONTINUE //the projectile destroyed the table, so it gets to keep going
 
 	visible_message("<span class='warning'>\The [P] hits [src]!</span>")
-	return 0
+	. = ..()
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))

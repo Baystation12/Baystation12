@@ -196,7 +196,7 @@
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
 	healthcheck()
-	return 0
+	. = ..()
 
 /obj/effect/energy_net/ex_act()
 	health = 0

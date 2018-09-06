@@ -109,7 +109,7 @@
 	return 1
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
-
+	GLOB.bullet_hit_event.raise_event(Proj,src)
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
 			if(BRUTE)

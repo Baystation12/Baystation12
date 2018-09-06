@@ -108,7 +108,7 @@
 		icon = virtualIcon // apply bulletholes over decals
 
 		return
-
+	..()
 	return PROJECTILE_CONTINUE // the bullet/projectile goes through the target!
 
 
