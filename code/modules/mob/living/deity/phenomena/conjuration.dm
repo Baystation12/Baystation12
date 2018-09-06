@@ -1,40 +1,17 @@
-/datum/phenomena/dimensional_locker
+/datum/phenomena/movable_object/dimensional_locker
 	name = "Dimensional Locker"
 	cost = 10
 	desc = "Summon a trans-dimensional locker anywhere within your influence. You may transport objects and things, but not people in it."
-	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
-	var/obj/structure/closet/cabinet
-	var/cabinet_type = /obj/structure/closet/cabinet
-	expected_type = /atom
 
-/datum/phenomena/dimensional_locker/New()
+/datum/phenomena/movable_object/dimensional_locker/activate(var/atom/a, var/mob/living/deity/user)
+	var/list/mobs_inside = list()
+	recursive_content_check(object_to_move, mobs_inside, client_check = 0, sight_check = 0, include_objects = 0)
+
+	for(var/i in mobs_inside)
+		var/mob/M = i
+		M.forceMove(get_turf(object_to_move))
+		to_chat(M,"<span class='warning'>You are suddenly flung out of \the [object_to_move]!</span>")
 	..()
-	cabinet = new cabinet_type()
-
-/datum/phenomena/dimensional_locker/Destroy()
-	if(!cabinet.loc)
-		QDEL_NULL(cabinet)
-	. = ..()
-
-/datum/phenomena/dimensional_locker/activate(var/atom/a, var/mob/living/deity/user)
-	..()
-	for(var/i in cabinet)
-		if(ismob(i))
-			var/mob/M = i
-			M.forceMove(get_turf(cabinet))
-			to_chat(M,"<span class='warning'>You are suddenly flung out of \the [cabinet]!</span>")
-	if(cabinet == a)
-		cabinet.forceMove(null) //Move to null space
-	else
-		var/turf/T = get_turf(a)
-		//No dense turf/stuff
-		if(T.density)
-			return
-		for(var/i in T)
-			var/atom/A = i
-			if(A.density)
-				return
-		cabinet.forceMove(T)
 
 /datum/phenomena/portals
 	name = "Portals"
