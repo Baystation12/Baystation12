@@ -1,7 +1,7 @@
 /obj/item/organ/internal/augment/active/polytool/engineer
 	name = "Engineering toolset"
 	action_button_name = "Deploy engineering tool"
-	desc = "A heavy duty augmentation for the discerning engineer. This one comes with a series of common tools"
+	desc = "A heavy duty augmentation for the engineer on-the-go. This one comes with a series of common tools"
 	paths = list(
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/wrench,
