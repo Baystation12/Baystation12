@@ -17568,7 +17568,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/structure/device/piano,
+/obj/structure/synthesized_instrument/synthesizer/minimoog,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "LV" = (

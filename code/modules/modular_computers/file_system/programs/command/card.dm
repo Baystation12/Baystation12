@@ -131,7 +131,7 @@
 			else
 				module.show_assignments = 1
 		if("print")
-			if(!(access_change_ids in user_id_card.access))
+			if(!authorized(user_id_card))
 				to_chat(usr, "<span class='warning'>Access denied.</span>")
 				return
 			if(computer && computer.nano_printer) //This option should never be called if there is no printer
@@ -176,7 +176,7 @@
 				else
 					computer.attackby(user.get_active_hand(), user)
 		if("terminate")
-			if(!(access_change_ids in user_id_card.access))
+			if(!authorized(user_id_card))
 				to_chat(usr, "<span class='warning'>Access denied.</span>")
 				return
 			if(computer && can_run(user, 1))
@@ -184,7 +184,7 @@
 				remove_nt_access(id_card)
 				callHook("terminate_employee", list(id_card))
 		if("edit")
-			if(!(access_change_ids in user_id_card.access))
+			if(!authorized(user_id_card))
 				to_chat(usr, "<span class='warning'>Access denied.</span>")
 				return
 			if(computer && can_run(user, 1))
@@ -204,7 +204,7 @@
 					var/email_password = input("Enter email password.", "Email password")
 					id_card.associated_email_login["password"] = email_password
 		if("assign")
-			if(!(access_change_ids in user_id_card.access))
+			if(!authorized(user_id_card))
 				to_chat(usr, "<span class='warning'>Access denied.</span>")
 				return
 			if(computer && can_run(user, 1) && id_card)
@@ -260,3 +260,9 @@
 
 /datum/computer_file/program/card_mod/proc/apply_access(var/obj/item/weapon/card/id/id_card, var/list/accesses)
 	id_card.access |= accesses
+
+/datum/computer_file/program/card_mod/proc/authorized(var/obj/item/weapon/card/id/id_card)
+	if(!(access_change_ids in id_card.access))
+		return 1
+	else
+		return 0

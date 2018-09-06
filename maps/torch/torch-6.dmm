@@ -22691,6 +22691,17 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"icz" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "ikd" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
@@ -22861,6 +22872,14 @@
 	},
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"kRx" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/handrai,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "kUL" = (
 /obj/machinery/porta_turret_construct,
 /turf/simulated/floor/shuttle/darkred,
@@ -23299,6 +23318,17 @@
 	name = "plating"
 	},
 /area/centcom/suppy)
+"xLV" = (
+/obj/machinery/door/airlock/external{
+	density = 1;
+	frequency = 1331;
+	id_tag = "rescue_shuttle_outer";
+	name = "Ship External Access";
+	req_access = list(103)
+	},
+/obj/effect/shuttle_landmark/ert/start,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rescue_base/start)
 "xTc" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/weapon/tray{
@@ -33691,7 +33721,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 ath
 atJ
 atJ
@@ -33845,7 +33875,7 @@ alU
 alU
 alU
 amJ
-ahk
+xLV
 ahk
 amJ
 amJ
@@ -33893,7 +33923,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 ath
 atK
 atO
@@ -34248,10 +34278,10 @@ anN
 anN
 amJ
 amJ
-ahj
+kRx
 ahT
 aiF
-akB
+icz
 amJ
 amJ
 alU

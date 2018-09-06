@@ -20,8 +20,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "ac" = (
-/obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -4262,8 +4262,8 @@
 /obj/machinery/status_display{
 	pixel_y = -32
 	},
-/obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -7015,9 +7015,7 @@
 /turf/simulated/floor/plating,
 /area/engineering/engine_room)
 "ol" = (
-/obj/machinery/cryopod{
-	dir = 2
-	},
+/obj/structure/bed/chair/shuttle/black,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "om" = (
@@ -10453,11 +10451,11 @@
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	frequency = 1380;
-	id_tag = "escape_pod_11";
-	name = "escape pod six controller";
+	id_tag = "escape_pod_10";
+	name = "escape pod five controller";
 	pixel_x = -32;
 	pixel_y = 0;
-	tag_door = "escape_pod_11_hatch"
+	tag_door = "escape_pod_10_hatch"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
@@ -10465,9 +10463,7 @@
 /obj/machinery/status_display{
 	pixel_y = 32
 	},
-/obj/machinery/cryopod{
-	dir = 2
-	},
+/obj/structure/bed/chair/shuttle/black,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "wl" = (
@@ -10775,9 +10771,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
 "xe" = (
-/obj/machinery/cryopod{
-	dir = 2
-	},
+/obj/structure/bed/chair/shuttle/black,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
 "xf" = (
@@ -16806,8 +16800,8 @@
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
 "Sl" = (
-/obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,

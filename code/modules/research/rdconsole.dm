@@ -804,7 +804,3 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 /obj/machinery/computer/rdconsole/robotics
 	name = "robotics fabrication console"
 	id = 2
-
-/obj/machinery/computer/rdconsole/petrov
-	name = "petrov fabricator console"
-	id = 3
