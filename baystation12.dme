@@ -1298,6 +1298,7 @@
 #include "code\modules\augment\augment.dm"
 #include "code\modules\augment\simple.dm"
 #include "code\modules\augment\active\armblades.dm"
+#include "code\modules\augment\active\circuit.dm"
 #include "code\modules\augment\active\polytool.dm"
 #include "code\modules\augment\active\tool\engineering.dm"
 #include "code\modules\augment\active\tool\surgical.dm"
