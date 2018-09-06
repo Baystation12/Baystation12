@@ -2189,6 +2189,7 @@
 #include "code\modules\organs\internal\species\promethean.dm"
 #include "code\modules\organs\internal\species\skrell.dm"
 #include "code\modules\organs\internal\species\starborn.dm"
+#include "code\modules\organs\internal\species\tritonian.dm"
 #include "code\modules\organs\internal\species\vox.dm"
 #include "code\modules\organs\internal\species\xenophage.dm"
 #include "code\modules\overmap\_defines.dm"

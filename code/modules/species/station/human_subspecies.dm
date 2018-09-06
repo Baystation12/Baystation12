@@ -80,8 +80,9 @@
 	baseline humanity. Conceived alongside dolphin and octopus genetic engineering projects, this genotype \
 	is adapted for amphibious life on flooded ocean moons like Triton, but is equally comfortable in a range \
 	of aquatic and non-aquatic environments. Their heavy, seal-like bodies have sharp teeth, recessed eyes, \
-	and thick blue-grey skin with a layer of dense blubber for insulation and protection, but they find \
-	it difficult to move quickly on land due to their bulk."
+	and thick blue-grey skin with a layer of dense blubber for insulation and protection \
+	as well as neck gills that allow them to breathe easily underwater. \
+	However, they find it difficult to move quickly on land due to their bulk."
 	icobase =     'icons/mob/human_races/species/human/subspecies/tritonian_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/tritonian_preview.dmi'
 	slowdown = 1
@@ -111,5 +112,22 @@
 		/datum/mob_descriptor/height,
 		/datum/mob_descriptor/build = 1
 		)
-	
+
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/tritonian,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
+		)
+
+/datum/species/human/tritonian/water_act(var/mob/living/carbon/human/H, var/depth)
+	..()
+	if(depth >= 40)
+		if(H.getHalLoss())
+			H.adjustHalLoss(-5)
+			if(prob(5))
+				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")
