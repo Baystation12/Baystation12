@@ -9,7 +9,7 @@
 	center_of_mass = null
 	randpixel = 3
 
-	var/default_type = DEFAULT_WALL_MATERIAL
+	var/default_type = "steel"
 	var/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
@@ -18,7 +18,7 @@
 	if(_material)
 		default_type = _material
 	if(!default_type)
-		default_type = DEFAULT_WALL_MATERIAL
+		default_type = "steel"
 	..()
 
 /obj/item/stack/material/Initialize()
@@ -233,9 +233,9 @@
 	amount = 50
 
 /obj/item/stack/material/steel
-	name = DEFAULT_WALL_MATERIAL
+	name = "steel"
 	icon_state = "sheet-metal"
-	default_type = DEFAULT_WALL_MATERIAL
+	default_type = "steel"
 
 /obj/item/stack/material/steel/ten
 	amount = 10

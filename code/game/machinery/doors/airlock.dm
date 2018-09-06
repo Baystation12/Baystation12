@@ -105,7 +105,7 @@ var/list/airlock_overlays = list()
 	..()
 
 /obj/machinery/door/airlock/get_material()
-	return SSmaterials.get_material_by_name(mineral ? mineral : DEFAULT_WALL_MATERIAL)
+	return SSmaterials.get_material_by_name(mineral ? mineral : "steel")
 
 //regular airlock presets
 
@@ -837,7 +837,7 @@ About the new airlock wires panel:
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
-			if (i.matter && (DEFAULT_WALL_MATERIAL in i.matter) && i.matter[DEFAULT_WALL_MATERIAL] > 0)
+			if (i.matter && ("steel" in i.matter) && i.matter["steel"] > 0)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()

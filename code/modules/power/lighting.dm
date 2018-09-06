@@ -538,7 +538,7 @@
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
-	matter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list("steel" = 60)
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 

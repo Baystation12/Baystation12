@@ -19,7 +19,7 @@
 /obj/machinery/door/unpowered/simple/New(var/newloc, var/material_name, var/locked)
 	..()
 	if(!material_name)
-		material_name = DEFAULT_WALL_MATERIAL
+		material_name = "steel"
 	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
 		qdel(src)

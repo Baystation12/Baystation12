@@ -94,7 +94,7 @@
 	sale_price = 2
 
 /material/steel
-	name = DEFAULT_WALL_MATERIAL
+	name = "steel"
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
 	brute_armor = 5
@@ -112,8 +112,8 @@
 	ore_smelts_to = "steel"
 
 /material/steel/holographic
-	name = "holo" + DEFAULT_WALL_MATERIAL
-	display_name = DEFAULT_WALL_MATERIAL
+	name = "holo" + "steel"
+	display_name = "steel"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0

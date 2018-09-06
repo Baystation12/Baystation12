@@ -16,7 +16,7 @@
 	var/force_divisor = 0.5
 	var/thrown_force_divisor = 0.5
 	var/attack_cooldown_modifier
-	var/default_material = DEFAULT_WALL_MATERIAL
+	var/default_material = "steel"
 	var/material/material
 	var/drops_debris = 1
 

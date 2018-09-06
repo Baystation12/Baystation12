@@ -80,7 +80,7 @@
 /obj/item/device/electronic_assembly/Initialize()
 	.=..()
 	START_PROCESSING(SScircuit, src)
-	matter[DEFAULT_WALL_MATERIAL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
+	matter["steel"] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
 
 /obj/item/device/electronic_assembly/Destroy()
 	STOP_PROCESSING(SScircuit, src)
