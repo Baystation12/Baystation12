@@ -1,5 +1,5 @@
 /material/uranium
-	name = "uranium"
+	name = MATERIAL_URANIUM
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
 	icon_base = "stone"
@@ -16,7 +16,7 @@
 	sale_price = 2
 
 /material/gold
-	name = "gold"
+	name = MATERIAL_GOLD
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#ffcc33"
 	weight = 25
@@ -29,7 +29,7 @@
 				/datum/reagent/gold = 20
 				)
 	construction_difficulty = 1
-	ore_smelts_to = "gold"
+	ore_smelts_to = MATERIAL_GOLD
 	ore_result_amount = 5
 	ore_name = "native gold"
 	ore_spread_chance = 10
@@ -44,7 +44,7 @@
 	sale_price = 3
 
 /material/gold/bronze //placeholder for ashtrays
-	name = "bronze"
+	name = MATERIAL_BRONZE
 	icon_colour = "#edd12f"
 	construction_difficulty = 1
 	ore_smelts_to = null
@@ -52,7 +52,7 @@
 	sale_price = null
 
 /material/copper
-	name = "copper"
+	name = MATERIAL_COPPER
 	icon_colour = "#b87333"
 	weight = 15
 	hardness = 30
@@ -64,7 +64,7 @@
 		/datum/reagent/silver = 8
 		)
 	construction_difficulty = 1
-	ore_smelts_to = "copper"
+	ore_smelts_to = MATERIAL_COPPER
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "tetrahedrite"
@@ -73,7 +73,7 @@
 	sale_price = 1
 
 /material/silver
-	name = "silver"
+	name = MATERIAL_SILVER
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
 	weight = 22
@@ -85,7 +85,7 @@
 				/datum/reagent/silver = 20
 				)
 	construction_difficulty = 1
-	ore_smelts_to = "silver"
+	ore_smelts_to = MATERIAL_SILVER
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "native silver"
@@ -94,7 +94,7 @@
 	sale_price = 2
 
 /material/steel
-	name = DEFAULT_WALL_MATERIAL
+	name = MATERIAL_STEEL
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
 	brute_armor = 5
@@ -106,14 +106,14 @@
 				/datum/reagent/iron = 15,
 				/datum/reagent/carbon = 5
 				)
-	alloy_materials = list("hematite" = 1875, "graphene" = 1875)
+	alloy_materials = list(MATERIAL_HEMATITE = 1875, MATERIAL_GRAPHENE = 1875)
 	alloy_product = TRUE
 	sale_price = 1
-	ore_smelts_to = "steel"
+	ore_smelts_to = MATERIAL_STEEL
 
 /material/steel/holographic
-	name = "holo" + DEFAULT_WALL_MATERIAL
-	display_name = DEFAULT_WALL_MATERIAL
+	name = "holo" + MATERIAL_STEEL
+	display_name = MATERIAL_STEEL
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -122,7 +122,7 @@
 	sale_price = null
 
 /material/plasteel
-	name = "plasteel"
+	name = MATERIAL_PLASTEEL
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
@@ -137,13 +137,13 @@
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = 1
-	alloy_materials = list("steel" = 2500, "platinum" = 1250)
+	alloy_materials = list(MATERIAL_STEEL = 2500, MATERIAL_PLATINUM = 1250)
 	alloy_product = TRUE
 	sale_price = 2
-	ore_smelts_to = "plasteel"
+	ore_smelts_to = MATERIAL_PLASTEEL
 
 /material/plasteel/titanium
-	name = "titanium"
+	name = MATERIAL_TITANIUM
 	brute_armor = 10
 	burn_armor = 8
 	integrity = 200
@@ -159,7 +159,7 @@
 	alloy_product = FALSE
 
 /material/plasteel/ocp
-	name = "osmium-carbide plasteel"
+	name = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
@@ -170,13 +170,13 @@
 	burn_armor = 20
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-	alloy_materials = list("plasteel" = 7500, "osmium" = 3750)
+	alloy_materials = list(MATERIAL_PLASTEEL = 7500, MATERIAL_OSMIUM = 3750)
 	construction_difficulty = 2
 	alloy_product = TRUE
 	sale_price = 3
 
 /material/osmium
-	name = "osmium"
+	name = MATERIAL_OSMIUM
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999ff"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -184,10 +184,10 @@
 	sheet_plural_name = "ingots"
 	construction_difficulty = 1
 	sale_price = 3
-	ore_smelts_to = "osmium"
+	ore_smelts_to = MATERIAL_OSMIUM
 
 /material/tritium
-	name = "tritium"
+	name = MATERIAL_TRITIUM
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -197,7 +197,7 @@
 	construction_difficulty = 2
 
 /material/deuterium
-	name = "deuterium"
+	name = MATERIAL_DEUTERIUM
 	stack_type = /obj/item/stack/material/deuterium
 	icon_colour = "#999999"
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -207,7 +207,7 @@
 	construction_difficulty = 2
 
 /material/mhydrogen
-	name = "mhydrogen"
+	name = MATERIAL_HYDROGEN
 	display_name = "metallic hydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#e6c5de"
@@ -217,15 +217,15 @@
 				/datum/reagent/hydrazine = 20
 				)
 	construction_difficulty = 2
-	ore_smelts_to = "tritium"
-	ore_compresses_to = "mhydrogen"
+	ore_smelts_to = MATERIAL_TRITIUM
+	ore_compresses_to = MATERIAL_HYDROGEN
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"
 	sale_price = 5
 
 /material/platinum
-	name = "platinum"
+	name = MATERIAL_PLATINUM
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#9999ff"
 	weight = 27
@@ -233,8 +233,8 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = 1
-	ore_smelts_to = "platinum"
-	ore_compresses_to = "osmium"
+	ore_smelts_to = MATERIAL_PLATINUM
+	ore_compresses_to = MATERIAL_OSMIUM
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "raw platinum"
@@ -243,7 +243,7 @@
 	sale_price = 5
 
 /material/iron
-	name = "iron"
+	name = MATERIAL_IRON
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5c5454"
 	weight = 22
@@ -257,7 +257,7 @@
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
-	name = "voxalloy"
+	name = MATERIAL_VOX
 	display_name = "durable alloy"
 	stack_type = null
 	icon_colour = "#6c7364"
@@ -270,14 +270,13 @@
 
 // Likewise.
 /material/voxalloy/elevatorium
-	name = "elevatorium"
+	name = MATERIAL_ELEVATORIUM
 	display_name = "elevator panelling"
 	icon_colour = "#666666"
 	construction_difficulty = 2
 
-
 /material/aliumium
-	name = "aliumium"
+	name = MATERIAL_ALIUMIUM
 	display_name = "alien alloy"
 	stack_type = null
 	icon_base = "jaggy"
@@ -304,10 +303,10 @@
 	return
 
 /material/hematite
-	name = "hematite"
+	name = MATERIAL_HEMATITE
 	stack_type = null
 	icon_colour = "#aa6666"
-	ore_smelts_to = "iron"
+	ore_smelts_to = MATERIAL_IRON
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"

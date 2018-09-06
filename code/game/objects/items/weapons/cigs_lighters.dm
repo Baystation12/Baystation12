@@ -357,7 +357,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "wooden tip"
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
 	icon_state = "woodbutt"
-	matter = list("Wood" = 1)
+	matter = list(MATERIAL_WOOD = 1)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/weapon/W, var/mob/user)
 	..()

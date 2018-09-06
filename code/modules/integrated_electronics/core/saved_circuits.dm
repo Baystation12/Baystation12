@@ -262,7 +262,7 @@
 	blocks["max_space"] = assembly.max_components
 
 	// Start keeping track of total metal cost
-	blocks["metal_cost"] = assembly.matter[DEFAULT_WALL_MATERIAL]
+	blocks["metal_cost"] = assembly.matter[MATERIAL_STEEL]
 
 
 	// Block 2. Components.
@@ -293,7 +293,7 @@
 		// Update estimated assembly complexity, taken space and material cost
 		blocks["complexity"] += component.complexity
 		blocks["used_space"] += component.size
-		blocks["metal_cost"] += component.matter[DEFAULT_WALL_MATERIAL]
+		blocks["metal_cost"] += component.matter[MATERIAL_STEEL]
 
 		// Check if the assembly requires printer upgrades
 		if(!(component.spawn_flags & IC_SPAWN_DEFAULT))
