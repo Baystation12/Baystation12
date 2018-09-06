@@ -23292,6 +23292,13 @@
 /obj/structure/holonet/end,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"xLx" = (
+/obj/machinery/door/airlock/external,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/centcom/suppy)
 "xTc" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/weapon/tray{
@@ -34088,7 +34095,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 ath
 atL
 atL
@@ -34290,7 +34297,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 ath
 atM
 atY
@@ -34492,7 +34499,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 atw
 atN
 atZ
@@ -34694,7 +34701,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 atw
 atL
 atL
@@ -34896,7 +34903,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 atw
 atO
 atO
@@ -35098,7 +35105,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 atw
 atP
 atO
@@ -35300,7 +35307,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 ath
 atQ
 atO
@@ -35502,7 +35509,7 @@ aqa
 aqa
 apZ
 ala
-asP
+ath
 ath
 ath
 aua
@@ -35704,8 +35711,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -35906,8 +35913,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -36108,8 +36115,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -36310,8 +36317,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -36512,8 +36519,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -36714,8 +36721,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -36916,8 +36923,8 @@ aqa
 aqa
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -37118,8 +37125,8 @@ apZ
 apZ
 apZ
 ala
-asP
-asP
+ath
+ath
 ath
 aub
 aub
@@ -37320,11 +37327,11 @@ ala
 ala
 ala
 ala
-asP
-asP
-ath
-aua
-aua
+atx
+atx
+atx
+xLx
+xLx
 atx
 atx
 atx
@@ -37522,8 +37529,8 @@ aaa
 aaa
 aaa
 aaa
-asP
-asP
+atx
+atx
 atR
 atR
 atR

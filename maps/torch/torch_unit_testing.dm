@@ -75,8 +75,7 @@
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase/station = NO_SCRUBBER,
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/shuttle/petrov/maint = NO_SCRUBBER|NO_VENT,
-		/area/vacant/room = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/shuttle/petrov/maint = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(

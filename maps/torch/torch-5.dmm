@@ -8678,9 +8678,6 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/sgr)
-"sQ" = (
-/turf/simulated/wall/prepainted,
-/area/crew_quarters/heads/office/rd)
 "sU" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -8999,20 +8996,17 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
-"tA" = (
-/turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
 "tB" = (
 /obj/structure/closet/crate,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "tC" = (
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "tF" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/bridge/aftport)
@@ -9358,20 +9352,12 @@
 /obj/random/junk,
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
-"up" = (
-/obj/random/obstruction,
-/turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
-"ur" = (
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "us" = (
 /obj/structure/catwalk,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "ut" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -9636,7 +9622,7 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "uV" = (
 /obj/structure/sign/deck/bridge{
 	icon_state = "deck-b";
@@ -13825,7 +13811,7 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "Nc" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -14300,7 +14286,7 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "Qh" = (
 /obj/machinery/light{
 	dir = 8;
@@ -15511,7 +15497,7 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/rd)
+/area/maintenance/bridge/aftport)
 "Yg" = (
 /obj/machinery/papershredder,
 /obj/structure/sign/ecplaque{
@@ -29149,14 +29135,14 @@ pG
 Cs
 rk
 sf
-sQ
-tA
+oh
+oS
 uo
-tA
-sQ
+oS
+oh
 Yf
 Yf
-sQ
+oh
 xl
 xt
 CN
@@ -29351,14 +29337,14 @@ hE
 qt
 rl
 sg
-sQ
+oh
 tB
 tC
 uU
-sQ
-tA
-tA
-up
+oh
+oS
+oS
+Hi
 xl
 xt
 CN
@@ -29553,14 +29539,14 @@ pH
 JD
 rm
 sh
-sQ
+oh
 tC
-tA
+oS
 Qg
-sQ
-tA
+oh
+oS
 Nb
-sQ
+oh
 xl
 CN
 CN
@@ -29756,13 +29742,13 @@ qu
 kJ
 kJ
 kJ
-sQ
-up
-sQ
-sQ
-up
-sQ
-sQ
+oh
+Hi
+oh
+oh
+Hi
+oh
+oh
 xm
 CN
 CN
@@ -29958,13 +29944,13 @@ qv
 rn
 yw
 kJ
-tA
-ur
-ur
-ur
-ur
-ur
-ur
+oS
+LM
+LM
+LM
+LM
+LM
+LM
 xl
 CN
 CN
@@ -30160,13 +30146,13 @@ Bn
 Kf
 KP
 kJ
-sQ
+oh
 us
-sQ
-sQ
-sQ
-sQ
-sQ
+oh
+oh
+oh
+oh
+oh
 xn
 CN
 CN
@@ -30362,9 +30348,9 @@ qx
 rp
 nG
 kJ
-tA
-ur
-sQ
+oS
+LM
+oh
 vE
 vE
 wP

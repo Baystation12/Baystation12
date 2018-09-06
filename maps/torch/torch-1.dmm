@@ -204,7 +204,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/maintenance/fourthdeck/aft)
 "aA" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -325,7 +325,7 @@
 	dir = 8
 	},
 /turf/simulated/wall/r_wall/hull,
-/area/space)
+/area/maintenance/fourthdeck/aft)
 "aN" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -423,7 +423,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/maintenance/fourthdeck/aft)
 "aW" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/starboard)
@@ -449,7 +449,7 @@
 	req_access = list(13)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/maintenance/fourthdeck/aft)
 "aY" = (
 /obj/machinery/space_heater,
 /turf/simulated/floor/plating,
@@ -497,7 +497,7 @@
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/techfloor/corner,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/maintenance/fourthdeck/aft)
 "be" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -17023,7 +17023,7 @@
 /area/exploration_shuttle/power)
 "ML" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -17336,9 +17336,6 @@
 "NB" = (
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
-"ND" = (
-/turf/simulated/wall/r_wall/hull,
-/area/space)
 "NF" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -36109,7 +36106,7 @@ aa
 aa
 aa
 aa
-ND
+ak
 ak
 ak
 aL
@@ -36149,7 +36146,7 @@ Ir
 EN
 HS
 HS
-ND
+HS
 aa
 aa
 aa
@@ -36311,7 +36308,7 @@ aa
 aa
 aa
 aa
-ND
+ak
 ak
 ak
 Wx
@@ -36351,7 +36348,7 @@ GK
 ZK
 HS
 HS
-ND
+HS
 aa
 aa
 aa
@@ -36512,8 +36509,8 @@ aa
 aa
 aa
 aa
-ND
-ND
+ak
+ak
 ak
 ak
 aL
@@ -36553,8 +36550,8 @@ Is
 EN
 HS
 HS
-ND
-ND
+HS
+HS
 aa
 aa
 kR
@@ -36714,8 +36711,8 @@ aa
 aa
 aa
 aa
-ND
-ND
+ak
+ak
 ak
 ak
 at
@@ -36755,8 +36752,8 @@ EN
 Jj
 HS
 HS
-ND
-ND
+HS
+HS
 aa
 aa
 kR
@@ -37724,8 +37721,8 @@ aa
 aa
 aa
 aa
-ND
-ND
+aq
+aq
 aq
 aq
 aw
@@ -37765,8 +37762,8 @@ EP
 Jl
 GT
 GT
-ND
-ND
+GT
+GT
 aa
 aa
 Mx
@@ -37926,8 +37923,8 @@ aa
 aa
 aa
 aa
-ND
-ND
+aq
+aq
 aq
 aq
 aP
@@ -37967,8 +37964,8 @@ It
 EP
 GT
 GT
-ND
-ND
+GT
+GT
 aa
 aa
 Mx
@@ -38129,7 +38126,7 @@ aa
 aa
 aa
 aa
-ND
+aq
 aq
 aq
 Qa
@@ -38169,7 +38166,7 @@ GR
 Vy
 GT
 GT
-ND
+GT
 aa
 aa
 aa
@@ -38331,7 +38328,7 @@ aa
 aa
 aa
 aa
-ND
+aq
 aq
 aq
 aP
@@ -38371,7 +38368,7 @@ Iu
 EP
 GT
 GT
-ND
+GT
 aa
 aa
 Sl
@@ -48449,11 +48446,11 @@ Vr
 Vr
 Vr
 Vr
-ND
+Vr
 az
 aV
 bd
-ND
+Vr
 Ty
 Ty
 Ty
@@ -48651,11 +48648,11 @@ aa
 aa
 aa
 aa
-ND
+Vr
 aM
 aX
-ND
-ND
+Vr
+Vr
 aa
 aa
 aa

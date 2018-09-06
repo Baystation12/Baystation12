@@ -677,9 +677,6 @@
 /area/crew_quarters/heads/office/xo
 	name = "\improper Command - XO's Office"
 
-/area/crew_quarters/heads/office/rd
-	name = "\improper Command - RD's Office"
-
 /area/crew_quarters/heads/office/cmo
 	name = "\improper Command - CMO's Office"
 
@@ -778,10 +775,6 @@
 
 /area/vacant/office
 	name = "\improper Unused Office"
-	icon_state = "conference"
-
-/area/vacant/room
-	name = "\improper Unused Room"
 	icon_state = "conference"
 
 // Storage
