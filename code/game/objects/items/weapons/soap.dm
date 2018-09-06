@@ -41,12 +41,11 @@
 		var/turf/T = get_turf(target)
 		if(!T)
 			return
-<<<<<<< HEAD
-<<<<<<< HEAD
 		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 		T.clean(src, user)
+		user.visible_message("<span class='warning'>[user] gets down on their hands and knees and starts scrubbing \the [T].</span>")
+		T.clean(src, user, 80, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 	else if(istype(target,/obj/structure/hygiene/sink))
-=======
 		if(!src.reagents.has_reagent(/datum/reagent/space_cleaner, 1)) //need to make the check here, or it	will let the user waste time trying to clean when they can't clean with it.
 			to_chat(user, "<span class='warning'>\The [src] is too dry to wash that.</span>")
 		else
@@ -55,12 +54,9 @@
 				to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 				if(T)
 					T.clean(src, user)
-=======
 		user.visible_message("<span class='warning'>[user] gets down on their hands and knees and starts scrubbing \the [T].</span>")
 		T.clean(src, user, 80, "<span class='notice'>You scrub \the [target.name] clean.</span>")
->>>>>>> Makes requested changes.
 	else if(istype(target,/obj/structure/hygiene/sink))
->>>>>>> Makes lots of soap changes.
 		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
 		wet()
 	else
