@@ -75,7 +75,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	item_state = "crossbow"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	matter = list(MATERIAL_STEEL = 2000)
 	slot_flags = SLOT_BELT
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
@@ -96,7 +96,7 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	one_hand_penalty = 1
-	matter = list(DEFAULT_WALL_MATERIAL = 200000)
+	matter = list(MATERIAL_STEEL = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large
 
 /obj/item/weapon/gun/energy/plasmastun

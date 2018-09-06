@@ -12,7 +12,7 @@
 	active_power_usage = 10000
 
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if (istype(O, /obj/item/stack/material) && O.get_material_name() == DEFAULT_WALL_MATERIAL)
+	if (istype(O, /obj/item/stack/material) && O.get_material_name() == MATERIAL_STEEL)
 		var/obj/item/stack/M = O
 		if (src.metal_amount < 150000.0)
 			var/count = 0
@@ -22,7 +22,7 @@
 					if(!M.get_amount())
 						return
 					while(metal_amount < 150000 && M.amount)
-						src.metal_amount += O.matter[DEFAULT_WALL_MATERIAL] /*O:height * O:width * O:length * 100000.0*/
+						src.metal_amount += O.matter[MATERIAL_STEEL] /*O:height * O:width * O:length * 100000.0*/
 						M.use(1)
 						count++
 

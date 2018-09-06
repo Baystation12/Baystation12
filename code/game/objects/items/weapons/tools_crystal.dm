@@ -7,7 +7,7 @@
 	icon = 'icons/obj/crystal_tools.dmi'
 	welding_resource = "stored charge"
 	tank = null
-	matter = list("crystal" = 1250)
+	matter = list(MATERIAL_CRYSTAL = 1250)
 	waterproof = TRUE
 
 /obj/item/weapon/weldingtool/crystal/attackby(var/obj/item/W, var/mob/user)
@@ -68,7 +68,7 @@
 	icon_state = "crystal_wirecutter"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list("crystal" = 1250)
+	matter = list(MATERIAL_CRYSTAL = 1250)
 
 /obj/item/weapon/wirecutters/crystal/Initialize()
 	. = ..()
@@ -81,7 +81,7 @@
 	icon_state = "crystal_screwdriver"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list("crystal" = 1250)
+	matter = list(MATERIAL_CRYSTAL = 1250)
 
 /obj/item/weapon/screwdriver/crystal/Initialize()
 	. = ..()
@@ -94,7 +94,7 @@
 	icon_state = "crystal_crowbar"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list("crystal" = 1250)
+	matter = list(MATERIAL_CRYSTAL = 1250)
 
 /obj/item/weapon/crowbar/crystal/Initialize()
 	. = ..()
@@ -107,7 +107,7 @@
 	icon_state = "crystal_wrench"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list("crystal" = 1250)
+	matter = list(MATERIAL_CRYSTAL = 1250)
 
 /obj/item/weapon/wrench/crystal/Initialize()
 	. = ..()
@@ -120,7 +120,7 @@
 	icon_state = "crystal_multitool"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list("crystal" = 1250)
+	matter = list(MATERIAL_CRYSTAL = 1250)
 
 /obj/item/weapon/storage/belt/utility/vigil
 	name = "tool harness"

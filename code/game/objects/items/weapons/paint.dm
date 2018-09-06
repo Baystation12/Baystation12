@@ -9,7 +9,7 @@ var/global/list/cached_icons = list()
 	icon = 'icons/obj/items.dmi'
 	icon_state = "paint_neutral"
 	item_state = "paintcan"
-	matter = list(DEFAULT_WALL_MATERIAL = 200)
+	matter = list(MATERIAL_STEEL = 200)
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "10;20;30;60"

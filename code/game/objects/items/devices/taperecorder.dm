@@ -5,7 +5,7 @@
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
 
-	matter = list(DEFAULT_WALL_MATERIAL = 60,"glass" = 30)
+	matter = list(MATERIAL_STEEL = 60,MATERIAL_GLASS = 30)
 
 	var/emagged = 0.0
 	var/recording = 0.0
@@ -359,7 +359,7 @@
 	icon_state = "tape_white"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_TINY
-	matter = list(DEFAULT_WALL_MATERIAL=20, "glass"=5)
+	matter = list(MATERIAL_STEEL=20, MATERIAL_GLASS=5)
 	force = 1
 	throwforce = 0
 	var/max_capacity = 600

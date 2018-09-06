@@ -1,41 +1,41 @@
 GLOBAL_LIST_INIT(weighted_minerals_sparse, \
 	list(                   \
-		"pitchblende" =  8, \
-		"platinum" =     8, \
-		"hematite" =    35, \
-		"graphene" =    35, \
-		"diamond" =      5, \
-		"gold" =         8, \
-		"silver" =       8, \
-		"phoron" =      10, \
-		"quartz" =       3, \
-		"pyrite" =       3, \
-		"spodumene" =    3, \
-		"cinnabar" =     3, \
-		"phosphorite" =  3, \
-		"rock salt" =    3, \
-		"potash" =       3, \
-		"bauxite" =      3  \
+		MATERIAL_PITCHBLENDE =  8, \
+		MATERIAL_PLATINUM =     8, \
+		MATERIAL_HEMATITE =    35, \
+		MATERIAL_GRAPHENE =    35, \
+		MATERIAL_DIAMOND =      5, \
+		MATERIAL_GOLD =         8, \
+		MATERIAL_SILVER =       8, \
+		MATERIAL_PHORON =      10, \
+		MATERIAL_QUARTZ =       3, \
+		MATERIAL_PYRITE =       3, \
+		MATERIAL_SPODUMENE =    3, \
+		MATERIAL_CINNABAR =     3, \
+		MATERIAL_PHOSPHORITE =  3, \
+		MATERIAL_ROCK_SALT =    3, \
+		MATERIAL_POTASH =       3, \
+		MATERIAL_BAUXITE =      3  \
 	))
 
 GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	list(                   \
-		"pitchblende" = 10, \
-		"platinum" =    10, \
-		"hematite" =    20, \
-		"graphene" =    20, \
-		"diamond" =      5, \
-		"gold" =        10, \
-		"silver" =      10, \
-		"phoron" =      20, \
-		"quartz" =       1, \
-		"pyrite" =       1, \
-		"spodumene" =    1, \
-		"cinnabar" =     1, \
-		"phosphorite" =  1, \
-		"rock salt" =    1, \
-		"potash" =       1, \
-		"bauxite" =      1  \
+		MATERIAL_PITCHBLENDE = 10, \
+		MATERIAL_PLATINUM =    10, \
+		MATERIAL_HEMATITE =    20, \
+		MATERIAL_GRAPHENE =    20, \
+		MATERIAL_DIAMOND =      5, \
+		MATERIAL_GOLD =        10, \
+		MATERIAL_SILVER =      10, \
+		MATERIAL_PHORON =      20, \
+		MATERIAL_QUARTZ =       1, \
+		MATERIAL_PYRITE =       1, \
+		MATERIAL_SPODUMENE =    1, \
+		MATERIAL_CINNABAR =     1, \
+		MATERIAL_PHOSPHORITE =  1, \
+		MATERIAL_ROCK_SALT =    1, \
+		MATERIAL_POTASH =       1, \
+		MATERIAL_BAUXITE =      1  \
 	))
 
 /datum/random_map/automata/cave_system
