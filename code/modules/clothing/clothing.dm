@@ -12,6 +12,7 @@
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
+	var/smell_state = SMELL_DEFAULT
 
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
@@ -50,6 +51,9 @@
 /obj/item/clothing/clean_blood()
 	. = ..()
 	gunshot_residue = null
+
+/obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
+	smell_state = smell
 
 /obj/item/clothing/proc/get_fibers()
 	. = "material from \a [name]"
