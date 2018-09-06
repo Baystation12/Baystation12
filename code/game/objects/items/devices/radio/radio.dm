@@ -24,7 +24,7 @@
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL
 
-	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
+	matter = list("glass" = 25,"steel" = 75)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 

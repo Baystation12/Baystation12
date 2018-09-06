@@ -6,7 +6,7 @@
 /obj/structure/table/steel
 	icon_state = "plain_preview"
 	color = COLOR_GRAY40
-	material = DEFAULT_WALL_MATERIAL
+	material = "steel"
 
 /obj/structure/table/marble
 	icon_state = "stone_preview"
@@ -17,13 +17,13 @@
 	icon_state = "reinf_preview"
 	color = COLOR_OFF_WHITE
 	material = DEFAULT_TABLE_MATERIAL
-	reinforced = DEFAULT_WALL_MATERIAL
+	reinforced = "steel"
 
 /obj/structure/table/steel_reinforced
 	icon_state = "reinf_preview"
 	color = COLOR_GRAY40
-	material = DEFAULT_WALL_MATERIAL
-	reinforced = DEFAULT_WALL_MATERIAL
+	material = "steel"
+	reinforced = "steel"
 
 /obj/structure/table/woodentable
 	icon_state = "solid_preview"

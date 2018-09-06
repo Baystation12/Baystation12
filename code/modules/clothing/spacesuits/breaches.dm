@@ -169,7 +169,7 @@
 			SetName("damaged [initial(name)]")
 	else if(all_patched)
 		SetName("patched [initial(name)]")
-	else 
+	else
 		SetName(initial(name))
 
 	return damage
@@ -180,7 +180,7 @@
 	if(istype(W,/obj/item/stack/material))
 		var/repair_power = 0
 		switch(W.get_material_name())
-			if(DEFAULT_WALL_MATERIAL)
+			if("steel")
 				repair_power = 2
 			if("plastic")
 				repair_power = 1

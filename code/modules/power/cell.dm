@@ -15,7 +15,7 @@
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
+	matter = list("steel" = 700, "glass" = 50)
 
 
 /obj/item/weapon/cell/New()
@@ -155,7 +155,7 @@
 	desc = "A cheap old power cell. It's probably been in use for quite some time now."
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 100
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
+	matter = list("steel" = 700, "glass" = 40)
 
 /obj/item/weapon/cell/crap/empty
 	charge = 0
@@ -165,7 +165,7 @@
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 250
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
+	matter = list("steel" = 700, "glass" = 40)
 
 /obj/item/weapon/cell/crap/empty/New()
 	..()
@@ -177,7 +177,7 @@
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = list(TECH_POWER = 1)
 	maxcharge = 500
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
+	matter = list("steel" = 700, "glass" = 50)
 
 
 /obj/item/weapon/cell/high
@@ -186,7 +186,7 @@
 	origin_tech = list(TECH_POWER = 2)
 	icon_state = "hcell"
 	maxcharge = 1000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
+	matter = list("steel" = 700, "glass" = 60)
 
 /obj/item/weapon/cell/high/empty/New()
 	..()
@@ -199,7 +199,7 @@
 	origin_tech = list(TECH_POWER = 3)
 	icon_state = "hcell"
 	maxcharge = 1500
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+	matter = list("steel" = 700, "glass" = 70)
 
 
 /obj/item/weapon/cell/super
@@ -208,7 +208,7 @@
 	origin_tech = list(TECH_POWER = 5)
 	icon_state = "scell"
 	maxcharge = 2000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+	matter = list("steel" = 700, "glass" = 70)
 
 /obj/item/weapon/cell/super/empty/New()
 	..()
@@ -221,7 +221,7 @@
 	origin_tech = list(TECH_POWER = 6)
 	icon_state = "hpcell"
 	maxcharge = 3000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
+	matter = list("steel" = 700, "glass" = 80)
 
 /obj/item/weapon/cell/hyper/empty/New()
 	..()
@@ -234,7 +234,7 @@
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 3000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
+	matter = list("steel" = 700, "glass" = 80)
 
 /obj/item/weapon/cell/infinite/check_charge()
 	return 1
