@@ -46,6 +46,7 @@ var/global/list/robot_modules = list(
 	// Bookkeeping
 	var/list/original_languages = list()
 	var/list/added_networks = list()
+	var/list/access_departments
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
 	..()
@@ -58,6 +59,7 @@ var/global/list/robot_modules = list(
 	add_languages(R)
 	add_subsystems(R)
 	apply_status_flags(R)
+	add_regional_access(R)
 
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
@@ -73,6 +75,7 @@ var/global/list/robot_modules = list(
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
+	remove_regional_access(R)
 
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
@@ -172,6 +175,16 @@ var/global/list/robot_modules = list(
 	if(!can_be_pushed)
 		R.status_flags |= CANPUSH
 
+/obj/item/weapon/robot_module/proc/add_regional_access(var/mob/living/silicon/robot/R)
+	for(var/region in access_departments)
+		R.idcard.access += get_region_accesses(region)
+
+/obj/item/weapon/robot_module/proc/remove_regional_access(var/mob/living/silicon/robot/R)
+	for(var/region in access_departments)
+		for(var/access in get_region_accesses(region))
+			R.idcard.access += access
+
+
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
 	sprites = list(	"Basic" = "robot_old",
@@ -197,6 +210,7 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_MEDICAL)
 	subsystems = list(/datum/nano_module/crew_monitor)
 	can_be_pushed = 0
+	access_departments = list(ACCESS_REGION_MEDBAY)
 
 /obj/item/weapon/robot_module/medical/surgeon
 	name = "surgeon robot module"
@@ -262,6 +276,7 @@ var/global/list/robot_modules = list(
 					"Drone - Chemistry" = "drone-chemistry",
 					"Doot" = "eyebot-medical"
 					)
+	access_departments = list(ACCESS_REGION_SECURITY, ACCESS_REGION_MEDBAY, ACCESS_REGION_ENGINEERING, ACCESS_REGION_SUPPLY)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
 	src.modules += new /obj/item/weapon/crowbar(src)
@@ -334,6 +349,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-engineering"
 					)
 	no_slip = 1
+	access_departments = list(ACCESS_REGION_ENGINEERING)
 
 /obj/item/weapon/robot_module/engineering/general/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -414,6 +430,7 @@ var/global/list/robot_modules = list(
 	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
 	can_be_pushed = 0
 	supported_upgrades = list(/obj/item/borg/upgrade/weaponcooler)
+	access_departments = list(ACCESS_REGION_SECURITY)
 
 /obj/item/weapon/robot_module/security/general
 	sprites = list(
@@ -463,6 +480,7 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-janitor",
 					"Doot" = "eyebot-janitor"
 					)
+	access_departments = list(ACCESS_REGION_SUPPLY)
 
 /obj/item/weapon/robot_module/janitor/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -495,6 +513,7 @@ var/global/list/robot_modules = list(
 					LANGUAGE_INDEPENDENT= 1,
 					LANGUAGE_SPACER = 1
 					)
+	access_departments = list(ACCESS_REGION_SUPPLY)
 
 /obj/item/weapon/robot_module/clerical/butler
 	sprites = list(	"Waitress" = "Service",
@@ -592,6 +611,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
+	access_departments = list(ACCESS_REGION_SUPPLY)
 
 /obj/item/weapon/robot_module/miner/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -616,6 +636,7 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-science",
 					"Doot" = "eyebot-science"
 					)
+	access_departments = list(ACCESS_REGION_RESEARCH)
 
 /obj/item/weapon/robot_module/research/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -694,6 +715,7 @@ var/global/list/robot_modules = list(
 	hide_on_manifest = 1
 	no_slip = 1
 	networks = list(NETWORK_ENGINEERING)
+	access_departments = list(ACCESS_REGION_SECURITY, ACCESS_REGION_MEDBAY, ACCESS_REGION_RESEARCH, ACCESS_REGION_ENGINEERING, ACCESS_REGION_SUPPLY)
 
 /obj/item/weapon/robot_module/drone/New(var/mob/living/silicon/robot/robot)
 	src.modules += new /obj/item/weapon/weldingtool(src)

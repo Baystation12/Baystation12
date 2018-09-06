@@ -273,7 +273,7 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Synthetic"
 
 /obj/item/weapon/card/id/synthetic/New()
-	access = get_all_station_access() + access_synth
+	access = get_region_accesses(ACCESS_REGION_GENERAL) + get_region_accesses(ACCESS_REGION_COMMAND) + access_synth + access_robotics + access_maint_tunnels
 	..()
 
 /obj/item/weapon/card/id/centcom
