@@ -1,3 +1,13 @@
+#define SENSOR_PRESSURE		1
+#define SENSOR_TEMPERATURE	2
+#define SENSOR_O2_COMP		4
+#define SENSOR_PH_COMP		8
+#define SENSOR_N2_COMP		16
+#define SENSOR_CO2_COMP		32
+#define SENSOR_H2_COMP		64
+#define SENSOR_N2O_COMP		128
+#define SENSOR_KR_COMP		256
+
 /obj/machinery/air_sensor
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "gsensor1"
@@ -35,11 +45,11 @@
 
 		var/datum/gas_mixture/air_sample = return_air()
 
+
 		if(output&1)
 			signal.data["pressure"] = num2text(round(air_sample.return_pressure(),0.1),)
 		if(output&2)
 			signal.data["temperature"] = round(air_sample.temperature,0.1)
-
 		if(output>4)
 			var/total_moles = air_sample.total_moles
 			if(total_moles > 0)
@@ -59,6 +69,7 @@
 				signal.data["nitrogen"] = 0
 				signal.data["carbon_dioxide"] = 0
 				signal.data["hydrogen"] = 0
+
 		signal.data["sigtype"]="status"
 		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
 
@@ -82,7 +93,7 @@ obj/machinery/air_sensor/Destroy()
 	icon_keyboard = "atmos_key"
 	icon_screen = "tank"
 
-	name = "Computer"
+	name = "Atmospherics Control Console"
 
 	var/frequency = 1439
 	var/list/sensors = list()
@@ -99,10 +110,29 @@ obj/machinery/computer/general_air_control/Destroy()
 /obj/machinery/computer/general_air_control/attack_hand(mob/user)
 	if(..(user))
 		return
+	//WIP code. Commented out to resume original functions.
+/*	var/datum/browser/popup = new (user, "[name]", "[src] Control Panel")
+	popup.set_content(jointext(get_console_data(),"<br>"))
+	popup.open()*/
 	user << browse(return_text(),"window=computer")
 	user.set_machine(src)
 	onclose(user, "computer")
 
+	//WIP code. Commented out to resume original functions.
+/*/obj/machinery/computer/general_air_control/proc/get_console_data()
+	. = list()
+	. += "<table>
+	var/sensor_data
+	if(sensors.len)
+	for(var/id_tag in sensors)
+			var/long_name = sensors[id_tag]
+			var/list/data = sensor_information[id_tag]
+			. += "<tr><td><strong>[long_name]</strong></tr></td>"
+			if(data)
+				for(d in data)
+					. += "<tr><td>[d]
+	. = JOINTEXT(.)
+*/
 /obj/machinery/computer/general_air_control/Process()
 	..()
 	src.updateUsrDialog()
