@@ -181,8 +181,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/proc/remove_regional_access(var/mob/living/silicon/robot/R)
 	for(var/region in access_departments)
-		for(var/access in get_region_accesses(region))
-			R.idcard.access -= access
+		R.idcard.access -= get_region_accesses(region)
 
 
 /obj/item/weapon/robot_module/standard
