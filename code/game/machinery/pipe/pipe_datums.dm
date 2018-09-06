@@ -4,7 +4,6 @@
 /datum/pipe
 	var/name = "pipe"							//item's name
 	var/desc = "a pipe"							//item description
-	var/item_name = null						//original item's name, in case it gets modified.
 	var/build_path = /obj/item/pipe				//path of the object that's being created
 	var/category = "general"					//Allows for easy sorting in the menu.
 	var/pipe_type = PIPE_SIMPLE_STRAIGHT		//What sort of pipe this is
@@ -21,7 +20,6 @@
 
 /datum/pipe/New()
 	..()
-	item_name = name
 	AssemblePipeInfo()
 
 //These procs are used in subtypes for assigning names and descriptions dynamically
@@ -33,16 +31,14 @@
 	if(!name && build_path)					//Get name from build path if posible
 		var/atom/movable/A = build_path
 		name = initial(A.name)
-		item_name = name
 
 /datum/pipe/proc/AssemblePipeDesc()
 	if(!desc)								//Try to make up a nice description if we don't have one
-		desc = "\a [item_name]."
+		desc = "\a [name]."
 
 /datum/pipe/proc/Build(var/datum/pipe/D, var/PipeColor = PIPE_COLOR_GREY, var/loc)
 	if(D.build_path)
-		var/obj/item/pipe/new_item = D.Fabricate(src)
-		new_item.loc = loc
+		var/obj/item/pipe/new_item = new build_path(loc)
 		if(D.pipe_type != null)
 			new_item.pipe_type = D.pipe_type
 		if(D.connect_types != null)
@@ -56,10 +52,6 @@
 		new_item.dir = D.dir
 		new_item.icon = D.build_icon
 		new_item.icon_state = D.build_icon_state
-
-/datum/pipe/proc/Fabricate(var/newloc)
-	return new build_path(newloc)
-
 
 //=============
 //List of Pipes

@@ -732,7 +732,10 @@
 /area/errant_pisces/atmos)
 "bX" = (
 /obj/machinery/atmospherics/omni/filter{
-	dir = 1
+	tag_east = 4; 
+	tag_north = 2; 
+	tag_south = 1; 
+	tag_west = 0
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -817,7 +820,10 @@
 /area/errant_pisces/atmos)
 "cl" = (
 /obj/machinery/atmospherics/omni/filter{
-	dir = 1
+	tag_east = 0;
+	tag_north = 2;
+	tag_south = 1;
+	tag_west = 3	
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -907,9 +913,11 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cA" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 5
+/obj/machinery/atmospherics/omni/filter{
+	tag_east = 0; 
+	tag_north = 2; 
+	tag_south = 1; 
+	tag_west = 5
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)

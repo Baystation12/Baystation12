@@ -20,19 +20,6 @@
 	for(var/category_type in categories)
 		for(var/recipe_type in subtypesof(category_type))
 			LAZYADD(categories[category_type], new recipe_type(src))
-/*
-	for(var/simple in subtypesof(/datum/pipe/pipe_dispenser/simple))
-		categories["simple_recipes"] += new simple(src)
-	for(var/scrub in subtypesof(/datum/pipe/pipe_dispenser/scrubber))
-		categories["scrubber_recipes"] += new scrub(src)
-	for(var/supply in subtypesof(/datum/pipe/pipe_dispenser/supply))
-		categories["supply_recipes"] += new supply(src)
-	for(var/fuel in subtypesof(/datum/pipe/pipe_dispenser/fuel))
-		categories["fuel_recipes"] += new fuel(src)
-	for(var/device in subtypesof(/datum/pipe/pipe_dispenser/device))
-		categories["device_recipes"] += new device(src)
-	for(var/he in subtypesof(/datum/pipe/pipe_dispenser/he))
-		categories["he_recipes"] += new he(src)*/
 
 /obj/machinery/pipedispenser/proc/get_console_data()
 	. = list()
@@ -43,43 +30,6 @@
 		for(var/datum/pipe/pipe in categories[category])
 			var/line = "[pipe.name]</td>"
 			. += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[pipe]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[pipe]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[pipe]'>10x</a></td></tr>"
-	//. += "<tr><td><font color = '#517087'><strong>Regular Pipes</strong></font></td></tr>"
-	/*var/result = ""
-
-	for(var/datum/pipe/simple in categories["simple_recipes"])
-		var/line = "[simple.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[simple]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[simple]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[simple]'>10x</a></td></tr>"
-	. += "[result]"
-	result = ""
-	. += "<tr><td><font color = '#517087'><strong>Supply Pipes</strong></font></td></tr>"
-	for(var/datum/pipe/supply in categories["supply_recipes"])
-		var/line = "[supply.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[supply]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[supply]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[supply]'>10x</a></td></tr>"
-	. += "[result]"
-	result = ""
-	. += "<tr><td><font color = '#517087'><strong>Scrubber Pipes</strong></font></td></tr>"
-	for(var/datum/pipe/scrubber in categories["scrubber_recipes"])
-		var/line = "[scrubber.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[scrubber]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[scrubber]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[scrubber]'>10x</a></td></tr>"
-	. += "[result]"
-	result = ""
-	. += "<tr><td><font color = '#517087'><strong>Fuel Pipes</strong></font></td></tr>"
-	for(var/datum/pipe/fuel in categories["fuel_recipes"])
-		var/line = "[fuel.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[fuel]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[fuel]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[fuel]'>10x</a></td></tr>"
-	. += "[result]"
-	result = ""
-	. += "<tr><td><font color = '#517087'><strong>Heat Exchange</strong></font></td></tr>"
-	for(var/datum/pipe/he in categories["he_recipes"])
-		var/line = "[he.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[he]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[he]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[he]'>10x</a></td></tr>"
-	. += "[result]"
-	result = ""
-	. += "<tr><td><font color = '#517087'><strong>Devices</strong></font></td></tr>"
-	for(var/datum/pipe/devices in categories["device_recipes"])
-		var/line = "[devices.name]</td>"
-		result += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[devices]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[devices]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[devices]'>10x</a></td></tr>"
-	. += "[result]"*/
 	.+= "</table>"
 	. = JOINTEXT(.)
 
@@ -100,7 +50,7 @@
 	if(href_list["color"])
 		var/choice = input(usr, "What color do you want pipes to have?") as null|anything in pipe_colors
 		if(!choice)
-			return
+			return 1
 		pipe_color = choice
 		updateUsrDialog()
 
