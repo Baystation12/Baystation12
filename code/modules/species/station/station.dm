@@ -24,7 +24,21 @@
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			CULTURE_HUMAN,
-			CULTURE_HUMAN_VATGROWN
+			CULTURE_HUMAN_VATGROWN,
+			CULTURE_HUMAN_MARTIAN,
+			CULTURE_HUMAN_MARSTUN,
+			CULTURE_HUMAN_LUNAPOOR,
+			CULTURE_HUMAN_LUNARICH,
+			CULTURE_HUMAN_VENUSIAN,
+			CULTURE_HUMAN_VENUSLOW,
+			CULTURE_HUMAN_BELTER,
+			CULTURE_HUMAN_PLUTO,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_CETI,
+			CULTURE_HUMAN_SPACER,
+			CULTURE_HUMAN_SPAFRO,
+			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_OTHER
 		)
 	)
 
@@ -154,9 +168,11 @@
 			HOME_SYSTEM_QERRBALAK
 		),
 		TAG_FACTION = list(
-			FACTION_OTHER,
 			FACTION_EXPEDITIONARY,
-			FACTION_NANOTRASEN
+			FACTION_NANOTRASEN,
+			FACTION_PCRC,
+			FACTION_HEPHAESTUS,
+			FACTION_OTHER
 		),
 		TAG_RELIGION =  list(
 			RELIGION_OTHER,
@@ -165,6 +181,23 @@
 			RELIGION_AGNOSTICISM
 		)
 	)
+
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/skrell,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
+		)
+
+/datum/species/skrell/water_act(var/mob/living/carbon/human/H, var/depth)
+	..()
+	if(depth >= 40)
+		if(H.getHalLoss())
+			H.adjustHalLoss(-5)
+			if(prob(5)) // Might be too spammy.
+				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")
 
 /datum/species/diona
 	name = SPECIES_DIONA

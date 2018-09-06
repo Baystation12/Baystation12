@@ -53,6 +53,8 @@
 			return global.SSevent;
 		if("SSfastprocess")
 			return global.SSfastprocess;
+		if("SSfluids")
+			return global.SSfluids;
 		if("SSgarbage")
 			return global.SSgarbage;
 		if("SSicon_update")
@@ -1038,6 +1040,8 @@
 			global.SSevent=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
+		if("SSfluids")
+			global.SSfluids=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
 		if("SSicon_update")
@@ -1996,6 +2000,7 @@
 	"SSevac",
 	"SSevent",
 	"SSfastprocess",
+	"SSfluids",
 	"SSgarbage",
 	"SSicon_update",
 	"SSinactivity",

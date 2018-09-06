@@ -161,6 +161,17 @@ Class Procs:
 		if(E.sleeping)
 			E.recheck()
 
+	// Handle condensation from the air.
+	for(var/g in air.gas)
+		var/product = gas_data.condensation_products[g]
+		if(product && air.temperature <= gas_data.condensation_points[g])
+			var/condensation = min(air.gas[g], 5)
+			while(condensation > 0)
+				condensation--
+				var/turf/flooding = pick(contents)
+				air.adjust_gas(g, -1)
+				flooding.add_fluid(air.group_multiplier * REAGENT_GAS_EXCHANGE_FACTOR, product)
+
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
 	for(var/g in air.gas)

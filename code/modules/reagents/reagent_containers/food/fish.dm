@@ -42,5 +42,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/fish/shark
 	fish_type = "shark"
 
+/obj/item/weapon/reagent_containers/food/snacks/fish/carp
+	fish_type = "carp"
+
 /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
 	fish_type = "tako"

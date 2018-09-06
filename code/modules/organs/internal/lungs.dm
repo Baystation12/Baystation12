@@ -11,7 +11,7 @@
 	relative_size = 60
 
 	var/active_breathing = 1
-
+	var/has_gills = FALSE
 	var/breath_type
 	var/exhale_type
 	var/list/poison_types
@@ -29,6 +29,9 @@
 	var/breathing = 0
 	var/last_failed_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
+
+/obj/item/organ/internal/lungs/proc/can_drown()
+	return (is_broken() || !has_gills)
 
 /obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
 	var/last_suffocation = oxygen_deprivation

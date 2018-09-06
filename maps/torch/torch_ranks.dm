@@ -295,7 +295,7 @@
 
 /datum/mil_rank/fleet/e9_alt1
 	name = "Command Master Chief Petty Officer"
-	name_short = "CMDCM"
+	name_short = "CMCPO"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt1, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 9
 
