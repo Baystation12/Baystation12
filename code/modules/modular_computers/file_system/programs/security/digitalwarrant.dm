@@ -26,6 +26,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		data["warrantname"] = activewarrant.fields["namewarrant"]
 		data["warrantcharges"] = activewarrant.fields["charges"]
 		data["warrantauth"] = activewarrant.fields["auth"]
+		data["warrantidauth"] = activewarrant.fields["idauth"]
 		data["type"] = activewarrant.fields["arrestsearch"]
 	else
 		var/list/arrestwarrants = list()
@@ -103,15 +104,15 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		. = 1
 		var/datum/computer_file/data/warrant/W = new()
 		if(CanInteract(user, GLOB.default_state))
+			W.fields["namewarrant"] = "Unknown"
+			W.fields["auth"] = "Unauthorized"
+			W.fields["idauth"] = "Unauthorized"
+			W.fields["access"] = list()
 			if(href_list["addwarrant"] == "arrest")
-				W.fields["namewarrant"] = "Unknown"
 				W.fields["charges"] = "No charges present"
-				W.fields["auth"] = "Unauthorized"
 				W.fields["arrestsearch"] = "arrest"
 			if(href_list["addwarrant"] == "search")
-				W.fields["namewarrant"] = "Unknown"
 				W.fields["charges"] = "No reason given"
-				W.fields["auth"] = "Unauthorized"
 				W.fields["arrestsearch"] = "search"
 			activewarrant = W
 
@@ -163,6 +164,31 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		if(!activewarrant)
 			return
 		activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+
+	if(href_list["editwarrantidauth"])
+		. = 1
+		if(!activewarrant)
+			return
+		// access-granting is only available for arrest warrants
+		if(activewarrant.fields["arrestsearch"] == "search")
+			return
+		if(!(access_change_ids in I.access))
+			to_chat(user, "Authentication error: Unable to locate ID with appropriate access to allow this operation.")
+			return
+	
+		// only works if they are in the crew records
+		var/datum/computer_file/report/crew_record/warrant_subject = get_crewmember_record(activewarrant.fields["namewarrant"])
+		if(!warrant_subject)
+			return
+		var/datum/job/J = job_master.GetJob(warrant_subject.get_job())
+		if(!J)
+			return
+		var/list/warrant_access = J.get_access()
+		// warrants can never grant command access
+		warrant_access.Remove(get_region_accesses(ACCESS_REGION_COMMAND))
+
+		activewarrant.fields["idauth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+		activewarrant.fields["access"] = warrant_access
 
 	if(href_list["back"])
 		. = 1

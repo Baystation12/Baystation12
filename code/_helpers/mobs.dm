@@ -266,3 +266,9 @@ proc/age2agedescription(age)
 				selected = M
 				break
 	return selected
+
+// Find a human mob with a certain (real) name
+/proc/find_human_by_name(var/name)
+	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
+		if(H.real_name == name)
+			return H
