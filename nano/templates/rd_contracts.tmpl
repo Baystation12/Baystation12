@@ -1,0 +1,70 @@
+<div class="item">
+	{{:helper.link('Operation', 'gear', {'state' : 'operation'}, null, data.state == 'operation' ? 'selected' : null)}}
+	{{:helper.link('Contracts', 'note', {'state' : 'contracts'}, null, data.state == 'contracts' ? 'selected' : null)}}
+	{{:helper.link('Store', 'cart', {'state' : 'purchase'}, null, data.state == 'purchase' ? 'selected' : null)}}
+</div>
+<hr>
+{{if data.state == 'operation'}}
+	<div class="statusDisplay">
+		<div class="itemContent">
+			<b>Loaded item: </b>{{:data.item_name}}
+		</div>
+		<div class="itemContent">
+			<b>Queued purchase: </b>{{:data.queued_purchase}}
+		</div>
+	</div>
+
+	<br>
+
+	<div class="itemContent">
+		{{:helper.link('Eject item', null, {'cmd' : 'eject'}, data.item ? null : 'disabled')}}
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Deliver item', null, {'cmd' : 'deliver'}, data.item ? null : 'disabled')}}
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Retrieve purchase', null, {'cmd' : 'get_purchase'}, (data.queued_purchase != "none" && !data.item && data.has_access) ? null : 'disabled')}}
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Cancel purchase', null, {'cmd' : 'cancel_purchase'}, (data.queued_purchase != "none" && data.has_access) ? null : 'disabled')}}
+	</div>
+{{/if}}
+
+{{if data.state == 'contracts'}}
+		{{for data.contracts}}
+			<div class="itemGroup">
+				<div class="item">
+					<h3>{{:value.name}}</h3>
+					<p>{{:value.desc}}</p>
+					<b>Reward:</b> T{{:value.reward}}
+				</div>
+			</div>
+			<br>
+		{{empty}}
+			<b>No contracts available!</b>
+		{{/for}}
+{{/if}}
+
+{{if data.state == 'purchase'}}
+		{{if data.has_access}}
+			<div class="statusDisplay">
+				Purchased items can be retrieved from the operations menu.
+				<br>
+				<b>Funds will be deducted once you retrieve your purchase.</b>
+				<br>
+				<p>Available funds: T{{:data.available_funds}}</p>
+			</div>
+
+			{{for data.articles}}
+				<div class="item">
+					<b>{{:value.name}}</b>
+					<br>
+					Price: T{{:value.cost}}
+					<span style="float:right;">{{:helper.link('Purchase', 'cart', {'cmd' : 'purchase', 'article' : value.type}, ((data.available_funds < value.cost) || (data.queued_purchase == value.name)) ? 'disabled' : null)}}</span>
+				</div>
+				<hr>
+			{{/for}}
+		{{else}}
+			<h3>Access denied: Missing identificaton or insufficient permissions.</h3>
+		{{/if}}
+{{/if}}

@@ -23613,6 +23613,17 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
+"lsJ" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/corner/purple{
+	dir = 5
+	},
+/obj/machinery/contracttube{
+	pixel_x = -3;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
 "ltb" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/computer/rdconsole/core{
@@ -54216,7 +54227,7 @@ lrb
 lub
 oPb
 aCf
-jMb
+lsJ
 oTb
 aSK
 pMb

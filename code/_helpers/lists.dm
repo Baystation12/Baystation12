@@ -629,6 +629,16 @@ proc/dd_sortedTextList(list/incoming)
 
 #define subtypesof(prototype) (typesof(prototype) - prototype)
 
+// creates a list of the direct subtypes of prototype
+// e.g. given that we have /datum/a/b/c, directsubtypesof(/datum/a) returns /datum/a/b
+/proc/directsubtypesof(prototype)
+	var/list/subtypes = subtypesof(prototype)
+
+	for(var/T in subtypes)
+		subtypes -= subtypesof(T)
+
+	return subtypes
+
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.
 /proc/init_subtypes(prototype, list/L)

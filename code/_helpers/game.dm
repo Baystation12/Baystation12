@@ -569,3 +569,9 @@ datum/projectile_data
 
 /proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
 	return (GLOB.cult.current_antagonists.len > spookiness_threshold)
+
+/proc/get_department_account(var/department)
+	var/list/datum/money_account/accounts = readglobal("department_accounts")
+	var/datum/money_account/department_account = accounts[department]
+
+	return department_account
