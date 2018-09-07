@@ -384,8 +384,9 @@
 "ht" = (/turf/simulated/floor/tranquility/catwalk4,/area/asteroid_base/south_airlock_1)
 "hu" = (/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk4,/area/asteroid_base/south_airlock_1)
 "hv" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk4,/area/asteroid_base/south_airlock_1)
-"hw" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
-"hx" = (/obj/machinery/light/spot,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
+"hw" = (/obj/machinery/telecomms/relay/long_range_planetary{tag = "icon-default"; icon_state = ""},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/armoury_3)
+"hx" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
+"hy" = (/obj/machinery/light/spot,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -436,6 +437,6 @@ epepepepepepepepepepeqeqeqeqeqfJexgAewgBhmglglglgogogogogogogogogogogogogogogogo
 epepepepepepepepepepeqererhneqewexevewfPhoglgmgmgngogngngngngngngngogngngngogngngngngngngngogpfTeKfb
 epepepepepepepepepepeqhpfdfeereteuevewgjgkglgmgmgngogngngngngngngngogngngngogngngngngngngngogpgZeKfb
 epepepepepepepepepepeqhqeseseqewexexewfPfPhrhkhshthuhthththvhthththuhthvhthuhthththththththufVfVeKfb
-epepepepepepepepepepeqeqeqeqeqewewewewfQfPfRfQfQfThwfTfTfTfVfVfTfTfXfVhxfTfXfTfTfTfTfTfTfVfYfVfVeKfb
+epephwepepepepepepepeqeqeqeqeqewewewewfQfPfRfQfQfThxfTfTfTfVfVfTfTfXfVhyfTfXfTfTfTfTfTfTfVfYfVfVeKfb
 epepepepepepepepepepepepepepepepepepeweweweweweweKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKeKfb
 "}

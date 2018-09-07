@@ -438,7 +438,7 @@
 "iv" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "iw" = (/obj/structure/mirror,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_research_facility/ground/interior/commsg)
 "ix" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/exo_research_facility/ground/interior/commsg)
-"iy" = (/obj/machinery/telecomms/server,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
+"iy" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "iz" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "iA" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "iB" = (/obj/machinery/photocopier,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)

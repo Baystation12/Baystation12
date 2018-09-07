@@ -92,7 +92,7 @@
 "bN" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
 "bO" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
 "bP" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
-"bQ" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
+"bQ" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
 "bR" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
 "bS" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
 "bT" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
