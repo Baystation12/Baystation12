@@ -482,6 +482,11 @@
 	if(!organ_to_replace)
 		return 0
 
+	var/obj/item/organ/internal/augment/A = organ_to_replace
+	if(istype(A))
+		if(!(A.augment_flags & AUGMENTATION_MECHANIC))
+			to_chat(user, SPAN_WARNING("\the [A] cannot function within a robotic limb"))
+
 	target.op_stage.current_organ = organ_to_replace
 	return ..()
 

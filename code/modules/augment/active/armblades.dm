@@ -35,3 +35,5 @@
 	icon_state = "wolverine"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	holding_type = /obj/item/weapon/material/hatchet/tacknife/armblade/claws
+	//Limited to robolimbs
+	augment_flags = AUGMENTATION_MECHANIC
