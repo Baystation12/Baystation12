@@ -22,7 +22,7 @@
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/corpse/russian
 	var/weapon1 = /obj/item/weapon/material/knife
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	faction = "russian"
 	status_flags = CANPUSH
 

@@ -12,7 +12,7 @@
 
 	min_gas = list("oxygen" = 1)
 	max_gas = null
-	unsuitable_atoms_damage = 1
+	unsuitable_atmos_damage = 1
 
 	var/list/wizardy_spells = list()
 
