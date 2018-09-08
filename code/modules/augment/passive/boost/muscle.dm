@@ -1,3 +1,4 @@
+//This one must do special handling because you need 2, so other than vars it doesn't share tht much
 /datum/skill_buff/augment/muscle
 
 /obj/item/organ/internal/augment/boost/muscle
@@ -19,19 +20,23 @@
 	else if(organ_tag == BP_AUGMENT_R_LEG)
 		other = owner.internal_organs_by_name[BP_AUGMENT_L_LEG]
 	if(other && istype(other))
-		log_world("Adding buff")
-		owner.buff_skill(buffs, 0, buffpath)
-		active = 1
-		other.active = 1
-		other.other = src
+		var/datum/skill_buff/augment/muscle/A
+		A = owner.buff_skill(buffs, 0, buffpath)
+		if(A && istype(A))
+			active = 1
+			other.active = 1
+			other.other = src
+			A.id = id
 
 /obj/item/organ/internal/augment/boost/muscle/onRemove()
 	if(!active)
 		return
 	var/list/B = owner.fetch_buffs_of_type(buffpath, 0)
-	if(B.len)
-		B[1].remove()
-		if(other)
-			other.active = 0
-			other.other = null
-			other = null
+	for(var/datum/skill_buff/augment/muscle/D in B)
+		if(D.id == id)
+			D.remove()
+			if(other)
+				other.active = 0
+				other.other = null
+				other = null
+			return
