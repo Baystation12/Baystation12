@@ -288,10 +288,18 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	return FALSE
 
 /obj/item/organ/external/proc/get_brute_mod()
-	return species.brute_mod + 0.2 * burn_dam/max_damage //burns make you take more brute damage
+	var/obj/item/organ/internal/augment/armor/A = owner.internal_organs_by_name[BP_AUGMENT_CHEST_ARMOUR]
+	var/B = 0
+	if(A && istype(A))
+		B = A.brute_mod
+	return species.brute_mod + B + 0.2 * burn_dam/max_damage //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod()
-	return species.burn_mod
+	var/obj/item/organ/internal/augment/armor/A = owner.internal_organs_by_name[BP_AUGMENT_CHEST_ARMOUR]
+	var/B = 0
+	if(A && istype(A))
+		B = A.burn_mod
+	return species.burn_mod + B
 
 //organs can come off in three cases
 //1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.

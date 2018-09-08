@@ -29,7 +29,7 @@
 
 //Alternate look
 /obj/item/organ/internal/augment/active/simple/wolverine
-	name = "embedded claws"
+	name = "Cyberclaws"
 	desc = "An unusual type of cybernetic weaponry, these sharp blades are bound to turn heads"
 	action_button_name = "Deploy claws"
 	icon_state = "wolverine"

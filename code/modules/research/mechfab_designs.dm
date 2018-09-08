@@ -608,3 +608,76 @@
 	materials = list(MATERIAL_STEEL = 750, MATERIAL_GLASS = 750)
 	build_path = /obj/item/device/flash/synthetic
 	category = "Misc"
+
+//Augments, son
+/datum/design/item/mechfab/augment
+	category = "Augments"
+
+/datum/design/item/mechfab/augment/armblade
+	name = "Armblade"
+	build_path = /obj/item/organ/internal/augment/active/simple/armblade
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 750)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_BIO = 3)
+	id = "augment_blade"
+
+/datum/design/item/mechfab/augment/armblade/wolverine
+	name = "Cyberclaws"
+	build_path = /obj/item/organ/internal/augment/active/simple/wolverine
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, "diamond" = 250)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
+	id = "augment_wolverine"
+
+/datum/design/item/mechfab/augment/engineering
+	name = "Engineering toolset"
+	build_path = /obj/item/organ/internal/augment/active/polytool/engineer
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_BIO = 2)
+	id = "augment_toolset_engineering"
+
+/datum/design/item/mechfab/augment/surgery
+	name = "Surgical toolset"
+	build_path = /obj/item/organ/internal/augment/active/polytool/surgical
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 2000)
+	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4)
+	id = "augment_toolset_surgery"
+
+/datum/design/item/mechfab/augment/reflex
+	name = "Synapse interceptors"
+	build_path = /obj/item/organ/internal/augment/boost/reflex
+	materials = list(DEFAULT_WALL_MATERIAL = 750, "glass" = 750, "silver" = 100)
+	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4, TECH_BIO = 4, TECH_MAGNET = 5)
+	id = "augment_booster_reflex"
+
+/datum/design/item/mechfab/augment/shooting
+	name = "Gunnery booster"
+	build_path = /obj/item/organ/internal/augment/boost/shooting
+	materials = list(DEFAULT_WALL_MATERIAL = 750, "glass" = 750, "silver" = 100)
+	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_BIO = 4)
+	id = "augment_booster_gunnery"
+
+/datum/design/item/mechfab/augment/muscle
+	name = "Mechanical muscles"
+	build_path = /obj/item/organ/internal/augment/boost/muscle
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000)
+	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
+	id = "augment_booster_muscles"
+
+/datum/design/item/mechfab/augment/armor
+	name = "Subdermal armor"
+	build_path = /obj/item/organ/internal/augment/armor
+	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 750)
+	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4, TECH_BIO = 4)
+	id = "augment_armor"
+
+/datum/design/item/mechfab/augment/nanounit
+	name = "Nanite MCU"
+	build_path = /obj/item/organ/internal/augment/active/nanounit
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "gold" = 100, "uranium" = 500)
+	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_BIO = 5, TECH_ENGINEERING = 5)
+	id = "augment_nanounit"
+
+/datum/design/item/mechfab/augment/circuit
+	name = "Integrated circuit frame"
+	build_path = /obj/item/organ/internal/augment/active/simple/circuit
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
+	id = "augment_circuitry"
