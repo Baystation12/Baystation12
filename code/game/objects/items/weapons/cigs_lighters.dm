@@ -127,6 +127,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/mob/living/carbon/human/C = loc
 			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
+				add_trace_DNA(C)
 		else // else just remove some of the reagents
 			reagents.remove_any(REM)
 
@@ -376,6 +377,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			return 1
 		to_chat(H, "<span class='notice'>You take a drag on your [name].</span>")
 		smoke(5)
+		add_trace_DNA(H)
 		return 1
 	return ..()
 
@@ -853,6 +855,7 @@ obj/item/clothing/mask/chewable/Destroy()
 			var/mob/living/carbon/human/C = loc
 			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // I am keeping this one because gum is not a replacement for real food. Fuck off Wonka.
+			add_trace_DNA(C)
 		else // else just remove some of the reagents
 			reagents.remove_any(REM)
 

@@ -4,6 +4,7 @@
 	icon_state = "swab"
 	var/gsr = 0
 	var/list/dna
+	var/list/trace_dna
 	var/used
 
 /obj/item/weapon/forensics/swab/proc/is_used()
@@ -83,6 +84,8 @@
 	var/list/choices = list()
 	if(A.blood_DNA)
 		choices |= "Blood"
+	if(istype(A, /obj/item/))
+		choices |= "DNA traces"
 	if(istype(A, /obj/item/clothing))
 		choices |= "Gunshot Residue"
 
@@ -100,7 +103,9 @@
 
 	var/sample_type
 	if(choice == "Blood")
-		if(!A.blood_DNA || !A.blood_DNA.len) return
+		if(!A.blood_DNA || !A.blood_DNA.len)
+			to_chat(user, "<span class='warning'>There is no blood on \the [A].</span>")
+			return
 		dna = A.blood_DNA.Copy()
 		sample_type = "blood"
 
@@ -111,6 +116,14 @@
 			return
 		gsr = B.gunshot_residue
 		sample_type = "residue"
+
+	else if(choice == "DNA traces")
+		var/obj/item/I = A
+		if(!istype(I) || !I.trace_DNA)
+			to_chat(user, "<span class='warning'>There is no non-blood DNA on \the [A].</span>")
+			return
+		trace_dna = I.trace_DNA.Copy()
+		sample_type = "trace DNA"
 
 	if(sample_type)
 		user.visible_message("\The [user] swabs \the [A] for a sample.", "You swab \the [A] for a sample.")
