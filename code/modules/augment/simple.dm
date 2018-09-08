@@ -39,8 +39,8 @@
 	if(owner.equip_to_slot_if_possible(holding, slot))
 		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
 		owner.visible_message(
-			SPAN_WARNING("[owner] extends \his [holding.name] from [parent_organ]."),
-			SPAN_NOTICE("You extend your [holding.name] from [parent_organ].")
+			SPAN_WARNING("[owner] extends \his [holding.name] from [limb]."),
+			SPAN_NOTICE("You extend your [holding.name] from [limb].")
 		)
 
 /obj/item/organ/internal/augment/active/simple/proc/retract()
@@ -51,8 +51,8 @@
 		var/mob/M = holding.loc
 		M.drop_from_inventory(holding, src)
 		M.visible_message(
-			SPAN_WARNING("[M] retracts \his [holding.name] into [parent_organ]."),
-			SPAN_NOTICE("You retract your [holding.name] into [parent_organ].")
+			SPAN_WARNING("[M] retracts \his [holding.name] into [limb]."),
+			SPAN_NOTICE("You retract your [holding.name] into [limb].")
 		)
 
 
