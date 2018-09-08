@@ -252,5 +252,12 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 					return
 			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, checkdir))
-			if(obstacle && obstacle.type in GLOB.hostile_attackables)
+			if(obstacle && CheckDestroyAllowed(obstacle))
 				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+
+/mob/living/simple_animal/hostile/proc/CheckDestroyAllowed(var/obj/to_destroy)
+	. = 0
+	for(var/path in GLOB.hostile_attackables)
+		if(istype(to_destroy,path))
+			. = 1
+			break
