@@ -211,6 +211,7 @@
 #define BP_AUGMENT_L_LEG         "left leg augment"
 #define BP_AUGMENT_CHEST_ARMOUR   "chest armor augment"
 #define BP_AUGMENT_CHEST_ACTIVE  "active chest augment"
+#define BP_AUGMENT_HEAD           "head augment"
 
 //Augment flags
 #define AUGMENTATION_MECHANIC 1

@@ -2,7 +2,7 @@
 	name = "Polytool embedded module"
 	action_button_name = "Deploy tool"
 	icon_state = "multitool"
-	allowed_organs = list(BP_R_ARM, BP_L_ARM)
+	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	var/list/items = list()
 	var/list/paths = list() //We may lose them
 	augment_flags = AUGMENTATION_MECHANIC
@@ -25,28 +25,36 @@
 		I.canremove = 1
 
 /obj/item/organ/internal/augment/active/polytool/activate()
-	var/target_hand = parent_organ == BP_L_ARM ? slot_l_hand : slot_r_hand
-	var/obj/I = owner.get_active_hand()
-	var/mob/living/carbon/human/H = owner
+	if(!can_activate())
+		return
+	var/slot = null
+
+	if(limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
+		slot = slot_l_hand
+	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
+		slot = slot_r_hand
+
+	var/obj/I = slot == slot_l_hand ? owner.l_hand : owner.r_hand
+
 	if(I)
 		if(is_type_in_list(I,paths) && !(I.type in items)) //We don't want several of same but you can replace parts whenever
-			H.drop_from_inventory(I, src)
+			owner.drop_from_inventory(I, src)
 			items += I
-			H.visible_message(
-				SPAN_WARNING("[H] retracts \his [I] into [limb]."),
+			owner.visible_message(
+				SPAN_WARNING("[owner] retracts \his [I] into [limb]."),
 				SPAN_NOTICE("You retract your [I] into [limb].")
 			)
 		else
-			to_chat(H, SPAN_WARNING("You must drop [I] before tool can be extend."))
+			to_chat(owner, SPAN_WARNING("You must drop [I] before tool can be extend."))
 	else
-		var/obj/item = input(H, "Select item for deploy") as null|anything in src
-		if(!item || !src.loc in H.organs || H.incapacitated())
+		var/obj/item = input(owner, "Select item for deploy") as null|anything in src
+		if(!item || !src.loc in owner.organs || !can_activate())
 			return
-		if(H.equip_to_slot_if_possible(item, target_hand))
+		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item
 			//Keep track of it, make sure it returns
 			GLOB.item_unequipped_event.register(item, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
-			H.visible_message(
-				SPAN_WARNING("[H] extend \his [item] from [limb]."),
+			owner.visible_message(
+				SPAN_WARNING("[owner] extends \his [item] from [limb]."),
 				SPAN_NOTICE("You extend your [item] from [limb].")
 			)
