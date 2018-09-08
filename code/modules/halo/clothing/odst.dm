@@ -58,7 +58,7 @@
 	armor = list(melee = 55, bullet = 45, laser = 55, energy = 45, bomb = 60, bio = 30, rad = 25)
 	//specials = list(/datum/armourspecials/internal_air_tank/human) This line is disabled untill a dev can fix the internals code for it.
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|FEET
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
@@ -184,14 +184,24 @@
 	item_state = "Odst Helmet Mann"
 	icon_state = "Odst Helmet Mann"
 
-
 /obj/item/clothing/suit/armor/special/odst/donator/mann
 	name = "Mann's ODST Armour"
 
 	icon_state = "Odst Armor Mann"
 
+/obj/item/clothing/head/helmet/odst/donator/moerk
+	name = "Moerk's ODST Helmet"
+
+	item_state = "Odst Helmet Moerk"
+	icon_state = "Odst Helmet Moerk"
+
+/obj/item/clothing/suit/armor/special/odst/donator/moerk
+	name = "Moerk's Customized ODST Armour"
+
+	icon_state = "Odst Armor Moerk"
+
 /obj/item/clothing/head/helmet/odst/donator/spartan
-	name = "ODST Medic Helmet"
+	name = "Spartan's ODST Helmet"
 
 	item_state = "Odst Helmet Spartan"
 	icon_state = "Odst Helmet Spartan"
@@ -200,6 +210,29 @@
 	name = "Customized ODST CQB Armour"
 
 	icon_state = "Odst Armor Spartan"
+
+/obj/item/clothing/head/helmet/odst/donator/caelumz
+	name = "Customized ODST Sniper Helmet"
+
+	item_state = "Odst Helmet Caelum"
+	icon_state = "Odst Helmet Caelum"
+
+/obj/item/clothing/suit/armor/special/odst/donator/caelumz
+	name = "Customized ODST Sniper Armour"
+
+	icon_state = "Odst Armor Caelum"
+
+/obj/item/clothing/head/helmet/odst/donator/maxattacker
+	name = "Customized ODST Helmet"
+
+	item_state = "Odst Helmet Maxattacker"
+	icon_state = "Odst Helmet Maxattacker"
+
+/obj/item/clothing/suit/armor/special/odst/donator/maxattacker
+	name = "Customized ODST Recon Armour"
+
+	icon_state = "Odst Armor Maxattacker"
+
 
 //END DONATOR GEAR
 
