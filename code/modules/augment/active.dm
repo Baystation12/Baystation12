@@ -10,9 +10,9 @@
 	limb = owner.get_organ(parent_organ)
 
 /obj/item/organ/internal/augment/active/proc/can_activate()
-	if(!owner || owner.incapacitated())
+	if(!owner || owner.incapacitated() || !is_usable())
 		to_chat(owner, SPAN_WARNING("You can't do that now!"))
-		return
+		return FALSE
 
 	return TRUE
 

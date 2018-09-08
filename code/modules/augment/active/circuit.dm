@@ -2,7 +2,7 @@
 	name = "Integrated circuit frame"
 	action_button_name = "Activate circuit"
 	icon_state = "circuit"
-	allowed_organs = list(BP_R_ARM, BP_L_ARM)
+	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	holding_type = null //We must get the holding item externally
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC

@@ -13,7 +13,7 @@
 	desc = "A sturdy housing for a steel utility blade."
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
-	allowed_organs = list(BP_R_HAND, BP_L_HAND)
+	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	holding_type = /obj/item/weapon/material/hatchet/tacknife/armblade
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
@@ -33,5 +33,5 @@
 	desc = "An unusual type of cybernetic weaponry, these sharp blades are bound to turn heads"
 	action_button_name = "Deploy claws"
 	icon_state = "wolverine"
-	allowed_organs = list(BP_R_HAND, BP_L_HAND)
+	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	holding_type = /obj/item/weapon/material/hatchet/tacknife/armblade/claws
