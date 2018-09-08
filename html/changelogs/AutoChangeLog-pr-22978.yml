@@ -1,5 +1,0 @@
-author: "Textor"
-delete-after: True
-changes: 
-  - tweak: "Staff now take tickets when they hit the \"PM\" button in the ticket panel."
-  - rscadd: "Adds the ability for admins to change the end credits slightly."
