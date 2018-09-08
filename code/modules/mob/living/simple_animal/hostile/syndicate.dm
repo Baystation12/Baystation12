@@ -23,7 +23,7 @@
 	var/corpse = /obj/effect/landmark/corpse/syndicate
 	var/weapon1
 	var/weapon2
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	environment_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH

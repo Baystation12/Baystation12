@@ -21,7 +21,7 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	min_gas = null
 	max_gas = null
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	faction = "alien"
 	environment_smash = 2
 	status_flags = CANPUSH
