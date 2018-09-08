@@ -74,7 +74,7 @@
 			report.info += "Surface analysis has determined unique fingerprint strings:<br><br>"
 			for(var/prints in card.evidence)
 				report.info += "<span class='notice'>Fingerprint string: </span>"
-				if(!is_complete_print(prints))
+				if(!is_complete_print(card.evidence[prints]))
 					report.info += "INCOMPLETE PRINT"
 				else
 					report.info += "[prints]"
