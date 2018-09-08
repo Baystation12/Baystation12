@@ -1,6 +1,0 @@
-author: "Textor44"
-delete-after: True
-changes: 
-  - bugfix: "Catwalks can now be cleaned by mops and soap by simply clicking on them. Janitors everywhere rejoice at having to do less work."
-  - tweak: "Soap now takes a longer time than a mop to scrub floors. Janitors everywhere grumble at having to take longer at doing their job."
-  - tweak: "Soap no longer can be used to knock people over by dragging them onto it. Janitors everywhere are sad they can no longer prank people as easily."
