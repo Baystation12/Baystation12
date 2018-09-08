@@ -78,10 +78,13 @@ var/list/slot_equipment_priority = list( \
 
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
-/mob/proc/equip_to_appropriate_slot(obj/item/W)
+/mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
 	if(!istype(W)) return 0
 
 	for(var/slot in slot_equipment_priority)
+		if(skip_store)
+			if(slot == slot_s_store || slot == slot_l_store || slot == slot_r_store)
+				continue
 		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return 1
 
