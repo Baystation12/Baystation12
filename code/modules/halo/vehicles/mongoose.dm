@@ -23,6 +23,7 @@
 
 /obj/vehicles/mongoose/update_object_sprites()
 	. = ..()
+	update_occupant_weight()
 	var/list/passengers = get_occupants_in_position("passenger")
 	var/list/offsets_to_use = sprite_offsets["[dir]"]
 	var/list/passenger_offset = MONGOOSE_BASE_PASSENGER_OFFSETS["[dir]"]
@@ -36,6 +37,17 @@
 			underlays += pass_img
 		else
 			overlays += pass_img
+
+/obj/vehicles/mongoose/proc/update_occupant_weight()
+	var/slowdown_amount = 0
+	for(var/mob/living/carbon/human/occupant in occupants)
+	//Ripped from human_movement.dm
+		for(var/slot = slot_first to slot_last)
+			var/obj/item/I = occupant.get_equipped_item(slot)
+			if(I)
+				slowdown_amount += I.slowdown_general
+				slowdown_amount += I.slowdown_per_slot[slot]
+	vehicle_move_delay = initial(vehicle_move_delay) + slowdown_amount
 
 #undef MONGOOSE_BASE_PASSENGER_OFFSETS
 //Mongoose component profile define//
