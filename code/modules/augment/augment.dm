@@ -19,14 +19,14 @@
 		onInstall()
 
 /obj/item/organ/internal/augment/proc/onInstall()
-
+	return
 
 /obj/item/organ/internal/augment/removed(var/mob/living/user, var/drop_organ=1)
 	onRemove()
 	..()
 
 /obj/item/organ/internal/augment/proc/onRemove()
-
+	return
 
 /obj/item/organ/internal/augment/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isScrewdriver(W) && allowed_organs.len > 1)
@@ -41,7 +41,6 @@
 /obj/item/organ/internal/augment/proc/update_parent_organ()
 	//This tries to match a parent organ to an augment slot
 	//This is intended to match the possible positions to a parent organ
-	/
 	//Update description
 	desc = initial(desc)
 	desc += " It is configured to be attached to the "
