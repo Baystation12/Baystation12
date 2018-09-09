@@ -1429,6 +1429,7 @@
 #include "code\modules\halo\covenant\antimatter_bomb.dm"
 #include "code\modules\halo\covenant\banshee.dm"
 #include "code\modules\halo\covenant\bed.dm"
+#include "code\modules\halo\covenant\chair.dm"
 #include "code\modules\halo\covenant\drone.dm"
 #include "code\modules\halo\covenant\energybarricade.dm"
 #include "code\modules\halo\covenant\engineer.dm"
