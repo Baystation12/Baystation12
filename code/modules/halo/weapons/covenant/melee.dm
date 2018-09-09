@@ -129,8 +129,15 @@
 				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
 				flick("blade burnout",src)
 				spawn(5)
+					var/mob/living/M = src.loc
+					if(istype(M))
+						//burn whoever tried to pick us up
+						M.apply_damage(75, BURN, def_zone = pick(BP_L_HAND, BP_R_HAND))
+					else
+						//burn everyone nearby
+						for(var/mob/living/L in range(0,src))
+							L.apply_damage(15, BURN)
 					qdel(src)
-					src.loc.ex_act(1)
 			else
 				deactivate(user)
 				visible_message("<span class='notice'>\The [src] disappears in a flash of light.</span>")
