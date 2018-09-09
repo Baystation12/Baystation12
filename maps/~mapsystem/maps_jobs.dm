@@ -11,7 +11,7 @@
 	if(S.type in J.blacklisted_species)
 		return TRUE
 	if(J.whitelisted_species.len && !(S.type in J.whitelisted_species))
-		return FALSE
+		return TRUE
 
 	var/list/whitelist = species_to_job_whitelist[S.type]
 	if(whitelist)
