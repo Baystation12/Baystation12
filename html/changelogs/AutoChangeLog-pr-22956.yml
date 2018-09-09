@@ -1,6 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - tweak: "Signallers no longer give visible or audible feedback that they received data. There's circuits for that and frankly we were all thinking of killing the roboticist."
-  - rscadd: "New filter circuits, so that you can discriminate properly"
-  - bugfix: "Fixed hypoinjector circuit not injecting"
