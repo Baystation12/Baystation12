@@ -8,3 +8,7 @@
 	emote_hear = list("blinks owlishly","shuffles its robe")
 	emote_see = list("harrumphs","wheezes")
 	speak_chance = 1
+
+/mob/living/simple_animal/prophet/death(gibbed, deathmessage = "dies!", show_dead_message)
+	. = ..()
+	ticker.mode.handle_mob_death(src)
