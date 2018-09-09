@@ -2,17 +2,15 @@
 
 	#include "overall_overmap.dm"
 
-	#include "../covenant_ships/kig_yar_pirates/includes.dm"
-	#include "../Exoplanet Research/includes.dm"
+	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
+	#include "../first_contact/maps/Exoplanet Research/includes.dm"
 
-	#include "../Exoplanet Icy/includes.dm"
+	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
 
-	#include "../Asteroid Listening Post/includes.dm"
+	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
 
-	#include "../Exoplanet Mining/includes.dm"
-
-	#include "maps/corvette_spawns.dm"
-	#include "maps/UNSC_Corvette.dmm"
+	#include "../overmap_ships/nh_overmap.dm"
+	#include "../overmap_ships/om_ship_areas.dm"
 
 	#include "maps/ccv_star_spawns.dm"
 	#include "maps/CCV_Star.dmm"
@@ -23,8 +21,11 @@
 	#include "maps/sbs_spawns.dm"
 	#include "maps/CCV_Slow_But_Steady.dmm"
 
+	#include "../first_contact/maps/UNSC_Bertels/includes.dm"
+
 	#include "overall_outfits.dm"
 	#include "overall_jobdefs.dm"
+	#include "mapdef.dm"
 
 	#define using_map_DATUM /datum/map/first_contact
 

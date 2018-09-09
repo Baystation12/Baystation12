@@ -131,6 +131,13 @@
 	gauge_icon = "indicator_emergency_double"
 	volume = 10
 
+/obj/item/weapon/tank/emergency/oxygen/odst
+	name = "extended-capacity emergency oxygen tank"
+	icon_state = "ODST internal tank"
+	volume = 5
+	canremove = 0
+	icon_state = "emergency_engi"
+	item_state = null
 
 /obj/item/weapon/tank/emergency/nitrogen
 	name = "emergency nitrogen tank"

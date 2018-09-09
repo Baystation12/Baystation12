@@ -280,6 +280,12 @@
 			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 				rig_supply = rig.air_supply
 
+//Work in progress		if(istype(wear_suit,/obj/item/clothing/suit/armor/special))
+//			var/obj/item/clothing/suit/armor/special = wear_suit
+//			for(var/datum/armourspecials/internal_air_supply/s in misc.armourspecials)
+//				rig_supply = s.internal_air_tank
+//Work in progress
+
 		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & AIRTIGHT)) || (head && (head.item_flags & AIRTIGHT)))))
 			internal = null
 

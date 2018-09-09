@@ -33,7 +33,7 @@
 		)
 
 /datum/species/kig_yar/skirmisher
-	name = "Kig-Yar - Tvaoan"
+	name = "Tvaoan Kig-Yar"
 	name_plural = "Kig-Yar"
 	blurb = ""
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
@@ -67,4 +67,4 @@
 	icon = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	icon_state = "h_quills"
 	name = "Quills"
-	species_allowed = list("Kig-Yar - Tvaoan")
+	species_allowed = list("Tvaoan Kig-Yar")

@@ -3,14 +3,14 @@
 	name = "Example"
 	full_name = "The Example"
 	path = "example"
-
-	lobby_icon = 'maps/example/example_lobby.dmi'
+	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 
 	station_levels = list(1,2)
 	contact_levels = list(1,2)
 	player_levels = list(1,2)
 
-	allowed_spawns = list("Arrivals Shuttle")
+	allowed_jobs = list(/datum/job/example)
+	allowed_spawns = list("Test Spawn")
 
 	shuttle_docked_message = "The shuttle has docked."
 	shuttle_leaving_dock = "The shuttle has departed from home dock."

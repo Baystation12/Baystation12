@@ -3,6 +3,7 @@
 
 	#include "../../code/modules/halo/lobby_music/halo_lobby_music.dm"
 	#include "death_asteroid_areas.dm"
+	#include "../overmap_ships/om_ship_areas.dm"
 	#include "death_asteroid_spawns.dm"
 
 	#include "mode_teamslayer.dm"

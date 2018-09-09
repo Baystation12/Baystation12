@@ -15,6 +15,9 @@
 /area/om_ships/star
 	name = "CCV Star"
 
+/area/om_ships/deliverance
+	name = "CCV Deliverance"
+
 /area/om_ships/comet
 	name = "CCV Comet"
 
@@ -49,15 +52,8 @@
 
 /area/om_ships/unscpatrol
 	name = "UNSC Patrol Vessel"
-
-/area/om_ships/unscpatrol/starboardbattery
-	name = "UNSC Corvette Starboard Gun Battery"
-
-/area/om_ships/unscpatrol/portbattery
-	name = "UNSC Corvette Port Gun Battery"
-
-/area/om_ships/unscpatrol/portrockets
- 	name = "UNSC Corvette Port Rocket Pods"
-
-/area/om_ships/unscpatrol/starboardrockets
- 	name = "UNSC Corvette Starboard Rocket Pods"
+	has_gravity = 1
+	power_environ = 1
+	power_light = 1
+	poweralm = 1
+	requires_power = 0

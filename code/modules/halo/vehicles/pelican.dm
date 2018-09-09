@@ -23,6 +23,8 @@
 
 	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
 
+	vehicle_size = 128
+
 /obj/vehicles/air/pelican/update_object_sprites()
 
 
@@ -80,6 +82,8 @@
 	occupants = list(13,1)
 
 	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
+
+	vehicle_size = 128
 
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"

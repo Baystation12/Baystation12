@@ -81,6 +81,10 @@
 	if(Allow_Spacemove())
 		return 1
 
+	var/obj/effect/antigrav/A = locate() in src.loc
+	if(A)
+		return 1
+
 	if(Check_Shoegrip())	//scaling hull with magboots
 		for(var/turf/simulated/T in trange(1,src))
 			if(T.density)

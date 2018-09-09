@@ -19,7 +19,7 @@
 	name = "Pulse Turret"
 	desc = "Fires beams of pure light at opposing vessels"
 	icon = 'code/modules/halo/machinery/pulse_turret.dmi'
-	icon_state = "pulse_turret"
+	icon_state = "pulse_turret_2"
 	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/pulse_laser
 	round_reload_time = 5 SECONDS

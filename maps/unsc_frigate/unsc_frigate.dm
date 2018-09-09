@@ -6,7 +6,7 @@
 
 	#include "../first_contact/overall_overmap.dm"
 
-	#include "../first_contact/maps/corvette_spawns.dm"
+	#include "../first_contact/maps//UNSC_Thorin/spawns_jobs.dm"
 
 	#define using_map_DATUM /datum/map/unsc_frigate
 

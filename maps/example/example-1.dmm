@@ -2,40 +2,59 @@
 "b" = (/turf/simulated/wall,/area/constructionsite)
 "c" = (/turf/simulated/floor/tiled,/area/constructionsite)
 "d" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/constructionsite)
-"e" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/constructionsite)
-"f" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/constructionsite)
-"g" = (/obj/effect/landmark/start,/turf/simulated/floor/tiled,/area/constructionsite)
-"h" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/constructionsite)
-"i" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/constructionsite)
-"j" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/turf/simulated/floor/tiled,/area/constructionsite)
-"k" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/constructionsite)
-"l" = (/obj/effect/landmark{name = "tdome1"},/turf/simulated/floor/tiled,/area/constructionsite)
+"e" = (/obj/effect/landmark{name = "tdome1"},/turf/simulated/floor/tiled,/area/constructionsite)
+"f" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/constructionsite)
+"g" = (/obj/machinery/light_switch{pixel_x = 25},/turf/simulated/floor/tiled,/area/constructionsite)
+"h" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/constructionsite)
+"i" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
+"j" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/constructionsite)
+"k" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/constructionsite)
+"l" = (/turf/simulated/wall/iron,/area/shuttle/escape)
 "m" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/tiled,/area/constructionsite)
-"n" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/tiled,/area/constructionsite)
-"o" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled,/area/constructionsite)
-"p" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/turf/simulated/floor/tiled,/area/constructionsite)
-"q" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/empty,/turf/simulated/floor/tiled,/area/constructionsite)
-"r" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/turf/simulated/floor/tiled,/area/constructionsite)
-"s" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/constructionsite)
-"t" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
-"u" = (/obj/machinery/light_switch{pixel_x = -25},/turf/simulated/floor/tiled,/area/constructionsite)
-"v" = (/obj/machinery/light_switch{pixel_x = 25},/turf/simulated/floor/tiled,/area/constructionsite)
-"w" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/constructionsite)
-"x" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
-"y" = (/turf/simulated/wall/iron,/area/shuttle/escape)
-"z" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/shuttle/escape)
-"A" = (/obj/machinery/computer/shuttle_control{shuttle_tag = "Example"},/turf/simulated/floor/plating,/area/shuttle/escape)
-"B" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_starboard"; pixel_x = 28},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_port"; pixel_x = -28},/obj/effect/shuttle_landmark/lower_level,/turf/simulated/floor/plating,/area/shuttle/escape)
-"C" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/shuttle/escape)
-"D" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_port_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
-"E" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_starboard_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
-"F" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "lower_level_dock"; pixel_x = -8; pixel_y = -25},/turf/simulated/floor,/area/constructionsite)
-"G" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "lower_level_dock_hatch"},/turf/simulated/floor,/area/constructionsite)
-"H" = (/turf/simulated/floor,/area/constructionsite)
-"I" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/constructionsite)
-"J" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
+"n" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled,/area/constructionsite)
+"o" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/tiled,/area/constructionsite)
+"p" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/shuttle/escape)
+"q" = (/obj/machinery/computer/shuttle_control{shuttle_tag = "Example"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"r" = (/obj/machinery/light_switch{pixel_x = -25},/turf/simulated/floor/tiled,/area/constructionsite)
+"s" = (/obj/effect/landmark/start,/turf/simulated/floor/tiled,/area/constructionsite)
+"t" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_starboard"; pixel_x = 28},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_port"; pixel_x = -28},/obj/effect/shuttle_landmark/lower_level,/turf/simulated/floor/plating,/area/shuttle/escape)
+"u" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/constructionsite)
+"v" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/turf/simulated/floor/tiled,/area/constructionsite)
+"w" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/empty,/turf/simulated/floor/tiled,/area/constructionsite)
+"x" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_port_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"y" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/shuttle/escape)
+"z" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_starboard_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"A" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "lower_level_dock_hatch"},/turf/simulated/floor,/area/constructionsite)
+"B" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "lower_level_dock"; pixel_x = -8; pixel_y = -25},/turf/simulated/floor,/area/constructionsite)
+"C" = (/turf/simulated/floor,/area/constructionsite)
+"D" = (/obj/effect/landmark/start/example,/turf/simulated/floor/tiled,/area/constructionsite)
+"E" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/turf/simulated/floor/tiled,/area/constructionsite)
+"F" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
+"G" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/constructionsite)
+"H" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/constructionsite)
+"I" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/turf/simulated/floor/tiled,/area/constructionsite)
+"J" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/constructionsite)
+"K" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
 
 (1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabcccdcccccdcccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabceeecfbfcccccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabceeecfffccccgbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabheeeifffccccjbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabcccccccccckccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaalllaabccccccccccmnobaaaaaa
+aaaaaaaaaaaaaaaaaaaaaapqpaabrcccccsccccccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaptpbbbccccucccccvnwbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaxyzABCccccccDcccEccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaalllbbbhcFFFcccccccjbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabGcFFFccccccccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabHcFFFccccccccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabIccJcccccJcccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -45,24 +64,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabcccdcccccdcccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabclllcwbwcccccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabclllcwwwccccvbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabelllxwwwccccfbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabccccccccccsccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaayyyaabccccccccccmonbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaazAzaabucccccgccccccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaazBzbbbccccIcccccpoqbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaDCEGFHccccccccccrccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaayyybbbectttcccccccfbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabhctttccccccccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabictttccccccccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabjcckccccckcccbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaJaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

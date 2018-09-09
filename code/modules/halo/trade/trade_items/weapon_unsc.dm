@@ -58,23 +58,23 @@
 	category = "weapon_unsc"
 	bonus_items = list(/obj/item/ammo_magazine/a762_box_ap)
 
-/datum/trade_item/m392_dmr
-	name = "M392 Designated Marksman Rifle"
-	item_type = /obj/item/weapon/gun/projectile/m392_dmr
-	quantity = 1
-	value = 17000
-	category = "weapon_unsc"
+///datum/trade_item/m392_dmr
+//	name = "M392 Designated Marksman Rifle"
+//	item_type = /obj/item/weapon/gun/projectile/m392_dmr
+//	quantity = 1
+//	value = 17000
+//	category = "weapon_unsc"
 
-/datum/trade_item/m41_ssr
-	name = "M41 rocket launcher"
-	item_type = /obj/item/weapon/gun/launcher/rocket/m41_ssr
-	quantity = 1
-	value = 25000
-	category = "weapon_unsc"
+///datum/trade_item/m41_ssr
+//	name = "M41 rocket launcher"
+//	item_type = /obj/item/weapon/gun/launcher/rocket/m41_ssr
+//	quantity = 1
+//	value = 25000
+//	category = "weapon_unsc"
 
-/datum/trade_item/srs99_sniper
-	name = "SRS99 sniper rifle"
-	item_type = /obj/item/weapon/gun/projectile/srs99_sniper
-	quantity = 1
-	value = 35000
-	category = "weapon_unsc"
+///datum/trade_item/srs99_sniper
+//	name = "SRS99 sniper rifle"
+//	item_type = /obj/item/weapon/gun/projectile/srs99_sniper
+//	quantity = 1
+//	value = 35000
+//	category = "weapon_unsc"

@@ -1,4 +1,8 @@
 
+#define BIOFOAM_PROB_REMOVE_EMBEDDED 30
+#define BIOFOAM_PROB_OVERDOSE_DAMAGING 35
+#define BIOFOAM_PROB_OVERDOSE_WARNING 50
+
 /datum/reagent/triadrenaline
 	name = "Tri-Adrenaline"
 	description = "An extremely powerful synthetic stimulant. Capable of restarting a human heart."
@@ -44,10 +48,12 @@
 	scannable = 1
 	flags = AFFECTS_DEAD
 
-/datum/reagent/biofoam/proc/check_and_stop_bleeding(var/obj/item/organ/o)
+/datum/reagent/biofoam/proc/check_and_stop_bleeding(var/obj/item/organ/external/o)
 	if(o.status & ORGAN_BLEEDING)
-		o.status &= ~ORGAN_BLEEDING
-		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
+		if(istype(o))
+			o.clamp()
+			o.update_damages()
+			to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
 
 /datum/reagent/biofoam/proc/mend_external(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/o in H.organs)
@@ -59,7 +65,7 @@
 		if(o.status & ORGAN_BROKEN)
 			o.status &= ~ORGAN_BROKEN
 			H.next_pain_time = world.time //Overrides the next pain timer
-			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>")
+			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>",10)
 			check_and_stop_bleeding(o)
 
 /datum/reagent/biofoam/proc/mend_internal(var/mob/living/carbon/human/H)
@@ -76,7 +82,7 @@
 			var/datum/wound/W = wounds
 			if(W.bleed_timer > 0)
 				W.bleed_timer = 0
-				to_chat(o.owner,"<span class = 'notice'>You feel the bleeding in your [o.name] slow.</span>")
+				to_chat(o.owner,"<span class = 'notice'>You feel the bleeding in your [o.name] slow, then stop.</span>")
 				W.bandaged = 1
 				W.salved = 1
 				o.update_damages()
@@ -85,7 +91,7 @@
 	for(var/obj/item/organ/external/o in M.bad_external_organs)
 		for(var/datum/wound/w in o.wounds)
 			for(var/obj/embedded in w.embedded_objects)
-				if(!prob(25))
+				if(!prob(BIOFOAM_PROB_REMOVE_EMBEDDED))
 					continue
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
 				embedded.loc = M.loc //And placing it on the ground below
@@ -106,10 +112,10 @@
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(prob(20))
+		if(prob(BIOFOAM_PROB_OVERDOSE_DAMAGING))
 			for(var/o in H.internal_organs)
 				var/obj/item/organ/O = o
-				var/dam = rand(10,50)
+				var/dam = rand((O.min_bruised_damage*0.5) ,(O.min_broken_damage*1.5))
 				O.damage += dam
 				if(dam < O.min_broken_damage)
 					dam = 0
@@ -117,6 +123,6 @@
 					dam = 1
 				to_chat(M,"<span class ='userdanger'>You feel [dam ? "your [O.name] collapse" : "immense pressure on your [O.name]" ].</span>")
 			holder.remove_reagent("biofoam",volume)
-		else if (prob(35))
+		else if (prob(BIOFOAM_PROB_OVERDOSE_WARNING))
 			var/obj/item/organ/O = pick(H.internal_organs)
 			to_chat(M,"<span class ='danger'>You feel your [O.name] being crushed.</span>")

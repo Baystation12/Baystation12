@@ -38,7 +38,7 @@
 	icon_state = "missile_pod"
 	fire_sound = 'code/modules/halo/sounds/rocket_pod_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/missile
-	round_reload_time = 2.5 SECONDS
+	round_reload_time = 25 SECONDS
 	rounds_loaded = 4
 	max_rounds_loadable = 4
 

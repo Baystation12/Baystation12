@@ -62,8 +62,10 @@ turf/c_airblock(turf/other)
 	if(other.z != src.z)
 		if(other.z < src.z)
 			if(!istype(src, /turf/simulated/open)) return BLOCKED
+			return src.CanZPass(src, DOWN)
 		else
 			if(!istype(other, /turf/simulated/open)) return BLOCKED
+			return other.CanZPass(other, DOWN)
 	#endif
 
 	if(((blocks_air & ZONE_BLOCKED) || (other.blocks_air & ZONE_BLOCKED)))

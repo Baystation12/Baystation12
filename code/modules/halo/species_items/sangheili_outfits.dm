@@ -3,6 +3,7 @@
 
 	uniform = /obj/item/clothing/under/covenant/sangheili
 	l_ear = /obj/item/device/radio/headset/covenant
+	l_hand = /obj/item/weapon/melee/energy/elite_sword/dagger
 
 /decl/hierarchy/outfit/sangheili/minor
 	name = "Sangheili (Minor)"
@@ -69,7 +70,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/specops
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/projectile/type51carbine
-	belt = /obj/item/weapon/melee/energy/elite_sword
+	belt = /obj/item/weapon/gun/energy/plasmapistol
 	shoes = /obj/item/clothing/shoes/sangheili/specops
 	head = /obj/item/clothing/head/helmet/sangheili/specops
 	l_pocket = /obj/item/ammo_magazine/type51mag
@@ -83,7 +84,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/eva
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/melee/energy/elite_sword
+	belt = /obj/item/weapon/gun/energy/plasmapistol
 	shoes = /obj/item/clothing/shoes/sangheili/eva
 	head = /obj/item/clothing/head/helmet/sangheili/eva
 	l_pocket = /obj/item/weapon/grenade/plasma

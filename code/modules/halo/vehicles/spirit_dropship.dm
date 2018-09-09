@@ -1,5 +1,5 @@
 /obj/vehicles/air/spirit_dropship
-	name = "Type-25 Troop Carrier"
+	name = "Type-25 \"Spirit\" Troop Carrier"
 	desc = "A large, tuning fork shaped ship with a underslung heavy plasma cannon."
 
 	icon = 'code/modules/halo/vehicles/spirit.dmi'
@@ -22,6 +22,8 @@
 	occupants = list(15,0)
 
 	exposed_positions = list()//No-one can get hit when inside this.
+
+	vehicle_size = 128
 
 /obj/vehicles/air/spirit_dropship/proc/update_pixel_xy()
 	pixel_x = 0

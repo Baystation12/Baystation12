@@ -1,6 +1,6 @@
 
 /obj/vehicles/ghost
-	name = "Type-32 Rapid Assault Vehicle"
+	name = "Type-32 \"Ghost\" Rapid Assault Vehicle"
 	desc = ""
 
 	bound_height = 32
@@ -17,6 +17,8 @@
 
 	icon = 'code/modules/halo/vehicles/ghost.dmi'
 	icon_state = "base"
+
+	vehicle_size = 16
 
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 300
