@@ -172,6 +172,6 @@
 	return ..()
 
 /turf/simulated/Initialize()
-	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()
 	. = ..()
