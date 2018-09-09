@@ -128,9 +128,13 @@
 		return success_smash(user)
 	return fail_smash(user)
 
-/turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/wall/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+	if(!construction_stage && try_graffiti(user, W))
+		return
+
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return

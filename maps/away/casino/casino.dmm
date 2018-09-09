@@ -522,7 +522,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bA" = (
-/obj/item/weapon/cigbutt/professionals{
+/obj/item/trash/cigbutt/professionals{
 	pixel_x = 4;
 	pixel_y = -5
 	},
@@ -541,7 +541,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bB" = (
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2278,7 +2278,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fX" = (
@@ -2573,7 +2573,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "gE" = (
-/obj/item/weapon/cigbutt/menthol,
+/obj/item/trash/cigbutt/menthol,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "gG" = (
@@ -2826,7 +2826,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hB" = (
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hC" = (
@@ -3877,7 +3877,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "kg" = (
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "kh" = (
@@ -4542,7 +4542,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lH" = (
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lI" = (

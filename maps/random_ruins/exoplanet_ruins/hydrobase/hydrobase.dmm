@@ -286,7 +286,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growD)
 "aR" = (
-/obj/item/weapon/cigbutt/woodbutt,
+/obj/item/trash/cigbutt/woodbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growD)
 "aS" = (
@@ -296,7 +296,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/hydrobase/station/growA)
 "aT" = (
-/obj/item/weapon/cigbutt/menthol,
+/obj/item/trash/cigbutt/menthol,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "aU" = (
@@ -652,7 +652,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "bH" = (
-/obj/item/weapon/cigbutt/woodbutt,
+/obj/item/trash/cigbutt/woodbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growF)
 "bI" = (
@@ -686,7 +686,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growD)
 "bM" = (
-/obj/item/weapon/cigbutt,
+/obj/item/trash/cigbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growD)
 "bN" = (
@@ -869,7 +869,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/item/weapon/cigbutt/woodbutt,
+/obj/item/trash/cigbutt/woodbutt,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cj" = (
@@ -904,7 +904,7 @@
 /area/map_template/hydrobase/station/growA)
 "co" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/weapon/cigbutt/menthol,
+/obj/item/trash/cigbutt/menthol,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "cp" = (
@@ -1127,7 +1127,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/hydrobase/station/growC)
 "cQ" = (
-/obj/item/weapon/cigbutt/woodbutt,
+/obj/item/trash/cigbutt/woodbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growC)
 "cR" = (
@@ -1178,7 +1178,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "cX" = (
-/obj/item/weapon/cigbutt/woodbutt,
+/obj/item/trash/cigbutt/woodbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "cY" = (
@@ -1483,7 +1483,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growC)
 "dF" = (
-/obj/item/weapon/cigbutt,
+/obj/item/trash/cigbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growC)
 "dG" = (
@@ -2119,7 +2119,7 @@
 /area/map_template/hydrobase/station/processing)
 "eU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/weapon/cigbutt/woodbutt,
+/obj/item/trash/cigbutt/woodbutt,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
 "eW" = (
@@ -2681,7 +2681,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
 "gd" = (
-/obj/item/weapon/cigbutt,
+/obj/item/trash/cigbutt,
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growB)
 "ge" = (
