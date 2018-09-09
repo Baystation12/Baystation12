@@ -18,6 +18,11 @@ var/list/nuke_disks = list()
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 	antag_tags = list(MODE_MERCENARY)
+	cinematic_icon_states = list(
+		"intro_nuke" = 35,
+		"summary_nukewin",
+		"summary_nukefail"
+	)
 
 //checks if L has a nuke disk on their person
 /datum/game_mode/nuclear/proc/check_mob(mob/living/L)

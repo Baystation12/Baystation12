@@ -73,6 +73,10 @@
 	src.key = key
 	..()
 
+/datum/mind/Destroy()
+	SSticker.minds -= src
+	. = ..()
+
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
 		world.log << "## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn"
@@ -119,7 +123,7 @@
 	recipient << browse(output,"window=memory")
 
 /datum/mind/proc/edit_memory()
-	if(!ticker || !ticker.mode)
+	if(GAME_STATE <= RUNLEVEL_SETUP)
 		alert("Not before round-start!", "Alert")
 		return
 
@@ -244,7 +248,7 @@
 				var/objective_type = "[objective_type_capital][objective_type_text]"//Add them together into a text string.
 
 				var/list/possible_targets = list("Free objective")
-				for(var/datum/mind/possible_target in ticker.minds)
+				for(var/datum/mind/possible_target in SSticker.minds)
 					if ((possible_target != src) && istype(possible_target.current, /mob/living/carbon/human))
 						possible_targets += possible_target.current
 
@@ -499,10 +503,7 @@
 	else
 		mind = new /datum/mind(key)
 		mind.original = src
-		if(ticker)
-			ticker.minds += mind
-		else
-			world.log << "## DEBUG: mind_initialize(): No ticker ready yet! Please inform Carn"
+		SSticker.minds += mind
 	if(!mind.name)	mind.name = real_name
 	mind.current = src
 	if(player_is_antag(mind))

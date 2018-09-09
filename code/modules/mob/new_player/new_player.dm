@@ -31,7 +31,7 @@
 	output +="<hr>"
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
-	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
+	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
 			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
 		else
@@ -71,16 +71,16 @@
 /mob/new_player/Stat()
 	. = ..()
 
-	if(statpanel("Lobby") && ticker)
+	if(statpanel("Lobby"))
 		if(check_rights(R_INVESTIGATE, 0, src))
-			stat("Game Mode:", "[ticker.mode || master_mode][ticker.hide_mode ? " (Secret)" : ""]")
+			stat("Game Mode:", "[SSticker.mode ? SSticker.mode.name : SSticker.master_mode] ([SSticker.master_mode])")
 		else
 			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 
-		if(ticker.current_state == GAME_STATE_PREGAME)
-			stat("Time To Start:", "[ticker.pregame_timeleft][round_progressing ? "" : " (DELAYED)"]")
+		if(GAME_STATE <= RUNLEVEL_LOBBY)
+			stat("Time To Start:", "[round(SSticker.pregame_timeleft/10)][SSticker.round_progressing ? "" : " (DELAYED)"]")
 			stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
@@ -100,7 +100,7 @@
 		return 1
 
 	if(href_list["ready"])
-		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
+		if(GAME_STATE <= RUNLEVEL_LOBBY) // Make sure we don't ready up after the round has started
 			ready = text2num(href_list["ready"])
 		else
 			ready = 0
@@ -110,7 +110,7 @@
 		new_player_panel()
 
 	if(href_list["observe"])
-		if(!(initialization_stage&INITIALIZATION_COMPLETE))
+		if(GAME_STATE < RUNLEVEL_LOBBY)
 			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
 			return
 
@@ -153,7 +153,7 @@
 
 	if(href_list["late_join"])
 
-		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
+		if(GAME_STATE != RUNLEVEL_GAME)
 			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 			return
 		LateChoices() //show the latejoin job selection menu
@@ -289,7 +289,7 @@
 
 	if(src != usr)
 		return 0
-	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
+	if(GAME_STATE != RUNLEVEL_GAME)
 		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 		return 0
 	if(!config.enter_allowed)
@@ -339,18 +339,18 @@
 		A.on_mob_init()
 
 		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
-		ticker.mode.handle_latejoin(character)
+		SSticker.mode.handle_latejoin(character)
 
 		qdel(C)
 		qdel(src)
 		return
 
-	ticker.mode.handle_latejoin(character)
+	SSticker.mode.handle_latejoin(character)
 	GLOB.universe.OnPlayerLatejoin(character)
 	if(job_master.ShouldCreateRecords(job.title))
 		if(character.mind.assigned_role != "Robot")
 			CreateModularRecord(character)
-			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
+			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
@@ -364,7 +364,7 @@
 
 
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
-	if (ticker.current_state == GAME_STATE_PLAYING)
+	if (GAME_STATE == RUNLEVEL_GAME)
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
@@ -467,7 +467,7 @@
 
 	new_character.lastarea = get_area(spawn_turf)
 
-	if(ticker.random_players)
+	if(GLOB.random_players)
 		new_character.gender = pick(MALE, FEMALE)
 		client.prefs.real_name = random_name(new_character.gender)
 		client.prefs.randomize_appearance_and_body_for(new_character)

@@ -1,23 +1,3 @@
-//Timing subsystem
-//Don't run if there is an identical unique timer active
-//if the arguments to addtimer are the same as an existing timer, it doesn't create a new timer, and returns the id of the existing timer
-#define TIMER_UNIQUE		0x1
-//For unique timers: Replace the old timer rather then not start this one
-#define TIMER_OVERRIDE		0x2
-//Timing should be based on how timing progresses on clients, not the sever.
-//	tracking this is more expensive,
-//	should only be used in conjuction with things that have to progress client side, such as animate() or sound()
-#define TIMER_CLIENT_TIME   0x4
-//Timer can be stopped using deltimer()
-#define TIMER_STOPPABLE     0x8
-//To be used with TIMER_UNIQUE
-//prevents distinguishing identical timers with the wait variable
-#define TIMER_NO_HASH_WAIT 0x10
-
-#define TIMER_NO_INVOKE_WARNING 600 //number of byond ticks that are allowed to pass before the timer subsystem thinks it hung on something
-
-#define TIMER_ID_NULL -1
-
 //For servers that can't do with any additional lag, set this to none in flightpacks.dm in subsystem/processing.
 #define FLIGHTSUIT_PROCESSING_NONE 0
 #define FLIGHTSUIT_PROCESSING_FULL 1
@@ -43,12 +23,13 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
-#define SS_INIT_GARBAGE          14
-#define SS_INIT_CHEMISTRY        13
-#define SS_INIT_MATERIALS        12
-#define SS_INIT_PLANTS           11
-#define SS_INIT_ANTAGS           10
-#define SS_INIT_CULTURE          9
+#define SS_INIT_GARBAGE          15
+#define SS_INIT_CHEMISTRY        14
+#define SS_INIT_MATERIALS        13
+#define SS_INIT_PLANTS           12
+#define SS_INIT_ANTAGS           11
+#define SS_INIT_CULTURE          10
+#define SS_INIT_MISC             9
 #define SS_INIT_CHAR_SETUP       8
 #define SS_INIT_SKYBOX           7
 #define SS_INIT_MAPPING          6
@@ -63,9 +44,10 @@
 #define SS_INIT_ALARM           -3
 #define SS_INIT_SHUTTLE         -4
 #define SS_INIT_LIGHTING        -5
-#define SS_INIT_XENOARCH       -50
-#define SS_INIT_BAY_LEGACY    -200
-#define SS_INIT_UNIT_TESTS    -250
+#define SS_INIT_XENOARCH        -10
+#define SS_INIT_BAY_LEGACY      -12
+#define SS_INIT_TICKER          -20
+#define SS_INIT_UNIT_TESTS      -100
 
 // SS runlevels
 

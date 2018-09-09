@@ -376,7 +376,7 @@ var/bomb_set
 	GLOB.moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 
 /obj/item/weapon/disk/nuclear/proc/check_z_level()
-	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
+	if(!(istype(SSticker.mode, /datum/game_mode/nuclear)))
 		GLOB.moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)

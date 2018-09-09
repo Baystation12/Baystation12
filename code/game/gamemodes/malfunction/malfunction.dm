@@ -9,6 +9,11 @@
 	auto_recall_shuttle = 0
 	antag_tags = list(MODE_MALFUNCTION)
 	disabled_jobs = list("AI")
+	cinematic_icon_states = list(
+		"intro_malf" = 76,
+		"summary_malf",
+		null
+	)
 
 /datum/game_mode/malfunction/post_setup()
 	. = ..()

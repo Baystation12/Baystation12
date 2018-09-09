@@ -51,9 +51,6 @@
 
 	var/dat
 
-	if (!( ticker ))
-		return
-
 	dat += "<hr/><br/><b>[storage_name]</b><br/>"
 	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
 	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
@@ -391,10 +388,6 @@
 		if(occupant.mind.objectives.len)
 			occupant.mind.objectives = null
 			occupant.mind.special_role = null
-	//else
-		//if(ticker.mode.name == "AutoTraitor")
-			//var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
-			//current_mode.possible_traitors.Remove(occupant)
 
 	// Delete them from datacore.
 	var/datum/computer_file/report/crew_record/R = get_crewmember_record(occupant.real_name)
