@@ -46,7 +46,7 @@
 	var/min_gas = list("oxygen" = 5)
 	var/max_gas = list("phoron" = 1, "carbon_dioxide" = 5)
 
-	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
+	var/unsuitable_atmos_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
@@ -83,13 +83,14 @@
 			set_density(1)
 		return 0
 
+	handle_atmos()
+
 	if(health <= 0)
 		death()
 		return
 
 	if(health > maxHealth)
 		health = maxHealth
-
 
 	handle_stunned()
 	handle_weakened()
@@ -135,7 +136,6 @@
 					audible_emote("[pick(emote_hear)].")
 				if("emote_see")
 					visible_emote("[pick(emote_see)].")
-	handle_atmos()
 	return 1
 
 /mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)
@@ -145,7 +145,7 @@
 		return
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	if(environment)
+	if(!(SPACERES in mutations) && environment)
 
 		if(abs(environment.temperature - bodytemperature) > 40 )
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)
@@ -155,12 +155,12 @@
 			if(LAZYLEN(min_gas))
 				for(var/gas in min_gas)
 					if(environment.gas[gas] < min_gas[gas])
-						atmos_suitable = 0
+						atmos_suitable = FALSE
 						break
 			if(atmos_suitable && LAZYLEN(max_gas))
 				for(var/gas in max_gas)
 					if(environment.gas[gas] < max_gas[gas])
-						atmos_suitable = 0
+						atmos_suitable = FALSE
 						break
 
 	//Atmos effect
@@ -174,7 +174,7 @@
 		fire_alert = 0
 
 	if(!atmos_suitable)
-		adjustBruteLoss(unsuitable_atoms_damage)
+		adjustBruteLoss(unsuitable_atmos_damage)
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
