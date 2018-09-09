@@ -15,6 +15,9 @@
 /area/om_ships/star
 	name = "CCV Star"
 
+/area/om_ships/deliverance
+	name = "CCV Deliverance"
+
 /area/om_ships/comet
 	name = "CCV Comet"
 

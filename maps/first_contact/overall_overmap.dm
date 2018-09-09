@@ -38,6 +38,16 @@
 
 	map_bounds = list(2,76,76,26)
 
+/obj/effect/overmap/ship/CCV_deliverance
+	name = "CCV Deliverance"
+	desc = "An unarmed medical freighter with a safer, isolated design and a traditional white paintjob."
+
+	icon = 'maps/first_contact/deliverance.dmi'
+	icon_state = "ship"
+	fore_dir = WEST
+
+	map_bounds = list(9,52,70,25)
+
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
 	deck_gun_area = /area/om_ships/comet
