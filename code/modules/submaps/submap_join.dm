@@ -95,7 +95,7 @@
 		BITSET(character.hud_updateflag, IMPLOYAL_HUD)
 		BITSET(character.hud_updateflag, SPECIALROLE_HUD)
 
-		ticker.mode.handle_offsite_latejoin(character)
+		SSticker.mode.handle_offsite_latejoin(character)
 		GLOB.universe.OnPlayerLatejoin(character)
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
 		if(character.cannot_stand()) equip_wheelchair(character)

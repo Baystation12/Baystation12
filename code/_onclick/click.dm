@@ -173,7 +173,7 @@
 
 /mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
 
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
 		return 0
 
