@@ -27,9 +27,9 @@
 "A" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "lower_level_dock_hatch"},/turf/simulated/floor,/area/constructionsite)
 "B" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "lower_level_dock"; pixel_x = -8; pixel_y = -25},/turf/simulated/floor,/area/constructionsite)
 "C" = (/turf/simulated/floor,/area/constructionsite)
-"D" = (/obj/effect/landmark/start/example,/turf/simulated/floor/tiled,/area/constructionsite)
-"E" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/turf/simulated/floor/tiled,/area/constructionsite)
-"F" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
+"D" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/turf/simulated/floor/tiled,/area/constructionsite)
+"E" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
+"F" = (/obj/effect/landmark/start/example,/turf/simulated/floor/tiled,/area/constructionsite)
 "G" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/constructionsite)
 "H" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/constructionsite)
 "I" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/turf/simulated/floor/tiled,/area/constructionsite)
@@ -46,10 +46,10 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaabcccccccccckccbaaaaaa
 aaaaaaaaaaaaaaaaaaaaaalllaabccccccccccmnobaaaaaa
 aaaaaaaaaaaaaaaaaaaaaapqpaabrcccccsccccccbaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaptpbbbccccucccccvnwbaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaxyzABCccccccDcccEccbaaaaaa
-aaaaaaaaaaaaaaaaaaaaaalllbbbhcFFFcccccccjbaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaabGcFFFccccccccbaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaabHcFFFccccccccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaxyzABCccccccccccDccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaalllbbbhcEEEccFccccjbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabGcEEEccccccccbaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabHcEEEccccccccbaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaabIccJcccccJcccbaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
