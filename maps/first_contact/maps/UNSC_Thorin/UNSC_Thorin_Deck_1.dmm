@@ -397,7 +397,7 @@
 "hG" = (/obj/item/clothing/head/bomb_hood/security/colossus,/obj/item/clothing/suit/bomb_suit/security/colossus,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Armory)
 "hH" = (/obj/structure/table/rack,/obj/item/clothing/mask/balaclava/tactical,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Armory)
 "hI" = (/obj/structure/table/rack,/obj/item/clothing/head/helmet/tactical,/obj/item/clothing/head/helmet/tactical,/obj/item/clothing/head/helmet/tactical,/obj/item/clothing/head/helmet/tactical,/obj/item/clothing/head/helmet/tactical,/obj/item/clothing/head/helmet/tactical,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Armory)
-"hJ" = (/obj/item/clothing/suit/justice/zeal,/obj/item/clothing/suit/justice/zeal,/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Armory)
+"hJ" = (/obj/item/clothing/suit/justice/zeal,/obj/item/clothing/suit/justice/zeal,/obj/structure/table/rack,/obj/item/clothing/head/helmet/zeal,/obj/item/clothing/head/helmet/zeal,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Armory)
 "hK" = (/obj/structure/ladder,/turf/simulated/floor/plating,/area/corvette/unscthorin/starboardcrew)
 "hL" = (/turf/simulated/wall,/area/corvette/unscthorin/storageroom)
 "hM" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/cryodorm)

@@ -101,6 +101,7 @@
 	else
 		item_state = "Odst Helmet"
 		icon_state = "Helmet ODST"
+	update_clothing_icon()
 	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/cqb
@@ -125,6 +126,7 @@
 	else
 		item_state = "Odst Helmet CQB"
 		icon_state = "Helmet CQB"
+		update_clothing_icon()
 	. = ..()
 
 /obj/effect/odst_armour_set/sharpshooter
@@ -153,6 +155,7 @@
 	else
 		item_state = "Odst Helmet Sharpshooter"
 		icon_state = "Helmet Sharpshooter"
+		update_clothing_icon()
 	. = ..()
 
 /obj/effect/odst_armour_set/medic
@@ -181,6 +184,7 @@
 	else
 		item_state = "Odst Helmet Medic"
 		icon_state = "Helmet Medic"
+		update_clothing_icon()
 	. = ..()
 
 /obj/effect/odst_armour_set/engineer
@@ -204,6 +208,7 @@
 	else
 		item_state = "Odst Helmet Engineer"
 		icon_state = "Helmet Engineer"
+		update_clothing_icon()
 	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/engineer
@@ -232,6 +237,7 @@
 	else
 		item_state = "Odst Helmet Squad Leader"
 		icon_state = "Helmet Squad Leader"
+		update_clothing_icon()
 	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/squadleader
@@ -262,6 +268,7 @@
 	else
 		item_state = "Odst Helmet Flaksim"
 		icon_state = "Odst Helmet Flaksim"
+		update_clothing_icon()
 	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/flaksim
@@ -308,6 +315,7 @@
 	else
 		item_state = "Odst Helmet Spartan"
 		icon_state = "Odst Helmet Spartan"
+		update_clothing_icon()
 	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/spartan
@@ -332,6 +340,7 @@
 	else
 		item_state = "Odst Helmet Caelum"
 		icon_state = "Odst Helmet Caelum"
+		update_clothing_icon()
 	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/caelumz
@@ -356,6 +365,8 @@
 	else
 		item_state = "Odst Helmet Maxattacker"
 		icon_state = "Odst Helmet Maxattacker"
+		update_clothing_icon()
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/maxattacker
 	name = "Customized ODST Recon Armour"

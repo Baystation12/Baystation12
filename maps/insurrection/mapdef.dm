@@ -20,3 +20,9 @@
 	overmap_size= 3
 
 	use_overmap = 1
+
+
+
+/datum/map/Insurrection
+	allowed_jobs = list(/datum/job/UNSC_assault,/datum/job/UNSC_Squad_Lead,/datum/job/UNSC_Team_Lead,/datum/job/Insurrectionist,/datum/job/Insurrectionist_leader,)
+	allowed_spawns = list("Insurrectionist","Insurrectionist Leader","ODST Assault Squad Lead","ODST Assault Squad Member","ODST Assault Team Lead",)
