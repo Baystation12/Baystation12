@@ -11,6 +11,8 @@
 	#include "sector/sector-1.dmm"
 	#include "sector/sector-2.dmm"
 
+	#include "../first_contact/maps//UNSC_Bertels/spawns_jobs.dm"
+
 	#include "../../code/modules/lobby_music/absconditus.dm"
 
 	#define using_map_DATUM /datum/map/overmap_example
