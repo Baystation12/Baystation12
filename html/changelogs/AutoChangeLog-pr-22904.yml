@@ -1,0 +1,8 @@
+author: "Cajoes"
+delete-after: True
+changes: 
+  - rscadd: "Some new cargo items, boxed snack foods for refilling vendors, etc. (canned bread does not go into Galley-!)"
+  - rscadd: "Added new cargo order tabs and orderable items. Galley, Custodial, Exploration, Non-Essentials, etc."
+  - tweak: "Rearranged existing cargo tab contents to something resembling logic. Floor tiles go into Flooring food supplies to the galley, costumes and hats into Non-essentials, etc"
+  - rscdel: "Removed the Tabs: Reagents, Miscellaneous and Hospitality  tabs as they ended up empty once the re-ordering was complete and no longer served a function."
+  - rscdel: "Crate of Boxes, Crate of Empty Reagent Cartridges, Ripley APLU Circuitboard Crate"
