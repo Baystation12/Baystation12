@@ -321,3 +321,45 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	melee_damage_lower = 25
 	melee_damage_upper = 35
 	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/minor
+	name = "Flood infested Minor"
+	icon = 'code/modules/halo/flood/flood_combat_minor.dmi'
+	icon_state = "elite_m"
+	icon_living = "elite_m"
+	icon_dead = "dead"
+	//
+	move_to_delay = 1
+	health = 250 //Combat forms need to be hardier.
+	maxHealth = 300
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+
+/mob/living/simple_animal/hostile/flood/combat_form/major
+	name = "Flood infested Major"
+	icon = 'code/modules/halo/flood/flood_combat_major.dmi'
+	icon_state = "elite_m"
+	icon_living = "elite_m"
+	icon_dead = "dead"
+	//
+	move_to_delay = 1
+	health = 250 //Combat forms need to be hardier.
+	maxHealth = 300
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+
+/mob/living/simple_animal/hostile/flood/combat_form/juggernaut
+	name = "Flood Juggernanut"
+	icon = 'code/modules/halo/flood/floodjuggernaut.dmi'
+	icon_state = "movement state"
+	icon_living = "movement state"
+	icon_dead = "death state"
+	//
+	move_to_delay = 1
+	health = 1200 //Combat forms need to be hardier.
+	maxHealth = 1200
+	melee_damage_lower = 40
+	melee_damage_upper = 55
+	attacktext = "Whips"
