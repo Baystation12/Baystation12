@@ -83,7 +83,7 @@
 		for(var/i in 1 to LAZYLEN(outputs)) //Clear everything out
 			set_pin_data(IC_OUTPUT,i,null)
 		var/datum/integrated_io/O = outputs[output_index]
-		O.data = get_pin_data(IC_INPUT, 2)
+		set_pin_data(IC_OUTPUT, output_index,get_pin_data(IC_INPUT, 2))
 		O.push_data()
 
 	activate_pin(2)
