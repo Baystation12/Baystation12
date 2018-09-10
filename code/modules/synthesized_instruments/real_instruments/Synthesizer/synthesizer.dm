@@ -40,6 +40,15 @@
 /obj/structure/synthesized_instrument/synthesizer/shouldStopPlaying(mob/user)
 	return !((src && in_range(src, user) && src.anchored) || src.real_instrument.player.song.autorepeat)
 
+
+//in-hand version
+/obj/item/device/synthesized_instrument/synthesizer
+	name = "Synthesizer Mini"
+	desc = "The power of an entire orchestra in a handy midi keyboard format."
+	icon_state = "h_synthesizer"
+	path = /datum/instrument
+	sound_player = /datum/sound_player/synthesizer
+
 /obj/structure/synthesized_instrument/synthesizer/minimoog
 	name = "space minimoog"
 	desc = "This is a minimoog, like a space piano, but more spacey!"
