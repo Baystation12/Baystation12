@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - bugfix: "Fixes microscope always treating partial prints as complete. End of golden age of forensics."
