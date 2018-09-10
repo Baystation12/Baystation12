@@ -7,6 +7,7 @@
 	#include "example-1.dmm"
 	#include "example-2.dmm"
 
+	#include "../first_contact/maps//UNSC_Bertels/spawns_jobs.dm"
 	#include "../../code/modules/lobby_music/absconditus.dm"
 	#include "example_areas.dm"
 	#include "example_define.dm"
