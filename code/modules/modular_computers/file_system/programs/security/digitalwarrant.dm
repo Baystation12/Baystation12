@@ -24,6 +24,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 
 	if(activewarrant)
 		data["warrantname"] = activewarrant.fields["namewarrant"]
+		data["warrantjob"] = activewarrant.fields["jobwarrant"]
 		data["warrantcharges"] = activewarrant.fields["charges"]
 		data["warrantauth"] = activewarrant.fields["auth"]
 		data["warrantidauth"] = activewarrant.fields["idauth"]
@@ -105,6 +106,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		var/datum/computer_file/data/warrant/W = new()
 		if(CanInteract(user, GLOB.default_state))
 			W.fields["namewarrant"] = "Unknown"
+			W.fields["jobwarrant"] = "N/A"
 			W.fields["auth"] = "Unauthorized"
 			W.fields["idauth"] = "Unauthorized"
 			W.fields["access"] = list()
@@ -136,20 +138,27 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		. = 1
 		var/namelist = list()
 		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-			namelist += CR.get_name()
-		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
+			namelist += "[CR.get_name()] \[[CR.get_job()]\]"
+		var/new_person = sanitize(input(usr, "Please input name") as null|anything in namelist)
 		if(CanInteract(user, GLOB.default_state))
-			if (!new_name || !activewarrant)
+			if (!new_person || !activewarrant)
 				return
-			activewarrant.fields["namewarrant"] = new_name
+			// string trickery to extract name & job
+			var/entry_components = splittext(new_person, " \[")
+			var/name = entry_components[1]
+			var/job = copytext(entry_components[2], 1, length(entry_components[2]))
+			activewarrant.fields["namewarrant"] = name
+			activewarrant.fields["jobwarrant"] = job
 
 	if(href_list["editwarrantnamecustom"])
 		. = 1
 		var/new_name = sanitize(input("Please input name") as null|text)
+		var/new_job = sanitize(input("Please input job") as null|text)
 		if(CanInteract(user, GLOB.default_state))
-			if (!new_name || !activewarrant)
+			if (!new_name || !new_job || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
+			activewarrant.fields["jobwarrant"] = new_job
 
 	if(href_list["editwarrantcharges"])
 		. = 1
@@ -175,14 +184,21 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		if(!(access_change_ids in I.access))
 			to_chat(user, "Authentication error: Unable to locate ID with appropriate access to allow this operation.")
 			return
-	
-		// only works if they are in the crew records
-		var/datum/computer_file/report/crew_record/warrant_subject = get_crewmember_record(activewarrant.fields["namewarrant"])
-		if(!warrant_subject)
-			return
-		var/datum/job/J = job_master.GetJob(warrant_subject.get_job())
+
+		// only works if they are in the crew records with a valid job
+		var/datum/computer_file/report/crew_record/warrant_subject
+		var/datum/job/J = job_master.GetJob(activewarrant.fields["jobwarrant"])
 		if(!J)
+			to_chat(user, "Lookup error: Unable to locate specified job in access database.")
 			return
+		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+			if(CR.get_name() == activewarrant.fields["namewarrant"] && CR.get_job() == J.title)
+				warrant_subject = CR
+
+		if(!warrant_subject)
+			to_chat(user, "Lookup error: Unable to locate specified personnel in crew records.")
+			return
+
 		var/list/warrant_access = J.get_access()
 		// warrants can never grant command access
 		warrant_access.Remove(get_region_accesses(ACCESS_REGION_COMMAND))
