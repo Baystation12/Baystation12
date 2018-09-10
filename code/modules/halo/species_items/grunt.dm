@@ -120,7 +120,7 @@
 	icon_state = "combatharness_specops"
 	item_state = "combatharness_specops"
 
-	action_button_name = "Toggle Active Camoflage"
+	action_button_name = "Toggle Active Camouflage"
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/cloaking)
 
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops

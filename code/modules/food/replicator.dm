@@ -9,8 +9,8 @@
 	use_power = 1
 	idle_power_usage = 40
 	flags = OBJ_ANCHORABLE
-	var/biomass = 100
-	var/biomass_max = 100
+	var/biomass = 10000
+	var/biomass_max = 10000
 	var/biomass_per = 2
 	var/deconstruct_eff = 0.5
 	var/list/queued_dishes = list()

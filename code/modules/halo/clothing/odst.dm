@@ -345,6 +345,18 @@
 	item_state = "Odst Helmet Maxattacker"
 	icon_state = "Odst Helmet Maxattacker"
 
+/obj/item/clothing/head/helmet/odst/donator/maxattacker/verb/Toggle_VISR03()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "Odst Helmet Maxattacker Transparent"
+		icon_state = "Odst Helmet Maxattacker Transparent"
+	else
+		item_state = "Odst Helmet Maxattacker"
+		icon_state = "Odst Helmet Maxattacker"
+
 /obj/item/clothing/suit/armor/special/odst/donator/maxattacker
 	name = "Customized ODST Recon Armour"
 
@@ -429,6 +441,13 @@
 	name = "Spartan's Backpack"
 	item_state = "Odst Spartan Backpack"
 	icon_state = "Odst Spartan Backpack"
+
+/obj/item/weapon/storage/backpack/odst/donator/general
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Customized's Backpack"
+	item_state = "Odst customized Backpack"
+	icon_state = "Odst customized Backpack"
 
 //END DONATOR GEAR
 #undef ODST_OVERRIDE
