@@ -94,11 +94,14 @@
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet "
-	else
 		item_state = "Odst Helmet Transparent"
-
+		icon_state = "Helmet ODST Transparent"
+	else
+		item_state = "Odst Helmet"
+		icon_state = "Helmet ODST"
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/cqb
 	name = "ODST CQB Armour"
@@ -115,10 +118,14 @@
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet CQB"
-	else
 		item_state = "Odst Helmet CQB Transparent"
+		icon_state = "Helmet CQB Transparent"
+	else
+		item_state = "Odst Helmet CQB"
+		icon_state = "Helmet CQB"
+	. = ..()
 
 /obj/effect/odst_armour_set/sharpshooter
 	helmet = /obj/item/clothing/head/helmet/odst/sharpshooter
@@ -139,10 +146,14 @@
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet Sharpshooter"
-	else
 		item_state = "Odst Helmet Sharpshooter Transparent"
+		icon_state = "Helmet Sharpshooter Transparent"
+	else
+		item_state = "Odst Helmet Sharpshooter"
+		icon_state = "Helmet Sharpshooter"
+	. = ..()
 
 /obj/effect/odst_armour_set/medic
 	helmet = /obj/item/clothing/head/helmet/odst/medic
@@ -159,14 +170,18 @@
 	item_state = "Odst Helmet Medic"
 	icon_state = "Helmet Medic"
 
-/obj/item/clothing/head/helmet/odst/medic/verb/Toggle_VISR1()
+/obj/item/clothing/head/helmet/odst/medic/verb/Toggle_VISR100()
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet Medic"
-	else
 		item_state = "Odst Helmet Medic Transparent"
+		icon_state = "Helmet Medic Transparent"
+	else
+		item_state = "Odst Helmet Medic"
+		icon_state = "Helmet Medic"
+	. = ..()
 
 /obj/effect/odst_armour_set/engineer
 	helmet = /obj/item/clothing/head/helmet/odst/engineer
@@ -182,10 +197,14 @@
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet Engineer"
-	else
 		item_state = "Odst Helmet Engineer Transparent"
+		icon_state = "Helmet Engineer Transparent"
+	else
+		item_state = "Odst Helmet Engineer"
+		icon_state = "Helmet Engineer"
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/engineer
 	name = "ODST Engineer Armour"
@@ -202,14 +221,18 @@
 	item_state = "Odst Helmet Squad Leader"
 	icon_state = "Helmet Squad Leader"
 
-/obj/item/clothing/head/helmet/odst/squadleader/verb/Toggle_VISR1()
+/obj/item/clothing/head/helmet/odst/squadleader/verb/Toggle_VISR001()
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet Squad Leader"
-	else
 		item_state = "Odst Helmet Squad Leader Transparent"
+		icon_state = "Helmet Squad Leader Transparent"
+	else
+		item_state = "Odst Helmet Squad Leader"
+		icon_state = "Helmet Squad Leader"
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/squadleader
 	name = "ODST Squad Leader Armour"
@@ -228,23 +251,18 @@
 	item_state = "Odst Helmet Flaksim"
 	icon_state = "Odst Helmet Flaksim"
 
-/obj/item/clothing/head/helmet/odst/donator/flaksim/verb/Toggle_VISR1()
+/obj/item/clothing/head/helmet/odst/donator/flaksim/verb/Toggle_VISR01()
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet Flaksim"
-	else
 		item_state = "Odst Helmet Flaksim Transparent"
-
-/obj/item/clothing/head/helmet/odst/verb/Toggle_VISR6()
-	set category = "Helmet"
-	set name = "Toggle VISR"
-	on = !on
-	if (on)
-		item_state = "Odst Helmet"
+		icon_state = "Odst Helmet Flaksim Transparent"
 	else
-		item_state = "Odst Helmet Transparent"
+		item_state = "Odst Helmet Flaksim"
+		icon_state = "Odst Helmet Flaksim"
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/flaksim
 	name = "Kashada's ODST Armour"
@@ -283,10 +301,14 @@
 	set category = "Helmet"
 	set name = "Toggle VISR"
 	on = !on
+	update_icon()
 	if (on)
-		item_state = "Odst Helmet Spartan"
-	else
 		item_state = "Odst Helmet Spartan Transparent"
+		icon_state = "Odst Helmet Spartan Transparent"
+	else
+		item_state = "Odst Helmet Spartan"
+		icon_state = "Odst Helmet Spartan"
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/spartan
 	name = "Customized ODST CQB Armour"
@@ -298,6 +320,19 @@
 
 	item_state = "Odst Helmet Caelum"
 	icon_state = "Odst Helmet Caelum"
+
+/obj/item/clothing/head/helmet/odst/donator/caelumz/verb/Toggle_VISR02()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "Odst Helmet Caelum Transparent"
+		icon_state = "Odst Helmet Caelum Transparent"
+	else
+		item_state = "Odst Helmet Caelum"
+		icon_state = "Odst Helmet Caelum"
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/caelumz
 	name = "Customized ODST Sniper Armour"
