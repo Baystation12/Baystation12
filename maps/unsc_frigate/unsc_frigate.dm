@@ -8,6 +8,7 @@
 
 	#include "../first_contact/maps//UNSC_Bertels/jobs.dm"
 	#include "../first_contact/maps//UNSC_Bertels/outfits.dm"
+	#include "../first_contact/maps//UNSC_Bertels/spawns_jobs.dm"
 
 	#define using_map_DATUM /datum/map/unsc_frigate
 
