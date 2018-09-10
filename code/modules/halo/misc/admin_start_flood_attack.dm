@@ -1,4 +1,4 @@
-#define FLOOD_INVASION_ATTACK_DELAY 10 SECONDS
+#define FLOOD_INVASION_ATTACK_DELAY 0.1 SECONDS
 #define FLOOD_INVASION_START 'code/modules/halo/misc/flood_inv_start.ogg'
 #define FLOOD_INVASION_END 'code/modules/halo/misc/flood_inv_end.ogg'
 

@@ -61,7 +61,7 @@
 "bi" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/obj/effect/landmark/start/innie_crew,/turf/simulated/floor/tiled,/area/om_ships/comet)
 "bj" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/telecomms/processor,/turf/simulated/floor/plating{tag = "icon-dmg4"; icon_state = "dmg4"},/area/om_ships/comet)
 "bk" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/telecomms/hub,/turf/simulated/floor/plating{tag = "icon-dmg4"; icon_state = "dmg4"},/area/om_ships/comet)
-"bl" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/telecomms/bus,/turf/simulated/floor/plating{tag = "icon-dmg1"; icon_state = "dmg1"},/area/om_ships/comet)
+"bl" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating{tag = "icon-dmg1"; icon_state = "dmg1"},/area/om_ships/comet)
 "bm" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/comet)
 "bn" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/comet)
 "bo" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/tiled,/area/om_ships/comet)
