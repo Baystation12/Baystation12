@@ -464,7 +464,7 @@
 "iV" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/porthallwaycentral)
 "iW" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/Reactorcore)
 "iX" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/Reactorcore)
-"iY" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/Reactorcore)
+"iY" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/Reactorcore)
 "iZ" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/portengine)
 "ja" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/machinery/portable_atmospherics/canister/phoron/engine_setup,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/portengine)
 "jb" = (/obj/machinery/atmospherics/pipe/tank/phoron{tag = "icon-phoron_map (EAST)"; icon_state = "phoron_map"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/portengine)

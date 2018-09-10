@@ -20,15 +20,16 @@
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
 	item_state = "Odst Helmet"
-	icon_state = "Helmet"
+	icon_state = "Helmet ODST"
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	flash_protection = FLASH_PROTECTION_MODERATE
 	cold_protection = HEAD
 	heat_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 0, rad = 5)
+	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 100, rad = 25)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -38,14 +39,7 @@
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
-
-	action_button_name = "Toggle Helmet Light"
-	icon_state = "Odst Helmet Transparent"
-
-
 	armor_thickness = 20
-
-
 
 
 /obj/item/clothing/suit/armor/special/odst
@@ -55,10 +49,10 @@
 	icon_state = "Odst Armour"
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 45, laser = 55, energy = 45, bomb = 60, bio = 30, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
 	//specials = list(/datum/armourspecials/internal_air_tank/human) This line is disabled untill a dev can fix the internals code for it.
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|FEET
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
@@ -74,7 +68,7 @@
 //Defines for armour subtypes//
 
 /obj/effect/odst_armour_set
-	var/obj/helmet = /obj/item/clothing/head/helmet/odst
+	var/obj/helmet = /obj/item/clothing/head/helmet/odst/rifleman
 	var/obj/armour = /obj/item/clothing/suit/armor/special/odst
 
 /obj/effect/odst_armour_set/New()
@@ -90,6 +84,22 @@
 	helmet = /obj/item/clothing/head/helmet/odst/cqb
 	armour = /obj/item/clothing/suit/armor/special/odst/cqb
 
+/obj/item/clothing/head/helmet/odst/rifleman
+	name = "ODST Rifleman Helmet"
+
+	item_state = "Odst Helmet"
+	icon_state = "Helmet ODST"
+
+/obj/item/clothing/head/helmet/odst/rifleman/verb/Toggle_VISR10()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet "
+	else
+		item_state = "Odst Helmet Transparent"
+
+
 /obj/item/clothing/suit/armor/special/odst/cqb
 	name = "ODST CQB Armour"
 
@@ -100,6 +110,15 @@
 
 	item_state = "Odst Helmet CQB"
 	icon_state = "Helmet CQB"
+
+/obj/item/clothing/head/helmet/odst/cqb/verb/Toggle_VISR3()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet CQB"
+	else
+		item_state = "Odst Helmet CQB Transparent"
 
 /obj/effect/odst_armour_set/sharpshooter
 	helmet = /obj/item/clothing/head/helmet/odst/sharpshooter
@@ -116,6 +135,15 @@
 	item_state = "Odst Helmet Sharpshooter"
 	icon_state = "Helmet Sharpshooter"
 
+/obj/item/clothing/head/helmet/odst/sharpshooter/verb/Toggle_VISR4()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet Sharpshooter"
+	else
+		item_state = "Odst Helmet Sharpshooter Transparent"
+
 /obj/effect/odst_armour_set/medic
 	helmet = /obj/item/clothing/head/helmet/odst/medic
 	armour = /obj/item/clothing/suit/armor/special/odst/medic
@@ -131,15 +159,33 @@
 	item_state = "Odst Helmet Medic"
 	icon_state = "Helmet Medic"
 
+/obj/item/clothing/head/helmet/odst/medic/verb/Toggle_VISR1()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet Medic"
+	else
+		item_state = "Odst Helmet Medic Transparent"
+
 /obj/effect/odst_armour_set/engineer
 	helmet = /obj/item/clothing/head/helmet/odst/engineer
 	armour = /obj/item/clothing/suit/armor/special/odst/engineer
 
 /obj/item/clothing/head/helmet/odst/engineer
 	name = "ODST Engineer Helmet"
-
+	flash_protection = FLASH_PROTECTION_MAJOR
 	item_state = "Odst Helmet Engineer"
 	icon_state = "Helmet Engineer"
+
+/obj/item/clothing/head/helmet/odst/engineer/verb/Toggle_VISR2()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet Engineer"
+	else
+		item_state = "Odst Helmet Engineer Transparent"
 
 /obj/item/clothing/suit/armor/special/odst/engineer
 	name = "ODST Engineer Armour"
@@ -155,6 +201,15 @@
 
 	item_state = "Odst Helmet Squad Leader"
 	icon_state = "Helmet Squad Leader"
+
+/obj/item/clothing/head/helmet/odst/squadleader/verb/Toggle_VISR1()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet Squad Leader"
+	else
+		item_state = "Odst Helmet Squad Leader Transparent"
 
 /obj/item/clothing/suit/armor/special/odst/squadleader
 	name = "ODST Squad Leader Armour"
@@ -172,6 +227,24 @@
 
 	item_state = "Odst Helmet Flaksim"
 	icon_state = "Odst Helmet Flaksim"
+
+/obj/item/clothing/head/helmet/odst/donator/flaksim/verb/Toggle_VISR1()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet Flaksim"
+	else
+		item_state = "Odst Helmet Flaksim Transparent"
+
+/obj/item/clothing/head/helmet/odst/verb/Toggle_VISR6()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet"
+	else
+		item_state = "Odst Helmet Transparent"
 
 /obj/item/clothing/suit/armor/special/odst/donator/flaksim
 	name = "Kashada's ODST Armour"
@@ -205,6 +278,15 @@
 
 	item_state = "Odst Helmet Spartan"
 	icon_state = "Odst Helmet Spartan"
+
+/obj/item/clothing/head/helmet/odst/donator/spartan/verb/Toggle_VISR1()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	if (on)
+		item_state = "Odst Helmet Spartan"
+	else
+		item_state = "Odst Helmet Spartan Transparent"
 
 /obj/item/clothing/suit/armor/special/odst/donator/spartan
 	name = "Customized ODST CQB Armour"

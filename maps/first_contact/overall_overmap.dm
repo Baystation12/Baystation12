@@ -29,8 +29,8 @@
 	map_bounds = list(7,49,73,27)
 
 /obj/effect/overmap/ship/unsc_corvette
-	name = "UNSC Thorin"
-	desc = "A standard contruction-model corvette."
+	name = "URFS Thorn"
+	desc = "A standard contruction-model corvette. Seems to have taken some battle damage."
 
 	icon = 'maps/first_contact/corvette.dmi'
 	icon_state = "ship"

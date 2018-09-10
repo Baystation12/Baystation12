@@ -43,6 +43,7 @@
 	name = "M7S submachine gun"
 	desc = "The M7S is a special operations variant of the M7 submachine gun with inbuilt suppressor and host of other attachments. Takes 5mm calibre magazines."
 	silenced = 1
+	accuracy = 0
 	icon_state = "m7smgs"
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
