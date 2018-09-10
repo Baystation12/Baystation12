@@ -90,7 +90,7 @@
 		/area/corvette/unscbertels/portbattery = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/corvette/unscbertels/portrockets = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/corvette/unscbertels/starboardrockets = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/asteroid_base = NO_SCRUBBER|NO_VENT|NO_APC, //Temp define for Tranq.
+		/area/asteroid_base = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/asteroid_base/engine = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/asteroid_base/engine/generator = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/asteroid_base/engine/generator/control = NO_SCRUBBER|NO_VENT|NO_APC,
