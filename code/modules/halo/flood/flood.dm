@@ -337,6 +337,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	attacktext = "slash"
 
 /mob/living/simple_animal/hostile/flood/combat_form/major
+	name = "Flood infested Major"
 	icon = 'code/modules/halo/flood/flood_combat_major.dmi'
 	icon_state = "elite_m"
 	icon_living = "elite_m"
