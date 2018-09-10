@@ -17,25 +17,5 @@
 /datum/map/overmap_example
 	apc_test_exempt_areas = list(
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/unscfrigate = NO_SCRUBBER|NO_VENT,
-		/area/unscfrigate/logistics = NO_SCRUBBER|NO_VENT,
-		/area/unscfrigate/medbay = NO_SCRUBBER|NO_VENT,
-		/area/unscfrigate/medbay/surgery1 = 0,
-		/area/unscfrigate/medbay/surgery2 = 0,
-		/area/unscfrigate/medbay/patient2 = 0,
-		/area/unscfrigate/medbay/recovery = NO_VENT,
-		/area/unscfrigate/medbay/exam = 0,
-		/area/unscfrigate/medbay/patient1 = 0,
-		/area/unscfrigate/logistics/hangar_aftstarb = NO_SCRUBBER,
-		/area/unscfrigate/logistics/hangar_forestarb = NO_SCRUBBER,
-		/area/unscfrigate/medbay/surgeryprep = NO_SCRUBBER,
-		/area/unscfrigate/logistics/hangar_aftport = NO_SCRUBBER,
-		/area/unscfrigate/logistics/hangar_foreport = NO_SCRUBBER,
-		/area/unscfrigate/hangar_starb = NO_SCRUBBER,
-		/area/unscfrigate/central = NO_SCRUBBER|NO_VENT,
-		/area/unscfrigate/hangar_port = NO_SCRUBBER,
-		/area/unscfrigate/tcomms = NO_SCRUBBER,
-		/area/unscfrigate/bridge = NO_SCRUBBER,
-		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC
 	)
