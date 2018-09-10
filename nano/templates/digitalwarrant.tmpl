@@ -14,6 +14,14 @@
 		<div class='itemContent'>
 			{{:data.warrantname}}
 		</div>
+		{{if data.type == "arrest"}}
+			<div class='itemLabel'>
+				Job:
+			</div>
+			<div class='itemContent'>
+				{{:data.warrantjob}}
+			</div>
+		{{/if}}
 	</div>
 	<div class='item'>
 		{{if data.type == "arrest"}}
@@ -55,7 +63,7 @@
 		<div class='itemContent'>
 			<table>
 				{{if data.type == "arrest"}}
-					<tr><td>{{:helper.link('Edit Name', null, {'editwarrantname' : 1})}}{{:helper.link('Custom Name', null, {'editwarrantnamecustom' : 1})}}
+					<tr><td>{{:helper.link('Edit Name/Job', null, {'editwarrantname' : 1})}}{{:helper.link('Custom Name/Job', null, {'editwarrantnamecustom' : 1})}}
 					<tr><td>{{:helper.link('Edit Charges', null, {'editwarrantcharges' : 1})}}
 				{{/if}}
 				{{if data.type == "search"}}
