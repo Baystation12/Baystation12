@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - bugfix: "Demultiplexers should have data set correctly now."
