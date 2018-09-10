@@ -108,10 +108,12 @@
 		P.overlays = list("paper_stamped")
 		//dna data itself
 		var/data = "No scan information available."
-		if(bloodsamp.dna != null)
-			data = "Spectometric analysis on provided sample has determined the presence of [bloodsamp.dna.len] strings of DNA.<br><br>"
+		if(bloodsamp.dna != null || bloodsamp.trace_dna != null)
+			data = "Spectometric analysis on provided sample has determined the presence of DNA.<br><br>"
 			for(var/blood in bloodsamp.dna)
-				data += "<span class='notice'>Blood type: [bloodsamp.dna[blood]]<br>\nDNA: [blood]</span><br><br>"
+				data += "<span class='notice'>Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]</span><br><br>"
+			for(var/trace in bloodsamp.trace_dna)
+				data += "<span class='notice'>Trace DNA: [trace]</span><br><br>"
 		else
 			data += "No DNA found.<br>"
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
