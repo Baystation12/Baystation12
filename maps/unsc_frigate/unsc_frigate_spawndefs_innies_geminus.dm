@@ -4,7 +4,7 @@
 	/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/colonist,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,\
 	/datum/job/UNSC_ship/bridge,\
 /datum/job/UNSC_ship/marine_co,/datum/job/UNSC_ship/marine_xo,\
-/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/weapons,/datum/job/UNSC_ship/marine,/datum/job/ODST,/datum/job/ODSTO,\
+/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/weapons,/datum/job/UNSC_ship/marine,/datum/job/bertelsODST,/datum/job/bertelsODSTO,\
 /datum/job/UNSC_ship/medical_chief,/datum/job/UNSC_ship/medical,/datum/job/UNSC_ship/security_chief,/datum/job/UNSC_ship/security,\
 /datum/job/UNSC_ship/cmdr_sqr,\
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,\
@@ -13,7 +13,7 @@
 /datum/job/IGUARD,/datum/job/Asteroidinnie,/datum/job/Asteroidinnieleader,\
 /datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,\
 /datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
-	allowed_spawns = list("UNSC Frigate","Colony Arrival Shuttle","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Emsville Spawn",,"Emsville Spawn Marshall","Listening Post Spawn","Listening Post Commander Spawn","Mining Asteroid Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
+	allowed_spawns = list("UNSC Frigate","UNSC Bertels ODST Spawn","UNSC Bertels ODST Officer Spawn","Colony Arrival Shuttle","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Emsville Spawn",,"Emsville Spawn Marshall","Listening Post Spawn","Listening Post Commander Spawn","Mining Asteroid Spawn",)
 	base_turf_by_z = list("6" = /turf/simulated/floor/planet/dirt)
 
 
