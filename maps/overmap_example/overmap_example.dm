@@ -6,6 +6,7 @@
 	#include "bearcat/bearcat_areas.dm"
 	#include "bearcat/bearcat-1.dmm"
 	#include "bearcat/bearcat-2.dmm"
+	#include "overmap_example_define.dm"
 
 	#include "sector/sector.dm"
 	#include "sector/sector-1.dmm"

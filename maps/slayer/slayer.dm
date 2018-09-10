@@ -5,6 +5,7 @@
 	#include "death_asteroid_areas.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 	#include "death_asteroid_spawns.dm"
+	#include "death_asteroid_map.dm"
 
 	#include "mode_teamslayer.dm"
 	#include "mode_slayer.dm"

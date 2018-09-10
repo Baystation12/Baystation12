@@ -66,7 +66,7 @@
 		/area/corvette/unscbertels/deck2/cryodorms = NO_SCRUBBER|NO_VENT,
 		/area/corvette/unscbertels/deck2/morgue = NO_SCRUBBER|NO_VENT,
 		/area/corvette/unscbertels/deck3/forehallway = NO_SCRUBBER|NO_VENT,
-		/area/corvette/unscbertels/deck3/soeiv = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/corvette/unscbertels/deck3/soeiv = NO_SCRUBBER|NO_VENT,
 		/area/corvette/unscbertels/deck3/odstarmory = NO_SCRUBBER|NO_VENT,
 		/area/corvette/unscbertels/deck3/odstquarters = NO_SCRUBBER|NO_VENT,
 		/area/corvette/unscbertels/deck3/odstbathroomport = NO_SCRUBBER|NO_VENT,
