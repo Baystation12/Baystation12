@@ -1155,7 +1155,7 @@
 	color = COLOR_DARK_GRAY
 	req_access = list(309)
 	products = list(
-	/obj/item/clothing/head/helmet/odst = 4,
+	/obj/item/clothing/head/helmet/odst/rifleman = 4,
 	/obj/item/clothing/suit/armor/special/odst = 4,
 	/obj/item/weapon/storage/backpack/odst/regular = 4,
 	/obj/item/clothing/head/helmet/odst/engineer = 4,
