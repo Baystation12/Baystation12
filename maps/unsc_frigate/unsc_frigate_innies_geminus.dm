@@ -21,10 +21,17 @@
 	#include "../insurrection/insurrection_spawns.dm"
 	#include "../insurrection/insurrection_gm.dm"
 	#include "../insurrection/innie_base_overmap.dm"
+	#include "../insurrection/UNSC_Yolotanker/jobs.dm"
+	#include "../insurrection/UNSC_Yolotanker/spawns_jobs.dm"
+
 
 	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
 
 	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
+	#include "../first_contact/maps/UNSC_Bertels/jobs.dm"
+	#include "../first_contact/maps/UNSC_Bertels/outfits.dm"
+	#include "../first_contact/maps/UNSC_Bertels/spawns_jobs.dm"
+
 
 	#include "../insurrection/innie_base_areas.dm"
 	#include "../insurrection/innie_base4.dmm"
@@ -39,9 +46,6 @@
 	#include "../first_contact/overall_overmap.dm"
 
 	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
-
-
-	#include "../first_contact/maps/UNSC_Thorin/spawns_jobs.dm"
 
 
 

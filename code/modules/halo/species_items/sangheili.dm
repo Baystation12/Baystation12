@@ -144,7 +144,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	icon_state = "specops_chest"
 	totalshields = 175
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
-	action_button_name = "Toggle Active Camoflage"
+	action_button_name = "Toggle Active Camouflage"
 
 /obj/item/clothing/shoes/sangheili/specops
 	name = "Sanghelli Leg Armour (Spec-Ops)"

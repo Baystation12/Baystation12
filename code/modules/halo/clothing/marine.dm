@@ -20,7 +20,7 @@
 	icon_state = "helmet_novisor"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
-	armor = list(melee = 50, bullet = 25, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -54,7 +54,7 @@
 	icon_state = "M52B Body Armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 35, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20

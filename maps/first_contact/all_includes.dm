@@ -16,12 +16,14 @@
 	#include "maps/CCV_Star.dmm"
 
 	#include "maps/comet_spawns.dm"
-	#include "maps/CCV_Comet.dmm"
+
 
 	#include "maps/sbs_spawns.dm"
 	#include "maps/CCV_Slow_But_Steady.dmm"
 
 	#include "../first_contact/maps/UNSC_Bertels/includes.dm"
+
+	#include "../first_contact/maps/UNSC_Thorin/includes.dm"
 
 	#include "overall_outfits.dm"
 	#include "overall_jobdefs.dm"

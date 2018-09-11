@@ -1,146 +1,137 @@
 /area/corvette/unscthorin
-	name = "UNSC Thorin"
+	name = "URFS Thorn"
 	has_gravity = 1
 	power_environ = 1
 	power_light = 1
 	poweralm = 1
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscthorin/Bridge
-	name = "UNSC Thorin Bridge"
+	name = "URFS Thorn Bridge"
 
 /area/corvette/unscthorin/Porthallway
-	name = "UNSC Thorin Deck 1 Port Hallway"
+	name = "URFS Thorn Deck 1 Port Hallway"
 
 /area/corvette/unscthorin/Porthallway2
-	name = "UNSC Thorin Deck 2 Port Hallway"
+	name = "URFS Thorn Deck 2 Port Hallway"
 
 /area/corvette/unscthorin/Centralhallway
-	name = "UNSC Thorin Deck 1 Central Hallway"
+	name = "URFS Thorn Deck 1 Central Hallway"
 
 /area/corvette/unscthorin/Centralhallway2
-	name = "UNSC Thorin Deck 2 Central Hallway"
+	name = "URFS Thorn Deck 2 Central Hallway"
 
 /area/corvette/unscthorin/Starboardhallway
-	name = "UNSC Thorin Deck 1 Starboard Hallway"
+	name = "URFS Thorn Deck 1 Starboard Hallway"
 
 /area/corvette/unscthorin/Starboardhallway2
-	name = "UNSC Thorin Deck 2 Starboard Hallway"
+	name = "URFS Thorn Deck 2 Starboard Hallway"
 
 /area/corvette/unscthorin/Hangarbay
-	name = "UNSC Thorin Deck 1 Rear Hangar Bay"
+	name = "URFS Thorn Deck 1 Rear Hangar Bay"
 
 /area/corvette/unscthorin/Hangarbayport
-	name = "UNSC Thorin Port Hangar Bay"
+	name = "URFS Thorn Port Hangar Bay"
 
 /area/corvette/unscthorin/Hangarbaystarboard
-	name = "UNSC Thorin Starboard Hangar Bay"
-
-/area/corvette/unscthorin/Portsoeiv
-	name = "UNSC Thorin SOEIV Bay 1"
-
-/area/corvette/unscthorin/starboardsoeiv
-	name = "UNSC Thorin SOEIV Bay 2"
+	name = "URFS Thorn Starboard Hangar Bay"
 
 /area/corvette/unscthorin/fuelstorage
-	name = "UNSC Thorin Fuel Storage"
+	name = "URFS Thorn Fuel Storage"
 
 /area/corvette/unscthorin/medicalbay
-	name = "UNSC Thorin Medical Bay"
+	name = "URFS Thorn Medical Bay"
 
 /area/corvette/unscthorin/oxystorage
-	name = "UNSC Thorin Oxygen Storage"
+	name = "URFS Thorn Oxygen Storage"
 
 /area/corvette/unscthorin/portengine
-	name = "UNSC Thorin Port Engine"
+	name = "URFS Thorn Port Engine"
 
 /area/corvette/unscthorin/starboardengine
-	name = "UNSC Thorin Starboard Engine"
+	name = "URFS Thorn Starboard Engine"
 
 /area/corvette/unscthorin/crewbathroom
-	name = "UNSC Thorin Crew Bathrooms"
+	name = "URFS Thorn Crew Bathrooms"
 
 /area/corvette/unscthorin/cryodorm
-	name = "UNSC Thorin Cryodorms"
+	name = "URFS Thorn Cryodorms"
 
 /area/corvette/unscthorin/cells
-	name = "UNSC Thorin Holding Cells"
+	name = "URFS Thorn Holding Cells"
 
 /area/corvette/unscthorin/janitorial
-	name = "UNSC Thorin Janitorial Closet"
+	name = "URFS Thorn Janitorial Closet"
 
 /area/corvette/unscthorin/storageroom
-	name = "UNSC Thorin Deck 1 Storage Room"
+	name = "URFS Thorn Deck 1 Storage Room"
 
 /area/corvette/unscthorin/storageroom2
-	name = "UNSC Thorin Deck 2 Storage Room"
+	name = "URFS Thorn Deck 2 Storage Room"
 
 
 /area/corvette/unscthorin/portbatterycontrol
-	name = "UNSC Thorin Port Battery Control"
+	name = "URFS Thorn Port Battery Control"
 
 /area/corvette/unscthorin/starboardbatterycontrol
-	name = "UNSC Thorin Starboard Battery Control"
+	name = "URFS Thorn Starboard Battery Control"
 
 /area/corvette/unscthorin/portcrew
-	name = "UNSC Thorin Port Crew Quarters"
+	name = "URFS Thorn Port Crew Quarters"
 
 /area/corvette/unscthorin/starboardcrew
-	name = "UNSC Thorin Starboard Crew Quarters"
+	name = "URFS Thorn Starboard Crew Quarters"
 
 /area/corvette/unscthorin/Messhall
-	name = "UNSC Thorin Mess Hall"
+	name = "URFS Thorn Mess Hall"
 
 /area/corvette/unscthorin/captainroom
-	name = "UNSC Thorin Captains Quarters"
+	name = "URFS Thorn Captains Quarters"
 
 /area/corvette/unscthorin/Armory
-	name = "UNSC Thorin Armory"
+	name = "URFS Thorn Armory"
 
 /area/corvette/unscthorin/Troopbunks
-	name = "UNSC Thorin Troop Bunks"
+	name = "URFS Thorn Troop Bunks"
 
 /area/corvette/unscthorin/PortGenerator
-	name = "UNSC Thorin Port Generator"
+	name = "URFS Thorn Port Generator"
 
 /area/corvette/unscthorin/StarboardGenerator
-	name = "UNSC Thorin Starboard Generator"
-
-/area/corvette/unscthorin/odstsection
-	name = "UNSC Thorin ODST Section"
+	name = "URFS Thorn Starboard Generator"
 
 /area/corvette/unscthorin/powercore
-	name = "UNSC Thorin Power Core"
+	name = "URFS Thorn Power Core"
 
 /area/corvette/unscthorin/powercoreaux
-	name = "UNSC Thorin Auxiliary Power Core"
+	name = "URFS Thorn Auxiliary Power Core"
 
 /area/corvette/unscthorin/portumbilical
-	name = "UNSC Thorin Port Docking Umbilical"
+	name = "URFS Thorn Port Docking Umbilical"
 
 /area/corvette/unscthorin/starboardumbilical
-	name = "UNSC Thorin Starboard Docking Umbilical"
+	name = "URFS Thorn Starboard Docking Umbilical"
 
 /area/corvette/unscthorin/deckacces
-	name = "UNSC Thorin Deck 1 Access"
+	name = "URFS Thorn Deck 1 Access"
 
 /area/corvette/unscthorin/boardingpods
-	name = "UNSC Thorin Boarding Pods"
+	name = "URFS Thorn Boarding Pods"
 
 /area/corvette/unscthorin/observation
-	name = "UNSC Thorin Observation Deck"
+	name = "URFS Thorn Observation Deck"
 
 /area/corvette/unscthorin/starboardbattery
-	name = "UNSC Thorin Starboard Gun Battery"
+	name = "URFS Thorn Starboard Gun Battery"
 
 /area/corvette/unscthorin/portbattery
-	name = "UNSC Thorin Port Gun Battery"
+	name = "URFS Thorn Port Gun Battery"
 
 /area/corvette/unscthorin/portrockets
- 	name = "UNSC Thorin Port Rocket Pods"
+ 	name = "URFS Thorn Port Rocket Pods"
 
 /area/corvette/unscthorin/starboardrockets
- 	name = "UNSC Thorin Starboard Rocket Pods"
+ 	name = "URFS Thorn Starboard Rocket Pods"
 
 //Overmap Weapon Console Defines//
 
