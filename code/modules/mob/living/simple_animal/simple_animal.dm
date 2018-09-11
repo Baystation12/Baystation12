@@ -159,7 +159,7 @@
 						break
 			if(atmos_suitable && LAZYLEN(max_gas))
 				for(var/gas in max_gas)
-					if(environment.gas[gas] < max_gas[gas])
+					if(environment.gas[gas] > max_gas[gas])
 						atmos_suitable = FALSE
 						break
 
