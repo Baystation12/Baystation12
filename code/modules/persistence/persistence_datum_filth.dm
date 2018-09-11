@@ -11,6 +11,9 @@
 	labelled_tokens["path"] = text2path(tokens[LAZYLEN(labelled_tokens)+1])
 	return labelled_tokens
 
+/datum/persistent/filth/is_valid_entry(var/atom/entry)
+	. = ..() && entry.invisibility == 0
+
 /datum/persistent/filth/check_token_sanity(var/list/tokens)
 	return ..() && ispath(tokens["path"])
 
