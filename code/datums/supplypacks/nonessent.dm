@@ -50,6 +50,15 @@
 	containertype = /obj/structure/closet
 	containername = "\improper Lasertag Closet"
 
+/decl/hierarchy/supply_pack/nonessent/instruments
+	name = "Rec - Instrument shipment"
+	contains = list(/obj/item/device/synthesized_instrument/synthesizer,
+					/obj/item/device/synthesized_instrument/guitar/multi,
+					/obj/item/device/synthesized_instrument/trumpet)
+	cost = 40
+	containername = "\improper Musical instrument crate"
+
+
 /decl/hierarchy/supply_pack/nonessent/llamps
 	num_contained = 3
 	contains = list(/obj/item/device/flashlight/lamp/lava,

@@ -3425,7 +3425,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jb" = (
-/obj/structure/device/piano,
+/obj/structure/synthesized_instrument/synthesizer/piano,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";

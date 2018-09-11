@@ -8767,7 +8767,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/administration/centcom)
 "auI" = (
-/obj/structure/device/piano{
+/obj/structure/synthesized_instrument/synthesizer/piano{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -22611,7 +22611,7 @@
 /area/holodeck/source_cafe)
 "ezo" = (
 /obj/structure/table/holo_woodentable,
-/obj/item/device/violin{
+/obj/item/device/synthesized_instrument/violin{
 	holographic = 1
 	},
 /turf/simulated/floor/holofloor/wood,
