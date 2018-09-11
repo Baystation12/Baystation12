@@ -707,6 +707,10 @@
 	name = "\improper Unused Office"
 	icon_state = "conference"
 
+/area/vacant/legal
+	name = "\improper Legal Office"
+	icon_state = "legal"
+
 // Storage
 /area/storage/auxillary/port
 	name = "Port Auxillary Storage"

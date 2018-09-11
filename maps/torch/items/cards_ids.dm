@@ -127,6 +127,9 @@
 /obj/item/weapon/card/id/torch/crew/bridgeofficer
 	job_access_type = /datum/job/bridgeofficer
 
+/obj/item/weapon/card/id/torch/crew/jag
+	job_access_type = /datum/job/jag
+
 /obj/item/weapon/card/id/torch/crew/pathfinder
 	job_access_type = /datum/job/pathfinder
 
