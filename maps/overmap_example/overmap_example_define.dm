@@ -18,24 +18,20 @@
 	apc_test_exempt_areas = list(
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/ship/scrap/maintenance/lower = NO_VENT,
-		/area/ship/scrap/maintenance/lower = NO_VENT,
+		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
-		/area/ship/scrap/crew/hallway/port = NO_SCRUBBER,
-		/area/ship/scrap/crew/hallway/port = NO_VENT,
-		/area/ship/scrap/crew/hallway/starboard = NO_SCRUBBER,
-		/area/ship/scrap/crew/hallway/starboard = NO_VENT,
-		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER,
-		/area/ship/scrap/maintenance/engine/port = NO_VENT,
-		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER,
-		/area/ship/scrap/maintenance/engine/starboard = NO_VENT,
-		/area/ship/scrap/shuttle/outgoing = NO_APC,
-		/area/ship/scrap/shuttle/outgoing = NO_SCRUBBER,
-		/area/ship/scrap/shuttle/outgoing = NO_VENT,
-		/area/sector/shuttle/outgoing2 = NO_APC,
-		/area/sector/shuttle/outgoing2 = NO_SCRUBBER,
-		/area/sector/shuttle/outgoing2 = NO_VENT,
-		/area/exoplanet/grass = NO_APC,
-		/area/exoplanet/grass = NO_SCRUBBER,
-		/area/exoplanet/grass = NO_VENT,
+		/area/ship/scrap/crew/hallway/port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/starboard = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/shuttle/outgoing = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/sector/shuttle/outgoing2 = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/grass = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/snow = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
+
+
+
+
+
+
