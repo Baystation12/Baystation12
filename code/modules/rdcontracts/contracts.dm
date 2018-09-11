@@ -57,9 +57,6 @@
 		ukey = "[ukey_name]-[id]"
 	GLOB.used_rd_contracts.Add(ukey)
 
-	for(var/unikey in GLOB.used_rd_contracts)
-		world << unikey
-
 	return 1
 
 // check for completion. don't call complete() from this. the delivery tube machine does it
