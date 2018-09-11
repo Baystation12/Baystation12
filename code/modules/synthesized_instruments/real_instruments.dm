@@ -254,7 +254,7 @@
 	icon = 'icons/obj/musician.dmi'
 	var/datum/instrument/instruments = list()
 	var/path = /datum/instrument
-	var/sound_player //Need path here
+	var/sound_player = /datum/sound_player
 
 /obj/item/device/synthesized_instrument/Initialize()
 	. = ..()
