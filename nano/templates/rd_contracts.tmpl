@@ -17,13 +17,13 @@
 	<br>
 
 	<div class="itemContent">
-		{{:helper.link('Eject item', null, {'cmd' : 'eject'}, data.item ? null : 'disabled')}}
+		{{:helper.link('Eject item', null, {'cmd' : 'eject'}, (data.item && !data.busy) ? null : 'disabled')}}
 	</div>
 	<div class="itemContent">
-		{{:helper.link('Deliver item', null, {'cmd' : 'deliver'}, data.item ? null : 'disabled')}}
+		{{:helper.link('Deliver item', null, {'cmd' : 'deliver'}, (data.item && !data.busy) ? null : 'disabled')}}
 	</div>
 	<div class="itemContent">
-		{{:helper.link('Retrieve purchase', null, {'cmd' : 'get_purchase'}, (data.queued_purchase != "none" && !data.item && data.has_access) ? null : 'disabled')}}
+		{{:helper.link('Retrieve purchase', null, {'cmd' : 'get_purchase'}, (data.queued_purchase != "none" && !data.busy && !data.item && data.has_access) ? null : 'disabled')}}
 	</div>
 	<div class="itemContent">
 		{{:helper.link('Cancel purchase', null, {'cmd' : 'cancel_purchase'}, (data.queued_purchase != "none" && data.has_access) ? null : 'disabled')}}

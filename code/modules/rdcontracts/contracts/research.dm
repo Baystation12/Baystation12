@@ -1,6 +1,7 @@
 /datum/rdcontract/research
 	name = "research something"
 	desc = "attain a research level in something and deliver a disk"
+	ukey_name = "research"
 
 	// we add to this reward based on the desired research level
 	reward = 100
@@ -22,24 +23,20 @@
 	var/min_level = 2
 	var/max_level = 3
 
-/datum/rdcontract/research/setup()
-	..()
+/datum/rdcontract/research/get_ukey_id()
+	if(possible_techs.len == 0)
+		return UKEY_ID_INVALID
 
 	desired_tech = pick(possible_techs)
+	possible_techs.Remove(desired_tech)
+
+	return desired_tech
+
+/datum/rdcontract/research/setup()
+	. = ..()
+
 	desired_level = rand(min_level,max_level)
 	reward += (100 * desired_level)
-
-	// don't include desired level in ukey. only one research contract per tech
-	var/ukey = "research-[desired_tech]"
-	while(GLOB.used_rd_contracts.Find(ukey))
-		possible_techs.Remove(desired_tech)
-		if(possible_techs.len == 0)
-			qdel(src)
-			return 0
-
-		desired_tech = pick(possible_techs)
-		ukey = "research-[desired_tech]"
-	GLOB.used_rd_contracts.Add(ukey)
 
 	var/datum/research/techonly/R = new()
 	var/datum/tech/T

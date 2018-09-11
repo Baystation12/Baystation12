@@ -6,6 +6,7 @@
 
 	req_access = list(access_rd)
 
+	var/busy = 0
 	var/ui_state = "operation"
 
 	// rd contracts
@@ -39,10 +40,9 @@
 	qdel(account)
 	account = null
 
-	if(!tube_item)
-		return
-	tube_item.dropInto(loc)
-	tube_item = null
+	if(tube_item)
+		tube_item.dropInto(loc)
+		tube_item = null
 
 	queued_purchase = null
 
@@ -55,8 +55,13 @@
 		icon_state = "filled"
 
 /obj/machinery/contracttube/attackby(var/obj/item/O, var/mob/user)
+	. = ..()
+
 	if(!istype(O))
-		..()
+		return
+
+	if(tube_item)
+		return
 
 	if(!user.drop_from_inventory(O))
 		return
@@ -87,11 +92,16 @@
 		contracts.Add(C)
 
 /obj/machinery/contracttube/proc/begin_deliver()
+	if(busy)
+		return 0
+
 	if(!tube_item)
 		return 0
 
 	if(!contracts.len)
 		return 0
+
+	busy = 1
 
 	flick("downfilled", src)
 	addtimer(CALLBACK(src, .proc/finish_deliver), 41)
@@ -115,7 +125,12 @@
 	
 	update_icon()
 
+	addtimer(CALLBACK(src, .proc/clear_busy), 40)
+
 /obj/machinery/contracttube/proc/begin_get_purchase()
+	if(busy)
+		return 0
+
 	if(!allowed(usr))
 		return 0
 
@@ -128,6 +143,8 @@
 	// sanity
 	if(account.money < queued_purchase.cost)
 		return 0
+
+	busy = 1
 
 	var/datum/transaction/T = new("NanoTrasen SEV Torch Dept.", "Article purchase ([queued_purchase.name])", -queued_purchase.cost, "BlueSupply Services")
 	account.do_transaction(T)
@@ -146,10 +163,16 @@
 
 	update_icon()
 
+	addtimer(CALLBACK(src, .proc/clear_busy), 40)
+
+/obj/machinery/contracttube/proc/clear_busy()
+	busy = 0
+
 /obj/machinery/contracttube/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null)
 	var/list/data = list()
 
 	data["state"] = ui_state
+	data["busy"] = busy
 
 	// operations
 	data["item"] = (tube_item ? 1 : 0)
@@ -192,6 +215,9 @@
 
 	switch(href_list["cmd"])
 		if("eject")
+			if(busy)
+				return 0
+
 			if(!tube_item)
 				return 0
 

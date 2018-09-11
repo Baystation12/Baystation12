@@ -1,6 +1,7 @@
 /datum/rdcontract/prototype
 	name = "deliver prototype"
 	desc = "deliver a prototype"
+	ukey_name = "prototype"
 
 	reward = 400
 	var/list/possible_types = list(
@@ -18,23 +19,17 @@
 		/obj/item/weapon/aiModule/purge
 	)
 
-/datum/rdcontract/prototype/setup()
-	..()
+/datum/rdcontract/prototype/get_ukey_id()
+	if(possible_types.len == 0)
+		return UKEY_ID_INVALID
 
 	delivery_type = pick(possible_types)
+	possible_types.Remove(delivery_type)
 
-	// make a unique key for this contract
-	var/ukey = "prototype-[delivery_type]"
-	while(GLOB.used_rd_contracts.Find(ukey))
-		possible_types.Remove(delivery_type)
-		// this while should always complete unless we run out of original contracts
-		if(possible_types.len == 0)
-			qdel(src)
-			return 0
+	return delivery_type
 
-		delivery_type = pick(possible_types)
-		ukey = "prototype-[delivery_type]"
-	GLOB.used_rd_contracts.Add(ukey)
+/datum/rdcontract/prototype/setup()
+	. = ..()
 
 	var/obj/item/proto = new delivery_type()
 	name = "Deliver a [proto.name]"
