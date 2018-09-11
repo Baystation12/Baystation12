@@ -125,6 +125,8 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 		return "INNIECOM"
 	if(job.faction_flag & COLONY)
 		return "System"
+	if(job.faction_flag & COVENANT)
+		return "Battlenet"
 	/*
 	if(job.department_flag & (COM | CIV | MSC))
 		return "Common"

@@ -517,7 +517,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (ticker.mode && ticker.mode.deny_respawn)
 		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
 		return
-	else if(!MayRespawn(1, config.respawn_delay))
+	else if(!MayRespawn(1, ticker.mode.get_respawn_time()))
 		return
 
 	to_chat(usr, "You can respawn now, enjoy your new life!")

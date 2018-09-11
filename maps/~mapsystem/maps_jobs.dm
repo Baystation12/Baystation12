@@ -7,6 +7,12 @@
 	if(!istype(S) || !istype(J))
 		return TRUE
 
+	//check the job itself first, before checking the map
+	if(S.type in J.blacklisted_species)
+		return TRUE
+	if(J.whitelisted_species.len && !(S.type in J.whitelisted_species))
+		return TRUE
+
 	var/list/whitelist = species_to_job_whitelist[S.type]
 	if(whitelist)
 		return !(J.type in whitelist)

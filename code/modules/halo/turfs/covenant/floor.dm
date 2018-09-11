@@ -13,3 +13,6 @@
 	mineral = DEFAULT_WALL_MATERIAL
 
 	heat_capacity = 17000
+
+/turf/simulated/floor/covenant/unggoy_den
+    initial_gas = list("methane" = (101.325*2500/(293.15*8.31)))

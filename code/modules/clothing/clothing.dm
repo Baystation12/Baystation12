@@ -631,7 +631,7 @@ BLIND     // can't see anything
 
 	if(item_state_slots && item_state_slots[slot])
 		ret.icon_state = item_state_slots[slot]
-	else
+	else if(!item_state)
 		ret.icon_state = icon_state
 	return ret
 
