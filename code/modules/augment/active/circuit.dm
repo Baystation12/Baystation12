@@ -14,7 +14,7 @@
 		//Here we can adjust location for implants that allow multiple slots
 		if(holding)
 			holding.canremove = 1
-			holding.forceMove(get_turf(src))
+			holding.dropInto(loc)
 			to_chat(user, SPAN_NOTICE("You take out \the [holding]."))
 			holding = null
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
