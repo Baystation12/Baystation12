@@ -58,6 +58,7 @@
 
 /obj/structure/deity/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
+	. = ..()
 
 /obj/structure/deity/proc/attack_deity(var/mob/living/deity/deity)
 	return

@@ -319,8 +319,7 @@
 	if(needs_power)
 		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 		G.storedpower -= 400 * Proj.get_structure_damage()
-	..()
-	return
+	. = ..()
 
 
 /obj/machinery/shieldwall/ex_act(severity)

@@ -137,12 +137,12 @@
 	if(!Proj)
 		return
 
+	. = ..()
 	switch(Proj.damage_type)
 		if(BRUTE)
 			take_damage(Proj.damage / brute_resist)
 		if(BURN)
 			take_damage((Proj.damage / laser_resist) / fire_resist)
-	return 0
 
 /obj/effect/blob/attackby(var/obj/item/weapon/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

@@ -201,6 +201,7 @@
 	if(Proj.damtype == STUN)
 		damage = (Proj.damage / 8)
 
+	GLOB.bullet_hit_event.raise_event(Proj,src)
 	adjustBruteLoss(damage)
 	Proj.on_hit(src)
 	return 0

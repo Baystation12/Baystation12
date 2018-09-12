@@ -150,6 +150,7 @@
 	qdel(src)
 
 /obj/structure/foamedmetal/bullet_act()
+	. = ..()
 	if(metal == 1 || prob(50))
 		qdel(src)
 

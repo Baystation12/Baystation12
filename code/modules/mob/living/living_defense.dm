@@ -83,7 +83,7 @@
 	if(!P.nodamage)
 		apply_damage(damage, P.damage_type, def_zone, absorb, flags, P)
 	P.on_hit(src, absorb, def_zone)
-
+	GLOB.bullet_hit_event.raise_event(P,src)
 	return absorb
 
 /mob/living/proc/aura_check(var/type)

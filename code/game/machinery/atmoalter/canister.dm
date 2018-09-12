@@ -249,7 +249,7 @@ update_flag
 	if(Proj.damage)
 		src.health -= round(Proj.damage / 2)
 		healthcheck()
-	..()
+	. = ..()
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(!isWrench(W) && !istype(W, /obj/item/weapon/tank) && !istype(W, /obj/item/device/analyzer) && !istype(W, /obj/item/modular_computer/pda))

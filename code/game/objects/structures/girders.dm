@@ -42,11 +42,9 @@
 		damage *= 0.4 //non beams do reduced damage
 
 	health -= damage
-	..()
+	. =..()
 	if(health <= 0)
 		dismantle()
-
-	return
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE

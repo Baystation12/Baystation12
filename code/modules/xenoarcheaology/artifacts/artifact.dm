@@ -281,6 +281,7 @@
 			my_effect.ToggleActivate()
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_ENERGY && prob(25))
 			secondary_effect.ToggleActivate(0)
+	. = ..()
 
 /obj/machinery/artifact/ex_act(severity)
 	switch(severity)

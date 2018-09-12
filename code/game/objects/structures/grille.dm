@@ -113,7 +113,7 @@
 			if(!(Proj.original == src || prob(20)))
 				Proj.damage *= 0.5
 				passthrough = 1
-
+	..()
 	if(passthrough)
 		. = PROJECTILE_CONTINUE
 		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage

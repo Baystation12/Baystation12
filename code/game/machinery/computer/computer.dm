@@ -62,7 +62,7 @@
 /obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
 	if(prob(Proj.get_structure_damage()))
 		set_broken()
-	..()
+	. = ..()
 
 /obj/machinery/computer/update_icon()
 	overlays.Cut()

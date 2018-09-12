@@ -87,7 +87,7 @@
 	if(buckled_mob && prob(70))
 		buckled_mob.bullet_act(Proj)
 		return
-	..()
+	. =..()
 
 /obj/vehicle/train/cargo/update_icon()
 	if(open)

@@ -192,7 +192,7 @@
 	if(buckled_mob && prob((100-protection_percent)))
 		buckled_mob.bullet_act(Proj)
 		return
-	..()
+	. =..()
 
 /obj/vehicle/bike/update_icon()
 	overlays.Cut()

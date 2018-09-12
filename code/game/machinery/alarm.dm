@@ -958,6 +958,7 @@ FIRE ALARM
 	return src.attack_hand(user)
 
 /obj/machinery/firealarm/bullet_act()
+	..()
 	return src.alarm()
 
 /obj/machinery/firealarm/emp_act(severity)

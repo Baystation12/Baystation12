@@ -13,9 +13,8 @@
 
 /obj/structure/alien/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.damage
-	..()
+	. =..()
 	healthcheck()
-	return
 
 /obj/structure/alien/ex_act(severity)
 	switch(severity)
