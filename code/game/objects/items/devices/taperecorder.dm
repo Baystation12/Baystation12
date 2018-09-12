@@ -495,7 +495,7 @@
 		if(index >= timestamp.len)
 			return
 		
-		to_chat(user, "<span class='notice'>You cut the part of the tape off.</span>")
+		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)
 		return TOPIC_REFRESH
