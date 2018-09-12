@@ -3,8 +3,8 @@
 	var/obj/item/holding = null
 	var/holding_type = null
 
-/obj/item/organ/internal/augment/active/simple/New()
-	..()
+/obj/item/organ/internal/augment/active/simple/Initialize()
+	. = ..()
 	if(holding_type)
 		holding = new holding_type(src)
 		holding.canremove = 0

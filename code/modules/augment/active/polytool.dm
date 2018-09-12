@@ -7,8 +7,8 @@
 	var/list/paths = list() //We may lose them
 	augment_flags = AUGMENTATION_MECHANIC
 
-/obj/item/organ/internal/augment/active/polytool/New()
-	..()
+/obj/item/organ/internal/augment/active/polytool/Initialize()
+	. = ..()
 	for(var/path in paths)
 		var/obj/item/I = new path (src)
 		I.canremove = FALSE

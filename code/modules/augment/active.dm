@@ -9,6 +9,9 @@
 /obj/item/organ/internal/augment/active/onInstall()
 	limb = owner.get_organ(parent_organ)
 
+/obj/item/organ/internal/augment/active/onRemove()
+	limb = null
+
 /obj/item/organ/internal/augment/active/proc/can_activate()
 	if(!owner || owner.incapacitated() || !is_usable())
 		to_chat(owner, SPAN_WARNING("You can't do that now!"))
@@ -23,8 +26,12 @@
 		activate()
 
 //Need to change icon?
-/obj/item/organ/internal/augment/refresh_action_button()
+/obj/item/organ/internal/augment/active/refresh_action_button()
 	. = ..()
 	if(.)
 		action.button_icon_state = icon_state
 		if(action.button) action.button.UpdateIcon()
+
+
+/obj/item/organ/internal/augment/active/Destroy()
+	limb = null
