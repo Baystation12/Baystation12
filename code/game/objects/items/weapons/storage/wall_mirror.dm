@@ -49,7 +49,7 @@
 	playsound(src, "shatter", 70, 1)
 	desc = "Oh no, seven years of bad luck!"
 
-/obj/item/weapon/storage/mirror/bullet_act(var/obj/item/projectile/Proj)
+/obj/item/weapon/storage/mirror/do_bullet_act(var/obj/item/projectile/Proj)
 
 	if(prob(Proj.get_structure_damage() * 2))
 		if(!shattered)

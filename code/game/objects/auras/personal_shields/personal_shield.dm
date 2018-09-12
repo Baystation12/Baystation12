@@ -6,7 +6,7 @@
 	playsound(user,'sound/weapons/flash.ogg',35,1)
 	to_chat(user,"<span class='notice'>You feel your body prickle as \the [src] comes online.</span>")
 
-/obj/aura/personal_shield/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/personal_shield/do_bullet_act(var/obj/item/projectile/P, var/def_zone)
 	user.visible_message("<span class='warning'>\The [user]'s [src.name] flashes before \the [P] can hit them!</span>")
 	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
 	playsound(user,'sound/effects/basscannon.ogg',35,1)
@@ -20,7 +20,7 @@
 /obj/aura/personal_shield/device
 	var/obj/item/device/personal_shield/shield
 
-/obj/aura/personal_shield/device/bullet_act()
+/obj/aura/personal_shield/device/do_bullet_act()
 	. = ..()
 	if(shield)
 		shield.take_charge()

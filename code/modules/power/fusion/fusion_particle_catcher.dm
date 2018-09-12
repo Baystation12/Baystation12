@@ -32,7 +32,7 @@
 		set_density(0)
 		SetName("collector [mysize] OFF")
 
-/obj/effect/fusion_particle_catcher/bullet_act(var/obj/item/projectile/Proj)
+/obj/effect/fusion_particle_catcher/do_bullet_act(var/obj/item/projectile/Proj)
 	parent.AddEnergy(Proj.damage)
 	update_icon()
 	return 0

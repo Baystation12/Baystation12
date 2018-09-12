@@ -158,7 +158,7 @@
 			do_animate("deny")
 	return
 
-/obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/door/do_bullet_act(var/obj/item/projectile/Proj)
 	..()
 
 	var/damage = Proj.get_structure_damage()

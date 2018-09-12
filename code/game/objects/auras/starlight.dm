@@ -6,7 +6,7 @@
 	plane = ABOVE_HUMAN_PLANE
 	layer = MOB_LAYER
 
-/obj/aura/starborn/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/starborn/do_bullet_act(var/obj/item/projectile/P, var/def_zone)
 	if(P.damage_type == BURN)
 		user.visible_message("<span class='warning'>\The [P] seems to only make \the [user] stronger.</span>")
 		user.adjustBruteLoss(-P.damage)

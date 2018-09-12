@@ -266,7 +266,7 @@
 				to_chat(M, "<b>You accidentally touch [src].</b>")
 	..()
 
-/obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)
+/obj/machinery/artifact/do_bullet_act(var/obj/item/projectile/P)
 	if(istype(P,/obj/item/projectile/bullet) ||\
 		istype(P,/obj/item/projectile/hivebotbullet))
 		if(my_effect.trigger == TRIGGER_FORCE)

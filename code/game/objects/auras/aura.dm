@@ -29,7 +29,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/attackby(var/obj/item/I, var/mob/user)
 	return 0
 
-/obj/aura/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/do_bullet_act(var/obj/item/projectile/P, var/def_zone)
 	return 0
 
 /obj/aura/hitby(var/atom/movable/M, var/speed)
@@ -42,7 +42,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 	log_debug("Attackby for \ref[src]: [I], [user]")
 	return returning
 
-/obj/aura/debug/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/debug/do_bullet_act(var/obj/item/projectile/P, var/def_zone)
 	log_debug("Bullet Act for \ref[src]: [P], [def_zone]")
 	return returning
 

@@ -42,7 +42,7 @@
 		return 0 //blocked
 	return 1
 
-/obj/structure/table/bullet_act(obj/item/projectile/P)
+/obj/structure/table/do_bullet_act(obj/item/projectile/P)
 	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
 		return 0
 

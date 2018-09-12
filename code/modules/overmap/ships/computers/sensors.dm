@@ -199,7 +199,7 @@
 	else if(health < max_health * 0.75)
 		to_chat(user, "\The [src] shows signs of damage!")
 
-/obj/machinery/shipsensors/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/shipsensors/do_bullet_act(var/obj/item/projectile/Proj)
 	take_damage(Proj.get_structure_damage())
 	..()
 

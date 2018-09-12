@@ -14,7 +14,7 @@
 	to_chat(user, "<span class='warning'>Your protective aura dissipates, leaving you feeling cold and unsafe.</span>")
 	..()
 
-/obj/aura/radiant_aura/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/radiant_aura/do_bullet_act(var/obj/item/projectile/P, var/def_zone)
 	if(P.check_armour == "laser")
 		user.visible_message("<span class='warning'>\The [P] refracts, bending into \the [user]'s aura.</span>")
 		return AURA_FALSE

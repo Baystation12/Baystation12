@@ -79,7 +79,7 @@ var/list/fusion_cores = list()
 		owned_field.AddParticles(name, quantity)
 		. = 1
 
-/obj/machinery/power/fusion_core/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/power/fusion_core/do_bullet_act(var/obj/item/projectile/Proj)
 	if(owned_field)
 		. = owned_field.bullet_act(Proj)
 

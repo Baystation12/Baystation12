@@ -122,7 +122,7 @@ obj/structure/net/Initialize(var/mapload)
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
 
-/obj/structure/net/bullet_act(obj/item/projectile/P)
+/obj/structure/net/do_bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
 	if(P.damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return

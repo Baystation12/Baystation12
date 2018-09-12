@@ -67,7 +67,7 @@
 		visible_message("<span class='warning'>\The [user] gently taps \the [src] with \the [O].</span>")
 
 
-/mob/living/simple_animal/hostile/syndicate/melee/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/syndicate/melee/do_bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return
 	if(prob(65))
 		src.health -= Proj.damage

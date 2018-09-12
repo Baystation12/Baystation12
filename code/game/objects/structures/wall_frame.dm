@@ -153,7 +153,7 @@
 			color = adjust_brightness(color, bleach_factor)
 	update_icon()
 
-/obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/wall_frame/do_bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
 	var/damage = min(proj_damage, 100)
 	take_damage(damage)
