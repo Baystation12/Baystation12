@@ -7,6 +7,7 @@
 	var/augment_flags = AUGMENTATION_MECHANIC | AUGMENTATION_ORGANIC
 	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	default_action_type = /datum/action/item_action/organ/augment
+	var/descriptor = ""
 
 /obj/item/organ/internal/augment/Initialize()
 	..()
@@ -41,30 +42,33 @@
 /obj/item/organ/internal/augment/proc/update_parent_organ()
 	//This tries to match a parent organ to an augment slot
 	//This is intended to match the possible positions to a parent organ
-	//Update description
-	desc = initial(desc)
-	desc += " It is configured to be attached to the "
+
 	if(organ_tag == BP_AUGMENT_L_LEG)
 		parent_organ = BP_L_LEG
-		desc += "left leg."
+		descriptor = "left leg."
 	if(organ_tag == BP_AUGMENT_R_LEG)
 		parent_organ = BP_R_LEG
-		desc += "right leg."
+		descriptor = "right leg."
 	if(organ_tag == BP_AUGMENT_L_HAND)
 		parent_organ = BP_L_HAND
-		desc += "left hand."
+		descriptor = "left hand."
 	if(organ_tag == BP_AUGMENT_R_HAND)
 		parent_organ = BP_R_HAND
-		desc += "right hand."
+		descriptor = "right hand."
 	if(organ_tag == BP_AUGMENT_L_ARM)
 		parent_organ = BP_L_ARM
-		desc += "left arm."
+		descriptor = "left arm."
 	if(organ_tag == BP_AUGMENT_R_ARM)
 		parent_organ = BP_R_ARM
-		desc += "right arm."
+		descriptor = "right arm."
 	if(organ_tag == BP_AUGMENT_HEAD)
 		parent_organ = BP_HEAD
-		desc += "head."
+		descriptor = "head."
 	if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)
 		parent_organ = BP_CHEST
-		desc += "chest."
+		descriptor = "chest."
+
+
+/obj/item/organ/internal/augment/examine(mob/user)
+	if(..(user, 1))
+		to_chat(user, "It is configured to be attached to the [descriptor]")
