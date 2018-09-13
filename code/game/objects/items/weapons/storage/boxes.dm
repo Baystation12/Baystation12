@@ -314,40 +314,10 @@
 	desc = "Drymate brand neaera cubes, shipped from Jargon 4. Just add water!"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube = 5)
 
-//cubed domestics
-
-/obj/item/weapon/storage/box/monkeycubes/catcubes
-	name = "cat cube box"
-	desc = "Drymate brand Instant cats. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/catcube = 2,
-						/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/kcatcube = 3)
-
-/obj/item/weapon/storage/box/monkeycubes/dogcubes
-	name = "corgi cube box"
-	desc = "Drymate brand Instant dogs. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/corgicube = 2,
-						/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/pcorgicube = 3)
-
-/obj/item/weapon/storage/box/monkeycubes/cowcubes
-	name = "cow cube box"
-	desc = "Drymate brand Instant cow. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/cowcube = 2)
-
-/obj/item/weapon/storage/box/monkeycubes/goatcubes
-	name = "goat cube box"
-	desc = "Drymate brand Instant goat. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/goatcube = 2)
-
-/obj/item/weapon/storage/box/monkeycubes/chickencubes
-	name = "chicken cube box"
-	desc = "Drymate brand Instant chicken. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/chickencube = 2,
-						/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/chickcube = 3)
-
-/obj/item/weapon/storage/box/monkeycubes/slimecubes
-	name = "slime cube box"
-	desc = "Drymate brand Instant slime. Just add water! (Caution: Not for recreational use)"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/slimecube = 3)
+/obj/item/weapon/storage/box/monkeycubes/spidercubes
+	name = "spiderling cube box"
+	desc = "Drymate brand Instant spiders. WHY WOULD YOU ORDER THIS!?"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/spidercube = 5)
 
 /obj/item/weapon/storage/box/ids
 	name = "box of spare IDs"
