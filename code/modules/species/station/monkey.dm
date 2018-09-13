@@ -2,6 +2,9 @@
 	name = "Monkey"
 	name_plural = "Monkeys"
 	description = "Ook."
+	codex_description = "Monkeys and other similar creatures tend to be found on science stations and vessels as \
+	cheap and disposable test subjects. This, naturally, infuriates animal rights groups."
+	hidden_from_codex = FALSE
 
 	icobase =         'icons/mob/human_races/species/monkey/monkey_body.dmi'
 	deform =          'icons/mob/human_races/species/monkey/monkey_body.dmi'

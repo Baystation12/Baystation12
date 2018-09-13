@@ -9,3 +9,4 @@
 	secondary_langs = null
 	economic_power = 0
 	hidden = TRUE
+	hidden_from_codex = TRUE

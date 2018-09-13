@@ -1,5 +1,6 @@
 /material/plastic
 	name = MATERIAL_PLASTIC
+	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
@@ -21,9 +22,11 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	sale_price = null
+	hidden_from_codex = TRUE
 
 /material/wood
 	name = MATERIAL_WOOD
+	lore_text = "A fibrous structural material harvested from trees. Don't get a splinter."
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824b28"
@@ -58,9 +61,11 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	sale_price = null
+	hidden_from_codex = TRUE
 
 /material/cardboard
 	name = MATERIAL_CARDBOARD
+	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MATERIAL_BRITTLE
 	integrity = 10
@@ -87,6 +92,7 @@
 	brute_armor = 1
 	conductive = 0
 	stack_type = null
+	hidden_from_codex = TRUE
 
 //TODO PLACEHOLDERS:
 /material/leather
@@ -98,6 +104,7 @@
 	melting_point = T0C+300
 	conductive = 0
 	stack_type = null
+	hidden_from_codex = TRUE
 
 /material/carpet
 	name = MATERIAL_CARPET
@@ -112,7 +119,7 @@
 	conductive = 0
 	stack_type = null
 
-/material/cotton
+/material/cloth
 	name = MATERIAL_COTTON
 	display_name ="grey"
 	use_name = "grey cloth"
@@ -122,91 +129,60 @@
 	melting_point = T0C+300
 	conductive = 0
 	stack_type = null
+	hidden_from_codex = TRUE
 
-/material/cloth_yellow
+/material/cloth/carpet
+	name = "carpet"
+	display_name = "red"
+	use_name = "red upholstery"
+	icon_colour = "#9d2300"
+	sheet_singular_name = "tile"
+	sheet_plural_name = "tiles"
+
+/material/cloth/yellow
 	name = "yellow"
 	display_name ="yellow"
 	use_name = "yellow cloth"
 	icon_colour = "#ffbf00"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_teal
+/material/cloth/teal
 	name = "teal"
-	display_name ="teal"
+	display_name = "teal"
 	use_name = "teal cloth"
 	icon_colour = "#00e1ff"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_black
+/material/cloth/black
 	name = "black"
 	display_name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_green
+/material/cloth/green
 	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
 	icon_colour = "#b7f27d"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_puple
+/material/cloth/puple
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9933ff"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_blue
+/material/cloth/blue
 	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#46698c"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_beige
+/material/cloth/beige
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
 	icon_colour = "#ceb689"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
 
-/material/cloth_lime
+/material/cloth/lime
 	name = "lime"
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null

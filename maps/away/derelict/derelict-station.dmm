@@ -2559,7 +2559,7 @@
 /turf/space,
 /area/constructionsite/medical)
 "is" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girder,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "it" = (
@@ -2651,7 +2651,7 @@
 /turf/simulated/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iC" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girder,
 /turf/space,
 /area/constructionsite/medical)
 "iD" = (

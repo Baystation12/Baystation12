@@ -616,6 +616,7 @@
 	taste_description = "slimey metal"
 	reagent_state = LIQUID
 	color = "#535e66"
+	hidden_from_codex = TRUE
 
 /datum/reagent/xenomicrobes
 	name = "Xenomicrobes"
@@ -623,6 +624,7 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#535e66"
+	hidden_from_codex = TRUE
 
 /datum/reagent/toxin/hair_remover
 	name = "Hair Remover"
@@ -649,6 +651,7 @@
 	strength = 10
 	metabolism = REM * 5
 	overdose = 30
+	hidden_from_codex = TRUE
 
 /datum/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed * 0.5)

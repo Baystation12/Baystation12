@@ -8,7 +8,9 @@
 	var/name
 	var/name_plural                                      // Pluralized name (since "[name]s" is not always valid)
 	var/description
+	var/codex_description
 	var/cyborg_noun = "Cyborg"
+	var/hidden_from_codex = TRUE
 
 	// Icon/appearance vars.
 	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
@@ -265,6 +267,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 */
 
 /datum/species/New()
+
+	if(!codex_description)
+		codex_description = description
+
 	for(var/token in ALL_CULTURAL_TAGS)
 
 		var/force_val = force_cultural_info[token]
