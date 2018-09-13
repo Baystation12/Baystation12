@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/polytool
 	name = "Polytool embedded module"
-	action_button_name = "Deploy tool"
+	action_button_name = "Deploy Tool"
 	icon_state = "multitool"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	var/list/items = list()
@@ -58,6 +58,6 @@
 			//Keep track of it, make sure it returns
 			GLOB.item_unequipped_event.register(item, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
 			owner.visible_message(
-				SPAN_WARNING("[owner] extends \his [item] from [limb]."),
-				SPAN_NOTICE("You extend your [item] from [limb].")
+				SPAN_WARNING("[owner] extends \his [item.name] from [limb]."),
+				SPAN_NOTICE("You extend your [item.name] from [limb].")
 			)

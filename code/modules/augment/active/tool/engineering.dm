@@ -1,9 +1,9 @@
 
 
 /obj/item/organ/internal/augment/active/polytool/engineer
-	name = "Engineering toolset"
-	action_button_name = "Deploy engineering tool"
-	desc = "A lightweight augmentation for the engineer on-the-go. This one comes with a series of common tools"
+	name = "\improper Engineering toolset"
+	action_button_name = "Deploy Engineering Tool"
+	desc = "A lightweight augmentation for the engineer on-the-go. This one comes with a series of common tools."
 	paths = list(
 		/obj/item/weapon/screwdriver/finger,
 		/obj/item/weapon/wrench/finger,
@@ -21,7 +21,6 @@
 
 /obj/item/weapon/weldingtool/finger/update_icon()
 	icon_state = welding ? "welder_finger_on" : "welder_finger"
-
 
 /obj/item/weapon/wirecutters/finger
 	name = "digital splicer"

@@ -25,10 +25,6 @@
 		holding.canremove = 1
 		holding = null     //We no longer hold this, you will have to get a replacement module or fix it somehow
 
-
-
-
-
 /obj/item/organ/internal/augment/active/simple/proc/deploy()
 
 	var/slot = null

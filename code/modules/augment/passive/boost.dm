@@ -1,6 +1,3 @@
-
-
-
 /datum/skill_buff/augment
 	var/id
 

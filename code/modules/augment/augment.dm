@@ -46,25 +46,25 @@
 	if(organ_tag == BP_AUGMENT_L_LEG)
 		parent_organ = BP_L_LEG
 		descriptor = "left leg."
-	if(organ_tag == BP_AUGMENT_R_LEG)
+	else if(organ_tag == BP_AUGMENT_R_LEG)
 		parent_organ = BP_R_LEG
 		descriptor = "right leg."
-	if(organ_tag == BP_AUGMENT_L_HAND)
+	else if(organ_tag == BP_AUGMENT_L_HAND)
 		parent_organ = BP_L_HAND
 		descriptor = "left hand."
-	if(organ_tag == BP_AUGMENT_R_HAND)
+	else if(organ_tag == BP_AUGMENT_R_HAND)
 		parent_organ = BP_R_HAND
 		descriptor = "right hand."
-	if(organ_tag == BP_AUGMENT_L_ARM)
+	else if(organ_tag == BP_AUGMENT_L_ARM)
 		parent_organ = BP_L_ARM
 		descriptor = "left arm."
-	if(organ_tag == BP_AUGMENT_R_ARM)
+	else if(organ_tag == BP_AUGMENT_R_ARM)
 		parent_organ = BP_R_ARM
 		descriptor = "right arm."
-	if(organ_tag == BP_AUGMENT_HEAD)
+	else if(organ_tag == BP_AUGMENT_HEAD)
 		parent_organ = BP_HEAD
 		descriptor = "head."
-	if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)
+	else if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)
 		parent_organ = BP_CHEST
 		descriptor = "chest."
 

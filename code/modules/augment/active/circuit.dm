@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/simple/circuit
-	name = "Integrated circuit frame"
-	action_button_name = "Activate circuit"
+	name = "integrated circuit frame"
+	action_button_name = "Activate Circuit"
 	icon_state = "circuit"
 	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	holding_type = null //We must get the holding item externally
@@ -10,8 +10,8 @@
 
 
 /obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isCrowbar(W) && allowed_organs.len > 1)
-		//Here we can adjust location for implants that allow multiple slots
+	if(isCrowbar(W))
+		//Remove internal circuit
 		if(holding)
 			holding.canremove = 1
 			holding.dropInto(loc)
