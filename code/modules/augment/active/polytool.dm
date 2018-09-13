@@ -15,6 +15,7 @@
 		items += I
 /obj/item/organ/internal/augment/active/polytool/Destroy()
 	QDEL_NULL_LIST(items)
+	. = ..()
 
 /obj/item/organ/internal/augment/active/polytool/proc/holding_dropped(var/obj/item/I)
 
@@ -38,7 +39,9 @@
 
 	if(I)
 		if(is_type_in_list(I,paths) && !(I.type in items)) //We don't want several of same but you can replace parts whenever
-			owner.drop_from_inventory(I, src)
+			if(!owner.drop_from_inventory(I, src))
+				to_chat(owner, "\the [I] fails to retract.")
+				return
 			items += I
 			owner.visible_message(
 				SPAN_WARNING("[owner] retracts \his [I] into [limb]."),
@@ -48,7 +51,7 @@
 			to_chat(owner, SPAN_WARNING("You must drop [I] before tool can be extend."))
 	else
 		var/obj/item = input(owner, "Select item for deploy") as null|anything in src
-		if(!item || !src.loc in owner.organs || !can_activate())
+		if(!item || !src.loc in owner.organs)
 			return
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item

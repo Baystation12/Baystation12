@@ -40,3 +40,7 @@
 				other.other = null
 				other = null
 			return
+
+/obj/item/organ/internal/augment/boost/muscle/Destroy()
+	. = ..()
+	other = null //If somehow onRemove didn't handle it

@@ -20,12 +20,13 @@
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		else to_chat(user, SPAN_WARNING("The augment is empty!"))
 		return
-	else if(istype(W, /obj/item/device/electronic_assembly/augment))
+	if(istype(W, /obj/item/device/electronic_assembly/augment))
 		if(holding)
 			to_chat(user, SPAN_WARNING("There's already an assembly in there."))
-			return
 		else if(user.unEquip(W, src))
 			holding = W
 			holding.canremove = 0
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+		return
+
 	..()

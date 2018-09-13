@@ -22,6 +22,7 @@
 
 /obj/item/organ/internal/augment/active/nanounit/onRemove()
 	QDEL_NULL(aura)
+	..()
 
 /obj/item/organ/internal/augment/active/nanounit/proc/catastrophic_failure()
 	playsound(owner,'sound/mecha/internaldmgalarm.ogg',25,1)
@@ -33,7 +34,7 @@
 	QDEL_NULL(aura)
 
 /obj/item/organ/internal/augment/active/nanounit/activate()
-	if(!can_activate())
+	if(!aura || !can_activate())
 		return
 	if(aura.active)
 		aura.active = 0
@@ -44,17 +45,19 @@
 	playsound(owner,'sound/weapons/flash.ogg',35,1)
 
 
+/obj/item/organ/internal/augment/active/nanounit/Destroy()
+	. = ..()
+	QDEL_NULL(aura)
 
 
 
 
 
-
-/obj/aura/nanoaura/New(var/mob/living/user, var/obj/item/organ/internal/augment/active/nanounit/holder)
-	..()
+/obj/aura/nanoaura/Initialize(var/maploading, var/obj/item/organ/internal/augment/active/nanounit/holder)
+	. = ..()
 	unit = holder
-	playsound(user,'sound/weapons/flash.ogg',35,1)
-	to_chat(user,SPAN_NOTICE("Your skin tingles as the nanites spread over your body."))
+	playsound(loc,'sound/weapons/flash.ogg',35,1)
+	to_chat(loc,SPAN_NOTICE("Your skin tingles as the nanites spread over your body."))
 
 /obj/aura/nanoaura/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	if(!active)

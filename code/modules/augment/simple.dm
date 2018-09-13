@@ -49,7 +49,9 @@
 
 	if(ismob(holding.loc) && holding.loc == owner)
 		var/mob/M = holding.loc
-		M.drop_from_inventory(holding, src)
+		if(!M.drop_from_inventory(holding, src))
+			to_chat(owner, "\the [holding.name] fails to retract.")
+			return
 		M.visible_message(
 			SPAN_WARNING("[M] retracts \his [holding.name] into [limb]."),
 			SPAN_NOTICE("You retract your [holding.name] into [limb].")

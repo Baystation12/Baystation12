@@ -10,7 +10,7 @@
 	var/descriptor = ""
 
 /obj/item/organ/internal/augment/Initialize()
-	..()
+	. = ..()
 	organ_tag = pick(allowed_organs)
 	update_parent_organ()
 
@@ -70,5 +70,5 @@
 
 
 /obj/item/organ/internal/augment/examine(mob/user)
-	if(..(user, 1))
+	if((. = ..(user, 1)))
 		to_chat(user, "It is configured to be attached to the [descriptor]")
