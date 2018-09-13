@@ -12,6 +12,7 @@
 		"has_oxy" = 1
 	)
 	name = "Blood"
+	description = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#c80000"
@@ -201,7 +202,7 @@
 
 /datum/reagent/fuel
 	name = "Welding fuel"
-	description = "Required for welders. Flamable."
+	description = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
 	taste_description = "gross metal"
 	reagent_state = LIQUID
 	color = "#660000"

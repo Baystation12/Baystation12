@@ -12,6 +12,12 @@
 	refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
 	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
+	codex_description = "The Vox are a species from the edges of human space. They prey on isolated stations, ships \
+	or planets without any apparent logic or reason, and tend to refuse communications or negotiations except \
+	when their backs are to the wall. They are four to five feet tall, reptillian, beaked, tailed and quilled; \
+	crews often refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
+	smell."
+	hidden_from_codex = FALSE
 
 	taste_sensitivity = TASTE_DULL
 	speech_sounds = list('sound/voice/shriek1.ogg')

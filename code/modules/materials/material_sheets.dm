@@ -42,6 +42,9 @@
 
 	update_strings()
 
+/obj/item/stack/material/get_codex_value()
+	return (material && !material.hidden_from_codex) ? "[lowertext(material.display_name)] (material)" : ..()
+
 /obj/item/stack/material/proc/set_amount(var/_amount)
 	amount = max(1, min(_amount, max_amount))
 	update_strings()
