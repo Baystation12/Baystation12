@@ -12,7 +12,8 @@
 	name = "Nanite MCU"
 	allowed_organs = list(BP_AUGMENT_CHEST_ACTIVE)
 	icon_state = "armor-chest"
-	desc = "Nanomachines, son"
+	desc = "Nanomachines, son."
+	action_button_name = "Toggle Nanomachines"
 	var/obj/aura/nanoaura/aura = null
 	var/charges = 4
 
@@ -26,11 +27,11 @@
 
 /obj/item/organ/internal/augment/active/nanounit/proc/catastrophic_failure()
 	playsound(owner,'sound/mecha/internaldmgalarm.ogg',25,1)
-	owner.visible_message(SPAN_WARNING("The nanites attempt to harden. But they seem...brittle."))
+	owner.visible_message(SPAN_WARNING("The nanites attempt to harden. But they seem... brittle."))
 	for(var/obj/item/organ/external/E in owner.organs)
 		if(prob(25))
 			E.status |= ORGAN_BRITTLE //Some nanites are not responding and you're out of luck
-			to_chat(owner,SPAN_DANGER("Your [E] feels cold and rigid"))
+			to_chat(owner,SPAN_DANGER("Your [E.name] feels cold and rigid"))
 	QDEL_NULL(aura)
 
 /obj/item/organ/internal/augment/active/nanounit/activate()
@@ -48,10 +49,6 @@
 /obj/item/organ/internal/augment/active/nanounit/Destroy()
 	. = ..()
 	QDEL_NULL(aura)
-
-
-
-
 
 /obj/aura/nanoaura/Initialize(var/maploading, var/obj/item/organ/internal/augment/active/nanounit/holder)
 	. = ..()
