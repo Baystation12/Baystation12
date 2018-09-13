@@ -1,18 +1,13 @@
 //Engine control and monitoring console
 
-/obj/machinery/computer/engines
+/obj/machinery/computer/ship/engines
 	name = "engine control console"
 	icon_keyboard = "tech_key"
 	icon_screen = "engines"
 	circuit = /obj/item/weapon/circuitboard/engine
 	var/state = "status"
-	var/obj/effect/overmap/ship/linked
 
-/obj/machinery/computer/engines/Initialize()
-	. = ..()
-	linked = map_sectors["[z]"]
-
-/obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/ship/engines/attack_hand(var/mob/user as mob)
 	if(..())
 		user.unset_machine()
 		return
@@ -22,7 +17,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/computer/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		to_chat(user, "<span class='warning'>Unable to connect to ship control systems.</span>")
 		return
@@ -55,7 +50,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/engines/Topic(href, href_list, ui_state)
+/obj/machinery/computer/ship/engines/Topic(href, href_list, ui_state)
 	if(..())
 		return 1
 

@@ -3544,7 +3544,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/machinery/computer/engines{
+/obj/machinery/computer/ship/engines{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -5136,7 +5136,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/crew/toilets)
 "vu" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "vL" = (
@@ -5257,7 +5257,7 @@
 	layer = 2.4;
 	level = 2
 	},
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "yb" = (
@@ -5282,7 +5282,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "yg" = (
-/obj/machinery/computer/helm,
+/obj/machinery/computer/ship/helm,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/bluegrid,
 /area/ship/scrap/command/bridge)

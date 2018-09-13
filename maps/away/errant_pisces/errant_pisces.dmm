@@ -487,7 +487,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bq" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "br" = (
@@ -6617,7 +6617,7 @@
 /turf/space,
 /area/space)
 "qa" = (
-/obj/machinery/computer/sensors{
+/obj/machinery/computer/ship/sensors{
 	icon_state = "computer";
 	dir = 4
 	},
@@ -6652,14 +6652,14 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qg" = (
-/obj/machinery/computer/helm{
+/obj/machinery/computer/ship/helm{
 	icon_state = "computer";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qh" = (
-/obj/machinery/computer/engines{
+/obj/machinery/computer/ship/engines{
 	icon_state = "computer";
 	dir = 1
 	},

@@ -14230,7 +14230,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/engineering/fuelbay)
 "FD" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/fuelbay)
 "FE" = (
@@ -14941,7 +14941,7 @@
 	pixel_x = 24;
 	pixel_y = -4
 	},
-/obj/machinery/computer/engines{
+/obj/machinery/computer/ship/engines{
 	icon_state = "computer";
 	dir = 8
 	},
