@@ -35,3 +35,4 @@
 
 /obj/item/organ/internal/augment/active/Destroy()
 	limb = null
+	. = ..()

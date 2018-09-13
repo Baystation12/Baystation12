@@ -14,8 +14,8 @@
 	icon_state = "booster"
 	allowed_organs = list(BP_AUGMENT_HEAD)
 
-/obj/item/organ/internal/augment/boost/New()
-	..()
+/obj/item/organ/internal/augment/boost/Initialize()
+	. = ..()
 	id = "[/obj/item/organ/internal/augment/boost]_[sequential_id(/obj/item/organ/internal/augment/boost)]"
 
 
