@@ -1,13 +1,12 @@
 LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
-/obj/machinery/computer/helm
+/obj/machinery/computer/ship/helm
 	name = "helm control console"
 	icon_keyboard = "teleport_key"
 	icon_screen = "helm"
 	light_color = "#7faaff"
 	circuit = /obj/item/weapon/circuitboard/helm
 	core_skill = SKILL_PILOT
-	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
@@ -15,12 +14,16 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/dy		//coordinates
 	var/speedlimit = 2 //top speed for autopilot
 
-/obj/machinery/computer/helm/Initialize()
+/obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
-	linked = map_sectors["[z]"]
 	get_known_sectors()
 
-/obj/machinery/computer/helm/proc/get_known_sectors()
+/obj/machinery/computer/ship/helm/attempt_hook_up(obj/effect/overmap/ship/sector)
+	if(!(. = ..()))
+		return
+	sector.nav_control = src
+
+/obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
 		if (S.known)
@@ -31,7 +34,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			known_sectors[S.name] = R
 	..()
 
-/obj/machinery/computer/helm/Process()
+/obj/machinery/computer/ship/helm/Process()
 	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
@@ -50,19 +53,19 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 		return
 
-/obj/machinery/computer/helm/relaymove(var/mob/user, direction)
+/obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
 	if(manual_control && linked)
 		linked.relaymove(user,direction)
 		return 1
 
-/obj/machinery/computer/helm/check_eye(var/mob/user as mob)
+/obj/machinery/computer/ship/helm/check_eye(var/mob/user as mob)
 	if (!manual_control)
 		return -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
 		return -1
 	return 0
 
-/obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/ship/helm/attack_hand(var/mob/user as mob)
 	if(..())
 		user.unset_machine()
 		manual_control = 0
@@ -76,7 +79,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	ui_interact(user)
 
-/obj/machinery/computer/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		return
 
@@ -124,7 +127,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/helm/Topic(href, href_list, state)
+/obj/machinery/computer/ship/helm/Topic(href, href_list, state)
 	if(..())
 		return 1
 

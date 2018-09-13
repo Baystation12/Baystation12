@@ -86,15 +86,15 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ap" = (
-/obj/machinery/computer/helm,
+/obj/machinery/computer/ship/helm,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aq" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ar" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "as" = (
