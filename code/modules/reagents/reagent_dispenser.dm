@@ -78,10 +78,61 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
+	var/modded = 0
 	possible_transfer_amounts = "10;25;50;100"
 	initial_capacity = 50000
 	initial_reagent_types = list(/datum/reagent/water = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
+
+/obj/structure/reagent_dispensers/watertank/proc/drain_water()
+	if(reagents.total_volume <= 0)
+		return
+
+	// For now, this cheats and only checks/leaks water, pending additions to the fluid system.
+	var/turf/T = get_turf(src)
+	var/W = reagents.remove_reagent(/datum/reagent/water, amount_per_transfer_from_this * 5)
+	if(W > 0)
+		// Artificially increased flow - a 1:1 rate doesn't result in very much water at all
+		T.add_fluid(W * 100, /datum/reagent/water)
+
+/obj/structure/reagent_dispensers/watertank/examine(mob/user)
+	if(!..(user, 2))
+		return
+
+	if(modded)
+		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
+
+/obj/structure/reagent_dispensers/watertank/attackby(obj/item/weapon/W, mob/user)
+	src.add_fingerprint(user)
+	if(isWrench(W))
+		modded = !modded
+		user.visible_message("<span class='notice'>\The [user] wrenches \the [src]'s tap [modded ? "open" : "shut"].</span>", \
+			"<span class='notice'>You wrench [src]'s drain [modded ? "open" : "shut"].</span>")
+
+		if (modded)
+			log_and_message_admins("opened a water tank at [loc.loc.name], leaking water.")
+			// Allows the water tank to continuously expel water, differing it from the fuel tank.
+			START_PROCESSING(SSprocessing, src)
+			drain_water()
+		else
+			STOP_PROCESSING(SSprocessing, src)
+
+	return ..()
+
+/obj/structure/reagent_dispensers/watertank/Process()
+	if (..() && modded)
+		drain_water()
+
+/obj/structure/reagent_dispensers/watertank/Move()
+	. = ..()
+
+	if (. && modded)
+		drain_water()
+
+/obj/structure/reagent_dispensers/watertank/Destroy()
+	. = .. ()
+
+	STOP_PROCESSING(SSprocessing, src)
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fuel tank"
