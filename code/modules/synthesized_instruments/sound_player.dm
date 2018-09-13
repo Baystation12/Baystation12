@@ -3,7 +3,8 @@
 	// Virtual object
 	// It's the one used to modify shit
 	var/range = 15
-	var/volume = 100
+	var/volume = 30
+	var/max_volume = 50
 	var/falloff = 2
 	var/apply_echo = 0
 	var/virtual_environment_selected = 0
