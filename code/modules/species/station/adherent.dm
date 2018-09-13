@@ -6,6 +6,7 @@
 	built by an extinct culture. They are devoted to the memory of their long-dead creators, \
 	whose home system and burgeoning stellar empire was scoured to bedrock by a solar flare. \
 	Physically, they are large, floating squidlike machines made of a crystalline composite."
+	hidden_from_codex = FALSE
 
 	genders =                 list(PLURAL)
 	cyborg_noun =             null

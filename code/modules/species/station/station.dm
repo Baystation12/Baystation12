@@ -11,6 +11,7 @@
 	assisted_langs = list(LANGUAGE_NABBER)
 	min_age = 17
 	max_age = 100
+	hidden_from_codex = FALSE
 
 	gluttonous = GLUT_TINY
 
@@ -111,6 +112,7 @@
 	health_hud_intensity = 1.75
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
 	genders = list(PLURAL)
+	hidden_from_codex = FALSE
 
 	min_age = 19
 	max_age = 90
@@ -216,6 +218,7 @@
 	icobase = 'icons/mob/human_races/species/diona/body.dmi'
 	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
+	hidden_from_codex = FALSE
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"

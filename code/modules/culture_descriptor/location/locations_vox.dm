@@ -9,6 +9,7 @@
 	ruling_body = "the Apex"
 	secondary_langs = list(LANGUAGE_GALCOM)
 	distance = "multiple systems"
+	hidden_from_codex = TRUE
 
 /decl/cultural_info/location/vox/shroud
 	name = HOME_SYSTEM_VOX_SHROUD

@@ -30,26 +30,10 @@ var/list/global/tank_gauge_cache = list()
 	var/volume = 70
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
 						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
-
 	var/failure_temp = 173 //173 deg C Borate seal (yes it should be 153 F, but that's annoying)
 	var/leaking = 0
 	var/wired = 0
-
 	var/list/starting_pressure //list in format 'xgm gas id' = 'desired pressure at start'
-
-	description_info = "These tanks are utilised to store any of the various types of gaseous substances. \
-	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
-	<br>\
-	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173�C. \
-	The valve itself will close after expending most or all of the contents into the air.<br>\
-	<br>\
-	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
-	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
-
-	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126�C). \
-	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173�C. \
-	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
-
 
 /obj/item/weapon/tank/Initialize()
 	. = ..()

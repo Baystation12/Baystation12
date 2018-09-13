@@ -6,6 +6,7 @@
 	ark families, with contests and challenges resulting in shifting heirarchies, it usually does not go any further than \
 	the general day-to-day energy exhibited by all vox. The average ark labourer is not ambitious, and knows things could \
 	be a lot worse."
+	hidden_from_codex = TRUE
 
 /decl/cultural_info/faction/vox/raider
 	name = FACTION_VOX_RAIDER

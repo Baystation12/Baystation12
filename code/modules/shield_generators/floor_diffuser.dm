@@ -1,7 +1,6 @@
 /obj/machinery/shield_diffuser
 	name = "shield diffuser"
 	desc = "A small underfloor device specifically designed to disrupt energy barriers."
-	description_info = "This device disrupts shields on directly adjacent tiles (in a + shaped pattern). They are commonly installed around exterior airlocks to prevent shields from blocking EVA access."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "fdiffuser_on"
 	use_power = 2

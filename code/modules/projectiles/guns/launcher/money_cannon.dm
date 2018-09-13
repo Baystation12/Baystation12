@@ -1,9 +1,6 @@
 /obj/item/weapon/gun/launcher/money
 	name = "money cannon"
 	desc = "A blocky, plastic novelty launcher that claims to be able to shoot thaler at considerable velocities."
-	description_info = "Load money into the cannon by picking it up with the gun, or feeding it directly by hand. Use in your hand to configure how much money you want to fire per shot."
-	description_fluff = "These devices were invented several centuries ago and are a distinctly human cultural infection. They have produced knockoffs as timeless and as insipid as the potato gun and the paddle ball, showing up in all corners of the galaxy. The Money Cannon variation is noteworthy for its sturdiness and build quality, but is, at the end of the day, just another knockoff of the ancient originals."
-	description_antag = "Sliding a cryptographic sequencer into the receptacle will short the motors and override their speed. If you set the cannon to dispense 100 thaler or more, this might make a handy weapon."
 	icon_state = "money_launcher"
 	item_state = "money_launcher"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)

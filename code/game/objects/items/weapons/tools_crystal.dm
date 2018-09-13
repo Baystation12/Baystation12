@@ -125,7 +125,6 @@
 /obj/item/weapon/storage/belt/utility/vigil
 	name = "tool harness"
 	desc = "A segmented belt of strange crystalline material."
-	description_fluff = "While some Vigil units have tools integrated directly into their bodies, less specialized units simply use toolbelts."
 	icon_state = "vigil"
 	item_state = "vigil"
 

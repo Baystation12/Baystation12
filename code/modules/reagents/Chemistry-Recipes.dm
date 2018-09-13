@@ -4,12 +4,20 @@
 // chemical_reaction_list[/datum/reagent/toxin/phoron] is a list of all reactions relating to phoron
 // Note that entries in the list are NOT duplicated. So if a reaction pertains to
 // more than one chemical it will still only appear in only one of the sublists.
+
+GLOBAL_LIST_INIT(chemical_products_list, new)
 /proc/initialize_chemical_reactions()
 	var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
 	chemical_reactions_list = list()
 
 	for(var/path in paths)
 		var/datum/chemical_reaction/D = new path()
+
+		if(D.result)
+			if(!GLOB.chemical_products_list[D.result])
+				GLOB.chemical_products_list[D.result] = list()
+			GLOB.chemical_products_list[D.result] += D
+
 		if(D.required_reagents && D.required_reagents.len)
 			var/reagent_id = D.required_reagents[1]
 			if(!chemical_reactions_list[reagent_id])
@@ -23,6 +31,7 @@
 	var/list/catalysts = list()
 	var/list/inhibitors = list()
 	var/result_amount = 0
+	var/hidden_from_codex
 
 	var/mix_message = "The solution begins to bubble."
 	var/reaction_sound = 'sound/effects/bubbles.ogg'
@@ -422,7 +431,6 @@
 	result = /datum/reagent/citalopram
 	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/carbon = 1)
 	result_amount = 3
-
 
 /datum/chemical_reaction/paroxetine
 	name = "Paroxetine"
@@ -853,6 +861,7 @@
 /* Slime cores */
 
 /datum/chemical_reaction/slime
+	hidden_from_codex = TRUE
 	var/required = null
 
 /datum/chemical_reaction/slime/can_happen(var/datum/reagents/holder)
@@ -1312,7 +1321,7 @@
 /datum/chemical_reaction/soysauce_acid
 	name = "Bitey Soy Sauce"
 	result = /datum/reagent/nutriment/soysauce
-	required_reagents = list(/datum/reagent/drink/milk/soymilk = 4, /datum/reagent/acid = 1) 
+	required_reagents = list(/datum/reagent/drink/milk/soymilk = 4, /datum/reagent/acid = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/ketchup
