@@ -1821,7 +1821,7 @@
 "eJ" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/smokes,
-/obj/item/weapon/gun/energy/gun/taser,
+/obj/item/weapon/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eK" = (
@@ -3176,7 +3176,7 @@
 /area/lar_maria/sec_wing)
 "hD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/gun/taser,
+/obj/item/weapon/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "hE" = (
@@ -3707,7 +3707,7 @@
 	dir = 4
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/gun/energy/gun/taser,
+/obj/item/weapon/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iE" = (
@@ -3760,7 +3760,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/item/weapon/gun/energy/gun/taser,
+/obj/item/weapon/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iL" = (

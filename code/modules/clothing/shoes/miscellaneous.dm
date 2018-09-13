@@ -184,4 +184,3 @@
 	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints/reversed
 	item_flags = ITEM_FLAG_SILENT
-	description_fluff =  "Originally designed to confuse Terran troops on the swamp moon of Nabier XI, where they were proven somewhat effective. Not bad on a space vessel, either."

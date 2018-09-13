@@ -15,6 +15,7 @@
 	var/color = "#000000"
 	var/color_weight = 1
 	var/flags = 0
+	var/hidden_from_codex
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"

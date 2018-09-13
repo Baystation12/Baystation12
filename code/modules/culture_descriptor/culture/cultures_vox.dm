@@ -8,6 +8,7 @@
 	permanent home any of the creatures have. Tending to the vast, decaying vessels is a full-time job for crews of thousands, \
 	and although the glamour and allure of the raider life appeals to many, staying home is seen as a more responsible and mature \
 	pursuit than haring off across the stars to attack the meat and steal their goods."
+	hidden_from_codex = TRUE
 
 /decl/cultural_info/culture/vox/salvager
 	name = CULTURE_VOX_SALVAGER

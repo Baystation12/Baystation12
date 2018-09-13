@@ -1,5 +1,7 @@
 /material/uranium
 	name = MATERIAL_URANIUM
+	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
+	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
 	icon_base = "stone"
@@ -17,6 +19,7 @@
 
 /material/gold
 	name = MATERIAL_GOLD
+	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#ffcc33"
 	weight = 25
@@ -45,6 +48,7 @@
 
 /material/gold/bronze //placeholder for ashtrays
 	name = MATERIAL_BRONZE
+	lore_text = "An alloy of copper and tin."
 	icon_colour = "#edd12f"
 	construction_difficulty = 1
 	ore_smelts_to = null
@@ -74,6 +78,7 @@
 
 /material/silver
 	name = MATERIAL_SILVER
+	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
 	weight = 22
@@ -95,6 +100,7 @@
 
 /material/steel
 	name = MATERIAL_STEEL
+	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
 	brute_armor = 5
@@ -120,9 +126,11 @@
 	alloy_materials = null
 	alloy_product = FALSE
 	sale_price = null
+	hidden_from_codex = TRUE
 
 /material/plasteel
 	name = MATERIAL_PLASTEEL
+	lore_text = "When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and an extremely hard platinum metal, osmium."
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
@@ -144,6 +152,7 @@
 
 /material/plasteel/titanium
 	name = MATERIAL_TITANIUM
+	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
 	burn_armor = 8
 	integrity = 200
@@ -177,6 +186,7 @@
 
 /material/osmium
 	name = MATERIAL_OSMIUM
+	lore_text = "An extremely hard form of platinum."
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999ff"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -188,6 +198,8 @@
 
 /material/tritium
 	name = MATERIAL_TRITIUM
+	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
+	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -198,6 +210,8 @@
 
 /material/deuterium
 	name = MATERIAL_DEUTERIUM
+	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
+	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
 	stack_type = /obj/item/stack/material/deuterium
 	icon_colour = "#999999"
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -208,6 +222,7 @@
 
 /material/mhydrogen
 	name = MATERIAL_HYDROGEN
+	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	display_name = "metallic hydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#e6c5de"
@@ -226,6 +241,7 @@
 
 /material/platinum
 	name = MATERIAL_PLATINUM
+	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#9999ff"
 	weight = 27
@@ -244,6 +260,7 @@
 
 /material/iron
 	name = MATERIAL_IRON
+	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5c5454"
 	weight = 22
@@ -267,6 +284,7 @@
 	hardness = 500
 	weight = 500
 	construction_difficulty = 1
+	hidden_from_codex = TRUE
 
 // Likewise.
 /material/voxalloy/elevatorium
@@ -274,6 +292,7 @@
 	display_name = "elevator panelling"
 	icon_colour = "#666666"
 	construction_difficulty = 2
+	hidden_from_codex = TRUE
 
 /material/aliumium
 	name = MATERIAL_ALIUMIUM
@@ -287,6 +306,7 @@
 	sheet_plural_name = "chunks"
 	stack_type = /obj/item/stack/material/aliumium
 	construction_difficulty = 2
+	hidden_from_codex = TRUE
 
 /material/aliumium/New()
 	icon_base = "metal"

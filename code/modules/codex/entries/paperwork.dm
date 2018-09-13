@@ -1,5 +1,6 @@
-/obj/item/weapon/pen
-	description_info = {"This is an item for writing down your thoughts, on paper or elsewhere. The following special commands are available:
+/datum/codex_entry/pen
+	associated_paths = list(/obj/item/weapon/pen)
+	mechanics_text = {"This is an item for writing down your thoughts, on paper or elsewhere. The following special commands are available:
 Pen and crayon commands
 \[br\] : Creates a linebreak.
 \[center\] - \[/center\] : Centers the text.
