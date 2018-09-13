@@ -5,7 +5,7 @@
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
-	var/area/shuttle_area //can be both single area type or a list of areas
+	var/list/shuttle_area //can be both single area type or a list of areas
 	var/obj/effect/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
@@ -142,6 +142,14 @@
 	shuttle_moved(destination, translation)
 	return TRUE
 
+/*****************
+* Shuttle Moved Handling * (Observer Pattern Implementation: Shuttle Moved)
+*****************/
+/datum/shuttle/attempt_move()
+	var/obj/effect/shuttle_landmark/old_location = current_location
+	. = ..()
+	if(.) // If not moved, returns FALSE.
+		GLOB.shuttle_moved_event.raise_event(src, old_location, current_location)
 
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.
@@ -222,6 +230,19 @@
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
 	return (moving_status == SHUTTLE_INTRANSIT)
+
+/datum/shuttle/proc/find_children()
+	. = list()
+	for(var/shuttle_name in SSshuttle.shuttles)
+		var/datum/shuttle/shuttle = SSshuttle.shuttles[shuttle_name]
+		if(shuttle.mothershuttle == name)
+			. += shuttle
+
+//Returns those areas that are not actually child shuttles.
+/datum/shuttle/proc/find_childfree_areas()
+	. = shuttle_area.Copy()
+	for(var/datum/shuttle/child in find_children())
+		. -= child.shuttle_area
 
 /datum/shuttle/autodock/proc/get_location_name()
 	if(moving_status == SHUTTLE_INTRANSIT)

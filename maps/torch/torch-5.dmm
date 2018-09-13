@@ -4468,7 +4468,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/computer/engines{
+/obj/machinery/computer/ship/engines{
 	icon_state = "computer";
 	dir = 4
 	},
@@ -11921,7 +11921,7 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 1
 	},
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/ship/sensors,
 /obj/structure/sign/ecplaque{
 	pixel_x = 29
 	},
@@ -12981,7 +12981,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HK" = (
-/obj/machinery/computer/helm{
+/obj/machinery/computer/ship/helm{
 	icon_state = "computer";
 	dir = 4
 	},

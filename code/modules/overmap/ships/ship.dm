@@ -11,31 +11,18 @@
 	var/list/last_movement = list(0,0)	//worldtime when ship last moved in x,y direction
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
 
-	var/obj/machinery/computer/helm/nav_control
+	var/obj/machinery/computer/ship/helm/nav_control
 	var/list/engines = list()
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
 /obj/effect/overmap/ship/Initialize()
 	. = ..()
-	for(var/datum/ship_engine/E in ship_engines)
-		if (E.holder.z in map_z)
-			engines |= E
-	for(var/obj/machinery/computer/engines/E in SSmachines.machinery)
-		if (E.z in map_z)
-			E.linked = src
-			//testing("Engines console at level [E.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
-		if (H.z in map_z)
-			nav_control = H
-			H.linked = src
-			H.get_known_sectors()
-			//testing("Helm console at level [H.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/navigation/N in SSmachines.machinery)
-		if (N.z in map_z)
-			N.linked = src
-			//testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	START_PROCESSING(SSobj, src)
+
+/obj/effect/overmap/ship/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
@@ -178,3 +165,79 @@
 	. = SKILL_MIN
 	if(nav_control)
 		. = nav_control.operator_skill || .
+
+/obj/effect/overmap/ship/populate_sector_objects()
+	..()
+	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
+		S.attempt_hook_up(src)
+	for(var/datum/ship_engine/E in ship_engines)
+		if(check_ownership(E.holder))
+			engines |= E
+
+// These come with shuttle functionality. Need to be assigned a (unique) shuttle datum name. 
+// Mapping location doesn't matter, so long as on a map loaded at the same time as the shuttle areas.
+// Multiz shuttles currently not supported. Non-autodock shuttles currently not supported.
+/obj/effect/overmap/ship/landable
+	var/shuttle                                         // Name of assotiated shuttle. Must be autodock.
+	var/obj/effect/shuttle_landmark/ship/landmark       // Record our open space landmark for easy reference.
+
+/obj/effect/overmap/ship/landable/Destroy()
+	GLOB.shuttle_moved_event.unregister(SSshuttle.shuttles[shuttle], src)
+	return ..()
+
+/obj/effect/overmap/ship/landable/check_ownership(obj/object)
+	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
+	if(!shuttle_datum)
+		return
+	var/list/areas = shuttle_datum.find_childfree_areas()
+	if(get_area(object) in areas)
+		return 1
+
+// We autobuild our z levels.
+/obj/effect/overmap/ship/landable/find_z_levels()
+	world.maxz++
+	map_z += world.maxz
+	// Not really the center, but rather where the shuttle landmark should be
+	var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
+	landmark = new (center_loc, shuttle)
+	add_landmark(landmark, shuttle)
+
+/obj/effect/overmap/ship/landable/populate_sector_objects()
+	..()
+	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
+	GLOB.shuttle_moved_event.register(shuttle_datum, src, .proc/on_shuttle_jump)
+	on_landing(landmark, shuttle_datum.current_location) // We "land" at round start to properly place ourselves on the overmap.
+
+/obj/effect/shuttle_landmark/ship
+	name = "Open Space"
+	landmark_tag = "ship"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/ship/Initialize(shuttle_name)
+	landmark_tag += "_[shuttle_name]"
+	. = ..()
+
+/obj/effect/shuttle_landmark/ship/Destroy()
+	var/obj/effect/overmap/ship/landable/ship = map_sectors["z"]
+	if(istype(ship) && ship.landmark == src)
+		ship.landmark = null
+	. = ..()
+
+/obj/effect/overmap/ship/landable/proc/on_shuttle_jump(datum/shuttle/given_shuttle, obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+	if(given_shuttle != SSshuttle.shuttles[shuttle])
+		return
+	var/datum/shuttle/autodock/auto = given_shuttle
+	if(into == auto.landmark_transition || into == landmark)
+		on_takeoff(from, into)
+	else
+		on_landing(from, into)
+
+/obj/effect/overmap/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+	var/obj/effect/overmap/target = map_sectors["[into.z]"]
+	if(!target || target == src)
+		return
+	forceMove(target)
+
+/obj/effect/overmap/ship/landable/proc/on_takeoff(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+	if(!isturf(loc))
+		forceMove(get_turf(loc))

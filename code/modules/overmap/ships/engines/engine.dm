@@ -9,9 +9,6 @@ var/list/ship_engines = list()
 	..()
 	holder = _holder
 	ship_engines += src
-	var/obj/effect/overmap/ship/S = map_sectors["[holder.z]"]
-	if(istype(S))
-		S.engines |= src
 
 /datum/ship_engine/proc/can_burn()
 	return 0
