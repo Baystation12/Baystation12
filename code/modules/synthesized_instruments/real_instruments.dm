@@ -79,7 +79,7 @@
 				src.usage_info = new (owner, src.player)
 			src.usage_info.ui_interact(usr)
 		if ("volume")
-			src.player.volume = max(min(player.volume+text2num(value), 100), 0)
+			src.player.volume = min(max(min(player.volume+text2num(value), 100), 0), player.max_volume)
 		if ("transposition")
 			src.player.song.transposition = max(min(player.song.transposition+value, GLOB.musical_config.highest_transposition), GLOB.musical_config.lowest_transposition)
 		if ("min_octave")
