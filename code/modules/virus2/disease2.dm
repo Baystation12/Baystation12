@@ -143,9 +143,10 @@ LEGACY_RECORD_STRUCTURE(virus_records, virus_record)
 
 	effects += get_random_virus2_effect(effect_stage, badness, exclude)
 
-	if (prob(5))
-		antigen = list(pick(ALL_ANTIGENS))
-		antigen |= pick(ALL_ANTIGENS)
+	//Since we aren't working with the original strain anymore, and so we could have a very different virus to handle, it's logically to have also a brand new antigens list.
+	//if (prob(5))
+	antigen = list(pick(ALL_ANTIGENS))
+	antigen |= pick(ALL_ANTIGENS)
 
 	if (prob(5) && all_species.len)
 		affected_species = get_infectable_species()

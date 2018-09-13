@@ -335,6 +335,17 @@
 		if (prob(30))
 			mob.jitteriness += 10
 
+/datum/disease2/effect/spiderfication
+	name = "Hatching Syndrome"
+	stage = 2
+	badness = VIRUS_COMMON
+	chance_max = 30
+	delay = 60 SECONDS
+	activate(var/mob/living/carbon/human/mob,var/multiplier)
+		var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(get_turf(mob))
+		mob.emote("cough")
+		to_chat(mob, "<span class='warning'>You cough up the [S]!</span>")
+
 ////////////////////////STAGE 1/////////////////////////////////
 
 /datum/disease2/effect/sneeze
