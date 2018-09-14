@@ -47,8 +47,8 @@
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 		if(installed_gun.fire_delay)
 			cooldown_per_use = installed_gun.fire_delay * 10
-		if(cooldown_per_use<30)
-			cooldown_per_use = 30
+		if(cooldown_per_use < 30)
+			cooldown_per_use = 30 //If there's no defined fire delay let's put some
 		if(installed_gun.charge_cost)
 			power_draw_per_use = installed_gun.charge_cost
 		set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
@@ -389,7 +389,7 @@
 
 /obj/item/integrated_circuit/manipulation/claw
 	name = "pulling claw"
-	desc = "Circuit which can pull things.."
+	desc = "A claw and tether system."
 	icon_state = "pull_claw"
 	extended_desc = "This circuit accepts a reference to a thing to be pulled."
 	w_class = ITEM_SIZE_SMALL
@@ -402,7 +402,8 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 50
 	ext_cooldown = 1
-	var/atom/movable/pulling
+	var/max_w_class = ITEM_SIZE_SMALL
+	var/obj/item/pulling
 
 /obj/item/integrated_circuit/manipulation/claw/Destroy()
 	stop_pulling()
@@ -410,16 +411,16 @@
 
 /obj/item/integrated_circuit/manipulation/claw/do_work(ord)
 	var/obj/acting_object = get_object()
-	var/atom/movable/AM = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
+	var/obj/item/to_pull = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
 	switch(ord)
 		if(1)
-			if(AM)
-				if(check_target(AM, exclude_contents = TRUE))
+			if(can_pull(to_pull))
+				if(check_target(to_pull, exclude_contents = TRUE))
 					set_pin_data(IC_OUTPUT, 1, TRUE)
-					pulling = AM
-					acting_object.visible_message("\The [acting_object] starts pulling \the [AM] around.")
-					GLOB.moved_event.register(AM, src, .proc/check_pull) //Whenever the target moves, make sure we can still pull it!
-					GLOB.destroyed_event.register(AM, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
+					pulling = to_pull
+					acting_object.visible_message("\The [acting_object] starts pulling \the [to_pull] around.")
+					GLOB.moved_event.register(to_pull, src, .proc/check_pull) //Whenever the target moves, make sure we can still pull it!
+					GLOB.destroyed_event.register(to_pull, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
 					GLOB.moved_event.register(acting_object, src, .proc/pull) //Make sure we actually pull it.
 			push_data()
 		if(3)
@@ -437,6 +438,9 @@
 						if(acting_object.Adjacent(F))
 							step_towards(pulling, F)
 	activate_pin(2)
+
+/obj/item/integrated_circuit/manipulation/claw/proc/can_pull(var/obj/item/I)
+	return I && I.w_class <= max_w_class && !I.anchored
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
 	var/obj/acting_object = get_object()
@@ -484,9 +488,9 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
 	power_draw_per_use = 50
+	var/max_w_class = ITEM_SIZE_SMALL
 
 /obj/item/integrated_circuit/manipulation/thrower/do_work()
-	var/max_w_class = assembly.w_class
 	var/target_x_rel = round(get_pin_data(IC_INPUT, 1))
 	var/target_y_rel = round(get_pin_data(IC_INPUT, 2))
 	var/obj/item/A = get_pin_data_as_type(IC_INPUT, 3, /obj/item)

@@ -53,6 +53,8 @@
 			return global.SSevent;
 		if("SSfastprocess")
 			return global.SSfastprocess;
+		if("SSfluids")
+			return global.SSfluids;
 		if("SSgarbage")
 			return global.SSgarbage;
 		if("SSicon_update")
@@ -79,6 +81,8 @@
 			return global.SSobj;
 		if("SSopen_space")
 			return global.SSopen_space;
+		if("SSpersistence")
+			return global.SSpersistence;
 		if("SSprocessing")
 			return global.SSprocessing;
 		if("SSradiation")
@@ -1038,6 +1042,8 @@
 			global.SSevent=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
+		if("SSfluids")
+			global.SSfluids=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
 		if("SSicon_update")
@@ -1064,6 +1070,8 @@
 			global.SSobj=newval;
 		if("SSopen_space")
 			global.SSopen_space=newval;
+		if("SSpersistence")
+			global.SSpersistence=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
 		if("SSradiation")
@@ -1996,6 +2004,7 @@
 	"SSevac",
 	"SSevent",
 	"SSfastprocess",
+	"SSfluids",
 	"SSgarbage",
 	"SSicon_update",
 	"SSinactivity",
@@ -2009,6 +2018,7 @@
 	"SSnano",
 	"SSobj",
 	"SSopen_space",
+	"SSpersistence",
 	"SSprocessing",
 	"SSradiation",
 	"SSshuttle",

@@ -94,6 +94,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	return 0
 
 /turf/simulated/create_fire(fl)
+
+	if(submerged())
+		return 1
+
 	if(fire)
 		fire.firelevel = max(fl, fire.firelevel)
 		return 1
@@ -130,7 +134,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	. = 1
 
 	var/turf/simulated/my_tile = loc
-	if(!istype(my_tile) || !my_tile.zone)
+	if(!istype(my_tile) || !my_tile.zone || my_tile.submerged())
 		if(my_tile && my_tile.fire == src)
 			my_tile.fire = null
 		RemoveFire()

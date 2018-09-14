@@ -1757,7 +1757,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "eI" = (
-/obj/structure/toilet,
+/obj/structure/hygiene/toilet,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1766,7 +1766,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eJ" = (
-/obj/structure/toilet,
+/obj/structure/hygiene/toilet,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1774,7 +1774,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eK" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,
@@ -1851,7 +1851,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eY" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_x = -30
 	},
 /obj/random/trash,
@@ -2188,7 +2188,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fZ" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2213,7 +2213,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "gd" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -2503,7 +2503,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "gW" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 25
 	},
 /turf/simulated/floor/tiled/white,
@@ -2839,7 +2839,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hN" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2968,7 +2968,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ij" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -3559,7 +3559,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "vb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -3576,7 +3576,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "wb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -3589,7 +3589,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "xb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;

@@ -2,65 +2,8 @@
 	name = "Hydroponics"
 	containertype = /obj/structure/closet/crate/hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/monkey
-	name = "Monkey crate"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes)
-	cost = 20
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "\improper Monkey crate"
-
-/decl/hierarchy/supply_pack/hydroponics/farwa
-	name = "Farwa crate"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/farwacubes)
-	cost = 30
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "\improper Farwa crate"
-
-/decl/hierarchy/supply_pack/hydroponics/skrell
-	name = "Neaera crate"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/neaeracubes)
-	cost = 30
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "\improper Neaera crate"
-
-/decl/hierarchy/supply_pack/hydroponics/stok
-	name = "Stok crate"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/stokcubes)
-	cost = 30
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "\improper Stok crate"
-
-/decl/hierarchy/supply_pack/hydroponics/corgi
-	name = "Corgi crate"
-	contains = list()
-	cost = 50
-	containertype = /obj/structure/largecrate/animal/corgi
-	containername = "\improper Corgi crate"
-
-//farm animals - useless and annoying, but potentially a good source of food. expensive because they're live animals and their produce is available cheaper
-/decl/hierarchy/supply_pack/hydroponics/cow
-	name = "Cow crate"
-	cost = 80
-	containertype = /obj/structure/largecrate/animal/cow
-	containername = "\improper Cow crate"
-	access = access_hydroponics
-
-/decl/hierarchy/supply_pack/hydroponics/goat
-	name = "Goat crate"
-	cost = 75
-	containertype = /obj/structure/largecrate/animal/goat
-	containername = "\improper Goat crate"
-	access = access_hydroponics
-
-/decl/hierarchy/supply_pack/hydroponics/chicken
-	name = "Chicken crate"
-	cost = 70
-	containertype = /obj/structure/largecrate/animal/chick
-	containername = "\improper Chicken crate"
-	access = access_hydroponics
-
 /decl/hierarchy/supply_pack/hydroponics/hydroponics // -- Skie
-	name = "Hydroponics Supply Crate"
+	name = "Gear - Hydroponics Supply Crate"
 	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone = 4,
 					/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 2,
 					/obj/item/weapon/material/hatchet,
@@ -76,7 +19,7 @@
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/seeds
-	name = "Seeds crate"
+	name = "Samples - Seeds crate"
 	contains = list(/obj/item/seeds/chiliseed,
 					/obj/item/seeds/berryseed,
 					/obj/item/seeds/cornseed,
@@ -99,7 +42,7 @@
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/weedcontrol
-	name = "Weed control crate"
+	name = "Gear - Weed control crate"
 	contains = list(/obj/item/weapon/material/hatchet = 2,
 					/obj/item/weapon/reagent_containers/spray/plantbgone = 4,
 					/obj/item/clothing/mask/gas = 2,
@@ -109,7 +52,7 @@
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/exoticseeds
-	name = "Exotic seeds crate"
+	name = "Samples - Exotic seeds crate"
 	contains = list(/obj/item/seeds/replicapod = 2,
 					/obj/item/seeds/libertymycelium,
 					/obj/item/seeds/reishimycelium,
@@ -121,14 +64,14 @@
 	access = access_xenobiology
 
 /decl/hierarchy/supply_pack/hydroponics/watertank
-	name = "Water tank crate"
+	name = "Liquid - Water tank crate"
 	contains = list(/obj/structure/reagent_dispensers/watertank)
 	cost = 8
 	containertype = /obj/structure/largecrate
 	containername = "\improper water tank crate"
 
 /decl/hierarchy/supply_pack/hydroponics/bee_keeper
-	name = "Beekeeping crate"
+	name = "Equipment - Beekeeping crate"
 	contains = list(/obj/item/beehive_assembly,
 					/obj/item/bee_smoker,
 					/obj/item/honey_frame = 5,
@@ -138,7 +81,7 @@
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/hydrotray
-	name = "Empty hydroponics tray"
+	name = "Equipment - Empty hydroponics tray"
 	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
 	cost = 30
 	containertype = /obj/structure/closet/crate/large/hydroponics
@@ -146,7 +89,7 @@
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/pottedplant
-	name = "Potted plant crate"
+	name = "Deco - Potted plant crate"
 	num_contained = 1
 	contains = list(/obj/structure/flora/pottedplant,
 					/obj/structure/flora/pottedplant/large,

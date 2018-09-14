@@ -212,7 +212,7 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/t_scanner                 = TRADER_THIS_TYPE,
 								/obj/item/device/taperecorder              = TRADER_THIS_TYPE,
 								/obj/item/device/batterer                  = TRADER_THIS_TYPE,
-								/obj/item/device/violin                    = TRADER_THIS_TYPE,
+								/obj/item/device/synthesized_instrument/violin                    = TRADER_THIS_TYPE,
 								/obj/item/device/hailer                    = TRADER_THIS_TYPE,
 								/obj/item/device/uv_light                  = TRADER_THIS_TYPE,
 								/obj/item/device/mmi                       = TRADER_ALL,

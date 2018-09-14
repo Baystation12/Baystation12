@@ -522,7 +522,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bA" = (
-/obj/item/weapon/cigbutt/professionals{
+/obj/item/trash/cigbutt/professionals{
 	pixel_x = 4;
 	pixel_y = -5
 	},
@@ -541,7 +541,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bB" = (
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -1264,7 +1264,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "dt" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/light{
@@ -1504,7 +1504,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "ee" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2278,7 +2278,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fX" = (
@@ -2573,7 +2573,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "gE" = (
-/obj/item/weapon/cigbutt/menthol,
+/obj/item/trash/cigbutt/menthol,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "gG" = (
@@ -2768,7 +2768,7 @@
 /turf/simulated/wall,
 /area/casino/casino_kitchen)
 "hp" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
@@ -2826,7 +2826,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hB" = (
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hC" = (
@@ -3425,7 +3425,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jb" = (
-/obj/structure/device/piano,
+/obj/structure/synthesized_instrument/synthesizer/piano,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";
@@ -3559,7 +3559,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "jq" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 30
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -3877,7 +3877,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "kg" = (
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "kh" = (
@@ -4542,7 +4542,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lH" = (
-/obj/item/weapon/cigbutt/professionals,
+/obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lI" = (
@@ -4603,7 +4603,7 @@
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_patron_bathroom)
 "lT" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -4834,7 +4834,7 @@
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_patron_bathroom)
 "mD" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -5898,7 +5898,7 @@
 /turf/simulated/floor/shuttle/yellow,
 /area/casino/casino_cutter)
 "Uc" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -5932,7 +5932,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "Vc" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -5976,7 +5976,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "Wc" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;

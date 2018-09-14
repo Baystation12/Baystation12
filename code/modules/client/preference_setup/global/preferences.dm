@@ -198,6 +198,9 @@ var/list/_client_preferences_by_type
 	description = "Show End Titles"
 	key = "SHOW_CREDITS"
 
+/datum/client_preference/play_instruments
+	description ="Play instruments"
+	key = "SOUND_INSTRUMENTS"
 
 /********************
 * General Staff Preferences *

@@ -227,7 +227,8 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 		listener_status[listener] &= ~SOUND_MUTE
 
 	sound.x = source_turf.x - listener_turf.x
-	sound.y = source_turf.y - listener_turf.y
+	sound.z = source_turf.y - listener_turf.y
+	sound.y = 1
 	// Far as I can tell from testing, sound priority just doesn't work.
 	// Sounds happily steal channels from each other no matter what.
 	sound.priority = Clamp(255 - distance, 0, 255)

@@ -154,7 +154,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 30
 	can_escape = 1
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
 	var/weapon = /obj/item/weapon/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'

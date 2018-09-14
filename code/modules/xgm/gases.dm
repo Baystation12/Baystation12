@@ -159,7 +159,9 @@
 
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
-	breathed_product = /datum/reagent/water
+	breathed_product =     /datum/reagent/water
+	condensation_product = /datum/reagent/water
+	condensation_point =   308.15 // 35C. Dew point is ~20C but this is better for gameplay considerations.
 
 /decl/xgm_gas/sulfurdioxide
 	id = "sulfurdioxide"
@@ -175,7 +177,7 @@
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
 	breathed_product = /datum/reagent/ammonia
-	
+
 /decl/xgm_gas/carbon_monoxide
 	id = "carbon_monoxide"
 	name = "Carbon Monoxide"

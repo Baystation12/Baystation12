@@ -36,17 +36,17 @@
 	if(A == src)
 		return FALSE
 
-	if(isliving(A))
-		var/mob/living/L = A
-		if(L.faction == src.faction && !attack_same)
+	if(ismob(A))
+		var/mob/M = A
+		if(M.faction == src.faction && !attack_same)
 			return FALSE
-		else if(weakref(L) in friends)
+		else if(weakref(M) in friends)
 			return FALSE
-		if(L.stat)
+		if(M.stat)
 			return FALSE
 
-		if(ishuman(L))
-			var/mob/living/carbon/human/H = L
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
 			if (H.is_cloaked())
 				return FALSE
 
