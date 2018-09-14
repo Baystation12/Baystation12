@@ -168,18 +168,10 @@
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
 
-/obj/structure/reagent_dispensers/fueltank/ex_act()
-	explode()
-
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
-	if (reagents.total_volume > 500)
-		explosion(src.loc,1,2,4)
-	else if (reagents.total_volume > 100)
-		explosion(src.loc,0,1,3)
-	else if (reagents.total_volume > 50)
-		explosion(src.loc,-1,1,2)
-	if(src)
-		qdel(src)
+	for(var/datum/reagent/R in reagents.reagent_list)
+		R.ex_act(src, 1)
+	qdel(src)
 
 /obj/structure/reagent_dispensers/fueltank/fire_act(datum/gas_mixture/air, temperature, volume)
 	if (modded)
