@@ -120,6 +120,9 @@
 	holder = null
 	. = ..()
 
+/datum/reagent/proc/ex_act(obj/item/weapon/reagent_containers/holder, severity)
+	return
+
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 
 /datum/reagent/proc/reaction_turf(var/turf/target)
