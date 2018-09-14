@@ -34,6 +34,13 @@
 	desc = "Headset of the corporate overlords."
 	icon_state = "nt_headset"
 	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/headset_torchcl
+
+/obj/item/device/radio/headset/heads/torchntdirector
+	name = "research director headset"
+	desc = "Headset of the masters of the universe."
+	icon_state = "nt_headset"
+	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchrd
 
 /obj/item/device/radio/headset/heads/torchntcommand/alt
