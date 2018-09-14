@@ -156,7 +156,6 @@
 	name = "Commander"
 	corpse_outfits = list(/decl/hierarchy/outfit/nanotrasen/commander)
 
-
 /obj/effect/landmark/corpse/pirate
 	name = "Pirate"
 	corpse_outfits = list(/decl/hierarchy/outfit/pirate/norm)

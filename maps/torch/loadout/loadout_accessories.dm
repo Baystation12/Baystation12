@@ -98,7 +98,7 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/ntaward
-	allowed_roles = NANOTRASEN_ROLES
+	allowed_roles = CORPORATE_ROLES
 
 /datum/gear/accessory/tie
 	allowed_branches = CIVILIAN_BRANCHES

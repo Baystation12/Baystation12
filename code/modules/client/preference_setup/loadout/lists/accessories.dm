@@ -53,8 +53,8 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/ntaward
-	display_name = "NanoTrasen award selection"
-	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
+	display_name = "corporate award selection"
+	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
 
@@ -62,7 +62,7 @@
 	..()
 	var/ntawards = list()
 	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	ntawards["nanotrasen service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
+	ntawards["distinguished service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
 	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
 	gear_tweaks += new/datum/gear_tweak/path(ntawards)
 
@@ -94,7 +94,7 @@
 	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/assistant)
 
 /datum/gear/accessory/armband_nt
-	display_name = "NanoTrasen armband"
+	display_name = "corporate armband"
 	path = /obj/item/clothing/accessory/armband/whitered
 
 /datum/gear/accessory/ftupin

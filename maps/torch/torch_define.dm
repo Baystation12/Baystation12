@@ -12,7 +12,7 @@
 	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30)
 	overmap_size = 35
 	overmap_event_areas = 34
-	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.nt", "torch.scg")
+	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.net", "torch.scg")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
@@ -25,7 +25,7 @@
 	company_name  = "Sol Central Government"
 	company_short = "SolGov"
 
-	map_admin_faxes = list("NanoTrasen Central Office")
+	map_admin_faxes = list("Corporate Central Office")
 
 	//These should probably be moved into the evac controller...
 	shuttle_docked_message = "Attention all hands: Jump preparation complete. The bluespace drive is now spooling up, secure all stations for departure. Time to jump: approximately %ETD%."
@@ -51,7 +51,7 @@
 /datum/map/torch/map_info(victim)
 	to_chat(victim, "<h2>Current map information</h2>")
 	to_chat(victim, "You're aboard the <b>[station_name]</b>, an Expeditionary Corps vessel. Its primary mission is looking for undiscovered sapient alien species, and general exploration along the way.")
-	to_chat(victim, "The vessel is staffed with a mix of SCG government personnel, hired contractors and NanoTrasen employees.")
+	to_chat(victim, "The vessel is staffed with a mix of SCG government personnel and hired contractors.")
 	to_chat(victim, "This area of space is uncharted, away from SCG territory. You might encounter remote outposts or drifting hulks, but no recognized government holds claim on this sector.")
 
 /datum/map/torch/send_welcome()

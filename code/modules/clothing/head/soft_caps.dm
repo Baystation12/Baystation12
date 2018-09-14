@@ -102,6 +102,6 @@
 	icon_state = "blacksoft"
 
 /obj/item/clothing/head/soft/sec/corp/guard
-	name = "\improper NanoTrasen security cap"
-	desc = "It's field cap in NanoTrasen colors."
+	name = "corporate security cap"
+	desc = "It's field cap in corporate colors."
 	icon_state = "ntwhitesoft"

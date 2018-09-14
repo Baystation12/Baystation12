@@ -54,7 +54,7 @@
 		"command blue" = 	COLOR_COMMAND_BLUE,
 		"cyan" =        	COLOR_CYAN,
 		"green" =      		COLOR_GREEN,
-		"NT red" =   		COLOR_NT_RED,
+		"corporate red" =	COLOR_NT_RED,
 		"orange" = 			COLOR_ORANGE,
 		"pale orange" =   	COLOR_PALE_ORANGE,
 		"red" = 			COLOR_RED,

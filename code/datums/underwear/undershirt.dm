@@ -77,7 +77,7 @@
 	icon_state = "army_s"
 
 /datum/category_item/underwear/undershirt/shirt_nt
-	name = "Shirt, NT"
+	name = "Shirt, corporate"
 	icon_state = "shirt_nano_s"
 
 /datum/category_item/underwear/undershirt/shortsleeve_shirt
@@ -184,5 +184,5 @@
 	icon_state = "expedition_female_s"
 
 /datum/category_item/underwear/undershirt/polo_nt
-	name = "Polo, NanoTrasen"
+	name = "Polo, corporate"
 	icon_state = "ntpolo"

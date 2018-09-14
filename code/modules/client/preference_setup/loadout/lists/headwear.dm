@@ -10,7 +10,7 @@
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
 /datum/gear/head/whitentberet
-	display_name = "beret, NanoTrasen security"
+	display_name = "beret, corporate security"
 	path = /obj/item/clothing/head/beret/guard
 
 /datum/gear/head/bandana

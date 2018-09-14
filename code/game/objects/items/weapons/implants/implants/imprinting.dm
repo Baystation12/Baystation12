@@ -9,14 +9,14 @@
 /obj/item/weapon/implant/imprinting/get_data()
 	. = {"
 	<b>Implant Specifications:</b><BR>
-	<b>Name:</b> NanoTrasen BB-56 "Educator" Employee Assistance Implant<BR>
+	<b>Name:</b> BB-56 "Educator" Employee Assistance Implant<BR>
 	<b>Life:</b> 1 year.<BR>
 	<HR>
 	<b>Function:</b> Adjusts itself to host's brainwaves, and presents supplied instructions as their 'inner voice' for less intrusive reminding. It will transmit them every 5 minutes in non-obtrusive manner.<BR>
 	<b>Special Features:</b> Do NOT implant if subject is under effect of any mind-altering drugs.
 	It carries risk of over-tuning, making subject unable to question the suggestions received, treating them as beliefs they feel strongly about.<BR>
-	It is HIGLY ILLEGAL and NanoTrasen does NOT endorse use of this device in such way.
-	Any amount of Nanotrasen brand "Mind-Breaker"(TM) present in bloodstream will trigger this side-effect.<BR>"}
+	It is HIGLY ILLEGAL and the seller does NOT endorse use of this device in such way.
+	Any amount of "Mind-Breaker"(TM) present in bloodstream will trigger this side-effect.<BR>"}
 	. += "<HR><B>Instructions:</B><BR>"
 	for(var/i = 1 to instructions.len)
 		. += "- [instructions[i]] <A href='byond://?src=\ref[src];edit=[i]'>Edit</A> <A href='byond://?src=\ref[src];del=[i]'>Remove</A><br>"

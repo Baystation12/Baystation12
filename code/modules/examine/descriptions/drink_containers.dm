@@ -2,7 +2,7 @@
 	description_fluff = "Space Cola is the most popular drink made by Robust Industries LLC. While it is only slightly different from traditional cola recipes, its blend of syrups and sugars is enticing to children and adults alike."
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle
-	description_fluff = "This is a generic, NanoTrasen branded bottle of water, included in vending machines for the benefit of Skrellian employees. The company swears on the quality of the water, saying it comes from the Martian poles. Most people disregard that and assume it's recycled from hydroponics trays."
+	description_fluff = "This is a generic, home-branded bottle of water, included in vending machines for the benefit of Skrellian employees. The company swears on the quality of the water, saying it comes from the Martian poles. Most people disregard that and assume it's recycled from hydroponics trays."
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind
 	description_fluff = "This cola was allegedly made after Vasily Federov, the son of a Robust Industries executive, went on a climbing expedition to an arctic planet. Inspired by the crisp planetary atmosphere, he created this refreshing citrus-flavored soft drink. Scientists claim that it can eat through a block of styrofoam in a matter of weeks, but people drink it anyway."

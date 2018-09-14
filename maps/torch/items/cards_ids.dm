@@ -144,7 +144,7 @@
 	job_access_type = /datum/job/assistant
 
 /obj/item/weapon/card/id/torch/passenger/research
-	desc = "A card issued to NanoTrasen personnel aboard the SEV Torch."
+	desc = "A card issued to corporate personnel aboard the SEV Torch."
 	icon_state = "corporate"
 	job_access_type = /datum/job/scientist_assistant
 

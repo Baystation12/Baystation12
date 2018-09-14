@@ -167,7 +167,7 @@
 				  <li>Package Wrapper</li>
 				  <li>Destination Tagger</li>
 				</ul>
-				
+
 				<h3>Crisis Cyborg</h3>
 				The crisis cyborg module is prepared to handle a variety of non-surgical medical emergencies.<br>A medical cyborg comes with:
 				<ul>
@@ -815,7 +815,7 @@
 				and then is screwed in for one and a quarter full rotations clockwise, leaving the faceplate directly in front of you. There is a small button on the right side of the helmet that activates the helmet light.
 				The tanks that fasten onto the side slot are emergency tanks, as well as full-sized oxygen tanks, leaving your back free for a backpack or satchel.<BR><BR>
 
-				These suits generally only fit one species. NanoTrasen's are usually human-fitting by default, but there's equipment that can make modifications to the hardsuits to fit them to other species.<BR><BR>
+				These suits generally only fit one species. Standard-issue suits are usually human-fitting by default, but there's equipment that can make modifications to the hardsuits to fit them to other species.<BR><BR>
 
 				<h2><a name="Equipment">Modification Equipment</a></h2>
 				<I>How to actually make hardsuits fit you.</I><BR>
