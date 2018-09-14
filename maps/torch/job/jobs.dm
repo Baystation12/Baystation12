@@ -131,13 +131,13 @@
 
 /datum/job/rd
 	title = "Research Director"
-	supervisors = "NanoTrasen and the Commanding Officer"
+	supervisors = "the Commanding Officer and your employers"
 	economic_power = 20
 	minimal_player_age = 7
 	ideal_character_age = 60
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_ADEPT,
@@ -163,7 +163,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring Nanotrasen's interests along with your Nanotrasen Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to find things to benefit NT. Don’t put NT’s position on board in jeopardy.  Advise the CO on science matters."
+	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring corporate interests are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to find things to benefit your employer. Don’t put the company’s position on board in jeopardy.  Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -307,23 +307,24 @@
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/liaison
-	title = "NanoTrasen Liaison"
+	title = "Corporate Liaison"
 	department = "Support"
 	department_flag = SPT
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "NanoTrasen and Corporate Regulations"
+	supervisors = "Corporate Regulations"
 	selection_color = "#2f2f7f"
 	economic_power = 15
 	minimal_player_age = 0
 	alt_titles = list(
-		"NanoTrasen Representative",
-		"NanoTrasen Executive"
+		"Corporate Representative",
+		"Corporate Executive",
+		"Union Representative"
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERT,
 	                    SKILL_FINANCE		= SKILL_BASIC)
 	skill_points = 20
@@ -336,7 +337,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Nanotrasen Liaison. You are a civilian employee of Nanotrasen assigned to the vessel to promote, protect and ensure the interests of the corporation on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on NT matters and try to push NT interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
+	return "You are the Corporate Liaison. You are a civilian employee of the corporate conglomerate funding the Torch, assigned to the vessel to promote, protect and ensure the interests of the conglomerate on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -362,7 +363,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/representative/get_description_blurb()
-	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and Nanotrasen interests on board. Send faxes back to Sol on mission progress and important events."
+	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and corporate interests on board. Send faxes back to Sol on mission progress and important events."
 
 /datum/job/sea
 	title = "Senior Enlisted Advisor"
@@ -490,7 +491,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/pathfinder/get_description_blurb()
-	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if NT doesn’t provide their pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
+	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if nobody else provides a pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
@@ -511,8 +512,7 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7
@@ -1270,10 +1270,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(
-		/datum/mil_rank/civ/nt,
-		/datum/mil_rank/civ/contractor
-	)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_mining, access_mining_office, access_mining_station,
 						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm)
@@ -1396,7 +1393,7 @@
 		"Research Supervisor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
@@ -1440,7 +1437,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
@@ -1455,14 +1452,14 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Research Director and science personnel"
 	selection_color = "#633d63"
 	economic_power = 6
 	minimal_player_age = 0
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/guard
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 	min_skill = list(   SKILL_COMBAT  = SKILL_BASIC,
 	                    SKILL_WEAPONS = SKILL_BASIC)
 
@@ -1482,7 +1479,7 @@
 
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Research Director and science personnel"
 	selection_color = "#633d63"
 	economic_power = 3
 	ideal_character_age = 30
@@ -1496,7 +1493,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
@@ -1528,7 +1525,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/nt
+		/datum/mil_rank/civ/contractor
 	)
 
 /datum/job/cyborg

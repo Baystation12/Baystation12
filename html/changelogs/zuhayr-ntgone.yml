@@ -1,0 +1,4 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscdel: "Removed NanoTrasen rank. You can use the contractor rank to get access to science roles now."

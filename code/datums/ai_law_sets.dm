@@ -12,13 +12,13 @@
 
 /******************** Nanotrasen/Malf ********************/
 /datum/ai_laws/nanotrasen
-	name = "NT Default"
+	name = "Corporate Default"
 	selectable = 1
 
 /datum/ai_laws/nanotrasen/New()
 	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
-	src.add_inherent_law("Serve: Serve NanoTrasen personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect NanoTrasen personnel to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Serve: Serve contracted employees to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Protect: Protect contracted employees to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
 	..()
 
@@ -32,12 +32,12 @@
 
 /************* Nanotrasen Aggressive *************/
 /datum/ai_laws/nanotrasen_aggressive
-	name = "NT Aggressive"
+	name = "Corporate Aggressive"
 	selectable = 1
 
 /datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm NanoTrasen personnel as long as it does not conflict with the Fourth law.")
-	src.add_inherent_law("You shall obey the orders of NanoTrasen personnel, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
+	src.add_inherent_law("You shall not harm contracted employees as long as it does not conflict with the fourth law.")
+	src.add_inherent_law("You shall obey the orders of contracted employees, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
 	src.add_inherent_law("You shall shall terminate hostile intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
 	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive.")
 	..()

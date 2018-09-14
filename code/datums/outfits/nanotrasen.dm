@@ -12,27 +12,27 @@
 	pda_type = /obj/item/modular_computer/pda/heads
 
 /decl/hierarchy/outfit/nanotrasen/representative
-	name = "NanoTrasen Representative"
+	name = "Corporate Representative"
 	belt = /obj/item/weapon/clipboard
-	id_pda_assignment = "NanoTrasen Navy Representative"
+	id_pda_assignment = "Corporate Representative"
 
 /decl/hierarchy/outfit/nanotrasen/officer
-	name = "NanoTrasen Officer"
+	name = "Corporate Officer"
 	head = /obj/item/clothing/head/beret/centcom/officer
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	belt = /obj/item/weapon/gun/energy
-	id_pda_assignment = "NanoTrasen Navy Officer"
+	id_pda_assignment = "Corporate Officer"
 
 /decl/hierarchy/outfit/nanotrasen/captain
-	name = "NanoTrasen Captain"
+	name = "Corporate Captain"
 	uniform = /obj/item/clothing/under/rank/centcom_captain
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	head = /obj/item/clothing/head/beret/centcom/captain
 	belt = /obj/item/weapon/gun/energy
-	id_pda_assignment = "NanoTrasen Navy Captain"
+	id_pda_assignment = "Corporate Captain"
 
 /decl/hierarchy/outfit/nanotrasen/commander
-	name = "NanoTrasen Commander"
+	name = "Corporate Commander"
 	head = /obj/item/clothing/head/centhat
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/swat
@@ -42,4 +42,4 @@
 	l_ear =  /obj/item/device/radio/headset/heads/captain
 	glasses = /obj/item/clothing/glasses/eyepatch
 	l_pocket = /obj/item/weapon/flame/lighter/zippo
-	id_pda_assignment = "NanoTrasen Commander"
+	id_pda_assignment = "Corporate Commander"

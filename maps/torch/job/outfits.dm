@@ -130,7 +130,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/cl
-	name = OUTFIT_JOB_NAME("NanoTrasen Liaison")
+	name = OUTFIT_JOB_NAME("Corporate Liaison")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
 	uniform = /obj/item/clothing/under/suit_jacket/nt
 	shoes = /obj/item/clothing/shoes/laceup
@@ -560,7 +560,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	BACKPACK_OVERRIDE_RESEARCH
 
 /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
-	name = OUTFIT_JOB_NAME("NanoTrasen Pilot")
+	name = OUTFIT_JOB_NAME("Corporate Pilot")
 	uniform = /obj/item/clothing/under/rank/ntpilot
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	shoes = /obj/item/clothing/shoes/workboots
