@@ -140,7 +140,9 @@
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
 		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          20),
+		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
+		list("radium",        "radium",        /datum/reagent/radium,            20)
 		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      20),
 		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20),
 		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     20)
