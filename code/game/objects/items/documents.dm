@@ -9,13 +9,13 @@
 	throw_range = 1
 
 /obj/item/documents/nanotrasen
-	name = "NanoTrasen secret documents"
-	desc = "\"Top Secret\" NanoTrasen documents, filled with complex diagrams, research procedures, and details on a deal with SCG granting NT exclusive breeding rights to non-sapient species the Torch encounters."
-	description_antag = "NanoTrasen seems to be wanting to create weaponized xenobiological species. Probably as a form of WMD, by your best guess."
+	name = "secret corporate documents"
+	desc = "\"Top Secret\" corporate documents, filled with complex diagrams, research procedures, and details on cloning or breeding rights to non-sapient species the Torch encounters. It seems like they will be auctioning them off to the highest private bidder."
+	description_antag = "A conglomerate of powerful corporations seems to be wanting to create weaponized xenobiological species. Probably as a form of WMD, by your best guess."
 	icon_state = "docs_verified"
 
 /obj/item/documents/scg/verified
-	name = "SCG secret documents"
+	name = "secret government documents"
 	desc = "\"Top Secret\" documents detailing SCG IFF codes, granting the Torch access into restricted sectors. The majority of them are coordinates, codes for fellow ships, and clearance lists."
 	description_antag = "These codes seem very odd for an exploration vessel: a lot of them are SCG blacksites, covered up. You've never even heard of most of these."
 	icon_state = "docs_verified"

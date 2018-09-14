@@ -9,8 +9,8 @@
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/toy/balloon
 
-/datum/uplink_item/item/badassery/balloon/NT
-	name = "For showing that you love NT SOO much (Useless Balloon)"
+/datum/uplink_item/item/badassery/balloon/corporate
+	name = "For showing that you love the company SOO much (Useless Balloon)"
 	path = /obj/item/toy/balloon/nanotrasen
 
 /datum/uplink_item/item/badassery/balloon/random

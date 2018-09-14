@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/liaison
-	name = "\improper NanoTrasen liaison's locker"
+	name = "\improper corporate liaison's locker"
 	req_access = list(access_liaison)
 	icon_state = "nanottwo1"
 	icon_closed = "nanottwo"

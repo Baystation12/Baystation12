@@ -476,7 +476,7 @@ var/global/datum/controller/occupations/job_master
 				if(H.char_branch && H.char_branch.email_domain)
 					domain = H.char_branch.email_domain
 				else
-					domain = "freemail.nt"
+					domain = "freemail.net"
 				desired_name = H.real_name
 				ntnet_global.create_email(H, desired_name, domain)
 			// END EMAIL GENERATION

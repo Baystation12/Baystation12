@@ -223,5 +223,5 @@
 #define SHUTTLE_MISSION_QUEUED   4
 
 //Built-in email accounts
-#define EMAIL_DOCUMENTS "document.server@internal-services.nt"
-#define EMAIL_BROADCAST "broadcast@internal-services.nt"
+#define EMAIL_DOCUMENTS "document.server@internal-services.net"
+#define EMAIL_BROADCAST "broadcast@internal-services.net"

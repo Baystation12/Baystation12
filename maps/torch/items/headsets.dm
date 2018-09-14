@@ -1,5 +1,5 @@
 /obj/item/device/radio/headset/torchnanotrasen
-	name = "nanotrasen headset"
+	name = "corporate headset"
 	desc = "A headset for corporate drones."
 	icon_state = "nt_headset"
 	item_state = "headset"
@@ -30,14 +30,14 @@
 	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/heads/torchntcommand
-	name = "nanotrasen command headset"
+	name = "corporate command headset"
 	desc = "Headset of the corporate overlords."
 	icon_state = "nt_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchrd
 
 /obj/item/device/radio/headset/heads/torchntcommand/alt
-	name = "nanotrasen command bowman headset"
+	name = "corporate command bowman headset"
 	icon_state = "nt_headset_alt"
 	item_state = "nt_headset_alt"
 

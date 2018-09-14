@@ -95,7 +95,7 @@
 
 /obj/item/toy/balloon
 	name = "\improper 'criminal' balloon"
-	desc = "FUK NT!11!"
+	desc = "FUK CAPITALISM!11!"
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -111,7 +111,7 @@
 
 /obj/item/toy/balloon/nanotrasen
 	name = "\improper 'motivational' balloon"
-	desc = "Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea."
+	desc = "Man, I love Profit soooo much. I use only Brand Name products. You have NO idea."
 	icon_state = "ntballoon"
 	item_state = "ntballoon"
 
