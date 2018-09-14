@@ -337,7 +337,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Corporate Liaison. You are a civilian employee of Torch LLC, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote, protect and ensure corporate interests are met. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
+	return "You are the Corporate Liaison. You are a civilian employee of Torch LLC, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote, protect and ensure corporate interests, and the interests of the contractors on board, are met. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"

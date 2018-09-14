@@ -14,9 +14,14 @@
 	channels = list("Science" = 1)
 
 /obj/item/device/encryptionkey/headset_torchrd
-	name = "corporate command radio encryption key"
+	name = "research director radio encryption key"
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1, "Command" = 1)
+
+/obj/item/device/encryptionkey/headset_torchcl
+	name = "corporate liaison radio encryption key"
+	icon_state = "nt_cypherkey"
+	channels = list("Science" = 1, "Service" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/headset_torchroboticist
 	name = "roboticist's encryption key"

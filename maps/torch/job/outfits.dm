@@ -68,7 +68,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	name = OUTFIT_JOB_NAME("Research Director - Torch")
-	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
+	l_ear = /obj/item/device/radio/headset/heads/torchntdirector
 	uniform = /obj/item/clothing/under/rank/research_director
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/brown

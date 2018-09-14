@@ -14,7 +14,7 @@
 		)
 
 /obj/item/clothing/under/rank/scientist
-	name = "corporate polo and pants"
+	name = "science polo and pants"
 	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics."
 	icon_state = "ntsmock"
 	item_state = "w_suit"
@@ -22,10 +22,14 @@
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/nanotrasen.dmi')
-	starting_accessories = list(/obj/item/clothing/accessory/nt_tunic)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/nanotrasen.dmi',
 		)
+
+/obj/item/clothing/under/rank/scientist/nt
+	name = "\improper NanoTrasen polo and pants"
+	desc = "A fashionable polo and pair of trousers belonging to the NanoTrasen corporation, a megacorporation that is primarily concerned with the research of new and dangerous technologies."
+	starting_accessories = list(/obj/item/clothing/accessory/nt_tunic)
 
 /obj/item/clothing/under/rank/scientist/executive
 	name = "executive polo and pants"
