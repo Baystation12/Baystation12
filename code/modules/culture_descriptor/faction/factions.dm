@@ -29,15 +29,16 @@
 /decl/cultural_info/faction/torchco
 	name = FACTION_TORCH_LLC
 	description = "Torch LLC is a government-owned, publically traded limited liability company assembled from the corporate \
-	backers who asssisted in funding the Torch project when it opened five years ago. Major players include NanoTrasen, \
+	backers who asssisted in funding the Torch project when it opened five years ago. Major players include NanoTrasen, Xynergy and \
 	Hephaestus Industries, as well as dozens of others. Torch LLC reports its earnings and operation plans directly to a board of \
 	directors, made up of corporate representatives and members of Expeditionary Corps command and the Committee for the Economy. \
 	While on the surface Torch LLC appears to have noble goals, it is in reality a compromise between the noble ideals of pioneering \
-	science, and the corporate desire to make a quick buck off whatever is found. Rumours also abound about shady practicies, hidden \
+	science, and the corporate desire to make a quick buck off whatever is found. Rumours also abound about shady practices, hidden \
 	protocols, and xenoartifacts being 'lost' in transit, but nothing has been conclusively proven as of yet, and SCG doubtless is \
 	reluctant to harpoon their own project."
 	economic_power = 1.2
 	subversive_potential = 35
+	language = LANGUAGE_SOL_COMMON
 
 /decl/cultural_info/faction/tcc
 	name = FACTION_TERRAN_CONFED

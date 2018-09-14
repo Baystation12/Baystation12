@@ -24,11 +24,8 @@
 //For civilian jobs that may have a strict uniform.
 #define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative,/datum/job/stowaway, /datum/job/detective)
 
-//For NanoTrasen employees
-#define CORPORATE_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant)
-
 //For contractors
-#define CONTRACTOR_ROLES list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/chef, /datum/job/janitor, /datum/job/detective, /datum/job/guard)
+#define CONTRACTOR_ROLES list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/chef, /datum/job/janitor, /datum/job/detective, /datum/job/guard, /datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant)
 
 //For corporate or government representatives
 #define REPRESENTATIVE_ROLES list(/datum/job/representative, /datum/job/liaison)

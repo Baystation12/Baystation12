@@ -10,8 +10,8 @@
 	icon_state = "suspenders"
 
 /obj/item/clothing/accessory/nt_tunic
-	name = "corporate tunic"
-	desc = "A fashionable tunic that companies give to their lab workers."
+	name = "\improper NanoTrasen tunic"
+	desc = "A fashionable tunic that NanoTrasen gives to their lab workers."
 	icon_state = "nttunic"
 
 /obj/item/clothing/accessory/nt_tunic/exec

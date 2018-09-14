@@ -77,7 +77,7 @@
 	icon_state = "army_s"
 
 /datum/category_item/underwear/undershirt/shirt_nt
-	name = "Shirt, corporate"
+	name = "Shirt, NT"
 	icon_state = "shirt_nano_s"
 
 /datum/category_item/underwear/undershirt/shortsleeve_shirt
