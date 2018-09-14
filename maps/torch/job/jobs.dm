@@ -163,7 +163,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring corporate interests are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to find things to benefit your employer. Don’t put the company’s position on board in jeopardy.  Advise the CO on science matters."
+	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring the corporate interests of Torch LLC are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit your employer. Don’t put Torch LLC or your employer’s position on board in jeopardy.  Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -337,7 +337,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Corporate Liaison. You are a civilian employee of the corporate conglomerate funding the Torch, assigned to the vessel to promote, protect and ensure the interests of the conglomerate on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
+	return "You are the Corporate Liaison. You are a civilian employee of Torch LLC, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote, protect and ensure corporate interests are met. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"
