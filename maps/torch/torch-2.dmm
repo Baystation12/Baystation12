@@ -9712,7 +9712,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "wz" = (
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian/professional,
 /turf/simulated/floor/lino,
 /area/crew_quarters/diplomat)
 "wA" = (
@@ -10139,7 +10139,7 @@
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "xp" = (
-/obj/item/modular_computer/console/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 4
 	},
@@ -11772,7 +11772,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "AS" = (
-/obj/item/modular_computer/console/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 1
 	},
@@ -16268,7 +16268,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ai_monitored/storage/eva)
 "Mr" = (
-/obj/item/modular_computer/console/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 1
 	},
@@ -17389,7 +17389,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 4
 	},
