@@ -313,7 +313,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Corporate Regulations"
+	supervisors = "Corporate Regulations and Torch LLC"
 	selection_color = "#2f2f7f"
 	economic_power = 15
 	minimal_player_age = 0
@@ -673,7 +673,7 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Engineer and Engineering Personnel"
+	supervisors = "the Chief Engineer, the Corporate Liaison and Engineering Personnel"
 	minimal_player_age = 0
 	selection_color = "#5b4d20"
 	alt_titles = list(
@@ -712,7 +712,7 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_contractor/get_description_blurb()
-	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the rest of the engineering team."
+	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the Corporate Liaison and the rest of the engineering team."
 
 /datum/job/engineer_trainee
 	title = "Engineer Trainee"
@@ -775,7 +775,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	minimal_player_age = 0
-	supervisors = "the Chief Engineer and the Chief Medical Officer"
+	supervisors = "the Chief Engineer, the Corporate Liaison and the Chief Medical Officer"
 	selection_color = "#5b4d20"
 	economic_power = 6
 	alt_titles = list(
@@ -800,7 +800,7 @@
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()
-	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics as well as the repair of all synthetic crew on board. You are also responsible for placing brains into MMI’s and giving them bodies and the production of exosuits(mechs) for various departments. You answer to the Chief Engineer."
+	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics as well as the repair of all synthetic crew on board. You are also responsible for placing brains into MMI’s and giving them bodies and the production of exosuits(mechs) for various departments. You answer to the Corporate Liaison and the Chief Engineer."
 
 /datum/job/warden
 	title = "Brig Officer"
@@ -1019,7 +1019,7 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Medical Officer and Medical Personnel"
+	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_power = 3
 	ideal_character_age = 30
@@ -1097,7 +1097,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Medical Officer and Medical Personnel"
+	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_power = 4
 	ideal_character_age = 30
@@ -1230,7 +1230,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Deck Officer and Supply Personnel"
+	supervisors = "the Deck Officer, the Corporate Liaison and Supply Personnel"
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
@@ -1254,7 +1254,7 @@
 	department_flag = SUP
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Deck Officer and Executive Officer"
+	supervisors = "the Deck Officer, the Corporate Liaison and the Executive Officer"
 	selection_color = "#515151"
 	economic_power = 7
 	ideal_character_age = 25
@@ -1339,7 +1339,7 @@
 /datum/job/bartender
 	department = "Service"
 	department_flag = SRV
-	supervisors = "the Executive Officer"
+	supervisors = "the Executive Officer and the Corporate Liaison"
 	ideal_character_age = 30
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
@@ -1384,7 +1384,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Research Director"
+	supervisors = "the Research Director and the Corporate Liaison"
 	selection_color = "#633d63"
 	economic_power = 12
 	minimal_player_age = 3
@@ -1415,7 +1415,7 @@
 	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Research Director"
+	supervisors = "the Research Director and the Corporate Liaison"
 	economic_power = 10
 	ideal_character_age = 45
 	minimal_player_age = 0
@@ -1452,7 +1452,7 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Research Director and science personnel"
+	supervisors = "the Research Director, the Corporate Liaison and science personnel"
 	selection_color = "#633d63"
 	economic_power = 6
 	minimal_player_age = 0
@@ -1479,7 +1479,7 @@
 
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Research Director and science personnel"
+	supervisors = "the Research Director, the Corporate Liaison and science personnel"
 	selection_color = "#633d63"
 	economic_power = 3
 	ideal_character_age = 30
