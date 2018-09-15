@@ -9,6 +9,9 @@
 	backpack_contents = list(/obj/item/weapon/storage/box = 1)
 	hierarchy_type = /decl/hierarchy/outfit/wizard
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/syndicate
+	id_pda_assignment = "Visitor"
 
 /decl/hierarchy/outfit/wizard/blue
 	name = "Wizard - Blue"
