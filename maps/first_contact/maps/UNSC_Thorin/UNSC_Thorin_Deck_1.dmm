@@ -181,7 +181,7 @@
 "dy" = (/turf/simulated/wall,/area/corvette/unscthorin/powercore)
 "dz" = (/obj/machinery/door/airlock/halo{name = "Power Core"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/corvette/unscthorin/powercore)
 "dA" = (/turf/simulated/wall,/area/corvette/unscthorin/medicalbay)
-"dB" = (/obj/machinery/door/airlock/halo{name = "Medical Bay"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/corvette/unscthorin/medicalbay)
+"dB" = (/obj/machinery/door/airlock/halo{name = "Medical Bay"},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/medicalbay)
 "dC" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/medicalbay)
 "dD" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(632)},/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway)
 "dE" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Porthallway)
