@@ -8008,6 +8008,9 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"qo" = (
+/turf/simulated/floor/reinforced/hydrogen/fuel,
+/area/engineering/fuelbay)
 "qu" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/seconddeck)
@@ -42722,8 +42725,8 @@ tO
 sZ
 Ec
 Fp
-Oo
-Oo
+qo
+qo
 Oo
 JF
 JF
@@ -42926,7 +42929,7 @@ Ec
 Fp
 Fp
 Fp
-Oo
+qo
 JF
 JF
 JF
