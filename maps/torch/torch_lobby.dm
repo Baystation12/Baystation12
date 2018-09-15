@@ -9,4 +9,11 @@
 		/music_track/treacherous_voyage,
 		/music_track/comet_haley,
 		/music_track/lysendraa,
-		/music_track/lasers)
+		/music_track/lasers,
+		/music_track/martiancowboy,
+		/music_track/monument,
+		/music_track/asfarasitgets,
+		/music_track/eighties,
+		/music_track/torn,
+		/music_track/nebula
+	)

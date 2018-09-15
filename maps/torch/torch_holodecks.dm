@@ -6,7 +6,7 @@
 		"boxingcourt"      = new/datum/holodeck_program(/area/holodeck/source_boxingcourt, list('sound/music/THUNDERDOME.ogg')),
 		"basketball"       = new/datum/holodeck_program(/area/holodeck/source_basketball, list('sound/music/THUNDERDOME.ogg')),
 		"thunderdomecourt" = new/datum/holodeck_program(/area/holodeck/source_thunderdomecourt, list('sound/music/THUNDERDOME.ogg')),
-		"beach"            = new/datum/holodeck_program(/area/holodeck/source_beach),
+		"beach"            = new/datum/holodeck_program(/area/holodeck/source_beach, list('sound/music/europa/WildEncounters.ogg')),
 		"desert"           = new/datum/holodeck_program(/area/holodeck/source_desert,
 														list(
 															'sound/effects/wind/wind_2_1.ogg',
