@@ -89,21 +89,25 @@
 	if(reagents.total_volume <= 0)
 		return
 
+	// To prevent it from draining while in a container.
+	if(!isturf(src.loc))
+		return
+
 	// Check for depth first, and pass if the water's too high. A four foot high water tank
 	// cannot jettison water above the level of a grown adult's head!
 	var/turf/T = get_turf(src)
-	if(T.get_fluid_depth() > fill_level)
+
+	if(!T || T.get_fluid_depth() > fill_level)
 		return
 
 	// For now, this cheats and only checks/leaks water, pending additions to the fluid system.
 	var/W = reagents.remove_reagent(/datum/reagent/water, amount_per_transfer_from_this * 5)
 	if(W > 0)
-		// Artificially increased flow - a 1:1 rate doesn't result in very much water at all
+		// Artificially increased flow - a 1:1 rate doesn't result in very much water at all.
 		T.add_fluid(W * 100, /datum/reagent/water)
 
 /obj/structure/reagent_dispensers/watertank/examine(mob/user)
-	if(!..(user, 2))
-		return
+	. = ..()
 
 	if(modded)
 		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
@@ -116,27 +120,20 @@
 			"<span class='notice'>You wrench [src]'s drain [modded ? "open" : "shut"].</span>")
 
 		if (modded)
-			log_and_message_admins("opened a water tank at [loc.loc.name], leaking water.")
+			log_and_message_admins("opened a water tank at [get_area(loc)], leaking water.")
 			// Allows the water tank to continuously expel water, differing it from the fuel tank.
 			START_PROCESSING(SSprocessing, src)
-			drain_water()
 		else
 			STOP_PROCESSING(SSprocessing, src)
 
 	return ..()
 
 /obj/structure/reagent_dispensers/watertank/Process()
-	if (..() && modded)
-		drain_water()
-
-/obj/structure/reagent_dispensers/watertank/Move()
-	. = ..()
-
-	if (. && modded)
+	if(modded)
 		drain_water()
 
 /obj/structure/reagent_dispensers/watertank/Destroy()
-	. = .. ()
+	. = ..()
 
 	STOP_PROCESSING(SSprocessing, src)
 
@@ -152,8 +149,8 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
-	if(!..(user, 2))
-		return
+	. = ..()
+
 	if (modded)
 		to_chat(user, "<span class='warning'>The faucet is wrenched open, leaking fuel!</span>")
 	if(rig)
