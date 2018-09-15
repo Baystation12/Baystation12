@@ -36,3 +36,6 @@ var/list/stored_shock_by_ref = list()
 			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
 		return equip_overlays[image_key]
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
+
+/datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
+	return

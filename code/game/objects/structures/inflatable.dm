@@ -141,6 +141,9 @@
 		user.visible_message("<span class='danger'>[user] [attack_verb] at [src]!</span>")
 	return 1
 
+/obj/structure/inflatable/CanFluidPass(var/coming_from)
+	return !density
+
 /obj/structure/inflatable/door //Based on mineral door code
 	name = "inflatable door"
 	density = 1

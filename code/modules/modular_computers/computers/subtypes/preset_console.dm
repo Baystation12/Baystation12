@@ -18,6 +18,10 @@
 	hard_drive.store_file(new/datum/computer_file/program/shields_monitor())
 
 // Medical
+/obj/item/modular_computer/console/preset/medical/install_default_hardware()
+	..()
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
+
 /obj/item/modular_computer/console/preset/medical/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
@@ -76,6 +80,10 @@
 	hard_drive.store_file(new/datum/computer_file/program/docking())
 
 // Security
+/obj/item/modular_computer/console/preset/security/install_default_hardware()
+	..()
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
+
 /obj/item/modular_computer/console/preset/security/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())

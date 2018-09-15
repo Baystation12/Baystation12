@@ -29,7 +29,7 @@ var/global/list/sparring_attack_cache = list()
 			sparring_attack_cache[sparring_variant_type] = new sparring_variant_type()
 		return sparring_attack_cache[sparring_variant_type]
 
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(user.restrained())
 		return 0
 
@@ -93,6 +93,10 @@ var/global/list/sparring_attack_cache = list()
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
 		target.apply_effect(3, WEAKEN, armour)
+
+	var/obj/item/clothing/C = target.get_covering_equipped_item(zone)
+	if(istype(C) && prob(10))
+		C.leave_evidence(user)
 
 /datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)

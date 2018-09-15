@@ -904,7 +904,7 @@
 	icon_state = "twindow";
 	dir = 4
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -920,7 +920,7 @@
 	icon_state = "bulb1";
 	dir = 8
 	},
-/obj/structure/toilet,
+/obj/structure/hygiene/toilet,
 /obj/structure/window/reinforced/tinted{
 	dir = 1
 	},
@@ -1234,7 +1234,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/crew/cryo)
 "dM" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	icon_state = "toilet00";
 	dir = 1
 	},
@@ -1252,7 +1252,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/ship/scrap/crew/toilets)
 "dN" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	icon_state = "toilet00";
 	dir = 1
 	},
@@ -1536,7 +1536,7 @@
 	name = "Galley APC"
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -4668,7 +4668,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_y = 29
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 18
 	},
 /obj/structure/window/reinforced/tinted{
@@ -5301,7 +5301,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/shuttle/outgoing)
 "zc" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -5735,7 +5735,7 @@
 /area/ship/scrap/maintenance/atmos)
 "Ic" = (
 /obj/item/weapon/stool/padded,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 8;
 	icon_state = "sink";
 	pixel_x = -13;

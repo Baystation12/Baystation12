@@ -72,7 +72,7 @@
 /area/medical/surgery2)
 "m" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	 icon_state = "sink";
 	dir = 4
 	},

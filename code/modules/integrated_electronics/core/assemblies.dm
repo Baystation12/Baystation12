@@ -25,6 +25,8 @@
 	var/allowed_circuit_action_flags = IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE //which circuit flags are allowed
 	var/creator // circuit creator if any
 	var/static/next_assembly_id = 0
+	var/interact_page = 0
+	var/components_per_page = 5
 	pass_flags = 0
 	armor = list("melee" = 50, "bullet" = 70, "laser" = 70, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 	anchored = FALSE
@@ -61,7 +63,7 @@
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
-	return !user.incapacitated() && CanUseTopic(user)
+	return (!user.incapacitated() && CanUseTopic(user))
 
 /obj/item/device/electronic_assembly/GetAccess()
 	. = list()
@@ -150,48 +152,37 @@
 	HTML += "<html><head><title>[name]</title></head><body>"
 
 	HTML += "<a href='?src=\ref[src]'>\[Refresh\]</a>  |  <a href='?src=\ref[src];rename=1'>\[Rename\]</a><br>"
-	HTML += "[total_part_size]/[max_components] ([round((total_part_size / max_components) * 100, 0.1)]%) space taken up in the assembly.<br>"
-	HTML += "[total_complexity]/[max_complexity] ([round((total_complexity / max_complexity) * 100, 0.1)]%) maximum complexity.<br>"
+	HTML += "[total_part_size]/[max_components] space taken up in the assembly.<br>"
+	HTML += "[total_complexity]/[max_complexity] complexity in the assembly.<br>"
 	if(battery)
 		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=\ref[src];remove_cell=1'>\[Remove\]</a>"
 	else
 		HTML += "<span class='danger'>No power cell detected!</span>"
-	HTML += "<br><br>"
 
+	if(length(assembly_components))
+		HTML += "<br><br>"
+		HTML += "Components:<br>"
 
-
-	HTML += "Components:"
-
-	var/builtin_components = ""
-
-	for(var/c in assembly_components)
-		var/obj/item/integrated_circuit/circuit = c
-		if(!circuit.removable)
-			builtin_components += "<a href='?src=\ref[circuit];rename=1'>\[R\]</a> | "
-			builtin_components += "<a href='?src=\ref[circuit];interact=1'>[circuit.displayed_name]</a>"
-			builtin_components += "<br>"
-
-	// Put removable circuits (if any) in separate categories from non-removable
-	if(builtin_components)
-		HTML += "<hr>"
-		HTML += "Built in:<br>"
-		HTML += builtin_components
-		HTML += "<hr>"
-		HTML += "Removable:"
-
-	HTML += "<br>"
-
-	for(var/c in assembly_components)
-		var/obj/item/integrated_circuit/circuit = c
-		if(circuit.removable)
-			HTML += "<a href='?src=\ref[src];component=\ref[circuit];up=1' style='text-decoration:none;'>&#8593;</a> "
-			HTML += "<a href='?src=\ref[src];component=\ref[circuit];down=1' style='text-decoration:none;'>&#8595;</a>  "
-			HTML += "<a href='?src=\ref[src];component=\ref[circuit];top=1' style='text-decoration:none;'>&#10514;</a> "
-			HTML += "<a href='?src=\ref[src];component=\ref[circuit];bottom=1' style='text-decoration:none;'>&#10515;</a> | "
+		var/start_index = ((components_per_page * interact_page) + 1)
+		for(var/i = start_index to min(length(assembly_components), start_index + (components_per_page - 1)))
+			var/obj/item/integrated_circuit/circuit = assembly_components[i]
+			HTML += "\[ <a href='?src=\ref[src];component=\ref[circuit];set_slot=1'>[i]</a> \] | "
 			HTML += "<a href='?src=\ref[circuit];component=\ref[circuit];rename=1'>\[R\]</a> | "
-			HTML += "<a href='?src=\ref[src];component=\ref[circuit];remove=1'>\[-\]</a> | "
+			if(circuit.removable)
+				HTML += "<a href='?src=\ref[src];component=\ref[circuit];remove=1'>\[-\]</a> | "
+			else
+				HTML += "\[-\] | "
 			HTML += "<a href='?src=\ref[circuit];examine=1'>[circuit.displayed_name]</a>"
 			HTML += "<br>"
+
+		if(length(assembly_components) > components_per_page)
+			HTML += "<br>\["
+			for(var/i = 0 to round(length(assembly_components)/components_per_page))
+				if(i == interact_page)
+					HTML += " [i+1]"
+				else
+					HTML += " <a href='?src=\ref[src];select_page=[i]'>[i+1]</a>"
+			HTML += " \]"
 
 	HTML += "</body></html>"
 	show_browser(user, jointext(HTML, null), "window=assembly-\ref[src];size=655x350;border=1;can_resize=1;can_close=1;can_minimize=1")
@@ -204,10 +195,16 @@
 				show_browser(usr, saved, "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
 			else
 				to_chat(usr, "<span class='warning'>The circuit is empty!</span>")
+		return 0
+
+	if(isobserver(usr))
 		return
 
 	if(!check_interactivity(usr))
-		return
+		return 0
+
+	if(href_list["select_page"])
+		interact_page = text2num(href_list["select_page"])
 
 	if(href_list["rename"])
 		rename(usr)
@@ -226,42 +223,27 @@
 		if(component)
 			// Builtin components are not supposed to be removed or rearranged
 			if(!component.removable)
-				return
+				return 0
 
 			add_allowed_scanner(usr.ckey)
 
 			var/current_pos = assembly_components.Find(component)
-
-			// Find the position of a first removable component
-			var/first_removable_pos
-			for(var/i in 1 to assembly_components.len)
-				var/obj/item/integrated_circuit/temp_component = assembly_components[i]
-				if(temp_component.removable)
-					first_removable_pos = i
-					break
 
 			if(href_list["remove"])
 				try_remove_component(component, usr)
 
 			else
 				// Adjust the position
-				if(href_list["up"])
-					current_pos--
-				else if(href_list["down"])
-					current_pos++
-				else if(href_list["top"])
-					current_pos = first_removable_pos
-				else if(href_list["bottom"])
-					current_pos = assembly_components.len
+				if(href_list["set_slot"])
+					var/selected_slot = input("Select a new slot", "Select slot", current_pos) as null|num
+					if(!check_interactivity(usr))
+						return 0
+					if(selected_slot < 1 || selected_slot > length(assembly_components))
+						return 0
 
-				// Wrap around nicely
-				if(current_pos < first_removable_pos)
-					current_pos = assembly_components.len
-				else if(current_pos > assembly_components.len)
-					current_pos = first_removable_pos
+					assembly_components.Remove(component)
+					assembly_components.Insert(selected_slot, component)
 
-				assembly_components.Remove(component)
-				assembly_components.Insert(current_pos, component)
 
 	interact(usr) // To refresh the UI.
 

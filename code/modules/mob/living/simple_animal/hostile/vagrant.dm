@@ -34,6 +34,8 @@
 	var/health_per_tick = 0.8
 	pass_flags = PASS_FLAG_TABLE
 
+	bleed_colour = "#aad9de"
+
 /mob/living/simple_animal/hostile/vagrant/Initialize()
 	. = ..()
 	if(prob(40))

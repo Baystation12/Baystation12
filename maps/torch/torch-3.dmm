@@ -4898,6 +4898,9 @@
 /obj/item/weapon/storage/box/mousetraps,
 /obj/item/weapon/storage/box/mousetraps,
 /obj/structure/catwalk,
+/obj/item/clothing/mask/plunger,
+/obj/item/clothing/mask/plunger,
+/obj/item/clothing/mask/plunger,
 /turf/simulated/floor/plating,
 /area/janitor)
 "jD" = (
@@ -6012,7 +6015,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 5;
@@ -7904,7 +7907,7 @@
 	pixel_x = 28
 	},
 /obj/effect/floor_decal/corner/yellow/diagonal,
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -8005,9 +8008,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
-"qo" = (
-/turf/simulated/floor/reinforced/hydrogen/fuel,
-/area/engineering/fuelbay)
 "qu" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/seconddeck)
@@ -10217,7 +10217,7 @@
 /turf/simulated/floor/plating,
 /area/engineering/drone_fabrication)
 "vD" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner/yellow/diagonal,
@@ -10225,7 +10225,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/maintenance/seconddeck/foreport)
 "vE" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner/yellow/diagonal,
@@ -11126,7 +11126,7 @@
 /area/maintenance/seconddeck/foreport)
 "yl" = (
 /obj/effect/floor_decal/corner/yellow/diagonal,
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/random_multi/single_item/punitelly,
@@ -11359,7 +11359,7 @@
 /area/maintenance/seconddeck/foreport)
 "zd" = (
 /obj/effect/floor_decal/corner/yellow/diagonal,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -14615,7 +14615,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/locker_room)
 "Hj" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 28
 	},
 /obj/machinery/light/small{
@@ -42722,8 +42722,8 @@ tO
 sZ
 Ec
 Fp
-qo
-qo
+Oo
+Oo
 Oo
 JF
 JF
@@ -42926,7 +42926,7 @@ Ec
 Fp
 Fp
 Fp
-qo
+Oo
 JF
 JF
 JF

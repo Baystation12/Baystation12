@@ -2,6 +2,8 @@ var/list/flooring_cache = list()
 
 /turf/simulated/floor/update_icon(var/update_neighbors)
 
+	..()
+
 	if(lava)
 		return
 

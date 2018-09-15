@@ -1385,7 +1385,7 @@
 	icon_state = "twindow";
 	dir = 4
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -1402,7 +1402,7 @@
 	icon_state = "bulb1";
 	dir = 8
 	},
-/obj/structure/toilet,
+/obj/structure/hygiene/toilet,
 /obj/structure/window/reinforced/tinted{
 	dir = 1
 	},
@@ -1773,7 +1773,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/crew/cryo)
 "di" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -1787,7 +1787,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/toilets)
 "dj" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	icon_state = "toilet00";
 	dir = 1
 	},
@@ -1805,7 +1805,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/toilets)
 "dk" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	icon_state = "toilet00";
 	dir = 1
 	},
@@ -2179,7 +2179,7 @@
 	name = "Galley APC"
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -2275,7 +2275,7 @@
 /area/ship/scrap/crew/medbay)
 "ee" = (
 /obj/item/weapon/stool/padded,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 8;
 	icon_state = "sink";
 	pixel_x = -13;
@@ -5715,7 +5715,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_y = 29
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 18
 	},
 /obj/structure/window/reinforced/tinted{

@@ -4,7 +4,6 @@
 	var/flash_protection = FLASH_PROTECTION_NONE	// Sets the item's level of flash protection.
 	var/tint = TINT_NONE							// Sets the item's level of visual impairment tint.
 	var/list/species_restricted = list("exclude", SPECIES_NABBER) //Only these species can wear this kit.
-	var/gunshot_residue //Used by forensics.
 
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
@@ -60,6 +59,11 @@
 			acc += A.get_fibers()
 	if(acc.len)
 		. += " with traces of [english_list(acc)]"
+
+/obj/item/clothing/proc/leave_evidence(mob/source)
+	add_fingerprint(source)
+	if(prob(10))
+		ironed_state = WRINKLES_WRINKLY
 
 /obj/item/clothing/New()
 	..()
@@ -495,6 +499,9 @@ BLIND     // can't see anything
 	var/pull_mask = 0
 	var/hanging = 0
 	blood_overlay_type = "maskblood"
+
+/obj/item/clothing/mask/proc/filters_water()
+	return FALSE
 
 /obj/item/clothing/mask/New()
 	if(pull_mask)

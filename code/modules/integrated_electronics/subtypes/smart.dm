@@ -102,11 +102,20 @@
 	var/Ps = get_pin_data(IC_INPUT, 4)
 	if(!Ps)
 		return
-	var/list/Pl = json_decode(XorEncrypt(hex2str(Ps, TRUE), SScircuit.cipherkey))
+
+	var/list/signature_and_data = splittext(Ps, ":")
+	var/signature = signature_and_data[1]
+	var/result = signature_and_data[2]
+
+	if(!check_data_signature(signature, result))
+		activate_pin(3)
+		return
+
+	var/list/Pl = json_decode(result)
 	if(Pl&&islist(Pl))
 		idc.access = Pl
 	var/turf/a_loc = get_turf(assembly)
-	var/list/P = AStar(assembly, locate(get_pin_data(IC_INPUT, 1), get_pin_data(IC_INPUT, 2), a_loc.z), /turf/proc/CardinalTurfsWithAccess, 0, 200, id=idc, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
+	var/list/P = AStar(a_loc, locate(get_pin_data(IC_INPUT, 1), get_pin_data(IC_INPUT, 2), a_loc.z), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 200, id=idc, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
 
 	if(!P)
 		activate_pin(3)

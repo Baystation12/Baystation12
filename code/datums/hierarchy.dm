@@ -26,5 +26,13 @@
 /decl/hierarchy/proc/is_hidden_category()
 	return hierarchy_type == type
 
+/decl/hierarchy/proc/get_descendents()
+	if(!children)
+		return
+	. = children.Copy()
+	for(var/decl/hierarchy/child in children)
+		if(child.children)
+			. += child.get_descendents()
+
 /decl/hierarchy/dd_SortValue()
 	return name

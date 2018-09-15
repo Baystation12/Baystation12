@@ -182,6 +182,23 @@
 		)
 	)
 
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/skrell,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
+		)
+
+/datum/species/skrell/water_act(var/mob/living/carbon/human/H, var/depth)
+	..()
+	if(depth >= 40)
+		if(H.getHalLoss())
+			H.adjustHalLoss(-5)
+			if(prob(5)) // Might be too spammy.
+				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")
+
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
