@@ -22,6 +22,18 @@
 	else
 		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")
 
+// an active warrant with access authorized grants access
+/obj/item/device/holowarrant/GetAccess()
+	. = list()
+
+	if(!active)
+		return
+
+	if(active.archived)
+		return
+
+	. |= active.fields["access"]
+
 //hit yourself with it
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
 	active = null
