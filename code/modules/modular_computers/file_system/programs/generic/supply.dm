@@ -102,7 +102,7 @@
 
 	if(href_list["order"])
 		var/decl/hierarchy/supply_pack/P = locate(href_list["order"]) in SSsupply.master_supply_list
-		if(!istype(P) || P.is_category())
+		if(!istype(P))
 			return 1
 
 		if(P.hidden && !emagged)
@@ -210,19 +210,21 @@
 /datum/nano_module/supply/proc/generate_categories()
 	category_names = list()
 	category_contents = list()
-	for(var/decl/hierarchy/supply_pack/sp in cargo_supply_pack_root.children)
-		if(sp.is_category())
-			category_names.Add(sp.name)
-			var/list/category[0]
-			for(var/decl/hierarchy/supply_pack/spc in sp.children)
-				if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
-					continue
-				category.Add(list(list(
-					"name" = spc.name,
-					"cost" = spc.cost,
-					"ref" = "\ref[spc]"
-				)))
-			category_contents[sp.name] = category
+	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
+	for(var/decl/hierarchy/supply_pack/sp in root.children)
+		if(!sp.is_category())
+			continue // No children
+		category_names.Add(sp.name)
+		var/list/category[0]
+		for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
+			if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
+				continue
+			category.Add(list(list(
+				"name" = spc.name,
+				"cost" = spc.cost,
+				"ref" = "\ref[spc]"
+			)))
+		category_contents[sp.name] = category
 
 /datum/nano_module/supply/proc/get_shuttle_status()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
