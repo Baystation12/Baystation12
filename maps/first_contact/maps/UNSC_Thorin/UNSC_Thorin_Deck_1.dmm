@@ -106,7 +106,7 @@
 "cb" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/portbattery)
 "cc" = (/obj/machinery/alarm,/turf/simulated/wall/r_wall,/area/corvette/unscthorin/portbatterycontrol)
 "cd" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Messhall)
-"ce" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Emergency Weapons Locker"; req_access = list(142)},/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway)
+"ce" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Emergency Weapons Locker"; req_access = list(632)},/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway)
 "cf" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Morgue"},/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/Porthallway)
 "cg" = (/obj/machinery/door/airlock/halo{name = "Captains Quarters"; req_access = list(633)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/captainroom)
 "ch" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall/r_wall,/area/corvette/unscthorin/oxystorage)
