@@ -88,6 +88,41 @@ obj/machinery/air_sensor/Destroy()
 		radio_controller.remove_object(src,frequency)
 	. = ..()
 
+/obj/machinery/air_sensor/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(isMultitool(O))
+		var/t = sanitizeSafe(input(user, "Enter the ID for the sensor.", src.name, id_tag), MAX_NAME_LEN)
+		if(user.incapacitated() && !user.Adjacent(src))
+			return
+		if (user.get_active_hand() != O)
+			return
+		if (!in_range(src, user) && src.loc != user)
+			return
+		t = sanitizeSafe(t, MAX_NAME_LEN)
+		if (t)
+			src.id_tag = t
+			to_chat(user, "<span class='notice'>The new ID of the sensor is [id_tag]</span>")
+		return
+	if(isWrench(O))
+		var/obj/item/air_sensor/sensor = new /obj/item/air_sensor(src.loc)
+		sensor.frequency = frequency
+		sensor.output = output
+		sensor.id_tag = id_tag
+		qdel(src)
+		return
+	if(isScrewdriver(O))
+		var/F = input("What frequency would you like to set this to?", "Adjust Frequency", frequency) as num|null
+		if(user.incapacitated() && !user.Adjacent(src))
+			return
+		if(user.get_active_hand() != O)
+			return
+		if(!in_range(src, user) && src.loc != user)
+			return
+		if(F)
+			frequency = F
+			set_frequency(F)
+			to_chat(user, "<span class='notice'>The frequency of the sensor is now [frequency]</span>")
+		return
+
 /obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "atmos_key"
@@ -181,8 +216,7 @@ obj/machinery/computer/general_air_control/Destroy()
 		sensor_data = "No sensors connected."
 
 	var/output = {"<B>[name]</B><HR>
-<B>Sensor Data:</B><HR><HR>[sensor_data]"}
-
+		<B>Sensor Data:</B><HR><HR>[sensor_data]"}
 	return output
 
 /obj/machinery/computer/general_air_control/proc/set_frequency(new_frequency)
@@ -271,7 +305,24 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 		spawn(1)
 			src.updateUsrDialog()
 		return 1
-
+	if(href_list["set_frequency"])
+		var/F = input("What frequency would you like to set this to?", "Adjust Frequency", frequency) as num|null
+		if(F)
+			frequency = F
+			set_frequency(F)
+		return 1
+	if(href_list["set_input_tag"])
+		var/t = sanitizeSafe(input(usr, "Enter the input ID tag.", src.name, src.input_tag), MAX_NAME_LEN)
+		t = sanitizeSafe(t, MAX_NAME_LEN)
+		if (t)
+			src.input_tag = t
+		return 1
+	if(href_list["set_output_tag"])
+		var/t = sanitizeSafe(input(usr, "Enter the output ID tag.", src.name, src.output_tag), MAX_NAME_LEN)
+		t = sanitizeSafe(t, MAX_NAME_LEN)
+		if (t)
+			src.output_tag = t
+		return 1
 	if(!radio_connection)
 		return 0
 	var/datum/signal/signal = new
@@ -558,7 +609,3 @@ Rate: [volume_rate] L/sec<BR>"}
 		)
 
 		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
-
-
-
-

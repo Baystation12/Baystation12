@@ -144,3 +144,37 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()
+
+/obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(isMultitool(O))
+		var/t = sanitizeSafe(input(user, "Enter the ID for the injector.", src.name, id), MAX_NAME_LEN)
+		if(user.incapacitated() && !user.Adjacent(src))
+			return
+		if (user.get_active_hand() != O)
+			return
+		if (!in_range(src, user) && src.loc != user)
+			return
+		t = sanitizeSafe(t, MAX_NAME_LEN)
+		if (t)
+			src.id = t
+			to_chat(user, "<span class='notice'>The new ID of the injector is [id]</span>")
+		return
+	if(isWrench(O))
+		var/obj/item/outlet_injector/injector = new /obj/item/outlet_injector(src.loc)
+		injector.frequency = frequency
+		injector.id = id
+		qdel(src)
+		return
+	if(isScrewdriver(O))
+		var/F = input("What frequency would you like to set this to?", "Adjust Frequency", frequency) as num|null
+		if(user.incapacitated() && !user.Adjacent(src))
+			return
+		if(user.get_active_hand() != O)
+			return
+		if(!in_range(src, user) && src.loc != user)
+			return
+		if(F)
+			frequency = F
+			set_frequency(F)
+			to_chat(user, "<span class='notice'>The frequency of the injector is now [frequency]</span>")
+		return

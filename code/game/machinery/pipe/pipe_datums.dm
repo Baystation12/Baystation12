@@ -409,6 +409,27 @@
 	pipe_type = PIPE_MTVALVEM
 	build_icon_state = "mtvalvem"
 
+/datum/pipe/pipe_dispenser/device/air_sensor
+	name = "gas sensor"
+	desc = "a sensor. It detects gasses."
+	build_path = /obj/item/air_sensor
+	pipe_type = null
+	build_icon_state = "gsensor1"
+	build_icon = 'icons/obj/stationobjs.dmi'
+	pipe_color = null
+	connect_types = null
+	colorable = FALSE
+
+/datum/pipe/pipe_dispenser/device/outlet_injector
+	name = "air injector"
+	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
+	build_icon = 'icons/atmos/injector.dmi'
+	build_icon_state = "off"
+	build_path = /obj/item/outlet_injector
+	connect_types = null
+	colorable = FALSE
+	pipe_color = null
+
 //Cleanup
 #undef PIPE_NORMAL
 #undef PIPE_BENT

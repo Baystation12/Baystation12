@@ -932,3 +932,46 @@ Buildable meters
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You have fastened the meter to the pipe</span>")
 	qdel(src)
+
+/obj/item/air_sensor
+	name = "gas sensor"
+	desc = "A sensor. It detects gasses."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "gsensor1"
+	w_class = ITEM_SIZE_LARGE
+	var/frequency = 1493
+	var/output = 3
+	var/id_tag
+
+/obj/item/air_sensor/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	..()
+	if(!isWrench(W))
+		return ..()
+	var/obj/machinery/air_sensor/sensor = new /obj/machinery/air_sensor(src.loc)
+	sensor.frequency = frequency
+	sensor.output = output
+	sensor.set_frequency(frequency)
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
+	qdel(src)
+
+/obj/item/outlet_injector
+	name = "air injector"
+	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
+	icon = 'icons/atmos/injector.dmi'
+	icon_state = "off"
+	var/frequency = 1493
+	var/id = null
+
+/obj/item/outlet_injector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	..()
+	if(!isWrench(W))
+		return ..()
+
+	var/obj/machinery/atmospherics/unary/outlet_injector/injector = new /obj/machinery/atmospherics/unary/outlet_injector(src.loc)
+	injector.frequency = frequency
+	injector.id = id
+	injector.set_frequency(frequency)
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
+	qdel(src)
