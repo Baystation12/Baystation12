@@ -17,19 +17,43 @@
 	icon = 'icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	var/associated_account_number = 0
-	var/list/associated_email_login = list("login" = "", "password" = "")
 
-	var/list/files = list(  )
+/obj/item/weapon/card/union
+	name = "union card"
+	desc = "A card showing membership in the local worker's union."
+	icon_state = "union"
+	slot_flags = SLOT_ID
+	var/signed_by
+
+/obj/item/weapon/card/union/examine(var/mob/user)
+	. = ..()
+	if(.)
+		if(signed_by)
+			to_chat(user, "It has been signed by [signed_by].")
+		else
+			to_chat(user, "It has a blank space for a signature.")
+
+/obj/item/weapon/card/union/attackby(var/obj/item/thing, var/mob/user)
+	if(istype(thing, /obj/item/weapon/pen))
+		if(signed_by)
+			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
+		else
+			var/signature = sanitizeSafe(input("What do you want to sign the card as?", "Union Card") as text, MAX_NAME_LEN)
+			if(signature && !signed_by && !user.incapacitated() && Adjacent(user))
+				signed_by = signature
+				user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with a flourish."))
+		return
+	..()
 
 /obj/item/weapon/card/data
 	name = "data disk"
 	desc = "A disk of data."
 	icon_state = "data"
+	item_state = "card-id"
 	var/function = "storage"
 	var/data = "null"
 	var/special = null
-	item_state = "card-id"
+	var/list/files = list(  )
 
 /obj/item/weapon/card/data/verb/label(t as text)
 	set name = "Label Disk"
@@ -95,10 +119,12 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A card used to provide ID and determine access."
 	icon_state = "id"
 	item_state = "card-id"
+	slot_flags = SLOT_ID
 
 	var/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
-	slot_flags = SLOT_ID
+	var/associated_account_number = 0
+	var/list/associated_email_login = list("login" = "", "password" = "")
 
 	var/age = "\[UNSET\]"
 	var/blood_type = "\[UNSET\]"
