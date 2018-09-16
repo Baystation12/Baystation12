@@ -6,7 +6,7 @@
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	w_class = ITEM_SIZE_NORMAL
-	default_material = "wood"
+	default_material = MATERIAL_WOOD
 	attack_verb = list("poked", "jabbed")
 
 

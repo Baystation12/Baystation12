@@ -200,7 +200,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 	var/datum/wire_description/wd = get_description(index)
 	if(!wd)
-		return 
+		return
 	if(wd.skill_level && !user.skill_check(SKILL_ELECTRICAL, wd.skill_level))
 		return
 	return wd.description
