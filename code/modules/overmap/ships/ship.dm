@@ -2,6 +2,7 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
+	var/moving_state = "ship_moving"
 	var/vessel_mass = 100 				//tonnes, arbitrary number, affects acceleration provided by engines
 	var/default_delay = 6 SECONDS 		//time it takes to move to next tile on overmap
 	var/speed_mod = 10					//multiplier for how much ship's speed reduces above time
@@ -108,10 +109,10 @@
 
 /obj/effect/overmap/ship/update_icon()
 	if(!is_still())
-		icon_state = "ship_moving"
+		icon_state = moving_state
 		dir = get_heading()
 	else
-		icon_state = "ship"
+		icon_state = initial(icon_state)
 
 /obj/effect/overmap/ship/proc/burn()
 	for(var/datum/ship_engine/E in engines)

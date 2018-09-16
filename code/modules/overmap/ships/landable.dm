@@ -10,6 +10,8 @@
 	var/shuttle                                         // Name of assotiated shuttle. Must be autodock.
 	var/obj/effect/shuttle_landmark/ship/landmark       // Record our open space landmark for easy reference.
 	var/status = SHIP_STATUS_LANDED
+	icon_state = "shuttle"
+	moving_state = "shuttle_moving"
 
 /obj/effect/overmap/ship/landable/Destroy()
 	GLOB.shuttle_moved_event.unregister(SSshuttle.shuttles[shuttle], src)
