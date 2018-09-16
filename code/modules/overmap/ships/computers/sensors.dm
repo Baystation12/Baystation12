@@ -140,7 +140,7 @@
 		return
 	if(sensors && sensors.use_power && sensors.powered())
 		var/sensor_range = round(sensors.range*1.5) + 1
-		linked.set_light(1, sensor_range, sensor_range+1)
+		linked.set_light(0.8, sensor_range, sensor_range+1)
 	else
 		linked.set_light(0)
 
@@ -208,8 +208,8 @@
 	..()
 
 /obj/machinery/shipsensors/proc/toggle()
-	if(!use_power && health == 0)
-		return
+	if(!use_power && (health == 0 || !in_vacuum()))
+		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
 		use_power(idle_power_usage*5)
 	use_power = !use_power

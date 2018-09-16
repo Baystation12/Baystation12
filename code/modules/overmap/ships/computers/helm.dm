@@ -90,6 +90,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	data["sector"] = current_sector ? current_sector.name : "Deep Space"
 	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
+	data["landed"] = linked.get_landed_info()
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
 	data["dest"] = dy && dx
@@ -122,7 +123,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 380, 530)
+		ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 400, 630)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

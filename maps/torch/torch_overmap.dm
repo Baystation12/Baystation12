@@ -41,6 +41,11 @@
 		"nav_bridge_aquila"
 	)
 
+/obj/effect/overmap/ship/landable/exploration_shuttle
+	name = "Charon"
+	shuttle = "Charon"
+	fore_dir = NORTH
+
 /obj/machinery/computer/shuttle_control/explore/aquila
 	name = "aquila control console"
 	shuttle_tag = "Aquila"

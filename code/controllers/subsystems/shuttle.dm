@@ -9,6 +9,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/registered_shuttle_landmarks = list()
 	var/last_landmark_registration_time
 	var/list/shuttle_logs = list()               //Keeps records of shuttle movement, format is list(datum/shuttle = datum/shuttle_log)
+	var/list/shuttle_areas = list()              //All the areas of all shuttles.
 
 	var/list/landmarks_awaiting_sector = list()  //Stores automatic landmarks that are waiting for a sector to finish loading.
 	var/list/landmarks_still_needed = list()     //Stores landmark_tags that need to be assigned to the sector (landmark_tag = sector) when registered.
@@ -117,6 +118,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/datum/shuttle/shuttle = shuttle_type
 	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
+		shuttle_areas |= shuttle.shuttle_area
 
 /datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
 	for(var/datum/shuttle/S in shuttles_list)

@@ -839,10 +839,7 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "ch" = (
-/obj/machinery/computer/general_air_control{
-	name = "Atmospheric Sensors";
-	sensors = list("calypso_out")
-	},
+/obj/machinery/computer/ship/helm,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
 "ci" = (
@@ -850,8 +847,8 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
 "cj" = (
-/obj/structure/table/steel_reinforced,
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
 "ck" = (
@@ -1445,11 +1442,13 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "dw" = (
-/obj/structure/table/steel_reinforced,
 /obj/item/device/radio,
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
@@ -1475,9 +1474,10 @@
 	icon_state = "camera";
 	dir = 1
 	},
-/obj/structure/bed/chair/shuttle/blue{
-	icon_state = "shuttle_chair_preview";
-	dir = 8
+/obj/machinery/computer/general_air_control{
+	dir = 8;
+	name = "Atmospheric Sensors";
+	sensors = list("calypso_out")
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
@@ -4113,6 +4113,8 @@
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/net,
 /obj/item/clothing/accessory/storage/bandolier/safari,
+/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/beartrap,
 /turf/simulated/floor/tiled/dark,
 /area/exploration_shuttle/cargo)
 "iC" = (
@@ -5016,6 +5018,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/ship)
+"kz" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/freezer/rations,
+/turf/simulated/floor/tiled/dark,
+/area/exploration_shuttle/cargo)
 "kA" = (
 /obj/machinery/conveyor{
 	dir = 1;
@@ -6218,6 +6225,7 @@
 	icon_state = "bulb1";
 	dir = 4
 	},
+/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "mP" = (
@@ -6838,6 +6846,7 @@
 	icon_state = "handrail";
 	dir = 8
 	},
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "nZ" = (
@@ -8088,10 +8097,8 @@
 /area/exploration_shuttle/cargo)
 "qv" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/crate/freezer/rations,
-/obj/item/weapon/material/knife/butch,
-/obj/item/weapon/beartrap,
 /obj/machinery/light/small,
+/obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/dark,
 /area/exploration_shuttle/cargo)
 "qw" = (
@@ -9628,6 +9635,9 @@
 	dir = 1;
 	health = 1e+006
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "tc" = (
@@ -9636,6 +9646,9 @@
 	dir = 1;
 	health = 1e+006
 	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo)
 "td" = (
@@ -9643,6 +9656,9 @@
 /obj/structure/window/reinforced{
 	dir = 1;
 	health = 1e+006
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
@@ -10558,20 +10574,20 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "uG" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 2
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "uH" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 2
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo)
 "uI" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 2
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
@@ -18513,6 +18529,18 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
+"Kr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/overmap/ship/landable/exploration_shuttle,
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/cargo)
 "Kx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -18779,6 +18807,13 @@
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
+"MI" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/cargo)
 "MO" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -18788,6 +18823,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/hangar)
+"MQ" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/cargo)
 "MR" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/center)
@@ -19362,6 +19406,11 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
+"RK" = (
+/obj/effect/paint/hull,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/cargo)
 "RL" = (
 /obj/machinery/suit_storage_unit/explorer,
 /obj/effect/floor_decal/corner/mauve/diagonal,
@@ -19451,6 +19500,17 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/ship)
+"SO" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 10
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/power)
 "SZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -19471,6 +19531,17 @@
 /obj/effect/floor_decal/corner/brown/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/center)
+"Th" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/atmos)
 "Tl" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -19612,6 +19683,9 @@
 "UH" = (
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
+"UP" = (
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/cargo)
 "US" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -19646,6 +19720,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/ship)
+"VG" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/atmos)
 "VL" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -19742,6 +19823,10 @@
 "WZ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/fore)
+"Xe" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/cargo)
 "Xk" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/sign/directions/science{
@@ -41260,7 +41345,7 @@ nU
 pg
 qs
 mM
-tb
+Th
 uG
 we
 xm
@@ -41462,7 +41547,7 @@ nV
 ph
 qt
 mM
-Mn
+VG
 Mn
 we
 ti
@@ -42067,8 +42152,8 @@ iA
 nX
 pk
 qv
-iC
-tc
+RK
+MQ
 uH
 we
 ti
@@ -42262,7 +42347,7 @@ fK
 gG
 hB
 iz
-jz
+Kr
 jz
 ly
 mO
@@ -42472,7 +42557,7 @@ iC
 pm
 iC
 iC
-Ob
+MI
 Ob
 we
 ti
@@ -42666,7 +42751,7 @@ fM
 gI
 eV
 iB
-iA
+kz
 iA
 lA
 mP
@@ -42876,7 +42961,7 @@ oa
 po
 qy
 mP
-td
+SO
 uI
 we
 xn
@@ -43070,8 +43155,8 @@ eL
 eV
 eV
 eV
-bi
-bi
+Xe
+UP
 iC
 mP
 ob
