@@ -1306,7 +1306,13 @@
 /datum/chemical_reaction/soysauce
 	name = "Soy Sauce"
 	result = /datum/reagent/nutriment/soysauce
-	required_reagents = list(/datum/reagent/drink/milk/soymilk = 4, /datum/reagent/acid = 1)
+	required_reagents = list(/datum/reagent/drink/milk/soymilk = 5, /datum/reagent/nutriment/vinegar = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/soysauce_acid
+	name = "Bitey Soy Sauce"
+	result = /datum/reagent/nutriment/soysauce
+	required_reagents = list(/datum/reagent/drink/milk/soymilk = 4, /datum/reagent/acid = 1) 
 	result_amount = 5
 
 /datum/chemical_reaction/ketchup
@@ -2007,3 +2013,29 @@
 	result = /datum/reagent/nanoblood
 	required_reagents = list(/datum/reagent/dexalinp = 1, /datum/reagent/iron = 1, /datum/reagent/blood = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/vinegar
+	name = "Apple Vinegar"
+	result = /datum/reagent/nutriment/vinegar
+	required_reagents = list(/datum/reagent/drink/juice/apple = 10)
+	catalysts = list(/datum/reagent/enzyme = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/vinegar2
+	name = "Clear Vinegar"
+	result = /datum/reagent/nutriment/vinegar
+	required_reagents = list(/datum/reagent/ethanol = 10)
+	catalysts = list(/datum/reagent/enzyme = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/mayo
+	name = "Vinegar Mayo"
+	result = /datum/reagent/nutriment/mayo
+	required_reagents = list(/datum/reagent/nutriment/vinegar = 5, /datum/reagent/nutriment/protein/egg = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/mayo2
+	name = "Lemon Mayo"
+	result = /datum/reagent/nutriment/mayo
+	required_reagents = list(/datum/reagent/drink/juice/lemon = 5, /datum/reagent/nutriment/protein/egg = 5)
+	result_amount = 10

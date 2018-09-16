@@ -432,6 +432,22 @@
 		M.bodytemperature += rand(15, 30)
 	holder.remove_reagent(/datum/reagent/frostoil, 5)
 
+/datum/reagent/nutriment/vinegar
+	name = "Vinegar"
+	description = "A weak solution of acetic acid. Usually used for seasoning food."
+	taste_description = "vinegar"
+	reagent_state = LIQUID
+	color = "#e8dfd0"
+	taste_mult = 3
+
+/datum/reagent/nutriment/mayo
+	name = "Mayonnaise"
+	description = "A mixture of egg yolk with lemon juice or vinegar. Usually put on bland food to make it more edible."
+	taste_description = "mayo"
+	reagent_state = LIQUID
+	color = "#efede8"
+	taste_mult = 2
+
 /* Drinks */
 
 /datum/reagent/drink
