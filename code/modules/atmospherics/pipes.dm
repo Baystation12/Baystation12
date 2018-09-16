@@ -127,7 +127,8 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, src)
+		var/obj/item/pipe/P = new /obj/item/pipe(loc, src)
+		P.pipe_type = pipe_type
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
