@@ -106,3 +106,33 @@
 	cost = 8
 	containertype = /obj/structure/largecrate
 	containername = "\improper water tank crate"
+
+//Vending Machines
+
+/decl/hierarchy/supply_pack/supply/snackvendor
+	name = "Vendor - Getmoore Chocolate Co"
+	contains = list(/obj/machinery/vending/snack{anchored = 0})
+	cost = 50
+	containertype = /obj/structure/largecrate
+	containername = "\improper Vending Machine"
+
+/decl/hierarchy/supply_pack/supply/snackvendor
+	name = "Vendor - Snix Zakuson TCC"
+	contains = list(/obj/machinery/vending/snix{anchored = 0})
+	cost = 50
+	containertype = /obj/structure/largecrate
+	containername = "\improper Vending Machine"
+
+/decl/hierarchy/supply_pack/supply/snackvendor
+	name = "Vendor - Solar Snacks SCC"
+	contains = list(/obj/machinery/vending/sol{anchored = 0})
+	cost = 50
+	containertype = /obj/structure/largecrate
+	containername = "\improper Vending Machine"
+
+/decl/hierarchy/supply_pack/supply/snackvendor
+	name = "Vendor - Softdrinks Robust Industries LLC"
+	contains = list(/obj/machinery/vending/cola{anchored = 0})
+	cost = 50
+	containertype = /obj/structure/largecrate
+	containername = "\improper Vending Machine"

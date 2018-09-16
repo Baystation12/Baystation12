@@ -3175,6 +3175,22 @@
 	nutriment_amt = 6
 	bitesize = 1
 
+/obj/item/weapon/reagent_containers/food/snacks/caviar/true
+	name = "\improper Terran Caviar"
+	icon_state = "carpeggs"
+	desc = "Terran caviar, or space carp eggs. Banned by Sol Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
+	trash = /obj/item/trash/carpegg
+	filling_color = "#000000"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
+	nutriment_amt = 6
+	bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/caviar/true/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 1)
+
+
 /obj/item/weapon/reagent_containers/food/snacks/squid
 	name = "\improper Calamari Crisps"
 	icon_state = "squid"
@@ -3230,6 +3246,116 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 
+
+/obj/item/weapon/reagent_containers/food/snacks/pistachios
+	name = "\improper Pistachios"
+	icon_state = "pistachios"
+	desc = "Pistachios. There is absolutely nothing remarkable about these."
+	trash = /obj/item/trash/pistachios
+	filling_color = "#825d26"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("nuts" = 1)
+	nutriment_amt = 3
+	bitesize = 0.5
+
+// Sol Approved Food Groups
+
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/lunacake
+	desc = "Still wrapped in some cellophane."
+	icon_state = "Lunacake_wrapped"
+	item_flags = 0
+	obj_flags = 0
+	wrapped = 1
+
+obj/item/weapon/reagent_containers/food/snacks/lunacake
+	name = "\improper Luna Cake"
+	icon_state = "lunacake"
+	desc = "Now with 20% less lawsuit enabling rhegolith!"
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "cocoa" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/triton
+	name = "\improper Tidal Gobs"
+	icon_state = "tidepods"
+	desc = "Contains over 9000% of your daily recommended intake of salt."
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("salt" = 4, "seagull?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/saturn
+	name = "\improper Saturn-Os"
+	icon_state = "saturno"
+	desc = "A day ration of sugar, styrofoam and possibly sawdust."
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "wood?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/jupiter
+	name = "\improper Jove Gello"
+	icon_state = "jupiter"
+	desc = "By Joove! It's some kind of gel."
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "vanilla?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/pluto
+	name = "\improper Plutonian Rods"
+	icon_state = "pluto"
+	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("chalk" = 4, "sad?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/mars
+	name = "\improper "
+	icon_state = "pluto"
+	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("chalk" = 4, "sad?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/venus
+	name = "\improper Venusian Hot Cakes"
+	icon_state = "venus"
+	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("chalk" = 4, "sad?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/oort
+	name = "\improper "
+	icon_state = "pluto"
+	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("chalk" = 4, "sad?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+// The Rest
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood
 	name = "\improper LiquidFood MRE"

@@ -801,19 +801,7 @@
 					/obj/item/weapon/flame/lighter/random = 4,
 					/obj/item/weapon/storage/chewables/tobacco = 2,
 					/obj/item/weapon/storage/chewables/tobacco2 = 2,
-					/obj/item/weapon/storage/chewables/tobacco3 = 2,
-					/obj/item/clothing/mask/smokable/ecig/simple = 10,
-					/obj/item/clothing/mask/smokable/ecig/util = 5,
-					/obj/item/clothing/mask/smokable/ecig/deluxe = 1,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 10,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 5,
-					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 2)
+					/obj/item/weapon/storage/chewables/tobacco3 = 2)
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4,
 					/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5)
@@ -838,7 +826,38 @@
 					/obj/item/weapon/storage/fancy/cigarettes/cigarello/mint = 85,
 					/obj/item/weapon/storage/fancy/cigarettes/cigarello/variety = 85,
 					/obj/item/weapon/storage/box/matches = 2,
-					/obj/item/weapon/flame/lighter/random = 5,
+					/obj/item/weapon/flame/lighter/random = 5)
+
+/obj/machinery/vending/ecigarette
+	name = "\improper E-Cigarette machine" //OCD had to be uppercase to look nice with the new formating
+	desc = "A specialized vending machine dispensing wussy non-lethal alternatives to smoking."
+	product_slogans = "Now in fruit flavor!'.;\
+		Batteries included.;\
+		Puff puff give, thats the rule."
+	product_ads = "Smoking, now without the side-effects!;\
+		Vaping! All the flavor, none of the cancer.;\
+		It's marginally better for you!;\
+		Only old farts use exothermic reactions.;\
+		Vape!;\
+		Vapers gonna vape;\
+		Don't hate, embrace the vape."
+	vend_delay = 21
+	icon_state = "cigs"
+	icon_vend = "cigs-vend"
+	products = list(
+					/obj/item/clothing/mask/smokable/ecig/simple = 10,
+					/obj/item/clothing/mask/smokable/ecig/util = 5,
+					/obj/item/clothing/mask/smokable/ecig/deluxe = 1,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 2)
+	prices = list(
 					/obj/item/clothing/mask/smokable/ecig/simple = 50,
 					/obj/item/clothing/mask/smokable/ecig/util = 100,
 					/obj/item/clothing/mask/smokable/ecig/deluxe = 250,
@@ -851,7 +870,6 @@
 					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 15,
 					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 15,
 					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 15)
-
 
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
@@ -1029,7 +1047,6 @@
 	/obj/item/weapon/storage/lunchbox/syndicate = 3,
 	/obj/item/weapon/storage/lunchbox/dais = 3)
 
-
 	contraband = list(/obj/item/weapon/material/knife/butch = 2)
 
 /obj/machinery/vending/sovietsoda
@@ -1156,8 +1173,8 @@
 	product_slogans = "Escape to a fantasy world!;Fuel your gambling addiction!;Ruin your friendships!"
 	product_ads = "Elves and dwarves!;Totally not satanic!;Fun times forever!"
 	icon_state = "games"
-	products = list(/obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/weapon/deck/cards = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2)
-	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
+	products = list(/obj/item/weapon/board = 2, /obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/weapon/deck/cards = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2)
+	prices = list(/obj/item/weapon/board = 10, /obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
 	premium = list(/obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
 
@@ -1176,7 +1193,8 @@
 					/obj/item/weapon/mirror = 8,
 					/obj/item/weapon/haircomb/random = 8,
 					/obj/item/weapon/haircomb/brush = 4,
-					/obj/item/weapon/towel/random = 6
+					/obj/item/weapon/towel/random = 6,
+					/obj/item/weapon/reagent_containers/spray/cleaner/deodorant = 4
 					)
 	premium = list(/obj/item/weapon/soap/gold = 1)
 	contraband = list(/obj/item/weapon/soap/syndie = 4,
@@ -1188,7 +1206,8 @@
 				  /obj/item/weapon/mirror = 40,
 				  /obj/item/weapon/haircomb/random = 40,
 				  /obj/item/weapon/haircomb/brush = 80,
-				  /obj/item/weapon/towel/random = 50
+				  /obj/item/weapon/towel/random = 50,
+				  /obj/item/weapon/reagent_containers/spray/cleaner/deodorant = 20
 					)
 
 //a food variant of the boda machine, only has one item currently.
@@ -1204,9 +1223,38 @@
 					/obj/item/weapon/reagent_containers/food/snacks/squid = 4,
 					/obj/item/weapon/reagent_containers/food/snacks/croutons = 4,
 					/obj/item/weapon/reagent_containers/food/snacks/salo = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 4
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 4
+					)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/caviar/true = 1)
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/caviar = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/caviar/true = 20
 					)
 
+/obj/machinery/vending/sol
+	name = "Solar Snacks"
+	desc = "A SolCentric vending machine dispensing treats from home."
+	vend_delay = 30
+	product_slogans = "A taste of home!"
+
+	icon_state = "solsnack"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/lunacake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pluto = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 8
+					)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/lunacake = 12)
 
 /obj/machinery/vending/hotfood
 	name = "Hot Foods"
