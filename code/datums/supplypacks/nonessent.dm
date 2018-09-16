@@ -7,7 +7,7 @@
 					/obj/item/device/floor_painter = 2,
 					/obj/item/device/cable_painter = 2)
 	cost = 10
-	containername = "\improper painting supplies crate"
+	containername = "painting supplies crate"
 	containertype = /obj/structure/closet/crate
 
 /decl/hierarchy/supply_pack/nonessent/artscrafts
@@ -27,7 +27,7 @@
 	/obj/item/weapon/contraband/poster,
 	/obj/item/weapon/wrapping_paper = 3)
 	cost = 10
-	containername = "\improper Arts and Crafts crate"
+	containername = "arts and Crafts crate"
 
 
 /decl/hierarchy/supply_pack/nonessent/card_packs
@@ -35,9 +35,9 @@
 	contains = list(/obj/item/weapon/pack/cardemon,
 					/obj/item/weapon/pack/spaceball,
 					/obj/item/weapon/deck/holder)
-	name = "\improper Rec - Trading Card Crate"
+	name = "Rec - Trading Cards"
 	cost = 20
-	containername = "\improper cards crate"
+	containername = "trading cards crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/nonessent/lasertag
@@ -48,15 +48,15 @@
 					/obj/item/clothing/suit/bluetag = 3)
 	cost = 20
 	containertype = /obj/structure/closet
-	containername = "\improper Lasertag Closet"
+	containername = "lasertag Closet"
 
 /decl/hierarchy/supply_pack/nonessent/instruments
-	name = "Rec - Instrument shipment"
+	name = "Rec - Musical Instruments"
 	contains = list(/obj/item/device/synthesized_instrument/synthesizer,
 					/obj/item/device/synthesized_instrument/guitar/multi,
 					/obj/item/device/synthesized_instrument/trumpet)
 	cost = 40
-	containername = "\improper Musical instrument crate"
+	containername = "musical instrument crate"
 
 
 /decl/hierarchy/supply_pack/nonessent/llamps
@@ -72,18 +72,18 @@
 					/obj/item/device/flashlight/lamp/lava/pink)
 	name = "Deco - Lava lamps"
 	cost = 10
-	containername = "\improper Lava lamp crate"
+	containername = "lava lamp crate"
 	supply_method = /decl/supply_method/randomized
 
 
 /decl/hierarchy/supply_pack/nonessent/wizard
-	name = "Costume - Wizard costume"
+	name = "Costume - Wizard"
 	contains = list(/obj/item/weapon/staff,
 					/obj/item/clothing/suit/wizrobe/fake,
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/fake)
 	cost = 20
-	containername = "\improper Wizard costume crate"
+	containername = "wizard costume crate"
 
 /decl/hierarchy/supply_pack/nonessent/costume
 	num_contained = 2
@@ -117,9 +117,9 @@
 					/obj/item/clothing/under/savage_hunter,
 					/obj/item/clothing/under/savage_hunter/female,
 					/obj/item/clothing/under/wetsuit)
-	name = "Costume - Costumes crate"
+	name = "Costume - Random"
 	cost = 10
-	containername = "\improper Actor Costumes"
+	containername = "actor costumes crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/nonessent/formal_wear
@@ -137,10 +137,10 @@
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/leather,
 					/obj/item/clothing/accessory/wcoat)
-	name = "Costume - Formalwear closet"
+	name = "Costume - Formalwear"
 	cost = 30
 	containertype = /obj/structure/closet
-	containername = "\improper Formalwear for the best occasions."
+	containername = "formalwear for the best occasions."
 
 
 /decl/hierarchy/supply_pack/nonessent/hats
@@ -165,23 +165,23 @@
 					/obj/item/clothing/head/collectable/slime,
 					/obj/item/clothing/head/collectable/xenom,
 					/obj/item/clothing/head/collectable/petehat)
-	name = "Costume - Collectable hat crate!"
+	name = "Costume - Collectible hats!"
 	cost = 200
 	containername = "\improper Collectable hats crate! Brought to you by Bass.inc!"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/nonessent/witch
-	name = "Costume - Witch costume"
+	name = "Costume - Witch"
 	contains = list(/obj/item/clothing/suit/wizrobe/marisa/fake,
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/marisa/fake,
 					/obj/item/weapon/staff/broom)
 	cost = 20
-	containername = "\improper Witch costume"
+	containername = "witch costume crate"
 	containertype = /obj/structure/closet
 
 /decl/hierarchy/supply_pack/nonessent/costume_hats
-	name = "Costume - Costume hats"
+	name = "Costume - Regular hats"
 	contains = list(/obj/item/clothing/head/redcoat,
 					/obj/item/clothing/head/mailman,
 					/obj/item/clothing/head/plaguedoctorhat,
@@ -198,7 +198,7 @@
 					/obj/item/clothing/head/ushanka,
 					/obj/item/clothing/mask/spirit)
 	cost = 10
-	containername = "\improper Actor hats crate"
+	containername = "actor hats crate"
 	containertype = /obj/structure/closet
 	num_contained = 2
 	supply_method = /decl/supply_method/randomized
@@ -217,7 +217,7 @@
 					/obj/item/clothing/under/dress/dress_yellow,
 					/obj/item/clothing/under/dress/dress_saloon)
 	cost = 15
-	containername = "\improper Pretty dress locker"
+	containername = "pretty dress locker"
 	containertype = /obj/structure/closet
 	num_contained = 1
 	supply_method = /decl/supply_method/randomized
@@ -231,10 +231,10 @@
 					/obj/item/toy/desk/officetoy,
 					/obj/item/toy/desk/dippingbird)
 	cost = 15
-	containername = "\improper Office toys crate"
+	containername = "office toys crate"
 
 /decl/hierarchy/supply_pack/nonessent/chaplaingear
-	name = "Costume - Chaplain equipment"
+	name = "Costume - Chaplain"
 	contains = list(/obj/item/clothing/under/rank/chaplain,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/suit/nun,
@@ -246,7 +246,7 @@
 //					/obj/item/weapon/storage/backpack/cultpack,
 					/obj/item/weapon/storage/fancy/candle_box = 3)
 	cost = 10
-	containername = "\improper Chaplain equipment crate"
+	containername = "chaplain equipment crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl1
 	name = "Mod - Ripley APLU modkit"
