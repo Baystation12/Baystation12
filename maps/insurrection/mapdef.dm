@@ -29,6 +29,7 @@
 
 /datum/map/Insurrection
 	apc_test_exempt_areas = list(
+		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/corvette/unscbertels = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/corvette/unscbertels/deck1/Bridge = NO_SCRUBBER|NO_VENT,
 		/area/corvette/unscbertels/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
