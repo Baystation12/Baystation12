@@ -21,8 +21,31 @@
 	create_reagents(30)
 
 /obj/item/weapon/mop/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
-	if(istype(A, /turf) || is_type_in_list(A,moppable_types))
+	if(!proximity)
+		return
+
+	var/moppable
+	if(istype(A, /turf))
+		var/turf/T = A
+		var/obj/effect/fluid/F = locate() in T
+		if(F && F.fluid_amount > 0)
+			if(F.fluid_amount > FLUID_SHALLOW)
+				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
+			else
+				user.visible_message("<span class='notice'>\The [user] begins to mop up \the [T].</span>")
+				if(do_after(user, 40, T) && F && !QDELETED(F))
+					if(F.fluid_amount > FLUID_SHALLOW)
+						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
+					else
+						qdel(F)
+						to_chat(user, "<span class='notice'>You have finished mopping!</span>")
+			return
+		moppable = TRUE
+
+	else if(is_type_in_list(A,moppable_types))
+		moppable = TRUE
+
+	if(moppable)
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='notice'>Your mop is dry!</span>")
 			return
@@ -30,7 +53,7 @@
 		if(!T)
 			return
 
-		user.visible_message("<span class='warning'>[user] begins to clean \the [T].</span>")
+		user.visible_message("<span class='warning'>\The [user] begins to clean \the [T].</span>")
 
 		if(do_after(user, 40, T))
 			if(T)
