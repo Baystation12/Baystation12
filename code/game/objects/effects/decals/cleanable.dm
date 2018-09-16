@@ -1,4 +1,5 @@
 /obj/effect/decal/cleanable
+	waterproof = FALSE
 	var/persistent = FALSE
 	var/generic_filth = FALSE
 	var/age = 0
