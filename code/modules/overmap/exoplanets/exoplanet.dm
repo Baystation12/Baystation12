@@ -422,6 +422,9 @@
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
 
+/turf/simulated/floor/exoplanet/can_engrave()
+	return FALSE
+
 /turf/simulated/floor/exoplanet/Entered(atom/movable/A)
 	..()
 
