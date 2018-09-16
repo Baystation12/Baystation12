@@ -130,13 +130,18 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/cl
-	name = OUTFIT_JOB_NAME("Corporate Liaison")
+	name = OUTFIT_JOB_NAME("Workplace Liaison")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
 	uniform = /obj/item/clothing/under/suit_jacket/nt
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
+
+decl/hierarchy/outfit/job/torch/passenger/research/cl/union
+	name = OUTFIT_JOB_NAME("Union Representative")
+	l_pocket = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
+	r_pocket = /obj/item/weapon/flame/lighter/zippo
 
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")

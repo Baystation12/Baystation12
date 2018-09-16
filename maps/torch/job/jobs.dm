@@ -307,20 +307,21 @@
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/liaison
-	title = "Corporate Liaison"
+	title = "Workplace Liaison"
 	department = "Support"
 	department_flag = SPT
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Corporate Regulations and Torch LLC"
+	supervisors = "Corporate Regulations, the Union Charter, and Torch LLC"
 	selection_color = "#2f2f7f"
 	economic_power = 15
 	minimal_player_age = 0
 	alt_titles = list(
+		"Corporate Liaison",
+		"Union Representative" = /decl/hierarchy/outfit/job/torch/passenger/research/cl/union,
 		"Corporate Representative",
-		"Corporate Executive",
-		"Union Representative"
+		"Corporate Executive"
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -331,13 +332,14 @@
 
 	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard,
-						access_hangar, access_petrov, access_petrov_helm)
+						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar,
+						access_petrov, access_petrov_helm, access_maint_tunnels, access_emergency_storage,
+						access_janitor, access_hydroponics, access_kitchen, access_bar, access_commissary)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Corporate Liaison. You are a civilian employee of Torch LLC, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote, protect and ensure corporate interests, and the interests of the contractors on board, are met. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
+	return "You are the Workplace Liaison. You are a civilian employee of Torch LLC, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"

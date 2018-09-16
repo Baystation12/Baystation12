@@ -1,4 +1,5 @@
 author: Zuhayr
 delete-after: True
 changes: 
-  - rscdel: "Removed NanoTrasen rank. You can use the contractor rank to get access to science roles now."
+  - rscdel: "Removed NanoTrasen rank. You can use the contractor rank to get access to science roles now. Play whatever company you like."
+  - tweak: "The Torch has unionized under the Torch LLC Corporate Union. You can get a union card in loadout and the Corporate Liaison is now the Workplace Liaison, with Corporate Liaison and Union Representative available as alt titles. Worker's rights!"

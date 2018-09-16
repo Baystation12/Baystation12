@@ -317,7 +317,7 @@ var/list/gear_datums = list()
 		gear_tweaks += new/datum/gear_tweak/path/type(path)
 	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/subtype(path)
-		
+
 /datum/gear/proc/get_description(var/metadata)
 	. = description
 	for(var/datum/gear_tweak/gt in gear_tweaks)
@@ -342,12 +342,9 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, metadata)
-
 	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
 		to_chat(H, "<span class='notice'>Equipping you with \the [item]!</span>")
-		return TRUE
-
-	return FALSE
+		. = item
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, metadata)
