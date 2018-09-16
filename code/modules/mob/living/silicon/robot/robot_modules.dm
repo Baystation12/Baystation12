@@ -475,6 +475,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/storage/bag/trash(src)
 	src.modules += new /obj/item/weapon/mop(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
+	src.modules += new /obj/item/borg/sight/hud/jani(src)
 	src.modules += new /obj/item/device/plunger/robot(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
@@ -724,6 +725,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/plunger/robot(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)
 	src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
+	src.modules += new /obj/item/borg/sight/hud/jani(src)
 
 	robot.internals = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
 	src.modules += robot.internals
