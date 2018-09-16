@@ -6225,7 +6225,6 @@
 	icon_state = "bulb1";
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "mP" = (
