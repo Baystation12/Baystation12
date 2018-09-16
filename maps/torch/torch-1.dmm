@@ -2861,7 +2861,7 @@
 "gd" = (
 /obj/effect/floor_decal/corner/mauve/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/computer/navigation,
+/obj/machinery/computer/ship/navigation,
 /turf/simulated/floor/tiled/monotile,
 /area/command/pathfinder)
 "ge" = (
@@ -9672,7 +9672,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/computer/navigation{
+/obj/machinery/computer/ship/navigation{
 	icon_state = "computer";
 	dir = 8
 	},
