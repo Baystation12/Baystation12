@@ -14,7 +14,8 @@ The following conduct may result in a warning being logged against your account:
 	    * Opening a PR you do not personally want merged. 
 		    * Exceptions exist on a case-by-case basis for opening PRs on behalf of other people, but they MUST sponsor the PR and be willing to argue in its defense as would any other contributor)
 		* Opening a PR changing, removing or adding features as a political statement to protest a change you do not like.
-		* Repeated attempts to force the 'Contentious' tag to block a change you do not agree with.
+		* Repeatedly attempting to compel Developers to block a PR you do not agree with.
+		    * This includes over the course of several PRs.
 * Disobeying development team members' instructions to cease a line of discussion or move discussion elsewhere.
 * Any other conduct deemed unhealthy or unhelpful as discussed on a case-by-case basis among the development team.
 
