@@ -1256,6 +1256,19 @@
 
 	prices = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/lunacake = 12)
 
+/obj/machinery/vending/terrajuice
+	name = "Terramart Juice"
+	desc = "A juice vendor that only stocks authentic Earth fruit juices. Reconstituted from flavor packs."
+	vend_delay = 30
+	product_slogans = "A taste of home!"
+
+	icon_state = "terrajuice"
+	products = list(
+					)
+
+	prices = list(
+					)
+
 /obj/machinery/vending/hotfood
 	name = "Hot Foods"
 	desc = "An old vending machine promising 'hot foods'. You doubt any of its contents are still edible."
