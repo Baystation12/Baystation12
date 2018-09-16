@@ -5,7 +5,7 @@
 "ae" = (/turf/simulated/floor/airless,/area/unishi/bridge)
 "af" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor/airless,/area/unishi/bridge)
 "ag" = (/obj/machinery/computer/ship/engines,/turf/simulated/floor/tiled,/area/unishi/bridge)
-"ah" = (/obj/machinery/computer/navigation,/turf/simulated/floor/tiled,/area/unishi/bridge)
+"ah" = (/obj/machinery/computer/ship/navigation,/turf/simulated/floor/tiled,/area/unishi/bridge)
 "ai" = (/obj/machinery/computer/ship/helm,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/unishi/bridge)
 "aj" = (/obj/machinery/computer/ship/sensors,/turf/simulated/floor/tiled,/area/unishi/bridge)
 "ak" = (/obj/machinery/computer/telecomms/server,/turf/simulated/floor/tiled,/area/unishi/bridge)
