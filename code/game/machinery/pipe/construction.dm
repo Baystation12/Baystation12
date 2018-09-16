@@ -256,17 +256,6 @@ Buildable meters
 			P.level = !T.is_plating() ? 2 : 1
 			if(src.build_binary(P))
 				return 1
-			/*P.atmos_init()
-			if (QDELETED(P))
-				to_chat(usr, pipefailtext)
-				return 1
-			P.build_network()
-			if (P.node1)
-				P.node1.atmos_init()
-				P.node1.build_network()
-			if (P.node2)
-				P.node2.atmos_init()
-				P.node2.build_network()*/
 
 		if(PIPE_SUPPLY_STRAIGHT, PIPE_SUPPLY_BENT)
 			var/obj/machinery/atmospherics/pipe/simple/hidden/supply/P = new( src.loc )

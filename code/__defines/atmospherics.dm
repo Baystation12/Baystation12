@@ -67,3 +67,26 @@
 #define CONNECT_TYPE_SCRUBBER		4
 #define CONNECT_TYPE_HE				8
 #define CONNECT_TYPE_FUEL			16
+
+//Disposal Pipe Definitions
+#define DISPOSAL_STRAIGHT			0
+#define DISPOSAL_BENT				1
+#define DISPOSAL_JUNCTION1			2
+#define DISPOSAL_JUNCTION2			3
+#define DISPOSAL_JUNCTION_Y			4
+#define DISPOSAL_TRUNK				5
+#define DISPOSAL_BIN				6
+#define DISPOSAL_OUTLET				7
+#define	DISPOSAL_INLET				8
+#define DISPOSAL_JUNCTION_SORT1		9
+#define DISPOSAL_JUNCTION_SORT2		10
+#define DISPOSAL_UP					11
+#define DISPOSAL_DOWN				12
+#define DISPOSAL_TAGGER				13
+#define DISPOSAL_TAGGER_PARTIAL		14
+#define DISPOSAL_DIVERSION			15
+
+//Disposal Sorting Subtype Definitions
+#define DISPOSAL_SUB_SORT_NORMAL	0
+#define DISPOSAL_SUB_SORT_WILD		1
+#define DISPOSAL_SUB_SORT_UNTAGGED	2

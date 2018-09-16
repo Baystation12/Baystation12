@@ -1,6 +1,7 @@
 // Disposal pipe construction
 // This is the pipe that you drag around, not the attached ones.
 
+
 /obj/structure/disposalconstruct
 
 	name = "disposal pipe segment"
@@ -12,7 +13,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 1850)
 	level = 2
 	var/sortType = ""
-	var/ptype = 0
+	var/ptype = DISPOSAL_STRAIGHT
 	// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk, 6=disposal bin, 7=outlet, 8=inlet 9=pipe-j1s 10=pipe-j2s
 	var/subtype = 0
 	var/dpdir = 0	// directions as disposalpipe
@@ -37,66 +38,66 @@
 	var/right = turn(dir, -90)
 
 	switch(ptype)
-		if(0)
+		if(DISPOSAL_STRAIGHT)
 			base_state = "pipe-s"
 			dpdir = dir | flip
-		if(1)
+		if(DISPOSAL_BENT)
 			base_state = "pipe-c"
 			dpdir = dir | right
-		if(2)
+		if(DISPOSAL_JUNCTION1)
 			base_state = "pipe-j1"
 			dpdir = dir | right | flip
-		if(3)
+		if(DISPOSAL_JUNCTION2)
 			base_state = "pipe-j2"
 			dpdir = dir | left | flip
-		if(4)
+		if(DISPOSAL_JUNCTION_Y)
 			base_state = "pipe-y"
 			dpdir = dir | left | right
-		if(5)
+		if(DISPOSAL_TRUNK)
 			base_state = "pipe-t"
 			dpdir = dir
 		 // disposal bin has only one dir, thus we don't need to care about setting it
-		if(6)
+		if(DISPOSAL_BIN)
 			if(anchored)
 				base_state = "disposal"
 			else
 				base_state = "condisposal"
 
-		if(7)
+		if(DISPOSAL_OUTLET)
 			base_state = "outlet"
 			dpdir = dir
 
-		if(8)
+		if(DISPOSAL_INLET)
 			base_state = "intake"
 			dpdir = dir
 
-		if(9)
+		if(DISPOSAL_JUNCTION_SORT1)
 			base_state = "pipe-j1s"
 			dpdir = dir | right | flip
 
-		if(10)
+		if(DISPOSAL_JUNCTION_SORT2)
 			base_state = "pipe-j2s"
 			dpdir = dir | left | flip
 ///// Z-Level stuff
-		if(11)
+		if(DISPOSAL_UP)
 			base_state = "pipe-u"
 			dpdir = dir
-		if(12)
+		if(DISPOSAL_DOWN)
 			base_state = "pipe-d"
 			dpdir = dir
 ///// Z-Level stuff
-		if(13)
+		if(DISPOSAL_TAGGER)
 			base_state = "pipe-tagger"
 			dpdir = dir | flip
-		if(14)
+		if(DISPOSAL_TAGGER_PARTIAL)
 			base_state = "pipe-tagger-partial"
 			dpdir = dir | flip
-		if(15)
+		if(DISPOSAL_DIVERSION)
 			base_state = "pipe-j1s"
 			dpdir = dir | flip
 
 ///// Z-Level stuff
-	if(!(ptype in list(6, 7, 8, 11, 12, 13, 14, 15)))
+	if(!(ptype in list(DISPOSAL_BIN, DISPOSAL_OUTLET, DISPOSAL_INLET, DISPOSAL_UP, DISPOSAL_DOWN, DISPOSAL_TAGGER, DISPOSAL_TAGGER_PARTIAL, DISPOSAL_DIVERSION)))
 ///// Z-Level stuff
 		icon_state = "con[base_state]"
 	else
@@ -147,59 +148,59 @@
 
 	set_dir(turn(dir, 180))
 	switch(ptype)
-		if(2)
-			ptype = 3
-		if(3)
-			ptype = 2
-		if(9)
-			ptype = 10
-		if(10)
-			ptype = 9
+		if(DISPOSAL_JUNCTION1)
+			ptype = DISPOSAL_JUNCTION2
+		if(DISPOSAL_JUNCTION2)
+			ptype = DISPOSAL_JUNCTION1
+		if(DISPOSAL_JUNCTION_SORT1)
+			ptype = DISPOSAL_JUNCTION_SORT2
+		if(DISPOSAL_JUNCTION_SORT2)
+			ptype = DISPOSAL_JUNCTION_SORT1
 
 	update()
 
 // returns the type path of disposalpipe corresponding to this item dtype
 /obj/structure/disposalconstruct/proc/dpipetype()
 	switch(ptype)
-		if(0,1)
+		if(DISPOSAL_STRAIGHT,DISPOSAL_BENT)
 			return /obj/structure/disposalpipe/segment
-		if(2,3,4)
+		if(DISPOSAL_JUNCTION1,DISPOSAL_JUNCTION2,DISPOSAL_JUNCTION_Y)
 			return /obj/structure/disposalpipe/junction
-		if(5)
+		if(DISPOSAL_TRUNK)
 			return /obj/structure/disposalpipe/trunk
-		if(6)
+		if(DISPOSAL_BIN)
 			return /obj/machinery/disposal
-		if(7)
+		if(DISPOSAL_OUTLET)
 			return /obj/structure/disposaloutlet
-		if(8)
+		if(DISPOSAL_INLET)
 			return /obj/machinery/disposal/deliveryChute
-		if(9)
+		if(DISPOSAL_JUNCTION_SORT1)
 			switch(subtype)
-				if(0)
+				if(DISPOSAL_SUB_SORT_NORMAL)
 					return /obj/structure/disposalpipe/sortjunction
-				if(1)
+				if(DISPOSAL_SUB_SORT_WILD)
 					return /obj/structure/disposalpipe/sortjunction/wildcard
-				if(2)
+				if(DISPOSAL_SUB_SORT_UNTAGGED)
 					return /obj/structure/disposalpipe/sortjunction/untagged
-		if(10)
+		if(DISPOSAL_JUNCTION_SORT2)
 			switch(subtype)
-				if(0)
+				if(DISPOSAL_SUB_SORT_NORMAL)
 					return /obj/structure/disposalpipe/sortjunction/flipped
-				if(1)
+				if(DISPOSAL_SUB_SORT_WILD)
 					return /obj/structure/disposalpipe/sortjunction/wildcard/flipped
-				if(2)
+				if(DISPOSAL_SUB_SORT_UNTAGGED)
 					return /obj/structure/disposalpipe/sortjunction/untagged/flipped
 ///// Z-Level stuff
-		if(11)
+		if(DISPOSAL_UP)
 			return /obj/structure/disposalpipe/up
-		if(12)
+		if(DISPOSAL_DOWN)
 			return /obj/structure/disposalpipe/down
 ///// Z-Level stuff
-		if(13)
+		if(DISPOSAL_TAGGER)
 			return /obj/structure/disposalpipe/tagger
-		if(14)
+		if(DISPOSAL_TAGGER_PARTIAL)
 			return /obj/structure/disposalpipe/tagger/partial
-		if(15)
+		if(DISPOSAL_DIVERSION)
 			return /obj/structure/disposalpipe/diversion_junction
 	return
 
@@ -213,25 +214,25 @@
 	var/ispipe = 0 // Indicates if we should change the level of this pipe
 	add_fingerprint(user, 0, I)
 	switch(ptype)
-		if(6)
+		if(DISPOSAL_BIN)
 			nicetype = "disposal bin"
-		if(7)
+		if(DISPOSAL_OUTLET)
 			nicetype = "disposal outlet"
-		if(8)
+		if(DISPOSAL_INLET)
 			nicetype = "delivery chute"
-		if(9, 10)
+		if(DISPOSAL_JUNCTION_SORT1, DISPOSAL_JUNCTION_SORT2)
 			switch(subtype)
-				if(0)
+				if(DISPOSAL_SUB_SORT_NORMAL)
 					nicetype = "sorting pipe"
-				if(1)
+				if(DISPOSAL_SUB_SORT_WILD)
 					nicetype = "wildcard sorting pipe"
-				if(2)
+				if(DISPOSAL_SUB_SORT_UNTAGGED)
 					nicetype = "untagged sorting pipe"
 			ispipe = 1
-		if(13)
+		if(DISPOSAL_TAGGER)
 			nicetype = "tagging pipe"
 			ispipe = 1
-		if(14)
+		if(DISPOSAL_TAGGER_PARTIAL)
 			nicetype = "partial tagging pipe"
 			ispipe = 1
 		else
@@ -255,7 +256,7 @@
 				set_density(1)
 			to_chat(user, "You detach the [nicetype] from the underfloor.")
 		else
-			if(ptype>=6 && ptype <= 8) // Disposal or outlet
+			if(ptype>=DISPOSAL_BIN && ptype <= DISPOSAL_INLET) // Disposal or outlet
 				if(CP) // There's something there
 					if(!istype(CP,/obj/structure/disposalpipe/trunk))
 						to_chat(user, "The [nicetype] requires a trunk underneath it in order to work.")
@@ -305,19 +306,19 @@
 						P.update_icon()
 
 						//Needs some special treatment ;)
-						if(ptype==9 || ptype==10)
+						if(ptype==DISPOSAL_JUNCTION_SORT1 || ptype==DISPOSAL_JUNCTION_SORT2)
 							var/obj/structure/disposalpipe/sortjunction/SortP = P
 							SortP.sortType = sortType
 							SortP.updatedir()
 							SortP.updatedesc()
 							SortP.updatename()
 
-					else if(ptype==6) // Disposal bin
+					else if(ptype==DISPOSAL_BIN) // Disposal bin
 						var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
 						src.transfer_fingerprints_to(P)
 						P.mode = 0 // start with pump off
 
-					else if(ptype==7) // Disposal outlet
+					else if(ptype==DISPOSAL_OUTLET) // Disposal outlet
 
 						var/obj/structure/disposaloutlet/P = new /obj/structure/disposaloutlet(src.loc)
 						src.transfer_fingerprints_to(P)
@@ -325,7 +326,7 @@
 						var/obj/structure/disposalpipe/trunk/Trunk = CP
 						Trunk.linked = P
 
-					else if(ptype==8) // Disposal outlet
+					else if(ptype==DISPOSAL_INLET) // Disposal outlet
 
 						var/obj/machinery/disposal/deliveryChute/P = new /obj/machinery/disposal/deliveryChute(src.loc)
 						src.transfer_fingerprints_to(P)

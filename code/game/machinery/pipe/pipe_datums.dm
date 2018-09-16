@@ -431,6 +431,45 @@
 	pipe_type = null
 	pipe_color = null
 
+
+/datum/pipe/disposal_dispenser
+
+/datum/pipe/disposal_dispenser/simple
+
+/datum/pipe/disposal_dispenser/simple/bent
+
+/datum/pipe/disposal_dispenser/simple/junction
+
+/datum/pipe/disposal_dispenser/simple/yjunction
+
+/datum/pipe/disposal_dispenser/simple/trunk
+
+/datum/pipe/disposal_dispenser/simple/up
+
+/datum/pipe/disposal_dispenser/simple/down
+
+/datum/pipe/disposal_dispenser/device/bin
+
+/datum/pipe/disposal_dispenser/device/outlet
+
+/datum/pipe/disposal_dispenser/device/chute
+
+/datum/pipe/disposal_dispenser/device/tagger
+
+/datum/pipe/disposal_dispenser/device/sorting
+
+/datum/pipe/disposal_dispenser/device/sorting/wildcard
+
+/datum/pipe/disposal_dispenser/device/sorting/untagged
+
+/datum/pipe/disposal_dispenser/device/tagger
+
+/datum/pipe/disposal_dispenser/device/tagger/partial
+
+/datum/pipe/disposal_dispenser/device/diversion
+
+/datum/pipe/disposal_dispenser/device/diversion/switch
+
 //Cleanup
 #undef PIPE_NORMAL
 #undef PIPE_BENT
