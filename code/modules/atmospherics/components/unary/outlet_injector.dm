@@ -145,6 +145,11 @@
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()
 
+/obj/machinery/atmospherics/unary/outlet_injector/attack_hand(mob/user as mob)
+	use_power = !use_power
+	to_chat(user, "<span class='notice'>[user] toggles the injector.</span>")
+	update_icon()
+
 /obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(isMultitool(O))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the injector.", src.name, id), MAX_NAME_LEN)

@@ -428,6 +428,7 @@
 	build_path = /obj/item/outlet_injector
 	connect_types = null
 	colorable = FALSE
+	pipe_type = null
 	pipe_color = null
 
 //Cleanup

@@ -969,9 +969,23 @@ Buildable meters
 		return ..()
 
 	var/obj/machinery/atmospherics/unary/outlet_injector/injector = new /obj/machinery/atmospherics/unary/outlet_injector(src.loc)
+	injector.dir = dir
 	injector.frequency = frequency
 	injector.id = id
 	injector.set_frequency(frequency)
+	injector.atmos_init()
+	injector.build_network()
+	if(injector.node)
+		injector.node.atmos_init()
+		injector.node.build_network()
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
 	qdel(src)
+
+/obj/item/outlet_injector/attack_self(mob/user as mob)
+	dir = turn(dir, -90)
+	return
+
+/obj/item/outlet_injector/AltClick()
+	dir = turn(dir,-90)
+	return
