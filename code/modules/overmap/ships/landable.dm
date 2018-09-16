@@ -101,7 +101,7 @@
 			return "Docked with an unknown object."
 		if(SHIP_STATUS_TRANSIT)
 			return "Maneuvering under secondary thrust."
-		if(SHIP_STATUS_LANDED)
+		if(SHIP_STATUS_OVERMAP)
 			return "In open space."
 
 #undef SHIP_STATUS_LANDED
