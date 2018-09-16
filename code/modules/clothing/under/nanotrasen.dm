@@ -52,7 +52,7 @@
 
 /obj/item/clothing/under/rank/ntpilot
 	name = "corporate flightsuit"
-	desc = "A sleek dark red flightsuit. It proudly sports three different patches with a corporate logo on it, as well as several unnecessary looking flaps and pockets for effect."
+	desc = "A sleek dark red flightsuit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon_state = "ntpilot"
 	item_state = "r_suit"
 	worn_state = "ntpilot"
