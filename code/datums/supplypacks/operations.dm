@@ -2,25 +2,25 @@
 	name = "Operations"
 
 /decl/hierarchy/supply_pack/operations/mule
-	name = "Equipment - MULEbot Crate"
+	name = "Equipment - MULEbot"
 	contains = list()
 	cost = 20
 	containertype = /obj/structure/largecrate/animal/mulebot
-	containername = "Mulebot Crate"
+	containername = "mulebot crate"
 
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Equipment - Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
 	cost = 45
 	containertype = /obj/structure/largecrate
-	containername = "\improper Cargo Train Tug Crate"
+	containername = "cargo train tug crate"
 
 /decl/hierarchy/supply_pack/operations/cargotrailer
 	name = "Equipment - Cargo Train Trolley"
 	contains = list(/obj/vehicle/train/cargo/trolley)
 	cost = 15
 	containertype = /obj/structure/largecrate
-	containername = "\improper Cargo Train Trolley Crate"
+	containername = "cargo train trolley crate"
 
 /decl/hierarchy/supply_pack/operations/contraband
 	num_contained = 5
@@ -31,7 +31,7 @@
 
 	name = "UNLISTED - Contraband crate"
 	cost = 30
-	containername = "\improper Unlabeled crate"
+	containername = "unlabeled crate"
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
 
@@ -40,10 +40,10 @@
 	contains = list()
 	cost = 80
 	containertype = /obj/structure/largecrate/hoverpod
-	containername = "\improper Hoverpod Crate"
+	containername = "hoverpod crate"
 
 /decl/hierarchy/supply_pack/operations/webbing
-	name = "Gear - Webbing crate"
+	name = "Gear - Webbing, vests, holsters."
 	num_contained = 4
 	contains = list(/obj/item/clothing/accessory/storage/holster,
 					/obj/item/clothing/accessory/storage/black_vest,
@@ -54,7 +54,7 @@
 					/obj/item/clothing/accessory/storage/drop_pouches/white,
 					/obj/item/clothing/accessory/storage/webbing)
 	cost = 15
-	containername = "\improper Webbing crate"
+	containername = "webbing crate"
 
 /decl/hierarchy/supply_pack/operations/voidsuit_engineering
 	name = "EVA - Engineering voidsuit"
@@ -62,7 +62,7 @@
 					/obj/item/clothing/head/helmet/space/void/engineering/alt,
 					/obj/item/clothing/shoes/magboots)
 	cost = 120
-	containername = "\improper Engineering voidsuit crate"
+	containername = "engineering voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_engine
 
@@ -72,7 +72,7 @@
 					/obj/item/clothing/head/helmet/space/void/medical/alt,
 					/obj/item/clothing/shoes/magboots)
 	cost = 120
-	containername = "\improper Medical voidsuit crate"
+	containername = "medical voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_medical_equip
 
@@ -82,7 +82,7 @@
 					/obj/item/clothing/head/helmet/space/void/security/alt,
 					/obj/item/clothing/shoes/magboots)
 	cost = 120
-	containername = "\improper Security voidsuit crate"
+	containername = "security voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_brig
 
@@ -103,5 +103,5 @@
 	name = "Office supplies"
 	cost = 15
 	containertype = /obj/structure/closet/crate/large
-	containername = "\improper Office supplies crate"
+	containername = "office supplies crate"
 
