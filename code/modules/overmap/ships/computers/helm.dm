@@ -214,15 +214,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	updateUsrDialog()
 
 
-/obj/machinery/computer/navigation
+/obj/machinery/computer/ship/navigation
 	name = "navigation console"
 	circuit = /obj/item/weapon/circuitboard/nav
 	var/viewing = 0
-	var/obj/effect/overmap/ship/linked
 	icon_keyboard = "generic_key"
 	icon_screen = "helm"
 
-/obj/machinery/computer/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		return
 
@@ -253,7 +252,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/navigation/check_eye(var/mob/user as mob)
+/obj/machinery/computer/ship/navigation/check_eye(var/mob/user as mob)
 	if (!viewing)
 		return -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
@@ -261,7 +260,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		return -1
 	return 0
 
-/obj/machinery/computer/navigation/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/ship/navigation/attack_hand(var/mob/user as mob)
 	if(..())
 		user.unset_machine()
 		viewing = 0
@@ -273,7 +272,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	ui_interact(user)
 
-/obj/machinery/computer/navigation/Topic(href, href_list)
+/obj/machinery/computer/ship/navigation/Topic(href, href_list)
 	if(..())
 		return 1
 

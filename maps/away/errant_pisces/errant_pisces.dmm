@@ -6328,7 +6328,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pi" = (
-/obj/machinery/computer/navigation{
+/obj/machinery/computer/ship/navigation{
 	icon_state = "computer";
 	dir = 1
 	},
