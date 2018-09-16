@@ -109,6 +109,9 @@
 	if(..())
 		return 1
 
+	if(href_list["close"])
+		unlook(usr)
+		return 1
 	if (!linked)
 		return
 
@@ -133,6 +136,10 @@
 		if (href_list["toggle"])
 			sensors.toggle()
 			return 1
+
+/obj/machinery/computer/ship/sensors/CouldNotUseTopic(mob/user)
+	unlook(user)
+	. = ..()
 
 /obj/machinery/computer/ship/sensors/Process()
 	..()
