@@ -14,7 +14,7 @@
 	overmap_event_areas = 34
 	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.net", "torch.scg")
 
-	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
+	allowed_spawns = list("Cryogenic Storage", "Auxiliary Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
 	station_name  = "SEV Torch"
@@ -94,3 +94,13 @@
 
 /decl/flooring/tiling
 	name = "deck"
+
+/datum/spawnpoint/cryo
+	disallow_job = list("Robot", "Research Director", "Senior Researcher", "Scientist", "Security Guard", "Research Assistant")
+
+/datum/spawnpoint/auxcryo
+	restrict_job = list("Robot", "Research Director", "Senior Researcher", "Scientist", "Security Guard", "Research Assistant", "NanoTrasen Liaison")
+
+/obj/machinery/computer/rdconsole/petrov
+	name = "petrov fabricator console"
+	id = 3

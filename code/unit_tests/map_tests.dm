@@ -41,13 +41,16 @@
 		else if(A.air_scrub_info.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
-
+			for(var/obj/machinery/atmospherics/unary/vent_scrubber/on/S in A.air_scrub_info.len)
+				log_bad("scrubber at [S.loc] - [bad_msg]")
 		if(!A.air_vent_info.len && !(exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
 		else if(A.air_vent_info.len && (exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
+			for(var/obj/machinery/atmospherics/unary/vent_pump/on/V in A.air_vent_info.len)
+				log_bad("scrubber at [V.loc] - [bad_msg]")
 
 		if(!area_good)
 			bad_areas.Add(A)
@@ -270,7 +273,7 @@ datum/unit_test/ladder_check/start_test()
 		if(L.allowed_directions & UP)
 			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
 		if(L.allowed_directions & DOWN)
-			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded 
+			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
 			succeeded = check_open_space(L) && succeeded
 	if(succeeded)
 		pass("All ladders are correctly setup.")

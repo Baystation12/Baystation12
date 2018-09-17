@@ -38,6 +38,10 @@
 			GLOB.latejoin_cyborg += loc
 			delete_me = 1
 			return
+		if("JoinLateAuxCryo")
+			GLOB.latejoin_auxcryo += loc
+			delete_me = 1
+			return
 		if("prisonwarp")
 			GLOB.prisonwarp += loc
 			delete_me = 1
