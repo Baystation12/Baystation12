@@ -12,7 +12,7 @@
 	if(istype(thing, /obj/item/stack/material) && construction_stage == 1)
 		var/obj/item/stack/material/reinforcing = thing
 		var/material/reinforcing_with = reinforcing.get_material()
-		if(reinforcing_with.name == DEFAULT_WALL_MATERIAL) // Steel
+		if(reinforcing_with.name == MATERIAL_STEEL) // Steel
 			if(reinforcing.get_amount() < 5)
 				to_chat(user, "<span class='warning'>You need at least 5 [reinforcing.singular_name]\s for this task.</span>")
 				return

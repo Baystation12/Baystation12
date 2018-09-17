@@ -9,7 +9,7 @@
 	icon_state = "conpipe-s"
 	anchored = 0
 	density = 0
-	matter = list(DEFAULT_WALL_MATERIAL = 1850)
+	matter = list(MATERIAL_STEEL = 1850)
 	level = 2
 	var/sortType = ""
 	var/ptype = 0

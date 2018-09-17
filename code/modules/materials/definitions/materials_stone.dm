@@ -1,5 +1,5 @@
 /material/diamond
-	name = "diamond"
+	name = MATERIAL_DIAMOND
 	stack_type = /obj/item/stack/material/diamond
 	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60
@@ -13,7 +13,7 @@
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
 	construction_difficulty = 2
-	ore_compresses_to = "diamond"
+	ore_compresses_to = MATERIAL_DIAMOND
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_rare"
@@ -22,14 +22,14 @@
 	sale_price = 5
 
 /material/diamond/crystal
-	name = "crystal"
+	name = MATERIAL_CRYSTAL
 	hardness = 80
 	stack_type = null
 	ore_compresses_to = null
 	sale_price = null
 
 /material/stone
-	name = "sandstone"
+	name = MATERIAL_SANDSTONE
 	stack_type = /obj/item/stack/material/sandstone
 	icon_base = "stone"
 	table_icon_base = "stone"
@@ -50,7 +50,7 @@
 	sale_price = 1
 
 /material/stone/marble
-	name = "marble"
+	name = MATERIAL_MARBLE
 	icon_colour = "#aaaaaa"
 	weight = 26
 	hardness = 60

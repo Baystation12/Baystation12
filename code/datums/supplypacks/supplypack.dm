@@ -1,8 +1,6 @@
-var/decl/hierarchy/supply_pack/cargo_supply_pack_root = new()
-var/decl/hierarchy/supply_pack/cargo_supply_packs	// Non-category supply packs
-
 /decl/hierarchy/supply_pack
 	name = "Supply Packs"
+	hierarchy_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
 	var/cost = null
@@ -15,14 +13,8 @@ var/decl/hierarchy/supply_pack/cargo_supply_packs	// Non-category supply packs
 	var/supply_method = /decl/supply_method
 	var/decl/security_level/security_level
 
-/decl/hierarchy/supply_pack/New()
-	..()
-	if(is_hidden_category())
-		return	// Don't init the manifest for category entries
-
-	if(!cargo_supply_packs) cargo_supply_packs = list()
-	dd_insertObjectList(cargo_supply_packs, src)	// Add all non-category supply packs to the list
-
+//Is run once on init for non-base-category supplypacks.
+/decl/hierarchy/supply_pack/proc/setup()
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])

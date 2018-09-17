@@ -21,7 +21,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
 	if(!new_material)
-		new_material = DEFAULT_WALL_MATERIAL
+		new_material = MATERIAL_STEEL
 	material = SSmaterials.get_material_by_name(new_material)
 	if(new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
@@ -32,7 +32,7 @@ var/global/list/stool_cache = list() //haha stool
 	update_icon()
 
 /obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
-	..(newloc, "steel", "carpet")
+	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/bar
 	name = "bar stool"
@@ -44,7 +44,7 @@ var/global/list/stool_cache = list() //haha stool
 	icon_state = "bar_stool_padded_preview"
 
 /obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
-	..(newloc, "steel", "carpet")
+	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
@@ -134,7 +134,7 @@ var/global/list/stool_cache = list() //haha stool
 			return
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 		if(istype(W,/obj/item/stack/tile/carpet))
-			padding_type = "carpet"
+			padding_type = MATERIAL_CARPET
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
 			if(M.material && (M.material.flags & MATERIAL_PADDING))

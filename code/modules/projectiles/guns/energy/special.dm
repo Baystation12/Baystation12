@@ -195,7 +195,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
-	matter = list(DEFAULT_WALL_MATERIAL = 4000)
+	matter = list(MATERIAL_STEEL = 4000)
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1

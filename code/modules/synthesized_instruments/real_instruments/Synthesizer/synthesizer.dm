@@ -1,7 +1,7 @@
 //Synthesizer and minimoog. They work the same
 
 /datum/sound_player/synthesizer
-	volume = 65
+	volume = 40
 
 /obj/structure/synthesized_instrument/synthesizer
 	name = "The Synthesizer 3.0"

@@ -1,5 +1,5 @@
 /material/waste
-	name = "waste"
+	name = MATERIAL_WASTE
 	stack_type = null
 	icon_colour = "#2e3a07"
 	ore_name = "slag"
@@ -7,7 +7,7 @@
 	ore_icon_overlay = "lump"
 
 /material/cult
-	name = "cult"
+	name = MATERIAL_CULT
 	display_name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
@@ -22,11 +22,11 @@
 	new /obj/structure/girder/cult(target)
 
 /material/cult/reinf
-	name = "cult2"
+	name = MATERIAL_REINFORCED_CULT
 	display_name = "runic inscriptions"
 
 /material/resin
-	name = "resin"
+	name = MATERIAL_RESIN
 	icon_colour = "#e85dd8"
 	dooropen_noise = 'sound/effects/attackblob.ogg'
 	door_icon_base = "resin"

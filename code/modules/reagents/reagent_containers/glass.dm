@@ -110,7 +110,7 @@
 	icon_state = "beaker"
 	item_state = "beaker"
 	center_of_mass = "x=15;y=10"
-	matter = list("glass" = 500)
+	matter = list(MATERIAL_GLASS = 500)
 
 	New()
 		..()
@@ -159,7 +159,7 @@
 	desc = "A large beaker."
 	icon_state = "beakerlarge"
 	center_of_mass = "x=16;y=10"
-	matter = list("glass" = 5000)
+	matter = list(MATERIAL_GLASS = 5000)
 	volume = 120
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;120"
@@ -171,7 +171,7 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mixingbowl"
 	center_of_mass = "x=16;y=10"
-	matter = list(DEFAULT_WALL_MATERIAL = 300)
+	matter = list(MATERIAL_STEEL = 300)
 	volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;180"
@@ -183,7 +183,7 @@
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
 	center_of_mass = "x=16;y=8"
-	matter = list("glass" = 500)
+	matter = list(MATERIAL_GLASS = 500)
 	volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
@@ -193,7 +193,7 @@
 	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
 	center_of_mass = "x=16;y=10"
-	matter = list("glass" = 5000)
+	matter = list(MATERIAL_GLASS = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;120;150;200;250;300"
@@ -204,7 +204,7 @@
 	desc = "A small glass vial."
 	icon_state = "vial"
 	center_of_mass = "x=15;y=8"
-	matter = list("glass" = 250)
+	matter = list(MATERIAL_GLASS = 250)
 	volume = 30
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
@@ -230,7 +230,7 @@
 	icon_state = "bucket"
 	item_state = "bucket"
 	center_of_mass = "x=16;y=9"
-	matter = list(DEFAULT_WALL_MATERIAL = 280)
+	matter = list(MATERIAL_STEEL = 280)
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = "10;20;30;60;120;150;180"
@@ -262,6 +262,10 @@
 	if (!is_open_container())
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 		overlays += lid
+	else if(reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "bucket")
+		filling.color = reagents.get_color()
+		overlays += filling
 
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug

@@ -206,7 +206,7 @@
 
 		num--
 		places += T
-		new new_type(T) 
+		new new_type(T)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
@@ -337,7 +337,7 @@
 		T.set_density(1)
 		T.set_opacity(1)
 		if(istype(T, /turf/simulated))
-			var/turf/simulated/S = T 
+			var/turf/simulated/S = T
 			S.blocks_air = 1
 	if(T.x <= TRANSITIONEDGE || T.x >= (limit_x - TRANSITIONEDGE + 1) || T.y <= TRANSITIONEDGE || T.y >= (limit_y - TRANSITIONEDGE + 1))
 		new/obj/effect/fogofwar(T)
@@ -421,6 +421,9 @@
 	has_resources = 1
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
+
+/turf/simulated/floor/exoplanet/can_engrave()
+	return FALSE
 
 /turf/simulated/floor/exoplanet/Entered(atom/movable/A)
 	..()

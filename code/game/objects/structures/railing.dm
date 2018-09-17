@@ -23,7 +23,7 @@
 	. = ..()
 	color = COLOR_GUNMETAL // They're not painted!
 
-/obj/structure/railing/New(var/newloc, var/material_key = "steel")
+/obj/structure/railing/New(var/newloc, var/material_key = MATERIAL_STEEL)
 	material = material_key // Converted to datum in initialize().
 	..(newloc)
 

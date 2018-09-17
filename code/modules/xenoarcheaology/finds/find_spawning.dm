@@ -25,14 +25,14 @@
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
 	if(istype(I, /obj/item/weapon/material))
 		var/obj/item/weapon/material/M = I
-		M.set_material("aliumium")
+		M.set_material(MATERIAL_ALIUMIUM)
 		source_material = "alien alloy"
 	else
-		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
 
 	var/decorations = ""
 	if(apply_material_decorations)
-		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
 		desc = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of [source_material], all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
 
 		var/list/descriptors = list()
