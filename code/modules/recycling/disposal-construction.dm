@@ -1,7 +1,6 @@
 // Disposal pipe construction
 // This is the pipe that you drag around, not the attached ones.
 
-
 /obj/structure/disposalconstruct
 
 	name = "disposal pipe segment"
@@ -14,10 +13,8 @@
 	level = 2
 	var/sortType = ""
 	var/ptype = DISPOSAL_STRAIGHT
-	// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk, 6=disposal bin, 7=outlet, 8=inlet 9=pipe-j1s 10=pipe-j2s
 	var/subtype = 0
 	var/dpdir = 0	// directions as disposalpipe
-	var/base_state = "pipe-s"
 
 /obj/structure/disposalconstruct/Initialize()
 	update_verbs()
@@ -39,69 +36,56 @@
 
 	switch(ptype)
 		if(DISPOSAL_STRAIGHT)
-			base_state = "pipe-s"
+			icon_state = "conpipe-s"
 			dpdir = dir | flip
 		if(DISPOSAL_BENT)
-			base_state = "pipe-c"
+			icon_state = "conpipe-c"
 			dpdir = dir | right
 		if(DISPOSAL_JUNCTION1)
-			base_state = "pipe-j1"
+			icon_state = "conpipe-j1"
 			dpdir = dir | right | flip
 		if(DISPOSAL_JUNCTION2)
-			base_state = "pipe-j2"
+			icon_state = "conpipe-j2"
 			dpdir = dir | left | flip
 		if(DISPOSAL_JUNCTION_Y)
-			base_state = "pipe-y"
+			icon_state = "conpipe-y"
 			dpdir = dir | left | right
 		if(DISPOSAL_TRUNK)
-			base_state = "pipe-t"
+			icon_state = "conpipe-t"
 			dpdir = dir
 		 // disposal bin has only one dir, thus we don't need to care about setting it
 		if(DISPOSAL_BIN)
 			if(anchored)
-				base_state = "disposal"
+				icon_state = "disposal"
 			else
-				base_state = "condisposal"
-
+				icon_state = "condisposal"
 		if(DISPOSAL_OUTLET)
-			base_state = "outlet"
+			icon_state = "outlet"
 			dpdir = dir
-
 		if(DISPOSAL_INLET)
-			base_state = "intake"
+			icon_state = "intake"
 			dpdir = dir
-
 		if(DISPOSAL_JUNCTION_SORT1)
-			base_state = "pipe-j1s"
+			icon_state = "conpipe-j1s"
 			dpdir = dir | right | flip
-
 		if(DISPOSAL_JUNCTION_SORT2)
-			base_state = "pipe-j2s"
+			icon_state = "conpipe-j2s"
 			dpdir = dir | left | flip
-///// Z-Level stuff
 		if(DISPOSAL_UP)
-			base_state = "pipe-u"
+			icon_state = "pipe-u"
 			dpdir = dir
 		if(DISPOSAL_DOWN)
-			base_state = "pipe-d"
+			icon_state = "pipe-d"
 			dpdir = dir
-///// Z-Level stuff
 		if(DISPOSAL_TAGGER)
-			base_state = "pipe-tagger"
+			icon_state = "pipe-tagger"
 			dpdir = dir | flip
 		if(DISPOSAL_TAGGER_PARTIAL)
-			base_state = "pipe-tagger-partial"
+			icon_state = "pipe-tagger-partial"
 			dpdir = dir | flip
 		if(DISPOSAL_DIVERSION)
-			base_state = "pipe-j1s"
+			icon_state = "conpipe-j1s"
 			dpdir = dir | flip
-
-///// Z-Level stuff
-	if(!(ptype in list(DISPOSAL_BIN, DISPOSAL_OUTLET, DISPOSAL_INLET, DISPOSAL_UP, DISPOSAL_DOWN, DISPOSAL_TAGGER, DISPOSAL_TAGGER_PARTIAL, DISPOSAL_DIVERSION)))
-///// Z-Level stuff
-		icon_state = "con[base_state]"
-	else
-		icon_state = base_state
 
 	if(invisibility)				// if invisible, fade icon
 		alpha = 128
@@ -300,7 +284,7 @@
 						var/pipetype = dpipetype()
 						var/obj/structure/disposalpipe/P = new pipetype(src.loc)
 						src.transfer_fingerprints_to(P)
-						P.base_icon_state = base_state
+						P.base_icon_state = icon_state
 						P.set_dir(dir)
 						P.dpdir = dpdir
 						P.update_icon()
