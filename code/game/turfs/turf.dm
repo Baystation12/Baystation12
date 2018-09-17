@@ -279,6 +279,10 @@ var/const/enterloopsanity = 100
 	if(!tool.sharp || !can_engrave())
 		return FALSE
 
+	if(jobban_isbanned(vandal, "Graffiti"))
+		to_chat(vandal, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
+		return
+
 	var/too_much_graffiti = 0
 	for(var/obj/effect/decal/writing/W in src)
 		too_much_graffiti++

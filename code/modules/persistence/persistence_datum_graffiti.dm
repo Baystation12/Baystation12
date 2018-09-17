@@ -2,6 +2,7 @@
 	name = "graffiti"
 	tokens_per_line = 6
 	entries_expire_at = 50
+	admin_dat_header_colspan = 4
 	var/entries_decay_at
 	var/const/graffiti_decay_weight = 0.5
 
@@ -68,3 +69,10 @@
 	var/obj/effect/decal/writing/save_graffiti = entry
 	LAZYADD(., "[save_graffiti.author ? save_graffiti.author : "unknown"]")
 	LAZYADD(., "[save_graffiti.message]")
+
+/datum/persistent/graffiti/GetAdminDataStringFor(var/thing, var/datum/admins/caller, var/can_modify)
+	var/obj/effect/decal/writing/save_graffiti = thing
+	if(can_modify)
+		. = "<td>[save_graffiti.message]</td><td>[save_graffiti.author]</td><td><a href='byond://?src=\ref[src];caller=\ref[caller];remove_entry=\ref[thing]'>Destroy</a></td><td><a href='byond://?src=\ref[src];caller=\ref[caller];ban_author=[save_graffiti.author]'>Ban Author</a></td>"
+	else
+		. = "<td colspan = 4>[save_graffiti.message]</td><td>[save_graffiti.author]</td>"
