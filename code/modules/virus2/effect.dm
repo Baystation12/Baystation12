@@ -259,6 +259,17 @@
 		if (mob.reagents.get_reagent_amount(data) < 5)
 			mob.reagents.add_reagent(data, 2)
 
+/datum/disease2/effect/spiderfication
+	name = "Hatching Syndrome"
+	stage = 3
+	badness = VIRUS_ENGINEERED
+	chance_max = 30
+	delay = 60 SECONDS
+	activate(var/mob/living/carbon/human/mob,var/multiplier)
+		var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(get_turf(mob))
+		mob.emote("cough")
+		to_chat(mob, "<span class='warning'>You cough up the [S]!</span>")
+
 /datum/disease2/effect/nothing
 	name = "Nil Syndrome"
 	stage = 1
@@ -334,6 +345,7 @@
 			mob.reagents.add_reagent(/datum/reagent/hyperzine, 4)
 		if (prob(30))
 			mob.jitteriness += 10
+
 
 ////////////////////////STAGE 1/////////////////////////////////
 

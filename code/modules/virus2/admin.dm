@@ -163,7 +163,7 @@
 			if("antigen")
 				if(href_list["toggle"])
 					var/T = href_list["toggle"]
-					if(length(T) != 1) return
+					if(length(T) != 2) return
 					if(T in antigens)
 						antigens -= T
 					else
