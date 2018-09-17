@@ -120,5 +120,7 @@
 			if(istype(value))
 				RemoveValue(value)
 				. = TRUE
+		if(href_list["ban_author"])
+			. = TRUE
 		if(.)
 			caller.view_persistent_data()
