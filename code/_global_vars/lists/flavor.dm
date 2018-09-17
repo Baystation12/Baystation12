@@ -103,7 +103,15 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"Treacherous Voyage" = /music_track/treacherous_voyage,
 	"Wake" = /music_track/wake,
 	"phoron will make us rich" = /music_track/pwmur,
-	"every light is blinking at once" = /music_track/elibao
+	"every light is blinking at once" = /music_track/elibao,
+	"In Orbit" = /music_track/inorbit,
+	"Martian Cowboy" = /music_track/martiancowboy,
+	"Monument" = /music_track/monument,
+	"As Far As It Gets" = /music_track/asfarasitgets,
+	"80s All Over Again" = /music_track/eighties,
+	"Wild Encounters" = /music_track/wildencounters,
+	"Torn" = /music_track/torn,
+	"Nebula" = /music_track/nebula
 ))
 
 /proc/setup_music_tracks(var/list/tracks)
