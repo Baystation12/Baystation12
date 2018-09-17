@@ -869,6 +869,24 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
+"abD" = (
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -28
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/structure/cable/green,
+/obj/structure/closet/secure_closet/xenolife_technician,
+/turf/simulated/floor/tiled/white,
+/area/rnd/locker)
 "abE" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/firstdeck/forestarboard)
@@ -26771,28 +26789,6 @@
 /obj/item/weapon/folder/nt,
 /turf/simulated/floor/tiled/white,
 /area/rnd/locker)
-"pqb" = (
-/obj/effect/floor_decal/corner/purple{
-	dir = 10
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/secure_closet/crew/research,
-/obj/random/maintenance/clean,
-/obj/random/maintenance/clean,
-/obj/random/maintenance/clean,
-/obj/item/weapon/folder/nt,
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	operating = 1;
-	pixel_y = -28
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/obj/structure/cable/green,
-/turf/simulated/floor/tiled/white,
-/area/rnd/locker)
 "prb" = (
 /obj/effect/floor_decal/corner/purple{
 	dir = 10
@@ -50607,7 +50603,7 @@ aFn
 apj
 jGb
 sNb
-pqb
+abD
 aHi
 rKL
 aCZ
