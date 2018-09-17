@@ -131,7 +131,7 @@
 	. = list()
 	. += "<table>"
 	for(var/category in categories)
-		var/datum/pipe/cat = category
+		var/datum/pipe/disposal_dispenser/cat = category
 		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
 		for(var/datum/pipe/pipe in categories[category])
 			var/line = "[pipe.name]</td>"

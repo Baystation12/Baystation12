@@ -442,6 +442,20 @@
 	pipe_type = null
 	pipe_color = null
 
+/datum/pipe/pipe_dispenser/device/drain
+	name = "gutter"
+	desc = "You probably can't get sucked down the plughole."
+	build_icon = 'icons/obj/drain.dmi'
+	build_icon_state = "drain"
+	build_path = /obj/item/drain
+	connect_types = null
+	colorable = FALSE
+	pipe_type = null
+	pipe_color = null
+
+//==============
+//Disposal Pipes
+//==============
 
 /datum/pipe/disposal_dispenser
 	name = "Disposal pipe. You should never see this."

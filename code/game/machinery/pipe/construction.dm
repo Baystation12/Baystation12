@@ -222,7 +222,7 @@ Buildable meters
 	return 0
 
 /obj/item/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	..()
+	. = ..()
 	//*
 	if(!isWrench(W))
 		return ..()
