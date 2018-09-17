@@ -9,15 +9,16 @@
 	var/entries_expire_at
 	var/file_entry_split_character = "\t"
 	var/file_line_split_character =  "\n"
+	var/admin_dat_header_colspan = 2
 
 /datum/persistent/New()
-	set_filename()
+	SetFilename()
 	..()
 
-/datum/persistent/proc/set_filename()
+/datum/persistent/proc/SetFilename()
 	return
 
-/datum/persistent/proc/label_tokens(var/list/tokens)
+/datum/persistent/proc/LabelTokens(var/list/tokens)
 	var/list/labelled_tokens = list()
 	labelled_tokens["x"] = text2num(tokens[1])
 	labelled_tokens["y"] = text2num(tokens[2])
@@ -25,14 +26,14 @@
 	labelled_tokens["age"] = text2num(tokens[4])
 	return labelled_tokens
 
-/datum/persistent/proc/get_valid_turf(var/turf/T, var/list/tokens)
-	if(T && check_turf_contents(T, tokens))
+/datum/persistent/proc/GetValidTurf(var/turf/T, var/list/tokens)
+	if(T && CheckTurfContents(T, tokens))
 		return T
 
-/datum/persistent/proc/check_turf_contents(var/turf/T, var/list/tokens)
+/datum/persistent/proc/CheckTurfContents(var/turf/T, var/list/tokens)
 	return TRUE
 
-/datum/persistent/proc/check_token_sanity(var/list/tokens)
+/datum/persistent/proc/CheckTokenSanity(var/list/tokens)
 	return ( \
 		!isnull(tokens["x"]) && \
 		!isnull(tokens["y"]) && \
@@ -41,33 +42,33 @@
 		tokens["age"] <= entries_expire_at \
 	)
 
-/datum/persistent/proc/create_entry_instance(var/turf/creating, var/list/tokens)
+/datum/persistent/proc/CreateEntryInstance(var/turf/creating, var/list/tokens)
 	return
 
-/datum/persistent/proc/process_and_apply_tokens(var/list/tokens)
+/datum/persistent/proc/ProcessAndApplyTokens(var/list/tokens)
 	var/_z = tokens["z"]
 	if(_z in GLOB.using_map.station_levels)
-		. = get_valid_turf(locate(tokens["x"], tokens["y"], _z), tokens)
+		. = GetValidTurf(locate(tokens["x"], tokens["y"], _z), tokens)
 		if(.)
-			create_entry_instance(., tokens)
+			CreateEntryInstance(., tokens)
 
-/datum/persistent/proc/is_valid_entry(var/atom/entry)
+/datum/persistent/proc/IsValidEntry(var/atom/entry)
 	return ( \
 		istype(entry) && \
-		get_entry_age(entry) <= entries_expire_at && \
+		GetEntryAge(entry) <= entries_expire_at && \
 		istype(entry.loc, /turf) && \
 		(entry.z in GLOB.using_map.station_levels) \
 	)
 
-/datum/persistent/proc/get_entry_age(var/atom/entry)
+/datum/persistent/proc/GetEntryAge(var/atom/entry)
 	return 0
 
-/datum/persistent/proc/compile_entry(var/atom/entry)
+/datum/persistent/proc/CompileEntry(var/atom/entry)
 	. = list(
 		entry.x,
 		entry.y,
 		entry.z,
-		get_entry_age(entry)
+		GetEntryAge(entry)
 	)
 
 /datum/persistent/proc/Initialize()
@@ -78,17 +79,46 @@
 			var/list/tokens = splittext(entry_line, file_entry_split_character)
 			if(LAZYLEN(tokens) < tokens_per_line)
 				continue
-			tokens = label_tokens(tokens)
-			if(!check_token_sanity(tokens))
+			tokens = LabelTokens(tokens)
+			if(!CheckTokenSanity(tokens))
 				continue
-			process_and_apply_tokens(tokens)
+			ProcessAndApplyTokens(tokens)
 
 /datum/persistent/proc/Shutdown()
 	if(fexists(filename))
 		fdel(filename)
 	var/write_file = file(filename)
 	for(var/thing in SSpersistence.tracking_values[type])
-		if(is_valid_entry(thing))
-			var/list/entry = compile_entry(thing)
+		if(IsValidEntry(thing))
+			var/list/entry = CompileEntry(thing)
 			if(LAZYLEN(entry) == tokens_per_line)
 				to_file(write_file, jointext(entry, file_entry_split_character))
+
+/datum/persistent/proc/RemoveValue(var/value)
+	qdel(value)
+
+/datum/persistent/proc/GetAdminSummary(var/datum/admins/caller, var/can_modify)
+	. = list("<table><tr><td colspan = [admin_dat_header_colspan]><b>[name]</b></td></tr>")
+	for(var/thing in SSpersistence.tracking_values[type])
+		. += "<tr>[GetAdminDataStringFor(thing, caller, can_modify)]</tr>"
+	. += "</table>"
+
+/datum/persistent/proc/GetAdminDataStringFor(var/thing, var/datum/admins/caller, var/can_modify)
+	if(can_modify)
+		. = "<td>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[caller];remove_entry=\ref[thing]'>Destroy</a></td>"
+	else
+		. = "<td colspan = 2>[thing]</td>"
+
+/datum/persistent/Topic(var/href, var/href_list)
+	. = ..()
+	if(!.)
+		var/datum/admins/caller = locate(href_list["caller"])
+		if(!istype(caller))
+			return TOPIC_HANDLED
+		if(href_list["remove_entry"])
+			var/datum/value = locate(href_list["remove_entry"])
+			if(istype(value))
+				RemoveValue(value)
+				. = TRUE
+		if(.)
+			caller.view_persistent_data()
