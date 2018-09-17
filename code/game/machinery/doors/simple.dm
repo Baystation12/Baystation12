@@ -52,7 +52,7 @@
 /obj/machinery/door/unpowered/simple/get_material_name()
 	return material.name
 
-/obj/machinery/door/unpowered/simple/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/door/unpowered/simple/do_bullet_act(var/obj/item/projectile/Proj)
 	var/damage = Proj.get_structure_damage()
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door

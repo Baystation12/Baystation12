@@ -113,5 +113,5 @@
 
 /obj/effect/dummy/spell_jaunt/ex_act(blah)
 	return
-/obj/effect/dummy/spell_jaunt/bullet_act(blah)
+/obj/effect/dummy/spell_jaunt/do_bullet_act(blah)
 	return

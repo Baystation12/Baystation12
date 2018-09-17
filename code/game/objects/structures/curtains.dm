@@ -13,7 +13,7 @@
 	layer = ABOVE_HUMAN_LAYER
 	opacity = 0
 
-/obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
+/obj/structure/curtain/do_bullet_act(obj/item/projectile/P, def_zone)
 	if(!P.nodamage)
 		visible_message("<span class='warning'>[P] tears [src] down!</span>")
 		qdel(src)

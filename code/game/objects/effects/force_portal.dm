@@ -54,7 +54,7 @@
 /obj/effect/force_portal/Bumped(var/atom/movable/AM)
 	AM.dropInto(src)
 
-/obj/effect/force_portal/bullet_act(var/obj/item/projectile/P)
+/obj/effect/force_portal/do_bullet_act(var/obj/item/projectile/P)
 	var/atom/movable/AM = new P.type()
 	if(istype(P, /obj/item/projectile/bullet/pellet))
 		var/obj/item/projectile/bullet/pellet/old_pellet = P

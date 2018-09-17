@@ -69,7 +69,7 @@
 			energy += round((rand(20,60)/2),1)
 			return
 
-/obj/singularity/bullet_act(obj/item/projectile/P)
+/obj/singularity/do_bullet_act(obj/item/projectile/P)
 	return 0 //Will there be an impact? Who knows. Will we see it? No.
 
 /obj/singularity/Bump(atom/A)

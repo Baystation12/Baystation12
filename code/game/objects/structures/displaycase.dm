@@ -37,7 +37,7 @@
 			if (prob(50))
 				take_damage(5)
 
-/obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/displaycase/do_bullet_act(var/obj/item/projectile/Proj)
 	..()
 	take_damage(Proj.get_structure_damage())
 

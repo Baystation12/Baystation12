@@ -17,7 +17,7 @@
 	. = ..()
 	shed_nymph(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/structure/diona_gestalt/do_bullet_act(var/obj/item/projectile/P, var/def_zone)
 	. = ..()
 	if(P && (P.damage_type == BRUTE || P.damage_type == BURN))
 		shed_nymph(forcefully = TRUE)

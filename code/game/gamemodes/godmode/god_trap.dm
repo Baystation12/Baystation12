@@ -20,7 +20,7 @@
 	trigger(user)
 	return ..()
 
-/obj/structure/deity/trap/bullet_act()
+/obj/structure/deity/trap/do_bullet_act()
 	return
 
 /obj/structure/deity/trap/proc/trigger(var/atom/entered, var/atom/movable/enterer)

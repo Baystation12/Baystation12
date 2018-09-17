@@ -608,7 +608,7 @@
 			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 	return
 
-/obj/mecha/bullet_act(var/obj/item/projectile/Proj)
+/obj/mecha/do_bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.damage_type == PAIN && !(src.r_deflect_coeff > 1))
 		use_power(Proj.agony * 5)
 

@@ -193,7 +193,7 @@
 			visible_message("<span class='danger'>\The [src] is torn apart!</span>")
 		qdel(src)
 
-/obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
+/obj/effect/energy_net/do_bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
 	healthcheck()
 	return 0

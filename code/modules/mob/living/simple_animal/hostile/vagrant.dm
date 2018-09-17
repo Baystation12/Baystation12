@@ -45,7 +45,7 @@
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
 	return 1
 
-/mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/vagrant/do_bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at

@@ -54,7 +54,7 @@
 		var/obj/mecha/M = A
 		if(!M.occupant)
 			return FALSE
-	
+
 	return TRUE
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
@@ -174,7 +174,7 @@
 		target_mob = M
 		MoveToTarget()
 
-/mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/do_bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))

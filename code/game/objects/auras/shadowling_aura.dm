@@ -14,7 +14,7 @@
 		user.mutations -= SPACERES
 	..()
 
-/obj/aura/shadowling_aura/bullet_act(var/obj/item/projectile/P)
+/obj/aura/shadowling_aura/do_bullet_act(var/obj/item/projectile/P)
 	if(P.check_armour == "laser")
 		P.damage *= 2
 	if(P.agony)

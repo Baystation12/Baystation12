@@ -126,6 +126,9 @@
 		density = !!new_density
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
+	. = do_bullet_act(P, def_zone)
+
+/atom/proc/do_bullet_act(var/obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
 	. = 0
 
