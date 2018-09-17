@@ -318,8 +318,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_subtle_message, // send an message to somebody as a 'voice in their head',
 	/client/proc/aooc,
 	/datum/admins/proc/sendFax,
-	/datum/admins/proc/paralyze_mob
-
+	/datum/admins/proc/paralyze_mob,
+	/datum/admins/proc/view_persistent_data
 )
 
 var/list/admin_verbs_mentor = list(
