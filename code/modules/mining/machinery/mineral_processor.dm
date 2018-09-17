@@ -79,7 +79,7 @@
 
 			sheets += abs(result)
 			while(result < 0)
-				new /obj/item/weapon/ore(output_turf, "waste")
+				new /obj/item/weapon/ore(output_turf, MATERIAL_WASTE)
 				result++
 
 		// Try to make any available alloys.
