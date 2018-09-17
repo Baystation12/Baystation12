@@ -454,7 +454,7 @@ department tags
 /obj/item/clothing/accessory/solgov/department/research
 	name = "research insignia"
 	desc = "Insignia denoting assignment to the research department. These fit Expeditionary Corps uniforms."
-	color = "#F8F8FF"
+	color = "#f8f8ff"
 
 /obj/item/clothing/accessory/solgov/department/research/service
 	icon_state = "dept_exped_service"
