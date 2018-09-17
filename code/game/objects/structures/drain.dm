@@ -33,7 +33,7 @@
 	if(isWrench(thing))
 		new /obj/item/drain(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>"
+		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
 		qdel(src)
 	return ..()
 
@@ -66,6 +66,6 @@
 	if(isWrench(thing))
 		new /obj/structure/drain(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='warning'>[user] wrenches the [src] down.</span>"
+		to_chat(user, "<span class='warning'>[user] wrenches the [src] down.</span>")
 		qdel(src)
 	return ..()
