@@ -1609,6 +1609,32 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/disk/integrated_circuit/upgrade/clone
 	sort_string = "WCLAE"
 
+// janitor gadgets
+
+/datum/design/item/advmop
+	name = "Advanced Mop"
+	desc = "An upgraded mop with a large internal capacity for holding water or other cleaning chemicals."
+	id = "advmop"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_POWER = 3)
+	materials = list(MATERIAL_STEEL = 2500, MATERIAL_GLASS = 200)
+	build_path = /obj/item/weapon/mop/advanced
+
+/datum/design/blutrash
+	name = "Trashbag of Holding"
+	desc = "An advanced trash bag with bluespace properties; capable of holding a plethora of garbage."
+	id = "blutrash"
+	req_tech = list(TECH_BLUESPACE = 5, TECH_MATERIALS = 6)
+	materials = list(MATERIAL_GOLD = 1500, MATERIAL_URANIUM = 250, MATERIAL_PHORON = 1500)
+	build_path = /obj/item/weapon/storage/bag/trash/bluespace
+
+/datum/design/item/holosign
+	name = "Holographic Sign Projector"
+	desc = "A holograpic projector used to project various warning signs."
+	id = "holosign"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_BLUESPACE = 4, TECH_POWER = 4)
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000)
+	build_path = /obj/item/holosign_creator
+
 /*
 CIRCUITS BELOW
 */
