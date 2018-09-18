@@ -522,6 +522,7 @@ obj/structure/disposalpipe/Destroy()
 	name = "partial package tagger"
 	icon_state = "pipe-tagger-partial"
 	partial = 1
+
 /obj/structure/disposalpipe/diversion_junction
 	name = "diversion junction"
 	icon_state = "pipe-j1s"

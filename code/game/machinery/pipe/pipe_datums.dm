@@ -63,6 +63,7 @@
 		new_item.dir = D.dir
 		new_item.icon = D.build_icon
 		new_item.icon_state = D.build_icon_state
+		new_item.set_density(1)
 
 //=============
 //List of Pipes
