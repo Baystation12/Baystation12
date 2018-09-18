@@ -260,6 +260,25 @@
 		/obj/item/weapon/crowbar/prybar
 		)
 
+/obj/item/weapon/storage/belt/janitor
+	name = "janibelt"
+	desc = "A belt used to hold most janitorial supplies."
+	icon_state = "janibelt"
+	item_state = "janibelt"
+	storage_slots = 6
+	can_hold = list(
+		/obj/item/weapon/grenade/chem_grenade,
+		/obj/item/device/lightreplacer,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/reagent_containers/spray/cleaner,
+		/obj/item/weapon/soap,
+		/obj/item/holosign_creator,
+		/obj/item/clothing/gloves,
+		/obj/item/device/assembly/mousetrap,
+		/obj/item/weapon/crowbar/prybar,
+		/obj/item/clothing/mask/plunger
+		)
+
 /obj/item/weapon/storage/belt/holster/general
 	name = "holster belt"
 	desc = "Can hold general equipment such as tablets, folders, and other office supplies. Comes with a holster."

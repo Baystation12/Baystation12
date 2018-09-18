@@ -42,7 +42,7 @@
 	name = "trash bag"
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
 	icon = 'icons/obj/janitor.dmi'
-	icon_state = "trashbag0"
+	icon_state = "trashbag"
 	item_state = "trashbag"
 
 	w_class = ITEM_SIZE_SMALL
@@ -56,10 +56,23 @@
 
 /obj/item/weapon/storage/bag/trash/update_icon()
 	switch(w_class)
-		if(2) icon_state = "trashbag0"
-		if(3) icon_state = "trashbag1"
-		if(4) icon_state = "trashbag2"
-		if(5 to INFINITY) icon_state = "trashbag3"
+		if(2) icon_state = "[initial(icon_state)]"
+		if(3) icon_state = "[initial(icon_state)]1"
+		if(4) icon_state = "[initial(icon_state)]2"
+		if(5 to INFINITY) icon_state = "[initial(icon_state)]3"
+
+/obj/item/weapon/storage/bag/trash/bluespace
+	name = "trash bag of holding"
+	max_storage_space = 56
+	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
+	icon_state = "bluetrashbag"
+
+/obj/item/weapon/storage/bag/trash/bluespace/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding) || istype(W, /obj/item/weapon/storage/bag/trash/bluespace))
+		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
+		qdel(W)
+		return 1
+	return ..()
 
 // -----------------------------
 //        Plastic Bag
