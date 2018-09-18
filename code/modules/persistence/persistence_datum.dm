@@ -7,6 +7,8 @@
 	var/filename
 	var/tokens_per_line
 	var/entries_expire_at
+	var/entries_decay_at
+	var/entry_decay_weight = 0.5
 	var/file_entry_split_character = "\t"
 	var/file_line_split_character =  "\n"
 	var/admin_dat_header_colspan = 2
@@ -16,7 +18,10 @@
 	..()
 
 /datum/persistent/proc/SetFilename()
-	return
+	if(name)
+		filename = "data/persistent/[lowertext(GLOB.using_map.name)]-[lowertext(name)].txt"
+	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
+		entries_decay_at = Floor(entries_expire_at * entries_decay_at)
 
 /datum/persistent/proc/LabelTokens(var/list/tokens)
 	var/list/labelled_tokens = list()
@@ -46,6 +51,26 @@
 	return
 
 /datum/persistent/proc/ProcessAndApplyTokens(var/list/tokens)
+
+	// If it's old enough we start to trim down any textual information and scramble strings.
+	if(tokens["message"] && !isnull(entries_decay_at) && !isnull(entry_decay_weight))
+		var/_n =       tokens["age"]
+		var/_message = tokens["message"]
+		if(_n >= entries_decay_at)
+			var/decayed_message = ""
+			for(var/i = 1 to length(_message))
+				var/char = copytext(_message, i, i + 1)
+				if(prob(round(_n * entry_decay_weight)))
+					if(prob(99))
+						decayed_message += pick(".",",","-","'","\\","/","\"",":",";")
+				else
+					decayed_message += char
+			_message = decayed_message
+		if(length(_message))
+			tokens["message"] = _message
+		else
+			return
+
 	var/_z = tokens["z"]
 	if(_z in GLOB.using_map.station_levels)
 		. = GetValidTurf(locate(tokens["x"], tokens["y"], _z), tokens)
@@ -94,7 +119,7 @@
 			if(LAZYLEN(entry) == tokens_per_line)
 				to_file(write_file, jointext(entry, file_entry_split_character))
 
-/datum/persistent/proc/RemoveValue(var/value)
+/datum/persistent/proc/RemoveValue(var/atom/value)
 	qdel(value)
 
 /datum/persistent/proc/GetAdminSummary(var/datum/admins/caller, var/can_modify)

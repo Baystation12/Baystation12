@@ -1,9 +1,6 @@
 /datum/persistent/filth/trash
 	name = "trash"
 
-/datum/persistent/filth/trash/SetFilename()
-	filename = "data/persistent/[lowertext(GLOB.using_map.name)]-trash.txt"
-
 /datum/persistent/filth/trash/CheckTurfContents(var/turf/T, var/list/tokens)
 	var/too_much_trash = 0
 	for(var/obj/item/trash/trash in T)
