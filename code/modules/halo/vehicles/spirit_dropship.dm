@@ -1,11 +1,11 @@
-/obj/vehicles/air/spirit_dropship
+/obj/vehicles/air/overmap/spirit_dropship
 	name = "Type-25 \"Spirit\" Troop Carrier"
 	desc = "A large, tuning fork shaped ship with a underslung heavy plasma cannon."
 
 	icon = 'code/modules/halo/vehicles/spirit.dmi'
 	icon_state = "base"
 	vehicle_move_delay = 1.45
-
+	faction = "covenant"
 	density = 1
 
 	bound_height = 128
@@ -25,7 +25,7 @@
 
 	vehicle_size = 128
 
-/obj/vehicles/air/spirit_dropship/proc/update_pixel_xy()
+/obj/vehicles/air/overmap/spirit_dropship/proc/update_pixel_xy()
 	pixel_x = 0
 	pixel_y = 0
 	bounds = "32,32"
@@ -37,7 +37,7 @@
 			pixel_y = -19
 			bounds = "160,128"
 
-/obj/vehicles/air/spirit_dropship/update_object_sprites()
+/obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
 	update_pixel_xy()
 
 //Pelican component profile define//

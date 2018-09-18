@@ -173,6 +173,10 @@
 	item_state = "Odst Helmet Medic"
 	icon_state = "Helmet Medic"
 
+///obj/item/clothing/head/helmet/odst/medic/health/process_hud(var/mob/M)
+//	process_med_hud(M, 1)
+
+
 /obj/item/clothing/head/helmet/odst/medic/verb/Toggle_VISR100()
 	set category = "Helmet"
 	set name = "Toggle VISR"
