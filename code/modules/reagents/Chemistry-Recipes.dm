@@ -2039,3 +2039,33 @@
 	result = /datum/reagent/nutriment/mayo
 	required_reagents = list(/datum/reagent/drink/juice/lemon = 5, /datum/reagent/nutriment/protein/egg = 5)
 	result_amount = 10
+
+/datum/chemical_reaction/anfo
+	name = "EZ-ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/toxin/fertilizer/eznutrient=20, /datum/reagent/fuel=10)
+	result_amount = 15
+
+/datum/chemical_reaction/anfo2
+	name = "Left 4 ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/toxin/fertilizer/left4zed=10, /datum/reagent/fuel=5)
+	result_amount = 10
+
+/datum/chemical_reaction/anfo3
+	name = "Robust ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/toxin/fertilizer/robustharvest=15, /datum/reagent/fuel=5)
+	result_amount = 10
+
+/datum/chemical_reaction/anfo4
+	name = "Chemlab ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/ammonia=10, /datum/reagent/fuel=5)
+	result_amount = 15
+
+/datum/chemical_reaction/anfo_plus
+	name = "ANFO+"
+	result = /datum/reagent/anfo/plus
+	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminum=5)
+	result_amount = 20

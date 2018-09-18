@@ -184,5 +184,5 @@
 	icon_state = "expedition_female_s"
 
 /datum/category_item/underwear/undershirt/polo_nt
-	name = "Polo, NanoTrasen"
+	name = "Polo, corporate"
 	icon_state = "ntpolo"

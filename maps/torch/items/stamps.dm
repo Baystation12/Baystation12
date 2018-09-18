@@ -23,7 +23,7 @@
 	icon_state = "stamp-intaff"
 
 /obj/item/weapon/stamp/nt
-	name = "\improper NanoTrasen rubber stamp"
+	name = "\improper corporate rubber stamp"
 	icon_state = "stamp-intaff"
 
 /obj/item/weapon/stamp/deckoff

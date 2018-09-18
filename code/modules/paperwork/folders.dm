@@ -22,7 +22,7 @@
 	icon_state = "folder_white"
 
 /obj/item/weapon/folder/nt
-	desc = "A NanoTrasen folder."
+	desc = "A corporate folder."
 	icon_state = "folder_nt"
 
 /obj/item/weapon/folder/update_icon()

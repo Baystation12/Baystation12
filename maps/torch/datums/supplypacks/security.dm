@@ -38,21 +38,21 @@
 	access = access_heads
 
 /decl/hierarchy/supply_pack/security/nanoarmor
-	name = "Armor - NanoTrasen"
+	name = "Armor - Corporate"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/nt = 2,
 					/obj/item/clothing/head/helmet/nt/guard =2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper NanoTrasen armor crate"
+	containername = "\improper Corporate armor crate"
 	access = access_nanotrasen
 
 /decl/hierarchy/supply_pack/security/lightnanoarmor
-	name = "Armor - NanoTrasen light"
+	name = "Armor - Corporate light"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/light/nt = 2,
 					/obj/item/clothing/head/helmet/nt/guard =2)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper NanoTrasen light armor crate"
+	containername = "\improper Corporate light armor crate"
 	access = access_nanotrasen
 
 /decl/hierarchy/supply_pack/security/pistol

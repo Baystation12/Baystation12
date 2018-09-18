@@ -2,6 +2,7 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
+	var/moving_state = "ship_moving"
 	var/vessel_mass = 100 				//tonnes, arbitrary number, affects acceleration provided by engines
 	var/default_delay = 6 SECONDS 		//time it takes to move to next tile on overmap
 	var/speed_mod = 10					//multiplier for how much ship's speed reduces above time
@@ -11,31 +12,18 @@
 	var/list/last_movement = list(0,0)	//worldtime when ship last moved in x,y direction
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
 
-	var/obj/machinery/computer/helm/nav_control
+	var/obj/machinery/computer/ship/helm/nav_control
 	var/list/engines = list()
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
 /obj/effect/overmap/ship/Initialize()
 	. = ..()
-	for(var/datum/ship_engine/E in ship_engines)
-		if (E.holder.z in map_z)
-			engines |= E
-	for(var/obj/machinery/computer/engines/E in SSmachines.machinery)
-		if (E.z in map_z)
-			E.linked = src
-			//testing("Engines console at level [E.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
-		if (H.z in map_z)
-			nav_control = H
-			H.linked = src
-			H.get_known_sectors()
-			//testing("Helm console at level [H.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/navigation/N in SSmachines.machinery)
-		if (N.z in map_z)
-			N.linked = src
-			//testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	START_PROCESSING(SSobj, src)
+
+/obj/effect/overmap/ship/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
@@ -121,10 +109,10 @@
 
 /obj/effect/overmap/ship/update_icon()
 	if(!is_still())
-		icon_state = "ship_moving"
+		icon_state = moving_state
 		dir = get_heading()
 	else
-		icon_state = "ship"
+		icon_state = initial(icon_state)
 
 /obj/effect/overmap/ship/proc/burn()
 	for(var/datum/ship_engine/E in engines)
@@ -178,3 +166,14 @@
 	. = SKILL_MIN
 	if(nav_control)
 		. = nav_control.operator_skill || .
+
+/obj/effect/overmap/ship/populate_sector_objects()
+	..()
+	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
+		S.attempt_hook_up(src)
+	for(var/datum/ship_engine/E in ship_engines)
+		if(check_ownership(E.holder))
+			engines |= E
+
+/obj/effect/overmap/ship/proc/get_landed_info()
+	return "This ship cannot land."

@@ -125,15 +125,15 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aq" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "ar" = (
-/obj/machinery/computer/helm,
+/obj/machinery/computer/ship/helm,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "as" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "at" = (
@@ -4722,7 +4722,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "mk" = (
-/obj/machinery/computer/engines{
+/obj/machinery/computer/ship/engines{
 	icon_state = "computer";
 	dir = 4
 	},

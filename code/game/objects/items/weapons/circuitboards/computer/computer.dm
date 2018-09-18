@@ -107,15 +107,15 @@
 
 /obj/item/weapon/circuitboard/helm
 	name = T_BOARD("helm control console")
-	build_path = /obj/machinery/computer/helm
+	build_path = /obj/machinery/computer/ship/helm
 
 /obj/item/weapon/circuitboard/engine
 	name = T_BOARD("engine control console")
-	build_path = /obj/machinery/computer/engines
+	build_path = /obj/machinery/computer/ship/engines
 
 /obj/item/weapon/circuitboard/nav
 	name = T_BOARD("navigation console")
-	build_path = /obj/machinery/computer/navigation
+	build_path = /obj/machinery/computer/ship/navigation
 
 /obj/item/weapon/circuitboard/mining_shuttle
 	name = T_BOARD("mining shuttle console")

@@ -158,6 +158,7 @@
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()
+	corps += /obj/item/clothing/under/rank/scientist/nt
 	corps += /obj/item/clothing/under/mbill
 	corps += /obj/item/clothing/under/saare
 	corps += /obj/item/clothing/under/aether

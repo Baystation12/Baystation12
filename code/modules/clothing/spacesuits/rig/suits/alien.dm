@@ -1,7 +1,7 @@
 /obj/item/weapon/rig/unathi
-	name = "NT breacher chassis control module"
-	desc = "A cheap NT knock-off of an Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
-	suit_type = "NT breacher"
+	name = "\improper NT breacher chassis control module"
+	desc = "A cheap NanoTrasen-made knock-off of an Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
+	suit_type = "\improper NT breacher rig"
 	icon_state = "breacher_rig_cheap"
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 60, bomb = 70, bio = 100, rad = 50)
 	emp_protection = -20
@@ -33,6 +33,6 @@
 
 /obj/item/clothing/shoes/magboots/rig/unathi
 	species_restricted = list(SPECIES_UNATHI)
-	
+
 /obj/item/clothing/gloves/rig/unathi
 	species_restricted = list(SPECIES_UNATHI)

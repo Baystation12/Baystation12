@@ -19,6 +19,7 @@
 #define FACTION_FLEET          "SCG Fleet"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
+#define FACTION_TORCH_LLC      "Torch LLC"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
 
