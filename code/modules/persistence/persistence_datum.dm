@@ -10,8 +10,9 @@
 	var/entries_decay_at
 	var/entry_decay_weight = 0.5
 	var/file_entry_split_character = "\t"
+	var/file_entry_substitute_character = " "
 	var/file_line_split_character =  "\n"
-	var/admin_dat_header_colspan = 2
+	var/has_admin_data
 
 /datum/persistent/New()
 	SetFilename()
@@ -78,21 +79,27 @@
 			CreateEntryInstance(., tokens)
 
 /datum/persistent/proc/IsValidEntry(var/atom/entry)
-	return ( \
-		istype(entry) && \
-		GetEntryAge(entry) <= entries_expire_at && \
-		istype(entry.loc, /turf) && \
-		(entry.z in GLOB.using_map.station_levels) \
-	)
+	if(!istype(entry))
+		return FALSE
+	if(GetEntryAge(entry) >= entries_expire_at)
+		return FALSE
+	var/turf/T = get_turf(entry)
+	if(!T || !(T.z in GLOB.using_map.station_levels) )
+		return FALSE
+	var/area/A = get_area(T)
+	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+		return FALSE
+	return TRUE
 
 /datum/persistent/proc/GetEntryAge(var/atom/entry)
 	return 0
 
 /datum/persistent/proc/CompileEntry(var/atom/entry)
+	var/turf/T = get_turf(entry)
 	. = list(
-		entry.x,
-		entry.y,
-		entry.z,
+		T.x,
+		T.y,
+		T.z,
 		GetEntryAge(entry)
 	)
 
@@ -117,35 +124,37 @@
 		if(IsValidEntry(thing))
 			var/list/entry = CompileEntry(thing)
 			if(LAZYLEN(entry) == tokens_per_line)
+				for(var/i = 1 to LAZYLEN(entry))
+					if(istext(entry[i]))
+						entry[i] = replacetext(entry[i], file_entry_split_character, file_entry_substitute_character)
 				to_file(write_file, jointext(entry, file_entry_split_character))
 
 /datum/persistent/proc/RemoveValue(var/atom/value)
 	qdel(value)
 
-/datum/persistent/proc/GetAdminSummary(var/datum/admins/caller, var/can_modify)
-	. = list("<table><tr><td colspan = [admin_dat_header_colspan]><b>[name]</b></td></tr>")
+/datum/persistent/proc/GetAdminSummary(var/mob/user, var/can_modify)
+	. = list("<tr><td colspan = 4><b>[capitalize(name)]</b></td></tr>")
+	. += "<tr><td colspan = 4><hr></td></tr>"
 	for(var/thing in SSpersistence.tracking_values[type])
-		. += "<tr>[GetAdminDataStringFor(thing, caller, can_modify)]</tr>"
-	. += "</table>"
+		. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
+	. += "<tr><td colspan = 4><hr></td></tr>"
 
-/datum/persistent/proc/GetAdminDataStringFor(var/thing, var/datum/admins/caller, var/can_modify)
+
+/datum/persistent/proc/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
 	if(can_modify)
-		. = "<td>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[caller];remove_entry=\ref[thing]'>Destroy</a></td>"
+		. = "<td colspan = 3>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
 	else
-		. = "<td colspan = 2>[thing]</td>"
+		. = "<td colspan = 4>[thing]</td>"
 
 /datum/persistent/Topic(var/href, var/href_list)
 	. = ..()
 	if(!.)
-		var/datum/admins/caller = locate(href_list["caller"])
-		if(!istype(caller))
-			return TOPIC_HANDLED
 		if(href_list["remove_entry"])
 			var/datum/value = locate(href_list["remove_entry"])
 			if(istype(value))
 				RemoveValue(value)
 				. = TRUE
-		if(href_list["ban_author"])
-			. = TRUE
 		if(.)
-			caller.view_persistent_data()
+			var/mob/user = locate(href_list["caller"])
+			if(user)
+				SSpersistence.show_info(user)

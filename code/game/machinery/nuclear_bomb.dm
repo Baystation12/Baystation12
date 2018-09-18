@@ -282,7 +282,7 @@ var/bomb_set
 					return 1
 				if(!timing && !safety)
 					start_bomb()
-				else 
+				else
 					check_cutoff()
 			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))

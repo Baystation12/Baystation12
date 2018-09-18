@@ -44,7 +44,12 @@
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")
 			qdel(src)
-	else if(thing.sharp) // TODO: partial overwrites instead of complete overwrite.
+	else if(thing.sharp)
+
+		if(jobban_isbanned(user, "Graffiti"))
+			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
+			return
+
 		var/_message = sanitize(input("Enter an additional message to engrave.", "Graffiti") as null|text, trim = TRUE)
 		if(_message && loc && user && !user.incapacitated() && user.Adjacent(loc) && thing.loc == user)
 			user.visible_message("<span class='warning'>\The [user] begins carving something into \the [loc].</span>")

@@ -11,18 +11,52 @@
 	var/const/max_notices = 5
 
 /obj/structure/noticeboard/Initialize()
+
 	. = ..()
+
+	// Grab any mapped notices.
 	notices = list()
 	for(var/obj/item/weapon/paper/note in get_turf(src))
 		note.forceMove(src)
-		notices += note
+		LAZYADD(notices, note)
 		if(LAZYLEN(notices) >= max_notices)
 			break
+
+	// Automatically place noticeboards that aren't mapped to specific positions.
+	if(pixel_x == 0 && pixel_y == 0)
+
+		var/turf/here = get_turf(src)
+		var/placing = 0
+		for(var/checkdir in GLOB.cardinal)
+			var/turf/T = get_step(here, checkdir)
+			if(T.density)
+				placing = checkdir
+				break
+			for(var/thing in T)
+				var/atom/A = thing
+				if(A.simulated && !A.CanPass(src, T))
+					placing = checkdir
+					break
+
+		switch(placing)
+			if(NORTH)
+				pixel_x = 0
+				pixel_y = 32
+			if(SOUTH)
+				pixel_x = 0
+				pixel_y = -32
+			if(EAST)
+				pixel_x = 32
+				pixel_y = 0
+			if(WEST)
+				pixel_x = -32
+				pixel_y = 0
+
 	update_icon()
 
 /obj/structure/noticeboard/proc/add_paper(var/atom/movable/paper, var/skip_icon_update)
-	if(istype(paper) && paper.loc != src)
-		notices |= paper
+	if(istype(paper))
+		LAZYDISTINCTADD(notices, paper)
 		paper.forceMove(src)
 		if(!skip_icon_update)
 			update_icon()
@@ -30,7 +64,7 @@
 /obj/structure/noticeboard/proc/remove_paper(var/atom/movable/paper, var/skip_icon_update)
 	if(istype(paper) && paper.loc == src)
 		paper.dropInto(loc)
-		notices -= paper
+		LAZYREMOVE(notices, paper)
 		SSpersistence.forget_value(paper, /datum/persistent/paper)
 		if(!skip_icon_update)
 			update_icon()
@@ -42,7 +76,7 @@
 	qdel(src)
 
 /obj/structure/noticeboard/Destroy()
-	notices.Cut()
+	QDEL_NULL_LIST(notices)
 	. = ..()
 
 /obj/structure/noticeboard/ex_act(var/severity)
@@ -52,8 +86,27 @@
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/weapon/thing, var/mob/user)
-	if(isWrench(thing))
+	if(isScrewdriver(thing))
+		var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
+		if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
+			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			switch(choice)
+				if("North")
+					pixel_x = 0
+					pixel_y = 32
+				if("South")
+					pixel_x = 0
+					pixel_y = -32
+				if("East")
+					pixel_x = 32
+					pixel_y = 0
+				if("West")
+					pixel_x = -32
+					pixel_y = 0
+		return
+	else if(isWrench(thing))
 		visible_message(SPAN_WARNING("\The [user] begins dismantling \the [src]."))
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 50, src))
 			visible_message(SPAN_DANGER("\The [user] has dismantled \the [src]!"))
 			dismantle()
@@ -83,12 +136,12 @@
 	if(.)
 		var/list/dat = list("<table>")
 		for(var/thing in notices)
-			dat += "<tr><td>[thing]</td><td>"
+			LAZYADD(dat, "<tr><td>[thing]</td><td>")
 			if(istype(thing, /obj/item/weapon/paper))
-				dat += "<a href='?src=\ref[src];read=\ref[thing]'>Read</a><a href='?src=\ref[src];write=\ref[thing]'>Write</a>"
+				LAZYADD(dat, "<a href='?src=\ref[src];read=\ref[thing]'>Read</a><a href='?src=\ref[src];write=\ref[thing]'>Write</a>")
 			else if(istype(thing, /obj/item/weapon/photo))
-				dat += "<a href='?src=\ref[src];look=\ref[thing]'>Look</a>"
-			dat += "<a href='?src=\ref[src];remove=\ref[thing]'>Remove</a></td></tr>"
+				LAZYADD(dat, "<a href='?src=\ref[src];look=\ref[thing]'>Look</a>")
+			LAZYADD(dat, "<a href='?src=\ref[src];remove=\ref[thing]'>Remove</a></td></tr>")
 		var/datum/browser/popup = new(user, "noticeboard-\ref[src]", "Noticeboard")
 		popup.set_content(jointext(dat, null))
 		popup.open()
@@ -130,37 +183,37 @@
 		interact(user)
 
 /obj/structure/noticeboard/anomaly
-	notices = 5
 	icon_state = "nboard05"
 
-/obj/structure/noticeboard/anomaly/New()
+/obj/structure/noticeboard/anomaly/Initialize()
+	. = ..()
 	var/obj/item/weapon/paper/P = new()
 	P.SetName("Memo RE: proper analysis procedure")
 	P.info = "<br>We keep test dummies in pens here for a reason, so standard procedure should be to activate newfound alien artifacts and place the two in close proximity. Promising items I might even approve monkey testing on."
 	P.stamped = list(/obj/item/weapon/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
-	add_paper(P)
+	add_paper(P, skip_icon_update = TRUE)
 
 	P = new()
 	P.SetName("Memo RE: materials gathering")
 	P.info = "Corasang,<br>the hands-on approach to gathering our samples may very well be slow at times, but it's safer than allowing the blundering miners to roll willy-nilly over our dig sites in their mechs, destroying everything in the process. And don't forget the escavation tools on your way out there!<br>- R.W"
 	P.stamped = list(/obj/item/weapon/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
-	add_paper(P)
+	add_paper(P, skip_icon_update = TRUE)
 
 	P = new()
 	P.SetName("Memo RE: ethical quandaries")
 	P.info = "Darion-<br><br>I don't care what his rank is, our business is that of science and knowledge - questions of moral application do not come into this. Sure, so there are those who would employ the energy-wave particles my modified device has managed to abscond for their own personal gain, but I can hardly see the practical benefits of some of these artifacts our benefactors left behind. Ward--"
 	P.stamped = list(/obj/item/weapon/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
-	add_paper(P)
+	add_paper(P, skip_icon_update = TRUE)
 
 	P = new()
 	P.SetName("READ ME! Before you people destroy any more samples")
 	P.info = "how many times do i have to tell you people, these xeno-arch samples are del-i-cate, and should be handled so! careful application of a focussed, concentrated heat or some corrosive liquids should clear away the extraneous carbon matter, while application of an energy beam will most decidedly destroy it entirely - like someone did to the chemical dispenser! W, <b>the one who signs your paychecks</b>"
 	P.stamped = list(/obj/item/weapon/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
-	add_paper(P)
+	add_paper(P, skip_icon_update = TRUE)
 
 	P = new()
 	P.SetName("Reminder regarding the anomalous material suits")
