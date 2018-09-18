@@ -2,7 +2,7 @@
 	name = "paper"
 	tokens_per_line = 7
 	entries_expire_at = 50
-	admin_dat_header_colspan = 4
+	has_admin_data = TRUE
 	var/paper_type = /obj/item/weapon/paper
 	var/requires_noticeboard = TRUE
 
@@ -15,25 +15,21 @@
 	return labelled_tokens
 
 /datum/persistent/paper/CheckTurfContents(var/turf/T, var/list/tokens)
-	var/obj/structure/noticeboard/board = locate() in T
-	return !istype(board) || LAZYLEN(board.notices) < board.max_notices
+	if(requires_noticeboard && !(locate(/obj/structure/noticeboard) in T))
+		new /obj/structure/noticeboard(T)
+	. = ..()
 
 /datum/persistent/paper/CreateEntryInstance(var/turf/creating, var/list/tokens)
 	var/obj/structure/noticeboard/board = locate() in creating
-	if(!board && requires_noticeboard)
-		board = new(creating)
+	if(requires_noticeboard && LAZYLEN(board.notices) >= board.max_notices)
+		return
 	var/obj/item/weapon/paper/paper = new paper_type(creating)
 	paper.set_content(tokens["message"], tokens["title"])
 	paper.last_modified_ckey = tokens["author"]
-	if(board)
+	if(requires_noticeboard)
 		board.add_paper(paper)
+	SSpersistence.track_value(paper, type)
 	return paper
-
-/datum/persistent/paper/IsValidEntry(var/atom/entry)
-	. = ..()
-	if(. && requires_noticeboard)
-		var/obj/structure/noticeboard/N = entry.loc
-		. = istype(N) && (entry in N.notices)
 
 /datum/persistent/paper/GetEntryAge(var/atom/entry)
 	var/obj/item/weapon/paper/paper = entry
@@ -46,12 +42,12 @@
 	LAZYADD(., "[paper.info]")
 	LAZYADD(., "[paper.name]")
 
-/datum/persistent/paper/GetAdminDataStringFor(var/thing, var/datum/admins/caller, var/can_modify)
+/datum/persistent/paper/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
 	var/obj/item/weapon/paper/paper = thing
 	if(can_modify)
-		. = "<td>[paper.info]</td><td>[paper.name]</td><td>[paper.last_modified_ckey]</td><td><a href='byond://?src=\ref[src];caller=\ref[caller];remove_entry=\ref[thing]'>Destroy</a></td><td><a href='byond://?src=\ref[src];caller=\ref[caller];ban_author=[paper.last_modified_ckey]'>Ban Author</a></td>"
+		. = "<td style='background-color:[paper.color]'>[paper.info]</td><td>[paper.name]</td><td>[paper.last_modified_ckey]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
 	else
-		. = "<td colspan = 2>[paper.info]</td><td colspan = 2>[paper.name]</td><td>[paper.last_modified_ckey]</td>"
+		. = "<td colspan = 2;style='background-color:[paper.color]'>[paper.info]</td><td>[paper.name]</td><td>[paper.last_modified_ckey]</td>"
 
 /datum/persistent/paper/RemoveValue(var/atom/value)
 	var/obj/structure/noticeboard/board = value.loc
