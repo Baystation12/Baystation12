@@ -27,6 +27,7 @@
 	paper.last_modified_ckey = tokens["author"]
 	if(board)
 		board.add_paper(paper)
+	return paper
 
 /datum/persistent/paper/IsValidEntry(var/atom/entry)
 	. = ..()
