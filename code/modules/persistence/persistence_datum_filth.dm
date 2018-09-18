@@ -3,9 +3,6 @@
 	tokens_per_line = 5
 	entries_expire_at = 5
 
-/datum/persistent/filth/SetFilename()
-	filename = "data/persistent/[lowertext(GLOB.using_map.name)]-filth.txt"
-
 /datum/persistent/filth/LabelTokens(var/list/tokens)
 	var/list/labelled_tokens = ..()
 	labelled_tokens["path"] = text2path(tokens[LAZYLEN(labelled_tokens)+1])
