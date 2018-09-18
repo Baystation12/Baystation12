@@ -11,13 +11,16 @@
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
 	var/mopping = 0
 	var/mopcount = 0
+	var/mopspeed = 40
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
 		/obj/effect/overlay,
 		/obj/effect/rune,
-		/obj/structure/catwalk)
+		/obj/structure/catwalk
+		)
 
-/obj/item/weapon/mop/New()
+/obj/item/weapon/mop/Initialize()
+	. = ..()
 	create_reagents(30)
 
 /obj/item/weapon/mop/afterattack(atom/A, mob/user, proximity)
@@ -55,7 +58,7 @@
 
 		user.visible_message("<span class='warning'>\The [user] begins to clean \the [T].</span>")
 
-		if(do_after(user, 40, T))
+		if(do_after(user, mopspeed, T))
 			if(T)
 				T.clean(src, user)
 			to_chat(user, "<span class='notice'>You have finished mopping!</span>")
@@ -65,3 +68,41 @@
 	if(istype(I, /obj/item/weapon/mop) || istype(I, /obj/item/weapon/soap))
 		return
 	..()
+
+/obj/item/weapon/mop/advanced
+	desc = "The most advanced tool in a custodian's arsenal, complete with a condenser for self-wetting! Just think of all the viscera you will clean up with this!"
+	name = "advanced mop"
+	icon_state = "advmop"
+	item_state = "mop"
+	force = 6
+	throwforce = 11
+	mopspeed = 20
+	var/refill_enabled = TRUE //Self-refill toggle for when a janitor decides to mop with something other than water.
+	var/refill_rate = 1 //Rate per process() tick mop refills itself
+	var/refill_reagent = /datum/reagent/water //Determins what reagent to use for refilling, just in case someone wanted to make a HOLY MOP OF PURGING
+
+/obj/item/weapon/mop/advanced/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/item/weapon/mop/advanced/attack_self(mob/user)
+	refill_enabled = !refill_enabled
+	if(refill_enabled)
+		START_PROCESSING(SSobj, src)
+	else
+		STOP_PROCESSING(SSobj,src)
+	to_chat(user, "<span class='notice'>You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position.</span>")
+	playsound(user, 'sound/machines/click.ogg', 30, 1)
+
+/obj/item/weapon/mop/advanced/Process()
+	if(reagents.total_volume < 30)
+		reagents.add_reagent(refill_reagent, refill_rate)
+
+/obj/item/weapon/mop/advanced/examine(mob/user)
+	..()
+	to_chat(user, "<span class='notice'>The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.</span>")
+
+/obj/item/weapon/mop/advanced/Destroy()
+	if(refill_enabled)
+		STOP_PROCESSING(SSobj, src)
+	return ..()
