@@ -9,8 +9,6 @@
 	#include "../geminus_city/geminus_city_spawns.dm"
 	#include "../geminus_city/geminus_city_overmap.dm"
 
-	#include "../first_contact/maps/Exoplanet Research/includes.dm"
-
 	#include "../geminus_city/geminuscity_2.dmm"
 	#include "../geminus_city/geminuscity_3.dmm"
 	#include "../geminus_city/geminuscity_4.dmm"
@@ -24,10 +22,6 @@
 	#include "../insurrection/UNSC_Yolotanker/jobs.dm"
 	#include "../insurrection/UNSC_Yolotanker/spawns_jobs.dm"
 
-
-	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
-
-	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
 	#include "../first_contact/maps/UNSC_Bertels/jobs.dm"
 	#include "../first_contact/maps/UNSC_Bertels/outfits.dm"
 	#include "../first_contact/maps/UNSC_Bertels/spawns_jobs.dm"
@@ -45,9 +39,7 @@
 
 	#include "../first_contact/overall_overmap.dm"
 
-	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
-
-
+	#include "../first_contact/maps/Covenant Corvette/includes.dm"
 
 	#include "../first_contact/maps/ccv_star_spawns.dm"
 	#include "../first_contact/maps/CCV_Star.dmm"
@@ -57,7 +49,7 @@
 	#include "../first_contact/maps/CCV_Slow_But_Steady.dmm"
 
 	#include "../first_contact/overall_outfits.dm"
-	#include "../first_contact/overall_jobdefs.dm"
+
 
 	#define using_map_DATUM /datum/map/unsc_frigate
 

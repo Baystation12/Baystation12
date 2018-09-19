@@ -84,7 +84,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ODSTO
-	name = "Second Lieutenant"
+	name = "Second Lieutenantt"
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -165,7 +165,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTRifleman
-	name = "Rifleman"
+	name = "Corporal"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -181,7 +181,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTRifleman
-	name = "Rifleman"
+	name = "Sergeant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -197,7 +197,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTstaffsergeant
-	name = "Rifleman"
+	name = "Staff Sergeant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -213,7 +213,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTgunnerysergeant
-	name = "Rifleman"
+	name = "Gunnery Sergeant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -278,7 +278,7 @@
 
 
 /decl/hierarchy/outfit/job/ODSTcaptain
-	name = "Officer"
+	name = "Captainn"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -294,7 +294,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTmajor
-	name = "Officer"
+	name = "Majorr"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -310,7 +310,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTltcolonel
-	name = "Officer"
+	name = "Colonell"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
@@ -326,7 +326,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/ODSTcolonel
-	name = "Officer"
+	name = "Colonelll"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
