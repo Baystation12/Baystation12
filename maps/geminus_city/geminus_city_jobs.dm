@@ -65,12 +65,6 @@
 	selection_color = "#000000"
 	spawnpoint_override = "Civ Ship Cap Crew"
 
-/datum/job/ship_cap_civ/equip(var/mob/m)
-	. = ..()
-	for(var/turf/T in range(2,m)) //Removing our spawn loc from the potential spawnpos's, so a ship doesn't get 2 captains.
-		for(var/obj/effect/landmark/start/ship_cap_civ/spawnpos in T.contents)
-			GLOB.ship_cap_civ_spawns -= spawnpos.loc
-
 /datum/job/ship_crew_innie
 	title = "Insurrectionist Ship Crew"
 	total_positions = 6
