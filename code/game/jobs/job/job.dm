@@ -42,6 +42,8 @@
 	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
 
+	var/required_education = EDUCATION_TIER_NONE
+
 /datum/job/New()
 	..()
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
@@ -174,6 +176,10 @@
 	var/datum/species/S = all_species[prefs.species]
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		return TRUE
+
+	if(!S.check_education(src, prefs))
+		to_chat(feedback, "<span class='boldannounce'>Insufficient level of education for role [title], species [S].</span>")
 		return TRUE
 
 	return FALSE

@@ -32,10 +32,19 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
 
+	// Add education, honorifics, etc.
+	var/formal_name = "Unset"
+	if(H)
+		formal_name = H.real_name
+		if(H.client && H.client.prefs)
+			for(var/culturetag in H.client.prefs.cultural_info)
+				var/decl/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
+				formal_name = culture.format_formal_name(formal_name)
+
 	// Generic record
-	set_name(H ? H.real_name : "Unset")
+	set_name(formal_name)
 	set_job(H ? GetAssignment(H) : "Unset")
-	set_sex(H ? gender2text(H.gender) : "Unset")
+	set_sex(H ? gender2text(H.get_sex()) : "Unset")
 	set_age(H ? H.age : 30)
 	set_status(GLOB.default_physical_status)
 	set_species(H ? H.get_species() : SPECIES_HUMAN)
@@ -53,7 +62,23 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
 
 	// Employment record
-	set_emplRecord(H && H.gen_record && !jobban_isbanned(H, "Records") ? html_decode(H.gen_record) : "No record supplied")
+	var/employment_record
+	if(H)
+		if(H.gen_record && !jobban_isbanned(H, "Records"))
+			employment_record = html_decode(H.gen_record)
+		if(H.client && H.client.prefs)
+			var/list/qualifications
+			for(var/culturetag in H.client.prefs.cultural_info)
+				var/decl/cultural_info/culture = SSculture.get_culture(culturetag)
+				var/extra_note = culture.get_qualifications()
+				if(extra_note)
+					LAZYADD(qualifications, extra_note)
+			if(LAZYLEN(qualifications))
+				employment_record = "[employment_record ? "[employment_record]<br>" : ""]<b>Additional Qualifications</b><br>[jointext(qualifications, "<br>")]"
+
+	set_emplRecord(employment_record ? employment_record : "No record supplied")
+
+	// Misc cultural info.
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
 	set_faction(H ? html_decode(H.get_cultural_value(TAG_FACTION)) : "Unset")
 	set_religion(H ? html_decode(H.get_cultural_value(TAG_RELIGION)) : "Unset")

@@ -142,9 +142,10 @@
 			bad_message = "\[IN [(available_in_days)] DAYS]"
 		else if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			bad_message = "\[MINIMUM CHARACTER AGE: [job.minimum_character_age]]"
-
 		else if(!job.is_species_allowed(S))
 			bad_message = "<b> \[SPECIES RESTRICTED]</b>"
+		else if(!S.check_education(job, user.client.prefs))
+			bad_message = "<b> \[EDUCATION RESTRICTED]</b>"
 
 		if(!bad_message && job.allowed_branches)
 			if(!player_branch)
@@ -315,6 +316,8 @@
 		if(config.wikiurl)
 			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
 		var/description = job.get_description_blurb()
+		if(job.required_education)
+			description = "[description ? "[description]\n\n" : ""]This role requires [SSculture.education_tiers_to_strings["[job.required_education]"]] or higher, selected under <b>Education</b> in the <b>Background</b> tab of your character preferences."
 		if(description)
 			dat += html_encode(description)
 		var/datum/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
