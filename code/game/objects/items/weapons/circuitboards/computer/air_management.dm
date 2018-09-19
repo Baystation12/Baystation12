@@ -25,7 +25,7 @@
 
 /obj/item/weapon/circuitboard/air_management/supermatter_core
 	name = T_BOARD("core control")
-	build_path = /obj/machinery/computer/general_air_control/supermatter_core
+	build_path = /obj/machinery/computer/general_air_control/large_tank_control/supermatter_core
 	frequency = 1438
 	var/input_tag
 	var/output_tag
@@ -69,7 +69,7 @@
 		LTC.pressure_setting = pressure_setting
 		return 1
 
-/obj/item/weapon/circuitboard/air_management/supermatter_core/construct(var/obj/machinery/computer/general_air_control/supermatter_core/SC)
+/obj/item/weapon/circuitboard/air_management/supermatter_core/construct(var/obj/machinery/computer/general_air_control/large_tank_control/supermatter_core/SC)
 	if(..(SC))
 		SC.input_tag = input_tag
 		SC.output_tag = output_tag
@@ -113,7 +113,7 @@
 		pressure_setting = LTC.pressure_setting
 		return 1
 
-/obj/item/weapon/circuitboard/air_management/supermatter_core/deconstruct(var/obj/machinery/computer/general_air_control/supermatter_core/SC)
+/obj/item/weapon/circuitboard/air_management/supermatter_core/deconstruct(var/obj/machinery/computer/general_air_control/large_tank_control/supermatter_core/SC)
 	if(..(SC))
 		input_tag = SC.input_tag
 		output_tag = SC.output_tag

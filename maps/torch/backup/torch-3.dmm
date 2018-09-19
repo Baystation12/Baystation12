@@ -7750,7 +7750,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/computer/general_air_control/large_tank_control/supermatter_core{
+/obj/machinery/computer/general_air_control/supermatter_core{
 	name = "Engine Cooling Control";
 	icon_state = "computer";
 	dir = 8;

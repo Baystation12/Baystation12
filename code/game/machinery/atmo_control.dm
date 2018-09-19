@@ -146,42 +146,19 @@ obj/machinery/computer/general_air_control/Destroy()
 	if(..(user))
 		return
 	//WIP code. Commented out to resume original functions.
-/*	var/datum/browser/popup = new (user, "[name]", "[src] Control Panel")
+	var/datum/browser/popup = new (user, "[name]", "[src] Control Panel")
 	popup.set_content(jointext(get_console_data(),"<br>"))
-	popup.open()*/
-	user << browse(return_text(),"window=computer")
-	user.set_machine(src)
-	onclose(user, "computer")
+	popup.open()
+	//user << browse(return_text(),"window=computer")
+	//user.set_machine(src)
+	//onclose(user, "computer")
 
 	//WIP code. Commented out to resume original functions.
-/*/obj/machinery/computer/general_air_control/proc/get_console_data()
+/obj/machinery/computer/general_air_control/proc/get_console_data()
+	var/sensor_data
+	var/output
 	. = list()
-	. += "<table>
-	var/sensor_data
-	if(sensors.len)
-	for(var/id_tag in sensors)
-			var/long_name = sensors[id_tag]
-			var/list/data = sensor_information[id_tag]
-			. += "<tr><td><strong>[long_name]</strong></tr></td>"
-			if(data)
-				for(d in data)
-					. += "<tr><td>[d]
-	. = JOINTEXT(.)
-*/
-/obj/machinery/computer/general_air_control/Process()
-	..()
-	src.updateUsrDialog()
-
-/obj/machinery/computer/general_air_control/receive_signal(datum/signal/signal)
-	if(!signal || signal.encryption) return
-
-	var/id_tag = signal.data["tag"]
-	if(!id_tag || !sensors.Find(id_tag)) return
-
-	sensor_information[id_tag] = signal.data
-
-/obj/machinery/computer/general_air_control/proc/return_text()
-	var/sensor_data
+	output += "<br>"
 	if(sensors.len)
 		for(var/id_tag in sensors)
 			var/long_name = sensors[id_tag]
@@ -215,9 +192,23 @@ obj/machinery/computer/general_air_control/Destroy()
 	else
 		sensor_data = "No sensors connected."
 
-	var/output = {"<B>[name]</B><HR>
-		<B>Sensor Data:</B><HR><HR>[sensor_data]"}
+	output += {"<B>[name]</B><HR>
+		<B>Sensor Data:</B><HR>[sensor_data]"}
+	. = output
+	. = JOINTEXT(.)
 	return output
+
+/obj/machinery/computer/general_air_control/Process()
+	..()
+	src.updateUsrDialog()
+
+/obj/machinery/computer/general_air_control/receive_signal(datum/signal/signal)
+	if(!signal || signal.encryption) return
+
+	var/id_tag = signal.data["tag"]
+	if(!id_tag || !sensors.Find(id_tag)) return
+
+	sensor_information[id_tag] = signal.data
 
 /obj/machinery/computer/general_air_control/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -242,38 +233,33 @@ obj/machinery/computer/general_air_control/Destroy()
 	var/pressure_setting = ONE_ATMOSPHERE * 45
 	circuit = /obj/item/weapon/circuitboard/air_management/tank_control
 
+/obj/machinery/computer/general_air_control/large_tank_control/Initialize()
+	. = ..()
 
-/obj/machinery/computer/general_air_control/large_tank_control/return_text()
+/obj/machinery/computer/general_air_control/large_tank_control/get_console_data()
 	var/output = ..()
-	//if(signal.data)
-	//	input_info = signal.data // Attempting to fix intake control -- TLE
-
+	. = list()
 	output += "<B>Tank Control System</B><BR><BR>"
 	if(input_info)
 		var/power = (input_info["power"])
-		var/volume_rate = round(input_info["volume_rate"], 0.1)
-		output += "<B>Input</B>: [power?("Injecting"):("On Hold")] <A href='?src=\ref[src];in_refresh_status=1'>Refresh</A><BR>Flow Rate Limit: [volume_rate] L/s<BR>"
-		output += "Command: <A href='?src=\ref[src];in_toggle_injector=1'>Toggle Power</A> <A href='?src=\ref[src];in_set_flowrate=1'>Set Flow Rate</A><BR>"
-
+		output += "<B>Input</B>: [power?("<font color = 'green'>Injecting</font>"):("<font color = 'red'>On Hold</font>")] <A href='?src=\ref[src];in_refresh_status=1'>Refresh</A><BR>Flow Rate Limit: [ATMOS_DEFAULT_VOLUME_PUMP+500] L/s<BR>"
 	else
 		output += "<FONT color='red'>ERROR: Can not find input port</FONT> <A href='?src=\ref[src];in_refresh_status=1'>Search</A><BR>"
 
-	output += "Flow Rate Limit: <A href='?src=\ref[src];adj_input_flow_rate=-100'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-10'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-1'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-0.1'>-</A> [round(input_flow_setting, 0.1)] L/s <A href='?src=\ref[src];adj_input_flow_rate=0.1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=10'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=100'>+</A><BR>"
-
+	output += "Flow Rate: [round(input_flow_setting, 0.1)] L/s<BR>"
+	output += "Command: <A href='?src=\ref[src];in_toggle_injector=1'>Toggle Power</A><A href='?src=\ref[src];in_set_flowrate=1'>Set Flow Rate</A><A href='?src=\ref[src];in_set_max=1'>Max Flow</a><BR>"
 	output += "<BR>"
 
 	if(output_info)
 		var/power = (output_info["power"])
-		var/output_pressure = output_info["internal"]
-		output += {"<B>Output</B>: [power?("Open"):("On Hold")] <A href='?src=\ref[src];out_refresh_status=1'>Refresh</A><BR>
-Max Output Pressure: [output_pressure] kPa<BR>"}
-		output += "Command: <A href='?src=\ref[src];out_toggle_power=1'>Toggle Power</A> <A href='?src=\ref[src];out_set_pressure=1'>Set Pressure</A><BR>"
+		output += {"<B>Output</B>: [power?("<font color = 'green'>Open</font>"):("<font color = 'red'>On Hold</font>")] <A href='?src=\ref[src];out_refresh_status=1'>Refresh</A><BR>Max Output Pressure: [MAX_PUMP_PRESSURE] kPa<BR>"}
 
 	else
 		output += "<FONT color='red'>ERROR: Can not find output port</FONT> <A href='?src=\ref[src];out_refresh_status=1'>Search</A><BR>"
-
-	output += "Max Output Pressure Set: <A href='?src=\ref[src];adj_pressure=-1000'>-</A> <A href='?src=\ref[src];adj_pressure=-100'>-</A> <A href='?src=\ref[src];adj_pressure=-10'>-</A> <A href='?src=\ref[src];adj_pressure=-1'>-</A> [pressure_setting] kPa <A href='?src=\ref[src];adj_pressure=1'>+</A> <A href='?src=\ref[src];adj_pressure=10'>+</A> <A href='?src=\ref[src];adj_pressure=100'>+</A> <A href='?src=\ref[src];adj_pressure=1000'>+</A><BR>"
-
+	output += "Output Pressure: [pressure_setting] kPa<BR>"
+	output += "Command: <A href='?src=\ref[src];out_toggle_power=1'>Toggle Power</A><A href='?src=\ref[src];out_set_pressure=1'>Set Pressure</A><A href='?src=\ref[src];out_set_max=1'>Max Pressure</a><BR>"
+	. = output
+	. = JOINTEXT(.)
 	return output
 
 /obj/machinery/computer/general_air_control/large_tank_control/receive_signal(datum/signal/signal)
@@ -291,20 +277,53 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 /obj/machinery/computer/general_air_control/large_tank_control/Topic(href, href_list)
 	if(..())
 		return 1
+	var/datum/signal/signal = new
+	signal.transmission_method = 1 //radio signal
+	signal.source = src
+	if(href_list["in_refresh_status"])
+		input_info = null
+		signal.data = list ("tag" = input_tag, "status" = 1)
+		. = 1
 
-	if(href_list["adj_pressure"])
-		var/change = text2num(href_list["adj_pressure"])
-		pressure_setting = between(0, pressure_setting + change, MAX_PUMP_PRESSURE)
-		spawn(1)
-			src.updateUsrDialog()
-		return 1
+	if(href_list["in_toggle_injector"])
+		input_info = null
+		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
+		. = 1
 
-	if(href_list["adj_input_flow_rate"])
-		var/change = text2num(href_list["adj_input_flow_rate"])
-		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
-		spawn(1)
-			src.updateUsrDialog()
-		return 1
+	if(href_list["in_set_flowrate"])
+		input_info = null
+		input_flow_setting = input("What would you like to set the rate limit to?", "Set Volume", input_flow_setting) as num|null
+		input_flow_setting = between(0, input_flow_setting, ATMOS_DEFAULT_VOLUME_PUMP+500)
+		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		. = 1
+	if(href_list["in_set_max"])
+		input_info = null
+		input_flow_setting = ATMOS_DEFAULT_VOLUME_PUMP+500
+		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		. = 1
+	if(href_list["out_refresh_status"])
+		output_info = null
+		signal.data = list ("tag" = output_tag, "status" = 1)
+		. = 1
+
+	if(href_list["out_toggle_power"])
+		output_info = null
+		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
+		. = 1
+
+	if(href_list["out_set_pressure"])
+		output_info = null
+		pressure_setting = input("How much pressure would you like to output?", "Set Pressure", pressure_setting) as num|null
+		pressure_setting = between(0, pressure_setting, MAX_PUMP_PRESSURE)
+		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]")
+		. = 1
+
+	if(href_list["out_set_max"])
+		output_info = null
+		pressure_setting = MAX_PUMP_PRESSURE
+		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]")
+		. = 1
+
 	if(href_list["set_frequency"])
 		var/F = input("What frequency would you like to set this to?", "Adjust Frequency", frequency) as num|null
 		if(F)
@@ -325,38 +344,6 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 		return 1
 	if(!radio_connection)
 		return 0
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-	if(href_list["in_refresh_status"])
-		input_info = null
-		signal.data = list ("tag" = input_tag, "status" = 1)
-		. = 1
-
-	if(href_list["in_toggle_injector"])
-		input_info = null
-		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
-		. = 1
-
-	if(href_list["in_set_flowrate"])
-		input_info = null
-		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
-		. = 1
-
-	if(href_list["out_refresh_status"])
-		output_info = null
-		signal.data = list ("tag" = output_tag, "status" = 1)
-		. = 1
-
-	if(href_list["out_toggle_power"])
-		output_info = null
-		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
-		. = 1
-
-	if(href_list["out_set_pressure"])
-		output_info = null
-		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]")
-		. = 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
@@ -364,55 +351,49 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	spawn(5)
 		src.updateUsrDialog()
 
-/obj/machinery/computer/general_air_control/supermatter_core
+/obj/machinery/computer/general_air_control/large_tank_control/supermatter_core
 	icon = 'icons/obj/computer.dmi'
 
 	frequency = 1438
-	var/input_tag
-	var/output_tag
 
-	var/list/input_info
-	var/list/output_info
-
-	var/input_flow_setting = 700
-	var/pressure_setting = 100
 	circuit = /obj/item/weapon/circuitboard/air_management/supermatter_core
 
 
-/obj/machinery/computer/general_air_control/supermatter_core/return_text()
-	var/output = ..()
+/obj/machinery/computer/general_air_control/large_tank_control/supermatter_core/get_console_data()
+	var/output
+	. = list()
 	//if(signal.data)
 	//	input_info = signal.data // Attempting to fix intake control -- TLE
 
 	output += "<B>Core Cooling Control System</B><BR><BR>"
 	if(input_info)
 		var/power = (input_info["power"])
-		var/volume_rate = round(input_info["volume_rate"], 0.1)
-		output += "<B>Coolant Input</B>: [power?("Injecting"):("On Hold")] <A href='?src=\ref[src];in_refresh_status=1'>Refresh</A><BR>Flow Rate Limit: [volume_rate] L/s<BR>"
+		output += "<B>Coolant Input</B>: [power?("<font color = 'green'>Injecting</font>"):("<font color = 'red'><strong>On Hold</strong></font>")] <A href='?src=\ref[src];in_refresh_status=1'>Refresh</A><BR>Flow Rate Limit: [ATMOS_DEFAULT_VOLUME_PUMP+500] L/s<BR>"
 		output += "Command: <A href='?src=\ref[src];in_toggle_injector=1'>Toggle Power</A> <A href='?src=\ref[src];in_set_flowrate=1'>Set Flow Rate</A><BR>"
 
 	else
 		output += "<FONT color='red'>ERROR: Can not find input port</FONT> <A href='?src=\ref[src];in_refresh_status=1'>Search</A><BR>"
 
-	output += "Flow Rate Limit: <A href='?src=\ref[src];adj_input_flow_rate=-100'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-10'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-1'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-0.1'>-</A> [round(input_flow_setting, 0.1)] L/s <A href='?src=\ref[src];adj_input_flow_rate=0.1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=10'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=100'>+</A><BR>"
-
+	output += "Flow Rate: [round(input_flow_setting, 0.1)] L/s<BR>"
+	output += "Command: <A href='?src=\ref[src];in_toggle_injector=1'>Toggle Power</A> <A href='?src=\ref[src];in_set_flowrate=1'>Set Flow Rate</A><a href='?src=\ref[src].in_set_max=1'>Max Flow</a><BR>"
 	output += "<BR>"
 
 	if(output_info)
 		var/power = (output_info["power"])
-		var/pressure_limit = output_info["external"]
-		output += {"<B>Core Outpump</B>: [power?("Open"):("On Hold")] <A href='?src=\ref[src];out_refresh_status=1'>Refresh</A><BR>
-Min Core Pressure: [pressure_limit] kPa<BR>"}
+		output += "<B>Core Output</B>: [power?("<font color = 'green'>Open</font>"):("<font color = 'red'><strong>On Hold</strong></font>")] <A href='?src=\ref[src];out_refresh_status=1'>Refresh</A><BR>Max Output Pressure: [MAX_PUMP_PRESSURE] kPa<BR>"
 		output += "Command: <A href='?src=\ref[src];out_toggle_power=1'>Toggle Power</A> <A href='?src=\ref[src];out_set_pressure=1'>Set Pressure</A><BR>"
 
 	else
 		output += "<FONT color='red'>ERROR: Can not find output port</FONT> <A href='?src=\ref[src];out_refresh_status=1'>Search</A><BR>"
 
-	output += "Min Core Pressure Set: <A href='?src=\ref[src];adj_pressure=-100'>-</A> <A href='?src=\ref[src];adj_pressure=-50'>-</A> <A href='?src=\ref[src];adj_pressure=-10'>-</A> <A href='?src=\ref[src];adj_pressure=-1'>-</A> [pressure_setting] kPa <A href='?src=\ref[src];adj_pressure=1'>+</A> <A href='?src=\ref[src];adj_pressure=10'>+</A> <A href='?src=\ref[src];adj_pressure=50'>+</A> <A href='?src=\ref[src];adj_pressure=100'>+</A><BR>"
+	output += "Min Core Pressure Set: [pressure_setting] kPa<BR>"
+	output += "Command: <A href='?src=\ref[src];out_toggle_power=1'>Toggle Power</A> <A href='?src=\ref[src];out_set_pressure=1'>Set Pressure</A><a href='?src=\ref[src].out_set_max=1'>Max Pressure</a><BR>"
+	. = output
+	. = JOINTEXT(.)
 
 	return output
 
-/obj/machinery/computer/general_air_control/supermatter_core/receive_signal(datum/signal/signal)
+/obj/machinery/computer/general_air_control/large_tank_control/supermatter_core/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption) return
 
 	var/id_tag = signal.data["tag"]
@@ -424,7 +405,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 	else
 		..(signal)
 
-/obj/machinery/computer/general_air_control/supermatter_core/Topic(href, href_list)
+/*/obj/machinery/computer/general_air_control/supermatter_core/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -482,7 +463,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 	spawn(5)
 		src.updateUsrDialog()
-
+*/
 /obj/machinery/computer/general_air_control/fuel_injection
 	icon = 'icons/obj/computer.dmi'
 	icon_screen = "alert:0"
@@ -525,7 +506,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 	..()
 
-/obj/machinery/computer/general_air_control/fuel_injection/return_text()
+/*/obj/machinery/computer/general_air_control/fuel_injection/return_text()
 	var/output = ..()
 
 	output += "<B>Fuel Injection System</B><BR>"
@@ -545,7 +526,7 @@ Rate: [volume_rate] L/sec<BR>"}
 	else
 		output += "<FONT color='red'>ERROR: Can not find device</FONT> <A href='?src=\ref[src];refresh_status=1'>Search</A><BR>"
 
-	return output
+	return output*/
 
 /obj/machinery/computer/general_air_control/fuel_injection/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption) return
