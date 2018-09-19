@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Adds vinegar reagent. Can be made from ethanol or apply juice by applying universal enzyme as catalyst."
-  - bugfix: "Adds mayo. Can be made from egg yolk and vinegar or lemon juice."
-  - tweak: "Adds alternative soy sauce recipe. Now it can be made with 5u Soy Milk + 5u Vinegar"
