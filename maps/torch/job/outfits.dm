@@ -545,6 +545,24 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
+	
+//Crew Research Oufits
+
+/decl/hierarchy/outfit/job/torch/crew/research
+	name = OUTFIT_JOB_NAME("Xenolife Technician")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/research
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
+	pda_type = /obj/item/modular_computer/pda/science
+	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+
+/decl/hierarchy/outfit/job/torch/crew/research/commissioned
+	name = OUTFIT_JOB_NAME("Xenolife Technician - Officer")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
+	pda_type = /obj/item/modular_computer/pda/science
+	l_ear = /obj/item/device/radio/headset/torchnanotrasen
 
 //Passenger Outfits
 
@@ -625,6 +643,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research
+
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor
 	name = OUTFIT_JOB_NAME("Custodian - Torch")

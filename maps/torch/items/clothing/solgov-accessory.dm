@@ -451,6 +451,14 @@ department tags
 	desc = "Insignia denoting assignment to the exploration department. These fit Army uniforms."
 	on_rolled = list("down" = "none")
 
+/obj/item/clothing/accessory/solgov/department/research
+	name = "research insignia"
+	desc = "Insignia denoting assignment to the research department. These fit Expeditionary Corps uniforms."
+	color = "#f8f8ff"
+
+/obj/item/clothing/accessory/solgov/department/research/service
+	icon_state = "dept_exped_service"
+
 /*********
 ranks - ec
 *********/

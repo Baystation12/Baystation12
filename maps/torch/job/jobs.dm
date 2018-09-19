@@ -24,7 +24,7 @@
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor, /datum/job/mining,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
-						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/xenolife_technician,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
 						/datum/job/merchant, /datum/job/stowaway
@@ -1502,6 +1502,42 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
+
+
+/datum/job/xenolife_technician
+	title = "Xenolife Technician"
+	department = "Science"
+	department_flag = SCI
+	
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Research Director"
+	selection_color = "#633d63"
+	economic_power = 7
+	ideal_character_age = 35
+	minimal_player_age = 0
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_COMPUTER    = SKILL_BASIC,
+	                    SKILL_SCIENCE     = SKILL_ADEPT,
+						SKILL_ANATOMY     = SKILL_BASIC,
+						SKILL_BOTANY     = SKILL_BASIC)
+
+	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_DEVICES     = SKILL_MAX,
+	                    SKILL_SCIENCE     = SKILL_MAX)
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/research/commissioned
+	)
+
+	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm, access_xenobiology, access_guppy_helm,
+						access_expedition_shuttle, access_guppy, access_hangar,  access_solgov_crew, access_emergency_storage)
+	minimal_access = list()
+	skill_points = 16
 
 
 /datum/job/assistant
