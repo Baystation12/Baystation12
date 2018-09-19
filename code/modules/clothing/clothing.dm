@@ -38,7 +38,7 @@
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
 		if(blood_DNA && user_human.species.blood_mask)
-			var/image/bloodsies	= overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
+			var/image/bloodsies = overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
 			ret.overlays	+= bloodsies
 
 	if(accessories.len)
@@ -375,6 +375,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
 
+	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
 	var/light_applied
 	var/brightness_on
@@ -386,20 +387,28 @@ BLIND     // can't see anything
 		)
 	blood_overlay_type = "helmetblood"
 
+/obj/item/clothing/head/equipped(var/mob/user, var/slot)
+	light_overlay_image = null
+	..(user, slot)
+
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	ret.overlays.Cut()
+	if(light_overlay_image)
+		ret.overlays -= light_overlay_image
 	if(on && slot == slot_head_str)
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/user_human = user_mob
-			if(sprite_sheets)
-				var/use_icon = sprite_sheets[user_human.species.get_bodytype(user_human)]
+		if(!light_overlay_image)
+			if(ishuman(user_mob))
+				var/mob/living/carbon/human/user_human = user_mob
+				var/use_icon
+				if(sprite_sheets)
+					use_icon = sprite_sheets[user_human.species.get_bodytype(user_human)]
 				if(use_icon)
-					ret.overlays |= user_human.species.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
-					return ret
-			ret.overlays |= user_human.species.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
-		else
-			ret.overlays |= overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
+					light_overlay_image = user_human.species.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
+				else
+					light_overlay_image = user_human.species.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
+			else
+				light_overlay_image = overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
+		ret.overlays |= light_overlay_image
 	return ret
 
 /obj/item/clothing/head/attack_self(mob/user)
