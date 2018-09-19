@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Added ANFO, a fertilizer+fuel explosive. Mix any of fertilizers (EZ-nutriment, Left 4 Zed or Robust Harvest) with welder fuel to make it. Add aluminium for more oomph if you can get it."
-  - rscadd: "To actually make it boom, you need ANOTHER explosion first. A weak explosion will pretty reliably activate <60u, strong <120u, devastating for more. If it wasn't strong enough, it can still trigger part of reagent."
-  - rscadd: "Due to related changes, any container holding welder fuel can now explode if caught in an explosion, though don't expect much oomph."

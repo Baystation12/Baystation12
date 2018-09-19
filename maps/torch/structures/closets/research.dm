@@ -180,3 +180,34 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
+
+/obj/structure/closet/secure_closet/xenolife_technician
+	name = "xenolife technician's locker"
+	req_one_access = list(access_research)
+	icon_state = "exp1"
+	icon_closed = "exp"
+	icon_locked = "exp1"
+	icon_opened = "expopen"
+	icon_off = "expoff"
+
+/obj/structure/closet/secure_closet/xenolife_technician/WillContain()
+	return list(
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/device/radio/headset/torchnanotrasen,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/weapon/tank/emergency/oxygen/engi,
+		/obj/item/weapon/clipboard,
+		/obj/item/weapon/folder,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape/random = 3,
+		/obj/item/device/camera,
+		/obj/item/device/analyzer,
+		/obj/item/taperoll/research,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/clothing/glasses/science,
+		/obj/item/weapon/storage/belt/general,
+		/obj/item/device/slime_scanner,
+		/obj/item/device/analyzer/plant_analyzer,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/, /obj/item/weapon/storage/backpack/satchel/grey)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/, 50)
+	)

@@ -93,6 +93,9 @@
 /obj/item/clothing/under/solgov/utility/expeditionary/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
 
+/obj/item/clothing/under/solgov/utility/expeditionary/research
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research)
+
 /obj/item/clothing/under/solgov/utility/expeditionary/officer
 	name = "expeditionary officer's uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim."
@@ -119,6 +122,9 @@
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/research
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research)
 
 /obj/item/clothing/under/solgov/utility/fleet
 	name = "fleet coveralls"
