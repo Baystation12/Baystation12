@@ -71,7 +71,7 @@
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
-		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation()
+		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(computer.z)
 		C.add_client(src)
 		C.operator = src
 		channel = C
@@ -161,7 +161,13 @@
 			channel.password = newpassword
 
 /datum/computer_file/program/chatclient/process_tick()
+
 	..()
+
+	if(channel && !(channel.source_z in GetConnectedZlevels(computer.z)))
+		channel.remove_client(src)
+		channel = null
+
 	if(program_state != PROGRAM_STATE_KILLED)
 		ui_header = "ntnrc_idle.gif"
 		if(channel)
@@ -170,6 +176,7 @@
 		else
 			last_message = null
 		return 1
+
 	if(channel && channel.messages && channel.messages.len)
 		ui_header = last_message == channel.messages[channel.messages.len - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
 	else
@@ -216,8 +223,9 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
+		var/list/connected_zs = GetConnectedZlevels(C.computer.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
-			if(conv && conv.title)
+			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(
 					"chan" = conv.title,
 					"id" = conv.id
