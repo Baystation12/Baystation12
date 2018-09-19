@@ -12,14 +12,14 @@
 /datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,\
 /datum/job/IGUARD,/datum/job/Asteroidinnie,/datum/job/Asteroidinnieleader,\
 /datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,\
-/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
-	allowed_spawns = list("UNSC Frigate","UNSC Bertels ODST Spawn","UNSC Bertels ODST Officer Spawn","Colony Arrival Shuttle","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Emsville Spawn",,"Emsville Spawn Marshall","Listening Post Spawn","Listening Post Commander Spawn","Mining Asteroid Spawn",)
+/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major)
+	allowed_spawns = list("UNSC Frigate","UNSC Bertels ODST Spawn","UNSC Bertels ODST Officer Spawn","Colony Arrival Shuttle","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Sangheili Corvette Spawn","Kig-Yar Corvette Spawn","Unggoy Corvette Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Emsville Spawn",,"Emsville Spawn Marshall","Listening Post Spawn","Listening Post Commander Spawn","Mining Asteroid Spawn",)
 	base_turf_by_z = list("6" = /turf/simulated/floor/planet/dirt)
 
 
-	species_to_job_whitelist = list(/datum/species/kig_yar = list(/datum/job/covenant/kigyarpirate,/datum/job/covenant/kigyarpirate/captain),/datum/species/unggoy = list(/datum/job/covenant/unggoy_deacon))
+	species_to_job_whitelist = list(/datum/species/kig_yar = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain),/datum/species/unggoy = list(/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major))
 
-	species_to_job_blacklist = list(/datum/species/human = list(/datum/job/covenant/kigyarpirate,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/unggoy_deacon))
+	species_to_job_blacklist = list(/datum/species/human = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major))
 
 
 
