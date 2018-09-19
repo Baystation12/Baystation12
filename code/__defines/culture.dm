@@ -1,15 +1,27 @@
 #define TAG_CULTURE   "culture"
+#define TAG_EDUCATION "education"
 #define TAG_HOMEWORLD "home_system"
 #define TAG_FACTION   "faction"
 #define TAG_RELIGION  "religion"
+
 #define ALL_CULTURAL_TAGS list( \
-	TAG_CULTURE = "Culture", \
-	TAG_HOMEWORLD = "Homeworld", \
-	TAG_FACTION = "Faction", \
-	TAG_RELIGION = "Beliefs" \
+	TAG_CULTURE =   "Culture", \
+	TAG_EDUCATION = "Education", \
+	TAG_HOMEWORLD = "Residence", \
+	TAG_FACTION =   "Faction", \
+	TAG_RELIGION =  "Beliefs" \
 	)
 
 // Cultural IDs.
+#define EDUCATION_NONE         "None"
+#define EDUCATION_DROPOUT      "Dropout"
+#define EDUCATION_HIGH_SCHOOL  "High School"
+#define EDUCATION_TRADE_SCHOOL "Trade School"
+#define EDUCATION_UNDERGRAD    "Bachelor's Degree"
+#define EDUCATION_MASTERS      "Master's Degree"
+#define EDUCATION_DOCTORATE    "Doctorate"
+#define EDUCATION_MEDSCHOOL    "Medical Degree"
+
 #define FACTION_SOL_CENTRAL    "Sol Central Government"
 #define FACTION_TERRAN_CONFED  "Terran Colonial Confederation"
 #define FACTION_NANOTRASEN     "NanoTrasen"
@@ -152,3 +164,13 @@
 #define CULTURE_XENOPHAGE_S    "Xenophage Sentinel"
 #define CULTURE_XENOPHAGE_Q    "Xenophage Queen"
 #define FACTION_XENOPHAGE      "Xenophage Hive"
+
+// Other culture values.
+#define EDUCATION_TIER_NONE      0
+#define EDUCATION_TIER_DROPOUT   1
+#define EDUCATION_TIER_BASIC     2
+#define EDUCATION_TIER_TRADE     3
+#define EDUCATION_TIER_BACHELOR  4
+#define EDUCATION_TIER_MASTERS   5
+#define EDUCATION_TIER_DOCTORATE 6
+#define EDUCATION_TIER_MEDSCHOOL 7

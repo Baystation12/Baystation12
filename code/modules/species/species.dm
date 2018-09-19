@@ -237,7 +237,8 @@
 		TAG_CULTURE =   list(CULTURE_OTHER),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
 		TAG_FACTION =   list(FACTION_OTHER),
-		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM)
+		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM),
+		TAG_EDUCATION = list(EDUCATION_NONE)
 	)
 	var/list/force_cultural_info =                list()
 	var/list/default_cultural_info =              list()
@@ -755,15 +756,3 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	return
-
-/datum/species/proc/is_available_for_join()
-	if(!(spawn_flags & SPECIES_CAN_JOIN))
-		return FALSE
-	else if(!isnull(max_players))
-		var/player_count = 0
-		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
-			if(H.client && H.key && H.species == src)
-				player_count++
-				if(player_count >= max_players)
-					return FALSE
-	return TRUE
