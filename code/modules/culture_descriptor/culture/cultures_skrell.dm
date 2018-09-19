@@ -2,7 +2,7 @@
 	name = CULTURE_SKRELL_QERR
 	language = LANGUAGE_SKRELLIAN
 	name_language = LANGUAGE_SKRELLIAN
-	description = " Considered as the leaders of Skrellkind, the Qerr-Katish are the face and soul of skrellian society. \
+	description = "Considered as the leaders of Skrellkind, the Qerr-Katish are the face and soul of skrellian society. \
 		Managers, diplomats, lawyers, they are notably the only caste allowed to fulfil the role of Qerr-Skria,\
 		and the only one forbidden from being appointed to the Xaq Moglar. As the representatives of the Skrell, \
 		the Qerr-Katish are highly social beings, sophisticated, cultured and very organised. As defenders of their society’s \

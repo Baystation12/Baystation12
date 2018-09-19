@@ -1476,6 +1476,8 @@
 #include "code\modules\culture_descriptor\culture\cultures_skrell.dm"
 #include "code\modules\culture_descriptor\culture\cultures_unathi.dm"
 #include "code\modules\culture_descriptor\culture\cultures_vox.dm"
+#include "code\modules\culture_descriptor\education\_education.dm"
+#include "code\modules\culture_descriptor\education\education_academic.dm"
 #include "code\modules\culture_descriptor\faction\_faction.dm"
 #include "code\modules\culture_descriptor\faction\factions.dm"
 #include "code\modules\culture_descriptor\faction\factions_adherent.dm"

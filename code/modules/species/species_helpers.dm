@@ -39,3 +39,26 @@ var/list/stored_shock_by_ref = list()
 
 /datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
 	return
+
+/datum/species/proc/is_available_for_join()
+	if(!(spawn_flags & SPECIES_CAN_JOIN))
+		return FALSE
+	else if(!isnull(max_players))
+		var/player_count = 0
+		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
+			if(H.client && H.key && H.species == src)
+				player_count++
+				if(player_count >= max_players)
+					return FALSE
+	return TRUE
+
+/datum/species/proc/check_education(var/datum/job/job, var/datum/preferences/prefs)
+	. = TRUE
+	if(istype(job) && istype(prefs) && job.required_education > EDUCATION_TIER_NONE)
+		var/has_sufficient_education = FALSE
+		for(var/culturetag in prefs.cultural_info)
+			var/decl/cultural_info/culture = SSculture.get_culture(prefs.cultural_info[culturetag])
+			if(culture.get_education_tier() >= job.required_education)
+				has_sufficient_education = TRUE
+				break
+		. = has_sufficient_education

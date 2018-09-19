@@ -195,8 +195,16 @@ var/const/NO_EMAG_ACT = -50
 
 /mob/proc/set_id_info(var/obj/item/weapon/card/id/id_card)
 	id_card.age = 0
-	id_card.registered_name		= real_name
-	id_card.sex 				= capitalize(gender)
+
+	var/formal_name = real_name
+	if(client && client.prefs)
+		for(var/culturetag in client.prefs.cultural_info)
+			var/decl/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
+			if(culture)
+				formal_name = culture.format_formal_name(formal_name)
+	id_card.registered_name = formal_name
+
+	id_card.sex = capitalize(get_sex())
 	id_card.set_id_photo(src)
 
 	if(dna)
@@ -207,10 +215,8 @@ var/const/NO_EMAG_ACT = -50
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()
 	id_card.age = age
-
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 		id_card.military_branch = char_branch
-
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		id_card.military_rank = char_rank
 

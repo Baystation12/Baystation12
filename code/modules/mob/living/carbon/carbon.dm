@@ -486,3 +486,6 @@
 
 /mob/living/carbon/has_chem_effect(chem, threshold)
 	return (chem_effects[chem] >= threshold)
+
+/mob/living/carbon/get_sex()
+	return species.get_sex(src)

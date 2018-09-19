@@ -52,25 +52,27 @@
 /decl/cultural_info/proc/sanitize_name(var/new_name)
 	return sanitizeName(new_name)
 
+#define COLLAPSED_CULTURE_BLURB_LEN 48
 /decl/cultural_info/proc/get_description(var/header, var/append, var/verbose = TRUE)
 	var/list/dat = list()
 	dat += "<table padding='8px'><tr>"
-	dat += "<td width='210px'>"
-	dat += "[header ? header : "<b>[desc_type]:</b> [name]"]<br>"
-	dat += "<small>"
-	dat += "[jointext(get_text_details(), "<br>")]"
-	dat += "</small></td>"
-	dat += "<td width>"
-	if(verbose || length(get_text_body()) <= MAX_DESC_LEN)
+	dat += "<td width='260px'>"
+	dat += "[header ? header : "<b>[desc_type]:</b>[name]"]<br>"
+	if(verbose)
+		dat += "<small>"
+		dat += "[jointext(get_text_details(), "<br>")]"
+		dat += "</small>"
+	dat += "</td><td width>"
+	if(verbose || length(get_text_body()) <= COLLAPSED_CULTURE_BLURB_LEN)
 		dat += "[get_text_body()]"
 	else
-		dat += "[copytext(get_text_body(), 1, MAX_DESC_LEN)] \[...\]"
-	if(append)
-		dat += "<br>[append]"
+		dat += "[copytext(get_text_body(), 1, COLLAPSED_CULTURE_BLURB_LEN)] \[...\]"
 	dat += "</td>"
-	dat += "</tr>"
-	dat += "</table><hr>"
+	if(append)
+		dat += "<td width = '100px'>[append]</td>"
+	dat += "</tr></table><hr>"
 	return jointext(dat, null)
+#undef COLLAPSED_CULTURE_BLURB_LEN
 
 /decl/cultural_info/proc/get_text_body()
 	return description
@@ -91,3 +93,12 @@
 	if(default_language)          . |= default_language
 	if(name_language)             . |= name_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
+
+/decl/cultural_info/proc/format_formal_name(var/character_name)
+	return character_name
+
+/decl/cultural_info/proc/get_education_tier()
+	return EDUCATION_TIER_NONE
+
+/decl/cultural_info/proc/get_qualifications()
+	return

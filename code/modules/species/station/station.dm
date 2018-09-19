@@ -192,6 +192,9 @@
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 
+/datum/species/skrell/get_sex(var/mob/living/carbon/H)
+	return descriptors["headtail length"] == 1 ? MALE : FEMALE
+
 /datum/species/skrell/water_act(var/mob/living/carbon/human/H, var/depth)
 	..()
 	if(depth >= 40)
