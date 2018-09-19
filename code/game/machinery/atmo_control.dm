@@ -21,15 +21,6 @@
 
 	var/on = 1
 	var/output = 3
-	//Flags:
-	// 1 for pressure
-	// 2 for temperature
-	// Output >= 4 includes gas composition
-	// 4 for oxygen concentration
-	// 8 for phoron concentration
-	// 16 for nitrogen concentration
-	// 32 for carbon dioxide concentration
-	// 64 for hydrogen concentration
 
 	var/datum/radio_frequency/radio_connection
 
@@ -91,7 +82,7 @@ obj/machinery/air_sensor/Destroy()
 /obj/machinery/air_sensor/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(isMultitool(O))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the sensor.", src.name, id_tag), MAX_NAME_LEN)
-		if(user.incapacitated() && !user.Adjacent(src))
+		if(!CanPhysicallyInteract(user))
 			return
 		if (user.get_active_hand() != O)
 			return
@@ -101,15 +92,13 @@ obj/machinery/air_sensor/Destroy()
 		if (t)
 			src.id_tag = t
 			to_chat(user, "<span class='notice'>The new ID of the sensor is [id_tag]</span>")
-		return
-	if(isWrench(O))
+	else if(isWrench(O))
 		var/obj/item/air_sensor/sensor = new /obj/item/air_sensor(src.loc)
 		sensor.frequency = frequency
 		sensor.output = output
 		sensor.id_tag = id_tag
 		qdel(src)
-		return
-	if(isScrewdriver(O))
+	else if(isScrewdriver(O))
 		var/F = input("What frequency would you like to set this to?", "Adjust Frequency", frequency) as num|null
 		if(user.incapacitated() && !user.Adjacent(src))
 			return
@@ -121,7 +110,6 @@ obj/machinery/air_sensor/Destroy()
 			frequency = F
 			set_frequency(F)
 			to_chat(user, "<span class='notice'>The frequency of the sensor is now [frequency]</span>")
-		return
 
 /obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'
@@ -405,65 +393,6 @@ obj/machinery/computer/general_air_control/Destroy()
 	else
 		..(signal)
 
-/*/obj/machinery/computer/general_air_control/supermatter_core/Topic(href, href_list)
-	if(..())
-		return 1
-
-	if(href_list["adj_pressure"])
-		var/change = text2num(href_list["adj_pressure"])
-		pressure_setting = between(0, pressure_setting + change, MAX_PUMP_PRESSURE)
-		spawn(1)
-			src.updateUsrDialog()
-		return 1
-
-	if(href_list["adj_input_flow_rate"])
-		var/change = text2num(href_list["adj_input_flow_rate"])
-		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
-		spawn(1)
-			src.updateUsrDialog()
-		return 1
-
-	if(!radio_connection)
-		return 0
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-	if(href_list["in_refresh_status"])
-		input_info = null
-		signal.data = list ("tag" = input_tag, "status" = 1)
-		. = 1
-
-	if(href_list["in_toggle_injector"])
-		input_info = null
-		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
-		. = 1
-
-	if(href_list["in_set_flowrate"])
-		input_info = null
-		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
-		. = 1
-
-	if(href_list["out_refresh_status"])
-		output_info = null
-		signal.data = list ("tag" = output_tag, "status" = 1)
-		. = 1
-
-	if(href_list["out_toggle_power"])
-		output_info = null
-		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
-		. = 1
-
-	if(href_list["out_set_pressure"])
-		output_info = null
-		signal.data = list ("tag" = output_tag, "set_external_pressure" = "[pressure_setting]", "checks" = 1)
-		. = 1
-
-	signal.data["sigtype"]="command"
-	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
-
-	spawn(5)
-		src.updateUsrDialog()
-*/
 /obj/machinery/computer/general_air_control/fuel_injection
 	icon = 'icons/obj/computer.dmi'
 	icon_screen = "alert:0"
@@ -505,28 +434,6 @@ obj/machinery/computer/general_air_control/Destroy()
 		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
 
 	..()
-
-/*/obj/machinery/computer/general_air_control/fuel_injection/return_text()
-	var/output = ..()
-
-	output += "<B>Fuel Injection System</B><BR>"
-	if(device_info)
-		var/power = device_info["power"]
-		var/volume_rate = device_info["volume_rate"]
-		output += {"Status: [power?("Injecting"):("On Hold")] <A href='?src=\ref[src];refresh_status=1'>Refresh</A><BR>
-Rate: [volume_rate] L/sec<BR>"}
-
-		if(automation)
-			output += "Automated Fuel Injection: <A href='?src=\ref[src];toggle_automation=1'>Engaged</A><BR>"
-			output += "Injector Controls Locked Out<BR>"
-		else
-			output += "Automated Fuel Injection: <A href='?src=\ref[src];toggle_automation=1'>Disengaged</A><BR>"
-			output += "Injector: <A href='?src=\ref[src];toggle_injector=1'>Toggle Power</A> <A href='?src=\ref[src];injection=1'>Inject (1 Cycle)</A><BR>"
-
-	else
-		output += "<FONT color='red'>ERROR: Can not find device</FONT> <A href='?src=\ref[src];refresh_status=1'>Search</A><BR>"
-
-	return output*/
 
 /obj/machinery/computer/general_air_control/fuel_injection/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption) return

@@ -34,7 +34,7 @@
 
 /datum/pipe/proc/AssemblePipeDesc()
 	if(!desc)								//Try to make up a nice description if we don't have one
-		desc = "\a [name]."
+		desc = "\A [name]."
 
 /datum/pipe/proc/Build(var/datum/pipe/D, var/PipeColor = PIPE_COLOR_GREY, var/loc)
 	if(D.build_path)
