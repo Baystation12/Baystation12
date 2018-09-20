@@ -105,7 +105,7 @@ var/global/datum/controller/occupations/job_master
 				unassigned -= player
 				job.current_positions++
 				if(job.track_players)
-					job.assigned_players.Add(player)
+					job.assigned_players.Add(player.mind)
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
@@ -624,6 +624,8 @@ var/global/datum/controller/occupations/job_master
 
 	if(!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
+	if(!istype(job_datum))
+		CRASH("Incorrect job typepassed to get_spawnpoint_for() proc for [C]! Recieved \'[job_datum]\' but expected /datum/job/")
 
 	var/rank = job_datum.title
 	var/mob/H = C.mob
