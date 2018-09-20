@@ -29,27 +29,25 @@
 	map_bounds = list(7,49,73,27)
 
 /obj/effect/overmap/ship/unsc_corvette
-	name = "UNSC Thorin"
-	desc = "A standard contruction-model corvette."
+	name = "URFS Thorn"
+	desc = "A standard contruction-model corvette. Seems to have taken some battle damage."
 
 	icon = 'maps/first_contact/corvette.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 
-	map_bounds = list(7,70,53,31)
+	map_bounds = list(2,76,76,26)
 
-//Overmap Weapon Console Defines//
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport
-	deck_gun_area = /area/om_ships/unscpatrol/portbattery
+/obj/effect/overmap/ship/CCV_deliverance
+	name = "CCV Deliverance"
+	desc = "An unarmed medical freighter with a safer, isolated design and a traditional white paintjob."
 
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvetteport
-	deck_gun_area = /area/om_ships/unscpatrol/portrockets
+	icon = 'maps/first_contact/deliverance.dmi'
+	icon_state = "ship"
+	fore_dir = WEST
 
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvettestarboard
-	deck_gun_area = /area/om_ships/unscpatrol/starboardrockets
+	map_bounds = list(9,52,70,25)
 
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/corvettestarboard
-	deck_gun_area = /area/om_ships/unscpatrol/starboardbattery
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
 	deck_gun_area = /area/om_ships/comet
@@ -57,31 +55,4 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/comet
 	deck_gun_area = /area/om_ships/comet/cometrockets
 
-//Misc Stuff//
-/obj/random_corvette_alarm_button
-	name = "Random Corvette Alarm Button"
 
-/obj/random_corvette_alarm_button/New()
-	var/obj/to_spawn = pick(list(\
-	/obj/machinery/button/toggle/alarm_button/corvette = 75,/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,\
-	/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,/obj/machinery/button/toggle/alarm_button/corvette/v4 = 5
-	))
-	new to_spawn (loc)
-
-/obj/random_corvette_alarm_button/Initialize()
-	return INITIALIZE_HINT_QDEL
-
-/obj/machinery/button/toggle/alarm_button/corvette
-	area_base = /area/om_ships/unscpatrol
-
-/obj/machinery/button/toggle/alarm_button/corvette/v2
-	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j1.ogg'
-	alarm_loop_time = 4.898 SECONDS //The amount of time it takes for the alarm sound to end. Used for restarting the sound.
-
-/obj/machinery/button/toggle/alarm_button/corvette/v3
-	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j2.ogg'
-	alarm_loop_time = 6.535 SECONDS
-
-/obj/machinery/button/toggle/alarm_button/corvette/v4
-	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j3.ogg'
-	alarm_loop_time = 15.267 SECONDS

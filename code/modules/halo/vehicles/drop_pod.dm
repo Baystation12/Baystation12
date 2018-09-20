@@ -20,11 +20,11 @@
 
 	var/launched = 0
 
-	var/drop_accuracy = 5 //The accuracy in tiles (+ or - from drop point)
+	var/drop_accuracy = 3 //The accuracy in tiles (+ or - from drop point)
 
 	var/launch_arm_time = 5 SECONDS
 
-	var/pod_range = 1 //Range of pod in overmap tiles
+	var/pod_range = 3 //Range of pod in overmap tiles
 
 /obj/vehicles/drop_pod/update_object_sprites()
 	overlays.Cut()
@@ -60,11 +60,13 @@
 		return
 	var/list/valid_points = list()
 	for(var/turf/t in view(drop_point,drop_accuracy))
-		if(istype(t,/turf/simulated/floor))
-			valid_points += t
-		if(istype(t,/turf/unsimulated/floor))
-			valid_points += t
+		if(istype(t,/turf/simulated/wall))
+			continue
+		if(istype(t,/turf/unsimulated/wall))
+			continue
+		valid_points += t
 	if(isnull(valid_points))
+		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
 		return
 	return pick(valid_points)
 
@@ -72,7 +74,7 @@
 	var/list/valid_points = list()
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		valid_points += l
-	if(isnull(valid_points))
+	if(isnull(valid_points) || valid_points.len == 0)
 		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
 		return
 	return pick(valid_points)
@@ -100,13 +102,13 @@
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
 		return
 
-	proc_launch_pod(usr,drop_turf)
+	proc_launch_pod(get_occupants_in_position("driver")[1],drop_turf)
 
 /obj/vehicles/drop_pod/proc/proc_launch_pod(var/mob/user,var/turf/drop_turf)
 	visible_message("<span class = 'danger'>[user] starts arming [src]'s launch mechanism.</span>")
 	if(!do_after(user, launch_arm_time, src)) return
 	visible_message("<span class = 'danger'>[user] arms [src]'s launch mechanism.</span>")
-	spawn(10) //For drama's sake.
+	spawn(5) //For drama's sake.
 		forceMove(drop_turf)
 		launched = 1
 		spawn(5) //Slight delay so player clients can update.
@@ -130,11 +132,15 @@
 		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
 		return
 
-	var/list/potential_om_targ
-	for(var/obj/effect/overmap/o in range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"])
+	var/list/potential_om_targ = list()
+	for(var/obj/effect/overmap/o in (range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"]))
 		potential_om_targ["[o.name]"] = o
+	if(isnull(potential_om_targ) || potential_om_targ.len == 0)
+		to_chat(usr,"<span class = 'notice'>No valid overmap targets in range.</span>")
+		return
 	var/om_user_choice = input("Select Target Object","Target Object Selection","Cancel") in potential_om_targ + list("Cancel")
 	if(om_user_choice == "Cancel")
+		to_chat(usr,"<span class = 'notice'>Launch target selection cancelled</span>")
 		return
 	var/obj/effect/overmap/om_targ = potential_om_targ[om_user_choice]
 
@@ -143,14 +149,17 @@
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
 		return
 
-	proc_launch_pod(usr,drop_turf)
+	proc_launch_pod(get_occupants_in_position("driver")[1],drop_turf)
 
 /obj/vehicles/drop_pod/overmap/get_drop_point(var/list/om_targ_zs)
 	var/list/valid_points = list()
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		if(l.z in om_targ_zs)
 			valid_points += l
-	return pick(valid_points)
+	if(isnull(valid_points) || valid_points.len == 0)
+		return null
+	else
+		return pick(valid_points)
 
 /datum/component_profile/drop_pod
 

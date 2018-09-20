@@ -88,6 +88,41 @@
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
 
+/obj/vehicles/air/overmap/pelican/urf
+	faction = "innie"
+
+	icon_state = "inni-base"
+	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
+	faction = "innie"
+	occupants = list(13,1)
+
+	comp_prof = /datum/component_profile/pelican/urf
+
+/obj/vehicles/air/pelican/innie/update_object_sprites()
+	. = ..()
+	overlays += image(icon,"innie_overlay")
+
+/obj/item/vehicle_component/health_manager/pelican/urf
+	resistances = list("brute"=25,"burn"=20,"emp"=35)
+
+/datum/component_profile/pelican/urf
+	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/innie)
+
+/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie
+	name = "40mm Chain-Gun"
+
+	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
+	icon_state = "chaingun_obj"
+	item_state = "chaingun_obj"
+
+	projectile_fired = /obj/item/projectile/bullet/a762_ap
+
+	fire_delay = 5.5 SECONDS
+
+	burst = 3
+
+
 /obj/vehicles/air/pelican/civ
 	desc = "A civilian pelican lacking in both weapons and armor."
 	faction = "police"

@@ -92,7 +92,7 @@
 "bN" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
 "bO" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
 "bP" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
-"bQ" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
+"bQ" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/asteroid_base/storage_eng)
 "bR" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
 "bS" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
 "bT" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/simulated/floor/plating,/area/asteroid_base/armoury_2)
@@ -137,17 +137,21 @@
 "cG" = (/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/storage_medbay)
 "cH" = (/obj/structure/grille,/obj/effect/decal/cleanable/dirt,/obj/structure/barricade,/turf/simulated/floor/plating,/area/asteroid_base/storage_medbay)
 "cI" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
-"cJ" = (/obj/structure/hangar_door,/turf/simulated/open,/area/asteroid_base/storage_medbay)
-"cK" = (/obj/effect/landmark/dropship_land_point{name = "Frozen Plains"},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
-"cL" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/storage_medbay)
-"cM" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/mac_gun)
-"cN" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/vault)
-"cO" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
-"cP" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/west_dorms)
-"cQ" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
-"cR" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
-"cS" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
-"cT" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
+"cJ" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/storage_medbay)
+"cK" = (/obj/structure/hangar_door,/turf/simulated/open,/area/asteroid_base/storage_medbay)
+"cL" = (/obj/effect/landmark/dropship_land_point{name = "Frozen Plains"},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
+"cM" = (/obj/effect/landmark/dropship_land_point/unsc,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
+"cN" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UNSC Land Point Alpha"},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
+"cO" = (/obj/effect/landmark/dropship_land_point/unsc{name = "UNSC Land Point Bravo"},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/storage_medbay)
+"cP" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/storage_medbay)
+"cQ" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/mac_gun)
+"cR" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/vault)
+"cS" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
+"cT" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/west_dorms)
+"cU" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
+"cV" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
+"cW" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
+"cX" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
 
 (1,1,1) = {"
 aaaaaaaaaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
@@ -183,21 +187,21 @@ ctctctctctctcvctctctctctctctctctctctctctcDcDcDctcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcx
 ctctctctctctcEctctctctctctctctctctcFcFcFcFcFcFctcGcxcGcGcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcBcxcxcx
 ctctctctctctcFcFcFctctctctctctcFcFcFcFcFcFcFcFcFcGcGcGcGcGcxcxcxcxcxcxcxcxcGcGcxcxcxcxcxcxcxcHcxcxcx
 ctctctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcxcxcxcxcxcxcGcGcGcGcxcxcxcxcGcGcGcGcxcx
-ctctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcx
-ctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcx
-ctctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcx
-ctctcFcFcFcFcFcFcFcFcFcFcFcFcIcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcx
-ctcFcFcFcFcIcFcFcFcFcFcFcFcFcFcFcFcFcFcFcIcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcxcx
-ctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcxcx
-ctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcxcx
-ctctctcFcFcFcFcFcFcKcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcGcx
-ctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcGcx
-ctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcGcx
-ctcFcFcFcFcFcFcFcFcFcFcFcFcFcIcFcFcFcFcFcIcFcFcFcGcGcJcJcJcJcJcJcJcGcGcGcGcGcJcJcJcJcJcJcJcGcGcGcGcx
-ctctcFcFcFcIcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcLcGcGcxcx
-ctctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcxcx
-cMctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcxcxcx
-cNcNctctcOcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFctcGcGcGcGcGcGcGcGcGcGcGcxcGcGcGcGcGcGcGcGcGcGcxcxcxcx
-cPctctctctcFcFcFcFcFcFctctcFcIcFcFctcFcFcFcFcFctcxcxcGcGcGcGcGcGcGcGcxcxcxcxcGcGcGcGcGcxcxcxcxcxcxcx
-cQcRcScTctctctctctctctctctctctctctctctctctctctctcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcx
+ctctcFcFcFcFcIcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcIcFcGcGcJcGcGcGcGcGcGcGcGcGcGcGcGcJcGcGcGcGcGcJcGcGcGcx
+ctcFcFcFcFcFcFcFcFcFcFcIcFcFcFcFcFcFcIcFcFcFcFcFcGcGcGcGcGcGcGcJcGcGcGcGcGcGcGcGcGcGcJcGcGcGcJcGcGcx
+ctctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcGcGcGcGcJcGcGcGcGcGcGcJcGcGcGcGcGcGcGcGcGcJcGcGcGcx
+ctctcFcFcFcFcFcFcFcIcFcFcFcFcIcFcFcFcFcFcFcFcFcFcJcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcJcGcGcGcGcGcGcGcx
+ctcFcFcFcFcIcFcFcFcFcFcIcFcFcFcFcFcFcFcFcIcFcFcFcGcGcKcKcKcKcKcKcKcGcGcGcGcGcKcKcKcKcKcKcKcGcGcGcxcx
+ctcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcIcFcFcFcFcFcIcFcGcGcKcKcKcKcKcKcKcGcGcGcJcGcKcKcKcKcKcKcKcGcGcGcxcx
+ctcFcFcFcFcFcFcIcFcFcFcFcFcIcFcFcFcFcFcFcFcFcFcFcJcGcKcKcKcKcKcKcKcGcJcGcGcGcKcKcKcKcKcKcKcGcGcGcxcx
+ctctctcFcIcFcFcFcFcLcFcFcFcFcFcFcFcFcIcFcFcIcFcFcGcGcKcKcKcKcKcKcKcGcGcGcGcGcKcKcKcKcKcKcKcGcGcGcGcx
+ctcFcFcFcFcFcFcFcFcFcFcMcFcFcFcFcFcFcFcFcFcFcFcIcGcGcKcKcKcKcKcKcKcGcGcGcGcGcKcKcKcKcKcKcKcGcGcGcGcx
+ctcFcFcFcFcFcFcIcFcFcIcFcFcFcFcFcIcFcFcFcFcFcFcFcGcGcKcKcKcKcKcKcKcGcGcJcGcGcKcKcKcKcKcKcKcGcGcGcGcx
+ctcFcFcFcFcFcNcFcFcFcFcFcFcFcIcFcFcFcFcFcIcFcFcFcGcJcKcKcKcKcKcKcKcGcGcGcGcOcKcKcKcKcKcKcKcGcGcGcGcx
+ctctcFcFcFcIcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcIcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcPcGcGcxcx
+ctctcFcIcFcFcFcFcFcIcFcFcFcFcFcFcFcIcFcFcIcFcFcFcGcGcGcGcGcJcGcGcJcGcGcGcGcGcGcJcGcGcGcGcGcGcGcGcxcx
+cQctcFcFcFcFcFcIcFcFcFcFcIcFcFcFcFcFcFcFcFcFcFcFcGcJcGcJcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcJcGcGcGcxcxcx
+cRcRctctcScFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcFcIcFctcGcGcGcGcGcGcGcJcGcGcGcxcGcGcGcGcGcJcGcGcGcGcxcxcxcx
+cTctctctctcFcFcFcFcFcFctctcFcIcFcFctcFcFcFcFcFctcxcxcGcGcGcGcGcGcGcGcxcxcxcxcGcGcGcGcGcxcxcxcxcxcxcx
+cUcVcWcXctctctctctctctctctctctctctctctctctctctctcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcx
 "}

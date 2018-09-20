@@ -120,7 +120,7 @@
 	icon_state = "combatharness_specops"
 	item_state = "combatharness_specops"
 
-	action_button_name = "Toggle Active Camoflage"
+	action_button_name = "Toggle Active Camouflage"
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/cloaking)
 
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops
@@ -130,6 +130,15 @@
 	item_state = "rebreather_specops"
 
 	rebreath_efficiency = 70
+
+/obj/item/clothing/shoes/grunt_boots
+	name = "Natural Armor"
+	desc = "The natural armor on your legs provides a small amount of protection against the elements."
+	icon = 'code/modules/halo/clothing/grunt_leg_armor.dmi'
+	icon_state = "naturalarmor"
+	item_state = " "
+
+	canremove = 0
 
 
 #undef GRUNT_GEAR_ICON

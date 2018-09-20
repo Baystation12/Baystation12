@@ -216,20 +216,22 @@
 "eh" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "ei" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "ej" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
-"ek" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"el" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"em" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"en" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"eo" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"ep" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"eq" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"er" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"es" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"et" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"eu" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"ev" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"ew" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"ex" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ek" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"el" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"em" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"en" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eo" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ep" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eq" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"er" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"es" = (/obj/machinery/telecomms/relay/ship_relay,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/east_dorms)
+"et" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eu" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ev" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ew" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ex" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ey" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ez" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -278,8 +280,8 @@ bJbJbJbJbJbJbJbMdwdgbOdgdxbMbJbJbJbJbJbJdidtdibJcacacacacbcccbcacacacacbdydzdAdB
 bJbJbJbJbJbJbJbMbMbMcUbMbMbMbJbJbJbJbJbJdidtdidicbcbcbcbcbcccbcacacacacbdHdIccdJdKdLdMdNdOdPcmcbcaca
 bJbJbJbJbJbJbJbJbMdQdRdSbMbJbJbJbJbJbJbJdidtdtdtcmcmcmcccccccbcacacacacbdTdUcmdVdWdFdXdYdWdZcccbcaca
 bJbJbJbJbJbJbJbJbMeaebdjbMbJbJbJbJbJbJbJdidididicbcbcbcbcbcbcbcacacacacbcmecedededeeefegehcceicbcaca
-bJbJbJbJbJbJbJbJbMdtejdtbMbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacbccccdBekelemeneoepeqdDcbcaca
-bJbJbJbJbJbJbJbJbMbMbMbMbMbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacbcmccereseseteuevewexewcbcaca
+bJbJbJbJbJbJbJbJbMdtejekbMbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacbccccdBelemeneoepeqerdDcbcaca
+bJbJbJbJbJbJbJbJbMbMbMbMbMbJbJesbJbJbJbJbJbJbJbJcacacacacacacacacacacacbcmcceteueuevewexeyezeycbcaca
 bJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacbcbcbcbcbcbcbcbcbcbcbcbcbcaca
 bJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacacacacacacacacacacacacacacaca
 "}

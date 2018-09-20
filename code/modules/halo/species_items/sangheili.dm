@@ -3,6 +3,7 @@ GLOBAL_LIST_INIT(first_names_sangheili, world.file2list('code/modules/halo/speci
 GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/species_items/last_sangheili.txt'))
 
 #define SANGHEILI_ARMOUR_ICON 'code/modules/halo/icons/species/Sangheili_Combat_Harness.dmi'
+#define SANGHEILI_BLEEDBLOCK_CHANCE 50
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
@@ -195,7 +196,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	item_state = "specops_chest"
 	totalshields = 175
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
-	action_button_name = "Toggle Active Camoflage"
+	action_button_name = "Toggle Active Camouflage"
 
 /obj/item/clothing/shoes/sangheili/specops
 	name = "Sanghelli Leg Armour (Spec-Ops)"
@@ -262,22 +263,25 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	organ_tag = "second heart"
 	icon_state = "heart-on"
 	min_broken_damage = 30
+	var/useheart = 0
 
 /obj/item/organ/heart_secondary/process()
 	if(is_broken())
 		return
 	var/obj/item/organ/internal/heart = owner.internal_organs_by_name["heart"]
 	if(heart && heart.is_broken())
-		var/useheart = world.time + 50
-		if(world.time >= useheart) //They still feel the effect.
-			damage = heart.damage;heart.damage = 0
+		if(useheart == 0)
+			useheart = world.time + 50
+		if((useheart != 0) && world.time >= useheart) //They still feel the effect.
+			damage = heart.damage
+			heart.damage = 0
+			useheart = 0
 		return
-	if(prob(5)) //The original implementation of adding blood now causes runtimes.
-		for(var/obj/item/organ/external/e in owner.bad_external_organs)
-			for(var/datum/wound/w in e.wounds)
-				w.damage -= rand(0.10)
-				if(!w.bandaged)
-					w.bandage()//Only helps agains brute wounds, burn isn't autobandaged by the secondary heart.
+	for(var/obj/item/organ/external/e in owner.bad_external_organs)
+		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
+			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
+		for(var/datum/wound/w in e.wounds)
+			w.damage -= rand(0,2)
 
 /obj/effect/armoursets/SangheiliMinorSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)

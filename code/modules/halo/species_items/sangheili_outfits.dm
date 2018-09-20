@@ -3,6 +3,7 @@
 
 	uniform = /obj/item/clothing/under/covenant/sangheili
 	l_ear = /obj/item/device/radio/headset/covenant
+	l_hand = /obj/item/weapon/melee/energy/elite_sword/dagger
 
 /decl/hierarchy/outfit/sangheili/minor
 	name = "Sangheili (Minor)"
@@ -64,7 +65,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/specops
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/projectile/type51carbine
-	belt = /obj/item/weapon/melee/energy/elite_sword
+	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/specops
 	shoes = /obj/item/clothing/shoes/sangheili/specops
 	head = /obj/item/clothing/head/helmet/sangheili/specops
@@ -77,7 +78,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/ranger
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/melee/energy/elite_sword
+	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ranger
 	shoes = /obj/item/clothing/shoes/sangheili/ranger
 	head = /obj/item/clothing/head/helmet/sangheili/ranger

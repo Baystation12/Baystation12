@@ -960,10 +960,10 @@
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
 	/obj/item/weapon/material/knife = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
-	/obj/item/weapon/reagent_containers/food/drinks/pitcher = 2,
-	/obj/item/weapon/reagent_containers/food/drinks/coffeecup = 8,
-	/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe = 2,
-	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/pitcher = 12,
+	/obj/item/weapon/reagent_containers/food/drinks/coffeecup = 18,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe = 12,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 18,
 	/obj/item/clothing/suit/chef/classic = 2,
 	/obj/item/weapon/storage/lunchbox = 3,
 	/obj/item/weapon/storage/lunchbox/heart = 3,
@@ -1110,7 +1110,7 @@
 	color = COLOR_DARK_GRAY
 	req_access = list(309)
 	products = list(
-	/obj/item/clothing/head/helmet/odst = 4,
+	/obj/item/clothing/head/helmet/odst/rifleman = 4,
 	/obj/item/clothing/suit/armor/special/odst = 4,
 	/obj/item/weapon/storage/backpack/odst/regular = 4,
 	/obj/item/clothing/head/helmet/odst/engineer = 4,
@@ -1155,7 +1155,7 @@
 	color = COLOR_DARK_GRAY
 	req_access = list(309)
 	products = list(
-	/obj/item/clothing/head/helmet/odst = 4,
+	/obj/item/clothing/head/helmet/odst/rifleman = 4,
 	/obj/item/clothing/suit/armor/special/odst = 4,
 	/obj/item/weapon/storage/backpack/odst/regular = 4,
 	/obj/item/clothing/head/helmet/odst/engineer = 4,

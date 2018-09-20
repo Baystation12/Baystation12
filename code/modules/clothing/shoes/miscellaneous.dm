@@ -41,7 +41,7 @@
 
 /obj/item/clothing/shoes/jungleboots
 	name = "tactical boots"
-	desc = "Lightweight synthetically reinforced titanium alloy combat boots. Certified to survive being dropped into hell first."
+	desc = "Lightweight synthetically reinforced titanium alloy combat boots. Certified to survive being dropped into hell feet first."
 	icon_state = "jungle"
 	force = 3
 	armor = list(melee = 30, bullet = 45, laser = 10, energy = 35, bomb = 20, bio = 10, rad = 0)
