@@ -174,3 +174,14 @@
 #define EDUCATION_TIER_MASTERS   5
 #define EDUCATION_TIER_DOCTORATE 6
 #define EDUCATION_TIER_MEDSCHOOL 7
+
+// Nabber grades.
+#define EDUCATION_NABBER_CMINUS "Grade C-"
+#define EDUCATION_NABBER_C      "Grade C"
+#define EDUCATION_NABBER_CPLUS  "Grade C+"
+#define EDUCATION_NABBER_BMINUS "Grade B-"
+#define EDUCATION_NABBER_B      "Grade B"
+#define EDUCATION_NABBER_BPLUS  "Grade B+"
+#define EDUCATION_NABBER_AMINUS "Grade A-"
+#define EDUCATION_NABBER_A      "Grade A"
+#define EDUCATION_NABBER_APLUS  "Grade A+"

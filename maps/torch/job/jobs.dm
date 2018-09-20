@@ -1653,3 +1653,20 @@
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
 	announced = FALSE
+
+// Some jobs for nabber grades defined here due to map-specific job datums.
+/decl/cultural_info/education/nabber/New()
+	LAZYADD(valid_jobs, /datum/job/scientist_assistant)
+	..()
+
+/decl/cultural_info/education/nabber/b/New()
+	LAZYADD(valid_jobs, /datum/job/cargo_contractor)
+	..()
+
+/decl/cultural_info/education/nabber/a/New()
+	LAZYADD(valid_jobs, /datum/job/engineer_contractor)
+	..()
+
+/decl/cultural_info/education/nabber/a/plus/New()
+	LAZYADD(valid_jobs, /datum/job/doctor_contractor)
+	..()
