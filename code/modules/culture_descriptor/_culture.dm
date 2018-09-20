@@ -94,8 +94,11 @@
 	if(name_language)             . |= name_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
 
-/decl/cultural_info/proc/format_formal_name(var/character_name)
-	return character_name
+/decl/cultural_info/proc/get_formal_name_suffix()
+	return
+
+/decl/cultural_info/proc/get_formal_name_prefix()
+	return
 
 /decl/cultural_info/proc/get_education_tier()
 	return EDUCATION_TIER_NONE

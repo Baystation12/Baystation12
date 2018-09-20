@@ -39,7 +39,10 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		if(H.client && H.client.prefs)
 			for(var/culturetag in H.client.prefs.cultural_info)
 				var/decl/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
-				formal_name = culture.format_formal_name(formal_name)
+				if(H.char_rank && H.char_rank.name_short)
+					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
+				else
+					formal_name = "[culture.get_formal_name_prefix()][formal_name][culture.get_formal_name_suffix()]"
 
 	// Generic record
 	set_name(formal_name)
