@@ -10,7 +10,7 @@
 	language = "Sangheili"
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 6
 	brute_mod = 1.1
@@ -31,6 +31,9 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/hollow_bones),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
+
+/datum/species/kig_yar/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
+	return
 
 /datum/species/kig_yar/skirmisher
 	name = "Tvaoan Kig-Yar"
