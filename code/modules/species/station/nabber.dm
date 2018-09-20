@@ -142,6 +142,17 @@
 		),
 		TAG_RELIGION =  list(
 			RELIGION_OTHER
+		),
+		TAG_EDUCATION = list(
+			EDUCATION_NABBER_CMINUS,
+			EDUCATION_NABBER_C,
+			EDUCATION_NABBER_CPLUS,
+			EDUCATION_NABBER_BMINUS,
+			EDUCATION_NABBER_B,
+			EDUCATION_NABBER_BPLUS,
+			EDUCATION_NABBER_AMINUS,
+			EDUCATION_NABBER_A,
+			EDUCATION_NABBER_APLUS
 		)
 	)
 
@@ -373,3 +384,7 @@
 		if(!hidden)
 			H.visible_message("<span class='warning'>[H] tenses as \he brings \his smaller arms in close to \his body. \His two massive spiked arms reach \
 			out. \He looks ready to attack.</span>")
+
+/datum/species/nabber/check_background(var/datum/job/job, var/datum/preferences/prefs)
+	var/decl/cultural_info/education/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_EDUCATION])
+	. = istype(grade) ? (job.type in grade.valid_jobs) : ..()

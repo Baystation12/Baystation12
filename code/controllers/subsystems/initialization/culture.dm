@@ -15,8 +15,9 @@ SUBSYSTEM_DEF(culture)
 
 	education_tiers_to_strings = list(
 		"[EDUCATION_TIER_NONE]"      = "no education",
-		"[EDUCATION_TIER_BASIC]"     = "some schooling",
-		"[EDUCATION_TIER_TRADE]"     = "a high school diploma",
+		"[EDUCATION_TIER_DROPOUT]"   = "some schooling",
+		"[EDUCATION_TIER_BASIC]"     = "a high school diploma",
+		"[EDUCATION_TIER_TRADE]"     = "a trade school certificate",
 		"[EDUCATION_TIER_BACHELOR]"  = "a bachelor's degree",
 		"[EDUCATION_TIER_MASTERS]"   = "a master's degree",
 		"[EDUCATION_TIER_DOCTORATE]" = "a doctorate",

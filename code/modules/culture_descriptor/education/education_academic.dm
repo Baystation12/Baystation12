@@ -12,25 +12,25 @@
 	name = EDUCATION_HIGH_SCHOOL
 	description = "You completed high school and likely have good literacy and numeracy, as well as a good grasp of a number of wider subjects like society, computing or higher mathematics."
 	education_tier = EDUCATION_TIER_BASIC
-	qualifications = list("High school diploma")
+	qualifications = list("High school diploma.")
 
 /decl/cultural_info/education/trade
 	name = EDUCATION_TRADE_SCHOOL
 	description = "You attended vocational training in a technical or trade school. You likely have highly specialized practical and theoretical knowledge of a hands-on field like engineering, cooking or network administration."
 	education_tier = EDUCATION_TIER_TRADE
-	qualifications = list("Trade school certificate")
+	qualifications = list("Trade school certificate.")
 
 /decl/cultural_info/education/undergrad
 	name = EDUCATION_UNDERGRAD
 	description = "You have attained a bachelor's degree in a field of your choice. You likely have excellent theoretical knowledge of an academic field like computer science, physics or psychology."
 	education_tier = EDUCATION_TIER_BACHELOR
-	qualifications = list("Bachelor's degree")
+	qualifications = list("Bachelor's degree.")
 
 /decl/cultural_info/education/masters
 	name = EDUCATION_MASTERS
 	description = "You have attained a master's degree in a field of your choice. This is a step up from a bachelor's degree, requiring a thorough understanding of your field and a solid work ethic, and represents a longer period spent studying."
 	education_tier = EDUCATION_TIER_MASTERS
-	qualifications = list("Master's degree")
+	qualifications = list("Master's degree.")
 
 /decl/cultural_info/education/doctorate
 	name = EDUCATION_DOCTORATE
@@ -38,7 +38,7 @@
 	education_tier = EDUCATION_TIER_DOCTORATE
 	education_prefix = "Dr. "
 	education_suffix = ", PhD"
-	qualifications = list("Doctorate")
+	qualifications = list("Doctorate.")
 
 /decl/cultural_info/education/medschool
 	name = EDUCATION_MEDSCHOOL
@@ -46,4 +46,4 @@
 	education_tier = EDUCATION_TIER_MEDSCHOOL
 	education_prefix = "Dr. "
 	education_suffix = ", MD"
-	qualifications = list("Medical degree")
+	qualifications = list("Medical degree.")

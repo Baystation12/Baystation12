@@ -52,7 +52,7 @@ var/list/stored_shock_by_ref = list()
 					return FALSE
 	return TRUE
 
-/datum/species/proc/check_education(var/datum/job/job, var/datum/preferences/prefs)
+/datum/species/proc/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	. = TRUE
 	if(istype(job) && istype(prefs) && job.required_education > EDUCATION_TIER_NONE)
 		var/has_sufficient_education = FALSE

@@ -62,21 +62,20 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
 
 	// Employment record
-	var/employment_record
+	var/employment_record = "No record supplied"
 	if(H)
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			employment_record = html_decode(H.gen_record)
 		if(H.client && H.client.prefs)
 			var/list/qualifications
 			for(var/culturetag in H.client.prefs.cultural_info)
-				var/decl/cultural_info/culture = SSculture.get_culture(culturetag)
+				var/decl/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
 				var/extra_note = culture.get_qualifications()
 				if(extra_note)
 					LAZYADD(qualifications, extra_note)
 			if(LAZYLEN(qualifications))
-				employment_record = "[employment_record ? "[employment_record]<br>" : ""]<b>Additional Qualifications</b><br>[jointext(qualifications, "<br>")]"
-
-	set_emplRecord(employment_record ? employment_record : "No record supplied")
+				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
+	set_emplRecord(employment_record)
 
 	// Misc cultural info.
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
