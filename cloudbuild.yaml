@@ -1,6 +1,0 @@
-steps:
-- name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/Baystation12/custom-items']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--build-arg', 'BUILD_ARGS="-Icustom-items/inc.dm"', '-t', 'gcr.io/$PROJECT_ID/bs12:latest', '.']
-images: ['gcr.io/$PROJECT_ID/bs12:latest']
