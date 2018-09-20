@@ -14,7 +14,7 @@
 					/obj/item/weapon/grenade/chem_grenade/cleaner = 3,
 					/obj/structure/mopbucket)
 	cost = 20
-	containertype = /obj/structure/closet/crate/large
+	containertype = /obj/structure/closet/crate/janitoral
 	containername = "\improper Janitorial supplies"
 
 /decl/hierarchy/supply_pack/custodial/mousetrap
@@ -40,7 +40,7 @@
 					/obj/item/weapon/reagent_containers/spray/cleaner = 2,
 					/obj/item/weapon/soap)
 	cost = 10
-	containertype = /obj/structure/closet/crate/large
+	containertype = /obj/structure/closet/crate/janitoral
 	containername = "\improper Cleaning supplies"
 
 /decl/hierarchy/supply_pack/custodial/bodybag
@@ -56,5 +56,5 @@
 					/obj/item/clothing/mask/gas,
 					/obj/item/weapon/tank/oxygen)
 	cost = 30
-	containertype = /obj/structure/closet/crate/secure
+	containertype = /obj/structure/closet/crate/secure/janitoral
 	containername = "\improper Janitor biohazard equipment"
