@@ -9,7 +9,7 @@
 	icon_template = 'code/modules/halo/icons/species/r_Augmented_Human_template.dmi'
 	flags = NO_MINOR_CUT
 	total_health = 250 //Same base health as sangheili
-	spawn_flags = SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	pain_mod = 0.75 //But they also feel pain a bit more.
 	item_icon_offsets = list(-1,3)
