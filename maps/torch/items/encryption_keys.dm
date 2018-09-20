@@ -29,7 +29,7 @@
 	channels = list("Engineering" = 1, "Medical" = 1)
 
 /obj/item/device/encryptionkey/headset_deckofficer
-	name = "deck officer's encryption key"
+	name = "deck chief's encryption key"
 	icon_state = "qm_cypherkey"
 	channels = list("Supply" = 1, "Command" = 1)
 

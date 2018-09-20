@@ -1177,7 +1177,7 @@
 	required_education = EDUCATION_TIER_BASIC
 
 /datum/job/qm
-	title = "Deck Officer"
+	title = "Deck Chief"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 1
@@ -1224,7 +1224,7 @@
 	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Deck Officer and Executive Officer"
+	supervisors = "the Deck Chief and Executive Officer"
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	allowed_branches = list(
@@ -1259,7 +1259,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Deck Officer, the Corporate Liaison and Supply Personnel"
+	supervisors = "the Deck Chief, the Corporate Liaison and Supply Personnel"
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
@@ -1284,7 +1284,7 @@
 	department_flag = SUP
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Deck Officer, the Corporate Liaison and the Executive Officer"
+	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
 	selection_color = "#515151"
 	economic_power = 7
 	ideal_character_age = 25

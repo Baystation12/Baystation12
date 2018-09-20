@@ -739,7 +739,7 @@
 // Supply
 
 /area/quartermaster/deckofficer
-	name = "\improper Deck Officer"
+	name = "\improper Deck Chief"
 	icon_state = "quart"
 
 /area/quartermaster/expedition
