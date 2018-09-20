@@ -222,7 +222,6 @@ var/const/NO_EMAG_ACT = -50
 			if(culture)
 				id_card.formal_name_prefix = "[culture.get_formal_name_prefix()][id_card.formal_name_prefix]"
 				id_card.formal_name_suffix = "[id_card.formal_name_suffix][culture.get_formal_name_suffix()]"
-				world.log << "[id_card.formal_name_suffix] [id_card.formal_name_prefix] [client.prefs.cultural_info[culturetag]]"
 
 	id_card.registered_name = real_name
 
