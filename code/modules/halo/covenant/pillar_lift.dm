@@ -246,7 +246,9 @@
 	//search nearby for the base turf
 	var/turf/simulated/open/pillar_lift/controller
 	controller = locate() in range(1, src)
-	controller = controller.get_controller()
+	if(controller)
+		//get this pillar_lift turf's controller
+		controller = controller.get_controller()
 
 	if(!controller)
 		to_chat(user,"<span class='warning'>[src] is unable to locate a nearby lift pillar.</span>")
