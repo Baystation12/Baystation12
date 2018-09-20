@@ -375,29 +375,35 @@
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
 
-	var/list/dat = list("<html><body><center>")
-	dat += "<b>Welcome, [name].<br></b>"
-	dat += "Round Duration: [roundduration2text()]<br>"
+	var/list/header = list("<html><body><center>")
+	header += "<b>Welcome, [name].<br></b>"
+	header += "Round Duration: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		dat += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
+		header += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			dat += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			header += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
 		else                                           // Crew transfer initiated
-			dat += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+			header += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
 
+	var/list/dat = list()
 	dat += "Choose from the following open/valid positions:<br>"
 	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs.</a><br>"
 	dat += "<table>"
 	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
 
 	// TORCH JOBS
+	var/list/hidden_reasons
 	var/list/job_summaries = list()
 	for(var/datum/job/job in job_master.occupations)
 		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
 		if(summary && summary != "")
 			job_summaries += summary
+		else
+			for(var/raisin in job.get_unavailable_reasons(client))
+				hidden_reasons[raisin] = TRUE
+
 	if(LAZYLEN(job_summaries))
 		dat += job_summaries
 	else
@@ -415,6 +421,10 @@
 				var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
 				if(summary && summary != "")
 					job_summaries += summary
+				else
+					for(var/raisin in job.get_unavailable_reasons(client))
+						hidden_reasons[raisin] = TRUE
+
 			if(LAZYLEN(job_summaries))
 				dat += job_summaries
 			else
@@ -422,6 +432,13 @@
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
+	if(LAZYLEN(hidden_reasons))
+		var/list/additional_dat = list("<b>Some roles have been hidden from this list for the following reasons:</b><br>")
+		for(var/raisin in hidden_reasons)
+			additional_dat += "[raisin]<br>"
+		additional_dat += "<br>"
+		dat = additional_dat + dat
+	dat = header + dat
 	src << browse(jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
