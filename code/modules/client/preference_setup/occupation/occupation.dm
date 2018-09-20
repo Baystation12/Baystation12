@@ -144,8 +144,8 @@
 			bad_message = "\[MINIMUM CHARACTER AGE: [job.minimum_character_age]]"
 		else if(!job.is_species_allowed(S))
 			bad_message = "<b> \[SPECIES RESTRICTED]</b>"
-		else if(!S.check_education(job, user.client.prefs))
-			bad_message = "<b> \[EDUCATION RESTRICTED]</b>"
+		else if(!S.check_background(job, user.client.prefs))
+			bad_message = "<b> \[BACKGROUND RESTRICTED]</b>"
 
 		if(!bad_message && job.allowed_branches)
 			if(!player_branch)

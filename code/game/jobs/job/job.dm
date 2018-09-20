@@ -178,8 +178,8 @@
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
 
-	if(!S.check_education(src, prefs))
-		to_chat(feedback, "<span class='boldannounce'>Insufficient level of education for role [title], species [S].</span>")
+	if(!S.check_background(src, prefs))
+		to_chat(feedback, "<span class='boldannounce'>Incompatible background for role [title], species [S].</span>")
 		return TRUE
 
 	return FALSE
