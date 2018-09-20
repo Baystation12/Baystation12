@@ -185,3 +185,10 @@
 #define EDUCATION_NABBER_AMINUS "Grade A-"
 #define EDUCATION_NABBER_A      "Grade A"
 #define EDUCATION_NABBER_APLUS  "Grade A+"
+
+// Skrellian educmacation.
+#define EDUCATION_SKRELL_FAILURE      "Qlor-Mog"
+#define EDUCATION_SKRELL_BASIC        "Qrri-Mog"
+#define EDUCATION_SKRELL_FULL         "Qerr-Mog"
+#define EDUCATION_SKRELL_FULL_SCIENCE "Qerr-Mog, Science Focus"
+#define EDUCATION_SKRELL_FULL_DOCTOR  "Qerr-Mog, Medicine Focus"
