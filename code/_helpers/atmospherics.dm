@@ -27,25 +27,25 @@
 
 		if (total_moles>0)
 			if(abs(pressure - ONE_ATMOSPHERE) < 10)
-				. += "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
+				. += "<span class='notice'>Pressure: [round(pressure,0.01)] kPa</span>"
 			else
-				. += "<span class='warning'>Pressure: [round(pressure,0.1)] kPa</span>"
+				. += "<span class='warning'>Pressure: [round(pressure,0.01)] kPa</span>"
 			for(var/mix in mixture.gas)
-				var/percentage = round(mixture.gas[mix]/total_moles * 100, advanced ? 0.01 : 1)
+				var/percentage = round(mixture.gas[mix]/total_moles * 100, advanced ? 0.001 : 0.01)
 				if(!percentage)
 					continue
 				. += "<span class='notice'>[gas_data.name[mix]]: [percentage]%</span>"
 				if(advanced)
 					var/list/traits = list()
 					if(gas_data.flags[mix] & XGM_GAS_FUEL)
-						traits += "can be used as combustion fuel" 
+						traits += "can be used as combustion fuel"
 					if(gas_data.flags[mix] & XGM_GAS_OXIDIZER)
-						traits += "can be used as oxidizer" 
+						traits += "can be used as oxidizer"
 					if(gas_data.flags[mix] & XGM_GAS_CONTAMINANT)
-						traits += "contaminates clothing with toxic residue" 
+						traits += "contaminates clothing with toxic residue"
 					if(gas_data.flags[mix] & XGM_GAS_FUSION_FUEL)
-						traits += "can be used to fuel fusion reaction" 
-					. += "\t<span class='notice'>Specific heat: [gas_data.specific_heat[mix]] J/(mol*K), Molar mass: [gas_data.molar_mass[mix]] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]</span>"
+						traits += "can be used to fuel fusion reaction"
+					. += "\t<span class='notice'>Specific heat: [gas_data.specific_heat[mix]] J/(mol*K), Molar mass: [gas_data.molar_mass[mix]] kg/mol. Total moles: [mixture.gas[mix]] moles. [traits.len ? "\n\tThis gas [english_list(traits)]" : ""]</span>"
 			. += "<span class='notice'>Temperature: [round(mixture.temperature-T0C)]&deg;C / [round(mixture.temperature)]K</span>"
 			return
 	. += "<span class='warning'>\The [target] has no gases!</span>"
