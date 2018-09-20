@@ -290,6 +290,27 @@
 
 	return job_master.job_icons[title]
 
+/datum/job/proc/get_unavailable_reasons(var/client/caller)
+	var/list/reasons = list()
+	if(jobban_isbanned(caller, title))
+		reasons["You are jobbanned."] = TRUE
+	if(!player_old_enough(caller))
+		reasons["Your player age is too low."] = TRUE
+	if(!is_position_available())
+		reasons["There are no positions left."] = TRUE
+	if(!is_branch_allowed(caller.prefs.char_branch))
+		reasons["Your branch of service does not allow it."] = TRUE
+	if(!is_rank_allowed(caller.prefs.char_branch, caller.prefs.char_rank))
+		reasons["Your rank choice does not allow it."] = TRUE
+	var/datum/species/S = all_species[caller.prefs.species]
+	if(S)
+		if(!is_species_allowed(S))
+			reasons["Your species choice does not allow it."] = TRUE
+		if(!S.check_background(src, caller.prefs))
+			reasons["Your background choices do not allow it."] = TRUE
+	if(LAZYLEN(reasons))
+		. = reasons
+
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)
 	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)

@@ -12,12 +12,11 @@
 /decl/cultural_info/education/get_education_tier()
 	return education_tier
 
-/decl/cultural_info/education/format_formal_name(var/character_name)
-	if(education_prefix)
-		character_name = "[education_prefix][character_name]"
-	if(education_suffix)
-		character_name = "[character_name][education_suffix]"
-	return character_name
+/decl/cultural_info/education/get_formal_name_suffix()
+	return education_suffix
+
+/decl/cultural_info/education/get_formal_name_prefix()
+	return education_prefix
 
 /decl/cultural_info/education/get_qualifications()
 	return qualifications

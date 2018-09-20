@@ -5,7 +5,7 @@
 
 /decl/cultural_info/education/dropout
 	name = EDUCATION_DROPOUT
-	description = "You dropped out before completing highschool. You likely have a basic understanding of letters and numbers, but anything else is a stretch."
+	description = "You did not complete highschool. You are unlikely to have more than a basic understanding of academics."
 	education_tier = EDUCATION_TIER_DROPOUT
 
 /decl/cultural_info/education/basic
