@@ -412,7 +412,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
-	name = OUTFIT_JOB_NAME("Deck Officer")
+	name = OUTFIT_JOB_NAME("Deck Chief")
 	l_ear = /obj/item/device/radio/headset/headset_deckofficer
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
@@ -420,11 +420,11 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned
-	name = OUTFIT_JOB_NAME("Deck Officer - EC Officer")
+	name = OUTFIT_JOB_NAME("Deck Chief - EC Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
-	name = OUTFIT_JOB_NAME("Deck Officer - Fleet")
+	name = OUTFIT_JOB_NAME("Deck Chief - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 
@@ -545,7 +545,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
-	
+
 //Crew Research Oufits
 
 /decl/hierarchy/outfit/job/torch/crew/research
