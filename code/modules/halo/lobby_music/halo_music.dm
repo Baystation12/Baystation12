@@ -16,20 +16,8 @@
 	album = "Halo 3 OST"
 	song = 'code/modules/halo/lobby_music/odst.ogg'
 
-/lobby_music/overture
+/lobby_music/reach_overture
 	artist = "Martin O'Donnell and Michael Salvatori"
 	title = "Overture to Reach"
 	album = "Halo 3: Reach OST"
 	song = 'code/modules/halo/lobby_music/One Final Effort.ogg'
-
-/lobby_music/odst
-	artist = "Martin O'Donnell and Michael Salvatori"
-	title = "Overture to ODST"
-	album = "Halo 3: ODST OST"
-	song = 'code/modules/halo/lobby_music/Overture.ogg'
-
-/lobby_music/secod_prelude
-	artist = "Martin O'Donnell and Michael Salvatori"
-	title = "Second Prelude"
-	album = "Halo 2 Anniversary Edition OST"
-	song = 'code/modules/halo/lobby_music/SecondPrelude.ogg'

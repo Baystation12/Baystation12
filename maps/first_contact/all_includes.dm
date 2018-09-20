@@ -29,6 +29,9 @@
 	#include "overall_jobdefs.dm"
 	#include "mapdef.dm"
 
+	#include "../../code/modules/halo/lobby_music/odst_music.dm"
+	#include "../../code/modules/halo/lobby_music/halo_music.dm"
+
 	#define using_map_DATUM /datum/map/first_contact
 
 #elif !defined(MAP_OVERRIDE)
