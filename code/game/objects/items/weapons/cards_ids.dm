@@ -157,6 +157,9 @@ var/const/NO_EMAG_ACT = -50
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
 
+	var/formal_name_prefix
+	var/formal_name_suffix
+
 /obj/item/weapon/card/id/New()
 	..()
 	if(job_access_type)
@@ -198,7 +201,9 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/proc/get_display_name()
 	. = registered_name
 	if(military_rank && military_rank.name_short)
-		. = military_rank.name_short + " " + .
+		. ="[military_rank.name_short] [.][formal_name_suffix]"
+	else if(formal_name_prefix || formal_name_suffix)
+		. = "[formal_name_prefix][.][formal_name_suffix]"
 	if(assignment)
 		. += ", [assignment]"
 
@@ -209,13 +214,17 @@ var/const/NO_EMAG_ACT = -50
 /mob/proc/set_id_info(var/obj/item/weapon/card/id/id_card)
 	id_card.age = 0
 
-	var/formal_name = real_name
+	id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
+	id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
 	if(client && client.prefs)
 		for(var/culturetag in client.prefs.cultural_info)
 			var/decl/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
 			if(culture)
-				formal_name = culture.format_formal_name(formal_name)
-	id_card.registered_name = formal_name
+				id_card.formal_name_prefix = "[culture.get_formal_name_prefix()][id_card.formal_name_prefix]"
+				id_card.formal_name_suffix = "[id_card.formal_name_suffix][culture.get_formal_name_suffix()]"
+				world.log << "[id_card.formal_name_suffix] [id_card.formal_name_prefix] [client.prefs.cultural_info[culturetag]]"
+
+	id_card.registered_name = real_name
 
 	id_card.sex = capitalize(get_sex())
 	id_card.set_id_photo(src)
@@ -235,7 +244,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
-	dat += text("Name: []</A><BR>", registered_name)
+	dat += text("Name: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
 
