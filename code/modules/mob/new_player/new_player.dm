@@ -394,12 +394,12 @@
 	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
 
 	// TORCH JOBS
-	var/list/hidden_reasons
-	var/list/job_summaries = list()
+	var/list/job_summaries
+	var/list/hidden_reasons = list()
 	for(var/datum/job/job in job_master.occupations)
 		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
 		if(summary && summary != "")
-			job_summaries += summary
+			LAZYADD(job_summaries, summary)
 		else
 			for(var/raisin in job.get_unavailable_reasons(client))
 				hidden_reasons[raisin] = TRUE
@@ -420,7 +420,7 @@
 				var/datum/job/job = submap.jobs[otherthing]
 				var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
 				if(summary && summary != "")
-					job_summaries += summary
+					LAZYADD(job_summaries, summary)
 				else
 					for(var/raisin in job.get_unavailable_reasons(client))
 						hidden_reasons[raisin] = TRUE
@@ -433,7 +433,7 @@
 
 	dat += "</table></center>"
 	if(LAZYLEN(hidden_reasons))
-		var/list/additional_dat = list("<b>Some roles have been hidden from this list for the following reasons:</b><br>")
+		var/list/additional_dat = list("<br><b>Some roles have been hidden from this list for the following reasons:</b><br>")
 		for(var/raisin in hidden_reasons)
 			additional_dat += "[raisin]<br>"
 		additional_dat += "<br>"
