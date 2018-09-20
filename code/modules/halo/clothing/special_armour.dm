@@ -47,4 +47,4 @@
 	GLOB.processing_objects -= src
 	for(var/item in specials)
 		qdel(item)
-	..()
+	. = ..()
