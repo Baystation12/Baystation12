@@ -20,6 +20,9 @@
 /mob/living/carbon/human/dummy/mannequin/instantiate_hud()
 	return	// Mannequins don't get HUDs
 
+/mob/living/carbon/human/dummy/mannequin/update_floating()
+	return	// Mannequins don't float
+
 /mob/living/carbon/human/skrell/New(var/new_loc)
 	h_style = "Skrell Male Tentacles"
 	..(new_loc, SPECIES_SKRELL)
