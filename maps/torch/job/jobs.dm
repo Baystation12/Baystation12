@@ -1212,7 +1212,7 @@
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BACHELOR
+	required_education = EDUCATION_TIER_BASIC
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
