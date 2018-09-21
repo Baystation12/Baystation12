@@ -77,12 +77,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if(linked)
 			user.reset_view(linked)
 
-	ui_interact(user)
+	if(linked)
+		ui_interact(user)
+	else
+		var/datum/browser/popup = new (user, "Helm Control", "[src]")
+		popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect.<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
+		popup.open()
 
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(!linked)
-		return
-
 	var/data[0]
 
 	var/turf/T = get_turf(linked)
@@ -133,7 +135,11 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		return 1
 
 	if (!linked)
-		return
+		if(href_list["sync"])
+			sync_linked()
+			return 1
+		else
+			return 1
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
@@ -223,6 +229,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		var/datum/browser/popup = new (user, "Navigation", "[src]")
+		popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to sensors.<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
+		popup.open()
 		return
 
 	var/data[0]
@@ -277,6 +286,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		return 1
 
 	if (!linked)
+		if(href_list["sync"])
+			sync_linked()
 		return
 
 	if (href_list["viewing"])
