@@ -799,7 +799,7 @@
 	req_access = list(20)
 	},
 /obj/machinery/button/windowtint{
-	id = "co_windows";
+	id = "xo_windows";
 	pixel_x = 0;
 	pixel_y = 32
 	},

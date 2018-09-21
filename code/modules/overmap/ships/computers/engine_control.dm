@@ -19,7 +19,9 @@
 
 /obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
-		to_chat(user, "<span class='warning'>Unable to connect to ship control systems.</span>")
+		var/datum/browser/popup = new (user, "Engine Control", "[src]")
+		popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to ship control systems.<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
+		popup.open()
 		return
 
 	var/data[0]
@@ -53,6 +55,9 @@
 /obj/machinery/computer/ship/engines/Topic(href, href_list, ui_state)
 	if(..())
 		return 1
+
+	if(href_list["sync"])
+		sync_linked()
 
 	if(href_list["state"])
 		state = href_list["state"]

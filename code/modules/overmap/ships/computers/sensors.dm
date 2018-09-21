@@ -35,6 +35,9 @@
 
 /obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		var/datum/browser/popup = new (user, "Navigation", "[src]")
+		popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to sensors.<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
+		popup.open()
 		return
 
 	var/data[0]
@@ -114,6 +117,8 @@
 		usr.unset_machine()
 		return 1
 	if (!linked)
+		if(href_list["sync"])
+			sync_linked()
 		return
 
 	if (href_list["viewing"])

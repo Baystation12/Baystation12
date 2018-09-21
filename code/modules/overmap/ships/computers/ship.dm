@@ -13,3 +13,16 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(sector.check_ownership(src))
 		linked = sector
 		return 1
+
+/obj/machinery/computer/ship/proc/sync_linked()
+	var/obj/effect/overmap/ship/sector = map_sectors["[z]"]
+	if(!sector)
+		return
+	return attempt_hook_up_recursive(sector)
+
+/obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/ship/sector)
+	if(attempt_hook_up(sector))
+		return sector
+	for(var/obj/effect/overmap/ship/candidate in sector)
+		if((. = .(candidate)))
+			return
