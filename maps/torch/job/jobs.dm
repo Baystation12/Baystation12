@@ -789,8 +789,8 @@
 	department = "Engineering"
 	department_flag = ENG|MED
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer, the Corporate Liaison and the Chief Medical Officer"
 	selection_color = "#5b4d20"
