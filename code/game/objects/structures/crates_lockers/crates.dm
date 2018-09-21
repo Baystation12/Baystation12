@@ -120,6 +120,13 @@ obj/structure/closet/crate
 	icon_opened = "trashcartopen"
 	icon_closed = "trashcart"
 
+/obj/structure/closet/crate/janitoral
+	name = "janitoral crate"
+	desc = "A janitoral crate."
+	icon_state = "janitoralcrate"
+	icon_opened = "janitoralcrateopen"
+	icon_closed = "janitoralcrate"
+
 /obj/structure/closet/crate/medical
 	name = "medical crate"
 	desc = "A medical crate."
@@ -308,6 +315,18 @@ obj/structure/closet/crate
 		/obj/item/device/analyzer/plant_analyzer = 2
 	)
 
+/obj/structure/closet/crate/secure/janitoral
+	name = "secure janitoral crate"
+	desc = "A secure janitoral crate."
+	icon_state = "janitoralseccrate"
+	icon_opened = "janitoralseccrateopen"
+	icon_closed = "janitoralseccrate"
+	open_sound = 'sound/items/Deconstruct.ogg'
+	close_sound = 'sound/items/Deconstruct.ogg'
+	redlight = "janitoralseccrater"
+	greenlight = "janitoralseccrateg"
+	req_access = list(access_janitor)
+
 /obj/structure/closet/crate/secure/biohazard
 	name = "biohazard cart"
 	desc = "A heavy cart with extensive sealing. You shouldn't eat things you find in it."
@@ -317,7 +336,7 @@ obj/structure/closet/crate
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-	
+
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 
