@@ -80,9 +80,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if(linked)
 		ui_interact(user)
 	else
-		var/datum/browser/popup = new (user, "Helm Control", "[src]")
-		popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect.<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
-		popup.open()
+		display_reconnect_dialog(user, "ship control systems")
 
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -229,9 +227,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
-		var/datum/browser/popup = new (user, "Navigation", "[src]")
-		popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to sensors.<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
-		popup.open()
+		display_reconnect_dialog(user, "Navigation")
 		return
 
 	var/data[0]
