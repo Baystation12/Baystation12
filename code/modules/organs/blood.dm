@@ -315,3 +315,11 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod
 	return min(blood_volume, 100)
+
+/mob/living/carbon/human/proc/cure_virus(var/virus_uuid)
+	if(vessel && virus_uuid)
+		for(var/datum/reagent/blood/B in vessel.reagent_list)
+			var/list/viruses = list()
+			viruses = B.data["virus2"]
+			viruses.Remove(virus_uuid)
+			B.data["virus2"] = viruses
