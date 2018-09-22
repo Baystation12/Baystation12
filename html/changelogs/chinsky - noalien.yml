@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscdel: "Removed alium-turning monolith from trader base."
