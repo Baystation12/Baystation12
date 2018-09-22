@@ -17846,6 +17846,23 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"etk" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/structure/closet/medical_wall{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/obj/random/firstaid,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/turf/simulated/floor/plating,
+/area/maintenance/firstdeck/centralstarboard)
 "etI" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/energy/stunrevolver/rifle,
@@ -48818,7 +48835,7 @@ adj
 adj
 aeU
 abP
-agT
+etk
 ahX
 aji
 aji
