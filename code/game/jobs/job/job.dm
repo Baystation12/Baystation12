@@ -43,6 +43,7 @@
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
 
 	var/required_education = EDUCATION_TIER_NONE
+	var/available_by_default = TRUE
 
 /datum/job/New()
 	..()

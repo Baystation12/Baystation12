@@ -22,8 +22,10 @@
 
 	var/features_budget = 2
 	//pre-defined list of features templates to pick from
-	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-									  /datum/map_template/ruin/exoplanet/hydrobase)
+	var/list/possible_features = list(
+									/datum/map_template/ruin/exoplanet/monolith,
+									/datum/map_template/ruin/exoplanet/hydrobase,
+									/datum/map_template/ruin/exoplanet/crashed_pod)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)

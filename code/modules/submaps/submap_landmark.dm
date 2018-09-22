@@ -9,11 +9,12 @@
 /obj/effect/submap_landmark/joinable_submap
 	icon_state = "x4"
 	var/archetype
+	var/submap_datum_type = /datum/submap
 
 /obj/effect/submap_landmark/joinable_submap/Initialize(var/mapload)
 	. = ..(mapload)
 	if(!SSmapping.submaps[name] && SSmapping.submap_archetypes[archetype])
-		var/datum/submap/submap = new(z)
+		var/datum/submap/submap = new submap_datum_type(z)
 		submap.name = name
 		submap.setup_submap(SSmapping.submap_archetypes[archetype])
 	else

@@ -21,6 +21,8 @@
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
+	var/has_distress_beacon
+
 /obj/effect/overmap/Initialize()
 	. = ..()
 	if(!GLOB.using_map.use_overmap)
