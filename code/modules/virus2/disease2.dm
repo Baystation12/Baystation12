@@ -118,7 +118,14 @@ LEGACY_RECORD_STRUCTURE(virus_records, virus_record)
 /datum/disease2/disease/proc/cure(var/mob/living/carbon/mob, antigen)
 	for(var/datum/disease2/effect/e in effects)
 		e.deactivate(mob)
+
 	mob.virus2.Remove("[uniqueID]")
+
+	//Tries to remove the virus also from the bloodstream (only for human-like lifeforms).
+	if(istype(mob, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = mob
+		H.cure_virus(uniqueID)
+
 	if(antigen)
 		mob.antibodies |= antigen
 
@@ -143,9 +150,8 @@ LEGACY_RECORD_STRUCTURE(virus_records, virus_record)
 
 	effects += get_random_virus2_effect(effect_stage, badness, exclude)
 
-	if (prob(5))
-		antigen = list(pick(ALL_ANTIGENS))
-		antigen |= pick(ALL_ANTIGENS)
+	antigen = list(pick(ALL_ANTIGENS))
+	antigen |= pick(ALL_ANTIGENS)
 
 	if (prob(5) && all_species.len)
 		affected_species = get_infectable_species()
