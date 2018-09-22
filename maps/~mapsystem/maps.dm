@@ -199,7 +199,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
-		allowed_jobs = subtypesof(/datum/job)
+		allowed_jobs = list()
+		for(var/jtype in subtypesof(/datum/job))
+			var/datum/job/job = jtype
+			if(initial(job.available_by_default))
+				allowed_jobs += jtype
 	if(!planet_size)
 		planet_size = list(world.maxx, world.maxy)
 

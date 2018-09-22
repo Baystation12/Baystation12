@@ -65,7 +65,7 @@
 
 	var/obj/effect/overmap/cell = map_sectors["[associated_z]"]
 	if(istype(cell))
-		name = cell.name
+		sync_cell(cell)
 
 	// Add the spawn points to the appropriate job list.
 	var/added_spawnpoint
@@ -81,6 +81,9 @@
 		to_chat(world.log, "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] has no job spawn points.")
 		qdel(src)
 		return
+
+/datum/submap/proc/sync_cell(var/obj/effect/overmap/cell)
+	name = cell.name
 
 /datum/submap/proc/available()
 	return TRUE

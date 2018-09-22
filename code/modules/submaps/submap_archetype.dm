@@ -18,4 +18,3 @@
 
 /decl/submap_archetype/abandoned_ship
 	descriptor = "abandoned ship"
-
