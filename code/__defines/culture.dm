@@ -152,6 +152,7 @@
 #define FACTION_UNATHI_SAVANNAH     "Savannah Clans"
 #define FACTION_UNATHI_DIAMOND_PEAK "Diamond Peak Clans"
 #define FACTION_UNATHI_SALT_SWAMP   "Salt Swamp Clans"
+#define FACTION_UNATHI_YEOSA		"Yeosa Clans"
 
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"
