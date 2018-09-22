@@ -4,12 +4,14 @@
 	shredding = 0
 	sharp = 1
 	edge = 1
+	attack_name = "sharp bite"
 
 /datum/unarmed_attack/diona
 	attack_verb = list("lashed", "bludgeoned")
 	attack_noun = list("tendril")
 	eye_attack_text = "a tendril"
 	eye_attack_text_victim = "a tendril"
+	attack_name = "tendrils"
 
 /datum/unarmed_attack/claws
 	attack_verb = list("scratched", "clawed", "slashed")
@@ -20,6 +22,7 @@
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	sharp = 1
 	edge = 1
+	attack_name = "claws"
 
 /datum/unarmed_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(user.gloves)
@@ -70,16 +73,19 @@
 	attack_verb = list("slashed")
 	damage = 5
 	shredding = 1
+	attack_name = "strong claws"
 
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("mauled")
 	damage = 8
 	shredding = 1
+	attack_name = "strong bite"
 
 /datum/unarmed_attack/slime_glomp
 	attack_verb = list("glomped")
 	attack_noun = list("body")
 	damage = 2
+	attack_name = "glomp"
 
 /datum/unarmed_attack/slime_glomp/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
 	..()
@@ -87,6 +93,7 @@
 
 /datum/unarmed_attack/stomp/weak
 	attack_verb = list("jumped on")
+	attack_name = "weak stomp"
 
 /datum/unarmed_attack/stomp/weak/get_unarmed_damage()
 	return damage
@@ -99,6 +106,7 @@
 /datum/unarmed_attack/tail //generally meant for people like unathi
 	attack_verb = list ("bludgeoned", "lashed", "smacked", "whapped")
 	attack_noun = list ("tail")
+	attack_name = "tail swipe"
 
 /datum/unarmed_attack/tail/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone) //ensures that you can't tail someone in the skull
 
@@ -146,10 +154,12 @@
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
+	attack_name = "forelimb slash"
 
 /datum/unarmed_attack/punch/starborn
 	attack_verb = list("scorched", "burned", "fried")
 	shredding = 1
+	attack_name = "starborn strike"
 
 /datum/unarmed_attack/punch/starborn/get_damage_type()
 	return BURN
@@ -159,6 +169,7 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	damage = 5
 	delay = 120
+	attack_name = "venomous bite"
 
 /datum/unarmed_attack/bite/venom/get_damage_type()
 	return TOX
