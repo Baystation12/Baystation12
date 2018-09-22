@@ -20,7 +20,7 @@
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	sharp = 1
 	edge = 1
-	
+
 /datum/unarmed_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(user.gloves)
 		var/obj/item/clothing/gloves/gloves = user.gloves
@@ -130,9 +130,9 @@
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
-		if(3 to 5)	user.visible_message("<span class='danger'>[user] glanced [target] with their [pick(attack_noun)] in the [organ]!</span>")
+		if(1 to 5)	user.visible_message("<span class='danger'>[user] glanced [target] with their [pick(attack_noun)] in the [organ]!</span>")
 
-		if(6 to 7)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
+		if(6 to 7)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ] with their [pick(attack_noun)]!</span>")
 
 		if(8)		user.visible_message("<span class='danger'>[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!</span>")
 
@@ -151,5 +151,14 @@
 	attack_verb = list("scorched", "burned", "fried")
 	shredding = 1
 
-/datum/unarmed_attack/punc/starborn/get_damage_type()
+/datum/unarmed_attack/punch/starborn/get_damage_type()
 	return BURN
+
+/datum/unarmed_attack/bite/venom
+	attack_verb = list("bit", "sank their fangs into")
+	attack_sound = 'sound/weapons/bite.ogg'
+	damage = 5
+	delay = 120
+
+/datum/unarmed_attack/bite/venom/get_damage_type()
+	return TOX

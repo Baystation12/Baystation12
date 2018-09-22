@@ -289,6 +289,7 @@
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
 #define SPECIES_GOLEM       "Golem"
+#define SPECIES_YEOSA       "Yeosa'Unathi"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

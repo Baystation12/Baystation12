@@ -27,3 +27,11 @@
 	description = "Often considered the least traditional of the Unathi, Salt Swamp Unathi are noted for their friendliness and openness to outsiders, \
 	along with their knack for rituals that often get mistaken as 'parties' by Humans. The Fruitful Lights and Hand of the Vines both have numerous \
 	followers with these Unathi."
+
+/decl/cultural_info/faction/unathi/yeosa
+	name = FACTION_UNATHI_YEOSA
+	description = "The strangest of the Unathi groups, the Yeosa are notable for their aquatic lifestyles. Not only are they adapted biologically to an \
+	amphibious lifestyle, their culture focuses around the islands and seas of Moghes. They are very friendly and open to outsiders, often trading their goods and technologies \
+	to the Sinta of the land. Most strangely is their third sex, the Caretakers, of whom have given up masculine or feminine sexual characteristics to ascend to near-divine status in their clans, \
+	being in charge of taking care of children, and doing a majority of the medical work."
+	language = LANGUAGE_YEOSA
