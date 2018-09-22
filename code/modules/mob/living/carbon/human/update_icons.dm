@@ -200,7 +200,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	else
 		M.Scale(size_multiplier)
 		M.Translate(0, 16*(size_multiplier-1))
-	transform = M
+	animate(src, transform = M, time = ANIM_LYING_TIME)
 
 var/global/list/damage_icon_parts = list()
 
