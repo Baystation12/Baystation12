@@ -1,6 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Education is now a selection in your background tab. Jobs are restricted to certain minimum educations. You will likely need to change your background tabs for all characters who work jobs other than Passenger."
-  - rscadd: "Doctorates and medical degrees in the education system modify your record and ID name to 'Dr. Foo, MD' or 'Dr. Foo, Phd'."
-  - tweak: "Skrell will no longer present as hive minds on their ID and crew records."
