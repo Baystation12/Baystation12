@@ -1,7 +1,7 @@
 
 #if !defined(using_map_DATUM)
 
-	#include "../../code/modules/halo/lobby_music/halo_lobby_music.dm"
+	#include "../../code/modules/halo/lobby_music/halo_music.dm"
 	#include "death_asteroid_areas.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 	#include "death_asteroid_spawns.dm"
