@@ -5284,11 +5284,6 @@
 /obj/machinery/optable{
 	name = "Robotics Operating Table"
 	},
-/obj/machinery/button/windowtint{
-	id = "robotics_surg";
-	pixel_x = -2;
-	pixel_y = 24
-	},
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 10
@@ -5297,10 +5292,10 @@
 	icon_state = "edge";
 	dir = 1
 	},
-/obj/machinery/button/holosign{
-	id = "robosurg";
-	pixel_x = 6;
-	pixel_y = 24
+/obj/machinery/body_scan_display{
+	pixel_x = 0;
+	pixel_y = 24;
+	tag = "rob_or_display2"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics_surgery)
@@ -5334,6 +5329,16 @@
 	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 8
+	},
+/obj/machinery/button/holosign{
+	id = "robosurg";
+	pixel_x = 6;
+	pixel_y = 24
+	},
+/obj/machinery/button/windowtint{
+	id = "robotics_surg";
+	pixel_x = -2;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics_surgery)
@@ -16250,6 +16255,10 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
+/obj/machinery/body_scan_display{
+	pixel_y = 24;
+	tag = "med_or_display"
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "cDO" = (
@@ -17365,8 +17374,9 @@
 /area/medical/sleeper)
 "dYb" = (
 /obj/machinery/body_scanconsole{
-	icon_state = "body_scannerconsole";
-	dir = 1
+	dir = 1;
+	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
+	icon_state = "body_scannerconsole"
 	},
 /obj/effect/floor_decal/corner/pink{
 	dir = 10
@@ -18052,11 +18062,6 @@
 /obj/machinery/optable{
 	name = "Robotics Operating Table"
 	},
-/obj/machinery/button/windowtint{
-	id = "robotics_windows";
-	pixel_x = -2;
-	pixel_y = 24
-	},
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 10
@@ -18065,10 +18070,9 @@
 	icon_state = "edge";
 	dir = 1
 	},
-/obj/machinery/button/holosign{
-	id = "operating2";
-	pixel_x = 6;
-	pixel_y = 24
+/obj/machinery/body_scan_display{
+	pixel_y = 24;
+	tag = "rob_or_display1"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
@@ -18096,6 +18100,16 @@
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/button/holosign{
+	id = "operating2";
+	pixel_x = 6;
+	pixel_y = 24
+	},
+/obj/machinery/button/windowtint{
+	id = "robotics_windows";
+	pixel_x = -2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eRb" = (
@@ -24839,8 +24853,9 @@
 /area/medical/infirmreception)
 "mzb" = (
 /obj/machinery/body_scanconsole{
-	icon_state = "body_scannerconsole";
-	dir = 4
+	dir = 4;
+	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
+	icon_state = "body_scannerconsole"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
