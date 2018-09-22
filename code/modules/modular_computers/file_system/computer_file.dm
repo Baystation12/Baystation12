@@ -8,11 +8,15 @@ var/global/file_uid = 0
 	var/unsendable = 0										// Whether the file may be sent to someone via NTNet transfer or other means.
 	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
 	var/uid													// UID of this file
+	var/list/metadata											// Any metadata the file uses.
+	var/papertype = /obj/item/paper
 
-/datum/computer_file/New()
+/datum/computer_file/New(var/list/md = null)
 	..()
 	uid = file_uid
 	file_uid++
+	if(islist(md))
+		metadata = md.Copy()
 
 /datum/computer_file/Destroy()
 	. = ..()
@@ -31,6 +35,8 @@ var/global/file_uid = 0
 	temp.unsendable = unsendable
 	temp.undeletable = undeletable
 	temp.size = size
+	if(metadata)
+		temp.metadata = metadata.Copy()
 	if(rename)
 		temp.filename = filename + "(Copy)"
 	else

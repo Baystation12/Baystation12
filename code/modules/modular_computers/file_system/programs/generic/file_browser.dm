@@ -38,19 +38,19 @@
 		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
-		var/datum/computer_file/file = HDD.find_file_by_name(href_list["PRG_deletefile"])
-		if(!file || file.undeletable)
+		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_deletefile"])
+		if(!F || F.undeletable)
 			return 1
-		HDD.remove_file(file)
+		HDD.remove_file(F)
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
 		var/obj/item/weapon/computer_hardware/hard_drive/RHDD = computer.portable_drive
 		if(!RHDD)
 			return 1
-		var/datum/computer_file/file = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
-		if(!file || file.undeletable)
+		var/datum/computer_file/F = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
+		if(!F || F.undeletable)
 			return 1
-		RHDD.remove_file(file)
+		RHDD.remove_file(F)
 	if(href_list["PRG_closefile"])
 		. = 1
 		open_file = null
@@ -70,12 +70,12 @@
 		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
-		var/datum/computer_file/file = HDD.find_file_by_name(href_list["PRG_rename"])
-		if(!file || !istype(file))
+		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_rename"])
+		if(!F || !istype(F))
 			return 1
-		var/newname = sanitize(input(usr, "Enter new file name:", "File rename", file.filename))
-		if(file && newname)
-			file.filename = newname
+		var/newname = sanitize(input(usr, "Enter new file name:", "File rename", F.filename))
+		if(F && newname)
+			F.filename = newname
 	if(href_list["PRG_edit"])
 		. = 1
 		if(!open_file)
@@ -87,6 +87,9 @@
 		if(!F || !istype(F))
 			return 1
 		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
+			return 1
+		if(F.read_only)
+			error = "This file is read only. You cannot edit it."
 			return 1
 
 		var/oldtext = html_decode(F.stored_data)
@@ -120,7 +123,7 @@
 		if(!computer.nano_printer)
 			error = "Missing Hardware: Your computer does not have required hardware to complete this operation."
 			return 1
-		if(!computer.nano_printer.print_text(pencode2html(F.stored_data)))
+		if(!computer.nano_printer.print_text(pencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
 	if(href_list["PRG_copytousb"])
@@ -161,18 +164,18 @@
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.open_file)
-		var/datum/computer_file/data/file
+		var/datum/computer_file/data/F
 
 		if(!PRG.computer || !PRG.computer.hard_drive)
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
 			HDD = PRG.computer.hard_drive
-			file = HDD.find_file_by_name(PRG.open_file)
-			if(!istype(file))
+			F = HDD.find_file_by_name(PRG.open_file)
+			if(!istype(F))
 				data["error"] = "I/O ERROR: Unable to open file."
 			else
-				data["filedata"] = pencode2html(file.stored_data)
-				data["filename"] = "[file.filename].[file.filetype]"
+				data["filedata"] = F.generate_file_data(user)
+				data["filename"] = "[F.filename].[F.filetype]"
 	else
 		if(!PRG.computer || !PRG.computer.hard_drive)
 			data["error"] = "I/O ERROR: Unable to access hard drive."
@@ -202,7 +205,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "file_manager.tmpl", "NTOS File Manager", 575, 700, state = state)
+		ui = new(user, src, ui_key, "file_manager.tmpl", "NTOS File Manager", 600, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
