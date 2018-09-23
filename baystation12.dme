@@ -238,6 +238,7 @@
 #include "code\datums\extensions\_defines.dm"
 #include "code\datums\extensions\deity_be_near.dm"
 #include "code\datums\extensions\extensions.dm"
+#include "code\datums\extensions\fake_data.dm"
 #include "code\datums\extensions\interactive.dm"
 #include "code\datums\extensions\label.dm"
 #include "code\datums\extensions\penetration.dm"
