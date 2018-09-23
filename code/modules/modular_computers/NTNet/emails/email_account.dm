@@ -91,3 +91,6 @@
 
 /datum/computer_file/data/email_account/service/document
 	login = EMAIL_DOCUMENTS
+
+/datum/computer_file/data/email_account/service/sysadmin
+	login = EMAIL_SYSADMIN
