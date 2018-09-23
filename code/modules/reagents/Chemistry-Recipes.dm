@@ -128,7 +128,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/tramadol/oxycodone
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/tramadol = 1)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
-	result_amount = 1
+	result_amount = 2
 
 /datum/chemical_reaction/sterilizine
 	name = "Sterilizine"
@@ -208,7 +208,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/peridaxon
 	required_reagents = list(/datum/reagent/bicaridine = 2, /datum/reagent/clonexadone = 2)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
-	result_amount = 2
+	result_amount = 3
 
 /datum/chemical_reaction/virus_food
 	name = "Virus Food"
@@ -307,7 +307,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	name = "Ethylredoxrazine"
 	result = /datum/reagent/ethylredoxrazine
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/dylovene = 1, /datum/reagent/carbon = 1)
-	result_amount = 3
+	result_amount = 4
 
 /datum/chemical_reaction/soporific
 	name = "Soporific"
@@ -447,7 +447,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 /datum/chemical_reaction/noexcutite
 	name = "Noexcutite"
 	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/synaptizine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/methyl_bromide
