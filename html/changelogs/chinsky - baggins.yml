@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Can now put items into forensic microscope for scan, instead of using tools on it first. Clicking on microscope with evidence bag puts item inside too."
