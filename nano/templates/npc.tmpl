@@ -8,20 +8,36 @@
 		<div class="itemLabel" style="width:20%;">Left hand:</div>
 		<div class="itemContentNarrow" style="width:50%;">{{:data.l_hand}}</div>
 		{{if data.l_sellable > 0}}
-			<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}}</div>
+			{{if data.l_is_bag}}
+				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}} (contents)</div>
+			{{else}}
+				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}}</div>
+			{{/if}}
 			<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_l' : data.l_hand, 'user' : data.user, 'worth' : data.l_hand_worth})}}</div>
 		{{else data.l_sellable < 0}}
-			<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+			{{if data.l_is_bag}}
+				<div class="itemContentNarrow" style="width:30%;">Trader does not want some of the contents!</div>
+			{{else}}
+				<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+			{{/if}}
 		{{/if}}
 	</div>
 	<div class='item'>
 		<div class="itemLabel" style="width:20%;">Right hand:</div>
 		<div class="itemContentNarrow" style="width:50%;">{{:data.r_hand}}</div>
 		{{if data.r_sellable > 0}}
-			<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}}</div>
+			{{if data.r_is_bag}}
+				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}} (contents)</div>
+			{{else}}
+				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}}</div>
+			{{/if}}
 			<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_r' : data.r_hand, 'user' : data.user, 'worth' : data.r_hand_worth})}}</div>
 		{{else data.r_sellable < 0}}
-			<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+			{{if data.r_is_bag}}
+				<div class="itemContentNarrow" style="width:30%;">Trader does not want some of the contents!</div>
+			{{else}}
+				<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+			{{/if}}
 		{{/if}}
 	</div>
 </div>

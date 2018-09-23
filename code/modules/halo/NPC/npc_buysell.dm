@@ -1,18 +1,39 @@
 
 /mob/living/simple_animal/npc/proc/player_sell(var/obj/O, var/mob/M, var/worth, var/resell = 1)
-	M.drop_from_inventory(O, src)
-	qdel(O)
+	if(!worth)
+		to_chat(M,"<span class='warning'>It's not worth your time to do that.</span>")
+		return
+
+	if(istype(O, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = O
+		for(var/obj/I in S.contents)
+			S.remove_from_storage(I, src)
+			if(resell)
+				try_list_for_sale(I)
+			else
+				qdel(I)
+	else
+		M.drop_from_inventory(O, src)
+
+		//add it to the trader inventory
+		if(resell)
+			try_list_for_sale(O)
+		else
+			qdel(O)
+
 	M.visible_message("<span class='info'>[M] exchanges items with [src]</span>",\
 		"<span class='info'>You give [O] to [src] who gives you a bundle of credits worth cR-[worth].</span>")
 	spawn_money(worth, M.loc, M)
+	src.playsound_local(src.loc, "rustle", 100, 1)
 
-	//add it to the trader inventory
-	if(resell)
-		var/datum/trade_item/T = trade_items_inventory_by_type[O.type]
-		if(T)
-			T.quantity += 1
-			T.value = round(T.value * 0.95)		//price goes down a little
-			update_trade_item_ui(T)
+/mob/living/simple_animal/npc/proc/try_list_for_sale(var/obj/O)
+	var/datum/trade_item/T = trade_items_inventory_by_type[O.type]
+	if(T)
+		T.quantity += 1
+		T.value = round(T.value * 0.95)		//price goes down a little
+		update_trade_item_ui(T)
+		return 1
+	return 0
 
 /mob/living/simple_animal/npc/proc/player_buy(var/item_name, var/mob/M)
 	var/datum/trade_item/D = trade_items_inventory_by_name[item_name]
@@ -43,3 +64,4 @@
 		//tell the user
 		M.visible_message("<span class='info'>[M] exchanges items with [src]</span>",\
 			"<span class='info'>You split off cR-[value] to [src] who hands you [O].</span>")
+		src.playsound_local(src.loc, "rustle", 100, 1)
