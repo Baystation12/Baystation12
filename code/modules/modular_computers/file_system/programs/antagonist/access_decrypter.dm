@@ -15,6 +15,7 @@
 	var/progress = 0
 	var/target_progress = 300
 	var/datum/access/target_access = null
+	var/list/restricted_access_codes = list(access_change_ids, access_network) // access codes that are not hackable due to balance reasons
 
 /datum/computer_file/program/access_decrypter/kill_program(var/forced)
 	reset()
@@ -38,15 +39,21 @@
 		message = "RFID card has been removed from the device. Operation aborted."
 		return
 
-	progress += CPU.max_idle_programs
+	progress += get_speed()
+
 	if(progress >= target_progress)
-		reset()
+		if(prob(20 * max(SKILL_ADEPT - operator_skill, 0))) // Oops
+			var/list/valid_access_values = get_all_station_access()
+			valid_access_values -= restricted_access_codes
+			valid_access_values -= RFID.stored_card.access
+			target_access = get_access_by_id(pick(valid_access_values))
 		RFID.stored_card.access |= target_access.id
-		if(ntnet_global.intrusion_detection_enabled)
+		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
 			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.network_card.get_network_tag()]  - downloaded access codes for: [target_access.desc].")
 			ntnet_global.intrusion_detection_alarm = 1
 		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [target_access.desc]"
 		target_access = null
+		reset()
 
 /datum/computer_file/program/access_decrypter/Topic(href, href_list)
 	if(..())
@@ -57,8 +64,6 @@
 	if(href_list["PRG_execute"])
 		if(running)
 			return 1
-		if(text2num(href_list["allowed"]))
-			return 1
 		var/obj/item/weapon/computer_hardware/processor_unit/CPU = computer.processor_unit
 		var/obj/item/weapon/computer_hardware/card_slot/RFID = computer.card_slot
 		if(!istype(CPU) || !CPU.check_functionality() || !istype(RFID) || !RFID.check_functionality())
@@ -67,16 +72,33 @@
 		if(!istype(RFID.stored_card))
 			message = "RFID card is not present in the device. Operation aborted."
 			return
+
+		var/access = text2num(href_list["PRG_execute"])
+		var/obj/item/weapon/card/id/id_card = RFID.stored_card
+		if(access in id_card.access)
+			return 1
+		if(access in restricted_access_codes)
+			return 1
+		target_access = get_access_by_id(access)
+		if(!target_access)
+			return 1
+
 		running = TRUE
-		target_access = get_access_by_id(text2num(href_list["PRG_execute"]))
-		if(ntnet_global.intrusion_detection_enabled)
+		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
+		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
 			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.network_card.get_network_tag()]")
 			ntnet_global.intrusion_detection_alarm = 1
 		return 1
 
+/datum/computer_file/program/access_decrypter/proc/get_sneak_chance()
+	return max(operator_skill - SKILL_ADEPT, 0) * 30
+
+/datum/computer_file/program/access_decrypter/proc/get_speed()
+	var/skill_speed_modifier = 1 + (operator_skill - SKILL_ADEPT)/(SKILL_MAX - SKILL_MIN)
+	return computer.processor_unit.max_idle_programs * skill_speed_modifier
+
 /datum/nano_module/program/access_decrypter
 	name = "NTNet Access Decrypter"
-	var/list/restricted_access_codes = list(access_change_ids, access_network) // access codes that are not hackable due to balance reasons
 
 /datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)
@@ -91,7 +113,7 @@
 		data["message"] = PRG.message
 	else if(PRG.running)
 		data["running"] = 1
-		data["rate"] = PRG.computer.processor_unit.max_idle_programs
+		data["rate"] = PRG.get_speed()
 
 		// Stolen from DOS traffic generator, generates strings of 1s and 0s
 		var/percentage = (PRG.progress / PRG.target_progress) * 100
@@ -113,7 +135,7 @@
 						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
 						"ref" = access,
 						"allowed" = (access in id_card.access) ? 1 : 0,
-						"blocked" = (access in restricted_access_codes) ? 1 : 0)))
+						"blocked" = (access in PRG.restricted_access_codes) ? 1 : 0)))
 
 			regions.Add(list(list(
 				"name" = get_region_accesses_name(i),

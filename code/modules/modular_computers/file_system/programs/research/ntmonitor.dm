@@ -20,6 +20,11 @@
 		return
 	var/list/data = host.initial_data()
 
+	data += "skill_fail"
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
+		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 20)
+		data["skill_fail"] = fake_data.update_and_return_data()
+
 	data["ntnetstatus"] = ntnet_global.check_function()
 	data["ntnetrelays"] = ntnet_global.relays.len
 	data["idsstatus"] = ntnet_global.intrusion_detection_enabled
@@ -48,6 +53,9 @@
 	var/mob/user = usr
 	if(..())
 		return 1
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
+		return 1
+
 	if(href_list["resetIDS"])
 		if(ntnet_global)
 			ntnet_global.resetIDS()

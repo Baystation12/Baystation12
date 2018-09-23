@@ -69,10 +69,14 @@
 
 	return 1
 
+/datum/computer_file/program/ntnetdownload/proc/stealth_chance()
+	return max(operator_skill - SKILL_BASIC, 0) * 30
+
 /datum/computer_file/program/ntnetdownload/proc/abort_file_download()
 	if(!downloaded_file)
 		return
-	generate_network_log("Aborted download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
+	if(!prob(stealth_chance()))
+		generate_network_log("Aborted download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
 	downloaded_file = null
 	download_completion = 0
 	ui_header = "downloader_finished.gif"
@@ -80,7 +84,8 @@
 /datum/computer_file/program/ntnetdownload/proc/complete_file_download()
 	if(!downloaded_file)
 		return
-	generate_network_log("Completed download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
+	if(!prob(stealth_chance()))
+		generate_network_log("Completed download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
 	if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(downloaded_file))
 		// The download failed
 		downloaderror = "I/O ERROR - Unable to save file. Check whether you have enough free space on your hard drive and whether your hard drive is properly connected. If the issue persists contact your system administrator for assistance."
@@ -117,6 +122,7 @@
 			begin_file_download(href_list["PRG_downloadfile"])
 		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
 			downloads_queue += href_list["PRG_downloadfile"]
+		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
 		return 1
 	if(href_list["PRG_removequeued"])
 		downloads_queue.Remove(href_list["PRG_removequeued"])
