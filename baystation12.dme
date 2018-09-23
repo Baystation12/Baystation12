@@ -165,6 +165,7 @@
 #include "code\controllers\subsystems\alarm.dm"
 #include "code\controllers\subsystems\antags.dm"
 #include "code\controllers\subsystems\atoms.dm"
+#include "code\controllers\subsystems\chemistry.dm"
 #include "code\controllers\subsystems\evac.dm"
 #include "code\controllers\subsystems\event.dm"
 #include "code\controllers\subsystems\fluids.dm"
