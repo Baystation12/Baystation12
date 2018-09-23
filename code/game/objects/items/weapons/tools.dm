@@ -289,22 +289,27 @@
 		if((!waterproof && submerged()) || !remove_fuel(0.05))
 			setWelding(0)
 
-/obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
-	if(!proximity) return
-	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
+/obj/item/weapon/weldingtool/afterattack(var/obj/O, var/mob/user, proximity)
+	if(!proximity)
+		return
+
+	if(istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !welding)
 		if(!tank)
-			to_chat(user, "\The [src] has no tank attached!")
+			to_chat(user, SPAN_WARNING("\The [src] has no tank attached!"))
 			return
 		O.reagents.trans_to_obj(tank, tank.max_fuel)
-		to_chat(user, "<span class='notice'>You refuel \the [tank].</span>")
+		to_chat(user, SPAN_NOTICE("You refuel \the [tank]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
-	if (src.welding)
+
+	if(welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
 		if(isliving(O))
 			var/mob/living/L = O
 			L.IgniteMob()
+		else if(istype(O))
+			O.HandleObjectHeating(src, user, 700)
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return

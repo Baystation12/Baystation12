@@ -28,8 +28,8 @@
 /obj/item/weapon/reagent_containers/food/drinks/shaker/proc/mix()
 	if(reagents && reagents.total_volume)
 		atom_flags &= ~ATOM_FLAG_NO_REACT
-		reagents.handle_reactions()
-		addtimer(CALLBACK(src, .proc/stop_react), 0)
+		HANDLE_REACTIONS(reagents)
+		addtimer(CALLBACK(src, .proc/stop_react), SSchemistry.wait)
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker/proc/stop_react()
 	atom_flags |= ATOM_FLAG_NO_REACT
