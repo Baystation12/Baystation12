@@ -21,8 +21,16 @@
 /datum/computer_file/program/aidiag/Topic(href, href_list)
 	if(..())
 		return 1
+
+	if(href_list["PRG_terminal"])
+		if(!computer)
+			to_chat(usr, "This program does not appear to be running on hardware with a built-in terminal feature.")
+			return 1
+		computer.open_terminal(usr)
+		return 1
 	if(!usr.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
 		return 1
+
 	var/mob/living/silicon/ai/A = get_ai()
 	if(!A)
 		return 0
