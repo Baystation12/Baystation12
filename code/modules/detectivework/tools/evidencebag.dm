@@ -87,12 +87,15 @@
 		"You hear someone rustle around in a plastic bag, and remove something.")
 
 		user.put_in_hands(stored_item)
-		stored_item = null
-		w_class = initial(w_class)
-		update_icon()
+		empty()
 	else
 		to_chat(user, "[src] is empty.")
 		update_icon()
+
+/obj/item/weapon/evidencebag/proc/empty()
+	stored_item = null
+	w_class = initial(w_class)
+	update_icon()
 
 /obj/item/weapon/evidencebag/examine(mob/user)
 	. = ..(user)
