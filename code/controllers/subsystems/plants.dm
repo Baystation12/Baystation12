@@ -1,27 +1,12 @@
-// Attempts to offload processing for the spreading plants from the MC.
-// Processes vines/spreading plants.
+PROCESSING_SUBSYSTEM_DEF(plants)
+	name = "Plants"
+	priority = SS_PRIORITY_PLANTS
+	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
+	flags = SS_BACKGROUND|SS_POST_FIRE_TIMING
+	init_order = SS_INIT_PLANTS
+	wait = 60
 
-#define PLANTS_PER_TICK 500 // Cap on number of plant segments processed.
-#define PLANT_TICK_TIME 75  // Number of ticks between the plant processor cycling.
-
-// Debug for testing seed genes.
-/client/proc/show_plant_genes()
-	set category = "Debug"
-	set name = "Show Plant Genes"
-	set desc = "Prints the round's plant gene masks."
-
-	if(!holder)	return
-
-	if(!plant_controller || !plant_controller.gene_tag_masks)
-		to_chat(usr, "Gene masks not set.")
-		return
-
-	for(var/mask in plant_controller.gene_tag_masks)
-		to_chat(usr, "[mask]: [plant_controller.gene_tag_masks[mask]]")
-
-var/global/datum/controller/plants/plant_controller // Set in New().
-
-/datum/controller/plants
+	process_proc = /obj/machinery/portable_atmospherics/hydroponics/Process
 
 	var/list/product_descs = list()         // Stores generated fruit descs.
 	var/list/seeds = list()                 // All seed data stored here.
@@ -32,19 +17,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	var/list/gene_masked_list = list()		// Stored gene masked list, rather than recreating it when needed.
 	var/list/plant_gene_datums = list()		// Stored datum versions of the gene masked list.
 
-/datum/controller/plants/New()
-	if(plant_controller && plant_controller != src)
-		log_debug("Rebuilding plant controller.")
-		qdel(plant_controller)
-	plant_controller = src
-	setup()
-
-// Predefined/roundstart varieties use a string key to make it
-// easier to grab the new variety when mutating. Post-roundstart
-// and mutant varieties use their uid converted to a string instead.
-// Looks like shit but it's sort of necessary.
-/datum/controller/plants/proc/setup()
-
+/datum/controller/subsystem/processing/plants/Initialize()
 	// Build the icon lists.
 	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))
 		var/split = findtext(icostate,"-")
@@ -70,8 +43,8 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	// Populate the global seed datum list.
 	for(var/type in typesof(/datum/seed)-/datum/seed)
 		var/datum/seed/S = new type
+		S.update_growth_stages()
 		seeds[S.name] = S
-		S.uid = "[seeds.len]"
 		S.roundstart = 1
 
 	// Make sure any seed packets that were mapped in are updated
@@ -102,12 +75,12 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		gene_tag_masks[gene_tag] = gene_mask
 		plant_gene_datums[gene_mask] = G
 		gene_masked_list.Add(list(list("tag" = gene_tag, "mask" = gene_mask)))
+	. = ..()
 
 // Proc for creating a random seed type.
-/datum/controller/plants/proc/create_random_seed(var/survive_on_station)
+/datum/controller/subsystem/processing/plants/proc/create_random_seed(var/survive_on_station)
 	var/datum/seed/seed = new()
 	seed.randomize()
-	seed.uid = plant_controller.seeds.len + 1
 	seed.name = "[seed.uid]"
 	seeds[seed.name] = seed
 
