@@ -250,7 +250,7 @@
 				if(isWirecutter(W))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
-					new /obj/item/stack/rods( src )
+					new /obj/item/stack/material/rods( src )
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
 					update_icon()
 					return
@@ -264,7 +264,7 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
 					return
-				else if( istype(W, /obj/item/stack/rods) )
+				else if( istype(W, /obj/item/stack/material/rods) )
 					var/obj/item/stack/O = W
 					if(O.get_amount()>0)
 						O.use(1)
@@ -332,7 +332,7 @@
 						return
 					construction_stage = 0
 					update_icon()
-					new /obj/item/stack/rods(src)
+					new /obj/item/stack/material/rods(src)
 					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
 					return
 			if(0)

@@ -114,12 +114,7 @@
 			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [recipe.display_name()]!</span>")
 		return
 
-	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
-		to_chat(user, "<span class='warning'>There is another [recipe.display_name()] here!</span>")
-		return
-
-	if (recipe.on_floor && !isfloor(user.loc))
-		to_chat(user, "<span class='warning'>\The [recipe.display_name()] must be constructed on the floor!</span>")
+	if(!recipe.can_make(user))
 		return
 
 	if (recipe.time)
@@ -128,20 +123,10 @@
 			return
 
 	if (use(required))
-		var/atom/O
-		if(recipe.send_material_data && recipe.use_material)
-			O = new recipe.result_type(user.loc, recipe.use_material)
-		else
-			O = new recipe.result_type(user.loc)
-		O.set_dir(user.dir)
+		var/atom/O = recipe.spawn_result(user, user.loc, produced)
 		O.add_fingerprint(user)
 
 		user.put_in_hands(O)
-
-		if (istype(O, /obj/item/stack))
-			var/obj/item/stack/S = O
-			S.amount = produced
-			S.add_to_stacks(user, 1)
 
 /obj/item/stack/Topic(href, href_list)
 	..()
@@ -247,11 +232,14 @@
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack = new src.type(loc, transfer)
-		newstack.color = color
+		newstack.copy_from(src)
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
 		return newstack
 	return null
+
+/obj/item/stack/proc/copy_from(var/obj/item/stack/other)
+	color = other.color
 
 /obj/item/stack/proc/get_amount()
 	if(uses_charge)
@@ -344,18 +332,43 @@
 	var/one_per_turf = 0
 	var/on_floor = 0
 	var/use_material
+	var/use_reinf_material
 	var/difficulty = 1 // higher difficulty requires higher skill level to make.
 	var/send_material_data = 0 //Whether the recipe will send the material name as an argument when creating product.
 
-/datum/stack_recipe/New(material/material)
+/datum/stack_recipe/New(material/material, var/reinforce_material)
 	if(material)
 		use_material = material.name
 		difficulty += material.construction_difficulty
+	if(reinforce_material)
+		use_reinf_material = reinforce_material
 
 /datum/stack_recipe/proc/display_name()
 	if(!use_material)
 		return title
-	return "[material_display_name(use_material)] [title]"
+	. = "[material_display_name(use_material)] [title]"
+	if(use_reinf_material)
+		. = "[material_display_name(use_reinf_material)]-reinforced [.]"
+
+/datum/stack_recipe/proc/spawn_result(mob/user, location, amount)
+	var/atom/O
+	if(send_material_data && use_material)
+		O = new result_type(location, use_material, use_reinf_material)
+	else
+		O = new result_type(location)
+	O.set_dir(user.dir)
+	return O
+
+/datum/stack_recipe/proc/can_make(mob/user)
+	if (one_per_turf && (locate(result_type) in user.loc))
+		to_chat(user, "<span class='warning'>There is another [display_name()] here!</span>")
+		return FALSE
+
+	if (on_floor && !isfloor(user.loc))
+		to_chat(user, "<span class='warning'>\The [display_name()] must be constructed on the floor!</span>")
+		return FALSE
+	
+	return TRUE
 
 /*
  * Recipe list datum

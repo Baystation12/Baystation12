@@ -20517,16 +20517,16 @@
 /area/merchant_station)
 "aVR" = (
 /obj/structure/table/rack,
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
 /turf/simulated/floor/plating,
@@ -21083,7 +21083,7 @@
 "aXi" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/crossbow,
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 10
 	},
 /obj/machinery/light/small{

@@ -76,20 +76,20 @@
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
 	power_cost = 280 // Same number of shots, but it'll seem to recharge slightly faster
 
-	loaded = /obj/item/stack/rods
-	load_type = /obj/item/stack/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges - actually they dont
+	loaded = /obj/item/stack/material/rods
+	load_type = /obj/item/stack/material/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges - actually they dont
 	projectile_type = /obj/item/projectile/bullet/magnetic
 	load_sheet_max = 6 // Fewer shots per "magazine", but more abundant than matter cartridges.
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3, TECH_MAGNET = 5)
 	slowdown_worn = 3 // Little slower when worn
 
 /obj/item/weapon/gun/magnetic/railgun/tcc/show_ammo(var/mob/user)
-	var/obj/item/stack/rods/ammo = loaded
+	var/obj/item/stack/material/rods/ammo = loaded
 	if(istype(ammo))
 		to_chat(user, "<span class='notice'>It has [ammo.amount] shots loaded.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/tcc/check_ammo()
-	var/obj/item/stack/rods/ammo = loaded
+	var/obj/item/stack/material/rods/ammo = loaded
 	return ammo && ammo.amount
 
 /obj/item/weapon/gun/magnetic/railgun/tcc/out_of_ammo()
@@ -100,7 +100,7 @@
 	visible_message("<span class='warning'>\The [src] beeps, before clanging as the ammunition bank resets.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/tcc/use_ammo()
-	var/obj/item/stack/rods/ammo = loaded
+	var/obj/item/stack/material/rods/ammo = loaded
 	ammo.use(1)
 	if(!istype(ammo))
 		out_of_ammo()

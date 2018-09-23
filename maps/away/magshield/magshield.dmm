@@ -140,7 +140,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "ao" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/space)
 "ap" = (
@@ -620,7 +620,7 @@
 /turf/space,
 /area/magshield/smes_storage)
 "bF" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/magshield/smes_storage)
 "bG" = (
@@ -1470,7 +1470,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dF" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dG" = (
@@ -3131,11 +3131,11 @@
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "ic" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "id" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/magshield/west)
 "ie" = (
@@ -4228,7 +4228,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "lg" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/magshield/south)
 "lh" = (

@@ -111,12 +111,6 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/dylovene = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/silicate
-	name = "Silicate"
-	result = /datum/reagent/silicate
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/silicon = 1, /datum/reagent/acetone = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/mutagen
 	name = "Unstable mutagen"
 	result = /datum/reagent/mutagen
