@@ -1,9 +1,0 @@
- 
-author: CaelAislinn
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds Valmoric's animated Covenant chair."
-  - bugfix: "Prophets and eswords both now die properly."
-  - tweak: "Disables most vanilla SS13 gamemodes."
