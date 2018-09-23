@@ -20,6 +20,11 @@
 	..()
 	update_icon()
 
+/obj/item/device/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)
+	if(proximity && istype(O) && on)
+		O.HandleObjectHeating(src, user, 500)
+	..()
+
 /obj/item/device/oxycandle/attack_self(mob/user)
 	if(!on)
 		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")

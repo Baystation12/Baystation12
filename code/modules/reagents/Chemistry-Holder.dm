@@ -15,12 +15,11 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/Destroy()
 	. = ..()
-	SSchemistry.unmark_for_update(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
+	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	QDEL_NULL_LIST(reagent_list)
 	my_atom = null
 
 /* Internal procs */
-
 /datum/reagents/proc/get_free_space() // Returns free space.
 	return maximum_volume - total_volume
 
@@ -64,32 +63,64 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			total_volume += R.volume
 	return
 
-/datum/reagents/proc/handle_reactions()
-	SSchemistry.mark_for_update(src)
-
 /datum/reagents/proc/process_reactions()
+
 	if(!my_atom) // No reactions in temporary holders
 		return 0
+
 	if(!my_atom.loc) //No reactions inside GC'd containers
 		return 0
+
 	if(my_atom.atom_flags & ATOM_FLAG_NO_REACT) // No reactions here
 		return 0
 
-	var/reaction_occured = 0
+	var/reaction_occured = FALSE
+	var/list/eligible_reactions = list()
 
-	var/list/datum/chemical_reaction/eligible_reactions = list()
+	var/temperature = my_atom ? my_atom.temperature : T20C
+	for(var/thing in reagent_list)
+		var/datum/reagent/R = thing
 
-	for(var/datum/reagent/R in reagent_list)
-		eligible_reactions |= SSchemistry.chemical_reactions_by_id[R.type]
+		// Check if the reagent is decaying or not.
+		var/list/replace_self_with
+		var/replace_message
+		var/replace_sound
 
-	var/list/datum/chemical_reaction/active_reactions = list()
+		if(LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
+			replace_self_with = R.chilling_products
+			replace_message =   "\The [lowertext(R.name)] [R.chilling_message]"
+			replace_sound =     R.chilling_sound
+
+		else if(LAZYLEN(R.heating_products) && temperature >= R.heating_point)
+			replace_self_with = R.heating_products
+			replace_message =   "\The [lowertext(R.name)] [R.heating_message]"
+			replace_sound =     R.heating_sound
+
+		// If it is, handle replacing it with the decay product.
+		if(replace_self_with)
+			var/replace_amount = R.volume / LAZYLEN(replace_self_with)
+			del_reagent(R.type)
+			for(var/product in replace_self_with)
+				add_reagent(product, replace_amount)
+			reaction_occured = TRUE
+
+			if(my_atom)
+				if(replace_message)
+					my_atom.visible_message("<span class='notice'>\icon[my_atom] [replace_message]</span>")
+				if(replace_sound)
+					playsound(my_atom, replace_sound, 80, 1)
+
+		else // Otherwise, collect all possible reactions.
+			eligible_reactions |= SSchemistry.chemical_reactions_by_id[R.type]
+
+	var/list/active_reactions = list()
 
 	for(var/datum/chemical_reaction/C in eligible_reactions)
 		if(C.can_happen(src))
 			active_reactions[C] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
 			reaction_occured = 1
 
-	var/list/used_reagents = list()       // this is a helper
+	var/list/used_reagents = list()
 	// if two reactions share a reagent, each is allocated half of it, so we compute this here
 	for(var/datum/chemical_reaction/C in active_reactions)
 		var/list/adding = C.get_used_reagents()
@@ -107,16 +138,18 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			// However, we are guaranteed to fully use up the most profligate reagent if possible.
 			// Further reactions may occur on the next tick, when this runs again.
 
-	for(var/datum/chemical_reaction/C in active_reactions)
+	for(var/thing in active_reactions)
+		var/datum/chemical_reaction/C = thing
 		C.process(src, active_reactions[C])
 
-	for(var/datum/chemical_reaction/C in active_reactions)
+	for(var/thing in active_reactions)
+		var/datum/chemical_reaction/C = thing
 		C.post_reaction(src)
 
 	update_total()
 
 	if(reaction_occured)
-		handle_reactions() // Check again in case the new reagents can react again
+		HANDLE_REACTIONS(src) // Check again in case the new reagents can react again
 
 	return reaction_occured
 
@@ -136,10 +169,11 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 				current.mix_data(data, amount)
 			update_total()
 			if(!safety)
-				handle_reactions()
+				HANDLE_REACTIONS(src)
 			if(my_atom)
 				my_atom.on_reagent_change()
 			return 1
+
 	if(ispath(reagent_type, /datum/reagent))
 		var/datum/reagent/R = new reagent_type(src)
 		reagent_list += R
@@ -147,7 +181,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		R.initialize_data(data)
 		update_total()
 		if(!safety)
-			handle_reactions()
+			HANDLE_REACTIONS(src)
 		if(my_atom)
 			my_atom.on_reagent_change()
 		return 1
@@ -163,7 +197,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			current.volume -= amount // It can go negative, but it doesn't matter
 			update_total() // Because this proc will delete it then
 			if(!safety)
-				handle_reactions()
+				HANDLE_REACTIONS(src)
 			if(my_atom)
 				my_atom.on_reagent_change()
 			return 1
@@ -255,7 +289,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		remove_reagent(current.type, amount_to_remove, 1)
 
 	update_total()
-	handle_reactions()
+	HANDLE_REACTIONS(src)
 	return amount
 
 // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
@@ -279,9 +313,9 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			remove_reagent(current.type, amount_to_transfer, 1)
 
 	if(!copy)
-		handle_reactions()
+		HANDLE_REACTIONS(src)
 	if(!safety)
-		target.handle_reactions()
+		HANDLE_REACTIONS(target)
 	return amount
 
 /* Holder-to-atom and similar procs */

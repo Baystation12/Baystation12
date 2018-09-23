@@ -1,6 +1,6 @@
 /atom
 	var/level = 2
-	var/atom_flags
+	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	var/list/blood_DNA
 	var/was_bloodied
 	var/blood_color
@@ -10,10 +10,7 @@
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 	var/simulated = 1 //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
-
-	///Chemistry.
-	var/datum/reagents/reagents = null
-
+	var/datum/reagents/reagents // chemical contents.
 	var/list/climbers
 	var/climb_speed_mult = 1
 

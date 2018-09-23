@@ -45,7 +45,7 @@
 	return //TODO: DEFERRED
 
 /mob/living/carbon/slime/proc/adjust_body_temperature(current, loc_temp, boost)
-	var/temperature = current
+	var/btemperature = current
 	var/difference = abs(current-loc_temp)	//get difference
 	var/increments// = difference/10			//find how many increments apart they are
 	if(difference > 50)
@@ -55,10 +55,10 @@
 	var/change = increments*boost	// Get the amount to change by (x per increment)
 	var/temp_change
 	if(current < loc_temp)
-		temperature = min(loc_temp, temperature+change)
+		btemperature = min(loc_temp, btemperature+change)
 	else if(current > loc_temp)
-		temperature = max(loc_temp, temperature-change)
-	temp_change = (temperature - current)
+		btemperature = max(loc_temp, btemperature-change)
+	temp_change = (btemperature - current)
 	return temp_change
 
 /mob/living/carbon/slime/handle_chemicals_in_body()

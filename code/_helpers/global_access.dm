@@ -103,6 +103,8 @@
 			return global.SSsun;
 		if("SSsupply")
 			return global.SSsupply;
+		if("SStemperature")
+			return global.SStemperature;
 		if("SStgui")
 			return global.SStgui;
 		if("SStimer")
@@ -1088,6 +1090,8 @@
 			global.SSsun=newval;
 		if("SSsupply")
 			global.SSsupply=newval;
+		if("SStemperature")
+			global.SStemperature=newval;
 		if("SStgui")
 			global.SStgui=newval;
 		if("SStimer")
@@ -2021,6 +2025,7 @@
 	"SSskybox",
 	"SSsun",
 	"SSsupply",
+	"SStemperature",
 	"SStgui",
 	"SStimer",
 	"SStrade",
