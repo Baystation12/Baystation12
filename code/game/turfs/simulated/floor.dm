@@ -85,3 +85,10 @@
 
 /turf/simulated/floor/can_engrave()
 	return (!flooring || flooring.can_engrave)
+
+/turf/simulated/floor/shuttle_ceiling
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "reinforced"
+
+/turf/simulated/floor/shuttle_ceiling/airless
+	initial_gas = null
