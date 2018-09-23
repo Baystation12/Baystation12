@@ -17190,7 +17190,6 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/structure/aliumizer,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNc" = (
