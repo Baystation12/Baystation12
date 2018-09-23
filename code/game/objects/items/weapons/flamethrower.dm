@@ -79,7 +79,7 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		new /obj/item/stack/rods(T)
+		new /obj/item/stack/material/rods(T)
 		qdel(src)
 		return
 

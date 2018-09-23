@@ -84,7 +84,6 @@
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
-	var/rod_product
 	var/wire_product
 	var/list/window_options = list()
 
@@ -122,18 +121,21 @@
 	var/xarch_source_mineral = "iron"
 
 // Placeholders for light tiles and rglass.
-/material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
-	if(!rod_product)
-		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
-		return
+/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
 	if(used_stack.get_amount() < 1 || target_stack.get_amount() < 1)
 		to_chat(user, "<span class='warning'>You need one rod and one sheet of [display_name] to make anything useful.</span>")
 		return
+	var/material/reinf_mat = used_stack.material
+	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
+		to_chat(user, "<span class='warning'>The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name].</span>")
+		return
+	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.display_name].</span>")
 	used_stack.use(1)
-	target_stack.use(1)
-	var/obj/item/stack/S = new rod_product(get_turf(user))
-	S.add_fingerprint(user)
-	S.add_to_stacks(user)
+	var/obj/item/stack/material/S = target_stack.split(1)
+	S.reinf_material = reinf_mat
+	S.update_strings()
+	S.update_icon()
+	S.dropInto(target_stack.loc)
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)

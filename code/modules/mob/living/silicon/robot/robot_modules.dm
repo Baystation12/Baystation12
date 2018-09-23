@@ -385,7 +385,7 @@ var/global/list/robot_modules = list(
 	G.synths = list(glass)
 	src.modules += G
 
-	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	var/obj/item/stack/material/rods/cyborg/R = new /obj/item/stack/material/rods/cyborg(src)
 	R.synths = list(metal)
 	src.modules += R
 
@@ -761,7 +761,7 @@ var/global/list/robot_modules = list(
 	G.synths = list(glass)
 	src.modules += G
 
-	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	var/obj/item/stack/material/rods/cyborg/R = new /obj/item/stack/material/rods/cyborg(src)
 	R.synths = list(metal)
 	src.modules += R
 

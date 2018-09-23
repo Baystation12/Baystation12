@@ -4651,7 +4651,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "hM" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "hN" = (
@@ -5190,13 +5190,13 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "iO" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /mob/living/simple_animal/hostile/carp,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iP" = (
 /obj/item/stack/material/steel,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iQ" = (
@@ -5354,7 +5354,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "jc" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/ship/scrap/maintenance/power)
 "jd" = (
@@ -5535,7 +5535,7 @@
 /turf/simulated/wall,
 /area/ship/scrap/maintenance/power)
 "jB" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/space)
 "jC" = (
@@ -5617,7 +5617,7 @@
 /area/ship/scrap/maintenance/engine/aft)
 "jN" = (
 /obj/item/stack/material/steel,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jO" = (
@@ -5681,7 +5681,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jX" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jY" = (

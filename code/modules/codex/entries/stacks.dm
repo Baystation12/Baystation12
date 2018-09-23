@@ -3,7 +3,7 @@
 	antag_text = "Telecrystals can be activated by utilizing them on devices with an actively running uplink. They will not activate on unactivated uplinks."
 
 /datum/codex_entry/rods
-	associated_paths = list(/obj/item/stack/rods)
+	associated_paths = list(/obj/item/stack/material/rods)
 	mechanics_text = "Made from steel sheets.  You can build a grille by using it in your hand. \
 	Clicking on a floor without any tiles will reinforce the floor.  You can make reinforced glass by combining rods and normal glass sheets."
 

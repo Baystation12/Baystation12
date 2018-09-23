@@ -196,7 +196,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/rods
 	name = "metal rods"
-	path = /obj/item/stack/rods
+	path = /obj/item/stack/material/rods
 	category = "General"
 	is_stack = 1
 

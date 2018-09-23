@@ -35,7 +35,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/surgicaldrill = 100,	\
 	/obj/item/weapon/pen = 75,	\
-	/obj/item/stack/rods = 50
+	/obj/item/stack/material/rods = 50
 	)
 
 	min_duration = 60

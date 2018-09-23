@@ -6960,10 +6960,10 @@
 /obj/item/stack/material/steel{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{

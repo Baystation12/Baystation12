@@ -29,6 +29,7 @@
 		recipes += new/datum/stack_recipe/furniture/bed(src)
 		recipes += new/datum/stack_recipe/lock(src)
 		recipes += new/datum/stack_recipe/railing(src)
+		recipes += new/datum/stack_recipe/rod(src)
 
 	if(hardness>50)
 		recipes += new/datum/stack_recipe/fork(src)
@@ -52,7 +53,6 @@
 	recipes += new/datum/stack_recipe/furniture/canister(src)
 	recipes += new/datum/stack_recipe/cannon(src)
 	recipes += create_recipe_list(/datum/stack_recipe/tile/metal)
-	recipes += new/datum/stack_recipe/rod(src)
 	recipes += new/datum/stack_recipe/furniture/computerframe(src)
 	recipes += new/datum/stack_recipe/furniture/girder(src)
 	recipes += new/datum/stack_recipe/furniture/wall(src)

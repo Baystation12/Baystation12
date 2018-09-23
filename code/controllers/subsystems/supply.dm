@@ -100,11 +100,12 @@ SUBSYSTEM_DEF(supply)
 						continue
 
 					// Sell materials
-					if(istype(A, /obj/item/stack))
-						var/obj/item/stack/P = A
-						var/material/material = P.get_material()
-						if(material.sale_price > 0)
-							material_count[material.display_name] += P.get_amount() * material.sale_price
+					if(istype(A, /obj/item/stack/material))
+						var/obj/item/stack/material/P = A
+						if(P.material.sale_price > 0)
+							material_count[P.material.display_name] += P.get_amount() * P.material.sale_price * P.matter_multiplier
+						if(P.reinf_material && P.reinf_material.sale_price > 0)
+							material_count[P.reinf_material.display_name] += P.get_amount() * P.reinf_material.sale_price * P.matter_multiplier * 0.5
 						continue
 
 					// Must sell ore detector disks in crates

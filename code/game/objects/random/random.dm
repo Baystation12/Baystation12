@@ -535,7 +535,7 @@ obj/random/closet/spawn_choices()
 				/obj/item/stack/material/plastic/ten,
 				/obj/item/stack/material/wood/ten,
 				/obj/item/stack/material/cardboard/ten,
-				/obj/item/stack/rods/ten,
+				/obj/item/stack/material/rods/ten,
 				/obj/item/stack/material/plasteel/ten,
 				/obj/item/stack/material/steel/fifty,
 				/obj/item/stack/material/glass/fifty,
@@ -543,7 +543,7 @@ obj/random/closet/spawn_choices()
 				/obj/item/stack/material/plastic/fifty,
 				/obj/item/stack/material/wood/fifty,
 				/obj/item/stack/material/cardboard/fifty,
-				/obj/item/stack/rods/fifty,
+				/obj/item/stack/material/rods/fifty,
 				/obj/item/stack/material/plasteel/fifty)
 
 /obj/random/soap

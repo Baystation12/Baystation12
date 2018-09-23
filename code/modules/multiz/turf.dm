@@ -142,15 +142,15 @@
 
 
 /turf/simulated/open/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/stack/rods))
+	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			return L.attackby(C, user)
-		var/obj/item/stack/rods/R = C
+		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z))
+			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.name)
 			//Update turfs
 			SSopen_space.add_turf(src, 1)
 		return

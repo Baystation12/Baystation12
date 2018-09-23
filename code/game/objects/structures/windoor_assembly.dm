@@ -79,7 +79,7 @@ obj/structure/windoor_assembly/Destroy()
 						to_chat(user, "<span class='notice'>You dissasembled the windoor assembly!</span>")
 						new /obj/item/stack/material/glass/reinforced(get_turf(src), 5)
 						if(secure)
-							new /obj/item/stack/rods(get_turf(src), 4)
+							new /obj/item/stack/material/rods(get_turf(src), 4)
 						qdel(src)
 				else
 					to_chat(user, "<span class='notice'>You need more welding fuel to dissassemble the windoor assembly.</span>")
@@ -114,8 +114,8 @@ obj/structure/windoor_assembly/Destroy()
 						src.SetName("Windoor Assembly")
 
 			//Adding plasteel makes the assembly a secure windoor assembly. Step 2 (optional) complete.
-			else if(istype(W, /obj/item/stack/rods) && !secure)
-				var/obj/item/stack/rods/R = W
+			else if(istype(W, /obj/item/stack/material/rods) && !secure)
+				var/obj/item/stack/material/rods/R = W
 				if(R.get_amount() < 4)
 					to_chat(user, "<span class='warning'>You need more rods to do this.</span>")
 					return

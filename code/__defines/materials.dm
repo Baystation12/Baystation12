@@ -70,3 +70,8 @@
 #define MATERIAL_PADDING    0x4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
+//Stack flags
+#define USE_MATERIAL_COLOR 				0x1
+#define USE_MATERIAL_SINGULAR_NAME    	0x2
+#define USE_MATERIAL_PLURAL_NAME    	0x4

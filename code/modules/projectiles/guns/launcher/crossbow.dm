@@ -145,8 +145,8 @@
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			update_icon()
 			return
-		else if(istype(W,/obj/item/stack/rods))
-			var/obj/item/stack/rods/R = W
+		else if(istype(W,/obj/item/stack/material/rods))
+			var/obj/item/stack/material/rods/R = W
 			if (R.use(1))
 				bolt = new /obj/item/weapon/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
@@ -220,9 +220,9 @@
 		if(5) to_chat(user, "It has a steel cable loosely strung across the lath.")
 
 /obj/item/weapon/crossbowframe/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack/rods))
+	if(istype(W,/obj/item/stack/material/rods))
 		if(buildstate == 0)
-			var/obj/item/stack/rods/R = W
+			var/obj/item/stack/material/rods/R = W
 			if(R.use(3))
 				to_chat(user, "<span class='notice'>You assemble a backbone of rods around the wooden stock.</span>")
 				buildstate++

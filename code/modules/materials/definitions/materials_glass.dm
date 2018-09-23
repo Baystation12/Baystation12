@@ -4,7 +4,7 @@
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
 	flags = MATERIAL_BRITTLE
-	icon_colour = "#00e1ff"
+	icon_colour = GLASS_COLOR
 	opacity = 0.3
 	integrity = 50
 	shard_type = SHARD_SHARD
@@ -17,16 +17,15 @@
 	door_icon_base = "stone"
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
-	window_options = list("One Direction" = 1, "Full Window" = 4)
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/basic
-	rod_product = /obj/item/stack/material/glass/reinforced
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
 	sale_price = 1
 
-/material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
+/material/glass/build_windows(var/mob/living/user, var/obj/item/stack/material/used_stack)
 
-	if(!user || !used_stack || !created_window || !window_options.len)
+	if(!user || !istype(used_stack) || !created_window || !window_options.len)
 		return 0
 
 	if(!user.IsAdvancedToolUser())
@@ -38,6 +37,9 @@
 		to_chat(user, "<span class='warning'>You must be standing on open flooring to build a window.</span>")
 		return 1
 
+	var/options = window_options.Copy()
+	if(!used_stack.reinf_material)
+		options -= "Windoor"
 	var/title = "Sheet-[used_stack.name] ([used_stack.get_amount()] sheet\s left)"
 	var/choice = input(title, "What would you like to construct?") as null|anything in window_options
 
@@ -89,7 +91,7 @@
 
 	// Build the structure and update sheet count etc.
 	used_stack.use(sheets_needed)
-	new build_path(T, build_dir, 1)
+	new build_path(T, build_dir, 1, name, used_stack.reinf_material && used_stack.reinf_material.name)
 	return 1
 
 /material/glass/proc/is_reinforced()
@@ -97,28 +99,6 @@
 
 /material/glass/is_brittle()
 	return ..() && !is_reinforced()
-
-/material/glass/reinforced
-	name = MATERIAL_REINFORCED_GLASS
-	display_name = "reinforced glass"
-	stack_type = /obj/item/stack/material/glass/reinforced
-	flags = MATERIAL_BRITTLE
-	icon_colour = "#00e1ff"
-	opacity = 0.3
-	integrity = 100
-	melting_point = T0C + 750
-	shard_type = SHARD_SHARD
-	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	weight = 17
-	brute_armor = 2
-	burn_armor = 3
-	stack_origin_tech = list(TECH_MATERIAL = 2)
-	alloy_materials = list(MATERIAL_STEEL = 1875,MATERIAL_GLASS = 3750)
-	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
-	created_window = /obj/structure/window/reinforced
-	wire_product = null
-	rod_product = null
-	construction_difficulty = 1
 
 /material/glass/phoron
 	name = MATERIAL_PHORON_GLASS
@@ -130,26 +110,11 @@
 	brute_armor = 2
 	burn_armor = 5
 	melting_point = T0C + 2000
-	icon_colour = "#fc2bc5"
+	icon_colour = MATERIAL_PHORON_GLASS
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
-	rod_product = /obj/item/stack/material/glass/phoronrglass
 	construction_difficulty = 2
 	alloy_product = TRUE
 	alloy_materials = list(MATERIAL_SAND = 2500, MATERIAL_PLATINUM = 1250)
 	sale_price = 2
-
-/material/glass/phoron/reinforced
-	name = MATERIAL_REINFORCED_PHORON_GLASS
-	brute_armor = 3
-	burn_armor = 10
-	melting_point = T0C + 4000
-	display_name = "reinforced borosilicate glass"
-	stack_type = /obj/item/stack/material/glass/phoronrglass
-	stack_origin_tech = list(TECH_MATERIAL = 5)
-	created_window = /obj/structure/window/phoronreinforced
-	stack_origin_tech = list(TECH_MATERIAL = 2)
-	alloy_materials = list() //todo
-	rod_product = null
-	integrity = 100

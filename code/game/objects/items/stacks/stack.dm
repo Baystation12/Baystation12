@@ -128,11 +128,7 @@
 			return
 
 	if (use(required))
-		var/atom/O
-		if(recipe.send_material_data && recipe.use_material)
-			O = new recipe.result_type(user.loc, recipe.use_material)
-		else
-			O = new recipe.result_type(user.loc)
+		var/atom/O = recipe.spawn_result(user.loc)
 		O.set_dir(user.dir)
 		O.add_fingerprint(user)
 
@@ -247,11 +243,14 @@
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack = new src.type(loc, transfer)
-		newstack.color = color
+		newstack.copy_from(src)
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
 		return newstack
 	return null
+
+/obj/item/stack/proc/copy_from(var/obj/item/stack/other)
+	color = other.color
 
 /obj/item/stack/proc/get_amount()
 	if(uses_charge)
@@ -356,6 +355,12 @@
 	if(!use_material)
 		return title
 	return "[material_display_name(use_material)] [title]"
+
+/datum/stack_recipe/proc/spawn_result(location, amount)
+	if(send_material_data && use_material)
+		. = new result_type(location, use_material)
+	else
+		. = new result_type(location)
 
 /*
  * Recipe list datum

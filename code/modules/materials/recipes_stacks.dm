@@ -53,7 +53,14 @@
 
 /datum/stack_recipe/rod
 	title = "rod"
-	result_type = /obj/item/stack/rods
+	result_type = /obj/item/stack/material/rods
 	res_amount = 2
 	max_res_amount = 60
+	send_material_data = 1
 	time = 5
+
+/datum/stack_recipe/rod/spawn_result(location, amount)
+	if(send_material_data && use_material)
+		. = new result_type(location, amount, use_material)
+	else
+		. = new result_type(location)

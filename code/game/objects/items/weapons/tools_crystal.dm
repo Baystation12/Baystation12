@@ -11,7 +11,7 @@
 	waterproof = TRUE
 
 /obj/item/weapon/weldingtool/crystal/attackby(var/obj/item/W, var/mob/user)
-	if(isScrewdriver(W) || istype(W,/obj/item/stack/rods) || istype(W, /obj/item/weapon/welder_tank))
+	if(isScrewdriver(W) || istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/weapon/welder_tank))
 		return
 	. = ..()
 
