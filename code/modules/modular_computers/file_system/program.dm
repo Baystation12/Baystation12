@@ -24,6 +24,7 @@
 	var/computer_emagged = 0						// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null							// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
 	var/ntnet_speed = 0								// GQ/s - current network connectivity transfer rate
+	var/operator_skill = SKILL_MIN                  // Holder for skill value of current/recent operator for programs that tick.
 
 /datum/computer_file/program/New(var/obj/item/modular_computer/comp = null)
 	..()
