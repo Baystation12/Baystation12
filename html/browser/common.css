@@ -14,7 +14,7 @@ hr
 	height: 1px;
 }
 
-a, a:link, a:visited, a:active, .linkOn, .linkOff
+a, a:link, a:visited, a:active, .linkOn, .linkOff, input
 { 
 	color: #ffffff; 
 	text-decoration: none;
