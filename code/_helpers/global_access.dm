@@ -673,8 +673,6 @@
 			return global.pipe_colors;
 		if("pipe_processing_killed")
 			return global.pipe_processing_killed;
-		if("plant_controller")
-			return global.plant_controller;
 		if("plant_seed_sprites")
 			return global.plant_seed_sprites;
 		if("playable_species")
@@ -1658,8 +1656,6 @@
 			global.pipe_colors=newval;
 		if("pipe_processing_killed")
 			global.pipe_processing_killed=newval;
-		if("plant_controller")
-			global.plant_controller=newval;
 		if("plant_seed_sprites")
 			global.plant_seed_sprites=newval;
 		if("playable_species")
@@ -2306,7 +2302,6 @@
 	"photo_count",
 	"pipe_colors",
 	"pipe_processing_killed",
-	"plant_controller",
 	"plant_seed_sprites",
 	"playable_species",
 	"possible_changeling_IDs",

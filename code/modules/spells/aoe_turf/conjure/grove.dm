@@ -22,7 +22,7 @@
 	if(seed_type)
 		seed = new seed_type()
 	else
-		seed = plant_controller.create_random_seed(1)
+		seed = SSplants.create_random_seed(1)
 
 /spell/aoe_turf/conjure/grove/before_cast()
 	var/turf/T = get_turf(holder)
