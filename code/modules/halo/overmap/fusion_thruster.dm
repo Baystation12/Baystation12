@@ -89,7 +89,7 @@
 			icon_state = "nozzle0"
 			src.visible_message("<span class='info'>[src] ejects it's spent [held_fuel].</span>")
 		else
-			user << "<span class='notice'>[src] does not contain a deuterium fuel packet!</span>"
+			to_chat(user, "<span class='notice'>[src] does not contain a deuterium fuel packet!</span>")
 
 /obj/machinery/fusion_thruster/attackby(var/obj/I, var/mob/user)
 	if(can_use(user))
