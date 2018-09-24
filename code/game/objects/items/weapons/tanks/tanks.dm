@@ -325,9 +325,29 @@ var/list/global/tank_gauge_cache = list()
 	check_status()
 
 /obj/item/weapon/tank/update_icon(var/override)
+	var/static/previous_gauge_pressure = null
+	
+	var/needs_updating = override
+	
 	if((atom_flags & ATOM_FLAG_INITIALIZED) && istype(loc, /obj/) && !istype(loc, /obj/item/clothing/suit/) && !override) //So we don't eat up our tick. Every tick, when we're not actually in play.
 		return
+
+	var/gauge_pressure = 0
+	if(air_contents)
+		gauge_pressure = air_contents.return_pressure()
+		if(gauge_pressure > TANK_IDEAL_PRESSURE)
+			gauge_pressure = -1
+		else
+			gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
+	if (previous_gauge_pressure != gauge_pressure)
+		needs_updating = 1
+	
+	previous_gauge_pressure = gauge_pressure
+	if (!needs_updating)
+		return
+
 	overlays.Cut()
+	
 	if(proxyassembly.assembly || wired)
 		overlays += image(icon,"bomb_assembly")
 		if(proxyassembly.assembly)
@@ -339,14 +359,6 @@ var/list/global/tank_gauge_cache = list()
 
 	if(!gauge_icon)
 		return
-
-	var/gauge_pressure = 0
-	if(air_contents)
-		gauge_pressure = air_contents.return_pressure()
-		if(gauge_pressure > TANK_IDEAL_PRESSURE)
-			gauge_pressure = -1
-		else
-			gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
 
 	var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
 	if(!tank_gauge_cache[indicator])
