@@ -22,12 +22,6 @@
 	if(..())
 		return 1
 
-	if(href_list["PRG_terminal"])
-		if(!computer)
-			to_chat(usr, "This program does not appear to be running on hardware with a built-in terminal feature.")
-			return 1
-		computer.open_terminal(usr)
-		return 1
 	if(!usr.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
 		return 1
 
@@ -100,6 +94,7 @@
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
 		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 25)
 		data["skill_fail"] = fake_data.update_and_return_data()
+	data["terminal"] = !!program
 
 	var/mob/living/silicon/ai/A
 	// A shortcut for getting the AI stored inside the computer. The program already does necessary checks.
