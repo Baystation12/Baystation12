@@ -9,16 +9,32 @@
 /datum/terminal/New(mob/user, obj/item/modular_computer/computer)
 	..()
 	src.computer = computer
-	if(user)
+	if(user && can_use(user))
 		show_terminal(user)
+	START_PROCESSING(SSprocessing, src)
 
 /datum/terminal/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
 	if(computer && computer.terminals)
 		computer.terminals -= src
 	computer = null
-	panel.close()
-	QDEL_NULL(panel)
+	if(panel)
+		panel.close()
+		QDEL_NULL(panel)
 	return ..()
+
+/datum/terminal/proc/can_use(mob/user)
+	if(!user)
+		return FALSE
+	if(!CanInteractWith(user, computer, GLOB.default_state))
+		return FALSE
+	if(!computer || !computer.enabled)
+		return FALSE
+	return TRUE
+
+/datum/terminal/Process()
+	if(!can_use(get_user()))
+		qdel(src)
 
 /datum/terminal/proc/command_by_name(name)
 	for(var/command in GLOB.terminal_commands)
@@ -43,6 +59,9 @@
 /datum/terminal/Topic(href, href_list)
 	if(..())
 		return 1
+	if(!can_use(usr) || href_list["close"])
+		qdel(src)
+		return 1
 	if(href_list["input"])
 		var/input = sanitize(href_list["input"])
 		history += "> [input]"
@@ -54,9 +73,6 @@
 			history.Cut(1, length(history) - history_max_length + 1)
 		update_content()
 		panel.update()
-		return 1
-	if(href_list["close"])
-		qdel(src)
 		return 1
 
 /datum/terminal/proc/parse(text, mob/user)

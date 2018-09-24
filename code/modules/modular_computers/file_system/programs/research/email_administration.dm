@@ -25,6 +25,7 @@
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
 		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 15)
 		data["skill_fail"] = fake_data.update_and_return_data()
+	data["terminal"] = !!program
 
 	if(error)
 		data["error"] = error
@@ -76,12 +77,6 @@
 	if(!istype(user))
 		return 1
 
-	if(href_list["terminal"])
-		if(!program || !program.computer)
-			to_chat(user, "This program does not appear to be running on hardware with a built-in terminal feature.")
-			return 1
-		program.computer.open_terminal(user)
-		return 1
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
 		return 1
 
