@@ -211,6 +211,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
 	src.modules += new /obj/item/device/flash(src)
+	src.modules += new /obj/item/borg/sight/hud/med(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/surgeon(src)
 	src.modules += new /obj/item/weapon/scalpel/manager(src)
@@ -473,7 +474,8 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 	src.modules += new /obj/item/weapon/storage/bag/trash(src)
-	src.modules += new /obj/item/weapon/mop(src)
+	src.modules += new /obj/item/weapon/mop/advanced(src)
+	src.modules += new /obj/item/holosign_creator(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/borg/sight/hud/jani(src)
 	src.modules += new /obj/item/device/plunger/robot(src)
