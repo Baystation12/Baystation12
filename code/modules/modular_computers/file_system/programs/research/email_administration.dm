@@ -13,6 +13,7 @@
 
 /datum/nano_module/program/email_administration
 	name = "Email Administration"
+	available_to_ai = TRUE
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 	var/error = ""
