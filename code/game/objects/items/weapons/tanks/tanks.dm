@@ -10,6 +10,7 @@ var/list/global/tank_gauge_cache = list()
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6
+	var/previous_gauge_pressure = null
 
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
@@ -325,8 +326,6 @@ var/list/global/tank_gauge_cache = list()
 	check_status()
 
 /obj/item/weapon/tank/update_icon(var/override)
-	var/static/previous_gauge_pressure = null
-	
 	var/needs_updating = override
 	
 	if((atom_flags & ATOM_FLAG_INITIALIZED) && istype(loc, /obj/) && !istype(loc, /obj/item/clothing/suit/) && !override) //So we don't eat up our tick. Every tick, when we're not actually in play.
