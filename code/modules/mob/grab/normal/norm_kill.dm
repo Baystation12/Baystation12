@@ -9,7 +9,7 @@
 	reverse_facing = 1
 	can_absorb = 1
 	shield_assailant = 0
-	point_blank_mult = 1
+	point_blank_mult = 2
 	same_tile = 1
 	force_danger = 1
 	restrains = 1
