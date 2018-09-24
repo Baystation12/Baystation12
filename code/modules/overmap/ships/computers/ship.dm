@@ -31,3 +31,18 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	var/datum/browser/popup = new (user, "[src]", "[src]")
 	popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to [flavor].<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
 	popup.open()
+
+/obj/machinery/computer/ship/attack_hand(var/mob/user as mob)
+	if(..())
+		user.unset_machine()
+
+	if(!isAI(user))
+		user.set_machine(src)
+
+	ui_interact(user)
+
+/obj/machinery/computer/ship/Topic(href, href_list)
+	if(..())
+		return 1
+	if(href_list["sync"])
+		sync_linked()

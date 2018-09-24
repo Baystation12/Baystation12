@@ -78,16 +78,13 @@
 
 /obj/machinery/computer/ship/sensors/attack_hand(var/mob/user as mob)
 	if(..())
-		user.unset_machine()
 		viewing = 0
 		unlook(user)
 		return
 
 	if(!isAI(user))
-		user.set_machine(src)
 		if(viewing)
 			look(user)
-	ui_interact(user)
 
 /obj/machinery/computer/ship/sensors/proc/look(var/mob/user)
 	if(linked)
@@ -114,9 +111,8 @@
 		unlook(usr)
 		usr.unset_machine()
 		return 1
+
 	if (!linked)
-		if(href_list["sync"])
-			sync_linked()
 		return
 
 	if (href_list["viewing"])
