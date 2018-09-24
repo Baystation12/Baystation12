@@ -282,30 +282,16 @@
 /obj/structure/railing/ex_act(severity)
 	qdel(src)
 
+/obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
+	. = ..()
+	if(. && get_turf(user) == get_turf(src))
+		var/turf/T = get_step(src, src.dir)
+		if(T.turf_is_crowded(user))
+			to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
+			return 0
+
 /obj/structure/railing/do_climb(var/mob/living/user)
-	if(!can_climb(user))
-		return
-
-	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
-	climbers |= user
-
-	if(!do_after(user,(issmall(user) ? 20 : 34)))
-		climbers -= user
-		return
-
-	if(!can_climb(user, post_climb_check=1))
-		climbers -= user
-		return
-
-	var/turf/T = (get_turf(user) == get_turf(src)) ? get_step(src, src.dir) : get_turf(src)
-	if(T.turf_is_crowded(user))
-		to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
-		climbers -= user
-		return
-
-	user.forceMove(T)
-
-	user.visible_message("<span class='danger'>\The [user] climbed over \the [src]!</span>")
-	if(!anchored || material.is_brittle())
-		take_damage(maxhealth) // Fatboy
-	climbers -= user
+	. = ..()
+	if(.)
+		if(!anchored || material.is_brittle())
+			take_damage(maxhealth) // Fatboy
