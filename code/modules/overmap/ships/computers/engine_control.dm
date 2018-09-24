@@ -54,9 +54,6 @@
 	if(..())
 		return 1
 
-	if(href_list["sync"])
-		sync_linked()
-
 	if(href_list["state"])
 		state = href_list["state"]
 

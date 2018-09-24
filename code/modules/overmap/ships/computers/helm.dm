@@ -67,77 +67,69 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/helm/attack_hand(var/mob/user as mob)
 	if(..())
-		user.unset_machine()
 		manual_control = 0
 		return
 
 	if(!isAI(user))
-		user.set_machine(src)
 		operator_skill = user.get_skill_value(core_skill)
 		if(linked)
 			user.reset_view(linked)
 
-	if(linked)
-		ui_interact(user)
-	else
-		display_reconnect_dialog(user, "ship control systems")
-
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
-	var/turf/T = get_turf(linked)
-	var/obj/effect/overmap/sector/current_sector = locate() in T
-
-	data["sector"] = current_sector ? current_sector.name : "Deep Space"
-	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
-	data["landed"] = linked.get_landed_info()
-	data["s_x"] = linked.x
-	data["s_y"] = linked.y
-	data["dest"] = dy && dx
-	data["d_x"] = dx
-	data["d_y"] = dy
-	data["speedlimit"] = speedlimit ? speedlimit : "None"
-	data["speed"] = linked.get_speed()
-	data["accel"] = linked.get_acceleration()
-	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
-	data["autopilot"] = autopilot
-	data["manual_control"] = manual_control
-	data["canburn"] = linked.can_burn()
-
-	if(linked.get_speed())
-		data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
+	if(!linked)
+		display_reconnect_dialog(user, "helm")
 	else
-		data["ETAnext"] = "N/A"
+		var/turf/T = get_turf(linked)
+		var/obj/effect/overmap/sector/current_sector = locate() in T
 
-	var/list/locations[0]
-	for (var/key in known_sectors)
-		var/datum/computer_file/data/waypoint/R = known_sectors[key]
-		var/list/rdata[0]
-		rdata["name"] = R.fields["name"]
-		rdata["x"] = R.fields["x"]
-		rdata["y"] = R.fields["y"]
-		rdata["reference"] = "\ref[R]"
-		locations.Add(list(rdata))
+		data["sector"] = current_sector ? current_sector.name : "Deep Space"
+		data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
+		data["landed"] = linked.get_landed_info()
+		data["s_x"] = linked.x
+		data["s_y"] = linked.y
+		data["dest"] = dy && dx
+		data["d_x"] = dx
+		data["d_y"] = dy
+		data["speedlimit"] = speedlimit ? speedlimit : "None"
+		data["speed"] = linked.get_speed()
+		data["accel"] = linked.get_acceleration()
+		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
+		data["autopilot"] = autopilot
+		data["manual_control"] = manual_control
+		data["canburn"] = linked.can_burn()
 
-	data["locations"] = locations
+		if(linked.get_speed())
+			data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
+		else
+			data["ETAnext"] = "N/A"
 
-	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
-		ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 400, 630)
-		ui.set_initial_data(data)
-		ui.open()
-		ui.set_auto_update(1)
+		var/list/locations[0]
+		for (var/key in known_sectors)
+			var/datum/computer_file/data/waypoint/R = known_sectors[key]
+			var/list/rdata[0]
+			rdata["name"] = R.fields["name"]
+			rdata["x"] = R.fields["x"]
+			rdata["y"] = R.fields["y"]
+			rdata["reference"] = "\ref[R]"
+			locations.Add(list(rdata))
+
+		data["locations"] = locations
+
+		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+		if (!ui)
+			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 400, 630)
+			ui.set_initial_data(data)
+			ui.open()
+			ui.set_auto_update(1)
 
 /obj/machinery/computer/ship/helm/Topic(href, href_list, state)
 	if(..())
 		return 1
 
-	if (!linked)
-		if(href_list["sync"])
-			sync_linked()
-			return 1
-		else
-			return 1
+	if(!linked)
+		return 1
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
@@ -267,23 +259,17 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation/attack_hand(var/mob/user as mob)
 	if(..())
-		user.unset_machine()
 		viewing = 0
 		return
 
 	if(viewing && linked &&!isAI(user))
-		user.set_machine(src)
 		user.reset_view(linked)
-
-	ui_interact(user)
 
 /obj/machinery/computer/ship/navigation/Topic(href, href_list)
 	if(..())
 		return 1
 
 	if (!linked)
-		if(href_list["sync"])
-			sync_linked()
 		return
 
 	if (href_list["viewing"])
