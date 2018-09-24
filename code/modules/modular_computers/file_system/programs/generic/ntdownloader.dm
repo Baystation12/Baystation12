@@ -19,6 +19,8 @@
 	var/download_netspeed = 0
 	var/downloaderror = ""
 	var/list/downloads_queue[0]
+	var/file_info //For logging, can be faked by antags.
+	var/server
 	usage_flags = PROGRAM_ALL
 
 /datum/computer_file/program/ntnetdownload/kill_program()
@@ -29,8 +31,7 @@
 	downloaderror = ""
 	ui_header = "downloader_finished.gif"
 
-
-/datum/computer_file/program/ntnetdownload/proc/begin_file_download(var/filename)
+/datum/computer_file/program/ntnetdownload/proc/begin_file_download(var/filename, skill)
 	if(downloaded_file)
 		return 0
 
@@ -41,16 +42,9 @@
 
 	ui_header = "downloader_running.gif"
 
-	if(PRG in ntnet_global.available_station_software)
-		generate_network_log("Began downloading file [PRG.filename].[PRG.filetype] from NTNet Software Repository.")
-		hacked_download = 0
-	else if(PRG in ntnet_global.available_antag_software)
-		generate_network_log("Began downloading file **ENCRYPTED**.[PRG.filetype] from unspecified server.")
-		hacked_download = 1
-	else
-		generate_network_log("Began downloading file [PRG.filename].[PRG.filetype] from unspecified server.")
-		hacked_download = 0
-
+	hacked_download = (PRG in ntnet_global.available_antag_software)
+	file_info = hide_file_info(PRG)
+	generate_network_log("Began downloading file [file_info] from [server].")
 	downloaded_file = PRG.clone()
 
 /datum/computer_file/program/ntnetdownload/proc/check_file_download(var/filename)
@@ -69,14 +63,21 @@
 
 	return 1
 
-/datum/computer_file/program/ntnetdownload/proc/stealth_chance()
-	return max(operator_skill - SKILL_BASIC, 0) * 30
+/datum/computer_file/program/ntnetdownload/proc/hide_file_info(datum/computer_file/file, skill)
+	server = (file in ntnet_global.available_station_software) ? "NTNet Software Repository" : "unspecified server"
+	if(!hacked_download)
+		return "[file.filename].[file.filetype]"
+	var/stealth_chance = max(skill - SKILL_BASIC, 0) * 30
+	if(!prob(stealth_chance))
+		return "**ENCRYPTED**.[file.filetype]"
+	var/datum/computer_file/fake_file = pick(ntnet_global.available_station_software)
+	server = "NTNet Software Repository"
+	return "[fake_file.filename].[fake_file.filetype]"
 
 /datum/computer_file/program/ntnetdownload/proc/abort_file_download()
 	if(!downloaded_file)
 		return
-	if(!prob(stealth_chance()))
-		generate_network_log("Aborted download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
+	generate_network_log("Aborted download of file [file_info].")
 	downloaded_file = null
 	download_completion = 0
 	ui_header = "downloader_finished.gif"
@@ -84,8 +85,7 @@
 /datum/computer_file/program/ntnetdownload/proc/complete_file_download()
 	if(!downloaded_file)
 		return
-	if(!prob(stealth_chance()))
-		generate_network_log("Completed download of file [hacked_download ? "**ENCRYPTED**" : downloaded_file.filename].[downloaded_file.filetype].")
+	generate_network_log("Completed download of file [file_info].")
 	if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(downloaded_file))
 		// The download failed
 		downloaderror = "I/O ERROR - Unable to save file. Check whether you have enough free space on your hard drive and whether your hard drive is properly connected. If the issue persists contact your system administrator for assistance."
@@ -99,7 +99,7 @@
 	if(download_completion >= downloaded_file.size)
 		complete_file_download()
 		if(downloads_queue.len > 0)
-			begin_file_download(downloads_queue[1])
+			begin_file_download(downloads_queue[1], downloads_queue[downloads_queue[1]])
 			downloads_queue.Remove(downloads_queue[1])
 
 	// Download speed according to connectivity state. NTNet server is assumed to be on unlimited speed so we're limited by our local connectivity
@@ -119,10 +119,9 @@
 		return 1
 	if(href_list["PRG_downloadfile"])
 		if(!downloaded_file)
-			begin_file_download(href_list["PRG_downloadfile"])
+			begin_file_download(href_list["PRG_downloadfile"], usr.get_skill_value(SKILL_COMPUTER))
 		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
-			downloads_queue += href_list["PRG_downloadfile"]
-		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
+			downloads_queue[href_list["PRG_downloadfile"]] = usr.get_skill_value(SKILL_COMPUTER)
 		return 1
 	if(href_list["PRG_removequeued"])
 		downloads_queue.Remove(href_list["PRG_removequeued"])
