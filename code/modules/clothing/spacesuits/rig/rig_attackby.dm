@@ -138,7 +138,7 @@
 
 				if("tank")
 					if(!air_supply)
-						to_chat(user, "There is not tank to remove.")
+						to_chat(user, "There is no tank to remove.")
 						return
 
 					user.put_in_hands(air_supply)
