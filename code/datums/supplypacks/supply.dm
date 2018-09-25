@@ -14,6 +14,12 @@
 	cost = 10
 	containername = "\improper Cardboard sheets crate"
 
+/decl/hierarchy/supply_pack/supply/cardboard_sheets
+	name = "Stationery - sticky notes (50)"
+	contains = list(/obj/item/sticky_pad/random)
+	cost = 10
+	containername = "\improper Sticky notes crate"
+
 /decl/hierarchy/supply_pack/supply/wpaper
 	name = "Cargo - Wrapping paper"
 	contains = list(/obj/item/stack/package_wrap/twenty_five = 3)
