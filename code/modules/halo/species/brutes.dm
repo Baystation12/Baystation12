@@ -14,3 +14,6 @@
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_IS_WHITELISTED
 	brute_mod = 0.9
+
+/datum/species/brutes/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
+	return

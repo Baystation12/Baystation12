@@ -232,6 +232,8 @@ var/list/gamemode_cache = list()
 	var/error_silence_time = 6000 // How long a unique error will be silenced for
 	var/error_msg_delay = 50 // How long to wait between messaging admins about occurrences of a unique error
 
+	var/do_sql_connection = 1
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -277,6 +279,9 @@ var/list/gamemode_cache = list()
 			switch (name)
 				if ("resource_urls")
 					config.resource_urls = splittext(value, " ")
+
+				if ("do_sql_connection")
+					config.do_sql_connection = splittext(value, " ")
 
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
