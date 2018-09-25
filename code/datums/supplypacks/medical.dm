@@ -312,3 +312,19 @@
 	containername = "\improper Medical scanner module crate"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_medical_equip
+
+/decl/hierarchy/supply_pack/medical/defib
+	name = "Electronics - Defibrilator crate"
+	contains = list(/obj/item/weapon/defibrillator)
+	cost = 60
+	containername = "\improper Defibrilator crate"
+	containertype = /obj/structure/closet/crate/secure
+	access = access_medical_equip
+
+/decl/hierarchy/supply_pack/medical/beltdefib
+	name = "Electronics - Compact Defibrilator crate"
+	contains = list(/obj/item/weapon/defibrillator/compact)
+	cost = 75
+	containername = "\improper Compact Defibrilator crate"
+	containertype = /obj/structure/closet/crate/secure
+	access = access_medical_equip
