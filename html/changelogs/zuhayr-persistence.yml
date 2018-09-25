@@ -1,8 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - tweak: "Noticeboards can be built out of wood, dismantled with a wrench, and rearranged with a screwdriver."
-  - rscadd: "Papers on noticeboards will persist round to round."
-  - rscadd: "Sticky notes can be ordered from cargo and will also persist round to round."
-  - rscadd: "Mods can now view a list of all persistent data. Admin can use this list to destroy it with prejudice."
-  - rscadd: "Relatedly, you can now be jobbanned from Graffiti."
