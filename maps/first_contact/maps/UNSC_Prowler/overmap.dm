@@ -1,8 +1,8 @@
-/obj/effect/overmap/ship/odst_corvette
-	name = "UNSC Bertels"
-	desc = "A standard contruction-model corvette."
+/obj/effect/overmap/ship/unsc_aegis
+	name = "UNSC Aegis"
+	desc = "A stealth vessel of unspecified design."
 
-	icon = 'maps/first_contact/maps/UNSC_Bertels/Heavycorvette.dmi'
+	icon = 'maps/first_contact/maps/UNSC_Prowler/prowl.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 
