@@ -9,7 +9,7 @@ import pyperclip as pclip
 
 LINE_LENGTH_LIM = 50
 LINES_LIMIT = 200
-TICK_LAG = 0.5
+TICK_LAG = 0.6
 OVERALL_IMPORT_LIM = 2*50*200
 END_OF_LINE_CHAR = """
 """ # BYOND can't parse \n and I am forced to define my own NEWLINE char

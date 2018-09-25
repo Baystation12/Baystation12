@@ -18,7 +18,7 @@
 	var/datum/musical_event_manager/event_manager = new
 
 	var/datum/proximity_trigger/square/proxy_listener
-	var/datum/sound_token/instrument/tokens = list()
+	var/list/datum/sound_token/instrument/tokens = list()
 	var/list/seen_turfs
 
 /datum/sound_player/New(datum/real_instrument/where, datum/instrument/what)
@@ -37,8 +37,7 @@
 	QDEL_NULL(event_manager)
 	QDEL_NULL(proxy_listener)
 	seen_turfs.Cut()
-	var/list/temp = tokens
-	temp.Cut()
+	tokens.Cut()
 	. = ..()
 
 /datum/sound_player/proc/subscribe(var/datum/sound_token/instrument/newtoken)

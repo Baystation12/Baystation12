@@ -65,3 +65,7 @@ datum/sound_token/instrument/PrivAddListener(var/atom/listener)
 /datum/sound_token/instrument/Stop()
 	player.unsubscribe(src)
 	. = ..()
+
+/datum/sound_token/instrument/Destroy()
+	. = ..()
+	player = null
