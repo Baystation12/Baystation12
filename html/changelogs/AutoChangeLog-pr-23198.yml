@@ -1,5 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - tweak: "Rigs can now be hacked after lifting wire cover with a screwdriver."
-  - tweak: "Rig modules and cells are now removed with wrench."
