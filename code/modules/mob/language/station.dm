@@ -208,7 +208,7 @@
 	speech_verb = "hisses"
 	ask_verb = "rattles"
 	exclaim_verb = "barks"
-	colour = "soghun_alt"
+	colour = "yeosa"
 	key = "h"
 	flags = WHITELISTED
 	space_chance = 40
