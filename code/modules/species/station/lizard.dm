@@ -74,10 +74,6 @@
 		/obj/aura/regenerating/human/unathi
 		)
 
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_heal_toggle
-		)
-
 	prone_overlay_offset = list(-4, -4)
 
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unathi)
