@@ -1,3 +1,15 @@
+{{if data.skill_fail}}
+	{{for data.skill_fail}}
+	<div class="item">
+		<div class="itemLabelWide">
+    		{{:value.key}}
+		</div>
+		<div class="itemContentNarrow">
+			{{:value.value}}
+		</div>
+	</div>
+	{{/for}}
+{{else}}
 <h1>WIRELESS CONNECTIVITY</h1>
 	<div class="item">
 		<div class="itemLabelWide">
@@ -109,4 +121,9 @@
 				{{/for}}
 			</div>
 		</div>
-    </div>
+	</div>
+{{/if}}
+{{if data.terminal}}
+<h1>MANUAL SYSTEM ACCESS</h1>
+{{:helper.link('ACTIVATE TERMINAL', null, {'PC_terminal' : 1})}}
+{{/if}}

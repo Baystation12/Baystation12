@@ -1,6 +1,17 @@
 {{if data.error}}
 	{{:data.error}}<br>
 	{{:helper.link('Return', null, {'back' : 1})}}
+{{else data.skill_fail}}
+	{{for data.skill_fail}}
+	<div class="item">
+		<div class="itemLabelWide">
+    		{{:value.key}}
+		</div>
+		<div class="itemContentNarrow">
+			{{:value.value}}
+		</div>
+	</div>
+	{{/for}}
 {{else data.msg_title}}
 	<div class="item">
 		<div class="itemLabel">
@@ -88,4 +99,8 @@
 		<tr><td>{{:helper.link(value.login, null, {'viewaccount' : value.uid})}}
 	{{/for}}
 	</table>
+{{/if}}
+{{if data.terminal}}
+<h1>MANUAL SYSTEM ACCESS</h1>
+{{:helper.link('ACTIVATE TERMINAL', null, {'PC_terminal' : 1})}}
 {{/if}}

@@ -298,3 +298,8 @@
 	. = ..()
 	if(scanner)
 		scanner.do_on_afterattack(user, target, proximity)
+
+obj/item/modular_computer/CtrlAltClick(mob/user)
+	if(!CanPhysicallyInteract(user))
+		return
+	open_terminal(user)
