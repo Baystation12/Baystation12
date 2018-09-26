@@ -153,6 +153,7 @@ var/list/debug_verbs = list (
 		,/datum/admins/proc/setup_supermatter
 		,/client/proc/atmos_toggle_debug
 		,/client/proc/spawn_tanktransferbomb
+		,/client/proc/find_leaky_pipes
 	)
 
 
@@ -333,3 +334,15 @@ var/list/debug_verbs = list (
 
 /proc/get_zas_image(var/turf/T, var/icon_state)
 	return image_repository.atom_image(T, 'icons/misc/debug_group.dmi', icon_state, plane = ABOVE_TURF_PLANE, layer = ABOVE_TILE_LAYER)
+
+//Special for Cakey
+/client/proc/find_leaky_pipes()
+	set category = "Mapping"
+	set name = "Find Leaky Pipes"
+
+	var/list/baddies = list("LEAKY PIPES")
+	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
+		if(P.leaking)
+			baddies += "[P] ([P.x],[P.y],[P.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[P.x];Y=[P.y];Z=[P.z]'>JMP</a>)"
+
+	to_chat(usr,jointext(baddies, "<br>"))
