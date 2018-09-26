@@ -140,6 +140,7 @@
 		ui = new(user, src, ui_key, "chem_disp.tmpl", ui_title, 390, 680)
 		ui.set_initial_data(data)
 		ui.open()
+		ui.set_auto_update(1)
 
 /obj/machinery/chemical_dispenser/OnTopic(mob/user, href_list)
 	if(href_list["amount"])
