@@ -86,11 +86,12 @@
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/tritonian_preview.dmi'
 	slowdown = 1
 
-	oxy_mod =           0.5
-	brute_mod =         0.8
-	toxins_mod =        1.15
-	radiation_mod =     1.15
-	body_temperature =  302
+	oxy_mod =             0.5
+	brute_mod =           0.8
+	toxins_mod =          1.15
+	radiation_mod =       1.15
+	body_temperature =    302
+	water_soothe_amount = 5
 
 	heat_level_1 = 350
 	heat_level_2 = 380
@@ -113,11 +114,3 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
-
-/datum/species/human/tritonian/water_act(var/mob/living/carbon/human/H, var/depth)
-	..()
-	if(depth >= 40)
-		if(H.getHalLoss())
-			H.adjustHalLoss(-5)
-			if(prob(5))
-				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")

@@ -126,6 +126,7 @@
 	hazard_low_pressure = HAZARD_LOW_PRESSURE * 2
 	warning_high_pressure = WARNING_HIGH_PRESSURE / 0.8125
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
+	water_soothe_amount = 5
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
@@ -194,7 +195,7 @@
 
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_LUNGS =    /obj/item/organ/internal/lungs/skrell,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/gills,
 		BP_LIVER =    /obj/item/organ/internal/liver,
 		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		BP_BRAIN =    /obj/item/organ/internal/brain,
@@ -203,14 +204,6 @@
 
 /datum/species/skrell/get_sex(var/mob/living/carbon/H)
 	return descriptors["headtail length"] == 1 ? MALE : FEMALE
-
-/datum/species/skrell/water_act(var/mob/living/carbon/human/H, var/depth)
-	..()
-	if(depth >= 40)
-		if(H.getHalLoss())
-			H.adjustHalLoss(-5)
-			if(prob(5)) // Might be too spammy.
-				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")
 
 /datum/species/diona
 	name = SPECIES_DIONA

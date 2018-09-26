@@ -24,7 +24,7 @@
 	blood_volume = 800
 
 	health_hud_intensity = 2
-	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
 
 	min_age = 18
 	max_age = 260
@@ -124,3 +124,6 @@
 		M.emote(pick("twitch", "drool"))
 	if(effective_dose > 20 && prob(10))
 		M.SelfMove(pick(GLOB.cardinal))
+
+/datum/species/unathi/get_bodytype(var/mob/living/carbon/human/H)
+	return SPECIES_UNATHI
