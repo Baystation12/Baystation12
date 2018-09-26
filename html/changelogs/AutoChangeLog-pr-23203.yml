@@ -1,9 +1,0 @@
-author: "Textor"
-delete-after: True
-changes: 
-  - maptweak: "Bridge Deck - Captain's quarters' light switch is moved so that you are no longer likely to remove the light tube when turning the lights on."
-  - maptweak: "Deck 1 - Xenoflora and Miscellaneous labs are now brighter. This should allow for scientists to actually see the things they work on. Robotics now has solid doors. Privacy windows are no longer thwarted by looking through the door-windows. Added a window to the mech bay side to compensate for the lack of visibility from that direction due to the door no longer having a window. Door to storage next to robotics actually opens for the roboticist now. Removed power cable to nowhere in deck 1 starboard fore maintenance. Swaps the filing cabinet and table in the morgue so that the paper bin, folder, and pen are actually accessible when someone is working in there."
-  - maptweak: "Deck 2 - Adds a shield diffuser at the edge of the old brig border so trash will stop being stuck behind the shields when ejected into space from the trash room. The shield should no longer block the airlock in deck 2 starboard mid maintenance due to wall unevenness."
-  - maptweak: "Deck3 - Adds a second mineral bath to deck 3 cryogenic storage wardrobe. Moves photocopier and shredder in office so that they can both be used normally."
-  - maptweak: "Deck 4 - The toxins storage room is now directly off the hangar in order to let scientists actually get to their toxins storage room. Finally adds a security camera to the fuel bay. The AI can now watch the fascinating process of refueling. Moves the atmos control computer in the Petrov Laboratory so that you can actually reach all the counter space when working."
-  - bugfix: "Had a long discussion with the OR computers and we both agreed that they need to actually face the direction they were mapped in."
