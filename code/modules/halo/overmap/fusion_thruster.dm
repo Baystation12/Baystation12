@@ -1,6 +1,6 @@
 
 /datum/ship_engine/fusion
-	name = "fusion ship engine"
+	name = "fusion thruster"
 	var/obj/machinery/fusion_thruster/nozzle
 
 /datum/ship_engine/fusion/New(var/obj/machinery/_holder)
@@ -38,10 +38,11 @@
 
 
 /obj/machinery/fusion_thruster
-	name = "repulsor engine"
+	name = "fusion thruster"
 	desc = "Simple thermal nozzle, uses heated gas to propel the ship."
 	icon = 'fusion_thruster.dmi'
 	icon_state = "nozzle0"
+	anchored = 1
 	use_power = 1
 	var/last_burn = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -53,7 +54,7 @@
 	var/on = 1
 	var/datum/ship_engine/fusion/controller
 	var/obj/item/fusion_fuel/held_fuel
-	var/fuel_consumption_rate = 10
+	var/fuel_consumption_rate = 1
 
 //spawn with fuel
 /obj/machinery/fusion_thruster/fueled
@@ -84,10 +85,10 @@
 /obj/machinery/fusion_thruster/attack_hand(var/mob/user)
 	if(can_use(user))
 		if(held_fuel)
+			src.visible_message("<span class='info'>[src] ejects it's spent [held_fuel].</span>")
 			held_fuel.loc = src.loc
 			held_fuel = null
 			icon_state = "nozzle0"
-			src.visible_message("<span class='info'>[src] ejects it's spent [held_fuel].</span>")
 		else
 			to_chat(user, "<span class='notice'>[src] does not contain a deuterium fuel packet!</span>")
 
@@ -98,6 +99,7 @@
 			I.loc = src
 			held_fuel = I
 			icon_state = "nozzle1"
+			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
 
 /obj/machinery/fusion_thruster/proc/get_status()
 	. = list()
@@ -141,3 +143,46 @@
 	var/turf/T = get_step(src,exhaust_dir)
 	if(T)
 		new/obj/effect/engine_exhaust(T,exhaust_dir, 1000)
+
+
+
+
+/obj/machinery/thruster_loader
+	name = "thruster fuel loader"
+	desc = "An automated loading device for a fusion thruster to insert and remove deuterium fuel packets."
+	icon = 'fusion_thruster.dmi'
+	icon_state = "loader"
+	anchored = 1
+
+/obj/machinery/thruster_loader/proc/can_use(var/mob/M)
+	if(M.stat || M.restrained() || M.lying || !istype(M, /mob/living) || get_dist(M, src) > 1)
+		return 0
+	return 1
+
+/obj/machinery/thruster_loader/attack_hand(var/mob/user)
+	if(can_use(user))
+		var/obj/machinery/fusion_thruster/thruster = locate() in get_step(src, src.dir)
+		if(thruster)
+			var/obj/item/fusion_fuel/old_fuel = thruster.held_fuel
+			if(old_fuel)
+				src.visible_message("<span class='info'>[src] ejects the spent [old_fuel].</span>")
+				old_fuel.loc = src.loc
+				thruster.held_fuel = null
+				thruster.icon_state = "nozzle0"
+			else
+				to_chat(user, "<span class='notice'>[src] can not detect a deuterium fuel packet!</span>")
+		else
+			to_chat(user, "<span class='notice'>No thruster detected by [src], check that it is located to the [dir2text(src.dir)].</span>")
+
+/obj/machinery/thruster_loader/attackby(var/obj/I, var/mob/user)
+	if(can_use(user))
+		var/obj/machinery/fusion_thruster/thruster = locate() in get_step(src, src.dir)
+		if(thruster)
+			if(istype(I, /obj/item/fusion_fuel))
+				user.drop_item()
+				I.loc = thruster
+				thruster.held_fuel = I
+				thruster.icon_state = "nozzle1"
+				to_chat(user, "<span class='info'>You insert [I] into [src] and it's loaded into the thruster.</span>")
+		else
+			to_chat(user, "<span class='notice'>No thruster detected by [src], check that it is located to the [dir2text(src.dir)].</span>")

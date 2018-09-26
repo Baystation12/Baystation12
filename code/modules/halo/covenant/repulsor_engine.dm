@@ -39,9 +39,10 @@
 
 /obj/machinery/repulsor_engine
 	name = "repulsor engine"
-	desc = "Simple thermal nozzle, uses heated gas to propel the ship."
+	desc = "A sophisticated gravitic drive that allows great speed and maneuvrability."
 	icon = 'repulsor.dmi'
 	icon_state = "nozzle"
+	anchored = 1
 	use_power = 1
 	var/last_burn = 0
 	idle_power_usage = 100		//internal circuitry, friction losses and stuff
