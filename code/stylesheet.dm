@@ -91,6 +91,7 @@ h1.alert, h2.alert		{color: #000000;}
 .alien					{color: #543354;}
 .skrell					{color: #00ced1;}
 .soghun					{color: #228b22;}
+.yeosa					{color: #218b89;}
 .nabber_lang			{color: #525252;}
 .solcom					{color: #22228b;}
 .changeling				{color: #800080;}

@@ -1,6 +1,6 @@
 /obj/item/device/oxycandle
 	name = "oxygen candle"
-	desc = "A steel tube with the words 'OXYGEN - PULL CORD TO IGNITE' stamped on the side. A small label warns against using the device underwater"
+	desc = "A steel tube with the words 'OXYGEN - PULL CORD TO IGNITE' stamped on the side.\nA small label reads <span class='warning'>'WARNING: NOT FOR LIGHTING USE. WILL IGNITE FLAMMABLE GASSES'</span>"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "oxycandle"
 	item_state = "oxycandle"

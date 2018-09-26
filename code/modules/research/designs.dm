@@ -514,6 +514,27 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	sort_string = "MCAAB"
 
+/datum/design/item/syringe/AssembleDesignName()
+	name = "Syringe prototype ([item_name])"
+
+/datum/design/item/syringe/noreactsyringe
+	name = "Cryo Syringe"
+	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
+	id = "noreactsyringe"
+	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4)
+	materials = list("glass" = 2000, "gold" = 1000)
+	build_path = /obj/item/weapon/reagent_containers/syringe/noreact
+	sort_string = "MCAAC"
+
+/datum/design/item/syringe/bluespacesyringe
+	name = "Bluespace Syringe"
+	desc = "An advanced syringe that can hold 60 units of chemicals"
+	id = "bluespacesyringe"
+	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
+	materials = list("glass" = 2000, "phoron" = 1000, "diamond" = 1000)
+	build_path = /obj/item/weapon/reagent_containers/syringe/bluespace
+	sort_string = "MCAAD"
+
 /datum/design/item/implant
 	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50)
 
@@ -1608,6 +1629,32 @@ other types of metals and chemistry for reagents).
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 10000)
 	build_path = /obj/item/disk/integrated_circuit/upgrade/clone
 	sort_string = "WCLAE"
+
+// janitor gadgets
+
+/datum/design/item/advmop
+	name = "Advanced Mop"
+	desc = "An upgraded mop with a large internal capacity for holding water or other cleaning chemicals."
+	id = "advmop"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_POWER = 3)
+	materials = list(MATERIAL_STEEL = 2500, MATERIAL_GLASS = 200)
+	build_path = /obj/item/weapon/mop/advanced
+
+/datum/design/blutrash
+	name = "Trashbag of Holding"
+	desc = "An advanced trash bag with bluespace properties; capable of holding a plethora of garbage."
+	id = "blutrash"
+	req_tech = list(TECH_BLUESPACE = 5, TECH_MATERIALS = 6)
+	materials = list(MATERIAL_GOLD = 1500, MATERIAL_URANIUM = 250, MATERIAL_PHORON = 1500)
+	build_path = /obj/item/weapon/storage/bag/trash/bluespace
+
+/datum/design/item/holosign
+	name = "Holographic Sign Projector"
+	desc = "A holograpic projector used to project various warning signs."
+	id = "holosign"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_BLUESPACE = 4, TECH_POWER = 4)
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000)
+	build_path = /obj/item/holosign_creator
 
 /*
 CIRCUITS BELOW

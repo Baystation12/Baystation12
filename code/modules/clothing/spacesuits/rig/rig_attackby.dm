@@ -40,15 +40,21 @@
 		to_chat(user, "You [open ? "open" : "close"] the access panel.")
 		return
 
+	else if(isScrewdriver(W))
+		p_open = !p_open
+		to_chat(user, "You [p_open ? "open" : "close"] the wire cover.")
+
+	// Hacking.
+	else if(isWirecutter(W) || isMultitool(W))
+		if(p_open)
+			wires.Interact(user)
+		else
+			to_chat(user, "You can't reach the wiring.")
+		return
+
 	if(open)
 
-		// Hacking.
-		if(isWirecutter(W) || isMultitool(W))
-			if(open)
-				wires.Interact(user)
-			else
-				to_chat(user, "You can't reach the wiring.")
-			return
+
 		// Air tank.
 		if(istype(W,/obj/item/weapon/tank)) //Todo, some kind of check for suits without integrated air supplies.
 
@@ -102,19 +108,9 @@
 
 		else if(isWrench(W))
 
-			if(!air_supply)
-				to_chat(user, "There is not tank to remove.")
-				return
-
-			user.put_in_hands(air_supply)
-			to_chat(user, "You detach and remove \the [air_supply].")
-			air_supply = null
-			return
-
-		else if(isScrewdriver(W))
-
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"
+			if(air_supply) current_mounts += "tank"
 			if(installed_modules && installed_modules.len) current_mounts += "system module"
 
 			var/to_remove = input("Which would you like to modify?") as null|anything in current_mounts
@@ -139,6 +135,15 @@
 						cell = null
 					else
 						to_chat(user, "There is nothing loaded in that mount.")
+
+				if("tank")
+					if(!air_supply)
+						to_chat(user, "There is no tank to remove.")
+						return
+
+					user.put_in_hands(air_supply)
+					to_chat(user, "You detach and remove \the [air_supply].")
+					air_supply = null
 
 				if("system module")
 

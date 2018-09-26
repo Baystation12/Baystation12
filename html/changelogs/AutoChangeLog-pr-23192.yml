@@ -1,0 +1,5 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Added holosign projector and advanced mop to the janitor robot."
+  - tweak: "Added medical HUD to the surgical robot."

@@ -6986,6 +6986,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
+/obj/machinery/papershredder,
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "qr" = (
@@ -8407,6 +8408,15 @@
 /area/hallway/primary/thirddeck/aft)
 "sM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
 "sR" = (
@@ -10872,10 +10882,6 @@
 	pixel_x = -22;
 	pixel_y = 0
 	},
-/turf/simulated/floor/lino,
-/area/vacant/office)
-"yr" = (
-/obj/machinery/photocopier,
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "ys" = (
@@ -13884,22 +13890,8 @@
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/cryolocker)
 "FV" = (
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/closet/secure_closet/crew,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/random/maintenance/solgov/clean,
-/obj/random/maintenance/solgov/clean,
-/obj/random/maintenance/solgov/clean,
-/turf/simulated/floor/tiled/monotile,
+/obj/structure/adherent_bath,
+/turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
 "FW" = (
 /obj/machinery/firealarm{
@@ -14129,11 +14121,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
@@ -18998,6 +18985,11 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
 "UZ" = (
@@ -19548,8 +19540,8 @@
 /turf/simulated/floor/lino,
 /area/command/captainmess)
 "WV" = (
-/obj/machinery/papershredder,
 /obj/machinery/light,
+/obj/machinery/photocopier,
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "WW" = (
@@ -43785,7 +43777,7 @@ vi
 NI
 Yn
 qo
-yr
+wp
 WV
 vh
 Do

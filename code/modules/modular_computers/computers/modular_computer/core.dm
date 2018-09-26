@@ -73,6 +73,7 @@
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
+	QDEL_NULL_LIST(terminals)
 	STOP_PROCESSING(SSobj, src)
 	if(istype(stored_pen))
 		QDEL_NULL(stored_pen)
@@ -159,6 +160,7 @@
 
 /obj/item/modular_computer/proc/shutdown_computer(var/loud = 1)
 	kill_program(1)
+	QDEL_NULL_LIST(terminals)
 	for(var/datum/computer_file/program/P in idle_threads)
 		P.kill_program(1)
 		idle_threads.Remove(P)
@@ -296,3 +298,15 @@
 /obj/item/modular_computer/get_cell()
 	if(battery_module)
 		return battery_module.get_cell()
+
+/obj/item/modular_computer/proc/has_terminal(mob/user)
+	for(var/datum/terminal/terminal in terminals)
+		if(terminal.get_user() == user)
+			return terminal
+
+/obj/item/modular_computer/proc/open_terminal(mob/user)
+	if(!enabled)
+		return
+	if(has_terminal(user))
+		return
+	LAZYADD(terminals, new /datum/terminal/(user, src))

@@ -8186,6 +8186,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
+"rT" = (
+/obj/machinery/light_switch{
+	pixel_x = -24
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/heads/cobed)
 "rU" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14207,10 +14213,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Ne" = (
-/obj/machinery/light_switch{
-	pixel_x = -24;
-	pixel_y = 6
-	},
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 8
@@ -24444,7 +24446,7 @@ CV
 KW
 Je
 Ne
-Je
+rT
 eP
 aZ
 XC

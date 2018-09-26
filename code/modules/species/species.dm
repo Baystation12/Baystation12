@@ -134,6 +134,8 @@
 		"Your chilly flesh stands out in goosebumps."
 		)
 
+	var/water_soothe_amount
+
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type

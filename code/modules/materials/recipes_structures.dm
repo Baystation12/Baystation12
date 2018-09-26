@@ -16,3 +16,11 @@
 	on_floor = 1
 	difficulty = 2
 	send_material_data = 1
+
+/datum/stack_recipe/noticeboard
+	title = "noticeboard"
+	result_type = /obj/structure/noticeboard
+	req_amount = 10
+	time = 50
+	on_floor = 1
+	difficulty = 2

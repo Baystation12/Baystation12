@@ -74,9 +74,10 @@
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
 //Area flags, possibly more to come
-#define AREA_FLAG_RAD_SHIELDED 1 // shielded from radiation, clearly
-#define AREA_FLAG_EXTERNAL     2 // External as in exposed to space, not outside in a nice, green, forest
-#define AREA_FLAG_ION_SHIELDED 4 // shielded from ionospheric anomalies as an FBP / IPC
+#define AREA_FLAG_RAD_SHIELDED      1 // shielded from radiation, clearly
+#define AREA_FLAG_EXTERNAL          2 // External as in exposed to space, not outside in a nice, green, forest
+#define AREA_FLAG_ION_SHIELDED      4 // shielded from ionospheric anomalies as an FBP / IPC
+#define AREA_FLAG_IS_NOT_PERSISTENT 8 // SSpersistence will not track values from this area.
 
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES 1 // Lets multiple copies of the template to be spawned
@@ -228,4 +229,8 @@
 
 //Built-in email accounts
 #define EMAIL_DOCUMENTS "document.server@internal-services.net"
+#define EMAIL_SYSADMIN  "admin@internal-services.net"
 #define EMAIL_BROADCAST "broadcast@internal-services.net"
+
+//Lying animation
+#define ANIM_LYING_TIME 2

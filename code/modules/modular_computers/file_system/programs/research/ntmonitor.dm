@@ -9,16 +9,22 @@
 	requires_ntnet = 1
 	required_access = access_network
 	available_on_ntnet = 1
-	nanomodule_path = /datum/nano_module/computer_ntnetmonitor/
+	nanomodule_path = /datum/nano_module/program/computer_ntnetmonitor/
 
-/datum/nano_module/computer_ntnetmonitor
+/datum/nano_module/program/computer_ntnetmonitor
 	name = "NTNet Diagnostics and Monitoring"
 	available_to_ai = TRUE
 
-/datum/nano_module/computer_ntnetmonitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_ntnetmonitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)
 		return
 	var/list/data = host.initial_data()
+
+	data += "skill_fail"
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
+		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 20)
+		data["skill_fail"] = fake_data.update_and_return_data()
+	data["terminal"] = !!program
 
 	data["ntnetstatus"] = ntnet_global.check_function()
 	data["ntnetrelays"] = ntnet_global.relays.len
@@ -44,10 +50,14 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/computer_ntnetmonitor/Topic(href, href_list, state)
+/datum/nano_module/program/computer_ntnetmonitor/Topic(href, href_list, state)
 	var/mob/user = usr
 	if(..())
 		return 1
+
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
+		return 1
+
 	if(href_list["resetIDS"])
 		if(ntnet_global)
 			ntnet_global.resetIDS()

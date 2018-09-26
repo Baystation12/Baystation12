@@ -9,7 +9,8 @@
 							 /datum/map_template/ruin/exoplanet/fountain,
 							 /datum/map_template/ruin/exoplanet/marooned,
 							 /datum/map_template/ruin/exoplanet/hydrobase,
-							 /datum/map_template/ruin/exoplanet/lodge)
+							 /datum/map_template/ruin/exoplanet/lodge,
+							 /datum/map_template/ruin/exoplanet/crashed_pod)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
 	if(prob(70))
