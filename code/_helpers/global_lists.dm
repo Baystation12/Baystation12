@@ -121,11 +121,11 @@ var/global/list/string_slot_flags = list(
 	sort_surgeries()
 
 	//List of job. I can't believe this was calculated multiple times per tick!
-	paths = typesof(/datum/job)-/datum/job
-	paths -= exclude_jobs
-	for(var/T in paths)
-		var/datum/job/J = new T
-		joblist[J.title] = J
+	for(var/jtype in subtypesof(/datum/job))
+		var/datum/job/job = jtype
+		if(initial(job.available_by_default))
+			job = new jtype
+			joblist[job.title] = job
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language
