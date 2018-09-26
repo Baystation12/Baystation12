@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Adds defib and compact defib crates to be ordered through supply."
