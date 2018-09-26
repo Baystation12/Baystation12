@@ -1,29 +1,3 @@
-//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
-// It is filtered into multiple lists within a list.
-// For example:
-// chemical_reaction_list[/datum/reagent/toxin/phoron] is a list of all reactions relating to phoron
-// Note that entries in the list are NOT duplicated. So if a reaction pertains to
-// more than one chemical it will still only appear in only one of the sublists.
-
-GLOBAL_LIST_INIT(chemical_products_list, new)
-/proc/initialize_chemical_reactions()
-	var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
-	chemical_reactions_list = list()
-
-	for(var/path in paths)
-		var/datum/chemical_reaction/D = new path()
-
-		if(D.result)
-			if(!GLOB.chemical_products_list[D.result])
-				GLOB.chemical_products_list[D.result] = list()
-			GLOB.chemical_products_list[D.result] += D
-
-		if(D.required_reagents && D.required_reagents.len)
-			var/reagent_id = D.required_reagents[1]
-			if(!chemical_reactions_list[reagent_id])
-				chemical_reactions_list[reagent_id] = list()
-			chemical_reactions_list[reagent_id] += D
-
 /datum/chemical_reaction
 	var/name = null
 	var/result = null
@@ -153,6 +127,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/thermite
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
+	mix_message = "The solution thickens into a coarse metallic paste."
 
 /datum/chemical_reaction/space_drugs
 	name = "Space Drugs"
@@ -165,6 +140,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/lube
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/silicon = 1, /datum/reagent/acetone = 1)
 	result_amount = 4
+	mix_message = "The solution becomes thick and slimy."
 
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
@@ -215,6 +191,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/nutriment/virus_food
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/drink/milk = 1)
 	result_amount = 5
+	mix_message = "The water dilutes the milk into a thin white solution."
 
 /datum/chemical_reaction/leporazine
 	name = "Leporazine"
@@ -339,12 +316,14 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/toxin/zombiepowder
 	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5, /datum/reagent/soporific = 5, /datum/reagent/copper = 5)
 	result_amount = 2
+	mix_message = "The solution boils off to form a fine powder."
 
 /datum/chemical_reaction/mindbreaker
 	name = "Mindbreaker Toxin"
 	result = /datum/reagent/mindbreaker
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 3
+	mix_message = "The solution takes on an iridescent sheen."
 
 /datum/chemical_reaction/lipozine
 	name = "Lipozine"
@@ -357,6 +336,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/surfactant
 	required_reagents = list(/datum/reagent/hydrazine = 2, /datum/reagent/carbon = 2, /datum/reagent/acid = 1)
 	result_amount = 5
+	mix_message = "The solution begins to foam gently."
 
 /datum/chemical_reaction/diethylamine
 	name = "Diethylamine"
@@ -381,6 +361,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/foaming_agent
 	required_reagents = list(/datum/reagent/lithium = 1, /datum/reagent/hydrazine = 1)
 	result_amount = 1
+	mix_message = "The solution begins to foam vigorously."
 
 /datum/chemical_reaction/glycerol
 	name = "Glycerol"
@@ -407,6 +388,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/tungsten = 1, /datum/reagent/acetone = 1, /datum/reagent/water = 1)
 	result_amount = 3
 	log_is_important = 1
+	mix_message = "The solution becomes thick and slightly slimy."
 
 /datum/chemical_reaction/rezadone
 	name = "Rezadone"
@@ -443,6 +425,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/toxin/hair_remover
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/potassium = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
+	mix_message = "The solution thins out and emits an acrid smell."
 
 /datum/chemical_reaction/noexcutite
 	name = "Noexcutite"
@@ -455,6 +438,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/toxin/bromide = 1, /datum/reagent/ethanol = 1, /datum/reagent/hydrazine = 1)
 	result_amount = 3
 	result = /datum/reagent/toxin/methyl_bromide
+	mix_message = "The solution begins to bubble, emitting a dark vapor."
 
 /* Solidification */
 /datum/chemical_reaction/phoronsolidification
@@ -462,6 +446,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/iron = 5, /datum/reagent/frostoil = 5, /datum/reagent/toxin/phoron = 20)
 	result_amount = 1
+	mix_message = "The solution hardens and begins to crystallize."
 
 /datum/chemical_reaction/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume)
 	new /obj/item/stack/material/phoron(get_turf(holder.my_atom), created_volume)
@@ -471,6 +456,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/acid/polyacid = 1, /datum/reagent/toxin/plasticide = 2)
 	result_amount = 1
+	mix_message = "The solution solidifies into a grey-white mass."
 
 /datum/chemical_reaction/plastication/on_reaction(var/datum/reagents/holder, var/created_volume)
 	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
@@ -483,6 +469,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/potassium = 1)
 	result_amount = 2
 	mix_message = null
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -500,6 +487,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
 	result_amount = null
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -529,6 +517,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/iron = 1) // Yes, laugh, it's the best recipe I could think of that makes a little bit of sense
 	result_amount = 2
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -561,6 +550,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
+	mix_message = "The solution thickens and begins to bubble."
 
 /datum/chemical_reaction/phlogiston/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
@@ -573,18 +563,21 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/napalm
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
 	result_amount = 2
+	mix_message = "The solution thickens and takes on a slimy sheen."
 
 /datum/chemical_reaction/napalmb
 	name = "Napalm B"
 	result = /datum/reagent/napalm/b
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/fuel = 1 )
 	result_amount = 2
+	mix_message = "The solution thickens and takes on a slimy sheen."
 
 /datum/chemical_reaction/chemsmoke
 	name = "Chemsmoke"
 	result = null
 	required_reagents = list(/datum/reagent/potassium = 1, /datum/reagent/sugar = 1, /datum/reagent/phosphorus = 1)
 	result_amount = 0.4
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -601,7 +594,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/surfactant = 1, /datum/reagent/water = 1)
 	result_amount = 2
-	mix_message = "The solution violently bubbles!"
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -619,6 +612,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/aluminum = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
 	result_amount = 5
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -635,6 +629,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/iron = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
 	result_amount = 5
+	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -653,6 +648,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/red = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy red sheen."
 
 /datum/chemical_reaction/red_paint/send_data()
 	return "#fe191a"
@@ -662,6 +658,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/orange = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy orange sheen."
 
 /datum/chemical_reaction/orange_paint/send_data()
 	return "#ffbe4f"
@@ -671,6 +668,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/yellow = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy yellow sheen."
 
 /datum/chemical_reaction/yellow_paint/send_data()
 	return "#fdfe7d"
@@ -680,6 +678,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/green = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy green sheen."
 
 /datum/chemical_reaction/green_paint/send_data()
 	return "#18a31a"
@@ -689,6 +688,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/blue = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy blue sheen."
 
 /datum/chemical_reaction/blue_paint/send_data()
 	return "#247cff"
@@ -698,6 +698,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/purple = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy purple sheen."
 
 /datum/chemical_reaction/purple_paint/send_data()
 	return "#cc0099"
@@ -707,6 +708,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/grey = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy grey sheen."
 
 /datum/chemical_reaction/grey_paint/send_data()
 	return "#808080"
@@ -716,6 +718,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/crayon_dust/brown = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy brown sheen."
 
 /datum/chemical_reaction/brown_paint/send_data()
 	return "#846f35"
@@ -725,6 +728,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/blood = 2)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy red sheen."
 
 /datum/chemical_reaction/blood_paint/send_data(var/datum/reagents/T)
 	var/t = T.get_data("blood")
@@ -737,6 +741,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/milk = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy white sheen."
 
 /datum/chemical_reaction/milk_paint/send_data()
 	return "#f0f8ff"
@@ -746,6 +751,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/orange = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy orange sheen."
 
 /datum/chemical_reaction/orange_juice_paint/send_data()
 	return "#e78108"
@@ -755,6 +761,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/tomato = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy red sheen."
 
 /datum/chemical_reaction/tomato_juice_paint/send_data()
 	return "#731008"
@@ -764,6 +771,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/lime = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy green sheen."
 
 /datum/chemical_reaction/lime_juice_paint/send_data()
 	return "#365e30"
@@ -773,6 +781,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/carrot = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy orange sheen."
 
 /datum/chemical_reaction/carrot_juice_paint/send_data()
 	return "#973800"
@@ -782,6 +791,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/berry = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy red sheen."
 
 /datum/chemical_reaction/berry_juice_paint/send_data()
 	return "#990066"
@@ -791,6 +801,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/grape = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy purple sheen."
 
 /datum/chemical_reaction/grape_juice_paint/send_data()
 	return "#863333"
@@ -800,6 +811,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/toxin/poisonberryjuice = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy purple sheen."
 
 /datum/chemical_reaction/poisonberry_juice_paint/send_data()
 	return "#863353"
@@ -809,6 +821,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/watermelon = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy red sheen."
 
 /datum/chemical_reaction/watermelon_juice_paint/send_data()
 	return "#b83333"
@@ -818,6 +831,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/lemon = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy yellow sheen."
 
 /datum/chemical_reaction/lemon_juice_paint/send_data()
 	return "#afaf00"
@@ -827,6 +841,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/drink/juice/banana = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy yellow sheen."
 
 /datum/chemical_reaction/banana_juice_paint/send_data()
 	return "#c3af00"
@@ -836,6 +851,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, "potatojuice" = 5)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy brown sheen."
 
 /datum/chemical_reaction/potato_juice_paint/send_data()
 	return "#302000"
@@ -845,6 +861,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/carbon = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy black sheen."
 
 /datum/chemical_reaction/carbon_paint/send_data()
 	return "#333333"
@@ -854,6 +871,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/paint
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminum = 1)
 	result_amount = 5
+	mix_message = "The solution thickens and takes on a glossy white sheen."
 
 /datum/chemical_reaction/aluminum_paint/send_data()
 	return "#f0f8ff"
@@ -862,6 +880,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 
 /datum/chemical_reaction/slime
 	hidden_from_codex = TRUE
+	mix_message = "The slime core twitches sharply."
 	var/required = null
 
 /datum/chemical_reaction/slime/can_happen(var/datum/reagents/holder)
@@ -1272,6 +1291,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/milk/soymilk = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 1
+	mix_message = "The solution thickens and clumps into a yellow-white substance."
 
 /datum/chemical_reaction/tofu/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1283,6 +1303,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/drink/milk/soymilk = 2, /datum/reagent/nutriment/coco = 2, /datum/reagent/sugar = 2)
 	result_amount = 1
+	mix_message = "The solution thickens and hardens into a glossy brown substance."
 
 /datum/chemical_reaction/chocolate_bar/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1294,6 +1315,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/drink/milk = 2, /datum/reagent/nutriment/coco = 2, /datum/reagent/sugar = 2)
 	result_amount = 1
+	mix_message = "The solution thickens and hardens into a glossy brown substance."
 
 /datum/chemical_reaction/chocolate_bar2/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1305,42 +1327,49 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/drink/milk/chocolate
 	required_reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/coco = 1)
 	result_amount = 5
+	mix_message = "The solution thickens into a creamy brown beverage."
 
 /datum/chemical_reaction/hot_coco
 	name = "Hot Coco"
 	result = /datum/reagent/drink/hot_coco
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coco = 1)
 	result_amount = 5
+	mix_message = "The solution thickens into a steaming brown beverage."
 
 /datum/chemical_reaction/soysauce
 	name = "Soy Sauce"
 	result = /datum/reagent/nutriment/soysauce
 	required_reagents = list(/datum/reagent/drink/milk/soymilk = 5, /datum/reagent/nutriment/vinegar = 5)
 	result_amount = 10
+	mix_message = "The solution settles into a glossy black sauce."
 
 /datum/chemical_reaction/soysauce_acid
 	name = "Bitey Soy Sauce"
 	result = /datum/reagent/nutriment/soysauce
 	required_reagents = list(/datum/reagent/drink/milk/soymilk = 4, /datum/reagent/acid = 1)
 	result_amount = 5
+	mix_message = "The solution settles into a glossy black sauce."
 
 /datum/chemical_reaction/ketchup
 	name = "Ketchup"
 	result = /datum/reagent/nutriment/ketchup
 	required_reagents = list(/datum/reagent/drink/juice/tomato = 2, /datum/reagent/water = 1, /datum/reagent/sugar = 1)
 	result_amount = 4
+	mix_message = "The solution thickens into a sweet-smelling red sauce."
 
 /datum/chemical_reaction/barbecue
 	name = "Barbecue Sauce"
 	result = /datum/reagent/nutriment/barbecue
 	required_reagents = list(/datum/reagent/nutriment/ketchup = 2, /datum/reagent/blackpepper = 1, /datum/reagent/sodiumchloride = 1)
 	result_amount = 4
+	mix_message = "The solution thickens into a sweet-smelling brown sauce."
 
 /datum/chemical_reaction/garlicsauce
 	name = "Garlic Sauce"
 	result = /datum/reagent/nutriment/garlicsauce
 	required_reagents = list(/datum/reagent/drink/juice/garlic = 1, /datum/reagent/nutriment/cornoil = 1)
 	result_amount = 2
+	mix_message = "The solution thickens into a creamy white oil."
 
 /datum/chemical_reaction/cheesewheel
 	name = "Cheesewheel"
@@ -1348,6 +1377,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/milk = 40)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 1
+	mix_message = "The solution thickens and curdles into a rich yellow substance."
 
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1359,6 +1389,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/nutriment/protein = 3, /datum/reagent/nutriment/flour = 5)
 	result_amount = 3
+	mix_message = "The flour thickens the processed meat until it clumps."
 
 /datum/chemical_reaction/rawmeatball/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1370,6 +1401,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 10)
 	result_amount = 1
+	mix_message = "The solution folds and thickens into a large ball of dough."
 
 /datum/chemical_reaction/dough/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1381,6 +1413,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = null
 	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 10)
 	result_amount = 1
+	mix_message = "The solution folds and thickens into a large ball of dough."
 
 /datum/chemical_reaction/soydough/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1394,24 +1427,28 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/nutriment/batter
 	required_reagents = list(/datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
 	result_amount = 10
+	mix_message = "The solution thickens into a glossy batter."
 
 /datum/chemical_reaction/cakebatter
 	name = "Cake Batter"
 	result = /datum/reagent/nutriment/batter/cakebatter
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/nutriment/batter = 2)
 	result_amount = 3
+	mix_message = "The sugar lightens the batter and gives it a sweet smell."
 
 /datum/chemical_reaction/soybatter
 	name = "Vegan Batter"
 	result = /datum/reagent/nutriment/batter
 	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
 	result_amount = 10
+	mix_message = "The solution thickens into a glossy batter."
 
 /datum/chemical_reaction/syntiflesh
 	name = "Syntiflesh"
 	result = null
 	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/clonexadone = 1)
 	result_amount = 1
+	mix_message = "The solution thickens disturbingly, taking on a meaty appearance."
 
 /datum/chemical_reaction/syntiflesh/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -1423,12 +1460,14 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/drink/hot_ramen
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/drink/dry_ramen = 3)
 	result_amount = 3
+	mix_message = "The noodles soften in the hot water, releasing savoury steam."
 
 /datum/chemical_reaction/hell_ramen
 	name = "Hell Ramen"
 	result = /datum/reagent/drink/hell_ramen
 	required_reagents = list(/datum/reagent/capsaicin = 1, /datum/reagent/drink/hot_ramen = 6)
 	result_amount = 6
+	mix_message = "The broth of the noodles takes on a hellish red gleam."
 
 /* Alcohol */
 
@@ -1437,42 +1476,49 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/ethanol/goldschlager
 	required_reagents = list(/datum/reagent/ethanol/vodka = 10, /datum/reagent/gold = 1)
 	result_amount = 10
+	mix_message = "The gold flakes and settles in the vodka."
 
 /datum/chemical_reaction/patron
 	name = "Patron"
 	result = /datum/reagent/ethanol/patron
 	required_reagents = list(/datum/reagent/ethanol/tequilla = 10, /datum/reagent/silver = 1)
 	result_amount = 10
+	mix_message = "The silver flakes and settles in the tequila."
 
 /datum/chemical_reaction/bilk
 	name = "Bilk"
 	result = /datum/reagent/ethanol/bilk
 	required_reagents = list(/datum/reagent/drink/milk = 1, /datum/reagent/ethanol/beer = 1)
 	result_amount = 2
+	mix_message = "The solution takes on an unpleasant, thick, brown appearance."
 
 /datum/chemical_reaction/icetea
 	name = "Iced Tea"
 	result = /datum/reagent/drink/tea/icetea
 	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea = 2, /datum/reagent/sugar = 1)
 	result_amount = 3
+	mix_message = "The ice clinks together in the sweat tea."
 
 /datum/chemical_reaction/sweettea
 	name = "Sweet Tea"
 	result = /datum/reagent/drink/tea/icetea
 	required_reagents = list(/datum/chemical_reaction/icetea = 3, /datum/reagent/sugar = 1)
 	result_amount = 4
+	mix_message = "The ice clinks together in the sweat tea."
 
 /datum/chemical_reaction/icecoffee
 	name = "Iced Coffee"
 	result = /datum/reagent/drink/coffee/icecoffee
 	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee = 2)
 	result_amount = 3
+	mix_message = "The ice clinks together in the chilled coffee."
 
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
 	result = /datum/reagent/drink/nuka_cola
 	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/space_cola = 5)
 	result_amount = 5
+	mix_message = "The solution bubbles and emits an eerie green glow."
 
 /datum/chemical_reaction/moonshine
 	name = "Moonshine"
@@ -1480,6 +1526,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/nutriment = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution exudes the powerful reek of raw alcohol."
 
 /datum/chemical_reaction/grenadine
 	name = "Grenadine Syrup"
@@ -1494,6 +1541,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/juice/grape = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a rich red liquid."
 
 /datum/chemical_reaction/pwine
 	name = "Poison Wine"
@@ -1501,6 +1549,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/toxin/poisonberryjuice = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a shifting purple liquid."
 
 /datum/chemical_reaction/melonliquor
 	name = "Melon Liquor"
@@ -1508,6 +1557,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/juice/watermelon = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a pale liquor."
 
 /datum/chemical_reaction/bluecuracao
 	name = "Blue Curacao"
@@ -1515,6 +1565,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/juice/orange = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a shockingly blue liquor."
 
 /datum/chemical_reaction/spacebeer
 	name = "Space Beer"
@@ -1522,6 +1573,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/nutriment/cornoil = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a foaming amber liquid."
 
 /datum/chemical_reaction/vodka
 	name = "Vodka"
@@ -1529,6 +1581,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/juice/potato = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a crystal clear liquid."
 
 /datum/chemical_reaction/vodka2
 	name = "Vodka"
@@ -1536,6 +1589,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/juice/turnip = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a crystal clear liquid."
 
 /datum/chemical_reaction/sake
 	name = "Sake"
@@ -1543,6 +1597,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/nutriment/rice = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a crystal clear liquid."
 
 /datum/chemical_reaction/kahlua
 	name = "Kahlua"
@@ -1550,6 +1605,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/coffee = 5, /datum/reagent/sugar = 5)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 5
+	mix_message = "The solution roils as it rapidly ferments into a rich brown liquid."
 
 /datum/chemical_reaction/gin_tonic
 	name = "Gin and Tonic"
@@ -1752,7 +1808,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result_amount = 3
 
 /datum/chemical_reaction/bahama_mama
-	name = "Bahama mama"
+	name = "Bahama Mama"
 	result = /datum/reagent/ethanol/bahama_mama
 	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/ice = 1)
 	result_amount = 6
@@ -1770,7 +1826,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result_amount = 2
 
 /datum/chemical_reaction/demonsblood
-	name = "Demons Blood"
+	name = "Demon's Blood"
 	result = /datum/reagent/ethanol/demonsblood
 	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/spacemountainwind = 1, /datum/reagent/blood = 1, /datum/reagent/drink/dr_gibb = 1)
 	result_amount = 6
@@ -1780,12 +1836,14 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/ethanol/booger
 	required_reagents = list(/datum/reagent/drink/milk/cream = 2, /datum/reagent/drink/juice/banana = 1, /datum/reagent/ethanol/rum = 1, /datum/reagent/drink/juice/watermelon = 1)
 	result_amount = 5
+	mix_message = "The solution thickens unpleasantly."
 
 /datum/chemical_reaction/antifreeze
 	name = "Anti-freeze"
 	result = /datum/reagent/ethanol/antifreeze
 	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/drink/milk/cream = 1, /datum/reagent/drink/ice = 1)
 	result_amount = 3
+	mix_message = "The solution thickens sluggishly."
 
 /datum/chemical_reaction/barefoot
 	name = "Barefoot"
@@ -1823,12 +1881,14 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/ethanol/iced_beer
 	required_reagents = list(/datum/reagent/ethanol/beer = 10, /datum/reagent/frostoil = 1)
 	result_amount = 10
+	mix_message = "The solution chills rapidly, frost forming on its surface."
 
 /datum/chemical_reaction/iced_beer2
 	name = "Iced Beer"
 	result = /datum/reagent/ethanol/iced_beer
 	required_reagents = list(/datum/reagent/ethanol/beer = 5, /datum/reagent/drink/ice = 1)
 	result_amount = 6
+	mix_message = "The ice clinks together in the beer."
 
 /datum/chemical_reaction/grog
 	name = "Grog"
@@ -1841,18 +1901,21 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/drink/coffee/soy_latte
 	required_reagents = list(/datum/reagent/drink/coffee = 1, /datum/reagent/drink/milk/soymilk = 1)
 	result_amount = 2
+	mix_message = "The soy milk suffuses the coffee with pale shades."
 
 /datum/chemical_reaction/cafe_latte
 	name = "Cafe Latte"
 	result = /datum/reagent/drink/coffee/cafe_latte
 	required_reagents = list(/datum/reagent/drink/coffee = 1, /datum/reagent/drink/milk = 1)
 	result_amount = 2
+	mix_message = "The milk suffuses the coffee with pale shades."
 
 /datum/chemical_reaction/acidspit
 	name = "Acid Spit"
 	result = /datum/reagent/ethanol/acid_spit
 	required_reagents = list(/datum/reagent/acid = 1, /datum/reagent/ethanol/wine = 5)
 	result_amount = 6
+	mix_message = "The solution curdles into an unpleasant, slimy liquid."
 
 /datum/chemical_reaction/amasec
 	name = "Amasec"
@@ -1863,8 +1926,9 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 /datum/chemical_reaction/changelingsting
 	name = "Changeling Sting"
 	result = /datum/reagent/ethanol/changelingsting
-	required_reagents = list("screwdrivercocktail" = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/juice/lemon = 1)
+	required_reagents = list(/datum/reagent/ethanol/screwdrivercocktail = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/juice/lemon = 1)
 	result_amount = 3
+	mix_message = "The solution begins to shift and change colour."
 
 /datum/chemical_reaction/aloe
 	name = "Aloe"
@@ -1980,6 +2044,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/water = 1)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 2
+	mix_message = "The solution roils as it rapidly ferments into a red-brown liquid."
 
 /datum/chemical_reaction/ships_surgeon
 	name = "Ship's Surgeon"
@@ -1992,12 +2057,14 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/luminol
 	required_reagents = list(/datum/reagent/hydrazine = 2, /datum/reagent/carbon = 2, /datum/reagent/ammonia = 2)
 	result_amount = 6
+	mix_message = "The solution begins to gleam with a fey inner light."
 
 /datum/chemical_reaction/oxyphoron
 	name = "Oxyphoron"
 	result = /datum/reagent/toxin/phoron/oxygen
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/toxin/phoron = 1)
 	result_amount = 2
+	mix_message = "The solution boils violently, shedding wisps of vapor."
 
 /datum/chemical_reaction/deuterium
 	name = "Deuterium"
@@ -2005,6 +2072,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/water = 10)
 	catalysts = list(/datum/reagent/toxin/phoron/oxygen = 5)
 	result_amount = 1
+	mix_message = "The solution makes a loud cracking sound as it crystalizes."
 
 /datum/chemical_reaction/deuterium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/T = get_turf(holder.my_atom)
@@ -2022,6 +2090,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	result = /datum/reagent/nanoblood
 	required_reagents = list(/datum/reagent/dexalinp = 1, /datum/reagent/iron = 1, /datum/reagent/blood = 1)
 	result_amount = 3
+	mix_message = "The solution thickens slowly into a glossy liquid."
 
 /datum/chemical_reaction/vinegar
 	name = "Apple Vinegar"
@@ -2029,6 +2098,7 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/drink/juice/apple = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a sharp-smelling liquid."
 
 /datum/chemical_reaction/vinegar2
 	name = "Clear Vinegar"
@@ -2036,45 +2106,53 @@ GLOBAL_LIST_INIT(chemical_products_list, new)
 	required_reagents = list(/datum/reagent/ethanol = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a sharp-smelling liquid."
 
 /datum/chemical_reaction/mayo
 	name = "Vinegar Mayo"
 	result = /datum/reagent/nutriment/mayo
 	required_reagents = list(/datum/reagent/nutriment/vinegar = 5, /datum/reagent/nutriment/protein/egg = 5)
 	result_amount = 10
+	mix_message = "The solution thickens into a glossy, creamy substance."
 
 /datum/chemical_reaction/mayo2
 	name = "Lemon Mayo"
 	result = /datum/reagent/nutriment/mayo
 	required_reagents = list(/datum/reagent/drink/juice/lemon = 5, /datum/reagent/nutriment/protein/egg = 5)
 	result_amount = 10
+	mix_message = "The solution thickens into a glossy, creamy substance."
 
 /datum/chemical_reaction/anfo
 	name = "EZ-ANFO"
 	result = /datum/reagent/anfo
 	required_reagents = list(/datum/reagent/toxin/fertilizer/eznutrient=20, /datum/reagent/fuel=10)
 	result_amount = 15
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo2
 	name = "Left 4 ANFO"
 	result = /datum/reagent/anfo
 	required_reagents = list(/datum/reagent/toxin/fertilizer/left4zed=10, /datum/reagent/fuel=5)
 	result_amount = 10
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo3
 	name = "Robust ANFO"
 	result = /datum/reagent/anfo
 	required_reagents = list(/datum/reagent/toxin/fertilizer/robustharvest=15, /datum/reagent/fuel=5)
 	result_amount = 10
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo4
 	name = "Chemlab ANFO"
 	result = /datum/reagent/anfo
 	required_reagents = list(/datum/reagent/ammonia=10, /datum/reagent/fuel=5)
 	result_amount = 15
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo_plus
 	name = "ANFO+"
 	result = /datum/reagent/anfo/plus
 	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminum=5)
 	result_amount = 20
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
