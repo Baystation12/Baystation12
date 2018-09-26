@@ -237,6 +237,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	allowed = list(/obj/item/weapon/tank)
 
 /obj/item/clothing/shoes/sangheili/ranger
 	name = "Sanghelli Leg Armour (Ranger)"
