@@ -3,133 +3,86 @@
 /decl/hierarchy/outfit/job/UNSC_ship/aegistechnician
 	name = "UNSC Aegis Engineer"
 
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/technician
-	shoes = /obj/item/clothing/shoes/workboots
-	belt = /obj/item/weapon/storage/belt/utility/full
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/aegishelmsman
 	name = "UNSC Aegis Helmsman"
 
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes =  /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/aegisbridgecrew
 	name = "UNSC Aegis Bridge Crew"
 
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes =  /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/aegispilot
-	name = "UNSC Aegis Pelican Pilot"
-
-	l_ear = /obj/item/device/radio/headset/unsc/pilot
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes = /obj/item/clothing/shoes/black
-	head = /obj/item/clothing/head/helmet/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/aegisjanitor
 	name = "UNSC Aegis Janitor"
 
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/logistics
-	shoes = /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/aegiscrew
 	name = "UNSC Aegis Ship Crew"
 
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/tactical
-	shoes = /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/aegisCO
 	name = "UNSC Aegis Commanding Officer"
 
-	l_ear = /obj/item/device/radio/headset/unsc/commander
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes = /obj/item/clothing/shoes/brown
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o4)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/aegisXO
 	name = "UNSC Aegis Executive Officer"
 
-	l_ear = /obj/item/device/radio/headset/unsc/officer
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes = /obj/item/clothing/shoes/brown
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o3)
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/badge/tags, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
-
-//UNSC Aegis Medical Staff Outfits
-
-/decl/hierarchy/outfit/job/UNSC_ship/medical
-	name = "UNSC Aegis Medical Staff"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/medical
-	shoes = /obj/item/clothing/shoes/white
-	l_hand = /obj/item/weapon/storage/firstaid/adv
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
-
-	flags = 0
-
-
-//MARINE Outfits
-
-/decl/hierarchy/outfit/job/UNSC_ship/aegismarine
-	name = "UNSC Marine"
-
-	l_ear = /obj/item/device/radio/headset/unsc/marine
-	glasses = /obj/item/clothing/glasses/hud/tactical
-	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	shoes = /obj/item/clothing/shoes/marine
-	head = /obj/item/clothing/head/helmet/marine
-	suit = /obj/item/clothing/suit/storage/marine
-	belt = /obj/item/weapon/storage/belt/marine_ammo
-	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/aegismarine_xo
-	name = "Marine Platoon Leader"
-
-	l_ear = /obj/item/device/radio/headset/unsc/marine
-	l_hand = /obj/item/squad_manager
-	glasses = /obj/item/clothing/glasses/hud/tactical
-	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	shoes = /obj/item/clothing/shoes/marine
-	head = /obj/item/clothing/head/helmet/marine
-	suit = /obj/item/clothing/suit/storage/marine
-	belt = /obj/item/weapon/storage/belt/marine_ammo
-	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
-
-	flags = 0
-
 
 //ODST Outfits
 
@@ -142,8 +95,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -158,8 +111,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -174,8 +127,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/fleet/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -190,8 +143,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -206,8 +159,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -222,8 +175,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -238,8 +191,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -254,8 +207,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e6, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e6, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -270,8 +223,8 @@
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e7, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e7, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -281,13 +234,15 @@
 	name = "Fireteam Leader"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e8, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/enlisted/e8, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -297,13 +252,15 @@
 	name = "Second Lieutenant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -313,13 +270,15 @@
 	name = "First Lieutenant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/officer/o2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -330,13 +289,15 @@
 	name = "odstCaptain"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o3, /obj/item/clothing/accessory/ribbon/frontier, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/officer/o3, /obj/item/clothing/accessory/ribbon/frontier, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -346,13 +307,15 @@
 	name = "Major"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o4, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/officer/o4, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -362,13 +325,15 @@
 	name = "LtColonel"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o5, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/officer/o5, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -378,13 +343,15 @@
 	name = "Colonel"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
+	head = /obj/item/clothing/head/helmet/odst/squadleader
+	suit = /obj/item/clothing/suit/armor/special/odst/squadleader
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	id_type = /obj/item/weapon/card/id/odst
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o6, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	id_type = /obj/item/weapon/card/id/oni
+	starting_accessories = list (/obj/item/clothing/accessory/badge/onib, /obj/item/clothing/accessory/rank/marine/officer/o6, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 

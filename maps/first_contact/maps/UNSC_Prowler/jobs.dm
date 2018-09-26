@@ -4,12 +4,11 @@
 	alt_titles = list("UNSC Aegis Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/aegistechnician,
 	"UNSC Aegis Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/aegishelmsman,
 	"UNSC Aegis Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/aegisbridgecrew ,
-	"UNSC Aegis Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/aegisjanitor ,
-	"UNSC Aegis Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/aegispilot,)
-	total_positions = 8
-	spawn_positions = 8
+	"UNSC Aegis Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/aegisjanitor ,)
+	total_positions = 3
+	spawn_positions = 3
 	selection_color = "#0A0A95"
-	access = list(142)
+	access = list(142,309)
 	spawnpoint_override = "UNSC Aegis Ship Crew Spawn"
 
 /datum/job/unscaegis_co
@@ -18,14 +17,14 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
-	access = list(142,143,144,145)
+	access = list(142,309,143,144,145)
 	spawnpoint_override = "UNSC Aegis Ship Crew Spawn"
 
 
 //UNSC Aegis ODST Jobs
 
-/datum/job/aegisODST
-	title = "Orbital Drop Shock Trooper"
+/datum/job/aegisODSTONI
+	title = "''ONI'' Orbital Drop Shock Trooper"
 	total_positions = 5
 	spawn_positions = 5
 	outfit_type = /decl/hierarchy/outfit/job/aegisfacil_ODST
@@ -43,8 +42,8 @@
 	spawnpoint_override = "UNSC Aegis ODST Spawn"
 	is_whitelisted = 1
 
-/datum/job/aegisODSTO
-	title = "Orbital Drop Shock Trooper Officer"
+/datum/job/aegisODSTOONI
+	title = "''ONI'' Orbital Drop Shock Trooper Officer"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/aegisODSTsecondlieutenant
