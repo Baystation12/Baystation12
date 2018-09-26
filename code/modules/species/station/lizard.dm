@@ -29,6 +29,8 @@
 	min_age = 18
 	max_age = 260
 
+	body_temperature = null // cold-blooded, implemented the same way nabbers do it
+
 	description = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
 	desert planet, they mostly hold ideals of honesty, virtue, martial combat and bravery above all \
@@ -72,6 +74,10 @@
 
 	base_auras = list(
 		/obj/aura/regenerating/human/unathi
+		)
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
 	prone_overlay_offset = list(-4, -4)
