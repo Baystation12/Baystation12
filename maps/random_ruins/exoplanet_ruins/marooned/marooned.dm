@@ -52,7 +52,7 @@
 	..()
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
-		T.fire_act(temperature = T0C + 3000)
+		T.fire_act(exposed_temperature = T0C + 3000)
 	return INITIALIZE_HINT_QDEL
 
 /obj/item/weapon/paper/marooned/

@@ -61,7 +61,7 @@
 	..()
 
 
-/obj/item/device/taperecorder/fire_act()
+/obj/item/device/taperecorder/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(mytape)
 		mytape.ruin() //Fires destroy the tape
 	return ..()
@@ -399,7 +399,7 @@
 		overlays += "ribbonoverlay"
 
 
-/obj/item/device/tape/fire_act()
+/obj/item/device/tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	ruin()
 
 /obj/item/device/tape/attack_self(mob/user)
