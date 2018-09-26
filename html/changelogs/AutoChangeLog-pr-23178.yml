@@ -1,0 +1,11 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "The IT skill now has gameplay effects when using modular computers."
+  - rscadd: "Higher IT skill allows the user to bypass logging on program download with higher probability (Trained: 30%, Expert: 60%, Master: 90%). Logs will still be generated, with faked entries for the download info."
+  - rscadd: "The antag access decryption program is more effective at higher skill levels. It works faster and has a chance to avoid tripping the alarm. At unskilled (generally meaning non-antag) it has a chance to give the wrong access."
+  - rscadd: "The antag camera alarm-trip probability is now tied to skill, with similar effectiveness as current at Trained."
+  - rscadd: "The antag dos program is more effective at higher skill, with more dos attacks per tick at higher levels (equal to current at Basic). At expert and master, gives extra fake attacking nodes to the system log to impede sysadmins."
+  - rscadd: "The network monitor, email administration, and AI management programs are locked below basic, basic, and trained skill, resp. You will instead get some random data displayed. The programs do link to a terminal now."
+  - rscadd: "Added a command line interface for modular computers. With enough skill (expert+ for most things) you can run specific commands (type man for a list) to do rudimentary sysadmin diagnostic tasks. Notably, with network access, you can ssh into terminals of other computers over the network. If you are unskilled, you may get various failure effects or just be unable to do anything."
+  - rscadd: "To access the terminal, either use one of the programs or use Ctl Alt Click."
