@@ -14,6 +14,7 @@
 	var/c_uid
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
+	var/paralyzedcharge = null // charge stored incase a robot is paralyzed (very snowflakey!)
 	var/overlay_state
 	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50)
 
