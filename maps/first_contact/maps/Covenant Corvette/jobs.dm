@@ -15,6 +15,7 @@
 	outfit_type = /decl/hierarchy/outfit/kigyarcorvette
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	faction_whitelist = "Covenant"
 
 
 /datum/job/covenant/kigyarcorvette/captain
@@ -25,6 +26,7 @@
 	outfit_type = /decl/hierarchy/outfit/kigyarcorvette/captain
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	faction_whitelist = "Covenant"
 
 /datum/job/covenant/unggoy_minor
 	title = "Unggoy - Minor"

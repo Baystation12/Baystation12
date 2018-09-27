@@ -89,3 +89,4 @@ GLOBAL_LIST_EMPTY(listen_staffl_spawns)
 	spawnpoint_override = "Listening Post Commander Spawn"
 	announced = FALSE
 	is_whitelisted = 0
+	faction_whitelist = "Insurrection"
