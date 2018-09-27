@@ -10,7 +10,7 @@
 		return
 	is_whitehot = 1
 	user.visible_message("<span class='notice'>[user] heats up \the [src].</span>", "You heat \the [src] to a white hot glow.")
-	spawn(200)
+	timer(200)
 		to_chat(user, "You think \the [src] is ready to be forged now.")
 		SetName("white hot " + name)
 		cooltime()
@@ -35,7 +35,13 @@
 /obj/item/stack/material/steel(obj/item/W as obj, mob/user as mob)
 //check if material is white hot or red hot
 //check if mob is using W, W being a hammer or wrench or other blunt instrument
+	if(istype(W,/obj/item/weapon/wrench))
+		..()
+		return
 //alternative check for having pliers (made using blacksmithing) or wirecutters in off-hand to hold down the material while forging
+		if(isWirecutter(user.l_hand) || isWirecutter(user.r_hand))
+		else
+			to_chat(user, "<span class='warning'>Were you planning to hold the hot metal down with your bare hand?</span>")
 //last check to ensure material is on a sturdy surface (eg: reinforced table) before you begin forging
 //add hammer noises
 //reduce risk of self-injury by wearing gloves and apron!
