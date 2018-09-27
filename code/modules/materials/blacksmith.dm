@@ -17,7 +17,7 @@
 
 /obj/item/stack/material/steel/proc/cooltime()
 	if (src.is_whitehot)
-		spawn(4200)
+		timer(4200)
 			src.is_whitehot = 0
 			src.is_redhot = 1
 			src.SetName(initial(name))
@@ -26,7 +26,7 @@
 
 /obj/item/stack/material/steel/proc/cooldown()
 	if (src.is_redhot)
-		spawn(4200)
+		timer(4200)
 			src.is_redhot = 0
 			src.SetName(initial(name))
 
