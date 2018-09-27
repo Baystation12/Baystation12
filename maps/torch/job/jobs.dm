@@ -1563,7 +1563,7 @@
 		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/research/commissioned
 	)
 
-	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm, access_xenobiology, access_guppy_helm,
+	access = list(access_tox_storage, access_research, access_petrov, access_xenobiology, access_guppy_helm,
 						access_expedition_shuttle, access_guppy, access_hangar,  access_solgov_crew, access_emergency_storage)
 	minimal_access = list()
 	skill_points = 16
