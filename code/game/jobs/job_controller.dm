@@ -121,7 +121,7 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
 		var/list/candidates = list()
 		for(var/mob/new_player/player in unassigned)
-			if(jobban_isbanned(player, job.title))
+			if(jobban_isbanned(player, job.title, job))
 				Debug("FOC isbanned failed, Player: [player]")
 				continue
 			if(!job.player_old_enough(player.client))

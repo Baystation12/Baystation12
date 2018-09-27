@@ -101,6 +101,8 @@
 		return 0
 	var/exhaust_dir = reverse_direction(dir)
 
+	. = thrust_limit
+
 	//use some power
 	use_power = 2
 	last_burn = world.time
