@@ -49,6 +49,22 @@ This is a sourcecode-only release, so the next step is to compile the server fil
     
     baystation12.dmb - 0 errors, 0 warnings
 
+Under Linux it is invoked with:
+
+    $ DreamMaker baystation12.dme
+    DM compiler version 511.1385
+    loading baystation12.dme
+    loading interface/skin.dmf
+    loading maps/area_holders/overmap_ship_area_holder.dmm
+    ...
+    loading UNSC_Bertels_Deck_1.dmm
+    loading SDV_Vindicative_Infraction.dmm
+    loading maps/CCV_Star.dmm
+    loading maps/CCV_Slow_But_Steady.dmm
+    saving baystation12.dmb (DEBUG mode)
+    baystation12.dmb - 0 errors, 0 warnings (9/18/18 1:15 pm)
+    $
+
 If you see any errors or warnings, something has gone wrong - possibly a corrupt download or the files extracted wrong, or a code issue on the main repo.  Ask on IRC.
 
 Once that's done, open up the config folder.  You'll want to edit config.txt to set the probabilities for different gamemodes in Secret and to set your server location so that all your players don't get disconnected at the end of each round.  It's recommended you don't turn on the gamemodes with probability 0, as they have various issues and aren't currently being tested, so they may have unknown and bizarre bugs.
@@ -60,6 +76,10 @@ You'll also want to edit admins.txt to remove the default admins and add your ow
 where the BYOND key must be in lowercase and the admin rank must be properly capitalised.  There are a bunch more admin ranks, but these two should be enough for most servers, assuming you have trustworthy admins.
 
 Finally, to start the server, run Dream Daemon and enter the path to your compiled baystation12.dmb file.  Make sure to set the port to the one you  specified in the config.txt, and set the Security box to 'Trusted'.  Then press GO and the server should start up and be ready to join.
+
+Under Linux it is invoked with:
+
+  DreamDaemon baystation12 <port_number> -trusted
 
 ---
 
