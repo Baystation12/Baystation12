@@ -101,7 +101,7 @@
 		return 0
 	var/exhaust_dir = reverse_direction(dir)
 
-	. = 1
+	. = thrust_limit
 
 	//use some power
 	use_power = 2
