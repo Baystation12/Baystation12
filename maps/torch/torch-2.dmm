@@ -4664,20 +4664,6 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/holocontrol)
-"kX" = (
-/obj/structure/hygiene/toilet{
-	pixel_y = 8
-	},
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -23;
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head)
 "kY" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -39126,7 +39112,7 @@ yH
 sq
 Dt
 uU
-kX
+vY
 xa
 of
 ng
