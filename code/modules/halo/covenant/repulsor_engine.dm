@@ -101,6 +101,8 @@
 		return 0
 	var/exhaust_dir = reverse_direction(dir)
 
+	. = 1
+
 	//use some power
 	use_power = 2
 	last_burn = world.time

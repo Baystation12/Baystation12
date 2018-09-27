@@ -135,6 +135,8 @@
 		on = !on
 		return 0
 
+	. = 1
+
 	//use some fuel
 	held_fuel.fuel_left = max(held_fuel.fuel_left - fuel_consumption_rate * thrust_limit, 0)
 
