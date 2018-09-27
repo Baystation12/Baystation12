@@ -270,7 +270,7 @@ datum/unit_test/ladder_check/start_test()
 		if(L.allowed_directions & UP)
 			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
 		if(L.allowed_directions & DOWN)
-			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded 
+			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
 			succeeded = check_open_space(L) && succeeded
 	if(succeeded)
 		pass("All ladders are correctly setup.")
@@ -507,6 +507,23 @@ datum/unit_test/ladder_check/start_test()
 		pass("All shutoff valves connect to two different pipe networks.")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/station_pipes_shall_not_leak
+	name = "MAP: Station pipes shall not leak"
+
+/datum/unit_test/station_pipes_shall_not_leak/start_test()
+	var/failures = 0
+	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
+		if(P.leaking && isStationLevel(P.z))
+			failures++
+			log_bad("Following pipe is leaking: [log_info_line(P)]")
+
+	if(failures)
+		fail("[failures] station pipe\s leak.")
+	else
+		pass("No station pipes are leaking")
+	return 1
 
 #undef SUCCESS
 #undef FAILURE
