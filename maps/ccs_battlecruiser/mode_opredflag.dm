@@ -45,8 +45,9 @@
 	//grab the spartan list
 	var/datum/job/spartans = job_master.occupations_by_title["Spartan II"]
 	living_spartans += spartans.assigned_players
+
 	//dont let spartans latejoin
-	spartans.total_positions = -1
+	spartans.total_positions = 0
 
 	//grab the elite shipmaster
 	var/datum/job/opredflag_elite/shipmaster = job_master.occupations_by_title["Sangheili Shipmaster"]
@@ -57,7 +58,8 @@
 
 	//grab the spartan commander
 	var/datum/job/opredflag_spartan/commander = job_master.occupations_by_title["Spartan II Commander"]
-	commander.total_positions = -1
+	//dont let a commander latejoin
+	commander.total_positions = 0
 	for(var/mob/M in commander.assigned_players)
 		spartan_commander = M.name
 		spartan_commander_ckey = M.ckey
