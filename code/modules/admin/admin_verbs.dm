@@ -965,7 +965,7 @@ var/list/admin_verbs_mentor = list(
 	load_whitelist()
 	if(config.usealienwhitelistSQL)
 		if(!load_alienwhitelistSQL())
-			world.log << "Could not load alienwhitelist via SQL"
+			log_and_message_admins("Could not load alienwhitelist via SQL")
 	else
 		load_alienwhitelist()
 
