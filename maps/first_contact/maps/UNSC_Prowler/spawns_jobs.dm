@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(prowlerodst_crew_spawns)
 
 /datum/spawnpoint/prowlerodst_crew
 	display_name = "UNSC Aegis Ship Crew Spawn"
-	restrict_job = list("UNSC Aegis Ship Crew"," UNSC Aegis Commanding Officer")
+	restrict_job = list("UNSC Aegis Ship Crew","UNSC Aegis Commanding Officer")
 
 /datum/spawnpoint/prowlerodst_crew/New()
 	..()

@@ -21,14 +21,14 @@
 
 /area/corvette/unscfox/deck1/storage
 	name = "UNSC Aegis Deck 1 Storage Bay"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck1/hallway
 	name = "UNSC Aegis Deck 1 Hallway"
 
 /area/corvette/unscfox/deck1/Reactorcore
 	name = "UNSC Aegis Deck 1 Main Reactor Core"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck1/medbay
 	name = "UNSC Aegis Deck 1  Medical Bay"
@@ -47,35 +47,35 @@
 //deck 2 areas
 /area/corvette/unscfox/deck2/hallway
 	name = "UNSC Aegis Deck 2 Hallway"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/auxpowercore
 	name = "UNSC Aegis Deck 2 Auxiliary Power Core"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/cells
 	name = "UNSC Aegis Deck 2 Holding Cells"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/soeivbay
 	name = "UNSC Aegis Deck 2 SOEIV Bay"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/odstbunks
 	name = "UNSC Aegis Deck 2 ODST Bunks"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/nuclearstorage
 	name = "UNSC Aegis Deck 2 Nuclear Payload Storage"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/umbilical
 	name = "UNSC Aegis Deck 2 Docking Umbilical"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/cryodorms
 	name = "UNSC Aegis Deck 2 Cryodorms"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/morgue
 	name = "UNSC Aegis Deck 2 Morgue"
@@ -83,11 +83,11 @@
 
 /area/corvette/unscfox/deck2/communications
 	name = "UNSC Aegis Deck 2 Communications Hub"
-	requires_power = 0
+	requires_power = 1
 
 /area/corvette/unscfox/deck2/airlock
 	name = "UNSC Aegis Deck 2 External Airlock"
-	requires_power = 0
+	requires_power = 1
 
 
 //ship weapon areas
