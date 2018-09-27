@@ -7,15 +7,20 @@
 
 /obj/item/energybarricade/attack_self(var/mob/user)
 	if(user)
-		user.visible_message("<span class='info'>[user] begins setting up [src].</span>")
-		if(do_after(user, 30, src.loc))
-			user.visible_message("<span class='info'>[user] finishes setting up [src].</span>")
-			user.drop_item()
-			var/turf/T = get_turf(user)
-			var/obj/structure/energybarricade/E = new(T)
-			E.dir = user.dir
-			E.overload()
-			qdel(src)
+		var/turf/T = get_turf(user)
+		var/obj/structure/energybarricade/E = locate() in T
+		if(E)
+			user.visible_message("<span class='notice'>There is already [E] there!</span>")
+		else
+			user.visible_message("<span class='info'>[user] begins setting up [src].</span>")
+			if(do_after(user, 30, src.loc))
+				user.visible_message("<span class='info'>[user] finishes setting up [src].</span>")
+				user.drop_item()
+				T = get_turf(user)
+				E = new(T)
+				E.dir = user.dir
+				E.overload()
+				qdel(src)
 
 
 
@@ -29,10 +34,6 @@
 	var/active = 1
 	var/time_recharged = 0
 	var/recharge_time = 50
-
-/obj/structure/energybarricade/New()
-	. = ..()
-	plane = MOB_LAYER + 0.1
 
 /obj/structure/energybarricade/CanPass(atom/A, turf/T)
 	. = ..()
@@ -57,10 +58,6 @@
 	if(user.loc == src.loc)
 		user.visible_message("<span class='info'>[user] begins deactivating [src] and begin packing it for transport.</span>")
 
-		//disable the shield for double recharge time
-		overload()
-		time_recharged += recharge_time
-
 		//spend some time breaking down the shield
 		if(do_after(user, recharge_time, src))
 			GLOB.processing_objects.Remove(src)
@@ -83,4 +80,8 @@
 /obj/structure/energybarricade/proc/recharge()
 	icon_state = "1"
 	active = 1
+	if(src.dir == NORTH)
+		src.plane = OBJ_PLANE
+	else
+		src.plane = ABOVE_HUMAN_PLANE
 	GLOB.processing_objects.Remove(src)
