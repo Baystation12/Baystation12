@@ -2921,6 +2921,15 @@
 /turf/unsimulated/mask,
 /area/hallway/primary/fourthdeck/center)
 "ko" = (
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/quartermaster/hangar/top)
 "kq" = (
@@ -6130,6 +6139,11 @@
 "uB" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/quartermaster/hangar/top)
@@ -10795,11 +10809,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/hangcheck)
 "MF" = (
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -11625,6 +11634,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar/top)
 "Pg" = (
@@ -12854,7 +12868,7 @@
 "Sg" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/civilian{
-	name = "Water Stores";
+	name = "Cistern";
 	req_access = list(14)
 	},
 /obj/structure/cable/green{
@@ -13355,6 +13369,11 @@
 	pixel_y = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/quartermaster/hangar/top)
 "Tn" = (
@@ -14704,6 +14723,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	icon_state = "map-scrubbers";
 	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/forestarboard)

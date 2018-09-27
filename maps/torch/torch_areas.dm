@@ -1169,7 +1169,7 @@
 	icon_state = "disposal"
 
 /area/maintenance/waterstore
-	name = "\improper Water Stores"
+	name = "\improper Cistern"
 	icon_state = "disposal"
 
 // Storage
