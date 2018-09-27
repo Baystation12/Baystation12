@@ -1350,6 +1350,11 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "da" = (
@@ -2887,6 +2892,11 @@
 /obj/structure/stairs/east,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
+"gr" = (
+/obj/random/closet,
+/obj/random/maintenance/solgov,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftport)
 "gt" = (
 /obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
@@ -5597,6 +5607,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
 "mQ" = (
@@ -6188,6 +6203,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "nU" = (
@@ -6199,6 +6219,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "nV" = (
@@ -6208,6 +6233,11 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -6938,7 +6968,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
 "pu" = (
-/obj/structure/largecrate,
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -7629,8 +7658,6 @@
 /area/hallway/primary/fifthdeck/aft)
 "qH" = (
 /obj/effect/floor_decal/corner/brown/half,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "qI" = (
@@ -9153,6 +9180,15 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"tK" = (
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (EAST)";
+	icon_state = "railing0";
+	dir = 8
+	},
+/obj/structure/railing/mapped,
+/turf/simulated/floor/plating,
+/area/maintenance/fifthdeck/aftport)
 "tR" = (
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -10023,15 +10059,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
-"vR" = (
-/obj/random/closet,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
 "vS" = (
-/obj/structure/largecrate,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
 "vT" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -10050,9 +10081,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vY" = (
-/obj/structure/largecrate,
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
 "vZ" = (
 /obj/machinery/floodlight,
@@ -11056,13 +11087,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Ao" = (
-/obj/machinery/door/airlock/multi_tile/glass/research{
-	name = "Petrov Access";
-	icon_state = "closed";
-	dir = 4;
-	req_access = list(200);
-	id_tag = "PetrovAccess"
-	},
 /obj/structure/handrai{
 	icon_state = "handrail";
 	dir = 1
@@ -11149,6 +11173,13 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/petrov/toxins)
+"AH" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/shuttle/petrov/hallwaya)
 "AK" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/artifact_analyser,
@@ -11294,6 +11325,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -11521,6 +11557,18 @@
 /obj/random/junk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"Cw" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/maintenance,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/maintenance/fifthdeck/fore)
 "Cy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -11832,6 +11880,13 @@
 /area/shuttle/petrov/cell1)
 "Dz" = (
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/multi_tile/glass/research{
+	name = "Petrov Access";
+	icon_state = "closed";
+	dir = 8;
+	req_access = list(200);
+	id_tag = "PetrovAccess"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
 "DE" = (
@@ -13358,6 +13413,14 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
+"Kn" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/scientist_torch,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/hallwaya)
 "Kr" = (
 /obj/structure/closet/secure_closet/scientist_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -13528,6 +13591,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
@@ -13927,6 +13993,10 @@
 /obj/item/weapon/stool/bar,
 /turf/simulated/floor/holofloor/wood,
 /area/vacant/bar)
+"MI" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/plating,
+/area/maintenance/fifthdeck/aftport)
 "ML" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -14481,6 +14551,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "Pa" = (
@@ -14849,6 +14924,9 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
@@ -16378,6 +16456,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
 "Xe" = (
@@ -16593,6 +16672,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/security)
+"Yh" = (
+/obj/random/tech_supply,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/structure/largecrate,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftport)
 "Yi" = (
 /obj/structure/table/rack{
 	dir = 4
@@ -29297,7 +29384,7 @@ pO
 uL
 uO
 cZ
-iY
+Cw
 ln
 or
 qQ
@@ -39219,7 +39306,7 @@ jl
 Em
 uh
 pt
-pv
+Yh
 ws
 ws
 aa
@@ -41235,9 +41322,9 @@ ws
 ws
 tq
 vO
-tq
-tq
-tq
+tK
+wj
+gr
 ws
 ws
 aa
@@ -41435,9 +41522,9 @@ aa
 aa
 ws
 ws
-vR
 TQ
 TQ
+MI
 vS
 vY
 ws
@@ -41638,8 +41725,8 @@ aa
 ws
 ws
 gI
-gI
 vH
+gI
 gI
 gI
 ws
@@ -43440,7 +43527,7 @@ By
 BL
 PC
 bu
-Mg
+Kn
 YG
 tJ
 CW
@@ -44250,7 +44337,7 @@ ZY
 Mt
 bb
 yr
-MN
+AH
 Yk
 IR
 Dt
