@@ -1043,17 +1043,14 @@ About the new airlock wires panel:
 	if(!repairing && isWelder(C) && !( operating > 0 ) && density)
 		var/obj/item/weapon/weldingtool/W = C
 		if(!W.remove_fuel(0,user))
-			to_chat(user, SPAN_NOTICE("Your \the [W] doesn't have enough fuel."))
+			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
 			return
 		playsound(loc, 'sound/items/Welder.ogg', 50, 1)
 		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
 							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
 		if(do_after(user, (rand(3,5)) SECONDS, src))
-			if(density)
-				if(!welded)
-					welded = TRUE
-				else
-					welded = FALSE
+			if(density && !(operating > 0) && !repairing)
+				welded = !welded
 				update_icon()
 				return
 		else
