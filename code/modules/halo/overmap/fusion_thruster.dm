@@ -43,7 +43,6 @@
 	icon = 'fusion_thruster.dmi'
 	icon_state = "nozzle0"
 	use_power = 1
-	anchored = 1
 	var/last_burn = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 5000
@@ -54,7 +53,7 @@
 	var/on = 1
 	var/datum/ship_engine/fusion/controller
 	var/obj/item/fusion_fuel/held_fuel
-	var/fuel_consumption_rate = 0.5
+	var/fuel_consumption_rate = 10
 
 //spawn with fuel
 /obj/machinery/fusion_thruster/fueled
