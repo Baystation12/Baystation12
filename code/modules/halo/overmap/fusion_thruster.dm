@@ -38,7 +38,7 @@
 
 
 /obj/machinery/fusion_thruster
-	name = "Fusion Thruster"
+	name = "repulsor engine"
 	desc = "Simple thermal nozzle, uses heated gas to propel the ship."
 	icon = 'fusion_thruster.dmi'
 	icon_state = "nozzle0"
