@@ -638,7 +638,7 @@
 		if(H.pull_damage())
 			to_chat(src, "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>")
 
-		var/obj/item/clothing/C = H.get_covering_equipped_item(BP_CHEST)
+		var/obj/item/clothing/C = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(C))
 			C.leave_evidence(src)
 

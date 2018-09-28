@@ -94,7 +94,7 @@ var/global/list/sparring_attack_cache = list()
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
 		target.apply_effect(3, WEAKEN, armour)
 
-	var/obj/item/clothing/C = target.get_covering_equipped_item(zone)
+	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)
 	if(istype(C) && prob(10))
 		C.leave_evidence(user)
 

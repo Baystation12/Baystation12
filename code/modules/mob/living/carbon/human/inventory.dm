@@ -426,4 +426,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(handcuffed) . += handcuffed
 		if(s_store)    . += s_store
 
+//Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
+/mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
+	var/obj/item/organ/external/O = get_organ(zone)
+	if(O)
+		return get_covering_equipped_item(O.body_part)
+
 #undef REMOVE_INTERNALS
