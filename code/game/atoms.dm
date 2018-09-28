@@ -332,6 +332,7 @@ its easier to just keep the beam vertical.
 	if(istype(blood_DNA, /list))
 		blood_DNA = null
 		return 1
+	gunshot_residue = null
 
 /atom/proc/get_global_map_pos()
 	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return

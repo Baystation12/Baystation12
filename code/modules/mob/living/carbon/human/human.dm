@@ -864,7 +864,10 @@
 
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
-	gunshot_residue = null
+	for(var/obj/item/organ/external/organ in organs)
+		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
+			organ.gunshot_residue = null
+	
 	if(clean_feet && !shoes)
 		feet_blood_color = null
 		feet_blood_DNA = null
