@@ -242,7 +242,7 @@
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attackby(var/obj/item/weapon/W, var/mob/user)
 	var/obj/item/weapon/laser_designator/designator = W
 	if(istype(W))
-		W.creator = src
+		designator.creator = src
 		to_chat(user,"Device linked to console. Designated targets will now be relayed for firing.")
 
 //MAC OVERMAP PROJECTILE//
