@@ -514,6 +514,11 @@
 		if(M)
 			src.examinate(M)
 
+	if(href_list["show_relations"])
+		var/mob/living/M = usr
+		if(istype(M))
+			M.see_relationship_info_with(src)
+
 	if (href_list["flavor_change"])
 		switch(href_list["flavor_change"])
 			if("done")
