@@ -35,14 +35,17 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 /obj/machinery/computer/ship/attack_hand(var/mob/user as mob)
 	if(..())
 		user.unset_machine()
+		return ..()
 
 	if(!isAI(user))
 		user.set_machine(src)
 
 	ui_interact(user)
 
-/obj/machinery/computer/ship/Topic(href, href_list)
+/obj/machinery/computer/ship/OnTopic(var/mob/user, var/list/href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 	if(href_list["sync"])
 		sync_linked()
+		return TOPIC_REFRESH
+	return TOPIC_NOACTION
