@@ -2,7 +2,7 @@
 	name = "stasis cage"
 	desc = "A high-tech animal cage, designed to keep contained fauna docile and safe."
 	icon = 'icons/obj/storage.dmi'
-	icon_state = "critter"
+	icon_state = "stasis_cage"
 	density = 1
 
 	var/mob/living/simple_animal/contained
@@ -21,6 +21,17 @@
 	if(Adjacent(user))
 		release()
 
+/obj/structure/stasis_cage/update_icon()
+	if(contained)
+		icon_state = "[initial(icon_state)]_on"
+	else
+		icon_state = initial(icon_state)
+
+/obj/structure/stasis_cage/examine(mob/user)
+	. = ..()
+	if(. && contained)
+		to_chat(user, "\The [contained] is kept inside.")
+
 /obj/structure/stasis_cage/proc/contain(var/mob/living/simple_animal/animal)
 	if(contained || !istype(animal))
 		return
@@ -28,7 +39,7 @@
 	contained = animal
 	animal.forceMove(src)
 	animal.in_stasis = 1
-	desc = initial(desc) + " \The [contained] is kept inside."
+	update_icon()
 
 /obj/structure/stasis_cage/proc/release()
 	if(!contained)
@@ -37,12 +48,10 @@
 	contained.dropInto(src)
 	contained.in_stasis = 0
 	contained = null
-	underlays.Cut()
-	desc = initial(desc)
+	update_icon()
 
 /obj/structure/stasis_cage/Destroy()
 	release()
-
 	return ..()
 
 /mob/living/simple_animal/MouseDrop(var/obj/structure/stasis_cage/over_object)
