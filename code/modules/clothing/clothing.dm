@@ -47,11 +47,6 @@
 			ret.overlays |= A.get_mob_overlay(user_mob, slot)
 	return ret
 
-// Aurora forensics port.
-/obj/item/clothing/clean_blood()
-	. = ..()
-	gunshot_residue = null
-
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell
 
