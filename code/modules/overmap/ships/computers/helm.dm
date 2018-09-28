@@ -124,35 +124,35 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			ui.open()
 			ui.set_auto_update(1)
 
-/obj/machinery/computer/ship/helm/Topic(href, href_list, state)
+/obj/machinery/computer/ship/helm/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 
 	if(!linked)
-		return 1
+		return TOPIC_HANDLED
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
 		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
-		if(!CanInteract(usr,state))
-			return
+		if(!CanInteract(user,state))
+			return TOPIC_NOACTION
 		if(!sec_name)
 			sec_name = "Sector #[known_sectors.len]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
-			to_chat(usr, "<span class='warning'>Sector with that name already exists, please input a different name.</span>")
-			return
+			to_chat(user, "<span class='warning'>Sector with that name already exists, please input a different name.</span>")
+			return TOPIC_REFRESH
 		switch(href_list["add"])
 			if("current")
 				R.fields["x"] = linked.x
 				R.fields["y"] = linked.y
 			if("new")
 				var/newx = input("Input new entry x coordinate", "Coordinate input", linked.x) as num
-				if(!CanInteract(usr,state))
-					return
+				if(!CanInteract(user,state))
+					return TOPIC_REFRESH
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
-				if(!CanInteract(usr,state))
-					return
+				if(!CanInteract(user,state))
+					return TOPIC_NOACTION
 				R.fields["x"] = Clamp(newx, 1, world.maxx)
 				R.fields["y"] = Clamp(newy, 1, world.maxy)
 		known_sectors[sec_name] = R
@@ -165,14 +165,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["setx"])
 		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return
 		if (newx)
 			dx = Clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return
 		if (newy)
 			dy = Clamp(newy, 1, world.maxy)
@@ -192,10 +192,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
-		var/mob/M = usr
-		if(istype(M) && prob(M.skill_fail_chance(SKILL_PILOT, 50, SKILL_ADEPT, factor = 1)))
+		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, SKILL_ADEPT, factor = 1)))
 			ndir = turn(ndir,pick(90,-90))
-		linked.relaymove(usr, ndir)
+		linked.relaymove(user, ndir)
 
 	if (href_list["brake"])
 		linked.decelerate()
@@ -206,7 +205,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if (href_list["manual"])
 		manual_control = !manual_control
 
-	add_fingerprint(usr)
+	add_fingerprint(user)
 	updateUsrDialog()
 
 
@@ -265,16 +264,15 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if(viewing && linked &&!isAI(user))
 		user.reset_view(linked)
 
-/obj/machinery/computer/ship/navigation/Topic(href, href_list)
+/obj/machinery/computer/ship/navigation/OnTopic(var/mob/user, var/list/href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 
 	if (!linked)
-		return
+		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
 		viewing = !viewing
-		if(viewing && !isAI(usr))
-			var/mob/user = usr
+		if(viewing && !isAI(user))
 			user.reset_view(linked)
-		return 1
+		return TOPIC_REFRESH

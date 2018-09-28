@@ -103,39 +103,39 @@
 	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
 	LAZYREMOVE(viewers, weakref(user))
 
-/obj/machinery/computer/ship/sensors/Topic(href, href_list, state)
+/obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 
 	if(href_list["close"])
-		unlook(usr)
-		usr.unset_machine()
-		return 1
+		unlook(user)
+		user.unset_machine()
+		return TOPIC_HANDLED
 
 	if (!linked)
-		return
+		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
 		viewing = !viewing
-		if(usr && !isAI(usr))
-			viewing ? look(usr) : unlook(usr)
-		return 1
+		if(user && !isAI(user))
+			viewing ? look(user) : unlook(user)
+		return TOPIC_REFRESH
 
 	if (href_list["link"])
 		find_sensors()
-		return 1
+		return TOPIC_REFRESH
 
 	if(sensors)
 		if (href_list["range"])
 			var/nrange = input("Set new sensors range", "Sensor range", sensors.range) as num|null
-			if(!CanInteract(usr,state))
-				return
+			if(!CanInteract(user,state))
+				return TOPIC_NOACTION
 			if (nrange)
 				sensors.set_range(Clamp(nrange, 1, world.view))
-			return 1
+			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
-			return 1
+			return TOPIC_REFRESH
 
 /obj/machinery/computer/ship/sensors/CouldNotUseTopic(mob/user)
 	unlook(user)
