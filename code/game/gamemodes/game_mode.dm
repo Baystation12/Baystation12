@@ -452,11 +452,12 @@ var/global/list/additional_antag_types = list()
 	return
 
 /datum/game_mode/proc/handle_mob_death(var/mob/M, var/list/args = list())
-	var/assigned_role = M.mind.assigned_role
-	if(assigned_role)
-		var/datum/job/J = job_master.occupations_by_title[assigned_role]
-		if(J && J.open_slot_on_death)
-			J.current_positions -= 1
+	if(M.mind)
+		var/assigned_role = M.mind.assigned_role
+		if(assigned_role)
+			var/datum/job/J = job_master.occupations_by_title[assigned_role]
+			if(J && J.open_slot_on_death)
+				J.current_positions -= 1
 
 	return 1
 

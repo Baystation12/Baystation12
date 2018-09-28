@@ -53,4 +53,4 @@ The name of the outfit will need to be "[job name] [species name]"
 	name = "Spartans Spartan"
 	uniform = null
 	suit = /obj/item/clothing/suit/armor/special/spartan/slayer
-	head = /obj/item/clothing/head/helmet/spartan
+	head = /obj/item/clothing/head/helmet/spartan/slayer

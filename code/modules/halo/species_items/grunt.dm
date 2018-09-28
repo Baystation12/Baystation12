@@ -2,7 +2,7 @@
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"unggoy")							//Code breaks if not placed in species folder,
-	name = pick(GLOB.first_names_kig_yar);name += " ";name += pick(GLOB.first_names_kig_yar)
+	name = species.get_random_name()
 	real_name = name
 	faction = "Covenant"
 
@@ -19,7 +19,7 @@
 
 	species_restricted = list("unggoy")
 
-	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank)
 
 /obj/item/clothing/mask/rebreather
 	name = "Unggoy Rebreather Mask"
@@ -44,6 +44,13 @@
 	gas_rebreathed.multiply(rebreath_efficiency/100)//A rebreather: Recycle some of the gas used up due to breathing.
 	tank_removed_from.air_contents.merge(gas_rebreathed)
 	qdel(gas_rebreathed)
+
+/obj/item/clothing/mask/rebreather/equipped(var/mob/user, var/slot)
+	. = ..()
+	if(slot == slot_wear_mask)
+		var/obj/item/weapon/tank/internal = locate() in user
+		if(internal)
+			internal.toggle_valve(user)
 
 /obj/item/weapon/tank/methane
 	name = "methane tank"
@@ -87,6 +94,8 @@
 
 	species_restricted = list("unggoy")
 
+	specials = list(/datum/armourspecials/gear/unggoy_tank)
+
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	name = "Unggoy Combat Harness (Major)"
 	desc = "A combat harness with an inbuilt gas tank"
@@ -96,8 +105,6 @@
 	item_state = "combatharness_major"
 
 	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0) //As good as armor
-
-	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
 	name = "Unggoy Combat Harness (Ultra)"
@@ -110,7 +117,7 @@
 	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
 
 	totalshields = 100
-	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/shields/unggoy)
+	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	name = "Unggoy Combat Harness (Spec-Ops)"
@@ -121,7 +128,7 @@
 	item_state = "combatharness_specops"
 
 	action_button_name = "Toggle Active Camouflage"
-	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/cloaking)
+	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/cloaking)
 
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	name = "Unggoy Rebreather Mask (Spec-Ops)"
@@ -134,8 +141,17 @@
 /obj/item/clothing/shoes/grunt_boots
 	name = "Natural Armor"
 	desc = "The natural armor on your legs provides a small amount of protection against the elements."
-	icon = 'code/modules/halo/clothing/grunt_leg_armor.dmi'
-	icon_state = "naturalarmor"
+	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon_state = "naturallegarmor"
+	item_state = " "
+
+	canremove = 0
+
+/obj/item/clothing/shoes/grunt_gloves
+	name = "Natural Armor"
+	desc = "The natural armor on your arms provides a small amount of protection against the elements."
+	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon_state = "naturalhandarmor"
 	item_state = " "
 
 	canremove = 0

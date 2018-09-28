@@ -24,8 +24,26 @@
 	. = ..()
 	//I guess their leg-boots are kinda organs.
 	H.equip_to_slot(new /obj/item/clothing/shoes/grunt_boots,slot_shoes)
+	H.equip_to_slot(new /obj/item/clothing/shoes/grunt_gloves,slot_gloves)
 
 /datum/species/unggoy/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
+	//unggoy have special breathing equipment handling via job outfits
+/*
 	H.backbag = 0
 	H.equip_to_slot_if_possible(new /obj/item/clothing/suit/armor/special/unggoy_combat_harness,slot_back_str)
 	H.equip_to_slot_if_possible(new /obj/item/clothing/mask/rebreather,slot_wear_mask_str)
+*/
+/datum/species/unggoy/get_random_name(var/gender)
+	var/list/consonants = list("d", "f", "k", "l", "m", "s", "w", "p", "y", "z", "b")
+	var/list/vowels = list("a","i","u")
+	var/newname = pick(consonants) + pick(vowels) + pick(consonants)
+	if(prob(33))
+		//repeat
+		newname += newname
+	else if(prob(50))
+		//two different syllabes
+		newname += pick(vowels) + pick(consonants)
+	else
+		//palindrome
+		newname += reverse_text(copytext(newname,1,lentext(newname)))
+	return capitalize(newname)

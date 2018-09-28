@@ -109,6 +109,7 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
+	faction_whitelist = "Covenant"
 
 /datum/job/covenant/kigyarpirate/captain
 	title = "Kig-Yar Ship - Captain"
@@ -118,6 +119,7 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate/captain
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
+	faction_whitelist = "Covenant"
 
 /datum/job/covenant/unggoy
 	title = "Kig-Yar Ship - Unggoy Crewmember"
@@ -136,3 +138,4 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 	outfit_type = /decl/hierarchy/outfit/unggoy/major/first_contact
 	access = list(230,250)
 	spawnpoint_override = "Unggoy Pirate Spawn"
+	faction_whitelist = "Covenant"
