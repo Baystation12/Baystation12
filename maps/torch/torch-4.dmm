@@ -20191,7 +20191,8 @@
 	name = "Fabricator Lab Desk";
 	req_access = list(7)
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/monotile,
 /area/rnd/development)
 "hyb" = (
 /obj/effect/wallframe_spawn/reinforced,
