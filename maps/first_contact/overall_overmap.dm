@@ -15,6 +15,8 @@
 	icon = 'maps/first_contact/freighter.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
+	vessel_mass = 5
+
 
 	map_bounds = list(102,160,154,117) //Aah standardised designs.
 
@@ -25,6 +27,8 @@
 	icon = 'maps/first_contact/slowbutsteady.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
+	vessel_mass = 4
+
 
 	map_bounds = list(7,49,73,27)
 
@@ -35,6 +39,7 @@
 	icon = 'maps/first_contact/corvette.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
+	vessel_mass = 2.75
 
 	map_bounds = list(2,76,76,26)
 
@@ -45,6 +50,7 @@
 	icon = 'maps/first_contact/deliverance.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
+	vessel_mass = 5
 
 	map_bounds = list(9,52,70,25)
 

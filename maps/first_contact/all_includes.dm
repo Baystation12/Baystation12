@@ -4,17 +4,18 @@
 
 	#include "../first_contact/maps/Exoplanet Research/includes.dm"
 
-	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
+	#include "../first_contact/maps/UNSC_Prowler/includes.dm"
 
-	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
+	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
 
 	#include "../overmap_ships/nh_overmap.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 
-	#include "../first_contact/maps/UNSC_Thorin/includes.dm"
-
 	#include "../first_contact/maps/UNSC_Bertels/includes.dm"
 
+	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
+
+	#include "../first_contact/maps/UNSC_Thorin/includes.dm"
 
 	#include "../first_contact/maps/Covenant Corvette/includes.dm"
 
