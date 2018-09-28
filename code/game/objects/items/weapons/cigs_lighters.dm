@@ -109,6 +109,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/weldermes = "USER lights NAME with FLAME"
 	var/ignitermes = "USER lights NAME with FLAME"
 	var/brand
+	var/gas_consumption = 0.04
 
 /obj/item/clothing/mask/smokable/New()
 	..()
@@ -120,6 +121,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit)
 		STOP_PROCESSING(SSobj, src)
 
+/obj/item/clothing/mask/smokable/fire_act()
+	light(0)
+
 /obj/item/clothing/mask/smokable/proc/smoke(amount)
 	smoketime -= amount
 	if(reagents && reagents.total_volume) // check if it has any reagents at all
@@ -130,13 +134,26 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				add_trace_DNA(C)
 		else // else just remove some of the reagents
 			reagents.remove_any(REM)
+	var/turf/T = get_turf(src)
+	if(T)
+		var/datum/gas_mixture/environment = T.return_air()
+		if(ishuman(loc))
+			var/mob/living/carbon/human/C = loc
+			if (src == C.wear_mask && C.internal)
+				environment = C.internal.return_air()
+		if(environment.get_by_flag(XGM_GAS_OXIDIZER) < gas_consumption)
+			extinguish()
+		else
+			environment.remove_by_flag(XGM_GAS_OXIDIZER, gas_consumption)
+			environment.adjust_gas("carbon_dioxide", 0.5*gas_consumption,0)
+			environment.adjust_gas("carbon_monoxide", 0.5*gas_consumption)
 
 /obj/item/clothing/mask/smokable/Process()
 	var/turf/location = get_turf(src)
-	smoke(1)
 	if(submerged() || smoketime < 1)
 		extinguish()
 		return
+	smoke(1)
 	if(location)
 		location.hotspot_expose(700, 5)
 
@@ -181,9 +198,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
 		reagents.handle_reactions()
 		update_icon()
-		var/turf/T = get_turf(src)
-		T.visible_message(flavor_text)
-		set_light(0.6, 0.5, 2, 2, "#e38f46")
+		if(flavor_text)
+			var/turf/T = get_turf(src)
+			T.visible_message(flavor_text)
 		START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/smokable/proc/extinguish(var/mob/user, var/no_message)
