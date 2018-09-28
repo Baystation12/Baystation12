@@ -13793,11 +13793,11 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/structure/closet/secure_closet/crew/research,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
+/obj/structure/closet/secure_closet/crew,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/cryolocker)
 "FY" = (
@@ -18950,7 +18950,7 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
 "Vd" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage)
 "Ve" = (
