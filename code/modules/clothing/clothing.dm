@@ -1001,7 +1001,7 @@ BLIND     // can't see anything
 		else if(max_heat_protection_temperature >= SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
 			armor_strings += "It provides good protection against fire and heat."
 
-		if(min_cold_protection_temperature <= SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE)
+		if(!isnull(min_cold_protection_temperature) && min_cold_protection_temperature <= SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE)
 			armor_strings += "It provides very good protection against very cold temperatures."
 
 		var/list/covers = list()
