@@ -9,7 +9,7 @@
 #define FOOTSTEP_CATWALK	"catwalk"
 #define FOOTSTEP_LAVA		"lava"
 
-/turf/simulated/floor/var/global/list/footstep_sounds = list(
+/turf/simulated/var/global/list/footstep_sounds = list(
 	FOOTSTEP_WOOD = list(
 		'sound/effects/footstep/wood1.ogg',
 		'sound/effects/footstep/wood2.ogg',
@@ -66,15 +66,19 @@
 /decl/flooring/wood/footstep_type = FOOTSTEP_WOOD
 /decl/flooring/reinforced/footstep_type = FOOTSTEP_PLATING
 
-/turf/simulated/floor/proc/get_footstep_sound()
+/turf/simulated/proc/get_footstep_sound()
 	if(check_fluid_depth(10) && !is_flooded(TRUE))
 		return safepick(footstep_sounds[FOOTSTEP_WATER])
 	else if(is_plating())
 		return safepick(footstep_sounds[FOOTSTEP_PLATING])
-	else if(!flooring || !flooring.footstep_type)
-		return safepick(footstep_sounds[FOOTSTEP_BLANK])
-	else
-		return safepick(footstep_sounds[flooring.footstep_type])
+
+/turf/simulated/floor/get_footstep_sound()
+	. = ..()
+	if(!.)
+		if(!flooring || !flooring.footstep_type)
+			return safepick(footstep_sounds[FOOTSTEP_BLANK])
+		else
+			return safepick(footstep_sounds[flooring.footstep_type])
 
 /turf/simulated/floor/asteroid/get_footstep_sound()
 	return safepick(footstep_sounds[FOOTSTEP_ASTEROID])
@@ -91,7 +95,7 @@
 /turf/simulated/floor/fixed/get_footstep_sound()
 	return safepick(footstep_sounds[FOOTSTEP_PLATING])
 
-/turf/simulated/floor/Entered(var/mob/living/carbon/human/H)
+/turf/simulated/Entered(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H))
 		H.handle_footsteps()
@@ -103,7 +107,7 @@
 /mob/living/carbon/human/var/step_count
 
 /mob/living/carbon/human/proc/handle_footsteps()
-	var/turf/simulated/floor/T = get_turf(src)
+	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))
 		return
 
