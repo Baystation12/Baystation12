@@ -103,3 +103,9 @@
 /obj/machinery/computer/rdconsole/petrov
 	name = "petrov fabricator console"
 	id = 3
+
+/turf/simulated/floor/shuttle_ceiling/torch
+	color = COLOR_HULL
+
+/turf/simulated/floor/shuttle_ceiling/torch/air
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)

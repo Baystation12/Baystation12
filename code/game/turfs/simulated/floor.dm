@@ -87,8 +87,10 @@
 	return (!flooring || flooring.can_engrave)
 
 /turf/simulated/floor/shuttle_ceiling
+	name = "hull plating"
 	icon = 'icons/turf/flooring/tiles.dmi'
-	icon_state = "reinforced"
-
-/turf/simulated/floor/shuttle_ceiling/airless
+	icon_state = "reinforced_light"
 	initial_gas = null
+
+/turf/simulated/floor/shuttle_ceiling/air
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
