@@ -140,7 +140,11 @@
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
 					return 1
-				crew_announcement.Announce(input)
+				var/affected_zlevels = GLOB.using_map.contact_levels
+				var/atom/A = host
+				if(istype(A))
+					affected_zlevels = GetConnectedZlevels(A.z)
+				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
