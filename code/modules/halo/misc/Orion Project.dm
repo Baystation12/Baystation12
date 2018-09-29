@@ -21,7 +21,7 @@
 
 /obj/item/clothing/suit/space/void/swat/thetar
 	name = "Red Orion Armor"
-	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
+	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor. This set of armor happens to be red."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
 	species_restricted = list("Orion")
@@ -34,7 +34,7 @@
 
 /obj/item/clothing/suit/space/void/swat/thetag
 	name = "Green Orion Armor"
-	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
+	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor. This set of armor happens to be green."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
 	species_restricted = list("Orion")
@@ -47,7 +47,7 @@
 
 /obj/item/clothing/suit/space/void/swat/thetab
 	name = "Blue Orion Armor"
-	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
+	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor. This set of armor happens to be blue."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 45, "energy" = 45, "bomb" = 50, "bio" = 0, "rad" = 0)
 	species_restricted = list("Orion")
@@ -60,16 +60,16 @@
 
 /obj/item/clothing/head/helmet/space/deathsquad/thetar
 	name = "Red Orion Helmet"
-	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet."
+	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet. This helmet happens to be red."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
-	armor_thickness = 50
+	armor_thickness = 40
 	icon_state = "orion1"
 	item_state = "orion1"
 	species_restricted = list("Orion")
 
 /obj/item/clothing/head/helmet/space/deathsquad/thetag
 	name = "Green Orion Helmet"
-	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet."
+	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet. This helmet happens to be green."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
 	armor_thickness = 40
 	icon_state = "orion2"
@@ -78,7 +78,7 @@
 
 /obj/item/clothing/head/helmet/space/deathsquad/thetab
 	name = "Blue Orion Helmet"
-	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet."
+	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet. This helmet happens to be blue."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
 	armor_thickness = 40
 	icon_state = "orion3"
