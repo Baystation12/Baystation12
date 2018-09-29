@@ -1,8 +1,8 @@
 /obj/item/weapon/book/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
-	author = "Torch LLC Corporate Union"
-	dat = {"<head><title>Torch LLC Union Charter of Workplace Rights</title></head>
+	author = "Torch, Ltd Corporate Union"
+	dat = {"<head><title>Torch, Ltd Union Charter of Workplace Rights</title></head>
 	<body>
 	<h2>0. Summary</h2>
 	<hr>

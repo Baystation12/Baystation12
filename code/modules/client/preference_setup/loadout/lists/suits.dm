@@ -25,6 +25,10 @@
 	display_name = "poncho, science"
 	path = /obj/item/clothing/suit/poncho/roles/science
 
+/datum/gear/suit/nanotrasen_poncho
+	display_name = "poncho, NanoTrasen"
+	path = /obj/item/clothing/suit/poncho/roles/science/nanotrasen
+
 /datum/gear/suit/cargo_poncho
 	display_name = "poncho, supply"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
@@ -73,6 +77,14 @@
 	display_name = "labcoat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/suit/labcoat_nanotrasen
+	display_name = "labcoat, NanoTrasen"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
+
+/datum/gear/suit/labcoat_nanotrasen_rd
+	display_name = "labcoat, NanoTrasen, Research Director"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
 
 /datum/gear/suit/coat
 	display_name = "coat, colour select"

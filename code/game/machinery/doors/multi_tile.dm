@@ -110,7 +110,7 @@
 
 /obj/machinery/door/airlock/multi_tile/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_NT_RED
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/multi_tile/science
 	door_color = COLOR_WHITE
@@ -164,7 +164,7 @@
 
 /obj/machinery/door/airlock/multi_tile/glass/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_NT_RED
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/multi_tile/glass/science
 	door_color = COLOR_WHITE

@@ -16,7 +16,7 @@
 		/obj/item/clothing/under/rank/research_director,
 		/obj/item/clothing/under/rank/research_director/rdalt,
 		/obj/item/clothing/under/rank/research_director/dress_rd,
-		/obj/item/clothing/under/suit_jacket/nt,
+		/obj/item/clothing/under/suit_jacket/corp,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat/rd,
@@ -184,11 +184,11 @@
 /obj/structure/closet/secure_closet/xenolife_technician
 	name = "xenolife technician's locker"
 	req_one_access = list(access_research)
-	icon_state = "exp1"
-	icon_closed = "exp"
-	icon_locked = "exp1"
-	icon_opened = "expopen"
-	icon_off = "expoff"
+	icon_state = "torchsol1"
+	icon_closed = "torchsol"
+	icon_locked = "torchsol1"
+	icon_opened = "torchsolopen"
+	icon_off = "torchsoloff"
 
 /obj/structure/closet/secure_closet/xenolife_technician/WillContain()
 	return list(
