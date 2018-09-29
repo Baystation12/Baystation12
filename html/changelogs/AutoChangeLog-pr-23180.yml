@@ -1,0 +1,10 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - maptweak: "Added Deck 5, an expansion of Deck 4 adding more verticality to the ship beyond stairs and ladders. Deck 4 has been split up to accomodate these changes."
+  - maptweak: "The hangar has been moved inwards to be more centralised on Deck 5."
+  - maptweak: "The lounge has been moved under cryogenics and now overlooks the hangar (Still accessible from cryogenics)."
+  - maptweak: "The officer's mess has been moved under the mess hall and now overlooks the hangar (Still accessible from the mess hall)."
+  - maptweak: "The Petrov has been made slightly bigger to be more useful. Moved several research suites to the Petrov."
+  - tweak: "The Research Director and Corporate Liason can now use the ID program to modify accesses within their own department. Petrov accesses are now only modifiable by the Research Director and NTL"
+  - tweak: "Fixes the commissarry shutter access requirement."
