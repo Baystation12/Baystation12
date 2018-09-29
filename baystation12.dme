@@ -1464,6 +1464,8 @@
 #include "code\modules\halo\jobs\UNSC_ship\_access.dm"
 #include "code\modules\halo\jobs\UNSC_ship\_defines.dm"
 #include "code\modules\halo\jobs\UNSC_ship\_UNSC_ship.dm"
+#include "code\modules\halo\loadout\ammo.dm"
+#include "code\modules\halo\loadout\weapons.dm"
 #include "code\modules\halo\machinery\ammo_fabricator.dm"
 #include "code\modules\halo\machinery\ammo_fabricator_datums.dm"
 #include "code\modules\halo\machinery\atmos_blastdoor.dm"

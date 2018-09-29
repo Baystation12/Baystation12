@@ -72,3 +72,6 @@
 		name += "0"
 	name += "[spartan_number]"
 	return name
+
+/datum/species/spartan/sanitize_name(name)
+	return sanitizeName(name, allow_numbers=TRUE)
