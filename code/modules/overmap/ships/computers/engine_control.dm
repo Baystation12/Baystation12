@@ -52,7 +52,7 @@
 
 /obj/machinery/computer/ship/engines/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		return TOPIC_HANDLED
+		return ..()
 
 	if(href_list["state"])
 		display_state = href_list["state"]
