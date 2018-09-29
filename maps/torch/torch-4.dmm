@@ -8199,7 +8199,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "azU" = (
@@ -9143,7 +9143,7 @@
 /area/rnd/breakroom)
 "aDt" = (
 /obj/machinery/vending/snack,
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "aDx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13076,7 +13076,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aRX" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -15563,12 +15565,14 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
 "bOZ" = (
-/obj/effect/floor_decal/corner/purple{
-	dir = 1
-	},
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTH)";
+	icon_state = "corner_white";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
@@ -16964,6 +16968,25 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"dxm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
 "dyb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -17683,11 +17706,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/autopsy)
 "equ" = (
-/obj/effect/floor_decal/corner/purple/half,
 /obj/machinery/camera/network/first_deck{
 	c_tag = "First Deck - Ladders";
 	dir = 1
 	},
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "erb" = (
@@ -18449,7 +18472,9 @@
 /area/chapel/crematorium)
 "flB" = (
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -19564,7 +19589,9 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -20544,7 +20571,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "hFu" = (
 /obj/structure/table/rack,
@@ -20562,7 +20589,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "hGs" = (
 /turf/simulated/wall/prepainted,
@@ -20818,7 +20845,7 @@
 	dir = 8
 	},
 /obj/item/weapon/stool/padded,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "hVG" = (
 /obj/machinery/ai_status_display,
@@ -21091,7 +21118,7 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "imF" = (
 /obj/structure/sign/warning/biohazard,
@@ -21622,18 +21649,19 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
 "iUb" = (
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "iVb" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/valve/shutoff,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "iVM" = (
@@ -21649,7 +21677,9 @@
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -21659,7 +21689,9 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -21673,8 +21705,8 @@
 	c_tag = "First Deck Hallway - Aft";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/half,
 /obj/machinery/light,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "jbb" = (
@@ -21771,7 +21803,7 @@
 /area/security/armoury)
 "jgb" = (
 /obj/machinery/vending/coffee,
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "jhb" = (
 /obj/machinery/door/firedoor/border_only,
@@ -21841,7 +21873,7 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "jmb" = (
@@ -21853,7 +21885,7 @@
 /area/rnd/breakroom)
 "jnb" = (
 /obj/machinery/light,
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "jnd" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -21892,7 +21924,9 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -21956,7 +21990,9 @@
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -22183,10 +22219,12 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/random_multi/single_item/boombox,
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "jBk" = (
@@ -22229,7 +22267,9 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -22250,10 +22290,12 @@
 	pixel_x = 6;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "jEb" = (
@@ -22261,7 +22303,9 @@
 /turf/simulated/floor/plating,
 /area/rnd/locker)
 "jGb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -22274,7 +22318,9 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/locker)
 "jHb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -22286,7 +22332,9 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -22302,7 +22350,9 @@
 	pixel_x = -30;
 	pixel_y = 0
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -22326,21 +22376,27 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "jMb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "jNb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -22383,7 +22439,14 @@
 /obj/item/modular_computer/telescreen/preset/generic{
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -22399,7 +22462,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
 "jQb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTH)";
+	icon_state = "corner_white";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -22431,19 +22496,25 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (EAST)";
+	icon_state = "corner_white";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "jSb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "jTb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (EAST)";
+	icon_state = "corner_white";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -22459,7 +22530,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -22468,19 +22541,11 @@
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall/prepainted,
 /area/security/bo)
-"jVb" = (
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
-	},
-/obj/effect/floor_decal/corner/purple{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white,
-/area/rnd/research)
 "jWb" = (
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (EAST)";
+	icon_state = "corner_white";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -22516,7 +22581,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -22668,7 +22735,9 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "kkN" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -23562,12 +23631,12 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "lkb" = (
-/obj/effect/catwalk_plated/white,
 /obj/structure/ladder,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "lkp" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -23820,7 +23889,7 @@
 	c_tag = "Research - Entry";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "lzb" = (
 /obj/structure/cable/green{
@@ -23890,7 +23959,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -24421,6 +24492,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
+"mpq" = (
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (WEST)";
+	icon_state = "corner_white";
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "mpy" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftstarboard)
@@ -24935,7 +25014,14 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -24952,7 +25038,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -25416,12 +25504,10 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "nAb" = (
-/obj/structure/closet/secure_closet/guard,
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
@@ -25438,6 +25524,7 @@
 	c_tag = "Research - Checkpoint";
 	dir = 4
 	},
+/obj/structure/bed/chair/office/comfy/red,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nBb" = (
@@ -25538,12 +25625,10 @@
 /turf/simulated/wall/prepainted,
 /area/security/equipment)
 "nIb" = (
-/obj/structure/closet/secure_closet/guard,
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	alarm_id = "xenobio2_alarm";
 	dir = 4;
@@ -25553,6 +25638,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/table/steel,
+/obj/item/weapon/board,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nJb" = (
@@ -25563,10 +25650,12 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/torchltdlogo{
+	tag = "icon-0,1";
+	icon_state = "0,1"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "nJo" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -25577,19 +25666,20 @@
 /turf/simulated/floor/plating,
 /area/security/wing)
 "nKb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
+/obj/effect/floor_decal/torchltdlogo{
+	tag = "icon-1,0";
+	icon_state = "1,0"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "nLb" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 4
 	},
-/obj/effect/catwalk_plated/white,
 /obj/structure/ladder,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "nMb" = (
 /obj/structure/table/marble,
@@ -25609,27 +25699,14 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "nPb" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
-/obj/structure/table/rack{
-	dir = 4
-	},
-/obj/machinery/door/window/brigdoor/westright{
-	dir = 4;
-	name = "suit storage";
-	req_access = list(86)
-	},
-/obj/item/weapon/rig/hazard/guard,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/bed/chair/office/comfy/red{
+	icon_state = "comfyofficechair_preview";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nQb" = (
@@ -25652,12 +25729,16 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/white,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/torchltdlogo,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "nSb" = (
-/obj/machinery/atmospherics/valve/shutoff,
-/obj/effect/floor_decal/industrial/shutoff,
-/turf/simulated/floor/tiled/white,
+/obj/effect/floor_decal/torchltdlogo{
+	tag = "icon-1,1";
+	icon_state = "1,1"
+	},
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "nUb" = (
 /obj/effect/floor_decal/industrial/shutoff{
@@ -25715,7 +25796,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -25861,10 +25944,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/white,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "oby" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -25893,11 +25974,8 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "ocb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9
-	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "odb" = (
 /obj/machinery/light,
@@ -25909,9 +25987,9 @@
 	icon_state = "warning";
 	dir = 6
 	},
-/obj/effect/catwalk_plated/white,
 /obj/structure/ladder,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/tiled,
 /area/rnd/entry)
 "oeb" = (
 /obj/structure/cable/green{
@@ -25925,7 +26003,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (WEST)";
+	icon_state = "corner_white";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -26048,7 +26128,9 @@
 /turf/simulated/floor/carpet/purple,
 /area/chapel/main)
 "oox" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -26224,7 +26306,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/nuke_storage)
 "ozb" = (
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "ozm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -26247,13 +26329,15 @@
 	icon_state = "console";
 	dir = 8
 	},
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "oAp" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "oAx" = (
@@ -26284,7 +26368,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "oFb" = (
 /obj/structure/table/glass,
@@ -26298,7 +26382,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "oGG" = (
 /obj/structure/hygiene/shower{
@@ -26466,7 +26550,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple,
+/obj/effect/floor_decal/corner/b_green,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "oRb" = (
@@ -26532,7 +26616,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/hologram/holopad,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -26547,7 +26633,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -26604,7 +26692,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -26702,7 +26792,9 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/structure/closet/medical_wall/filled{
@@ -26727,11 +26819,13 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple{
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (WEST)";
+	icon_state = "corner_white";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
@@ -26863,7 +26957,9 @@
 /turf/simulated/wall/prepainted,
 /area/medical/sleeper)
 "pqb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -26881,7 +26977,9 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/locker)
 "prb" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/machinery/alarm{
@@ -26894,7 +26992,9 @@
 /area/rnd/locker)
 "psb" = (
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -26915,7 +27015,9 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -26928,7 +27030,9 @@
 	pixel_y = -22
 	},
 /obj/machinery/lapvend,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -27161,7 +27265,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/corner/purple,
+/obj/effect/floor_decal/corner/b_green,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "pIb" = (
@@ -27183,7 +27287,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -27296,7 +27402,7 @@
 /obj/structure/bed/chair/office/light{
 	dir = 4
 	},
-/turf/simulated/floor/carpet/red,
+/turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "pUb" = (
 /obj/structure/closet/toolcloset,
@@ -27359,11 +27465,13 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/purple{
-	dir = 6
-	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHEAST)";
+	icon_state = "corner_white";
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
@@ -27472,7 +27580,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -27679,7 +27789,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHEAST)";
+	icon_state = "corner_white";
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -27836,7 +27948,9 @@
 	pixel_x = -22;
 	pixel_y = 0
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -27990,7 +28104,7 @@
 	icon_state = "map_valve0";
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
@@ -28019,7 +28133,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
@@ -28061,7 +28175,7 @@
 	dir = 1
 	},
 /obj/machinery/meter,
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "qUl" = (
@@ -28078,7 +28192,7 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /obj/machinery/light/spot{
 	dir = 4
 	},
@@ -28116,7 +28230,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHEAST)";
+	icon_state = "corner_white";
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -28129,7 +28245,7 @@
 	c_tag = "Research - Xenobotany Environment";
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -28150,7 +28266,7 @@
 	icon_state = "intact";
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -28163,7 +28279,7 @@
 	tag_north = 2;
 	tag_south = 1
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -28175,7 +28291,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -28201,13 +28317,14 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -28223,6 +28340,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "rhb" = (
@@ -28282,7 +28400,7 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
@@ -28291,14 +28409,14 @@
 	icon_state = "heater_0";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "rnb" = (
 /obj/machinery/portable_atmospherics/canister,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
@@ -28315,13 +28433,15 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "rpb" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/toolbox/mechanical,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "rqb" = (
@@ -28375,7 +28495,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
@@ -28402,7 +28522,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 8
@@ -28437,9 +28557,13 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
+"rvY" = (
+/obj/effect/floor_decal/corner/b_green,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "rwb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -28493,7 +28617,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHEAST)";
+	icon_state = "corner_white";
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -28514,7 +28640,9 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /obj/machinery/firealarm{
@@ -28527,7 +28655,9 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -28536,7 +28666,9 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -28566,13 +28698,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -28738,10 +28871,12 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHEAST)";
+	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "rNb" = (
@@ -28807,7 +28942,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -28899,7 +29036,7 @@
 /obj/machinery/vending/hydronutrients{
 	categories = 3
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
@@ -28920,11 +29057,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/purple{
-	dir = 6
-	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHEAST)";
+	icon_state = "corner_white";
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
@@ -29143,7 +29282,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHWEST)";
+	icon_state = "corner_white";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -29222,7 +29363,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (SOUTHWEST)";
+	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/machinery/newscaster{
@@ -29238,14 +29381,21 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/purple{
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (EAST)";
+	icon_state = "corner_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (EAST)";
+	icon_state = "corner_white";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "stb" = (
 /obj/machinery/seed_storage/xenobotany,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -32;
@@ -29255,7 +29405,7 @@
 /area/rnd/xenobiology/xenoflora)
 "sub" = (
 /obj/structure/closet/secure_closet/hydroponics_torch,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
@@ -29276,7 +29426,7 @@
 	dir = 1
 	},
 /obj/machinery/disposal,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
@@ -29320,7 +29470,7 @@
 	icon_state = "heater_0";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
@@ -29336,14 +29486,14 @@
 	dir = 1
 	},
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "szb" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/item/weapon/reagent_containers/glass/bucket,
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -31369,7 +31519,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "ycp" = (
-/obj/effect/floor_decal/corner/purple/half,
+/obj/effect/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "ycz" = (
@@ -52712,7 +52862,7 @@ ovb
 aju
 dMe
 hnN
-oox
+mpq
 htb
 ljb
 hVb
@@ -53318,7 +53468,7 @@ oxb
 aju
 axw
 hnN
-oox
+rvY
 htb
 lkb
 nLb
@@ -53326,7 +53476,7 @@ nLb
 odb
 mUm
 jRb
-mSb
+dxm
 qtb
 qHb
 qcb
@@ -54941,7 +55091,7 @@ jBb
 jCb
 jDb
 aGG
-jVb
+bOZ
 mTb
 bmb
 pQb

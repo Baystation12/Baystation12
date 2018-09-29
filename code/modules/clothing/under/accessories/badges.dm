@@ -78,9 +78,9 @@
 
 /obj/item/clothing/accessory/badge/holo/NT
 	name = "corporate holobadge"
-	desc = "This glowing red badge marks the holder as a member of corporate security."
+	desc = "This glowing green badge marks the holder as a member of corporate security."
 	icon_state = "ntholobadge"
-	color = COLOR_WHITE
+	color = null
 	badge_string = "Corporate Security"
 	badge_access = access_research
 

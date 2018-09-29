@@ -466,10 +466,16 @@
 
 /obj/item/clothing/suit/poncho/roles/science
 	name = "science poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, which are standard corporate colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few bottle green stripes, corporate colors."
 	species_restricted = null
 	icon_state = "sciponcho"
 	item_state = "sciponcho"
+
+/obj/item/clothing/suit/poncho/roles/science/nanotrasen
+	name = "\improper NanoTrasen poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, colors of NanoTrasen. Go NanoTrasen!"
+	icon_state = "sciponcho_nt"
+	item_state = "sciponcho_nt"
 
 /obj/item/clothing/suit/poncho/roles/cargo
 	name = "cargo poncho"

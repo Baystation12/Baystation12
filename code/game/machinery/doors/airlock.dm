@@ -115,6 +115,10 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/security
 	door_color = COLOR_NT_RED
 
+/obj/machinery/door/airlock/security/research
+	door_color = COLOR_WHITE
+	stripe_color = COLOR_NT_RED
+
 /obj/machinery/door/airlock/engineering
 	name = "Maintenance Hatch"
 	door_color = COLOR_AMBER
@@ -138,7 +142,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_NT_RED
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/science
 	door_color = COLOR_WHITE
@@ -198,7 +202,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_NT_RED
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/glass/science
 	door_color = COLOR_WHITE

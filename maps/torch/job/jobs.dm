@@ -177,7 +177,7 @@
 	required_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring the corporate interests of Torch LLC are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit your employer. Don’t put Torch LLC or your employer’s position on board in jeopardy.  Advise the CO on science matters."
+	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring the corporate interests of Torch Ltd are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit your employer. Don't put Torch Ltd's, or your employer's, position onboard in jeopardy.  Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -329,7 +329,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Corporate Regulations, the Union Charter, and Torch LLC"
+	supervisors = "Corporate Regulations, the Union Charter, and Torch, Ltd"
 	selection_color = "#2f2f7f"
 	economic_power = 15
 	minimal_player_age = 0
@@ -356,7 +356,7 @@
 	required_education = EDUCATION_TIER_BASIC
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Workplace Liaison. You are a civilian employee of Torch LLC, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
+	return "You are the Workplace Liaison. You are a civilian employee of Torch Ltd, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"
