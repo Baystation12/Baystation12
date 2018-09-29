@@ -2491,12 +2491,12 @@
 	dir = 4
 	},
 /obj/structure/table/glass,
-/obj/machinery/photocopier/faxmachine{
-	department = "Research Director's Office"
-	},
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 8
+	},
+/obj/machinery/photocopier/faxmachine{
+	department = "Research Director's Office - Torch"
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
@@ -7282,6 +7282,7 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/door/airlock/security{
+	id_tag = "cosdoor";
 	name = "Chief of Security";
 	req_access = list(58);
 	secured_wires = 1
@@ -9149,7 +9150,6 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/computer/rdservercontrol,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
@@ -9517,31 +9517,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
-"ur" = (
-/obj/effect/floor_decal/corner/grey/diagonal{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/crew_quarters/heads/office/rd)
-"us" = (
-/obj/item/weapon/rig/hazmat/equipped,
-/obj/structure/table/rack,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/machinery/door/window/brigdoor/westright{
-	name = "suit storage";
-	req_access = list(30)
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
-/turf/simulated/floor/tiled,
-/area/crew_quarters/heads/office/rd)
 "ut" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -9823,10 +9798,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/bridge/fore)
 "uW" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 4
-	},
 /obj/structure/flora/pottedplant/unusual,
 /obj/effect/floor_decal/corner/red/diagonal{
 	icon_state = "corner_white_diagonal";
@@ -11257,7 +11228,7 @@
 /area/maintenance/bridge/foreport)
 "xP" = (
 /obj/effect/landmark/map_data{
-	height = 5
+	height = 6
 	},
 /turf/space,
 /area/space)
@@ -12160,11 +12131,6 @@
 "Dd" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
-	},
-/obj/machinery/button/windowtint{
-	id = "co_windows";
-	pixel_x = 6;
-	pixel_y = 24
 	},
 /obj/machinery/light_switch{
 	pixel_x = -6;
@@ -13688,6 +13654,9 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"JP" = (
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/heads/office/rd)
 "JV" = (
 /turf/simulated/floor/tiled/dark,
 /area/aquila/passenger)
@@ -14059,7 +14028,6 @@
 	pixel_x = 15;
 	pixel_y = 1
 	},
-/obj/item/weapon/folder/envelope/blanks,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "Mi" = (
@@ -14162,8 +14130,6 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/structure/closet/secure_closet/RD_torch,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/corner/red/diagonal{
 	icon_state = "corner_white_diagonal";
 	dir = 8
@@ -14429,6 +14395,14 @@
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 6
+	},
+/obj/machinery/button/remote/airlock{
+	desc = "A remote control-switch for the office door.";
+	id = "cosdoor";
+	name = "Office Door Control";
+	pixel_x = -12;
+	pixel_y = 0;
+	req_access = list(58)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cos)
@@ -15913,6 +15887,9 @@
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/bridge/fore)
+"Yy" = (
+/turf/simulated/floor/plating,
+/area/crew_quarters/heads/office/rd)
 "YC" = (
 /obj/structure/sign/warning/high_voltage{
 	icon_state = "shock";
@@ -30320,7 +30297,7 @@ rn
 yw
 kJ
 tE
-ur
+up
 uW
 Lb
 Mb
@@ -30522,7 +30499,7 @@ Kf
 KP
 kJ
 sT
-us
+sT
 sT
 sT
 sT
@@ -30723,9 +30700,9 @@ qx
 rp
 nG
 kJ
-sT
-sT
-sT
+Yy
+Yy
+JP
 vE
 vE
 wP
@@ -30925,7 +30902,7 @@ qy
 Vh
 EN
 kJ
-tF
+oS
 oS
 oh
 vF
@@ -43601,12 +43578,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
 zb
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -47882,7 +47859,7 @@ aa
 aa
 aa
 aa
-Ab
+aa
 aa
 aa
 aa
@@ -49902,7 +49879,7 @@ aa
 aa
 aa
 aa
-aa
+Ab
 aa
 aa
 aa

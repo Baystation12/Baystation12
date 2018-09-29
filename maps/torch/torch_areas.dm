@@ -14,15 +14,11 @@
 		/area/shuttle/administration/centcom,
 		/area/shuttle/specops/centcom,
 	)
-/*
-//Fifth Deck (Z-1) Coming SoonTM
+
+//Fifth Deck (Z-0)
 /area/hallway/primary/fifthdeck/fore
 	name = "\improper Fifth Deck Fore Hallway"
 	icon_state = "hallF"
-
-/area/hallway/primary/fifthdeck/center
-	name = "\improper Fifth Deck Central Hallway"
-	icon_state = "hallC3"
 
 /area/hallway/primary/fifthdeck/aft
 	name = "\improper Fifth Deck Aft Hallway"
@@ -32,29 +28,24 @@
 	name = "Fifth Deck Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/fifthdeck/aft
-	name = "Fifth Deck Aft Maintenance"
-	icon_state = "amaint"
+/area/maintenance/fifthdeck/aftport
+	name = "Fifth Deck Aft Port Maintenance"
+	icon_state = "apmaint"
 
-/area/maintenance/fifthdeck/foreport
-	name = "Fifth Deck Fore Port Maintenance"
-	icon_state = "fpmaint"
+/area/maintenance/fifthdeck/aftstarboard
+	name = "Fifth Deck Aft Starboard Maintenance"
+	icon_state = "asmaint"
 
-/area/maintenance/fifthdeck/forestarboard
-	name = "Fifth Deck Fore Starboard Maintenance"
-	icon_state = "fsmaint"
-
-/area/maintenance/fifthdeck/starboard
-	name = "Fifth Deck Starboard Maintenance"
-	icon_state = "smaint"
-
-/area/teleporter/fifthdeck
-	name = "\improper Fifth Deck Teleporter"
-	icon_state = "teleporter"
+/area/maintenance/fifthdeck/fore
+	name = "Fifth Deck Fore Maintenance"
+	icon_state = "fmaint"
 
 /area/maintenance/substation/fifthdeck
 	name = "Fifth Deck Substation"
-*/
+
+/area/crew_quarters/safe_room/fifthdeck
+	name = "\improper Fifth Deck Safe Room"
+
 //Fourth Deck (Z-1)
 /area/hallway/primary/fourthdeck/fore
 	name = "\improper Fourth Deck Fore Hallway"
@@ -417,9 +408,6 @@
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
-/area/shuttle/petrov/ship
-	icon_state = "shuttlered"
-
 /area/shuttle/petrov/cell1
 	name = "\improper NSV Petrov - Isolation Cell 1"
 	icon_state = "shuttle"
@@ -429,6 +417,58 @@
 /area/shuttle/petrov/cell3
 	name = "\improper NSV Petrov - Isolation Cell 3"
 	icon_state = "shuttle"
+
+/area/shuttle/petrov/hallwaya
+	name = "\improper NSV Petrov - Lower Hallway"
+	icon_state = "hallA"
+
+/area/shuttle/petrov/security
+	name = "\improper NSV Petrov - Security Office"
+	icon_state = "checkpoint1"
+
+/area/shuttle/petrov/rd
+	name = "\improper NSV Petrov - RD's Office"
+	icon_state = "head_quarters"
+
+/area/shuttle/petrov/cockpit
+	name = "\improper NSV Petrov - Cockpit"
+	icon_state = "shuttlered"
+
+/area/shuttle/petrov/maint
+	name = "\improper NSV Petrov - Maintenance"
+	icon_state = "engine"
+
+/area/shuttle/petrov/analysis
+	name = "\improper NSV Petrov - Analysis Lab"
+	icon_state = "devlab"
+
+/area/shuttle/petrov/toxins
+	name = "\improper NSV Petrov - Toxins Lab"
+	icon_state = "toxstorage"
+
+/area/shuttle/petrov/rnd
+	name = "\improper NSV Petrov - Fabricator Lab"
+	icon_state = "devlab"
+
+/area/shuttle/petrov/isolation
+	name = "\improper NSV Petrov - Isolation Lab"
+	icon_state = "xeno_lab"
+
+/area/shuttle/petrov/phoron
+	name = "\improper NSV Petrov - Sublimation Lab"
+	icon_state = "toxstorage"
+
+/area/shuttle/petrov/custodial
+	name = "\improper NSV Petrov - Custodial"
+	icon_state = "decontamination"
+
+/area/shuttle/petrov/equipment
+	name = "\improper NSV Petrov - Equipment Storage"
+	icon_state = "locker"
+
+/area/shuttle/petrov/eva
+	name = "\improper NSV Petrov - EVA Storage"
+	icon_state = "locker"
 
 //Turbolift
 /area/turbolift
@@ -536,29 +576,37 @@
 	lift_floor_name = "Bridge"
 	lift_announce_str = "Arriving at Command Deck: Bridge. Meeting Room. Command Offices. AI Core. Landing Area. Auxiliary EVA."
 
-/area/turbolift/torch_third
-	name = "lift (upper deck)"
+/area/turbolift/torch_fourth
+	name = "lift (first deck)"
 	lift_floor_label = "Deck 1"
 	lift_floor_name = "Operations Deck"
 	lift_announce_str = "Arriving at Operations Deck: Infirmary. Security Wing. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory."
 
-/area/turbolift/torch_second
-	name = "lift (maintenance)"
+/area/turbolift/torch_third
+	name = "lift (maintenance deck)"
 	lift_floor_label = "Deck 2"
 	lift_floor_name = "Maintenance Deck"
+	lift_floor_name = "Habitation Deck"
 	lift_announce_str = "Arriving at Maintenance Deck: Engineering. Atmospherics. Sanitation. Storage."
 
-/area/turbolift/torch_first
-	name = "lift (second deck)"
+/area/turbolift/torch_second
+	name = "lift (third deck)"
 	lift_floor_label = "Deck 3"
+	lift_floor_name = "Maintenance Deck"
 	lift_floor_name = "Habitation Deck"
-	lift_announce_str = "Arriving at Habitation Deck: EVA. Telecommunications. Mess Hall. Officer's Mess. Diplomatic Quarters. Hydroponics. Cryogenic Storage. Holodeck. Gym."
+	lift_announce_str = "Arriving at Habitation Deck: EVA. Telecommunications. Mess Hall. Officer's Mess. Lounge. Diplomatic Quarters. Hydroponics. Cryogenic Storage. Holodeck. Gym."
+
+/area/turbolift/torch_first
+	name = "lift (fourth deck)"
+	lift_floor_label = "Deck 4"
+	lift_floor_name = "Supply Deck"
+	lift_announce_str = "Arriving at Supply Deck: Shuttle Docks. Pathfinder's Office. Cargo Storage. Supply Office. Laundry."
 
 /area/turbolift/torch_ground
-	name = "lift (lower deck)"
-	lift_floor_label = "Deck 4"
+	name = "lift (fifth deck)"
+	lift_floor_label = "Deck 5"
 	lift_floor_name = "Hangar Deck"
-	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Pathfinder's Office. Cargo Storage. Main Hangar. Supply Office. Expedition Preparation. Mineral Processing."
+	lift_announce_str = "Arriving at Hangar Deck: Main Hangar. Supply Warehouse. Expedition Preparation. Mineral Processing."
 	base_turf = /turf/simulated/floor
 
 // Command
@@ -574,6 +622,11 @@
 
 /area/command/pathfinder
 	name = "\improper Pathfinder's Office"
+	icon_state = "head_quarters"
+	sound_env = MEDIUM_SOFTFLOOR
+
+/area/command/pilot
+	name = "\improper Pilot's Lounge"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
@@ -635,18 +688,10 @@
 	icon_state = "engine_smes"
 	sound_env = SMALL_ENCLOSED
 
-/area/engineering/hallway
-	name = "\improper Engineering Hallway"
-	icon_state = "engineering_workshop"
-
 /area/engineering/hardstorage
 	name = "\improper Engineering Hard Storage"
 	icon_state = "engineering_storage"
 	sound_env = SMALL_ENCLOSED
-
-/area/engineering/hardstorage/lower
-	name = "\improper Lower Engineering Hard Storage"
-	icon_state = "engineering_storage"
 
 /area/engineering/hardstorage/aux
 	name = "\improper Auxiliary Engineering Hard Storage"
@@ -704,6 +749,10 @@
 /area/vacant/office
 	name = "\improper Unused Office"
 	icon_state = "conference"
+
+/area/vacant/bar
+	name = "\improper Hidden Bar"
+	icon_state = "bar"
 
 // Storage
 /area/storage/auxillary/port
@@ -765,6 +814,13 @@
 	icon_state = "hangar"
 	sound_env = LARGE_ENCLOSED
 
+/area/quartermaster/hangar/top
+	name = "\improper Hangar Maintenance"
+
+/area/quartermaster/flightcontrol
+	name = "\improper Flight Control Tower"
+	icon_state = "hangar"
+
 /area/quartermaster/unused
 	name = "\improper Ready Room"
 	icon_state = "auxstorage"
@@ -793,11 +849,6 @@
 /area/rnd/checkpoint
 	name = "\improper Research Security Checkpoint"
 	icon_state = "checkpoint1"
-
-/area/rnd/blanks
-	name = "\improper Aux Custodial Supplies"
-	icon_state = "decontamination"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 // Crew areas
 /area/crew_quarters/bar
@@ -979,10 +1030,10 @@
 
 /area/shield/fourthdeck
 	name = "\improper Fourth Deck Shield Generator"
-/*
+
 /area/shield/fifthdeck
 	name = "\improper Fifth Deck Shield Generator"
-*/
+
 // Misc
 /area/deity_spawn
 	name = "\improper Deity Spawn"
@@ -1115,6 +1166,10 @@
 
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
+	icon_state = "disposal"
+
+/area/maintenance/waterstore
+	name = "\improper Cistern"
 	icon_state = "disposal"
 
 // Storage
@@ -1373,6 +1428,9 @@
 	icon_state = "quartstorage"
 	sound_env = LARGE_ENCLOSED
 
+/area/quartermaster/storage/upper
+	name = "\improper Upper Warehouse"
+
 // Crew
 
 /area/crew_quarters/sleep/cryo
@@ -1386,6 +1444,9 @@
 /area/janitor
 	name = "\improper Custodial Closet"
 	icon_state = "janitor"
+
+/area/janitor/aux
+	name = "\improper Aux Custodial Closet"
 
 // Tcomm
 /area/tcommsat/
