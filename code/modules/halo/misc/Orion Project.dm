@@ -62,7 +62,7 @@
 	name = "Red Orion Helmet"
 	desc = "A prototype Helmet made from flexible high grade metals meant intimidate the wearer's foes and for use by a Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
-	armor_thickness = 40
+	armor_thickness = 50
 	icon_state = "orion1"
 	item_state = "orion1"
 	species_restricted = list("Orion")
