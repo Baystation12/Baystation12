@@ -330,9 +330,6 @@
 /area/maintenance/fourthdeck/forestarboard)
 "bw" = (
 /obj/structure/railing/mapped,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "by" = (
@@ -446,22 +443,14 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fourthdeck/forestarboard)
-"ca" = (
-/obj/structure/railing/mapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
@@ -473,13 +462,6 @@
 	},
 /turf/simulated/open,
 /area/maintenance/fourthdeck/starboard)
-"ce" = (
-/obj/structure/railing/mapped,
-/obj/machinery/atmospherics/valve/shutoff{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fourthdeck/forestarboard)
 "cf" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning{
@@ -656,24 +638,6 @@
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
-"cJ" = (
-/obj/structure/catwalk,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fourthdeck/forestarboard)
 "cK" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -2611,6 +2575,24 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
+"iM" = (
+/obj/structure/catwalk,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/aft)
 "iZ" = (
 /obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -5700,6 +5682,9 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -14084,21 +14069,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage/upper)
-"Vc" = (
-/obj/structure/catwalk,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fourthdeck/forestarboard)
 "Vd" = (
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor,
@@ -34877,8 +34847,8 @@ aa
 ak
 ak
 bN
-ce
-Vc
+bw
+bZ
 dU
 Mp
 Un
@@ -35079,8 +35049,8 @@ aa
 ak
 ak
 bN
-ca
-cJ
+bw
+bZ
 dU
 Mp
 Mp
@@ -40753,7 +40723,7 @@ dJ
 QW
 ur
 vD
-tl
+iM
 uM
 cr
 xs
@@ -40955,7 +40925,7 @@ WK
 ny
 Rw
 vD
-tl
+iM
 uN
 cr
 bl
@@ -41157,7 +41127,7 @@ TP
 Pl
 qC
 vD
-tl
+iM
 uO
 cr
 fU
@@ -41359,7 +41329,7 @@ vD
 vD
 vD
 vD
-tl
+iM
 rQ
 cr
 cr
