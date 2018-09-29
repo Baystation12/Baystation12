@@ -1040,22 +1040,26 @@ About the new airlock wires panel:
 			..()
 		return
 
-	if(!repairing && isWelder(C) && !( src.operating > 0 ) && src.density)
+	if(!repairing && isWelder(C) && !( operating > 0 ) && density)
 		var/obj/item/weapon/weldingtool/W = C
-		if(W.remove_fuel(0,user))
-			if(!src.welded)
-				src.welded = 1
-			else
-				src.welded = null
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			src.update_icon()
+		if(!W.remove_fuel(0,user))
+			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
 			return
+		playsound(loc, 'sound/items/Welder.ogg', 50, 1)
+		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
+							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
+		if(do_after(user, (rand(3,5)) SECONDS, src))
+			if(density && !(operating > 0) && !repairing)
+				welded = !welded
+				update_icon()
+				return
 		else
+			to_chat(user, SPAN_NOTICE("You must remain still to complete this task."))
 			return
 	else if(isScrewdriver(C))
 		if (src.p_open)
 			if (stat & BROKEN)
-				to_chat(usr, "<span class='warning'>The panel is broken and cannot be closed.</span>")
+				to_chat(user, "<span class='warning'>The panel is broken, and cannot be closed.</span>")
 			else
 				src.p_open = 0
 		else
@@ -1075,7 +1079,7 @@ About the new airlock wires panel:
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40,src))
-				to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
+				to_chat(user, "<span class='notice'>You've removed the airlock electronics!</span>")
 				deconstruct(user)
 				return
 		else if(arePowerSystemsOn())

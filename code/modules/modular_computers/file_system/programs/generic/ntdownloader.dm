@@ -197,7 +197,10 @@
 	data["downloadable_programs"] = all_entries
 
 	if(prog.downloads_queue.len > 0)
-		data["downloads_queue"] = prog.downloads_queue
+		var/list/queue = list() // Nanoui can't iterate through assotiative lists, so we have to do this
+		for(var/item in prog.downloads_queue)
+			queue += item
+		data["downloads_queue"] = queue
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

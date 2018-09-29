@@ -186,7 +186,7 @@
 
 
 // Fire
-/obj/effect/shield/fire_act()
+/obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!disabled_for)
 		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
 

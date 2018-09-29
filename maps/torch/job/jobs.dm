@@ -30,6 +30,16 @@
 						/datum/job/merchant, /datum/job/stowaway
 						)
 
+	access_modify_region = list(
+		ACCESS_REGION_SECURITY = list(access_change_ids),
+		ACCESS_REGION_MEDBAY = list(access_change_ids),
+		ACCESS_REGION_RESEARCH = list(access_rd, access_change_ids),
+		ACCESS_REGION_ENGINEERING = list(access_change_ids),
+		ACCESS_REGION_COMMAND = list(access_change_ids),
+		ACCESS_REGION_GENERAL = list(access_change_ids),
+		ACCESS_REGION_SUPPLY = list(access_change_ids),
+		ACCESS_REGION_NT = list(access_rd)
+	)
 
 /datum/map/torch/setup_map()
 	..()
@@ -156,7 +166,8 @@
 	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
+						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, access_petrov_security, access_petrov_maint)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -1461,7 +1472,8 @@
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
+						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_maint)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -1506,7 +1518,8 @@
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
-						access_xenoarch, access_nanotrasen, access_expedition_shuttle, access_guppy, access_hangar)
+						access_xenoarch, access_nanotrasen, access_expedition_shuttle, access_guppy, access_hangar,
+						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)
 	minimal_access = list()
 	skill_points = 20
 	required_education = EDUCATION_TIER_MASTERS
@@ -1535,7 +1548,8 @@
 	                    SKILL_DEVICES     = SKILL_MAX)
 
 	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
+						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_petrov_helm, access_expedition_shuttle, access_guppy,
+						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint)
 	required_education = EDUCATION_TIER_DROPOUT
 
 /datum/job/scientist_assistant
@@ -1598,7 +1612,7 @@
 		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/research/commissioned
 	)
 
-	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm, access_xenobiology, access_guppy_helm,
+	access = list(access_tox_storage, access_research, access_petrov, access_xenobiology, access_guppy_helm,
 						access_expedition_shuttle, access_guppy, access_hangar,  access_solgov_crew, access_emergency_storage)
 	minimal_access = list()
 	skill_points = 16

@@ -195,6 +195,16 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		TAG_EDUCATION = EDUCATION_HIGH_SCHOOL
 	)
 
+	var/access_modify_region = list(
+		ACCESS_REGION_SECURITY = list(access_hos, access_change_ids),
+		ACCESS_REGION_MEDBAY = list(access_cmo, access_change_ids),
+		ACCESS_REGION_RESEARCH = list(access_rd, access_change_ids),
+		ACCESS_REGION_ENGINEERING = list(access_ce, access_change_ids),
+		ACCESS_REGION_COMMAND = list(access_change_ids),
+		ACCESS_REGION_GENERAL = list(access_change_ids),
+		ACCESS_REGION_SUPPLY = list(access_change_ids)
+	)
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()

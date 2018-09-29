@@ -5351,6 +5351,7 @@
 	name = "Ship External Access";
 	req_access = list(103)
 	},
+/obj/effect/shuttle_landmark/ert/start,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amt" = (
@@ -6892,15 +6893,6 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/rescue_base/start)
-"aqf" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Storage";
-	opacity = 1;
-	req_access = list(103)
-	},
-/obj/effect/shuttle_landmark/ert/start,
-/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aqg" = (
 /obj/machinery/door/airlock/centcom{
@@ -8548,14 +8540,6 @@
 	name = "plating"
 	},
 /area/centcom/living)
-"auc" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 1
-	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/supply/dock)
 "aud" = (
 /turf/space,
 /area/shuttle/alien/base)
@@ -9082,17 +9066,6 @@
 	icon_state = "white"
 	},
 /area/centcom/living)
-"avA" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "diagonalWall3"
-	},
-/area/supply/dock)
 "avB" = (
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -9103,19 +9076,7 @@
 	icon_state = "comm_server";
 	name = "Supply Drone Virtual Intelligence"
 	},
-/obj/machinery/light/spot,
 /turf/simulated/floor/plating,
-/area/supply/dock)
-"avC" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "diagonalWall3"
-	},
 /area/supply/dock)
 "avD" = (
 /obj/structure/lattice,
@@ -12689,6 +12650,7 @@
 	opacity = 0
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aCK" = (
@@ -13173,10 +13135,6 @@
 	pixel_y = -5;
 	req_access = list(150)
 	},
-/turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
-"aDJ" = (
-/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "aDK" = (
@@ -18988,9 +18946,12 @@
 /obj/machinery/atmospherics/omni/mixer{
 	tag_east = 1;
 	tag_east_con = 0.5;
-	tag_south = 1;
-	tag_south_con = 0.5;
-	tag_west = 2;
+	tag_north = 1;
+	tag_north_con = 2;
+	tag_south = null;
+	tag_south_con = null;
+	tag_west = 1;
+	tag_west_con = 0.5;
 	use_power = 0
 	},
 /turf/unsimulated/floor{
@@ -21655,7 +21616,6 @@
 "aXB" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
-/obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aXC" = (
@@ -22146,6 +22106,7 @@
 	req_access = list(150)
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
 "bfZ" = (
@@ -22779,6 +22740,10 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"jlA" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "jps" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert2"
@@ -23170,6 +23135,12 @@
 /obj/machinery/door/unpowered/simple/wood,
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
+"rxE" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "ryl" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/teleport/hub,
@@ -28258,7 +28229,7 @@ apu
 apG
 anl
 anl
-aqf
+aqg
 aqw
 aqw
 aqw
@@ -37382,9 +37353,9 @@ atx
 atx
 atx
 atx
-atx
-atx
-awU
+aab
+aab
+aab
 awU
 axA
 axM
@@ -37583,10 +37554,10 @@ atR
 atR
 atR
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 awU
 axA
 axN
@@ -37785,10 +37756,10 @@ auw
 auA
 atR
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 awU
 axC
 axM
@@ -37977,7 +37948,7 @@ aab
 aab
 atx
 atR
-atR
+rxE
 aup
 aux
 auz
@@ -37987,10 +37958,10 @@ aur
 aup
 auA
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 awU
 awU
 awU
@@ -38179,20 +38150,20 @@ aab
 aab
 atx
 atR
-auc
+rxE
 auq
 auy
 auz
 auz
 auz
-auz
-avA
+jlA
+aup
 aup
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38381,7 +38352,7 @@ aab
 aab
 atx
 atR
-auc
+rxE
 auq
 auz
 auz
@@ -38391,10 +38362,10 @@ auz
 avB
 aup
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38583,20 +38554,20 @@ aab
 aab
 atx
 atR
-auc
-auq
-auy
-auz
-auz
-auz
-auz
-avC
+rxE
 aup
+auA
+auz
+auz
+auz
+auo
+aup
+aux
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38786,19 +38757,19 @@ aab
 atx
 atR
 atR
-aup
-auA
-auz
-auz
-auz
-auo
-aup
+aur
+auw
+auQ
+auQ
+auQ
+auw
 aux
 atR
 atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38988,19 +38959,19 @@ aab
 atx
 atR
 atR
-aur
-auw
-auQ
-auQ
-auQ
-auw
-aux
 atR
 atR
 atR
 atR
 atR
-awU
+atR
+atR
+atR
+atR
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -39188,21 +39159,21 @@ aab
 aab
 aab
 atx
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-awU
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -39389,22 +39360,22 @@ aab
 aab
 aab
 aab
-atx
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-awU
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -56996,7 +56967,7 @@ aAc
 azE
 aDb
 azE
-aDJ
+azE
 azE
 azE
 azE

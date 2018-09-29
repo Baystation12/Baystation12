@@ -1,6 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Added a crashed escape pod that may generate on exoplanets and allow for latejoiners a la Bearcat."
-  - tweak: "Some ruins and submaps will add themselves to the distress signal list. Probably worth checking now."
-  - rscdel: "Prevented submap jobs from being test-spawned by the global datum system as they do not expect null args."

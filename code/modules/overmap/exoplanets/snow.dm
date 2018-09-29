@@ -62,6 +62,6 @@
 	icon_state = pick("snow[rand(1,12)]","snow0")
 	..()
 
-/turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, temperature, volume)
+/turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	name = "permafrost"
 	icon_state = "permafrost"
