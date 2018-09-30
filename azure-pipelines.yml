@@ -2,7 +2,7 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  imageName: 'registry.baystation12.net/baystation12:$(Build.BuildId)'
+  imageName: 'registry.baystation12.net/baystation12:latest'
 
 steps:
 - script: git clone https://github.com/Baystation12/custom-items
@@ -25,4 +25,3 @@ steps:
   inputs:
     command: 'push'
     imageName: '$(imageName)'
-    additionalImageTags: 'latest'
