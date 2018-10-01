@@ -4096,9 +4096,9 @@
 "ok" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
+/obj/structure/disposalpipe/sortjunction/untagged/flipped{
+	icon_state = "pipe-j2s";
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
@@ -15031,7 +15031,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/disposalpipe/segment,
+/obj/structure/disposalpipe/junction{
+	icon_state = "pipe-j2";
+	dir = 2
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "XM" = (
