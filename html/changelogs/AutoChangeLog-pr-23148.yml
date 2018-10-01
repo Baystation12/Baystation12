@@ -1,5 +1,0 @@
-author: "Textor"
-delete-after: True
-changes: 
-  - bugfix: "Helm control, engine control, sensor, and navigation consoles no longer stop functioning after repair or construction. Just hit \"reconnect.\""
-  - bugfix: "The windowtint button on the back wall of the XO's office actually works now."
