@@ -1,8 +1,0 @@
-author: "Cakey"
-delete-after: True
-changes: 
-  - maptweak: "Made maintenance style-consistent throughout all decks with techmaint tiles and railings. maptweak: Made railings not obstruct items, shuffled some items around to not be behind railings."
-  - maptweak: "Added a single seat in the lounge facing space, which takes up barely any extra space."
-  - maptweak: "Added a fax machine to the pilot's lounge."
-  - tweak: "Fixed Petrov airlock accesses."
-  - tweak: "Fixed Hangar maintenance airlock accesses."
