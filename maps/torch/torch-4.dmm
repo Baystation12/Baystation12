@@ -23361,6 +23361,15 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/machinery/light_switch{
+	pixel_x = -4;
+	pixel_y = 24
+	},
+/obj/machinery/button/windowtint{
+	id = "robotics_external_windows";
+	pixel_x = 4;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
 "kGb" = (
@@ -23376,11 +23385,6 @@
 /turf/simulated/floor/tiled/white,
 /area/security/brig)
 "kHb" = (
-/obj/machinery/door/airlock/glass/engineering{
-	name = "Charging Bay";
-	req_access = list(82);
-	req_one_access = newlist()
-	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -23392,6 +23396,10 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Charging Bay";
+	req_access = list(82)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/chargebay)
@@ -23731,11 +23739,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
 "ldb" = (
-/obj/machinery/door/airlock/glass/engineering{
-	name = "Robotics Laboratory";
-	req_access = list(82);
-	req_one_access = newlist()
-	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -23744,6 +23747,10 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Robotics Laboratory";
+	req_access = list(82)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics)
@@ -26691,18 +26698,9 @@
 /obj/item/weapon/folder/yellow,
 /obj/item/weapon/pen,
 /obj/machinery/light,
-/obj/machinery/light_switch{
-	pixel_x = -4;
-	pixel_y = -24
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 21
-	},
-/obj/machinery/button/windowtint{
-	id = "robotics_external_windows";
-	pixel_x = 4;
-	pixel_y = -24
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
