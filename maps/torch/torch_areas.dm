@@ -1328,7 +1328,11 @@
 	icon_state = "exam_room"
 
 /area/medical/surgery
-	name = "\improper Operating Theatre"
+	name = "\improper Operating Theatre 1"
+	icon_state = "surgery"
+
+/area/medical/surgery2
+	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
 
 /area/medical/autopsy
