@@ -1,0 +1,6 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - maptweak: "Adds dedicated Robotics OR."
+  - maptweak: "Each OR now has holosigns to show when they are in use."
+  - maptweak: "Moved some items from the joint OR to the robotics OR, added some extra tools."
