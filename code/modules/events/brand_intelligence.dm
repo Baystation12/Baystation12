@@ -19,13 +19,11 @@
 	if(!vendingMachines.len)
 		kill()
 		return
-
-	originMachine = pick(vendingMachines)
-	vendingMachines.Remove(originMachine)
+	var/weakref/W = pick_n_take(vendingMachines)
+	originMachine = W.resolve()
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
 	originMachine.shooting_chance = 15
-
 
 /datum/event/brand_intelligence/tick()
 	if(!vendingMachines.len || QDELETED(originMachine) || originMachine.shut_up || !originMachine.shoot_inventory)	//if every machine is infected, or if the original vending machine is missing or has it's voice switch flipped or fixed
