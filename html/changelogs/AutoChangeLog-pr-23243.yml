@@ -1,0 +1,8 @@
+author: "sabira"
+delete-after: True
+changes: 
+  - tweak: "The research department's colouration has changed from the red of NanoTrasen to the green of Torch, Limited."
+  - tweak: "Torch, LLC (the holding company representing the research department) has been renamed to Torch, Ltd."
+  - maptweak: "Changed the area around research to use the green decals, and new Torch Ltd logo."
+  - maptweak: "Changed the research director and liaison's offices on the bridge to make use of the green decals."
+  - rscadd: "Added legacy NanoTrasen uniforms to the loadout."
