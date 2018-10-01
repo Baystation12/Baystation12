@@ -349,6 +349,14 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	name = OUTFIT_JOB_NAME("Mortician")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
 
+/decl/hierarchy/outfit/job/torch/crew/medical/biomech
+	name = OUTFIT_JOB_NAME("Biomechanical Engineer")
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
+	shoes = /obj/item/clothing/shoes/black
+	l_ear = /obj/item/device/radio/headset/torchroboticist
+	id_type = /obj/item/weapon/card/id/torch/contractor/biomech
+	pda_type = /obj/item/modular_computer/pda/roboticist
+
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
 	uniform = /obj/item/clothing/under/rank/virologist
