@@ -66,11 +66,6 @@
 	path = /obj/item/clothing/accessory/armband/solgov/ma
 	allowed_roles = SECURITY_ROLES
 
-/datum/gear/accessory/armband_solgov
-	display_name = "peacekeeper armband"
-	path = /obj/item/clothing/accessory/armband/bluegold
-	allowed_roles = SOLGOV_ROLES
-
 /datum/gear/accessory/armband_security
 	allowed_roles = SECURITY_ROLES
 
