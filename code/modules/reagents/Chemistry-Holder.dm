@@ -258,7 +258,10 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	handle_reactions()
 	return amount
 
-/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]).
+// Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
+// Returns actual amount removed from [src] (not amount transferred to [target]).
+// Use safety = 1 for temporary targets to avoid queuing them up for processing.
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0)
 	if(!target || !istype(target))
 		return
 
@@ -277,7 +280,8 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	if(!copy)
 		handle_reactions()
-	target.handle_reactions()
+	if(!safety)
+		target.handle_reactions()
 	return amount
 
 /* Holder-to-atom and similar procs */
@@ -392,7 +396,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			return trans_to_holder(R, amount, multiplier, copy)
 	else
 		var/datum/reagents/R = new /datum/reagents(amount, GLOB.temp_reagents_holder)
-		. = trans_to_holder(R, amount, multiplier, copy)
+		. = trans_to_holder(R, amount, multiplier, copy, 1)
 		R.touch_mob(target)
 		qdel(R)
 
@@ -401,7 +405,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return
 
 	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
-	. = trans_to_holder(R, amount, multiplier, copy)
+	. = trans_to_holder(R, amount, multiplier, copy, 1)
 	R.touch_turf(target)
 	qdel(R)
 	return
@@ -412,7 +416,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	if(!target.reagents)
 		var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
-		. = trans_to_holder(R, amount, multiplier, copy)
+		. = trans_to_holder(R, amount, multiplier, copy, 1)
 		R.touch_obj(target)
 		qdel(R)
 		return
