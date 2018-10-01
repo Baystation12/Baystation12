@@ -6358,7 +6358,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
 /area/maintenance/seconddeck/hallway)
 "ne" = (
 /obj/structure/cable{
@@ -6388,6 +6389,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/hallway)
 "nh" = (
@@ -6409,16 +6411,6 @@
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/hallway)
-"nj" = (
-/obj/random/obstruction,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/hallway)
 "nk" = (
 /obj/random/junk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6426,6 +6418,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/hallway)
@@ -15018,6 +15014,10 @@
 	dir = 4
 	},
 /obj/structure/railing/mapped{
+	icon_state = "railing0";
+	dir = 1
+	},
+/obj/structure/railing/mapped{
 	tag = "icon-railing0 (EAST)";
 	icon_state = "railing0";
 	dir = 4
@@ -15080,6 +15080,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/hallway)
@@ -15614,6 +15618,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos)
 "Ms" = (
+/obj/machinery/light/small,
 /obj/structure/railing/mapped{
 	tag = "icon-railing0 (EAST)";
 	icon_state = "railing0";
@@ -15924,6 +15929,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0";
+	dir = 1
 	},
 /obj/structure/railing/mapped{
 	tag = "icon-railing0 (EAST)";
@@ -17143,6 +17152,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
+"SQ" = (
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "SU" = (
 /obj/structure/catwalk,
 /obj/structure/sign/warning/pods/east{
@@ -17883,6 +17899,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/hallway)
@@ -18877,6 +18897,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
+"ZS" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/hallway)
 "ZX" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/reagent_dispensers/fueltank,
@@ -34530,7 +34554,7 @@ Nf
 YF
 Zr
 bI
-nf
+ZS
 NS
 nf
 nc
@@ -34732,7 +34756,7 @@ Pf
 rU
 bd
 bI
-QQ
+ZS
 JU
 jV
 jV
@@ -34934,7 +34958,7 @@ jU
 bI
 hM
 bI
-QQ
+ZS
 Wi
 jV
 jV
@@ -35136,8 +35160,8 @@ bI
 bI
 jq
 bI
-QQ
-nj
+SQ
+JU
 jV
 jV
 lm
@@ -35338,7 +35362,7 @@ hM
 bd
 bd
 bI
-QQ
+ZS
 JU
 jV
 jV
@@ -35540,7 +35564,7 @@ fp
 fp
 fo
 fp
-QQ
+ZS
 nk
 jV
 jV
@@ -35742,7 +35766,7 @@ hN
 iy
 jr
 fp
-QQ
+ZS
 JU
 jV
 jV
@@ -36146,7 +36170,7 @@ hP
 iA
 jt
 fp
-QQ
+ZS
 nk
 jV
 jV
@@ -36348,7 +36372,7 @@ fp
 fp
 fo
 fp
-QQ
+SQ
 JU
 jV
 VE
@@ -36550,7 +36574,7 @@ bK
 bf
 bf
 bf
-QQ
+ZS
 JU
 QQ
 VE
@@ -36752,7 +36776,7 @@ bK
 fx
 fx
 bf
-QQ
+ZS
 JU
 QQ
 VE
@@ -36954,7 +36978,7 @@ bK
 bK
 Yr
 bf
-Ms
+ZS
 Jz
 Ms
 VE
