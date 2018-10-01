@@ -16042,10 +16042,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/cell3)
-"Ux" = (
-/obj/effect/paint/red,
-/turf/simulated/wall/titanium,
-/area/space)
 "Uy" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -48375,7 +48371,7 @@ DQ
 DQ
 DQ
 DQ
-Ux
+DQ
 NZ
 Jj
 Qi
@@ -48577,7 +48573,7 @@ BT
 BT
 BT
 BT
-Ux
+DQ
 Oh
 PE
 yo
@@ -48779,7 +48775,7 @@ Kt
 Kt
 Kt
 Kt
-Ux
+DQ
 aa
 aa
 aa
