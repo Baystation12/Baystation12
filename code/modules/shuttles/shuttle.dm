@@ -188,7 +188,7 @@
 						else
 							to_chat(M, "<span class='warning'>The floor lurches beneath you!</span>")
 							shake_camera(M, 10, 1)
-							M.visible_message("<span class='warning'>[M.name] is tossed around by the sudden acceleration!</span>")	
+							M.visible_message("<span class='warning'>[M.name] is tossed around by the sudden acceleration!</span>")
 							M.throw_at_random(FALSE, 4, 1)
 
 		for(var/obj/structure/cable/C in A)
@@ -206,6 +206,8 @@
 			for(var/turf/TD in A.contents)
 				var/turf/TA = GetAbove(TD)
 				if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
+					if(get_area(TA) in shuttle_area)
+						continue
 					TA.ChangeTurf(ceiling_type, 1, 1)
 
 	// Remove all powernets that were affected, and rebuild them.
@@ -218,7 +220,7 @@
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(C)
 			propagate_network(C,C.powernet)
-	
+
 	if(mothershuttle)
 		var/datum/shuttle/mothership = SSshuttle.shuttles[mothershuttle]
 		if(mothership)

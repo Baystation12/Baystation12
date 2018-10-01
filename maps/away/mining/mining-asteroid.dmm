@@ -249,7 +249,7 @@
 "kb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_north_outer";
 	locked = 1
 	},
@@ -284,7 +284,7 @@
 "ob" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_north_inner";
 	locked = 1
 	},
@@ -294,7 +294,7 @@
 "pb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_north_inner";
 	locked = 1
 	},
@@ -357,7 +357,7 @@
 "wb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_east_inner";
 	locked = 1
 	},
@@ -389,7 +389,7 @@
 "zb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_east_outer";
 	locked = 1
 	},
@@ -405,7 +405,7 @@
 "Bb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_east_inner";
 	locked = 1
 	},

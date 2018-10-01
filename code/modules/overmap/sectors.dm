@@ -59,6 +59,7 @@
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
+		GLOB.using_map.map_levels |= map_z
 
 //Helper for init.
 /obj/effect/overmap/proc/check_ownership(obj/object)
