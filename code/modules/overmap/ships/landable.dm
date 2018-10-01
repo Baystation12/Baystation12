@@ -55,7 +55,7 @@
 	landmark_tag = "ship"
 	autoset = 1
 
-/obj/effect/shuttle_landmark/ship/Initialize(shuttle_name)
+/obj/effect/shuttle_landmark/ship/Initialize(mapload, shuttle_name)
 	landmark_tag += "_[shuttle_name]"
 	. = ..()
 
