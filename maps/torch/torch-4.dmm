@@ -21733,10 +21733,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "iOb" = (
-/obj/machinery/door/airlock/security{
-	name = "Checkpoint";
-	req_one_access = list(86)
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -21745,6 +21741,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/security/research{
+	name = "Checkpoint";
+	req_access = list(207)
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/rnd/checkpoint)
 "iPb" = (
@@ -25772,7 +25772,7 @@
 	c_tag = "Research - Checkpoint";
 	dir = 4
 	},
-/obj/structure/bed/chair/office/comfy/red,
+/obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nBb" = (
@@ -25886,8 +25886,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/table/steel,
-/obj/item/weapon/board,
+/obj/structure/closet/secure_closet/guard,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nJb" = (
@@ -25951,10 +25951,8 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/structure/bed/chair/office/comfy/red{
-	icon_state = "comfyofficechair_preview";
-	dir = 1
-	},
+/obj/structure/closet/secure_closet/guard,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "nQb" = (
