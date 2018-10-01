@@ -380,8 +380,9 @@
 	for(var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
 		S.randomize()
-		S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
-		S.set_trait(TRAIT_PLANT_ICON,"alien[rand(1,4)]")
+		var/planticon = "alien[rand(1,4)]"
+		S.set_trait(TRAIT_PRODUCT_ICON,planticon)
+		S.set_trait(TRAIT_PLANT_ICON,planticon)
 		var/color = pick(plantcolors)
 		if(color == "RANDOM")
 			color = get_random_colour(0,75,190)
