@@ -93,3 +93,18 @@
 
 /datum/gear/uniform/frontier
 	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/uniform/nanotrasen_guard
+	allowed_roles = list(/datum/job/guard)
+
+/datum/gear/uniform/nanotrasen_executive
+	allowed_roles = list(/datum/job/senior_scientist)
+
+/datum/gear/uniform/nanotrasen_coveralls
+	allowed_roles = list(/datum/job/mining, /datum/job/scientist_assistant)
+
+/datum/gear/uniform/nanotrasen_flightsuit
+	allowed_roles = list(/datum/job/nt_pilot)
+
+/datum/gear/uniform/nanotrasen_executive
+	allowed_roles = list(/datum/job/liaison, /datum/job/rd)
