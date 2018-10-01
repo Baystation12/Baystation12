@@ -9,18 +9,23 @@
 
 /datum/event/ionstorm/announce()
 	for(var/mob/living/carbon/S in SSmobs.mob_list)
-		if (S.isSynthetic() && !issilicon(S))
-			var/area/A = get_area(S)
-			if(!A)
-				continue
-			if(A.area_flags & AREA_FLAG_ION_SHIELDED)
-				continue
-			to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
-			var/ionbug = rand(5, 15)
-			S.confused += ionbug
-			S.eye_blurry += ionbug-1
+		if (!S.isSynthetic())
+			continue
+		if(!(S.z in affecting_z))
+			continue
+		var/area/A = get_area(S)
+		if(!A)
+			continue
+		if(A.area_flags & AREA_FLAG_ION_SHIELDED)
+			continue
+		to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
+		var/ionbug = rand(5, 15)
+		S.confused += ionbug
+		S.eye_blurry += ionbug-1
 	for(var/mob/living/silicon/S in SSmobs.mob_list)
 		if(is_drone(S) || !(isAI(S) || isrobot(S)))
+			continue
+		if(!(S.z in affecting_z))
 			continue
 		if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
@@ -106,7 +111,9 @@
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in world)
+		for(var/mob/living/bot/bot in GLOB.living_mob_list_)
+			if(!(bot.z in affecting_z))
+				continue
 			if(prob(botEmagChance))
 				bot.emag_act(1)
 
