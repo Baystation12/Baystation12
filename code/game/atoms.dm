@@ -492,9 +492,15 @@ its easier to just keep the beam vertical.
 		LAZYREMOVE(climbers,user)
 		return 0
 
-	user.forceMove(get_turf(src))
+	var/target_turf = get_turf(src)
 
-	if (get_turf(user) == get_turf(src))
+	//climbing over border objects like railings
+	if((atom_flags & ATOM_FLAG_CHECKS_BORDER) && get_turf(user) == target_turf)
+		target_turf = get_step(src, dir)
+
+	user.forceMove(target_turf)
+
+	if (get_turf(user) == target_turf)
 		user.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
 	LAZYREMOVE(climbers,user)
 	return 1
