@@ -1,0 +1,4 @@
+author: "Sbotkin"
+delete-after: True
+changes: 
+  - rscdel: "Removed ID modification and weapon authorization tools from command computers."
