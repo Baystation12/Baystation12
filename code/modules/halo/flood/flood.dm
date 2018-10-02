@@ -320,9 +320,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	maxHealth = 125
 	melee_damage_lower = 25
 	melee_damage_upper = 35
-<<<<<<< HEAD
-	attacktext = list("bashed","slashed","stabbed")
-=======
 	attacktext = "bashed"
 
 /mob/living/simple_animal/hostile/flood/combat_form/minor
@@ -366,4 +363,3 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	melee_damage_lower = 40
 	melee_damage_upper = 55
 	attacktext = "Whips"
->>>>>>> 62ef7b5dc65712e70277a207fb6d62710b64d368
