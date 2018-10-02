@@ -59,8 +59,10 @@
 	send_material_data = 1
 	time = 5
 
-/datum/stack_recipe/rod/spawn_result(location, amount)
+/datum/stack_recipe/rod/spawn_result(user, location, amount)
 	if(send_material_data && use_material)
 		. = new result_type(location, amount, use_material)
 	else
 		. = new result_type(location)
+	var/obj/item/stack/S = .
+	S.add_to_stacks(user, 1)

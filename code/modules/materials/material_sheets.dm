@@ -18,23 +18,18 @@
 	var/plural_name
 	var/matter_multiplier = 1
 
-/obj/item/stack/material/New(var/loc, var/amount, var/_material, var/_reinf_material)
+/obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
+	. = ..()
 	if(_material)
 		default_type = _material
 	if(_reinf_material)
 		default_reinf_type = _reinf_material
-	if(!default_type)
-		default_type = MATERIAL_STEEL
-	..()
-
-/obj/item/stack/material/Initialize()
-	. = ..()
 	material = SSmaterials.get_material_by_name(default_type)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
 	if(default_reinf_type)
 		reinf_material = SSmaterials.get_material_by_name(default_reinf_type)
-	recipes = material.get_recipes()
+	recipes = material.get_recipes(reinf_material && reinf_material.name)
 	if(!stacktype)
 		stacktype = material.stack_type
 	if(islist(material.stack_origin_tech))
@@ -121,19 +116,15 @@
 		update_strings()
 		update_icon()
 
-/obj/item/stack/material/attack_self(var/mob/user)
-	if(!material.build_windows(user, src))
-		..()
-
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
 	if(isCoil(W))
 		material.build_wired_product(user, W, src)
 		return
-	else if(istype(W, /obj/item/stack/material) && is_same(W))
-		..()
-		return
-	else if(istype(W, /obj/item/stack/material/rods) && !reinf_material)
-		material.reinforce(user, W, src)
+	else if(istype(W, /obj/item/stack/material))
+		if(is_same(W))
+			..()
+		else if(!reinf_material)
+			material.reinforce(user, W, src)
 		return
 	else if(reinf_material && reinf_material.stack_type && isWelder(W))
 		var/obj/item/weapon/weldingtool/WT = W
