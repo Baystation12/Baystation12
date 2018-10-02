@@ -135,6 +135,13 @@
 	if(prob(100/severity)) BB = null
 	update_icon()
 
+/obj/item/ammo_casing/shotgun/beacon //The default will call down just gunfire.
+	name = "beacon shell"
+	desc = "A beacon shell."
+	icon_state = "stunshell"
+	projectile_type = /obj/item/projectile/bullet/shotgun/beacon/explosive
+	matter = list(MATERIAL_STEEL = 360, MATERIAL_GLASS = 720)
+
 //Does not stun, only blinds, but has area of effect.
 /obj/item/ammo_casing/shotgun/flash
 	name = "flash shell"

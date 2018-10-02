@@ -1,3 +1,4 @@
+
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
@@ -281,3 +282,37 @@
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
 	..()
+
+//Beacon
+/obj/item/projectile/bullet/shotgun/beacon
+	name = "Beacon"
+	damage = 8
+
+/obj/item/projectile/bullet/shotgun/beacon/explosive
+	agony = 15 //That thing has to be pretty painful.
+
+/obj/item/projectile/bullet/shotgun/beacon/explosive/on_hit(atom/target, blocked = FALSE)
+	..()
+	var/strikes_amount = 5
+	var/offset_target
+	var/turf/T = GetAbove(src)//This checks for space
+	if(!T)
+		if(isliving(target))//Check if alive.
+			target.visible_message("<span class='danger'>[target] is struck by the beacon slug!</span>")
+			playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+			addtimer(CALLBACK(target, /atom/.proc/visible_message, "<span class='danger'>The beacon starts flashing and beeping!</span>"), 10)
+			addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src.loc, 'sound/machines/buttonbeep.ogg', 80, 1), 30)//f-first time be g-gentle	
+			for(var/i = 1 to strikes_amount)
+				sleep(6)//Placeholder until i know timers. Value is random.
+				offset_target = get_offset_target_turf(target.loc, rand(3)-rand(3), rand(3)-rand(3))//This repeat to get new locations each round.
+				explosion(offset_target, -1, 1, 2, 4)//Placeholder values.
+		else
+			playsound(src.loc, 'sound/machines/defib_failed.ogg', 80, 1)
+			target.visible_message("The beacon turns off after a moment.")
+			qdel(src)
+			return
+	else
+		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 80, 1)
+		target.visible_message("The beacon goes dull instantly.")
+		qdel(src)
+		return
