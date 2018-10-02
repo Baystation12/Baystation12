@@ -22,12 +22,18 @@ var/global/datum/matchmaker/matchmaker = new()
 		if(R.other && !R.finalized)
 			to_warn |= R.holder.current
 	for(var/mob/M in to_warn)
-		to_chat(M,"<span class='warning'>You have new connections. Use \"See Relationship Info\" to view and finalize them.</span>")
+		to_chat(M,"<span class='warning'>You have new connections. Use \"<a href='byond://?src=\ref[M];show_relations=1'>See Relationship Info</a>\" to view and finalize them.</span>")
 
-/datum/matchmaker/proc/get_relationships(datum/mind/M)
+/datum/matchmaker/proc/get_relationships(datum/mind/M, finalized_only)
 	. = list()
 	for(var/datum/relation/R in relations)
-		if(R.holder == M && R.other)
+		if(R.holder == M && R.other && (R.finalized || !finalized_only))
+			. += R
+
+/datum/matchmaker/proc/get_relationships_between(datum/mind/holder, datum/mind/target, finalized_only)
+	. = list()
+	for(var/datum/relation/R in relations)
+		if(R.holder == holder && R.other && R.other.holder == target && (R.finalized || !finalized_only))
 			. += R
 
 //Types of relations
@@ -46,7 +52,7 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/New()
 	..()
 	if(!can_connect_to)
-		can_connect_to = list(name)
+		can_connect_to = list(type)
 	matchmaker.relations += src
 
 /datum/relation/proc/get_candidates()
@@ -72,9 +78,9 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/proc/can_connect(var/datum/relation/R)
 	for(var/datum/relation/D in matchmaker.relations) //have to check all connections between us and them
 		if(D.holder == R.holder && D.other && D.other.holder == holder)
-			if(D.name in incompatible)
+			if(D.type in incompatible)
 				return 0
-	return (R.name in can_connect_to) && !(R.name in incompatible) && R.open
+	return (R.type in can_connect_to) && !(R.type in incompatible) && R.open
 
 /datum/relation/proc/get_copy()
 	var/datum/relation/R = new type
@@ -176,6 +182,26 @@ var/global/datum/matchmaker/matchmaker = new()
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
+/mob/living/proc/see_relationship_info_with(var/mob/living/other)
+	if(!other.mind)
+		return
+	var/list/relations = matchmaker.get_relationships(mind,other.mind,TRUE)
+	var/list/dat = list("<h2>[other]</h2>")
+	if(mind.gen_relations_info)
+		dat += "<b>Things they know about you:</b><br>[mind.gen_relations_info]<hr>"
+		dat += "<br>"
+	for(var/datum/relation/R in relations)
+		dat += "<br>[R.desc]"
+		dat += "<br>"
+		dat += "<b>Things they know about you:</b><br>[R.info ? "[R.info]" : " Nothing specific."]"
+		if(R.other.info)
+			dat += "<br><b>Things you know about them:</b><br>[R.other.info]<br>[R.other.holder.gen_relations_info]"
+		dat += "<hr>"
+
+	var/datum/browser/popup = new(usr, "relations", "Relationship Info")
+	popup.set_content(jointext(dat,null))
+	popup.open()
+
 /mob/living/Topic(href, href_list)
 	if(..())
 		return 1
@@ -204,3 +230,8 @@ var/global/datum/matchmaker/matchmaker = new()
 		else
 			show_browser(usr,null, "window=relations")
 		return 1
+	if(href_list["show_relations"])
+		var/mob/living/L = usr
+		if(istype(L))
+			L.see_relationship_info()
+			return 1
