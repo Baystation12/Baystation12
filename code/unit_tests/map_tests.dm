@@ -525,5 +525,30 @@ datum/unit_test/ladder_check/start_test()
 		pass("No station pipes are leaking")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/power_terminals_shall_be_wired
+	name = "MAP: Power terminals shall be wired"
+
+/datum/unit_test/power_terminals_shall_be_wired/start_test()
+	var/failures = 0
+	for(var/obj/machinery/power/terminal/term in SSmachines.machinery)
+		var/turf/T = get_turf(term)
+		var/found_cable = FALSE
+		 // It's safe to loop over null so we don't bother with the extra check
+		for(var/obj/structure/cable/C in T)
+			if(C.d2 > 0 && C.d1 == 0)
+				found_cable = TRUE
+				break
+		if(!found_cable)
+			failures++
+			log_bad("Unwired terminal : [log_info_line(term)]")
+
+	if(failures)
+		fail("[failures] unwired power terminal\s.")
+	else
+		pass("All power terminals are wired.")
+	return 1
+
 #undef SUCCESS
 #undef FAILURE
