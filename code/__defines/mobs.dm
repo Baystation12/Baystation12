@@ -315,3 +315,6 @@
 #define MOB_INPUT_TEXT "text"
 #define MOB_INPUT_MESSAGE "message"
 #define MOB_INPUT_NUM "num"
+
+#define MOB_CLIMB_TIME_SMALL 30
+#define MOB_CLIMB_TIME_MEDIUM 50
