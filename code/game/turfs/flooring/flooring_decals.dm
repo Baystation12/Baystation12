@@ -991,7 +991,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/torchltdlogo
 	alpha = 230
 	icon = 'icons/turf/flooring/corp_floor.dmi'
-	icon_state = "0,0"
+	icon_state = "bottomleft"
 
 //Techfloor
 
