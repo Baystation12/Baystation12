@@ -3810,11 +3810,6 @@
 	req_one_access = list(93,94,95)
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/exploration)
 "iU" = (

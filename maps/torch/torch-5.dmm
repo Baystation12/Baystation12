@@ -4917,6 +4917,11 @@
 	name = "west bump";
 	pixel_x = -24
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
 "lg" = (
@@ -5448,6 +5453,11 @@
 /area/turret_protected/ai)
 "mo" = (
 /obj/machinery/ai_slipper,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
 "mp" = (
@@ -13443,6 +13453,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
+/obj/structure/cable/green,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sea)
 "Il" = (
