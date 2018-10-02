@@ -91,6 +91,9 @@
 		if (SOUTHEAST) return "southeast"
 		if (NORTHWEST) return "northwest"
 		if (SOUTHWEST) return "southwest"
+		if (UP)        return "up"
+		if (DOWN)      return "down"
+	return "unknown ([direction])"
 
 // Turns text into proper directions
 /proc/text2dir(direction)
