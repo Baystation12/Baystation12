@@ -2250,6 +2250,16 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/bridge/fore)
+"fH" = (
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge)
 "fI" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/bridge/aft)
@@ -3057,10 +3067,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "hj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "0,0";
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "hk" = (
@@ -4088,9 +4094,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "jy" = (
-/obj/effect/floor_decal/corner/blue/three_quarters{
-	dir = 8
-	},
+/obj/effect/floor_decal/corner/blue/full,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "jz" = (
@@ -5919,7 +5923,8 @@
 /area/bridge)
 "nh" = (
 /obj/effect/floor_decal/scglogo{
-	icon_state = "2,1"
+	tag = "icon-center-right";
+	icon_state = "center-right"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -5946,10 +5951,6 @@
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
 "nj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "0,1";
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -6247,10 +6248,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
-"nI" = (
-/obj/effect/floor_decal/corner/blue/three_quarters,
-/turf/simulated/floor/tiled/dark,
-/area/bridge)
 "nJ" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
@@ -6447,13 +6444,6 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/aftport)
-"oj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "0,2";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
 "ol" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
@@ -7209,7 +7199,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/scglogo{
-	icon_state = "0,2"
+	tag = "icon-top-left";
+	icon_state = "top-left"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -7241,7 +7232,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/scglogo{
-	icon_state = "0,0"
+	tag = "icon-bottom-left";
+	icon_state = "bottom-left"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -9799,8 +9791,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/structure/bed/chair/padded/red,
 /obj/effect/floor_decal/corner/b_green/diagonal,
+/obj/structure/bed/chair/padded/green,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
 "uO" = (
@@ -9881,7 +9873,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/structure/bed/chair/padded/red,
+/obj/structure/bed/chair/padded/green,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "uV" = (
@@ -9948,7 +9940,8 @@
 /area/crew_quarters/heads/office/xo)
 "vf" = (
 /obj/effect/floor_decal/scglogo{
-	icon_state = "1,2"
+	tag = "icon-top-center";
+	icon_state = "top-center"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -10327,11 +10320,12 @@
 	pixel_y = 24;
 	req_access = list(84)
 	},
-/obj/structure/bed/chair/office/comfy/red{
+/obj/effect/floor_decal/corner/b_green/diagonal,
+/obj/structure/bed/chair/office/comfy/green{
+	tag = "icon-comfyofficechair_preview (NORTH)";
 	icon_state = "comfyofficechair_preview";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/b_green/diagonal,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
 "wb" = (
@@ -10394,7 +10388,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/structure/bed/chair/office/comfy/red{
+/obj/structure/bed/chair/office/comfy/green{
+	tag = "icon-comfyofficechair_preview (NORTH)";
 	icon_state = "comfyofficechair_preview";
 	dir = 1
 	},
@@ -11580,18 +11575,20 @@
 	pixel_y = 6;
 	req_access = list(19)
 	},
-/obj/effect/floor_decal/scglogo{
-	icon_state = "2,2"
-	},
 /obj/structure/bed/chair/comfy/blue{
 	icon_state = "comfychair_preview";
-	dir = 8
+	dir = 1
+	},
+/obj/effect/floor_decal/scglogo{
+	tag = "icon-top-right";
+	icon_state = "top-right"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "yh" = (
 /obj/effect/floor_decal/scglogo{
-	icon_state = "1,0"
+	tag = "icon-bottom-center";
+	icon_state = "bottom-center"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11772,10 +11769,11 @@
 	pixel_y = 6;
 	req_access = list(19)
 	},
-/obj/effect/floor_decal/scglogo{
-	icon_state = "2,0"
-	},
 /obj/structure/bed/chair/comfy/blue,
+/obj/effect/floor_decal/scglogo{
+	tag = "icon-bottom-right";
+	icon_state = "bottom-right"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "zi" = (
@@ -11787,13 +11785,6 @@
 /obj/machinery/suit_storage_unit/atmos/alt,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
-"zj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "1,0";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
 "zl" = (
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -11923,10 +11914,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "Aj" = (
-/obj/effect/floor_decal/scglogo{
-	dir = 8;
-	icon_state = "1,1"
-	},
 /obj/structure/bed/chair{
 	dir = 1
 	},
@@ -12077,13 +12064,6 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aux_eva)
-"Bj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "1,2";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
 "Bn" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
@@ -12225,6 +12205,9 @@
 	dir = 6
 	},
 /obj/effect/overmap/ship/torch,
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ci" = (
@@ -12741,10 +12724,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aux_eva)
 "Fj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "2,0";
-	dir = 8
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -12879,10 +12858,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "Gj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "2,1";
-	dir = 8
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
@@ -13063,13 +13038,6 @@
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
-"Hj" = (
-/obj/effect/floor_decal/scglogo{
-	icon_state = "2,2";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
 "Hm" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -13213,6 +13181,9 @@
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -13769,6 +13740,10 @@
 /obj/machinery/computer/ship/navigation{
 	icon_state = "computer";
 	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -15781,6 +15756,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
+"UP" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled/dark,
+/area/bridge)
 "UT" = (
 /obj/structure/table/glass,
 /obj/structure/cable/green{
@@ -15952,6 +15936,17 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
+"VD" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge)
 "VG" = (
 /obj/structure/sign/warning/secure_area{
 	icon_state = "securearea";
@@ -16516,7 +16511,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/scglogo{
-	icon_state = "0,1"
+	tag = "icon-center-left";
+	icon_state = "center-left"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -25369,13 +25365,13 @@ aK
 aK
 eP
 hV
-HC
+UP
 jy
-lo
+fH
 lo
 II
-nI
-HC
+jy
+VD
 HX
 eP
 qO
@@ -30007,7 +30003,7 @@ TX
 Ti
 Zi
 hj
-zj
+hj
 Fj
 Oj
 TX
@@ -30410,9 +30406,9 @@ bz
 TX
 Vi
 cj
-oj
-Bj
-Hj
+hj
+hj
+hj
 Qj
 TX
 gk

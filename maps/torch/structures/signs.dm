@@ -52,7 +52,7 @@
 /obj/effect/floor_decal/scglogo
 	alpha = 230
 	icon = 'maps/torch/icons/obj/solgov_floor.dmi'
-	icon_state = "1,1"
+	icon_state = "center"
 
 /obj/structure/sign/solgov
 	name = "\improper SolGov Seal"
