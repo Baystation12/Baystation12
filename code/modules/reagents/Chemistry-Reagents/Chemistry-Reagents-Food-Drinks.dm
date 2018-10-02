@@ -523,6 +523,24 @@
 	glass_name = "lemon juice"
 	glass_desc = "Sour..."
 
+/datum/reagent/drink/juice/lemon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	//Attempt to spur the immunitary system to produce antibodies.
+	if(M.virus2.len)
+		for(var/ID in M.virus2)
+			var/datum/disease2/disease/V = M.virus2[ID]
+			if(prob(4))
+				M.antibodies |= V.antigen
+
+/datum/reagent/drink/juice/lemon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	//Attempt to spur the immunitary system to produce antibodies.
+	if(M.virus2.len)
+		for(var/ID in M.virus2)
+			var/datum/disease2/disease/V = M.virus2[ID]
+			if(prob(5))
+				M.antibodies |= V.antigen
+
 /datum/reagent/drink/juice/lime
 	name = "Lime Juice"
 	description = "The sweet-sour juice of limes."
@@ -538,6 +556,21 @@
 	if(alien == IS_DIONA)
 		return
 	M.adjustToxLoss(-0.5 * removed)
+	//Attempt to spur the immunitary system to produce antibodies.
+	if(M.virus2.len)
+		for(var/ID in M.virus2)
+			var/datum/disease2/disease/V = M.virus2[ID]
+			if(prob(4))
+				M.antibodies |= V.antigen
+
+/datum/reagent/drink/juice/lime/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	//Attempt to spur the immunitary system to produce antibodies.
+	if(M.virus2.len)
+		for(var/ID in M.virus2)
+			var/datum/disease2/disease/V = M.virus2[ID]
+			if(prob(5))
+				M.antibodies |= V.antigen
 
 /datum/reagent/drink/juice/orange
 	name = "Orange juice"
@@ -553,6 +586,21 @@
 	if(alien == IS_DIONA)
 		return
 	M.adjustOxyLoss(-2 * removed)
+	//Attempt to spur the immunitary system to produce antibodies.
+	if(M.virus2.len)
+		for(var/ID in M.virus2)
+			var/datum/disease2/disease/V = M.virus2[ID]
+			if(prob(4))
+				M.antibodies |= V.antigen
+
+/datum/reagent/drink/juice/orange/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	//Attempt to spur the immunitary system to produce antibodies.
+	if(M.virus2.len)
+		for(var/ID in M.virus2)
+			var/datum/disease2/disease/V = M.virus2[ID]
+			if(prob(5))
+				M.antibodies |= V.antigen
 
 /datum/reagent/toxin/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
 	name = "Poison Berry Juice"
