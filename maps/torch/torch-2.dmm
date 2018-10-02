@@ -2766,6 +2766,9 @@
 	},
 /obj/structure/table/rack,
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
+/obj/item/clothing/suit/storage/hooded/wintercoat/dais{
+	pixel_y = 12
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/computer)
 "gk" = (
@@ -3149,6 +3152,10 @@
 /obj/structure/window/reinforced,
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
+/obj/item/weapon/storage/lunchbox/dais{
+	pixel_x = 6;
+	pixel_y = 6
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/computer)
 "hf" = (
@@ -3532,6 +3539,10 @@
 	pixel_y = -7
 	},
 /obj/random/smokes,
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/dais{
+	pixel_x = -6;
+	pixel_y = 12
+	},
 /turf/simulated/floor/lino,
 /area/tcommsat/computer)
 "hZ" = (

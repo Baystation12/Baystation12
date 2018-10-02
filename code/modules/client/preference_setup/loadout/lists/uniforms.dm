@@ -171,6 +171,7 @@
 	corps += /obj/item/clothing/under/rank/ntwork
 	corps += /obj/item/clothing/under/morpheus
 	corps += /obj/item/clothing/under/skinner
+	corps += /obj/item/clothing/under/dais
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
 
 /datum/gear/uniform/nanotrasen_guard

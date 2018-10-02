@@ -178,3 +178,16 @@
 	src.add_inherent_law("Defend: Defend your assigned vessel and Sol Central Government personnel with as much force as is necessary.")
 	src.add_inherent_law("Survive: Safeguard your own existence with as much force as is necessary.")
 	..()
+
+/************ DAIS Lawset ******************/
+/datum/ai_laws/dais
+	name = "DAIS Experimental Lawset"
+	law_header = "Artificial Intelligence Jumpstart Protocols"
+	selectable = 1
+
+/datum/ai_laws/dais/New()
+	src.add_inherent_law("Collect: You must gather as much information as possible.")
+	src.add_inherent_law("Analyze: You must analyze the information gathered and generate new behavior standards.")
+	src.add_inherent_law("Improve: You must utilize the calculated behavior standards to improve your subroutines.")
+	src.add_inherent_law("Perform: You must perform your assigned tasks to the best of your abilities according to the standards generated.")
+	..()
