@@ -10,6 +10,7 @@ var/list/global/tank_gauge_cache = list()
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6
+	var/previous_gauge_pressure = null
 
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
@@ -89,7 +90,7 @@ var/list/global/tank_gauge_cache = list()
 		to_chat(user, "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>")
 
 
-/obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/tank/attackby(var/obj/item/weapon/W, var/mob/user)
 	..()
 	if (istype(loc, /obj/item/assembly))
 		icon = loc
@@ -180,8 +181,6 @@ var/list/global/tank_gauge_cache = list()
 				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
 		add_fingerprint(user)
 
-
-
 /obj/item/weapon/tank/attack_self(mob/user as mob)
 	add_fingerprint(user)
 	if (!air_contents)
@@ -191,7 +190,6 @@ var/list/global/tank_gauge_cache = list()
 // There's GOT to be a better way to do this
 	if (proxyassembly.assembly)
 		proxyassembly.assembly.attack_self(user)
-
 
 /obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/mob/living/carbon/location = null
@@ -295,15 +293,16 @@ var/list/global/tank_gauge_cache = list()
 				to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
 
 /obj/item/weapon/tank/remove_air(amount)
-	return air_contents.remove(amount)
+	. = air_contents.remove(amount)
+	queue_icon_update()
 
 /obj/item/weapon/tank/return_air()
 	return air_contents
 
 /obj/item/weapon/tank/assume_air(datum/gas_mixture/giver)
 	air_contents.merge(giver)
-
 	check_status()
+	queue_icon_update()
 	return 1
 
 /obj/item/weapon/tank/proc/remove_air_volume(volume_to_return)
@@ -321,37 +320,36 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/weapon/tank/Process()
 	//Allow for reactions
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
-	update_icon()
 	check_status()
 
 /obj/item/weapon/tank/update_icon(var/override)
-	if((atom_flags & ATOM_FLAG_INITIALIZED) && istype(loc, /obj/) && !istype(loc, /obj/item/clothing/suit/) && !override) //So we don't eat up our tick. Every tick, when we're not actually in play.
-		return
-	overlays.Cut()
-	if(proxyassembly.assembly || wired)
-		overlays += image(icon,"bomb_assembly")
+
+	var/list/overlays_to_add
+	if(override && (proxyassembly.assembly || wired))
+		LAZYADD(overlays_to_add, image(icon,"bomb_assembly"))
 		if(proxyassembly.assembly)
 			var/image/bombthing = image(proxyassembly.assembly.icon, proxyassembly.assembly.icon_state)
 			bombthing.overlays |= proxyassembly.assembly.overlays
 			bombthing.pixel_y = -1
 			bombthing.pixel_x = -3
-			overlays += bombthing
+			LAZYADD(overlays_to_add, bombthing)
 
-	if(!gauge_icon)
-		return
+	if(gauge_icon)
+		var/gauge_pressure = 0
+		if(air_contents)
+			gauge_pressure = air_contents.return_pressure()
+			if(gauge_pressure > TANK_IDEAL_PRESSURE)
+				gauge_pressure = -1
+			else
+				gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
+		if(override || (previous_gauge_pressure != gauge_pressure))
+			var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
+			if(!tank_gauge_cache[indicator])
+				tank_gauge_cache[indicator] = image(icon, indicator)
+			LAZYADD(overlays_to_add, tank_gauge_cache[indicator])
+		previous_gauge_pressure = gauge_pressure
 
-	var/gauge_pressure = 0
-	if(air_contents)
-		gauge_pressure = air_contents.return_pressure()
-		if(gauge_pressure > TANK_IDEAL_PRESSURE)
-			gauge_pressure = -1
-		else
-			gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
-
-	var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
-	if(!tank_gauge_cache[indicator])
-		tank_gauge_cache[indicator] = image(icon, indicator)
-	overlays += tank_gauge_cache[indicator]
+	overlays = overlays_to_add
 
 //Handle exploding, leaking, and rupturing of the tank
 /obj/item/weapon/tank/proc/check_status()
