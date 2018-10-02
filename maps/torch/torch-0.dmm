@@ -11795,12 +11795,18 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/toxins)
 "CH" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/multi_tile/glass/research{
-	id_tag = "";
-	name = "Sublimation Chamber";
-	req_access = list(204)
+/obj/machinery/door/window/southright{
+	name = "Test Chamber";
+	req_access = list(7);
+	req_one_access = newlist()
 	},
+/obj/machinery/door/window/southright{
+	dir = 1;
+	name = "Test Chamber";
+	req_access = list(7);
+	req_one_access = newlist()
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "CJ" = (
@@ -11990,7 +11996,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "Du" = (
 /obj/item/weapon/rig/hazmat/equipped,
@@ -12264,11 +12270,8 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "El" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/item/device/reagent_scanner,
-/obj/item/device/mass_spectrometer/adv,
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/gloves/sm_proof,
+/turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "Em" = (
 /turf/simulated/wall/prepainted,
@@ -12388,7 +12391,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/white,
+/obj/machinery/atmospherics/portables_connector,
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "EL" = (
 /obj/structure/cable{
@@ -12433,11 +12438,13 @@
 /area/shuttle/petrov/equipment)
 "Ff" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/binary/pump{
-	dir = 1
-	},
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/machinery/computer/phoron_desublimer_control{
+	icon_state = "computer";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
@@ -13337,7 +13344,6 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "IR" = (
-/obj/machinery/portable_atmospherics/canister,
 /obj/machinery/light_switch{
 	pixel_x = -6;
 	pixel_y = 24
@@ -13347,6 +13353,8 @@
 	pixel_x = -24;
 	pixel_y = 0
 	},
+/obj/structure/closet/radiation,
+/obj/item/clothing/gloves/sm_proof,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "IU" = (
@@ -13371,13 +13379,18 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/turf/simulated/floor/tiled/white,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "Jc" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/fore)
+"Jd" = (
+/obj/machinery/phoron_desublimer/furnace,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "Jf" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -14557,6 +14570,10 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/eva)
+"NA" = (
+/obj/machinery/phoron_desublimer/resonant_chamber,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "NC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -14702,6 +14719,11 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"Oe" = (
+/obj/item/weapon/material/shard/supermatter,
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "Of" = (
 /obj/machinery/door/airlock/research{
 	id_tag = null;
@@ -14793,15 +14815,13 @@
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
 "OC" = (
-/obj/structure/table/standard,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 21
 	},
-/turf/simulated/floor/tiled/white,
+/obj/machinery/portable_atmospherics/canister/phoron,
+/turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "OD" = (
 /obj/machinery/door/firedoor/border_only,
@@ -15438,6 +15458,8 @@
 /area/maintenance/fifthdeck/fore)
 "Rc" = (
 /obj/machinery/door/firedoor/border_only,
+/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/paint/silver,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "Rd" = (
@@ -15590,6 +15612,11 @@
 /obj/machinery/artifact_scanpad,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
+"RP" = (
+/obj/structure/closet/radiation,
+/obj/item/clothing/gloves/sm_proof,
+/turf/simulated/floor/plating,
+/area/shuttle/petrov/isolation)
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/infirmary)
@@ -15789,6 +15816,10 @@
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
+"SE" = (
+/obj/machinery/phoron_desublimer/vessel,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "SG" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
@@ -16767,7 +16798,6 @@
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Wy" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 1;
 	external_pressure_bound = 0;
@@ -16828,7 +16858,7 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "WG" = (
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/white/monotile,
+/turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
 "WH" = (
 /obj/machinery/suit_storage_unit/mining,
@@ -17101,8 +17131,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/maint)
 "XQ" = (
-/obj/machinery/atmospherics/portables_connector,
-/turf/simulated/floor/tiled/white,
+/obj/machinery/atmospherics/binary/pump{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "XS" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -44902,7 +44934,7 @@ XQ
 Ff
 Ng
 Wy
-Dv
+SE
 XG
 Yk
 aa
@@ -45104,7 +45136,7 @@ LI
 WG
 CH
 Dv
-Dv
+Oe
 XG
 Yk
 aa
@@ -45306,7 +45338,7 @@ YJ
 WG
 Rc
 Ht
-Dv
+Jd
 XG
 Yk
 aa
@@ -45508,7 +45540,7 @@ IY
 Tc
 Ng
 RB
-Dv
+NA
 XG
 Yk
 aa
@@ -48538,7 +48570,7 @@ Wl
 za
 za
 Ax
-za
+RP
 fF
 aa
 aa

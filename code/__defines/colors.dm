@@ -115,3 +115,12 @@
 #define COLOR_OCEAN "#99f5ff"
 
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))
+
+// Used by supermatter
+#define COLOR_SM_DEFAULT       "#4bff32"
+#define COLOR_SM_TWO           "#9bff32"
+#define COLOR_SM_THREE         "#d9ff32"
+#define COLOR_SM_FOUR          "#fff832"
+#define COLOR_SM_FIVE          "#ffba32"
+#define COLOR_SM_SIX           "#ff7b32"
+#define COLOR_SM_SEVEN         "#ff3032"

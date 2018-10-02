@@ -143,3 +143,11 @@
 	permeability_coefficient = 0.03
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 
+/obj/item/clothing/gloves/sm_proof
+	desc = "These gloves are weaved with phoron threads, protecting the user from contact with supermatter."
+	name = "phoroweave gloves"
+	icon_state = "sm_proof"
+	item_state = "sm_proof"
+	permeability_coefficient = 0.9
+	siemens_coefficient = 0.9
+	item_flags = ITEM_FLAG_SMPROOF

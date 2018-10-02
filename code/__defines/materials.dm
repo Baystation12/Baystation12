@@ -49,6 +49,7 @@
 #define MATERIAL_CARDBOARD               "cardboard"
 #define MATERIAL_CLOTH                   "cloth"
 #define MATERIAL_CARPET                  "carpet"
+#define MATERIAL_SUPERMATTER             "supermatter"
 
 #define DEFAULT_TABLE_MATERIAL MATERIAL_PLASTIC
 #define DEFAULT_WALL_MATERIAL  MATERIAL_STEEL
@@ -70,3 +71,8 @@
 #define MATERIAL_PADDING    0x4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
+#define MIN_SUPERMATTER_LEVEL 1
+#define MAX_SUPERMATTER_LEVEL 7
+#define SUPERMATTER_GROWTH_MAX 50
+#define SUPERMATTER_GROWTH_MULT 1.2
