@@ -8526,12 +8526,11 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/bluespace)
 "rP" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/bluespace)
 "rQ" = (
