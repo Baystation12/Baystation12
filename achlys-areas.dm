@@ -45,9 +45,22 @@
 	name = "wide open areas"
 /area/achlys/three
 	sound_env = HALLWAY
+	name = "long hallways"
 /area/achlys/four
 	sound_env = SMALL_ENCLOSED
+	name = "cargo bays and hangars"
 /area/achlys/five
 	sound_env = LARGE_SOFTFLOOR
 	name = "carpeted areas"
-
+/area/achlys/two
+	sound_env = SPACE
+	name = "enclosed rooms"
+/area/achlys/six
+	sound_env = HANGAR
+	name = "medium sized rooms"
+/area/achlys/seven
+	sound_env = STONE_CORRIDOR
+	name = "bridge hallway"
+/area/achlys/eight
+	sound_env = ALLEY
+	name = "spacious hallways"
