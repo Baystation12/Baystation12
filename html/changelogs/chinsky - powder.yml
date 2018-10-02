@@ -1,8 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Various changes to gunshot residue (GSR) forensic thingamabob."
-  - rscadd: "Shooting someone pointblank will now leave GSR on the targeted organ, and burn them a bit. Just like in those mystery novels!"
-  - rscadd: "You now need to aim at hand to take GSR from THAT hand, not from both. You can take GSR from other bodyparts by aiming at them too."
-  - rscadd: "Gun actually gets GSR too now."
-  - rscadd: "Guns have a chance to leave GSR on the ground when fired."
