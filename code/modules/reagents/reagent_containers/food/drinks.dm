@@ -399,3 +399,9 @@
 	filling_states = "50;70;90;100"
 	base_name = "tall cup"
 	base_icon = "coffeecup_tall"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/dais
+	name = "\improper DAIS coffee cup"
+	desc = "A coffee cup imprinted with the stylish logo of Deimos Advanced Information Systems."
+	icon_state = "coffeecup_dais"
+	base_name = "DAIS cup"

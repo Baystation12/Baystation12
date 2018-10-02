@@ -59,7 +59,7 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "corporate labcoat"
-	desc = "A suit that protects against minor chemical spills. Has a red stripe on the shoulder and red trim on the sleeves, denoting it as a corporate labcoat."
+	desc = "A suit that protects against minor chemical spills. Has a green stripe on the shoulder and green trim on the sleeves, denoting it as a corporate labcoat."
 	icon_state = "labcoat_TL_open"
 	icon_open = "labcoat_TL_open"
 	icon_closed = "labcoat_TL"
@@ -105,3 +105,13 @@
 	icon_closed = "labcoat_xy"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
 	species_restricted = list(SPECIES_IPC)
+
+/obj/item/clothing/suit/storage/toggle/labcoat/dais
+	name = "\improper DAIS labcoat"
+	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
+	trim and the pockets are reinforced to hold tools. It seems to have an insulated material woven in to prevent static shocks."
+	icon_state = "labcoat_dais"
+	icon_open = "labcoat_dais_open"
+	icon_closed = "labcoat_dais"
+	armor = list(melee = 5, bullet = 0, laser = 0,energy = 5, bomb = 0, bio = 0, rad = 0)//They don't need to protect against the environment very much.
+	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.

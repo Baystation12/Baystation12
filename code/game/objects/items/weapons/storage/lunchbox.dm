@@ -51,6 +51,12 @@
 	item_state = "toolbox_blue"
 	desc = "A little lunchbox. This one is branded with the Nanotrasen logo!"
 
+/obj/item/weapon/storage/lunchbox/dais
+	name = "\improper DAIS brand lunchbox"
+	icon_state = "lunchbox_dais"
+	item_state = "toolbox_blue"
+	desc = "A little lunchbox. This one is branded with the Deimos Advanced Information Systems logo!"
+
 /obj/item/weapon/storage/lunchbox/nt/filled
 	filled = TRUE
 

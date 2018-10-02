@@ -1026,7 +1026,8 @@
 	/obj/item/weapon/storage/lunchbox/mars = 3,
 	/obj/item/weapon/storage/lunchbox/cti = 3,
 	/obj/item/weapon/storage/lunchbox/nymph = 3,
-	/obj/item/weapon/storage/lunchbox/syndicate = 3)
+	/obj/item/weapon/storage/lunchbox/syndicate = 3,
+	/obj/item/weapon/storage/lunchbox/dais = 3)
 
 
 	contraband = list(/obj/item/weapon/material/knife/butch = 2)
