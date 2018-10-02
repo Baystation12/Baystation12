@@ -262,18 +262,18 @@
 	icon_state = "osama-helmet_obj"
 		
 /obj/item/clothing/head/helmet/odst/donator/liam_gallagher/verb/Toggle_VISR01()
-set category = "Helmet"
-set name = "Toggle VISR"
-on = !on
-update_icon()
-if (on)
-	item_state = "osama-helmet_worn"
-	icon_state = "osama-helmet_obj"
-else
-	item_state = "osama-helmet-open_worn"
-	icon_state = "osama-helmet_obj"
-	update_clothing_icon()
-. = ..()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "osama-helmet_worn"
+		icon_state = "osama-helmet_obj"
+	else
+		item_state = "osama-helmet-open_worn"
+		icon_state = "osama-helmet_obj"
+		update_clothing_icon()
+	. = ..()
 	
 /obj/item/clothing/suit/armor/special/odst/donator/liam_gallagher
 	name = "ODST EOD Suit"
@@ -287,18 +287,18 @@ else
 	icon_state = "ragnarok-helmet_obj"
 	
 /obj/item/clothing/head/helmet/odst/donator/ragnarok/verb/Toggle_VISR01()
-set category = "Helmet"
-set name = "Toggle VISR"
-on = !on
-update_icon()
-if (on)
-	item_state = "ragnarok-helmet_worn"
-	icon_state = "ragnarok-helmet_obj"
-else
-	item_state = "ragnarok-helmet-open_worn"
-	icon_state = "ragnarok-helmet_obj"
-	update_clothing_icon()
-. = ..()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "ragnarok-helmet_worn"
+		icon_state = "ragnarok-helmet_obj"
+	else
+		item_state = "ragnarok-helmet-open_worn"
+		icon_state = "ragnarok-helmet_obj"
+		update_clothing_icon()
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/ragnarok
 	name = "Bishop's ODST Armour"
@@ -312,18 +312,18 @@ else
 	icon_state = "amy-helmet_obj"	
 	
 /obj/item/clothing/head/helmet/odst/donator/winterume/verb/Toggle_VISR01()
-set category = "Helmet"
-set name = "Toggle VISR"
-on = !on
-update_icon()
-if (on)
-	item_state = "amy-helmet_worn"
-	icon_state = "amy-helmet_obj"
-else
-	item_state = "amy-helmet-open_worn"
-	icon_state = "amy-helmet_obj"
-	update_clothing_icon()
-. = ..()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "amy-helmet_worn"
+		icon_state = "amy-helmet_obj"
+	else
+		item_state = "amy-helmet-open_worn"
+		icon_state = "amy-helmet_obj"
+		update_clothing_icon()
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/winterume
 	name = "Rose's Recon Armor"
@@ -337,18 +337,18 @@ else
 	icon_state = "eonoc-helmet_obj"	
 	
 /obj/item/clothing/head/helmet/odst/donator/eonoc/verb/Toggle_VISR01()
-set category = "Helmet"
-set name = "Toggle VISR"
-on = !on
-update_icon()
-if (on)
-	item_state = "eonoc-helmet_worn"
-	icon_state = "eonoc-helmet_obj"
-else
-	item_state = "eonoc-helmet-open_worn"
-	icon_state = "eonoc-helmet_obj"
-	update_clothing_icon()
-. = ..()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "eonoc-helmet_worn"
+		icon_state = "eonoc-helmet_obj"
+	else
+		item_state = "eonoc-helmet-open_worn"
+		icon_state = "eonoc-helmet_obj"
+		update_clothing_icon()
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/odst/donator/eonoc
 	name = "Barnabus's ODST Armor"
