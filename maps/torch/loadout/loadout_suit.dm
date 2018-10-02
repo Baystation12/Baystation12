@@ -50,6 +50,14 @@
 	display_name = "labcoat, NanoTrasen"
 	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant)
 
+/datum/gear/suit/labcoat_dais
+	display_name = "labcoat, DAIS"
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/scientist, /datum/job/rd)
+
+/datum/gear/suit/wintercoat_dais
+	display_name = "winter coat, DAIS"
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/scientist, /datum/job/rd)
+
 /datum/gear/suit/labcoat_nanotrasen_rd
 	display_name = "labcoat, NanoTrasen, Research Director"
 	allowed_roles = list(/datum/job/rd)

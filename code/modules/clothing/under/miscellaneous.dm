@@ -583,6 +583,12 @@
 	icon_state = "wardt"
 	worn_state = "wardt"
 
+/obj/item/clothing/under/dais
+	name = "\improper Deimos Advanced Information Systems uniform"
+	desc = "The uniform of Deimos Advanced Information Systems, an IT company."
+	icon_state = "dais"
+	worn_state = "dais"
+	
 /obj/item/clothing/under/mbill
 	name = "\improper Major Bill's uniform"
 	desc = "A uniform belonging to Major Bill's Transportation, a major shipping company."
