@@ -239,6 +239,12 @@
 		play_fire_sound(targ_overmap,target_turf)
 		explosion(target_turf,4,5,6,20)
 
+/obj/machinery/overmap_weapon_console/mac/orbital_bombard/attackby(var/obj/item/weapon/W, var/mob/user)
+	var/obj/item/weapon/laser_designator/designator = W
+	if(istype(W))
+		designator.creator = src
+		to_chat(user,"Device linked to console. Designated targets will now be relayed for firing.")
+
 //MAC OVERMAP PROJECTILE//
 /obj/item/projectile/overmap/mac
 	name = "MAC Slug"

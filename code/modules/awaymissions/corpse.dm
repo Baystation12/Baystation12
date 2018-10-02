@@ -101,7 +101,16 @@
 	corpseidjob = "Operative"
 	corpseidaccess = "Syndicate"
 
-
+/obj/effect/landmark/corpse/ONIGUARD
+	name = "ONI Security Guard"
+	corpseuniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
+	corpsesuit = /obj/item/clothing/suit/storage/oni_guard
+	corpseshoes = /obj/item/clothing/shoes/oni_guard
+	corpsegloves = /obj/item/clothing/gloves/thick/oni_guard
+	corpsehelmet = /obj/item/clothing/head/helmet/oni_guard
+	corpseid = 1
+	corpseidjob = "ONI Security Guard"
+	corpseidaccess = "Syndicate"
 
 /obj/effect/landmark/corpse/syndicatecommando
 	name = "Syndicate Commando"

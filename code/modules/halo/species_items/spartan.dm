@@ -1,35 +1,38 @@
 
 /mob/living/carbon/human/spartan/New(var/new_loc)
 	..(new_loc,"Spartan")
-	if(gender == "male")
-		name = pick(GLOB.first_names_male)
-	else
-		name = pick(GLOB.first_names_female)
-	name += " "
-	name += pick(GLOB.last_names)
+
+	name = species.get_random_name()
 	real_name = name
 
-
-
 /obj/item/organ/external/chest/augmented
+	gendered_icon = 1
 	min_broken_damage = 50
 
 /obj/item/organ/external/groin/augmented
+	gendered_icon = 1
 	min_broken_damage = 50
 
 /obj/item/organ/external/head/augmented
+	gendered_icon = 1
 	min_broken_damage = 50
+	eye_icon = "eyes_s"
+	eye_icon_location = 'code/modules/halo/icons/species/r_Augmented_Human.dmi'
 
 /obj/item/organ/external/arm/augmented
+	gendered_icon = 1
 	min_broken_damage = 50 //Needs 20 more damage to break
 
 /obj/item/organ/external/arm/right/augmented
+	gendered_icon = 1
 	min_broken_damage = 50
 
 /obj/item/organ/external/leg/augmented
+	gendered_icon = 1
 	min_broken_damage = 50
 
 /obj/item/organ/external/leg/right/augmented
+	gendered_icon = 1
 	min_broken_damage = 50
 
 /obj/item/organ/external/hand/augmented
@@ -79,3 +82,14 @@
 	max_damage = 60
 	min_bruised_damage = 30 //Considerably tougher
 	min_broken_damage = 45
+
+/decl/hierarchy/outfit/spartan_two
+	name = "Spartan II"
+	uniform = /obj/item/clothing/under/spartan_internal
+	suit = /obj/item/clothing/suit/armor/special/spartan
+	l_pocket = /obj/item/weapon/gun/projectile/m6d_magnum
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	head = /obj/item/clothing/head/helmet/spartan
+	l_hand = /obj/item/weapon/gun/projectile/ma5b_ar
+	l_ear = /obj/item/device/radio/headset/spartan
+	suit_store = /obj/item/weapon/tank/emergency/oxygen/double

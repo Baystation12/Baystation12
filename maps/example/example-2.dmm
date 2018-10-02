@@ -16,16 +16,18 @@
 "p" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "q" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "r" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/air,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"s" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"t" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/empty,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"u" = (/obj/machinery/light_switch{pixel_x = -25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"v" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"w" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"x" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"y" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"z" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"A" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"B" = (/obj/effect/lobby_image,/turf/space,/area/space)
+"s" = (/obj/effect/landmark/start,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"t" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"u" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/empty,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"v" = (/obj/machinery/light_switch{pixel_x = -25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"w" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"x" = (/obj/effect/landmark/start/example,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"y" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"z" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"A" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"B" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"C" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"D" = (/obj/effect/lobby_image,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaabaaacccccccccccccccaaaaaa
@@ -36,12 +38,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaacidddjfffdddddkklmaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaacddddddddddndoccccaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaacddddddddddpqrcaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaacdddddddddddddcaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaacddddddddddsqtcaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaacudddddddddvddcaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaacidddddddddddwcaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaacxddddddddddddcaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaacyddddddddddddcaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaczddAdddddAdddcaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacdddsddddddtqucaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacvdddddddddwddcaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaciddddxddddddycaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaczddddddddddddcaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacAddddddddddddcaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacBddCdddddCdddcaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaacccccccccccccccaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -59,5 +61,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-Baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

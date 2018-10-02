@@ -70,6 +70,10 @@
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/weapon/cell/hyper
 
+/obj/machinery/power/apc/infinite
+	cell_type = /obj/item/weapon/cell/infinite
+
+
 /obj/machinery/power/apc
 	name = "area power controller"
 	desc = "A control terminal for the area electrical systems."

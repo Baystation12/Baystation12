@@ -10,6 +10,7 @@ var/list/whitelist = list()
 /proc/load_whitelist()
 	var/list/whitelist_base = file2list(WHITELISTFILE)
 	if(!whitelist_base.len)	whitelist = null
+	whitelist = list()
 	for(var/value in whitelist_base) //Added some code to handle jobs.
 		if(isnull(value) || value == "" || value == " ")
 			continue
@@ -54,6 +55,7 @@ var/list/whitelist = list()
 		world.log << dbcon_old.ErrorMsg()
 		return 0
 	else
+		alien_whitelist = list()
 		while(query.NextRow())
 			var/list/row = query.GetRowData()
 			if(alien_whitelist[row["ckey"]])

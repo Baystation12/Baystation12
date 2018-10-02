@@ -5,6 +5,14 @@
 	if(!O)
 		return 0
 
+	//check if it's a container
+	if (istype(O, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = O
+		for(var/obj/I in S.contents)
+			if(!check_tradeable(I))
+				return 0
+		return 1
+
 	if(O.trader_category && O.trader_category in trade_categories_by_name)
 		return 1
 
@@ -30,6 +38,14 @@
 		//note: spawn_trade_item() will slightly randomise the sale value to make it different per NPC
 		spawn_trade_item(T, 1)
 		return T.value
+
+	//check if it's a container
+	if (istype(O, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = O
+		var/total_value = 0
+		for(var/obj/I in S.contents)
+			total_value += get_trade_value(I)
+		return total_value
 
 	//try and find it via the global controller
 	T = trade_controller.trade_items_by_type[O.type]

@@ -20,7 +20,7 @@
 	icon_state = "helmet_novisor"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
-	armor = list(melee = 50, bullet = 25, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -28,6 +28,13 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
+
+/obj/item/clothing/head/helmet/marine/medic
+	name = "CH252 Helmet Medic"
+	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	item_state = "CH252 Helmet Medic"
+	icon_state = "helmet_novisor_medic"
+	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/visor
 	name = "CH252-V Helmet"
@@ -43,14 +50,25 @@
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "armor"
-	icon_state = "M52B Body Armor"
+	item_state = "M52B Body Armor regular"
+	icon_state = "M52B Body Armor regular"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 35, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/medic
+	name = "M52B Body Armor Medic"
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "M52B Body Armor Medic"
+	icon_state = "M52B Body Armor Medic"
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
@@ -140,6 +158,20 @@
 /obj/item/weapon/card/id/unsc
 	name = "identification card"
 	desc = "An identification card worn by members of the UNSC."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
+/obj/item/weapon/card/id/odst
+	name = "ODST ID Badge"
+	desc = "An identification card worn by members of the 113th Shock Troops Division."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
+/obj/item/weapon/card/id/oni
+	name = "ONI ID Badge"
+	desc = "An identification card worn by members of the Office Of Naval Intelligence."
 	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
 	icon_state = "id"
 	item_state = "card-id"

@@ -4,7 +4,7 @@
 	desc = "A pulsating mass of flesh."
 	icon = 'flood_bio.dmi'
 	icon_state = "biomass1"
-	density = 1
+	density = 0
 	opacity = 1
 	anchored = 1
 	var/datum/flood_spawner/flood_spawner

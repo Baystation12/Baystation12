@@ -1,6 +1,6 @@
 #define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan)
-#define LUNGE_DELAY 2 SECONDS
+#define LUNGE_DELAY 3 SECONDS
 
 /obj/effect/esword_path
 	name = "displaced air"
@@ -19,8 +19,29 @@
 	active_throwforce = 12
 	edge = 0
 	sharp = 0
+	var/failsafe = 1
 
 	var/next_leapwhen
+
+/obj/item/weapon/melee/energy/elite_sword/New()
+	. = ..()
+	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
+
+/obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
+	set name = "Enable weapon failsafe"
+	set category = "IC"
+	failsafe = 1
+	to_chat(usr,"<span class='info'>WARNING! You enable [src]'s failsafe. [src] will now self destruct if you drop it while active.</span>")
+	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
+	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
+
+/obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe()
+	set name = "Disable weapon failsafe"
+	set category = "IC"
+	failsafe = 0
+	to_chat(usr,"<span class='info'>You disable [src]'s failsafe. [src] will no longer self destruct if you drop it.</span>")
+	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
+	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
 
 /obj/item/weapon/melee/energy/elite_sword/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
 	if(isnull(mob) || !istype(mob))
@@ -103,8 +124,23 @@
 /obj/item/weapon/melee/energy/elite_sword/dropped(var/mob/user)
 	..()
 	if(!istype(loc,/mob))
-		deactivate(user)
-		visible_message("<span class='notice'>\The [src] disappears in a flash of light.</span>")
+		if(w_class == ITEM_SIZE_HUGE)
+			if(failsafe)
+				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
+				flick("blade burnout",src)
+				spawn(5)
+					var/mob/living/M = src.loc
+					if(istype(M))
+						//burn whoever tried to pick us up
+						M.apply_damage(75, BURN, def_zone = pick(BP_L_HAND, BP_R_HAND))
+					else
+						//burn everyone nearby
+						for(var/mob/living/L in range(0,src))
+							L.apply_damage(15, BURN)
+					qdel(src)
+			else
+				deactivate(user)
+				visible_message("<span class='notice'>\The [src] disappears in a flash of light.</span>")
 
 /obj/item/weapon/melee/energy/elite_sword/attack(var/mob/m,var/mob/user)
 	if(ismob(m))

@@ -1,6 +1,6 @@
 
 /obj/vehicles/ghost
-	name = "Type-32 Rapid Assault Vehicle"
+	name = "Type-32 \"Ghost\" Rapid Assault Vehicle"
 	desc = ""
 
 	bound_height = 32

@@ -196,7 +196,7 @@
 
 /obj/vehicles/proc/exit_vehicle(var/mob/user)
 
-	if(!(user in occupants) || !is_atom_adjacent(user))
+	if(!(user in occupants) || !is_atom_adjacent(user) || user.incapacitated())
 		return
 	occupants -= user
 	contents -= user
@@ -209,7 +209,7 @@
 	set src in view(1)
 
 	var/mob/living/user = usr
-	if(!istype(user) || !is_atom_adjacent(user))
+	if(!istype(user) || !is_atom_adjacent(user) || user.incapacitated())
 		return
 	var/player_pos_choice = input(user,"Enter which position?","Vehicle Entry Position Select","Cancel") in ALL_VEHICLE_POSITIONS + list("Cancel")
 	if(player_pos_choice == "Cancel")
@@ -283,7 +283,7 @@
 	set src in view(1)
 
 	var/mob/user = usr
-	if(!istype(user))
+	if(!istype(user) || user.incapacitated())
 		return
 
 	var/list/cargo_list_names = list()
@@ -321,7 +321,7 @@
 	set src in view(1)
 
 	var/mob/puller = usr
-	if(!istype(puller))
+	if(!istype(puller) || puller.incapacitated())
 		return
 
 	var/list/all_viable_occupants = list()

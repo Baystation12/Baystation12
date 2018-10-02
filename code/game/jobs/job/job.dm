@@ -41,6 +41,9 @@
 	var/spawn_faction
 	var/is_whitelisted = 0
 	var/spawnpoint_override = null //If set: This will override player-chosen spawnpoints. Text string of spawnpoint's display name.
+	var/list/blacklisted_species = list()		//job cannot be filled by these species
+	var/list/whitelisted_species = list()		//job can only be filled by these species
+	var/open_slot_on_death = 0
 
 /datum/job/New()
 	..()

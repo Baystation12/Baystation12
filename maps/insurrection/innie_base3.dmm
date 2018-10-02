@@ -381,7 +381,8 @@
 "hq" = (/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/asteroid_base/north_airlock_1)
 "hr" = (/obj/vehicles/air/pelican/innie{tag = "icon-base (EAST)"; icon_state = "base"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/north_airlock_1)
 "hs" = (/obj/vehicles/air/pelican/innie{tag = "icon-base (WEST)"; icon_state = "base"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/north_airlock_1)
-"ht" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/asteroid_base/north_airlock_1)
+"ht" = (/obj/machinery/telecomms/relay/long_range_planetary{tag = "icon-default"; icon_state = ""},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_1)
+"hu" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/asteroid_base/north_airlock_1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -433,5 +434,5 @@ eheheheheieAeieieieieiejhjhkeieieihlekejejejejejfcfcfcfceMeMfcfcfcfcfcfcfceMeMfc
 eheheheheiejejejejejeAhmeWgFejejejejhnhoejejejejeLfceMeMfcfcfcfcfcfcfcfcfcfceMfcfcfceLfceMgnhpeMeGeV
 eheheheheieieieieieieiejejeAeieieieiekejhcejejejfceMeMfcfcfcfcfcfcfcfcgtfcfcfcfcfcfcfcfceMfcfceMeGeV
 eheheheheheheheheheheieieieieiehehehekejejejejejfcfcfcfcfchqhrfcfcfceMeMeMfchsfcfchqfcfceMfceMeMeGeV
-ehehehehehehehehehehehehehehehehehehekekekekekekeGeGeGgNeGeGeGeGeGeGeGeGeGeGeGhteGeGeGeGeGeGeGeGeGeV
+htehehehehehehehehehehehehehehehehehekekekekekekeGeGeGgNeGeGeGeGeGeGeGeGeGeGeGhueGeGeGeGeGeGeGeGeGeV
 "}

@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	action_button_name = "Toggle Night Vision"
 	var/linked_glasses
 	var/mob/living/carbon/human/u
+	flags_inv = null
 
 /obj/item/clothing/head/helmet/kigyar/proc/try_equip_NV()
 	if(u.equip_to_slot_if_possible(new /obj/item/clothing/glasses/kigyarNV,slot_glasses))

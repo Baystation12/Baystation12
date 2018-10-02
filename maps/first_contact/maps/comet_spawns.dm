@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(innie_crew_spawns)
 
 /datum/spawnpoint/innie_crew
 	display_name = "Innie Crew"
-	restrict_job = list("Innie Ship Crew","Innie Ship Captain")
+	restrict_job = list("Insurrectionist Ship Crew","Insurrectionist Ship Captain")
 
 /datum/spawnpoint/innie_crew/New()
 	..()

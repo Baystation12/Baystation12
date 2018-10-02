@@ -17,8 +17,8 @@
 	invisibility = 101
 
 /obj/item/projectile/flood_pod_onmap/on_impact(var/atom/impacted)
-	var/type_to_spawn = pick(list(/obj/structure/biomass/medium))//No sprites for large, so let's not spawn them.//,/obj/structure/biomass/large))
-	var/obj/spawned = new type_to_spawn
+	var/type_to_spawn = pick(list(/obj/structure/biomass/medium,/obj/structure/biomass))//No sprites for large, so let's not spawn them.//,/obj/structure/biomass/large))
+	var/obj/spawned = new type_to_spawn (loc)
 	spawned.loc = impacted.loc
 	qdel(src)
 	return 1

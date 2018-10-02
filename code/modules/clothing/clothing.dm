@@ -574,7 +574,7 @@ BLIND     // can't see anything
 	..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
+	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil,/obj/item/weapon/material/knife/combat_knife, /obj/item/weapon/material/hatchet/tacknife)))
 		if(holding)
 			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
 			return
@@ -631,7 +631,7 @@ BLIND     // can't see anything
 
 	if(item_state_slots && item_state_slots[slot])
 		ret.icon_state = item_state_slots[slot]
-	else
+	else if(!item_state)
 		ret.icon_state = icon_state
 	return ret
 
