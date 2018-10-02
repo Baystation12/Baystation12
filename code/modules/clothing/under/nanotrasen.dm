@@ -2,7 +2,7 @@
 
 /obj/item/clothing/under/rank/guard
 	name = "corporate security uniform"
-	desc = "A durable uniform worn by Torch, LLC security."
+	desc = "A durable uniform worn by Torch, Ltd. security."
 	icon_state = "guard"
 	item_state = "w_suit"
 	worn_state = "guard"
@@ -39,7 +39,7 @@
 
 /obj/item/clothing/under/rank/scientist/executive
 	name = "executive polo and pants"
-	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Torch, LLC higher-up."
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Torch, Ltd. higher-up."
 	icon_state = "smockexec"
 	worn_state = "smockexec"
 	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec)
