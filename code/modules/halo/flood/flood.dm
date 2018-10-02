@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "static"
 	icon_living = "static"
 	icon_dead = "dead"
-	passflags = PASSTABLE
+	pass_flags = PASSTABLE
 	//
 	move_to_delay = 15
 	health = 1
