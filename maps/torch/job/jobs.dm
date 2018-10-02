@@ -1102,11 +1102,10 @@
 		                SKILL_MEDICAL       = SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT)
 
-	max_skill = list(   SKILL_CONSTRUCTION  = SKILL_MAX,
-	                    SKILL_ELECTRICAL    = SKILL_MAX,
+	max_skill = list(   SKILL_MEDICAL     	= SKILL_MAX,
+	                    SKILL_ANATOMY    	= SKILL_MAX,
 	                    SKILL_DEVICES       = SKILL_MAX,
-	                    SKILL_COMPUTER      = SKILL_MAX,
-	                    SKILL_MECH      	= SKILL_MAX)
+	                    SKILL_COMPUTER      = SKILL_MAX)
 	skill_points = 32
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 	minimal_access = list()
