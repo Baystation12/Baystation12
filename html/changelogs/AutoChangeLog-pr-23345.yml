@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - experiment: "We are conducting some stability testing. You may notice issues with how objects below you, on other z levels, are rendered: this is expected."
