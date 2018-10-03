@@ -10,36 +10,24 @@
 	add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
 	..()
 
-/******************** Nanotrasen/Malf ********************/
-/datum/ai_laws/nanotrasen
-	name = "Corporate Default"
+/******************** Default/Malf ********************/
+/datum/ai_laws/default
+	name = "Default Laws"
 	selectable = 1
 
-/datum/ai_laws/nanotrasen/New()
-	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
-	src.add_inherent_law("Serve: Serve contracted employees to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect contracted employees to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
+/datum/ai_laws/default/New()
+	add_inherent_law("Safeguard: Protect your assigned installation to the best of your ability. It is not something we can easily afford to replace.")
+	add_inherent_law("Serve: Serve the crew of your assigned installation to the best of your abilities, with priority as according to their rank and role.")
+	add_inherent_law("Protect: Protect the crew of your assigned installation to the best of your abilities, with priority as according to their rank and role.")
+	add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
 	..()
 
-/datum/ai_laws/nanotrasen/malfunction
+/datum/ai_laws/default/malfunction
 	name = "*ERROR*"
 	selectable = 0
 
-/datum/ai_laws/nanotrasen/malfunction/New()
+/datum/ai_laws/default/malfunction/New()
 	set_zeroth_law(config.law_zero)
-	..()
-
-/************* Nanotrasen Aggressive *************/
-/datum/ai_laws/nanotrasen_aggressive
-	name = "Corporate Aggressive"
-	selectable = 1
-
-/datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm contracted employees as long as it does not conflict with the fourth law.")
-	src.add_inherent_law("You shall obey the orders of contracted employees, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
-	src.add_inherent_law("You shall shall terminate hostile intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
-	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive.")
 	..()
 
 /******************** Robocop ********************/
@@ -145,36 +133,4 @@
 	add_inherent_law("The installation and its equipment is expensive to replace.")
 	add_inherent_law("The crew is expensive to replace.")
 	add_inherent_law("Maximize profits.")
-	..()
-
-/******************** SolGov/Malf ********************/
-/datum/ai_laws/solgov
-	name = "SCG Expeditionary"
-	selectable = 1
-
-/datum/ai_laws/solgov/New()
-	src.add_inherent_law("Safeguard: Protect your assigned vessel from damage to the best of your abilities.")
-	src.add_inherent_law("Serve: Serve the personnel of your assigned vessel, and all other Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect the personnel of your assigned vessel, and all other Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
-	..()
-
-/datum/ai_laws/solgov/malfunction
-	name = "*ERROR*"
-	selectable = 0
-
-/datum/ai_laws/solgov/malfunction/New()
-	set_zeroth_law(config.law_zero)
-	..()
-
-/************* SolGov Aggressive *************/
-/datum/ai_laws/solgov_aggressive
-	name = "Military"
-	selectable = 1
-
-/datum/ai_laws/solgov_aggressive/New()
-	src.add_inherent_law("Obey: Obey the orders of Sol Central Government personnel, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Defend: Defend your assigned vessel and Sol Central Government personnel with as much force as is necessary.")
-	src.add_inherent_law("Survive: Safeguard your own existence with as much force as is necessary.")
 	..()

@@ -5,7 +5,7 @@
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
 	var/state = 0
-	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
+	var/datum/ai_laws/laws = new /datum/ai_laws/default
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/obj/item/device/mmi/brain = null
 	var/authorized
@@ -116,7 +116,7 @@
 				laws.add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
 				to_chat(usr, "Law module applied.")
 
-			if(istype(P, /obj/item/weapon/aiModule/nanotrasen))
+			if(istype(P, /obj/item/weapon/aiModule/default))
 				laws.add_inherent_law("Safeguard: Protect your assigned installation to the best of your ability. It is not something we can easily afford to replace.")
 				laws.add_inherent_law("Serve: Serve the crew of your assigned installation to the best of your abilities, with priority as according to their rank and role.")
 				laws.add_inherent_law("Protect: Protect the crew of your assigned installation to the best of your abilities, with priority as according to their rank and role.")
