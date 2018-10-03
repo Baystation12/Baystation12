@@ -21,15 +21,7 @@ SUBSYSTEM_DEF(open_space)
 	GLOB.over_OS_darkness.plane = OVER_OPENSPACE_PLANE
 	GLOB.over_OS_darkness.layer = MOB_LAYER
 	GLOB.open_space_initialised = TRUE
-	return INITIALIZE_HINT_LATELOAD
-
-
-//Add the turf
-turf/simulated/open/LateInitialize()
-	SSopen_space.add_turf(src)
-
-
-
+	disable() // Testing stability issues.
 
 /datum/controller/subsystem/open_space/fire(resumed = 0)
 	// We use a different list so any additions to the update lists during a delay from CHECK_TICK
