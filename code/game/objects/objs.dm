@@ -161,3 +161,22 @@
 
 /obj/is_fluid_pushable(var/amt)
 	return ..() && w_class <= round(amt/20)
+
+/obj/proc/trip_check(mob/user as mob)
+	for(var/obj/structure/catwalk/C in get_turf(src))
+		return FALSE
+	if(!ishuman(user) || !has_gravity(src) || user.resting || user.can_overcome_gravity() || user.move_intent.flags & MOVE_INTENT_DELIBERATE)
+		return FALSE
+	if(user.get_skill_value(SKILL_HAULING) >= SKILL_ADEPT)
+		return FALSE
+	return TRUE
+
+/obj/Crossed(mob/living/carbon/M as mob)
+	..()
+	if(obj_flags & OBJ_FLAG_TRIPPABLE)
+		if(prob(40) && trip_check(M))
+			M.apply_damage(5,BRUTE)
+			M.slip(src, 6)
+			M.visible_message(\
+				"<span class='warning'>[M] trips over \the [src]!</span>",\
+				"<span class='notice'>You trip over \the [src]!</span>")
