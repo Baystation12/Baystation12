@@ -193,7 +193,7 @@
 "dK" = (/obj/machinery/door/airlock/halo{name = "Observation"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/Surgery)
 "dL" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
 "dM" = (/obj/structure/table/steel,/obj/item/weapon/folder/yellow,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
-"dN" = (/obj/structure/table/steel,/obj/item/weapon/clipboard,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
+"dN" = (/obj/structure/table/steel,/obj/item/weapon/clipboard,/obj/item/weapon/pen,/obj/item/device/binoculars,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
 "dO" = (/obj/structure/table/steel,/obj/item/weapon/folder/white,/obj/item/weapon/folder/white,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
 "dP" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin{pixel_y = 10},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
 "dQ" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel2/interior/testingr)
