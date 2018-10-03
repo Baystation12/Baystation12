@@ -5,6 +5,21 @@
 	icon_state = "plating"
 	plane = PLATING_PLANE
 
+/turf/simulated/floor/plating/Entered(mob/living/M as mob)
+	..()
+	for(var/obj/structure/catwalk/C in src)
+		return
+	if(!ishuman(M) || !has_gravity(src))
+		return
+	if(M.move_intent.flags & MOVE_INTENT_QUICK)
+		if(prob(40))
+			M.apply_damage(5,BRUTE)
+			M.slip(src, 6)
+			M.visible_message(\
+				"<span class='warning'>[M.name] trips over \the [name]!</span>",\
+				"<span class='notice'>You trip over \the [name]!</span>")
+			return
+
 /turf/simulated/floor/bluegrid
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
