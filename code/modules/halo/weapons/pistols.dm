@@ -53,6 +53,13 @@
 	silenced = 1
 	screen_shake = 0
 
+/obj/item/weapon/gun/projectile/m6c_magnum_s/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope (Sidearm)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.1)
+
 /obj/item/weapon/gun/projectile/m6c_magnum_s/update_icon()
 	if(ammo_magazine)
 		icon_state = "SOCOM"

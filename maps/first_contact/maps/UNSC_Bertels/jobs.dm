@@ -29,6 +29,7 @@
 	selection_color = "#0A0A95"
 	access = list(142,143,144,145)
 	spawnpoint_override = "UNSC Bertels CO Spawn"
+	faction_whitelist = "UNSC"
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
@@ -38,6 +39,7 @@
 	selection_color = "#0A0A95"
 	access = list(142,144,145)
 	spawnpoint_override = "UNSC Bertels XO Spawn"
+	faction_whitelist = "UNSC"
 
 
 //UNSC Bertels Marine Jobs
@@ -62,6 +64,7 @@
 	selection_color = "#0A0A95"
 	access = list(142,144,145,192)
 	spawnpoint_override = "UNSC Bertels Marine Platoon Leader Spawn"
+	faction_whitelist = "UNSC"
 
 
 //UNSC BERTELS ODST Jobs
@@ -81,7 +84,7 @@
 	"Master Sergeant" = /decl/hierarchy/outfit/job/bertelsODSTFireteamLead)
 
 	selection_color = "#0A0A95"
-	access = list(142,144,110,192,309)
+	access = list(142,144,110,192,309,310)
 	spawnpoint_override = "UNSC Bertels ODST Spawn"
 	is_whitelisted = 1
 
@@ -97,6 +100,6 @@
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/bertelsODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
 	selection_color = "#0A0A95"
-	access = list(142,144,145,110,192,300,306,309)
+	access = list(142,144,145,110,192,300,306,309,310,311)
 	spawnpoint_override = "UNSC Bertels ODST Officer Spawn"
 	is_whitelisted = 1

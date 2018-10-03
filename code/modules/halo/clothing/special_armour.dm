@@ -9,6 +9,15 @@
 		specials -= i
 		specials += new i (src)
 
+/obj/item/clothing/suit/armor/special/mob_can_equip(var/mob/living/M, slot, disable_warning = 0)
+	. = ..()
+
+	for(var/datum/armourspecials/gear/I in specials)
+		var/obj/blocker = M.get_equipped_item(I.equip_slot)
+		if(blocker)
+			if(!disable_warning)
+				to_chat(M,"<span class='notice'>[blocker] is in the way of equipping [src].</span>")
+			return 0
 
 /obj/item/clothing/suit/armor/special/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	for(var/datum/armourspecials/i in specials)
@@ -19,10 +28,12 @@
 			return returnresult
 
 
-/obj/item/clothing/suit/armor/special/equipped(mob/user)
-	for(var/datum/armourspecials/i in specials)
-		i.user = user
-		i.on_equip(src)
+/obj/item/clothing/suit/armor/special/equipped(var/mob/user, var/slot)
+	if(slot == slot_wear_suit)
+		for(var/datum/armourspecials/i in specials)
+			i.user = user
+			i.on_equip(src)
+	. = ..()
 
 /obj/item/clothing/suit/armor/special/emp_act(severity)
 	for(var/datum/armourspecials/i in specials)
@@ -47,4 +58,4 @@
 	GLOB.processing_objects -= src
 	for(var/item in specials)
 		qdel(item)
-	..()
+	. = ..()

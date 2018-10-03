@@ -82,6 +82,9 @@
 	if(is_path_in_list(type, H.worn_underwear))
 		return FALSE
 
+	if(!(H.species.appearance_flags & HAS_UNDERWEAR))
+		return FALSE
+
 	H.worn_underwear += src
 	forceMove(H)
 	if(update_icons)

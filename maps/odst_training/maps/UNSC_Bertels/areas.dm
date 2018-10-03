@@ -167,9 +167,6 @@
 /area/corvette/unscbertels/deck3/commsroom
 	name = "UNSC Bertels Communications Room"
 
-/area/corvette/unscbertels/deck3/portfiringrange
-	name = "UNSC Bertels Port Firing Range"
-
 /area/corvette/unscbertels/deck3/starboardfiringrange
 	name = "UNSC Bertels Starboard Firing Range"
 
@@ -191,7 +188,20 @@
 /area/corvette/unscbertels/deck3/centralhallway
 	name = "UNSC Bertels Deck 3 Central Hallway"
 
+/area/corvette/unscbertels/deck3/rearporthallway
+	name = "UNSC Bertels Deck 3 Rear Port Hallway"
 
+/area/corvette/unscbertels/deck3/porthangar
+	name = "UNSC Bertels Deck 3 Port Hangar"
+
+/area/corvette/unscbertels/deck3/starboardhangar
+	name = "UNSC Bertels Deck 3 Starboard Hangar"
+
+/area/corvette/unscbertels/deck3/prestageprep
+	name = "UNSC Bertels Deck 3 Prestage Prep Area"
+
+/area/corvette/unscbertels/deck3/cryopods
+	name = "UNSC Bertels Deck 3 Cryogenic Storage"
 
 //ship weapon areas
 /area/corvette/unscbertels/portbatterycontrol

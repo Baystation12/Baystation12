@@ -29,7 +29,7 @@
 			qdel(W)
 		else
 			if(!disable_warning)
-				to_chat(src, "<span class='warning'>You are unable to equip that.</span>")//Only print if del_on_fail is false
+				to_chat(src, "<span class='warning'>You are unable to equip the [W].</span>")//Only print if del_on_fail is false
 
 		return 0
 

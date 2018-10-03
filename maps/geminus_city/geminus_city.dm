@@ -16,6 +16,7 @@
 	#include "geminuscity_4.dmm"
 
 	#define using_map_DATUM /datum/map/geminus_city
+	#include "../first_contact/overall_outfits.dm"
 
 #elif !defined(MAP_OVERRIDE)
 

@@ -24,6 +24,7 @@
 	title = "Insurrectionist Ship Crew"
 	total_positions = 6
 	spawn_positions = 6
+	access = list(632)
 	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
 	selection_color = "#ff0000"
 	spawnpoint_override = "Innie Crew"
@@ -32,6 +33,7 @@
 	title = "Insurrectionist Ship Captain"
 	total_positions = 1
 	spawn_positions = 1
+	access = list(632,633)
 	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
 	selection_color = "#ff0000"
 	spawnpoint_override = "Innie Crew"
@@ -72,10 +74,10 @@
 	is_whitelisted = 1
 
 /datum/map/first_contact
-	allowed_jobs = list(/datum/job/unscbertels_co,/datum/job/unscbertels_xo,/datum/job/unscbertels_ship_crew,/datum/job/unscbertels_medical_crew,/datum/job/bertelsunsc_ship_marine,/datum/job/unsc_ship_marineplatoon,/datum/job/bertelsODST,/datum/job/bertelsODSTO,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
-	allowed_spawns = list("UNSC Bertels Ship Crew Spawn","UNSC Bertels Medical Staff Spawn","UNSC Bertels CO Spawn","UNSC Bertels XO Spawn","UNSC Bertels Marine Spawn","UNSC Bertels Marine Platoon Leader Spawn","UNSC Bertels ODST Spawn","UNSC Bertels ODST Officer Spawn","Innie Crew","Civilian Ship Crew","Civ Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn",)
+	allowed_jobs = list(/datum/job/unscbertels_co,/datum/job/unscbertels_xo,/datum/job/unscbertels_ship_crew,/datum/job/unscbertels_medical_crew,/datum/job/bertelsunsc_ship_marine,/datum/job/unsc_ship_marineplatoon,/datum/job/bertelsODST,/datum/job/bertelsODSTO,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,/datum/job/unscaegis_co,/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI,)
+	allowed_spawns = list("UNSC Bertels Ship Crew Spawn","UNSC Bertels Medical Staff Spawn","UNSC Bertels CO Spawn","UNSC Bertels XO Spawn","UNSC Bertels Marine Spawn","UNSC Bertels Marine Platoon Leader Spawn","UNSC Bertels ODST Spawn","UNSC Bertels ODST Officer Spawn","Innie Crew","Civilian Ship Crew","Civ Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn","Sangheili Corvette Spawn","Kig-Yar Corvette Spawn","Unggoy Corvette Spawn","UNSC Aegis Ship Crew Spawn","UNSC Aegis ODST Spawn","UNSC Aegis ODST Officer Spawn",)
 
-	species_to_job_whitelist = list(/datum/species/kig_yar = list(/datum/job/covenant/kigyarpirate,/datum/job/covenant/kigyarpirate/captain),/datum/species/unggoy = list(/datum/job/covenant/unggoy_deacon))
+	species_to_job_whitelist = list(/datum/species/kig_yar = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain),/datum/species/unggoy = list(/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major))
 
-	species_to_job_blacklist = list(/datum/species/human = list(/datum/job/covenant/kigyarpirate,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/unggoy_deacon))
+	species_to_job_blacklist = list(/datum/species/human = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major))
 

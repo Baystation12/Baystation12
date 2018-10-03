@@ -68,6 +68,13 @@
 		data["r_hand_worth"] = "0"
 		data["r_sellable"] = 0
 
+	data["l_is_bag"] = 0
+	if(istype(M.l_hand, /obj/item/weapon/storage))
+		data["l_is_bag"] = 1
+	data["r_is_bag"] = 0
+	if(istype(M.r_hand, /obj/item/weapon/storage))
+		data["r_is_bag"] = 1
+
 	data["user"] = "\ref[user]"
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
