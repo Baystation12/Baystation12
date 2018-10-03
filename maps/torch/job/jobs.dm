@@ -806,7 +806,7 @@
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer and the Corporate Liaison."
 	selection_color = "#5b4d20"
-	economic_power = 5
+	economic_power = 6
 	alt_titles = list(
 		"Mechsuit Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
@@ -818,11 +818,12 @@
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX,
-	                    SKILL_ENGINES      = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_EXPERT,
+	                    SKILL_ENGINES      = SKILL_EXPERT,
 	                    SKILL_DEVICES      = SKILL_MAX,
-	                    SKILL_ANATOMY      = SKILL_MAX,
-	                    SKILL_MEDICAL      = SKILL_MAX)
+	                    SKILL_ANATOMY      = SKILL_EXPERT,
+	                    SKILL_MEDICAL      = SKILL_EXPERT)
+	skill_points = 20
 
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 	minimal_access = list()
@@ -1108,7 +1109,7 @@
 	                    SKILL_COMPUTER      = SKILL_MAX,
 	                    SKILL_CONSTRUCTION 	= SKILL_EXPERT,
 	                    SKILL_ELECTRICAL 	= SKILL_EXPERT)
-	skill_points = 32
+	skill_points = 24
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 	minimal_access = list()
 	required_education = EDUCATION_TIER_MEDSCHOOL
