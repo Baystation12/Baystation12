@@ -16907,7 +16907,8 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
@@ -16974,6 +16975,9 @@
 "aMD" = (
 /obj/structure/table/woodentable,
 /obj/random/plushie,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
 "aME" = (
@@ -16992,7 +16996,8 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
@@ -17126,6 +17131,9 @@
 "aMY" = (
 /obj/structure/table/woodentable,
 /obj/random/action_figure,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
 "aMZ" = (
@@ -17138,9 +17146,15 @@
 	spawn_object = /obj/item/weapon/flame/lighter
 	},
 /obj/random/toy,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNa" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNb" = (
@@ -17326,19 +17340,31 @@
 "aNu" = (
 /obj/machinery/door/airlock{
 	name = "Room A";
-	req_access = list(201)
+	req_access = list(301)
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aNv" = (
 /obj/item/weapon/storage/secure/safe{
 	pixel_x = -25
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNw" = (
 /obj/structure/undies_wardrobe,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNx" = (
@@ -17355,6 +17381,9 @@
 	name = "Toilet"
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aNB" = (
@@ -17366,6 +17395,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aNC" = (
@@ -17497,13 +17529,13 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aNW" = (
 /obj/machinery/firealarm{
-	dir = 1;
 	pixel_y = 24
 	},
 /turf/simulated/floor/wood,
@@ -17511,9 +17543,18 @@
 "aNX" = (
 /obj/machinery/door/airlock{
 	name = "Room B";
-	req_access = list(201)
+	req_access = list(301)
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aNY" = (
@@ -17534,6 +17575,9 @@
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aOa" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /mob/living/simple_animal/tindalos{
 	name = "Eddy"
 	},
@@ -17545,6 +17589,9 @@
 	pixel_y = 8
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aOc" = (
@@ -17812,20 +17859,27 @@
 "aOE" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/glasses/pint,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aOF" = (
 /obj/machinery/door/airlock/glass{
 	name = "Lounge"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aOG" = (
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
-	pixel_x = -22
+	pixel_x = -22;
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -17833,6 +17887,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
@@ -17844,11 +17901,17 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aOI" = (
 /obj/machinery/door/airlock{
 	name = "Toilet"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
@@ -17858,10 +17921,14 @@
 	pixel_y = 8
 	},
 /obj/machinery/recharge_station,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aOK" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
 "aOL" = (
@@ -18042,6 +18109,8 @@
 	icon_state = "tube1";
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aPl" = (
@@ -18073,12 +18142,19 @@
 	id_tag = "rbath";
 	name = "Bathroom"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aPq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
 "aPs" = (
@@ -18355,9 +18431,12 @@
 "aPX" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Office";
-	req_access = list(201)
+	req_access = list(301)
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -18425,12 +18504,8 @@
 "aQe" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/wood,
 /area/merchant_station)
 "aQf" = (
@@ -18483,6 +18558,7 @@
 	icon_state = "pipe-j2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQk" = (
@@ -18530,7 +18606,8 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
@@ -18697,7 +18774,8 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
@@ -18730,10 +18808,8 @@
 /area/merchant_station)
 "aQL" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQM" = (
@@ -18764,9 +18840,14 @@
 "aQP" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Storage";
-	req_access = list(201)
+	req_access = list(301)
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
 "aQQ" = (
@@ -19135,7 +19216,10 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRF" = (
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -19155,9 +19239,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRH" = (
@@ -19265,7 +19347,10 @@
 	name = "Warehouse";
 	req_access = newlist()
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRY" = (
@@ -19309,7 +19394,7 @@
 "aSh" = (
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -19344,7 +19429,7 @@
 	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/southright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
@@ -19361,7 +19446,7 @@
 	name = "Merchant Loading Shutters";
 	pixel_x = 27;
 	pixel_y = -9;
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled,
@@ -19483,24 +19568,6 @@
 /obj/structure/flora/pottedplant/tropical,
 /turf/simulated/floor/wood,
 /area/shuttle/merchant/home)
-"aSD" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
-	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
-	id_tag = "merchant_ship_dock";
-	pixel_x = -24;
-	pixel_y = 0;
-	tag_airpump = "merchant_ship_vent";
-	tag_chamber_sensor = "merchant_ship_sensor";
-	tag_exterior_door = "merchant_ship_exterior";
-	tag_interior_door = "merchant_ship_interior"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/shuttle/merchant/home)
 "aSE" = (
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
@@ -19509,7 +19576,7 @@
 	dir = 1
 	},
 /obj/machinery/door/window/brigdoor/eastright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
@@ -19687,7 +19754,7 @@
 	name = "Merchant Window Shutters";
 	pixel_x = 0;
 	pixel_y = -28;
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (WEST)";
@@ -19702,7 +19769,7 @@
 "aTf" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Cockpit";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/wood,
 /area/shuttle/merchant/home)
@@ -19769,7 +19836,7 @@
 	id_tag = "merchant_ship_interior";
 	locked = 1;
 	name = "Ship Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/merchant/home)
@@ -19881,7 +19948,7 @@
 "aTC" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/brigdoor/eastright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/light,
 /obj/structure/closet/walllocker/emerglocker/south,
@@ -19935,7 +20002,8 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -19981,21 +20049,21 @@
 /area/shuttle/merchant/home)
 "aTT" = (
 /obj/machinery/door/window/brigdoor/northleft{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
 "aTU" = (
 /obj/machinery/door/window/brigdoor/northright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
 "aTX" = (
 /obj/machinery/door/window/brigdoor/northright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /obj/machinery/light{
@@ -20010,7 +20078,7 @@
 	id_tag = "merchant_ship_exterior";
 	locked = 1;
 	name = "Ship Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -20116,19 +20184,21 @@
 	id_tag = "merchant_station_exterior";
 	locked = 1;
 	name = "Station Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aUi" = (
 /obj/machinery/firealarm{
-	dir = 1;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aUj" = (
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aUk" = (
@@ -20184,7 +20254,7 @@
 	id_tag = "merchant_station_dock";
 	pixel_x = -28;
 	pixel_y = 0;
-	req_access = list(201);
+	req_access = list(301);
 	tag_airpump = "merchant_station_vent";
 	tag_chamber_sensor = "merchant_station_sensor";
 	tag_exterior_door = "merchant_station_exterior";
@@ -20218,7 +20288,7 @@
 	id_tag = "merchant_station_interior";
 	locked = 1;
 	name = "Station Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -20267,7 +20337,10 @@
 	name = "Warehouse";
 	req_access = newlist()
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -20376,7 +20449,6 @@
 	dir = 1
 	},
 /obj/machinery/firealarm{
-	dir = 1;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -20395,13 +20467,13 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aUS" = (
 /obj/machinery/suit_storage_unit/standard_unit{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -20425,7 +20497,8 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
@@ -20632,9 +20705,12 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Maintenance";
-	req_access = list(201)
+	req_access = list(301)
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	req_access = list(301);
+	req_one_access = newlist()
+	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -20782,7 +20858,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/vending/engivend{
-	req_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/plating,
 /area/merchant_station)
@@ -20815,7 +20892,8 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_access = list(301);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -22433,6 +22511,9 @@
 /obj/item/weapon/storage/mirror{
 	pixel_y = 32
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "bPb" = (
@@ -22445,6 +22526,9 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "bQb" = (
@@ -22504,6 +22588,13 @@
 /obj/machinery/hologram/holopad/longrange,
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
+"cEi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/merchant_station)
 "cMP" = (
 /obj/structure/flora/ausbushes/genericbush,
 /obj/effect/floor_decal/spline/plain/grey{
@@ -22522,6 +22613,24 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"cYW" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1380;
+	id_tag = "merchant_ship_dock";
+	pixel_x = -24;
+	pixel_y = -32;
+	tag_airpump = "merchant_ship_vent";
+	tag_chamber_sensor = "merchant_ship_sensor";
+	tag_exterior_door = "merchant_ship_exterior";
+	tag_interior_door = "merchant_ship_interior"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/shuttle/merchant/home)
 "djm" = (
 /obj/item/weapon/beach_ball/holovolleyball,
 /turf/simulated/floor/holofloor/beach/sand,
@@ -22534,6 +22643,15 @@
 /obj/effect/floor_decal/beach/corner,
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
+"dLX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/merchant_station)
 "dMH" = (
 /obj/effect/floor_decal/spline/plain{
 	icon_state = "spline_plain";
@@ -22541,6 +22659,11 @@
 	},
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"dTD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/merchant_station)
 "dTZ" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup{
@@ -22646,6 +22769,15 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"fJL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/merchant_station)
 "fMb" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -22832,6 +22964,13 @@
 	icon_state = "desert4"
 	},
 /area/holodeck/source_volleyball)
+"kjL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/carpet,
+/area/merchant_station)
 "kjW" = (
 /obj/structure/bed/chair/wood{
 	dir = 1;
@@ -22978,6 +23117,24 @@
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
+"nkK" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/wood,
+/area/merchant_station)
+"nlX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/carpet/blue,
+/area/merchant_station)
 "ntZ" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
@@ -22985,6 +23142,12 @@
 /obj/structure/table/holo_woodentable,
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"nPK" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/merchant_station)
 "nUi" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -23036,6 +23199,12 @@
 	dir = 1
 	},
 /area/rescue_base/base)
+"oSv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/carpet,
+/area/merchant_station)
 "pci" = (
 /obj/structure/table/rack,
 /obj/item/clothing/head/helmet/ballistic,
@@ -23331,6 +23500,12 @@
 /obj/effect/floor_decal/spline/plain,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"xYp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/merchant_station)
 
 (1,1,1) = {"
 aaa
@@ -49141,9 +49316,9 @@ aab
 aab
 aRA
 aSh
-aSD
-aSE
 aTA
+aSE
+cYW
 btb
 aRA
 aab
@@ -50543,10 +50718,10 @@ aLG
 aLW
 aMf
 aMt
-aMC
-aMC
+oSv
+kjL
 aNu
-aNU
+nkK
 aOE
 aPk
 aQe
@@ -50748,7 +50923,7 @@ aMu
 aMD
 aMY
 aMf
-aNU
+aPY
 pEp
 pEp
 aQf
@@ -50950,7 +51125,7 @@ aMf
 aMf
 aMf
 aMf
-aNU
+aPY
 aOF
 aPc
 aQg
@@ -51354,7 +51529,7 @@ aMf
 aMF
 aNa
 aNv
-aNa
+nlX
 aMf
 aPm
 aPc
@@ -53578,12 +53753,12 @@ aLW
 aNC
 aOe
 aOL
-aPq
+xYp
 aQo
 aNC
 aRt
-aRH
-aPc
+fJL
+nPK
 aPc
 aSS
 aTq
@@ -53780,11 +53955,11 @@ aLW
 aNC
 aOf
 aOf
-aPq
+xYp
 aQp
 aNC
 aRu
-aQN
+aQK
 aPc
 aSq
 aMf
@@ -53982,11 +54157,11 @@ aLW
 aNC
 aOg
 aOM
-aPq
-aPq
+cEi
+dTD
 aQP
-aPc
-aPc
+aPd
+dLX
 aPc
 aPc
 aST
