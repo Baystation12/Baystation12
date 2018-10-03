@@ -26,6 +26,7 @@
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       60	// processing_objects processing.
 #define SS_PRIORITY_PROCESSING    30	// Generic datum processor. Replaces objects processor.
+#define SS_PRIORITY_PLANTS        30	// Spreading vine effects.
 #define SS_PRIORITY_GARBAGE       25	// Garbage collection.
 #define SS_PRIORITY_VINES         25	// Spreading vine effects.
 #define SS_PRIORITY_NANO          20    // Updates to nanoui uis.
