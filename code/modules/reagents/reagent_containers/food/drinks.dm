@@ -336,10 +336,10 @@
 	base_name = "NT cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp
-	name = "research coffee cup"
-	desc = "A tasteful bottle green coffee cup."
+	name = "\improper Tenjin Holdings coffee cup"
+	desc = "A tasteful coffee cup in Tenjin Holdings corporate colours."
 	icon_state = "coffeecup_corp"
-	base_name = "green cup"
+	base_name = "TH cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
 	name = "#1 coffee cup"
