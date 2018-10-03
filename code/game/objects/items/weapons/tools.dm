@@ -31,7 +31,7 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
 /obj/item/weapon/wrench/Initialize()
-	icon_state = "wrench[pick("","_red","_black")]"
+	icon_state = "wrench[pick("","_red","_black","_green","_blue")]"
 	. = ..()
 
 /*
@@ -114,9 +114,22 @@
 	edge = 1
 
 /obj/item/weapon/wirecutters/Initialize()
-	if(prob(50))
-		icon_state = "cutters-y"
-		item_state = "cutters_yellow"
+	switch(pick("red","yellow","green","blue","black"))
+		if ("red")
+			icon_state = "cutters"
+			item_state = "cutters"
+		if ("yellow")
+			icon_state = "cutters_yellow"
+			item_state = "cutters_yellow"
+		if ("green")
+			icon_state = "cutters_green"
+			item_state = "cutters_green"
+		if ("blue")
+			icon_state = "cutters_blue"
+			item_state = "cutters_blue"
+		if ("black")
+			icon_state = "cutters_black"
+			item_state = "cutters_black"
 	. = ..()
 
 /obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
