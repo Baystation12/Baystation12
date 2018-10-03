@@ -335,6 +335,12 @@
 	icon_state = "coffeecup_NT"
 	base_name = "NT cup"
 
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp
+	name = "research coffee cup"
+	desc = "A tasteful bottle green coffee cup."
+	icon_state = "coffeecup_corp"
+	base_name = "green cup"
+
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
 	name = "#1 coffee cup"
 	desc = "A white coffee cup, prominently featuring a #1."
