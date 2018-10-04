@@ -26,7 +26,7 @@
 	//Vehicle ferrying//
 	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
 
-	var/vehicle_view_modifier = 1 //The modifier to apply to the gunners and pilot. Added due to the sheer size of some vehicles.
+	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 
 /obj/vehicles/New()
 	. = ..()
@@ -206,6 +206,8 @@
 	contents -= user
 	user.loc = pick(src.locs)
 	update_object_sprites()
+	if(user.client)
+		user.client.view = initial(user.client.view)
 
 /obj/vehicles/verb/enter_vehicle()
 	set name = "Enter Vehicle"
@@ -220,6 +222,8 @@
 		return
 	else
 		enter_as_position(user,player_pos_choice)
+		if(user.client)
+			user.client.view *= vehicle_view_modifier
 
 /obj/vehicles/proc/damage_occupant(var/position,var/obj/item/projectile/P)
 	var/list/occ_list = get_occupants_in_position(position)
