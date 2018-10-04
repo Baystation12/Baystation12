@@ -30,10 +30,16 @@
 	pixel_y = 0
 	bounds = "32,32"
 	switch (dir)
-		if(SOUTH || NORTH)
+		if(SOUTH)
 			pixel_x = -19
 			bounds = "128,160"
-		if(EAST || WEST)
+		if(NORTH)
+			pixel_x = -19
+			bounds = "128,160"
+		if(EAST)
+			pixel_y = -19
+			bounds = "160,128"
+		if(WEST)
 			pixel_y = -19
 			bounds = "160,128"
 

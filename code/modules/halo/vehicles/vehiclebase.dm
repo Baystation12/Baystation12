@@ -26,6 +26,8 @@
 	//Vehicle ferrying//
 	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
 
+	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
+
 /obj/vehicles/New()
 	. = ..()
 	comp_prof = new comp_prof(src)
@@ -194,14 +196,18 @@
 
 	exit_vehicle(user)
 
-/obj/vehicles/proc/exit_vehicle(var/mob/user)
+/obj/vehicles/proc/exit_vehicle(var/mob/user,var/ignore_incap_check = 0)
 
-	if(!(user in occupants) || !is_atom_adjacent(user) || user.incapacitated())
+	if(!(user in occupants) || !is_atom_adjacent(user))
+		return
+	if(user.incapacitated() && !ignore_incap_check)
 		return
 	occupants -= user
 	contents -= user
 	user.loc = pick(src.locs)
 	update_object_sprites()
+	if(user.client)
+		user.client.view = initial(user.client.view)
 
 /obj/vehicles/verb/enter_vehicle()
 	set name = "Enter Vehicle"
@@ -216,6 +222,8 @@
 		return
 	else
 		enter_as_position(user,player_pos_choice)
+		if(user.client)
+			user.client.view *= vehicle_view_modifier
 
 /obj/vehicles/proc/damage_occupant(var/position,var/obj/item/projectile/P)
 	var/list/occ_list = get_occupants_in_position(position)
@@ -235,7 +243,6 @@
 			return position
 	return null
 
-//TODO: VEHICLE HEALTH DETERMINED BY COMPONENTS
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	if(!isnull(pos_to_dam))
@@ -263,7 +270,6 @@
 	Move(new_loc,direction)
 	user.client.move_delay = world.time + vehicle_move_delay
 
-//TODO: CARGO SYSTEM
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
 	if(O == src)
 		return
@@ -337,7 +343,7 @@
 	if(chosen_occ.stat == CONSCIOUS)
 		if(!do_after(puller, VEHICLE_LOAD_DELAY*2,src,1,1,,1))
 			return
-	exit_vehicle(chosen_occ)
+	exit_vehicle(chosen_occ,1)
 
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
 	if(elevation > user.elevation || elevation > I.elevation)
@@ -349,7 +355,7 @@
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
-		return //TODO: SETUP HIT DAMAGE
+		return ..()
 	put_cargo_item(user,I)
 
 #undef ALL_VEHICLE_POSITIONS
