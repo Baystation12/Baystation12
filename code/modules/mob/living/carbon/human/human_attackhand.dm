@@ -87,12 +87,12 @@
 					return
 
 				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
-				if(prob(5))
+				if(prob(5 + 5 * (SKILL_EXPERT - M.get_skill_value(SKILL_ANATOMY))))
 					var/obj/item/organ/external/chest = get_organ(BP_CHEST)
 					if(chest)
 						chest.fracture()
 				if(stat != DEAD)
-					if(prob(15))
+					if(prob(10 + 5 * M.get_skill_value(SKILL_ANATOMY)))
 						resuscitate()
 
 					if(!H.check_has_mouth())
