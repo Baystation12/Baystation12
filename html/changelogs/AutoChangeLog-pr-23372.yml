@@ -1,4 +1,0 @@
-author: "greggbot"
-delete-after: True
-changes: 
-  - rscadd: "RFID Card Broadcasters, previously only found in PDAs, can now be printed."
