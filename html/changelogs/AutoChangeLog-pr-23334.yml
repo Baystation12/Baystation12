@@ -1,9 +1,0 @@
-author: "Textor"
-delete-after: True
-changes: 
-  - rscadd: "Deimos Advanced Information Systems (DAIS) is now officially in the game. Lunchboxes, mugs, an undershirt polo, contractor uniforms, winter coats, and a labcoat, are all in-game now."
-  - rscadd: "DAIS is now a faction in the background tab of the character creator."
-  - rscadd: "A new experimental DAIS lawset is available for researchers to install in an AI."
-  - maptweak: "Adds DAIS lunchbox, coat, and mug to telecomms room."
-  - bugfix: "Corrects science labcoat description to reflect new color scheme."
-  - bugfix: "Replaces lingering references to Torch, LLC with Torch, Ltd."

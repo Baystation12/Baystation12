@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Automatic shutoff valve circuit toggling now works as intended."
