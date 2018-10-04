@@ -125,7 +125,7 @@
 	job_access_type = /datum/job/representative
 
 /obj/item/weapon/card/id/torch/crew/sea
-	job_access_type = /datum/job/sea
+	job_access_type = /datum/job/bosun
 
 /obj/item/weapon/card/id/torch/crew/bridgeofficer
 	job_access_type = /datum/job/bridgeofficer

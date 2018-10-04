@@ -153,12 +153,13 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
-	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	name = OUTFIT_JOB_NAME("Bosun")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	id_type = /obj/item/weapon/card/id/torch/crew/sea
 	pda_type = /obj/item/modular_computer/pda/heads
+	l_pocket = /obj/item/toy/bosunwhistle
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
@@ -167,11 +168,6 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	id_type = /obj/item/weapon/card/id/torch/crew/bridgeofficer
 	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/bridgeofficer
-
-/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
-	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
-	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Engineering Outfits
 

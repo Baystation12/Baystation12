@@ -66,7 +66,7 @@
 	)
 
 /obj/structure/closet/secure_closet/sea
-	name = "senior enlisted advisor's locker"
+	name = "Bosun's locker"
 	req_access = list(access_senadv)
 	icon_state = "sol1"
 	icon_closed = "sol"

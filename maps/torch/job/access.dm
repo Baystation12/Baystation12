@@ -108,7 +108,7 @@
 /var/const/access_senadv = 92
 /datum/access/senadv
 	id = access_senadv
-	desc = "Senior Enlisted Advisor"
+	desc = "Bosun"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_explorer = 93
