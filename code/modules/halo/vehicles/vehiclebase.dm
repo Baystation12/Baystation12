@@ -239,7 +239,6 @@
 			return position
 	return null
 
-//TODO: VEHICLE HEALTH DETERMINED BY COMPONENTS
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	if(!isnull(pos_to_dam))
@@ -267,7 +266,6 @@
 	Move(new_loc,direction)
 	user.client.move_delay = world.time + vehicle_move_delay
 
-//TODO: CARGO SYSTEM
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
 	if(O == src)
 		return
@@ -353,7 +351,7 @@
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
-		return //TODO: SETUP HIT DAMAGE
+		return ..()
 	put_cargo_item(user,I)
 
 #undef ALL_VEHICLE_POSITIONS
