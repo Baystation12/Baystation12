@@ -52,7 +52,7 @@
 
 /datum/gear/suit/labcoat_dais
 	display_name = "labcoat, DAIS"
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/scientist, /datum/job/rd)
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/scientist, /datum/job/rd, /datum/job/biomech, /datum/job/roboticist)
 
 /datum/gear/suit/wintercoat_dais
 	display_name = "winter coat, DAIS"
