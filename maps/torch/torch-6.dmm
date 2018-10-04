@@ -4383,7 +4383,6 @@
 "aku" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/secure/briefcase,
-/obj/item/clothing/head/beret/centcom/captain,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4534,6 +4533,7 @@
 /obj/item/weapon/cell/high,
 /obj/item/weapon/cell/high,
 /obj/item/weapon/cell/high,
+/obj/item/weapon/aiModule/solgov_aggressive,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -9383,7 +9383,6 @@
 	},
 /area/centcom/specops)
 "awn" = (
-/obj/item/weapon/aiModule/nanotrasen,
 /obj/item/weapon/aiModule/reset,
 /obj/item/weapon/aiModule/freeformcore,
 /obj/item/weapon/aiModule/protectStation,
@@ -9392,6 +9391,7 @@
 /obj/item/weapon/aiModule/robocop,
 /obj/item/weapon/aiModule/safeguard,
 /obj/structure/table/rack,
+/obj/item/weapon/aiModule/corp,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1

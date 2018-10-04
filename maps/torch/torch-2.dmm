@@ -16534,6 +16534,7 @@
 	name = "AI Maintenance"
 	},
 /obj/item/weapon/aiModule/solgov,
+/obj/item/weapon/aiModule/solgov_aggressive,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/turret_protected/ai_upload)
 "Mz" = (
@@ -18790,8 +18791,6 @@
 	name = "Core Modules";
 	req_access = list(20)
 	},
-/obj/item/weapon/aiModule/solgov_aggressive,
-/obj/item/weapon/aiModule/nanotrasen,
 /obj/item/weapon/aiModule/freeformcore,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/turret_protected/ai_upload)

@@ -57,7 +57,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 			return 0
 
 		A.setup_for_malf()
-		A.laws = new /datum/ai_laws/nanotrasen/malfunction
+		A.laws = new /datum/ai_laws/default/malfunction
 
 
 		var/mob/living/silicon/ai/malf = player.current

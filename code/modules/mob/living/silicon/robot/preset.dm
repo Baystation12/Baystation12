@@ -21,7 +21,7 @@
 	cell = /obj/item/weapon/cell/super
 	pitch_toggle = 0
 
-/mob/living/silicon/robot/combat/nt
-	laws = /datum/ai_laws/nanotrasen_aggressive
+/mob/living/silicon/robot/combat/corp
+	laws = /datum/ai_laws/corporate
 	idcard = /obj/item/weapon/card/id/centcom/ERT
 	silicon_radio = /obj/item/device/radio/borg/ert
