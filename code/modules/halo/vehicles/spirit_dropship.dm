@@ -25,6 +25,10 @@
 
 	vehicle_size = 128
 
+	overmap_range = 2
+
+	vehicle_view_modifier = 1.3
+
 /obj/vehicles/air/overmap/spirit_dropship/proc/update_pixel_xy()
 	pixel_x = 0
 	pixel_y = 0
