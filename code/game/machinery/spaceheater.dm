@@ -23,12 +23,16 @@
 /obj/machinery/space_heater/update_icon(var/rebuild_overlay = 0)
 	if(!on)
 		icon_state = "sheater-off"
+		set_light(0)
 	else if(active > 0)
 		icon_state = "sheater-heat"
+		set_light(0.7, 1, 2, 3, COLOR_SEDONA)
 	else if(active < 0)
 		icon_state = "sheater-cool"
+		set_light(0.7, 1, 2, 3, COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "sheater-standby"
+		set_light(0)
 
 	if(rebuild_overlay)
 		overlays.Cut()
