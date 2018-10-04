@@ -64,6 +64,7 @@
 		else
 			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];add_never=[ghost_trap.pref_check]'>Never</a></br>"
 		. += "</td></tr>"
+	. += "<tr><td>Select All: </td><td><a href='?src=\ref[src];select_all=2'>High</a> <a href='?src=\ref[src];select_all=1'>Low</a> <a href='?src=\ref[src];select_all=0'>Never</a></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
 
@@ -91,6 +92,34 @@
 	if(href_list["add_never"])
 		pref.be_special_role -= href_list["add_never"]
 		pref.never_be_special_role |= href_list["add_never"]
+		return TOPIC_REFRESH
+
+	if(href_list["select_all"])		
+		var/selection = text2num(href_list["select_all"])
+		var/list/all_antag_types = GLOB.all_antag_types_
+		var/list/antag_list = list()
+		for(var/antag_type in all_antag_types)
+			var/datum/antagonist/antag = all_antag_types[antag_type]
+			if((antag.id in valid_special_roles())&&(!jobban_isbanned(preference_mob(), antag.id)))
+				if(!(antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
+					antag_list += antag.id
+		var/list/ghost_traps = get_ghost_traps()
+		for(var/ghost_trap_key in ghost_traps)
+			var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
+			if(ghost_trap.list_as_special_role && (!banned_from_ghost_role(preference_mob(), ghost_trap)))
+				antag_list += ghost_trap.pref_check
+
+		for(var/id in antag_list)
+			switch(selection)
+				if(0)
+					pref.be_special_role -= id
+					pref.never_be_special_role |= id					
+				if(1)
+					pref.be_special_role -= id
+					pref.never_be_special_role -= id					
+				if(2)					
+					pref.be_special_role |= id
+					pref.never_be_special_role -= id
 		return TOPIC_REFRESH
 
 	return ..()
