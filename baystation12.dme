@@ -1199,6 +1199,7 @@
 #include "code\modules\admin\secrets\admin_secrets\show_game_mode.dm"
 #include "code\modules\admin\secrets\admin_secrets\show_law_changes.dm"
 #include "code\modules\admin\secrets\admin_secrets\show_signalers.dm"
+#include "code\modules\admin\secrets\admin_secrets\toggle_overmap_movement.dm"
 #include "code\modules\admin\secrets\admin_secrets\traitors_and_objectives.dm"
 #include "code\modules\admin\secrets\debug\world_types.dm"
 #include "code\modules\admin\secrets\final_solutions\summon_narsie.dm"

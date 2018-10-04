@@ -16,7 +16,7 @@
 	var/move_time = 240		//the time spent in the transition area
 
 	category = /datum/shuttle/autodock
-	flags = SHUTTLE_FLAGS_PROCESS
+	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
 
 /datum/shuttle/autodock/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
 	..(_name, start_waypoint)

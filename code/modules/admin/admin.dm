@@ -1231,7 +1231,6 @@ var/global/floorIsLava = 0
 	if(!ai_number)
 		to_chat(usr, "<b>No AIs located</b>")//Just so you know the thing is actually working and not just ignoring you.
 
-
 /datum/admins/proc/show_skills(mob/M)
 	set category = "Admin"
 	set name = "Skill Panel"
