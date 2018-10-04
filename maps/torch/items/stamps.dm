@@ -7,7 +7,7 @@
 	icon_state = "stamp-hop"
 
 /obj/item/weapon/stamp/sea
-	name = "senior enlisted advisor's rubber stamp"
+	name = "Bosun's rubber stamp"
 	icon_state = "stamp-hop"
 
 /obj/item/weapon/stamp/cos

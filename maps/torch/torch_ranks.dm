@@ -5,7 +5,6 @@
 /datum/map/torch
 	branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
 		/datum/mil_branch/army
@@ -13,7 +12,6 @@
 
 	spawn_branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov
 	)
