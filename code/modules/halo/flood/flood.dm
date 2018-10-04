@@ -2,6 +2,7 @@ GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define INFECT_DELAY 13 SECONDS
+#define PLAYER_FLOOD_HEALTH_MOD 1.5
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
 
@@ -15,11 +16,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	*/
-	mob_swap_flags = 0
-	mob_push_flags = 0
 	break_stuff_probability = 50
-	stop_automated_movement = 1
-	wander = 0
+	stop_automated_movement = 0
+	wander = 1
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	min_gas = list()
@@ -44,7 +43,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
-
+	if(client)
+		target_mob = null
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
 		if(prob(75))
@@ -124,20 +124,30 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 		new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_form/human
-		new_combat_form.maxHealth = 350 //Buff their health a bit.
-		new_combat_form.health = 350
-		new_combat_form.forceMove(h.loc)
-		new_combat_form.ckey = h.ckey
-		new_combat_form.name = h.real_name
-		if(prob(25))
-			playsound(src.loc,PLAYER_TRANSFORM_SFX,100)
-		if(new_combat_form.ckey)
-			new_combat_form.stop_automated_movement = 1
-		for(var/obj/i in h.contents)
-			h.drop_from_inventory(i)
-		qdel(h)
+		do_infect(h)
 	return 1
+
+/mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	if(istype(h.species,/datum/species/sangheili))
+		if(prob(50))
+			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
+		else
+			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+
+	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
+	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
+	new_combat_form.health *= PLAYER_FLOOD_HEALTH_MOD
+	new_combat_form.forceMove(h.loc)
+	new_combat_form.ckey = h.ckey
+	new_combat_form.name = h.real_name
+	if(prob(25))
+		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
+	if(new_combat_form.ckey)
+		new_combat_form.stop_automated_movement = 1
+	for(var/obj/i in h.contents)
+		h.drop_from_inventory(i)
+	qdel(h)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
@@ -357,7 +367,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "movement state"
 	icon_living = "movement state"
 	icon_dead = "death state"
-	//
 	move_to_delay = 1
 	health = 1200 //Combat forms need to be hardier.
 	maxHealth = 1200
