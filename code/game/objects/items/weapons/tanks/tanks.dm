@@ -16,7 +16,9 @@ var/list/global/tank_gauge_cache = list()
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 
-	force = 5.0
+	force = 15
+	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
+	melee_accuracy_bonus = -30
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
