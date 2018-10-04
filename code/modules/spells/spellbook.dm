@@ -2,6 +2,8 @@
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
 #define INVESTABLE			8
+#define NO_LOCKING         16
+
 //spells/spellbooks have a variable for this but as artefacts are literal items they do not.
 //so we do this instead.
 var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
@@ -146,7 +148,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 15 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
 		if(!(spellbook.book_flags & NOREVERT))
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
-		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
+		if(!(spellbook.book_flags & NO_LOCKING))
+			dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	user << browse(dat,"window=spellbook")
 
 /obj/item/weapon/spellbook/CanUseTopic(var/mob/living/carbon/human/H)
@@ -159,7 +162,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	return ..()
 
 /obj/item/weapon/spellbook/OnTopic(var/mob/living/carbon/human/user, href_list)
-	if(href_list["lock"])
+	if(href_list["lock"] && !(spellbook.book_flags & NO_LOCKING))
 		if(spellbook.book_flags & LOCKED)
 			spellbook.book_flags &= ~LOCKED
 		else
@@ -215,7 +218,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 					playsound(get_turf(user),'sound/effects/phasein.ogg',50,1)
 		. = TOPIC_REFRESH
 
-	else if(href_list["reset"])
+	else if(href_list["reset"] && !(spellbook.book_flags & NOREVERT))
 		var/area/wizard_station/A = get_area(user)
 		if(istype(A))
 			uses = spellbook.max_uses

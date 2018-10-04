@@ -43,7 +43,7 @@
 					/obj/item/clothing/under/color/lightpurple = slot_w_uniform,
 					/obj/item/clothing/shoes/sandal = slot_shoes,
 					/obj/item/weapon/staff = slot_r_hand,
-					/obj/item/weapon/spellbook/student = slot_l_hand,
+					/obj/item/weapon/spellbook/apprentice = slot_l_hand,
 					/obj/item/clothing/suit/wizrobe = slot_wear_suit)
 	spells = list(/spell/noclothes)
 
