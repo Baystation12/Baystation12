@@ -9,10 +9,10 @@ Single Use Emergency Pouches
 	storage_slots = 7
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
-
-	var/base_icon = "white"
+	icon_state = "pack0"
 	var/injury_type = "generic"
 	var/opened = FALSE
+	var/global/image/cross_overlay
 
 	var/instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
@@ -28,11 +28,20 @@ Single Use Emergency Pouches
 /obj/item/weapon/storage/med_pouch/Initialize()
 	. = ..()
 	name = "emergency [injury_type] pouch"
+	make_exact_fit()
 	for(var/obj/item/weapon/reagent_containers/pill/P in contents)
-		P.icon_state = base_icon
-	for(var/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/A in contents)
-		A.icon_colour = base_icon
+		P.color = color
+	for(var/obj/item/weapon/reagent_containers/hypospray/autoinjector/A in contents)
+		A.band_color = color
 		A.update_icon()
+
+/obj/item/weapon/storage/med_pouch/update_icon()
+	overlays.Cut()
+	if(!cross_overlay)
+		cross_overlay = image(icon, "cross")
+		cross_overlay.appearance_flags = RESET_COLOR
+	overlays += cross_overlay
+	icon_state = "pack[opened]"
 
 /obj/item/weapon/storage/med_pouch/examine()
 	. = ..()
@@ -46,32 +55,20 @@ Single Use Emergency Pouches
 		to_chat(user, instructions)
 		return TOPIC_HANDLED
 
-/obj/item/weapon/storage/med_pouch/update_icon()
-	if(opened)
-		icon_state = base_icon + "_t"
-	else
-		icon_state = base_icon
+/obj/item/weapon/storage/med_pouch/attack_self(mob/user)
+	open(user)
 
-/obj/item/weapon/storage/med_pouch/attack_self(mob/user as mob)
+/obj/item/weapon/storage/med_pouch/open(mob/user)
 	if(!opened)
 		user.visible_message("<span class='notice'>\The [user] tears open [src], breaking the vacuum seal!</span>", "<span class='notice'>You tear open [src], breaking the vacuum seal!</span>")
 		opened = 1
-		max_w_class = ITEM_SIZE_TINY
-		storage_slots = 4
 		update_icon()
-	else
-		to_chat(user, "<span class='notice'>[src] is already ripped open.</span>")
-
-/obj/item/weapon/storage/med_pouch/open(mob/user as mob)
-	if(opened)
-		. = ..()
-	else
-		to_chat(user, "<span class='notice'>[src] needs to be opened before use.</span>")
+	. = ..()
 
 /obj/item/weapon/storage/med_pouch/trauma
 	name = "trauma pouch"
-	base_icon = "red"
 	injury_type = "trauma"
+	color = COLOR_RED
 
 	startswith = list(
 	/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
@@ -91,8 +88,8 @@ Single Use Emergency Pouches
 
 /obj/item/weapon/storage/med_pouch/burn
 	name = "burn pouch"
-	base_icon = "orange"
 	injury_type = "burn"
+	color = COLOR_SEDONA
 
 	startswith = list(
 	/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
@@ -114,8 +111,8 @@ Single Use Emergency Pouches
 
 /obj/item/weapon/storage/med_pouch/oxyloss
 	name = "low oxygen pouch"
-	base_icon = "blue"
 	injury_type = "low oxygen"
+	color = COLOR_BLUE
 
 	startswith = list(
 	/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
@@ -137,8 +134,8 @@ Single Use Emergency Pouches
 
 /obj/item/weapon/storage/med_pouch/toxin
 	name = "toxin pouch"
-	base_icon = "green"
 	injury_type = "toxin"
+	color = COLOR_GREEN
 
 	startswith = list(
 	/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/dylovene,
@@ -155,8 +152,8 @@ Single Use Emergency Pouches
 
 /obj/item/weapon/storage/med_pouch/radiation
 	name = "radiation pouch"
-	base_icon = "yellow"
 	injury_type = "radiation"
+	color = COLOR_AMBER
 
 	startswith = list(
 	/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad,
@@ -174,6 +171,7 @@ Single Use Emergency Pouches
 /obj/item/weapon/reagent_containers/pill/pouch_pill
 	name = "emergency pill"
 	desc = "An emergency pill from an emergency medical pouch"
+	icon_state = "pill2"
 	var/datum/reagent/chem_type
 	var/chem_amount = 15
 
@@ -198,13 +196,6 @@ Single Use Emergency Pouches
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
 	desc = "An emergency autoinjector from an emergency medical pouch"
-	var/icon_colour
-
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/update_icon()
-	if(reagents.total_volume > 0)
-		icon_state = "[icon_colour]1"
-	else
-		icon_state = "[icon_colour]0"
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline
 	name = "emergency inaprovaline autoinjector"
