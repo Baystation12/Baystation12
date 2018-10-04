@@ -85,12 +85,12 @@
 	if(!target || target == src)
 		return
 	forceMove(target)
-	speed = list(0, 0)
-	adjust_speed(0, 0) // Resets star movement and icon.
+	halt()
 
 /obj/effect/overmap/ship/landable/proc/on_takeoff(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
 	if(!isturf(loc))
 		forceMove(get_turf(loc))
+		unhalt()
 
 /obj/effect/overmap/ship/landable/get_landed_info()
 	switch(status)

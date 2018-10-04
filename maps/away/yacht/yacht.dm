@@ -4,9 +4,8 @@
 	name = "private yacht"
 	desc = "Sensor array is detecting a small vessel with unknown lifeforms on board"
 	color = "#ffc966"
-	vessel_mass = 30
-	default_delay = 35 SECONDS
-	speed_mod = 10 SECONDS
+	vessel_mass = 3000
+	max_speed = 1/(2 SECONDS)
 	initial_generic_waypoints = list(
 		"nav_yacht_1",
 		"nav_yacht_2",
