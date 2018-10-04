@@ -696,3 +696,9 @@ proc/is_blind(A)
 	if(isnull(choice) || src.incapacitated() || (required_item && !GLOB.hands_state.can_use_topic(required_item,src)))
 		return null
 	return choice
+
+/mob/proc/set_sdisability(sdisability)
+	sdisabilities |= sdisability
+
+/mob/proc/unset_sdisability(sdisability)
+	sdisabilities &= ~sdisability

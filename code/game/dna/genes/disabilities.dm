@@ -33,7 +33,7 @@
 	if(disability)
 		M.disabilities|=disability
 	if(sdisability)
-		M.sdisabilities|=sdisability
+		M.set_sdisability(sdisability)
 	if(activation_message)
 		to_chat(M, "<span class='warning'>[activation_message]</span>")
 	else
@@ -45,7 +45,7 @@
 	if(disability)
 		M.disabilities &= (~disability)
 	if(sdisability)
-		M.sdisabilities &= (~sdisability)
+		M.unset_sdisability(sdisability)
 	if(deactivation_message)
 		to_chat(M, "<span class='warning'>[deactivation_message]</span>")
 	else
