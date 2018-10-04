@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Adjusts max skill points and skill caps for Biomech and Roboticist."
