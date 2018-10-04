@@ -1244,6 +1244,16 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/card_slot
 	sort_string = "VBADA"
 
+// Card Broadcaster
+/datum/design/item/modularcomponent/accessory/cardbroadcaster
+	name = "RFID card broadcaster"
+	id = "cardbroadcaster"
+	req_tech = list(TECH_DATA = 3)
+	build_type = PROTOLATHE
+	materials = list(MATERIAL_STEEL = 600)
+	build_path = /obj/item/weapon/computer_hardware/card_slot/broadcaster
+	sort_string = "VBADB"
+
 // inteliCard Slot
 /datum/design/item/modularcomponent/accessory/aislot
 	name = "inteliCard slot"
@@ -1253,7 +1263,7 @@ other types of metals and chemistry for reagents).
 	materials = list(MATERIAL_STEEL = 2000)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/weapon/computer_hardware/ai_slot
-	sort_string = "VBADB"
+	sort_string = "VBADC"
 
 // Nano printer
 /datum/design/item/modularcomponent/accessory/nanoprinter
@@ -1263,7 +1273,7 @@ other types of metals and chemistry for reagents).
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 600)
 	build_path = /obj/item/weapon/computer_hardware/nano_printer
-	sort_string = "VBADC"
+	sort_string = "VBADD"
 
 // Tesla Link
 /datum/design/item/modularcomponent/accessory/teslalink
@@ -1273,7 +1283,7 @@ other types of metals and chemistry for reagents).
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 2000)
 	build_path = /obj/item/weapon/computer_hardware/tesla_link
-	sort_string = "VBADD"
+	sort_string = "VBADE"
 
 //Scanners
 /datum/design/item/modularcomponent/accessory/reagent_scanner
@@ -1283,7 +1293,7 @@ other types of metals and chemistry for reagents).
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
 	build_path = /obj/item/weapon/computer_hardware/scanner/reagent
-	sort_string = "VBADE"
+	sort_string = "VBADF"
 
 /datum/design/item/modularcomponent/accessory/paper_scanner
 	name = "paper scanner module"
@@ -1292,7 +1302,7 @@ other types of metals and chemistry for reagents).
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
 	build_path = /obj/item/weapon/computer_hardware/scanner/paper
-	sort_string = "VBADF"
+	sort_string = "VBADG"
 
 /datum/design/item/modularcomponent/accessory/atmos_scanner
 	name = "atmospheric scanner module"
@@ -1301,7 +1311,7 @@ other types of metals and chemistry for reagents).
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
 	build_path = /obj/item/weapon/computer_hardware/scanner/atmos
-	sort_string = "VBADG"
+	sort_string = "VBADH"
 
 /datum/design/item/modularcomponent/accessory/medical_scanner
 	name = "medical scanner module"
@@ -1310,7 +1320,7 @@ other types of metals and chemistry for reagents).
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
 	build_path = /obj/item/weapon/computer_hardware/scanner/medical
-	sort_string = "VBADH"
+	sort_string = "VBADI"
 
 // Batteries
 /datum/design/item/modularcomponent/battery/AssembleDesignName()
