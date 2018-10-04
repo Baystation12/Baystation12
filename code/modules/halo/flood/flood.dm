@@ -13,11 +13,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		)
 	/*
 	mob_bump_flag = SIMPLE_ANIMAL
+	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	*/
-	mob_swap_flags = ALLMOBS
-	mob_push_flags = ALLMOBS
-	mob_swap_flags = 0
-	mob_push_flags = 0
 	break_stuff_probability = 50
 	stop_automated_movement = 0
 	wander = 1
