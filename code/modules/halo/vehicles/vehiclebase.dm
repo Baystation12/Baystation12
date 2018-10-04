@@ -26,6 +26,8 @@
 	//Vehicle ferrying//
 	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
 
+	var/vehicle_view_modifier = 1 //The modifier to apply to the gunners and pilot. Added due to the sheer size of some vehicles.
+
 /obj/vehicles/New()
 	. = ..()
 	comp_prof = new comp_prof(src)
@@ -194,9 +196,11 @@
 
 	exit_vehicle(user)
 
-/obj/vehicles/proc/exit_vehicle(var/mob/user)
+/obj/vehicles/proc/exit_vehicle(var/mob/user,var/ignore_incap_check = 0)
 
-	if(!(user in occupants) || !is_atom_adjacent(user) || user.incapacitated())
+	if(!(user in occupants) || !is_atom_adjacent(user))
+		return
+	if(user.incapacitated() && !ignore_incap_check)
 		return
 	occupants -= user
 	contents -= user
@@ -337,7 +341,7 @@
 	if(chosen_occ.stat == CONSCIOUS)
 		if(!do_after(puller, VEHICLE_LOAD_DELAY*2,src,1,1,,1))
 			return
-	exit_vehicle(chosen_occ)
+	exit_vehicle(chosen_occ,1)
 
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
 	if(elevation > user.elevation || elevation > I.elevation)
