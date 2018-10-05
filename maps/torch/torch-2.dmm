@@ -286,6 +286,12 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
+"bc" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	dir = 4
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d3port)
 "bd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d3starboard)
@@ -2957,8 +2963,9 @@
 "gN" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/holocontrol)
-"gR" = (
-/turf/simulated/floor/reinforced,
+"gP" = (
+/obj/structure/lattice,
+/turf/simulated/wall/r_wall/hull,
 /area/thruster/d3port)
 "gV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -3281,6 +3288,23 @@
 /obj/machinery/vending/boozeomat,
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
+"hG" = (
+/obj/machinery/air_sensor{
+	id_tag = "d3po2_sensor";
+	output = 2
+	},
+/turf/simulated/floor/reinforced/oxygen,
+/area/thruster/d3port)
+"hK" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 2;
+	frequency = 1441;
+	icon_state = "map_injector";
+	id = "d3ph_in";
+	use_power = 1
+	},
+/turf/simulated/floor/reinforced/hydrogen,
+/area/thruster/d3port)
 "hO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -3649,15 +3673,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
-"it" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 12
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "iu" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4405,6 +4420,9 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
+"kg" = (
+/turf/simulated/floor/reinforced/hydrogen,
+/area/thruster/d3port)
 "ki" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -4877,13 +4895,6 @@
 /obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
-"lG" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/thruster/d3port)
 "lJ" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -5296,23 +5307,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
-"mF" = (
-/obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
-	},
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 8;
-	frequency = 1441;
-	icon_state = "map_injector";
-	id = "n2_in";
-	use_power = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "mJ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/crate/freezer/rations,
@@ -5668,6 +5662,10 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/substation/thirddeck)
+"nr" = (
+/obj/structure/lattice,
+/turf/simulated/floor/reinforced/hydrogen,
+/area/thruster/d3port)
 "nt" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/computer/HolodeckControl{
@@ -5685,6 +5683,16 @@
 	},
 /turf/space,
 /area/space)
+"nx" = (
+/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	description_info = "This pipe, and all other pipes, can be connected or disconnected by a wrench.  The internal pressure of the pipe must  be below 300 kPa to do this.  More pipes can be obtained from the pipe dispenser.";
+	dir = 10;
+	icon_state = "intact"
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "nC" = (
 /turf/simulated/wall/prepainted,
 /area/vacant/mess)
@@ -6658,17 +6666,6 @@
 	},
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
-"pv" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
-	dir = 5
-	},
-/obj/machinery/meter,
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "pz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -7226,6 +7223,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai_upload_foyer)
+"qO" = (
+/obj/machinery/atmospherics/valve/digital{
+	dir = 4;
+	frequency = 1447;
+	id = "fuelmode"
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/reinforced/oxygen,
+/area/thruster/d3port)
 "qP" = (
 /obj/effect/floor_decal/corner/green/half{
 	icon_state = "bordercolorhalf";
@@ -7423,10 +7429,6 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/aft)
-"rq" = (
-/obj/structure/lattice,
-/turf/simulated/floor/reinforced,
-/area/space)
 "rr" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -7518,6 +7520,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"rE" = (
+/obj/structure/lattice,
+/obj/structure/grille,
+/turf/simulated/wall/r_wall/hull,
+/area/space)
 "rG" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -9191,6 +9198,14 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
+"uJ" = (
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 4;
+	target_pressure = 15000
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/thruster/d3port)
 "uK" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
@@ -9895,27 +9910,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
-"wx" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/machinery/atmospherics/unary/vent_pump{
-	dir = 8;
-	external_pressure_bound = 0;
-	external_pressure_bound_default = 0;
-	frequency = 1441;
-	icon_state = "map_vent_in";
-	id_tag = "n2_out";
-	initialize_directions = 1;
-	internal_pressure_bound = 4000;
-	internal_pressure_bound_default = 4000;
-	pressure_checks = 2;
-	pressure_checks_default = 2;
-	pump_direction = 0;
-	use_power = 1
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "wz" = (
 /obj/item/modular_computer/console/preset/civilian/professional,
 /turf/simulated/floor/lino,
@@ -10507,13 +10501,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/diplomat)
-"xA" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "xB" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -12406,6 +12393,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"BT" = (
+/obj/machinery/air_sensor{
+	id_tag = "cChamber3p";
+	output = 2
+	},
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "BU" = (
 /obj/structure/table/steel,
 /obj/random/maintenance/solgov,
@@ -12424,20 +12418,6 @@
 "BX" = (
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
-"BZ" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 1
-	},
-/obj/machinery/atmospherics/binary/passive_gate/on{
-	dir = 4;
-	regulate_mode = 1;
-	target_pressure = 35000;
-	use_power = 1
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "Cb" = (
 /obj/machinery/newscaster{
 	pixel_y = 32
@@ -12789,6 +12769,39 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"CQ" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 1
+	},
+/obj/machinery/atmospherics/binary/passive_gate/on{
+	dir = 4;
+	max_pressure_setting = 35000;
+	regulate_mode = 2;
+	target_pressure = 35000;
+	use_power = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
+"CS" = (
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 8;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
+	frequency = 1441;
+	icon_state = "map_vent_in";
+	id_tag = "d3po2_out";
+	initialize_directions = 1;
+	internal_pressure_bound = 4000;
+	internal_pressure_bound_default = 4000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/turf/simulated/floor/reinforced/oxygen,
+/area/thruster/d3port)
 "CU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12812,6 +12825,21 @@
 	},
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
+"CW" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/computer/general_air_control/large_tank_control{
+	dir = 1;
+	frequency = 1441;
+	input_tag = "d3ph_in";
+	name = "Hydrogen Supply Control";
+	output_tag = "d3ph_out";
+	sensors = list("d3ph_sensor" = "Tank")
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "CX" = (
 /obj/structure/curtain/open/bed,
 /obj/effect/floor_decal/techfloor{
@@ -13563,15 +13591,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
-"EL" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "EM" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Third Deck Shield Generator";
@@ -13933,6 +13952,22 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"FR" = (
+/obj/machinery/atmospherics/omni/mixer{
+	set_flow_rate = 50;
+	tag_east = 1;
+	tag_east_con = 0.20;
+	tag_north = 2;
+	tag_north_con = null;
+	tag_south = 1;
+	tag_south_con = 0.40;
+	tag_west = 1;
+	tag_west_con = 0.40
+	},
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/thruster/d3port)
 "FS" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/cryolocker)
@@ -13972,6 +14007,15 @@
 /obj/random/maintenance/clean,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/cryolocker)
+"FY" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	injecting = 1;
+	use_power = 1;
+	volume_rate = 4000
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "FZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14473,18 +14517,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
-"Hn" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
-	dir = 1;
-	frequency = 1441;
-	input_tag = "o2_in";
-	name = "Oxygen Supply Control";
-	output_tag = "o2_out";
-	sensors = list("o2_sensor" = "Tank")
-	},
-/obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "Ho" = (
 /obj/structure/closet/secure_closet/personal,
 /obj/effect/floor_decal/corner/lime{
@@ -15051,9 +15083,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
-"IT" = (
-/turf/simulated/wall/prepainted,
-/area/space)
 "IU" = (
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/atmospherics/pipe/tank/oxygen{
@@ -15208,6 +15237,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"Jk" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 1;
+	target_pressure = 15000
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "Jo" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -15557,6 +15598,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"JW" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 1;
+	id = "dp3o2_in";
+	injecting = 1;
+	use_power = 1
+	},
+/turf/simulated/floor/reinforced/oxygen,
+/area/thruster/d3port)
 "JX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -15762,6 +15812,27 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
+/area/thruster/d3port)
+"Kx" = (
+/obj/machinery/computer/general_air_control/large_tank_control{
+	dir = 1;
+	frequency = 1441;
+	input_tag = "d3po2_in";
+	name = "Oxygen Supply Control";
+	output_tag = "d3po2_out";
+	sensors = list("d3po2_sensor" = "Tank")
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
+"Kz" = (
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 8;
+	max_pressure_setting = 15000;
+	target_pressure = 15000
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3port)
 "KB" = (
 /obj/structure/hygiene/toilet{
@@ -15992,6 +16063,27 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"Ls" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "Lv" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
@@ -16077,18 +16169,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
-"LH" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/warning,
-/obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 1;
-	target_pressure = 200
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "LM" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -16556,6 +16636,22 @@
 /obj/machinery/suit_storage_unit/atmos/alt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
+"Np" = (
+/obj/machinery/button/remote/blast_door{
+	id = "d3portnacelle";
+	name = "combustion chamber blast door controll";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "Ns" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -16571,12 +16667,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
-"Nt" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Nv" = (
 /obj/machinery/cooker/oven,
 /obj/effect/floor_decal/corner/grey/diagonal{
@@ -16681,17 +16771,6 @@
 /obj/structure/table/marble,
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
-"NS" = (
-/obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/binary/passive_gate/on{
-	dir = 4;
-	regulate_mode = 1;
-	target_pressure = 35000;
-	use_power = 1
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "NV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -17092,6 +17171,12 @@
 	},
 /turf/simulated/floor,
 /area/ai_monitored/storage/eva)
+"Pi" = (
+/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible/cyan,
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "Pj" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -17173,6 +17258,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
+"Pu" = (
+/obj/machinery/air_sensor{
+	id_tag = "d3ph_sensor";
+	output = 2
+	},
+/turf/simulated/floor/reinforced/hydrogen,
+/area/thruster/d3port)
 "Pw" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -17294,6 +17386,18 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
+"PM" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/binary/passive_gate/on{
+	dir = 4;
+	max_pressure_setting = 30000;
+	regulate_mode = 2;
+	target_pressure = 30000;
+	use_power = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "PN" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/portables_connector{
@@ -17779,9 +17883,6 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
-"RA" = (
-/turf/simulated/floor/reinforced,
-/area/maintenance/thirddeck/aftport)
 "RD" = (
 /obj/machinery/light{
 	dir = 8
@@ -18308,18 +18409,6 @@
 /obj/effect/floor_decal/corner/green/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/commissary)
-"Tf" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/machinery/atmospherics/valve/digital{
-	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
-	},
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Tg" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -18423,6 +18512,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
+"Tv" = (
+/obj/structure/lattice,
+/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "Tx" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -18434,6 +18530,20 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"Ty" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/orange,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "Tz" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
@@ -18449,13 +18559,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
-"TE" = (
-/obj/structure/lattice,
-/obj/effect/wingrille_spawn/reinforced_phoron,
-/obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/machinery/meter,
-/turf/simulated/floor/reinforced,
-/area/space)
 "TH" = (
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters{
@@ -18489,6 +18592,25 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
+"TM" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 2;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
+	frequency = 1441;
+	icon_state = "map_vent_in";
+	id_tag = "d3ph_out";
+	initialize_directions = 1;
+	internal_pressure_bound = 2000;
+	internal_pressure_bound_default = 2000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/turf/simulated/floor/reinforced/hydrogen,
+/area/thruster/d3port)
 "TO" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "offmess_windows"
@@ -18496,6 +18618,14 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/command/captainmess)
+"TQ" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced/oxygen,
+/area/thruster/d3port)
 "TS" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 10
@@ -18785,21 +18915,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
-"UH" = (
-/obj/machinery/button/remote/blast_door{
-	id = "d3portnacelle";
-	name = "combustion chamber blast door controll";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "UI" = (
 /obj/structure/table/steel,
 /obj/random/tech_supply,
@@ -18884,21 +18999,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
-"UT" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/machinery/computer/general_air_control/large_tank_control{
-	dir = 1;
-	frequency = 1441;
-	input_tag = "o2_in";
-	name = "Oxygen Supply Control";
-	output_tag = "o2_out";
-	sensors = list("o2_sensor" = "Tank")
-	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "UV" = (
 /obj/structure/table/marble,
 /obj/structure/flora/pottedplant/deskferntrim{
@@ -18920,13 +19020,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
-"UY" = (
-/obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "UZ" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -19050,15 +19143,6 @@
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/hardstorage/lower)
-"Vt" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on{
-	dir = 8;
-	max_pressure_setting = 35000;
-	target_pressure = 30000
-	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/thruster/d3port)
 "Vu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/table/marble,
@@ -19197,6 +19281,17 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/center)
+"VS" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "VT" = (
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
@@ -19254,25 +19349,6 @@
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
-"Wf" = (
-/obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
-	dir = 2;
-	external_pressure_bound = 0;
-	external_pressure_bound_default = 0;
-	frequency = 1441;
-	icon_state = "map_vent_in";
-	id_tag = "n2_out";
-	initialize_directions = 1;
-	internal_pressure_bound = 4000;
-	internal_pressure_bound_default = 4000;
-	pressure_checks = 2;
-	pressure_checks_default = 2;
-	pump_direction = 0;
-	use_power = 1
-	},
-/turf/simulated/floor/reinforced,
-/area/space)
 "Wg" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Holodeck Maintenance";
@@ -19337,12 +19413,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
-"Wr" = (
-/obj/machinery/atmospherics/omni/mixer,
-/obj/effect/floor_decal/industrial/warning/full,
-/obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/thruster/d3port)
 "Wt" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -19622,14 +19692,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
-"Xp" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	injecting = 1;
-	use_power = 1
-	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Xs" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -19789,16 +19851,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/diplomat)
-"XV" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 2;
-	frequency = 1441;
-	icon_state = "map_injector";
-	id = "n2_in";
-	use_power = 1
-	},
-/turf/simulated/floor/reinforced,
-/area/maintenance/thirddeck/aftport)
 "XX" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19960,17 +20012,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
-"Yq" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/hatch/orange,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "Ys" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -20014,6 +20055,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ai_monitored/storage/eva)
+"YA" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "YC" = (
 /obj/machinery/space_heater,
 /turf/simulated/floor/plating,
@@ -20223,6 +20268,14 @@
 	},
 /turf/simulated/floor,
 /area/ai_monitored/storage/eva)
+"Zi" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 4;
+	target_pressure = 15000
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "Zj" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
@@ -20231,14 +20284,6 @@
 /obj/machinery/libraryscanner,
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
-"Zk" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/air_sensor{
-	id_tag = "cChamber3p";
-	output = 2
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Zm" = (
 /obj/machinery/seed_storage/garden,
 /turf/simulated/floor/tiled/monotile,
@@ -20301,27 +20346,6 @@
 /obj/random/tank,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
-"ZA" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 12
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 1
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/meter,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
 "ZB" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -47193,7 +47217,7 @@ EH
 jZ
 jZ
 jZ
-LD
+gP
 pI
 RH
 pI
@@ -47393,12 +47417,12 @@ jZ
 jZ
 jZ
 jZ
-RA
-Wf
-TE
+kg
+TM
+Tv
 ze
 VZ
-UT
+CW
 pI
 aa
 aa
@@ -47595,12 +47619,12 @@ jZ
 jZ
 jZ
 jZ
-RA
-rq
+Pu
+nr
 lh
 lS
 VZ
-Hn
+Kx
 pI
 aa
 aa
@@ -47797,10 +47821,10 @@ jZ
 jZ
 jZ
 jZ
-RA
-XV
+kg
+hK
 Rw
-it
+VS
 Za
 vq
 pI
@@ -48002,11 +48026,11 @@ jZ
 jZ
 pI
 vw
-ZA
+Ls
 Oz
-mF
+bc
 pI
-aa
+pI
 aa
 aa
 aa
@@ -48199,16 +48223,16 @@ aa
 aa
 aa
 aV
-bb
+LD
 jZ
+La
 pI
+Ty
+Zi
+rA
+nx
+JW
 pI
-Yq
-UY
-xA
-Nt
-pI
-aa
 aa
 aa
 aa
@@ -48400,17 +48424,17 @@ aa
 aa
 aa
 aa
-aV
+rE
 aU
-pI
-Xp
+La
+FY
 zQ
 Xx
-Wr
-LH
-pv
+FR
+Jk
+Pi
+TQ
 pI
-aa
 aa
 aa
 aa
@@ -48601,18 +48625,18 @@ aI
 aa
 aa
 aa
-aa
+aU
 pI
-pI
+La
 LO
-gR
+BT
 Ri
 QD
-Vt
+Kz
 Xw
-Tf
+lh
+qO
 pI
-aa
 aa
 aa
 aa
@@ -48807,14 +48831,14 @@ aa
 Li
 ZI
 Sb
-Zk
+YA
 Si
 rz
 iq
 NG
-wx
+lh
+CS
 pI
-aa
 aa
 aa
 aa
@@ -49005,18 +49029,18 @@ aI
 aI
 aa
 aa
-aa
+aU
 pI
 Mi
 Ni
 Oi
 La
-UH
+Np
 QB
 rA
-Nt
+lh
+hG
 pI
-aa
 aa
 aa
 aa
@@ -49213,12 +49237,12 @@ oq
 op
 tM
 sS
-BZ
-lG
-NS
-EL
+CQ
+uJ
+PM
 pI
-aa
+pI
+pI
 aa
 aa
 aa
@@ -49409,7 +49433,7 @@ aI
 aI
 aa
 aa
-aa
+aU
 pI
 kX
 TK
@@ -49420,7 +49444,7 @@ kp
 Yw
 jq
 pI
-aa
+pI
 aa
 aa
 aa
@@ -49611,7 +49635,7 @@ aI
 aI
 aa
 aa
-aa
+aU
 pI
 Kf
 Kf
@@ -49622,7 +49646,7 @@ pI
 Kf
 Kf
 pI
-aa
+pI
 aa
 aa
 aa
@@ -49817,12 +49841,12 @@ aa
 aa
 aa
 aa
-IT
-IT
-IT
-IT
-IT
-IT
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
