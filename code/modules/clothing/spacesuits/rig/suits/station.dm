@@ -176,10 +176,9 @@
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/hazmat
-
-	name = "AMI control module"
+	name = "\improper AMI control module"
 	suit_type = "hazmat hardsuit"
-	desc = "An Anomalous Material Interaction hardsuit, a prototype NanoTrasen design, protects the wearer against the strangest energies the universe can throw at it."
+	desc = "An Anomalous Material Interaction hardsuit, a cutting-edge NanoTrasen design, protects the wearer against the strangest energies the universe can throw at it."
 	icon_state = "science_rig"
 	armor = list(melee = 45, bullet = 5, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
 	online_slowdown = 1
@@ -218,7 +217,6 @@
 		)
 
 /obj/item/weapon/rig/medical
-
 	name = "rescue suit control module"
 	suit_type = "rescue hardsuit"
 	desc = "A durable suit designed for medical rescue in high risk areas."
@@ -275,7 +273,7 @@
 /obj/item/weapon/rig/hazard
 	name = "hazard hardsuit control module"
 	suit_type = "hazard hardsuit"
-	desc = "A NanoTrasen security hardsuit designed for prolonged EVA in dangerous environments."
+	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
 	armor = list(melee = 60, bullet = 40, laser = 40, energy = 15, bomb = 60, bio = 100, rad = 30)
 	online_slowdown = 1

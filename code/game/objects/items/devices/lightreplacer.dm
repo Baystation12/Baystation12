@@ -39,13 +39,8 @@
 
 
 /obj/item/device/lightreplacer
-
 	name = "light replacer"
 	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
-	description_info = "Examine or use this item to see how many lights are remaining. You can feed it lightbulbs or sheets of glass to refill it."
-	description_fluff = "Can you believe they used to have to screw lightbulbs in by hand?"
-	description_antag = "Using a cryptographic sequencer on this device will cause it to overload each light it replaces; when turned on, the new lights will explode!"
-
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
 	item_state = "electronic"
@@ -92,7 +87,7 @@
 	. = ..()
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")

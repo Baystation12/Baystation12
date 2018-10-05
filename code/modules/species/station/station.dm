@@ -11,6 +11,7 @@
 	assisted_langs = list(LANGUAGE_NABBER)
 	min_age = 17
 	max_age = 100
+	hidden_from_codex = FALSE
 
 	gluttonous = GLUT_TINY
 
@@ -24,7 +25,21 @@
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			CULTURE_HUMAN,
-			CULTURE_HUMAN_VATGROWN
+			CULTURE_HUMAN_VATGROWN,
+			CULTURE_HUMAN_MARTIAN,
+			CULTURE_HUMAN_MARSTUN,
+			CULTURE_HUMAN_LUNAPOOR,
+			CULTURE_HUMAN_LUNARICH,
+			CULTURE_HUMAN_VENUSIAN,
+			CULTURE_HUMAN_VENUSLOW,
+			CULTURE_HUMAN_BELTER,
+			CULTURE_HUMAN_PLUTO,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_CETI,
+			CULTURE_HUMAN_SPACER,
+			CULTURE_HUMAN_SPAFRO,
+			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_OTHER
 		)
 	)
 
@@ -97,6 +112,7 @@
 	health_hud_intensity = 1.75
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
 	genders = list(PLURAL)
+	hidden_from_codex = FALSE
 
 	min_age = 19
 	max_age = 90
@@ -110,6 +126,7 @@
 	hazard_low_pressure = HAZARD_LOW_PRESSURE * 2
 	warning_high_pressure = WARNING_HIGH_PRESSURE / 0.8125
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
+	water_soothe_amount = 5
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
@@ -143,7 +160,7 @@
 	)
 
 	available_cultural_info = list(
-		TAG_CULTURE =   list(
+		TAG_CULTURE = list(
 			CULTURE_SKRELL_QERR,
 			CULTURE_SKRELL_MALISH,
 			CULTURE_SKRELL_KANIN,
@@ -154,17 +171,39 @@
 			HOME_SYSTEM_QERRBALAK
 		),
 		TAG_FACTION = list(
-			FACTION_OTHER,
 			FACTION_EXPEDITIONARY,
-			FACTION_NANOTRASEN
+			FACTION_TORCH_LTD,
+			FACTION_NANOTRASEN,
+			FACTION_PCRC,
+			FACTION_HEPHAESTUS,
+			FACTION_OTHER
 		),
-		TAG_RELIGION =  list(
+		TAG_RELIGION = list(
 			RELIGION_OTHER,
 			RELIGION_ATHEISM,
 			RELIGION_DEISM,
 			RELIGION_AGNOSTICISM
+		),
+		TAG_EDUCATION = list(
+			EDUCATION_SKRELL_FAILURE,
+			EDUCATION_SKRELL_BASIC,
+			EDUCATION_SKRELL_FULL,
+			EDUCATION_SKRELL_FULL_SCIENCE,
+			EDUCATION_SKRELL_FULL_DOCTOR
 		)
 	)
+
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/gills,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
+		)
+
+/datum/species/skrell/get_sex(var/mob/living/carbon/H)
+	return descriptors["headtail length"] == 1 ? MALE : FEMALE
 
 /datum/species/diona
 	name = SPECIES_DIONA
@@ -172,6 +211,7 @@
 	icobase = 'icons/mob/human_races/species/diona/body.dmi'
 	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
+	hidden_from_codex = FALSE
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
@@ -263,7 +303,7 @@
 		return 0
 
 	//This is a terrible hack and I should be ashamed.
-	var/datum/seed/diona = plant_controller.seeds["diona"]
+	var/datum/seed/diona = SSplants.seeds["diona"]
 	if(!diona)
 		return 0
 

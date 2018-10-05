@@ -6,6 +6,7 @@
 	built by an extinct culture. They are devoted to the memory of their long-dead creators, \
 	whose home system and burgeoning stellar empire was scoured to bedrock by a solar flare. \
 	Physically, they are large, floating squidlike machines made of a crystalline composite."
+	hidden_from_codex = FALSE
 
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
@@ -40,9 +41,9 @@
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
-	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_LACE
+	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
-	appearance_flags = HAS_EYE_COLOR
+	appearance_flags = HAS_EYE_COLOR | HAS_BASE_SKIN_COLOURS
 	blood_color = "#2de00d"
 	flesh_color = "#90edeb"
 	virus_immune = 1
@@ -92,6 +93,15 @@
 		)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
+
+	base_skin_colours = list(
+		"Turquoise"   = "",
+		"Emerald"     = "_green",
+		"Amethyst"    = "_purple",
+		"Sapphire"    = "_blue",
+		"Ruby"        = "_red",
+		"Topaz"       = "_yellow"
+	)
 
 /datum/species/adherent/New()
 	equip_adjust = list(

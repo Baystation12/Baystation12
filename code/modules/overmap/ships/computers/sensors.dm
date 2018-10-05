@@ -1,20 +1,17 @@
-/obj/machinery/computer/sensors
+/obj/machinery/computer/ship/sensors
 	name = "sensors console"
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
 	//circuit = /obj/item/weapon/circuitboard/sensors
-	var/obj/effect/overmap/ship/linked
 	var/obj/machinery/shipsensors/sensors
 	var/viewing = 0
 	var/list/viewers
 
-/obj/machinery/computer/sensors/Initialize()
+/obj/machinery/computer/ship/sensors/Initialize()
 	. = ..()
-	linked = map_sectors["[z]"]
-	find_sensors()
 
-/obj/machinery/computer/sensors/Destroy()
+/obj/machinery/computer/ship/sensors/Destroy()
 	sensors = null
 	if(LAZYLEN(viewers))
 		for(var/weakref/W in viewers)
@@ -23,14 +20,22 @@
 				unlook(M)
 	. = ..()
 
-/obj/machinery/computer/sensors/proc/find_sensors()
+/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/ship/sector)
+	if(!(. = ..()))
+		return
+	find_sensors()
+
+/obj/machinery/computer/ship/sensors/proc/find_sensors()
+	if(!linked)
+		return
 	for(var/obj/machinery/shipsensors/S in SSmachines.machinery)
-		if (S.z in GetConnectedZlevels(z))
+		if(linked.check_ownership(S))
 			sensors = S
 			break
 
-/obj/machinery/computer/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		display_reconnect_dialog(user, "sensors")
 		return
 
 	var/data[0]
@@ -58,12 +63,12 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 420, 530)
+		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 420, 530, src)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/sensors/check_eye(var/mob/user as mob)
+/obj/machinery/computer/ship/sensors/check_eye(var/mob/user as mob)
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
 		viewing = 0
 	if (!viewing)
@@ -71,66 +76,72 @@
 	else
 		return 0
 
-/obj/machinery/computer/sensors/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/ship/sensors/attack_hand(var/mob/user as mob)
 	if(..())
-		user.unset_machine()
 		viewing = 0
 		unlook(user)
 		return
 
 	if(!isAI(user))
-		user.set_machine(src)
 		if(viewing)
 			look(user)
-	ui_interact(user)
 
-/obj/machinery/computer/sensors/proc/look(var/mob/user)
+/obj/machinery/computer/ship/sensors/proc/look(var/mob/user)
 	if(linked)
 		user.reset_view(linked)
 	if(user.client)
 		user.client.view = world.view + 4
-	GLOB.moved_event.register(user, src, /obj/machinery/computer/sensors/proc/unlook)
-	GLOB.stat_set_event.register(user, src, /obj/machinery/computer/sensors/proc/unlook)
+	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
+	GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
 
-/obj/machinery/computer/sensors/proc/unlook(var/mob/user)
+/obj/machinery/computer/ship/sensors/proc/unlook(var/mob/user)
 	user.reset_view()
 	if(user.client)
 		user.client.view = world.view
-	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/sensors/proc/unlook)
-	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/sensors/proc/unlook)
+	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
+	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
 	LAZYREMOVE(viewers, weakref(user))
 
-/obj/machinery/computer/sensors/Topic(href, href_list, state)
+/obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
+
+	if(href_list["close"])
+		unlook(user)
+		user.unset_machine()
+		return TOPIC_HANDLED
 
 	if (!linked)
-		return
+		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
 		viewing = !viewing
-		if(usr && !isAI(usr))
-			viewing ? look(usr) : unlook(usr)
-		return 1
+		if(user && !isAI(user))
+			viewing ? look(user) : unlook(user)
+		return TOPIC_REFRESH
 
 	if (href_list["link"])
 		find_sensors()
-		return 1
+		return TOPIC_REFRESH
 
 	if(sensors)
 		if (href_list["range"])
 			var/nrange = input("Set new sensors range", "Sensor range", sensors.range) as num|null
-			if(!CanInteract(usr,state))
-				return
+			if(!CanInteract(user,state))
+				return TOPIC_NOACTION
 			if (nrange)
 				sensors.set_range(Clamp(nrange, 1, world.view))
-			return 1
+			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
-			return 1
+			return TOPIC_REFRESH
 
-/obj/machinery/computer/sensors/Process()
+/obj/machinery/computer/ship/sensors/CouldNotUseTopic(mob/user)
+	unlook(user)
+	. = ..()
+
+/obj/machinery/computer/ship/sensors/Process()
 	..()
 	if(!linked)
 		return
@@ -204,8 +215,8 @@
 	..()
 
 /obj/machinery/shipsensors/proc/toggle()
-	if(!use_power && health == 0)
-		return
+	if(!use_power && (health == 0 || !in_vacuum()))
+		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
 		use_power(idle_power_usage*5)
 	use_power = !use_power

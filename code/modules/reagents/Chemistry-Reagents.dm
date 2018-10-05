@@ -15,6 +15,7 @@
 	var/color = "#000000"
 	var/color_weight = 1
 	var/flags = 0
+	var/hidden_from_codex
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
@@ -119,6 +120,9 @@
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	holder = null
 	. = ..()
+
+/datum/reagent/proc/ex_act(obj/item/weapon/reagent_containers/holder, severity)
+	return
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 

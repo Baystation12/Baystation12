@@ -37,6 +37,10 @@
 	name = "Fin Hawk"
 	icon_state = "fin_hawk"
 
+/datum/sprite_accessory/hair/una/exotic
+	name = "Exotic Frills"
+	icon_state = "big_frills"
+
 /datum/sprite_accessory/skin/unathi
 	name = "Default Unathi skin"
 	icon_state = "default"

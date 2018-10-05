@@ -46,7 +46,7 @@ restricted_waypoints is list of 'shuttle name = list(landmark_tags)' pairs for w
 *************************************************************
 # Helm console
 *************************************************************
-/obj/machinery/computer/helm
+/obj/machinery/computer/ship/helm
 ### WHAT IT DOES
 Lets you steer ship around on overmap.
 Lets you use autopilot.
@@ -56,7 +56,7 @@ Just place it anywhere on the ship.
 *************************************************************
 # Engines control console
 *************************************************************
-/obj/machinery/computer/engines
+/obj/machinery/computer/ship/engines
 ### WHAT IT DOES
 Lets use set thrust limits for engines of your ship.
 Lets you shutdown/restart the engines.

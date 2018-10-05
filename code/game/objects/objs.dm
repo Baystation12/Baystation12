@@ -158,3 +158,6 @@
 	if(Adjacent(user))
 		add_fingerprint(user)
 	..()
+
+/obj/is_fluid_pushable(var/amt)
+	return ..() && w_class <= round(amt/20)

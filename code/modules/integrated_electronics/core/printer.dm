@@ -46,7 +46,7 @@
 /obj/item/device/integrated_circuit_printer/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
-		if(M.material.name == DEFAULT_WALL_MATERIAL)
+		if(M.material.name == MATERIAL_STEEL)
 			var/amt = M.amount
 			if(amt * SHEET_MATERIAL_AMOUNT + metal > metal_max)
 				amt = (metal_max - metal) / SHEET_MATERIAL_AMOUNT
@@ -92,7 +92,7 @@
 			recycling = TRUE
 			for(var/V in EA.assembly_components)
 				var/obj/item/integrated_circuit/IC = V
-				if(IC.matter[DEFAULT_WALL_MATERIAL] && metal + IC.matter[DEFAULT_WALL_MATERIAL] > metal_max)
+				if(IC.matter[MATERIAL_STEEL] && metal + IC.matter[MATERIAL_STEEL] > metal_max)
 					to_chat(user, "<span class='notice'>[src] can't hold any more materials!</span>")
 					break
 				if(!do_after(user, 5, target = user))
@@ -100,7 +100,7 @@
 					return
 				playsound(src, 'sound/items/crowbar.ogg', 50, TRUE)
 				if(EA.try_remove_component(IC, user, TRUE))
-					metal += IC.matter[DEFAULT_WALL_MATERIAL]
+					metal += IC.matter[MATERIAL_STEEL]
 			to_chat(user, "<span class='notice'>You recycle all the components[EA.assembly_components.len ? " you could " : " "]from [EA]!</span>")
 			playsound(src, 'sound/items/electronic_assembly_empty.ogg', 50, TRUE)
 			recycling = FALSE
@@ -192,10 +192,10 @@
 		var/cost = 400
 		if(ispath(build_type, /obj/item/device/electronic_assembly))
 			var/obj/item/device/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
-			cost = E.matter[DEFAULT_WALL_MATERIAL]
+			cost = E.matter[MATERIAL_STEEL]
 		else if(ispath(build_type, /obj/item/integrated_circuit))
 			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
-			cost = IC.matter[DEFAULT_WALL_MATERIAL]
+			cost = IC.matter[MATERIAL_STEEL]
 		else if(!build_type in SScircuit.circuit_fabricator_recipe_list["Tools"])
 			return
 

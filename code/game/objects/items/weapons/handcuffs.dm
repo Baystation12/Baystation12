@@ -11,7 +11,7 @@
 	throw_speed = 2
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	matter = list(MATERIAL_STEEL = 500)
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
@@ -74,7 +74,7 @@
 		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
 		return 0
 
-	if(istype(H.gloves,/obj/item/clothing/gloves/rig) && !elastic) // Can't cuff someone who's in a deployed hardsuit.
+	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
 		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
 		return 0
 

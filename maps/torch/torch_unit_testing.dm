@@ -1,3 +1,6 @@
+/datum/unit_test/station_wires_shall_be_connected
+	exceptions = list(list(80, 107, 1, WEST))
+
 /datum/map/torch
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
@@ -16,14 +19,14 @@
 		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance/firstdeck/foreport = NO_SCRUBBER,
 		/area/maintenance/firstdeck/forestarboard = NO_SCRUBBER,
-		/area/maintenance/fourthdeck/aft = 0,
 		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/seconddeck/aftport = NO_SCRUBBER,
 		/area/maintenance/seconddeck/forestarboard = NO_SCRUBBER,
 		/area/maintenance/seconddeck/hallway = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER|NO_VENT,
+		/area/maintenance/fifthdeck/aftstarboard = NO_SCRUBBER,
+		/area/maintenance/waterstore = 0,
 		/area/maintenance/bluespace = NO_SCRUBBER,
-		/area/janitor = NO_SCRUBBER|NO_VENT,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ninja_dojo = NO_SCRUBBER |NO_VENT | NO_APC,
@@ -74,7 +77,9 @@
 		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase/station = NO_SCRUBBER,
-		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/shuttle/petrov/maint = NO_SCRUBBER,
+		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(

@@ -41,6 +41,8 @@
 #define COLOR_OFF_WHITE        "#eeeeee"
 #define COLOR_WHITE            "#ffffff"
 #define COLOR_NT_RED           "#9d2300"
+#define COLOR_BOTTLE_GREEN     "#1f6b4f"
+#define COLOR_PALE_BTL_GREEN   "#57967f"
 #define COLOR_GUNMETAL         "#545c68"
 #define COLOR_MUZZLE_FLASH     "#ffffb2"
 #define COLOR_CHESTNUT         "#996633"
@@ -105,5 +107,8 @@
 #define COLOR_ASSEMBLY_LBLUE   "#5d99be"
 #define COLOR_ASSEMBLY_BLUE    "#38559e"
 #define COLOR_ASSEMBLY_PURPLE  "#6f6192"
+
+// Used by fluid system.
+#define COLOR_OCEAN "#99f5ff"
 
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

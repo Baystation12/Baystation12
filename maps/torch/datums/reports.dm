@@ -12,7 +12,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch - Office of the Executive Officer")
 	add_field(/datum/report_field/people/from_manifest, "Name (XO)")
 	add_field(/datum/report_field/people/from_manifest, "Name (applicant)", required = 1)
-	add_field(/datum/report_field/date, "Date filed")	
+	add_field(/datum/report_field/date, "Date filed")
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/simple_text, "Present position")
 	add_field(/datum/report_field/simple_text, "Requested position")
@@ -38,7 +38,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch - Office of the Executive Officer")
 	add_field(/datum/report_field/people/from_manifest, "Name (XO)")
 	add_field(/datum/report_field/people/from_manifest, "Name (applicant)", required = 1)
-	add_field(/datum/report_field/date, "Date filed")	
+	add_field(/datum/report_field/date, "Date filed")
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/simple_text, "Present position")
 	add_field(/datum/report_field/simple_text, "Requested access")
@@ -64,7 +64,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch - Office of the Executive Officer")
 	add_field(/datum/report_field/people/from_manifest, "Name (XO)")
 	add_field(/datum/report_field/people/from_manifest, "Name (subject)", required = 1)
-	add_field(/datum/report_field/date, "Date filed")	
+	add_field(/datum/report_field/date, "Date filed")
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/instruction, "I, undersigned, hereby agree to willingly undergo a Regulation Lobotimization with intention of cyborgification or AI assimilation, and I am aware of all the consequences of such act. I also understand that this operation may be irreversible, and that my employment contract will be terminated.")
 	add_field(/datum/report_field/signature, "Subject's signature")
@@ -91,7 +91,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch Security Department")
 	add_field(/datum/report_field/instruction, "For internal use only.")
 	add_field(/datum/report_field/people/from_manifest, "Name")
-	add_field(/datum/report_field/date, "Date")	
+	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time")
 	add_field(/datum/report_field/simple_text, "Case name")
 	add_field(/datum/report_field/pencode_text, "Summary")
@@ -110,7 +110,7 @@
 	add_field(/datum/report_field/instruction, "To be filled out by Officer on duty responding to the Incident. Report must be signed and submitted before the end of the shift!")
 	add_field(/datum/report_field/people/from_manifest, "Reporting Officer")
 	add_field(/datum/report_field/simple_text, "Offense/Incident Type")
-	add_field(/datum/report_field/date, "Date")	
+	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time of incident")
 	add_field(/datum/report_field/people/list_from_manifest, "Assisting Officer(s)")
 	add_field(/datum/report_field/simple_text, "Location")
@@ -129,7 +129,7 @@
 	..()
 	var/datum/report_field/temp_field
 	add_field(/datum/report_field/instruction, "SEV Torch Security Department")
-	add_field(/datum/report_field/date, "Date")	
+	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time")
 	add_field(/datum/report_field/people/from_manifest, "Confiscated from")
 	add_field(/datum/report_field/pencode_text, "List of items in custody/evidence lockup")
@@ -157,7 +157,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch Supply and Hangar Management Department")
 	add_field(/datum/report_field/instruction, "General Info")
 	add_field(/datum/report_field/date, "Date")
-	add_field(/datum/report_field/simple_text, "Vessel Name")		
+	add_field(/datum/report_field/simple_text, "Vessel Name")
 	add_field(/datum/report_field/simple_text, "Vessel Pilot/Owner")
 	add_field(/datum/report_field/simple_text, "Vessel Intended Purpose")
 	add_field(/datum/report_field/people/from_manifest, "Docking Authorized by")
@@ -199,7 +199,7 @@
 	add_field(/datum/report_field/pencode_text, "Defense/Offense")
 	add_field(/datum/report_field/pencode_text, "Special Characteristic(s)")
 	add_field(/datum/report_field/pencode_text, "Classification")
-	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Research Director should fax the form to both the NanoTrasen Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Research Director should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
 
 //NT reports, mostly for liason but can be used by any NT personnel.
 
@@ -213,7 +213,7 @@
 	add_field(/datum/report_field/simple_text, "Index")
 
 /datum/computer_file/report/recipient/nt/anomaly
-	form_name = "NT-1546"
+	form_name = "C-1546"
 	title = "Anomalistic Object Report"
 	available_on_ntnet = 1
 
@@ -233,8 +233,8 @@
 	add_field(/datum/report_field/simple_text, "Threat Level of AO")
 
 /datum/computer_file/report/recipient/nt/fire
-	form_name = "NT-0102"
-	title = "NT Employment Termination Form"
+	form_name = "C-0102"
+	title = "Corporate Employment Termination Form"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/fire/New()
@@ -269,8 +269,8 @@
 	add_field(/datum/report_field/options/yes_no, "Approved")
 
 /datum/computer_file/report/recipient/nt/incident/ship
-	form_name = "NT-3203"
-	title = "NanoTrasen Ship Incident Report"
+	form_name = "C-3203"
+	title = "Corporate Ship Incident Report"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/ship/generate_fields()
@@ -280,8 +280,8 @@
 
 
 /datum/computer_file/report/recipient/nt/incident/personnel
-	form_name = "NT-3205"
-	title = "NanoTrasen Personnel Incident Report"
+	form_name = "C-3205"
+	title = "Corporate Personnel Incident Report"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/personnel/generate_fields()
@@ -290,41 +290,41 @@
 	add_signatures()
 
 /datum/computer_file/report/recipient/nt/incident/asset
-	form_name = "NT-3201"
-	title = "NanoTrasen Asset Incident Report"
+	form_name = "C-3201"
+	title = "Corporate Asset Incident Report"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/asset/generate_fields()
 	..()
-	add_field(/datum/report_field/pencode_text, "NanoTrasen Employee Injuries")
-	add_field(/datum/report_field/pencode_text, "NanoTrasen Assets Lost")
+	add_field(/datum/report_field/pencode_text, "Corporate Employee Injuries")
+	add_field(/datum/report_field/pencode_text, "Corporate Assets Lost")
 	add_signatures()
 
 /datum/computer_file/report/recipient/nt/incident/xeno
-	form_name = "NT-3213"
-	title = "NanoTrasen Non-Human Employee Incident Report"
+	form_name = "C-3213"
+	title = "Corporate Non-Human Employee Incident Report"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/xeno/generate_fields()
-	add_field(/datum/report_field/instruction, "If non-human employee lacks a valid work visa, use form NT-3213A instead.")
+	add_field(/datum/report_field/instruction, "If non-human employee lacks a valid work visa, use form C-3213A instead.")
 	..()
 	add_field(/datum/report_field/people/list_from_manifest, "Non-Human Employee(s) Involved")
 	add_signatures()
 
 /datum/computer_file/report/recipient/nt/incident/xeno_no_visa/
-	form_name = "NT-3213A"
-	title = "NanoTrasen Non-Human Employee Incident Report: Without Visa"
+	form_name = "C-3213A"
+	title = "Corporate Non-Human Employee Incident Report: Without Visa"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/xeno_no_visa/generate_fields()
-	add_field(/datum/report_field/instruction, "If non-human employee has a valid work visa, use form NT-3213 instead.")
+	add_field(/datum/report_field/instruction, "If non-human employee has a valid work visa, use form C-3213 instead.")
 	..()
 	add_field(/datum/report_field/people/list_from_manifest, "Non-Human Employee(s) Involved")
 	add_signatures()
 
 /datum/computer_file/report/recipient/nt/incident/synth
-	form_name = "NT-3213X"
-	title = "NanoTrasen Synthetic Employee Incident Report"
+	form_name = "C-3213X"
+	title = "Corporate Synthetic Employee Incident Report"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/synth/generate_fields()
@@ -333,8 +333,8 @@
 	add_signatures()
 
 /datum/computer_file/report/recipient/nt/incident/crew
-	form_name = "NT-3241"
-	title = "NanoTrasen Ship Crew/Employee Incident Report"
+	form_name = "C-3241"
+	title = "Corporate Ship Crew/Employee Incident Report"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/incident/crew/generate_fields()
@@ -345,8 +345,8 @@
 	add_signatures()
 
 /datum/computer_file/report/recipient/nt/volunteer
-	form_name = "NT-1443"
-	title = "NanoTrasen Test Subject Volunteer Form"
+	form_name = "C-1443"
+	title = "Corporate Test Subject Volunteer Form"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/volunteer/generate_fields()
@@ -357,25 +357,25 @@
 	add_field(/datum/report_field/simple_text, "Intended Procedure(s)")
 	add_field(/datum/report_field/simple_text, "Compensation for Volunteer: (if any)")
 	add_field(/datum/report_field/people/list_from_manifest, "Handling Researcher(s)")
-	add_field(/datum/report_field/instruction, "By signing, the \"Volunteer\" agrees to absolve the NanoTrasen Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative of the NanoTrasen Corporation, such as a Research Director or NanoTrasen Executive - this form is deemed reviewed, but is only approved if so marked.")
+	add_field(/datum/report_field/instruction, "By signing, the \"Volunteer\" agrees to absolve the Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative of the Corporation, such as a Research Director or Executive - this form is deemed reviewed, but is only approved if so marked.")
 	add_field(/datum/report_field/signature, "Volunteer's Signature:")
-	temp_fields += add_field(/datum/report_field/signature, "NanoTrasen Representative's Signature")
+	temp_fields += add_field(/datum/report_field/signature, "Corporate Representative's Signature")
 	temp_fields += add_field(/datum/report_field/options/yes_no, "Approved")
 	for(var/datum/report_field/temp_field in temp_fields)
 		temp_field.set_access(access_edit = access_nanotrasen)
 
 /datum/computer_file/report/recipient/nt/deny
-	form_name = "NT-1443D"
+	form_name = "C-1443D"
 	title = "Rejection of Test Subject Volunteer Notice"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/deny/generate_fields()
 	..()
 	add_header()
-	add_field(/datum/report_field/instruction, "Dear Sir/Madam, we regret to inform you that your volunteer application for service as a test subject with the NanoTrasen Corporation has been rejected. We thank you for your interest in our company and the progression of research. Attached, you will find a copy of your original volunteer form for your records. Regards,")
-	add_field(/datum/report_field/signature, "NanoTrasen Representative's Signature")
+	add_field(/datum/report_field/instruction, "Dear Sir/Madam, we regret to inform you that your volunteer application for service as a test subject with the Corporation has been rejected. We thank you for your interest in our company and the progression of research. Attached, you will find a copy of your original volunteer form for your records. Regards,")
+	add_field(/datum/report_field/signature, "Corporate Representative's Signature")
 	add_field(/datum/report_field/people/from_manifest, "Name of Volunteer")
-	add_field(/datum/report_field/instruction, "Reason for Rejection")	
+	add_field(/datum/report_field/instruction, "Reason for Rejection")
 	add_field(/datum/report_field/options/yes_no, "Physically Unfit")
 	add_field(/datum/report_field/options/yes_no, "Mentally Unfit")
 	add_field(/datum/report_field/options/yes_no, "Project Cancellation")
@@ -392,7 +392,7 @@
 	add_field(/datum/report_field/options/yes_no, "Approved")
 
 /datum/computer_file/report/recipient/nt/memo/internal
-	form_name = "NT-0003"
+	form_name = "C-0003"
 	title = "Internal Memorandum"
 	available_on_ntnet = 1
 
@@ -401,7 +401,7 @@
 	set_access(access_nanotrasen, access_nanotrasen)
 
 /datum/computer_file/report/recipient/nt/memo/external
-	form_name = "NT-0005"
+	form_name = "C-0005"
 	title = "External Memorandum"
 	available_on_ntnet = 1
 
@@ -411,8 +411,8 @@
 
 //No access restrictions for easier use.
 /datum/computer_file/report/recipient/nt/sales
-	form_name = "NT-2192"
-	title = "NanoTrasen Sales Contract and Receipt"
+	form_name = "C-2192"
+	title = "Corporate Sales Contract and Receipt"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/sales/generate_fields()
@@ -431,8 +431,8 @@
 	add_field(/datum/report_field/options/yes_no, "Approved")
 
 /datum/computer_file/report/recipient/nt/visa
-	form_name = "NT-0952"
-	title = "NanoTrasen Sol Central Government Work Visa Request Form"
+	form_name = "C-0952"
+	title = "Corporate Sol Central Government Work Visa Request Form"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/nt/visa/generate_fields()
@@ -450,7 +450,7 @@
 	temp_field.set_access(access_edit = access_representative)
 
 /datum/computer_file/report/recipient/nt/payout
-	form_name = "NT-3310"
+	form_name = "C-3310"
 	title = "Next of Kin Payout Authorization"
 	available_on_ntnet = 1
 

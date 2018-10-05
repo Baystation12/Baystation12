@@ -9,14 +9,24 @@
 	desc = "They suspend the illusion of the mime's play."
 	icon_state = "suspenders"
 
-/obj/item/clothing/accessory/nt_tunic
-	name = "\improper NanoTrasen tunic"
-	desc = "A fashionable tunic that NanoTrasen gives to its lab workers."
-	icon_state = "nttunic"
+/obj/item/clothing/accessory/tunic
+	name = "researcher's tunic"
+	desc = "A fashionable tunic that Torch, Ltd. provides to their lab workers."
+	icon_state = "tunic"
 
-/obj/item/clothing/accessory/nt_tunic/exec
+/obj/item/clothing/accessory/tunic/nanotrasen
+	name = "\improper NanoTrasen tunic"
+	desc = "A fashionable tunic that NanoTrasen provides to their lab workers."
+	icon_state = "tunic_nt"
+
+/obj/item/clothing/accessory/tunic/exec
+	name = "executive tunic"
+	icon_state = "tunicblack"
+
+/obj/item/clothing/accessory/tunic/exec/nanotrasen
 	name = "\improper NanoTrasen executive tunic"
-	icon_state = "nttunicblack"
+	desc = "A fashionable tunic that NanoTrasen provides to their lab workers."
+	icon_state = "tunicblack_nt"
 
 /obj/item/clothing/accessory/dashiki
 	name = "black dashiki"
@@ -151,10 +161,15 @@
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
 
-/obj/item/clothing/accessory/toggleable/nanotrasen_jacket
+/obj/item/clothing/accessory/toggleable/corpjacket
+	name = "corporate suit jacket"
+	desc = "A jacket that companies have their executives wear."
+	icon_state = "jacket_tl"
+
+/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen
 	name = "\improper NanoTrasen suit jacket"
-	desc = "A jacket that NanoTrasen has its executives wear."
-	icon_state = "nt_jacket"
+	desc = "A jacket that NanoTrasen has their executives wear."
+	icon_state = "jacket_nt"
 
 /obj/item/clothing/accessory/toggleable/hawaii
 	name = "flower-pattern shirt"

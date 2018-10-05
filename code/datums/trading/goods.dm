@@ -212,7 +212,7 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/t_scanner                 = TRADER_THIS_TYPE,
 								/obj/item/device/taperecorder              = TRADER_THIS_TYPE,
 								/obj/item/device/batterer                  = TRADER_THIS_TYPE,
-								/obj/item/device/violin                    = TRADER_THIS_TYPE,
+								/obj/item/device/synthesized_instrument/violin                    = TRADER_THIS_TYPE,
 								/obj/item/device/hailer                    = TRADER_THIS_TYPE,
 								/obj/item/device/uv_light                  = TRADER_THIS_TYPE,
 								/obj/item/device/mmi                       = TRADER_ALL,
@@ -286,7 +286,7 @@ Sells devices, odds and ends, and medical stuff
 	name = "Xenolife Collector"
 	origin = "CSV Not a Poacher"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
-	possible_origins = list("XenoHugs","NT Specimen Acquisition","Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
+	possible_origins = list("XenoHugs", "Xynergy Specimen Acquisition", "Skinner Catering Reseller", "NanoTrasen Companionship Division", "Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
 	speech = list("hail_generic"    = "Welcome! We are always looking to acquire more exotic life forms.",
 				"hail_deny"         = "We no longer wish to speak to you. Please contact our legal representative if you wish to rectify this.",
 

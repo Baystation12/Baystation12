@@ -269,7 +269,7 @@
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_emptycourt)
 "aba" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	pixel_y = 16
 	},
 /turf/unsimulated/floor{
@@ -278,7 +278,7 @@
 	},
 /area/rescue_base/base)
 "abb" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -289,7 +289,7 @@
 /area/rescue_base/base)
 "abc" = (
 /obj/item/weapon/soap,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
@@ -624,7 +624,7 @@
 /obj/structure/mopbucket,
 /obj/item/weapon/mop,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 21
 	},
 /turf/unsimulated/floor{
@@ -933,7 +933,7 @@
 	},
 /area/rescue_base/base)
 "acu" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -1020,7 +1020,7 @@
 	},
 /area/rescue_base/base)
 "acC" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -4699,7 +4699,7 @@
 	dir = 5
 	},
 /obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"
@@ -4898,7 +4898,7 @@
 /obj/item/clothing/mask/breath/medical,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -5351,6 +5351,7 @@
 	name = "Ship External Access";
 	req_access = list(103)
 	},
+/obj/effect/shuttle_landmark/ert/start,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amt" = (
@@ -5814,7 +5815,7 @@
 	},
 /area/wizard_station)
 "anu" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	pixel_y = 8
 	},
 /turf/unsimulated/floor{
@@ -6893,15 +6894,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
-"aqf" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Storage";
-	opacity = 1;
-	req_access = list(103)
-	},
-/obj/effect/shuttle_landmark/ert/start,
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "aqg" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Storage";
@@ -6988,7 +6980,7 @@
 /area/ninja_dojo/dojo)
 "aqr" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	pixel_y = 8
 	},
 /turf/unsimulated/floor{
@@ -7001,7 +6993,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqt" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -7338,7 +7330,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -8548,14 +8540,6 @@
 	name = "plating"
 	},
 /area/centcom/living)
-"auc" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 1
-	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/supply/dock)
 "aud" = (
 /turf/space,
 /area/shuttle/alien/base)
@@ -8767,7 +8751,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/administration/centcom)
 "auI" = (
-/obj/structure/device/piano{
+/obj/structure/synthesized_instrument/synthesizer/piano{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -9082,17 +9066,6 @@
 	icon_state = "white"
 	},
 /area/centcom/living)
-"avA" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "diagonalWall3"
-	},
-/area/supply/dock)
 "avB" = (
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -9103,19 +9076,7 @@
 	icon_state = "comm_server";
 	name = "Supply Drone Virtual Intelligence"
 	},
-/obj/machinery/light/spot,
 /turf/simulated/floor/plating,
-/area/supply/dock)
-"avC" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "diagonalWall3"
-	},
 /area/supply/dock)
 "avD" = (
 /obj/structure/lattice,
@@ -10591,7 +10552,7 @@
 	},
 /area/syndicate_mothership)
 "ayH" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 28
 	},
 /turf/unsimulated/floor{
@@ -11715,7 +11676,7 @@
 	},
 /area/syndicate_mothership)
 "aAT" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
@@ -11724,7 +11685,7 @@
 	},
 /area/syndicate_mothership)
 "aAU" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 32
 	},
 /obj/structure/window/basic{
@@ -11736,7 +11697,7 @@
 	},
 /area/syndicate_mothership)
 "aAV" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 32
 	},
 /obj/item/weapon/soap/syndie,
@@ -11934,7 +11895,7 @@
 	},
 /area/syndicate_mothership)
 "aBr" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -12071,7 +12032,7 @@
 	},
 /area/centcom/specops)
 "aBC" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -12628,7 +12589,7 @@
 	},
 /area/centcom/control)
 "aCB" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/black,
@@ -12689,6 +12650,7 @@
 	opacity = 0
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aCK" = (
@@ -12849,7 +12811,7 @@
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
 "aDa" = (
-/obj/item/weapon/cigbutt,
+/obj/item/trash/cigbutt,
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
 "aDb" = (
@@ -13173,10 +13135,6 @@
 	pixel_y = -5;
 	req_access = list(150)
 	},
-/turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
-"aDJ" = (
-/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "aDK" = (
@@ -13818,7 +13776,7 @@
 	},
 /area/centcom/ferry)
 "aFa" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -15525,7 +15483,7 @@
 	},
 /area/centcom/holding)
 "aJn" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -17190,7 +17148,6 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/structure/aliumizer,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNc" = (
@@ -17385,7 +17342,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNx" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 4
 	},
@@ -17405,7 +17362,7 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -17564,7 +17521,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNZ" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0
@@ -17630,7 +17587,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
 "aOi" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/item/weapon/soap/syndie,
@@ -17640,7 +17597,7 @@
 	},
 /area/syndicate_mothership/raider_base)
 "aOj" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
@@ -17649,7 +17606,7 @@
 	},
 /area/syndicate_mothership/raider_base)
 "aOk" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/random/trash,
@@ -18591,7 +18548,7 @@
 	},
 /area/syndicate_mothership/raider_base)
 "aQt" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -18600,7 +18557,7 @@
 	},
 /area/syndicate_mothership/raider_base)
 "aQu" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -18989,9 +18946,12 @@
 /obj/machinery/atmospherics/omni/mixer{
 	tag_east = 1;
 	tag_east_con = 0.5;
-	tag_south = 1;
-	tag_south_con = 0.5;
-	tag_west = 2;
+	tag_north = 1;
+	tag_north_con = 2;
+	tag_south = null;
+	tag_south_con = null;
+	tag_west = 1;
+	tag_west_con = 0.5;
 	use_power = 0
 	},
 /turf/unsimulated/floor{
@@ -19262,7 +19222,7 @@
 "aRN" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -21656,7 +21616,6 @@
 "aXB" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
-/obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aXC" = (
@@ -21669,7 +21628,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aXD" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -21813,7 +21772,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/skipjack_station/start)
 "aXX" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -21854,7 +21813,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/skipjack_station/start)
 "aYe" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -21954,7 +21913,7 @@
 	},
 /area/deity_spawn)
 "aYt" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -21985,7 +21944,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/skipjack_station/start)
 "aYy" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -22147,6 +22106,7 @@
 	req_access = list(150)
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
 "bfZ" = (
@@ -22407,7 +22367,7 @@
 /turf/unsimulated/wall,
 /area/rescue_base/base)
 "bKb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -22425,7 +22385,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -22454,7 +22414,7 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -22466,7 +22426,7 @@
 	},
 /area/syndicate_mothership)
 "bOb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -22476,7 +22436,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "bPb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -22488,7 +22448,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "bQb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -22504,7 +22464,7 @@
 	},
 /area/syndicate_mothership/raider_base)
 "bRb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -22611,7 +22571,7 @@
 /area/holodeck/source_cafe)
 "ezo" = (
 /obj/structure/table/holo_woodentable,
-/obj/item/device/violin{
+/obj/item/device/synthesized_instrument/violin{
 	holographic = 1
 	},
 /turf/simulated/floor/holofloor/wood,
@@ -22622,7 +22582,7 @@
 	pixel_y = 0;
 	req_access = list(150)
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -22780,6 +22740,10 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
+"jlA" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "jps" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert2"
@@ -23171,6 +23135,12 @@
 /obj/machinery/door/unpowered/simple/wood,
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
+"rxE" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "ryl" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/teleport/hub,
@@ -28259,7 +28229,7 @@ apu
 apG
 anl
 anl
-aqf
+aqg
 aqw
 aqw
 aqw
@@ -37383,9 +37353,9 @@ atx
 atx
 atx
 atx
-atx
-atx
-awU
+aab
+aab
+aab
 awU
 axA
 axM
@@ -37584,10 +37554,10 @@ atR
 atR
 atR
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 awU
 axA
 axN
@@ -37786,10 +37756,10 @@ auw
 auA
 atR
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 awU
 axC
 axM
@@ -37978,7 +37948,7 @@ aab
 aab
 atx
 atR
-atR
+rxE
 aup
 aux
 auz
@@ -37988,10 +37958,10 @@ aur
 aup
 auA
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 awU
 awU
 awU
@@ -38180,20 +38150,20 @@ aab
 aab
 atx
 atR
-auc
+rxE
 auq
 auy
 auz
 auz
 auz
-auz
-avA
+jlA
+aup
 aup
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38382,7 +38352,7 @@ aab
 aab
 atx
 atR
-auc
+rxE
 auq
 auz
 auz
@@ -38392,10 +38362,10 @@ auz
 avB
 aup
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38584,20 +38554,20 @@ aab
 aab
 atx
 atR
-auc
-auq
-auy
-auz
-auz
-auz
-auz
-avC
+rxE
 aup
+auA
+auz
+auz
+auz
+auo
+aup
+aux
 atR
-atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38787,19 +38757,19 @@ aab
 atx
 atR
 atR
-aup
-auA
-auz
-auz
-auz
-auo
-aup
+aur
+auw
+auQ
+auQ
+auQ
+auw
 aux
 atR
 atR
-atR
-atR
-awU
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -38989,19 +38959,19 @@ aab
 atx
 atR
 atR
-aur
-auw
-auQ
-auQ
-auQ
-auw
-aux
 atR
 atR
 atR
 atR
 atR
-awU
+atR
+atR
+atR
+atR
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -39189,21 +39159,21 @@ aab
 aab
 aab
 atx
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-awU
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atS
+atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -39390,22 +39360,22 @@ aab
 aab
 aab
 aab
-atx
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-awU
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -56997,7 +56967,7 @@ aAc
 azE
 aDb
 azE
-aDJ
+azE
 azE
 azE
 azE

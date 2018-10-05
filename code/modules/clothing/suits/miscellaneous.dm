@@ -419,14 +419,14 @@
 	icon_closed = "mu_hoodie"
 
 /obj/item/clothing/suit/storage/toggle/hoodie/nt
-	name = "NanoTrasen hoodie"
-	desc = "A warm, blue sweatshirt.  It proudly bears the silver NanoTrasen insignia lettering on the back.  The edges are trimmed with silver."
+	name = "corporate hoodie"
+	desc = "A warm, blue sweatshirt. It proudly bears a corporate logo on the back. The edges are trimmed with silver."
 	icon_state = "nt_hoodie"
 	icon_open = "nt_hoodie_open"
 	icon_closed = "nt_hoodie"
 
 /obj/item/clothing/suit/storage/toggle/hoodie/smw
-	name = "Space Mountain Wind hoodie"
+	name = "\improper Space Mountain Wind hoodie"
 	desc = "A warm, black sweatshirt.  It has the logo for the popular softdrink Space Mountain Wind on both the front and the back."
 	icon_state = "smw_hoodie"
 	icon_open = "smw_hoodie_open"
@@ -466,10 +466,16 @@
 
 /obj/item/clothing/suit/poncho/roles/science
 	name = "science poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, which are standard NanoTrasen colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few bottle green stripes, corporate colors."
 	species_restricted = null
 	icon_state = "sciponcho"
 	item_state = "sciponcho"
+
+/obj/item/clothing/suit/poncho/roles/science/nanotrasen
+	name = "\improper NanoTrasen poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, colors of NanoTrasen. Go NanoTrasen!"
+	icon_state = "sciponcho_nt"
+	item_state = "sciponcho_nt"
 
 /obj/item/clothing/suit/poncho/roles/cargo
 	name = "cargo poncho"

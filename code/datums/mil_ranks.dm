@@ -112,7 +112,7 @@ var/datum/mil_branches/mil_branches = new()
 	var/assistant_job //what people who have the BE_ASSISTANT pref set will attempt to join as
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
-	var/email_domain = "freemail.nt"
+	var/email_domain = "freemail.net"
 
 	var/list/min_skill
 

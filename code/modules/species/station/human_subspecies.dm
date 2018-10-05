@@ -86,11 +86,12 @@
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/tritonian_preview.dmi'
 	slowdown = 1
 
-	oxy_mod =           0.5
-	brute_mod =         0.8
-	toxins_mod =        1.15
-	radiation_mod =     1.15
-	body_temperature =  302
+	oxy_mod =             0.5
+	brute_mod =           0.8
+	toxins_mod =          1.15
+	radiation_mod =       1.15
+	body_temperature =    302
+	water_soothe_amount = 5
 
 	heat_level_1 = 350
 	heat_level_2 = 380
@@ -111,5 +112,5 @@
 		/datum/mob_descriptor/height,
 		/datum/mob_descriptor/build = 1
 		)
-	
+
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR

@@ -19,11 +19,12 @@
 	)
 
 	species_to_branch_whitelist = list(
-		/datum/species/diona   = list(/datum/mil_branch/civilian),
-		/datum/species/nabber  = list(/datum/mil_branch/civilian),
-		/datum/species/skrell  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/unathi  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/vox     = list()
+		/datum/species/diona      = list(/datum/mil_branch/civilian),
+		/datum/species/nabber     = list(/datum/mil_branch/civilian),
+		/datum/species/skrell     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/unathi     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/vox        = list(),
+		/datum/species/adherent   = list(/datum/mil_branch/civilian)
 	)
 
 	species_to_rank_whitelist = list(
@@ -194,21 +195,17 @@
 /datum/mil_branch/civilian
 	name = "Civilian"
 	name_short = "civ"
-	email_domain = "freemail.nt"
+	email_domain = "freemail.net"
 
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -297,7 +294,7 @@
 
 /datum/mil_rank/fleet/e9_alt1
 	name = "Command Master Chief Petty Officer"
-	name_short = "CMDCM"
+	name_short = "CMCPO"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt1, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 9
 
@@ -620,14 +617,8 @@
 	name = "Civilian"
 	name_short = null
 
-/datum/mil_rank/civ/nt
-	name = "NanoTrasen Employee"
-
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
-
-/datum/mil_rank/civ/offduty
-	name = "Off-Duty Personnel"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"

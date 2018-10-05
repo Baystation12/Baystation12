@@ -19,7 +19,7 @@
 		slot_l_hand_str = "welding",
 		slot_r_hand_str = "welding",
 		)
-	matter = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
+	matter = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000)
 	var/up = 0
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)

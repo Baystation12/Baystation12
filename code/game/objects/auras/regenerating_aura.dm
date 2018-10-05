@@ -80,7 +80,7 @@
 
 /obj/aura/regenerating/human/unathi
 	brute_mult = 2
-	organ_mult = 5
+	organ_mult = 4
 	regen_message = "<span class='warning'>You feel a soothing sensation as your ORGAN mends...</span>"
 	grow_chance = 2
 	grow_threshold = 150
@@ -108,3 +108,8 @@
 /obj/aura/regenerating/human/diona/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/carbon/human/H)
 	to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
 	H.nutrition -= 60
+
+/obj/aura/regenerating/human/unathi/yeosa
+	brute_mult = 1.5
+	organ_mult = 3
+	tox_mult = 2

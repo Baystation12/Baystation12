@@ -12,6 +12,7 @@
 #define SS_PRIORITY_MOB            100	// Mob Life().
 #define SS_PRIORITY_MACHINERY      100	// Machinery + powernet ticks.
 #define SS_PRIORITY_AIR            80	// ZAS processing.
+#define SS_PRIORITY_CHEMISTRY      60	// Multi-tick chemical reactions.
 #define SS_PRIORITY_ALARM          20   // Alarm processing.
 #define SS_PRIORITY_EVENT          20   // Event processing and queue handling.
 #define SS_PRIORITY_SHUTTLE        20   // Shuttle movement.
@@ -25,6 +26,7 @@
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       60	// processing_objects processing.
 #define SS_PRIORITY_PROCESSING    30	// Generic datum processor. Replaces objects processor.
+#define SS_PRIORITY_PLANTS        30	// Spreading vine effects.
 #define SS_PRIORITY_GARBAGE       25	// Garbage collection.
 #define SS_PRIORITY_VINES         25	// Spreading vine effects.
 #define SS_PRIORITY_NANO          20    // Updates to nanoui uis.

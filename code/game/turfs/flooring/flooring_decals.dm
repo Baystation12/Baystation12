@@ -60,7 +60,7 @@ var/list/floor_decals = list()
 	icon_state = "blue2_edges"
 
 /obj/effect/floor_decal/carpet/purple
-	name = "orange carpet"
+	name = "purple carpet"
 	icon_state = "purple_edges"
 
 /obj/effect/floor_decal/carpet/orange
@@ -657,6 +657,40 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/lightgrey/bordercee
 	icon_state = "bordercolorcee"
 
+/obj/effect/floor_decal/corner/b_green
+	name = "bottle green corner"
+	color = COLOR_PALE_BTL_GREEN
+
+/obj/effect/floor_decal/corner/b_green/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/b_green/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/b_green/full
+	icon_state = "corner_white_full"
+
+/obj/effect/floor_decal/corner/b_green/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/b_green/half
+	icon_state = "bordercolorhalf"
+
+/obj/effect/floor_decal/corner/b_green/mono
+	icon_state = "bordercolormonofull"
+
+/obj/effect/floor_decal/corner/b_green/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/b_green/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/b_green/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/b_green/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/spline/plain
 	name = "spline - plain"
 	icon_state = "spline_plain"
@@ -953,6 +987,11 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/ntlogo
 	icon_state = "ntlogo"
+
+/obj/effect/floor_decal/torchltdlogo
+	alpha = 230
+	icon = 'icons/turf/flooring/corp_floor.dmi'
+	icon_state = "bottomleft"
 
 //Techfloor
 

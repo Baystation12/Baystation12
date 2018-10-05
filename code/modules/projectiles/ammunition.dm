@@ -37,18 +37,26 @@
 	update_icon()
 
 /obj/item/ammo_casing/proc/leave_residue()
-	var/mob/living/carbon/human/H
-	if(ishuman(loc))
-		H = loc //in a human, somehow
-	else if(loc && ishuman(loc.loc))
-		H = loc.loc //more likely, we're in a gun being held by a human
-
+	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
+	var/obj/item/weapon/gun/G = get_holder_of_type(src, /obj/item/weapon/gun)
+	put_residue_on(G)
 	if(H)
-		if(H.gloves && (H.l_hand == loc || H.r_hand == loc))
-			var/obj/item/clothing/G = H.gloves
-			G.gunshot_residue = caliber
-		else
-			H.gunshot_residue = caliber
+		var/zone
+		if(H.l_hand == G)
+			zone = BP_L_HAND
+		else if(H.r_hand == G)
+			zone = BP_R_HAND
+		if(zone)
+			var/target = H.get_covering_equipped_item_by_zone(zone)
+			if(!target)
+				target = H.get_organ(zone)
+			put_residue_on(target)
+	if(prob(30))
+		put_residue_on(get_turf(src))
+
+/obj/item/ammo_casing/proc/put_residue_on(atom/A)
+	if(A)
+		LAZYDISTINCTADD(A.gunshot_residue, caliber)
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
@@ -91,7 +99,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	matter = list(MATERIAL_STEEL = 500)
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4

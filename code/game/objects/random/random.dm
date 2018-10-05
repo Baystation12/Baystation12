@@ -223,7 +223,8 @@
 				/obj/item/clothing/under/syndicate = 2,
 				/obj/item/weapon/reagent_containers/syringe = 3,
 				/obj/item/weapon/reagent_containers/syringe/steroid = 2,
-				/obj/item/weapon/reagent_containers/syringe/drugs = 1)
+				/obj/item/weapon/reagent_containers/syringe/drugs = 1,
+				/obj/item/weapon/reagent_containers/food/snacks/egg/lizard = 3)
 
 /obj/random/drinkbottle
 	name = "random drink"
@@ -571,7 +572,6 @@ obj/random/obstruction/spawn_choices()
 	return list(/obj/structure/barricade,
 				/obj/structure/girder,
 				/obj/structure/girder/displaced,
-				/obj/structure/girder/reinforced,
 				/obj/structure/grille,
 				/obj/structure/grille/broken,
 				/obj/structure/foamedmetal,
@@ -884,6 +884,16 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/spacecash/bundle/c100 = 2,
 				/obj/item/weapon/spacecash/bundle/c1000 = 1)
 
+/obj/random/documents // top secret documents for SCG eyes only
+	name = "random secret documents"
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "docs_generic"
+
+/obj/random/documents/spawn_choices()
+	return list (/obj/item/documents/scg/verified = 10,
+	/obj/item/documents/scg/red = 10,
+	/obj/item/documents/scg/blue = 10)
+
 /obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
@@ -1140,7 +1150,7 @@ var/list/random_useful_
 	if(prob(95)) // Misc. junk
 		if(!random_junk_)
 			random_junk_ = subtypesof(/obj/item/trash)
-			random_junk_ += typesof(/obj/item/weapon/cigbutt)
+			random_junk_ += typesof(/obj/item/trash/cigbutt)
 			random_junk_ += /obj/effect/decal/cleanable/spiderling_remains
 			random_junk_ += /obj/item/remains/mouse
 			random_junk_ += /obj/item/remains/robot

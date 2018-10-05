@@ -478,7 +478,7 @@
 "bI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "bJ" = (
@@ -663,7 +663,7 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "cl" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -919,7 +919,7 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "de" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -1275,7 +1275,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eh" = (
-/obj/structure/sink/puddle,
+/obj/structure/hygiene/sink/puddle,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "ei" = (

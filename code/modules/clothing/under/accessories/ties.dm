@@ -41,10 +41,15 @@
 	icon_state = "longtie"
 	color = "#b18345"
 
-/obj/item/clothing/accessory/nt
-	name = "\improper NanoTrasen tie with a clip"
-	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears 'NT' on it."
-	icon_state = "ntcliptie"
+/obj/item/clothing/accessory/corptie
+	name = "corporate tie"
+	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears a corporate logo."
+	icon_state = "cliptie"
+
+/obj/item/clothing/accessory/corptie/nanotrasen
+	name = "\improper NanoTrasen tie"
+	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears the NanoTrasen logo."
+	icon_state = "cliptie_nt"
 
 //Bowties
 /obj/item/clothing/accessory/bowtie

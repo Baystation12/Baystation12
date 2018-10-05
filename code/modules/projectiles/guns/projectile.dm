@@ -9,7 +9,7 @@
 	icon_state = "revolver"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	w_class = ITEM_SIZE_NORMAL
-	matter = list(DEFAULT_WALL_MATERIAL = 1000)
+	matter = list(MATERIAL_STEEL = 1000)
 	screen_shake = 1
 	combustion = 1
 
@@ -85,6 +85,18 @@
 	if(chambered)
 		chambered.expend()
 		process_chambered()
+
+/obj/item/weapon/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
+	..()
+	if(chambered && ishuman(target))
+		var/mob/living/carbon/human/H = target
+		var/zone = BP_CHEST
+		if(user && user.zone_sel)
+			zone = user.zone_sel.selecting
+		var/obj/item/organ/external/E = H.get_organ(zone)
+		if(E)
+			chambered.put_residue_on(E)
+			H.apply_damage(3, BURN, used_weapon = "Gunpowder Burn", given_organ = E)
 
 /obj/item/weapon/gun/projectile/handle_click_empty()
 	..()

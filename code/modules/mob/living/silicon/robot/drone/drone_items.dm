@@ -3,7 +3,6 @@
 /obj/item/weapon/gripper
 	name = "magnetic gripper"
 	desc = "A simple grasping tool specialized in construction and engineering work."
-	description_info = "Click an item to pick it up with your gripper. Use it as you would normally use anything in your hand. The Drop Item verb will allow you to release the item."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gripper"
 
@@ -26,7 +25,8 @@
 		/obj/item/weapon/computer_hardware,
 		/obj/item/weapon/fuel_assembly,
 		/obj/item/stack/material/deuterium,
-		/obj/item/stack/material/tritium
+		/obj/item/stack/material/tritium,
+		/obj/item/stack/tile
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -344,7 +344,7 @@
 
 	for(var/obj/W in T)
 		//Different classes of items give different commodities.
-		if(istype(W,/obj/item/weapon/cigbutt))
+		if(istype(W,/obj/item/trash/cigbutt))
 			if(plastic)
 				plastic.add_charge(500)
 		else if(istype(W,/obj/effect/spider/spiderling))

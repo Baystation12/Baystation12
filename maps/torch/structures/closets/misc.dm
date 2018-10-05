@@ -1,11 +1,11 @@
 /obj/structure/closet/secure_closet/liaison
-	name = "\improper NanoTrasen liaison's locker"
+	name = "\improper corporate liaison's locker"
 	req_access = list(access_liaison)
-	icon_state = "nanottwo1"
-	icon_closed = "nanottwo"
-	icon_locked = "nanottwo1"
-	icon_opened = "nanottwoopen"
-	icon_off = "nanottwooff"
+	icon_state = "corp21"
+	icon_closed = "corp2"
+	icon_locked = "corp21"
+	icon_opened = "corp2open"
+	icon_off = "corp2off"
 
 /obj/structure/closet/secure_closet/liaison/WillContain()
 	return list(
@@ -72,11 +72,11 @@
 /obj/structure/closet/secure_closet/crew/research
 	name = "research equipment locker"
 	req_access = list(access_nanotrasen)
-	icon_state = "nanot1"
-	icon_closed = "nanot"
-	icon_locked = "nanot1"
-	icon_opened = "nanotopen"
-	icon_off = "nanotoff"
+	icon_state = "corp1"
+	icon_closed = "corp"
+	icon_locked = "corp1"
+	icon_opened = "corpopen"
+	icon_off = "corpoff"
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm
 	name = "sidearm cabinet"

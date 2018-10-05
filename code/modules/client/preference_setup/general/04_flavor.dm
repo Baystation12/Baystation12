@@ -51,7 +51,7 @@
 		switch(href_list["flavor_text"])
 			if("open")
 			if("general")
-				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavor_texts[href_list["flavor_text"]] = msg
 			else

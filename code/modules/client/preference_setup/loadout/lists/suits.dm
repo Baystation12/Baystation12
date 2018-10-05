@@ -25,6 +25,10 @@
 	display_name = "poncho, science"
 	path = /obj/item/clothing/suit/poncho/roles/science
 
+/datum/gear/suit/nanotrasen_poncho
+	display_name = "poncho, NanoTrasen"
+	path = /obj/item/clothing/suit/poncho/roles/science/nanotrasen
+
 /datum/gear/suit/cargo_poncho
 	display_name = "poncho, supply"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
@@ -74,6 +78,18 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/labcoat_nanotrasen
+	display_name = "labcoat, NanoTrasen"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
+
+/datum/gear/suit/labcoat_dais
+	display_name = "labcoat, DAIS"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/dais
+
+/datum/gear/suit/labcoat_nanotrasen_rd
+	display_name = "labcoat, NanoTrasen, Research Director"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
+
 /datum/gear/suit/coat
 	display_name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
@@ -98,6 +114,10 @@
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
+/datum/gear/suit/wintercoat_dais
+	display_name = "winter coat, DAIS"
+	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
+
 /datum/gear/suit/track
 	display_name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
@@ -119,7 +139,7 @@
 
 /datum/gear/suit/medcoat/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/labcoat/blue, /obj/item/clothing/suit/surgicalapron)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/storage/toggle/labcoat/blue, /obj/item/clothing/suit/surgicalapron)
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"

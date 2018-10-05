@@ -20,14 +20,13 @@
 	. = ..()
 
 /obj/item/device/camera/tvcamera/Initialize()
-	. = ..()
 	camera = new(src)
 	camera.c_tag = channel
 	camera.status = FALSE
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
-	update_icon()
+	. = ..()
 
 /obj/item/device/camera/tvcamera/examine()
 	. = ..()
@@ -57,7 +56,7 @@
 	if (href_list["focus"])
 		change_size()
 	if(href_list["channel"])
-		var/nc = input(usr, "Channel name", "Select new channel name", channel) as text|null
+		var/nc = sanitize(input(usr, "Channel name", "Select new channel name", channel) as text|null)
 		if(nc)
 			channel = nc
 			camera.c_tag = channel

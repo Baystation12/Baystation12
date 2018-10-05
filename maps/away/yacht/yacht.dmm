@@ -33,11 +33,11 @@
 /area/yacht/bridge)
 "ai" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/computer/helm,
+/obj/machinery/computer/ship/helm,
 /turf/simulated/floor/wood,
 /area/yacht/bridge)
 "aj" = (
-/obj/machinery/computer/sensors{
+/obj/machinery/computer/ship/sensors{
 	icon_state = "computer";
 	dir = 4
 	},
@@ -51,7 +51,7 @@
 /turf/simulated/floor/wood,
 /area/yacht/bridge)
 "al" = (
-/obj/machinery/computer/engines{
+/obj/machinery/computer/ship/engines{
 	icon_state = "computer";
 	dir = 8
 	},
@@ -187,7 +187,7 @@
 /turf/simulated/wall/titanium,
 /area/yacht/living)
 "aD" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 20
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -235,7 +235,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/yacht/living)
 "aJ" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -657,7 +657,7 @@
 /obj/item/weapon/book/manual/engineering_guide,
 /obj/item/weapon/rcd,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bU" = (
@@ -1535,7 +1535,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_y = 28
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 20
 	},
 /obj/item/weapon/bikehorn/rubberducky,

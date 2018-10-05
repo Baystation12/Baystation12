@@ -100,10 +100,6 @@
 	log_unit_test("Unit Tests Enabled. This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
-
-	// Set up roundstart seed list.
-	plant_controller = new()
-
 	if(config.generate_map)
 		GLOB.using_map.perform_map_generation()
 
@@ -470,6 +466,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		*/
 
+	Master.Shutdown()
 	processScheduler.stop()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite

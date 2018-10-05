@@ -248,7 +248,7 @@
 /obj/machinery/power/supermatter/examine(mob/user)
 	. = ..()
 	if(user.skill_check(SKILL_ENGINES, SKILL_EXPERT))
-		var/integrity_message 
+		var/integrity_message
 		switch(get_integrity())
 			if(0 to 30)
 				integrity_message = "<span class='danger'>It looks highly unstable!</span>"
@@ -320,14 +320,14 @@
 
 	if(damage > explosion_point)
 		if(!exploded)
-			if(!istype(L, /turf/space))
+			if(!istype(L, /turf/space) && (L.z in GLOB.using_map.station_levels))
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!istype(L, /turf/space) && (world.timeofday - lastwarning) >= WARNING_DELAY * 10)
+		if(!istype(L, /turf/space) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in GLOB.using_map.station_levels))
 			announce_warning()
 	else
 		shift_light(4,initial(light_color))
@@ -524,6 +524,17 @@
 /obj/machinery/power/supermatter/RepelAirflowDest(n)
 	return
 
+/obj/machinery/power/supermatter/ex_act(var/severity)
+	..()
+	switch(severity)
+		if(1.0)
+			power *= 4
+		if(2.0)
+			power *= 3
+		if(3.0)
+			power *= 2
+	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
+
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "Supermatter Shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
@@ -541,8 +552,6 @@
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
-
-
 
 #undef DETONATION_RADS_RANGE
 #undef DETONATION_RADS_BASE

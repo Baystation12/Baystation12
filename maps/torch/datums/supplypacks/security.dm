@@ -38,21 +38,21 @@
 	access = access_heads
 
 /decl/hierarchy/supply_pack/security/nanoarmor
-	name = "Armor - NanoTrasen"
+	name = "Armor - Corporate"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/nt = 2,
 					/obj/item/clothing/head/helmet/nt/guard =2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper NanoTrasen armor crate"
+	containername = "\improper Corporate armor crate"
 	access = access_nanotrasen
 
 /decl/hierarchy/supply_pack/security/lightnanoarmor
-	name = "Armor - NanoTrasen light"
+	name = "Armor - Corporate light"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/light/nt = 2,
 					/obj/item/clothing/head/helmet/nt/guard =2)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper NanoTrasen light armor crate"
+	containername = "\improper Corporate light armor crate"
 	access = access_nanotrasen
 
 /decl/hierarchy/supply_pack/security/pistol
@@ -144,7 +144,7 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/holster
-	name = "Misc - Holster crate"
+	name = "Gear - Holster crate"
 	contains = list(/obj/item/clothing/accessory/storage/holster/hip = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -152,7 +152,7 @@
 	access = access_solgov_crew
 
 /decl/hierarchy/supply_pack/security/securityextragear
-	name = "Misc - Security equipment"
+	name = "Gear - Security equipment"
 	contains = list(/obj/item/weapon/storage/belt/holster/security = 2,
 					/obj/item/device/radio/headset/headset_sec = 2,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 2,
@@ -167,7 +167,7 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/cosextragear
-	name = "Misc - Chief of Security equipment"
+	name = "Gear - Chief of Security equipment"
 	contains = list(/obj/item/device/radio/headset/heads/cos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,

@@ -2,8 +2,9 @@
 	name = "swab kit"
 	desc = "A sterilized cotton swab and vial used to take forensic samples."
 	icon_state = "swab"
-	var/gsr = 0
+	var/list/gunshot_residue_sample
 	var/list/dna
+	var/list/trace_dna
 	var/used
 
 /obj/item/weapon/forensics/swab/proc/is_used()
@@ -43,26 +44,21 @@
 		dna = list(H.dna.unique_enzymes)
 		sample_type = "DNA"
 
-	else if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
-		var/has_hand
-		var/obj/item/organ/external/O = H.organs_by_name[BP_R_HAND]
-		if(istype(O) && !O.is_stump())
-			has_hand = 1
-		else
-			O = H.organs_by_name[BP_L_HAND]
-			if(istype(O) && !O.is_stump())
-				has_hand = 1
-		if(!has_hand)
-			to_chat(user, "<span class='warning'>They don't have any hands.</span>")
-			return
-		if(H.gloves)
-			afterattack(H.gloves, user, 1) //Lazy but this would work
-			return
-		user.visible_message("[user] swabs [H]'s palm for a sample.")
-		sample_type = "GSR"
-		gsr = H.gunshot_residue
 	else
-		return
+		var/zone = user.zone_sel.selecting
+		if(!H.has_organ(zone))
+			to_chat(user, "<span class='warning'>They don't have that part!</span>")
+			return
+		var/obj/item/organ/external/O = H.get_organ(zone)
+		if(!O.gunshot_residue)
+			return
+		var/obj/C = H.get_covering_equipped_item_by_zone(zone)
+		if(C)
+			afterattack(C, user, 1) //Lazy but this would work
+			return
+		user.visible_message("[user] swabs [H]'s [O.name] for a sample.")
+		sample_type = "gunshot_residue"
+		gunshot_residue_sample = O.gunshot_residue.Copy()
 
 	if(sample_type)
 		set_used(sample_type, H)
@@ -83,6 +79,8 @@
 	var/list/choices = list()
 	if(A.blood_DNA)
 		choices |= "Blood"
+	if(istype(A, /obj/item/))
+		choices |= "DNA traces"
 	if(istype(A, /obj/item/clothing))
 		choices |= "Gunshot Residue"
 
@@ -100,7 +98,9 @@
 
 	var/sample_type
 	if(choice == "Blood")
-		if(!A.blood_DNA || !A.blood_DNA.len) return
+		if(!A.blood_DNA || !A.blood_DNA.len)
+			to_chat(user, "<span class='warning'>There is no blood on \the [A].</span>")
+			return
 		dna = A.blood_DNA.Copy()
 		sample_type = "blood"
 
@@ -109,8 +109,16 @@
 		if(!istype(B) || !B.gunshot_residue)
 			to_chat(user, "<span class='warning'>There is no residue on \the [A].</span>")
 			return
-		gsr = B.gunshot_residue
+		gunshot_residue_sample = B.gunshot_residue.Copy()
 		sample_type = "residue"
+
+	else if(choice == "DNA traces")
+		var/obj/item/I = A
+		if(!istype(I) || !I.trace_DNA)
+			to_chat(user, "<span class='warning'>There is no non-blood DNA on \the [A].</span>")
+			return
+		trace_dna = I.trace_DNA.Copy()
+		sample_type = "trace DNA"
 
 	if(sample_type)
 		user.visible_message("\The [user] swabs \the [A] for a sample.", "You swab \the [A] for a sample.")

@@ -58,6 +58,13 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
+	name = "corporate labcoat"
+	desc = "A suit that protects against minor chemical spills. Has a green stripe on the shoulder and green trim on the sleeves, denoting it as a corporate labcoat."
+	icon_state = "labcoat_TL_open"
+	icon_open = "labcoat_TL_open"
+	icon_closed = "labcoat_TL"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
 	name = "\improper NanoTrasen labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a red stripe on the shoulder and red trim on the sleeves, denoting it as a NanoTrasen labcoat."
 	icon_state = "labcoat_nt_open"
@@ -66,11 +73,17 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
-	desc = "A full-body labcoat covered in red and black designs, denoting it as a NanoTrasen management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of NanoTrasen employees."
+	desc = "A full-body labcoat covered in green and black designs, denoting it as a corporate management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_open"
 	icon_open = "labcoat_rd_open"
 	icon_closed = "labcoat_rd"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
+	desc = "A full-body labcoat covered in red and black designs, denoting it as a NanoTrasen management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	icon_state = "labcoat_rd_nt_open"
+	icon_open = "labcoat_rd_nt_open"
+	icon_closed = "labcoat_rd_nt"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"
@@ -92,3 +105,13 @@
 	icon_closed = "labcoat_xy"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
 	species_restricted = list(SPECIES_IPC)
+
+/obj/item/clothing/suit/storage/toggle/labcoat/dais
+	name = "\improper DAIS labcoat"
+	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
+	trim and the pockets are reinforced to hold tools. It seems to have an insulated material woven in to prevent static shocks."
+	icon_state = "labcoat_dais"
+	icon_open = "labcoat_dais_open"
+	icon_closed = "labcoat_dais"
+	armor = list(melee = 5, bullet = 0, laser = 0,energy = 5, bomb = 0, bio = 0, rad = 0)//They don't need to protect against the environment very much.
+	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.

@@ -50,7 +50,7 @@
 		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return
 
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL)
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_STEEL)
 
 		var/result = load_metal(W)
 		if(isnull(result))

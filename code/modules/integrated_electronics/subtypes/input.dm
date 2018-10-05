@@ -126,28 +126,28 @@
 
 /obj/item/integrated_circuit/input/med_scanner
 	name = "integrated medical analyser"
-	desc = "A very small version of the common medical analyser. This allows the machine to know how healthy someone is."
+	desc = "A very small version of the common medical analyser. This allows the machine to track some vital signs."
 	icon_state = "medscan"
 	complexity = 4
 	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
-		"total health %" = IC_PINTYPE_NUMBER,
-		"total missing health" = IC_PINTYPE_NUMBER
+		"brain activity" = IC_PINTYPE_BOOLEAN,
+		"pulse" = IC_PINTYPE_NUMBER,
+		"is conscious" = IC_PINTYPE_BOOLEAN
 		)
 	activators = list("scan" = IC_PINTYPE_PULSE_IN, "on scanned" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 40
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
-	var/mob/living/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
-		var/total_health = round(H.health/H.getMaxHealth(), 0.01)*100
-		var/missing_health = H.getMaxHealth() - H.health
-
-		set_pin_data(IC_OUTPUT, 1, total_health)
-		set_pin_data(IC_OUTPUT, 2, missing_health)
+		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
+		set_pin_data(IC_OUTPUT, 2, H.get_pulse(1))
+		set_pin_data(IC_OUTPUT, 3, (H.stat == 0))
 
 	push_data()
 	activate_pin(2)
@@ -156,37 +156,60 @@
 	name = "integrated adv. medical analyser"
 	desc = "A very small version of the medbot's medical analyser. This allows the machine to know how healthy someone is. \
 	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer."
+	extended_desc = "Values for damage and pain are 0 to 5 marking severity of the damage"
 	icon_state = "medscan_adv"
 	complexity = 12
 	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
-		"total health %"		= IC_PINTYPE_NUMBER,
-		"total missing health"	= IC_PINTYPE_NUMBER,
+		"brain activity"		= IC_PINTYPE_BOOLEAN,
+		"is conscious"	        = IC_PINTYPE_BOOLEAN,
 		"brute damage"			= IC_PINTYPE_NUMBER,
 		"burn damage"			= IC_PINTYPE_NUMBER,
 		"tox damage"			= IC_PINTYPE_NUMBER,
 		"oxy damage"			= IC_PINTYPE_NUMBER,
-		"clone damage"			= IC_PINTYPE_NUMBER
+		"clone damage"			= IC_PINTYPE_NUMBER,
+		"pulse"                 = IC_PINTYPE_NUMBER,
+		"oxygenation level"     = IC_PINTYPE_NUMBER,
+		"pain level"            = IC_PINTYPE_NUMBER,
+		"radiation"             = IC_PINTYPE_NUMBER
 	)
 	activators = list("scan" = IC_PINTYPE_PULSE_IN, "on scanned" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 80
 
+/obj/item/integrated_circuit/input/adv_med_scanner/proc/damage_to_severity(var/value)
+	if(value < 1)
+		return 0
+	if(value < 25)
+		return 1
+	if(value < 50)
+		return 2
+	if(value < 75)
+		return 3
+	if(value < 100)
+		return 4
+	return 5
+
+
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
-	var/mob/living/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
+	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
 	if(!istype(H)) //Invalid input
 		return
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
-		var/total_health = round(H.health/H.getMaxHealth(), 0.01)*100
-		var/missing_health = H.getMaxHealth() - H.health
 
-		set_pin_data(IC_OUTPUT, 1, total_health)
-		set_pin_data(IC_OUTPUT, 2, missing_health)
-		set_pin_data(IC_OUTPUT, 3, H.getBruteLoss())
-		set_pin_data(IC_OUTPUT, 4, H.getFireLoss())
-		set_pin_data(IC_OUTPUT, 5, H.getToxLoss())
-		set_pin_data(IC_OUTPUT, 6, H.getOxyLoss())
-		set_pin_data(IC_OUTPUT, 7, H.getCloneLoss())
+
+		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
+		set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
+		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 8, H.get_pulse(1))
+		set_pin_data(IC_OUTPUT, 9, H.get_blood_oxygenation())
+		set_pin_data(IC_OUTPUT, 10, damage_to_severity(H.get_shock()))
+		set_pin_data(IC_OUTPUT, 11, H.radiation)
 
 	push_data()
 	activate_pin(2)
@@ -366,13 +389,6 @@
 	else
 		set_pin_data(IC_OUTPUT, 1, H.name)
 		set_pin_data(IC_OUTPUT, 2, H.desc)
-
-		if(istype(H, /mob/living))
-			var/mob/living/M = H
-			var/msg = M.examine()
-			if(msg)
-				set_pin_data(IC_OUTPUT, 2, msg)
-
 		set_pin_data(IC_OUTPUT, 3, H.x-T.x)
 		set_pin_data(IC_OUTPUT, 4, H.y-T.y)
 		set_pin_data(IC_OUTPUT, 5, sqrt((H.x-T.x)*(H.x-T.x)+ (H.y-T.y)*(H.y-T.y)))
@@ -688,26 +704,36 @@
 	var/new_code = get_pin_data(IC_INPUT, 2)
 	if(isnum(new_freq) && new_freq > 0)
 		set_frequency(new_freq)
-	if(isnum(new_code))
-		code = new_code
+	code = new_code
 
 
-/obj/item/integrated_circuit/input/signaler/do_work() // Sends a signal.
-	if(!radio_connection)
+/obj/item/integrated_circuit/input/signaler/do_work(var/ord) // Sends a signal.
+	if(!radio_connection || ord != 1)
 		return
 
 	radio_connection.post_signal(src, create_signal())
 	activate_pin(2)
 
 /obj/item/integrated_circuit/input/signaler/proc/signal_good(var/datum/signal/signal)
-	if(!signal || signal.source == src || signal.encryption != code)
+	if(!signal || signal.source == src)
 		return FALSE
+	if(code)
+		var/real_code = 0
+		if(isnum(code))
+			real_code = code
+		var/rec = 0
+		if(signal.encryption)
+			rec = signal.encryption
+		if(real_code != rec)
+			return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
+	signal.transmission_method = 1
 	signal.source = src
-	signal.encryption = code
+	if(isnum(code))
+		signal.encryption = code
 	signal.data["message"] = "ACTIVATE"
 	return signal
 
@@ -719,21 +745,14 @@
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/integrated_circuit/input/signaler/receive_signal(datum/signal/signal)
-	var/new_code = get_pin_data(IC_INPUT, 2)
-	var/code = 0
+	if(!signal_good(signal))
+		return 0
+	treat_signal(signal)
+	return 1
 
-	if(isnum(new_code))
-		code = new_code
-	if(!signal)
-		return 0
-	if(signal.data["code"] != code)
-		return 0
-	if(signal.source == src) // Don't trigger ourselves.
-		return 0
-
+//This only procs when a signal is valid.
+/obj/item/integrated_circuit/input/signaler/proc/treat_signal(var/datum/signal/signal)
 	activate_pin(3)
-	audible_message("\icon[src] *beep* *beep* *beep*", null, 1)
-	playsound(get_turf(src), 'sound/machines/triple_beep.ogg', 50)
 
 /obj/item/integrated_circuit/input/signaler/advanced
 	name = "advanced integrated signaler"
@@ -745,30 +764,30 @@
 	complexity = 8
 	inputs = list("frequency" = IC_PINTYPE_NUMBER, "id tag" = IC_PINTYPE_STRING, "command" = IC_PINTYPE_STRING)
 	outputs = list("received command" = IC_PINTYPE_STRING)
-	var/id_tag = "Integrated_Circuit"
-	var/command = "ACTIVATE"
+	var/command
+	code = "Integrated_Circuits"
 
 /obj/item/integrated_circuit/input/signaler/advanced/on_data_written()
 	..()
-	var/new_tag = get_pin_data(IC_INPUT,2)
-	var/new_command = get_pin_data(IC_INPUT,3)
-	if(istext(new_tag))
-		id_tag = new_tag
-	if(istext(new_command))
-		command = new_command
+	command = get_pin_data(IC_INPUT,3)
 
 /obj/item/integrated_circuit/input/signaler/advanced/signal_good(var/datum/signal/signal)
-	var/results = ..()
-	if(!results || signal.data["tag"] != id_tag)
+	if(!..() || signal.data["tag"] != code)
 		return FALSE
 	return TRUE
 
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
-	var/datum/signal/signal = ..()
-	signal.data["tag"] = id_tag
+	var/datum/signal/signal = new()
+	signal.transmission_method = 1
+	signal.data["tag"] = code
 	signal.data["command"] = command
-	signal.encryption = null
+	signal.encryption = 0
 	return signal
+
+/obj/item/integrated_circuit/input/signaler/advanced/treat_signal(var/datum/signal/signal)
+	set_pin_data(IC_OUTPUT,1,signal.data["command"])
+	push_data()
+	..()
 
 /obj/item/integrated_circuit/input/teleporter_locator
 	name = "teleporter locator"
@@ -776,7 +795,7 @@
 	icon_state = "gps"
 	complexity = 5
 	inputs = list()
-	outputs = list("teleporter")
+	outputs = list("teleporter" = IC_PINTYPE_REF)
 	activators = list("on selected" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
@@ -798,6 +817,7 @@
 	if(href_list["tport"])
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
+		push_data()
 		activate_pin(1)
 		return IC_TOPIC_REFRESH
 
@@ -859,7 +879,7 @@
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M as mob, text, verb, datum/language/speaking)
 	var/translated = TRUE
 	if(M && text)
-		if(!speaking.machine_understands)
+		if(speaking && !speaking.machine_understands)
 			text = speaking.scramble(text)
 			translated = FALSE
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
@@ -1035,7 +1055,7 @@
 		"target" = IC_PINTYPE_REF
 		)
 	outputs = list(
-		"Metal"				 	= IC_PINTYPE_NUMBER,
+		"Steel"				 	= IC_PINTYPE_NUMBER,
 		"Glass"					= IC_PINTYPE_NUMBER,
 		"Silver"				= IC_PINTYPE_NUMBER,
 		"Gold"					= IC_PINTYPE_NUMBER,
@@ -1054,8 +1074,7 @@
 		)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 40
-	var/list/mtypes = list(DEFAULT_WALL_MATERIAL, "glass", "silver", "gold", "diamond", "phoron", "uranium", "plasteel", "titanium", "glass", "plastic")
-
+	var/list/mtypes = list("steel", "glass", "silver", "gold", "diamond", "phoron", "uranium", "plasteel", "titanium", "glass", "plastic")
 
 /obj/item/integrated_circuit/input/matscan/do_work()
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)
@@ -1159,9 +1178,9 @@
 	)
 
 /obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
-	var/obj/item/weapon/card/data/card = I.GetIdCard()
+	var/obj/item/weapon/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
-	if(card)
+	if(istype(card))
 		if(write_mode == TRUE)
 			card.function = get_pin_data(IC_INPUT, 1)
 			card.data = get_pin_data(IC_INPUT, 2)

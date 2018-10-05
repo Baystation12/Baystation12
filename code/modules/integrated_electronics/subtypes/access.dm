@@ -14,10 +14,15 @@
 		"on read" = IC_PINTYPE_PULSE_OUT
 	)
 
+/obj/item/integrated_circuit/input/card_reader/old // adds compatibility for old TG blueprints
+	name = "card reader"
+	spawn_flags = 0
+
 /obj/item/integrated_circuit/input/card_reader/attackby_react(obj/item/I, mob/living/user, intent)
 	var/obj/item/weapon/card/id/card = I.GetIdCard()
 	var/list/access = I.GetAccess()
-	var/passkey = str2hex(XorEncrypt(json_encode(access), SScircuit.cipherkey))
+	var/json_access = json_encode(access)
+	var/passkey = add_data_signature(json_access)
 
 	if(card) // An ID card.
 		set_pin_data(IC_OUTPUT, 1, card.registered_name)
@@ -31,7 +36,7 @@
 		return FALSE
 
 	set_pin_data(IC_OUTPUT, 3, passkey)
-
+	user.visible_message("<span class='notice'>\The [user] swipes \the [I] onto \the [get_object()]'s card reader.</span>")
 	push_data()
 	activate_pin(1)
 	return TRUE
@@ -50,7 +55,19 @@
 	var/list/access
 
 /obj/item/integrated_circuit/output/access_displayer/do_work()
-	access = json_decode(XorEncrypt(hex2str(get_pin_data(IC_INPUT, 1), TRUE), SScircuit.cipherkey))
+	var/list/signature_and_data = splittext(get_pin_data(IC_INPUT, 1), ":")
+	var/signature = signature_and_data[1]
+	var/result = signature_and_data[2]
+
+	// check if the signature is valid
+	if(!check_data_signature(signature, result))
+		return FALSE
+	
+	if(length(result) > 1)
+		result = json_decode(result)
+	else
+		result = list(result)
+	access = result
 
 /obj/item/integrated_circuit/output/access_displayer/GetAccess()
 	return access

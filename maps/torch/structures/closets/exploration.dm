@@ -81,6 +81,7 @@
 		/obj/item/device/spaceflare,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/device/analyzer,
+		/obj/item/device/radio/headset/headset_pilot,
 		/obj/item/device/radio/headset/headset_pilot/alt,
 		/obj/item/device/binoculars,
 		/obj/item/clothing/gloves/thick,

@@ -70,7 +70,6 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
-	var/gunshot_residue
 	var/pulling_punches    // Are you trying not to hurt your opponent?
 	var/full_prosthetic    // We are a robutt.
 	var/robolimb_count = 0 // Number of robot limbs.
@@ -98,6 +97,8 @@
 	var/datum/mil_rank/char_rank = null
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
+
+	var/datum/unarmed_attack/default_attack	//default unarmed attack
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
 

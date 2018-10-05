@@ -20,7 +20,7 @@
 	var/ticks_left_locked_down = 0
 	var/ticks_left_timeout = 0
 	var/machine_id = ""
-	var/obj/item/weapon/card/held_card
+	var/obj/item/weapon/card/id/held_card
 	var/editing_security_level = 0
 	var/view_screen = NO_SCREEN
 	var/datum/effect/effect/system/spark_spread/spark_system
@@ -351,7 +351,7 @@
 				if(authenticated_account)
 					var/obj/item/weapon/paper/R = new(src.loc)
 					R.SetName("Account balance: [authenticated_account.owner_name]")
-					R.info = "<b>NT Automated Teller Account Statement</b><br><br>"
+					R.info = "<b>Automated Teller Account Statement</b><br><br>"
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
 					R.info += "<i>Balance:</i> T[authenticated_account.money]<br>"

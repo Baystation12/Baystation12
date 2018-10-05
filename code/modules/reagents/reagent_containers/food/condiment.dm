@@ -14,6 +14,21 @@
 	possible_transfer_amounts = "1;5;10"
 	center_of_mass = "x=16;y=6"
 	volume = 50
+	var/list/starting_reagents
+	var/global/list/special_bottles = list(
+		/datum/reagent/nutriment/ketchup = /obj/item/weapon/reagent_containers/food/condiment/ketchup,
+		/datum/reagent/nutriment/barbecue = /obj/item/weapon/reagent_containers/food/condiment/barbecue,
+		/datum/reagent/capsaicin = /obj/item/weapon/reagent_containers/food/condiment/capsaicin,
+		/datum/reagent/enzyme = /obj/item/weapon/reagent_containers/food/condiment/enzyme,
+		/datum/reagent/nutriment/soysauce = /obj/item/weapon/reagent_containers/food/condiment/soysauce,
+		/datum/reagent/frostoil = /obj/item/weapon/reagent_containers/food/condiment/frostoil,
+		/datum/reagent/sodiumchloride = /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,
+		/datum/reagent/blackpepper = /obj/item/weapon/reagent_containers/food/condiment/small/peppermill,
+		/datum/reagent/nutriment/cornoil = /obj/item/weapon/reagent_containers/food/condiment/cornoil,
+		/datum/reagent/sugar = /obj/item/weapon/reagent_containers/food/condiment/sugar,
+		/datum/reagent/nutriment/mayo = /obj/item/weapon/reagent_containers/food/condiment/mayo,
+		/datum/reagent/nutriment/vinegar = /obj/item/weapon/reagent_containers/food/condiment/vinegar
+		)
 
 /obj/item/weapon/reagent_containers/food/condiment/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
@@ -71,97 +86,82 @@
 /obj/item/weapon/reagent_containers/food/condiment/self_feed_message(var/mob/user)
 	to_chat(user, "<span class='notice'>You swallow some of contents of \the [src].</span>")
 
+/obj/item/weapon/reagent_containers/food/condiment/Initialize()
+	. = ..()
+	for(var/R in starting_reagents)
+		reagents.add_reagent(R, starting_reagents[R])
+
 /obj/item/weapon/reagent_containers/food/condiment/on_reagent_change()
-	if(reagents.reagent_list.len > 0)
-		switch(reagents.get_master_reagent_type())
-			if(/datum/reagent/nutriment/ketchup)
-				name = "ketchup"
-				desc = "You feel more American already."
-				icon_state = "ketchup"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/nutriment/barbecue)
-				name = "barbecue sauce"
-				desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
-				icon_state = "barbecue"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/capsaicin)
-				name = "hotsauce"
-				desc = "You can almost TASTE the stomach ulcers now!"
-				icon_state = "hotsauce"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/enzyme)
-				name = "universal enzyme"
-				desc = "Used in cooking various dishes."
-				icon_state = "enzyme"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/nutriment/soysauce)
-				name = "soy sauce"
-				desc = "A dark, salty, savoury flavoring."
-				icon_state = "soysauce"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/frostoil)
-				name = "coldsauce"
-				desc = "Leaves the tongue numb in its passage."
-				icon_state = "coldsauce"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/sodiumchloride)
-				name = "salt shaker"
-				desc = "Salt. From space oceans, presumably."
-				icon_state = "saltshaker"
-				center_of_mass = "x=16;y=10"
-			if(/datum/reagent/blackpepper)
-				name = "pepper mill"
-				desc = "Often used to flavor food or make people sneeze."
-				icon_state = "peppermillsmall"
-				center_of_mass = "x=16;y=10"
-			if(/datum/reagent/nutriment/cornoil)
-				name = "corn oil"
-				desc = "A delicious oil used in cooking. Made from corn."
-				icon_state = "oliveoil"
-				center_of_mass = "x=16;y=6"
-			if(/datum/reagent/sugar)
-				name = "sugar"
-				desc = "Tastey space sugar!"
-				center_of_mass = "x=16;y=6"
-			else
-				name = "unlabelled condiment bottle"
-				if (reagents.reagent_list.len==1)
-					desc = "Looks like it is [reagents.get_master_reagent_name()], but you are not sure."
-				else
-					desc = "A mixture of various condiments. [reagents.get_master_reagent_name()] is one of them."
-				icon_state = "mixedcondiments"
-				center_of_mass = "x=16;y=6"
+	var/reagent = reagents.get_master_reagent_type()
+	if(reagent in special_bottles)
+		var/obj/item/weapon/reagent_containers/food/condiment/special_bottle = special_bottles[reagent]
+		name = initial(special_bottle.name)
+		desc = initial(special_bottle.desc)
+		icon_state = initial(special_bottle.icon_state)
+		center_of_mass = initial(special_bottle.center_of_mass)
 	else
-		icon_state = "emptycondiment"
-		name = "condiment bottle"
-		desc = "An empty condiment bottle."
-		center_of_mass = "x=16;y=6"
+		name = initial(name)
+		desc = initial(desc)
+		center_of_mass = initial(center_of_mass)
+		if(reagents.reagent_list.len > 0)
+			icon_state = "mixedcondiments"
+		else
+			icon_state = "emptycondiment"
 	if(label_text)
 		name = addtext(name," ([label_text])")
-
-	return
 
 /obj/item/weapon/reagent_containers/food/condiment/enzyme
 	name = "universal enzyme"
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
-
-/obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/enzyme, 50)
+	starting_reagents = list(/datum/reagent/enzyme = 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/barbecue
 	name = "barbecue sauce"
 	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
 	icon_state = "barbecue"
+	starting_reagents = list(/datum/reagent/nutriment/barbecue = 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/barbecue/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
+/obj/item/weapon/reagent_containers/food/condiment/sugar
+	name = "sugar"
+	desc = "Cavities in a bottle."
+	starting_reagents = list(/datum/reagent/sugar = 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/sugar/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/sugar, 50)
+/obj/item/weapon/reagent_containers/food/condiment/ketchup
+	name = "ketchup"
+	desc = "Tomato, but more liquid, stronger, better."
+	icon_state = "ketchup"
+	starting_reagents = list(/datum/reagent/nutriment/ketchup = 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/cornoil
+	name = "corn oil"
+	desc = "A delicious oil used in cooking. Made from corn."
+	icon_state = "oliveoil"
+	starting_reagents = list(/datum/reagent/nutriment/cornoil = 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/vinegar
+	name = "vinegar"
+	icon_state = "vinegar"
+	desc = "As acidic as it gets in the kitchen."
+	starting_reagents = list(/datum/reagent/nutriment/vinegar = 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/mayo
+	name = "mayonnaise"
+	icon_state = "mayo"
+	desc = "Mayonnaise, used for centuries to make things edible."
+	starting_reagents = list(/datum/reagent/nutriment/mayo = 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/frostoil
+	name = "coldsauce"
+	desc = "Leaves the tongue numb in its passage."
+	icon_state = "coldsauce"
+	starting_reagents = list(/datum/reagent/frostoil = 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/capsaicin
+	name = "hotsauce"
+	desc = "You can almost TASTE the stomach ulcers now!"
+	icon_state = "hotsauce"
+	starting_reagents = list(/datum/reagent/capsaicin = 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/small
 	possible_transfer_amounts = "1;20"
@@ -176,30 +176,21 @@
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
 	center_of_mass = "x=16;y=9"
-
-/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker/New()
-	..()
-	reagents.add_reagent(/datum/reagent/sodiumchloride, 20)
+	starting_reagents = list(/datum/reagent/sodiumchloride = 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill
 	name = "pepper mill"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
 	center_of_mass = "x=16;y=8"
-
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill/New()
-	..()
-	reagents.add_reagent(/datum/reagent/blackpepper, 20)
+	starting_reagents = list(/datum/reagent/blackpepper = 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar
 	name = "sugar"
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
 	center_of_mass = "x=17;y=9"
-
-/obj/item/weapon/reagent_containers/food/condiment/small/sugar/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/sugar, 30)
+	starting_reagents = list(/datum/reagent/sugar = 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/flour
 	name = "flour sack"
@@ -208,13 +199,10 @@
 	icon_state = "flour"
 	item_state = "flour"
 	randpixel = 10
+	starting_reagents = list(/datum/reagent/nutriment/flour = 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/flour/on_reagent_change()
 	return
-
-/obj/item/weapon/reagent_containers/food/condiment/flour/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/flour, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/salt
 	name = "big bag of salt"
@@ -225,27 +213,20 @@
 	randpixel = 10
 	volume = 500
 	w_class = ITEM_SIZE_LARGE
+	starting_reagents = list(/datum/reagent/sodiumchloride = 500)
 
 /obj/item/weapon/reagent_containers/food/condiment/salt/on_reagent_change()
 	return
-
-/obj/item/weapon/reagent_containers/food/condiment/salt/New()
-	..()
-	reagents.add_reagent(/datum/reagent/sodiumchloride, 500)
-
 
 /obj/item/weapon/reagent_containers/food/condiment/mint
 	name = "mint essential oil"
 	desc = "A small bottle of the essential oil of some kind of mint plant."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "coldsauce"
+	starting_reagents = list(/datum/reagent/nutriment/mint = 15)
 
 /obj/item/weapon/reagent_containers/food/condiment/mint/on_reagent_change()
 	return
-
-/obj/item/weapon/reagent_containers/food/condiment/mint/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/mint, 15)
 
 /obj/item/weapon/reagent_containers/food/condiment/soysauce
 	name = "soy sauce"
@@ -253,7 +234,4 @@
 	icon_state = "soysauce"
 	amount_per_transfer_from_this = 1
 	volume = 20
-
-/obj/item/weapon/reagent_containers/food/condiment/soysauce/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/soysauce, 20)
+	starting_reagents = list(/datum/reagent/nutriment/soysauce = 20)

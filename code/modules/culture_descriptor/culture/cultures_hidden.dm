@@ -1,6 +1,7 @@
 /decl/cultural_info/culture/hidden
 	description = "This is a hidden cultural detail. If you can see this, please report it on the tracker."
 	hidden = TRUE
+	hidden_from_codex = TRUE
 
 /decl/cultural_info/culture/hidden/alium
 	name = CULTURE_ALIUM

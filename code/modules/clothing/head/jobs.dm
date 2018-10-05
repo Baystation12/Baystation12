@@ -159,7 +159,7 @@
 
 /obj/item/clothing/head/beret/guard
 	name = "corporate security beret"
-	desc = "A white beret adorned with the crest of NanoTrasen. For security guards that are more inclined towards style than safety."
+	desc = "A white beret adorned with a corporate logo. For security guards that are more inclined towards style than safety."
 	icon_state = "beret_corporate_whitered"
 
 /obj/item/clothing/head/beret/plaincolor

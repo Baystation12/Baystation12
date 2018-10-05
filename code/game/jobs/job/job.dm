@@ -42,6 +42,9 @@
 	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
 
+	var/required_education = EDUCATION_TIER_NONE
+	var/available_by_default = TRUE
+
 /datum/job/New()
 	..()
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
@@ -176,6 +179,10 @@
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
 
+	if(!S.check_background(src, prefs))
+		to_chat(feedback, "<span class='boldannounce'>Incompatible background for role [title], species [S].</span>")
+		return TRUE
+
 	return FALSE
 
 /datum/job/proc/get_join_link(var/client/caller, var/href_string, var/show_invalid_jobs)
@@ -283,6 +290,27 @@
 		job_master.job_icons[title] = preview_icon
 
 	return job_master.job_icons[title]
+
+/datum/job/proc/get_unavailable_reasons(var/client/caller)
+	var/list/reasons = list()
+	if(jobban_isbanned(caller, title))
+		reasons["You are jobbanned."] = TRUE
+	if(!player_old_enough(caller))
+		reasons["Your player age is too low."] = TRUE
+	if(!is_position_available())
+		reasons["There are no positions left."] = TRUE
+	if(!is_branch_allowed(caller.prefs.char_branch))
+		reasons["Your branch of service does not allow it."] = TRUE
+	if(!is_rank_allowed(caller.prefs.char_branch, caller.prefs.char_rank))
+		reasons["Your rank choice does not allow it."] = TRUE
+	var/datum/species/S = all_species[caller.prefs.species]
+	if(S)
+		if(!is_species_allowed(S))
+			reasons["Your species choice does not allow it."] = TRUE
+		if(!S.check_background(src, caller.prefs))
+			reasons["Your background choices do not allow it."] = TRUE
+	if(LAZYLEN(reasons))
+		. = reasons
 
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)

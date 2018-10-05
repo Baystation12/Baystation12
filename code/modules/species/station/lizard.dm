@@ -10,6 +10,7 @@
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
 	limb_blend = ICON_MULTIPLY
 	tail_blend = ICON_MULTIPLY
+	hidden_from_codex = FALSE
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
@@ -23,10 +24,12 @@
 	blood_volume = 800
 
 	health_hud_intensity = 2
-	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
 
 	min_age = 18
 	max_age = 260
+
+	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
 	description = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -112,3 +115,17 @@
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
+
+/datum/species/unathi/proc/handle_sugar(var/mob/living/carbon/human/M, var/datum/reagent/sugar, var/efficiency = 1)
+	var/effective_dose = efficiency * M.chem_doses[sugar.type]
+	if(effective_dose < 5)
+		return
+	M.druggy = max(M.druggy, 10)
+	M.add_chemical_effect(CE_PULSE, -1)
+	if(effective_dose > 15 && prob(7))
+		M.emote(pick("twitch", "drool"))
+	if(effective_dose > 20 && prob(10))
+		M.SelfMove(pick(GLOB.cardinal))
+
+/datum/species/unathi/get_bodytype(var/mob/living/carbon/human/H)
+	return SPECIES_UNATHI

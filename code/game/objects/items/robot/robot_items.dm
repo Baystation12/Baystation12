@@ -51,10 +51,9 @@
 	icon = 'icons/obj/clothing/glasses.dmi'
 	hud_type = HUD_MEDICAL
 
-	New()
-		..()
-		hud = new /obj/item/clothing/glasses/hud/health(src)
-		return
+/obj/item/borg/sight/hud/med/Initialize()
+	. = ..()
+	hud = new /obj/item/clothing/glasses/hud/health(src)
 
 
 /obj/item/borg/sight/hud/sec
@@ -63,7 +62,17 @@
 	icon = 'icons/obj/clothing/glasses.dmi'
 	hud_type = HUD_SECURITY
 
-	New()
-		..()
-		hud = new /obj/item/clothing/glasses/hud/security(src)
-		return
+/obj/item/borg/sight/hud/Initialize()
+	. = ..()
+	hud = new /obj/item/clothing/glasses/hud/security(src)
+
+
+/obj/item/borg/sight/hud/jani
+	name = "janitor hud"
+	icon_state = "janihud"
+	icon = 'icons/obj/clothing/glasses.dmi'
+	hud_type = HUD_JANITOR
+
+/obj/item/borg/sight/hud/jani/Initialize()
+	. = ..()
+	hud = new /obj/item/clothing/glasses/hud/janitor(src)

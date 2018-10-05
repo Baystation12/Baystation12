@@ -22,8 +22,10 @@
 
 	var/features_budget = 2
 	//pre-defined list of features templates to pick from
-	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-									  /datum/map_template/ruin/exoplanet/hydrobase)
+	var/list/possible_features = list(
+									/datum/map_template/ruin/exoplanet/monolith,
+									/datum/map_template/ruin/exoplanet/hydrobase,
+									/datum/map_template/ruin/exoplanet/crashed_pod)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -206,7 +208,7 @@
 
 		num--
 		places += T
-		new new_type(T) 
+		new new_type(T)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
@@ -219,6 +221,7 @@
 			newgases -= "phoron"
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
+		newgases -= "watervapor"
 
 		var/sanity = prob(99.9)
 
@@ -337,7 +340,7 @@
 		T.set_density(1)
 		T.set_opacity(1)
 		if(istype(T, /turf/simulated))
-			var/turf/simulated/S = T 
+			var/turf/simulated/S = T
 			S.blocks_air = 1
 	if(T.x <= TRANSITIONEDGE || T.x >= (limit_x - TRANSITIONEDGE + 1) || T.y <= TRANSITIONEDGE || T.y >= (limit_y - TRANSITIONEDGE + 1))
 		new/obj/effect/fogofwar(T)
@@ -378,8 +381,9 @@
 	for(var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
 		S.randomize()
-		S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
-		S.set_trait(TRAIT_PLANT_ICON,"alien[rand(1,4)]")
+		var/planticon = "alien[rand(1,4)]"
+		S.set_trait(TRAIT_PRODUCT_ICON,planticon)
+		S.set_trait(TRAIT_PLANT_ICON,planticon)
 		var/color = pick(plantcolors)
 		if(color == "RANDOM")
 			color = get_random_colour(0,75,190)
@@ -421,6 +425,9 @@
 	has_resources = 1
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
+
+/turf/simulated/floor/exoplanet/can_engrave()
+	return FALSE
 
 /turf/simulated/floor/exoplanet/Entered(atom/movable/A)
 	..()

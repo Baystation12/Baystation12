@@ -343,7 +343,7 @@
 		I.take_internal_damage(rand(3,5))
 
 //////////////////////////////////////////////////////////////////
-//	 Organ inserting surgery step
+//	 Organ attachment surgery step
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/internal/attach_organ
 	allowed_tools = list(
@@ -378,6 +378,11 @@
 	if(organ_to_replace.parent_organ != affected.organ_tag)
 		to_chat(user, "<span class='warning'>You can't find anywhere to attach [organ_to_replace] to!</span>")
 		return SURGERY_FAILURE
+
+	var/obj/item/organ/internal/augment/A = organ_to_replace
+	if(istype(A))
+		if(!(A.augment_flags & AUGMENTATION_ORGANIC))
+			to_chat(user, SPAN_WARNING("\the [A] cannot function within a non-robotic limb"))
 
 	var/o_a =  (organ_to_replace.gender == PLURAL) ? "" : "a "
 

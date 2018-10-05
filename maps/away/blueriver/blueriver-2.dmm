@@ -86,15 +86,15 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ap" = (
-/obj/machinery/computer/helm,
+/obj/machinery/computer/ship/helm,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aq" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ar" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "as" = (
@@ -432,13 +432,13 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bs" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 24
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /obj/random/soap,

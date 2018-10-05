@@ -22,6 +22,8 @@
 	minbodytemp = 0
 	speed = 4
 
+	bleed_colour = SYNTH_BLOOD_COLOUR
+
 /mob/living/simple_animal/hostile/hivebot/range
 	name = "Hivebot"
 	desc = "A smallish robot, this one is armed!"

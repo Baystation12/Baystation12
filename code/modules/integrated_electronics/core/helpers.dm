@@ -47,15 +47,15 @@
 /obj/item/integrated_circuit/proc/get_pin_ref(pin_type, pin_number)
 	switch(pin_type)
 		if(IC_INPUT)
-			if(pin_number > inputs.len)
+			if(!inputs || pin_number > inputs.len)
 				return
 			return inputs[pin_number]
 		if(IC_OUTPUT)
-			if(pin_number > outputs.len)
+			if(!outputs || pin_number > outputs.len)
 				return
 			return outputs[pin_number]
 		if(IC_ACTIVATOR)
-			if(pin_number > activators.len)
+			if(!activators || pin_number > activators.len)
 				return
 			return activators[pin_number]
 	return
@@ -131,16 +131,14 @@
 
 	return get_pin_ref(parameters[1], parameters[2], parameters[3], components)
 
+// this is for data validation of stuff like ref encodes and more importantly ID access lists
 
+/proc/compute_signature(data)
+	return md5(SScircuit.cipherkey + data)
 
+/proc/add_data_signature(data)
+	var/signature = compute_signature(data)
+	return "[signature]:[data]"
 
-// Used to obfuscate object refs imported/exported as strings.
-// Not very secure, but if someone still finds a way to abuse refs, they deserve it.
-/proc/XorEncrypt(string, key)
-	if(!string || !key ||!istext(string)||!istext(key))
-		return
-	var/r
-	for(var/i = 1 to length(string))
-		r += ascii2text(text2ascii(string,i) ^ text2ascii(key,(i-1)%length(string)+1))
-	return r
-
+/proc/check_data_signature(signature, data)
+	return (compute_signature(data) == signature)

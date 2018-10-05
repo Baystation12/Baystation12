@@ -91,6 +91,9 @@
 		if(!hard_drive)
 			return
 		set_autorun(href_list["PC_setautorun"])
+	if( href_list["PC_terminal"] )
+		open_terminal(usr)
+		return 1
 
 	if(.)
 		update_uis()

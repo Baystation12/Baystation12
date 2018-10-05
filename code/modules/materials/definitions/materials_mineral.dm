@@ -1,8 +1,8 @@
 /material/pitchblende
-	name = "pitchblende"
-	ore_compresses_to = "pitchblende"
+	name = MATERIAL_PITCHBLENDE
+	ore_compresses_to = MATERIAL_PITCHBLENDE
 	icon_colour = "#917d1a"
-	ore_smelts_to = "uranium"
+	ore_smelts_to = MATERIAL_URANIUM
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
@@ -23,12 +23,12 @@
 	sale_price = 2
 
 /material/graphene
-	name = "graphene"
-	ore_compresses_to = "graphene"
+	name = MATERIAL_GRAPHENE
+	ore_compresses_to = MATERIAL_GRAPHENE
 	icon_colour = "#444444"
-	ore_smelts_to = "plastic"
+	ore_smelts_to = MATERIAL_PLASTIC
 	ore_name = "graphene"
-	ore_smelts_to = "plastic"
+	ore_smelts_to = MATERIAL_PLASTIC
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
@@ -40,8 +40,8 @@
 	sale_price = 1
 
 /material/quartz
-	name = "quartz"
-	ore_compresses_to = "quartz"
+	name = MATERIAL_QUARTZ
+	ore_compresses_to = MATERIAL_QUARTZ
 	ore_name = "quartz"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -60,7 +60,7 @@
 	sale_price = 2
 
 /material/pyrite
-	name = "pyrite"
+	name = MATERIAL_PYRITE
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -77,12 +77,12 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	ore_compresses_to = "pyrite"
+	ore_compresses_to = MATERIAL_PYRITE
 	sale_price = 2
 
 /material/spodumene
-	name = "spodumene"
-	ore_compresses_to = "spodumene"
+	name = MATERIAL_SPODUMENE
+	ore_compresses_to = MATERIAL_SPODUMENE
 	ore_name = "spodumene"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -101,8 +101,8 @@
 	sale_price = 2
 
 /material/cinnabar
-	name = "cinnabar"
-	ore_compresses_to = "cinnabar"
+	name = MATERIAL_CINNABAR
+	ore_compresses_to = MATERIAL_CINNABAR
 	ore_name = "cinnabar"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -121,8 +121,8 @@
 	sale_price = 2
 
 /material/phosphorite
-	name = "phosphorite"
-	ore_compresses_to = "phosphorite"
+	name = MATERIAL_PHOSPHORITE
+	ore_compresses_to = MATERIAL_PHOSPHORITE
 	ore_name = "phosphorite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -141,8 +141,8 @@
 	sale_price = 2
 
 /material/rocksalt
-	name = "rock salt"
-	ore_compresses_to = "rock salt"
+	name = MATERIAL_ROCK_SALT
+	ore_compresses_to = MATERIAL_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -161,8 +161,8 @@
 	sale_price = 2
 
 /material/potash
-	name = "potash"
-	ore_compresses_to = "potash"
+	name = MATERIAL_POTASH
+	ore_compresses_to = MATERIAL_POTASH
 	ore_name = "potash"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -181,7 +181,7 @@
 	sale_price = 2
 
 /material/bauxite
-	name = "bauxite"
+	name = MATERIAL_BAUXITE
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -197,15 +197,15 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	ore_compresses_to = "bauxite"
+	ore_compresses_to = MATERIAL_BAUXITE
 	sale_price = 2
 
 /material/sand
-	name = "sand"
+	name = MATERIAL_SAND
 	stack_type = null
 	icon_colour = "#e2dbb5"
-	ore_smelts_to = "glass"
-	ore_compresses_to = "sandstone"
+	ore_smelts_to = MATERIAL_GLASS
+	ore_compresses_to = MATERIAL_SANDSTONE
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
 	chem_products = list(
@@ -213,7 +213,7 @@
 		)
 
 /material/phoron
-	name = "phoron"
+	name = MATERIAL_PHORON
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
@@ -231,7 +231,7 @@
 		)
 	construction_difficulty = 2
 	ore_name = "phoron"
-	ore_compresses_to = "phoron"
+	ore_compresses_to = MATERIAL_PHORON
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
@@ -241,12 +241,13 @@
 		"billion" = 13,
 		"billion_lower" = 10
 		)
-	xarch_source_mineral = "phoron"
+	xarch_source_mineral = MATERIAL_PHORON
 	ore_icon_overlay = "gems"
 	sale_price = 5
 
 /material/phoron/supermatter
-	name = "supermatter"
+	name = MATERIAL_SUPERMATTER
+	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20
 	stack_origin_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 6, TECH_PHORON = 4)

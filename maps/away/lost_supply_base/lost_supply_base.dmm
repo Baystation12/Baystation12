@@ -2326,14 +2326,14 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "gq" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 1
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "gr" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -2359,7 +2359,7 @@
 /turf/space,
 /area/space)
 "ib" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;

@@ -201,3 +201,25 @@
  	"ek", "ras", "ver", "zan", "das", "waa", "geb", "vol", "lu", "min", "breh", "rus", "stv", "ee", "goe", "sk",
  	"la", "ver", "we", "ge", "luk", "an", "ar", "at", "es", "et", "bel", "du", "jaa", "ch", "kk", "gh", "ll", "uu", "wat")
 	shorthand = "SP"
+
+/datum/language/yeosa
+	name = LANGUAGE_YEOSA
+	desc = "A language of Moghes consisting of a combination of spoken word and gesticulation. While it is uncommonly spoken in the drier regions, it enjoys popular usage as the official tongue of the Yeosa clans."
+	speech_verb = "hisses"
+	ask_verb = "rattles"
+	exclaim_verb = "barks"
+	colour = "yeosa"
+	key = "h"
+	flags = WHITELISTED
+	space_chance = 40
+	syllables = list(
+		"azs","zis","zau","azua","skiu","zuakz","izo","aei","ki","kut","zo",
+		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
+		"ha", "ah", "he", "eh", "hi", "ih", "ho", "oh", "hu", "uh", "hs", "sh",
+		"la", "al", "le", "el", "li", "il", "lo", "ol", "lu", "ul", "ls", "sl",
+		"ka", "ak", "ke", "ek", "ki", "ik", "ko", "ok", "ku", "uk", "ks", "sk",
+		"sa", "as", "se", "es", "si", "is", "so", "os", "su", "us", "ss", "ss",
+		"ra", "ar", "re", "er", "ri", "ir", "ro", "or", "ru", "ur", "rs", "sr",
+		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
+	)
+	shorthand = "YU"

@@ -32,10 +32,22 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
 
+	// Add education, honorifics, etc.
+	var/formal_name = "Unset"
+	if(H)
+		formal_name = H.real_name
+		if(H.client && H.client.prefs)
+			for(var/culturetag in H.client.prefs.cultural_info)
+				var/decl/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
+				if(H.char_rank && H.char_rank.name_short)
+					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
+				else
+					formal_name = "[culture.get_formal_name_prefix()][formal_name][culture.get_formal_name_suffix()]"
+
 	// Generic record
-	set_name(H ? H.real_name : "Unset")
+	set_name(formal_name)
 	set_job(H ? GetAssignment(H) : "Unset")
-	set_sex(H ? gender2text(H.gender) : "Unset")
+	set_sex(H ? gender2text(H.get_sex()) : "Unset")
 	set_age(H ? H.age : 30)
 	set_status(GLOB.default_physical_status)
 	set_species(H ? H.get_species() : SPECIES_HUMAN)
@@ -53,7 +65,22 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
 
 	// Employment record
-	set_emplRecord(H && H.gen_record && !jobban_isbanned(H, "Records") ? html_decode(H.gen_record) : "No record supplied")
+	var/employment_record = "No record supplied"
+	if(H)
+		if(H.gen_record && !jobban_isbanned(H, "Records"))
+			employment_record = html_decode(H.gen_record)
+		if(H.client && H.client.prefs)
+			var/list/qualifications
+			for(var/culturetag in H.client.prefs.cultural_info)
+				var/decl/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
+				var/extra_note = culture.get_qualifications()
+				if(extra_note)
+					LAZYADD(qualifications, extra_note)
+			if(LAZYLEN(qualifications))
+				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
+	set_emplRecord(employment_record)
+
+	// Misc cultural info.
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
 	set_faction(H ? html_decode(H.get_cultural_value(TAG_FACTION)) : "Unset")
 	set_religion(H ? html_decode(H.get_cultural_value(TAG_RELIGION)) : "Unset")
@@ -129,43 +156,43 @@ KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
 // Fear not the preprocessor, for it is a friend. To add a field, use one of these, depending on value type and if you need special access to see it.
 // It will also create getter/setter procs for record datum, named like /get_[key here]() /set_[key_here](value) e.g. get_name() set_name(value)
 // Use getter setters to avoid errors caused by typoing the string key.
-#define FIELD_SHORT(NAME, KEY, ACCESS) SETUP_FIELD(NAME, KEY, simple_text/crew_record, ACCESS, null)
-#define FIELD_LONG(NAME, KEY, ACCESS) SETUP_FIELD(NAME, KEY, pencode_text/crew_record, ACCESS, null)
-#define FIELD_NUM(NAME, KEY, ACCESS) SETUP_FIELD(NAME, KEY, number/crew_record, ACCESS, null)
-#define FIELD_LIST(NAME, KEY, OPTIONS, ACCESS) FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, null)
+#define FIELD_SHORT(NAME, KEY, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, simple_text/crew_record, ACCESS, ACCESS_EDIT)
+#define FIELD_LONG(NAME, KEY, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, pencode_text/crew_record, ACCESS, ACCESS_EDIT)
+#define FIELD_NUM(NAME, KEY, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, number/crew_record, ACCESS, ACCESS_EDIT)
+#define FIELD_LIST(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT) FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT)
 #define FIELD_LIST_EDIT(NAME, KEY, OPTIONS, ACCESS, ACCESS_EDIT) SETUP_FIELD(NAME, KEY, options/crew_record, ACCESS, ACCESS_EDIT);\
 /datum/report_field/options/crew_record/##KEY/get_options(){return OPTIONS}
 
 // GENERIC RECORDS
-FIELD_SHORT("Name", name, null)
-FIELD_SHORT("Job",job, null)
-FIELD_LIST("Sex", sex, record_genders(), null)
-FIELD_NUM("Age", age, null)
+FIELD_SHORT("Name", name, null, access_change_ids)
+FIELD_SHORT("Job", job, null, access_change_ids)
+FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
+FIELD_NUM("Age", age, null, access_change_ids)
 FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
 
-FIELD_SHORT("Species",species, null)
-FIELD_LIST("Branch", branch, record_branches(), null)
-FIELD_LIST("Rank", rank, record_ranks(), null)
+FIELD_SHORT("Species",species, null, access_change_ids)
+FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
+FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids)
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, null)
-FIELD_LONG("Medical Record", medRecord, access_medical)
-FIELD_SHORT("Religion", religion, access_medical)
+FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
+FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
+FIELD_SHORT("Religion", religion, access_medical, access_medical)
 
 // SECURITY RECORDS
-FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security)
-FIELD_LONG("Security Record", secRecord, access_security)
-FIELD_SHORT("DNA", dna, access_security)
-FIELD_SHORT("Fingerprint", fingerprint, access_security)
+FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_security)
+FIELD_LONG("Security Record", secRecord, access_security, access_security)
+FIELD_SHORT("DNA", dna, access_security, access_security)
+FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)
 
 // EMPLOYMENT RECORDS
-FIELD_LONG("Employment Record", emplRecord, access_bridge)
-FIELD_SHORT("Home System", homeSystem, access_bridge)
-FIELD_SHORT("Faction", faction, access_bridge)
-FIELD_LONG("Qualifications", skillset, access_bridge)
+FIELD_LONG("Employment Record", emplRecord, access_bridge, access_bridge)
+FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids)
+FIELD_SHORT("Faction", faction, access_bridge, access_bridge)
+FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge)
 
 // ANTAG RECORDS
-FIELD_LONG("Exploitable Information", antagRecord, access_syndicate)
+FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_syndicate)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()

@@ -1,5 +1,5 @@
 /obj/item/device/radio/headset/torchnanotrasen
-	name = "nanotrasen headset"
+	name = "corporate headset"
 	desc = "A headset for corporate drones."
 	icon_state = "nt_headset"
 	item_state = "headset"
@@ -30,14 +30,21 @@
 	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/heads/torchntcommand
-	name = "nanotrasen command headset"
+	name = "corporate command headset"
 	desc = "Headset of the corporate overlords."
+	icon_state = "nt_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/headset_torchcl
+
+/obj/item/device/radio/headset/heads/torchntdirector
+	name = "research director headset"
+	desc = "Headset of the masters of the universe."
 	icon_state = "nt_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchrd
 
 /obj/item/device/radio/headset/heads/torchntcommand/alt
-	name = "nanotrasen command bowman headset"
+	name = "corporate command bowman headset"
 	icon_state = "nt_headset_alt"
 	item_state = "nt_headset_alt"
 
@@ -54,14 +61,14 @@
 	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/headset_deckofficer
-	name = "deck officer's radio headset"
+	name = "deck chief's radio headset"
 	desc = "The headset of the chief box pusher."
 	icon_state = "cargo_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_deckofficer
 
 /obj/item/device/radio/headset/headset_deckofficer/alt
-	name = "deck officer's bowman headset"
+	name = "deck chief's bowman headset"
 	item_state = "cargo_headset_alt"
 	icon_state = "cargo_headset_alt"
 	max_keys = 3
@@ -112,10 +119,10 @@
 	ks1type = /obj/item/device/encryptionkey/headset_torchroboticist
 
 /obj/item/device/radio/headset/headset_cargo
-	desc = "A headset used by the Deck Officer and his slaves."
+	desc = "A headset used by the Deck Chief and his slaves."
 
 /obj/item/device/radio/headset/headset_cargo/alt
-	desc = "A bowman headset used by the Deck Officer and his slaves."
+	desc = "A bowman headset used by the Deck Chief and his slaves."
 
 /obj/item/device/radio/headset/headset_corpsman
 	name = "corpsman headset"

@@ -158,6 +158,7 @@
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()
+	corps += /obj/item/clothing/under/rank/scientist/nanotrasen
 	corps += /obj/item/clothing/under/mbill
 	corps += /obj/item/clothing/under/saare
 	corps += /obj/item/clothing/under/aether
@@ -170,7 +171,28 @@
 	corps += /obj/item/clothing/under/rank/ntwork
 	corps += /obj/item/clothing/under/morpheus
 	corps += /obj/item/clothing/under/skinner
+	corps += /obj/item/clothing/under/dais
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
+
+/datum/gear/uniform/nanotrasen_guard
+	display_name = "NanoTrasen colours, guard"
+	path = /obj/item/clothing/under/rank/guard/nanotrasen
+
+/datum/gear/uniform/nanotrasen_executive
+	display_name = "NanoTrasen colours, senior researcher"
+	path = /obj/item/clothing/under/rank/scientist/executive/nanotrasen
+
+/datum/gear/uniform/nanotrasen_coveralls
+	display_name = "NanoTrasen colours, coveralls"
+	path = /obj/item/clothing/under/rank/ntwork/nanotrasen
+
+/datum/gear/uniform/nanotrasen_flightsuit
+	display_name = "NanoTrasen colours, flight suit"
+	path = /obj/item/clothing/under/rank/ntpilot/nanotrasen
+
+/datum/gear/uniform/nanotrasen_executive
+	display_name = "NanoTrasen colours, liason suit"
+	path = /obj/item/clothing/under/suit_jacket/corp/nanotrasen
 
 /datum/gear/uniform/sterile
 	display_name = "sterile jumpsuit"
@@ -183,4 +205,3 @@
 /datum/gear/uniform/frontier
 	display_name = "frontier clothes"
 	path = /obj/item/clothing/under/frontier
-

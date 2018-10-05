@@ -9,21 +9,37 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/registered_shuttle_landmarks = list()
 	var/last_landmark_registration_time
 	var/list/shuttle_logs = list()               //Keeps records of shuttle movement, format is list(datum/shuttle = datum/shuttle_log)
+	var/list/shuttle_areas = list()              //All the areas of all shuttles.
 
 	var/list/landmarks_awaiting_sector = list()  //Stores automatic landmarks that are waiting for a sector to finish loading.
 	var/list/landmarks_still_needed = list()     //Stores landmark_tags that need to be assigned to the sector (landmark_tag = sector) when registered.
-	var/list/shuttles_to_initialize              //A queue for shuttles that were asked to initialize too early.
+	var/list/shuttles_to_initialize              //A queue for shuttles to initialize at the appropriate time.
+	var/list/sectors_to_initialize               //Used to find all sector objects at the appropriate time.
 
 	var/tmp/list/working_shuttles
 
 /datum/controller/subsystem/shuttle/Initialize()
 	last_landmark_registration_time = world.time
-	initialize_shuttles()
+	for(var/shuttle_type in subtypesof(/datum/shuttle)) // This accounts for most shuttles, though away maps can queue up more.
+		var/datum/shuttle/shuttle = shuttle_type
+		if(!initial(shuttle.defer_initialisation))
+			LAZYDISTINCTADD(shuttles_to_initialize, shuttle_type)
+	initialize_shuttles() // Order matters here.
+	initialize_sectors()
 	. = ..()
 
 /datum/controller/subsystem/shuttle/fire(resumed = FALSE)
 	if (!resumed)
 		working_shuttles = process_shuttles.Copy()
+	
+	if(length(shuttles_to_initialize))
+		initialize_shuttles()
+		if (MC_TICK_CHECK)
+			return
+	if(length(sectors_to_initialize))
+		initialize_sectors()
+		if (MC_TICK_CHECK)
+			return
 
 	while (working_shuttles.len)
 		var/datum/shuttle/shuttle = working_shuttles[working_shuttles.len]
@@ -33,6 +49,17 @@ SUBSYSTEM_DEF(shuttle)
 
 		if (MC_TICK_CHECK)
 			return
+
+/datum/controller/subsystem/shuttle/proc/initialize_shuttles()
+	for(var/shuttle_type in shuttles_to_initialize)
+		initialize_shuttle(shuttle_type)
+	hook_up_motherships(shuttles_to_initialize)
+	shuttles_to_initialize = null
+
+/datum/controller/subsystem/shuttle/proc/initialize_sectors()
+	for(var/sector in sectors_to_initialize)
+		initialize_sector(sector)
+	sectors_to_initialize = null
 
 /datum/controller/subsystem/shuttle/proc/register_landmark(shuttle_landmark_tag, obj/effect/shuttle_landmark/shuttle_landmark)
 	if (registered_shuttle_landmarks[shuttle_landmark_tag])
@@ -56,6 +83,8 @@ SUBSYSTEM_DEF(shuttle)
 //Checks if the given sector's landmarks have initialized; if so, registers them with the sector, if not, marks them for assignment after they come in.
 //Also adds automatic landmarks that were waiting on their sector to spawn.
 /datum/controller/subsystem/shuttle/proc/initialize_sector(obj/effect/overmap/given_sector)
+	given_sector.populate_sector_objects() // This is a late init operation that sets up the sector's map_z and does non-overmap-related init tasks.
+
 	for(var/landmark_tag in given_sector.initial_generic_waypoints)
 		if(!try_add_landmark_tag(landmark_tag, given_sector))
 			landmarks_still_needed[landmark_tag] = given_sector
@@ -85,21 +114,21 @@ SUBSYSTEM_DEF(shuttle)
 			given_sector.add_landmark(landmark, shuttle_name)
 			. = 1
 
-//This is called by gameticker after all the machines and radio frequencies have been properly initialized
-/datum/controller/subsystem/shuttle/proc/initialize_shuttles()
-	for(var/shuttle_type in subtypesof(/datum/shuttle))
-		var/datum/shuttle/shuttle = shuttle_type
-		if((shuttle in shuttles_to_initialize) || !initial(shuttle.defer_initialisation))
-			initialise_shuttle(shuttle_type, TRUE)
-	shuttles_to_initialize = null
-
-/datum/controller/subsystem/shuttle/proc/initialise_shuttle(var/shuttle_type, during_init = FALSE)
-	if(!initialized && !during_init)
-		LAZYADD(shuttles_to_initialize, shuttle_type)
-		return //We'll get back to it during init.
+/datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type)
 	var/datum/shuttle/shuttle = shuttle_type
 	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
+		shuttle_areas |= shuttle.shuttle_area
+
+/datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
+	for(var/datum/shuttle/S in shuttles_list)
+		if(S.mothershuttle && !S.motherdock)
+			var/datum/shuttle/mothership = shuttles[S.mothershuttle]
+			if(mothership)
+				S.motherdock = S.current_location.landmark_tag
+				mothership.shuttle_area |= S.shuttle_area
+			else
+				error("Shuttle [S] was unable to find mothership [mothership]!")
 
 /datum/controller/subsystem/shuttle/stat_entry()
 	..("S:[shuttles.len], L:[registered_shuttle_landmarks.len], Landmarks w/o Sector:[landmarks_awaiting_sector.len], Missing Landmarks:[landmarks_still_needed.len]")

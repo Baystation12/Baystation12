@@ -30,6 +30,8 @@
 	var/list/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
+	var/last_modified_ckey
+	var/age = 0
 
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
@@ -315,6 +317,8 @@
 		else
 			info += t // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
+
+		last_modified_ckey = usr.ckey
 
 		update_space(t)
 

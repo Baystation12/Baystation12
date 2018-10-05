@@ -107,3 +107,18 @@
 /datum/gear/eyes/hudpatch
 	display_name = "iPatch"
 	path = /obj/item/clothing/glasses/eyepatch/hud
+
+/datum/gear/eyes/blindfold
+	display_name = "blindfold"
+	path = /obj/item/clothing/glasses/sunglasses/blindfold
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/eyes/janitor
+	display_name = "JaniHUD"
+	path = /obj/item/clothing/glasses/hud/janitor
+	cost = 2
+	allowed_roles = list(/datum/job/janitor)
+
+/datum/gear/eyes/janitor/prescription
+	display_name = "JaniHUD, prescription"
+	path = /obj/item/clothing/glasses/hud/janitor/prescription

@@ -10,8 +10,8 @@
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
-	icon_state = "0"
-	matter = list("glass" = 150)
+	icon_state = "rg"
+	matter = list(MATERIAL_GLASS = 150)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null
 	volume = 15
@@ -23,6 +23,10 @@
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
+
+/obj/item/weapon/reagent_containers/syringe/Initialize(var/mapload)
+	. = ..()
+	update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/on_reagent_change()
 	update_icon()
@@ -88,7 +92,9 @@
 		icon_state = "broken"
 		return
 
-	var/rounded_vol = round(reagents.total_volume, round(reagents.maximum_volume / 3))
+	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 1, 15)
+	if (reagents.total_volume == 0)
+		rounded_vol = 0
 	if(ismob(loc))
 		var/injoverlay
 		switch(mode)
@@ -97,7 +103,7 @@
 			if (SYRINGE_INJECT)
 				injoverlay = "inject"
 		overlays += injoverlay
-	icon_state = "[rounded_vol]"
+	icon_state = "[initial(icon_state)][rounded_vol]"
 	item_state = "syringe_[rounded_vol]"
 
 	if(reagents.total_volume)
@@ -380,9 +386,26 @@
 /obj/item/weapon/reagent_containers/syringe/steroid
 	name = "Syringe (anabolic steroids)"
 	desc = "Contains drugs for muscle growth."
-	
+
 /obj/item/weapon/reagent_containers/syringe/steroid/New()
 	..()
 	reagents.add_reagent(/datum/reagent/adrenaline, 5)
 	reagents.add_reagent(/datum/reagent/hyperzine, 10)
+
+
+// TG ports
+
+/obj/item/weapon/reagent_containers/syringe/bluespace
+	name = "bluespace syringe"
+	desc = "An advanced syringe that can hold 60 units of chemicals."
+	amount_per_transfer_from_this = 20
+	volume = 60
+	icon_state = "bs"
+
+/obj/item/weapon/reagent_containers/syringe/noreact
+	name = "cryostasis syringe"
+	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
+	volume = 20
+	atom_flags = ATOM_FLAG_NO_REACT
+	icon_state = "cs"
 

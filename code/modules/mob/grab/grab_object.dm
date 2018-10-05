@@ -149,6 +149,7 @@
 /obj/item/grab/proc/action_used()
 	assailant.remove_cloaking_source(assailant.species)
 	last_action = world.time
+	leave_forensic_traces()
 
 /obj/item/grab/proc/check_action_cooldown()
 	return (world.time >= last_action + current_grab.action_cooldown)
@@ -156,6 +157,13 @@
 /obj/item/grab/proc/check_upgrade_cooldown()
 	return (world.time >= last_upgrade + current_grab.upgrade_cooldown)
 
+/obj/item/grab/proc/leave_forensic_traces()
+	var/obj/item/clothing/C = affecting.get_covering_equipped_item_by_zone(target_zone)
+	if(istype(C))
+		C.leave_evidence(assailant)
+		if(prob(50))
+			C.ironed_state = WRINKLES_WRINKLY
+	
 /obj/item/grab/proc/upgrade(var/bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
 		to_chat(assailant, "<span class='danger'>It's too soon to upgrade.</span>")
@@ -167,6 +175,7 @@
 		last_upgrade = world.time
 		adjust_position()
 		update_icons()
+		leave_forensic_traces()
 		current_grab.enter_as_up(src)
 
 /obj/item/grab/proc/downgrade()

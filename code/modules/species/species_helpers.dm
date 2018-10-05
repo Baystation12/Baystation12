@@ -36,3 +36,33 @@ var/list/stored_shock_by_ref = list()
 			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
 		return equip_overlays[image_key]
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
+
+/datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
+	if(!isnull(water_soothe_amount) && depth >= 40)
+		if(H.getHalLoss())
+			H.adjustHalLoss(-(water_soothe_amount))
+			if(prob(5))
+				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")
+
+/datum/species/proc/is_available_for_join()
+	if(!(spawn_flags & SPECIES_CAN_JOIN))
+		return FALSE
+	else if(!isnull(max_players))
+		var/player_count = 0
+		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
+			if(H.client && H.key && H.species == src)
+				player_count++
+				if(player_count >= max_players)
+					return FALSE
+	return TRUE
+
+/datum/species/proc/check_background(var/datum/job/job, var/datum/preferences/prefs)
+	. = TRUE
+	if(istype(job) && istype(prefs) && job.required_education > EDUCATION_TIER_NONE)
+		var/has_sufficient_education = FALSE
+		for(var/culturetag in prefs.cultural_info)
+			var/decl/cultural_info/culture = SSculture.get_culture(prefs.cultural_info[culturetag])
+			if(culture.get_education_tier() >= job.required_education)
+				has_sufficient_education = TRUE
+				break
+		. = has_sufficient_education

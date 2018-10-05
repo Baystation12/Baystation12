@@ -18,6 +18,8 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text
 	var/eye_attack_text_victim
 
+	var/attack_name = "fist"
+
 /datum/unarmed_attack/proc/get_damage_type()
 	if(deal_halloss)
 		return PAIN
@@ -29,7 +31,7 @@ var/global/list/sparring_attack_cache = list()
 			sparring_attack_cache[sparring_variant_type] = new sparring_variant_type()
 		return sparring_attack_cache[sparring_variant_type]
 
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(user.restrained())
 		return 0
 
@@ -94,6 +96,10 @@ var/global/list/sparring_attack_cache = list()
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
 		target.apply_effect(3, WEAKEN, armour)
 
+	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)
+	if(istype(C) && prob(10))
+		C.leave_evidence(user)
+
 /datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	user.visible_message("<span class='warning'>[user] [pick(attack_verb)] [target] in the [affecting.name]!</span>")
@@ -119,6 +125,7 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	sharp = 0
 	edge = 0
+	attack_name = "bite"
 
 /datum/unarmed_attack/bite/sharp
 	attack_verb = list("bit", "chomped")
@@ -142,6 +149,7 @@ var/global/list/sparring_attack_cache = list()
 	eye_attack_text = "fingers"
 	eye_attack_text_victim = "digits"
 	damage = 0
+	attack_name = "punch"
 
 /datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
@@ -185,6 +193,7 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("kick", "kick", "kick", "knee strike")
 	attack_sound = "swing_hit"
 	damage = 0
+	attack_name = "kick"
 
 /datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
@@ -222,6 +231,7 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("stomp")
 	attack_sound = "swing_hit"
 	damage = 0
+	attack_name = "stomp"
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
@@ -271,3 +281,4 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	sharp = 0
 	edge = 0
+	attack_name = "light hit"

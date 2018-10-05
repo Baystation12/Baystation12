@@ -68,7 +68,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	name = OUTFIT_JOB_NAME("Research Director - Torch")
-	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
+	l_ear = /obj/item/device/radio/headset/heads/torchntdirector
 	uniform = /obj/item/clothing/under/rank/research_director
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/brown
@@ -130,13 +130,18 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/cl
-	name = OUTFIT_JOB_NAME("NanoTrasen Liaison")
+	name = OUTFIT_JOB_NAME("Workplace Liaison")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
-	uniform = /obj/item/clothing/under/suit_jacket/nt
+	uniform = /obj/item/clothing/under/suit_jacket/corp
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
+
+decl/hierarchy/outfit/job/torch/passenger/research/cl/union
+	name = OUTFIT_JOB_NAME("Union Representative")
+	l_pocket = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
+	r_pocket = /obj/item/weapon/flame/lighter/zippo
 
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")
@@ -344,6 +349,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Mortician")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
 
+/decl/hierarchy/outfit/job/torch/crew/medical/biomech
+	name = OUTFIT_JOB_NAME("Biomechanical Engineer")
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
+	shoes = /obj/item/clothing/shoes/black
+	l_ear = /obj/item/device/radio/headset/torchroboticist
+	id_type = /obj/item/weapon/card/id/torch/contractor/biomech
+	pda_type = /obj/item/modular_computer/pda/roboticist
+
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
 	uniform = /obj/item/clothing/under/rank/virologist
@@ -407,19 +420,15 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
-	name = OUTFIT_JOB_NAME("Deck Officer")
+	name = OUTFIT_JOB_NAME("Deck Chief")
 	l_ear = /obj/item/device/radio/headset/headset_deckofficer
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	pda_type = /obj/item/modular_computer/pda/cargo
 
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned
-	name = OUTFIT_JOB_NAME("Deck Officer - EC Officer")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
-
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
-	name = OUTFIT_JOB_NAME("Deck Officer - Fleet")
+	name = OUTFIT_JOB_NAME("Deck Chief - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 
@@ -541,6 +550,24 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
 
+//Crew Research Oufits
+
+/decl/hierarchy/outfit/job/torch/crew/research
+	name = OUTFIT_JOB_NAME("Xenolife Technician")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/research
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
+	pda_type = /obj/item/modular_computer/pda/science
+	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+
+/decl/hierarchy/outfit/job/torch/crew/research/commissioned
+	name = OUTFIT_JOB_NAME("Xenolife Technician - Officer")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
+	pda_type = /obj/item/modular_computer/pda/science
+	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+
 //Passenger Outfits
 
 /decl/hierarchy/outfit/job/torch/passenger/research
@@ -560,7 +587,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	BACKPACK_OVERRIDE_RESEARCH
 
 /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
-	name = OUTFIT_JOB_NAME("NanoTrasen Pilot")
+	name = OUTFIT_JOB_NAME("Corporate Pilot")
 	uniform = /obj/item/clothing/under/rank/ntpilot
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	shoes = /obj/item/clothing/shoes/workboots
@@ -620,6 +647,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research
+
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor
 	name = OUTFIT_JOB_NAME("Custodian - Torch")

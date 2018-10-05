@@ -3,7 +3,6 @@
 
 	name = "Embedded Controller"
 	anchored = 1
-
 	use_power = 1
 	idle_power_usage = 10
 

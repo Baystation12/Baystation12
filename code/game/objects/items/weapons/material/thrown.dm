@@ -21,4 +21,4 @@
 		M.adjustToxLoss(rand(urgh/2,urgh))
 
 /obj/item/weapon/material/star/ninja
-	default_material = "uranium"
+	default_material = MATERIAL_URANIUM

@@ -3,9 +3,6 @@
 /obj/item/weapon/rcd
 	name = "rapid construction device"
 	desc = "Small, portable, and far, far heavier than it looks, this gun-shaped device has a port into which one may insert compressed matter cartridges."
-	description_info = "On use, this device will toggle between various types of structures (or their removal). You can examine it to see its current mode. It must be loaded with compressed matter cartridges, which can be obtained from an autolathe. Click an adjacent tile to use the device."
-	description_fluff = "Advents in material printing and synthesis technology have produced everyday miracles, such as the RCD, which in certain industries has single-handedly put entire construction crews out of a job."
-	description_antag = "RCDs can be incredibly dangerous in the wrong hands. Use them to swiftly block off corridors, or instantly breach the ship wherever you want."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"
 	opacity = 0
@@ -19,7 +16,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 50000)
+	matter = list(MATERIAL_STEEL = 50000)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
 	var/max_stored_matter = 30
@@ -107,7 +104,7 @@
 	item_state = "rcdammo"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 15000,"glass" = 7500)
+	matter = list(MATERIAL_STEEL = 15000,MATERIAL_GLASS = 7500)
 	var/remaining = 10
 
 /obj/item/weapon/rcd_ammo/examine(var/mob/user)
@@ -118,7 +115,7 @@
 /obj/item/weapon/rcd_ammo/large
 	name = "high-capacity matter cartridge"
 	desc = "Do not ingest."
-	matter = list(DEFAULT_WALL_MATERIAL = 45000,"glass" = 22500)
+	matter = list(MATERIAL_STEEL = 45000,MATERIAL_GLASS = 22500)
 	remaining = 30
 	origin_tech = list(TECH_MATERIAL = 4)
 

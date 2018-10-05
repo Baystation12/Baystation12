@@ -305,7 +305,7 @@
 // Copied over from paper's rename verb
 // see code/modules/paperwork/paper.dm line 62
 
-/obj/item/weapon/pen/robopen/proc/RenamePaper(mob/user as mob,obj/paper as obj)
+/obj/item/weapon/pen/robopen/proc/RenamePaper(mob/user, obj/item/weapon/paper/paper)
 	if ( !user || !paper )
 		return
 	var/n_name = sanitizeSafe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text, 32)
@@ -315,6 +315,7 @@
 	//n_name = copytext(n_name, 1, 32)
 	if(( get_dist(user,paper) <= 1  && user.stat == 0))
 		paper.SetName("paper[(n_name ? text("- '[n_name]'") : null)]")
+		paper.last_modified_ckey = user.ckey
 	add_fingerprint(user)
 	return
 

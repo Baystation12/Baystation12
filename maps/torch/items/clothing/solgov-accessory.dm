@@ -263,12 +263,12 @@ armbands
 
 /obj/item/clothing/accessory/armband/solgov/mp
 	name = "military police brassard"
-	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is black with white letters MP."
+	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is black with 'MP' in white."
 	icon_state = "mpband"
 
 /obj/item/clothing/accessory/armband/solgov/ma
 	name = "master at arms brassard"
-	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is white with navy blue letters MA."
+	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is white with 'MA' in navy blue."
 	icon_state = "maband"
 
 /obj/item/weapon/storage/box/armband
@@ -450,6 +450,14 @@ department tags
 	icon_state = "dept_army"
 	desc = "Insignia denoting assignment to the exploration department. These fit Army uniforms."
 	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/solgov/department/research
+	name = "research insignia"
+	desc = "Insignia denoting assignment to the research department. These fit Expeditionary Corps uniforms."
+	color = COLOR_BOTTLE_GREEN
+
+/obj/item/clothing/accessory/solgov/department/research/service
+	icon_state = "dept_exped_service"
 
 /*********
 ranks - ec

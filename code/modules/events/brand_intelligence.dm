@@ -13,30 +13,29 @@
 
 /datum/event/brand_intelligence/start()
 	for(var/obj/machinery/vending/V in SSmachines.machinery)
-		if(isNotStationLevel(V.z))	continue
-		vendingMachines.Add(V)
+		if(V.z in affecting_z)
+			vendingMachines += weakref(V)
 
 	if(!vendingMachines.len)
 		kill()
 		return
-
-	originMachine = pick(vendingMachines)
-	vendingMachines.Remove(originMachine)
+	var/weakref/W = pick_n_take(vendingMachines)
+	originMachine = W.resolve()
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
 	originMachine.shooting_chance = 15
 
-
 /datum/event/brand_intelligence/tick()
-	if(!vendingMachines.len || !originMachine || originMachine.shut_up || !originMachine.shoot_inventory)	//if every machine is infected, or if the original vending machine is missing or has it's voice switch flipped or fixed
+	if(!vendingMachines.len || QDELETED(originMachine) || originMachine.shut_up || !originMachine.shoot_inventory)	//if every machine is infected, or if the original vending machine is missing or has it's voice switch flipped or fixed
 		kill()
 		return
 
-	if(IsMultiple(activeFor, 5))
-		if(prob(15))
-			var/obj/machinery/vending/infectedMachine = pick(vendingMachines)
-			vendingMachines.Remove(infectedMachine)
-			infectedVendingMachines.Add(infectedMachine)
+	if(IsMultiple(activeFor, 5) && prob(15))
+		var/weakref/W = pick(vendingMachines)
+		vendingMachines -= W
+		var/obj/machinery/vending/infectedMachine = W.resolve()
+		if(infectedMachine)
+			infectedVendingMachines += W
 			infectedMachine.shut_up = 0
 			infectedMachine.shoot_inventory = 1
 
@@ -52,7 +51,13 @@
 /datum/event/brand_intelligence/end()
 	originMachine.shut_up = 1
 	originMachine.shooting_chance = initial(originMachine.shooting_chance)
-	for(var/obj/machinery/vending/infectedMachine in infectedVendingMachines)
+	for(var/weakref/W in infectedVendingMachines)
+		var/obj/machinery/vending/infectedMachine = W.resolve()
+		if(!infectedMachine)
+			continue
 		infectedMachine.shut_up = 1
 		infectedMachine.shoot_inventory = 0
 	command_announcement.Announce("All traces of the rampant brand intelligence have disappeared from the systems.", "[location_name()] Firewall Subroutines")
+	originMachine = null
+	infectedVendingMachines.Cut()
+	vendingMachines.Cut()

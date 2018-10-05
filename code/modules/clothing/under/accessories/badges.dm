@@ -77,11 +77,11 @@
 	var/emagged //emag_act removes access requirements
 
 /obj/item/clothing/accessory/badge/holo/NT
-	name = "\improper NT holobadge"
-	desc = "This glowing red badge marks the holder as a member of NanoTrasen corporate security."
+	name = "corporate holobadge"
+	desc = "This glowing green badge marks the holder as a member of corporate security."
 	icon_state = "ntholobadge"
-	color = COLOR_WHITE
-	badge_string = "NanoTrasen Security"
+	color = null
+	badge_string = "Corporate Security"
 	badge_access = access_research
 
 /obj/item/clothing/accessory/badge/holo/cord
@@ -141,8 +141,8 @@
 					  /obj/item/clothing/accessory/badge/holo/cord = 2)
 
 /obj/item/weapon/storage/box/holobadgeNT
-	name = "\improper NT holobadge box"
-	desc = "A box containing NanoTrasen security holobadges."
+	name = "corporate holobadge box"
+	desc = "A box containing corporate security holobadges."
 	startswith = list(/obj/item/clothing/accessory/badge/holo/NT = 4,
 					  /obj/item/clothing/accessory/badge/holo/NT/cord = 2)
 
@@ -165,10 +165,10 @@
 	badge_string = "Office of Interstellar Intelligence"
 
 /obj/item/clothing/accessory/badge/nanotrasen
-	name = "\improper NanoTrasen badge"
-	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a NanoTrasen corporate executive."
+	name = "corporate badge"
+	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a corporate executive."
 	icon_state = "ntbadge"
-	badge_string = "NanoTrasen Corporate"
+	badge_string = "Corporate Executive Body"
 
 /obj/item/clothing/accessory/badge/ocieagent
 	name = "\improper OCIE Agent's badge"

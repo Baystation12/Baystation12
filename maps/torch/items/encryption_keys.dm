@@ -9,14 +9,19 @@
 	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1)
 
 /obj/item/device/encryptionkey/headset_torchnt
-	name = "nanotrasen radio encryption key"
+	name = "corporate radio encryption key"
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1)
 
 /obj/item/device/encryptionkey/headset_torchrd
-	name = "nanotrasen command radio encryption key"
+	name = "research director radio encryption key"
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1, "Command" = 1)
+
+/obj/item/device/encryptionkey/headset_torchcl
+	name = "corporate liaison radio encryption key"
+	icon_state = "nt_cypherkey"
+	channels = list("Science" = 1, "Service" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/headset_torchroboticist
 	name = "roboticist's encryption key"
@@ -24,7 +29,7 @@
 	channels = list("Engineering" = 1, "Medical" = 1)
 
 /obj/item/device/encryptionkey/headset_deckofficer
-	name = "deck officer's encryption key"
+	name = "deck chief's encryption key"
 	icon_state = "qm_cypherkey"
 	channels = list("Supply" = 1, "Command" = 1)
 

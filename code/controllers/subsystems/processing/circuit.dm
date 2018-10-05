@@ -17,7 +17,7 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 	var/cost_multiplier = SHEET_MATERIAL_AMOUNT / 10 // Each circuit cost unit is 200cm3
 
 /datum/controller/subsystem/processing/circuit/Initialize()
-	SScircuit.cipherkey = uppertext(generateRandomString(2000+rand(0,10)))
+	SScircuit.cipherkey = generateRandomString(2000+rand(0,10))
 	circuits_init()
 	. = ..()
 
@@ -55,5 +55,7 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 		/obj/item/device/integrated_electronics/debugger,
 		/obj/item/device/integrated_electronics/analyzer,
 		/obj/item/device/integrated_electronics/detailer,
-		/obj/item/weapon/card/data
+		/obj/item/weapon/card/data,
+		/obj/item/weapon/card/data/full_color,
+		/obj/item/weapon/card/data/disk
 		)

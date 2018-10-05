@@ -105,7 +105,7 @@ var/list/airlock_overlays = list()
 	..()
 
 /obj/machinery/door/airlock/get_material()
-	return SSmaterials.get_material_by_name(mineral ? mineral : DEFAULT_WALL_MATERIAL)
+	return SSmaterials.get_material_by_name(mineral ? mineral : MATERIAL_STEEL)
 
 //regular airlock presets
 
@@ -114,6 +114,10 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/security
 	door_color = COLOR_NT_RED
+
+/obj/machinery/door/airlock/security/research
+	door_color = COLOR_WHITE
+	stripe_color = COLOR_NT_RED
 
 /obj/machinery/door/airlock/engineering
 	name = "Maintenance Hatch"
@@ -138,7 +142,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_NT_RED
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/science
 	door_color = COLOR_WHITE
@@ -198,7 +202,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_NT_RED
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/glass/science
 	door_color = COLOR_WHITE
@@ -267,36 +271,36 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/gold
 	name = "Gold Airlock"
 	door_color = COLOR_SUN
-	mineral = "gold"
+	mineral = MATERIAL_GOLD
 
 /obj/machinery/door/airlock/silver
 	name = "Silver Airlock"
 	door_color = COLOR_SILVER
-	mineral = "silver"
+	mineral = MATERIAL_SILVER
 
 /obj/machinery/door/airlock/diamond
 	name = "Diamond Airlock"
 	door_color = COLOR_CYAN_BLUE
-	mineral = "diamond"
+	mineral = MATERIAL_DIAMOND
 
 /obj/machinery/door/airlock/uranium
 	name = "Uranium Airlock"
 	desc = "And they said I was crazy."
 	door_color = COLOR_PAKISTAN_GREEN
-	mineral = "uranium"
+	mineral = MATERIAL_URANIUM
 	var/last_event = 0
 	var/rad_power = 7.5
 
 /obj/machinery/door/airlock/sandstone
 	name = "\improper Sandstone Airlock"
 	door_color = COLOR_BEIGE
-	mineral = "sandstone"
+	mineral = MATERIAL_SANDSTONE
 
 /obj/machinery/door/airlock/phoron
 	name = "\improper Phoron Airlock"
 	desc = "No way this can end badly."
 	door_color = COLOR_PURPLE
-	mineral = "phoron"
+	mineral = MATERIAL_PHORON
 
 /obj/machinery/door/airlock/centcom
 	airlock_type = "centcomm"
@@ -837,7 +841,7 @@ About the new airlock wires panel:
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
-			if (i.matter && (DEFAULT_WALL_MATERIAL in i.matter) && i.matter[DEFAULT_WALL_MATERIAL] > 0)
+			if (i.matter && (MATERIAL_STEEL in i.matter) && i.matter[MATERIAL_STEEL] > 0)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()
@@ -1040,22 +1044,26 @@ About the new airlock wires panel:
 			..()
 		return
 
-	if(!repairing && isWelder(C) && !( src.operating > 0 ) && src.density)
+	if(!repairing && isWelder(C) && !( operating > 0 ) && density)
 		var/obj/item/weapon/weldingtool/W = C
-		if(W.remove_fuel(0,user))
-			if(!src.welded)
-				src.welded = 1
-			else
-				src.welded = null
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			src.update_icon()
+		if(!W.remove_fuel(0,user))
+			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
 			return
+		playsound(loc, 'sound/items/Welder.ogg', 50, 1)
+		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
+							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
+		if(do_after(user, (rand(3,5)) SECONDS, src))
+			if(density && !(operating > 0) && !repairing)
+				welded = !welded
+				update_icon()
+				return
 		else
+			to_chat(user, SPAN_NOTICE("You must remain still to complete this task."))
 			return
 	else if(isScrewdriver(C))
 		if (src.p_open)
 			if (stat & BROKEN)
-				to_chat(usr, "<span class='warning'>The panel is broken and cannot be closed.</span>")
+				to_chat(user, "<span class='warning'>The panel is broken, and cannot be closed.</span>")
 			else
 				src.p_open = 0
 		else
@@ -1075,7 +1083,7 @@ About the new airlock wires panel:
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40,src))
-				to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
+				to_chat(user, "<span class='notice'>You've removed the airlock electronics!</span>")
 				deconstruct(user)
 				return
 		else if(arePowerSystemsOn())

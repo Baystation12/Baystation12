@@ -15,7 +15,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/Destroy()
 	. = ..()
-
+	SSchemistry.unmark_for_update(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	QDEL_NULL_LIST(reagent_list)
 	my_atom = null
 
@@ -64,6 +64,9 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			total_volume += R.volume
 	return
 
+/datum/reagents/proc/handle_reactions()
+	SSchemistry.mark_for_update(src)
+
 /datum/reagents/proc/process_reactions()
 	if(!my_atom) // No reactions in temporary holders
 		return 0
@@ -77,29 +80,35 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/list/datum/chemical_reaction/eligible_reactions = list()
 
 	for(var/datum/reagent/R in reagent_list)
-		eligible_reactions |= chemical_reactions_list[R.type]
+		eligible_reactions |= SSchemistry.chemical_reactions_by_id[R.type]
 
 	var/list/datum/chemical_reaction/active_reactions = list()
 
 	for(var/datum/chemical_reaction/C in eligible_reactions)
 		if(C.can_happen(src))
-			active_reactions |= C
+			active_reactions[C] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
 			reaction_occured = 1
 
-	var/list/used_reagents = list()
+	var/list/used_reagents = list()       // this is a helper
+	// if two reactions share a reagent, each is allocated half of it, so we compute this here
 	for(var/datum/chemical_reaction/C in active_reactions)
 		var/list/adding = C.get_used_reagents()
 		for(var/R in adding)
-			used_reagents[R] += 1
+			LAZYADD(used_reagents[R], C)
 
-	var/max_split = 1
 	for(var/R in used_reagents)
-		if(used_reagents[R] > max_split)
-			max_split = used_reagents[R]
+		var/counter = length(used_reagents[R])
+		if(counter <= 1)
+			continue // Only used by one reaction, so nothing we need to do.
+		for(var/datum/chemical_reaction/C in used_reagents[R])
+			active_reactions[C] = max(counter, active_reactions[C])
+			counter-- //so the next reaction we execute uses more of the remaining reagents
+			// Note: this is not guaranteed to maximize the size of the reactions we do (if one reaction is limited by reagent A, we may be over-allocating reagent B to it)
+			// However, we are guaranteed to fully use up the most profligate reagent if possible.
+			// Further reactions may occur on the next tick, when this runs again.
 
 	for(var/datum/chemical_reaction/C in active_reactions)
-		C.process(src, max_split, total_volume)
-		--max_split
+		C.process(src, active_reactions[C])
 
 	for(var/datum/chemical_reaction/C in active_reactions)
 		C.post_reaction(src)
@@ -107,7 +116,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	update_total()
 
 	if(reaction_occured)
-		process_reactions() // Check again in case the new reagents can react again
+		handle_reactions() // Check again in case the new reagents can react again
 
 	return reaction_occured
 
@@ -127,7 +136,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 				current.mix_data(data, amount)
 			update_total()
 			if(!safety)
-				process_reactions()
+				handle_reactions()
 			if(my_atom)
 				my_atom.on_reagent_change()
 			return 1
@@ -138,7 +147,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		R.initialize_data(data)
 		update_total()
 		if(!safety)
-			process_reactions()
+			handle_reactions()
 		if(my_atom)
 			my_atom.on_reagent_change()
 		return 1
@@ -154,7 +163,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			current.volume -= amount // It can go negative, but it doesn't matter
 			update_total() // Because this proc will delete it then
 			if(!safety)
-				process_reactions()
+				handle_reactions()
 			if(my_atom)
 				my_atom.on_reagent_change()
 			return 1
@@ -246,10 +255,13 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		remove_reagent(current.type, amount_to_remove, 1)
 
 	update_total()
-	process_reactions()
+	handle_reactions()
 	return amount
 
-/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]).
+// Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier].
+// Returns actual amount removed from [src] (not amount transferred to [target]).
+// Use safety = 1 for temporary targets to avoid queuing them up for processing.
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/safety = 0)
 	if(!target || !istype(target))
 		return
 
@@ -267,8 +279,9 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			remove_reagent(current.type, amount_to_transfer, 1)
 
 	if(!copy)
-		process_reactions()
-	target.process_reactions()
+		handle_reactions()
+	if(!safety)
+		target.handle_reactions()
 	return amount
 
 /* Holder-to-atom and similar procs */
@@ -383,7 +396,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			return trans_to_holder(R, amount, multiplier, copy)
 	else
 		var/datum/reagents/R = new /datum/reagents(amount, GLOB.temp_reagents_holder)
-		. = trans_to_holder(R, amount, multiplier, copy)
+		. = trans_to_holder(R, amount, multiplier, copy, 1)
 		R.touch_mob(target)
 		qdel(R)
 
@@ -392,7 +405,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return
 
 	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
-	. = trans_to_holder(R, amount, multiplier, copy)
+	. = trans_to_holder(R, amount, multiplier, copy, 1)
 	R.touch_turf(target)
 	qdel(R)
 	return
@@ -403,7 +416,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	if(!target.reagents)
 		var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
-		. = trans_to_holder(R, amount, multiplier, copy)
+		. = trans_to_holder(R, amount, multiplier, copy, 1)
 		R.touch_obj(target)
 		qdel(R)
 		return

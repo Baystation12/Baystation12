@@ -82,7 +82,7 @@
 	name = "Lar Maria hostile mob"
 	desc = "You shouldn't see me!"
 	icon = 'maps/away/lar_maria/lar_maria_sprites.dmi'
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	environment_smash = 1
 	faction = "lar_maria"
 	status_flags = CANPUSH

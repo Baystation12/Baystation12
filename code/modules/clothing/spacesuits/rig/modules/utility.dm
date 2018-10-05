@@ -123,14 +123,12 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     80),
-		list("dramadol",      "tramadol",      /datum/reagent/tramadol,          80),
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
-		list("antibiotics",   "antibiotics",   /datum/reagent/spaceacillin,      80),
-		list("antitoxins",    "antitoxins",    /datum/reagent/dylovene,          80),
-		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
+		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         80),
-		list("radium",        "radium",        /datum/reagent/radium,            80)
+		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      80),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80),
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -140,14 +138,14 @@
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     20),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20),
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
-		list("antibiotics",   "antibiotics",   /datum/reagent/spaceacillin,      20),
-		list("antitoxins",    "antitoxins",    /datum/reagent/dylovene,          20),
+		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          20),
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
-		list("radium",        "radium",        /datum/reagent/radium,            20)
+		list("radium",        "radium",        /datum/reagent/radium,            20),
+		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      20),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20),
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)

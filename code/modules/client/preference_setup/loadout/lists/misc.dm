@@ -2,6 +2,16 @@
 	display_name = "cane"
 	path = /obj/item/weapon/cane
 
+/datum/gear/union_card
+	display_name = "union membership"
+	path = /obj/item/weapon/card/union
+
+/datum/gear/union_card/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
+	. = ..()
+	if(.)
+		var/obj/item/weapon/card/union/card = .
+		card.signed_by = H.real_name
+
 /datum/gear/dice
 	display_name = "dice pack"
 	path = /obj/item/weapon/storage/pill_bottle/dice

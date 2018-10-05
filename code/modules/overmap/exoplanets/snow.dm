@@ -3,7 +3,7 @@
 	desc = "Cold planet with limited plant life."
 	color = "#e8faff"
 	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-							/datum/map_template/ruin/exoplanet/marooned) 
+							/datum/map_template/ruin/exoplanet/marooned)
 
 	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
 							 /datum/map_template/ruin/exoplanet/oasis,
@@ -11,7 +11,8 @@
 							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
 							 /datum/map_template/ruin/exoplanet/fountain,
 							 /datum/map_template/ruin/exoplanet/hydrobase,
-							 /datum/map_template/ruin/exoplanet/lodge)
+							 /datum/map_template/ruin/exoplanet/lodge,
+							 /datum/map_template/ruin/exoplanet/crashed_pod)
 
 /obj/effect/overmap/sector/exoplanet/snow/generate_map()
 	for(var/zlevel in map_z)
@@ -61,6 +62,6 @@
 	icon_state = pick("snow[rand(1,12)]","snow0")
 	..()
 
-/turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, temperature, volume)
+/turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	name = "permafrost"
 	icon_state = "permafrost"

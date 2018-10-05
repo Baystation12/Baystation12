@@ -8,6 +8,7 @@
 	total_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/assistant
 	hud_icon = "hudblank"
+	available_by_default = FALSE
 
 	var/info = "You have survived a terrible disaster. Make the best of things that you can."
 	var/rank

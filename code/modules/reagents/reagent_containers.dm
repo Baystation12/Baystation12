@@ -18,10 +18,10 @@
 		amount_per_transfer_from_this = N
 
 /obj/item/weapon/reagent_containers/New()
+	create_reagents(volume)
 	..()
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
-	create_reagents(volume)
 
 /obj/item/weapon/reagent_containers/attack_self(mob/user as mob)
 	return
@@ -128,6 +128,7 @@
 			self_feed_message(user)
 			reagents.trans_to_mob(user, issmall(user) ? ceil(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
 			feed_sound(user)
+			add_trace_DNA(user)
 			return 1
 
 
@@ -154,6 +155,7 @@
 
 			reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
 			feed_sound(user)
+			add_trace_DNA(target)
 			return 1
 
 	return 0
@@ -203,3 +205,9 @@
 		to_chat(user, "<span class='notice'>The [src] contains: [reagents.get_reagents(precision = prec)].</span>")
 	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERT))
 		to_chat(user, "<span class='notice'>Using your chemistry knowledge, you indentify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)].</span>")
+
+/obj/item/weapon/reagent_containers/ex_act(severity)
+	if(reagents)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			R.ex_act(src, severity)
+	..()

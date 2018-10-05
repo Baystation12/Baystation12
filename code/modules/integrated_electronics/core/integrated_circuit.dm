@@ -38,19 +38,6 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 // This should be used when someone is examining while the case is opened.
 /obj/item/integrated_circuit/proc/internal_examine(mob/user)
-	to_chat(user, "This board has [LAZYLEN(inputs)] input pin\s, [LAZYLEN(outputs)] output pin\s and [LAZYLEN(activators)] activation pin\s.")
-	for(var/k in 1 to LAZYLEN(inputs))
-		var/datum/integrated_io/I = inputs[k]
-		if(I.linked.len)
-			to_chat(user, "The '[I]' is connected to [I.get_linked_to_desc()].")
-	for(var/k in 1 to LAZYLEN(outputs))
-		var/datum/integrated_io/O = outputs[k]
-		if(O.linked.len)
-			to_chat(user, "The '[O]' is connected to [O.get_linked_to_desc()].")
-	for(var/k in 1 to LAZYLEN(activators))
-		var/datum/integrated_io/activate/A = activators[k]
-		if(A.linked.len)
-			to_chat(user, "The '[A]' is connected to [A.get_linked_to_desc()].")
 	any_examine(user)
 	interact(user)
 
@@ -86,7 +73,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
-	matter[DEFAULT_WALL_MATERIAL] = w_class * SScircuit.cost_multiplier
+	matter[MATERIAL_STEEL] = w_class * SScircuit.cost_multiplier
 	. = ..()
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.

@@ -19,11 +19,12 @@
 	dos_speed = 0
 	switch(ntnet_status)
 		if(1)
-			dos_speed = NTNETSPEED_LOWSIGNAL * NTNETSPEED_DOS_AMPLIFICATION
+			dos_speed = NTNETSPEED_LOWSIGNAL
 		if(2)
-			dos_speed = NTNETSPEED_HIGHSIGNAL * NTNETSPEED_DOS_AMPLIFICATION
+			dos_speed = NTNETSPEED_HIGHSIGNAL
 		if(3)
-			dos_speed = NTNETSPEED_ETHERNET * NTNETSPEED_DOS_AMPLIFICATION
+			dos_speed = NTNETSPEED_ETHERNET
+	dos_speed *= NTNETSPEED_DOS_AMPLIFICATION + operator_skill - SKILL_BASIC
 	if(target && executed)
 		target.dos_overload += dos_speed
 		if(!target.operable())
@@ -99,10 +100,24 @@
 		error = ""
 		return 1
 	if(href_list["PRG_execute"])
-		if(target)
-			executed = 1
-			target.dos_sources.Add(src)
-			if(ntnet_global.intrusion_detection_enabled)
-				ntnet_global.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from device: [computer.network_card.get_network_tag()]")
-				ntnet_global.intrusion_detection_alarm = 1
+		if(!target)
+			return 1
+		executed = 1
+		target.dos_sources.Add(src)
+		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
+	
+		var/list/sources_to_show = list(computer.network_card.get_network_tag())
+		var/extra_to_show = 2 * max(operator_skill - SKILL_ADEPT, 0)
+		if(extra_to_show)
+			var/list/candidates = list()
+			for(var/obj/item/modular_computer/C in SSobj.processing) // Apparently the only place these are stored.
+				if(C.network_card && (C.z in GetConnectedZlevels(computer.z)))
+					candidates += C
+			for(var/i = 1, i <= extra_to_show, i++)
+				var/obj/item/modular_computer/C = pick_n_take(candidates)
+				sources_to_show += C.network_card.get_network_tag()
+
+		if(ntnet_global.intrusion_detection_enabled)
+			ntnet_global.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")
+			ntnet_global.intrusion_detection_alarm = 1
 		return 1

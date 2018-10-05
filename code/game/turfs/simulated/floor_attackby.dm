@@ -1,10 +1,13 @@
-/turf/simulated/floor/attackby(obj/item/C as obj, mob/user as mob)
+/turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
 
 	if(!C || !user)
 		return 0
 
 	if(isCoil(C) || (flooring && istype(C, /obj/item/stack/rods)))
 		return ..(C, user)
+
+	if(!(isScrewdriver(C) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
+		return
 
 	if(flooring)
 		if(isCrowbar(C))

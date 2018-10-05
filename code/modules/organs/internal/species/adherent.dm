@@ -110,6 +110,10 @@
 	status = ORGAN_ROBOTIC
 	phoron_guard = TRUE
 
+/obj/item/organ/internal/eyes/adherent/Initialize()
+	. = ..()
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+
 /obj/item/organ/internal/cell/adherent
 	name = "piezoelectric core"
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'

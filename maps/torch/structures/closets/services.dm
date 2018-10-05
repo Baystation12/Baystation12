@@ -58,7 +58,9 @@
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/weapon/storage/box/detergent,
-		/obj/item/weapon/soap
+		/obj/item/weapon/soap,
+		/obj/item/weapon/storage/belt/janitor,
+		/obj/item/clothing/glasses/hud/janitor
 	)
 
 /obj/structure/closet/secure_closet/bar_torch

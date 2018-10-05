@@ -285,8 +285,8 @@ AI MODULES
 /******************** NanoTrasen ********************/
 
 /obj/item/weapon/aiModule/nanotrasen // -- TLE
-	name = "'NT Default' Core AI Module"
-	desc = "An 'NT Default' Core AI Module: 'Reconfigures the AI's core laws.'."
+	name = "'Corporate Default' Core AI Module"
+	desc = "A 'Corporate Default' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/nanotrasen
 
@@ -409,3 +409,11 @@ obj/item/weapon/aiModule/solgov_aggressive
 	desc = "An 'Antimov' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 4)
 	laws = new/datum/ai_laws/antimov()
+
+/******************** DAIS ********************/
+
+/obj/item/weapon/aiModule/dais
+	name = "\improper 'DAIS Experimental' core AI module"
+	desc = "A 'DAIS Experimental' Core AI Module: 'Reconfigures the AI's core laws.'."
+	origin_tech = list(TECH_DATA = 4)
+	laws = new/datum/ai_laws/dais()

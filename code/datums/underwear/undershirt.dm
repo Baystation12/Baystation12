@@ -184,5 +184,9 @@
 	icon_state = "expedition_female_s"
 
 /datum/category_item/underwear/undershirt/polo_nt
-	name = "Polo, NanoTrasen"
+	name = "Polo, corporate"
 	icon_state = "ntpolo"
+
+/datum/category_item/underwear/undershirt/polo_dais
+	name = "Polo, Deimos Advanced Information Systems"
+	icon_state = "dais_polo"

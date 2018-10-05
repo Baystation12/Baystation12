@@ -65,7 +65,7 @@
 	var/cavity_name = "cavity"
 
 	// Surgery vars.
-	var/cavity_max_w_class = 0
+	var/cavity_max_w_class = ITEM_SIZE_TINY //this is increased if bigger organs spawn by default inside
 	var/hatch_state = 0
 	var/stage = 0
 	var/cavity = 0
@@ -199,6 +199,10 @@
 			if(istype(I, /obj/item/organ))
 				continue
 			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
+		var/ouchies = get_wounds_desc()
+		if(ouchies != "nothing")
+			to_chat(usr, "<span class='notice'>There is [ouchies] visible on it.</span>")
+
 	return
 
 /obj/item/organ/external/show_decay_status(mob/user)
@@ -881,7 +885,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_BLUNT)
 			var/obj/gore
 			if(BP_IS_CRYSTAL(src))
-				gore = new /obj/item/weapon/material/shard(get_turf(victim), "crystal")
+				gore = new /obj/item/weapon/material/shard(get_turf(victim), MATERIAL_CRYSTAL)
 			else if(BP_IS_ROBOTIC(src))
 				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
 			else

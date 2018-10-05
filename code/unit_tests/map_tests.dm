@@ -270,7 +270,7 @@ datum/unit_test/ladder_check/start_test()
 		if(L.allowed_directions & UP)
 			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
 		if(L.allowed_directions & DOWN)
-			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded 
+			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
 			succeeded = check_open_space(L) && succeeded
 	if(succeeded)
 		pass("All ladders are correctly setup.")
@@ -507,6 +507,132 @@ datum/unit_test/ladder_check/start_test()
 		pass("All shutoff valves connect to two different pipe networks.")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/station_pipes_shall_not_leak
+	name = "MAP: Station pipes shall not leak"
+
+/datum/unit_test/station_pipes_shall_not_leak/start_test()
+	var/failures = 0
+	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
+		if(P.leaking && isStationLevel(P.z))
+			failures++
+			log_bad("Following pipe is leaking: [log_info_line(P)]")
+
+	if(failures)
+		fail("[failures] station pipe\s leak.")
+	else
+		pass("No station pipes are leaking")
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/station_power_terminals_shall_be_wired
+	name = "MAP: Station power terminals shall be wired"
+
+/datum/unit_test/station_power_terminals_shall_be_wired/start_test()
+	var/failures = 0
+	for(var/obj/machinery/power/terminal/term in SSmachines.machinery)
+		var/turf/T = get_turf(term)
+		if(!T)
+			failures++
+			log_bad("Nullspace terminal : [log_info_line(term)]")
+			continue
+
+		if(!isStationLevel(T.z))
+			continue
+
+		var/found_cable = FALSE
+		for(var/obj/structure/cable/C in T)
+			if(C.d2 > 0 && C.d1 == 0)
+				found_cable = TRUE
+				break
+		if(!found_cable)
+			failures++
+			log_bad("Unwired terminal : [log_info_line(term)]")
+
+	if(failures)
+		fail("[failures] unwired power terminal\s.")
+	else
+		pass("All station power terminals are wired.")
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/station_wires_shall_be_connected
+	name = "MAP: Station wires shall be connected"
+	var/list/exceptions
+
+/datum/unit_test/station_wires_shall_be_connected/start_test()
+	var/failures = 0
+
+	var/exceptions_by_turf = list()
+	for(var/exception in exceptions)
+		var/turf/T = locate(exception[1], exception[2], exception[3])
+		if(!T)
+			CRASH("Invalid exception: [exception[1]] - [exception[2]] - [exception[3]]")
+		if(!(T in exceptions_by_turf))
+			exceptions_by_turf[T] = list()
+		exceptions_by_turf[T] += exception[4]
+	exceptions = exceptions_by_turf
+
+	for(var/obj/structure/cable/C in world)
+		if(!all_ends_connected(C))
+			failures++
+
+	if(failures)
+		fail("Found [failures] cable\s without connections.")
+	else if(exceptions.len)
+		for(var/entry in exceptions)
+			log_bad("[log_info_line(entry)] - [english_list(exceptions[entry])] ")
+		fail("Unnecessary exceptions need to be cleaned up.")
+	else
+		pass("All station wires are properly connected.")
+
+	return 1
+
+// We work on the assumption that another test ensures we only have valid directions
+/datum/unit_test/station_wires_shall_be_connected/proc/all_ends_connected(var/obj/structure/cable/C)
+	. = TRUE
+
+	var/turf/source_turf = get_turf(C)
+	if(!source_turf)
+		log_bad("Nullspace wire: [log_info_line(C)]")
+		return FALSE
+
+	// We don't care about non-station wires
+	if(!isStationLevel(source_turf.z))
+		return TRUE
+
+	for(var/dir in list(C.d1, C.d2))
+		if(!dir) // Don't care about knots
+			continue
+		var/rev_dir = GLOB.reverse_dir[dir]
+
+		var/list/exception = exceptions[source_turf]
+		if(exception && (dir in exception))
+			exception -= dir
+			if(!exception.len)
+				exceptions -= source_turf
+			continue
+
+		var/turf/target_turf
+		if(dir == UP)
+			target_turf = GetAbove(C)
+		if(dir == DOWN)
+			target_turf = GetBelow(C)
+		else
+			target_turf = get_step(C, dir)
+
+		var/connected = FALSE
+		for(var/obj/structure/cable/revC in target_turf)
+			if(revC.d1 == rev_dir || revC.d2 == rev_dir)
+				connected = TRUE
+				break
+
+		if(!connected)
+			log_bad("Disconnected wire: [dir2text(dir)] - [log_info_line(C)]")
+			. = FALSE
 
 #undef SUCCESS
 #undef FAILURE
