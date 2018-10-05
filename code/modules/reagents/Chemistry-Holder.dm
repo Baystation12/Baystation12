@@ -15,7 +15,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/Destroy()
 	. = ..()
-
+	SSchemistry.unmark_for_update(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	QDEL_NULL_LIST(reagent_list)
 	my_atom = null
 
