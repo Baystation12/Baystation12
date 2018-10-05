@@ -180,6 +180,9 @@
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	heating_products = list(/datum/reagent/cryoxadone, /datum/reagent/sodium)
+	heating_point = 10 CELCIUS
+	heating_message = "turns back to sludge."
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_CRYO, 1)

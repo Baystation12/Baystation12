@@ -70,6 +70,8 @@
 
 	if(air_contents)
 		temperature_archived = air_contents.temperature
+		if(beaker)
+			ADJUST_ATOM_TEMPERATURE(beaker, air_contents.temperature)
 		heat_gas_contents()
 		expel_gas()
 

@@ -135,6 +135,8 @@
 	result = /datum/reagent/space_drugs
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/sugar = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
+	minimum_temperature = 50 CELCIUS
+	maximum_temperature = (50 CELCIUS) + 100
 
 /datum/chemical_reaction/lube
 	name = "Space Lube"
@@ -154,6 +156,8 @@
 	result = /datum/reagent/synaptizine
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/lithium = 1, /datum/reagent/water = 1)
 	result_amount = 3
+	minimum_temperature = 30 CELCIUS
+	maximum_temperature = (30 CELCIUS) + 100
 
 /datum/chemical_reaction/hyronalin
 	name = "Hyronalin"
@@ -205,6 +209,8 @@
 	name = "Cryptobiolin"
 	result = /datum/reagent/cryptobiolin
 	required_reagents = list(/datum/reagent/potassium = 1, /datum/reagent/acetone = 1, /datum/reagent/sugar = 1)
+	minimum_temperature = 30 CELCIUS
+	maximum_temperature = 60 CELCIUS
 	result_amount = 3
 
 /datum/chemical_reaction/tricordrazine
@@ -231,6 +237,8 @@
 	result = /datum/reagent/dermaline
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/phosphorus = 1, /datum/reagent/kelotane = 1)
 	result_amount = 3
+	minimum_temperature = (-50 CELCIUS) - 100
+	maximum_temperature = -50 CELCIUS
 
 /datum/chemical_reaction/dexalinp
 	name = "Dexalin Plus"
@@ -260,14 +268,18 @@
 /datum/chemical_reaction/cryoxadone
 	name = "Cryoxadone"
 	result = /datum/reagent/cryoxadone
-	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/water = 1, /datum/reagent/acetone = 1)
+	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/drink/ice = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
+	minimum_temperature = (-25 CELCIUS) - 100
+	maximum_temperature = -25 CELCIUS
 
 /datum/chemical_reaction/clonexadone
 	name = "Clonexadone"
 	result = /datum/reagent/clonexadone
 	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1, /datum/reagent/toxin/phoron = 0.1)
 	result_amount = 2
+	minimum_temperature = (-75 CELCIUS) - 100
+	maximum_temperature = -75 CELCIUS
 
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
@@ -304,6 +316,8 @@
 	name = "Potassium Chloride"
 	result = /datum/reagent/toxin/potassium_chloride
 	required_reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/potassium = 1)
+	minimum_temperature = 60 CELCIUS
+	maximum_temperature = (60 CELCIUS) + 100
 	result_amount = 2
 
 /datum/chemical_reaction/potassium_chlorophoride
@@ -317,6 +331,8 @@
 	result = /datum/reagent/toxin/zombiepowder
 	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5, /datum/reagent/soporific = 5, /datum/reagent/copper = 5)
 	result_amount = 2
+	minimum_temperature = 90 CELCIUS
+	maximum_temperature = 99 CELCIUS
 	mix_message = "The solution boils off to form a fine powder."
 
 /datum/chemical_reaction/mindbreaker
@@ -325,6 +341,8 @@
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
+	minimum_temperature = 75 CELCIUS
+	maximum_temperature = (75 CELCIUS) + 25
 
 /datum/chemical_reaction/lipozine
 	name = "Lipozine"
@@ -451,8 +469,10 @@
 /datum/chemical_reaction/phoronsolidification
 	name = "Solid Phoron"
 	result = null
-	required_reagents = list(/datum/reagent/iron = 5, /datum/reagent/frostoil = 5, /datum/reagent/toxin/phoron = 20)
+	required_reagents = list(/datum/reagent/iron = 5, /datum/reagent/toxin/phoron = 20)
 	result_amount = 1
+	minimum_temperature = (-80 CELCIUS) - 100
+	maximum_temperature = -80 CELCIUS
 	mix_message = "The solution hardens and begins to crystallize."
 
 /datum/chemical_reaction/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -1360,6 +1380,8 @@
 	result = /datum/reagent/drink/hot_coco
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coco = 1)
 	result_amount = 5
+	minimum_temperature = 70 CELCIUS
+	maximum_temperature = (70 CELCIUS) + 100
 	mix_message = "The solution thickens into a steaming brown beverage."
 
 /datum/chemical_reaction/soysauce
@@ -1404,6 +1426,8 @@
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 1
 	mix_message = "The solution thickens and curdles into a rich yellow substance."
+	minimum_temperature = 40 CELCIUS
+	maximum_temperature = (40 CELCIUS) + 100
 
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume)
 	..()
@@ -1764,6 +1788,8 @@
 	name = "Hooch"
 	result = /datum/reagent/ethanol/hooch
 	required_reagents = list (/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/fuel = 1)
+	minimum_temperature = 30 CELCIUS
+	maximum_temperature = (30 CELCIUS) + 100
 	result_amount = 3
 
 /datum/chemical_reaction/irish_coffee
@@ -1873,6 +1899,8 @@
 	name = "Anti-freeze"
 	result = /datum/reagent/ethanol/antifreeze
 	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/drink/milk/cream = 1, /datum/reagent/drink/ice = 1)
+	minimum_temperature = (0 CELCIUS) - 100
+	maximum_temperature = 0 CELCIUS
 	result_amount = 3
 	mix_message = "The solution thickens sluggishly."
 
