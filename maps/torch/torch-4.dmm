@@ -1,4 +1,4 @@
-//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE 
 "aaa" = (
 /turf/space,
 /area/space)
@@ -14976,6 +14976,26 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
+"bkN" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/box/beakers,
+/obj/item/weapon/storage/box/beakers,
+/obj/item/weapon/reagent_containers/dropper,
+/obj/effect/floor_decal/corner/beige{
+	dir = 6
+	},
+/obj/machinery/camera/network/medbay{
+	c_tag = "Infirmary - Chemistry";
+	dir = 8
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	dir = 8;
+	icon_state = "nosmoking";
+	pixel_x = 32
+	},
+/obj/item/weapon/storage/box/syringes,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "blb" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
@@ -15497,6 +15517,30 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
+"bLJ" = (
+/obj/machinery/button/remote/blast_door{
+	id = "chemcounter";
+	name = "Chemistry Counter Lockdown Control";
+	pixel_x = -6;
+	pixel_y = -21
+	},
+/obj/machinery/button/remote/blast_door{
+	id = "chemwindow";
+	name = "Chemistry Window Shutters Control";
+	pixel_x = 6;
+	pixel_y = -21
+	},
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/beige/three_quarters{
+	dir = 4
+	},
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/machinery/reagentgrinder,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "bMb" = (
 /turf/simulated/wall/prepainted,
 /area/engineering/hardstorage/aux)
@@ -17195,22 +17239,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
-"dLb" = (
-/obj/structure/table/standard,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/weapon/storage/box/beakers,
-/obj/machinery/light/spot{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rnd/misc_lab)
 "dMb" = (
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
@@ -19212,24 +19240,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage/aux)
-"gcb" = (
+"gcY" = (
 /obj/structure/table/standard,
-/obj/item/stack/package_wrap/twenty_five,
-/obj/item/weapon/hand_labeler,
-/obj/effect/floor_decal/corner/beige/three_quarters{
-	dir = 1
+/obj/structure/window/reinforced{
+	dir = 2;
+	health = 1e+007
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 32
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/dark,
+/area/rnd/misc_lab)
 "gdb" = (
 /obj/structure/filingcabinet/wallcabinet{
 	pixel_x = -30
@@ -19401,18 +19420,6 @@
 /obj/item/weapon/crowbar/prybar,
 /turf/simulated/floor/tiled/monotile,
 /area/security/equipment)
-"gob" = (
-/obj/structure/table/standard,
-/obj/machinery/reagentgrinder,
-/obj/effect/floor_decal/corner/beige{
-	dir = 9
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
 "goA" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -19426,45 +19433,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
-"gpb" = (
-/obj/structure/table/standard,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
-"gqb" = (
-/obj/structure/table/standard,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/effect/floor_decal/corner/beige{
-	dir = 6
-	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Chemistry";
-	dir = 8
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	icon_state = "nosmoking";
-	pixel_x = 32
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
 "grb" = (
 /obj/machinery/button/remote/airlock{
 	desc = "A remote control switch for the medbay foyer.";
@@ -19918,34 +19886,6 @@
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
-"gTb" = (
-/obj/machinery/button/remote/blast_door{
-	id = "chemcounter";
-	name = "Chemistry Counter Lockdown Control";
-	pixel_x = -6;
-	pixel_y = -21
-	},
-/obj/machinery/button/remote/blast_door{
-	id = "chemwindow";
-	name = "Chemistry Window Shutters Control";
-	pixel_x = 6;
-	pixel_y = -21
-	},
-/obj/structure/table/standard,
-/obj/item/weapon/storage/box/syringes,
-/obj/item/weapon/reagent_containers/spray/cleaner{
-	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
-	name = "Chemistry Cleaner"
-	},
-/obj/effect/floor_decal/corner/beige/three_quarters{
-	dir = 4
-	},
-/obj/item/device/radio/intercom{
-	dir = 8;
-	pixel_x = 21
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
 "gUb" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
@@ -20489,6 +20429,24 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/rnd/entry)
+"hvY" = (
+/obj/structure/table/standard,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/weapon/storage/box/beakers,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/weapon/reagent_containers/dropper,
+/turf/simulated/floor/tiled/dark,
+/area/rnd/misc_lab)
 "hwb" = (
 /obj/structure/sign/science_1{
 	icon_state = "science";
@@ -26725,19 +26683,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
-"oKb" = (
-/obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/effect/floor_decal/corner/beige/three_quarters,
-/obj/structure/disposalpipe/segment,
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
 "oLb" = (
 /obj/item/weapon/stool/padded,
 /obj/machinery/light_switch{
@@ -27718,12 +27663,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
-"pXb" = (
-/obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
-/obj/item/weapon/reagent_containers/dropper,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/rnd/misc_lab)
 "pXm" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/sol{
@@ -28016,10 +27955,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
-"qvb" = (
-/obj/machinery/status_display,
-/turf/simulated/wall/prepainted,
-/area/rnd/misc_lab)
 "qvX" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
@@ -30889,6 +30824,25 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
+"uuS" = (
+/obj/structure/table/standard,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/weapon/reagent_containers/dropper,
+/obj/effect/floor_decal/corner/beige/three_quarters,
+/obj/structure/disposalpipe/segment,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/obj/item/stack/material/phoron,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "uBg" = (
 /obj/structure/sign/double/solgovflag/left{
 	pixel_y = 32
@@ -31955,6 +31909,65 @@
 /obj/structure/closet/toolcloset,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralstarboard)
+"zSy" = (
+/obj/machinery/status_display,
+/turf/simulated/wall/r_wall/prepainted,
+/area/rnd/misc_lab)
+"BFy" = (
+/obj/structure/table/standard,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/weapon/hand_labeler,
+/obj/effect/floor_decal/corner/beige/three_quarters{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/obj/item/weapon/reagent_containers/spray/cleaner{
+	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
+	name = "Chemistry Cleaner"
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
+"HyY" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rnd/misc_lab)
+"MxQ" = (
+/obj/structure/table/standard,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
+"WGQ" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/beige{
+	dir = 9
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 
 (1,1,1) = {"
 aaa
@@ -55481,9 +55494,9 @@ aoK
 lXb
 aqR
 fZb
-gob
+WGQ
 aud
-oKb
+uuS
 awv
 axB
 ayA
@@ -55683,7 +55696,7 @@ idb
 kmb
 aqS
 asa
-gpb
+MxQ
 aue
 avq
 aww
@@ -56288,10 +56301,10 @@ jCM
 iub
 fpb
 aqT
-gcb
-gqb
+BFy
+bkN
 gFb
-gTb
+bLJ
 kgW
 awM
 ugg
@@ -57110,7 +57123,7 @@ aDx
 aEx
 aFH
 awX
-dLb
+hvY
 pib
 pDb
 fBb
@@ -57719,8 +57732,8 @@ awX
 qpb
 pnb
 pGb
-pXb
-qvb
+HyY
+gcY
 qDb
 qWb
 rpb
@@ -57922,7 +57935,7 @@ aHQ
 aHQ
 aHQ
 aHQ
-aHQ
+zSy
 aHQ
 aHQ
 aHQ

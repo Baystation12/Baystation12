@@ -8,6 +8,9 @@
 	reagent_state = LIQUID
 	color = "#cf3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
+	heating_products = list(/datum/reagent/toxin/denatured)
+	heating_point = 100 CELCIUS
+	heating_message = "goes clear."
 
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
@@ -31,6 +34,19 @@
 		if(dam)
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
 
+/datum/reagent/toxin/denatured
+	name = "denatured toxin"
+	description = "Once toxic, now harmless."
+	taste_description = null
+	taste_mult = null
+	color = "#808080"
+	metabolism = REM
+	heating_products = null
+	heating_point = null
+
+	target_organ = null
+	strength = 0
+
 /datum/reagent/toxin/plasticide
 	name = "Plasticide"
 	description = "Liquid plastic, do not eat."
@@ -38,6 +54,8 @@
 	reagent_state = LIQUID
 	color = "#cf3600"
 	strength = 5
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
@@ -64,6 +82,8 @@
 	color = "#707c13"
 	strength = 15
 	metabolism = REM
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/phoron
 	name = "Phoron"
@@ -74,6 +94,8 @@
 	strength = 30
 	touch_met = 5
 	var/fire_mult = 5
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -118,6 +140,8 @@
 	strength = 20
 	metabolism = REM * 2
 	target_organ = BP_HEART
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -131,6 +155,8 @@
 	color = "#ffffff"
 	strength = 0
 	overdose = REAGENTS_OVERDOSE
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/potassium_chloride/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -152,6 +178,8 @@
 	color = "#ffffff"
 	strength = 10
 	overdose = 20
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -173,6 +201,8 @@
 	metabolism = REM
 	strength = 3
 	target_organ = BP_BRAIN
+	heating_message = "melts into a liquid slurry."
+	heating_products = list(/datum/reagent/toxin/carpotoxin, /datum/reagent/soporific, /datum/reagent/copper)
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -200,6 +230,8 @@
 	reagent_state = LIQUID
 	strength = 0.5 // It's not THAT poisonous.
 	color = "#664330"
+	heating_point = null
+	heating_products = null
 
 /datum/reagent/toxin/fertilizer/eznutrient
 	name = "EZ Nutrient"
@@ -217,6 +249,7 @@
 	reagent_state = LIQUID
 	color = "#49002e"
 	strength = 4
+	heating_products = list(/datum/reagent/toxin, /datum/reagent/water)
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
 	if(istype(T, /turf/simulated/wall))
@@ -442,6 +475,9 @@
 	color = "#000055"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
+	heating_point = 61 CELCIUS
+	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/sugar)
+
 
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -625,6 +661,7 @@
 	reagent_state = LIQUID
 	color = "#535e66"
 	hidden_from_codex = TRUE
+	heating_point = 100 CELCIUS
 
 /datum/reagent/toxin/hair_remover
 	name = "Hair Remover"
@@ -634,6 +671,8 @@
 	color = "#d9ffb3"
 	strength = 1
 	overdose = REAGENTS_OVERDOSE
+	heating_products = null
+	heating_point = null
 
 /datum/reagent/toxin/hair_remover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
@@ -652,6 +691,8 @@
 	metabolism = REM * 5
 	overdose = 30
 	hidden_from_codex = TRUE
+	heating_products = null
+	heating_point = null
 
 /datum/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed * 0.5)
@@ -675,6 +716,8 @@
 	reagent_state = LIQUID
 	color = "#4c3b34"
 	strength = 3
+	heating_products = null
+	heating_point = null
 
 /datum/reagent/toxin/methyl_bromide
 	name = "Methyl Bromide"
@@ -683,6 +726,8 @@
 	reagent_state = LIQUID
 	color = "#4c3b34"
 	strength = 5
+	heating_products = null
+	heating_point = null
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
 	if(istype(T))

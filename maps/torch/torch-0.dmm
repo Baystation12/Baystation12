@@ -1,4 +1,4 @@
-//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE 
 "aa" = (
 /turf/space,
 /area/space)
@@ -1508,6 +1508,11 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/airlock)
+"dn" = (
+/obj/machinery/optable,
+/obj/item/weapon/reagent_containers/spray/sterilizine,
+/turf/simulated/floor/tiled/white,
+/area/vacant/infirmary)
 "do" = (
 /obj/structure/bed/chair/shuttle/blue{
 	icon_state = "shuttle_chair_preview";
@@ -5336,6 +5341,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"mm" = (
+/obj/structure/table/standard,
+/obj/item/device/mass_spectrometer/adv,
+/obj/item/weapon/storage/box/syringes,
+/obj/item/weapon/storage/box/beakers,
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 20
+	},
+/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/weapon/reagent_containers/dropper,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/shuttle/petrov/analysis)
 "mn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -7118,15 +7136,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
-"pL" = (
-/obj/structure/table/standard,
-/obj/structure/closet/medical_wall{
-	pixel_x = 0;
-	pixel_y = 32
-	},
-/obj/item/weapon/reagent_containers/spray/sterilizine,
-/turf/simulated/floor/plating,
-/area/vacant/infirmary)
 "pM" = (
 /obj/structure/iv_drip,
 /obj/structure/hygiene/sink/kitchen{
@@ -8671,10 +8680,6 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
-"sM" = (
-/obj/machinery/optable,
-/turf/simulated/floor/tiled/white,
-/area/vacant/infirmary)
 "sN" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/medical,
@@ -11475,6 +11480,19 @@
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
+"Ch" = (
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/structure/table/standard,
+/obj/machinery/reagentgrinder,
+/obj/item/stack/material/phoron,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/shuttle/petrov/analysis)
 "Cj" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/door/firedoor/border_only,
@@ -12187,6 +12205,13 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"ET" = (
+/obj/structure/closet/medical_wall{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/vacant/infirmary)
 "EX" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12256,17 +12281,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
-"Fr" = (
-/obj/structure/table/standard,
-/obj/item/device/mass_spectrometer/adv,
-/obj/item/weapon/storage/box/syringes,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/device/radio/intercom{
-	dir = 8;
-	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/analysis)
@@ -12767,12 +12781,6 @@
 "HB" = (
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/rnd)
-"HD" = (
-/obj/structure/table/standard,
-/obj/machinery/reagentgrinder,
-/obj/item/stack/material/phoron,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
 "HE" = (
 /obj/structure/table/steel,
 /turf/simulated/floor/holofloor/wood,
@@ -13118,15 +13126,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
-"IT" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/machinery/atmospherics/portables_connector,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/guppy_hangar/start)
 "IY" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/newscaster{
@@ -13812,6 +13811,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/analysis)
+"LF" = (
+/obj/structure/table/standard,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/shuttle/petrov/analysis)
 "LG" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -14127,6 +14133,11 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"MQ" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/shuttle/petrov/analysis)
 "MR" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fifthdeck/fore)
@@ -15299,15 +15310,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell2)
-"RI" = (
-/obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
 "RN" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/artifact_scanpad,
@@ -15497,6 +15499,11 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"SF" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/plating,
+/area/vacant/infirmary)
 "SG" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
@@ -15654,18 +15661,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
-"Tn" = (
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/obj/item/modular_computer/console/preset/civilian/professional,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
 "Tp" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -29610,7 +29605,7 @@ aa
 an
 an
 an
-pL
+SF
 sq
 sQ
 sT
@@ -29813,7 +29808,7 @@ an
 an
 an
 er
-sq
+ET
 aM
 aM
 er
@@ -30016,7 +30011,7 @@ se
 Jc
 er
 pM
-sM
+dn
 sR
 er
 su
@@ -45174,7 +45169,7 @@ DZ
 vo
 Fo
 Vk
-HD
+MQ
 Tx
 BM
 Wn
@@ -45374,9 +45369,9 @@ Px
 wl
 Ap
 TH
-Tn
-RI
-Fr
+Ch
+LF
+mm
 Tx
 QW
 FU
