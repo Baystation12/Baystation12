@@ -58,3 +58,6 @@ SUBSYSTEM_DEF(chemistry)
 
 /datum/controller/subsystem/chemistry/proc/mark_for_update(var/datum/reagents/holder)
 	active_holders[holder] = TRUE
+
+/datum/controller/subsystem/chemistry/proc/unmark_for_update(var/datum/reagents/holder)
+	active_holders -= holder

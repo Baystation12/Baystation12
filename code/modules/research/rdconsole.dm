@@ -1,3 +1,12 @@
+#define CHECK_LATHE \
+	if(!linked_lathe){\
+		screen = 1;\
+		return};\
+	if(!linked_lathe.reagents){\
+		crash_with("An rdconsole's linked lathe's reagents holder was deleted.");\
+		screen = 1;\
+		return}
+
 /*
 Research and Development (R&D) Console
 
@@ -154,17 +163,26 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		. = TOPIC_REFRESH
 
 	else if(href_list["updt_tech"]) //Update the research holder with information from the technology disk.
-		screen = 0.0
 		. = TOPIC_REFRESH
+		if(!t_disk)
+			screen = 1
+			return
+		screen = 0.0
 		spawn(50)
+			if(!t_disk)
+				screen = 1
+				return
 			screen = 1.2
 			files.AddTech2Known(t_disk.stored)
 			updateUsrDialog()
 			griefProtection() //Update centcomm too
 
 	else if(href_list["clear_tech"]) //Erase data on the technology disk.
-		t_disk.stored = null
 		. = TOPIC_REFRESH
+		if(!t_disk)
+			screen = 1
+			return
+		t_disk.stored = null
 
 	else if(href_list["eject_tech"]) //Eject the technology disk.
 		t_disk.dropInto(loc)
@@ -173,38 +191,55 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		. = TOPIC_REFRESH
 
 	else if(href_list["copy_tech"]) //Copys some technology data from the research holder to the disk.
+		. = TOPIC_REFRESH
+		if(!t_disk)
+			screen = 1
+			return
 		for(var/datum/tech/T in files.known_tech)
 			if(href_list["copy_tech_ID"] == T.id)
 				t_disk.stored = T
 				break
 		screen = 1.2
-		. = TOPIC_REFRESH
 
 	else if(href_list["updt_design"]) //Updates the research holder with design data from the design disk.
-		screen = 0.0
 		. = TOPIC_REFRESH
+		if(!d_disk)
+			screen = 1
+			return
+		screen = 0.0
 		spawn(50)
+			if(!d_disk)
+				screen = 1
+				return
 			screen = 1.4
 			files.AddDesign2Known(d_disk.blueprint)
 			updateUsrDialog()
 			griefProtection() //Update centcomm too
 
 	else if(href_list["clear_design"]) //Erases data on the design disk.
-		d_disk.blueprint = null
 		. = TOPIC_REFRESH
+		if(!d_disk)
+			screen = 1
+			return
+		d_disk.blueprint = null
 
 	else if(href_list["eject_design"]) //Eject the design disk.
-		d_disk.dropInto(loc)
+		if(d_disk)
+			d_disk.dropInto(loc)
 		d_disk = null
 		screen = 1.0
+		. = TOPIC_REFRESH
 
 	else if(href_list["copy_design"]) //Copy design data from the research holder to the design disk.
+		. = TOPIC_REFRESH
+		if(!d_disk)
+			screen = 1
+			return
 		for(var/datum/design/D in files.known_designs)
 			if(href_list["copy_design_ID"] == D.id)
 				d_disk.blueprint = D
 				break
 		screen = 1.4
-		. = TOPIC_REFRESH
 
 	else if(href_list["eject_item"]) //Eject the item inside the destructive analyzer.
 		if(linked_destroy)
@@ -307,17 +342,16 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		. = TOPIC_REFRESH
 
 	else if(href_list["build"]) //Causes the Protolathe to build something.
-		if(linked_lathe)
-			var/datum/design/being_built = null
-			for(var/datum/design/D in files.known_designs)
-				if(D.id == href_list["build"])
-					being_built = D
-					break
-			if(being_built)
-				linked_lathe.addToQueue(being_built)
-
-		screen = 3.1
 		. = TOPIC_REFRESH
+		CHECK_LATHE
+		var/datum/design/being_built = null
+		for(var/datum/design/D in files.known_designs)
+			if(D.id == href_list["build"])
+				being_built = D
+				break
+		if(being_built)
+			linked_lathe.addToQueue(being_built)
+		screen = 3.1
 
 	else if(href_list["imprint"]) //Causes the Circuit Imprinter to build something.
 		if(linked_imprinter)
@@ -341,27 +375,34 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		linked_imprinter.reagents.clear_reagents()
 		. = TOPIC_REFRESH
 
-	else if(href_list["removeI"] && linked_lathe)
-		linked_imprinter.removeFromQueue(text2num(href_list["removeI"]))
+	else if(href_list["removeI"])
 		. = TOPIC_REFRESH
+		CHECK_LATHE
+		linked_imprinter.removeFromQueue(text2num(href_list["removeI"]))
 
-	else if(href_list["disposeP"] && linked_lathe)  //Causes the protolathe to dispose of a single reagent (all of it)
+	else if(href_list["disposeP"])  //Causes the protolathe to dispose of a single reagent (all of it)
+		. = TOPIC_REFRESH
+		CHECK_LATHE
 		var/datum/reagent/R = locate(href_list["disposeP"]) in linked_lathe.reagents.reagent_list
 		if(R)
 			linked_lathe.reagents.del_reagent(R.type)
+	
+	else if(href_list["disposeallP"]) //Causes the protolathe to dispose of all it's reagents.
 		. = TOPIC_REFRESH
-
-	else if(href_list["disposeallP"] && linked_lathe) //Causes the protolathe to dispose of all it's reagents.
+		CHECK_LATHE
 		linked_lathe.reagents.clear_reagents()
-		. = TOPIC_REFRESH
 
-	else if(href_list["removeP"] && linked_lathe)
-		linked_lathe.removeFromQueue(text2num(href_list["removeP"]))
+	else if(href_list["removeP"])
 		. = TOPIC_REFRESH
+		CHECK_LATHE
+		var/to_remove = text2num(href_list["removeP"])
+		if(sanitize_integer(to_remove, 1, length(linked_lathe.queue), 1) == to_remove)
+			linked_lathe.removeFromQueue(to_remove)
 
-	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
+	else if(href_list["lathe_ejectsheet"]) //Causes the protolathe to eject a sheet of material
+		. = TOPIC_REFRESH
+		CHECK_LATHE
 		linked_lathe.eject(href_list["lathe_ejectsheet"], text2num(href_list["amount"]))
-		. = TOPIC_REFRESH
 
 	else if(href_list["imprinter_ejectsheet"] && linked_imprinter) //Causes the protolathe to eject a sheet of material
 		linked_imprinter.eject(href_list["imprinter_ejectsheet"], text2num(href_list["amount"]))
@@ -376,17 +417,18 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			attack_hand(user)
 
 	else if(href_list["disconnect"]) //The R&D console disconnects with a specific device.
+		. = TOPIC_REFRESH
 		switch(href_list["disconnect"])
 			if("destroy")
 				linked_destroy.linked_console = null
 				linked_destroy = null
 			if("lathe")
+				CHECK_LATHE
 				linked_lathe.linked_console = null
 				linked_lathe = null
 			if("imprinter")
 				linked_imprinter.linked_console = null
 				linked_imprinter = null
-		. = TOPIC_REFRESH
 
 	else if(href_list["reset"]) //Reset the R&D console's database.
 		griefProtection()
@@ -451,7 +493,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		return
 
 	user.set_machine(src)
-	var/dat = ""
+	var/dat = list()
 	files.RefreshResearch()
 	switch(screen) //A quick check to make sure you get the right screen when a device is disconnected.
 		if(2 to 2.9)
@@ -520,7 +562,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "</UL>"
 
 		if(1.2) //Technology Disk Menu
-
+			if(!t_disk)
+				screen = 1
+				return
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "Disk Contents: (Technology Data Disk)<BR><BR>"
 			if(t_disk.stored == null)
@@ -537,6 +581,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];eject_tech=1'>Eject Disk</A>"
 
 		if(1.3) //Technology Disk submenu
+			if(!t_disk)
+				screen = 1
+				return
 			dat += "<BR><A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=1.2'>Return to Disk Operations</A><HR>"
 			dat += "Load Technology to Disk:<BR><BR>"
@@ -547,6 +594,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "</UL>"
 
 		if(1.4) //Design Disk menu.
+			if(!d_disk)
+				screen = 1
+				return
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			if(d_disk.blueprint == null)
 				dat += "The disk has no data stored on it.<HR>"
@@ -566,7 +616,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				dat += "<A href='?src=\ref[src];clear_design=1'>Clear Disk</A> || "
 			dat += "<A href='?src=\ref[src];eject_design=1'>Eject Disk</A>"
 
-		if(1.5) //Technology disk submenu
+		if(1.5) //Design disk submenu
+			if(!d_disk)
+				screen = 1
+				return
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=1.4'>Return to Disk Operations</A><HR>"
 			dat += "Load Design to Disk:<BR><BR>"
@@ -644,6 +697,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "NO PROTOLATHE LINKED TO CONSOLE<BR><BR>"
 
 		if(3.1)
+			CHECK_LATHE
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.4'>View Queue</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.2'>Material Storage</A> || "
@@ -669,6 +723,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "</UL>"
 
 		if(3.2) //Protolathe Material Storage Sub-menu
+			CHECK_LATHE
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Material Storage<BR><HR>"
@@ -688,6 +743,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "</UL>"
 
 		if(3.3) //Protolathe Chemical Storage Submenu
+			CHECK_LATHE
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Chemical Storage<BR><HR>"
@@ -697,6 +753,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				dat += "<A href='?src=\ref[src];disposeallP=1'><U>Disposal All Chemicals in Storage</U></A><BR>"
 
 		if(3.4) // Protolathe queue
+			CHECK_LATHE
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Queue<BR><HR>"
@@ -794,7 +851,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "List of Available Designs:"
 			dat += GetResearchListInfo()
 
-	user << browse("<TITLE>Fabrication Control Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
+	show_browser(user, "<TITLE>Fabrication Control Console</TITLE><HR>[JOINTEXT(dat)]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
 
 /obj/machinery/computer/rdconsole/robotics
@@ -805,3 +862,5 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 /obj/machinery/computer/rdconsole/core
 	name = "core fabricator console"
 	id = 1
+
+#undef CHECK_LATHE
