@@ -76,14 +76,14 @@
 
 /datum/category_item/player_setup_item/antagonism/candidacy/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["add_special"])
-		if(!(href_list["add_special"] in valid_special_roles()))
+		if(!(href_list["add_special"] in valid_special_roles(FALSE)))
 			return TOPIC_HANDLED
 		pref.be_special_role |= href_list["add_special"]
 		pref.never_be_special_role -= href_list["add_special"]
 		return TOPIC_REFRESH
 
 	if(href_list["del_special"])
-		if(!(href_list["del_special"] in valid_special_roles()))
+		if(!(href_list["del_special"] in valid_special_roles(FALSE)))
 			return TOPIC_HANDLED
 		pref.be_special_role -= href_list["del_special"]
 		pref.never_be_special_role -= href_list["del_special"]
@@ -119,8 +119,9 @@
 	for(var/antag_type in GLOB.all_antag_types_)
 		if(!include_bans)
 			if(jobban_isbanned(preference_mob(), antag_type))
-				if(((antag_type  == MODE_MALFUNCTION) && jobban_isbanned(preference_mob(), "AI")))
-					continue
+				continue
+			if(((antag_type  == MODE_MALFUNCTION) && jobban_isbanned(preference_mob(), "AI")))
+				continue
 		private_valid_special_roles += antag_type
 
 	var/list/ghost_traps = get_ghost_traps()
