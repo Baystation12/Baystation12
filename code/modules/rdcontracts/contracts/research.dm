@@ -27,9 +27,7 @@
 	if(possible_techs.len == 0)
 		return UKEY_ID_INVALID
 
-	desired_tech = pick(possible_techs)
-	possible_techs.Remove(desired_tech)
-
+	desired_tech = pick_n_take(possible_techs)
 	return desired_tech
 
 /datum/rdcontract/research/setup()

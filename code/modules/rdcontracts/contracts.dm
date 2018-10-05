@@ -9,31 +9,23 @@
 	var/delivery_type = null
 	// reward for completing the contract
 	var/reward = 0
+	// account number to pay reward to
+	var/reward_account_number
 	// fluff. who are you doing the contract for?
 	var/contractor
 
-/datum/rdcontract/New()
+/datum/rdcontract/New(var/account_number)
 	. = ..()
 
-	var/succ = setup()
-	if(!succ)
-		qdel(src)
+	reward_account_number = account_number
+	if(!setup())
+		qdel_self()
 
 // return indicates success
 /datum/rdcontract/proc/setup()
-	var/list/contractors = list(
-		"GeneriTech",
-		"Nuisance Co.",
-		"MicroTarp",
-		"Qualm Labs"
-	)
-	contractor = pick(contractors)
+	contractor = pick(GLOB.corporate_factions)
 
-	var/could_make_unique = create_ukey()
-	if(!could_make_unique)
-		return 0
-
-	return 1
+	return create_ukey()
 
 // get a unique id for the unique key
 // this may be called multiple times if the ID has been used before (contract wouldn't be unique)
@@ -65,13 +57,12 @@
 
 // add money to the science department account
 /datum/rdcontract/proc/complete()
-	qdel(src)
-
-	var/datum/money_account/rd_account = get_department_account("Science")
-	if(!rd_account)
+	var/datum/money_account/account = get_account(reward_account_number)
+	if(!account)
 		return 0
 
-	var/datum/transaction/T = new("NanoTrasen SEV Torch Dept.", "Contract completion", reward, contractor)
-	rd_account.do_transaction(T)
+	var/datum/transaction/T = new("Torch, Ltd. Research Dept.", "Contract completion", reward, contractor)
+	account.do_transaction(T)
 
+	qdel_self()
 	return 1

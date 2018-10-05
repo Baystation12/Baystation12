@@ -10,7 +10,7 @@
 	var/ui_state = "operation"
 
 	// rd contracts
-	var/list/datum/rdcontract/contracts = list()
+	var/list/contracts = list()
 	// held item
 	var/obj/item/tube_item = null
 	// isolated bank account for the system's $$$
@@ -26,19 +26,29 @@
 	// we're waiting to purchase this item
 	var/decl/hierarchy/rd_shopping_article/queued_purchase = null
 
+	// used for contract generation
+	var/list/possible_contracts
+	var/list/normal_contracts
+	var/list/highend_contract_list
+
 /obj/machinery/contracttube/Initialize()
 	. = ..()
 
-	account = create_account("NanoTrasen Supply Fund")
-	account.security_level = 2 // makes it practically impossible to mess with
+	account = create_account("Research Supply Fund")
+	// makes it practically impossible to mess with since nobody has the PIN
+	account.security_level = 2
+
+	possible_contracts = subtypesof(/datum/rdcontract)
+	normal_contracts = directsubtypesof(/datum/rdcontract)
+	highend_contract_list = possible_contracts - normal_contracts
+
 	gen_contracts(num_contracts)
 
 /obj/machinery/contracttube/Destroy()
 	for(var/datum/rdcontract/C in contracts)
 		qdel(C)
 
-	qdel(account)
-	account = null
+	QDEL_NULL(account)
 
 	if(tube_item)
 		tube_item.dropInto(loc)
@@ -55,8 +65,6 @@
 		icon_state = "filled"
 
 /obj/machinery/contracttube/attackby(var/obj/item/O, var/mob/user)
-	. = ..()
-
 	if(!istype(O))
 		return
 
@@ -70,16 +78,14 @@
 
 	update_icon()
 
+	. = ..()
+
 /obj/machinery/contracttube/attack_hand(var/mob/user)
 	ui_interact(user)
 
 // generate n new contracts
 /obj/machinery/contracttube/proc/gen_contracts(var/n)
-	var/list/possible_contracts = subtypesof(/datum/rdcontract)
-	var/list/normal_contracts = directsubtypesof(/datum/rdcontract)
-	var/list/highend_contract_list = possible_contracts - normal_contracts
-
-	for(var/i = 0; i < n; i++)
+	for(var/i in 0 to n)
 		// pick normal contracts if we have enough high end ones
 		var/chosen_contract = pick(possible_contracts)
 		if((highend_contracts == max_highend_contracts))
@@ -88,8 +94,7 @@
 		if(chosen_contract in highend_contract_list)
 			highend_contracts++
 
-		var/datum/rdcontract/C = new chosen_contract()
-		contracts.Add(C)
+		contracts.Add(new chosen_contract(account.account_number))
 
 /obj/machinery/contracttube/proc/begin_deliver()
 	if(busy)
@@ -146,7 +151,7 @@
 
 	busy = 1
 
-	var/datum/transaction/T = new("NanoTrasen SEV Torch Dept.", "Article purchase ([queued_purchase.name])", -queued_purchase.cost, "BlueSupply Services")
+	var/datum/transaction/T = new("Torch, Ltd. Research Dept.", "Article purchase ([queued_purchase.name])", -queued_purchase.cost, "BlueSupply Services")
 	account.do_transaction(T)
 
 	flick("downempty", src)

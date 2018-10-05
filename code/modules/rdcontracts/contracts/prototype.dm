@@ -20,20 +20,18 @@
 	)
 
 /datum/rdcontract/prototype/get_ukey_id()
-	if(possible_types.len == 0)
+	if(LAZYLEN(possible_types) == 0)
 		return UKEY_ID_INVALID
 
-	delivery_type = pick(possible_types)
-	possible_types.Remove(delivery_type)
-
+	delivery_type = pick_n_take(possible_types)
 	return delivery_type
 
 /datum/rdcontract/prototype/setup()
 	. = ..()
 
 	var/obj/item/proto = new delivery_type()
-	name = "Deliver a [proto.name]"
-	desc = "Deliver a [proto.name] prototype for experimental use."
+	name = "Deliver \a [initial(proto.name)]"
+	desc = "Deliver \a [initial(proto.name)] prototype for experimental use."
 	proto = null
 
 /datum/rdcontract/prototype/check_completion(var/obj/item/O)

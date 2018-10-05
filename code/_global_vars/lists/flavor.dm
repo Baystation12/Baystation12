@@ -106,6 +106,12 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"every light is blinking at once" = /music_track/elibao
 ))
 
+// List of all corporate factions. Used for R&D contracts
+GLOBAL_LIST_INIT(corporate_factions, list(
+	"NanoTrasen", "SAARE", "Aether Atmospherics", "DAIS",
+	"Hephaestus Industries", "Morpheus Cyberkinetics",
+	"PCRC", "Ward-Takahashi", "Focal Point", "Xynergy"))
+
 /proc/setup_music_tracks(var/list/tracks)
 	. = list()
 	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.music_tracks
