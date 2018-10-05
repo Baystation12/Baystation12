@@ -887,7 +887,7 @@
 
 	push_data()
 	activate_pin(1)
-	if(translated)
+	if(translated && !(speaking.name == LANGUAGE_GALCOM))
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor
