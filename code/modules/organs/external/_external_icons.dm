@@ -17,7 +17,7 @@ var/list/limb_icon_cache = list()
 	s_col = null
 	s_base = ""
 	h_col = list(human.r_hair, human.g_hair, human.b_hair)
-	if(BP_IS_ROBOTIC(src))
+	if(BP_IS_ROBOTIC(src) && !(human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
 			return
