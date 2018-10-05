@@ -221,6 +221,7 @@
 			newgases -= "phoron"
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
+		newgases -= "watervapor"
 
 		var/sanity = prob(99.9)
 
