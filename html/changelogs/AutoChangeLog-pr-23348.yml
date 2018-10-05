@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Adherent players can now select from some pre-set colours in character creation."
