@@ -212,13 +212,6 @@
 "ax" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/aftstarboard)
-"ay" = (
-/obj/structure/closet/crate/medical,
-/obj/item/bodybag,
-/obj/item/bodybag,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/central)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
@@ -267,12 +260,13 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/auxsolarstarboard)
 "aF" = (
-/obj/machinery/door/airlock/maintenance{
-	req_access = list(12)
-	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	name = "Medical Storage Maintenance";
+	req_access = list(5,12)
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/maintenance/seconddeck/central)
+/area/storage/medical)
 "aG" = (
 /obj/machinery/door/blast/regular{
 	id = "trash";
@@ -796,11 +790,14 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/lattice,
 /obj/structure/railing/mapped{
 	tag = "icon-railing0 (EAST)";
 	icon_state = "railing0";
 	dir = 4
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0";
+	dir = 1
 	},
 /turf/simulated/open,
 /area/maintenance/seconddeck/central)
@@ -1455,12 +1452,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/expedition)
-"cZ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/straight_jacket,
-/obj/item/clothing/mask/muzzle,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/medical)
 "da" = (
 /obj/structure/table/rack,
 /obj/item/device/flashlight,
@@ -2389,6 +2380,11 @@
 	icon_state = "railing0";
 	dir = 1
 	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (EAST)";
+	icon_state = "railing0";
+	dir = 4
+	},
 /turf/simulated/open,
 /area/maintenance/seconddeck/central)
 "eL" = (
@@ -2518,18 +2514,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
-"eW" = (
-/obj/structure/railing/mapped{
-	icon_state = "railing0";
-	dir = 1
-	},
-/obj/structure/railing/mapped{
-	tag = "icon-railing0 (EAST)";
-	icon_state = "railing0";
-	dir = 4
-	},
-/turf/simulated/open,
-/area/maintenance/seconddeck/central)
 "eX" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -3489,31 +3473,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
-"hd" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/expedition)
 "he" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4057,13 +4016,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
-"id" = (
-/obj/item/roller,
-/obj/item/roller,
-/obj/item/roller,
-/obj/item/roller,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/medical)
 "ie" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/plating,
@@ -4330,13 +4282,35 @@
 /turf/simulated/floor/plating,
 /area/engineering/locker_room)
 "iJ" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+/obj/structure/table/rack{
+	dir = 8
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/storage/expedition)
 "iK" = (
 /obj/machinery/power/apc{
@@ -7838,6 +7812,37 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
+"qB" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/expedition)
 "qC" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
@@ -11043,6 +11048,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"zn" = (
+/obj/item/roller,
+/obj/item/roller,
+/obj/item/roller,
+/obj/item/roller,
+/obj/structure/table/rack,
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/expedition)
 "zo" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning{
@@ -14202,42 +14215,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/exterior)
-"He" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/expedition)
 "Hf" = (
 /obj/machinery/power/apc/super/critical{
 	dir = 1;
@@ -14468,6 +14445,12 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/storage)
+"HJ" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "HN" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/status_display{
@@ -14735,6 +14718,15 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"Iy" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
+/area/storage/expedition)
 "Iz" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector{
@@ -15073,6 +15065,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"JT" = (
+/obj/structure/closet/crate/medical,
+/obj/item/bodybag,
+/obj/item/bodybag,
+/obj/item/clothing/suit/straight_jacket,
+/obj/item/clothing/mask/muzzle,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/expedition)
 "JU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -18896,6 +18897,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
+"ZQ" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/expedition)
 "ZS" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -37575,7 +37584,7 @@ cn
 cW
 dy
 ec
-eW
+aV
 bD
 gk
 Pr
@@ -38177,10 +38186,10 @@ aa
 aa
 aa
 aa
-aC
-KT
-KT
-aV
+aB
+HJ
+bq
+bq
 ee
 eR
 Ge
@@ -38378,11 +38387,11 @@ ag
 ag
 ag
 ag
-aC
-aC
-ay
-ee
-ee
+aB
+aB
+bq
+zn
+JT
 ee
 eR
 Ge
@@ -38581,13 +38590,13 @@ ag
 aB
 aB
 aB
-cp
-cp
+bq
+bq
 ee
-hd
-He
+ee
+ee
 iJ
-xR
+Ge
 ee
 ee
 iF
@@ -38783,12 +38792,12 @@ aa
 aB
 nb
 bP
+bq
 cq
-cZ
 ee
 ef
-eR
-xR
+ZQ
+Iy
 iK
 ee
 kO
@@ -39190,7 +39199,7 @@ bq
 db
 PD
 ee
-Ge
+qB
 eR
 bZ
 Je
@@ -39388,7 +39397,7 @@ aa
 aa
 aB
 dc
-id
+bq
 cp
 cp
 ee
