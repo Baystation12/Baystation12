@@ -57,6 +57,8 @@
 
 /obj/item/organ/internal/augment/boost/Process()
 	..()
+	if(!owner)
+		return
 	if(is_broken() && !debuffing)
 		debuff()
 	else if(!is_broken() && debuffing)

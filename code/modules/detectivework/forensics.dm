@@ -76,6 +76,7 @@ obj/item/var/list/trace_DNA
 	return 1
 
 /atom/proc/add_partial_print(full_print, bonus)
+	LAZYINITLIST(fingerprints)
 	if(!fingerprints[full_print])
 		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
@@ -119,7 +120,7 @@ obj/item/var/list/trace_DNA
 	if(suit_fibers)
 		LAZYDISTINCTADD(A.suit_fibers, suit_fibers)
 	if(blood_DNA)
-		A.blood_DNA |= blood_DNA
+		LAZYDISTINCTADD(A.blood_DNA, blood_DNA)
 	if(gunshot_residue)
 		var/obj/item/clothing/C = A
 		LAZYDISTINCTADD(C.gunshot_residue, gunshot_residue)
