@@ -96,14 +96,9 @@
 
 	if(href_list["select_all"])		
 		var/selection = text2num(href_list["select_all"])
-		var/list/roles = valid_special_roles()
-		var/list/allowed_roles = list()
+		var/list/roles = valid_special_roles(FALSE)
 
-		for(var/role in roles)
-			if(!jobban_isbanned(preference_mob(), role))
-				if(!((role  == MODE_MALFUNCTION) && jobban_isbanned(preference_mob(), "AI")))
-					allowed_roles += role
-		for(var/id in allowed_roles)
+		for(var/id in roles)
 			switch(selection)
 				if(0)
 					pref.be_special_role -= id
@@ -118,10 +113,14 @@
 
 	return ..()
 
-/datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles()
+/datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles(var/include_bans = TRUE)
 	var/list/private_valid_special_roles = list()
 
 	for(var/antag_type in GLOB.all_antag_types_)
+		if(!include_bans)
+			if(jobban_isbanned(preference_mob(), antag_type))
+				if(((antag_type  == MODE_MALFUNCTION) && jobban_isbanned(preference_mob(), "AI")))
+					continue
 		private_valid_special_roles += antag_type
 
 	var/list/ghost_traps = get_ghost_traps()
@@ -129,7 +128,11 @@
 		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
 		if(!ghost_trap.list_as_special_role)
 			continue
+		if(!include_bans)
+			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
+				continue
 		private_valid_special_roles += ghost_trap.pref_check
+
 
 	return private_valid_special_roles
 
