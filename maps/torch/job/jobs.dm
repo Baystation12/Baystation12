@@ -1648,10 +1648,10 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "your laws"
-	minimal_player_age = 0
+	minimal_player_age = 3
 
 /datum/job/ai
-	minimal_player_age = 3
+	minimal_player_age = 7
 
 /datum/job/merchant
 	title = "Merchant"
