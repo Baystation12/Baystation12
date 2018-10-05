@@ -3,6 +3,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define INFECT_DELAY 13 SECONDS
 #define PLAYER_FLOOD_HEALTH_MOD 1.5
+#define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
 
@@ -106,12 +107,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(30)
 		spawning = 0
 
-/mob/living/simple_animal/hostile/flood/proc/is_being_infested(var/mob/m)
+/mob/living/simple_animal/hostile/flood/infestor/proc/is_being_infested(var/mob/m)
 	if(locate(/obj/effect/dead_infestor) in m.contents)
 		return 1
 	return 0
 
-/mob/living/simple_animal/hostile/flood/proc/infect_mob(var/mob/living/carbon/human/h)
+/mob/living/simple_animal/hostile/flood/infestor/proc/infect_mob(var/mob/living/carbon/human/h)
 	if(is_being_infested(h))
 		return 0
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
@@ -127,7 +128,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		do_infect(h)
 	return 1
 
-/mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
+/mob/living/simple_animal/hostile/flood/infestor/proc/do_infect(var/mob/living/carbon/human/h)
 	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
 	if(istype(h.species,/datum/species/sangheili))
 		if(prob(50))
@@ -265,8 +266,24 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	return ..(0,deathmessage)
 
 /mob/living/simple_animal/hostile/flood/combat_form
+	var/next_infestor_spawn = 0
 
 	var/obj/item/weapon/gun/our_gun
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/spawn_infestor()
+	if(world.time < next_infestor_spawn)
+		if(client)
+			to_chat(src,"<span class = 'notice'>Your biomass hasn't recovered from the previous formation.</span>")
+		return
+	next_infestor_spawn = world.time + COMBAT_FORM_INFESTOR_SPAWN_DELAY
+	new /mob/living/simple_animal/hostile/flood/infestor (src.loc)
+	visible_message("<span class = 'warning'>[src]'s flesh writhes for a moment, blood-red feelers emerging, followed by a singular infection form.</span>")
+
+/mob/living/simple_animal/hostile/flood/combat_form/verb/create_infestor_form()
+	set name = "Create Infestor Form"
+	set category = "Abilities"
+
+	spawn_infestor()
 
 /mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
 	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
