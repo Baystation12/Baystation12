@@ -8,7 +8,8 @@
 		..()
 	return
 
-/obj/item/weapon/handle_shield(var/mob/user, var/damage, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/weapon/handle_shield(var/mob/user, var/damage, var/atom/dam_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	var/obj/item/damage_source = dam_source
 	if(!attacker)
 		return 0
 	if(istype(damage_source,/obj/item/projectile))
