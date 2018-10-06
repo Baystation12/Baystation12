@@ -1,4 +1,6 @@
 /obj/effect/decal/cleanable
+	density = FALSE
+	anchored = TRUE
 	waterproof = FALSE
 	var/persistent = FALSE
 	var/generic_filth = FALSE
