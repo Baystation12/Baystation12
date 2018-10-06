@@ -440,6 +440,12 @@
 	result = /datum/reagent/toxin/methyl_bromide
 	mix_message = "The solution begins to bubble, emitting a dark vapor."
 
+/datum/chemical_reaction/adrenaline
+	name = "Adrenaline"
+	result = /datum/reagent/adrenaline
+	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/dexalin = 1)
+	result_amount = 2
+
 /* Solidification */
 /datum/chemical_reaction/phoronsolidification
 	name = "Solid Phoron"
