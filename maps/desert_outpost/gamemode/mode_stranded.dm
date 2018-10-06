@@ -13,7 +13,7 @@
 
 	var/player_faction = "UNSC"
 	var/wave_num = 0
-	var/area/planet/daynight/planet_area
+	//var/area/planet/daynight/planet_area
 	var/list/flood_spawn_turfs = list()
 	var/list/flood_assault_turfs = list()
 
@@ -51,7 +51,7 @@
 
 	var/list/available_resupply_points = list()
 
-	var/obj/effect/landmark/day_night_zcontroller/daynight_controller
+	//var/obj/effect/landmark/day_night_zcontroller/daynight_controller
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time

@@ -50,10 +50,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		target_mob = null
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
-		if(prob(75))
-			dir = get_dir(src, assault_target)
-			var/turf/target_turf = get_step_towards(src,assault_target)
-			Move(target_turf)
+		wander = 0
+		stop_automated_movement = 1
+		dir = get_dir(src, assault_target)
+		var/turf/target_turf = get_step_towards(src,assault_target)
+		Move(target_turf)
 			/*else
 				var/moving_to = pick(GLOB.cardinal)
 				set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
@@ -64,8 +65,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		if(prob(50))
 			wander = 1
 			stop_automated_movement = 0
-		else
-			wander = 0
 
 /mob/living/simple_animal/hostile/flood/death()
 	. = ..()
