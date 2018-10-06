@@ -8,14 +8,14 @@
 	var/time_next_respawn = 0
 	var/spawning = 1
 	var/list/spawn_pool = list(\
-		//mob/living/simple_animal/hostile/flood/infestor, //These just dilute the spawn pool.
-		/mob/living/simple_animal/hostile/flood/carrier,\
-		/mob/living/simple_animal/hostile/flood/combat_form/human,\
-		/mob/living/simple_animal/hostile/flood/combat_form/ODST,\
-		/mob/living/simple_animal/hostile/flood/combat_form/guard,\
-		/mob/living/simple_animal/hostile/flood/combat_form/oni,\
-		/mob/living/simple_animal/hostile/flood/combat_form/minor,
-		/mob/living/simple_animal/hostile/flood/combat_form/major)
+	//mob/living/simple_animal/hostile/flood/infestor, //These just dilute the spawn pool.
+	/mob/living/simple_animal/hostile/flood/carrier,\
+	/mob/living/simple_animal/hostile/flood/combat_form/human,\
+	/mob/living/simple_animal/hostile/flood/combat_form/ODST,\
+	/mob/living/simple_animal/hostile/flood/combat_form/guard,\
+	/mob/living/simple_animal/hostile/flood/combat_form/oni,\
+	/mob/living/simple_animal/hostile/flood/combat_form/minor,
+	/mob/living/simple_animal/hostile/flood/combat_form/major)
 
 /datum/flood_spawner/New(var/atom/a_owner, var/a_max_flood, var/a_respawn_delay)
 	owner = a_owner
