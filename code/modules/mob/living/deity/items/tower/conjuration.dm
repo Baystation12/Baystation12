@@ -38,7 +38,7 @@
 	desc = "Gain the ability to move a magical locker around. While it cannot move living things, you can move it around as you please, even disappearing it into the nether."
 	base_cost = 50
 	category = DEITY_TREE_CONJURATION
-	phenomena_path = /datum/phenomena/dimensional_locker
+	phenomena_path = /datum/phenomena/movable_object/dimensional_locker
 	requirements = list(DEITY_TREE_CONJURATION = 1)
 
 //Level 2

@@ -64,6 +64,7 @@
 
 /datum/phenomena/proc/activate(var/target)
 	to_chat(linked, "<span class='notice'>You use the phenomena [name] on \the [target]</span>")
+	log_and_message_admins("uses the phenomena [name] on \the [target]", linked, get_turf(target))
 	return
 
 /datum/phenomena/proc/get_desc()

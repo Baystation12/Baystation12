@@ -6,7 +6,8 @@
 	. = ..()
 	var/mob/observer/eye/cult/C = new(src)
 	C.suffix = "Soul"
-	name = old_mob.real_name
+	if(old_mob)
+		name = old_mob.real_name
 	eyeobj = C
 
 /mob/living/starlight_soul/proc/set_deity(var/mob/living/deity/deity)

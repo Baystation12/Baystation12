@@ -159,7 +159,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		if(is_cloaked())
 			icon = 'icons/mob/human.dmi'
 			icon_state = "blank"
-			visible_overlays = list(visible_overlays[R_HAND_LAYER], visible_overlays[L_HAND_LAYER])
+			visible_overlays = list(overlays_standing[R_HAND_LAYER], overlays_standing[L_HAND_LAYER])
 		else
 			icon = stand_icon
 			icon_state = null
