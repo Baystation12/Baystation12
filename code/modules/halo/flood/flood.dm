@@ -51,8 +51,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		wander = 0
 		stop_automated_movement = 1
 		dir = get_dir(src, assault_target)
-		var/turf/target_turf = get_turf(assault_target)
-		walk_to(src,target_turf,move_to_delay)
+		var/turf/target_turf = get_step_towards(src,assault_target)
+		Move(target_turf)
 			/*else
 				var/moving_to = pick(GLOB.cardinal)
 				set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
