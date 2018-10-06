@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Raises minimum player age for AI to 7 days and Cyborg to 3 days."
