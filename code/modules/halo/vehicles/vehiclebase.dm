@@ -132,9 +132,9 @@
 	if(check_position_blocked(position))
 		to_chat(user,"<span class = 'notice'>No [position] spaces in [src]</span>")
 		return 0
-	var/mob/living/carbon/human/h_test = user
+	var/mob/living/h_test = user
 	if(!istype(h_test) && position == "driver")
-		to_chat(user,"<span class = 'notice'>You don't know how to drive that.</span>") //Let's assume non-human mobs can't drive.
+		to_chat(user,"<span class = 'notice'>You don't know how to drive that.</span>") //Let's assume non-living mobs can't drive.
 		return
 	var/can_enter = check_enter_invalid()
 	if(can_enter)
