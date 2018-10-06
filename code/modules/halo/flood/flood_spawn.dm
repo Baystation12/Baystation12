@@ -8,7 +8,6 @@
 	var/time_next_respawn = 0
 	var/spawning = 1
 	var/list/spawn_pool = list(\
-	//mob/living/simple_animal/hostile/flood/infestor, //These just dilute the spawn pool.
 	/mob/living/simple_animal/hostile/flood/carrier,\
 	/mob/living/simple_animal/hostile/flood/combat_form/human,\
 	/mob/living/simple_animal/hostile/flood/combat_form/ODST,\
