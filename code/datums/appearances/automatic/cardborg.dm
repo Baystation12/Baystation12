@@ -64,35 +64,35 @@
 	backpack_type = /obj/item/weapon/storage/backpack/industrial
 
 /decl/cardborg_appearance/engineering/satchel
-	backpack_type = /obj/item/weapon/storage/backpack/satchel_eng
+	backpack_type = /obj/item/weapon/storage/backpack/satchel/eng
 
 /decl/cardborg_appearance/medical
 	icon_state = "Medbot"
 	backpack_type = /obj/item/weapon/storage/backpack/medic
 
 /decl/cardborg_appearance/medical/satchel
-	backpack_type = /obj/item/weapon/storage/backpack/satchel_med
+	backpack_type = /obj/item/weapon/storage/backpack/satchel/med
 
 /decl/cardborg_appearance/science
 	icon_state = "droid-science"
 	backpack_type = /obj/item/weapon/storage/backpack/toxins
 
 /decl/cardborg_appearance/science/satchel
-	backpack_type = /obj/item/weapon/storage/backpack/satchel_tox
+	backpack_type = /obj/item/weapon/storage/backpack/satchel/tox
 
 /decl/cardborg_appearance/security
 	icon_state = "securityrobot"
 	backpack_type = /obj/item/weapon/storage/backpack/security
 
 /decl/cardborg_appearance/security/satchel
-	backpack_type = /obj/item/weapon/storage/backpack/satchel_sec
+	backpack_type = /obj/item/weapon/storage/backpack/satchel/sec
 
 /decl/cardborg_appearance/centcom
 	icon_state = "centcomborg"
 	backpack_type = /obj/item/weapon/storage/backpack/captain
 
 /decl/cardborg_appearance/centcom/satchel
-	backpack_type = /obj/item/weapon/storage/backpack/satchel_cap
+	backpack_type = /obj/item/weapon/storage/backpack/satchel/cap
 
 /decl/cardborg_appearance/syndicate
 	icon_state = "droid-combat"

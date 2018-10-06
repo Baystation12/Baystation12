@@ -60,7 +60,7 @@ Torch specific items
 	desc = "A rugged backpack."
 	icon_state = "exppack"
 
-/obj/item/weapon/storage/backpack/satchel_explorer
+/obj/item/weapon/storage/backpack/satchel/explorer
 	name = "explorer satchel"
 	desc = "A rugged satchel for field work."
 	icon_state = "satchel-exp"
