@@ -31,8 +31,8 @@
 	//deciseconds
 	var/duration_wave_base = 6000
 	var/duration_wave_current = 6000
-	var/duration_rest_base = 6000
-	var/duration_rest_current = 6000
+	var/duration_rest_base = 12000
+	var/duration_rest_current = 12000
 	var/time_wave_cycle = 0
 	var/interval_resupply = 2000
 	var/time_next_resupply = 0
