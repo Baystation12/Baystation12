@@ -48,6 +48,12 @@ GLOBAL_LIST_EMPTY(skills)
 	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
+/decl/hierarchy/skill/physical
+	name = "Physical"
+	ID   = "3"
+	difficulty = SKILL_EASY
+	default_max = SKILL_MAX
+
 /decl/hierarchy/skill/service
 	name = "Service"
 	ID	 = "service"
@@ -129,16 +135,6 @@ GLOBAL_LIST_EMPTY(skills)
 	difficulty = SKILL_AVERAGE
 	default_max = SKILL_ADEPT
 
-/decl/hierarchy/skill/general/hauling
-	ID = "hauling"
-	name = "Athletics"
-	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
-	levels = list( "Unskilled"			= "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.<br>- You can pull objects but start to generate Lactate after tiring out. Your strength increases with level.<br>- You can throw objects. Their speed, thrown distance, and force increases with level.",
-						"Basic"				= "You have some familiarity with manual labor, and are in reasonable physical shape. Tasks requiring great dexterity or strength may still elude you.<br>- You can throw \"huge\" items or normal-sized mobs without getting weakened.",
-						"Trained"			= "You have sufficient strength and dexterity for even very strenuous tasks, and can work for a long time without tiring.",
-						"Experienced"		= "You have experience with heavy work in trying physical conditions, and are in excellent shape. You visit the gym frequently.",
-						"Master"		= "In addition to your excellent strength and endurance, you have a lot of experience with the specific physical demands of your job. You may have competitive experience with some form of athletics.")
-
 /decl/hierarchy/skill/general/computer
 	ID = "computer"
 	name = "Information Technology"
@@ -148,6 +144,28 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "At this level, you're probably working with computers on a daily basis. You understand and can repair the telecommunications network. Your understanding of AI programming and psychology lets you fix problems with the AIs or cyborgs--or create problems, if you so desire. You can program computers and AIs and change their laws effectively.<br>- You can fully operate the Network Monitor, E-mail Administration, and AI Management Programs.",
 						"Experienced"		= "You have years of experience with computer networks, AI systems, telecommunications, and sysadmin tasks. You know the systems used on a daily basis intimately, and can diagnose complex problems.<br>- The antagonist dos program gives extra fake attacking nodes to the system log.<br>- You can use the command line on modular computers (type \"man\" for a list).",
 						"Master"		= "People are probably starting to wonder whether you might be a computer yourself. Computer code is your first language; you relate to AIs as easily as (probably more easily than) organics. You could build a telecommunications network from the ground up.")
+
+// Category: Physical
+
+/decl/hierarchy/skill/physical/hauling
+	ID = "hauling"
+	name = "Athletics"
+	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
+	levels = list( "Unskilled"			= "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.<br>- You can pull objects but start to generate Lactate after tiring out. Your strength increases with level.<br>- You can throw objects. Their speed, thrown distance, and force increases with level.",
+						"Basic"			= "You have some familiarity with manual labor, and are in reasonable physical shape. Tasks requiring great dexterity or strength may still elude you.<br>- You can throw \"huge\" items or normal-sized mobs without getting weakened.",
+						"Trained"		= "You have sufficient strength and dexterity for even very strenuous tasks, and can work for a long time without tiring.",
+						"Experienced"	= "You have experience with heavy work in trying physical conditions, and are in excellent shape. You visit the gym frequently.",
+						"Master"		= "In addition to your excellent strength and endurance, you have a lot of experience with the specific physical demands of your job. You may have competitive experience with some form of athletics.")
+
+/decl/hierarchy/skill/physical/acrobatics
+	ID = "acrobatics"
+	name = "Acrobatics"
+	desc = "Your uncanny ability to climb, jump, and flip your way over inconvenient obstacles."
+	levels = list( "Unskilled"		= "You're a clumsy oaf. You try to keep your feet planted as solidly on terra firma as possible, lest you fall on your ass.<br>- You can maneuver around the ship well enough, but should probably avoid climbing flimsy tables.",
+					"Basic"			= "You took easily to riding a bike, and can hop on one leg. Your balance is no better or worse than the average person.<br>- You can climb ladders a bit more quickly than normal.",
+					"Trained"		= "You've trained in your spare time, and it's starting to show - you've gotten nimble! You're no gymnast, but you never shy away from the chance to surmount whatever gets in your way.<br>- You can Move Up if there is a lattice overhead.",
+					"Experienced"	= "You never bothered walking like a normal person when you could scamper around like a monkey instead. Where people see a ship full of inconvenient obstacles, you see an exciting challenge.<br>You can climb structures, such as tables and crates, very quickly. You will also tuck and roll, absorbing some of the damage from a fall, provided it's not too far.",
+					"Master"		= "The laws of physics barely seem to apply to you. The ship is your jungle gym - nothing seems to slow you down.<br>- You're even better at tucking and rolling, and can bounce back to your feet a bit more easily.<br>- You can jump by attempting to throw with an empty hand.")
 
 // Category: Service
 

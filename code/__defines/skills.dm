@@ -17,7 +17,8 @@
 #define SKILL_EVA           /decl/hierarchy/skill/general/EVA
 #define SKILL_MECH          /decl/hierarchy/skill/general/mech
 #define SKILL_PILOT         /decl/hierarchy/skill/general/pilot
-#define SKILL_HAULING       /decl/hierarchy/skill/general/hauling
+#define SKILL_HAULING       /decl/hierarchy/skill/physical/hauling
+#define SKILL_ACROBATICS    /decl/hierarchy/skill/physical/acrobatics
 #define SKILL_COMPUTER      /decl/hierarchy/skill/general/computer
 #define SKILL_BOTANY        /decl/hierarchy/skill/service/botany
 #define SKILL_COOKING       /decl/hierarchy/skill/service/cooking

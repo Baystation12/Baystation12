@@ -68,6 +68,11 @@
 	if(species && species.can_overcome_gravity(src))
 		return 1
 	else
+		// Good at acrobatics? Let 'em.
+		if(skill_check(SKILL_ACROBATICS, SKILL_ADEPT))
+			return 1
+
+		// Check if we're standing on anything construed as climbable.
 		for(var/atom/a in src.loc)
 			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
 				return 1
@@ -231,18 +236,3 @@
 	if(w_class == ITEM_SIZE_NO_CONTAINER)
 		return 100
 	return base_storage_cost(w_class)
-
-/mob/living/carbon/human/handle_fall_effect(var/turf/landing)
-	if(species && species.handle_fall_special(src, landing))
-		return
-
-	..()
-	var/damage = 10
-	apply_damage(rand(0, damage), BRUTE, BP_HEAD)
-	apply_damage(rand(0, damage), BRUTE, BP_CHEST)
-	apply_damage(rand(0, damage), BRUTE, BP_L_LEG)
-	apply_damage(rand(0, damage), BRUTE, BP_R_LEG)
-	apply_damage(rand(0, damage), BRUTE, BP_L_ARM)
-	apply_damage(rand(0, damage), BRUTE, BP_R_ARM)
-	weakened = max(weakened,2)
-	updatehealth()

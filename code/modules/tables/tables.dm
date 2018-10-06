@@ -161,6 +161,37 @@
 
 	return ..()
 
+/obj/structure/table/do_climb(mob/living/user)
+	. = ..()
+
+	if (.)
+		// See if some dumbass is trying to climb the table at Unskilled Acrobatics.
+		if(user.get_skill_value(SKILL_ACROBATICS) > SKILL_NONE)
+			// We're safe.
+			return
+
+		// No smashing tables if they're nice and tough, or they're unfinished.
+		if(reinforced || !material)
+			return
+
+		// Chance begins appearing if integrity is below 100 (e.g. anything weaker than steel)
+		var/smash_chance = 100 - material.integrity
+		if(material.is_brittle())
+			smash_chance += 50
+
+		if(prob(smash_chance))
+			// Tough luck, Joey Bag o' Donuts!
+			user.visible_message("<span class='warning'>\The [src] gives out beneath \the [user], smashing into pieces!</span>",
+				"<span class='danger'>\The [src] gives out beneath you, smashing into pieces!</span>",
+				"<span class='warning'>You hear the crash of [material.display_name]!</span>")
+			break_to_parts()
+
+		var/dam = 3
+		user.apply_damage(rand(0, dam), BRUTE, BP_L_ARM)
+		user.apply_damage(rand(0, dam), BRUTE, BP_R_ARM)
+		user.Stun(2)
+		user.updatehealth()
+
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
 	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
 		reinforce_table(what, usr)

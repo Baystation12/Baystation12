@@ -872,7 +872,7 @@
 	for(var/obj/item/organ/external/organ in organs)
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.gunshot_residue = null
-	
+
 	if(clean_feet && !shoes)
 		feet_blood_color = null
 		feet_blood_DNA = null
@@ -1614,3 +1614,45 @@
 
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	return cultural_info[token]
+
+/mob/living/carbon/human/handle_fall_effect(var/turf/landing)
+	if(species && species.handle_fall_special(src, landing))
+		return
+
+	..()
+
+	var/fall_distance = 1 // Represents how many z-levels we plummeted.
+	if(istype(landing, /turf/simulated/open))
+		fall_distance++
+
+	var/min_damage = fall_distance - 1
+	var/damage = 5 * fall_distance
+	var/weak_damage = 1 * fall_distance
+
+	// If we only fell 2 or fewer floors, let Acrobatics help negate damage.
+	if(fall_distance <= 2 && (skill_check(SKILL_ACROBATICS, SKILL_EXPERT)))
+		if(!istype(landing, /turf/simulated/open))
+			var/datum/gender/G = gender_datums[get_gender()]
+			visible_message("<span class='notice'>\The [src] hits \the [landing.name], tucking into a roll as [G.he] lands!</span>",
+				"<span class='notice'>You hurl yourself into a roll just before you land!</span>",
+				"You hear the light collision of someone hitting the floor.")
+			damage /= (skill_check(SKILL_ACROBATICS, SKILL_PROF) ? 4 : 2)
+			// A master acrobat won't be slowed down by the fall, even if it hurts a bit.
+			weak_damage = (skill_check(SKILL_ACROBATICS, SKILL_PROF) ? 0 : weak_damage / 2)
+
+	for(var/body_part in list(BP_HEAD, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
+		apply_damage(rand(min_damage, damage), BRUTE, body_part)
+
+	weakened = max(weakened, weak_damage)
+	updatehealth()
+
+/mob/living/carbon/human/can_acrobatics_jump()
+	. = ..()
+
+	if(.)
+		var/obj/item/organ/external/l_foot = src.get_organ(BP_L_FOOT)
+		var/obj/item/organ/external/r_foot = src.get_organ(BP_R_FOOT)
+		if(!l_foot.is_usable() || !r_foot.is_usable())
+			// Are we missing feet? Proooobably shouldn't jump.
+			to_chat(src, "<span notice='warning'>How do you propose to jump without both feet?</span>")
+			. = 0

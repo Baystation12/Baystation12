@@ -33,15 +33,21 @@
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
 		var/turf/T = get_turf(A)
 		var/turf/above = shadow.loc
+		var/climb_speed = 50
 		if(T.Adjacent(shadow) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
 
 			var/area/location = get_area(loc)
 			if(location.has_gravity && !can_overcome_gravity())
 				return
 
+			if(get_skill_value(SKILL_ACROBATICS) < SKILL_BASIC)
+				climb_speed *= 2
+			else if(skill_check(SKILL_ACROBATICS, SKILL_EXPERT))
+				climb_speed /= 3
+
 			visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
 			shadow.visible_message("<span class='notice'>[shadow] starts climbing onto \the [A]!</span>")
-			if(do_after(src, 50, A))
+			if(do_after(src, climb_speed, A))
 				visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
 				shadow.visible_message("<span class='notice'>[shadow] climbs onto \the [A]!</span>")
 				src.Move(T)

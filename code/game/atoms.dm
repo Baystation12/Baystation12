@@ -481,11 +481,22 @@ its easier to just keep the beam vertical.
 	if (!can_climb(user))
 		return 0
 
-	add_fingerprint(user)
-	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
+	var/climb_speed = 50
+	var/is_touching = TRUE
+
+	// If we're Expert or above in Acrobatics, we'll jump instead.
+	if(user.skill_check(SKILL_ACROBATICS, SKILL_EXPERT))
+		// Half speed at Experienced, fourth speed at Master.
+		climb_speed /= (user.skill_check(SKILL_ACROBATICS, SKILL_PROF) ? 4 : 2)
+		is_touching = FALSE // You don't leave fingerprints if you jump!
+
+	if(is_touching)
+		add_fingerprint(user)
+
+	user.visible_message("<span class='warning'>\The [user] [is_touching ? "starts climbing" : "prepares to leap"] onto \the [src]!</span>")
 	LAZYDISTINCTADD(climbers,user)
 
-	if(!do_after(user,(issmall(user) ? 30 : 50), src))
+	if(!do_after(user,(issmall(user) ? 30 : climb_speed), src))
 		LAZYREMOVE(climbers,user)
 		return 0
 
@@ -502,7 +513,7 @@ its easier to just keep the beam vertical.
 	user.forceMove(target_turf)
 
 	if (get_turf(user) == target_turf)
-		user.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
+		user.visible_message("<span class='warning'>\The [user] [is_touching ? "climbs" : "leaps"] onto \the [src]!</span>")
 	LAZYREMOVE(climbers,user)
 	return 1
 

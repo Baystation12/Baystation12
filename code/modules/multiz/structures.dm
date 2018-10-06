@@ -78,14 +78,20 @@
 		G.adjust_position()
 
 	var/direction = target_ladder == target_up ? "up" : "down"
+	var/climb_speed = climb_time
+	var/speedy = 0
+	if(M.skill_check(SKILL_ACROBATICS, SKILL_BASIC))
+		speedy = 1
+		// Slight speed increase at Basic, with incrementally bigger boosts the higher your skill is.
+		climb_speed -= (0.25 * M.get_skill_value(SKILL_ACROBATICS))
 
-	M.visible_message("<span class='notice'>\The [M] begins climbing [direction] \the [src]!</span>",
-	"You begin climbing [direction] \the [src]!",
+	M.visible_message("<span class='notice'>\The [M] begins [speedy ? "swiftly " : ""]climbing [direction] \the [src]!</span>",
+	"You begin [speedy ? " swiftly" : ""]climbing [direction] \the [src]!",
 	"You hear the grunting and clanging of a metal ladder being used.")
 
 	target_ladder.audible_message("<span class='notice'>You hear something coming [direction] \the [src]</span>")
 
-	if(do_after(M, climb_time, src))
+	if(do_after(M, climb_speed, src))
 		climbLadder(M, target_ladder)
 		for (var/obj/item/grab/G in M)
 			G.adjust_position(force = 1)
