@@ -4,6 +4,8 @@
 
 #define SHOES_SLOWDOWN         -1.0  // How much shoes slow you down by default. Negative values speed you up.
 
+#define BASE_WEAPON_PARRYCHANCE 20 //This is multiplied by the object's w_class - 1, so tiny objects can't block.
+
 #define CANDLE_LUM 3 // For how bright candles are.
 
 // Item inventory slot bitmasks.
