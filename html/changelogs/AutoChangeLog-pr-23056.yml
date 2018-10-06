@@ -1,0 +1,5 @@
+author: "Cajoes"
+delete-after: True
+changes: 
+  - rscadd: "Added cubed spiders"
+  - rscdel: "Removes previously added domestic animal cubes"
