@@ -2811,7 +2811,7 @@
 "fY" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
-	id_tag = "hangarexit";
+	id_tag = "hangarleft";
 	name = "Hangar Bay";
 	req_access = list(73)
 	},
@@ -3792,7 +3792,7 @@
 "iS" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
-	id_tag = "hangarexit";
+	id_tag = "hangarright";
 	name = "Hangar Bay";
 	req_access = list(73)
 	},
@@ -4556,10 +4556,9 @@
 /area/quartermaster/exploration)
 "kx" = (
 /obj/effect/catwalk_plated,
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24;
-	pixel_y = 0
+/obj/machinery/button/remote/airlock{
+	id = "hangarleft";
+	pixel_x = -25
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -6671,6 +6670,10 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/button/remote/airlock{
+	id = "hangarright";
+	pixel_x = 25
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -13205,6 +13208,18 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
+"IV" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "IY" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/newscaster{
@@ -32818,7 +32833,7 @@ aX
 aX
 aX
 kx
-kU
+IV
 aX
 aX
 aX
