@@ -49,22 +49,22 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
-	New()
-		..()
-		return
+/obj/item/weapon/storage/backpack/holding/New()
+	..()
+	return
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/storage/backpack/holding) || istype(W, /obj/item/weapon/storage/bag/trash/bluespace))
-			to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
-			qdel(W)
-			return 1
-		return ..()
+/obj/item/weapon/storage/backpack/holding/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding) || istype(W, /obj/item/weapon/storage/bag/trash/bluespace))
+		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
+		qdel(W)
+		return 1
+	return ..()
 
 	//Please don't clutter the parent storage item with stupid hacks.
-	can_be_inserted(obj/item/W as obj, stop_messages = 0)
-		if(istype(W, /obj/item/weapon/storage/backpack/holding))
-			return 1
-		return ..()
+/obj/item/weapon/storage/backpack/holding/can_be_inserted(obj/item/W as obj, stop_messages = 0)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding))
+		return 1
+	return ..()
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
@@ -278,7 +278,7 @@
 	name = "auburn pocketbook"
 	color = "#512828"
 
-/obj/item/weapon/storage/backpack/satchel_eng
+/obj/item/weapon/storage/backpack/satchel/eng
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
@@ -287,7 +287,7 @@
 		slot_r_hand_str = "engiepack",
 		)
 
-/obj/item/weapon/storage/backpack/satchel_med
+/obj/item/weapon/storage/backpack/satchel/med
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
@@ -296,27 +296,27 @@
 		slot_r_hand_str = "medicalpack",
 		)
 
-/obj/item/weapon/storage/backpack/satchel_vir
+/obj/item/weapon/storage/backpack/satchel/vir
 	name = "virologist satchel"
 	desc = "A sterile satchel with virologist colours."
 	icon_state = "satchel-vir"
 
-/obj/item/weapon/storage/backpack/satchel_chem
+/obj/item/weapon/storage/backpack/satchel/chem
 	name = "chemist satchel"
 	desc = "A sterile satchel with chemist colours."
 	icon_state = "satchel-chem"
 
-/obj/item/weapon/storage/backpack/satchel_gen
+/obj/item/weapon/storage/backpack/satchel/gen
 	name = "geneticist satchel"
 	desc = "A sterile satchel with geneticist colours."
 	icon_state = "satchel-gen"
 
-/obj/item/weapon/storage/backpack/satchel_tox
+/obj/item/weapon/storage/backpack/satchel/tox
 	name = "corporate satchel"
 	desc = "Useful for holding research materials. The colors on it denote it as a corporate bag."
 	icon_state = "satchel-nt"
 
-/obj/item/weapon/storage/backpack/satchel_sec
+/obj/item/weapon/storage/backpack/satchel/sec
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
@@ -325,12 +325,12 @@
 		slot_r_hand_str = "securitypack",
 		)
 
-/obj/item/weapon/storage/backpack/satchel_hyd
+/obj/item/weapon/storage/backpack/satchel/hyd
 	name = "hydroponics satchel"
 	desc = "A green satchel for plant related work."
 	icon_state = "satchel_hyd"
 
-/obj/item/weapon/storage/backpack/satchel_cap
+/obj/item/weapon/storage/backpack/satchel/cap
 	name = "captain's satchel"
 	desc = "An exclusive satchel for officers."
 	icon_state = "satchel-cap"
