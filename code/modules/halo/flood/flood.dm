@@ -118,8 +118,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(is_being_infested(h))
 		return 0
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
-	adjustBruteLoss(1)
-	src = null //Just in case we get killed.
+	wander = 0
+	stop_automated_movement = 1
+	invisibility = 101
+	anchored = 1
+	density = 0
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
 	var/obj/infest_placeholder = new /obj/effect/dead_infestor
 	h.contents += infest_placeholder
@@ -151,6 +154,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	for(var/obj/i in h.contents)
 		h.drop_from_inventory(i)
 	qdel(h)
+	adjustBruteLoss(1)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
