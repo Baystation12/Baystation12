@@ -85,6 +85,19 @@
 	cost = 50
 	containername = "\improper Stasis bag crate"
 
+/decl/hierarchy/supply_pack/medical/stretcher
+	name = "Equipment - Roller bed crate"
+	contains = list(/obj/item/roller = 3)
+	cost = 10
+	containername = "\improper Roller bed crate"
+
+/decl/hierarchy/supply_pack/medical/wheelchair
+	name = "Equipment - Wheelchair crate"
+	contains = list(/obj/structure/bed/chair/wheelchair)
+	cost = 15
+	containertype = /obj/structure/closet/crate/large
+	containername = "\improper Wheelchair crate"
+
 /decl/hierarchy/supply_pack/medical/medicalextragear
 	name = "Gear - Medical surplus equipment"
 	contains = list(/obj/item/weapon/storage/belt/medical = 3,
