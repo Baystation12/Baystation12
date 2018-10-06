@@ -1317,6 +1317,8 @@
 	reagents.add_reagent(/datum/reagent/frostoil, 3)
 	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 2)
 
+//cubed animals!
+
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
@@ -1396,81 +1398,16 @@
 	name = "neaera cube"
 	monkey_type = /mob/living/carbon/human/neaera
 
-//More cubes!
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/catcube
-	name = "cat cube"
-	monkey_type = /mob/living/simple_animal/cat
+//Spider cubes, all that's left of the cube PR
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/catcube
-	name = "cat cube"
-	monkey_type = /mob/living/simple_animal/cat
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/spidercube
+	name = "spider cube"
+	monkey_type = /obj/effect/spider/spiderling
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/kcatcube
-	name = "kitten cube"
-	monkey_type = /mob/living/simple_animal/cat/kitten
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/kcatcube
-	name = "kitten cube"
-	monkey_type = /mob/living/simple_animal/cat/kitten
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/corgicube
-	name = "corgi cube"
-	monkey_type = /mob/living/simple_animal/corgi
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/corgicube
-	name = "corgi cube"
-	monkey_type = /mob/living/simple_animal/corgi
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/pcorgicube
-	name = "corgi puppy cube"
-	monkey_type = /mob/living/simple_animal/corgi/puppy
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/pcorgicube
-	name = "corgi puppy cube"
-	monkey_type = /mob/living/simple_animal/corgi/puppy
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cowcube
-	name = "cow cube"
-	monkey_type = /mob/living/simple_animal/cow
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/cowcube
-	name = "cow cube"
-	monkey_type = /mob/living/simple_animal/cow
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/goatcube
-	name = "goat cube"
-	monkey_type = /mob/living/simple_animal/hostile/retaliate/goat
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/goatcube
-	name = "goat cube"
-	monkey_type = /mob/living/simple_animal/hostile/retaliate/goat
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/chickencube
-	name = "chicken cube"
-	monkey_type = /mob/living/simple_animal/chicken
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/chickencube
-	name = "chicken cube"
-	monkey_type = /mob/living/simple_animal/chicken
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/chickcube
-	name = "chick cube"
-	monkey_type = /mob/living/simple_animal/chick
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/chickcube
-	name = "chick cube"
-	monkey_type = /mob/living/simple_animal/chick
-
-//Slime Cubes: Bit experimental: May need to tweak the reagent used to activate them to avoid double-tapping your specimen to death by accident.
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/slimecube
-	name = "slime cube (grey)"
-	monkey_type = /mob/living/carbon/slime
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/slimecube
-	name = "slime cube (grey)"
-	monkey_type = /mob/living/carbon/slime
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/spidercube
+	name = "spider cube"
+	monkey_type = /obj/effect/spider/spiderling
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger
 	name = "spell burger"

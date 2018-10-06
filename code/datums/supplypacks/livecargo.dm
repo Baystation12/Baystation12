@@ -30,6 +30,16 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "\improper Stok crate"
 
+/decl/hierarchy/supply_pack/livecargo/spidercubes
+	name = "Inert - Spiders"
+	contains = list(/obj/item/weapon/storage/box/monkeycubes/spidercubes)
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Spiderling crate"
+	contraband = 1
+	security_level = null
+
+
 //actual live animals
 
 /decl/hierarchy/supply_pack/livecargo/corgi
