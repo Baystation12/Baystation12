@@ -8,7 +8,7 @@
 		var/spawn_type
 		if(prob(33))
 			number_to_spawn = 1
-			spawn_type = pick(typesof(/mob/living/simple_animal/hostile/flood/combat_form) - /mob/living/simple_animal/hostile/flood/combat_form)
+			spawn_type = pick(typesof(/mob/living/simple_animal/hostile/flood/combat_form) - list(/mob/living/simple_animal/hostile/flood/combat_form,/mob/living/simple_animal/hostile/flood/combat_form/juggernaut))
 		else if(prob(50))
 			number_to_spawn = 1
 			spawn_type = /mob/living/simple_animal/hostile/flood/carrier
