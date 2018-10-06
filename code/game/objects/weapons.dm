@@ -14,28 +14,33 @@
 	if(istype(damage_source,/obj/item/projectile))
 		return 0
 	//Checks done, Parrycode starts here.//
+	if(attacker.a_intent == "help") //We don't need to block helpful actions.
+		return 0
 	var/parry_chance_divisor = 1
 	var/obj/item/weapon/gun/this_weapon = src
-	if(istype(this_weapon) && this_weapon.one_hand_penalty == -1 && !this_weapon.is_held_twohanded(user))
+	if(istype(this_weapon) && this_weapon.one_hand_penalty == -1 && !this_weapon.is_held_twohanded(user))//Ensure big twohanded guns are worse at parrying when not twohanded.
 		parry_chance_divisor = 2
 	if(!prob((BASE_WEAPON_PARRYCHANCE * (w_class - 1))/parry_chance_divisor)) //Do our base parrychance calculation.
 		return 0
-	if(!damage_source)
+	if(!damage_source || damage_source == attacker)
 		visible_message("<span class = 'danger'>[user] counters [attacker]'s unarmed attack with their [src.name]!</span>")
-		src.attack(attacker)
+		attack(attacker,user,pick("l_arm","r_arm","chest"))
 		return 1
 	else
 		visible_message("<span class = 'danger'>[user] parries [attacker]'s [damage_source.name] with their [src.name]</span>")
+		playsound(loc, hitsound, 50, 1, -1)
+		playsound(loc, damage_source.hitsound, 50, 1, -1)
 
 	var/obj/item/item_to_disintegrate
 	var/mob/living/mob_holding_disintegrated
 
+	//Grab a set of references to the weapon and person being disintegrated.
 	if(istype(src,/obj/item/weapon/melee/energy/elite_sword) && !istype(damage_source,/obj/item/weapon/melee/energy/elite_sword))
 		item_to_disintegrate = damage_source
 		mob_holding_disintegrated = attacker
 	if(istype(damage_source,/obj/item/weapon/melee/energy/elite_sword) && !istype(src,/obj/item/weapon/melee/energy/elite_sword))
 		item_to_disintegrate = src
-		mob_holding_disintegrated = src
+		mob_holding_disintegrated = user
 
 	if(isnull(item_to_disintegrate) || isnull(mob_holding_disintegrated))
 		return 1
