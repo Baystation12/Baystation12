@@ -6,6 +6,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 #define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
+#define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6c_magnum_s,\
+/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg/silenced)
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -74,8 +76,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"
 	icon = 'code/modules/halo/flood/flood_infection.dmi'
-	icon_state = "static"
-	icon_living = "static"
+	icon_state = "anim"
+	icon_living = "anim"
 	icon_dead = "dead"
 	pass_flags = PASSTABLE
 	//
@@ -228,8 +230,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/carrier
 	name = "Flood carrier"
 	icon = 'code/modules/halo/flood/flood_carrier.dmi'
-	icon_state = "static"
-	icon_living = "static"
+	icon_state = "anim"
+	icon_living = "anim"
 	icon_dead = ""
 	//
 	move_to_delay = 30
@@ -331,6 +333,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	. = ..()
 	if(ckey || client)
 		return
+	spawn_infestor()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
@@ -347,6 +350,53 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	melee_damage_lower = 25
+	melee_damage_upper = 35
+	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/ODST
+	name = "Flood infested ODST"
+	icon = 'code/modules/halo/flood/flood_combat_odst.dmi'
+	icon_state = "odst_infested"
+	icon_living = "odst_infested"
+	icon_dead = "odst_dead"
+	//
+	move_to_delay = 2
+	health = 200 //Combat forms need to be hardier.
+	maxHealth = 200
+	melee_damage_lower = 30
+	melee_damage_upper = 35
+	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/ODST/New()
+	..()
+	var/gun_type_spawn = pick(ODST_FLOOD_GUN_LIST)
+	pickup_gun(new gun_type_spawn (loc))
+
+/mob/living/simple_animal/hostile/flood/combat_form/guard
+	name = "Flood infested human"
+	icon = 'code/modules/halo/flood/flood_combat_depotguard.dmi'
+	icon_state = "guard_infested"
+	icon_living = "guard_infested"
+	icon_dead = "guard_dead"
+	//
+	move_to_delay = 2
+	health = 150 //Combat forms need to be hardier.
+	maxHealth = 150
+	melee_damage_lower = 25
+	melee_damage_upper = 30
+	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/oni
+	name = "Flood infested human"
+	icon = 'code/modules/halo/flood/flood_combat_oni.dmi'
+	icon_state = "oni_infested"
+	icon_living = "oni_infested"
+	icon_dead = "oni_dead"
+	//
+	move_to_delay = 2
+	health = 200 //Combat forms need to be hardier.
+	maxHealth = 200
+	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
 
