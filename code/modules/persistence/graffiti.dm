@@ -7,6 +7,7 @@
 	blend_mode = BLEND_MULTIPLY
 	color = "#000000"
 	alpha = 120
+	anchored = TRUE
 
 	var/message
 	var/graffiti_age = 0
@@ -34,8 +35,11 @@
 	. = ..()
 
 /obj/effect/decal/writing/examine(mob/user)
-	..(user)
-	to_chat(user,  "It reads \"[message]\".")
+	. = ..(user)
+	if(.)
+		to_chat(user,  "It reads \"[message]\".")
+	else
+		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
 	if(isWelder(thing))
