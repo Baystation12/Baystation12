@@ -241,3 +241,69 @@
 	icon_state = "coatfl"
 	armor = list(melee = 20, bullet = 10, laser = 10, energy = 20, bomb = 20, bio = 0, rad = 10)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+
+//SolGov Hardsuits
+
+/obj/item/clothing/suit/space/void/engineering/alt/sol
+	icon = 'maps/torch/icons/obj/solgov-suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-suit-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-suit-skrell.dmi',
+		)
+
+/obj/item/clothing/suit/space/void/engineering/alt/sol/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt/sol
+	boots = /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/suit/space/void/atmos/alt/sol
+	icon = 'maps/torch/icons/obj/solgov-suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-suit-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-suit-skrell.dmi',
+		)
+
+/obj/item/clothing/suit/space/void/atmos/alt/sol/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt/sol
+	boots = /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/suit/space/void/pilot/sol
+	icon = 'maps/torch/icons/obj/solgov-suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-suit-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-suit-skrell.dmi',
+		)
+
+/obj/item/clothing/suit/space/void/pilot/sol/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/pilot/sol
+	boots = /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/suit/space/void/medical/alt/sol
+	icon = 'maps/torch/icons/obj/solgov-suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-suit-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-suit-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-suit-skrell.dmi',
+		)
+
+/obj/item/clothing/suit/space/void/medical/alt/sol/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/sol
+	boots = /obj/item/clothing/shoes/magboots

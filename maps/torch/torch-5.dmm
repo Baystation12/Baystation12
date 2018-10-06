@@ -3066,7 +3066,7 @@
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/medical/alt,
+/obj/machinery/suit_storage_unit/medical/alt/sol,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "hj" = (
@@ -7836,7 +7836,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/corner/yellow/full,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/engineering/alt,
+/obj/machinery/suit_storage_unit/engineering/alt/sol,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "rj" = (
@@ -11789,7 +11789,7 @@
 	},
 /obj/effect/floor_decal/corner/yellow/full,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/atmos/alt,
+/obj/machinery/suit_storage_unit/atmos/alt/sol,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "zo" = (

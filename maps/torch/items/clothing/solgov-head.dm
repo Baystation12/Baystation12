@@ -393,3 +393,53 @@
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
 	starting_accessories = null
+
+//SolGov Hardsuits
+
+/obj/item/clothing/head/helmet/space/void/engineering/alt/sol
+	icon = 'maps/torch/icons/obj/solgov-head.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-head-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-head-skrell.dmi',
+		)
+
+/obj/item/clothing/head/helmet/space/void/atmos/alt/sol
+	icon = 'maps/torch/icons/obj/solgov-head.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-head-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-head-skrell.dmi',
+		)
+
+/obj/item/clothing/head/helmet/space/void/pilot/sol
+	icon = 'maps/torch/icons/obj/solgov-head.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-head-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-head-skrell.dmi',
+		)
+
+/obj/item/clothing/head/helmet/space/void/medical/alt/sol
+	icon = 'maps/torch/icons/obj/solgov-head.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/solgov-head-skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/solgov-head-unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/solgov-head-skrell.dmi',
+		)
