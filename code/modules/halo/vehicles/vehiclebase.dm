@@ -153,6 +153,8 @@
 	user.loc = contents
 	contents += user
 	update_object_sprites()
+	if(user.client)
+		user.client.view *= vehicle_view_modifier
 	return 1
 
 /obj/vehicles/proc/do_seat_switch(var/mob/user,var/position)
@@ -207,7 +209,7 @@
 	user.loc = pick(src.locs)
 	update_object_sprites()
 	if(user.client)
-		user.client.view = initial(user.client.view)
+		user.client.view = world.view
 
 /obj/vehicles/verb/enter_vehicle()
 	set name = "Enter Vehicle"
@@ -222,8 +224,6 @@
 		return
 	else
 		enter_as_position(user,player_pos_choice)
-		if(user.client)
-			user.client.view *= vehicle_view_modifier
 
 /obj/vehicles/proc/damage_occupant(var/position,var/obj/item/projectile/P)
 	var/list/occ_list = get_occupants_in_position(position)
