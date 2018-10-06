@@ -16127,14 +16127,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "cub" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 10
-	},
 /obj/machinery/camera/network/medbay{
 	c_tag = "Infirmary - Treatment Centre Starboard"
 	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "cur" = (
@@ -16437,7 +16437,6 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/structure/closet/crate/freezer,
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Medbay";
@@ -16451,10 +16450,6 @@
 	icon_state = "intact";
 	dir = 5
 	},
-/obj/item/weapon/reagent_containers/ivbag/nanoblood,
-/obj/item/weapon/reagent_containers/ivbag/nanoblood,
-/obj/item/weapon/reagent_containers/ivbag/nanoblood,
-/obj/item/weapon/reagent_containers/ivbag/nanoblood,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "cNb" = (
@@ -18277,9 +18272,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -19973,7 +19965,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/iv_drip,
+/obj/structure/closet/crate/freezer,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "gSb" = (
@@ -25819,6 +25815,10 @@
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
+"nCM" = (
+/obj/structure/iv_drip,
+/turf/simulated/floor/tiled/white/monotile,
+/area/medical/surgery2)
 "nDb" = (
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/dark,
@@ -25928,6 +25928,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
+"nKK" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	id_tag = "medtoiletmaint";
+	locked = 1;
+	name = "Infirmary Maintenance Access";
+	req_access = list(12,66)
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/medical/washroom)
 "nLb" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -27682,16 +27692,14 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
-/obj/machinery/door/window/eastright{
-	dir = 1
-	},
 /obj/structure/hygiene/shower{
-	dir = 4;
+	dir = 1;
 	icon_state = "shower";
 	pixel_x = 0;
 	pixel_y = 0
 	},
 /obj/item/weapon/soap/deluxe,
+/obj/structure/curtain/open/shower,
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
 "pMb" = (
@@ -27731,9 +27739,17 @@
 	id = "medtoilet";
 	name = "Door Bolt Control";
 	pixel_x = 25;
+	pixel_y = 5;
 	specialfunctions = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/button/remote/airlock{
+	id = "medtoiletmaint";
+	name = "Maintenance Bolt Control";
+	pixel_x = 25;
+	pixel_y = -5;
+	specialfunctions = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
 "pQO" = (
@@ -28047,9 +28063,6 @@
 /area/rnd/misc_lab)
 "qnz" = (
 /obj/machinery/washing_machine,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
 "qpb" = (
@@ -29342,6 +29355,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
 "rXb" = (
@@ -50838,7 +50854,7 @@ cjb
 gwA
 gwA
 gwA
-gwA
+nKK
 gwA
 tCw
 eOb
@@ -51044,7 +51060,7 @@ eUp
 pLL
 tCw
 blb
-fCb
+nCM
 gjb
 kcb
 iGb
