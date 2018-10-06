@@ -674,6 +674,9 @@
 	departments = list("Engineering","Atmos")
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
 
+/obj/machinery/suit_cycler/engineering/alt
+	departments = list("Engineering, Alt", "Atmos, Alt")
+
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
@@ -695,12 +698,18 @@
 	departments = list("Security","Security, Alt")
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
+/obj/machinery/suit_cycler/security/alt
+	departments = list("Security, Alt")
+
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
 	model_text = "Medical"
 	req_access = list(access_medical)
 	departments = list("Medical")
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+
+/obj/machinery/suit_cycler/medical/alt
+	departments = list("Medical, Alt")
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
@@ -1052,6 +1061,18 @@
 					slot_l_hand_str = "eng_voidsuit",
 					slot_r_hand_str = "eng_voidsuit",
 				)
+		if("Engineering, Alt")
+			if(helmet)
+				helmet.SetName("engineering voidsuit helmet")
+				helmet.icon_state = "rig0-engineeringalt"
+				helmet.item_state = "engalt_helm"
+			if(suit)
+				suit.SetName("engineering voidsuit")
+				suit.icon_state = "rig-engineeringalt"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "eng_voidsuit",
+					slot_r_hand_str = "eng_voidsuit",
+				)
 		if("Mining")
 			if(helmet)
 				helmet.SetName("mining voidsuit helmet")
@@ -1088,6 +1109,18 @@
 					slot_l_hand_str = "medical_voidsuit",
 					slot_r_hand_str = "medical_voidsuit",
 				)
+		if("Medical, Alt")
+			if(helmet)
+				helmet.SetName("medical voidsuit helmet")
+				helmet.icon_state = "rig0-medicalalt"
+				helmet.item_state = "medicalalt_helm"
+			if(suit)
+				suit.SetName("medical voidsuit")
+				suit.icon_state = "rig-medicalalt"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "medical_voidsuit",
+					slot_r_hand_str = "medical_voidsuit",
+				)
 		if("Security")
 			if(helmet)
 				helmet.SetName("security voidsuit helmet")
@@ -1120,6 +1153,18 @@
 			if(suit)
 				suit.SetName("atmospherics voidsuit")
 				suit.icon_state = "rig-atmos"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "atmos_voidsuit",
+					slot_r_hand_str = "atmos_voidsuit",
+				)
+		if("Atmos, Alt")
+			if(helmet)
+				helmet.SetName("atmospherics voidsuit helmet")
+				helmet.icon_state = "rig0-atmosalt"
+				helmet.item_state = "atmosalt_helm"
+			if(suit)
+				suit.SetName("atmospherics voidsuit")
+				suit.icon_state = "rig-atmosalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "atmos_voidsuit",
 					slot_r_hand_str = "atmos_voidsuit",
