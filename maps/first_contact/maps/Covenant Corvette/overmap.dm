@@ -18,7 +18,7 @@
 /obj/effect/overmap/ship/covenant_corvette/process()
 	. = ..()
 	if(is_still())
-		animate(src,alpha = 127,time = 2 SECONDS) //Hard to see if sat still.
+		animate(src,alpha = 15,time = 2 SECONDS) //Hard to see if sat still.
 	else
 		animate(src,alpha = 255, time = 2 SECONDS)
 
