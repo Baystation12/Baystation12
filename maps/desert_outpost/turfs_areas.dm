@@ -13,6 +13,7 @@
 	base_turf = /turf/simulated/floor/asteroid/planet
 	dynamic_lighting = 0
 	luminosity = 1
+	requires_power = 0
 
 /area/planet/stranded_outpost
 	name = "Stranded Outpost"
@@ -20,3 +21,4 @@
 	base_turf = /turf/simulated/floor/asteroid/planet
 	dynamic_lighting = 0
 	luminosity = 1
+	requires_power = 0
