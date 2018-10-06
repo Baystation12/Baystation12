@@ -77,6 +77,10 @@
 	name = "caviar can"
 	icon_state = "fisheggs_can"
 
+/obj/item/trash/carpegg
+	name = "caviar can"
+	icon_state = "carpeggs_can"
+
 /obj/item/trash/salo
 	name = "salo pack"
 	icon_state = "salo"
@@ -109,6 +113,13 @@
 /obj/item/trash/tastybread
 	name = "bread tube"
 	icon_state = "tastybread"
+
+//solsnack trash
+/obj/item/trash/cakewrap
+	name = "cake wrapper"
+	icon_state = "Lunacake_trash"
+
+
 
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return
