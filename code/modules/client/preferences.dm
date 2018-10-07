@@ -50,6 +50,9 @@ datum/preferences
 		load_preferences()
 		load_and_update_character()
 	sanitize_preferences()
+	if(client && istype(client.mob, /mob/new_player))
+		var/mob/new_player/np = client.mob
+		np.new_player_panel(TRUE)
 
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)

@@ -395,7 +395,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 				player.ready = 0
-				player.new_player_panel_proc()
+				player.new_player_panel()
 				unassigned -= player
 		return 1
 
