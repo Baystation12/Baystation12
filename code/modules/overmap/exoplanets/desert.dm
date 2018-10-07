@@ -135,7 +135,7 @@
 	..()
 	update_icon()
 
-/obj/structure/quicksand/update_icon()
+/obj/structure/quicksand/on_update_icon()
 	if(!exposed)
 		return
 	icon_state = "open"

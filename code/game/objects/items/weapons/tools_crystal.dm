@@ -22,7 +22,7 @@
 		return
 	. = ..()
 
-/obj/item/weapon/weldingtool/crystal/update_icon()
+/obj/item/weapon/weldingtool/crystal/on_update_icon()
 	icon_state = welding ? "crystal_welder_on" : "crystal_welder"
 	item_state = welding ? "crystal_tool_lit"  : "crystal_tool"
 	var/mob/M = loc

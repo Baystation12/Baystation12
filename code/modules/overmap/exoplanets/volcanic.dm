@@ -83,7 +83,7 @@
 	. = ..()
 	update_icon(1)
 
-/turf/simulated/floor/exoplanet/volcanic/update_icon(var/update_neighbors)
+/turf/simulated/floor/exoplanet/volcanic/on_update_icon(var/update_neighbors)
 	overlays.Cut()
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)

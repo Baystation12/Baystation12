@@ -57,7 +57,7 @@
 		else
 			to_chat(user, "<span class='notice'>A no server error appears on the screen.</span>")
 
-/obj/machinery/computer/message_monitor/update_icon()
+/obj/machinery/computer/message_monitor/on_update_icon()
 	if(emag || hacking)
 		icon_screen = hack_icon
 	else

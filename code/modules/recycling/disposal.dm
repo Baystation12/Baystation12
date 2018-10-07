@@ -326,7 +326,7 @@
 	update_icon()
 
 // update the icon & overlays to reflect mode & status
-/obj/machinery/disposal/update_icon()
+/obj/machinery/disposal/on_update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)
 		mode = 0

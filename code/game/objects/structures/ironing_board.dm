@@ -46,7 +46,7 @@
 	if(cloth)
 		to_chat(user, "<span class='notice'>\The \icon[cloth] [cloth] lies on it.</span>")
 
-/obj/structure/bed/roller/ironingboard/update_icon()
+/obj/structure/bed/roller/ironingboard/on_update_icon()
 	if(density)
 		icon_state = "up"
 	else

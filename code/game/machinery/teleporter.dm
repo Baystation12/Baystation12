@@ -300,7 +300,7 @@
 	if (engaged && (stat & NOPOWER))
 		disengage()
 
-/obj/machinery/teleport/station/update_icon()
+/obj/machinery/teleport/station/on_update_icon()
 	if(stat & NOPOWER)
 		icon_state = "controller-p"
 	else

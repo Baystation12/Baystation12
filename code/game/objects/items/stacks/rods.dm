@@ -100,7 +100,7 @@
 		use(2)
 	return
 
-/obj/item/stack/rods/update_icon()
+/obj/item/stack/rods/on_update_icon()
 	if(amount == 1)
 		icon = 'icons/obj/weapons.dmi'
 		icon_state = "metal-rod"

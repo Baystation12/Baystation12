@@ -78,7 +78,7 @@
 		I.forceMove(loc)
 	. = ..()
 
-/obj/structure/skele_stand/update_icon()
+/obj/structure/skele_stand/on_update_icon()
 	overlays.Cut()
 	for(var/slot in swag)
 		var/obj/item/I = swag[slot]

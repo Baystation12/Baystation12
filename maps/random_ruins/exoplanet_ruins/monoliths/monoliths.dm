@@ -28,7 +28,7 @@
 		if(istype(E))
 			desc += "\nThere are images on it: [E.get_engravings()]"
 
-/obj/structure/monolith/update_icon()
+/obj/structure/monolith/on_update_icon()
 	overlays.Cut()
 	if(active)
 		var/image/I = image(icon,"[icon_state]decor")

@@ -212,7 +212,7 @@
 // if NOPOWER, display blank
 // if BROKEN, display blue screen of death icon AI uses
 // if timing=true, run update display function
-/obj/machinery/door_timer/update_icon()
+/obj/machinery/door_timer/on_update_icon()
 	if(stat & (NOPOWER))
 		icon_state = "frame"
 		return

@@ -18,7 +18,7 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/singularity/narsie/large/exit/update_icon()
+/obj/singularity/narsie/large/exit/on_update_icon()
 	overlays = 0
 
 /obj/singularity/narsie/large/exit/Process()

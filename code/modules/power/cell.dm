@@ -40,7 +40,7 @@
 
 	return use(cell_amt) / CELLRATE
 
-/obj/item/weapon/cell/update_icon()
+/obj/item/weapon/cell/on_update_icon()
 
 	var/new_overlay_state = null
 	if(percent() >= 95)

@@ -1,5 +1,5 @@
 //Refreshes the icon and sets the luminosity
-/obj/machinery/portable_atmospherics/hydroponics/update_icon()
+/obj/machinery/portable_atmospherics/hydroponics/on_update_icon()
 	// Update name.
 	if(seed)
 		if(mechanical)

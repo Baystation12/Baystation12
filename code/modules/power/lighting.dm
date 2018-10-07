@@ -42,7 +42,7 @@
 
 	update_icon()
 
-/obj/machinery/light_construct/update_icon()
+/obj/machinery/light_construct/on_update_icon()
 	switch(stage)
 		if(1) icon_state = "tube-construct-stage1"
 		if(2) icon_state = "tube-construct-stage2"
@@ -125,7 +125,7 @@
 	fixture_type = /obj/machinery/light/small
 	sheets_refunded = 1
 
-/obj/machinery/light_construct/small/update_icon()
+/obj/machinery/light_construct/small/on_update_icon()
 	switch(stage)
 		if(1) icon_state = "bulb-construct-stage1"
 		if(2) icon_state = "bulb-construct-stage2"
@@ -199,7 +199,7 @@
 	QDEL_NULL(s)
 	. = ..()
 
-/obj/machinery/light/update_icon(var/trigger = 1)
+/obj/machinery/light/on_update_icon(var/trigger = 1)
 	overlays = overlays.Cut()
 	icon_state = "[base_state]_empty" //Never use the initial state. That'll just reset it to the mapping icon.
 	pixel_y = 0
@@ -621,7 +621,7 @@
 	matter = list(MATERIAL_GLASS = 100)
 
 // update the icon state and description of the light
-/obj/item/weapon/light/update_icon()
+/obj/item/weapon/light/on_update_icon()
 	color = b_colour
 	var/broken
 	switch(status)

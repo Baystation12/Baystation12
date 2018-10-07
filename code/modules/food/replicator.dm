@@ -59,7 +59,7 @@
 		..()
 	return
 
-/obj/machinery/food_replicator/update_icon()
+/obj/machinery/food_replicator/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else if( !(stat & NOPOWER) )

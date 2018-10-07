@@ -56,7 +56,7 @@
 	update_icon()
 
 
-/obj/machinery/atmospherics/unary/heater/update_icon()
+/obj/machinery/atmospherics/unary/heater/on_update_icon()
 	if(node)
 		if(use_power && heating)
 			icon_state = "heater_1"

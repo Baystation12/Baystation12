@@ -57,7 +57,7 @@
 /obj/machinery/mech_sensor/proc/enabled()
 	return on && !(stat & NOPOWER)
 
-/obj/machinery/mech_sensor/update_icon(var/safety = 0)
+/obj/machinery/mech_sensor/on_update_icon(var/safety = 0)
 	if (enabled())
 		icon_state = "airlock_sensor_standby"
 	else

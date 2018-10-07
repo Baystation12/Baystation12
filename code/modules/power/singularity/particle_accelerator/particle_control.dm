@@ -58,7 +58,7 @@
 
 	return
 
-/obj/machinery/particle_accelerator/control_box/update_icon()
+/obj/machinery/particle_accelerator/control_box/on_update_icon()
 	if(active)
 		icon_state = "[reference]p1"
 	else

@@ -193,7 +193,7 @@
 			return 0
 	return 1
 
-/obj/machinery/shipsensors/update_icon()
+/obj/machinery/shipsensors/on_update_icon()
 	if(use_power)
 		icon_state = "sensors"
 	else

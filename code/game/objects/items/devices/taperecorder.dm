@@ -364,7 +364,7 @@
 		record()
 
 
-/obj/item/device/taperecorder/update_icon()
+/obj/item/device/taperecorder/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	if(!mytape)
@@ -393,7 +393,7 @@
 	var/doctored = 0
 
 
-/obj/item/device/tape/update_icon()
+/obj/item/device/tape/on_update_icon()
 	overlays.Cut()
 	if(ruined && max_capacity)
 		overlays += "ribbonoverlay"
@@ -528,7 +528,7 @@
 /obj/item/device/tape/loose/fix()
 	return
 
-/obj/item/device/tape/loose/update_icon()
+/obj/item/device/tape/loose/on_update_icon()
 	return
 
 /obj/item/device/tape/loose/get_loose_tape()

@@ -111,7 +111,7 @@
 
 // icon related
 
-/obj/structure/wall_frame/update_icon()
+/obj/structure/wall_frame/on_update_icon()
 	overlays.Cut()
 	var/image/I
 

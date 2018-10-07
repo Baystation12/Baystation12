@@ -57,7 +57,7 @@
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/weapon/material/twohanded/update_icon()
+/obj/item/weapon/material/twohanded/on_update_icon()
 	icon_state = "[base_icon][wielded]"
 	item_state_slots[slot_l_hand_str] = icon_state
 	item_state_slots[slot_r_hand_str] = icon_state

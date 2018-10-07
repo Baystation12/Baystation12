@@ -61,7 +61,7 @@
 	var/list/air_mix = list("oxygen" = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 	air_contents.adjust_multi("oxygen", air_mix["oxygen"])
 
-/obj/item/device/oxycandle/update_icon()
+/obj/item/device/oxycandle/on_update_icon()
 	if(on == 1)
 		icon_state = "oxycandle_on"
 		item_state = icon_state

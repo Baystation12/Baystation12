@@ -33,7 +33,7 @@
 	update_icon()
 
 //maybe add soft lighting? Maybe, though not everything needs it
-/obj/machinery/holosign/update_icon()
+/obj/machinery/holosign/on_update_icon()
 	if (!lit || (stat & (BROKEN|NOPOWER)))
 		icon_state = "sign_off"
 	else
@@ -68,6 +68,6 @@
 
 	return
 
-/obj/machinery/button/holosign/update_icon()
+/obj/machinery/button/holosign/on_update_icon()
 	icon_state = "light[active]"
 	return

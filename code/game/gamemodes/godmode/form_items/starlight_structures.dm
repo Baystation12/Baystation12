@@ -151,7 +151,7 @@
 	var/charge = 0
 	var/charging = 0 //Charging, dispersing, etc.
 
-/obj/structure/deity/radiant_statue/update_icon()
+/obj/structure/deity/radiant_statue/on_update_icon()
 	if(charging)
 		icon_state = "statue_charging"
 	else if(charge)

@@ -268,7 +268,7 @@
 	H.update_icon()
 	update_clothing_icon()
 
-/obj/item/clothing/accessory/toggleable/flannel/update_icon()
+/obj/item/clothing/accessory/toggleable/flannel/on_update_icon()
 	icon_state = initial(icon_state)
 	if(rolled)
 		icon_state += "r"

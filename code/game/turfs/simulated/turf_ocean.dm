@@ -32,7 +32,7 @@
 		detail_decal = "asteroid[rand(0,9)]"
 		update_icon()
 
-/turf/simulated/ocean/update_icon(update_neighbors)
+/turf/simulated/ocean/on_update_icon(update_neighbors)
 	..(update_neighbors)
 	if(detail_decal)
 		overlays += image(icon = 'icons/turf/mining_decals.dmi', icon_state = detail_decal)

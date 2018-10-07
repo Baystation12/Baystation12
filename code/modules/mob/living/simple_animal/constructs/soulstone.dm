@@ -39,7 +39,7 @@
 	if(full == SOULSTONE_CRACKED)
 		to_chat(user, "This one is cracked and useless.")
 
-/obj/item/device/soulstone/update_icon()
+/obj/item/device/soulstone/on_update_icon()
 	if(full == SOULSTONE_EMPTY)
 		icon_state = "soulstone"
 	if(full == SOULSTONE_ESSENCE)
