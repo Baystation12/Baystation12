@@ -1,0 +1,4 @@
+author: "Atebite"
+delete-after: True
+changes: 
+  - bugfix: "Fixed less wet floors increasing slip chance. Mopped floors should now only have a 50% chance of slipping you."
