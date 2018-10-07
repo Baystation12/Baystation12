@@ -1,0 +1,4 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - rscadd: "Adds buttons to allow selecting \"high,\" \"low,\" or \"never\" on all antag roles with a single click."
