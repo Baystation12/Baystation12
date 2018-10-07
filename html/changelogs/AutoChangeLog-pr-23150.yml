@@ -1,0 +1,6 @@
+author: "Cajoes"
+delete-after: True
+changes: 
+  - rscdel: "Removed the mention of crate in the cargo interface order form. Since it is implied the shipment will be in a crate.. or locker.. or otherwise sealed in some material."
+  - rscdel: "Removed \\improper tags from labels that didn't require them. You will neither notice nor care."
+  - rscdel: "Removed dispenser cartridge packs from Galley-Cargo due to redundancy. Refer to Dispenser Refills-Cargo."
