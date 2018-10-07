@@ -55,7 +55,7 @@
 				circ1 = null
 				circ2 = null
 
-/obj/machinery/power/generator/update_icon()
+/obj/machinery/power/generator/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		overlays.Cut()
 	else

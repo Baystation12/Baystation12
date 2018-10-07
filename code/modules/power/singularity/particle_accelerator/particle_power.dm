@@ -5,6 +5,6 @@
 	icon_state = "power_box"
 	reference = "power_box"
 
-/obj/structure/particle_accelerator/power_box/update_icon()
+/obj/structure/particle_accelerator/power_box/on_update_icon()
 	..()
 	return

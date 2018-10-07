@@ -54,7 +54,7 @@
 	..()
 	update_icon()
 
-/obj/item/weapon/storage/bag/trash/update_icon()
+/obj/item/weapon/storage/bag/trash/on_update_icon()
 	switch(w_class)
 		if(2) icon_state = "[initial(icon_state)]"
 		if(3) icon_state = "[initial(icon_state)]1"

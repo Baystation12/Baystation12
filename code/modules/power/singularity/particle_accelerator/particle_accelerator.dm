@@ -84,7 +84,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	icon_state = "end_cap"
 	reference = "end_cap"
 
-/obj/structure/particle_accelerator/update_icon()
+/obj/structure/particle_accelerator/on_update_icon()
 	..()
 	return
 
@@ -157,7 +157,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		else
 	return
 
-/obj/structure/particle_accelerator/update_icon()
+/obj/structure/particle_accelerator/on_update_icon()
 	switch(construction_state)
 		if(0,1)
 			icon_state="[reference]"
@@ -290,7 +290,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	src.set_dir(turn(src.dir, 90))
 	return 1
 
-/obj/machinery/particle_accelerator/update_icon()
+/obj/machinery/particle_accelerator/on_update_icon()
 	return
 
 /obj/machinery/particle_accelerator/examine(mob/user)

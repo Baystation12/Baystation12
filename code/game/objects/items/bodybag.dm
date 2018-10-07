@@ -87,7 +87,7 @@
 	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
 		fold(usr)
 
-/obj/structure/closet/body_bag/update_icon()
+/obj/structure/closet/body_bag/on_update_icon()
 	if(opened)
 		icon_state = icon_opened
 	else

@@ -19,7 +19,7 @@
 	icon = 'icons/obj/augment_tools.dmi'
 
 
-/obj/item/weapon/weldingtool/finger/update_icon()
+/obj/item/weapon/weldingtool/finger/on_update_icon()
 	icon_state = welding ? "welder_finger_on" : "welder_finger"
 
 /obj/item/weapon/wirecutters/finger

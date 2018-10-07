@@ -92,7 +92,7 @@
 
 	update_icon()
 
-/obj/item/clothing/accessory/bowtie/update_icon()
+/obj/item/clothing/accessory/bowtie/on_update_icon()
 	if(icon_state == icon_tied)
 		icon_state = "[icon_tied]_untied"
 	else

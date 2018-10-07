@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/weapon/implant/imp
 
-/obj/item/weapon/implantpad/update_icon()
+/obj/item/weapon/implantpad/on_update_icon()
 	if (imp)
 		icon_state = "implantpad-1"
 	else

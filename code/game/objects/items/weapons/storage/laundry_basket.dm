@@ -50,7 +50,7 @@
 	linked = O
 	return
 
-/obj/item/weapon/storage/laundry_basket/update_icon()
+/obj/item/weapon/storage/laundry_basket/on_update_icon()
 	if(contents.len)
 		icon_state = "laundry-full"
 	else

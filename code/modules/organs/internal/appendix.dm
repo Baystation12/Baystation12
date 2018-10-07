@@ -5,7 +5,7 @@
 	organ_tag = BP_APPENDIX
 	var/inflamed = 0
 
-/obj/item/organ/internal/appendix/update_icon()
+/obj/item/organ/internal/appendix/on_update_icon()
 	..()
 	if(inflamed)
 		icon_state = "appendixinflamed"

@@ -351,7 +351,7 @@
 	src.updateUsrDialog()
 	src.update_icon()
 
-/obj/machinery/microwave/update_icon()
+/obj/machinery/microwave/on_update_icon()
 	if(dirty == 100)
 		src.icon_state = "mwbloody[operating]"
 	else if(broken)

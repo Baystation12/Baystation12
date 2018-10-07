@@ -82,7 +82,7 @@ obj/structure/closet/crate
 	. = ..()
 	update_icon()
 
-/obj/structure/closet/crate/secure/update_icon()
+/obj/structure/closet/crate/secure/on_update_icon()
 	..()
 	if(broken)
 		overlays += emag

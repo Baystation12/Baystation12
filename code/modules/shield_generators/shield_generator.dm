@@ -28,7 +28,7 @@
 	var/ai_control_disabled = 0			// Whether the AI control is disabled.
 	var/list/mode_list = null			// A list of shield_mode datums.
 
-/obj/machinery/power/shield_generator/update_icon()
+/obj/machinery/power/shield_generator/on_update_icon()
 	if(running)
 		icon_state = "generator1"
 	else

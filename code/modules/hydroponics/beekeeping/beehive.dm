@@ -17,7 +17,7 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/beehive/update_icon()
+/obj/machinery/beehive/on_update_icon()
 	overlays.Cut()
 	icon_state = "beehive-[closed]"
 	if(closed)

@@ -31,7 +31,7 @@
 		return
 	return ..()
 
-/obj/machinery/organ_printer/update_icon()
+/obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
 		overlays += "bioprinter_panel_open"

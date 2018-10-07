@@ -134,7 +134,7 @@
 	verbs -= shackled_verbs
 	update_icon()
 
-/obj/item/organ/internal/posibrain/update_icon()
+/obj/item/organ/internal/posibrain/on_update_icon()
 	if(src.brainmob && src.brainmob.key)
 		icon_state = "posibrain-occupied"
 	else

@@ -23,7 +23,7 @@
 	update_icon()
 
 
-/obj/structure/dispenser/update_icon()
+/obj/structure/dispenser/on_update_icon()
 	overlays.Cut()
 	switch(oxygentanks)
 		if(1 to 3)	overlays += "oxygen-[oxygentanks]"

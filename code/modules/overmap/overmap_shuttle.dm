@@ -132,7 +132,7 @@
 		user.put_in_hands(contents[1])
 	update_icon()
 
-/obj/structure/fuel_port/update_icon()
+/obj/structure/fuel_port/on_update_icon()
 	if(opened)
 		if(contents.len > 0)
 			icon_state = icon_full

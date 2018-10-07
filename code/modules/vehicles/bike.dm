@@ -194,7 +194,7 @@
 		return
 	..()
 
-/obj/vehicle/bike/update_icon()
+/obj/vehicle/bike/on_update_icon()
 	overlays.Cut()
 
 	if(on)

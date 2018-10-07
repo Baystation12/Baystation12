@@ -162,7 +162,7 @@
 		mask = new mask_type(src)
 	update_icon()
 
-/obj/machinery/suit_storage_unit/update_icon()
+/obj/machinery/suit_storage_unit/on_update_icon()
 	overlays.Cut()
 	if(panelopen)
 		overlays += ("panel")

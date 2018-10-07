@@ -49,7 +49,7 @@
 			capacitor.use(capacitor.charge * 0.05)
 	update_icon()
 
-/obj/item/weapon/gun/magnetic/update_icon()
+/obj/item/weapon/gun/magnetic/on_update_icon()
 	var/list/overlays_to_add = list()
 	if(removable_components)
 		if(cell)

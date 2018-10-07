@@ -104,7 +104,7 @@ var/list/floor_light_cache = list()
 	active_power_usage = ((light_outer_range + light_max_bright) * 20)
 	update_icon()
 
-/obj/machinery/floor_light/update_icon()
+/obj/machinery/floor_light/on_update_icon()
 	overlays.Cut()
 	if(use_power && !broken())
 		if(isnull(damaged))

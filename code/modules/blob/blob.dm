@@ -42,7 +42,7 @@
 		if(3)
 			take_damage(rand(20, 60) / brute_resist)
 
-/obj/effect/blob/update_icon()
+/obj/effect/blob/on_update_icon()
 	if(health > maxHealth / 2)
 		icon_state = "blob"
 	else
@@ -177,7 +177,7 @@
 	var/growth_range = 10 // Maximal distance for new blob pieces from this core.
 
 // Rough icon state changes that reflect the core's health
-/obj/effect/blob/core/update_icon()
+/obj/effect/blob/core/on_update_icon()
 	var/health_percent = (health / maxHealth) * 100
 	switch(health_percent)
 		if(66 to INFINITY)
@@ -221,7 +221,7 @@
 
 	layer = BLOB_NODE_LAYER
 
-/obj/effect/blob/core/secondary/update_icon()
+/obj/effect/blob/core/secondary/on_update_icon()
 	icon_state = (health / maxHealth >= 0.5) ? "blob_node" : "blob_factory"
 
 /obj/effect/blob/shield
@@ -242,7 +242,7 @@
 	update_nearby_tiles()
 	..()
 
-/obj/effect/blob/shield/update_icon()
+/obj/effect/blob/shield/on_update_icon()
 	if(health > maxHealth * 2 / 3)
 		icon_state = "blob_idle"
 	else if(health > maxHealth / 3)

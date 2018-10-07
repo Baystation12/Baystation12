@@ -84,7 +84,7 @@
 		gib() //Leave no identifiable evidence.
 		return
 
-/mob/living/simple_animal/hostile/vagrant/update_icon()
+/mob/living/simple_animal/hostile/vagrant/on_update_icon()
 	if(cloaked) //It's fun time
 		alpha = 45
 		set_light(0)

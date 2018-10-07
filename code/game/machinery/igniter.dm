@@ -22,7 +22,7 @@
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
-/obj/machinery/igniter/update_icon()
+/obj/machinery/igniter/on_update_icon()
 	..()
 	icon_state = "igniter[on]"
 
@@ -80,7 +80,7 @@
 	wifi_receiver = null
 	return ..()
 
-/obj/machinery/sparker/update_icon()
+/obj/machinery/sparker/on_update_icon()
 	..()
 	if(disable)
 		icon_state = "migniter-d"

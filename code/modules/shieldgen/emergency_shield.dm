@@ -325,7 +325,7 @@
 		..()
 
 
-/obj/machinery/shieldgen/update_icon()
+/obj/machinery/shieldgen/on_update_icon()
 	if(active && !(stat & NOPOWER))
 		src.icon_state = malfunction ? "shieldonbr":"shieldon"
 	else

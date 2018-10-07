@@ -133,7 +133,7 @@
 	last_target = assailant.zone_sel.selecting
 	affecting.UpdateLyingBuckledAndVerbStatus()
 	adjust_position()
-	update_icons()
+	update_icon()
 	action_used()
 
 // Returns the organ of the grabbed person that the grabber is targeting
@@ -174,7 +174,7 @@
 		current_grab = upgrab
 		last_upgrade = world.time
 		adjust_position()
-		update_icons()
+		update_icon()
 		leave_forensic_traces()
 		current_grab.enter_as_up(src)
 
@@ -182,9 +182,9 @@
 	var/datum/grab/downgrab = current_grab.downgrade(src)
 	if(downgrab)
 		current_grab = downgrab
-		update_icons()
+		update_icon()
 
-/obj/item/grab/proc/update_icons()
+/obj/item/grab/on_update_icon()
 	if(current_grab.icon)
 		icon = current_grab.icon
 	if(current_grab.icon_state)

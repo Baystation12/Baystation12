@@ -71,7 +71,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	mat_efficiency = 1 - (T - 1) / 4
 	speed = T
 
-/obj/machinery/r_n_d/circuit_imprinter/update_icon()
+/obj/machinery/r_n_d/circuit_imprinter/on_update_icon()
 	if(panel_open)
 		icon_state = "circuit_imprinter_t"
 	else if(busy)
