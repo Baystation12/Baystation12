@@ -103,14 +103,14 @@ code\game\dna\genes\goon_powers.dm
 	invocation = "Tid Caeh Yor!"
 	spell_flags = NOFACTION
 	invocation_type = SpI_SHOUT
-	charge_max = 100
+	charge_max = 30 SECONDS
 	spell_flags = 0
 
 	amt_dizziness = 0
-	amt_eye_blurry = 0
-	amt_stunned = 10
+	amt_eye_blurry = 5
+	amt_stunned = 1
 
 	effect_state = "electricity_constant"
-	effect_duration = 10
+	effect_duration = 5
 
 	hud_state = "wiz_starburst"

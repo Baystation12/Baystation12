@@ -27,7 +27,6 @@
 				/datum/deity_item/boon/burning_touch,
 				/datum/deity_item/boon/burning_grip,
 				/datum/deity_item/boon/blood_boil,
-				/datum/deity_item/boon/fireball,
 				/datum/deity_item/boon/emp,
 				/datum/deity_item/boon/cure_light,
 				/datum/deity_item/phenomena/herald,
