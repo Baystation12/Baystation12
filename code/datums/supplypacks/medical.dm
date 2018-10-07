@@ -3,7 +3,7 @@
 	containertype = /obj/structure/closet/crate/medical
 
 /decl/hierarchy/supply_pack/medical/medical
-	name = "Refills - Medical crate"
+	name = "Refills - Medical supplies"
 	contains = list(/obj/item/weapon/storage/firstaid/regular,
 					/obj/item/weapon/storage/firstaid/trauma,
 					/obj/item/weapon/storage/firstaid/fire,
@@ -17,73 +17,73 @@
 					/obj/item/weapon/storage/box/syringes,
 					/obj/item/weapon/storage/box/autoinjectors)
 	cost = 70
-	containername = "\improper Medical crate"
+	containername = "medical crate"
 
 /decl/hierarchy/supply_pack/medical/atk
-	name = "Triage - Advanced trauma crate"
+	name = "Triage - Advanced trauma supplies"
 	contains = list(/obj/item/stack/medical/advanced/bruise_pack = 6)
 	cost = 30
-	containername = "\improper Advanced trauma crate"
+	containername = "advanced trauma crate"
 
 /decl/hierarchy/supply_pack/medical/abk
-	name = "Triage - Advanced burn crate"
+	name = "Triage - Advanced burn supplies"
 	contains = list(/obj/item/stack/medical/advanced/ointment = 6)
 	cost = 30
-	containername = "\improper Advanced burn crate"
+	containername = "advanced burn crate"
 
 /decl/hierarchy/supply_pack/medical/trauma
-	name = "EMERGENCY - Trauma pouch crate"
+	name = "EMERGENCY - Trauma pouches"
 	contains = list(/obj/item/weapon/storage/firstaid/trauma = 3)
 	cost = 10
-	containername = "\improper Trauma pouch crate"
+	containername = "trauma pouch crate"
 
 /decl/hierarchy/supply_pack/medical/burn
-	name = "EMERGENCY - Burn pouch crate"
+	name = "EMERGENCY - Burn pouches"
 	contains = list(/obj/item/weapon/storage/firstaid/fire = 3)
 	cost = 10
-	containername = "\improper Burn pouch crate"
+	containername = "burn pouch crate"
 
 /decl/hierarchy/supply_pack/medical/toxin
-	name = "EMERGENCY - Toxin pouch crate"
+	name = "EMERGENCY - Toxin pouches"
 	contains = list(/obj/item/weapon/storage/firstaid/toxin = 3)
 	cost = 10
-	containername = "\improper Toxin pouch crate"
+	containername = "toxin pouch crate"
 
 /decl/hierarchy/supply_pack/medical/oxyloss
-	name = "EMERGENCY - Low oxygen pouch crate"
+	name = "EMERGENCY - Low oxygen pouches"
 	contains = list(/obj/item/weapon/storage/firstaid/o2 = 3)
 	cost = 10
-	containername = "\improper Low oxygen pouch crate"
+	containername = "low oxygen pouch crate"
 
 /decl/hierarchy/supply_pack/medical/stab
-	name = "Triage - Stability kit crate"
+	name = "Triage - Stability kit"
 	contains = list(/obj/item/weapon/storage/firstaid/stab = 3)
 	cost = 60
-	containername = "\improper Stability kit crate"
+	containername = "stability kit crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
-	name = "Refills - Blood pack crate"
+	name = "Refills - Blood packs"
 	contains = list(/obj/item/weapon/storage/box/bloodpacks = 3)
 	cost = 10
-	containername = "\improper Blood pack crate"
+	containername = "blood pack crate"
 
 /decl/hierarchy/supply_pack/medical/blood
-	name = "Refills - Nanoblood crate"
+	name = "Refills - Nanoblood"
 	contains = list(/obj/item/weapon/reagent_containers/ivbag/nanoblood = 4)
 	cost = 15
-	containername = "\improper Nanoblood crate"
+	containername = "nanoblood crate"
 
 /decl/hierarchy/supply_pack/medical/bodybag
-	name = "Equipment - Body bag crate"
+	name = "Equipment - Body bags"
 	contains = list(/obj/item/weapon/storage/box/bodybags = 3)
 	cost = 10
-	containername = "\improper Body bag crate"
+	containername = "body bag crate"
 
 /decl/hierarchy/supply_pack/medical/cryobag
-	name = "Equipment - Stasis bag crate"
+	name = "Equipment - Stasis bags"
 	contains = list(/obj/item/bodybag/cryobag = 3)
 	cost = 50
-	containername = "\improper Stasis bag crate"
+	containername = "stasis bag crate"
 
 /decl/hierarchy/supply_pack/medical/stretcher
 	name = "Equipment - Roller bed crate"
@@ -104,7 +104,7 @@
 					/obj/item/clothing/glasses/hud/health = 3)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Medical surplus equipment"
+	containername = "medical surplus equipment crate"
 	access = access_medical
 
 /decl/hierarchy/supply_pack/medical/cmogear
@@ -125,7 +125,7 @@
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Chief medical officer equipment"
+	containername = "chief medical officer equipment crate"
 	access = access_cmo
 
 /decl/hierarchy/supply_pack/medical/doctorgear
@@ -145,7 +145,7 @@
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Medical Doctor equipment"
+	containername = "medical Doctor equipment crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/chemistgear
@@ -165,7 +165,7 @@
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Chemist equipment"
+	containername = "chemist equipment crate"
 	access = access_chemistry
 
 /decl/hierarchy/supply_pack/medical/paramedicgear
@@ -190,7 +190,7 @@
 					/obj/item/clothing/accessory/storage/white_vest)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Paramedic equipment"
+	containername = "paramedic equipment crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/psychiatristgear
@@ -206,7 +206,7 @@
 					/obj/item/weapon/pen)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Psychiatrist equipment"
+	containername = "psychiatrist equipment crate"
 	access = access_psychiatrist
 
 /decl/hierarchy/supply_pack/medical/medicalscrubs
@@ -224,7 +224,7 @@
 					/obj/item/weapon/storage/box/gloves)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Medical scrubs crate"
+	containername = "medical scrubs crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/autopsy
@@ -239,7 +239,7 @@
 					/obj/item/weapon/pen)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Autopsy equipment crate"
+	containername = "autopsy equipment crate"
 	access = access_morgue
 
 /decl/hierarchy/supply_pack/medical/medicaluniforms
@@ -263,7 +263,7 @@
 					/obj/item/weapon/storage/box/gloves)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Medical uniform crate"
+	containername = "medical uniform crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/medicalbiosuits
@@ -278,19 +278,19 @@
 					/obj/item/weapon/storage/box/gloves)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Medical biohazard equipment"
+	containername = "medical biohazard equipment crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/portablefreezers
-	name = "Equipment - Portable freezers crate"
+	name = "Equipment - Portable freezers"
 	contains = list(/obj/item/weapon/storage/box/freezer = 7)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Portable freezers"
+	containername = "portable freezers crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/surgery
-	name = "Gear - Surgery crate"
+	name = "Gear - Surgery tools"
 	contains = list(/obj/item/weapon/cautery,
 					/obj/item/weapon/surgicaldrill,
 					/obj/item/clothing/mask/breath/medical,
@@ -304,11 +304,11 @@
 					/obj/item/weapon/circular_saw)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Surgery crate"
+	containername = "surgery crate"
 	access = access_medical
 
 /decl/hierarchy/supply_pack/medical/sterile
-	name = "Gear - Sterile equipment crate"
+	name = "Gear - Sterile clothes"
 	contains = list(/obj/item/clothing/under/rank/medical/scrubs/green = 2,
 					/obj/item/clothing/head/surgery/green = 2,
 					/obj/item/weapon/storage/box/masks,
@@ -316,13 +316,13 @@
 					/obj/item/weapon/storage/belt/medical = 3)
 	cost = 15
 	containertype = /obj/structure/closet/crate
-	containername = "\improper Sterile equipment crate"
+	containername = "sterile clothes crate"
 
 /decl/hierarchy/supply_pack/medical/scanner_module
-	name = "Electronics - Medical scanner module crate"
+	name = "Electronics - Medical scanner modules"
 	contains = list(/obj/item/weapon/computer_hardware/scanner/medical = 4)
 	cost = 20
-	containername = "\improper Medical scanner module crate"
+	containername = "medical scanner module crate"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_medical_equip
 
