@@ -1151,3 +1151,19 @@
 	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("actuator"))
 		return 1
 	return ..()
+
+/mob/living/silicon/robot/proc/paralyze()
+	if (cell)
+		cell.paralyzedcharge = cell.charge
+		cell.charge = 0
+
+/mob/living/silicon/robot/proc/unparalyze()
+	if (cell)
+		cell.charge = cell.paralyzedcharge
+		cell.paralyzedcharge = null
+
+/mob/living/silicon/robot/proc/isParalyzed()
+	if (cell.paralyzedcharge)
+		return TRUE
+	else
+		return FALSE

@@ -1408,12 +1408,21 @@ var/global/floorIsLava = 0
 		return
 
 	if(check_rights(R_INVESTIGATE))
-		if (H.paralysis == 0)
-			H.paralysis = 8000
-			msg = "has paralyzed [key_name(H)]."
+		if (istype(H, /mob/living/silicon/robot))
+			var/mob/living/silicon/robot/R = H
+			if (!R.isParalyzed())
+				R.paralyze()
+				msg = "has paralyzed [key_name(H)]."
+			else
+				R.unparalyze()
+				msg = "has unparalyzed [key_name(H)]."
 		else
-			H.paralysis = 0
-			msg = "has unparalyzed [key_name(H)]."
+			if (H.paralysis == 0)
+				H.paralysis = 8000
+				msg = "has paralyzed [key_name(H)]."
+			else
+				H.paralysis = 0
+				msg = "has unparalyzed [key_name(H)]."
 		log_and_message_admins(msg)
 
 
