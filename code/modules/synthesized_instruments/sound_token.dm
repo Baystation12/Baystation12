@@ -3,9 +3,10 @@
 
 /datum/sound_token/instrument
 	var/use_env = 0
+	var/datum/sound_player/player
 
 //Slight duplication, but there's key differences
-/datum/sound_token/instrument/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE, var/use_env)
+/datum/sound_token/instrument/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE, var/use_env, var/datum/sound_player/player)
 	if(!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
 	if(!istype(sound))
@@ -21,6 +22,7 @@
 	src.sound       = sound
 	src.sound_id    = sound_id
 	src.use_env = use_env
+	src.player = player
 
 	var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
 	if(!isnum(channel))
@@ -30,11 +32,9 @@
 	listeners = list()
 	listener_status = list()
 
-	GLOB.destroyed_event.register(source, src, /datum/sound_token/proc/Stop)
+	GLOB.destroyed_event.register(source, src, /datum/proc/qdel_self)
 
-	if(ismovable(source))
-		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
-		proxy_listener.register_turfs()
+	player.subscribe(src)
 
 
 /datum/sound_token/instrument/PrivGetEnvironment(var/listener)
@@ -61,3 +61,11 @@ datum/sound_token/instrument/PrivAddListener(var/atom/listener)
 			PrivRemoveListener(listener)
 			return
 	return ..()
+
+/datum/sound_token/instrument/Stop()
+	player.unsubscribe(src)
+	. = ..()
+
+/datum/sound_token/instrument/Destroy()
+	. = ..()
+	player = null
