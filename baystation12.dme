@@ -190,6 +190,7 @@
 #include "code\controllers\subsystems\trade.dm"
 #include "code\controllers\subsystems\wireless.dm"
 #include "code\controllers\subsystems\xenoarch.dm"
+#include "code\controllers\subsystems\initialization\character_setup.dm"
 #include "code\controllers\subsystems\initialization\codex.dm"
 #include "code\controllers\subsystems\initialization\culture.dm"
 #include "code\controllers\subsystems\initialization\materials.dm"
