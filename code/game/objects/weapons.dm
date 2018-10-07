@@ -46,6 +46,10 @@
 	if(isnull(item_to_disintegrate) || isnull(mob_holding_disintegrated))
 		return 1
 
+	if(istype(item_to_disintegrate,/obj/item/weapon/gun) && !prob(BASE_PARRY_PLASMA_DESTROY))
+		visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]":"[attacker]" ]</span>")
+		return 1
+
 	visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]" : "[attacker]"] cuts through [mob_holding_disintegrated]'s [item_to_disintegrate.name] with their [item_to_disintegrate == damage_source ? "[src.name]" : "[damage_source.name]"], rendering it useless!</span>")
 	mob_holding_disintegrated.drop_from_inventory(item_to_disintegrate)
 	new /obj/effect/decal/cleanable/ash (item_to_disintegrate.loc)
