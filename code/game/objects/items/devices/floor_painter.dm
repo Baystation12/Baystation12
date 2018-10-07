@@ -110,7 +110,7 @@
 		return
 
 	var/turf/simulated/floor/F = A
-	if(!istype(F))
+	if(!istype(F) || !F.flooring)
 		to_chat(user, "<span class='warning'>\The [src] can only be used on floors, walls or certain airlocks.</span>")
 		return
 

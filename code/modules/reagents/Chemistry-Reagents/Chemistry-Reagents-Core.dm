@@ -68,10 +68,11 @@
 	var/weakref/W = data["donor"]
 	if (!W)
 		blood_splatter(T, src, 1)
+		return
 	W = W.resolve()
-	if(istype(W, /mob/living/carbon/human))
+	if(ishuman(W))
 		blood_splatter(T, src, 1)
-	else if(istype(W, /mob/living/carbon/alien))
+	else if(isalien(W))
 		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"

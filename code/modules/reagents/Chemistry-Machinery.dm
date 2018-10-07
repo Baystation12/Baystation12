@@ -398,7 +398,7 @@
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
 		var/material/material = stack.material
-		if(!material.chem_products.len)
+		if(!length(material.chem_products))
 			to_chat(user, "\The [material.name] is unable to produce any usable reagents.")
 			return 1
 
