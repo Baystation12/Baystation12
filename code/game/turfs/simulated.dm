@@ -109,7 +109,7 @@
 
 		if(src.wet)
 
-			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
+			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(16/wet))) ) )
 				return
 
 			var/slip_dist = 1
