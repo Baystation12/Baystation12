@@ -17,6 +17,8 @@
 	buckle_lying = -1
 	var/datum/sound_token/sound_token
 
+	obj_flags = OBJ_FLAG_TRIPPABLE
+
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 
@@ -1432,6 +1434,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/update_underlays()
 	..()
 	update_icon()
+
+/obj/machinery/atmospherics/pipe/trip_check(mob/user as mob)
+	var/turf/T = src.loc
+	if(!T.is_plating())
+		return FALSE
+	if(initialize_directions & user.dir)
+		return FALSE
+	. = ..()
 
 /obj/machinery/atmospherics/proc/universal_underlays(var/obj/machinery/atmospherics/node, var/direction)
 	var/turf/T = loc
