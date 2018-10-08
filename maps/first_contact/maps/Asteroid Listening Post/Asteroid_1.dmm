@@ -117,7 +117,7 @@
 "cm" = (/obj/effect/decal/cleanable/mucus,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
 "cn" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/observation)
 "co" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/docking)
-"cp" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
+"cp" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; req_access = list(632)},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
 "cq" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
 "cr" = (/obj/machinery/door/airlock/halo{name = "Weapons Locker"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
 "cs" = (/obj/machinery/light/spot{dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/controlhangar)
