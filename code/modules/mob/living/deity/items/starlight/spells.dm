@@ -16,7 +16,7 @@
 	name = "Radiant Aura"
 	desc = "This spell makes one of your followers immune to laser fire, for a short while at least."
 	base_cost = 70
-	boon_path = /spell/radiant_aura
+	boon_path = /spell/radiant_aura/starlight
 	category = DEITY_TREE_FIRECONJ
 
 /datum/deity_item/boon/burning_touch
@@ -51,7 +51,7 @@
 	name = "Disable Machinery"
 	desc = "Gives your follower a spell of disabling machinery, and mechanical hearts."
 	base_cost = 110
-	boon_path = /spell/aoe_turf/disable_tech
+	boon_path = /spell/aoe_turf/disable_tech/starlight
 	category = DEITY_TREE_FIRECONJ
 
 /datum/deity_item/boon/cure_light

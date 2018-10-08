@@ -27,9 +27,9 @@
 		if(dist < min_dist)
 			min_dist = dist
 	if(min_dist)
-		deal_damage(I.loc, round(min_dist/max(1,threshold_base)))
+		deal_damage(I.loc, round(min(5,min_dist/max(1,threshold_base))))
 	else if(keep_away_instead)
-		deal_damage(I.loc, round(threshold_base/max(1,(min_dist*2))))
+		deal_damage(I.loc, round(min(5,threshold_base/max(1,(min_dist*2)))))
 
 
 /datum/extension/deity_be_near/proc/deal_damage(var/mob/living/victim, var/mult)
