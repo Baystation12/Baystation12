@@ -71,14 +71,14 @@
 /area/constructionsite)
 "m" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "n" = (
 /obj/machinery/atmospherics/portables_connector{
-	 icon_state = "map_connector";
+	icon_state = "map_connector";
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
@@ -86,21 +86,21 @@
 /area/constructionsite)
 "o" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "p" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "q" = (
 /obj/machinery/atmospherics/portables_connector{
-	 icon_state = "map_connector";
+	icon_state = "map_connector";
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
@@ -108,7 +108,7 @@
 /area/constructionsite)
 "r" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	 icon_state = "map_scrubber_on";
+	icon_state = "map_scrubber_on";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -215,6 +215,11 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
+"R" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 
 (1,1,1) = {"
 a
@@ -1012,7 +1017,7 @@ b
 c
 w
 w
-w
+R
 c
 c
 c
@@ -1046,7 +1051,7 @@ b
 c
 b
 w
-w
+R
 c
 c
 g
@@ -1080,7 +1085,7 @@ b
 c
 w
 w
-w
+R
 c
 c
 c

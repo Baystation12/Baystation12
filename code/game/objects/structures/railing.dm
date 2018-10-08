@@ -73,6 +73,15 @@
 		return !density
 	return TRUE
 
+/obj/structure/railing/Bumped(atom/A)
+	if(isliving(A))
+		var/mob/living/L = A
+		
+		if(can_climb(L))
+			do_climb(L)
+	
+	. = ..()
+	
 /obj/structure/railing/examine(mob/user)
 	. = ..()
 	if(health < maxhealth)
