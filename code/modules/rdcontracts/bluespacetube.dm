@@ -39,15 +39,16 @@
 	account.security_level = 2
 
 	possible_contracts = subtypesof(/datum/rdcontract)
-	normal_contracts = directsubtypesof(/datum/rdcontract)
+	for(var/C in possible_contracts)
+		var/datum/rdcontract/contract = C
+		if(!initial(contract.highend))
+			LAZYADD(normal_contracts, C)
 	highend_contract_list = possible_contracts - normal_contracts
 
 	gen_contracts(num_contracts)
 
 /obj/machinery/contracttube/Destroy()
-	for(var/datum/rdcontract/C in contracts)
-		qdel(C)
-
+	QDEL_NULL_LIST(contracts)
 	QDEL_NULL(account)
 
 	if(tube_item)
@@ -68,12 +69,14 @@
 	if(!istype(O))
 		return
 
+	if(busy)
+		return
+
 	if(tube_item)
 		return
 
-	if(!user.drop_from_inventory(O))
+	if(!user.unEquip(O, src))
 		return
-	O.forceMove(src)
 	tube_item = O
 
 	update_icon()
@@ -85,7 +88,7 @@
 
 // generate n new contracts
 /obj/machinery/contracttube/proc/gen_contracts(var/n)
-	for(var/i in 0 to n)
+	for(var/i in 0 to (n-1))
 		// pick normal contracts if we have enough high end ones
 		var/chosen_contract = pick(possible_contracts)
 		if((highend_contracts == max_highend_contracts))
@@ -118,7 +121,7 @@
 			contracts.Remove(C)
 			C.complete()
 
-			qdel(tube_item)
+			QDEL_NULL(tube_item)
 			tube_item = null
 
 			gen_contracts(1)
@@ -130,7 +133,8 @@
 	
 	update_icon()
 
-	addtimer(CALLBACK(src, .proc/clear_busy), 40)
+	sleep(4	SECONDS)
+	busy = 0
 
 /obj/machinery/contracttube/proc/begin_get_purchase()
 	if(busy)
@@ -168,9 +172,7 @@
 
 	update_icon()
 
-	addtimer(CALLBACK(src, .proc/clear_busy), 40)
-
-/obj/machinery/contracttube/proc/clear_busy()
+	sleep(4	SECONDS)
 	busy = 0
 
 /obj/machinery/contracttube/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null)
@@ -197,7 +199,9 @@
 	data["has_access"] = allowed(user)
 
 	data["articles"] = list()
-	for(var/decl/hierarchy/rd_shopping_article/A in GLOB.rd_shopping_decl_root.children)
+	// putting this inline made the compiler whine
+	var/decl/hierarchy/D = decls_repository.get_decl(/decl/hierarchy/rd_shopping_article)
+	for(var/decl/hierarchy/rd_shopping_article/A in D.children)
 		data["articles"] += list(list("name" = A.name, "cost" = A.cost, "type" = "[A.item_path]"))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -205,26 +209,22 @@
 		ui = new(user, src, ui_key, "rd_contracts.tmpl", src.name, 400, 500, master_ui = master_ui)
 		ui.set_initial_data(data)
 		ui.open()
-		ui.set_auto_update(1)
 
-/obj/machinery/contracttube/Topic(href, href_list)
+/obj/machinery/contracttube/OnTopic(href, href_list)
 	if(..())
 		return 1
 
 	if(href_list["state"])
 		ui_state = href_list["state"]
-		return
+		return TOPIC_REFRESH
 
-	if(!href_list["cmd"])
-		return 0
+	if(busy)
+		return TOPIC_HANDLED
 
 	switch(href_list["cmd"])
 		if("eject")
-			if(busy)
-				return 0
-
 			if(!tube_item)
-				return 0
+				return TOPIC_HANDLED
 
 			tube_item.dropInto(loc)
 			tube_item = null
@@ -235,12 +235,13 @@
 
 		if("purchase")
 			if(!allowed(usr))
-				return 0
+				return TOPIC_HANDLED
 
 			if(!href_list["article"])
-				return 0
+				return TOPIC_HANDLED
 
-			for(var/decl/hierarchy/rd_shopping_article/A in GLOB.rd_shopping_decl_root.children)
+			var/decl/hierarchy/D = decls_repository.get_decl(/decl/hierarchy/rd_shopping_article)
+			for(var/decl/hierarchy/rd_shopping_article/A in D.children)
 				if("[A.item_path]" == href_list["article"])
 					queued_purchase = A
 					break
@@ -251,4 +252,4 @@
 		if("get_purchase")
 			begin_get_purchase()
 
-	return 1
+	return TOPIC_REFRESH

@@ -1,5 +1,3 @@
-GLOBAL_DATUM_INIT(rd_shopping_decl_root, /decl/hierarchy/rd_shopping_article, new)
-
 /decl/hierarchy/rd_shopping_article
 	name = "shop article"
 	var/cost = 0

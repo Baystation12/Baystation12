@@ -1,10 +1,9 @@
-#define UKEY_ID_INVALID 0
-
 /datum/rdcontract
 	var/name = "research contract"
 	var/desc = "a r&d contract for the delivery of an item"
 	var/ukey_name = "default" // see create_ukey()
 
+	var/highend = 0
 	// type path of the item to deliver
 	var/delivery_type = null
 	// reward for completing the contract
@@ -15,7 +14,7 @@
 	var/contractor
 
 /datum/rdcontract/New(var/account_number)
-	. = ..()
+	..()
 
 	reward_account_number = account_number
 	if(!setup())
@@ -30,7 +29,7 @@
 // get a unique id for the unique key
 // this may be called multiple times if the ID has been used before (contract wouldn't be unique)
 /datum/rdcontract/proc/get_ukey_id()
-	return UKEY_ID_INVALID
+	return null
 
 // make a ukey to ensure contract uniqueness
 // return indicates success
@@ -43,7 +42,7 @@
 		id = get_ukey_id()
 
 		// special return to indicate that no id could be made
-		if (id == UKEY_ID_INVALID)
+		if(isnull(id))
 			return 0
 
 		ukey = "[ukey_name]-[id]"

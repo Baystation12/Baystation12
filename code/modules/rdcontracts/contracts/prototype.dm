@@ -21,7 +21,7 @@
 
 /datum/rdcontract/prototype/get_ukey_id()
 	if(LAZYLEN(possible_types) == 0)
-		return UKEY_ID_INVALID
+		return null
 
 	delivery_type = pick_n_take(possible_types)
 	return delivery_type
@@ -29,7 +29,7 @@
 /datum/rdcontract/prototype/setup()
 	. = ..()
 
-	var/obj/item/proto = new delivery_type()
+	var/obj/item/proto = delivery_type
 	name = "Deliver \a [initial(proto.name)]"
 	desc = "Deliver \a [initial(proto.name)] prototype for experimental use."
 	proto = null
@@ -42,6 +42,7 @@
 
 // difficult contract but more money
 /datum/rdcontract/prototype/highend
+	highend = 1
 	reward = 800
 	possible_types = list(
 		/obj/item/weapon/storage/backpack/holding,

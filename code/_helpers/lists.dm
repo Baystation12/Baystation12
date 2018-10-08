@@ -627,8 +627,6 @@ proc/dd_sortedTextList(list/incoming)
 /datum/alarm/dd_SortValue()
 	return "[sanitize_old(last_name)]"
 
-#define subtypesof(prototype) (typesof(prototype) - prototype)
-
 // creates a list of the direct subtypes of prototype
 // e.g. given that we have /datum/a/b/c, directsubtypesof(/datum/a) returns /datum/a/b
 /proc/directsubtypesof(prototype)
