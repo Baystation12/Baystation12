@@ -46,7 +46,7 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
 
 proc/process_jani_hud(var/mob/M, var/mob/Alt)
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.jani_hud_users)
-	for (var/obj/effect/decal/cleanable/dirtyfloor in P.Mob.in_view(P.Turf))
+	for (var/obj/effect/decal/cleanable/dirtyfloor in view(P.Mob))
 		P.Client.images += dirtyfloor.hud_overlay
 
 datum/arranged_hud_process
