@@ -167,7 +167,7 @@
 	name = "UNSC Bertels Communications Room"
 
 /area/corvette/unscbertels/deck3/starboardfiringrange
-	name = "UNSC Bertels Starboard Firing Range"
+	name = "UNSC Bertels Starboard Training Grounds"
 
 /area/corvette/unscbertels/deck3/cargo1
 	name = "UNSC Bertels Deck 3 Cargo Bay 1"
