@@ -6,6 +6,8 @@
 	electric = 1
 	gender = NEUTER
 
+	species_restricted = null
+
 /obj/item/clothing/glasses/proc/process_hud(var/mob/M)
 	if(hud)
 		hud.process_hud(M)
