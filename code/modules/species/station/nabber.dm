@@ -122,8 +122,9 @@
 	unarmed_types = list(/datum/unarmed_attack/nabber)
 
 	equip_adjust = list(
-		slot_back_str = list(NORTH = list("x" = 0, "y" = 7), EAST = list("x" = 0, "y" = 8), SOUTH = list("x" = 0, "y" = 8), WEST = list("x" = 0, "y" = 8)),
-		slot_belt_str = list(NORTH = list("x" = 0, "y" = 0), EAST = list("x" = 8, "y" = 0), SOUTH = list("x" = 0, "y" = 0), WEST = list("x" = -8, "y" = 0)),
+		slot_back_str =    list(NORTH = list("x" = 0, "y" = 7), EAST = list("x" = 0, "y" = 8), SOUTH = list("x" = 0, "y" = 8), WEST = list("x" = 0, "y" = 8)),
+		slot_belt_str =    list(NORTH = list("x" = 0, "y" = 0), EAST = list("x" = 8, "y" = 0), SOUTH = list("x" = 0, "y" = 0), WEST = list("x" = -8, "y" = 0)),
+		slot_glasses_str = list(NORTH = list("x" = 0, "y" = 10), EAST = list("x" = 0, "y" = 11), SOUTH = list("x" = 0, "y" = 11), WEST = list("x" = 0, "y" = 11)),
 	)
 
 	descriptors = list(
