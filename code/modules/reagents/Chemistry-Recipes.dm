@@ -443,7 +443,7 @@
 /datum/chemical_reaction/adrenaline
 	name = "Adrenaline"
 	result = /datum/reagent/adrenaline
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/dexalin = 1)
+	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/hyperzine = 1)
 	result_amount = 2
 
 /* Solidification */
