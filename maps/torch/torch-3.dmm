@@ -802,7 +802,7 @@
 	icon_state = "railing0";
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/central)
 "bE" = (
 /obj/structure/railing/mapped{
@@ -1810,7 +1810,7 @@
 /area/vacant/chapel)
 "dP" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/forestarboard)
 "dQ" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2236,7 +2236,7 @@
 	icon_state = "railing0";
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftstarboard)
 "ev" = (
 /obj/structure/ladder,
@@ -2389,7 +2389,7 @@
 	icon_state = "railing0";
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/central)
 "eL" = (
 /obj/machinery/camera/network/engineering{
@@ -2528,7 +2528,7 @@
 	icon_state = "railing0";
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/central)
 "eX" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -2698,7 +2698,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/central)
 "fv" = (
 /obj/structure/cable{
@@ -2969,7 +2969,7 @@
 	icon_state = "railing0";
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/forestarboard)
 "gc" = (
 /obj/structure/disposalpipe/down,
@@ -2978,7 +2978,7 @@
 	icon_state = "railing0";
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/forestarboard)
 "gd" = (
 /obj/machinery/door/firedoor/border_only,
@@ -3370,7 +3370,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/lattice,
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/forestarboard)
 "gR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -12569,7 +12569,7 @@
 	icon_state = "railing0";
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "CP" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -12778,7 +12778,7 @@
 	},
 /obj/structure/railing/mapped,
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "Do" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -14510,7 +14510,7 @@
 	},
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "Ib" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
@@ -15088,7 +15088,7 @@
 /area/maintenance/seconddeck/hallway)
 "JW" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "JX" = (
 /turf/simulated/wall/r_wall/hull,
@@ -15206,7 +15206,7 @@
 	dir = 1
 	},
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "Ko" = (
 /obj/effect/floor_decal/corner/white{
@@ -15238,7 +15238,7 @@
 	icon_state = "railing0";
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "KI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -15403,9 +15403,7 @@
 	pixel_x = -32
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/fuel,
-/turf/simulated/open{
-	initial_gas = null
-	},
+/turf/simulated/floor,
 /area/space)
 "LJ" = (
 /obj/machinery/door/firedoor/border_only,
@@ -15648,7 +15646,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
 "MI" = (
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "MK" = (
 /obj/effect/floor_decal/techfloor,
@@ -16687,7 +16685,7 @@
 	icon_state = "railing0";
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/seconddeck/aftport)
 "QQ" = (
 /turf/simulated/floor/plating,
@@ -17132,9 +17130,7 @@
 	},
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/zpipe/down/fuel,
-/turf/simulated/open{
-	initial_gas = null
-	},
+/turf/simulated/floor,
 /area/space)
 "SH" = (
 /obj/machinery/firealarm{

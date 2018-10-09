@@ -833,7 +833,7 @@
 /area/maintenance/thirddeck/starboard)
 "ck" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/starboard)
 "cl" = (
 /turf/simulated/wall/prepainted,
@@ -2887,7 +2887,7 @@
 /obj/structure/disposalpipe/down{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/aftport)
 "gy" = (
 /obj/structure/disposalpipe/segment{
@@ -3430,7 +3430,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/port)
 "hK" = (
 /obj/structure/railing/mapped{
@@ -4028,7 +4028,7 @@
 	icon_state = "railing0";
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/forestarboard)
 "iU" = (
 /obj/structure/closet/secure_closet/freezer/meat,
@@ -4466,7 +4466,7 @@
 /area/crew_quarters/safe_room/thirddeck)
 "jQ" = (
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/security/habcheck)
 "jR" = (
 /obj/structure/cable/green{
@@ -5577,7 +5577,7 @@
 /area/crew_quarters/galley)
 "mG" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/aftstarboard)
 "mJ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -6476,7 +6476,7 @@
 	icon_state = "railing0";
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/starboard)
 "oI" = (
 /obj/structure/cable/green{
@@ -15411,7 +15411,7 @@
 	icon_state = "railing0";
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/port)
 "JN" = (
 /obj/random/trash,
@@ -16720,7 +16720,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/aftport)
 "Nf" = (
 /obj/structure/cable/green{
@@ -17360,7 +17360,7 @@
 	icon_state = "railing0";
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/port)
 "Pn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -17979,7 +17979,7 @@
 	dir = 1
 	},
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/aftport)
 "Rt" = (
 /obj/effect/floor_decal/corner/red{
@@ -18284,7 +18284,7 @@
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/zpipe/down/supply,
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/aftstarboard)
 "Su" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -18381,7 +18381,7 @@
 	dir = 1
 	},
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/port)
 "SK" = (
 /obj/structure/table/standard,
@@ -18927,7 +18927,7 @@
 	icon_state = "railing0";
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/starboard)
 "Uw" = (
 /obj/structure/table/standard,
@@ -19410,7 +19410,7 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/starboard)
 "VT" = (
 /obj/structure/disposalpipe/sortjunction/flipped{
@@ -19531,7 +19531,7 @@
 	icon_state = "railing0";
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/aftport)
 "Wt" = (
 /obj/machinery/door/blast/shutters{
@@ -19609,7 +19609,7 @@
 "WL" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/port)
 "WN" = (
 /obj/structure/catwalk,
@@ -19687,7 +19687,7 @@
 	},
 /obj/structure/lattice,
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/starboard)
 "Xa" = (
 /obj/machinery/light/small{
@@ -20099,7 +20099,7 @@
 	dir = 8
 	},
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/simulated/floor,
 /area/maintenance/thirddeck/port)
 "Yk" = (
 /obj/machinery/atmospherics/portables_connector{
