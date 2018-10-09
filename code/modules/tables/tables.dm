@@ -189,7 +189,7 @@
 		var/dam = 3
 		user.apply_damage(rand(0, dam), BRUTE, BP_L_ARM)
 		user.apply_damage(rand(0, dam), BRUTE, BP_R_ARM)
-		user.Stun(2)
+		user.Weaken(2)
 		user.updatehealth()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
