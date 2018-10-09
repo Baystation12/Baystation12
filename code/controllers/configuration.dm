@@ -432,6 +432,9 @@ var/list/gamemode_cache = list()
 				if ("githuburl")
 					config.githuburl = value
 
+				if ("issuereporturl")
+					config.issuereporturl = value
+
 				if ("ghosts_can_possess_animals")
 					config.ghosts_can_possess_animals = value
 
