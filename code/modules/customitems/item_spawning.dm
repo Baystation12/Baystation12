@@ -140,7 +140,7 @@
 /hook/startup/proc/load_custom_items()
 
 	var/datum/custom_item/current_data
-	for(var/line in splittext(file2text("config/custom_items.txt"), "\n"))
+	for(var/line in splittext(file2text(CUSTOM_ITEM_CONFIG), "\n"))
 
 		line = trim(line)
 		if(line == "" || !line || findtext(line, "#", 1, 2))
