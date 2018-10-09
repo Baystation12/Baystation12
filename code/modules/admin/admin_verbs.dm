@@ -161,7 +161,8 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity,
-	/client/proc/nanomapgen_DumpImage
+	/client/proc/nanomapgen_DumpImage,
+	/client/proc/reload_whitelists
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/getruntimelog,                     // allows us to access runtime logs to somebody,
@@ -954,3 +955,20 @@ var/list/admin_verbs_mentor = list(
 	T.add_spell(new S)
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("gave [key_name(T)] the spell [S].")
+
+
+/client/proc/reload_whitelists()
+	set name = "Reload Whitelists"
+	set category = "Admin"
+
+	//ignore config options for whitelists
+	load_whitelist()
+	if(config.usealienwhitelistSQL)
+		if(!load_alienwhitelistSQL())
+			log_and_message_admins("Could not load alienwhitelist via SQL")
+	else
+		load_alienwhitelist()
+
+	feedback_add_details("admin_verb","RWL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_and_message_admins("reloaded all whitelists.")
+	return

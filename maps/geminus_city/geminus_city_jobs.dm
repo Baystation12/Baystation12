@@ -44,10 +44,80 @@
 	title = "Colonist - Insurrectionist Recruiter"
 	total_positions = 1
 	head_position = 1
+	outfit_type = /decl/hierarchy/outfit/job/civ_crewmember
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Insurrection"
+
+/datum/job/ship_crew_civ
+	title = "Civilian Ship Crew"
+	total_positions = 7
+	spawn_positions = 7
+	outfit_type = /decl/hierarchy/outfit/job/civ_crewmember
+	selection_color = "#000000"
+	spawnpoint_override = "Civilian Ship Crew"
+
+/datum/job/ship_cap_civ
+	title = "Civilian Ship Captain"
+	total_positions = 2
+	spawn_positions = 2
+	outfit_type = /decl/hierarchy/outfit/job/civ_captain
+	selection_color = "#000000"
+	spawnpoint_override = "Civ Ship Cap Crew"
+
+/datum/job/ship_crew_innie
+	title = "Insurrectionist Ship Crew"
+	total_positions = 6
+	spawn_positions = 6
+	access = list(632)
+	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
+	selection_color = "#ff0000"
+	spawnpoint_override = "Innie Crew"
+
+/datum/job/ship_cap_innie
+	title = "Insurrectionist Ship Captain"
+	total_positions = 1
+	spawn_positions = 1
+	access = list(632,633)
+	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
+	selection_color = "#ff0000"
+	spawnpoint_override = "Innie Crew"
+
+/datum/job/ODST
+	title = "Orbital Drop Shock Trooper"
+	total_positions = 5
+	spawn_positions = 5
+	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
+	alt_titles = list("Private First Class"= /decl/hierarchy/outfit/job/ODSTCQC,
+	"Lance Corporal"= /decl/hierarchy/outfit/job/ODSTengineer,
+	"Corporal"= /decl/hierarchy/outfit/job/facil_ODST,
+	"Petty Officer Third Class"= /decl/hierarchy/outfit/job/ODSTMedic,
+	"Sergeant"= /decl/hierarchy/outfit/job/ODSTSharpshooter,
+	"Staff Sergeant"= /decl/hierarchy/outfit/job/ODSTstaffsergeant,
+	"Gunnery Sergeant"= /decl/hierarchy/outfit/job/ODSTgunnerysergeant,
+	"Master Sergeant" = /decl/hierarchy/outfit/job/ODSTFireteamLead)
+
+	selection_color = "#008000"
+	access = list(142,144,110,309,311)
+	spawnpoint_override = "ODST Rifleman Spawn"
+	is_whitelisted = 1
+
+/datum/job/ODSTO
+	title = "Orbital Drop Shock Trooper Officer"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/ODSTsecondlieutenant
+	alt_titles = list("Second Lieutenant" = /decl/hierarchy/outfit/job/ODSTsecondlieutenant,
+	"First Lieutenant" = /decl/hierarchy/outfit/job/ODSTfirstlieutenant,
+	"Captain" = /decl/hierarchy/outfit/job/ODSTcaptain,
+	"Major" = /decl/hierarchy/outfit/job/ODSTmajor,
+	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/ODSTltcolonel,
+	"Colonel" = /decl/hierarchy/outfit/job/ODSTcolonel)
+	selection_color = "#008000"
+	access = list(142,144,110,300,306,309,310,311)
+	spawnpoint_override = "ODST Squad Leader Spawn"
+	is_whitelisted = 1
 
 	create_record = 0
 	account_allowed = 1

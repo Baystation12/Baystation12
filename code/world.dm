@@ -676,11 +676,13 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	GLOB.world_runtime_log << "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------"
 
-#define FAILED_DB_CONNECTION_CUTOFF 1//5	//5 takes a few minutes. we can cut down server startup times by reducing this
+#define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
 var/failed_old_db_connections = 0
 
 /hook/startup/proc/connectDB()
+	if(!config.do_sql_connection)
+		return 1
 	if(!setup_database_connection())
 		world.log << "Your server failed to establish a connection with the feedback database."
 	else

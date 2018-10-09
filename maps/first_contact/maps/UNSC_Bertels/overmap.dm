@@ -5,6 +5,7 @@
 	icon = 'maps/first_contact/maps/UNSC_Bertels/Heavycorvette.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
+	vessel_mass = 4
 
 	map_bounds = list(4,99,142,52)
 

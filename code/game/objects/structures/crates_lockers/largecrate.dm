@@ -82,6 +82,11 @@
 /obj/structure/largecrate/animal/cat/bones
 	held_type = /mob/living/simple_animal/cat/fluff/bones
 
+/obj/structure/largecrate/animal/cat/jade
+	name = "Airtight Cat Carrier"
+	desc = "An airtight carrier designed for cats, It has tag that reads 'Property of Lieutenant Colonel Kashada'"
+	held_type = /mob/living/simple_animal/cat/fluff/kitten/jade
+
 /obj/structure/largecrate/animal/chick
 	name = "chicken crate"
 	held_count = 5

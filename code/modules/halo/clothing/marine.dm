@@ -50,8 +50,8 @@
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "armor"
-	icon_state = "M52B Body Armor"
+	item_state = "M52B Body Armor regular"
+	icon_state = "M52B Body Armor regular"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
@@ -165,6 +165,13 @@
 /obj/item/weapon/card/id/odst
 	name = "ODST ID Badge"
 	desc = "An identification card worn by members of the 113th Shock Troops Division."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
+/obj/item/weapon/card/id/oni
+	name = "ONI ID Badge"
+	desc = "An identification card worn by members of the Office Of Naval Intelligence."
 	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
 	icon_state = "id"
 	item_state = "card-id"

@@ -149,30 +149,30 @@
 	deck_gun_area = /area/corvette/unscthorin/starboardbattery
 
 //Misc Stuff//
-/obj/random_corvette_alarm_button
+/obj/random_corvette_alarm_buttonthorin
 	name = "Random Corvette Alarm Button"
 
-/obj/random_corvette_alarm_button/New()
+/obj/random_corvette_alarm_buttonthorin/New()
 	var/obj/to_spawn = pick(list(\
-	/obj/machinery/button/toggle/alarm_button/corvette = 75,/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,\
-	/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,/obj/machinery/button/toggle/alarm_button/corvette/v4 = 5
+	/obj/machinery/button/toggle/alarm_button/corvettethorin = 75,/obj/machinery/button/toggle/alarm_button/corvettethorin/v2 = 10,\
+	/obj/machinery/button/toggle/alarm_button/corvettethorin/v2 = 10,/obj/machinery/button/toggle/alarm_button/corvettethorin/v4 = 5
 	))
 	new to_spawn (loc)
 
-/obj/random_corvette_alarm_button/Initialize()
+/obj/random_corvette_alarm_buttonthorin/Initialize()
 	return INITIALIZE_HINT_QDEL
 
-/obj/machinery/button/toggle/alarm_button/corvette
+/obj/machinery/button/toggle/alarm_button/corvettethorin
 	area_base = /area/corvette/unscthorin
 
-/obj/machinery/button/toggle/alarm_button/corvette/v2
+/obj/machinery/button/toggle/alarm_button/corvettethorin/v2
 	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j1.ogg'
 	alarm_loop_time = 4.898 SECONDS //The amount of time it takes for the alarm sound to end. Used for restarting the sound.
 
-/obj/machinery/button/toggle/alarm_button/corvette/v3
+/obj/machinery/button/toggle/alarm_button/corvettethorin/v3
 	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j2.ogg'
 	alarm_loop_time = 6.535 SECONDS
 
-/obj/machinery/button/toggle/alarm_button/corvette/v4
+/obj/machinery/button/toggle/alarm_button/corvettethorin/v4
 	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j3.ogg'
 	alarm_loop_time = 15.267 SECONDS

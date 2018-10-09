@@ -8,7 +8,7 @@
 	anchored = 1
 
 /obj/structure/food_nipple/attack_hand(var/mob/living/carbon/user)
-	if(istype(user, /mob/living/carbon/human/covenant/unggoy))
+	if(istype(user, /mob/living/carbon/human))
 		var/turf/T = user.loc
 		var/turf/forward = get_step(src,dir)
 		if(T != forward)
