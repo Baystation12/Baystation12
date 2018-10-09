@@ -1,4 +1,0 @@
-author: "greggbot"
-delete-after: True
-changes: 
-  - bugfix: "IC seed extractor now properly creates the appropriate seed and deletes the fruit."
