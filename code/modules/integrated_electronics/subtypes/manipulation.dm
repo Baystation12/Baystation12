@@ -319,9 +319,11 @@
 	var/list/seed_output = list()
 	for(var/i in 1 to rand(1,4))
 		var/obj/item/seeds/seeds = new(get_turf(O))
+		seeds.seed = SSplants.seeds[O.plantname]
 		seeds.seed_type = SSplants.seeds[O.seed.name]
 		seeds.update_seed()
 		seed_output += weakref(seeds)
+	qdel(O)
 
 	if(seed_output.len)
 		set_pin_data(IC_OUTPUT, 1, seed_output)
