@@ -234,7 +234,7 @@ var/list/ai_verbs_default = list(
 	var/list/custom_icons = list()
 	LAZYSET(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
 
-	var/file = file2text("config/custom_sprites.txt")
+	var/file = file2text(CUSTOM_ITEM_SYNTH_CONFIG)
 	var/lines = splittext(file, "\n")
 
 	var/custom_index = 1

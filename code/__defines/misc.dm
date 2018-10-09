@@ -87,6 +87,12 @@
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
+#ifndef CUSTOM_ITEM_CONFIG
+#define CUSTOM_ITEM_CONFIG "config/custom_items.txt"
+#endif
+#ifndef CUSTOM_ITEM_SYNTH_CONFIG
+#define CUSTOM_ITEM_SYNTH_CONFIG "config/custom_sprites.txt"
+#endif
 #ifndef CUSTOM_ITEM_OBJ
 #define CUSTOM_ITEM_OBJ 'icons/obj/custom_items_obj.dmi'
 #endif
