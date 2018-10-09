@@ -1,0 +1,5 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - tweak: "janihud now bases vision off of what the mob wearing it can see instead of the tile"
+  - rscadd: "nabbers can now use HUDs"
