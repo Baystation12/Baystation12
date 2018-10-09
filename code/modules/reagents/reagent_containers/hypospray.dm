@@ -112,7 +112,7 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector
 	name = "autoinjector"
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
-	icon_state = "blue"
+	icon_state = "injector"
 	item_state = "autoinjector"
 	amount_per_transfer_from_this = 5
 	volume = 5
@@ -120,6 +120,7 @@
 	slot_flags = SLOT_BELT | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
+	var/band_color = COLOR_CYAN
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
@@ -136,10 +137,12 @@
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/update_icon()
+	overlays.Cut()
 	if(reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
+	overlays+= overlay_image(icon,"injector_band",band_color,RESET_COLOR)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
@@ -150,25 +153,25 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
-	icon_state = "green"
+	band_color = COLOR_GREEN
 	starts_with = list(/datum/reagent/dylovene = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
-	icon_state = "purple"
+	band_color = COLOR_PURPLE
 	starts_with = list(/datum/reagent/tramadol = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/combatpain
 	name = "autoinjector (oxycodone)"
-	icon_state = "black"
+	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
-	icon_state = "yellow"
+	band_color = COLOR_AMBER
 	starts_with = list(/datum/reagent/hyronalin = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"
-	icon_state = "black"
+	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
