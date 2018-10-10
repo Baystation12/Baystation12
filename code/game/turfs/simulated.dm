@@ -109,7 +109,11 @@
 
 		if(src.wet)
 
-			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(16/wet))) ) )
+			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
+				return
+
+			// skillcheck for slipping
+			if(!prob(min(100, M.skill_fail_chance(SKILL_HAULING, 100, SKILL_MAX+1)/(3/wet))))
 				return
 
 			var/slip_dist = 1
