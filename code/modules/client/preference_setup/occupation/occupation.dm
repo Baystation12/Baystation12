@@ -253,15 +253,18 @@
 	else if(href_list["show_branches"])
 		var/rank = href_list["show_branches"]
 		var/datum/job/job = job_master.GetJob(rank)
-		to_chat(user, "<span clas='notice'>Valid branches for [rank]: [job.get_branches()]</span>")
+		if(job)
+			to_chat(user, "<span clas='notice'>Valid branches for [rank]: [job.get_branches()]</span>")
 	else if(href_list["show_ranks"])
 		var/rank = href_list["show_ranks"]
 		var/datum/job/job = job_master.GetJob(rank)
-		to_chat(user, "<span clas='notice'>Valid ranks for [rank] ([pref.char_branch]): [job.get_ranks(pref.char_branch)]</span>")
+		if(job)
+			to_chat(user, "<span clas='notice'>Valid ranks for [rank] ([pref.char_branch]): [job.get_ranks(pref.char_branch)]</span>")
 	else if(href_list["set_skills"])
 		var/rank = href_list["set_skills"]
 		var/datum/job/job = job_master.GetJob(rank)
-		open_skill_setup(user, job)
+		if(job)
+			open_skill_setup(user, job)
 
 	//From the skills popup
 
