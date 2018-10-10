@@ -1,0 +1,4 @@
+author: "Atebite"
+delete-after: True
+changes: 
+  - tweak: "Added a skillcheck for slips based on athletics"
