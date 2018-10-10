@@ -12430,6 +12430,11 @@
 	pixel_x = -32;
 	req_access = newlist()
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/white,
 /area/aquila/medical)
 "Dr" = (
@@ -13721,15 +13726,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
-"IT" = (
-/obj/structure/closet,
-/obj/item/device/tape/random,
-/obj/item/device/tape/random,
-/obj/item/device/tape/random,
-/obj/item/device/taperecorder,
-/obj/effect/floor_decal/corner/blue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/bridge/disciplinary_board_room)
 "IJ" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -13750,6 +13746,15 @@
 	},
 /turf/simulated/floor/airless,
 /area/aquila/secure_storage)
+"IT" = (
+/obj/structure/closet,
+/obj/item/device/tape/random,
+/obj/item/device/tape/random,
+/obj/item/device/tape/random,
+/obj/item/device/taperecorder,
+/obj/effect/floor_decal/corner/blue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/bridge/disciplinary_board_room)
 "Jb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
@@ -14062,7 +14067,8 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/floor/plating)
+/turf/simulated/floor/plating,
+/area/space)
 "KN" = (
 /obj/machinery/power/port_gen/pacman{
 	anchored = 1;
@@ -14976,15 +14982,6 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/medical)
-"PY" = (
-/obj/structure/railing/mapped,
-/obj/structure/railing/mapped{
-	tag = "icon-railing0 (EAST)";
-	icon_state = "railing0";
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
 "Qb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
