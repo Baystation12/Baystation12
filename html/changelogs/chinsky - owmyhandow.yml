@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Disarming is now riskier. There's a chance to hurt your hand on the weapon you're going for instead, with chance adjusted based on skill difference / being flashed etc / being on help intent."
