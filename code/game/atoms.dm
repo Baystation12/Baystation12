@@ -15,6 +15,7 @@
 	var/datum/reagents/reagents = null
 
 	var/list/climbers
+	var/climb_speed_mult = 1
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
@@ -485,7 +486,7 @@ its easier to just keep the beam vertical.
 	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
 	LAZYDISTINCTADD(climbers,user)
 
-	if(!do_after(user,(issmall(user) ? 30 : 50), src))
+	if(!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src))
 		LAZYREMOVE(climbers,user)
 		return 0
 

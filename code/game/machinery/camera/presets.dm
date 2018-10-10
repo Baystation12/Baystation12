@@ -22,9 +22,6 @@
 /obj/machinery/camera/network/thunder
 	network = list(NETWORK_THUNDER)
 
-/obj/machinery/camera/network/nanotrasen
-	network = list(NETWORK_NANOTRASEN)
-
 // EMP
 
 /obj/machinery/camera/emp_proof/Initialize()
