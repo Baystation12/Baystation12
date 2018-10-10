@@ -80,6 +80,7 @@
 	tube_item = O
 
 	update_icon()
+	SSnano.update_uis(src)
 
 	. = ..()
 
@@ -110,6 +111,7 @@
 		return 0
 
 	busy = 1
+	SSnano.update_uis(src)
 
 	flick("downfilled", src)
 	addtimer(CALLBACK(src, .proc/finish_deliver), 41)
@@ -122,7 +124,6 @@
 			C.complete()
 
 			QDEL_NULL(tube_item)
-			tube_item = null
 
 			gen_contracts(1)
 			anim = "upempty"
@@ -135,6 +136,8 @@
 
 	sleep(4	SECONDS)
 	busy = 0
+
+	SSnano.update_uis(src)
 
 /obj/machinery/contracttube/proc/begin_get_purchase()
 	if(busy)
@@ -154,6 +157,7 @@
 		return 0
 
 	busy = 1
+	SSnano.update_uis(src)
 
 	var/datum/transaction/T = new("Torch, Ltd. Research Dept.", "Article purchase ([queued_purchase.name])", -queued_purchase.cost, "BlueSupply Services")
 	account.do_transaction(T)
@@ -174,6 +178,8 @@
 
 	sleep(4	SECONDS)
 	busy = 0
+
+	SSnano.update_uis(src)
 
 /obj/machinery/contracttube/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null)
 	var/list/data = list()

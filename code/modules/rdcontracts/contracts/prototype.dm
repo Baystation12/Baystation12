@@ -32,7 +32,6 @@
 	var/obj/item/proto = delivery_type
 	name = "Deliver \a [initial(proto.name)]"
 	desc = "Deliver \a [initial(proto.name)] prototype for experimental use."
-	proto = null
 
 /datum/rdcontract/prototype/check_completion(var/obj/item/O)
 	if(!istype(O, delivery_type))
