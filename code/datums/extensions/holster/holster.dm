@@ -85,6 +85,7 @@
 			playsound(get_turf(atom_holder), sound_out, sound_vol)
 		holstered.add_fingerprint(user)
 		user.put_in_hands(holstered)
+		holstered.update_icon()
 		storage.w_class = initial(storage.w_class)
 		clear_holster()
 		atom_holder.update_icon()
