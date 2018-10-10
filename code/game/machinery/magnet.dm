@@ -311,7 +311,7 @@
 
 			// Broadcast the signal
 
-			radio_connection.post_signal(src, signal, filter = RADIO_MAGNETS)
+			radio_connection.post_signal(src, signal, radio_filter = RADIO_MAGNETS)
 
 			spawn(1)
 				updateUsrDialog() // pretty sure this increases responsiveness
@@ -378,7 +378,7 @@
 
 			// Broadcast the signal
 			spawn()
-				radio_connection.post_signal(src, signal, filter = RADIO_MAGNETS)
+				radio_connection.post_signal(src, signal, radio_filter = RADIO_MAGNETS)
 
 			if(speed == 10)
 				sleep(1)
