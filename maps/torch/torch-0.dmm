@@ -2081,6 +2081,18 @@
 "eu" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/exploration)
+"ev" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "ew" = (
 /obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
@@ -3792,15 +3804,15 @@
 /area/quartermaster/storage)
 "iS" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/mining{
-	id_tag = "hangarexit";
-	name = "Hangar Bay";
-	req_access = list(73)
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/mining{
+	id_tag = "hangarexit2";
+	name = "Hangar Bay";
+	req_access = list(73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar)
@@ -4554,10 +4566,13 @@
 /area/quartermaster/exploration)
 "kx" = (
 /obj/effect/catwalk_plated,
-/obj/machinery/firealarm{
-	dir = 8;
+/obj/machinery/button/remote/airlock{
+	desc = "A remote control-switch for airlocks.";
+	id = "hangarexit";
+	name = "Hangar Exit Door Control";
 	pixel_x = -24;
-	pixel_y = 0
+	pixel_y = 0;
+	req_access = list(207)
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -6716,10 +6731,13 @@
 /area/hallway/primary/fifthdeck/fore)
 "pb" = (
 /obj/effect/catwalk_plated,
-/obj/machinery/firealarm{
-	dir = 4;
-	layer = 3.3;
-	pixel_x = 26
+/obj/machinery/button/remote/airlock{
+	desc = "A remote control-switch for airlocks.";
+	id = "hangarexit2";
+	name = "Hangar Exit Door Control";
+	pixel_x = 24;
+	pixel_y = 0;
+	req_access = list(207)
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -12305,8 +12323,10 @@
 	icon_state = "nosmoking";
 	pixel_y = -32
 	},
-/obj/machinery/atmospherics/binary/pump{
-	dir = 1
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 1;
+	name = "CO2 to Hangar";
+	target_pressure = 15000
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/shuttlefuel)
@@ -12968,6 +12988,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"IO" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	layer = 3.3;
+	pixel_x = 26
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "IR" = (
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/light_switch{
@@ -32690,7 +32722,7 @@ aX
 aX
 aX
 kx
-kU
+ev
 aX
 aX
 aX
@@ -37942,7 +37974,7 @@ HY
 Gw
 ih
 pb
-kT
+IO
 aX
 aX
 aX
