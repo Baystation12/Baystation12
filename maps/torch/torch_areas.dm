@@ -1002,6 +1002,11 @@
 	icon_state = "medbay3"
 	ambience = list('sound/ambience/signal.ogg')
 
+/area/medical/washroom
+	name = "\improper Infirmary Washroom"
+	icon_state = "toilet"
+	sound_env = SMALL_ENCLOSED
+
 // Chapel
 /area/chapel/crematorium
 	name = "\improper Crematorium"

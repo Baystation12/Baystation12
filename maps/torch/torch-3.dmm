@@ -206,12 +206,6 @@
 "ax" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/aftstarboard)
-"ay" = (
-/obj/structure/closet/crate/medical,
-/obj/item/bodybag,
-/obj/item/bodybag,
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/central)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
@@ -259,12 +253,13 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/auxsolarstarboard)
 "aF" = (
-/obj/machinery/door/airlock/maintenance{
-	req_access = list(12)
-	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	name = "Medical Storage Maintenance";
+	req_access = list(5,12)
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/maintenance/seconddeck/central)
+/area/storage/medical)
 "aG" = (
 /obj/machinery/door/blast/regular{
 	id = "trash";
@@ -641,6 +636,7 @@
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
+/obj/structure/catwalk,
 /obj/item/device/flashlight/pen,
 /obj/item/device/flashlight/pen,
 /obj/item/device/flashlight/pen,
@@ -792,6 +788,10 @@
 	dir = 4;
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/seconddeck/central)
@@ -1415,12 +1415,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/expedition)
-"cZ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/straight_jacket,
-/obj/item/clothing/mask/muzzle,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/medical)
 "da" = (
 /obj/structure/table/rack,
 /obj/item/device/flashlight,
@@ -1937,6 +1931,7 @@
 /area/maintenance/seconddeck/central)
 "ec" = (
 /obj/effect/floor_decal/industrial/warning,
+/obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1952,7 +1947,6 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "ed" = (
@@ -2306,6 +2300,11 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
 /turf/simulated/open,
 /area/maintenance/seconddeck/central)
 "eL" = (
@@ -2392,12 +2391,12 @@
 /area/storage/tech)
 "eR" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor,
 /area/storage/expedition)
 "eS" = (
 /obj/structure/table/rack,
@@ -2436,18 +2435,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
-"eW" = (
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/open,
-/area/maintenance/seconddeck/central)
 "eX" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -3329,31 +3316,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
-"hd" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/expedition)
 "he" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -3901,13 +3863,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
-"id" = (
-/obj/item/roller,
-/obj/item/roller,
-/obj/item/roller,
-/obj/item/roller,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/medical)
 "ie" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/techfloor,
@@ -4167,11 +4122,6 @@
 /turf/simulated/floor/plating,
 /area/engineering/locker_room)
 "iJ" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/storage/expedition)
@@ -7138,6 +7088,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
+"pz" = (
+/obj/structure/closet/crate/medical,
+/obj/item/bodybag,
+/obj/item/bodybag,
+/obj/item/clothing/suit/straight_jacket,
+/obj/item/clothing/mask/muzzle,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "pB" = (
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -8944,6 +8903,12 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
+"tG" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "tJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	icon_state = "intact";
@@ -10026,6 +9991,7 @@
 /turf/simulated/wall/prepainted,
 /area/janitor)
 "wG" = (
+/obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
@@ -10040,7 +10006,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "wH" = (
@@ -14174,6 +14139,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"HT" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/expedition)
 "HY" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
@@ -14712,6 +14685,14 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)
+"JN" = (
+/obj/item/roller,
+/obj/item/roller,
+/obj/item/roller,
+/obj/item/roller,
+/obj/structure/table/rack,
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "JS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -16109,6 +16090,15 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"PO" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
+/area/storage/expedition)
 "PP" = (
 /obj/machinery/door/blast/regular{
 	dir = 4;
@@ -17233,14 +17223,35 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
 "UI" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor,
 /area/storage/expedition)
 "UY" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -17914,6 +17925,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
 "XI" = (
+/obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 8
@@ -17925,7 +17937,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "XS" = (
@@ -37232,7 +37243,7 @@ cn
 cW
 dy
 ec
-eW
+aV
 bD
 gk
 Pr
@@ -37630,11 +37641,11 @@ ar
 aa
 aa
 aa
-aD
-aD
-aD
-cU
-cU
+fT
+fT
+aB
+cp
+cp
 aF
 ee
 kg
@@ -37834,12 +37845,12 @@ aa
 aa
 aa
 aa
-aC
-bK
-bK
-aV
+aB
+tG
+bq
+bq
 ee
-UI
+eR
 Ge
 Je
 ee
@@ -38035,13 +38046,13 @@ ag
 ag
 ag
 ag
-aC
-aC
-ay
+aB
+aB
+bq
+JN
+pz
 ee
-ee
-ee
-UI
+eR
 Ge
 Je
 ee
@@ -38238,11 +38249,11 @@ ag
 aB
 aB
 aB
-cp
-cp
+bq
+bq
 ee
-hd
-He
+ee
+ee
 UI
 Ge
 ee
@@ -38440,12 +38451,12 @@ aa
 aB
 nb
 bP
+bq
 cq
-cZ
 ee
 ef
-Ge
-UI
+HT
+PO
 iK
 ee
 GM
@@ -38847,8 +38858,8 @@ bq
 db
 PD
 ee
-Ge
-UI
+He
+eR
 bZ
 Je
 ee
@@ -39045,7 +39056,7 @@ aa
 aa
 aB
 dc
-id
+bq
 cp
 cp
 ee
