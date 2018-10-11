@@ -20,6 +20,8 @@
 
 		<h4>Additional</h4>
 		<div class=itemGroup>
+			<div class="item">{{:helper.link('Unbolt saferoom doors', null, {'action' : 'unbolt_doors'})}}</div>
+			<div class="item">{{:helper.link('Bolt saferoom doors', null, {'action' : 'bolt_doors'})}}</div>		
 			{{for data.evac_options}}
 				<div class="item">
 					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.isAI)) ? 'disabled' : null, 'redButton')}}
