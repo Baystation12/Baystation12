@@ -127,8 +127,11 @@
 
 //FALLING STUFF
 
-//Holds fall checks that should not be overriden by children
 /atom/movable/proc/fall()
+	SSopen_space.do_fall(src)
+
+//Holds fall checks that should not be overriden by children
+/atom/movable/proc/should_fall()
 	if(!isturf(loc))
 		return
 
@@ -149,15 +152,7 @@
 		return
 
 	if(can_fall())
-		// We spawn here to let the current move operation complete before we start falling. fall() is normally called from
-		// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
-		// or normal movement so other move behavior can continue.
-		var/mob/M = src
-		var/is_client_moving = (ismob(M) && M.moving)
-		spawn(0)
-			if(is_client_moving) M.moving = 1
-			handle_fall(below)
-			if(is_client_moving) M.moving = 0
+		return TRUE
 
 //For children to override
 /atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
@@ -205,22 +200,12 @@
 	if(..())
 		return species.can_fall(src)
 
-/atom/movable/proc/handle_fall(var/turf/landing)
-	forceMove(landing)
-	if(locate(/obj/structure/stairs) in landing)
-		return 1
-	else
-		handle_fall_effect(landing)
-
-/atom/movable/proc/handle_fall_effect(var/turf/landing)
-	if(istype(landing, /turf/simulated/open))
-		visible_message("\The [src] falls from the deck above through \the [landing]!", "You hear a whoosh of displaced air.")
-	else
-		visible_message("\The [src] falls from the deck above and slams into \the [landing]!", "You hear something slam into the deck.")
-		if(fall_damage())
-			for(var/mob/living/M in landing.contents)
-				visible_message("\The [src] hits \the [M.name]!")
-				M.take_overall_damage(fall_damage())
+/atom/movable/proc/handle_fall_effect(var/turf/landing, var/turf/start_loc)
+	visible_message("\The [src] falls from the deck above and slams into \the [landing]!", blind_message = "You hear something slam into the deck.")
+	if(fall_damage())
+		for(var/mob/living/M in landing.contents)
+			visible_message("\The [src] hits \the [M.name]!")
+			M.take_overall_damage(fall_damage())
 
 /atom/movable/proc/fall_damage()
 	return 0
@@ -232,12 +217,12 @@
 		return 100
 	return base_storage_cost(w_class)
 
-/mob/living/carbon/human/handle_fall_effect(var/turf/landing)
+/mob/living/carbon/human/handle_fall_effect(var/turf/landing, var/turf/start_loc)
 	if(species && species.handle_fall_special(src, landing))
 		return
 
 	..()
-	var/damage = 10
+	var/damage = 10 * (start_loc.z - landing.z)
 	apply_damage(rand(0, damage), BRUTE, BP_HEAD)
 	apply_damage(rand(0, damage), BRUTE, BP_CHEST)
 	apply_damage(rand(0, damage), BRUTE, BP_L_LEG)

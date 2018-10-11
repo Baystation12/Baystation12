@@ -15,6 +15,8 @@ SUBSYSTEM_DEF(open_space)
 	var/counter = 1 //Can't use .len because we need to iterate in order
 	var/times_updated = 0
 
+	var/list/fallers = list() // Currently falling atoms
+
 /datum/controller/subsystem/open_space/Initialize()
 	. = ..()
 	GLOB.over_OS_darkness.plane = OVER_OPENSPACE_PLANE
@@ -91,3 +93,57 @@ SUBSYSTEM_DEF(open_space)
 		if(isopenspace(T))
 			SSopen_space.add_turf(T, 1)
 	. = ..() // Important that this be at the bottom, or we will have been moved to nullspace.
+
+/datum/controller/subsystem/open_space/proc/do_fall(atom/movable/faller)
+	set waitfor = FALSE
+	var/datum/fall/fall_datum = fallers[faller]
+	if(!faller.should_fall())
+		if(fall_datum)
+			fall_datum.end_fall()
+			qdel(fall_datum)
+		return
+	if(!fall_datum)
+		fall_datum = new (faller)
+	fall_datum.process_fall()
+
+/datum/fall
+	var/atom/movable/faller
+	var/turf/start_loc
+	var/is_client_moving
+
+/datum/fall/New(atom/movable/faller)
+	src.faller = faller
+	GLOB.destroyed_event.register(faller, src, .proc/qdel_self)
+	SSopen_space.fallers[faller] = src
+	start_loc = faller.loc // Guaranteed to be a turf by earlier checks, in fact
+
+	var/mob/M = faller
+	is_client_moving = istype(M) && M.moving
+
+/datum/fall/Destroy()
+	GLOB.destroyed_event.unregister(faller, src, .proc/qdel_self)
+	SSopen_space.fallers -= faller
+	faller = null
+	start_loc = null
+	return ..()
+
+/datum/fall/proc/process_fall()
+	var/mob/M = faller
+	if(is_client_moving)
+		M.moving = 1
+	faller.forceMove(GetBelow(faller)) // Will call do_fall again from Entered(), which will run after this completes.
+	if(!faller)
+		return // Check for possible deletion on Entered(); this will call the listener for actual deletion handling (nulling faller), but we still need to stop.
+	if(is_client_moving)
+		M.moving = 0
+	if(!faller.should_fall(faller))
+		end_fall()
+		qdel(src)
+		return
+	faller.visible_message("\The [faller] falls from the deck above through \the [faller.loc]!", "You hear a whoosh of displaced air.")
+
+/datum/fall/proc/end_fall()
+	var/turf/landing = get_turf(faller)
+	if((start_loc.z - faller.z <= 1) && (locate(/obj/structure/stairs) in landing))
+		return
+	faller.handle_fall_effect(landing, start_loc)
