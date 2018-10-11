@@ -213,7 +213,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/hud/med(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
-	src.modules += new /obj/item/weapon/reagent_containers/borghypo/surgeon(src)
+	src.modules += new /obj/item/weapon/reagent_containers/robot/hypo/surgeon(src)
 	src.modules += new /obj/item/weapon/scalpel/manager(src)
 	src.modules += new /obj/item/weapon/hemostat(src)
 	src.modules += new /obj/item/weapon/retractor(src)
@@ -273,7 +273,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/reagent_scanner/adv(src)
 	src.modules += new /obj/item/robot_rack/roller(src, 1)
 	src.modules += new /obj/item/robot_rack/body_bag(src)
-	src.modules += new /obj/item/weapon/reagent_containers/borghypo/crisis(src)
+	src.modules += new /obj/item/weapon/reagent_containers/robot/hypo/crisis(src)
 	src.modules += new /obj/item/weapon/shockpaddles/robot(src)
 	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
@@ -541,7 +541,7 @@ var/global/list/robot_modules = list(
 	src.modules += L
 
 	src.modules += new /obj/item/weapon/tray/robotray(src)
-	src.modules += new /obj/item/weapon/reagent_containers/borghypo/service(src)
+	src.modules += new /obj/item/weapon/reagent_containers/robot/hypo/service(src)
 	src.emag = new /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer(src)
 
 	var/datum/reagents/R = src.emag.create_reagents(50)
