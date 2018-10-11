@@ -368,6 +368,3 @@
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
 	starting_accessories = null
-
-/obj/item/clothing/head/helmet/space/void/exploration
-	camera = /obj/machinery/camera/network/exploration
