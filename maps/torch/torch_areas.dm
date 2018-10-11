@@ -806,6 +806,10 @@
 /area/quartermaster/shuttlefuel
 	name = "\improper Shuttle Fuel Bay"
 	icon_state = "toxstorage"
+	
+/area/quartermaster/oxygenstores
+	name = "\improper Oxygen Storage Bay"
+	icon_state = "toxstorage"
 
 /area/quartermaster/hangar
 	name = "\improper Hangar Deck"
