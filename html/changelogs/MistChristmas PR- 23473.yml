@@ -1,5 +1,4 @@
 author: MistChristmas
 delete-after: True
 changes: 
-  - rscadd: "Added a new Oxygen Storage Bay in Hanger. Added Oxygen tank and canister to the Charon"
-  - rscdel: "Removed Air tank and canister from the Charon"
+  - maptweak: "Added a new Oxygen Storage Bay in Hanger. Added Oxygen tank and canister to the Charon. Removed Air tank and canister from the Charon"
