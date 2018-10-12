@@ -568,6 +568,11 @@
 
 	return 1
 
+/obj/item/weapon/rig/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+	if(check_suit_access(user))
+		return STATUS_INTERACTIVE
+	else return ..()
+
 //TODO: Fix Topic vulnerabilities for malfunction and AI override.
 /obj/item/weapon/rig/Topic(href,href_list)
 	if(!check_suit_access(usr))
