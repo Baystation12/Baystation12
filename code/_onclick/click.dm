@@ -348,6 +348,9 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	mouse_opacity = 2
 	screen_loc = "CENTER-7,CENTER-7"
 
+/obj/screen/click_catcher/Destroy()
+	return QDEL_HINT_LETMELIVE
+
 /proc/create_click_catcher()
 	. = list()
 	for(var/i = 0, i<15, i++)
