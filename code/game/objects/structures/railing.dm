@@ -248,7 +248,7 @@
 		if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(do_after(user, 20, src))
-				if(!anchored)
+				if(anchored)
 					return
 				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
 				material.place_sheet(loc, 2)
