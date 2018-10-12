@@ -70,6 +70,7 @@
 	option_target = EVAC_OPT_ABANDON_SHIP
 	needs_syscontrol = TRUE
 	silicon_allowed = TRUE
+	abandon_ship = TRUE
 
 /datum/evacuation_option/abandon_ship/execute(mob/user)
 	if (!ticker || !evacuation_controller)

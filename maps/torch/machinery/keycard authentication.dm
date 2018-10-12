@@ -12,7 +12,9 @@
 
 	user.set_machine(src)
 
-	var/dat = "<h1>Keycard Authentication Device</h1>"
+	var/list/dat = list()
+	
+	dat += "<h1>Keycard Authentication Device</h1>"
 
 	dat += "This device is used to trigger some high security events. It requires the simultaneous swipe of two high-level ID cards."
 	dat += "<br><hr><br>"
@@ -87,6 +89,6 @@
 				to_chat(usr, "<span class='danger'>Unable to initiate evacuation!</span>")
 				return
 			for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
-				if(EO.type == /datum/evacuation_option/abandon_ship)
+				if(EO.abandon_ship)
 					evacuation_controller.handle_evac_option(EO.option_target, usr)
 					return
