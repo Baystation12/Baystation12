@@ -1717,6 +1717,7 @@
 #include "code\modules\maps\ruins.dm"
 #include "code\modules\maps\swapmaps.dm"
 #include "code\modules\materials\_materials.dm"
+#include "code\modules\materials\blacksmith.dm"
 #include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
 #include "code\modules\materials\material_synth.dm"
