@@ -517,9 +517,10 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket/heat(weakref/message_to)
 	..()
-	var/mob/user = message_to.resolve()
-	if(user)
-		to_chat(user, "You think \the [src] is ready to eat about now.")
+	if(message_to)
+		var/mob/user = message_to.resolve()
+		if(user)
+			to_chat(user, "You think \the [src] is ready to eat about now.")
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket
 	name = "\improper Donk-pocket"
