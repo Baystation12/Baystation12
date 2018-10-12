@@ -2,7 +2,7 @@ GLOBAL_VAR_INIT(total_runtimes, 0)
 GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 
 #ifdef DEBUG
-/world/Error(exception/E, datum/e_src)
+/world/Error(exception/E)
 	if(!istype(E)) //Something threw an unusual exception
 		log_world("\[[time_stamp()]] Uncaught exception: [E]")
 		return ..()

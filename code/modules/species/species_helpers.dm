@@ -28,7 +28,7 @@ var/list/stored_shock_by_ref = list()
 			// Apply all pixel shifts for each direction.
 			for(var/shift_facing in shifts)
 				var/list/facing_list = shifts[shift_facing]
-				var/use_dir = text2dir(shift_facing)
+				var/use_dir = text2num(shift_facing)
 				var/icon/equip = new(mob_icon, icon_state = mob_state, dir = use_dir)
 				var/icon/canvas = new(icon_template)
 				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
