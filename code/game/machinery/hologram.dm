@@ -141,6 +141,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	log_admin("[key_name(caller_id)] just established a holopad connection from [sourcepad.loc.loc] to [src.loc.loc]")
 
 /obj/machinery/hologram/holopad/proc/end_call(mob/user)
+	if(!caller_id)
+		return
 	caller_id.unset_machine()
 	caller_id.reset_view() //Send the caller back to his body
 	clear_holo(0, caller_id) // destroy the hologram
