@@ -38,6 +38,7 @@
 /datum/species/kig_yar/skirmisher
 	name = "Tvaoan Kig-Yar"
 	name_plural = "Kig-Yar"
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	blurb = ""
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
