@@ -1,0 +1,5 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - balance: "Increased atmospheric pump efficiency, and atmospheric filter efficiencies. Pipe wizards rejoice!"
+  - balance: "Increased air injector internal tank size as well as power cap. this increases its flow rate due to how atmospheric devices perform their math. Pipe wizards rejoice!"
