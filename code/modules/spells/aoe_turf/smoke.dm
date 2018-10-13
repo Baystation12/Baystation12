@@ -23,3 +23,6 @@
 	smoke_amt += 2
 
 	return "[src] will now create more smoke."
+
+/spell/aoe_turf/smoke/tower
+	charge_max = 2

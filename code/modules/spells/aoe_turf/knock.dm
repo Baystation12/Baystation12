@@ -34,3 +34,6 @@
 /spell/aoe_turf/knock/slow
 	name = "Slow Knock"
 	charge_max = 200
+
+/spell/aoe_turf/knock/tower
+	charge_max = 2

@@ -14,7 +14,7 @@
 	desc = "Allows your follower to generate a livable atmosphere in the area they are in."
 	base_cost = 25
 	category = DEITY_TREE_CONJURATION
-	boon_path = /spell/create_air
+	boon_path = /spell/create_air/tower
 	requirements = list(DEITY_TREE_CONJURATION = 1)
 
 /datum/deity_item/boon/single_charge/acid_spray
@@ -22,7 +22,7 @@
 	desc = "The simplest form of aggressive conjuration: acid spray is quite effective in melting both man and object."
 	base_cost = 130
 	category = DEITY_TREE_CONJURATION
-	boon_path = /spell/acid_spray
+	boon_path = /spell/acid_spray/tower
 	requirements = list(DEITY_TREE_CONJURATION = 1)
 
 /datum/deity_item/boon/single_charge/force_wall
@@ -30,7 +30,7 @@
 	desc = "A temporary invincible wall for followers to summon."
 	base_cost = 30
 	category = DEITY_TREE_CONJURATION
-	boon_path = /spell/aoe_turf/conjure/forcewall
+	boon_path = /spell/aoe_turf/conjure/forcewall/tower
 	requirements = list(DEITY_TREE_CONJURATION = 1)
 
 /datum/deity_item/phenomena/dimensional_locker
@@ -47,7 +47,7 @@
 	desc = "This spell allows a follower to summon a singular spectral dog that guards the nearby area. Anyone without the password is barked at or bitten."
 	base_cost = 40
 	category = DEITY_TREE_CONJURATION
-	boon_path = /spell/aoe_turf/conjure/faithful_hound
+	boon_path = /spell/aoe_turf/conjure/faithful_hound/tower
 	requirements = list(DEITY_TREE_CONJURATION = 2)
 
 /datum/deity_item/wizard_armaments
@@ -61,7 +61,7 @@
 	name = "Summon Sword"
 	desc = "This spell allows your followers to summon a golden firey sword for a short duration."
 	base_cost = 50
-	boon_path = /spell/targeted/equip_item/dyrnwyn
+	boon_path = /spell/targeted/equip_item/dyrnwyn/tower
 	category = DEITY_TREE_CONJURATION
 	requirements = list(DEITY_UNLOCK_ARMS = 1)
 
@@ -69,7 +69,7 @@
 	name = "Summon Shield"
 	desc = "This spell allows your followers to summon a magical shield for a short duration."
 	base_cost = 20
-	boon_path = /spell/targeted/equip_item/shield
+	boon_path = /spell/targeted/equip_item/shield/tower
 	category = DEITY_TREE_CONJURATION
 	requirements = list(DEITY_UNLOCK_ARMS = 1)
 
@@ -86,7 +86,7 @@
 	name = "Fireball"
 	desc = "Embue your follower with the power of exploding fire."
 	base_cost = 85
-	boon_path = /spell/targeted/projectile/dumbfire/fireball
+	boon_path = /spell/targeted/projectile/dumbfire/fireball/tower
 	category = DEITY_TREE_CONJURATION
 	requirements = list(DEITY_TREE_CONJURATION = 3)
 
@@ -94,7 +94,7 @@
 	name = "Force Portal"
 	desc = "This spell allows a follower to summon a force portal. Anything that hits the portal gets sucked inside and is then thrown out when the portal explodes."
 	base_cost = 45
-	boon_path = /spell/aoe_turf/conjure/force_portal
+	boon_path = /spell/aoe_turf/conjure/force_portal/tower
 	category = DEITY_TREE_CONJURATION
 	requirements = list(DEITY_TREE_CONJURATION = 3)
 
