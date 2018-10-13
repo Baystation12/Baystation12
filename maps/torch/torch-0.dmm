@@ -43,15 +43,15 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_dock_inner";
+	id_tag = "petrov_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = list(13)
+	req_one_access = list(13,200)
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
 "al" = (
@@ -396,15 +396,15 @@
 	icon_state = "techfloor_edges";
 	dir = 8
 	},
-/obj/machinery/airlock_sensor{
-	frequency = 1380;
-	id_tag = "petrov2_shuttle_dock_sensor";
-	pixel_x = -24;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8;
 	icon_state = "map"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "petrov_shuttle_dock_sensor";
+	pixel_x = -24;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -641,7 +641,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_outer";
+	id_tag = "petrov_shuttle_outer";
 	locked = 0;
 	name = "Petrov Exterior Access";
 	req_access = list(200)
@@ -2132,6 +2132,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
+"eB" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1380;
+	id_tag = "petrov_shuttle_dock_pump"
+	},
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/hallway/primary/fifthdeck/aft)
 "eC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3726,6 +3736,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage)
 "iM" = (
@@ -4258,12 +4269,12 @@
 	dir = 1
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	display_name = "Aft Dock (NanoTrasen)";
+	display_name = "Aft Dock (Petrov)";
 	frequency = 1380;
 	id_tag = "petrov_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = 0;
-	req_one_access = list(74);
+	req_one_access = list(13,200);
 	tag_airpump = "petrov_shuttle_dock_pump";
 	tag_chamber_sensor = "petrov_shuttle_dock_sensor";
 	tag_exterior_door = "petrov_shuttle_dock_outer";
@@ -7475,7 +7486,6 @@
 	id_tag = "petrov_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = newlist();
 	req_one_access = list(13,200)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -8981,7 +8991,6 @@
 	id_tag = "petrov_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = newlist();
 	req_one_access = list(13,200)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -8993,7 +9002,6 @@
 	id_tag = "petrov_shuttle_dock_outer";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = newlist();
 	req_one_access = list(13,200)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -9673,14 +9681,14 @@
 	icon_state = "techfloor_edges";
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
-	frequency = 1380;
-	id_tag = "petrov2_shuttle_dock_pump"
-	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "petrov_shuttle_dock_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -10159,13 +10167,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/cockpit)
-"xi" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 6
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/titanium,
-/area/shuttle/petrov/hallwaya)
 "xl" = (
 /obj/structure/ladder/up,
 /obj/effect/floor_decal/corner/brown{
@@ -10419,25 +10420,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
-"yn" = (
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	display_name = "Aft Dock (NanoTrasen)";
-	frequency = 1380;
-	id_tag = "petrov2_shuttle_dock_airlock";
-	pixel_x = 24;
-	pixel_y = 0;
-	req_one_access = list(74);
-	tag_airpump = "petrov2_shuttle_dock_pump";
-	tag_chamber_sensor = "petrov2_shuttle_dock_sensor";
-	tag_exterior_door = "petrov2_shuttle_dock_outer";
-	tag_interior_door = "petrov2_shuttle_dock_inner"
-	},
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/canister/air/airlock,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/fifthdeck/aftstarboard)
 "yo" = (
 /obj/structure/sign/warning/hot_exhaust{
 	icon_state = "fire";
@@ -10490,7 +10472,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
 	frequency = 1380;
-	id_tag = "petrov2_shuttle_dock_pump"
+	id_tag = "petrov_shuttle_dock_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -10869,7 +10851,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_outer";
+	id_tag = "petrov_shuttle_outer";
 	locked = 0;
 	name = "Petrov Exterior Access";
 	req_access = list(200)
@@ -10917,13 +10899,6 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1380;
-	master_tag = "petrov2_shuttle_airlock";
-	pixel_x = -24;
-	pixel_y = 32
-	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
@@ -11487,15 +11462,15 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_inner";
+	id_tag = "petrov_shuttle_inner";
 	locked = 0;
 	name = "Petrov Interior Access";
 	req_access = list(200)
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/maint)
 "CB" = (
@@ -12322,18 +12297,11 @@
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Gh" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 6
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8;
+	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
-"Gj" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9;
-	icon_state = "intact"
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/titanium,
 /area/shuttle/petrov/hallwaya)
 "Gk" = (
 /obj/machinery/door/firedoor/border_only,
@@ -13712,6 +13680,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/item/device/radio/intercom{
+	pixel_y = 23
+	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/security)
 "LE" = (
@@ -13906,17 +13877,6 @@
 "Mr" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
-	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 2;
-	frequency = 1331;
-	id_tag = "petrov_shuttle_pump_out_external"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
-	id_tag = "petrov_shuttle_sensor_external";
-	pixel_x = 25;
-	pixel_y = -25
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/security)
@@ -14249,10 +14209,10 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_dock_inner";
+	id_tag = "petrov_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = list(13)
+	req_one_access = list(13,200)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -14521,7 +14481,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_inner";
+	id_tag = "petrov_shuttle_inner";
 	locked = 0;
 	name = "Petrov Interior Access";
 	req_access = list(200)
@@ -15833,12 +15793,6 @@
 	icon_state = "handrail";
 	dir = 8
 	},
-/obj/machinery/airlock_sensor{
-	frequency = 1379;
-	id_tag = "petrov2_shuttle_sensor";
-	pixel_x = 24;
-	pixel_y = 0
-	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4
@@ -15879,10 +15833,10 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_dock_outer";
+	id_tag = "petrov_shuttle_dock_outer";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = list(13)
+	req_one_access = list(13,200)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -16053,19 +16007,6 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/toxins)
 "Va" = (
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	cycle_to_external_air = 1;
-	frequency = 1380;
-	id_tag = "petrov_shuttle_airlock";
-	pixel_x = -24;
-	pixel_y = 0;
-	req_one_access = list(200);
-	tag_airpump = "petrov_shuttle_pump";
-	tag_chamber_sensor = "petrov_shuttle_sensor";
-	tag_exterior_door = "petrov_shuttle_outer";
-	tag_exterior_sensor = "petrov_shuttle_sensor_external";
-	tag_interior_door = "petrov_shuttle_inner"
-	},
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
 	id_tag = "petrov_shuttle_sensor";
@@ -16075,14 +16016,14 @@
 /obj/machinery/oxygen_pump{
 	pixel_y = 32
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 1;
-	frequency = 1331;
-	id_tag = "petrov_shuttle_pump_out_internal"
-	},
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 2;
+	frequency = 1380;
+	id_tag = "petrov_shuttle_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/hallwaya)
@@ -16113,10 +16054,10 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov2_shuttle_dock_outer";
+	id_tag = "petrov_shuttle_dock_outer";
 	locked = 0;
 	name = "Docking Port Airlock";
-	req_access = list(13)
+	req_one_access = list(13,200)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -16708,23 +16649,16 @@
 	icon_state = "handrail";
 	dir = 4
 	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	cycle_to_external_air = 0;
-	frequency = 1380;
-	id_tag = "petrov2_shuttle_airlock";
-	pixel_x = -24;
-	pixel_y = 0;
-	req_one_access = list(200);
-	tag_airpump = "petrov2_shuttle_pump";
-	tag_chamber_sensor = "petrov2_shuttle_sensor";
-	tag_exterior_door = "petrov2_shuttle_outer";
-	tag_exterior_sensor = null;
-	tag_interior_door = "petrov2_shuttle_inner"
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 2;
 	frequency = 1380;
-	id_tag = "petrov2_shuttle_pump"
+	id_tag = "petrov_shuttle_pump"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "petrov_shuttle_sensor";
+	pixel_x = -24;
+	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/maint)
@@ -17035,6 +16969,19 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 0;
+	frequency = 1380;
+	id_tag = "petrov_shuttle_airlock";
+	pixel_x = -24;
+	pixel_y = 0;
+	req_one_access = list(200);
+	tag_airpump = "petrov_shuttle_pump";
+	tag_chamber_sensor = "petrov_shuttle_sensor";
+	tag_exterior_door = "petrov_shuttle_outer";
+	tag_exterior_sensor = null;
+	tag_interior_door = "petrov_shuttle_inner"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
 "YZ" = (
@@ -17072,6 +17019,20 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fifthdeck/aft)
+"Zc" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1380;
+	id_tag = "petrov_shuttle_pump"
+	},
+/obj/effect/floor_decal/techfloor,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/shuttle/petrov/hallwaya)
 "Zd" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
@@ -17091,9 +17052,6 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/modular_computer/console/preset/civilian/professional,
-/obj/item/device/radio/intercom{
-	pixel_y = 23
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/security)
 "Zj" = (
@@ -40640,7 +40598,7 @@ ZG
 vF
 pw
 vE
-tH
+eB
 da
 ws
 ws
@@ -41243,7 +41201,7 @@ bP
 bP
 bP
 aa
-xi
+Al
 Va
 Gh
 Zw
@@ -41445,10 +41403,10 @@ bP
 bP
 bP
 Mr
-Gj
+Al
 Jv
 yL
-Zw
+Zc
 Al
 Jk
 xh
@@ -42444,7 +42402,7 @@ yY
 XU
 ec
 BS
-yn
+Py
 ZG
 ZG
 aa
