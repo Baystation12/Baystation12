@@ -111,9 +111,9 @@
 
 /obj/structure/deity/gateway/proc/stop_looking_for(var/successful)
 	if(looking_for)
-		looking_for = null
 		if(!successful)
 			to_chat(linked_god, "<span class='warning'>\The [src] did not find any [looking_for]. You may try again if you wish.</span>")
+		looking_for = null
 
 /obj/structure/deity/gateway/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["accept"] && istype(user,/mob/living/starlight_soul))

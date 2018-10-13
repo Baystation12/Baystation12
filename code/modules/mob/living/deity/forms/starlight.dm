@@ -17,7 +17,9 @@
 					/obj/structure/deity/pylon/starlight,
 					/obj/structure/deity/radiant_statue,
 					)
-	items = list(/datum/deity_item/boon/blazing_blade,
+	items = list(/datum/deity_item/general/potential,
+				/datum/deity_item/general/regeneration,
+				/datum/deity_item/boon/blazing_blade,
 				/datum/deity_item/boon/holy_beacon,
 				/datum/deity_item/boon/black_death,
 				/datum/deity_item/blood_crafting/firecrafting,
