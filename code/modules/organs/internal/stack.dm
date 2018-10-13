@@ -1,6 +1,4 @@
 /mob/living/carbon/human/proc/create_stack()
-	set waitfor=0
-	sleep(10)
 	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
 	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>")
 

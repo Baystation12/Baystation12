@@ -50,8 +50,9 @@
 		if(food.trash) holding_item = new food.trash(src)
 		qdel(food)
 
-	holding_item.equipped(src)
-	holding_item.screen_loc = DIONA_SCREEN_LOC_HELD
+	if(!QDELETED(holding_item))
+		holding_item.equipped(src)
+		holding_item.screen_loc = DIONA_SCREEN_LOC_HELD
 
 /mob/living/carbon/alien/diona/verb/drop_item_verb()
 	set name = "Drop Held Item"

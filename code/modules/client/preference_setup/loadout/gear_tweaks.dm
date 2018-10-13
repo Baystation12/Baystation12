@@ -41,7 +41,7 @@
 /datum/gear_tweak/color/tweak_item(var/obj/item/I, var/metadata)
 	if(valid_colors && !(metadata in valid_colors))
 		return
-	I.color = metadata
+	I.color = sanitize_hexcolor(metadata, I.color)
 
 /*
 * Path adjustment
@@ -130,7 +130,7 @@
 			return metadata
 
 /datum/gear_tweak/contents/tweak_item(var/obj/item/I, var/list/metadata)
-	if(metadata.len != valid_contents.len)
+	if(length(metadata) != length(valid_contents))
 		return
 	for(var/i = 1 to valid_contents.len)
 		var/path
@@ -172,11 +172,13 @@
 /datum/gear_tweak/reagents/tweak_item(var/obj/item/I, var/list/metadata)
 	if(metadata == "None")
 		return
+	var/reagent
 	if(metadata == "Random")
-		. = valid_reagents[pick(valid_reagents)]
+		reagent = valid_reagents[pick(valid_reagents)]
 	else
-		. = valid_reagents[metadata]
-	I.reagents.add_reagent(., I.reagents.get_free_space())
+		reagent = valid_reagents[metadata]
+	if(reagent)
+		return I.reagents.add_reagent(reagent, I.reagents.get_free_space())
 
 /datum/gear_tweak/tablet
 	var/list/ValidProcessors = list(/obj/item/weapon/computer_hardware/processor_unit/small)
@@ -300,9 +302,13 @@
 	. += names[entry]
 
 /datum/gear_tweak/tablet/get_default()
-	return list(1, 1, 1, 1, 1, 1, 1)
+	. = list()
+	for(var/i in 1 to TWEAKABLE_COMPUTER_PART_SLOTS)
+		. += 1
 
 /datum/gear_tweak/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
+	if(length(metadata) < TWEAKABLE_COMPUTER_PART_SLOTS)
+		return
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
 		I.processor_unit = new t(I)
