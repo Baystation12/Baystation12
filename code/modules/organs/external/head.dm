@@ -115,7 +115,7 @@
 		if (burn_dam > 40)
 			disfigure("burn")
 
-/obj/item/organ/external/head/update_icon()
+/obj/item/organ/external/head/on_update_icon()
 
 	..()
 

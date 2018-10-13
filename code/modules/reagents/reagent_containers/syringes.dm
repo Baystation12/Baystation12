@@ -85,7 +85,7 @@
 
 	handleTarget(target, user)
 
-/obj/item/weapon/reagent_containers/syringe/update_icon()
+/obj/item/weapon/reagent_containers/syringe/on_update_icon()
 	overlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)

@@ -55,5 +55,5 @@
 	fire_sound_text = "a strange noise"
 	fire_sound = 'sound/weapons/bladeslice.ogg'
 
-/obj/item/weapon/gun/launcher/alien/spikethrower/update_icon()
+/obj/item/weapon/gun/launcher/alien/spikethrower/on_update_icon()
 	icon_state = "spikethrower[ammo]"

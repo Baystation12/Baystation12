@@ -51,7 +51,7 @@
 	set_active(secured ? FALSE : on)
 	return secured
 
-/obj/item/device/assembly/infra/update_icon()
+/obj/item/device/assembly/infra/on_update_icon()
 	overlays.Cut()
 	if(on)
 		overlays += "infrared_on"

@@ -91,7 +91,7 @@
 		to_chat(user, "You emag \the [src]. It's screen briefly shows a \"OVERRIDE ACCEPTED: New software downloads available.\" message.")
 		return 1
 
-/obj/item/modular_computer/update_icon()
+/obj/item/modular_computer/on_update_icon()
 	icon_state = icon_state_unpowered
 
 	overlays.Cut()

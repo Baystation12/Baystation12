@@ -148,7 +148,7 @@
 			use_power = 1
 			update_icon()
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/update_icon()
+/obj/machinery/portable_atmospherics/reagent_sublimator/on_update_icon()
 	icon_state = "sublimator-[use_power == 2 ? "on" : "off"]-[container ? "loaded" : "unloaded"]-[holding ? "tank" : "notank"]"
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/examine(var/mob/user)

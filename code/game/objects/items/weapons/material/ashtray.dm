@@ -17,7 +17,7 @@
 	else if(contents.len)
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
-/obj/item/weapon/material/ashtray/update_icon()
+/obj/item/weapon/material/ashtray/on_update_icon()
 	overlays.Cut()
 	if (contents.len == max_butts)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_full")

@@ -60,7 +60,7 @@
 	internal_cells = null
 	return ..()
 
-/obj/machinery/power/smes/batteryrack/update_icon()
+/obj/machinery/power/smes/batteryrack/on_update_icon()
 	overlays.Cut()
 	icon_update = 0
 

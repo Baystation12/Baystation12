@@ -233,7 +233,7 @@
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "The [P.name].")
 
-/obj/item/weapon/hand/update_icon(var/direction = 0)
+/obj/item/weapon/hand/on_update_icon(var/direction = 0)
 
 	if(!cards.len)
 		qdel(src)

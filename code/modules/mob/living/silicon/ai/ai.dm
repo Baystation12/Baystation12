@@ -234,7 +234,7 @@ var/list/ai_verbs_default = list(
 	var/list/custom_icons = list()
 	LAZYSET(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
 
-	var/file = file2text("config/custom_sprites.txt")
+	var/file = file2text(CUSTOM_ITEM_SYNTH_CONFIG)
 	var/lines = splittext(file, "\n")
 
 	var/custom_index = 1
@@ -689,7 +689,7 @@ var/list/ai_verbs_default = list(
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
 
-/mob/living/silicon/ai/update_icon()
+/mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
 		selected_sprite = decls_repository.get_decl(default_ai_icon)
 

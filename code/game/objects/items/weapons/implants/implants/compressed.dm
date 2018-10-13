@@ -49,7 +49,7 @@
 	var/safe = 1
 	imp = /obj/item/weapon/implant/compressed
 
-/obj/item/weapon/implanter/compressed/update_icon()
+/obj/item/weapon/implanter/compressed/on_update_icon()
 	if (imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if(!c.scanned)

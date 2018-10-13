@@ -38,6 +38,8 @@
 	..()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
+	if(QDELETED(src)) // In case we remove multiple times without being careful.
+		return
 	holder.remove_reagent(type, amount)
 
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
@@ -51,6 +53,8 @@
 	return
 
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+	if(QDELETED(src))
+		return // Something else removed us.
 	if(!istype(M))
 		return
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
@@ -85,7 +89,6 @@
 
 	if(volume)
 		remove_self(removed)
-	return
 
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	return

@@ -43,9 +43,6 @@
 /area/maintenance/substation/fifthdeck
 	name = "Fifth Deck Substation"
 
-/area/crew_quarters/safe_room/fifthdeck
-	name = "\improper Fifth Deck Safe Room"
-
 //Fourth Deck (Z-1)
 /area/hallway/primary/fourthdeck/fore
 	name = "\improper Fourth Deck Fore Hallway"
@@ -89,6 +86,9 @@
 
 /area/maintenance/substation/fourthdeck
 	name = "Fourth Deck Substation"
+
+/area/crew_quarters/safe_room/fourthdeck
+	name = "\improper Fourth Deck Safe Room"
 
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore

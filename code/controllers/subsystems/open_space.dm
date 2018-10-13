@@ -2,26 +2,23 @@
 // Controller handling icon updates of open space turfs
 //
 
-GLOBAL_VAR_INIT(open_space_initialised, FALSE)
 GLOBAL_DATUM_INIT(over_OS_darkness, /image, image('icons/turf/open_space.dmi', "black_open"))
 
 
 SUBSYSTEM_DEF(open_space)
 	name = "Open Space"
 	init_order = SS_INIT_OPEN_SPACE
+	priority = SS_PRIORITY_OPEN_SPACE
+	wait = 1 SECOND
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = list()  //List of previous turfs that is set to update
 	var/counter = 1 //Can't use .len because we need to iterate in order
-
-
+	var/times_updated = 0
 
 /datum/controller/subsystem/open_space/Initialize()
 	. = ..()
-	wait = world.tick_lag // every second
 	GLOB.over_OS_darkness.plane = OVER_OPENSPACE_PLANE
 	GLOB.over_OS_darkness.layer = MOB_LAYER
-	GLOB.open_space_initialised = TRUE
-	disable() // Testing stability issues.
 
 /datum/controller/subsystem/open_space/fire(resumed = 0)
 	// We use a different list so any additions to the update lists during a delay from CHECK_TICK
@@ -41,8 +38,15 @@ SUBSYSTEM_DEF(open_space)
 		var/turf/T = turfs_to_process_old[counter]
 		counter += 1
 		update_turf(T)
+		times_updated++
 		if (MC_TICK_CHECK)
 			return
+
+	if(!length(turfs_to_process))
+		suspend()
+
+/datum/controller/subsystem/open_space/stat_entry()
+	..("T: [length(turfs_to_process)], U: [times_updated]")
 
 /datum/controller/subsystem/open_space/proc/update_turf(var/turf/T)
 	for(var/atom/movable/A in T)
@@ -52,28 +56,27 @@ SUBSYSTEM_DEF(open_space)
 /datum/controller/subsystem/open_space/proc/add_turf(var/turf/T, var/recursive = 0)
 	ASSERT(isturf(T))
 	//Check for multiple additions
-	if((T in turfs_to_process))
+	if(turfs_to_process[T])
 		//If we want to add it again, the implication is
 		//That we need to know what happened below
 		//so It has to happen after previous addition
 		//take it out and readd
 		turfs_to_process -= T
-	turfs_to_process += T
+	turfs_to_process[T] = TRUE
 	if(recursive > 0)
 		var/turf/above = GetAbove(T)
 		if(above && isopenspace(above))
 			add_turf(above, recursive)
+	wake()
 
 /turf/simulated/open/Initialize()
 	. = ..()
-	if(GLOB.open_space_initialised)
-		// log_debug("[src] ([x],[y],[z]) queued for update for initialize()")
-		SSopen_space.add_turf(src)
+	SSopen_space.add_turf(src)
 
 
-/obj/update_icon()
+/obj/on_update_icon()
 	. = ..()
-	if(GLOB.open_space_initialised && !invisibility && isturf(loc))
+	if(!invisibility && isturf(loc))
 		var/turf/T = GetAbove(src)
 		if(isopenspace(T))
 			// log_debug("[T] ([T.x],[T.y],[T.z]) queued for update for [src].update_icon()")
@@ -83,7 +86,7 @@ SUBSYSTEM_DEF(open_space)
 
 //Probably should hook Destroy() If we can think of something more efficient, lets hear it.
 /obj/Destroy()
-	if(GLOB.open_space_initialised && !invisibility && isturf(loc))
+	if(!invisibility && isturf(loc))
 		var/turf/T = GetAbove(src)
 		if(isopenspace(T))
 			SSopen_space.add_turf(T, 1)

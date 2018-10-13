@@ -64,6 +64,7 @@
 		else
 			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];add_never=[ghost_trap.pref_check]'>Never</a></br>"
 		. += "</td></tr>"
+	. += "<tr><td>Select All: </td><td><a href='?src=\ref[src];select_all=2'>High</a> <a href='?src=\ref[src];select_all=1'>Low</a> <a href='?src=\ref[src];select_all=0'>Never</a></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
 
@@ -75,14 +76,14 @@
 
 /datum/category_item/player_setup_item/antagonism/candidacy/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["add_special"])
-		if(!(href_list["add_special"] in valid_special_roles()))
+		if(!(href_list["add_special"] in valid_special_roles(FALSE)))
 			return TOPIC_HANDLED
 		pref.be_special_role |= href_list["add_special"]
 		pref.never_be_special_role -= href_list["add_special"]
 		return TOPIC_REFRESH
 
 	if(href_list["del_special"])
-		if(!(href_list["del_special"] in valid_special_roles()))
+		if(!(href_list["del_special"] in valid_special_roles(FALSE)))
 			return TOPIC_HANDLED
 		pref.be_special_role -= href_list["del_special"]
 		pref.never_be_special_role -= href_list["del_special"]
@@ -93,12 +94,34 @@
 		pref.never_be_special_role |= href_list["add_never"]
 		return TOPIC_REFRESH
 
+	if(href_list["select_all"])		
+		var/selection = text2num(href_list["select_all"])
+		var/list/roles = valid_special_roles(FALSE)
+
+		for(var/id in roles)
+			switch(selection)
+				if(0)
+					pref.be_special_role -= id
+					pref.never_be_special_role |= id					
+				if(1)
+					pref.be_special_role -= id
+					pref.never_be_special_role -= id					
+				if(2)					
+					pref.be_special_role |= id
+					pref.never_be_special_role -= id
+		return TOPIC_REFRESH
+
 	return ..()
 
-/datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles()
+/datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles(var/include_bans = TRUE)
 	var/list/private_valid_special_roles = list()
 
 	for(var/antag_type in GLOB.all_antag_types_)
+		if(!include_bans)
+			if(jobban_isbanned(preference_mob(), antag_type))
+				continue
+			if(((antag_type  == MODE_MALFUNCTION) && jobban_isbanned(preference_mob(), "AI")))
+				continue
 		private_valid_special_roles += antag_type
 
 	var/list/ghost_traps = get_ghost_traps()
@@ -106,7 +129,11 @@
 		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
 		if(!ghost_trap.list_as_special_role)
 			continue
+		if(!include_bans)
+			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
+				continue
 		private_valid_special_roles += ghost_trap.pref_check
+
 
 	return private_valid_special_roles
 

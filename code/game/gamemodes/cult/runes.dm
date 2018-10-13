@@ -19,7 +19,7 @@
 	blood = nblood
 	update_icon()
 
-/obj/effect/rune/update_icon()
+/obj/effect/rune/on_update_icon()
 	overlays.Cut()
 	if(GLOB.cult.rune_strokes[type])
 		var/list/f = GLOB.cult.rune_strokes[type]

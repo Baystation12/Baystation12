@@ -12,7 +12,7 @@
 		return
 	return ..()
 
-/turf/simulated/floor/fixed/update_icon()
+/turf/simulated/floor/fixed/on_update_icon()
 	update_flood_overlay()
 
 /turf/simulated/floor/fixed/is_plating()

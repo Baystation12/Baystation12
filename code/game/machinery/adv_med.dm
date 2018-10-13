@@ -188,7 +188,7 @@
 
 
 
-/obj/machinery/body_scanconsole/update_icon()
+/obj/machinery/body_scanconsole/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "body_scannerconsole-p"
 	else if (stat & NOPOWER)

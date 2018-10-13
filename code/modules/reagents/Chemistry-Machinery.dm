@@ -345,7 +345,7 @@
 	..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 
-/obj/machinery/reagentgrinder/update_icon()
+/obj/machinery/reagentgrinder/on_update_icon()
 	icon_state = "juicer"+num2text(!isnull(beaker))
 
 /obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -398,7 +398,7 @@
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
 		var/material/material = stack.material
-		if(!material.chem_products.len)
+		if(!length(material.chem_products))
 			to_chat(user, "\The [material.name] is unable to produce any usable reagents.")
 			return 1
 

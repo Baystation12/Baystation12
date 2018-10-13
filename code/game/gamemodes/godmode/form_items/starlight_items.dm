@@ -60,12 +60,17 @@
 	icon_state = "star_oracle"
 	armor = list(melee = 25, bullet = 20, laser = 45,energy = 40, bomb = 25, bio = 10, rad = 0)
 
-/obj/item/clothing/suit/shadowsuit
+/obj/item/clothing/suit/armor/sunrobe/Initialize()
+	. = ..()
+	set_light(0.3, 0.1, 4, 2)
+
+/obj/item/clothing/suit/space/shadowsuit
 	name = "traitor's cloak"
 	desc = "There is absolutely nothing visible through the fabric. The shadows stick to your skin when you touch it."
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	icon_state = "star_traitor"
 
-/obj/item/clothing/head/shadowhood
+/obj/item/clothing/head/helmet/space/shadowhood
 	name = "traitor's hood"
 	desc = "No light can pierce this hood. It’s unsettling."
 	icon_state = "star_traitor"

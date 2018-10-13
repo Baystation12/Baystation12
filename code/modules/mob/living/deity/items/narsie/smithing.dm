@@ -4,6 +4,7 @@
 	category = DEITY_BLOOD_CRAFT
 	max_level = 1
 	base_cost = 75
+	var/forge_type = /obj/structure/deity/blood_forge
 	var/list/recipes = list(/obj/item/weapon/melee/cultblade = 50,
 							/obj/item/clothing/head/culthood/alt = 10,
 							/obj/item/clothing/suit/cultrobes/alt = 20
@@ -11,13 +12,13 @@
 
 /datum/deity_item/blood_crafting/buy(var/mob/living/deity/user)
 	..()
-	user.form.buildables |= /obj/structure/deity/blood_forge //put structure here
-	var/list/L = user.feats[DEITY_BLOOD_CRAFT]
+	user.form.buildables |= forge_type //put structure here
+	var/list/L = user.feats[name]
 	if(!L)
 		L = list()
 	for(var/type in recipes)
 		L[type] = recipes[type]
-	user.feats[DEITY_BLOOD_CRAFT] = L
+	user.feats[name] = L
 
 /datum/deity_item/blood_crafting/armored
 	name = DEITY_ARMOR_CRAFT

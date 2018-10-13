@@ -181,7 +181,7 @@
 /obj/machinery/chemical_dispenser/attack_hand(mob/user as mob)
 	ui_interact(user)
 
-/obj/machinery/chemical_dispenser/update_icon()
+/obj/machinery/chemical_dispenser/on_update_icon()
 	overlays.Cut()
 	if(container)
 		var/mutable_appearance/beaker_overlay

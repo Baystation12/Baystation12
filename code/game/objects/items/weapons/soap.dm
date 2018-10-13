@@ -69,7 +69,7 @@
 		return
 	..()
 
-/obj/item/weapon/soap/update_icon()
+/obj/item/weapon/soap/on_update_icon()
 	overlays.Cut()
 	if(key_data)
 		overlays += image('icons/obj/items.dmi', icon_state = "soap_key_overlay")

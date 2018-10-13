@@ -26,7 +26,7 @@
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/toxins(src)
 	else
-		new /obj/item/weapon/storage/backpack/satchel_tox(src)
+		new /obj/item/weapon/storage/backpack/satchel/tox(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag(src)
 	new /obj/item/clothing/under/rank/scientist(src)

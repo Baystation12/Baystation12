@@ -205,6 +205,9 @@ GUEST_BAN
 ## GitHub address
 # GITHUBURL https://github.com/example-user/example-repository
 
+## GitHub new issue address
+# ISSUEREPORTURL https://github.com/example-user/example-repository/issues/new
+
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
 

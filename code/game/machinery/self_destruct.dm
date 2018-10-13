@@ -113,7 +113,7 @@
 		to_chat(usr, "[src] is loaded and ready to be armed.")
 		return
 
-/obj/machinery/self_destruct/update_icon()
+/obj/machinery/self_destruct/on_update_icon()
 	if(armed)
 		icon_state = "armed"
 	else if(cylinder)

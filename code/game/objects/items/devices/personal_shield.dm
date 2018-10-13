@@ -27,7 +27,7 @@
 		update_icon()
 		return
 
-/obj/item/device/personal_shield/update_icon()
+/obj/item/device/personal_shield/on_update_icon()
 	if(uses)
 		icon_state = "batterer"
 	else

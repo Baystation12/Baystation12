@@ -15,20 +15,20 @@
 					/obj/structure/mopbucket)
 	cost = 20
 	containertype = /obj/structure/closet/crate/large
-	containername = "\improper Janitorial supplies"
+	containername = "janitorial supplies crate"
 
 /decl/hierarchy/supply_pack/custodial/mousetrap
 	num_contained = 3
 	contains = list(/obj/item/weapon/storage/box/mousetraps)
-	name = "Misc - Pest control crate"
+	name = "Misc - Pest control"
 	cost = 10
-	containername = "\improper Pest control crate"
+	containername = "pest control crate"
 
 /decl/hierarchy/supply_pack/custodial/lightbulbs
 	name = "Spares - Replacement lights"
 	contains = list(/obj/item/weapon/storage/box/lights/mixed = 3)
 	cost = 10
-	containername = "\improper Replacement lights"
+	containername = "replacement lights crate"
 
 /decl/hierarchy/supply_pack/custodial/cleaning
 	name = "Gear - Cleaning supplies"
@@ -41,20 +41,20 @@
 					/obj/item/weapon/soap)
 	cost = 10
 	containertype = /obj/structure/closet/crate/large
-	containername = "\improper Cleaning supplies"
+	containername = "cleaning supplies crate"
 
 /decl/hierarchy/supply_pack/custodial/bodybag
-	name = "Equipment - Body bag crate"
+	name = "Equipment - Body bags"
 	contains = list(/obj/item/weapon/storage/box/bodybags = 3)
 	cost = 10
-	containername = "\improper Body bag crate"
+	containername = "body bag crate"
 
 /decl/hierarchy/supply_pack/custodial/janitorbiosuits
-	name = "Gear - Janitor biohazard gear"
+	name = "Gear - Janitor biohazard equipment"
 	contains = list(/obj/item/clothing/head/bio_hood/janitor,
 					/obj/item/clothing/suit/bio_suit/janitor,
 					/obj/item/clothing/mask/gas,
 					/obj/item/weapon/tank/oxygen)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Janitor biohazard equipment"
+	containername = "janitor biohazard equipment crate"

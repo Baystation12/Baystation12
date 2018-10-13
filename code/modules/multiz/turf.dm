@@ -89,7 +89,7 @@
 /**
 * Update icon and overlays of open space to be that of the turf below, plus any visible objects on that turf.
 */
-/turf/simulated/open/update_icon()
+/turf/simulated/open/on_update_icon()
 	overlays.Cut()
 	underlays.Cut()
 	var/turf/below = GetBelow(src)
@@ -182,7 +182,7 @@
 
 /turf/simulated/open/proc/handle_move(var/atom/current_loc, var/atom/movable/am, var/atom/changed_loc)
 	//First handle objs and such
-	if(GLOB.open_space_initialised && !am.invisibility && isobj(am))
+	if(!am.invisibility && isobj(am))
 	//Update icons
 		SSopen_space.add_turf(src, 1)
 	//Check for mobs and create/destroy their shadows
@@ -201,9 +201,8 @@
 
 //When turf changes, a bunch of things can take place
 /turf/simulated/open/proc/turf_change(var/turf/affected)
-	if(GLOB.open_space_initialised)
-		if(!isopenspace(affected))//If affected is openspace it will add itself
-			SSopen_space.add_turf(src, 1)
+	if(!isopenspace(affected))//If affected is openspace it will add itself
+		SSopen_space.add_turf(src, 1)
 
 
 //The two situations which require unregistering

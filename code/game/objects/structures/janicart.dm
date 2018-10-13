@@ -148,7 +148,7 @@
 	updateUsrDialog()
 
 
-/obj/structure/janitorialcart/update_icon()
+/obj/structure/janitorialcart/on_update_icon()
 	overlays = null
 	if(mybag)
 		overlays += "cart_garbage"

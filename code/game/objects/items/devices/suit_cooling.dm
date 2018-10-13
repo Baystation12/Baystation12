@@ -134,7 +134,7 @@
 
 	return ..()
 
-/obj/item/device/suit_cooling_unit/update_icon()
+/obj/item/device/suit_cooling_unit/on_update_icon()
 	overlays.Cut()
 	if (cover_open)
 		if (cell)

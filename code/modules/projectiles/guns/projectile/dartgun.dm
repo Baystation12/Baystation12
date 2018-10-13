@@ -76,7 +76,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/weapon/gun/projectile/dartgun/update_icon()
+/obj/item/weapon/gun/projectile/dartgun/on_update_icon()
 	if(!ammo_magazine)
 		icon_state = "dartgun-empty"
 		return 1

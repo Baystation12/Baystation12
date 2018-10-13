@@ -95,7 +95,7 @@
 		ability.maptext = "[i]" // Slot number
 		i++
 
-/obj/screen/movable/ability_master/update_icon()
+/obj/screen/movable/ability_master/on_update_icon()
 	if(ability_objects.len)
 		set_invisibility(0)
 	else
@@ -188,7 +188,7 @@
 	ability_master = null
 	return ..()
 
-/obj/screen/ability/update_icon()
+/obj/screen/ability/on_update_icon()
 	overlays.Cut()
 	icon_state = "[background_base_state]_spell_base"
 
@@ -398,7 +398,7 @@
 	if(spell.silenced)
 		overlays += "silence"
 
-/obj/screen/ability/spell/update_icon(var/forced = 0)
+/obj/screen/ability/spell/on_update_icon(var/forced = 0)
 	update_charge(forced)
 	return
 

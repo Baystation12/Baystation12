@@ -78,7 +78,7 @@
 	return "[src] heals more, and heals organ damage and radiation."
 
 /spell/targeted/heal_target/major/tower
-	charge_max = 2
+	charge_max = 1
 
 /spell/targeted/heal_target/area
 	name = "Cure Area"
@@ -106,7 +106,7 @@
 	return "[src] now heals more in a wider area."
 
 /spell/targeted/heal_target/area/tower
-	charge_max = 2
+	charge_max = 1
 
 /spell/targeted/heal_target/area/slow
 	charge_max = 2 MINUTES

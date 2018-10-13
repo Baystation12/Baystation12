@@ -300,3 +300,8 @@
 
 	UNSETEMPTY(cloaking_sources)
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
+
+/mob/living/carbon/human/set_sdisability(sdisability)
+	if(isSynthetic())
+		return // Can't cure disabilites, so don't give them.
+	..()

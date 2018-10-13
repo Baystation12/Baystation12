@@ -25,7 +25,7 @@
 	desc = "A corporate folder."
 	icon_state = "folder_nt"
 
-/obj/item/weapon/folder/update_icon()
+/obj/item/weapon/folder/on_update_icon()
 	overlays.Cut()
 	if(contents.len)
 		overlays += "folder_paper"
@@ -115,7 +115,7 @@
 	icon_state = "envelope_sealed"
 	var/sealed = 1
 
-/obj/item/weapon/folder/envelope/update_icon()
+/obj/item/weapon/folder/envelope/on_update_icon()
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else

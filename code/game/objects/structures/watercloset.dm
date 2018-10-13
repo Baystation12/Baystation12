@@ -111,7 +111,7 @@
 	open = !open
 	update_icon()
 
-/obj/structure/hygiene/toilet/update_icon()
+/obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/hygiene/toilet/attackby(obj/item/I as obj, var/mob/living/user)
@@ -235,7 +235,7 @@
 			return
 	. = ..()
 
-/obj/structure/hygiene/shower/update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
+/obj/structure/hygiene/shower/on_update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
 	overlays.Cut()					//once it's been on for a while, in addition to handling the water overlay.
 	if(mymist)
 		qdel(mymist)

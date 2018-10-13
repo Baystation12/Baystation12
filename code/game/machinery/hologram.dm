@@ -65,7 +65,11 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 /obj/machinery/hologram/holopad/attack_hand(var/mob/living/carbon/human/user) //Carn: Hologram requests.
 	if(!istype(user))
 		return
-	if(incoming_connection&&caller_id)
+	if(incoming_connection && caller_id)
+		if(QDELETED(sourcepad)) // If the sourcepad was deleted, most likely.
+			incoming_connection = 0
+			clear_holo()
+			return
 		visible_message("The pad hums quietly as it establishes a connection.")
 		if(caller_id.loc!=sourcepad.loc)
 			visible_message("The pad flashes an error message. The caller has left their holopad.")
@@ -180,31 +184,33 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/
+// Note that speaking may be null here, presumably due to echo effects/non-mob transmission.
 /obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
-			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
+			var/ai_text = text
+			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.			
 				if(speaking)
-					text = speaking.scramble(text)
+					ai_text = speaking.scramble(text)
 				else
-					text = stars(text)
+					ai_text = stars(text)
 			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
-			var/rendered
-			if(speaking)
-				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
-			else
-				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
-			master.show_message(rendered, 2)
+			master.show_message(get_hear_message(name_used, ai_text, verb, speaking), 2)
 	var/name_used = M.GetVoice()
+	var/message = get_hear_message(name_used, text, verb, speaking)
 	if(targetpad) //If this is the pad you're making the call from
-		var/message = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
 		targetpad.audible_message(message)
 		targetpad.last_message = message
 	if(sourcepad) //If this is a pad receiving a call
 		if(name_used==caller_id||text==last_message||findtext(text, "Holopad received")) //prevent echoes
 			return
-		sourcepad.audible_message("<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>")
+		sourcepad.audible_message(message)
+
+/obj/machinery/hologram/holopad/proc/get_hear_message(name_used, text, verb, datum/language/speaking)
+	if(speaking)
+		return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
+	return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
 	if(M)
@@ -238,12 +244,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/carbon/caller_id, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
-		var/tempicon = 0
 		var/datum/computer_file/report/crew_record/R = get_crewmember_record(caller_id.name)
 		if(R)
-			tempicon = R.photo_front
-		hologram.overlays += getHologramIcon(icon(tempicon), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
-	else
+			hologram.overlays += getHologramIcon(icon(R.photo_front), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
+	else if(A)
 		if(holopadType == HOLOPAD_LONG_RANGE)
 			hologram.overlays += A.holo_icon_longrange
 		else
@@ -263,9 +267,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.
 		A.holo = src
 		masters[A] = hologram
-	hologram.set_light(2)	//hologram lighting
+	hologram.set_light(1, 0.1, 2)	//hologram lighting
 	hologram.color = color //painted holopad gives coloured holograms
-	set_light(2)			//pad lighting
+	set_light(1, 0.1, 2)			//pad lighting
 	icon_state = "[base_icon]1"
 	return 1
 

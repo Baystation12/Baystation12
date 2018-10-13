@@ -82,7 +82,7 @@
 /obj/structure/noticeboard/ex_act(var/severity)
 	dismantle()
 
-/obj/structure/noticeboard/update_icon()
+/obj/structure/noticeboard/on_update_icon()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/weapon/thing, var/mob/user)

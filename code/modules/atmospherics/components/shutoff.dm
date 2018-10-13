@@ -9,7 +9,7 @@
 	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR
 
 
-/obj/machinery/atmospherics/valve/shutoff/update_icon()
+/obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[open]"
 
 /obj/machinery/atmospherics/valve/shutoff/examine(var/mob/user)

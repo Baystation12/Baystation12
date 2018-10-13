@@ -208,7 +208,7 @@
 	qdel(src)
 
 
-/obj/item/weapon/paper_bundle/update_icon()
+/obj/item/weapon/paper_bundle/on_update_icon()
 	var/obj/item/weapon/paper/P = pages[1]
 	icon_state = P.icon_state
 	overlays = P.overlays

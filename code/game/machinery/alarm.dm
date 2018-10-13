@@ -304,7 +304,7 @@
 		return 1
 	return 0
 
-/obj/machinery/alarm/update_icon()
+/obj/machinery/alarm/on_update_icon()
 	if(wiresexposed)
 		icon_state = "alarmx"
 		set_light(0)
@@ -606,7 +606,6 @@
 			var/list/gas_names = list(
 				"oxygen"         = "O<sub>2</sub>",
 				"carbon dioxide" = "CO<sub>2</sub>",
-				"phoron"         = "Toxin",
 				"other"          = "Other")
 			for (var/g in gas_names)
 				thresholds[++thresholds.len] = list("name" = gas_names[g], "settings" = list())
@@ -902,7 +901,7 @@ FIRE ALARM
 	. = ..()
 	update_icon()
 
-/obj/machinery/firealarm/update_icon()
+/obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
 
 	pixel_x = 0

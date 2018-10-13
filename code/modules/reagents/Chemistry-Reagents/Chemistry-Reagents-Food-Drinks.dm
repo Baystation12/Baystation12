@@ -16,6 +16,7 @@
 		return
 
 	//add the new taste data
+	LAZYINITLIST(data)
 	for(var/taste in newdata)
 		if(taste in data)
 			data[taste] += newdata[taste]

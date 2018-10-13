@@ -155,7 +155,7 @@
 	if(old_selecting != selecting)
 		update_icon()
 
-/obj/screen/zone_sel/update_icon()
+/obj/screen/zone_sel/on_update_icon()
 	overlays.Cut()
 	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
 
@@ -181,7 +181,7 @@
 	update_icon()
 	usr.a_intent = intent
 
-/obj/screen/intent/update_icon()
+/obj/screen/intent/on_update_icon()
 	icon_state = "intent_[intent]"
 
 /obj/screen/Click(location, control, params)

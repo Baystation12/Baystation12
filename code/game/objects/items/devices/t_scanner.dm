@@ -24,7 +24,7 @@
 	if(on)
 		set_active(FALSE)
 
-/obj/item/device/t_scanner/update_icon()
+/obj/item/device/t_scanner/on_update_icon()
 	icon_state = "t-ray[on]"
 
 /obj/item/device/t_scanner/emp_act()

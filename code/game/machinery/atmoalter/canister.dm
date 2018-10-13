@@ -135,7 +135,7 @@
 	else
 		return 0
 
-/obj/machinery/portable_atmospherics/canister/update_icon()
+/obj/machinery/portable_atmospherics/canister/on_update_icon()
 /*
 update_flag
 1 = holding

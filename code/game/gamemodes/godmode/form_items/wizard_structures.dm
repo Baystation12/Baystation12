@@ -1,3 +1,6 @@
+/obj/structure/deity/altar/tower
+	icon_state = "tomealtar"
+
 /obj/structure/deity/wizard_recharger
 	name = "fountain of power"
 	desc = "Refreshing, cool water surrounded by archaic carvings."

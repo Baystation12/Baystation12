@@ -46,7 +46,7 @@
 	else
 		luminosity = 1
 
-/turf/update_icon()
+/turf/on_update_icon()
 	update_flood_overlay()
 
 /turf/proc/update_flood_overlay()

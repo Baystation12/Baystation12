@@ -1,7 +1,5 @@
 #define SAVE_RESET -1
 
-var/list/preferences_datums = list()
-
 datum/preferences
 	//doohickeys for savefiles
 	var/path
@@ -29,6 +27,17 @@ datum/preferences
 	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
+	if(istype(C))
+		client = C
+		client_ckey = C.ckey
+		SScharacter_setup.preferences_datums += src
+		if(SScharacter_setup.initialized)
+			setup()
+		else
+			SScharacter_setup.prefs_awaiting_setup += src
+	..()
+
+/datum/preferences/proc/setup()
 	if(!length(GLOB.skills))
 		decls_repository.get_decl(/decl/hierarchy/skill)
 	player_setup = new(src)
@@ -36,13 +45,14 @@ datum/preferences
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
 
-	if(istype(C))
-		client = C
-		client_ckey = C.ckey
-		if(!IsGuestKey(C.key))
-			load_path(C.ckey)
-			load_preferences()
-			load_and_update_character()
+	if(client && !IsGuestKey(client.key))
+		load_path(client.ckey)
+		load_preferences()
+		load_and_update_character()
+	sanitize_preferences()
+	if(client && istype(client.mob, /mob/new_player))
+		var/mob/new_player/np = client.mob
+		np.new_player_panel(TRUE)
 
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)
@@ -51,7 +61,10 @@ datum/preferences
 		save_character()
 
 /datum/preferences/proc/ShowChoices(mob/user)
-	if(!user || !user.client)	return
+	if(!SScharacter_setup.initialized)
+		return
+	if(!user || !user.client)
+		return
 
 	if(!get_mob_by_key(client_ckey))
 		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")

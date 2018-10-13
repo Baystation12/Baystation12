@@ -15,6 +15,7 @@
 	var/datum/reagents/reagents = null
 
 	var/list/climbers
+	var/climb_speed_mult = 1
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
@@ -234,7 +235,7 @@ its easier to just keep the beam vertical.
 /atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
-	if(src.blood_DNA && !istype(src, /obj/effect/decal))
+	if(blood_DNA && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
 			f_name = "some "
 		else
@@ -271,6 +272,9 @@ its easier to just keep the beam vertical.
 		icon_state = new_icon_state
 
 /atom/proc/update_icon()
+	on_update_icon(arglist(args))
+
+/atom/proc/on_update_icon()
 	return
 
 /atom/proc/ex_act()
@@ -485,7 +489,7 @@ its easier to just keep the beam vertical.
 	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
 	LAZYDISTINCTADD(climbers,user)
 
-	if(!do_after(user,(issmall(user) ? 30 : 50), src))
+	if(!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src))
 		LAZYREMOVE(climbers,user)
 		return 0
 
