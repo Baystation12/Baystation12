@@ -885,6 +885,7 @@
 #include "code\game\objects\items\weapons\AI_modules.dm"
 #include "code\game\objects\items\weapons\autopsy.dm"
 #include "code\game\objects\items\weapons\beachball.dm"
+#include "code\game\objects\items\weapons\bodycam.dm"
 #include "code\game\objects\items\weapons\candle.dm"
 #include "code\game\objects\items\weapons\cane.dm"
 #include "code\game\objects\items\weapons\cards_ids.dm"
