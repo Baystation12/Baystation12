@@ -121,7 +121,7 @@
 /obj/structure/closet/statue/verb_toggleopen()
 	return
 
-/obj/structure/closet/statue/update_icon()
+/obj/structure/closet/statue/on_update_icon()
 	return
 
 /obj/structure/closet/statue/proc/shatter(mob/user as mob)

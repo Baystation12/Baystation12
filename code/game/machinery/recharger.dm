@@ -95,7 +95,7 @@ obj/machinery/recharger/emp_act(severity)
 			C.emp_act(severity)
 	..(severity)
 
-obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
+obj/machinery/recharger/on_update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
 	if(charging)
 		icon_state = icon_state_charging
 	else

@@ -210,7 +210,7 @@
 			qdel(G)
 	return
 
-/obj/machinery/atmospherics/unary/cryo_cell/update_icon()
+/obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
 	overlays.Cut()
 	icon_state = "pod[on]"
 	var/image/I

@@ -28,7 +28,7 @@
 	connected_area.set_lightswitch(on)
 	update_icon()
 
-/obj/machinery/light_switch/update_icon()
+/obj/machinery/light_switch/on_update_icon()
 	if(!overlay)
 		overlay = image(icon, "light1-overlay")
 		overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE

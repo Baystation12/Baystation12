@@ -37,7 +37,7 @@
 		bound_height = width * world.icon_size
 
 
-/obj/machinery/door/airlock/multi_tile/update_icon(state=0, override=0)
+/obj/machinery/door/airlock/multi_tile/on_update_icon(state=0, override=0)
 	..()
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
 		if(connections in list(WEST, EAST, EAST|WEST))

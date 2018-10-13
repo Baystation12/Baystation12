@@ -74,7 +74,7 @@ SUBSYSTEM_DEF(open_space)
 	SSopen_space.add_turf(src)
 
 
-/obj/update_icon()
+/obj/on_update_icon()
 	. = ..()
 	if(!invisibility && isturf(loc))
 		var/turf/T = GetAbove(src)

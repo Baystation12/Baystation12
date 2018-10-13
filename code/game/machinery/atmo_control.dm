@@ -23,7 +23,7 @@
 
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/air_sensor/update_icon()
+/obj/machinery/air_sensor/on_update_icon()
 	icon_state = "gsensor[on]"
 
 /obj/machinery/air_sensor/Process()

@@ -288,7 +288,7 @@
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
-/obj/machinery/autolathe/update_icon()
+/obj/machinery/autolathe/on_update_icon()
 	icon_state = (panel_open ? "autolathe_t" : "autolathe")
 
 //Updates overall lathe storage size.

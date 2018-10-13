@@ -15,7 +15,7 @@
 	radio_connection = register_radio(src, frequency, frequency, RADIO_ATMOSIA)
 
 
-/obj/machinery/status_light/update_icon()
+/obj/machinery/status_light/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "doortimer-b"
 		return

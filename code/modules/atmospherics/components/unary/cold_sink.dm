@@ -53,7 +53,7 @@
 
 	update_icon()
 
-/obj/machinery/atmospherics/unary/freezer/update_icon()
+/obj/machinery/atmospherics/unary/freezer/on_update_icon()
 	if(node)
 		if(use_power && cooling)
 			icon_state = "freezer_1"

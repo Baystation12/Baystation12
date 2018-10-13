@@ -24,7 +24,7 @@
 		src.base_state = src.icon_state
 	return
 
-/obj/machinery/door/window/update_icon()
+/obj/machinery/door/window/on_update_icon()
 	if(density)
 		icon_state = base_state
 	else

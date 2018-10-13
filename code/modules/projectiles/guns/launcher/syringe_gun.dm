@@ -12,7 +12,7 @@
 	w_class = ITEM_SIZE_TINY
 	var/obj/item/weapon/reagent_containers/syringe/syringe
 
-/obj/item/weapon/syringe_cartridge/update_icon()
+/obj/item/weapon/syringe_cartridge/on_update_icon()
 	underlays.Cut()
 	if(syringe)
 		underlays += image(syringe.icon, src, syringe.icon_state)

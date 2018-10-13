@@ -153,7 +153,7 @@
 	if(opened)
 		to_chat(M,"<span class='notice'>Its battery compartment is open.</span>")
 
-/obj/item/inducer/update_icon()
+/obj/item/inducer/on_update_icon()
 	overlays.Cut()
 	if(opened)
 		if(!get_cell())
@@ -179,7 +179,7 @@
 		return
 	. = ..()
 
-/obj/item/inducer/borg/update_icon()
+/obj/item/inducer/borg/on_update_icon()
 	. = ..()
 	overlays += image("icons/obj/gun.dmi","safety[safety()]")
 

@@ -44,7 +44,7 @@ var/list/gyrotrons = list()
 	E.damage = mega_energy * 50
 	return E
 
-/obj/machinery/power/emitter/gyrotron/update_icon()
+/obj/machinery/power/emitter/gyrotron/on_update_icon()
 	if (active && powernet && avail(active_power_usage))
 		icon_state = "emitter-on"
 	else

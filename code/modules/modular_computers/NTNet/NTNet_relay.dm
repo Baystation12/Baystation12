@@ -29,7 +29,7 @@
 		return 0
 	return 1
 
-/obj/machinery/ntnet_relay/update_icon()
+/obj/machinery/ntnet_relay/on_update_icon()
 	if(operable())
 		icon_state = "bus"
 	else

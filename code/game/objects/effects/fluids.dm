@@ -46,7 +46,7 @@
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
 
-/obj/effect/fluid/update_icon()
+/obj/effect/fluid/on_update_icon()
 
 	overlays.Cut()
 

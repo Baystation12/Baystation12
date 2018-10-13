@@ -363,7 +363,7 @@
 		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
-/obj/item/weapon/weldingtool/update_icon()
+/obj/item/weapon/weldingtool/on_update_icon()
 	..()
 
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)

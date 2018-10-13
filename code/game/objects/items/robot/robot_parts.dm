@@ -110,7 +110,7 @@
 	..()
 	src.update_icon()
 
-/obj/item/robot_parts/robot_suit/update_icon()
+/obj/item/robot_parts/robot_suit/on_update_icon()
 	src.overlays.Cut()
 	if(src.parts[BP_L_ARM])
 		src.overlays += "l_arm+o"

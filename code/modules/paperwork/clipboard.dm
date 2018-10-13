@@ -33,7 +33,7 @@
 			add_fingerprint(usr)
 			return
 
-/obj/item/weapon/clipboard/update_icon()
+/obj/item/weapon/clipboard/on_update_icon()
 	overlays.Cut()
 	if(toppaper)
 		overlays += toppaper.icon_state

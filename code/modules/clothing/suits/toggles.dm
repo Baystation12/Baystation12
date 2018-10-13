@@ -57,7 +57,7 @@
 	else
 		RemoveHood()
 
-/obj/item/clothing/suit/storage/hooded/update_icon()
+/obj/item/clothing/suit/storage/hooded/on_update_icon()
 	if(suittoggled)
 		icon_state = "[initial(icon_state)]_t"
 	else

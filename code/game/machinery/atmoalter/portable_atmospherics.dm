@@ -49,7 +49,7 @@
 /obj/machinery/portable_atmospherics/proc/MolesForPressure(var/target_pressure = start_pressure)
 	return (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
 
-/obj/machinery/portable_atmospherics/update_icon()
+/obj/machinery/portable_atmospherics/on_update_icon()
 	return null
 
 /obj/machinery/portable_atmospherics/proc/connect(obj/machinery/atmospherics/portables_connector/new_port)

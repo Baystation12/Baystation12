@@ -347,7 +347,7 @@ var/bomb_set
 
 	SetUniversalState(/datum/universal_state/nuclear_explosion, arguments=list(src))
 
-/obj/machinery/nuclearbomb/update_icon()
+/obj/machinery/nuclearbomb/on_update_icon()
 	if(lighthack)
 		icon_state = "idle"
 	else if(timing == -1)
@@ -539,7 +539,7 @@ var/bomb_set
 	..()
 	announced = 0
 
-/obj/machinery/nuclearbomb/station/update_icon()
+/obj/machinery/nuclearbomb/station/on_update_icon()
 	var/target_icon_state
 	if(lighthack)
 		target_icon_state = "rcircuit_off"

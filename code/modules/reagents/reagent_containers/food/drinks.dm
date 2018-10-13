@@ -88,7 +88,7 @@
 		if(percent <= k)
 			return k
 
-/obj/item/weapon/reagent_containers/food/drinks/update_icon()
+/obj/item/weapon/reagent_containers/food/drinks/on_update_icon()
 	overlays.Cut()
 	if(reagents.reagent_list.len > 0)
 		if(base_name)

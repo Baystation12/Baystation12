@@ -165,7 +165,7 @@
 	to_chat(src.loc, "<span class='warning'>You drop \the [wrapped].</span>")
 	wrapped.loc = get_turf(src)
 	wrapped = null
-	//update_icon()
+	//on_update_icon()
 
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	// Don't fall through and smack people with gripper, instead just no-op

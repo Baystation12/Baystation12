@@ -42,7 +42,7 @@
 			qdel(rice)
 	update_icon()
 
-/obj/item/weapon/reagent_containers/food/snacks/sushi/update_icon()
+/obj/item/weapon/reagent_containers/food/snacks/sushi/on_update_icon()
 	name = "[fish_type] sushi"
 	overlays = list("[fish_type]", "nori")
 
@@ -65,7 +65,7 @@
 	name = "[fish_type] sashimi"
 	update_icon()
 
-/obj/item/weapon/reagent_containers/food/snacks/sashimi/update_icon()
+/obj/item/weapon/reagent_containers/food/snacks/sashimi/on_update_icon()
 	icon_state = "sashimi_base"
 	var/list/adding = list()
 	var/slice_offset = (slices-1)*2

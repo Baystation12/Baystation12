@@ -26,7 +26,7 @@
 	playsound(user, 'sound/effects/Glassbr3.ogg', 100, 1)
 	update_icon()
 
-/obj/structure/fireaxecabinet/update_icon()
+/obj/structure/fireaxecabinet/on_update_icon()
 	overlays.Cut()
 	if(fireaxe)
 		overlays += image(icon, "fireaxe_item")

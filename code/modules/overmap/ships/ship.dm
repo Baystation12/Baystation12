@@ -107,7 +107,7 @@
 			handle_wraparound()
 		update_icon()
 
-/obj/effect/overmap/ship/update_icon()
+/obj/effect/overmap/ship/on_update_icon()
 	if(!is_still())
 		icon_state = moving_state
 		dir = get_heading()

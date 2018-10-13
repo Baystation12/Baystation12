@@ -6,7 +6,7 @@
 	var/iscopy = 0
 
 
-/obj/item/weapon/paper/carbon/update_icon()
+/obj/item/weapon/paper/carbon/on_update_icon()
 	if(iscopy)
 		if(info)
 			icon_state = "cpaper_words"

@@ -265,7 +265,7 @@
 /obj/item/device/electronic_assembly/proc/can_move()
 	return FALSE
 
-/obj/item/device/electronic_assembly/update_icon()
+/obj/item/device/electronic_assembly/on_update_icon()
 	if(opened)
 		icon_state = initial(icon_state) + "-open"
 	else

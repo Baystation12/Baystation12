@@ -31,7 +31,7 @@
 
 /obj/item/weapon/reagent_containers/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-/obj/item/weapon/reagent_containers/ivbag/update_icon()
+/obj/item/weapon/reagent_containers/ivbag/on_update_icon()
 	overlays.Cut()
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)

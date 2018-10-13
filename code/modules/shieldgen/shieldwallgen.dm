@@ -34,7 +34,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/shieldwallgen/update_icon()
+/obj/machinery/shieldwallgen/on_update_icon()
 //	if(stat & BROKEN) -TODO: Broken icon
 	if(!active)
 		icon_state = "Shield_Gen"

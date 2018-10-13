@@ -22,7 +22,7 @@
 	update_icon()
 	. = ..(mapload)
 
-/obj/structure/diona_gestalt/update_icon()
+/obj/structure/diona_gestalt/on_update_icon()
 	overlays = list(eyes_overlay)
 	if(nymphs && nymphs.len)
 		var/matrix/M = matrix()

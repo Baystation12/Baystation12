@@ -46,7 +46,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
 	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
 
-/obj/item/weapon/stool/update_icon()
+/obj/item/weapon/stool/on_update_icon()
 	// Prep icon.
 	icon_state = ""
 	// Base icon.

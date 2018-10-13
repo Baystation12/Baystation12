@@ -76,7 +76,7 @@
 		update_icon()
 	return 1
 
-/obj/item/weapon/aicard/update_icon()
+/obj/item/weapon/aicard/on_update_icon()
 	overlays.Cut()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)

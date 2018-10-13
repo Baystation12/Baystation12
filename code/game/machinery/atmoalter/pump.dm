@@ -28,7 +28,7 @@
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
-/obj/machinery/portable_atmospherics/powered/pump/update_icon()
+/obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	src.overlays = 0
 
 	if(on && cell && cell.charge)

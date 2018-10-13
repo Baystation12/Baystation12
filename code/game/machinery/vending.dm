@@ -545,7 +545,7 @@
 /obj/machinery/vending/powered()
 	return anchored && ..()
 
-/obj/machinery/vending/update_icon()
+/obj/machinery/vending/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else if( !(stat & NOPOWER) )
