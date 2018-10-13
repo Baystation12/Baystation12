@@ -4237,6 +4237,11 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 21
+	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/storage)
 "jM" = (
@@ -6628,6 +6633,11 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 21
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -11548,6 +11558,19 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
+"CN" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "CS" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
@@ -12407,12 +12430,6 @@
 /area/shuttle/petrov/eva)
 "GG" = (
 /obj/machinery/artifact_scanpad,
-/obj/machinery/alarm{
-	alarm_id = "petrov1";
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
 "GI" = (
@@ -13871,6 +13888,12 @@
 /obj/machinery/atmospherics/unary/vent_scrubber{
 	icon_state = "map_scrubber_off";
 	dir = 1
+	},
+/obj/machinery/alarm{
+	alarm_id = "petrov1";
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -24
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
@@ -32716,7 +32739,7 @@ aX
 aX
 aX
 oM
-kU
+CN
 aX
 aX
 aX

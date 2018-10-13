@@ -6091,6 +6091,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "asy" = (
@@ -8164,11 +8165,17 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "azN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -9854,6 +9861,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aFT" = (
@@ -15393,6 +15401,24 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
+"bEQ" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/firstdeck/aft)
 "bFb" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
@@ -15859,6 +15885,9 @@
 "cgu" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -18972,6 +19001,7 @@
 /obj/item/weapon/reagent_containers/spray/cleaner{
 	pixel_x = -5
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "fRb" = (
@@ -20155,15 +20185,15 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/aft)
 "hhB" = (
@@ -20383,7 +20413,6 @@
 "hub" = (
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -20391,6 +20420,9 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/rnd/entry)
 "huf" = (
@@ -20404,6 +20436,10 @@
 "hvb" = (
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/rnd/entry)
 "hwb" = (
@@ -21694,8 +21730,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/valve/shutoff,
-/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "iVM" = (
@@ -21993,6 +22027,7 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
+/obj/effect/floor_decal/corner/red,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "jpt" = (
@@ -26543,6 +26578,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "oFb" = (
@@ -26557,6 +26593,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "oGG" = (
@@ -28447,6 +28484,11 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
+"rcx" = (
+/obj/machinery/atmospherics/valve/shutoff,
+/obj/effect/floor_decal/industrial/shutoff,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "rdb" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -30833,6 +30875,7 @@
 /obj/machinery/newscaster{
 	pixel_x = -32
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
 "uRO" = (
@@ -30912,6 +30955,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
+"uZi" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "uZO" = (
 /obj/structure/table/steel,
 /obj/machinery/recharger,
@@ -53439,8 +53488,8 @@ gBb
 mzb
 gWb
 ivT
-hnN
-aGx
+bEQ
+rcx
 hvb
 hGb
 nKb
@@ -57278,7 +57327,7 @@ avw
 awB
 fhx
 hnN
-aGx
+uZi
 sOg
 aCo
 moh
