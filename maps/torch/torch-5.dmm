@@ -3495,6 +3495,10 @@
 /area/crew_quarters/heads/office/ce)
 "ij" = (
 /obj/machinery/papershredder,
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 21
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
 "ik" = (
@@ -3795,12 +3799,8 @@
 /obj/item/weapon/rcd_ammo,
 /obj/item/weapon/rcd_ammo,
 /obj/item/weapon/rcd,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/item/device/radio/intercom{
-	dir = 8;
-	pixel_x = 21
+/obj/structure/noticeboard{
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
@@ -4185,6 +4185,9 @@
 /obj/structure/closet/secure_closet/engineering_chief_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
 "jN" = (
@@ -5583,9 +5586,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/keycard_auth/torch{
-	pixel_x = 0;
-	pixel_y = 24
+/obj/structure/noticeboard{
+	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cos)
@@ -5620,6 +5622,10 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/red/mono,
+/obj/machinery/keycard_auth/torch{
+	pixel_x = 38;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "mK" = (
@@ -6835,6 +6841,7 @@
 /obj/item/weapon/hand_labeler,
 /obj/item/device/destTagger,
 /obj/effect/floor_decal/corner/blue/mono,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/meeting_room)
 "pu" = (
@@ -10056,6 +10063,7 @@
 	},
 /obj/item/weapon/stamp/nt,
 /obj/effect/floor_decal/corner/b_green/diagonal,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
 "vv" = (
@@ -10086,6 +10094,7 @@
 	},
 /obj/item/weapon/stamp/solgov,
 /obj/item/documents/scgr,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "vy" = (
@@ -12344,6 +12353,7 @@
 	pixel_y = 7
 	},
 /obj/item/weapon/stamp/ce,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
 "Dg" = (
@@ -12491,6 +12501,7 @@
 	pixel_x = 24;
 	pixel_y = 16
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ei" = (
@@ -12580,6 +12591,9 @@
 /obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = -24
+	},
+/obj/structure/noticeboard{
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
@@ -13345,6 +13359,7 @@
 	icon_state = "4-8"
 	},
 /obj/random_multi/single_item/boombox,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Ih" = (
@@ -14016,6 +14031,7 @@
 	pixel_y = -32
 	},
 /obj/machinery/light,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "KR" = (
@@ -14173,6 +14189,7 @@
 	},
 /obj/item/weapon/stamp/rd,
 /obj/item/weapon/pen,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "Li" = (
@@ -14960,6 +14977,7 @@
 	},
 /obj/item/weapon/pen,
 /obj/item/weapon/stamp/sea,
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "Qg" = (
@@ -15588,6 +15606,7 @@
 	pixel_x = 8;
 	pixel_y = -3
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
 "Uf" = (
@@ -16253,6 +16272,9 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Yd" = (
@@ -16274,7 +16296,6 @@
 	pixel_x = 0;
 	pixel_y = -3
 	},
-/obj/random/documents,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "Yf" = (
@@ -16373,12 +16394,12 @@
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "Zc" = (
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/machinery/photocopier,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/noticeboard{
+	pixel_y = 30
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Zd" = (
