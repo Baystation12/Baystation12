@@ -10085,7 +10085,6 @@
 	pixel_x = -21
 	},
 /obj/item/weapon/stamp/solgov,
-/obj/item/documents/scgr,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "vy" = (
@@ -15241,7 +15240,6 @@
 	},
 /obj/item/weapon/folder/envelope/blanks,
 /obj/item/weapon/pen/green,
-/obj/item/documents/nanotrasen,
 /obj/effect/floor_decal/corner/b_green/diagonal,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
@@ -16274,7 +16272,6 @@
 	pixel_x = 0;
 	pixel_y = -3
 	},
-/obj/random/documents,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "Yf" = (
