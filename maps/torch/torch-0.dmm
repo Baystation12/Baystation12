@@ -4577,7 +4577,7 @@
 	name = "Hangar Exit Door Control";
 	pixel_x = -24;
 	pixel_y = 0;
-	req_access = list(207)
+	req_access = newlist()
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -6747,7 +6747,7 @@
 	name = "Hangar Exit Door Control";
 	pixel_x = 24;
 	pixel_y = 0;
-	req_access = list(207)
+	req_access = newlist()
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -10691,6 +10691,19 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
+"zf" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "zi" = (
 /obj/structure/bed,
 /obj/structure/cable/cyan{
@@ -11558,19 +11571,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
-"CN" = (
-/obj/effect/catwalk_plated,
-/obj/machinery/light/spot{
-	dir = 8
-	},
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
 "CS" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
@@ -32739,7 +32739,7 @@ aX
 aX
 aX
 oM
-CN
+zf
 aX
 aX
 aX
