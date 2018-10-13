@@ -14,14 +14,14 @@
 	desc = "Allows a follower to slicken a small patch of floor. Anyone without sure-footing will find it hard to stay upright."
 	base_cost = 10
 	category = DEITY_TREE_TRANSMUTATION
-	boon_path = /spell/hand/slippery_surface
+	boon_path = /spell/hand/slippery_surface/tower
 
 /datum/deity_item/boon/single_charge/smoke
 	name = "Smoke"
 	desc = "Allows a follower to distill the nearby air into smoke."
 	base_cost = 10
 	category = DEITY_TREE_TRANSMUTATION
-	boon_path = /spell/aoe_turf/smoke
+	boon_path = /spell/aoe_turf/smoke/tower
 
 //Level 2
 /datum/deity_item/boon/single_charge/knock
@@ -29,14 +29,14 @@
 	desc = "Allows a follower to open nearby doors without the keys."
 	base_cost = 25
 	category = DEITY_TREE_TRANSMUTATION
-	boon_path = /spell/aoe_turf/knock
+	boon_path = /spell/aoe_turf/knock/tower
 	requirements = list(DEITY_TREE_TRANSMUTATION = 2)
 
 /datum/deity_item/boon/single_charge/burning_grip
 	name = "Burning Grip"
 	desc = "Allows a follower cause an object to heat up intensly in someone's hand, making them drop it and whatever skin is attached."
 	base_cost = 15
-	boon_path = /spell/hand/burning_grip
+	boon_path = /spell/hand/burning_grip/tower
 	category = DEITY_TREE_TRANSMUTATION
 	requirements = list(DEITY_TREE_TRANSMUTATION = 2)
 
@@ -54,7 +54,7 @@
 	desc = "Allows a follower to liquify for a short duration, letting them pass through all dense objects."
 	base_cost = 25
 	category = DEITY_TREE_TRANSMUTATION
-	boon_path = /spell/targeted/ethereal_jaunt
+	boon_path = /spell/targeted/ethereal_jaunt/tower
 	requirements = list(DEITY_TREE_TRANSMUTATION = 3)
 
 /datum/deity_item/healing_spells
@@ -72,7 +72,7 @@
 	category = DEITY_TREE_TRANSMUTATION
 	requirements = list(DEITY_UNLOCK_HEAL = 1)
 	category = DEITY_TREE_TRANSMUTATION
-	boon_path = /spell/targeted/heal_target
+	boon_path = /spell/targeted/heal_target/tower
 
 /datum/deity_item/boon/single_charge/heal/major
 	name = "Major Heal"
@@ -80,7 +80,7 @@
 	base_cost = 25
 	category = DEITY_TREE_TRANSMUTATION
 	requirements = list(DEITY_UNLOCK_HEAL = 1)
-	boon_path = /spell/targeted/heal_target/major
+	boon_path = /spell/targeted/heal_target/major/tower
 
 /datum/deity_item/boon/single_charge/heal/area
 	name = "Area Heal"
@@ -88,7 +88,7 @@
 	base_cost = 20
 	category = DEITY_TREE_TRANSMUTATION
 	requirements = list(DEITY_UNLOCK_HEAL = 1)
-	boon_path = /spell/targeted/heal_target/area
+	boon_path = /spell/targeted/heal_target/area/tower
 
 /datum/deity_item/phenomena/rock_form
 	name = "Phenomena: Rock Form"
