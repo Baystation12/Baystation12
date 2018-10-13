@@ -105,7 +105,7 @@
 	icon_state = "pillA"
 
 /obj/item/weapon/reagent_containers/pill/adminordrazine/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/adminordrazine, 1)
 
 /obj/item/weapon/reagent_containers/pill/stox
