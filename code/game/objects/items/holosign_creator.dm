@@ -25,6 +25,8 @@
 	. = ..()
 	if(flag)
 		var/turf/T = get_turf(target)
+		if(!T)
+			return // Some objs qdel on attackby (notably, holosigns), which happens before this.
 		var/obj/structure/holosign/H = locate(holosign_type) in T
 		if(H)
 			return
