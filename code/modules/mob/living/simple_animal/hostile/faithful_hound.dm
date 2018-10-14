@@ -10,7 +10,7 @@
 	melee_damage_upper = 30
 	attacktext = "bites"
 	attack_sound = 'sound/weapons/bite.ogg'
-	faction = "neutral"
+	faction = MOB_FACTION_NEUTRAL
 	density = 0
 	stop_automated_movement = 1
 	wander = 0

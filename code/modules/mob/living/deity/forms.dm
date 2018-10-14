@@ -6,7 +6,7 @@ Each plays slightly different and has different challenges/benefits
 	var/name = "Form"
 	var/info = "This is a form your being can take."
 	var/desc = "This is the mob's description given."
-	var/faction = "neutral" //For stuff like mobs and shit
+	var/faction = MOB_FACTION_NEUTRAL //For stuff like mobs and shit
 	var/god_icon_state = "nar-sie" //What you look like
 	var/pylon_icon_state //What image shows up when appearing in a pylon
 	var/mob/living/deity/linked_god = null

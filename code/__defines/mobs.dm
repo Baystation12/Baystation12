@@ -318,3 +318,5 @@
 
 #define MOB_CLIMB_TIME_SMALL 30
 #define MOB_CLIMB_TIME_MEDIUM 50
+
+#define MOB_FACTION_NEUTRAL "neutral"
