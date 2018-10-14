@@ -31,7 +31,7 @@
 
 	adjust_source(-3, L)
 	minions -= L.mind
-	L.faction = "neutral"
+	L.faction = MOB_FACTION_NEUTRAL
 	if(L.mind)
 		remove_follower_spells(L.mind)
 	update_followers()

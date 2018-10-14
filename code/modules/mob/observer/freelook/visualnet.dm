@@ -21,7 +21,8 @@
 		remove_source(source, FALSE)
 	sources.Cut()
 	for(var/chunk in chunks)
-		qdel(chunk)
+		var/chunk_datum = chunks[chunk]
+		qdel(chunk_datum)
 	chunks.Cut()
 	. = ..()
 
