@@ -229,6 +229,6 @@
 	signal.frequency = frequency
 	signal.data["tag"] = id
 	signal.data["command"] = "valve_toggle"
-	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 	active = !active
 	update_icon()
