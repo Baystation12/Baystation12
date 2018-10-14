@@ -1112,9 +1112,9 @@
 	skill_points = 24
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 	minimal_access = list()
-	required_education = EDUCATION_TIER_MEDSCHOOL
+	required_education = EDUCATION_TIER_DOCTORATE
 /datum/job/biomech/get_description_blurb()
-	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI’s and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
+	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI's and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
 
 /datum/job/medical_trainee
 	title = "Corpsman Trainee"
