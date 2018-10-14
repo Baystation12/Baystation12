@@ -6,6 +6,7 @@ SUBSYSTEM_DEF(trade)
 
 	var/list/traders = list()
 	var/tmp/list/current_traders
+	var/max_traders = 10
 
 /datum/controller/subsystem/trade/Initialize()
 	. = ..()
@@ -26,7 +27,7 @@ SUBSYSTEM_DEF(trade)
 		if (MC_TICK_CHECK)
 			return
 
-	if(prob(100-traders.len*10))
+	if((traders.len <= max_traders) && prob(100 - 50 * traders.len / max_traders))
 		generate_trader()
 
 /datum/controller/subsystem/trade/stat_entry()

@@ -1,5 +1,5 @@
 /datum/trader/ship/vox
-	typical_duration = 15
+	typical_duration = 60
 	origin = "UNREGISTERED VESSEL"
 	name_language = LANGUAGE_VOX
 	compliment_increase = 0
