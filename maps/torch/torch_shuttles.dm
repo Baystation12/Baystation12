@@ -603,7 +603,7 @@
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_calypso"
 
-/obj/effect/shuttle_landmark/torch/transit/exploration_shuttle
+/obj/effect/shuttle_landmark/transit/torch/exploration_shuttle
 	name = "In transit"
 	landmark_tag = "nav_transit_calypso"
 
@@ -649,7 +649,7 @@
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_guppy"
 
-/obj/effect/shuttle_landmark/torch/transit/guppy
+/obj/effect/shuttle_landmark/transit/torch/guppy
 	name = "In transit"
 	landmark_tag = "nav_transit_guppy"
 
@@ -691,7 +691,7 @@
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_aquila"
 
-/obj/effect/shuttle_landmark/torch/transit/aquila
+/obj/effect/shuttle_landmark/transit/torch/aquila
 	name = "In transit"
 	landmark_tag = "nav_transit_aquila"
 

@@ -31,7 +31,7 @@
 #define FACTION_FLEET          "SCG Fleet"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
-#define FACTION_TORCH_LTD      "Torch, Ltd"
+#define FACTION_CORPORATE       "Expeditionary Corps Organisation"
 #define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
@@ -80,7 +80,6 @@
 #define CULTURE_STOK           "Stok Business"
 #define CULTURE_ALIUM          "Mysterious Aliens"
 #define CULTURE_CULTIST        "Blood Cult"
-
 #define RELIGION_OTHER         "Other Religion"
 #define RELIGION_JUDAISM       "Judaism"
 #define RELIGION_HINDUISM      "Hinduism"

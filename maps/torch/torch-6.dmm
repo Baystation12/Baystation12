@@ -16907,7 +16907,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
@@ -16992,7 +16992,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
@@ -17326,7 +17326,7 @@
 "aNu" = (
 /obj/machinery/door/airlock{
 	name = "Room A";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/wood,
@@ -17497,7 +17497,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
@@ -17511,7 +17511,7 @@
 "aNX" = (
 /obj/machinery/door/airlock{
 	name = "Room B";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/wood,
@@ -17550,7 +17550,7 @@
 "aOc" = (
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark,
@@ -18355,7 +18355,7 @@
 "aPX" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Office";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -18507,19 +18507,19 @@
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/weapon/card/id{
-	access = list(201);
+	access = list(301);
 	desc = "A visitor's access card, this one is for the Merchant's Station.";
 	icon_state = "guest";
 	name = "Visitor's Card - Merchant's Station"
 	},
 /obj/item/weapon/card/id{
-	access = list(201);
+	access = list(301);
 	desc = "A visitor's access card, this one is for the Merchant's Station.";
 	icon_state = "guest";
 	name = "Visitor's Card - Merchant's Station"
 	},
 /obj/item/weapon/card/id{
-	access = list(201);
+	access = list(301);
 	desc = "A visitor's access card, this one is for the Merchant's Station.";
 	icon_state = "guest";
 	name = "Visitor's Card - Merchant's Station"
@@ -18530,7 +18530,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
@@ -18697,7 +18697,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
@@ -18757,14 +18757,14 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQP" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Storage";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
@@ -19309,7 +19309,7 @@
 "aSh" = (
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -19344,7 +19344,7 @@
 	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/southright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
@@ -19361,7 +19361,7 @@
 	name = "Merchant Loading Shutters";
 	pixel_x = 27;
 	pixel_y = -9;
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled,
@@ -19509,7 +19509,7 @@
 	dir = 1
 	},
 /obj/machinery/door/window/brigdoor/eastright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
@@ -19687,7 +19687,7 @@
 	name = "Merchant Window Shutters";
 	pixel_x = 0;
 	pixel_y = -28;
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (WEST)";
@@ -19702,7 +19702,7 @@
 "aTf" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Cockpit";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/wood,
 /area/shuttle/merchant/home)
@@ -19769,7 +19769,7 @@
 	id_tag = "merchant_ship_interior";
 	locked = 1;
 	name = "Ship Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/merchant/home)
@@ -19849,7 +19849,7 @@
 "aTy" = (
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/item/device/radio/intercom{
 	dir = 1;
@@ -19881,7 +19881,7 @@
 "aTC" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/brigdoor/eastright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/light,
 /obj/structure/closet/walllocker/emerglocker/south,
@@ -19935,7 +19935,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -19981,21 +19981,21 @@
 /area/shuttle/merchant/home)
 "aTT" = (
 /obj/machinery/door/window/brigdoor/northleft{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
 "aTU" = (
 /obj/machinery/door/window/brigdoor/northright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
 "aTX" = (
 /obj/machinery/door/window/brigdoor/northright{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/structure/table/rack,
 /obj/machinery/light{
@@ -20010,7 +20010,7 @@
 	id_tag = "merchant_ship_exterior";
 	locked = 1;
 	name = "Ship Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -20116,7 +20116,7 @@
 	id_tag = "merchant_station_exterior";
 	locked = 1;
 	name = "Station Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/merchant_station)
@@ -20184,7 +20184,7 @@
 	id_tag = "merchant_station_dock";
 	pixel_x = -28;
 	pixel_y = 0;
-	req_access = list(201);
+	req_access = list(301);
 	tag_airpump = "merchant_station_vent";
 	tag_chamber_sensor = "merchant_station_sensor";
 	tag_exterior_door = "merchant_station_exterior";
@@ -20218,7 +20218,7 @@
 	id_tag = "merchant_station_interior";
 	locked = 1;
 	name = "Station Exterior";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -20395,13 +20395,13 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aUS" = (
 /obj/machinery/suit_storage_unit/standard_unit{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -20425,7 +20425,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
@@ -20632,7 +20632,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Maintenance";
-	req_access = list(201)
+	req_access = list(301)
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/decal/cleanable/dirt,
@@ -20782,7 +20782,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/vending/engivend{
-	req_access = list(201)
+	req_access = list(301)
 	},
 /turf/simulated/floor/plating,
 /area/merchant_station)
@@ -20815,7 +20815,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)

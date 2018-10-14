@@ -43,9 +43,6 @@
 /area/maintenance/substation/fifthdeck
 	name = "Fifth Deck Substation"
 
-/area/crew_quarters/safe_room/fifthdeck
-	name = "\improper Fifth Deck Safe Room"
-
 //Fourth Deck (Z-1)
 /area/hallway/primary/fourthdeck/fore
 	name = "\improper Fourth Deck Fore Hallway"
@@ -89,6 +86,9 @@
 
 /area/maintenance/substation/fourthdeck
 	name = "Fourth Deck Substation"
+
+/area/crew_quarters/safe_room/fourthdeck
+	name = "\improper Fourth Deck Safe Room"
 
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore
@@ -1001,6 +1001,11 @@
 	name = "\improper Mental Health"
 	icon_state = "medbay3"
 	ambience = list('sound/ambience/signal.ogg')
+
+/area/medical/washroom
+	name = "\improper Infirmary Washroom"
+	icon_state = "toilet"
+	sound_env = SMALL_ENCLOSED
 
 // Chapel
 /area/chapel/crematorium

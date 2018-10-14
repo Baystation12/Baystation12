@@ -187,7 +187,7 @@ SUBSYSTEM_DEF(unit_tests)
 	var/list/queue = list()
 	var/list/async_tests = list()
 	var/list/current_async
-	var/stage = 0
+	var/stage = 1
 	var/end_unit_tests
 
 /datum/controller/subsystem/unit_tests/Initialize(timeofday)
@@ -203,25 +203,22 @@ SUBSYSTEM_DEF(unit_tests)
 	//
 	//Start the Round.
 	//
-	world.save_mode("extended")
+	SSticker.master_mode = "extended"
 	for(var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
 	log_unit_test("[queue.len] unit tests loaded.")
 	. = ..()
 
 /datum/controller/subsystem/unit_tests/proc/start_game()
-	if(Master.current_runlevel < RUNLEVEL_LOBBY)
-		return //Have to wait for the old Master.
-	log_unit_test("Master process setup.")
-
-	if (ticker.current_state == GAME_STATE_FINISHED)
+	if (GAME_STATE >= RUNLEVEL_POSTGAME)
 		log_unit_test("Unable to start testing - game is finished!")
 		del world
 		return
 
-	if (ticker.current_state == GAME_STATE_PREGAME)
-		ticker.current_state = GAME_STATE_SETTING_UP
-		Master.SetRunLevel(RUNLEVEL_SETUP)
+	if ((GAME_STATE == RUNLEVEL_LOBBY) && !SSticker.start_now())
+		log_unit_test("Unable to start testing - SSticker failed to start the game!")
+		del world
+		return
 
 	stage++
 	log_unit_test("Round has been started.  Waiting 10 seconds to start tests.")
@@ -246,21 +243,17 @@ SUBSYSTEM_DEF(unit_tests)
 
 	var/list/async = current_async
 	while (async.len)
-		var/datum/unit_test/test = current_async[current_async.len]
-		current_async.len--
+		var/datum/unit_test/test = current_async[async.len]
+		async.len--
 		if(check_unit_test(test, end_unit_tests))
 			async_tests -= test
 		if (MC_TICK_CHECK)
 			return
-	if (!async.len)
+	if (!async_tests.len)
 		stage++
 
 /datum/controller/subsystem/unit_tests/fire(resumed = 0)
 	switch (stage)
-		if (0)
-			stage ++
-			log_unit_test("Awaiting the master process...")
-
 		if (1)
 			start_game()
 

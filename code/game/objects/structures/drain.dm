@@ -32,7 +32,7 @@
 		return
 	return ..()
 
-/obj/structure/drain/update_icon()
+/obj/structure/drain/on_update_icon()
 	icon_state = "[initial(icon_state)][welded ? "-welded" : ""]"
 
 /obj/structure/drain/Process()

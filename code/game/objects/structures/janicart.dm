@@ -5,7 +5,7 @@
 	icon_state = "cart"
 	anchored = 0
 	density = 1
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	//copypaste sorry
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/weapon/storage/bag/trash/mybag	= null
@@ -148,7 +148,7 @@
 	updateUsrDialog()
 
 
-/obj/structure/janitorialcart/update_icon()
+/obj/structure/janitorialcart/on_update_icon()
 	overlays = null
 	if(mybag)
 		overlays += "cart_garbage"
@@ -169,7 +169,7 @@
 	icon_state = "pussywagon"
 	anchored = 1
 	density = 1
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	//copypaste sorry
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/weapon/storage/bag/trash/mybag	= null

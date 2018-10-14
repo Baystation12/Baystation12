@@ -83,11 +83,11 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 	var/tmp/last_safety_check = -INFINITY
-	var/safety_state = 0
+	var/safety_state = 1
 	var/has_safety = TRUE
 
-/obj/item/weapon/gun/New()
-	..()
+/obj/item/weapon/gun/Initialize()
+	. = ..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
@@ -99,7 +99,7 @@
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
-/obj/item/weapon/gun/update_icon()
+/obj/item/weapon/gun/on_update_icon()
 	var/mob/living/M = loc
 	overlays.Cut()
 	if(istype(M))
@@ -528,3 +528,13 @@
 /obj/item/weapon/gun/attack_hand()
 	..()
 	update_icon()
+
+/obj/item/weapon/gun/on_disarm_attempt(mob/target, mob/attacker)
+	var/list/turfs = list()
+	for(var/turf/T in view())
+		turfs += T
+	if(turfs.len)
+		var/turf/shoot_to = pick(turfs)
+		target.visible_message("<span class='danger'>\The [src] goes off during the struggle!</span>")
+		afterattack(shoot_to,target)
+		return 1

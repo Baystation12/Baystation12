@@ -347,7 +347,7 @@ var/bomb_set
 
 	SetUniversalState(/datum/universal_state/nuclear_explosion, arguments=list(src))
 
-/obj/machinery/nuclearbomb/update_icon()
+/obj/machinery/nuclearbomb/on_update_icon()
 	if(lighthack)
 		icon_state = "idle"
 	else if(timing == -1)
@@ -376,7 +376,7 @@ var/bomb_set
 	GLOB.moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 
 /obj/item/weapon/disk/nuclear/proc/check_z_level()
-	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
+	if(!(istype(SSticker.mode, /datum/game_mode/nuclear)))
 		GLOB.moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)
@@ -513,7 +513,7 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/station/Process()
 	..()
-	if(timeleft > 0 && ticker.current_state != GAME_STATE_FINISHED)
+	if(timeleft > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
 		if(timeleft <= self_destruct_cutoff)
 			if(!announced)
 				priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
@@ -539,7 +539,7 @@ var/bomb_set
 	..()
 	announced = 0
 
-/obj/machinery/nuclearbomb/station/update_icon()
+/obj/machinery/nuclearbomb/station/on_update_icon()
 	var/target_icon_state
 	if(lighthack)
 		target_icon_state = "rcircuit_off"

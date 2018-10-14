@@ -1,4 +1,4 @@
-#define PUBLIC_GAME_MODE (ticker ? (ticker.hide_mode == 0 ? master_mode : "Secret") : "Unknown")
+#define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define Clamp(value, low, high) 	(value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
@@ -123,7 +123,7 @@
 
 #define CanPhysicallyInteractWith(user, target) CanInteractWith(user, target, GLOB.physical_state)
 
-#define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
+#define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) }}; if(x) {x.Cut(); x = null } // Second x check to handle items that LAZYREMOVE on qdel.
 
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
 

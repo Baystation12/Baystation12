@@ -39,15 +39,17 @@
 			biomass = Clamp(biomass + round(N.volume*deconstruct_eff),1,biomass_max)
 		qdel(O)
 	else if(istype(O, /obj/item/weapon/storage/plants))
-		if(!O.contents || !O.contents.len)
-			return
-		to_chat(user, "You empty \the [O] into \the [src]")
-		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
-			var/obj/item/weapon/storage/S = O
-			S.remove_from_storage(G, null)
+		var/obj/item/weapon/storage/S = O
+		var/success
+		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in S)
+			success = 1
+			S.remove_from_storage(G, null, 1)
 			for(var/datum/reagent/nutriment/N in G.reagents.reagent_list)
 				biomass = Clamp(biomass + round(N.volume*deconstruct_eff),1,biomass_max)
 			qdel(G)
+		if(success)
+			S.finish_bulk_removal()
+			to_chat(user, "You empty \the [O] into \the [src]")
 
 	if(default_deconstruction_screwdriver(user, O))
 		return
@@ -59,7 +61,7 @@
 		..()
 	return
 
-/obj/machinery/food_replicator/update_icon()
+/obj/machinery/food_replicator/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else if( !(stat & NOPOWER) )

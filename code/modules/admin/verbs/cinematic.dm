@@ -6,22 +6,19 @@
 	if(!check_rights(R_FUN))
 		return
 
-	if(alert("Are you sure you want to run [cinematic]?","Confirmation","Yes","No")=="No") return
-	if(!ticker)	return
+	if(alert("Are you sure you want to run [cinematic]?","Confirmation","Yes","No")=="No")
+		return
 	switch(cinematic)
 		if("explosion")
 			if(alert("The game will be over. Are you really sure?", "Confirmation" ,"Continue", "Cancel") == "Cancel")
 				return
-			var/parameter = input(src,"station_missed = ?","Enter Parameter",0) as num
-			var/override
-			switch(parameter)
-				if(1)
-					override = input(src,"mode = ?","Enter Parameter",null) as anything in list("mercenary","no override")
-				if(0)
-					override = input(src,"mode = ?","Enter Parameter",null) as anything in list("blob","mercenary","AI malfunction","no override")
-			ticker.station_explosion_cinematic(parameter,override)
+			var/parameter = input(src,"station_missed = ? (0 for hit, 1 for near miss, 2 for not close)","Enter Parameter",0) as num
+			var/datum/game_mode/override
+			var/name = input(src,"Override mode = ?","Enter Parameter",null) as null|anything in gamemode_cache
+			override = gamemode_cache[name]
+			if(!istype(override))
+				override = null
+			GLOB.cinematic.station_explosion_cinematic(parameter,override)
 
 	log_admin("[key_name(src)] launched cinematic \"[cinematic]\"")
 	message_admins("[key_name_admin(src)] launched cinematic \"[cinematic]\"", 1)
-
-	return

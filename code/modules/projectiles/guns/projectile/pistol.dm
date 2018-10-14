@@ -20,7 +20,7 @@
 	accuracy = 0.35
 	fire_delay = 6.5
 
-/obj/item/weapon/gun/projectile/military/update_icon()
+/obj/item/weapon/gun/projectile/military/on_update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "usp"
@@ -39,7 +39,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
-/obj/item/weapon/gun/projectile/sec/update_icon()
+/obj/item/weapon/gun/projectile/sec/on_update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "secguncomp"
@@ -55,7 +55,7 @@
 	icon_state = "secgundark"
 	accuracy = 0
 
-/obj/item/weapon/gun/projectile/sec/wood/update_icon()
+/obj/item/weapon/gun/projectile/sec/wood/on_update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "secgundark"
@@ -92,7 +92,7 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 
-/obj/item/weapon/gun/projectile/magnum_pistol/update_icon()
+/obj/item/weapon/gun/projectile/magnum_pistol/on_update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "magnum"
@@ -115,7 +115,7 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 
-/obj/item/weapon/gun/projectile/gyropistol/update_icon()
+/obj/item/weapon/gun/projectile/gyropistol/on_update_icon()
 	..()
 	if(ammo_magazine)
 		icon_state = "gyropistolloaded"
@@ -133,7 +133,7 @@
 	load_method = MAGAZINE
 	accuracy = 0.35
 
-/obj/item/weapon/gun/projectile/beretta/update_icon()
+/obj/item/weapon/gun/projectile/beretta/on_update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "92fs"
@@ -186,7 +186,7 @@
 		return
 	..()
 
-/obj/item/weapon/gun/projectile/pistol/update_icon()
+/obj/item/weapon/gun/projectile/pistol/on_update_icon()
 	..()
 	if(silenced)
 		icon_state = "pistol-silencer"
@@ -230,13 +230,13 @@
 /obj/item/weapon/gun/projectile/pirate/toggle_safety(var/mob/user)
 	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
-/obj/item/weapon/gun/projectile/pirate/New()
+/obj/item/weapon/gun/projectile/pirate/Initialize()
 	ammo_type = pick(ammo_types)
 	desc += " Uses [ammo_types[ammo_type]] rounds."
 
 	var/obj/item/ammo_casing/ammo = ammo_type
 	caliber = initial(ammo.caliber)
-	..()
+	. = ..()
 
 // Zip gun construction.
 /obj/item/weapon/zipgunframe
@@ -246,7 +246,7 @@
 	item_state = "zipgun-solid"
 	var/buildstate = 0
 
-/obj/item/weapon/zipgunframe/update_icon()
+/obj/item/weapon/zipgunframe/on_update_icon()
 	icon_state = "zipgun[buildstate]"
 
 /obj/item/weapon/zipgunframe/examine(mob/user)

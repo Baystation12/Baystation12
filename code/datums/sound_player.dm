@@ -156,7 +156,7 @@ datum/sound_token/proc/Mute()
 	listeners = null
 	listener_status = null
 
-	GLOB.destroyed_event.unregister(source, src, /datum/sound_token/proc/Stop)
+	GLOB.destroyed_event.unregister(source, src, /datum/proc/qdel_self)
 	QDEL_NULL(proxy_listener)
 	source = null
 

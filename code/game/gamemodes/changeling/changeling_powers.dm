@@ -776,8 +776,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	var/mob/living/carbon/human/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>Your ears pop and begin ringing loudly!</span>")
-	T.sdisabilities |= DEAF
-	spawn(300)	T.sdisabilities &= ~DEAF
+	T.ear_deaf += 15
 	feedback_add_details("changeling_powers","DS")
 	return 1
 

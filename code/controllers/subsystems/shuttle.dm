@@ -4,6 +4,9 @@ SUBSYSTEM_DEF(shuttle)
 	priority = SS_PRIORITY_SHUTTLE
 	init_order = SS_INIT_SHUTTLE                 //Should be initialized after all maploading is over and atoms are initialized, to ensure that landmarks have been initialized.
 
+	var/overmap_halted = FALSE                   //Whether ships can move on the overmap; used for adminbus.
+	var/list/ships = list()                      //List of all ships.
+
 	var/list/shuttles = list()                   //maps shuttle tags to shuttle datums, so that they can be looked up.
 	var/list/process_shuttles = list()           //simple list of shuttles, for processing
 	var/list/registered_shuttle_landmarks = list()
@@ -130,5 +133,13 @@ SUBSYSTEM_DEF(shuttle)
 			else
 				error("Shuttle [S] was unable to find mothership [mothership]!")
 
+/datum/controller/subsystem/shuttle/proc/toggle_overmap(new_setting)
+	if(overmap_halted == new_setting)
+		return
+	overmap_halted = !overmap_halted
+	for(var/ship in ships)
+		var/obj/effect/overmap/ship/ship_effect = ship
+		overmap_halted ? ship_effect.halt() : ship_effect.unhalt()
+
 /datum/controller/subsystem/shuttle/stat_entry()
-	..("S:[shuttles.len], L:[registered_shuttle_landmarks.len], Landmarks w/o Sector:[landmarks_awaiting_sector.len], Missing Landmarks:[landmarks_still_needed.len]")
+	..("Shuttles:[shuttles.len], Ships:[ships.len], L:[registered_shuttle_landmarks.len][overmap_halted ? ", HALT" : ""]")

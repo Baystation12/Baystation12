@@ -193,7 +193,7 @@
 	add_fingerprint(user)
 	return
 
-/obj/item/weapon/shield/energy/update_icon()
+/obj/item/weapon/shield/energy/on_update_icon()
 	icon_state = "eshield[active]"
 	if(active)
 		set_light(0.4, 0.1, 1, 2, "#006aff")

@@ -135,7 +135,7 @@
 	else
 		return 0
 
-/obj/machinery/portable_atmospherics/canister/update_icon()
+/obj/machinery/portable_atmospherics/canister/on_update_icon()
 /*
 update_flag
 1 = holding
@@ -222,6 +222,8 @@ update_flag
 			var/returnval = pump_gas_passive(src, air_contents, environment, transfer_moles)
 			if(returnval >= 0)
 				src.update_icon()
+				if(holding)
+					holding.queue_icon_update()
 
 	if(air_contents.return_pressure() < 1)
 		can_label = 1

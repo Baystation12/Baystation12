@@ -10,3 +10,6 @@
 	cast_sound = null
 
 	hud_state = "wiz_force"
+
+/spell/aoe_turf/conjure/force_portal/tower
+	charge_max = 2

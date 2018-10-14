@@ -11,7 +11,7 @@
 
 /obj/item/clothing/accessory/tunic
 	name = "researcher's tunic"
-	desc = "A fashionable tunic that Torch, Ltd. provides to their lab workers."
+	desc = "A fashionable tunic that EXO provides to their lab workers."
 	icon_state = "tunic"
 
 /obj/item/clothing/accessory/tunic/nanotrasen
@@ -268,7 +268,7 @@
 	H.update_icon()
 	update_clothing_icon()
 
-/obj/item/clothing/accessory/toggleable/flannel/update_icon()
+/obj/item/clothing/accessory/toggleable/flannel/on_update_icon()
 	icon_state = initial(icon_state)
 	if(rolled)
 		icon_state += "r"

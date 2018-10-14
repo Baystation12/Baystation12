@@ -9,7 +9,7 @@
 	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 100
-	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
 	var/operating = 0 // Is it on?
 	var/dirty = 0 // = {0..100} Does it need cleaning?
 	var/broken = 0 // ={0,1,2} How broken is it???
@@ -77,7 +77,7 @@
 				src.broken = 0 // Fix it!
 				src.dirty = 0 // just to be sure
 				src.update_icon()
-				src.atom_flags = ATOM_FLAG_OPEN_CONTAINER
+				src.atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 		else
 			to_chat(user, "<span class='warning'>It's broken!</span>")
 			return 1
@@ -95,7 +95,7 @@
 				src.dirty = 0 // It's clean!
 				src.broken = 0 // just to be sure
 				src.update_icon()
-				src.atom_flags = ATOM_FLAG_OPEN_CONTAINER
+				src.atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 		else //Otherwise bad luck!!
 			to_chat(user, "<span class='warning'>It's dirty!</span>")
 			return 1
@@ -351,7 +351,7 @@
 	src.updateUsrDialog()
 	src.update_icon()
 
-/obj/machinery/microwave/update_icon()
+/obj/machinery/microwave/on_update_icon()
 	if(dirty == 100)
 		src.icon_state = "mwbloody[operating]"
 	else if(broken)
@@ -361,6 +361,13 @@
 
 /obj/machinery/microwave/proc/fail()
 	var/amount = 0
+
+	// Kill + delete mobs in mob holders
+	for (var/obj/item/weapon/holder/H in contents)
+		for (var/mob/living/M in H.contents)
+			M.death()
+			qdel(M)
+
 	for (var/obj/O in contents)
 		amount++
 		if (O.reagents)

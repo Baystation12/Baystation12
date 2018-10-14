@@ -70,6 +70,8 @@
 
 	if(air_contents)
 		temperature_archived = air_contents.temperature
+		if(beaker)
+			ADJUST_ATOM_TEMPERATURE(beaker, air_contents.temperature)
 		heat_gas_contents()
 		expel_gas()
 
@@ -210,7 +212,7 @@
 			qdel(G)
 	return
 
-/obj/machinery/atmospherics/unary/cryo_cell/update_icon()
+/obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
 	overlays.Cut()
 	icon_state = "pod[on]"
 	var/image/I

@@ -167,13 +167,16 @@ var/list/gear_datums = list()
 		var/list/entry = list()
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
-		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
+		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[G.display_name]'>[G.display_name]</a></td>"
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 		var/allowed = 1
-		if(G.allowed_branches && pref.char_branch)
+		if(length(G.allowed_branches))
 			var/datum/mil_branch/player_branch = mil_branches.get_branch(pref.char_branch)
-			if(!(player_branch.type in G.allowed_branches))
+			if(!player_branch)
+				entry += "<br><i><font color=cc5555>Needs branch selected</font></i>"
+				allowed = 0
+			else if(!(player_branch.type in G.allowed_branches))
 				entry += "<br><i><font color=cc5555>[player_branch.name]</font></i>"
 				allowed = 0
 		if(allowed && G.allowed_roles)
@@ -226,6 +229,8 @@ var/list/gear_datums = list()
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
 	if(href_list["toggle_gear"])
 		var/datum/gear/TG = gear_datums[href_list["toggle_gear"]]
+		if(!TG)
+			return TOPIC_REFRESH
 		if(TG.display_name in pref.gear_list[pref.gear_slot])
 			pref.gear_list[pref.gear_slot] -= TG.display_name
 		else
@@ -334,10 +339,10 @@ var/list/gear_datums = list()
 /datum/gear/proc/spawn_item(var/location, var/metadata)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_gear_data(metadata["[gt]"], gd)
+		gt.tweak_gear_data(metadata && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(item, metadata["[gt]"])
+		gt.tweak_item(item, metadata && metadata["[gt]"])
 	return item
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
@@ -348,6 +353,7 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, metadata)
+	item.add_fingerprint(H)
 
 	var/atom/placed_in = H.equip_to_storage(item)
 	if(placed_in)
@@ -358,5 +364,3 @@ var/list/gear_datums = list()
 		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
 	else
 		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
-		item.forceMove(get_turf(H))
-		item.add_fingerprint(H)

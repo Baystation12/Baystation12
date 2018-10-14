@@ -98,7 +98,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/list_traders,
 	/client/proc/add_trader,
 	/client/proc/remove_trader,
-	/datum/admins/proc/sendFax
+	/datum/admins/proc/sendFax,
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -171,7 +171,6 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/jump_to_fluid_active,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
-	/client/proc/kill_air,
 	/client/proc/ZASSettings,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
@@ -286,7 +285,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/callproc_target,
 	/client/proc/Debug2,
 	/client/proc/reload_admins,
-	/client/proc/kill_air,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
 	/client/proc/startSinglo,
@@ -652,19 +650,6 @@ var/list/admin_verbs_mentor = list(
 		for (var/mob/V in hearers(mob.control_object))
 			V.show_message("<b>[mob.control_object.name]</b> says: \"" + msg + "\"", 2)
 	feedback_add_details("admin_verb","OT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/kill_air() // -- TLE
-	set category = "Debug"
-	set name = "Kill Air"
-	set desc = "Toggle Air Processing"
-	if(air_processing_killed)
-		air_processing_killed = 0
-		to_chat(usr, "<b>Enabled air processing.</b>")
-	else
-		air_processing_killed = 1
-		to_chat(usr, "<b>Disabled air processing.</b>")
-	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_and_message_admins("used 'kill air'.")
 
 /client/proc/readmin_self()
 	set name = "Re-Admin self"

@@ -42,7 +42,7 @@ var/global/photo_count = 0
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
 
-/obj/item/weapon/photo/update_icon()
+/obj/item/weapon/photo/on_update_icon()
 	overlays.Cut()
 	var/scale = 8/(photo_size*32)
 	var/image/small_img = image(img.icon)
@@ -151,7 +151,7 @@ var/global/photo_count = 0
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
 	var/size = 3
-/obj/item/device/camera/update_icon()
+/obj/item/device/camera/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(on)
 		icon_state = "[bis.base_icon_state]"
@@ -275,13 +275,13 @@ var/global/photo_count = 0
 /obj/item/weapon/photo/proc/copy(var/copy_id = 0)
 	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
 
-	p.SetName(name)
-	p.icon = icon(icon, icon_state)
-	p.tiny = icon(tiny)
+	p.SetName(name) // Do this first, manually, to make sure listeners are alerted properly.
+	p.appearance = appearance
+
+	p.tiny = new
+	p.tiny.appearance = tiny.appearance
 	p.img = icon(img)
-	p.desc = desc
-	p.pixel_x = pixel_x
-	p.pixel_y = pixel_y
+
 	p.photo_size = photo_size
 	p.scribble = scribble
 

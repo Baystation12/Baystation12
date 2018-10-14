@@ -125,7 +125,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	else
 		..(O, user)
 
-/obj/machinery/message_server/update_icon()
+/obj/machinery/message_server/on_update_icon()
 	if((stat & (BROKEN|NOPOWER)))
 		icon_state = "server-nopower"
 	else if (!active)

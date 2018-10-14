@@ -5,7 +5,7 @@ obj/structure/closet/crate
 	icon_state = "crate"
 	icon_opened = "crateopen"
 	icon_closed = "crate"
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	setup = 0
 
 	storage_types = CLOSET_STORAGE_ITEMS
@@ -82,7 +82,7 @@ obj/structure/closet/crate
 	. = ..()
 	update_icon()
 
-/obj/structure/closet/crate/secure/update_icon()
+/obj/structure/closet/crate/secure/on_update_icon()
 	..()
 	if(broken)
 		overlays += emag
@@ -163,26 +163,30 @@ obj/structure/closet/crate
 	icon_state = "freezer"
 	icon_opened = "freezeropen"
 	icon_closed = "freezer"
+	temperature = -16 CELCIUS
+
 	var/target_temp = T0C - 40
 	var/cooling_power = 40
 
-	return_air()
-		var/datum/gas_mixture/gas = (..())
-		if(!gas)	return null
-		var/datum/gas_mixture/newgas = new/datum/gas_mixture()
-		newgas.copy_from(gas)
-		if(newgas.temperature <= target_temp)	return
+/obj/structure/closet/crate/freezer/return_air()
+	var/datum/gas_mixture/gas = (..())
+	if(!gas)	return null
+	var/datum/gas_mixture/newgas = new/datum/gas_mixture()
+	newgas.copy_from(gas)
+	if(newgas.temperature <= target_temp)	return
 
-		if((newgas.temperature - cooling_power) > target_temp)
-			newgas.temperature -= cooling_power
-		else
-			newgas.temperature = target_temp
-		return newgas
+	if((newgas.temperature - cooling_power) > target_temp)
+		newgas.temperature -= cooling_power
+	else
+		newgas.temperature = target_temp
+	return newgas
+
+/obj/structure/closet/crate/freezer/ProcessAtomTemperature()
+	return PROCESS_KILL
 
 /obj/structure/closet/crate/freezer/rations //Fpr use in the escape shuttle
 	name = "emergency rations"
 	desc = "A crate of emergency rations."
-
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
 	return list(/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 4)
@@ -317,7 +321,7 @@ obj/structure/closet/crate
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-	
+
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 

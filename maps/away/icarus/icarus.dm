@@ -46,14 +46,17 @@ obj/effect/icarus/irradiate/Destroy()
 /obj/effect/shuttle_landmark/nav_icarus/nav1
 	name = "Planetary Navpoint #1"
 	landmark_tag = "nav_icarus_1"
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/nav_icarus/nav2
 	name = "Planetary Navpoint #2"
 	landmark_tag = "nav_icarus_2"
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/nav_icarus/nav3
 	name = "Planetary Navpoint #3"
 	landmark_tag = "nav_icarus_antag"
+	flags = SLANDMARK_FLAG_AUTOSET
 
 obj/structure/icarus/broken_cryo
 	name = "destroyed cryo sleeper"

@@ -393,7 +393,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -413,7 +413,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 /obj/item/device/mass_spectrometer/on_reagent_change()
 	update_icon()
 
-/obj/item/device/mass_spectrometer/update_icon()
+/obj/item/device/mass_spectrometer/on_update_icon()
 	icon_state = initial(icon_state)
 	if(reagents.total_volume)
 		icon_state += "_s"

@@ -110,7 +110,7 @@
 	..()
 	src.update_icon()
 
-/obj/item/robot_parts/robot_suit/update_icon()
+/obj/item/robot_parts/robot_suit/on_update_icon()
 	src.overlays.Cut()
 	if(src.parts[BP_L_ARM])
 		src.overlays += "l_arm+o"
@@ -327,13 +327,6 @@
 				add_flashes(W,user)
 		else
 			add_flashes(W,user)
-	else if(istype(W, /obj/item/weapon/stock_parts/manipulator))
-		to_chat(user, "<span class='notice'>You install some manipulators and modify the head, creating a functional spider-bot!</span>")
-		new /mob/living/simple_animal/spiderbot(get_turf(loc))
-		qdel(W)
-		qdel(src)
-		return
-	return
 
 /obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
 	if(src.flash1 && src.flash2)

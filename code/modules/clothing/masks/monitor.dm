@@ -86,7 +86,7 @@
 		monitor_state_index = choice
 		update_icon()
 
-/obj/item/clothing/mask/monitor/update_icon()
+/obj/item/clothing/mask/monitor/on_update_icon()
 	if(!(monitor_state_index in monitor_states))
 		monitor_state_index = initial(monitor_state_index)
 	icon_state = monitor_states[monitor_state_index]

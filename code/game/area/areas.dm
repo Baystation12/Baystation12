@@ -160,7 +160,7 @@
 					D.open()
 	return
 
-/area/update_icon()
+/area/on_update_icon()
 	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
 			icon_state = "blue"

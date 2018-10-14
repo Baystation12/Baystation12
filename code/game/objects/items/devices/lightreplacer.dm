@@ -69,8 +69,9 @@
 			if(!user.stat && src.uses < src.max_uses)
 				src.AddUses(1)
 				amt_inserted++
-				S.remove_from_storage(L, T)
+				S.remove_from_storage(L, T, 1)
 				qdel(L)
+		S.finish_bulk_removal()
 		if(amt_inserted)
 			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
 			add_fingerprint(user)
@@ -124,7 +125,7 @@
 	*/
 	to_chat(usr, "It has [uses] lights remaining.")
 
-/obj/item/device/lightreplacer/update_icon()
+/obj/item/device/lightreplacer/on_update_icon()
 	icon_state = "lightreplacer[emagged]"
 
 

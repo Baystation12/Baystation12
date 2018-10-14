@@ -129,7 +129,7 @@
 		spawn(50) // To stop a signal being spammed from a proxy sensor constantly going off or whatever
 			toggle = 1
 
-/obj/item/device/transfer_valve/update_icon()
+/obj/item/device/transfer_valve/on_update_icon()
 	overlays.Cut()
 	underlays = null
 
@@ -165,9 +165,8 @@
 	if(valve_open)
 		return
 	tank_two.air_contents.volume += tank_one.air_contents.volume
-	var/datum/gas_mixture/temp
-	temp = tank_one.air_contents.remove_ratio(1)
-	tank_two.air_contents.merge(temp)
+	var/datum/gas_mixture/temp = tank_one.remove_air_ratio(1)
+	tank_two.assume_air(temp)
 	valve_open = 1
 
 /obj/item/device/transfer_valve/proc/split_gases()
@@ -180,11 +179,9 @@
 		return
 
 	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume
-	var/datum/gas_mixture/temp
-	temp = tank_two.air_contents.remove_ratio(ratio1)
-	tank_one.air_contents.merge(temp)
+	var/datum/gas_mixture/temp = tank_two.remove_air_ratio(ratio1)
 	tank_two.air_contents.volume -=  tank_one.air_contents.volume
-
+	tank_one.assume_air(temp)
 
 	/*
 	Exadv1: I know this isn't how it's going to work, but this was just to check

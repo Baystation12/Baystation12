@@ -210,25 +210,25 @@ default behaviour is:
 	take_overall_damage(0, burn_amount)
 
 /mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
-	var/temperature = actual
+	var/btemperature = actual
 	var/difference = abs(actual-desired)	//get difference
 	var/increments = difference/10 //find how many increments apart they are
 	var/change = increments*incrementboost	// Get the amount to change by (x per increment)
 
 	// Too cold
 	if(actual < desired)
-		temperature += change
+		btemperature += change
 		if(actual > desired)
-			temperature = desired
+			btemperature = desired
 	// Too hot
 	if(actual > desired)
-		temperature -= change
+		btemperature -= change
 		if(actual < desired)
-			temperature = desired
+			btemperature = desired
 //	if(istype(src, /mob/living/carbon/human))
 //		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
 
-	return temperature
+	return btemperature
 
 /mob/living/proc/getBruteLoss()
 	return maxHealth - health

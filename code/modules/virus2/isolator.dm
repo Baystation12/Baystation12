@@ -15,7 +15,7 @@
 	var/datum/computer_file/data/virus_record/entry = null
 	var/obj/item/weapon/reagent_containers/syringe/sample = null
 
-/obj/machinery/disease2/isolator/update_icon()
+/obj/machinery/disease2/isolator/on_update_icon()
 	if (stat & (BROKEN|NOPOWER))
 		icon_state = "isolator"
 		return

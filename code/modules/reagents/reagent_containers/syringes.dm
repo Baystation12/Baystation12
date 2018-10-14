@@ -85,7 +85,7 @@
 
 	handleTarget(target, user)
 
-/obj/item/weapon/reagent_containers/syringe/update_icon()
+/obj/item/weapon/reagent_containers/syringe/on_update_icon()
 	overlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)
@@ -406,6 +406,6 @@
 	name = "cryostasis syringe"
 	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
 	volume = 20
-	atom_flags = ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
 

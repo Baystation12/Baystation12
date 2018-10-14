@@ -115,3 +115,6 @@
 	return
 /obj/effect/dummy/spell_jaunt/bullet_act(blah)
 	return
+
+/spell/targeted/ethereal_jaunt/tower
+	charge_max = 2

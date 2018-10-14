@@ -15,3 +15,10 @@
 
 /datum/gear/suit/unathi/savage_hunter
 	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/head/skrell_helmet
+	display_name = "skrellian helmet (Skrell)"
+	path = /obj/item/clothing/head/helmet/skrell
+	whitelisted = list(SPECIES_SKRELL)
+	sort_category = "Xenowear"
+	allowed_roles = ARMORED_ROLES

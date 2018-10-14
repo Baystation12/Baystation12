@@ -27,12 +27,12 @@
 	overhauls to improve efficiency and capabilities, publicly to counter encroachment by the Terran Colonial Confederation."
 
 /decl/cultural_info/faction/torchco
-	name = FACTION_TORCH_LTD
-	description = "'Torch, Limited' is a government-owned, publically traded limited liability company assembled from the corporate \
+	name = FACTION_CORPORATE
+	description = "The Expeditionary Corps Organisation is a government-owned, publically traded limited liability company assembled from the corporate \
 	backers who asssisted in funding the Torch project when it opened five years ago. Major players include NanoTrasen, Xynergy and \
-	Hephaestus Industries, as well as dozens of others. Torch Ltd reports its earnings and operation plans directly to a board of \
+	Hephaestus Industries, as well as dozens of others. The Expeditionary Corps Organisation reports its earnings and operation plans directly to a board of \
 	directors, made up of corporate representatives and members of Expeditionary Corps command and the Committee for the Economy. \
-	While on the surface Torch, Ltd appears to have noble goals, it is in reality a compromise between the noble ideals of pioneering \
+	While on the surface the Expeditionary Corps Organisation appears to have noble goals, it is in reality a compromise between the noble ideals of pioneering \
 	science, and the corporate desire to make a quick buck off whatever is found. Rumours also abound about shady practices, hidden \
 	protocols, and xenoartifacts being 'lost' in transit, but nothing has been conclusively proven as of yet, and SCG doubtless is \
 	reluctant to harpoon their own project."
@@ -129,9 +129,9 @@
 	description = "Deimos Advanced Information Systems (DAIS) is a large corporation specializing in information technology such as computer hardware \
 	and software, telecommunications equipment, and networking equipment based on Mars. It is the number one supplier of computer technology in The Sol Central \
 	 Government, its systems used by most consumers and businesses within SolGov. DAIS is actually older than the Sol Central Government and is one of the very \
-	few corporate members of the Solar Assembly. DAIS is also a major investor in the Torch project, and is on the Torch, Ltd. board of directors. Currently DAIS \
-	is invested in bluespace computing research and artificial intelligence research. Despite recent intrusions by NanoTrasen into their sector with NTNet and related \
-	products, they still remain the market leader in computer technologies."
+	few corporate members of the Solar Assembly. DAIS is also a major investor in the Torch project, and is on the Expeditionary Corps Organization board of directors. \
+	Currently DAIS is invested in bluespace computing research and artificial intelligence research. Despite recent intrusions by NanoTrasen into their sector with NTNet \
+	and related products, they still remain the market leader in computer technologies."
 	economic_power = 1.1
 	subversive_potential = 15
 	language = LANGUAGE_SOL_COMMON

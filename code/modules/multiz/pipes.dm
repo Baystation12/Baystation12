@@ -16,11 +16,6 @@ obj/machinery/atmospherics/pipe/zpipe
 	var/minimum_temperature_difference = 300
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
-	var/maximum_pressure = 70*ONE_ATMOSPHERE
-	var/fatigue_pressure = 55*ONE_ATMOSPHERE
-	alert_pressure = 55*ONE_ATMOSPHERE
-
-
 	level = 1
 
 obj/machinery/atmospherics/pipe/zpipe/New()
@@ -93,7 +88,7 @@ obj/machinery/atmospherics/pipe/zpipe/Destroy()
 obj/machinery/atmospherics/pipe/zpipe/pipeline_expansion()
 	return list(node1, node2)
 
-obj/machinery/atmospherics/pipe/zpipe/update_icon()
+obj/machinery/atmospherics/pipe/zpipe/on_update_icon()
 	return
 
 obj/machinery/atmospherics/pipe/zpipe/disconnect(obj/machinery/atmospherics/reference)

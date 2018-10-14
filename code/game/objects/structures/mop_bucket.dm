@@ -5,8 +5,7 @@
 	icon_state = "mopbucket"
 	density = 1
 	w_class = ITEM_SIZE_NORMAL
-	atom_flags = ATOM_FLAG_CLIMBABLE
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
 	var/amount_per_transfer_from_this = 5	//shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 
 

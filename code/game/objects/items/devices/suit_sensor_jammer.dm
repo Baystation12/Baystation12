@@ -62,7 +62,7 @@
 		else
 			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
 
-/obj/item/device/suit_sensor_jammer/update_icon()
+/obj/item/device/suit_sensor_jammer/on_update_icon()
 	overlays.Cut()
 	if(bcell)
 		var/percent = bcell.percent()

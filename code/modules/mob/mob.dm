@@ -101,7 +101,7 @@
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
-		if(!is_invisible_to(M) || narrate)
+		if(!M.is_blind() || narrate)
 			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
@@ -348,18 +348,6 @@
 		if (W)
 			W.attack_self(src)
 			update_inv_r_hand()
-	return
-
-/*
-/mob/verb/dump_source()
-
-	var/master = "<PRE>"
-	for(var/t in typesof(/area))
-		master += text("[]\n", t)
-		//Foreach goto(26)
-	src << browse(master)
-	return
-*/
 
 /mob/verb/memory()
 	set name = "Notes"
@@ -454,7 +442,7 @@
 	set name = "Observe"
 	set category = "OOC"
 
-	if(!(initialization_stage&INITIALIZATION_COMPLETE))
+	if(GAME_STATE < RUNLEVEL_LOBBY)
 		to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
 		return
 
@@ -684,7 +672,7 @@
 		return
 
 	if(statpanel("Status"))
-		if(ticker && ticker.current_state != GAME_STATE_PREGAME)
+		if(GAME_STATE >= RUNLEVEL_LOBBY)
 			stat("Local Time", stationtime2text())
 			stat("Local Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
@@ -692,8 +680,6 @@
 			stat("Location:", "([x], [y], [z]) [loc]")
 
 	if(client.holder)
-		if(statpanel("Processes") && processScheduler)
-			processScheduler.statProcesses()
 		if(statpanel("MC"))
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
@@ -1010,7 +996,7 @@
 
 // A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
 // It should not use both.
-/mob/update_icon()
+/mob/on_update_icon()
 	return update_icons()
 
 /mob/verb/face_direction()
@@ -1096,12 +1082,12 @@
 	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."
 	set category = "OOC"
 	if(isghostmind(src.mind) || isnewplayer(src))
-		if(ticker && ticker.looking_for_antags)
-			if(src.mind in ticker.antag_pool)
-				ticker.antag_pool -= src.mind
+		if(SSticker.looking_for_antags)
+			if(src.mind in SSticker.antag_pool)
+				SSticker.antag_pool -= src.mind
 				to_chat(usr, "You have left the antag pool.")
 			else
-				ticker.antag_pool += src.mind
+				SSticker.antag_pool += src.mind
 				to_chat(usr, "You have joined the antag pool. Make sure you have the needed role set to high!")
 		else
 			to_chat(usr, "The game is not currently looking for antags.")

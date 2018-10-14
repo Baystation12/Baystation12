@@ -251,3 +251,91 @@
 		if(isnum(t1) && t1 <= 5)
 			return "USER raises [t1] finger\s."
 	return .. ()
+
+/decl/emote/visible/afold
+	key = "afold"
+	check_restraints = TRUE
+	emote_message_3p = "USER folds USER_THEIR arms."
+
+/decl/emote/visible/alook
+	key = "alook"
+	emote_message_3p = "USER looks away."
+
+/decl/emote/visible/hbow
+	key = "hbow"
+	emote_message_3p = "USER bows USER_THEIR head."
+
+/decl/emote/visible/hip
+	key = "hip"
+	check_restraints = TRUE
+	emote_message_3p = "USER puts USER_THEIR hands on USER_THEIR hips."
+	
+/decl/emote/visible/holdup
+	key = "holdup"
+	check_restraints = TRUE
+	emote_message_3p = "USER holds up USER_THEIR palms."
+	
+/decl/emote/visible/hshrug
+	key = "hshrug"
+	emote_message_3p = "USER gives a half shrug."
+	
+/decl/emote/visible/crub
+	key = "crub"
+	check_restraints = TRUE
+	emote_message_3p = "USER rubs USER_THEIR chin."
+		
+/decl/emote/visible/eroll
+	key = "eroll"
+	emote_message_3p = "USER rolls USER_THEIR eyes."
+	emote_message_3p_target = "USER rolls USER_THEIR eyes at TARGET."
+	
+/decl/emote/visible/erub
+	key = "erub"
+	check_restraints = TRUE
+	emote_message_3p = "USER rubs USER_THEIR eyes."
+
+/decl/emote/visible/fslap
+	key = "fslap"
+	check_restraints = TRUE
+	emote_message_3p = "USER slaps USER_THEIR forehead."
+
+/decl/emote/visible/ftap
+	key = "ftap"
+	emote_message_3p = "USER taps USER_THEIR foot."
+	
+/decl/emote/visible/hrub
+	key = "hrub"
+	check_restraints = TRUE
+	emote_message_3p = "USER rubs USER_THEIR hands together."
+
+/decl/emote/visible/hspread
+	key = "hspread"
+	check_restraints = TRUE
+	emote_message_3p = "USER spreads USER_THEIR hands."
+
+/decl/emote/visible/pocket
+	key = "pocket"
+	check_restraints = TRUE
+	emote_message_3p = "USER shoves USER_THEIR hands in USER_THEIR pockets."
+
+/decl/emote/visible/rsalute
+	key = "rsalute"
+	check_restraints = TRUE
+	emote_message_3p = "USER returns the salute."
+	
+/decl/emote/visible/rshoulder
+	key = "rshoulder"
+	emote_message_3p = "USER rolls USER_THEIR shoulders."
+	
+/decl/emote/visible/squint
+	key = "squint"
+	emote_message_3p = "USER squints."
+	emote_message_3p_target = "USER squints at TARGET."
+	
+/decl/emote/visible/tfist
+	key = "tfist"
+	emote_message_3p = "USER tightens USER_THEIR hands into fists."
+	
+/decl/emote/visible/tilt
+	key = "tilt"
+	emote_message_3p = "USER tilts USER_THEIR head."

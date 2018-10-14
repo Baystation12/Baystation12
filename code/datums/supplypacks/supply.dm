@@ -14,7 +14,7 @@
 	cost = 10
 	containername = "cardboard sheets crate"
 
-/decl/hierarchy/supply_pack/supply/cardboard_sheets
+/decl/hierarchy/supply_pack/supply/stickies
 	name = "Stationery - sticky notes (50)"
 	contains = list(/obj/item/sticky_pad/random)
 	cost = 10

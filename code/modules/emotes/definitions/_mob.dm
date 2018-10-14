@@ -143,7 +143,26 @@
 		/decl/emote/visible/hug,
 		/decl/emote/visible/dap,
 		/decl/emote/visible/signal,
-		/decl/emote/visible/handshake
+		/decl/emote/visible/handshake,
+		/decl/emote/visible/afold,
+		/decl/emote/visible/alook,
+		/decl/emote/visible/eroll,
+		/decl/emote/visible/hbow,
+		/decl/emote/visible/hip,
+		/decl/emote/visible/holdup,
+		/decl/emote/visible/hshrug,
+		/decl/emote/visible/crub,
+		/decl/emote/visible/erub,
+		/decl/emote/visible/fslap,
+		/decl/emote/visible/ftap,
+		/decl/emote/visible/hrub,
+		/decl/emote/visible/hspread,
+		/decl/emote/visible/pocket,
+		/decl/emote/visible/rsalute,
+		/decl/emote/visible/rshoulder,
+		/decl/emote/visible/squint,
+		/decl/emote/visible/tfist,
+		/decl/emote/visible/tilt
 	)
 
 /mob/living/silicon/robot

@@ -21,7 +21,7 @@
 	use_alt_layer = !use_alt_layer
 	update_icon()
 
-/obj/item/weapon/storage/belt/update_icon()
+/obj/item/weapon/storage/belt/on_update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_belt()
@@ -83,7 +83,7 @@
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
-/obj/item/weapon/storage/belt/holster/update_icon()
+/obj/item/weapon/storage/belt/holster/on_update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_belt()

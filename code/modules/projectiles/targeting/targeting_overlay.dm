@@ -178,7 +178,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	GLOB.moved_event.register(aiming_at, src, /obj/aiming_overlay/proc/target_moved)
 	GLOB.destroyed_event.register(aiming_at, src, /obj/aiming_overlay/proc/cancel_aiming)
 
-/obj/aiming_overlay/update_icon()
+/obj/aiming_overlay/on_update_icon()
 	if(locked)
 		icon_state = "locked"
 	else

@@ -135,7 +135,7 @@
 	else
 		return ..()
 
-/obj/machinery/microscope/update_icon()
+/obj/machinery/microscope/on_update_icon()
 	icon_state = "microscope"
 	if(sample)
 		icon_state += "slide"

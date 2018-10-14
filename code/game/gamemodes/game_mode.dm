@@ -38,6 +38,13 @@ var/global/list/additional_antag_types = list()
 	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
 
+	//Format: list(start_animation = duration, hit_animation, miss_animation). null means animation is skipped.
+	var/cinematic_icon_states = list(
+		"intro_nuke" = 35,
+		"summary_selfdes",
+		null
+	)
+
 /datum/game_mode/New()
 	..()
 	// Enforce some formatting.
@@ -114,9 +121,9 @@ var/global/list/additional_antag_types = list()
 			return
 		var/datum/antagonist/antag = GLOB.all_antag_types_[choice]
 		if(antag)
-			if(!islist(ticker.mode.antag_templates))
-				ticker.mode.antag_templates = list()
-			ticker.mode.antag_templates |= antag
+			if(!islist(SSticker.mode.antag_templates))
+				SSticker.mode.antag_templates = list()
+			SSticker.mode.antag_templates |= antag
 			message_admins("Admin [key_name_admin(usr)] added [antag.role_text] template to game mode.")
 
 	// I am very sure there's a better way to do this, but I'm not sure what it might be. ~Z
@@ -142,7 +149,7 @@ var/global/list/additional_antag_types = list()
 			antag_summary += "[antag.role_text_plural]"
 			i++
 		antag_summary += "."
-		if(antag_templates.len > 1 && master_mode != "secret")
+		if(antag_templates.len > 1 && SSticker.master_mode != "secret")
 			to_world("[antag_summary]")
 		else
 			message_admins("[antag_summary]")
@@ -196,8 +203,8 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/pre_setup()
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.update_current_antag_max()
-		antag.build_candidate_list() //compile a list of all eligible candidates
+		antag.update_current_antag_max(src)
+		antag.build_candidate_list(src) //compile a list of all eligible candidates
 
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 		if(antag.flags & ANTAG_OVERRIDE_JOB)
@@ -232,8 +239,8 @@ var/global/list/additional_antag_types = list()
 		evacuation_controller.recall = 1
 
 	feedback_set_details("round_start","[time2text(world.realtime)]")
-	if(ticker && ticker.mode)
-		feedback_set_details("game_mode","[ticker.mode]")
+	if(SSticker.mode)
+		feedback_set_details("game_mode","[SSticker.mode]")
 	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
@@ -377,7 +384,7 @@ var/global/list/additional_antag_types = list()
 		return candidates
 
 	// If this is being called post-roundstart then it doesn't care about ready status.
-	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+	if(GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/player in GLOB.player_list)
 			if(!player.client)
 				continue
@@ -449,6 +456,31 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/check_victory()
 	return
 
+// Manipulates the end-game cinematic in conjunction with GLOB.cinematic
+/datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
+	if(!cinematic_icon_states)
+		return
+	if(station_missed < 2)
+		var/intro = cinematic_icon_states[1]
+		if(intro)
+			flick(intro,cinematic_screen)
+			sleep(cinematic_icon_states[intro])
+		var/end = cinematic_icon_states[3]
+		var/to_flick = "station_intact_fade_red"
+		if(!station_missed)
+			end = cinematic_icon_states[2]
+			to_flick = "station_explode_fade_red"
+			for(var/mob/living/M in GLOB.living_mob_list_)
+				if(is_station_turf(get_turf(M)))
+					M.death()//No mercy
+		if(end)
+			flick(to_flick,cinematic_screen)
+			cinematic_screen.icon_state = end
+
+	else
+		sleep(50)
+	sound_to(world, sound('sound/effects/explosionfar.ogg'))
+
 //////////////////////////
 //Reports player logouts//
 //////////////////////////
@@ -516,15 +548,15 @@ proc/display_roundstart_logout_report()
 
 	GLOB.using_map.map_info(src)
 
-	if(!ticker || !ticker.mode)
+	if(!SSticker.mode)
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
 
-	if(!ticker.hide_mode)
-		to_chat(usr, "<b>The roundtype is [capitalize(ticker.mode.name)]</b>")
-		if(ticker.mode.round_description)
-			to_chat(usr, "<i>[ticker.mode.round_description]</i>")
-		if(ticker.mode.extended_round_description)
-			to_chat(usr, "[ticker.mode.extended_round_description]")
+	if(SSticker.master_mode != "secret")
+		to_chat(usr, "<b>The roundtype is [capitalize(SSticker.mode.name)]</b>")
+		if(SSticker.mode.round_description)
+			to_chat(usr, "<i>[SSticker.mode.round_description]</i>")
+		if(SSticker.mode.extended_round_description)
+			to_chat(usr, "[SSticker.mode.extended_round_description]")
 	else
 		to_chat(usr, "<i>Shhhh</i>. It's a secret.")

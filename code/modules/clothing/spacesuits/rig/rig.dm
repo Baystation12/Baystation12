@@ -508,7 +508,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/weapon/rig/update_icon(var/update_mob_icon)
+/obj/item/weapon/rig/on_update_icon(var/update_mob_icon)
 
 	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
 	overlays.Cut()

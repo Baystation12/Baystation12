@@ -517,9 +517,10 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket/heat(weakref/message_to)
 	..()
-	var/mob/user = message_to.resolve()
-	if(user)
-		to_chat(user, "You think \the [src] is ready to eat about now.")
+	if(message_to)
+		var/mob/user = message_to.resolve()
+		if(user)
+			to_chat(user, "You think \the [src] is ready to eat about now.")
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket
 	name = "\improper Donk-pocket"
@@ -1322,7 +1323,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#adac7f"
@@ -2590,7 +2591,7 @@
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
 
-/obj/item/pizzabox/update_icon()
+/obj/item/pizzabox/on_update_icon()
 
 	overlays = list()
 

@@ -66,7 +66,7 @@
 	else
 		SetName("dry [initial(name)]")
 
-/obj/item/weapon/reagent_containers/glass/rag/update_icon()
+/obj/item/weapon/reagent_containers/glass/rag/on_update_icon()
 	if(on_fire)
 		icon_state = "raglit"
 	else

@@ -121,6 +121,7 @@ Weapons
 	fire_delay = 5.7 //Autorevolver. Also synced with the animation
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	starts_loaded = 0 //Nobody keeps ballistic weapons loaded
 
 /obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen
 	name = "corporate stun revolver"

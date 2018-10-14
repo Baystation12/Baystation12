@@ -21,6 +21,7 @@
 
 /datum/uplink_item/item/visible_weapons/g9mm
 	name = "Silenced Holdout Pistol"
+	desc = "9mm with silencer kit and ammunition."
 	item_cost = 32
 	path = /obj/item/weapon/storage/box/syndie_kit/g9mm
 
@@ -42,12 +43,14 @@
 
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Revolver, .357"
+	desc = ".357 revolver, with ammunition."
 	item_cost = 56
 	antag_costs = list(MODE_MERCENARY = 14)
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
 
 /datum/uplink_item/item/visible_weapons/revolver2
 	name = "Revolver, .44"
+	desc = ".44 magnum revolver, with ammunition."
 	item_cost = 48
 	antag_costs = list(MODE_MERCENARY = 5)
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2

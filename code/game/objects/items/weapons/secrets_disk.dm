@@ -11,7 +11,7 @@
 
 /obj/item/weapon/disk/secret_project/science
 	desc = "A special disk for storing massive amounts of data. It is marked as classified, and has an ID card slot on top. \
-	This one has a lengthy legal label on it denoting it the private copyrighted property of a major corporate conglomerate."
+	This one has a lengthy legal label on it denoting it the private, copyrighted property of the Expeditionary Corps Organisation."
 	req_access = access_rd
 
 /obj/item/weapon/disk/secret_project/Initialize()

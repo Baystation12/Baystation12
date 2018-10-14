@@ -205,7 +205,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/weapon/storage/pill_bottle/update_icon()
+/obj/item/weapon/storage/pill_bottle/on_update_icon()
 	overlays.Cut()
 	if(wrapper_color)
 		var/image/I = image(icon, "pillbottle_wrap")

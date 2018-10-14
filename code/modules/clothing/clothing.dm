@@ -185,7 +185,7 @@
 
 /obj/item/clothing/ears/earmuffs/headphones
 	name = "headphones"
-	desc = "It's probably not in accordance with corporate policy to listen to music on the job... but fuck it."
+	desc = "It's probably not in accordance with company policy to listen to music on the job... but fuck it."
 	var/headphones_on = 0
 	icon_state = "headphones_off"
 	item_state = "headphones_off"
@@ -466,7 +466,7 @@ BLIND     // can't see anything
 		to_chat(user, "<span class='notice'>You crawl under \the [src].</span>")
 	return 1
 
-/obj/item/clothing/head/update_icon(var/mob/user)
+/obj/item/clothing/head/on_update_icon(var/mob/user)
 
 	overlays.Cut()
 	if(on)
@@ -628,7 +628,7 @@ BLIND     // can't see anything
 	else
 		return ..()
 
-/obj/item/clothing/shoes/update_icon()
+/obj/item/clothing/shoes/on_update_icon()
 	overlays.Cut()
 	if(holding)
 		overlays += image(icon, "[icon_state]_knife")

@@ -17,7 +17,6 @@
 	var/heat_capacity = 1
 
 	//Properties for both
-	var/temperature = T20C      // Initial turf temperature.
 	var/blocks_air = 0          // Does this turf contain air/let air through?
 
 	// General properties.
@@ -46,7 +45,7 @@
 	else
 		luminosity = 1
 
-/turf/update_icon()
+/turf/on_update_icon()
 	update_flood_overlay()
 
 /turf/proc/update_flood_overlay()
@@ -136,9 +135,11 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return 1 //Nothing found to block so return success!
 
 var/const/enterloopsanity = 100
-/turf/Entered(atom/atom as mob|obj)
+/turf/Entered(var/atom/atom, var/atom/old_loc)
 
 	..()
+
+	QUEUE_TEMPERATURE_ATOMS(atom)
 
 	if(!istype(atom, /atom/movable))
 		return

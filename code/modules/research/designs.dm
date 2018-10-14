@@ -2037,6 +2037,20 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/oxyregenerator
 	sort_string = "JCAAC"
 
+/datum/design/circuit/reagent_heater
+	name = "chemical heating system"
+	id = "chemheater"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/circuitboard/reagent_heater
+	sort_string = "JCAAD"
+
+/datum/design/circuit/reagent_cooler
+	name = "chemical cooling system"
+	id = "chemcooler"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/circuitboard/reagent_heater/cooler
+	sort_string = "JCAAE"
+
 /datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
 	desc =  "Allows for the construction of a tamper-resistant airlock electronics."

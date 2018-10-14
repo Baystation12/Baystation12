@@ -44,7 +44,7 @@
 			existing.growth = new_growth
 			existing.update_icon()
 
-/obj/structure/diona/vines/update_icon()
+/obj/structure/diona/vines/on_update_icon()
 	icon_state = "vines[growth]"
 
 /obj/structure/diona/bulb

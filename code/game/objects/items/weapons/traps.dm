@@ -108,7 +108,7 @@
 			update_icon()
 	..()
 
-/obj/item/weapon/beartrap/update_icon()
+/obj/item/weapon/beartrap/on_update_icon()
 	..()
 
 	if(!deployed)

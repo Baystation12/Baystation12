@@ -60,7 +60,7 @@
 	internal_cells = null
 	return ..()
 
-/obj/machinery/power/smes/batteryrack/update_icon()
+/obj/machinery/power/smes/batteryrack/on_update_icon()
 	overlays.Cut()
 	icon_update = 0
 
@@ -111,6 +111,8 @@
 	if(equalise)
 		// Now try to get least charged cell and use the power from it.
 		var/obj/item/weapon/cell/CL = get_least_charged_cell()
+		if(!CL)
+			return //no cells
 		amount -= CL.give(amount)
 		if(!amount)
 			return
@@ -189,7 +191,7 @@
 		var/obj/item/weapon/cell/least = get_least_charged_cell()
 		var/obj/item/weapon/cell/most = get_most_charged_cell()
 		// Don't bother equalising charge between two same cells. Also ensure we don't get NULLs or wrong types. Don't bother equalising when difference between charges is tiny.
-		if(least == most || !istype(least) || !istype(most) || least.percent() == most.percent())
+		if(!least || !most || least.percent() == most.percent())
 			return
 		var/percentdiff = (most.percent() - least.percent()) / 2 // Transfer only 50% of power. The reason is that it could lead to situations where least and most charged cells would "swap places" (45->50% and 50%->45%)
 		var/celldiff
@@ -215,18 +217,17 @@
 	data["cells_max"] = max_cells
 	data["cells_cur"] = internal_cells.len
 	var/list/cells = list()
-	var/cell_index = 0
+	var/cell_index = 1
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		var/list/cell[0]
-		cell["slot"] = cell_index + 1
+		cell["slot"] = cell_index
 		cell["used"] = 1
 		cell["percentage"] = round(C.percent(), 0.01)
-		cell["id"] = C.c_uid
 		cell_index++
 		cells += list(cell)
-	while(cell_index < PSU_MAXCELLS)
+	while(cell_index <= PSU_MAXCELLS)
 		var/list/cell[0]
-		cell["slot"] = cell_index + 1
+		cell["slot"] = cell_index
 		cell["used"] = 0
 		cell_index++
 		cells += list(cell)
@@ -289,16 +290,12 @@
 		equalise = 0
 		return 1
 	else if( href_list["ejectcell"] )
-		var/obj/item/weapon/cell/C
-		for(var/obj/item/weapon/cell/CL in internal_cells)
-			if(CL.c_uid == text2num(href_list["ejectcell"]))
-				C = CL
-				break
-
-		if(!istype(C))
+		var/slot_number = text2num(href_list["ejectcell"])
+		if(slot_number != Clamp(round(slot_number), 1, length(internal_cells)))
 			return 1
+		var/obj/item/weapon/cell/C = internal_cells[slot_number]
 
-		C.forceMove(get_turf(src))
+		C.dropInto(loc)
 		internal_cells -= C
 		update_icon()
 		RefreshParts()

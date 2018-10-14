@@ -117,10 +117,16 @@
 #define CP(L, S) copytext(L, S, S+1)
 #define IS_DIGIT(L) (L >= "0" && L <= "9" ? 1 : 0)
 
+#define STOP_PLAY_LINES \
+	autorepeat = 0 ;\
+	playing = 0 ;\
+	current_line = 0 ;\
+	player.event_manager.deactivate() ;\
+	return
 
 /datum/synthesized_song/proc/play_lines(mob/user, list/allowed_suff, list/note_off_delta, list/lines)
-	Start
-	if (!lines.len) goto Stop
+	if (!lines.len)
+		STOP_PLAY_LINES
 	var/list/cur_accidentals = list("n", "n", "n", "n", "n", "n", "n")
 	var/list/cur_octaves = list(3, 3, 3, 3, 3, 3, 3)
 	src.current_line = 1
@@ -171,21 +177,17 @@
 					cur_accidentals[note_off] = accidental
 					play_synthesized_note(note_off, accidental, octave+transposition, duration, src.current_line, cur_note)
 					if (src.player.event_manager.is_overloaded())
-						goto Stop
+						STOP_PLAY_LINES
 			cur_note++
 			src.player.event_manager.suspended = 0
-			if (!src.playing || src.player.shouldStopPlaying(user)) goto Stop
+			if (!src.playing || src.player.shouldStopPlaying(user))
+				STOP_PLAY_LINES
 			sleep(duration)
 		src.current_line++
 	if (src.autorepeat)
-		goto Start
+		.()
 
-	Stop
-	src.autorepeat = 0
-	src.playing = 0
-	src.current_line = 0
-	src.player.event_manager.deactivate()
-
+#undef STOP_PLAY_LINES
 
 /datum/synthesized_song/proc/play_song(mob/user)
 	// This code is really fucking horrible.

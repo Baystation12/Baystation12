@@ -7,7 +7,7 @@
 
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
-	atom_flags = ATOM_FLAG_CHECKS_BORDER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	alpha = 180
 	var/maxhealth = 14.0
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
@@ -398,7 +398,7 @@
 	return istype(S, /obj/structure/window)
 
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
-/obj/structure/window/update_icon()
+/obj/structure/window/on_update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
 	overlays.Cut()
@@ -650,5 +650,5 @@
 	if(active && !powered(power_channel))
 		toggle_tint()
 
-/obj/machinery/button/windowtint/update_icon()
+/obj/machinery/button/windowtint/on_update_icon()
 	icon_state = "light[active]"

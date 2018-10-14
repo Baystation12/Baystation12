@@ -43,10 +43,11 @@
 		return ..()
 
 /obj/item/inducer/proc/CannotUse(mob/user)
-	if(!get_cell())
+	var/obj/item/weapon/cell/my_cell = get_cell()
+	if(!istype(my_cell))
 		to_chat(user, "<span class='warning'>\The [src] doesn't have a power cell installed!</span>")
 		return TRUE
-	if(cell.percent() <= 0)
+	if(my_cell.percent() <= 0)
 		to_chat(user, "<span class='warning'>\The [src]'s battery is dead!</span>")
 		return TRUE
 	return FALSE
@@ -107,6 +108,10 @@
 			length += rand(40, 60)
 		while(C.charge < C.maxcharge)
 			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, target = user))
+				if(CannotUse(user))
+					return TRUE
+				if(QDELETED(C))
+					return TRUE
 				sparks.start()
 				done_any = TRUE
 				induce(C)
@@ -153,7 +158,7 @@
 	if(opened)
 		to_chat(M,"<span class='notice'>Its battery compartment is open.</span>")
 
-/obj/item/inducer/update_icon()
+/obj/item/inducer/on_update_icon()
 	overlays.Cut()
 	if(opened)
 		if(!get_cell())
@@ -179,7 +184,7 @@
 		return
 	. = ..()
 
-/obj/item/inducer/borg/update_icon()
+/obj/item/inducer/borg/on_update_icon()
 	. = ..()
 	overlays += image("icons/obj/gun.dmi","safety[safety()]")
 

@@ -186,7 +186,7 @@
 	matter = list(MATERIAL_GLASS = 500)
 	volume = 60
 	amount_per_transfer_from_this = 10
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 
 /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	name = "bluespace beaker"
@@ -257,7 +257,7 @@
 	else
 		return ..()
 
-/obj/item/weapon/reagent_containers/glass/bucket/update_icon()
+/obj/item/weapon/reagent_containers/glass/bucket/on_update_icon()
 	overlays.Cut()
 	if (!is_open_container())
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")

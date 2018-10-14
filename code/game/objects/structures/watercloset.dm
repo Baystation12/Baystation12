@@ -111,7 +111,7 @@
 	open = !open
 	update_icon()
 
-/obj/structure/hygiene/toilet/update_icon()
+/obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/hygiene/toilet/attackby(obj/item/I as obj, var/mob/living/user)
@@ -235,7 +235,7 @@
 			return
 	. = ..()
 
-/obj/structure/hygiene/shower/update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
+/obj/structure/hygiene/shower/on_update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
 	overlays.Cut()					//once it's been on for a while, in addition to handling the water overlay.
 	if(mymist)
 		qdel(mymist)
@@ -299,15 +299,15 @@
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M)) return
 
-	var/temperature = temperature_settings[watertemp]
-	var/temp_adj = between(BODYTEMP_COOLING_MAX, temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/water_temperature = temperature_settings[watertemp]
+	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(temperature >= H.species.heat_level_1)
+		if(water_temperature >= H.species.heat_level_1)
 			to_chat(H, "<span class='danger'>The water is searing hot!</span>")
-		else if(temperature <= H.species.cold_level_1)
+		else if(water_temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
 
 /obj/item/weapon/bikehorn/rubberducky

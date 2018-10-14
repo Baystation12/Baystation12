@@ -37,7 +37,7 @@ field_generator power level display
 	var/field_power_draw = 2000	//power needed per field object
 
 
-/obj/machinery/field_generator/update_icon()
+/obj/machinery/field_generator/on_update_icon()
 	overlays.Cut()
 	if(!active)
 		if(warming_up)

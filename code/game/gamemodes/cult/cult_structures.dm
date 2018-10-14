@@ -67,7 +67,7 @@
 		isbroken = 0
 		set_density(1)
 		icon_state = "pylon"
-		set_light(5)
+		set_light(0.5)
 
 /obj/structure/cult/tome
 	name = "Desk"

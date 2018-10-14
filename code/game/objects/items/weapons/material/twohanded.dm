@@ -18,6 +18,7 @@
  */
 /obj/item/weapon/material/twohanded
 	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
@@ -45,7 +46,6 @@
 	force_unwielded = round(force*unwielded_force_divisor)
 	force_wielded = force
 	force = force_unwielded
-//	log_debug("[src] has unwielded force [force_unwielded], wielded force [force_wielded] and throwforce [throwforce] when made from default material [material.name]")
 
 
 /obj/item/weapon/material/twohanded/New()
@@ -57,10 +57,11 @@
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/weapon/material/twohanded/update_icon()
+/obj/item/weapon/material/twohanded/on_update_icon()
 	icon_state = "[base_icon][wielded]"
 	item_state_slots[slot_l_hand_str] = icon_state
 	item_state_slots[slot_r_hand_str] = icon_state
+	item_state_slots[slot_back_str] = base_icon
 
 /*
  * Fireaxe
@@ -75,8 +76,6 @@
 	unwielded_force_divisor = 0.3
 	sharp = 1
 	edge = 1
-	w_class = ITEM_SIZE_HUGE
-	slot_flags = SLOT_BACK
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
@@ -101,8 +100,6 @@
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 10
-	w_class = ITEM_SIZE_HUGE
-	slot_flags = SLOT_BACK
 	applies_material_colour = 0
 
 	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
@@ -120,3 +117,35 @@
 	if(!consumed)
 		new /obj/item/weapon/material/wirerod(get_turf(src)) //give back the wired rod
 	..()
+
+/obj/item/weapon/material/twohanded/baseballbat
+	name = "bat"
+	desc = "HOME RUN!"
+	icon_state = "metalbat0"
+	base_icon = "metalbat"
+	item_state = "metalbat"
+	w_class = ITEM_SIZE_LARGE
+	throwforce = 7
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
+	hitsound = 'sound/weapons/genhit3.ogg'
+	default_material = MATERIAL_WOOD
+	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
+	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
+	attack_cooldown_modifier = 1
+	melee_accuracy_bonus = -10
+
+//Predefined materials go here.
+/obj/item/weapon/material/twohanded/baseballbat/metal/New(var/newloc)
+	..(newloc,MATERIAL_STEEL)
+
+/obj/item/weapon/material/twohanded/baseballbat/uranium/New(var/newloc)
+	..(newloc,MATERIAL_URANIUM)
+
+/obj/item/weapon/material/twohanded/baseballbat/gold/New(var/newloc)
+	..(newloc,MATERIAL_GOLD)
+
+/obj/item/weapon/material/twohanded/baseballbat/platinum/New(var/newloc)
+	..(newloc,MATERIAL_PLATINUM)
+
+/obj/item/weapon/material/twohanded/baseballbat/diamond/New(var/newloc)
+	..(newloc,MATERIAL_DIAMOND)

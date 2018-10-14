@@ -14,7 +14,7 @@
 	atmos_canpass = CANPASS_PROC
 
 
-/obj/effect/shield/update_icon()
+/obj/effect/shield/on_update_icon()
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
 		set_opacity(1)
 	else

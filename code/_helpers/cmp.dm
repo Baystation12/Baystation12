@@ -28,6 +28,9 @@
 /proc/cmp_numeric_asc(a,b)
 	return a - b
 
+/proc/cmp_numeric_dsc(a,b)
+	return b - a
+
 /proc/cmp_subsystem_display(datum/controller/subsystem/a, datum/controller/subsystem/b)
 	return sorttext(b.name, a.name)
 

@@ -10,7 +10,7 @@
 	health = 150
 	visible = 0.0
 	use_power = 0
-	atom_flags = ATOM_FLAG_CHECKS_BORDER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	explosion_resistance = 5
@@ -24,7 +24,7 @@
 		src.base_state = src.icon_state
 	return
 
-/obj/machinery/door/window/update_icon()
+/obj/machinery/door/window/on_update_icon()
 	if(density)
 		icon_state = base_state
 	else
@@ -82,8 +82,6 @@
 					close()
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
-	if (!( ticker ))
-		return
 	if (src.operating)
 		return
 	if (src.density && (!issmall(M) || ishuman(M)) && src.allowed(AM))
@@ -114,8 +112,6 @@
 
 /obj/machinery/door/window/open()
 	if (operating == 1) //doors can still open when emag-disabled
-		return 0
-	if (!ticker)
 		return 0
 	if (!src.operating) //in case of emag
 		src.operating = 1

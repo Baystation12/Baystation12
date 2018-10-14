@@ -118,7 +118,7 @@ LINEN BINS
 	to_chat(user, "There are [amount] bed sheets in the bin.")
 
 
-/obj/structure/bedsheetbin/update_icon()
+/obj/structure/bedsheetbin/on_update_icon()
 	switch(amount)
 		if(0)				icon_state = "linenbin-empty"
 		if(1 to amount / 2)	icon_state = "linenbin-half"

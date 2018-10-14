@@ -20,6 +20,11 @@
 	..()
 	update_icon()
 
+/obj/item/device/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)
+	if(proximity && istype(O) && on)
+		O.HandleObjectHeating(src, user, 500)
+	..()
+
 /obj/item/device/oxycandle/attack_self(mob/user)
 	if(!on)
 		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")
@@ -61,7 +66,7 @@
 	var/list/air_mix = list("oxygen" = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 	air_contents.adjust_multi("oxygen", air_mix["oxygen"])
 
-/obj/item/device/oxycandle/update_icon()
+/obj/item/device/oxycandle/on_update_icon()
 	if(on == 1)
 		icon_state = "oxycandle_on"
 		item_state = icon_state

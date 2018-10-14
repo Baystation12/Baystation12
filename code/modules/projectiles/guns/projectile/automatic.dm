@@ -41,7 +41,7 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/mini_uzi/update_icon()
+/obj/item/weapon/gun/projectile/automatic/mini_uzi/on_update_icon()
 	..()
 	if(ammo_magazine)
 		icon_state = "mpistolen"
@@ -72,7 +72,7 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=4, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
+/obj/item/weapon/gun/projectile/automatic/c20r/on_update_icon()
 	..()
 	if(ammo_magazine)
 		icon_state = "c20r-[round(ammo_magazine.stored_ammo.len,4)]"
@@ -105,7 +105,7 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=6, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
+/obj/item/weapon/gun/projectile/automatic/sts35/on_update_icon()
 	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
 	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
 	..()
@@ -131,7 +131,7 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
+/obj/item/weapon/gun/projectile/automatic/wt550/on_update_icon()
 	..()
 	if(ammo_magazine)
 		icon_state = "wt550-[round(ammo_magazine.stored_ammo.len,4)]"
@@ -170,8 +170,8 @@
 	var/use_launcher = 0
 	var/obj/item/weapon/gun/launcher/grenade/underslung/launcher
 
-/obj/item/weapon/gun/projectile/automatic/z8/New()
-	..()
+/obj/item/weapon/gun/projectile/automatic/z8/Initialize()
+	. = ..()
 	launcher = new(src)
 
 /obj/item/weapon/gun/projectile/automatic/z8/attackby(obj/item/I, mob/user)
@@ -194,7 +194,7 @@
 	else
 		..()
 
-/obj/item/weapon/gun/projectile/automatic/z8/update_icon()
+/obj/item/weapon/gun/projectile/automatic/z8/on_update_icon()
 	..()
 	if(ammo_magazine)
 		if(ammo_magazine.stored_ammo.len)
@@ -268,7 +268,7 @@
 	else
 		return ..() //once open, behave like normal
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
+/obj/item/weapon/gun/projectile/automatic/l6_saw/on_update_icon()
 	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
 		icon_state = "l6[cover_open ? "open" : "closed"][round(ammo_magazine.stored_ammo.len, 25)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"

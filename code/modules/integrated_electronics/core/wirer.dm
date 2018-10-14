@@ -15,7 +15,7 @@
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
 
-/obj/item/device/integrated_electronics/wirer/update_icon()
+/obj/item/device/integrated_electronics/wirer/on_update_icon()
 	icon_state = "wirer-[mode]"
 
 /obj/item/device/integrated_electronics/wirer/proc/wire(var/datum/integrated_io/io, mob/user)

@@ -148,7 +148,7 @@
 			O.forceMove(new_turf)
 		else if(istype(O,/obj/effect/shuttle_landmark))
 			var/obj/effect/shuttle_landmark/L = O
-			if(L.mobile)
+			if(L.flags & SLANDMARK_FLAG_MOBILE)
 				L.forceMove(new_turf)
 
 	for(var/mob/M in source)

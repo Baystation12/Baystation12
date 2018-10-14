@@ -43,7 +43,7 @@
 
 	..(severity)
 
-/obj/machinery/portable_atmospherics/powered/scrubber/update_icon()
+/obj/machinery/portable_atmospherics/powered/scrubber/on_update_icon()
 	src.overlays = 0
 
 	if(on && cell && cell.charge)
@@ -92,6 +92,8 @@
 		if (!cell.charge && !powered())
 			power_change()
 			update_icon()
+		if(holding)
+			holding.queue_icon_update()
 
 	//src.update_icon()
 	src.updateDialog()
@@ -176,7 +178,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(var/mob/user as mob)
 		to_chat(usr, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/update_icon()
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
 	src.overlays = 0
 
 	if(on && !(stat & (NOPOWER|BROKEN)))

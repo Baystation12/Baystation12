@@ -52,7 +52,7 @@
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/structure/closet/body_bag/cryobag/update_icon()
+/obj/structure/closet/body_bag/cryobag/on_update_icon()
 	..()
 	overlays.Cut()
 	var/image/I = image(icon, "indicator[opened]")

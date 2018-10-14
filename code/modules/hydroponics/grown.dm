@@ -129,7 +129,7 @@
 		SSplants.product_descs["[seed.uid]"] = desc
 	desc += ". Delicious! Probably."
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/update_icon()
+/obj/item/weapon/reagent_containers/food/snacks/grown/on_update_icon()
 	if(!seed)
 		return
 	overlays.Cut()

@@ -12,7 +12,6 @@
 	var/last_action
 	var/last_upgrade
 
-	var/last_target
 	var/special_target_functional = 1
 
 	var/attacking = 0
@@ -22,18 +21,23 @@
 /*
 	This section is for overrides of existing procs.
 */
-/obj/item/grab/New(mob/living/carbon/human/attacker, mob/living/carbon/human/victim)
-	..()
+/obj/item/grab/Initialize(mapload, mob/living/carbon/human/victim)
+	. = ..()
+	current_grab = all_grabstates[start_grab_name]
 
-	assailant = attacker
+	assailant = loc
+	if(!istype(assailant))
+		return INITIALIZE_HINT_QDEL
 	affecting = victim
-	target_zone = attacker.zone_sel.selecting
-	attacker.remove_cloaking_source(attacker.species)
-	var/obj/item/O = get_targeted_organ()
+	target_zone = assailant.zone_sel.selecting
+	assailant.remove_cloaking_source(assailant.species)
+	var/obj/item/organ/O = get_targeted_organ()
+	if(!istype(O))
+		to_chat(assailant, "<span class='notice'>\The [affecting] is missing that body part!</span>")
+		return INITIALIZE_HINT_QDEL
 	SetName("[name] ([O.name])")
-
-	if(start_grab_name)
-		current_grab = all_grabstates[start_grab_name]
+	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
+	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 
 /obj/item/grab/examine(var/user)
 	..()
@@ -61,28 +65,43 @@
 
 /obj/item/grab/Destroy()
 	if(affecting)
+		GLOB.dismembered_event.unregister(affecting, src)
 		reset_position()
 		affecting.grabbed_by -= src
 		affecting.reset_plane_and_layer()
 		affecting = null
 	if(assailant)
+		GLOB.zone_selected_event.unregister(assailant.zone_sel, src)
 		assailant = null
 	return ..()
 
 /*
 	This section is for newly defined useful procs.
 */
-/obj/item/grab/proc/target_change()
-	var/hit_zone = assailant.zone_sel.selecting
-	if(src != assailant.get_active_hand())
-		return 0
-	if(hit_zone && hit_zone != last_target)
-		last_target = hit_zone
-		special_target_functional = current_grab.check_special_target(src)
-		return hit_zone
-	else
-		return 0
 
+/obj/item/grab/proc/on_target_change(obj/screen/zone_sel/zone, old_sel, new_sel)
+	if(src != assailant.get_active_hand())
+		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
+	if(target_zone == new_sel)
+		return
+	var/old_zone = target_zone
+	target_zone = new_sel
+	if(!istype(get_targeted_organ(), /obj/item/organ))
+		current_grab.let_go(src)
+		return
+	current_grab.on_target_change(src, old_zone, target_zone)
+
+/obj/item/grab/proc/on_organ_loss(mob/victim, obj/item/organ/lost)
+	if(affecting != victim)
+		crash_with("A grab switched affecting targets without properly re-registering for dismemberment updates.")
+		return
+	var/obj/item/organ/O = get_targeted_organ()
+	if(!istype(O))
+		current_grab.let_go(src)
+		return // Sanity check in case the lost organ was improperly removed elsewhere in the code.
+	if(lost != O)
+		return
+	current_grab.let_go(src)
 
 /obj/item/grab/proc/force_drop()
 	assailant.drop_from_inventory(src)
@@ -130,10 +149,9 @@
 	return 1
 
 /obj/item/grab/proc/init()
-	last_target = assailant.zone_sel.selecting
 	affecting.UpdateLyingBuckledAndVerbStatus()
 	adjust_position()
-	update_icons()
+	update_icon()
 	action_used()
 
 // Returns the organ of the grabbed person that the grabber is targeting
@@ -174,7 +192,7 @@
 		current_grab = upgrab
 		last_upgrade = world.time
 		adjust_position()
-		update_icons()
+		update_icon()
 		leave_forensic_traces()
 		current_grab.enter_as_up(src)
 
@@ -182,9 +200,9 @@
 	var/datum/grab/downgrab = current_grab.downgrade(src)
 	if(downgrab)
 		current_grab = downgrab
-		update_icons()
+		update_icon()
 
-/obj/item/grab/proc/update_icons()
+/obj/item/grab/on_update_icon()
 	if(current_grab.icon)
 		icon = current_grab.icon
 	if(current_grab.icon_state)

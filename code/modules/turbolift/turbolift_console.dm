@@ -83,7 +83,7 @@
 	light_up = TRUE
 	update_icon()
 
-/obj/structure/lift/button/update_icon()
+/obj/structure/lift/button/on_update_icon()
 	if(light_up)
 		icon_state = "button_lit"
 	else

@@ -28,6 +28,9 @@
 /datum/phenomena/herald/can_activate(var/a)
 	if(!..())
 		return FALSE
+	return valid_for_herald(a)
+
+/datum/phenomena/herald/proc/valid_for_herald(var/a)
 	var/mob/living/carbon/human/H = a
 	if(!istype(H))
 		return FALSE
@@ -47,26 +50,27 @@
 /datum/phenomena/herald/Topic(var/href, var/list/href_list)
 	if(..())
 		return 1
-	if(!istype(usr, /mob/living/starlight_soul))
+	if(usr != linked)
 		return 1
 
 	if(href_list["herald"])
 		var/list/form = possible_forms[href_list["herald"]]
 		var/mob/living/L = locate(href_list["target"])
-		if(!L || !can_activate(L) || !form)
+		var/turf/T = get_turf(L)
+		if(!L || !valid_for_herald(L) || !form)
 			return 1
 		var/type = form["armor"]
-		var/obj/item/I = new type
+		var/obj/item/I = new type(T)
 		var/datum/extension/deity_be_near/extension = set_extension(I, /datum/extension/deity_be_near, form["extension"], linked)
-		equip_slot(L, slot_wear_suit, I)
+		L.equip_to_slot_or_store_or_drop(I, slot_wear_suit)
 		if(form["helm"])
 			var/h_type = form["helm"]
-			var/obj/item/helm = new h_type
-			equip_slot(L, slot_head, helm)
+			var/obj/item/helm = new h_type(T)
+			L.equip_to_slot_or_store_or_drop(helm, slot_head)
 			extension.expected_helmet = helm.type //We only do by type because A. its easier to manage and B the chances of it being non-unique in a normal game is very small
 		if(form["weapon"])
 			var/w_type = form["weapon"]
-			equip_slot(L, slot_r_hand, new w_type)
+			L.equip_to_slot_or_store_or_drop(new w_type(T), slot_r_hand)
 		if(form["spells"])
 			for(var/s in form["spells"])
 				var/spell/S = new s

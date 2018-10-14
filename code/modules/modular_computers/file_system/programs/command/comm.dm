@@ -89,6 +89,8 @@
 	var/list/processed_evac_options = list()
 	if(!isnull(evacuation_controller))
 		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+			if(EO.abandon_ship)
+				continue
 			var/list/option = list()
 			option["option_text"] = EO.option_text
 			option["option_target"] = EO.option_target
@@ -250,6 +252,12 @@
 						to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
 					else
 						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out a paper.</span>")
+		if("unbolt_doors")
+			GLOB.using_map.unbolt_saferooms()
+			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms unbolted.</span>")
+		if("bolt_doors")
+			GLOB.using_map.bolt_saferooms()
+			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms bolted.</span>")
 
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
@@ -313,7 +321,7 @@ var/last_message_id = 0
 	frequency.post_signal(src, status_signal)
 
 /proc/cancel_call_proc(var/mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 
 	if(evacuation_controller.cancel_evacuation())
@@ -330,7 +338,7 @@ var/last_message_id = 0
 	return 0
 
 /proc/call_shuttle_proc(var/mob/user, var/emergency)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 
 	if(isnull(emergency))
@@ -360,7 +368,7 @@ var/last_message_id = 0
 
 /proc/init_autotransfer()
 
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 
 	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)

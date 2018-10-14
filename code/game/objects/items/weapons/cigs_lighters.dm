@@ -17,6 +17,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	waterproof = FALSE
 	var/lit = 0
 
+/obj/item/weapon/flame/afterattack(var/obj/O, var/mob/user, proximity)
+	..()
+	if(proximity && lit && istype(O))
+		O.HandleObjectHeating(src, user, 700)
+
 /obj/item/weapon/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = 0
 	damtype = "brute"
@@ -157,7 +162,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(location)
 		location.hotspot_expose(700, 5)
 
-/obj/item/clothing/mask/smokable/update_icon()
+/obj/item/clothing/mask/smokable/on_update_icon()
 	if(lit && icon_on)
 		icon_state = icon_on
 		item_state = icon_on
@@ -196,7 +201,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			qdel(src)
 			return
 		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
-		reagents.handle_reactions()
+		HANDLE_REACTIONS(reagents)
 		update_icon()
 		if(flavor_text)
 			var/turf/T = get_turf(src)
@@ -262,13 +267,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
-/obj/item/clothing/mask/smokable/cigarette/update_icon()
+/obj/item/clothing/mask/smokable/cigarette/on_update_icon()
 	..()
 	overlays.Cut()
 	if(lit)
 		overlays += overlay_image(icon, "cigon", flags=RESET_COLOR)
 
-/obj/item/clothing/mask/smokable/cigarette/trident/update_icon()
+/obj/item/clothing/mask/smokable/cigarette/trident/on_update_icon()
 	..()
 	overlays.Cut()
 	if(lit)
@@ -1121,7 +1126,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	else
 		extinguish(user)
 
-/obj/item/weapon/flame/lighter/update_icon()
+/obj/item/weapon/flame/lighter/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	if(lit)

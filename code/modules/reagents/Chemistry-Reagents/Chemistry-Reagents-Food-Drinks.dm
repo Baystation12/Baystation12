@@ -1064,19 +1064,6 @@
 		return
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
-/datum/reagent/drink/ice
-	name = "Ice"
-	description = "Frozen water, your dentist wouldn't like you chewing this."
-	taste_description = "ice"
-	taste_mult = 1.5
-	reagent_state = SOLID
-	color = "#619494"
-	adj_temp = -5
-
-	glass_name = "ice"
-	glass_desc = "Generally, you're supposed to put something else in there too..."
-	glass_icon = DRINK_ICON_NOISY
-
 /datum/reagent/drink/nothing
 	name = "Nothing"
 	description = "Absolutely nothing."

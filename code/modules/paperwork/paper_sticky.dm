@@ -12,7 +12,7 @@
 	var/written_by
 	var/paper_type = /obj/item/weapon/paper/sticky
 
-/obj/item/sticky_pad/update_icon()
+/obj/item/sticky_pad/on_update_icon()
 	if(papers <= 15)
 		icon_state = "pad_empty"
 	else if(papers <= 50)
@@ -94,7 +94,7 @@
 	GLOB.moved_event.unregister(src, src)
 	. = ..()
 
-/obj/item/weapon/paper/sticky/update_icon()
+/obj/item/weapon/paper/sticky/on_update_icon()
 	if(icon_state != "scrap")
 		icon_state = info ? "paper_words" : "paper"
 
@@ -103,6 +103,9 @@
 	. = ..()
 	if(!istype(loc, /turf))
 		reset_persistence_tracking()
+
+/obj/item/weapon/paper/sticky/can_bundle()
+	return FALSE // Would otherwise lead to buggy interaction
 
 /obj/item/weapon/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
 

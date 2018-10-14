@@ -70,7 +70,7 @@
 	else
 		..()
 
-/obj/item/weapon/weldpack/update_icon()
+/obj/item/weapon/weldpack/on_update_icon()
 	..()
 
 	overlays.Cut()

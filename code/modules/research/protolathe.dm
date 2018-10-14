@@ -1,7 +1,7 @@
 /obj/machinery/r_n_d/protolathe
 	name = "\improper Protolathe"
 	icon_state = "protolathe"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 
 	use_power = 1
 	idle_power_usage = 30
@@ -69,7 +69,7 @@
 	speed = T / 2
 
 
-/obj/machinery/r_n_d/protolathe/update_icon()
+/obj/machinery/r_n_d/protolathe/on_update_icon()
 	if(panel_open)
 		icon_state = "protolathe_t"
 	else if(busy)

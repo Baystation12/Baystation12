@@ -74,7 +74,7 @@
 		recent_moles_transferred = 0
 		update_icon()
 
-/obj/machinery/atmospherics/binary/circulator/update_icon()
+/obj/machinery/atmospherics/binary/circulator/on_update_icon()
 	if(stat & (BROKEN|NOPOWER) || !anchored)
 		icon_state = "circ-p"
 	else if(last_pressure_delta > 0 && recent_moles_transferred > 0)

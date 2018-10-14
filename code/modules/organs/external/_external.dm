@@ -108,6 +108,7 @@
 
 	if(parent && parent.children)
 		parent.children -= src
+		parent = null
 
 	if(children)
 		for(var/obj/item/organ/external/C in children)
@@ -167,7 +168,7 @@
 		if(I.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 			burn_damage += I.w_class * rand(power, 3*power)
 
-	if(burn_damage)
+	if(owner && burn_damage)
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
 		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 

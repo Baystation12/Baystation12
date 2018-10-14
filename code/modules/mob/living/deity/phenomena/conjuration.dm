@@ -1,4 +1,5 @@
 /datum/phenomena/movable_object/dimensional_locker
+	object_type = /obj/structure/closet
 	name = "Dimensional Locker"
 	cost = 10
 	desc = "Summon a trans-dimensional locker anywhere within your influence. You may transport objects and things, but not people in it."

@@ -1,8 +1,8 @@
 //TORCH NanoTrasen Uniforms - DO NOT ADD NEW UNIFORMS TO UNIFORM.DMI - TORCH NANOTRASEN UNIFORMS GO IN NANOTRASEN.DMI
 
 /obj/item/clothing/under/rank/guard
-	name = "corporate security uniform"
-	desc = "A durable uniform worn by Torch, Ltd. security."
+	name = "security guard uniform"
+	desc = "A durable uniform worn by Expeditionary Corps Organisation security."
 	icon_state = "guard"
 	item_state = "w_suit"
 	worn_state = "guard"
@@ -14,12 +14,12 @@
 		)
 
 /obj/item/clothing/under/rank/guard/nanotrasen
-	desc = "A durable uniform worn by NanoTrasen security."
+	desc = "A durable uniform worn by subcontracted NanoTrasen security."
 	icon_state = "guard_nt"
 	worn_state = "guard_nt"
 
 /obj/item/clothing/under/rank/scientist
-	name = "polo and pants"
+	name = "\improper Expeditionary Corps Organisation polo and pants"
 	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics."
 	icon_state = "smock"
 	item_state = "w_suit"
@@ -34,12 +34,12 @@
 
 /obj/item/clothing/under/rank/scientist/nanotrasen
 	name = "\improper NanoTrasen polo and pants"
-	desc = "A fashionable polo and pair of trousers belonging to the NanoTrasen corporation, a megacorporation that is primarily concerned with the research of new and dangerous technologies."
+	desc = "A fashionable polo and pair of trousers belonging to NanoTrasen, a megacorporation that is primarily concerned with the research of new and dangerous technologies."
 	starting_accessories = list(/obj/item/clothing/accessory/tunic/nanotrasen)
 
 /obj/item/clothing/under/rank/scientist/executive
-	name = "executive polo and pants"
-	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Torch, Ltd. higher-up."
+	name = "\improper Expeditionary Corps Organisation polo and pants"
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Expeditionary Corps Organisation higher-up."
 	icon_state = "smockexec"
 	worn_state = "smockexec"
 	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec)
@@ -69,7 +69,7 @@
 
 /obj/item/clothing/under/rank/ntpilot
 	name = "flight suit"
-	desc = "A sleek flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
+	desc = "A sleek green Expeditionary Corps Organisation flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon_state = "pilot"
 	item_state = "g_suit"
 	worn_state = "pilot"
@@ -79,7 +79,6 @@
 		)
 
 /obj/item/clothing/under/rank/ntpilot/nanotrasen
-	name = "\improper NanoTrasen flight suit"
 	desc = "A sleek red NanoTrasen flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon_state = "pilot_nt"
 	item_state = "r_suit"
@@ -91,7 +90,7 @@
 
 /obj/item/clothing/under/suit_jacket/corp
 	name = "executive suit"
-	desc = "A set of suit pants and shirt that companies tend to give to their executives."
+	desc = "A set of Expeditionary Corps Organisation-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit_tl"
 	item_state = "bl_suit"
 	worn_state = "suit_tl"
@@ -106,3 +105,7 @@
 	icon_state = "suit_nt"
 	worn_state = "suit_nt"
 	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen, /obj/item/clothing/accessory/corptie/nanotrasen)
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp
+	name = "\improper Expeditionary Corps Organisation labcoat"
+	desc = "A coat that protects against minor chemical spills. Has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."

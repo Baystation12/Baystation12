@@ -42,8 +42,8 @@
 	//var/list/icon_keys = list()		//keys
 	//var/list/ammo_states = list()	//values
 
-/obj/item/weapon/gun/projectile/New()
-	..()
+/obj/item/weapon/gun/projectile/Initialize()
+	. = ..()
 	if (starts_loaded)
 		if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))
 			for(var/i in 1 to max_shells)

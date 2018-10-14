@@ -216,7 +216,7 @@
 
 			if(!O || !src) return
 
-			if(O.sharp) //Projectile is suitable for pinning.
+			if(O.can_embed()) //Projectile is suitable for pinning.
 				//Handles embedding for non-humans and simple_animals.
 				embed(O)
 

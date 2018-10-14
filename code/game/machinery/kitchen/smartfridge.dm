@@ -11,7 +11,7 @@
 	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 100
-	atom_flags = ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_on = "smartfridge"
 	var/icon_off = "smartfridge-off"
@@ -157,7 +157,7 @@
 		dry()
 		update_icon()
 
-/obj/machinery/smartfridge/drying_rack/update_icon()
+/obj/machinery/smartfridge/drying_rack/on_update_icon()
 	overlays.Cut()
 	if(inoperable())
 		icon_state = icon_off
@@ -191,7 +191,7 @@
 	if(src.shoot_inventory && prob(2))
 		src.throw_item()
 
-/obj/machinery/smartfridge/update_icon()
+/obj/machinery/smartfridge/on_update_icon()
 	if(stat & (BROKEN|NOPOWER))
 		icon_state = icon_off
 	else
@@ -230,9 +230,10 @@
 		var/obj/item/weapon/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
-			if(accept_check(G) && P.remove_from_storage(G, src))
+			if(accept_check(G) && P.remove_from_storage(G, src, 1))
 				plants_loaded++
 				stock_item(G)
+		P.finish_bulk_removal()
 
 		if(plants_loaded)
 			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")

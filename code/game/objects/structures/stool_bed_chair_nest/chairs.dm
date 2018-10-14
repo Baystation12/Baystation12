@@ -36,7 +36,7 @@
 	update_icon()
 	return ..()
 
-/obj/structure/bed/chair/update_icon()
+/obj/structure/bed/chair/on_update_icon()
 	..()
 
 	var/cache_key = "[base_icon]-[material.name]-over"
@@ -182,7 +182,7 @@
 	base_icon = "capchair"
 	buckle_movable = 1
 
-/obj/structure/bed/chair/comfy/captain/update_icon()
+/obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
 	var/image/I = image(icon, "[base_icon]_special")
 	I.plane = ABOVE_HUMAN_PLANE
@@ -347,7 +347,7 @@
 		base_icon = "shuttle_chair"
 	..()
 
-/obj/structure/bed/chair/shuttle/update_icon()
+/obj/structure/bed/chair/shuttle/on_update_icon()
 	..()
 	if(!buckled_mob)
 		var/image/I = image(icon, "[base_icon]_special")

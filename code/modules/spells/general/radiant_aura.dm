@@ -6,6 +6,7 @@
 	invocation_type = SpI_EMOTE
 	invocation = "conjures a sphere of fire around themselves."
 	school = "conjuration"
+	spell_flags = NEEDSCLOTHES
 	charge_max = 300
 	cooldown_min = 100
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 2, Sp_POWER = 0)
@@ -19,3 +20,7 @@
 /spell/radiant_aura/cast(var/list/targets, var/mob/user)
 	var/obj/aura/radiant_aura/A = new(user)
 	QDEL_IN(A,duration)
+
+/spell/radiant_aura/starlight
+	spell_flags = 0
+	charge_max = 400

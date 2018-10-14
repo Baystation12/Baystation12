@@ -9,7 +9,7 @@
 	buckle_pixel_shift = "x=0;y=6"
 	var/health = 100
 
-/obj/structure/bed/nest/update_icon()
+/obj/structure/bed/nest/on_update_icon()
 	return
 
 /obj/structure/bed/nest/user_unbuckle_mob(mob/user as mob)

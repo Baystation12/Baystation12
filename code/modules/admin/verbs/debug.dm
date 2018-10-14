@@ -42,7 +42,7 @@
 	set category = "Fun"
 	set name = "Make Robot"
 
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
 	if(istype(M, /mob/living/carbon/human))
@@ -57,7 +57,7 @@
 	set category = "Fun"
 	set name = "Make Simple Animal"
 
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
 
@@ -105,7 +105,7 @@
 	set category = "Fun"
 	set name = "Make slime"
 
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
 	if(ishuman(M))
@@ -116,97 +116,6 @@
 		log_and_message_admins("made [key_name(M)] into a slime.")
 	else
 		alert("Invalid mob")
-
-/*
-/client/proc/cmd_admin_monkeyize(var/mob/M in mob_list)
-	set category = "Fun"
-	set name = "Make Monkey"
-
-	if(!ticker)
-		alert("Wait until the game starts")
-		return
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/target = M
-		log_admin("[key_name(src)] is attempting to monkeyize [M.key].")
-		spawn(10)
-			target.monkeyize()
-	else
-		alert("Invalid mob")
-
-/client/proc/cmd_admin_changelinginize(var/mob/M in mob_list)
-	set category = "Fun"
-	set name = "Make Changeling"
-
-	if(!ticker)
-		alert("Wait until the game starts")
-		return
-	if(istype(M, /mob/living/carbon/human))
-		log_admin("[key_name(src)] has made [M.key] a changeling.")
-		spawn(10)
-			M.absorbed_dna[M.real_name] = M.dna.Clone()
-			M.make_changeling()
-			if(M.mind)
-				M.mind.special_role = "Changeling"
-	else
-		alert("Invalid mob")
-*/
-/*
-/client/proc/cmd_admin_abominize(var/mob/M in mob_list)
-	set category = null
-	set name = "Make Abomination"
-
-	to_chat(usr, "Ruby Mode disabled. Command aborted.")
-	return
-	if(!ticker)
-		alert("Wait until the game starts.")
-		return
-	if(istype(M, /mob/living/carbon/human))
-		log_admin("[key_name(src)] has made [M.key] an abomination.")
-
-	//	spawn(10)
-	//		M.make_abomination()
-
-*/
-/*
-/client/proc/make_cultist(var/mob/M in mob_list) // -- TLE, modified by Urist
-	set category = "Fun"
-	set name = "Make Cultist"
-	set desc = "Makes target a cultist"
-	if(!cultwords["travel"])
-		runerandom()
-	if(M)
-		if(M.mind in ticker.mode.cult)
-			return
-		else
-			if(alert("Spawn that person a tome?",,"Yes","No")=="Yes")
-				to_chat(M, "<span class='warning'>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie. A tome, a message from your new master, appears on the ground.</span>")
-				new /obj/item/weapon/book/tome(M.loc)
-			else
-				to_chat(M, "<span class='warning'>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie.</span>")
-			var/glimpse=pick("1","2","3","4","5","6","7","8")
-			switch(glimpse)
-				if("1")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["travel"]] is travel...</span>")
-				if("2")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["blood"]] is blood...</span>")
-				if("3")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["join"]] is join...</span>")
-				if("4")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["hell"]] is Hell...</span>")
-				if("5")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["destroy"]] is destroy...</span>")
-				if("6")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["technology"]] is technology...</span>")
-				if("7")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["self"]] is self...</span>")
-				if("8")
-					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["see"]] is see...</span>")
-
-			if(M.mind)
-				M.mind.special_role = "Cultist"
-				ticker.mode.cult += M.mind
-			to_chat(src, "Made [M] a cultist.")
-*/
 
 //TODO: merge the vievars version into this or something maybe mayhaps
 /client/proc/cmd_debug_del_all()
@@ -245,7 +154,7 @@
 	set category = "Admin"
 	set name = "Grant Full Access"
 
-	if (!ticker)
+	if (GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
 	if (istype(M, /mob/living/carbon/human))
@@ -483,7 +392,7 @@
 
 // DNA2 - Admin Hax
 /client/proc/cmd_admin_toggle_block(var/mob/M,var/block)
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
 	if(istype(M, /mob/living/carbon))
@@ -524,7 +433,7 @@
 
 	if(!H)	return
 
-	var/dat = H.get_medical_data(SKILL_MAX)
+	var/dat = display_medical_data(H.get_raw_medical_data(), SKILL_MAX)
 
 	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
 	show_browser(usr, dat, "window=scanconsole;size=430x600")

@@ -88,7 +88,7 @@
 		if(percent <= k)
 			return k
 
-/obj/item/weapon/reagent_containers/food/drinks/update_icon()
+/obj/item/weapon/reagent_containers/food/drinks/on_update_icon()
 	overlays.Cut()
 	if(reagents.reagent_list.len > 0)
 		if(base_name)
@@ -336,10 +336,10 @@
 	base_name = "NT cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp
-	name = "research coffee cup"
-	desc = "A tasteful bottle green coffee cup."
+	name = "\improper Expeditionary Corps Organisation coffee cup"
+	desc = "A tasteful coffee cup in Expeditionary Corps Organisation corporate colours."
 	icon_state = "coffeecup_corp"
-	base_name = "green cup"
+	base_name = "EXO cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
 	name = "#1 coffee cup"

@@ -40,9 +40,7 @@ var/global/list/rad_collectors = list()
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
 			eject()
 		else
-			P.air_contents.adjust_gas("phoron", -0.001*drainratio)
-	return
-
+			P.air_adjust_gas("phoron", -0.001*drainratio)
 
 /obj/machinery/power/rad_collector/attack_hand(mob/user as mob)
 	if(anchored)
@@ -68,7 +66,7 @@ var/global/list/rad_collectors = list()
 		if(!user.unEquip(W, src))
 			return
 		src.P = W
-		update_icons()
+		update_icon()
 		return 1
 	else if(isCrowbar(W))
 		if(P && !src.locked)
@@ -131,7 +129,7 @@ var/global/list/rad_collectors = list()
 	if(active)
 		toggle_power()
 	else
-		update_icons()
+		update_icon()
 
 /obj/machinery/power/rad_collector/proc/receive_pulse(var/pulse_strength)
 	if(P && active)
@@ -143,7 +141,12 @@ var/global/list/rad_collectors = list()
 	return
 
 
-/obj/machinery/power/rad_collector/proc/update_icons()
+/obj/machinery/power/rad_collector/on_update_icon()
+	if(active)
+		icon_state = "ca_on"
+	else
+		icon_state = "ca"
+
 	overlays.Cut()
 	if(P)
 		overlays += image('icons/obj/singularity.dmi', "ptank")
@@ -156,10 +159,7 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/proc/toggle_power()
 	active = !active
 	if(active)
-		icon_state = "ca_on"
 		flick("ca_active", src)
 	else
-		icon_state = "ca"
 		flick("ca_deactive", src)
-	update_icons()
-	return
+	update_icon()

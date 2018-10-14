@@ -31,6 +31,19 @@
 	var/gas_overlay = "generic"
 	// END GAS DATA
 
+	// Matter state data.
+	var/chilling_point
+	var/chilling_message = "crackles and freezes!"
+	var/chilling_sound = 'sound/effects/bubbles.ogg'
+	var/list/chilling_products
+
+	var/list/heating_products
+	var/heating_point
+	var/heating_message = "begins to boil!"
+	var/heating_sound = 'sound/effects/bubbles.ogg'
+
+	var/temperature_multiplier = 1
+
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))
 		CRASH("Invalid reagents holder: [log_info_line(holder)]")

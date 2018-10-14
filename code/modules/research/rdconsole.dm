@@ -362,7 +362,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		var/datum/reagent/R = locate(href_list["disposeP"]) in linked_lathe.reagents.reagent_list
 		if(R)
 			linked_lathe.reagents.del_reagent(R.type)
-	
+
 	else if(href_list["disposeallP"]) //Causes the protolathe to dispose of all it's reagents.
 		. = TOPIC_REFRESH
 		CHECK_LATHE
@@ -463,6 +463,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	for(var/obj/I in linked_destroy.contents)
 		for(var/mob/M in I.contents)
 			M.death()
+			qdel(M)
 		if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
 			var/obj/item/stack/material/S = I
 			if(S.get_amount() > 1)
@@ -871,8 +872,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "List of Available Designs:"
 			dat += GetResearchListInfo()
 
-	show_browser(user, "<TITLE>Fabrication Control Console</TITLE><HR>[JOINTEXT(dat)]", "window=rdconsole;size=850x600")
-	onclose(user, "rdconsole")
+	var/datum/browser/popup = new(user, "rdconsolenew", "Research Console", 850, 600)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 /obj/machinery/computer/rdconsole/robotics
 	name = "robotics fabrication console"

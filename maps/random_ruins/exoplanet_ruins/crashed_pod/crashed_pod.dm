@@ -22,6 +22,12 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 /datum/job/submap/pod
 	title = "Stranded Survivor"
 	info = "Your ship has been destroyed by a terrible disaster."
+	outfit_type = /decl/hierarchy/outfit/job/survivor
+
+/decl/hierarchy/outfit/job/survivor
+	name = OUTFIT_JOB_NAME("Survivor")
+	id_type = null
+	pda_type = null
 
 /datum/job/submap/pod/New(var/datum/submap/_owner)
 	..()

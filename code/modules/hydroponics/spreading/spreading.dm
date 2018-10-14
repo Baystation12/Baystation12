@@ -101,7 +101,7 @@
 		growth_type = seed.get_growth_type()
 	else
 		max_growth = seed.growth_stages
-		growth_threshold = max_health/seed.growth_stages
+		growth_threshold = max_growth && max_health/max_growth
 
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
@@ -129,7 +129,7 @@
 		var/turf/T = get_turf(src)
 		T.ex_act(prob(80) ? 3 : 2)
 
-/obj/effect/vine/update_icon()
+/obj/effect/vine/on_update_icon()
 	overlays.Cut()
 	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)

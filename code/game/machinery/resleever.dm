@@ -264,7 +264,7 @@ obj/machinery/resleever/Process()
 		else
 	return
 
-/obj/machinery/resleever/update_icon()
+/obj/machinery/resleever/on_update_icon()
 	..()
 	icon_state = empty_state
 	if(occupant)

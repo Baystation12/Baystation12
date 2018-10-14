@@ -59,7 +59,7 @@
 	.=..()
 	update_icon()
 
-/obj/item/weapon/card/data/update_icon()
+/obj/item/weapon/card/data/on_update_icon()
 	overlays.Cut()
 	var/image/detail_overlay = image('icons/obj/card.dmi', src,"[icon_state]-color")
 	detail_overlay.color = detail_color

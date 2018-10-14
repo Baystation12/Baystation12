@@ -19,16 +19,13 @@
 	var/area/base_area
 	//Will also leave this type of turf behind if set.
 	var/turf/base_turf
-	//If set, will set base area and turf type to same as where it was spawned at
-	var/autoset
-	//Will be moved by the shuttle when it moves
-	var/mobile
 	//Name of the shuttle, null for generic waypoint
 	var/shuttle_restricted 
+	var/flags = 0
 
 /obj/effect/shuttle_landmark/Initialize()
 	. = ..()
-	if(autoset)
+	if(flags & SLANDMARK_FLAG_AUTOSET)
 		base_area = get_area(src)
 		var/turf/T = get_turf(src)
 		if(T)
@@ -87,7 +84,7 @@
 /obj/effect/shuttle_landmark/automatic
 	name = "Navpoint"
 	landmark_tag = "navpoint"
-	autoset = 1
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
 	landmark_tag += "-[x]-[y]-[z]-[random_id("landmarks",1,9999)]"
@@ -138,7 +135,7 @@
 	T.hotspot_expose(1500, 5)
 	update_icon()
 
-/obj/item/device/spaceflare/update_icon()
+/obj/item/device/spaceflare/on_update_icon()
 	if(active)
 		icon_state = "bluflare_on"
 		set_light(0.3, 0.1, 6, 2, "85d1ff")

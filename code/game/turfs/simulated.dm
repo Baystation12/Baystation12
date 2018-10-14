@@ -91,7 +91,7 @@
 					S.handle_movement(src, MOVING_QUICKLY(H))
 					if(S.track_blood && S.blood_DNA)
 						bloodDNA = S.blood_DNA
-						bloodcolor=S.blood_color
+						bloodcolor = S.blood_color
 						S.track_blood--
 			else
 				if(H.track_blood && H.feet_blood_DNA)
@@ -109,7 +109,11 @@
 
 		if(src.wet)
 
-			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(16/wet))) ) )
+			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
+				return
+
+			// skillcheck for slipping
+			if(!prob(min(100, M.skill_fail_chance(SKILL_HAULING, 100, SKILL_MAX+1)/(3/wet))))
 				return
 
 			var/slip_dist = 1
@@ -168,6 +172,6 @@
 	return ..()
 
 /turf/simulated/Initialize()
-	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()
 	. = ..()

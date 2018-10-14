@@ -43,7 +43,7 @@
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
-/obj/machinery/keycard_auth/update_icon()
+/obj/machinery/keycard_auth/on_update_icon()
 	if(stat &NOPOWER)
 		icon_state = "auth_off"
 
@@ -186,7 +186,7 @@
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1
-	return ticker.mode && ticker.mode.ert_disabled
+	return SSticker.mode && SSticker.mode.ert_disabled
 
 var/global/maint_all_access = 0
 

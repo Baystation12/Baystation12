@@ -16,7 +16,7 @@
 	light_strength = 4
 	max_damage = 300
 	broken_damage = 150
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/item/modular_computer/console/CouldUseTopic(var/mob/user)
 	..()

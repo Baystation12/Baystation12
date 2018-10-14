@@ -19,7 +19,7 @@
 	cell = new/obj/item/weapon/cell/crap(src)
 	..()
 
-/obj/machinery/floodlight/update_icon()
+/obj/machinery/floodlight/on_update_icon()
 	overlays.Cut()
 	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
 
@@ -81,9 +81,8 @@
 		if(ishuman(user))
 			if(!user.get_active_hand())
 				user.put_in_hands(cell)
-				cell.loc = user.loc
 		else
-			cell.loc = loc
+			cell.dropInto(loc)
 
 		cell.add_fingerprint(user)
 		cell.update_icon()

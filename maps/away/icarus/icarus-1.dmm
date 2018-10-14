@@ -2655,21 +2655,15 @@
 /turf/unsimulated/mineral,
 /area/space)
 "jb" = (
-/obj/effect/shuttle_landmark/nav_icarus/nav1{
-	autoset = 1
-	},
+/obj/effect/shuttle_landmark/nav_icarus/nav1,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "kb" = (
-/obj/effect/shuttle_landmark/nav_icarus/nav2{
-	autoset = 1
-	},
+/obj/effect/shuttle_landmark/nav_icarus/nav2,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "lb" = (
-/obj/effect/shuttle_landmark/nav_icarus/nav3{
-	autoset = 1
-	},
+/obj/effect/shuttle_landmark/nav_icarus/nav3,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "mb" = (

@@ -5,7 +5,7 @@
 	icon_state = "papershredder0"
 	density = 1
 	anchored = 1
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/max_paper = 10
 	var/paperamount = 0
@@ -95,7 +95,7 @@
 	paperamount--
 	return new /obj/item/weapon/shreddedp(get_turf(src))
 
-/obj/machinery/papershredder/update_icon()
+/obj/machinery/papershredder/on_update_icon()
 	icon_state = "papershredder[max(0,min(5,Floor(paperamount/2)))]"
 
 /obj/item/weapon/shreddedp/attackby(var/obj/item/W as obj, var/mob/user)

@@ -37,7 +37,7 @@
 			L.update_icon() //so siding get updated properly
 
 
-/obj/structure/catwalk/update_icon()
+/obj/structure/catwalk/on_update_icon()
 	update_connections()
 	overlays.Cut()
 	icon_state = ""
@@ -126,7 +126,7 @@
 
 /obj/effect/catwalk_plated/Initialize(mapload)
 	. = ..()
-	var/auto_activate = mapload || (ticker && ticker.current_state < GAME_STATE_PLAYING)
+	var/auto_activate = mapload || (GAME_STATE < RUNLEVEL_GAME)
 	if(auto_activate)
 		activate()
 		return INITIALIZE_HINT_QDEL

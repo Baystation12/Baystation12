@@ -21,7 +21,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/device/flashlight/update_icon()
+/obj/item/device/flashlight/on_update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2, light_color)
@@ -164,7 +164,7 @@
 	matter = list(MATERIAL_STEEL = 200,MATERIAL_GLASS = 100)
 	flashlight_outer_range = 5
 
-/obj/item/device/flashlight/lantern/update_icon()
+/obj/item/device/flashlight/lantern/on_update_icon()
 	..()
 	if(on)
 		item_state = "lantern-on"
@@ -266,6 +266,11 @@
 	if(.)
 		activate(user)
 
+/obj/item/device/flashlight/flare/afterattack(var/obj/O, var/mob/user, var/proximity)
+	if(proximity && istype(O) && on)
+		O.HandleObjectHeating(src, user, 500)
+	..()
+
 /obj/item/device/flashlight/flare/proc/activate(var/mob/user)
 	if(on)
 		return
@@ -284,7 +289,7 @@
 		force = initial(force)
 		damtype = initial(damtype)
 
-/obj/item/device/flashlight/flare/update_icon()
+/obj/item/device/flashlight/flare/on_update_icon()
 	..()
 	if(!on && !fuel)
 		icon_state = "[initial(icon_state)]-empty"
@@ -310,7 +315,7 @@
 	fuel = rand(1600, 2000)
 	light_color = color
 
-/obj/item/device/flashlight/flare/glowstick/update_icon()
+/obj/item/device/flashlight/flare/glowstick/on_update_icon()
 	item_state = "glowstick"
 	overlays.Cut()
 	if(!fuel)
@@ -380,7 +385,7 @@
 /obj/item/device/flashlight/slime/New()
 	..()
 
-/obj/item/device/flashlight/slime/update_icon()
+/obj/item/device/flashlight/slime/on_update_icon()
 	return
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)

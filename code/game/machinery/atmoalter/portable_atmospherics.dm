@@ -11,7 +11,7 @@
 
 	var/start_pressure = ONE_ATMOSPHERE
 	var/maximum_pressure = 90 * ONE_ATMOSPHERE
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/portable_atmospherics/New()
 	..()
@@ -49,7 +49,7 @@
 /obj/machinery/portable_atmospherics/proc/MolesForPressure(var/target_pressure = start_pressure)
 	return (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
 
-/obj/machinery/portable_atmospherics/update_icon()
+/obj/machinery/portable_atmospherics/on_update_icon()
 	return null
 
 /obj/machinery/portable_atmospherics/proc/connect(obj/machinery/atmospherics/portables_connector/new_port)

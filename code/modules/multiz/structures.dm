@@ -151,7 +151,7 @@
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
 
-/obj/structure/ladder/update_icon()
+/obj/structure/ladder/on_update_icon()
 	icon_state = "ladder[!!(allowed_directions & UP)][!!(allowed_directions & DOWN)]"
 
 /obj/structure/ladder/up
@@ -163,7 +163,7 @@
 	icon_state = "ladder11"
 
 /obj/structure/stairs
-	name = "Stairs"
+	name = "stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
 	icon = 'icons/obj/stairs.dmi'
 	density = 0
@@ -182,22 +182,23 @@
 			above.ChangeTurf(/turf/simulated/open)
 	. = ..()
 
-/obj/structure/stairs/Uncross(atom/movable/A)
-	if(A.dir == dir && upperStep(A.loc))
-		// This is hackish but whatever.
-		var/turf/target = get_step(GetAbove(A), dir)
-		var/turf/source = A.loc
-		var/turf/above = GetAbove(A)
-		if(above.CanZPass(source, UP) && target.Enter(A, source))
-			A.forceMove(target)
-			if(isliving(A))
-				var/mob/living/L = A
-				if(L.pulling)
-					L.pulling.forceMove(source)
-		else
-			to_chat(A, "<span class='warning'>Something blocks the path.</span>")
-		return 0
-	return 1
+/obj/structure/stairs/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+	if(get_dir(loc, target) == dir && upperStep(mover.loc))
+		return FALSE
+	return ..()
+
+/obj/structure/stairs/Bumped(atom/movable/A)
+	var/turf/target = get_step(GetAbove(A), dir)
+	var/turf/source = A.loc
+	var/turf/above = GetAbove(A)
+	if(above.CanZPass(source, UP) && target.Enter(A, src))
+		A.forceMove(target)
+		if(isliving(A))
+			var/mob/living/L = A
+			if(L.pulling)
+				L.pulling.forceMove(target)
+	else
+		to_chat(A, "<span class='warning'>Something blocks the path.</span>")
 
 /obj/structure/stairs/proc/upperStep(var/turf/T)
 	return (T == loc)

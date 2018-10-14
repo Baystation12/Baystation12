@@ -28,7 +28,7 @@
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
-/obj/machinery/portable_atmospherics/powered/pump/update_icon()
+/obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	src.overlays = 0
 
 	if(on && cell && cell.charge)
@@ -90,6 +90,8 @@
 				power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 			else
 				power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
+			if(holding)
+				holding.queue_icon_update()
 
 	if (power_draw < 0)
 		last_flow_rate = 0

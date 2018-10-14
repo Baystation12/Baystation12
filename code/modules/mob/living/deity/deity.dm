@@ -18,10 +18,10 @@
 
 /mob/living/deity/New()
 	..()
-	if(eye_type)
-		eyeobj = new eye_type(src)
-		eyeobj.possess(src)
-		eyeobj.visualnet.add_source(src)
+	var/visualnet = new /datum/visualnet/cultnet()
+	eyeobj = new /mob/observer/eye/cult(get_turf(src), visualnet)
+	eyeobj.possess(src)
+	eyeobj.visualnet.add_source(src)
 
 /mob/living/deity/death()
 	. = ..()
@@ -44,8 +44,9 @@
 /mob/living/deity/Destroy()
 	death(0)
 	minions.Cut()
-	eyeobj.release()
 	structures.Cut()
+	eyeobj.release()
+	QDEL_NULL(eyeobj.visualnet) //We do it here as some mobs have eyes that have access to the visualnet and we only want to destroy it when the deity is destroyed
 	QDEL_NULL(eyeobj)
 	QDEL_NULL(form)
 	return ..()
