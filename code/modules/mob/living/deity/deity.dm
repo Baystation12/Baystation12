@@ -44,8 +44,8 @@
 /mob/living/deity/Destroy()
 	death(0)
 	minions.Cut()
-	eyeobj.release()
 	structures.Cut()
+	eyeobj.release()
 	QDEL_NULL(eyeobj.visualnet) //We do it here as some mobs have eyes that have access to the visualnet and we only want to destroy it when the deity is destroyed
 	QDEL_NULL(eyeobj)
 	QDEL_NULL(form)

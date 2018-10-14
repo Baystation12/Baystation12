@@ -3,7 +3,7 @@
 	if(player.current)
 		if(jobban_isbanned(player.current, id))
 			return 0
-		if(player.current.faction != "neutral")
+		if(player.current.faction != MOB_FACTION_NEUTRAL)
 			return 0
 
 	var/datum/job/J = job_master.GetJob(player.assigned_role)
