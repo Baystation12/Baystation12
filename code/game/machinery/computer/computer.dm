@@ -64,7 +64,7 @@
 		set_broken()
 	..()
 
-/obj/machinery/computer/update_icon()
+/obj/machinery/computer/on_update_icon()
 	overlays.Cut()
 	if(stat & NOPOWER)
 		set_light(0)

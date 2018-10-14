@@ -163,7 +163,7 @@ var/list/mob_hat_cache = list()
 		real_name = "[initial(name)] ([random_id(type,100,999)])"
 	SetName(real_name)
 
-/mob/living/silicon/robot/drone/update_icon()
+/mob/living/silicon/robot/drone/on_update_icon()
 
 	overlays.Cut()
 	if(stat == 0)

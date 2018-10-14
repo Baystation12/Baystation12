@@ -11,6 +11,7 @@ var/const/NETWORK_HANGAR      = "Hangar"
 var/const/NETWORK_EXPLO       = "Exploration"
 var/const/NETWORK_THIRD_DECK  = "Third Deck"
 var/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
+var/const/NETWORK_NANOTRASEN  = "Petrov"
 
 /datum/map/torch/get_network_access(var/network)
 	switch(network)
@@ -55,6 +56,7 @@ var/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 		NETWORK_AQUILA,
 		NETWORK_CALYPSO,
 		NETWORK_POD,
+		NETWORK_NANOTRASEN,
 		NETWORK_ALARM_ATMOS,
 		NETWORK_ALARM_CAMERA,
 		NETWORK_ALARM_FIRE,
@@ -118,6 +120,9 @@ var/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 
 /obj/machinery/camera/network/engineering_outpost
 	network = list(NETWORK_ENGINEERING_OUTPOST)
+
+/obj/machinery/camera/network/nanotrasen
+	network = list(NETWORK_NANOTRASEN)
 
 // Motion
 /obj/machinery/camera/motion/engineering_outpost

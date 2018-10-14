@@ -60,7 +60,7 @@
 	internal_cells = null
 	return ..()
 
-/obj/machinery/power/smes/batteryrack/update_icon()
+/obj/machinery/power/smes/batteryrack/on_update_icon()
 	overlays.Cut()
 	icon_update = 0
 
@@ -111,6 +111,8 @@
 	if(equalise)
 		// Now try to get least charged cell and use the power from it.
 		var/obj/item/weapon/cell/CL = get_least_charged_cell()
+		if(!CL)
+			return //no cells
 		amount -= CL.give(amount)
 		if(!amount)
 			return
@@ -189,7 +191,7 @@
 		var/obj/item/weapon/cell/least = get_least_charged_cell()
 		var/obj/item/weapon/cell/most = get_most_charged_cell()
 		// Don't bother equalising charge between two same cells. Also ensure we don't get NULLs or wrong types. Don't bother equalising when difference between charges is tiny.
-		if(least == most || !istype(least) || !istype(most) || least.percent() == most.percent())
+		if(!least || !most || least.percent() == most.percent())
 			return
 		var/percentdiff = (most.percent() - least.percent()) / 2 // Transfer only 50% of power. The reason is that it could lead to situations where least and most charged cells would "swap places" (45->50% and 50%->45%)
 		var/celldiff

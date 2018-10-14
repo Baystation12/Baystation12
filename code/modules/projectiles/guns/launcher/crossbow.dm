@@ -189,7 +189,7 @@
 	bolt.icon_state = "metal-rod-superheated"
 	cell.use(500)
 
-/obj/item/weapon/gun/launcher/crossbow/update_icon()
+/obj/item/weapon/gun/launcher/crossbow/on_update_icon()
 	if(tension > 1)
 		icon_state = "crossbow-drawn"
 	else if(bolt)
@@ -207,7 +207,7 @@
 
 	var/buildstate = 0
 
-/obj/item/weapon/crossbowframe/update_icon()
+/obj/item/weapon/crossbowframe/on_update_icon()
 	icon_state = "crossbowframe[buildstate]"
 
 /obj/item/weapon/crossbowframe/examine(mob/user)

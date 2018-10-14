@@ -66,7 +66,7 @@
 	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
 		. += "spacecash1"
 
-/obj/item/weapon/spacecash/bundle/update_icon()
+/obj/item/weapon/spacecash/bundle/on_update_icon()
 	overlays.Cut()
 	var/list/images = src.getMoneyImages()
 

@@ -62,7 +62,7 @@
 	w_class = I.w_class
 	update_icon()
 
-/obj/item/weapon/evidencebag/update_icon()
+/obj/item/weapon/evidencebag/on_update_icon()
 	overlays.Cut()
 	if(stored_item)
 		icon_state = "evidence"

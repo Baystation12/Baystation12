@@ -28,6 +28,9 @@
 /datum/phenomena/herald/can_activate(var/a)
 	if(!..())
 		return FALSE
+	return valid_for_herald(a)
+
+/datum/phenomena/herald/proc/valid_for_herald(var/a)
 	var/mob/living/carbon/human/H = a
 	if(!istype(H))
 		return FALSE
@@ -47,13 +50,13 @@
 /datum/phenomena/herald/Topic(var/href, var/list/href_list)
 	if(..())
 		return 1
-	if(!istype(usr, /mob/living/starlight_soul))
+	if(usr != linked)
 		return 1
 
 	if(href_list["herald"])
 		var/list/form = possible_forms[href_list["herald"]]
 		var/mob/living/L = locate(href_list["target"])
-		if(!L || !can_activate(L) || !form)
+		if(!L || !valid_for_herald(L) || !form)
 			return 1
 		var/type = form["armor"]
 		var/obj/item/I = new type

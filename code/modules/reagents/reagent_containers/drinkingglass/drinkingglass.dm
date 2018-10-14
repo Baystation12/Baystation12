@@ -91,7 +91,7 @@
 
 	return 1
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/update_icon()
+/obj/item/weapon/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
 
 	if (reagents.reagent_list.len > 0)

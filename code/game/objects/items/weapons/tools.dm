@@ -363,7 +363,7 @@
 		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
-/obj/item/weapon/weldingtool/update_icon()
+/obj/item/weapon/weldingtool/on_update_icon()
 	..()
 
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
@@ -448,11 +448,7 @@
 		if(safety<FLASH_PROTECTION_MAJOR)
 			if(E.damage > 10)
 				to_chat(user, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
-
-			if (E.damage >= E.min_broken_damage)
-				to_chat(H, "<span class='danger'>You go blind!</span>")
-				H.sdisabilities |= BLIND
-			else if (E.damage >= E.min_bruised_damage)
+			if (E.damage >= E.min_bruised_damage)
 				to_chat(H, "<span class='danger'>You go blind!</span>")
 				H.eye_blind = 5
 				H.eye_blurry = 5

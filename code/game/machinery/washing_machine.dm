@@ -107,7 +107,7 @@
 		usr.loc = src.loc
 
 
-/obj/machinery/washing_machine/update_icon()
+/obj/machinery/washing_machine/on_update_icon()
 	icon_state = "wm_[state][panel]"
 
 /obj/machinery/washing_machine/attackby(obj/item/weapon/W as obj, mob/user as mob)

@@ -91,7 +91,7 @@
 	return
 
 
-/obj/item/device/assembly/prox_sensor/update_icon()
+/obj/item/device/assembly/prox_sensor/on_update_icon()
 	overlays.Cut()
 	attached_overlays = list()
 	if(timing)

@@ -507,6 +507,17 @@ var/list/global/slot_flags_enumeration = list(
 		if(base_parry_chance || user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 			. += 10 * (user.get_skill_value(SKILL_COMBAT) - SKILL_BASIC)
 
+/obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
+	if(force < 1)
+		return 0
+	if(!istype(attacker))
+		return 0
+	attacker.apply_damage(force, damtype, attacker.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
+	attacker.visible_message("<span class='danger'>[attacker] hurts \his hand on [src]!</span>")
+	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	playsound(target, hitsound, 50, 1, -1)
+	return 1
+
 /obj/item/proc/get_loc_turf()
 	var/atom/L = loc
 	while(L && !istype(L, /turf/))
@@ -533,14 +544,6 @@ var/list/global/slot_flags_enumeration = list(
 	user.do_attack_animation(M)
 
 	src.add_fingerprint(user)
-	//if((CLUMSY in user.mutations) && prob(50))
-	//	M = user
-		/*
-		to_chat(M, "<span class='warning'>You stab yourself in the eye.</span>")
-		M.sdisabilities |= BLIND
-		M.weakened += 4
-		M.adjustBruteLoss(10)
-		*/
 
 	if(istype(H))
 

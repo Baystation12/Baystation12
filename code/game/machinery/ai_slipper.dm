@@ -19,7 +19,7 @@
 	..()
 	update_icon()
 
-/obj/machinery/ai_slipper/update_icon()
+/obj/machinery/ai_slipper/on_update_icon()
 	if (stat & NOPOWER || stat & BROKEN)
 		icon_state = "motion0"
 	else

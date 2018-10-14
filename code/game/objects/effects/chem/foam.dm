@@ -140,7 +140,7 @@
 	update_nearby_tiles(1)
 	..()
 
-/obj/structure/foamedmetal/update_icon()
+/obj/structure/foamedmetal/on_update_icon()
 	if(metal == 1)
 		icon_state = "metalfoam"
 	else

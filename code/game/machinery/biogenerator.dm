@@ -60,7 +60,7 @@
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
 
-/obj/machinery/biogenerator/update_icon()
+/obj/machinery/biogenerator/on_update_icon()
 	if(state == BG_NO_BEAKER)
 		icon_state = "biogen-empty"
 	else if(state == BG_READY || state == BG_COMPLETE)

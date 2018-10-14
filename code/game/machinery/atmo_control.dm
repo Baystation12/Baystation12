@@ -23,7 +23,7 @@
 
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/air_sensor/update_icon()
+/obj/machinery/air_sensor/on_update_icon()
 	icon_state = "gsensor[on]"
 
 /obj/machinery/air_sensor/Process()
@@ -60,7 +60,7 @@
 				signal.data["carbon_dioxide"] = 0
 				signal.data["hydrogen"] = 0
 		signal.data["sigtype"]="status"
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 
 /obj/machinery/air_sensor/proc/set_frequency(new_frequency)
@@ -278,7 +278,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 		. = 1
 
 	signal.data["sigtype"]="command"
-	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	spawn(5)
 		src.updateUsrDialog()
@@ -397,7 +397,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 		. = 1
 
 	signal.data["sigtype"]="command"
-	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	spawn(5)
 		src.updateUsrDialog()
@@ -440,7 +440,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 			"sigtype"="command"
 		)
 
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	..()
 
@@ -493,7 +493,7 @@ Rate: [volume_rate] L/sec<BR>"}
 			"status" = 1,
 			"sigtype"="command"
 		)
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	if(href_list["toggle_automation"])
 		automation = !automation
@@ -512,7 +512,7 @@ Rate: [volume_rate] L/sec<BR>"}
 			"sigtype"="command"
 		)
 
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	if(href_list["injection"])
 		if(!radio_connection)
@@ -527,7 +527,7 @@ Rate: [volume_rate] L/sec<BR>"}
 			"sigtype"="command"
 		)
 
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 
 

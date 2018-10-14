@@ -7,7 +7,7 @@
 	var/obj/item/weapon/cell/device/cell
 	var/enabled = 0
 
-/obj/item/weapon/shield_diffuser/update_icon()
+/obj/item/weapon/shield_diffuser/on_update_icon()
 	if(enabled)
 		icon_state = "hdiffuser_on"
 	else

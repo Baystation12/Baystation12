@@ -77,7 +77,7 @@ var/list/ai_status_emotions = list(
 /obj/machinery/ai_status_display/Process()
 	return
 
-/obj/machinery/ai_status_display/update_icon()
+/obj/machinery/ai_status_display/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		overlays.Cut()
 		return

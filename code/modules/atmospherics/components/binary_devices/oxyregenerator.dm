@@ -157,7 +157,7 @@
 		if (inner_tank.return_pressure() <= 0.1)
 			phase = "filling"
 
-/obj/machinery/atmospherics/binary/oxyregenerator/update_icon()
+/obj/machinery/atmospherics/binary/oxyregenerator/on_update_icon()
 	if(!powered())
 		icon_state = "off"
 	else

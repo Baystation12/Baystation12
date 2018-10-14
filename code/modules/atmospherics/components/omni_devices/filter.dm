@@ -120,22 +120,22 @@
 
 		var/input = 0
 		var/output = 0
-		var/filter = 1
+		var/is_filter = 1
 		var/f_type = null
 		switch(P.mode)
 			if(ATM_INPUT)
 				input = 1
-				filter = 0
+				is_filter = 0
 			if(ATM_OUTPUT)
 				output = 1
-				filter = 0
+				is_filter = 0
 			if(ATM_O2 to ATM_H2)
 				f_type = mode_send_switch(P.mode)
 
 		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"input" = input, \
 										"output" = output, \
-										"filter" = filter, \
+										"filter" = is_filter, \
 										"f_type" = f_type)
 
 	if(portData.len)

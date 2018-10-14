@@ -62,7 +62,7 @@ var/global/list/image/splatter_cache=list()
 	if(world.time > drytime)
 		dry()
 
-/obj/effect/decal/cleanable/blood/update_icon()
+/obj/effect/decal/cleanable/blood/on_update_icon()
 	if(basecolor == "rainbow") basecolor = get_random_colour(1)
 	color = basecolor
 	if(basecolor == SYNTH_BLOOD_COLOUR)
@@ -185,7 +185,7 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("gib1", "gib2", "gib3", "gib5", "gib6")
 	var/fleshcolor = "#ffffff"
 
-/obj/effect/decal/cleanable/blood/gibs/update_icon()
+/obj/effect/decal/cleanable/blood/gibs/on_update_icon()
 
 	var/image/giblets = new(base_icon, "[icon_state]_flesh", dir)
 	if(!fleshcolor || fleshcolor == "rainbow")

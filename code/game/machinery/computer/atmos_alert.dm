@@ -14,7 +14,7 @@ var/global/list/minor_air_alarms = list()
 
 /obj/machinery/computer/atmos_alert/Initialize()
 	. = ..()
-	atmosphere_alarm.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
+	atmosphere_alarm.register_alarm(src, /atom/proc/update_icon)
 
 /obj/machinery/computer/atmos_alert/Destroy()
 	atmosphere_alarm.unregister_alarm(src)
@@ -44,7 +44,7 @@ var/global/list/minor_air_alarms = list()
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/atmos_alert/update_icon()
+/obj/machinery/computer/atmos_alert/on_update_icon()
 	if(!(stat & (NOPOWER|BROKEN)))
 		if(atmosphere_alarm.has_major_alarms(get_z(src)))
 			icon_screen = "alert:2"

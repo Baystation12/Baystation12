@@ -125,7 +125,7 @@
 		if(access_card)
 			to_chat(user, "It has an access cuff with \the [access_card] inserted.")
 
-/mob/living/simple_animal/crow/update_icon()
+/mob/living/simple_animal/crow/on_update_icon()
 	..()
 	overlays -= "bag"
 	overlays -= "bag_dead"
@@ -140,7 +140,7 @@
 	desc = "A large cybercrow. k4w k4w."
 	speak_emote = list("beeps")
 
-/mob/living/simple_animal/crow/cyber/update_icon()
+/mob/living/simple_animal/crow/cyber/on_update_icon()
 	..()
 	overlays -= "cyber"
 	overlays -= "cyber_dead"

@@ -8,7 +8,7 @@ obj/structure/firedoor_assembly
 	density = 1
 	var/wired = 0
 
-obj/structure/firedoor_assembly/update_icon()
+obj/structure/firedoor_assembly/on_update_icon()
 	if(anchored)
 		icon_state = "door_anchored"
 	else

@@ -52,6 +52,8 @@
 	return null
 
 /mob/living/carbon/proc/get_breath_from_environment(var/volume_needed=STD_BREATH_VOLUME)
+	if(volume_needed <= 0)
+		return
 	var/datum/gas_mixture/breath = null
 
 	var/datum/gas_mixture/environment

@@ -78,7 +78,7 @@
 // Heavy laser beam
 //----------------------------
 /obj/effect/projectile/laser/heavy
-	light_max_bright = 3
+	light_max_bright = 1
 
 /obj/effect/projectile/laser/heavy/tracer
 	icon_state = "beam_heavy"
@@ -93,7 +93,7 @@
 // Pulse laser beam
 //----------------------------
 /obj/effect/projectile/laser/pulse
-	light_max_bright = 2
+	light_max_bright = 1
 	light_color = COLOR_DEEP_SKY_BLUE
 
 /obj/effect/projectile/laser/pulse/tracer
@@ -111,7 +111,7 @@
 //----------------------------
 /obj/effect/projectile/pulse/muzzle
 	icon_state = "muzzle_pulse"
-	light_max_bright = 2
+	light_max_bright = 1
 	light_color = COLOR_DEEP_SKY_BLUE
 
 //----------------------------

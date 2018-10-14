@@ -35,7 +35,7 @@ Single Use Emergency Pouches
 		A.band_color = color
 		A.update_icon()
 
-/obj/item/weapon/storage/med_pouch/update_icon()
+/obj/item/weapon/storage/med_pouch/on_update_icon()
 	overlays.Cut()
 	if(!cross_overlay)
 		cross_overlay = image(icon, "cross")

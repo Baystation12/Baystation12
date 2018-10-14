@@ -107,7 +107,7 @@
 	playsound(loc, "sparks", 50, 1)
 	visible_message("<span class='warning'>\The [src] shuts down with a spark.</span>")
 
-/obj/item/device/uplink_service/update_icon()
+/obj/item/device/uplink_service/on_update_icon()
 	switch(state)
 		if(AWAITING_ACTIVATION)
 			icon_state = initial(icon_state)

@@ -14,7 +14,7 @@
 		set_density(0)
 	. = ..()
 
-/obj/machinery/gateway/update_icon()
+/obj/machinery/gateway/on_update_icon()
 	if(active)
 		icon_state = "on"
 		return
@@ -40,7 +40,7 @@
 	awaygate = locate(/obj/machinery/gateway/centeraway)
 	. = ..()
 
-/obj/machinery/gateway/centerstation/update_icon()
+/obj/machinery/gateway/centerstation/on_update_icon()
 	if(active)
 		icon_state = "oncenter"
 		return
@@ -154,7 +154,7 @@ obj/machinery/gateway/centerstation/Process()
 	stationgate = locate(/obj/machinery/gateway/centerstation)
 	. = ..()
 
-/obj/machinery/gateway/centeraway/update_icon()
+/obj/machinery/gateway/centeraway/on_update_icon()
 	if(active)
 		icon_state = "oncenter"
 		return

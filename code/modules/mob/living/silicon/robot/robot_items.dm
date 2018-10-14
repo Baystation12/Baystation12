@@ -112,7 +112,7 @@
 	else
 		activate_strobe()
 
-/obj/item/weapon/party_light/update_icon()
+/obj/item/weapon/party_light/on_update_icon()
 	if (activated)
 		icon_state = "partylight-on"
 		set_light(1, 1, 7)

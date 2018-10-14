@@ -21,7 +21,7 @@
 	if(Adjacent(user))
 		release()
 
-/obj/structure/stasis_cage/update_icon()
+/obj/structure/stasis_cage/on_update_icon()
 	if(contained)
 		icon_state = "[initial(icon_state)]_on"
 	else

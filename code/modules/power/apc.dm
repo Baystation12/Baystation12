@@ -274,7 +274,7 @@
 
 // update the APC icon to show the three base states
 // also add overlays for indicator lights
-/obj/machinery/power/apc/update_icon()
+/obj/machinery/power/apc/on_update_icon()
 	if (!status_overlays)
 		status_overlays = 1
 		status_overlays_lock = new

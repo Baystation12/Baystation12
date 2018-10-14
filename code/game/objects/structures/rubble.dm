@@ -23,7 +23,7 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/rubble/update_icon()
+/obj/structure/rubble/on_update_icon()
 	overlays.Cut()
 	var/list/parts = list()
 	for(var/i = 1 to 7)

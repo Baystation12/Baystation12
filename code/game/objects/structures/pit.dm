@@ -35,7 +35,7 @@
 		return
 	..()
 
-/obj/structure/pit/update_icon()
+/obj/structure/pit/on_update_icon()
 	icon_state = "pit[open]"
 	if(istype(loc,/turf/simulated/floor/exoplanet))
 		var/turf/simulated/floor/exoplanet/E = loc

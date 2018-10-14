@@ -125,7 +125,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/hides_under_flooring()
 	return 1
 
-/obj/structure/cable/update_icon()
+/obj/structure/cable/on_update_icon()
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
 
@@ -539,7 +539,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	return ..()
 
 
-/obj/item/stack/cable_coil/update_icon()
+/obj/item/stack/cable_coil/on_update_icon()
 	if (!color)
 		color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
 	if(amount == 1)

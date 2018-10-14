@@ -55,7 +55,7 @@
 	else
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 
-/obj/structure/displaycase/update_icon()
+/obj/structure/displaycase/on_update_icon()
 	if(destroyed)
 		icon_state = "glassboxb"
 	else

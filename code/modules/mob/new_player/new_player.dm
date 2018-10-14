@@ -23,12 +23,11 @@
 	..()
 	verbs += /mob/proc/toggle_antag_pool
 
-/mob/new_player/verb/new_player_panel()
-	set src = usr
-	new_player_panel_proc()
-
-/mob/new_player/proc/new_player_panel_proc()
-	var/output = "<div align='center'>"
+/mob/new_player/proc/new_player_panel(force = FALSE)
+	if(!SScharacter_setup.initialized && !force)
+		return // Not ready yet.
+	var/output = list()
+	output += "<div align='center'>"
 	output +="<hr>"
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
@@ -66,9 +65,8 @@
 
 	panel = new(src, "Welcome","Welcome", 210, 280, src)
 	panel.set_window_options("can_close=0")
-	panel.set_content(output)
+	panel.set_content(JOINTEXT(output))
 	panel.open()
-	return
 
 /mob/new_player/Stat()
 	. = ..()
@@ -109,7 +107,7 @@
 
 	if(href_list["refresh"])
 		panel.close()
-		new_player_panel_proc()
+		new_player_panel()
 
 	if(href_list["observe"])
 		if(!(initialization_stage&INITIALIZATION_COMPLETE))

@@ -89,7 +89,7 @@
 		return
 	..()
 
-/obj/vehicle/train/cargo/update_icon()
+/obj/vehicle/train/cargo/on_update_icon()
 	if(open)
 		icon_state = initial(icon_state) + "_open"
 	else

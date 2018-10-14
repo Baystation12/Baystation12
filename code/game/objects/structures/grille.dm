@@ -23,7 +23,7 @@
 /obj/structure/grille/ex_act(severity)
 	qdel(src)
 
-/obj/structure/grille/update_icon()
+/obj/structure/grille/on_update_icon()
 	update_onframe()
 
 	overlays.Cut()

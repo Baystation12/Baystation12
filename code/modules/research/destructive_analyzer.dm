@@ -31,7 +31,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 		T += S.rating
 	decon_mod = T * 0.1
 
-/obj/machinery/r_n_d/destructive_analyzer/update_icon()
+/obj/machinery/r_n_d/destructive_analyzer/on_update_icon()
 	if(panel_open)
 		icon_state = "d_analyzer_t"
 	else if(loaded_item)

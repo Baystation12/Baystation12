@@ -35,7 +35,7 @@
 		STOP_PROCESSING(SSobj, src)
 		update_icon()
 
-/obj/structure/alien/egg/update_icon()
+/obj/structure/alien/egg/on_update_icon()
 	if(progress == -1)
 		icon_state = "egg_hatched"
 	else if(progress < MAX_PROGRESS)

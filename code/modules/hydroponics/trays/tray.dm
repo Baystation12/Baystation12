@@ -156,7 +156,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/Destroy()
 	STOP_PROCESSING(SSplants, src)
-	..()
+	. = ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
 	. = ..()

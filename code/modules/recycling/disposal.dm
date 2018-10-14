@@ -142,6 +142,8 @@
 	update_icon()
 
 /obj/machinery/disposal/MouseDrop_T(atom/movable/AM, mob/user)
+	if(!istype(AM)) // Could be dragging in a turf.
+		return
 	var/incapacitation_flags = INCAPACITATION_DEFAULT
 	if(AM == user)
 		incapacitation_flags &= ~INCAPACITATION_RESTRAINED
@@ -326,7 +328,7 @@
 	update_icon()
 
 // update the icon & overlays to reflect mode & status
-/obj/machinery/disposal/update_icon()
+/obj/machinery/disposal/on_update_icon()
 	overlays.Cut()
 	if(stat & BROKEN)
 		mode = 0

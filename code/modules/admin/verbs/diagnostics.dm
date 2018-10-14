@@ -131,11 +131,11 @@
 	set desc = "This searches all the active jobban entries for the current round and outputs the results to standard output."
 	set category = "Debug"
 
-	var/filter = input("Contains what?","Filter") as text|null
-	if(!filter)
+	var/job_filter = input("Contains what?","Filter") as text|null
+	if(!job_filter)
 		return
 
 	to_chat(usr, "<b>Jobbans active in this round.</b>")
 	for(var/t in jobban_keylist)
-		if(findtext(t, filter))
+		if(findtext(t, job_filter))
 			to_chat(usr, "[t]")
