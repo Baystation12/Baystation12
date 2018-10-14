@@ -59,10 +59,9 @@
 
 //If this hits 0 then they decide to up and leave.
 /datum/trader/proc/tick()
-	spawn(0)
-		add_to_pool(trading_items, possible_trading_items, 200)
-		add_to_pool(wanted_items, possible_wanted_items, 50)
-		remove_from_pool(possible_trading_items, 9) //We want the stock to change every so often, so we make it so that they have roughly 10~11 ish items max
+	add_to_pool(trading_items, possible_trading_items, 200)
+	add_to_pool(wanted_items, possible_wanted_items, 50)
+	remove_from_pool(possible_trading_items, 9) //We want the stock to change every so often, so we make it so that they have roughly 10~11 ish items max
 	return 1
 
 /datum/trader/proc/remove_from_pool(var/list/pool, var/chance_per_item)
