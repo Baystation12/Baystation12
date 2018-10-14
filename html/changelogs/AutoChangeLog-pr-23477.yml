@@ -1,0 +1,6 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - tweak: "Due to the extremely likely outcome of death for the crew upon ejection of the escape pods, command has moved abandon ship from Command and Communciations to Keycard Authentication Devices and renamed it to \"Initiate Evacuation Procedures.\" Abort still occurs at C&C consoles, as does bluespace jump initiation."
+  - tweak: "Moves bolt/unbolt saferooms from Keycard Authentication Devices to C&C"
+  - tweak: "Changes Keycard Authentication Device interface to NanoUI"
