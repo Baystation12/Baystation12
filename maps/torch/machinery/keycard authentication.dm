@@ -12,40 +12,42 @@
 
 	user.set_machine(src)
 
-	var/dat = "<h1>Keycard Authentication Device</h1>"
+	var/list/dat = list()
+	
+	dat += "<h1>Keycard Authentication Device</h1>"
 
 	dat += "This device is used to trigger some high security events. It requires the simultaneous swipe of two high-level ID cards."
 	dat += "<br><hr><br>"
 
 	if(screen == 1)
-		dat += "Select an event to trigger:<ul>"
+		dat += "Select an event to trigger:<br>"
 
 		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 		if(security_state.current_security_level == security_state.severe_security_level)
-			dat += "<li>Cannot modify the alert level at this time: [security_state.severe_security_level.name] engaged.</li>"
+			dat += "Cannot modify the alert level at this time: [security_state.severe_security_level.name] engaged.<br>"
 		else
 			if(security_state.current_security_level == security_state.high_security_level)
-				dat += "<li><A href='?src=\ref[src];triggerevent=Revert alert'>Disengage [security_state.high_security_level.name]</A></li>"
+				dat += "<A href='?src=\ref[src];triggerevent=Revert alert'>Disengage [security_state.high_security_level.name]</A><br>"
 			else
-				dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Engage [security_state.high_security_level.name]</A></li>"
+				dat += "<A href='?src=\ref[src];triggerevent=Red alert'>Engage [security_state.high_security_level.name]</A><br>"
 
 		if(!config.ert_admin_call_only)
-			dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
+			dat += "<A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A><br>"
 
-		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
-		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
-		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A></li>"
-		dat += "<li><A href='?src=\ref[src];triggerevent=Bolt All Saferooms'>Bolt All Saferooms</A></li>"
-		dat += "<li><A href='?src=\ref[src];triggerevent=Unbolt All Saferooms'>Unbolt All Saferooms</A></li>"
-		dat += "</ul>"
-		user << browse(dat, "window=keycard_auth;size=500x250")
+		dat += "<A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A><br>"
+		dat += "<A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A><br>"
+		dat += "<A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A><br>"
+		dat += "<a href='?src=\ref[src];triggerevent=Evacuate'>Initiate Evacuation Procedures</a><br>"
 	if(screen == 2)
 		dat += "Please swipe your card to authorize the following event: <b>[event]</b>"
 		dat += "<p><A href='?src=\ref[src];reset=1'>Back</A>"
-		user << browse(dat, "window=keycard_auth;size=500x250")
+	
+	var/datum/browser/popup = new(user, "kad_window", "Keycard Authentication Device", 500, 250)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 	return
 
-/obj/machinery/keycard_auth/torch/trigger_event()
+/obj/machinery/keycard_auth/torch/trigger_event()	
 	switch(event)
 		if("Red alert")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
@@ -82,3 +84,11 @@
 		if("Unbolt All Saferooms")
 			GLOB.using_map.unbolt_saferooms()
 			feedback_inc("unbolted_saferoom",1)
+		if("Evacuate")
+			if(!evacuation_controller)
+				to_chat(usr, "<span class='danger'>Unable to initiate evacuation!</span>")
+				return
+			for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+				if(EO.abandon_ship)
+					evacuation_controller.handle_evac_option(EO.option_target, usr)
+					return
