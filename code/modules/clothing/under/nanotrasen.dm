@@ -2,7 +2,7 @@
 
 /obj/item/clothing/under/rank/guard
 	name = "security guard uniform"
-	desc = "A durable uniform worn by Tenjin Holdings security."
+	desc = "A durable uniform worn by Expeditionary Corps Organisation security."
 	icon_state = "guard"
 	item_state = "w_suit"
 	worn_state = "guard"
@@ -19,7 +19,7 @@
 	worn_state = "guard_nt"
 
 /obj/item/clothing/under/rank/scientist
-	name = "\improper Tenjin Holdings polo and pants"
+	name = "\improper Expeditionary Corps Organisation polo and pants"
 	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics."
 	icon_state = "smock"
 	item_state = "w_suit"
@@ -38,8 +38,8 @@
 	starting_accessories = list(/obj/item/clothing/accessory/tunic/nanotrasen)
 
 /obj/item/clothing/under/rank/scientist/executive
-	name = "\improper Tenjin Holdings polo and pants"
-	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Tenjin Holdings higher-up."
+	name = "\improper Expeditionary Corps Organisation polo and pants"
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Expeditionary Corps Organisation higher-up."
 	icon_state = "smockexec"
 	worn_state = "smockexec"
 	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec)
@@ -69,7 +69,7 @@
 
 /obj/item/clothing/under/rank/ntpilot
 	name = "flight suit"
-	desc = "A sleek green Tenjin Holdings flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
+	desc = "A sleek green Expeditionary Corps Organisation flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon_state = "pilot"
 	item_state = "g_suit"
 	worn_state = "pilot"
@@ -90,7 +90,7 @@
 
 /obj/item/clothing/under/suit_jacket/corp
 	name = "executive suit"
-	desc = "A set of Tenjin-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
+	desc = "A set of Expeditionary Corps Organisation-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit_tl"
 	item_state = "bl_suit"
 	worn_state = "suit_tl"
@@ -107,5 +107,5 @@
 	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen, /obj/item/clothing/accessory/corptie/nanotrasen)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/corp
-	name = "\improper Tenjin Holdings labcoat"
-	desc = "A coat that protects against minor chemical spills. Has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Tenjin Holdings labcoat."
+	name = "\improper Expeditionary Corps Organisation labcoat"
+	desc = "A coat that protects against minor chemical spills. Has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."
