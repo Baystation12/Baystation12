@@ -130,6 +130,8 @@
 	// else inputting = 0, as set in process()
 
 	for(var/obj/machinery/power/terminal/term in terminals)
+		if(!term.powernet)
+			continue
 		var/inputted = term.powernet.draw_power(to_input)
 		add_charge(inputted)
 		input_available += inputted
