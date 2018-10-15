@@ -18229,6 +18229,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
+/obj/item/modular_computer/laptop/preset/records,
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "eYb" = (
@@ -19029,9 +19030,6 @@
 "fUb" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 4
-	},
-/obj/item/modular_computer/telescreen/preset/medical{
-	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -26280,6 +26278,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
+/obj/item/modular_computer/laptop/preset/records,
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "okp" = (
