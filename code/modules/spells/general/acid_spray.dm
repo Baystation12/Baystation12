@@ -24,3 +24,6 @@
 		chem.set_color()
 		spawn(0)
 			chem.set_up(get_ranged_target_turf(target, angle2dir(angle+mod), 3))
+
+/spell/acid_spray/tower
+	charge_max = 2

@@ -5,7 +5,7 @@
 		<font color='blue'>+Learn spells from two different schools.<br>
 		+Deity gains power through each spell use.</font><br>
 	<b>Drawbacks:</b><br>
-		<font color='red'>-Abilities hold a single charge and must be charged at a fountain of power.</font>
+		<font color='red'>-Abilities hold a limited amount of charge and must be charged at a fountain of power.</font>
 	"}
 	desc = "A single solitary tower"
 	god_icon_state = "tower"

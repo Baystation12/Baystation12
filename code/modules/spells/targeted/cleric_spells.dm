@@ -30,6 +30,9 @@
 
 	return "[src] will now heal more."
 
+/spell/targeted/heal_target/tower
+	charge_max = 2
+
 /spell/targeted/heal_target/touch
 	name = "Healing Touch"
 	desc = "Heals an adjacent target for a reasonable amount of health."
@@ -74,6 +77,9 @@
 
 	return "[src] heals more, and heals organ damage and radiation."
 
+/spell/targeted/heal_target/major/tower
+	charge_max = 1
+
 /spell/targeted/heal_target/area
 	name = "Cure Area"
 	desc = "This spell heals everyone in an area."
@@ -99,6 +105,8 @@
 
 	return "[src] now heals more in a wider area."
 
+/spell/targeted/heal_target/area/tower
+	charge_max = 1
 
 /spell/targeted/heal_target/area/slow
 	charge_max = 2 MINUTES

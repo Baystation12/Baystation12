@@ -21,6 +21,5 @@
 	. = ..()
 	if(istype(.,/spell))
 		var/spell/S = .
-		S.charge_max = 1
-		S.charge_counter = 1
+		S.charge_counter = S.charge_max
 		S.charge_type = Sp_CHARGES
