@@ -103,10 +103,10 @@
 	name = "Adminordrazine pill"
 	desc = "It's magic. We don't have to explain it."
 	icon_state = "pillA"
-/obj/item/weapon/reagent_containers/pill/adminordrazine/New()
-	..()
-	reagents.add_reagent(/datum/reagent/adminordrazine, 50)
 
+/obj/item/weapon/reagent_containers/pill/adminordrazine/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/adminordrazine, 1)
 
 /obj/item/weapon/reagent_containers/pill/stox
 	name = "Soporific (15u)"
