@@ -1,0 +1,4 @@
+author: "Roland410"
+delete-after: True
+changes: 
+  - tweak: "Changes Tower deity spells to have more charges, and the fountain of power only takes 30 seconds to recharge it."
