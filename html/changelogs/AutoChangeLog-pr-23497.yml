@@ -1,8 +1,0 @@
-author: "Cakey"
-delete-after: True
-changes: 
-  - maptweak: "Fixes Petrov isolation cell alarm placement."
-  - maptweak: "Added sticky notes to offices around the ship."
-  - maptweak: "Added noticeboard to head of staff offices where missing."
-  - maptweak: "Added missing air alarms to hangar, hangar storage."
-  - maptweak: "Fixes hangar exit button access."
