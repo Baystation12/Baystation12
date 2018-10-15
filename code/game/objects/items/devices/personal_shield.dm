@@ -7,7 +7,7 @@
 	var/obj/aura/personal_shield/device/shield
 
 /obj/item/device/personal_shield/attack_self(var/mob/living/user)
-	if(uses)
+	if(uses && !shield)
 		shield = new(user,src)
 	else
 		QDEL_NULL(shield)

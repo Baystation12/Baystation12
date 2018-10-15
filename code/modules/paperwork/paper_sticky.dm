@@ -104,6 +104,9 @@
 	if(!istype(loc, /turf))
 		reset_persistence_tracking()
 
+/obj/item/weapon/paper/sticky/can_bundle()
+	return FALSE // Would otherwise lead to buggy interaction
+
 /obj/item/weapon/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
 
 	if(!in_range(user, A) || istype(A, /obj/machinery/door) || icon_state == "scrap")
