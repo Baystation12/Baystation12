@@ -117,7 +117,7 @@
 			if(!to_remove)
 				return
 
-			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell")
+			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell" && to_remove != "tank")
 				var/mob/living/carbon/human/H = src.loc
 				if(H.back == src)
 					to_chat(user, "You can't remove an installed device while the hardsuit is being worn.")
