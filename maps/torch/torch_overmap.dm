@@ -10,7 +10,8 @@
 
 	initial_restricted_waypoints = list(
 		"Charon" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
-		"Guppy" = list("nav_hangar_guppy")
+		"Guppy" = list("nav_hangar_guppy"),
+		"Aquila" = list("nav_hangar_aquila")
 	)
 
 	initial_generic_waypoints = list(
@@ -45,6 +46,11 @@
 /obj/effect/overmap/ship/landable/exploration_shuttle
 	name = "Charon"
 	shuttle = "Charon"
+	fore_dir = NORTH
+
+/obj/effect/overmap/ship/landable/aquila
+	name = "Aquila"
+	shuttle = "Aquila"
 	fore_dir = NORTH
 
 /obj/machinery/computer/shuttle_control/explore/aquila
