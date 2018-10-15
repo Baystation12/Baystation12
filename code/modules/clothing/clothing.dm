@@ -720,6 +720,8 @@ BLIND     // can't see anything
 
 /obj/item/clothing/under/New()
 	..()
+	if(has_sensor == SUIT_HAS_SENSORS)
+		sensor_mode = SUIT_SENSOR_VITAL
 	update_rolldown_status()
 	update_rollsleeves_status()
 	if(rolled_down == -1)
