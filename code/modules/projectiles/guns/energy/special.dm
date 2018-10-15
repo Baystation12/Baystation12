@@ -62,6 +62,11 @@
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
+/obj/item/weapon/gun/energy/floragun/resolve_attackby(atom/A)
+	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
+		return FALSE // do afterattack, i.e. fire, at pointblank at trays.
+	return ..()
+
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
 	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
