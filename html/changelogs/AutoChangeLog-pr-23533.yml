@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Change to chem recipe for making adrenaline: now requires inaprov, hyperzine, and dex+."
