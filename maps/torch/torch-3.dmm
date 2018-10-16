@@ -2796,19 +2796,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/space)
 "fU" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/shuttle/escape_pod11/station)
-"fV" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod11/station)
-"fW" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod11/station)
 "fX" = (
 /obj/effect/decal/cleanable/cobweb,
@@ -3182,9 +3170,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod11/station)
 "gM" = (
 /obj/random/junk,
@@ -3913,11 +3899,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"im" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
-	},
-/area/shuttle/escape_pod11/station)
 "in" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -4425,11 +4406,6 @@
 	req_access = list(13)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/shuttle/escape_pod11/station)
-"jl" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
 /area/shuttle/escape_pod11/station)
 "jn" = (
 /obj/item/frame/apc,
@@ -9562,14 +9538,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "vt" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/shuttle/escape_pod10/station)
-"vu" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod10/station)
 "vv" = (
 /obj/machinery/door/airlock/external{
@@ -9581,11 +9550,6 @@
 	req_access = list(13)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/shuttle/escape_pod10/station)
-"vw" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
 /area/shuttle/escape_pod10/station)
 "vx" = (
 /obj/machinery/door/firedoor/border_only,
@@ -9877,9 +9841,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod10/station)
 "wq" = (
 /obj/machinery/space_heater,
@@ -10295,11 +10257,6 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
-"xU" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
-	},
-/area/shuttle/escape_pod10/station)
 "xW" = (
 /obj/machinery/light/small,
 /obj/structure/bed/chair/shuttle{
@@ -10599,11 +10556,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
-"yS" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
-/area/shuttle/escape_pod10/station)
 "yT" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -15683,7 +15635,7 @@
 /area/maintenance/seconddeck/forestarboard)
 "Og" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod11,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod11/station)
 "Oh" = (
@@ -17630,7 +17582,7 @@
 /area/engineering/engine_room)
 "Wl" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod10,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod10/station)
 "Wm" = (
@@ -28403,10 +28355,10 @@ JX
 JX
 JX
 fU
-fV
+fU
 Og
-fV
-im
+fU
+fU
 qw
 mb
 Mg
@@ -28421,10 +28373,10 @@ Yj
 mb
 qw
 vt
-vu
+vt
 Wl
-vu
-xU
+vt
+vt
 Wp
 Wp
 Wp
@@ -28604,11 +28556,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 xe
 hz
 ac
-fV
+fU
 qw
 mb
 mb
@@ -28622,11 +28574,11 @@ Qi
 mb
 mb
 qw
-vu
+vt
 ol
 wl
 Sl
-vu
+vt
 Wp
 Wp
 Wp
@@ -28806,11 +28758,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 gG
 hz
 io
-fV
+fU
 qw
 mb
 mb
@@ -28824,11 +28776,11 @@ Uj
 mb
 mb
 qw
-vu
+vt
 wi
 wl
 xW
-vu
+vt
 Wp
 Wp
 Wp
@@ -29008,11 +28960,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 gH
 hz
 ip
-fV
+fU
 JX
 mb
 mb
@@ -29026,11 +28978,11 @@ Si
 mb
 mb
 Wp
-vu
+vt
 wj
 wl
 xX
-vu
+vt
 Wp
 Wp
 Wp
@@ -29210,11 +29162,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 gH
 hz
 iq
-fV
+fU
 JX
 OY
 mb
@@ -29228,11 +29180,11 @@ Ti
 mb
 ub
 Wp
-vu
+vt
 wk
 wl
 xX
-vu
+vt
 Wp
 Wp
 Wp
@@ -29412,7 +29364,7 @@ aa
 JX
 JX
 JX
-fV
+fU
 gH
 hz
 hz
@@ -29434,7 +29386,7 @@ vv
 wl
 wl
 xX
-vu
+vt
 Wp
 Wp
 Wp
@@ -29614,11 +29566,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 gI
 hA
 ir
-fV
+fU
 JX
 Sx
 Qe
@@ -29632,11 +29584,11 @@ Vj
 Qe
 Bq
 Wp
-vu
+vt
 wm
 xf
 xY
-vu
+vt
 Wp
 Wp
 Wp
@@ -29816,11 +29768,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 gJ
 hB
 is
-fV
+fU
 JX
 NQ
 Qe
@@ -29834,11 +29786,11 @@ VL
 Qe
 ZV
 Wp
-vu
+vt
 wn
 xg
 xZ
-vu
+vt
 Wp
 Wp
 Wp
@@ -30018,11 +29970,11 @@ aa
 JX
 JX
 JX
-fV
+fU
 gK
 gK
 gK
-fV
+fU
 JX
 cg
 Qe
@@ -30036,11 +29988,11 @@ Wj
 Qe
 uf
 Wp
-vu
+vt
 wo
 wo
 wo
-vu
+vt
 Wp
 Wp
 Wp
@@ -30220,11 +30172,11 @@ aa
 JX
 JX
 JX
-fW
+fU
 gL
 gL
 gL
-jl
+fU
 JX
 NQ
 Qe
@@ -30238,11 +30190,11 @@ Xi
 Qe
 ZV
 Wp
-vw
+vt
 wp
 wp
 wp
-yS
+vt
 Wp
 Wp
 Wp

@@ -1250,40 +1250,19 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/forestarboard)
 "act" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/shuttle/escape_pod12/station)
-"acv" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod12/station)
 "acw" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/shuttle/escape_pod13/station)
-"acy" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod13/station)
 "acz" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod14/station)
 "acA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
-"acB" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
-/area/shuttle/escape_pod14/station)
 "acC" = (
 /obj/structure/closet/l3closet/virology,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -1504,11 +1483,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/forestarboard)
-"adh" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod12/station)
 "adi" = (
 /obj/machinery/door/airlock/civilian{
 	name = "Shower"
@@ -1521,11 +1495,6 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
-"adj" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod13/station)
 "adk" = (
 /obj/machinery/firealarm{
 	dir = 2;
@@ -1542,11 +1511,6 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
-"adl" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod14/station)
 "adn" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -2369,9 +2333,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 2
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod12/station)
 "aeT" = (
 /obj/machinery/door/airlock/external{
@@ -2388,9 +2350,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 2
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod13/station)
 "aeV" = (
 /obj/machinery/door/airlock/external{
@@ -2407,9 +2367,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 2
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod14/station)
 "aeX" = (
 /obj/machinery/door/airlock/external{
@@ -12861,9 +12819,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod15/station)
 "aRC" = (
 /obj/machinery/door/airlock/external{
@@ -12880,9 +12836,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod16/station)
 "aRE" = (
 /obj/machinery/door/airlock/external{
@@ -12899,9 +12853,7 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod17/station)
 "aRG" = (
 /obj/machinery/door/airlock/external{
@@ -13203,19 +13155,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/foreport)
 "aSx" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod15/station)
 "aSz" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod16/station)
 "aSB" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod17/station)
 "aSD" = (
 /obj/machinery/power/apc{
@@ -13538,27 +13484,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/foreport)
-"aTr" = (
-/turf/simulated/shuttle/wall/corner/dark,
-/area/shuttle/escape_pod15/station)
-"aTt" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
-/area/shuttle/escape_pod15/station)
-"aTw" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
-/area/shuttle/escape_pod16/station)
-"aTx" = (
-/turf/simulated/shuttle/wall/corner/dark,
-/area/shuttle/escape_pod17/station)
-"aTz" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
-/area/shuttle/escape_pod17/station)
 "aTA" = (
 /obj/structure/closet/crate/secure/biohazard,
 /turf/simulated/floor/tiled/techfloor,
@@ -15442,7 +15367,7 @@
 /area/maintenance/firstdeck/aftstarboard)
 "bHb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod12,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/escape_pod12/station)
 "bHp" = (
@@ -15470,12 +15395,12 @@
 /area/hallway/primary/firstdeck/center)
 "bIb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod13,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/escape_pod13/station)
 "bJb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod14,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/escape_pod14/station)
 "bKb" = (
@@ -15869,17 +15794,17 @@
 /area/medical/chemistry)
 "ccb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod15,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod15/station)
 "cdb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod16,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod16/station)
 "ceb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod17,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod17/station)
 "cef" = (
@@ -26394,9 +26319,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/equipment)
-"olG" = (
-/turf/simulated/shuttle/wall/corner/dark,
-/area/shuttle/escape_pod16/station)
 "omb" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/regular{
@@ -48237,9 +48159,9 @@ aaa
 aaa
 aaa
 act
-adh
-adh
-adh
+act
+act
+act
 aeS
 abP
 agR
@@ -48280,7 +48202,7 @@ aRB
 aSx
 aSx
 aSx
-aTr
+aSx
 aaa
 aaa
 aaa
@@ -48640,10 +48562,10 @@ aaa
 aaa
 aaa
 aaa
-acv
-adh
-adh
-adh
+act
+act
+act
+act
 aeS
 abP
 agT
@@ -48684,7 +48606,7 @@ aRB
 aSx
 aSx
 aSx
-aTt
+aSx
 aaa
 aaa
 aaa
@@ -49045,9 +48967,9 @@ aaa
 aaa
 aaa
 acw
-adj
-adj
-adj
+acw
+acw
+acw
 aeU
 abP
 agV
@@ -49088,7 +49010,7 @@ aRD
 aSz
 aSz
 aSz
-olG
+aSz
 aaa
 aaa
 aaa
@@ -49448,10 +49370,10 @@ aaa
 aaa
 aaa
 aaa
-acy
-adj
-adj
-adj
+acw
+acw
+acw
+acw
 aeU
 abP
 cBU
@@ -49492,7 +49414,7 @@ aRD
 aSz
 aSz
 aSz
-aTw
+aSz
 aaa
 aaa
 aaa
@@ -49853,9 +49775,9 @@ aaa
 aaa
 aaa
 acz
-adl
-adl
-adl
+acz
+acz
+acz
 aeW
 abP
 agX
@@ -49896,7 +49818,7 @@ aRF
 aSB
 aSB
 aSB
-aTx
+aSB
 aaa
 aaa
 aaa
@@ -50256,10 +50178,10 @@ aaa
 aaa
 aaa
 aaa
-acB
-adl
-adl
-adl
+acz
+acz
+acz
+acz
 aeW
 abP
 agT
@@ -50300,7 +50222,7 @@ aRF
 aSB
 aSB
 aSB
-aTz
+aSB
 aaa
 aaa
 aaa
