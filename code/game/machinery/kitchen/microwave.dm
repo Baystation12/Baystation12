@@ -361,6 +361,13 @@
 
 /obj/machinery/microwave/proc/fail()
 	var/amount = 0
+
+	// Kill + delete mobs in mob holders
+	for (var/obj/item/weapon/holder/H in contents)
+		for (var/mob/living/M in H.contents)
+			M.death()
+			qdel(M)
+
 	for (var/obj/O in contents)
 		amount++
 		if (O.reagents)
