@@ -1,7 +1,0 @@
-author: "Textor"
-delete-after: True
-changes: 
-  - rscadd: "Body scans now look different depening on the skill of the person reading them. This includes printed and scanned versions."
-  - rscadd: "New machine: Body Scan Display. It can have scans pushed to it for surgeons to reference."
-  - tweak: "Body scanner UI updated to nanoui."
-  - maptweak: "Maps in two body scan displays, one in the main operating room, the other in robotics operating room."
