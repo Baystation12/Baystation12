@@ -10,5 +10,7 @@ Examples were changelog entries are optional/not typically required:
 * Optimizations and other changes to underlying systems which do not affect gameplay.
 * Minor bug fixes.
 
-You find a README and example file in .\html\changelogs\ for further instructions.
+You'll find a README and example file in .\html\changelogs\ for further instructions.
+
+You can also find a template for adding your changelog directly to the PR description here: https://github.com/Baystation12/Baystation12/wiki/Automatic-changelog-generation
 -->
