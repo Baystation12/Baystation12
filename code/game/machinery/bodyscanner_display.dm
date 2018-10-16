@@ -11,16 +11,12 @@
 	w_class = ITEM_SIZE_HUGE
 	var/list/bodyscans = list()
 	var/selected = 0
-	var/list/connected_consoles = list()
-
 
 /obj/machinery/body_scan_display/proc/add_new_scan(var/list/scan)
 	bodyscans += list(scan.Copy())
 	updateUsrDialog()
 
 /obj/machinery/body_scan_display/OnTopic(mob/user as mob, href_list)
-	if(..())
-		return 1
 	if(href_list["view"])
 		var/selection = text2num(href_list["view"])
 		var/sanitized = sanitize_integer(selection, 1, bodyscans.len)
@@ -29,11 +25,17 @@
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 	if(href_list["delete"])
-		var/index = text2num(href_list["delete"])
-		if(selected  == index)
-			selected = 0
-		bodyscans -= list(bodyscans[index])		
-		return TOPIC_REFRESH
+		var/selection = text2num(href_list["delete"])
+		var/sanitized = sanitize_integer(selection, 1, bodyscans.len)
+		if(sanitized)
+			if(selected == sanitized)
+				selected = 0
+			else if(selected > sanitized)
+				selected--
+			bodyscans -= list(bodyscans[sanitized])
+			return TOPIC_REFRESH
+		else
+			return TOPIC_HANDLED
 
 /obj/machinery/body_scan_display/attack_ai(user as mob)
 	return attack_hand(user)
@@ -45,7 +47,7 @@
 		return
 	ui_interact(user)
 
-/obj/machinery/body_scan_display/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
+/obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
 	var/list/data = list()
 	data["scans"] = bodyscans
 	data["selected"] = selected
@@ -63,14 +65,3 @@
 		ui = new(user, src, ui_key, "body_scan_display.tmpl", "Body Scan Display Console", 600, 800)
 		ui.set_initial_data(data)
 		ui.open()
-
-/obj/machinery/body_scan_display/proc/add_console(var/obj/machinery/body_scanconsole/console)
-	connected_consoles += console
-
-/obj/machinery/body_scan_display/proc/remove_console(var/obj/machinery/body_scanconsole/console)
-	connected_consoles -= console
-
-/obj/machinery/body_scan_display/Destroy()
-	. = ..()
-	for(var/obj/machinery/body_scanconsole/console in connected_consoles)
-		console.remove_display(src)
