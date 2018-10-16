@@ -1,289 +1,608 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"a" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/map_template/crashed_pod)
-"b" = (
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
-"c" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/map_template/crashed_pod)
-"d" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"e" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/effect/wallframe_spawn/reinforced/hull,
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"f" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
-/area/map_template/crashed_pod)
-"g" = (
-/obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
-	dir = 1
-	},
+"ac" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/effect/submap_landmark/joinable_submap/crashed_pod,
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
-"h" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4
+"ad" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 9
 	},
-/obj/structure/window/reinforced{
-	dir = 8
+/obj/structure/table/standard{
+	name = "plastic table frame"
 	},
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"i" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"j" = (
+/obj/item/weapon/storage/firstaid/surgery,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled/white/monotile,
 /area/map_template/crashed_pod)
-"k" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/machinery/atmospherics/portables_connector{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"l" = (
-/obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
+"ae" = (
+/obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/effect/wallframe_spawn/reinforced/hull,
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
 /area/map_template/crashed_pod)
-"m" = (
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -25;
-	pixel_y = 0
+"af" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/obj/structure/closet/crate/freezer/rations,
+/obj/random/handgun,
+/obj/random/handgun,
+/obj/random/handgun,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"ag" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	layer = 2.4;
+	level = 2
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"n" = (
+"ah" = (
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
-/obj/structure/window/reinforced{
+/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"o" = (
+"ai" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/obj/machinery/optable,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"aj" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"ak" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"aJ" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1379;
+	master_tag = "crashed_pod_airlock";
+	name = "exterior access button";
+	pixel_x = 0;
+	pixel_y = 0;
+	req_access = list(13)
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/crashed_pod)
+"aP" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"bi" = (
+/turf/simulated/wall/titanium,
+/area/map_template/crashed_pod)
+"bo" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1379;
+	icon_state = "closed";
+	id_tag = "crashed_pod_outer";
+	locked = 1;
+	name = "EVA Access";
+	req_access = list(13)
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"bp" = (
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1379;
+	master_tag = "crashed_pod_airlock";
+	name = "interior access button";
+	pixel_x = 0;
+	pixel_y = 0;
+	req_access = newlist()
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/crashed_pod)
+"bs" = (
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	frequency = 1379;
+	id_tag = "crashed_pod_airlock";
+	name = "Airlock Console";
+	pixel_x = -24;
+	pixel_y = 0;
+	req_access = newlist();
+	tag_airpump = "crashed_pod_pump";
+	tag_chamber_sensor = "crashed_pod_sensor";
+	tag_exterior_door = "crashed_pod_outer";
+	tag_interior_door = "crashed_pod_inner"
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1379;
+	id_tag = "crashed_pod_pump"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"bt" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"bx" = (
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 10
+	},
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/random/firstaid,
+/obj/random/firstaid,
+/obj/random/firstaid,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"by" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"bz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bA" = (
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bB" = (
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"bC" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1379;
+	icon_state = "closed";
+	id_tag = "crashed_pod_inner";
+	locked = 1;
+	name = "EVA Access";
+	req_access = list(13)
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"bG" = (
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"bH" = (
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 6
+	},
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/crashed_pod)
+"bI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bK" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	locked = 0;
+	name = "south bump";
+	pixel_y = -24;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bO" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/crashed_pod)
+"bP" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"bQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bS" = (
+/obj/machinery/power/smes/buildable/power_shuttle,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"bT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bV" = (
+/obj/machinery/door/airlock/hatch,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bY" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"bZ" = (
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
-/obj/structure/window/reinforced{
+/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -25;
+	pixel_y = 0;
+	req_one_access = newlist()
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"ca" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"cb" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"p" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+"cc" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"q" = (
+"cd" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"ce" = (
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -25;
+	pixel_y = 0;
+	req_one_access = newlist()
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"cf" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"r" = (
+"cg" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/hatch,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"ch" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -25;
+	pixel_y = 0;
+	req_one_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"ci" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"cj" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"ck" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"cl" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"cm" = (
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -25;
+	pixel_y = 0;
+	req_one_access = newlist()
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"cn" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/item/weapon/pickaxe,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/crashed_pod)
+"co" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
 /obj/structure/closet/hydrant{
 	pixel_x = 24;
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"s" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"t" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"u" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"v" = (
-/obj/machinery/light/small{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"w" = (
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"x" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/steel/fifty,
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"y" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/item/weapon/storage/belt/utility/full,
-/obj/item/weapon/storage/belt/utility/full,
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"z" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/item/weapon/pickaxe,
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"A" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"B" = (
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	operating = 1;
-	pixel_y = -28
-	},
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"C" = (
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/crashed_pod)
-"D" = (
-/obj/machinery/door/airlock/external{
-	name = "escape pod airlock"
-	},
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"E" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/cable/cyan,
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
-	},
-/obj/machinery/power/smes/buildable/power_shuttle,
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"F" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/item/weapon/storage/firstaid/surgery,
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"G" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"H" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/closet/crate/freezer/rations,
-/obj/random/handgun,
-/obj/random/handgun,
-/obj/random/handgun,
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"I" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 9
-	},
+"cp" = (
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
@@ -291,236 +610,176 @@
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/weapon/tank/oxygen,
 /obj/structure/table/rack,
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"J" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 5
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1379;
+	id_tag = "crashed_pod_pump"
 	},
 /obj/machinery/light/small{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"K" = (
-/obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 1
 	},
-/obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
-/obj/structure/closet/crate,
-/obj/item/stack/material/phoron/fifty,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
-"L" = (
-/obj/effect/floor_decal/industrial/warning{
+"cq" = (
+/obj/machinery/power/terminal,
+/obj/structure/cable/cyan,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/machinery/optable,
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"M" = (
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"N" = (
-/obj/machinery/sleeper{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
 	},
 /obj/machinery/light/small{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"O" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 10
+	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"P" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 6
-	},
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"Q" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/structure/cable/cyan,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/map_template/crashed_pod)
-"R" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/random/firstaid,
-/obj/random/firstaid,
-/obj/random/firstaid,
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"S" = (
-/obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"T" = (
-/obj/machinery/sleeper{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/map_template/crashed_pod)
-"U" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
-	},
-/area/map_template/crashed_pod)
-"V" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
 /area/map_template/crashed_pod)
 
 (1,1,1) = {"
-a
-c
-c
-c
-e
-e
-c
-c
-c
-U
+bi
+bi
+ci
+ci
+bi
+ci
+ci
+bi
+ci
+bi
+aa
+aa
+aa
+aa
 "}
 (2,1,1) = {"
-b
-g
-m
-s
-w
-w
-d
-I
-O
-c
+ab
+ac
+cj
+cj
+bZ
+cj
+bA
+bi
+bG
+bi
+bi
+bi
+bi
+bi
 "}
 (3,1,1) = {"
-c
-c
-n
-n
-x
-w
-D
-J
-P
-D
+ab
+ci
+bA
+ag
+bz
+bI
+bQ
+bV
+bX
+ce
+bp
+cp
+bs
+aJ
 "}
 (4,1,1) = {"
-c
-h
-o
-o
-y
-B
-c
-c
-c
-c
+bi
+bi
+cb
+ah
+cb
+ck
+cl
+bi
+bY
+bW
+bC
+aP
+bt
+bo
 "}
 (5,1,1) = {"
-d
-i
-p
-t
-w
-C
-E
-K
-Q
-d
+aa
+bi
+bi
+bi
+bi
+bi
+bi
+bi
+cn
+bK
+bi
+bi
+bi
+bi
 "}
 (6,1,1) = {"
-e
-j
-q
-u
-w
-w
-w
-w
-w
-e
+bi
+bi
+ad
+ai
+bx
+bB
+cm
+bi
+cc
+cf
+cg
+ch
+ca
+bi
 "}
 (7,1,1) = {"
-c
-k
-n
-n
-z
-w
-F
-L
-R
-c
+ab
+ci
+ae
+aj
+by
+bL
+bT
+bV
+cd
+co
+bO
+cq
+bS
+bi
 "}
 (8,1,1) = {"
-c
-c
-o
-o
-A
-w
-G
-M
-S
-c
+ab
+ci
+af
+ak
+bH
+bN
+bU
+bi
+bP
+bi
+bi
+bi
+bi
+bi
 "}
 (9,1,1) = {"
-b
-l
-r
-v
-w
-w
-H
-N
-T
-c
-"}
-(10,1,1) = {"
-f
-c
-c
-c
-e
-e
-c
-c
-c
-V
+bi
+bi
+ci
+ci
+bi
+ci
+ci
+bi
+ci
+bi
+aa
+aa
+aa
+aa
 "}
