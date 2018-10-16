@@ -31,7 +31,7 @@
 #define FACTION_FLEET          "SCG Fleet"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
-#define FACTION_TORCH_LTD      "Torch, Ltd"
+#define FACTION_CORPORATE       "Expeditionary Corps Organisation"
 #define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"

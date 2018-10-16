@@ -27,12 +27,12 @@
 	overhauls to improve efficiency and capabilities, publicly to counter encroachment by the Terran Colonial Confederation."
 
 /decl/cultural_info/faction/torchco
-	name = FACTION_TORCH_LTD
-	description = "'Torch, Limited' is a government-owned, publically traded limited liability company assembled from the corporate \
+	name = FACTION_CORPORATE
+	description = "The Expeditionary Corps Organisation is a government-owned, publically traded limited liability company assembled from the corporate \
 	backers who asssisted in funding the Torch project when it opened five years ago. Major players include NanoTrasen, Xynergy and \
-	Hephaestus Industries, as well as dozens of others. Torch Ltd reports its earnings and operation plans directly to a board of \
+	Hephaestus Industries, as well as dozens of others. The Expeditionary Corps Organisation reports its earnings and operation plans directly to a board of \
 	directors, made up of corporate representatives and members of Expeditionary Corps command and the Committee for the Economy. \
-	While on the surface Torch, Ltd appears to have noble goals, it is in reality a compromise between the noble ideals of pioneering \
+	While on the surface the Expeditionary Corps Organisation appears to have noble goals, it is in reality a compromise between the noble ideals of pioneering \
 	science, and the corporate desire to make a quick buck off whatever is found. Rumours also abound about shady practices, hidden \
 	protocols, and xenoartifacts being 'lost' in transit, but nothing has been conclusively proven as of yet, and SCG doubtless is \
 	reluctant to harpoon their own project."

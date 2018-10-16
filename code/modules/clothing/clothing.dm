@@ -185,7 +185,7 @@
 
 /obj/item/clothing/ears/earmuffs/headphones
 	name = "headphones"
-	desc = "It's probably not in accordance with corporate policy to listen to music on the job... but fuck it."
+	desc = "It's probably not in accordance with company policy to listen to music on the job... but fuck it."
 	var/headphones_on = 0
 	icon_state = "headphones_off"
 	item_state = "headphones_off"
