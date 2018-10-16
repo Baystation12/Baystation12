@@ -1,6 +1,0 @@
-author: "zaredman"
-delete-after: True
-changes: 
-  - maptweak: "Adds washroom to medical. Moves a maint ladder to give some space."
-  - maptweak: "Expands medical's D3 storage slightly to use up unused space."
-  - maptweak: "Adds trash chute to medical locker room."
