@@ -50,7 +50,7 @@
 
 /obj/machinery/bodyscanner/proc/drop_contents()
 	for(var/obj/O in (contents - component_parts))
-		O.forceMove(loc)
+		O.dropInto(loc)
 
 /obj/machinery/bodyscanner/proc/go_out()
 	if ((!( src.occupant ) || src.locked))
@@ -136,3 +136,9 @@
 					A.dropInto(loc)
 					A.ex_act(severity)
 				qdel(src)
+
+
+/obj/machinery/bodyscanner/Destroy()
+	. = ..()
+	occupant.dropInto(loc)
+	occupant = null
