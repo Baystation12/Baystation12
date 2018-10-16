@@ -72,7 +72,6 @@
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	flags = GEAR_HAS_COLOR_SELECTION
 
-
 // IPC clothing
 /datum/gear/mask/ipc_monitor
 	display_name = "display monitor (IPC)"
