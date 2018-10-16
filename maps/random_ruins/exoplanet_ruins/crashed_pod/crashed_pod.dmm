@@ -96,6 +96,60 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/crashed_pod)
+"al" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/hatch,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/item/tape/atmos{
+	icon_state = "tape_door_0"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"am" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -25;
+	pixel_y = 0;
+	req_one_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/item/stack/material/steel,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/crashed_pod)
+"an" = (
+/obj/structure/girder,
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"ao" = (
+/obj/structure/girder,
+/obj/item/stack/material/steel,
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"ap" = (
+/obj/item/stack/material/steel,
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
+"aq" = (
+/obj/item/stack/rods,
+/turf/simulated/floor/plating,
+/area/map_template/crashed_pod)
 "aJ" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -486,39 +540,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/crashed_pod)
-"cg" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/airlock/hatch,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/map_template/crashed_pod)
-"ch" = (
-/obj/effect/floor_decal/techfloor{
-	icon_state = "techfloor_edges";
-	dir = 8
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -25;
-	pixel_y = 0;
-	req_one_access = newlist()
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/map_template/crashed_pod)
 "ci" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
@@ -730,10 +751,10 @@ cm
 bi
 cc
 cf
-cg
-ch
+al
+am
 ca
-bi
+ap
 "}
 (7,1,1) = {"
 ab
@@ -749,7 +770,7 @@ co
 bO
 cq
 bS
-bi
+an
 "}
 (8,1,1) = {"
 ab
@@ -763,9 +784,9 @@ bi
 bP
 bi
 bi
-bi
-bi
-bi
+an
+ao
+aq
 "}
 (9,1,1) = {"
 bi
