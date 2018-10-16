@@ -61,28 +61,14 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/starboard)
 "ar" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/shuttle/escape_pod6/station)
-"at" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod6/station)
 "av" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/fourthdeck/port)
 "aw" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
-/area/shuttle/escape_pod7/station)
-"ay" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod7/station)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -166,16 +152,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
-"aL" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod6/station)
-"aP" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod7/station)
 "aS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -238,7 +214,7 @@
 /area/maintenance/fourthdeck/starboard)
 "bi" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod6,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "bk" = (
@@ -2446,21 +2422,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/forestarboard)
-"ia" = (
-/turf/simulated/shuttle/wall/corner/dark,
-/area/shuttle/escape_pod6/station)
 "ib" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 2
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod6/station)
-"ic" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod6/station)
 "id" = (
 /obj/structure/table/rack{
@@ -2479,21 +2445,11 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/starboard)
-"if" = (
-/turf/simulated/shuttle/wall/corner/dark,
-/area/shuttle/escape_pod7/station)
 "ig" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 2
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod7/station)
-"ih" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod7/station)
 "ij" = (
 /obj/machinery/light{
@@ -4088,7 +4044,7 @@
 /area/hallway/primary/fourthdeck/fore)
 "nD" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod7,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
 "nH" = (
@@ -8668,40 +8624,22 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/foreport)
 "DU" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod8/station)
 "DV" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod8/station)
-"DW" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod8/station)
 "DX" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod9/station)
 "DY" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
 	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod9/station)
-"DZ" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
+/turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod9/station)
 "Em" = (
 /obj/effect/floor_decal/corner/brown/half{
@@ -8859,11 +8797,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
-"EN" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod8/station)
 "EO" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -8872,11 +8805,6 @@
 /obj/structure/window/reinforced,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod8/station)
-"EP" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/shuttle/escape_pod9/station)
 "EQ" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -9994,11 +9922,6 @@
 "IZ" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/laundry)
-"Jh" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
-	},
-/area/shuttle/escape_pod8/station)
 "Ji" = (
 /obj/machinery/door/blast/regular{
 	name = "Escape Pod Release Door"
@@ -10009,21 +9932,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/aft)
-"Jj" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
-/area/shuttle/escape_pod8/station)
-"Jl" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
-	},
-/area/shuttle/escape_pod9/station)
-"Jn" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
-/area/shuttle/escape_pod9/station)
 "Jo" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
@@ -10264,12 +10172,12 @@
 /area/maintenance/fourthdeck/aft)
 "JU" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod8,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod8/station)
 "JX" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod9,
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod9/station)
 "JY" = (
@@ -39304,15 +39212,15 @@ aD
 Lm
 ie
 ar
-aL
-aL
-aL
-aL
-aL
-aL
-aL
-aL
-ia
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
 kz
 iC
 RU
@@ -39329,15 +39237,15 @@ Ad
 Lx
 Lz
 DU
-EN
-EN
-EN
-EN
-EN
-EN
-EN
-EN
-Jh
+DU
+DU
+DU
+DU
+DU
+DU
+DU
+DU
+DU
 By
 kx
 Ke
@@ -39505,7 +39413,7 @@ wW
 aF
 bf
 ie
-aL
+ar
 cZ
 cx
 dj
@@ -39539,7 +39447,7 @@ GJ
 GJ
 Ir
 Ix
-EN
+DU
 By
 kx
 LO
@@ -39909,7 +39817,7 @@ wW
 aH
 bf
 ie
-aL
+ar
 Tu
 cy
 dk
@@ -39943,7 +39851,7 @@ Hr
 HU
 Is
 NT
-EN
+DU
 By
 kx
 LO
@@ -40111,16 +40019,16 @@ wW
 aI
 bf
 ie
-at
-aL
-aL
-aL
-aL
+ar
+ar
+ar
+ar
+ar
 et
-aL
-aL
-aL
-ic
+ar
+ar
+ar
+ar
 wa
 iD
 QS
@@ -40136,16 +40044,16 @@ SL
 MB
 co
 wa
-DW
-EN
-EN
-EN
+DU
+DU
+DU
+DU
 GL
-EN
-EN
-EN
-EN
-Jj
+DU
+DU
+DU
+DU
+DU
 By
 tg
 Kf
@@ -41122,15 +41030,15 @@ Sa
 LS
 Ji
 aw
-aP
-aP
-aP
-aP
+aw
+aw
+aw
+aw
 ey
-aP
-aP
-aP
-if
+aw
+aw
+aw
+aw
 IZ
 lD
 jF
@@ -41147,15 +41055,15 @@ bl
 fU
 ah
 DX
-EP
-EP
-EP
+DX
+DX
+DX
 GQ
-EP
-EP
-EP
-EP
-Jl
+DX
+DX
+DX
+DX
+DX
 wc
 JS
 Ki
@@ -41323,7 +41231,7 @@ wp
 Qa
 te
 Ji
-aP
+aw
 ZJ
 cB
 dl
@@ -41357,7 +41265,7 @@ Hu
 HX
 It
 Sq
-EP
+DX
 wc
 JS
 PV
@@ -41727,7 +41635,7 @@ wp
 Ew
 nH
 Ji
-aP
+aw
 lB
 cC
 dm
@@ -41761,7 +41669,7 @@ GS
 GS
 Iu
 oM
-EP
+DX
 wc
 JS
 OB
@@ -41929,16 +41837,16 @@ wp
 Ew
 nH
 Ji
-ay
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-ih
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
 ah
 lG
 mT
@@ -41954,16 +41862,16 @@ rP
 yN
 Bs
 ah
-DZ
-EP
-EP
-EP
-EP
-EP
-EP
-EP
-EP
-Jn
+DX
+DX
+DX
+DX
+DX
+DX
+DX
+DX
+DX
+DX
 wc
 JS
 OB
