@@ -182,3 +182,4 @@
 	name = "skrellian helmet"
 	desc = "A helmet built for use by a Skrell. This one appears to be fairly standard and reliable."
 	icon_state = "helmet_skrell"
+	valid_accessory_slots = null
