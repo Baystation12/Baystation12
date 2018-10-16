@@ -14,7 +14,7 @@
 
 /obj/machinery/atmospherics/valve/shutoff/examine(var/mob/user)
 	..()
-	to_chat(user, "The automatic shutoff circuit is [close_on_leaks ? "disabled" : "enabled"].")
+	to_chat(user, "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
 
 /obj/machinery/atmospherics/valve/shutoff/New()
 	open()
