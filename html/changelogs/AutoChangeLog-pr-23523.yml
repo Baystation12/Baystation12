@@ -1,4 +1,0 @@
-author: "sierrakomodo"
-delete-after: True
-changes: 
-  - bugfix: "Fixes mouse/drone duplication bugs with cookers, microwaves, and destructive analyzers (#14179)"
