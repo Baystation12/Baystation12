@@ -32,19 +32,19 @@
 		to_chat(viewers(null, null), "Cannot locate mass driver connector. Cancelling firing sequence!")
 		return
 
-	for(var/obj/machinery/door/blast/M in world)
+	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
 		if(M.id == id)
 			M.open()
 
 	sleep(20)
 
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in SSmachines.machinery)
 		if(M.id == id)
 			M.power = connected.power
 			M.drive()
 
 	sleep(50)
-	for(var/obj/machinery/door/blast/M in world)
+	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
 		if(M.id == id)
 			M.close()
 			return
@@ -181,7 +181,7 @@
 		time = min(max(round(time), 0), 120)
 		. = TOPIC_REFRESH
 	else if(href_list["door"])
-		for(var/obj/machinery/door/blast/M in world)
+		for(var/obj/machinery/door/blast/M in SSmachines.machinery)
 			if(M.id == id)
 				if(M.density)
 					M.open()

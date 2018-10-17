@@ -173,7 +173,7 @@
 
 	spawn(5)		// allow map load
 		conveyors = list()
-		for(var/obj/machinery/conveyor/C in world)
+		for(var/obj/machinery/conveyor/C in SSmachines.machinery)
 			if(C.id == id)
 				conveyors += C
 
@@ -221,7 +221,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in SSmachines.machinery)
 		if(S.id == src.id)
 			S.position = position
 			S.update_icon()
@@ -250,7 +250,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in SSmachines.machinery)
 		if(S.id == src.id)
 			S.position = position
 			S.update_icon()
