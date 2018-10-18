@@ -1,0 +1,4 @@
+author: "Miraviel"
+delete-after: True
+changes: 
+  - maptweak: "Added proper piping to the infirmary hallway and lighting to the locker room. Added missing shutters and moved around a few overlapping objects."
