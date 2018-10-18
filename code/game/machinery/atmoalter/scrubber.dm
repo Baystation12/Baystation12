@@ -92,6 +92,8 @@
 		if (!cell.charge && !powered())
 			power_change()
 			update_icon()
+		if(holding)
+			holding.queue_icon_update()
 
 	//src.update_icon()
 	src.updateDialog()

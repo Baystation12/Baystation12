@@ -299,7 +299,22 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/weapon/tank/remove_air(amount)
 	. = air_contents.remove(amount)
+	if(.)
+		queue_icon_update()
+
+/obj/item/weapon/tank/proc/remove_air_ratio(ratio, out_group_multiplier = 1)
+	. = air_contents.remove_ratio(ratio, out_group_multiplier)
+	if(.)
+		queue_icon_update()
+
+/obj/item/weapon/tank/proc/remove_air_by_flag(flag, amount)
+	. = air_contents.remove_by_flag(flag, amount)
 	queue_icon_update()
+
+/obj/item/weapon/tank/proc/air_adjust_gas(gasid, moles, update = 1)
+	. = air_contents.adjust_gas(gasid, moles, update)
+	if(.)
+		queue_icon_update()
 
 /obj/item/weapon/tank/return_air()
 	return air_contents
