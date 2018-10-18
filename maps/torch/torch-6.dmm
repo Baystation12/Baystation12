@@ -8284,7 +8284,7 @@
 	icon_state = "propulsion_l";
 	dir = 8
 	},
-/obj/effect/paint/sun,
+/obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/shuttle/administration/centcom)
 "atC" = (
@@ -8292,7 +8292,7 @@
 	icon_state = "heater";
 	dir = 8
 	},
-/obj/effect/paint/sun,
+/obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/shuttle/administration/centcom)
 "atD" = (
@@ -8416,7 +8416,7 @@
 	icon_state = "propulsion_r";
 	dir = 8
 	},
-/obj/effect/paint/sun,
+/obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/shuttle/administration/centcom)
 "atV" = (
@@ -8510,7 +8510,7 @@
 /area/shuttle/administration/centcom)
 "aum" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/shuttle/administration/centcom)
 "aun" = (
@@ -8934,7 +8934,7 @@
 /area/space)
 "avE" = (
 /obj/machinery/vending/medical,
-/obj/effect/paint/hull,
+/obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/shuttle/administration/centcom)
 "avF" = (
@@ -10281,6 +10281,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "ayB" = (
@@ -12637,6 +12638,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aDg" = (
@@ -12688,6 +12690,7 @@
 /area/centcom/holding)
 "aDn" = (
 /obj/effect/wingrille_spawn/reinforced,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aDo" = (
@@ -13586,6 +13589,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aFg" = (
@@ -13635,6 +13639,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aFn" = (
@@ -22229,6 +22234,10 @@
 /obj/effect/paint/red,
 /turf/simulated/wall/r_titanium,
 /area/syndicate_station/start)
+"izl" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/shuttle/administration/centcom)
 "iPk" = (
 /obj/machinery/body_scanconsole,
 /turf/simulated/floor/shuttle/white,
@@ -22248,6 +22257,7 @@
 /area/holodeck/source_volleyball)
 "jgN" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "jhl" = (
@@ -22338,6 +22348,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "kce" = (
@@ -22660,10 +22671,6 @@
 	},
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
-"qCm" = (
-/obj/effect/paint/sun,
-/turf/simulated/wall/r_titanium,
-/area/shuttle/administration/centcom)
 "qRm" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert3"
@@ -22826,6 +22833,12 @@
 "vbR" = (
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
+"wkp" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/shuttle/administration/centcom)
 "wCU" = (
 /obj/structure/window/holowindow/full,
 /turf/simulated/floor/holofloor,
@@ -28397,15 +28410,15 @@ asR
 asR
 asR
 asR
-qCm
+izl
 atB
 atU
-qCm
+izl
 asR
-qCm
+izl
 atB
 atU
-qCm
+izl
 asR
 asR
 asR
@@ -28598,17 +28611,17 @@ asP
 asR
 asR
 asR
-qCm
-qCm
+izl
+izl
 atC
 atC
-qCm
-qCm
-qCm
+izl
+izl
+izl
 atC
 atC
-qCm
-qCm
+izl
+izl
 asR
 asR
 asR
@@ -28799,19 +28812,19 @@ aaa
 asP
 asR
 asR
-asS
-asS
-asS
+izl
+izl
+izl
 atD
 atV
 aug
-asS
+izl
 auD
 auR
 auY
-asS
-asS
-asS
+izl
+izl
+izl
 asR
 asR
 avY
@@ -29000,21 +29013,21 @@ aad
 aaa
 asP
 asR
-asS
-asS
+izl
+izl
 atc
 atn
 atd
 atd
 auh
-asS
+izl
 auD
 auS
 auZ
 avj
 avp
 avE
-asS
+izl
 asR
 avY
 awn
@@ -29202,21 +29215,21 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asV
 atd
 atd
 atd
 atd
 aui
-asS
+izl
 auE
 auS
 auS
 auS
 auS
 avF
-asS
+izl
 asR
 avY
 awo
@@ -29404,21 +29417,21 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asW
 ate
 ato
 asW
 atd
 auj
-asS
+izl
 auD
 auS
 auS
 auS
 auS
 avG
-asS
+izl
 asR
 avY
 awp
@@ -29606,21 +29619,21 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asW
 atf
 atp
 asW
 atd
 auk
-asS
+izl
 auF
 auS
 auS
 avk
 avq
 avH
-asS
+izl
 asR
 avY
 awq
@@ -29808,21 +29821,21 @@ aad
 aaa
 asP
 asR
-asS
-asS
-asS
-asS
-asS
+izl
+izl
+izl
+izl
+izl
 atr
-asS
-asS
-asS
+izl
+izl
+izl
 atr
-asS
-asS
-asS
-asS
-asS
+izl
+izl
+izl
+izl
+izl
 asR
 avY
 awr
@@ -30010,7 +30023,7 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asX
 atd
 atq
@@ -30022,9 +30035,9 @@ atd
 atd
 atd
 atq
-aum
+wkp
 avI
-aum
+wkp
 asR
 avY
 awr
@@ -30212,7 +30225,7 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asX
 atd
 atd
@@ -30414,21 +30427,21 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asY
 atd
 atd
 atd
-asS
+izl
 atd
 aut
 atd
-asS
-asS
+izl
+izl
 atr
-asS
-asS
-asS
+izl
+izl
+izl
 asR
 avY
 aws
@@ -30616,21 +30629,21 @@ aad
 aaa
 asP
 asR
-asS
+izl
 asZ
 atd
 atd
 atE
-asS
+izl
 aul
 auu
 auG
-asS
+izl
 ava
 atd
 atq
 avK
-asS
+izl
 asR
 avY
 awt
