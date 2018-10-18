@@ -239,7 +239,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	base_parry_chance = 50
 	var/active = 0
 	var/item_color

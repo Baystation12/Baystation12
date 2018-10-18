@@ -40,20 +40,18 @@ Class Procs:
 */
 
 
-/zone/var/name
-/zone/var/invalid = 0
-/zone/var/list/contents = list()
-/zone/var/list/fire_tiles = list()
-/zone/var/list/fuel_objs = list()
-
-/zone/var/needs_update = 0
-
-/zone/var/list/edges = list()
-
-/zone/var/datum/gas_mixture/air = new
-
-/zone/var/list/graphic_add = list()
-/zone/var/list/graphic_remove = list()
+/zone
+	var/name
+	var/invalid = 0
+	var/list/contents = list()
+	var/list/fire_tiles = list()
+	var/list/fuel_objs = list()
+	var/needs_update = 0
+	var/list/edges = list()
+	var/datum/gas_mixture/air = new
+	var/list/graphic_add = list()
+	var/list/graphic_remove = list()
+	var/last_air_temperature = TCMB
 
 /zone/New()
 	SSair.add_zone(src)
@@ -146,17 +144,21 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
+
+	// Update fires.
 	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
 
+	// Update gas overlays.
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)
 		graphic_add.len = 0
 		graphic_remove.len = 0
 
+	// Update connected edges.
 	for(var/connection_edge/E in edges)
 		if(E.sleeping)
 			E.recheck()
@@ -174,6 +176,16 @@ Class Procs:
 					break
 				air.adjust_gas(g, -condense_amt)
 				flooding.add_fluid(condense_amt, product)
+
+	// Update atom temperature.
+	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
+		last_air_temperature = air.temperature
+		for(var/turf/simulated/T in contents)
+			for(var/check_atom in T.contents)
+				var/atom/checking = check_atom
+				if(checking.simulated)
+					QUEUE_TEMPERATURE_ATOMS(checking)
+			CHECK_TICK
 
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)

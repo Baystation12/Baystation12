@@ -54,11 +54,8 @@ About the Holder:
 		update_total()
 			Updates total volume, called automatically.
 
-		handle_reactions()
-			Checks reagents and triggers any reactions that happen. Usually called automatically.
-
 		add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
-			Adds [amount] units of [id] reagent. [data] will be passed to reagent's mix_data() or initialize_data(). If [safety] is 0, handle_reactions() will be called. Returns 1 if successful, 0 otherwise.
+			Adds [amount] units of [id] reagent. [data] will be passed to reagent's mix_data() or initialize_data(). If [safety] is 0, HANDLE_REACTIONS() will be called. Returns 1 if successful, 0 otherwise.
 
 		remove_reagent(var/id, var/amount, var/safety = 0)
 			Ditto, but removes reagent. Returns 1 if successful, 0 otherwise.
@@ -105,10 +102,10 @@ About the Holder:
 			Calls each reagent's touch_obj(target).
 
 		trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
-			The general proc for applying reagents to things externally (as opposed to directly injected into the contents). 
+			The general proc for applying reagents to things externally (as opposed to directly injected into the contents).
 			It first calls touch, then the appropriate trans_to_*() or splash_mob().
 			If for some reason you want touch effects to be bypassed (e.g. injecting stuff directly into a reagent container or person), call the appropriate trans_to_*() proc.
-			
+
 			Calls touch() before checking the type of [target], calling splash_mob(target, amount), trans_to_turf(target, amount, multiplier, copy), or trans_to_obj(target, amount, multiplier, copy).
 
 		trans_id_to(var/atom/target, var/id, var/amount = 1)

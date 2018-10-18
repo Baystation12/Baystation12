@@ -14,7 +14,7 @@
 	var/list/req_components = null
 	var/list/req_component_names = null
 	var/state = 1
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 	proc/update_desc()
 		var/D

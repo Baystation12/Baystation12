@@ -17,6 +17,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	waterproof = FALSE
 	var/lit = 0
 
+/obj/item/weapon/flame/afterattack(var/obj/O, var/mob/user, proximity)
+	..()
+	if(proximity && lit && istype(O))
+		O.HandleObjectHeating(src, user, 700)
+
 /obj/item/weapon/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = 0
 	damtype = "brute"
@@ -196,7 +201,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			qdel(src)
 			return
 		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
-		reagents.handle_reactions()
+		HANDLE_REACTIONS(reagents)
 		update_icon()
 		if(flavor_text)
 			var/turf/T = get_turf(src)

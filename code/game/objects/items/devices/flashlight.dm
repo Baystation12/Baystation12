@@ -266,6 +266,11 @@
 	if(.)
 		activate(user)
 
+/obj/item/device/flashlight/flare/afterattack(var/obj/O, var/mob/user, var/proximity)
+	if(proximity && istype(O) && on)
+		O.HandleObjectHeating(src, user, 500)
+	..()
+
 /obj/item/device/flashlight/flare/proc/activate(var/mob/user)
 	if(on)
 		return
