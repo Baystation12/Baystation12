@@ -116,7 +116,7 @@
 	icon_state = "x3"
 
 /obj/effect/engine_setup/Initialize()
-	..()
+	.=..()
 	landmarks_list += src
 
 /obj/effect/engine_setup/Destroy()
