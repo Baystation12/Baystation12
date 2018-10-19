@@ -1276,6 +1276,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
 "cS" = (
+/turf/simulated/floor/tiled/dark,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -1293,7 +1294,6 @@
 /obj/item/device/spaceflare,
 /obj/item/device/spaceflare,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/airlock)
 "cT" = (
@@ -12418,10 +12418,9 @@
 	icon_state = "nosmoking";
 	pixel_y = -32
 	},
-/obj/machinery/atmospherics/binary/pump/high_power/on{
+/obj/machinery/atmospherics/binary/pump{
 	dir = 1;
-	name = "CO2 to Hangar";
-	target_pressure = 15000
+	name = "CO2 to Hangar"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/shuttlefuel)
@@ -13118,15 +13117,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
-"IT" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/machinery/atmospherics/portables_connector,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/guppy_hangar/start)
 "IY" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/newscaster{
