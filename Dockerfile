@@ -1,4 +1,4 @@
-FROM mloc6/byond:511
+FROM xales/byond:512-latest
 
 ARG BUILD_ARGS
 ENV RUNAS=root
