@@ -18446,6 +18446,10 @@
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	dir = 1
 	},
+/obj/structure/noticeboard{
+	pixel_x = 0;
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fjb" = (
