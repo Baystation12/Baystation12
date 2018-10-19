@@ -9483,10 +9483,13 @@
 	icon_state = "techfloor_edges";
 	dir = 9
 	},
-/obj/machinery/atmospherics/binary/pump/high_power/on{
+/obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 1;
+	max_pressure_setting = 15000;
 	name = "CO2 to Hangar";
-	target_pressure = 15000
+	regulate_mode = 2;
+	target_pressure = 2500;
+	use_power = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
