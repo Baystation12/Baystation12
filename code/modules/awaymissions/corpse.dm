@@ -36,66 +36,52 @@
 
 /obj/effect/landmark/corpse/Initialize()
 	..()
-
-	var/mob/living/carbon/human/M = new /mob/living/carbon/human(loc)
-
-	randomize_appearance(M)
-	equip_outfit(M)
-
-	M.adjustOxyLoss(M.maxHealth)//cease life functions
-	M.setBrainLoss(M.maxHealth)
-	var/obj/item/organ/internal/heart/corpse_heart = M.internal_organs_by_name[BP_HEART]
-	if (corpse_heart)
-		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
-	M.update_dna()
-	M.update_icon()
-
+	var/species_choice = pickweight(species)
+	new/mob/living/carbon/human/corpse (loc, species_choice, src)
 	return INITIALIZE_HINT_QDEL
 
 #define HEX_COLOR_TO_RGB_ARGS(X) arglist(GetHexColors(X))
-/obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M)
-	M.set_species(pickweight(species))
-
+/obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
-		if(M.species.type in genders_per_species)
-			M.change_gender(pickweight(genders_per_species[M.species.type]))
+		if(species_choice in genders_per_species)
+			M.change_gender(pick(genders_per_species[species_choice]))
 		else
 			M.randomize_gender()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_TONE))
-		if(M.species.type in skin_tones_per_species)
-			M.change_skin_tone(pickweight(skin_tones_per_species[M.species.type]))
+		if(species_choice in skin_tones_per_species)
+			M.change_skin_tone(pick(skin_tones_per_species[species_choice]))
 		else
 			M.randomize_skin_tone()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_COLOR))
-		if(M.species.type in skin_colors_per_species)
-			M.change_skin_color(HEX_COLOR_TO_RGB_ARGS(pickweight(skin_colors_per_species[M.species.type])))
+		if(species_choice in skin_colors_per_species)
+			M.change_skin_color(HEX_COLOR_TO_RGB_ARGS(pick(skin_colors_per_species[species_choice])))
 		else
 			M.s_tone = random_skin_tone(M.species)
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
-		if(M.species.type in hair_colors_per_species)
-			M.change_hair_color(HEX_COLOR_TO_RGB_ARGS(pickweight(hair_colors_per_species[M.species.type])))
+		if(species_choice in hair_colors_per_species)
+			M.change_hair_color(HEX_COLOR_TO_RGB_ARGS(pick(hair_colors_per_species[species_choice])))
 		else
 			M.randomize_hair_color()
 		M.change_facial_hair_color(M.r_hair, M.g_hair, M.b_hair)
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
-		if(M.species.type in hair_styles_per_species)
-			M.change_hair(pickweight(hair_styles_per_species[M.species.type]))
+		if(species_choice in hair_styles_per_species)
+			M.change_hair(pick(hair_styles_per_species[species_choice]))
 		else
 			M.randomize_hair_style()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_FACIAL_STYLE))
-		if(M.species.type in facial_styles_per_species)
-			M.change_facial_hair(pickweight(facial_styles_per_species[M.species.type]))
+		if(species_choice in facial_styles_per_species)
+			M.change_facial_hair(pick(facial_styles_per_species[species_choice]))
 		else
 			M.randomize_facial_hair_style()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_EYE_COLOR))
-		if(M.species.type in eye_colors_per_species)
-			M.change_eye_color(HEX_COLOR_TO_RGB_ARGS(pickweight(eye_colors_per_species[M.species.type])))
+		if(species_choice in eye_colors_per_species)
+			M.change_eye_color(HEX_COLOR_TO_RGB_ARGS(pick(eye_colors_per_species[species_choice])))
 		else
 			M.randomize_eye_color()
 
