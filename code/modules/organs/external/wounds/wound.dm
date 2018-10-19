@@ -92,7 +92,7 @@
 	if (!(other.clamped) != !(src.clamped)) return 0
 	if (!(other.salved) != !(src.salved)) return 0
 	if (!(other.disinfected) != !(src.disinfected)) return 0
-	if (!(other.parent_organ) != parent_organ) return 0
+	if (other.parent_organ != parent_organ) return 0
 	return 1
 
 /datum/wound/proc/merge_wound(var/datum/wound/other)
