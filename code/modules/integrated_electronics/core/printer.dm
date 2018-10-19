@@ -43,6 +43,20 @@
 	assembly.creator = key_name(user)
 	cloning = FALSE
 
+/obj/item/device/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/device/electronic_assembly/assembly)
+	if(!O.canremove) //in case we have an augment circuit
+		return
+	if(O.matter[MATERIAL_STEEL] && metal + O.matter[MATERIAL_STEEL] > metal_max)
+		to_chat(user, "<span class='notice'>[src] can't hold any more materials!</span>")
+		return
+	metal += O.matter[MATERIAL_STEEL]
+	if(assembly)
+		assembly.remove_component(O)
+	if(user)
+		to_chat(user, "<span class='notice'>You recycle [O]!</span>")
+	qdel(O)
+	return TRUE
+
 /obj/item/device/integrated_circuit_printer/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
@@ -71,14 +85,14 @@
 
 	if(istype(O, /obj/item/device/electronic_assembly))
 		var/obj/item/device/electronic_assembly/EA = O //microtransactions not included
+		if(EA.battery)
+			to_chat(user, "<span class='warning'>Remove [EA]'s power cell first!</span>")
+			return
 		if(EA.assembly_components.len)
 			if(recycling)
 				return
 			if(!EA.opened)
 				to_chat(user, "<span class='warning'>You can't reach [EA]'s components to remove them!</span>")
-				return
-			if(EA.battery)
-				to_chat(user, "<span class='warning'>Remove [EA]'s power cell first!</span>")
 				return
 			for(var/V in EA.assembly_components)
 				var/obj/item/integrated_circuit/IC = V
@@ -91,20 +105,16 @@
 				return
 			recycling = TRUE
 			for(var/V in EA.assembly_components)
-				var/obj/item/integrated_circuit/IC = V
-				if(IC.matter[MATERIAL_STEEL] && metal + IC.matter[MATERIAL_STEEL] > metal_max)
-					to_chat(user, "<span class='notice'>[src] can't hold any more materials!</span>")
-					break
-				if(!do_after(user, 5, target = user))
-					recycling = FALSE
-					return
-				playsound(src, 'sound/items/crowbar.ogg', 50, TRUE)
-				if(EA.try_remove_component(IC, user, TRUE))
-					metal += IC.matter[MATERIAL_STEEL]
+				recycle(V, null, EA)
 			to_chat(user, "<span class='notice'>You recycle all the components[EA.assembly_components.len ? " you could " : " "]from [EA]!</span>")
 			playsound(src, 'sound/items/electronic_assembly_empty.ogg', 50, TRUE)
 			recycling = FALSE
 			return TRUE
+		else
+			return recycle(EA, user)
+
+	if(istype(O, /obj/item/integrated_circuit))
+		return recycle(O, user)
 
 	return ..()
 
