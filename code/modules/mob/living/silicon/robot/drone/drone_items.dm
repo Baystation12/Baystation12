@@ -241,16 +241,14 @@
 		var/mob/living/silicon/robot/A = target
 		if(A.opened)
 			if(A.cell)
-
 				wrapped = A.cell
-
 				A.cell.add_fingerprint(user)
 				A.cell.update_icon()
 				A.update_icon()
-				A.cell.loc = src
+				A.cell.forceMove(src)
 				A.cell = null
-
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+				A.power_down()
 
 /obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
 
