@@ -53,7 +53,7 @@
 /obj/effect/shuttle_landmark/ship
 	name = "Open Space"
 	landmark_tag = "ship"
-	autoset = 1
+	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G
 
 /obj/effect/shuttle_landmark/ship/Initialize(mapload, shuttle_name)
 	landmark_tag += "_[shuttle_name]"
