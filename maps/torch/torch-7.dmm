@@ -112,7 +112,7 @@
 /turf/space/transit/north,
 /area/space)
 "p" = (
-/obj/effect/shuttle_landmark/torch/transit/exploration_shuttle,
+/obj/effect/shuttle_landmark/transit/torch/exploration_shuttle,
 /turf/space/transit/north,
 /area/space)
 "q" = (
@@ -217,7 +217,7 @@
 /turf/space/bluespace,
 /area/space)
 "H" = (
-/obj/effect/shuttle_landmark/torch/transit/guppy,
+/obj/effect/shuttle_landmark/transit/torch/guppy,
 /turf/space/transit/north,
 /area/space)
 "I" = (
@@ -225,7 +225,7 @@
 /turf/space/transit/east,
 /area/space)
 "J" = (
-/obj/effect/shuttle_landmark/torch/transit/aquila,
+/obj/effect/shuttle_landmark/transit/torch/aquila,
 /turf/space/transit/north,
 /area/space)
 "K" = (

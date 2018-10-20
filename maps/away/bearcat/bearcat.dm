@@ -61,7 +61,7 @@
 /obj/effect/shuttle_landmark/lift/top
 	name = "Top Deck"
 	landmark_tag = "nav_bearcat_lift_top"
-	autoset = 1
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/lift/bottom
 	name = "Lower Deck"

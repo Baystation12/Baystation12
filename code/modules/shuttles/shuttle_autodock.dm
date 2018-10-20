@@ -184,3 +184,6 @@
 //Note that this is called when the shuttle leaves the WAIT_FINISHED state, the proc name is a little misleading
 /datum/shuttle/autodock/proc/arrived()
 	return	//do nothing for now
+
+/obj/effect/shuttle_landmark/transit
+	flags = SLANDMARK_FLAG_ZERO_G
