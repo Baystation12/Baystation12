@@ -1,7 +1,7 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
-
+	layer = STRUCTURE_LAYER
 	var/breakable
 	var/parts
 
