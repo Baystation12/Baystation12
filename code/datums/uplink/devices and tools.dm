@@ -17,6 +17,7 @@
 
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"
+	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
 	item_cost = 16
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/clerical
 

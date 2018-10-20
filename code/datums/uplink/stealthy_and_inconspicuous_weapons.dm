@@ -11,6 +11,7 @@
 
 /datum/uplink_item/item/stealthy_weapons/cigarette_kit
 	name = "Cigarette Kit"
+	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."
 	item_cost = 8
 	path = /obj/item/weapon/storage/box/syndie_kit/cigarette
 
@@ -21,6 +22,7 @@
 
 /datum/uplink_item/item/stealthy_weapons/random_toxin
 	name = "Random Toxin - Beaker"
+	desc = "An apple will not be enough to keep the doctor away after this."
 	item_cost = 8
 	path = /obj/item/weapon/storage/box/syndie_kit/toxin
 
