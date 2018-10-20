@@ -26,7 +26,7 @@
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav2
 	name = "Abandoned Asteroid Base Navpoint #2"
 	landmark_tag = "nav_smugglers_antag"
-	autoset = 1
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/item/weapon/paper/smug_1
 	name = "suspicios note"

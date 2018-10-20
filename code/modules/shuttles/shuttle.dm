@@ -159,7 +159,7 @@
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
 //	log_debug("destination: [destination]")
-	if(flags & SHUTTLE_FLAGS_ZERO_G)
+	if((flags & SHUTTLE_FLAGS_ZERO_G) && (destination.flags & SLANDMARK_FLAG_ZERO_G))
 		var/area/new_area = get_area(destination)
 		for(var/area/our_area in shuttle_area)
 			if(our_area.has_gravity != new_area.has_gravity)
