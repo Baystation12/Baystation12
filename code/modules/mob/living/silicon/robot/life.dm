@@ -58,12 +58,16 @@
 
 		src.has_power = 1
 	else
-		if (src.has_power)
-			to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
-		src.has_power = 0
-		if(lights_on) // Light is on but there is no power!
-			lights_on = 0
-			set_light(0)
+		power_down()
+
+/mob/living/silicon/robot/proc/power_down()
+	if (has_power)
+		to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
+		has_power = 0
+		set_stat(UNCONSCIOUS)
+	if(lights_on) // Light is on but there is no power!
+		lights_on = 0
+		set_light(0)
 
 /mob/living/silicon/robot/handle_regular_status_updates()
 
