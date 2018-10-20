@@ -14,28 +14,22 @@
 	desc = "A sleek, sturdy dufflebag."
 	icon_state = "duffle_syndie"
 
-
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom
-	name = "box (F)"
 	startswith = list(/obj/item/weapon/implanter/freedom)
 
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink
-	name = "box (U)"
 	startswith = list(/obj/item/weapon/implanter/uplink)
 
 /obj/item/weapon/storage/box/syndie_kit/imp_compress
-	name = "box (C)"
 	startswith = list(/obj/item/weapon/implanter/compressed)
 
 /obj/item/weapon/storage/box/syndie_kit/imp_explosive
-	name = "box (E)"
 	startswith = list(
 		/obj/item/weapon/implanter/explosive,
 		/obj/item/weapon/implantpad
 		)
 
 /obj/item/weapon/storage/box/syndie_kit/imp_imprinting
-	name = "box (I)"
 	startswith = list(
 		/obj/item/weapon/implanter/imprinting,
 		/obj/item/weapon/implantpad,
@@ -65,8 +59,6 @@
 		)
 
 /obj/item/weapon/storage/box/syndie_kit/chameleon
-	name = "chameleon kit"
-	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
 	startswith = list(
 		/obj/item/clothing/gloves/chameleon,
 		/obj/item/clothing/glasses/chameleon,
@@ -75,8 +67,6 @@
 
 // Clerical uplink kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/clerical
-	name = "clerical kit"
-	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
 	startswith = list(
 		/obj/item/stack/package_wrap/twenty_five,
 		/obj/item/weapon/hand_labeler,
@@ -86,16 +76,12 @@
 		)
 
 /obj/item/weapon/storage/box/syndie_kit/spy
-	name = "spy kit"
-	desc = "For when you want to conduct voyeurism from afar."
 	startswith = list(
 		/obj/item/device/spy_bug = 6,
 		/obj/item/device/spy_monitor
 	)
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm
-	name = "\improper Smooth operator"
-	desc = "9mm with silencer kit and ammunition."
 	startswith = list(
 		/obj/item/weapon/gun/projectile/pistol,
 		/obj/item/weapon/silencer,
@@ -103,24 +89,18 @@
 	)
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
-	name = "\improper Tough operator"
-	desc = ".357 revolver, with ammunition."
 	startswith = list(
 		/obj/item/weapon/gun/projectile/revolver,
 		/obj/item/ammo_magazine/a357
 	)
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2
-	name = "\improper Dandy tough operator"
-	desc = ".44 magnum revolver, with ammunition."
 	startswith = list(
 		/obj/item/weapon/gun/projectile/revolver/webley,
 		/obj/item/ammo_magazine/c44
 	)
 
 /obj/item/weapon/storage/box/syndie_kit/toxin
-	name = "toxin kit"
-	desc = "An apple will not be enough to keep the doctor away after this."
 	startswith = list(
 		/obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin,
 		/obj/item/weapon/reagent_containers/syringe
@@ -135,7 +115,7 @@
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette
 	name = "\improper Tricky smokes"
-	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."
+	desc = "Smokes so good, you'd think it was a trick!"
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette/New()
 	..()
@@ -172,8 +152,6 @@
 
 //Rig Electrowarfare and Voice Synthesiser kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/ewar_voice
-	//name = "\improper Electrowarfare and Voice Synthesiser pack"
-	//desc = "Kit for confounding organic and synthetic entities alike."
 	startswith = list(
 		/obj/item/rig_module/electrowarfare_suite,
 		/obj/item/rig_module/voice,
@@ -194,8 +172,6 @@
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/armor
-	name = "armor satchel"
-	desc = "A satchel for when you don't want to try a diplomatic approach."
 	startswith = list(
 		/obj/item/clothing/suit/armor/pcarrier/merc,
 		/obj/item/clothing/head/helmet/merc
