@@ -28,8 +28,8 @@
 	#include "maps/sbs_spawns.dm"
 	#include "maps/CCV_Slow_But_Steady.dmm"
 
-	#includes "maps/ccv_deliverance_spawns.dm"
-	#includes "maps/CCV_Deliverance.dmm"
+	#include "maps/ccv_deliverance_spawns.dm"
+	#include "maps/CCV_Deliverance.dmm"
 
 
 	#include "overall_outfits.dm"
