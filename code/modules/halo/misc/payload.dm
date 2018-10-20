@@ -55,7 +55,7 @@
 /obj/payload/proc/checkturf()
   for(var/obj/effect/bomblocation/b in range(0,src))
     return 1
-  return 1
+  return 0
 
 /obj/payload/proc/checknextto()
 	if(u)
@@ -102,6 +102,15 @@
 	checkexplode()
 	checkdisarm()
 
+/obj/payload/free_explode
+
+/obj/payload/free_explode/checkturf()
+  for(var/obj/effect/bomblocation/b in range(0,src))
+    return 1
+  return 1
+
+
+
 /obj/effect/bomblocation
 	name = "Bomb Delivery Point"
 	desc = "Marks the location for the delivery of a bomb."
@@ -145,9 +154,15 @@
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator/toggle_mode()
 	visible_message("<span class = 'notice'>The locator announces 'TARGET LOCKED: MODE CHANGE UNAVAILABLE'</span>")
 	return
+/obj/payload/covenant/free_explode
+
+/obj/payload/covenant/free_explode/checkturf()
+  for(var/obj/effect/bomblocation/b in range(0,src))
+    return 1
+  return 1
 
 /datum/nuclearexplosion/New(var/obj/b)
-	explosion(b.loc,40,60,70,75)
+	explosion(b.loc,50,70,80,85)
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
