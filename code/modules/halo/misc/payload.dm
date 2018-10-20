@@ -7,6 +7,9 @@
 	anchored = 0
 	density = 1
 	var/explodetype = /datum/nuclearexplosion
+	var/explodetype2 = /datum/antiexplosion
+	var/radioactive = /datum/radioactivewaste
+	var/heat = /datum/superheat
 	var/exploding
 	var/explode_at
 	var/seconds_to_explode = 240
@@ -26,6 +29,7 @@
 			if(do_after(user,arm_time SECONDS,src,1,1,,1))
 				u = user
 				u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
+				admin_attack_log("([user.name]) primed a nuke/anti-matter charge.")
 				explode_at = world.time + seconds_to_explode*10
 				exploding = 1
 				GLOB.processing_objects += src
@@ -51,7 +55,7 @@
 /obj/payload/proc/checkturf()
   for(var/obj/effect/bomblocation/b in range(0,src))
     return 1
-  return 0
+  return 1
 
 /obj/payload/proc/checknextto()
 	if(u)
@@ -73,6 +77,8 @@
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
 		new explodetype(src)
+		new heat(src)
+		new radioactive(src)
 		qdel(src)
 		return
 
@@ -114,6 +120,15 @@
 	seconds_to_explode = 300
 	seconds_to_disarm = 60
 
+/obj/payload/covenant/checkexplode()
+	if(exploding)
+		desc = explodedesc + " [(explode_at - world.time)/10] seconds remain."
+	if(exploding && world.time >= explode_at)
+		GLOB.processing_objects -= src
+		new explodetype2(src)
+		qdel(src)
+		return
+
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator
 	name = "Optimal Ordinance Yield Locator"
 	desc = "A locator device that points towards an optimal location that maximises the yield of a bomb."
@@ -137,3 +152,17 @@
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
 	qdel(src)
+
+/datum/radioactivewaste/New(var/obj/b)
+	radiation_repository.radiate(b.loc,1000,10000)
+
+/datum/superheat/New(var/obj/b)
+	for(var/turf/simulated/floor/target_tile in range(b,100))
+		target_tile.hotspot_expose(100000)
+
+/datum/antiexplosion/New(var/obj/b)
+	explosion(b.loc,80,120,140,150)
+	for(var/mob/living/m in range(100,b.loc))
+		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
+		m.gib()
+		qdel(src)

@@ -1,5 +1,6 @@
 #define ALL_VEHICLE_POSITIONS list("driver","passenger","gunner")
 #define VEHICLE_LOAD_DELAY 2.5 SECONDS //This is the delay to load people onto the vehicle.
+#define VEHICLE_ITEM_LOAD 3.0 SECONDS
 
 /obj/vehicles
 	name = "Vehicle"
@@ -276,6 +277,20 @@
 	if(!istype(O,/obj/vehicles))
 		user.drop_from_inventory(O)
 	comp_prof.cargo_transfer(O)
+
+obj/vehicles/MouseDrop(var/obj/over_object)
+	var/mob/user = usr
+	if(!istype(over_object,/obj)) return
+	if(istype(over_object,/obj/vehicles)) return
+	if(over_object.anchored) return
+	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
+	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
+		return
+	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
+	over_object.loc = pick(src.locs)
+	comp_prof.cargo_transfer(over_object)
+
 
 /obj/vehicles/verb/get_cargo_item()
 	set name = "Retrieve Cargo"
