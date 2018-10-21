@@ -230,6 +230,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/firealarm_electronics
 	category = "Engineering"
 
+/datum/autolathe/recipe/clamp
+	name = "stasis clamp"
+	path = /obj/item/clamp
+	category = "Engineering"
+
 /datum/autolathe/recipe/powermodule
 	name = "power control module"
 	path = /obj/item/weapon/module/power_control
@@ -239,6 +244,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "matter cartridge"
 	path = /obj/item/weapon/rcd_ammo
 	category = "Engineering"
+
 /datum/autolathe/recipe/rcd_ammo_large
 	name = "high-capacity matter cartridge"
 	path = /obj/item/weapon/rcd_ammo/large
@@ -590,6 +596,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
+datum/autolathe/recipe/netshell
+	name = "net gun shell"
+	path = /obj/item/weapon/net_shell
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/rcd
 	name = "rapid construction device"
 	path = /obj/item/weapon/rcd
@@ -629,6 +640,76 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "ecigarette cartridge"
 	path = /obj/item/weapon/reagent_containers/ecig_cartridge/blank
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/manipulator
+	name = "micro-manipulator"
+	path = /obj/item/weapon/stock_parts/manipulator
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/micro_laser
+	name = "micro-laser"
+	path = /obj/item/weapon/stock_parts/micro_laser
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/scanning_module
+	name = "scanning module"
+	path = /obj/item/weapon/stock_parts/scanning_module
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/capacitor
+	name = "capacitor"
+	path = /obj/item/weapon/stock_parts/capacitor
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/harddrive
+	name = "basic hard drive"
+	path = /obj/item/weapon/computer_hardware/hard_drive
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/harddrivesmall
+	name = "small hard drive"
+	path = /obj/item/weapon/computer_hardware/hard_drive/small
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/cpu
+	name = "standard processor"
+	path = /obj/item/weapon/computer_hardware/processor_unit
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/cpusmall
+	name = "micro processor"
+	path = /obj/item/weapon/computer_hardware/processor_unit/small
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/compbattery
+	name = "standard battery"
+	path = /obj/item/weapon/computer_hardware/battery_module
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/compbatterysmall
+	name = "micro battery"
+	path = /obj/item/weapon/computer_hardware/battery_module/micro
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/matterbin
+	name = "basic matter bin"
+	path = /obj/item/weapon/stock_parts/matter_bin
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/spraybottle
+	name = "spray bottle"
+	path = /obj/item/weapon/reagent_containers/spray
+	category = "General"
+
+/datum/autolathe/recipe/toolbox
+	name = "empty toolbox"
+	path = /obj/item/weapon/storage/toolbox
+	category = "General"
+
+/datum/autolathe/recipe/emergencytank
+	name = "empty emergency tank"
+	path = /obj/item/weapon/tank/emergency
+	category = "General"
 
 /datum/autolathe/recipe/plunger
 	name = "plunger"

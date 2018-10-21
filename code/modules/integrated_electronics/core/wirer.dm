@@ -10,6 +10,7 @@
 	used for power or data transmission."
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
 	icon_state = "wirer-wire"
+	matter = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 400)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null

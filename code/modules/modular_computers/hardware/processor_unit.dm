@@ -10,6 +10,7 @@
 	critical = 1
 	malfunction_probability = 1
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
+	matter = list(MATERIAL_STEEL = 100,MATERIAL_GLASS = 350)
 
 	var/max_idle_programs = 2 // 2 idle, + 1 active = 3 as said in description.
 
@@ -21,6 +22,7 @@
 	power_usage = 25
 	max_idle_programs = 1
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 200)
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic
 	name = "photonic processor"

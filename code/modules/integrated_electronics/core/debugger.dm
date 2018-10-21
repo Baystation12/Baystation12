@@ -4,6 +4,7 @@
 	settings to specific circuits, or for debugging purposes.  It can also pulse activation pins."
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
 	icon_state = "debugger"
+	matter = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 400)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL

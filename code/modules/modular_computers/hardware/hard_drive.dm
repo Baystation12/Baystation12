@@ -5,6 +5,7 @@
 	icon_state = "hdd_normal"
 	hardware_size = 1
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	matter = list(MATERIAL_STEEL = 300,MATERIAL_GLASS = 400)
 	var/max_capacity = 128
 	var/used_capacity = 0
 	var/list/stored_files = list()		// List of stored files on this drive. DO NOT MODIFY DIRECTLY!
@@ -42,6 +43,7 @@
 	desc = "A small highly efficient solid state drive for portable devices."
 	power_usage = 10
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	matter = list(MATERIAL_STEEL = 150,MATERIAL_GLASS = 300)
 	max_capacity = 64
 	icon_state = "hdd_small"
 	hardware_size = 1
@@ -51,6 +53,7 @@
 	desc = "A small micro hard drive for portable devices."
 	power_usage = 2
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	matter = list(MATERIAL_STEEL = 100,MATERIAL_GLASS = 250)
 	max_capacity = 32
 	icon_state = "hdd_micro"
 	hardware_size = 1

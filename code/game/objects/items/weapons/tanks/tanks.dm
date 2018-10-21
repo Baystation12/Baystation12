@@ -22,6 +22,7 @@ var/list/global/tank_gauge_cache = list()
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
+	matter = list(MATERIAL_STEEL = 800)
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE

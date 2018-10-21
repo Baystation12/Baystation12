@@ -9,6 +9,7 @@
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	var/battery_rating = 75
 	var/obj/item/weapon/cell/battery = null
+	matter = list(MATERIAL_STEEL = 200,MATERIAL_GLASS = 300)
 
 /obj/item/weapon/computer_hardware/battery_module/advanced
 	name = "advanced battery"
@@ -40,6 +41,7 @@
 	icon_state = "battery_micro"
 	origin_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	battery_rating = 50
+	matter = list(MATERIAL_STEEL = 100,MATERIAL_GLASS = 250)
 
 /obj/item/weapon/computer_hardware/battery_module/nano
 	name = "nano battery"
@@ -47,6 +49,7 @@
 	icon_state = "battery_nano"
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	battery_rating = 30
+	matter = list(MATERIAL_STEEL = 75,MATERIAL_GLASS = 250)
 
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/weapon/computer_hardware/battery_module/lambda
