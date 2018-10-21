@@ -117,7 +117,7 @@
 /obj/item/weapon/gun/launcher/pneumatic/handle_post_fire()
 	if(tank)
 		var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
-		var/datum/gas_mixture/removed = tank.air_contents.remove(lost_gas_amount)
+		var/datum/gas_mixture/removed = tank.remove_air(lost_gas_amount)
 
 		var/turf/T = get_turf(src.loc)
 		if(T) T.assume_air(removed)

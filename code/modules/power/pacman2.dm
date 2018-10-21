@@ -27,8 +27,7 @@
 		return 0
 
 	UseFuel()
-		P.air_contents.phoron -= 0.01
-		return
+		P.air_adjust_gas("phoron", -0.01)
 
 	New()
 		..()

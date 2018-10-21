@@ -90,6 +90,8 @@
 				power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 			else
 				power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
+			if(holding)
+				holding.queue_icon_update()
 
 	if (power_draw < 0)
 		last_flow_rate = 0
