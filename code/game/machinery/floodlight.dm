@@ -81,9 +81,8 @@
 		if(ishuman(user))
 			if(!user.get_active_hand())
 				user.put_in_hands(cell)
-				cell.loc = user.loc
 		else
-			cell.loc = loc
+			cell.dropInto(loc)
 
 		cell.add_fingerprint(user)
 		cell.update_icon()

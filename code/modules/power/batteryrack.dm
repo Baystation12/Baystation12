@@ -217,18 +217,17 @@
 	data["cells_max"] = max_cells
 	data["cells_cur"] = internal_cells.len
 	var/list/cells = list()
-	var/cell_index = 0
+	var/cell_index = 1
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		var/list/cell[0]
-		cell["slot"] = cell_index + 1
+		cell["slot"] = cell_index
 		cell["used"] = 1
 		cell["percentage"] = round(C.percent(), 0.01)
-		cell["id"] = C.c_uid
 		cell_index++
 		cells += list(cell)
-	while(cell_index < PSU_MAXCELLS)
+	while(cell_index <= PSU_MAXCELLS)
 		var/list/cell[0]
-		cell["slot"] = cell_index + 1
+		cell["slot"] = cell_index
 		cell["used"] = 0
 		cell_index++
 		cells += list(cell)
@@ -291,16 +290,12 @@
 		equalise = 0
 		return 1
 	else if( href_list["ejectcell"] )
-		var/obj/item/weapon/cell/C
-		for(var/obj/item/weapon/cell/CL in internal_cells)
-			if(CL.c_uid == text2num(href_list["ejectcell"]))
-				C = CL
-				break
-
-		if(!istype(C))
+		var/slot_number = text2num(href_list["ejectcell"])
+		if(slot_number != Clamp(round(slot_number), 1, length(internal_cells)))
 			return 1
+		var/obj/item/weapon/cell/C = internal_cells[slot_number]
 
-		C.forceMove(get_turf(src))
+		C.dropInto(loc)
 		internal_cells -= C
 		update_icon()
 		RefreshParts()
