@@ -1,0 +1,4 @@
+author: "sierrakomodo"
+delete-after: True
+changes: 
+  - rscadd: "Bridge Officers now have access to the Charon's Airlock and Charon's Helm"
