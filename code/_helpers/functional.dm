@@ -1,28 +1,36 @@
-/proc/all_predicates_true(var/list/input, var/list/predicates)
-	predicates = istype(predicates) ? predicates : list(predicates)
+#define PREPARE_INPUT \
+predicates = istype(predicates) ? predicates : list(predicates);\
+input = istype(input) ? input : list(input);
 
-	for(var/i = 1 to predicates.len)
-		if(istype(input))
-			if(!call(predicates[i])(arglist(input)))
-				return FALSE
-		else
-			if(!call(predicates[i])(input))
-				return FALSE
+#define PREPARE_ARGUMENTS \
+var/extra_arguments = predicates[predicate];\
+var/list/predicate_input = input;\
+if(LAZYLEN(extra_arguments)) {\
+	predicate_input = predicate_input.Copy();\
+	predicate_input += list(extra_arguments);\
+}
+
+/proc/all_predicates_true(var/list/input, var/list/predicates)
+	PREPARE_INPUT
+	for(var/predicate in predicates)
+		PREPARE_ARGUMENTS
+		if(!call(predicate)(arglist(predicate_input)))
+			return FALSE
 	return TRUE
 
 /proc/any_predicate_true(var/list/input, var/list/predicates)
-	predicates = istype(predicates) ? predicates : list(predicates)
+	PREPARE_INPUT
 	if(!predicates.len)
 		return TRUE
 
-	for(var/i = 1 to predicates.len)
-		if(istype(input))
-			if(call(predicates[i])(arglist(input)))
-				return TRUE
-		else
-			if(call(predicates[i])(input))
-				return TRUE
+	for(var/predicate in predicates)
+		PREPARE_ARGUMENTS
+		if(call(predicate)(arglist(predicate_input)))
+			return TRUE
 	return FALSE
+
+#undef PREPARE_ARGUMENTS
+#undef PREPARE_INPUT
 
 /proc/is_atom_predicate(var/value, var/feedback_receiver)
 	. = isatom(value)
