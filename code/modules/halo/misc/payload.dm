@@ -6,10 +6,8 @@
 	icon_state = "MFDD"
 	anchored = 0
 	density = 1
-	var/explodetype = /datum/nuclearexplosion
-	var/explodetype2 = /datum/antiexplosion
-	var/radioactive = /datum/radioactivewaste
-	var/heat = /datum/superheat
+	var/explodetype = /datum/explosion/nuclearexplosion
+	var/explodetype2 = /datum/explosion
 	var/exploding
 	var/explode_at
 	var/seconds_to_explode = 240
@@ -20,6 +18,7 @@
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
 	var/activeoverlay = "MFDD Armed Screen"
+	var/strength=1
 
 /obj/payload/attack_hand(var/mob/living/user)
 	if(!exploding)
@@ -77,8 +76,6 @@
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
 		new explodetype(src)
-		new heat(src)
-		new radioactive(src)
 		qdel(src)
 		return
 
@@ -128,6 +125,7 @@
 	explodedesc = "Spikes conceal a countdown timer."
 	seconds_to_explode = 300
 	seconds_to_disarm = 60
+	strength=1.5
 
 /obj/payload/covenant/checkexplode()
 	if(exploding)
@@ -161,23 +159,14 @@
     return 1
   return 1
 
-/datum/nuclearexplosion/New(var/obj/b)
-	explosion(b.loc,50,70,80,85)
+/datum/explosion/New(var/obj/payload/b)
+	explosion(b.loc,b.strength*50,b.strength*70,b.strength*80,b.strength*80)
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
 	qdel(src)
 
-/datum/radioactivewaste/New(var/obj/b)
+/datum/explosion/nuclearexplosion/New(var/obj/payload/b)
+	..()
 	radiation_repository.radiate(b.loc,1000,10000)
 
-/datum/superheat/New(var/obj/b)
-	for(var/turf/simulated/floor/target_tile in range(b,100))
-		target_tile.hotspot_expose(100000)
-
-/datum/antiexplosion/New(var/obj/b)
-	explosion(b.loc,80,120,140,150)
-	for(var/mob/living/m in range(100,b.loc))
-		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
-		m.gib()
-		qdel(src)
