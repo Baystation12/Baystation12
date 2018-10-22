@@ -23,7 +23,7 @@
 /proc/get_subarea_turfs(var/area/A, var/list/predicates)
 	. = new/list()
 	A = istype(A) ? A.type : A
-	if(!A)
+	if(!ispath(A))
 		return
 	for(var/sub_area_type in typesof(A))
 		var/area/sub_area = locate(sub_area_type)
@@ -46,7 +46,7 @@
 */
 /proc/pick_subarea_turf(var/areatype, var/list/predicates)
 	var/list/turfs = get_subarea_turfs(areatype, predicates)
-	if(turfs && turfs.len)
+	if(LAZYLEN(turfs))
 		return pick(turfs)
 
 /proc/pick_area_turf(var/areatype, var/list/predicates)
@@ -56,18 +56,29 @@
 
 /proc/pick_area(var/list/predicates)
 	var/list/areas = get_filtered_areas(predicates)
-	if(areas && areas.len)
+	if(LAZYLEN(areas))
 		. = pick(areas)
 
 /proc/pick_area_and_turf(var/list/area_predicates, var/list/turf_predicates)
-	var/area/A = pick_area(area_predicates)
-	if(!A)
-		return
-	return pick_area_turf(A, turf_predicates)
+	var/list/areas = get_filtered_areas(area_predicates)
+	// We loop over all area candidates, until we finally get a valid turf or run out of areas
+	while(!. && length(areas))
+		var/area/A = pick_n_take(areas)
+		. = pick_area_turf(A, turf_predicates)
+
+/proc/pick_area_turf_in_connected_z_levels(var/list/area_predicates, var/list/turf_predicates, var/z_level)
+	area_predicates = area_predicates.Copy()
+
+	var/z_levels = GetConnectedZlevels(z_level)
+	area_predicates[/proc/area_belongs_to_zlevels] = z_levels
+	return pick_area_and_turf(area_predicates, turf_predicates)
 
 /*
 	Predicate Helpers
 */
+/proc/area_belongs_to_zlevels(var/area/A, var/list/z_levels)
+	. = (A.z in z_levels)
+
 /proc/is_station_area(var/area/A)
 	. = isStationLevel(A.z)
 
