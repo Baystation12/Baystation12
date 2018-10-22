@@ -872,8 +872,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "List of Available Designs:"
 			dat += GetResearchListInfo()
 
-	show_browser(user, "<TITLE>Fabrication Control Console</TITLE><HR>[JOINTEXT(dat)]", "window=rdconsole;size=850x600")
-	onclose(user, "rdconsole")
+	var/datum/browser/popup = new(user, "rdconsolenew", "Research Console", 850, 600)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 /obj/machinery/computer/rdconsole/robotics
 	name = "robotics fabrication console"
