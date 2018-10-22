@@ -3159,8 +3159,8 @@
 	},
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
-	name = "Pathfinder's Office";
-	sortType = "Pathfinder's Office"
+	name = "Commissary";
+	sortType = "Commissary"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -5358,9 +5358,6 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/center)
 "sC" = (
@@ -5373,9 +5370,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -5395,16 +5389,14 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/structure/disposalpipe/sortjunction/flipped{
-	dir = 8;
-	name = "Security Checkpoint - Deck 4";
-	sortType = "Security Checkpoint - Deck 4"
-	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/center)

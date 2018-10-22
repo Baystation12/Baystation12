@@ -1277,8 +1277,8 @@
 	},
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
-	name = "Pilot's Lounge";
-	sortType = "Pilot's Lounge"
+	name = "XO's Office";
+	sortType = "XO's Office"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
