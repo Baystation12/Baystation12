@@ -569,7 +569,7 @@
 	return 1
 
 /obj/item/weapon/rig/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if(check_suit_access(user))
+	if(istype(user, /mob/living/silicon/ai))
 		return STATUS_INTERACTIVE
 	else return ..()
 
