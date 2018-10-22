@@ -7,7 +7,6 @@
 	anchored = 0
 	density = 1
 	var/explodetype = /datum/explosion/nuclearexplosion
-	var/explodetype2 = /datum/explosion
 	var/exploding
 	var/explode_at
 	var/seconds_to_explode = 240
@@ -18,7 +17,7 @@
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
 	var/activeoverlay = "MFDD Armed Screen"
-	var/strength=1
+	var/strength=1 //The size of the explosion
 
 /obj/payload/attack_hand(var/mob/living/user)
 	if(!exploding)
@@ -106,8 +105,6 @@
     return 1
   return 1
 
-
-
 /obj/effect/bomblocation
 	name = "Bomb Delivery Point"
 	desc = "Marks the location for the delivery of a bomb."
@@ -126,15 +123,7 @@
 	seconds_to_explode = 300
 	seconds_to_disarm = 60
 	strength=1.5
-
-/obj/payload/covenant/checkexplode()
-	if(exploding)
-		desc = explodedesc + " [(explode_at - world.time)/10] seconds remain."
-	if(exploding && world.time >= explode_at)
-		GLOB.processing_objects -= src
-		new explodetype2(src)
-		qdel(src)
-		return
+	explodetype = /datum/explosion
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator
 	name = "Optimal Ordinance Yield Locator"
