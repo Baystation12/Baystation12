@@ -11041,10 +11041,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
-"Ar" = (
-/obj/effect/paint/red,
-/turf/simulated/wall/titanium,
-/area/quartermaster/hangar)
 "As" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -36672,8 +36668,8 @@ ie
 aJ
 kd
 ee
-Ar
-Ar
+aY
+aY
 bG
 Cm
 cj

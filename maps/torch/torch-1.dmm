@@ -1343,6 +1343,10 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Mess Hall - Officer's Mess";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "eB" = (
