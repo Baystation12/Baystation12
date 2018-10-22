@@ -243,13 +243,13 @@ SUBSYSTEM_DEF(unit_tests)
 
 	var/list/async = current_async
 	while (async.len)
-		var/datum/unit_test/test = current_async[current_async.len]
-		current_async.len--
+		var/datum/unit_test/test = current_async[async.len]
+		async.len--
 		if(check_unit_test(test, end_unit_tests))
 			async_tests -= test
 		if (MC_TICK_CHECK)
 			return
-	if (!async.len)
+	if (!async_tests.len)
 		stage++
 
 /datum/controller/subsystem/unit_tests/fire(resumed = 0)
