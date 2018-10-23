@@ -43,6 +43,7 @@
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
 
 	var/required_education = EDUCATION_TIER_NONE
+	var/maximum_education
 	var/available_by_default = TRUE
 
 /datum/job/New()
@@ -180,7 +181,7 @@
 		return TRUE
 
 	if(!S.check_background(src, prefs))
-		to_chat(feedback, "<span class='boldannounce'>Incompatible background for role [title], species [S].</span>")
+		to_chat(feedback, "<span class='boldannounce'>Incompatible education for [title].</span>")
 		return TRUE
 
 	return FALSE
