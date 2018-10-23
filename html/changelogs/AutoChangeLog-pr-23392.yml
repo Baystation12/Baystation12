@@ -1,5 +1,0 @@
-author: "BlueNexus"
-delete-after: True
-changes: 
-  - tweak: "\"Many chemicals now require heating or cooling in order to mix. Check the wiki for specifics.\""
-  - maptweak: "\"Added heaters and coolers to various locations on the map.\""
