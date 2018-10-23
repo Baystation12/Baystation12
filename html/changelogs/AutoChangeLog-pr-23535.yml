@@ -1,7 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "Ship movement physics have been altered. Ships are now generally slower to accelerate, though can move pretty fast when at max speed. This includes the Torch as well as overmap-capable shuttles and away site vessels."
-  - bugfix: "Overmap wrapping when moving diagonally has been fixed."
-  - tweak: "Shuttles no longer have gravity when not at a location that has ambient gravity."
-  - rscadd: "A new admin tool has been added, Toggle Overmap Halt, which allows admins to make all overmap ships stop and freeze them from moving."

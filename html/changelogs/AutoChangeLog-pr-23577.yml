@@ -1,5 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - tweak: "All pipes, except fuel pipes, now have the same pressure damage threshold. Previously, cross-z pipes were significantly weaker. Fuel pipes' extremely high threshold remain unchanged."
-  - tweak: "All pipes have a slightly higher burst pressure threshold."
