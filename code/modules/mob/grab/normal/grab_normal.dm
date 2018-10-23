@@ -202,7 +202,7 @@
 // Handles special targeting like eyes and mouth being covered.
 /datum/grab/normal/special_target_effect(var/obj/item/grab/G)
 	if(G.special_target_functional)
-		switch(G.last_target)
+		switch(G.target_zone)
 			if(BP_MOUTH)
 				if(G.affecting.silent < 3)
 					G.affecting.silent = 3
@@ -211,10 +211,10 @@
 					G.affecting.eye_blind = 3
 
 // Handles when they change targeted areas and something is supposed to happen.
-/datum/grab/normal/special_target_change(var/obj/item/grab/G, var/diff_zone)
-	if(G.target_zone != BP_HEAD && G.target_zone != BP_CHEST)
+/datum/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)
+	if(old_zone != BP_HEAD && old_zone != BP_CHEST)
 		return
-	switch(diff_zone)
+	switch(new_zone)
 		if(BP_MOUTH)
 			G.assailant.visible_message("<span class='warning'>\The [G.assailant] covers [G.affecting]'s mouth!</span>")
 		if(BP_EYES)
@@ -222,7 +222,7 @@
 
 
 /datum/grab/normal/check_special_target(var/obj/item/grab/G)
-	switch(G.last_target)
+	switch(G.target_zone)
 		if(BP_MOUTH)
 			if(!G.affecting.check_has_mouth())
 				to_chat(G.assailant, "<span class='danger'>You cannot locate a mouth on [G.affecting]!</span>")
