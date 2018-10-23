@@ -983,7 +983,6 @@
 #include "code\game\objects\items\weapons\implants\implants\translator.dm"
 #include "code\game\objects\items\weapons\implants\implants\uplink.dm"
 #include "code\game\objects\items\weapons\material\ashtray.dm"
-#include "code\game\objects\items\weapons\material\bats.dm"
 #include "code\game\objects\items\weapons\material\bell.dm"
 #include "code\game\objects\items\weapons\material\coins.dm"
 #include "code\game\objects\items\weapons\material\kitchen.dm"
