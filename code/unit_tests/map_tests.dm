@@ -637,6 +637,9 @@ datum/unit_test/ladder_check/start_test()
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages
 	name = "MAP: Networked disposals shall deliver tagged packages"
 	async = 1
+
+	var/extra_spawns = 3
+
 	var/list/packages_awaiting_delivery = list()
 	var/list/all_tagged_bins = list()
 	var/list/all_tagged_destinations = list()
@@ -665,17 +668,22 @@ datum/unit_test/ladder_check/start_test()
 		fail("Improperly connected junction detected.")
 		return
 	for(var/target_tag in all_tagged_destinations)
-		for(var/tag in all_tagged_bins)
-			var/obj/structure/disposalholder/unit_test/package = new()
-			package.tomail = 1
-			package.destinationTag = target_tag
-			package.start(all_tagged_bins[tag])
-			package.test = src
-			packages_awaiting_delivery[package] = tag
+		var/tag = all_tagged_bins[target_tag] ? target_tag : pick(all_tagged_bins)
+		spawn_package(tag, target_tag)
+		for(var/i in 1 to extra_spawns)
+			spawn_package(pick(all_tagged_bins), target_tag) // This potentially helps catch errors in junction logic.
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/spawn_package(tag, target_tag)
+	var/obj/structure/disposalholder/unit_test/package = new()
+	package.tomail = 1
+	package.destinationTag = target_tag
+	package.start(all_tagged_bins[tag])
+	package.test = src
+	packages_awaiting_delivery[package] = tag
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
-	var/speed = 20
+	var/speed = 50
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
