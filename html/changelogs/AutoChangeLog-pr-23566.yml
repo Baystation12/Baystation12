@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscdel: "The Move To Top object verb has been removed due to changes in the new BYOND version making it no longer work consistently."
