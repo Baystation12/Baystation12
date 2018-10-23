@@ -143,20 +143,6 @@
 			if (prob(5))
 				qdel(src)
 
-/obj/item/verb/move_to_top()
-	set name = "Move To Top"
-	set category = "Object"
-	set src in oview(1)
-
-	if(!istype(src.loc, /turf) || usr.stat || usr.restrained() )
-		return
-
-	var/turf/T = src.loc
-
-	src.loc = null
-
-	src.loc = T
-
 /obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
