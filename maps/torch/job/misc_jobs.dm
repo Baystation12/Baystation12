@@ -46,7 +46,6 @@ Civilian
 	title = "Merchant"
 	department = "Civilian"
 	department_flag = CIV
-
 	total_positions = 2
 	spawn_positions = 2
 	availablity_chance = 30
@@ -71,7 +70,6 @@ Civilian
 	title = "Stowaway"
 	department = "Civilian"
 	department_flag = CIV
-
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 20

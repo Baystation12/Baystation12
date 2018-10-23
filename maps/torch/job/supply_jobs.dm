@@ -36,6 +36,7 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BASIC
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
@@ -70,12 +71,12 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BASIC
+	maximum_education = EDUCATION_TIER_TRADE
 
 /datum/job/cargo_contractor
 	title = "Supply Assistant"
 	department = "Supply"
 	department_flag = SUP
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Deck Chief, the Corporate Liaison and Supply Personnel"
@@ -96,6 +97,7 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_DROPOUT
+	maximum_education = EDUCATION_TIER_TRADE
 
 /datum/job/mining
 	title = "Prospector"
@@ -125,3 +127,4 @@
 						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm)
 	minimal_access = list()
 	required_education = EDUCATION_TIER_DROPOUT
+	maximum_education = EDUCATION_TIER_TRADE

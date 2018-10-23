@@ -52,7 +52,6 @@
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
-
 	skill_points = 30
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads,
@@ -218,6 +217,7 @@
 							 /datum/computer_file/program/shields_monitor,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_MASTERS
+	maximum_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/chief_engineer/get_description_blurb()
 	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
@@ -261,6 +261,7 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BACHELOR
+	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/hos/get_description_blurb()
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
@@ -269,7 +270,6 @@
 	title = "Workplace Liaison"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
@@ -305,7 +305,6 @@
 	title = "SolGov Representative"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
@@ -332,7 +331,6 @@
 	title = "Senior Enlisted Advisor"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -371,6 +369,7 @@
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BASIC
+	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/sea/get_description_blurb()
 	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and “advising” them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
@@ -379,7 +378,6 @@
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Commanding Officer and heads of staff"
@@ -418,6 +416,7 @@
 							 /datum/computer_file/program/reports,
 							 /datum/computer_file/program/deck_management)
 	required_education = EDUCATION_TIER_BACHELOR
+	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
