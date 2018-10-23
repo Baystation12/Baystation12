@@ -99,13 +99,14 @@
 	let_go_effect(G)
 	G.force_drop()
 
-/datum/grab/proc/process(var/obj/item/grab/G)
-	var/diff_zone = G.target_change()
-	if(diff_zone && G.special_target_functional)
-		special_target_change(G, diff_zone)
-	else
+/datum/grab/proc/on_target_change(var/obj/item/grab/G, old_zone, new_zone)
+	G.special_target_functional = check_special_target(G)
+	if(G.special_target_functional)
+		special_target_change(G, old_zone, new_zone)
 		special_target_effect(G)
 
+/datum/grab/proc/process(var/obj/item/grab/G)
+	special_target_effect(G)
 	process_effect(G)
 
 /datum/grab/proc/throw_held(var/obj/item/grab/G)

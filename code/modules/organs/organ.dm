@@ -249,11 +249,14 @@ var/list/organ_cache = list()
  *  Remove an organ
  *
  *  drop_organ - if true, organ will be dropped at the loc of its former owner
+ *
+ *  Also, Observer Pattern Implementation: Dismembered Handling occurs here.
  */
 /obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
 	if(!istype(owner))
 		return
+	GLOB.dismembered_event.raise_event(owner, src)
 
 	action_button_name = null
 
