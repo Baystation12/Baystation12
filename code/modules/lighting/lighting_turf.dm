@@ -7,10 +7,11 @@
 	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
 	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
 	var/tmp/list/datum/lighting_corner/corners
-	var/opaque_counter
+	var/list/opaque_list = list()
 
 /turf/New()
-	opaque_counter = opacity
+	if(opacity)
+		opaque_list |= src
 	..()
 	
 /turf/set_opacity()
@@ -71,18 +72,20 @@
 /turf/Entered(var/atom/movable/Obj, var/atom/OldLoc)
 	. = ..()
 	if(Obj && Obj.opacity)
-		if(!opaque_counter++)
+		opaque_list |= Obj
+		if(opaque_list.len == 1)
 			reconsider_lights()
 		
 
 /turf/Exited(var/atom/movable/Obj, var/atom/newloc)
 	. = ..()
 	if(Obj && Obj.opacity)
-		if(!(--opaque_counter))
+		opaque_list -= Obj
+		if(!opaque_list.len)
 			reconsider_lights()
 
 /turf/proc/get_corners()
-	if(opaque_counter)
+	if(opaque_list.len)
 		return null // Since this proc gets used in a for loop, null won't be looped though.
 
 	return corners
@@ -101,13 +104,12 @@
 /turf/proc/handle_opacity_change(var/atom/opacity_changer)
 	if(opacity_changer)
 		if(opacity_changer.opacity)
-			if(!opaque_counter)
+			opaque_list |= opacity_changer
+			if(opaque_list.len == 1)
 				reconsider_lights()
-			opaque_counter++
 		else
-			var/old_counter = opaque_counter
-			opaque_counter--
-			if(old_counter && !opaque_counter)
+			opaque_list -= opacity_changer
+			if(!opaque_list.len)
 				reconsider_lights()
 	
 	

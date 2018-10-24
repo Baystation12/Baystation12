@@ -49,7 +49,7 @@
 
 	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 
-	W.opaque_counter = opaque_counter
+	W.opaque_list = opaque_list
 
 	if(ispath(N, /turf/simulated))
 		if(old_fire)
