@@ -84,10 +84,15 @@
 	emote_message_3p_target = "USER bows to TARGET."
 	emote_message_3p = "USER bows."
 
-/decl/emote/visible/salute
+/decl/emote/audible/salute
 	key = "salute"
 	emote_message_3p_target = "USER salutes TARGET."
 	emote_message_3p = "USER salutes."
+	emote_sound = list(
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/misc/salute.ogg'),
+		)
+	)
 
 /decl/emote/visible/flap
 	key = "flap"
@@ -318,10 +323,15 @@
 	check_restraints = TRUE
 	emote_message_3p = "USER shoves USER_THEIR hands in USER_THEIR pockets."
 
-/decl/emote/visible/rsalute
+/decl/emote/audible/rsalute
 	key = "rsalute"
 	check_restraints = TRUE
 	emote_message_3p = "USER returns the salute."
+	emote_sound = list(
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/misc/salute.ogg'),
+		)
+	)
 
 /decl/emote/visible/rshoulder
 	key = "rshoulder"

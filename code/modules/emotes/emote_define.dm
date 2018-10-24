@@ -19,6 +19,10 @@
 	var/check_restraints               // Can this emote be used while restrained?
 	var/conscious = 1				   // Do we need to be awake to emote this?
 
+	// three-dimensional array
+	// first is the species, associated to a list of genders, associated to a list of the sound effects to use
+	var/list/emote_sound = null
+
 /decl/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)
 		return emote_message_1p_target
@@ -86,7 +90,18 @@
 	do_extra(user, target)
 
 /decl/emote/proc/do_extra(var/atom/user, var/atom/target)
-	return
+	var/mob/living/carbon/human/H = user
+	if(istype(H) && islist(emote_sound))
+		if(islist(emote_sound[EMOTE_ALL_SPECIES]))
+			if(islist(emote_sound[EMOTE_ALL_SPECIES][EMOTE_ALL_GENDERS]))
+				playsound(user.loc, pick(emote_sound[EMOTE_ALL_SPECIES][EMOTE_ALL_GENDERS]), 50, 0)
+			else if(islist(emote_sound[EMOTE_ALL_SPECIES][H.gender]))
+				playsound(user.loc, pick(emote_sound[EMOTE_ALL_SPECIES][H.gender]), 50, 0)
+		else if (islist(emote_sound[H.species.name]))
+			if(islist(emote_sound[H.species.name][EMOTE_ALL_GENDERS]))
+				playsound(user.loc, pick(emote_sound[H.species.name][EMOTE_ALL_GENDERS]), 50, 0)
+			else if(islist(emote_sound[H.species.name][H.gender]))
+				playsound(user.loc, pick(emote_sound[H.species.name][H.gender]), 50, 0)
 
 /decl/emote/proc/check_user(var/atom/user)
 	return TRUE

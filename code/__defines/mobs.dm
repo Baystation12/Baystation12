@@ -321,3 +321,7 @@
 #define MOB_CLIMB_TIME_MEDIUM 50
 
 #define MOB_FACTION_NEUTRAL "neutral"
+
+//Used in mob emote classifications
+#define EMOTE_ALL_SPECIES "All"
+#define EMOTE_ALL_GENDERS "All"

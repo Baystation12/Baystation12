@@ -2,14 +2,6 @@
 	key = "burp"
 	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
-	// three-dimensional array
-	// first is the species, associated to a list of genders, associated to a list of the sound effects to use
-	var/list/emote_sound = null
-
-/decl/emote/audible/do_extra(var/atom/user)
-	var/mob/living/carbon/human/H = user
-	if(istype(H) && islist(emote_sound) && islist(emote_sound[H.species.name]) && islist(emote_sound[H.species.name][H.gender]))
-		playsound(user.loc, pick(emote_sound[H.species.name][H.gender]), 50, 0)
 
 /decl/emote/audible/deathgasp_alien
 	key = "deathgasp"
@@ -20,8 +12,7 @@
 	emote_message_3p = "USER whimpers."
 	emote_sound = list(
 		SPECIES_MONKEY = list(
-			MALE = list('sound/voice/monkey/whimper1.ogg', 'sound/voice/monkey/whimper2.ogg', 'sound/voice/monkey/whimper3.ogg'),
-			FEMALE = list('sound/voice/monkey/whimper1.ogg', 'sound/voice/monkey/whimper2.ogg', 'sound/voice/monkey/whimper3.ogg')
+			EMOTE_ALL_GENDERS = list('sound/voice/monkey/whimper1.ogg', 'sound/voice/monkey/whimper2.ogg', 'sound/voice/monkey/whimper3.ogg'),
 		)
 	)
 
@@ -54,8 +45,7 @@
 	emote_message_3p = "USER chirps!"
 	emote_sound = list(
 		SPECIES_DIONA = list(
-			MALE = list('sound/misc/nymphchirp.ogg'),
-			FEMALE = list('sound/misc/nymphchirp.ogg')
+			EMOTE_ALL_GENDERS = list('sound/misc/nymphchirp.ogg'),
 		)
 	)
 
@@ -108,6 +98,11 @@
 /decl/emote/audible/clap
 	key = "clap"
 	emote_message_3p = "USER claps."
+	emote_sound = list(
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/misc/clap.ogg'),
+		)
+	)
 
 /decl/emote/audible/chuckle
 	key = "chuckle"
@@ -165,17 +160,13 @@
 	emote_sound = list(
 		SPECIES_HUMAN = list(
 			MALE = list('sound/voice/human/scream_m1.ogg','sound/voice/human/scream_m2.ogg','sound/voice/human/scream_m3.ogg'),
-			FEMALE = list('sound/voice/human/scream_f1.ogg')
+			FEMALE = list('sound/voice/human/scream_f1.ogg','sound/voice/human/scream_f2.ogg','sound/voice/human/scream_f3.ogg')
 		),
 		SPECIES_MONKEY = list(
-			MALE = list('sound/voice/monkey/scream1.ogg'),
-			FEMALE = list('sound/voice/monkey/scream1.ogg')
+			EMOTE_ALL_GENDERS = list('sound/voice/monkey/scream1.ogg'),
 		),
 		SPECIES_IPC = list(
-			NEUTER = list('sound/voice/robot/scream1.ogg'),
-			MALE = list('sound/voice/robot/scream1.ogg'),
-			FEMALE = list('sound/voice/robot/scream1.ogg'),
-			PLURAL = list('sound/voice/robot/scream1.ogg')
+			EMOTE_ALL_GENDERS = list('sound/voice/robot/scream1.ogg'),
 		)
 	)
 
@@ -196,9 +187,8 @@
 	emote_message_3p_target = "USER hisses at TARGET."
 	emote_message_3p = "USER hisses."
 	emote_sound = list(
-		SPECIES_DIONA = list(
-			MALE = list('sound/voice/BugHiss.ogg'),
-			FEMALE = list('sound/voice/BugHiss.ogg')
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/voice/BugHiss.ogg'),
 		)
 	)
 
@@ -206,9 +196,8 @@
 	key ="buzz"
 	emote_message_3p = "USER buzzes its wings."
 	emote_sound = list(
-		SPECIES_NABBER = list(
-			MALE = list('sound/voice/BugBuzz.ogg'),
-			FEMALE = list('sound/voice/BugBuzz.ogg')
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/voice/BugBuzz.ogg'),
 		)
 	)
 
@@ -216,8 +205,7 @@
 	key ="chitter"
 	emote_message_3p = "USER chitters."
 	emote_sound = list(
-		SPECIES_DIONA = list(
-			MALE = list('sound/voice/Bug.ogg'),
-			FEMALE = list('sound/voice/Bug.ogg')
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/voice/Bug.ogg'),
 		)
 	)
