@@ -290,6 +290,7 @@
 #define SPECIES_ADHERENT    "Adherent"
 #define SPECIES_GOLEM       "Golem"
 #define SPECIES_YEOSA       "Yeosa'Unathi"
+#define SPECIES_MONKEY		"Monkey"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
