@@ -129,9 +129,9 @@
 	maxcharge = 100
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 5)
 
-/obj/item/weapon/cell/device/variable/Initialize(mapload, charge_amount)
+/obj/item/weapon/cell/device/variable/New(loc, charge_amount)
 	maxcharge = charge_amount
-	return ..(mapload)
+	return ..(loc)
 
 /obj/item/weapon/cell/device/standard
 	name = "standard device power cell"
