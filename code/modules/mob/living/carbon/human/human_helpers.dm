@@ -227,16 +227,14 @@
 		var/obj/item/grab/given_grab_type = all_grabobjects[grab_tag]
 		G = new given_grab_type(attacker, victim)
 
-	if(!G.pre_check())
+	if(QDELETED(G))
+		return 0
+	if(!G.pre_check() || !G.can_grab())
 		qdel(G)
 		return 0
 
-	if(G.can_grab())
-		G.init()
-		return 1
-	else
-		qdel(G)
-		return 0
+	G.init()
+	return 1
 
 /mob/living/carbon/human
 	var/list/cloaking_sources
