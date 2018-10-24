@@ -159,11 +159,14 @@
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
 //	log_debug("destination: [destination]")
-	if((flags & SHUTTLE_FLAGS_ZERO_G) && (destination.flags & SLANDMARK_FLAG_ZERO_G))
-		var/area/new_area = get_area(destination)
+	if((flags & SHUTTLE_FLAGS_ZERO_G))
+		var/new_grav = 1
+		if(destination.flags & SLANDMARK_FLAG_ZERO_G)
+			var/area/new_area = get_area(destination)
+			new_grav = new_area.has_gravity
 		for(var/area/our_area in shuttle_area)
-			if(our_area.has_gravity != new_area.has_gravity)
-				our_area.gravitychange(new_area.has_gravity)
+			if(our_area.has_gravity != new_grav)
+				our_area.gravitychange(new_grav)
 
 	for(var/turf/src_turf in turf_translation)
 		var/turf/dst_turf = turf_translation[src_turf]
