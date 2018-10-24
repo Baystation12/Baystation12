@@ -28,8 +28,18 @@
 	if(enabled)
 		bsod = 1
 		update_icon()
-		shutdown_computer()
 		to_chat(usr, "You press a hard-reset button on \the [src]. It displays a brief debug screen before shutting down.")
+		if(updating)
+			updating = FALSE
+			updates = 0
+			update_progress = 0
+			if(prob(10))
+				visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
+				hard_drive.take_damage(hard_drive.damage_malfunction)
+			else if(prob(5))
+				visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
+				hard_drive.take_damage(hard_drive.damage_failure)
+		shutdown_computer(FALSE)
 		spawn(2 SECONDS)
 			bsod = 0
 			update_icon()
@@ -285,7 +295,7 @@
 
 	if(enabled && .)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
-		
+
 	if(card_slot && card_slot.stored_card)
 		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
 

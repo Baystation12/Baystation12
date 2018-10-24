@@ -11,6 +11,7 @@
 	slot_flags = SLOT_ID | SLOT_BELT
 	stores_pen = TRUE
 	stored_pen = /obj/item/weapon/pen
+	receives_updates = FALSE
 
 /obj/item/modular_computer/pda/Initialize()
 	. = ..()
