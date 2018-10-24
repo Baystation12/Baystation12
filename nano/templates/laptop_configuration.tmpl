@@ -66,5 +66,21 @@
 	{{/if}}
 	<br><br>
 {{/for}}
+	<h3>Auto-Updater</h3>
+	<i>Automatically downloads and installs critical OS upgrades if NTNet is reachable. Disabling voids warranty.</i><br>
+	<div class="itemLabel">
+		State: 
+	</div>
+	<div class="itemContent">
+		{{:data.receives_updates ? "Enabled" : "Disabled"}}
+	</div>	
+	<div class="itemLabel">
+		Toggle Updates: 
+	</div>
+	<div class="itemContent">
+		{{:helper.link("ON", null, {'PC_enable_update' : 1}, data.receives_updates ? 'disabled' : null)}}
+		{{:helper.link("OFF", null, {'PC_disable_update' : 1}, data.receives_updates ? null : 'disabled')}}
+	</div>
+	<br><br>
 <hr><hr>
 <i>NTOS v2.0.4b Copyright NanoTrasen 2557 - 2559</i>

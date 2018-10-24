@@ -59,3 +59,10 @@
 
 	var/stores_pen = FALSE
 	var/obj/item/weapon/pen/stored_pen
+
+	//Pain and suffering
+	var/receives_updates = TRUE
+	var/updating = FALSE
+	var/updates = 0
+	var/update_progress = 0
+	var/update_postshutdown
