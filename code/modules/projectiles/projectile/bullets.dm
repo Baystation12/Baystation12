@@ -129,16 +129,16 @@
 	damage = 26.5 //.45
 
 /obj/item/projectile/bullet/pistol/medium/smg
-	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
+	fire_sound = 'sound/weapons/gunshot/mp5.ogg'
 	damage = 28 //10mm
 	penetration_modifier = 0.8
 
 /obj/item/projectile/bullet/pistol/medium/revolver
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = 'sound/weapons/gunshot/45_pistol.ogg'
 	damage = 30 //.44 magnum or something
 
 /obj/item/projectile/bullet/pistol/strong //matebas
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = 'sound/weapons/gunshot/45_pistol.ogg'
 	damage = 60 //.50AE
 	armor_penetration = 30
 

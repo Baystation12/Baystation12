@@ -10,7 +10,7 @@
 /obj/item/projectile/energy/flash
 	name = "chemical shell"
 	icon_state = "bullet"
-	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	fire_sound = 'sound/weapons/gunshot/9mm_pistol.ogg'
 	damage = 5
 	agony = 20
 	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.

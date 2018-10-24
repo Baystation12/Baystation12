@@ -77,6 +77,9 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 
+	if(Proj.damage_type == BRUTE && prob(15))
+		playsound(src, pick('sound/weapons/guns/ricochet1.ogg', 'sound/weapons/guns/ricochet2.ogg', 'sound/weapons/guns/ricochet3.ogg', 'sound/weapons/guns/ricochet4.ogg'), 100, 1)
+
 	if(reinf_material)
 		if(Proj.damage_type == BURN)
 			proj_damage /= reinf_material.burn_armor
