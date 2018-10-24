@@ -125,7 +125,7 @@
 	min_power = 30
 
 /datum/hallucination/gunfire/start()
-	gunshot = pick('sound/weapons/gunshot/gunshot_strong.ogg', 'sound/weapons/gunshot/gunshot2.ogg', 'sound/weapons/gunshot/shotgun.ogg', 'sound/weapons/gunshot/gunshot.ogg','sound/weapons/Taser.ogg')
+	gunshot = pick('sound/weapons/gunshot/9mm_pistol.ogg', 'sound/weapons/gunshot/45_pistol.ogg', 'sound/weapons/gunshot/shotgun.ogg', 'sound/weapons/gunshot/bullpup.ogg','sound/weapons/Taser.ogg','sound/weapons/gunshot/c20r.ogg','sound/weapons/gunshot/deagle.ogg','sound/weapons/gunshot/doublebarrel.ogg','sound/weapons/gunshot/m60.ogg',)
 	origin = locate(holder.x + rand(4,8), holder.y + rand(4,8), holder.z)
 	holder.playsound_local(origin,gunshot,50)
 

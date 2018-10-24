@@ -14,7 +14,7 @@
 	melee_damage_lower = 2
 	melee_damage_upper = 3
 	attacktext = "clawed"
-	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	projectilesound = 'sound/weapons/gunshot/kriss.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
 	faction = "hivebot"
 	min_gas = null

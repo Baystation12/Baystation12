@@ -7,6 +7,7 @@
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
+	fire_sound = 'sound/weapons/gunshot/revolver.ogg'
 
 /obj/item/weapon/gun/projectile/military
 	name = "military .45 pistol"
@@ -19,6 +20,7 @@
 	load_method = MAGAZINE
 	accuracy = 0.35
 	fire_delay = 6.5
+	fire_sound = 'sound/weapons/gunshot/45_pistol.ogg'
 
 /obj/item/weapon/gun/projectile/military/on_update_icon()
 	..()
@@ -38,6 +40,7 @@
 	fire_delay = 5.5
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
+	fire_sound = 'sound/weapons/gunshot/45_pistol.ogg'
 
 /obj/item/weapon/gun/projectile/sec/on_update_icon()
 	..()
@@ -76,6 +79,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
 	allowed_magazines = /obj/item/ammo_magazine/c45m
+	fire_sound = 'sound/weapons/gunshot/silencedpistol.ogg'
 
 /obj/item/weapon/gun/projectile/magnum_pistol
 	name = ".50 magnum pistol"
@@ -91,6 +95,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/a50
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/deagle.ogg'
 
 /obj/item/weapon/gun/projectile/magnum_pistol/on_update_icon()
 	..()
@@ -114,6 +119,7 @@
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gryojet.ogg'
 
 /obj/item/weapon/gun/projectile/gyropistol/on_update_icon()
 	..()
@@ -132,6 +138,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 	accuracy = 0.35
+	fire_sound = 'sound/weapons/gunshot/9mm_pistol.ogg'
 
 /obj/item/weapon/gun/projectile/beretta/on_update_icon()
 	..()
@@ -153,6 +160,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 	allowed_magazines = /obj/item/ammo_magazine/mc9mm
+	fire_sound = 'sound/weapons/gunshot/9mm_pistol.ogg'
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "holdout signal pistol"

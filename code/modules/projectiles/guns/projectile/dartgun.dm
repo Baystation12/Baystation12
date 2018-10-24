@@ -50,7 +50,7 @@
 	item_state = null
 
 	caliber = "dart"
-	fire_sound = 'sound/weapons/empty.ogg'
+	fire_sound = 'sound/weapons/gunshot/dartgun.ogg'
 	fire_sound_text = "a metallic click"
 	screen_shake = 0
 	silenced = 1

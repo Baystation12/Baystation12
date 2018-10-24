@@ -17,6 +17,7 @@
 	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "gun_wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
@@ -53,6 +54,7 @@
 	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/shotgun
 	one_hand_penalty = 3 //a little heavier than the regular shotgun
+	fire_sound = 'sound/weapons/gunshot/spas12.ogg'
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
@@ -73,6 +75,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	one_hand_penalty = 2
 	wielded_item_state = "gun_wielded"
+	fire_sound = 'sound/weapons/gunshot/doublebarrel.ogg'
 
 	burst_delay = 0
 	firemodes = list(

@@ -1,7 +1,7 @@
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = null
 	damage = 50
 	damage_type = BRUTE
 	nodamage = 0
@@ -122,7 +122,7 @@
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
 /obj/item/projectile/bullet/pistol
-	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	fire_sound = 'sound/weapons/gunshot/9mm_pistol.ogg'
 	damage = 25 //9mm, .38, etc
 
 /obj/item/projectile/bullet/pistol/medium

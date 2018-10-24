@@ -12,6 +12,7 @@
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/revolver.ogg'
 
 /obj/item/weapon/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
@@ -46,6 +47,7 @@
 	caliber = ".50"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	ammo_type = /obj/item/ammo_casing/a50
+	fire_sound = 'sound/weapons/gunshot/m60.ogg'
 
 /obj/item/weapon/gun/projectile/revolver/detective
 	name = "revolver"
@@ -80,6 +82,7 @@
 	desc = "A custom-built revolver, based off the semi-popular Detective Special model."
 	icon_state = "deckard-empty"
 	ammo_type = /obj/item/ammo_magazine/c38/rubber
+	fire_sound = 'sound/weapons/gunshot/45_pistol.ogg'
 
 /obj/item/weapon/gun/projectile/revolver/deckard/emp
 	ammo_type = /obj/item/ammo_casing/c38/emp
@@ -125,3 +128,4 @@
 	caliber = ".44"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	ammo_type = /obj/item/ammo_casing/c44
+	fire_sound = 'sound/weapons/gunshot/45_pistol.ogg'
