@@ -1,4 +1,4 @@
-//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE 
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aaa" = (
 /turf/space,
 /area/space)
@@ -15861,6 +15861,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod17/station)
+"cbj" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/beige{
+	dir = 9
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "ccb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod15,
 /obj/effect/wingrille_spawn/reinforced,
@@ -16090,6 +16102,22 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/security/brig)
+"cuT" = (
+/obj/structure/table/standard,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "cvb" = (
 /obj/machinery/atmospherics/unary/freezer{
 	dir = 2;
@@ -17307,6 +17335,16 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
+"dQA" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 4;
+	pixel_y = -26
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/opscheck)
 "dRb" = (
 /obj/structure/morgue,
 /obj/machinery/light/small{
@@ -21396,6 +21434,10 @@
 /obj/random/obstruction,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/foreport)
+"ivh" = (
+/obj/machinery/status_display,
+/turf/simulated/wall/r_wall/prepainted,
+/area/rnd/misc_lab)
 "ivT" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -25769,6 +25811,28 @@
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
+"nDd" = (
+/obj/structure/table/standard,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/weapon/hand_labeler,
+/obj/effect/floor_decal/corner/beige/three_quarters{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/obj/item/weapon/reagent_containers/spray/cleaner{
+	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
+	name = "Chemistry Cleaner"
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "nDB" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/computer/guestpass{
@@ -31842,6 +31906,11 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
+"xMP" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/rnd/misc_lab)
 "xPU" = (
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
@@ -31913,65 +31982,6 @@
 /obj/structure/closet/toolcloset,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralstarboard)
-"zSy" = (
-/obj/machinery/status_display,
-/turf/simulated/wall/r_wall/prepainted,
-/area/rnd/misc_lab)
-"BFy" = (
-/obj/structure/table/standard,
-/obj/item/stack/package_wrap/twenty_five,
-/obj/item/weapon/hand_labeler,
-/obj/effect/floor_decal/corner/beige/three_quarters{
-	dir = 1
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 32
-	},
-/obj/item/weapon/reagent_containers/spray/cleaner{
-	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
-	name = "Chemistry Cleaner"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
-"HyY" = (
-/obj/structure/table/standard,
-/obj/machinery/reagent_temperature,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/rnd/misc_lab)
-"MxQ" = (
-/obj/structure/table/standard,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/reagent_temperature/cooler,
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
-"WGQ" = (
-/obj/structure/table/standard,
-/obj/effect/floor_decal/corner/beige{
-	dir = 9
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
-/obj/machinery/reagent_temperature,
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
 
 (1,1,1) = {"
 aaa
@@ -55498,7 +55508,7 @@ aoK
 lXb
 aqR
 fZb
-WGQ
+cbj
 aud
 uuS
 awv
@@ -55700,7 +55710,7 @@ idb
 kmb
 aqS
 asa
-MxQ
+cuT
 aue
 avq
 aww
@@ -56305,7 +56315,7 @@ jCM
 iub
 fpb
 aqT
-BFy
+nDd
 bkN
 gFb
 bLJ
@@ -57327,7 +57337,7 @@ qmw
 aCn
 aDy
 aEy
-aFI
+dQA
 awX
 kpb
 pjb
@@ -57736,7 +57746,7 @@ awX
 qpb
 pnb
 pGb
-HyY
+xMP
 gcY
 qDb
 qWb
@@ -57939,7 +57949,7 @@ aHQ
 aHQ
 aHQ
 aHQ
-zSy
+ivh
 aHQ
 aHQ
 aHQ
