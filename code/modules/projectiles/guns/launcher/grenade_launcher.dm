@@ -106,8 +106,8 @@
 	return TRUE
 
 // For uplink purchase, comes loaded with a random assortment of grenades
-/obj/item/weapon/gun/launcher/grenade/loaded/New()
-	..()
+/obj/item/weapon/gun/launcher/grenade/loaded/Initialize()
+	. = ..()
 
 	var/list/grenade_types = list(
 		/obj/item/weapon/grenade/anti_photon = 2,
