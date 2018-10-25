@@ -121,7 +121,6 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 	required_education = EDUCATION_TIER_TRADE
-	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/biomech
 	title = "Biomechanical Engineer"
@@ -149,7 +148,7 @@
 	                    SKILL_CONSTRUCTION 	= SKILL_EXPERT,
 	                    SKILL_ELECTRICAL 	= SKILL_EXPERT)
 	skill_points = 24
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_solgov_crew)
 	minimal_access = list()
 	required_education = EDUCATION_TIER_MEDSCHOOL
 
@@ -257,4 +256,4 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
-	required_education = EDUCATION_TIER_BASIC
+	required_education = EDUCATION_TIER_BACHELOR

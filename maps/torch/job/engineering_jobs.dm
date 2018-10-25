@@ -44,8 +44,8 @@
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor)
-	required_education = EDUCATION_TIER_BACHELOR
-	maximum_education = EDUCATION_TIER_MASTERS
+	required_education = EDUCATION_TIER_TRADE
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/senior_engineer/get_description_blurb()
 	return "You are the Senior Engineer. You are a veteran SNCO. You are subordinate to the Chief Engineer though you may have many years more experience than them and your subordinates are the rest of engineering. You should be an expert in practically every engineering area and familiar and possess leadership skills. Coordinate the team and ensure the smooth running of the department along with the Chief Engineer."

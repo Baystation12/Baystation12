@@ -126,7 +126,7 @@
 
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
 	required_education = EDUCATION_TIER_DROPOUT
-	maximum_education = EDUCATION_TIER_TRADE
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/xenolife_technician
 	title = "Xenolife Technician"
