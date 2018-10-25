@@ -20,15 +20,17 @@
 		GLOB._preloader.load(src)
 
 	var/do_initialize = SSatoms.initialized
+	var/list/created = SSatoms.created_atoms
 	if(do_initialize != INITIALIZATION_INSSATOMS)
 		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
 		if(SSatoms.InitAtom(src, args))
 			//we were deleted
 			return
-
-	var/list/created = SSatoms.created_atoms
-	if(created)
-		created += src
+	else if(created)
+		var/list/argument_list
+		if(length(args) > 1)
+			argument_list = args.Copy(2)
+			created[src] = argument_list
 
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		verbs += /atom/proc/climb_on
@@ -40,7 +42,7 @@
 //Called from base of New if the map is not being loaded. mapload = FALSE
 //This base must be called or derivatives must set initialized to TRUE
 //must not sleep
-//Other parameters are passed from New (excluding loc), this does not happen if mapload is TRUE
+//Other parameters are passed from New (excluding loc)
 //Must return an Initialize hint. Defined in __DEFINES/subsystems.dm
 
 /atom/proc/Initialize(mapload, ...)
