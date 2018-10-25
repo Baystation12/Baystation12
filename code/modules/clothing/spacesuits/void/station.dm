@@ -218,6 +218,12 @@
 	icon_state = "rig0-secalt"
 	item_state = "secalt_helm"
 	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
+	sprite_sheets = list(
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/hats.dmi',
+		)
 
 /obj/item/clothing/suit/space/void/security/alt
 	icon_state = "rig-secalt"
@@ -225,6 +231,12 @@
 	desc = "A heavily armored voidsuit, designed to intimidate people who find black intimidating. Surprisingly slimming."
 	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
+	sprite_sheets = list(
+		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/suits.dmi',
+		)
 
 /obj/item/clothing/suit/space/void/security/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/security/alt
