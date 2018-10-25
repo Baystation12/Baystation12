@@ -7,16 +7,10 @@
 	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
 	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
 	var/tmp/list/datum/lighting_corner/corners
-	var/list/opaque_list = list()
+	var/list/opaque_list
 
 /turf/New()
-	if(opacity)
-		opaque_list |= src
 	..()
-	
-/turf/set_opacity()
-	. = ..()
-	handle_opacity_change(src)
 
 // Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
@@ -102,7 +96,7 @@
 		corners[i] = new /datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i])
 
 /turf/proc/handle_opacity_change(var/atom/opacity_changer)
-	if(opacity_changer)
+	if(opacity_changer && !(src.opacity))
 		if(opacity_changer.opacity)
 			opaque_list |= opacity_changer
 			if(opaque_list.len == 1)
