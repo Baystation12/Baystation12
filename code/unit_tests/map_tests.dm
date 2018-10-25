@@ -668,18 +668,18 @@ datum/unit_test/ladder_check/start_test()
 		fail("Improperly connected junction detected.")
 		return
 	for(var/target_tag in all_tagged_destinations)
-		var/tag = all_tagged_bins[target_tag] ? target_tag : pick(all_tagged_bins)
-		spawn_package(tag, target_tag)
+		var/start_tag = all_tagged_bins[target_tag] ? target_tag : pick(all_tagged_bins)
+		spawn_package(start_tag, target_tag)
 		for(var/i in 1 to extra_spawns)
 			spawn_package(pick(all_tagged_bins), target_tag) // This potentially helps catch errors in junction logic.
 
-/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/spawn_package(tag, target_tag)
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/spawn_package(start_tag, target_tag)
 	var/obj/structure/disposalholder/unit_test/package = new()
 	package.tomail = 1
 	package.destinationTag = target_tag
-	package.start(all_tagged_bins[tag])
+	package.start(all_tagged_bins[start_tag])
 	package.test = src
-	packages_awaiting_delivery[package] = tag
+	packages_awaiting_delivery[package] = start_tag
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
@@ -695,10 +695,15 @@ datum/unit_test/ladder_check/start_test()
 		if(. == PROCESS_KILL)
 			if(QDELETED(src) || !test.packages_awaiting_delivery[src])
 				return
-			test.make_fail_message(src)
+			test.log_bad(log_info_line(src))
 			test.failed = TRUE
 			test.packages_awaiting_delivery -= src
 			return
+
+/obj/structure/disposalholder/unit_test/get_log_info_line()
+	var/location = log_info_line(get_turf(src))
+	var/expected_loc = log_info_line(get_turf(test.all_tagged_destinations[destinationTag]))
+	return "A package routed from [test.packages_awaiting_delivery[src]] to [destinationTag] was misrouted to [location]; expected location was [expected_loc]."
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/check_result()
 	. = 1
@@ -710,27 +715,19 @@ datum/unit_test/ladder_check/start_test()
 		return
 	return 0
 
-/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/make_fail_message(var/obj/structure/disposalholder/package)
-	var/turf/T = get_turf(package)
-	var/location = T ? "([T.x], [T.y], [T.z])" : "nullspace"
-	T = get_turf(all_tagged_destinations[package.destinationTag])
-	var/expected_loc = T ? "([T.x], [T.y], [T.z])" : "nullspace"
-	log_bad("A package routed from [tag] to [package.destinationTag] was misrouted to [location]; expected location was [expected_loc].")
-
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(var/obj/structure/disposalholder/package)
-	var/tag = packages_awaiting_delivery[package]
-	if(!tag)
+	if(!packages_awaiting_delivery[package])
 		return
 	var/obj/structure/disposalpipe/trunk/trunk = package.loc
 	packages_awaiting_delivery -= package
 
 	if(!istype(trunk))
-		make_fail_message(package)
+		log_bad(log_info_line(package))
 		failed = TRUE
 		return
 	var/obj/linked = trunk.linked
 	if(all_tagged_destinations[package.destinationTag] != linked)
-		make_fail_message(package)
+		log_bad(log_info_line(package))
 		failed = TRUE
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/get_bin_from_junction(var/obj/structure/disposalpipe/sortjunction/sort)
