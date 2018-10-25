@@ -1,6 +1,0 @@
-author: "Sbotkin"
-delete-after: True
-changes: 
-  - rscadd: "Experienced shooter will disable the safety if they draw a gun with harm intent."
-  - tweak: "Captain's revolver (the one in the showcase) spawns with no ammo."
-  - bugfix: "Fixed a bug with safety state not showing after unholstering."
