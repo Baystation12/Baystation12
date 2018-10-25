@@ -1091,11 +1091,11 @@
 		if("Security")
 			if(helmet)
 				helmet.SetName("security voidsuit helmet")
-				helmet.icon_state = "rig0-sec"
-				helmet.item_state = "sec_helm"
+				helmet.icon_state = "rig0-secalt"
+				helmet.item_state = "secalt_helm"
 			if(suit)
 				suit.SetName("security voidsuit")
-				suit.icon_state = "rig-sec"
+				suit.icon_state = "rig-secalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "sec_voidsuit",
 					slot_r_hand_str = "sec_voidsuit",
