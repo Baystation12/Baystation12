@@ -25,7 +25,7 @@
 
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
-	if(user.mind && (user.mind.assigned_role == "Chaplain"))
+	if(user.mind && (user.mind.assigned_role == "Counselor"))
 		if(A.reagents && A.reagents.has_reagent(/datum/reagent/water)) //blesses all the water in the holder
 			to_chat(user, "<span class='notice'>You bless \the [A].</span>") // I wish it was this easy in nethack
 			var/water2holy = A.reagents.get_reagent_amount(/datum/reagent/water)
@@ -72,4 +72,3 @@
 						break
 				if(i == 0)
 					icon_changed = 1
-					
