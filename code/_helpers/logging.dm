@@ -221,7 +221,9 @@
 	if(islist(d))
 		var/list/L = list()
 		for(var/e in d)
-			L += log_info_line(e)
+			// Indexing on numbers just gives us the same number again in the best case and causes an index out of bounds runtime in the worst
+			var/v = isnum(e) ? null : d[e]
+			L += "[log_info_line(e)][v ? " - [log_info_line(v)]" : ""]"
 		return "\[[jointext(L, ", ")]\]" // We format the string ourselves, rather than use json_encode(), because it becomes difficult to read recursively escaped "
 	if(!istype(d))
 		return json_encode(d)
