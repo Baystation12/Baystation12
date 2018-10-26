@@ -909,7 +909,7 @@
 			if(O.edge || O.sharp)
 				if(prob(1))
 					stomach_contents.Remove(O)
-					if(can_feel_pain())
+					if(can_feel_pain() && O.can_embed())
 						to_chat(src, "<span class='danger'>You feel something rip out of your stomach!</span>")
 						groin.embed(O)
 				else if(prob(5))
