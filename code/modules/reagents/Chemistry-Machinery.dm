@@ -374,11 +374,11 @@
 	if(istype(O,/obj/item/weapon/storage/plants))
 		var/obj/item/weapon/storage/plants/bag = O
 		var/failed = 1
-		for(var/obj/item/G in O.contents)
+		for(var/obj/item/G in O)
 			if(!G.reagents || !G.reagents.total_volume)
 				continue
 			failed = 0
-			bag.remove_from_storage(G, src)
+			bag.remove_from_storage(G, src, 1)
 			holdingitems += G
 			if(holdingitems && holdingitems.len >= limit)
 				break
@@ -386,6 +386,7 @@
 		if(failed)
 			to_chat(user, "Nothing in the plant bag is usable.")
 			return 1
+		bag.finish_bulk_removal()
 
 		if(!O.contents.len)
 			to_chat(user, "You empty \the [O] into \the [src].")

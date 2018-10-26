@@ -69,8 +69,9 @@
 			if(!user.stat && src.uses < src.max_uses)
 				src.AddUses(1)
 				amt_inserted++
-				S.remove_from_storage(L, T)
+				S.remove_from_storage(L, T, 1)
 				qdel(L)
+		S.finish_bulk_removal()
 		if(amt_inserted)
 			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
 			add_fingerprint(user)
