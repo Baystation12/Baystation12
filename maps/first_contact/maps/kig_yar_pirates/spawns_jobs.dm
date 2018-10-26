@@ -95,21 +95,11 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
-/decl/hierarchy/outfit/unggoy
-	name = "Unggoy (Deacon)"
-
-	l_ear = /obj/item/device/radio/headset/covenant
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
-	suit_store = /obj/item/weapon/gun/energy/plasmapistol
-	mask = /obj/item/clothing/mask/rebreather
-	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = /obj/item/weapon/grenade/plasma
+/decl/hierarchy/outfit/unggoy/first_contact
 	l_hand = /obj/item/language_learner/unggoy_to_common
 
-	flags = 0
-
-	hierarchy_type = /decl/hierarchy/outfit/job
+/decl/hierarchy/outfit/unggoy/major/first_contact
+	l_hand = /obj/item/language_learner/unggoy_to_common
 
 /datum/job/covenant/kigyarpirate
 	title = "Kig-Yar Ship - Pirate"
@@ -119,6 +109,7 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
+	faction_whitelist = "Covenant"
 
 /datum/job/covenant/kigyarpirate/captain
 	title = "Kig-Yar Ship - Captain"
@@ -128,12 +119,23 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate/captain
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
+	faction_whitelist = "Covenant"
 
-/datum/job/covenant/unggoy_deacon
+/datum/job/covenant/unggoy
 	title = "Kig-Yar Ship - Unggoy Crewmember"
 	total_positions = 6
 	spawn_positions = 6
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/unggoy
+	outfit_type = /decl/hierarchy/outfit/unggoy/first_contact
 	access = list(230,250)
 	spawnpoint_override = "Unggoy Pirate Spawn"
+
+/datum/job/covenant/unggoy_deacon
+	title = "Kig-Yar Ship - Unggoy Crewmember Deacon"
+	total_positions = 3
+	spawn_positions = 3
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/unggoy/major/first_contact
+	access = list(230,250)
+	spawnpoint_override = "Unggoy Pirate Spawn"
+	faction_whitelist = "Covenant"

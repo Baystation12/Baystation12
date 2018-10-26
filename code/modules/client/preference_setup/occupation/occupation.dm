@@ -111,8 +111,9 @@
 		if(job.total_positions == 0 && job.spawn_positions == 0)
 			. += "<del>[rank]</del></td><td><b> \[UNAVAILABLE]</b></td></tr>"
 			continue
-		if(jobban_isbanned(user, rank))
-			. += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
+		var/isbanned = jobban_isbanned(user, rank, job.is_whitelisted, job)
+		if(isbanned)
+			. += "<del>[rank]</del></td><td><b> \[[isbanned]]</b></td></tr>"
 			continue
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
@@ -123,7 +124,7 @@
 			continue
 
 		if(!job.is_species_allowed(S))
-			. += "<del>[rank]</del></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
+			. += "<del>[rank]</del></td><td><b> \[WRONG SPECIES]</b></td></tr>"
 			continue
 
 		if(job.allowed_branches)
