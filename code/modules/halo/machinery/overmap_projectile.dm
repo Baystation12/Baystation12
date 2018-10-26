@@ -55,7 +55,10 @@
 
 /obj/item/projectile/overmap/proc/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
-	explosion(turf_to_explode,3,5,7,10)
+	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
+		z_level--
+	turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
+	explosion(turf_to_explode,9,15,21,30) //explosion(turf_to_explode,3,5,7,10) original tiny explosion
 
 /obj/item/projectile/overmap/proc/do_z_level_proj_spawn(var/z_level,var/obj/effect/overmap/ship/overmap_object_hit)
 	var/start_co_ords
@@ -93,7 +96,10 @@
 			return 0
 	chosen_impact_z = pick(overmap_object.map_z)
 	if(istype(impacted,/obj/effect/overmap/sector))
-		do_sector_hit(chosen_impact_z,impacted)
+		do_sector_hit(overmap_object.map_z[1],impacted) //this is so it only hits the upper z-levels in planets
+		if(istype(src,/obj/item/projectile/overmap/mac))
+			overmap_object.hit++
+
 	else if(istype(impacted,/obj/effect/overmap/ship))
 		do_z_level_proj_spawn(chosen_impact_z,overmap_object)
 	qdel(src)
