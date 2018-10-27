@@ -61,7 +61,7 @@
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
-/decl/hierarchy/outfit/kigyarcorvette/sangheili_ultra
+/decl/hierarchy/outfit/sangheilicorvette/sangheili_ultra
 	name = "Sangheili - Ultra"
 
 	l_ear = /obj/item/device/radio/headset/covenant
@@ -80,7 +80,7 @@
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
-/decl/hierarchy/outfit/kigyarcorvette/sangheili_major
+/decl/hierarchy/outfit/sangheilicorvette/sangheili_major
 	name = "Sangheili - Major"
 
 	l_ear = /obj/item/device/radio/headset/covenant
@@ -98,7 +98,7 @@
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
-/decl/hierarchy/outfit/kigyarcorvette/sangheili_minor
+/decl/hierarchy/outfit/sangheilicorvette/sangheili_minor
 	name = "Sangheili - Minor"
 
 	l_ear = /obj/item/device/radio/headset/covenant
