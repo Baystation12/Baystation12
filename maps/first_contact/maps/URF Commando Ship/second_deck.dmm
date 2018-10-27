@@ -1,0 +1,108 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall/r_wall,/area/space)
+"c" = (/obj/machinery/chemical_dispenser/full,/obj/item/weapon/reagent_containers/glass/beaker/large,/turf/simulated/floor/tiled/white,/area/space)
+"d" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/space)
+"e" = (/turf/simulated/floor/tiled/white,/area/space)
+"f" = (/obj/item/weapon/storage/firstaid/fire,/obj/item/weapon/storage/firstaid/fire,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/space)
+"g" = (/obj/item/weapon/storage/firstaid/combat,/obj/item/weapon/storage/firstaid/combat,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/space)
+"h" = (/obj/machinery/chemical_dispenser/ert,/obj/item/weapon/reagent_containers/glass/beaker/large,/turf/simulated/floor/tiled/white,/area/space)
+"i" = (/obj/item/weapon/storage/firstaid/regular,/obj/item/weapon/storage/firstaid/regular,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/space)
+"j" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/space)
+"k" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled/white,/area/space)
+"l" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/space)
+"m" = (/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/space)
+"n" = (/turf/simulated/floor/tiled/dark,/area/space)
+"o" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/masks,/turf/simulated/floor/tiled/white,/area/space)
+"p" = (/obj/item/weapon/storage/firstaid/toxin,/obj/item/weapon/storage/firstaid/toxin,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/space)
+"q" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/masks,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/space)
+"r" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{name = "anesthetic pump  "; pixel_y = 30},/turf/simulated/floor/tiled/white,/area/space)
+"s" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/space)
+"t" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/space)
+"u" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (EAST)"; icon_state = "sleeper_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/space)
+"v" = (/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/space)
+"w" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/machinery/door/firedoor,/turf/simulated/floor,/area/space)
+"x" = (/obj/structure/table/standard,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled/white,/area/space)
+"y" = (/obj/structure/bed,/obj/item/weapon/bedsheet/medical,/turf/simulated/floor/tiled/white,/area/space)
+"z" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (EAST)"; icon_state = "body_scannerconsole"; dir = 4},/turf/simulated/floor/tiled/white,/area/space)
+"A" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (EAST)"; icon_state = "body_scanner_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/space)
+"B" = (/obj/structure/fitness/weightlifter,/turf/simulated/floor/carpet,/area/space)
+"C" = (/turf/simulated/floor/carpet,/area/space)
+"D" = (/obj/machinery/organ_printer/flesh/mapped{max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/space)
+"E" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/space)
+"F" = (/obj/structure/fitness/punchingbag,/turf/simulated/floor/carpet,/area/space)
+"G" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/white,/area/space)
+"H" = (/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/space)
+"I" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (NORTHWEST)"; icon_state = "spline_fancy"; dir = 9},/turf/simulated/floor/carpet,/area/space)
+"J" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (NORTH)"; icon_state = "spline_fancy"; dir = 1},/turf/simulated/floor/carpet,/area/space)
+"K" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (NORTHEAST)"; icon_state = "spline_fancy"; dir = 5},/turf/simulated/floor/carpet,/area/space)
+"L" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (WEST)"; icon_state = "spline_fancy"; dir = 8},/turf/simulated/floor/carpet,/area/space)
+"M" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (EAST)"; icon_state = "spline_fancy"; dir = 4},/turf/simulated/floor/carpet,/area/space)
+"N" = (/obj/machinery/vending/fitness,/turf/simulated/floor/carpet,/area/space)
+"O" = (/turf/simulated/floor/plating,/area/space)
+"P" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (SOUTHWEST)"; icon_state = "spline_fancy"; dir = 10},/turf/simulated/floor/carpet,/area/space)
+"Q" = (/obj/effect/floor_decal/spline/fancy/wood,/turf/simulated/floor/carpet,/area/space)
+"R" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (SOUTHEAST)"; icon_state = "spline_fancy"; dir = 6},/turf/simulated/floor/carpet,/area/space)
+"S" = (/obj/structure/stairs,/turf/simulated/floor/tiled/dark,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaabbbbbbbbbbaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbaaaaabbbbbbbbaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbaaaaaaaaabbbbbbaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbaaaaaabbbbbbbbaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbcdefgbbbbaaabbbbbbbbbbbbaaaaa
+aaaaaaaaaaaaaaaaaabaaaaabbbbbbheeeeeibbbbbbbbbbbbbbbaaaaaaaa
+aaaaaaaaaaaaaaaaaabbbbbbbbbbbbjkellembbbnnnnnnbbbaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabbbbbbbbbbbbboeellepbbbnnnnnnnnbaaaaaaaaaaa
+aaaaaaaaaaaaaaabbbbnnnnnnbqrstueeeeevbbbnnnnnnnnbaaaaaaaaaaa
+aaaaaaaaaaabwwwbbbnnnnnnnbxeetueyeyezAbbnnnnnnnnbaaaaaaaaaaa
+aaaaaaabwwwbBCCBbbnnnnnnnbDeeEeeyeyeeebbnnnnnnnnbaaaaaaaaaaa
+aaaaaaawFCCCCCCCbbbnnnnnnbbbbbbGbbbGbbbbnnnnnnnnbaaaaaaaaaaa
+aaaaaawwCCCCCCCCHnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbaaaaaaaaaaa
+aaaaaawFCCIJJKCCHnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbbbbaaaaaaaaaa
+aaaaabbbCCLCCMCNbbbbbbbbbbbbbbbbbbbbbbbbnnnnnnOObbaaaaaaaaaa
+aaaaaawFCCPQQRCCHnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbbbbaaaaaaaaaa
+aaaaaawwCCCCCCCCHnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbaaaaaaaaaaa
+aaaaaaawFCCCCCCCbbbnbbbnbbbnbbbnbbbnbnnbnnnnnnnnbaaaaaaaaaaa
+aaaaaaabwwwbBCCBbbnnnnnnnnnnnbOOOOOObSSbnnnnnnnnbaaaaaaaaaaa
+aaaaaaaaaaabwwwbbbnnnnnnnnnnnbOOOOOObbbbnnnnnnnnbaaaaaaaaaaa
+aaaaaaaaaaaaaaabbbbnnnnnnnnnnbOOOOOOObbbnnnnnnnnbaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabbbbbbbbbbbbbOOOOOOObbbnnnnnnnnbaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabbbbbbbbbbbbOOOOOOObbbnnnnnnbbbaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabaaaaabbbbbbOOOOOOObbbbbbbbbbbbbbbaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbOOOOOOObbbaaabbbbbbbbbbbbaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbOOOOObbaaaaaabbbbbbbbaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbaaaaaaaaabbbbbbaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbaaaaabbbbbbbbaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaabbbbbbbbbbaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
