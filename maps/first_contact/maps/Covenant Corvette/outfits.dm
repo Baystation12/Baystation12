@@ -70,7 +70,7 @@
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = 	/obj/item/weapon/melee/energy/sword/pirate
+	r_pocket = 	/obj/item/weapon/melee/energy/elite_sword/dagger
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra
 	head = /obj/item/clothing/head/helmet/sangheili/ultra
