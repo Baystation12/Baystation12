@@ -45,5 +45,5 @@ changes:
   - bugfix: "Mechs can now go upstairs"
   - bugfix: "MAC rounds no longer hit random z-levels in planets and other overmap objects" 
   - imageadd: "Added 'bombed' icons for exoplanets"
-  - imageadd: "Added kig-yar ranger suit sprites (courtesy of: Eluxor)"
+  - imageadd: "Added kig-yar ranger suit sprites courtesy of Eluxor"
 		
