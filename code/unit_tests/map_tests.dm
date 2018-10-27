@@ -695,15 +695,15 @@ datum/unit_test/ladder_check/start_test()
 		if(. == PROCESS_KILL)
 			if(QDELETED(src) || !test.packages_awaiting_delivery[src])
 				return
-			test.log_bad(log_info_line(src))
-			test.failed = TRUE
-			test.packages_awaiting_delivery -= src
+			log_and_fail()
 			return
 
-/obj/structure/disposalholder/unit_test/get_log_info_line()
+/obj/structure/disposalholder/unit_test/proc/log_and_fail()
 	var/location = log_info_line(get_turf(src))
 	var/expected_loc = log_info_line(get_turf(test.all_tagged_destinations[destinationTag]))
-	return "A package routed from [test.packages_awaiting_delivery[src]] to [destinationTag] was misrouted to [location]; expected location was [expected_loc]."
+	test.log_bad("A package routed from [test.packages_awaiting_delivery[src]] to [destinationTag] was misrouted to [location]; expected location was [expected_loc].")
+	test.failed = TRUE
+	test.packages_awaiting_delivery -= src
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/check_result()
 	. = 1
@@ -715,20 +715,19 @@ datum/unit_test/ladder_check/start_test()
 		return
 	return 0
 
-/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(var/obj/structure/disposalholder/package)
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(var/obj/structure/disposalholder/unit_test/package)
 	if(!packages_awaiting_delivery[package])
 		return
 	var/obj/structure/disposalpipe/trunk/trunk = package.loc
-	packages_awaiting_delivery -= package
 
 	if(!istype(trunk))
-		log_bad(log_info_line(package))
-		failed = TRUE
+		package.log_and_fail()
 		return
 	var/obj/linked = trunk.linked
 	if(all_tagged_destinations[package.destinationTag] != linked)
-		log_bad(log_info_line(package))
-		failed = TRUE
+		package.log_and_fail()
+		return
+	packages_awaiting_delivery -= package
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/get_bin_from_junction(var/obj/structure/disposalpipe/sortjunction/sort)
 	var/list/traversed = list(sort) // Avoid self-looping, infinite loops.
