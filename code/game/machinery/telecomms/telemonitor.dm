@@ -131,7 +131,7 @@
 					new /obj/item/weapon/material/shard( src.loc )
 					var/obj/item/weapon/circuitboard/comm_monitor/M = new /obj/item/weapon/circuitboard/comm_monitor( A )
 					for (var/obj/C in src)
-						C.loc = src.loc
+						C.dropInto(loc)
 					A.circuit = M
 					A.state = 3
 					A.icon_state = "3"
@@ -142,7 +142,7 @@
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 					var/obj/item/weapon/circuitboard/comm_monitor/M = new /obj/item/weapon/circuitboard/comm_monitor( A )
 					for (var/obj/C in src)
-						C.loc = src.loc
+						C.dropInto(loc)
 					A.circuit = M
 					A.state = 4
 					A.icon_state = "4"

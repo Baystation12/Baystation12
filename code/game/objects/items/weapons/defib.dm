@@ -94,7 +94,7 @@
 	else if(isScrewdriver(W))
 		if(bcell)
 			bcell.update_icon()
-			bcell.forceMove(get_turf(src.loc))
+			bcell.dropInto(loc)
 			bcell = null
 			to_chat(user, "<span class='notice'>You remove the cell from \the [src].</span>")
 			update_icon()

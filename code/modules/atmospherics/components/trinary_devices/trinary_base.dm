@@ -51,8 +51,6 @@ obj/machinery/atmospherics/trinary
 		return null
 
 	Destroy()
-		loc = null
-
 		if(node1)
 			node1.disconnect(src)
 			qdel(network1)
@@ -67,7 +65,7 @@ obj/machinery/atmospherics/trinary
 		node2 = null
 		node3 = null
 
-		..()
+		return ..()
 
 	atmos_init()
 		..()

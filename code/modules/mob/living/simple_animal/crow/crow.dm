@@ -74,7 +74,7 @@
 					removed = messenger_bag
 					messenger_bag = null
 			if(removed)
-				removed.forceMove(get_turf(src))
+				removed.dropInto(loc)
 				usr.put_in_hands(removed)
 				visible_message("<span class='notice'>\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]].</span>")
 				show_inv(usr)

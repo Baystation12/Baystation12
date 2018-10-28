@@ -85,12 +85,12 @@
 		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,src)
 		if(B)
 			last_eat = world.time
-			B.loc = null
 			if(istype(B, /obj/effect/decal/cleanable/blood/drip))
 				charges += 0.25
 			else
 				charges += 1
 				playsound(src.loc, 'sound/effects/splat.ogg', 50, 1, -3)
+			qdel(B)
 
 	//use up stored charges
 	if(charges >= 10)
@@ -198,8 +198,8 @@
 	return ..()
 
 /obj/effect/shadow_wight/Process()
-	if(src.loc)
-		src.loc = get_turf(pick(orange(1,src)))
+	if(loc)
+		step_rand(src)
 		var/mob/living/carbon/M = locate() in src.loc
 		if(M)
 			playsound(src.loc, pick('sound/hallucinations/behind_you1.ogg',\
@@ -217,7 +217,7 @@
 			'sound/hallucinations/turn_around2.ogg',\
 			), 50, 1, -3)
 			M.sleeping = max(M.sleeping,rand(5,10))
-			src.loc = null
+			qdel(src)
 	else
 		STOP_PROCESSING(SSobj, src)
 

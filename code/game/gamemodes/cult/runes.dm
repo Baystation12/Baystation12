@@ -219,7 +219,7 @@
 /obj/effect/rune/teleport/proc/leaveRune(var/mob/living/user)
 	if(user.loc != src)
 		return
-	user.forceMove(get_turf(src))
+	user.dropInto(loc)
 	user.visible_message("<span class='warning'>\The [user] appears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets thrown out of the dimension of Nar-Sie!</span>", "You hear a pop.")
 
 /obj/effect/rune/tome

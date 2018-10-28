@@ -949,9 +949,7 @@
 /datum/chemical_reaction/slime/spawn/on_reaction(var/datum/reagents/holder)
 	..()
 	holder.my_atom.visible_message("<span class='warning'>Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!</span>")
-	var/mob/living/carbon/slime/S = new /mob/living/carbon/slime
-	S.loc = get_turf(holder.my_atom)
-	..()
+	new /mob/living/carbon/slime(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/monkey
 	name = "Slime Monkey"
@@ -963,9 +961,7 @@
 /datum/chemical_reaction/slime/monkey/on_reaction(var/datum/reagents/holder)
 	..()
 	for(var/i = 1, i <= 3, i++)
-		var /obj/item/weapon/reagent_containers/food/snacks/monkeycube/M = new /obj/item/weapon/reagent_containers/food/snacks/monkeycube
-		M.loc = get_turf(holder.my_atom)
-	..()
+		new /obj/item/weapon/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
 
 //Green
 /datum/chemical_reaction/slime/mutate
@@ -985,13 +981,10 @@
 
 /datum/chemical_reaction/slime/metal/on_reaction(var/datum/reagents/holder)
 	..()
-	var/obj/item/stack/material/steel/M = new /obj/item/stack/material/steel
+	var/obj/item/stack/material/steel/M = new (get_turf(holder.my_atom))
 	M.amount = 15
-	M.loc = get_turf(holder.my_atom)
-	var/obj/item/stack/material/plasteel/P = new /obj/item/stack/material/plasteel
+	var/obj/item/stack/material/plasteel/P = new (get_turf(holder.my_atom))
 	P.amount = 5
-	P.loc = get_turf(holder.my_atom)
-	..()
 
 //Gold
 /datum/chemical_reaction/slime/crit
@@ -1014,7 +1007,6 @@
 	..()
 	var/type = pick(possible_mobs)
 	new type(get_turf(holder.my_atom))
-	..()
 
 //Silver
 /datum/chemical_reaction/slime/bork
@@ -1034,13 +1026,11 @@
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
-		var/obj/B = new chosen
+		var/obj/B = new chosen(get_turf(holder.my_atom))
 		if(B)
-			B.loc = get_turf(holder.my_atom)
 			if(prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)
 					step(B, pick(NORTH, SOUTH, EAST, WEST))
-	..()
 
 //Blue
 /datum/chemical_reaction/slime/frost
@@ -1140,8 +1130,7 @@
 
 /datum/chemical_reaction/slime/psteroid/on_reaction(var/datum/reagents/holder, var/created_volume)
 	..()
-	var/obj/item/weapon/slimesteroid/P = new /obj/item/weapon/slimesteroid
-	P.loc = get_turf(holder.my_atom)
+	new /obj/item/weapon/slimesteroid(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/jam
 	name = "Slime Jam"
@@ -1160,9 +1149,8 @@
 
 /datum/chemical_reaction/slime/plasma/on_reaction(var/datum/reagents/holder)
 	..()
-	var/obj/item/stack/material/phoron/P = new /obj/item/stack/material/phoron
+	var/obj/item/stack/material/phoron/P = new (get_turf(holder.my_atom))
 	P.amount = 10
-	P.loc = get_turf(holder.my_atom)
 
 //Red
 /datum/chemical_reaction/slime/glycerol
@@ -1195,8 +1183,7 @@
 
 /datum/chemical_reaction/slime/ppotion/on_reaction(var/datum/reagents/holder)
 	..()
-	var/obj/item/weapon/slimepotion/P = new /obj/item/weapon/slimepotion
-	P.loc = get_turf(holder.my_atom)
+	new /obj/item/weapon/slimepotion(get_turf(holder.my_atom))
 
 //Black
 /datum/chemical_reaction/slime/mutate2

@@ -24,6 +24,6 @@
 	if(holder2 && (holder2.card_slot == src))
 		holder2.card_slot = null
 	if(stored_card)
-		stored_card.forceMove(get_turf(holder2))
+		stored_card.dropInto(holder2 ? holder2.loc : loc)
 	holder2 = null
 	return ..()

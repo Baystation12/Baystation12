@@ -95,7 +95,7 @@ RSF
 			used_energy = 200
 
 	to_chat(user, "Dispensing [product ? product : "product"]...")
-	product.loc = get_turf(A)
+	product.dropInto(A.loc)
 
 	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user

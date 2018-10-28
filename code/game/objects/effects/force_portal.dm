@@ -30,7 +30,7 @@
 		var/target = pick(possible_turfs)
 		possible_turfs -= target
 		var/atom/movable/picked = pick(contents)
-		picked.forceMove(get_turf(src))
+		picked.dropInto(loc)
 		if(istype(picked, /obj/item/projectile))
 			var/obj/item/projectile/P = picked
 			P.launch(target)

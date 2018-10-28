@@ -16,7 +16,7 @@
 	name = "Drone photo camera"
 
 /obj/item/device/camera/siliconcam/proc/injectaialbum(obj/item/weapon/photo/p, var/sufix = "") //stores image information to a list similar to that of the datacore
-	p.loc = src
+	p.forceMove(src)
 	photos_taken++
 	p.SetName("Image [photos_taken][sufix]")
 	aipictures += p

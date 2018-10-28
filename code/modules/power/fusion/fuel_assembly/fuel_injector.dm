@@ -23,7 +23,7 @@ var/list/fuel_injectors = list()
 
 /obj/machinery/fusion_fuel_injector/Destroy()
 	if(cur_assembly)
-		cur_assembly.forceMove(get_turf(src))
+		cur_assembly.dropInto(loc)
 		cur_assembly = null
 	fuel_injectors -= src
 	return ..()
@@ -58,7 +58,7 @@ var/list/fuel_injectors = list()
 		else
 			visible_message("<span class='notice'>\The [user] inserts \a [W] into \the [src].</span>")
 		if(cur_assembly)
-			cur_assembly.forceMove(get_turf(src))
+			cur_assembly.dropInto(loc)
 			user.put_in_hands(cur_assembly)
 		cur_assembly = W
 		return
@@ -84,7 +84,7 @@ var/list/fuel_injectors = list()
 		return
 
 	if(cur_assembly)
-		cur_assembly.forceMove(get_turf(src))
+		cur_assembly.dropInto(loc)
 		user.put_in_hands(cur_assembly)
 		visible_message("<span class='notice'>\The [user] removes \the [cur_assembly] from \the [src].</span>")
 		cur_assembly = null

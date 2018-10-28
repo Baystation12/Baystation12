@@ -23,7 +23,7 @@
 
 /obj/item/weapon/gun/launcher/process_projectile(obj/item/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
 	update_release_force(projectile)
-	projectile.loc = get_turf(user)
+	projectile.dropInto(user.loc)
 	projectile.throw_at(target, throw_distance, release_force, user)
 	play_fire_sound(user,projectile)
 	return 1

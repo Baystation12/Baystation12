@@ -13,17 +13,12 @@
 	for(var/mob/M in src)
 		if(M==src.occupant)
 			continue
-		M.loc = get_turf(src)
-		M.loc.Entered(M)
+		M.dropInto(loc)
 		step_rand(M)
 	for(var/atom/movable/A in src.cargo)
-		A.loc = get_turf(src)
-		var/turf/T = get_turf(A)
-		if(T)
-			T.Entered(A)
+		A.dropInto(loc)
 		step_rand(A)
-	..()
-	return
+	return ..()
 
 /obj/mecha/working/Topic(href, href_list)
 	..()
@@ -31,13 +26,9 @@
 		var/obj/O = locate(href_list["drop_from_cargo"])
 		if(O && O in src.cargo)
 			src.occupant_message("<span class='notice'>You unload [O].</span>")
-			O.loc = get_turf(src)
+			O.dropInto(loc)
 			src.cargo -= O
-			var/turf/T = get_turf(O)
-			if(T)
-				T.Entered(O)
 			src.log_message("Unloaded [O]. Cargo compartment capacity: [cargo_capacity - src.cargo.len]")
-	return
 
 /obj/mecha/working/Exit(atom/movable/O)
 	if(O in cargo)

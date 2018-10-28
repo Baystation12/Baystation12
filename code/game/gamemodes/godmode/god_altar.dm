@@ -20,7 +20,7 @@
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		if(G.force_danger())
-			G.affecting.forceMove(get_turf(src))
+			G.affecting.dropInto(loc)
 			G.affecting.Weaken(1)
 			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")
 			user.drop_from_inventory(G)

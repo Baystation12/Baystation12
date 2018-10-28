@@ -219,15 +219,15 @@ else if(##equipment_var) {\
 
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
-				tank.forceMove(get_turf(src))
+				tank.dropInto(loc)
 				src.tank = null
 			else if(choice == helmet)
 				to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
-				helmet.forceMove(get_turf(src))
+				helmet.dropInto(loc)
 				src.helmet = null
 			else if(choice == boots)
 				to_chat(user, "You detatch \the [boots] from \the [src]'s boot mounts.")
-				boots.forceMove(get_turf(src))
+				boots.dropInto(loc)
 				src.boots = null
 		else
 			to_chat(user, "\The [src] does not have anything installed.")

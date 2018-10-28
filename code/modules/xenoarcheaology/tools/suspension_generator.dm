@@ -98,9 +98,7 @@
 	else if(href_list["ejectcard"])
 		if(auth_card)
 			if(ishuman(user))
-				auth_card.loc = user.loc
-				if(!user.get_active_hand())
-					user.put_in_hands(auth_card)
+				user.put_in_hands(auth_card)
 				auth_card = null
 			else
 				auth_card.forceMove(loc)

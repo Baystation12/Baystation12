@@ -163,7 +163,7 @@
 
 					var/obj/item/rig_module/removed = possible_removals[removal_choice]
 					to_chat(user, "You detach \the [removed] from \the [src].")
-					removed.forceMove(get_turf(src))
+					removed.dropInto(loc)
 					removed.removed()
 					installed_modules -= removed
 					update_icon()

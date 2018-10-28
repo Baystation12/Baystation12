@@ -16,12 +16,10 @@
 		var/obj/structure/bed/chair/C = new /obj/structure/bed/chair(loc)
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		C.set_dir(dir)
-		part.loc = loc
+		part.dropInto(loc)
 		part.master = null
 		part = null
 		qdel(src)
-		return
-	return
 
 /obj/structure/bed/chair/e_chair/verb/toggle()
 	set name = "Toggle Electric Chair"
