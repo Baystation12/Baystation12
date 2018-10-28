@@ -53,8 +53,11 @@
 /obj/item/weapon/card/id/torch/crew/medical/senior
 	job_access_type = /datum/job/senior_doctor
 
-/obj/item/weapon/card/id/torch/contractor/medical
+/obj/item/weapon/card/id/torch/contractor/doctor
 	job_access_type = /datum/job/doctor_contractor
+
+/obj/item/weapon/card/id/torch/contractor/nurse
+	job_access_type = /datum/job/nurse
 
 /obj/item/weapon/card/id/torch/contractor/chemist
 	job_access_type = /datum/job/chemist

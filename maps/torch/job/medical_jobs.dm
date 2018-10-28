@@ -2,7 +2,6 @@
 	title = "Physician"
 	department = "Medical"
 	department_flag = MED
-
 	minimal_player_age = 2
 	ideal_character_age = 45
 	total_positions = 2
@@ -45,6 +44,8 @@
 
 /datum/job/doctor
 	title = "Corpsman"
+	department = "Medical"
+	department_flag = MED
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Chief Medical Officer"
@@ -87,22 +88,51 @@
 	required_education = EDUCATION_TIER_TRADE
 
 /datum/job/doctor_contractor
-	title = "Medical Contractor"
+	title = "Contracted Doctor"
 	department = "Medical"
 	department_flag = MED
-
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Chief Medical Officer, the Workplace Liaison and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_power = 3
-	ideal_character_age = 30
-	alt_titles = list(
-		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
-		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
-		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
-		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
+	ideal_character_age = 45
+	minimal_player_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_MEDICAL     = SKILL_ADEPT,
+	                    SKILL_ANATOMY     = SKILL_EXPERT,
+	                    SKILL_CHEMISTRY   = SKILL_BASIC,
+	                    SKILL_VIROLOGY    = SKILL_BASIC)
+
+	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
+	                    SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_CHEMISTRY   = SKILL_MAX,
+	                    SKILL_VIROLOGY    = SKILL_MAX)
+	skill_points = 32
+
+	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
+			            access_crematorium, access_chemistry, access_surgery,
+			            access_medical_equip, access_solgov_crew, access_senmed)
+
+	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
+							 /datum/computer_file/program/camera_monitor)
+	required_education = EDUCATION_TIER_MEDSCHOOL
+
+/datum/job/nurse
+	title = "Nurse"
+	department = "Medical"
+	department_flag = MED
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Chief Medical Officer, the Workplace Liaison and Medical Personnel"
+	selection_color = "#013d3b"
+	economic_power = 7
+	ideal_character_age = 40
+	alt_titles = list("Paramedic")
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/nurse
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
@@ -113,20 +143,20 @@
 	                    SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX,
 	                    SKILL_VIROLOGY    = SKILL_MAX)
-	skill_points = 32
 
-	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
-		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_hangar)
+	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
+	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+	skill_points = 26
 	required_education = EDUCATION_TIER_TRADE
 
 /datum/job/biomech
 	title = "Biomechanical Engineer"
 	department = "Medical"
 	department_flag = MED
-
 	minimal_player_age = 0
 	ideal_character_age = 45
 	total_positions = 1
@@ -159,7 +189,6 @@
 	title = "Corpsman Trainee"
 	department = "Medical"
 	department_flag = MED
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
@@ -203,7 +232,6 @@
 	title = "Chemist"
 	department = "Medical"
 	department_flag = MED
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
@@ -227,6 +255,8 @@
 
 /datum/job/psychiatrist
 	title = "Counselor"
+	department = "Medical"
+	department_flag = MED
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40

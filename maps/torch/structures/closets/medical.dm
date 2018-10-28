@@ -101,6 +101,66 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
 
+/obj/structure/closet/secure_closet/medical_torchdoctor
+	name = "doctor's locker"
+	req_access = list(access_senmed)
+	icon_state = "securemed1"
+	icon_closed = "securemed"
+	icon_locked = "securemed1"
+	icon_opened = "securemedopen"
+	icon_off = "securemedoff"
+
+/obj/structure/closet/secure_closet/medical_torchdoctor/WillContain()
+	return list(
+		/obj/item/clothing/under/sterile,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/surgicalapron,
+		/obj/item/clothing/shoes/white,
+		/obj/item/device/radio/headset/headset_med,
+		/obj/item/device/radio/headset/headset_med/alt,
+		/obj/item/weapon/storage/belt/medical,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/device/healthanalyzer,
+		/obj/item/clothing/accessory/stethoscope,
+		/obj/item/device/flashlight/pen,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/storage/firstaid/adv,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
+	)
+
+/obj/structure/closet/secure_closet/medical_torchnurse
+	name = "nurse's locker"
+	req_access = list(access_medical_equip)
+	icon_state = "securemed1"
+	icon_closed = "securemed"
+	icon_locked = "securemed1"
+	icon_opened = "securemedopen"
+	icon_off = "securemedoff"
+
+/obj/structure/closet/secure_closet/medical_torchnurse/WillContain()
+	return list(
+		/obj/item/clothing/under/sterile,
+		/obj/item/clothing/head/soft/mime,
+		/obj/item/clothing/head/nursehat,
+		/obj/item/clothing/accessory/storage/white_vest,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/toggle/fr_jacket,
+		/obj/item/clothing/shoes/white,
+		/obj/item/device/radio/headset/headset_med,
+		/obj/item/device/radio/headset/headset_med/alt,
+		/obj/item/weapon/storage/belt/medical,
+		/obj/item/weapon/storage/belt/medical/emt,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/weapon/tank/emergency/oxygen/engi,
+		/obj/item/weapon/storage/box/autoinjectors,
+		/obj/item/device/healthanalyzer,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/storage/firstaid/adv,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
+	)
+
 /obj/structure/closet/secure_closet/medical_contractor
 	name = "medical contractor's locker"
 	req_access = list(access_medical)

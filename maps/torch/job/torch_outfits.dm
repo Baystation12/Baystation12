@@ -328,26 +328,16 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor
-	name = OUTFIT_JOB_NAME("Medical Contractor")
-	uniform = /obj/item/clothing/under/rank/medical
+	name = OUTFIT_JOB_NAME("Contracted Doctor")
+	uniform = /obj/item/clothing/under/sterile
 	shoes = /obj/item/clothing/shoes/white
-	id_type = /obj/item/weapon/card/id/torch/contractor/medical
+	id_type = /obj/item/weapon/card/id/torch/contractor/doctor
 
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly
-	name = OUTFIT_JOB_NAME("Orderly")
-	uniform = /obj/item/clothing/under/rank/orderly
-
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/resident
-	name = OUTFIT_JOB_NAME("Medical Resident")
-	uniform = /obj/item/clothing/under/color/white
-
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon
-	name = OUTFIT_JOB_NAME("Xenosurgeon")
-	uniform = /obj/item/clothing/under/rank/medical/scrubs/purple
-
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus
-	name = OUTFIT_JOB_NAME("Mortician")
-	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/nurse
+	name = OUTFIT_JOB_NAME("Nurse")
+	uniform = /obj/item/clothing/under/sterile
+	shoes = /obj/item/clothing/shoes/white
+	id_type = /obj/item/weapon/card/id/torch/contractor/nurse
 
 /decl/hierarchy/outfit/job/torch/crew/medical/biomech
 	name = OUTFIT_JOB_NAME("Biomechanical Engineer")

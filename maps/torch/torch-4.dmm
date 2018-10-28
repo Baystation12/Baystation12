@@ -16946,11 +16946,11 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dqb" = (
-/obj/structure/closet/secure_closet/medical_contractor,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/medical_torchdoctor,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "drb" = (
@@ -17171,7 +17171,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
-/obj/structure/closet/secure_closet/medical_contractor,
+/obj/structure/closet/secure_closet/medical_torchnurse,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dFb" = (
