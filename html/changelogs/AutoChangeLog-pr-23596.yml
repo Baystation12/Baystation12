@@ -1,0 +1,5 @@
+author: "MistChristmas"
+delete-after: True
+changes: 
+  - maptweak: "Added a weapon charger to Deck One Checkpoint"
+  - maptweak: "Removed fire alarm hiding in a bin in excavation prep"
