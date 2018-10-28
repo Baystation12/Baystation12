@@ -6,9 +6,10 @@
 	
 	PUT YOUR ANSWERS ON THE BLANK LINES BELOW THE HEADERS 
 	(The lines with four #'s) 
-	Don't edit them or delete them it's part of the formatting
+	Don't edit them or delete them, it's part of the formatting.
+	
+	Issues not following this template will be closed.
 -->
-
 #### Description of issue
 
 
@@ -36,13 +37,12 @@
 
 
 #### Client version, Server revision & Game ID
-<!-- Found with the "Show server revision" verb in the OOC tab in game. -->
+<!-- Found with the "Show server revision" verb in the OOC tab in game, or !revision in the coding channels on IRC/Discord -->
 
 
 
 #### Issue bingo
-
-Please check whatever applies. More checkboxes checked increase your chances of the issue being looked at sooner.
+_Please check whatever applies._
 
 <!-- Check these by writing an x inside the [ ] (like this: [x])-->
 <!-- Don't forget to remove the space between the brackets, or it won't work! -->
