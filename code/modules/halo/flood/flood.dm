@@ -2,8 +2,12 @@ GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define INFECT_DELAY 13 SECONDS
+#define PLAYER_FLOOD_HEALTH_MOD 1.5
+#define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
+#define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6c_magnum_s,\
+/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg/silenced)
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -15,11 +19,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	*/
-	mob_swap_flags = 0
-	mob_push_flags = 0
 	break_stuff_probability = 50
-	stop_automated_movement = 1
-	wander = 0
+	stop_automated_movement = 0
+	wander = 1
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	min_gas = list()
@@ -44,13 +46,15 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
-
+	if(client)
+		target_mob = null
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
-		if(prob(75))
-			dir = get_dir(src, assault_target)
-			var/turf/target_turf = get_step_towards(src,assault_target)
-			Move(target_turf)
+		wander = 0
+		stop_automated_movement = 1
+		dir = get_dir(src, assault_target)
+		var/turf/target_turf = get_step_towards(src,assault_target)
+		Move(target_turf)
 			/*else
 				var/moving_to = pick(GLOB.cardinal)
 				set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
@@ -61,8 +65,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		if(prob(50))
 			wander = 1
 			stop_automated_movement = 0
-		else
-			wander = 0
 
 /mob/living/simple_animal/hostile/flood/death()
 	. = ..()
@@ -73,8 +75,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"
 	icon = 'code/modules/halo/flood/flood_infection.dmi'
-	icon_state = "static"
-	icon_living = "static"
+	icon_state = "anim"
+	icon_living = "anim"
 	icon_dead = "dead"
 	pass_flags = PASSTABLE
 	//
@@ -106,17 +108,20 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(30)
 		spawning = 0
 
-/mob/living/simple_animal/hostile/flood/proc/is_being_infested(var/mob/m)
+/mob/living/simple_animal/hostile/flood/infestor/proc/is_being_infested(var/mob/m)
 	if(locate(/obj/effect/dead_infestor) in m.contents)
 		return 1
 	return 0
 
-/mob/living/simple_animal/hostile/flood/proc/infect_mob(var/mob/living/carbon/human/h)
+/mob/living/simple_animal/hostile/flood/infestor/proc/infect_mob(var/mob/living/carbon/human/h)
 	if(is_being_infested(h))
 		return 0
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
-	adjustBruteLoss(1)
-	src = null //Just in case we get killed.
+	wander = 0
+	stop_automated_movement = 1
+	invisibility = 101
+	anchored = 1
+	density = 0
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
 	var/obj/infest_placeholder = new /obj/effect/dead_infestor
 	h.contents += infest_placeholder
@@ -124,20 +129,31 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 		new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_form/human
-		new_combat_form.maxHealth = 350 //Buff their health a bit.
-		new_combat_form.health = 350
-		new_combat_form.forceMove(h.loc)
-		new_combat_form.ckey = h.ckey
-		new_combat_form.name = h.real_name
-		if(prob(25))
-			playsound(src.loc,PLAYER_TRANSFORM_SFX,100)
-		if(new_combat_form.ckey)
-			new_combat_form.stop_automated_movement = 1
-		for(var/obj/i in h.contents)
-			h.drop_from_inventory(i)
-		qdel(h)
+		do_infect(h)
 	return 1
+
+/mob/living/simple_animal/hostile/flood/infestor/proc/do_infect(var/mob/living/carbon/human/h)
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	if(istype(h.species,/datum/species/sangheili))
+		if(prob(50))
+			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
+		else
+			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+
+	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
+	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
+	new_combat_form.health *= PLAYER_FLOOD_HEALTH_MOD
+	new_combat_form.forceMove(h.loc)
+	new_combat_form.ckey = h.ckey
+	new_combat_form.name = h.real_name
+	if(prob(25))
+		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
+	if(new_combat_form.ckey)
+		new_combat_form.stop_automated_movement = 1
+	for(var/obj/i in h.contents)
+		h.drop_from_inventory(i)
+	qdel(h)
+	adjustBruteLoss(1)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
@@ -217,8 +233,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/carrier
 	name = "Flood carrier"
 	icon = 'code/modules/halo/flood/flood_carrier.dmi'
-	icon_state = "static"
-	icon_living = "static"
+	icon_state = "anim"
+	icon_living = "anim"
 	icon_dead = ""
 	//
 	move_to_delay = 30
@@ -255,8 +271,24 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	return ..(0,deathmessage)
 
 /mob/living/simple_animal/hostile/flood/combat_form
+	var/next_infestor_spawn = 0
 
 	var/obj/item/weapon/gun/our_gun
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/spawn_infestor()
+	if(world.time < next_infestor_spawn)
+		if(client)
+			to_chat(src,"<span class = 'notice'>Your biomass hasn't recovered from the previous formation.</span>")
+		return
+	next_infestor_spawn = world.time + COMBAT_FORM_INFESTOR_SPAWN_DELAY
+	new /mob/living/simple_animal/hostile/flood/infestor (src.loc)
+	visible_message("<span class = 'warning'>[src]'s flesh writhes for a moment, blood-red feelers emerging, followed by a singular infection form.</span>")
+
+/mob/living/simple_animal/hostile/flood/combat_form/verb/create_infestor_form()
+	set name = "Create Infestor Form"
+	set category = "Abilities"
+
+	spawn_infestor()
 
 /mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
 	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
@@ -304,6 +336,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	. = ..()
 	if(ckey || client)
 		return
+	spawn_infestor()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
@@ -320,6 +353,53 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	melee_damage_lower = 25
+	melee_damage_upper = 35
+	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/ODST
+	name = "Flood infested ODST"
+	icon = 'code/modules/halo/flood/flood_combat_odst.dmi'
+	icon_state = "odst_infested"
+	icon_living = "odst_infested"
+	icon_dead = "odst_dead"
+	//
+	move_to_delay = 2
+	health = 200 //Combat forms need to be hardier.
+	maxHealth = 200
+	melee_damage_lower = 30
+	melee_damage_upper = 35
+	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/ODST/New()
+	..()
+	var/gun_type_spawn = pick(ODST_FLOOD_GUN_LIST)
+	pickup_gun(new gun_type_spawn (loc))
+
+/mob/living/simple_animal/hostile/flood/combat_form/guard
+	name = "Flood infested human"
+	icon = 'code/modules/halo/flood/flood_combat_depotguard.dmi'
+	icon_state = "guard_infested"
+	icon_living = "guard_infested"
+	icon_dead = "guard_dead"
+	//
+	move_to_delay = 2
+	health = 150 //Combat forms need to be hardier.
+	maxHealth = 150
+	melee_damage_lower = 25
+	melee_damage_upper = 30
+	attacktext = "bashed"
+
+/mob/living/simple_animal/hostile/flood/combat_form/oni
+	name = "Flood infested human"
+	icon = 'code/modules/halo/flood/flood_combat_oni.dmi'
+	icon_state = "oni_infested"
+	icon_living = "oni_infested"
+	icon_dead = "oni_dead"
+	//
+	move_to_delay = 2
+	health = 200 //Combat forms need to be hardier.
+	maxHealth = 200
+	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
 
@@ -357,7 +437,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "movement state"
 	icon_living = "movement state"
 	icon_dead = "death state"
-	//
 	move_to_delay = 1
 	health = 1200 //Combat forms need to be hardier.
 	maxHealth = 1200

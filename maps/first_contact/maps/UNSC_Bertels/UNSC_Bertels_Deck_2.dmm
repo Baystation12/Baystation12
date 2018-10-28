@@ -336,7 +336,7 @@
 "gx" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/chemistrylab)
 "gy" = (/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/chemistrylab)
 "gz" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/smartfridge/chemistry,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/chemistrylab)
-"gA" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime,/obj/machinery/light{dir = 1},/obj/structure/table/glass,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/chemistrylab)
+"gA" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime,/obj/machinery/light{dir = 1},/obj/structure/table/glass,/obj/item/weapon/hand_labeler,/obj/item/weapon/hand_labeler,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/chemistrylab)
 "gB" = (/obj/structure/table/woodentable,/obj/machinery/light{dir = 1},/obj/machinery/computer/med_data/laptop,/turf/simulated/floor/wood,/area/corvette/unscbertels/deck2/chemistrylab)
 "gC" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor/wood,/area/corvette/unscbertels/deck2/chemistrylab)
 "gD" = (/obj/structure/bookcase/manuals/medical,/obj/machinery/light{dir = 1},/turf/simulated/floor/wood,/area/corvette/unscbertels/deck2/chemistrylab)
