@@ -27,7 +27,9 @@
 		return FALSE
 	if(!computer.network_card || !computer.network_card.check_functionality())
 		return FALSE
-	if(!ntnet_global.check_function())
+
+	var/turf/T = get_turf(origin_computer)
+	if(!ntnet_global.check_function(T.z))
 		return FALSE
 
 	return TRUE

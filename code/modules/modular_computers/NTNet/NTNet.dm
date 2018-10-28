@@ -79,15 +79,15 @@ var/global/datum/ntnet/ntnet_global = new()
 	return FALSE
 
 // Checks whether NTNet operates. If parameter is passed checks whether specific function is enabled.
-/datum/ntnet/proc/check_function(var/specific_action = 0)
+/datum/ntnet/proc/check_function(z, specific_action = 0)
 	if(!relays || !relays.len) // No relays found. NTNet is down
 		return 0
 
 	var/operating = 0
 
-	// Check all relays. If we have at least one working relay, network is up.
+	// Check all relays. If we have at least one working relay in our linked z levels, network is up.
 	for(var/obj/machinery/ntnet_relay/R in relays)
-		if(R.operable())
+		if((R.z in GetConnectedZlevels(z)) && R.operable())
 			operating = 1
 			break
 

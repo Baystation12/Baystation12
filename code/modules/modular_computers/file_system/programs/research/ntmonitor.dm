@@ -25,8 +25,8 @@
 		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 20)
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
-
-	data["ntnetstatus"] = ntnet_global.check_function()
+	var/turf/T = get_turf(program.holder.holder2)
+	data["ntnetstatus"] = ntnet_global.check_function(T?.z)
 	data["ntnetrelays"] = ntnet_global.relays.len
 	data["idsstatus"] = ntnet_global.intrusion_detection_enabled
 	data["idsalarm"] = ntnet_global.intrusion_detection_alarm

@@ -105,7 +105,7 @@ Subtypes
 	if(!ch)
 		return "hwinfo: No such hardware found."
 	ch.diagnostics(user)
-	return "Running diagnostic protocols..."	
+	return "Running diagnostic protocols..."
 
 // Sysadmin
 /datum/terminal_command/relays
@@ -134,9 +134,10 @@ Subtypes
 	pattern = "^status$"
 	req_access = list(access_network)
 
-/datum/terminal_command/status/proper_input_entered(text, mob/user, terminal)
+/datum/terminal_command/status/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	. = list()
-	. += "NTnet status: [ntnet_global.check_function() ? "ENABLED" : "DISABLED"]"
+	var/turf/T = get_turf(terminal.computer)
+	. += "NTnet status: [ntnet_global.check_function(T.z) ? "ENABLED" : "DISABLED"]"
 	. += "Alarm status: [ntnet_global.intrusion_detection_enabled ? "ENABLED" : "DISABLED"]"
 	if(ntnet_global.intrusion_detection_alarm)
 		. += "NETWORK INCURSION DETECTED"
@@ -153,7 +154,8 @@ Subtypes
 	if(length(text) < 8)
 		return
 	var/obj/item/modular_computer/origin = terminal.computer
-	if(!ntnet_global.check_function() || !origin || !origin.network_card || !origin.network_card.check_functionality())
+	var/turf/T = get_turf(origin)
+	if(!ntnet_global.check_function(T.z) || !origin || !origin.network_card || !origin.network_card.check_functionality())
 		return
 	var/nid = text2num(copytext(text, 8))
 	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
@@ -173,7 +175,8 @@ Subtypes
 		. += "ping: Improper syntax. Use ping nid."
 		return
 	var/obj/item/modular_computer/origin = terminal.computer
-	if(!ntnet_global.check_function() || !origin || !origin.network_card || !origin.network_card.check_functionality())
+	var/turf/T = get_turf(origin)
+	if(!ntnet_global.check_function(T.z) || !origin || !origin.network_card || !origin.network_card.check_functionality())
 		. += "failed. Check network status."
 		return
 	var/nid = text2num(copytext(text, 6))
@@ -195,7 +198,7 @@ Subtypes
 	if(length(text) < 5)
 		return "ssh: Improper syntax. Use ssh nid."
 	var/obj/item/modular_computer/origin = terminal.computer
-	if(!ntnet_global.check_function() || !origin || !origin.network_card || !origin.network_card.check_functionality())
+	if(!ntnet_global.check_function(terminal.computer.z) || !origin || !origin.network_card || !origin.network_card.check_functionality())
 		return "ssh: Check network connectivity."
 	var/nid = text2num(copytext(text, 5))
 	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
