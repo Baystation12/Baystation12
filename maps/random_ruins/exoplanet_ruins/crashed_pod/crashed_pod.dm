@@ -11,6 +11,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 /area/map_template/crashed_pod
 	name = "\improper Crashed Escape Pod"
 	icon_state = "blue"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /decl/submap_archetype/crashed_pod
 	descriptor = "crashed escape pod"
