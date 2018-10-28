@@ -904,45 +904,6 @@
 /mob/living/silicon/robot/proc/radio_menu()
 	silicon_radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
 
-
-/mob/living/silicon/robot/Move(a, b, flag)
-
-	. = ..()
-
-	if(module)
-		if(module.type == /obj/item/weapon/robot_module/janitor)
-			var/turf/tile = loc
-			if(isturf(tile))
-				tile.clean_blood()
-				if (istype(tile, /turf/simulated))
-					var/turf/simulated/S = tile
-					S.dirt = 0
-				for(var/A in tile)
-					if(istype(A, /obj/effect))
-						if(istype(A, /obj/effect/rune) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay))
-							qdel(A)
-					else if(istype(A, /obj/item))
-						var/obj/item/cleaned_item = A
-						cleaned_item.clean_blood()
-					else if(istype(A, /mob/living/carbon/human))
-						var/mob/living/carbon/human/cleaned_human = A
-						if(cleaned_human.lying)
-							if(cleaned_human.head)
-								cleaned_human.head.clean_blood()
-								cleaned_human.update_inv_head(0)
-							if(cleaned_human.wear_suit)
-								cleaned_human.wear_suit.clean_blood()
-								cleaned_human.update_inv_wear_suit(0)
-							else if(cleaned_human.w_uniform)
-								cleaned_human.w_uniform.clean_blood()
-								cleaned_human.update_inv_w_uniform(0)
-							if(cleaned_human.shoes)
-								cleaned_human.shoes.clean_blood()
-								cleaned_human.update_inv_shoes(0)
-							cleaned_human.clean_blood(1)
-							to_chat(cleaned_human, "<span class='warning'>[src] cleans your face!</span>")
-		return
-
 /mob/living/silicon/robot/proc/self_destruct()
 	gib()
 	return

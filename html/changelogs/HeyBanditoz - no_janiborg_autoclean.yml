@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - rscdel: "Janitor borgs no longer automatically clean up turfs they walk over."
