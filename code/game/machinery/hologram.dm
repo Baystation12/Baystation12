@@ -41,7 +41,6 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 
 	var/power_per_hologram = 500 //per usage per hologram
 	idle_power_usage = 5
-	use_power = 1
 
 	var/list/mob/living/silicon/ai/masters = new() //List of AIs that use the holopad
 	var/last_request = 0 //to prevent request spam. ~Carn
@@ -304,7 +303,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			clear_holo(master)
 			continue
 
-		use_power(power_per_hologram)
+		use_power_oneoff(power_per_hologram)
 	if(last_request + 200 < world.time&&incoming_connection==1)
 		if(sourcepad)
 			sourcepad.audible_message("<i><span class='game say'>The holopad connection timed out</span></i>")
@@ -352,7 +351,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 100
 

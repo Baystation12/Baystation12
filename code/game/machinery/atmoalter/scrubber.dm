@@ -83,7 +83,7 @@
 		if(!powered())
 			cell.use(power_draw * CELLRATE)
 		else
-			use_power(power_draw)
+			use_power_oneoff(power_draw)
 		last_power_draw = power_draw
 
 		update_connected_network()
@@ -159,7 +159,7 @@
 	volume = 50000
 	volume_rate = 5000
 
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	active_power_usage = 100000	//100 kW ~ 135 HP
 
@@ -190,11 +190,11 @@
 	var/old_stat = stat
 	..()
 	if (old_stat != stat)
-		update_icon()
+		queue_icon_update()
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/Process()
 	if(!on || (stat & (NOPOWER|BROKEN)))
-		update_use_power(0)
+		update_use_power(POWER_USE_OFF)
 		last_flow_rate = 0
 		last_power_draw = 0
 		return 0
@@ -211,7 +211,7 @@
 		last_flow_rate = 0
 		last_power_draw = 0
 	else
-		use_power(power_draw)
+		use_power_oneoff(power_draw)
 		update_connected_network()
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)

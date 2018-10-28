@@ -5,7 +5,6 @@
 	icon_state = "borgcharger0"
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 50
 	var/mob/living/occupant = null
 	var/obj/item/weapon/cell/cell = null
@@ -63,7 +62,9 @@
 		recharge_amount = (occupant ? restore_power_active : restore_power_passive) * CELLRATE
 
 		recharge_amount = cell.give(recharge_amount)
-		use_power(recharge_amount / CELLRATE)
+		use_power_oneoff(recharge_amount / CELLRATE)
+	else
+		cell.use(get_power_usage() * CELLRATE) //since the recharge station can still be on even with NOPOWER. Instead it draws from the internal cell.
 
 	if(icon_update_tick >= 10)
 		icon_update_tick = 0
@@ -72,19 +73,6 @@
 
 	if(occupant || recharge_amount)
 		update_icon()
-
-//since the recharge station can still be on even with NOPOWER. Instead it draws from the internal cell.
-/obj/machinery/recharge_station/auto_use_power()
-	if(!(stat & NOPOWER))
-		return ..()
-
-	if(!has_cell_power())
-		return 0
-	if(src.use_power == 1)
-		cell.use(idle_power_usage * CELLRATE)
-	else if(src.use_power >= 2)
-		cell.use(active_power_usage * CELLRATE)
-	return 1
 
 //Processes the occupant, drawing from the internal power cell if needed.
 /obj/machinery/recharge_station/proc/process_occupant()

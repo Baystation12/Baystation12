@@ -14,7 +14,6 @@
 	plane = ABOVE_PLATING_PLANE
 	layer = ABOVE_WIRE_LAYER
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 50
 
 	var/freq = 1449		// radio frequency
@@ -152,10 +151,10 @@
 
 		// Update power usage:
 		if(on)
-			use_power = 2
-			active_power_usage = electricity_level*15
+			update_use_power(POWER_USE_ACTIVE)
+			change_power_consumption(electricity_level*15, POWER_USE_ACTIVE)
 		else
-			use_power = 0
+			update_use_power(POWER_USE_IDLE)
 
 
 		// Overload conditions:
@@ -186,7 +185,7 @@
 					if(istype(S, /mob/living/silicon/ai)) continue
 					step_towards(S, center)
 
-			use_power(electricity_level * 5)
+			use_power_oneoff(electricity_level * 5)
 			sleep(13 - electricity_level)
 
 		pulling = 0
@@ -202,7 +201,6 @@
 	icon_state = "airlock_control_standby"
 	density = 1
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 45
 	var/frequency = 1449
 	var/code = 0

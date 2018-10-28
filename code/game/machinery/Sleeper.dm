@@ -15,7 +15,6 @@
 	var/list/stasis_settings = list(1, 2, 5)
 	var/stasis = 1
 
-	use_power = 1
 	idle_power_usage = 15
 	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
 
@@ -227,7 +226,7 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
-		update_use_power(2)
+		update_use_power(POWER_USE_ACTIVE)
 		occupant = M
 		update_icon()
 
@@ -244,7 +243,7 @@
 		if(O == beaker)
 			continue
 		O.dropInto(loc)
-	update_use_power(1)
+	update_use_power(POWER_USE_IDLE)
 	update_icon()
 	toggle_filter()
 
@@ -262,7 +261,7 @@
 	var/chemical_type = available_chemicals[chemical_name]
 	if(occupant && occupant.reagents)
 		if(occupant.reagents.get_reagent_amount(chemical_type) + amount <= 20)
-			use_power(amount * CHEM_SYNTH_ENERGY)
+			use_power_oneoff(amount * CHEM_SYNTH_ENERGY)
 			occupant.reagents.add_reagent(chemical_type, amount)
 			to_chat(user, "Occupant now has [occupant.reagents.get_reagent_amount(chemical_type)] unit\s of [chemical_name] in their bloodstream.")
 		else

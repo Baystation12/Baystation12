@@ -74,7 +74,7 @@
 	icon = 'icons/obj/apc.dmi'
 	plane = ABOVE_HUMAN_PLANE
 	anchored = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	req_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER

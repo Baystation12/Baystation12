@@ -7,7 +7,6 @@ var/list/fuel_injectors = list()
 	density = 1
 	anchored = 0
 	req_access = list(access_engine)
-	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 500
 
@@ -97,13 +96,13 @@ var/list/fuel_injectors = list()
 	if(!injecting && cur_assembly)
 		icon_state = "injector1"
 		injecting = 1
-		use_power = 1
+		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/fusion_fuel_injector/proc/StopInjecting()
 	if(injecting)
 		injecting = 0
 		icon_state = "injector0"
-		use_power = 0
+		update_use_power(POWER_USE_OFF)
 
 /obj/machinery/fusion_fuel_injector/proc/Inject()
 	if(!injecting)

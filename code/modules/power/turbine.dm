@@ -79,7 +79,7 @@
 
 
 	if(starter && !(stat & NOPOWER))
-		use_power(2800)
+		use_power_oneoff(2800)
 		if(rpm<1000)
 			rpmtarget = 1000
 	else

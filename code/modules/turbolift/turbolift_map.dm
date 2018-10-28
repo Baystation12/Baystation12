@@ -163,6 +163,13 @@
 				if(tx >= ux && tx <= ex && ty >= uy && ty <= ey)
 					floor_turfs += checking
 
+		// Do this area stuff before placing machinery or anything else. Otherwise it will potentially change areas without properly updating listeners.
+		var/area_path = areas_to_use[az]
+		for(var/thing in floor_turfs)
+			new area_path(thing)
+		var/area/A = locate(area_path)
+		cfloor.set_area_ref("\ref[A]")
+
 		// Place exterior doors.
 		for(var/tx = door_x1 to door_x2)
 			for(var/ty = door_y1 to door_y2)
@@ -209,12 +216,6 @@
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
 			qdel(src)
 			return
-
-		var/area_path = areas_to_use[az]
-		for(var/thing in floor_turfs)
-			new area_path(thing)
-		var/area/A = locate(area_path)
-		cfloor.set_area_ref("\ref[A]")
 		az++
 
 	// Place lift panel.

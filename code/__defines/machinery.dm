@@ -12,7 +12,12 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define DOOR_CRUSH_DAMAGE 40
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
+#define POWER_USE_OFF    0
+#define POWER_USE_IDLE   1
+#define POWER_USE_ACTIVE 2
+
 // Channel numbers for power.
+#define POWER_CHAN -1 // Use default channel
 #define EQUIP   1
 #define LIGHT   2
 #define ENVIRON 3

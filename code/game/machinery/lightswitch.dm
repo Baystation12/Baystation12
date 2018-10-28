@@ -7,7 +7,6 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 20
 	power_channel = LIGHT
 	var/on = 0
