@@ -93,8 +93,13 @@ var/list/points_of_interest = list()
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
+	GLOB.processing_objects += src
 	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
+
+/obj/effect/overmap/sector/process()
+	if(15<=hit)
+		src.icon_state="bombed"
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)
@@ -120,3 +125,5 @@ var/list/points_of_interest = list()
 
 	testing("Overmap build complete.")
 	return 1
+
+
