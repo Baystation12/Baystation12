@@ -10,7 +10,6 @@
 	var/datum/omni_port/output
 	var/max_output_pressure = MAX_OMNI_PRESSURE
 
-	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
 
@@ -80,7 +79,7 @@
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
-		use_power(power_draw)
+		use_power_oneoff(power_draw)
 
 		if(input.network)
 			input.network.update = 1
@@ -168,13 +167,13 @@
 	switch(href_list["command"])
 		if("power")
 			if(!configuring)
-				use_power = !use_power
+				update_use_power(!use_power)
 			else
-				use_power = 0
+				update_use_power(POWER_USE_OFF)
 		if("configure")
 			configuring = !configuring
 			if(configuring)
-				use_power = 0
+				update_use_power(POWER_USE_OFF)
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
 	if(configuring && !use_power)

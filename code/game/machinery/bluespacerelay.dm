@@ -6,7 +6,6 @@
 
 	anchored = 1
 	density = 1
-	use_power = 1
 	var/on = 1
 
 	idle_power_usage = 15000

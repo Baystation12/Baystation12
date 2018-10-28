@@ -3,7 +3,7 @@
 // Abilities in this tree allow the AI to physically manipulate systems around the station.
 // T1 - Electrical Pulse - Sends out pulse that breaks some lights and sometimes even APCs. This can actually break the AI's APC so be careful!
 // T2 - Reboot camera - Allows the AI to reactivate a camera.
-// T3 - Emergency Forcefield - Allows the AI to project 1 tile forcefield that blocks movement and air flow. Forcefield´dissipates over time. It is also very susceptible to energetic weaponry.
+// T3 - Emergency Forcefield - Allows the AI to project 1 tile forcefield that blocks movement and air flow. Forcefieldï¿½dissipates over time. It is also very susceptible to energetic weaponry.
 // T4 - Machine Overload - Detonates machine of choice in a minor explosion. Two of these are usually enough to kill or K/O someone.
 // T5 - Machine Upgrade - Upgrades a machine of choice. Upgrade behavior can be defined for each machine independently.
 
@@ -161,7 +161,7 @@
 	if(!ability_pay(user,price))
 		return
 
-	M.use_power(250 KILOWATTS)
+	M.use_power_oneoff(250 KILOWATTS)
 
 	// Trigger a powernet alarm. Careful engineers will probably notice something is going on.
 	var/area/temp_area = get_area(M)

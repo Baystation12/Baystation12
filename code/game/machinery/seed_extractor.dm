@@ -5,7 +5,7 @@
 	icon_state = "sextractor"
 	density = 1
 	anchored = 1
-	use_power = 2
+	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 10
 	active_power_usage = 2000
 

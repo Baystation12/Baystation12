@@ -4,7 +4,6 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "ccharger0"
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 60 KILOWATTS	//This is the power drawn when charging
 	power_channel = EQUIP
@@ -100,13 +99,13 @@
 //	log_debug("ccpt [charging] [stat]")
 
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
-		update_use_power(0)
+		update_use_power(POWER_USE_OFF)
 		return
 
 	if (charging && !charging.fully_charged())
 		charging.give(active_power_usage*CELLRATE)
-		update_use_power(2)
+		update_use_power(POWER_USE_ACTIVE)
 
 		update_icon()
 	else
-		update_use_power(1)
+		update_use_power(POWER_USE_IDLE)

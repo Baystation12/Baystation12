@@ -129,7 +129,7 @@
 		var/overlays_post = overlays.len
 		if(overlays_post != (overlays_pre + o_img.len)) //Here we go!
 			//log_world("Corrupted openspace turf at [x],[y],[z] being replaced. Pre: [overlays_pre], Post: [overlays_post]")
-			new /turf/simulated/open(src)
+			ChangeTurf(/turf/simulated/open)
 			return //Let's get out of here.
 
 		//TODO : Add overlays if people fall down holes

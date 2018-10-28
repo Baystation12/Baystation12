@@ -6,7 +6,7 @@
 
 	name = "Gas filter"
 
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
 
@@ -69,7 +69,7 @@
 		icon_state += use_power ? "on" : "off"
 	else
 		icon_state += "off"
-		use_power = 0
+		update_use_power(POWER_USE_OFF)
 
 /obj/machinery/atmospherics/trinary/filter/update_underlays()
 	if(..())
@@ -117,7 +117,7 @@
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
-		use_power(power_draw)
+		use_power_oneoff(power_draw)
 
 	return 1
 
@@ -223,7 +223,7 @@
 		var/new_flow_rate = input(usr,"Enter new flow rate (0-[air1.volume]L/s)","Flow Rate Control",src.set_flow_rate) as num
 		src.set_flow_rate = max(0, min(air1.volume, new_flow_rate))
 	if(href_list["power"])
-		use_power=!use_power
+		update_use_power(!use_power)
 	src.update_icon()
 	src.updateUsrDialog()
 /*

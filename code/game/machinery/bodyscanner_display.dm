@@ -6,8 +6,8 @@
 	var/icon_state_unpowered = "telescreen"
 	anchored = TRUE
 	density = 0
-	var/base_idle_power_usage = 75
-	var/base_active_power_usage = 300
+	idle_power_usage = 75
+	active_power_usage = 300
 	w_class = ITEM_SIZE_HUGE
 	var/list/bodyscans = list()
 	var/selected = 0

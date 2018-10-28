@@ -655,10 +655,10 @@
 		qdel(src)
 
 /obj/machinery/button/windowtint/proc/toggle_tint()
-	use_power(5)
+	use_power_oneoff(5)
 
 	active = !active
-	update_icon()
+	queue_icon_update()
 
 	for(var/obj/structure/window/reinforced/polarized/W in range(src,range))
 		if (W.id == src.id || !W.id)

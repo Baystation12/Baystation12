@@ -5,7 +5,7 @@
 	icon_state = "off"
 	level = 1
 	density = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
 	var/target_pressure = 10*ONE_ATMOSPHERE
@@ -115,7 +115,7 @@
 			power_draw = pump_gas(src, air1, inner_tank, transfer_moles, power_rating*power_setting) * intake_power_efficiency
 			if (power_draw >= 0)
 				last_power_draw = power_draw
-				use_power(power_draw)
+				use_power_oneoff(power_draw)
 				if(network1)
 					network1.update = 1
 		if (air1.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
@@ -137,7 +137,7 @@
 				M.place_sheet(get_turf(src), 1, M.name)
 			power_draw = power_rating * co2_intake
 			last_power_draw = power_draw
-			use_power(power_draw)
+			use_power_oneoff(power_draw)
 		else
 			phase = "releasing"
 
@@ -149,7 +149,7 @@
 			power_draw = pump_gas(src, inner_tank, air2, transfer_moles, power_rating*power_setting)
 			if (power_draw >= 0)
 				last_power_draw = power_draw
-				use_power(power_draw)
+				use_power_oneoff(power_draw)
 				if(network2)
 					network2.update = 1
 		else//can't push outside harder than target pressure. Device is not intended to be used as a pump after all
@@ -197,7 +197,7 @@
 	if(..())
 		return 1
 	if(href_list["toggleStatus"])
-		use_power = !use_power
+		update_use_power(!use_power)
 		update_icon()
 		return 1
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways

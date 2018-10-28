@@ -27,7 +27,6 @@
 	clickvol = 40
 
 	// Power
-	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 150
 
@@ -60,7 +59,7 @@
 		state = 8
 	else
 		state = 5
-	use_power = 2
+	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
 	addtimer(CALLBACK(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS, TIMER_UNIQUE)
 
@@ -89,7 +88,7 @@
 		WL.amount = HH.amount
 		qdel(HH)
 
-	use_power = 1
+	update_use_power(POWER_USE_IDLE)
 	if( locate(/mob,contents) )
 		state = 7
 		gibs_ready = 1
@@ -136,8 +135,7 @@
 			return
 		else
 			wrench_floor_bolts(user)
-			use_power = anchored
-			power_change()
+			update_use_power(anchored)
 			return
 	else if(istype(W,/obj/item/grab))
 		if((state == 1) && hacked)

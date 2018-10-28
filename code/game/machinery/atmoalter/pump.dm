@@ -101,7 +101,7 @@
 		if(!powered())
 			cell.use(power_draw * CELLRATE)
 		else
-			use_power(power_draw)
+			use_power_oneoff(power_draw)
 		last_power_draw = power_draw
 
 		update_connected_network()

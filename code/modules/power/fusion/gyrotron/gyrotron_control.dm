@@ -63,7 +63,7 @@
 			to_chat(user, "<span class='warning'>That's not a valid number.</span>")
 			return TOPIC_REFRESH
 		G.mega_energy = Clamp(new_val, 1, 50)
-		G.active_power_usage = G.mega_energy * 1500
+		G.change_power_consumption(G.mega_energy * 1500, POWER_USE_ACTIVE)
 		updateUsrDialog()
 		return TOPIC_REFRESH
 

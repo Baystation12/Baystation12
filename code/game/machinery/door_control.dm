@@ -13,7 +13,6 @@
 	*/
 
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 4
 
@@ -45,7 +44,7 @@
 		flick("[initial(icon_state)]-denied",src)
 		return
 
-	use_power(5)
+	use_power_oneoff(5)
 	icon_state = "[initial(icon_state)]1"
 	desiredstate = !desiredstate
 	trigger(user)

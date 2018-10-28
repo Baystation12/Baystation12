@@ -2,7 +2,7 @@
 /obj/machinery/ntnet_relay
 	name = "NTNet Quantum Relay"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."
-	use_power = 2
+	use_power = POWER_USE_ACTIVE
 	active_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	idle_power_usage = 100
 	icon_state = "bus"
@@ -37,9 +37,9 @@
 
 /obj/machinery/ntnet_relay/Process()
 	if(operable())
-		use_power = 2
+		update_use_power(POWER_USE_ACTIVE)
 	else
-		use_power = 1
+		update_use_power(POWER_USE_IDLE)
 
 	if(dos_overload)
 		dos_overload = max(0, dos_overload - dos_dissipate)

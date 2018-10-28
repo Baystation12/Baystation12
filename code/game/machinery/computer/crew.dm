@@ -4,7 +4,6 @@
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
 	light_color = "#315ab4"
-	use_power = 1
 	idle_power_usage = 250
 	active_power_usage = 500
 	circuit = /obj/item/weapon/circuitboard/crew

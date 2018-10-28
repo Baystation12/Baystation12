@@ -16,7 +16,6 @@
 	icon_state = "TheSingGen"
 	anchored = 1
 	density = 1
-	use_power = 1
 	idle_power_usage = 200
 	active_power_usage = 1000
 	var/on = 1
