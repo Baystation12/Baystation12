@@ -96,7 +96,7 @@
 	else if(shade.loc == src)
 		var/choice = alert("Would you like to invoke the spirit within?",,"Yes","No")
 		if(choice == "Yes")
-			shade.forceMove(get_turf(src))
+			shade.dropInto(loc)
 			to_chat(user, "<span class='notice'>You summon \the [shade].</span>")
 		if(choice == "No")
 			return

@@ -24,16 +24,11 @@
 	movement_range = 15
 	energy = 15
 
-
 /obj/effect/accelerated_particle/New(loc, dir = 2)
-	src.loc = loc
-	src.set_dir(dir)
+	set_dir(dir)
 	if(movement_range > 20)
 		movement_range = 20
-	spawn(0)
-		move(1)
-	return
-
+	move(1)
 
 /obj/effect/accelerated_particle/Bump(atom/A)
 	if (A)
@@ -47,51 +42,45 @@
 				if(collided_core.AddParticles(particle_type, 1 + additional_particles))
 					collided_core.owned_field.plasma_temperature += mega_energy
 					collided_core.owned_field.energy += energy
-					loc = null
+					qdel(src)
 		else if(istype(A, /obj/effect/fusion_particle_catcher))
 			var/obj/effect/fusion_particle_catcher/PC = A
 			if(particle_type && particle_type != "neutron")
 				if(PC.parent.owned_core.AddParticles(particle_type, 1 + additional_particles))
 					PC.parent.plasma_temperature += mega_energy
 					PC.parent.energy += energy
-					loc = null
-	return
-
+					qdel(src)
 
 /obj/effect/accelerated_particle/Bumped(atom/A)
 	if(ismob(A))
 		Bump(A)
-	return
-
 
 /obj/effect/accelerated_particle/ex_act(severity)
 	qdel(src)
-	return
 
 /obj/effect/accelerated_particle/proc/toxmob(var/mob/living/M)
 	var/radiation = (energy*2)
 	M.apply_effect((radiation*3),IRRADIATE,blocked = M.getarmor(null, "rad"))
 	M.updatehealth()
-//	to_chat(M, "<span class='warning'>You feel odd.</span>")
-	return
-
 
 /obj/effect/accelerated_particle/proc/move(var/lag)
+	set waitfor = FALSE
+	if(QDELETED(src))
+		return
+	var/destination
 	if(target)
-		if(movetotarget)
-			if(!step_towards(src,target))
-				src.loc = get_step(src, get_dir(src,target))
-			if(get_dist(src,target) < 1)
-				movetotarget = 0
-		else
-			if(!step(src, get_step_away(src,source)))
-				src.loc = get_step(src, get_step_away(src,source))
+		destination = movetotarget ? get_step_towards(src, target) : get_step_away(src, source)
 	else
-		if(!step(src,dir))
-			src.loc = get_step(src,dir)
+		destination = get_step(src, dir)
+	if(!step_towards(src, destination))
+		if(QDELETED(src))
+			return
+		forceMove(destination)
+	if(target && movetotarget && (get_dist(src,target) < 1))
+		movetotarget = 0
 	movement_range--
 	if(movement_range <= 0)
 		qdel(src)
-	else
-		sleep(lag)
-		move(lag)
+		return
+	sleep(lag)
+	move(lag)

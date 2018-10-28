@@ -3,7 +3,7 @@
 /obj/machinery/atmospherics/Destroy()
 	for(var/mob/living/M in src) //ventcrawling is serious business
 		M.remove_ventcrawl()
-		M.forceMove(get_turf(src))
+		M.dropInto(loc)
 	if(pipe_image)
 		for(var/mob/living/M in GLOB.player_list)
 			if(M.client)

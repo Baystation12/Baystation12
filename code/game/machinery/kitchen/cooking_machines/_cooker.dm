@@ -144,7 +144,7 @@
 	if(!can_burn_food)
 		icon_state = off_icon
 		cooking = 0
-		result.forceMove(get_turf(src))
+		result.dropInto(loc)
 		cooking_obj = null
 	else
 		var/failed

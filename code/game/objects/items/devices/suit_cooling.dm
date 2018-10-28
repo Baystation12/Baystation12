@@ -90,7 +90,7 @@
 		if(ishuman(user))
 			user.put_in_hands(cell)
 		else
-			cell.forceMove(get_turf(src))
+			cell.dropInto(loc)
 
 		cell.add_fingerprint(user)
 		cell.update_icon()

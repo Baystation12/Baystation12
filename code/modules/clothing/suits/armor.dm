@@ -94,7 +94,7 @@
 		spark_system.start()
 		playsound(user.loc, "sparks", 50, 1)
 
-		user.loc = picked
+		user.forceMove(picked)
 		return PROJECTILE_FORCE_MISS
 	return 0
 

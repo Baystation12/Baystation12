@@ -68,7 +68,7 @@
 			if(chassis.occupant)
 				for(var/obj/effect/speech_bubble/B in range(1, chassis))
 					if(B.parent == chassis.occupant)
-						B.loc = chassis.loc
+						B.forceMove(get_turf(chassis))
 		if(move_result)
 			wait = 1
 			chassis.use_power(energy_drain)

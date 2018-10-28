@@ -236,7 +236,7 @@
 					if (get_turf(G.affecting) == get_turf(src))
 						G.affecting.forceMove(get_step(src, src.dir))
 					else
-						G.affecting.forceMove(get_turf(src))
+						G.affecting.dropInto(loc)
 					G.affecting.Weaken(5)
 					visible_message("<span class='danger'>[G.assailant] throws \the [G.affecting] over \the [src].</span>")
 			else

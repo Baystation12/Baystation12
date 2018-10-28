@@ -357,7 +357,7 @@ BLIND     // can't see anything
 	var/mob/living/carbon/human/H = wearer
 	if(ring && istype(H))
 		if(!H.equip_to_slot_if_possible(ring, slot_gloves))
-			ring.forceMove(get_turf(src))
+			ring.dropInto(loc)
 		src.ring = null
 	wearer = null
 
@@ -592,7 +592,7 @@ BLIND     // can't see anything
 	if(usr.stat || usr.restrained() || usr.incapacitated())
 		return
 
-	holding.forceMove(get_turf(usr))
+	holding.dropInto(loc)
 
 	if(usr.put_in_hands(holding))
 		usr.visible_message("<span class='warning'>\The [usr] pulls \the [holding] out of \the [src]!</span>", range = 1)

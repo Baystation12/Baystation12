@@ -105,7 +105,7 @@
 		else	//Or make a new one if empty.
 			brain = new(user.loc)
 		brainmob.container = null//Reset brainmob mmi var.
-		brainmob.loc = brain//Throw mob into brain.
+		brainmob.forceMove(brain)//Throw mob into brain.
 		brainmob.remove_from_living_mob_list() //Get outta here
 		brain.brainmob = brainmob//Set the brain to use the brainmob
 		brainmob = null//Set mmi brainmob var to null

@@ -192,19 +192,19 @@
 									large_cocoon = 1
 									fed++
 									src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
-									M.loc = C
+									M.forceMove(C)
 									C.pixel_x = M.pixel_x
 									C.pixel_y = M.pixel_y
 									break
 								for(var/obj/item/I in C.loc)
-									I.loc = C
+									I.forceMove(C)
 								for(var/obj/structure/S in C.loc)
 									if(!S.anchored)
-										S.loc = C
+										S.forceMove(C)
 										large_cocoon = 1
 								for(var/obj/machinery/M in C.loc)
 									if(!M.anchored)
-										M.loc = C
+										M.forceMove(C)
 										large_cocoon = 1
 								if(large_cocoon)
 									C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")

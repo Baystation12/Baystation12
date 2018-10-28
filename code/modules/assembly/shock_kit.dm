@@ -16,11 +16,8 @@
 
 /obj/item/assembly/shock_kit/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isWrench(W) && !status)
-		var/turf/T = loc
-		if(ismob(T))
-			T = T.loc
-		part1.loc = T
-		part2.loc = T
+		part1.dropInto(loc)
+		part2.dropInto(loc)
 		part1.master = null
 		part2.master = null
 		part1 = null

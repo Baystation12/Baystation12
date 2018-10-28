@@ -107,9 +107,7 @@
 
 	if(istype(stored_pen))
 		to_chat(usr, "<span class='notice'>You remove [stored_pen] from [src].</span>")
-		stored_pen.forceMove(get_turf(src))
-		if(!issilicon(usr))
-			usr.put_in_hands(stored_pen)
+		usr.put_in_hands(stored_pen) // Silicons will drop it anyway.
 		stored_pen = null
 		update_verbs()
 
@@ -131,9 +129,7 @@
 	for(var/datum/computer_file/program/P in idle_threads)
 		P.event_idremoved(1)
 
-	card_slot.stored_card.forceMove(get_turf(src))
-	if(!issilicon(user))
-		user.put_in_hands(card_slot.stored_card)
+	user.put_in_hands(card_slot.stored_card)
 	to_chat(user, "You remove [card_slot.stored_card] from [src].")
 	card_slot.stored_card = null
 	update_uis()
@@ -158,7 +154,7 @@
 		to_chat(user, "There is no intellicard connected to \the [src].")
 		return
 
-	ai_slot.stored_card.forceMove(get_turf(src))
+	ai_slot.stored_card.dropInto(loc)
 	ai_slot.stored_card = null
 	ai_slot.update_power_usage()
 	update_uis()

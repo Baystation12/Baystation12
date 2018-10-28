@@ -349,7 +349,7 @@
 
 /obj/mecha/relaymove(mob/user,direction)
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.
-		user.forceMove(get_turf(src))
+		user.dropInto(loc)
 		to_chat(user, "You climb out from [src]")
 		return 0
 	if(connected_port)
@@ -1151,13 +1151,12 @@
 		if(istype(mob_container, /obj/item/device/mmi))
 			var/obj/item/device/mmi/mmi = mob_container
 			if(mmi.brainmob)
-				occupant.loc = mmi
+				occupant.forceMove(mmi)
 			mmi.mecha = null
 			src.verbs += /obj/mecha/verb/eject
 		src.occupant = null
 		src.icon_state = src.reset_icon()+"-open"
 		src.set_dir(dir_in)
-	return
 
 /////////////////////////
 ////// Access stuff /////

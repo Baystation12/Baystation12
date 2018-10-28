@@ -40,7 +40,7 @@
 				to_chat(user, "<span class='danger'>\The [src] was too full, and shredded paper goes everywhere!</span>")
 				for(var/i=(paperamount-max_paper);i>0;i--)
 					var/obj/item/weapon/shreddedp/SP = get_shredded_paper()
-					SP.loc = get_turf(src)
+					SP.dropInto(loc)
 					SP.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),1,5)
 				paperamount = max_paper
 			update_icon()

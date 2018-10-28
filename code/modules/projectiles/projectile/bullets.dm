@@ -266,8 +266,8 @@
 	sharp = 0
 
 /obj/item/projectile/bullet/pistol/cap/Process()
-	loc = null
 	qdel(src)
+	return PROCESS_KILL
 
 /obj/item/projectile/bullet/rock //spess dust
 	name = "micrometeor"

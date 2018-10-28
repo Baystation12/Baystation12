@@ -133,7 +133,7 @@
 	else
 		O.key = key
 
-	O.loc = loc
+	O.dropInto(loc)
 	O.job = "Robot"
 	if(O.mind.assigned_role == "Robot")
 		if(O.mind.role_alt_title == "Drone")

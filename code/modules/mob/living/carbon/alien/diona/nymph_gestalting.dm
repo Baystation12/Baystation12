@@ -34,7 +34,7 @@
 			else
 				to_chat(H, "You feel a pang of loss as \the [src] splits away from your gestalt.")
 				H.visible_message("\The [src] wriggles out of the depths of \the [H] and plops to the ground.")
-				src.forceMove(get_turf(H))
+				dropInto(loc)
 			return
 
 	to_chat(src, "<span>You are not within a gestalt currently.</span>")

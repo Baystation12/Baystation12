@@ -118,7 +118,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 					M.forceMove(src.loc)
 
 		for(var/atom/movable/M in src)
-			M.forceMove(get_turf(src))
+			M.dropInto(loc)
 		qdel(src)
 
 

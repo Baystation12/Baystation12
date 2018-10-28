@@ -78,9 +78,8 @@ var/const/tk_maxrange = 15
 /obj/item/tk_grab/dropped(mob/user as mob)
 	if(focus && user && loc != user && loc != user.loc) // drop_item() gets called when you tk-attack a table/closet with an item
 		if(focus.Adjacent(loc))
-			focus.loc = loc
-	loc = null
-	QDEL_IN(src, 1)
+			focus.forceMove(loc)
+	qdel(src)
 
 //stops TK grabs being equipped anywhere but into hands
 /obj/item/tk_grab/equipped(var/mob/user, var/slot)

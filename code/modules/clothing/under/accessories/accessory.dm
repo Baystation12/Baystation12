@@ -85,7 +85,7 @@
 		usr.put_in_hands(src)
 		src.add_fingerprint(user)
 	else
-		src.forceMove(get_turf(src))
+		dropInto(loc)
 
 //default attackby behaviour
 /obj/item/clothing/accessory/attackby(obj/item/I, mob/user)

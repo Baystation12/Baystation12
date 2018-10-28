@@ -30,7 +30,7 @@
 		update_power_usage()
 	if(isScrewdriver(W))
 		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
-		stored_card.forceMove(get_turf(src))
+		stored_card.dropInto(loc)
 		stored_card = null
 		update_power_usage()
 
@@ -38,6 +38,6 @@
 	if(holder2 && (holder2.ai_slot == src))
 		holder2.ai_slot = null
 	if(stored_card)
-		stored_card.forceMove(get_turf(holder2))
+		stored_card.dropInto(holder2 ? holder2.loc : loc)
 	holder2 = null
 	return ..()

@@ -25,7 +25,7 @@
 				if(newvars && length(newvars))
 					for(var/v in newvars)
 						x.vars[v] = newvars[v]
-				x.loc = T
+				x.dropInto(loc)
 				if(prob(50))
 					for(var/j = 1, j <= rand(1, 3), j++)
 						step(x, pick(NORTH,SOUTH,EAST,WEST))

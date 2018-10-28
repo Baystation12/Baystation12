@@ -316,7 +316,7 @@ Class Procs:
 						R.handle_item_insertion(A, 1)
 						component_parts -= A
 						component_parts += B
-						B.loc = null
+						B.forceMove(null)
 						to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
 						break
 			update_icon()
@@ -332,7 +332,7 @@ Class Procs:
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
-		I.forceMove(get_turf(src))
+		I.dropInto(loc)
 
 	qdel(src)
 	return 1

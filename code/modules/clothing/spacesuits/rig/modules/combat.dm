@@ -292,7 +292,7 @@
 
 	if(target)
 		var/obj/item/firing = new fabrication_type()
-		firing.forceMove(get_turf(src))
+		firing.dropInto(loc)
 		H.visible_message("<span class='danger'>[H] launches \a [firing]!</span>")
 		firing.throw_at(target,fire_force,fire_distance)
 	else

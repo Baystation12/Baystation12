@@ -104,8 +104,7 @@
 
 	sleep(20)
 	if(state in list(1,3,6) )
-		usr.loc = src.loc
-
+		usr.dropInto(loc)
 
 /obj/machinery/washing_machine/on_update_icon()
 	icon_state = "wm_[state][panel]"
@@ -144,7 +143,7 @@
 		if((state == 1) && hacked)
 			var/obj/item/grab/G = W
 			if(ishuman(G.assailant) && iscorgi(G.affecting))
-				G.affecting.loc = src
+				G.affecting.forceMove(src)
 				qdel(G)
 				state = 3
 		else
@@ -219,7 +218,7 @@
 		if(4)
 			state = 3
 			for(var/atom/movable/O in contents)
-				O.forceMove(get_turf(src))
+				O.dropInto(loc)
 			crayon = null
 			detergent = null
 			state = 1

@@ -58,9 +58,9 @@
 	climb(M)
 
 /obj/structure/ladder/proc/instant_climb(var/mob/M)
-	var/target_ladder = getTargetLadder(M)
+	var/atom/target_ladder = getTargetLadder(M)
 	if(target_ladder)
-		M.forceMove(get_turf(target_ladder))
+		M.dropInto(target_ladder.loc)
 
 /obj/structure/ladder/proc/climb(var/mob/M)
 	if(!M.may_climb_ladders(src))

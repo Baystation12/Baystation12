@@ -171,7 +171,7 @@
 			to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
 			src.state = 1
 			src.SetName("Wired Airlock Assembly")
-			electronics.loc = src.loc
+			electronics.dropInto(loc)
 			electronics = null
 
 	else if(istype(W, /obj/item/stack/material) && !glass)
