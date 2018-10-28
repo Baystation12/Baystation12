@@ -36,7 +36,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "sublimator-off-unloaded-notank"
 	density = TRUE
-	use_power = 1
+	use_power = POWER_USE_IDLE
 
 	var/sublimated_units_per_tick = 20
 	var/obj/item/weapon/reagent_containers/container
@@ -82,7 +82,8 @@
 		user.visible_message("<span class='notice'>\The [user] removes \the [container] from \the [src].</span>")
 		container = null
 		verbs -= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
-		if(use_power >= 2) use_power = 1
+		if(use_power >= POWER_USE_ACTIVE)
+			update_use_power(POWER_USE_IDLE)
 		update_icon()
 	else
 		to_chat(user, "<span class='warning'>\The [src] has no reagent container loaded.</span>")
@@ -94,7 +95,7 @@
 	if(stat & (BROKEN|NOPOWER))
 		to_chat(user, "<span class='warning'>\The [src] is not currently functional.</span>")
 		return
-	use_power = use_power == 2 ? 1 : 2
+	update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 	user.visible_message("<span class='notice'>\The [user] switches \the [src] [use_power == 2 ? "on" : "off"].</span>")
 	update_icon()
 
@@ -121,11 +122,11 @@
 
 	if(stat & (BROKEN|NOPOWER))
 		if(use_power)
-			use_power = 0
+			update_use_power(POWER_USE_OFF)
 			update_icon()
 		return
 
-	if(use_power >= 2 && container && container.reagents)
+	if(use_power >= POWER_USE_ACTIVE && container && container.reagents)
 		var/datum/gas_mixture/produced = new
 		var/added_gas = FALSE
 		for(var/datum/reagent/R in container.reagents.reagent_list)
@@ -143,11 +144,11 @@
 			air_contents.merge(produced)
 		else
 			visible_message("<span class='notice'>\The [src] pings as it finishes processing the contents of \the [container].</span>")
-			use_power = 1
+			update_use_power(POWER_USE_IDLE)
 			update_icon()
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/on_update_icon()
-	icon_state = "sublimator-[use_power == 2 ? "on" : "off"]-[container ? "loaded" : "unloaded"]-[holding ? "tank" : "notank"]"
+	icon_state = "sublimator-[use_power == POWER_USE_ACTIVE ? "on" : "off"]-[container ? "loaded" : "unloaded"]-[holding ? "tank" : "notank"]"
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/examine(var/mob/user)
 	. = ..()

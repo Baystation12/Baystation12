@@ -23,7 +23,6 @@ datum/track/proc/GetTrack()
 	anchored = 1
 	density = 1
 	power_channel = EQUIP
-	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 100
 	clicksound = 'sound/machines/buttonbeep.ogg'
@@ -203,7 +202,7 @@ datum/track/proc/GetTrack()
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
 	playing = 0
-	update_use_power(1)
+	update_use_power(POWER_USE_IDLE)
 	update_icon()
 	QDEL_NULL(sound_token)
 
@@ -217,7 +216,7 @@ datum/track/proc/GetTrack()
 	sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, current_track.GetTrack(), volume = volume, range = 7, falloff = 3, prefer_mute = TRUE)
 
 	playing = 1
-	update_use_power(2)
+	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)

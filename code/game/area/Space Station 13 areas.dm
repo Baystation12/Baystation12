@@ -36,12 +36,15 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
-	var/power_equip = 1
+	var/power_equip = 1 // Status
 	var/power_light = 1
 	var/power_environ = 1
-	var/used_equip = 0
+	var/used_equip = 0  // Continuous drain; don't mess with these directly.
 	var/used_light = 0
 	var/used_environ = 0
+	var/oneoff_equip   = 0 //Used once and cleared each tick.
+	var/oneoff_light   = 0
+	var/oneoff_environ = 0
 
 	var/has_gravity = 1
 	var/obj/machinery/power/apc/apc = null

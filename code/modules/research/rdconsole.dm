@@ -477,7 +477,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				qdel(I)
 				linked_destroy.icon_state = "d_analyzer"
 
-	use_power(linked_destroy.active_power_usage)
+	use_power_oneoff(linked_destroy.active_power_usage)
 	screen = 1.0
 	if(user)
 		attack_hand(user)

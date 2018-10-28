@@ -130,7 +130,7 @@
 	var/is_open = 0 //Whether or not the wires are exposed
 	var/locked = 0
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 0
 
 /obj/machinery/shieldgen/Destroy()
@@ -145,10 +145,11 @@
 
 	create_shields()
 
-	idle_power_usage = 0
+	var/new_idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		idle_power_usage += shield_tile.shield_idle_power
-	update_use_power(1)
+		new_idle_power_usage += shield_tile.shield_idle_power
+	change_power_consumption(new_idle_power_usage, POWER_USE_IDLE)
+	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/shieldgen/proc/shields_down()
 	if(!active) return 0 //If it's already off, how did this get called?
@@ -158,7 +159,7 @@
 
 	collapse_shields()
 
-	update_use_power(0)
+	update_use_power(POWER_USE_OFF)
 
 /obj/machinery/shieldgen/proc/create_shields()
 	for(var/turf/target_tile in range(8, src))
@@ -166,14 +167,14 @@
 			if (malfunction && prob(33) || !malfunction)
 				var/obj/machinery/shield/S = new/obj/machinery/shield(target_tile)
 				deployed_shields += S
-				use_power(S.shield_generate_power)
+				use_power_oneoff(S.shield_generate_power)
 
 	for(var/turf/above in range(8, GetAbove(src)))//Probably a better way to do this.
 		if ((istype(above,/turf/space)|| istype(above, /turf/simulated/open)) && !(locate(/obj/machinery/shield) in above))
 			if (malfunction && prob(33) || !malfunction)
 				var/obj/machinery/shield/A = new/obj/machinery/shield(above)
 				deployed_shields += A
-				use_power(A.shield_generate_power)
+				use_power_oneoff(A.shield_generate_power)
 
 /obj/machinery/shieldgen/proc/collapse_shields()
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
@@ -203,8 +204,7 @@
 				new_power_usage += shield_tile.shield_idle_power
 
 			if (new_power_usage != idle_power_usage)
-				idle_power_usage = new_power_usage
-				use_power(0)
+				change_power_consumption(new_power_usage, POWER_USE_IDLE)
 
 			check_delay = 60
 		else

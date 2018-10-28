@@ -15,7 +15,7 @@ var/list/fusion_cores = list()
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	idle_power_usage = 50
 	active_power_usage = 500 //multiplied by field strength
 	anchored = 0
@@ -50,7 +50,7 @@ var/list/fusion_cores = list()
 	if(href_list["str"])
 		var/dif = text2num(href_list["str"])
 		field_strength = min(max(field_strength + dif, MIN_FIELD_STR), MAX_FIELD_STR)
-		active_power_usage = 500 * field_strength
+		change_power_consumption(500 * field_strength, POWER_USE_ACTIVE)
 		if(owned_field)
 			owned_field.ChangeFieldStrength(field_strength)
 
@@ -60,7 +60,7 @@ var/list/fusion_cores = list()
 	owned_field = new(loc, src)
 	owned_field.ChangeFieldStrength(field_strength)
 	icon_state = "core1"
-	use_power = 2
+	update_use_power(POWER_USE_ACTIVE)
 	. = 1
 
 /obj/machinery/power/fusion_core/proc/Shutdown(var/force_rupture)
@@ -72,7 +72,7 @@ var/list/fusion_cores = list()
 			owned_field.RadiateAll()
 		qdel(owned_field)
 		owned_field = null
-	use_power = 1
+	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/power/fusion_core/proc/AddParticles(var/name, var/quantity = 1)
 	if(owned_field)
@@ -86,7 +86,7 @@ var/list/fusion_cores = list()
 /obj/machinery/power/fusion_core/proc/set_strength(var/value)
 	value = Clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
 	field_strength = value
-	active_power_usage = 5 * value
+	change_power_consumption(5 * value, POWER_USE_ACTIVE)
 	if(owned_field)
 		owned_field.ChangeFieldStrength(value)
 

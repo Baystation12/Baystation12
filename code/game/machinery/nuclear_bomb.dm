@@ -6,7 +6,7 @@ var/bomb_set
 	icon = 'icons/obj/nuke.dmi'
 	icon_state = "idle"
 	density = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	unacidable = 1
 
 	var/deployable = 0

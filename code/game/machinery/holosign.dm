@@ -5,7 +5,6 @@
 	icon = 'icons/obj/holosign.dmi'
 	icon_state = "sign_off"
 	layer = ABOVE_DOOR_LAYER
-	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 70
 	anchored = 1
@@ -29,7 +28,7 @@
 	if (stat & (BROKEN|NOPOWER))
 		return
 	lit = !lit
-	use_power = lit ? 2 : 1
+	update_use_power(lit ? POWER_USE_ACTIVE : POWER_USE_IDLE)
 	update_icon()
 
 //maybe add soft lighting? Maybe, though not everything needs it
@@ -55,7 +54,7 @@
 	if(..())
 		return
 
-	use_power(5)
+	use_power_oneoff(5)
 
 	active = !active
 	update_icon()
