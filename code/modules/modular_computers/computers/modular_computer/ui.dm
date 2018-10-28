@@ -38,6 +38,11 @@
 		programs.Add(list(program))
 
 	data["programs"] = programs
+
+	data["updating"] = updating
+	data["update_progress"] = update_progress
+	data["updates"] = updates
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "NTOS Main Menu", 400, 500)
@@ -45,6 +50,12 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
+
+/obj/item/modular_computer/CanUseTopic()
+	//There is no bypassing the update, mwhahaha
+	if(updating)
+		return min(STATUS_UPDATE, ..())
+	return ..()
 
 // Handles user's GUI input
 /obj/item/modular_computer/Topic(href, href_list)
@@ -62,6 +73,12 @@
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
+		. = 1
+	if( href_list["PC_enable_update"] )
+		receives_updates = TRUE
+		. = 1
+	if( href_list["PC_disable_update"] )
+		receives_updates = FALSE
 		. = 1
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
@@ -153,6 +170,6 @@
 	data["PC_programheaders"] = program_headers
 
 	data["PC_stationtime"] = stationtime2text()
-	data["PC_hasheader"] = 1
+	data["PC_hasheader"] = !updating
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data

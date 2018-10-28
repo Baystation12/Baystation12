@@ -7,6 +7,11 @@
 		shutdown_computer()
 		return 0
 
+	if(updating)
+		handle_power()
+		process_updates()
+		return 1
+
 	if(active_program && active_program.requires_ntnet && !get_ntnet_status(active_program.requires_ntnet_feature)) // Active program requires NTNet to run but we've just lost connection. Crash.
 		active_program.event_networkfailure(0)
 
@@ -95,7 +100,7 @@
 	icon_state = icon_state_unpowered
 
 	overlays.Cut()
-	if(bsod)
+	if(bsod || updating)
 		overlays.Add("bsod")
 		return
 	if(!enabled)
@@ -164,6 +169,13 @@
 	for(var/datum/computer_file/program/P in idle_threads)
 		P.kill_program(1)
 		idle_threads.Remove(P)
+
+	//Not so fast!
+	if(updates)
+		handle_updates(TRUE)
+		update_icon()
+		return
+
 	if(loud)
 		visible_message("\The [src] shuts down.", range = 1)
 	enabled = 0
@@ -171,12 +183,18 @@
 
 /obj/item/modular_computer/proc/enable_computer(var/mob/user = null)
 	enabled = 1
+
+	//Not so fast!
+	if(updates)
+		handle_updates(FALSE)
+
 	update_icon()
 
 	// Autorun feature
-	var/datum/computer_file/data/autorun = hard_drive ? hard_drive.find_file_by_name("autorun") : null
-	if(istype(autorun))
-		run_program(autorun.stored_data)
+	if(!updates)
+		var/datum/computer_file/data/autorun = hard_drive ? hard_drive.find_file_by_name("autorun") : null
+		if(istype(autorun))
+			run_program(autorun.stored_data)
 
 	if(user)
 		ui_interact(user)
@@ -310,3 +328,22 @@
 	if(has_terminal(user))
 		return
 	LAZYADD(terminals, new /datum/terminal/(user, src))
+
+/obj/item/modular_computer/proc/handle_updates(shutdown_after)
+	updating = TRUE
+	update_progress = 0
+	update_postshutdown = shutdown_after
+
+/obj/item/modular_computer/proc/process_updates()
+	if(update_progress < updates)
+		update_progress += rand(0, 2500)
+		return
+
+	//It's done.
+	updating = FALSE
+	update_icon()
+	updates = 0
+	update_progress = 0
+
+	if(update_postshutdown)
+		shutdown_computer()
