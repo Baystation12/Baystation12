@@ -155,7 +155,7 @@
 	if(!wrapped)
 		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 		for(var/obj/item/thing in src.contents)
-			thing.loc = get_turf(src)
+			thing.dropInto(loc)
 		return
 
 	if(wrapped.loc != src)
@@ -163,7 +163,7 @@
 		return
 
 	to_chat(src.loc, "<span class='warning'>You drop \the [wrapped].</span>")
-	wrapped.loc = get_turf(src)
+	wrapped.dropInto(loc)
 	wrapped = null
 	//on_update_icon()
 
@@ -229,7 +229,7 @@
 
 				A.cell.add_fingerprint(user)
 				A.cell.update_icon()
-				A.cell.loc = src
+				A.cell.forceMove(src)
 				A.cell = null
 
 				A.charging = 0
@@ -253,7 +253,7 @@
 /obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
 
 	if(QDELETED(wrapped))
-		wrapped.loc = null
+		wrapped.forceMove(null)
 		wrapped = null
 		return
 

@@ -59,7 +59,6 @@
 		return
 
 	if(holding)
-		holding.forceMove(get_turf(src))
 		user.put_in_hands(holding)
 		user.visible_message("<span class='notice'>\The [user] removes \the [holding] from \the [src].</span>")
 		holding = null
@@ -79,7 +78,6 @@
 		return
 
 	if(container)
-		container.forceMove(get_turf(src))
 		user.put_in_hands(container)
 		user.visible_message("<span class='notice'>\The [user] removes \the [container] from \the [src].</span>")
 		container = null

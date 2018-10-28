@@ -119,7 +119,6 @@
 		return
 
 	to_chat(user, "You remove \the [initial(name)] from [stuck].")
-	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
 	stuck = null
 	qdel(src)

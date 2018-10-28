@@ -318,9 +318,9 @@
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
 		P.info += "<b>Scanned item:</b> [scanned_item.name]<br><br>" + data
 		last_scan_data = P.info
-		P.loc = src.loc
+		P.dropInto(loc)
 
-		scanned_item.loc = src.loc
+		scanned_item.dropInto(loc)
 		scanned_item = null
 
 /obj/machinery/radiocarbon_spectrometer/OnTopic(user, href_list)
@@ -357,6 +357,6 @@
 
 	else if(href_list["ejectItem"])
 		if(scanned_item)
-			scanned_item.loc = src.loc
+			scanned_item.dropInto(loc)
 			scanned_item = null
 		. = TOPIC_REFRESH

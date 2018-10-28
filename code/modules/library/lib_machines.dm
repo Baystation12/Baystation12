@@ -50,11 +50,9 @@
 		cache = null
 	if(href_list["eject"])
 		for(var/obj/item/weapon/book/B in contents)
-			B.loc = src.loc
+			B.dropInto(loc)
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
-	return
-
 
 /*
  * Book binder

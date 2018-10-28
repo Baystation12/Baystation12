@@ -10,7 +10,7 @@
 
 	for(var/i in mobs_inside)
 		var/mob/M = i
-		M.forceMove(get_turf(object_to_move))
+		M.dropInto(object_to_move.loc)
 		to_chat(M,"<span class='warning'>You are suddenly flung out of \the [object_to_move]!</span>")
 	..()
 
@@ -78,5 +78,5 @@
 /obj/effect/rift/Destroy()
 	for(var/o in contents)
 		var/atom/movable/M = o
-		M.forceMove(get_turf(src))
+		M.dropInto(loc)
 	. = ..()

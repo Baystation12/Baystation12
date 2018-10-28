@@ -114,7 +114,7 @@
 		toggle_valve()
 	else if(attached_device)
 		if(href_list["rem_device"])
-			attached_device.loc = get_turf(src)
+			attached_device.dropInto(loc)
 			attached_device:holder = null
 			attached_device = null
 			update_icon()

@@ -213,7 +213,7 @@
 		if(!battery)
 			to_chat(usr, "<span class='warning'>There's no power cell to remove from \the [src].</span>")
 		else
-			battery.forceMove(get_turf(src))
+			battery.dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 			to_chat(usr, "<span class='notice'>You pull \the [battery] out of \the [src]'s power supplier.</span>")
 			battery = null
@@ -371,7 +371,7 @@
 // Actually removes the component, doesn't perform any checks.
 /obj/item/device/electronic_assembly/proc/remove_component(obj/item/integrated_circuit/component)
 	component.disconnect_all()
-	component.forceMove(get_turf(src))
+	component.dropInto(loc)
 	component.assembly = null
 	assembly_components.Remove(component)
 

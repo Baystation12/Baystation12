@@ -311,7 +311,7 @@
 		if(istype(I, /obj/item/projectile))
 			return
 		if(prob(50))
-			I.loc = src.loc
+			I.dropInto(loc)
 			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", 3)
 		else
 			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", 3)
@@ -349,7 +349,7 @@
 		if(istype(I, /obj/item/projectile))
 			return
 		if(prob(10))
-			I.forceMove(get_turf(src))
+			I.dropInto(loc)
 			visible_message("<span class='notice'>Swish! \the [I] gets caught in \the [src].</span>", 3)
 			return 0
 		else

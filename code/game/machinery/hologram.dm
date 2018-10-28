@@ -263,7 +263,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.anchored = 1//So space wind cannot drag it.
 	if(caller_id)
 		hologram.SetName("[caller_id.name] (Hologram)")
-		hologram.loc = get_step(src,1)
+		hologram.forceMove(get_step(src,1))
 		masters[caller_id] = hologram
 	else
 		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.
@@ -321,7 +321,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(masters[user])
 		step_to(masters[user], user.eyeobj) // So it turns.
 		var/obj/effect/overlay/H = masters[user]
-		H.forceMove(get_turf(user.eyeobj))
+		H.dropInto(user.eyeobj)
 		masters[user] = H
 
 		if(!(H in view(src)))

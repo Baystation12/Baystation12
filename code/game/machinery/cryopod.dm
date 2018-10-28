@@ -367,7 +367,7 @@
 		else
 			if(control_computer && control_computer.allow_items)
 				control_computer.frozen_items += W
-				W.loc = null
+				W.forceMove(null)
 			else
 				W.forceMove(src.loc)
 
@@ -481,7 +481,7 @@
 	if(announce) items -= announce
 
 	for(var/obj/item/W in items)
-		W.forceMove(get_turf(src))
+		W.dropInto(loc)
 
 	src.go_out()
 	add_fingerprint(usr)
@@ -532,7 +532,7 @@
 		occupant.client.eye = src.occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 
-	occupant.forceMove(get_turf(src))
+	occupant.dropInto(loc)
 	set_occupant(null)
 
 	icon_state = base_icon_state

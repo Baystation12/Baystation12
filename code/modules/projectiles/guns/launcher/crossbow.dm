@@ -43,7 +43,7 @@
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		to_chat(user, "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow.")
 		var/obj/item/weapon/material/shard/shrapnel/S = new()
-		S.loc = get_turf(src)
+		S.dropInto(loc)
 		qdel(src)
 
 /obj/item/weapon/gun/launcher/crossbow
@@ -87,7 +87,7 @@
 	if(tension)
 		if(bolt)
 			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
-			bolt.loc = get_turf(src)
+			bolt.dropInto(loc)
 			var/obj/item/weapon/arrow/A = bolt
 			bolt = null
 			A.removed(user)
@@ -150,7 +150,7 @@
 			if (R.use(1))
 				bolt = new /obj/item/weapon/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
-				bolt.loc = src
+				bolt.dropInto(loc)
 				update_icon()
 				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
 				superheat_rod(user)
@@ -169,7 +169,7 @@
 	else if(isScrewdriver(W))
 		if(cell)
 			var/obj/item/C = cell
-			C.loc = get_turf(user)
+			C.dropInto(user.loc)
 			to_chat(user, "<span class='notice'>You jimmy [cell] out of [src] with [W].</span>")
 			cell = null
 		else

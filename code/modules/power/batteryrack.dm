@@ -242,7 +242,7 @@
 
 /obj/machinery/power/smes/batteryrack/dismantle()
 	for(var/obj/item/weapon/cell/C in internal_cells)
-		C.forceMove(get_turf(src))
+		C.dropInto(loc)
 		internal_cells -= C
 	return ..()
 

@@ -16,7 +16,7 @@
 		return
 	else if(istype(current_boon, /obj/item))
 		var/obj/item/I = current_boon
-		I.forceMove(get_turf(L))
+		I.dropInto(L.loc)
 		var/origin_text = "on the floor"
 		if(L.equip_to_appropriate_slot(I))
 			origin_text = "on your body"

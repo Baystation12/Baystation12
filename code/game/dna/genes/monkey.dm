@@ -16,7 +16,7 @@
 	var/list/implants = list() //Try to preserve implants.
 	for(var/obj/item/weapon/implant/W in H)
 		implants += W
-		W.loc = null
+		W.forceMove(null)
 
 	if(!connected)
 		for(var/obj/item/W in (H.contents-implants))
@@ -62,14 +62,14 @@
 	for(var/obj/T in (M.contents-implants))
 		qdel(T)
 
-	O.loc = M.loc
+	O.dropInto(M.loc)
 
 	if(M.mind)
 		M.mind.transfer_to(O)	//transfer our mind to the cute little monkey
 
 	if (connected) //inside dna thing
 		var/obj/machinery/dna_scannernew/C = connected
-		O.loc = C
+		O.forceMove(C)
 		C.occupant = O
 		connected = null
 	O.real_name = text("monkey ([])",copytext(md5(M.real_name), 2, 6))
@@ -94,7 +94,7 @@
 	var/list/implants = list() //Still preserving implants
 	for(var/obj/item/weapon/implant/W in Mo)
 		implants += W
-		W.loc = null
+		W.forceMove(null)
 	if(!connected)
 		for(var/obj/item/W in (Mo.contents-implants))
 			Mo.drop_from_inventory(W)
@@ -138,14 +138,14 @@
 	//for(var/obj/T in M)
 	//	qdel(T)
 
-	O.loc = M.loc
+	O.dropInto(M.loc)
 
 	if(M.mind)
 		M.mind.transfer_to(O)	//transfer our mind to the human
 
 	if (connected) //inside dna thing
 		var/obj/machinery/dna_scannernew/C = connected
-		O.loc = C
+		O.forceMove(C)
 		C.occupant = O
 		connected = null
 

@@ -746,7 +746,7 @@
 		// Leaving it intact and sitting in a wall is stupid.
 		if(T.density)
 			for(var/atom/movable/AM in H)
-				AM.loc = T
+				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
 			return

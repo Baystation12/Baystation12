@@ -79,7 +79,7 @@
 
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
-		contained.forceMove(get_turf(C))
+		contained.dropInto(C.loc)
 		C.equip_to_slot(contained, slot_wear_mask)
 		if(tank)
 			tank.forceMove(C)

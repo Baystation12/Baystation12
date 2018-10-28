@@ -180,7 +180,7 @@
 		else if(user)
 			user.put_in_hands(ai_card)
 		else
-			ai_card.forceMove(get_turf(src))
+			ai_card.dropInto(loc)
 	ai_card = null
 	integrated_ai = null
 	update_verb_holder()
