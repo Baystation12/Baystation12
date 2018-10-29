@@ -237,10 +237,6 @@
 	},
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
-"aG" = (
-/obj/machinery/ntnet_relay,
-/turf/simulated/floor/bluegrid/airless,
-/area/ship/scrap/comms)
 "aH" = (
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/comms)
@@ -12630,7 +12626,7 @@ xU
 Yv
 Yv
 ar
-aG
+aH
 aO
 aX
 Yv
