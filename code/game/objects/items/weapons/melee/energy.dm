@@ -7,6 +7,9 @@
 	armor_penetration = 50
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 
+/obj/item/weapon/melee/energy/can_embed()
+	return FALSE
+
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	if(active)
 		return
