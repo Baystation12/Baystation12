@@ -130,7 +130,7 @@
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
-	darksight_range = 4
+	darksight_range = 5
 	darksight_tint = DARKTINT_MODERATE
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
