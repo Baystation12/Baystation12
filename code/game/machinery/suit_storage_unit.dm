@@ -692,14 +692,7 @@
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
-	departments = list("Security")
-	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
-
-/obj/machinery/suit_cycler/securityalt
-	name = "Riot Security suit cycler"
-	model_text = "Security, Alt"
-	req_access = list(access_security)
-	departments = list("Security, Alt")
+	departments = list("Security","Security, Alt")
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/medical
