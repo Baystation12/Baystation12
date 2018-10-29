@@ -284,6 +284,16 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/reagent_containers/glass/beaker/large
 	category = "Medical"
 
+/datum/autolathe/recipe/beaker_insul
+	name = "insulated beaker"
+	path = /obj/item/weapon/reagent_containers/glass/beaker/insulated
+	category = "Medical"
+
+/datum/autolathe/recipe/beaker_insul_large
+	name = "large insulated beaker"
+	path = /obj/item/weapon/reagent_containers/glass/beaker/insulated/large
+	category = "Medical"
+
 /datum/autolathe/recipe/vial
 	name = "glass vial"
 	path = /obj/item/weapon/reagent_containers/glass/beaker/vial

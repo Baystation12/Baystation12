@@ -9,12 +9,18 @@
 	. = ..()
 	QUEUE_TEMPERATURE_ATOMS(atom)
 
+/obj
+	temperature_coefficient = null
+
+/mob
+	temperature_coefficient = null
+
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
 /obj/Initialize()
 	. = ..()
-	temperature_coefficient = Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT)
+	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
 	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
@@ -26,7 +32,7 @@
 
 /mob/Initialize()
 	. = ..()
-	temperature_coefficient = Clamp(MAX_TEMPERATURE_COEFFICIENT - Floor(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT)
+	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - Floor(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
 /atom/proc/ProcessAtomTemperature()
 
