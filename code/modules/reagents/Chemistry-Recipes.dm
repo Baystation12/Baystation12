@@ -272,14 +272,16 @@
 	result_amount = 3
 	minimum_temperature = (-25 CELCIUS) - 100
 	maximum_temperature = -25 CELCIUS
+	mix_message = "The solution becomes sludge-like."
 
 /datum/chemical_reaction/clonexadone
 	name = "Clonexadone"
 	result = /datum/reagent/clonexadone
-	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1, /datum/reagent/toxin/phoron = 0.1)
+	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1)
 	result_amount = 2
 	minimum_temperature = (-75 CELCIUS) - 100
 	maximum_temperature = -75 CELCIUS
+	mix_message = "The solution thickens into translucent slime."
 
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
