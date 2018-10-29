@@ -144,6 +144,10 @@
 	icon_state = "beaker"
 	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker = 7)
 
+/obj/item/weapon/storage/box/beakers/insulated
+	name = "box of insulated beakers"
+	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/insulated = 7)
+
 /obj/item/weapon/storage/box/blanks
 	name = "box of blank shells"
 	desc = "It has a picture of a gun and several warning symbols on the front."

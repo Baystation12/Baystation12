@@ -144,6 +144,9 @@
 	glass_desc = "The father of all refreshments."
 	chilling_products = list(/datum/reagent/drink/ice)
 	chilling_point = T0C
+	heating_products = list(/datum/reagent/water/boiling)
+	heating_point = T100C
+	heating_message = "starts to boil."
 
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
@@ -210,6 +213,14 @@
 	if(M.chem_doses[type] == removed)
 		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 		M.confused = max(M.confused, 2)
+
+/datum/reagent/water/boiling
+	name = "Boiling water"
+	chilling_products = list(/datum/reagent/water)
+	chilling_point =   99 CELCIUS
+	chilling_message = "stops boiling."
+	heating_products =  list(null)
+	heating_point =    null
 
 // Ice is a drink for some reason.
 /datum/reagent/drink/ice
