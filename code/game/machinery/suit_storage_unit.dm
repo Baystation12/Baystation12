@@ -695,6 +695,13 @@
 	departments = list("Security")
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
+/obj/machinery/suit_cycler/securityalt
+	name = "Riot Security suit cycler"
+	model_text = "Security, Alt"
+	req_access = list(access_security)
+	departments = list("Security, Alt")
+	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
 	model_text = "Medical"
@@ -1089,6 +1096,18 @@
 					slot_r_hand_str = "medical_voidsuit",
 				)
 		if("Security")
+			if(helmet)
+				helmet.SetName("security voidsuit helmet")
+				helmet.icon_state = "rig0-sec"
+				helmet.item_state = "sec_helm"
+			if(suit)
+				suit.SetName("security voidsuit")
+				suit.icon_state = "rig-sec"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "sec_voidsuit",
+					slot_r_hand_str = "sec_voidsuit",
+				)
+		if("Security, Alt")
 			if(helmet)
 				helmet.SetName("security voidsuit helmet")
 				helmet.icon_state = "rig0-secalt"
