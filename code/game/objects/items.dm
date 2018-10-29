@@ -89,14 +89,13 @@
 		pixel_y = rand(-randpixel, randpixel)
 
 /obj/item/Destroy()
-	qdel(hidden_uplink)
-	hidden_uplink = null
+	QDEL_NULL(hidden_uplink)
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
-		m.update_inv_r_hand()
-		m.update_inv_l_hand()
-		src.loc = null
+	var/obj/item/weapon/storage/storage = loc
+	if(istype(storage))
+		storage.on_item_deletion()
 	return ..()
 
 /obj/item/device

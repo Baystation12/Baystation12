@@ -87,7 +87,7 @@
 	if(old_event == new_event)
 		return
 	if(old_event)
-		if(new_event && old_event.difficulty == new_event.difficulty && old_event.event == new_event.event)
+		if(new_event && old_event.difficulty == new_event.difficulty && same_entries(old_event.events, new_event.events))
 			return
 		old_event.leave(entering_ship)
 
@@ -104,7 +104,7 @@
 	if(old_event == new_event)
 		return
 	if(new_event)
-		if(old_event && old_event.difficulty == new_event.difficulty && initial(old_event.event) == initial(new_event.event))
+		if(old_event && old_event.difficulty == new_event.difficulty && same_entries(old_event.events, new_event.events))
 			return
 		new_event.enter(entering_ship)
 
@@ -120,7 +120,7 @@
 	var/name = "map event"
 	var/radius = 2
 	var/count = 6
-	var/event = null
+	var/list/events
 	var/list/event_icon_states = list("event")
 	var/opacity = 1
 	var/difficulty = EVENT_LEVEL_MODERATE
@@ -132,22 +132,23 @@
 		log_error("Multiple attempts to trigger the same event by [victim] detected.")
 		return
 	LAZYADD(victims, victim)
-	var/datum/event_meta/EM = new(difficulty, "Overmap event - [name]", event, add_to_queue = FALSE, is_one_shot = TRUE)
-	var/datum/event/E = new event(EM)
-	E.startWhen = 0
-	E.endWhen = INFINITY
-	E.affecting_z = victim.map_z
-	victims[victim] = E
+	for(var/event in events)
+		var/datum/event_meta/EM = new(difficulty, "Overmap event - [name]", event, add_to_queue = FALSE, is_one_shot = TRUE)
+		var/datum/event/E = new event(EM)
+		E.startWhen = 0
+		E.endWhen = INFINITY
+		E.affecting_z = victim.map_z
+		LAZYADD(victims[victim], E)
 
 /datum/overmap_event/proc/leave(victim)
 	if(victims && victims[victim])
-		var/datum/event/E = victims[victim]
-		E.kill()
+		for(var/datum/event/E in victims[victim])
+			E.kill()
 		LAZYREMOVE(victims, victim)
 
 /datum/overmap_event/meteor
 	name = "asteroid field"
-	event = /datum/event/meteor_wave/overmap
+	events = list(/datum/event/meteor_wave/overmap)
 	count = 15
 	radius = 4
 	continuous = FALSE
@@ -157,12 +158,13 @@
 /datum/overmap_event/meteor/enter(var/obj/effect/overmap/ship/victim)
 	..()
 	if(victims[victim])
-		var/datum/event/meteor_wave/overmap/E = victims[victim]
-		E.victim = victim
+		var/datum/event/meteor_wave/overmap/E = locate() in victims[victim]
+		if(E)
+			E.victim = victim
 
 /datum/overmap_event/electric
 	name = "electrical storm"
-	event = /datum/event/electrical_storm
+	events = list(/datum/event/electrical_storm)
 	count = 11
 	radius = 3
 	opacity = 0
@@ -171,14 +173,14 @@
 
 /datum/overmap_event/dust
 	name = "dust cloud"
-	event = /datum/event/dust
+	events = list(/datum/event/dust)
 	count = 16
 	radius = 4
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")
 
 /datum/overmap_event/ion
 	name = "ion cloud"
-	event = /datum/event/ionstorm/overmap
+	events = list(/datum/event/ionstorm, /datum/event/computer_damage)
 	count = 8
 	radius = 3
 	opacity = 0
@@ -187,7 +189,7 @@
 
 /datum/overmap_event/carp
 	name = "carp shoal"
-	event = /datum/event/carp_migration
+	events = list(/datum/event/carp_migration)
 	count = 8
 	radius = 3
 	opacity = 0

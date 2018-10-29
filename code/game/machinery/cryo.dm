@@ -201,14 +201,14 @@
 		beaker =  G
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 	else if(istype(G, /obj/item/grab))
-		if(!ismob(G:affecting))
+		var/obj/item/grab/grab = G
+		if(!ismob(grab.affecting))
 			return
-		for(var/mob/living/carbon/slime/M in range(1,G:affecting))
-			if(M.Victim == G:affecting)
-				to_chat(usr, "[G:affecting:name] will not fit into the cryo because they have a slime latched onto their head.")
+		for(var/mob/living/carbon/slime/M in range(1,grab.affecting))
+			if(M.Victim == grab.affecting)
+				to_chat(user, "[grab.affecting.name] will not fit into the cryo because they have a slime latched onto their head.")
 				return
-		var/mob/M = G:affecting
-		if(put_mob(M))
+		if(put_mob(grab.affecting))
 			qdel(G)
 	return
 
