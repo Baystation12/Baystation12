@@ -18,6 +18,7 @@
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
 	var/activeoverlay = "MFDD Armed Screen"
 	var/strength=1 //The size of the explosion
+	var/free_explode = 0
 
 /obj/payload/attack_hand(var/mob/living/user)
 	if(!exploding)
@@ -51,9 +52,12 @@
 		overlays -= activeoverlay
 
 /obj/payload/proc/checkturf()
+  if(free_explode)
+    return 1
   for(var/obj/effect/bomblocation/b in range(0,src))
     return 1
   return 0
+
 
 /obj/payload/proc/checknextto()
 	if(u)
@@ -98,13 +102,6 @@
 	checkexplode()
 	checkdisarm()
 
-/obj/payload/free_explode
-
-/obj/payload/free_explode/checkturf()
-  for(var/obj/effect/bomblocation/b in range(0,src))
-    return 1
-  return 1
-
 /obj/effect/bomblocation
 	name = "Bomb Delivery Point"
 	desc = "Marks the location for the delivery of a bomb."
@@ -141,12 +138,6 @@
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator/toggle_mode()
 	visible_message("<span class = 'notice'>The locator announces 'TARGET LOCKED: MODE CHANGE UNAVAILABLE'</span>")
 	return
-/obj/payload/covenant/free_explode
-
-/obj/payload/covenant/free_explode/checkturf()
-  for(var/obj/effect/bomblocation/b in range(0,src))
-    return 1
-  return 1
 
 /datum/explosion/New(var/obj/payload/b)
 	explosion(b.loc,b.strength*50,b.strength*70,b.strength*80,b.strength*80)

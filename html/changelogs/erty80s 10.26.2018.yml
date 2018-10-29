@@ -41,7 +41,6 @@ changes:
   - tweak: "More objects can be stuffed in vehicles"
   - tweak: "MAC rounds make a bigger explosion when hitting a planet"
   - bugfix: "Fixed the bug where vehicles couldnt be attached to air vehicles"
-  - bugfix: "Objects can now go normally upstairs when pulled"	
   - bugfix: "Mechs can now go upstairs"
   - bugfix: "MAC rounds no longer hit random z-levels in planets and other overmap objects" 
   - imageadd: "Added bombed icons for exoplanets"
