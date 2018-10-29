@@ -62,9 +62,6 @@
 		return 0
 	if(!(id in SSticker.mode.latejoin_antag_tags))
 		return 0
-	update_current_antag_max(SSticker.mode)
-	if(get_antag_count() >= cur_max)
-		return 0
 	return 1
 
 /datum/antagonist/proc/is_latejoin_template()
