@@ -462,8 +462,7 @@
 		if(!check_occupant_allowed(grab.affecting))
 			return
 
-		var/mob/M = G:affecting
-		attempt_enter(M, user)
+		attempt_enter(grab.affecting, user)
 
 /obj/machinery/cryopod/verb/eject()
 	set name = "Eject Pod"

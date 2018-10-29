@@ -149,13 +149,12 @@ default behaviour is:
 					if(istype(tmob.buckled, /obj/structure/bed))
 						if(!tmob.buckled.anchored)
 							step(tmob.buckled, t)
-				if(ishuman(AM) && AM:grabbed_by)
-					for(var/obj/item/grab/G in AM:grabbed_by)
-						step(G:assailant, get_dir(G:assailant, AM))
+				if(ishuman(AM))
+					var/mob/living/carbon/human/M = AM
+					for(var/obj/item/grab/G in M.grabbed_by)
+						step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
 				now_pushing = 0
-			return
-	return
 
 /proc/swap_density_check(var/mob/swapper, var/mob/swapee)
 	var/turf/T = get_turf(swapper)

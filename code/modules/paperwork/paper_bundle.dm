@@ -17,9 +17,11 @@
 
 /obj/item/weapon/paper_bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	var/obj/item/weapon/paper/paper = W
-	if(istype(W) && !paper.can_bundle())
+	if(!istype(W))
 		return
+	var/obj/item/weapon/paper/paper = W
+	if(istype(paper) && !paper.can_bundle())
+		return //non-paper or bundlable paper only
 	if (istype(W, /obj/item/weapon/paper/carbon))
 		var/obj/item/weapon/paper/carbon/C = W
 		if (!C.iscopy && !C.copied)

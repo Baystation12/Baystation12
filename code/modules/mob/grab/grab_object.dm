@@ -29,12 +29,17 @@
 	if(!istype(assailant))
 		return INITIALIZE_HINT_QDEL
 	affecting = victim
+	if(!istype(affecting))
+		return INITIALIZE_HINT_QDEL
 	target_zone = assailant.zone_sel.selecting
 	assailant.remove_cloaking_source(assailant.species)
-	var/obj/item/organ/O = get_targeted_organ()
-	if(!istype(O))
-		to_chat(assailant, "<span class='notice'>\The [affecting] is missing that body part!</span>")
+
+	if(!can_grab())
 		return INITIALIZE_HINT_QDEL
+	if(!init())
+		return INITIALIZE_HINT_QDEL
+
+	var/obj/item/organ/O = get_targeted_organ()
 	SetName("[name] ([O.name])")
 	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
 	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
@@ -59,7 +64,6 @@
 
 /obj/item/grab/dropped()
 	..()
-	loc = null
 	if(!QDELETED(src))
 		qdel(src)
 
@@ -107,52 +111,44 @@
 	assailant.drop_from_inventory(src)
 
 /obj/item/grab/proc/can_grab()
-
-	// can't grab non-carbon/human/'s
-	if(!istype(affecting))
-		return 0
-
-	if(assailant.anchored || affecting.anchored)
-		return 0
-
 	if(!assailant.Adjacent(affecting))
 		return 0
-
+	if(assailant.anchored || affecting.anchored)
+		return 0
+	if(assailant == affecting)
+		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
+		return 0
+	if(assailant.get_active_hand())
+		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
+		return 0
+	if(assailant.grabbed_by.len)
+		to_chat(assailant, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
+		return 0
+	var/obj/item/organ/organ = get_targeted_organ()
+	if(!istype(organ))
+		to_chat(assailant, "<span class='notice'>\The [affecting] is missing that body part!</span>")
+		return 0
 	for(var/obj/item/grab/G in affecting.grabbed_by)
 		if(G.assailant == assailant && G.target_zone == target_zone)
 			var/obj/O = G.get_targeted_organ()
 			to_chat(assailant, "<span class='notice'>You already grabbed [affecting]'s [O.name].</span>")
 			return 0
-
 	return 1
 
-// This is for all the sorts of things that need to be checked for pretty much every
-// grab made. Feel free to override it but it stops a lot of situations that could
-// cause runtimes so be careful with it.
-/obj/item/grab/proc/pre_check()
-
-	if(!assailant || !affecting)
-		return 0
-
-	if(assailant == affecting)
-		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
-		return 0
-
-	if(assailant.get_active_hand())
-		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
-		return 0
-
-	if(assailant.grabbed_by.len)
-		to_chat(assailant, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
-		return 0
-
-	return 1
-
+// This will run from Initialize, after can_grab and other checks have succeeded. Must call parent; returning FALSE means failure and qdels the grab.
 /obj/item/grab/proc/init()
+	if(!assailant.put_in_active_hand(src))
+		return FALSE // This should succeed as we checked the hand, but if not we abort here.
 	affecting.UpdateLyingBuckledAndVerbStatus()
+	affecting.grabbed_by += src // This is how we handle affecting being deleted.
 	adjust_position()
-	update_icon()
 	action_used()
+	if(affecting.w_uniform)
+		affecting.w_uniform.add_fingerprint(assailant)
+	assailant.do_attack_animation(affecting)
+	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	update_icon()
+	return TRUE
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
