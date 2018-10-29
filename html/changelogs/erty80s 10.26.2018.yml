@@ -33,16 +33,16 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Adds a different type of payload that detonates outside a detonation area"
-  - rscadd: "Adds different types of explosions for different payloads and also made them deadlier"
-  - rscadd: "Overmap objects now show damaged icons when bombarded enough times"
-  - rscadd: "Adds the kig yar ranger suit"
-  - tweak: "More objects can be carried up umbilicals"
-  - tweak: "More objects can be stuffed in vehicles"
-  - tweak: "MAC rounds make a bigger explosion when hitting a planet"
-  - bugfix: "Fixed the bug where vehicles couldnt be attached to air vehicles"
-  - bugfix: "Mechs can now go upstairs"
-  - bugfix: "MAC rounds no longer hit random z-levels in planets and other overmap objects" 
-  - imageadd: "Added bombed icons for exoplanets"
-  - imageadd: "Added kig-yar ranger suit sprites courtesy of Eluxor"
+  - rscadd: "Adds a different type of payload that detonates outside a detonation area."
+  - rscadd: "Adds different types of explosions for different payloads and also made them deadlier."
+  - rscadd: "Overmap objects now show damaged icons when bombarded enough times."
+  - rscadd: "Adds the kig yar ranger suit."
+  - tweak: "More objects can be carried up umbilicals."
+  - tweak: "More objects can be stuffed in vehicles."
+  - tweak: "MAC rounds make a bigger explosion when hitting a planet."
+  - bugfix: "Fixed the bug where vehicles couldnt be attached to air vehicles."
+  - bugfix: "Mechs can now go upstairs."
+  - bugfix: "MAC rounds no longer hit random z-levels in planets and other overmap objects." 
+  - imageadd: "Added bombed icons for exoplanets."
+  - imageadd: "Added kig-yar ranger suit sprites courtesy of Eluxor."
 		
