@@ -245,8 +245,8 @@
 	start_grab_name = NAB_AGGRESSIVE
 
 /obj/item/grab/nab/special/init()
-	..()
-
+	if(!(. = ..()))
+		return
 	var/armor = affecting.run_armor_check(BP_CHEST, "melee")
 	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")

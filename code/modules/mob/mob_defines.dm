@@ -117,7 +117,7 @@
 	var/obj/item/weapon/storage/s_active = null//Carbon
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
-	var/list/grabbed_by = list(  )
+	var/list/grabbed_by = list()
 
 	var/in_throw_mode = 0
 

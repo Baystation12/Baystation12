@@ -4,20 +4,10 @@
 	start_grab_name = NAB_PASSIVE
 
 /obj/item/grab/nab/init()
-	..()
-
-	if(affecting.w_uniform)
-		affecting.w_uniform.add_fingerprint(assailant)
-
-	if(assailant.l_hand) assailant.unEquip(assailant.l_hand)
-	if(assailant.r_hand) assailant.unEquip(assailant.r_hand)
-
-	assailant.put_in_active_hand(src)
-	assailant.do_attack_animation(affecting)
-	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	if(!(. = ..()))
+		return
+	assailant.unEquip(assailant.get_inactive_hand())
 	visible_message("<span class='warning'>[assailant] has nabbed [affecting] passively!</span>")
-	affecting.grabbed_by += src
-
 
 /datum/grab/nab
 

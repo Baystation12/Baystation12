@@ -31,10 +31,11 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 
 /datum/job/submap/pod/New(var/datum/submap/_owner)
 	..()
-	info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \
-	leaving you stranded in your escape pod on a hostile exoplanet. Your pod's distress \
-	signal might draw help, but even if you should be so lucky, you must survive long \
-	enough for it to arrive."
+	if(_owner) // Might be called from admin tools, etc
+		info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \
+		leaving you stranded in your escape pod on a hostile exoplanet. Your pod's distress \
+		signal might draw help, but even if you should be so lucky, you must survive long \
+		enough for it to arrive."
 
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor
 	name = "Stranded Survivor"

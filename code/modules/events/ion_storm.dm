@@ -120,7 +120,7 @@
 /datum/event/ionstorm/end()
 	spawn(rand(5000,8000))
 		if(prob(50))
-			ion_storm_announcement()
+			ion_storm_announcement(affecting_z)
 
 
 /datum/event/ionstorm/proc/get_random_humanoid_player_name(var/default_if_none)
@@ -160,7 +160,3 @@
 		return L.name
 	else // Highly unlikely but it is a failsafe fallback.
 		return "Gibberish."
-
-/datum/event/ionstorm/overmap/start()
-	..()
-	computer_damage_event(severity)

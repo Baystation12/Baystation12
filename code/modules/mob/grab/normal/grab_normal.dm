@@ -1,21 +1,12 @@
 /obj/item/grab/normal
-
 	type_name = GRAB_NORMAL
 	start_grab_name = NORM_PASSIVE
 
 /obj/item/grab/normal/init()
-	..()
-
-	if(affecting.w_uniform)
-		affecting.w_uniform.add_fingerprint(assailant)
-
-	assailant.put_in_active_hand(src)
-	assailant.do_attack_animation(affecting)
-	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	if(!(. = ..()))
+		return
 	var/obj/O = get_targeted_organ()
 	visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
-	affecting.grabbed_by += src
-
 	if(!(affecting.a_intent == I_HELP))
 		upgrade(TRUE)
 
