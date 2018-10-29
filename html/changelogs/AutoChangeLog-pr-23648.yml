@@ -1,4 +1,0 @@
-author: "RyanSmake"
-delete-after: True
-changes: 
-  - rscdel: "Removed NTNet relay from Bearcat space ruin as it was non-functional."
