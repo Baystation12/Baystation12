@@ -1,0 +1,5 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - rscadd: "Added insulated beakers. It is now actually possible to make clonex. Oops."
+  - tweak: "Clonex no longer requires phoron."
