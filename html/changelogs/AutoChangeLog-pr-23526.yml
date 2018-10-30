@@ -1,0 +1,4 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - tweak: "The bodyscanner now provides feedback when pushing scans to the OR displays."
