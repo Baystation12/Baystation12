@@ -2,7 +2,6 @@
 	title = "Pathfinder"
 	department = "Exploration"
 	department_flag = EXP
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -31,6 +30,7 @@
 	software_on_spawn = list(/datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BACHELOR
+	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/pathfinder/get_description_blurb()
 	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if nobody else provides a pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
@@ -40,7 +40,6 @@
 	supervisors = "the Pathfinder"
 	department = "Exploration"
 	department_flag = EXP
-
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#68099e"
@@ -69,6 +68,7 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	required_education = EDUCATION_TIER_BASIC
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/explorer
 	title = "Explorer"
@@ -97,6 +97,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 	required_education = EDUCATION_TIER_BASIC
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/explorer/get_description_blurb()
 	return "You are an Explorer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully."

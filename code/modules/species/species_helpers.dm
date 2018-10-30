@@ -59,10 +59,13 @@ var/list/stored_shock_by_ref = list()
 /datum/species/proc/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	. = TRUE
 	if(istype(job) && istype(prefs) && job.required_education > EDUCATION_TIER_NONE)
-		var/has_sufficient_education = FALSE
+		var/has_suitable_education = FALSE
 		for(var/culturetag in prefs.cultural_info)
 			var/decl/cultural_info/culture = SSculture.get_culture(prefs.cultural_info[culturetag])
 			if(culture.get_education_tier() >= job.required_education)
-				has_sufficient_education = TRUE
-				break
-		. = has_sufficient_education
+				has_suitable_education = TRUE
+			if(job.maximum_education)
+				if(culture.get_education_tier() > job.maximum_education)
+					has_suitable_education = FALSE
+					break
+		. = has_suitable_education

@@ -43,6 +43,7 @@
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
 
 	var/required_education = EDUCATION_TIER_NONE
+	var/maximum_education
 	var/available_by_default = TRUE
 
 /datum/job/New()
@@ -180,7 +181,10 @@
 		return TRUE
 
 	if(!S.check_background(src, prefs))
-		to_chat(feedback, "<span class='boldannounce'>Incompatible background for role [title], species [S].</span>")
+		var/backgroundreport = list("<span class='boldannounce'>Incompatible education or background for [title]. The required education level for this role is [SSculture.education_tiers_to_strings["[required_education]"]]</span>")
+		if(maximum_education)
+			backgroundreport += ("<span class='boldannounce'>, and the maximum permitted education level is [SSculture.education_tiers_to_strings["[maximum_education]"]]</span>")
+		to_chat(feedback, JOINTEXT(backgroundreport))
 		return TRUE
 
 	return FALSE
@@ -308,7 +312,7 @@
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
 		if(!S.check_background(src, caller.prefs))
-			reasons["Your background choices do not allow it."] = TRUE
+			reasons["Your background choices, such as education, do not allow it."] = TRUE
 	if(LAZYLEN(reasons))
 		. = reasons
 

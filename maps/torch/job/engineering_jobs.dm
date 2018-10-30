@@ -2,7 +2,6 @@
 	title = "Senior Engineer"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -46,6 +45,7 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_TRADE
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/senior_engineer/get_description_blurb()
 	return "You are the Senior Engineer. You are a veteran SNCO. You are subordinate to the Chief Engineer though you may have many years more experience than them and your subordinates are the rest of engineering. You should be an expert in practically every engineering area and familiar and possess leadership skills. Coordinate the team and ensure the smooth running of the department along with the Chief Engineer."
@@ -105,6 +105,7 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_TRADE
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/engineer/get_description_blurb()
 	return "You are an Engineer. You operate under one of many titles and may be highly specialised in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
@@ -113,7 +114,6 @@
 	title = "Engineering Contractor"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer, the Corporate Liaison and Engineering Personnel"
@@ -154,6 +154,7 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_TRADE
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/engineer_contractor/get_description_blurb()
 	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the Corporate Liaison and the rest of the engineering team."
@@ -162,7 +163,6 @@
 	title = "Engineer Trainee"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
@@ -207,6 +207,7 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_BASIC
+	maximum_education = EDUCATION_TIER_TRADE
 
 /datum/job/engineer_trainee/get_description_blurb()
 	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
@@ -243,6 +244,7 @@
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 	minimal_access = list()
 	required_education = EDUCATION_TIER_TRADE
+	maximum_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/roboticist/get_description_blurb()
 	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics (like robots). You are also responsible for the production of exosuits(mechs) and bots for various departments. You answer to the Corporate Liaison and the Chief Engineer."

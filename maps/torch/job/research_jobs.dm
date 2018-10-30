@@ -74,7 +74,6 @@
 	title = "Security Guard"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Research Director, the Corporate Liaison and science personnel"
@@ -97,12 +96,12 @@
 						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_petrov_helm, access_expedition_shuttle, access_guppy,
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint)
 	required_education = EDUCATION_TIER_DROPOUT
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/scientist_assistant
 	title = "Research Assistant"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Research Director, the Corporate Liaison and science personnel"
@@ -127,12 +126,12 @@
 
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
 	required_education = EDUCATION_TIER_DROPOUT
+	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/xenolife_technician
 	title = "Xenolife Technician"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director"
@@ -163,3 +162,4 @@
 	minimal_access = list()
 	skill_points = 16
 	required_education = EDUCATION_TIER_BACHELOR
+	maximum_education = EDUCATION_TIER_DOCTORATE
