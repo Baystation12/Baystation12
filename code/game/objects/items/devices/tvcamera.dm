@@ -26,6 +26,7 @@
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
+	radio.power_usage = 0
 	. = ..()
 
 /obj/item/device/camera/tvcamera/examine()
