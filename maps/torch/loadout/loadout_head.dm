@@ -81,15 +81,15 @@
 /datum/gear/head/fleetberet
 	display_name = "Fleet branch beret selection"
 	description = "A beret denoting service in one of the fleets within the SCG Fleet."
-	path = /obj/item/clothing/head/beret/solgov/fleet/first
+	path = /obj/item/clothing/head/beret/solgov/fleet/branch
 	allowed_branches = list(/datum/mil_branch/fleet)
 
 /datum/gear/head/fleetberet/New()
 	..()
 	var/berets = list()
-	berets["first fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/first
-	berets["second fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/second
-	berets["third fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/third
-	berets["fourth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/fourth
-	berets["fifth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/fifth
+	berets["first fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch
+	berets["second fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/second
+	berets["third fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/third
+	berets["fourth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/fourth
+	berets["fifth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/fifth
 	gear_tweaks += new/datum/gear_tweak/path(berets)
