@@ -303,7 +303,7 @@
 	desc = "A white SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_whiterim_com"
 
-/obj/item/clothing/head/beret/solgov/fleet
+/obj/item/clothing/head/beret/solgov/fleet/first
 	name = "first fleet beret"
 	desc = "An SCG Fleet beret carrying insignia of First Fleet, the Sol Guard, stationed in Sol. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_first"
