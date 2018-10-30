@@ -32,6 +32,15 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
 		GLOB.alldepartments |= department
 
+/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/card/id))
+		if(!user.unEquip(O, src))
+			return
+		scan = O
+		to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
+	else 
+		..()
+
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
 	user.set_machine(src)
 
