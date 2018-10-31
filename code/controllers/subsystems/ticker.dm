@@ -55,6 +55,8 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/setup_tick()
 	switch(choose_gamemode())
+		if(CHOOSE_GAMEMODE_SILENT_REDO)
+			return
 		if(CHOOSE_GAMEMODE_RETRY)
 			pregame_timeleft = 15 SECONDS
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
@@ -221,15 +223,18 @@ Helpers
 		return
 
 	//Find the relevant datum, resolving secret in the process.
-	var/list/runnable_modes = config.get_runnable_modes() //format: list(datum/game_mode instance = weight)
+	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
 	if((mode_to_try=="random") || (mode_to_try=="secret"))
+		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
 			mode_datum = config.pick_mode(secret_force_mode)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
 			return
 		else
-			mode_datum = pickweight(runnable_modes)
+			mode_datum = config.pick_mode(pickweight(runnable_modes))
+			if(length(runnable_modes) > 1) // More to pick if we fail; we won't tell anyone we failed unless we fail all possibilities, though.
+				. = CHOOSE_GAMEMODE_SILENT_REDO
 	else
 		mode_datum = config.pick_mode(mode_to_try)
 	if(!istype(mode_datum))
@@ -245,7 +250,7 @@ Helpers
 	if(mode_datum.startRequirements())
 		mode_datum.fail_setup()
 		job_master.ResetOccupations()
-		bad_modes += mode_to_try
+		bad_modes += mode_datum.config_tag
 		return
 
 	//Declare victory, make an announcement.
@@ -255,8 +260,10 @@ Helpers
 	if(mode_to_try == "secret")
 		to_world("<B>The current game mode is - Secret!</B>")
 		var/list/mode_names = list()
-		for (var/datum/game_mode/M in runnable_modes)
-			mode_names += M.name
+		for (var/mode_tag in base_runnable_modes)
+			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			if(M)
+				mode_names += M.name
 		to_world("<B>Possibilities:</B> [english_list(mode_names)]")
 	else
 		mode.announce()
