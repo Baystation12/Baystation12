@@ -3,7 +3,7 @@
 	var/decl/submap_archetype/archetype
 	var/list/jobs
 	var/associated_z
-	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/station
+	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/station/offstation
 
 /datum/submap/New(var/existing_z)
 	SSmapping.submaps[src] = TRUE
