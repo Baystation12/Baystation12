@@ -1,8 +1,9 @@
 //Used with the ticker to help choose the gamemode.
-#define CHOOSE_GAMEMODE_SUCCESS 1 // A gamemode was successfully chosen.
-#define CHOOSE_GAMEMODE_RETRY   2 // The gamemode could not be chosen; we will use the next most popular option voted in, or the default.
-#define CHOOSE_GAMEMODE_REVOTE  3 // The gamemode could not be chosen; we need to have a revote.
-#define CHOOSE_GAMEMODE_RESTART 4 // The gamemode could not be chosen; we will restart the server.
+#define CHOOSE_GAMEMODE_SUCCESS     1 // A gamemode was successfully chosen.
+#define CHOOSE_GAMEMODE_RETRY       2 // The gamemode could not be chosen; we will use the next most popular option voted in, or the default.
+#define CHOOSE_GAMEMODE_REVOTE      3 // The gamemode could not be chosen; we need to have a revote.
+#define CHOOSE_GAMEMODE_RESTART     4 // The gamemode could not be chosen; we will restart the server.
+#define CHOOSE_GAMEMODE_SILENT_REDO 5 // The gamemode could not be chosen; we request to have the the proc rerun on the next tick.
 
 //End game state, to manage round end.
 #define END_GAME_NOT_OVER         1
