@@ -383,7 +383,7 @@
 	//Handle job slot/tater cleanup.
 	if(occupant.mind)
 		var/job = occupant.mind.assigned_role
-		job_master.FreeRole(job)
+		job_master.ClearSlot(job)
 
 		if(occupant.mind.objectives.len)
 			occupant.mind.objectives = null
