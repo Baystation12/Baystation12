@@ -168,6 +168,13 @@ var/global/datum/controller/occupations/job_master
 			job.make_position_available()
 			return 1
 		return 0
+	
+	proc/ClearSlot(var/rank) // Removing one from the current filled counter
+		var/datum/job/job = GetJob(rank)
+		if (job && job.current_positions > 0)
+			job.current_positions -= 1
+			return TRUE
+		return FALSE
 
 	proc/FindOccupationCandidates(datum/job/job, level, flag)
 		Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
