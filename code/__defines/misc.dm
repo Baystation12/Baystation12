@@ -84,6 +84,7 @@
 #define TEMPLATE_FLAG_SPAWN_GUARANTEED 2 // Makes it ignore away site budget and just spawn (only for away sites)
 #define TEMPLATE_FLAG_CLEAR_CONTENTS   4 // if it should destroy objects it spawns on top of
 #define TEMPLATE_FLAG_NO_RUINS         8 // if it should forbid ruins from spawning on top of it
+#define TEMPLATE_FLAG_NO_RADS          16// Removes all radiation from the template after spawning.
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

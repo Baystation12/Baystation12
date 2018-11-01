@@ -100,10 +100,10 @@ SUBSYSTEM_DEF(supply)
 						continue
 
 					// Sell materials
-					if(istype(A, /obj/item/stack))
+					if(istype(A, /obj/item/stack/material))
 						var/obj/item/stack/P = A
 						var/material/material = P.get_material()
-						if(material.sale_price > 0)
+						if(material && material.sale_price > 0)
 							material_count[material.display_name] += P.get_amount() * material.sale_price
 						continue
 
