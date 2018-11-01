@@ -31,13 +31,14 @@
 		return 0
 	current_antagonists |= player
 
-	if(faction_verb && player.current)
+	if(faction_verb)
 		player.current.verbs |= faction_verb
 
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
 		player.current.verbs += /mob/proc/add_objectives
 
-	player.current.client.verbs += /client/proc/aooc
+	if(player.current.client)
+		player.current.client.verbs += /client/proc/aooc
 
 	spawn(1 SECOND) //Added a delay so that this should pop up at the bottom and not the top of the text flood the new antag gets.
 		to_chat(player.current, "<span class='notice'>Once you decide on a goal to pursue, you can optionally display it to \
@@ -68,15 +69,16 @@
 		faction_members -= player
 		player.special_role = null
 		update_icons_removed(player)
-		BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
 
-		//Reset their skills to be job-appropriate.
 		if(player.current)
-			player.current.reset_skillset()
+			BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
+			player.current.reset_skillset() //Reset their skills to be job-appropriate.
 
 		if(!is_special_character(player))
-			player.current.verbs -= /mob/living/proc/write_ambition
-			player.current.client.verbs -= /client/proc/aooc
+			if(player.current)
+				player.current.verbs -= /mob/living/proc/write_ambition
+				if(player.current.client)
+					player.current.client.verbs -= /client/proc/aooc
 			player.ambitions = ""
 		return 1
 	return 0

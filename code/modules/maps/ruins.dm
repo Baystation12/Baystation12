@@ -80,10 +80,4 @@ proc/load_ruin(turf/central_turf, datum/map_template/template)
 	var/datum/map_template/ruin = template
 	if(istype(ruin))
 		new /obj/effect/landmark/ruin(central_turf, ruin)
-
-	if(template.template_flags & TEMPLATE_FLAG_NO_RUINS)
-		for(var/i in template.get_affected_turfs(central_turf, 1))
-			var/turf/T = i
-			T.turf_flags |= TURF_FLAG_NORUINS
-
 	return TRUE

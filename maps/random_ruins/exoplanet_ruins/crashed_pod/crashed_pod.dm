@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	description = "A crashed escape pod from a destroyed ship."
 	suffixes = list("crashed_pod/crashed_pod.dmm")
 	cost = 2
-	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 
 /area/map_template/crashed_pod
 	name = "\improper Crashed Escape Pod"

@@ -70,8 +70,8 @@
 
 //Not that it should ever get deleted but just in case
 /obj/effect/overmap/sector/exoplanet/Destroy()
-		. = ..()
-		STOP_PROCESSING(SSobj, src)
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
 
 /obj/effect/overmap/sector/exoplanet/Process()
 	if(animals.len < 0.5*max_animal_count && !repopulating)
