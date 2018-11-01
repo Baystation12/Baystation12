@@ -38,7 +38,7 @@
 	"}
 	// sort mobs
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-		var/name = CR.get_name()
+		var/name = CR.get_formal_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
 
@@ -52,7 +52,8 @@
 		if(OOC)
 			var/active = 0
 			for(var/mob/M in GLOB.player_list)
-				if(M.real_name == name && M.client && M.client.inactivity <= 10 * 60 * 10)
+				var/mob_real_name = M.real_name
+				if(sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
 					active = 1
 					break
 			isactive[name] = active ? "Active" : "Inactive"

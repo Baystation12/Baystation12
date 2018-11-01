@@ -45,7 +45,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 					formal_name = "[culture.get_formal_name_prefix()][formal_name][culture.get_formal_name_suffix()]"
 
 	// Generic record
-	set_name(formal_name)
+	set_name(H ? H.real_name : "Unset")
+	set_formal_name(formal_name)
 	set_job(H ? GetAssignment(H) : "Unset")
 	set_sex(H ? gender2text(H.get_sex()) : "Unset")
 	set_age(H ? H.age : 30)
@@ -165,6 +166,7 @@ KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
 
 // GENERIC RECORDS
 FIELD_SHORT("Name", name, null, access_change_ids)
+FIELD_SHORT("Formal Name", formal_name, null, access_change_ids)
 FIELD_SHORT("Job", job, null, access_change_ids)
 FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
 FIELD_NUM("Age", age, null, access_change_ids)
