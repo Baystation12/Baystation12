@@ -191,13 +191,13 @@
 	key = "hug"
 	check_restraints = TRUE
 	emote_message_3p_target = "USER hugs TARGET."
-	emote_message_3p = "USER hugs USER_THEMself."
+	emote_message_3p = "USER hugs USER_SELF."
 
 /decl/emote/visible/dap
 	key = "dap"
 	check_restraints = TRUE
 	emote_message_3p_target = "USER gives daps to TARGET."
-	emote_message_3p = "USER sadly can't find anybody to give daps to, and daps USER_THEMself."
+	emote_message_3p = "USER sadly can't find anybody to give daps to, and daps USER_SELF."
 
 /decl/emote/visible/signal
 	key = "signal"
@@ -231,7 +231,7 @@
 	key = "handshake"
 	check_restraints = TRUE
 	emote_message_3p_target = "USER shakes hands with TARGET."
-	emote_message_3p = "USER shakes hands with USER_THEMself."
+	emote_message_3p = "USER shakes hands with USER_SELF."
 	message_type = VISIBLE_MESSAGE
 
 /decl/emote/visible/handshake/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
@@ -269,26 +269,26 @@
 	key = "hip"
 	check_restraints = TRUE
 	emote_message_3p = "USER puts USER_THEIR hands on USER_THEIR hips."
-	
+
 /decl/emote/visible/holdup
 	key = "holdup"
 	check_restraints = TRUE
 	emote_message_3p = "USER holds up USER_THEIR palms."
-	
+
 /decl/emote/visible/hshrug
 	key = "hshrug"
 	emote_message_3p = "USER gives a half shrug."
-	
+
 /decl/emote/visible/crub
 	key = "crub"
 	check_restraints = TRUE
 	emote_message_3p = "USER rubs USER_THEIR chin."
-		
+
 /decl/emote/visible/eroll
 	key = "eroll"
 	emote_message_3p = "USER rolls USER_THEIR eyes."
 	emote_message_3p_target = "USER rolls USER_THEIR eyes at TARGET."
-	
+
 /decl/emote/visible/erub
 	key = "erub"
 	check_restraints = TRUE
@@ -302,7 +302,7 @@
 /decl/emote/visible/ftap
 	key = "ftap"
 	emote_message_3p = "USER taps USER_THEIR foot."
-	
+
 /decl/emote/visible/hrub
 	key = "hrub"
 	check_restraints = TRUE
@@ -322,20 +322,20 @@
 	key = "rsalute"
 	check_restraints = TRUE
 	emote_message_3p = "USER returns the salute."
-	
+
 /decl/emote/visible/rshoulder
 	key = "rshoulder"
 	emote_message_3p = "USER rolls USER_THEIR shoulders."
-	
+
 /decl/emote/visible/squint
 	key = "squint"
 	emote_message_3p = "USER squints."
 	emote_message_3p_target = "USER squints at TARGET."
-	
+
 /decl/emote/visible/tfist
 	key = "tfist"
 	emote_message_3p = "USER tightens USER_THEIR hands into fists."
-	
+
 /decl/emote/visible/tilt
 	key = "tilt"
 	emote_message_3p = "USER tilts USER_THEIR head."
