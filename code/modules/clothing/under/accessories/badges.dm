@@ -191,3 +191,24 @@
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
 	icon_state = "pressbadge"
 	badge_string = "Journalist"
+	
+/obj/item/clothing/accessory/badge/tags/skrell
+	name = "\improper Skrellian holobadge"
+	desc = "A high tech Skrellian holobadge, designed to project information about the owner."
+	icon_state = "skrell_badge"
+	badge_string = null	//Will be the name of the SDTF.
+
+/obj/item/clothing/accessory/badge/tags/skrell/set_desc(var/mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	desc = "Blood type: [H.b_type]"
+	
+/obj/item/clothing/accessory/badge/tags/skrell/verb/set_sdtf(mob/user as mob)
+	set name = "Set SDTF Name"
+	set category = "Object"
+	desc = "Set your SDTF origin!"
+	
+	badge_string = sanitize(input(usr, "Input your SDTF.", "SDTF Holobadge") as null|text, MAX_NAME_LEN)
+	set_name(user.real_name)
+	set_desc(user)
+	verbs -= /obj/item/clothing/accessory/badge/tags/skrell/verb/set_sdtf

@@ -71,6 +71,12 @@
 	display_name = "female headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	flags = GEAR_HAS_COLOR_SELECTION
+	
+/datum/gear/accessory/skrell_badge
+	display_name = "skrellian SDTF badge"
+	path = /obj/item/clothing/accessory/badge/tags/skrell
+	whitelisted = list(SPECIES_SKRELL)
+	sort_category = "Xenowear"
 
 // IPC clothing
 /datum/gear/mask/ipc_monitor
