@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - maptweak: "Adds Security, Science, and Engineering department pagers in their respective lobbies."
