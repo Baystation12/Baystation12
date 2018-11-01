@@ -71,7 +71,7 @@
 	contains = list(/obj/item/stack/material/ocp/ten)
 	cost = 20
 	containername = "osmium carbide plasteel sheets crate"
-.
+
 /decl/hierarchy/supply_pack/materials/phoron10
 	name = "10 phoron sheets"
 	contains = list(/obj/item/stack/material/phoron/ten)
