@@ -6,7 +6,7 @@
 	icon_state = "MFDD"
 	anchored = 0
 	density = 1
-	var/explodetype = /datum/nuclearexplosion
+	var/explodetype = /datum/explosion/nuclearexplosion
 	var/exploding
 	var/explode_at
 	var/seconds_to_explode = 240
@@ -17,6 +17,8 @@
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
 	var/activeoverlay = "MFDD Armed Screen"
+	var/strength=1 //The size of the explosion
+	var/free_explode = 0
 
 /obj/payload/attack_hand(var/mob/living/user)
 	if(!exploding)
@@ -26,6 +28,7 @@
 			if(do_after(user,arm_time SECONDS,src,1,1,,1))
 				u = user
 				u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
+				admin_attack_log("([user.name]) primed a nuke/anti-matter charge.")
 				explode_at = world.time + seconds_to_explode*10
 				exploding = 1
 				GLOB.processing_objects += src
@@ -49,9 +52,12 @@
 		overlays -= activeoverlay
 
 /obj/payload/proc/checkturf()
+  if(free_explode)
+    return 1
   for(var/obj/effect/bomblocation/b in range(0,src))
     return 1
   return 0
+
 
 /obj/payload/proc/checknextto()
 	if(u)
@@ -113,6 +119,8 @@
 	explodedesc = "Spikes conceal a countdown timer."
 	seconds_to_explode = 300
 	seconds_to_disarm = 60
+	strength=1.5
+	explodetype = /datum/explosion
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator
 	name = "Optimal Ordinance Yield Locator"
@@ -131,9 +139,14 @@
 	visible_message("<span class = 'notice'>The locator announces 'TARGET LOCKED: MODE CHANGE UNAVAILABLE'</span>")
 	return
 
-/datum/nuclearexplosion/New(var/obj/b)
-	explosion(b.loc,40,60,70,75)
+/datum/explosion/New(var/obj/payload/b)
+	explosion(b.loc,b.strength*50,b.strength*70,b.strength*80,b.strength*80)
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
 	qdel(src)
+
+/datum/explosion/nuclearexplosion/New(var/obj/payload/b)
+	..()
+	radiation_repository.radiate(b.loc,1000,10000)
+

@@ -10,6 +10,7 @@ var/list/points_of_interest = list()
 	var/list/map_z = list()
 	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
 	var/weapon_miss_chance = 35
+	var hit // for icon changes  when damaged
 
 	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.
 	var/list/map_bounds = list(1,255,255,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
@@ -92,8 +93,13 @@ var/list/points_of_interest = list()
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
+	GLOB.processing_objects += src
 	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
+
+/obj/effect/overmap/sector/process()
+	if(15<=hit)
+		src.icon_state="bombed"
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)
@@ -119,3 +125,5 @@ var/list/points_of_interest = list()
 
 	testing("Overmap build complete.")
 	return 1
+
+

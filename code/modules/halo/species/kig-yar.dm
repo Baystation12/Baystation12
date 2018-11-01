@@ -49,7 +49,7 @@
 	slowdown = -1.75
 
 	total_health = 225
-	pixel_offset_x = -5
+	pixel_offset_x = -4
 
 	item_icon_offsets = list(4,-1)
 
