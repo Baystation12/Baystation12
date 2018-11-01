@@ -973,7 +973,7 @@
 /obj/structure/table/standard,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/weapon/paper/smug_3,
-/obj/item/weapon/flame/lighter/random,
+/obj/item/weapon/flame/lighter,
 /obj/random/coin,
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
