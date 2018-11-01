@@ -1039,9 +1039,9 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/weapon/flame/lighter
 	name = "cheap lighter"
 	desc = "A cheap-as-free lighter."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "lighter-g"
-	item_state = "lighter-g"
+	icon = 'icons/obj/lighters.dmi'
+	icon_state = "lighter"
+	item_state = "lighter"
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -1049,11 +1049,12 @@ obj/item/clothing/mask/chewable/Destroy()
 	attack_verb = list("burnt", "singed")
 	var/max_fuel = 5
 
-/obj/item/weapon/flame/lighter/New()
-	..()
+/obj/item/weapon/flame/lighter/Initialize()
+	. = ..()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	color = pick(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE)
 	update_icon()
 
 /obj/item/weapon/flame/lighter/proc/light(mob/user)
@@ -1090,33 +1091,6 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/weapon/flame/lighter/proc/shutoff_effects(mob/user)
 	user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
 
-/obj/item/weapon/flame/lighter/zippo
-	name = "\improper Zippo lighter"
-	desc = "The zippo."
-	icon_state = "zippo"
-	item_state = "zippo"
-	max_fuel = 10
-
-/obj/item/weapon/flame/lighter/zippo/light_effects(mob/user)
-	user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
-	playsound(src.loc, 'sound/items/zippo_open.ogg', 100, 1, -4)
-
-/obj/item/weapon/flame/lighter/zippo/shutoff_effects(mob/user)
-	user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
-	playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
-
-/obj/item/weapon/flame/lighter/zippo/afterattack(obj/O, mob/user, proximity)
-	if(!proximity) return
-	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && !lit)
-		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user, "<span class='notice'>You refuel [src] from \the [O]</span>")
-		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-
-/obj/item/weapon/flame/lighter/random/New()
-	icon_state = "lighter-[pick("r","c","y","g")]"
-	item_state = icon_state
-	..()
-
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
 	if(!lit)
 		if(reagents.has_reagent(/datum/reagent/fuel))
@@ -1127,14 +1101,11 @@ obj/item/clothing/mask/chewable/Destroy()
 		extinguish(user)
 
 /obj/item/weapon/flame/lighter/on_update_icon()
-	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
+	overlays.Cut()
 	if(lit)
-		icon_state = "[bis.base_icon_state]on"
-		item_state = "[bis.base_icon_state]on"
+		overlays += overlay_image(icon, "[initial(icon_state)]_flame", flags=RESET_COLOR)
 	else
-		icon_state = "[bis.base_icon_state]"
-		item_state = "[bis.base_icon_state]"
+		overlays += overlay_image(icon, "[initial(icon_state)]_striker", flags=RESET_COLOR)
 
 /obj/item/weapon/flame/lighter/attack(var/mob/living/carbon/M, var/mob/living/carbon/user)
 	if(!istype(M, /mob))
@@ -1153,7 +1124,6 @@ obj/item/clothing/mask/chewable/Destroy()
 				else
 					cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
 			return
-
 	..()
 
 /obj/item/weapon/flame/lighter/Process()
@@ -1171,3 +1141,57 @@ obj/item/clothing/mask/chewable/Destroy()
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)
+
+// Zippo
+/obj/item/weapon/flame/lighter/zippo
+	name = "\improper Zippo lighter"
+	desc = "The zippo."
+	icon_state = "zippo"
+	item_state = "zippo"
+	max_fuel = 10
+
+/obj/item/weapon/flame/lighter/zippo/Initialize()
+	. = ..()
+	color = pick(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE)
+
+/obj/item/weapon/flame/lighter/zippo/on_update_icon()
+	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+
+	overlays.Cut()
+	if(lit)
+		icon_state = "[bis.base_icon_state]_open"
+		item_state = "[bis.base_icon_state]_open"
+		overlays += overlay_image(icon, "[initial(icon_state)]_flame", flags=RESET_COLOR)
+	else
+		icon_state = "[bis.base_icon_state]"
+		item_state = "[bis.base_icon_state]"
+		overlays.Cut()
+
+/obj/item/weapon/flame/lighter/zippo/light_effects(mob/user)
+	user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
+	playsound(src.loc, 'sound/items/zippo_open.ogg', 100, 1, -4)
+
+/obj/item/weapon/flame/lighter/zippo/shutoff_effects(mob/user)
+	user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
+	playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
+
+/obj/item/weapon/flame/lighter/zippo/afterattack(obj/O, mob/user, proximity)
+	if(!proximity) return
+	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && !lit)
+		O.reagents.trans_to_obj(src, max_fuel)
+		to_chat(user, "<span class='notice'>You refuel [src] from \the [O]</span>")
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+
+/obj/item/weapon/flame/lighter/zippo/custom/Initialize()
+	. = ..()
+	color = null
+
+/obj/item/weapon/flame/lighter/zippo/custom/on_update_icon()
+	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+
+	if(lit)
+		icon_state = "[bis.base_icon_state]_on"
+		item_state = "[bis.base_icon_state]_on"
+	else
+		icon_state = "[bis.base_icon_state]"
+		item_state = "[bis.base_icon_state]"
