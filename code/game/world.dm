@@ -90,9 +90,6 @@
 		log = runtime_log
 
 	callHook("startup")
-	//Emergency Fix
-	load_mods()
-	//end-emergency fix
 
 	. = ..()
 
@@ -450,11 +447,6 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 /world/Reboot(var/reason)
-	/*spawn(0)
-		sound_to(world, sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')))// random end sounds!! - LastyBatsy
-
-		*/
-
 	Master.Shutdown()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
@@ -508,7 +500,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
-	world.load_mentors() // no need to write another hook.
+	world.load_mentors()
 	return 1
 
 /world/proc/load_mods()
@@ -561,8 +553,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "<b>[station_name()]</b>";
 	s += " ("
 	s += "<a href=\"https://forums.baystation12.net/\">" //Change this to wherever you want the hub to link to.
-//	s += "[game_version]"
-	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "Forums" 
 	s += "</a>"
 	s += ")"
 
@@ -601,7 +592,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (features)
 		s += ": [jointext(features, ", ")]"
 
-	/* does this help? I do not know */
 	if (src.status != s)
 		src.status = s
 
@@ -632,7 +622,6 @@ var/failed_old_db_connections = 0
 	return 1
 
 proc/setup_database_connection()
-
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
 
