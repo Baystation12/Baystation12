@@ -22,3 +22,4 @@
 	whitelisted = list(SPECIES_SKRELL)
 	sort_category = "Xenowear"
 	allowed_roles = ARMORED_ROLES
+	
