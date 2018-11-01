@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "Secret and random will (almost) never fail to start when voted in."
