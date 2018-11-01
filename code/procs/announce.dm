@@ -91,7 +91,22 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	news.message = message
 	news.message_type = announcement_type
 	news.can_be_redacted = 0
-	announce_newscaster_news(news)
+	var/datum/feed_channel/sendto
+	for(var/datum/feed_channel/FC in news_network.network_channels)
+		if(FC.channel_name == news.channel_name)
+			sendto = FC
+			break
+
+	if(!sendto)
+		sendto = new /datum/feed_channel
+		sendto.channel_name = news.channel_name
+		sendto.author = news.author
+		sendto.locked = 1
+		sendto.is_admin_channel = 1
+		news_network.network_channels += sendto
+
+	var/author = news.author ? news.author : sendto.author
+	news_network.SubmitArticle(news.message, author, news.channel_name, null, !news.can_be_redacted, news.message_type)
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/weapon/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)

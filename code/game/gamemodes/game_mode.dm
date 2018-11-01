@@ -11,7 +11,6 @@ var/global/list/additional_antag_types = list()
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
-	var/newscaster_announcements = null
 	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
 	var/ert_disabled = 0                     // ERT cannot be called.
 	var/deny_respawn = 0	                 // Disable respawn during this round.
@@ -451,7 +450,6 @@ var/global/list/additional_antag_types = list()
 				antag_templates |= antag
 
 	shuffle(antag_templates) //In the case of multiple antag types
-	newscaster_announcements = pick(newscaster_standard_feeds)
 
 /datum/game_mode/proc/check_victory()
 	return
