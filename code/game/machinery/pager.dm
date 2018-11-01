@@ -66,3 +66,12 @@
 
 /obj/machinery/pager/cargo //supply
 	department = SUP
+
+/obj/machinery/pager/security //torch security
+	department = SEC
+
+/obj/machinery/pager/science
+	department = SCI
+
+/obj/machinery/pager/engineering
+	department = ENG

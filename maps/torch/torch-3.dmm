@@ -7112,9 +7112,13 @@
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
 "pC" = (
-/obj/effect/floor_decal/corner/yellow/mono,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/emcloset,
+/obj/machinery/pager/engineering{
+	pixel_y = 25
+	},
+/obj/effect/floor_decal/corner/yellow{
+	icon_state = "corner_white";
+	dir = 5
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/foyer)
 "pG" = (
@@ -10269,6 +10273,14 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced/nitrogen,
+/area/engineering/atmos)
+"xG" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/corner/blue{
+	dir = 10
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
 /area/engineering/atmos)
 "xK" = (
 /obj/machinery/atmospherics/omni/filter{
@@ -40124,7 +40136,7 @@ qN
 rZ
 oc
 oc
-sZ
+xG
 sZ
 xE
 yy
