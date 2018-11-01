@@ -64,7 +64,7 @@
 
 	return match
 
-#define RECOMMENDED_VERSION 511
+#define RECOMMENDED_VERSION 512
 /world/New()
 	//set window title
 	name = "[server_name] - [GLOB.using_map.full_name]"
