@@ -340,6 +340,10 @@
 	var/obj/item/weapon/reagent_containers/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
+	var/list/bag_whitelist = list(
+		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/weapon/storage/plants
+	) // These bags will fast-empty into the grinder.
 
 /obj/machinery/reagentgrinder/New()
 	..()
@@ -371,8 +375,8 @@
 	if(!istype(O))
 		return
 
-	if(istype(O,/obj/item/weapon/storage/plants))
-		var/obj/item/weapon/storage/plants/bag = O
+	if(is_type_in_list(O, bag_whitelist))
+		var/obj/item/weapon/storage/bag = O
 		var/failed = 1
 		for(var/obj/item/G in O)
 			if(!G.reagents || !G.reagents.total_volume)
@@ -384,7 +388,7 @@
 				break
 
 		if(failed)
-			to_chat(user, "Nothing in the plant bag is usable.")
+			to_chat(user, "Nothing in \the [O] is usable.")
 			return 1
 		bag.finish_bulk_removal()
 
