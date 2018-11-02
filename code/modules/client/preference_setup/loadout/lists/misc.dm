@@ -143,10 +143,20 @@
 /datum/gear/lighter
 	display_name = "cheap lighter"
 	path = /obj/item/weapon/flame/lighter
+	var/lighter_colours = list("white" = COLOR_WHITE, "black" = COLOR_DARK_GRAY, "red" = COLOR_RED, "yellow" = COLOR_YELLOW, "cyan" = COLOR_CYAN, "green" = COLOR_GREEN, "violet" = COLOR_VIOLET)
+
+/datum/gear/lighter/New()
+	..()
+	gear_tweaks += new /datum/gear_tweak/color(lighter_colours)
 
 /datum/gear/zippo
 	display_name = "zippo"
 	path = /obj/item/weapon/flame/lighter/zippo
+	var/zippo_colours = list("steel" = COLOR_WHITE, "blackened" = COLOR_DARK_GRAY, "gunmetal" = COLOR_GUNMETAL, "bronze" = COLOR_BRONZE)
+
+/datum/gear/zippo/New()
+	..()
+	gear_tweaks += new /datum/gear_tweak/color(zippo_colours)
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
