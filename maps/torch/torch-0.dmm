@@ -10707,7 +10707,7 @@
 "yy" = (
 /obj/structure/table/standard,
 /obj/item/weapon/crowbar,
-/obj/item/weapon/flame/lighter,
+/obj/item/weapon/flame/lighter/random,
 /obj/item/weapon/storage/box/evidence,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/analysis)
