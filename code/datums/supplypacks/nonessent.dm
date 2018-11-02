@@ -244,7 +244,7 @@
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/under/wedding/bride_white,
 //					/obj/item/weapon/storage/backpack/cultpack,
-					/obj/item/weapon/storage/fancy/candle_box = 3)
+					/obj/item/weapon/storage/candle_box = 3)
 	cost = 10
 	containername = "chaplain equipment crate"
 

@@ -147,10 +147,12 @@
 /datum/gear/lighter/New()
 	..()
 	var/colours = list()
+	colours["random"] = /obj/item/weapon/flame/lighter/random
 	colours["red"] = /obj/item/weapon/flame/lighter/red
 	colours["yellow"] = /obj/item/weapon/flame/lighter/yellow
 	colours["cyan"] = /obj/item/weapon/flame/lighter/cyan
 	colours["green"] = /obj/item/weapon/flame/lighter/green
+	colours["pink"] = /obj/item/weapon/flame/lighter/pink
 	gear_tweaks += new/datum/gear_tweak/path(colours)
 
 /datum/gear/zippo
@@ -160,10 +162,12 @@
 /datum/gear/zippo/New()
 	..()
 	var/colours = list()
+	colours["random"] = /obj/item/weapon/flame/lighter/zippo/random
 	colours["silver"] = /obj/item/weapon/flame/lighter/zippo
 	colours["blackened"] = /obj/item/weapon/flame/lighter/zippo/black
 	colours["gunmetal"] = /obj/item/weapon/flame/lighter/zippo/gunmetal
 	colours["bronze"] = /obj/item/weapon/flame/lighter/zippo/bronze
+	colours["pink"] = /obj/item/weapon/flame/lighter/zippo/pink
 	gear_tweaks += new/datum/gear_tweak/path(colours)
 
 /datum/gear/ashtray

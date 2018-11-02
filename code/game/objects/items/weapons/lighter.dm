@@ -11,7 +11,7 @@
 	attack_verb = list("burnt", "singed")
 	var/max_fuel = 5
 	var/random_colour = FALSE
-	var/available_colors = list(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE)
+	var/available_colors = list(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE, COLOR_PINK)
 
 /obj/item/weapon/flame/lighter/Initialize()
 	. = ..()
@@ -129,6 +129,11 @@
 	color = COLOR_GREEN
 	name = "green lighter"
 
+/obj/item/weapon/flame/lighter/pink/Initialize()
+	. = ..()
+	color = COLOR_PINK
+	name = "pink lighter"
+
 /obj/item/weapon/flame/lighter/random
 	random_colour = TRUE
 
@@ -141,7 +146,7 @@
 	icon_state = "zippo"
 	item_state = "zippo"
 	max_fuel = 10
-	available_colors = list(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE)
+	available_colors = list(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE, COLOR_BRASS)
 
 /obj/item/weapon/flame/lighter/zippo/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
@@ -181,10 +186,20 @@
 	color = COLOR_GUNMETAL
 	name = "gunmetal zippo"
 
+/obj/item/weapon/flame/lighter/zippo/brass/Initialize()
+	. = ..()
+	color = COLOR_BRASS
+	name = "brass zippo"
+
 /obj/item/weapon/flame/lighter/zippo/bronze/Initialize()
 	. = ..()
 	color = COLOR_BRONZE
 	name = "bronze zippo"
+
+/obj/item/weapon/flame/lighter/zippo/pink/Initialize()
+	. = ..()
+	color = COLOR_PINK
+	name = "pink zippo"
 
 //Spawn using the colour list in the master type
 /obj/item/weapon/flame/lighter/zippo/random
