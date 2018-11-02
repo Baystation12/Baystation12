@@ -143,20 +143,28 @@
 /datum/gear/lighter
 	display_name = "cheap lighter"
 	path = /obj/item/weapon/flame/lighter
-	var/lighter_colours = list("white" = COLOR_WHITE, "black" = COLOR_DARK_GRAY, "red" = COLOR_RED, "yellow" = COLOR_YELLOW, "cyan" = COLOR_CYAN, "green" = COLOR_GREEN, "violet" = COLOR_VIOLET)
 
 /datum/gear/lighter/New()
 	..()
-	gear_tweaks += new /datum/gear_tweak/color(lighter_colours)
+	var/colours = list()
+	colours["red"] = /obj/item/weapon/flame/lighter/red
+	colours["yellow"] = /obj/item/weapon/flame/lighter/yellow
+	colours["cyan"] = /obj/item/weapon/flame/lighter/cyan
+	colours["green"] = /obj/item/weapon/flame/lighter/green
+	gear_tweaks += new/datum/gear_tweak/path(colours)
 
 /datum/gear/zippo
 	display_name = "zippo"
 	path = /obj/item/weapon/flame/lighter/zippo
-	var/zippo_colours = list("steel" = COLOR_WHITE, "blackened" = COLOR_DARK_GRAY, "gunmetal" = COLOR_GUNMETAL, "bronze" = COLOR_BRONZE)
 
 /datum/gear/zippo/New()
 	..()
-	gear_tweaks += new /datum/gear_tweak/color(zippo_colours)
+	var/colours = list()
+	colours["silver"] = /obj/item/weapon/flame/lighter/zippo
+	colours["blackened"] = /obj/item/weapon/flame/lighter/zippo/black
+	colours["gunmetal"] = /obj/item/weapon/flame/lighter/zippo/gunmetal
+	colours["bronze"] = /obj/item/weapon/flame/lighter/zippo/bronze
+	gear_tweaks += new/datum/gear_tweak/path(colours)
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
