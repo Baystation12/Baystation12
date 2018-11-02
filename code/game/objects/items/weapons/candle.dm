@@ -1,17 +1,18 @@
 /obj/item/weapon/flame/candle
-	name = "red candle"
+	name = "candle"
 	desc = "A small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = ITEM_SIZE_TINY
 	light_color = "#e09d37"
+	var/available_colours = list(COLOR_WHITE, COLOR_DARK_GRAY, COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_BLUE, COLOR_INDIGO, COLOR_VIOLET)
 	var/wax
 
-/obj/item/weapon/flame/candle/New()
+/obj/item/weapon/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
-
-	..()
+	color = pick(available_colours)
+	. = ..()
 
 /obj/item/weapon/flame/candle/on_update_icon()
 	var/i
@@ -20,8 +21,9 @@
 	else if(wax > 800)
 		i = 2
 	else i = 3
-	icon_state = "candle[i][lit ? "_lit" : ""]"
-
+	icon_state = "candle[i]"
+	if(lit)
+		overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
 
 /obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -46,7 +48,9 @@
 		return
 	wax--
 	if(!wax)
-		new/obj/item/trash/candle(src.loc)
+		var/obj/item/trash/candle/C = new(loc)
+		overlays.Cut()
+		C.color = color
 		qdel(src)
 	update_icon()
 	if(istype(loc, /turf)) //start a fire if possible
@@ -56,5 +60,19 @@
 /obj/item/weapon/flame/candle/attack_self(mob/user as mob)
 	if(lit)
 		lit = 0
+		overlays.Cut()
 		update_icon()
 		set_light(0)
+
+/obj/item/weapon/storage/candle_box
+	name = "candle pack"
+	desc = "A pack of unscented candles in a variety of colours."
+	icon = 'icons/obj/candle.dmi'
+	icon_state = "candlebox"
+	throwforce = 2
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
+	max_storage_space = 7
+	slot_flags = SLOT_BELT
+
+	startswith = list(/obj/item/weapon/flame/candle = 7)

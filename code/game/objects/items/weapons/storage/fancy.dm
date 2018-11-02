@@ -5,7 +5,6 @@
  *
  * Contains:
  *		Egg Box
- *		Candle Box
  *		Crayon Box
  *		Cigarette Box
  */
@@ -62,26 +61,6 @@
 
 /obj/item/weapon/storage/fancy/egg_box/empty
 	startswith = null
-
-
-/*
- * Candle Box
- */
-
-/obj/item/weapon/storage/fancy/candle_box
-	name = "candle pack"
-	desc = "A pack of red candles."
-	icon = 'icons/obj/candle.dmi'
-	icon_state = "candlebox"
-	opened = 1 //no closed state
-	throwforce = 2
-	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 5
-	slot_flags = SLOT_BELT
-
-	key_type = /obj/item/weapon/flame/candle
-	startswith = list(/obj/item/weapon/flame/candle = 5)
 
 /*
  * Crayon Box
