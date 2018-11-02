@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Job slots should now open back up properly whenever someone cryos from a multi-slot job"
