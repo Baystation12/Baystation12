@@ -6443,7 +6443,7 @@
 /area/wizard_station)
 "aoU" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/fancy/candle_box,
+/obj/item/weapon/storage/candle_box,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
