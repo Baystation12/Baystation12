@@ -11419,7 +11419,7 @@
 	name = "Prisoner's Locker"
 	},
 /obj/random/tech_supply,
-/obj/item/weapon/flame/lighter/zippo,
+/obj/item/weapon/flame/lighter/zippo/random,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/smokes,
 /obj/effect/floor_decal/industrial/warning,

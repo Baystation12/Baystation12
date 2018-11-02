@@ -1048,13 +1048,16 @@ obj/item/clothing/mask/chewable/Destroy()
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
 	var/max_fuel = 5
+	var/random_colour = FALSE
+	var/available_colors = list(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE)
 
 /obj/item/weapon/flame/lighter/Initialize()
 	. = ..()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
-	color = pick(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE)
+	if(random_colour)
+		color = pick(available_colors)
 	update_icon()
 
 /obj/item/weapon/flame/lighter/proc/light(mob/user)
@@ -1101,11 +1104,13 @@ obj/item/clothing/mask/chewable/Destroy()
 		extinguish(user)
 
 /obj/item/weapon/flame/lighter/on_update_icon()
+	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+
 	overlays.Cut()
 	if(lit)
-		overlays += overlay_image(icon, "[initial(icon_state)]_flame", flags=RESET_COLOR)
+		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
 	else
-		overlays += overlay_image(icon, "[initial(icon_state)]_striker", flags=RESET_COLOR)
+		overlays += overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR)
 
 /obj/item/weapon/flame/lighter/attack(var/mob/living/carbon/M, var/mob/living/carbon/user)
 	if(!istype(M, /mob))
@@ -1142,6 +1147,9 @@ obj/item/clothing/mask/chewable/Destroy()
 	if(location)
 		location.hotspot_expose(700, 5)
 
+/obj/item/weapon/flame/lighter/random
+	random_colour = TRUE
+
 // Zippo
 /obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
@@ -1149,10 +1157,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	icon_state = "zippo"
 	item_state = "zippo"
 	max_fuel = 10
-
-/obj/item/weapon/flame/lighter/zippo/Initialize()
-	. = ..()
-	color = pick(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE)
+	available_colors = list(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE)
 
 /obj/item/weapon/flame/lighter/zippo/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
@@ -1161,7 +1166,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	if(lit)
 		icon_state = "[bis.base_icon_state]_open"
 		item_state = "[bis.base_icon_state]_open"
-		overlays += overlay_image(icon, "[initial(icon_state)]_flame", flags=RESET_COLOR)
+		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
 	else
 		icon_state = "[bis.base_icon_state]"
 		item_state = "[bis.base_icon_state]"
@@ -1181,6 +1186,9 @@ obj/item/clothing/mask/chewable/Destroy()
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, "<span class='notice'>You refuel [src] from \the [O]</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+
+/obj/item/weapon/flame/lighter/zippo/random
+	random_colour = TRUE
 
 /obj/item/weapon/flame/lighter/zippo/custom/Initialize()
 	. = ..()

@@ -69,7 +69,7 @@
 /area/icarus/vessel)
 "au" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/flame/lighter/zippo,
+/obj/item/weapon/flame/lighter/zippo/random,
 /obj/random/smokes,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
