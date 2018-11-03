@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "OOC lobby manifest entries should now show proper Active/Inactive status"
-  - rscadd: "Crew records now have a separate 'Formal Name' field that contains the MD/PhD/etc suffix. This will be the name displayed on manifests."
