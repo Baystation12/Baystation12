@@ -140,6 +140,18 @@ proc/get_radio_key_from_channel(var/channel)
 		return "asks"
 	return verb
 
+/mob/living/proc/format_say_message(var/message = null)
+	if(!message)
+		return
+
+	message = html_decode(message)
+
+	var/end_char = copytext(message, lentext(message), lentext(message) + 1)
+	if(!(end_char in list(".", "?", "!", "-", "~")))
+		message += "."
+
+	return html_encode(capitalize(message))
+
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
@@ -192,8 +204,8 @@ proc/get_radio_key_from_channel(var/channel)
 			verb = say_quote(message, speaking)
 
 	message = trim_left(message)
-
 	message = handle_autohiss(message, speaking)
+	message = format_say_message(message)
 
 	if(!(speaking && (speaking.flags & NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)
