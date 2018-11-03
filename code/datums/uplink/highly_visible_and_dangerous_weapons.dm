@@ -45,33 +45,29 @@
 	name = "Revolver, .357"
 	desc = ".357 revolver, with ammunition."
 	item_cost = 56
-	antag_costs = list(MODE_MERCENARY = 14)
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
 
 /datum/uplink_item/item/visible_weapons/revolver2
 	name = "Revolver, .44"
 	desc = ".44 magnum revolver, with ammunition."
 	item_cost = 48
-	antag_costs = list(MODE_MERCENARY = 5)
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"
 	item_cost = 60
-	antag_roles = list(MODE_MERCENARY = 12)
+	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/weapon/gun/launcher/grenade/loaded
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
 /datum/uplink_item/item/visible_weapons/submachinegun
 	name = "Submachine Gun"
 	item_cost = 52
-	antag_costs = list(MODE_MERCENARY = 20)
 	path = /obj/item/weapon/gun/projectile/automatic/c20r
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
 	name = "Assault Rifle"
 	item_cost = 60
-	antag_costs = list(MODE_MERCENARY = 9)
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
@@ -87,7 +83,6 @@
 /datum/uplink_item/item/visible_weapons/machine_pistol
 	name = "Machine Pistol"
 	item_cost = 45
-	antag_costs = list(MODE_MERCENARY = 10)
 	path = /obj/item/weapon/gun/projectile/automatic/machine_pistol
 
 /datum/uplink_item/item/visible_weapons/combat_shotgun
@@ -118,13 +113,11 @@
 /datum/uplink_item/item/visible_weapons/pulserifle
 	name = "Pulse Rifle"
 	item_cost = 68
-	antag_costs = list(MODE_MERCENARY = 30)
 	path = /obj/item/weapon/gun/energy/pulse_rifle
 
 /datum/uplink_item/item/visible_weapons/flechetterifle
 	name = "Flechette Rifle"
 	item_cost = 60
-	antag_costs = list(MODE_MERCENARY = 20)
 	path = /obj/item/weapon/gun/magnetic/railgun/flechette
 
 /datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
