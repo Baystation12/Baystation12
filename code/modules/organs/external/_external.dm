@@ -154,13 +154,13 @@
 	var/burn_damage = 0
 	switch (severity)
 		if (1)
-			burn_damage = 15
+			burn_damage = 30
 		if (2)
-			burn_damage = 7
+			burn_damage = 15
 		if (3)
-			burn_damage = 3
+			burn_damage = 7.5
 
-	var/mult = BP_IS_ROBOTIC(src) + BP_IS_ASSISTED(src)
+	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
 	burn_damage *= mult/species.burn_mod //ignore burn mod for EMP damage
 
 	var/power = 4 - severity //stupid reverse severity
@@ -1493,6 +1493,17 @@ obj/item/organ/external/proc/remove_clamps()
 	W.damage += damage
 	W.time_inflicted = world.time
 
-
 /obj/item/organ/external/proc/has_genitals()
 	return !BP_IS_ROBOTIC(src) && species && species.sexybits_location == organ_tag
+
+// Added to the mob's move delay tally if this organ is being used to move with.
+obj/item/organ/external/proc/movement_delay(max_delay)
+	. = 0
+	if(is_stump())
+		. += max_delay
+	else if(splinted)
+		. += max_delay/8
+	else if(status & ORGAN_BROKEN)
+		. += max_delay * 3/8
+	else if(BP_IS_ROBOTIC(src))
+		. += max_delay * CLAMP01(damage/max_damage)

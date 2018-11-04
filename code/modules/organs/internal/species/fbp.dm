@@ -37,6 +37,10 @@
 		cell.use(amount)
 		return 1
 
+/obj/item/organ/internal/cell/proc/get_servo_cost()
+	var/damage_factor = 1 + 10 * damage/max_damage
+	return servo_cost * damage_factor
+
 /obj/item/organ/internal/cell/Process()
 	..()
 	if(!owner)
@@ -46,19 +50,13 @@
 	if(!is_usable())
 		owner.Paralyse(3)
 		return
-	var/standing = !owner.lying && !owner.buckled //on the edge
-	var/drop
-	if(!check_charge(servo_cost)) //standing is pain
-		drop = 1
-	else if(standing)
-		use(servo_cost)
-		if(world.time - owner.l_move_time < 15) //so is
-			if(!use(servo_cost))
-				drop = 1
-	if(drop)
-		if(standing)
+	var/cost = get_servo_cost()
+	if(world.time - owner.l_move_time < 15)
+		cost *= 2
+	if(!use(cost))
+		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
-		owner.Weaken(2)
+		owner.Paralyse(3)
 
 /obj/item/organ/internal/cell/emp_act(severity)
 	..()
