@@ -6,7 +6,7 @@
 
 /obj/effect/overlay/shields
 	icon = 'code/modules/halo/icons/species/Sangheili_Combat_Harness.dmi'
-	icon_state = "shieldoverlay0"
+	icon_state = "shieldoverlay"
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
@@ -37,7 +37,6 @@
 	GLOB.processing_objects += src
 	user.overlays -= shieldoverlay
 	if(checkshields(damage))
-		shieldoverlay.icon_state = "shieldoverlay[user.lying]"
 		user.overlays += shieldoverlay
 		connectedarmour.armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0) //This is needed because shields don't work if armour absorbs the blow instead.
 		var/obj/item/dam_source = damage_source
