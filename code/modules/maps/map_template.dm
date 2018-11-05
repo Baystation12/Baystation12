@@ -36,11 +36,11 @@
 	return TRUE
 
 /datum/map_template/proc/init_atoms(var/list/atoms)
-
 	if (SSatoms.initialized == INITIALIZATION_INSSATOMS)
 		return // let proper initialisation handle it later
 	if(length(shuttles_to_initialise))
 		SSshuttle.suspend() // For proper shuttle init behavior, we wait until done with init here.
+	atoms = atoms.Copy()
 
 	var/list/turf/turfs = list()
 	var/list/obj/machinery/atmospherics/atmos_machines = list()
@@ -62,11 +62,17 @@
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines)
 
-	for (var/obj/machinery/machine in machines)
+	for (var/i in machines)
+		var/obj/machinery/machine = i
 		machine.power_change()
 
-	for (var/turf/T in turfs)
+	for (var/i in turfs)
+		var/turf/T = i
 		T.post_change()
+		if(template_flags & TEMPLATE_FLAG_NO_RUINS)
+			T.turf_flags |= TURF_FLAG_NORUINS
+		if(template_flags & TEMPLATE_FLAG_NO_RADS)
+			qdel(SSradiation.sources_assoc[i])
 
 /datum/map_template/proc/init_shuttles()
 	for (var/shuttle_type in shuttles_to_initialise)
