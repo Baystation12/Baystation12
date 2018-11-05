@@ -9,7 +9,8 @@
 		/obj/item/weapon/wrench/finger,
 		/obj/item/weapon/weldingtool/finger,
 		/obj/item/weapon/crowbar/finger,
-		/obj/item/weapon/wirecutters/finger
+		/obj/item/weapon/wirecutters/finger,
+		/obj/item/device/multitool/finger
 	)
 
 /obj/item/weapon/weldingtool/finger
@@ -65,3 +66,9 @@
 	. = ..()
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
+
+/obj/item/device/multitool/finger
+	name = "digital multitool"
+	desc = "A multitool inside of a multitool. Doubletool?"
+	icon_state = "multitool_finger"
+	icon = 'icons/obj/augment_tools.dmi'

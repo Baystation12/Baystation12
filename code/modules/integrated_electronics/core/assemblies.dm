@@ -506,12 +506,14 @@
 /obj/item/device/electronic_assembly/hook
 	name = "type-e electronic assembly"
 	icon_state = "setup_small_hook"
-	desc = "It's a case, for building small electronics with. This one looks like it has a belt clip, but it's purely decorative."
+	desc = "It's a case, for building small electronics with. This one looks like it has a belt clip."
+	slot_flags = SLOT_BELT
 
 /obj/item/device/electronic_assembly/pda
 	name = "type-f electronic assembly"
 	icon_state = "setup_small_pda"
 	desc = "It's a case, for building small electronics with. This one resembles a PDA."
+	slot_flags = SLOT_BELT | SLOT_ID
 
 /obj/item/device/electronic_assembly/augment
 	name = "augment electronic assembly"
