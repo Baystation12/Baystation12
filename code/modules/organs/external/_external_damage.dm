@@ -65,7 +65,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(internal_organs && internal_organs.len)
 		var/damage_amt = brute
 		var/cur_damage = brute_dam
-		if(laser)
+		if(laser || BP_IS_ROBOTIC(src))
 			damage_amt += burn
 			cur_damage += burn_dam
 		var/organ_damage_threshold = 10
