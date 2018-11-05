@@ -169,6 +169,13 @@
 	icon_state = "id"
 	item_state = "card-id"
 
+/obj/item/weapon/card/id/oni
+	name = "ONI ID Badge"
+	desc = "An identification card worn by members of the Office Of Naval Intelligence."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
 /obj/item/clothing/gloves/thick/unsc //Combined effect of SWAT gloves and insulated gloves
 	desc = "Standard Issue UNSC Marine Gloves."
 	name = "UNSC Combat gloves"

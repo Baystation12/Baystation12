@@ -226,6 +226,15 @@
 	icon_dead = "kitten_dead"
 	gender = NEUTER
 
+/mob/living/simple_animal/cat/fluff/kitten/jade
+	name = "Jade"
+	desc = "D'aaawwww, A little Sphynx Kitten"
+	icon_state = "kitten"
+	item_state = "kitten"
+	icon_living = "kitten"
+	icon_dead = "kitten_dead"
+	gender = FEMALE
+
 // Leaving this here for now.
 /obj/item/weapon/holder/cat/fluff/bones
 	name = "Bones"

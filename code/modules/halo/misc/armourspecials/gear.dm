@@ -8,10 +8,14 @@
 	if(!user)
 		return
 
+	if(user.get_equipped_item(equip_slot))
+		return
+
 	if(!spawned_gear)
 		spawned_gear = new gear_type(source_armour)
 		spawned_gear.canremove = 0
-	return user.equip_to_slot_if_possible(spawned_gear, equip_slot, 1, 0)
+		
+	return user.equip_to_slot(spawned_gear, equip_slot)
 
 /datum/armourspecials/gear/on_drop(var/obj/source_armour)
 	if(!user)

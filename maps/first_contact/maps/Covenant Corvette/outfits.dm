@@ -60,3 +60,58 @@
 	flags = 0
 
 	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/sangheilicorvette/sangheili_ultra
+	name = "Sangheili - Ultra"
+
+	l_ear = /obj/item/device/radio/headset/covenant
+	uniform = /obj/item/clothing/under/covenant/sangheili
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = 	/obj/item/weapon/melee/energy/elite_sword/dagger
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra
+	head = /obj/item/clothing/head/helmet/sangheili/ultra
+	shoes = /obj/item/clothing/shoes/sangheili/ultra
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/sangheilicorvette/sangheili_major
+	name = "Sangheili - Major"
+
+	l_ear = /obj/item/device/radio/headset/covenant
+	uniform = /obj/item/clothing/under/covenant/sangheili
+	suit = /obj/item/clothing/suit/armor/special/combatharness/major
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/major
+	head = /obj/item/clothing/head/helmet/sangheili/major
+	shoes = /obj/item/clothing/shoes/sangheili/major
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/sangheilicorvette/sangheili_minor
+	name = "Sangheili - Minor"
+
+	l_ear = /obj/item/device/radio/headset/covenant
+	uniform = /obj/item/clothing/under/covenant/sangheili
+	suit = /obj/item/clothing/suit/armor/special/combatharness/minor
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = 	/obj/item/weapon/grenade/plasma
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/minor
+	head = /obj/item/clothing/head/helmet/sangheili/minor
+	shoes = /obj/item/clothing/shoes/sangheili/minor
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job

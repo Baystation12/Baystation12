@@ -13,7 +13,7 @@
 
 	var/player_faction = "UNSC"
 	var/wave_num = 0
-	var/area/planet/daynight/planet_area
+	//var/area/planet/daynight/planet_area
 	var/list/flood_spawn_turfs = list()
 	var/list/flood_assault_turfs = list()
 
@@ -29,10 +29,10 @@
 	var/spawn_interval = 30
 
 	//deciseconds
-	var/duration_wave_base = 6000
-	var/duration_wave_current = 6000
-	var/duration_rest_base = 6000
-	var/duration_rest_current = 6000
+	var/duration_wave_base = 3000
+	var/duration_wave_current = 3000
+	var/duration_rest_base = 12000
+	var/duration_rest_current = 12000
 	var/time_wave_cycle = 0
 	var/interval_resupply = 2000
 	var/time_next_resupply = 0
@@ -51,7 +51,7 @@
 
 	var/list/available_resupply_points = list()
 
-	var/obj/effect/landmark/day_night_zcontroller/daynight_controller
+	//var/obj/effect/landmark/day_night_zcontroller/daynight_controller
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
