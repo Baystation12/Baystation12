@@ -26,12 +26,7 @@
 
 	var/round_start = 0
 	var/round_completion_delay = 150
-/*
-/datum/game_mode/opredflag/pre_setup()
-	world << "/datum/game_mode/opredflag/pre_setup()"
-	var/retval = ..()
-	. = retval
-*/
+
 /datum/game_mode/opredflag/post_setup()
 	. = ..()
 
