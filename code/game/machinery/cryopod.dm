@@ -390,7 +390,9 @@
 			occupant.mind.special_role = null
 
 	// Delete them from datacore.
-	var/datum/computer_file/report/crew_record/R = get_crewmember_record(occupant.real_name)
+	var/sanitized_name = occupant.real_name
+	sanitized_name = sanitize(sanitized_name)
+	var/datum/computer_file/report/crew_record/R = get_crewmember_record(sanitized_name)
 	if(R)
 		qdel(R)
 
