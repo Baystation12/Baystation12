@@ -6,17 +6,15 @@
 
 /obj/effect/overlay/shields
 	icon = 'code/modules/halo/icons/species/Sangheili_Combat_Harness.dmi'
-	icon_state = "shield"
+	icon_state = "shieldoverlay0"
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/effect/overlay/shields/spartan
 	icon = 'code/modules/halo/clothing/spartan_armour.dmi'
-	icon_state = "Spartan Shields"
 
 /obj/effect/overlay/shields/unggoy
 	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
-	icon_state = "shield"
 
 /datum/armourspecials/shields
 	var/shieldstrength
@@ -24,7 +22,7 @@
 	var/nextcharge
 	var/warned
 	var/shield_recharge_delay = 2//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
-	var/shieldoverlay = new /obj/effect/overlay/shields
+	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/obj/item/clothing/suit/armor/special/connectedarmour
 	var/list/armourvalue
 
@@ -39,6 +37,7 @@
 	GLOB.processing_objects += src
 	user.overlays -= shieldoverlay
 	if(checkshields(damage))
+		shieldoverlay.icon_state = "shieldoverlay[user.lying]"
 		user.overlays += shieldoverlay
 		connectedarmour.armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0) //This is needed because shields don't work if armour absorbs the blow instead.
 		var/obj/item/dam_source = damage_source
