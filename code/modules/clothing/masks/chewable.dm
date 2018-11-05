@@ -17,9 +17,13 @@ obj/item/clothing/mask/chewable/New()
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
-/obj/item/clothing/mask/chewable/equipped()
-	START_PROCESSING(SSobj, src)
+/obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
 	..()
+	if(slot == SLOT_MASK)
+		if(user.check_has_mouth())
+			START_PROCESSING(SSobj, src)
+		else
+			to_chat(user, "<span class='notice'>You don't have a mouth, and can't make much use of \the [src].</span>")
 
 /obj/item/clothing/mask/chewable/dropped()
 	STOP_PROCESSING(SSobj, src)
@@ -31,25 +35,27 @@ obj/item/clothing/mask/chewable/Destroy()
 
 /obj/item/clothing/mask/chewable/proc/chew(amount)
 	chewtime -= amount
-	if(reagents && reagents.total_volume) // check if it has any reagents at all
+	if(reagents && reagents.total_volume)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
-				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // I am keeping this one because gum is not a replacement for real food. Fuck off Wonka.
+			if (src == C.wear_mask && C.check_has_mouth())
+				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2)
 			add_trace_DNA(C)
-		else // else just remove some of the reagents
-			reagents.remove_any(REM)
+		else
+			STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/chewable/Process()
+	if(!equipped())
+		STOP_PROCESSING(SSobj, src)
+		return
 	chew(1)
 	if(chewtime < 1)
 		extinguish()
 		return
 
-
 /obj/item/clothing/mask/chewable/tobacco
 	name = "wad"
-	desc = "A chewy wad of terbecco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
+	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
 	throw_speed = 0.5
 	icon_state = "chew"
 	type_butt = /obj/item/trash/cigbutt/spitwad
@@ -108,28 +114,23 @@ obj/item/clothing/mask/chewable/Destroy()
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
-//	brand = "wad"
 	filling = list(/datum/reagent/sugar = 2)
-
 
 /obj/item/trash/cigbutt/spitgum
 	name = "old gum"
 	desc = "A disgusting chewed up wad of gum."
 	icon_state = "spit-gum"
 
-
 /obj/item/trash/cigbutt/lollibutt
 	name = "popsicle stick"
 	desc = "A popsicle stick devoid of pop."
 	icon_state = "pop-stick"
-
 
 /obj/item/clothing/mask/chewable/candy/gum
 	name = "chewing gum"
 	desc = "A chewy wad of fine synthetic rubber and artificial flavoring."
 	icon_state = "gum"
 	item_state = "gum"
-//	brand = "gum"
 
 /obj/item/clothing/mask/chewable/candy/gum/New()
 	..()
@@ -152,7 +153,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	type_butt = /obj/item/trash/cigbutt/lollibutt
 	icon_state = "lollipop"
 	item_state = "lollipop"
-//	brand = "unremarkable"
+
 /obj/item/clothing/mask/chewable/candy/lolli/New()
 	..()
 	reagents.add_reagent(pick(list(

@@ -59,23 +59,26 @@
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
-		return
 
 /obj/item/weapon/flame/match/dropped(var/mob/user)
 	//If dropped, put ourselves out
 	//not before lighting up the turf we land on, though.
 	if(lit)
-		spawn(0)
-			var/turf/location = src.loc
-			if(istype(location))
-				location.hotspot_expose(700, 5)
-			extinguish()
+		var/turf/location = src.loc
+		if(istype(location))
+			location.hotspot_expose(700, 5)
+		extinguish()
 	return ..()
 
 /obj/item/weapon/flame/match/extinguish(var/mob/user, var/no_message)
 	. = ..()
-	icon_state = "match_burnt"
-	item_state = "cigoff"
 	name = "burnt match"
 	desc = "A match. This one has seen better days."
 	burnt = 1
+	update_icon()
+
+/obj/item/weapon/flame/match/on_update_icon()
+	..()
+	if(burnt)
+		icon_state = "match_burnt"
+		item_state = "cigoff"
