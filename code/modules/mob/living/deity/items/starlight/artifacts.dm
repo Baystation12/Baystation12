@@ -26,7 +26,7 @@
 	category = DEITY_TREE_ARTIFACT
 	max_level = 1
 	forge_type = /obj/structure/deity/blood_forge/starlight
-	recipes = list(/obj/item/clothing/ring/aura_ring/talisman_of_starborn = 500,
-							/obj/item/clothing/ring/aura_ring/talisman_of_blueforged = 500,
-							/obj/item/clothing/ring/aura_ring/talisman_of_shadowling = 500
+	recipes = list(/obj/item/clothing/ring/aura_ring/talisman_of_starborn = 70,
+							/obj/item/clothing/ring/aura_ring/talisman_of_blueforged = 70,
+							/obj/item/clothing/ring/aura_ring/talisman_of_shadowling = 70
 							)

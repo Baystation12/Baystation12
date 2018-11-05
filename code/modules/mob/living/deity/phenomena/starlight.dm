@@ -102,6 +102,10 @@
 /datum/phenomena/create_gateway/can_activate(var/atom/a)
 	if(!..())
 		return 0
+	if(istype(a, /obj/structure/deity/gateway))
+		var/obj/structure/deity/gateway/G = a
+		if(G.linked_god == linked)
+			return 1
 	var/turf/T = get_turf(a)
 	if(!T || T.density)
 		return 0
@@ -113,7 +117,10 @@
 
 /datum/phenomena/create_gateway/activate(var/atom/a)
 	..()
-	new /obj/structure/deity/gateway(get_turf(a), linked)
+	if(istype(a, /obj/structure/deity/gateway))
+		qdel(a)
+	else
+		new /obj/structure/deity/gateway(get_turf(a), linked)
 
 /datum/phenomena/flickering_whisper
 	name = "Flickering Whisper"
@@ -194,18 +201,22 @@
 	addtimer(CALLBACK(src, .proc/succeed_ritual, L), 600 SECONDS) //6 minutes
 	for(var/mob/living/player in GLOB.player_list)
 		sound_to(player, 'sound/effects/cascade.ogg')
-		if(player.mind && player.mind.assigned_role == "Chaplain")
-			to_chat(player, "<span class='cult'>Something bad is coming.... you know you don't have much time.</span>")
+		if(player.mind && player.mind.assigned_role == "Counselor")
+			to_chat(player, "<span class='cult'>Something bad is coming.... you know you don't have much time. Find and destroy the vessel, before its too late.</span>")
 		else if(player != linked && !linked.is_follower(player, silent = 1))
-			to_chat(player, "<span class='warning'>The world swims around you for just a moment...</span>")
+			to_chat(player, "<span class='warning'>The world swims around you for just a moment... something is wrong. Very wrong.</span>")
+		else
+			to_chat(player, "<span class='notice'>Your Master is being reborn into the body of \the [L]. Protect it at all costs.</span>")
 
 /datum/phenomena/divine_right/proc/fail_ritual(var/mob/living/L)
 	qdel(linked)
 
 /datum/phenomena/divine_right/proc/succeed_ritual(var/mob/living/L)
 	to_chat(linked, "<span class='cult'>You have been reborn! Your power is limited here, focused on your body, but in return you are both eternal and physical.</span>")
+	for(var/mob/living/player in GLOB.player_list)
+		sound_to(player, 'sound/effects/cascade.ogg')
+		to_chat(player, "<span class='cult'>\The [linked] has been born into flesh. Kneel to its authority or else.</span>")
 	linked.mind.transfer_to(L)
-	L.ckey = linked.ckey
 	L.SetName("[linked] Incarnate")
 	L.real_name = "[linked] Incarnate"
 
