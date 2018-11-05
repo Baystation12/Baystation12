@@ -24,7 +24,7 @@
 
 /obj/item/weapon/flame/lighter/proc/light(mob/user)
 	if(submerged())
-		to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
+		to_chat(user, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 		return
 	lit = 1
 	update_icon()
@@ -41,7 +41,7 @@
 			user.apply_damage(2,BURN,BP_L_HAND)
 		else
 			user.apply_damage(2,BURN,BP_R_HAND)
-		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
+		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], burning their finger in the process.</span>")
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
 /obj/item/weapon/flame/lighter/extinguish(var/mob/user, var/no_message)
@@ -61,7 +61,7 @@
 		if(reagents.has_reagent(/datum/reagent/fuel))
 			light(user)
 		else
-			to_chat(user, "<span class='warning'>[src] won't ignite - out of fuel.</span>")
+			to_chat(user, "<span class='warning'>\The [src] won't ignite - it must be out of fuel.</span>")
 	else
 		extinguish(user)
 
@@ -74,7 +74,7 @@
 	else
 		overlays += overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR)
 
-/obj/item/weapon/flame/lighter/attack(var/mob/living/carbon/M, var/mob/living/carbon/user)
+/obj/item/weapon/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
 	if(!istype(M, /mob))
 		return
 
@@ -86,20 +86,16 @@
 			if(M == user)
 				cig.attackby(src, user)
 			else
-				if(istype(src, /obj/item/weapon/flame/lighter/zippo))
-					cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M].</span>")
-				else
-					cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
+				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
 			return
 	..()
 
 /obj/item/weapon/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))
 		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
-			to_chat(loc, "<span class='warning'>[src]'s flame flickers.</span>")
+			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
 			set_light(0)
-			spawn(4)
-				set_light(0.6, 0.5, 2)
+			addtimer(CALLBACK(src, .atom/proc/set_light, 0.6, 0.5, 2), 4)
 		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
 	else
 		extinguish()
@@ -109,28 +105,23 @@
 	if(location)
 		location.hotspot_expose(700, 5)
 
-/obj/item/weapon/flame/lighter/red/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/red
 	color = COLOR_RED
 	name = "red lighter"
 
-/obj/item/weapon/flame/lighter/yellow/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/yellow
 	color = COLOR_YELLOW
 	name = "yellow lighter"
 
-/obj/item/weapon/flame/lighter/cyan/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/cyan
 	color = COLOR_CYAN
 	name = "cyan lighter"
 
-/obj/item/weapon/flame/lighter/green/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/green
 	color = COLOR_GREEN
 	name = "green lighter"
 
-/obj/item/weapon/flame/lighter/pink/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/pink
 	color = COLOR_PINK
 	name = "pink lighter"
 
@@ -159,7 +150,6 @@
 	else
 		icon_state = "[bis.base_icon_state]"
 		item_state = "[bis.base_icon_state]"
-		overlays.Cut()
 
 /obj/item/weapon/flame/lighter/zippo/light_effects(mob/user)
 	user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
@@ -176,28 +166,23 @@
 		to_chat(user, "<span class='notice'>You refuel [src] from \the [O]</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 
-/obj/item/weapon/flame/lighter/zippo/black/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/zippo/black
 	color = COLOR_DARK_GRAY
 	name = "black zippo"
 
-/obj/item/weapon/flame/lighter/zippo/gunmetal/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/zippo/gunmetal
 	color = COLOR_GUNMETAL
 	name = "gunmetal zippo"
 
-/obj/item/weapon/flame/lighter/zippo/brass/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/zippo/brass
 	color = COLOR_BRASS
 	name = "brass zippo"
 
-/obj/item/weapon/flame/lighter/zippo/bronze/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/zippo/bronze
 	color = COLOR_BRONZE
 	name = "bronze zippo"
 
-/obj/item/weapon/flame/lighter/zippo/pink/Initialize()
-	. = ..()
+/obj/item/weapon/flame/lighter/zippo/pink
 	color = COLOR_PINK
 	name = "pink zippo"
 
