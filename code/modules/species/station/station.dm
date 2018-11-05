@@ -206,7 +206,7 @@
 	return descriptors["headtail length"] == 1 ? MALE : FEMALE
 
 /datum/species/skrell/check_background()
-    return TRUE
+	return TRUE
 
 /datum/species/diona
 	name = SPECIES_DIONA
