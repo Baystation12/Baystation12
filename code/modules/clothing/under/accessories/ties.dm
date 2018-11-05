@@ -43,13 +43,19 @@
 
 /obj/item/clothing/accessory/corptie
 	name = "corporate tie"
-	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears a corporate logo."
+	desc = "A green neosilk clip-on tie. This one has a clip on it that proudly bears a corporate logo."
 	icon_state = "cliptie"
 
 /obj/item/clothing/accessory/corptie/nanotrasen
 	name = "\improper NanoTrasen tie"
-	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears the NanoTrasen logo."
+	desc = "A red neosilk clip-on tie. This one has a clip on it that proudly bears the NanoTrasen logo."
 	icon_state = "cliptie_nt"
+
+/obj/item/clothing/accessory/corptie/heph
+	name = "\improper Hephaestus Industries tie"
+	desc = "A cyan neosilk clip-on tie. This one has a clip on it that proudly bears the Hephaestus Industries logo."
+	icon_state = "cliptie_heph"
+
 
 //Bowties
 /obj/item/clothing/accessory/bowtie

@@ -18,7 +18,7 @@
 		/obj/item/clothing/under/rank/research_director/dress_rd,
 		/obj/item/clothing/under/suit_jacket/corp,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science/corp,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat/rd,
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/shoes/laceup,
@@ -55,7 +55,7 @@
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch/WillContain()
 	return list(
 		/obj/item/clothing/under/rank/scientist,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science/corp,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/torchnanotrasen,
@@ -88,7 +88,7 @@
 /obj/structure/closet/secure_closet/scientist_torch/WillContain()
 	return list(
 		/obj/item/clothing/under/rank/scientist,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science/corp,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/torchnanotrasen,
