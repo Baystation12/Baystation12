@@ -24,6 +24,8 @@
 	icon_state = "candle[i]"
 	if(lit)
 		overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
+	else
+		overlays.Cut()
 
 /obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -49,9 +51,9 @@
 	wax--
 	if(!wax)
 		var/obj/item/trash/candle/C = new(loc)
-		overlays.Cut()
 		C.color = color
 		qdel(src)
+		return
 	update_icon()
 	if(istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc
@@ -60,7 +62,6 @@
 /obj/item/weapon/flame/candle/attack_self(mob/user as mob)
 	if(lit)
 		lit = 0
-		overlays.Cut()
 		update_icon()
 		set_light(0)
 
