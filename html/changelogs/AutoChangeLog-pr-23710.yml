@@ -1,8 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - balance: "EMPs now deal much less damage to synthetic humans (FBP, IPC), though the amount is still considerable."
-  - balance: "Damaged robotic legs and feet reduce movement speed."
-  - balance: "Robotic external organs will, if heavily damaged or the damage taken is large, pass burn damage to contained internal organs."
-  - tweak: "Cell organs are dramatically less power-efficient if damaged."
-  - tweak: "If a synthetic human runs out of juice, they become unconscious."
