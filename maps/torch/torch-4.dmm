@@ -5190,9 +5190,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "aob" = (
@@ -5209,17 +5206,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "aoc" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -5562,7 +5553,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aqc" = (
@@ -6030,9 +6020,6 @@
 /area/security/detectives_office)
 "asq" = (
 /obj/effect/floor_decal/corner/blue/three_quarters{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -14732,6 +14719,9 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/virologyaccess)
 "aYj" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14745,10 +14735,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/structure/disposalpipe/junction{
-	dir = 8;
-	icon_state = "pipe-j2"
-	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "aZb" = (
@@ -14990,6 +14976,26 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
+"bkN" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/box/beakers,
+/obj/item/weapon/storage/box/beakers,
+/obj/item/weapon/reagent_containers/dropper,
+/obj/effect/floor_decal/corner/beige{
+	dir = 6
+	},
+/obj/machinery/camera/network/medbay{
+	c_tag = "Infirmary - Chemistry";
+	dir = 8
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	dir = 8;
+	icon_state = "nosmoking";
+	pixel_x = 32
+	},
+/obj/item/weapon/storage/box/syringes,
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "blb" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
@@ -17090,9 +17096,6 @@
 "dzG" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/disposal,
-/obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/conference)
 "dAb" = (
@@ -17723,27 +17726,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage/aux)
-"eoj" = (
-/obj/structure/table/standard,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/effect/floor_decal/corner/beige{
-	dir = 6
-	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Chemistry";
-	dir = 8
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	icon_state = "nosmoking";
-	pixel_x = 32
-	},
-/obj/item/weapon/storage/box/syringes,
-/obj/item/weapon/storage/box/beakers/insulated,
-/obj/item/weapon/storage/box/freezer,
-/turf/simulated/floor/tiled/white,
-/area/medical/chemistry)
 "epb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -19252,10 +19234,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "fZb" = (
@@ -20141,9 +20119,6 @@
 "hdu" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 8
-	},
-/obj/machinery/pager/security{
-	pixel_x = -25
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
@@ -21245,6 +21220,11 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "ilh" = (
@@ -21578,6 +21558,19 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/armoury)
+"iCb" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "concheckwindow";
+	name = "Research Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced,
+/obj/structure/cable/green,
+/turf/simulated/floor/plating,
+/area/rnd/checkpoint)
 "iCj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -24138,9 +24131,6 @@
 	c_tag = "Research - Entry";
 	dir = 1
 	},
-/obj/machinery/pager/science{
-	pixel_x = -25
-	},
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
 "lAb" = (
@@ -26097,12 +26087,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "nWV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
@@ -27492,7 +27480,6 @@
 /obj/machinery/door/airlock/sol{
 	name = "Briefing Room"
 	},
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/conference)
 "pCb" = (
@@ -27722,9 +27709,6 @@
 /area/maintenance/firstdeck/aftport)
 "pUr" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/pager/security{
-	pixel_x = 25
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/fore)
 "pVb" = (
@@ -27914,9 +27898,6 @@
 /area/rnd/xenobiology/xenoflora)
 "qgw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -30366,8 +30347,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology)
 "tdb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
 /mob/living/carbon/slime,
@@ -30484,17 +30464,15 @@
 /turf/simulated/wall/prepainted,
 /area/security/armoury)
 "tjb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
 /mob/living/carbon/slime,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tkb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
 /turf/simulated/floor/reinforced,
@@ -30537,9 +30515,8 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology)
 "tnb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
 /turf/simulated/floor/reinforced,
@@ -30556,8 +30533,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "tob" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "tpb" = (
@@ -30573,7 +30550,7 @@
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tqb" = (
@@ -30589,27 +30566,23 @@
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "trb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "tsb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/wall/r_wall/prepainted,
@@ -30621,28 +30594,24 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tub" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tvb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
@@ -30656,22 +30625,20 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "txb" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tyb" = (
@@ -30681,20 +30648,17 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tzb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
 /turf/simulated/wall/r_wall/hull,
@@ -53112,7 +53076,7 @@ hsb
 hDb
 hUb
 ilb
-aAD
+iCb
 aAD
 jPb
 jzb
@@ -56333,7 +56297,7 @@ iub
 fpb
 aqT
 nDd
-eoj
+bkN
 gFb
 bLJ
 kgW
