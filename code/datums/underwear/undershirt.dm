@@ -183,8 +183,12 @@
 	name = "Shirt, Expeditionary Corps, Female"
 	icon_state = "expedition_female_s"
 
-/datum/category_item/underwear/undershirt/polo_nt
+/datum/category_item/underwear/undershirt/polo_corp
 	name = "Polo, corporate"
+	icon_state = "corp_polo"
+
+/datum/category_item/underwear/undershirt/polo_nt
+	name = "Polo, NanoTrasen"
 	icon_state = "ntpolo"
 
 /datum/category_item/underwear/undershirt/polo_dais
