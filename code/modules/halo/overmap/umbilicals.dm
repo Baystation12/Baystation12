@@ -96,8 +96,8 @@
 
 /obj/docking_umbilical/MouseDrop(var/obj/over_object)
 	var/mob/user = usr
-	if(!istype(over_object)) return
-	if(istype(over_object,/obj/vehicles)) return //Yeah no vehicles-through-umbilical thanks. use a dropship.
+	if(!istype(over_object,/obj)) return
+	if(istype(over_object,/obj/vehicles) || istype(over_object,/obj/mecha)) return //Yeah no vehicles-through-umbilical thanks. use a dropship.
 	if(over_object.anchored) return
 	if(!Adjacent(user) || !user.Adjacent(over_object)) return
 	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] through [src]\'s airlock.</span>")

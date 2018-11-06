@@ -94,7 +94,7 @@
 
 	species_restricted = list("unggoy")
 
-	specials = list(/datum/armourspecials/gear/unggoy_tank)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	name = "Unggoy Combat Harness (Major)"
@@ -117,7 +117,7 @@
 	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
 
 	totalshields = 100
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	name = "Unggoy Combat Harness (Spec-Ops)"
@@ -128,7 +128,18 @@
 	item_state = "combatharness_specops"
 
 	action_button_name = "Toggle Active Camouflage"
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/cloaking)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/cloaking)
+
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
+	name = "Unggoy Combat Harness (Deacon)"
+	desc = "A combat harness with an inbuilt gas tank."
+	icon = GRUNT_GEAR_ICON
+	icon_override = GRUNT_GEAR_ICON
+	icon_state = "combatharness_deacon"
+	item_state = "combatharness_deacon"
+	totalshields = 50 //Pretty much just a distinguishing feature.
+
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	name = "Unggoy Rebreather Mask (Spec-Ops)"
@@ -137,6 +148,14 @@
 	item_state = "rebreather_specops"
 
 	rebreath_efficiency = 70
+
+/obj/item/clothing/mask/rebreather/unggoy_deacon
+	name = "Unggoy Rebreather Mask (Deacon)"
+
+	icon_state = "rebreather_deacon"
+	item_state = "rebreather_deacon"
+
+	rebreath_efficiency = 65
 
 /obj/item/clothing/shoes/grunt_boots
 	name = "Natural Armor"

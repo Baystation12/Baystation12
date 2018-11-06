@@ -88,5 +88,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/power = force
 	if(HULK in user.mutations)
 		power *= 2
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		power *= H.species.melee_force_multiplier
 	return target.hit_with_weapon(src, user, power, hit_zone)
 

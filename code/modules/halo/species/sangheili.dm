@@ -16,7 +16,8 @@
 	brute_mod = 0.9
 	pain_mod = 0.5 //Pain has half an effect on them.
 	slowdown = -1 //negates noshoes
-	item_icon_offsets = list(-1,2)
+	pixel_offset_x = -8
+	item_icon_offsets = list(0,2)
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,

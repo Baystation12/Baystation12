@@ -42,7 +42,11 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	species_restricted = list("Spartan")
 
-	specials = list(/datum/armourspecials/gear/human_tank, /datum/armourspecials/shields/spartan, /datum/armourspecials/gear/spartan_boots, /datum/armourspecials/gear/spartan_gloves)
+	specials = list(/datum/armourspecials/gear/human_tank,\
+		/datum/armourspecials/shields/spartan)
+		/*/datum/armourspecials/gear/mjolnir_gloves,\
+		/datum/armourspecials/gear/mjolnir_boots,\
+		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
 	allowed = list(/obj/item/weapon/tank)
 
 /obj/item/clothing/under/spartan_internal/get_mob_overlay(mob/user_mob, slot)

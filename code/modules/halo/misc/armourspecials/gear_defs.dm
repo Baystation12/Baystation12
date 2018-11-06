@@ -15,10 +15,14 @@
 	gear_type = /obj/item/weapon/tank/oxygen
 	equip_slot = slot_s_store
 
-/datum/armourspecials/gear/spartan_boots
-	gear_type = /obj/item/clothing/shoes/magboots/spartan
-	equip_slot = slot_shoes
-
-/datum/armourspecials/gear/spartan_gloves
+/datum/armourspecials/gear/mjolnir_gloves
 	gear_type = /obj/item/clothing/gloves/spartan
 	equip_slot = slot_gloves
+
+/datum/armourspecials/gear/mjolnir_jumpsuit
+	gear_type = /obj/item/clothing/under/spartan_internal
+	equip_slot = slot_w_uniform
+
+/datum/armourspecials/gear/mjolnir_boots
+	gear_type = /obj/item/clothing/shoes/magboots/spartan
+	equip_slot = slot_shoes
