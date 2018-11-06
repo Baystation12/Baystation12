@@ -154,9 +154,9 @@
 /datum/trade_item/gyropistol
 	name = "gyrojet pistol"
 	item_type = /obj/item/weapon/gun/projectile/gyropistol
-	quantity = 10
-	value = 600
-	trader_weight = 10
+	quantity = 1
+	value = 10000
+	trader_weight = 5
 	category = "weapon"
 	bonus_items = list(/obj/item/ammo_magazine/a75)
 
