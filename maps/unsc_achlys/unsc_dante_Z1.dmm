@@ -31,7 +31,7 @@
 "aE" = (/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/turf/simulated/wall/strong,/area/dante/deck2)
 "aF" = (/obj/machinery/computer/med_data{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_keyboard = "comm"; icon_screen = "comm"; icon_state = "comm"; tag = "icon-comm"},/turf/simulated/wall/strong,/area/dante/deck2)
 "aG" = (/obj/machinery/computer/helm{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 2; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/wall/strong,/area/dante/deck2)
-"aH" = (/obj/structure/closet,/turf/simulated/floor/tiled,/area/dante/deck2)
+"aH" = (/obj/structure/closet,/obj/item/weapon/coin/gold,/turf/simulated/floor/tiled,/area/dante/deck2)
 "aI" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/dante/deck2)
 "aJ" = (/obj/structure/closet/medical_wall/filled{pixel_y = 32},/turf/simulated/floor/tiled,/area/dante/deck2)
 "aK" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled/white,/area/dante/deck2)
@@ -84,34 +84,31 @@
 "bF" = (/obj/structure/table/standard,/obj/item/device/taperecorder,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bG" = (/obj/machinery/door/airlock/halo{name = "Captain's Quarters"; req_access = list(145)},/turf/simulated/floor/tiled,/area/dante/deck2)
 "bH" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bI" = (/obj/machinery/door/airlock/multi_tile/halo{name = "Bridge"; req_access = list(145)},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bJ" = (/obj/machinery/door/airlock/halo{name = "Pilot Equipment"; req_access = list(144)},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bK" = (/obj/machinery/door/airlock/halo{name = "Mess Hall"; req_access = list(144)},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bL" = (/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bM" = (/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bN" = (/turf/simulated/floor/stairs,/area/dante/deck2)
-"bO" = (/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bP" = (/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bQ" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bR" = (/obj/machinery/vending/fitness,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bS" = (/obj/structure/closet/medical_wall/filled{pixel_y = -32},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bT" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bU" = (/obj/structure/bed,/obj/item/weapon/bedsheet/captain,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bV" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bW" = (/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 4},/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bX" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Pelican Bay Bravo"; req_access = list(144)},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bY" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Briefing"; req_access = list(142)},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bZ" = (/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
-"ca" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/tiled,/area/dante/deck2)
-"cb" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/dante/deck2)
-"cc" = (/obj/machinery/overmap_weapon_console/deck_gun_control/missile_control{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/turf/simulated/wall/strong,/area/dante/deck2)
-"cd" = (/obj/machinery/overmap_weapon_console/deck_gun_control{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/wall/strong,/area/dante/deck2)
-"ce" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/turf/simulated/wall/strong,/area/dante/deck2)
-"cf" = (/obj/machinery/door/airlock/multi_tile/halo{name = "Cryo Bay"; req_access = list(142)},/turf/simulated/floor/tiled,/area/dante/deck2)
-"cg" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/dante/deck2)
-"ch" = (/obj/machinery/door/airlock/halo{name = "Communications Array"; req_access = list(202)},/turf/simulated/floor/plating,/area/dante/deck2)
-"ci" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/dante/deck2)
-"cj" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Dante Map Data"},/turf/space,/area/space)
+"bI" = (/obj/structure/closet,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bJ" = (/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bK" = (/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bL" = (/turf/simulated/floor/stairs,/area/dante/deck2)
+"bM" = (/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bN" = (/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bO" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bP" = (/obj/machinery/vending/fitness,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bQ" = (/obj/structure/closet/medical_wall/filled{pixel_y = -32},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bR" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bS" = (/obj/structure/bed,/obj/item/weapon/bedsheet/captain,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bT" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bU" = (/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 4},/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bV" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Pelican Bay Bravo"; req_access = list(144)},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bW" = (/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bX" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bY" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bZ" = (/obj/machinery/overmap_weapon_console/deck_gun_control/missile_control{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/turf/simulated/wall/strong,/area/dante/deck2)
+"ca" = (/obj/machinery/overmap_weapon_console/deck_gun_control{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/wall/strong,/area/dante/deck2)
+"cb" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/turf/simulated/wall/strong,/area/dante/deck2)
+"cc" = (/obj/machinery/door/airlock/multi_tile/halo{name = "Cryo Bay"; req_access = list(142)},/turf/simulated/floor/tiled,/area/dante/deck2)
+"cd" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/dante/deck2)
+"ce" = (/obj/machinery/door/airlock/halo{name = "Communications Array"; req_access = list(202)},/turf/simulated/floor/plating,/area/dante/deck2)
+"cf" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/dante/deck2)
+"cg" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Dante Map Data"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -174,15 +171,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalal
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbjalacbkblbmacalbdbealalamacbnbdbdbdbdalalboalalacalamacalalalbpalalbdbebebqbralalbsalbialalalbtbualalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacacacacacacacacalbdbealalalbvalbdbdbdbdalalboalalbwalalbxalalalbpalalbdbeacbybralbzacbnbialbAalbBbtalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbjalacbkblbCacbcbdbealalalacalbdbdbdbdalalboalbDacalalacbcalalbpalalbdbEbebebralalalalbialalalbtbtalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalalalalalacalbdbdbdbdalalalalalacbFbeacacbGacacbcalalbHbHbHalalalbIalbialalalalalalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaQaRbJalalalbKalalalalalalacalalalalalalalalalalacacacacaHalalacalalalalalalalalalacbLbMbNbObNbObNbPbLbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaHalacalatalacalalalatbQbRacalalalalbSalalalalalacakakacbTalbUacalalalalalalalalalacacaLbVaNbVbWbVaPacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacacacacacacacbXalacacacacacaxalacacbYalacacacacakakacbZatcaacacalalalcbbQbRaIacacacacccaccdacceacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalalalalalacalbdbdbdbdalalalalalacbFbeacacbGacacbcalalbHbHbHalalalbsalbialalalalalalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaQaRaSalalalaTalalalalalalacalalalalalalalalalalacacacacbIalalacalalalalalalalalalacbJbKbLbMbLbMbLbNbJbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbIalacalatalacalalalatbObPacalalalalbQalalalalalacakakacbRalbSacalalalalalalalalalacacaLbTaNbTbUbTaPacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacacacacacacacbValacacacacacaxalacacaxalacacacacakakacbWatbXacacalalalbYbObPaIacacacacbZaccaaccbacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacacacacacalalacakakalalalalalacalalaoalalalalalacacacacacacacavacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadanacacacacacalalacakakalalatalalacalalalalalcfalatacaccgalalalalalalasacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalamacacacacacacacacacacacacacacacacacacacacchacacacacaiacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadanacacacacacalalacakakalalatalalacalalalalalccalatacaccdalalalalalalasacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalamacacacacacacacacacacacacacacacacacacacacceacacacacaiacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalalacaaaaaaaaaaaaaaababababababababababacadadadacacadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadahacaiacacacacacaiacacaaaaaaaaaaaaaaababababababababababacadciadacacadajadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadahacaiacacacacacaiacacaaaaaaaaaaaaaaababababababababababacadcfadacacadajadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacadadadafadadadacaaaaaaaaaaaaaaaaababababababababababacadaeadacacadaeadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacaaaaaaaaaaaaaaaaababababababababababacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -212,6 +209,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-cjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

@@ -52,8 +52,8 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 
 /datum/job/achlys/marine
 	title = "Marine"
-	total_positions = 16
-	spawn_positions = 16
+	total_positions = 18
+	spawn_positions = 18
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine
 	access = list(142)
