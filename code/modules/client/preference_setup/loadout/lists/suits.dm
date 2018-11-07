@@ -78,17 +78,15 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/suit/labcoat_nanotrasen
-	display_name = "labcoat, NanoTrasen"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
+/datum/gear/suit/labcoat_corp
+	display_name = "labcoat, corporate colors"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/suit/labcoat_dais
-	display_name = "labcoat, DAIS"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/dais
-
-/datum/gear/suit/labcoat_nanotrasen_rd
-	display_name = "labcoat, NanoTrasen, Research Director"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
+/datum/gear/suit/labcoat_corp_rd
+	display_name = "labcoat, research director, corporate colors"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/suit/coat
 	display_name = "coat, colour select"
