@@ -102,7 +102,7 @@
 	deform = 'icons/mob/human_races/species/skrell/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/skrell/preview.dmi'
 	primitive_form = "Neaera"
-	unarmed_types = list(/datum/unarmed_attack/punch)
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	description = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
 	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
@@ -204,6 +204,9 @@
 
 /datum/species/skrell/get_sex(var/mob/living/carbon/H)
 	return descriptors["headtail length"] == 1 ? MALE : FEMALE
+
+/datum/species/skrell/check_background()
+	return TRUE
 
 /datum/species/diona
 	name = SPECIES_DIONA
