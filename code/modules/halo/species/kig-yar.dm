@@ -35,7 +35,7 @@
 /datum/species/kig_yar/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 
-/datum/species/kig_yar/skirmisher
+/datum/species/kig_yar_skirmisher
 	name = "Tvaoan Kig-Yar"
 	name_plural = "Kig-Yar"
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
