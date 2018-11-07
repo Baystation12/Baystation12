@@ -1,8 +1,14 @@
 
 GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species_items/first_kig-yar.txt'))
 
-/mob/living/carbon/human/covenant/kigyar/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Kig-Yar")							//Code breaks if not placed in species folder,
+/mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
+	..(new_loc,"Kig-Yar")
+	name = pick(GLOB.first_names_kig_yar)
+	real_name = name
+	faction = "Covenant"
+
+/mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
+	..(new_loc,"Tvaoan Kig-Yar")
 	name = pick(GLOB.first_names_kig_yar)
 	real_name = name
 	faction = "Covenant"
@@ -14,7 +20,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon_state = "scouthelm"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
-	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
+	species_restricted = list("Kig-Yar")
 	action_button_name = "Toggle Night Vision"
 	var/linked_glasses
 	var/mob/living/carbon/human/u
@@ -79,7 +85,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/organ/external/arm/hollow_bones
 	min_broken_damage = 20 //Needs 10 less damage to break

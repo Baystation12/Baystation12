@@ -30,7 +30,6 @@
 	suspicion_chance = 0
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 
-	list/valid_species =       list()
 	min_player_age = 0
 
 	antag_text = "You are Mga'lekgolo, a colony of sentient worms encased in powerful armour and carrying heavy weaponry. Protect the ship and the prophets with all your being."

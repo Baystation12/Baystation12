@@ -11,13 +11,13 @@
 	generate_email = 0
 	whitelisted_species = list(/datum/species/spartan)
 	spawn_positions = 99
-	total_positions = 99
+	total_positions = 0
 	track_players = 1
 
 /datum/job/opredflag_spartan/commander
 	title = "Spartan II Commander"
 	supervisors = "UNSC High Command"
-	total_positions = 1
+	total_positions = 0
 	spawn_positions = 1
 
 /decl/hierarchy/outfit/spartan_two

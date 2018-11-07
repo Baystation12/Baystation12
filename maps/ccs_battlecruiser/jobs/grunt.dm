@@ -36,5 +36,4 @@
 	supervisors = "the Elites"
 	outfit_type = /decl/hierarchy/outfit/unggoy/specops
 	open_slot_on_death = 1
-	total_positions = 3
-	spawn_positions = 3
+	spawn_positions = 1

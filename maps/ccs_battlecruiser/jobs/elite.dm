@@ -58,5 +58,4 @@
 	supervisors = "the Shipmaster"
 	outfit_type = /decl/hierarchy/outfit/sangheili/specops
 	open_slot_on_death = 1
-	total_positions = 2
-	spawn_positions = 2
+	spawn_positions = 1

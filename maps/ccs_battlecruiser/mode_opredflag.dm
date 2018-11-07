@@ -64,7 +64,7 @@
 	return 0.5		//minutes
 
 /datum/game_mode/opredflag/handle_mob_death(var/mob/M, var/list/args = list())
-	if(istype(M, /mob/living/simple_animal/prophet))
+	if(istype(M, /mob/living/carbon/human/covenant/sanshyuum))
 		if(M.mind && M.mind in living_prophets)
 			living_prophets -= M.mind
 		dead_prophets += M
