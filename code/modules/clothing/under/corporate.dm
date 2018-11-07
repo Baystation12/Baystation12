@@ -9,9 +9,9 @@
 	worn_state = "guard"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/rank/scientist
@@ -22,9 +22,9 @@
 	worn_state = "smock"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 10, bio = 10, rad = 0)
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 	starting_accessories = list(/obj/item/clothing/accessory/tunic)
 
@@ -42,9 +42,9 @@
 	item_state = "lb_suit"
 	worn_state = "work"
 	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/rank/ntpilot
@@ -53,9 +53,9 @@
 	icon_state = "pilot"
 	item_state = "g_suit"
 	worn_state = "pilot"
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/suit_jacket/corp
@@ -64,10 +64,10 @@
 	icon_state = "suit"
 	item_state = "bl_suit"
 	worn_state = "suit"
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
 	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket, /obj/item/clothing/accessory/corptie)
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
 //NanoTrasen
@@ -102,9 +102,9 @@
 	icon_state = "pilot_nt"
 	item_state = "r_suit"
 	worn_state = "pilot_nt"
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/suit_jacket/corp/nanotrasen
@@ -145,9 +145,9 @@
 	desc = "A sleek cyan Hephaestus Industries flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon_state = "pilot_heph"
 	worn_state = "pilot_heph"
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/corporate.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/corporate.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/suit_jacket/corp/heph

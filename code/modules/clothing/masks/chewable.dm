@@ -1,7 +1,7 @@
 /obj/item/clothing/mask/chewable
 	name = "chewable item master"
 	desc = "You're not sure what this is. You should probably ahelp it."
-	icon = 'icons/obj/clothing/masks.dmi'
+	icon = 'icons/obj/clothing/obj_mask.dmi'
 	body_parts_covered = 0
 
 	var/type_butt = null

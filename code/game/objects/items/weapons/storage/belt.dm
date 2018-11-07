@@ -4,7 +4,7 @@
 /obj/item/weapon/storage/belt
 	name = "belt"
 	desc = "Can hold various things."
-	icon = 'icons/obj/clothing/belts.dmi'
+	icon = 'icons/obj/clothing/obj_belt.dmi'
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	storage_slots = 7
@@ -29,7 +29,7 @@
 	overlays.Cut()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
 		for(var/obj/item/I in contents)
-			overlays += image('icons/obj/clothing/belts_overlays.dmi', "[I.icon_state]")
+			overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
 
 /obj/item/weapon/storage/belt/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -39,9 +39,9 @@
 			var/use_state = (I.item_state ? I.item_state : I.icon_state)
 			if(ishuman(user_mob))
 				var/mob/living/carbon/human/H = user_mob
-				ret_overlays += H.species.get_offset_overlay_image(FALSE, 'icons/mob/onmob/belt.dmi', use_state, I.color, slot)
+				ret_overlays += H.species.get_offset_overlay_image(FALSE, 'icons/mob/onmob/onmob_belt.dmi', use_state, I.color, slot)
 			else
-				ret_overlays += overlay_image('icons/mob/onmob/belt.dmi', use_state, I.color, RESET_COLOR)
+				ret_overlays += overlay_image('icons/mob/onmob/onmob_belt.dmi', use_state, I.color, RESET_COLOR)
 			ret.overlays += ret_overlays
 	return ret
 
@@ -94,9 +94,9 @@
 		for(var/obj/item/I in contents)
 			if(I == H.holstered)
 				if(overlay_flags & BELT_OVERLAY_HOLSTER)
-					overlays += image('icons/obj/clothing/belts_overlays.dmi', "[I.icon_state]")
+					overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
 			else if(overlay_flags & BELT_OVERLAY_ITEMS)
-				overlays += image('icons/obj/clothing/belts_overlays.dmi', "[I.icon_state]")
+				overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
 
 /obj/item/weapon/storage/belt/utility
 	name = "tool belt"
