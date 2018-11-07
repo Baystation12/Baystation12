@@ -1445,6 +1445,7 @@
 #include "code\modules\halo\covenant\pillar_lift.dm"
 #include "code\modules\halo\covenant\pinch_fusion.dm"
 #include "code\modules\halo\covenant\plasma_drill.dm"
+#include "code\modules\halo\covenant\plasmacharge.dm"
 #include "code\modules\halo\covenant\prophet.dm"
 #include "code\modules\halo\covenant\ramp.dm"
 #include "code\modules\halo\covenant\repulsor_engine.dm"
