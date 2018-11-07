@@ -28,6 +28,36 @@
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
 
+/datum/job/covenant/skirmminor
+	title = "T'Voan - Minor"
+	total_positions = 12
+	spawn_positions = 12
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/skirmisher_minor
+	access = list(240,250)
+	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	total_positions = 1
+
+/datum/job/covenant/skirmmajor
+	title = "T'Voan - Major"
+	total_positions = 12
+	spawn_positions = 12
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/skirmisher_major
+	access = list(240,250)
+	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	total_positions = 1
+
+/datum/job/covenant/skirmmurmillo
+	title = "T'Voan - Murmillo"
+	total_positions = 12
+	spawn_positions = 12
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
+	access = list(240,250)
+	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	total_positions = 1
+
 /datum/job/covenant/kigyarminor
 	title = "Kig-Yar - Minor"
 	total_positions = 12
