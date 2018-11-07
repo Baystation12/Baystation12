@@ -18,7 +18,8 @@
 	desc = "To be worn in conjunction with the Mjolnir Powered Assault Armour."
 	icon = 'code/modules/halo/clothing/spartan_gear.dmi'
 	icon_override = 'code/modules/halo/clothing/spartan_gear.dmi'
-	icon_state = "neuralboots_obj"
+	icon_state = "neuralboots_obj0"
+	icon_base = "neuralboots_obj"
 	item_state = "neuralboots"
 	force = 5
 	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 40, bio = 0, rad = 0)

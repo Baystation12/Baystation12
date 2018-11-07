@@ -7,10 +7,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
-	name = pick(GLOB.first_names_sangheili)
-	name += " "
-	name += pick(GLOB.last_names_sangheili)
-	real_name = name
 	faction = "Covenant"
 
 /datum/language/sangheili

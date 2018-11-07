@@ -34,6 +34,7 @@
 	var/active = 1
 	var/time_recharged = 0
 	var/recharge_time = 50
+	var/can_deconstruct = 1
 
 /obj/structure/energybarricade/CanPass(atom/A, turf/T)
 	. = ..()
@@ -55,17 +56,20 @@
 
 /obj/structure/energybarricade/attack_hand(var/mob/user)
 	//deconstruct the shield if we are behind it
-	if(user.loc == src.loc)
-		user.visible_message("<span class='info'>[user] begins deactivating [src] and begin packing it for transport.</span>")
+	if(can_deconstruct)
+		if(user.loc == src.loc)
+			user.visible_message("<span class='info'>[user] begins deactivating [src] and begin packing it for transport.</span>")
 
-		//spend some time breaking down the shield
-		if(do_after(user, recharge_time, src))
-			GLOB.processing_objects.Remove(src)
-			new /obj/item/energybarricade(src.loc)
-			qdel(src)
-			user.visible_message("<span class='info'>[user] finishes deactivating [src] and packs it for transport.</span>")
+			//spend some time breaking down the shield
+			if(do_after(user, recharge_time, src))
+				GLOB.processing_objects.Remove(src)
+				new /obj/item/energybarricade(src.loc)
+				qdel(src)
+				user.visible_message("<span class='info'>[user] finishes deactivating [src] and packs it for transport.</span>")
+		else
+			to_chat(user,"<span class='info'>You must be behind [src] to do this.</span>")
 	else
-		to_chat(user,"<span class='info'>You must be behind [src] to do this.</span>")
+		to_chat(user,"<span class='info'>This one has been secured and cannot be deactivated.</span>")
 
 /obj/structure/energybarricade/process()
 	if(world.time > time_recharged)
