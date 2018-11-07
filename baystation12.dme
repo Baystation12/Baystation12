@@ -1439,6 +1439,7 @@
 #include "code\modules\halo\covenant\engineer.dm"
 #include "code\modules\halo\covenant\food_nipple.dm"
 #include "code\modules\halo\covenant\grav.dm"
+#include "code\modules\halo\covenant\jump_pad.dm"
 #include "code\modules\halo\covenant\lekgolo_spawner.dm"
 #include "code\modules\halo\covenant\medmachines.dm"
 #include "code\modules\halo\covenant\multitile_airlocks.dm"
