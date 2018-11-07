@@ -15,6 +15,7 @@
 	var/datum/armourspecials/shields/tvoan/my_shield
 	var/shieldstrength = 200
 	var/totalshields = 200
+	var/intercept_chance = 33	//only 33% chance to block the bullets
 
 /obj/effect/overlay/shields/tvoan
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
@@ -26,6 +27,7 @@
 	. = ..()
 
 	my_shield = new(src)
+	my_shield.intercept_chance = src.intercept_chance
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/equipped(var/mob/user, var/slot)
 	if(slot == slot_gloves)

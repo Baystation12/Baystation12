@@ -31,6 +31,7 @@
 	var/list/armourvalue
 	var/armour_state = SHIELD_IDLE
 	var/tick_recharge = 30
+	var/intercept_chance = 100
 
 /datum/armourspecials/shields/New(var/obj/item/clothing/suit/armor/special/c) //Needed the type path for typecasting to use the totalshields var.
 	connectedarmour = c
@@ -70,27 +71,29 @@
 /datum/armourspecials/shields/proc/take_damage(var/damage)
 	. = 0
 
-	//reset or begin the recharge timer
-	reset_recharge()
+	//some shields dont have full coverage
+	if(prob(intercept_chance))
+		//reset or begin the recharge timer
+		reset_recharge()
 
-	if(shieldstrength > 0)
+		if(shieldstrength > 0)
 
-		//tell the damage procs that we blocked the attack
-		. = 1
+			//tell the damage procs that we blocked the attack
+			. = 1
 
-		//shield visual effect
-		update_overlay("shield_overlay_damage")
-		armour_state = SHIELD_DAMAGE
+			//shield visual effect
+			update_overlay("shield_overlay_damage")
+			armour_state = SHIELD_DAMAGE
 
-		//apply the damage
-		shieldstrength -= damage
+			//apply the damage
+			shieldstrength -= damage
 
-		//chat log output
-		if(shieldstrength <= 0)
-			shieldstrength = 0
-			user.visible_message("<span class ='warning'>[user]'s [connectedarmour] shield collapses!</span>","<span class ='userdanger'>Your [connectedarmour] shields fizzle and spark, losing their protective ability!</span>")
-		else
-			user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact</span>")
+			//chat log output
+			if(shieldstrength <= 0)
+				shieldstrength = 0
+				user.visible_message("<span class ='warning'>[user]'s [connectedarmour] shield collapses!</span>","<span class ='userdanger'>Your [connectedarmour] shields fizzle and spark, losing their protective ability!</span>")
+			else
+				user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact</span>")
 
 /datum/armourspecials/shields/proc/reset_recharge(var/extra_delay = 0)
 	//begin counting down the recharge
