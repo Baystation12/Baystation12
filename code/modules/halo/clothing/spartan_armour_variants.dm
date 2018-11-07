@@ -106,7 +106,7 @@
 
 
 // MK V Gungnir Custom //
-//mistermann donator item
+//mistermann/plaguewalker donator item
 /obj/item/clothing/head/helmet/spartan/mkv_gungnir_mann
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Gungnir"
 	icon_state = "mk5-mistermannhelm"
@@ -132,7 +132,7 @@
 
 
 // MK IV Praetor //
-//Caelum donator item
+//CaelumZ donator item
 /obj/item/clothing/head/helmet/spartan/praetor
 	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Praetor"
 	icon_state = "caelum-praetor-helm"
@@ -158,7 +158,7 @@
 
 
 // MK IV Security //
-//Moerk donator item
+//Focks in a Bocks donator item
 /obj/item/clothing/head/helmet/spartan/mkiv_security
 	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Security"
 	icon_state = "SPARTAN-morekhelm"
@@ -181,3 +181,29 @@
 	name = "MJOLNIR Powered Assault Armor Mark IV Flak"
 	icon_state = "SPARTAN-flaksimarmor"
 	item_state = "SPARTAN-flaksimarmor-worn"
+
+
+// MK IV Dome Protector //
+//SuckMySocks1 donator item
+/obj/item/clothing/head/helmet/spartan/mkiv_domeprotector
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Special Issue Dome Protector"
+	icon_state = "socks-spartanhelm_obj"
+	item_state = "socks-spartanhelm_worn"
+
+/obj/item/clothing/suit/armor/special/spartan/mkiv_domeprotector
+	name = "MJOLNIR Powered Assault Armor Mark IV Special Issue Body Rig"
+	icon_state = "socks-spartanarmor_obj"
+	item_state = "socks-spartanarmor_worn"
+
+
+// MK IV Kelso //
+//Kelso33 donator item
+/obj/item/clothing/head/helmet/spartan/mkiv_kelso
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Recon"
+	icon_state = "kelso-spartanhelm_obj"
+	item_state = "kelso-spartanhelm_worn"
+
+/obj/item/clothing/suit/armor/special/spartan/mkiv_kelso
+	name = "MJOLNIR Powered Assault Armor Mark IV Grenadier"
+	icon_state = "kelso-spartanarmor_obj"
+	item_state = "kelso-spartanarmor_worn"
