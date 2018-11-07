@@ -1,6 +1,0 @@
-author: "Earthcrusher"
-delete-after: True
-changes: 
-  - bugfix: "Emotes ending in quotation marks will no longer add a superfluous period on the end."
-  - bugfix: "Lazy typists rejoice! When speaking, the game will automatically capitalize and add punctuation where needed. Well at least on the end of the sentence."
-  - tweak: "Emotes now use the visible emote character set in your Character Setup, which defaults to \"^\"."
