@@ -48,7 +48,7 @@
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
 	allowed = list(/obj/item/weapon/tank)
-	totalshields = 100
+	totalshields = 150
 
 /obj/item/clothing/under/spartan_internal/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()
