@@ -1,7 +1,7 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/turf/space,/area/ccs_battlecruiser/deck4)
 "ac" = (/turf/simulated/wall/covenant,/area/ccs_battlecruiser/deck4)
-"ad" = (/obj/structure/window/basic{dir = 1},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
+"ad" = (/obj/structure/window/basic{dir = 1},/obj/effect/landmark/jump_pad_target{id = "deck4 starboard hangar"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
 "ae" = (/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
 "af" = (/obj/structure/banshee{dir = 1},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
 "ag" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
@@ -173,7 +173,7 @@
 "dq" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/bed/grunt,/obj/effect/landmark/start{name = "Unggoy Major"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
 "dr" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
 "ds" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
-"dt" = (/obj/structure/window/basic,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
+"dt" = (/obj/structure/window/basic,/obj/effect/landmark/jump_pad_target{id = "deck4 port hangar"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck4)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
