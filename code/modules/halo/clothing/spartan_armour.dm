@@ -22,6 +22,7 @@
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
+	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
 
 /obj/item/clothing/suit/armor/special/spartan
 	name = "MJOLNIR Powered Assault Armor Mark IV"
@@ -49,6 +50,7 @@
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
 	allowed = list(/obj/item/weapon/tank)
 	totalshields = 150
+	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 
 /obj/item/clothing/under/spartan_internal/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()
