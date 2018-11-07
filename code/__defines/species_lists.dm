@@ -9,4 +9,4 @@
 	/mob/living/simple_animal/engineer,\
 	/mob/living/simple_animal/hostile/retaliate/done,\
 	/mob/living/simple_animal/lekgolo/mgalekgolo,\
-	/mob/living/simple_animal/prophet)
+	/mob/living/carbon/human/covenant/sanshyuum)
