@@ -57,7 +57,7 @@
 
 // MK V Commando //
 
-/obj/item/clothing/head/helmet/spartan/mkv_commado
+/obj/item/clothing/head/helmet/spartan/mkv_commando
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Commando"
 	icon_state = "mk5-commandohelm"
 	item_state = "mk5-commandohelm-worn"
@@ -65,13 +65,13 @@
 
 // MK V Air Assault //
 
-/obj/item/clothing/head/helmet/spartan/mkv_commado
+/obj/item/clothing/head/helmet/spartan/mkv_airassault
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Air Assault"
 	icon_state = "mk5-airassaulthelm"
 	item_state = "mk5-airassaulthelm-worn"
 
 
-// MK V Air Assault //
+// MK V Noble Team //
 
 /obj/item/clothing/head/helmet/spartan/mkv_noblesix
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Noble Team"
@@ -93,7 +93,7 @@
 
 
 // MK V Gungnir Navy //
-
+//maxattacker donator item
 /obj/item/clothing/head/helmet/spartan/mkv_gungnir_navy
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Gungnir"
 	icon_state = "mk5-navygungirhelm"
@@ -106,7 +106,7 @@
 
 
 // MK V Gungnir Custom //
-
+//mistermann donator item
 /obj/item/clothing/head/helmet/spartan/mkv_gungnir_mann
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Gungnir"
 	icon_state = "mk5-mistermannhelm"
@@ -119,7 +119,7 @@
 
 
 // MK V Grenadier //
-
+//osamabinbrahmin donator item
 /obj/item/clothing/head/helmet/spartan/mkv_grenadier
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Grenadier"
 	icon_state = "mk5-donorhelm"
@@ -146,12 +146,12 @@
 
 // MK V Air Assault (customised) //
 //RoseConey donator item
-/obj/item/clothing/head/helmet/spartan/mkv_airassault
+/obj/item/clothing/head/helmet/spartan/mkv_airassault_amy
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Air Assault (customised)"
 	icon_state = "amy-spartan-helm"
 	item_state = "amy-spartan-helm-worn"
 
-/obj/item/clothing/suit/armor/special/spartan/mkv_airassault
+/obj/item/clothing/suit/armor/special/spartan/mkv_airassault_amy
 	name = "MJOLNIR Powered Assault Armor Mark V Air Assault (customised)"
 	icon_state = "amy-spartan-shell"
 	item_state = "amy-spartan-shell-worn"
