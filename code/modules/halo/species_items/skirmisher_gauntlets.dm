@@ -4,7 +4,7 @@
 	desc = "Point defence gauntlets with twin energy shields for deflecting fire."
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
 	icon_override = 'code/modules/halo/icons/species/skirm_clothing.dmi'
-	icon_state = "murmilloshield"
+	icon_state = "murmilloglove"
 	item_state = "murmilloshield"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
@@ -47,14 +47,14 @@
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando
 	name = "T'Voan Commando shield gauntlets"
-	icon_state = "commandoshield"
 	item_state = "commandoshield"
+	icon_state = "commandoglove"
 	shieldstrength = 250
 	totalshields = 250
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/champion
 	name = "T'Voan Champion shield gauntlets"
-	icon_state = "championshield"
 	item_state = "championshield"
+	icon_state = "championglove"
 	shieldstrength = 300
 	totalshields = 300
