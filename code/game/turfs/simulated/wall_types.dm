@@ -113,6 +113,12 @@
 /turf/simulated/wall/titanium/New(var/newloc)
 	..(newloc,MATERIAL_TITANIUM)
 
+/turf/simulated/wall/r_titanium
+	icon_state = "rgeneric"
+
+/turf/simulated/wall/r_titanium/New(var/newloc)
+	..(newloc, MATERIAL_TITANIUM,MATERIAL_TITANIUM)
+
 /turf/simulated/wall/alium
 	icon_state = "jaggy"
 	floor_type = /turf/simulated/floor/fixed/alium
