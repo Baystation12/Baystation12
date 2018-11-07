@@ -28,14 +28,11 @@
 	my_shield = new(src)
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/equipped(var/mob/user, var/slot)
-	world << "/obj/item/clothing/gloves/skirmisher_shield_gauntlets/equipped([user], [slot])"
-	world << "	[slot_gloves]"
 	if(slot == slot_gloves)
 		my_shield.user = user
 	. = ..()
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/get_mob_overlay(mob/user_mob, slot)
-	world << "/obj/item/clothing/gloves/skirmisher_shield_gauntlets/equipped([user_mob], [slot])"
 	var/image/retval = ..()
 	if(slot == "slot_gloves")
 		my_shield.update_mob_overlay(retval)
