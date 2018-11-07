@@ -11,8 +11,8 @@
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
 	sprite_sheets = list(
-		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
 		)
 	species_restricted = null
 
@@ -48,7 +48,7 @@
 	resilience = 0.2
 	can_breach = 1
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
 		)
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 

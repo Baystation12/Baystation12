@@ -7,7 +7,7 @@
 	husk_icon = 'icons/mob/human_races/species/unathi/husk.dmi'
 	preview_icon = 'icons/mob/human_races/species/unathi/preview.dmi'
 	tail = "sogtail"
-	tail_animation = 'icons/mob/species/unathi/tail.dmi'
+	tail_animation = 'icons/mob/species/unathi/unathi_tail.dmi'
 	limb_blend = ICON_MULTIPLY
 	tail_blend = ICON_MULTIPLY
 	hidden_from_codex = FALSE

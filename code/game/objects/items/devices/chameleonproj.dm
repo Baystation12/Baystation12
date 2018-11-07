@@ -12,7 +12,7 @@
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
 	var/saved_item = /obj/item/trash/cigbutt
-	var/saved_icon = 'icons/obj/clothing/masks.dmi'
+	var/saved_icon = 'icons/obj/clothing/obj_mask.dmi'
 	var/saved_icon_state = "cigbutt"
 	var/saved_overlays
 

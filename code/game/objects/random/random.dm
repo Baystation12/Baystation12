@@ -642,7 +642,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/masks
 	name = "random mask"
 	desc = "This is a random face mask."
-	icon = 'icons/obj/clothing/masks.dmi'
+	icon = 'icons/obj/clothing/obj_mask.dmi'
 	icon_state = "gas_mask"
 
 /obj/random/masks/spawn_choices()
@@ -722,7 +722,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/shoes
 	name = "random footwear"
 	desc = "This is a random pair of shoes."
-	icon = 'icons/obj/clothing/shoes.dmi'
+	icon = 'icons/obj/clothing/obj_feet.dmi'
 	icon_state = "boots"
 
 /obj/random/shoes/spawn_choices()
@@ -750,7 +750,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/gloves
 	name = "random gloves"
 	desc = "This is a random pair of gloves."
-	icon = 'icons/obj/clothing/gloves.dmi'
+	icon = 'icons/obj/clothing/obj_hands.dmi'
 	icon_state = "rainbow"
 
 /obj/random/gloves/spawn_choices()
@@ -770,7 +770,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/glasses
 	name = "random eyewear"
 	desc = "This is a random pair of glasses."
-	icon = 'icons/obj/clothing/glasses.dmi'
+	icon = 'icons/obj/clothing/obj_eyes.dmi'
 	icon_state = "leforge"
 
 /obj/random/glasses/spawn_choices()
@@ -793,7 +793,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/hat
 	name = "random headgear"
 	desc = "This is a random hat of some kind."
-	icon = 'icons/obj/clothing/hats.dmi'
+	icon = 'icons/obj/clothing/obj_head.dmi'
 	icon_state = "tophat"
 
 /obj/random/hat/spawn_choices()
@@ -811,7 +811,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/suit
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
-	icon = 'icons/obj/clothing/suits.dmi'
+	icon = 'icons/obj/clothing/obj_suit.dmi'
 	icon_state = "fire"
 
 /obj/random/suit/spawn_choices()
@@ -834,7 +834,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/clothing
 	name = "random clothes"
 	desc = "This is a random piece of clothing."
-	icon = 'icons/obj/clothing/uniforms.dmi'
+	icon = 'icons/obj/clothing/obj_under.dmi'
 	icon_state = "grey"
 
 /obj/random/clothing/spawn_choices()
@@ -853,7 +853,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/accessory
 	name = "random accessory"
 	desc = "This is a random utility accessory."
-	icon = 'icons/obj/clothing/ties.dmi'
+	icon = 'icons/obj/clothing/obj_accessories.dmi'
 	icon_state = "horribletie"
 
 /obj/random/accessory/spawn_choices()
@@ -1003,7 +1003,7 @@ something, make sure it's not in one of the other lists.*/
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"
 	desc = "This is a random voidsuit helmet."
-	icon = 'icons/obj/clothing/hats.dmi'
+	icon = 'icons/obj/clothing/obj_head.dmi'
 	icon_state = "void"
 
 /obj/random/voidhelmet/spawn_choices()
@@ -1024,7 +1024,7 @@ something, make sure it's not in one of the other lists.*/
 /obj/random/voidsuit
 	name = "Random Voidsuit"
 	desc = "This is a random voidsuit."
-	icon = 'icons/obj/clothing/suits.dmi'
+	icon = 'icons/obj/clothing/obj_suit.dmi'
 	icon_state = "void"
 
 /obj/random/voidsuit/spawn_choices()

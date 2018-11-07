@@ -20,7 +20,7 @@
 	icon_state = "expeditionpt"
 	worn_state = "expeditionpt"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
 
 /obj/item/clothing/under/solgov/pt/fleet
@@ -45,7 +45,7 @@
 	item_state = "bl_suit"
 	worn_state = "blackutility"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary
@@ -54,7 +54,7 @@
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt
@@ -63,7 +63,7 @@
 	icon_state = "blackservicef"
 	worn_state = "blackservicef"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
@@ -233,7 +233,7 @@
 	icon_state = "greydress"
 	worn_state = "greydress"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
 
 /obj/item/clothing/under/solgov/service/expeditionary/skirt
@@ -339,5 +339,5 @@
 	name = "adjusted expeditionary uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim. It was also mangled to fit a monkey. This better be worth the NJP you'll get for making it."
 	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/wo1_monkey)
