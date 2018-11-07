@@ -124,7 +124,7 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_mining, access_mining_office, access_mining_station,
-						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm)
+						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm, access_solgov_crew, access_eva)
 	minimal_access = list()
 	required_education = EDUCATION_TIER_DROPOUT
 	maximum_education = EDUCATION_TIER_TRADE
