@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "All various subcontractor (NanoTrasen and Hephaestus Industries, at time of writing) items in the loadout have been merged into one item with type selection. Key word to search for (CTRL-F) is 'corporate'"
