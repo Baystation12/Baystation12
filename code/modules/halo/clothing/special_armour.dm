@@ -59,3 +59,10 @@
 	for(var/item in specials)
 		qdel(item)
 	. = ..()
+
+/obj/item/clothing/suit/armor/special/get_mob_overlay(mob/user_mob, slot)
+	var/image/retval = ..()
+	for(var/datum/armourspecials/special in specials)
+		special.update_mob_overlay(retval)
+
+	return retval
