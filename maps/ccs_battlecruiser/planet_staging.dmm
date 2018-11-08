@@ -38,7 +38,7 @@
 "aL" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aM" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aN" = (/obj/item/weapon/gun/launcher/rocket/m41_ssr,/obj/structure/table/rack,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"aO" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aO" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aP" = (/obj/structure/table/rack,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aQ" = (/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aR" = (/obj/structure/table/rack,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
@@ -50,20 +50,20 @@
 "aX" = (/obj/effect/landmark/start{name = "Spartan II Commander"},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aY" = (/obj/structure/curtain,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aZ" = (/obj/structure/curtain/open,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"ba" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"ba" = (/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/storage/box/m762_ap_ma5b,/obj/item/weapon/storage/box/m762_ap_ma5b,/obj/item/weapon/storage/box/m762_ap_ma5b,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bb" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/storage/box/m127_saphe,/obj/item/weapon/storage/box/m127_saphe,/obj/item/weapon/storage/box/m127_saphe,/obj/item/weapon/storage/box/m127_saphe,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bc" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/storage/box/m95_sap,/obj/item/weapon/storage/box/m95_sap,/obj/item/weapon/storage/box/m95_sap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bd" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bc" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/storage/box/m95_sap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bd" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "be" = (/obj/structure/table/rack,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bf" = (/obj/structure/table/rack,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/flashbang,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bg" = (/obj/structure/table/rack,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/smokebomb,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bh" = (/obj/structure/bed,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bi" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bj" = (/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bi" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bj" = (/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bk" = (/obj/structure/table/rack,/obj/item/weapon/material/sword/katana,/obj/item/weapon/material/sword/katana,/obj/item/weapon/material/sword/katana,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bl" = (/obj/structure/table/rack,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bl" = (/obj/structure/table/rack,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bm" = (/obj/structure/table/rack,/obj/item/weapon/material/machete,/obj/item/weapon/material/machete,/obj/item/weapon/material/machete,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bn" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bn" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bo" = (/obj/structure/table/standard,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bp" = (/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 
@@ -102,10 +102,10 @@ aaaqaqaqaqaqaKaKaKaKaKaqaLaLaLaqaMaMaMaqaNaOaPaqaQaRaSaqaaaaaqaTaTaTaTaqaqaqaaaa
 aaaqaqaqaqaqaKaKaKaKaKaqaLaLaLaqaMaMaMaqaUaOaPaqaVaWaWaqaqaqaqaqaqaqaqaqaqaAaaaa
 aaavaqaqaqaqaKaKaKaKaKaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqataaaa
 aaataqaqaXaqaKaKaKaKaKaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaaaYaZaZaYaaaaataaaa
-aaaaayaqaqaqaKaKaKaKaKaqbababaaqbbbbbbaqbcbdbdaqbebfbgaqaqaaaaaqaqaqaqaaaaaaaaaa
-aaaaataqaqaqaKaKaKaKaKaqbababaaqbbbbbbaqbcbcbdaqbebfbgaqaaaabhaqbhbhaqbhaaaaaaaa
+aaaaayaqaqaqaKaKaKaKaKaqbababaaqbbbbbbaqbcbdbcaqbebfbgaqaqaaaaaqaqaqaqaaaaaaaaaa
+aaaaataqaqaqaKaKaKaKaKaqbababaaqbbbbbbaqbcbcbcaqbebfbgaqaaaabhaqbhbhaqbhaaaaaaaa
 aaaaaaaAaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaaaabhaqbhbhaqbhaaaaaaaa
 aaaaaaaaayaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaAaaaaaabhaqbhbhaqbhaaaaaaaa
-aaaaaaaaaaatatatbibjbkblbmbnavatatbobobobpbpbpayataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaatatbibibjbkblbmbnavatatbobobobpbpbpayataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
