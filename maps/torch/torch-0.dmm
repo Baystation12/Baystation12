@@ -503,6 +503,11 @@
 	pixel_x = 21
 	},
 /obj/machinery/camera/network/exploration_shuttle,
+/obj/machinery/alarm{
+	frequency = 1439;
+	pixel_y = 23;
+	req_one_access = list(11,24)
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "bG" = (
@@ -947,6 +952,11 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -1680,6 +1690,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
 "dD" = (
@@ -1934,6 +1949,10 @@
 	},
 /obj/structure/handrai,
 /obj/machinery/camera/network/exploration_shuttle,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "dY" = (
@@ -2340,6 +2359,10 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "fa" = (
@@ -2417,6 +2440,10 @@
 /obj/structure/handrai,
 /obj/random_multi/single_item/boombox,
 /obj/structure/catwalk,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "fg" = (
