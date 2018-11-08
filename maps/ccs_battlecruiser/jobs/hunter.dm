@@ -28,7 +28,7 @@
 	mob_path = /mob/living/simple_animal/lekgolo/mgalekgolo
 	minimum_player_age = 0
 	suspicion_chance = 0
-	flags = ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
+	flags = ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
 
 	min_player_age = 0
 
