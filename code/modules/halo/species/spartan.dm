@@ -58,6 +58,8 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/augmented)
 		)
 
+	ignore_equipment_slowdown = 1
+
 /datum/species/spartan/get_random_name(var/gender)
 	var/name = ""
 	if(gender == FEMALE)
