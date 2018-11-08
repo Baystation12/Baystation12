@@ -188,6 +188,7 @@
 
 	var/list/item_icon_offsets = list(0,0) //A list (x,y) of offsets to apply to inhand images.
 	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
+	var/melee_force_multiplier = 1
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
