@@ -150,7 +150,7 @@ proc/get_radio_key_from_channel(var/channel)
 	if(!(end_char in list(".", "?", "!", "-", "~")))
 		message += "."
 
-	return html_encode(capitalize(message))
+	return html_encode(message)
 
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
 	if(client)
