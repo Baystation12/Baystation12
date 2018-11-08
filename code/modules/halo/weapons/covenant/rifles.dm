@@ -4,7 +4,7 @@
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Rifle"
 	item_state = "plasmarifle"
-	slot_flags = SLOT_BACK | SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	charge_meter = 0
 	self_recharge = 1
