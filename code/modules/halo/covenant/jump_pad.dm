@@ -3,7 +3,7 @@
 	name = "Covenant Jump Pad"
 	desc = "A high power jump pad that will send you somewhere on the ship."
 	icon = 'grav32.dmi'
-	icon_state = "lift"
+	icon_state = "jumppad"
 	density = 0
 	anchored = 1
 	layer = 2.9
