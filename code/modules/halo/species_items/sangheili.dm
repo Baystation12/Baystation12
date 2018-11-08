@@ -228,7 +228,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "A sealed. airtight Sangheili Combat Harness."
 	icon_state = "ranger_chest_obj"
 	item_state = "ranger_chest"
-	totalshields = 150
+	totalshields = 50
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
