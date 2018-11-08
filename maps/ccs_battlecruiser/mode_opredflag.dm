@@ -63,18 +63,42 @@
 /datum/game_mode/opredflag/get_respawn_time()
 	return 0.5		//minutes
 
-/datum/game_mode/opredflag/handle_mob_death(var/mob/M, var/list/args = list())
-	if(istype(M, /mob/living/carbon/human/covenant/sanshyuum))
-		if(M.mind && M.mind in living_prophets)
-			living_prophets -= M.mind
-		dead_prophets += M
-		return 1
+/datum/game_mode/opredflag/handle_mob_death(var/mob/living/carbon/human/M, var/list/args = list())
+	ASSERT(M)
 
-	if(istype(M, /mob/living/carbon/human/spartan))
-		if(M.mind && M.mind in living_spartans)
-			living_spartans -= M.mind
-		dead_spartans += M
-		return 1
+	//work out the mob species
+	var/type = 0
+	if(istype(M, /mob/living/carbon/human/covenant/sanshyuum))
+		type = 1
+	else if(istype(M, /mob/living/carbon/human/spartan))
+		type = 2
+	else
+		var/datum/species/S = M.species
+		if(istype(S, /datum/species/sanshyuum))
+			type = 1
+		else if(istype(S, /datum/species/spartan))
+			type = 2
+
+	//grab the mind
+	var/datum/mind/D = M.mind
+	if(!D)
+		for(var/datum/mind/cur_mind in living_prophets + living_spartans)
+			if(cur_mind.name == M.real_name)
+				D = cur_mind
+				break
+
+	if(D)
+		//prophets
+		if(type == 1)
+			living_prophets -= D
+			dead_prophets += D
+			return 1
+
+		//spartans
+		if(type == 2)
+			living_spartans -= D
+			dead_spartans += D
+			return 1
 
 	return ..()
 
@@ -93,35 +117,36 @@
 /datum/game_mode/opredflag/declare_completion()
 	var/text = ""
 	if(!living_prophets.len)
-		text += "All Prophets were slain!<br>"
+		text += "<span class='boldannounce'>All Prophets were slain!</span><br>"
 
-	text += "The Prophets were:<br>"
+	text += "<span class='cult'>The Prophets were:</span><br>"
 	for(var/datum/mind/D in living_prophets)
-		text += "<br>[D] (played by [D.key])"
-	for(var/mob/living/simple_animal/P in dead_prophets)
-		text += "<br>[P] (played by [P.ckey])(slain)"
+		text += "<span class='cult'>[D] (played by [D.key])</span>"
+	for(var/datum/mind/D in dead_prophets)
+		text += "<span class='cult'>[D.name] (played by [D.key])(slain)</span>"
 	text += "<br>"
-	text += "The Elite Shipmaster was [elite_shipmaster] (played by [elite_shipmaster_ckey])<br>"
-
-	text += "The Spartan 2 commander was [spartan_commander] (played by [spartan_commander_ckey])<br>"
+	if(elite_shipmaster)
+		text += "<span class='cult'>The Elite Shipmaster was [elite_shipmaster] (played by [elite_shipmaster_ckey])</span><br>"
+	if(spartan_commander)
+		text += "<span class='passive'>The Spartan II commander was [spartan_commander] (played by [spartan_commander_ckey])</span><br>"
 	if(!living_spartans.len)
-		text = "All Spartans have failed to return!<br>"
-	text += "The Spartan IIs were:<br>"
-	for(var/mob/M in living_spartans)
-		text += "<br>[M] (played by [M.ckey])"
-	for(var/mob/M in dead_spartans)
-		text += "<br>[M] (played by [M.ckey])(MIA)"
+		text = "<span class='boldannounce'>All Spartans have failed to return!</span><br>"
+	text += "<span class='passive'>The Spartan IIs were:</span><br>"
+	for(var/datum/mind/M in living_spartans)
+		text += "<span class='passive'>[M] (played by [M.key])</span>"
+	for(var/datum/mind/M in dead_spartans)
+		text += "<span class='passive'>[M] (played by [M.key])(MIA)</span></span>"
 	text += "<br>"
 
 	if(!living_prophets.len)
 		if(living_spartans.len)
-			text += "UNSC Major Victory"
+			text += "<h1 class='alert'>UNSC Major Victory</span>"
 		else
-			text += "UNSC Pyrrhic Victory"
+			text += "<h1 class='alert'>UNSC Pyrrhic Victory</span>"
 	else if(living_spartans.len)
-		text += "Covenant Minor Victory"
+		text += "<h1 class='alert'>Covenant Minor Victory</span>"
 	else
-		text += "Covenant Major Victory"
+		text += "<h1 class='alert'>Covenant Major Victory</span>"
 
 	to_world(text)
 
