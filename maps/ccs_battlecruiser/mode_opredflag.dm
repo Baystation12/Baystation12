@@ -135,18 +135,18 @@
 	for(var/datum/mind/M in living_spartans)
 		text += "<span class='passive'>[M] (played by [M.key])</span>"
 	for(var/datum/mind/M in dead_spartans)
-		text += "<span class='passive'>[M] (played by [M.key])(MIA)</span></span>"
+		text += "<span class='passive'>[M] (played by [M.key])(MIA)</span>"
 	text += "<br>"
 
 	if(!living_prophets.len)
 		if(living_spartans.len)
-			text += "<h1 class='alert'>UNSC Major Victory</span>"
+			text += "<h1 class='alert'>UNSC Major Victory</h1>"
 		else
-			text += "<h1 class='alert'>UNSC Pyrrhic Victory</span>"
+			text += "<h1 class='alert'>UNSC Pyrrhic Victory</h1>"
 	else if(living_spartans.len)
-		text += "<h1 class='alert'>Covenant Minor Victory</span>"
+		text += "<h1 class='alert'>Covenant Minor Victory</h1>"
 	else
-		text += "<h1 class='alert'>Covenant Major Victory</span>"
+		text += "<h1 class='alert'>Covenant Major Victory</h1>"
 
 	to_world(text)
 
