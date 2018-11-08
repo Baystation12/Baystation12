@@ -122,9 +122,9 @@
 	change_misc_variables(1)
 
 /obj/item/weapon/melee/energy/elite_sword/dropped(var/mob/user)
-	..()
+	. = ..()
 	if(!istype(loc,/mob))
-		if(w_class == ITEM_SIZE_HUGE)
+		if(w_class == ITEM_SIZE_LARGE)
 			if(failsafe)
 				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
 				flick("blade burnout",src)

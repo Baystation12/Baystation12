@@ -52,3 +52,8 @@
 	if(newname)
 		M.name = newname
 		M.real_name = newname
+
+/datum/antagonist/opredflag_prophet/equip(var/mob/living/carbon/human/player)
+	. = ..()
+	player.equip_to_slot_or_del(new /obj/item/clothing/suit/prophet_robe(player), slot_wear_suit)
+	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/covenant(player), slot_l_ear)

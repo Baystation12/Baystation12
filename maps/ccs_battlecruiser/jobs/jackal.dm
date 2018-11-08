@@ -1,6 +1,6 @@
 
 /datum/job/opredflag_jackal
-	title = "Kig'Yar"
+	title = "Kig-Yar"
 	faction_flag = COVENANT
 	supervisors = "the Elites"
 	selection_color = "#9900ff"
@@ -15,7 +15,7 @@
 	track_players = 1
 
 /datum/job/opredflag_skirmisher
-	title = "T'Voan Skirmisher"
+	title = "T-Voan Skirmisher"
 	faction_flag = COVENANT
 	supervisors = "the Elites"
 	selection_color = "#9900ff"
@@ -29,7 +29,7 @@
 	track_players = 1
 
 /datum/job/opredflag_skirmisher_major
-	title = "T'Voan Skirmisher Major"
+	title = "T-Voan Skirmisher Major"
 	faction_flag = COVENANT
 	supervisors = "the Elites"
 	selection_color = "#9900ff"
@@ -44,7 +44,7 @@
 	track_players = 1
 
 /datum/job/opredflag_skirmisher_murmillo
-	title = "T'Voan Skirmisher Murmillo"
+	title = "T-Voan Skirmisher Murmillo"
 	faction_flag = COVENANT
 	supervisors = "the Elites"
 	selection_color = "#9900ff"
@@ -58,7 +58,7 @@
 	track_players = 1
 
 /datum/job/opredflag_skirmisher_commando
-	title = "T'Voan Skirmisher Commando"
+	title = "T-Voan Skirmisher Commando"
 	faction_flag = COVENANT
 	supervisors = "the Elites"
 	selection_color = "#9900ff"
@@ -72,7 +72,7 @@
 	track_players = 1
 
 /datum/job/opredflag_skirmisher_champion
-	title = "T'Voan Skirmisher Champion"
+	title = "T-Voan Skirmisher Champion"
 	faction_flag = COVENANT
 	supervisors = "the Elites"
 	selection_color = "#9900ff"

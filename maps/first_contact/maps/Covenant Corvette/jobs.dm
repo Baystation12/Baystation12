@@ -29,7 +29,7 @@
 	faction_whitelist = "Covenant"
 
 /datum/job/covenant/skirmminor
-	title = "T'Voan - Minor"
+	title = "T-Voan - Minor"
 	total_positions = 12
 	spawn_positions = 12
 	selection_color = "#800080"
@@ -39,7 +39,7 @@
 	total_positions = 1
 
 /datum/job/covenant/skirmmajor
-	title = "T'Voan - Major"
+	title = "T-Voan - Major"
 	total_positions = 12
 	spawn_positions = 12
 	selection_color = "#800080"
@@ -49,7 +49,7 @@
 	total_positions = 1
 
 /datum/job/covenant/skirmmurmillo
-	title = "T'Voan - Murmillo"
+	title = "T-Voan - Murmillo"
 	total_positions = 12
 	spawn_positions = 12
 	selection_color = "#800080"
