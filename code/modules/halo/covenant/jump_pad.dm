@@ -22,9 +22,9 @@
 /obj/structure/jump_pad/Crossed(atom/movable/O)
 	attempt_jump(O)
 
-/obj/structure/jump_pad/proc/attempt_jump(var/mob/O)
+/obj/structure/jump_pad/proc/attempt_jump(var/mob/living/carbon/human/O)
 	. = ..()
-	if(linked_turfs.len && O.loc in range(1,src))
+	if(O && istype(O) && linked_turfs.len && O.loc in range(1,src))
 		if(alert(O,"Warning: this is a one way trip and you should wait until your team is ready. Are you ready to go?",\
 			"[src]","Ascend jump pad","Remain below") == "Ascend jump pad")
 			var/turf/target = pick(linked_turfs)
