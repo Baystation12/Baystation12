@@ -108,12 +108,12 @@
 		if(start_char != "," && start_char != "'")
 			subtext = " " + subtext
 
-	pretext = html_encode(pretext)
+	pretext = capitalize(html_encode(pretext))
 	nametext = html_encode(nametext)
 	subtext = html_encode(subtext)
 	// Store the player's name in a nice bold, naturalement
 	nametext = "<B>[emoter]</B>"
-	return capitalize(pretext + nametext + subtext)
+	return pretext + nametext + subtext
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
 
