@@ -2891,6 +2891,7 @@
 #include "maps\random_ruins\exoplanet_ruins\marooned\marooned.dm"
 #include "maps\random_ruins\exoplanet_ruins\monoliths\monoliths.dm"
 #include "maps\random_ruins\exoplanet_ruins\oasis\oasis.dm"
+#include "maps\random_ruins\exoplanet_ruins\oldpod\oldpod.dm"
 #include "maps\random_ruins\space_ruins\space_ruins.dm"
 #include "maps\torch\torch.dm"
 #include "maps\torch\torch_define.dm"
