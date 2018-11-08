@@ -83,6 +83,15 @@
 	min_bruised_damage = 30 //Considerably tougher
 	min_broken_damage = 45
 
+//give spartans some slight regen
+/obj/item/organ/internal/heart/spartan/process()
+	. = ..()
+	for(var/obj/item/organ/external/e in owner.bad_external_organs)
+		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
+			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
+		for(var/datum/wound/w in e.wounds)
+			w.damage -= rand(0,2)
+
 /decl/hierarchy/outfit/spartan_two
 	name = "Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
