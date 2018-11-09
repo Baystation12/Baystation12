@@ -26022,12 +26022,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "nWV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
@@ -30288,8 +30286,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology)
 "tdb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
 /mob/living/carbon/slime,
@@ -30406,17 +30403,15 @@
 /turf/simulated/wall/prepainted,
 /area/security/armoury)
 "tjb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
 /mob/living/carbon/slime,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tkb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
 /turf/simulated/floor/reinforced,
@@ -30459,9 +30454,8 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology)
 "tnb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
 /turf/simulated/floor/reinforced,
@@ -30478,8 +30472,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "tob" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "tpb" = (
@@ -30495,7 +30489,7 @@
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tqb" = (
@@ -30511,27 +30505,23 @@
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "trb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "tsb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/wall/r_wall/prepainted,
@@ -30543,28 +30533,24 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tub" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tvb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
@@ -30578,22 +30564,20 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "txb" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tyb" = (
@@ -30603,20 +30587,18 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/red,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tzb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
-	dir = 9
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
 /turf/simulated/wall/r_wall/hull,
