@@ -207,6 +207,7 @@
 	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)
 	if(I)
 		new_record.set_name(I.registered_name)
+		new_record.set_formal_name("[I.formal_name_prefix][I.registered_name][I.formal_name_suffix]")
 		new_record.set_sex(I.sex)
 		new_record.set_age(I.age)
 		new_record.set_job(I.assignment)
@@ -217,6 +218,7 @@
 			new_record.set_branch(I.military_branch.name)
 			if(I.military_rank)
 				new_record.set_rank(I.military_rank.name)
+				new_record.set_formal_name("[I.registered_name][I.formal_name_suffix]") // Rank replaces formal name prefix in real manifest entries
 	if(random_record)
 		COPY_VALUE(faction)
 		COPY_VALUE(religion)
@@ -236,7 +238,7 @@
 		new_record.set_skillset(jointext(skills,"\n"))
 
 	if(istype(job) && job.announced)
-		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), get_announcement_frequency(job))
+		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", get_announcement_frequency(job))
 	. = ..()
 
 #undef COPY_VALUE
