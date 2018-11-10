@@ -3,14 +3,10 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 
 /mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
 	..(new_loc,"Kig-Yar")
-	name = pick(GLOB.first_names_kig_yar)
-	real_name = name
 	faction = "Covenant"
 
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
 	..(new_loc,"Tvaoan Kig-Yar")
-	name = pick(GLOB.first_names_kig_yar)
-	real_name = name
 	faction = "Covenant"
 
 /obj/item/clothing/head/helmet/kigyar

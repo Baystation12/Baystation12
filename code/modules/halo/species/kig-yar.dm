@@ -36,6 +36,9 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
 
+/datum/species/kig_yar/get_random_name(var/gender)
+	return pick(GLOB.first_names_kig_yar)
+
 /datum/species/kig_yar/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 
@@ -77,6 +80,9 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
+
+/datum/species/kig_yar_skirmisher/get_random_name(var/gender)
+	return pick(GLOB.first_names_kig_yar)
 
 /datum/sprite_accessory/hair/skirmisherquills
 	icon = 'code/modules/halo/icons/species/r_skirmishers.dmi'
