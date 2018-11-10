@@ -5,7 +5,9 @@
 	uniform = /obj/item/clothing/under/covenant/kigyar
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar/skirmisher
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher
+	shoes = /obj/item/clothing/shoes/skirmisher
 
 /decl/hierarchy/outfit/skirmisher_major
 	name = "T'Voan Skirmisher Major"
@@ -13,7 +15,9 @@
 	uniform = /obj/item/clothing/under/covenant/kigyar
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar/skirmisher/major
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/major
+	shoes = /obj/item/clothing/shoes/skirmisher/major
 
 /decl/hierarchy/outfit/skirmisher_murmillo
 	name = "T'Voan Skirmisher Murmillo"
@@ -21,8 +25,10 @@
 	uniform = /obj/item/clothing/under/covenant/kigyar
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar/skirmisher/murmillo
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets
+	shoes = /obj/item/clothing/shoes/skirmisher/murmillo
 
 /decl/hierarchy/outfit/skirmisher_commando
 	name = "T'Voan Skirmisher Commando"
@@ -30,8 +36,10 @@
 	uniform = /obj/item/clothing/under/covenant/kigyar
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar/skirmisher/commando
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/commando
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando
+	shoes = /obj/item/clothing/shoes/skirmisher/commando
 
 /decl/hierarchy/outfit/skirmisher_champion
 	name = "T'Voan Skirmisher Champion"
@@ -39,5 +47,7 @@
 	uniform = /obj/item/clothing/under/covenant/kigyar
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar/skirmisher/champion
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/champion
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/champion
+	shoes = /obj/item/clothing/shoes/skirmisher/champion
