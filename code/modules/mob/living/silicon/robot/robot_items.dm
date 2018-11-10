@@ -246,7 +246,7 @@
 			dropspot = target.loc
 
 
-		overlays = null
+		overlays.Cut()
 
 		var droppedSomething = 0
 

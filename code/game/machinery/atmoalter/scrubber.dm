@@ -44,7 +44,7 @@
 	..(severity)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/on_update_icon()
-	src.overlays = 0
+	overlays.Cut()
 
 	if(on && cell && cell.charge)
 		icon_state = "pscrubber:1"
@@ -179,7 +179,7 @@
 		to_chat(usr, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
-	src.overlays = 0
+	overlays.Cut()
 
 	if(on && !(stat & (NOPOWER|BROKEN)))
 		icon_state = "scrubber:1"

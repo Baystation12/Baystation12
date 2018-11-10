@@ -118,7 +118,7 @@
 		if(unlocked)
 			if(open)
 				open = 0
-				overlays = null
+				overlays.Cut()
 				to_chat(user, "You crowbar the battery panel in place.")
 			else
 				if(unlocked)
