@@ -19,7 +19,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/singularity/narsie/large/exit/on_update_icon()
-	overlays = 0
+	overlays.Cut()
 
 /obj/singularity/narsie/large/exit/Process()
 	for(var/mob/M in GLOB.player_list)

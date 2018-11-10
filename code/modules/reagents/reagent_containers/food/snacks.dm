@@ -2593,7 +2593,7 @@
 
 /obj/item/pizzabox/on_update_icon()
 
-	overlays = list()
+	overlays.Cut()
 
 	// Set appropriate description
 	if( open && pizza )

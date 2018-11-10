@@ -200,7 +200,7 @@
 	. = ..()
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
-	overlays = overlays.Cut()
+	overlays.Cut()
 	icon_state = "[base_state]_empty" //Never use the initial state. That'll just reset it to the mapping icon.
 	pixel_y = 0
 	pixel_x = 0

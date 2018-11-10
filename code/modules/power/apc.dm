@@ -348,12 +348,12 @@
 
 	if(!(update_state & UPDATE_ALLGOOD))
 		if(overlays.len)
-			overlays = 0
+			overlays.Cut()
 			return
 
 	if(update & 2)
 		if(overlays.len)
-			overlays.len = 0
+			overlays.Cut()
 		if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]
 			overlays += status_overlays_charging[charging+1]

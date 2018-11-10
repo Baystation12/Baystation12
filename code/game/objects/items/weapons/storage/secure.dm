@@ -104,7 +104,7 @@
 					src.l_set = 1
 				else if ((src.code == src.l_code) && (src.emagged == 0) && (src.l_set == 1))
 					src.locked = 0
-					src.overlays = null
+					overlays.Cut()
 					overlays += image('icons/obj/storage.dmi', icon_opened)
 					src.code = null
 				else
@@ -112,7 +112,7 @@
 			else
 				if ((href_list["type"] == "R") && (src.emagged == 0) && (!src.l_setshort))
 					src.locked = 1
-					src.overlays = null
+					overlays.Cut()
 					src.code = null
 					src.close(usr)
 				else
@@ -130,7 +130,7 @@
 		emagged = 1
 		src.overlays += image('icons/obj/storage.dmi', icon_sparking)
 		sleep(6)
-		src.overlays = null
+		overlays.Cut()
 		overlays += image('icons/obj/storage.dmi', icon_locking)
 		locked = 0
 		to_chat(user, (feedback ? feedback : "You short out the lock of \the [src]."))

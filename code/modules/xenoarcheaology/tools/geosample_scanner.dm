@@ -268,7 +268,7 @@
 		var/obj/item/weapon/paper/P = new(src)
 		P.SetName("[src] report #[++report_num]: [scanned_item.name]")
 		P.stamped = list(/obj/item/weapon/stamp)
-		P.overlays = list("paper_stamped")
+		P.queue_icon_update()
 
 		//work out data
 		var/data = " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
