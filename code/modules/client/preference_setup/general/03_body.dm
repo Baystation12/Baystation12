@@ -640,7 +640,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	dat += "<b>Language:</b> [current_species.language]<br/>"
 	dat += "<small>"
 	if(current_species.spawn_flags & SPECIES_CAN_JOIN)
-		dat += "</br><b>Often present among humans.</b>"
+		dat += "</br><b>Playable.</b>"
 	if(current_species.spawn_flags & SPECIES_IS_WHITELISTED)
 		dat += "</br><b>Whitelist restricted.</b>"
 	if(!current_species.has_organ[BP_HEART])
