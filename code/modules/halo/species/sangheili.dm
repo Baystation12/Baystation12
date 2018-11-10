@@ -1,7 +1,11 @@
 /datum/species/sangheili
 	name = "Sangheili"
 	name_plural = "Sangheili"
-	blurb = ""
+	blurb = "The Sangheili (Macto cognatus, \"I glorify my kin\"), known to humans as Elites, \
+		are a saurian species of strong, proud, and intelligent warriors, as well as skilled \
+		combat tacticians. Due to their skill in combat, the Sangheili have formed the military \
+		backbone of the Covenant for almost the entirety of its existence. They had a very strong \
+		rivalry with the upstart, crude Jiralhanae."
 	flesh_color = "#4A4A64"
 	blood_color = "#4A4A64"
 	icobase = 'code/modules/halo/icons/species/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)

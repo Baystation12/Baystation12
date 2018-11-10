@@ -30,6 +30,7 @@ datum/preferences
 		backbag = rand(1,5)
 		age = rand(current_species.min_age, current_species.max_age)
 		b_type = RANDOM_BLOOD_TYPE
+		real_name = random_name(gender,species)
 		if(H)
 			copy_to(H)
 

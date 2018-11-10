@@ -1,7 +1,12 @@
 /datum/species/unggoy
-	name = "unggoy"
-	name_plural = "unggoy"
-	blurb = "" // Doesn't appear in chargen
+	name = "Unggoy"
+	name_plural = "Unggoy"
+	blurb = "The Unggoy (Latin, Monachus frigus, meaning \"cold monk\") are a sapient \
+		species of squat biped xeno-arthropodal vertebroid lifeforms in the Covenant.\
+		They are the lowest-ranking species in the hierarchy, and are frequently \
+		mistreated by most other races. Unggoy are primarily used as laborers, \
+		slaves, or in combat situations, as cannon fodder. Unggoy sometimes feud with\
+		Kig'Yar for status as the lowest ranked species of the Covenant."
 	flesh_color = "#4F4F7F"
 	blood_color = "#4A4A64" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_unggoy.dmi'

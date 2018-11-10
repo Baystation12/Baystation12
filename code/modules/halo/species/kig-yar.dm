@@ -1,7 +1,11 @@
 /datum/species/kig_yar
 	name = "Kig-Yar"
 	name_plural = "Kig-Yar"
-	blurb = ""
+	blurb = "Ruutian Kig'Yar are the most commonly encountered species of Kig'Yar, known as Jackals. \
+		They have an avian appearance and serve as light infantry in combat, being equipped with either \
+		light weaponry and large energy defence point defence shields or (less frequently) marksman weaponry \
+		due to their enhanced hearing and eyesight. Kig'Yar feud with Unggoy for status as the lowest ranked\
+		members of the Covenant."
 	flesh_color = "#FF9463"
 	blood_color = "#4A4A64" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_kig-yar.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
@@ -32,6 +36,9 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
 
+/datum/species/kig_yar/get_random_name(var/gender)
+	return pick(GLOB.first_names_kig_yar)
+
 /datum/species/kig_yar/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 
@@ -39,7 +46,14 @@
 	name = "Tvaoan Kig-Yar"
 	name_plural = "Kig-Yar"
 	spawn_flags = SPECIES_CAN_JOIN
-	blurb = ""
+	blurb = "T'Voan Skirmishers are the same species as the more common, lightly-built Ruutian Jackals, but \
+		they are subspecies that is faster, stronger, can jump higher and are more agile than any ordinary Kig-Yar. In addition, \
+		they sport manes of feathers rather than quills. A Skirmisher's voice is more raspy and guttural - this is \
+		because they have an expanded voice chamber in their throat. Skirmishers serve as Covenant shock troopers \
+		and close-range combatants, attacking in packs and using flanking tactics. Kig'Yar feud with Unggoy for \
+		status as the lowest ranked members of the Covenant."
+	default_language = "Sangheili"
+	language = "Sangheili"
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
@@ -66,6 +80,9 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
+
+/datum/species/kig_yar_skirmisher/get_random_name(var/gender)
+	return pick(GLOB.first_names_kig_yar)
 
 /datum/sprite_accessory/hair/skirmisherquills
 	icon = 'code/modules/halo/icons/species/r_skirmishers.dmi'
