@@ -1,6 +1,6 @@
 /datum/species/unggoy
-	name = "unggoy"
-	name_plural = "unggoy"
+	name = "Unggoy"
+	name_plural = "Unggoy"
 	blurb = "The Unggoy (Latin, Monachus frigus, meaning \"cold monk\") are a sapient \
 		species of squat biped xeno-arthropodal vertebroid lifeforms in the Covenant.\
 		They are the lowest-ranking species in the hierarchy, and are frequently \
