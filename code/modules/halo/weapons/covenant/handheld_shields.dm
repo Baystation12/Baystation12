@@ -15,12 +15,13 @@
 	var/obj/item/weapon/gauntlet_shield/connected_shield = /obj/item/weapon/gauntlet_shield
 	var/mob/current_user
 
-	var/shield_max_charge = 300
-	var/shield_current_charge = 300
+	var/shield_max_charge = 400
+	var/shield_current_charge = 400
 	var/list/shield_colour_values = list("300" = "#6d63ff","200" = "#ffa76d","100" = "#ff4248")//Associative list with shield-charge as key and colour value as keyvalue. Ordered highest to lowest. EG: "200" = "#6D63FF"
 	var/shield_recharge_delay = 2 //The delay between taking damage and starting to recharge, in seconds.
 	var/shield_next_charge
 	var/limb_hit_chance = 5 //The chance to hit arms and legs even if the shield were to block the shot. Percentile.
+	var/active_slowdown_amount = 5
 
 /obj/item/clothing/gloves/shield_gauntlet/New()
 	. = ..()
@@ -48,12 +49,16 @@
 	if(!current_user.put_in_inactive_hand(connected_shield))
 		if(!current_user.put_in_active_hand(connected_shield))
 			to_chat(current_user,"<span class = 'notice'>You need one hand unobstructed to use [src.name]</span>")
+		else
+			//activate shield and we walk slower
+			slowdown_per_slot[slot_gloves] = active_slowdown_amount
 	update_inhand_icons()
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/unequip_shield()
 	current_user.drop_from_inventory(connected_shield)
 	contents += connected_shield
 	update_inhand_icons()
+	slowdown_per_slot[slot_gloves] = 0
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/drain_shield(var/damage)
 	var/charge_after_depletion = shield_current_charge - damage
@@ -198,3 +203,4 @@
 /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	name = "Kig-Yar Point Defense Gauntlet"
 	desc = "A wrist-worn gauntlet that contains a directional shield generator, allowing it to provide protection from gunfire in the direction the user is facing."
+	species_restricted = list("Kig-Yar")
