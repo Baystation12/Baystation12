@@ -1,0 +1,5 @@
+author: "Roland410"
+delete-after: True
+changes: 
+  - rscadd: "Added a playable crashed survival pod."
+  - maptweak: "Converted the old crashed pod into a random ruin."
