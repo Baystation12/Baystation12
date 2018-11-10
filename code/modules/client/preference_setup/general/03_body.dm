@@ -340,6 +340,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 			pref.body_markings.Cut() // Basically same as above.
 
+			pref.real_name = random_name(pref.gender,pref.species)
+
 			prune_occupation_prefs()
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
