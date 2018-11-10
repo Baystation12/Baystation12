@@ -279,7 +279,7 @@
 	result = /datum/reagent/clonexadone
 	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1)
 	result_amount = 2
-	minimum_temperature = (-75 CELCIUS) - 100
+	minimum_temperature = -100 CELCIUS
 	maximum_temperature = -75 CELCIUS
 	mix_message = "The solution thickens into translucent slime."
 
