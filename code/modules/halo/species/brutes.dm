@@ -1,7 +1,13 @@
 /datum/species/brutes
 	name = "Brute"
 	name_plural = "Brutes"
-	blurb = ""//Not in chargen
+	blurb = "The Jiralhanae (Latin, Servus ferox, translated to \"Wild Slave\"), \
+		known by humans as Brutes, are the most recent members of the Covenant. \
+		They are a large, bipedal, warlike species resembling apes that resent \
+		the Sangheili for their respected position in the Covenant. They are organised\
+		into tribes and packs, and in combat utilise crute brute force weaponry.\
+		If they are hurt or angry eough, they can enter a beserk rage where they are \
+		near immune to pain and damage."
 	flesh_color = "#4A4A64"
 	blood_color = "#A10808"
 	icobase = 'code/modules/halo/icons/species/r_Augmented_Human.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
