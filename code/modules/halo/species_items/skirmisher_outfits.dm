@@ -8,6 +8,7 @@
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher
 	shoes = /obj/item/clothing/shoes/skirmisher
+	back = /obj/item/weapon/gun/projectile/type51carbine
 
 /decl/hierarchy/outfit/skirmisher_major
 	name = "T'Voan Skirmisher Major"
@@ -18,6 +19,7 @@
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/major
 	shoes = /obj/item/clothing/shoes/skirmisher/major
+	back = /obj/item/weapon/gun/projectile/type51carbine
 
 /decl/hierarchy/outfit/skirmisher_murmillo
 	name = "T'Voan Skirmisher Murmillo"
