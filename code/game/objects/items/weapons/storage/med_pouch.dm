@@ -10,8 +10,9 @@ Single Use Emergency Pouches
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
 	icon_state = "pack0"
+	opened = FALSE
+	open_sound = 'sound/effects/rip1.ogg'
 	var/injury_type = "generic"
-	var/opened = FALSE
 	var/global/image/cross_overlay
 
 	var/instructions = {"
@@ -61,8 +62,6 @@ Single Use Emergency Pouches
 /obj/item/weapon/storage/med_pouch/open(mob/user)
 	if(!opened)
 		user.visible_message("<span class='notice'>\The [user] tears open [src], breaking the vacuum seal!</span>", "<span class='notice'>You tear open [src], breaking the vacuum seal!</span>")
-		opened = 1
-		update_icon()
 	. = ..()
 
 /obj/item/weapon/storage/med_pouch/trauma
