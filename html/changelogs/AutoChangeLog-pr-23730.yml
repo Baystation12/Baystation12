@@ -1,0 +1,4 @@
+author: "Datraen"
+delete-after: True
+changes: 
+  - bugfix: "Cancelling SDTF naming for Skrell badges no longer blocks setting in the future."
