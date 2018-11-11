@@ -26,6 +26,8 @@
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
+	var/opened = null
+	var/open_sound = null
 
 /obj/item/weapon/storage/Destroy()
 	QDEL_NULL(storage_ui)
@@ -79,6 +81,10 @@
 		storage_ui.hide_from(user)
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
+	if(!opened)
+		playsound(src.loc, src.open_sound, 50, 0, -5)
+		opened = 1
+		queue_icon_update()
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
 	if (isrobot(user) && user.hud_used)
