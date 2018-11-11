@@ -29,7 +29,7 @@
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
-	src.overlays = 0
+	overlays.Cut()
 
 	if(on && cell && cell.charge)
 		icon_state = "psiphon:1"

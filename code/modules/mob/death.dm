@@ -72,7 +72,7 @@
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
 
 	if(healths)
-		healths.overlays = null // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
+		healths.overlays.Cut() // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
 		if("health7" in icon_states(healths.icon))
 			healths.icon_state = "health7"
 		else

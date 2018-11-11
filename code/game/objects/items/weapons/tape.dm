@@ -121,7 +121,6 @@
 	to_chat(user, "You remove \the [initial(name)] from [stuck].")
 	user.put_in_hands(stuck)
 	stuck = null
-	overlays = null
 	qdel(src)
 
 /obj/item/weapon/ducttape/afterattack(var/A, mob/user, flag, params)

@@ -149,7 +149,7 @@
 
 
 /obj/structure/janitorialcart/on_update_icon()
-	overlays = null
+	overlays.Cut()
 	if(mybag)
 		overlays += "cart_garbage"
 	if(mymop)
