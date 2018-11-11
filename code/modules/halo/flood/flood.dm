@@ -1,7 +1,6 @@
 GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
-#define INFECT_DELAY 13 SECONDS
 #define PLAYER_FLOOD_HEALTH_MOD 1.5
 #define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
@@ -86,20 +85,19 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		else
 			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
 
-	spawn(INFECT_DELAY)
-		var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
-		new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
-		new_combat_form.health *= PLAYER_FLOOD_HEALTH_MOD
-		new_combat_form.forceMove(h.loc)
-		new_combat_form.ckey = h.ckey
-		new_combat_form.name = h.real_name
-		if(prob(25))
-			playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
-		if(new_combat_form.ckey)
-			new_combat_form.stop_automated_movement = 1
-		for(var/obj/i in h.contents)
-			h.drop_from_inventory(i)
-		qdel(h)
+	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
+	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
+	new_combat_form.health *= PLAYER_FLOOD_HEALTH_MOD
+	new_combat_form.forceMove(h.loc)
+	new_combat_form.ckey = h.ckey
+	new_combat_form.name = h.real_name
+	if(prob(25))
+		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
+	if(new_combat_form.ckey)
+		new_combat_form.stop_automated_movement = 1
+	for(var/obj/i in h.contents)
+		h.drop_from_inventory(i)
+	qdel(h)
 
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"

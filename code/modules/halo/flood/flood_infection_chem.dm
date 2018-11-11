@@ -1,4 +1,4 @@
-#define FLOOD_INFECTION_MESSAGE_PROB 1
+#define FLOOD_INFECTION_MESSAGE_PROB 5
 #define FLOOD_INFECTION_MESSAGES_LOW list(\
 "Your skin becomes cold to the touch...",\
 "A spasm runs through your body...",\
