@@ -377,7 +377,7 @@
 /obj/item/trash/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
-	icon = 'icons/obj/clothing/masks.dmi'
+	icon = 'icons/obj/clothing/obj_mask.dmi'
 	icon_state = "cigbutt"
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
@@ -425,7 +425,7 @@
 /obj/item/weapon/reagent_containers/terrbacco
 	name = "tobacco"
 	desc = "A wad of carefully cured and dried tobacco. Ground into a mess."
-	icon = 'icons/obj/clothing/masks.dmi'
+	icon = 'icons/obj/clothing/obj_mask.dmi'
 	icon_state = "chew"
 	w_class = ITEM_SIZE_TINY
 	volume = 15

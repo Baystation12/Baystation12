@@ -588,7 +588,7 @@
 	desc = "The uniform of Deimos Advanced Information Systems, an IT company."
 	icon_state = "dais"
 	worn_state = "dais"
-	
+
 /obj/item/clothing/under/mbill
 	name = "\improper Major Bill's uniform"
 	desc = "A uniform belonging to Major Bill's Transportation, a major shipping company."
@@ -650,7 +650,7 @@
 	icon_state = "punpun"
 	worn_state = "punpun"
 	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/punpants
 	name = "monkey pants"
@@ -658,7 +658,7 @@
 	icon_state = "jeansmustang"
 	worn_state = "jeansmustang"
 	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	desc = "A warm looking sweater and a pair of dark blue slacks."

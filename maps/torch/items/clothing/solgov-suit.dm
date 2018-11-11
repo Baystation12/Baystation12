@@ -22,7 +22,7 @@
 	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps."
 	icon_state = "ecservice_crew"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 		)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
@@ -168,7 +168,7 @@
 	icon_state = "greydress"
 	item_state = "greydress"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 		)
 
 /obj/item/clothing/suit/dress/solgov/expedition/command

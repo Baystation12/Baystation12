@@ -38,7 +38,7 @@
 	item_icons = list(
 					slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',
 					slot_r_hand_str = 'icons/mob/onmob/items/righthand.dmi',
-					slot_belt_str = 'icons/mob/onmob/belt.dmi'
+					slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi'
 					)
 	item_state = "excalibur"
 	edge = 1
