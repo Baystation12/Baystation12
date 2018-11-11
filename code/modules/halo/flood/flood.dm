@@ -72,6 +72,33 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner.flood_die(src)
 		flood_spawner = null
 
+/mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
+	h.Stun(999)
+	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
+	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	if(istype(h.species,/datum/species/sangheili))
+		if(prob(50))
+			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
+		else
+			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+
+	spawn(INFECT_DELAY)
+		var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
+		new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
+		new_combat_form.health *= PLAYER_FLOOD_HEALTH_MOD
+		new_combat_form.forceMove(h.loc)
+		new_combat_form.ckey = h.ckey
+		new_combat_form.name = h.real_name
+		if(prob(25))
+			playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
+		if(new_combat_form.ckey)
+			new_combat_form.stop_automated_movement = 1
+		for(var/obj/i in h.contents)
+			h.drop_from_inventory(i)
+		qdel(h)
+		adjustBruteLoss(1)
+
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"
 	icon = 'code/modules/halo/flood/flood_infection.dmi'
@@ -125,35 +152,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
 	var/obj/infest_placeholder = new /obj/effect/dead_infestor
 	h.contents += infest_placeholder
-	spawn(INFECT_DELAY)
-		h.Stun(999)
-		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
-		new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-		do_infect(h)
+	h.vessel.add_reagent("Unknown Biological Contaminant",15)
 	return 1
-
-/mob/living/simple_animal/hostile/flood/infestor/proc/do_infect(var/mob/living/carbon/human/h)
-	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
-	if(istype(h.species,/datum/species/sangheili))
-		if(prob(50))
-			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
-		else
-			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
-
-	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
-	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
-	new_combat_form.health *= PLAYER_FLOOD_HEALTH_MOD
-	new_combat_form.forceMove(h.loc)
-	new_combat_form.ckey = h.ckey
-	new_combat_form.name = h.real_name
-	if(prob(25))
-		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
-	if(new_combat_form.ckey)
-		new_combat_form.stop_automated_movement = 1
-	for(var/obj/i in h.contents)
-		h.drop_from_inventory(i)
-	qdel(h)
-	adjustBruteLoss(1)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
