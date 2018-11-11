@@ -1,0 +1,4 @@
+author: "Alex6511"
+delete-after: True
+changes: 
+  - tweak: "Reduced the frequency of windows updates events by half"
