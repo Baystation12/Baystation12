@@ -146,8 +146,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(is_being_infested(h))
 		return 0
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
-	h.vessel.remove_reagent(/datum/reagent/blood,15) //Remove some blood to make way for the infectiontoxin. This also models the "corruption" of the bloodstream.
-	h.vessel.add_reagent(/datum/reagent/floodinfectiontoxin,15)
+	h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,15)
 	adjustBruteLoss(1)
 	return 1
 
