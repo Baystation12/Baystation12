@@ -42,8 +42,22 @@
 
 /datum/reagent/floodinfectiontoxin/overdose(var/mob/living/carbon/human/H)
 	holder.remove_reagent("Unknown Biological Contaminant",volume)
+	if(locate(/obj/effect/dead_infestor) in H.contents)
+		return
 	to_chat(H,"<span class = 'danger'>Your flesh writhes and twists against your own control...</span>")
-	spawn(20)
-		var/mob/living/simple_animal/hostile/flood/spawned_flood = new
-		spawned_flood.do_infect(H)
-		qdel(spawned_flood)
+	var/mob/living/simple_animal/hostile/flood/spawned_flood = new
+	spawned_flood.do_infect(H)
+	qdel(spawned_flood)
+
+//Items for testing.
+/obj/item/weapon/reagent_containers/syringe/floodtox
+	name = "Unknown Biological Contaminant"
+	desc = "A syringe filled with a green, bloodlike substance that appears to have lifeforms floating in it."
+	volume = 30
+	amount_per_transfer_from_this = 30
+
+
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/floodinfectiontoxin, 30)
+		update_icon()

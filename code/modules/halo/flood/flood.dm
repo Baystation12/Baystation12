@@ -73,6 +73,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
+	sound_to(h,TO_PLAYER_INFECTED_SOUND)
+	var/obj/infest_placeholder = new /obj/effect/dead_infestor
+	h.contents += infest_placeholder
 	h.Stun(999)
 	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
@@ -97,7 +100,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		for(var/obj/i in h.contents)
 			h.drop_from_inventory(i)
 		qdel(h)
-		adjustBruteLoss(1)
 
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"
@@ -144,15 +146,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(is_being_infested(h))
 		return 0
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
-	wander = 0
-	stop_automated_movement = 1
-	invisibility = 101
-	anchored = 1
-	density = 0
-	sound_to(h,TO_PLAYER_INFECTED_SOUND)
-	var/obj/infest_placeholder = new /obj/effect/dead_infestor
-	h.contents += infest_placeholder
-	h.vessel.add_reagent("Unknown Biological Contaminant",15)
+	h.vessel.remove_reagent(/datum/reagent/blood,15) //Remove some blood to make way for the infectiontoxin. This also models the "corruption" of the bloodstream.
+	h.vessel.add_reagent(/datum/reagent/floodinfectiontoxin,15)
+	adjustBruteLoss(1)
 	return 1
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
