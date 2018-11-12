@@ -189,7 +189,7 @@ obj/structure/closet/crate
 	desc = "A crate of emergency rations."
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 4)
+	return list(/obj/random/mre = 6)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"
