@@ -329,14 +329,8 @@
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	//Bans the most common combat items, idea is that this isn't a mass built shouldergun rig.
-	var/banned_modules = list(/obj/item/rig_module/grenade_launcher,/obj/item/rig_module/mounted,/obj/item/rig_module/fabricator )
+	banned_modules = list(/obj/item/rig_module/grenade_launcher,/obj/item/rig_module/mounted,/obj/item/rig_module/fabricator )
 	req_access = list()
-
-/obj/item/weapon/rig/zero/attackby(obj/item/W as obj, mob/user as mob)
-	if(is_type_in_list(W,banned_modules))
-		to_chat(user, "<span class='danger'>\The [src] cannot mount this type of module.</span>")
-		return
-	..()
 
 /obj/item/clothing/head/helmet/space/rig/zero
 	camera = 0
