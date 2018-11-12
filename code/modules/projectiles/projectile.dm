@@ -58,6 +58,7 @@
 
 	var/fire_sound
 	var/miss_sounds
+	var/ricochet_sounds
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
