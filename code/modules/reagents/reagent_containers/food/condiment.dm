@@ -192,6 +192,97 @@
 	center_of_mass = "x=17;y=9"
 	starting_reagents = list(/datum/reagent/sugar = 20)
 
+//MRE condiments and drinks.
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet
+	icon_state = "packet"
+	w_class = ITEM_SIZE_TINY
+	possible_transfer_amounts = "1;5;10"
+	amount_per_transfer_from_this = 1
+	volume = 10
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt
+	name = "salt packet"
+	desc = "Contains 10u of table salt."
+	starting_reagents = list(/datum/reagent/sodiumchloride = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper
+	name = "pepper packet"
+	desc = "Contains 10u of black pepper."
+	starting_reagents = list(/datum/reagent/blackpepper = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar
+	name = "sugar packet"
+	desc = "Contains 10u of refined sugar."
+	starting_reagents = list(/datum/reagent/sugar = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly
+	name = "jelly packet"
+	desc = "Contains 10u of cherry jelly. Best used for spreading on crackers."
+	starting_reagents = list(/datum/reagent/nutriment/cherryjelly = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/honey
+	name = "honey packet"
+	desc = "Contains 10u of honey."
+	starting_reagents = list(/datum/reagent/sugar = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin
+	name = "hot sauce packet"
+	desc = "Contains 10u of hot sauce. Enjoy in moderation."
+	starting_reagents = list(/datum/reagent/capsaicin = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup
+	name = "ketchup packet"
+	desc = "Contains 10u of ketchup."
+	starting_reagents = list(/datum/reagent/nutriment/ketchup = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo
+	name = "mayonnaise packet"
+	desc = "Contains 10u of mayonnaise."
+	starting_reagents = list(/datum/reagent/nutriment/mayo = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy
+	name = "soy sauce packet"
+	desc = "Contains 10u of soy sauce."
+	starting_reagents = list(/datum/reagent/nutriment/soysauce = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee
+	name = "coffee powder packet"
+	desc = "Contains 5u of coffee powder. Mix with 25u of water and heat."
+	starting_reagents = list(/datum/reagent/nutriment/coffee = 5)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/tea
+	name = "tea powder packet"
+	desc = "Contains 5u of black tea powder. Mix with 25u of water and heat."
+	starting_reagents = list(/datum/reagent/nutriment/tea = 5)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/cocoa
+	name = "cocoa powder packet"
+	desc = "Contains 5u of cocoa powder. Mix with 25u of water and heat."
+	starting_reagents = list(/datum/reagent/nutriment/coco = 5)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/grape
+	name = "grape juice powder packet"
+	desc = "Contains 10u of powdered grape juice. Mix with 30u of water."
+	starting_reagents = list(/datum/reagent/nutriment/instantjuice/grape = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/orange
+	name = "orange juice powder packet"
+	desc = "Contains 10u of powdered orange juice. Mix with 30u of water."
+	starting_reagents = list(/datum/reagent/nutriment/instantjuice/orange = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/watermelon
+	name = "watermelon juice powder packet"
+	desc = "Contains 10u of powdered watermelon juice. Mix with 30u of water."
+	starting_reagents = list(/datum/reagent/nutriment/instantjuice/watermelon = 10)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/apple
+	name = "apple juice powder packet"
+	desc = "Contains 10u of powdered apple juice. Mix with 30u of water."
+	starting_reagents = list(/datum/reagent/nutriment/instantjuice/apple = 10)
+
+//End of MRE stuff.
+
 /obj/item/weapon/reagent_containers/food/condiment/flour
 	name = "flour sack"
 	desc = "A big bag of flour. Good for baking!"

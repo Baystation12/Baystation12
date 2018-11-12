@@ -1364,6 +1364,24 @@
 	result_amount = 5
 	mix_message = "The solution thickens into a creamy brown beverage."
 
+/datum/chemical_reaction/coffee
+	name = "Coffee"
+	result = /datum/reagent/drink/coffee
+	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coffee = 1)
+	result_amount = 5
+	minimum_temperature = 70 CELCIUS
+	maximum_temperature = (70 CELCIUS) + 100
+	mix_message = "The solution thickens into a steaming dark brown beverage."
+
+/datum/chemical_reaction/tea
+	name = "Black tea"
+	result = /datum/reagent/drink/tea
+	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/tea = 1)
+	result_amount = 5
+	minimum_temperature = 70 CELCIUS
+	maximum_temperature = (70 CELCIUS) + 100
+	mix_message = "The solution thickens into a steaming black beverage."
+
 /datum/chemical_reaction/hot_coco
 	name = "Hot Coco"
 	result = /datum/reagent/drink/hot_coco
@@ -1372,6 +1390,34 @@
 	minimum_temperature = 70 CELCIUS
 	maximum_temperature = (70 CELCIUS) + 100
 	mix_message = "The solution thickens into a steaming brown beverage."
+
+/datum/chemical_reaction/grapejuice
+	name = "Grape Juice"
+	result = /datum/reagent/drink/juice/grape
+	required_reagents = list(/datum/reagent/water = 3, /datum/reagent/nutriment/instantjuice/grape = 1)
+	result_amount = 3
+	mix_message = "The solution settles into a purplish-red beverage."
+
+/datum/chemical_reaction/orangejuice
+	name = "Orange Juice"
+	result = /datum/reagent/drink/juice/orange
+	required_reagents = list(/datum/reagent/water = 3, /datum/reagent/nutriment/instantjuice/orange = 1)
+	result_amount = 3
+	mix_message = "The solution settles into an orange beverage."
+
+/datum/chemical_reaction/watermelonjuice
+	name = "Watermelon Juice"
+	result = /datum/reagent/drink/juice/watermelon
+	required_reagents = list(/datum/reagent/water = 3, /datum/reagent/nutriment/instantjuice/watermelon = 1)
+	result_amount = 3
+	mix_message = "The solution settles into a red beverage."
+
+/datum/chemical_reaction/applejuice
+	name = "Apple Juice"
+	result = /datum/reagent/drink/juice/apple
+	required_reagents = list(/datum/reagent/water = 3, /datum/reagent/nutriment/instantjuice/apple = 1)
+	result_amount = 3
+	mix_message = "The solution settles into a clear brown beverage."
 
 /datum/chemical_reaction/soysauce
 	name = "Soy Sauce"
