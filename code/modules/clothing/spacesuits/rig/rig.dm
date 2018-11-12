@@ -88,6 +88,8 @@
 	var/datum/wires/rig/wires
 	var/datum/effect/effect/system/spark_spread/spark_system
 
+	var/banned_modules = list()
+
 /obj/item/weapon/rig/examine()
 	. = ..()
 	if(wearer)
