@@ -9431,6 +9431,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/habcheck)
 "uO" = (
@@ -13721,6 +13722,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/disposalpipe/trunk{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "FA" = (
@@ -16728,6 +16732,18 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/diplomat)
+"Nn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/thirddeck/center)
 "No" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/suit_storage_unit/atmos/alt/sol,
@@ -18167,6 +18183,10 @@
 	pixel_x = -22;
 	pixel_y = 26
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "Sn" = (
@@ -18832,6 +18852,30 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
+"Us" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/structure/disposalpipe/junction{
+	icon_state = "pipe-j1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/thirddeck/center)
 "Ut" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -35601,8 +35645,8 @@ lu
 lu
 kK
 NA
-VW
-OI
+Us
+Nn
 uN
 Sm
 Ns
