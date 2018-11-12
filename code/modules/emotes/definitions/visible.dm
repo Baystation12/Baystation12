@@ -84,7 +84,7 @@
 	emote_message_3p_target = "USER bows to TARGET."
 	emote_message_3p = "USER bows."
 
-/decl/emote/audible/salute
+/decl/emote/visible/salute
 	key = "salute"
 	emote_message_3p_target = "USER salutes TARGET."
 	emote_message_3p = "USER salutes."
@@ -323,7 +323,7 @@
 	check_restraints = TRUE
 	emote_message_3p = "USER shoves USER_THEIR hands in USER_THEIR pockets."
 
-/decl/emote/audible/rsalute
+/decl/emote/visible/rsalute
 	key = "rsalute"
 	check_restraints = TRUE
 	emote_message_3p = "USER returns the salute."
