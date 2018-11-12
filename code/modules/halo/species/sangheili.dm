@@ -34,7 +34,8 @@
 	BP_EYES =     /obj/item/organ/internal/eyes
 	)
 
-	ignore_equipment_slowdown = 1
+	equipment_slowdown_multiplier = 0.5
+	ignore_equipment_threshold = 3
 
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
