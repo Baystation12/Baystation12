@@ -118,6 +118,10 @@
 		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 		return M
 
+	if(istype(attacked,/obj/structure))
+		var/obj/structure/attacked_obj = attacked
+		attacked_obj.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	if(!ranged)
 		return
