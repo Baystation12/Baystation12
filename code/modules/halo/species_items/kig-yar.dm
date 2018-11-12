@@ -55,7 +55,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	canremove = 0
 
-/obj/item/clothing/under/covenant/kigyar
+/obj/item/clothing/under/kigyar
 	name = "Kig-Yar Body-Suit"
 	desc = "A Kig-Yar body suit. Meant to be worn underneath a combat harness"
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
@@ -65,13 +65,13 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
-/obj/item/clothing/under/covenant/kigyar/armless
+/obj/item/clothing/under/kigyar/armless
 	icon_state = "jackal_bodysuit_armless_s"
 	worn_state = "jackal_bodysuit_armless"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 	species_restricted = list("Kig-Yar")
 
-/obj/item/clothing/suit/armor/covenant/kigyar
+/obj/item/clothing/suit/armor/kigyar
 	name = "Kig-Yar Combat Harness"
 	desc = "A protective harness for use during combat."
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
