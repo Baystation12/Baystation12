@@ -30,12 +30,16 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 	else
-		if(!species.ignore_equipment_slowdown)
-			for(var/slot = slot_first to slot_last)
-				var/obj/item/I = get_equipped_item(slot)
-				if(I)
-					tally += I.slowdown_general
-					tally += I.slowdown_per_slot[slot]
+		var/equipment_slowdown = 0
+		for(var/slot = slot_first to slot_last)
+			var/obj/item/I = get_equipped_item(slot)
+			if(I)
+				equipment_slowdown += I.slowdown_general
+				equipment_slowdown += I.slowdown_per_slot[slot]
+
+		equipment_slowdown = max(equipment_slowdown - species.ignore_equipment_threshold, 0)
+		equipment_slowdown *= species.equipment_slowdown_multiplier
+		tally += equipment_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
