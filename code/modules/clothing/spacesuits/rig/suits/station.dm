@@ -318,8 +318,8 @@
 	icon_state = "null_rig"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 20)
 	online_slowdown = 0
-	offline_slowdown = 0
-	offline_vision_restriction = TINT_HEAVY
+	offline_slowdown = 1
+	offline_vision_restriction = TINT_HEAVY //You're wearing a flash protective space suit without light compensation, think it makes sense
 
 	chest_type = /obj/item/clothing/suit/space/rig/zero
 	helm_type = /obj/item/clothing/head/helmet/space/rig/zero
@@ -333,7 +333,7 @@
 	req_access = list()
 
 /obj/item/clothing/head/helmet/space/rig/zero
-	camera = 0
+	camera = null
 	species_restricted = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL)
 	light_overlay = "null_light"
 	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information"
@@ -350,13 +350,13 @@
 /obj/item/weapon/rig/zero/on_update_icon(var/update_mob_icon)
 	..()
 	//Append the f for female states
-	if(!istype(src.loc, /mob/living/carbon/human))
+	if(!ishuman(loc))
 		return
-	var/mob/living/carbon/human/user = src.loc
+	var/mob/living/carbon/human/user = loc
 	if(!chest) return
 	//If there's a better way to do this with current rig setup tell me
 	//Do not further append if current state already indicates gender
-	if(user.gender == FEMALE && !findtext(chest.icon_state,"_f"))
+	if(user.gender == FEMALE && !findtext(chest.icon_state,"_f", -2))
 		chest.icon_state = "[chest.icon_state]_f"
 	chest.update_icon(1)
 
