@@ -1,7 +1,7 @@
 #define GRUNT_GEAR_ICON 'code/modules/halo/icons/species/grunt_gear.dmi'
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"unggoy")							//Code breaks if not placed in species folder,
+	..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
 	name = species.get_random_name()
 	real_name = name
 	faction = "Covenant"
@@ -17,7 +17,7 @@
 	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 30, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
 
-	species_restricted = list("unggoy")
+	species_restricted = list("Unggoy")
 
 	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank)
 
@@ -29,7 +29,7 @@
 	icon_state = "rebreather"
 	item_state = "rebreather"
 
-	species_restricted = list("unggoy")
+	species_restricted = list("Unggoy")
 
 	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
@@ -64,7 +64,7 @@
 	air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /obj/item/weapon/tank/methane/unggoy_internal
-	name = "unggoy methane tank"
+	name = "Unggoy methane tank"
 	desc = "A methane tank usually found affixed to a unggoy combat harness."
 
 	canremove = 0
@@ -92,7 +92,7 @@
 
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
 
-	species_restricted = list("unggoy")
+	species_restricted = list("Unggoy")
 
 	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank)
 
