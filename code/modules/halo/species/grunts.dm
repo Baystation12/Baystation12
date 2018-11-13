@@ -24,6 +24,9 @@
 
 	warning_low_pressure = 25
 	hazard_low_pressure = -1
+	equipment_slowdown_multiplier = 0.75
+	ignore_equipment_threshold = 2
+	slowdown = 1
 
 /datum/species/unggoy/create_organs(var/mob/living/carbon/human/H)
 	. = ..()
