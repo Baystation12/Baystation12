@@ -31,7 +31,11 @@
 	set desc = "Pick a map template to load as a new zlevel, or a set of new zlevels if multi-z."
 	set name = "Map Template - Place In New Z"
 
-	if (!check_rights(R_FUN)) return
+	if(!check_rights(R_FUN))
+		return
+	if(GAME_STATE < RUNLEVEL_LOBBY)
+		to_chat(usr, "Please wait for the master controller to initialize before loading maps!")
+		return
 
 	var/map = input(usr, "Choose a Map Template to place on a new zlevel","Place Map Template") as null|anything in SSmapping.map_templates
 	if(!map)
@@ -45,7 +49,7 @@
 		if (!jesus_take_the_wheel)
 			return
 
-	var/new_z_centre = template.load_new_z()
+	var/new_z_centre = template.load_new_z(FALSE) // Don't skip changeturf
 	if (new_z_centre)
 		log_and_message_admins("has placed a map template ([template.name]) on a new zlevel.", location=new_z_centre)
 	else

@@ -59,10 +59,7 @@
 
 //Bowties
 /obj/item/clothing/accessory/bowtie
-	var/icon_tied
-/obj/item/clothing/accessory/bowtie/New()
-	icon_tied = icon_tied || icon_state
-	..()
+	var/tied = TRUE
 
 /obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
@@ -80,29 +77,18 @@
 
 	if(usr.incapacitated())
 		return 0
+	do_toggle(usr)
 
-	var/obj/item/clothing/accessory/bowtie/H = null
-	if (istype(src, /obj/item/clothing/accessory/bowtie))
-		H = src
-	else
-		H = locate() in src
-
-	if(H)
-		H.do_toggle(usr)
-
-/obj/item/clothing/accessory/bowtie/proc/do_toggle(user)
-	if(icon_state == icon_tied)
-		to_chat(usr, "You untie [src].")
-	else
-		to_chat(usr, "You tie [src].")
-
+/obj/item/clothing/accessory/bowtie/proc/do_toggle(mob/user)
+	user.visible_message("\The [user] [tied ? "un" : ""]ties \the [src].", "You [tied ? "un" : ""]tie \the [src].")
+	tied = !tied
 	update_icon()
 
 /obj/item/clothing/accessory/bowtie/on_update_icon()
-	if(icon_state == icon_tied)
-		icon_state = "[icon_tied]_untied"
+	if(tied)
+		icon_state = initial(icon_state)
 	else
-		icon_state = icon_tied
+		icon_state = "[initial(icon_state)]_untied"
 
 /obj/item/clothing/accessory/bowtie/color
 	name = "bowtie"
