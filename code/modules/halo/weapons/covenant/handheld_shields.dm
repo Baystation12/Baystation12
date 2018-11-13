@@ -140,6 +140,7 @@
 	slot_r_hand_str = SHIELD_GAUNTLET_ICON_INHAND_R)
 
 	var/obj/item/clothing/gloves/shield_gauntlet/creator_gauntlet
+	canremove = 0
 
 /obj/item/weapon/gauntlet_shield/New(var/obj/created_by)
 	. = ..()
