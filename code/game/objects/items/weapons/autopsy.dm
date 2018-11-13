@@ -187,3 +187,7 @@
 		chemtraces += initial(R.name)
 
 	return 1
+
+/obj/item/weapon/autopsy_scanner/attack_self(mob/user as mob)
+	print_data(user)
+	return 0
