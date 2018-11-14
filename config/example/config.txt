@@ -148,8 +148,8 @@ VOTE_AUTOTRANSFER_INITIAL 108000
 ##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes)
 VOTE_AUTOTRANSFER_INTERVAL 18000
 
-## Time left (seconds) before round start when automatic gamemote vote is called (default 100).
-VOTE_AUTOGAMEMODE_TIMELEFT 100
+## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
+VOTE_AUTOGAMEMODE_TIMELEFT 160
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
