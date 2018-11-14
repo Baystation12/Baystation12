@@ -1548,6 +1548,8 @@
 #include "code\modules\halo\species_items\covenant_comms.dm"
 #include "code\modules\halo\species_items\grunt.dm"
 #include "code\modules\halo\species_items\grunt_outfits.dm"
+#include "code\modules\halo\species_items\jiralhanae.dm"
+#include "code\modules\halo\species_items\jiralhanae_outfit.dm"
 #include "code\modules\halo\species_items\kig-yar.dm"
 #include "code\modules\halo\species_items\kig-yar_outfits.dm"
 #include "code\modules\halo\species_items\lekgolo.dm"
