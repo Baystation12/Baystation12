@@ -27,6 +27,7 @@
 	var/static/next_assembly_id = 0
 	var/interact_page = 0
 	var/components_per_page = 5
+	health = 30
 	pass_flags = 0
 	armor = list("melee" = 50, "bullet" = 70, "laser" = 70, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 	anchored = FALSE
@@ -58,9 +59,24 @@
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
+	if(health != initial(health))
+		if(health <= initial(health)/2)
+			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
+		else
+			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
 
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
+
+
+/obj/item/device/electronic_assembly/proc/take_damage(var/amnt)
+	health = health - amnt
+	if(health <= 0)
+		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
+		qdel(src)
+	else if(health < initial(health)*0.15 && prob(5))
+		visible_message("<span class='danger'>\The [src] starts to break apart!</span>")
+
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))
@@ -86,6 +102,8 @@
 
 /obj/item/device/electronic_assembly/Destroy()
 	STOP_PROCESSING(SScircuit, src)
+	for(var/circ in assembly_components)
+		remove_component(circ)
 	return ..()
 
 /obj/item/device/electronic_assembly/Process()
@@ -93,11 +111,15 @@
 	for(var/obj/item/integrated_circuit/passive/power/P in assembly_components)
 		P.make_energy()
 
+	var/power_failure = FALSE
+	if(initial(health)/health < 0.5 && prob(5))
+		visible_message("<span class='warning'>\The [src] shudders and sparks</span>")
+		power_failure = TRUE
 	// Now spend it.
 	for(var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		if(IC.power_draw_idle)
-			if(!draw_power(IC.power_draw_idle))
+			if(power_failure || !draw_power(IC.power_draw_idle))
 				IC.power_fail()
 
 /obj/item/device/electronic_assembly/MouseDrop_T(atom/dropping, mob/user)
@@ -440,15 +462,24 @@
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
 		update_icon()
+	else if(isCoil(I))
+		var/obj/item/stack/cable_coil/C = I
+		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
+			user.visible_message("\The [user] patches up \the [src]")
+			health = min(initial(health), health + 5)
 	else
-		for(var/obj/item/integrated_circuit/input/S in assembly_components)
-			S.attackby_react(I,user,user.a_intent)
-		if(user.a_intent != I_HELP)
-			return ..()
-
+		if(user.a_intent == I_HURT) // Kill it
+			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
+			take_damage(I.force)
+		else
+			for(var/obj/item/integrated_circuit/input/S in assembly_components)
+				S.attackby_react(I,user,user.a_intent)
 
 /obj/item/device/electronic_assembly/attack_self(mob/user)
 	interact(user)
+
+/obj/item/device/electronic_assembly/bullet_act(var/obj/item/projectile/P)
+	take_damage(P.damage)
 
 /obj/item/device/electronic_assembly/emp_act(severity)
 	. = ..()
@@ -528,6 +559,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
+	health = 20
 
 /obj/item/device/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -570,6 +602,7 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
+	health = 30
 
 /obj/item/device/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -608,6 +641,7 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
+	health = 50
 
 /obj/item/device/electronic_assembly/drone/can_move()
 	return TRUE
@@ -647,6 +681,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
+	health = 10
 
 /obj/item/device/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)
