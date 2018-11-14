@@ -24,11 +24,41 @@
 
 /datum/armourspecials/regeneration/process()
 	if(active)
-		if(owner)
-			for(var/obj/item/organ/external/e in owner.bad_external_organs)
-				for(var/datum/wound/w in e.wounds)
-					w.damage -= regen_rate
-		else
-			GLOB.processing_objects -= src
+		heal_tick()
 	else if(world.time >= next_active_time)
 		active = 1
+
+/datum/armourspecials/regeneration/proc/heal_tick()
+	if(owner)
+		//heal wounds
+		for(var/obj/item/organ/external/e in owner.bad_external_organs)
+			for(var/datum/wound/w in e.wounds)
+				w.damage -= regen_rate
+
+		// Heals normal damage.
+		if(owner.getBruteLoss())
+			owner.adjustBruteLoss(-4)
+		if(owner.getFireLoss())
+			owner.adjustFireLoss(-4)
+		if(owner.getToxLoss())
+			owner.adjustToxLoss(-8)
+		if(owner.getOxyLoss())
+			owner.adjustOxyLoss(-8)
+
+		if (prob(10))
+			var/obj/item/organ/external/head/D = owner.organs_by_name["head"]
+			if (D.disfigured && !owner.getBruteLoss() && !owner.getFireLoss())
+				D.disfigured = 0
+
+		for(var/obj/item/organ/I in owner.internal_organs)
+			if(I.damage > 0)
+				I.damage = max(I.damage - 2, 0)
+				if (prob(1))
+					to_chat(src, "<span class='warning'>You sense your [I.name] regenerating...</span>")
+
+		if (prob(10))
+			for(var/limb_type in owner.species.has_limbs)
+				var/obj/item/organ/external/E = owner.organs_by_name[limb_type]
+				for(var/datum/wound/W in E.wounds)
+					if (W.wound_damage() == 0 && prob(50))
+						E.wounds -= W
