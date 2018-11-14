@@ -2681,7 +2681,7 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/random/toolbox,
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/aquila{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -3310,10 +3310,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
 "hO" = (
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/aquila{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable/cyan{
@@ -4015,7 +4014,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
 "jl" = (
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/aquila{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -4351,10 +4350,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/machinery/power/apc{
-	dir = 2;
+/obj/machinery/power/apc/shuttle/aquila{
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28
 	},
 /obj/structure/cable/cyan{
@@ -7956,7 +7953,7 @@
 	c_tag = "Aquila - Storage";
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/aquila{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -8562,7 +8559,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/aquila{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -8853,10 +8850,9 @@
 	pixel_x = 21
 	},
 /obj/structure/handrai,
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/aquila{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable/cyan{
@@ -12608,10 +12604,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/power/apc{
-	dir = 2;
+/obj/machinery/power/apc/shuttle/aquila{
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28
 	},
 /obj/structure/cable/cyan{
@@ -15830,7 +15824,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/machinery/power/apc/hyper{
+/obj/machinery/power/apc/hyper/shuttle/aquila{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
