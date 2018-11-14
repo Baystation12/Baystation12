@@ -53,7 +53,7 @@
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list(\
 		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
-		"Personal Cloaking Device" = /datum/armourspecials/cloaking,\
+		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
 		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\
 		"Overshield Emitter" = /datum/armourspecials/overshield,\
 		"Upper Body Strength Enhancements" = /datum/armourspecials/superstrength,\
