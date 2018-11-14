@@ -40,3 +40,9 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/energy/plasmarifle/brute
+	name = "Type-25 Directed Energy Rifle (overcharged)"
+	icon_state = "Brute Plasma Rifle"
+	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for extra damage."
+	recharge_time = 3
