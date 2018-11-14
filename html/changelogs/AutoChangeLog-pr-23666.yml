@@ -1,5 +1,0 @@
-author: "Roland410"
-delete-after: True
-changes: 
-  - tweak: "Gamemode vote starts at 160 seconds, giving players 100 seconds to change their character/preferences according to the voted gamemode."
-  - tweak: "Should a non-secret mode fail to start, you will have one minute to adjust your preferences or unready before roundstart."
