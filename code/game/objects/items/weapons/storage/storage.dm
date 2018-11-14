@@ -26,7 +26,7 @@
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
-	var/use_dynamic_slowdown = 0
+	var/use_dynamic_slowdown = 1
 
 /obj/item/weapon/storage/Destroy()
 	QDEL_NULL(storage_ui)
