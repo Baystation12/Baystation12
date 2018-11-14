@@ -453,12 +453,10 @@
 	icon_state = "corner_white";
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/charon{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24;
-	req_access = list(11)
+	pixel_y = 24
 	},
 /obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled,
@@ -902,10 +900,8 @@
 /obj/machinery/light,
 /obj/structure/cable/cyan,
 /obj/machinery/hologram/holopad/longrange,
-/obj/machinery/power/apc{
-	dir = 2;
+/obj/machinery/power/apc/shuttle/charon{
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1707,7 +1703,7 @@
 /obj/item/weapon/material/hatchet,
 /obj/item/weapon/storage/box/glowsticks,
 /obj/item/weapon/material/hatchet,
-/obj/machinery/power/apc/high{
+/obj/machinery/power/apc/high/shuttle/charon{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2228,10 +2224,8 @@
 	icon_state = "handrail";
 	dir = 1
 	},
-/obj/machinery/power/apc{
-	dir = 2;
+/obj/machinery/power/apc/shuttle/charon{
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -2342,10 +2336,9 @@
 	icon_state = "0-2"
 	},
 /obj/structure/handrai,
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/shuttle/charon{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/catwalk,
@@ -2814,10 +2807,8 @@
 "fP" = (
 /obj/machinery/floodlight,
 /obj/structure/cable/cyan,
-/obj/machinery/power/apc{
-	dir = 2;
+/obj/machinery/power/apc/shuttle/charon{
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28
 	},
 /obj/structure/catwalk,
