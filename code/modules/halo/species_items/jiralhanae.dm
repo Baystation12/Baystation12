@@ -8,8 +8,8 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 /obj/item/clothing/under/covenant/jiralhanae
 	name = "Jiralhanae Bodysuit"
 	desc = "A Jiralhanae body suit. Looks itchy and covered in hair."
-	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
-	icon_state = "bodysuit"
+	icon = 'code/modules/halo/icons/species/jiralhanae.dmi'
+	icon_state = "bodysuit_s"
 	worn_state = "bodysuit"
 	sprite_sheets = list("Jiralhanae" = 'code/modules/halo/icons/species/jiralhanae.dmi')
 	species_restricted = list("Jiralhanae")

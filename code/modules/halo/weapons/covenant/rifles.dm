@@ -46,3 +46,4 @@
 	icon_state = "Brute Plasma Rifle"
 	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for extra damage."
 	recharge_time = 3
+	projectile_type = /obj/item/projectile/covenant/plasmarifle/brute
