@@ -29,10 +29,10 @@
 		/datum/job/opredflag_grunt/specops,\
 		/datum/job/opredflag_jackal,\
 		/datum/job/opredflag_skirmisher,\
-		/datum/job/opredflag_skirmisher_major,\
-		/datum/job/opredflag_skirmisher_murmillo,\
-		/datum/job/opredflag_skirmisher_commando,\
-		/datum/job/opredflag_skirmisher_champion,\
+		/datum/job/opredflag_skirmisher/major,\
+		/datum/job/opredflag_skirmisher/murmillo,\
+		/datum/job/opredflag_skirmisher/commando,\
+		/datum/job/opredflag_skirmisher/champion,\
 		/datum/job/opredflag_spartan,\
 		/datum/job/opredflag_spartan/commander\
 	)
