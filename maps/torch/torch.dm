@@ -55,6 +55,7 @@
 	#include "job/supply_jobs.dm"
 
 	#include "machinery/keycard authentication.dm"
+	#include "machinery/suit_storage.dm"
 
 	#include "structures/closets.dm"
 	#include "structures/signs.dm"

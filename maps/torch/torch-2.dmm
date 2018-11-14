@@ -1,4 +1,4 @@
-//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE 
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
 /turf/space,
 /area/space)
@@ -1538,7 +1538,7 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "dJ" = (
-/obj/machinery/suit_storage_unit/atmos/alt,
+/obj/machinery/suit_storage_unit/atmos/alt/sol,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_eva)
@@ -3842,13 +3842,13 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "iE" = (
-/obj/machinery/suit_cycler/engineering,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0
 	},
+/obj/machinery/suit_cycler/engineering/alt,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_eva)
 "iG" = (
@@ -5275,13 +5275,13 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ai_monitored/storage/eva)
 "lW" = (
-/obj/machinery/suit_cycler/security,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/suit_cycler/security/alt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "lX" = (
-/obj/machinery/suit_cycler/medical,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/suit_cycler/medical/alt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "lY" = (
@@ -5906,8 +5906,8 @@
 /turf/simulated/floor/plating,
 /area/holocontrol)
 "no" = (
-/obj/machinery/suit_storage_unit/engineering/alt,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit/engineering/alt/sol,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_eva)
 "nq" = (
@@ -5996,8 +5996,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "nJ" = (
-/obj/machinery/suit_cycler/engineering,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/suit_cycler/engineering/alt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "nK" = (
@@ -10737,7 +10737,7 @@
 /area/ai_monitored/storage/eva)
 "xH" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/suit_storage_unit/medical/alt,
+/obj/machinery/suit_storage_unit/medical/alt/sol,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "xI" = (
@@ -11178,6 +11178,11 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/diplomat)
+"yD" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit/atmos/alt/sol,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/engine_eva)
 "yE" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -11567,7 +11572,7 @@
 /area/maintenance/thirddeck/aftport)
 "zz" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/suit_storage_unit/engineering/alt,
+/obj/machinery/suit_storage_unit/engineering/alt/sol,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "zA" = (
@@ -16725,7 +16730,7 @@
 /area/crew_quarters/diplomat)
 "No" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/suit_storage_unit/atmos/alt,
+/obj/machinery/suit_storage_unit/atmos/alt/sol,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "Nq" = (
@@ -19421,7 +19426,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/suit_storage_unit/medical/alt,
+/obj/machinery/suit_storage_unit/medical/alt/sol,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ai_monitored/storage/eva)
 "Wo" = (
@@ -42863,7 +42868,7 @@ jq
 XC
 ds
 nA
-dJ
+yD
 dM
 iE
 Wl
