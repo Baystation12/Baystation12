@@ -1,3 +1,7 @@
+
+/datum/job/covenant
+	loadout_allowed = FALSE
+
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
 	total_positions = 1

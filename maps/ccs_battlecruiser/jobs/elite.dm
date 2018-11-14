@@ -6,7 +6,7 @@
 	selection_color = "#9900ff"
 	account_allowed = 0               // Does this job type come with a station account?
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
-	loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
+	loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
 	announced = TRUE                  //If their arrival is announced on radio
 	generate_email = 0
 	whitelisted_species = list(/datum/species/sangheili)
