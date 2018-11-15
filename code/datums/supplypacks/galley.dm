@@ -84,8 +84,7 @@
 					/obj/item/weapon/storage/mre/menu7,
 					/obj/item/weapon/storage/mre/menu8,
 					/obj/item/weapon/storage/mre/menu9,
-					/obj/item/weapon/storage/mre/menu10,
-					/obj/item/weapon/storage/mre/menu11)
+					/obj/item/weapon/storage/mre/menu10)
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "emergency rations"
