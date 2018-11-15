@@ -225,26 +225,6 @@ MRE Stuff
 	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo
 	)
 
-/obj/item/weapon/storage/mre/random
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one has a random menu."
-	startswith = list(
-	/obj/random/mremain,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
-
 /obj/item/weapon/storage/mrebag
 	name = "main course"
 	desc = "A vacuum-sealed bag containing the MRE's main course. Self-heats when opened."
