@@ -4,6 +4,7 @@
 	var/next_active_time = 0
 	var/regen_rate = 2
 	var/emp_disable_duration = 100
+	var/damage_disable_duration = 70
 	var/obj/item/worn
 	var/mob/living/carbon/human/owner
 
@@ -27,6 +28,14 @@
 		heal_tick()
 	else if(world.time >= next_active_time)
 		active = 1
+
+/datum/armourspecials/regeneration/handle_shield(mob/m,damage,atom/damage_source)
+	. = 0
+
+	//taking damage disables regeneration
+	if(damage > 0)
+		active = 0
+		next_active_time = world.time + damage_disable_duration
 
 /datum/armourspecials/regeneration/proc/heal_tick()
 	if(owner)
