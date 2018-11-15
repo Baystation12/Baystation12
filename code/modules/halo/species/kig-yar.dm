@@ -18,9 +18,9 @@
 	flags = NO_MINOR_CUT
 	darksight = 6
 	brute_mod = 1.1
-	slowdown = -1.5 //-1 to negate noshoes, -0.5 for their natural speed increase.
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(0,0)
+	total_health = 150
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -35,6 +35,21 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/hollow_bones),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
+
+/datum/species/kig_yar/create_organs(var/mob/living/carbon/human/H)
+	. = ..()
+
+	H.equip_to_slot(new /obj/item/clothing/shoes/ruutian_boots,slot_shoes)
+
+
+/obj/item/clothing/shoes/ruutian_boots
+	name = "Ruutian leg armour"
+	desc = "The natural armor on your legs provides a small amount of protection against the elements."
+	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon_state = "naturallegarmor"
+	item_state = " "
+
+	canremove = 0
 
 /datum/species/kig_yar/get_random_name(var/gender)
 	return pick(GLOB.first_names_kig_yar)
@@ -59,10 +74,10 @@
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 
 	pain_mod = 0.9
-	brute_mod = 0.95
-	slowdown = -1.75
+	brute_mod = 1.1
+	slowdown = -3
 
-	total_health = 225
+	total_health = 150
 	pixel_offset_x = -4
 
 	item_icon_offsets = list(4,-1)

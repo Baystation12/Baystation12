@@ -10,7 +10,7 @@
 	blood_color = "#4A4A64"
 	icobase = 'code/modules/halo/icons/species/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_elite.dmi'
-	icon_template = 'code/modules/halo/icons/species/r_elite_template.dmi'
+	icon_template = 'code/modules/halo/icons/species/Sangheili_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
 	flags = NO_MINOR_CUT
@@ -34,7 +34,8 @@
 	BP_EYES =     /obj/item/organ/internal/eyes
 	)
 
-	ignore_equipment_slowdown = 1
+	equipment_slowdown_multiplier = 0.5
+	ignore_equipment_threshold = 3
 
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return

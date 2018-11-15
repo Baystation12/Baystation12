@@ -279,7 +279,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= rand(0,2)
+			w.damage -= pick(0,0,1)
 
 /obj/effect/armoursets/SangheiliMinorSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)

@@ -189,7 +189,8 @@
 	var/list/item_icon_offsets = list(0,0) //A list (x,y) of offsets to apply to inhand images.
 	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
 	var/melee_force_multiplier = 1
-	var/ignore_equipment_slowdown = 0		//for very strong species
+	var/equipment_slowdown_multiplier = 1	//for strong or weak species
+	var/ignore_equipment_threshold = 0
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return

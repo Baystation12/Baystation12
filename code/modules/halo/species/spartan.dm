@@ -61,7 +61,8 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/augmented)
 		)
 
-	ignore_equipment_slowdown = 1
+	equipment_slowdown_multiplier = 0.5
+	ignore_equipment_threshold = 3
 
 /datum/species/spartan/get_random_name(var/gender)
 	var/name = ""

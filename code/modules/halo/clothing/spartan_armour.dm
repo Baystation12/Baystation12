@@ -51,9 +51,26 @@
 	allowed = list(/obj/item/weapon/tank)
 	totalshields = 150
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
+	var/list/available_abilities = list(\
+		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
+		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
+		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\
+		"Overshield Emitter" = /datum/armourspecials/overshield,\
+		"Upper Body Strength Enhancements" = /datum/armourspecials/superstrength,\
+		"Leg Speed and Agility Enhancements" = /datum/armourspecials/superspeed\
+		)
 
 /obj/item/clothing/under/spartan_internal/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()
 	if(gender == FEMALE)
 		I.icon_state += "_f"
 	return I
+
+/obj/item/clothing/suit/armor/special/spartan/equipped(var/mob/user, var/slot)
+	..()
+
+	spawn(0)
+		if(specials.len <= 2 && available_abilities.len && user.client)
+			var/ability_type_string = input(user, "Choose the armour ability of your MJOLNIR","MJOLNIR Armour Ability") in available_abilities
+			var/ability_type = available_abilities[ability_type_string]
+			specials.Add(new ability_type(src))

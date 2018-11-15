@@ -26,7 +26,7 @@
 		user.visible_message("<span class = 'warning'>[user] deactivates their active camoflage</span>")
 	else
 		to_chat(user,"<span class = 'danger'>Your active camoflage fails!</span>")
-		user.visible_message("<span calss = 'warning'>[user]'s active camoflage sputters and fails!</span>")
+		user.visible_message("<span class = 'warning'>[user]'s active camoflage sputters and fails!</span>")
 
 /datum/armourspecials/cloaking/proc/disrupt_cloak(var/disrupt_time = cloak_recover_time)
 	if(!src.cloak_active)
