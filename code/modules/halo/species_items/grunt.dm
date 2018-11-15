@@ -64,7 +64,7 @@
 	air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /obj/item/weapon/tank/methane/unggoy_internal
-	name = "unggoy methane tank"
+	name = "Unggoy methane tank"
 	desc = "A methane tank usually found affixed to a unggoy combat harness."
 
 	canremove = 0

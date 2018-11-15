@@ -1,6 +1,8 @@
 
 /datum/game_mode/stranded/proc/spawn_attackers_tick(var/amount = 1)
 	set background = 1
+	if(allowed_ghost_roles.len == 0 || isnull(allowed_ghost_roles))
+		allowed_ghost_roles += list(/datum/ghost_role/flood_combat_form)
 	amount += bonus_spawns
 	bonus_spawns = 0
 	while(amount >= 1)
