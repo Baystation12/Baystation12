@@ -2463,6 +2463,7 @@
 	filling_color = "#f5deb8"
 	center_of_mass = "x=17;y=6"
 	nutriment_desc = list("salt" = 1, "cracker" = 2)
+	w_class = ITEM_SIZE_TINY
 	nutriment_amt = 1
 
 /////////////////////////////////////////////////PIZZA////////////////////////////////////////
@@ -3182,6 +3183,17 @@
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/iron, 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/meatcube
+	name = "cubed meat"
+	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
+	icon_state = "meatcube"
+	filling_color = "#7a3d11"
+	center_of_mass = "x=16;y=16"
+	bitesize = 3
+/obj/item/weapon/reagent_containers/food/snacks/meatcube/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 15)
 
 /obj/item/weapon/reagent_containers/food/snacks/tastybread
 	name = "bread tube"

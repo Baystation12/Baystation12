@@ -1174,3 +1174,101 @@ var/list/random_useful_
 	// 1% chance that we reach here
 	var/lunches = lunchables_lunches()
 	return lunches[pick(lunches)]
+
+//Random MRE stuff
+
+/obj/random/mre
+	name = "random MRE"
+	desc = "This is a random single MRE."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "mre"
+
+/obj/random/mre/spawn_choices()
+	return list(/obj/item/weapon/storage/mre,
+				/obj/item/weapon/storage/mre/menu2,
+				/obj/item/weapon/storage/mre/menu3,
+				/obj/item/weapon/storage/mre/menu4,
+				/obj/item/weapon/storage/mre/menu5,
+				/obj/item/weapon/storage/mre/menu6,
+				/obj/item/weapon/storage/mre/menu7,
+				/obj/item/weapon/storage/mre/menu8,
+				/obj/item/weapon/storage/mre/menu9,
+				/obj/item/weapon/storage/mre/menu10)
+
+
+/obj/random/mremain
+	name = "random MRE main course"
+	desc = "This is a random main course for MREs."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "pouch"
+
+/obj/random/mremain/spawn_choices()
+	return list(/obj/item/weapon/storage/mrebag,
+				/obj/item/weapon/storage/mrebag/menu2,
+				/obj/item/weapon/storage/mrebag/menu3,
+				/obj/item/weapon/storage/mrebag/menu4,
+				/obj/item/weapon/storage/mrebag/menu5,
+				/obj/item/weapon/storage/mrebag/menu6,
+				/obj/item/weapon/storage/mrebag/menu7,
+				/obj/item/weapon/storage/mrebag/menu8)
+
+
+/obj/random/mreside
+	name = "random MRE side dish"
+	desc = "This is a random side dish for MREs."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "pouch"
+
+/obj/random/mreside/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/snacks/tossedsalad,
+				/obj/item/weapon/reagent_containers/food/snacks/boiledrice,
+				/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
+				/obj/item/weapon/reagent_containers/food/snacks/twobread,
+				/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast)
+
+/obj/random/mredessert
+	name = "random MRE dessert"
+	desc = "This is a random dessert for MREs."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "pouch"
+
+/obj/random/mredessert/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
+				/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
+				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+				/obj/item/weapon/reagent_containers/food/snacks/cookie)
+
+/obj/random/mrehotdrinks
+	name = "random MRE hot drink"
+	desc = "This is a random hot drink for MREs."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "packet"
+
+/obj/random/mrehotdrinks/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/tea,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/cocoa)
+
+/obj/random/mrejuice
+	name = "random MRE juice"
+	desc = "This is a random juice powder packet for MREs."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "packet"
+
+/obj/random/mrejuice/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/grape,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/orange,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/watermelon,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/apple)
+
+/obj/random/mrespread
+	name = "random MRE spread"
+	desc = "This is a random spread packet for MREs."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "packet"
+
+/obj/random/mrespread/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/honey)

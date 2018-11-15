@@ -72,6 +72,24 @@
 	containername = "pizza crate"
 	supply_method = /decl/supply_method/randomized
 
+/decl/hierarchy/supply_pack/galley/rations
+	num_contained = 6
+	name = "Emergency - Ready-to-eat Meals"
+	contains = list(/obj/item/weapon/storage/mre,
+					/obj/item/weapon/storage/mre/menu2,
+					/obj/item/weapon/storage/mre/menu3,
+					/obj/item/weapon/storage/mre/menu4,
+					/obj/item/weapon/storage/mre/menu5,
+					/obj/item/weapon/storage/mre/menu6,
+					/obj/item/weapon/storage/mre/menu7,
+					/obj/item/weapon/storage/mre/menu8,
+					/obj/item/weapon/storage/mre/menu9,
+					/obj/item/weapon/storage/mre/menu10)
+	cost = 30
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "emergency rations"
+	supply_method = /decl/supply_method/randomized
+
 /decl/hierarchy/supply_pack/galley/party
 	name = "Bar - Party equipment"
 	contains = list(
