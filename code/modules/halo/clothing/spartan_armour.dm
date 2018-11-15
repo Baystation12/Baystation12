@@ -67,8 +67,10 @@
 	return I
 
 /obj/item/clothing/suit/armor/special/spartan/equipped(var/mob/user, var/slot)
-	if(specials.len <= 2 && available_abilities.len && user.client)
-		var/ability_type_string = input(user, "Choose the armour ability of your MJOLNIR","MJOLNIR Armour Ability") in available_abilities
-		var/ability_type = available_abilities[ability_type_string]
-		specials.Add(new ability_type(src))
 	..()
+
+	spawn(0)
+		if(specials.len <= 2 && available_abilities.len && user.client)
+			var/ability_type_string = input(user, "Choose the armour ability of your MJOLNIR","MJOLNIR Armour Ability") in available_abilities
+			var/ability_type = available_abilities[ability_type_string]
+			specials.Add(new ability_type(src))
