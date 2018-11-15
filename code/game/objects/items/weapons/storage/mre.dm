@@ -3,7 +3,7 @@ MRE Stuff
  */
 
 /obj/item/weapon/storage/mre
-	name = "Standard MRE"
+	name = "standard MRE"
 	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "mre"
@@ -131,7 +131,7 @@ MRE Stuff
 
 /obj/item/weapon/storage/mrebag/on_update_icon()
 	if(opened)
-		icon_state = "pouch[opened]"
+		icon_state = "[initial(icon_state)][opened]"
 	. = ..()
 
 /obj/item/weapon/storage/mrebag/attack_self(mob/user)

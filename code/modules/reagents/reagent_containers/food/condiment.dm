@@ -204,7 +204,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/salt
 	name = "salt packet"
 	desc = "Contains 5u of table salt."
-	icon_state = "packet_small_black"
+	icon_state = "packet_small_white"
 	starting_reagents = list(/datum/reagent/sodiumchloride = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper
@@ -216,7 +216,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar
 	name = "sugar packet"
 	desc = "Contains 5u of refined sugar."
-	icon_state = "packet_small_black"
+	icon_state = "packet_small_white"
 	starting_reagents = list(/datum/reagent/sugar = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly
