@@ -241,9 +241,9 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "a762"
-	matter = list(MATERIAL_STEEL = 1800)
+	matter = list(MATERIAL_STEEL = 2400)
 	ammo_type = /obj/item/ammo_casing/a762
-	max_ammo = 15 //if we lived in a world where normal mags had 30 rounds, this would be a 20 round mag
+	max_ammo = 20
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a762/empty
@@ -298,9 +298,9 @@
 	icon_state = "c762"
 	mag_type = MAGAZINE
 	caliber = "a556"
-	matter = list(MATERIAL_STEEL = 1800)
+	matter = list(MATERIAL_STEEL = 2700)
 	ammo_type = /obj/item/ammo_casing/a556
-	max_ammo = 20
+	max_ammo = 30
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/caps
