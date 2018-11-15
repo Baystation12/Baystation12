@@ -1,6 +1,0 @@
-author: "Faustico"
-delete-after: True
-changes: 
-  - rscadd: "Added basic security belts, like normal security belts but without a holster."
-  - maptweak: "Added basic security belts to MAA lockers."
-  - tweak: "Storage accessories and holsters use two different accessory slots again."

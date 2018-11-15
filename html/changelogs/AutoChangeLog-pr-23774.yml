@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Blob resistance has been rebalanced. Brute-based weapons (Crowbars, fireaxes) are more effective against cores, while fire-based weapons (Welders, lasers*) are more effective against blob and strong blob. *Laser rifles take a 1/2 damage penalty against all blob targets. See https://github.com/Baystation12/Baystation12/pull/23774 for specific numbers."
