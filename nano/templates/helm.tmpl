@@ -81,36 +81,6 @@
 	</div>
 </div>
 
-<div class='item'>
-	<div class="itemLabel">
-		<h3>Autopilot</h3>
-	</div>
-	<div class="itemContent" style="padding-top: 10px;">
-		{{:helper.link(data.autopilot ? 'Engaged' : 'Disengaged', 'gear', { 'apilot' : 1 }, data.dest ? null : 'disabled', data.autopilot ? 'selected' : null)}}
-	</div>
-</div> 
-<div class='block'>
-	<div class='item'>
-		<div style="float:left;width:45%">
-			<span class='white'>Target coordinates:</span>
-		</div>
-		<div style="float:left;width:20%">
-			{{if data.dest}}
-				{{:helper.link(data.d_x, null, { 'setx' : 1 }, null, null)}} {{:helper.link(data.d_y, null, { 'sety' : 1 }, null, null)}}
-			{{else}}
-				{{:helper.link('None', null, { 'sety' : 1, 'setx' : 1 }, null, null)}}
-			{{/if}}
-		</div>
-	</div> 
-	<div class='item'>
-		<div style="float:left;width:45%">
-			<span class='white'>Maximum speed:</span>
-		</div>
-		<div style="float:left;width:20%">
-			{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}}
-		</div>
-	</div> 
-</div>
 
 <h3>Navigation data</h3>
 <div class='item'>
@@ -126,7 +96,6 @@
 				<span class='white'>{{:value.x}} : {{:value.y}}</span>
 		  </div>
 		  <div class='item'>
-			{{:helper.link('Plot course', 'arrowreturnthick-1-e', { 'x' : value.x, 'y' : value.y }, null, null)}}
 			{{:helper.link('Remove entry', 'close', { 'remove' : value.reference }, null, null)}}
 		  </div>
 		{{/for}}

@@ -7,12 +7,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	light_color = "#7faaff"
 	circuit = /obj/item/weapon/circuitboard/helm
 	core_skill = SKILL_PILOT
-	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
-	var/dx		//desitnation
-	var/dy		//coordinates
-	var/speedlimit = 2 //top speed for autopilot
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
@@ -33,26 +29,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			R.fields["y"] = S.y
 			known_sectors[S.name] = R
 	..()
-
-/obj/machinery/computer/ship/helm/Process()
-	..()
-	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
-		if(linked.loc == T)
-			if(linked.is_still())
-				autopilot = 0
-			else
-				linked.decelerate()
-
-		var/brake_path = linked.get_brake_path()
-
-		if((!speedlimit || linked.get_speed() < speedlimit) && get_dist(linked.loc, T) > brake_path)
-			linked.accelerate(get_dir(linked.loc, T))
-		else
-			linked.decelerate()
-
-		return
-
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
 	if(manual_control && linked)
 		linked.relaymove(user,direction)
@@ -89,14 +65,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["landed"] = linked.get_landed_info()
 		data["s_x"] = linked.x
 		data["s_y"] = linked.y
-		data["dest"] = dy && dx
-		data["d_x"] = dx
-		data["d_y"] = dy
-		data["speedlimit"] = speedlimit ? speedlimit : "None"
 		data["speed"] = linked.get_speed()
 		data["accel"] = linked.get_acceleration()
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
-		data["autopilot"] = autopilot
 		data["manual_control"] = manual_control
 		data["canburn"] = linked.can_burn()
 
@@ -163,33 +134,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			known_sectors.Remove(R.fields["name"])
 			qdel(R)
 
-	if (href_list["setx"])
-		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
-		if(!CanInteract(user,state))
-			return
-		if (newx)
-			dx = Clamp(newx, 1, world.maxx)
-
-	if (href_list["sety"])
-		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
-		if(!CanInteract(user,state))
-			return
-		if (newy)
-			dy = Clamp(newy, 1, world.maxy)
-
-	if (href_list["x"] && href_list["y"])
-		dx = text2num(href_list["x"])
-		dy = text2num(href_list["y"])
-
-	if (href_list["reset"])
-		dx = 0
-		dy = 0
-
-	if (href_list["speedlimit"])
-		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit) as num|null
-		if(newlimit)
-			speedlimit = Clamp(newlimit, 0, 100)
-
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
 		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, SKILL_ADEPT, factor = 1)))
@@ -198,9 +142,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["brake"])
 		linked.decelerate()
-
-	if (href_list["apilot"])
-		autopilot = !autopilot
 
 	if (href_list["manual"])
 		manual_control = !manual_control

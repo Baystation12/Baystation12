@@ -49,7 +49,6 @@ restricted_waypoints is list of 'shuttle name = list(landmark_tags)' pairs for w
 /obj/machinery/computer/ship/helm
 ### WHAT IT DOES
 Lets you steer ship around on overmap.
-Lets you use autopilot.
 ### HOW TO USE
 Just place it anywhere on the ship.
 
