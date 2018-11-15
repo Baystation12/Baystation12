@@ -180,4 +180,4 @@ MRE Stuff
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit)
 
 /obj/item/weapon/storage/mrebag/dessert/menu11
-	startswith = list(/obj/item/weapon/pen/crayon/random)
+	startswith = list(/obj/item/weapon/pen/crayon/rainbow)
