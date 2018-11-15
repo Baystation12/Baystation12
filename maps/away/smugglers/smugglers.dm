@@ -94,7 +94,7 @@
 /obj/random/ammo_magazine_smug/spawn_choices()
 	return list(
 		/obj/item/ammo_magazine/a10mm,
-		/obj/item/ammo_magazine/a357,
+		/obj/item/ammo_magazine/a44,
 		/obj/item/ammo_magazine/c45m,
 		/obj/item/ammo_magazine/c556,
 		/obj/item/ammo_magazine/a762)

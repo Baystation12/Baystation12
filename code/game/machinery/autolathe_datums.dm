@@ -343,9 +343,9 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/speedloader_44_rubber
-	name = "speed loader (.44 magnum, rubber)"
-	path = /obj/item/ammo_magazine/c44/rubber
+/datum/autolathe/recipe/speedloader_357_rubber
+	name = "speed loader (.357 Magnum, rubber)"
+	path = /obj/item/ammo_magazine/c357/rubber
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -481,8 +481,8 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_revolver_1
-	name = "ammunition (.357)"
-	path = /obj/item/ammo_magazine/a357
+	name = "ammunition (.44 Magnum)"
+	path = /obj/item/ammo_magazine/a44
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -498,9 +498,9 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/speedloader_44
-	name = "speed loader (.44 magnum)"
-	path = /obj/item/ammo_magazine/c44
+/datum/autolathe/recipe/speedloader_357
+	name = "speed loader (.357 Magnum)"
+	path = /obj/item/ammo_magazine/c357
 	hidden = 1
 	category = "Arms and Ammunition"
 

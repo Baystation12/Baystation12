@@ -190,10 +190,10 @@
 	access = access_solgov_crew
 
 /decl/hierarchy/supply_pack/security/magnum_ammo
-	name = "Ammo - .44 Magnum"
-	contains = list(/obj/item/ammo_magazine/c44 = 4)
+	name = "Ammo - .357 Magnum"
+	contains = list(/obj/item/ammo_magazine/c357 = 4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = ".44 magnum ammunition crate"
+	containername = ".357 magnum ammunition crate"
 	access = access_heads
 	security_level = SUPPLY_SECURITY_ELEVATED
