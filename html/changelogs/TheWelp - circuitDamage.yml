@@ -1,4 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds ability to destroy circuit assemblies via damage. Bigger assemblies means more health. Can be healed with wire."
