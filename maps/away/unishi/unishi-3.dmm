@@ -78,7 +78,7 @@
 "bz" = (/obj/structure/closet/crate/bin,/obj/effect/floor_decal/corner/brown{dir = 6},/turf/simulated/floor/tiled,/area/unishi/living)
 "bA" = (/obj/structure/closet/jcloset,/obj/structure/lattice,/obj/machinery/atmospherics/pipe/zpipe/down/supply,/obj/machinery/atmospherics/pipe/zpipe/down/scrubbers,/obj/structure/cable{d1 = 32;icon_state = "32-1"},/turf/simulated/open,/area/unishi/living)
 "bB" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor,/area/unishi/living)
-"bC" = (/obj/structure/closet,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/weapon/gun/projectile/revolver/mateba,/obj/item/weapon/handcuffs,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/unishi/living)
+"bC" = (/obj/structure/closet,/obj/item/ammo_magazine/a44,/obj/item/ammo_magazine/a44,/obj/item/ammo_magazine/a44,/obj/item/weapon/gun/projectile/revolver/mateba,/obj/item/weapon/handcuffs,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/unishi/living)
 "bD" = (/obj/structure/bed/chair/office{dir = 1},/turf/simulated/floor/tiled,/area/unishi/living)
 "bE" = (/obj/machinery/door/airlock/command{dir = 8},/turf/simulated/floor/tiled,/area/unishi/living)
 "bF" = (/obj/effect/floor_decal/corner/brown{dir = 9},/obj/effect/floor_decal/corner/brown{dir = 10},/turf/simulated/floor/tiled,/area/unishi/living)
