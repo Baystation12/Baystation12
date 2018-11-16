@@ -5,9 +5,27 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	..(new_loc,"Kig-Yar")
 	faction = "Covenant"
 
+/datum/language/ruuhti
+	name = "Ruuhti"
+	desc = "The language of the Ruuhtian KigYar"
+	native = 1
+	colour = "vox"
+	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
+	key = "R"
+	flags = RESTRICTED
+
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
 	..(new_loc,"Tvaoan Kig-Yar")
 	faction = "Covenant"
+
+/datum/language/tvoai
+	name = "Tvoai"
+	desc = "The language of the Tvaoan KigYar"
+	native = 1
+	colour = "vox"
+	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
+	key = "T"
+	flags = RESTRICTED
 
 /obj/item/clothing/head/helmet/kigyar
 	name = "Kig-Yar Scout Helmet"

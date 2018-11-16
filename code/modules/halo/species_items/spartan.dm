@@ -100,5 +100,5 @@
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan
 	l_hand = /obj/item/weapon/gun/projectile/ma5b_ar
-	l_ear = /obj/item/device/radio/headset/spartan
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double

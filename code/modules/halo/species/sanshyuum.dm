@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/species_it
 	icon_template = 'code/modules/halo/icons/species/sanshyuum_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
+	secondary_langs = list("Janjur Qomi")
 	total_health = 150		//weaker than a human
 	slowdown = 2			//slight slowdown
 	equipment_slowdown_multiplier = 2

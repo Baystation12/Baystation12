@@ -27,7 +27,7 @@
 "aA" = (/obj/structure/closet/covenant,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck1)
 "aB" = (/obj/structure/stairs/covenant/south,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck1)
 "aC" = (/obj/structure/grav_lift/double,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck1)
-"aD" = (/obj/machinery/telecomms/allinone,/turf/simulated/wall/covenant,/area/ccs_battlecruiser/deck1)
+"aD" = (/obj/machinery/telecomms/allinone,/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/simulated/wall/covenant,/area/ccs_battlecruiser/deck1)
 "aE" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck1)
 "aF" = (/obj/vehicles/ghost,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck1)
 "aG" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck1)

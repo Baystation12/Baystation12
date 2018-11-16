@@ -47,7 +47,7 @@
 
 		if(decoy_holo)
 			qdel(decoy_holo)
-		decoy_holo = new(user.loc)
+		decoy_holo = new(get_turf(user))
 		decoy_holo.copy_appearance(user)
 		// This is to try to have the illusion move at the same rate the real mob world.
 		decoy_holo.step_delay = max(user.movement_delay() + 4, 3)

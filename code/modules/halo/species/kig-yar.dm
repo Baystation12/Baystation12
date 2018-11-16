@@ -12,6 +12,7 @@
 	deform = 'code/modules/halo/icons/species/r_kig-yar.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet
 	language = "Sangheili"
+	secondary_langs = list("Ruuhti")
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_CAN_JOIN
@@ -59,7 +60,7 @@
 
 /datum/species/kig_yar_skirmisher
 	name = "Tvaoan Kig-Yar"
-	name_plural = "Kig-Yar"
+	name_plural = "Tvaoan Kig-Yar"
 	spawn_flags = SPECIES_CAN_JOIN
 	blurb = "T'Voan Skirmishers are the same species as the more common, lightly-built Ruutian Jackals, but \
 		they are subspecies that is faster, stronger, can jump higher and are more agile than any ordinary Kig-Yar. In addition, \
@@ -69,6 +70,7 @@
 		status as the lowest ranked members of the Covenant."
 	default_language = "Sangheili"
 	language = "Sangheili"
+	secondary_langs = list("Tvoai")
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
