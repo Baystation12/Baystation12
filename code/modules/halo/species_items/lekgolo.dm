@@ -6,6 +6,7 @@
 	maxHealth = 300
 	health = 300
 	unsuitable_atoms_damage = 0
+	var/custom_name
 
 	stop_automated_movement = 1
 	wander = 0
@@ -42,12 +43,23 @@
 		return
 	health += 5
 
+/mob/living/simple_animal/lekgolo/proc/random_name()
+ 	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
+ 	var/list/vowels = list("a","e","i","o","u")
+ 	var/syllables_left = rand(4,10)
+ 	var/final_name = ""
+ 	while(syllables_left > 0)
+		syllables_left -= 1
+		final_name += pick(vowels)
+		final_name += pick(syllables)
+ 	return final_name
+
 /mob/living/simple_animal/lekgolo/verb/set_name()
 	set name = "Set Name"
 
 	set category = "Abilities"
 
-	if(name != initial(name))
+	if(custom_name)
 		to_chat(src,"<span class = 'notice'>You've already changed your name. Contact an admin for further name modification.</span>")
 		return
 	var/user_input_name = input("Change your name","Name Change",null)
@@ -55,6 +67,7 @@
 		return
 	real_name = user_input_name
 	name = real_name
+	custom_name = real_name
 
 /mob/living/simple_animal/lekgolo/Life()
 	if(health < maxHealth)
@@ -100,6 +113,10 @@
 
 	var/list/equipped_weapons = newlist(/datum/mgalekgolo_weapon/fuel_rod_cannon)
 	var/atom/current_target
+
+/mob/living/simple_animal/lekgolo/mgalekgolo/New()
+	. = ..()
+	name = capitalize(random_name())
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/Life()
 	for(var/datum/mgalekgolo_weapon/W in equipped_weapons)

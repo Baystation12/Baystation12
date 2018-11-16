@@ -35,13 +35,6 @@
 	antag_text = "You are Mga'lekgolo, a colony of sentient worms encased in powerful armour and carrying heavy weaponry. Protect the ship and the prophets with all your being."
 
 /datum/antagonist/opredflag_hunter/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
- 	. = ..()
- 	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
- 	var/list/vowels = list("a","e","i","o","u")
- 	var/syllables_left = rand(4,10)
- 	var/final_name = ""
- 	while(syllables_left > 0)
-		syllables_left -= 1
-		final_name += pick(vowels)
-		final_name += pick(syllables)
- 	target.current.name = final_name
+	. = ..()
+	var/mob/living/simple_animal/lekgolo/mgalekgolo/new_hunter = target.current
+	GLOB.global_headset.autosay("A new mgalekgolo, [new_hunter], has been outfitted for battle.", "Arrivals Announcement Computer", "Battlenet", "Sangheili")
