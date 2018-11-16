@@ -310,3 +310,53 @@
 		/obj/item/rig_module/mounted/taser,
 		/obj/item/rig_module/cooling_unit
 		)
+
+/obj/item/weapon/rig/zero
+	name = "null suit control module"
+	suit_type = "null hardsuit"
+	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you were wearing nothing at all"
+	icon_state = "null_rig"
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 20)
+	online_slowdown = 0
+	offline_slowdown = 1
+	offline_vision_restriction = TINT_HEAVY //You're wearing a flash protective space suit without light compensation, think it makes sense
+
+	chest_type = /obj/item/clothing/suit/space/rig/zero
+	helm_type = /obj/item/clothing/head/helmet/space/rig/zero
+	boot_type = null
+	glove_type = null
+
+
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
+	//Bans the most common combat items, idea is that this isn't a mass built shouldergun rig.
+	banned_modules = list(/obj/item/rig_module/grenade_launcher,/obj/item/rig_module/mounted,/obj/item/rig_module/fabricator )
+	req_access = list()
+
+/obj/item/clothing/head/helmet/space/rig/zero
+	camera = null
+	species_restricted = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL)
+	light_overlay = "null_light"
+	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information"
+
+//All in one suit
+/obj/item/clothing/suit/space/rig/zero
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi'
+		)
+	breach_threshold = 18
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+
+/obj/item/weapon/rig/zero/on_update_icon(var/update_mob_icon)
+	..()
+	//Append the f for female states
+	if(!ishuman(loc))
+		return
+	var/mob/living/carbon/human/user = loc
+	if(!chest) return
+	//If there's a better way to do this with current rig setup tell me
+	//Do not further append if current state already indicates gender
+	if(user.gender == FEMALE && !findtext(chest.icon_state,"_f", -2))
+		chest.icon_state = "[chest.icon_state]_f"
+	chest.update_icon(1)
+

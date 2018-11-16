@@ -681,3 +681,11 @@
 	build_path = /obj/item/organ/internal/augment/active/simple/circuit
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	id = "augment_circuitry"
+
+/datum/design/item/mechfab/rig/zero
+	category = "Hardsuits"
+	name = "Null suit control module"
+	build_path = /obj/item/weapon/rig/zero
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, "glass" = 5000, "silver" = 1000)
+	id = "null _suit"
+	time = 120
