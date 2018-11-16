@@ -54,7 +54,7 @@
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_full_window() && coming_from != dir)
 
-/obj/structure/window/proc/take_damage(var/damage = 0,  var/sound_effect = 1)
+/obj/structure/window/take_damage(damage = 0,  var/sound_effect = 1)
 	var/initialhealth = health
 
 	if(silicate)
@@ -68,11 +68,11 @@
 		if(sound_effect)
 			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
-			visible_message("[src] looks like it's about to shatter!" )
+			visible_message("<span class='notice'>\The [src] looks like it's about to shatter!</span>")
 		else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
-			visible_message("[src] looks seriously damaged!" )
+			visible_message("\The [src] looks seriously damaged!" )
 		else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
-			visible_message("Cracks begin to appear in [src]!" )
+			visible_message("Cracks begin to appear in \the [src]!" )
 	return
 
 /obj/structure/window/proc/apply_silicate(var/amount)
@@ -96,7 +96,7 @@
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
-		visible_message("[src] shatters!")
+		visible_message("<span class='notice'>\The [src] shatters!</span>")
 
 	cast_new(shardtype, is_fulltile() ? 4 : 1, loc)
 	if(reinf) cast_new(/obj/item/stack/rods, is_fulltile() ? 4 : 1, loc)

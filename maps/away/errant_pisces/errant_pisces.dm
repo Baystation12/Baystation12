@@ -22,16 +22,22 @@
 	icon_living = "shark"
 	icon_dead = "shark_dead"
 	icon_gib = "shark_dead"
-	turns_per_move = 8
+	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/sharkmeat
-	speed = 8
-	maxHealth = 75
-	health = 75
-	harm_intent_damage = 20
-	melee_damage_lower = 20
-	melee_damage_upper = 20
-	break_stuff_probability = 25
+	speed = 2
+	maxHealth = 100
+	health = 100
+	harm_intent_damage = 5
+	melee_damage_lower = 15
+	melee_damage_upper = 25
+	break_stuff_probability = 35
 	faction = "shark"
+
+/mob/living/simple_animal/hostile/carp/shark/carp_randomify()
+	return
+
+/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
+	return
 
 /mob/living/simple_animal/hostile/carp/shark/death()
 	..()
