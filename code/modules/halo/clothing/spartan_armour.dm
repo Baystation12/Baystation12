@@ -70,7 +70,7 @@
 	..()
 
 	spawn(0)
-		if(specials.len <= 2 && available_abilities.len && user.client)
+		if(user && user.client && specials.len <= 2 && available_abilities.len)
 			var/ability_type_string = input(user, "Choose the armour ability of your MJOLNIR","MJOLNIR Armour Ability") in available_abilities
 			var/ability_type = available_abilities[ability_type_string]
 			specials.Add(new ability_type(src))
