@@ -2,15 +2,15 @@
 	name = "\improper Sol Central Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
 	icon_state = "solvest"
-	icon = 'maps/torch/icons/obj/solgov-suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 
 /obj/item/clothing/suit/storage/vest/solgov
 	name = "\improper Sol Central Government heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
-	icon = 'maps/torch/icons/obj/solgov-suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/solgov-suit.dmi')
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 
 /obj/item/clothing/suit/storage/vest/solgov/security
 	name = "master at arms heavy armored vest"
