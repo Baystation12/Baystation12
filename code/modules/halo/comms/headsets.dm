@@ -37,3 +37,9 @@
 /obj/item/device/radio/headset/police
 	ks2type = /obj/item/device/encryptionkey/police
 	icon_state = "sec_headset"
+
+//spartan headset
+/obj/item/device/radio/headset/spartan_oprf
+	name = "Spartan II radio headset"
+	ks2type = /obj/item/device/encryptionkey/spartan_oprf
+	icon_state = "sec_headset"

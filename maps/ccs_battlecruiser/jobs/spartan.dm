@@ -5,7 +5,7 @@
 	supervisors = "the mission commander"
 	selection_color = "#33ff00"
 	account_allowed = 0               // Does this job type come with a station account?
-	outfit_type = /decl/hierarchy/outfit/spartan_two
+	outfit_type = /decl/hierarchy/outfit/spartan_two_oprf
 	loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
 	announced = FALSE                  //If their arrival is announced on radio
 	generate_email = 0
@@ -20,7 +20,7 @@
 	total_positions = 0
 	spawn_positions = 1
 
-/decl/hierarchy/outfit/spartan_two
+/decl/hierarchy/outfit/spartan_two_oprf
 	name = "Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
@@ -28,6 +28,6 @@
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	gloves = /obj/item/clothing/gloves/spartan
 	head = /obj/item/clothing/head/helmet/spartan
-	l_ear = /obj/item/device/radio/headset/spartan
+	l_ear = /obj/item/device/radio/headset/spartan_oprf
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	backpack = null
