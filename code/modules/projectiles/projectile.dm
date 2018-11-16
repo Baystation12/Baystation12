@@ -313,7 +313,7 @@
 			return
 
 		//Deals with moving a projectile up / down to hit targets on the ground or in air
-		if(elevation != original.elevation)
+		if(original  && elevation != original.elevation)
 			var/elevation_mod = original.elevation - elevation
 			change_elevation(elevation_mod)
 		before_move()
@@ -323,7 +323,7 @@
 			spawn()
 				do_supression_aoe(loc)
 
-		if(!bumped && !isturf(original))
+		if(!bumped && original && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
