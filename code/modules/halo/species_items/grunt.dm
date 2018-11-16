@@ -6,6 +6,15 @@
 	real_name = name
 	faction = "Covenant"
 
+/datum/language/balahese
+	name = "Balahese"
+	desc = "The language of the Unggoy"
+	native = 1
+	colour = "vox"
+	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
+	key = "B"
+	flags = RESTRICTED
+
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	name = "Unggoy Combat Harness (Minor)"
 	desc = "A combat harness with an inbuilt gas tank"

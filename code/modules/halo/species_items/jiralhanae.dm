@@ -5,6 +5,16 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	..(new_loc,"Jiralhanae")
 	faction = "Covenant"
 
+/datum/language/doisacci
+	name = "Doisacci"
+	desc = "The language of the Jiralhanae"
+	native = 1
+	colour = "vox"
+	syllables = list("ung","ugh","uhh","hss","grss","grah","argh","hng","ung","uss","hoh","rog")
+	key = "D"
+	flags = RESTRICTED
+
+
 /obj/item/clothing/under/covenant/jiralhanae
 	name = "Jiralhanae Bodysuit"
 	desc = "A Jiralhanae body suit. Looks itchy and covered in hair."
