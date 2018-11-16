@@ -15,6 +15,20 @@
 /obj/structure/proc/get_footstep_sound()
 	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
 
+/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
+	if(wallbreaker && damage && breakable)
+		visible_message("<span class='danger'>\The [user] smashes the \[src] to pieces!</span>")
+		attack_animation(user)
+		qdel(src)
+		return 1
+	visible_message("<span class='danger'>\The [user] [attack_verb] \the [src]!</span>")
+	attack_animation(user)
+	take_damage(damage)
+	return 1
+
+/obj/structure/proc/take_damage(var/damage)
+	return
+
 /obj/structure/Destroy()
 	var/turf/T = get_turf(src)
 	if(T && parts)
@@ -60,14 +74,6 @@
 				return
 		if(3.0)
 			return
-
-/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
-	if(!breakable || !damage || !wallbreaker)
-		return 0
-	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	attack_animation(user)
-	spawn(1) qdel(src)
-	return 1
 
 /obj/structure/proc/can_visually_connect()
 	return anchored

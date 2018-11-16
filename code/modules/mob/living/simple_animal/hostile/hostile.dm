@@ -18,6 +18,15 @@
 
 	var/shuttletarget = null
 	var/enroute = 0
+	var/stop_AI = FALSE // this var stops most AI procs from running
+
+	//hostile mobs will bash through these in order - any new entry must have a functioning attack_generic()
+	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
+												/obj/structure/closet,
+												/obj/machinery/door/window,
+												/obj/structure/table,
+												/obj/structure/grille,
+												/obj/structure/wall_frame)
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
@@ -26,10 +35,12 @@
 	for(var/atom/A in ListTargets(10))
 		var/atom/F = Found(A)
 		if(F)
+			face_atom(F)
 			return F
 
 		if(ValidTarget(A))
 			stance = HOSTILE_STANCE_ATTACK
+			face_atom(A)
 			return A
 
 /mob/living/simple_animal/hostile/proc/ValidTarget(var/atom/A)
@@ -54,7 +65,7 @@
 		var/obj/mecha/M = A
 		if(!M.occupant)
 			return FALSE
-	
+
 	return TRUE
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
@@ -94,6 +105,7 @@
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
+	face_atom(target_mob)
 	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
@@ -137,6 +149,9 @@
 		return 0
 	if(client)
 		return 0
+	if(stop_AI)
+		return 0
+
 	if(isturf(src.loc) && !src.buckled)
 		if(!stat)
 			switch(stance)
@@ -219,26 +234,33 @@
 	A.launch(target, def_zone)
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
-	if(prob(break_stuff_probability))
+	if(prob(break_stuff_probability) && !Adjacent(target_mob))
+		face_atom(target_mob)
 		for(var/dir in GLOB.cardinal) // North, South, East, West
 			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, dir))
 			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
 				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 				return
-			for(var/obj/structure/window/obstacle in get_step(src, dir))
-				if(obstacle.dir == GLOB.reverse_dir[dir]) // So that windows get smashed in the right order
+			for(var/type in valid_obstacles_by_priority)
+				var/obj/obstacle = locate(type, get_step(src, dir))
+				if(obstacle)
+					face_atom(obstacle)
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 					return
-			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
-			if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
-				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
-				return
-			if(istype(obstacle, /obj/structure/wall_frame))
-				var/turf/T = get_turf(obstacle)
-				var/obj/structure/struct = locate(/obj/structure/window) in T
-				if(!struct)
-					struct = locate(/obj/structure/grille) in T
-				if(struct)
-					struct.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+			for(var/obj/machinery/door/obstacle in get_step(src, dir))
+				if(obstacle.density)
+					if(!obstacle.can_open(1))
+						return
+					face_atom(obstacle)
+					pry_door(src, 5 SECONDS, obstacle)
 					return
-				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+
+/mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
+	visible_message("<span class='warning'>\The [user] begins prying at \the [pesky_door]!</span>")
+	stop_AI = TRUE
+	if(do_after(user, delay, pesky_door))
+		pesky_door.open(1)
+		stop_AI = FALSE
+	else
+		visible_message("<span class='notice'>\The [user] is interrupted.</span>")
+		stop_AI = FALSE

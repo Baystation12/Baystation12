@@ -403,14 +403,11 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
-	if(!damage || !wallbreaker)
-		return
-	attack_animation(user)
-	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
-	dump_contents()
-	spawn(1) qdel(src)
-	return 1
+/obj/structure/closet/take_damage(damage)
+	health -= damage
+	if(health <= 0)
+		dump_contents()
+		qdel(src)
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)
