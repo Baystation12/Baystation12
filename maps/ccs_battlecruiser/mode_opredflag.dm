@@ -10,8 +10,9 @@
 	round_autoantag = 1
 	required_players = 0
 	required_enemies = 1
-	antag_tags = list("prophet")
+	antag_tags = list("prophet","hunter")
 	latejoin_antag_tags = list("hunter")
+	antag_scaling_coeff = 0
 
 	var/elite_shipmaster
 	var/elite_shipmaster_ckey
