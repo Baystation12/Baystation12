@@ -14,9 +14,7 @@
 	layer = TABLE_LAYER
 	color = COLOR_GUNMETAL
 
-	var/damage = 0
-	var/maxhealth = 10
-	var/health = 10
+	var/health = 100
 	var/stripe_color
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
@@ -174,13 +172,7 @@
 	new /obj/item/stack/material/steel(get_turf(src))
 	qdel(src)
 
-/obj/structure/wall_frame/proc/take_damage(dam)
-	if(dam)
-		damage = max(0, damage + dam)
-		update_damage()
-	return
-
-/obj/structure/wall_frame/proc/update_damage()
-	if(damage >= 150)
+/obj/structure/wall_frame/take_damage(damage)
+	health -= damage
+	if(health <= 0)
 		dismantle()
-	return

@@ -74,6 +74,14 @@
 	target_organ = BP_BRAIN
 	strength = 10
 
+/datum/reagent/toxin/venom
+	name = "Spider Venom"
+	description = "A deadly necrotic toxin produced by giant spiders to disable their prey."
+	taste_description = "absolutely vile"
+	color = "#91d895"
+	target_organ = BP_LIVER
+	strength = 10
+
 /datum/reagent/toxin/chlorine
 	name = "Chlorine"
 	description = "A highly poisonous liquid. Smells strongly of bleach."

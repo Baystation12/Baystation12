@@ -41,7 +41,7 @@
 	..()
 	take_damage(Proj.get_structure_damage())
 
-/obj/structure/displaycase/proc/take_damage(damage)
+/obj/structure/displaycase/take_damage(damage)
 	health -= damage
 	if(health <= 0)
 		if (!destroyed)

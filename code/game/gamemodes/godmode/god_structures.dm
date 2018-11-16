@@ -50,7 +50,7 @@
 		)
 	take_damage(W.force)
 
-/obj/structure/deity/proc/take_damage(var/amount)
+/obj/structure/deity/take_damage(var/amount)
 	health -= amount
 	if(health < 0)
 		src.visible_message("\The [src] crumbles!")

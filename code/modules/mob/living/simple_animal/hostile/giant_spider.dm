@@ -4,13 +4,14 @@
 #define MOVING_TO_TARGET 3
 #define SPINNING_COCOON 4
 
-//basic spider mob, these generally guard nests
+//basic spider mob, these generally guard nests (not really) and are pretty tough all-rounders
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
-	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
-	icon_state = "guard"
-	icon_living = "guard"
-	icon_dead = "guard_dead"
+	desc = "A monstrously huge brown spider with shimmering eyes."
+	icon = 'icons/mob/spider.dmi'
+	icon_state = "brown"
+	icon_living = "brown"
+	icon_dead = "brown_dead"
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
 	speak_chance = 5
@@ -23,58 +24,100 @@
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	var/poison_per_bite = 5
-	var/poison_type = /datum/reagent/toxin
+	var/poison_type = /datum/reagent/toxin/venom
 	faction = "spiders"
 	var/busy = 0
 	pass_flags = PASS_FLAG_TABLE
-	move_to_delay = 6
-	speed = 3
+	move_to_delay = 3
+	speed = 1
 	max_gas = list("phoron" = 1, "carbon_dioxide" = 5, "methyl_bromide" = 1)
 	mob_size = MOB_LARGE
-	pass_flags = PASS_FLAG_TABLE
-
 	bleed_colour = "#0d5a71"
+	can_escape = TRUE
+	break_stuff_probability = 25
 
-//nursemaids - these create webs and eggs
+	var/body_colour
+	var/eye_colour
+	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
+
+//nursemaids - these create webs and eggs - the weakest and least threatening, and the only ones that can be captured for study
 /mob/living/simple_animal/hostile/giant_spider/nurse
-	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."
-	icon_state = "nurse"
-	icon_living = "nurse"
-	icon_dead = "nurse_dead"
-	maxHealth = 40
-	health = 40
-	melee_damage_lower = 5
-	melee_damage_upper = 10
-	poison_per_bite = 10
+	desc = "A monstrously huge beige spider with shimmering eyes."
+	icon_state = "beige"
+	icon_living = "beige"
+	icon_dead = "beige_dead"
+	maxHealth = 80
+	health = 80
+	melee_damage_lower = 8
+	melee_damage_upper = 12
+	poison_per_bite = 15
+	speed = 0
 	var/atom/cocoon_target
 	poison_type = /datum/reagent/soporific
 	var/fed = 0
+	can_escape = FALSE
 
-//hunters have the most poison and move the fastest, so they can find prey
+//hunters have the most poison and move the fastest, so they can find prey. hunters should be terrifying to fight 1v1
 /mob/living/simple_animal/hostile/giant_spider/hunter
-	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes."
-	icon_state = "hunter"
-	icon_living = "hunter"
-	icon_dead = "hunter_dead"
-	maxHealth = 120
-	health = 120
-	melee_damage_lower = 10
+	desc = "A monstrously huge black spider with shimmering eyes."
+	icon_state = "black"
+	icon_living = "black"
+	icon_dead = "black_dead"
+	maxHealth = 150
+	health = 150
+	melee_damage_lower = 15
 	melee_damage_upper = 20
-	poison_per_bite = 5
-	move_to_delay = 4
+	poison_per_bite = 15
+	speed = -1
+	move_to_delay = 2
+	break_stuff_probability = 30
 
 /mob/living/simple_animal/hostile/giant_spider/New(var/location, var/atom/parent)
 	get_light_and_color(parent)
 	..()
 
+/mob/living/simple_animal/hostile/giant_spider/Initialize()
+	. = ..()
+	spider_randomify()
+	update_icon()
+
+/mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
+	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
+	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
+	poison_per_bite = rand(0.5 * initial(poison_per_bite), (1.2 * initial(poison_per_bite)))
+	maxHealth = rand(initial(maxHealth), (1.5 * initial(maxHealth)))
+	health = maxHealth
+	eye_colour = pick(allowed_eye_colours)
+	if(eye_colour)
+		var/image/I = image(icon = icon, icon_state = "[icon_state]_eyes", layer = EYE_GLOW_LAYER)
+		I.color = eye_colour
+		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.appearance_flags = RESET_COLOR
+		overlays += I
+
+/mob/living/simple_animal/hostile/giant_spider/on_update_icon()
+	if(stat == DEAD)
+		overlays.Cut()
+		var/image/I = image(icon = icon, icon_state = "[icon_dead]_eyes")
+		I.color = eye_colour
+		I.appearance_flags = RESET_COLOR
+		overlays += I
+
+/mob/living/simple_animal/hostile/giant_spider/FindTarget()
+	. = ..()
+	if(.)
+		custom_emote(1,"raises its forelegs at [.]")
+
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
 	. = ..()
 	if(isliving(.))
+		if(health < maxHealth)
+			health += (0.3 * rand(melee_damage_lower, melee_damage_upper)) //heal a bit on hit
 		var/mob/living/L = .
 		if(L.reagents)
 			L.reagents.add_reagent(/datum/reagent/toxin, poison_per_bite)
