@@ -34,7 +34,7 @@
 	round_start = world.time
 
 	//grab the prophets
-	for(var/datum/antagonist/opredflag_prophet/prophets in antag_templates)
+	for(var/datum/antagonist/opredflag_cov/prophet/prophets in antag_templates)
 		for(var/D in prophets.current_antagonists)
 			living_prophets.Add(D)
 
@@ -46,7 +46,7 @@
 	spartans.total_positions = 0
 
 	//grab the elite shipmaster
-	var/datum/job/opredflag_elite/shipmaster = job_master.occupations_by_title["Sangheili Shipmaster"]
+	var/datum/job/opredflag_cov/elite/shipmaster = job_master.occupations_by_title["Sangheili Shipmaster"]
 	for(var/mob/M in shipmaster.assigned_players)
 		elite_shipmaster = M.name
 		elite_shipmaster_ckey = M.ckey
