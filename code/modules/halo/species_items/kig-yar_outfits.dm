@@ -3,8 +3,8 @@
 	name = "Kig-Yar"
 
 	l_ear = /obj/item/device/radio/headset/covenant
-	uniform = /obj/item/clothing/under/covenant/kigyar/armless
-	suit = /obj/item/clothing/suit/armor/covenant/kigyar
+	uniform = /obj/item/clothing/under/kigyar/armless
+	suit = /obj/item/clothing/suit/armor/kigyar
 	back = null
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar

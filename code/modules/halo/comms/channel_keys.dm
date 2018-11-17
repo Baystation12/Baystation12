@@ -57,7 +57,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[SEC_NAME] = police_freq
 	frequencies[ODST_NAME] = odst_freq
 	frequencies[BERTELS_NAME] = bertels_freq
-	GLOB.default_internal_channels["[eband_freq]"] = list()
+	//GLOB.default_internal_channels["[eband_freq]"] = list()
 	radiochannels = frequencies
 
 /datum/halo_frequencies/proc/setup_com_channels()
@@ -157,6 +157,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /obj/item/device/encryptionkey/teamcom
 	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
+
+/obj/item/device/encryptionkey/spartan_oprf
+	channels = list(SQUADCOM_NAME = 1)
 
 /obj/item/device/encryptionkey/eband
 		channels = list(EBAND_NAME = 1)

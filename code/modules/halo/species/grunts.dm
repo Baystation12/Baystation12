@@ -1,13 +1,19 @@
 /datum/species/unggoy
-	name = "unggoy"
-	name_plural = "unggoy"
-	blurb = "" // Doesn't appear in chargen
+	name = "Unggoy"
+	name_plural = "Unggoy"
+	blurb = "The Unggoy (Latin, Monachus frigus, meaning \"cold monk\") are a sapient \
+		species of squat biped xeno-arthropodal vertebroid lifeforms in the Covenant.\
+		They are the lowest-ranking species in the hierarchy, and are frequently \
+		mistreated by most other races. Unggoy are primarily used as laborers, \
+		slaves, or in combat situations, as cannon fodder. Unggoy sometimes feud with\
+		Kig'Yar for status as the lowest ranked species of the Covenant."
 	flesh_color = "#4F4F7F"
 	blood_color = "#4A4A64" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_unggoy.dmi'
 	deform = 'code/modules/halo/icons/species/r_unggoy.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet
 	language = "Sangheili"
+	secondary_langs = list("Balahese")
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
@@ -19,6 +25,9 @@
 
 	warning_low_pressure = 25
 	hazard_low_pressure = -1
+	equipment_slowdown_multiplier = 0.75
+	ignore_equipment_threshold = 2
+	slowdown = 1
 
 /datum/species/unggoy/create_organs(var/mob/living/carbon/human/H)
 	. = ..()
