@@ -266,6 +266,9 @@ USEALIENWHITELIST
 ## Password used for authorizing external tools that can apply bans
 #BAN_COMMS_PASSWORD
 
+## BYOND builds that will result the client using them to be banned.
+#FORBIDDEN_VERSIONS 512.0001;512.0002
+
 ## Export address where external tools that monitor logins are located
 #LOGIN_EXPORT_ADDR
 
