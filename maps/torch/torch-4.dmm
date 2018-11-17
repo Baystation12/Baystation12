@@ -11060,6 +11060,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
+	},
 /turf/simulated/floor/plating,
 /area/security/wing)
 "aLG" = (
@@ -16829,6 +16832,17 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/auxpower)
+"dlf" = (
+/obj/effect/floor_decal/corner/b_green{
+	tag = "icon-corner_white (NORTHEAST)";
+	icon_state = "corner_white";
+	dir = 5
+	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
 "dmb" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -18805,12 +18819,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
-"fFb" = (
-/obj/machinery/vending/wallmed1{
-	pixel_y = 0
-	},
-/turf/simulated/wall/prepainted,
-/area/medical/infirmreception)
 "fGb" = (
 /obj/machinery/requests_console{
 	announcementConsole = 1;
@@ -19034,6 +19042,9 @@
 	pixel_x = -5
 	},
 /obj/item/sticky_pad/random,
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "fRb" = (
@@ -19041,7 +19052,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/machinery/computer/guestpass,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "fRN" = (
@@ -22658,9 +22668,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/light,
-/obj/machinery/computer/guestpass{
-	pixel_y = -32
-	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "jXp" = (
@@ -25769,9 +25776,6 @@
 /area/medical/chemistry)
 "nDB" = (
 /obj/effect/catwalk_plated,
-/obj/machinery/computer/guestpass{
-	pixel_x = 32
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -51790,7 +51794,7 @@ eHb
 anM
 gwb
 fob
-fFb
+arK
 fQb
 mpb
 gsb
@@ -54229,7 +54233,7 @@ dob
 irb
 jjb
 aCf
-jSb
+dlf
 srR
 aSK
 qtb
