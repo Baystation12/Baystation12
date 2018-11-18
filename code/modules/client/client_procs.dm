@@ -118,7 +118,8 @@
 	if(byond_version < MIN_CLIENT_VERSION)		//Out of date client.
 		return null
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
-		_DB_ban_record(bantype = BANTYPE_PERMA, reason = "You have attempted connecting to the server with a BYOND client with known abuse potential.", banckey = ckey)
+		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
+		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version before trying again.")
 		qdel(src)
 		return
 

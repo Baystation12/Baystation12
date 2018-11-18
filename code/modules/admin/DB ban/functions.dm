@@ -1,6 +1,11 @@
 datum/admins/proc/DB_staffwarn_record(var/ckey, var/reason)
 	if(!check_rights((R_ADMIN|R_MOD), 0)) return
 	if(!istext(reason)) return
+	_DB_staffwarn_record(ckey, reason)
+
+/proc/_DB_staffwarn_record(var/ckey, var/reason)
+	if(usr && !check_rights((R_ADMIN|R_MOD), 0))
+		return
 	var/dbreason = sql_sanitize_text(reason)
 	var/dbckey = sql_sanitize_text(ckey)
 
