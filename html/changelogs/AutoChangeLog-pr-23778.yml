@@ -1,0 +1,4 @@
+author: "Miraviel"
+delete-after: True
+changes: 
+  - tweak: "Using the autopsy scanner in-hand will now print the scan. Its icon was also updated."
