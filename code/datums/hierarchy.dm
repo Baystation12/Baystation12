@@ -4,7 +4,7 @@
 	var/decl/hierarchy/parent
 	var/list/decl/hierarchy/children
 
-/decl/hierarchy/New(var/full_init = TRUE)
+/decl/hierarchy/Initialize(var/full_init = TRUE)
 	children = list()
 	if(!full_init)
 		return
@@ -12,7 +12,7 @@
 	var/list/all_subtypes = list()
 	all_subtypes[type] = src
 	for(var/subtype in subtypesof(type))
-		all_subtypes[subtype] = new subtype(FALSE)
+		all_subtypes[subtype] = decls_repository.get_decl(subtype, FALSE)
 
 	for(var/subtype in (all_subtypes - type))
 		var/decl/hierarchy/subtype_instance = all_subtypes[subtype]

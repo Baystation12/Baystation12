@@ -25,9 +25,11 @@
 		</div>
 		</td>
 		{{for skill_value.levels :level_value:level_key}}
+			{{if !level_value.blank}}
 			<td>
 				{{:helper.link(level_value.name, null, {'value_hit' : level_value.val, 'skill' : skill_value.ref}, null, level_value.selected ? 'selected' : null)}}
 			</td>
+			{{/if}}
 		{{/for}}
 		</tr>
 	{{/for}}

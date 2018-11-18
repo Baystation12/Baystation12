@@ -360,9 +360,16 @@
 	if(state)
 		occupant_message("<font color='red'>Maintenance protocols in effect.</font>")
 		return
+	if(!user.skill_check(SKILL_MECH, HAS_PERK))
+		if(prob(5))
+			if((. = do_move(turn(direction, pick(90, 270)), 2)))
+				user.visible_message("<span class='warning'>\The [src] swerves wildly!</span>", "<span class='warning'>You hit the wrong control: [src] swerves wildly!</span>")
+			return
+		if(prob(5))
+			return do_move(direction, rand(5,12))
 	return do_move(direction)
 
-/obj/mecha/proc/do_move(direction)
+/obj/mecha/proc/do_move(direction, number = 1)
 	if(!can_move)
 		return 0
 	if(src.pr_inertial_movement.active())
@@ -385,6 +392,8 @@
 				src.log_message("Movement control lost. Inertial movement started.")
 		if(do_after(step_in))
 			can_move = 1
+		if(--number)
+			return .()
 		return 1
 	return 0
 
@@ -780,7 +789,7 @@
 		if(state>=3 && src.occupant)
 			to_chat(user, "You attempt to eject the pilot using the maintenance controls.")
 			if(src.occupant.stat)
-				src.go_out()
+				src.go_out(user)
 				src.log_message("[src.occupant] was ejected using the maintenance controls.")
 			else
 				to_chat(user, "<span class='warning'>Your attempt is rejected.</span>")
@@ -1083,28 +1092,19 @@
 	src.occupant << browse(src.get_stats_html(), "window=exosuit")
 	return
 
-/*
-/obj/mecha/verb/force_eject()
-	set category = "Object"
-	set name = "Force Eject"
-	set src in view(5)
-	src.go_out()
-	return
-*/
-
 /obj/mecha/verb/eject()
 	set name = "Eject"
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
-	if(usr!=src.occupant)
+	if(usr != occupant)
 		return
-	src.go_out()
+	go_out(usr)
 	add_fingerprint(usr)
 	return
 
-
-/obj/mecha/proc/go_out()
+// user argument optional, for skill checking
+/obj/mecha/proc/go_out(mob/user)
 	if(!src.occupant) return
 	var/atom/movable/mob_container
 	if(ishuman(occupant))
@@ -1154,6 +1154,9 @@
 				occupant.forceMove(mmi)
 			mmi.mecha = null
 			src.verbs += /obj/mecha/verb/eject
+		if(occupant == user && !occupant.skill_check(SKILL_MECH, HAS_PERK) && prob(25))
+			mob_container.throw_at_random(FALSE, 3, 1)
+			user.visible_message("<span class ='notice'>\The [mob_container] is forcibly ejected by \the [src]!</span>", "<span class ='notice'>\The [src] forcibly ejects you! Are you sure that was the right button?</span>")
 		src.occupant = null
 		src.icon_state = src.reset_icon()+"-open"
 		src.set_dir(dir_in)

@@ -41,9 +41,11 @@
 		</td>
 		{{for skill_value.levels :level_value:level_key}}
 			<td>
+			{{if !level_value.blank}}
 			<div class={{if level_value.selected}}'selected'{{else}}'null'{{/if}}>
 				{{:level_value.name}}
 			</div>
+			{{/if}}
 			</td>
 		{{/for}}
 		</tr>
