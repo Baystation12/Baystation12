@@ -299,7 +299,7 @@
 	icon_state = "beret_whiterim"
 
 /obj/item/clothing/head/beret/solgov/fleet/dress/command
-	name = "fleet command dress beret"
+	name = "fleet officer's dress beret"
 	desc = "A white SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_whiterim_com"
 

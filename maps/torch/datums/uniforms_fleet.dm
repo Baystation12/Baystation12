@@ -25,6 +25,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/eng/officer
 	name = "Fleet engineering CO"
@@ -55,6 +56,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/sec/officer
 	name = "Fleet security CO"
@@ -85,6 +87,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/med/officer
 	name = "Fleet medical CO"
@@ -115,6 +118,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/sup/officer
 	name = "Fleet supply CO"
@@ -141,6 +145,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/srv/officer
 	name = "Fleet service CO"
@@ -167,6 +172,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/exp/officer
 	name = "Fleet exploration CO"
@@ -185,8 +191,6 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
 
-	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
-
 /decl/hierarchy/mil_uniform/fleet/spt/noncom
 	name = "Fleet command support SNCO"
 	min_rank = 7
@@ -194,6 +198,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/spt/officer
 	name = "Fleet command support CO"
