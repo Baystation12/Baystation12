@@ -17,7 +17,7 @@ var/list/outfits_decls_by_type_
 		return
 	outfits_decls_ = list()
 	outfits_decls_by_type_ = list()
-	outfits_decls_root_ = new/decl/hierarchy/outfit()
+	outfits_decls_root_ = decls_repository.get_decl(/decl/hierarchy/outfit)
 
 /decl/hierarchy/outfit
 	name = "Naked"

@@ -46,23 +46,45 @@
 		skill_cat["name"] = V.name
 		var/list/skills_in_cat = list()
 		for(var/decl/hierarchy/skill/S in V.children)
-			var/list/skill_item = list()
-			skill_item["name"] = S.name
-			var/value = get_value(S.type)
-			skill_item["val"] = value
-			skill_item["ref"] = "\ref[S.type]"
-			var/list/levels = list()
-			for(var/i in 1 to length(S.levels))
-				var/list/level = list()
-				level["val"] = i
-				level["name"] = S.levels[i]
-				level["selected"] = (i <= value)
-				levels += list(level)
-			skill_item["levels"] = levels
-			skills_in_cat += list(skill_item)
+			skills_in_cat += list(get_nano_row(S))
+			for(var/decl/hierarchy/skill/perk in S.children)
+				skills_in_cat += list(get_nano_row(perk))
 		skill_cat["skills"] = skills_in_cat
 		skill_data += list(skill_cat)
 	.["skills_by_cat"] = skill_data
+
+/datum/skillset/proc/get_nano_row(var/decl/hierarchy/skill/S)
+	var/list/skill_item = list()
+	skill_item["name"] = S.name
+	var/value = get_value(S.type)
+	skill_item["val"] = value
+	skill_item["ref"] = "\ref[S.type]"
+	skill_item["available"] = check_prerequisites(S.type)
+	var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
+	var/list/levels = list()
+	for(var/i in 1 to offset)
+		levels += list(list("blank" = 1))
+	for(var/i in 1 to length(S.levels))
+		var/list/level = list()
+		level["blank"] = 0
+		level["val"] = i
+		level["name"] = S.levels[i]
+		level["selected"] = (i <= value)
+		levels += list(level)
+	for(var/i in (length(levels) + 1) to SKILL_MAX)
+		levels += list(list("blank" = 1))
+	skill_item["levels"] = levels
+	return skill_item
+
+/datum/skillset/proc/check_prerequisites(skill_type)
+	var/decl/hierarchy/skill/S = decls_repository.get_decl(skill_type)
+	if(!S.prerequisites)
+		return TRUE
+	for(var/prereq_type in S.prerequisites)
+		if(!(get_value(prereq_type) >= S.prerequisites[prereq_type]))
+			return FALSE
+	return TRUE
+
 /*
 The generic antag version.
 */
@@ -147,6 +169,11 @@ The generic antag version.
 		return
 	if(skillset.get_value(skill_type) >= level)
 		return
+	var/decl/hierarchy/skill/S = decls_repository.get_decl(skill_type)
+	if(length(S.levels) < level)
+		return
+	if(S.prerequisites)
+		return // Can't select perks from here.
 	return 1
 
 /datum/nano_module/skill_ui/antag/proc/select(skill_type, level)

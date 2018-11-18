@@ -3,6 +3,7 @@
 #define SKILL_ADEPT    3
 #define SKILL_EXPERT   4
 #define SKILL_PROF     5
+#define HAS_PERK       SKILL_NONE + 1
 
 #define SKILL_MIN      1 // Min skill value selectable
 #define SKILL_MAX      5 // Max skill value selectable
@@ -15,7 +16,7 @@
 #define SKILL_BUREAUCRACY   /decl/hierarchy/skill/organizational/bureaucracy
 #define SKILL_FINANCE       /decl/hierarchy/skill/organizational/finance
 #define SKILL_EVA           /decl/hierarchy/skill/general/EVA
-#define SKILL_MECH          /decl/hierarchy/skill/general/mech
+#define SKILL_MECH          /decl/hierarchy/skill/general/EVA/mech
 #define SKILL_PILOT         /decl/hierarchy/skill/general/pilot
 #define SKILL_HAULING       /decl/hierarchy/skill/general/hauling
 #define SKILL_COMPUTER      /decl/hierarchy/skill/general/computer
