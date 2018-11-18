@@ -7,7 +7,7 @@
 	icon_living = "drone"
 	icon_dead = "drone_dead"
 	ranged = 1
-	rapid = 1
+	rapid = 0
 	speak_chance = 5
 	turns_per_move = 3
 	response_help = "pokes"
@@ -20,6 +20,7 @@
 	health = 300
 	maxHealth = 300
 	speed = 8
+	move_to_delay = 6
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
