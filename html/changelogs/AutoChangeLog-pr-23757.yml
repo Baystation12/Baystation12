@@ -1,0 +1,5 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - bugfix: "Cryo Cells now work properly, with temperature. This means clonex is possible."
+  - tweak: "Clonex can no longer mix below -200C"
