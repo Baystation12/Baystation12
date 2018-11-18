@@ -9,6 +9,7 @@
 	plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 
 	var/on = 0
 	use_power = 1
@@ -61,6 +62,12 @@
 	..()
 	if(!node)
 		return
+
+	var/has_air_contents = FALSE
+	if(air_contents) //Check this even if it's unpowered
+		ADJUST_ATOM_TEMPERATURE(src, air_contents.temperature)
+		has_air_contents = TRUE
+
 	if(!on)
 		return
 
@@ -68,10 +75,8 @@
 		if(occupant.stat != 2)
 			process_occupant()
 
-	if(air_contents)
+	if(has_air_contents)
 		temperature_archived = air_contents.temperature
-		if(beaker)
-			ADJUST_ATOM_TEMPERATURE(beaker, air_contents.temperature)
 		heat_gas_contents()
 		expel_gas()
 
@@ -199,6 +204,8 @@
 		if(!user.unEquip(G, src))
 			return
 		beaker =  G
+		beaker.temperature = air_contents.temperature
+		QUEUE_TEMPERATURE_ATOMS(beaker)
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 	else if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
@@ -359,9 +366,7 @@
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air()
-	if(on)
-		return air_contents
-	..()
+	return air_contents
 
 //This proc literally only exists for cryo cells.
 /atom/proc/return_air_for_internal_lifeform()
