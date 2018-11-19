@@ -158,7 +158,7 @@
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
 
-/decl/hierarchy/mil_uniform/fleet/srv
+/decl/hierarchy/mil_uniform/fleet/exp
 	name = "Fleet exploration"
 	departments = EXP
 
