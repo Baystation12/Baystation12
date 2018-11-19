@@ -25,7 +25,8 @@
 	var/list/possible_features = list(
 									/datum/map_template/ruin/exoplanet/monolith,
 									/datum/map_template/ruin/exoplanet/hydrobase,
-									/datum/map_template/ruin/exoplanet/crashed_pod)
+									/datum/map_template/ruin/exoplanet/crashed_pod,
+									/datum/map_template/ruin/exoplanet/hut)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)

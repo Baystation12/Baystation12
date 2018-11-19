@@ -1,0 +1,364 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/simulated/wall/r_wall/prepainted{
+	paint_color = "#5b8693"
+	},
+/area/template_noop)
+"c" = (
+/obj/structure/closet/walllocker/emerglocker/east,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"d" = (
+/obj/machinery/door/airlock/external,
+/turf/simulated/floor/tiled/techfloor,
+/area/template_noop)
+"e" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"f" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/structure/barricade,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"h" = (
+/obj/structure/grille,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"i" = (
+/obj/structure/table/standard{
+	flipped = 1
+	},
+/obj/effect/spider/cocoon,
+/obj/item/weapon/net_shell,
+/obj/random/energy,
+/obj/random/trash,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"j" = (
+/obj/structure/table/standard{
+	flipped = 1
+	},
+/obj/item/weapon/pen,
+/obj/random/junk,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"k" = (
+/obj/structure/filingcabinet,
+/obj/effect/decal/cleanable/cobweb,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"l" = (
+/obj/structure/bed/chair/office/comfy/blue,
+/obj/item/weapon/pen,
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"m" = (
+/obj/random/trash,
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"o" = (
+/obj/structure/table/standard{
+	flipped = 1
+	},
+/obj/random/junk,
+/obj/random/loot,
+/obj/item/weapon/paper,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"p" = (
+/obj/effect/landmark/corpse/doctor,
+/obj/effect/decal/cleanable/blood,
+/obj/item/weapon/material/shard,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/vomit,
+/turf/simulated/floor/tiled/techfloor,
+/area/template_noop)
+"q" = (
+/obj/item/weapon/melee/telebaton,
+/obj/item/seeds/random,
+/obj/effect/decal/cleanable/spiderling_remains,
+/obj/structure/fireaxecabinet{
+	pixel_x = -32
+	},
+/turf/simulated/floor/lino,
+/area/template_noop)
+"r" = (
+/obj/item/weapon/paper_bin,
+/obj/random/trash,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"s" = (
+/obj/machinery/seed_storage/random,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"t" = (
+/obj/item/weapon/paper,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"u" = (
+/obj/effect/spider/stickyweb,
+/obj/item/weapon/paper,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"v" = (
+/obj/random/junk,
+/obj/effect/spider/stickyweb,
+/obj/item/seeds/random,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"w" = (
+/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/blood,
+/mob/living/simple_animal/hostile/giant_spider,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"x" = (
+/obj/structure/grille/broken,
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/effect/decal/cleanable/blood/drip,
+/mob/living/simple_animal/hostile/giant_spider/nurse,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"y" = (
+/obj/random/trash,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"z" = (
+/obj/effect/decal/cleanable/blood,
+/obj/item/weapon/paper,
+/obj/random/loot,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"A" = (
+/obj/random/loot,
+/obj/structure/sign/xenobio_1{
+	pixel_y = 32
+	},
+/turf/template_noop,
+/area/template_noop)
+"B" = (
+/obj/random/smokes,
+/obj/random/voidhelmet,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"C" = (
+/obj/random/loot,
+/mob/living/simple_animal/hostile/giant_spider/hunter,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"D" = (
+/obj/structure/bookcase/manuals/research_and_development,
+/obj/effect/decal/cleanable/cobweb2,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"E" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/spider/cocoon,
+/obj/random/loot,
+/turf/simulated/floor/reinforced,
+/area/template_noop)
+"F" = (
+/obj/structure/bed/chair/office/comfy/purple,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"G" = (
+/obj/structure/grille/broken,
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"H" = (
+/obj/structure/grille/broken,
+/obj/random/trash,
+/obj/effect/decal/cleanable/blood,
+/obj/random/loot,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"I" = (
+/obj/item/weapon/paper,
+/obj/effect/decal/cleanable/blood/drip,
+/mob/living/simple_animal/hostile/giant_spider,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"J" = (
+/obj/effect/spider/stickyweb,
+/obj/machinery/door/airlock/external,
+/turf/simulated/floor/tiled/techfloor,
+/area/template_noop)
+"K" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/blood/gibs/body,
+/turf/simulated/floor/reinforced,
+/area/template_noop)
+"L" = (
+/obj/random/loot,
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/reinforced,
+/area/template_noop)
+"M" = (
+/obj/effect/decal/cleanable/blood,
+/turf/template_noop,
+/area/template_noop)
+"N" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"O" = (
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/template_noop,
+/area/template_noop)
+"P" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/template_noop,
+/area/template_noop)
+"R" = (
+/obj/structure/sign/warning/biohazard,
+/turf/simulated/wall/r_wall/prepainted{
+	paint_color = "#5b8693"
+	},
+/area/template_noop)
+"W" = (
+/obj/effect/spider/stickyweb,
+/obj/random/voidsuit,
+/obj/random/loot,
+/obj/effect/decal/cleanable/vomit,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = -32
+	},
+/turf/simulated/floor/lino,
+/area/template_noop)
+"X" = (
+/obj/structure/filingcabinet,
+/turf/simulated/floor/lino,
+/area/template_noop)
+"Y" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/reinforced,
+/area/template_noop)
+"Z" = (
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/plating,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+m
+"}
+(2,1,1) = {"
+b
+b
+s
+q
+W
+h
+K
+b
+a
+"}
+(3,1,1) = {"
+b
+k
+t
+v
+w
+x
+L
+b
+a
+"}
+(4,1,1) = {"
+f
+i
+l
+B
+y
+b
+b
+R
+M
+"}
+(5,1,1) = {"
+f
+o
+e
+z
+N
+d
+p
+J
+P
+"}
+(6,1,1) = {"
+f
+j
+u
+n
+F
+b
+b
+b
+A
+"}
+(7,1,1) = {"
+b
+X
+r
+Z
+I
+G
+Y
+b
+O
+"}
+(8,1,1) = {"
+b
+b
+D
+C
+c
+H
+E
+b
+m
+"}
+(9,1,1) = {"
+m
+b
+b
+b
+b
+b
+b
+b
+a
+"}

@@ -79,6 +79,12 @@
 	emote_see = list("paws the ground","shakes its mane","stomps")
 	emote_hear = list("snuffles")
 
+/mob/living/simple_animal/hostile/retaliate/beast/samak/alt
+	desc = "A fast, armoured predator accustomed to hiding and ambushing."
+	icon_state = "samak-alt"
+	icon_living = "samak-alt"
+	icon_dead = "samak-alt_dead"
+
 /mob/living/simple_animal/hostile/retaliate/beast/diyaab
 	name = "diyaab"
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
@@ -117,7 +123,14 @@
 	cold_damage_per_tick = 0
 	speak_chance = 2
 	speak = list("Shuhn","Shrunnph?","Shunpf")
-	emote_see = list("scratches the ground","shakes out it's mane","tinkles gently")
+	emote_see = list("scratches the ground","shakes out its mane","tinkles gently")
+
+/mob/living/simple_animal/hostile/retaliate/beast/shantak/alt
+	desc = "A piglike creature with a long and graceful mane. Don't be fooled by its beauty."
+	icon_state = "shantak-alt"
+	icon_living = "shantak-alt"
+	icon_dead = "shantak-alt_dead"
+	emote_see = list("scratches the ground","shakes out it's mane","rustles softly")
 
 /mob/living/simple_animal/yithian
 	name = "yithian"
@@ -147,7 +160,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/jelly
 	name = "zeq"
-	desc = "It looks like a jellyfish floating up. How does it do that?"
+	desc = "It looks like a floating jellyfish. How does it do that?"
 	faction = "zeq"
 	icon_state = "jelly"
 	icon_living = "jelly"
@@ -162,6 +175,28 @@
 	damtype = BURN
 	speak_chance = 1
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
+
+/mob/living/simple_animal/hostile/retaliate/jelly/alt
+	icon_state = "jelly-alt"
+	icon_living = "jelly-alt"
+	icon_dead = "jelly-alt_dead"
+
+mob/living/simple_animal/hostile/retaliate/royalcrab
+	name = "cragenoy"
+	desc = "It looks like a crustacean with an exceedingly hard carapace. Watch the pinchers!"
+	faction = "crab"
+	icon_state = "royalcrab"
+	icon_living = "royalcrab"
+	icon_dead = "royalcrab_dead"
+	move_to_delay = 3
+	maxHealth = 150
+	health = 150
+	speed = 1
+	melee_damage_lower = 2
+	melee_damage_upper = 5
+	attacktext = "pinched"
+	speak_chance = 1
+	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
 
 /mob/living/simple_animal/hostile/jelly/New()
 	..()
