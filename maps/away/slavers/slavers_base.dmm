@@ -216,11 +216,11 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aR" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aS" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -263,7 +263,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aZ" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -292,7 +292,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bd" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/trash/liquidfood,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
@@ -319,7 +319,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bh" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/machinery/flasher{
 	id = "permentryflash";
 	name = "Floor mounted flash";
@@ -478,7 +478,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "bu" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -632,12 +632,12 @@
 /area/slavers_base/cells)
 "bP" = (
 /obj/machinery/light/small/red,
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bQ" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -843,11 +843,11 @@
 /obj/machinery/light/small/red{
 	dir = 1
 	},
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cf" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/random/snack,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -859,7 +859,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "ch" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/remains/human,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1134,7 +1134,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cM" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
@@ -1145,7 +1145,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cO" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/glass/rag,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/effect/landmark/corpse/slavers_base/slave,
@@ -1160,7 +1160,7 @@
 /area/slavers_base/cells)
 "cQ" = (
 /obj/machinery/light/small/red,
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)

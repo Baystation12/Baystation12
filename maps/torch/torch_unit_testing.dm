@@ -65,6 +65,8 @@
 		/area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exoplanet/garbage  = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/shrouded = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/chlorine = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT,
@@ -93,6 +95,8 @@
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
 		/area/exoplanet/garbage,
+		/area/exoplanet/shrouded,
+		/area/exoplanet/chlorine,
 		/area/icarus/vessel,
 		/area/icarus/open,
 	)
