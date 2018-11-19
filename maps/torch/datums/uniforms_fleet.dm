@@ -158,12 +158,12 @@
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
 
-/decl/hierarchy/mil_uniform/fleet/srv
+/decl/hierarchy/mil_uniform/fleet/exp
 	name = "Fleet exploration"
 	departments = EXP
 
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/exploration
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/exploration, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/exploration, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet, /obj/item/clothing/under/solgov/utility/fleet/combat/exploration)
 
 /decl/hierarchy/mil_uniform/fleet/exp/noncom
 	name = "Fleet exploration SNCO"
@@ -212,4 +212,3 @@
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet/command
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
-

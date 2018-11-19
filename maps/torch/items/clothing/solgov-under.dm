@@ -172,6 +172,9 @@
 /obj/item/clothing/under/solgov/utility/fleet/combat/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
 
+/obj/item/clothing/under/solgov/utility/fleet/combat/exploration
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
+
 /obj/item/clothing/under/solgov/utility/army
 	name = "army fatigues"
 	desc = "The utility uniform of the SCG Army, made from durable material."
