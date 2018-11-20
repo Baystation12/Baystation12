@@ -116,6 +116,15 @@
 	icon_state = "event"
 	opacity = 1
 
+/obj/effect/overmap_event/Destroy()
+	var/list/events_by_turf = overmap_event_handler.get_event_turfs_by_z_level(z)
+	var/datum/overmap_event/tokill = events_by_turf[get_turf(src)]
+	GLOB.entered_event.unregister(get_turf(src), overmap_event_handler, /decl/overmap_event_handler/proc/on_turf_entered)
+	GLOB.exited_event.unregister(get_turf(src), overmap_event_handler, /decl/overmap_event_handler/proc/on_turf_exited)
+	for(var/obj/effect/overmap/ship/leaver in get_turf(src))
+		tokill.leave(leaver)
+	. = ..()
+
 /datum/overmap_event
 	var/name = "map event"
 	var/radius = 2
@@ -126,6 +135,7 @@
 	var/difficulty = EVENT_LEVEL_MODERATE
 	var/list/victims
 	var/continuous = TRUE //if it should form continous blob, or can have gaps
+	var/weaknesses //if the BSA can destroy them and with what
 
 /datum/overmap_event/proc/enter(var/obj/effect/overmap/ship/victim)
 	if(victim in victims)
@@ -154,6 +164,7 @@
 	continuous = FALSE
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
 	difficulty = EVENT_LEVEL_MAJOR
+	weaknesses = BSA_MINING | BSA_EXPLOSIVE
 
 /datum/overmap_event/meteor/enter(var/obj/effect/overmap/ship/victim)
 	..()
@@ -170,6 +181,7 @@
 	opacity = 0
 	event_icon_states = list("electrical1", "electrical2", "electrical3", "electrical4")
 	difficulty = EVENT_LEVEL_MAJOR
+	weaknesses = BSA_EMP
 
 /datum/overmap_event/dust
 	name = "dust cloud"
@@ -177,6 +189,7 @@
 	count = 16
 	radius = 4
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")
+	weaknesses = BSA_MINING | BSA_EXPLOSIVE | BSA_FIRE
 
 /datum/overmap_event/ion
 	name = "ion cloud"
@@ -186,6 +199,7 @@
 	opacity = 0
 	event_icon_states = list("ion1", "ion2", "ion3", "ion4")
 	difficulty = EVENT_LEVEL_MAJOR
+	weaknesses = BSA_EMP
 
 /datum/overmap_event/carp
 	name = "carp shoal"
@@ -196,6 +210,7 @@
 	difficulty = EVENT_LEVEL_MODERATE
 	continuous = FALSE
 	event_icon_states = list("carp1", "carp2")
+	weaknesses = BSA_EXPLOSIVE | BSA_FIRE
 
 /datum/overmap_event/carp/major
 	name = "carp school"

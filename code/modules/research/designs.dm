@@ -2080,6 +2080,27 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
 	sort_string = "KCAAB"
 
+/datum/design/circuit/bsafront
+	name = "bluespace particle beam generator mark VI."
+	id = "bsafront"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/bsafront
+	sort_string = "KCAAC"
+
+/datum/design/circuit/bsamiddle
+	name = "bluespace fusor mark VI."
+	id = "bsamiddle"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/bsamiddle
+	sort_string = "KCAAD"
+
+/datum/design/circuit/bsaback
+	name = "bluespace material deconstructor mark VI."
+	id = "bsaback"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/bsaback
+	sort_string = "KCAAE"
+
 /datum/design/circuit/mecha
 	req_tech = list(TECH_DATA = 3)
 
