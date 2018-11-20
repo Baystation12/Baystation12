@@ -88,6 +88,7 @@
 	var/equipment_light_protection
 	var/list/equipment_overlays = list()	// Extra overlays from equipped items
 
+	var/public_record = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""

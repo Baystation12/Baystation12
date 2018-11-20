@@ -54,6 +54,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_species(H ? H.get_species() : SPECIES_HUMAN)
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
 	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
+	set_public_record(H && H.public_record && !jobban_isbanned(H, "Records") ? html_decode(H.public_record) : "No record supplied")
 
 	// Medical record
 	set_bloodtype(H ? H.b_type : "Unset")
@@ -175,6 +176,8 @@ FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
 FIELD_SHORT("Species",species, null, access_change_ids)
 FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
 FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids)
+
+FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
 FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
