@@ -617,10 +617,6 @@
 /obj/machinery/microwave,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
-"bs" = (
-/obj/structure/grille,
-/turf/space,
-/area/map_template/crashed_pod)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1093,9 +1089,9 @@
 
 (1,1,1) = {"
 aa
-bs
-bs
-bs
+aa
+aa
+aa
 ab
 ab
 ab
