@@ -1,4 +1,5 @@
 /datum/preferences
+	var/public_record = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -9,12 +10,14 @@
 	sort_order = 3
 
 /datum/category_item/player_setup_item/background/records/load_character(var/savefile/S)
+	from_file(S["public_record"],pref.public_record)
 	from_file(S["med_record"],pref.med_record)
 	from_file(S["sec_record"],pref.sec_record)
 	from_file(S["gen_record"],pref.gen_record)
 	from_file(S["memory"],pref.memory)
 
 /datum/category_item/player_setup_item/background/records/save_character(var/savefile/S)
+	to_file(S["public_record"],pref.public_record)
 	to_file(S["med_record"],pref.med_record)
 	to_file(S["sec_record"],pref.sec_record)
 	to_file(S["gen_record"],pref.gen_record)
@@ -26,6 +29,8 @@
 	if(jobban_isbanned(user, "Records"))
 		. += "<span class='danger'>You are banned from using character records.</span><br>"
 	else
+		. += "General Notes (Public): "
+		. += "<a href='?src=\ref[src];set_public_record=1'>[TextPreview(pref.public_record,40)]</a><br>"
 		. += "Medical Records: "
 		. += "<a href='?src=\ref[src];set_medical_records=1'>[TextPreview(pref.med_record,40)]</a><br>"
 		. += "Employment Records: "
@@ -37,7 +42,13 @@
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/records/OnTopic(var/href,var/list/href_list, var/mob/user)
-	if(href_list["set_medical_records"])
+	if (href_list["set_public_record"])
+		var/new_public = sanitize(input(user,"Enter general public record information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.public_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		if (!isnull(new_public) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+			pref.public_record = new_public
+		return TOPIC_REFRESH
+
+	else if(href_list["set_medical_records"])
 		var/new_medical = sanitize(input(user,"Enter medical information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.med_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(new_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.med_record = new_medical
