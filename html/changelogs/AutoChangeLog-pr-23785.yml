@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Charon and Aquila APCs now include helm access flags, meaning anyone who can access the shuttle's helm can also unlock the shuttle's APCs. Engineers still have APC access as well."

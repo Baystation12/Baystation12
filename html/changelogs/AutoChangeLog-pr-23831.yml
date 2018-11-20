@@ -1,4 +1,0 @@
-author: "Aticius"
-delete-after: True
-changes: 
-  - bugfix: "Crashed pod should no longer have random space tiles causing constant air flow/air loss."
