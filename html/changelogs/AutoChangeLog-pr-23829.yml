@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "Clonex should work properly with cryo tubes now (recall that you have to make it at -100 to -75 C, best done with the cooler). It will adjust its temperature to that of the cryo tube, which should prevent it from denaturing under normal circumstances."
