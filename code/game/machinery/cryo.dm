@@ -66,6 +66,8 @@
 	var/has_air_contents = FALSE
 	if(air_contents) //Check this even if it's unpowered
 		ADJUST_ATOM_TEMPERATURE(src, air_contents.temperature)
+		if(beaker)
+			QUEUE_TEMPERATURE_ATOMS(beaker)
 		has_air_contents = TRUE
 
 	if(!on)
@@ -202,10 +204,8 @@
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
 		if(!user.unEquip(G, src))
-			return
+			return // Temperature will be adjusted on Entered()
 		beaker =  G
-		beaker.temperature = air_contents.temperature
-		QUEUE_TEMPERATURE_ATOMS(beaker)
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 	else if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
