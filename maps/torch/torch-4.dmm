@@ -30833,6 +30833,7 @@
 /obj/item/stack/material/phoron,
 /obj/item/stack/material/phoron,
 /obj/item/stack/material/phoron,
+/obj/item/weapon/reagent_containers/glass/beaker/insulated/large,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "uBg" = (
