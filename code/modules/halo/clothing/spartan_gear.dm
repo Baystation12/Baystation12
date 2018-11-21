@@ -49,6 +49,3 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list("Spartan")
-
-//todo
-/obj/item/device/radio/headset/spartan

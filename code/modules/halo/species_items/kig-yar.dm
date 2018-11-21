@@ -1,11 +1,31 @@
 
 GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species_items/first_kig-yar.txt'))
 
-/mob/living/carbon/human/covenant/kigyar/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Kig-Yar")							//Code breaks if not placed in species folder,
-	name = pick(GLOB.first_names_kig_yar)
-	real_name = name
+/mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
+	..(new_loc,"Kig-Yar")
 	faction = "Covenant"
+
+/datum/language/ruuhti
+	name = "Ruuhti"
+	desc = "The language of the Ruuhtian KigYar"
+	native = 1
+	colour = "vox"
+	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
+	key = "R"
+	flags = RESTRICTED
+
+/mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
+	..(new_loc,"Tvaoan Kig-Yar")
+	faction = "Covenant"
+
+/datum/language/tvoai
+	name = "Tvoai"
+	desc = "The language of the Tvaoan KigYar"
+	native = 1
+	colour = "vox"
+	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
+	key = "T"
+	flags = RESTRICTED
 
 /obj/item/clothing/head/helmet/kigyar
 	name = "Kig-Yar Scout Helmet"
@@ -14,7 +34,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon_state = "scouthelm"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
-	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
+	species_restricted = list("Kig-Yar")
 	action_button_name = "Toggle Night Vision"
 	var/linked_glasses
 	var/mob/living/carbon/human/u
@@ -53,7 +73,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	canremove = 0
 
-/obj/item/clothing/under/covenant/kigyar
+/obj/item/clothing/under/kigyar
 	name = "Kig-Yar Body-Suit"
 	desc = "A Kig-Yar body suit. Meant to be worn underneath a combat harness"
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
@@ -63,13 +83,13 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
-/obj/item/clothing/under/covenant/kigyar/armless
+/obj/item/clothing/under/kigyar/armless
 	icon_state = "jackal_bodysuit_armless_s"
 	worn_state = "jackal_bodysuit_armless"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 	species_restricted = list("Kig-Yar")
 
-/obj/item/clothing/suit/armor/covenant/kigyar
+/obj/item/clothing/suit/armor/kigyar
 	name = "Kig-Yar Combat Harness"
 	desc = "A protective harness for use during combat."
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
@@ -79,7 +99,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/organ/external/arm/hollow_bones
 	min_broken_damage = 20 //Needs 10 less damage to break

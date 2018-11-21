@@ -12,6 +12,7 @@
 	role_text_plural = "Prophets"       // As above but plural.
 
 	antaghud_indicator = "hudcovenant"
+	mob_path = /mob/living/carbon/human/covenant/sanshyuum
 	/*
 	var/antag_indicator                     // icon_state for icons/mob/mob.dm visual indicator.
 	var/faction_indicator                   // See antag_indicator, but for factionalized people only.
@@ -31,13 +32,12 @@
 	initial_spawn_target = 1            // Gamemode will attempt to spawn this many antags.
 
 	landmark_id = "prophet_start"
-	mob_path = /mob/living/simple_animal/prophet
 	feedback_tag = "prophet_objective"
 	minimum_player_age = 0
 	suspicion_chance = 0
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 
-	list/valid_species =       list()
+	list/valid_species =       list("San'Shyuum")
 	min_player_age = 0
 
 	antag_text = "You are a Prophet of the Covenant! Not only are you a religious leader, but you hold a great deal of practical power too. \
@@ -45,5 +45,15 @@
 		No-one except another prophet would dare countermand or disobey you."
 
 /datum/antagonist/opredflag_prophet/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
- 	. = ..()
- 	target.current.name = "Lesser Prophet of [pick("Harmony","Charity","Hope","Temperance","Diligence","Patience","Humility","Reverence","Purity","Reverence")]"
+	. = ..()
+
+	var/mob/living/carbon/M = target.current
+	var/newname = input("Choose your Prophet name, or leave blank to keep the random name", "Prophet Name",M.name)
+	if(newname)
+		M.name = newname
+		M.real_name = newname
+
+/datum/antagonist/opredflag_prophet/equip(var/mob/living/carbon/human/player)
+	. = ..()
+	player.equip_to_slot_or_del(new /obj/item/clothing/suit/prophet_robe(player), slot_wear_suit)
+	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/covenant(player), slot_l_ear)

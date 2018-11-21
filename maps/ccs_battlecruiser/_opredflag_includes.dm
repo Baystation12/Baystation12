@@ -17,6 +17,9 @@
 	#include "ccs_battlecruiser4.dmm"
 	#include "ccs_battlecruiser5.dmm"
 
+	#include "planet_staging.dm"
+	#include "planet_staging.dmm"
+
 	#include "mapdef.dm"
 
 	#include "mode_opredflag.dm"

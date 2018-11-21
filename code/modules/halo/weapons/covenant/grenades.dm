@@ -4,8 +4,9 @@
 	desc = "When activated, the coating of this grenade becomes a powerful adhesive, sticking to anyone it is thrown at."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
+	throw_speed = 1
 	var/alt_explosion_damage_max = 70 //The amount of damage done when grenade is stuck inside someone
-	var/alt_explosion_range = 3
+	var/alt_explosion_range = 2
 
 /obj/item/weapon/grenade/plasma/throw_impact(var/atom/A)
 	. = ..()
@@ -38,4 +39,4 @@
 	throw_range = 1
 
 	alt_explosion_damage_max = 100
-	alt_explosion_range = 2
+	alt_explosion_range = 1
