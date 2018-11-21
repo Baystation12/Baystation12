@@ -17,6 +17,6 @@
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring InnieBase
+	#warn A map has already been included, ignoring UNSC_Achlys
 
 #endif
