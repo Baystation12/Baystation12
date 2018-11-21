@@ -1,0 +1,11 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - balance: "Space carp now have generally more health and more powerful attack values, and move faster. Pikes and sharks now have more health and do more damage."
+  - balance: "All castes of giant spiders are now tougher, faster, and more deadly all around. Hunters in particular are very dangerous."
+  - rscadd: "Hunters and guards now use a new venom."
+  - rscadd: "Added colour variants for space carp."
+  - rscadd: "Added randomly coloured eyes for giant spiders, and made them glow."
+  - rscadd: "Hostile mobs will now attempt to pry open doors between them and their target, though they can be interrupted."
+  - rscadd: "Hostile mobs can now destroy window-doors and tables."
+  - bugfix: "Fixed hostile mobs not destroying windows, grilles, wall frames, etc."
