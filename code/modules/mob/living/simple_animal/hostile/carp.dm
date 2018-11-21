@@ -1,9 +1,8 @@
 /mob/living/simple_animal/hostile/carp
 	name = "space carp"
 	desc = "A ferocious, fang-bearing creature that resembles a fish."
-	icon_state = "carp"
-	icon_living = "carp"
-	icon_dead = "carp_dead"
+	icon = 'icons/mob/carp.dmi'
+	icon_state = "carp" //for mapping purposes
 	icon_gib = "carp_gib"
 	speak_chance = 0
 	turns_per_move = 3
@@ -34,6 +33,9 @@
 
 	pass_flags = PASS_FLAG_TABLE
 
+	var/carp_color = "carp" //holder for icon set
+	var/list/icon_sets = list("carp", "blue", "yellow", "grape", "rust", "teal")
+
 /mob/living/simple_animal/hostile/carp/Initialize()
 	. = ..()
 	carp_randomify()
@@ -44,20 +46,13 @@
 	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
 	maxHealth = rand(initial(maxHealth), (1.5 * initial(maxHealth)))
 	health = maxHealth
-	if(prob(25))
-		icon_state = "carp_b"
-		icon_living = "carp_b"
-		icon_dead = "carp_b_dead"
-	else if(prob(10))
-		icon_state = "carp_y"
-		icon_living = "carp_y"
-		icon_dead = "carp_y_dead"
-	else if(prob(1))
-		icon_state = "carp_w"
-		icon_living = "carp_w"
-		icon_dead = "carp_w_dead"
-		desc = "The rare albino carp!"
-		can_escape = 1
+	if(prob(1))
+		carp_color = pick("white", "black")
+	else
+		carp_color = pick(icon_sets)
+	icon_state = "[carp_color]"
+	icon_living = "[carp_color]"
+	icon_dead = "[carp_color]_dead"
 
 /mob/living/simple_animal/hostile/carp/Allow_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for space carp!	//original comments do not steal
