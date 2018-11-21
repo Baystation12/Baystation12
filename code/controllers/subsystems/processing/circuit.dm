@@ -97,7 +97,7 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 // With immediate set, will generally imitate the order of the call stack if execution happened directly.
 // With immediate off, you go to the bottom of the pile.
 /datum/controller/subsystem/processing/circuit/proc/queue_component(obj/item/integrated_circuit/circuit, immediate = TRUE)
-	var/list/entry = list(circuit, args.Copy(3))
+	var/list/entry = list(circuit) + args.Copy(3)
 	if(!immediate || !position)
 		queued_components.Insert(1, list(entry))
 		if(position)
