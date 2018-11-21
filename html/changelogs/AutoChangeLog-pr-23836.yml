@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Clonex now won't denature below 50 C (i.e. unless you heat it)."
