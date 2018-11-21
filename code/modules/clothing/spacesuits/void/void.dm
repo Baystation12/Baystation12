@@ -50,10 +50,10 @@
 	can_breach = 1
 
 	//Inbuilt devices.
-	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
-	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
-	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
-
+	var/obj/item/clothing/shoes/magboots/boots = null 		// Deployable boots, if any.
+	var/obj/item/clothing/head/helmet/helmet = null   		// Deployable helmet, if any.
+	var/obj/item/weapon/tank/tank = null					// Deployable tank, if any.
+	var/obj/item/device/suit_cooling_unit/cooling = null	// Deployable cooling unit, if any
 	action_button_name = "Toggle Helmet"
 
 #define VOIDSUIT_INIT_EQUIPMENT(equipment_var, expected_path) \
@@ -69,6 +69,7 @@ else if(##equipment_var) {\
 	VOIDSUIT_INIT_EQUIPMENT(boots,  /obj/item/clothing/shoes/magboots)
 	VOIDSUIT_INIT_EQUIPMENT(helmet, /obj/item/clothing/head/helmet)
 	VOIDSUIT_INIT_EQUIPMENT(tank,   /obj/item/weapon/tank)
+	VOIDSUIT_INIT_EQUIPMENT(cooling, /obj/item/device/suit_cooling_unit)
 
 #undef VOIDSUIT_INIT_EQUIPMENT
 
@@ -77,11 +78,12 @@ else if(##equipment_var) {\
 	QDEL_NULL(boots)
 	QDEL_NULL(helmet)
 	QDEL_NULL(tank)
+	QDEL_NULL(cooling)
 
 /obj/item/clothing/suit/space/void/examine(user)
 	. = ..(user)
 	var/list/part_list = new
-	for(var/obj/item/I in list(helmet,boots,tank))
+	for(var/obj/item/I in list(helmet,boots,tank,cooling))
 		part_list += "\a [I]"
 	to_chat(user, "\The [src] has [english_list(part_list)] installed.")
 	if(tank && in_range(src,user))
@@ -122,6 +124,13 @@ else if(##equipment_var) {\
 			to_chat(M, "The valve on your suit's installed tank safely engages.")
 			tank.canremove = 0
 
+	if(cooling)
+		if(H.s_store) //In case someone finds a way.
+			to_chat(M, "Alarmingly, your suit's installed equipment fails to deploy.")
+		else if (H.equip_to_slot_if_possible(cooling, slot_s_store))
+			to_chat(M, "Your suit's installed equipment safely deploys.")
+			cooling.canremove = 0
+
 
 /obj/item/clothing/suit/space/void/dropped()
 	..()
@@ -145,6 +154,10 @@ else if(##equipment_var) {\
 	if(tank)
 		tank.canremove = 1
 		tank.forceMove(src)
+
+	if(cooling)
+		cooling.canremove = 1
+		cooling.forceMove(src)
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -178,16 +191,16 @@ else if(##equipment_var) {\
 			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
 	helmet.update_light(H)
 
-/obj/item/clothing/suit/space/void/verb/eject_tank()
+/obj/item/clothing/suit/space/void/verb/eject_storage()
 
-	set name = "Eject Voidsuit Tank"
+	set name = "Eject Voidsuit Storage"
 	set category = "Object"
 	set src in usr
 
 	if(!istype(src.loc,/mob/living)) return
 
-	if(!tank)
-		to_chat(usr, "There is no tank inserted.")
+	if(!tank && !cooling)
+		to_chat(usr, "\The [src]'s storage compartment is empty.")
 		return
 
 	var/mob/living/carbon/human/H = usr
@@ -196,10 +209,16 @@ else if(##equipment_var) {\
 	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
-	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
-	tank.canremove = 1
-	H.drop_from_inventory(tank)
-	src.tank = null
+	if(tank)
+		to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
+		tank.canremove = 1
+		H.drop_from_inventory(tank)
+		src.tank = null
+	else
+		to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [cooling] from your suit.</span>")
+		cooling.canremove = 1
+		H.drop_from_inventory(cooling)
+		src.cooling = null
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -213,14 +232,18 @@ else if(##equipment_var) {\
 		return
 
 	if(istype(W,/obj/item/weapon/screwdriver))
-		if(helmet || boots || tank)
-			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
+		if(helmet || boots || tank || cooling)
+			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank,cooling)
 			if(!choice) return
 
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
 				tank.dropInto(loc)
 				src.tank = null
+			else if(choice == cooling)
+				to_chat(user, "You pop \the [cooling] out of \the [src]'s storage compartment.")
+				cooling.dropInto(loc)
+				src.cooling = null
 			else if(choice == helmet)
 				to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
 				helmet.dropInto(loc)
@@ -251,8 +274,8 @@ else if(##equipment_var) {\
 			boots = W
 		return
 	else if(istype(W,/obj/item/weapon/tank))
-		if(tank)
-			to_chat(user, "\The [src] already has an airtank installed.")
+		if(tank || cooling)
+			to_chat(user, "\The [src]'s storage compartment is currently occupied.")
 		else if(istype(W,/obj/item/weapon/tank/phoron))
 			to_chat(user, "\The [W] cannot be inserted into \the [src]'s storage compartment.")
 		else
@@ -260,6 +283,14 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W
+	else if(istype(W,/obj/item/device/suit_cooling_unit))
+		if(cooling || tank)
+			to_chat(user, "\The [src]'s storage compartment is currently occupied.")
+		else
+			if(!user.unEquip(W, src))
+				return
+			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
+			cooling = W
 		return
 
 	..()
