@@ -27,6 +27,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	min_gas = list()
 	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
+	var walkPoint
+	var pbol = 0
+	var/list/patrol_points = list()
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
@@ -46,8 +49,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
+<<<<<<< HEAD
 	if(client)
 		target_mob = null
+=======
+	setPatrol(listPatrol())
+	patrol(detectPatrol())
+>>>>>>> 37df7291bf8753e79a61241ac7fd0e1fe200da4f
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
 		wander = 0
@@ -71,6 +79,38 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(flood_spawner)
 		flood_spawner.flood_die(src)
 		flood_spawner = null
+
+/mob/living/simple_animal/hostile/flood/proc/setPatrol(var/obj/effect/landmark/flood_patrol_target/Pa)
+	if(stance==HOSTILE_STANCE_IDLE && pbol==0)
+		walkPoint=Pa.nextPoint
+		wander=0
+		pbol=1
+
+/mob/living/simple_animal/hostile/flood/proc/listPatrol()
+	if(stance==HOSTILE_STANCE_IDLE && pbol==0)
+		for(var/obj/effect/landmark/flood_patrol_target/L in range(src))
+			patrol_points += L
+		if(isnull(patrol_points) || patrol_points.len == 0)
+			wander = 1
+			return
+	return pick(patrol_points)
+
+/mob/living/simple_animal/hostile/flood/proc/detectPatrol()
+	if(stance==HOSTILE_STANCE_IDLE && pbol==1)
+		for(var/obj/effect/landmark/flood_patrol_target/L in range(src,0))
+			return L
+
+/mob/living/simple_animal/hostile/flood/proc/patrol(var/obj/effect/landmark/flood_patrol_target/Pa)
+	if(stance==HOSTILE_STANCE_IDLE && pbol==1)
+		var/obj/effect/landmark/flood_patrol_target/flood_point=locate(walkPoint)
+		dir = get_dir(src,flood_point)
+		var/turf/walk_target = get_step_towards(src,flood_point)
+		Move(walk_target)
+		if(walk_target == src.loc)
+			walkPoint=Pa.nextPoint
+
+	else pbol=0
+
 
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"
