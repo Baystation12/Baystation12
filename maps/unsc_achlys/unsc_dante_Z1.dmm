@@ -54,17 +54,17 @@
 "bb" = (/obj/structure/window/reinforced/treated{dir = 4},/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 8},/obj/structure/grille,/turf/simulated/floor/plating,/area/dante/deck2)
 "bc" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/dante/deck2)
 "bd" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled,/area/dante/deck2)
-"be" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bf" = (/obj/structure/table/standard,/obj/item/device/megaphone,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bg" = (/obj/machinery/door/airlock/halo{name = "Showers"; req_access = list(145)},/turf/simulated/floor/tiled/white,/area/dante/deck2)
-"bh" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bi" = (/turf/simulated/floor/stairs/west,/area/dante/deck2)
-"bj" = (/obj/machinery/shower{icon_state = "shower"; dir = 4},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bk" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bl" = (/obj/structure/closet,/obj/item/clothing/head/helmet/pilot,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/shoes/dutyboots,/obj/item/clothing/under/unsc/pilot,/obj/item/clothing/accessory/holster/thigh,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bm" = (/obj/structure/table/glass,/obj/item/weapon/flame/lighter/zippo,/obj/item/weapon/storage/fancy/cigarettes/jerichos,/obj/item/clothing/glasses/sunglasses/big,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bn" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bo" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled,/area/dante/deck2)
+"be" = (/obj/machinery/door/airlock/halo{name = "Showers"; req_access = list(145)},/turf/simulated/floor/tiled/white,/area/dante/deck2)
+"bf" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bg" = (/turf/simulated/floor/stairs/west,/area/dante/deck2)
+"bh" = (/obj/machinery/shower{icon_state = "shower"; dir = 4},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bi" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bj" = (/obj/structure/closet,/obj/item/clothing/head/helmet/pilot,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/shoes/dutyboots,/obj/item/clothing/under/unsc/pilot,/obj/item/clothing/accessory/holster/thigh,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bk" = (/obj/structure/table/glass,/obj/item/weapon/flame/lighter/zippo,/obj/item/weapon/storage/fancy/cigarettes/jerichos,/obj/item/clothing/glasses/sunglasses/big,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bl" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bm" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/dante/deck2)
+"bn" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bo" = (/obj/structure/table/standard,/obj/item/device/megaphone,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/dante/deck2)
 "bp" = (/turf/simulated/floor/stairs/east,/area/dante/deck2)
 "bq" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/snacks/meatsteak,/turf/simulated/floor/tiled,/area/dante/deck2)
 "br" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/dante/deck2)
@@ -80,8 +80,8 @@
 "bB" = (/obj/structure/bed/chair/comfy/captain{tag = "icon-capchair_preview (EAST)"; name = "Comfy Office chair"; icon_state = "capchair_preview"; dir = 4},/turf/simulated/floor/tiled,/area/dante/deck2)
 "bC" = (/obj/structure/table/glass,/obj/item/weapon/flame/lighter/zippo,/obj/item/weapon/storage/fancy/cigarettes/professionals,/obj/item/clothing/glasses/sunglasses/big,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bD" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bE" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/snacks/fishfingers,/obj/item/weapon/reagent_containers/food/snacks/chips,/turf/simulated/floor/tiled,/area/dante/deck2)
-"bF" = (/obj/structure/table/standard,/obj/item/device/taperecorder,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bE" = (/obj/structure/table/standard,/obj/item/device/taperecorder,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bF" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/snacks/fishfingers,/obj/item/weapon/reagent_containers/food/snacks/chips,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bG" = (/obj/machinery/door/airlock/halo{name = "Captain's Quarters"; req_access = list(145)},/turf/simulated/floor/tiled,/area/dante/deck2)
 "bH" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/dante/deck2)
 "bI" = (/obj/structure/closet,/turf/simulated/floor/tiled,/area/dante/deck2)
@@ -164,23 +164,23 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalal
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalamacacacacacacacacacacacacacacacacacacacacacacacacacaiacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadanacacacacacalalacakakalalaoalalacalalalalalalalaoacapaqaracacalalalasacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacacacacacalalacakakalalalalalacalalatalalaualalacapaqaracacacavacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacacacacacacacawalacacacacacaxalacacaxalacacacacakakacayaqazacacalalalaAaBaCaDacacacacaEacaFacaGacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacacacacacacacawalacacacacacaxalacacaxalacacacacalalacayaqazacacalalalaAaBaCaDacacacacaEacaFacaGacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaHalacalaoalacalalalaoaIaDacalalalalaJalalalalalacakakacaKaqaKacalalalalalalalalalacacaLaMaNaMaOaMaPacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaQaRaSalalalaTalalalalalalacalalalalalalalalalalacacacacaUaqaVacalalalalalalalalalacaWaXaYaZaYaZaYbaaWbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalalalalalacalbdbdbdbdalalalalalacbebfacacbgacacbcalalbhbhbhalalalalalbialalalalalalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbjalacbkblbmacalbdbealalamacbnbdbdbdbdalalboalalacalamacalalalbpalalbdbebebqbralalbsalbialalalbtbualalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacacacacacacacacalbdbealalalbvalbdbdbdbdalalboalalbwalalbxalalalbpalalbdbeacbybralbzacbnbialbAalbBbtalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbjalacbkblbCacbcbdbealalalacalbdbdbdbdalalboalbDacalalacbcalalbpalalbdbEbebebralalalalbialalalbtbtalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalalalalalacalbdbdbdbdalalalalalacbFbeacacbGacacbcalalbHbHbHalalalbsalbialalalalalalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaQaRaSalalalaTalalalalalalacalalalalalalalalalalacacacacbIalalacalalalalalalalalalacbJbKbLbMbLbMbLbNbJbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaQaRaSalalalaTalalalalalalacalalalalalalalalalalacakakacaUaqaVacalalalalalalalalalacaWaXaYaZaYaZaYbaaWbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalalalalalacalbdbdbdbdalalalalalacacacacacbeacacbcalalbfbfbfalalalalalbgalalalalalalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbhalacbibjbkacalbdblalalamacbmbdbdbdbdalalbnalalacblboacalalalbpalalbdblblbqbralalbsalbgalalalbtbualalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacacacacacacacacalbdblalalalbvalbdbdbdbdalalbnalalbwalalbxalalalbpalalbdblacbybralbzacbmbgalbAalbBbtalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbhalacbibjbCacbcbdblalalalacalbdbdbdbdalalbnalbDacbEblacbcalalbpalalbdbFblblbralalalalbgalalalbtbtalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbcalacalalalacalalalalalalacalbdbdbdbdalalalalalacacacacacbGacacbcalalbHbHbHalalalbsalbgalalalalalalalbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaQaRaSalalalaTalalalalalalacalalalalalalalalalalacakakacbIalalacalalalalalalalalalacbJbKbLbMbLbMbLbNbJbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbIalacalatalacalalalatbObPacalalalalbQalalalalalacakakacbRalbSacalalalalalalalalalacacaLbTaNbTbUbTaPacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacacacacacacacbValacacacacacaxalacacaxalacacacacakakacbWatbXacacalalalbYbObPaIacacacacbZaccaaccbacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacacacacacacacbValacacacacacaxalacacaxalacacacacalalacbWatbXacacalalalbYbObPaIacacacacbZaccaaccbacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacacacacacalalacakakalalalalalacalalaoalalalalalacacacacacacacavacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadanacacacacacalalacakakalalatalalacalalalalalccalatacaccdalalalalalalasacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalamacacacacacacacacacacacacacacacacacacacacceacacacacaiacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalalacaaaaaaaaaaaaaaababababababababababacadadadacacadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadahacaiacacacacacaiacacaaaaaaaaaaaaaaababababababababababacadcfadacacadajadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacadadadafadadadacaaaaaaaaaaaaaaaaababababababababababacadaeadacacadaeadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadadadadacakakalalalalacaaaaabababababababababababababababacadadadacacadadadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababagadadadadahacaiacacacacacaiacacaaaaabababababababababababababababacadcfadacacadajadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababacacacacacacacadadadafadadadacaaaaaaabababababababababababababababacadaeadacacadaeadacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacaaaaaaaaaaaaaaaaababababababababababacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
