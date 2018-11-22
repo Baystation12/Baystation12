@@ -225,7 +225,8 @@
 		return
 
 	var/mob/living/L = locate() in bag
-	injectMob(L, user, bag)
+	if(L)
+		injectMob(L, user, bag)
 
 /obj/item/weapon/reagent_containers/syringe/proc/injectMob(var/mob/living/carbon/target, var/mob/living/carbon/user, var/atom/trackTarget)
 	if(!trackTarget)

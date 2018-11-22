@@ -28,8 +28,9 @@
 		GLOB.using_map.accessible_z_levels -= "[z]" //not accessible during the jump
 
 /datum/universal_state/bluespace_jump/OnExit()
-	for(var/M in bluespaced)
-		clear_bluespaced(M)
+	for(var/mob/M in bluespaced)
+		if(!QDELETED(M))
+			clear_bluespaced(M)
 
 	bluespaced.Cut()
 	GLOB.using_map.accessible_z_levels = old_accessible_z_levels

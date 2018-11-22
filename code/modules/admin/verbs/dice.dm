@@ -6,10 +6,8 @@
 
 	var/sum = input("How many times should we throw?") as num
 	var/side = input("Select the number of sides.") as num
-	if(!side)
-		side = 6
-	if(!sum)
-		sum = 2
+	sanitize_integer(sum, 1, INFINITY, 2)
+	sanitize_integer(side, 1, INFINITY, 6)
 
 	var/dice = num2text(sum) + "d" + num2text(side)
 
