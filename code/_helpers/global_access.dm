@@ -49,6 +49,8 @@
 			return global.SSchemistry;
 		if("SScircuit")
 			return global.SScircuit;
+		if("SScircuit_components")
+			return global.SScircuit_components;
 		if("SScodex")
 			return global.SScodex;
 		if("SSculture")
@@ -1010,6 +1012,8 @@
 			global.SSchemistry=newval;
 		if("SScircuit")
 			global.SScircuit=newval;
+		if("SScircuit_components")
+			global.SScircuit_components=newval;
 		if("SScodex")
 			global.SScodex=newval;
 		if("SSculture")
@@ -1946,6 +1950,7 @@
 	"SScharacter_setup",
 	"SSchemistry",
 	"SScircuit",
+	"SScircuit_components",
 	"SScodex",
 	"SSculture",
 	"SSevac",
