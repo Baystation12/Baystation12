@@ -76,7 +76,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner.flood_die(src)
 		flood_spawner = null
 
-<<<<<<< HEAD
 /mob/living/simple_animal/hostile/flood/proc/setPatrol(var/obj/effect/landmark/flood_patrol_target/Pa)
 	if(stance==HOSTILE_STANCE_IDLE && pbol==0)
 		walkPoint=Pa.nextPoint
@@ -108,7 +107,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 	else pbol=0
 
-=======
 /mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
 	var/obj/infest_placeholder = new /obj/effect/dead_infestor
@@ -136,7 +134,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	for(var/obj/i in h.contents)
 		h.drop_from_inventory(i)
 	qdel(h)
->>>>>>> 6ea2141cdca326b2a00fa4ef9675a85f96ce2ab0
 
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"
