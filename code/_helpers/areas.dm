@@ -38,8 +38,16 @@
 
 /proc/group_areas_by_z_level(var/list/predicates)
 	. = list()
+	var/list/L = list()
+	var/length = 0
 	for(var/area/A in get_filtered_areas(predicates))
-		group_by(., num2text(A.z), A)
+		group_by(L, num2text(A.z), A)
+		length = max(length, length(num2text(A.z)))
+	for(var/key in L) // pad the keys so they are text-sorted correctly
+		var/new_key = key
+		while(length(new_key) < length)
+			new_key = ".[new_key]"
+		.[new_key] = L[key]
 
 /*
 	Pick helpers
