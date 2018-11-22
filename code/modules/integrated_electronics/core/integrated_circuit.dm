@@ -83,7 +83,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	QDEL_NULL_LIST(inputs)
 	QDEL_NULL_LIST(outputs)
 	QDEL_NULL_LIST(activators)
-	SScircuit.dequeue_component(src)
+	SScircuit_components.dequeue_component(src)
 	. = ..()
 
 /obj/item/integrated_circuit/emp_act(severity)
