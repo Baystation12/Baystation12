@@ -17,7 +17,7 @@
 #define SS_PRIORITY_ALARM          20   // Alarm processing.
 #define SS_PRIORITY_EVENT          20   // Event processing and queue handling.
 #define SS_PRIORITY_SHUTTLE        20   // Shuttle movement.
-#define SS_PRIORITY_CIRCUIT        20	// Processing Circuit's ticks and all that.
+#define SS_PRIORITY_CIRCUIT_COMP   20	// Processing circuit component do_work.
 #define SS_PRIORITY_TEMPERATURE    20	// Cooling and heating of atoms.
 #define SS_PRIORITY_RADIATION      20   // Radiation processing and cache updates.
 #define SS_PRIORITY_OPEN_SPACE     20    // Open turf updates.
@@ -28,16 +28,17 @@
 #define SS_PRIORITY_TRADE          10   // Adds/removes traders.
 
 // SS_BACKGROUND
-#define SS_PRIORITY_OBJECTS       60	// processing_objects processing.
-#define SS_PRIORITY_PROCESSING    30	// Generic datum processor. Replaces objects processor.
-#define SS_PRIORITY_PLANTS        30	// Spreading vine effects.
+#define SS_PRIORITY_OBJECTS       100	// processing_objects processing.
+#define SS_PRIORITY_PROCESSING    95	// Generic datum processor. Replaces objects processor.
+#define SS_PRIORITY_PLANTS        90	// Plant processing, slow ticks.
+#define SS_PRIORITY_VINES         50	// Spreading vine effects.
+#define SS_PRIORITY_NANO          40    // Updates to nanoui uis.
+#define SS_PRIORITY_TGUI          40    // Updates to tgui uis.
+#define SS_PRIORITY_TURF          30    // Radioactive walls/blob.
+#define SS_PRIORITY_EVAC          30    // Processes the evac controller.
+#define SS_PRIORITY_CIRCUIT       30	// Processing Circuit's ticks and all that.
+#define SS_PRIORITY_WIRELESS      30	// Wireless connection setup.
 #define SS_PRIORITY_GARBAGE       25	// Garbage collection.
-#define SS_PRIORITY_VINES         25	// Spreading vine effects.
-#define SS_PRIORITY_NANO          20    // Updates to nanoui uis.
-#define SS_PRIORITY_TGUI          20    // Updates to tgui uis.
-#define SS_PRIORITY_TURF          20    // Radioactive walls/blob.
-#define SS_PRIORITY_EVAC          20    // Processes the evac controller.
-#define SS_PRIORITY_WIRELESS      10	// Wireless connection setup.
 
 
 // Subsystem fire priority, from lowest to highest priority
