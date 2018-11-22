@@ -1495,7 +1495,6 @@
 #include "code\modules\halo\misc\admin_covenant_strike_team.dm"
 #include "code\modules\halo\misc\admin_start_flood_attack.dm"
 #include "code\modules\halo\misc\faction_whitelist.dm"
-#include "code\modules\halo\misc\mapnav.dm"
 #include "code\modules\halo\misc\memorial_statue.dm"
 #include "code\modules\halo\misc\Orion Project.dm"
 #include "code\modules\halo\misc\payload.dm"
