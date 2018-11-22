@@ -109,8 +109,7 @@
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/cow/New()
-	udder = new(50)
-	udder.my_atom = src
+	udder = new(50, src)
 	..()
 
 /mob/living/simple_animal/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)

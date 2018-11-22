@@ -188,9 +188,11 @@
 	popup.open()
 
 /obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
-	if(!user.Adjacent(src) || (issilicon(user) && href_list["remove_container"]))
-		to_chat(user, SPAN_WARNING("You are too far away."))
-		return STATUS_CLOSE
+	if(href_list["remove_container"])
+		. = ..(user, GLOB.physical_state, href_list)
+		if(. == STATUS_CLOSE)
+			to_chat(user, SPAN_WARNING("You are too far away."))
+		return
 	return ..()
 
 /obj/machinery/reagent_temperature/proc/ToggleUsePower()
