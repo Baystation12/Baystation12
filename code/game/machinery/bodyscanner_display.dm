@@ -19,23 +19,20 @@
 /obj/machinery/body_scan_display/OnTopic(mob/user as mob, href_list)
 	if(href_list["view"])
 		var/selection = text2num(href_list["view"])
-		var/sanitized = sanitize_integer(selection, 1, bodyscans.len)
-		if(sanitized)
-			selected = sanitized
+		if(is_valid_index(selection, bodyscans))
+			selected = selection
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 	if(href_list["delete"])
 		var/selection = text2num(href_list["delete"])
-		var/sanitized = sanitize_integer(selection, 1, bodyscans.len)
-		if(sanitized)
-			if(selected == sanitized)
-				selected = 0
-			else if(selected > sanitized)
-				selected--
-			bodyscans -= list(bodyscans[sanitized])
-			return TOPIC_REFRESH
-		else
+		if(!is_valid_index(selection, bodyscans))
 			return TOPIC_HANDLED
+		if(selected == selection)
+			selected = 0
+		else if(selected > selection)
+			selected--
+		bodyscans -= list(bodyscans[selection])
+		return TOPIC_REFRESH
 
 /obj/machinery/body_scan_display/attack_ai(user as mob)
 	return attack_hand(user)

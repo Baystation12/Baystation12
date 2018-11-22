@@ -126,8 +126,15 @@
 
 	if(mind)		//TODO
 		mind.transfer_to(O)
-		if(O.mind.assigned_role == "Robot")
+		if(O.mind && O.mind.assigned_role == "Robot")
 			O.mind.original = O
+			if(O.mind.role_alt_title == "Drone")
+				O.mmi = new /obj/item/device/mmi/digital/robot(O)
+			else if(O.mind.role_alt_title == "Cyborg")
+				O.mmi = new /obj/item/device/mmi(O)
+			else
+				O.mmi = new /obj/item/organ/internal/posibrain(O)
+			O.mmi.transfer_identity(src)
 		else if(mind && mind.special_role)
 			O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
 	else
@@ -135,21 +142,10 @@
 
 	O.dropInto(loc)
 	O.job = "Robot"
-	if(O.mind.assigned_role == "Robot")
-		if(O.mind.role_alt_title == "Drone")
-			O.mmi = new /obj/item/device/mmi/digital/robot(O)
-		else if(O.mind.role_alt_title == "Cyborg")
-			O.mmi = new /obj/item/device/mmi(O)
-		else
-			O.mmi = new /obj/item/organ/internal/posibrain(O)
-
-		O.mmi.transfer_identity(src)
-
 	callHook("borgify", list(O))
 	O.Namepick()
 
-	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
-		qdel(src)
+	qdel(src) // Queues us for a hard delete
 	return O
 
 /mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
