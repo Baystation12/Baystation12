@@ -8733,8 +8733,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -9483,8 +9483,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /obj/machinery/computer/general_air_control/large_tank_control{
 	name = "Carbon Dioxide Supply Control";
@@ -11207,8 +11207,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /obj/machinery/computer/general_air_control/large_tank_control{
 	dir = 8;
@@ -12458,8 +12458,8 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -13751,8 +13751,8 @@
 	},
 /obj/effect/floor_decal/corner/white,
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -14029,8 +14029,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /obj/machinery/computer/general_air_control/large_tank_control{
 	dir = 8;
@@ -14566,8 +14566,8 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -14804,8 +14804,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -18147,8 +18147,8 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 1
+	dir = 2;
+	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
