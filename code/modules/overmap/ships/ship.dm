@@ -94,10 +94,10 @@
 	return round(num_burns/burns_per_grid)
 
 /obj/effect/overmap/ship/proc/decelerate()
-	if(!is_still() && can_burn())
-		if (MOVING(speed[1]))
+	if(((speed[1]) || (speed[2])) && can_burn())
+		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(get_burn_acceleration(),abs(speed[1])), 0)
-		if (MOVING(speed[2]))
+		if (speed[2])
 			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
 		last_burn = world.time
 
