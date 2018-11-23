@@ -1,0 +1,7 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "The mecha skill (Exosuit Operation) is now a subskill of EVA. You need to have at least Trained in EVA to select it, and then choose it from skill selection."
+  - rscadd: "Driving mecha without the mecha skill may result in unpredictable movement."
+  - rscadd: "Exiting a mecha without proper skill may occasionally force-eject you."
+  - tweak: "The mecha skill no longer has anything to do with mecha fabrication in the description."
