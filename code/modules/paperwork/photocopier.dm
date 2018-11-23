@@ -1,8 +1,8 @@
 /obj/machinery/photocopier
 	name = "photocopier"
-	icon = 'icons/obj/library.dmi'
-	icon_state = "bigscanner"
-	var/insert_anim = "bigscanner1"
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "photocopier"
+	var/insert_anim = "photocopier_animation"
 	anchored = 1
 	density = 1
 	use_power = 1
@@ -181,7 +181,7 @@
 		toner--
 	if(toner == 0)
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
-	c.update_icon()	
+	c.update_icon()
 	return c
 
 /obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy, var/need_toner=1)
