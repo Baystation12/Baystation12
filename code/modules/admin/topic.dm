@@ -396,7 +396,7 @@
 		body += formatJobGroup(M, "Civilian Positions", "dddddd", "civiliandept", GLOB.civilian_positions)
 
 	//Non-Human (Green)
-		body += formatJobGroup(M, "Non-human Positions", "ccffcc", "nonhumandept", GLOB.nonhuman_positions + "pAI" + "Antag HUD")
+		body += formatJobGroup(M, "Non-human Positions", "ccffcc", "nonhumandept", GLOB.nonhuman_positions + "Antag HUD")
 
 	//Antagonist (Orange)
 		var/antagban_list = list()
