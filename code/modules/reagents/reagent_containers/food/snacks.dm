@@ -454,6 +454,24 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 12)
 	reagents.add_reagent(/datum/reagent/hyperzine, 5)
 
+/obj/item/weapon/reagent_containers/food/snacks/spider
+	name = "giant spider leg"
+	desc = "An economical replacement for crab. In space! Would probably be a lot nicer cooked."
+	icon_state = "spiderleg"
+	filling_color = "#d5f5dc"
+	center_of_mass = "x=16;y=10"
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/spider/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
+
+/obj/item/weapon/reagent_containers/food/snacks/spider/cooked
+	name = "boiled spider meat"
+	desc = "An economical replacement for crab. In space!"
+	icon_state = "spiderleg_c"
+	bitesize = 5
+
 /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 	name = "meat"
 	desc = "A slab of green meat. Smells like acid."
