@@ -339,7 +339,7 @@
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
-	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
+	description = "A light stimulant often used to dampen or negate the impact to speed and reaction-time caused by heavy equipment loads or light wounds."
 	taste_description = "acid"
 	reagent_state = LIQUID
 	color = "#FF3300"
@@ -347,11 +347,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(prob(5))
-		M.emote(pick("twitch", "blink_r", "shiver"))
-	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+	M.add_chemical_effect(CE_SLOWREMOVE, 1)
 	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/ethylredoxrazine

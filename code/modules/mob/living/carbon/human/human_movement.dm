@@ -11,10 +11,6 @@
 	if(embedded_flag || (stomach_contents && stomach_contents.len))
 		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(CE_SPEEDBOOST in chem_effects)
-		if(species.slowdown >= 0)
-			tally += SPEEDBOOST_SLOWDOWN_REDUCTION
-
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
@@ -64,6 +60,15 @@
 
 	if(mRun in mutations)
 		tally = 0
+
+	if((CE_SLOWREMOVE in chem_effects) && (tally > 0)) //Goes here because it checks the full tally first.
+		if(tally > SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED)
+			tally -= SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED
+		else
+			tally = 0
+
+	if(CE_SPEEDBOOST in chem_effects)
+		tally -= SPEEDBOOST_CHEM_SPEED_INCREASE
 
 	return (tally+config.human_delay)
 
