@@ -1,4 +1,3 @@
-
 #define SPINNING_WEB 1
 #define LAYING_EGGS 2
 #define MOVING_TO_TARGET 3
@@ -14,10 +13,11 @@
 	icon_dead = "brown_dead"
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
+	emote_see = list("rubs its forelegs together", "wipes its fangs", "stops suddenly")
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
@@ -28,10 +28,7 @@
 	melee_damage_upper = 15
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
-	var/poison_per_bite = 5
-	var/poison_type = /datum/reagent/toxin/venom
 	faction = "spiders"
-	var/busy = 0
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
 	speed = 1
@@ -41,7 +38,9 @@
 	can_escape = TRUE
 	break_stuff_probability = 25
 
-	var/body_colour
+	var/poison_per_bite = 5
+	var/poison_type = /datum/reagent/toxin/venom
+	var/busy = 0
 	var/eye_colour
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 
@@ -57,10 +56,12 @@
 	melee_damage_upper = 12
 	poison_per_bite = 15
 	speed = 0
-	var/atom/cocoon_target
 	poison_type = /datum/reagent/soporific
-	var/fed = 0
 	can_escape = FALSE
+
+	var/atom/cocoon_target
+	var/fed = 0
+	var/infest_chance = 8
 
 //hunters have the most poison and move the fastest, so they can find prey. hunters should be terrifying to fight 1v1
 /mob/living/simple_animal/hostile/giant_spider/hunter
@@ -77,14 +78,11 @@
 	move_to_delay = 2
 	break_stuff_probability = 30
 
-/mob/living/simple_animal/hostile/giant_spider/New(var/location, var/atom/parent)
+/mob/living/simple_animal/hostile/giant_spider/Initialize(var/mapload, var/atom/parent)
 	get_light_and_color(parent)
-	..()
-
-/mob/living/simple_animal/hostile/giant_spider/Initialize()
-	. = ..()
 	spider_randomify()
 	update_icon()
+	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
@@ -129,7 +127,7 @@
 	. = ..()
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
-		if(prob(poison_per_bite))
+		if(prob(infest_chance))
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(!BP_IS_ROBOTIC(O))
 				var/eggs = new /obj/effect/spider/eggcluster(O, src)

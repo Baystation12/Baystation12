@@ -1019,3 +1019,10 @@ I said no!
 /datum/recipe/cake/chocolatebar
 	reagents = list(/datum/reagent/drink/milk/chocolate = 10, /datum/reagent/nutriment/coco = 5, /datum/reagent/sugar = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/chocolatebar
+
+/datum/recipe/boiledspiderleg
+	reagents = list(/datum/reagent/water = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/spider
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/spider/cooked
