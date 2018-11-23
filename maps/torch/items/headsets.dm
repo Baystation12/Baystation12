@@ -1,6 +1,6 @@
 /obj/item/device/radio/headset/torchnanotrasen
-	name = "corporate headset"
-	desc = "A headset for corporate drones."
+	name = "research headset"
+	desc = "A headset for researchers."
 	icon_state = "nt_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchnt
