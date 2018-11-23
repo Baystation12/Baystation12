@@ -389,7 +389,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 
 /obj/item/device/mass_spectrometer
 	name = "mass spectrometer"
-	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample."
+	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
@@ -427,6 +427,11 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 		var/list/blood_traces = list()
 		var/list/blood_doses = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
+			if(length(reagents.reagent_list) == 1)
+				var/datum/reagent/random/random = R
+				if(istype(random))
+					random.on_chemicals_analyze(user)
+					return
 			if(R.type != /datum/reagent/blood)
 				reagents.clear_reagents()
 				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")

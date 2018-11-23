@@ -9,6 +9,8 @@ SUBSYSTEM_DEF(chemistry)
 	var/list/chemical_reactions_by_result = list()
 	var/list/processing_holders =           list()
 
+	var/list/random_chem_prototypes =       list()
+
 /datum/controller/subsystem/chemistry/stat_entry()
 	..("AH:[active_holders.len]")
 
@@ -55,3 +57,20 @@ SUBSYSTEM_DEF(chemistry)
 
 		if (MC_TICK_CHECK)
 			return
+
+/datum/controller/subsystem/chemistry/proc/get_prototype(var/datum/reagent/random/reagent)
+	if(!istype(reagent))
+		return
+	. = random_chem_prototypes[reagent.type]
+	if(!.)
+		var/datum/reagent/random/new_prototype = new reagent.type(null, TRUE)
+		new_prototype.randomize_data()
+		. = new_prototype
+		random_chem_prototypes[reagent.type] = .
+
+/datum/controller/subsystem/chemistry/proc/get_random_chem(var/only_if_unique = FALSE)
+	for(var/type in typesof(/datum/reagent/random))
+		if(only_if_unique && random_chem_prototypes[type])
+			continue
+		get_prototype(type) // we don't need it, but fill the cache to know it's been assigned
+		return type
