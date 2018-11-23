@@ -210,9 +210,9 @@ Helpers
 
 	//Decide on the mode to try.
 	if(!bypass_gamemode_vote && gamemode_vote_results)
+		gamemode_vote_results -= bad_modes
 		if(length(gamemode_vote_results))
 			mode_to_try = gamemode_vote_results[1]
-			gamemode_vote_results.Cut(1,2)
 			. = CHOOSE_GAMEMODE_RETRY //Worth it to try again at least once.
 		else
 			mode_to_try = "extended"
