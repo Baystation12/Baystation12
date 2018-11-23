@@ -1,7 +1,0 @@
-author: "Blue Bit"
-delete-after: True
-changes: 
-  - rscadd: "There are now two additional exoplanet types: shrouded and chlorine."
-  - rscadd: "Added a few alien creature color variants."
-  - maptweak: "Added six new randomly spawning exoplanet sites."
-  - bugfix: "Fixed a portion of the \"Lodge\" away site that was designated as space."

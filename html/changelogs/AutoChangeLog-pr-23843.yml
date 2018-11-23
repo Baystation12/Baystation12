@@ -1,5 +1,0 @@
-author: "Toriate"
-delete-after: True
-changes: 
-  - tweak: "Photocopier now uses new photocopier icon state in bureaucracy.dmi instead of the scanner iconstate."
-  - imageadd: "New photocopier sprites added! Made by yours truly."

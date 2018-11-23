@@ -1,4 +1,0 @@
-author: "RyanSmake"
-delete-after: True
-changes: 
-  - rscadd: "Adds a Bluespace Artillery to Deck 2 missile bay. Select an adjacent overmap tile, and get rid of the event on it, or shoot at the away sector a charge of your choosing (emp, remote mining, explosive, fire, or droppod)."
