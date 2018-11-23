@@ -194,6 +194,10 @@ var/list/_client_preferences_by_type
 	key = "HARDSUIT_ACTIVATION"
 	options = list(GLOB.PREF_MIDDLE_CLICK, GLOB.PREF_CTRL_CLICK, GLOB.PREF_ALT_CLICK, GLOB.PREF_CTRL_SHIFT_CLICK)
 
+/datum/client_preference/holster_on_intent
+	description = "Draw gun based on intent"
+	key = "HOLSTER_ON_INTENT"
+
 /datum/client_preference/show_credits
 	description = "Show End Titles"
 	key = "SHOW_CREDITS"
