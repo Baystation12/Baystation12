@@ -429,6 +429,11 @@
 		chems[/datum/reagent/nutriment] = list(rand(1,10),rand(10,20))
 
 	var/additional_chems = rand(0,5)
+	if(prob(50))
+		var/chem_type = SSchemistry.get_random_chem(TRUE)
+		if(chem_type)
+			additional_chems = 0
+			chems[chem_type] = list(rand(1,10),rand(10,20))
 
 	if(additional_chems)
 		var/list/banned_chems = list(

@@ -150,3 +150,5 @@
 
 /datum/reagent/proc/reaction_mob(var/mob/target)
 	touch_mob(target)
+
+/datum/reagent/proc/custom_temperature_effects(var/temperature)
