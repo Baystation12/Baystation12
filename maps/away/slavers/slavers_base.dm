@@ -62,7 +62,7 @@
 /decl/hierarchy/outfit/corpse
 	name = "Corpse Clothing"
 
-/decl/hierarchy/outfit/corpse/Initialize()
+/decl/hierarchy/outfit/corpse/New()
 	..()
 	hierarchy_type = type
 
