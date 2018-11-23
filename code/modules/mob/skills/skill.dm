@@ -1,9 +1,10 @@
 GLOBAL_LIST_EMPTY(skills)
 
 /decl/hierarchy/skill
-	var/ID = "none"					// ID of this skill. Needs to be unique.
-	name = "None" 				// Name of the skill. This is what the player sees.
-	var/desc = "Placeholder skill" 	// Generic description of this skill.
+	var/ID = "none"                        // ID of this skill. Needs to be unique.
+	name = "None"                          // Name of the skill. This is what the player sees.
+	hierarchy_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
+	var/desc = "Placeholder skill"         // Generic description of this skill.
 
    	// Names for different skill values, in order from 1 up.
 	var/levels = list( 		"Unskilled"			= "Unskilled Description",
@@ -11,9 +12,9 @@ GLOBAL_LIST_EMPTY(skills)
 							"Trained"			= "Trained Description",
 							"Experienced"		= "Experienced Description",
 							"Master"		= "Professional Description")
-	var/difficulty = SKILL_AVERAGE   //Used to compute how expensive the skill is
-	var/default_max = SKILL_ADEPT    //Makes the skill capped at this value in selection unless overriden at job level.
-	var/prerequisites // A list of skill prerequisites, if needed.
+	var/difficulty = SKILL_AVERAGE         //Used to compute how expensive the skill is
+	var/default_max = SKILL_ADEPT          //Makes the skill capped at this value in selection unless overriden at job level.
+	var/prerequisites                      // A list of skill prerequisites, if needed.
 
 /decl/hierarchy/skill/proc/get_cost(var/level)
 	switch(level)
@@ -24,10 +25,9 @@ GLOBAL_LIST_EMPTY(skills)
 		else
 			return 0
 
-//Do not attempt to get_decl any of these except /decl/hierarchy/skill from decls_repository. Use the children variable or GLOB.skills instead.
-/decl/hierarchy/skill/Initialize(var/full_init = TRUE)
-	..(full_init)
-	if(full_init)
+/decl/hierarchy/skill/Initialize()
+	..()
+	if(is_hidden_category())
 		if(!GLOB.skills.len)
 			for(var/decl/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
