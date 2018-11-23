@@ -218,12 +218,14 @@
 
 	rank_types = list(
 		/datum/mil_rank/sol/gov,
-		/datum/mil_rank/sol/agent
+		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/scientist
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/sol/gov,
-		/datum/mil_rank/sol/agent
+		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/scientist
 	)
 
 /datum/mil_rank/grade()
@@ -636,3 +638,6 @@
 	name = "OCIE Agent"
 	name_short = "AGT"
 	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
+
+/datum/mil_rank/sol/scientist
+	name = "Scientist"
