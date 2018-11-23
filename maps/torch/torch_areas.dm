@@ -639,6 +639,10 @@
 	name = "\improper Emergency Armory - Tactical"
 	icon_state = "Tactical"
 
+/area/command/bsa
+	name = "\improper Bluespace Artillery"
+	icon_state = "firingrange"
+
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
 
@@ -735,10 +739,6 @@
 /area/vacant/cargo
 	name = "\improper Requisitions Office"
 	icon_state = "quart"
-
-/area/vacant/missile
-	name = "\improper Third Deck Port Missile Pod"
-	icon_state = "firingrange"
 
 /area/vacant/brig
 	name = "\improper Permanent Brig"
