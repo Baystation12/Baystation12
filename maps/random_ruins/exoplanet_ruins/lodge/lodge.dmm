@@ -6,8 +6,9 @@
 /turf/simulated/wall/wood,
 /area/template_noop)
 "c" = (
-/turf/template_noop,
-/area/space)
+/obj/machinery/power/port_gen/pacman,
+/turf/simulated/floor/wood,
+/area/template_noop)
 "d" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/under/color/black,
@@ -28,8 +29,10 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "h" = (
-/turf/simulated/wall/wood,
-/area/space)
+/obj/structure/table/woodentable,
+/obj/item/weapon/board,
+/turf/simulated/floor/wood,
+/area/template_noop)
 "i" = (
 /obj/item/device/flashlight/lamp/green,
 /obj/structure/table/woodentable,
@@ -85,12 +88,21 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "p" = (
+/obj/structure/bed/chair/wood{
+	tag = "icon-wooden_chair_preview (WEST)";
+	icon_state = "wooden_chair_preview";
+	dir = 8
+	},
+/obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/wood,
-/area/space)
+/area/template_noop)
 "q" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/structure/table/woodentable,
+/obj/item/weapon/book/manual/detective,
+/obj/item/weapon/material/ashtray/bronze,
+/obj/item/weapon/deck/cards,
 /turf/simulated/floor/wood,
-/area/space)
+/area/template_noop)
 "r" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
@@ -142,19 +154,17 @@
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "A" = (
-/obj/structure/table/woodentable,
-/obj/item/weapon/board,
-/turf/simulated/floor/wood,
-/area/space)
-"B" = (
-/obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
-	icon_state = "wooden_chair_preview";
-	dir = 8
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/wood,
-/area/space)
+/area/template_noop)
+"B" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 1
+	},
+/turf/simulated/floor/wood,
+/area/template_noop)
 "C" = (
 /obj/structure/table/woodentable,
 /obj/machinery/computer/atmoscontrol/laptop{
@@ -193,22 +203,22 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "I" = (
-/obj/structure/table/woodentable,
-/obj/item/weapon/book/manual/detective,
-/obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/deck/cards,
+/obj/structure/table/rack,
+/obj/item/weapon/gun/projectile/pirate,
+/obj/item/weapon/storage/box/shotgunshells,
 /turf/simulated/floor/wood,
-/area/space)
+/area/template_noop)
 "J" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
+/obj/structure/closet,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/wood/fifty,
+/obj/item/stack/tile/carpetgreen/fifty,
+/obj/item/stack/material/glass/reinforced/ten,
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
 	},
 /turf/simulated/floor/wood,
-/area/space)
-"K" = (
-/obj/structure/window/reinforced/full,
-/turf/simulated/floor/wood,
-/area/space)
+/area/template_noop)
 "L" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/towermycelium,
@@ -219,12 +229,6 @@
 /obj/item/seeds/potatoseed,
 /turf/template_noop,
 /area/template_noop)
-"N" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 1
-	},
-/turf/simulated/floor/wood,
-/area/space)
 "O" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/wheatseed,
@@ -239,36 +243,11 @@
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/wood,
 /area/template_noop)
-"R" = (
-/obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/pirate,
-/obj/item/weapon/storage/box/shotgunshells,
-/turf/simulated/floor/wood,
-/area/space)
 "S" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/wood,
 /area/template_noop)
-"T" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/wood,
-/area/space)
-"U" = (
-/obj/structure/closet,
-/obj/item/stack/material/steel/ten,
-/obj/item/stack/material/wood/fifty,
-/obj/item/stack/tile/carpetgreen/fifty,
-/obj/item/stack/material/glass/reinforced/ten,
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 8
-	},
-/turf/simulated/floor/wood,
-/area/space)
-"V" = (
-/obj/machinery/door/unpowered/simple/wood,
-/turf/simulated/floor/wood,
-/area/space)
 
 (1,1,1) = {"
 a
@@ -440,41 +419,41 @@ S
 b
 "}
 (14,1,1) = {"
-c
-h
-p
-p
-A
-I
-p
-p
-p
-T
-V
-"}
-(15,1,1) = {"
-c
+a
+b
+o
+o
 h
 q
+o
+o
+o
+F
+H
+"}
+(15,1,1) = {"
+a
+b
+c
+o
 p
+A
+A
 B
+I
 J
-J
-N
-R
-U
-h
+b
 "}
 (16,1,1) = {"
-c
-h
-h
-h
-h
-K
-K
-h
-h
-h
-h
+a
+b
+b
+b
+b
+g
+g
+b
+b
+b
+b
 "}
