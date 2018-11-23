@@ -13,6 +13,7 @@ GLOBAL_LIST_EMPTY(skills)
 							"Master"		= "Professional Description")
 	var/difficulty = SKILL_AVERAGE   //Used to compute how expensive the skill is
 	var/default_max = SKILL_ADEPT    //Makes the skill capped at this value in selection unless overriden at job level.
+	var/prerequisites // A list of skill prerequisites, if needed.
 
 /decl/hierarchy/skill/proc/get_cost(var/level)
 	switch(level)
@@ -24,12 +25,12 @@ GLOBAL_LIST_EMPTY(skills)
 			return 0
 
 //Do not attempt to get_decl any of these except /decl/hierarchy/skill from decls_repository. Use the children variable or GLOB.skills instead.
-/decl/hierarchy/skill/New(var/full_init = TRUE)
+/decl/hierarchy/skill/Initialize(var/full_init = TRUE)
 	..(full_init)
 	if(full_init)
 		if(!GLOB.skills.len)
 			for(var/decl/hierarchy/skill/C in children)
-				GLOB.skills += C.children
+				GLOB.skills += C.get_descendents()
 		else
 			log_error("<span class='warning'>Warning: multiple instances of /decl/hierarchy/skill have been created!</span>")
 
@@ -106,15 +107,14 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You can use all kinds of space suits, including specialized versions. Your years of experience in EVA keep you from being disoriented in space, and you have experience using a jetpack to move around. <br>- You cannot slip anymore.",
 						"Master"		= "You are just as much at home in a vacuum as in atmosphere. You probably do your job almost entirely EVA.<br>- You cannot get floored anymore.<br>- You get bonus speed for jetpacks.")
 
-/decl/hierarchy/skill/general/mech
+/decl/hierarchy/skill/general/EVA/mech
 	ID = "mech"
 	name = "Exosuit Operation"
-	desc = "Describes your experience and understanding of operating heavy machinery, which includes mechs and other large exosuits. Used in piloting mechs."
-	levels = list( "Unskilled"			= "You know what a mech is, and if you see one you can recognize which type it is. If your department uses exosuits, you know roughly what their capabilities are. If you were to get into one, you'd have about fifty-fifty odds of getting it moving in the direction you wanted it to go.",
-						"Basic"				= "You can drive an exosuit safely, but you specialize in only one type of mech that your department regularly uses. You're not an expert and you fumble the controls sometimes, but you're going where you want to go and you're pretty sure you know what those buttons do.",
-						"Trained"			= "You are quite comfortable using the type of exosuit you're most familiar with. You may spend entire shifts piloting one, and you're familiar with its functions. You can do basic maintenance. You can use most types of exosuits, unless they're very exotic or specialized.",
-						"Experienced"		= "You can use any type of mech comfortably and automatically. To you, a mech is more like a second skin than a vehicle. You can maintain, repair, and probably build exosuits.",
-						"Master"		= "You are a professional exosuit technician, and are well-versed in construction and maintenance procedures. You can design and construct exosuits suitable for any needs.")
+	desc = "Allows you to operate exosuits well."
+	levels = list("Untrained" = "You are unfamiliar with exosuit controls, and if you attempt to use them you are liable to make mistakes.",
+		"Trained" = "You are proficient in exosuit operation and safety, and can use them without penalties.")
+	prerequisites = list(SKILL_EVA = SKILL_ADEPT)
+	default_max = SKILL_BASIC
 	difficulty = SKILL_AVERAGE
 
 /decl/hierarchy/skill/general/pilot

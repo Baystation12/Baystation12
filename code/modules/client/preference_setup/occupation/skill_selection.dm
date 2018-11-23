@@ -111,22 +111,51 @@
 		if((points_by_job[job] >= sum) && sum)				//we didn't overspend, so use sanitized imported data
 			.[job] = L
 			points_by_job[job] -= sum						//if we overspent, or did no spending, default to not including the job at all
+		purge_skills_missing_prerequisites(job)
+
+/datum/preferences/proc/check_skill_prerequisites(datum/job/job, decl/hierarchy/skill/S)
+	if(!S.prerequisites)
+		return TRUE
+	for(var/skill_type in S.prerequisites)
+		var/decl/hierarchy/skill/prereq = decls_repository.get_decl(skill_type)
+		var/value = get_min_skill(job, prereq) + LAZYACCESS(skills_allocated[job], prereq)
+		if(value < S.prerequisites[skill_type])
+			return FALSE
+	return TRUE
+
+/datum/preferences/proc/purge_skills_missing_prerequisites(datum/job/job)
+	var/allocation = skills_allocated[job]
+	if(!allocation)
+		return
+	for(var/decl/hierarchy/skill/S in allocation)
+		if(!check_skill_prerequisites(job, S))
+			clear_skill(job, S)
+			.() // restart checking from the beginning, as after doing this we don't know whether what we've already checked is still fine.
+			return
+
+/datum/preferences/proc/clear_skill(datum/job/job, decl/hierarchy/skill/S)
+	if(job in skills_allocated)
+		var/min = get_min_skill(job,S)
+		var/T = skills_allocated[job]
+		var/freed_points = get_level_cost(job, S, min+T[S])
+		points_by_job[job] += freed_points
+		T -= S								  //And we no longer need this entry
+		if(!length(T))
+			skills_allocated -= job		  //Don't keep track of a job with no allocation
 
 /datum/category_item/player_setup_item/occupation/proc/update_skill_value(datum/job/job, decl/hierarchy/skill/S, new_level)
 	if(!isnum(new_level) || (round(new_level) != new_level))
 		return											//Checks to make sure we were fed an integer.
+	if(!pref.check_skill_prerequisites(job, S))
+		return
 	var/min = pref.get_min_skill(job,S)
-	var/max = pref.get_max_skill(job,S)
+
 	if(new_level == min)
-		if(job in pref.skills_allocated)
-			var/T = pref.skills_allocated[job]
-			var/freed_points = pref.get_level_cost(job, S, min+T[S])
-			pref.points_by_job[job] += freed_points
-			T -= S								  //And we no longer need this entry
-			if(!length(T))
-				pref.skills_allocated -= job		  //Don't keep track of a job with no allocation
+		pref.clear_skill(job, S)
+		pref.purge_skills_missing_prerequisites(job)
 		return
 
+	var/max = pref.get_max_skill(job,S)
 	if(!(job in pref.skills_allocated))
 		pref.skills_allocated[job] = list()
 	var/list/T = pref.skills_allocated[job]
@@ -138,12 +167,9 @@
 														//None of this should happen normally, but this avoids client attacks.
 	pref.points_by_job[job] += (current_value - new_value)
 	T[S] = new_level - min								//skills_allocated stores the difference from job minimum
+	pref.purge_skills_missing_prerequisites(job)
 
 /datum/category_item/player_setup_item/occupation/proc/generate_skill_content(datum/job/job)
-	var/allocation = list()
-	if(job in pref.skills_allocated)
-		allocation = pref.skills_allocated[job]
-
 	var/dat  = list()
 	dat += "<body>"
 	dat += "<style>.Selectable,.Current,.Unavailable,.Toohigh{border: 1px solid #161616;padding: 1px 4px 1px 4px;margin: 0 2px 0 0}</style>"
@@ -161,33 +187,49 @@
 		dat += "<tr><th colspan = 4><b>[cat.name]</b>"
 		dat += "</th></tr>"
 		for(var/decl/hierarchy/skill/S in cat.children)
-			var/min = pref.get_min_skill(job,S)
-			var/level = min + (allocation[S] || 0)				//the current skill level
-			var/cap = pref.get_max_affordable(job, S) //if selecting the skill would make you overspend, it won't be shown
-			dat += "<tr style='text-align:left;'>"
-			dat += "<th><a href='?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></th>"
-			for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
-				dat += skill_to_button(S, job, level, i, min, cap)
-			dat += "</tr>"
+			dat += get_skill_row(job, S)
+			for(var/decl/hierarchy/skill/perk in S.children)
+				dat += get_skill_row(job, perk)
 	dat += "</table>"
-	return jointext(dat,null)
+	return JOINTEXT(dat)
+
+/datum/category_item/player_setup_item/occupation/proc/get_skill_row(datum/job/job, decl/hierarchy/skill/S)
+	var/list/dat = list()
+	var/min = pref.get_min_skill(job,S)
+	var/level = min + (pref.skills_allocated[job] ? pref.skills_allocated[job][S] : 0)				//the current skill level
+	var/cap = pref.get_max_affordable(job, S) //if selecting the skill would make you overspend, it won't be shown
+	dat += "<tr style='text-align:left;'>"
+	dat += "<th><a href='?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></th>"
+	for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
+		dat += skill_to_button(S, job, level, i, min, cap)
+	dat += "</tr>"
+	return JOINTEXT(dat)
 
 /datum/category_item/player_setup_item/occupation/proc/open_skill_setup(mob/user, datum/job/job)
 	panel = new(user, "Skill Selection: [job.title]", "Skill Selection: [job.title]", 770, 850, src)
 	panel.set_content(generate_skill_content(job))
 	panel.open()
 
-/datum/category_item/player_setup_item/proc/skill_to_button(decl/hierarchy/skill/skill, datum/job/job, current_level, selection_level, min, max)
-	var/level_name = skill.levels[selection_level]
-	var/cost = skill.get_cost(selection_level)
+/datum/category_item/player_setup_item/occupation/proc/skill_to_button(decl/hierarchy/skill/skill, datum/job/job, current_level, selection_level, min, max)
+	var/offset = skill.prerequisites ? skill.prerequisites[skill.parent.type] - 1 : 0
+	var/effective_level = selection_level - offset
+	if(effective_level <= 0 || effective_level > length(skill.levels))
+		return "<th></th>"
+	var/level_name = skill.levels[effective_level]
+	var/cost = skill.get_cost(effective_level)
 	var/button_label = "[level_name] ([cost])"
-	if(selection_level < min)
+	if(effective_level < min)
 		return "<th><span class='Unavailable'>[button_label]</span></th>"
-	else if(selection_level < current_level)
-		return "<th><a class='Current' href='?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[selection_level]'>[button_label]</a></th>"
-	else if(selection_level == current_level)
+	else if(effective_level < current_level)
+		return "<th>[add_link(skill, job, button_label, "'Current'", effective_level)]</th>"
+	else if(effective_level == current_level)
 		return "<th><span class='Current'>[button_label]</span></th>"
-	else if(selection_level <= max)
-		return "<th><a class='Selectable' href='?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[selection_level]'>[button_label]</a></th>"
+	else if(effective_level <= max)
+		return "<th>[add_link(skill, job, button_label, "'Selectable'", effective_level)]</th>"
 	else
 		return "<th><span class='Toohigh'>[button_label]</span></th>"
+
+/datum/category_item/player_setup_item/occupation/proc/add_link(decl/hierarchy/skill/skill, datum/job/job, text, style, value)
+	if(pref.check_skill_prerequisites(job, skill))
+		return "<a class=[style] href='?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[value]'>[text]</a>"
+	return text

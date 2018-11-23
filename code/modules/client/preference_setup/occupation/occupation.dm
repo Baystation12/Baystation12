@@ -288,7 +288,7 @@
 		HTML += "<h2>[S.name]</h2>"
 		HTML += "[S.desc]<br>"
 		var/i
-		for(i=SKILL_MIN, i <= SKILL_MAX, i++)
+		for(i=1, i <= length(S.levels), i++)
 			var/level_name = S.levels[i]
 			HTML +=	"<br><b>[level_name]</b>: [S.levels[level_name]]<br>"
 		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
