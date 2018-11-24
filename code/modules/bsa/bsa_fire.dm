@@ -33,7 +33,7 @@
 	var/list/relevant_z = GetConnectedZlevels(start.z)
 	for(var/mob/M in GLOB.player_list)
 		var/turf/T = get_turf(M)
-		if(!(T.z in relevant_z))
+		if(!T || !(T.z in relevant_z))
 			continue
 		shake_camera(M, 25)
 		if(!isdeaf(M))
