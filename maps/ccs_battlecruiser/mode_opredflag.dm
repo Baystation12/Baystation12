@@ -122,9 +122,9 @@
 
 	text += "<span class='cult'>The Prophets were:</span><br>"
 	for(var/datum/mind/D in living_prophets)
-		text += "<span class='cult'>[D] (played by [D.key])</span>"
+		text += "<span class='cult'>[D] (played by [D.key])</span><br>"
 	for(var/datum/mind/D in dead_prophets)
-		text += "<span class='cult'>[D.name] (played by [D.key])(slain)</span>"
+		text += "<span class='cult'>[D.name] (played by [D.key])(slain)</span><br>"
 	text += "<br>"
 	if(elite_shipmaster)
 		text += "<span class='cult'>The Elite Shipmaster was [elite_shipmaster] (played by [elite_shipmaster_ckey])</span><br>"
@@ -134,9 +134,9 @@
 		text = "<span class='boldannounce'>All Spartans have failed to return!</span><br>"
 	text += "<span class='passive'>The Spartan IIs were:</span><br>"
 	for(var/datum/mind/M in living_spartans)
-		text += "<span class='passive'>[M] (played by [M.key])</span>"
+		text += "<span class='passive'>[M] (played by [M.key])</span><br>"
 	for(var/datum/mind/M in dead_spartans)
-		text += "<span class='passive'>[M] (played by [M.key])(MIA)</span>"
+		text += "<span class='passive'>[M] (played by [M.key])(MIA)</span><br>"
 	text += "<br>"
 
 	if(!living_prophets.len)
