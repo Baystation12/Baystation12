@@ -18,7 +18,6 @@
 	var/obj/item/weapon/card/id/ID
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
-	var/static/decl/hierarchy/mil_uniform/mil_uniforms
 	var/global/list/issued_items = list()
 
 /obj/machinery/uniform_vendor/attack_hand(mob/user)
@@ -116,10 +115,8 @@
 	be in command, and there are no variants as a result. Also no special CO uniform :(
 */
 /obj/machinery/uniform_vendor/proc/find_uniforms(var/datum/mil_rank/user_rank, var/datum/mil_branch/user_branch, var/department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
-	if(!mil_uniforms)
-		mil_uniforms = new()
-
-	var/decl/hierarchy/mil_uniform/user_outfit = mil_uniforms
+	var/decl/hierarchy/mil_uniform/user_outfit = decls_repository.get_decl(/decl/hierarchy/mil_uniform)
+	var/mil_uniforms = user_outfit
 	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
 		if(istype(user_branch,child.branch))
 			user_outfit = child
