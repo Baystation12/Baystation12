@@ -57,7 +57,7 @@ GLOBAL_LIST_EMPTY(player_nav_waypoints)
 			outtext += " and up"
 
 		var/image/arrow = image('arrow.dmi', src.mob, "arrow", dir = targetdir)
-		to_chat(src,"\icon[arrow]<span class='notice'>[outtext]</span>")
+		to_chat(src,"<span class='notice'>[outtext]</span>")
 		flick_overlay(arrow, list(src), 25)
 		spawn(25)
 			qdel(arrow)
