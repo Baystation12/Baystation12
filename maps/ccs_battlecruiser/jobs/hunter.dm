@@ -1,5 +1,5 @@
 
-/datum/antagonist/opredflag_hunter
+/datum/antagonist/opredflag_cov/hunter
 	welcome_text = "You are a colony of sentient worms encased in armour and heavy weaponry. A living weapon that must protect the ship, protect the prophets."
 
 	id = "hunter"
@@ -34,7 +34,7 @@
 
 	antag_text = "You are Mga'lekgolo, a colony of sentient worms encased in powerful armour and carrying heavy weaponry. Protect the ship and the prophets with all your being."
 
-/datum/antagonist/opredflag_hunter/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
+/datum/antagonist/opredflag_cov/hunter/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
 	. = ..()
 	var/mob/living/simple_animal/lekgolo/mgalekgolo/new_hunter = target.current
 	GLOB.global_headset.autosay("A new mgalekgolo, [new_hunter], has been outfitted for battle.", "Arrivals Announcement Computer", "Battlenet", "Sangheili")
