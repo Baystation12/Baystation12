@@ -7,6 +7,7 @@
 	var/atom/source_atom     // The atom that we belong to.
 
 	var/turf/source_turf     // The turf under the above.
+	var/turf/pixel_turf      // The turf the top_atom appears to over.
 	var/light_max_bright = 1  // intensity of the light within the full brightness range. Value between 0 and 1
 	var/light_inner_range = 0 // range, in tiles, the light is at full brightness
 	var/light_outer_range = 0 // range, in tiles, where the light becomes darkness
@@ -48,6 +49,8 @@
 		top_atom.light_sources += src
 
 	source_turf = top_atom
+	pixel_turf = get_turf_pixel(top_atom) || source_turf
+
 	light_max_bright = source_atom.light_max_bright
 	light_inner_range = source_atom.light_inner_range
 	light_outer_range = source_atom.light_outer_range
@@ -138,10 +141,17 @@
 	if(isturf(top_atom))
 		if(source_turf != top_atom)
 			source_turf = top_atom
+			pixel_turf = source_turf
 			. = 1
 	else if(top_atom.loc != source_turf)
 		source_turf = top_atom.loc
+		pixel_turf = get_turf_pixel(top_atom)
 		. = 1
+	else
+		var/P = get_turf_pixel(top_atom)
+		if (P != pixel_turf)
+			. = 1
+			pixel_turf = get_turf_pixel(top_atom)
 
 	if(source_atom.light_max_bright != light_max_bright)
 		light_max_bright = source_atom.light_max_bright
@@ -185,7 +195,7 @@
 // The braces and semicolons are there to be able to do this on a single line.
 
 #define APPLY_CORNER(C)              \
-	. = LUM_FALLOFF(C, source_turf); \
+	. = LUM_FALLOFF(C, pixel_turf); \
 	. *= (light_max_bright ** 2);    \
 	. *= light_max_bright < 0 ? -1:1;\
 	effect_str[C] = .;               \
