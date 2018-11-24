@@ -1,6 +1,6 @@
-var/global/list/player_nav_waypoints = list()
+GLOBAL_LIST_EMPTY(player_nav_waypoints)
+
 /client/var/obj/effect/landmark/playernav/playernav
-var/var/image/nav_arrow
 
 /obj/effect/landmark/playernav
 	name = "player navigation waypoint (rename me)"
@@ -8,7 +8,7 @@ var/var/image/nav_arrow
 
 /obj/effect/landmark/playernav/New()
 	. = ..()
-	player_nav_waypoints[src.name] = src
+	GLOB.player_nav_waypoints[src.name] = src
 
 /obj/effect/landmark/playernav/Topic()
 	//begin navigating
@@ -19,8 +19,8 @@ var/var/image/nav_arrow
 	set category = "IC"
 
 	to_chat(src,"<span class='notice'>The following destinations are available:</span>")
-	for(var/playernav_id in player_nav_waypoints)
-		var/obj/effect/landmark/playernav/playernav = player_nav_waypoints[playernav_id]
+	for(var/playernav_id in GLOB.player_nav_waypoints)
+		var/obj/effect/landmark/playernav/playernav = GLOB.player_nav_waypoints[playernav_id]
 		var/outtext = "[playernav]"
 		var/mob/M = src.mob
 		if(playernav.z < M.z)
@@ -34,9 +34,9 @@ var/var/image/nav_arrow
 	set name = "Choose player destination"
 	set category = "IC"
 
-	var/dest_id = input("Choose a player navigation destination","Pick destination") in player_nav_waypoints
-	if(dest_id && dest_id in player_nav_waypoints)
-		playernav = player_nav_waypoints[dest_id]
+	var/dest_id = input("Choose a player navigation destination","Pick destination") in GLOB.player_nav_waypoints
+	if(dest_id && dest_id in GLOB.player_nav_waypoints)
+		playernav = GLOB.player_nav_waypoints[dest_id]
 		to_chat(src,"<span class='notice'>You have selected your desination as: [playernav]</span>")
 		direct_destinations()
 	else
@@ -57,7 +57,7 @@ var/var/image/nav_arrow
 			outtext += " and up"
 
 		var/image/arrow = image('arrow.dmi', src.mob, "arrow", dir = targetdir)
-		to_chat(src,"[arrow] <span class='notice'>[outtext]</span>")
+		to_chat(src,"\icon[arrow]<span class='notice'>[outtext]</span>")
 		flick_overlay(arrow, list(src), 25)
 		spawn(25)
 			qdel(arrow)
