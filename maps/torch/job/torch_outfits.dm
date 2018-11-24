@@ -63,7 +63,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
@@ -154,7 +154,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	id_type = /obj/item/weapon/card/id/torch/crew/sea
@@ -170,7 +170,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Engineering Outfits
