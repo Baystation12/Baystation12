@@ -19,8 +19,7 @@
 
 		var/decl/decl = .
 		if(istype(decl))
-			var/list/arguments = length(args) > 1 ? args.Copy(2) : list()
-			decl.Initialize(arglist(arguments))
+			decl.Initialize()
 
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
