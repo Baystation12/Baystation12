@@ -122,6 +122,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	idle_power_usage = 0
 	machinetype = 6
 	produces_heat = 0
+	circuitboard = /obj/item/weapon/circuitboard/telecomms/allinone
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
 
 /obj/machinery/telecomms/allinone/receive_signal(datum/signal/signal)
