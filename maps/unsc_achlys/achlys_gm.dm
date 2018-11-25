@@ -1,8 +1,6 @@
 
-
-#define ITEM_SCANFOR_TYPEPATH_1 //These need to be destroyed.
-#define ITEM_SCANFOR_TYPEPATH_2 //These need to be destroyed.
-#define ITEM_RETRIEVE_TYPEPATH_1 //This is the item that needs to be returned to a person/rank.
+#define COMMS_CUTIN_EVENT_CHANCE 10
+#define COMMS_CUTIN_EVENT_DURATION 5 MINUTES
 
 /datum/game_mode/achlys
 	name = "ONI Investigation: Achlys"
@@ -11,6 +9,7 @@
 	config_tag = "achlys"
 	votable = 1
 	probability = 0
+	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
 	var/list/items_to_destroy = list()
 	var/item_retrieve_tag = "retrievethis" //Map-set tags for items that need to be retrieved.
@@ -31,6 +30,8 @@
 	..()
 	populate_items_destroy()
 	populate_items_retrieve()
+	if(prob(COMMS_CUTIN_EVENT_CHANCE))
+		special_event_starttime = world.time + 5 MINUTES //TODO: MAKE THIS RANDOMISED.
 
 /datum/game_mode/achlys/check_finished()
 	. = check_item_destroy_status()
@@ -52,11 +53,32 @@
 			if(!(holder.mind) || !(holder.mind.assigned_role in rank_retrieve_names))
 				. = 0
 
+/datum/game_mode/achlys/proc/do_special_event_handling() //Currently handles the "Comms cut-in event"
+	special_event_starttime = 0
+	for(var/z_level = 0,z_level <= world.maxz, z_level += 1)
+		var/turf/item_spawn_turf = locate(0,0,z_level)
+		var/area/spawned_nopower_area = new /area (item_spawn_turf)
+		spawned_nopower_area.requires_power = 0
+		var/spawned_relay = new /obj/machinery/telecomms/relay/ship_relay (item_spawn_turf)
+		var/spawned_tcomms_machine = new /obj/machinery/telecomms/allinone (item_spawn_turf)
+		var/obj/machinery/telecomms_jammers/spawned_jammer = new /obj/machinery/telecomms_jammers (item_spawn_turf)
+		spawned_jammer.jam_chance = 50
+		spawned_jammer.jam_range = 999
+		spawn(COMMS_CUTIN_EVENT_DURATION)
+			qdel(spawned_nopower_area)
+			qdel(spawned_relay)
+			qdel(spawned_tcomms_machine)
+			qdel(spawned_jammer)
+
 /datum/game_mode/achlys/process()
 	..()
+	if(special_event_starttime != 0 && world.time > special_event_starttime)
+		do_special_event_handling()
 
 /datum/game_mode/achlys/declare_completion()
 	..()
 
 /datum/game_mode/achlys/handle_mob_death(var/mob/victim, var/list/args = list())
 	..()
+
+#undef COMMS_CUTIN_EVENT_CHANCE
