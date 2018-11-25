@@ -4,7 +4,7 @@
 	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Pistol"
-	slot_flags = SLOT_BELT||SLOT_HOLSTER
+	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/haloplasmapistol.ogg'
 	charge_meter = 0
 	self_recharge = 1

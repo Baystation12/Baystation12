@@ -12,6 +12,8 @@
 	var/current_positions = 0             // How many players have this job
 	var/availablity_chance = 100          // Percentage chance job is available each round
 
+	var/intro_blurb
+
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#ffffff"       // Selection screen color
 	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.

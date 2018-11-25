@@ -1,12 +1,16 @@
 /datum/species/sangheili
 	name = "Sangheili"
 	name_plural = "Sangheili"
-	blurb = ""
+	blurb = "The Sangheili (Macto cognatus, \"I glorify my kin\"), known to humans as Elites, \
+		are a saurian species of strong, proud, and intelligent warriors, as well as skilled \
+		combat tacticians. Due to their skill in combat, the Sangheili have formed the military \
+		backbone of the Covenant for almost the entirety of its existence. They had a very strong \
+		rivalry with the upstart, crude Jiralhanae."
 	flesh_color = "#4A4A64"
 	blood_color = "#4A4A64"
 	icobase = 'code/modules/halo/icons/species/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_elite.dmi'
-	icon_template = 'code/modules/halo/icons/species/r_elite_template.dmi'
+	icon_template = 'code/modules/halo/icons/species/Sangheili_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
 	flags = NO_MINOR_CUT
@@ -16,7 +20,8 @@
 	brute_mod = 0.9
 	pain_mod = 0.5 //Pain has half an effect on them.
 	slowdown = -1 //negates noshoes
-	item_icon_offsets = list(-1,2)
+	pixel_offset_x = -8
+	item_icon_offsets = list(0,2)
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
@@ -28,6 +33,9 @@
 	BP_APPENDIX = /obj/item/organ/internal/appendix,
 	BP_EYES =     /obj/item/organ/internal/eyes
 	)
+
+	equipment_slowdown_multiplier = 0.5
+	ignore_equipment_threshold = 3
 
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return

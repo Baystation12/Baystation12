@@ -1,6 +1,6 @@
 #define ESWORD_LEAP_DIST 2
-#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan)
-#define LUNGE_DELAY 3 SECONDS
+#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
+#define LUNGE_DELAY 5 SECONDS
 
 /obj/effect/esword_path
 	name = "displaced air"
@@ -107,7 +107,7 @@
 	playsound(user, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	to_chat(user, "<span class='notice'>\The [src] bursts from its handle.</span>")
 	icon_state = icon_state_deployed
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 	edge = 1
 	sharp = 1
 	flags = NOBLOODY
@@ -122,9 +122,9 @@
 	change_misc_variables(1)
 
 /obj/item/weapon/melee/energy/elite_sword/dropped(var/mob/user)
-	..()
+	. = ..()
 	if(!istype(loc,/mob))
-		if(w_class == ITEM_SIZE_HUGE)
+		if(w_class != ITEM_SIZE_SMALL)
 			if(failsafe)
 				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
 				flick("blade burnout",src)
@@ -153,10 +153,19 @@
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "en_dag_handle"
 	icon_state_deployed = "en_dag_deploy"
+	w_class = ITEM_SIZE_SMALL
 	active_force = 30
 	active_throwforce = 12
 	edge = 0
 	sharp = 0
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/activate(mob/living/user)
+	..()
+	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/deactivate(mob/living/user)
+	..()
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/melee/energy/elite_sword/dagger/get_species_leap_dist()
 	return 0

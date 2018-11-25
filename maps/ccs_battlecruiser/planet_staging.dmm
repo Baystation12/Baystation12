@@ -1,0 +1,117 @@
+"aa" = (/obj/machinery/telecomms/allinone,/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
+"ab" = (/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
+"ac" = (/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ad" = (/obj/structure/jump_pad{id = "deck 2 port cargo"; name = "Covenant Jump Pad - deck 2 port cargo bay"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ae" = (/obj/structure/jump_pad{id = "deck 1 port hangar"; name = "Covenant Jump Pad - deck 1 port hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"af" = (/obj/structure/jump_pad{id = "deck 2 starboard cargo"; name = "Covenant Jump Pad - deck 2 starboard cargo bay"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ag" = (/obj/structure/jump_pad{id = "deck 1 starboard hangar"; name = "Covenant Jump Pad - deck 1 starboard hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ah" = (/obj/structure/closet/covenant,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ai" = (/mob/living/simple_animal/hostile/retaliate/done,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"aj" = (/obj/effect/landmark{name = "Observer-Start"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ak" = (/obj/structure/covenant_comms_tower,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"al" = (/obj/structure/jump_pad{id = "deck4 starboard hangar"; name = "Covenant Jump Pad - deck 4 starboard hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"am" = (/obj/structure/jump_pad{id = "topdeck airlock"; name = "Covenant Jump Pad - deck 5 external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"an" = (/obj/structure/jump_pad{id = "deck 1 assault elevator"; invisibility = 101; name = "Covenant Jump Pad - deck 5 external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ao" = (/obj/structure/energybarricade{can_deconstruct = 0},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ap" = (/obj/structure/grav_elevator_external,/obj/structure/jump_pad{id = "deck 1 assault elevator"; invisibility = 101; name = "Covenant Jump Pad - deck 5 external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"aq" = (/obj/structure/jump_pad{id = "deck4 port hangar"; name = "Covenant Jump Pad - deck 4 port hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ar" = (/obj/structure/tanktrap,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"as" = (/obj/structure/tanktrap_dead,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"at" = (/obj/structure/sandbag{dir = 1},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"au" = (/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"av" = (/obj/structure/sandbag{dir = 4},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"aw" = (/obj/structure/energybarricade{can_deconstruct = 0; dir = 8},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ax" = (/obj/structure/barricade,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"ay" = (/obj/structure/jump_pad{id = "deck 3 port airlock"; name = "Covenant Jump Pad - deck 3 port external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"az" = (/obj/structure/jump_pad{id = "deck 3 port airlock"; name = "Covenant Jump Pad - deck 3 starboard external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"aA" = (/obj/structure/ore_box,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aB" = (/obj/structure/sandbag_dead{dir = 4},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aC" = (/obj/structure/jump_pad{id = "deck 3 starboard airlock"; name = "Covenant Jump Pad - deck 3 starboard external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"aD" = (/obj/structure/barrel,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aE" = (/obj/structure/sandbag{dir = 4},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aF" = (/obj/machinery/floodlight{anchored = 1},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aG" = (/obj/structure/sandbag_dead,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aH" = (/obj/structure/table/rack,/obj/item/weapon/storage/backpack/dufflebag,/obj/item/weapon/storage/backpack/dufflebag,/obj/item/weapon/storage/backpack/dufflebag,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aI" = (/obj/structure/turret/chaingun{dir = 1},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aJ" = (/obj/structure/sandbag,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aK" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/m9_frag,/obj/item/weapon/storage/box/m9_frag,/obj/item/weapon/storage/box/m9_frag,/obj/item/weapon/storage/box/m9_frag,/obj/item/weapon/storage/box/m9_frag,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aL" = (/obj/structure/bed/roller,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aM" = (/obj/structure/bed/chair,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aN" = (/obj/structure/table/standard,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aO" = (/obj/structure/table/standard,/obj/item/device/binoculars,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aP" = (/obj/structure/table/standard,/obj/item/device/paicard,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aQ" = (/obj/effect/landmark/start{name = "Spartan II"},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aR" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aS" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aT" = (/obj/item/weapon/gun/launcher/rocket/m41_ssr,/obj/structure/table/rack,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aU" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aV" = (/obj/structure/table/rack,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aW" = (/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aX" = (/obj/structure/table/rack,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aY" = (/obj/structure/table/rack,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aZ" = (/obj/structure/bed/chair{dir = 1},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"ba" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/srs99_sniper,/obj/item/weapon/storage/box/m145_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bb" = (/obj/structure/table/rack,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bc" = (/obj/structure/table/rack,/obj/item/device/flashlight/unsc,/obj/item/device/flashlight/unsc,/obj/item/device/flashlight/unsc,/obj/item/device/flashlight/unsc,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bd" = (/obj/effect/landmark/start{name = "Spartan II Commander"},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"be" = (/obj/structure/curtain,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bf" = (/obj/structure/curtain/open,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bg" = (/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/storage/box/m762_ap_ma5b,/obj/item/weapon/storage/box/m762_ap_ma5b,/obj/item/weapon/storage/box/m762_ap_ma5b,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bh" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/storage/box/m127_saphe,/obj/item/weapon/storage/box/m127_saphe,/obj/item/weapon/storage/box/m127_saphe,/obj/item/weapon/storage/box/m127_saphe,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bi" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/storage/box/m95_sap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bj" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bk" = (/obj/structure/table/rack,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bl" = (/obj/structure/table/rack,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/flashbang,/obj/item/weapon/grenade/flashbang,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bm" = (/obj/structure/table/rack,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/smokebomb,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bn" = (/obj/structure/bed,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bo" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/obj/item/weapon/material/hatchet/tacknife,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bp" = (/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bq" = (/obj/structure/table/rack,/obj/item/weapon/material/sword/katana,/obj/item/weapon/material/sword/katana,/obj/item/weapon/material/sword/katana,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"br" = (/obj/structure/table/rack,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/obj/item/weapon/material/sword,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bs" = (/obj/structure/table/rack,/obj/item/weapon/material/machete,/obj/item/weapon/material/machete,/obj/item/weapon/material/machete,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bt" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bu" = (/obj/structure/table/standard,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bv" = (/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+
+(1,1,1) = {"
+aaababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababacacadadadadababababababababababab
+ababababababababababababababababacaeaeaeaeacacacacacacacacacafababababababababab
+ababababababababababababagagagagacacacacacacacacahacacacacacacafabababababababab
+abababababababababababacacacacacacacacacacacacacacacacaiacacacacafababababababab
+ababababababababababacacacacacacacaiacacacacacacacacacacacacacacacafabababababab
+ababababababababababacacacacacacacacacajajajajajajajajajajajacacacacacababababab
+ababababababababababacacacahacacacajajajacacacacacacacacacajajajacacacacacacabab
+ababababababababababacacacacacacajajacacacacacacacacakacacacacajajacacacacacalab
+abababababababababamacacacacacacajacacacacananananacacacacacacacacajacacacacalab
+abababababababababamacacacaoacacajacacacacananananacacacacacacacacajacacacacalab
+abababababababababamacacacacacacajacacacacananananacacacacacacacacajacacacacalab
+abababababababababamacacacacacacajacacacacapanananacacacacahacacacajacacacacacab
+abababababababababacacacacacacacajacacaoacacacacacacacacacacacacajajacacacaqabab
+abababababababababaracacacasacacajacacacacacaiacacacacacacacacajajacacacacaqabab
+ababababababababababacacacacacacacajajacacacacacahacacacacacajajacacacacacaqabab
+ababababababababababaracacacacaiacacacajajajacacacacacajajajajacacacaiacacaqabab
+abababababababababababatatacacacacacacacacacajajajajajajacacacacacacacacacababab
+abababababababababababauacacacacacacacasacacacacacacacacacacacacacacacacabababab
+ababababababababababauauauacacavacacacacacawacacacacacacacacacacacacacababababab
+abababababaxaxaxaxaxauauauauacavaracacacacacacacacacacacacayazazazacabababababab
+abababaxaxaxaAauauaBauauauauauabababababababaracaCaCaCaCacababababababababababab
+ababaDauauaEauauauauauauauauabababababababababababababababababababababababababab
+abaFauauauaEauauauauauauaGababababababababababababababababababababababababababab
+abaHauauauaEauauauauauauaIababababababababababababababababababababababababababab
+abaHauauauauauauauauaJaJaJaxabababababababababababababababababaxaFauaDababababab
+abaHauauauauauauauauauauauaAababababababababababababababaxauauauauauauauabababab
+abaHauauauauauauauauauauauauaxaAaDaFaKaKaKaKaKaKaAaxababaLauauaMaMaMaMauaxababab
+abaHauauauauauauauauauauauauauauauauauauauauauauauauababaLauauaNaOaNaNauaAababab
+abaHauauauauauauauauauauauauauauauauauauauauauauauauauababauauaNaPaOaNauauababab
+abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSauaTaUaVauaWaXaYauababauaZaZaZaZauauauabab
+abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSaubaaUaVaubbbcbcauauauauauauauauauauaFabab
+abaAauauauauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauauauauauauauauaxabab
+abaxauaubdauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauabbebfbfbeababaxabab
+ababaDauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibjbiaubkblbmauauababauauauauababababab
+ababaxauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibibiaubkblbmauababbnaubnbnaubnabababab
+abababaFauauauauauauauauauauauauauauauauauauauauauauauauababbnaubnbnaubnabababab
+ababababaDauauauauauauauauauauauauauauauauauauauauauaFabababbnaubnbnaubnabababab
+abababababaxaxbobobpbqbrbsbtaAaxaxbubububvbvbvaDaxababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababab
+"}

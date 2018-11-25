@@ -7,10 +7,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
-	name = pick(GLOB.first_names_sangheili)
-	name += " "
-	name += pick(GLOB.last_names_sangheili)
-	real_name = name
 	faction = "Covenant"
 
 /datum/language/sangheili
@@ -53,6 +49,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
 	armor = list(melee = 95, bullet = 80, laser = 60, energy = 60, bomb = 60, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
+	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
 
 /obj/item/clothing/shoes/sangheili
 	name = "Sanghelli Leg Armour"
@@ -194,7 +191,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	name = "Sangheili Combat Harness (Spec-Ops)"
 	icon_state = "specops_chest_obj"
 	item_state = "specops_chest"
-	totalshields = 175
+	totalshields = 50
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
 	action_button_name = "Toggle Active Camouflage"
 
@@ -232,7 +229,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "A sealed. airtight Sangheili Combat Harness."
 	icon_state = "ranger_chest_obj"
 	item_state = "ranger_chest"
-	totalshields = 150
+	totalshields = 100
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -282,7 +279,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= rand(0,2)
+			w.damage -= pick(0,0,1)
 
 /obj/effect/armoursets/SangheiliMinorSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)

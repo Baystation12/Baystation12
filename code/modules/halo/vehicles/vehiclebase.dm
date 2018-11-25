@@ -1,5 +1,6 @@
 #define ALL_VEHICLE_POSITIONS list("driver","passenger","gunner")
 #define VEHICLE_LOAD_DELAY 2.5 SECONDS //This is the delay to load people onto the vehicle.
+#define VEHICLE_ITEM_LOAD 3.0 SECONDS
 
 /obj/vehicles
 	name = "Vehicle"
@@ -25,6 +26,8 @@
 
 	//Vehicle ferrying//
 	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
+
+	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 
 /obj/vehicles/New()
 	. = ..()
@@ -130,9 +133,9 @@
 	if(check_position_blocked(position))
 		to_chat(user,"<span class = 'notice'>No [position] spaces in [src]</span>")
 		return 0
-	var/mob/living/carbon/human/h_test = user
+	var/mob/living/h_test = user
 	if(!istype(h_test) && position == "driver")
-		to_chat(user,"<span class = 'notice'>You don't know how to drive that.</span>") //Let's assume non-human mobs can't drive.
+		to_chat(user,"<span class = 'notice'>You don't know how to drive that.</span>") //Let's assume non-living mobs can't drive.
 		return
 	var/can_enter = check_enter_invalid()
 	if(can_enter)
@@ -151,6 +154,8 @@
 	user.loc = contents
 	contents += user
 	update_object_sprites()
+	if(user.client)
+		user.client.view *= vehicle_view_modifier
 	return 1
 
 /obj/vehicles/proc/do_seat_switch(var/mob/user,var/position)
@@ -194,14 +199,18 @@
 
 	exit_vehicle(user)
 
-/obj/vehicles/proc/exit_vehicle(var/mob/user)
+/obj/vehicles/proc/exit_vehicle(var/mob/user,var/ignore_incap_check = 0)
 
-	if(!(user in occupants) || !is_atom_adjacent(user) || user.incapacitated())
+	if(!(user in occupants) || !is_atom_adjacent(user))
+		return
+	if(user.incapacitated() && !ignore_incap_check)
 		return
 	occupants -= user
 	contents -= user
 	user.loc = pick(src.locs)
 	update_object_sprites()
+	if(user.client)
+		user.client.view = world.view
 
 /obj/vehicles/verb/enter_vehicle()
 	set name = "Enter Vehicle"
@@ -235,7 +244,6 @@
 			return position
 	return null
 
-//TODO: VEHICLE HEALTH DETERMINED BY COMPONENTS
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	if(!isnull(pos_to_dam))
@@ -263,7 +271,6 @@
 	Move(new_loc,direction)
 	user.client.move_delay = world.time + vehicle_move_delay
 
-//TODO: CARGO SYSTEM
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
 	if(O == src)
 		return
@@ -276,6 +283,20 @@
 	if(!istype(O,/obj/vehicles))
 		user.drop_from_inventory(O)
 	comp_prof.cargo_transfer(O)
+
+obj/vehicles/MouseDrop(var/obj/over_object)
+	var/mob/user = usr
+	if(!istype(over_object,/obj)) return
+	if(istype(over_object,/obj/vehicles)) return
+	if(over_object.anchored) return
+	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
+	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
+		return
+	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
+	over_object.loc = pick(src.locs)
+	comp_prof.cargo_transfer(over_object)
+
 
 /obj/vehicles/verb/get_cargo_item()
 	set name = "Retrieve Cargo"
@@ -337,7 +358,7 @@
 	if(chosen_occ.stat == CONSCIOUS)
 		if(!do_after(puller, VEHICLE_LOAD_DELAY*2,src,1,1,,1))
 			return
-	exit_vehicle(chosen_occ)
+	exit_vehicle(chosen_occ,1)
 
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
 	if(elevation > user.elevation || elevation > I.elevation)
@@ -349,7 +370,7 @@
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
-		return //TODO: SETUP HIT DAMAGE
+		return ..()
 	put_cargo_item(user,I)
 
 #undef ALL_VEHICLE_POSITIONS

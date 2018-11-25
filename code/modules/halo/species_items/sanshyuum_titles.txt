@@ -1,0 +1,7 @@
+Minister
+Vice Minister
+Assistant Minister
+High Councillor
+Councillor
+Prophet
+Lesser Prophet

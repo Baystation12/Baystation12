@@ -930,6 +930,10 @@ About the new airlock wires panel:
 
 	src.add_fingerprint(user)
 
+	if(istype(C, /obj/item/weapon/plastique))
+		//attempting to apply C12 to the door
+		return
+
 	if (!repairing && (stat & BROKEN) && src.locked) //bolted and broken
 		if (!cut_bolts(C,user))
 			..()

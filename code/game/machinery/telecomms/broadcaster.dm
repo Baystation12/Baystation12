@@ -302,6 +302,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		//Inteference due to jammers of some sort.
 		var/signal_jammed = 0
 		for(var/obj/machinery/telecomms_jammers/tj in telecomms_list)
+			if(tj.jamming_active == 0)
+				continue
 			if(get_dist(tj,R) <= tj.jam_range)
 				if(prob(tj.jam_chance))
 					compression += tj.jam_power

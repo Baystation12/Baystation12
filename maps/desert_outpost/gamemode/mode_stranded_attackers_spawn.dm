@@ -1,6 +1,8 @@
 
 /datum/game_mode/stranded/proc/spawn_attackers_tick(var/amount = 1)
 	set background = 1
+	if(allowed_ghost_roles.len == 0 || isnull(allowed_ghost_roles))
+		allowed_ghost_roles += list(/datum/ghost_role/flood_combat_form)
 	amount += bonus_spawns
 	bonus_spawns = 0
 	while(amount >= 1)
@@ -8,7 +10,7 @@
 		var/spawn_type
 		if(prob(33))
 			number_to_spawn = 1
-			spawn_type = /mob/living/simple_animal/hostile/flood/combat_form/human
+			spawn_type = pick(typesof(/mob/living/simple_animal/hostile/flood/combat_form) - list(/mob/living/simple_animal/hostile/flood/combat_form,/mob/living/simple_animal/hostile/flood/combat_form/juggernaut))
 		else if(prob(50))
 			number_to_spawn = 1
 			spawn_type = /mob/living/simple_animal/hostile/flood/carrier
