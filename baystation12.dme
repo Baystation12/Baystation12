@@ -1491,6 +1491,7 @@
 #include "code\modules\halo\misc\payload.dm"
 #include "code\modules\halo\misc\scrap.dm"
 #include "code\modules\halo\misc\ship_cap_ghost_role.dm"
+#include "code\modules\halo\misc\step_trigger.dm"
 #include "code\modules\halo\misc\tools_items_gear.dm"
 #include "code\modules\halo\misc\armourspecials\armourspecials.dm"
 #include "code\modules\halo\misc\armourspecials\cloaking.dm"
