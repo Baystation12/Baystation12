@@ -1,5 +1,5 @@
 
-/datum/job/opredflag_grunt
+/datum/job/opredflag_cov/grunt
 	title = "Unggoy Minor"
 	faction_flag = COVENANT
 	supervisors = "the Grunt Majors, Grunt Ultras and the Elites"
@@ -14,7 +14,7 @@
 	total_positions = -1
 	track_players = 1
 
-/datum/job/opredflag_grunt/major
+/datum/job/opredflag_cov/grunt/major
 	title = "Unggoy Major"
 	supervisors = "the Grunt Ultras and the Elites"
 	outfit_type = /decl/hierarchy/outfit/unggoy/major
@@ -22,7 +22,7 @@
 	spawn_positions = 6
 	total_positions = 6
 
-/datum/job/opredflag_grunt/ultra
+/datum/job/opredflag_cov/grunt/ultra
 	title = "Unggoy Ultra"
 	supervisors = "the Elites"
 	outfit_type = /decl/hierarchy/outfit/unggoy/ultra
@@ -31,7 +31,7 @@
 	total_positions = 3
 	spawn_positions = 3
 
-/datum/job/opredflag_grunt/specops
+/datum/job/opredflag_cov/grunt/specops
 	title = "Special Operations Unggoy"
 	supervisors = "the Elites"
 	outfit_type = /decl/hierarchy/outfit/unggoy/specops

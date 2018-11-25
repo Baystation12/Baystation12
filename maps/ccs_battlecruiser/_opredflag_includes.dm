@@ -9,6 +9,8 @@
 	#include "jobs/hunter.dm"
 	#include "jobs/spartan.dm"
 
+	#include "playernav.dm"
+
 	#include "ccs_battlecruiser_areas.dm"
 
 	#include "ccs_battlecruiser1.dmm"
