@@ -1,0 +1,4 @@
+author: "Funce"
+delete-after: True
+changes: 
+  - bugfix: "You can no longer get infinite amounts of cable coil from constructing and deconstructing certain telecomms equipment"
