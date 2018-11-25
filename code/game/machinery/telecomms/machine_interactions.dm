@@ -89,8 +89,8 @@
 							for(var/i = 1, i <= C.req_components[I], i++)
 								var/obj/item/s = new I
 								s.dropInto(user.loc)
-								if(istype(P, /obj/item/stack/cable_coil))
-									var/obj/item/stack/cable_coil/A = P
+								if(istype(s, /obj/item/stack/cable_coil))
+									var/obj/item/stack/cable_coil/A = s
 									A.amount = 1
 
 						// Drop a circuit board too
