@@ -464,9 +464,6 @@
 	if(!organ_to_fix.can_recover())
 		to_chat(user, "<span class='notice'>The [organ_to_fix.name] is necrotic and can't be saved, it will need to be replaced.</span>")
 		return 0
-	if(organ_to_fix.damage >= organ_to_fix.max_damage)
-		to_chat(user, "<span class='notice'>The [organ_to_fix.name] needs to be repaired before it is regenerated.</span>")
-		return 0
 
 	target.op_stage.current_organ = organ_to_fix
 
