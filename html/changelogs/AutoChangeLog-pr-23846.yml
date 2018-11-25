@@ -1,7 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Autopilot default speed lowered from 2 (Exceeds max speed hardcap of 0.1) to 0.0025 (40 seconds ETA per tile)"
-  - bugfix: "Autopilot no longer burns fuel needlessly bouncing above/below the speedlimit, and will now never go above the speedlimit."
-  - tweak: "Autopilot now handles changing direction/destination and diagonal movement much more efficiently fuel wise"
-  - bugfix: "It is once again possible to decelerate to a speed of 0."
