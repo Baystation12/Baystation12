@@ -33,6 +33,8 @@
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
 		to_world("<span class = 'radio'>\[System\] [name]: \"Is their ship disabled?\"</span>")
+		target = null
+		return
 
 	var/obj/item/projectile/to_fire = pick(projectiles_to_fire)
 	var/fire_delay = projectiles_to_fire[to_fire]
@@ -51,7 +53,7 @@
 					fire_at_target()
 			else
 				fire_at_target()
-		target_loc = pick(view(target_range_from,target)-view(target_range_from-1,target)) //Let's emulate a "circling" behaviour.
+		target_loc = pick((view(target_range_from,target)-view(target_range_from-1,target))) //Let's emulate a "circling" behaviour.
 	..()
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
