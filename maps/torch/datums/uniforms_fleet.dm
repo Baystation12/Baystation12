@@ -12,6 +12,20 @@
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
 
+/decl/hierarchy/mil_uniform/fleet/com/seniorofficer
+	name = "Fleet senior command"
+	min_rank = 15
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
+
+/decl/hierarchy/mil_uniform/fleet/com/flagofficer
+	name = "Fleet flag command"
+	min_rank = 17
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
+
 /decl/hierarchy/mil_uniform/fleet/eng
 	name = "Fleet engineering"
 	departments = ENG
@@ -44,6 +58,20 @@
 /decl/hierarchy/mil_uniform/fleet/eng/officer/com //Can only be officers
 	name = "Fleet engineering command"
 	departments = ENG|COM
+
+/decl/hierarchy/mil_uniform/fleet/eng/officer/com/seniorofficer
+	name = "Fleet engineering senior command"
+	min_rank = 15
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
+
+/decl/hierarchy/mil_uniform/fleet/eng/officer/com/flagofficer
+	name = "Fleet engineering flag command"
+	min_rank = 17
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
 
 /decl/hierarchy/mil_uniform/fleet/sec
 	name = "Fleet security"
@@ -78,6 +106,20 @@
 	name = "Fleet security command"
 	departments = SEC|COM
 
+/decl/hierarchy/mil_uniform/fleet/sec/officer/com/seniorofficer
+	name = "Fleet security senior command"
+	min_rank = 15
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
+
+/decl/hierarchy/mil_uniform/fleet/sec/officer/com/flagofficer
+	name = "Fleet security flag command"
+	min_rank = 17
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
+
 /decl/hierarchy/mil_uniform/fleet/med
 	name = "Fleet medical"
 	departments = MED
@@ -111,6 +153,20 @@
 	name = "Fleet medical command"
 	departments = MED|COM
 
+/decl/hierarchy/mil_uniform/fleet/med/officer/com/seniorofficer
+	name = "Fleet medical senior command"
+	min_rank = 15
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
+
+/decl/hierarchy/mil_uniform/fleet/med/officer/com/flagofficer
+	name = "Fleet medical flag command"
+	min_rank = 17
+
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
+
 /decl/hierarchy/mil_uniform/fleet/sup
 	name = "Fleet supply"
 	departments = SUP
@@ -137,6 +193,35 @@
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/officer
+	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
+
+/decl/hierarchy/mil_uniform/fleet/sup/seniorofficer
+	name = "Fleet supply senior command"
+	min_rank = 15
+
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command, /obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
+	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
+	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
+
+/decl/hierarchy/mil_uniform/fleet/sup/flagofficer
+	name = "Fleet spply flag command"
+	min_rank = 17
+
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command, /obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
+	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
 
@@ -228,3 +313,31 @@
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
 
+/decl/hierarchy/mil_uniform/fleet/spt/seniorofficer
+	name = "Fleet senior command support"
+	min_rank = 15
+
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command, /obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
+	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
+	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)
+
+/decl/hierarchy/mil_uniform/fleet/spt/flagofficer
+	name = "Fleet flag command support"
+	min_rank = 17
+
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command, /obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
+	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
+	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword, /obj/item/clothing/head/beret/solgov/fleet/dress/command)

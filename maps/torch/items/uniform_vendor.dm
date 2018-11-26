@@ -129,20 +129,26 @@
 		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
 			if(child.departments & COM)
 				user_outfit = child
+				for(var/decl/hierarchy/mil_uniform/seniorchild in user_outfit.children) //Check for variants of command outfits
+					if(user_rank.sort_order >= seniorchild.min_rank && user_outfit.min_rank < seniorchild.min_rank)
+						user_outfit = seniorchild
 	else
 		var/tmp_department = department
 		tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
 
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children) //find base department outfit
 			if(child.departments & tmp_department)
 				user_outfit = child
 				break
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children) //find highest applicable ranking department outfit
 			if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
 				user_outfit = child
 		if(department & COM) //user is in command of their department
 			if(user_outfit.children[1])// Command outfit exists
 				user_outfit = user_outfit.children[1]
+				for(var/decl/hierarchy/mil_uniform/child in user_outfit.children) //Check for variants of command outfits
+					if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
+						user_outfit = child
 
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 
