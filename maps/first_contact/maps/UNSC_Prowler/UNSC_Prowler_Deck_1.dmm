@@ -189,7 +189,7 @@
 "dG" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dH" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/obj/structure/extinguisher_cabinet{pixel_y = 30},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dI" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"dJ" = (/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"dJ" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dK" = (/obj/machinery/vending/medical,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dL" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
 "dM" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/closet/wall_medical{pixel_x = 32},/obj/structure/sign/halo_floorsign/engineering,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
@@ -216,22 +216,22 @@
 "eh" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
 "ei" = (/obj/structure/closet/wall_medical{pixel_x = 32},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
 "ej" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (WEST)"; icon_state = "sleeper_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"ek" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"el" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/light{dir = 4},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
-"em" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 4},/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"en" = (/obj/machinery/meter,/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eo" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"ep" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eq" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{tag = "icon-map (WEST)"; icon_state = "map"; dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"er" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"es" = (/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/power/fusion_drive,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"et" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eu" = (/obj/machinery/light/colored/blue,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
-"ev" = (/obj/machinery/light/colored/blue,/obj/structure/extinguisher_cabinet{pixel_y = -30},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
-"ew" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
-"ex" = (/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
-"ey" = (/obj/structure/closet/crate/medical,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/combat,/obj/item/weapon/storage/firstaid/combat,/obj/item/weapon/reagent_containers/syringe/biofoam,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"ez" = (/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "surgical sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"ek" = (/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"el" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "surgical sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"em" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/light{dir = 4},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
+"en" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 4},/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eo" = (/obj/machinery/meter,/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"ep" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eq" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"er" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{tag = "icon-map (WEST)"; icon_state = "map"; dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"es" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"et" = (/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/power/fusion_drive,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eu" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"ev" = (/obj/machinery/light/colored/blue,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
+"ew" = (/obj/machinery/light/colored/blue,/obj/structure/extinguisher_cabinet{pixel_y = -30},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
+"ex" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
+"ey" = (/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
+"ez" = (/obj/structure/closet/crate/medical,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/combat,/obj/item/weapon/storage/firstaid/combat,/obj/item/weapon/reagent_containers/syringe/biofoam,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "eA" = (/obj/machinery/vending/tool,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
 "eB" = (/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
 "eC" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
@@ -244,26 +244,26 @@
 "eJ" = (/obj/structure/table/steel_reinforced,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
 "eK" = (/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
 "eL" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
-"eM" = (/obj/structure/closet/crate/medical,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/syringe/biofoam,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"eM" = (/obj/structure/closet/crate/medical,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "eN" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "eO" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"eP" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/medbay{tag = "icon-medbay (WEST)"; icon_state = "medbay"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
-"eQ" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/engineering{tag = "icon-engineering (EAST)"; icon_state = "engineering"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
-"eR" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eS" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eT" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eU" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
-"eV" = (/obj/structure/cable/blue,/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/unscfoxstarboard{tag = "icon-gun (NORTH)"; name = "Missile Pod Control Console"; desc = "A console to control missile pods. "; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/turf/simulated/wall/r_wall,/area/corvette/unscfox/deck1/Bridge)
-"eW" = (/obj/structure/cable/blue,/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide (NORTH)"},/obj/machinery/overmap_weapon_console/deck_gun_control/local/unscfoxport{tag = "icon-comm (NORTH)"; name = "Railgun Control"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/wall/r_wall,/area/corvette/unscfox/deck1/Bridge)
-"eX" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Bridge)
-"eY" = (/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Bridge)
-"eZ" = (/obj/structure/toilet{tag = "icon-toilet00 (NORTH)"; icon_state = "toilet00"; dir = 1},/obj/machinery/light{tag = "icon-bulb0 (EAST)"; icon_state = "bulb0"; dir = 4},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
-"fa" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/defibrillator/loaded,/obj/machinery/light,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/weapon/tank/anesthetic,/obj/item/clothing/mask/breath/anesthetic,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"fb" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = -32},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"fc" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"fd" = (/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"fe" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"ff" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{name = "Medical Bay"; req_access = list(309)},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"eP" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{name = "Medical Bay"; req_access = list(309)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"eQ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/medbay{tag = "icon-medbay (WEST)"; icon_state = "medbay"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
+"eR" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/engineering{tag = "icon-engineering (EAST)"; icon_state = "engineering"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
+"eS" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eT" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eU" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eV" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
+"eW" = (/obj/structure/cable/blue,/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/unscfoxstarboard{tag = "icon-gun (NORTH)"; name = "Missile Pod Control Console"; desc = "A console to control missile pods. "; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/turf/simulated/wall/r_wall,/area/corvette/unscfox/deck1/Bridge)
+"eX" = (/obj/structure/cable/blue,/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide (NORTH)"},/obj/machinery/overmap_weapon_console/deck_gun_control/local/unscfoxport{tag = "icon-comm (NORTH)"; name = "Railgun Control"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/wall/r_wall,/area/corvette/unscfox/deck1/Bridge)
+"eY" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Bridge)
+"eZ" = (/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Bridge)
+"fa" = (/obj/structure/toilet{tag = "icon-toilet00 (NORTH)"; icon_state = "toilet00"; dir = 1},/obj/machinery/light{tag = "icon-bulb0 (EAST)"; icon_state = "bulb0"; dir = 4},/turf/simulated/floor/tiled/freezer,/area/corvette/unscfox/deck1/crewbathroom)
+"fb" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/defibrillator/loaded,/obj/machinery/light,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/weapon/tank/anesthetic,/obj/item/clothing/mask/breath/anesthetic,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"fc" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = -32},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"fd" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"fe" = (/obj/machinery/atmospherics/unary/cryo_cell{dir = 4},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"ff" = (/obj/machinery/light,/obj/machinery/atmospherics/unary/freezer{dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "fg" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{name = "Reactor Core"; req_access = list(309)},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
 "fh" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
 "fi" = (/obj/machinery/portable_atmospherics/powered/scrubber,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
@@ -295,21 +295,22 @@
 "fI" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/Reactorcore)
 "fJ" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
 "fK" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fL" = (/obj/structure/lattice,/turf/space,/area/corvette/unscfox/portbattery)
-"fM" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fN" = (/obj/structure/closet/wall_medical{pixel_x = 32},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fO" = (/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fP" = (/obj/structure/table/rack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fQ" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/device/multitool,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fR" = (/obj/structure/lattice,/obj/machinery/deck_gun/chaingun{tag = "icon-deck_gatling3 (WEST)"; icon_state = "deck_gatling3"; dir = 8},/turf/space,/area/corvette/unscfox/portbattery)
-"fS" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo_lifepod{name = "Escape Pod"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fT" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fU" = (/obj/structure/drop_pod_launchbay,/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fV" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fW" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fX" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fY" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Aegis Map Data"},/turf/space,/area/space)
-"fZ" = (/obj/effect/overmap/ship/unsc_aegis,/turf/space,/area/space)
+"fL" = (/turf/space,/area/corvette/unscthorin/medicalbay)
+"fM" = (/obj/structure/lattice,/turf/space,/area/corvette/unscfox/portbattery)
+"fN" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fO" = (/obj/structure/closet/wall_medical{pixel_x = 32},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fP" = (/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fQ" = (/obj/structure/table/rack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fR" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/device/multitool,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fS" = (/obj/structure/lattice,/obj/machinery/deck_gun/chaingun{tag = "icon-deck_gatling3 (WEST)"; icon_state = "deck_gatling3"; dir = 8},/turf/space,/area/corvette/unscfox/portbattery)
+"fT" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo_lifepod{name = "Escape Pod"},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fU" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fV" = (/obj/structure/drop_pod_launchbay,/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fW" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fX" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fY" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
+"fZ" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Aegis Map Data"},/turf/space,/area/space)
+"ga" = (/obj/effect/overmap/ship/unsc_aegis,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -344,25 +345,25 @@ aaaaaaaaaaaacccccccncocpcqcrcsctcococucococvcwcxcyczcwcAcBcCcwcDcEcxcBcFcGcBczcH
 aaaaaaaaaaaacccPcQcRbrbMcScTaAaAcUcVcWcXcYcZdabhbibhdadbdcdddadedadbdcdfdgdcbhbhdabhbhdbdadhbhbhdadidjdkbFaaaaaaaaaaaaaa
 aaaaaaaaaaaaaAaAbMcebrbMdldmaAaAdndodpdqaAdrdrdrdsdrdrdrdrdtdtdudtdtdtdvbidwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwaaaaaaaaaaaaaa
 aaaaaaaaaaaaccdxcQcRbrbMdydzaAaAdAbrbrdBaAdCdrdDdEdFdrdCdrdGdHdIdJdKdtdLdMdwdNdOdPdQdRdSdTdUdVdQdWdXdwdwdwaaaaaaaaaaaaaa
-aaaaaaaaaaaaccccccdpdYdZeaebeccoedcocoeeaAefdregeheidrefdrejdJdIdJekdtbGeldwemeneodOepeqdOdOdTeresetdwdwdwaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaccaAaAaAcebrcecYeubrbrevaAewexdEexexexexdreydJdIdJezdtbhbidweAeBeBeCepeDeDeDeBeCeEeFdwdwdwaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaAaSaAeGbMeGaAaAaAeHaAaAeIdreJeKeLdreIdreMdJeNeOeOeOePeQeReSeReReReReReReReTeReUeBdwdwdwaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaAaAaAeVaAeWaAaSeXeYaSaAeZdrdrdrdrdreZdrfafbfcfdfeffbhbhfgfheBeBeBeBeBeBeBfheBeBfidwdwdwaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaAaAaAaSaAaAaAfjfkaAaAdrdrdrdrdrdrdrdrdtdtdtdtdtdtfldwdwfmeReReReRfneReRfoeBfpfidwdwdwaaaaaaaaaaaaaa
+aaaaaaaaaaaaccccccdpdYdZeaebeccoedcocoeeaAefdregeheidrefdrejekdIekeldtbGemdweneoepdOeqerdOdOdTeseteudwdwdwaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaccaAaAaAcebrcecYevbrbrewaAexeydEeyeyeyeydrezekdIekekekbhbidweAeBeBeCeqeDeDeDeBeCeEeFdwdwdwaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaAaSaAeGbMeGaAaAaAeHaAaAeIdreJeKeLdreIdreMekeNeOeOePeQeReSeTeSeSeSeSeSeSeSeUeSeVeBdwdwdwaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaAaAaAeWaAeXaAaSeYeZaSaAfadrdrdrdrdrfadrfbfcfdfeffdtbhbhfgfheBeBeBeBeBeBeBfheBeBfidwdwdwaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaAaAaAaSaAaAaAfjfkaAaAdrdrdrdrdrdrdrdrdtdtdtdtdtdtfldwdwfmeSeSeSeSfneSeSfoeBfpfidwdwdwaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaAaAaAaAaAaAaAaAaAdrdrdrdrdrdrdrdrdtdtdtdtdtdtfqdwdwfreBeBeBfsfsfsftfufsfsfsfsfsfsaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaAaAaAaAaAdrdrdrdrdrdrdrdrdtdtdtdtdtdtdwdwdwfheBeBeBfsfvfwfxfufyfzfsfxfAaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaAaAaAaAdraaaaaaaaaaaaaaaaaadtdtdtdtdwdwdwfBfCeBeBfsfsfsfxfDfEfFfsfGfAaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwdwfHfIfpeBfsfsfsfJfxfxfKfsfxfAaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafLdwdwdwdwdwfsfvfwfxfxfxfxfMfxfAaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafLfLdwdwdwdwfsfsfsfxfxfxfNfsfGfAaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafLfLfLdwdwdwfsfsfsfxfxfxfxfsfxfAaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafLfLfLfLdwdwfsfvfwfxfOfPfQfsfsfsfsaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafRfLfLfLfLdwfsfsfsfSfsfsfsfsfsfsfsaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafLfLfsfsfsfsfsfTfTfxfsfsfsfsfsfsfsaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfUfTfVfsfsfsfsfsfsaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfsfsfsfWfTfxfsfsfsfsaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfsfsfsfsfsfXfXfsfsfsaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfsfsfsfsfsfsfXfXfsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafLfLaaaaaaaaaaaaaaaaaaaaaafMdwdwdwdwdwfsfvfwfxfxfxfxfNfxfAaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafMfMdwdwdwdwfsfsfsfxfxfxfOfsfGfAaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafMfMfMdwdwdwfsfsfsfxfxfxfxfsfxfAaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafMfMfMfMdwdwfsfvfwfxfPfQfRfsfsfsfsaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafSfMfMfMfMdwfsfsfsfTfsfsfsfsfsfsfsaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafMfMfsfsfsfsfsfUfUfxfsfsfsfsfsfsfsaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfVfUfWfsfsfsfsfsfsaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfsfsfsfXfUfxfsfsfsfsaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfsfsfsfsfsfYfYfsfsfsaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafsfsfsfsfsfsfsfsfsfsfsfsfsfYfYfsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -370,6 +371,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-fYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 fZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
