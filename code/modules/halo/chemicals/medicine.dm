@@ -126,3 +126,22 @@
 		else if (prob(BIOFOAM_PROB_OVERDOSE_WARNING))
 			var/obj/item/organ/O = pick(H.internal_organs)
 			to_chat(M,"<span class ='danger'>You feel your [O.name] being crushed.</span>")
+
+/datum/reagent/hyperzine_concentrated
+	name = "Concentrated Hyperzine"
+	description = "A long-lasting, powerful muscle stimulant. A concentrated version of Hyperzine, forgoing safety to provide a considerable boost the the user's speed and reaction time."
+	taste_description = "acid"
+	reagent_state = LIQUID
+	color = "#FF3300"
+	metabolism = REM * 0.15
+	overdose = REAGENTS_OVERDOSE * 0.5
+
+/datum/reagent/hyperzine_concentrated/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
+	if(H.internal_organs_by_name[BP_LIVER])
+		var/obj/item/organ/user_liver = H.internal_organs_by_name[BP_LIVER]
+		user_liver.take_damage(1,1)
+	H.adjustToxLoss(2)
+	if(prob(5))
+		H.emote(pick("twitch", "blink_r", "shiver"))
+	H.add_chemical_effect(CE_SPEEDBOOST, 1)
+	H.add_chemical_effect(CE_PULSE, 2)
