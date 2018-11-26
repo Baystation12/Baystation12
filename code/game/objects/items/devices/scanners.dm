@@ -42,7 +42,7 @@ REAGENT SCANNER
 		to_chat(user, "<span class='warning'>You are not nimble enough to use this device.</span>")
 		return
 
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over the floor.")
 		to_chat(user, "<span class='notice'><b>Scan results for the floor:</b></span>")
 		to_chat(user, "Overall Status: Healthy</span>")
