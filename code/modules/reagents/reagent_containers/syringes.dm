@@ -143,9 +143,6 @@
 				if(istype(target, /mob/living/carbon/human))
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
-			if(NOCLONE in T.mutations) //target done been et, no more blood in him
-				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
-				return
 
 			var/injtime = time //Taking a blood sample through a hardsuit takes longer due to needing to find a port.
 			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))

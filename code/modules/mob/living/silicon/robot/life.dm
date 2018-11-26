@@ -259,7 +259,7 @@
 /mob/living/silicon/robot/handle_vision()
 	..()
 
-	if (src.stat == DEAD || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
+	if (src.stat == DEAD || (MUTATION_XRAY in mutations) || (src.sight_mode & BORGXRAY))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		set_see_in_dark(8)
 		set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)

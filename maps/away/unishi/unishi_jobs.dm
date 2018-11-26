@@ -39,9 +39,10 @@
 	r_pocket = /obj/item/device/radio
 	l_pocket = /obj/item/weapon/crowbar/prybar
 
-#undef BEARCAT_OUTFIT_JOB_NAME
 /obj/effect/submap_landmark/spawnpoint/unishi_crew
 	name = "Crew"
 
 /obj/effect/submap_landmark/spawnpoint/unishi_researcher
 	name = "Researcher"
+
+#undef UNISHI_OUTFIT_JOB_NAME

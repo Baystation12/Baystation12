@@ -212,5 +212,5 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 
 #undef SSMACHINES_PIPENETS
 #undef SSMACHINES_MACHINERY
-#undef SSMACHINES_POWER
-#undef SSMACHINES_power_objects
+#undef SSMACHINES_POWERNETS
+#undef SSMACHINES_POWER_OBJECTS

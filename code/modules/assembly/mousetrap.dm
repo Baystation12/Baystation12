@@ -53,7 +53,7 @@
 		if(!armed)
 			to_chat(user, "<span class='notice'>You arm [src].</span>")
 		else
-			if((CLUMSY in user.mutations) && prob(50))
+			if((MUTATION_CLUMSY in user.mutations) && prob(50))
 				var/which_hand = BP_L_HAND
 				if(!user.hand)
 					which_hand = BP_R_HAND
@@ -69,7 +69,7 @@
 
 	attack_hand(mob/living/user as mob)
 		if(armed)
-			if((CLUMSY in user.mutations) && prob(50))
+			if((MUTATION_CLUMSY in user.mutations) && prob(50))
 				var/which_hand = BP_L_HAND
 				if(!user.hand)
 					which_hand = BP_R_HAND

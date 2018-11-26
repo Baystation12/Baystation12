@@ -1,5 +1,3 @@
-#define TANK_MAX_RELEASE_PRESSURE (3*ONE_ATMOSPHERE)
-#define TANK_DEFAULT_RELEASE_PRESSURE 24
 #define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
 
 var/list/global/tank_gauge_cache = list()
