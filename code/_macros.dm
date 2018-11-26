@@ -71,8 +71,6 @@
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
 
-#define isairlock(A) istype(A, /obj/machinery/door/airlock)
-
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
 #define isWrench(A) istype(A, /obj/item/weapon/wrench)

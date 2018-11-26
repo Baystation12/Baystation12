@@ -15,7 +15,7 @@
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
-	if((CLUMSY in user.mutations) && prob(50))
+	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>Huh? How does this thing work?</span>")
 		det_time = fail_det_time
 		activate(user)

@@ -70,7 +70,7 @@
 		drop_from_inventory(handcuffed)
 
 /mob/living/carbon/proc/can_break_cuffs()
-	if(HULK in mutations)
+	if(MUTATION_HULK in mutations)
 		return 1
 
 /mob/living/carbon/proc/break_handcuffs()

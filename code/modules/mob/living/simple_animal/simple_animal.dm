@@ -145,7 +145,7 @@
 		return
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	if(!(SPACERES in mutations) && environment)
+	if(!(MUTATION_SPACERES in mutations) && environment)
 
 		if(abs(environment.temperature - bodytemperature) > 40 )
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)

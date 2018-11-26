@@ -79,7 +79,7 @@
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
 	activation_message="You feel lightheaded."
-	mutation=CLUMSY
+	mutation=MUTATION_CLUMSY
 
 /datum/dna/gene/disability/clumsy/New()
 	block=GLOB.CLUMSYBLOCK
