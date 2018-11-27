@@ -226,6 +226,11 @@
 	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/a145_ap
 
+/obj/item/ammo_casing/a145_ap/tracerless
+	desc = "A 14.5mm bullet casing. Some modifications appear to have been made to remove the tracer-effect, however, this is likely to reduce the penetration of the round."
+	caliber = "14.5mm"
+	projectile_type = /obj/item/projectile/bullet/a145_ap
+
 /obj/item/projectile/bullet/a145_ap
 	damage = 80
 	step_delay = 0.1
@@ -234,6 +239,12 @@
 	accuracy = 6
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
+
+/obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
+	penetrating = 0
+	armor_penetration = 70
+	tracer_type = null
+	tracer_delay_time = null
 
 /obj/effect/projectile/srs99
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'

@@ -172,7 +172,7 @@
 "dp" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
 "dq" = (/obj/structure/toilet{dir = 8},/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
 "dr" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/material/kitchen/utensil/knife,/obj/item/weapon/material/kitchen/rollingpin,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"ds" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"ds" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{desc = "Salt. From ODST tears, presumably."},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
 "dt" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
 "du" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
 "dv" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_soft/full,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)

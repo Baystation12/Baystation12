@@ -149,8 +149,24 @@
 	color = COLOR_DARK_GRAY
 	req_access = list()
 	products = list(\
+
+	/obj/item/weapon/gun/projectile/heavysniper = 1,
+	/obj/item/weapon/gun/projectile/br85 = 2,
+	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
+	/obj/item/weapon/gun/projectile/m7_smg = 2,
+	/obj/item/weapon/gun/projectile/m392_dmr/innie = 1,
+	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
 	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 8, //Add ammo just after all the weapons.
+	/obj/item/ammo_box/heavysniper = 2,
+	/obj/item/ammo_magazine/m762_ap/MA3 = 16,
+	/obj/item/ammo_magazine/m95_sap = 10,
+	/obj/item/ammo_magazine/m5 = 24,
+	/obj/item/ammo_box/shotgun = 10,
+	/obj/item/ammo_box/shotgun/slug = 10,
+	/obj/item/ammo_magazine/lmg_30cal_box_ap = 5,
+	/obj/item/ammo_magazine/m127_saphe =10,
+	/obj/item/ammo_magazine/m127_saphp =10,
 	/obj/item/weapon/storage/belt/marine_ammo = 4,
 	/obj/item/weapon/storage/belt/marine_medic = 4,
 	/obj/item/weapon/material/knife/combat_knife = 4,
@@ -159,5 +175,6 @@
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,
 	/obj/item/weapon/grenade/smokebomb = 8,
-	/obj/item/weapon/grenade/frag/m9_hedp = 8
+	/obj/item/device/landmine = 2,
+	/obj/item/weapon/grenade/frag/m9_hedp = 4
 	)
