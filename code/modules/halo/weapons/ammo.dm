@@ -194,6 +194,17 @@
 /obj/item/ammo_magazine/a762_box_ap/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/lmg_30cal_box_ap
+	name = "box magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 rounds. Designed for heavier use."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	mag_type = MAGAZINE
+	icon_state = "30cal_lmg_mag"
+	ammo_type = /obj/item/ammo_casing/a762_ap
+	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
+	caliber = "a762"
+	max_ammo = 72
+	multiple_sprites = 1
 
 
 //used by: SRS99 sniper rifle
