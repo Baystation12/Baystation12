@@ -101,8 +101,12 @@
 		qdel(finaltarget)
 
 /obj/machinery/computer/ship/bsa/proc/fire_at_sector(obj/effect/overmap/finaltarget, obj/structure/ship_munition/bsa_charge/charge, chargetype)
-	var/turf/targetturf = pick_area_turf_in_connected_z_levels(list(/proc/is_area_with_turf,/proc/is_not_space_area), list(/proc/is_not_space_turf), finaltarget.map_z[1])
-	message_admins("Aforementioned artillery strike hit sector at [targetturf.x],[targetturf.y],[targetturf.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[targetturf.x];Y=[targetturf.y];Z=[targetturf.z]'>JMP</a>).")
+	var/list/targetareas = finaltarget.get_areas()
+	targetareas -= locate(/area/space)
+	var/area/finalarea = pick(targetareas)
+	var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
+
+	message_admins("Aforementioned artillery strike hit sector at [get_area(targetturf)]: [targetturf.x],[targetturf.y],[targetturf.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[targetturf.x];Y=[targetturf.y];Z=[targetturf.z]'>JMP</a>).")
 	if(chargetype == BSA_DROPPOD)
 		if(targetturf.density)
 			targetturf.ex_act(1)
