@@ -33,139 +33,154 @@
 "aG" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
 "aH" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
 "aI" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
-"aJ" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"aJ" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/obj/effect/landmark/start/commando_spawn,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
 "aK" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
 "aL" = (/obj/machinery/vending/engineering,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
 "aM" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Mixed''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/structure/cable/blue{icon_state = "4-8"},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
-"aN" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
-"aO" = (/obj/machinery/computer/atmos_alert{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 2},/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"aP" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/computer/engines{tag = "icon-nav"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 2},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"aQ" = (/obj/structure/table/standard,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"aR" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
-"aS" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Mixed''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
-"aT" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
-"aU" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"aV" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"aW" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
-"aX" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide"},/obj/machinery/overmap_weapon_console/npc_comms_console{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; tag = "icon-default"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"aY" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{tag = "icon-gun"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"},/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"aZ" = (/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"ba" = (/obj/structure/bed/chair/comfy/captain{dir = 1; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (NORTH)"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bb" = (/obj/machinery/door/airlock/halo{name = "Crew Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
-"bc" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
-"bd" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
-"be" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bf" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
-"bg" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bh" = (/obj/structure/window/reinforced{dir = 5},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bi" = (/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_lockdown"},/obj/machinery/door/firedoor,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bj" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bk" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bl" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bm" = (/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
-"bn" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bo" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bp" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bq" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
-"br" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/computer/helm{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bs" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bt" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 5},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bu" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = "urf_prowler_bridge_s"; name = "Exterior Lockdown"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"bv" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"bw" = (/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bx" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Engine"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
-"by" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bz" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bA" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bB" = (/obj/structure/table/standard,/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bC" = (/turf/simulated/floor/stairs/stairsdark/west,/area/commando_ship/urfs_avarice/Bridge)
-"bD" = (/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"bE" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"bF" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bG" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway)
-"bH" = (/obj/machinery/door/airlock/multi_tile/halo/blast{tag = "icon-door_closed"; name = "Engine"; icon_state = "door_closed"; dir = 2; req_access = list(252)},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bI" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/power/terminal{tag = "icon-term (WEST)"; icon_state = "term"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bJ" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bK" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bL" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bM" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bN" = (/obj/machinery/telecomms/relay/ship_relay{name = "Signal Relay"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bO" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bP" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = "urf_prowler_bridge_lockdown"; name = "Bridge Lockdown"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"bQ" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide (NORTH)"},/obj/machinery/overmap_weapon_console/npc_comms_console{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"bR" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bS" = (/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_lockdown"},/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"bT" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
-"bU" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bV" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bW" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"bX" = (/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
-"bY" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"bZ" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"ca" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cb" = (/obj/structure/computerframe{tag = "icon-computer (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; dir = 1; layer = 2; level = 1},/obj/machinery/computer/navigation{tag = "icon-engine (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"cc" = (/obj/structure/bed/chair/comfy/captain{name = "Bridge chair"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"cd" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"ce" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"cf" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cg" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"ch" = (/obj/machinery/atmospherics/unary/freezer{tag = "icon-freezer_1 (WEST)"; icon_state = "freezer_1"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"ci" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide (NORTH)"},/obj/machinery/overmap_weapon_console/npc_comms_console{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"cj" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"ck" = (/obj/machinery/door/airlock/halo{name = "Crew Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
-"cl" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/captainroom)
-"cm" = (/obj/machinery/door/airlock/halo{name = "Commander Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/captainroom)
-"cn" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Messhall)
-"co" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Messhall)
-"cp" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Messhall)
-"cq" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cr" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cs" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
-"ct" = (/obj/machinery/computer/atmos_alert{tag = "icon-engine (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 1},/obj/structure/computerframe{tag = "icon-computer (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; dir = 1; layer = 2; level = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"cu" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/obj/machinery/computer/engines{tag = "icon-nav (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
-"cv" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
-"cw" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
-"cx" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cy" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cz" = (/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cA" = (/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cB" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cC" = (/obj/structure/table/woodentable,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cD" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cE" = (/turf/simulated/open,/area/commando_ship/urfs_avarice/Centralhallway)
-"cF" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cG" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cH" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cI" = (/obj/structure/table/woodentable,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cJ" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cK" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cL" = (/obj/structure/closet/cabinet,/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
-"cM" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cN" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"cO" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cP" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cQ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cR" = (/obj/machinery/door/airlock/halo{name = "Commander Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
-"cS" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (NORTH)"; icon_state = "cooling_manifold"; dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cT" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cU" = (/obj/machinery/atmospherics/binary/fusion_cooling,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cV" = (/obj/machinery/shower,/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
-"cW" = (/obj/structure/sink{dir = 1; pixel_y = 16},/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
-"cX" = (/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
-"cY" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cZ" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"da" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/structure/closet/wall_medical{pixel_y = -32},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"db" = (/obj/structure/toilet{dir = 8},/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
-"dc" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/material/kitchen/utensil/knife,/obj/item/weapon/material/kitchen/rollingpin,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"dd" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"de" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"df" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"dg" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_soft/full,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"dh" = (/obj/structure/table/woodentable,/obj/machinery/microwave,/obj/machinery/light/spot,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"di" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"dj" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
-"dk" = (/obj/effect/landmark/map_data{height = 2},/turf/space,/area/space)
-"dl" = (/obj/effect/overmap/ship/urfcommando_prowler,/turf/space,/area/space)
+"aN" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"aO" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"aP" = (/obj/machinery/computer/atmos_alert{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 2},/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"aQ" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/computer/engines{tag = "icon-nav"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 2},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"aR" = (/obj/structure/table/standard,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"aS" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"aT" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"aU" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Mixed''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"aV" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"aW" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"aX" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"aY" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"aZ" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
+"ba" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide"},/obj/machinery/overmap_weapon_console/npc_comms_console{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; tag = "icon-default"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bb" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{tag = "icon-gun"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"},/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bc" = (/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bd" = (/obj/structure/bed/chair/comfy/captain{dir = 1; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (NORTH)"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"be" = (/obj/machinery/light/small,/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Troopbunks)
+"bf" = (/obj/machinery/door/airlock/halo{name = "Crew Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"bg" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"bh" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/storageroom)
+"bi" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bj" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
+"bk" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bl" = (/obj/structure/window/reinforced,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bm" = (/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_lockdown"},/obj/machinery/door/firedoor,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bn" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"bo" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"bp" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"bq" = (/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
+"br" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bs" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bt" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bu" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
+"bv" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/computer/helm{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bw" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bx" = (/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"by" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = "urf_prowler_bridge_s"; name = "Exterior Lockdown"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
+"bz" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
+"bA" = (/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bB" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Engine"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
+"bC" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bD" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bE" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bF" = (/obj/structure/table/standard,/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bG" = (/turf/simulated/floor/stairs/stairsdark/west,/area/commando_ship/urfs_avarice/Bridge)
+"bH" = (/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
+"bI" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
+"bJ" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bK" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bL" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway)
+"bM" = (/obj/machinery/door/airlock/multi_tile/halo/blast{tag = "icon-door_closed"; name = "Engine"; icon_state = "door_closed"; dir = 2; req_access = list(252)},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"bN" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/power/terminal{tag = "icon-term (WEST)"; icon_state = "term"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bO" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bP" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bQ" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bR" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bS" = (/obj/machinery/telecomms/relay/ship_relay{name = "Signal Relay"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"bT" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bU" = (/obj/structure/table/standard,/obj/machinery/button/remote/blast_door{id = "urf_prowler_bridge_lockdown"; name = "Bridge Lockdown"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
+"bV" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide (NORTH)"},/obj/machinery/overmap_weapon_console/npc_comms_console{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
+"bW" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bX" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bY" = (/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_lockdown"},/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"bZ" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"ca" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cb" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cc" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cd" = (/obj/machinery/power/apc{dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"ce" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cf" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cg" = (/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
+"ch" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"ci" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cj" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"ck" = (/obj/structure/computerframe{tag = "icon-computer (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; dir = 1; layer = 2; level = 1},/obj/machinery/computer/navigation{tag = "icon-engine (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cl" = (/obj/structure/bed/chair/comfy/captain{name = "Bridge chair"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cm" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cn" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"co" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cp" = (/obj/machinery/light/spot,/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cq" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"cr" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cs" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"ct" = (/obj/machinery/atmospherics/unary/freezer{tag = "icon-freezer_1 (WEST)"; icon_state = "freezer_1"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cu" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer_wide"; layer = 2; level = 1; tag = "icon-computer_wide (NORTH)"},/obj/machinery/overmap_weapon_console/npc_comms_console{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cv" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 1},/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cw" = (/obj/machinery/door/airlock/halo{name = "Crew Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"cx" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/captainroom)
+"cy" = (/obj/machinery/door/airlock/halo{name = "Commander Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/captainroom)
+"cz" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Messhall)
+"cA" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Messhall)
+"cB" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Messhall)
+"cC" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cD" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cE" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 5},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced/full,/obj/machinery/door/blast/regular/open{id = "urf_prowler_bridge_s"},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/Bridge)
+"cF" = (/obj/machinery/computer/atmos_alert{tag = "icon-engine (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 1},/obj/structure/computerframe{tag = "icon-computer (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; dir = 1; layer = 2; level = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cG" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/obj/machinery/computer/engines{tag = "icon-nav (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 1},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cH" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"cI" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"cJ" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
+"cK" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cL" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cM" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cN" = (/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"cO" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"cP" = (/obj/structure/table/woodentable,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"cQ" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"cR" = (/turf/simulated/open,/area/commando_ship/urfs_avarice/Centralhallway)
+"cS" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/obj/effect/landmark/start/commando_officer_spawn,/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cT" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cU" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cV" = (/obj/structure/table/woodentable,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"cW" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cX" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"cY" = (/obj/structure/closet/cabinet,/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"cZ" = (/turf/simulated/floor/wood,/area/commando_ship/urfs_avarice/captainroom)
+"da" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"db" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dc" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"dd" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"de" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"df" = (/obj/machinery/door/airlock/halo{name = "Commander Quarters"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
+"dg" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (NORTH)"; icon_state = "cooling_manifold"; dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"dh" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"di" = (/obj/machinery/atmospherics/binary/fusion_cooling,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"dj" = (/obj/machinery/shower,/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
+"dk" = (/obj/structure/sink{dir = 1; pixel_y = 16},/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
+"dl" = (/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
+"dm" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"dn" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"do" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/structure/closet/wall_medical{pixel_y = -32},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
+"dp" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
+"dq" = (/obj/structure/toilet{dir = 8},/turf/simulated/floor/tiled/freezer,/area/commando_ship/urfs_avarice/captainroom)
+"dr" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/material/kitchen/utensil/knife,/obj/item/weapon/material/kitchen/rollingpin,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"ds" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dt" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"du" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dv" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_soft/full,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dw" = (/obj/structure/table/woodentable,/obj/machinery/microwave,/obj/machinery/light/spot,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dx" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dy" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/lino,/area/commando_ship/urfs_avarice/Messhall)
+"dz" = (/obj/effect/landmark/map_data{height = 2},/turf/space,/area/space)
+"dA" = (/obj/effect/overmap/ship/urfcommando_prowler,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -191,41 +206,41 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaabababababacamafanaoafafapacacad
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababacaqafarasafafatacacadauavawaxayazadadadaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababacafafafafafafapacacadadadawawawawadawaAaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaBababababababababababababacaCafafaDafafalacacadauavawawawaEadaFaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaBaGaHaIaBaBabaJaKaJabaJaKaJabaJaKaJacaLafaDaMafaNacacacadadadawawawawavawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaBaGaHaIaBaOaPaQaQaBabaRaRaRabaRaRaRabaRaRaRacafafaDaSafaTacacacadauavaUawawaVadawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaWaQaXaYaZaZbaaZaQaBababbbabababbbabababbbabacacbcacacacbdacacacadadadawbebeadadaFaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaabfbfbgaZbaaZbhbhaZaZbiaRbjbjbjbkbjbjbjbjbjbjbjbkbjbjbjbjbjblbkbjbjbjbmawawbnbobpadawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaabqbrbsaZaZbtbubvbwaZbiaRbjbjbjbjbjbjbjbjbjbjbjbjbjbjbjbjbjblbjbjbjbjbxawawbybzbAadadadadaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaBaBaBbBaZaZbCbDbEbwbFaBabbGbGbGbGbGbHbjbGbGbGbGbGbGbGbGbGbHblbGbGbGbGadbIbJbKbLbMawavbNadaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaWbrbsaZaZbObPbQbwbRbSbTbUbUbUbUbUbVbUbUbUbVbUbUbUbUbUbUbUbWbUbUbUbUbXbJbJbYbZcaadadadadaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaabfbfcbaZccaZcdcdaZaZbiaRbjbjbjcebjblbjbjbjblbjcebjbjbjbjbjblcebjbjbjbxawawcfcgchadawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaabqaQcicjaZaZccaZaQaBababbbabababckabclclcmclclcncocncncncpcnbjbjadadadawcqcrchadaFaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaBcsaHaIaBctcuaQaQaBabaRaRaRabaRcvcwclcxcyczclcAcAcBcCcBcDcncEcEadauavaUcqcrchadawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaBaGaHaIaBaBabaJaKaJabaJaKaJclcFcGcHclcAcAcBcIcBcDcncncnadadadawcJcKawavawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaBababababababababclcLczczclcAcAcBcIcBcMcNcncnadauavawcOcPcQadaFaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababclclclcRclcAcAcAcAcAcAcAcncnadadadawcScTcUadawaAaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababclcVcWcXclcBcBcBcBcBcBcAcncnadauavawcYcZdaadadadaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaabclclcXdbcldccIcIcIdddecAcncnadadadadadadadadadadadadadaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclclcAcAcAcAcAcAcAcncnadaaaaaaadadadadadadadadadadadadaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclclcndfdgdhdidjcncnaaaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclclcncncncncncncncnaaaaaaaaaaaaaaaaaaadadadadadadaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclclcncncncncncncncnaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclcncncncncncncncnaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclcncncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclcncncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclcncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclcncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclcncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclcncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclcncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclcncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclcncncncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclclclcncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaclclclclcncncncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaBaGaHaIaBaBabaJaKaJabaJaKaJabaJaKaJacaLafaDaMaNaOacacacadadadawawawawavawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaBaGaHaIaBaPaQaRaRaBabaSaTaSabaSaTaSabaSaTaSacafafaDaUaVaWacacacadauavaXawawaYadawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaZaRbabbbcbcbdbcaRaBabbebfabababbfabababbfabacacbgacacacbhacacacadadadawbibiadadaFaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaabjbjbkbcbdbcblblbcbcbmaTbnbnbnbobnbnbnbnbnbnbnbobnbnbnbnbnbpbobnbnbnbqawawbrbsbtadawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaabubvbwbcbcbxbybzbAbcbmaTbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbpbnbnbnbnbBawawbCbDbEadadadadaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaBaBaBbFbcbcbGbHbIbJbKaBabbLbLbLbLbLbMbnbLbLbLbLbLbLbLbLbLbMbpbLbLbLbLadbNbObPbQbRawavbSadaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaZbvbwbcbcbTbUbVbWbXbYbZcacacacacacbcacacacbcccdcecacacacacfcacacacacgbObOchcicjadadadadaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaabjbjckbcclbccmcmbcbcbmaTbnbnbncnbnbpbnbnbnbpcocpcqbnbnbnbnbpcnbnbnbnbBawawcrcsctadawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabuaRcucvbcbcclbcaRaBababbfabababcwabcxcxcycxcxczcAczczczcBczbnbnadadadawcCcDctadaFaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaBcEaHaIaBcFcGaRaRaBabcHaTcHabcHcIcJcxcKcLcMcxcNcNcOcPcOcQczcRcRadauavaXcCcDctadawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaBaGaHaIaBaBabaJaKaJabaJaKaJcxcScTcUcxcNcNcOcVcOcQczczczadadadawcWcXawavawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaBababababababababcxcYcZcZcxcNcNcOcVcOdadbczczadauavawdcdddeadaFaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababcxcxcxdfcxcNcNcNcNcNcNcNczczadadadawdgdhdiadawaAaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababcxdjdkdlcxcOcOcOcOcOcOcNczczadauavawdmdndoadadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaabcxcxdpdqcxdrcVcVcVdsdtcNczczadadadadadadadadadadadadadaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxcxcNcNcNcNcNcNcNczczadaaaaaaadadadadadadadadadadadadaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxcxczdudvdwdxdyczczaaaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxcxczczczczczczczczaaaaaaaaaaaaaaaaaaadadadadadadaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxcxczczczczczczczczaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxczczczczczczczczaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxcxcxczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacxcxcxcxczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-dkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-dlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

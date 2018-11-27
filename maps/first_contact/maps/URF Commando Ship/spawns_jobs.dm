@@ -4,7 +4,7 @@ GLOBAL_LIST_EMPTY(commando_spawns)
 	display_name = "Commando Spawn"
 	restrict_job = list("URF Commando - Rifleman")
 
-/datum/spawnpoint/corvetteodst_crewmedical/New()
+/datum/spawnpoint/commando_spawn/New()
 	..()
 	turfs = GLOB.commando_spawns
 
@@ -14,3 +14,21 @@ GLOBAL_LIST_EMPTY(commando_spawns)
 /obj/effect/landmark/start/commando_spawn/New()
 	..()
 	GLOB.commando_spawns += loc
+
+GLOBAL_LIST_EMPTY(commando_officer_spawns)
+
+/datum/spawnpoint/commando_officer_spawn
+	display_name = "Commando Officer Spawn"
+	restrict_job = list("URF Commando Officer")
+
+/datum/spawnpoint/commando_officer_spawn/New()
+	..()
+	turfs = GLOB.commando_officer_spawns
+
+/obj/effect/landmark/start/commando_officer_spawn
+	name = "Commando Officer Spawn"
+
+/obj/effect/landmark/start/commando_officer_spawn/New()
+	..()
+	GLOB.commando_officer_spawns += loc
+
