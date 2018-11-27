@@ -148,8 +148,7 @@
 	icon_deny = "ironhammer-deny"
 	color = COLOR_DARK_GRAY
 	req_access = list()
-	products = list(\
-
+	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
 	/obj/item/weapon/gun/projectile/br85 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
