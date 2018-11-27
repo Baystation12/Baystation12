@@ -47,8 +47,8 @@
 	caliber = "a762"
 	slot_flags = 0	//too unwieldy to carry on your back
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a762_box_ap
-	allowed_magazines = list(/obj/item/ammo_magazine/a762_box_ap)
+	magazine_type = /obj/item/ammo_magazine/lmg_30cal_box_ap
+	allowed_magazines = list(/obj/item/ammo_magazine/lmg_30cal_box_ap)
 	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
@@ -67,19 +67,19 @@
 		)
 
 /obj/item/weapon/gun/projectile/m739_lmg/lmg30cal/update_icon()
+	. = ..()
 	if(ammo_magazine)
 		icon_state = "30cal_lmg"
 	else
 		icon_state = "30cal_lmg_unloaded"
-	. = ..()
 
 //Bit of handling for the loading states.
 /obj/item/weapon/gun/projectile/m739_lmg/lmg30cal/load_ammo(var/item/I,var/mob/user)
 	icon_state = "30cal_lmg_empty_open"
-	sleep(1)
+	sleep(2)
 	. = ..()
 
 /obj/item/weapon/gun/projectile/m739_lmg/lmg30cal/unload_ammo(var/mob/user,var/allow_dump = 0)
 	icon_state = "30cal_lmg_full_open"
-	sleep(1)
+	sleep(2)
 	. = ..()
