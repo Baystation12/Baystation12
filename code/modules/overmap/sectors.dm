@@ -46,6 +46,8 @@
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/proc/populate_sector_objects()
 
+/obj/effect/overmap/proc/get_areas()
+
 /obj/effect/overmap/proc/find_z_levels()
 	map_z = GetConnectedZlevels(z)
 
@@ -99,6 +101,9 @@
 		plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
 			H.get_known_sectors()
+
+/obj/effect/overmap/sector/get_areas()
+	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)
