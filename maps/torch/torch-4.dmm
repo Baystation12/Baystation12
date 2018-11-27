@@ -5321,10 +5321,16 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/structure/filingcabinet/chestdrawer,
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Forensics";
 	dir = 8
+	},
+/obj/structure/table/steel,
+/obj/machinery/photocopier/faxmachine{
+	department = "Forensic's Office"
+	},
+/obj/structure/filingcabinet/wallcabinet{
+	pixel_x = 30
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
@@ -16948,6 +16954,9 @@
 /obj/random/medical/lite,
 /obj/random/medical/lite,
 /obj/random/medical/lite,
+/obj/item/weapon/storage/box/detergent{
+	pixel_x = -3
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "dwb" = (
@@ -24741,8 +24750,8 @@
 /area/security/processing)
 "mtb" = (
 /obj/structure/table/steel,
-/obj/item/device/camera,
 /obj/structure/disposalpipe/segment,
+/obj/item/device/camera,
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "mtk" = (
