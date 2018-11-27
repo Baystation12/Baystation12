@@ -229,7 +229,7 @@
 /obj/item/ammo_casing/a145_ap/tracerless
 	desc = "A 14.5mm bullet casing. Some modifications appear to have been made to remove the tracer-effect, however, this is likely to reduce the penetration of the round."
 	caliber = "14.5mm"
-	projectile_type = /obj/item/projectile/bullet/a145_ap
+	projectile_type = /obj/item/projectile/bullet/a145_ap/tracerless
 
 /obj/item/projectile/bullet/a145_ap
 	damage = 80
