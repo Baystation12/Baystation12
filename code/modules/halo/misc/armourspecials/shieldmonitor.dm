@@ -6,4 +6,4 @@
 	var/list/valid_helmets = list(/obj/item/clothing/head/helmet/spartan) //This should work for the slayer helms too. IIRC, Istype also counts subtypes.
 
 /datum/armourspecials/shieldmonitor/sangheili
-	valid_helmets = list(/obj/item/clothing/head/helmet/sangheili, /obj/item/clothing/head/helmet/spartan)
+	valid_helmets = list(/obj/item/clothing/head/helmet/sangheili)

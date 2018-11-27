@@ -45,7 +45,7 @@
 
 	specials = list(/datum/armourspecials/gear/human_tank,\
 		/datum/armourspecials/shields/spartan,
-		/datum/armourspecials/shieldmonitor/sangheili)
+		/datum/armourspecials/shieldmonitor/)
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
