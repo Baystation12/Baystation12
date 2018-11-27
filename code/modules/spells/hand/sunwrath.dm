@@ -20,19 +20,14 @@
 		var/turf/turf = t
 		if(turf.density || istype(turf, /turf/space))
 			break
-		new /obj/effect/sunwrath(t)
+		new /obj/effect/fake_fire/sunwrath(t)
 	return 1
 
-/obj/effect/sunwrath
-	blend_mode = BLEND_ADD
-	icon = 'icons/effects/fire.dmi'
-	icon_state = "3"
+/obj/effect/fake_fire/sunwrath
+	firelevel = 2
+	last_temperature = 0
+	pressure = 3000
 
-/obj/effect/sunwrath/New()
-	..()
-	START_PROCESSING(SSobj,src)
-	QDEL_IN(src,100)
-
-/obj/effect/sunwrath/Process()
+/obj/effect/fake_fire/sunwrath/Process() //Override, so we burn mobs only
 	for(var/mob/living/L in loc)
-		L.FireBurn(2,0,3000,ONE_ATMOSPHERE)
+		L.FireBurn(firelevel,last_temperature,pressure)
