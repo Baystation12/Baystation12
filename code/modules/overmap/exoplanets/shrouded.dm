@@ -60,29 +60,5 @@
 	desc = "Sand that has been packed in to solid earth."
 
 /turf/simulated/floor/exoplanet/shrouded/New()
-	icon_state = pick("shrouded[rand(0,8)]")
+	icon_state = "shrouded[rand(0,8)]"
 	..()
-
-/turf/simulated/floor/exoplanet/shrouded/Initialize()
-	. = ..()
-	update_icon(1)
-
-/turf/simulated/floor/exoplanet/shrouded/on_update_icon(var/update_neighbors)
-	overlays.Cut()
-	for(var/direction in GLOB.cardinal)
-		var/turf/turf_to_check = get_step(src,direction)
-		if(!istype(turf_to_check, type))
-			var/image/rock_side = image(icon, "edge[pick(1,2,3,4)]", dir = turn(direction, 180))
-			rock_side.plating_decal_layerise()
-			switch(direction)
-				if(NORTH)
-					rock_side.pixel_y += world.icon_size
-				if(SOUTH)
-					rock_side.pixel_y -= world.icon_size
-				if(EAST)
-					rock_side.pixel_x += world.icon_size
-				if(WEST)
-					rock_side.pixel_x -= world.icon_size
-			overlays += rock_side
-		else if(update_neighbors)
-			turf_to_check.update_icon()
