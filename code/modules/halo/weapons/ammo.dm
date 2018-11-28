@@ -146,6 +146,10 @@
 	name = "box of 7.62mm M118 magazines"
 	startswith = list(/obj/item/ammo_magazine/m762_ap = 7)
 
+/obj/item/weapon/storage/box/m762_ap_ma5b
+	name = "box of 7.62mm M118 magazines for the MA5B rifle"
+	startswith = list(/obj/item/ammo_magazine/m762_ap/MA5B = 7)
+
 //used by: BR55 battle rifle
 
 /obj/item/ammo_magazine/m95_sap

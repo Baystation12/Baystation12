@@ -1,10 +1,19 @@
 #define GRUNT_GEAR_ICON 'code/modules/halo/icons/species/grunt_gear.dmi'
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"unggoy")							//Code breaks if not placed in species folder,
+	..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
 	name = species.get_random_name()
 	real_name = name
 	faction = "Covenant"
+
+/datum/language/balahese
+	name = "Balahese"
+	desc = "The language of the Unggoy"
+	native = 1
+	colour = "vox"
+	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
+	key = "B"
+	flags = RESTRICTED
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	name = "Unggoy Combat Harness (Minor)"
@@ -17,7 +26,7 @@
 	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 30, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
 
-	species_restricted = list("unggoy")
+	species_restricted = list("Unggoy")
 
 	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank)
 
@@ -29,7 +38,7 @@
 	icon_state = "rebreather"
 	item_state = "rebreather"
 
-	species_restricted = list("unggoy")
+	species_restricted = list("Unggoy")
 
 	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
@@ -64,7 +73,7 @@
 	air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /obj/item/weapon/tank/methane/unggoy_internal
-	name = "unggoy methane tank"
+	name = "Unggoy methane tank"
 	desc = "A methane tank usually found affixed to a unggoy combat harness."
 
 	canremove = 0
@@ -92,9 +101,9 @@
 
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
 
-	species_restricted = list("unggoy")
+	species_restricted = list("Unggoy")
 
-	specials = list(/datum/armourspecials/gear/unggoy_tank)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	name = "Unggoy Combat Harness (Major)"
@@ -117,7 +126,7 @@
 	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
 
 	totalshields = 100
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	name = "Unggoy Combat Harness (Spec-Ops)"
@@ -128,7 +137,18 @@
 	item_state = "combatharness_specops"
 
 	action_button_name = "Toggle Active Camouflage"
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/cloaking)
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/cloaking)
+
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
+	name = "Unggoy Combat Harness (Deacon)"
+	desc = "A combat harness with an inbuilt gas tank."
+	icon = GRUNT_GEAR_ICON
+	icon_override = GRUNT_GEAR_ICON
+	icon_state = "combatharness_deacon"
+	item_state = "combatharness_deacon"
+	totalshields = 50 //Pretty much just a distinguishing feature.
+
+	specials = list(/datum/armourspecials/gear/unggoy_jumpsuit,/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	name = "Unggoy Rebreather Mask (Spec-Ops)"
@@ -137,6 +157,14 @@
 	item_state = "rebreather_specops"
 
 	rebreath_efficiency = 70
+
+/obj/item/clothing/mask/rebreather/unggoy_deacon
+	name = "Unggoy Rebreather Mask (Deacon)"
+
+	icon_state = "rebreather_deacon"
+	item_state = "rebreather_deacon"
+
+	rebreath_efficiency = 65
 
 /obj/item/clothing/shoes/grunt_boots
 	name = "Natural Armor"

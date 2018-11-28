@@ -11,3 +11,6 @@
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 
 	id_hud_icons = 'stranded_hud_icons.dmi'
+
+	use_overmap = 1
+	overmap_size = 2

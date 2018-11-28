@@ -27,7 +27,7 @@
 		for(var/obj/effect/landmark/flood_assault_target/F in world)
 			flood_assault_turfs.Add(get_turf(F))
 
-	planet_area = locate() in world
+	//planet_area = locate() in world
 
 /datum/game_mode/stranded/announce()
 	..()
@@ -42,6 +42,6 @@
 	time_next_resupply = world.time + interval_resupply
 	//time_new_cycle = world.time + solar_cycle_duration - solar_cycle_duration * threshold_dawn
 
-	daynight_controller = locate() in world
+	/*daynight_controller = locate() in world
 	if(!daynight_controller)
-		daynight_controller = new (1,1,1)
+		daynight_controller = new (1,1,1)*/

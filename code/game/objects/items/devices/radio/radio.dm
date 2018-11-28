@@ -203,7 +203,7 @@
 	if(.)
 		GLOB.nanomanager.update_uis(src)
 
-/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
+/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/language_name) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
@@ -216,7 +216,7 @@
 		return
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
-	talk_into(A, message, channel,"states")
+	talk_into(A, message, channel,"states", all_languages[language_name])
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum

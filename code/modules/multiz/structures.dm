@@ -173,6 +173,17 @@
 			return 0
 		return 1
 
+	Uncross(obj/A)
+		if(A.dir == dir)
+			// This is hackish but whatever.
+			var/turf/target = get_step(GetAbove(A), dir)
+			var/turf/source = A.loc
+			if(target.Enter(A, source))
+				A.loc = target
+				target.Entered(A, source)
+			return 0
+		return 1
+
 	CanPass(obj/mover, turf/source, height, airflow)
 		return airflow || !density
 

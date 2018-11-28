@@ -32,7 +32,9 @@
 	var/kit_desc
 	var/kit_icon
 	var/additional_data
-	
+	var/equip_before_job = 0
+	var/replace_existing = 0
+
 /datum/custom_item/proc/is_valid(var/checker)
 	if(!item_path)
 		to_chat(checker, "<span class='warning'>The given item path, [item_path_as_string], is invalid and does not exist.</span>")
@@ -191,20 +193,28 @@
 				current_data.kit_desc = field_data
 			if("kit_icon")
 				current_data.kit_icon = field_data
+			if("equip_before_job")
+				current_data.equip_before_job = text2num(field_data)
+			if("replace_existing")
+				current_data.replace_existing = text2num(field_data)
 			if("additional_data")
 				current_data.additional_data = field_data
 	return 1
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
-/proc/equip_custom_items(mob/living/carbon/human/M)
+/proc/equip_custom_items(mob/living/carbon/human/M, var/before_job = 0, var/target_slot)
 	var/list/key_list = custom_items[M.ckey]
 	if(!key_list || key_list.len < 1)
 		return
 
 	for(var/datum/custom_item/citem in key_list)
 
+		// Check this is the right pass
+		if(before_job != citem.equip_before_job)
+			continue
+
 		// Check for requisite ckey and character name.
-		if((lowertext(citem.assoc_key) != lowertext(M.ckey)) || (lowertext(citem.character_name) != lowertext(M.real_name)))
+		if((citem.assoc_key && lowertext(citem.assoc_key) != lowertext(M.ckey)) || (citem.character_name && lowertext(citem.character_name) != lowertext(M.real_name)))
 			continue
 			
 		// Once we've decided that the custom item belongs to this player, validate it

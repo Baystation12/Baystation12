@@ -11,9 +11,6 @@
 	if(embedded_flag || (stomach_contents && stomach_contents.len))
 		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(CE_SPEEDBOOST in chem_effects)
-		return -1
-
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
@@ -30,11 +27,16 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 	else
+		var/equipment_slowdown = 0
 		for(var/slot = slot_first to slot_last)
 			var/obj/item/I = get_equipped_item(slot)
 			if(I)
-				tally += I.slowdown_general
-				tally += I.slowdown_per_slot[slot]
+				equipment_slowdown += I.slowdown_general
+				equipment_slowdown += I.slowdown_per_slot[slot]
+
+		equipment_slowdown = max(equipment_slowdown - species.ignore_equipment_threshold - src.ignore_equipment_threshold, 0)
+		equipment_slowdown *= species.equipment_slowdown_multiplier * src.equipment_slowdown_multiplier
+		tally += equipment_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
@@ -58,6 +60,15 @@
 
 	if(mRun in mutations)
 		tally = 0
+
+	if((CE_SLOWREMOVE in chem_effects) && (tally > 0)) //Goes here because it checks the full tally first.
+		if(tally > SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED)
+			tally -= SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED
+		else
+			tally = 0
+
+	if(CE_SPEEDBOOST in chem_effects)
+		tally -= SPEEDBOOST_CHEM_SPEED_INCREASE
 
 	return (tally+config.human_delay)
 

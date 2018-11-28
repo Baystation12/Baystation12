@@ -1,6 +1,6 @@
 
 /obj/item/clothing/suit/armor/special
-	var/specials = list() //Don't edit these during runtime unless you really need too. If edited during runtime, manually run the item's New() proc.
+	var/list/specials = list() //Don't edit these during runtime unless you really need too. If edited during runtime, manually run the item's New() proc.
 	var/totalshields
 
 /obj/item/clothing/suit/armor/special/New()
@@ -59,3 +59,10 @@
 	for(var/item in specials)
 		qdel(item)
 	. = ..()
+
+/obj/item/clothing/suit/armor/special/get_mob_overlay(mob/user_mob, slot)
+	var/image/retval = ..()
+	for(var/datum/armourspecials/special in specials)
+		special.update_mob_overlay(retval)
+
+	return retval

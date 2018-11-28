@@ -29,6 +29,11 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
+/obj/item/projectile/covenant/plasmarifle/brute
+	damage = 45
+	accuracy = 0.5
+	icon_state = "heavy_plas_cannon"
+
 /obj/item/projectile/covenant/beamrifle
 	name = "energy beam"
 	desc = ""

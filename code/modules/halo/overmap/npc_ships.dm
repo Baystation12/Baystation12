@@ -3,8 +3,8 @@
 #define ON_PROJECTILE_HIT_MESSAGES list(\
 "We're taking fire. Requesting assistance from nearby ships! Repeat; Taking fire!",\
 "Our hull has been breached! Help!",\
-"Sweet hell, is this what we pay our taxses for?!","We're on your side!","Please, we're unarmed!","Oh god, they're firing on us!",\
-"This is the captain of F-H-419, we're being fired upon. Requesting assistance.","PLEASE! WE HAVE FAMILIES!"\
+"Sweet hell, is this what we pay our taxes for?!","We're on your side!","Please, we're unarmed!","Oh god, they're firing on us!",\
+"PLEASE! WE HAVE FAMILIES!"\
 )
 #define ON_DEATH_MESSAGES list(\
 "Do you feel like a hero yet?","Oof-",\
@@ -17,6 +17,8 @@
 #define STOP_WAIT_TIME 10 MINUTES
 #define STOP_DISEMBARK_TIME 2 MINUTES
 
+#define BROADCAST_ON_HIT_PROB 10 //10
+
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
 	desc = "A ship, Duh."
@@ -27,7 +29,7 @@
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
 
-	var/hull = 100 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
+	var/hull = 200 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
 	var/move_delay = 6 SECONDS //The amount of ticks to delay for when auto-moving across the system map.
 	var/turf/target_loc
@@ -35,6 +37,7 @@
 	var/unload_at = 0
 	var/list/ship_datums = list(/datum/npc_ship/ccv_star)
 	var/datum/npc_ship/chosen_ship_datum
+	var/list/available_ship_requests = newlist(/datum/npc_ship_request/halt)
 
 	var/list/projectiles_to_spawn = list()
 
@@ -80,9 +83,16 @@
 	if(world.time >= unload_at && unload_at != 0)
 		lose_to_space()
 	if(hull > initial(hull)/4)
+		var/stop_normal_operations = 0
+		for(var/datum/npc_ship_request/request in available_ship_requests)
+			if(request.request_requires_processing)
+				stop_normal_operations = request.do_request_process(src)
+		if(stop_normal_operations)
+			return
 		if(loc == target_loc)
 			pick_target_loc()
 		else
+
 			walk(src,get_dir(src,target_loc),move_delay)
 			dir = get_dir(src,target_loc)
 	else
@@ -93,7 +103,7 @@
 	var/message_to_use = pick(messages_on_hit)
 	if(ship_disabled)
 		message_to_use = pick(messages_on_death)
-	GLOB.global_headset.autosay("[message_to_use]","[name]","EBAND")
+	to_world("<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\"</span>")
 
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)
@@ -102,7 +112,9 @@
 	if(hull <= initial(hull)/4 && target_loc)
 		broadcast_hit(1)
 	else
-		broadcast_hit()
+		if(prob(BROADCAST_ON_HIT_PROB)) //If we get the probability, broadcast the hit.
+			broadcast_hit()
+
 	if(add_proj && hull <=0) // So we don't delete the ship from damage when it's loaded in.
 		lose_to_space()
 
@@ -111,6 +123,7 @@
 	chosen_ship_datum = new chosen_ship_datum
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
+	set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
@@ -123,9 +136,8 @@
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		var/z_to_load_at = shipmap_handler.get_next_usable_z()
 		shipmap_handler.un_free_map(z_to_load_at)
-		spawn(-1)
-			maploader.load_map(link,z_to_load_at)
-			create_lighting_overlays_zlevel(z_to_load_at)
+		maploader.load_map(link,z_to_load_at)
+		create_lighting_overlays_zlevel(z_to_load_at)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
@@ -141,19 +153,51 @@
 
 /obj/effect/overmap/ship/npc_ship/proc/get_requestable_actions(var/authority_level)
 	var/list/requestable_actions = list()
-	if(authority_level >= AUTHORITY_LEVEL_UNSC)
-		requestable_actions += "Cargo Inspection."
-		requestable_actions += "Halt"
-	return requestable_actions
+	. = requestable_actions
+	for(var/datum/npc_ship_request/npc_ship_request in available_ship_requests)
+		if(npc_ship_request.request_name == "")
+			continue
+		if(authority_level in npc_ship_request.request_auth_levels)
+			requestable_actions += npc_ship_request.request_name
 
-/obj/effect/overmap/ship/npc_ship/proc/parse_action_request(var/request,var/mob/requester)
-	if(request == "Cargo Inspection" || "Halt")
-		target_loc = null
-		GLOB.global_headset.autosay("Slowing down..\nI can only give you [STOP_WAIT_TIME/600] minutes.","[name]","System")
-		spawn(STOP_WAIT_TIME)
-			GLOB.global_headset.autosay("I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.","[name]","System")
-			spawn(STOP_DISEMBARK_TIME)
-				pick_target_loc()
+/obj/effect/overmap/ship/npc_ship/proc/parse_action_request(var/request,var/mob/requester,var/auth_level)
+	for(var/datum/npc_ship_request/npc_ship_request in available_ship_requests)
+		if(request == npc_ship_request.request_name && auth_level in npc_ship_request.request_auth_levels)
+			npc_ship_request.do_request(src,requester)
+
+/datum/npc_ship_request
+	var/request_name = "Request" //Name of the request. Use "" if you don't want it to appear in the request-list and merely want to use if for behind-the-scense processing.
+	var/list/request_auth_levels = list()
+	var/request_requires_processing = 0
+
+/datum/npc_ship_request/proc/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
+
+/datum/npc_ship_request/proc/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source) //Return 1 in this to stop normal NPC ship move processing.
+
+/datum/npc_ship_request/halt
+	request_name = "Halt"
+	request_auth_levels = list(AUTHORITY_LEVEL_UNSC,AUTHORITY_LEVEL_ONI)
+	var/time_leave_at = 0
+	var/already_warned = 0
+
+/datum/npc_ship_request/halt/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
+	ship_source.target_loc = null
+	if(time_leave_at > 0)
+		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Woah, Calm down. We're already waiting on someone's behalf.\"</span>")
+		return
+	to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Slowing down.. I can only give you [STOP_WAIT_TIME/600] minutes.\"</span>")
+	time_leave_at = world.time + STOP_WAIT_TIME
+
+/datum/npc_ship_request/halt/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source)
+	if(time_leave_at != 0 && world.time > time_leave_at)
+		if(already_warned)
+			time_leave_at = 0
+			ship_source.pick_target_loc()
+			already_warned = 0
+			return
+		already_warned = 1
+		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.\"</span>")
+		time_leave_at = world.time + STOP_DISEMBARK_TIME
 
 /datum/npc_ship
 	var/list/mapfile_links = list('maps/civ_hauler/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.

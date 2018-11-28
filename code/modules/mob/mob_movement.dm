@@ -436,6 +436,9 @@
 	if(!lastarea)
 		lastarea = get_area(loc)
 	var/area/curarea = get_area(loc)
+	if(!curarea)
+		return 0
+
 	if(!curarea.has_gravity)
 		return 0
 
