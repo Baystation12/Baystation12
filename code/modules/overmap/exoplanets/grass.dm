@@ -11,7 +11,8 @@
 							 /datum/map_template/ruin/exoplanet/fountain,
 							 /datum/map_template/ruin/exoplanet/lodge,
 							 /datum/map_template/ruin/exoplanet/crashed_pod,
-							 /datum/map_template/ruin/exoplanet/hut)
+							 /datum/map_template/ruin/exoplanet/hut,
+							 /datum/map_template/ruin/exoplanet/playablecolony)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
 	if(prob(40))
