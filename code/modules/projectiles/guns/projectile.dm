@@ -202,7 +202,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
-	if(istype(W,/obj/item/ammo_box))
+	if(istype(A,/obj/item/ammo_box))
 		load_from_box(A,user)
 	. = ..()
 	load_ammo(A, user)
