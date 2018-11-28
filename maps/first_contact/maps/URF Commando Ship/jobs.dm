@@ -12,7 +12,7 @@
 	selection_color = "#0A0A95"
 	access = list(252)
 	spawnpoint_override = "Commando Spawn"
-	//is_whitelisted = 1
+	is_whitelisted = 1
 
 /datum/job/URF_commando_officer
 	title = "URF Commando Officer"
@@ -24,5 +24,5 @@
 	selection_color = "#0A0A95"
 	access = list(252)
 	spawnpoint_override = "Commando Officer Spawn"
-	//is_whitelisted = 1
+	is_whitelisted = 1
 
