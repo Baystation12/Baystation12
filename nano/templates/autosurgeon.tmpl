@@ -1,0 +1,39 @@
+<!-- 
+Title: HaloStation13 Autosurgeon UI
+Used In File(s): \code\modules\halo\machinery\autosurgeon.dm
+ -->
+ 
+<h3>AutoDoctor</h3>
+
+<div class='block'>
+	<div class="itemLabel">Patient: </div>
+	<div class="itemContent">{{:data.name ? data.name : ''}}</div>
+	<br>
+	<div class="itemLabel">Species: </div>
+	<div class="itemContent">{{:data.species ? data.species : ''}}</div>
+	<br>
+</div>
+<br>
+{{:helper.link('Startup delay: ' + data.start_delay, 'clock', {'set_start_delay' : 1, 'user' : data.user})}}
+<br>
+<br>
+{{:helper.link(data.do_start_delay ? 'Startup delay enabled' : 'Startup delay disabled', data.do_start_delay ? 'check' : 'closethick', {'toggle_start_delay' : 1, 'user' : data.user}, data.do_start_delay ? 'selected' : null)}}
+<br>
+<br>
+{{:helper.link(data.active ? 'Deactivate' : 'Activate', 'heart', {'toggle_active' : data.active, 'user' : data.user}, data.active ? 'selected' : null)}}
+<br>
+<br>
+{{:helper.link(data.buckled_mob ? 'Release patient' : 'No patient detected', 'arrowthickstop-1-e', {'release_patient' : 1, 'user' : data.user}, data.buckled_mob ? null : 'disabled')}}
+<br>
+<br>
+<div class='block'>
+	<div class="itemLabel">Internal bruise pack stock: </div>
+	<div class="itemContent">{{:data.bruisepack_amount}}</div>
+	<br>
+	<div class="itemLabel">Internal ointment stock: </div>
+	<div class="itemContent">{{:data.ointment_amount}}</div>
+	<br>
+	<div class="itemLabel">Internal splint stock: </div>
+	<div class="itemContent">{{:data.splint_amount}}</div>
+	<br>
+</div>
