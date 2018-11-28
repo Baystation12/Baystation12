@@ -227,7 +227,7 @@
 "es" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/medicalbay)
 "et" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/captainroom)
 "eu" = (/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/captainroom)
-"ev" = (/obj/machinery/door/airlock/halo,/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/captainroom)
+"ev" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/captainroom)
 "ew" = (/obj/structure/bed,/obj/item/weapon/bedsheet/medical,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
 "ex" = (/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/power/apc{cell_type = /obj/item/weapon/cell/infinite; pixel_y = 32},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
 "ey" = (/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
@@ -237,28 +237,31 @@
 "eC" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/captainroom)
 "eD" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (EAST)"; icon_state = "sleeper_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
 "eE" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eF" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eG" = (/obj/machinery/organ_printer/flesh/mapped{max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eH" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eI" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eJ" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eK" = (/obj/item/weapon/storage/firstaid/toxin,/obj/item/weapon/storage/firstaid/toxin,/obj/structure/table/rack,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/fire,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eL" = (/obj/item/weapon/storage/firstaid/regular,/obj/item/weapon/storage/firstaid/regular,/obj/structure/table/rack,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/combat,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eM" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (NORTH)"; icon_state = "body_scanner_0"; dir = 1},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eN" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (NORTH)"; icon_state = "body_scannerconsole"; dir = 1},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eO" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eP" = (/obj/machinery/button/remote/blast_door{id = "avarice_u2"; name = "Umbilical Access"},/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway)
-"eQ" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eR" = (/obj/machinery/chemical_dispenser/full,/obj/item/weapon/reagent_containers/glass/beaker/large,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
-"eS" = (/obj/machinery/door/airlock/multi_tile/halo/blast{tag = "icon-door_closed"; name = "Engine"; icon_state = "door_closed"; dir = 2; req_access = list(252)},/obj/machinery/door/blast/regular{id = "avarice_u2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"eT" = (/obj/machinery/door/blast/regular{id = "avarice_u2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"eU" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
-"eV" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
-"eW" = (/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
-"eX" = (/obj/docking_umbilical/south{name = "URFS Avarice Umbilical 2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"eY" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
-"eZ" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
-"fa" = (/obj/effect/overmap/ship/urfcommando_prowler,/turf/space,/area/space)
+"eF" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eG" = (/obj/structure/bed,/obj/item/weapon/bedsheet/medical,/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eH" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eI" = (/obj/machinery/organ_printer/flesh/mapped{max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eJ" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eK" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eL" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eM" = (/obj/item/weapon/storage/firstaid/toxin,/obj/item/weapon/storage/firstaid/toxin,/obj/structure/table/rack,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/fire,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eN" = (/obj/item/weapon/storage/firstaid/regular,/obj/item/weapon/storage/firstaid/regular,/obj/structure/table/rack,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/combat,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eO" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (NORTH)"; icon_state = "body_scanner_0"; dir = 1},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eP" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (NORTH)"; icon_state = "body_scannerconsole"; dir = 1},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eQ" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eR" = (/obj/machinery/button/remote/blast_door{id = "avarice_u2"; name = "Umbilical Access"},/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway)
+"eS" = (/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eT" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eU" = (/obj/machinery/chemical_dispenser/full,/obj/item/weapon/reagent_containers/glass/beaker/large,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"eV" = (/obj/machinery/door/airlock/multi_tile/halo/blast{tag = "icon-door_closed"; name = "Engine"; icon_state = "door_closed"; dir = 2; req_access = list(252)},/obj/machinery/door/blast/regular{id = "avarice_u2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"eW" = (/obj/machinery/door/blast/regular{id = "avarice_u2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"eX" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
+"eY" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
+"eZ" = (/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
+"fa" = (/obj/docking_umbilical/south{name = "URFS Avarice Umbilical 2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
+"fb" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
+"fc" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
+"fd" = (/obj/effect/overmap/ship/urfcommando_prowler,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -302,23 +305,23 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaXaaaaaaaaaaaXdqejekdqaBaedsdFdFdFdFdFdFdFds
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqdqaBaedsdselemeneoepdsdsaaaaaaaEaEaEaEaEaEaEaEaEaEaEaEaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqeqerdqaGaeesesesesesesesesesaaaaaaaaaEaEaEaEaEaEaEaEaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqeteuevaBaeesewexeyezeAeBesesaaaaaaaaaaaaaaaEaEaEaEaEaEaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqeCdqaGaeeseDeEeyezeyeyesaaaaaaaaaEaEaEaEaEaEaEaEaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaBaoeseweEeyeFeyeGesaaaaaaaaaaaaaaaaaaaEaEaEaEaEaEaEaEaEaEaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqdhaxeHeIeJeKesesesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaeaoeseweyeyeLesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaeaeeseDeyeyeMesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaeaoeseweyeyeNesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaeaeeFeyeyeyeOesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababePaeaoeseyeQeResesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababeSeTeseUeVesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabceaeaeeseWeWesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeaeaeeseWeWesesesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababaeeXaeeseYeWesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababeseZeZesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqeCdqaGaeeseDeEeyezeyeFesaaaaaaaaaEaEaEaEaEaEaEaEaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaBaoeseGeEeyeHeyeIesaaaaaaaaaaaaaaaaaaaEaEaEaEaEaEaEaEaEaEaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqdhaxeJeKeLeMesesesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaeaoeseGeyeyeNesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaeaeeseDeyeyeOesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadqdqdqaeaoeseGeyeyePesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaeaeeHeyeyeyeQesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababeRaeaoeseSeTeUesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababeVeWeseXeYesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabceaeaeeseZeZesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeaeaeeseZeZesesesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababaefaaeesfbeZesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababesfcfcesesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-faaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+fdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
