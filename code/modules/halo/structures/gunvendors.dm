@@ -173,6 +173,7 @@
 	/obj/item/weapon/plastique = 9,
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,
+	/obj/item/weapon/handcuffs/ = 5,
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/device/landmine = 2,
 	/obj/item/weapon/grenade/frag/m9_hedp = 4
