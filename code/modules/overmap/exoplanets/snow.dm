@@ -53,6 +53,9 @@
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "ice"
 
+/turf/simulated/floor/exoplanet/ice/on_update_icon()
+	return
+
 /turf/simulated/floor/exoplanet/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
@@ -65,27 +68,3 @@
 /turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	name = "permafrost"
 	icon_state = "permafrost"
-
-/turf/simulated/floor/exoplanet/snow/Initialize()
-	. = ..()
-	update_icon(1)
-
-/turf/simulated/floor/exoplanet/snow/on_update_icon(var/update_neighbors)
-	overlays.Cut()
-	for(var/direction in GLOB.cardinal)
-		var/turf/turf_to_check = get_step(src,direction)
-		if(!istype(turf_to_check, type))
-			var/image/rock_side = image(icon, "edge[pick(1,2,3)]", dir = turn(direction, 180))
-			rock_side.plating_decal_layerise()
-			switch(direction)
-				if(NORTH)
-					rock_side.pixel_y += world.icon_size
-				if(SOUTH)
-					rock_side.pixel_y -= world.icon_size
-				if(EAST)
-					rock_side.pixel_x += world.icon_size
-				if(WEST)
-					rock_side.pixel_x -= world.icon_size
-			overlays += rock_side
-		else if(update_neighbors)
-			turf_to_check.update_icon()
