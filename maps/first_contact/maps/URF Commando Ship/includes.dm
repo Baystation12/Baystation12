@@ -4,5 +4,4 @@
 #include "jobs.dm"
 #include "outfits.dm"
 
-#include "second_deck.dmm"
 #include "first_deck.dmm"
