@@ -37,7 +37,7 @@ var/list/ghost_traps
 
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
-	if(!candidate.MayRespawn(1, minutes_since_death))
+	if(!candidate.MayRespawn(feedback, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
