@@ -1,0 +1,4 @@
+author: "Heph-hasto"
+delete-after: True
+changes: 
+  - rscdel: "Removes ability for ship AI to be traitors"
