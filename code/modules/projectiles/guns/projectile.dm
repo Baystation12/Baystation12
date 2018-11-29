@@ -49,6 +49,22 @@
 			ammo_magazine = new magazine_type(src)
 	update_icon()
 
+/obj/item/weapon/gun/projectile/proc/load_from_box(var/obj/item/ammo_box/box,var/mob/user)
+	if(box.contents.len == 0 || isnull(box.contents.len))
+		to_chat(user,"<span class ='notice'>The [box.name] is empty!</span>")
+		return
+	if(!(loaded.len <= max_shells))
+		to_chat(user,"<span class = 'notice'>The [name] is full!</span>")
+		return
+	to_chat(user,"<span class ='notice'>You start loading the [name] from the [box.name]</span>")
+	for(var/ammo in box.contents)
+		if(do_after(user,box.load_time SECONDS,box, same_direction = 1))
+			load_ammo(ammo,user)
+			continue
+		break
+
+	box.update_icon()
+
 /obj/item/weapon/gun/projectile/consume_next_projectile()
 	if(!is_jammed && prob(jam_chance))
 		src.visible_message("<span class='danger'>\The [src] jams!</span>")
@@ -186,6 +202,8 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
+	if(istype(A,/obj/item/ammo_box))
+		load_from_box(A,user)
 	. = ..()
 	load_ammo(A, user)
 
