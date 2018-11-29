@@ -298,6 +298,16 @@ armour attachments
 	desc = "An armor tag with the word POLICE printed in silver lettering on it."
 	icon_state = "sectag"
 
+/obj/item/clothing/accessory/armor/tag/solgov/medic
+	name = "\improper MEDIC tag"
+	desc = "An armor tag with the word MEDIC printed in red lettering on it."
+	icon_state = "medictag"
+
+/obj/item/clothing/accessory/armor/tag/solgov/agent
+	name = "\improper OCIE AGENT tag"
+	desc = "An armor tag with the word OCIE AGENT printed in gold lettering on it."
+	icon_state = "agenttag"
+
 /obj/item/clothing/accessory/armor/tag/solgov/com
 	name = "\improper SCG tag"
 	desc = "An armor tag with the words SOL CENTRAL GOVERNMENT printed in gold lettering on it."
