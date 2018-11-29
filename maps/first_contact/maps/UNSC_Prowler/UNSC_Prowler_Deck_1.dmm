@@ -189,7 +189,7 @@
 "dG" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dH" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/obj/structure/extinguisher_cabinet{pixel_y = 30},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dI" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
-"dJ" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
+"dJ" = (/obj/machinery/atmospherics/unary/cryo_cell{dir = 4},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dK" = (/obj/machinery/atmospherics/unary/freezer{dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/unscfox/deck1/medbay)
 "dL" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
 "dM" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/closet/wall_medical{pixel_x = 32},/obj/structure/sign/halo_floorsign/engineering,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
