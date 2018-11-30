@@ -258,3 +258,7 @@
 	health = min(max(health - value, 0),max_health)
 	if(use_power && health == 0)
 		toggle()
+
+/obj/machinery/shipsensors/weak
+	heat_reduction = 0.2
+	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
