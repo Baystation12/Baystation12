@@ -325,6 +325,11 @@
 
 	adjustBruteLoss(damage * blocked_mult(getarmor(null, "bomb")))
 
+/mob/living/simple_animal/updatehealth()
+	..()
+	if(health <= 0)
+		death()
+
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
 	updatehealth()
