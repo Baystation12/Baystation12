@@ -155,7 +155,7 @@
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
 	/obj/item/weapon/gun/projectile/m392_dmr/innie = 1,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
-	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 2,
+	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 1,
 	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 8,
 	/obj/item/ammo_box/heavysniper = 2,
 	/obj/item/ammo_magazine/m762_ap/MA3 = 16,
@@ -177,4 +177,16 @@
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/device/landmine = 2,
 	/obj/item/weapon/grenade/frag/m9_hedp = 4
+	)
+
+/obj/machinery/vending/armory/commandovend/armour
+	products = list(
+	/obj/item/clothing/head/helmet/urfc/engineer = 2,
+	/obj/item/clothing/suit/armor/special/urfc/engineer = 2,
+	/obj/item/clothing/head/helmet/urfc/medic = 2,
+	/obj/item/clothing/suit/armor/special/urfc/medic = 2,
+	/obj/item/clothing/head/helmet/urfc/sniper = 2,
+	/obj/item/clothing/suit/armor/special/urfc/sniper = 2,
+	/obj/item/clothing/head/helmet/urfc/cqb = 2,
+	/obj/item/clothing/suit/armor/special/urfc/cqb = 2
 	)
