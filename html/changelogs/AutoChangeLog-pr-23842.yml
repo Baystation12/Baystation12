@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "A new admin tool, Toggle Circuits, has been added to the Secrets panel."
