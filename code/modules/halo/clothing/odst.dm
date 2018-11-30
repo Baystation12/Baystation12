@@ -65,6 +65,17 @@
 	armor_thickness = 20
 
 
+/obj/item/clothing/shoes/magboots/odst
+	name = "ODST Magboots"
+	desc = "Experimental magnetic boots, used to ensure the user is safely attached to any surfaces during extra-vehicular operations. They're large enough to be worn over other footwear."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_state = "magboots_obj0"
+	icon_base = "magboots_obj"
+	item_state = "magboots"
+	can_hold_knife = 1
+	force = 5
+
 //Defines for armour subtypes//
 
 /obj/effect/odst_armour_set
@@ -260,7 +271,7 @@
 
 	item_state = "osama-helmet_worn"
 	icon_state = "osama-helmet_obj"
-		
+
 /obj/item/clothing/head/helmet/odst/donator/liam_gallagher/verb/Toggle_VISR01()
 	set category = "Helmet"
 	set name = "Toggle VISR"
@@ -274,18 +285,18 @@
 		icon_state = "osama-helmet_obj"
 		update_clothing_icon()
 	. = ..()
-	
+
 /obj/item/clothing/suit/armor/special/odst/donator/liam_gallagher
 	name = "ODST EOD Suit"
 
-	icon_state = "osama-armor_worn"	
-	
+	icon_state = "osama-armor_worn"
+
 /obj/item/clothing/head/helmet/odst/donator/ragnarok
 	name = "Bishop's ODST Helmet"
 
 	item_state = "ragnarok-helmet_worn"
 	icon_state = "ragnarok-helmet_obj"
-	
+
 /obj/item/clothing/head/helmet/odst/donator/ragnarok/verb/Toggle_VISR01()
 	set category = "Helmet"
 	set name = "Toggle VISR"
@@ -303,14 +314,14 @@
 /obj/item/clothing/suit/armor/special/odst/donator/ragnarok
 	name = "Bishop's ODST Armour"
 
-	icon_state = "ragnarok-armor_worn"	
+	icon_state = "ragnarok-armor_worn"
 
 /obj/item/clothing/head/helmet/odst/donator/winterume
 	name = "Rose's Recon Helmet"
 
 	item_state = "amy-helmet_worn"
-	icon_state = "amy-helmet_obj"	
-	
+	icon_state = "amy-helmet_obj"
+
 /obj/item/clothing/head/helmet/odst/donator/winterume/verb/Toggle_VISR01()
 	set category = "Helmet"
 	set name = "Toggle VISR"
@@ -334,8 +345,8 @@
 	name = "Barnabus's ODST Helmet"
 
 	item_state = "eonoc-helmet_worn"
-	icon_state = "eonoc-helmet_obj"	
-	
+	icon_state = "eonoc-helmet_obj"
+
 /obj/item/clothing/head/helmet/odst/donator/eonoc/verb/Toggle_VISR01()
 	set category = "Helmet"
 	set name = "Toggle VISR"
