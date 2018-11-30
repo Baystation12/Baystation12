@@ -12,6 +12,7 @@
 	can_absorb = 0
 	shield_assailant = 0
 	point_blank_mult = 1.5
+	damage_stage = 1
 	same_tile = 0
 	can_throw = 1
 	force_danger = 1
