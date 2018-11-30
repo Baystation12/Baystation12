@@ -7,7 +7,6 @@
 	icon_state = "commando_uniform"
 	item_state = "commando_uniform"
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
-	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/helmet/urfc
 	name = "URFC Rifleman Helmet"
