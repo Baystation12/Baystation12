@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "General Notes (Public) field has been added to crew records. These are records visible to anyone who can open crew records, and are intended for 'common' information between security, medical, /and/ employment records."
