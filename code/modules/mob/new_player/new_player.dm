@@ -341,6 +341,7 @@
 	if(!character)
 		return 0
 
+	equip_custom_items(character, 1)
 	character = job_master.EquipRank(character, job.title, 1)					//equips the human
 	UpdateFactionList(character)
 	equip_custom_items(character)

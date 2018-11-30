@@ -1,2 +1,0 @@
-
-/datum/armourspecials/thrusters

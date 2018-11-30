@@ -42,3 +42,13 @@
 	mask = /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
+
+/decl/hierarchy/outfit/unggoy/deacon
+	name = "Unggoy (Deacon)"
+
+	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
+	suit_store = /obj/item/weapon/gun/energy/plasmapistol
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	mask = /obj/item/clothing/mask/rebreather/unggoy_deacon
+	l_pocket = /obj/item/weapon/grenade/plasma/heavy_plasma
+	r_pocket = /obj/item/weapon/grenade/plasma

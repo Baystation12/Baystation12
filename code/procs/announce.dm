@@ -111,9 +111,9 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	var/rank = job.title
 	if(character.mind.role_alt_title)
 		rank = character.mind.role_alt_title
-	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
+	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job),character.default_language)
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency, var/language_name)
 	GLOB.global_headset.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
 
 /proc/get_announcement_frequency(var/datum/job/job)

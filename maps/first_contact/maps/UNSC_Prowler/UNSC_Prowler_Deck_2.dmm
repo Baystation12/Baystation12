@@ -103,7 +103,7 @@
 "bY" = (/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/hallway)
 "bZ" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/airlock,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/hallway)
 "ca" = (/turf/simulated/wall/r_wall,/area/corvette/unscfox/deck2/soeivbay)
-"cb" = (/obj/machinery/vending/odstvend2,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/odstbunks)
+"cb" = (/obj/machinery/vending/armory/odstvend/vend_2,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/odstbunks)
 "cc" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/odstbunks)
 "cd" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/odstbunks)
 "ce" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck2/odstbunks)

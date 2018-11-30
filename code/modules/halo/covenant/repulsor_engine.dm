@@ -41,7 +41,7 @@
 	name = "repulsor engine"
 	desc = "A sophisticated gravitic drive that allows great speed and maneuvrability."
 	icon = 'repulsor.dmi'
-	icon_state = "nozzle"
+	icon_state = "off"
 	anchored = 1
 	use_power = 1
 	var/last_burn = 0
@@ -66,6 +66,7 @@
 	if(use_power == 2)
 		if(world.time > last_burn + 30)
 			use_power = 1
+			icon_state = "off"
 
 /obj/machinery/repulsor_engine/proc/get_status()
 	. = list()
@@ -129,3 +130,5 @@
 		//punch it!
 		for(var/atom/movable/A in victims)
 			A.throw_at(throw_turf, rand(3, 10), 1, src)
+
+	icon_state = "animated"

@@ -1,0 +1,213 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/medicalbay)
+"ac" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice)
+"ad" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway2)
+"ae" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Armory)
+"af" = (/obj/machinery/chemical_dispenser/full,/obj/item/weapon/reagent_containers/glass/beaker/large,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ag" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ah" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ai" = (/obj/item/weapon/storage/firstaid/fire,/obj/item/weapon/storage/firstaid/fire,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aj" = (/obj/item/weapon/storage/firstaid/combat,/obj/item/weapon/storage/firstaid/combat,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ak" = (/obj/machinery/chemical_dispenser/ert,/obj/item/weapon/reagent_containers/glass/beaker/large,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"al" = (/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"am" = (/obj/item/weapon/storage/firstaid/regular,/obj/item/weapon/storage/firstaid/regular,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"an" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ao" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ap" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aq" = (/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ar" = (/obj/docking_umbilical/north{name = "URFS Avarice Umbilical 1"},/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway2)
+"as" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/masks,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"at" = (/obj/item/weapon/storage/firstaid/toxin,/obj/item/weapon/storage/firstaid/toxin,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"au" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"av" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"aw" = (/obj/machinery/vending/armory/commandovend,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"ax" = (/obj/machinery/vending/armory/commandovend,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"ay" = (/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"az" = (/obj/structure/table/rack,/obj/effect/urfc_armour_set/sniper,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"aA" = (/obj/structure/table/rack,/obj/effect/urfc_armour_set/medic,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"aB" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/masks,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aC" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{name = "anesthetic pump  "; pixel_y = 30},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aD" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aE" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aF" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (EAST)"; icon_state = "sleeper_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aG" = (/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/structure/table/rack,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aH" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/observation)
+"aI" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/machinery/door/firedoor,/turf/simulated/floor,/area/commando_ship/urfs_avarice/observation)
+"aJ" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"aK" = (/obj/structure/table/rack,/obj/effect/urfc_armour_set/engineer,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"aL" = (/obj/structure/table/standard,/obj/item/weapon/defibrillator/loaded,/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aM" = (/obj/structure/bed,/obj/item/weapon/bedsheet/medical,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aN" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (EAST)"; icon_state = "body_scannerconsole"; dir = 4},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aO" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (EAST)"; icon_state = "body_scanner_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aP" = (/obj/structure/fitness/weightlifter,/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"aQ" = (/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"aR" = (/obj/structure/table/rack,/obj/effect/urfc_armour_set/cqb,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"aS" = (/obj/machinery/organ_printer/flesh/mapped{max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aT" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aU" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aV" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aW" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aX" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"aY" = (/obj/structure/fitness/punchingbag,/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"aZ" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"ba" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/commando_ship/urfs_avarice/medicalbay)
+"bb" = (/obj/machinery/door/blast/regular{id = "avarice_u1"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bc" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bd" = (/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/observation)
+"be" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bf" = (/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bg" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bh" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bi" = (/obj/machinery/button/remote/blast_door{id = "avarice_u1"; name = "Umbilical Access"},/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bj" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (NORTHWEST)"; icon_state = "spline_fancy"; dir = 9},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bk" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (NORTH)"; icon_state = "spline_fancy"; dir = 1},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bl" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (NORTHEAST)"; icon_state = "spline_fancy"; dir = 5},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bm" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bn" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Fitness Room"; req_access = list(252)},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/observation)
+"bo" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bp" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Armory"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bq" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"br" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Umbilical Access"; req_access = list(252)},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bs" = (/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bt" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (WEST)"; icon_state = "spline_fancy"; dir = 8},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bu" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (EAST)"; icon_state = "spline_fancy"; dir = 4},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bv" = (/obj/machinery/vending/fitness,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bw" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; name = "Armory"; req_access = list(252)},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bx" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (SOUTHWEST)"; icon_state = "spline_fancy"; dir = 10},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"by" = (/obj/effect/floor_decal/spline/fancy/wood,/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bz" = (/obj/effect/floor_decal/spline/fancy/wood{tag = "icon-spline_fancy (SOUTHEAST)"; icon_state = "spline_fancy"; dir = 6},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bA" = (/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/observation)
+"bB" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bC" = (/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bD" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bE" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bF" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bG" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bH" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Fitness Room"; req_access = list(252)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/observation)
+"bI" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bJ" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Armory"; req_access = list(252)},/obj/machinery/door/firedoor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bK" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bL" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bM" = (/obj/machinery/button/remote/blast_door{id = "avarice_u2"; name = "Umbilical Access"},/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bN" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bO" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/carpet,/area/commando_ship/urfs_avarice/observation)
+"bP" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bQ" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"bR" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/janitorial)
+"bS" = (/obj/machinery/door/airlock/halo,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"bT" = (/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/powercoreaux)
+"bU" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercoreaux)
+"bV" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercoreaux)
+"bW" = (/obj/machinery/door/blast/regular{id = "avarice_u2"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"bX" = (/obj/structure/janitorialcart,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"bY" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"bZ" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"ca" = (/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cb" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cc" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cd" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"ce" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cf" = (/obj/structure/stairs,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway2)
+"cg" = (/obj/structure/closet/jcloset,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"ch" = (/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"ci" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"cj" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"ck" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cl" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cm" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cn" = (/obj/machinery/vending/armory/commandovend,/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"co" = (/obj/structure/table/rack,/obj/effect/urfc_armour_set/sniper,/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Armory)
+"cp" = (/obj/structure/closet/l3closet/janitor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"cq" = (/obj/structure/reagent_dispensers/watertank,/obj/item/weapon/reagent_containers/glass/bucket,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/janitorial)
+"cr" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cs" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"ct" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cu" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cv" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cw" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cx" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cy" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cz" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cA" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cB" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cC" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cD" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cE" = (/obj/machinery/atmospherics/unary/freezer{tag = "icon-freezer_1 (WEST)"; icon_state = "freezer_1"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cF" = (/obj/docking_umbilical/south{name = "URFS Avarice Umbilical 2"},/turf/simulated/wall/r_wall,/area/commando_ship/urfs_avarice/Centralhallway2)
+"cG" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cH" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 8},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cI" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cJ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cK" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cL" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cM" = (/obj/machinery/atmospherics/unary/freezer{tag = "icon-freezer_1 (WEST)"; icon_state = "freezer_1"; dir = 8},/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cN" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (NORTH)"; icon_state = "cooling_manifold"; dir = 1},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cO" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cP" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cQ" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cR" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cS" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"cT" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/structure/closet/wall_medical{pixel_y = -32},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeababababababababababababaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeababababababababababababaaaaaaaaaaaaaaaaaaadadadadadadaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeababababababababababababaaaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeabababababafagahaiajabababadaaaaaaadadadadadadadadadadadadaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaeaeababababakalalalalalamababadadadadadadadadadadadadadaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeababababanaoalapapalaqababadadadadaradadadadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeababababasalalapapalatababadauavavavavavauadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeawaxayaeazaAaeaBaCaDaEaFalalalalalaGababadavavavavavavavadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaHaIaIaIaHaHaeayaJaJayaeaJaKaeaLalalaEaFalaMalaMalaNaOabadavavavavavavavadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaHaIaIaIaHaPaQaQaPaHaeayaJaJayaJaJaRaeaSalalaTalalaMaUaMaVaWaXabadavavavavavavavadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaIaYaQaQaQaQaQaQaQaHaeaeaJaJaJaJaJaJaeabababababaZabababbaabababadadadbbbbbbadadadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaIaIaQaQaQaQaQaQaQbcbdbebebebebebebebebfbgbgbgbgbgbgbgbgbgbhavavavavavavavavavavbiadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaIaYaQaQbjbkbkblaQbmbnaJaJaJboaJaJboaJbpavavavavavavavbqavavavavavbravavavbqavavadadadadaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaHaHaHbsaQbtaQaQbuaQbvaHaeaeaeaebwaJaeaeaeadadadadadadadadadadadadadadadadadadadadadadadadaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaIaYaQaQbxbybybzaQbmbAaJaJaJbBaJaJbBaJbCavavavavavavavauavbDbgbgbgbgbgbgbgbEbgbFacadadadaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaIaIaQaQaQaQaQaQbcbGbHbebebebebebebIbebJbgbKbgbgbgbgbgbgbgbLavavavbravavavavavavbMadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaIaYaQaQaQaQaQbNbOaHaeaeaJaJaJaJbPbQaebRbSbRbTbTbUbTbTbTbVadavavadadadbWbWbWadadadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaHaIaIaIaHaPaQaQaPaHaeayaJaJayaJaJaRaebXbYbZbTcacacbcccdceadcfcfadavavavavavavavadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaHaIaIaIaHaHaeayaJaJayaeaJaKaecgchcibTcacacjckclcmbTbTadadavavavavavavavadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeawcnayaecoaAaecpchcqbTcacacrcsctcucvbTadadavavavavavavavadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaebRbRbRbTcacwcxcyczcAcvbTadadbqavavavavavbqadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaebRbRbRbTcacBcCczczcDcEbTadadadadadcFadadadadadaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaeaebRbRbRbTcacrcGcacacHcEbTadadadadadadadadadadadadadadaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebRbRbRbTcacGcIcJcKcLcMbTadadaaaaaaadadadadadadadadadadadadaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebRbRbRbTcacNcOcPctcQbTbTaaaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebRbRbRbTcacRcScTcabTbTbTaaaaaaaaaaaaaaaaaaadadadadadadaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebRbRbRbTbTbTbTbTbTbTbTbTaaaaaaaaaaadadadadadadadadaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbTbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbTbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbTbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbTbTbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbRbRbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabRbRbRbTbTbTbTbTbTbTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
