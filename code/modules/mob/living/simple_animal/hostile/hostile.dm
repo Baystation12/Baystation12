@@ -26,7 +26,8 @@
 												/obj/machinery/door/window,
 												/obj/structure/table,
 												/obj/structure/grille,
-												/obj/structure/wall_frame)
+												/obj/structure/wall_frame,
+												/obj/structure/railing)
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
