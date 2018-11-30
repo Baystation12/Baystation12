@@ -188,5 +188,8 @@
 	/obj/item/clothing/head/helmet/urfc/sniper = 2,
 	/obj/item/clothing/suit/armor/special/urfc/sniper = 2,
 	/obj/item/clothing/head/helmet/urfc/cqb = 2,
-	/obj/item/clothing/suit/armor/special/urfc/cqb = 2
+	/obj/item/clothing/suit/armor/special/urfc/cqb = 2,
+	/obj/item/clothing/under/urfc_jumpsuit = 8,
+	/obj/item/clothing/gloves/thick/swat = 8,
+	/obj/item/clothing/shoes/magboots/urfc = 8
 	)
