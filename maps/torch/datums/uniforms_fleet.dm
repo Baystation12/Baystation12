@@ -34,13 +34,22 @@
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/engineering, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
 
 /decl/hierarchy/mil_uniform/fleet/eng/noncom
-	name = "Fleet engineering SNCO"
-	min_rank = 7
+	name = "Fleet engineering NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/eng/snco
+	name = "Fleet engineering SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/eng/officer
@@ -81,13 +90,22 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 
 /decl/hierarchy/mil_uniform/fleet/sec/noncom
-	name = "Fleet security SNCO"
-	min_rank = 7
+	name = "Fleet security NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/sec/snco
+	name = "Fleet security SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/sec/officer
@@ -128,13 +146,22 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/medical
 
 /decl/hierarchy/mil_uniform/fleet/med/noncom
-	name = "Fleet medical SNCO"
-	min_rank = 7
+	name = "Fleet medical NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/med/snco
+	name = "Fleet medical SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/med/officer
@@ -175,13 +202,22 @@
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/supply, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
 
 /decl/hierarchy/mil_uniform/fleet/sup/noncom
-	name = "Fleet supply SNCO"
-	min_rank = 7
+	name = "Fleet supply NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/sup/snco
+	name = "Fleet supply SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/sup/officer
@@ -233,13 +269,22 @@
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/service, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
 
 /decl/hierarchy/mil_uniform/fleet/srv/noncom
-	name = "Fleet service SNCO"
-	min_rank = 7
+	name = "Fleet service NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/srv/snco
+	name = "Fleet service SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/srv/officer
@@ -262,13 +307,22 @@
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/exploration, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
 
 /decl/hierarchy/mil_uniform/fleet/exp/noncom
-	name = "Fleet exploration SNCO"
-	min_rank = 7
+	name = "Fleet exploration NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/exp/snco
+	name = "Fleet exploration SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/exp/officer
@@ -290,13 +344,22 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
 
 /decl/hierarchy/mil_uniform/fleet/spt/noncom
-	name = "Fleet command support SNCO"
-	min_rank = 7
+	name = "Fleet support NCO"
+	min_rank = 4
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
+
+/decl/hierarchy/mil_uniform/fleet/spt/snco
+	name = "Fleet support SNCO"
+	min_rank = 7
+
+	service_hat = /obj/item/clothing/head/solgov/dress/fleet
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
+
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/snco
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer, /obj/item/clothing/head/beret/solgov/fleet/dress)
 
 /decl/hierarchy/mil_uniform/fleet/spt/officer
