@@ -5,7 +5,7 @@
 	density = 1
 	anchored = 1.0
 	var/win_path = /obj/structure/window/basic
-	var/frame_path = /obj/structure/wall_frame
+	var/frame_path = /obj/structure/wall_frame/standard
 	var/activated = FALSE
 	var/fulltile = TRUE
 
@@ -101,10 +101,17 @@
 	name = "reinforced hull wall frame window spawner"
 	frame_path = /obj/structure/wall_frame/hull
 
+/obj/effect/wallframe_spawn/reinforced/bare //standard type is used most often so its in the master type, this one is for away sites etc with unpainted walls
+	name = "bare metal reinforced wall frame window spawner"
+	icon_state = "r-wingrille"
+	frame_path = /obj/structure/wall_frame
+
+
 /obj/effect/wallframe_spawn/phoron
 	name = "phoron wall frame window spawner"
 	icon_state = "p-wingrille"
 	win_path = /obj/structure/window/phoronbasic/full
+
 
 /obj/effect/wallframe_spawn/reinforced_phoron
 	name = "reinforced phoron wall frame window spawner"
@@ -116,6 +123,7 @@
 
 /obj/effect/wallframe_spawn/reinforced_phoron/hull
 	frame_path = /obj/structure/wall_frame/hull
+
 
 /obj/effect/wallframe_spawn/reinforced/polarized
 	name = "polarized wall frame window spawner"
