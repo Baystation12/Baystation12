@@ -11,7 +11,8 @@
 							 /datum/map_template/ruin/exoplanet/lodge,
 							 /datum/map_template/ruin/exoplanet/crashed_pod,
 							 /datum/map_template/ruin/exoplanet/drill_site,
-							 /datum/map_template/ruin/exoplanet/hut)
+							 /datum/map_template/ruin/exoplanet/hut,
+							 /datum/map_template/ruin/exoplanet/playablecolony)
 
 /obj/effect/overmap/sector/exoplanet/snow/generate_map()
 	for(var/zlevel in map_z)
