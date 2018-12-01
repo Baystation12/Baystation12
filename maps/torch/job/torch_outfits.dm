@@ -613,6 +613,10 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	..()
 	BACKPACK_OVERRIDE_RESEARCH
 
+/decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
+	name = OUTFIT_JOB_NAME("Scientist - SCG")
+	head = /obj/item/clothing/head/beret/solgov/research
+
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
 	name = OUTFIT_JOB_NAME("Psychologist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
@@ -647,6 +651,10 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research
+
+/decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov
+	name = OUTFIT_JOB_NAME("Research Assistant - SCG")
+	head = /obj/item/clothing/head/beret/solgov/research
 
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor
