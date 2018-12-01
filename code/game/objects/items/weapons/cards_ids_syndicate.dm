@@ -1,9 +1,10 @@
 /obj/item/weapon/card/id/syndicate
-	icon_state = "syndicate"
 	assignment = "Agent"
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
+	color = COLOR_GRAY40
+	detail_color = COLOR_NT_RED
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
 	..()
@@ -125,6 +126,10 @@
 				if(choice && CanUseTopic(user, state))
 					src.icon_state = choice.icon_state
 					src.item_state = choice.item_state
+					src.color = choice.color
+					src.detail_color = choice.detail_color
+					src.extra_details = choice.extra_details
+					update_icon()
 					to_chat(usr, "<span class='notice'>Appearance changed to [choice].</span>")
 					. = 1
 			if("Assignment")
@@ -194,6 +199,9 @@
 					electronic_warfare = initial(electronic_warfare)
 					fingerprint_hash = initial(fingerprint_hash)
 					icon_state = initial(icon_state)
+					color = initial(color)
+					detail_color = initial(detail_color)
+					extra_details = initial(extra_details)
 					SetName(initial(name))
 					registered_name = initial(registered_name)
 					unset_registered_user()
@@ -227,7 +235,17 @@
 			var/datum/card_state/CS = new()
 			CS.icon_state = initial(ID.icon_state)
 			CS.item_state = initial(ID.item_state)
+			CS.color = initial(ID.color)
+			CS.detail_color = initial(ID.detail_color)
+			CS.extra_details = initial(ID.extra_details)
 			CS.name = initial(ID.name) + " - " + initial(ID.icon_state)
+			var/color_pair = ""
+			if(CS.color)
+				color_pair += CS.color
+			if(CS.detail_color)
+				color_pair += "/[CS.detail_color]"
+			if(color_pair)
+				CS.name += " - [color_pair]"
 			id_card_states += CS
 		id_card_states = dd_sortedObjectList(id_card_states)
 
@@ -237,6 +255,10 @@
 	var/name
 	var/icon_state
 	var/item_state
+	var/color
+	var/detail_color
+	var/details
+	var/extra_details
 
 /datum/card_state/dd_SortValue()
 	return name
