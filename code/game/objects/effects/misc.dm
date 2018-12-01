@@ -30,7 +30,8 @@
 		W.update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
 	if(WF)
-		WF.color = color
+		WF.paint_color = color
+		WF.update_icon()
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/paint/pink
