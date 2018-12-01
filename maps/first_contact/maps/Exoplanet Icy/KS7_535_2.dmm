@@ -96,43 +96,43 @@
 "bR" = (/obj/structure/sign/neon/disco{pixel_y = 32},/turf/simulated/floor/decor{tag = "icon-outertile"; icon_state = "outertile"},/area/exo_Ice_facility/basement/interior/emsdisco)
 "bS" = (/obj/machinery/camera/autoname{c_tag = "Bar 1"},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_Ice_facility/basement/interior/emsdisco)
 "bT" = (/obj/effect/landmark/start/emsville_staff,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/basement/interior/emslivingb)
-"bU" = (/obj/machinery/door/airlock/multi_tile/glass{dir = 8; name = "Emsville Apartments"; pixel_x = -32},/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
-"bV" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"bW" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/box/glowsticks,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"bX" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"bY" = (/turf/simulated/floor/light/green,/area/exo_Ice_facility/basement/interior/emsdisco)
-"bZ" = (/turf/simulated/floor/light/blue,/area/exo_Ice_facility/basement/interior/emsdisco)
-"ca" = (/obj/structure/tree,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/grass,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cb" = (/obj/structure/stairs{tag = "icon-default (NORTH)"; icon_state = ""; dir = 1},/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cc" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cd" = (/obj/machinery/light/colored/green{tag = "icon-green1 (NORTH)"; icon_state = "green1"; dir = 1},/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/emslivingb)
-"ce" = (/obj/structure/bed,/obj/item/weapon/bedsheet/red,/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cf" = (/obj/structure/table/reinforced,/obj/item/weapon/book/manual/barman_recipes,/obj/item/clothing/head/that{pixel_x = 4; pixel_y = 6},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"cg" = (/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/glass/rag,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"ch" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/decor{tag = "icon-outertile"; icon_state = "outertile"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"ci" = (/turf/simulated/floor/light/white,/area/exo_Ice_facility/basement/interior/emsdisco)
-"cj" = (/turf/simulated/floor/light/yellow,/area/exo_Ice_facility/basement/interior/emsdisco)
-"ck" = (/turf/simulated/floor/light/purple,/area/exo_Ice_facility/basement/interior/emsdisco)
-"cl" = (/obj/structure/table/reinforced,/obj/item/weapon/wrench,/obj/item/weapon/screwdriver,/obj/item/weapon/crowbar,/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"cm" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"cn" = (/obj/machinery/mining/drill,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"co" = (/obj/structure/ore_box,/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"cp" = (/mob/living/simple_animal/corgi/Emelie,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
-"cq" = (/mob/living/simple_animal/npc/colonist/labourer,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
-"cr" = (/obj/structure/table/standard,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
-"cs" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (WEST)"; icon_state = "officechair_white_preview"; dir = 8},/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
-"ct" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (WEST)"; icon_state = "officechair_white_preview"; dir = 8},/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cu" = (/obj/structure/table/woodentable,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cv" = (/obj/structure/bed,/obj/item/weapon/bedsheet/red,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/carpet/blue,/area/exo_Ice_facility/basement/interior/emslivingb)
-"cw" = (/obj/machinery/vending/boozeomat,/obj/machinery/camera/autoname{dir = 4},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"cx" = (/obj/effect/landmark/start{name = "Bartender"},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"cy" = (/obj/structure/table/reinforced,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
-"cz" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/light/red,/area/exo_Ice_facility/basement/interior/emsdisco)
-"cA" = (/turf/simulated/floor/light/red,/area/exo_Ice_facility/basement/interior/emsdisco)
-"cB" = (/obj/structure/table/reinforced,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"cC" = (/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"cD" = (/obj/machinery/mining/brace,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
-"cE" = (/mob/living/simple_animal/npc/colonist/highclass,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
+"bU" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"bV" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/box/glowsticks,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"bW" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"bX" = (/turf/simulated/floor/light/green,/area/exo_Ice_facility/basement/interior/emsdisco)
+"bY" = (/turf/simulated/floor/light/blue,/area/exo_Ice_facility/basement/interior/emsdisco)
+"bZ" = (/obj/structure/tree,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/grass,/area/exo_Ice_facility/basement/interior/emslivingb)
+"ca" = (/obj/structure/stairs{tag = "icon-default (NORTH)"; icon_state = ""; dir = 1},/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/emslivingb)
+"cb" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/emslivingb)
+"cc" = (/obj/machinery/light/colored/green{tag = "icon-green1 (NORTH)"; icon_state = "green1"; dir = 1},/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/emslivingb)
+"cd" = (/obj/structure/bed,/obj/item/weapon/bedsheet/red,/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
+"ce" = (/obj/structure/table/reinforced,/obj/item/weapon/book/manual/barman_recipes,/obj/item/clothing/head/that{pixel_x = 4; pixel_y = 6},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"cf" = (/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/glass/rag,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"cg" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/decor{tag = "icon-outertile"; icon_state = "outertile"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"ch" = (/turf/simulated/floor/light/white,/area/exo_Ice_facility/basement/interior/emsdisco)
+"ci" = (/turf/simulated/floor/light/yellow,/area/exo_Ice_facility/basement/interior/emsdisco)
+"cj" = (/turf/simulated/floor/light/purple,/area/exo_Ice_facility/basement/interior/emsdisco)
+"ck" = (/obj/structure/table/reinforced,/obj/item/weapon/wrench,/obj/item/weapon/screwdriver,/obj/item/weapon/crowbar,/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"cl" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"cm" = (/obj/machinery/mining/drill,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"cn" = (/obj/structure/ore_box,/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"co" = (/mob/living/simple_animal/corgi/Emelie,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
+"cp" = (/mob/living/simple_animal/npc/colonist/labourer,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
+"cq" = (/obj/structure/table/standard,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
+"cr" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (WEST)"; icon_state = "officechair_white_preview"; dir = 8},/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
+"cs" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (WEST)"; icon_state = "officechair_white_preview"; dir = 8},/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
+"ct" = (/obj/structure/table/woodentable,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
+"cu" = (/obj/structure/bed,/obj/item/weapon/bedsheet/red,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/carpet/blue,/area/exo_Ice_facility/basement/interior/emslivingb)
+"cv" = (/obj/machinery/vending/boozeomat,/obj/machinery/camera/autoname{dir = 4},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"cw" = (/obj/effect/landmark/start{name = "Bartender"},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"cx" = (/obj/structure/table/reinforced,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
+"cy" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/light/red,/area/exo_Ice_facility/basement/interior/emsdisco)
+"cz" = (/turf/simulated/floor/light/red,/area/exo_Ice_facility/basement/interior/emsdisco)
+"cA" = (/obj/structure/table/reinforced,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"cB" = (/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"cC" = (/obj/machinery/mining/brace,/turf/simulated/floor/plating,/area/exo_Ice_facility/basement/exterior/cave)
+"cD" = (/mob/living/simple_animal/npc/colonist/highclass,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
+"cE" = (/obj/machinery/door/airlock/multi_tile/glass{dir = 8; name = "Emsville Apartments"; pixel_x = -32},/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/exo_Ice_facility/basement/interior/emslivingb)
 "cF" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (NORTH)"; icon_state = "officechair_white_preview"; dir = 1},/obj/machinery/light,/turf/simulated/floor/wood,/area/exo_Ice_facility/basement/interior/emslivingb)
 "cG" = (/obj/machinery/smartfridge/drinks,/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
 "cH" = (/obj/machinery/button/remote/blast_door{id = "disco"; name = "disco gate control"; pixel_x = -32; pixel_y = -32},/turf/simulated/floor/decor{icon_state = "tiles1"; tag = "icon-freezerfloor"},/area/exo_Ice_facility/basement/interior/emsdisco)
@@ -732,15 +732,15 @@ acasasasasasasaRasaSacauauauauauacaSasaRasasasasasasacacacacaTaUacasasaIauauaVaW
 acbfbgbhasbiasacaracacbjauauaubkacacaracasblasbmbgbnacbobpacbqaYacbrasaIauauaVbsaYaYacbabtbuacadbvaiaiaiaiaiaiaiadbwbwbxaiaiadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acacacacacacbyacacacaIaIasasasaIaIacacacbyacacacacacacbzaxaJaYaYbAasasaIbBauacacbCbAacacacacacadadbDbDbDbDadadbEadbDbDbDbFbDadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acacacacacbGbHbHaVauauaIacacacaIauauaVbHbHbHbIbGacbHacbJagacacacacasasaIaIaIaIaIaIaIaIaIaIaIacadbKbLbMbNaibObPbPbQbQbRbQbSbPadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacacacacbHbHbHaVauauaIasasasaIauauaVbHbHbTbHbHacbHacacacacacacacasasaIaIaIbUaIaIaIaIaIaIaIbCadbVaiaiaiaibWbXbQbYbZbZbYbQbPadaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacacasasasasanaccaauaIcbcbcbaIbBbkacavasasascccdasacacacacaTceacasasaIauauacacacbAacacacacacadcfaiaiaiaicgchcicjckckcjcibQadaaaaaaaaaaaaaaaaaaaaaaaaaaabclcmcncncoabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacaccbcbaIaIaIaIaIaIcpaIaIaIcqaIaIaIaIaIaIaIcrcsaIacbobpacbqaYacbrasaIauauaVaWctaYaWcuacaAcvadcwaiaiaicxcychbZckczcAckbZbQadaaaaaaaaaaaaaaaaaaaaaaaaaaabcBcCcDcDcCabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacacaIaIaIcEaIbUaIaIaIaIaIaIaIaIaIbUaIaIaIaIcraIaIacbzaxaJaYaYbAasasaIbBauaVcFaYaYaYaYaZaKaKadcGaiaicHcIadbQbZckcAcAckbZbQadaaaaaaaaaaaaaaaaaaaaaaaaaaabcJcCcDcDcCabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacacavasasasanacbjauaIasasasaIaubkacavasasasascKasacbJcLacacacacasasacacacacacaJacaccMacacacadadcNadadadadbQcicjckckcjcibQadaaaaaaaaaaaaaaaaaaaaaaaaaaabcOcCcCcCcPabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacacacacbTbHbHaVbBauaIasasasaIauauaVbHbHbHbHcQacbHacacacacacbCacasasacacacbpcRaxaccSbaacaAaBadcTaiaiaiaicUcVbQbYbZbZbYbQbPadaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacacacacbHbHbHaVauauaIasasasaIauauaVbHbHbTbHbHacbHacacacacacacacasasaIaIaIaIaIaIaIaIaIaIaIbCadbUaiaiaiaibVbWbQbXbYbYbXbQbPadaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacacasasasasanacbZauaIcacacaaIbBbkacavasasascbccasacacacacaTcdacasasaIauauacacacbAacacacacacadceaiaiaiaicfcgchcicjcjcichbQadaaaaaaaaaaaaaaaaaaaaaaaaaaabckclcmcmcnabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacaccacaaIaIaIaIaIaIcoaIaIaIcpaIaIaIaIaIaIaIcqcraIacbobpacbqaYacbrasaIauauaVaWcsaYaWctacaAcuadcvaiaiaicwcxcgbYcjcyczcjbYbQadaaaaaaaaaaaaaaaaaaaaaaaaaaabcAcBcCcCcBabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacacaIaIaIcDaIcEaIaIaIaIaIaIaIaIaIcEaIaIaIaIcqaIaIacbzaxaJaYaYbAasasaIbBauaVcFaYaYaYaYaZaKaKadcGaiaicHcIadbQbYcjczczcjbYbQadaaaaaaaaaaaaaaaaaaaaaaaaaaabcJcBcCcCcBabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacacavasasasanacbjauaIasasasaIaubkacavasasasascKasacbJcLacacacacasasacacacacacaJacaccMacacacadadcNadadadadbQchcicjcjcichbQadaaaaaaaaaaaaaaaaaaaaaaaaaaabcOcBcBcBcPabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacacacacbTbHbHaVbBauaIasasasaIauauaVbHbHbHbHcQacbHacacacacacbCacasasacacacbpcRaxaccSbaacaAaBadcTaiaiaiaicUcVbQbXbYbYbXbQbPadaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acacacacacbHbHbHaVauauaIcXasasaIbBauaVbHbHbHbHbHacbHacacacacaTcYacasasacacacaebJagaccZdaacaKaKaddbaiaiaidcadddbPbQbQbQbQbPbPadaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWaaaaaacWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWaaaaaacWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acacacacacacbyacacacaIaIasasasaIaIacacacbyacacacacacacbobpacbqaYacbrasacacacacacacacdebaaZaKaKaddfaiaiaidgaddhdididididididjadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWcWcWcWcWcWcWcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWaaaacWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acccbgdkcdblasacaracacdlaIauaIdmacacaracasblasdnbgdoacbzaxaJaYaYbAasasacacacacacacacdpbaacdqdraddsaidtdudvaddwdxdxaiaidxdxdyadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWcWcWcWcWcWcWcWdzcWcWaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+accbbgdkccblasacaracacdlaIauaIdmacacaracasblasdnbgdoacbzaxaJaYaYbAasasacacacacacacacdpbaacdqdraddsaidtdudvaddwdxdxaiaidxdxdyadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWcWcWcWcWcWcWcWdzcWcWaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acasasasasasasaRasaSacaIaIauaIaIacaSasaRasasasasasasacbJagacacacacdAasacacacacacacacacacacacacadaddBadadadaddCbDbDdDdDbDadadadcWcWaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWcWcWcWcWcWdEcWcWdFcWcWcWcWcWcWcWcWcWcWcWcWcWcWcWaaaacWcWcWcWcWaaaacWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acasasacacaFacacavaGataIaIauaIaIatasanacacaFacacasasacacacacacacacdGdGdGdGdHdGdGdGdGdHdGdGdGdGdHdGdGdGdIdJdHdGdGdGdGdGdKdLcWcWcWcWaaaaaaaaaaaaaaaaaacWcWcWcWcWcWcWcWcWcWdFdMdMdMdNcWcWaacWcWcWcWaaaaaaaaaacWcWcWcWcWcWaacWcWcWcWcWaaaacWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acdOanacaodPaqacdQasataIaIauaIaIatasaracaodPaqacasdRacacacacacacacdSdGdTdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdLcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaacWcWcWdzcWcWaadUdUdUdUdVdUdUdUdUdUdUdUdUdUaaaaaaaacWcWcWcWcWcWcWcWcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
