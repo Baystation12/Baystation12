@@ -234,23 +234,23 @@
 	email_domain = "terran.navy.mil"
 
 	rank_types = list(
-		/datum/mil_rank/fleet/e1,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/fleet/o6,
-		/datum/mil_rank/fleet/o7,
-		/datum/mil_rank/fleet/o8,
-		/datum/mil_rank/fleet/o9,
-		/datum/mil_rank/fleet/o10
+		/datum/mil_rank/terran/e1,
+		/datum/mil_rank/terran/e3,
+		/datum/mil_rank/terran/e4,
+		/datum/mil_rank/terran/e6,
+		/datum/mil_rank/terran/e7,
+		/datum/mil_rank/terran/e9,
+		/datum/mil_rank/terran/e9_alt1,
+		/datum/mil_rank/terran/o1,
+		/datum/mil_rank/terran/o2,
+		/datum/mil_rank/terran/o3,
+		/datum/mil_rank/terran/o4,
+		/datum/mil_rank/terran/o5,
+		/datum/mil_rank/terran/o6,
+		/datum/mil_rank/terran/o7,
+		/datum/mil_rank/terran/o8,
+		/datum/mil_rank/terran/o9,
+		/datum/mil_rank/terran/o10
 	)
 
 	assistant_job = "Sailor"
@@ -680,101 +680,101 @@
 /datum/mil_rank/terran/e1
 	name = "Sailor Recruit"
 	name_short = "SlrRct"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted)
 	sort_order = 1
 
 /datum/mil_rank/terran/e3
 	name = "Sailor"
 	name_short = "Slr"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted/e3)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e3)
 	sort_order = 3
 
 /datum/mil_rank/terran/e4
 	name = "Bosman"
 	name_short = "Bsn"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted/e4)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e4)
 	sort_order = 4
 
 /datum/mil_rank/terran/e6
 	name = "Starszy Bosman"
 	name_short = "SBsn"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted/e6)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e6)
 	sort_order = 6
 
 /datum/mil_rank/terran/e7
 	name = "Glavny Starshina"
 	name_short = "GStr"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted/e7)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e7)
 	sort_order = 7
 
 /datum/mil_rank/terran/e9
 	name = "Michman"
 	name_short = "Mch"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted/e9)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e9)
 	sort_order = 9
 
 /datum/mil_rank/terran/e9_alt1
 	name = "Michman of the Terran Navy"
 	name_short = "MchNvy"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/enlisted/e9_alt1)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e9_alt1)
 	sort_order = 9
 
 /datum/mil_rank/terran/o1
 	name = "Ensign"
 	name_short = "ENS"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/officer)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/officer)
 	sort_order = 11
 
 /datum/mil_rank/terran/o2
 	name = "Leytenant"
 	name_short = "Lyt"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/officer/o2)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/officer/o2)
 	sort_order = 12
 
 /datum/mil_rank/terran/o3
 	name = "Starshy Leytenant"
 	name_short = "SLyt"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/officer/o3)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/officer/o3)
 	sort_order = 13
 
 /datum/mil_rank/terran/o4
 	name = "Corvette-Komandor"
 	name_short = "CvtKdr"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/officer/o4)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/officer/o4)
 	sort_order = 14
 
 /datum/mil_rank/terran/o5
 	name = "Komandor"
 	name_short = "Kdr"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/officer/o5)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/officer/o5)
 	sort_order = 15
 
 /datum/mil_rank/terran/o6
 	name = "Kapitan"
 	name_short = "Kpt"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/officer/o6)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/officer/o6)
 	sort_order = 16
 
 /datum/mil_rank/terran/o7
 	name = "Kontradmiral"
 	name_short = "KtrAdm"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/flag)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag)
 	sort_order = 17
 
 /datum/mil_rank/terran/o8
 	name = "Wiceadmiral"
 	name_short = "WcAdm"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/flag/o8)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag/o8)
 	sort_order = 18
 
 /datum/mil_rank/terran/o9
 	name = "Admiral"
 	name_short = "Adm"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/flag/o9)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag/o9)
 	sort_order = 19
 
 /datum/mil_rank/terran/o10
 	name = "Admiral of the Terran Navy"
 	name_short = "AdmNvy"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/terran/flag/o10)
+	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag/o10)
 	sort_order = 20
