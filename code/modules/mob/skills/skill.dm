@@ -193,17 +193,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You've used firearms and other ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.",
 						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.<br>- You get extra accuracy for sniper rifles.<br>- You automatically eject shells from bolt-action firearms.")
 
-/decl/hierarchy/skill/security/weapons/get_cost(var/level)
-	switch(level)
-		if(SKILL_BASIC)
-			return difficulty
-		if(SKILL_ADEPT)
-			return 2*difficulty
-		if(SKILL_EXPERT, SKILL_PROF)
-			return 4*difficulty
-		else
-			return 0
-
 /decl/hierarchy/skill/security/forensics
 	ID = "forensics"
 	name = "Forensics"
