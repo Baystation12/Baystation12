@@ -1,9 +1,9 @@
 /obj/item/device/floor_painter
-	name = "paintgun"
+	name = "paint gun"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "flpainter"
 	item_state = "fl_painter"
-	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors. It can also paint walls."
+	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors and walls."
 
 	var/decal =        "remove all decals"
 	var/paint_dir =    "precise"
@@ -85,7 +85,7 @@
 
 	var/obj/structure/wall_frame/WF = A
 	if(istype(WF))
-		WF.color = paint_colour
+		WF.paint_color = paint_colour
 		WF.update_icon()
 		return
 

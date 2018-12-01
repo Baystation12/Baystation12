@@ -174,10 +174,10 @@ ARMCHAIR(yellow)
 	req_amount = 2
 	time = 50
 
-/datum/stack_recipe/furniture/wall
+/datum/stack_recipe/furniture/wall_frame
 	title = "low wall frame"
 	result_type = /obj/structure/wall_frame
-	req_amount = 2
+	req_amount = 3
 	time = 50
 
 /datum/stack_recipe/furniture/machine
