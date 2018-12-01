@@ -74,6 +74,12 @@
 	icon_state = "blueservice"
 	item_state = "blueservice"
 
+/obj/item/clothing/suit/storage/solgov/service/fleet/snco
+	name = "fleet SNCO service jacket"
+	desc = "A navy blue SCG Fleet service jacket with silver cuffs."
+	icon_state = "blueservice_snco"
+	item_state = "blueservice_snco"
+
 /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 	name = "fleet officer's dress jacket"
 	desc = "A navy blue SCG Fleet dress jacket with silver accents."
@@ -222,6 +228,12 @@
 	desc = "A navy blue SCG Fleet dress jacket. Don't get near pasta sauce or vox."
 	icon_state = "whitedress"
 	item_state = "whitedress"
+
+/obj/item/clothing/suit/storage/solgov/dress/fleet/snco
+	name = "fleet dress SNCO jacket"
+	desc = "A navy blue SCG Fleet dress jacket with silver cuffs. Don't get near pasta sauce or vox."
+	icon_state = "whitedress_snco"
+	item_state = "whitedress_snco"
 
 /obj/item/clothing/suit/storage/solgov/dress/fleet/officer
 	name = "fleet officer's dress jacket"
