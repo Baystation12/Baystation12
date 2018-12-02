@@ -80,7 +80,7 @@
 	taste_description = "absolutely vile"
 	color = "#91d895"
 	target_organ = BP_LIVER
-	strength = 10
+	strength = 7
 
 /datum/reagent/toxin/chlorine
 	name = "Chlorine"
