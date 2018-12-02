@@ -674,7 +674,7 @@
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/engineering/alt
-	departments = list("Engineering, Alt", "Atmos, Alt")
+	departments = list("Engineering, Alt", "Atmos, Alt", "Hazard")
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
@@ -1068,6 +1068,18 @@
 			if(suit)
 				suit.SetName("engineering voidsuit")
 				suit.icon_state = "rig-engineeringalt"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "eng_voidsuit",
+					slot_r_hand_str = "eng_voidsuit",
+				)
+		if("Hazard")
+			if(helmet)
+				helmet.SetName("hazardous operation voidsuit helmet")
+				helmet.icon_state = "rig0-haz"
+				helmet.item_state = "haz_helm"
+			if(suit)
+				suit.SetName("hazardous operation voidsuit")
+				suit.icon_state = "rig-haz"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "eng_voidsuit",
 					slot_r_hand_str = "eng_voidsuit",
