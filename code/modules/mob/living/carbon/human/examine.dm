@@ -184,7 +184,7 @@
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"
-		else if(!client)
+		else if(!client || ssd_sleeping)
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]

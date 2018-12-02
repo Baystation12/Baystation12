@@ -85,6 +85,7 @@
 	var/resting = 0			//Carbon
 	var/lying = 0
 	var/lying_prev = 0
+	var/ssd_sleeping = 0	// Went to SSD, set their own medical status to SSD
 
 	var/unacidable = 0
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)

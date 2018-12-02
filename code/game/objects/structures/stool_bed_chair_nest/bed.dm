@@ -165,6 +165,35 @@
 	if(padding_material)
 		padding_material.place_sheet(get_turf(src))
 
+/obj/structure/bed/verb/toggle_ssd() // Going to sleep with the intent of AFKing; sets medical record to SSD
+	set src in range(1)
+	set name = "Toggle SSD"
+	set category = "IC"
+
+	var/mob/living/carbon/user = usr
+	var/datum/computer_file/report/crew_record/E = get_crewmember_record(user.name)
+	
+	if (!istype(user))
+		return
+	if (user.drowsyness > 0 || user.paralysis || user.status_flags & FAKEDEATH) // Against waking up from other sleep-induced sources
+		to_chat(user, "<span style='warning'>You cannot wake up right now!</span>")
+		return
+	if (user.ssd_sleeping) // They are asleep and waking up
+		to_chat(user, "<span class='notice'>You wake up.</span>")
+		user.ssd_sleeping = 0
+		user.sleeping = 0
+		E.set_status("Active")
+		return
+	if ((get_turf(user) != src.loc) || (!user.lying)) // They are awake but not being or lying on top of it
+		to_chat(user, "<span style='warning'>You must be lying on top of the [src] to fall asleep.</span>")
+		return
+
+	to_chat(user, "<span style='font-size: 150%;'>Your character has gone SSD. You can wake them up with the \"Toggle SSD\" verb if you are ready to return.</span>")
+	user.ssd_sleeping = 1
+	user.sleeping = 3 HOURS
+	E.set_status("SSD")
+	return
+
 /obj/structure/bed/psych
 	name = "psychiatrist's couch"
 	desc = "For prime comfort during psychiatric evaluations."
