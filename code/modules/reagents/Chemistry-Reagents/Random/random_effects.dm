@@ -53,6 +53,14 @@
 
 // All general properties will be chosen.
 
+/decl/random_chem_effect/general_properties/name
+	maximum = 999
+	minimum = 100
+	mode = RANDOM_CHEM_EFFECT_INT
+
+/decl/random_chem_effect/general_properties/name/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+	reagent.name = "[initial(reagent.name)]-[value]"
+
 /decl/random_chem_effect/general_properties/color_r
 	maximum = 255
 	mode = RANDOM_CHEM_EFFECT_INT
