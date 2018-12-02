@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Wall frames now use materials like walls do, and can be painted and unpainted with the paint gun."
