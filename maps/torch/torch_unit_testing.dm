@@ -80,7 +80,8 @@
 		/area/map_template/hydrobase/station = NO_SCRUBBER,
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/petrov/maint = NO_SCRUBBER,
-		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -98,7 +99,7 @@
 		/area/exoplanet/shrouded,
 		/area/exoplanet/chlorine,
 		/area/icarus/vessel,
-		/area/icarus/open,
+		/area/icarus/open
 	)
 
 	area_coherency_test_subarea_count = list()
