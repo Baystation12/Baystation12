@@ -22,8 +22,8 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
 	stop_automated_movement_when_pulled = 0
-	maxHealth = 200
-	health = 200
+	maxHealth = 175
+	health = 175
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 	heat_damage_per_tick = 20
@@ -69,8 +69,8 @@
 	icon_state = "black"
 	icon_living = "black"
 	icon_dead = "black_dead"
-	maxHealth = 150
-	health = 150
+	maxHealth = 100
+	health = 100
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 	poison_per_bite = 15
