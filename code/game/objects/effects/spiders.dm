@@ -30,6 +30,9 @@
 
 	var/damage = W.force / 4.0
 
+	if(W.edge)
+		damage += 5
+
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/WT = W
 
@@ -127,9 +130,14 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
+	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
-	greater_form = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
+	greater_form = pickweight(castes)
 	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)

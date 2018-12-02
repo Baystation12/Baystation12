@@ -8,6 +8,8 @@
 	var/projectiletype
 	var/projectilesound
 	var/casingtype
+	var/fire_desc = "fires"
+	var/ranged_range = 6 //tiles of range for ranged attackers to attack
 	var/move_to_delay = 4 //delay for the automated movement.
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
@@ -19,6 +21,8 @@
 	var/shuttletarget = null
 	var/enroute = 0
 	var/stop_AI = FALSE // this var stops most AI procs from running
+	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
+	var/sa_accuracy = 85 //percentage chance to hit
 
 	//hostile mobs will bash through these in order - any new entry must have a functioning attack_generic()
 	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
@@ -30,6 +34,8 @@
 												/obj/structure/railing)
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
+	if(stop_AI || incapacitated())	
+		return 0
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
 	stop_automated_movement = 0
@@ -73,12 +79,14 @@
 	return
 
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
+	if(stop_AI || incapacitated())
+		return 0
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		if(ranged)
-			if(get_dist(src, target_mob) <= 6)
+			if(get_dist(src, target_mob) <= ranged_range)
 				OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
@@ -87,6 +95,8 @@
 			walk_to(src, target_mob, 1, move_to_delay)
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
+	if(stop_AI || incapacitated())
+		return 0
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		LoseTarget()
@@ -106,11 +116,16 @@
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
+	if(stop_AI || incapacitated())	
+		return
 	face_atom(target_mob)
 	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
 	if(isliving(target_mob))
+		if(!prob(sa_accuracy))
+			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
+			return
 		var/mob/living/L = target_mob
 		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense)
 		return L
@@ -138,19 +153,23 @@
 
 	return L
 
+/mob/living/simple_animal/hostile/incapacitated()
+	. = ..()
+	if(.)
+		LoseTarget()
+
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/Life()
-
 	. = ..()
 	if(!.)
 		walk(src, 0)
 		return 0
 	if(client)
 		return 0
-	if(stop_AI)
+	if(stop_AI || incapacitated())
 		return 0
 
 	if(isturf(src.loc) && !src.buckled)
@@ -160,11 +179,13 @@
 					target_mob = FindTarget()
 
 				if(HOSTILE_STANCE_ATTACK)
+					face_atom(target_mob)
 					if(destroy_surroundings)
 						DestroySurroundings()
 					MoveToTarget()
 
 				if(HOSTILE_STANCE_ATTACKING)
+					face_atom(target_mob)
 					if(destroy_surroundings)
 						DestroySurroundings()
 					AttackTarget()
@@ -199,7 +220,7 @@
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	var/target = target_mob
-	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
+	visible_message("<span class='danger'>\The [src] [fire_desc] at \the [target]!</span>", 1)
 
 	if(rapid)
 		spawn(1)
@@ -239,21 +260,21 @@
 		face_atom(target_mob)
 		for(var/dir in GLOB.cardinal) // North, South, East, West
 			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, dir))
-			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
+			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS) && (target_mob.get_dist(target_mob, obstacle) <= 3))
 				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 				return
 			for(var/type in valid_obstacles_by_priority)
 				var/obj/obstacle = locate(type, get_step(src, dir))
-				if(obstacle)
+				if(obstacle && (target_mob.get_dist(target_mob, obstacle) <= 3))
 					face_atom(obstacle)
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 					return
 			for(var/obj/machinery/door/obstacle in get_step(src, dir))
-				if(obstacle.density)
+				if(obstacle.density && (target_mob.get_dist(target_mob, obstacle) <= 3))
 					if(!obstacle.can_open(1))
 						return
 					face_atom(obstacle)
-					pry_door(src, 5 SECONDS, obstacle)
+					pry_door(src, pry_time, obstacle)
 					return
 
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
