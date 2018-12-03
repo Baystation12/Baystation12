@@ -1,0 +1,11 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - balance: "Giant spider nurses will now only inject eggs into organs that have space for them."
+  - balance: "Reduced the number of spiders hatched per egg injected."
+  - balance: "Injected spider eggs now mature more slowly."
+  - tweak: "Slightly reduced maximum possible health for all castes of giant spider."
+  - tweak: "Reduced occurrence weight and severity of spider infestation event."
+  - tweak: "Spiders bursting out of organs is more damaging."
+  - tweak: "Hostile simple animals can now destroy railings."
+  - tweak: "Simple animals should now die faster after taking fatal damage."
