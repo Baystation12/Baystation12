@@ -96,9 +96,10 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	amount_grown += rand(0,2)
+	if(prob(80))
+		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(6,24)
+		var/num = rand(3,9)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
@@ -275,7 +276,8 @@
 			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(1, BRUTE, O.organ_tag)
+				O.owner.apply_damage(5, BRUTE, O.organ_tag)
+				O.owner.apply_damage(3, TOX, O.organ_tag)
 		else if(prob(1))
 			O.owner.apply_damage(1, TOX, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)

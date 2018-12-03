@@ -18,6 +18,7 @@
 	turns_per_move = 5
 	see_in_dark = 10
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_amount = 3
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
@@ -88,7 +89,7 @@
 	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
 	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
 	poison_per_bite = rand(0.5 * initial(poison_per_bite), (1.2 * initial(poison_per_bite)))
-	maxHealth = rand(initial(maxHealth), (1.5 * initial(maxHealth)))
+	maxHealth = rand(initial(maxHealth), (1.3 * initial(maxHealth)))
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
 	if(eye_colour)
@@ -129,7 +130,7 @@
 		var/mob/living/carbon/human/H = .
 		if(prob(infest_chance))
 			var/obj/item/organ/external/O = pick(H.organs)
-			if(!BP_IS_ROBOTIC(O))
+			if(!BP_IS_ROBOTIC(O) && (LAZYLEN(O.implants) < 2))
 				var/eggs = new /obj/effect/spider/eggcluster(O, src)
 				O.implants += eggs
 
@@ -139,9 +140,6 @@
 		if(stance == HOSTILE_STANCE_IDLE)
 			//1% chance to skitter madly away
 			if(!busy && prob(1))
-				/*var/list/move_targets = list()
-				for(var/turf/T in orange(20, src))
-					move_targets.Add(T)*/
 				stop_automated_movement = 1
 				walk_to(src, pick(orange(20, src)), 1, move_to_delay)
 				spawn(50)
