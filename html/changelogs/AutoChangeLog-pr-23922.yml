@@ -1,0 +1,4 @@
+author: "Aticius"
+delete-after: True
+changes: 
+  - maptweak: "Bunch of minor fixes and tweaks to the Colony map. The walls no longer eat mining computers. Oops."
