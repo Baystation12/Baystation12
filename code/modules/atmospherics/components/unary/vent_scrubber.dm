@@ -188,7 +188,7 @@
 		return 0
 
 	if(signal.data["power"] != null)
-		use_power = update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
+		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
 	if(signal.data["power_toggle"] != null)
 		update_use_power(!use_power)
 
