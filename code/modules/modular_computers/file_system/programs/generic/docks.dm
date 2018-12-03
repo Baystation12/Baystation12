@@ -34,12 +34,12 @@
 			for(var/sname in SSshuttle.shuttles) //do not touch shuttle-side ones
 				var/datum/shuttle/autodock/S = SSshuttle.shuttles[sname]
 				if(istype(S) && S.shuttle_docking_controller)
-					if(S.shuttle_docking_controller.id_tag == D.docking_program.id_tag)
+					if(S.shuttle_docking_controller.id_tag == D.program.id_tag)
 						shuttleside = 1
 						break
 			if(shuttleside)
 				continue
-			docking_controllers += D.docking_program.id_tag
+			docking_controllers += D.program.id_tag
 
 /datum/nano_module/docking/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
