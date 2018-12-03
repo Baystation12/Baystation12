@@ -85,25 +85,28 @@
 	color = "#00a000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	var/static/list/remove_toxins = list(
+	var/remove_generic = 1
+	var/list/remove_toxins = list(
 		/datum/reagent/toxin/zombiepowder
 	)
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.drowsyness = max(0, M.drowsyness - 6 * removed)
-	M.adjust_hallucination(-9 * removed)
-	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
+
+	if(remove_generic)
+		M.drowsyness = max(0, M.drowsyness - 6 * removed)
+		M.adjust_hallucination(-9 * removed)
+		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	for(var/datum/reagent/R in ingested.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.reagents.remove_reagent(R.type, removing)
 			return
 
@@ -335,6 +338,18 @@
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 
+/datum/reagent/dylovene/venaxilin
+	name = "Venaxilin"
+	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
+	taste_description = "overpowering sweetness"
+	color = "#dadd98"
+	metabolism = REM * 2
+	remove_generic = 0
+	remove_toxins = list(
+		/datum/reagent/toxin/venom,
+		/datum/reagent/toxin/carpotoxin
+	)
+
 /datum/reagent/alkysine
 	name = "Alkysine"
 	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a injury. Can aid in healing brain tissue."
@@ -548,12 +563,46 @@
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
+	chilling_products = list(/datum/reagent/leporazine/cold)
+	chilling_point = -10 CELCIUS
+	chilling_message = "Takes on the consistency of slush."
+	heating_products = list(/datum/reagent/leporazine/hot)
+	heating_point = 110 CELCIUS
+	heating_message = "starts swirling, glowing occasionally."
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	else if(M.bodytemperature < 311)
 		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+
+/datum/reagent/leporazine/hot
+	name = "Pyrogenic Leporazine"
+	chilling_products = list(/datum/reagent/leporazine)
+	chilling_point = 0 CELCIUS
+	chilling_message = "Stops swirling and glowing."
+	heating_products = null
+	heating_point = null
+	heating_message = null
+	scannable = 0
+
+/datum/reagent/leporazine/hot/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature < 330)
+		M.bodytemperature = min(330, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+
+/datum/reagent/leporazine/cold
+	name = "Cryogenic Leporazine"
+	chilling_products = null
+	chilling_point = null
+	chilling_message = null
+	heating_products = list(/datum/reagent/leporazine)
+	heating_point = 100 CELCIUS
+	heating_message = "Becomes clear and smooth."
+	scannable = 0
+
+/datum/reagent/leporazine/cold/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature > 290)
+		M.bodytemperature = max(290, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /* Antidepressants */
 
