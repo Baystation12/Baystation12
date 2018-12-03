@@ -85,6 +85,7 @@
 	color = "#00a000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	var/remove_generic = 1
 	var/static/list/remove_toxins = list(
 		/datum/reagent/toxin/zombiepowder
 	)
@@ -92,17 +93,19 @@
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.drowsyness = max(0, M.drowsyness - 6 * removed)
-	M.adjust_hallucination(-9 * removed)
-	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
+
+	if(remove_generic)
+		M.drowsyness = max(0, M.drowsyness - 6 * removed)
+		M.adjust_hallucination(-9 * removed)
+		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
 	var/removing = (4 * removed)
 	for(var/datum/reagent/R in M.ingested.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.reagents.remove_reagent(R.type, removing)
 			return
 
@@ -331,6 +334,18 @@
 	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
+
+/datum/reagent/dylovene/venaxilin
+	name = "Venaxilin"
+	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
+	taste_description = "overpowering sweetness"
+	color = "#dadd98"
+	metabolism = REM * 2
+	remove_generic = 0
+	var/static/list/remove_toxins = list(
+		/datum/reagent/toxin/venom,
+		/datum/reagent/toxin/carpotoxin
+	)
 
 /datum/reagent/alkysine
 	name = "Alkysine"
