@@ -544,12 +544,40 @@
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
+	chilling_products = list(/datum/reagent/leporazine/cold)
+	chilling_point = -10 CELCIUS
+	chilling_message = "Takes on the consistency of slush."
+	heating_products = list(/datum/reagent/leporazine/hot)
+	heating_point = 110 CELCIUS
+	heating_message = "starts swirling, glowing occasionally."
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	else if(M.bodytemperature < 311)
 		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+
+/datum/reagent/leporazine/hot
+	name = "Pyrogenic Leporazine"
+	chilling_products = list(/datum/reagent/leporazine)
+	chilling_point = 0 CELCIUS
+	chilling_message = "Stops swirling and glowing."
+	scannable = 0
+
+/datum/reagent/leporazine/hot/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature < 330)
+		M.bodytemperature = min(330, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+
+/datum/reagent/leporazine/cold
+	name = "Cryogenic Leporazine"
+	heating_products = list(/datum/reagent/leporazine)
+	heating_point = 100 CELCIUS
+	heating_message = "Becomes clear and smooth."
+	scannable = 0
+
+/datum/reagent/leporazine/cold/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature > 290)
+		M.bodytemperature = max(290, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /* Antidepressants */
 
