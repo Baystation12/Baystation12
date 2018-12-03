@@ -71,8 +71,8 @@
 	if(. != PROCESS_KILL)
 		if(temperature != last_temperature)
 			queue_icon_update()
-		if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power)
-			update_use_power(POWER_USE_OFF)
+		if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
+			update_use_power(POWER_USE_IDLE)
 			queue_icon_update()
 
 /obj/machinery/reagent_temperature/attack_hand(var/mob/user)
@@ -193,10 +193,10 @@
 
 /obj/machinery/reagent_temperature/proc/ToggleUsePower()
 
-	if(use_power == POWER_USE_OFF || (stat & (BROKEN|NOPOWER)))
+	if(stat & (BROKEN|NOPOWER))
 		return TOPIC_HANDLED
 
-	update_use_power(use_power == POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
+	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
 	QUEUE_TEMPERATURE_ATOMS(src)
 	update_icon()
 
