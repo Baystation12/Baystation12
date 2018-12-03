@@ -1,0 +1,29 @@
+<div class="item" style="padding-top: 10px">
+	<div class="item">
+		<div class="itemLabel">
+			Internal Pressure:
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(data.chamber_pressure, 0, 200, (data.chamber_pressure < 80) || (data.chamber_pressure > 120) ? 'bad' : (data.chamber_pressure < 95) || (data.chamber_pressure > 110) ? 'average' : 'good')}}
+			<div class="statusValue">
+				{{:data.chamber_pressure}} kPa
+			</div>
+		</div>
+	</div>
+</div>
+<div class="item" style="padding-top: 10px">
+	<div class="item">
+		<div class="itemContent" style="width: 100%">
+			{{:helper.link('Evacuate Air', null, {'command' : 'evacuate_atmos'}, data.state == 2 ? 'selected' : null)}}
+			{{:helper.link('Equalize With Exterior', null, {'command' : 'fill_atmos'}, data.state == 1 ? 'selected' : null)}}
+			{{:helper.link('Seal', null, {'command' : 'seal'}, data.state == 3 ? 'selected' : null)}}
+		</div>
+		<div class="itemContent" style="padding-top: 2px; width: 100%">
+		{{if data.door_safety}}
+			{{:helper.link('Override door safety', 'alert', {'command' : 'toggle_door_safety'}, null, 'redButton')}}
+		{{else}}
+			{{:helper.link('Re-engage door safety', 'alert', {'command' : 'toggle_door_safety'}, null, 'yellowButton')}}
+		{{/if}}
+		</div>
+	</div>
+</div>

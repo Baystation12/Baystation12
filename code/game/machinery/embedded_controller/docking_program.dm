@@ -75,6 +75,7 @@
 		signal.data["recipient"] = id_tag
 		signal.data["code"] = docking_codes
 		receive_signal(signal)
+		return TRUE
 	
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
