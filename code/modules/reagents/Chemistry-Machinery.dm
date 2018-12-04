@@ -509,7 +509,6 @@
 	if (!beaker || (beaker && beaker.reagents.total_volume >= beaker.reagents.maximum_volume))
 		return
 
-	hurt_hand(user)
 	playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 	inuse = 1
 
@@ -553,36 +552,3 @@
 				qdel(O)
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
-
-/obj/machinery/reagentgrinder/proc/hurt_hand(mob/living/carbon/human/user)
-	var/skill_to_check = SKILL_CHEMISTRY
-	if(user.get_skill_value(SKILL_COOKING) > user.get_skill_value(SKILL_CHEMISTRY))
-		skill_to_check = SKILL_COOKING
-	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
-		return
-	var/hand = pick(BP_L_HAND, BP_R_HAND)
-	var/obj/item/organ/external/hand_organ = user.get_organ(hand)
-	if(!hand_organ)
-		return
-
-	var/dam = rand(10, 15)
-	user.visible_message("<span class='danger'>\The [user]'s hand gets caught in \the [src]!</span>", "<span class='danger'>Your hand gets caught in \the [src]!</span>")
-	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
-	if(BP_IS_ROBOTIC(hand_organ))
-		beaker.reagents.add_reagent(/datum/reagent/iron, dam)
-	else
-		user.take_blood(beaker, dam)
-	user.Stun(2)
-	addtimer(CALLBACK(src, .proc/shake, user, 40), 0)
-
-/obj/machinery/reagentgrinder/proc/shake(mob/user, duration)
-	for(var/i = 1, i<=duration, i++)
-		sleep(1)
-		if(!user || !Adjacent(user))
-			break
-		if(user.is_jittery)
-			continue
-		user.do_jitter(4)
-
-	if(user && !user.is_jittery)
-		user.do_jitter(0) //resets the icon.
