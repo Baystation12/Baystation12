@@ -15,7 +15,6 @@
 	crew_jobs = list(
 		/datum/job/submap/colonist,
 		/datum/job/submap/colonist_doc,
-		/datum/job/submap/colonist_law,
 		/datum/job/submap/colonist_boss
 	)
 

@@ -128,7 +128,7 @@
 	id = "colarm";
 	name = "Armory Blast Door Control";
 	pixel_y = 8;
-	req_access = list(996)
+	req_access = list(997)
 	},
 /obj/item/weapon/card/id/merchant{
 	desc = "this card can be used to access the Colony's telepad to exchange goods.";
@@ -397,6 +397,9 @@
 /obj/effect/floor_decal/techfloor/hole/right{
 	icon_state = "techfloor_hole_right";
 	dir = 1
+	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/command)
@@ -1282,12 +1285,14 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
 "cC" = (
-/obj/machinery/door/airlock/autoname/colony,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
+	},
+/obj/machinery/door/airlock/maintenance{
+	name = "Storage"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/storage2)
@@ -1776,12 +1781,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
-"dB" = (
-/obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/hos,
-/obj/effect/submap_landmark/spawnpoint/colonist_law,
-/turf/simulated/floor/carpet,
-/area/map_template/colony/dorms)
 "dC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2091,9 +2090,11 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/autoname/medical/colony,
 /obj/machinery/holosign/surgery{
 	id = "colonymed"
+	},
+/obj/machinery/door/airlock/medical{
+	name = "Medbay"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/medbay)
@@ -2182,10 +2183,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/item/weapon/storage/box/bodybags{
-	pixel_x = 1;
-	pixel_y = 2
-	},
+/obj/item/device/healthanalyzer,
+/obj/item/weapon/storage/belt/medical,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "ek" = (
@@ -2528,13 +2527,15 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/item/weapon/storage/belt/medical,
-/obj/item/device/healthanalyzer,
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/spaceacillin,
 /obj/item/weapon/storage/pill_bottle/antidexafen,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/medbay)
 "eP" = (
@@ -3072,7 +3073,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/autoname/colony,
+/obj/machinery/door/airlock/glass/civilian{
+	name = "Mess Hall"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/messhall)
 "fH" = (
@@ -3413,7 +3416,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/civilian,
+/obj/machinery/door/airlock/freezer,
 /turf/simulated/floor/lino,
 /area/map_template/colony/messhall)
 "ge" = (
@@ -4400,7 +4403,7 @@
 	name = "Armory Blast Door Control";
 	pixel_x = 25;
 	pixel_y = 0;
-	req_access = list(996)
+	req_access = list(997)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/map_template/colony/armory)
@@ -4621,7 +4624,7 @@
 	name = "Armory Blast Door Control";
 	pixel_x = -25;
 	pixel_y = 0;
-	req_access = list(996)
+	req_access = list(997)
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
@@ -4652,7 +4655,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/autoname/colony,
+/obj/machinery/door/airlock/glass/civilian{
+	name = "Common Room"
+	},
 /turf/simulated/floor/wood,
 /area/map_template/colony/commons)
 "ih" = (
@@ -4870,7 +4875,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/autoname/security/colony,
+/obj/machinery/door/airlock/security{
+	name = "Jail Hall";
+	req_access = list(995)
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "iA" = (
@@ -5419,7 +5427,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/autoname/colony,
+/obj/machinery/door/airlock/civilian{
+	name = "Latrine"
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/bathroom)
 "jo" = (
@@ -5563,7 +5573,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/autoname/security/colony,
+/obj/machinery/door/airlock/security{
+	name = "Jail";
+	req_access = list(995)
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "jB" = (
@@ -5618,7 +5631,9 @@
 /area/map_template/colony/commons)
 "jF" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/autoname/colony,
+/obj/machinery/door/airlock/civilian{
+	name = "Latrine"
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/bathroom)
 "jG" = (
@@ -5827,12 +5842,14 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/autoname/colony,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
+	},
+/obj/machinery/door/airlock/maintenance{
+	name = "Storage"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/storage1)
@@ -5849,7 +5866,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/autoname/colony,
+/obj/machinery/door/airlock/glass/civilian{
+	name = "Hydroponics Bay"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
 "jV" = (
@@ -5996,7 +6015,10 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/door/airlock/autoname/security/colony,
+/obj/machinery/door/airlock/security{
+	name = "Checkpoint";
+	req_access = list(995)
+	},
 /turf/simulated/floor/lino,
 /area/map_template/colony/checkpoint)
 "kh" = (
@@ -6212,6 +6234,12 @@
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/structure/cable,
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmosintake)
 "kz" = (
@@ -6229,11 +6257,10 @@
 /turf/simulated/floor/lino,
 /area/map_template/colony/checkpoint)
 "kA" = (
-/obj/machinery/alarm{
-	locked = 0;
-	pixel_y = 20
-	},
 /obj/structure/flora/pottedplant/tropical,
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
+	},
 /turf/simulated/floor/lino,
 /area/map_template/colony/checkpoint)
 "kB" = (
@@ -6534,13 +6561,13 @@
 	id = "colmainexit";
 	name = "Exit Blast Doors";
 	pixel_y = 0;
-	req_access = list(996)
+	req_access = list(995)
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "colmainblast";
 	name = "Entry Blast Doors";
 	pixel_y = 8;
-	req_access = list(996)
+	req_access = list(995)
 	},
 /turf/simulated/floor/lino,
 /area/map_template/colony/checkpoint)
@@ -6823,7 +6850,10 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/door/airlock/autoname/security/colony,
+/obj/machinery/door/airlock/security{
+	name = "Jail Cell";
+	req_access = list(995)
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "lH" = (
@@ -6924,7 +6954,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/autoname/security/colony,
+/obj/machinery/door/airlock/security{
+	name = "Jail Cell";
+	req_access = list(995)
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "lO" = (
@@ -7904,6 +7937,11 @@
 	pixel_y = 0
 	},
 /obj/machinery/light,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25;
+	req_one_access = list(201)
+	},
 /turf/simulated/floor/lino,
 /area/map_template/colony/checkpoint)
 "nl" = (
@@ -8995,6 +9033,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/storage2)
+"wQ" = (
+/turf/template_noop,
+/area/space)
 "yE" = (
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
@@ -9071,6 +9112,28 @@
 	},
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
+"Hx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/holosign/surgery{
+	id = "colonymed"
+	},
+/obj/machinery/door/airlock/medical{
+	name = "Surgery";
+	req_access = list(996)
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony/medbay)
 "Hy" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/power/apc{
@@ -10127,7 +10190,7 @@ ac
 Uo
 Uo
 at
-dB
+vI
 cG
 dj
 az
@@ -10661,7 +10724,7 @@ dn
 fc
 au
 FY
-ec
+Hx
 FY
 aB
 fo
@@ -10886,7 +10949,7 @@ aa
 aa
 aa
 aa
-aa
+wQ
 aa
 aa
 aa
