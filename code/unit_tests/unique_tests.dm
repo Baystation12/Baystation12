@@ -151,11 +151,28 @@
 
 	var/number_of_issues = number_of_issues(backpacks_by_name, "Outfit Backpack Names")
 	if(number_of_issues)
-		fail("[number_of_issues] outfit backpacks\s found.")
+		fail("[number_of_issues] duplicate outfit backpacks\s found.")
 	else
 		pass("All outfit backpacks have unique names.")
 	return 1
 
+/datum/unit_test/space_suit_modifiers_shall_have_unique_names
+	name = "UNIQUENESS: Space Suit Modifiers Shall Have Unique Names"
+
+/datum/unit_test/space_suit_modifiers_shall_have_unique_names/start_test()
+	var/list/space_suit_modifiers_by_name = list()
+
+	var/sss = decls_repository.get_decls_of_subtype(/decl/item_modifier/space_suit)
+	for(var/ss in sss)
+		var/decl/item_modifier/space_suit/space_suit_modifier = sss[ss]
+		group_by(space_suit_modifiers_by_name, space_suit_modifier.name, space_suit_modifier)
+
+	var/number_of_issues = number_of_issues(space_suit_modifiers_by_name, "Space Suit Modifier Names")
+	if(number_of_issues)
+		fail("[number_of_issues] duplicate space suit modifier\s found.")
+	else
+		pass("All space suit modifiers have unique names.")
+	return 1
 
 /datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
 	var/issues = 0
