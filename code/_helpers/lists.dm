@@ -743,3 +743,9 @@ proc/dd_sortedTextList(list/incoming)
 			.[i] = .(.[i])
 
 #define IS_VALID_INDEX(list, index) (list.len && index > 0 && index <= list.len)
+
+// Returns the first key where T fulfills ispath
+/proc/get_ispath_key(var/list/L, var/T)
+	for(var/key in L)
+		if(ispath(T, key))
+			return key

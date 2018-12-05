@@ -98,7 +98,7 @@
 	return 1
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states
-	name = "ICON STATE template"
+	name = "ICON STATE - Posters Shall Have Icon States"
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states/start_test()
 	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
@@ -113,4 +113,32 @@
 		fail("/decl/poster with missing icon states: [english_list(invalid_posters)]")
 	else
 		pass("All /decl/poster subtypes have valid icon states.")
+	return 1
+
+/datum/unit_test/icon_test/item_modifiers_shall_have_icon_states
+	name = "ICON STATE - Item Modifiers Shall Have Icon Sates"
+	var/list/icon_states_by_type
+
+/datum/unit_test/icon_test/item_modifiers_shall_have_icon_states/start_test()
+	var/list/bad_modifiers = list()
+	var/item_modifiers = list_values(decls_repository.get_decls(/decl/item_modifier))
+
+	for(var/im in item_modifiers)
+		var/decl/item_modifier/item_modifier = im
+		for(var/type_setup_type in item_modifier.type_setups)
+			var/list/type_setup = item_modifier.type_setups[type_setup_type]
+			var/list/icon_states = icon_states_by_type[type_setup_type]
+
+			if(!icon_states)
+				var/obj/item/I = type_setup_type
+				icon_states = icon_states(initial(I.icon))
+				LAZYSET(icon_states_by_type, type_setup_type, icon_states)
+
+			if(!(type_setup["icon_state"] in icon_states))
+				bad_modifiers += type_setup_type
+
+	if(bad_modifiers.len)
+		fail("Item modifiers with missing icon states: [english_list(bad_modifiers)]")
+	else
+		pass("All item modifiers have valid icon states.")
 	return 1
