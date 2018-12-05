@@ -1,5 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - maptweak: "The GUP is now overmap capable, though with poor sensor quality."
-  - maptweak: "The GUP is no longer fully pressurized. Use the unlocked air alarm to properly modify the atmosphere as needed."
