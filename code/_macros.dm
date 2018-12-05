@@ -127,6 +127,8 @@
 
 #define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
 
+#define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
+
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 
 // Helper macros to aid in optimizing lazy instantiation of lists.
