@@ -1,0 +1,7 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - imageadd: "Fleet uniforms sprites have been re-done."
+  - rscadd: "Added Fleet officer's alt utility uniform, mainly used by bridge crew."
+  - rscadd: "Added Fleet service jackets, with alternating trimmings based on rank (enlisted, officer, senior officer, flag officer)"
+  - rscadd: "Added new Fleet dress jackets, with alternating trimmings based on rank (enlisted, officer, senior officer, flag officer)"
