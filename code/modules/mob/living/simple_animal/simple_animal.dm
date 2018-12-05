@@ -59,6 +59,7 @@
 	var/resistance		  = 0	// Damage reduction
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
+	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -70,8 +71,11 @@
 
 	// contained in a cage
 	var/in_stasis = 0
+
 /mob/living/simple_animal/Life()
-	..()
+	. = ..()
+	if(!.)
+		return FALSE
 	if(!living_observers_present(GetConnectedZlevels(z)))
 		return
 	//Health
@@ -250,6 +254,12 @@
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
 		return
+
+	if(istype(O, /obj/item/device/flash))
+		if(stat != DEAD)
+			O.attack(src, user, user.zone_sel.selecting)
+			return
+
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(O.edge)
 			harvest(user)

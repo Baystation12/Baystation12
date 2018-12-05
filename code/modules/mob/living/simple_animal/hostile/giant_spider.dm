@@ -33,10 +33,10 @@
 	move_to_delay = 3
 	speed = 1
 	max_gas = list("phoron" = 1, "carbon_dioxide" = 5, "methyl_bromide" = 1)
-	mob_size = MOB_LARGE
 	bleed_colour = "#0d5a71"
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
+	pry_desc = "clawing"
 
 	var/poison_per_bite = 8
 	var/poison_type = /datum/reagent/toxin/venom
@@ -62,9 +62,9 @@
 	break_stuff_probability = 15
 	pry_time = 7 SECONDS
 
-	var/paired_nurse //spider we follow
-	var/vengance //how likely we are to fly into a rage if our nurse dies
+	var/vengance
 	var/berserking
+	var/mob/living/simple_animal/hostile/giant_spider/nurse/paired_nurse
 
 //nursemaids - these create webs and eggs - the weakest and least threatening
 /mob/living/simple_animal/hostile/giant_spider/nurse
@@ -76,7 +76,8 @@
 	health = 80
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	poison_per_bite = 8
+	harm_intent_damage = 6 //soft
+	poison_per_bite = 5
 	speed = 0
 	poison_type = /datum/reagent/soporific
 	break_stuff_probability = 10
@@ -84,9 +85,9 @@
 
 	var/atom/cocoon_target
 	var/fed = 0
-	var/max_eggs = 12
+	var/max_eggs = 8
 	var/infest_chance = 8
-	var/paired_guard //spider that follows us
+	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
 //hunters - the most damage, fast, average health and the only caste tenacious enough to break out of nets
 /mob/living/simple_animal/hostile/giant_spider/hunter
@@ -105,10 +106,12 @@
 	hunt_chance = 25
 	can_escape = TRUE
 	pry_time = 6 SECONDS
+	flash_vulnerability = 2 //sensitive eyes for stalking prey
+	does_spin = FALSE
 
 	var/leap_range = 5
 	var/last_leapt
-	var/leap_cooldown = 1 MINUTE
+	var/leap_cooldown = 5 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter
@@ -116,8 +119,8 @@
 	icon_state = "purple"
 	icon_living = "purple"
 	icon_dead = "purple_dead"
-	maxHealth = 100
-	health = 100
+	maxHealth = 90
+	health = 90
 	melee_damage_lower = 8
 	melee_damage_upper = 12
 	poison_per_bite = 15
@@ -128,6 +131,7 @@
 	fire_desc = "spits venom"
 	ranged_range = 5
 	pry_time = 7 SECONDS
+	flash_vulnerability = 2
 
 	var/venom_charge = 16
 
@@ -181,51 +185,57 @@
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	. = ..()
-	if(!stat && !incapacitated())
-		if(stance == HOSTILE_STANCE_IDLE)
-			//chance to skitter madly away
-			if(!busy && prob(hunt_chance))
-				stop_automated_movement = 1
-				walk_to(src, pick(orange(20, src)), 1, move_to_delay)
-				addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+	if(!.)
+		return FALSE
+	if(stance == HOSTILE_STANCE_IDLE)
+		//chance to skitter madly away
+		if(!busy && prob(hunt_chance))
+			stop_automated_movement = 1
+			walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+			addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
 	stop_automated_movement = 0
 	walk(src,0)
+	kick_stance()
 
-//Guard procs
+/mob/living/simple_animal/hostile/giant_spider/proc/divorce()
+	return
+
+/****************
+Guard caste procs
+****************/
 /mob/living/simple_animal/hostile/giant_spider/guard/Life()
 	. = ..()
+	if(!.)
+		return FALSE
 	if(berserking)
-		return
-	if(!stat)
-		if(!paired_nurse)
-			find_nurse()
-		if(paired_nurse && !busy && stance == HOSTILE_STANCE_IDLE)
-			protect(paired_nurse)
+		return FALSE
+	if(!paired_nurse)
+		find_nurse()
+	if(paired_nurse && !busy && stance == HOSTILE_STANCE_IDLE)
+		protect(paired_nurse)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/death()
 	. = ..()
-	if(paired_nurse)
-		var/mob/living/simple_animal/hostile/giant_spider/nurse/N = paired_nurse
-		if(N.paired_guard)
-			N.paired_guard = null
-		paired_nurse = null
+	divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/guard/Destroy()
 	. = ..()
-	var/mob/living/simple_animal/hostile/giant_spider/nurse/N = paired_nurse
-	paired_nurse = null
-	if(N.paired_guard)
-		N.paired_guard = null
+	divorce()
+
+/mob/living/simple_animal/hostile/giant_spider/guard/divorce()
+	if(paired_nurse)
+		if(paired_nurse.paired_guard)
+			paired_nurse.paired_guard = null
+		paired_nurse = null
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/find_nurse()
-	var/mob/living/simple_animal/hostile/giant_spider/nurse/N 
-	for(N in ListTargets(10))
+	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in ListTargets(10))
 		if(N.stat || N.paired_guard)
 			continue
 		paired_nurse = N
-		N.paired_guard = src
+		paired_nurse.paired_guard = src
 		return 1
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/protect(mob/nurse)
@@ -249,25 +259,27 @@
 	move_to_delay++
 	break_stuff_probability = 10
 
-//Nurse procs
+/****************
+Nurse caste procs
+****************/
+/mob/living/simple_animal/hostile/giant_spider/nurse/divorce()
+	if(paired_guard)
+		if(paired_guard.paired_nurse)
+			paired_guard.paired_nurse = null
+	paired_guard = null
+
 /mob/living/simple_animal/hostile/giant_spider/nurse/death()
 	. = ..()
 	if(paired_guard)
-		var/mob/living/simple_animal/hostile/giant_spider/guard/G = paired_guard
-		G.vengance = rand(50,100)
-		if(prob(G.vengance))
-			G.berserking = TRUE
-			G.go_berserk()
-			if(G.paired_nurse)
-				G.paired_nurse = null
-		paired_guard = null
+		paired_guard.vengance = rand(50,100)
+		if(prob(paired_guard.vengance))
+			paired_guard.berserking = TRUE
+			paired_guard.go_berserk()
+	divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Destroy()
 	. = ..()
-	var/mob/living/simple_animal/hostile/giant_spider/guard/G = paired_guard
-	paired_guard = null
-	if(G.paired_nurse)
-		G.paired_nurse = null
+	divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
 	. = ..()
@@ -289,108 +301,111 @@
 			stop_automated_movement = 0
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Life()
-	..()
-	if(!stat)
-		if(stance == HOSTILE_STANCE_IDLE)
-			var/list/can_see = view(src, 10)
-			//30% chance to stop wandering and do something
-			if(!busy && prob(30))
-				//first, check for potential food nearby to cocoon
-				for(var/mob/living/C in can_see)
-					if(C.stat)
-						cocoon_target = C
-						busy = MOVING_TO_TARGET
-						walk_to(src, C, 1, move_to_delay)
-						//give up if we can't reach them after 10 seconds
-						GiveUp(C)
-						return
+	. = ..()
+	if(!.)
+		return FALSE
+	if(stance == HOSTILE_STANCE_IDLE)
+		var/list/can_see = view(src, 10)
+		//30% chance to stop wandering and do something
+		if(!busy && prob(30))
+			//first, check for potential food nearby to cocoon
+			for(var/mob/living/C in can_see)
+				if(C.stat)
+					cocoon_target = C
+					busy = MOVING_TO_TARGET
+					walk_to(src, C, 1, move_to_delay)
+					//give up if we can't reach them after 10 seconds
+					GiveUp(C)
+					return
 
-				//second, spin a sticky spiderweb on this tile
-				var/obj/effect/spider/stickyweb/W = locate() in get_turf(src)
-				if(!W)
-					busy = SPINNING_WEB
-					src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance.</span>")
+			//second, spin a sticky spiderweb on this tile
+			var/obj/effect/spider/stickyweb/W = locate() in get_turf(src)
+			if(!W)
+				busy = SPINNING_WEB
+				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance.</span>")
+				stop_automated_movement = 1
+				spawn(40)
+					if(busy == SPINNING_WEB)
+						new /obj/effect/spider/stickyweb(src.loc)
+						busy = 0
+						stop_automated_movement = 0
+			else
+				//third, lay an egg cluster there
+				var/obj/effect/spider/eggcluster/E = locate() in get_turf(src)
+				if(!E && fed > 0 && max_eggs)
+					busy = LAYING_EGGS
+					src.visible_message("<span class='notice'>\The [src] begins to lay a cluster of eggs.</span>")
 					stop_automated_movement = 1
-					spawn(40)
-						if(busy == SPINNING_WEB)
-							new /obj/effect/spider/stickyweb(src.loc)
+					spawn(50)
+						if(busy == LAYING_EGGS)
+							E = locate() in get_turf(src)
+							if(!E)
+								new /obj/effect/spider/eggcluster(loc, src)
+								max_eggs--
+								fed--
 							busy = 0
 							stop_automated_movement = 0
 				else
-					//third, lay an egg cluster there
-					var/obj/effect/spider/eggcluster/E = locate() in get_turf(src)
-					if(!E && fed > 0 && max_eggs)
-						busy = LAYING_EGGS
-						src.visible_message("<span class='notice'>\The [src] begins to lay a cluster of eggs.</span>")
-						stop_automated_movement = 1
-						spawn(50)
-							if(busy == LAYING_EGGS)
-								E = locate() in get_turf(src)
-								if(!E)
-									new /obj/effect/spider/eggcluster(loc, src)
-									max_eggs--
-									fed--
-								busy = 0
-								stop_automated_movement = 0
-					else
-						//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
-						for(var/obj/O in can_see)
+					//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
+					for(var/obj/O in can_see)
 
-							if(O.anchored)
-								continue
+						if(O.anchored)
+							continue
 
-							if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
-								cocoon_target = O
-								busy = MOVING_TO_TARGET
-								stop_automated_movement = 1
-								walk_to(src, O, 1, move_to_delay)
-								//give up if we can't reach them after 10 seconds
-								GiveUp(O)
+						if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
+							cocoon_target = O
+							busy = MOVING_TO_TARGET
+							stop_automated_movement = 1
+							walk_to(src, O, 1, move_to_delay)
+							//give up if we can't reach them after 10 seconds
+							GiveUp(O)
 
-			else if(busy == MOVING_TO_TARGET && cocoon_target)
-				if(get_dist(src, cocoon_target) <= 1)
-					busy = SPINNING_COCOON
-					src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
-					stop_automated_movement = 1
-					walk(src,0)
-					spawn(50)
-						if(busy == SPINNING_COCOON)
-							if(cocoon_target && istype(cocoon_target.loc, /turf) && get_dist(src,cocoon_target) <= 1)
-								var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
-								var/large_cocoon = 0
-								C.pixel_x = cocoon_target.pixel_x
-								C.pixel_y = cocoon_target.pixel_y
-								for(var/mob/living/M in C.loc)
-									if(istype(M, /mob/living/simple_animal/hostile/giant_spider))
-										continue
+		else if(busy == MOVING_TO_TARGET && cocoon_target)
+			if(get_dist(src, cocoon_target) <= 1)
+				busy = SPINNING_COCOON
+				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
+				stop_automated_movement = 1
+				walk(src,0)
+				spawn(50)
+					if(busy == SPINNING_COCOON)
+						if(cocoon_target && istype(cocoon_target.loc, /turf) && get_dist(src,cocoon_target) <= 1)
+							var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
+							var/large_cocoon = 0
+							C.pixel_x = cocoon_target.pixel_x
+							C.pixel_y = cocoon_target.pixel_y
+							for(var/mob/living/M in C.loc)
+								if(istype(M, /mob/living/simple_animal/hostile/giant_spider))
+									continue
 									large_cocoon = 1
-									fed++
-									max_eggs++
-									src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
+								fed++
+								max_eggs++
+								src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
+								M.forceMove(C)
+								C.pixel_x = M.pixel_x
+								C.pixel_y = M.pixel_y
+								break
+							for(var/obj/item/I in C.loc)
+								I.forceMove(C)
+							for(var/obj/structure/S in C.loc)
+								if(!S.anchored)
+									S.forceMove(C)
+							for(var/obj/machinery/M in C.loc)
+								if(!M.anchored)
 									M.forceMove(C)
-									C.pixel_x = M.pixel_x
-									C.pixel_y = M.pixel_y
-									break
-								for(var/obj/item/I in C.loc)
-									I.forceMove(C)
-								for(var/obj/structure/S in C.loc)
-									if(!S.anchored)
-										S.forceMove(C)
-								for(var/obj/machinery/M in C.loc)
-									if(!M.anchored)
-										M.forceMove(C)
-								if(large_cocoon)
-									C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
-							busy = 0
-							stop_automated_movement = 0
+							if(large_cocoon)
+								C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+						busy = 0
+						stop_automated_movement = 0
 
-		else
-			busy = 0
-			stop_automated_movement = 0
+	else
+		busy = 0
+		stop_automated_movement = 0
 
-//Hunter procs
+/*****************
+Hunter caste procs
+*****************/
 /mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget()
-	if(stop_AI || incapacitated())
+	if(!can_act())
 		return
 	var/mob/living/target = target_mob
 	if(can_leap(target))
@@ -399,34 +414,17 @@
 	..()
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/proc/can_leap(mob/living/target)
-//	if(incapacitated() || last_leapt > world.time || !target || !isliving(target) || (get_dist(src, target) >= 3))
-	if(incapacitated())
-		world << "incap check failed"
-		return FALSE
-	if(last_leapt > world.time)
-		world << "cooldown check failed"
-		return FALSE
-	if(!target)
-		world << "target check failed"
-		return FALSE
-	if(!isliving(target))
-		world << "isliving check failed"
-		return FALSE
-	if(get_dist(src, target) <= 3)
-		world << "too close check failed"
+	if(!can_act() || last_leapt > world.time || !isliving(target) || (get_dist(src, target) <= 3))
 		return FALSE
 	if(get_dist(src, target) <= leap_range)
-		world << "can_leap passed"
 		return TRUE
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/proc/prepare_leap(mob/living/target)
-	if(get_dist(get_turf(src), get_turf(target)) > leap_range)
-		return
 	face_atom(target)
 	walk(src,0)
-	stop_AI = TRUE
+	stop_automation = TRUE
 	visible_message("<span class='warning'>\The [src] reels back and prepares to launch itself at \the [target]!</span>")
-	addtimer(CALLBACK(src, .proc/leap, target), 1 SECOND)
+	addtimer(CALLBACK(src, .proc/leap, target), 2 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/proc/leap(mob/living/target)
 	visible_message("<span class='danger'>\The [src] springs forward towards \the [target]!</span>")
@@ -434,18 +432,23 @@
 	addtimer(CALLBACK(src, .proc/resolve_leap, target), 5)
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/proc/resolve_leap(mob/living/target)
-	stop_AI = FALSE
 	if(Adjacent(target))
 		visible_message("<span class='danger'>\The [src] slams into \the [target], knocking them over!</span>")
-		target.Weaken(0.1)
+		target.Weaken(1)
+		stop_automation = FALSE
 		MoveToTarget()
 	else
-		visible_message("<span class='warning'>\The [src] misses its quarry and staggers!</span>")
-		Stun(2) //we missed!
+		visible_message("<span class='warning'>\The [src] misses its quarry and gets staggered!</span>")
+		stop_automation = FALSE
+		Stun(3) //we missed!
 
-//Spitter procs
+/******************
+Spitter caste procs
+******************/
 /mob/living/simple_animal/hostile/giant_spider/spitter/Life()
-	..()
+	. = ..()
+	if(!.)
+		return FALSE
 	if(venom_charge <= 0)
 		ranged = FALSE
 		if(prob(25))

@@ -65,13 +65,13 @@
 
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	var/flashfail = 0
+	var/flash_strength = (rand(str_min,str_max))
 
 	if(iscarbon(M))
 		if(M.stat!=DEAD)
 			var/mob/living/carbon/C = M
 			var/safety = C.eyecheck()
 			if(safety < FLASH_PROTECTION_MODERATE)
-				var/flash_strength = (rand(str_min,str_max))
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
 					flash_strength = round(H.species.flash_mod * flash_strength)
@@ -88,8 +88,19 @@
 			else
 				flashfail = 1
 
+	else if(isanimal(M))
+		var/mob/living/simple_animal/SA = M
+		if(SA.flash_vulnerability)
+			SA.Stun(flash_strength - 2)
+			SA.flash_eyes(2)
+			SA.eye_blurry += flash_strength
+			SA.confused += flash_strength
+			if(SA.flash_vulnerability > 1)
+				SA.Weaken(2)
+
 	else if(issilicon(M))
 		M.Weaken(rand(str_min,6))
+
 	else
 		flashfail = 1
 

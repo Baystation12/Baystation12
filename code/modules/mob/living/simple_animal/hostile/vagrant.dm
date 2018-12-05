@@ -55,6 +55,8 @@
 
 /mob/living/simple_animal/hostile/vagrant/Life()
 	. = ..()
+	if(!.)
+		return FALSE
 	if(gripping)
 		if(!(get_turf(src) == get_turf(gripping)))
 			gripping = null
