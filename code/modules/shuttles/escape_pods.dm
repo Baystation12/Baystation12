@@ -53,6 +53,7 @@ var/list/escape_pods_by_name = list()
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
+	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
 	data = list(
 		"docking_status" = docking_program.get_docking_status(),
@@ -86,10 +87,11 @@ var/list/escape_pods_by_name = list()
 //This controller is for the escape pod berth (station side)
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth
 	name = "escape pod berth controller"
-	progtype = /datum/computer/file/embedded_program/docking/simple/escape_pod
+	program = /datum/computer/file/embedded_program/docking/simple/escape_pod
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
+	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
 	var/armed = null
 	if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
@@ -114,8 +116,8 @@ var/list/escape_pods_by_name = list()
 	if (!emagged)
 		to_chat(user, "<span class='notice'>You emag the [src], arming the escape pod!</span>")
 		emagged = 1
-		if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
-			var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = docking_program
+		if (istype(program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
+			var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = program
 			if (!P.armed)
 				P.arm()
 		return 1
@@ -135,8 +137,8 @@ var/list/escape_pods_by_name = list()
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/receive_user_command(command)
 	if (!armed)
-		return
-	..(command)
+		return TRUE // Eat all commands.
+	return ..(command)
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/process()
 	..()
