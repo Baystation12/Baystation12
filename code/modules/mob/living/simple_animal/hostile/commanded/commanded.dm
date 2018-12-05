@@ -23,6 +23,9 @@
 	return 0
 
 /mob/living/simple_animal/hostile/commanded/Life()
+	. = ..()
+	if(!.)
+		return FALSE
 	while(command_buffer.len > 0)
 		var/mob/speaker = command_buffer[1]
 		var/text = command_buffer[2]

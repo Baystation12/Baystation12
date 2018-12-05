@@ -160,7 +160,7 @@
 
 /obj/item/projectile/venom
 	name = "venom bolt"
-	icon_state = "neurotoxin"
+	icon_state = "venom"
 	damage = 5 //most damage is in the reagent
 	damage_type = TOX
 	check_armour = "bio"

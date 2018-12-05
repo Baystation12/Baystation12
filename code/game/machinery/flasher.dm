@@ -109,13 +109,16 @@
 	..(severity)
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
-	if ((src.disable) || (src.last_flash && world.time < src.last_flash + 150))
+	if(!anchored || disable || last_flash && world.time < last_flash + 150)
 		return
 
 	if(istype(AM, /mob/living/carbon))
 		var/mob/living/carbon/M = AM
-		if (!MOVING_DELIBERATELY(M) && (src.anchored))
-			src.flash()
+		if(!MOVING_DELIBERATELY(M))
+			flash()
+	
+	if(isanimal(AM))
+		flash()
 
 /obj/machinery/flasher/portable/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isWrench(W))
