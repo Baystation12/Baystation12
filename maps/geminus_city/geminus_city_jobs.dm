@@ -1,7 +1,7 @@
 
 /datum/map/geminus_city
 	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader,/datum/job/police,/datum/job/cop)
-	allowed_spawns = List("Default")
+	allowed_spawns = list("Default")
 /datum/job/colonist
 	title = "Colonist"
 	total_positions = 20
