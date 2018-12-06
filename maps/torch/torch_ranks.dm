@@ -229,9 +229,9 @@
 	)
 
 /datum/mil_branch/terran
-	name = "Terran Navy"
-	name_short = "TCCN"
-	email_domain = "terran.navy.mil"
+	name = "Independent Navy"
+	name_short = "ICCGN"
+	email_domain = "gilgamesh.navy.mil"
 
 	rank_types = list(
 		/datum/mil_rank/terran/e1,
@@ -714,7 +714,7 @@
 	sort_order = 9
 
 /datum/mil_rank/terran/e9_alt1
-	name = "Michman of the Terran Navy"
+	name = "Michman of the Independent Navy"
 	name_short = "MchNvy"
 	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/enlisted/e9_alt1)
 	sort_order = 9
@@ -774,7 +774,7 @@
 	sort_order = 19
 
 /datum/mil_rank/terran/o10
-	name = "Admiral of the Terran Navy"
+	name = "Admiral of the Independent Navy"
 	name_short = "AdmNvy"
 	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag/o10)
 	sort_order = 20

@@ -210,13 +210,13 @@
 
 /obj/item/clothing/mask/rubber/admiral
 	name = "Admiral Diwali mask"
-	desc = "Admiral that led the offensive against the Terran Colonial Navy in the Gaia conflict. For bridge officers who wish they'd achieve a fraction of that."
+	desc = "Admiral that led the infamous last stand at Helios against the Independent Navy in the Gaia conflict. For bridge officers who wish they'd achieve a fraction of that."
 	icon_state = "admiral"
 	visible_name = "Admiral Diwali"
 
 /obj/item/clothing/mask/rubber/turner
 	name = "Charles Turner mask"
-	desc = "Premier of the Terran Colonial Confederation. Probably shouldn't wear this in front of your veteran uncle."
+	desc = "Premier of the Gilgamesh Colonial Confederation. Probably shouldn't wear this in front of your veteran uncle."
 	icon_state = "turner"
 	visible_name = "Charles Turner"
 

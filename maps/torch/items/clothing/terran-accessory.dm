@@ -39,8 +39,8 @@ ranks - TCC
 	desc = "Insignia denoting the rank of Michman."
 
 /obj/item/clothing/accessory/terran/rank/navy/enlisted/e9_alt1
-	name = "ranks (E-9 michman of the terran navy)"
-	desc = "Insignia denoting the rank of Michman of the Terran Navy."
+	name = "ranks (E-9 michman of the independent navy)"
+	desc = "Insignia denoting the rank of Michman of the Independent Navy."
 
 /obj/item/clothing/accessory/terran/rank/navy/officer
 	name = "ranks (O-1 ensign)"
@@ -82,5 +82,5 @@ ranks - TCC
 	desc = "Insignia denoting the rank of Admiral."
 
 /obj/item/clothing/accessory/terran/rank/navy/flag/o10
-	name = "ranks (O-10 admiral of the terran navy)"
-	desc = "Insignia denoting the rank of Admiral of the Terran Navy."
+	name = "ranks (O-10 admiral of the independent navy)"
+	desc = "Insignia denoting the rank of Admiral of the Independent Navy."
