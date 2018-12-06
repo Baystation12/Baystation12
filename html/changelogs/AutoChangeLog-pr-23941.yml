@@ -1,4 +1,0 @@
-author: "RyanSmake"
-delete-after: True
-changes: 
-  - bugfix: "Stopped AIs and ghosts from activating artifacts."
