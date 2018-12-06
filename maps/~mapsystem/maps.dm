@@ -113,9 +113,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_EARTH,
-			HOME_SYSTEM_LUNA,
 			HOME_SYSTEM_MARS,
+			HOME_SYSTEM_LUNA,
+			HOME_SYSTEM_EARTH,
 			HOME_SYSTEM_VENUS,
 			HOME_SYSTEM_CERES,
 			HOME_SYSTEM_PLUTO,
@@ -133,7 +133,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		),
 		TAG_FACTION = list(
 			FACTION_SOL_CENTRAL,
-			FACTION_TERRAN_CONFED,
+			FACTION_INDIE_CONFED,
 			FACTION_CORPORATE,
 			FACTION_NANOTRASEN,
 			FACTION_FREETRADE,
@@ -146,7 +146,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(
-			CULTURE_HUMAN,
 			CULTURE_HUMAN_MARTIAN,
 			CULTURE_HUMAN_MARSTUN,
 			CULTURE_HUMAN_LUNAPOOR,

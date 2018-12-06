@@ -168,7 +168,7 @@
 
 /datum/language/confederate
 	name = LANGUAGE_INDEPENDENT
-	desc = "The official language of the Terran Colonial Confederation, evolved from a pidgin of Eastern European languages and English."
+	desc = "The official language of the Independent Colonial Confederation of Gilgamesh, evolved from a pidgin of Eastern European languages and English."
 	speech_verb = "speaks"
 	colour = "terran"
 	key = "r"
