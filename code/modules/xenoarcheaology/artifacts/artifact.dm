@@ -163,7 +163,10 @@
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_NITRO && !secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
-/obj/machinery/artifact/attack_hand(var/mob/user as mob)
+/obj/machinery/artifact/attack_hand(mob/living/user)
+	if(!istype(user))
+		return
+
 	if (get_dist(user, src) > 1)
 		to_chat(user, "<span class='warning'>You can't reach \the [src] from here.</span>")
 		return
