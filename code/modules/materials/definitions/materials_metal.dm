@@ -31,7 +31,7 @@
 	chem_products = list(
 				/datum/reagent/gold = 20
 				)
-	construction_difficulty = 1
+	construction_difficulty = 2
 	ore_smelts_to = MATERIAL_GOLD
 	ore_result_amount = 5
 	ore_name = "native gold"
@@ -50,7 +50,7 @@
 	name = MATERIAL_BRONZE
 	lore_text = "An alloy of copper and tin."
 	icon_colour = "#edd12f"
-	construction_difficulty = 1
+	construction_difficulty = 2
 	ore_smelts_to = null
 	ore_compresses_to = null
 	sale_price = null
@@ -67,7 +67,7 @@
 		/datum/reagent/copper = 12,
 		/datum/reagent/silver = 8
 		)
-	construction_difficulty = 1
+	construction_difficulty = 2
 	ore_smelts_to = MATERIAL_COPPER
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -89,7 +89,7 @@
 	chem_products = list(
 				/datum/reagent/silver = 20
 				)
-	construction_difficulty = 1
+	construction_difficulty = 2
 	ore_smelts_to = MATERIAL_SILVER
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -116,6 +116,7 @@
 	alloy_product = TRUE
 	sale_price = 1
 	ore_smelts_to = MATERIAL_STEEL
+	construction_difficulty = 1
 
 /material/steel/holographic
 	name = "holo" + MATERIAL_STEEL
@@ -144,7 +145,7 @@
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	hitsound = 'sound/weapons/smash.ogg'
-	construction_difficulty = 1
+	construction_difficulty = 2
 	alloy_materials = list(MATERIAL_STEEL = 2500, MATERIAL_PLATINUM = 1250)
 	alloy_product = TRUE
 	sale_price = 2
@@ -163,7 +164,7 @@
 	door_icon_base = "metal"
 	icon_colour = "#d1e6e3"
 	icon_reinf = "reinf_metal"
-	construction_difficulty = 1
+	construction_difficulty = 3
 	alloy_materials = null
 	alloy_product = FALSE
 
@@ -180,7 +181,7 @@
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	alloy_materials = list(MATERIAL_PLASTEEL = 7500, MATERIAL_OSMIUM = 3750)
-	construction_difficulty = 2
+	construction_difficulty = 3
 	alloy_product = TRUE
 	sale_price = 3
 
@@ -192,7 +193,7 @@
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	construction_difficulty = 1
+	construction_difficulty = 3
 	sale_price = 3
 	ore_smelts_to = MATERIAL_OSMIUM
 
@@ -248,7 +249,7 @@
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	construction_difficulty = 1
+	construction_difficulty = 2
 	ore_smelts_to = MATERIAL_PLATINUM
 	ore_compresses_to = MATERIAL_OSMIUM
 	ore_result_amount = 5
@@ -267,6 +268,7 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
+	construction_difficulty = 1
 	chem_products = list(
 				/datum/reagent/iron = 20
 				)
@@ -283,7 +285,7 @@
 	explosion_resistance = 200 // Hull plating.
 	hardness = 500
 	weight = 500
-	construction_difficulty = 1
+	construction_difficulty = 2
 	hidden_from_codex = TRUE
 
 // Likewise.
@@ -305,7 +307,7 @@
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
 	stack_type = /obj/item/stack/material/aliumium
-	construction_difficulty = 2
+	construction_difficulty = 3
 	hidden_from_codex = TRUE
 
 /material/aliumium/New()

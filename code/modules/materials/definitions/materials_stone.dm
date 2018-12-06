@@ -13,7 +13,7 @@
 	burn_armor = 50		// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
-	construction_difficulty = 2
+	construction_difficulty = 3
 	ore_compresses_to = MATERIAL_DIAMOND
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -61,4 +61,5 @@
 	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
+	construction_difficulty = 2
 	chem_products = null
