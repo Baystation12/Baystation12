@@ -1,13 +1,13 @@
 /obj/effect/overmap/sector/exoplanet/garbage
 	name = "settled exoplanet"
-	desc = "An arid exoplanet with artificial structures detected on the surface."
+	desc = "An arid exoplanet with unnatural formations covering the surface. Hotspots of radiation detected."
 	color = "#a5a18b"
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_map()
 	if(prob(50))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/garbage(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
+		var/datum/random_map/noise/exoplanet/garbage/M = new /datum/random_map/noise/exoplanet/garbage(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
 		get_biostuff(M)
 		new /datum/random_map/noise/ore/poor(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
 
@@ -44,6 +44,12 @@
 	flora_diversity = 2
 	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator)
 	fauna_prob = 1
+	var/fallout = 0
+
+/datum/random_map/noise/exoplanet/garbage/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+	if(prob(60))
+		fallout = rand(20, 100)
+	..()
 
 /datum/random_map/noise/exoplanet/garbage/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -53,10 +59,21 @@
 	else
 		if(prob(2))
 			new/obj/structure/rubble/war(T)
+			var/datum/radiation_source/S = new(T, 2*fallout, FALSE)
+			S.range = 4
+			SSradiation.add_source(S)
 		if(prob(0.02))
 			var/datum/artifact_find/A = new()
 			new A.artifact_find_type(T)
 			qdel(A)
+
+/datum/random_map/noise/exoplanet/garbage/apply_to_map()
+	..()
+	var/turf/T = locate(origin_x,origin_y,origin_z)
+	if(T)
+		var/datum/radiation_source/S = new(T, fallout, FALSE)
+		S.range = limit_x
+		SSradiation.add_source(S)
 
 /datum/random_map/noise/exoplanet/garbage/get_appropriate_path(var/value)
 	var/v = noise2value(value)

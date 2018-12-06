@@ -314,3 +314,12 @@
 
 /obj/item/stack/material/glass/phoronrglass/ten
 	amount = 10
+	
+/obj/item/stack/material/aliumium
+	name = "aliumium chunks"
+	icon_state = "sheet-torn"
+	default_type = "aliumium"
+	apply_colour = TRUE
+
+/obj/item/stack/material/aliumium/ten
+	amount = 10

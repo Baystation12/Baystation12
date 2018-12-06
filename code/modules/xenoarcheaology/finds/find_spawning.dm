@@ -19,12 +19,16 @@
 /obj/item/weapon/archaeological_find/Initialize()
 	. = ..()
 	var/obj/item/I = spawn_item()
-
 	var/source_material = ""
 	var/material_descriptor = ""
 	if(prob(40))
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
-	source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+	if(istype(I, /obj/item/weapon/material))
+		var/obj/item/weapon/material/M = I
+		M.set_material("aliumium")
+		source_material = "alien alloy"
+	else
+		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
 
 	var/decorations = ""
 	if(apply_material_decorations)
@@ -277,16 +281,9 @@
 
 /obj/item/weapon/archaeological_find/material/spawn_item()
 	var/list/possible_spawns = list()
-	possible_spawns += /obj/item/stack/material/steel
-	possible_spawns += /obj/item/stack/material/plasteel
-	possible_spawns += /obj/item/stack/material/glass
-	possible_spawns += /obj/item/stack/material/glass/reinforced
+	possible_spawns += /obj/item/stack/material/aliumium
 	possible_spawns += /obj/item/stack/material/phoron
-	possible_spawns += /obj/item/stack/material/gold
-	possible_spawns += /obj/item/stack/material/silver
 	possible_spawns += /obj/item/stack/material/uranium
-	possible_spawns += /obj/item/stack/material/sandstone
-	possible_spawns += /obj/item/stack/material/silver
 	var/new_type = pick(possible_spawns)
 	var/obj/item/stack/material/new_item = new new_type(loc)
 	new_item.amount = rand(5,45)

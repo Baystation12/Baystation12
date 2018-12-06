@@ -120,7 +120,7 @@
 	list/blend_objects = newlist()
 
 /turf/simulated/wall/alium/New(var/newloc)
-	..(newloc,"alien alloy")
+	..(newloc,"aliumium")
 
 /turf/simulated/wall/alium/ex_act(severity)
 	if(prob(explosion_resistance))
