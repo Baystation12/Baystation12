@@ -118,7 +118,7 @@
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null
-	construction_difficulty = 1
+	construction_difficulty = 2
 
 /material/glass/phoron
 	name = MATERIAL_PHORON_GLASS
@@ -152,4 +152,5 @@
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	alloy_materials = list() //todo
 	rod_product = null
+	construction_difficulty = 2
 	integrity = 100

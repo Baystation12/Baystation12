@@ -2,6 +2,7 @@
 	res_amount = 4
 	max_res_amount = 20
 	time = 5
+	difficulty = 1
 
 /datum/stack_recipe/tile/metal/floor
 	title = "regular floor tile"
@@ -57,3 +58,4 @@
 	res_amount = 2
 	max_res_amount = 60
 	time = 5
+	difficulty = 1
