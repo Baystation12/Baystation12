@@ -67,8 +67,8 @@
 				map[current_cell] = 1
 
 /datum/random_map/noise/ore/filthy_rich
-	deep_val = 0.9
-	rare_val = 0.7
+	deep_val = 0.6
+	rare_val = 0.4
 
 /area/exoplanet/volcanic
 	forced_ambience = list('sound/ambience/magma.ogg')

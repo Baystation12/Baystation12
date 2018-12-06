@@ -43,7 +43,9 @@
 
 /datum/random_map/noise/ore/poor
 	deep_val = 0.8
-	rare_val = 0.9
+	rare_val = 0.7
+	min_rare_ratio = 0.02
+	min_rare_ratio = 0.01
 
 /turf/simulated/floor/exoplanet/ice
 	name = "ice"
