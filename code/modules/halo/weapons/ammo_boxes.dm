@@ -98,3 +98,9 @@
 
 /obj/item/ammo_box/shotgun/flash/update_icon()
 	desc = "[initial(desc)] It has [contents.len] practice shells left."
+
+/obj/item/ammo_box/heavysniper
+	name = "Tracerless Sniper Rounds"
+	desc = "A box of sniper rounds to assist in holding rounds for bolt-action sniper rifles"
+	capacity = 14
+	ammo_spawnwith = list(/obj/item/ammo_casing/a145_ap/tracerless)

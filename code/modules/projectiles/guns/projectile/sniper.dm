@@ -12,8 +12,8 @@
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
-	ammo_type = /obj/item/ammo_casing/a145
-	one_hand_penalty = 6
+	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless
+	one_hand_penalty = -1
 	accuracy = -2
 	scoped_accuracy = 5 //increased accuracy over the LWAP because only one shot
 	var/bolt_open = 0
