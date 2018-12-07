@@ -248,7 +248,7 @@
 
 /datum/gear/tactical/large_pouches/misc
 	display_name = "miscellaneous large armor pouches selection"
-	path = /obj/item/clothing/accessory/storage/pouches
+	path = /obj/item/clothing/accessory/storage/pouches/large
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/tactical/large_pouches/misc/New()
