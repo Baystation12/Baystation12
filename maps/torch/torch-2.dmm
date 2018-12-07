@@ -3356,10 +3356,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "hx" = (
 /obj/structure/fitness/weightlifter,
@@ -3814,14 +3812,6 @@
 /obj/effect/floor_decal/corner/green,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
-"iq" = (
-/obj/machinery/alarm/cold{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22
-	},
-/turf/simulated/wall/prepainted,
-/area/crew_quarters/mess)
 "ir" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -7945,10 +7935,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 10
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "rN" = (
 /obj/machinery/atmospherics/binary/pump/on{
@@ -12073,13 +12064,10 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
+/obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "Ar" = (
 /obj/machinery/door/firedoor/border_only,
@@ -12183,14 +12171,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "AC" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/obj/machinery/vending/cigarette,
-/turf/simulated/floor/tiled/white,
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 1
+	},
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "AD" = (
 /obj/structure/table/standard,
@@ -14555,6 +14543,24 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"He" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 6
+	},
+/turf/simulated/floor/carpet/green,
+/area/crew_quarters/mess)
 "Hf" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/port)
@@ -18613,10 +18619,8 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/structure/flora/tree/pine/xmas,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "St" = (
 /obj/structure/railing/mapped,
@@ -18753,7 +18757,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
 "SO" = (
-/obj/structure/railing/mapped,
+/obj/machinery/vending/cigarette,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "SP" = (
@@ -18848,11 +18852,11 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 9
 	},
-/obj/machinery/vending/games,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "Te" = (
 /obj/structure/table/steel,
@@ -19797,10 +19801,10 @@
 	name = "Hydroponics";
 	sortType = "Hydroponics"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "VU" = (
 /turf/simulated/floor/tiled,
@@ -21001,11 +21005,11 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/sleep/bunk)
 "ZK" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 5
 	},
-/obj/item/modular_computer/console/preset/civilian,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "ZN" = (
 /turf/simulated/wall/r_wall/hull,
@@ -39105,7 +39109,7 @@ Pn
 bA
 ZK
 Aq
-rM
+He
 rL
 AA
 dF
@@ -39306,7 +39310,7 @@ wn
 Qn
 bA
 fB
-iq
+fB
 gA
 fB
 jf
