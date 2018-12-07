@@ -49,7 +49,7 @@
 		top_atom.light_sources += src
 
 	source_turf = top_atom
-	pixel_turf = get_turf_pixel(top_atom) || source_turf
+	pixel_turf = (top_atom.pixel_x || top_atom.pixel_y) ? get_turf_pixel(top_atom) : source_turf
 
 	light_max_bright = source_atom.light_max_bright
 	light_inner_range = source_atom.light_inner_range
