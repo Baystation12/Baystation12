@@ -1,7 +1,7 @@
 /obj/item/projectile/beam/spartan
 	name = "spartan laser"
 	icon_state = "heavylaser"
-	damage = 100
+	damage = 200
 	armor_penetration = 100
 
 	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
