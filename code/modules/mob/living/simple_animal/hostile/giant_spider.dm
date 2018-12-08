@@ -89,6 +89,10 @@
 	var/infest_chance = 8
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
+	//things we can't encase in a cocoon
+	var/list/cocoon_blacklist = list(/mob/living/simple_animal/hostile/giant_spider,
+									 /obj/structure/closet)
+
 //hunters - the most damage, fast, average health and the only caste tenacious enough to break out of nets
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
@@ -310,6 +314,8 @@ Nurse caste procs
 		if(!busy && prob(30))
 			//first, check for potential food nearby to cocoon
 			for(var/mob/living/C in can_see)
+				if(is_type_in_list(C, cocoon_blacklist))
+					continue
 				if(C.stat)
 					cocoon_target = C
 					busy = MOVING_TO_TARGET
@@ -351,6 +357,9 @@ Nurse caste procs
 
 						if(O.anchored)
 							continue
+						
+						if(is_type_in_list(O, cocoon_blacklist))
+							continue
 
 						if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
 							cocoon_target = O
@@ -374,9 +383,7 @@ Nurse caste procs
 							C.pixel_x = cocoon_target.pixel_x
 							C.pixel_y = cocoon_target.pixel_y
 							for(var/mob/living/M in C.loc)
-								if(istype(M, /mob/living/simple_animal/hostile/giant_spider))
-									continue
-									large_cocoon = 1
+								large_cocoon = 1
 								fed++
 								max_eggs++
 								src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
