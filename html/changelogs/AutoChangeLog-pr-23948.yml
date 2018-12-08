@@ -1,0 +1,5 @@
+author: "Eckles"
+delete-after: True
+changes: 
+  - tweak: "Changed Terran to Gilgamesh/Independent.  Faction rename."
+  - tweak: "Enforced Martian and Martian Surfacer as default human culture/system instead of generic 'humankind'."
