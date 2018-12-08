@@ -762,3 +762,4 @@
 	strength = 4
 	heating_products = list(/datum/reagent/acetone, /datum/reagent/carbon, /datum/reagent/ethanol)
 	heating_point = 145 CELCIUS
+	heating_message = "separates."
