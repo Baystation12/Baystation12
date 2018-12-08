@@ -254,7 +254,7 @@
 			if(nearby.len)
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
-				if(prob(25))
+				if(prob(10))
 					src.visible_message("<span class='notice'>\The [src] skitters[pick(" away"," around","")].</span>")
 					// Reduces the risk of spiderlings hanging out at the extreme ranges of the shift range.
 					var/min_x = pixel_x <= -shift_range ? 0 : -2
