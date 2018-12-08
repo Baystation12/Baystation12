@@ -21,7 +21,7 @@
 	recharge_time = 20
 	max_shots = 4
 
-	arm_time = 50
+	arm_time = 30 //Deciseconds
 	charge_meter = 0
 	force = 10
 	screen_shake = 1

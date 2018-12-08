@@ -245,7 +245,10 @@
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 
 	if(is_charged_weapon==1)
-		do_after(user,arm_time,src) && playsound(src.loc, charge_sound, 100, 1)
+		playsound(src.loc, charge_sound, 100, 1)
+
+		if (!do_after(user,arm_time,src))
+			return
 		Fire(A,user,params)
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
