@@ -71,12 +71,13 @@
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(H.nutrition > grow_threshold && E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
-				E.removed()			//...because no one wants their head to explode to make way for a new one.
-				qdel(E)
-				E= null
-			else
-				low_nut_warning(E.name)
+			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
+				if (H.nutrition > grow_threshold)
+					E.removed()			//...because no one wants their head to explode to make way for a new one.
+					qdel(E)
+					E= null
+				else
+					low_nut_warning(E.name)
 			if(!E)
 				var/list/organ_data = H.species.has_limbs[limb_type]
 				var/limb_path = organ_data["path"]
@@ -85,7 +86,7 @@
 				organ_data["descriptor"] = O.name
 				H.update_body()
 				return
-			else
+			else if (H.nutrition > grow_threshold) //We don't subtract any nut here, but let's still only heal wounds when we have nut.
 				for(var/datum/wound/W in E.wounds)
 					if(W.wound_damage() == 0 && prob(50))
 						E.wounds -= W
