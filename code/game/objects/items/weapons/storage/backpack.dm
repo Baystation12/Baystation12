@@ -22,20 +22,43 @@
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
+	var/worn_access = FALSE
+
 /obj/item/weapon/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
 		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 	..()
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
-	return ..()
+	if (!worn_check(user))
+		return
+	if (use_sound)
+		playsound(loc, use_sound, 50, 1, -5)
+	..(W, user)
+
+/obj/item/weapon/storage/backpack/attack_hand(mob/user as mob)
+	if (!worn_check(user))
+		return
+	..(user)
 
 /obj/item/weapon/storage/backpack/equipped(var/mob/user, var/slot)
-	if (slot == slot_back && src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+	if (!worn_check(user, show_warning = FALSE))
+		close(user)
+	if (slot == slot_back && use_sound)
+		playsound(loc, use_sound, 50, 1, -5)
 	..(user, slot)
+
+/obj/item/weapon/storage/backpack/open(mob/user)
+	if (!worn_check(user))
+		return
+	..(user)
+
+/obj/item/weapon/storage/backpack/proc/worn_check(var/mob/L, var/show_warning = TRUE)
+	if(!worn_access && L.get_equipped_item(slot_back) == src)
+		if(show_warning)
+			to_chat(L, "<span class='warning'>You need take off \the [src] before you can use it!</span>")
+		return FALSE
+	return TRUE
 
 /*
  * Backpack Types
@@ -48,10 +71,6 @@
 	icon_state = "holdingpack"
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
-
-/obj/item/weapon/storage/backpack/holding/New()
-	..()
-	return
 
 /obj/item/weapon/storage/backpack/holding/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/storage/backpack/holding) || istype(W, /obj/item/weapon/storage/bag/trash/bluespace))
@@ -227,6 +246,7 @@
 	name = "satchel"
 	desc = "A trendy looking satchel."
 	icon_state = "satchel-norm"
+	worn_access = TRUE
 
 /obj/item/weapon/storage/backpack/satchel/grey
 	name = "grey satchel"
