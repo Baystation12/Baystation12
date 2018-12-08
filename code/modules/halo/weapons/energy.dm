@@ -1,4 +1,4 @@
-/*/obj/item/weapon/gun/energy/railrifle
+/obj/item/weapon/gun/energy/railrifle
 	name = " Asymmetric Recoilless Carbine-920"
 	desc = "An Hesphaistos Industries G40E carbine, designed to kill with concentrated energy blasts."
 	icon_state = "phantom"
@@ -27,30 +27,3 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/effect/projectile/laser_blue/impact
-*/
-
-/obj/item/weapon/gun/energy/spartanlaser
-	name = "M6 Grindell/Galilean Nonlinear Rifle"
-	desc = "Also known as the spartan laser, is the most powerful handheld weapon produced by the UNSC. It can disable most vehicles and infantry in a single hit."
-	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "spartanlaser"
-	item_state = "spartanlaser"
-	slot_flags = SLOT_BACK
-	w_class = 3
-	accuracy = 100
-	max_shots = 4
-	charge_meter = 0
-	force = 10
-	screen_shake = 1
-	self_recharge = 1
-	recharge_time = 10
-	origin_tech = list(TECH_COMBAT = 10, TECH_POWER = 20)
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	projectile_type = /obj/item/projectile/beam/spartan
-
-/obj/item/weapon/gun/energy/spartanlaser/verb/scope()
-	set category = "Weapon"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(usr, 1.25)
