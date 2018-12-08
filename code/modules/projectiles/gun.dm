@@ -88,7 +88,7 @@
 	var/list/attachments_on_spawn = list()
 
 	var/is_charged_weapon = 0 //Does the weapon require charging? Defaults to 0 unless it's from /charged weapon sets
-	var/arm_time = 2.5 //Default charge time for weapons that charge
+	var/arm_time = 25 //Default charge time for weapons that charge
 	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Shot_Sound_Effect.ogg'
 /obj/item/weapon/gun/New()
 	..()
@@ -231,7 +231,6 @@
 		O.emp_act(severity)
 
 /obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
-
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
@@ -246,6 +245,7 @@
 
 	if(is_charged_weapon==1)
 		playsound(src.loc, charge_sound, 100, 1)
+		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
 
 		if (!do_after(user,arm_time,src))
 			return
