@@ -1,5 +1,0 @@
-author: "Roland410"
-delete-after: True
-changes: 
-  - tweak: "Construction skill is required for basically any recipes now, and material difficulty (what skill you need to be able to craft from it) has been upped for most of them."
-  - tweak: "Engineering contractors receive trained construction now to be able to handle plasteel."
