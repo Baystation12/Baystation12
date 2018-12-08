@@ -779,7 +779,7 @@ TERRAN OUTFITS
 */
 
 /decl/hierarchy/outfit/job/terran/crew
-	name = OUTFIT_JOB_NAME("Terran Navy - Utility")
+	name = OUTFIT_JOB_NAME("Independent Navy - Utility")
 	hierarchy_type = /decl/hierarchy/outfit/job/terran/crew
 	uniform = /obj/item/clothing/under/terran/navy/utility
 	l_ear = /obj/item/device/radio/headset
@@ -788,7 +788,7 @@ TERRAN OUTFITS
 	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/terran/crew/service
-	name = OUTFIT_JOB_NAME("Terran Navy - Service")
+	name = OUTFIT_JOB_NAME("Independent Navy - Service")
 	head = /obj/item/clothing/head/terran/navy/service
 	uniform = /obj/item/clothing/under/terran/navy/service
 	suit = /obj/item/clothing/suit/storage/terran/service/navy
@@ -796,13 +796,13 @@ TERRAN OUTFITS
 	gloves = /obj/item/clothing/gloves/terran
 
 /decl/hierarchy/outfit/job/terran/crew/service/command
-	name = OUTFIT_JOB_NAME("Terran Navy - Service Command")
+	name = OUTFIT_JOB_NAME("Independent Navy - Service Command")
 	head = /obj/item/clothing/head/terran/navy/service/command
 	uniform = /obj/item/clothing/under/terran/navy/service/command
 	suit = /obj/item/clothing/suit/storage/terran/service/navy/command
 
 /decl/hierarchy/outfit/job/terran/crew/dress
-	name = OUTFIT_JOB_NAME("Terran Navy - Dress")
+	name = OUTFIT_JOB_NAME("Independent Navy - Dress")
 	head = /obj/item/clothing/head/terran/navy/service
 	uniform = /obj/item/clothing/under/terran/navy/service
 	suit = /obj/item/clothing/suit/dress/terran/navy
@@ -810,12 +810,12 @@ TERRAN OUTFITS
 	gloves = /obj/item/clothing/gloves/terran
 
 /decl/hierarchy/outfit/job/terran/crew/dress/officer
-	name = OUTFIT_JOB_NAME("Terran Navy - Officer")
+	name = OUTFIT_JOB_NAME("Independent Navy - Officer")
 	uniform = /obj/item/clothing/under/terran/navy/service
 	suit = /obj/item/clothing/suit/dress/terran/navy/officer
 
 /decl/hierarchy/outfit/job/terran/crew/dress/command
-	name = OUTFIT_JOB_NAME("Terran Navy - Dress Command")
+	name = OUTFIT_JOB_NAME("Independent Navy - Dress Command")
 	head = /obj/item/clothing/head/terran/navy/service/command
 	uniform = /obj/item/clothing/under/terran/navy/service/command
 	suit = /obj/item/clothing/suit/dress/terran/navy/command

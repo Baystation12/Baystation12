@@ -23,7 +23,7 @@
 #define EDUCATION_MEDSCHOOL    "Medical Degree"
 
 #define FACTION_SOL_CENTRAL    "Sol Central Government"
-#define FACTION_TERRAN_CONFED  "Terran Colonial Confederation"
+#define FACTION_INDIE_CONFED  "Gilgamesh Colonial Confederation"
 #define FACTION_NANOTRASEN     "NanoTrasen"
 #define FACTION_FREETRADE      "Free Trade Union"
 #define FACTION_HEPHAESTUS     "Hephaestus Industries"
