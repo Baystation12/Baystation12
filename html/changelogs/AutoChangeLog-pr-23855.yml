@@ -1,8 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Some exoplanet plants now produce exotic chemicals, with effects that are randomly generated each round."
-  - rscadd: "Inspecting these chemicals in the mass spec with high chemistry and/or science skill will reveal additional information about them."
-  - rscadd: "By heating them to almost, but not quite, their boiling points, the effects of these chemicals strengthen (if with phoron catalysis, then weaken). By also adding certain additional ingredients (depending on the effect), the effect will instead be left unchanged."
-  - rscadd: "Cooling works similarly, but now the default behavior is that the effect is left unchanged: you need to add certain additional ingredients to make the effect strengthen (or weaken, with phoron)."
-  - rscadd: "These chemicals may have powerful combinations of medical (or poisonous) effects that can be used, or (if purified sufficiently) can be sold for large profits."
