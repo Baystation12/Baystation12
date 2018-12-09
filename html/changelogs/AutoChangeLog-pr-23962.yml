@@ -1,0 +1,5 @@
+author: "Blue Bit"
+delete-after: True
+changes: 
+  - rscadd: "Liquids can now be collected from exoplanet puddles."
+  - rscadd: "Added tar. It's a bit toxic, but it can be heated and broken down."
