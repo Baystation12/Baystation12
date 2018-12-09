@@ -72,7 +72,7 @@
 // XGM gas flags.
 #define XGM_GAS_FUEL        1
 #define XGM_GAS_OXIDIZER    2
-#define XGM_GAS_CONTAMINANT 4
+#define XGM_GAS_HAZARDOUS 4
 #define XGM_GAS_FUSION_FUEL 8
 
 #define TANK_LEAK_PRESSURE     (30 * ONE_ATMOSPHERE) // Tank starts leaking.

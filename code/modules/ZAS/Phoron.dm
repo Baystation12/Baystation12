@@ -72,27 +72,27 @@ obj/var/contaminated = 0
 //	if(istype(back,/obj/item/weapon/storage/backpack))
 //		back.contaminate()
 
-/mob/proc/pl_effects()
+/mob/proc/hazard_effects()
 
-/mob/living/carbon/human/pl_effects()
-	//Handles all the bad things phoron can do.
+/mob/living/carbon/human/hazard_effects(var/contaminates, var/burns_skin, var/burns_eyes, var/corrupts)
+	//Handles all the bad things hazardous gasses can do.
 
 	//Contamination
-	if(vsc.plc.CLOTH_CONTAMINATION) contaminate()
+	if(vsc.plc.CLOTH_CONTAMINATION && contaminates) contaminate()
 
 	//Anything else requires them to not be dead.
 	if(stat >= 2)
 		return
 
 	//Burn skin if exposed.
-	if(vsc.plc.SKIN_BURNS)
+	if(vsc.plc.SKIN_BURNS && burns_skin)
 		if(!pl_head_protected() || !pl_suit_protected())
 			burn_skin(0.75)
 			if(prob(20)) to_chat(src, "<span class='danger'>Your skin burns!</span>")
 			updatehealth()
 
 	//Burn eyes if exposed.
-	if(vsc.plc.EYE_BURNS)
+	if(vsc.plc.EYE_BURNS && burns_eyes)
 		if(!head)
 			if(!wear_mask)
 				burn_eyes()
@@ -108,7 +108,7 @@ obj/var/contaminated = 0
 						burn_eyes()
 
 	//Genetic Corruption
-	if(vsc.plc.GENETIC_CORRUPTION)
+	if(vsc.plc.GENETIC_CORRUPTION && corrupts)
 		if(rand(1,10000) < vsc.plc.GENETIC_CORRUPTION)
 			randmutb(src)
 			to_chat(src, "<span class='danger'>High levels of toxins cause you to spontaneously mutate!</span>")
@@ -165,6 +165,6 @@ turf/Entered(obj/item/I)
 		if(!env)
 			return
 		for(var/g in env.gas)
-			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && env.gas[g] > gas_data.overlay_limit[g] + 1)
+			if(gas_data.flags[g] & XGM_GAS_HAZARDOUS && env.gas[g] > gas_data.overlay_limit[g] + 1)
 				I.contaminate()
 				break

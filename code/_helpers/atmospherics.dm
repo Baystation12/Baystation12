@@ -38,13 +38,13 @@
 				if(advanced)
 					var/list/traits = list()
 					if(gas_data.flags[mix] & XGM_GAS_FUEL)
-						traits += "can be used as combustion fuel" 
+						traits += "can be used as combustion fuel"
 					if(gas_data.flags[mix] & XGM_GAS_OXIDIZER)
-						traits += "can be used as oxidizer" 
-					if(gas_data.flags[mix] & XGM_GAS_CONTAMINANT)
-						traits += "contaminates clothing with toxic residue" 
+						traits += "can be used as oxidizer"
+					if(gas_data.flags[mix] & XGM_GAS_HAZARDOUS)
+						traits += "is hazardous to living beings"
 					if(gas_data.flags[mix] & XGM_GAS_FUSION_FUEL)
-						traits += "can be used to fuel fusion reaction" 
+						traits += "can be used to fuel fusion reaction"
 					. += "\t<span class='notice'>Specific heat: [gas_data.specific_heat[mix]] J/(mol*K), Molar mass: [gas_data.molar_mass[mix]] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]</span>"
 			. += "<span class='notice'>Temperature: [round(mixture.temperature-T0C)]&deg;C / [round(mixture.temperature)]K</span>"
 			return

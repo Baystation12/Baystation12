@@ -146,7 +146,7 @@
 	if(S.consume_gasses)
 		S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
 	for(var/g in atmosphere.gas)
-		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
+		if(gas_data.flags[g] & XGM_GAS_HAZARDOUS)
 			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)

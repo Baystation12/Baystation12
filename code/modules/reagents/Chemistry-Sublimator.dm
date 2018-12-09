@@ -20,6 +20,10 @@
 	gas_data.flags[gas_id] =            reagent.gas_flags
 	gas_data.burn_product[gas_id] =     reagent.gas_burn_product
 	gas_data.breathed_product[gas_id] = reagent.type
+	gas_data.contaminates = 			reagent.gas_contaminates
+	gas_data.burns_skin = 				reagent.gas_burns_skin
+	gas_data.burns_eyes = 				reagent.gas_burns_eyes
+	gas_data.corrupts_genes = 			reagent.gas_corrupts_genes
 
 	if(reagent.gas_overlay)
 		var/image/I = image('icons/effects/tile_effects.dmi', reagent.gas_overlay, FLY_LAYER)

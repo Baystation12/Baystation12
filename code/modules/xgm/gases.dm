@@ -40,7 +40,11 @@
 
 	tile_overlay = "phoron"
 	overlay_limit = 0.7
-	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
+	flags = XGM_GAS_FUEL | XGM_GAS_HAZARDOUS | XGM_GAS_FUSION_FUEL
+	contaminates = TRUE
+	burns_skin = TRUE
+	burns_eyes = TRUE
+	corrupts_genes = TRUE
 	breathed_product = /datum/reagent/toxin/phoron
 
 /decl/xgm_gas/sleeping_agent
@@ -74,7 +78,11 @@
 	else if(prob(40)) //it's prooobably a bad idea for gas being oxidizer to itself.
 		flags |= XGM_GAS_OXIDIZER
 	if(prob(40))
-		flags |= XGM_GAS_CONTAMINANT
+		flags |= XGM_GAS_HAZARDOUS
+		contaminates = pick(TRUE,FALSE)
+		burns_skin = pick(TRUE,FALSE)
+		burns_eyes = pick(TRUE,FALSE)
+		corrupts_genes = pick(TRUE,FALSE)
 	if(prob(40))
 		flags |= XGM_GAS_FUSION_FUEL
 
@@ -151,7 +159,10 @@
 	overlay_limit = 0.5
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
-	flags = XGM_GAS_CONTAMINANT
+	flags = XGM_GAS_HAZARDOUS
+	contaminates = TRUE
+	burns_skin = TRUE
+	burns_eyes = TRUE
 	breathed_product = /datum/reagent/toxin/chlorine
 
 /decl/xgm_gas/vapor

@@ -915,6 +915,14 @@
 /datum/chemical_reaction/aluminum_paint/send_data()
 	return "#f0f8ff"
 
+/* Hazards */
+
+/datum/chemical_reaction/yperite
+	name = "Yperite"
+	result = /datum/reagent/toxin/yperite
+	required_reagents = list(/datum/reagent/carbon = 4, /datum/reagent/hydrazine = 8, /datum/reagent/sulfur = 1, /datum/reagent/toxin/chlorine = 2)
+	result_amount = 15
+
 /* Slime cores */
 
 /datum/chemical_reaction/slime

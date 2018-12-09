@@ -20955,6 +20955,10 @@
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/hardstorage/aux)
+"hWU" = (
+/obj/machinery/portable_atmospherics/canister,
+/turf/simulated/floor/tiled/white,
+/area/rnd/misc_lab)
 "hYb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -28105,7 +28109,10 @@
 /area/maintenance/firstdeck/foreport)
 "qDb" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/vending/assist,
+/obj/machinery/portable_atmospherics/reagent_sublimator,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
 "qDJ" = (
@@ -28426,15 +28433,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/foreport)
 "qWb" = (
-/obj/structure/table/standard,
-/obj/item/clothing/mask/gas,
-/obj/item/clothing/mask/gas,
-/obj/item/clothing/mask/gas,
-/obj/item/clothing/mask/gas,
 /obj/effect/floor_decal/corner/b_green/half,
 /obj/machinery/light/spot{
 	dir = 4
 	},
+/obj/machinery/vending/assist,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "qWF" = (
@@ -28679,13 +28682,18 @@
 	},
 /obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/corner/b_green/mono,
+/obj/structure/table/standard,
+/obj/item/weapon/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "rpb" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/toolbox/mechanical,
 /obj/effect/floor_decal/corner/b_green/mono,
 /obj/effect/floor_decal/corner/b_green/mono,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
 "rpn" = (
@@ -57269,7 +57277,7 @@ pjb
 pEb
 iqb
 jAb
-aLo
+hWU
 ycp
 rnb
 aHQ
@@ -57471,7 +57479,7 @@ pbb
 pFb
 pbb
 khb
-aLo
+qQb
 ycp
 rob
 aHQ

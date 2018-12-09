@@ -23,6 +23,11 @@
 	var/list/condensation_points = list()
 	// Reagent path resulting from condesation.
 	var/list/condensation_products = list()
+	// Hazardous effects, if any. Only applies if XGM_GAS_HAZARDOUS is true.
+	var/list/contaminates = list()
+	var/list/burns_skin = list()
+	var/list/burns_eyes = list()
+	var/list/corrupts_genes = list()
 
 /decl/xgm_gas
 	var/id = ""
@@ -38,6 +43,11 @@
 	var/breathed_product
 	var/condensation_point = INFINITY
 	var/condensation_product
+	//Contaminates, burns skin, burns eyes, corrupts genes.
+	var/contaminates = FALSE
+	var/burns_skin = FALSE
+	var/burns_eyes = FALSE
+	var/corrupts_genes = FALSE
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
@@ -64,5 +74,9 @@
 			gas_data.condensation_products[gas.id] = gas.condensation_product
 
 		gas_data.breathed_product[gas.id] = gas.breathed_product
+		gas_data.contaminates[gas.id] = gas.contaminates
+		gas_data.burns_skin[gas.id] = gas.burns_skin
+		gas_data.burns_eyes[gas.id] = gas.burns_eyes
+		gas_data.corrupts_genes[gas.id] = gas.corrupts_genes
 
 	return 1

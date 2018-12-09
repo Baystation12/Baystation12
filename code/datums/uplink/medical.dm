@@ -18,3 +18,8 @@
 	name = "Combat medical kit"
 	item_cost = 48
 	path = /obj/item/weapon/storage/firstaid/combat
+
+/datum/uplink_item/item/medical/cl_cartridge
+	name = "Chlorine cartridge"
+	item_cost = 20
+	path = /obj/item/weapon/reagent_containers/chem_disp_cartridge/chlorine

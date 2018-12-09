@@ -30,6 +30,9 @@
 	sacid		spawn_reagent = /datum/reagent/acid
 	tungsten	spawn_reagent = /datum/reagent/tungsten
 
+	// Traitor
+	chlorine	spawn_reagent = /datum/reagent/toxin/chlorine
+
 	// Bar, alcoholic
 	beer		spawn_reagent = /datum/reagent/ethanol/beer
 	kahlua		spawn_reagent = /datum/reagent/ethanol/coffee/kahlua

@@ -29,6 +29,10 @@
 	var/gas_flags =         0
 	var/gas_burn_product
 	var/gas_overlay = "generic"
+	var/gas_contaminates = FALSE
+	var/gas_burns_skin = FALSE
+	var/gas_burns_eyes = FALSE
+	var/gas_corrupts_genes = FALSE
 	// END GAS DATA
 
 	// Matter state data.

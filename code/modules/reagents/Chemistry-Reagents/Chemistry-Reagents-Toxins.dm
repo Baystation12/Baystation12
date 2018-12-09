@@ -93,6 +93,22 @@
 	heating_point = null
 	heating_products = null
 
+/datum/reagent/toxin/yperite
+	name = "Yperite"
+	description = "Nobody remembers how it got its name."
+	taste_description = "Garlic and mustard"
+	reagent_state = GAS
+	color = "#ffdb58"
+	target_organ = BP_LUNGS
+	strength = 5
+	gas_flags = XGM_GAS_HAZARDOUS
+	gas_burns_skin = TRUE
+	gas_burns_eyes = TRUE
+
+/datum/reagent/toxin/yperite/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	M.take_organ_damage(0, removed * 0.1)
+	M.hazard_effects(gas_contaminates, gas_burns_skin, gas_burns_eyes, gas_corrupts_genes)
+
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	description = "Phoron in its liquid form."
@@ -117,7 +133,7 @@
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 	if(prob(10 * fire_mult))
-		M.pl_effects()
+		M.hazard_effects()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))

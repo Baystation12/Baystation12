@@ -329,8 +329,8 @@
 
 	//Check for contaminants before anything else because we don't want to skip it.
 	for(var/g in environment.gas)
-		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
-			pl_effects()
+		if(gas_data.flags[g] & XGM_GAS_HAZARDOUS && environment.gas[g] > gas_data.overlay_limit[g] + 1)
+			hazard_effects(gas_data.contaminates, gas_data.burns_skin, gas_data.burns_eyes, gas_data.corrupts_genes)
 			break
 
 	if(istype(src.loc, /turf/space)) //being in a closet will interfere with radiation, may not make sense but we don't model radiation for atoms in general so it will have to do for now.
