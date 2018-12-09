@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - bugfix: "Giant spider nurses will no longer infinitely attempt to cocoon deceased giant spiders."
