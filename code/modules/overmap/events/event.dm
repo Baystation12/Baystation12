@@ -123,6 +123,7 @@
 	GLOB.exited_event.unregister(get_turf(src), overmap_event_handler, /decl/overmap_event_handler/proc/on_turf_exited)
 	for(var/obj/effect/overmap/ship/leaver in get_turf(src))
 		tokill.leave(leaver)
+	events_by_turf -= get_turf(src)
 	. = ..()
 
 /datum/overmap_event
