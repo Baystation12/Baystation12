@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "You can now order additional BSA charges from supply."
+  - tweak: "Mass driver ammo is now cheaper."
