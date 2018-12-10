@@ -64,6 +64,7 @@
 	var/release_speed = 10                  // Speed per unit of tension.
 	var/obj/item/weapon/cell/cell = null    // Used for firing superheated rods.
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
+	var/draw_time = 20						// Time needed to draw the bow back by one "tension"
 
 /obj/item/weapon/gun/launcher/crossbow/toggle_safety(var/mob/user)
 	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
@@ -112,7 +113,7 @@
 	tension = 1
 
 	while(bolt && tension && loc == current_user)
-		if(!do_after(user, 20, src)) //crossbow strings don't just magically pull back on their own.
+		if(!do_after(user, draw_time, src)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
 			update_icon()
@@ -276,3 +277,90 @@
 		return
 	else
 		..()
+
+/*////////////////////////////
+//	Rapid Crossbow Device	//
+*/////////////////////////////
+
+/obj/item/weapon/arrow/rapidcrossbowdevice
+	name = "flashforged bolt"
+	desc = "The ultimate ghetto deconstruction implement."
+	throwforce = 4
+
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice
+	name = "rapid crossbow device"
+	desc = "A hacked RCD turns an innocent construction tool into the penultimate deconstruction tool. Flashforges bolts using matter units when the string is drawn back."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "rxb"
+	slot_flags = null
+	draw_time = 10
+	var/stored_matter = 0
+	var/max_stored_matter = 120
+	var/boltcost = 30
+
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/proc/generate_bolt(var/mob/user)
+	if(stored_matter >= boltcost && !bolt)
+		bolt = new/obj/item/weapon/arrow/rapidcrossbowdevice(src)
+		stored_matter -= boltcost
+		to_chat(user, "<span class='notice'>The RCD flashforges a new bolt!</span>")
+		queue_icon_update()
+	else
+		to_chat(user, "<span class='warning'>The \'Low Ammo\' light on the device blinks yellow.</span>")
+		flick("[icon_state]-empty", src)
+
+
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/living/user as mob)
+	if(tension)
+		user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
+		tension = 0
+		update_icon()
+	else
+		generate_bolt(user)
+		draw(user)
+
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/weapon/rcd_ammo))
+		var/obj/item/weapon/rcd_ammo/cartridge = W
+		if((stored_matter + cartridge.remaining) > max_stored_matter)
+			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
+			return
+		stored_matter += cartridge.remaining
+		qdel(W)
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
+		update_icon()
+
+	if(istype(W, /obj/item/weapon/arrow/rapidcrossbowdevice))
+		var/obj/item/weapon/arrow/rapidcrossbowdevice/A = W
+		if((stored_matter + 10) > max_stored_matter)
+			to_chat(user, "<span class='notice'>Unable to reclaim flashforged bolt. The RCD can't hold that many additional matter-units.</span>")
+			return
+		stored_matter += 10
+		qdel(A)
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		to_chat(user, "<span class='notice'>Flashforged bolt reclaimed. The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
+		update_icon()
+
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()
+	overlays.Cut()
+
+	if(bolt)
+		overlays += "rxb-bolt"
+
+	var/ratio = 0
+	if(stored_matter < boltcost)
+		ratio = 0
+	else
+		ratio = stored_matter / max_stored_matter
+		ratio = max(round(ratio, 0.25) * 100, 25)
+	overlays += "rxb-[ratio]"
+
+	if(tension > 1)
+		icon_state = "rxb-drawn"
+	else
+		icon_state = "rxb"
+
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/examine(var/user)
+	. = ..()
+	if(.)
+		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
