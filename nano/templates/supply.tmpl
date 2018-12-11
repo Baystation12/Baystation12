@@ -22,7 +22,7 @@
 		<table style="width:100%">
 			<tr><th style="width:70%">Item<th style="width:20%">Cost<th style="width:10%">Order
 			{{for data.possible_purchases}}
-				<tr>
+				<tr class="candystripe">
 				<td>{{:value.name}}
 				<td>{{:value.cost}} {{:data.currency}}
 				<td>{{:helper.link('Order', null, {'order' : value.ref})}}
