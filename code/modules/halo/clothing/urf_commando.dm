@@ -42,7 +42,7 @@
 	blood_overlay_type = "armor"
 	item_state_slots = list(slot_l_hand_str = "urf_armour", slot_r_hand_str = "urf_armour")
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
-	item_flags = THICKMATERIAL
+	item_flags = THICKMATERIAL | STOPPRESSUREDAMAGE
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS

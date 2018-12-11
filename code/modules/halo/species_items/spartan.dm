@@ -97,6 +97,8 @@
 	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
 	l_pocket = /obj/item/weapon/gun/projectile/m6d_magnum
+	gloves = /obj/item/clothing/gloves/spartan
+	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan
 	l_hand = /obj/item/weapon/gun/projectile/ma5b_ar
