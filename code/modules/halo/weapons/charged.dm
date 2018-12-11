@@ -11,9 +11,14 @@
 	desc = "Also known as the spartan laser, is the most powerful handheld weapon produced by the UNSC. It can disable most vehicles and infantry in a single hit."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "spartanlaser"
-	item_state = "spartanlaser"
+	item_state = "m41"
 	slot_flags = SLOT_BACK
 	w_class = 3
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
 
 	accuracy = 1000
 	one_hand_penalty = -1
