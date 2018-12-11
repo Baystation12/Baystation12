@@ -1,18 +1,23 @@
 /obj/structure/ship_munition/bsa_charge
-	name = "unknown bsa charge"
+	name = "bsa charge"
 	desc = "A charge to power the BSA with. It looks impossibly round and shiny."
 	icon_state = "slug"
 	var/chargetype
 	var/chargedesc
+	var/chargeeffect
+
+/obj/structure/ship_munition/bsa_charge/examine(mob/user)
+	. = ..(user)
+	if(. && user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		to_chat(user, "You recognize it as a [chargedesc]. [chargeeffect]")
 
 /obj/structure/ship_munition/bsa_charge/proc/fire(turf/target, strength, range)
 	CRASH("BSA charge firing logic not set!")
 
 /obj/structure/ship_munition/bsa_charge/fire
-	name = "\improper BSA-FR1-ENFER charge"
-	color = "#b95a00"
 	chargetype = BSA_FIRE
-	chargedesc = "ENFER"
+	chargedesc = "BSA-FR1-ENFER"
+	chargeeffect = "It creates a localized fire on impact."
 
 /obj/structure/ship_munition/bsa_charge/fire/fire(turf/target, strength, range)
 	for(var/turf/T in range(range, target))
@@ -25,19 +30,17 @@
 	pressure = 1500
 
 /obj/structure/ship_munition/bsa_charge/emp
-	name = "\improper BSA-EM2-QUASAR charge"
-	color = "#6a97b0"
 	chargetype = BSA_EMP
-	chargedesc = "QUASAR"
+	chargedesc = "BSA-EM2-QUASAR"
+	chargeeffect = "It creates an electromagnetic pulse on impact."
 
 /obj/structure/ship_munition/bsa_charge/emp/fire(turf/target, strength, range)
 	empulse(target, strength * range / 3, strength * range)
 
 /obj/structure/ship_munition/bsa_charge/mining
-	name = "\improper BSA-MN3-BERGBAU charge"
-	color = "#cfcf55"
 	chargetype = BSA_MINING
-	chargedesc = "BERGBAU"
+	chargedesc = "BSA-MN3-BERGBAU"
+	chargeeffect = "It extracts minerals from rock formations on impact."
 
 /obj/structure/ship_munition/bsa_charge/mining/fire(turf/target, strength, range)
 	var/list/victims = range(range * 3, target)
@@ -49,10 +52,9 @@
 		L.ex_act(3) //no artif- I mean idiot/unfortunate bystanders survive this... much
 
 /obj/structure/ship_munition/bsa_charge/explosive
-	name = "\improper BSA-XP4-INDARRA charge"
-	color = "#aa5f61"
 	chargetype = BSA_EXPLOSIVE
-	chargedesc = "INDARRA"
+	chargedesc = "BSA-XP4-INDARRA"
+	chargeeffect = "It explodes on impact."
 
 /obj/structure/ship_munition/bsa_charge/explosive/fire(turf/target, strength, range)
 	explosion(target,max(1,strength * range / 10),strength * range / 7.5,strength * range / 5)
