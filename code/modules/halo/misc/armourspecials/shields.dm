@@ -91,6 +91,7 @@
 			//chat log output
 			if(shieldstrength <= 0)
 				shieldstrength = 0
+				playsound(user, 'code/modules/halo/sounds/Shields_Gone.ogg',100,0)
 				user.visible_message("<span class ='warning'>[user]'s [connectedarmour] shield collapses!</span>","<span class ='userdanger'>Your [connectedarmour] shields fizzle and spark, losing their protective ability!</span>")
 			else
 				user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact</span>")
@@ -131,6 +132,7 @@
 
 		//begin this recharge cycle
 		if(armour_state == SHIELD_PROCESS)
+			playsound(user, 'code/modules/halo/sounds/Shields_Recharge.ogg',100,0)
 			user.visible_message("<span class = 'notice'>A faint hum emanates from [user]'s [connectedarmour].</span>")
 			update_overlay("shield_overlay_recharge")
 			armour_state = SHIELD_RECHARGE
