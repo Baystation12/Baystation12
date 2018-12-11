@@ -160,6 +160,7 @@
 	var/corps = list()
 	corps += /obj/item/clothing/under/rank/scientist/nanotrasen
 	corps += /obj/item/clothing/under/rank/scientist/heph
+	corps += /obj/item/clothing/under/rank/scientist/zeng
 	corps += /obj/item/clothing/under/mbill
 	corps += /obj/item/clothing/under/saare
 	corps += /obj/item/clothing/under/aether

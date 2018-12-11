@@ -156,3 +156,30 @@
 	icon_state = "suit_heph"
 	worn_state = "suit_heph"
 	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/heph, /obj/item/clothing/accessory/corptie/heph)
+
+//Zeng-Hu
+/obj/item/clothing/under/rank/scientist/zeng
+	name = "\improper Zeng-Hu polo and pants"
+	desc = "A fashionable polo and pair of trousers belonging to Zeng-Hu Pharmaceuticals, a megacorporation primarily concerned with the research and production of medical equipment and pharmaceuticals."
+	icon_state = "smock_zeng"
+	worn_state = "smock_zeng"
+	starting_accessories = list(/obj/item/clothing/accessory/tunic/zeng)
+
+/obj/item/clothing/under/rank/scientist/executive/zeng
+	name = "\improper Zeng-Hu polo and pants"
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Zeng-Hu Pharmaceuticals higher-up."
+	icon_state = "smockexec_zeng"
+	worn_state = "smockexec_zeng"
+	starting_accessories = list(/obj/item/clothing/accessory/tunic/exec/zeng)
+
+/obj/item/clothing/under/rank/ntwork/zeng
+	name = "beige and gold coveralls"
+	icon_state = "work_zeng"
+	worn_state = "work_zeng"
+
+/obj/item/clothing/under/suit_jacket/corp/zeng
+	name = "\improper Zeng-Hu executive suit"
+	desc = "A set of Zeng-Hu Pharmaceuticals-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
+	icon_state = "suit_zeng"
+	worn_state = "suit_zeng"
+	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/zeng, /obj/item/clothing/accessory/corptie/zeng)
