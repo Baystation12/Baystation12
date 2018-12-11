@@ -18,7 +18,7 @@
 
 /obj/machinery/gravity_generator
 	name = "gravitational generator"
-	desc = "A device which produces a gravaton field when set up."
+	desc = "A device which produces a graviton field when set up."
 	icon = 'icons/obj/machines/gravity_generator.dmi'
 	anchored = 1
 	density = 1
@@ -468,7 +468,7 @@
 /obj/machinery/gravity_generator/main/proc/get_area_type(var/area/A = get_area())
 	if (A.name == "Space")
 		return AREA_SPACE
-	else if(A.alwaysgravity == 1 || A.nevergravity == 1)
+	else if(A.gravity_state == AREA_GRAVITY_ALWAYS || AREA_GRAVITY_NEVER)
 		return AREA_SPECIAL
 	else
 		return AREA_STATION

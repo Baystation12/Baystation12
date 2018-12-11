@@ -897,7 +897,7 @@
 					<li>Locate the control panel on the gravity generator. This is located on the bottom most part of the generator.</li><br>
 					<li>Locate the main beaker switch and switch it to the OFF position.</li><br>
 					<li>Wait for the charge to drop to 0 percent before leaving.<br></li>
-					<li>Ensure that there is no longer garvity.</a><br></li>
+					<li>Ensure that there is no longer gravity.</a><br></li>
 					<b>Note</b>:If the shutdown procedure fails, read: <a href="#p9142">Procedure 9142</a>
 				</ul><br><br>
 				<a name="p8549"><h2>Procedure 8549 (Repairing Physical Damage)</h2><br></a>
@@ -907,7 +907,7 @@
 					<li>Ensure all steps in basic saftey are completed.</li><br>
 					<li>Follow: <a href="#ShutDown">Shutdown Procedure</a><br>
 					<li>Ensure the framework is properly secured with a screwdriver.<br></li>
-					<li>If the framework is damage, weld the damaged plating.<br></li>
+					<li>If the framework is damaged, weld the damaged plating.<br></li>
 					<li>Apply plasteel plating to the welded damaged plating.<br></li>
 					<li>Secure the plasteel to the plating with a wrench.<br></li>
 					<li>Follow the <a href="#StartUp">Startup procedure</a></li>
@@ -942,7 +942,7 @@
 					<li>Press the red button.</li><br>
 					<li>Replace the panel with a crowbar.<br></li>
 					<li>If the generator does not shut down, immediately cut the power to the room to prevent the risk of death.</li><br>
-					<li>Follow the appropriate maintence procedure.</li>
+					<li>Follow the appropriate maintenance procedure.</li>
 				</ul><br><br>
 				</body>
 			</html>

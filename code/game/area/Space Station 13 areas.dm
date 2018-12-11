@@ -47,8 +47,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/oneoff_environ = 0
 
 	var/has_gravity = 1
-	var/alwaysgravity
-	var/nevergravity
+	var/gravity_state = AREA_GRAVITY_NORMAL
 
 	var/obj/machinery/power/apc/apc = null
 	var/no_air = null

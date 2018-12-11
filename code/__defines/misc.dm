@@ -79,6 +79,10 @@
 #define AREA_FLAG_ION_SHIELDED      4 // shielded from ionospheric anomalies as an FBP / IPC
 #define AREA_FLAG_IS_NOT_PERSISTENT 8 // SSpersistence will not track values from this area.
 
+#define AREA_GRAVITY_NEVER  0 // No gravity, never
+#define AREA_GRAVITY_NORMAL 1 // Gravity in area will act like always
+#define AREA_GRAVITY_ALWAYS 2 // No matter what, gravity always would be
+
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES 1 // Lets multiple copies of the template to be spawned
 #define TEMPLATE_FLAG_SPAWN_GUARANTEED 2 // Makes it ignore away site budget and just spawn (only for away sites)

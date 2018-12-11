@@ -31,11 +31,11 @@
 		power_equip = 0
 		power_environ = 0
 
-	if(alwaysgravity == TRUE)
-		has_gravity = 1
+	if(gravity_state == AREA_GRAVITY_NEVER)
+		has_gravity = 0
 	else
-		if(nevergravity == TRUE)
-			has_gravity = 0
+		if(gravity_state == AREA_GRAVITY_ALWAYS)
+			has_gravity = 1
 
 	power_change() // all machines set to current power level, also updates lighting icon
 
