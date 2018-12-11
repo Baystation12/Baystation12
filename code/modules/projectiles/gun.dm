@@ -89,7 +89,7 @@
 
 	var/is_charged_weapon = 0 //Does the weapon require charging? Defaults to 0 unless it's from /charged weapon sets
 	var/arm_time = 25 //Default charge time for weapons that charge
-	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Shot_Sound_Effect.ogg'
+	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Charge_Sound_Effect.ogg'
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
