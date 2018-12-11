@@ -231,6 +231,15 @@
 		prob_slip *= 0.5
 	return prob_slip
 
+/mob/proc/update_gravity()
+	return
+
+/mob/proc/mob_has_gravity(turf/T)
+	return has_gravity(src, T)
+
+/mob/proc/mob_negates_gravity()
+	return 0
+
 #define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
 
 /client/verb/moveup()

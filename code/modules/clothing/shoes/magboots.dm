@@ -40,6 +40,12 @@
 	user.update_action_buttons()
 	user.update_floating()
 
+/obj/item/clothing/shoes/magboots/negates_gravity()
+	if(magpulse)
+		return TRUE
+	else
+		return FALSE
+
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
 	var/mob/living/carbon/human/H = user
 

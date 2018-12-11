@@ -390,6 +390,14 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
+/mob/living/update_gravity(has_gravity)
+	if(!(GAME_STATE >= RUNLEVEL_GAME))
+		return
+	if(has_gravity)
+		stop_floating()
+	else
+		start_floating()
+
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)

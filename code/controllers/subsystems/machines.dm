@@ -54,6 +54,8 @@ SUBSYSTEM_DEF(machines)
 	var/list/processing
 	var/list/current_run = list()
 
+	var/list/gravity_generators = list()
+
 /datum/controller/subsystem/machines/PreInit()
 	 processing = machinery
 

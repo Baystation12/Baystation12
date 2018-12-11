@@ -71,6 +71,9 @@
 			var/obj/item/clothing/accessory/tie = new T(src)
 			src.attach_accessory(null, tie)
 
+/obj/item/proc/negates_gravity()
+	return FALSE
+
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = 0)
 

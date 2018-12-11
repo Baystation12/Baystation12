@@ -699,6 +699,12 @@
 	name = "\improper Auxiliary Engineering Hard Storage"
 	icon_state = "engineering_storage"
 
+/* uncomment this if you adding gravgen on map
+/area/engineering/gravity_gen
+	name = "\improper Gravity Generator"
+	icon_state = "engine"
+	sound_env = SMALL_ENCLOSED */
+
 //Vacant Areas
 /area/vacant
 	name = "\improper Vacant Area"
