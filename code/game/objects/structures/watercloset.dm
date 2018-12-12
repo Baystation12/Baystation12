@@ -1,11 +1,11 @@
 //todo: toothbrushes, and some sort of "toilet-filthinator" for the hos
 /obj/structure/hygiene
 	var/next_gurgle = 0
-	var/clogged // -1 = never clog
+	var/clogged = 0 // -1 = never clog
 
 /obj/structure/hygiene/New()
 	..()
-	SSfluids.hygiene_props[src] = TRUE
+	SSfluids.hygiene_props += src
 
 /obj/structure/hygiene/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
@@ -13,18 +13,18 @@
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(var/severity)
-	if(!isnull(clogged))
+	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
 	START_PROCESSING(SSprocessing, src)
 	return TRUE
 
 /obj/structure/hygiene/proc/unclog()
-	clogged = null
+	clogged = 0
 	STOP_PROCESSING(SSprocessing, src)
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
-	if(!isnull(clogged) && clogged > 0 && isPlunger(thing))
+	if(clogged > 0 && isPlunger(thing))
 		user.visible_message("<span class='notice'>\The [user] strives valiantly to unclog \the [src] with \the [thing]!</span>")
 		spawn
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
@@ -36,7 +36,7 @@
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
 			sleep(5)
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
-		if(do_after(user, 45, src) && clogged)
+		if(do_after(user, 45, src) && clogged > 0)
 			visible_message("<span class='notice'>With a loud gurgle, \the [src] begins flowing more freely.</span>")
 			playsound(loc, pick(SSfluids.gurgles), 100, 1)
 			clogged--
@@ -47,10 +47,11 @@
 
 /obj/structure/hygiene/examine()
 	. = ..()
-	if(clogged) to_chat(usr, "<span class='warning'>It seems to be badly clogged.</span>")
+	if(clogged > 0)
+		to_chat(usr, "<span class='warning'>It seems to be badly clogged.</span>")
 
 /obj/structure/hygiene/Process()
-	if(isnull(clogged))
+	if(clogged <= 0)
 		return
 	var/flood_amt
 	switch(clogged)
@@ -376,7 +377,7 @@
 
 /obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
 
-	if(isPlunger(O) && !isnull(clogged))
+	if(isPlunger(O) && clogged > 0)
 		return ..()
 
 	if(busy)
