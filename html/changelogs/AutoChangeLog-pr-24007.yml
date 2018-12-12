@@ -1,0 +1,5 @@
+author: "WhiteHusky"
+delete-after: True
+changes: 
+  - rscadd: "Supply consoles now show a notice when there are pending orders when properly authenticated."
+  - spellcheck: "Fixed misspellings in the Supply Console."
