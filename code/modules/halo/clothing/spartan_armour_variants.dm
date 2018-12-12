@@ -220,3 +220,25 @@
 	name = "MJOLNIR Powered Assault Armor Mark IV Scarred EVA"
 	icon_state = "spartankiller-spartanarmor_obj"
 	item_state = "spartankiller-spartanarmor_worn"
+	
+	
+//MK IV Osama//
+/obj/item/clothing/head/helmet/spartan/liam_gallagher
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Scarred EVA"
+	icon = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	icon_state = "osama-spartan-helm_obj"
+	item_state = "osama-spartan-helm_worn"
+	icon_override = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+
+/obj/item/clothing/suit/armor/special/spartan/liam_gallagher
+	name = "MJOLNIR Powered Assault Armor Mark IV Scarred EVA"
+	icon = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	icon_state = "osama-spartan-armor_obj"
+	item_state = "osama-spartan-armor_worn"
+	icon_override = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	
+	
+	
+	
+	
+	

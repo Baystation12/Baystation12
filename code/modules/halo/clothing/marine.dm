@@ -189,6 +189,30 @@
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+	
+//DONATOR GEAR	
+	
+/obj/item/clothing/suit/storage/marine/donator/liam_gallagher	
+	name = "Experimental Marine Armor"
 
+	item_state = "osama-UNSCarmor_worn"
+	
+/obj/item/clothing/head/helmet/marine/donator/liam_gallagher	
+	name = "Experimental Marine Helmet"
+
+	item_state = "osama-UNSChelm_worn"
+	icon_state = "osama-UNSChelm_obj"	
+	
+/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher	
+	desc = "A specialized set of fatigues with latches and hooks for a special set of UNSC armor."
+	name = "UNSC Experimental Fatigues"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "osama-UNSCsuit_worn"
+	icon_state = "osama-UNSCsuit_worn"
+	worn_state = "UNSC Marine Fatigues"
+	
+//END DONATOR GEAR
+	
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND
