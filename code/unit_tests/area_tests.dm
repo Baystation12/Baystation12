@@ -12,16 +12,19 @@
 		for(var/turf/T in A)
 			area_turfs += T
 
-		var/actual_number_of_sub_areas = 0
-		var/expected_number_of_sub_areas = (A.type in GLOB.using_map.area_coherency_test_subarea_count) ? GLOB.using_map.area_coherency_test_subarea_count[A.type] : 1
+		var/list/sub_area_turfs = list()
+		var/expected_number_of_sub_areas = GLOB.using_map.area_coherency_test_subarea_count[A.type] || 1
 		do
-			actual_number_of_sub_areas++
-			area_turfs -= get_turfs_fill(area_turfs[1])
+			var/turf/T = area_turfs[1]
+			sub_area_turfs += T
+			area_turfs -= get_turfs_fill(T)
 		while(area_turfs.len)
 
-		if(actual_number_of_sub_areas != expected_number_of_sub_areas)
+		if(sub_area_turfs.len != expected_number_of_sub_areas)
 			incoherent_areas++
-			log_bad("[log_info_line(A)] is incoherent. Expected [expected_number_of_sub_areas] subarea\s, fill gave [actual_number_of_sub_areas].")
+			log_bad("[log_info_line(A)] is incoherent. Expected [expected_number_of_sub_areas] subarea\s, fill gave [sub_area_turfs.len]. Origin turfs:")
+			for(var/T in sub_area_turfs)
+				log_bad(log_info_line(T))
 
 	if(incoherent_areas)
 		fail("Found [incoherent_areas] incoherent area\s.")
