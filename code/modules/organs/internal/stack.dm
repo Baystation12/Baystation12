@@ -17,6 +17,20 @@
 	var/default_language
 	var/list/languages = list()
 	var/datum/mind/backup
+	var/prompting = FALSE // Are we waiting for a user prompt?
+
+/obj/item/organ/internal/stack/examine(var/mob/user)
+	. = ..(user)
+	if(istype(backup)) // Do we have a backup?
+		if(user.skill_check(SKILL_DEVICES, SKILL_EXPERT)) // Can we even tell what the blinking means?
+			if(find_dead_player(ownerckey, 1)) // Is the player still around and dead?
+				to_chat(user, "<span class='notice'>The light on [src] is blinking rapidly. Someone might have a second chance.</span>")
+			else
+				to_chat(user, "The light on [src] is blinking slowly. Maybe wait a while...")
+		else
+			to_chat(user, "The light on [src] is blinking, but you don't know what it means.")
+	else
+		to_chat(user, "The light on [src] is off. " + (user.skill_check(SKILL_DEVICES, SKILL_EXPERT) ? "It doesn't have a backup." : "Wonder what that means."))
 
 /obj/item/organ/internal/stack/emp_act()
 	return
@@ -42,10 +56,13 @@
 
 /obj/item/organ/internal/stack/replaced()
 	if(!..()) return 0
-
+	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+		return 0
 	if(owner && !backup_inviable())
 		var/current_owner = owner
-		var/response = input(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life?", "Resleeving") as anything in list("Yes", "No")
+		prompting = TRUE
+		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
+		prompting = FALSE
 		if(src && response == "Yes" && owner == current_owner)
 			overwrite()
 	sleep(-1)
@@ -59,6 +76,8 @@
 
 /obj/item/organ/internal/stack/proc/overwrite()
 	if(owner.mind && owner.ckey) //Someone is already in this body!
+		if(owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
+			return
 		owner.visible_message("<span class='danger'>\The [owner] spasms violently!</span>")
 		if(prob(66))
 			to_chat(owner, "<span class='danger'>You fight off the invading tendrils of another mind, holding onto your own body!</span>")
