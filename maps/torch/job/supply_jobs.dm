@@ -79,7 +79,7 @@
 	department_flag = SUP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Deck Chief, the Corporate Liaison and Supply Personnel"
+	supervisors = "the Deck Chief, the Workplace Liaison and Supply Personnel"
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
@@ -105,7 +105,7 @@
 	department_flag = SUP
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
+	supervisors = "the Deck Chief, the Workplace Liaison and the Executive Officer"
 	selection_color = "#515151"
 	economic_power = 7
 	ideal_character_age = 25

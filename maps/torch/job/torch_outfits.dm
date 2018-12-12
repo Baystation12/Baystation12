@@ -216,14 +216,6 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	id_type = /obj/item/weapon/card/id/torch/contractor/engineering
 	pda_type = /obj/item/modular_computer/pda/engineering
 
-/decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	name = OUTFIT_JOB_NAME("Roboticist - Torch")
-	uniform = /obj/item/clothing/under/rank/roboticist
-	shoes = /obj/item/clothing/shoes/black
-	l_ear = /obj/item/device/radio/headset/torchroboticist
-	id_type = /obj/item/weapon/card/id/torch/contractor/engineering/roboticist
-	pda_type = /obj/item/modular_computer/pda/roboticist
-
 //Security Outfits
 
 /decl/hierarchy/outfit/job/torch/crew/security
@@ -355,7 +347,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	shoes = /obj/item/clothing/shoes/black
 	l_ear = /obj/item/device/radio/headset/torchroboticist
 	id_type = /obj/item/weapon/card/id/torch/contractor/biomech
-	pda_type = /obj/item/modular_computer/pda/roboticist
+	pda_type = /obj/item/modular_computer/pda/biomech
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
@@ -664,6 +656,14 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject
 	name = OUTFIT_JOB_NAME("Testing Assistant")
 	uniform = /obj/item/clothing/under/rank/ntwork
+
+/decl/hierarchy/outfit/job/torch/passenger/research/roboticist
+	name = OUTFIT_JOB_NAME("Roboticist - Torch")
+	uniform = /obj/item/clothing/under/rank/roboticist/exo
+	shoes = /obj/item/clothing/shoes/black
+	l_ear = /obj/item/device/radio/headset/torchroboticist
+	id_type = /obj/item/device/radio/headset/torchnanotrasen
+	pda_type = /obj/item/modular_computer/pda/roboticist
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger
 	name = OUTFIT_JOB_NAME("Passenger - Torch")

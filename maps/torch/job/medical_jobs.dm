@@ -93,7 +93,7 @@
 	department_flag = MED
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
+	supervisors = "the Chief Medical Officer, the Workplace Liaison and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_power = 3
 	ideal_character_age = 30
@@ -130,7 +130,7 @@
 	ideal_character_age = 45
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Medical Officer and the Corporate Liaison"
+	supervisors = "the Chief Medical Officer and the Workplace Liaison"
 	selection_color = "#013d3b"
 	economic_power = 6
 	alt_titles = list()
@@ -153,7 +153,7 @@
 	required_education = EDUCATION_TIER_MEDSCHOOL
 
 /datum/job/biomech/get_description_blurb()
-	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI’s and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
+	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMIs and anything involving augments. You answer to the Chief Medical Officer and the Workplace Liaison."
 
 /datum/job/medical_trainee
 	title = "Corpsman Trainee"
@@ -205,7 +205,7 @@
 	department_flag = MED
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
+	supervisors = "the Chief Medical Officer, the Workplace Liaison and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_power = 4
 	ideal_character_age = 30

@@ -112,9 +112,9 @@
 	item_state = "exp_headset_alt"
 
 /obj/item/device/radio/headset/torchroboticist
-	name = "roboticist's headset"
-	desc = "A headset with access to the engineering and medical channels."
-	icon_state = "eng_headset"
+	name = "biomechanist's headset"
+	desc = "A headset with access to the medical and engineering channels."
+	icon_state = "med_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchroboticist
 

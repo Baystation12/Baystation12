@@ -63,7 +63,7 @@
 /datum/job/bartender
 	department = "Service"
 	department_flag = SRV
-	supervisors = "the Executive Officer and the Corporate Liaison"
+	supervisors = "the Executive Officer and the Workplace Liaison"
 	ideal_character_age = 30
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender

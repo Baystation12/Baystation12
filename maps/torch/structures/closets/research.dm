@@ -211,3 +211,24 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/, 50)
 	)
+
+/obj/structure/closet/secure_closet/scientist_torch_robotics
+	name = "roboticist's locker"
+	req_access = list(access_robotics)
+	icon_state = "secureres1"
+	icon_closed = "secureres"
+	icon_locked = "secureres1"
+	icon_opened = "secureresopen"
+	icon_off = "secureresoff"
+
+/obj/structure/closet/wardrobe/scientist_torch_robotics/WillContain()
+	return list(
+		/obj/item/clothing/under/rank/scientist,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/under/rank/roboticist/exo,
+		/obj/item/clothing/under/rank/roboticist/skirt/exo,
+		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/gloves/thick
+	)

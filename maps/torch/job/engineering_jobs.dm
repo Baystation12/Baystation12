@@ -116,7 +116,7 @@
 	department_flag = ENG
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Engineer, the Corporate Liaison and Engineering Personnel"
+	supervisors = "the Chief Engineer, the Workplace Liaison and Engineering Personnel"
 	minimal_player_age = 0
 	selection_color = "#5b4d20"
 	alt_titles = list(
@@ -157,7 +157,7 @@
 	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/engineer_contractor/get_description_blurb()
-	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the Corporate Liaison and the rest of the engineering team."
+	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the Workplace Liaison and the rest of the engineering team."
 
 /datum/job/engineer_trainee
 	title = "Engineer Trainee"
@@ -211,39 +211,3 @@
 
 /datum/job/engineer_trainee/get_description_blurb()
 	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
-
-/datum/job/roboticist
-	title = "Roboticist"
-	department = "Engineering"
-	department_flag = ENG
-
-	total_positions = 1
-	spawn_positions = 1
-	minimal_player_age = 0
-	supervisors = "the Chief Engineer and the Corporate Liaison."
-	selection_color = "#5b4d20"
-	economic_power = 6
-	alt_titles = list(
-		"Mechsuit Technician")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
-	                    SKILL_DEVICES		= SKILL_ADEPT)
-
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_EXPERT,
-	                    SKILL_ENGINES      = SKILL_EXPERT,
-	                    SKILL_DEVICES      = SKILL_MAX,
-	                    SKILL_ANATOMY      = SKILL_EXPERT,
-	                    SKILL_MEDICAL      = SKILL_EXPERT)
-	skill_points = 20
-
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
-	minimal_access = list()
-	required_education = EDUCATION_TIER_TRADE
-	maximum_education = EDUCATION_TIER_DOCTORATE
-
-/datum/job/roboticist/get_description_blurb()
-	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics (like robots). You are also responsible for the production of exosuits(mechs) and bots for various departments. You answer to the Corporate Liaison and the Chief Engineer."

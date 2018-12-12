@@ -113,3 +113,7 @@
 /obj/item/modular_computer/pda/roboticist
 	icon_state = "pda-robot"
 	icon_state_unpowered = "pda-robot"
+
+/obj/item/modular_computer/pda/biomech
+	icon_state = "pda-biomech"
+	icon_state_unpowered = "pda-biomech"
