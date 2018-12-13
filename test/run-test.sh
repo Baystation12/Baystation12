@@ -251,7 +251,7 @@ function run_byond_tests {
     run_test_fail "check no runtimes 2" "grep 'runtime error:' log.txt"
     run_test_fail "check no scheduler failures" "grep 'Process scheduler caught exception processing' log.txt"
     run_test_fail "check no warnings" "grep 'WARNING:' log.txt"
-    run_test_fail "check no failures" "grep 'ERROR:' log.txt"
+    run_test_fail "check no errors" "grep 'ERROR:' log.txt"
 }
 
 function run_all_tests {
