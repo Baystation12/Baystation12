@@ -94,6 +94,12 @@
 		var/amount = o.reagents.trans_to_obj(src, 500)
 		to_chat(user, "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		if(istype(target, /obj/structure/reagent_dispensers/acid))
+			to_chat(user, "<span class='warning'>You can only watch as the acid begins violently eating away at the bottom of \the [src]!</span>")
+			if(prob(50))
+				reagents.splash(user, 5)
+			qdel(src)
+			return
 		return
 
 	if (!safety)
