@@ -640,14 +640,14 @@
 				"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
 				"You replace the damaged APC frame with new one.")
 			qdel(W)
-			stat &= ~BROKEN
+			set_broken(FALSE)
 			// Malf AI, removes the APC from AI's hacked APCs list.
 			if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
 				hacker.hacked_apcs -= src
 				hacker = null
 			if (opened==2)
 				opened = 1
-			update_icon()
+			queue_icon_update()
 	else
 		if (((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) \
 				&& !opened \
@@ -678,8 +678,8 @@
 						opened = 1
 					if(90 to 100)
 						to_chat(user, "<span class='warning'>There's a nasty sound and \the [src] goes cold...</span>")
-						stat |= BROKEN
-				update_icon()
+						set_broken(TRUE)
+				queue_icon_update()
 		playsound(get_turf(src), 'sound/weapons/smash.ogg', 75, 1)
 
 // attack with hand - remove cell (if cover open) or interact with the APC
@@ -1203,12 +1203,12 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 			return
 		if(2.0)
 			if (prob(50))
-				set_broken()
+				set_broken(TRUE)
 				if (cell && prob(50))
 					cell.ex_act(2.0)
 		if(3.0)
 			if (prob(25))
-				set_broken()
+				set_broken(TRUE)
 				if (cell && prob(25))
 					cell.ex_act(3.0)
 	return
@@ -1218,16 +1218,17 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 		terminal.master = null
 		terminal = null
 
-/obj/machinery/power/apc/proc/set_broken()
-	// Aesthetically much better!
-	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
+/obj/machinery/power/apc/set_broken(new_state)
+	if(!new_state || (stat & BROKEN))
+		return ..()
+	visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
 	power_alarm.triggerAlarm(loc, src)
 	spawn(rand(2,5))
-		src.visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
-		stat |= BROKEN
+		..()
+		visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
 		operating = 0
-		update_icon()
 		update()
+	return TRUE
 
 /obj/machinery/power/apc/proc/reboot()
 	//reset various counters so that process() will start fresh

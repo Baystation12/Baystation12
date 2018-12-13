@@ -109,9 +109,11 @@ Class Procs:
 	. = ..()
 	if(d)
 		set_dir(d)
-	START_PROCESSING(SSmachines, src)
+	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here.
+	SSmachines.machinery += src // All machines should remain in this list, always.
 
 /obj/machinery/Destroy()
+	SSmachines.machinery -= src
 	STOP_PROCESSING(SSmachines, src)
 	if(component_parts)
 		for(var/atom/A in component_parts)
@@ -121,9 +123,8 @@ Class Procs:
 				component_parts -= A
 	. = ..()
 
-/obj/machinery/Process()//If you dont use process or power why are you here
-	if(!(use_power || idle_power_usage || active_power_usage))
-		return PROCESS_KILL
+/obj/machinery/Process()
+	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
@@ -155,6 +156,16 @@ Class Procs:
 				return
 		else
 	return
+
+/obj/machinery/proc/set_broken(new_state)
+	if(new_state && !(stat & BROKEN))
+		stat |= BROKEN
+		. = TRUE
+	else if(!new_state && (stat & BROKEN))
+		stat &= ~BROKEN
+		. = TRUE
+	if(.)
+		queue_icon_update()
 
 /proc/is_operable(var/obj/machinery/M, var/mob/user)
 	return istype(M) && M.operable()

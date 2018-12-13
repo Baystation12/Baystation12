@@ -143,7 +143,7 @@
 
 
 /obj/machinery/computer/pod/Process()
-	if(!..())
+	if(inoperable())
 		return
 	if(timing)
 		if(time > 0)
@@ -153,8 +153,6 @@
 			time = 0
 			timing = 0
 		updateDialog()
-	return
-
 
 /obj/machinery/computer/pod/OnTopic(user, href_list)
 	if(href_list["power"])

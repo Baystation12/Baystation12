@@ -333,11 +333,10 @@
 		to_chat(user, "\The [src] shows signs of damage!")
 
 
-/obj/machinery/door/proc/set_broken()
-	stat |= BROKEN
-	visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
-	update_icon()
-
+/obj/machinery/door/set_broken(new_state)
+	. = ..()
+	if(. && new_state)
+		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
 
 /obj/machinery/door/ex_act(severity)
 	switch(severity)

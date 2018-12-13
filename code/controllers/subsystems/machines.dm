@@ -47,15 +47,12 @@ SUBSYSTEM_DEF(machines)
 	var/cost_power_objects = 0
 
 	var/list/pipenets      = list()
-	var/list/machinery     = list()
+	var/list/machinery     = list() // These are all machines.
 	var/list/powernets     = list()
 	var/list/power_objects = list()
 
-	var/list/processing
+	var/list/processing  = list() // These are the machines which are processing.
 	var/list/current_run = list()
-
-/datum/controller/subsystem/machines/PreInit()
-	 processing = machinery
 
 /datum/controller/subsystem/machines/Initialize(timeofday)
 	makepowernets()
@@ -131,10 +128,10 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	msg += "PO:[round(cost_power_objects,1)]"
 	msg += "} "
 	msg += "PI:[pipenets.len]|"
-	msg += "MC:[machinery.len]|"
+	msg += "MC:[processing.len]|"
 	msg += "PN:[powernets.len]|"
 	msg += "PO:[power_objects.len]|"
-	msg += "MC/MS:[round((cost ? machinery.len/cost : 0),0.1)]"
+	msg += "MC/MS:[round((cost ? processing.len/cost : 0),0.1)]"
 	..(jointext(msg, null))
 
 /datum/controller/subsystem/machines/proc/process_pipenets(resumed = 0)
@@ -155,14 +152,14 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 
 /datum/controller/subsystem/machines/proc/process_machinery(resumed = 0)
 	if (!resumed)
-		src.current_run = machinery.Copy()
+		src.current_run = processing.Copy()
 
 	var/list/current_run = src.current_run
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
 		if(!QDELETED(M) && (M.Process(wait) == PROCESS_KILL))
-			machinery.Remove(M)
+			processing.Remove(M)
 			M.is_processing = null
 		if(MC_TICK_CHECK)
 			return
@@ -202,6 +199,8 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 		pipenets = SSmachines.pipenets
 	if (istype(SSmachines.machinery))
 		machinery = SSmachines.machinery
+	if (istype(SSmachines.processing))
+		processing = SSmachines.processing
 	if (istype(SSmachines.powernets))
 		powernets = SSmachines.powernets
 	if (istype(SSmachines.power_objects))

@@ -267,6 +267,6 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 
 	A.do_animate("spark")
 	sleep(6)
-	A.stat |= BROKEN
+	A.set_broken(TRUE)
 	var/check = A.open(1)
 	src.visible_message("\The [src] slices \the [A]'s controls[check ? ", ripping it open!" : ", breaking it!"]")
