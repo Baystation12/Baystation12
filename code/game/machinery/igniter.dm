@@ -11,10 +11,6 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/igniter/wifi_receiver
 
-/obj/machinery/igniter/New()
-	..()
-	update_icon()
-
 /obj/machinery/igniter/Initialize()
 	. = ..()
 	update_icon()
@@ -38,8 +34,8 @@
 		return
 	ignite()
 
-/obj/machinery/igniter/Process()	//ugh why is this even in process()?
-	if (on && powered() )
+/obj/machinery/igniter/Process()
+	if(powered())
 		var/turf/location = src.loc
 		if (isturf(location))
 			location.hotspot_expose(1000,500,1)
@@ -48,8 +44,11 @@
 /obj/machinery/igniter/proc/ignite()
 	use_power_oneoff(50)
 	on = !on
+	if(on)
+		START_PROCESSING(SSmachines, src)
+	else
+		STOP_PROCESSING(SSmachines, src)
 	update_icon()
-
 
 // Wall mounted remote-control igniter.
 

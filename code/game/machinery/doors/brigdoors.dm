@@ -49,8 +49,8 @@
 			targets += C
 
 	if(targets.len==0)
-		stat |= BROKEN
-	update_icon()
+		set_broken(TRUE)
+	queue_icon_update()
 
 //Main door timer loop, if it's timing and time is >0 reduce time by 1.
 // if it's less than 0, open door, reset timer

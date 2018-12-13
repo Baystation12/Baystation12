@@ -39,7 +39,7 @@ var/list/floor_light_cache = list()
 		if(!src || !WT.isOn())
 			return
 		visible_message("<span class='notice'>\The [user] has repaired \the [src].</span>")
-		stat &= ~BROKEN
+		set_broken(FALSE)
 		damaged = null
 		update_brightness()
 	else if(W.force && user.a_intent == "hurt")
@@ -52,7 +52,7 @@ var/list/floor_light_cache = list()
 		if(!isnull(damaged) && !(stat & BROKEN))
 			visible_message("<span class='danger'>\The [user] smashes \the [src]!</span>")
 			playsound(src, "shatter", 70, 1)
-			stat |= BROKEN
+			set_broken(TRUE)
 		else
 			visible_message("<span class='danger'>\The [user] attacks \the [src]!</span>")
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
@@ -140,7 +140,7 @@ var/list/floor_light_cache = list()
 			if (prob(50))
 				qdel(src)
 			else if(prob(20))
-				stat |= BROKEN
+				set_broken(TRUE)
 			else
 				if(isnull(damaged))
 					damaged = 0

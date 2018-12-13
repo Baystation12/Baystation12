@@ -60,14 +60,14 @@
 				construct_op ++
 				var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
 				A.amount = 5
-				stat |= BROKEN // the machine's been borked!
+				set_broken(TRUE, TRUE) // the machine's been borked!
 		if(3)
 			if(isCoil(P))
 				var/obj/item/stack/cable_coil/A = P
 				if (A.use(5))
 					to_chat(user, "<span class='notice'>You insert the cables.</span>")
 					construct_op--
-					stat &= ~BROKEN // the machine's not borked anymore!
+					set_broken(FALSE, TRUE) // the machine's not borked anymore!
 				else
 					to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
 			if(isCrowbar(P))

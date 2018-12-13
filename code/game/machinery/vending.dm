@@ -559,10 +559,7 @@
 		while(R.get_amount()>0)
 			R.get_product(loc)
 		break
-
-	stat |= BROKEN
-	src.icon_state = "[initial(icon_state)]-broken"
-	return
+	set_broken(TRUE)
 
 //Somebody cut an important wire and now we're following a new definition of "pitch."
 /obj/machinery/vending/proc/throw_item()

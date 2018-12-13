@@ -12,18 +12,11 @@
 
 /obj/machinery/cell_charger/on_update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
-
 	if(charging && !(stat & (BROKEN|NOPOWER)) )
-
 		var/newlevel = 	round(charging.percent() * 4.0 / 99)
-//		log_debug(world, "nl: [newlevel]")
-
-
 		if(chargelevel != newlevel)
-
 			overlays.Cut()
 			overlays += "ccharger-o[newlevel]"
-
 			chargelevel = newlevel
 	else
 		overlays.Cut()
@@ -52,40 +45,36 @@
 			if(!user.unEquip(W, src))
 				return
 			charging = W
+			set_power()
+			START_PROCESSING(SSmachines, src)
 			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
 			chargelevel = -1
-		update_icon()
+		queue_icon_update()
 	else if(isWrench(W))
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove the cell first!</span>")
 			return
 
 		anchored = !anchored
+		set_power()
 		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 /obj/machinery/cell_charger/attack_hand(mob/user)
 	if(charging)
-		usr.put_in_hands(charging)
+		user.put_in_hands(charging)
 		charging.add_fingerprint(user)
 		charging.update_icon()
 
-		src.charging = null
+		charging = null
 		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
 		chargelevel = -1
-		update_icon()
+		set_power()
+		STOP_PROCESSING(SSmachines, src)
 
-/obj/machinery/cell_charger/attack_ai(mob/user)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Borgs can remove the cell if they are near enough
-		if(!src.charging)
-			return
-
-		charging.dropInto(loc)
-		charging.update_icon()
-		charging = null
-		update_icon()
-		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
-
+/obj/machinery/cell_charger/attack_robot(mob/user)
+	if(Adjacent(user)) // Borgs can remove the cell if they are near enough
+		attack_hand(user)
 
 /obj/machinery/cell_charger/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -94,18 +83,22 @@
 		charging.emp_act(severity)
 	..(severity)
 
+/obj/machinery/cell_charger/power_change()
+	if(..())
+		set_power()
 
-/obj/machinery/cell_charger/Process()
-//	log_debug("ccpt [charging] [stat]")
-
+/obj/machinery/cell_charger/proc/set_power()
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
 		update_use_power(POWER_USE_OFF)
 		return
-
 	if (charging && !charging.fully_charged())
-		charging.give(active_power_usage*CELLRATE)
 		update_use_power(POWER_USE_ACTIVE)
-
-		update_icon()
 	else
 		update_use_power(POWER_USE_IDLE)
+	queue_icon_update()
+
+/obj/machinery/cell_charger/Process()
+	if(!charging)
+		return PROCESS_KILL
+	charging.give(active_power_usage*CELLRATE)
+	update_icon()

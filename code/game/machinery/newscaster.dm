@@ -713,7 +713,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				if(hitstaken==3)
 					for (var/mob/O in hearers(5, src.loc))
 						O.show_message("[user.name] smashes the [src.name]!" )
-					stat |= BROKEN
+					set_broken(TRUE)
 					playsound(src.loc, 'sound/effects/Glassbr3.ogg', 100, 1)
 				else
 					for (var/mob/O in hearers(5, src.loc))
@@ -721,7 +721,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		else
 			to_chat(user, "<span class='notice'>This does nothing.</span>")
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/newscaster/attack_ai(mob/user as mob)
 	return src.attack_hand(user) //or maybe it'll have some special functions? No idea.
