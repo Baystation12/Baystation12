@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Placing acids in a fire extinguisher will now destroy them, and may splash acid onto the user."
