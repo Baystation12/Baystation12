@@ -15,8 +15,8 @@
 	name = "Kig-Yar Ship-captain"
 
 	l_ear = /obj/item/device/radio/headset/covenant
-	uniform = /obj/item/clothing/under/covenant/kigyar
-	suit = /obj/item/clothing/suit/armor/covenant/kigyar
+	uniform = /obj/item/clothing/under/kigyar
+	suit = /obj/item/clothing/suit/armor/kigyar
 	suit_store = /obj/item/weapon/gun/energy/plasmapistol
 	back = /obj/item/weapon/gun/projectile/type51carbine
 	l_pocket = /obj/item/weapon/melee/energy/sword/pirate
@@ -49,6 +49,7 @@
 /decl/hierarchy/outfit/unggoycorvette/major
 	name = "Unggoy (Major)"
 
+	l_ear = /obj/item/device/radio/headset/covenant
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	suit_store = /obj/item/weapon/gun/energy/plasmapistol
 	belt = /obj/item/weapon/gun/energy/plasmapistol

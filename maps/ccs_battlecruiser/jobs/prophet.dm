@@ -1,5 +1,5 @@
 
-/datum/antagonist/opredflag_prophet
+/datum/antagonist/opredflag_cov/prophet
 	welcome_text = "You are a religious leader of the Covenant."
 	leader_welcome_text = "You are a high ranking religious leader of the Covenant."
 	victory_text = "The Prophet is victorious!"
@@ -44,7 +44,7 @@
 		While the Shipmaster gives orders on the ship, you give orders to the Shipmaster. \
 		No-one except another prophet would dare countermand or disobey you."
 
-/datum/antagonist/opredflag_prophet/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
+/datum/antagonist/opredflag_cov/prophet/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
 	. = ..()
 
 	var/mob/living/carbon/M = target.current
@@ -52,3 +52,8 @@
 	if(newname)
 		M.name = newname
 		M.real_name = newname
+
+/datum/antagonist/opredflag_cov/prophet/equip(var/mob/living/carbon/human/player)
+	. = ..()
+	player.equip_to_slot_or_del(new /obj/item/clothing/suit/prophet_robe(player), slot_wear_suit)
+	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/covenant(player), slot_l_ear)

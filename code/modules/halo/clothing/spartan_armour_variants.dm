@@ -119,7 +119,7 @@
 
 
 // MK V Grenadier //
-//osamabinbrahmin donator item
+//osamabinbrahmin/liam_gallagher donator item
 /obj/item/clothing/head/helmet/spartan/mkv_grenadier
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V Grenadier"
 	icon_state = "mk5-donorhelm"
@@ -207,3 +207,38 @@
 	name = "MJOLNIR Powered Assault Armor Mark IV Grenadier"
 	icon_state = "kelso-spartanarmor_obj"
 	item_state = "kelso-spartanarmor_worn"
+
+
+// MK IV SpartanKiller //
+//Spartankill3r donator item
+/obj/item/clothing/head/helmet/spartan/spartan_killer
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Scarred EVA"
+	icon_state = "spartankiller-spartanhelm_obj"
+	item_state = "spartankiller-spartanhelm_worn"
+
+/obj/item/clothing/suit/armor/special/spartan/spartan_killer
+	name = "MJOLNIR Powered Assault Armor Mark IV Scarred EVA"
+	icon_state = "spartankiller-spartanarmor_obj"
+	item_state = "spartankiller-spartanarmor_worn"
+	
+	
+//MK IV Osama//
+/obj/item/clothing/head/helmet/spartan/liam_gallagher
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Scarred EVA"
+	icon = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	icon_state = "osama-spartan-helm_obj"
+	item_state = "osama-spartan-helm_worn"
+	icon_override = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+
+/obj/item/clothing/suit/armor/special/spartan/liam_gallagher
+	name = "MJOLNIR Powered Assault Armor Mark IV Scarred EVA"
+	icon = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	icon_state = "osama-spartan-armor_obj"
+	item_state = "osama-spartan-armor_worn"
+	icon_override = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	
+	
+	
+	
+	
+	

@@ -1,6 +1,6 @@
 #define ESWORD_LEAP_DIST 2
-#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan)
-#define LUNGE_DELAY 3 SECONDS
+#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
+#define LUNGE_DELAY 5 SECONDS
 
 /obj/effect/esword_path
 	name = "displaced air"
@@ -122,9 +122,9 @@
 	change_misc_variables(1)
 
 /obj/item/weapon/melee/energy/elite_sword/dropped(var/mob/user)
-	..()
+	. = ..()
 	if(!istype(loc,/mob))
-		if(w_class == ITEM_SIZE_HUGE)
+		if(w_class != ITEM_SIZE_SMALL)
 			if(failsafe)
 				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
 				flick("blade burnout",src)

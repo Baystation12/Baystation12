@@ -26,7 +26,7 @@
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
-	var/use_dynamic_slowdown = 0
+	var/use_dynamic_slowdown = 1
 
 /obj/item/weapon/storage/Destroy()
 	QDEL_NULL(storage_ui)
@@ -39,7 +39,7 @@
 	var/slowdown_total = 0
 	for(var/obj/A in inv)
 		slowdown_total += base_storage_cost(A.w_class) * BACKPACK_SLOWDOWN_MOD
-	var/min_slowdown = (max_storage_space*BACKPACK_SLOWDOWN_MOD)-1 //With backpack slowdown mod of 0.05, means you can carry max 2 normal before slowdown kicks in.
+	var/min_slowdown = 1.5//(max_storage_space*BACKPACK_SLOWDOWN_MOD)-1 //With backpack slowdown mod of 0.05, means you can carry max 2 normal before slowdown kicks in.
 	if(slowdown_total <= min_slowdown)
 		slowdown_total = 0
 	else

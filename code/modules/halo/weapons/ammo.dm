@@ -146,6 +146,10 @@
 	name = "box of 7.62mm M118 magazines"
 	startswith = list(/obj/item/ammo_magazine/m762_ap = 7)
 
+/obj/item/weapon/storage/box/m762_ap_ma5b
+	name = "box of 7.62mm M118 magazines for the MA5B rifle"
+	startswith = list(/obj/item/ammo_magazine/m762_ap/MA5B = 7)
+
 //used by: BR55 battle rifle
 
 /obj/item/ammo_magazine/m95_sap
@@ -190,6 +194,17 @@
 /obj/item/ammo_magazine/a762_box_ap/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/lmg_30cal_box_ap
+	name = "box magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 rounds. Designed for heavier use."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	mag_type = MAGAZINE
+	icon_state = "30cal_lmg_mag"
+	ammo_type = /obj/item/ammo_casing/a762_ap
+	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
+	caliber = "a762"
+	max_ammo = 72
+	multiple_sprites = 1
 
 
 //used by: SRS99 sniper rifle
@@ -211,6 +226,11 @@
 	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/a145_ap
 
+/obj/item/ammo_casing/a145_ap/tracerless
+	desc = "A 14.5mm bullet casing. Some modifications appear to have been made to remove the tracer-effect, however, this is likely to reduce the penetration of the round."
+	caliber = "14.5mm"
+	projectile_type = /obj/item/projectile/bullet/a145_ap/tracerless
+
 /obj/item/projectile/bullet/a145_ap
 	damage = 80
 	step_delay = 0.1
@@ -219,6 +239,12 @@
 	accuracy = 6
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
+
+/obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
+	penetrating = 0
+	armor_penetration = 70
+	tracer_type = null
+	tracer_delay_time = null
 
 /obj/effect/projectile/srs99
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'

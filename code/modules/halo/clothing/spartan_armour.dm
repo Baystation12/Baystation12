@@ -17,6 +17,7 @@
 	siemens_coefficient = 1
 	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 25,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
+	armor_thickness = 60
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -41,19 +42,38 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	armor_thickness = 30
 	species_restricted = list("Spartan")
 
 	specials = list(/datum/armourspecials/gear/human_tank,\
-		/datum/armourspecials/shields/spartan)
+		/datum/armourspecials/shields/spartan,
+		/datum/armourspecials/shieldmonitor/)
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
 	allowed = list(/obj/item/weapon/tank)
 	totalshields = 150
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
+	var/list/available_abilities = list(\
+		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
+		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
+		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\
+		"Overshield Emitter" = /datum/armourspecials/overshield,\
+		"Upper Body Strength Enhancements" = /datum/armourspecials/superstrength,\
+		"Leg Speed and Agility Enhancements" = /datum/armourspecials/superspeed\
+		)
 
 /obj/item/clothing/under/spartan_internal/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()
 	if(gender == FEMALE)
 		I.icon_state += "_f"
 	return I
+
+/obj/item/clothing/suit/armor/special/spartan/equipped(var/mob/user, var/slot)
+	..()
+
+	spawn(0)
+		if(user && user.client && specials.len <= 3 && available_abilities.len)
+			var/ability_type_string = input(user, "Choose the armour ability of your MJOLNIR","MJOLNIR Armour Ability") in available_abilities
+			var/ability_type = available_abilities[ability_type_string]
+			specials.Add(new ability_type(src))

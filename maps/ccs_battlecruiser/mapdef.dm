@@ -16,23 +16,23 @@
 	system_name = "Uncharted System"
 	overmap_size= 60
 	allowed_jobs = list(\
-		/datum/job/opredflag_elite,\
-		/datum/job/opredflag_elite/major,\
-		/datum/job/opredflag_elite/ultra,\
-		/datum/job/opredflag_elite/shipmaster,\
-		/datum/job/opredflag_elite/zealot,\
-		/datum/job/opredflag_elite/ranger,\
-		/datum/job/opredflag_elite/specops,\
-		/datum/job/opredflag_grunt,\
-		/datum/job/opredflag_grunt/major,\
-		/datum/job/opredflag_grunt/ultra,\
-		/datum/job/opredflag_grunt/specops,\
-		/datum/job/opredflag_jackal,\
-		/datum/job/opredflag_skirmisher,\
-		/datum/job/opredflag_skirmisher_major,\
-		/datum/job/opredflag_skirmisher_murmillo,\
-		/datum/job/opredflag_skirmisher_commando,\
-		/datum/job/opredflag_skirmisher_champion,\
+		/datum/job/opredflag_cov/elite,\
+		/datum/job/opredflag_cov/elite/major,\
+		/datum/job/opredflag_cov/elite/ultra,\
+		/datum/job/opredflag_cov/elite/shipmaster,\
+		/datum/job/opredflag_cov/elite/zealot,\
+		/datum/job/opredflag_cov/elite/ranger,\
+		/datum/job/opredflag_cov/elite/specops,\
+		/datum/job/opredflag_cov/grunt,\
+		/datum/job/opredflag_cov/grunt/major,\
+		/datum/job/opredflag_cov/grunt/ultra,\
+		/datum/job/opredflag_cov/grunt/specops,\
+		/datum/job/opredflag_cov/jackal,\
+		/datum/job/opredflag_cov/skirmisher,\
+		/datum/job/opredflag_cov/skirmisher/major,\
+		/datum/job/opredflag_cov/skirmisher/murmillo,\
+		/datum/job/opredflag_cov/skirmisher/commando,\
+		/datum/job/opredflag_cov/skirmisher/champion,\
 		/datum/job/opredflag_spartan,\
 		/datum/job/opredflag_spartan/commander\
 	)

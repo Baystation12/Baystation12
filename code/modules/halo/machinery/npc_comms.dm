@@ -35,7 +35,7 @@
 	var/user_input = input(firer,"Request what action?","Action Requests","Cancel") in requestable_actions + list("Cancel")
 	if(user_input == "Cancel")
 		return
-	ship.parse_action_request(user_input,firer)
+	ship.parse_action_request(user_input,firer,authority_level)
 
 /obj/machinery/overmap_weapon_console/npc_comms_console/oni
 	authority_level = AUTHORITY_LEVEL_ONI

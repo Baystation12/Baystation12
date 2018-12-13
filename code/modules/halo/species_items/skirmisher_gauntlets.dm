@@ -26,11 +26,12 @@
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/New()
 	. = ..()
 
-	my_shield = new(src)
-	my_shield.intercept_chance = src.intercept_chance
+	if(totalshields)
+		my_shield = new(src)
+		my_shield.intercept_chance = src.intercept_chance
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/equipped(var/mob/user, var/slot)
-	if(slot == slot_gloves)
+	if(my_shield && slot == slot_gloves)
 		my_shield.user = user
 	. = ..()
 
@@ -41,7 +42,9 @@
 	return retval
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	return my_shield.handle_shield(user, damage, damage_source, attacker, def_zone, attack_text)
+	if(my_shield)
+		return my_shield.handle_shield(user, damage, damage_source, attacker, def_zone, attack_text)
+	return 0
 
 
 
@@ -51,8 +54,8 @@
 	name = "T'Voan Commando shield gauntlets"
 	item_state = "commandoshield"
 	icon_state = "commandoglove"
-	shieldstrength = 250
-	totalshields = 250
+	shieldstrength = 0
+	totalshields = 0
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/champion
 	name = "T'Voan Champion shield gauntlets"
