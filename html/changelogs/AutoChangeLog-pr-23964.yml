@@ -1,0 +1,4 @@
+author: "PoZe"
+delete-after: True
+changes: 
+  - tweak: "Admin verb Create Object major flaw was optimized to display/search lists of all objects instantly, instead of freezing for 3-4 seconds."
