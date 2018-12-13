@@ -643,7 +643,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard/New()
 	..()
-	BACKPACK_OVERRIDE_SECURITY
+	BACKPACK_OVERRIDE_SECURITY_EXO
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
