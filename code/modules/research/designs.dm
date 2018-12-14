@@ -1823,13 +1823,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/comm_server
 	sort_string = "HAACB"
 
-/datum/design/circuit/comm_traffic
-	name = "telecommunications traffic control console"
-	id = "comm_traffic"
-	req_tech = list(TECH_DATA = 6)
-	build_path = /obj/item/weapon/circuitboard/comm_traffic
-	sort_string = "HAACC"
-
 /datum/design/circuit/message_monitor
 	name = "messaging monitor console"
 	id = "message_monitor"
