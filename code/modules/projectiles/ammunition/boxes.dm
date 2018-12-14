@@ -249,6 +249,17 @@
 /obj/item/ammo_magazine/p10mm/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/c4mm
+	name = "submachine gun magazine (4mm)"
+	icon_state = "4mm"
+	origin_tech = list(TECH_COMBAT = 4)
+	mag_type = MAGAZINE
+	caliber = "4mm"
+	matter = list(MATERIAL_STEEL = 2000)
+	ammo_type = /obj/item/ammo_casing/c4mm
+	max_ammo = 40
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/a762
 	name = "magazine (7.62mm)"
 	icon_state = "762"

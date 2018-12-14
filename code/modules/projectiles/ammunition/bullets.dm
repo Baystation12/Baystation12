@@ -90,6 +90,13 @@
 	icon_state = "10mmcasing"
 	spent_icon = "10mmcasing-spent"
 
+/obj/item/ammo_casing/c4mm
+	desc = "A 4mm bullet casing."
+	caliber = "4mm"
+	projectile_type = /obj/item/projectile/bullet/c4mm
+	icon_state = "4mmcasing"
+	spent_icon = "4mmcasing-spent"
+
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
 	desc = "A 12 gauge slug."
