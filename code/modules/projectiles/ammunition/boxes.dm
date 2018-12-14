@@ -222,7 +222,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a10mm
-	name = "magazine (10mm)"
+	name = "submachine gun magazine (10mm)"
 	icon_state = "10mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
@@ -233,6 +233,20 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a10mm/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/p10mm
+	name = "pistol magazine (10mm)"
+	icon_state = "p10mm"
+	origin_tech = list(TECH_COMBAT = 2)
+	mag_type = MAGAZINE
+	caliber = "10mm"
+	matter = list(MATERIAL_STEEL = 750)
+	ammo_type = /obj/item/ammo_casing/a10mm
+	max_ammo = 10
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/p10mm/empty
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a762

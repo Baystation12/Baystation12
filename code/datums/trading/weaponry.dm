@@ -20,6 +20,7 @@
 
 	possible_trading_items = list(/obj/item/weapon/gun/projectile/pistol    = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/beretta     = TRADER_ALL,
+								/obj/item/weapon/gun/projectile/sigsauer    = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/colt        = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/magnum_pistol= TRADER_ALL,
 								/obj/item/weapon/gun/projectile/sec         = TRADER_ALL,
@@ -33,6 +34,7 @@
 								/obj/item/ammo_magazine/c45mds/empty        = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/mc9mm/empty         = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/mc9mmds/empty       = TRADER_BLACKLIST,
+								/obj/item/ammo_magazine/p10mm/empty         = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/box/c9mm/empty      = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/box/c45/empty       = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/box/a556/empty      = TRADER_BLACKLIST,

@@ -63,6 +63,11 @@
 	item_cost = 8
 	path = /obj/item/ammo_magazine/a10mm
 
+/datum/uplink_item/item/ammo/p10mm
+	name = "10mm Pistol Magazine"
+	item_cost = 6
+	path = /obj/item/ammo_magazine/a10mm
+
 /datum/uplink_item/item/ammo/a50
 	name = ".50 AE magazine"
 	item_cost = 8
@@ -75,7 +80,6 @@
 
 /datum/uplink_item/item/ammo/c38
 	name = ".38 speedloader"
-	item_cost = 8
 	path = /obj/item/ammo_magazine/c38
 
 /datum/uplink_item/item/ammo/flechette
