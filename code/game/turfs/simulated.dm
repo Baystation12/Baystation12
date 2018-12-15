@@ -105,6 +105,9 @@
 
 				bloodDNA = null
 
+		if(M.lying)
+			return ..()
+
 		if(src.wet)
 
 			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
