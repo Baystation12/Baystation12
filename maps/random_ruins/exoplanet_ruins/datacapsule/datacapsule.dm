@@ -72,8 +72,8 @@
 
 
 
-/obj/item/weapon/reagent_containers/glass/bottle/zombiescience/New()
-	..()
+/obj/item/weapon/reagent_containers/glass/bottle/zombiescience/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/zombie/science, 30) //Should pretty much be death if they decide to chug it, unless explorers happen to follow chemical procedure for once - Pandolphina
 	update_icon()
 
