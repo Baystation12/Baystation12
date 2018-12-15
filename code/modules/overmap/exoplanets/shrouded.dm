@@ -11,7 +11,8 @@
 							/datum/map_template/ruin/exoplanet/radshrine,
 							/datum/map_template/ruin/exoplanet/spider_nest,
 							/datum/map_template/ruin/exoplanet/deserted_lab,
-							/datum/map_template/ruin/exoplanet/playablecolony)
+							/datum/map_template/ruin/exoplanet/playablecolony,
+							/datum/map_template/ruin/exoplanet/datacapsule)
 
 /obj/effect/overmap/sector/exoplanet/shrouded/generate_map()
 	for(var/zlevel in map_z)
