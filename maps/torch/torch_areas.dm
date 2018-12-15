@@ -1263,6 +1263,14 @@
 	name = "\improper Holodeck - Volleyball"
 	sound_env = PLAIN
 
+/area/holodeck/source_temple
+	name = "\improper Holodeck - Temple"
+	sound_env = SMALL_ENCLOSED
+
+/area/holodeck/source_plaza
+	name = "\improper Holodeck - Plaza"
+	sound_env = SMALL_ENCLOSED
+
 // Engineering
 
 /area/engineering/atmos/storage

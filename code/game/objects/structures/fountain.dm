@@ -54,3 +54,12 @@
 		user.age = round(rand(15,17))
 	used = TRUE
 	desc = "The water flows beautifully from the spout, but the water in the pool does not ripple."
+
+/obj/structure/fountain/mundane
+	name = "fountain"
+	desc = "A beautifully constructed fountain."
+	icon_state = "fountain_g"
+	used = TRUE
+
+/obj/structure/fountain/mundane/attack_hand()
+	return

@@ -162,6 +162,12 @@
 /obj/item/stack/tile/linoleum/fifty
 	amount = 50
 
+/obj/item/stack/tile/stone
+	name = "stone slabs"
+	singular name = "stone slab"
+	desc = "A smooth, flat slab of some kind of stone."
+	icon_state = "tile_stone"
+
 /*
  * Carpets
  */
