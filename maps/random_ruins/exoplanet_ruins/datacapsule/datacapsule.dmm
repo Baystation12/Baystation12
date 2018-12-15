@@ -31,7 +31,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/datacapsule)
 "i" = (
-/obj/machinery/blackbox_recorder,
+/obj/machinery/constructable_frame/machine_frame,
 /turf/simulated/floor/plating,
 /area/map_template/datacapsule)
 "j" = (

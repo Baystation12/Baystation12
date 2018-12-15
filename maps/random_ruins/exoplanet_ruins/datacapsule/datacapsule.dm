@@ -14,21 +14,15 @@
 
 
 
-/decl/hierarchy/outfit/corpse/zombiescience
+/obj/effect/landmark/corpse/zombiescience
+	name = "Dead Scientist"
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zombie_science)
+
+/decl/hierarchy/outfit/corpse/zombie_science
 	name = OUTFIT_JOB_NAME("Dead Scientist")
 	uniform = /obj/item/clothing/under/rank/scientist
 	suit = /obj/item/clothing/suit/bio_suit/anomaly
 	head = /obj/item/clothing/head/bio_hood/anomaly
-
-
-
-/obj/effect/landmark/corpse/zombiescience
-	name = "Dead Scientist"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zombiescience)
-
-
-
-
 
 /datum/reagent/toxin/zombie/science
 	name = "Isolated Corruption"
