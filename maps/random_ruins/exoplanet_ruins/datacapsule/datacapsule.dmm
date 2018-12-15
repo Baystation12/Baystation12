@@ -15,10 +15,6 @@
 /obj/machinery/door/blast/shutters,
 /turf/simulated/floor/reinforced,
 /area/map_template/datacapsule)
-"e" = (
-/obj/item/stack/material/ocp,
-/turf/template_noop,
-/area/template_noop)
 "f" = (
 /obj/machinery/telecomms/server,
 /turf/simulated/floor/reinforced,
@@ -58,13 +54,20 @@
 /obj/item/stack/material/steel,
 /turf/simulated/floor/plating,
 /area/map_template/datacapsule)
+"p" = (
+/obj/structure/sign/warning/server_room,
+/turf/simulated/wall/ocp_wall,
+/area/map_template/datacapsule)
+"T" = (
+/turf/simulated/wall/ocp_wall,
+/area/map_template/datacapsule)
 
 (1,1,1) = {"
 a
 a
 a
 a
-e
+a
 a
 a
 a
@@ -90,7 +93,7 @@ a
 a
 a
 a
-e
+a
 a
 "}
 (3,1,1) = {"
@@ -100,10 +103,10 @@ b
 b
 b
 b
-a
+T
 b
 b
-a
+T
 a
 a
 a
@@ -130,7 +133,7 @@ a
 (5,1,1) = {"
 a
 a
-a
+p
 b
 f
 i
@@ -171,7 +174,7 @@ j
 g
 n
 b
-e
+T
 a
 a
 a
