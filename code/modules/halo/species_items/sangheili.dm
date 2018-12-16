@@ -77,11 +77,12 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+
 //Code for in guantlet energy daggers + the weapon itself ( edited dagger)
 
 	action_button_name = "Toggle Gauntlet Energy Dagger"
 
-	var/obj/item/weapon/melee/energy/g_dagger/connected_dagger = /obj/item/weapon/melee/energy/g_dagger
+	var/obj/item/weapon/melee/g_dagger/connected_dagger = /obj/item/weapon/melee/g_dagger
 	var/mob/current_user
 
 /obj/item/clothing/gloves/thick/sangheili/New()
@@ -115,9 +116,8 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /obj/item/clothing/gloves/thick/sangheili/proc/unequip_dagger()
 	current_user.drop_from_inventory(connected_dagger)
-	contents -= connected_dagger
+	contents += connected_dagger
 	update_inhand_icons()
-	qdel(src)
 
 /obj/item/clothing/gloves/thick/sangheili/proc/update_inhand_icons()
 	if(!current_user)
@@ -131,27 +131,30 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /obj/item/clothing/gloves/thick/sangheili/proc/on_dagger_dropped()
 	contents += connected_dagger
-	qdel(src)
 
-/obj/item/weapon/melee/energy/g_dagger/proc/inhand_check()
-	var/mob/current_user
-	var/mob/living/carbon/human/h = current_user
+/obj/item/weapon/melee/g_dagger/proc/inhand_check()
+	var/mob/living/carbon/human/h = creator_dagger.current_user
 	if(istype(h))
 		if(h.l_hand  || h.r_hand == src)
 			return 1
 	return 0
+
+/obj/item/weapon/melee/g_dagger/dropped()
+	if(!inhand_check())
+		creator_dagger.on_dagger_dropped()
 
 /obj/item/clothing/gloves/thick/sangheili/ui_action_click()
 	if(!connected_dagger.inhand_check())
 		equip_dagger()
 		playsound(usr, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	else
+		playsound(usr, 'sound/weapons/saberoff.ogg', 75, 1)
 		unequip_dagger()
 
 
-//Physical dagger object define - this is essentially the dagger but without activate states - can only be 'on'//
+//Physical dagger object define - this is essentially the dagger but without activate states - can only be 'on'. Had to do it this way due to the inherits from /energy and /elite_sword causing issues//
 
-/obj/item/weapon/melee/energy/g_dagger
+/obj/item/weapon/melee/g_dagger
 	name = "Internal Energy Dagger"
 	desc = "A wrist-mounted Energy Dagger that extends from sangheili combat gauntlets"
 
@@ -162,7 +165,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	throwforce = 12
 	edge = 0
 	sharp = 0
-
+	var/obj/item/clothing/gloves/thick/sangheili/creator_dagger
 	var/next_leapwhen
 
 	canremove = 0
@@ -172,8 +175,11 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	slot_l_hand_str = "en_dag_l_hand",
 	slot_r_hand_str = "en_dag_r_hand" )
 	hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+/obj/item/weapon/melee/g_dagger/New(var/obj/created_by)
+	.=..()
+	creator_dagger = created_by
 
-/obj/item/weapon/melee/energy/g_dagger/attack(var/mob/m,var/mob/user)
+/obj/item/weapon/melee/g_dagger/attack(var/mob/m,var/mob/user)
 	if(ismob(m))
 		damtype = BURN
 	return ..()
@@ -181,17 +187,17 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 //The lunge code straight from the energy sword, switched to work here.
 
 #define ESWORD_LEAP_DIST 2
-#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
+#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili)
 #define LUNGE_DELAY 5 SECONDS
 
-/obj/item/weapon/melee/energy/g_dagger/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
+/obj/item/weapon/melee/g_dagger/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
 	if(isnull(mob) || !istype(mob))
 		return 0
 	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
 		return 5
 	return ESWORD_LEAP_DIST
 
-/obj/item/weapon/melee/energy/g_dagger/afterattack(var/atom/target,var/mob/user)
+/obj/item/weapon/melee/g_dagger/afterattack(var/atom/target,var/mob/user)
 	if(world.time < next_leapwhen)
 		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
 		return
@@ -230,69 +236,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(user.Adjacent(target) && ismob(target))
 			attack(target,user)
 		next_leapwhen = world.time + LUNGE_DELAY
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Sangheili Armour Subtype Defines//
 
