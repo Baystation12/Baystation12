@@ -16,14 +16,13 @@
 	R.add_fingerprint(user)
 	qdel(src)
 
-
 /obj/item/inflatable/wall
 	name = "inflatable wall"
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
 	icon_state = "folded_wall"
 	deploy_path = /obj/structure/inflatable/wall
 
-/obj/item/inflatable/door/
+/obj/item/inflatable/door
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
 	icon_state = "folded_door"
@@ -39,7 +38,7 @@
 	icon_state = "wall"
 
 	var/undeploy_path = null
-	var/health = 50.0
+	var/health = 50
 
 /obj/structure/inflatable/wall
 	name = "inflatable wall"
@@ -189,6 +188,10 @@
 
 /obj/structure/inflatable/door/proc/SwitchState()
 	if(state)
+		var/turf/T = get_turf(src)
+		for(var/atom/movable/AM in T)
+			if(AM.blocks_airlock())
+				return
 		Close()
 	else
 		Open()
@@ -207,9 +210,9 @@
 /obj/structure/inflatable/door/proc/Close()
 	isSwitchingStates = 1
 	flick("door_closing",src)
-	sleep(10)
 	set_density(1)
 	set_opacity(0)
+	sleep(10)
 	state = 0
 	update_icon()
 	isSwitchingStates = 0
