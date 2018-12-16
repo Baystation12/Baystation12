@@ -58,9 +58,6 @@
 /obj/structure/sign/warning/server_room,
 /turf/simulated/wall/ocp_wall,
 /area/map_template/datacapsule)
-"T" = (
-/turf/simulated/wall/ocp_wall,
-/area/map_template/datacapsule)
 
 (1,1,1) = {"
 a
@@ -103,10 +100,10 @@ b
 b
 b
 b
-T
 b
 b
-T
+b
+b
 a
 a
 a
@@ -174,7 +171,7 @@ j
 g
 n
 b
-T
+b
 a
 a
 a
