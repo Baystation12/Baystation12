@@ -242,6 +242,7 @@
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
+		return
 
 	if(is_charged_weapon==1)
 		playsound(src.loc, charge_sound, 100, 1)
