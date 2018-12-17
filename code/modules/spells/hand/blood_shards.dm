@@ -11,6 +11,7 @@
 	max_casts = 2
 	compatible_targets = list(/atom)
 	hud_state = "wiz_bshard"
+	cast_sound = 'sound/magic/demon_attack1.ogg'
 
 /spell/hand/charges/blood_shard/cast_hand(var/atom/A,var/mob/user)
 	var/obj/item/projectile/blood_shard/B = new(get_turf(user))

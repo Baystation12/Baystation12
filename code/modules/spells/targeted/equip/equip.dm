@@ -2,6 +2,7 @@
 
 /spell/targeted/equip_item
 	name = "equipment spell"
+	cast_sound = 'sound/magic/summonitems_generic.ogg'
 
 	var/list/equipped_summons = list() //assoc list of text ids and paths to spawn
 
