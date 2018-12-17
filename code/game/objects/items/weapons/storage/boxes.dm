@@ -151,37 +151,37 @@
 /obj/item/weapon/storage/box/blanks
 	name = "box of blank shells"
 	desc = "It has a picture of a gun and several warning symbols on the front."
-	startswith = list(/obj/item/ammo_casing/shotgun/blank = 7)
-
-/obj/item/weapon/storage/box/beanbags
-	name = "box of beanbag shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/beanbag = 7)
-
-/obj/item/weapon/storage/box/shotgunammo
-	name = "box of shotgun slugs"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun = 7)
-
-/obj/item/weapon/storage/box/shotgunshells
-	name = "box of shotgun shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/pellet = 7)
-
-/obj/item/weapon/storage/box/flashshells
-	name = "box of illumination shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/flash = 7)
-
-/obj/item/weapon/storage/box/stunshells
-	name = "box of stun shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/stunshell = 7)
+	startswith = list(/obj/item/ammo_casing/shotgun/blank = 8)
 
 /obj/item/weapon/storage/box/practiceshells
 	name = "box of practice shells"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/practice = 7)
+	startswith = list(/obj/item/ammo_casing/shotgun/practice = 8)
+
+/obj/item/weapon/storage/box/beanbags
+	name = "box of beanbag shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	startswith = list(/obj/item/ammo_magazine/shotholder/beanbag = 2)
+
+/obj/item/weapon/storage/box/shotgunammo
+	name = "box of shotgun slugs"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	startswith = list(/obj/item/ammo_magazine/shotholder = 2)
+
+/obj/item/weapon/storage/box/shotgunshells
+	name = "box of shotgun shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	startswith = list(/obj/item/ammo_magazine/shotholder/shell = 2)
+
+/obj/item/weapon/storage/box/flashshells
+	name = "box of illumination shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	startswith = list(/obj/item/ammo_magazine/shotholder/flash = 2)
+
+/obj/item/weapon/storage/box/stunshells
+	name = "box of stun shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	startswith = list(/obj/item/ammo_magazine/shotholder/stun = 2)
 
 /obj/item/weapon/storage/box/sniperammo
 	name = "box of 14.5mm shells"
