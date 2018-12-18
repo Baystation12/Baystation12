@@ -314,7 +314,7 @@ proc/get_radio_key_from_channel(var/channel)
 			if(M)
 				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 				if(M.client)
-					speech_bubble_recipients += M.client
+					speech_bubble_recipients |= M.client
 
 		for(var/obj/O in eavesdroping)
 			spawn(0)
