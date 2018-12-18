@@ -9,12 +9,12 @@
 
 /obj/item/weapon/circuitboard/aiupload
 	name = T_BOARD("AI upload console")
-	build_path = /obj/machinery/computer/aiupload
+	build_path = /obj/machinery/computer/upload/ai
 	origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/circuitboard/borgupload
 	name = T_BOARD("cyborg upload console")
-	build_path = /obj/machinery/computer/borgupload
+	build_path = /obj/machinery/computer/upload/robot
 	origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/circuitboard/teleporter
