@@ -7154,7 +7154,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/computer/borgupload,
+/obj/machinery/computer/upload/robot,
 /obj/item/device/radio/intercom/locked/ai_private{
 	pixel_y = 22
 	},
@@ -9466,7 +9466,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/computer/aiupload{
+/obj/machinery/computer/upload/ai{
 	icon_state = "computer";
 	dir = 1
 	},
