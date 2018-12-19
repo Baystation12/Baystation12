@@ -70,7 +70,7 @@
 	req_amount = 6
 	time = 20
 	on_floor = 1
-	difficulty = 3
+	difficulty = 1
 	send_material_data = 1
 
 /datum/stack_recipe/grip
@@ -79,7 +79,7 @@
 	req_amount = 4
 	time = 20
 	on_floor = 1
-	difficulty = 3
+	difficulty = 1
 	send_material_data = 1
 
 /datum/stack_recipe/key
@@ -145,25 +145,25 @@
 	title = "modular console frame"
 	result_type = /obj/item/modular_computer/console
 	req_amount = 20
-	difficulty = 3
+	difficulty = 2
 
 /datum/stack_recipe/computer/telescreen
 	title = "modular telescreen frame"
 	result_type = /obj/item/modular_computer/telescreen
 	req_amount = 10
-	difficulty = 3
+	difficulty = 2
 
 /datum/stack_recipe/computer/laptop
 	title = "modular laptop frame"
 	result_type = /obj/item/modular_computer/laptop
 	req_amount = 10
-	difficulty = 3
+	difficulty = 2
 
 /datum/stack_recipe/computer/tablet
 	title = "modular tablet frame"
 	result_type = /obj/item/modular_computer/tablet
 	req_amount = 5
-	difficulty = 3
+	difficulty = 2
 
 /datum/stack_recipe/hazard_cone
 	title = "hazard cone"
@@ -218,6 +218,7 @@
 	title = "stick"
 	result_type = /obj/item/weapon/material/stick
 	send_material_data = 1
+	difficulty = 0
 
 /datum/stack_recipe/crossbowframe
 	title = "crossbow frame"
@@ -239,11 +240,14 @@
 	title = "cardborg suit"
 	result_type = /obj/item/clothing/suit/cardborg
 	req_amount = 3
+	difficulty = 0
 
 /datum/stack_recipe/cardborg_helmet
 	title = "cardborg helmet"
 	result_type = /obj/item/clothing/head/cardborg
+	difficulty = 0
 
 /datum/stack_recipe/candle
 	title = "candle"
 	result_type = /obj/item/weapon/flame/candle
+	difficulty = 0

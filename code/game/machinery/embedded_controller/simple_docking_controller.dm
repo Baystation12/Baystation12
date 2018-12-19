@@ -1,17 +1,12 @@
 //a docking port that uses a single door
 /obj/machinery/embedded_controller/radio/simple_docking_controller
 	name = "docking hatch controller"
+	program = /datum/computer/file/embedded_program/docking/simple
 	var/tag_door
-	var/datum/computer/file/embedded_program/docking/simple/docking_program
-	var/progtype = /datum/computer/file/embedded_program/docking/simple/
-
-/obj/machinery/embedded_controller/radio/simple_docking_controller/New()
-	..()
-	docking_program = new progtype(src)
-	program = docking_program
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
+	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
 	data = list(
 		"docking_status" = docking_program.get_docking_status(),
@@ -27,25 +22,6 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-
-/obj/machinery/embedded_controller/radio/simple_docking_controller/Topic(href, href_list)
-	if(..())
-		return 1
-
-	usr.set_machine(src)
-
-	var/clean = 0
-	switch(href_list["command"])	//anti-HTML-hacking checks
-		if("force_door")
-			clean = 1
-		if("toggle_override")
-			clean = 1
-
-	if(clean)
-		program.receive_user_command(href_list["command"])
-
-	return 0
-
 
 //A docking controller program for a simple door based docking port
 /datum/computer/file/embedded_program/docking/simple
@@ -76,6 +52,7 @@
 	..(signal, receive_method, receive_param)
 
 /datum/computer/file/embedded_program/docking/simple/receive_user_command(command)
+	. = TRUE
 	switch(command)
 		if("force_door")
 			if (override_enabled)
@@ -88,7 +65,8 @@
 				disable_override()
 			else
 				enable_override()
-
+		else
+			. = FALSE
 
 /datum/computer/file/embedded_program/docking/simple/proc/signal_door(var/command)
 	var/datum/signal/signal = new

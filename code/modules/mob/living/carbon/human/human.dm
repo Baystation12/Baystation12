@@ -298,7 +298,7 @@
 //Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
-	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
+	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		if(istype(wear_mask))
 			return wear_mask.visible_name
 		else
@@ -1510,7 +1510,7 @@
 			else
 				src.show_message("My [org.name] is <span class='notice'>OK.</span>",1)
 
-		if((SKELETON in mutations) && (!w_uniform) && (!wear_suit))
+		if((MUTATION_SKELETON in mutations) && (!w_uniform) && (!wear_suit))
 			play_xylophone()
 
 /mob/living/carbon/human/proc/resuscitate()

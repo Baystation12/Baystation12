@@ -5,7 +5,6 @@
 	icon_state = "table2-idle"
 	density = 1
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 1
 	active_power_usage = 5
 
@@ -71,7 +70,7 @@
 
 /obj/machinery/optable/attack_hand(var/mob/user)
 
-	if(HULK in user.mutations)
+	if(MUTATION_HULK in user.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.set_density(0)
 		qdel(src)

@@ -200,7 +200,7 @@ specialty pins
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
 
-/obj/item/clothing/accessory/solgov/speciality/pilot
+/obj/item/clothing/accessory/solgov/specialty/pilot
 	name = "pilot's qualification pin"
 	desc = "An iron pin denoting the qualification to fly SCG spacecraft."
 	icon_state = "pin_pilot"
@@ -297,6 +297,16 @@ armour attachments
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the word POLICE printed in silver lettering on it."
 	icon_state = "sectag"
+
+/obj/item/clothing/accessory/armor/tag/solgov/medic
+	name = "\improper MEDIC tag"
+	desc = "An armor tag with the word MEDIC printed in red lettering on it."
+	icon_state = "medictag"
+
+/obj/item/clothing/accessory/armor/tag/solgov/agent
+	name = "\improper OCIE AGENT tag"
+	desc = "An armor tag with the word OCIE AGENT printed in gold lettering on it."
+	icon_state = "agenttag"
 
 /obj/item/clothing/accessory/armor/tag/solgov/com
 	name = "\improper SCG tag"

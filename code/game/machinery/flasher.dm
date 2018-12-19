@@ -12,7 +12,6 @@
 	var/strength = 10 //How weakened targets are when flashed.
 	var/base_state = "mflash"
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/_wifi_id
@@ -74,7 +73,7 @@
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	flick("[base_state]_flash", src)
 	src.last_flash = world.time
-	use_power(1500)
+	use_power_oneoff(1500)
 
 	for (var/mob/living/O in viewers(src, null))
 		if (get_dist(src, O) > src.range)
@@ -110,13 +109,16 @@
 	..(severity)
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
-	if ((src.disable) || (src.last_flash && world.time < src.last_flash + 150))
+	if(!anchored || disable || last_flash && world.time < last_flash + 150)
 		return
 
 	if(istype(AM, /mob/living/carbon))
 		var/mob/living/carbon/M = AM
-		if (!MOVING_DELIBERATELY(M) && (src.anchored))
-			src.flash()
+		if(!MOVING_DELIBERATELY(M))
+			flash()
+	
+	if(isanimal(AM))
+		flash()
 
 /obj/machinery/flasher/portable/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isWrench(W))
@@ -140,7 +142,7 @@
 	if(..())
 		return
 
-	use_power(5)
+	use_power_oneoff(5)
 
 	active = 1
 	icon_state = "launcheract"

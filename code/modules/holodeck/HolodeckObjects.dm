@@ -367,7 +367,6 @@
 	var/eventstarted = 0
 
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON

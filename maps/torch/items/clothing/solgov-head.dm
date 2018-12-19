@@ -182,7 +182,7 @@
 
 /obj/item/clothing/head/beret/solgov/research
 	name = "government research beret"
-	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
+	desc = "A green beret denoting service in the Bureau of Research. For scientists that are more inclined towards style than safety."
 	icon_state = "beret_green"
 
 /obj/item/clothing/head/beret/solgov/health

@@ -159,7 +159,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return
 
-	if(HUSK in T.mutations)
+	if(MUTATION_HUSK in T.mutations)
 		to_chat(src, "<span class='warning'>This creature's DNA is ruined beyond useability!</span>")
 		return
 
@@ -807,7 +807,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
+	if((MUTATION_HUSK in T.mutations) || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return 0
 

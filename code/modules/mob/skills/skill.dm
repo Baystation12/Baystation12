@@ -1,9 +1,10 @@
 GLOBAL_LIST_EMPTY(skills)
 
 /decl/hierarchy/skill
-	var/ID = "none"					// ID of this skill. Needs to be unique.
-	name = "None" 				// Name of the skill. This is what the player sees.
-	var/desc = "Placeholder skill" 	// Generic description of this skill.
+	var/ID = "none"                        // ID of this skill. Needs to be unique.
+	name = "None"                          // Name of the skill. This is what the player sees.
+	hierarchy_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
+	var/desc = "Placeholder skill"         // Generic description of this skill.
 
    	// Names for different skill values, in order from 1 up.
 	var/levels = list( 		"Unskilled"			= "Unskilled Description",
@@ -11,9 +12,9 @@ GLOBAL_LIST_EMPTY(skills)
 							"Trained"			= "Trained Description",
 							"Experienced"		= "Experienced Description",
 							"Master"		= "Professional Description")
-	var/difficulty = SKILL_AVERAGE   //Used to compute how expensive the skill is
-	var/default_max = SKILL_ADEPT    //Makes the skill capped at this value in selection unless overriden at job level.
-	var/prerequisites // A list of skill prerequisites, if needed.
+	var/difficulty = SKILL_AVERAGE         //Used to compute how expensive the skill is
+	var/default_max = SKILL_ADEPT          //Makes the skill capped at this value in selection unless overriden at job level.
+	var/prerequisites                      // A list of skill prerequisites, if needed.
 
 /decl/hierarchy/skill/proc/get_cost(var/level)
 	switch(level)
@@ -24,10 +25,9 @@ GLOBAL_LIST_EMPTY(skills)
 		else
 			return 0
 
-//Do not attempt to get_decl any of these except /decl/hierarchy/skill from decls_repository. Use the children variable or GLOB.skills instead.
-/decl/hierarchy/skill/Initialize(var/full_init = TRUE)
-	..(full_init)
-	if(full_init)
+/decl/hierarchy/skill/Initialize()
+	..()
+	if(is_hidden_category())
 		if(!GLOB.skills.len)
 			for(var/decl/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
@@ -230,10 +230,10 @@ GLOBAL_LIST_EMPTY(skills)
 	ID = "construction"
 	name = "Construction"
 	desc = "Your ability to construct various buildings, such as walls, floors, tables and so on. Note that constructing devices such as APCs additionally requires the Electronics skill. A low level of this skill is typical for janitors, a high level of this skill is typical for engineers."
-	levels = list( "Unskilled"			= "You can move furniture, assemble or disassemble chairs and tables (sometimes they even stay assembled), bash your way through a window, open a crate, or pry open an unpowered airlock. You can recognize and use basic hand tools and inflatable barriers, though not very well.<br>- You can construct items from stacks of materials with a low speed. Speed and the amount of recipes increase by level.",
-						"Basic"				= "You can dismantle or build a wall or window, build furniture, redecorate a room, and replace floor tiles and carpeting. You can safely use a welder without burning your eyes, and using hand tools is second nature to you.<br>- You can construct items from Bronze, Gold, Osmium, Plasteel, Platinum, Reinforced Glass, Sandstone, Silver, and Titanium.",
-						"Trained"			= "You can build, repair, or dismantle most things, but will occasionally make mistakes and have things not come out the way you expected.<br>- You can construct items from Deuterium, Diamond, Metallic Hydrogen, Osmium-Carbide Plasteel, Phoron, Phoron Glass, Tritium, and Uranium.<br>- You can construct furnitures.<br>- You can construct simple objects such as light fixtures, crude weapons, and wall-mounted frames.",
-						"Experienced"		= "You know how to seal a breach, rebuild broken piping, and repair major damage. You know the basics of structural engineering.<br>- You can construct complex objects such as machine and weapon frames.",
+	levels = list( "Unskilled"			= "You can break furniture, disassemble chairs and tables, bash your way through a window, open a crate, or pry open an unpowered airlock. You can recognize and use basic hand tools and inflatable barriers, though not very well.",
+						"Basic"				= "You can dismantle or build a wall or window, redecorate a room, and replace floor tiles and carpeting. You can safely use a welder without burning your eyes, and using hand tools is second nature to you.<br>- You can construct items from Steel, Wood and Plastic.",
+						"Trained"			= "You can build, repair, or dismantle most things, but will occasionally make mistakes and have things not come out the way you expected.<br>- You can construct items from Bronze, Gold, Osmium, Plasteel, Platinum, Reinforced Glass, Sandstone, Silver, Deuterium, Metallic Hydrogen, Phoron, Phoron Glass, Tritium, and Uranium.<br>- You can construct furnitures.<br>- You can construct simple objects such as light fixtures, crude weapons, and wall-mounted frames.",
+						"Experienced"		= "You know how to seal a breach, rebuild broken piping, and repair major damage. You know the basics of structural engineering.<br>- You can construct items from Osmium-Carbide Plasteel, Titanium, Diamond and make complex objects such as machine and weapon frames.",
 						"Master"		= "You are a construction worker or engineer. You could pretty much rebuild the installation or ship from the ground up, given supplies, and you're efficient and skilled at repairing damage.")
 	difficulty = SKILL_EASY
 

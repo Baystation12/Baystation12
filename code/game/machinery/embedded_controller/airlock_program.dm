@@ -51,8 +51,8 @@
 		tag_interior_door = controller.tag_interior_door? controller.tag_interior_door : "[id_tag]_inner"
 		tag_airpump = controller.tag_airpump? controller.tag_airpump : "[id_tag]_pump"
 		tag_chamber_sensor = controller.tag_chamber_sensor? controller.tag_chamber_sensor : "[id_tag]_sensor"
-		tag_exterior_sensor = controller.tag_exterior_sensor
-		tag_interior_sensor = controller.tag_interior_sensor
+		tag_exterior_sensor = controller.tag_exterior_sensor || "[id_tag]_exterior_sensor"
+		tag_interior_sensor = controller.tag_interior_sensor || "[id_tag]_interior_sensor"
 		tag_airlock_mech_sensor = controller.tag_airlock_mech_sensor? controller.tag_airlock_mech_sensor : "[id_tag]_airlock_mech"
 		tag_shuttle_mech_sensor = controller.tag_shuttle_mech_sensor? controller.tag_shuttle_mech_sensor : "[id_tag]_shuttle_mech"
 		memory["secure"] = controller.tag_secure
@@ -116,6 +116,7 @@
 
 /datum/computer/file/embedded_program/airlock/receive_user_command(command)
 	var/shutdown_pump = 0
+	. = TRUE
 	switch(command)
 		if("cycle_ext")
 			//If airlock is already cycled in this direction, just toggle the doors.
@@ -162,6 +163,8 @@
 			else
 				signalDoor(tag_interior_door, "unlock")
 				signalDoor(tag_exterior_door, "unlock")
+		else
+			. = FALSE
 
 	if(shutdown_pump)
 		signalPump(tag_airpump, 0)		//send a signal to stop pressurizing

@@ -5,9 +5,12 @@
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
+	var/sa_accuracy = 85 //base chance to hit out of 100
 	var/projectiletype
 	var/projectilesound
 	var/casingtype
+	var/fire_desc = "fires" //"X fire_desc at Y!"
+	var/ranged_range = 6 //tiles of range for ranged attackers to attack
 	var/move_to_delay = 4 //delay for the automated movement.
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
@@ -18,7 +21,9 @@
 
 	var/shuttletarget = null
 	var/enroute = 0
-	var/stop_AI = FALSE // this var stops most AI procs from running
+	var/stop_automation = FALSE //stops AI procs from running
+	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
+	var/pry_desc = "prying" //"X begins pry_desc the door!"
 
 	//hostile mobs will bash through these in order - any new entry must have a functioning attack_generic()
 	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
@@ -26,9 +31,23 @@
 												/obj/machinery/door/window,
 												/obj/structure/table,
 												/obj/structure/grille,
-												/obj/structure/wall_frame)
+												/obj/structure/wall_frame,
+												/obj/structure/railing)
+
+/mob/living/simple_animal/hostile/proc/can_act()
+	if(stat || stop_automation || incapacitated())
+		return FALSE
+	return TRUE
+
+/mob/living/simple_animal/hostile/proc/kick_stance()
+	if(target_mob)
+		stance = HOSTILE_STANCE_ATTACK
+	else
+		stance = HOSTILE_STANCE_IDLE
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
+	if(!can_act())
+		return null
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
 	stop_automated_movement = 0
@@ -72,12 +91,17 @@
 	return
 
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
+	if(!can_act())
+		return
+	if(confused)
+		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
+		return
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		if(ranged)
-			if(get_dist(src, target_mob) <= 6)
+			if(get_dist(src, target_mob) <= ranged_range)
 				OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
@@ -110,6 +134,9 @@
 	if(!Adjacent(target_mob))
 		return
 	if(isliving(target_mob))
+		if(!prob(get_accuracy()))
+			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
+			return
 		var/mob/living/L = target_mob
 		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense)
 		return L
@@ -127,54 +154,63 @@
 	stance = HOSTILE_STANCE_IDLE
 	walk(src, 0)
 
-
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = hearers(src, dist)
 
 	for (var/obj/mecha/M in mechas_list)
 		if (M.z == src.z && get_dist(src, M) <= dist)
 			L += M
-
 	return L
+
+/mob/living/simple_animal/hostile/proc/get_accuracy()
+	var/accuracy_holder = sa_accuracy
+	if(eye_blind)
+		accuracy_holder -= 15
+	if(confused)
+		accuracy_holder -= 15
+	if(eye_blurry)
+		accuracy_holder -= 10
+	return Clamp(accuracy_holder, 0, 100)
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/Life()
-
 	. = ..()
 	if(!.)
 		walk(src, 0)
 		return 0
 	if(client)
 		return 0
-	if(stop_AI)
+	if(!can_act())
+		walk(src, 0)
+		kick_stance()
 		return 0
 
 	if(isturf(src.loc) && !src.buckled)
-		if(!stat)
-			switch(stance)
-				if(HOSTILE_STANCE_IDLE)
-					target_mob = FindTarget()
+		switch(stance)
+			if(HOSTILE_STANCE_IDLE)
+				target_mob = FindTarget()
 
-				if(HOSTILE_STANCE_ATTACK)
-					if(destroy_surroundings)
-						DestroySurroundings()
-					MoveToTarget()
+			if(HOSTILE_STANCE_ATTACK)
+				face_atom(target_mob)
+				if(destroy_surroundings)
+					DestroySurroundings()
+				MoveToTarget()
 
-				if(HOSTILE_STANCE_ATTACKING)
-					if(destroy_surroundings)
-						DestroySurroundings()
-					AttackTarget()
-				if(HOSTILE_STANCE_INSIDE) //we aren't inside something so just switch
-					stance = HOSTILE_STANCE_IDLE
+			if(HOSTILE_STANCE_ATTACKING)
+				face_atom(target_mob)
+				if(destroy_surroundings)
+					DestroySurroundings()
+				AttackTarget()
+			if(HOSTILE_STANCE_INSIDE) //we aren't inside something so just switch
+				stance = HOSTILE_STANCE_IDLE
 	else
 		if(stance != HOSTILE_STANCE_INSIDE)
 			stance = HOSTILE_STANCE_INSIDE
 			walk(src,0)
 			target_mob = null
-
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
 	var/oldhealth = health
@@ -198,7 +234,7 @@
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	var/target = target_mob
-	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
+	visible_message("<span class='danger'>\The [src] [fire_desc] at \the [target]!</span>", 1)
 
 	if(rapid)
 		spawn(1)
@@ -222,7 +258,6 @@
 	target_mob = null
 	return
 
-
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)
 		return
@@ -233,34 +268,41 @@
 	var/def_zone = get_exposed_defense_zone(target)
 	A.launch(target, def_zone)
 
-/mob/living/simple_animal/hostile/proc/DestroySurroundings()
+/mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
+	if(!can_act())
+		return
 	if(prob(break_stuff_probability) && !Adjacent(target_mob))
 		face_atom(target_mob)
-		for(var/dir in GLOB.cardinal) // North, South, East, West
-			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, dir))
-			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		var/turf/targ = get_step_towards(src, target_mob)
+		if(!targ)
+			return
+
+		var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
+		if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
+			S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+			return
+
+		for(var/type in valid_obstacles_by_priority)
+			var/obj/obstacle = locate(type) in targ
+			if(obstacle)
+				face_atom(obstacle)
+				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
 				return
-			for(var/type in valid_obstacles_by_priority)
-				var/obj/obstacle = locate(type, get_step(src, dir))
-				if(obstacle)
-					face_atom(obstacle)
-					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+
+		for(var/obj/machinery/door/obstacle in targ)
+			if(obstacle.density)
+				if(!obstacle.can_open(1))
 					return
-			for(var/obj/machinery/door/obstacle in get_step(src, dir))
-				if(obstacle.density)
-					if(!obstacle.can_open(1))
-						return
-					face_atom(obstacle)
-					pry_door(src, 5 SECONDS, obstacle)
-					return
+				face_atom(obstacle)
+				pry_door(src, pry_time, obstacle)
+				return
 
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
-	visible_message("<span class='warning'>\The [user] begins prying at \the [pesky_door]!</span>")
-	stop_AI = TRUE
+	visible_message("<span class='warning'>\The [user] begins [pry_desc] at \the [pesky_door]!</span>")
+	stop_automation = TRUE
 	if(do_after(user, delay, pesky_door))
 		pesky_door.open(1)
-		stop_AI = FALSE
+		stop_automation = FALSE
 	else
 		visible_message("<span class='notice'>\The [user] is interrupted.</span>")
-		stop_AI = FALSE
+		stop_automation = FALSE

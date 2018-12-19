@@ -21,6 +21,7 @@
 	if(integrity>50)
 		recipes += new/datum/stack_recipe/furniture/chair(src) //NOTE: the wood material has it's own special chair recipe
 		recipes += new/datum/stack_recipe_list("padded [display_name] chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/padded))
+
 	if(integrity>=50)
 		recipes += new/datum/stack_recipe/furniture/door(src)
 		recipes += new/datum/stack_recipe/furniture/barricade(src)
@@ -29,6 +30,7 @@
 		recipes += new/datum/stack_recipe/furniture/bed(src)
 		recipes += new/datum/stack_recipe/lock(src)
 		recipes += new/datum/stack_recipe/railing(src)
+		recipes += new/datum/stack_recipe/furniture/wall_frame(src)
 
 	if(hardness>50)
 		recipes += new/datum/stack_recipe/fork(src)
@@ -55,7 +57,6 @@
 	recipes += new/datum/stack_recipe/rod(src)
 	recipes += new/datum/stack_recipe/furniture/computerframe(src)
 	recipes += new/datum/stack_recipe/furniture/girder(src)
-	recipes += new/datum/stack_recipe/furniture/wall(src)
 	recipes += new/datum/stack_recipe/furniture/machine(src)
 	recipes += new/datum/stack_recipe/furniture/turret(src)
 	recipes += new/datum/stack_recipe_list("airlock assemblies", create_recipe_list(/datum/stack_recipe/furniture/door_assembly))

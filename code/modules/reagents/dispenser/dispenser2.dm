@@ -15,7 +15,6 @@
 	var/accept_drinking = 0
 	var/amount = 30
 
-	use_power = 1
 	idle_power_usage = 100
 	density = 1
 	anchored = 1

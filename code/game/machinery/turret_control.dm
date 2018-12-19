@@ -198,7 +198,7 @@
 		for (var/obj/machinery/porta_turret/aTurret in control_area)
 			aTurret.setState(TC)
 
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/turretid/power_change()
 	. = ..()

@@ -8,9 +8,6 @@
 	var/viewing = 0
 	var/list/viewers
 
-/obj/machinery/computer/ship/sensors/Initialize()
-	. = ..()
-
 /obj/machinery/computer/ship/sensors/Destroy()
 	sensors = null
 	if(LAZYLEN(viewers))
@@ -156,6 +153,7 @@
 	desc = "Long range gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "sensors"
+	anchored = 1
 	var/max_health = 200
 	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
@@ -218,9 +216,9 @@
 	if(!use_power && (health == 0 || !in_vacuum()))
 		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
-		use_power(idle_power_usage*5)
-	use_power = !use_power
-	update_icon()
+		use_power_oneoff(idle_power_usage*5)
+	update_use_power(!use_power)
+	queue_icon_update()
 
 /obj/machinery/shipsensors/Process()
 	..()
@@ -246,7 +244,7 @@
 
 /obj/machinery/shipsensors/proc/set_range(nrange)
 	range = nrange
-	idle_power_usage = 1500 * (range**2) // Exponential increase, also affects speed of overheating
+	change_power_consumption(1500 * (range**2), POWER_USE_IDLE) //Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
 	if(!use_power)
@@ -258,3 +256,7 @@
 	health = min(max(health - value, 0),max_health)
 	if(use_power && health == 0)
 		toggle()
+
+/obj/machinery/shipsensors/weak
+	heat_reduction = 0.2
+	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."

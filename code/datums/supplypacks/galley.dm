@@ -74,7 +74,7 @@
 
 /decl/hierarchy/supply_pack/galley/rations
 	num_contained = 6
-	name = "Emergency - Ready-to-eat Meals"
+	name = "Emergency - MREs"
 	contains = list(/obj/item/weapon/storage/mre,
 					/obj/item/weapon/storage/mre/menu2,
 					/obj/item/weapon/storage/mre/menu3,

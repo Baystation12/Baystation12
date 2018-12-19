@@ -26,7 +26,6 @@
 /obj/machinery/gateway/centerstation
 	density = 1
 	icon_state = "offcenter"
-	use_power = 1
 
 	//warping vars
 	var/list/linked = list()
@@ -54,7 +53,7 @@ obj/machinery/gateway/centerstation/Process()
 		return
 
 	if(active)
-		use_power(5000)
+		use_power_oneoff(5000)
 
 
 /obj/machinery/gateway/centerstation/proc/detect()
@@ -127,7 +126,7 @@ obj/machinery/gateway/centerstation/Process()
 		if(dest)
 			M.forceMove(dest.loc)
 			M.set_dir(SOUTH)
-			use_power(5000)
+			use_power_oneoff(5000)
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(isMultitool(W))
@@ -140,7 +139,7 @@ obj/machinery/gateway/centerstation/Process()
 /obj/machinery/gateway/centeraway
 	density = 1
 	icon_state = "offcenter"
-	use_power = 0
+	use_power = POWER_USE_OFF
 	var/calibrated = 1
 	var/list/linked = list()	//a list of the connected gateway chunks
 	var/ready = 0

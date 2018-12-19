@@ -474,7 +474,7 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/simple_pipes_shall_not_face_north_or_west/start_test()
 	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/simple/pipe in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/pipe/simple/pipe in world) // Pipes are removed from the SSmachines list during init.
 		if(!istype(pipe, /obj/machinery/atmospherics/pipe/simple/hidden) && !istype(pipe, /obj/machinery/atmospherics/pipe/simple/visible))
 			continue
 		if(pipe.dir == NORTH || pipe.dir == WEST)
@@ -514,7 +514,7 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/station_pipes_shall_not_leak/start_test()
 	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/pipe/P in world)
 		if(P.leaking && isStationLevel(P.z))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
@@ -638,7 +638,7 @@ datum/unit_test/ladder_check/start_test()
 	name = "MAP: Networked disposals shall deliver tagged packages"
 	async = 1
 
-	var/extra_spawns = 3
+	var/extra_spawns = 1
 
 	var/list/packages_awaiting_delivery = list()
 	var/list/all_tagged_bins = list()
@@ -683,7 +683,7 @@ datum/unit_test/ladder_check/start_test()
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
-	var/speed = 50
+	var/speed = 100
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)

@@ -10,7 +10,6 @@
 	icon_state = "close"
 	anchored = 1
 	density = 1
-	use_power = 1
 	idle_power_usage = 50
 	active_power_usage = 200
 	interact_offline = 1
@@ -162,6 +161,15 @@
 		mask = new mask_type(src)
 	update_icon()
 
+/obj/machinery/suit_storage_unit/Destroy()
+	DROP_NULL(occupant)
+	DROP_NULL(suit)
+	DROP_NULL(helmet)
+	DROP_NULL(boots)
+	DROP_NULL(tank)
+	DROP_NULL(mask)
+	. = ..()
+
 /obj/machinery/suit_storage_unit/on_update_icon()
 	overlays.Cut()
 	if(panelopen)
@@ -263,7 +271,7 @@
 
 
 /obj/machinery/suit_storage_unit/Topic(href, href_list) //I fucking HATE this proc
-	if(..())
+	if((. = ..()))
 		return
 	usr.set_machine(src)
 	if (href_list["toggleUV"])
@@ -629,7 +637,7 @@
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "close"
 
-	req_access = list(access_captain,access_bridge)
+	req_access = list(access_captain, access_bridge)
 
 	var/active = 0          // PLEASE HOLD.
 	var/safeties = 1        // The cycler won't start with a living thing inside it unless safeties are off.
@@ -640,12 +648,33 @@
 	var/can_repair          // If set, the cycler can repair voidsuits.
 	var/electrified = 0
 
-	//Departments that the cycler can paint suits to look like.
-	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","Science","Pilot")
+	// Possible modifications to pick between
+	var/list/available_modifications = list(
+		/decl/item_modifier/space_suit/engineering,
+		/decl/item_modifier/space_suit/mining,
+		/decl/item_modifier/space_suit/medical,
+		/decl/item_modifier/space_suit/security,
+		/decl/item_modifier/space_suit/atmos,
+		/decl/item_modifier/space_suit/science,
+		/decl/item_modifier/space_suit/pilot
+	)
+
+	// Extra modifications to add when emagged, duplicates won't be added
+	var/emagged_modifications = list(
+		/decl/item_modifier/space_suit/engineering,
+		/decl/item_modifier/space_suit/mining,
+		/decl/item_modifier/space_suit/medical,
+		/decl/item_modifier/space_suit/security,
+		/decl/item_modifier/space_suit/atmos,
+		/decl/item_modifier/space_suit/science,
+		/decl/item_modifier/space_suit/pilot,
+		/decl/item_modifier/space_suit/mercenary/emag
+	)
+
 	//Species that the suits can be configured to fit.
 	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
-	var/target_department
+	var/decl/item_modifier/target_modification
 	var/target_species
 
 	var/mob/living/carbon/human/occupant = null
@@ -654,68 +683,78 @@
 
 	var/datum/wires/suit_storage_unit/wires = null
 
-/obj/machinery/suit_cycler/New()
-	..()
+/obj/machinery/suit_cycler/Initialize()
+	. = ..()
+	if(!length(available_modifications) || !length(species))
+		crash_with("Invalid setup: [log_info_line(src)]")
+		return INITIALIZE_HINT_QDEL
+
+	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
 	wires = new(src)
-	target_department = departments[1]
+	target_modification = available_modifications[1]
 	target_species = species[1]
-	if(!target_department || !target_species) qdel(src)
 
 /obj/machinery/suit_cycler/Destroy()
-	qdel(wires)
-	wires = null
+	DROP_NULL(occupant)
+	DROP_NULL(suit)
+	DROP_NULL(helmet)
+	QDEL_NULL(wires)
 	return ..()
 
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"
 	model_text = "Engineering"
 	req_access = list(access_construction)
-	departments = list("Engineering","Atmos")
-	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
+	available_modifications = list(/decl/item_modifier/space_suit/engineering, /decl/item_modifier/space_suit/atmos)
+	species = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/engineering/alt
-	departments = list("Engineering, Alt", "Atmos, Alt")
+	available_modifications = list(
+		/decl/item_modifier/space_suit/engineering/alt,
+		/decl/item_modifier/space_suit/atmos/alt,
+		/decl/item_modifier/space_suit/hazard
+	)
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
 	req_access = list(access_mining)
-	departments = list("Mining")
+	available_modifications = list(/decl/item_modifier/space_suit/mining)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/science
 	name = "Excavation suit cycler"
 	model_text = "Excavation"
 	req_access = list(access_xenoarch)
-	departments = list("Science")
+	available_modifications = list(/decl/item_modifier/space_suit/science)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/security
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
-	departments = list("Security","Security, Alt")
+	available_modifications = list(/decl/item_modifier/space_suit/security, /decl/item_modifier/space_suit/security/alt)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/security/alt
-	departments = list("Security, Alt")
+	available_modifications = list(/decl/item_modifier/space_suit/security/alt)
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
 	model_text = "Medical"
 	req_access = list(access_medical)
-	departments = list("Medical")
+	available_modifications = list(/decl/item_modifier/space_suit/medical)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/medical/alt
-	departments = list("Medical, Alt")
+	available_modifications = list(/decl/item_modifier/space_suit/medical/alt)
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"
 	req_access = list(access_syndicate)
-	departments = list("Mercenary")
+	available_modifications = list(/decl/item_modifier/space_suit/mercenary)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 	can_repair = 1
 
@@ -723,7 +762,7 @@
 	name = "Pilot suit cycler"
 	model_text = "Pilot"
 	req_access = list(access_mining_office)
-	departments = list("Pilot")
+	available_modifications = list(/decl/item_modifier/space_suit/pilot)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
@@ -832,7 +871,10 @@
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
-	departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
+
+	var/additional_modifications = list_values(decls_repository.get_decls(emagged_modifications))
+	available_modifications |= additional_modifications
+
 	emagged = 1
 	safeties = 0
 	req_access = list()
@@ -877,7 +919,7 @@
 		dat += "<A href='?src=\ref[src];select_rad_level=1'>\[select power level\]</a> <A href='?src=\ref[src];begin_decontamination=1'>\[begin decontamination cycle\]</a><br><hr>"
 
 		dat += "<h2>Customisation</h2>"
-		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_department]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
+		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
 		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
 
 	if(panel_open)
@@ -888,6 +930,9 @@
 	return
 
 /obj/machinery/suit_cycler/Topic(href, href_list)
+	if((. = ..()))
+		return
+
 	if(href_list["eject_suit"])
 		if(!suit) return
 		suit.dropInto(loc)
@@ -897,11 +942,13 @@
 		helmet.dropInto(loc)
 		helmet = null
 	else if(href_list["select_department"])
-		var/choice = input("Please select the target department paintjob.","Suit cycler",null) as null|anything in departments
-		if(choice) target_department = choice
+		var/choice = input("Please select the target department paintjob.", "Suit cycler", target_modification) as null|anything in available_modifications
+		if(choice && CanPhysicallyInteract(usr))
+			target_modification = choice
 	else if(href_list["select_species"])
 		var/choice = input("Please select the target species configuration.","Suit cycler",null) as null|anything in species
-		if(choice) target_species = choice
+		if(choice && CanPhysicallyInteract(usr))
+			target_species = choice
 	else if(href_list["select_rad_level"])
 		var/choices = list(1,2,3)
 		if(emagged)
@@ -959,7 +1006,6 @@
 				suit.clean_blood()
 
 	updateUsrDialog()
-	return
 
 /obj/machinery/suit_cycler/Process()
 
@@ -1038,166 +1084,15 @@
 
 	return
 
-//There HAS to be a less bloated way to do this. TODO: some kind of table/icon name coding? ~Z
 /obj/machinery/suit_cycler/proc/apply_paintjob()
-
-	if(!target_species || !target_department)
+	if(!target_species || !target_modification)
 		return
 
-	if(target_species)
-		if(helmet) helmet.refit_for_species(target_species)
-		if(suit) suit.refit_for_species(target_species)
+	if(helmet) helmet.refit_for_species(target_species)
+	if(suit) suit.refit_for_species(target_species)
 
-	switch(target_department)
-		if("Engineering")
-			if(helmet)
-				helmet.SetName("engineering voidsuit helmet")
-				helmet.icon_state = "rig0-engineering"
-				helmet.item_state = "eng_helm"
-			if(suit)
-				suit.SetName("engineering voidsuit")
-				suit.icon_state = "rig-engineering"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "eng_voidsuit",
-					slot_r_hand_str = "eng_voidsuit",
-				)
-		if("Engineering, Alt")
-			if(helmet)
-				helmet.SetName("engineering voidsuit helmet")
-				helmet.icon_state = "rig0-engineeringalt"
-				helmet.item_state = "engalt_helm"
-			if(suit)
-				suit.SetName("engineering voidsuit")
-				suit.icon_state = "rig-engineeringalt"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "eng_voidsuit",
-					slot_r_hand_str = "eng_voidsuit",
-				)
-		if("Mining")
-			if(helmet)
-				helmet.SetName("mining voidsuit helmet")
-				helmet.icon_state = "rig0-mining"
-				helmet.item_state = "mining_helm"
-			if(suit)
-				suit.SetName("mining voidsuit")
-				suit.icon_state = "rig-mining"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "mining_voidsuit",
-					slot_r_hand_str = "mining_voidsuit",
-				)
-		if("Science")
-			if(helmet)
-				helmet.SetName("excavation voidsuit helmet")
-				helmet.icon_state = "rig0-excavation"
-				helmet.item_state = "excavation_helm"
-			if(suit)
-				suit.SetName("excavation voidsuit")
-				suit.icon_state = "rig-excavation"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "excavation_voidsuit",
-					slot_r_hand_str = "excavation_voidsuit",
-				)
-		if("Medical")
-			if(helmet)
-				helmet.SetName("medical voidsuit helmet")
-				helmet.icon_state = "rig0-medical"
-				helmet.item_state = "medical_helm"
-			if(suit)
-				suit.SetName("medical voidsuit")
-				suit.icon_state = "rig-medical"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "medical_voidsuit",
-					slot_r_hand_str = "medical_voidsuit",
-				)
-		if("Medical, Alt")
-			if(helmet)
-				helmet.SetName("medical voidsuit helmet")
-				helmet.icon_state = "rig0-medicalalt"
-				helmet.item_state = "medicalalt_helm"
-			if(suit)
-				suit.SetName("medical voidsuit")
-				suit.icon_state = "rig-medicalalt"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "medical_voidsuit",
-					slot_r_hand_str = "medical_voidsuit",
-				)
-		if("Security")
-			if(helmet)
-				helmet.SetName("security voidsuit helmet")
-				helmet.icon_state = "rig0-sec"
-				helmet.item_state = "sec_helm"
-			if(suit)
-				suit.SetName("security voidsuit")
-				suit.icon_state = "rig-sec"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "sec_voidsuit",
-					slot_r_hand_str = "sec_voidsuit",
-				)
-		if("Security, Alt")
-			if(helmet)
-				helmet.SetName("security voidsuit helmet")
-				helmet.icon_state = "rig0-secalt"
-				helmet.item_state = "secalt_helm"
-			if(suit)
-				suit.SetName("security voidsuit")
-				suit.icon_state = "rig-secalt"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "sec_voidsuit",
-					slot_r_hand_str = "sec_voidsuit",
-				)
-		if("Atmos")
-			if(helmet)
-				helmet.SetName("atmospherics voidsuit helmet")
-				helmet.icon_state = "rig0-atmos"
-				helmet.item_state = "atmos_helm"
-			if(suit)
-				suit.SetName("atmospherics voidsuit")
-				suit.icon_state = "rig-atmos"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "atmos_voidsuit",
-					slot_r_hand_str = "atmos_voidsuit",
-				)
-		if("Atmos, Alt")
-			if(helmet)
-				helmet.SetName("atmospherics voidsuit helmet")
-				helmet.icon_state = "rig0-atmosalt"
-				helmet.item_state = "atmosalt_helm"
-			if(suit)
-				suit.SetName("atmospherics voidsuit")
-				suit.icon_state = "rig-atmosalt"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "atmos_voidsuit",
-					slot_r_hand_str = "atmos_voidsuit",
-				)
-		if("Explorer")
-			if(helmet)
-				helmet.SetName("exploration voidsuit helmet")
-				helmet.icon_state = "helm_explorer"
-				helmet.item_state = "helm_explorer"
-			if(suit)
-				suit.SetName("exploration voidsuit")
-				suit.icon_state = "void_explorer"
-
-		if("^%###^%$" || "Mercenary")
-			if(helmet)
-				helmet.SetName("blood-red voidsuit helmet")
-				helmet.icon_state = "rig0-syndie"
-				helmet.item_state = "syndie_helm"
-			if(suit)
-				suit.SetName("blood-red voidsuit")
-				suit.icon_state = "rig-syndie"
-				suit.item_state_slots = list(
-					slot_l_hand_str = "syndie_voidsuit",
-					slot_r_hand_str = "syndie_voidsuit",
-				)
-		if("Pilot")
-			if(helmet)
-				helmet.SetName("pilot voidsuit helmet")
-				helmet.icon_state = "rig0_pilot"
-				helmet.item_state = "pilot_helm"
-			if(suit)
-				suit.SetName("pilot voidsuit")
-				suit.icon_state = "rig-pilot"
+	target_modification.RefitItem(helmet)
+	target_modification.RefitItem(suit)
 
 	if(helmet) helmet.SetName("refitted [helmet.name]")
 	if(suit) suit.SetName("refitted [suit.name]")

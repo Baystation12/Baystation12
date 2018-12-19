@@ -99,7 +99,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 	. = 0
 
-	if((HULK in mutations) && health >= 25 && length(message))
+	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		message_data[3] = 0
@@ -297,7 +297,6 @@ proc/get_radio_key_from_channel(var/channel)
 			if(M.client)
 				speech_bubble_recipients += M.client
 
-	flick_overlay(speech_bubble, speech_bubble_recipients, 30)
 
 	for(var/obj/O in listening_obj)
 		spawn(0)
@@ -313,14 +312,16 @@ proc/get_radio_key_from_channel(var/channel)
 		eavesdroping_obj -= listening_obj
 		for(var/mob/M in eavesdroping)
 			if(M)
-				show_image(M, speech_bubble)
 				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+				if(M.client)
+					speech_bubble_recipients |= M.client
 
 		for(var/obj/O in eavesdroping)
 			spawn(0)
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
+	flick_overlay(speech_bubble, speech_bubble_recipients, 30)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")

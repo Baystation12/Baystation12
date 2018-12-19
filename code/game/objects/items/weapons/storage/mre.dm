@@ -3,35 +3,33 @@ MRE Stuff
  */
 
 /obj/item/weapon/storage/mre
-	name = "meal, ready-to-eat"
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 1, meat pizza."
+	name = "standard MRE"
+	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "mre"
 	storage_slots = 7
 	max_w_class = ITEM_SIZE_SMALL
 	opened = FALSE
 	open_sound = 'sound/effects/rip1.ogg'
+	var/main_meal = /obj/item/weapon/storage/mrebag
+	var/meal_desc = "This one is menu 1, meat pizza."
 	startswith = list(
-	/obj/item/weapon/storage/mrebag,
-	/obj/item/weapon/storage/mrebag/side = 2,
 	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
+	/obj/item/weapon/storage/fancy/crackers,
+	/obj/random/mre/spread,
+	/obj/random/mre/drink,
+	/obj/random/mre/sauce,
+	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/weapon/storage/mre/Initialize()
+	create_objects_in_loc(src, main_meal)
 	. = ..()
 	make_exact_fit()
+
+/obj/item/weapon/storage/mre/examine(mob/user)
+	. = ..()
+	to_chat(user, meal_desc)
 
 /obj/item/weapon/storage/mre/on_update_icon()
 	if(opened)
@@ -47,210 +45,81 @@ MRE Stuff
 	. = ..()
 
 /obj/item/weapon/storage/mre/menu2
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 2, margherita."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu2,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "This one is menu 2, margherita."
+	main_meal = /obj/item/weapon/storage/mrebag/menu2
 
 /obj/item/weapon/storage/mre/menu3
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 3, vegetable pizza."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu3,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "This one is menu 3, vegetable pizza."
+	main_meal = /obj/item/weapon/storage/mrebag/menu3
 
 /obj/item/weapon/storage/mre/menu4
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 4, hamburger."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu4,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "This one is menu 4, hamburger."
+	main_meal = /obj/item/weapon/storage/mrebag/menu4
 
 /obj/item/weapon/storage/mre/menu5
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 5, taco."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu5,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "This one is menu 5, taco."
+	main_meal = /obj/item/weapon/storage/mrebag/menu5
 
 /obj/item/weapon/storage/mre/menu6
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 6, meatbread."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu6,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "This one is menu 6, meatbread."
+	main_meal = /obj/item/weapon/storage/mrebag/menu6
 
 /obj/item/weapon/storage/mre/menu7
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 7, spicy enchilada."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu7,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "This one is menu 7, salad."
+	main_meal = /obj/item/weapon/storage/mrebag/menu7
 
 /obj/item/weapon/storage/mre/menu8
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 8, hot chili."
-	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu8,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = " This one is menu 8, hot chili."
+	main_meal = /obj/item/weapon/storage/mrebag/menu3
 
 /obj/item/weapon/storage/mre/menu9
-	name = "meal, ready-to-eat, vegan"
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 9, vegan (skrell-safe)."
+	name = "vegan MRE"
+	meal_desc = "This one is menu 9, boiled rice (skrell-safe)."
 	icon_state = "vegmre"
+	main_meal = /obj/item/weapon/storage/mrebag/menu9
 	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu9,
-	/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 2,
 	/obj/item/weapon/storage/mrebag/dessert/menu9,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
+	/obj/item/weapon/storage/fancy/crackers,
+	/obj/random/mre/spread,
+	/obj/random/mre/drink,
+	/obj/random/mre/sauce/vegan,
+	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/weapon/storage/mre/menu10
-	name = "meal, ready-to-eat, carnivore"
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one is menu 10, carnivore."
+	name = "protein MRE"
+	meal_desc = "This one is menu 10, protein."
 	icon_state = "meatmre"
+	main_meal = /obj/item/weapon/storage/mrebag/menu10
 	startswith = list(
-	/obj/item/weapon/storage/mrebag/menu10,
-	/obj/item/weapon/storage/mrebag/side/menu10 = 3,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo
+	/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
+	/obj/item/weapon/reagent_containers/food/condiment/small/packet/protein,
+	/obj/random/mre/sauce/sugarfree,
+	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+	)
+
+/obj/item/weapon/storage/mre/menu11
+	name = "crayon MRE"
+	meal_desc = "This one doesn't have a menu listing. How very odd."
+	icon_state = "crayonmre"
+	main_meal = /obj/item/weapon/storage/fancy/crayons
+	startswith = list(
+	/obj/item/weapon/storage/mrebag/dessert/menu11,
+	/obj/random/mre/sauce/crayon,
+	/obj/random/mre/sauce/crayon,
+	/obj/random/mre/sauce/crayon
 	)
 
 /obj/item/weapon/storage/mre/random
-	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package. This one has a random menu."
-	startswith = list(
-	/obj/random/mremain,
-	/obj/item/weapon/storage/mrebag/side = 2,
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers = 2,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic,
-	/obj/random/mrejuice = 2,
-	/obj/random/mrehotdrinks,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
-	/obj/random/mrespread,
-	/obj/item/clothing/mask/chewable/candy/gum = 2
-	)
+	meal_desc = "The menu label is faded out."
+	main_meal = /obj/random/mre/main
 
 /obj/item/weapon/storage/mrebag
 	name = "main course"
 	desc = "A vacuum-sealed bag containing the MRE's main course. Self-heats when opened."
 	icon = 'icons/obj/food.dmi'
-	icon_state = "pouch"
-	storage_slots = 7
+	icon_state = "pouch_medium"
+	storage_slots = 1
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
 	opened = FALSE
@@ -259,11 +128,10 @@ MRE Stuff
 
 /obj/item/weapon/storage/mrebag/Initialize()
 	. = ..()
-	make_exact_fit()
 
 /obj/item/weapon/storage/mrebag/on_update_icon()
 	if(opened)
-		icon_state = "pouch[opened]"
+		icon_state = "[initial(icon_state)][opened]"
 	. = ..()
 
 /obj/item/weapon/storage/mrebag/attack_self(mob/user)
@@ -290,30 +158,26 @@ MRE Stuff
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/slice/meatbread/filled)
 
 /obj/item/weapon/storage/mrebag/menu7
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/enchiladas)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/tossedsalad)
 
 /obj/item/weapon/storage/mrebag/menu8
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/hotchili)
 
 /obj/item/weapon/storage/mrebag/menu9
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/tossedsalad)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/boiledrice)
 
 /obj/item/weapon/storage/mrebag/menu10
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/meatcube)
-
-/obj/item/weapon/storage/mrebag/side
-	name = "side dish"
-	desc = "A vacuum-sealed bag containing the MRE's side dish. Self-heats when opened."
-	startswith = list(/obj/random/mreside)
-
-/obj/item/weapon/storage/mrebag/side/menu10
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/meatcube)
 
 /obj/item/weapon/storage/mrebag/dessert
 	name = "dessert"
 	desc = "A vacuum-sealed bag containing the MRE's dessert."
+	icon_state = "pouch_small"
 	open_sound = 'sound/effects/rip1.ogg'
-	startswith = list(/obj/random/mredessert)
+	startswith = list(/obj/random/mre/dessert)
 
 /obj/item/weapon/storage/mrebag/dessert/menu9
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit)
+
+/obj/item/weapon/storage/mrebag/dessert/menu11
+	startswith = list(/obj/item/weapon/pen/crayon/rainbow)

@@ -16,7 +16,6 @@
 	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
 	density = 0
-	use_power = 1
 	idle_power_usage = 10
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
@@ -231,8 +230,7 @@
 			set_picture(signal.data["picture_state"])
 	update()
 
-#undef CHARS_PER_LINE
-#undef FOND_SIZE
+#undef FONT_SIZE
 #undef FONT_COLOR
 #undef FONT_STYLE
 #undef SCROLL_SPEED

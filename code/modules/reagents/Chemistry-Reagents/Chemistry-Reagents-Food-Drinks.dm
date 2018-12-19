@@ -1317,7 +1317,7 @@
 
 /datum/reagent/ethanol/vodka
 	name = "Vodka"
-	description = "Number one drink AND fueling choice for Terrans around the galaxy."
+	description = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
@@ -1331,7 +1331,7 @@
 
 /datum/reagent/ethanol/vodka/premium
 	name = "Premium Vodka"
-	description = "Premium distilled vodka imported directly from the Terran Colonial Confederation."
+	description = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10

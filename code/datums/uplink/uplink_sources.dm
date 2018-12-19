@@ -135,5 +135,5 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	to_chat(M, "<span class='warning'>Either by choice or circumstance you will be without an uplink.</span>")
 	return FALSE
 
-#undef NO_EXTRA_COST_NO_GUARANTEE_DESC
+#undef NO_GUARANTEE_NO_EXTRA_COST_DESC
 #undef SETUP_FAILED

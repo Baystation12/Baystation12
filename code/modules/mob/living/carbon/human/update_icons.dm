@@ -256,10 +256,10 @@ var/global/list/damage_icon_parts = list()
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
-	var/husk = (HUSK in src.mutations)
-	var/fat = (FAT in src.mutations)
-	var/hulk = (HULK in src.mutations)
-	var/skeleton = (SKELETON in src.mutations)
+	var/husk = (MUTATION_HUSK in src.mutations)
+	var/fat = (MUTATION_FAT in src.mutations)
+	var/hulk = (MUTATION_HULK in src.mutations)
+	var/skeleton = (MUTATION_SKELETON in src.mutations)
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
@@ -418,7 +418,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_mutations(var/update_icons=1)
 	var/fat
-	if(FAT in mutations)
+	if(MUTATION_FAT in mutations)
 		fat = "fat"
 
 	var/image/standing	= overlay_image('icons/effects/genetics.dmi', flags=RESET_COLOR)
@@ -436,7 +436,7 @@ var/global/list/damage_icon_parts = list()
 				add_image = 1
 	for(var/mut in mutations)
 		switch(mut)
-			if(LASER)
+			if(MUTATION_LASER)
 				standing.overlays	+= "lasereyes_s"
 				add_image = 1
 	if(add_image)
@@ -808,8 +808,7 @@ var/global/list/damage_icon_parts = list()
 #undef HO_SUIT_STORE_LAYER
 #undef HO_BACK_LAYER
 #undef HO_HAIR_LAYER
-#undef GOGGLES_LAYER
-#undef HO_EARS_LAYER
+#undef HO_GOGGLES_LAYER
 #undef HO_FACEMASK_LAYER
 #undef HO_HEAD_LAYER
 #undef HO_COLLAR_LAYER

@@ -38,7 +38,6 @@
 	land_type = /turf/simulated/floor/exoplanet/desert
 	planetary_area = /area/exoplanet/garbage
 	plantcolors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
-
 	flora_prob = 1
 	large_flora_prob = 0
 	flora_diversity = 2
@@ -90,3 +89,6 @@
 	desc = "Stone-like artificial material."
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_state = "concrete"
+
+/turf/simulated/floor/exoplanet/concrete/on_update_icon()
+	return

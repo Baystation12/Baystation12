@@ -18,7 +18,7 @@
 
 /datum/nano_module/supply
 	name = "Supply Management program"
-	var/screen = 1		// 0: Ordering menu, 1: Statistics 2: Shuttle control, 3: Orders menu
+	var/screen = 1		// 1: Ordering menu, 2: Statistics, 3: Shuttle control, 4: Orders menu
 	var/selected_category
 	var/list/category_names
 	var/list/category_contents
@@ -34,6 +34,9 @@
 		current_security_level = security_state.current_security_level
 
 	data["is_admin"] = is_admin
+	if(is_admin)
+		data["shopping_cart_length"] = SSsupply.shoppinglist.len
+		data["request_length"] = SSsupply.requestlist.len
 	data["screen"] = screen
 	data["credits"] = "[SSsupply.points]"
 	data["currency"] = GLOB.using_map.supply_currency_name

@@ -91,7 +91,7 @@
 			C.internal = tank
 			if(C.internals)
 				C.internals.icon_state = "internal1"
-		use_power = 2
+		update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/oxygen_pump/proc/detach_mask(mob/user)
 	if(tank)
@@ -104,7 +104,7 @@
 	if(breather.internals)
 		breather.internals.icon_state = "internal0"
 	breather = null
-	use_power = 1
+	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/carbon/human/target, mob/user as mob)
 	if(!user)

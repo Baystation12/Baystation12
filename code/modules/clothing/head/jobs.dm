@@ -160,7 +160,7 @@
 /obj/item/clothing/head/beret/guard
 	name = "corporate security beret"
 	desc = "A white beret adorned with a corporate logo. For security guards that are more inclined towards style than safety."
-	icon_state = "beret_corporate_whitered"
+	icon_state = "corpsec_beret"
 
 /obj/item/clothing/head/beret/plaincolor
 	name = "beret"

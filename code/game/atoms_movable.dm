@@ -118,7 +118,7 @@
 	src.throw_source = get_turf(src)	//store the origin turf
 	src.pixel_z = 0
 	if(usr)
-		if(HULK in usr.mutations)
+		if(MUTATION_HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
 
 	var/dist_travelled = 0

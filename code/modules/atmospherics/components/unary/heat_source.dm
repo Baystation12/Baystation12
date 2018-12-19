@@ -8,7 +8,7 @@
 	icon_state = "heater_0"
 	density = 1
 	anchored = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 
 	var/max_temperature = T20C + 680
@@ -77,7 +77,7 @@
 
 	if(network && air_contents.total_moles && air_contents.temperature < set_temperature)
 		air_contents.add_thermal_energy(power_rating * HEATER_PERF_MULT)
-		use_power(power_rating)
+		use_power_oneoff(power_rating)
 
 		heating = 1
 		network.update = 1
@@ -125,7 +125,7 @@
 	if(..())
 		return 1
 	if(href_list["toggleStatus"])
-		use_power = !use_power
+		update_use_power(!use_power)
 		update_icon()
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])

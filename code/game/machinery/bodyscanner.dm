@@ -7,8 +7,6 @@
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1
-
-	use_power = 1
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
@@ -61,7 +59,7 @@
 		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.dropInto(loc)
 	src.occupant = null
-	update_use_power(1)
+	update_use_power(POWER_USE_IDLE)
 	update_icon()
 
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
@@ -94,7 +92,7 @@
 	target.forceMove(src)
 	src.occupant = target
 
-	update_use_power(2)
+	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
 	drop_contents()
 
@@ -139,6 +137,7 @@
 
 
 /obj/machinery/bodyscanner/Destroy()
+	if(occupant)
+		occupant.dropInto(loc)
+		occupant = null
 	. = ..()
-	occupant.dropInto(loc)
-	occupant = null

@@ -6,7 +6,6 @@
 	layer = BELOW_OBJ_LAYER
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
@@ -291,7 +290,7 @@
 	for (var/i=1 to seconds)
 		if (stat & (NOPOWER|BROKEN))
 			return 0
-		use_power(500)
+		use_power_oneoff(500)
 		sleep(10)
 	return 1
 

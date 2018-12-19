@@ -137,7 +137,7 @@ D [1]/  ||
 /datum/integrated_io/activate/push_data()
 	for(var/k in 1 to linked.len)
 		var/datum/integrated_io/io = linked[k]
-		SScircuit.queue_component(io.holder, TRUE, io.ord)
+		SScircuit_components.queue_component(io.holder, TRUE, io.ord)
 
 /datum/integrated_io/proc/pull_data()
 	for(var/k in 1 to linked.len)

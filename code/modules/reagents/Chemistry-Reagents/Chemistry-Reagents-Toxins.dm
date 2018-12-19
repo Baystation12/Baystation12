@@ -80,7 +80,7 @@
 	taste_description = "absolutely vile"
 	color = "#91d895"
 	target_organ = BP_LIVER
-	strength = 10
+	strength = 7
 
 /datum/reagent/toxin/chlorine
 	name = "Chlorine"
@@ -753,3 +753,13 @@
 						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
 						qdel(spider)
 						break
+
+/datum/reagent/toxin/tar
+	name = "Tar"
+	description = "A dark, viscous liquid."
+	taste_description = "petroleum"
+	color = "#140b30"
+	strength = 4
+	heating_products = list(/datum/reagent/acetone, /datum/reagent/carbon, /datum/reagent/ethanol)
+	heating_point = 145 CELCIUS
+	heating_message = "separates."

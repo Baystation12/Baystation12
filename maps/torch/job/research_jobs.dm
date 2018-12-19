@@ -5,7 +5,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Research Director and the Corporate Liaison"
+	supervisors = "the Research Director and the Workplace Liaison"
 	selection_color = "#633d63"
 	economic_power = 12
 	minimal_player_age = 3
@@ -38,7 +38,7 @@
 	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Research Director and the Corporate Liaison"
+	supervisors = "the Research Director and the Workplace Liaison"
 	economic_power = 10
 	ideal_character_age = 45
 	minimal_player_age = 0
@@ -59,8 +59,10 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian,
+							/datum/mil_branch/solgov)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor,
+						 /datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov)
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
@@ -76,7 +78,7 @@
 	department_flag = SCI
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Research Director, the Corporate Liaison and science personnel"
+	supervisors = "the Research Director, the Workplace Liaison and science personnel"
 	selection_color = "#633d63"
 	economic_power = 6
 	minimal_player_age = 0
@@ -104,7 +106,7 @@
 	department_flag = SCI
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Research Director, the Corporate Liaison and science personnel"
+	supervisors = "the Research Director, the Workplace Liaison and science personnel"
 	selection_color = "#633d63"
 	economic_power = 3
 	ideal_character_age = 30
@@ -117,8 +119,10 @@
 		"Field Assistant")
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/assist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian,
+							/datum/mil_branch/solgov)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor,
+						 /datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov)
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,

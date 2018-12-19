@@ -109,8 +109,7 @@
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/cow/New()
-	udder = new(50)
-	udder.my_atom = src
+	udder = new(50, src)
 	..()
 
 /mob/living/simple_animal/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -127,9 +126,10 @@
 
 /mob/living/simple_animal/cow/Life()
 	. = ..()
-	if(stat == CONSCIOUS)
-		if(udder && prob(5))
-			udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
+	if(!.)
+		return FALSE
+	if(udder && prob(5))
+		udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
 
 /mob/living/simple_animal/cow/attack_hand(mob/living/carbon/M as mob)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
@@ -177,14 +177,13 @@
 	pixel_y = rand(0, 10)
 
 /mob/living/simple_animal/chick/Life()
-	. =..()
+	. = ..()
 	if(!.)
-		return
-	if(!stat)
-		amount_grown += rand(1,2)
-		if(amount_grown >= 100)
-			new /mob/living/simple_animal/chicken(src.loc)
-			qdel(src)
+		return FALSE
+	amount_grown += rand(1,2)
+	if(amount_grown >= 100)
+		new /mob/living/simple_animal/chicken(src.loc)
+		qdel(src)
 
 var/const/MAX_CHICKENS = 50
 var/global/chicken_count = 0
@@ -244,10 +243,10 @@ var/global/chicken_count = 0
 		..()
 
 /mob/living/simple_animal/chicken/Life()
-	. =..()
+	. = ..()
 	if(!.)
-		return
-	if(!stat && prob(3) && eggsleft > 0)
+		return FALSE
+	if(prob(3) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")
 		eggsleft--
 		var/obj/item/weapon/reagent_containers/food/snacks/egg/E = new(get_turf(src))

@@ -613,6 +613,10 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	..()
 	BACKPACK_OVERRIDE_RESEARCH
 
+/decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
+	name = OUTFIT_JOB_NAME("Scientist - SCG")
+	head = /obj/item/clothing/head/beret/solgov/research
+
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
 	name = OUTFIT_JOB_NAME("Psychologist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
@@ -639,7 +643,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard/New()
 	..()
-	BACKPACK_OVERRIDE_SECURITY
+	BACKPACK_OVERRIDE_SECURITY_EXO
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
@@ -647,6 +651,10 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research
+
+/decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov
+	name = OUTFIT_JOB_NAME("Research Assistant - SCG")
+	head = /obj/item/clothing/head/beret/solgov/research
 
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor
@@ -765,3 +773,49 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 /decl/hierarchy/outfit/job/torch/armydress/officer/skirt
 	name = OUTFIT_JOB_NAME("SCGA Dress - Officer Skirt")
 	uniform = /obj/item/clothing/under/solgov/mildress/army/command/skirt
+
+/*
+TERRAN OUTFITS
+*/
+
+/decl/hierarchy/outfit/job/terran/crew
+	name = OUTFIT_JOB_NAME("Independent Navy - Utility")
+	hierarchy_type = /decl/hierarchy/outfit/job/terran/crew
+	uniform = /obj/item/clothing/under/terran/navy/utility
+	l_ear = /obj/item/device/radio/headset
+	shoes = /obj/item/clothing/shoes/terran
+	pda_type = /obj/item/modular_computer/pda
+	pda_slot = slot_l_store
+
+/decl/hierarchy/outfit/job/terran/crew/service
+	name = OUTFIT_JOB_NAME("Independent Navy - Service")
+	head = /obj/item/clothing/head/terran/navy/service
+	uniform = /obj/item/clothing/under/terran/navy/service
+	suit = /obj/item/clothing/suit/storage/terran/service/navy
+	shoes = /obj/item/clothing/shoes/terran/service
+	gloves = /obj/item/clothing/gloves/terran
+
+/decl/hierarchy/outfit/job/terran/crew/service/command
+	name = OUTFIT_JOB_NAME("Independent Navy - Service Command")
+	head = /obj/item/clothing/head/terran/navy/service/command
+	uniform = /obj/item/clothing/under/terran/navy/service/command
+	suit = /obj/item/clothing/suit/storage/terran/service/navy/command
+
+/decl/hierarchy/outfit/job/terran/crew/dress
+	name = OUTFIT_JOB_NAME("Independent Navy - Dress")
+	head = /obj/item/clothing/head/terran/navy/service
+	uniform = /obj/item/clothing/under/terran/navy/service
+	suit = /obj/item/clothing/suit/dress/terran/navy
+	shoes = /obj/item/clothing/shoes/terran/service
+	gloves = /obj/item/clothing/gloves/terran
+
+/decl/hierarchy/outfit/job/terran/crew/dress/officer
+	name = OUTFIT_JOB_NAME("Independent Navy - Officer")
+	uniform = /obj/item/clothing/under/terran/navy/service
+	suit = /obj/item/clothing/suit/dress/terran/navy/officer
+
+/decl/hierarchy/outfit/job/terran/crew/dress/command
+	name = OUTFIT_JOB_NAME("Independent Navy - Dress Command")
+	head = /obj/item/clothing/head/terran/navy/service/command
+	uniform = /obj/item/clothing/under/terran/navy/service/command
+	suit = /obj/item/clothing/suit/dress/terran/navy/command

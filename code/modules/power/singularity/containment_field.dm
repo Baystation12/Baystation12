@@ -8,7 +8,7 @@
 	anchored = 1
 	density = 0
 	unacidable = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	light_outer_range = 4
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/obj/machinery/field_generator/FG1 = null

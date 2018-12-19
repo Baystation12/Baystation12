@@ -17,7 +17,8 @@
 	icon_state = "pine_[rand(1, 3)]"
 
 /obj/structure/flora/tree/pine/xmas
-	name = "xmas tree"
+	name = "\improper Christmas tree"
+	desc = "O Christmas tree, O Christmas tree..."
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_c"
 

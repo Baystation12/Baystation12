@@ -105,6 +105,6 @@
 	return UI_CLOSE // Otherwise, we got nothing.
 
 /mob/living/carbon/human/shared_living_ui_distance(atom/movable/src_object)
-	if((TK in mutations))
+	if((MUTATION_TK in mutations))
 		return UI_INTERACTIVE
 	return ..()

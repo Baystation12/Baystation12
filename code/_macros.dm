@@ -71,8 +71,6 @@
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
 
-#define isairlock(A) istype(A, /obj/machinery/door/airlock)
-
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
 #define isWrench(A) istype(A, /obj/item/weapon/wrench)
@@ -129,6 +127,8 @@
 
 #define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
 
+#define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
+
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 
 // Helper macros to aid in optimizing lazy instantiation of lists.
@@ -141,7 +141,7 @@
 // Sets a L back to null iff it is empty
 #define UNSETEMPTY(L) if (L && !L.len) L = null
 // Removes I from list L, and sets I to null if it is now empty
-#define LAZYREMOVE(L, I) if(L) { L -= I; if(!L.len) { L = null; } }
+#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
 // Adds I to L, initalizing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
 // Insert I into L at position X, initalizing L if necessary
@@ -151,7 +151,7 @@
 // Sets L[A] to I, initalizing L if necessary
 #define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
 // Reads I from L safely - Works with both associative and traditional lists.
-#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= L.len ? L[I] : null) : L[I]) : null)
+#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null
 #define LAZYLEN(L) length(L)
 // Safely checks if I is in L

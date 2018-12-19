@@ -8,6 +8,13 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
+/obj/item/weapon/gun/projectile/colt/on_update_icon()
+	..()
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		icon_state = "colt"
+	else
+		icon_state = "colt-e"
+
 /obj/item/weapon/gun/projectile/military
 	name = "military .45 pistol"
 	desc = "The WT45 - a mass produced kinetic sidearm in widespread service with the SCGDF. Uses .45 rounds."
@@ -76,6 +83,25 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
 	allowed_magazines = /obj/item/ammo_magazine/c45m
+
+/obj/item/weapon/gun/projectile/sigsauer
+	name = "10mm pistol"
+	desc = "The HelTek Optimus, best known as the standard-issue sidearm for the ICCG Navy. Uses 10mm rounds."
+	magazine_type = /obj/item/ammo_magazine/p10mm
+	allowed_magazines = /obj/item/ammo_magazine/p10mm
+	icon_state = "p220"
+	caliber = "10mm"
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
+	load_method = MAGAZINE
+	accuracy = 0.40
+	fire_delay = 7.5
+
+/obj/item/weapon/gun/projectile/sigsauer/on_update_icon()
+	..()
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		icon_state = "p220"
+	else
+		icon_state = "p220-e"
 
 /obj/item/weapon/gun/projectile/magnum_pistol
 	name = ".50 magnum pistol"
@@ -214,7 +240,7 @@
 	w_class = ITEM_SIZE_NORMAL
 
 	var/global/list/ammo_types = list(
-		/obj/item/ammo_casing/a357              = ".357",
+		/obj/item/ammo_casing/a44               = ".44",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun           = "12 gauge",
 		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",

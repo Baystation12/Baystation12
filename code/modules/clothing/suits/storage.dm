@@ -1,9 +1,10 @@
 /obj/item/clothing/suit/storage
 	var/obj/item/weapon/storage/internal/pockets/pockets
+	var/slots = 2
 
-/obj/item/clothing/suit/storage/New()
-	..()
-	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 2, slot_size = 2) //two slots, fit only pocket sized items
+/obj/item/clothing/suit/storage/Initialize()
+	. = ..()
+	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots, ITEM_SIZE_SMALL) //fit only pocket sized items
 
 /obj/item/clothing/suit/storage/Destroy()
 	QDEL_NULL(pockets)
@@ -48,14 +49,9 @@
 		return
 	update_clothing_icon()	//so our overlays update
 
+/obj/item/clothing/suit/storage/vest/merc
+	slots = 4
 
-/obj/item/clothing/suit/storage/vest/merc/New()
-	..()
-	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
-
-
-/obj/item/clothing/suit/storage/vest/tactical/New()
-	..()
-	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
-
+/obj/item/clothing/suit/storage/vest/tactical
+	slots = 4
 

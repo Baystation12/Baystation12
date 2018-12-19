@@ -14,7 +14,7 @@
 		if(BRUTE)
 			adjustBruteLoss(damage * blocked_mult(blocked))
 		if(BURN)
-			if(COLD_RESISTANCE in mutations)	damage = 0
+			if(MUTATION_COLD_RESISTANCE in mutations)	damage = 0
 			adjustFireLoss(damage * blocked_mult(blocked))
 		if(TOX)
 			adjustToxLoss(damage * blocked_mult(blocked))

@@ -4,6 +4,7 @@
 	icon_keyboard = "med_key"
 	icon_screen = "dna"
 	circuit = /obj/item/weapon/circuitboard/curefab
+	idle_power_usage = 500
 	var/curing
 	var/virusing
 
@@ -69,7 +70,6 @@
 
 	if(stat & (NOPOWER|BROKEN))
 		return
-	use_power(500)
 
 	if(curing)
 		curing -= 1

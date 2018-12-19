@@ -1,4 +1,4 @@
-// These come with shuttle functionality. Need to be assigned a (unique) shuttle datum name. 
+// These come with shuttle functionality. Need to be assigned a (unique) shuttle datum name.
 // Mapping location doesn't matter, so long as on a map loaded at the same time as the shuttle areas.
 // Multiz shuttles currently not supported. Non-autodock shuttles currently not supported.
 
@@ -43,6 +43,12 @@
 	var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
 	landmark = new (center_loc, shuttle)
 	add_landmark(landmark, shuttle)
+
+/obj/effect/overmap/ship/landable/get_areas()
+	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
+	if(!shuttle_datum)
+		return list()
+	return shuttle_datum.find_childfree_areas()
 
 /obj/effect/overmap/ship/landable/populate_sector_objects()
 	..()

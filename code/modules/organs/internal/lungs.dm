@@ -245,7 +245,7 @@
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(
-	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in owner.mutations))
+	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
 		var/damage = 0
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))

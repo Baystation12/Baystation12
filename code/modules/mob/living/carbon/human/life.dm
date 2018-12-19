@@ -186,7 +186,7 @@
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())
-		if((COLD_RESISTANCE in mutations) || (prob(1)))
+		if((MUTATION_COLD_RESISTANCE in mutations) || (prob(1)))
 			heal_organ_damage(0,1)
 
 	// DNA2 - Gene processing.
@@ -317,7 +317,7 @@
 	return !failed_last_breath
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
-	if(!environment || (SPACERES in mutations))
+	if(!environment || (MUTATION_SPACERES in mutations))
 		return
 
 	//Stuff like the xenomorph's plasma regen happens here.
@@ -478,7 +478,7 @@
 	return get_thermal_protection(thermal_protection_flags)
 
 /mob/living/carbon/human/get_cold_protection(temperature)
-	if(COLD_RESISTANCE in mutations)
+	if(MUTATION_COLD_RESISTANCE in mutations)
 		return 1 //Fully protected from the cold.
 
 	temperature = max(temperature, 2.7) //There is an occasional bug where the temperature is miscalculated in ares with a small amount of gas on them, so this is necessary to ensure that that bug does not affect this calculation. Space's temperature is 2.7K and most suits that are intended to protect against any cold, protect down to 2.0K.
@@ -1143,5 +1143,5 @@
 
 /mob/living/carbon/human/update_living_sight()
 	..()
-	if(XRAY in mutations)
+	if(MUTATION_XRAY in mutations)
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

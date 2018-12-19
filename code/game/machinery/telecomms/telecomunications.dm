@@ -135,8 +135,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
-	update_power()
 	. = ..()
+	update_power()
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src
@@ -169,7 +169,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			on = 1
 	else
 		on = 0
-	use_power = on
+	update_use_power(on)
 
 /obj/machinery/telecomms/Process()
 	update_power()
@@ -256,7 +256,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	desc = "This machine has a dish-like shape and green lights. It is designed to detect and process subspace radio activity."
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 600
 	machinetype = 1
 	produces_heat = 0
@@ -314,7 +313,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	desc = "A mighty piece of hardware used to send/receive massive amounts of data."
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 1600
 	machinetype = 7
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/hub
@@ -348,7 +346,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	desc = "A mighty piece of hardware used to send massive amounts of data far away."
 	density = 1
 	anchored = 1
-	use_power = 1
 	machinetype = 8
 	produces_heat = 0
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/relay
@@ -366,9 +363,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 /obj/machinery/telecomms/relay/update_power()
 	..()
 	if(z in GLOB.using_map.station_levels)
-		idle_power_usage = 2.5 KILOWATTS
+		change_power_consumption(2.5 KILOWATTS, POWER_USE_IDLE)
 	else
-		idle_power_usage = 100 KILOWATTS
+		change_power_consumption(100 KILOWATTS, POWER_USE_IDLE)
 
 /obj/machinery/telecomms/relay/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -412,7 +409,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	desc = "A mighty piece of hardware used to send massive amounts of data quickly."
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 1000
 	machinetype = 2
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/bus
@@ -464,7 +460,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	desc = "This machine is used to process large quantities of information."
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 600
 	machinetype = 3
 	delay = 5
@@ -502,7 +497,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	desc = "A machine used to store data and network statistics."
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 300
 	machinetype = 4
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/server
@@ -513,10 +507,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/totaltraffic = 0 // gigabytes (if > 1024, divide by 1024 -> terrabytes)
 
 	var/list/memory = list()	// stored memory
-	var/rawcode = ""	// the code to compile (raw text)
-	var/datum/TCS_Compiler/Compiler	// the compiler that compiles and runs the code
-	var/autoruncode = 0		// 1 if the code is set to run every time a signal is picked up
-
 	var/encryption = "null" // encryption key: ie "password"
 	var/salt = "null"		// encryption salt: ie "123comsat"
 							// would add up to md5("password123comsat")
@@ -525,8 +515,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/server/New()
 	..()
-	Compiler = new()
-	Compiler.Holder = src
 	server_radio = new()
 
 /obj/machinery/telecomms/server/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
@@ -605,22 +593,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				var/identifier = num2text( rand(-1000,1000) + world.time )
 				log.name = "data packet ([md5(identifier)])"
 
-				if(Compiler && autoruncode)
-					Compiler.Run(signal)	// execute the code
-
 			var/can_send = relay_information(signal, /obj/machinery/telecomms/hub)
 			if(!can_send)
 				relay_information(signal, /obj/machinery/telecomms/broadcaster)
-
-
-/obj/machinery/telecomms/server/proc/setcode(var/t)
-	if(t)
-		if(istext(t))
-			rawcode = t
-
-/obj/machinery/telecomms/server/proc/compile()
-	if(Compiler)
-		return Compiler.Compile(rawcode)
 
 /obj/machinery/telecomms/server/proc/update_logs()
 	// start deleting the very first log entry

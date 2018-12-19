@@ -49,7 +49,7 @@
 
 	if(light_max_bright && light_outer_range)
 		update_light()
-		
+
 	if(opacity)
 		updateVisibility(src)
 		var/turf/T = loc
@@ -431,6 +431,11 @@ its easier to just keep the beam vertical.
 		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
 					"<span class='notice'>You shake \the [src].</span>")
 		object_shaken()
+
+// Called when hitting the atom with a grab.
+// Will skip attackby() and afterattack() if returning TRUE.
+/atom/proc/grab_attack(var/obj/item/grab/G)
+	return FALSE
 
 /atom/proc/climb_on()
 

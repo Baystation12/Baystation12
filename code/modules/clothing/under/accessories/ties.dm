@@ -56,6 +56,10 @@
 	desc = "A cyan neosilk clip-on tie. This one has a clip on it that proudly bears the Hephaestus Industries logo."
 	icon_state = "cliptie_heph"
 
+/obj/item/clothing/accessory/corptie/zeng
+	name = "\improper Zeng-Hu tie"
+	desc = "A gold neosilk clip-on tie. This one has a clip on it that proudly bears the Zeng-Hu Pharmaceuticals logo."
+	icon_state = "cliptie_zeng"
 
 //Bowties
 /obj/item/clothing/accessory/bowtie

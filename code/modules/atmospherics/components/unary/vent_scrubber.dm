@@ -4,7 +4,7 @@
 
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it."
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
 
@@ -30,7 +30,7 @@
 	var/welded = 0
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	icon_state = "map_scrubber_on"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
@@ -142,7 +142,7 @@
 		return 1
 
 	if (!node)
-		use_power = 0
+		update_use_power(POWER_USE_OFF)
 	//broadcast_status()
 	if(!use_power || (stat & (NOPOWER|BROKEN)))
 		return 0
@@ -170,7 +170,7 @@
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
-		use_power(power_draw)
+		use_power_oneoff(power_draw)
 
 	if(network)
 		network.update = 1
@@ -188,21 +188,21 @@
 		return 0
 
 	if(signal.data["power"] != null)
-		use_power = text2num(signal.data["power"])
+		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
 	if(signal.data["power_toggle"] != null)
-		use_power = !use_power
+		update_use_power(!use_power)
 
 	if(signal.data["panic_siphon"]) //must be before if("scrubbing" thing
 		panic = text2num(signal.data["panic_siphon"])
 		if(panic)
-			use_power = 1
+			update_use_power(POWER_USE_IDLE)
 			scrubbing = SCRUBBER_SIPHON
 		else
 			scrubbing = SCRUBBER_EXCHANGE
 	if(signal.data["toggle_panic_siphon"] != null)
 		panic = !panic
 		if(panic)
-			use_power = 1
+			update_use_power(POWER_USE_IDLE)
 			scrubbing = SCRUBBER_SIPHON
 		else
 			scrubbing = SCRUBBER_EXCHANGE

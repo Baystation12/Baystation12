@@ -9,6 +9,16 @@
 			return number
 	return default
 
+// Checks if the given input is a valid list index; returns true/false and doesn't change anything.
+/proc/is_valid_index(input, list/given_list)
+	if(!isnum(input))
+		return FALSE
+	if(input != round(input))
+		return FALSE
+	if(input < 1 || input > length(given_list))
+		return FALSE
+	return TRUE
+
 /proc/sanitize_text(text, default="")
 	if(istext(text))
 		return text

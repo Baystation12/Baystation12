@@ -64,6 +64,12 @@
 	Predicate helpers
 */
 
+/proc/is_space_turf(var/turf/T)
+	return istype(T, /turf/space)
+
+/proc/is_not_space_turf(var/turf/T)
+	return !is_space_turf(T)
+
 /proc/is_holy_turf(var/turf/T)
 	return T && T.holy
 

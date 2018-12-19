@@ -9,7 +9,6 @@
 	desc = "A small electric Bunsen, used to heat beakers and vials of chemicals."
 	icon = 'icons/obj/machines/heat_sources.dmi'
 	icon_state = "hotplate"
-	use_power =  1
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	density =    TRUE
 	anchored =   TRUE
@@ -48,9 +47,8 @@
 		new /obj/item/weapon/stock_parts/micro_laser(src),
 		new /obj/item/weapon/stock_parts/capacitor(src)
 	)
-	RefreshParts()
-
 	. = ..()
+	RefreshParts()
 
 /obj/machinery/reagent_temperature/Destroy()
 	if(container)
@@ -59,24 +57,22 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-
 	heating_power = initial(heating_power)
-	active_power_usage = initial(active_power_usage)
 
 	var/obj/item/weapon/stock_parts/comp = locate(/obj/item/weapon/stock_parts/capacitor) in component_parts
 	if(comp)
 		heating_power *= comp.rating
 	comp = locate(/obj/item/weapon/stock_parts/micro_laser) in component_parts
 	if(comp)
-		active_power_usage = max(0.5 KILOWATTS, active_power_usage - (comp.rating * 0.25 KILOWATTS))
+		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - (comp.rating * 0.25 KILOWATTS)), POWER_USE_ACTIVE)
 
 /obj/machinery/reagent_temperature/Process()
 	. = ..()
 	if(. != PROCESS_KILL)
 		if(temperature != last_temperature)
 			queue_icon_update()
-		if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power)
-			use_power = 0
+		if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
+			update_use_power(POWER_USE_IDLE)
 			queue_icon_update()
 
 /obj/machinery/reagent_temperature/attack_hand(var/mob/user)
@@ -86,7 +82,7 @@
 	interact(user)
 
 /obj/machinery/reagent_temperature/ProcessAtomTemperature()
-	if(use_power >= 2)
+	if(use_power >= POWER_USE_ACTIVE)
 		var/last_temperature = temperature
 		if(heater_mode == HEATER_MODE_HEAT && temperature < target_temperature)
 			temperature = min(target_temperature, temperature + heating_power)
@@ -137,7 +133,7 @@
 
 	var/list/adding_overlays
 
-	if(use_power >= 2)
+	if(use_power >= POWER_USE_ACTIVE)
 		if(!on_icon)
 			on_icon = image(icon, "[icon_state]-on")
 		LAZYADD(adding_overlays, on_icon)
@@ -180,7 +176,7 @@
 	dat += "<tr><td>Loaded container:</td>"
 	dat += "<td>[container ? "[container.name] ([Floor(container.temperature - T0C)]C) <a href='?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
 
-	dat += "<tr><td>Switched:</td><td><a href='?src=\ref[src];toggle_power=1'>[use_power == 2 ? "On" : "Off"]</a></td></tr>"
+	dat += "<tr><td>Switched:</td><td><a href='?src=\ref[src];toggle_power=1'>[use_power == POWER_USE_ACTIVE ? "On" : "Off"]</a></td></tr>"
 	dat += "</table>"
 
 	var/datum/browser/popup = new(user, "\ref[src]-reagent_temperature_window", "[capitalize(name)]")
@@ -188,17 +184,19 @@
 	popup.open()
 
 /obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
-	if(!user.Adjacent(src) || (issilicon(user) && href_list["remove_container"]))
-		to_chat(user, SPAN_WARNING("You are too far away."))
-		return STATUS_CLOSE
+	if(href_list["remove_container"])
+		. = ..(user, GLOB.physical_state, href_list)
+		if(. == STATUS_CLOSE)
+			to_chat(user, SPAN_WARNING("You are too far away."))
+		return
 	return ..()
 
 /obj/machinery/reagent_temperature/proc/ToggleUsePower()
 
-	if(use_power <= 0 || (stat & (BROKEN|NOPOWER)))
+	if(stat & (BROKEN|NOPOWER))
 		return TOPIC_HANDLED
 
-	use_power = use_power == 1 ? 2 : 1
+	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
 	QUEUE_TEMPERATURE_ATOMS(src)
 	update_icon()
 

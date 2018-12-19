@@ -724,18 +724,18 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/decloner
 	sort_string = "TAJAB"
 
-/datum/design/item/weapon/smg
-	id = "smg"
-	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
-	materials = list(MATERIAL_STEEL = 8000, MATERIAL_SILVER = 2000, MATERIAL_DIAMOND = 1000)
-	build_path = /obj/item/weapon/gun/projectile/automatic
-	sort_string = "TAPAA"
-
 /datum/design/item/weapon/wt550
 	id = "wt550"
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_SILVER = 3000, MATERIAL_DIAMOND = 1500)
 	build_path = /obj/item/weapon/gun/projectile/automatic/wt550
+	sort_string = "TAPAA"
+
+/datum/design/item/weapon/smg
+	id = "smg"
+	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4)
+	materials = list(MATERIAL_STEEL = 8000, MATERIAL_SILVER = 2000, MATERIAL_DIAMOND = 2000)
+	build_path = /obj/item/weapon/gun/projectile/automatic
 	sort_string = "TAPAB"
 
 /datum/design/item/weapon/bullpup
@@ -756,13 +756,21 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/ammo_magazine/box/c9mm
 	sort_string = "TBAAA"
 
+/datum/design/item/weapon/ammunition/ammo_4mm
+	id = "ammo_4mm"
+	desc = "A high capacity magazine of 4mm armor piercing rounds."
+	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4)
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_SILVER = 500, MATERIAL_DIAMOND = 200)
+	build_path = /obj/item/ammo_magazine/c4mm
+	sort_string = "TBAAB"
+
 /datum/design/item/weapon/ammunition/stunshell
 	desc = "A stunning shell for a shotgun."
 	id = "stunshell"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	materials = list(MATERIAL_STEEL = 4000)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
-	sort_string = "TBAAB"
+	sort_string = "TBAAC"
 
 /datum/design/item/weapon/ammunition/ammo_emp_38
 	id = "ammo_emp_38"
@@ -770,7 +778,7 @@ other types of metals and chemistry for reagents).
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	build_path = /obj/item/ammo_magazine/box/emp
-	sort_string = "TBAAC"
+	sort_string = "TBAAD"
 
 /datum/design/item/weapon/ammunition/ammo_emp_45
 	id = "ammo_emp_45"
@@ -778,15 +786,15 @@ other types of metals and chemistry for reagents).
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	build_path = /obj/item/ammo_magazine/box/emp/c45
-	sort_string = "TBAAD"
+	sort_string = "TBAAE"
 
 /datum/design/item/weapon/ammunition/ammo_emp_10
 	id = "ammo_emp_10"
-	desc = "A .10mm round with an integrated EMP charge."
+	desc = "A 10mm round with an integrated EMP charge."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	build_path = /obj/item/ammo_magazine/box/emp/a10mm
-	sort_string = "TBAAE"
+	sort_string = "TBAAF"
 
 /datum/design/item/weapon/ammunition/ammo_emp_slug
 	id = "ammo_emp_slug"
@@ -794,7 +802,7 @@ other types of metals and chemistry for reagents).
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_URANIUM = 1000)
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	build_path = /obj/item/ammo_casing/shotgun/emp
-	sort_string = "TBAAF"
+	sort_string = "TBAAG"
 
 /datum/design/item/stock_part/subspace_ansible
 	id = "s-ansible"
@@ -1823,13 +1831,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/comm_server
 	sort_string = "HAACB"
 
-/datum/design/circuit/comm_traffic
-	name = "telecommunications traffic control console"
-	id = "comm_traffic"
-	req_tech = list(TECH_DATA = 6)
-	build_path = /obj/item/weapon/circuitboard/comm_traffic
-	sort_string = "HAACC"
-
 /datum/design/circuit/message_monitor
 	name = "messaging monitor console"
 	id = "message_monitor"
@@ -2079,6 +2080,27 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
 	sort_string = "KCAAB"
+
+/datum/design/circuit/bsafront
+	name = "bluespace particle beam generator mark VI."
+	id = "bsafront"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/bsafront
+	sort_string = "KCAAC"
+
+/datum/design/circuit/bsamiddle
+	name = "bluespace fusor mark VI."
+	id = "bsamiddle"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/bsamiddle
+	sort_string = "KCAAD"
+
+/datum/design/circuit/bsaback
+	name = "bluespace material deconstructor mark VI."
+	id = "bsaback"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
+	build_path = /obj/item/weapon/circuitboard/bsaback
+	sort_string = "KCAAE"
 
 /datum/design/circuit/mecha
 	req_tech = list(TECH_DATA = 3)

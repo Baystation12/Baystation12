@@ -1190,7 +1190,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/open(var/forced=0)
 	if(!can_open(forced))
 		return 0
-	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
+	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
 	if(arePowerSystemsOn())
@@ -1243,9 +1243,9 @@ About the new airlock wires panel:
 		for(var/atom/movable/AM in turf)
 			if(AM.airlock_crush(door_crush_damage))
 				take_damage(door_crush_damage)
-				use_power(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
+				use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
 
-	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
+	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
 		playsound(src.loc, close_sound_powered, 100, 1)
 	else

@@ -318,7 +318,7 @@ var/list/organ_cache = list()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/proc/can_recover()
-	return (!(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD)
+	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
 
 /obj/item/organ/proc/get_scan_results(var/tag = FALSE)
 	. = list()

@@ -10,7 +10,10 @@
 							 /datum/map_template/ruin/exoplanet/marooned,
 							 /datum/map_template/ruin/exoplanet/hydrobase,
 							 /datum/map_template/ruin/exoplanet/lodge,
-							 /datum/map_template/ruin/exoplanet/crashed_pod)
+							 /datum/map_template/ruin/exoplanet/crashed_pod,
+							 /datum/map_template/ruin/exoplanet/drill_site,
+							 /datum/map_template/ruin/exoplanet/radshrine,
+							 /datum/map_template/ruin/exoplanet/playablecolony)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
 	if(prob(70))

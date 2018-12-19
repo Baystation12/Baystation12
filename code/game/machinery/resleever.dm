@@ -5,7 +5,6 @@
 
 	anchored = 1
 	density = 1
-	use_power = 1
 	idle_power_usage = 4
 	active_power_usage = 4000 // 4 Kw. A CT scan machine uses 1-15 kW depending on the model and equipment involved.
 	req_access = list(access_medical)
@@ -48,10 +47,10 @@ obj/machinery/resleever/Process()
 	if(occupant)
 		occupant.Paralyse(4) // We need to always keep the occupant sleeping if they're in here.
 	if(stat & (NOPOWER|BROKEN) || !anchored)
-		update_use_power(0)
+		update_use_power(POWER_USE_OFF)
 		return
 	if(resleeving)
-		update_use_power(2)
+		update_use_power(POWER_USE_ACTIVE)
 		if(remaining < timetosleeve)
 			remaining += 1
 
@@ -60,12 +59,12 @@ obj/machinery/resleever/Process()
 		else
 			remaining = 0
 			resleeving = 0
-			update_use_power(1)
+			update_use_power(POWER_USE_IDLE)
 			eject_occupant()
 			playsound(loc, 'sound/machines/ping.ogg', 100, 1)
 			visible_message("\The [src] pings as it completes its procedure!", 3)
 			return
-	update_use_power(0)
+	update_use_power(POWER_USE_OFF)
 	return
 
 /obj/machinery/resleever/proc/isOccupiedEjectable()

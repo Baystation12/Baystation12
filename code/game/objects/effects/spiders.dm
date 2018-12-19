@@ -30,6 +30,9 @@
 
 	var/damage = W.force / 4.0
 
+	if(W.edge)
+		damage += 5
+
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/WT = W
 
@@ -96,9 +99,10 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	amount_grown += rand(0,2)
+	if(prob(80))
+		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(6,24)
+		var/num = rand(3,9)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
@@ -126,9 +130,14 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
+	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
+					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
-	greater_form = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
+	greater_form = pickweight(castes)
 	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
@@ -245,7 +254,7 @@
 			if(nearby.len)
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
-				if(prob(25))
+				if(prob(10))
 					src.visible_message("<span class='notice'>\The [src] skitters[pick(" away"," around","")].</span>")
 					// Reduces the risk of spiderlings hanging out at the extreme ranges of the shift range.
 					var/min_x = pixel_x <= -shift_range ? 0 : -2
@@ -275,7 +284,8 @@
 			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(1, BRUTE, O.organ_tag)
+				O.owner.apply_damage(5, BRUTE, O.organ_tag)
+				O.owner.apply_damage(3, TOX, O.organ_tag)
 		else if(prob(1))
 			O.owner.apply_damage(1, TOX, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)

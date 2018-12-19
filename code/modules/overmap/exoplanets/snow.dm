@@ -3,16 +3,16 @@
 	desc = "Cold planet with limited plant life."
 	color = "#e8faff"
 	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-							/datum/map_template/ruin/exoplanet/marooned)
-
-	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
 							 /datum/map_template/ruin/exoplanet/oasis,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
 							 /datum/map_template/ruin/exoplanet/fountain,
 							 /datum/map_template/ruin/exoplanet/hydrobase,
 							 /datum/map_template/ruin/exoplanet/lodge,
-							 /datum/map_template/ruin/exoplanet/crashed_pod)
+							 /datum/map_template/ruin/exoplanet/crashed_pod,
+							 /datum/map_template/ruin/exoplanet/drill_site,
+							 /datum/map_template/ruin/exoplanet/hut,
+							 /datum/map_template/ruin/exoplanet/playablecolony)
 
 /obj/effect/overmap/sector/exoplanet/snow/generate_map()
 	for(var/zlevel in map_z)
@@ -52,6 +52,9 @@
 	name = "ice"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "ice"
+
+/turf/simulated/floor/exoplanet/ice/on_update_icon()
+	return
 
 /turf/simulated/floor/exoplanet/snow
 	name = "snow"

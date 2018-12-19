@@ -16,7 +16,6 @@
 	icon_state = "icecream_vat"
 	density = 1
 	anchored = 0
-	use_power = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
 
 	var/list/product_types = list()

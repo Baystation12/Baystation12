@@ -174,7 +174,7 @@
 
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(HULK in user.mutations)
+	if(MUTATION_HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
 		user.do_attack_animation(src)
@@ -276,6 +276,27 @@
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
 	return
+
+/obj/structure/window/grab_attack(var/obj/item/grab/G)
+	if (G.assailant.a_intent != I_HURT)
+		return TRUE
+	if (!G.force_danger())
+		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
+		return TRUE
+	var/def_zone = ran_zone(BP_HEAD, 20)
+	var/blocked = G.affecting.run_armor_check(def_zone, "melee")
+	if(G.damage_stage() < 2)
+		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
+		if (prob(50))
+			G.affecting.Weaken(1)
+		G.affecting.apply_damage(10, BRUTE, def_zone, blocked, used_weapon = src)
+		hit(25)
+	else
+		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
+		G.affecting.Weaken(5)
+		G.affecting.apply_damage(20, BRUTE, def_zone, blocked, used_weapon = src)
+		hit(50)
+	return TRUE
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
 	if(reinf) damage *= 0.5
@@ -634,10 +655,10 @@
 		qdel(src)
 
 /obj/machinery/button/windowtint/proc/toggle_tint()
-	use_power(5)
+	use_power_oneoff(5)
 
 	active = !active
-	update_icon()
+	queue_icon_update()
 
 	for(var/obj/structure/window/reinforced/polarized/W in range(src,range))
 		if (W.id == src.id || !W.id)

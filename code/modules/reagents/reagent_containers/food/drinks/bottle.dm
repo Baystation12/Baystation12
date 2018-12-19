@@ -197,7 +197,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
-	desc = "Aah, vodka. Prime choice of drink AND fuel by Terrans around the galaxy."
+	desc = "Aah, vodka. Prime choice of drink AND fuel by Indies around the galaxy."
 	icon_state = "vodkabottle"
 	center_of_mass = "x=17;y=3"
 	New()
@@ -378,14 +378,14 @@
 //////////////////////////PREMIUM ALCOHOL ///////////////////////
 /obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka
 	name = "Four Stripes Quadruple Distilled"
-	desc = "Premium distilled vodka imported directly from the Terran Colonial Confederation."
+	desc = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	icon_state = "premiumvodka"
 	center_of_mass = "x=17;y=3"
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka/New()
 	..()
 	reagents.add_reagent(/datum/reagent/ethanol/vodka/premium, 100)
-	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Terran","STS-35")
+	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Indie","STS-35")
 	var/typepick = pick("Absolut","Gold","Quadruple Distilled","Platinum","Standard")
 	name = "[namepick] [typepick]"
 

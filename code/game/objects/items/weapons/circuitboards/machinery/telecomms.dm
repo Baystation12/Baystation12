@@ -73,3 +73,16 @@
 							/obj/item/weapon/stock_parts/subspace/filter = 1,
 							/obj/item/weapon/stock_parts/subspace/crystal = 1,
 							/obj/item/weapon/stock_parts/micro_laser/high = 2)
+
+/obj/item/weapon/circuitboard/telecomms/allinone
+	name = T_BOARD("telecommunication mainframe")
+	build_path = /obj/machinery/telecomms/allinone
+	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3);
+	req_components = list(
+							/obj/item/stack/cable_coil = 2,
+							/obj/item/weapon/stock_parts/subspace/ansible = 1,
+							/obj/item/weapon/stock_parts/subspace/filter = 1,
+							/obj/item/weapon/stock_parts/subspace/treatment = 2,
+							/obj/item/weapon/stock_parts/subspace/analyzer = 1,
+							/obj/item/weapon/stock_parts/subspace/amplifier = 1,
+							/obj/item/weapon/stock_parts/subspace/crystal = 1)

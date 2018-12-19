@@ -161,10 +161,7 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(istype(M) && !QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
-			if(M.use_power)
-				M.auto_use_power()
-		else
+		if(!QDELETED(M) && (M.Process(wait) == PROCESS_KILL))
 			machinery.Remove(M)
 			M.is_processing = null
 		if(MC_TICK_CHECK)
@@ -212,5 +209,5 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 
 #undef SSMACHINES_PIPENETS
 #undef SSMACHINES_MACHINERY
-#undef SSMACHINES_POWER
-#undef SSMACHINES_power_objects
+#undef SSMACHINES_POWERNETS
+#undef SSMACHINES_POWER_OBJECTS

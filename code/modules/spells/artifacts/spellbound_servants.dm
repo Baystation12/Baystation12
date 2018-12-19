@@ -91,7 +91,7 @@
 	switch(input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
 		if("Space Pike")
 			H.mutations |= mNobreath
-			H.mutations |= SPACERES
+			H.mutations |= MUTATION_SPACERES
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl

@@ -277,6 +277,7 @@
 				/obj/item/weapon/gun/projectile/automatic/sts35 = 2,
 				/obj/item/weapon/gun/projectile/automatic/z8 = 2,
 				/obj/item/weapon/gun/projectile/beretta = 4,
+				/obj/item/weapon/gun/projectile/sigsauer = 3,
 				/obj/item/weapon/gun/projectile/colt = 4,
 				/obj/item/weapon/gun/projectile/sec = 4,
 				/obj/item/weapon/gun/projectile/sec/wood = 3,
@@ -301,6 +302,7 @@
 	return list(/obj/item/weapon/gun/projectile/sec = 3,
 				/obj/item/weapon/gun/energy/gun = 2,
 				/obj/item/weapon/gun/projectile/beretta = 2,
+				/obj/item/weapon/gun/projectile/sigsauer = 1,
 				/obj/item/weapon/gun/projectile/colt = 2,
 				/obj/item/weapon/gun/projectile/pistol = 2,
 				/obj/item/weapon/gun/energy/retro = 1,
@@ -1196,13 +1198,12 @@ var/list/random_useful_
 				/obj/item/weapon/storage/mre/menu10)
 
 
-/obj/random/mremain
+/obj/random/mre/main
 	name = "random MRE main course"
 	desc = "This is a random main course for MREs."
-	icon = 'icons/obj/food.dmi'
 	icon_state = "pouch"
 
-/obj/random/mremain/spawn_choices()
+/obj/random/mre/main/spawn_choices()
 	return list(/obj/item/weapon/storage/mrebag,
 				/obj/item/weapon/storage/mrebag/menu2,
 				/obj/item/weapon/storage/mrebag/menu3,
@@ -1212,63 +1213,84 @@ var/list/random_useful_
 				/obj/item/weapon/storage/mrebag/menu7,
 				/obj/item/weapon/storage/mrebag/menu8)
 
-
-/obj/random/mreside
-	name = "random MRE side dish"
-	desc = "This is a random side dish for MREs."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "pouch"
-
-/obj/random/mreside/spawn_choices()
-	return list(/obj/item/weapon/reagent_containers/food/snacks/tossedsalad,
-				/obj/item/weapon/reagent_containers/food/snacks/boiledrice,
-				/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
-				/obj/item/weapon/reagent_containers/food/snacks/twobread,
-				/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast)
-
-/obj/random/mredessert
+/obj/random/mre/dessert
 	name = "random MRE dessert"
 	desc = "This is a random dessert for MREs."
-	icon = 'icons/obj/food.dmi'
 	icon_state = "pouch"
 
-/obj/random/mredessert/spawn_choices()
+/obj/random/mre/dessert/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
 				/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
 				/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
 				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
-				/obj/item/weapon/reagent_containers/food/snacks/cookie)
+				/obj/item/weapon/reagent_containers/food/snacks/cookie,
+				/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
+				/obj/item/clothing/mask/chewable/candy/gum)
 
-/obj/random/mrehotdrinks
-	name = "random MRE hot drink"
-	desc = "This is a random hot drink for MREs."
-	icon = 'icons/obj/food.dmi'
+/obj/random/mre/dessert/vegan/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
+				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+				/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit)
+
+/obj/random/mre/drink
+	name = "random MRE drink"
+	desc = "This is a random drink for MREs."
 	icon_state = "packet"
 
-/obj/random/mrehotdrinks/spawn_choices()
+/obj/random/mre/drink/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/tea,
-				/obj/item/weapon/reagent_containers/food/condiment/small/packet/cocoa)
-
-/obj/random/mrejuice
-	name = "random MRE juice"
-	desc = "This is a random juice powder packet for MREs."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "packet"
-
-/obj/random/mrejuice/spawn_choices()
-	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/grape,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/cocoa,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/grape,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/orange,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/watermelon,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/apple)
 
-/obj/random/mrespread
+/obj/random/mre/spread
 	name = "random MRE spread"
 	desc = "This is a random spread packet for MREs."
-	icon = 'icons/obj/food.dmi'
 	icon_state = "packet"
 
-/obj/random/mrespread/spawn_choices()
+/obj/random/mre/spread/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/honey)
+
+/obj/random/mre/sauce
+	name = "random MRE sauce"
+	desc = "This is a random sauce packet for MREs."
+	icon_state = "packet"
+
+/obj/random/mre/sauce/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy)
+
+/obj/random/mre/sauce/vegan/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy)
+
+/obj/random/mre/sauce/sugarfree/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy)
+
+/obj/random/mre/sauce/crayon/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/red,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/orange,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/yellow,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/green,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/blue,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/purple,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/grey,
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/brown,)

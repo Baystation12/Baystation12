@@ -72,7 +72,7 @@ code\game\dna\genes\goon_powers.dm
 	range = 0
 	max_targets = 1
 
-	mutations = list(LASER, HULK)
+	mutations = list(MUTATION_LASER, MUTATION_HULK)
 	duration = 300
 
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 0)

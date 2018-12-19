@@ -117,11 +117,13 @@
 		return null
 	if(byond_version < MIN_CLIENT_VERSION)		//Out of date client.
 		return null
+	#if DM_VERSION >= 512
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version before trying again.")
 		qdel(src)
 		return
+	#endif
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
@@ -314,7 +316,6 @@
 	query_accesslog.Execute()
 
 
-#undef TOPIC_SPAM_DELAY
 #undef UPLOAD_LIMIT
 #undef MIN_CLIENT_VERSION
 
