@@ -49,6 +49,7 @@
 /decl/hierarchy/outfit/unggoycorvette/major
 	name = "Unggoy (Major)"
 
+	l_ear = /obj/item/device/radio/headset/covenant
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	suit_store = /obj/item/weapon/gun/energy/plasmapistol
 	belt = /obj/item/weapon/gun/energy/plasmapistol
