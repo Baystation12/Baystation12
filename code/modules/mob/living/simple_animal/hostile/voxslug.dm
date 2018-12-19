@@ -40,10 +40,6 @@ Small, little HP, poisonous.
 				continue
 		L += a
 
-	for (var/obj/mecha/M in mechas_list)
-		if (M.z == src.z && get_dist(src, M) <= dist)
-			L += M
-
 	return L
 
 /mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)

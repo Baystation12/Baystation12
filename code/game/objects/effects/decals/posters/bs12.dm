@@ -127,7 +127,7 @@
 /decl/poster/bay_26
 	icon_state="bsposter26"
 	name = "The Men We Knew"
-	desc = "This movie poster depicts a group of soldiers fighting a large mech, the movie seems to be a patriotic war movie."
+	desc = "This movie poster depicts a group of soldiers fighting a large exosuit, the movie seems to be a patriotic war movie."
 
 /decl/poster/bay_27
 	icon_state="bsposter27"

@@ -13278,10 +13278,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HU" = (
-/obj/machinery/computer/mecha{
-	icon_state = "computer";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)

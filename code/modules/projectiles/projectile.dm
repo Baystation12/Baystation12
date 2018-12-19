@@ -421,7 +421,7 @@
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
 		return
-	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
+	if(istype(A, /mob/living) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
 		return
 	result = 1

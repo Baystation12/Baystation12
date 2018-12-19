@@ -216,15 +216,6 @@
 	followed_type = /mob/living // List all other (living) mobs we haven't given a special suffix
 	suffix = "Mob"
 
-/datum/follow_holder/mech
-	sort_order = 8
-	followed_type = /obj/mecha
-	suffix = "Mech"
-
-/datum/follow_holder/mech/get_suffix(var/obj/mecha/M)
-	suffix = M.occupant ? "\[[M.occupant]\] \[[initial(suffix)]\]" : "\[[initial(suffix)]\]"
-	return ..()
-
 /datum/follow_holder/blob
 	sort_order = 9
 	followed_type = /obj/effect/blob/core

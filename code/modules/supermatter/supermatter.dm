@@ -188,7 +188,7 @@
 	grav_pulling = 1
 	exploded = 1
 	sleep(pull_time)
-	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
+	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, exosuit, or other container shouldn't block it's effects that way.
 	if(!istype(TS))
 		return
 

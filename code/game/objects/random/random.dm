@@ -487,7 +487,7 @@ obj/random/closet/spawn_choices()
 				/obj/item/toy/crossbow,
 				/obj/item/toy/blink,
 				/obj/item/weapon/reagent_containers/spray/waterflower,
-				/obj/item/toy/prize/ripley,
+				/obj/item/toy/prize/powerloader,
 				/obj/item/toy/prize/fireripley,
 				/obj/item/toy/prize/deathripley,
 				/obj/item/toy/prize/gygax,

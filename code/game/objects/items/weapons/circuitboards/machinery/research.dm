@@ -54,7 +54,7 @@ obj/item/weapon/circuitboard/rdserver
 
 /obj/item/weapon/circuitboard/mechfab
 	name = "Circuit board (Exosuit Fabricator)"
-	build_path = /obj/machinery/mecha_part_fabricator
+	build_path = /obj/machinery/robotics_fabricator
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 	req_components = list(

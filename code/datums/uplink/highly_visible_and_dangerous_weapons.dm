@@ -31,11 +31,6 @@
 	path = /obj/item/weapon/gun/launcher/money/hacked
 	desc = "Too much money? Not enough screaming? Try the Money Cannon."
 
-/datum/uplink_item/item/visible_weapons/riggedlaser
-	name = "Exosuit (APLU) Rigged Laser"
-	item_cost = 32
-	path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
-
 /datum/uplink_item/item/visible_weapons/energy_gun
 	name = "Energy Gun"
 	item_cost = 32

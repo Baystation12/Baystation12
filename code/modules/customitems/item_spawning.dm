@@ -9,7 +9,7 @@
 // On-mob icons must be in CUSTOM_ITEM_MOB with state name [item_icon].
 // Inhands must be in CUSTOM_ITEM_MOB as [icon_state]_l and [icon_state]_r.
 
-// Kits must have mech icons in CUSTOM_ITEM_OBJ under [kit_icon].
+// Kits must have exosuit icons in CUSTOM_ITEM_OBJ under [kit_icon].
 // Broken must be [kit_icon]-broken and open must be [kit_icon]-open.
 
 // Kits must also have hardsuit icons in CUSTOM_ITEM_MOB as [kit_icon]_suit
@@ -83,10 +83,7 @@
 		K.new_desc = kit_desc
 		K.new_icon = kit_icon
 		K.new_icon_file = CUSTOM_ITEM_OBJ
-		if(istype(item, /obj/item/device/kit/paint))
-			var/obj/item/device/kit/paint/kit = item
-			kit.allowed_types = splittext(additional_data, ", ")
-		else if(istype(item, /obj/item/device/kit/suit))
+		if(istype(item, /obj/item/device/kit/suit))
 			var/obj/item/device/kit/suit/kit = item
 			kit.new_light_overlay = additional_data
 			kit.new_mob_icon_file = CUSTOM_ITEM_MOB

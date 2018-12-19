@@ -24,12 +24,6 @@
 	if(!destination || !target || !target.loc || destination.z > max_default_z_level())
 		return 0
 
-	if(istype(target, /obj/mecha))
-		if(destination.z in GLOB.using_map.admin_levels)
-			var/obj/mecha/mech = target
-			to_chat(mech.occupant, "<span class='danger'>\The [target] would not survive the jump to a location so far away!</span>")
-			return 0
-
 	if(is_type_in_list(target, teleport_blacklist))
 		return 0
 

@@ -575,6 +575,9 @@
 		if ((stat & NOPOWER) || isbroken)
 			to_chat(user, "<span class='warning'>The unit is not operational.</span>")
 			return
+		if(!ishuman(G.affecting) || G.affecting.anchored)
+			return
+
 		if ( (occupant) || (helmet ) || (suit) || (boots) || (tank) || (mask)) //Unit needs to be absolutely empty
 			to_chat(user, "<span class='warning'>The unit's storage area is too cluttered.</span>")
 			return

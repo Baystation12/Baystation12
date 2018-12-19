@@ -86,6 +86,10 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 				var/obj/item/weapon/rig/suit = H.back
 				if(istype(suit))
 					return suit.cell
+	if(istype(loc, /obj/item/mech_equipment/mounted_system))
+		var/obj/item/mech_equipment/mounted_system/MS = loc
+		if(MS.owner && MS.owner.body)
+			return MS.owner.get_cell()
 	return null
 
 /obj/item/weapon/gun/energy/examine(mob/user)

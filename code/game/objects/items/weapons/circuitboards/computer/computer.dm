@@ -79,10 +79,6 @@
 	name = T_BOARD("prisoner management console")
 	build_path = /obj/machinery/computer/prisoner
 
-/obj/item/weapon/circuitboard/mecha_control
-	name = T_BOARD("exosuit control console")
-	build_path = /obj/machinery/computer/mecha
-
 /obj/item/weapon/circuitboard/rdservercontrol
 	name = T_BOARD("R&D server control console")
 	build_path = /obj/machinery/computer/rdservercontrol
