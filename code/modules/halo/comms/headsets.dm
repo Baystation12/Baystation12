@@ -2,6 +2,10 @@
 //default civilian headset
 /obj/item/device/radio/headset
 	ks2type = /obj/item/device/encryptionkey/eband
+//Medical ship headsets
+
+/obj/item/device/radio/headset/medship
+	ks2type = /obj/item/device/encryptionkey/medship
 
 //insurrectionist headset
 /obj/item/device/radio/headset/insurrection

@@ -14,6 +14,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define BERTELS_NAME "UNSC Bertels Intercom"
 #define ONI_NAME "ONICOM"
 #define URFC_NAME "CMDOCOM"
+#define MED_NAME "MEDCOM"
 /datum/halo_frequencies
 	var/innie_channel = "INNIECOM"
 	var/innie_freq = -1
@@ -29,8 +30,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/police_freq = -1
 	var/oni_freq = -1
 	var/urfc_freq = -1
+	var/med_freq = -1
 	var/list/used_freqs = list()
-	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME,ODST_NAME,ONI_NAME,URFC_NAME)
+	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME,ODST_NAME,ONI_NAME,URFC_NAME,MED_NAME,)
 
 /datum/halo_frequencies/New()
 	if(GLOB.using_map.use_global_covenant_comms)
@@ -62,6 +64,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[BERTELS_NAME] = bertels_freq
 	frequencies[ONI_NAME] = oni_freq
 	frequencies[URFC_NAME] = urfc_freq
+	frequencies[MED_NAME] = med_freq
 	//GLOB.default_internal_channels["[eband_freq]"] = list()
 	radiochannels = frequencies
 
@@ -138,6 +141,11 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		urfc_freq = rand(1001, 9998)
 	used_freqs += "[urfc_freq]"
 
+	med_freq = rand(1001, 9998)
+	while(used_freqs.Find("[med_freq]"))
+		med_freq = rand(1001, 9998)
+	used_freqs += "[med_freq]"
+
 	setup_com_channel_list()
 
 	return 1
@@ -188,6 +196,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /obj/item/device/encryptionkey/public
 	channels = list(CIV_NAME = 1)
+
+/obj/item/device/encryptionkey/medship
+	channels = list(MED_NAME = 1, EBAND_NAME = 1)
 
 /proc/halo_frequency_span_class(var/frequency)
 	//Innie channel
