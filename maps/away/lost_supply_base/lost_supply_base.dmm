@@ -1252,7 +1252,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dk" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/mech_wreckage/powerloader,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)

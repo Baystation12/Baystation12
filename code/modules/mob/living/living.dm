@@ -71,6 +71,7 @@ default behaviour is:
 	spawn(0)
 		if ((!( yes ) || now_pushing) || !loc)
 			return
+
 		now_pushing = 1
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM
@@ -852,7 +853,7 @@ default behaviour is:
 	if(!can_drown() || !loc.is_flooded(lying))
 		return FALSE
 	if(prob(5))
-		to_chat(src, "<span class='danger'>You choke and splutter as you inhale water!</span>")
+		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale water!"))
 	var/turf/T = get_turf(src)
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.

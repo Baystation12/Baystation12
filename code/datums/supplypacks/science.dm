@@ -25,15 +25,6 @@
 	containertype = /obj/structure/largecrate
 	containername = "coolant tank crate"
 
-/decl/hierarchy/supply_pack/science/mecha_odysseus
-	name = "Electronics - Circuit (\"Odysseus\")"
-	contains = list(/obj/item/weapon/stock_parts/circuitboard/mecha/odysseus/peripherals, //TEMPORARY due to lack of circuitboard printer,
-					/obj/item/weapon/stock_parts/circuitboard/mecha/odysseus/main) //TEMPORARY due to lack of circuitboard printer
-	cost = 25
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper \"Odysseus\" Circuit crate"
-	access = access_robotics
-
 /decl/hierarchy/supply_pack/science/robotics
 	name = "Parts - Robotics"
 	contains = list(/obj/item/device/assembly/prox_sensor = 3,

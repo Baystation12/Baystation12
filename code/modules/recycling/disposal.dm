@@ -112,15 +112,13 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(istype(G))	// handle grabbed mob
 		if(ismob(G.affecting))
 			var/mob/GM = G.affecting
-			for (var/mob/V in viewers(usr))
-				V.show_message("[usr] starts putting [GM.name] into the disposal.", 3)
+			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
 			if(do_after(usr, 20, src))
 				if (GM.client)
 					GM.client.perspective = EYE_PERSPECTIVE
 					GM.client.eye = src
 				GM.forceMove(src)
-				for (var/mob/C in viewers(src))
-					C.show_message("<span class='warning'>[GM.name] has been placed in the [src] by [user].</span>", 3)
+				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
 				qdel(G)
 				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return

@@ -183,7 +183,7 @@
 /obj/item/weapon/cell/high/empty
 	charge = 0
 
-/obj/item/weapon/cell/mecha
+/obj/item/weapon/cell/exosuit
 	name = "exosuit power cell"
 	desc = "A special power cell designed for heavy-duty use in industrial exosuits."
 	origin_tech = list(TECH_POWER = 3)

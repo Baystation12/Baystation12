@@ -43,9 +43,6 @@
 		else
 			do_teleport(L, pick(endgame_safespawns)) //dead-on precision
 
-	else if (istype(A, /obj/mecha/))
-		do_teleport(A, pick(endgame_safespawns)) //dead-on precision
-
 	else if (isturf(A))
 		var/turf/T = A
 		var/dist = get_dist(T, src)

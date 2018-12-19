@@ -126,13 +126,6 @@
 
 /obj/effect/razorweb/proc/entangle(var/mob/living/L, var/silent)
 
-	if(istype(L, /obj/mecha))
-		var/obj/mecha/mech = L
-		visible_message(SPAN_DANGER("\The [mech] stomps through \the [src], breaking it apart!"))
-		mech.take_damage(rand(30, 50))
-		qdel(src)
-		return
-
 	if(!istype(L) || !L.simulated || L.lying || (MOVING_DELIBERATELY(L) && prob(25)) || L.is_floating)
 		return
 

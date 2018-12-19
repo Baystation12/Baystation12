@@ -258,7 +258,6 @@
 /area/unishi/common)
 "aI" = (
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/circuitboard/mecha/gygax/main,
 /obj/item/integrated_circuit/converter/text2num,
 /turf/simulated/floor,
 /area/unishi/common)
@@ -1580,7 +1579,6 @@
 /area/unishi/hydro)
 "dX" = (
 /obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/weapon/stock_parts/circuitboard/mecha/gygax/peripherals,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dY" = (
@@ -2190,7 +2188,6 @@
 /area/unishi/common)
 "fy" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/stock_parts/circuitboard/mecha/gygax/targeting,
 /obj/random/snack,
 /obj/item/device/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,

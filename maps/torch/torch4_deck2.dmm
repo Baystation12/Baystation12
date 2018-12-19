@@ -814,7 +814,6 @@
 "bB" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/stock_parts/circuitboard/mecha_control,
 /obj/item/weapon/stock_parts/circuitboard/robotics,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
@@ -8983,7 +8982,7 @@
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/engineering/atmos)
 "tW" = (
-/obj/machinery/mecha_part_fabricator,
+/obj/machinery/robotics_fabricator,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -18492,7 +18491,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/drone_fabrication)
 "WQ" = (
-/obj/machinery/mecha_part_fabricator,
+/obj/machinery/robotics_fabricator,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)

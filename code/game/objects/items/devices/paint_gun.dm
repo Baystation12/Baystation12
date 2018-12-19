@@ -3,7 +3,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "flpainter"
 	item_state = "fl_painter"
-	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors and walls."
+	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of exosuits, floors and walls."
 
 	var/decal =        "remove all decals"
 	var/paint_dir =    "precise"
@@ -89,6 +89,21 @@
 	if(istype(WF))
 		WF.paint_color = paint_colour
 		WF.update_icon()
+		return
+
+	var/mob/living/exosuit/ES = A
+	if(istype(ES))
+		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
+		return
+
+	var/obj/structure/heavy_vehicle_frame/EF = A
+	if(istype(EF))
+		EF.set_colour(paint_colour)
+		return
+
+	var/obj/item/mech_component/MC = A
+	if(istype(MC))
+		MC.set_colour(paint_colour)
 		return
 
 	var/obj/machinery/door/airlock/D = A

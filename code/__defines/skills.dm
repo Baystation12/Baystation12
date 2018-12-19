@@ -16,7 +16,7 @@
 #define SKILL_BUREAUCRACY   /decl/hierarchy/skill/organizational/bureaucracy
 #define SKILL_FINANCE       /decl/hierarchy/skill/organizational/finance
 #define SKILL_EVA           /decl/hierarchy/skill/general/EVA
-#define SKILL_MECH          /decl/hierarchy/skill/general/EVA/mech
+#define SKILL_MECH          /decl/hierarchy/skill/general/EVA/exosuit
 #define SKILL_PILOT         /decl/hierarchy/skill/general/pilot
 #define SKILL_HAULING       /decl/hierarchy/skill/general/hauling
 #define SKILL_COMPUTER      /decl/hierarchy/skill/general/computer

@@ -426,7 +426,7 @@
 		if(target != user)
 			if(alert(target,"Would you like to enter long-term storage?",,"Yes","No") != "Yes")
 				return
-	if(!user.incapacitated() && user.Adjacent(src) && user.Adjacent(target))
+	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
 		visible_message("[user] starts putting [target] into \the [src].", 3)
 		if(!do_after(user, 20, src)|| QDELETED(target))
 			return

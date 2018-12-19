@@ -10,4 +10,4 @@
 	req_components = list(
 							/obj/item/weapon/stock_parts/capacitor = 2,
 							/obj/item/weapon/stock_parts/scanning_module = 1,
-							/obj/item/weapon/stock_parts/manipulator = 2)
+							/obj/item/weapon/stock_parts/manipulator = 2) 

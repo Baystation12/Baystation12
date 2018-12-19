@@ -3183,7 +3183,7 @@
 	pixel_x = 32
 	},
 /obj/structure/table/standard,
-/obj/item/toy/prize/ripley,
+/obj/item/toy/prize/powerloader,
 /obj/item/weapon/material/ashtray/plastic,
 /obj/machinery/recharger,
 /obj/item/blueprints,

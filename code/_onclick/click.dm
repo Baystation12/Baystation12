@@ -31,7 +31,7 @@
 
 /*
 	Standard mob ClickOn()
-	Handles exceptions: middle click, modified clicks, mech actions
+	Handles exceptions: middle click, modified clicks, exosuit actions
 
 	After that, mostly just check your state, check whether you're holding an item,
 	check whether you're adjacent to the target, then pass off the click to whoever
@@ -48,6 +48,11 @@
 		return
 
 	next_click = world.time + 1
+
+	// I hate to do this but intercepting it here is much nicer than a dozen overrides.
+	if(istype(loc, /mob/living/exosuit) && !(A in src.contents))
+		var/mob/living/exosuit/M = loc
+		return M.ClickOn(A, params, src)
 
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
@@ -78,12 +83,6 @@
 
 	if(!canClick()) // in the year 2000...
 		return
-
-	if(istype(loc, /obj/mecha))
-		if(!locate(/turf) in list(A, A.loc)) // Prevents inventory from being drilled
-			return
-		var/obj/mecha/M = loc
-		return M.click_action(A, src)
 
 	if(restrained())
 		setClickCooldown(10)
