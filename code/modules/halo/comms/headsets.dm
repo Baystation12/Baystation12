@@ -7,6 +7,10 @@
 /obj/item/device/radio/headset/insurrection
 	ks2type = /obj/item/device/encryptionkey/inniecom
 
+//URF Commando headset
+/obj/item/device/radio/headset/commando
+	ks2type = /obj/item/device/encryptionkey/urfccom
+
 //unsc crew headset
 /obj/item/device/radio/headset/unsc
 	ks2type = /obj/item/device/encryptionkey/shipcom
@@ -37,6 +41,10 @@
 /obj/item/device/radio/headset/police
 	ks2type = /obj/item/device/encryptionkey/police
 	icon_state = "sec_headset"
+
+//Oni headset
+/obj/item/device/radio/headset/oni
+	ks2type = /obj/item/device/encryptionkey/onicom
 
 //spartan headset
 /obj/item/device/radio/headset/spartan_oprf
