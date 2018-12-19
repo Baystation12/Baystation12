@@ -125,7 +125,22 @@
 			stored_ammo += new ammo_type(src)
 	update_icon()
 
+/obj/item/ammo_magazine/proc/load_from_box(var/obj/item/ammo_box/box,var/mob/user)
+	if(box.contents.len == 0 || isnull(box.contents.len))
+		to_chat(user,"<span class ='notice'>The [box.name] is empty!</span>")
+		return
+	to_chat(user,"<span class ='notice'>You start loading the [name] from the [box.name]</span>")
+	for(var/ammo in box.contents)
+		if(do_after(user,box.load_time SECONDS,box, same_direction = 1))
+			attackby(ammo,user)
+			continue
+		break
+
+	box.update_icon()
+
 /obj/item/ammo_magazine/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/ammo_box))
+		load_from_box(W,user)
 	if(istype(W, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = W
 		if(C.caliber != caliber)

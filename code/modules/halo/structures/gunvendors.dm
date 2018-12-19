@@ -70,6 +70,8 @@
 	/obj/item/clothing/head/helmet/odst/cqb = 4,
 	/obj/item/clothing/suit/armor/special/odst/cqb = 4,
 	/obj/item/weapon/storage/backpack/odst/cqb = 4,
+	/obj/item/clothing/head/helmet/odst/squadleader = 4,
+	/obj/item/clothing/suit/armor/special/odst/squadleader = 4,
 	/obj/item/clothing/head/helmet/odst/sharpshooter = 4,
 	/obj/item/clothing/suit/armor/special/odst/sharpshooter = 4,
 	/obj/item/weapon/storage/backpack/odst/sharpshooter = 4,
@@ -80,6 +82,7 @@
 	/obj/item/weapon/storage/belt/marine_ammo = 4,
 	/obj/item/weapon/storage/belt/marine_medic = 4,
 	/obj/item/clothing/accessory/storage/odst = 4,
+	/obj/item/clothing/shoes/magboots/odst = 8,
 	/obj/item/weapon/material/knife/combat_knife = 4,
 	/obj/item/weapon/material/machete = 2,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 4,
@@ -112,6 +115,8 @@
 	/obj/item/clothing/head/helmet/odst/medic = 4,
 	/obj/item/clothing/suit/armor/special/odst/medic = 4,
 	/obj/item/weapon/storage/backpack/odst/medic = 4,
+	/obj/item/clothing/head/helmet/odst/squadleader = 4,
+	/obj/item/clothing/suit/armor/special/odst/squadleader = 4,
 	/obj/item/clothing/head/helmet/odst/sharpshooter = 4,
 	/obj/item/clothing/suit/armor/special/odst/sharpshooter = 4,
 	/obj/item/weapon/storage/backpack/odst/sharpshooter = 4,
@@ -119,6 +124,7 @@
 	/obj/item/weapon/storage/belt/marine_ammo = 4,
 	/obj/item/weapon/storage/belt/marine_medic = 4,
 	/obj/item/clothing/accessory/storage/odst = 4,
+	/obj/item/clothing/shoes/magboots/odst = 8,
 	/obj/item/weapon/material/knife/combat_knife = 4,
 	/obj/item/weapon/material/machete = 2,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
@@ -155,7 +161,7 @@
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
 	/obj/item/weapon/gun/projectile/m392_dmr/innie = 1,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
-	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 2,
+	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 1,
 	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 8,
 	/obj/item/ammo_box/heavysniper = 2,
 	/obj/item/ammo_magazine/m762_ap/MA3 = 16,
@@ -177,4 +183,19 @@
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/device/landmine = 2,
 	/obj/item/weapon/grenade/frag/m9_hedp = 4
+	)
+
+/obj/machinery/vending/armory/commandovend/armour
+	products = list(
+	/obj/item/clothing/head/helmet/urfc/engineer = 2,
+	/obj/item/clothing/suit/armor/special/urfc/engineer = 2,
+	/obj/item/clothing/head/helmet/urfc/medic = 2,
+	/obj/item/clothing/suit/armor/special/urfc/medic = 2,
+	/obj/item/clothing/head/helmet/urfc/sniper = 2,
+	/obj/item/clothing/suit/armor/special/urfc/sniper = 2,
+	/obj/item/clothing/head/helmet/urfc/cqb = 2,
+	/obj/item/clothing/suit/armor/special/urfc/cqb = 2,
+	/obj/item/clothing/under/urfc_jumpsuit = 8,
+	/obj/item/clothing/gloves/thick/swat = 8,
+	/obj/item/clothing/shoes/magboots/urfc = 8
 	)
