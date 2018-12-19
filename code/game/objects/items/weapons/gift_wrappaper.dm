@@ -82,7 +82,7 @@
 		/obj/item/toy/prize/mauler,
 		/obj/item/toy/prize/odysseus,
 		/obj/item/toy/prize/phazon,
-		/obj/item/toy/prize/ripley,
+		/obj/item/toy/prize/powerloader,
 		/obj/item/toy/prize/seraph,
 		/obj/item/toy/spinningtoy,
 		/obj/item/toy/sword,

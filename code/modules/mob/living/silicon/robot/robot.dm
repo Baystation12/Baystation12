@@ -493,7 +493,7 @@
 	if(opened) // Are they trying to insert something?
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
-			if(!C.installed && istype(W, C.external_type))
+			if(!C.installed && C.accepts_component(W))
 				if(!user.unEquip(W))
 					return
 				C.installed = 1

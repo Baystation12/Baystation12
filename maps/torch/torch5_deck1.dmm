@@ -18304,7 +18304,6 @@
 /area/hallway/primary/firstdeck/fore)
 "fDR" = (
 /obj/structure/catwalk,
-/obj/structure/closet/crate/mechabeacons,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},

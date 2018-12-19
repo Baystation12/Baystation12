@@ -110,10 +110,6 @@
 	if(V)
 		V.ex_act(2)
 		return
-	var/obj/mecha/M = locate() in T
-	if(M)
-		attack_mech(M)
-		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)
 		CA.take_damage(30)

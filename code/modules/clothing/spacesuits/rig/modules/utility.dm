@@ -426,7 +426,7 @@
 
 /obj/item/rig_module/device/pen
 	name = "mounted pen"
-	desc = "For mecha John Hancocks."
+	desc = "For exosuit John Hancocks."
 	icon_state = "pen"
 	interface_name = "mounted pen"
 	interface_desc = "Signatures with style(tm)."

@@ -583,7 +583,7 @@
 					<li>A firesuit must be connected to the firefighter chassis for heat shielding.</li>
 					<li>Internal armor is plasteel for additional strength.</li>
 					<li>External armor must be installed in 2 parts, totalling 10 sheets.</li>
-					<li>Completed mech is more resilient against fire, and is a bit more durable overall.</li>
+					<li>Completed exosuit is more resilient against fire, and is a bit more durable overall.</li>
 					<li>The Company is determined to ensure the safety of its <s>investments</s> employees.</li>
 				</ul>
 				</body>

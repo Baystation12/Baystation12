@@ -11,6 +11,10 @@
 		return
 	next_click = world.time + 1
 
+	if(istype(loc, /mob/living/exosuit) && !(A in src.contents))
+		var/mob/living/exosuit/M = loc
+		return M.ClickOn(A, params, src)
+
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)

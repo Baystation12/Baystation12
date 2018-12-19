@@ -218,8 +218,13 @@
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
 	if(!M)
 		return
+
 	if(stat & (BROKEN|NOPOWER))
 		return
+
+	if(!ishuman(M) || user.anchored)
+		return
+
 	if(occupant)
 		to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
 		return

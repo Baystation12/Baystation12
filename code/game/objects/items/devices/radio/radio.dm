@@ -28,7 +28,7 @@
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device
+	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/device
 	var/power_usage = 2800
 
 	var/datum/radio_frequency/radio_connection
@@ -85,8 +85,9 @@
 	data["speaker"] = listening
 	data["freq"] = format_frequency(frequency)
 	data["rawfreq"] = num2text(frequency)
-	if(cell)
-		var/charge = round(cell.percent())
+	var/obj/item/weapon/cell/has_cell = get_cell()
+	if(has_cell)
+		var/charge = round(has_cell.percent())
 		data["charge"] = charge ? "[charge]%" : "NONE"
 	data["mic_cut"] = (wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
@@ -280,9 +281,10 @@
 
 
 	if(power_usage)
-		if(!cell)
+		var/obj/item/weapon/cell/has_cell = get_cell()
+		if(!has_cell)
 			return 0
-		if(!cell.checked_use(power_usage * CELLRATE))
+		if(!has_cell.checked_use(power_usage * CELLRATE))
 			return 0
 
 	if(loc == M)
@@ -459,8 +461,9 @@
 		"verb" = verb
 	)
 	signal.frequency = connection.frequency // Quick frequency set
-	if(cell && cell.percent() < 20)
-		signal.data["compression"] = max(0, 80 - cell.percent()*3)
+	var/obj/item/weapon/cell/has_cell = get_cell()
+	if(has_cell && has_cell.percent() < 20)
+		signal.data["compression"] = max(0, 80 - has_cell.percent()*3)
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
@@ -815,3 +818,30 @@
 	icon_state = "radio"
 	intercept = 1
 	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/device/radio/exosuit
+	name = "exosuit radio"
+	cell = null
+
+/obj/item/device/radio/exosuit/get_cell()
+	. = ..()
+	if(!.)
+		var/mob/living/exosuit/exosuit = loc
+		if(istype(exosuit) && exosuit.body)
+			. = exosuit.get_cell()
+
+/obj/item/device/radio/exosuit/attack_self(var/mob/user)
+	var/mob/living/exosuit/exosuit = loc
+	if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
+		user.set_machine(src)
+		interact(user)
+	else
+		to_chat(user, SPAN_WARNING("The radio is too damaged to function."))
+
+/obj/item/device/radio/exosuit/Topic(href, href_list)
+	if(href_list["freq"] || href_list["spec_freq"] || href_list["talk"] || href_list["listen"])
+		var/mob/living/exosuit/exosuit = loc
+		if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
+			return ..()
+		return TRUE
+	. = ..()
