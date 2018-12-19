@@ -99,6 +99,10 @@
 	icon_state = "securitypack"
 	item_state_slots = null
 
+/obj/item/weapon/storage/backpack/security/exo
+	name = "corporate security backpack"
+	icon_state = "securitypack_exo"
+
 /obj/item/weapon/storage/backpack/captain
 	name = "captain's backpack"
 	desc = "It's a special backpack made exclusively for officers."
@@ -325,6 +329,10 @@
 		slot_r_hand_str = "securitypack",
 		)
 
+/obj/item/weapon/storage/backpack/satchel/sec/exo
+	name = "corporate security satchel"
+	icon_state = "satchel-sec_exo"
+
 /obj/item/weapon/storage/backpack/satchel/hyd
 	name = "hydroponics satchel"
 	desc = "A green satchel for plant related work."
@@ -420,3 +428,9 @@
 	name = "security messenger bag"
 	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
 	icon_state = "courierbagsec"
+
+/obj/item/weapon/storage/backpack/messenger/sec/exo
+	name = "corporate security messenger bag"
+	desc = "A tactical backpack worn over one shoulder. This is black and bottle green."
+	icon_state = "courierbagsec_exo"
+
