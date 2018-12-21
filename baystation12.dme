@@ -1444,6 +1444,7 @@
 #include "code\modules\halo\covenant\cov_language.dm"
 #include "code\modules\halo\covenant\crate.dm"
 #include "code\modules\halo\covenant\cryotube.dm"
+#include "code\modules\halo\covenant\cycling_trader.dm"
 #include "code\modules\halo\covenant\design.dm"
 #include "code\modules\halo\covenant\design_cov_components.dm"
 #include "code\modules\halo\covenant\design_weapon_brute.dm"
