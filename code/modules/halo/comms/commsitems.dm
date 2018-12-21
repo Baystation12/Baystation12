@@ -28,7 +28,7 @@
 			radio_controller.add_object(src,frequency,RADIO_CHAT)
 
 /obj/item/device/mobilecomms/commsbackpack/proc/convert_freq_to_numerical(var/frequency)
-	var/freq_numerical = halo_frequencies.frequencies[frequency]
+	var/freq_numerical = halo_frequencies.all_frequencies[frequency]
 	recieving_frequencies += freq_numerical
 	recieving_frequencies -= frequency //Delete the original text value.
 	return 1
@@ -51,8 +51,10 @@
 		return
 	if(signal.data["reject"] == 1)
 		return
+		/*
 	if(!(signal.frequency in recieving_frequencies))
 		return
+		*/
 
 
 	//This is mostly stolen from all-in-one code, with a few small changes.
@@ -86,7 +88,7 @@
 /obj/item/device/mobilecomms/commsbackpack/innie/New()
 	..()
 	spawn(6) //The convert_freq_to_numerical proc runtimes if this isn't here, it attempts to read the innie frequency
-		recieving_frequencies.Add(halo_frequencies.innie_freq)
+		recieving_frequencies.Add(halo_frequencies.innie_channel_name)
 
 /obj/item/device/mobilecomms/commsbackpack/unsc/permanant
 	active = 1
