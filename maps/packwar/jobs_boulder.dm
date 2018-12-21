@@ -1,0 +1,82 @@
+
+/datum/job/packwar_chieftain_boulder
+	title = "Boulder Clan Chieftain"
+	faction_flag = COVENANT
+	//department_flag = COM
+	department = "Boulder Clan"
+	supervisors = "the Gods themselves"
+	selection_color = "#993300"
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/jiralhanae_boulderclan/chieftain
+	loadout_allowed = FALSE
+	announced = FALSE
+	generate_email = 0
+	whitelisted_species = list(/datum/species/brutes)
+	spawn_positions = 1
+	total_positions = 1
+	track_players = 1
+	head_position = 1
+
+/datum/job/packwar_captain_boulder
+	title = "Boulder Clan Captain"
+	faction_flag = COVENANT
+	department = "Boulder Clan"
+	supervisors = "the Boulder Clan chieftain"
+	selection_color = "#337700"
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/jiralhanae_boulderclan/captain
+	loadout_allowed = FALSE
+	announced = FALSE
+	generate_email = 0
+	whitelisted_species = list(/datum/species/brutes)
+	spawn_positions = 2
+	total_positions = 2
+	track_players = 1
+
+/datum/job/packwar_major_boulder
+	title = "Boulder Clan Major"
+	faction_flag = COVENANT
+	department = "Boulder Clan"
+	supervisors = "the Boulder Clan captains and chieftain"
+	selection_color = "#993300"
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/jiralhanae_boulderclan/major
+	loadout_allowed = FALSE
+	announced = FALSE
+	generate_email = 0
+	whitelisted_species = list(/datum/species/brutes)
+	spawn_positions = 3
+	total_positions = 3
+	track_players = 1
+
+/datum/job/packwar_minor_boulder
+	title = "Boulder Clan Warrior"
+	faction_flag = COVENANT
+	department = "Boulder Clan"
+	supervisors = "the Boulder Clan majors, captains and chieftain"
+	selection_color = "#993300"
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/jiralhanae_boulderclan
+	loadout_allowed = FALSE
+	announced = FALSE
+	generate_email = 0
+	whitelisted_species = list(/datum/species/brutes)
+	spawn_positions = -1
+	total_positions = -1
+	track_players = 1
+
+/datum/job/packwar_thrall_boulder
+	title = "Boulder Clan Unggoy Thrall"
+	faction_flag = COVENANT
+	department = "Boulder Clan"
+	supervisors = "everyone"
+	selection_color = "#993300"
+	account_allowed = 0               // Does this job type come with a station account?
+	outfit_type = /decl/hierarchy/outfit/unggoy/thrall
+	loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
+	announced = FALSE                  //If their arrival is announced on radio
+	generate_email = 0
+	whitelisted_species = list(/datum/species/unggoy)
+	spawn_positions = -1
+	total_positions = -1
+	track_players = 1

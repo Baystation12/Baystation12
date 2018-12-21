@@ -1,0 +1,22 @@
+<!-- 
+Title: Mercenary Console UI
+Used In File(s): \maps\packwar\mercenaries.dm
+ -->
+<h3>Mercenaries for hire:</h3>
+<div class="item">
+    {{for data.interact_inventory}}
+		{{if value.available > 0}}
+			<div class="itemLabel" style="width:66%;">
+				{{:value.title}}<br>
+			</div>
+			<div class="itemContent" style="width:33%;">
+				Amount available: {{:value.available}}<br>
+				Price: {{:value.price}}<br>
+				{{:helper.link('Hire Mercenary', 'bookmark', {'hire' : value.title, 'user' : data.user})}}<br>
+			</div>
+		{{/if}}
+	{{empty}}
+		This list is empty.
+    {{/for}}
+</div>
+<div class="item">&nbsp;</div>
