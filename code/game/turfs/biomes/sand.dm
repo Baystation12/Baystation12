@@ -4,7 +4,7 @@
 
 /obj/effect/landmark/biome/sand_turf/New()
 	. = ..()
-	atom_types = list(pick(\
+	turf_types = list(pick(\
 		/turf/unsimulated/floor/desert,\
 		/turf/unsimulated/floor/desert2,\
 		/turf/unsimulated/floor/sand_mars,\
@@ -21,7 +21,7 @@
 
 /obj/effect/landmark/biome/sand_turf/sand1/New()
 	. = ..()
-	atom_types = list(/turf/unsimulated/floor/desert)
+	turf_types = list(/turf/unsimulated/floor/desert)
 
 
 /obj/effect/landmark/biome/sand_turf/sand2
@@ -29,7 +29,7 @@
 
 /obj/effect/landmark/biome/sand_turf/sand2/New()
 	. = ..()
-	atom_types = list(/turf/unsimulated/floor/desert2)
+	turf_types = list(/turf/unsimulated/floor/desert2)
 
 
 /obj/effect/landmark/biome/sand_turf/sand_mars
@@ -37,7 +37,7 @@
 
 /obj/effect/landmark/biome/sand_turf/sand_mars/New()
 	. = ..()
-	atom_types = list(/turf/unsimulated/floor/sand_mars)
+	turf_types = list(/turf/unsimulated/floor/sand_mars)
 
 
 /obj/effect/landmark/biome/sand_turf/sand_moon
@@ -45,4 +45,4 @@
 
 /obj/effect/landmark/biome/sand_turf/sand_moon/New()
 	. = ..()
-	atom_types = list(/turf/unsimulated/floor/sand_moon)
+	turf_types = list(/turf/unsimulated/floor/sand_moon)
