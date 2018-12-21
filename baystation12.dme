@@ -1440,6 +1440,7 @@
 #include "code\modules\halo\covenant\chair.dm"
 #include "code\modules\halo\covenant\cleaning_drone.dm"
 #include "code\modules\halo\covenant\comms.dm"
+#include "code\modules\halo\covenant\cov_language.dm"
 #include "code\modules\halo\covenant\crate.dm"
 #include "code\modules\halo\covenant\cryotube.dm"
 #include "code\modules\halo\covenant\drone.dm"
