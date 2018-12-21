@@ -1537,6 +1537,7 @@
 #include "code\modules\halo\misc\armourspecials\strength.dm"
 #include "code\modules\halo\NPC\npc.dm"
 #include "code\modules\halo\NPC\npc_buysell.dm"
+#include "code\modules\halo\NPC\npc_death.dm"
 #include "code\modules\halo\NPC\npc_interact.dm"
 #include "code\modules\halo\NPC\npc_listen.dm"
 #include "code\modules\halo\NPC\npc_new.dm"
