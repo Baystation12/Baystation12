@@ -179,6 +179,10 @@ var/list/flooring_types
 /decl/flooring/tiling/new_tile/kafel
 	icon_base = "kafel_full"
 
+/decl/flooring/tiling/stone
+	icon_base = "stone"
+	build_type = /obj/item/stack/tile/stone
+
 /decl/flooring/tiling/new_tile/techmaint
 	icon_base = "techmaint"
 	build_type = /obj/item/stack/tile/techmaint
