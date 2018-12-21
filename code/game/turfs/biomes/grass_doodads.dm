@@ -51,6 +51,10 @@
 			chosen_flora = pick(flora_types)
 			atom_types[chosen_flora] = 5
 
+/obj/effect/landmark/biome/grassy_plain/geysers/New()
+	. = ..()
+	atom_types[/obj/structure/geyser] = 1
+
 /obj/effect/landmark/biome/forest
 	name = "forest doodad generator"
 	skip_chance = 66
@@ -95,3 +99,21 @@
 	if(prob(50))
 		chosen_flora = pick(flora_types)
 		atom_types[chosen_flora] = 5
+
+/obj/effect/landmark/biome/forest/geysers/New()
+	. = ..()
+	atom_types[/obj/structure/geyser/noble_gas] = 0.05
+
+/obj/effect/landmark/biome/swamp
+	name = "swampy doodad generator"
+	skip_chance = 90
+	atom_types = list(\
+		/obj/effect/flora/reedbush = 1,\
+		/obj/effect/flora/stalkybush = 1,\
+		/obj/effect/flora/fernybush = 1\
+	)
+
+/obj/effect/landmark/biome/swamp/geysers/New()
+	. = ..()
+	atom_types[/obj/structure/geyser/natural_gas] = 0.1
+	atom_types[/obj/structure/geyser/noble_gas] = 0.1
