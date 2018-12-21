@@ -465,7 +465,10 @@ var/global/list/additional_antag_types = list()
 	return config.respawn_delay
 
 /hook/death/proc/mode_on_mob_death(var/mob/living/carbon/human/H, var/list/args = list())
-	return ticker.mode.handle_mob_death(H, args)
+	//there is no mode if something dies before round start
+	if(ticker.mode)
+		return ticker.mode.handle_mob_death(H, args)
+	return 1
 
 //////////////////////////
 //Reports player logouts//
