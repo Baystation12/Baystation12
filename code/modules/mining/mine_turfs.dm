@@ -402,24 +402,45 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
 	icon_state = "rock_mineral"
-	var/mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 5, "Iron" = 35, "Carbon" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5)
+	var/mineralSpawnChanceList = list(\
+		"uranium" = 1, "phoron" = 1, "diamond" = 1, , "corundum" = 1, "kemocite" = 1, \
+		"platinum" = 5, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
+		"iron" = 35, "carbon" = 35 \
+		)
+	var/crystal_weight = 5
 	var/mineralChance = 10 //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
 		var/mineral_name = pickweight(mineralSpawnChanceList) //temp mineral name
-		mineral_name = lowertext(mineral_name)
 		ensure_ore_data_initialised()
 		if (mineral_name && (mineral_name in ore_data))
 			mineral = ore_data[mineral_name]
 			UpdateMineral()
-
+		else if(mineral_name == "crystal")
+			//special handling for crystal caves
+			var/crystal_type = pick(/obj/structure/crystal_deposit,/obj/structure/crystal_deposit/pink,/obj/structure/crystal_deposit/orange)
+			//spawn(10)
+				//world << "generating [crystal_type] cave at ([x],[y])"
+			var/cave_size = 4
+			for(var/turf/simulated/mineral/T in circlerange(src, cave_size))
+				var/chance = 25 * (cave_size - get_dist(T,src)) + 50
+				//spawn(10)
+					//world << "	dist:[get_dist(T,src)] chance:[chance]%"
+				if(prob(chance))
+					T.ChangeTurf(T.mined_turf)
+					if(prob(20))
+						new crystal_type(T)
 	. = ..()
 
 /turf/simulated/mineral/random/high_chance
 	icon_state = "rock_mineral_high"
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 10, "Iron" = 60, "Carbon" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "mhydrogen" = 1)
+	mineralSpawnChanceList = list(\
+		"uranium" = 1, "phoron" = 1, "diamond" = 1, , "corundum" = 1, "kemocite" = 1, \
+		"platinum" = 5, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
+		"iron" = 5, "carbon" = 5 \
+		)
 
 
 /**********************Asteroid**************************/
