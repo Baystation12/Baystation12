@@ -1632,6 +1632,7 @@
 #include "code\modules\halo\turfs\streetobjs.dm"
 #include "code\modules\halo\turfs\covenant\floor.dm"
 #include "code\modules\halo\turfs\covenant\materials.dm"
+#include "code\modules\halo\turfs\covenant\unsimulated.dm"
 #include "code\modules\halo\turfs\covenant\walls.dm"
 #include "code\modules\halo\vehicles\boarding_pod.dm"
 #include "code\modules\halo\vehicles\drop_pod.dm"
