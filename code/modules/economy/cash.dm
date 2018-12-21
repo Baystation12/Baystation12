@@ -4,6 +4,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "spacecash1"
+	var/icon_state_base = "spacecash"
 	opacity = 0
 	density = 0
 	anchored = 0.0
@@ -16,16 +17,21 @@
 	access = access_crate_cash
 	var/worth = 0
 	var/global/denominations = list(1000,500,200,100,50,20,10,1)
+	var/currency = "credits"
 
 /obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash))
 		if(istype(W, /obj/item/weapon/spacecash/ewallet)) return 0
 
-		var/obj/item/weapon/spacecash/bundle/bundle
+		var/obj/item/weapon/spacecash/bundle/bundle = W
+		if(bundle.currency != src.currency)
+			to_chat(user, "\icon[src] <span class='warning'>[src] is a different kind of currency.</span>")
+			return
+
 		if(!istype(W, /obj/item/weapon/spacecash/bundle))
 			var/obj/item/weapon/spacecash/cash = W
 			user.drop_from_inventory(cash)
-			bundle = new (src.loc)
+			bundle = new type(src.loc)
 			bundle.worth += cash.worth
 			qdel(cash)
 		else //is bundle
@@ -37,7 +43,7 @@
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		to_chat(user, "<span class='notice'>You add [src.worth] worth of credits to the bundles.<br>It holds [bundle.worth] credits now.</span>")
+		to_chat(user, "<span class='notice'>You add [src.worth] worth of [currency] to the bundles.<br>It holds [bundle.worth] [currency] now.</span>")
 		qdel(src)
 
 /obj/item/weapon/spacecash/proc/getMoneyImages()
@@ -51,8 +57,6 @@
 	worth = 0
 
 /obj/item/weapon/spacecash/bundle/getMoneyImages()
-	if(icon_state)
-		return list(icon_state)
 	. = list()
 	var/sum = src.worth
 	var/num = 0
@@ -60,9 +64,9 @@
 		while(sum >= i && num < 50)
 			sum -= i
 			num++
-			. += "spacecash[i]"
+			. += "[icon_state_base][i]"
 	if(num == 0) // Less than one credit, let's just make it look like 1 for ease
-		. += "spacecash1"
+		. += "[icon_state_base]1"
 
 /obj/item/weapon/spacecash/bundle/update_icon()
 	overlays.Cut()
@@ -76,11 +80,11 @@
 		banknote.transform = M
 		src.overlays += banknote
 
-	src.desc = "They are worth [worth] credits."
+	src.desc = "They are worth [worth] [currency]."
 	if(worth in denominations)
-		src.name = "[worth] credit"
+		src.name = "[worth] [currency]"
 	else
-		src.name = "pile of [worth] credits"
+		src.name = "pile of [worth] [currency]"
 
 	if(overlays.len <= 2)
 		w_class = ITEM_SIZE_TINY
@@ -88,7 +92,7 @@
 		w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/spacecash/bundle/attack_self()
-	var/amount = input(usr, "How many credits do you want to take out? (0 to [src.worth])", "Take Money", 20) as num
+	var/amount = input(usr, "How many [currency] do you want to take out? (0 to [src.worth])", "Take Money", 20) as num
 	var/result = split_off(amount, usr)
 	if(result)
 		usr.put_in_hands(result)
@@ -105,10 +109,10 @@
 		user.drop_from_inventory(src)
 	if(amount in list(1000,500,200,100,50,20,1))
 		var/cashtype = text2path("/obj/item/weapon/spacecash/bundle/c[amount]")
-		var/obj/cash = new cashtype (user.loc)
+		var/obj/cash = new cashtype (user.loc, currency)
 		. = cash
 	else
-		var/obj/item/weapon/spacecash/bundle/bundle = new (user.loc)
+		var/obj/item/weapon/spacecash/bundle/bundle = new (user.loc, currency, amount)
 		bundle.worth = amount
 		bundle.update_icon()
 		. = bundle
