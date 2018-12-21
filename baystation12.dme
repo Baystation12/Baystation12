@@ -1463,6 +1463,7 @@
 #include "code\modules\halo\covenant\shipnames.dm"
 #include "code\modules\halo\covenant\slipspace.dm"
 #include "code\modules\halo\covenant\spirit.dm"
+#include "code\modules\halo\covenant\tools.dm"
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\flood\flood.dm"
 #include "code\modules\halo\flood\flood_infection_chem.dm"
