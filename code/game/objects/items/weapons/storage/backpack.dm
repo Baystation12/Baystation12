@@ -347,6 +347,41 @@
 		slot_r_hand_str = "satchel-cap",
 		)
 
+//Smuggler's satchel
+/obj/item/weapon/storage/backpack/satchel/flat
+	name = "\improper Smuggler's satchel"
+	desc = "A very slim satchel that can easily fit into tight spaces."
+	icon_state = "satchel-flat"
+	item_state = "satchel-norm"
+	level = 1
+	w_class = ITEM_SIZE_NORMAL //Can fit in backpacks itself.
+	storage_slots = 5
+	max_w_class = ITEM_SIZE_NORMAL
+	max_storage_space = 15
+	cant_hold = list(/obj/item/weapon/storage/backpack/satchel/flat) //muh recursive backpacks
+	startswith = list(
+		/obj/item/stack/tile/floor,
+		/obj/item/weapon/crowbar
+		)
+
+/obj/item/weapon/storage/backpack/satchel/flat/MouseDrop(var/obj/over_object)
+	var/turf/T = get_turf(src)
+	if(hides_under_flooring() && isturf(T) && !T.is_plating())
+		return
+	..()
+
+/obj/item/weapon/storage/backpack/satchel/flat/hide(var/i)
+	set_invisibility(i ? 101 : 0)
+	anchored = i ? TRUE : FALSE
+	alpha = i ? 128 : initial(alpha)
+
+/obj/item/weapon/storage/backpack/satchel/flat/attackby(obj/item/W, mob/user)
+	var/turf/T = get_turf(src)
+	if(hides_under_flooring() && isturf(T) && !T.is_plating())
+		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
+		return 1
+	return ..()
+
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
 	name = "emergency response team backpack"
