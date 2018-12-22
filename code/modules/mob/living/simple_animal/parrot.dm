@@ -261,7 +261,9 @@
  * AI - Not really intelligent, but I'm calling it AI anyway.
  */
 /mob/living/simple_animal/parrot/Life()
-	..()
+	. = ..()
+	if(!.)
+		return FALSE
 
 	//Sprite and AI update for when a parrot gets pulled
 	if(pulledby && stat == CONSCIOUS)

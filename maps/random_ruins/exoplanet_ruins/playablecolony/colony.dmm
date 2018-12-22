@@ -175,7 +175,7 @@
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/clothing/suit/storage/toggle/track/tcc,
+/obj/item/clothing/suit/storage/toggle/track/gcc,
 /obj/item/device/radio,
 /obj/structure/closet/shipping_wall{
 	pixel_y = -28
@@ -1553,7 +1553,6 @@
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/clothing/suit/storage/toggle/track/tcc,
 /obj/item/device/radio,
 /obj/structure/closet/cabinet,
 /turf/simulated/floor/carpet,
@@ -2589,7 +2588,6 @@
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/clothing/suit/storage/toggle/track/tcc,
 /obj/item/device/radio,
 /obj/structure/closet/shipping_wall{
 	pixel_y = 34
@@ -3076,7 +3074,7 @@
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/clothing/suit/storage/toggle/track/tcc,
+/obj/item/clothing/suit/storage/toggle/track/gcc,
 /obj/item/device/radio,
 /obj/structure/closet/cabinet,
 /turf/simulated/floor/carpet,

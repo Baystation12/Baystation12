@@ -1,5 +1,5 @@
 /obj/machinery/r_n_d/protolathe
-	name = "\improper Protolathe"
+	name = "protolathe"
 	icon_state = "protolathe"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 

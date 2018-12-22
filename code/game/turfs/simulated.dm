@@ -74,8 +74,6 @@
 /turf/simulated/Entered(atom/A, atom/OL)
 	if (istype(A,/mob/living))
 		var/mob/living/M = A
-		if(M.lying)
-			return ..()
 
 		// Dirt overlays.
 		update_dirt()
@@ -106,6 +104,9 @@
 					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0,H.dir,bloodcolor) // Going
 
 				bloodDNA = null
+
+		if(M.lying)
+			return ..()
 
 		if(src.wet)
 

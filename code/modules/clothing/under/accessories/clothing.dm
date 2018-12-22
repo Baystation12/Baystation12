@@ -24,6 +24,11 @@
 	desc = "A fashionable tunic that Hephaestus Industries provides to their lab workers."
 	icon_state = "tunic_heph"
 
+/obj/item/clothing/accessory/tunic/zeng
+	name = "\improper Zeng-Hu tunic"
+	desc = "A fashionable tunic that Zeng-Hu provides to their lab workers."
+	icon_state = "tunic_heph"
+
 /obj/item/clothing/accessory/tunic/exec
 	name = "executive tunic"
 	icon_state = "tunicblack"
@@ -37,6 +42,11 @@
 	name = "\improper Hephaestus Industries executive tunic"
 	desc = "A fashionable tunic that Hephaestus Industries provides to their lab workers."
 	icon_state = "tunicblack_heph"
+
+/obj/item/clothing/accessory/tunic/exec/zeng
+	name = "\improper Zeng-Hu executive tunic"
+	desc = "A fashionable tunic that Zeng-Hu provides to their lab workers."
+	icon_state = "tunicblack_zeng"
 
 /obj/item/clothing/accessory/dashiki
 	name = "black dashiki"
@@ -185,6 +195,11 @@
 	name = "\improper Hephaestus Industries suit jacket"
 	desc = "A jacket that Hephaestus Industries has their executives wear."
 	icon_state = "jacket_heph"
+
+/obj/item/clothing/accessory/toggleable/corpjacket/zeng
+	name = "\improper Zeng-Hu suit jacket"
+	desc = "A jacket that Zeng-Hu has their executives wear."
+	icon_state = "jacket_zeng"
 
 /obj/item/clothing/accessory/toggleable/hawaii
 	name = "flower-pattern shirt"

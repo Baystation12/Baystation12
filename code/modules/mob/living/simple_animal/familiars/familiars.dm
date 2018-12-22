@@ -120,7 +120,9 @@
 	var/icon_rest //so that we can have resting little guys.
 
 /mob/living/simple_animal/familiar/pet/Life()
-	..()
+	. = ..()
+	if(!.)
+		return FALSE
 	if(!icon_rest)
 		return
 	if(stat == UNCONSCIOUS || resting)

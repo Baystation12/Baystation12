@@ -26,6 +26,11 @@
 	for(var/decl_type in decl_types)
 		.[decl_type] =  get_decl(decl_type)
 
+/repository/decls/proc/get_decls_unassociated(var/list/decl_types)
+	. = list()
+	for(var/decl_type in decl_types)
+		. += get_decl(decl_type)
+
 /repository/decls/proc/get_decls_of_type(var/decl_prototype)
 	. = fetched_decl_types[decl_prototype]
 	if(!.)

@@ -53,6 +53,7 @@
 	icon = 'icons/turf/chlorine.dmi'
 	icon_state = "chlorine_liquid"
 	desc = "A pool of noxious liquid chlorine. It's full of silt and plant matter."
+	reagent_type = /datum/reagent/toxin/chlorine
 
 /turf/simulated/floor/exoplanet/chlorine_sand
 	name = "chlorinated sand"

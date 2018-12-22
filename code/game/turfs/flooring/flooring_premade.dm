@@ -229,6 +229,11 @@
 	icon_state = "kafel_full"
 	initial_flooring = /decl/flooring/tiling/new_tile/kafel
 
+/turf/simulated/floor/tiled/stone
+	name = "stone slab floor"
+	icon_state = "stone_full"
+	initial_flooring = /decl/flooring/tiling/stone
+
 /turf/simulated/floor/tiled/techfloor/grid
 	name = "floor"
 	icon_state = "techfloor_grid"

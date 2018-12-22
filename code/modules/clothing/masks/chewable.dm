@@ -135,7 +135,6 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/gum/New()
 	..()
 	reagents.add_reagent(pick(list(
-				/datum/reagent/fuel,
 				/datum/reagent/drink/juice/grape,
 				/datum/reagent/drink/juice/orange,
 				/datum/reagent/drink/juice/lemon,

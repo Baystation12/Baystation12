@@ -477,6 +477,15 @@
 	icon_state = "seashallow"
 	movement_delay = 2
 	mudpit = 1
+	var/reagent_type = /datum/reagent/water
+
+/turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
+	var/obj/item/weapon/reagent_containers/RG = O
+	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
+		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+		user.visible_message("<span class='notice'>[user] fills \the [RG] from \the [src].</span>","<span class='notice'>You fill \the [RG] from \the [src].</span>")
+	else
+		return ..()
 
 /turf/simulated/floor/exoplanet/water/update_dirt()
 	return	// Water doesn't become dirty

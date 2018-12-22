@@ -47,7 +47,7 @@
 	name = "Exploration suit cycler"
 	model_text = "Exploration"
 	req_access = list(access_explorer)
-	departments = list("Exploration")
+	available_modifications = list(/decl/item_modifier/space_suit/explorer)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_storage_unit/explorer

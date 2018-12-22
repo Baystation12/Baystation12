@@ -126,21 +126,21 @@
 				damtype = ELECTROCUTE
 
 		else if(prob(5)) //earthquake spell
-			visible_message("<span class='cult'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
-			stop_AI = TRUE
+			visible_message("<span class='danger'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
+			stop_automation = TRUE
 			if(do_after(src, 6 SECONDS, src))
 				var/health_holder = health
 				visible_message("<span class='cult'>\The [src] raises its fore-hooves and stomps them into the ground with incredible force!</span>")
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 2, 2, 3, 6)
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 1, 4, 4, 6)
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 3, 4, 3, 6)
-				stop_AI = FALSE
+				stop_automation = FALSE
 				spellscast += 2
 				if(!health < health_holder)
 					health = health_holder //our own magicks cannot harm us
 			else
 				visible_message("<span class='notice'>\The [src] loses concentration and huffs haughtily.</span>")
-				stop_AI = FALSE
+				stop_automation = FALSE
 
 		else return
 
@@ -167,7 +167,9 @@
 	default_pixel_y = 10
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Life()
-	..()
+	. = ..()
+	if(!.)
+		return FALSE
 	if(special_attacks >= 6 && damtype != BRUTE)
 		visible_message("<span class='cult'>The energy surrounding \the [src]'s horns dissipates.</span>")
 		damtype = BRUTE
@@ -197,14 +199,16 @@
 	QDEL_NULL(boss_theme)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/UnarmedAttack(mob/living/L)
+/mob/living/simple_animal/hostile/retaliate/goat/king/UnarmedAttack(atom/A)
 	..()
-	if(prob(stun_chance))
-		L.Weaken(0.5)
-		L.confused += 1
-		visible_message("<span class='warning'>\The [L] is bowled over by the impact of [src]'s attack!</span>")
+	if(isliving(A))
+		var/mob/living/L = A
+		if(prob(stun_chance))
+			L.Weaken(0.5)
+			L.confused += 1
+			visible_message("<span class='warning'>\The [L] is bowled over by the impact of [src]'s attack!</span>")
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/UnarmedAttack(mob/living/L)
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/UnarmedAttack()
 	..()
 	if(damtype != BRUTE)
 		special_attacks++

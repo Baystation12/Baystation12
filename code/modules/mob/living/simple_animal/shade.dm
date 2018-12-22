@@ -34,7 +34,7 @@
 	return
 
 /mob/living/simple_animal/shade/Life()
-	..()
+	. = ..()
 	OnDeathInLife()
 
 /mob/living/simple_animal/shade/proc/OnDeathInLife()

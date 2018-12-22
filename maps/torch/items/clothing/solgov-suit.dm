@@ -81,19 +81,19 @@
 	item_state = "blueservice_snco"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/officer
-	name = "fleet officer's dress jacket"
+	name = "fleet officer's service jacket"
 	desc = "A navy blue SCG Fleet dress jacket with silver accents."
 	icon_state = "blueservice_off"
 	item_state = "blueservice_off"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/command
-	name = "fleet senior officer's dress jacket"
+	name = "fleet senior officer's service jacket"
 	desc = "A navy blue SCG Fleet dress jacket with gold accents."
 	icon_state = "blueservice_comm"
 	item_state = "blueservice_comm"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/flag
-	name = "fleet flag officer's dress jacket"
+	name = "fleet flag officer's service jacket"
 	desc = "A navy blue SCG Fleet dress jacket with red accents."
 	icon_state = "blueservice_flag"
 	item_state = "blueservice_flag"

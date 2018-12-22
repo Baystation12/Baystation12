@@ -105,6 +105,11 @@
 	item_cost = 40
 	path = /obj/item/weapon/gun/projectile/beretta
 
+/datum/uplink_item/item/visible_weapons/sigsauer
+	name = "10mm Pistol"
+	item_cost = 40
+	path = /obj/item/weapon/gun/projectile/sigsauer
+
 /datum/uplink_item/item/visible_weapons/detective_revolver
 	name = "Holdout Revolver"
 	item_cost = 38

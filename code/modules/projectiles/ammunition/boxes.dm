@@ -48,6 +48,40 @@
 	icon_state = "38_r"
 	ammo_type = /obj/item/ammo_casing/c38/rubber
 
+/obj/item/ammo_magazine/shotholder
+	name = "shotgun slug holder"
+	desc = "A convenient pouch that holds 12 gauge shells."
+	icon_state = "shotholder"
+	caliber = "shotgun"
+	ammo_type = /obj/item/ammo_casing/shotgun
+	matter = list(MATERIAL_STEEL = 1440)
+	max_ammo = 4
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/shotholder/shell
+	name = "shotgun shell holder"
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+
+/obj/item/ammo_magazine/shotholder/beanbag
+	name = "beanbag shell holder"
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	matter = list(MATERIAL_STEEL = 720)
+
+/obj/item/ammo_magazine/shotholder/flash
+	name = "illumination shell holder"
+	ammo_type = /obj/item/ammo_casing/shotgun/flash
+	matter = list(MATERIAL_STEEL = 360, MATERIAL_GLASS = 360)
+
+/obj/item/ammo_magazine/shotholder/stun
+	name = "stun shell holder"
+	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
+	matter = list(MATERIAL_STEEL = 1440, MATERIAL_GLASS = 2880)
+
+/obj/item/ammo_magazine/shotholder/empty
+	name = "shotgun ammunition holder"
+	matter = list(MATERIAL_STEEL = 250)
+	initial_ammo = 0
+
 /obj/item/ammo_magazine/c45m
 	name = "magazine (.45)"
 	icon_state = "45"
@@ -222,7 +256,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a10mm
-	name = "magazine (10mm)"
+	name = "submachine gun magazine (10mm)"
 	icon_state = "10mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
@@ -234,6 +268,31 @@
 
 /obj/item/ammo_magazine/a10mm/empty
 	initial_ammo = 0
+
+/obj/item/ammo_magazine/p10mm
+	name = "pistol magazine (10mm)"
+	icon_state = "p10mm"
+	origin_tech = list(TECH_COMBAT = 2)
+	mag_type = MAGAZINE
+	caliber = "10mm"
+	matter = list(MATERIAL_STEEL = 750)
+	ammo_type = /obj/item/ammo_casing/a10mm
+	max_ammo = 10
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/p10mm/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/c4mm
+	name = "submachine gun magazine (4mm)"
+	icon_state = "4mm"
+	origin_tech = list(TECH_COMBAT = 4)
+	mag_type = MAGAZINE
+	caliber = "4mm"
+	matter = list(MATERIAL_STEEL = 2000)
+	ammo_type = /obj/item/ammo_casing/c4mm
+	max_ammo = 40
+	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a762
 	name = "magazine (7.62mm)"

@@ -148,6 +148,7 @@
 	id = "chlorine"
 	name = "Chlorine"
 	tile_overlay = "chlorine"
+	overlay_limit = 0.5
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
 	flags = XGM_GAS_CONTAMINANT

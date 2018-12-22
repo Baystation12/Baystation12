@@ -35,8 +35,10 @@
 	can_pull_mobs = MOB_PULL_NONE
 
 /mob/living/simple_animal/mouse/Life()
-	..()
-	if(!stat && prob(speak_chance))
+	. = ..()
+	if(!.)
+		return FALSE
+	if(prob(speak_chance))
 		for(var/mob/M in view())
 			sound_to(M, 'sound/effects/mousesqueek.ogg')
 

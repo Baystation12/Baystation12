@@ -11,8 +11,11 @@
 	if(reagents)
 		for(var/a in reagents.reagent_list)
 			var/datum/reagent/reg = a
-			. += reg.value * reg.volume
+			. += reg.Value() * reg.volume
 	. = round(.)
+
+/datum/reagent/proc/Value()
+	return value
 
 /obj/item/stack/Value(var/base)
 	return base * amount
