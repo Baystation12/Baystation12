@@ -554,7 +554,7 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
-	if(ssd_check() && species.get_ssd(src))
+	if(ssd_check() && species.get_ssd(src) || player_triggered_sleeping)
 		Sleeping(2)
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		blinded = 1
