@@ -142,10 +142,10 @@
 	desc = "Chief of Security"
 	
 /datum/access/hop
-		desc = "Executive Officer"
+	desc = "Executive Officer"
 		
 /datum/access/qm
-		desc = "Deck Chief"
+	desc = "Deck Chief"
 
 /************
 * SEV Torch *
