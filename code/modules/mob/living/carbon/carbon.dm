@@ -205,11 +205,12 @@
 			var/show_ssd
 			var/mob/living/carbon/human/H = src
 			if(istype(H)) show_ssd = H.species.show_ssd
-			if(show_ssd && !client && !teleop)
+			if(show_ssd && ssd_check())
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
-			else if(lying || src.sleeping)
-				src.sleeping = max(0,src.sleeping-5)
+			else if(lying || src.sleeping || player_triggered_sleeping)
+				src.player_triggered_sleeping = 0
+				src.sleeping = max(0,src.sleeping - 5)
 				if(src.sleeping == 0)
 					src.resting = 0
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
@@ -366,11 +367,8 @@
 	set name = "Sleep"
 	set category = "IC"
 
-	if(usr.sleeping)
-		to_chat(usr, "<span class='warning'>You are already sleeping</span>")
-		return
-	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
-		usr.sleeping = 20 //Short nap
+	if(alert("Are you sure you want to [player_triggered_sleeping ? "wake up?" : "sleep for a while? Use 'sleep' again to wake up"]", "Sleep", "No", "Yes") == "Yes")
+		player_triggered_sleeping = !player_triggered_sleeping
 
 /mob/living/carbon/Bump(var/atom/movable/AM, yes)
 	if(now_pushing || !yes)

@@ -40,3 +40,5 @@
 
 	var/list/stasis_sources = list()
 	var/stasis_value
+
+	var/player_triggered_sleeping = 0
