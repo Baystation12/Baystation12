@@ -131,7 +131,7 @@
 		return 1
 	else if(ispath(path,/obj))
 		new path(get_turf(user.loc))
-		playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
+		playsound(get_turf(usr),'sound/magic/charge.ogg',50,1)
 		return 1
 
 /obj/item/weapon/contract/boon/wizard

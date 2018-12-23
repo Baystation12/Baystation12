@@ -12,6 +12,7 @@
 	cooldown_min = 20 //20 deciseconds reduction per rank
 
 	hud_state = "wiz_knock"
+	cast_sound = 'sound/magic/knock.ogg'
 
 /spell/aoe_turf/knock/cast(list/targets)
 	for(var/turf/T in targets)

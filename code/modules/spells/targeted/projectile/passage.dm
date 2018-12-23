@@ -20,7 +20,7 @@
 	proj_step_delay = 1
 
 	hud_state = "gen_project"
-
+	cast_sound = 'sound/magic/lightning_bolt.ogg'
 
 /spell/targeted/projectile/dumbfire/passage/prox_cast(var/list/targets, atom/spell_holder)
 	for(var/mob/living/L in targets)
@@ -32,7 +32,7 @@
 	var/datum/effect/effect/system/smoke_spread/S = new /datum/effect/effect/system/smoke_spread()
 	S.set_up(3,0,T)
 	S.start()
-
+	playsound(src, 'sound/magic/lightningshock.ogg', 50)
 
 /spell/targeted/projectile/dumbfire/passage/empower_spell()
 	if(!..())
