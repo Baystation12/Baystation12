@@ -14266,11 +14266,8 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "aVf" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/monitor{
 	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/reinforced,
@@ -14336,11 +14333,8 @@
 /turf/simulated/floor/plating,
 /area/rnd/xenobiology)
 "aVq" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/monitor{
 	alarm_id = "xenobio4_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/reinforced,
@@ -30530,16 +30524,15 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/xenobiology)
 "ttb" = (
-/obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/alarm/monitor{
+	alarm_id = "xenobio2_alarm";
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tub" = (
@@ -30584,16 +30577,15 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tyb" = (
-/obj/machinery/alarm{
-	alarm_id = "xenobio3_alarm";
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/alarm/monitor{
+	alarm_id = "xenobio3_alarm";
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tzb" = (
