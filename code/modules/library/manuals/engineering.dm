@@ -388,7 +388,7 @@
 				</style>
 				</head>
 				<body>
-				<h1>OPERATING MANUAL FOR MK 1 PROTOTYPE THERMOELECTRIC SUPERMATTER ENGINE 'TOMBOLA'</h1>
+				<h1>OPERATING MANUAL FOR MK 1 THERMOELECTRIC SUPERMATTER ENGINE "JUPITER"</h1>
 				<br>
 				<h2>OPERATING PRINCIPLES</h2>
 				<br>
@@ -411,6 +411,7 @@
 				<h2>STARTUP PROCEDURE</h2>
 				<ol>
 				<li>Fill reactor loop (green and yellow) and radiator loop (cyan) with two (2) standard canisters of hydrogen gas each.</li>
+				<li>Additional canisters of hydrogen gas can be obtained from nearby Atmospherics if required.</li>
 				<li>Ensure that the Thermoelectric Generator (TEG) high-power pumps (on cyan pipes) are switched on at full power.</li>
 				<li><i>IMPORTANT: </i> Set filters (port-side of engine room) to Hydrogen instead of Carbon Dioxide, and afterwards ensure each filter is switched on.</li>
 				<li>Ensure the pump to the phoron canister is set to max.</li>
