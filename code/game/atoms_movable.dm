@@ -39,13 +39,10 @@
 		src.throw_impact(A)
 		src.throwing = 0
 
-	spawn(0)
-		if (A && yes)
-			A.last_bumped = world.time
-			A.Bumped(src)
-		return
+	if (A && yes)
+		A.last_bumped = world.time
+		INVOKE_ASYNC(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
-	return
 
 /atom/movable/proc/forceMove(atom/destination)
 	if(loc == destination)
