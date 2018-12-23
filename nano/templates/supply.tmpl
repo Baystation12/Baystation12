@@ -92,6 +92,16 @@
 	</div>
 {{else data.screen == 4}}
 	{{if data.is_admin}}
+		{{if data.is_NTOS}}
+			<div class="item">
+				<div class="itemLabel">
+					Notifications are: 
+				</div>
+				<div class="itemContent">
+					{{:helper.link((data.notifications_enabled ? 'Enabled' : 'Disabled'), null, {'toggle_notifications': 1})}}
+				</div>
+			</div>
+		{{/if}}
 		<div class="item">
 			<center><h3>Pending orders</h3></span>
 			<table style="width:100%">
