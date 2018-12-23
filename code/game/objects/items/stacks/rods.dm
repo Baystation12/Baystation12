@@ -11,7 +11,6 @@
 	throw_range = 20
 	matter = list(MATERIAL_STEEL = 1875)
 	max_amount = 100
-	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 
