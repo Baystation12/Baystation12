@@ -1,6 +1,6 @@
 /obj/structure/ship_munition/bsa_charge
 	name = "unknown bsa charge"
-	desc = "A charge to power the BSA with. It looks impossibly round and shiny."
+	desc = "A charge to power the BSA with. It looks impossibly round and shiny. This charge does not have a defined purpose."
 	icon_state = "slug"
 	var/chargetype
 	var/chargedesc
@@ -11,6 +11,7 @@
 /obj/structure/ship_munition/bsa_charge/fire
 	name = "\improper BSA-FR1-ENFER charge"
 	color = "#b95a00"
+	desc = "A charge to power the BSA with. It looks impossibly round and shiny. This charge is designed to release a localised fire on impact."
 	chargetype = BSA_FIRE
 	chargedesc = "ENFER"
 
@@ -27,6 +28,7 @@
 /obj/structure/ship_munition/bsa_charge/emp
 	name = "\improper BSA-EM2-QUASAR charge"
 	color = "#6a97b0"
+	desc = "A charge to power the BSA with. It looks impossibly round and shiny. This charge is designed to release a blast of electromagnetic pulse on impact."
 	chargetype = BSA_EMP
 	chargedesc = "QUASAR"
 
@@ -36,6 +38,7 @@
 /obj/structure/ship_munition/bsa_charge/mining
 	name = "\improper BSA-MN3-BERGBAU charge"
 	color = "#cfcf55"
+	desc = "A charge to power the BSA with. It looks impossibly round and shiny. This charge is designed to mine ores on impact."
 	chargetype = BSA_MINING
 	chargedesc = "BERGBAU"
 
@@ -51,6 +54,7 @@
 /obj/structure/ship_munition/bsa_charge/explosive
 	name = "\improper BSA-XP4-INDARRA charge"
 	color = "#aa5f61"
+	desc = "A charge to power the BSA with. It looks impossibly round and shiny. This charge is designed to explode on impact."
 	chargetype = BSA_EXPLOSIVE
 	chargedesc = "INDARRA"
 
