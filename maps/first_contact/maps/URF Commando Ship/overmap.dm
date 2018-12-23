@@ -3,7 +3,7 @@
 	desc = "A stealthy Chiroptera prowler."
 
 	icon = 'maps/first_contact/maps/URF Commando Ship/prowler.dmi'
-	icon_state = "blank"
+	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 4
 

@@ -236,7 +236,7 @@
 "eB" = (/obj/effect/floor_decal/corner/green{dir = 6},/turf/simulated/floor/tiled/dark,/area/unscfrigate/marine_dorms)
 "eC" = (/obj/effect/floor_decal/corner/green/diagonal,/obj/structure/fitness/punchingbag,/turf/simulated/floor/tiled/dark,/area/unscfrigate/marine_dorms)
 "eD" = (/obj/effect/floor_decal/corner/green{dir = 9},/turf/simulated/floor/tiled/dark,/area/unscfrigate/marine_dorms)
-"eE" = (/obj/machinery/vending/odstvend2,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
+"eE" = (/obj/machinery/vending/armory/odstvend/vend_2,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "eF" = (/obj/machinery/door/airlock/halo{name = "ODST Armory"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "eG" = (/obj/effect/landmark/start/corvetteodst_odst,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "eH" = (/obj/machinery/door/firedoor,/obj/machinery/door/blast/shutters{_wifi_id = "ODST2"; id = "ODST2"; name = "ODST Pod Bay"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)

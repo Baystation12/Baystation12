@@ -10,3 +10,10 @@
 	result = /datum/reagent/biofoam
 	required_reagents = list(/datum/reagent/foaming_agent = 1, /datum/reagent/tricordrazine = 1, /datum/reagent/bicaridine = 1)
 	result_amount = 2
+
+/datum/chemical_reaction/hyperzine_concentrated
+	name = "Concentrated Hyperzine"
+	result = /datum/reagent/hyperzine_concentrated
+	required_reagents = list(/datum/reagent/hyperzine = 2, /datum/reagent/impedrezene = 1) //Impedrezene slows down brain function, so let's say combining it with hyperzine concentrates the effects.
+	result_amount = 1
+
