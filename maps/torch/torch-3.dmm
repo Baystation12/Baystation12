@@ -6535,6 +6535,15 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/foyer)
+"oi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/engine_room)
 "ok" = (
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -7304,6 +7313,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/engineering/engine_monitoring)
+"pV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/engine_room)
 "pX" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/sign/warning/engineering_access{
@@ -9727,8 +9748,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
 "wd" = (
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "we" = (
@@ -15903,6 +15930,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
+"Pj" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/engine_room)
 "Pk" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/machinery/door/blast/regular/open{
@@ -16595,8 +16630,11 @@
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
 "Sh" = (
-/obj/machinery/portable_atmospherics/canister/hydrogen,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "Si" = (
@@ -18315,6 +18353,24 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"Zf" = (
+/obj/machinery/power/apc/super/critical{
+	dir = 1;
+	is_critical = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/engine_room)
 "Zg" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -43055,7 +43111,7 @@ lR
 dp
 wd
 Sh
-Sh
+pV
 qY
 sl
 Pb
@@ -43255,9 +43311,9 @@ dp
 lc
 nx
 dp
-wd
-Sh
-Sh
+Zf
+oi
+Pj
 qZ
 sm
 Kc
