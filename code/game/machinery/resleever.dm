@@ -6,7 +6,7 @@
 	anchored = 1
 	density = 1
 	idle_power_usage = 4
-	active_power_usage = 4000 // 4 Kw. A CT scan machine uses 1-15 kW depending on the model and equipment involved.
+	active_power_usage = 4 KILOWATTS // A CT scan machine uses 1-15 kW depending on the model and equipment involved.
 	req_access = list(access_medical)
 
 	icon_state = "body_scanner_0"
@@ -150,12 +150,9 @@ obj/machinery/resleever/Process()
 			lace = null
 			lace_name = null
 			playsound(loc, 'sound/machines/twobeep.ogg', 50, vary = TRUE)
-			visible_message("\The [src] beeps softly as it begins it's procedure.", "You hear a beep.", range = 3)
+			visible_message("\The [src] beeps softly as it begins its procedure.", "You hear a beep.", range = 3)
 			return TRUE
-		else
-			return FALSE
-	else
-		return FALSE
+	return FALSE // Return false if the the lace doesn't exist, the lace is busy prompting, no occupant, or the occupant's head (parrent organ) doesn't exist.
 
 /obj/machinery/resleever/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(default_deconstruction_screwdriver(user, W))
