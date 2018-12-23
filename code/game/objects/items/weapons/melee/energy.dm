@@ -6,7 +6,8 @@
 	edge = 0
 	armor_penetration = 50
 	flags = NOBLOODY
-
+	var/activate_sound = 'sound/weapons/saberon.ogg'
+	var/deactivate_sound = 'sound/weapons/saberoff.ogg'
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
 	if(active)
@@ -17,13 +18,13 @@
 	sharp = 1
 	edge = 1
 	slot_flags |= SLOT_DENYPOCKET
-	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+	playsound(user, activate_sound, 50, 1)
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	anchored = 0
 	if(!active)
 		return
-	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
+	playsound(user, deactivate_sound, 50, 1)
 	active = 0
 	force = initial(force)
 	throwforce = initial(throwforce)

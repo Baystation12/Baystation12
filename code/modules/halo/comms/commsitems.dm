@@ -119,3 +119,5 @@
 #undef SEC_NAME
 #undef ODST_NAME
 #undef BERTELS_NAME
+#undef ONI_NAME
+#undef URFC_NAME

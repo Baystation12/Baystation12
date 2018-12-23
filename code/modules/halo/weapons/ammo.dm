@@ -199,7 +199,7 @@
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 rounds. Designed for heavier use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	mag_type = MAGAZINE
-	icon_state = "30cal_lmg_mag"
+	icon_state = "Innie 30cal box - Full"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
 	caliber = "a762"

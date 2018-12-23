@@ -20,7 +20,7 @@
 	edge = 0
 	sharp = 0
 	var/failsafe = 1
-
+	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
 	var/next_leapwhen
 
 /obj/item/weapon/melee/energy/elite_sword/New()
@@ -104,7 +104,6 @@
 
 /obj/item/weapon/melee/energy/elite_sword/activate(mob/living/user)
 	..()
-	playsound(user, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	to_chat(user, "<span class='notice'>\The [src] bursts from its handle.</span>")
 	icon_state = icon_state_deployed
 	w_class = ITEM_SIZE_LARGE
