@@ -63,3 +63,6 @@
 
 /proc/cmp_timer(datum/timedevent/a, datum/timedevent/b)
 	return a.timeToRun - b.timeToRun
+
+/proc/cmp_clientcolor_priority(datum/client_color/A, datum/client_color/B)
+	return B.priority - A.priority
