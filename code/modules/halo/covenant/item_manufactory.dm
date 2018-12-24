@@ -103,7 +103,6 @@
 		to_chat(user, "<span class='warning'>Insufficient ingredients to manufacture [design_name].</span>")
 
 /obj/machinery/item_manufacturer/proc/locate_materials(var/datum/design/chosen_design, var/consume_mats = 0)
-	world << "/obj/machinery/item_manufacturer/proc/locate_materials([chosen_design], [consume_mats])"
 
 	var/list/materials_to_locate = chosen_design.materials.Copy()
 	var/list/components_to_locate = chosen_design.components.Copy()
@@ -116,21 +115,16 @@
 		//check for any materials loaded
 		for(var/obj/item/I in tray)
 
-			world << "	[I]"
 			//materials
 			if(istype(I, /obj/item/stack/material))
 				var/obj/item/stack/material/M = I
 				var/amount_needed = materials_to_locate[M.default_type]
-				world << "	amount_needed1:[amount_needed]"
-				world << "	M.amount:[M.amount]"
 				//check if we need it
 				if(amount_needed > 0)
 
 					//subtract the needed amount
 					var/amount_to_subtract = min(M.amount, amount_needed)
-					world << "	amount_to_subtract:[amount_to_subtract]"
 					amount_needed -= amount_to_subtract
-					world << "	amount_needed2:[amount_needed]"
 					materials_to_locate[M.default_type] = amount_needed
 
 					if(consume_mats)
