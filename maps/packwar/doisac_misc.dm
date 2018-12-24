@@ -23,3 +23,11 @@
 	corpsesuit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	corpsemask = /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	corpsepocket2 = /obj/item/weapon/melee/energy/elite_sword/dagger
+
+/obj/item/weapon/paper/grunt_farm
+	name = "how 2 farm"
+	info = "go 2 mudy soil out bac. dug hol with trowl n put seed. put water n doodoo for good plant craves. get bucet wif water form river or swamp. put bukit on dirt to make mud."
+
+/obj/item/weapon/paper/grunt_mine
+	name = "how 2 dig"
+	info = "ok strong one. you get pik and dig long tunnel, find shinies. brute like shinies so you fetch many make happy brut. put shinies into box n up lift. shiny metals go into machines and maek stuff."
