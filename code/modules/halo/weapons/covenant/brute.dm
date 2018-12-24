@@ -45,6 +45,10 @@
 	load_method = MAGAZINE
 	handle_casings = CASELESS
 	fire_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
+	burst = 3
+	edge = 1
+	sharp = 1
+	force = 40
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 
 /obj/item/ammo_magazine/spike
@@ -118,6 +122,9 @@
 	fire_sound = 'code/modules/halo/sounds/bruteshotfire.ogg'
 	var/reload_sound = 'code/modules/halo/sounds/bruteshotreload.ogg'
 	var/reload_time = 30
+	force = 45
+	edge = 1
+	sharp = 1
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
@@ -189,10 +196,12 @@
 	amount += transferred
 
 	//update the throw range... more = heaver = shorter range
-	throw_range = 20
+	throw_range = 10
 	if(amount > 1)
-		throw_range -= amount * 2
-		throw_range = max(throw_range, 4)
+		if(amount > 3)
+			throw_range = 2
+		else
+			throw_range = 3
 
 	//delete if none
 	if(!amount && delete_if_empty)
