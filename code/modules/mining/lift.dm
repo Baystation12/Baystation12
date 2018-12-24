@@ -1,17 +1,22 @@
 
 /obj/machinery/mine_lift
-	name = "automatic lift"
+	name = "equipment conveyor lift"
 	desc = "For moving things between the surface and the lower levels."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "chute"
-	var/moving_dir = 0
+	anchored = 1
+	var/obj/machinery/mine_lift/target_lift
+
+/obj/machinery/mine_lift/New()
+	. = ..()
+	GLOB.processing_objects.Remove(src)
 
 /obj/machinery/mine_lift/attack_hand(mob/user)
 	if(isliving(user))
 		add_fingerprint(user)
-		toggle()
+		toggle(user)
 
-/obj/machinery/mine_lift/proc/toggle()
+/obj/machinery/mine_lift/proc/toggle(var/mob/user)
 	var/new_icon_state
 	var/new_dir = dir
 	if(icon_state == "chute_active")
@@ -22,6 +27,7 @@
 			new_dir = SOUTH
 	else
 		new_icon_state = "chute_active"
+		to_chat(user, "\icon[src] <span class='info'>You set [src] moving [dir == SOUTH ? "down" : "up"]wards.</span>")
 
 	set_state(new_icon_state, new_dir)
 
@@ -36,30 +42,32 @@
 
 	update_target_lift(icon_state, dir)
 
+/obj/machinery/mine_lift/proc/update_target_lift(var/new_icon_state, var/new_dir)
+	target_lift = get_target_lift()
+	if(target_lift)
+		target_lift.set_state(new_icon_state, new_dir)
+
 /obj/machinery/mine_lift/proc/get_target_lift()
 	var/turf/T
 	if(dir == SOUTH)
-		//upwards
-		T = GetAbove()
-	else
 		//downwards
-		T = GetBelow()
+		T = GetBelow(src)
+	else
+		//upwards
+		T = GetAbove(src)
 
 	if(T)
-		var/obj/machinery/mine_lift/other = locate() in T
-		return other
+		target_lift = locate() in T
+		return target_lift
 
-/obj/machinery/mine_lift/proc/update_target_lift(var/new_icon_state, var/new_dir)
-	var/obj/machinery/mine_lift/other = get_target_lift()
-	if(other)
-		other.set_state(icon_state, dir)
+	return null
 
 /obj/machinery/mine_lift/process()
-	var/obj/machinery/mine_lift/other = get_target_lift()
-	if(other)
-		for(var/atom/movable/M in src.loc)
-			if(M.anchored)
-				continue
+	if(icon_state == "chute_active")
+		if(target_lift)
+			for(var/obj/O in src.loc)
+				if(O.anchored)
+					continue
 
-			M.loc = other.loc
-			break
+				O.loc = target_lift.loc
+				break
