@@ -3,6 +3,7 @@
 	name = "Doisac"
 	icon_state = "green"
 	has_gravity = 1
+	requires_power = 0
 	dynamic_lighting = 0
 	ambience = list(\
 		'sound/effects/wind/wind_2_1.ogg',\
@@ -16,6 +17,7 @@
 	name = "Doisac grassy plain"
 	icon_state = "hydro"
 	has_gravity = 1
+	requires_power = 0
 	dynamic_lighting = 0
 	ambience = list(\
 		'sound/effects/wind/wind_2_1.ogg',\
@@ -29,6 +31,7 @@
 	name = "Doisac swamp"
 	icon_state = "blue2"
 	has_gravity = 1
+	requires_power = 0
 	dynamic_lighting = 0
 	ambience = list(\
 		'sound/effects/wind/wind_2_1.ogg',\
@@ -42,6 +45,7 @@
 	name = "Doisac forest"
 	icon_state = "blueold"
 	has_gravity = 1
+	requires_power = 0
 	dynamic_lighting = 0
 	ambience = list(\
 		'sound/effects/wind/wind_2_1.ogg',\
@@ -55,6 +59,7 @@
 	name = "Doisac lava"
 	icon_state = "red"
 	has_gravity = 1
+	requires_power = 0
 	dynamic_lighting = 0
 	ambience = list(\
 		'sound/effects/wind/wind_2_1.ogg',\
@@ -68,5 +73,6 @@
 	name = "Doisac underground"
 	icon_state = "cave"
 	has_gravity = 1
+	requires_power = 0
 	ambience = list(\
 		'sound/ambience/ambimine.ogg')
