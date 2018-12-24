@@ -12,15 +12,16 @@
 	announced = FALSE
 	generate_email = 0
 	whitelisted_species = list(/datum/species/brutes)
+	latejoin_at_spawnpoints = 1
 	spawn_positions = 1
 	total_positions = 1
 	track_players = 1
-	head_position = 1
 
 /datum/job/packwar_captain_ram
 	title = "Ram Clan Captain"
 	faction_flag = COVENANT
 	department = "Ram Clan"
+	department_flag = COM
 	supervisors = "the Ram Clan chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -29,6 +30,7 @@
 	announced = FALSE
 	generate_email = 0
 	whitelisted_species = list(/datum/species/brutes)
+	latejoin_at_spawnpoints = 1
 	spawn_positions = 2
 	total_positions = 2
 	track_players = 1
@@ -44,6 +46,7 @@
 	announced = FALSE
 	generate_email = 0
 	whitelisted_species = list(/datum/species/brutes)
+	latejoin_at_spawnpoints = 1
 	spawn_positions = 3
 	total_positions = 3
 	track_players = 1
@@ -59,6 +62,7 @@
 	announced = FALSE
 	generate_email = 0
 	whitelisted_species = list(/datum/species/brutes)
+	latejoin_at_spawnpoints = 1
 	spawn_positions = -1
 	total_positions = -1
 	track_players = 1
@@ -74,6 +78,7 @@
 	announced = FALSE                  //If their arrival is announced on radio
 	generate_email = 0
 	whitelisted_species = list(/datum/species/unggoy)
+	latejoin_at_spawnpoints = 1
 	spawn_positions = -1
 	total_positions = -1
 	track_players = 1
