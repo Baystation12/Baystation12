@@ -6,6 +6,8 @@
 	icon = 'code/modules/halo/icons/machinery/Covenant/Covie_Obj_Stuff.dmi'
 	icon_state = "Large Covie Holo"
 	desc = "A console for contacting mercenaries"
+	density = 1
+	anchored = 1
 	var/faction = "Ram Clan"
 
 	/*
@@ -23,17 +25,23 @@
 		)
 
 	var/list/mercenary_inventory = list()
+	var/list/console_inventory = list()
+	var/list/my_mercs = list()
 
 /obj/structure/kigyar_merc_console/boulder
 	name = "Boulder Clan Mercenary Hire Console"
 	faction = "Boulder Clan"
 
-/obj/structure/kigyar_merc_console/New()
+
+/obj/structure/kigyar_merc_console/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/kigyar_merc_console/LateInitialize()
 	. = ..()
 
 	for(var/cur_job_name in merc_job_names)
 		var/datum/job/packwar_merc/cur_job = job_master.occupations_by_title["[faction] [cur_job_name]"]
-
 		//setup interact inventory
 		add_merc_listing(cur_job)
 
@@ -57,45 +65,36 @@
 
 //this proc does not safety check if an entry already exists
 /obj/structure/kigyar_merc_console/proc/add_merc_listing(var/datum/job/packwar_merc/cur_job)
-	if(cur_job.available_hires > 0)
-		mercenary_inventory.Add(list(list("title" = cur_job.title, "price" = cur_job.current_merc_price, "available" = cur_job.available_hires)))
+	my_mercs[cur_job.title] = cur_job
+	mercenary_inventory.Add(list(list(\
+		"title" = cur_job.title,\
+		"price" = cur_job.current_merc_price,\
+		"available" = cur_job.available_hires,\
+		"ready" = cur_job.total_positions - cur_job.assigned_players.len,\
+		"dispatched" = cur_job.assigned_players.len)))
 
-/obj/structure/kigyar_merc_console/proc/update_merc_available(var/datum/job/packwar_merc/cur_job, var/new_amount = 0, var/set_value = 0)
-	if(set_value)
-		cur_job.available_hires = new_amount
-	else
-		cur_job.available_hires += new_amount
+/obj/structure/kigyar_merc_console/proc/update_merc_listing_all()
+	for(var/i=1, i<=mercenary_inventory.len, i++)
+		var/merc_title = mercenary_inventory[i]["title"]
+		var/datum/job/packwar_merc/cur_job = my_mercs[merc_title]
+		update_merc_listing_index(i, cur_job)
 
+/obj/structure/kigyar_merc_console/proc/update_merc_listing_job(var/datum/job/packwar_merc/cur_job)
 	var/found = 0
 	for(var/i=1, i<=mercenary_inventory.len, i++)
 		if(mercenary_inventory[i]["title"] == cur_job.title)
-			mercenary_inventory[i]["price"] = cur_job.current_merc_price
 			found = 1
-
-		if(mercenary_inventory[i]["available"] <= 0)
-			mercenary_inventory.Cut(i, i+1)
-
-		if(found)
+			update_merc_listing_index(i, cur_job)
 			break
 
 	if(!found)
 		add_merc_listing(cur_job)
 
-/obj/structure/kigyar_merc_console/proc/update_merc_price(var/datum/job/packwar_merc/cur_job)
-	var/found = 0
-	for(var/i=1, i<=mercenary_inventory.len, i++)
-		if(mercenary_inventory[i]["title"] == cur_job.title)
-			mercenary_inventory[i]["available"] = cur_job.available_hires
-			found = 1
-
-		if(mercenary_inventory[i]["available"] <= 0)
-			mercenary_inventory.Cut(i, i+1)
-
-		if(found)
-			break
-
-	if(!found)
-		add_merc_listing(cur_job)
+/obj/structure/kigyar_merc_console/proc/update_merc_listing_index(var/merc_index, var/datum/job/packwar_merc/cur_job)
+	mercenary_inventory[merc_index]["available"] = cur_job.available_hires
+	mercenary_inventory[merc_index]["price"] = cur_job.current_merc_price
+	mercenary_inventory[merc_index]["ready"] = cur_job.total_positions - cur_job.assigned_players.len
+	mercenary_inventory[merc_index]["dispatched"] = cur_job.assigned_players.len
 
 /obj/structure/kigyar_merc_console/attack_hand(var/mob/living/carbon/human/user)
 	if(user && istype(user))
@@ -171,11 +170,11 @@
 
 			//adjust the values
 			merc.current_merc_price += merc.current_merc_price * rand(105,115) / 100	//a bit more expensive
+			merc.available_hires -= 1
 			merc.total_positions += 1
 
 			//update the console menu
-			update_merc_available(merc, -1)
-			update_merc_price(merc)
+			update_merc_listing_job(merc)
 
 			//tell the user
 			to_chat(usr,"\icon[src]<span class='info'>Successfully hired: [mercname]</span>")

@@ -1,31 +1,47 @@
 
 /datum/game_mode/packwar/proc/refresh_mercenaries()
 
-	var/datum/job/merc
+	var/list/boulder_mercs = list()
+	var/list/ram_mercs = list()
+	var/datum/job/packwar_merc/merc
 
 	available_champions = 1
 	merc = job_master.occupations_by_title["Boulder Clan Mercenary - T-Voan Champion"]
-	merc.total_positions = available_champions
+	boulder_mercs[merc.title] = merc
+	merc.available_hires = available_champions
 	merc = job_master.occupations_by_title["Ram Clan Mercenary - T-Voan Champion"]
-	merc.total_positions = available_champions
+	ram_mercs[merc.title] = merc
+	merc.available_hires = available_champions
 
 	available_murmillos = pick(2,3)
 	merc = job_master.occupations_by_title["Boulder Clan Mercenary - T-Voan Murmillo"]
-	merc.total_positions = available_murmillos
+	boulder_mercs[merc.title] = merc
+	merc.available_hires = available_murmillos
 	merc = job_master.occupations_by_title["Ram Clan Mercenary - T-Voan Murmillo"]
-	merc.total_positions = available_murmillos
+	ram_mercs[merc.title] = merc
+	merc.available_hires = available_murmillos
 
 	available_defenders = pick(3,4)
 	merc = job_master.occupations_by_title["Boulder Clan Mercenary - Ruutian Defender"]
-	merc.total_positions = available_defenders
+	boulder_mercs[merc.title] = merc
+	merc.available_hires = available_defenders
 	merc = job_master.occupations_by_title["Ram Clan Mercenary - Ruutian Defender"]
-	merc.total_positions = available_defenders
+	ram_mercs[merc.title] = merc
+	merc.available_hires = available_defenders
 
 	available_snipers = pick(1,2,3)
 	merc = job_master.occupations_by_title["Boulder Clan Mercenary - Ruutian Sniper"]
-	merc.total_positions = available_snipers
+	boulder_mercs[merc.title] = merc
+	merc.available_hires = available_snipers
 	merc = job_master.occupations_by_title["Ram Clan Mercenary - Ruutian Sniper"]
-	merc.total_positions = available_snipers
+	ram_mercs[merc.title] = merc
+	merc.available_hires = available_snipers
+
+	for(var/obj/structure/kigyar_merc_console/console in world)
+		if(console.faction == "Ram Clan")
+			console.update_merc_listing_all()
+		else
+			console.update_merc_listing_all()
 
 	//announce over radio
 	GLOB.global_headset.autosay("I've just arrived in the system. My crew is available for hire as mercenaries.", \
@@ -93,7 +109,7 @@
 			GLOB.global_headset.autosay(\
 				"I've dispatched some of the mercenaries you hired and they will arrive in [merc_respawn_wave] seconds. \
 				Good hunting, [pick("[clan_name] clan","apes","hair balls","brutes")].", \
-				"Kig\'Yar Pirate Shipmistress", radio_channel, "Sangheili")
+				"Kig\'Yar Pirate", radio_channel, "Sangheili")
 
 /obj/effect/landmark/mercspawn/proc/arrive_planet()
 	time_merc_dropoff = 0
