@@ -2,6 +2,8 @@
 /mob/living/simple_animal/npc
 	name = "NPC"
 	desc = "Surprisingly, this one is neither wearing a red shirt nor called Bob."
+	icon = 'code/modules/halo/NPC/npc.dmi'
+	icon_state = "Human_m"
 	var/npc_job_title
 	speak_chance = 0
 	turns_per_move = 5
