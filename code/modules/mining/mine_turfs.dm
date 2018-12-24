@@ -407,8 +407,10 @@ var/global/list/mining_floors = list()
 		"platinum" = 5, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
 		"iron" = 35, "carbon" = 35 \
 		)
-	var/crystal_weight = 5
 	var/mineralChance = 10 //means 10% chance of this plot changing to a mineral deposit
+
+/turf/simulated/mineral/random/planet
+	mined_turf = /turf/simulated/floor/asteroid/planet
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
@@ -442,6 +444,8 @@ var/global/list/mining_floors = list()
 		"iron" = 5, "carbon" = 5 \
 		)
 
+/turf/simulated/mineral/random/high_chance/planet
+	mined_turf = /turf/simulated/floor/asteroid/planet
 
 /**********************Asteroid**************************/
 
