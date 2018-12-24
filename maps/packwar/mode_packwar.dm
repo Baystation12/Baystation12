@@ -119,3 +119,15 @@
 	to_world(text)
 
 	return 0
+
+/datum/game_mode/packwar/AnnounceLateArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
+	var/radio_channel
+	switch(job.department)
+		if("Boulder Clan")
+			radio_channel = "BoulderNet"
+		if("Ram Clan")
+			radio_channel = "RamNet"
+	if(radio_channel)
+		GLOB.global_headset.autosay(\
+			"[character.name], [job] has returned from wandering in the wilderness to fight for the clan.", \
+			"Clan Barracks", radio_channel, "Sangheili")

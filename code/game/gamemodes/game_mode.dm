@@ -464,6 +464,12 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/get_respawn_time()
 	return config.respawn_delay
 
+/datum/game_mode/proc/AnnounceLateArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
+	var/rank = job.title
+	if(character.mind.role_alt_title)
+		rank = character.mind.role_alt_title
+	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job),character.default_language)
+
 /hook/death/proc/mode_on_mob_death(var/mob/living/carbon/human/H, var/list/args = list())
 	//there is no mode if something dies before round start
 	if(ticker.mode)
