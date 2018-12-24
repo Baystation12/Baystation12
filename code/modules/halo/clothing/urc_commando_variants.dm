@@ -89,3 +89,31 @@
 
 	item_state = "death_worn"
 	icon_state = "death_helmet"
+	
+//DONATOR GEAR	
+	
+/obj/item/clothing/head/helmet/urfc/socks
+	name = "H34D Dome Protector (TEXUS)"
+
+	item_state = "socks-helmet_worn"
+	icon_state = "socks-helmet_obj"	
+	
+/obj/item/clothing/suit/armor/special/urfc/socks
+	name = "I25B Heavy Chest Rig (TEXUS)"
+
+	item_state = "socks-armor_worn"
+	icon_state = "socks-armor_obj"
+
+/obj/item/clothing/under/urfc_jumpsuit/socks
+	name = "Eridanus Uniform (TEXUS)"
+	
+	item_state = "socks-jumpsuit_worn"
+	icon_state = "socks-jumpsuit_obj"
+	
+/obj/item/clothing/shoes/magboots/urfc/socks	
+	name = "F76F Mag Boots (TEXUS)"
+	
+	item_state = "socks-boots_worn"
+	icon_state = "socks-boots_obj"
+	
+//END DONATOR GEAR

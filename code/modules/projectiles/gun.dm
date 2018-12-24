@@ -87,6 +87,9 @@
 	var/list/attachment_slots = list()
 	var/list/attachments_on_spawn = list()
 
+	var/is_charged_weapon = 0 //Does the weapon require charging? Defaults to 0 unless it's from /charged weapon sets
+	var/arm_time = 25 //Default charge time for weapons that charge
+	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Charge_Sound_Effect.ogg'
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -239,6 +242,15 @@
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
+		return
+
+	if(is_charged_weapon==1)
+		playsound(src.loc, charge_sound, 100, 1)
+		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
+
+		if (!do_after(user,arm_time,src))
+			return
+		Fire(A,user,params)
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 

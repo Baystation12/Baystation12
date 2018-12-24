@@ -18,7 +18,7 @@
 	var/shield_max_charge = 400
 	var/shield_current_charge = 400
 	var/list/shield_colour_values = list("300" = "#6d63ff","200" = "#ffa76d","100" = "#ff4248")//Associative list with shield-charge as key and colour value as keyvalue. Ordered highest to lowest. EG: "200" = "#6D63FF"
-	var/shield_recharge_delay = 2 //The delay between taking damage and starting to recharge, in seconds.
+	var/shield_recharge_delay = 6 //The delay between taking damage and starting to recharge, in seconds.
 	var/shield_next_charge
 	var/limb_hit_chance = 5 //The chance to hit arms and legs even if the shield were to block the shot. Percentile.
 	var/active_slowdown_amount = 5
