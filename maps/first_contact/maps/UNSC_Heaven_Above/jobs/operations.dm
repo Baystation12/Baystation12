@@ -47,7 +47,7 @@
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/device/radio/headset/unsc(src)
 
-/*
+
 //coordinates fighter and shuttle traffic around the ship, including docking and departing
 /datum/job/UNSC_ship/ops_traffic
 	title = "Strike Traffic Controller"
@@ -137,4 +137,3 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_l_store)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		return 1
-*/

@@ -13,7 +13,7 @@
 	#include "../overmap_ships/nh_overmap.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 
-	#include "../first_contact/maps/UNSC_Bertels/includes.dm"
+	//#include "../first_contact/maps/UNSC_Bertels/includes.dm"
 
 	#include "../first_contact/maps/URF Commando Ship/includes.dm"
 

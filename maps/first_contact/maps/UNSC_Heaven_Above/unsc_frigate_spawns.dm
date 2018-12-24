@@ -22,3 +22,43 @@ GLOBAL_LIST_EMPTY(unsc_frigate_spawns)
 /obj/effect/landmark/start/unsc_frigate/New()
 	..()
 	GLOB.unsc_frigate_spawns += loc
+
+//UNSC BERTELS ODST Spawnpoints
+
+GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
+
+/datum/spawnpoint/corvetteodst_odst
+	display_name = "UNSC Bertels ODST Spawn"
+	restrict_job = list("Orbital Drop Shock Trooper")
+
+/datum/spawnpoint/corvetteodst_odst/New()
+	..()
+	turfs = GLOB.corvetteodst_odst_spawns
+
+/obj/effect/landmark/start/corvetteodst_odst
+	name = "UNSC Bertels ODST Spawn"
+
+/obj/effect/landmark/start/corvetteodst_odst/New()
+	..()
+	GLOB.corvetteodst_odst_spawns += loc
+
+
+GLOBAL_LIST_EMPTY(corvetteodst_ftl_spawns)
+
+
+GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
+
+/datum/spawnpoint/corvetteodst_officer
+	display_name = "UNSC Bertels ODST Officer Spawn"
+	restrict_job = list("Orbital Drop Shock Trooper Officer")
+
+/datum/spawnpoint/corvetteodst_officer/New()
+	..()
+	turfs = GLOB.corvetteodst_officer_spawns
+
+/obj/effect/landmark/start/corvetteodst_officer
+	name = "UNSC Bertels ODST Officer Spawn"
+
+/obj/effect/landmark/start/corvetteodst_officer/New()
+	..()
+	GLOB.corvetteodst_officer_spawns += loc
