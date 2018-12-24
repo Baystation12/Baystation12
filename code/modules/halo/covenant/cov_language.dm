@@ -9,6 +9,7 @@
 
 /datum/language/covenant/New()
 	. = ..()
+	cov_alphabet = new(cov_alphabet)
 	cov_alphabet.Crop(1,1,24,24)
 	syllables = list()
 	syllable_names = icon_states(cov_alphabet)
