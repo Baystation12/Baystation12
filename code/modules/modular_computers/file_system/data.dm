@@ -28,7 +28,13 @@
 /datum/computer_file/data/bodyscan
 	filetype = "BSC"	
 	read_only = 1
+	size = 4
 	papertype = /obj/item/weapon/paper/bodyscan
+
+/datum/computer_file/data/bodyscan/New(var/list/scan_data)
+	..()
+	if(scan_data)
+		filename = replacetext(scan_data["time"], ":", "_") + "-" + scan_data["name"]
 
 /datum/computer_file/data/bodyscan/generate_file_data(var/mob/user)
 	return display_medical_data(metadata, user.get_skill_value(SKILL_MEDICAL), TRUE)

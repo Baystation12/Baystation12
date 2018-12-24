@@ -112,7 +112,7 @@
 		<tr><td><strong>Scan Results For:</strong></td><td>Name</td></tr>
 		<tr><td><strong>Scan Performed At:</strong></td><td>00:00</td></tr>
 	*/
-	dat += "<table class='block' width='95%'>"
+	dat += "<table class='block' width='100%'>"
 	dat += "<tr><td><strong>Scan Results For:</strong></td><td>[scan["name"]]</td></tr>"
 	dat += "<tr><td><strong>Scan performed at:</strong></td><td>[scan["time"]]</td></tr>"
 

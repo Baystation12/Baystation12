@@ -17378,7 +17378,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "dYb" = (
-/obj/machinery/body_scanconsole{
+/obj/machinery/body_scanconsole/advanced_hard_drive{
 	dir = 1;
 	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
 	icon_state = "body_scannerconsole"
@@ -24889,7 +24889,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "mzb" = (
-/obj/machinery/body_scanconsole{
+/obj/machinery/body_scanconsole/advanced_hard_drive{
 	dir = 4;
 	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
 	icon_state = "body_scannerconsole"

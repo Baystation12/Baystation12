@@ -1,5 +1,61 @@
-<table class='block' width='95%'>
-    <tr><td>
+{{##def.file_header:
+    <tr>
+        <th>Patient</th>
+        <th>Time</th>
+        <th>Options</th>
+    </tr>
+#}}
+{{##def.file_open:
+    <tr class="candystripe">
+        <td>{{:value.scan_name}}</td>
+        <td>{{:value.scan_time}}</td>
+        <td style="width:25%">
+#}}
+{{##def.file_close:
+        </td>
+    </tr>
+#}}
+{{##def.no_files:
+    <tr><td align="center" colspan="3" class="candystripe"><i>No Body Scan Files</i></td></tr>
+#}}
+{{if data.show_files}}
+    <table class='block' style="width:100%"><tr><th colspan="3">File Listing<hr></th></tr>
+        {{if data.main_file_storage_present}}
+            <tr><th colspan="3">MAIN STORAGE</th></tr>
+            {{#def.file_header}}
+            {{if data.main_file_storage_files.length == 0 }}
+                {{#def.no_files}}
+            {{else}}
+                {{for data.main_file_storage_files}}
+                    {{#def.file_open}}
+                        {{:helper.link('', 'copy', { "copy_scan" : 1, "file_reference" : value.ref }, null)}}
+                        {{:helper.link('', 'scissors', { "move_scan" : 1, "file_reference" : value.ref }, null)}}
+                        {{:helper.link('', 'arrowthickstop-1-s', { "recall_scan" : 1, "file_reference" : value.ref }, null)}}
+                        {{:helper.link('', 'trash', { "delete_scan" : 1, "file_reference" : value.ref }, null)}}
+                    {{#def.file_close}}
+                {{/for}}
+            {{/if}}
+        {{/if}}
+        {{if data.portable_file_storage_present}}
+            <tr><th colspan="3">PORTABLE STORAGE</th></tr>
+            {{#def.file_header}}
+            {{if data.portable_file_storage_files.length == 0 }}
+                {{#def.no_files}}
+            {{else}}
+                {{for data.portable_file_storage_files}}
+                    {{#def.file_open}}
+                        {{:helper.link('', 'copy', { "copy_scan" : 2, "file_reference" : value.ref }, null)}}
+                        {{:helper.link('', 'scissors', { "move_scan" : 2, "file_reference" : value.ref }, null)}}
+                        {{:helper.link('', 'arrowthickstop-1-s', { "recall_scan" : 2, "file_reference" : value.ref }, null)}}
+                        {{:helper.link('', 'trash', { "delete_scan" : 2, "file_reference" : value.ref }, null)}}
+                    {{#def.file_close}}
+                {{/for}}
+            {{/if}}
+        {{/if}}
+    </table>
+{{/if}}
+<table class='block' style="width:100%">
+    <tr><td align="center" colspan="3">
     {{if data.scanEnabled}}
         {{if data.isCompatible}}
             {{:helper.link( 'Scan Occupant', null, { "scan" : 1 }, null)}}
@@ -10,9 +66,37 @@
         {{:helper.link( 'Scanner Empty', null, { "scan" : 1 }, 'disabled')}}
     {{/if}}
     </td>
-    <td>{{:helper.link('Print Scan', null, {"print" : 1}, data.printEnabled ? null : 'disabled')}}</td>
-    <td>{{:helper.link('Erase Scan', null, {"erase" : 1}, data.eraseEnabled ? null : 'disabled')}}</td>
-    <td>{{:helper.link('Push  Scan to Displays', null, {"push" : 1}, data.pushEnabled ? null : 'disabled' )}}</td></tr>
+    </tr>
+    <td align="right">{{:helper.link(data.print_mode + ' Scan', null, {"print" : 1}, data.printEnabled ? null : 'disabled')}}</td>
+    <td align="center">{{:helper.link('Erase Scan', null, {"erase" : 1}, data.eraseEnabled ? null : 'disabled')}}</td>
+    <td align="left">{{:helper.link('Push Scan to Displays', null, {"push" : 1}, data.pushEnabled ? null : 'disabled' )}}</td>
+    </tr>
+    {{if data.file_storage_present}}
+        {{if data.main_file_storage_present}}
+            <tr><td colspan="3">
+                <div class="itemLabel">
+                    Main File Storage
+                </div>
+                <div class="itemContent">
+                    {{:helper.displayBar(data.main_file_storage_used, 0, 100, (data.main_file_storage_used >= 90) ? 'bad' : (data.main_file_storage_used >= 70) ? 'average' : 'good')}} {{:data.main_file_storage_used}}%
+                </div>
+            </td></tr>
+        {{/if}}
+        {{if data.portable_file_storage_present}}
+            <tr><td colspan="3">
+                <div class="itemLabel">
+                    Portable File Storage
+                </div>
+                <div class="itemContent">
+                    {{:helper.displayBar(data.portable_file_storage_used, 0, 100, (data.portable_file_storage_used >= 90) ? 'bad' : (data.portable_file_storage_used >= 70) ? 'average' : 'good')}} {{:data.portable_file_storage_used}}% {{:helper.link('', 'eject', {"eject_portable_storage" : 1})}}
+                </div>
+            </td></tr>
+        {{/if}}
+        <tr>
+            <td align="right">{{:helper.link('Change Save Mode', null, {"switch_print_mode" : 1})}}</td>
+            <td align="left">{{:helper.link((data.show_files ? 'Hide Files': 'Show Files'), null, {"show_files" : 1})}}</td>
+        </tr>
+    {{/if}}
 </table>
 {{:data.html_scan_header}}
 {{:data.html_scan_health}}
