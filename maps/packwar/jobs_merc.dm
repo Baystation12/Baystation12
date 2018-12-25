@@ -18,6 +18,7 @@ Clanless runt
 	spawn_positions = -1
 	total_positions = -1
 	track_players = 1
+	latejoin_at_spawnpoints = 1
 
 
 
