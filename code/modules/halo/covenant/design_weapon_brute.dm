@@ -12,6 +12,19 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 5)
 	build_path = /obj/item/ammo_magazine/spiker
 
+/datum/design/brute_weapon/brute_mauler
+	name = "Type-52 Mauler sidearm"
+	id = "brute_mauler"
+	materials = list(DEFAULT_WALL_MATERIAL = 50, "plasteel" = 5, "glass" = 5)
+	build_path = /obj/item/weapon/gun/projectile/spiker
+	components = list("hydrogen gas packet" = /obj/item/gas_packet/hydrogen)
+
+/datum/design/brute_weapon/brute_mauler_mag
+	name = "mauler magazine"
+	id = "brute_mauler_mag"
+	materials = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 5)
+	build_path = /obj/item/ammo_magazine/mauler
+
 /datum/design/brute_weapon/brute_shot
 	name = "Type-25 Grenade Launcher"
 	id = "brute_shot"
