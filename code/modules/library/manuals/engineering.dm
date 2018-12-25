@@ -398,9 +398,9 @@
 				<br>
 				<li>Gas in the radiator loop is circulated through the radiator bank, located in space. The radiative cooling provides the temperature differential required for power generation.</li>
 				<br>
-				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 2000K to 4000K and generate up to 1MW of power. Beyond 1MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
+				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 2000 K to 4000 K and generate up to 1 MW of power. Beyond 1 MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
 				<br>
-				<li>The crystal structure of the supermatter will begin to delaminate if its temperature exceeds 5000K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
+				<li>The crystal structure of the supermatter will begin to delaminate if its temperature exceeds 5000 K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
 				<br>
 				<h2>SUPERMATTER HANDLING</h2>
 				<li>Do not expose supermatter to oxygen.</li>
@@ -425,7 +425,7 @@
 				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
 				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
 				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
-				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, either pump in more gas to cool the engine, or see EMERGENCY COOLING PROCEDURE.</li>
+				<li>Ensure that reactor temperature does not exceed 5000 K. In event of reactor temperature exceeding 5000 K, either pump in more gas to cool the engine, or see EMERGENCY COOLING PROCEDURE.</li>
 				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>
