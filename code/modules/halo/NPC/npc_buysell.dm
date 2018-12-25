@@ -57,7 +57,8 @@
 
 		//create the object and pass it over
 		var/obj/O = new D.item_type(M.loc)
-		M.put_in_hands(O)
+		if(!istype(O,/obj/structure) && !istype(O,/obj/machinery))
+			M.put_in_hands(O)
 
 		//update the inventory
 		D.quantity -= 1

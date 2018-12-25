@@ -31,3 +31,11 @@
 /obj/item/weapon/paper/grunt_mine
 	name = "how 2 dig"
 	info = "ok strong one. you get pik and dig long tunnel, find shinies. brute like shinies so you fetch many make happy brut. put shinies into box n up lift. shiny metals go into machines and maek stuff."
+
+/datum/trade_item/gas_collector
+	name = "gas harvestor"
+	item_type = /obj/machinery/portable_atmospherics/gas_collector/covenant
+	category = "ore"
+	quantity = 10
+	value = 2000
+	trader_weight = 1
