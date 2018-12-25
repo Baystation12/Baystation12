@@ -147,16 +147,20 @@
 	if(get_dist(A,user) > 1)
 		return
 
+	var/atom/throw_target = get_edge_target_turf(A, get_dir(A, get_step_away(src, A)))
+	if(istype(A, /atom/movable))
+		var/atom/movable/AM = A
+		AM.throw_at(throw_target, 6, 4, user)
+
 	for(var/atom/movable/M in range(A,1))
 		if(M == user)
 			continue
 
-		if(!M.anchored)
-			var/atom/throw_target = get_edge_target_turf(M, get_dir(user, get_step_away(M, src)))
-			M.throw_at(throw_target, 3, 4, user)
-
 		if(M == A)
 			continue
+
+		if(!M.anchored)
+			M.throw_at(throw_target, 3, 4, user)
 
 		if(isliving(M))
 			var/mob/living/victim = M
