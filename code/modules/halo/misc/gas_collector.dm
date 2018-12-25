@@ -17,11 +17,27 @@
 	var/obj/structure/geyser/secured_geyser
 	var/list/gases_to_expel = list()
 	var/list/gas_inventory = list()
+	var/hitpoints = 300
+	var/hitpoints_max = 300
 
 /obj/machinery/portable_atmospherics/gas_collector/New()
 	. = ..()
 	update_gases_ui()
 	max_pressure = TANK_LEAK_PRESSURE * 0.9
+
+/obj/machinery/portable_atmospherics/gas_collector/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+	..()
+
+	if(hitpoints < hitpoints_max)
+		to_chat(user, "<span class='info'>It is [100 - round(100*hitpoints/hitpoints_max)]% damaged. It needs steel sheets to be repaired.</span>")
+
+/obj/machinery/portable_atmospherics/gas_collector/bullet_act(var/obj/item/projectile/P)
+	take_damage(P.damage)
+	. = ..()
+
+/obj/machinery/portable_atmospherics/gas_collector/ex_act()
+	take_damage(75)
+	. = ..()
 
 /obj/machinery/portable_atmospherics/gas_collector/covenant
 	icon_state = "collector_cov"
@@ -37,7 +53,7 @@
 			var/obj/item/weapon/tank/T = I
 			T.loc = src
 			holding = T
-	if(istype(I, /obj/item/weapon/wrench))
+	else if(istype(I, /obj/item/weapon/wrench))
 		anchored = !anchored
 		if(anchored)
 			visible_message("<span class='info'>[user] extends [src]'s stabilising legs into the ground. It will now harvest gas.</span>")
@@ -45,6 +61,28 @@
 		else
 			visible_message("<span class='info'>[user] retracts [src]'s stabilising legs. It can now be moved</span>")
 			secured_geyser = null
+
+	else if(istype(I, /obj/item/stack/material/steel))
+		to_chat(user,"\icon[src] <span class='info'>You begin repairing [src] with [I].</span>")
+		if(do_after(user, 30, src))
+			var/obj/item/stack/material/steel/old_stack = I
+			var/obj/item/stack/material/steel/new_stack = old_stack.split(10)
+			if(new_stack)
+				hitpoints += new_stack.amount * 10
+				hitpoints = min(hitpoints, hitpoints_max)
+				qdel(new_stack)
+
+	else
+		take_damage(I.force)
+		. = ..()
+
+/obj/machinery/portable_atmospherics/gas_collector/proc/take_damage(var/amount)
+	hitpoints -= amount
+	if(hitpoints <= 0)
+		qdel(src)
+		var/turf/T = get_turf(src)
+		spawn(0)
+			explosion(T, 1, 3, 5, 7)
 
 /obj/machinery/portable_atmospherics/gas_collector/proc/recieve_gas(var/datum/gas_mixture/new_gas)
 
