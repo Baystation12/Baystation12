@@ -7,7 +7,7 @@
 	department_flag = OPSCO
 	total_positions = 1
 	spawn_positions = 1
-	spawnpoint_override = "UNSC Frigate"
+	spawnpoint_override = "UNSC Operations Supervisor Spawn"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops_chief
 	selection_color = "#33ccff"
 
@@ -24,7 +24,7 @@
 	department_flag = OPS
 	total_positions = -1
 	spawn_positions = 2
-	spawnpoint_override = "UNSC Frigate"
+	spawnpoint_override = "UNSC Operations Specialist Spawn"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops
 	selection_color = "#33ccff"
 	alt_titles = list("Sensor Operator", "Electronic Warfare Specialist","Cryptologic Specialist","Signals Analyst","Navigator","Helmsman")

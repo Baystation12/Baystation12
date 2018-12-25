@@ -4,4 +4,4 @@
 
 /datum/map/unsc_frigate
 	allowed_jobs = ALL_SHIP_JOBS
-	allowed_spawns = list("UNSC Frigate","UNSC Heaven Above ODST Spawn","UNSC Heaven Above ODST Officer Spawn")
+	allowed_spawns = list("UNSC Frigate")
