@@ -4,7 +4,7 @@
 
 	l_ear = /obj/item/device/radio/headset/covenant
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness
-	suit_store = /obj/item/weapon/tank/methane/unggoy_internal
+	back = /obj/item/weapon/tank/methane/unggoy_internal
 	uniform = /obj/item/clothing/under/unggoy_internal
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	mask = /obj/item/clothing/mask/rebreather
@@ -17,13 +17,23 @@
 
 /decl/hierarchy/outfit/unggoy_thrall
 	name = "Unggoy Thrall"
-
+	l_ear = null
 	uniform = /obj/item/clothing/under/unggoy_thrall
 	back = /obj/item/weapon/tank/methane
+	suit = null
 	mask = /obj/item/clothing/mask/rebreather/small
+	l_pocket = null
+	r_pocket = null
 
-/decl/hierarchy/outfit/unggoy/thrall/green
-	back = /obj/item/weapon/tank/methane/green
+/decl/hierarchy/outfit/unggoy_thrall/ramclan
+	name = "Ram Clan Unggoy Thrall"
+	l_ear = /obj/item/device/radio/headset/brute_ramclan
+	back = /obj/item/weapon/tank/methane/blue
+
+/decl/hierarchy/outfit/unggoy_thrall/boulderclan
+	name = "Boulder Clan Unggoy Thrall"
+	l_ear = /obj/item/device/radio/headset/brute_boulderclan
+	back = /obj/item/weapon/tank/methane/red
 
 /decl/hierarchy/outfit/unggoy/major
 	name = "Unggoy (Major)"

@@ -65,6 +65,7 @@
 #define HIDEJUMPSUIT    0x4
 #define HIDESHOES       0x8
 #define HIDETAIL        0x10
+#define HIDEBACK        0x20
 
 // WARNING: The following flags apply only to the helmets and masks!
 #define HIDEMASK 0x1

@@ -38,6 +38,7 @@
 /datum/job/packwar_major_ram
 	title = "Ram Clan Major"
 	faction_flag = COVENANT
+	department = "Ram Clan"
 	supervisors = "the Ram Clan captains and chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -54,6 +55,7 @@
 /datum/job/packwar_minor_ram
 	title = "Ram Clan Warrior"
 	faction_flag = COVENANT
+	department = "Ram Clan"
 	supervisors = "the Ram Clan majors, captains and chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -70,10 +72,11 @@
 /datum/job/packwar_thrall_ram
 	title = "Ram Clan Unggoy Thrall"
 	faction_flag = COVENANT
+	department = "Ram Clan"
 	supervisors = "everyone"
 	selection_color = "#337700"
 	account_allowed = 0               // Does this job type come with a station account?
-	outfit_type = /decl/hierarchy/outfit/unggoy/thrall/green
+	outfit_type = /decl/hierarchy/outfit/unggoy_thrall/ramclan
 	loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
 	announced = FALSE                  //If their arrival is announced on radio
 	generate_email = 0

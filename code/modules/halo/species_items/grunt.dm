@@ -20,23 +20,22 @@
 	desc = "A combat harness with an inbuilt gas tank"
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
+	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	icon_state = "combatharness_minor"
-	item_state = "combatharness_minor"
 
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
 
+	flags_inv = HIDESUITSTORAGE|HIDEBACK
 	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 30, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
 
 	allowed = list(/obj/item/weapon/tank)
 	species_restricted = list("Unggoy")
 
-	specials = list(/datum/armourspecials/gear/unggoy_tank)
-
 /obj/item/clothing/mask/rebreather
 	name = "Unggoy Rebreather Mask"
 	desc = "A breathing device fitted for Unggoy, who breathe a methane atmospheric mix."
-
+	item_state = "blank"
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "rebreather"
@@ -44,7 +43,7 @@
 	species_restricted = list("Unggoy")
 
 	body_parts_covered = HEAD|FACE
-	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
+	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT | FLEXIBLEMATERIAL
 	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 15, bio = 0, rad = 0)
 	armor_thickness = 10
 
@@ -54,9 +53,9 @@
 	name = "Small Unggoy Rebreather Mask"
 	icon_state = "rebreather_small"
 	body_parts_covered = FACE
-	item_flags = 0
-	armor = list(melee = 20, bullet = 10, laser = 15,energy = 15, bomb = 5, bio = 0, rad = 0)
-	armor_thickness = 5
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor_thickness = 0
 
 /obj/item/clothing/mask/rebreather/post_internals_breathe(var/datum/gas_mixture/removed_gas,var/obj/item/weapon/tank/tank_removed_from)
 	var/datum/gas_mixture/gas_rebreathed = new
@@ -77,13 +76,17 @@
 	desc = "A tank of methane."
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
-	icon_state = "methanetank_red"
-	item_state_slots = list(slot_back_str = "methanetank_red_back")
+	icon_state = "methanetank_green"
+	item_state_slots = list(slot_back_str = "methanetank_green_back", slot_l_hand_str = "methanetank_green", slot_r_hand_str = "methanetank_green")
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 
-/obj/item/weapon/tank/methane/green
-	icon_state = "methanetank_green"
-	item_state_slots = list(slot_back_str = "methanetank_green_back")
+/obj/item/weapon/tank/methane/red
+	icon_state = "methanetank_red"
+	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
+
+/obj/item/weapon/tank/methane/blue
+	icon_state = "methanetank_blue"
+	item_state_slots = list(slot_back_str = "methanetank_blue_back", slot_l_hand_str = "methanetank_blue", slot_r_hand_str = "methanetank_blue")
 
 /obj/item/weapon/tank/methane/New()
 	..()
@@ -92,16 +95,19 @@
 /obj/item/weapon/tank/methane/unggoy_internal
 	name = "Unggoy methane tank"
 	desc = "A methane tank usually found affixed to a unggoy combat harness."
+	gauge_icon = "indicator_emergency"
 
 	icon = GRUNT_GEAR_ICON
 	icon_state = "methane_tank_orange"
-	item_state = null
+	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
 
 /obj/item/weapon/tank/methane/unggoy_internal/red
 	icon_state = "methane_tank_red"
+	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
 
 /obj/item/weapon/tank/methane/unggoy_internal/blue
 	icon_state = "methane_tank_blue"
+	item_state_slots = list(slot_back_str = "methanetank_blue_back", slot_l_hand_str = "methanetank_blue", slot_r_hand_str = "methanetank_blue")
 
 /obj/item/weapon/tank/methane/unggoy_internal/MouseDrop(var/obj/over_object)
 	. = ..()
@@ -114,6 +120,7 @@
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "utility_jumpsuit"
+	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	species_restricted = list("Unggoy")
 
 /obj/item/clothing/under/unggoy_thrall
@@ -122,9 +129,20 @@
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "thrall_robe"
+	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	species_restricted = list("Unggoy")
 
 //Unggoy Harness Sub-Defines//
+
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/ramclan
+	name = "Ram Clan Unggoy Harness"
+	icon_state = "combatharness_blue"
+	item_state = "combatharness_blue"
+
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/boulderclan
+	name = "Boulder Clan Unggoy Harness"
+	icon_state = "combatharness_red"
+	item_state = "combatharness_red"
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	name = "Unggoy Combat Harness (Major)"
@@ -147,7 +165,7 @@
 	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
 
 	totalshields = 100
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
+	specials = list(/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	name = "Unggoy Combat Harness (Spec-Ops)"
@@ -158,7 +176,7 @@
 	item_state = "combatharness_specops"
 
 	action_button_name = "Toggle Active Camouflage"
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/cloaking)
+	specials = list(/datum/armourspecials/cloaking)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
 	name = "Unggoy Combat Harness (Deacon)"
@@ -169,7 +187,7 @@
 	item_state = "combatharness_deacon"
 	totalshields = 50 //Pretty much just a distinguishing feature.
 
-	specials = list(/datum/armourspecials/gear/unggoy_tank,/datum/armourspecials/shields/unggoy)
+	specials = list(/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	name = "Unggoy Rebreather Mask (Spec-Ops)"
@@ -190,7 +208,7 @@
 	desc = "The natural armor on your legs provides a small amount of protection against the elements."
 	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
 	icon_state = "naturallegarmor"
-	item_state = " "
+	item_state = "blank"
 
 	canremove = 0
 
@@ -199,7 +217,7 @@
 	desc = "The natural armor on your arms provides a small amount of protection against the elements."
 	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
 	icon_state = "naturalhandarmor"
-	item_state = " "
+	item_state = "blank"
 
 	canremove = 0
 

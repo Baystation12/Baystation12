@@ -76,7 +76,7 @@
 	supervisors = "everyone"
 	selection_color = "#993300"
 	account_allowed = 0               // Does this job type come with a station account?
-	outfit_type = /decl/hierarchy/outfit/unggoy/thrall
+	outfit_type = /decl/hierarchy/outfit/unggoy_thrall/boulderclan
 	loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
 	announced = FALSE                  //If their arrival is announced on radio
 	generate_email = 0
