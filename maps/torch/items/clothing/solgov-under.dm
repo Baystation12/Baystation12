@@ -5,6 +5,7 @@
 	item_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_under_solgov.dmi')
 	armor = list(melee = 5, bullet = 0, laser = 5, energy = 5, bomb = 0, bio = 5, rad = 5)
 	siemens_coefficient = 0.8
+	gender_icons = 1
 
 //PT
 /obj/item/clothing/under/solgov/pt
@@ -60,8 +61,8 @@
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt
 	name = "expeditionary skirt"
 	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps."
-	icon_state = "blackservicef"
-	worn_state = "blackservicef"
+	icon_state = "blackservicefem"
+	worn_state = "blackservicefem"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
@@ -69,8 +70,8 @@
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
 	name = "expeditionary officer skirt"
 	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps. This one has gold trim."
-	icon_state = "blackservicef_com"
-	worn_state = "blackservicef_com"
+	icon_state = "blackservicefem_com"
+	worn_state = "blackservicefem_com"
 
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command)
