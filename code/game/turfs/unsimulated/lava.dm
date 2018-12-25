@@ -22,7 +22,7 @@
 /turf/unsimulated/floor/lava/Entered(atom/movable/Obj,atom/OldLoc)
 	var/loseme = 0
 	if(isliving(Obj))
-
+		loseme = 1
 		var/mob/living/M = Obj
 
 		M.adjustFireLoss(10000)
