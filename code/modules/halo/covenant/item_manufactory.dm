@@ -47,7 +47,7 @@
 
 /obj/machinery/item_manufacturer/tools
 	name = "tool manufacturer"
-	design_type_parent = null
+	design_type_parent = /datum/design/cov_tool
 
 /obj/machinery/item_manufacturer/New()
 	. = ..()

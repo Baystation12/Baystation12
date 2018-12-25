@@ -1447,6 +1447,7 @@
 #include "code\modules\halo\covenant\cycling_trader.dm"
 #include "code\modules\halo\covenant\design.dm"
 #include "code\modules\halo\covenant\design_cov_components.dm"
+#include "code\modules\halo\covenant\design_cov_tools.dm"
 #include "code\modules\halo\covenant\design_weapon_brute.dm"
 #include "code\modules\halo\covenant\design_weapon_cov.dm"
 #include "code\modules\halo\covenant\drone.dm"

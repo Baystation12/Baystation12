@@ -61,3 +61,9 @@
 	desc = "A small plasma based power storage device."
 	icon = 'tools.dmi'
 	icon_state = "cell"
+
+/obj/item/cov_fuel
+	name = "covenant H-fuel"
+	desc = "An advanced hydrogen derivative fuel packet for Covenant technology."
+	icon = 'tools.dmi'
+	icon_state = "hfuel"
