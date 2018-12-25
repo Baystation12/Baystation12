@@ -51,6 +51,7 @@
 	sharp = 1
 	force = 40
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
+	item_state_slots = list(slot_back_str = "blank")
 
 /obj/item/ammo_magazine/spiker
 	name = "spiker magazine"
@@ -94,6 +95,7 @@
 	sharp = 1
 	force = 40
 	w_class = ITEM_SIZE_NORMAL
+	item_state_slots = list(slot_back_str = "blank")
 
 /obj/item/ammo_magazine/mauler
 	name = "mauler magazine"
@@ -136,6 +138,7 @@
 	edge = 0
 	sharp = 0
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
+	item_state_slots = list(slot_back_str = "blank")
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
 	for(var/atom/movable/M in range(A,1))
@@ -173,6 +176,7 @@
 	force = 45
 	edge = 1
 	sharp = 1
+	item_state_slots = list(slot_back_str = "blank")
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
