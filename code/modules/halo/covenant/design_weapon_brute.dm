@@ -22,7 +22,7 @@
 /datum/design/brute_weapon/brute_shot_gren
 	name = "Type-25 grenade"
 	id = "brute_shot_grenade"
-	materials = list(DEFAULT_WALL_MATERIAL = 30, "duridium" = 5, "kemocite" = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 15, "plasteel" = 5, "kemocite" = 10)
 	build_path = /obj/item/ammo_magazine/spike
 
 /datum/design/brute_weapon/spikegren
@@ -36,3 +36,24 @@
 	id = "brute_machete"
 	materials = list(DEFAULT_WALL_MATERIAL = 30)
 	build_path = /obj/item/weapon/material/machete
+
+/datum/design/brute_weapon/grenade_chlorine
+	name = "chlorine grenade"
+	id = "toxgas_chlorine"
+	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
+	build_path = /obj/item/weapon/grenade/toxic_gas
+	components = list("chlorine gas packet" = /obj/item/gas_packet/chlorine)
+
+/datum/design/brute_weapon/grenade_carbonmonoxide
+	name = "carbon monoxide grenade"
+	id = "toxgas_carbmonox"
+	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
+	build_path = /obj/item/weapon/grenade/toxic_gas
+	components = list("carbon monoxide gas packet" = /obj/item/gas_packet/carbonmonoxide)
+
+/datum/design/brute_weapon/grenade_sulfurdioxide
+	name = "sulfur dioxide grenade"
+	id = "toxgas_sulfdiox"
+	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
+	build_path = /obj/item/weapon/grenade/toxic_gas
+	components = list("sulfur dioxide gas packet" = /obj/item/gas_packet/sulfurdioxide)
