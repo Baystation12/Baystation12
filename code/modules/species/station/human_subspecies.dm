@@ -17,7 +17,7 @@
 	slowdown =      1
 
 	descriptors = list(
-		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/height = -1,
 		/datum/mob_descriptor/build = 1
 		)
 
