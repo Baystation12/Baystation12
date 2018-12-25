@@ -32,17 +32,17 @@
 	id = "cov_edagger"
 	materials = list("plasteel" = 10, "phglass" = 10)
 	build_path = /obj/item/weapon/melee/energy/elite_sword/dagger
-	components = list("plasma modulator" = /obj/item/plasma_modulator, "crystal matrix" = /obj/item/crystal_matrix, "covenant power cell" = /obj/item/weapon/cell/covenant)
+	components = list("crystal matrix" = /obj/item/crystal_matrix, "covenant power cell" = /obj/item/weapon/cell/covenant)
 
 /datum/design/cov_weapon/plasma_carbine
-	name = "energy dagger"
+	name = "plasma carbine"
 	id = "cov_edagger"
 	materials = list("plasteel" = 75, "phglass" = 20, "duridium" = 5)
 	build_path = /obj/item/weapon/gun/projectile/type51carbine
 	components = list("plasma modulator" = /obj/item/plasma_modulator, "crystal matrix" = /obj/item/crystal_matrix, "covenant power cell" = /obj/item/weapon/cell/covenant)
 
 /datum/design/cov_weapon/beam_rifle
-	name = "energy dagger"
+	name = "plasma carbine"
 	id = "cov_edagger"
 	materials = list("plasteel" = 100, "phglass" = 20, "nanolaminate" = 10)
 	build_path = /obj/item/weapon/gun/energy/beam_rifle
