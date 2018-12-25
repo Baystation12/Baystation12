@@ -228,9 +228,9 @@ var/global/list/mining_floors = list()
 							B.artifact_find = artifact_find
 					else
 						artifact_debris(1)
-				else if(prob(5))
+				/*else if(prob(5))
 					//empty boulder
-					B = new(src)
+					B = new(src)*/
 
 				if(B)
 					GetDrilled(0)
