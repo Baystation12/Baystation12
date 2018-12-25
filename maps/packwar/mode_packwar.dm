@@ -63,7 +63,6 @@
 	var/datum/mind/D = M.mind
 	if(!D)
 		for(var/datum/mind/check_mind in list(boulder_chief_mind,ram_chief_mind) + ram_clan_captains + boulder_clan_captains)
-			world << "	[check_mind.name]"
 			if(check_mind.name == M.real_name)
 				D = check_mind
 				break
