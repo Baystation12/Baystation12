@@ -59,10 +59,15 @@
 			//create a smoke effect
 			var/obj/machinery/portable_atmospherics/gas_collector/collector = locate() in src.loc
 			if(!collector || !collector.anchored)
-				spawn_smoke()
+				spawn_smoke(src.loc)
+				var/smokedist = 2
+				spawn_smoke(locate(x + smokedist, y + smokedist, z))
+				spawn_smoke(locate(x - smokedist, y + smokedist, z))
+				spawn_smoke(locate(x + smokedist, y - smokedist, z))
+				spawn_smoke(locate(x - smokedist, y - smokedist, z))
 
-/obj/structure/geyser/proc/spawn_smoke()
-	var/obj/effect/effect/smoke/chem/smoke = new (src.loc, duration_of_vent)
+/obj/structure/geyser/proc/spawn_smoke(var/turf/target_turf)
+	var/obj/effect/effect/smoke/chem/smoke = new (src.loc, duration_of_vent, target_turf)
 
 	var/datum/reagents/carry = smoke.reagents
 	for(var/reagent_type in smoke_reagent_types)
