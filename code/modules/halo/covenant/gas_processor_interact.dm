@@ -37,17 +37,17 @@
 			overlays -= "dispenser_tank"
 
 	if(href_list["expel_gas"])
-		expel_gas(href_list["expel_gas"], locate(href_list["user"]))
-		update_gases_ui()
+		if(expel_gas(href_list["expel_gas"], locate(href_list["user"])))
+			update_gases_ui()
 
 	if(href_list["fill_holding"])
-		fill_holding(href_list["fill_holding"])
-		update_gases_ui()
+		if(fill_holding(href_list["fill_holding"]))
+			update_gases_ui()
 
 	if(href_list["drain_holding"])
-		drain_holding()
-		update_gases_ui()
+		if(drain_holding())
+			update_gases_ui()
 
 	if(href_list["make_packet"])
-		make_gas_packet(href_list["make_packet"], locate(href_list["user"]))
-		update_gases_ui()
+		if(make_gas_packet(href_list["make_packet"], locate(href_list["user"])))
+			update_gases_ui()

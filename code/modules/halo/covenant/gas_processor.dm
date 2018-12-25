@@ -91,6 +91,7 @@
 
 /obj/machinery/portable_atmospherics/gas_processor/proc/expel_gas(var/gasid, var/mob/user)
 	ASSERT(user)
+	. = 0
 
 	var/amount = 0
 	switch(alert(user, "How much gas should be expelled", "Expel gas", "All", "Half", "None"))
@@ -111,7 +112,10 @@
 		spawn(30)
 			overlays -= "expel"
 
+		return 1
+
 /obj/machinery/portable_atmospherics/gas_processor/proc/make_gas_packet(var/gasid, var/mob/user)
+	. = 0
 	if(held_steel >= steel_per_packet)
 		if(air_contents.gas[gasid] >= moles_per_packet)
 			var/packet_type = packet_types[gasid]
@@ -120,6 +124,7 @@
 			new packet_type(src.loc, gasid)
 			air_contents.adjust_gas(gasid, -moles_per_packet)
 			to_chat(user,"<span class='info'>[src] compresses [gasid] into a sealed packet.</span>")
+			. = 1
 		else
 			to_chat(user,"<span class='warning'>Insufficient [gasid], requires [moles_per_packet] moles per packet.</span>")
 	else
