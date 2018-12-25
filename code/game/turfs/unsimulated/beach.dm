@@ -34,8 +34,15 @@
 /turf/unsimulated/water/Enter(atom/movable/O, atom/oldloc)
 	if(isliving(O))
 		return 0
+
+	. = ..()
+
+	if(istype(O, /obj/effect))
+		return .
+
 	spawn(10)
 		if(O.loc == src)
 			src.visible_message("<span class='notice'>[O] sinks beneath the surface of [src].</span>")
 			qdel(O)
+
 	return ..()
