@@ -68,6 +68,9 @@
 					spawn_smoke(target_tur)
 
 /obj/structure/geyser/proc/spawn_smoke(var/turf/target_turf)
+	//disable smoke for now
+	return
+
 	var/obj/effect/effect/smoke/chem/smoke = new (src.loc, duration_of_vent, target_turf)
 
 	var/datum/reagents/carry = smoke.reagents
