@@ -9,7 +9,7 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_state = "spikegren0"
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
-	item_state = "empty"
+	item_state = "blank"
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
 
 	//less explosive power but more spikes
