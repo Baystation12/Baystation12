@@ -22,9 +22,9 @@
 	//
 	var/objective_state = 0		//1 = boulder chieftain death
 								//2 = ram chieftain death
-	var/mercenary_interval_upper = 20 MINUTES
-	var/mercenary_interval_lower = 10 MINUTES
-	var/time_next_mercenary_ship = 15 MINUTES
+	var/mercenary_interval_upper = 15 MINUTES
+	var/mercenary_interval_lower = 5 MINUTES
+	var/time_next_mercenary_ship = 5 MINUTES
 
 	var/available_champions = 0
 	var/available_murmillos = 0
