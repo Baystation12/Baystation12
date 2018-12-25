@@ -247,6 +247,8 @@
 /obj/item/weapon/grenade/brute_shot/detonate()
 	..()
 
+	explosion(get_turf(src), 0, 0, max(amount / 2, 2), max(amount / 2, 3), 0)
+
 	for(var/atom/movable/M in range(src,1))
 		if(M == src)
 			continue
@@ -254,8 +256,6 @@
 		if(!M.anchored)
 			var/atom/throw_target = get_edge_target_turf(M, get_dir(src, get_step_away(M, src)))
 			M.throw_at(throw_target, 1, 4, src)
-
-	explosion(get_turf(src), -1, -1, max(amount / 2, 1), max(amount / 2, 2), 0)
 
 	qdel(src)
 
