@@ -10,7 +10,7 @@
 	name = "spiker magazine"
 	id = "brute_spiker_mag"
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 5)
-	build_path = /obj/item/ammo_magazine/spike
+	build_path = /obj/item/ammo_magazine/spiker
 
 /datum/design/brute_weapon/brute_shot
 	name = "Type-25 Grenade Launcher"
@@ -22,8 +22,8 @@
 /datum/design/brute_weapon/brute_shot_gren
 	name = "Type-25 grenade"
 	id = "brute_shot_grenade"
-	materials = list(DEFAULT_WALL_MATERIAL = 15, "plasteel" = 5, "kemocite" = 10)
-	build_path = /obj/item/ammo_magazine/spike
+	materials = list(DEFAULT_WALL_MATERIAL = 5, "plasteel" = 1, "kemocite" = 10)
+	build_path = /obj/item/weapon/grenade/brute_shot/single
 
 /datum/design/brute_weapon/spikegren
 	name = "Type-2 spike grenade"

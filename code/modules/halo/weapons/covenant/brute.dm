@@ -38,9 +38,10 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "spiker"
-	magazine_type = /obj/item/ammo_magazine/spike
-	allowed_magazines = /obj/item/ammo_magazine/spike
-	caliber = "spike"
+	item_state = "spiker"
+	magazine_type = /obj/item/ammo_magazine/spiker
+	allowed_magazines = /obj/item/ammo_magazine/spiker
+	caliber = "spiker"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 	handle_casings = CASELESS
@@ -51,27 +52,74 @@
 	force = 40
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 
-/obj/item/ammo_magazine/spike
+/obj/item/ammo_magazine/spiker
 	name = "spiker magazine"
 	desc = "A 20 round magazine for the Jiralhanae spiker"
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
-	icon_state = "spikermag"
+	icon_state = "spiker_mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/m5
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
-	caliber = "spike"
+	caliber = "spiker"
 	max_ammo = 20
 
-/obj/item/ammo_casing/spike
+/obj/item/ammo_casing/spiker
 	desc = "A spike round casing."
-	caliber = "spike"
-	projectile_type = /obj/item/projectile/bullet/spike
+	caliber = "spiker"
+	projectile_type = /obj/item/projectile/bullet/spiker
 
-/obj/item/projectile/bullet/spike
-	damage = 20
+/obj/item/projectile/bullet/spiker
+	damage = 18
 	accuracy = -3
 
 #undef CASELESS
+
+
+
+/* MAULER */
+
+/obj/item/weapon/gun/projectile/mauler
+	name = "Type-52 \"Mauler\""
+	desc = "A single shot, short range Jiralhanae sidearm with a powerful punch. Has a blade underneath."
+	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
+	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
+	icon_state = "mauler"
+	item_state = "mauler"
+	magazine_type = /obj/item/ammo_magazine/mauler
+	allowed_magazines = /obj/item/ammo_magazine/mauler
+	load_method = MAGAZINE
+	caliber = "mauler"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	edge = 1
+	sharp = 1
+	force = 40
+	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/ammo_magazine/mauler
+	name = "mauler magazine"
+	desc = "A 5 round magazine for the Jiralhanae mauler"
+	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
+	icon_state = "mauler_mag"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/mauler
+	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	caliber = "mauler"
+	max_ammo = 5
+
+/obj/item/ammo_casing/mauler
+	desc = "A mauler round casing."
+	caliber = "mauler"
+	projectile_type = /obj/item/projectile/bullet/mauler
+
+/obj/item/projectile/bullet/mauler
+	damage = 75
+	accuracy = -3
+
+/obj/item/projectile/bullet/mauler/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
+	. = ..()
+	if(.)
+		//reduced damage from further away
+		damage -= get_dist(starting, src) * 10
 
 
 
@@ -90,13 +138,13 @@
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
-	for(var/atom/movable/M in range(user,1))
+	for(var/atom/movable/M in range(A,1))
 		if(M == user)
 			continue
 
 		if(!M.anchored)
 			var/atom/throw_target = get_edge_target_turf(M, get_dir(user, get_step_away(M, src)))
-			M.throw_at(throw_target, 1, 4)
+			M.throw_at(throw_target, 3, 4, user)
 
 		if(M == A)
 			continue
@@ -189,7 +237,17 @@
 
 /obj/item/weapon/grenade/brute_shot/detonate()
 	..()
+
+	for(var/atom/movable/M in range(src,1))
+		if(M == src)
+			continue
+
+		if(!M.anchored)
+			var/atom/throw_target = get_edge_target_turf(M, get_dir(src, get_step_away(M, src)))
+			M.throw_at(throw_target, 1, 4, src)
+
 	explosion(get_turf(src), -1, -1, max(amount / 2, 1), max(amount / 2, 2), 0)
+
 	qdel(src)
 
 /obj/item/weapon/grenade/brute_shot/proc/modify_amount(var/transferred, var/delete_if_empty = 1)
@@ -254,3 +312,27 @@
 		src.overlays += gren
 
 		grensleft -= 1
+
+/obj/item/weapon/grenade/toxic_gas
+	name = "toxic gas grenade"
+	icon_state = "banana"
+	item_state = "grenade"
+	desc = "A chemical smoke grenade made from gasses toxic to carbon based lifeforms."
+
+/obj/item/weapon/grenade/toxic_gas/New()
+	. = ..()
+	create_reagents(500)
+	reagents.add_reagent(/datum/reagent/toxin, 500)
+
+/obj/item/weapon/grenade/toxic_gas/detonate()
+	playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
+
+	var/datum/effect/effect/system/smoke_spread/chem/poison_gas = new()
+	poison_gas.set_up(reagents, 10, 0, src.loc)
+	poison_gas.start()
+
+	if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
+		var/mob/living/carbon/C = loc
+		C.drop_from_inventory(src)
+		C.throw_mode_off()
+	qdel(src)
