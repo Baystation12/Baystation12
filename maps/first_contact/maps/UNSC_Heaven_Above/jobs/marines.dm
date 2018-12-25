@@ -117,37 +117,39 @@
 	new /obj/item/clothing/head/helmet/marine(src)
 	new /obj/item/clothing/suit/storage/marine(src)
 
-/datum/job/UNSC_ship/odst
-	title = "ODST Rifleman"
-	department_flag = MAR
-	total_positions = 4
+//UNSC Heaven Above ODST Jobs
+
+/datum/job/HeavenAbove_ODST
+	title = "Orbital Drop Shock Trooper"
+	total_positions = 5
 	spawn_positions = 4
-	faction_flag = ODST
-	ideal_character_age = 40
-	minimal_player_age = 21
-	spawnpoint_override = "UNSC Frigate"
-	selection_color = "#667700"
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odst
-	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist","ODST Combat Engineer")
-	access = list(access_unsc_crew,
-		access_unsc_supplies, access_unsc_marine)
-	latejoin_at_spawnpoints = TRUE
+	outfit_type = /decl/hierarchy/outfit/job/bertelsfacil_ODST
+	alt_titles = list("Private First Class"= /decl/hierarchy/outfit/job/bertelsODSTCQC,
+	"Lance Corporal"= /decl/hierarchy/outfit/job/bertelsODSTengineer,
+	"Corporal"= /decl/hierarchy/outfit/job/bertelsfacil_ODST,
+	"Petty Officer Third Class"= /decl/hierarchy/outfit/job/bertelsODSTMedic,
+	"Sergeant"= /decl/hierarchy/outfit/job/bertelsODSTSharpshooter,
+	"Staff Sergeant"= /decl/hierarchy/outfit/job/bertelsODSTstaffsergeant,
+	"Gunnery Sergeant"= /decl/hierarchy/outfit/job/bertelsODSTgunnerysergeant,
+	"Master Sergeant" = /decl/hierarchy/outfit/job/bertelsODSTFireteamLead)
+
+	selection_color = "#0A0A95"
+	access = list(142,144,110,192,309,310)
+	//spawnpoint_override = "UNSC Bertels ODST Spawn"
 	is_whitelisted = 1
 
-/datum/job/UNSC_ship/odsto
-	title = "ONI Bridge Officer"
-	department_flag = MAR
+/datum/job/HeavenAbove_ODSTO
+	title = "Orbital Drop Shock Trooper Officer"
 	total_positions = 1
-	faction_flag = ODST
 	spawn_positions = 1
-	ideal_character_age = 36
-	minimal_player_age = 27
-	spawnpoint_override = "UNSC Frigate"
-	selection_color = "#667700"
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odsto
-	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
-		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
-		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids, 60)
-	latejoin_at_spawnpoints = TRUE
+	outfit_type = /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant
+	alt_titles = list("Second Lieutenant" = /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant,
+	"First Lieutenant" = /decl/hierarchy/outfit/job/bertelsODSTfirstlieutenant,
+	"Captain" = /decl/hierarchy/outfit/job/bertelsODSTcaptain,
+	"Major" = /decl/hierarchy/outfit/job/bertelsODSTmajor,
+	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/bertelsODSTltcolonel,
+	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
+	selection_color = "#0A0A95"
+	access = list(142,144,145,110,192,300,306,309,310,311)
+	//spawnpoint_override = "UNSC Bertels ODST Officer Spawn"
 	is_whitelisted = 1

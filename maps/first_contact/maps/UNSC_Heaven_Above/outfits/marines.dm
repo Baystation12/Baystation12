@@ -68,24 +68,261 @@
 	if(prob(25))
 		H.equip_to_slot_or_del(/obj/item/clothing/head/helmet/marine/visor)
 
-/decl/hierarchy/outfit/job/UNSC_ship/odst
-	name = "ODST Rifleman"
+//ODST Outfits
+
+/decl/hierarchy/outfit/job/bertelsfacil_ODST
+	name = "Rifleman"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh)
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
-/decl/hierarchy/outfit/job/UNSC_ship/odsto
-	name = "ONI Bridge Officer"
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	uniform = /obj/item/clothing/under/utility
-	shoes = /obj/item/clothing/shoes/dress
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTSharpshooter
+	name = "Sharpshooter"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh)
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTMedic
+	name = "Field Medic"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTCQC
+	name = "CQC Specialist"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTengineer
+	name = "Combat Engineer"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTRifleman
+	name = "corporal"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTRifleman2
+	name = "sarge"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTstaffsergeant
+	name = "staffsarge"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e6, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTgunnerysergeant
+	name = "gunnysarge"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e7, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTFireteamLead
+	name = "Fireteam Leader"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e8, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant
+	name = "Second Lieutenant"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTfirstlieutenant
+	name = "First Lieutenant"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+
+/decl/hierarchy/outfit/job/bertelsODSTcaptain
+	name = "odstCaptain"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o3, /obj/item/clothing/accessory/ribbon/frontier, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTmajor
+	name = "Major"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o4, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTltcolonel
+	name = "LtColonel"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o5, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/bertelsODSTcolonel
+	name = "Colonel"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer/o6, /obj/item/clothing/accessory/ribbon/marksman,/obj/item/clothing/accessory/ribbon/frontier,/obj/item/clothing/accessory/ribbon/instructor, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
