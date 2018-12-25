@@ -38,7 +38,7 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "spiker"
-	item_state = "spiker"
+	item_state = "blank"
 	magazine_type = /obj/item/ammo_magazine/spiker
 	allowed_magazines = /obj/item/ammo_magazine/spiker
 	caliber = "spiker"
@@ -51,13 +51,14 @@
 	sharp = 1
 	force = 40
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
-	item_state_slots = list(slot_back_str = "blank")
+	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 
 /obj/item/ammo_magazine/spiker
 	name = "spiker magazine"
 	desc = "A 20 round magazine for the Jiralhanae spiker"
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_state = "spiker_mag"
+	item_state = "blank"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/m5
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
@@ -85,7 +86,7 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "mauler"
-	item_state = "mauler"
+	item_state = "blank"
 	magazine_type = /obj/item/ammo_magazine/mauler
 	allowed_magazines = /obj/item/ammo_magazine/mauler
 	load_method = MAGAZINE
@@ -95,7 +96,7 @@
 	sharp = 1
 	force = 40
 	w_class = ITEM_SIZE_NORMAL
-	item_state_slots = list(slot_back_str = "blank")
+	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 
 /obj/item/ammo_magazine/mauler
 	name = "mauler magazine"
@@ -133,14 +134,18 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj_large.dmi'
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "gravhammer"
+	item_state = "blank"
 	w_class = ITEM_SIZE_HUGE
 	force = 65
 	edge = 0
 	sharp = 0
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
-	item_state_slots = list(slot_back_str = "blank")
+	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer")
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
+	if(get_dist(A,user) > 1)
+		return
+
 	for(var/atom/movable/M in range(A,1))
 		if(M == user)
 			continue
@@ -166,7 +171,7 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj_large.dmi'
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "bruteshot"
-	item_state = "bruteshot"
+	item_state = "blank"
 	pump_sound = null
 	max_grenades = 6
 	one_hand_penalty = 4
@@ -176,7 +181,7 @@
 	force = 45
 	edge = 1
 	sharp = 1
-	item_state_slots = list(slot_back_str = "blank")
+	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot")
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
