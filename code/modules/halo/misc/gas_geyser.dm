@@ -60,11 +60,12 @@
 			var/obj/machinery/portable_atmospherics/gas_collector/collector = locate() in src.loc
 			if(!collector || !collector.anchored)
 				spawn_smoke(src.loc)
-				var/smokedist = 2
-				spawn_smoke(locate(x + smokedist, y + smokedist, z))
-				spawn_smoke(locate(x - smokedist, y + smokedist, z))
-				spawn_smoke(locate(x + smokedist, y - smokedist, z))
-				spawn_smoke(locate(x - smokedist, y - smokedist, z))
+				var/smokenum = rand(3,5)
+				var/list/dirsleft = GLOB.alldirs.Copy()
+				for(var/i=0,i<smokenum,i++)
+					var/pickdir = pick_n_take(dirsleft)
+					var/turf/target_tur = get_step(src, pickdir)
+					spawn_smoke(target_tur)
 
 /obj/structure/geyser/proc/spawn_smoke(var/turf/target_turf)
 	var/obj/effect/effect/smoke/chem/smoke = new (src.loc, duration_of_vent, target_turf)
