@@ -34,12 +34,15 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	species_restricted = list("Jiralhanae")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	armor = list(melee = 3, bullet = 3, laser = 3, energy = 3, bomb = 3, bio = 0, rad = 0)
 
 /obj/item/clothing/under/covenant/jiralhanae/red
 	icon_state = "bodysuit_red"
+	armor = list(melee = 3, bullet = 3, laser = 3, energy = 3, bomb = 3, bio = 0, rad = 0)
 
 /obj/item/clothing/under/covenant/jiralhanae/blue
 	icon_state = "bodysuit_blue"
+	armor = list(melee = 3, bullet = 3, laser = 3, energy = 3, bomb = 3, bio = 0, rad = 0)
 
 
 
