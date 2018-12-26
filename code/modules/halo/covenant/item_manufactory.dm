@@ -30,18 +30,18 @@
 /obj/machinery/item_manufacturer/covenant
 	name = "weapon assembly forge"
 	desc = "An advanced nanofabricator."
-	icon_state = "experiment-open"
-	icon_state_idle = "experiment-open"
-	icon_state_active = "experiment"
+	icon_state = "console"
+	icon_state_idle = "console"
+	icon_state_active = "console-active"
 	busy_noises = list("whirrs!")
 	design_type_parent = /datum/design/cov_weapon
 
 /obj/machinery/item_manufacturer/component
 	name = "component assembly forge"
 	desc = "An advanced nanofabricator."
-	icon_state = "experiment-open"
-	icon_state_idle = "experiment-open"
-	icon_state_active = "experiment"
+	icon_state = "console"
+	icon_state_idle = "console"
+	icon_state_active = "console-active"
 	busy_noises = list("whirrs!")
 	design_type_parent = /datum/design/cov_component
 
@@ -50,15 +50,16 @@
 	design_type_parent = /datum/design/brute_clothing
 
 /obj/machinery/item_manufacturer/armour/boulderclan
-	name = "armour assembly forge"
 	design_type_parent = /datum/design/brute_clothing/boulder
 
 /obj/machinery/item_manufacturer/armour/ramclan
-	name = "armour assembly forge"
 	design_type_parent = /datum/design/brute_clothing/ram
 
 /obj/machinery/item_manufacturer/tools
 	name = "tool manufacturer"
+	icon_state = "experiment-open"
+	icon_state_idle = "experiment-open"
+	icon_state_active = "experiment"
 	design_type_parent = /datum/design/cov_tool
 
 /obj/machinery/item_manufacturer/New()
