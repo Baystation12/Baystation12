@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Anomaly isolation and Xenobiology air alarms will no longer cause atmos alarms."
