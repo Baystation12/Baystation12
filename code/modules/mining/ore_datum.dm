@@ -150,7 +150,7 @@ var/global/list/ores_by_type = list()
 	compresses_to = "osmium"
 	alloy = 1
 	result_amount = 2
-	spread_chance = 10
+	spread_chance = 25
 	ore = /obj/item/weapon/ore/osmium
 	scan_icon = "mineral_rare"
 

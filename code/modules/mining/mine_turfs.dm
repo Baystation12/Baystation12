@@ -404,8 +404,8 @@ var/global/list/mining_floors = list()
 	icon_state = "rock_mineral"
 	var/mineralSpawnChanceList = list(\
 		"uranium" = 1, "phoron" = 1, "diamond" = 1, , "corundum" = 1, "kemocite" = 1, \
-		"platinum" = 5, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
-		"iron" = 35, "carbon" = 35 \
+		"platinum" = 10, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
+		"iron" = 30, "carbon" = 30 \
 		)
 	var/mineralChance = 10 //means 10% chance of this plot changing to a mineral deposit
 
@@ -440,7 +440,7 @@ var/global/list/mining_floors = list()
 	mineralChance = 25
 	mineralSpawnChanceList = list(\
 		"uranium" = 1, "phoron" = 1, "diamond" = 1, , "corundum" = 1, "kemocite" = 1, \
-		"platinum" = 5, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
+		"platinum" = 10, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
 		"iron" = 5, "carbon" = 5 \
 		)
 
