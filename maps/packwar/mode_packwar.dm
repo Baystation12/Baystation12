@@ -35,7 +35,7 @@
 /datum/game_mode/packwar/post_setup()
 	. = ..()
 
-	time_next_mercenary_ship = mercenary_interval_lower
+	time_next_mercenary_ship = world.time + mercenary_interval_lower
 
 	//grab the two chieftains
 	var/datum/job/boulder_chief = job_master.occupations_by_title["Boulder Clan Chieftain"]
