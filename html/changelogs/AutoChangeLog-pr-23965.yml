@@ -1,0 +1,7 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - tweak: "XO default access is no longer spotty. It now has access to the entire ship and shuttles, including research. Specific changes: Added robotics, all of research including petrov, Pilot, Mining, and Commisary. Places XO does not have access: Captain, Research Director's office, Research Director's Petrov Office, SolGov Rep, and Corporate Liason."
+  - rscdel: "Removed Genetics access from the game."
+  - tweak: "Renamed \"Nanotrasen\" in the access computer program to \"Corporate\"."
+  - tweak: "Renamed access \"Psychiatrist's Office\" to \"Mental Health\". Renamed access \"Head of Security\" to \"Chief of Security\". Renamed \"Head of Personnel\" to \"Executive Officer\". \"Quartermaster\" is renamed to \"Deck Chief\"."
