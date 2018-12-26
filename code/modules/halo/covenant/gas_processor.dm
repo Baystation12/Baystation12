@@ -58,20 +58,17 @@
 	return 0
 
 /obj/machinery/portable_atmospherics/gas_processor/proc/fill_holding(var/gasid)
-	world << "/obj/machinery/portable_atmospherics/gas_processor/proc/fill_holding([gasid])"
 	if(holding)
 		//we only want to move over as much as the tank can fit before leaking
 
 		//test the pressure of moving over all moles
 		var/gas_moles = air_contents.gas[gasid]
-		world << "	gas_moles:[gas_moles]"
 		var/datum/gas_mixture/new_gas = new(holding.volume)
 		new_gas.adjust_gas(gasid, gas_moles)
 		new_gas.temperature = air_contents.temperature
 
 		//if its too much, remove some of our fake moles
 		var/excess_pressure = new_gas.return_pressure() - max_pressure
-		world << "	excess_pressure:[excess_pressure]"
 		if(excess_pressure > 0)
 			var/excess_ratio = excess_pressure / max_pressure
 			qdel(new_gas.remove_ratio(excess_ratio))
