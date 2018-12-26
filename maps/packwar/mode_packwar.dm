@@ -30,7 +30,7 @@
 	var/available_murmillos = 0
 	var/available_defenders = 0
 	var/available_snipers = 0
-	var/respawn_time = 1.5 MINUTES
+	var/respawn_time = 1.5	//minutes
 
 /datum/game_mode/packwar/post_setup()
 	. = ..()
