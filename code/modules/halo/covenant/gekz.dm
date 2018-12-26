@@ -75,5 +75,7 @@
 	update_icon()
 
 /obj/item/weapon/spacecash/bundle/random/gekz
+	name = "a random bundle of gekz"
 	currency = "gekz"
 	icon_state = "gekz100"
+	icon_state_base = "gekz"

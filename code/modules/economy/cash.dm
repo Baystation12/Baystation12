@@ -3,8 +3,8 @@
 	desc = "It's worth 0 credits."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
-	icon_state = "spacecash1"
-	var/icon_state_base = "spacecash"
+	icon_state = "credits1"
+	var/icon_state_base = "credits"
 	opacity = 0
 	density = 0
 	anchored = 0.0
@@ -121,49 +121,49 @@
 
 /obj/item/weapon/spacecash/bundle/credits1
 	name = "1 credit"
-	icon_state = "spacecash1"
+	icon_state = "credits1"
 	desc = "It's worth 1 credit."
 	worth = 1
 
 /obj/item/weapon/spacecash/bundle/credits10
 	name = "10 credits"
-	icon_state = "spacecash10"
+	icon_state = "credits10"
 	desc = "It's worth 10 credits."
 	worth = 10
 
 /obj/item/weapon/spacecash/bundle/credits20
 	name = "20 credits"
-	icon_state = "spacecash20"
+	icon_state = "credits20"
 	desc = "It's worth 20 credits."
 	worth = 20
 
 /obj/item/weapon/spacecash/bundle/credits50
 	name = "50 credits"
-	icon_state = "spacecash50"
+	icon_state = "credits50"
 	desc = "It's worth 50 credits."
 	worth = 50
 
 /obj/item/weapon/spacecash/bundle/credits100
 	name = "100 credits"
-	icon_state = "spacecash100"
+	icon_state = "credits100"
 	desc = "It's worth 100 credits."
 	worth = 100
 
 /obj/item/weapon/spacecash/bundle/credits200
 	name = "200 credits"
-	icon_state = "spacecash200"
+	icon_state = "credits200"
 	desc = "It's worth 200 credits."
 	worth = 200
 
 /obj/item/weapon/spacecash/bundle/credits500
 	name = "500 credits"
-	icon_state = "spacecash500"
+	icon_state = "credits500"
 	desc = "It's worth 500 credits."
 	worth = 500
 
 /obj/item/weapon/spacecash/bundle/credits1000
 	name = "1000 credits"
-	icon_state = "spacecash1000"
+	icon_state = "credits1000"
 	desc = "It's worth 1000 credits."
 	worth = 1000
 

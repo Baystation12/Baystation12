@@ -1,7 +1,7 @@
 "aa" = (/turf/unsimulated/mineral,/area/doisac_surface)
 "ab" = (/turf/unsimulated/floor/grass2,/area/doisac_surface/plain)
 "ac" = (/obj/effect/landmark/mercspawn/ram,/turf/unsimulated/floor/rescue_base,/area/doisac_surface)
-"ad" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/wallet/poly,/obj/item/weapon/spacecash/bundle/gekz10,/obj/item/weapon/spacecash/bundle/gekz20,/obj/item/weapon/spacecash/bundle/gekz50,/obj/item/weapon/spacecash/bundle/gekz1,/obj/item/weapon/spacecash/bundle/gekz1,/obj/item/weapon/spacecash/bundle/gekz1,/turf/simulated/floor/wood,/area/doisac_surface)
+"ad" = (/obj/item/weapon/spacecash/bundle/random/gekz,/obj/structure/table/woodentable,/obj/item/weapon/storage/wallet/poly,/turf/simulated/floor/wood,/area/doisac_surface)
 "ae" = (/obj/structure/closet/covenant,/obj/item/device/landmine,/obj/item/device/landmine,/obj/item/device/landmine,/obj/item/device/landmine,/obj/item/device/landmine,/turf/simulated/floor/wood,/area/doisac_surface)
 "af" = (/obj/item/weapon/material/hatchet/unathiknife,/obj/item/weapon/material/hatchet/unathiknife,/obj/item/weapon/material/hatchet/unathiknife,/obj/item/weapon/material/hatchet/unathiknife,/obj/item/weapon/material/hatchet/unathiknife,/obj/structure/closet/covenant,/turf/simulated/floor/wood,/area/doisac_surface)
 "ag" = (/obj/effect/landmark/start{name = "clanless Jiralhanae"},/turf/unsimulated/floor/grass2,/area/doisac_surface/plain)
