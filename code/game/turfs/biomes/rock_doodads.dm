@@ -24,7 +24,7 @@
 		/obj/effect/rocks = 2,\
 		/obj/structure/geyser/toxic_gas = 1,\
 		/obj/structure/geyser/volcanic_gas = 1,\
-		/mob/living/simple_animal/hostile/diyaab = 1,\
-		/mob/living/simple_animal/hostile/shantak = 1,\
-		/mob/living/simple_animal/hostile/samak = 1\
+		/mob/living/simple_animal/hostile/diyaab = 0.5,\
+		/mob/living/simple_animal/hostile/shantak = 0.5,\
+		/mob/living/simple_animal/hostile/samak = 0.5\
 	)
