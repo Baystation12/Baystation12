@@ -17,6 +17,12 @@
 	total_positions = 1
 	track_players = 1
 
+/datum/job/packwar_chieftain_ram/assign_player(var/datum/mind/new_mind)
+	. = ..()
+	if(istype(ticker.mode, /datum/game_mode/packwar))
+		var/datum/game_mode/packwar/P = ticker.mode
+		P.ram_chief_mind = new_mind
+
 /datum/job/packwar_captain_ram
 	title = "Ram Clan Captain"
 	faction_flag = COVENANT
