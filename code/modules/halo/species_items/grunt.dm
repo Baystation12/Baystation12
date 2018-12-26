@@ -34,13 +34,14 @@
 
 /obj/item/clothing/mask/rebreather
 	name = "Unggoy Rebreather Mask"
-	desc = "A breathing device fitted for Unggoy, who breathe a methane atmospheric mix."
+	desc = "A breathing device fitted for Unggoy, who breathe a methane atmospheric mix. This one has some protective armour for the head."
 	item_state = "blank"
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "rebreather"
 
 	species_restricted = list("Unggoy")
+	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 
 	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT | FLEXIBLEMATERIAL
@@ -79,24 +80,33 @@
 	icon_state = "methanetank_green"
 	item_state_slots = list(slot_back_str = "methanetank_green_back", slot_l_hand_str = "methanetank_green", slot_r_hand_str = "methanetank_green")
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	var/starting_pressure = TANK_LEAK_PRESSURE * 0.9
 
 /obj/item/weapon/tank/methane/red
 	icon_state = "methanetank_red"
 	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
 
+/obj/item/weapon/tank/methane/red/empty
+	name = "tank"
+	starting_pressure = 0
+
 /obj/item/weapon/tank/methane/blue
 	icon_state = "methanetank_blue"
 	item_state_slots = list(slot_back_str = "methanetank_blue_back", slot_l_hand_str = "methanetank_blue", slot_r_hand_str = "methanetank_blue")
 
+/obj/item/weapon/tank/methane/blue/empty
+	name = "tank"
+	starting_pressure = 0
+
 /obj/item/weapon/tank/methane/New()
 	..()
-	air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+	if(starting_pressure > 0)
+		air_contents.adjust_gas("methane", starting_pressure)
 
 /obj/item/weapon/tank/methane/unggoy_internal
 	name = "Unggoy methane tank"
 	desc = "A methane tank usually found affixed to a unggoy combat harness."
 	gauge_icon = "indicator_emergency"
-
 	icon = GRUNT_GEAR_ICON
 	icon_state = "methane_tank_orange"
 	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
@@ -105,9 +115,15 @@
 	icon_state = "methane_tank_red"
 	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
 
+/obj/item/weapon/tank/methane/unggoy_internal/red/empty
+	starting_pressure = 0
+
 /obj/item/weapon/tank/methane/unggoy_internal/blue
 	icon_state = "methane_tank_blue"
 	item_state_slots = list(slot_back_str = "methanetank_blue_back", slot_l_hand_str = "methanetank_blue", slot_r_hand_str = "methanetank_blue")
+
+/obj/item/weapon/tank/methane/unggoy_internal/blue/empty
+	starting_pressure = 0
 
 /obj/item/weapon/tank/methane/unggoy_internal/MouseDrop(var/obj/over_object)
 	. = ..()
@@ -116,12 +132,13 @@
 
 /obj/item/clothing/under/unggoy_internal
 	name = "Unggoy Internal Jumpsuit"
-	desc = "A form fitting functional undersuit for Unggoy soldiers."
+	desc = "A form fitting functional undersuit for Unggoy soldiers. Has a little protective padding."
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "utility_jumpsuit"
 	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	species_restricted = list("Unggoy")
+	armor = list(melee = 3, bullet = 3, laser = 3, energy = 3, bomb = 3, bio = 0, rad = 0)
 
 /obj/item/clothing/under/unggoy_thrall
 	name = "Unggoy thrall robe"
