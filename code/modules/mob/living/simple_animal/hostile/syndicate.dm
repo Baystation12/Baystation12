@@ -110,8 +110,9 @@
 	name = "viscerator"
 	desc = "A small, twin-bladed machine capable of inflicting very deadly lacerations."
 	icon = 'icons/mob/critter.dmi'
-	icon_state = "viscerator_attack"
-	icon_living = "viscerator_attack"
+	icon_state = "viscerator"
+	icon_living = "viscerator"
+	icon_dead = "viscerator_dead"
 	pass_flags = PASSTABLE
 	health = 15
 	maxHealth = 15
@@ -124,6 +125,6 @@
 	max_gas = null
 	minbodytemp = 0
 
-/mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
-	..(null,"is smashed into pieces!", show_dead_message)
-	qdel(src)
+/mob/living/simple_animal/hostile/viscerator/UnarmedAttack(var/atom/attacked,var/prox_flag)
+	. = ..()
+	flick("viscerator_attack", src)
