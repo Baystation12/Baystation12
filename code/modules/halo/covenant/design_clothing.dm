@@ -56,45 +56,45 @@
 
 /* RAM CLAN */
 
-/datum/design/brute_clothing/ram/jumpsuit
+/datum/design/brute_clothing_ram/jumpsuit
 	name = "blue Jiralhanae jumpsuit"
 	id = "brute_jumpsuit_blue"
 	materials = list("cloth" = 50)
 	build_path = /obj/item/clothing/under/covenant/jiralhanae/blue
 
 
-/datum/design/brute_clothing/ram/armour_minor
+/datum/design/brute_clothing_ram/armour_minor
 	name = "blue Jiralhanae minor armour"
 	id = "brute_armourminor_blue"
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "cloth" = 15)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/blue
 
-/datum/design/brute_clothing/ram/armour_major
+/datum/design/brute_clothing_ram/armour_major
 	name = "blue Jiralhanae major armour"
 	id = "brute_armourmajor_blue"
 	materials = list("plasteel" = 50, DEFAULT_WALL_MATERIAL = 30, "cloth" = 15, "osmium-carbide plasteel" = 5)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/major/blue
 
-/datum/design/brute_clothing/ram/armour_captain
+/datum/design/brute_clothing_ram/armour_captain
 	name = "blue Jiralhanae captain armour"
 	id = "brute_armourcaptain_blue"
 	materials = list("duridium" = 50, "osmium-carbide plasteel" = 30, "cloth" = 15)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain/blue
 
 
-/datum/design/brute_clothing/ram/unggoy_methane_blue
+/datum/design/brute_clothing_ram/unggoy_methane_blue
 	name = "blue Unggoy internal methane tank"
 	id = "unggoy_methane_blue"
 	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 10)
 	build_path = /obj/item/weapon/tank/methane/unggoy_internal/blue/empty
 
-/datum/design/brute_clothing/ram/tank_blue
+/datum/design/brute_clothing_ram/tank_blue
 	name = "blue tank"
 	id = "tank_blue"
 	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 10)
 	build_path = /obj/item/weapon/tank/methane/blue/empty
 
-/datum/design/brute_clothing/ram/unggoy_harness_blue
+/datum/design/brute_clothing_ram/unggoy_harness_blue
 	name = "blue Unggoy combat harness"
 	id = "unggoy_harness_blue"
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "cloth" = 15, "plasteel" = 20)
@@ -104,45 +104,45 @@
 
 /* BOULDER CLAN */
 
-/datum/design/brute_clothing/boulder/jumpsuit
+/datum/design/brute_clothing_boulder/jumpsuit
 	name = "red Jiralhanae jumpsuit"
 	id = "brute_jumpsuit_red"
 	materials = list("cloth" = 50)
 	build_path = /obj/item/clothing/under/covenant/jiralhanae/red
 
 
-/datum/design/brute_clothing/boulder/armour_minor
+/datum/design/brute_clothing_boulder/armour_minor
 	name = "red Jiralhanae minor armour"
 	id = "brute_armourminor_red"
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "cloth" = 15)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/red
 
-/datum/design/brute_clothing/boulder/armour_major
+/datum/design/brute_clothing_boulder/armour_major
 	name = "red Jiralhanae major armour"
 	id = "brute_armourmajor_red"
 	materials = list("plasteel" = 50, DEFAULT_WALL_MATERIAL = 30, "cloth" = 15, "osmium-carbide plasteel" = 5)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/major/red
 
-/datum/design/brute_clothing/boulder/armour_captain
+/datum/design/brute_clothing_boulder/armour_captain
 	name = "red Jiralhanae captain armour"
 	id = "brute_armourcaptain_red"
 	materials = list("duridium" = 50, "osmium-carbide plasteel" = 30, "cloth" = 15)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain/red
 
 
-/datum/design/brute_clothing/boulder/unggoy_methane_red
+/datum/design/brute_clothing_boulder/unggoy_methane_red
 	name = "red Unggoy internal methane tank"
 	id = "unggoy_methane_red"
 	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 10)
 	build_path = /obj/item/weapon/tank/methane/unggoy_internal/blue/empty
 
-/datum/design/brute_clothing/boulder/tank_red
+/datum/design/brute_clothing_boulder/tank_red
 	name = "red tank"
 	id = "tank_red"
 	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 10)
 	build_path = /obj/item/weapon/tank/methane/red/empty
 
-/datum/design/brute_clothing/boulder/unggoy_harness_red
+/datum/design/brute_clothing_boulder/unggoy_harness_red
 	name = "red Unggoy combat harness"
 	id = "unggoy_harness_red"
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "cloth" = 15, "plasteel" = 20)
