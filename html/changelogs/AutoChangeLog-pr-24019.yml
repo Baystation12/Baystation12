@@ -1,4 +1,0 @@
-author: "WhiteHusky"
-delete-after: True
-changes: 
-  - rscadd: "You can now print receipts on pending, approved, and archived orders."
