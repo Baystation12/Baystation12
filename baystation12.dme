@@ -1632,6 +1632,8 @@
 #include "code\modules\halo\trade\trade_item.dm"
 #include "code\modules\halo\trade\trade_items\ammo.dm"
 #include "code\modules\halo\trade\trade_items\ammo_unsc.dm"
+#include "code\modules\halo\trade\trade_items\bars.dm"
+#include "code\modules\halo\trade\trade_items\coins.dm"
 #include "code\modules\halo\trade\trade_items\crops.dm"
 #include "code\modules\halo\trade\trade_items\innie.dm"
 #include "code\modules\halo\trade\trade_items\ore.dm"
