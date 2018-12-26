@@ -137,6 +137,7 @@
 	icon_state = "gravhammer"
 	item_state = "blank"
 	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
 	force = 65
 	edge = 0
 	sharp = 0
