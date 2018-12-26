@@ -176,6 +176,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob, v
 	else
 		var/obj/item/weapon/spacecash/bundle/bundle = new (spawnloc)
 		bundle.currency = currency_name
+		bundle.icon_state_base = currency_name
 		bundle.worth = sum
 		bundle.update_icon()
 		if (ishuman(human_user) && !human_user.get_active_hand())
