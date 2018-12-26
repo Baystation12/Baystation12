@@ -147,7 +147,7 @@
 	if(get_dist(A,user) > 1)
 		return
 
-	var/atom/throw_target = get_edge_target_turf(A, get_dir(A, get_step_away(src, A)))
+	var/atom/throw_target = get_edge_target_turf(A, get_dir(user, A))
 	if(istype(A, /atom/movable))
 		var/atom/movable/AM = A
 		AM.throw_at(throw_target, 6, 4, user)
