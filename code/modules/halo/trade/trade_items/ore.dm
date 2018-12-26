@@ -20,31 +20,31 @@
 	category = "ore"
 	quantity = 10
 	value = 10
-	trader_weight = 1
+	trader_weight = 0
 
 /datum/trade_item/iron
 	name = "iron ore"
 	item_type = /obj/item/weapon/ore/iron
 	category = "ore"
-	quantity = 10
+	quantity = 0
 	value = 25
-	trader_weight = 1
+	trader_weight = 0
 
 /datum/trade_item/silver
 	name = "native silver ore"
 	item_type = /obj/item/weapon/ore/silver
 	category = "ore"
-	quantity = 5
+	quantity = 0
 	value = 50
-	trader_weight = 1
+	trader_weight = 0
 
 /datum/trade_item/gold
 	name = "native gold ore"
 	item_type = /obj/item/weapon/ore/gold
 	category = "ore"
-	quantity = 5
+	quantity = 0
 	value = 50
-	trader_weight = 1
+	trader_weight = 0
 
 /datum/trade_item/platinum
 	name = "native platinum ore"

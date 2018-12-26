@@ -59,11 +59,18 @@
 
 		//create the object and pass it over
 		var/obj/O = new D.item_type(M.loc)
+		var/trade_amount = 1
+		if(istype(O,/obj/item/stack))
+			var/obj/item/stack/S = O
+			//this will round up the amount to a full stack if the trader doesnt have enough
+			//im aware this creates a sort of exploit, but there is very little benefit to the players and it saves me a headache
+			trade_amount = S.max_amount
+			S.amount = trade_amount
 		if(!istype(O,/obj/structure) && !istype(O,/obj/machinery))
 			M.put_in_hands(O)
 
 		//update the inventory
-		D.quantity -= 1
+		D.quantity -= min(trade_amount, D.quantity)
 		D.value = round(D.value * 1.05)		//price goes up a little
 		update_trade_item_ui(D)
 

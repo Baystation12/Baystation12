@@ -50,3 +50,11 @@
 	quantity = 0
 	value = 150
 	trader_weight = 0
+
+/datum/trade_item/coin_platinum
+	name = "platinum coin"
+	item_type = /obj/item/weapon/coin/platinum
+	category = "ore"
+	quantity = 0
+	value = 50
+	trader_weight = 0
