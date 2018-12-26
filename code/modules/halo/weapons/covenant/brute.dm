@@ -141,7 +141,7 @@
 	edge = 0
 	sharp = 0
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
-	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer")
+	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer", slot_back_str = "back_hammer")
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
 	if(get_dist(A,user) > 1)
@@ -186,7 +186,7 @@
 	force = 45
 	edge = 1
 	sharp = 1
-	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot")
+	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
