@@ -18,10 +18,13 @@
 
 /obj/effect/landmark/biome/lava_waste
 	name = "lava waste doodad generator"
-	skip_chance = 98
+	skip_chance = 97
 	atom_types = list(\
 		/obj/effect/rocks/small = 8,\
 		/obj/effect/rocks = 2,\
 		/obj/structure/geyser/toxic_gas = 1,\
-		/obj/structure/geyser/volcanic_gas = 1\
+		/obj/structure/geyser/volcanic_gas = 1,\
+		/mob/living/simple_animal/hostile/diyaab = 1,\
+		/mob/living/simple_animal/hostile/shantak = 1,\
+		/mob/living/simple_animal/hostile/samak = 1\
 	)
