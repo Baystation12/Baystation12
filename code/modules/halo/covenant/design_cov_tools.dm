@@ -1,6 +1,77 @@
 
 
 
+/* MINING */
+
+/datum/design/cov_tool/pickaxe_steel
+	name = "steel pickaxe"
+	id = "cov_steel_pickaxe"
+	materials = list(DEFAULT_WALL_MATERIAL = 15, "wood" = 30)
+	build_path = /obj/item/weapon/pickaxe/steel
+
+/datum/design/cov_tool/pickaxe_silver
+	name = "silver pickaxe"
+	id = "cov_silver_pickaxe"
+	materials = list("silver" = 15, "wood" = 30)
+	build_path = /obj/item/weapon/pickaxe/silver
+
+/datum/design/cov_tool/pickaxe_gold
+	name = "gold pickaxe"
+	id = "cov_gold_pickaxe"
+	materials = list("gold" = 15, "wood" = 30)
+	build_path = /obj/item/weapon/pickaxe/gold
+
+/datum/design/cov_tool/pickaxe_diamond
+	name = "diamond pickaxe"
+	id = "cov_diamond_pickaxe"
+	materials = list("diamond" = 15, "wood" = 30)
+	build_path = /obj/item/weapon/pickaxe/diamond
+
+
+/datum/design/cov_tool/drill
+	name = "mining drill"
+	id = "cov_drill"
+	materials = list(DEFAULT_WALL_MATERIAL = 30, "plasteel" = 10)
+	build_path = /obj/item/weapon/pickaxe
+	components = list("nitrogen gas packet" = /obj/item/gas_packet/nitrogen)
+
+/datum/design/cov_tool/adv_drill
+	name = "advanced mining drill"
+	id = "cov_adv_drill"
+	materials = list(DEFAULT_WALL_MATERIAL = 30, "plasteel" = 10, "phglass" = 15)
+	build_path = /obj/item/weapon/pickaxe/drill
+	components = list("nitrogen gas packet" = /obj/item/gas_packet/nitrogen)
+
+/datum/design/cov_tool/sonic_jackhammer
+	name = "sonic jackhammer"
+	id = "cov_jackhammer"
+	materials = list("plasteel" = 30, "duridium" = 10, "phglass" = 15)
+	build_path = /obj/item/weapon/pickaxe/jackhammer
+	components = list("nitrogen gas packet" = /obj/item/gas_packet/nitrogen)
+
+/datum/design/cov_tool/diamond_drill
+	name = "diamond tipped mining drill"
+	id = "cov_diamond_drill"
+	materials = list("duridium" = 30, "osmium-carbide plasteel" = 10, "diamond" = 15)
+	build_path = /obj/item/weapon/pickaxe/diamonddrill
+	components = list("covenant power cell" = /obj/item/weapon/cell/covenant, "nitrogen gas packet" = /obj/item/gas_packet/nitrogen)
+
+/datum/design/cov_tool/plasmacutter
+	name = "plasma cutter"
+	id = "cov_plasma_cutter"
+	materials = list("duridium" = 15, "osmium-carbide plasteel" = 19, "nanolaminate" = 5)
+	build_path = /obj/item/weapon/pickaxe/plasmacutter
+	components = list("covenant power cell" = /obj/item/weapon/cell/covenant, "plasma core" = /obj/item/plasma_core)
+
+/datum/design/cov_tool/plasma_drill
+	name = "plasma drill"
+	id = "cov_plasma_drill"
+	materials = list("duridium" = 30, "osmium-carbide plasteel" = 15, "nanolaminate" = 10)
+	build_path = /obj/item/weapon/pickaxe/plasma_drill
+	components = list("covenant power cell" = /obj/item/weapon/cell/covenant, "plasma core" = /obj/item/plasma_core, "crystal matrix" = /datum/design/cov_component/crystalmatrix)
+
+
+
 /* MISC */
 
 /datum/design/cov_tool/beaker
@@ -10,7 +81,7 @@
 	build_path = /obj/item/weapon/reagent_containers/glass/beaker
 
 /datum/design/cov_tool/bucket
-	name = "bucket"
+	name = "steel bucket"
 	id = "cov_bucket"
 	materials = list(DEFAULT_WALL_MATERIAL = 25)
 	build_path = /obj/item/weapon/reagent_containers/glass/bucket

@@ -184,6 +184,8 @@ var/global/list/mining_floors = list()
 			return
 
 		var/obj/item/weapon/pickaxe/P = W
+		if(!P.can_drill())
+			return
 		if(last_act + P.digspeed > world.time)//prevents message spam
 			return
 		last_act = world.time
