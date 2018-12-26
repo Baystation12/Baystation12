@@ -34,6 +34,25 @@
 	build_path = /obj/item/clothing/under/unggoy_internal
 
 
+/datum/design/brute_clothing/helm_minor
+	name = "Jiralhanae minor helm"
+	id = "brute_helmminor"
+	materials = list(DEFAULT_WALL_MATERIAL = 30, "cloth" = 5)
+	build_path = /obj/item/clothing/suit/armor/jiralhanae
+
+/datum/design/brute_clothing/helm_major
+	name = "Jiralhanae major helm"
+	id = "brute_helmmajor"
+	materials = list("plasteel" = 30, DEFAULT_WALL_MATERIAL = 15, "cloth" = 5, "osmium-carbide plasteel" = 5)
+	build_path = /obj/item/clothing/suit/armor/jiralhanae/major
+
+/datum/design/brute_clothing/helm_captain
+	name = "Jiralhanae captain helm"
+	id = "brute_helmcaptain"
+	materials = list("duridium" = 30, "osmium-carbide plasteel" = 15, "cloth" = 5)
+	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain
+
+
 
 /* RAM CLAN */
 
@@ -60,25 +79,6 @@
 	name = "blue Jiralhanae captain armour"
 	id = "brute_armourcaptain_blue"
 	materials = list("duridium" = 50, "osmium-carbide plasteel" = 30, "cloth" = 15)
-	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain/blue
-
-
-/datum/design/brute_clothing/ram/helm_minor
-	name = "blue Jiralhanae minor helm"
-	id = "brute_helmminor_blue"
-	materials = list(DEFAULT_WALL_MATERIAL = 30, "cloth" = 5)
-	build_path = /obj/item/clothing/suit/armor/jiralhanae/blue
-
-/datum/design/brute_clothing/ram/helm_major
-	name = "blue Jiralhanae major helm"
-	id = "brute_helmmajor_blue"
-	materials = list("plasteel" = 30, DEFAULT_WALL_MATERIAL = 15, "cloth" = 5, "osmium-carbide plasteel" = 5)
-	build_path = /obj/item/clothing/suit/armor/jiralhanae/major/blue
-
-/datum/design/brute_clothing/ram/helm_captain
-	name = "blue Jiralhanae captain helm"
-	id = "brute_helmcaptain_blue"
-	materials = list("duridium" = 30, "osmium-carbide plasteel" = 15, "cloth" = 5)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain/blue
 
 
@@ -127,25 +127,6 @@
 	name = "red Jiralhanae captain armour"
 	id = "brute_armourcaptain_red"
 	materials = list("duridium" = 50, "osmium-carbide plasteel" = 30, "cloth" = 15)
-	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain/red
-
-
-/datum/design/brute_clothing/boulder/helm_minor
-	name = "red Jiralhanae minor helm"
-	id = "brute_helmminor_red"
-	materials = list(DEFAULT_WALL_MATERIAL = 30, "cloth" = 5)
-	build_path = /obj/item/clothing/suit/armor/jiralhanae/red
-
-/datum/design/brute_clothing/boulder/helm_major
-	name = "red Jiralhanae major helm"
-	id = "brute_helmmajor_red"
-	materials = list("plasteel" = 30, DEFAULT_WALL_MATERIAL = 15, "cloth" = 5, "osmium-carbide plasteel" = 5)
-	build_path = /obj/item/clothing/suit/armor/jiralhanae/major/red
-
-/datum/design/brute_clothing/boulder/helm_captain
-	name = "red Jiralhanae captain helm"
-	id = "brute_helmcaptain_red"
-	materials = list("duridium" = 30, "osmium-carbide plasteel" = 15, "cloth" = 5)
 	build_path = /obj/item/clothing/suit/armor/jiralhanae/captain/red
 
 
