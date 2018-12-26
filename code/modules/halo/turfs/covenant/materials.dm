@@ -101,15 +101,15 @@
 
 /material/kemocite
 	name = "kemocite"
-	display_name = "refined kemocite"
+	display_name = "compressed kemocite"
 	shard_can_repair = 0 //I doubt you can melt nanolaminate with a hand welder.
 	icon_base = "kemocite"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	stack_type = /obj/item/stack/material/kemocite
 
 /obj/item/stack/material/kemocite
-	name = "refined kemocite"
-	singular_name = "refined kemocite ingots"
+	name = "compressed kemocite"
+	singular_name = "compressed kemocite ingots"
 	icon = 'code/modules/halo/icons/materials/covenant/materials.dmi'
 	icon_state = "kemocite_ingot"
 	default_type = "kemocite"

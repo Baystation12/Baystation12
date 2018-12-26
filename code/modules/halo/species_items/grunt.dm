@@ -52,6 +52,7 @@
 
 /obj/item/clothing/mask/rebreather/small
 	name = "Small Unggoy Rebreather Mask"
+	desc = "A breathing device fitted for Unggoy, who breathe a methane atmospheric mix."
 	icon_state = "rebreather_small"
 	body_parts_covered = FACE
 	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
