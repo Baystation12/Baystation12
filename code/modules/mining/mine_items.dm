@@ -76,8 +76,8 @@
 /obj/item/weapon/pickaxe/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, repair_material))
 		var/obj/item/stack/material/S = W
-		var/obj/item/stack/material/new_stack = S.split(10)
-		durability += new_stack.amount * 2
+		var/obj/item/stack/material/new_stack = S.split(5)
+		durability += new_stack.amount * 4
 		qdel(new_stack)
 		if(S.amount <= 0)
 			user.drop_item()
