@@ -80,7 +80,7 @@
 	icon_state = "methanetank_green"
 	item_state_slots = list(slot_back_str = "methanetank_green_back", slot_l_hand_str = "methanetank_green", slot_r_hand_str = "methanetank_green")
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	var/starting_pressure = TANK_LEAK_PRESSURE * 0.9
+	var/starting_pressure = 1
 
 /obj/item/weapon/tank/methane/red
 	icon_state = "methanetank_red"
@@ -101,7 +101,7 @@
 /obj/item/weapon/tank/methane/New()
 	..()
 	if(starting_pressure > 0)
-		air_contents.adjust_gas("methane", starting_pressure)
+		air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /obj/item/weapon/tank/methane/unggoy_internal
 	name = "Unggoy methane tank"
