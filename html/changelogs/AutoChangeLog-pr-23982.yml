@@ -1,0 +1,8 @@
+author: "Toriate"
+delete-after: True
+changes: 
+  - tweak: "RCD now carries 120 matter units at max. Small matter cartridges give 30 units, while large ones give 120."
+  - rscadd: "Rapid Crossbow Device added. Craft by screwdrivering a RCD and then slapping a fully assembled crossbow frame into it."
+  - imageadd: "New RCD sprites in tools.dmi, made by yours truly. Originally made for Eris."
+  - imageadd: "New Matter Cartridge sprites, based off /tg/'s."
+  - imagedel: "Old RCD sprites deleted."
