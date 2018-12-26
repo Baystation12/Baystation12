@@ -22,8 +22,8 @@
 			qdel(O)
 
 	M.visible_message("<span class='info'>[M] exchanges items with [src]</span>",\
-		"<span class='info'>You give [O] to [src] who gives you a bundle of credits worth cR-[worth].</span>")
-	spawn_money(worth, M.loc, M)
+		"<span class='info'>You give [O] to [src] who gives you a bundle of [accepted_currency] worth [worth].</span>")
+	spawn_money(worth, M.loc, M, accepted_currency)
 	src.playsound_local(src.loc, "rustle", 100, 1)
 
 /mob/living/simple_animal/npc/proc/try_list_for_sale(var/obj/O)
@@ -41,12 +41,14 @@
 	var/obj/item/weapon/spacecash/bundle/B = M.l_hand
 	if(!B || !istype(B))
 		B = M.r_hand
+	if(!B || !istype(B))
+		return
 
 	if(B.currency != accepted_currency)
 		var/user_msg = "<span class='game say'><span class='name'>[src.name]</span> whispers to you, <span class='message emote'><span class='body'>\"I only accept [accepted_currency]\"</span></span></span>"
 		M.visible_message("<span class='info'>[src] whispers something to [M].</span>", user_msg)
 	else if(!B || !istype(B) || B.worth < value)
-		var/money_phrases = list("Show me the cR-[value].","Where is the cash? cR-[value]","That's not enough, you'd be out of pocket cR-[value]","I don't do credit. That's cR-[value]")
+		var/money_phrases = list("Show me the cR-[value].","Where is the cash? [value]","That's not enough, you'd be out of pocket cR-[value]","I don't do lending. That's [value]")
 		var/user_msg = "<span class='game say'><span class='name'>[src.name]</span> whispers to you, <span class='message emote'><span class='body'>\"[pick(money_phrases)]\"</span></span></span>"
 		M.visible_message("<span class='info'>[src] whispers something to [M].</span>", user_msg)
 	else
@@ -69,3 +71,5 @@
 		M.visible_message("<span class='info'>[M] exchanges items with [src]</span>",\
 			"<span class='info'>You split off cR-[value] to [src] who hands you [O].</span>")
 		src.playsound_local(src.loc, "rustle", 100, 1)
+
+		return 1

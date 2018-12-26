@@ -62,3 +62,18 @@
 	currency = "gekz"
 	icon_state = "gekz1000"
 	icon_state_base = "gekz"
+
+/obj/item/weapon/spacecash/bundle/random
+	name = "a random bundle of cash"
+	icon_state = "cash100"
+	var/amount_lower = 5
+	var/amount_upper = 95
+
+/obj/item/weapon/spacecash/bundle/random/New()
+	. = ..()
+	worth = rand(amount_lower, amount_upper)
+	update_icon()
+
+/obj/item/weapon/spacecash/bundle/random/gekz
+	currency = "gekz"
+	icon_state = "gekz100"

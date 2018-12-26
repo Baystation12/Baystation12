@@ -108,7 +108,7 @@
 	if(!worth)
 		user.drop_from_inventory(src)
 	if(amount in list(1000,500,200,100,50,20,1))
-		var/cashtype = text2path("/obj/item/weapon/spacecash/bundle/c[amount]")
+		var/cashtype = text2path("/obj/item/weapon/spacecash/bundle/[currency][amount]")
 		var/obj/cash = new cashtype (user.loc, currency)
 		. = cash
 	else
@@ -119,62 +119,63 @@
 	if(!worth)
 		qdel(src)
 
-/obj/item/weapon/spacecash/bundle/c1
+/obj/item/weapon/spacecash/bundle/credits1
 	name = "1 credit"
 	icon_state = "spacecash1"
 	desc = "It's worth 1 credit."
 	worth = 1
 
-/obj/item/weapon/spacecash/bundle/c10
+/obj/item/weapon/spacecash/bundle/credits10
 	name = "10 credits"
 	icon_state = "spacecash10"
 	desc = "It's worth 10 credits."
 	worth = 10
 
-/obj/item/weapon/spacecash/bundle/c20
+/obj/item/weapon/spacecash/bundle/credits20
 	name = "20 credits"
 	icon_state = "spacecash20"
 	desc = "It's worth 20 credits."
 	worth = 20
 
-/obj/item/weapon/spacecash/bundle/c50
+/obj/item/weapon/spacecash/bundle/credits50
 	name = "50 credits"
 	icon_state = "spacecash50"
 	desc = "It's worth 50 credits."
 	worth = 50
 
-/obj/item/weapon/spacecash/bundle/c100
+/obj/item/weapon/spacecash/bundle/credits100
 	name = "100 credits"
 	icon_state = "spacecash100"
 	desc = "It's worth 100 credits."
 	worth = 100
 
-/obj/item/weapon/spacecash/bundle/c200
+/obj/item/weapon/spacecash/bundle/credits200
 	name = "200 credits"
 	icon_state = "spacecash200"
 	desc = "It's worth 200 credits."
 	worth = 200
 
-/obj/item/weapon/spacecash/bundle/c500
+/obj/item/weapon/spacecash/bundle/credits500
 	name = "500 credits"
 	icon_state = "spacecash500"
 	desc = "It's worth 500 credits."
 	worth = 500
 
-/obj/item/weapon/spacecash/bundle/c1000
+/obj/item/weapon/spacecash/bundle/credits1000
 	name = "1000 credits"
 	icon_state = "spacecash1000"
 	desc = "It's worth 1000 credits."
 	worth = 1000
 
-proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
+proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob, var/currency_name = "credits")
 	if(sum in list(1000,500,200,100,50,20,10,1))
-		var/cash_type = text2path("/obj/item/weapon/spacecash/bundle/c[sum]")
+		var/cash_type = text2path("/obj/item/weapon/spacecash/bundle/[currency_name][sum]")
 		var/obj/cash = new cash_type (usr.loc)
 		if(ishuman(human_user) && !human_user.get_active_hand())
 			human_user.put_in_hands(cash)
 	else
 		var/obj/item/weapon/spacecash/bundle/bundle = new (spawnloc)
+		bundle.currency = currency_name
 		bundle.worth = sum
 		bundle.update_icon()
 		if (ishuman(human_user) && !human_user.get_active_hand())
