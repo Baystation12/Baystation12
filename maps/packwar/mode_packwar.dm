@@ -30,9 +30,12 @@
 	var/available_murmillos = 0
 	var/available_defenders = 0
 	var/available_snipers = 0
+	var/respawn_time = 1.5 MINUTES
 
 /datum/game_mode/packwar/post_setup()
 	. = ..()
+
+	time_next_mercenary_ship = mercenary_interval_lower
 
 	//grab the two chieftains
 	var/datum/job/boulder_chief = job_master.occupations_by_title["Boulder Clan Chieftain"]
@@ -132,4 +135,4 @@
 			"Clan Barracks", radio_channel, "Sangheili")
 
 /datum/game_mode/packwar/get_respawn_time()
-	return 1 MINUTE
+	return respawn_time
