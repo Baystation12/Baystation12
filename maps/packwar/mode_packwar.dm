@@ -130,3 +130,6 @@
 		GLOB.global_headset.autosay(\
 			"[character.name], [job] has returned from wandering in the wilderness to fight for the clan.", \
 			"Clan Barracks", radio_channel, "Sangheili")
+
+/datum/game_mode/packwar/get_respawn_time()
+	return 1 MINUTE
