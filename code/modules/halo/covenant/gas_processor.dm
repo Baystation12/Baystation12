@@ -7,6 +7,7 @@
 	anchored = 1
 	density = 1
 	volume = 1000
+	layer = OBJ_LAYER + 0.1
 	var/max_pressure = TANK_LEAK_PRESSURE * 0.9
 	var/list/gas_inventory = list()
 	var/held_steel = 0
