@@ -45,6 +45,18 @@
 	busy_noises = list("whirrs!")
 	design_type_parent = /datum/design/cov_component
 
+/obj/machinery/item_manufacturer/armour
+	name = "armour assembly forge"
+	design_type_parent = /datum/design/brute_clothing
+
+/obj/machinery/item_manufacturer/armour/boulderclan
+	name = "armour assembly forge"
+	design_type_parent = /datum/design/brute_clothing/boulder
+
+/obj/machinery/item_manufacturer/armour/ramclan
+	name = "armour assembly forge"
+	design_type_parent = /datum/design/brute_clothing/ram
+
 /obj/machinery/item_manufacturer/tools
 	name = "tool manufacturer"
 	design_type_parent = /datum/design/cov_tool
