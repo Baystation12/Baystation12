@@ -424,13 +424,9 @@ var/global/list/mining_floors = list()
 		else if(mineral_name == "crystal")
 			//special handling for crystal caves
 			var/crystal_type = pick(/obj/structure/crystal_deposit,/obj/structure/crystal_deposit/pink,/obj/structure/crystal_deposit/orange)
-			//spawn(10)
-				//world << "generating [crystal_type] cave at ([x],[y])"
 			var/cave_size = 4
 			for(var/turf/simulated/mineral/T in circlerange(src, cave_size))
 				var/chance = 25 * (cave_size - get_dist(T,src)) + 50
-				//spawn(10)
-					//world << "	dist:[get_dist(T,src)] chance:[chance]%"
 				if(prob(chance))
 					T.ChangeTurf(T.mined_turf)
 					if(prob(20))
