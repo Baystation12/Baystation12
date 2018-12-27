@@ -25,7 +25,7 @@
 	var/detected_materials = "None"
 	var/detected_components = "None"
 	var/list/busy_noises = list("clangs!","bangs!","whines!","grinds!","whirrs!")
-	var/list/design_type_parents = list(/datum/design/brute_weapon)
+	var/list/design_type_parents = list(/datun/craft_blueprint/brute_weapon)
 
 /obj/machinery/item_manufacturer/covenant
 	name = "weapon assembly forge"
@@ -34,7 +34,7 @@
 	icon_state_idle = "console"
 	icon_state_active = "console-active"
 	busy_noises = list("whirrs!")
-	design_type_parents = list(/datum/design/cov_weapon)
+	design_type_parents = list(/datun/craft_blueprint/cov_weapon)
 
 /obj/machinery/item_manufacturer/component
 	name = "component assembly forge"
@@ -43,24 +43,24 @@
 	icon_state_idle = "console"
 	icon_state_active = "console-active"
 	busy_noises = list("whirrs!")
-	design_type_parents = list(/datum/design/cov_component)
+	design_type_parents = list(/datun/craft_blueprint/cov_component)
 
 /obj/machinery/item_manufacturer/armour
 	name = "armour assembly forge"
-	design_type_parents = list(/datum/design/brute_clothing)
+	design_type_parents = list(/datun/craft_blueprint/brute_clothing)
 
 /obj/machinery/item_manufacturer/armour/boulderclan
-	design_type_parents = list(/datum/design/brute_clothing, /datum/design/brute_clothing_boulder)
+	design_type_parents = list(/datun/craft_blueprint/brute_clothing, /datun/craft_blueprint/brute_clothing_boulder)
 
 /obj/machinery/item_manufacturer/armour/ramclan
-	design_type_parents = list(/datum/design/brute_clothing, /datum/design/brute_clothing_ram)
+	design_type_parents = list(/datun/craft_blueprint/brute_clothing, /datun/craft_blueprint/brute_clothing_ram)
 
 /obj/machinery/item_manufacturer/tools
 	name = "tool manufacturer"
 	icon_state = "experiment-open"
 	icon_state_idle = "experiment-open"
 	icon_state_active = "experiment"
-	design_type_parents = list(/datum/design/cov_tool)
+	design_type_parents = list(/datun/craft_blueprint/cov_tool)
 
 /obj/machinery/item_manufacturer/New()
 	. = ..()
@@ -74,7 +74,7 @@
 		//chat spam i know... this machine is meant to be loud and crude
 		if(busy_noises.len)
 			src.visible_message("<span class='info'>[src] [pick(busy_noises)]</span>")
-		var/datum/design/building = building_queue[1]
+		var/datun/craft_blueprint/building = building_queue[1]
 		if(world.time > start_build_time + building.time SECONDS)
 			//finish building
 			building_queue.Cut(1,2)
@@ -89,7 +89,7 @@
 			else
 				icon_state = icon_state_idle
 
-/obj/machinery/item_manufacturer/proc/add_design(var/datum/design/new_design)
+/obj/machinery/item_manufacturer/proc/add_design(var/datun/craft_blueprint/new_design)
 	known_designs[new_design.name] = new_design
 	var/req_materials = ""
 	for(var/cur_material in new_design.materials)
@@ -100,7 +100,7 @@
 
 /obj/machinery/item_manufacturer/proc/attempt_build_design(var/design_name, var/mob/living/user)
 	//get the design
-	var/datum/design/chosen_design = known_designs[design_name]
+	var/datun/craft_blueprint/chosen_design = known_designs[design_name]
 
 	//check for materials
 	if(locate_materials(chosen_design, 0))
@@ -116,7 +116,7 @@
 	else
 		to_chat(user, "<span class='warning'>Insufficient ingredients to manufacture [design_name].</span>")
 
-/obj/machinery/item_manufacturer/proc/locate_materials(var/datum/design/chosen_design, var/consume_mats = 0)
+/obj/machinery/item_manufacturer/proc/locate_materials(var/datun/craft_blueprint/chosen_design, var/consume_mats = 0)
 
 	var/list/materials_to_locate = chosen_design.materials.Copy()
 	var/list/components_to_locate = chosen_design.components.Copy()
