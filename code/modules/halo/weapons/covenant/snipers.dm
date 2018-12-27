@@ -49,6 +49,7 @@
 	max_shots = 5
 	recharge_time = 2 SECONDS
 	projectile_type = /obj/item/projectile/covenant/beamrifle
+	one_hand_penalty = -1
 
 	var/next_allowed_fire
 

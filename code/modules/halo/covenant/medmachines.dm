@@ -1,10 +1,10 @@
 
 /obj/machinery/chemical_dispenser/full/covenant
-	icon = 'medmachines.dmi'
+	icon = 'machines.dmi'
 	icon_state = "covie_medicine_dispenser"
 
 /obj/machinery/organ_printer/flesh/covenant
-	icon = 'medmachines.dmi'
+	icon = 'machines.dmi'
 	icon_state = "covenant_organ_printer"
 	/*
 	products = list(

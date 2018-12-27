@@ -1,7 +1,9 @@
 
 /mob/living/simple_animal/npc
 	name = "NPC"
-	desc = "Does what he wants cause a pirate is free."
+	desc = "Surprisingly, this one is neither wearing a red shirt nor called Bob."
+	icon = 'code/modules/halo/NPC/npc.dmi'
+	icon_state = "Human_m"
 	var/npc_job_title
 	speak_chance = 0
 	turns_per_move = 5
@@ -21,6 +23,9 @@
 	var/list/suits = list()
 	var/suit_chance = 25
 
+	var/species_type = /datum/species/human
+	var/datum/species/my_species
+
 	unsuitable_atoms_damage = 15
 	var/corpse = /obj/effect/landmark/mobcorpse/pirate
 	var/weapon1 = /obj/item/weapon/melee/energy/sword/pirate
@@ -39,6 +44,7 @@
 	var/total_trade_weight = 0
 	//
 	var/list/interact_inventory = list()
+	var/accepted_currency = "credits"
 
 	var/datum/controller/process/trade_controller/trade_controller_debug
 

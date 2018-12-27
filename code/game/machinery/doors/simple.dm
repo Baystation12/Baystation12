@@ -29,7 +29,8 @@
 	if(!icon_base)
 		icon_base = material.door_icon_base
 	hitsound = material.hitsound
-	name = "[material.display_name] door"
+	if(name == "door")
+		name = "[material.display_name] door"
 	color = material.icon_colour
 	if(initial_lock_value)
 		locked = initial_lock_value

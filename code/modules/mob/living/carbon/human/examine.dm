@@ -7,6 +7,7 @@
 	var/skipears = 0
 	var/skipeyes = 0
 	var/skipface = 0
+	var/skipback = 0
 
 	//exosuits and helmets obscure our view and stuff.
 	if(wear_suit)
@@ -14,6 +15,7 @@
 		skipsuitstorage = wear_suit.flags_inv & HIDESUITSTORAGE
 		skipjumpsuit = wear_suit.flags_inv & HIDEJUMPSUIT
 		skipshoes = wear_suit.flags_inv & HIDESHOES
+		skipback = wear_suit.flags_inv & HIDEBACK
 
 	if(head)
 		skipmask = head.flags_inv & HIDEMASK
@@ -93,7 +95,7 @@
 				msg += "[T.He] [T.is] carrying \icon[s_store] \a [s_store] on [T.his] [wear_suit.name].\n"
 
 	//back
-	if(back)
+	if(back && !skipback)
 		if(back.blood_DNA)
 			msg += "<span class='warning'>[T.He] [T.has] \icon[back] [back.gender==PLURAL?"some":"a"] [(back.blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [back] on [T.his] back.</span>\n"
 		else

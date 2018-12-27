@@ -1,0 +1,39 @@
+Held steel: {{:data.held_steel}}<br>
+
+<h1>Storage Tank</h1>
+Tank volume: {{:data.volume}} Litres<br>
+Tank pressure: {{:data.pressure}} kPa<br>
+Tank capacity: {{:data.max_pressure}} kPa<br>
+{{:helper.displayBar(data.pressure, 0, data.max_pressure, '', data.fill_percent)}}<br>
+<div class='block'>
+	<div class="itemLabelNarrow" style="width:110px">Gas Name</div>
+	<div class="itemLabelNarrow" style="width:110px">Amount</div>
+	{{for data.gas_inventory}}
+		<div class="item">
+			<div class="itemContentNarrow" style="width:110px">{{:value.gasid}}</div>
+			<div class="itemContentNarrow" style="width:110px">{{:value.moles}} moles</div>
+			<div class="itemContentNarrow" style="width:400px">
+				{{:helper.link('Vent stocks', 'arrow-4-diag', {'expel_gas' : value.gasid, 'user' : data.user}, null)}}
+				{{:helper.link('Fill inserted tank', 'refresh', {'fill_holding' : value.gasid, 'user' : data.user}, null)}}
+				{{:helper.link('Process to packet', 'gear', {'make_packet' : value.gasid, 'user' : data.user}, null)}}
+			</div>
+		</div>
+	{{empty}}
+		<div class="notice">The storage tank is empty.</div>
+	{{/for}}
+</div>
+
+<h1>Inserted tank</h1>
+<div class='block'>
+	{{if data.is_holding}}
+		<div class="itemLabel" style="width:100%">{{:data.holding}}</div><br>
+			<div class="item">
+			<div class="itemContent">Volume: {{:data.holding_volume}} Litres</div><br>
+			<div class="itemContent">Pressure: {{:data.holding_pressure}} kPa</div><br>
+			<div class="itemContent">{{:helper.link('Eject', 'extlink', {'eject' : 1, 'user' : data.user})}}</div><br>
+			<div class="itemContent">{{:helper.link('Drain to tank', 'arrowreturn-1-n', {'drain_holding' : 1, 'user' : data.user})}}</div><br>
+		</div>
+	{{else}}
+		<div class="notice">No tank inserted.</div>
+	{{/if}}
+</div>

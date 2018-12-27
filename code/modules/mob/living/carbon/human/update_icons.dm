@@ -532,7 +532,7 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_s_store(var/update_icons=1)
-	if(s_store)
+	if(s_store && !(wear_suit && wear_suit.flags_inv & HIDESUITSTORAGE))
 		overlays_standing[SUIT_STORE_LAYER]	= s_store.get_mob_overlay(src,slot_s_store_str)
 	else
 		overlays_standing[SUIT_STORE_LAYER]	= null
@@ -575,6 +575,7 @@ var/global/list/damage_icon_parts = list()
 		update_inv_w_uniform(0)
 		update_inv_shoes(0)
 		update_inv_gloves(0)
+		update_inv_back(0)
 
 	update_collar(0)
 
@@ -592,7 +593,7 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
-	if(back)
+	if(back && !(wear_suit && wear_suit.flags_inv & HIDEBACK))
 		overlays_standing[BACK_LAYER] = back.get_mob_overlay(src,slot_back_str)
 	else
 		overlays_standing[BACK_LAYER] = null

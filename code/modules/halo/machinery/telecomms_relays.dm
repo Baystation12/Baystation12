@@ -13,7 +13,7 @@
 
 /obj/machinery/telecomms/relay/long_range_emergency/Initialize()
 	. = ..()
-	freq_listening = list(halo_frequencies.eband_freq)
+	freq_listening = list(halo_frequencies.frequencies_human["EBAND"])
 
 /obj/machinery/telecomms/relay/ship_relay
 	name = "Shipboard Signal Relay"

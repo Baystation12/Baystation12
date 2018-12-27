@@ -12,7 +12,8 @@
 	siemens_coefficient = 0
 
 	breath_type = null
-	poison_type = null
+	//poison_type = null
+	poison_gases = list()
 
 	blood_color = "#515573"
 	flesh_color = "#137E8F"
