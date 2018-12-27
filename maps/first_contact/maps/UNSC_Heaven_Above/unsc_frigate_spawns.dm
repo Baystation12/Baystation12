@@ -141,6 +141,125 @@ GLOBAL_LIST_EMPTY(Operations_Specialist_spawns)
 /obj/effect/landmark/start/Operations_Specialist/New()
 	..()
 	GLOB.Operations_Specialist_spawns += loc
+
+//UNSC Heaven Above Technical Spawnpoints
+
+//Crew Chief (Technical)
+GLOBAL_LIST_EMPTY(Crew_Chief_technical_spawns)
+
+/datum/spawnpoint/Crew_Chief_technical
+	display_name = "UNSC Crew Chief (technical) Spawn"
+	restrict_job = list("Crew Chief (technical)")
+
+/datum/spawnpoint/Crew_Chief_technical/New()
+	..()
+	turfs = GLOB.Crew_Chief_technical_spawns
+
+/obj/effect/landmark/start/Crew_Chief_technical
+	name = "UNSC Crew Chief (technical) Spawn"
+
+/obj/effect/landmark/start/Crew_Chief_technical/New()
+	..()
+	GLOB.Crew_Chief_technical_spawns += loc
+
+//Technician
+
+GLOBAL_LIST_EMPTY(Technician_spawns)
+
+/datum/spawnpoint/Technician
+	display_name = "UNSC Technician Spawn"
+	restrict_job = list("Technician")
+
+/datum/spawnpoint/Technician/New()
+	..()
+	turfs = GLOB.Technician_spawns
+
+/obj/effect/landmark/start/Technician
+	name = "UNSC Technician Spawn"
+
+/obj/effect/landmark/start/Technician/New()
+	..()
+	GLOB.Technician_spawns += loc
+
+//UNSC Heaven Above Naval Security Spawnpoints
+
+//Master At Arms
+
+GLOBAL_LIST_EMPTY(Master_At_Arms_spawns)
+
+/datum/spawnpoint/Master_At_Arms
+	display_name = "UNSC Master-At-Arms Spawn"
+	restrict_job = list("Master-At-Arms")
+
+/datum/spawnpoint/Master_At_Arms/New()
+	..()
+	turfs = GLOB.Master_At_Arms_spawns
+
+/obj/effect/landmark/start/Master_At_Arms
+	name = "UNSC Master-At-Arms Spawn"
+
+/obj/effect/landmark/start/Master_At_Arms/New()
+	..()
+	GLOB.Master_At_Arms_spawns += loc
+
+//Naval Security
+
+GLOBAL_LIST_EMPTY(security_spawns)
+
+/datum/spawnpoint/security
+	display_name = "UNSC Naval Security Officer Spawn"
+	restrict_job = list("Naval Security Officer")
+
+/datum/spawnpoint/security/New()
+	..()
+	turfs = GLOB.security_spawns
+
+/obj/effect/landmark/start/security
+	name = "UNSC Naval Security Officer Spawn"
+
+/obj/effect/landmark/start/security/New()
+	..()
+	GLOB.security_spawns += loc
+
+//UNSC Heaven Above Tactical Spawnpoints
+
+//Gunnery Crew Chief
+GLOBAL_LIST_EMPTY(Crew_Chief_Gunnery_spawns)
+
+/datum/spawnpoint/Crew_Chief_Gunnery
+	display_name = "UNSC Crew Chief (gunnery) Spawn"
+	restrict_job = list("Crew Chief (gunnery)")
+
+/datum/spawnpoint/security/New()
+	..()
+	turfs = GLOB.Crew_Chief_Gunnery_spawns
+
+/obj/effect/landmark/start/Crew_Chief_Gunnery
+	name = "UNSC Crew Chief (gunnery) Spawn"
+
+/obj/effect/landmark/start/Crew_Chief_Gunnery/New()
+	..()
+	GLOB.Crew_Chief_Gunnery_spawns += loc
+
+//Gunnery
+
+GLOBAL_LIST_EMPTY(Gunnery_Operator_spawns)
+
+/datum/spawnpoint/Gunnery_Operator
+	display_name = "UNSC Gunnery Operator Spawn"
+	restrict_job = list("Gunnery Operator")
+
+/datum/spawnpoint/Gunnery_Operator/New()
+	..()
+	turfs = GLOB.Gunnery_Operator_spawns
+
+/obj/effect/landmark/start/Gunnery_Operator
+	name = "UNSC Gunnery Operator Spawn"
+
+/obj/effect/landmark/start/Gunnery_Operator/New()
+	..()
+	GLOB.Gunnery_Operator_spawns += loc
+
 //UNSC Heaven Above ODST Spawnpoints
 
 GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)

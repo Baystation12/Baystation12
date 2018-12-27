@@ -7,7 +7,7 @@
 	department_flag = GUNCO
 	total_positions = 1
 	spawn_positions = 1
-	spawnpoint_override = "UNSC Frigate"
+	spawnpoint_override = "UNSC Crew Chief (gunnery) Spawn"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/gunnery_chief
 	selection_color = "#cc0000"
 	req_admin_notify = 1
@@ -23,7 +23,7 @@
 	department_flag = GUN
 	total_positions = -1
 	spawn_positions = 2
-	spawnpoint_override = "UNSC Frigate"
+	spawnpoint_override = "UNSC Gunnery Operator Spawn"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/gunnery
 	selection_color = "#cc0000"
 	//job_guide = "Your responsibility is to man the ship's turrets. Unfortunately your job has no content yet but it's coming soon."
