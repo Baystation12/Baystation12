@@ -1,0 +1,34 @@
+<!-- 
+Title: Brute Manufactory Console UI
+Used In File(s): \code\modules\halo\covenant\weapon_manufactory.dm
+ -->
+ 
+<h3>Detected materials</h3>
+<div class='block'>
+	<div class="itemLabel">{{:helper.link('SCAN', 'bookmark', {'update_materials' : 1, 'user' : data.user})}}</div>
+    <div class="itemContent">{{:data.detected_materials}}</div>
+	<br>
+</div>
+
+<h3>Available manufactured items</h3>
+<div class='block'>
+    {{for data.designs_ui}}
+		<div class="item">
+			<div class="itemLabel" style="width:50%;">{{:helper.link('CONSTRUCT', 'bookmark', {'construct' : value.name, 'user' : data.user})}} {{:value.name}}</div>
+			<div class="itemContent" style="width:50%;">{{:value.req_materials}}</div>
+		</div>
+	{{empty}}
+		There are no valid designs.
+    {{/for}}
+</div>
+
+<h3>Build queue</h3>
+<div class='block'>
+    {{for data.build_queue}}
+		<div class="item">
+			<div class="itemContent">{{:value}}</div>
+		</div>
+	{{empty}}
+		Nothing is currently being manufactured.
+    {{/for}}
+</div>

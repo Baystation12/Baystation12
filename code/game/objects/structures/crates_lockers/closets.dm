@@ -25,6 +25,7 @@
 
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup
+	var/max_hold = 30
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
 	var/broken = FALSE
@@ -148,6 +149,8 @@
 	for(var/obj/item/I in loc)
 		if(I.anchored)
 			continue
+		if(src.contents.len >= max_hold)
+			break
 		var/item_size = content_size(I)
 		if(CLOSET_CHECK_TOO_BIG(item_size))
 			break

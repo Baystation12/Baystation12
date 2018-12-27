@@ -30,7 +30,7 @@
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/covenant/plasmarifle/brute
-	damage = 45
+	damage = 38
 	accuracy = 0.5
 	icon_state = "heavy_plas_cannon"
 

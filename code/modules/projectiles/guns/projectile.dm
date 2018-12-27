@@ -2,6 +2,7 @@
 #define CLEAR_CASINGS	1 //clear chambered so that the next round will be automatically loaded and fired, but don't drop anything on the floor
 #define EJECT_CASINGS	2 //drop spent casings on the ground after firing
 #define CYCLE_CASINGS	3 //cycle casings, like a revolver. Also works for multibarrelled guns
+#define CASELESS		4 //leaves no casings
 
 /obj/item/weapon/gun/projectile
 	name = "gun"
@@ -106,6 +107,8 @@
 				ammo_magazine.stored_ammo += chambered
 			else
 				loaded += chambered
+		if(CASELESS)
+			qdel(chambered)
 
 	if(handle_casings != HOLD_CASINGS)
 		chambered = null

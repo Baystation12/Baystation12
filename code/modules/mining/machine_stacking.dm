@@ -31,9 +31,12 @@
 
 	dat += text("<h1>Stacking unit console</h1><hr><table>")
 
-	for(var/stacktype in machine.stack_storage)
-		if(machine.stack_storage[stacktype] > 0)
-			dat += "<tr><td width = 150><b>[capitalize(stacktype)]:</b></td><td width = 30>[machine.stack_storage[stacktype]]</td><td width = 50><A href='?src=\ref[src];release_stack=[stacktype]'>\[release\]</a></td></tr>"
+	for(var/stacktype in machine.held_items)
+		var/obj/item/stack/S = machine.held_items[stacktype]
+		if(!S)
+			machine.held_items -= stacktype
+		else
+			dat += "<tr><td width = 150><b>[capitalize(S.name)]:</b></td><td width = 30>[S.amount]</td><td width = 50><A href='?src=\ref[src];release_stack=[stacktype]'>\[release\]</a></td></tr>"
 	dat += "</table><hr>"
 	dat += text("<br>Stacking: [machine.stack_amt] <A href='?src=\ref[src];change_stack=1'>\[change\]</a><br><br>")
 
@@ -51,11 +54,10 @@
 		machine.stack_amt = choice
 
 	if(href_list["release_stack"])
-		if(machine.stack_storage[href_list["release_stack"]] > 0)
-			var/stacktype = machine.stack_paths[href_list["release_stack"]]
-			var/obj/item/stack/material/S = new stacktype (get_turf(machine.output))
-			S.amount = machine.stack_storage[href_list["release_stack"]]
-			machine.stack_storage[href_list["release_stack"]] = 0
+		var/stacktype = href_list["release_stack"]
+		if(machine.held_items[stacktype])
+			var/obj/item/stack/material/held_stack = machine.held_items[stacktype]
+			machine.try_produce_stack(held_stack, held_stack.amount)
 
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
@@ -74,25 +76,11 @@
 	var/obj/machinery/mineral/stacking_unit_console/console
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
-	var/list/stack_storage[0]
-	var/list/stack_paths[0]
+	var/held_items = list()
 	var/stack_amt = 50; // Amount to stack before releassing
 
 /obj/machinery/mineral/stacking_machine/New()
 	..()
-
-	for(var/stacktype in subtypesof(/obj/item/stack/material))
-		var/obj/item/stack/S = stacktype
-		var/stack_name = initial(S.name)
-		stack_storage[stack_name] = 0
-		stack_paths[stack_name] = stacktype
-
-	stack_storage["glass"] = 0
-	stack_paths["glass"] = /obj/item/stack/material/glass
-	stack_storage[DEFAULT_WALL_MATERIAL] = 0
-	stack_paths[DEFAULT_WALL_MATERIAL] = /obj/item/stack/material/steel
-	stack_storage["plasteel"] = 0
-	stack_paths["plasteel"] = /obj/item/stack/material/plasteel
 
 	spawn( 5 )
 		for (var/dir in GLOB.cardinal)
@@ -108,24 +96,34 @@
 	if (src.output && src.input)
 		var/turf/T = get_turf(input)
 		for(var/obj/item/O in T.contents)
-			if(!O) return
-			if(istype(O,/obj/item/stack))
-				if(!isnull(stack_storage[O.name]))
-					stack_storage[O.name]++
-					O.loc = null
+			if(istype(O, /obj/item/stack/material))
+
+				var/obj/item/stack/material/S = O
+				var/obj/item/stack/material/held_stack
+				if(held_items[S.default_type])
+					held_stack = held_items[S.default_type]
+					held_stack.amount += S.amount
+					qdel(S)
 				else
-					O.loc = output.loc
+					held_stack = S
+					held_stack.loc = src
+					held_items[S.default_type] = held_stack
+				try_produce_stack(held_stack)
+
 			else
 				O.loc = output.loc
 
-	//Output amounts that are past stack_amt.
-	for(var/sheet in stack_storage)
-		if(stack_storage[sheet] >= stack_amt)
-			var/stacktype = stack_paths[sheet]
-			var/obj/item/stack/material/S = new stacktype (get_turf(output))
-			S.amount = stack_amt
-			stack_storage[sheet] -= stack_amt
-
-	console.updateUsrDialog()
+	if(console)
+		console.updateUsrDialog()
 	return
 
+/obj/machinery/mineral/stacking_machine/proc/try_produce_stack(var/obj/item/stack/material/held_stack, var/release_amount = stack_amt)
+	if(release_amount > 0 && held_stack.amount >= release_amount)
+		var/obj/item/stack/material/new_stack = new held_stack.stacktype(get_turf(output), release_amount)
+		new_stack.update_strings()
+		held_stack.amount -= release_amount
+		src.visible_message("\icon[src] <span class='info'>[src] releases a stack of [new_stack].</span>")
+		if(held_stack.amount <= 0)
+			held_items -= held_stack.default_type
+			qdel(held_stack)
+		return 1

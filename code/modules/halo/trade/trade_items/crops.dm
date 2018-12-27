@@ -4,6 +4,23 @@
 	category = "crops"
 	item_type = /obj/item/weapon/reagent_containers/food/snacks/grown
 	trader_weight = 0
+
+/datum/trade_item/wood
+	name = "wood planks"
+	category = "crops"
+	item_type = /obj/item/stack/material/wood
+	quantity = 20
+	value = 30
+	trader_weight = 1
+
+/datum/trade_item/cloth
+	name = "bolts of cloth"
+	category = "crops"
+	item_type = /obj/item/stack/material/cloth
+	quantity = 20
+	value = 30
+	trader_weight = 1
+
 /*
 /datum/trade_item/grown/chili
 	name = "chili"

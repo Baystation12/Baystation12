@@ -3,7 +3,7 @@
 	name = "Dirt terrain turf generator"
 
 /obj/effect/landmark/biome/dirt_turf/New()
-	atom_types = list(pick(\
+	turf_types = list(pick(\
 		/turf/unsimulated/floor/dirt_dark,\
 		/turf/unsimulated/floor/mud_light,\
 		/turf/unsimulated/floor/mud_dark,\

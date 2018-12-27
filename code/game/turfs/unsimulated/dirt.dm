@@ -10,7 +10,7 @@
 	icon_state = "mud-light"
 
 /turf/unsimulated/floor/mud_dark
-	name = "dirt"
+	name = "muddy soil"
 	icon = 'code/modules/halo/icons/turfs/seafloor.dmi'
 	icon_state = "mud-dark"
 
@@ -25,6 +25,6 @@
 	icon_state = "rock-dark"
 
 /turf/unsimulated/floor/dirt
-	name = "soil"
+	name = "dirt"
 	icon = 'code/modules/halo/icons/turfs/natureicons.dmi'
 	icon_state = "dirt"

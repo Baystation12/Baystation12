@@ -108,10 +108,8 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 		return
 	if (ticker.current_state != GAME_STATE_PLAYING)
 		return
-	var/rank = job.title
-	if(character.mind.role_alt_title)
-		rank = character.mind.role_alt_title
-	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job),character.default_language)
+
+	return ticker.mode.AnnounceLateArrival(character, job, join_message)
 
 /proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency, var/language_name)
 	GLOB.global_headset.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
