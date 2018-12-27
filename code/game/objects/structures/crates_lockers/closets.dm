@@ -25,7 +25,7 @@
 
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup
-	var/max_hold = 15
+	var/max_hold = 30
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
 	var/broken = FALSE
