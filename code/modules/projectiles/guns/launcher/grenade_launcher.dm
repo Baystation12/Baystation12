@@ -25,9 +25,9 @@
 		/obj/item/weapon/grenade/frag/shell\
 		)
 
-	var/list/blacklisted_grenades = list()/*
-		/obj/item/weapon/grenade/flashbang/clusterbang,
-		/obj/item/weapon/grenade/frag)*/
+	var/list/blacklisted_grenades = list()
+	/*/obj/item/weapon/grenade/flashbang/clusterbang,
+	/obj/item/weapon/grenade/frag)*/
 
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 

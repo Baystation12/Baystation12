@@ -119,7 +119,7 @@
 	if(ship_area)
 		for(var/mob/M in ship_area)
 			M.loc = src.loc
-			to_chat(M,"<span class='notice'>You have been ejected from the dropship as you have arrived at your destination.</notice>")
+			to_chat(M,"<span class='notice'>You have been ejected from the dropship as you have arrived at your destination.</span>")
 
 /obj/effect/landmark/mercspawn/proc/leave_planet()
 	time_leave_planet = 0

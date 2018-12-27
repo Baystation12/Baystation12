@@ -46,7 +46,7 @@
 		var/obj/item/stack/material/steel/S = I
 		user.drop_item()
 		held_steel += S.amount
-		to_chat(user, "<span class='info'>You insert [I] into [src]. It now holds [held_steel] steel sheets.<span>")
+		to_chat(user, "<span class='info'>You insert [I] into [src]. It now holds [held_steel] steel sheets.</span>")
 		qdel(I)
 
 /obj/machinery/portable_atmospherics/gas_processor/proc/drain_holding()
