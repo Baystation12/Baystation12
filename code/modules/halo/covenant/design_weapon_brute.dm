@@ -16,7 +16,7 @@
 	name = "Type-52 Mauler sidearm"
 	id = "brute_mauler"
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "plasteel" = 5, "glass" = 5)
-	build_path = /obj/item/weapon/gun/projectile/spiker
+	build_path = /obj/item/weapon/gun/projectile/mauler
 	components = list("hydrogen gas packet" = /obj/item/gas_packet/hydrogen)
 
 /datum/design/brute_weapon/brute_mauler_mag
@@ -29,7 +29,7 @@
 	name = "Type-25 Grenade Launcher"
 	id = "brute_shot"
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "osmium-carbide plasteel" = 5, "duridium" = 10)
-	build_path = /obj/item/weapon/gun/projectile/spiker
+	build_path = /obj/item/weapon/gun/launcher/grenade/brute_shot
 	components = list("hydrogen gas packet" = /obj/item/gas_packet/hydrogen)
 
 /datum/design/brute_weapon/brute_shot_gren
@@ -54,19 +54,19 @@
 	name = "chlorine grenade"
 	id = "toxgas_chlorine"
 	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
-	build_path = /obj/item/weapon/grenade/toxic_gas
+	build_path = /obj/item/weapon/grenade/toxic_gas/chlorine
 	components = list("chlorine gas packet" = /obj/item/gas_packet/chlorine)
 
 /datum/design/brute_weapon/grenade_carbonmonoxide
 	name = "carbon monoxide grenade"
 	id = "toxgas_carbmonox"
 	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
-	build_path = /obj/item/weapon/grenade/toxic_gas
+	build_path = /obj/item/weapon/grenade/toxic_gas/carbon_monodixe
 	components = list("carbon monoxide gas packet" = /obj/item/gas_packet/carbonmonoxide)
 
 /datum/design/brute_weapon/grenade_sulfurdioxide
 	name = "sulfur dioxide grenade"
 	id = "toxgas_sulfdiox"
 	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
-	build_path = /obj/item/weapon/grenade/toxic_gas
+	build_path = /obj/item/weapon/grenade/toxic_gas/sulfur_dioxide
 	components = list("sulfur dioxide gas packet" = /obj/item/gas_packet/sulfurdioxide)

@@ -17,13 +17,13 @@
 
 /datum/design/brute_clothing/unggoy_rebreather_armour
 	name = "Unggoy armoured rebreather"
-	id = "unggoy_rebreather"
+	id = "unggoy_rebreather_armour"
 	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 10,"cloth" = 5)
 	build_path = /obj/item/clothing/mask/rebreather
 
 /datum/design/brute_clothing/unggoy_thrall_jumpsuit
 	name = "Unggoy thrall jumpsuit"
-	id = "unggoy_jumpsuit"
+	id = "unggoy_jumpsuit_thrall"
 	materials = list("cloth" = 30)
 	build_path = /obj/item/clothing/under/unggoy_thrall
 
@@ -134,7 +134,7 @@
 	name = "red Unggoy internal methane tank"
 	id = "unggoy_methane_red"
 	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 10)
-	build_path = /obj/item/weapon/tank/methane/unggoy_internal/blue/empty
+	build_path = /obj/item/weapon/tank/methane/unggoy_internal/red/empty
 
 /datum/design/brute_clothing_boulder/tank_red
 	name = "red tank"

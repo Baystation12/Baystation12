@@ -10,7 +10,7 @@
 	name = "plasma core"
 	id = "cov_plasmacore"
 	materials = list("plasteel" = 30, "phglass" = 10)
-	build_path = /obj/item/crystal_matrix
+	build_path = /obj/item/plasma_core
 	components = list("helium gas packet" = /obj/item/gas_packet/helium, "covenant H-fuel package" = /obj/item/cov_fuel, "orange crystal" = /obj/item/crystal/orange, "covenant power cell" = /obj/item/weapon/cell/covenant)
 
 /datum/design/cov_component/emmodule

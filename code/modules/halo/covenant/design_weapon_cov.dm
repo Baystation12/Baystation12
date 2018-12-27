@@ -36,14 +36,14 @@
 
 /datum/design/cov_weapon/plasma_carbine
 	name = "plasma carbine"
-	id = "cov_edagger"
+	id = "cov_plascarbine"
 	materials = list("plasteel" = 75, "phglass" = 20, "duridium" = 5)
 	build_path = /obj/item/weapon/gun/projectile/type51carbine
 	components = list("plasma modulator" = /obj/item/plasma_modulator, "crystal matrix" = /obj/item/crystal_matrix, "covenant power cell" = /obj/item/weapon/cell/covenant)
 
 /datum/design/cov_weapon/beam_rifle
 	name = "plasma carbine"
-	id = "cov_edagger"
+	id = "cov_beamrifle"
 	materials = list("plasteel" = 100, "phglass" = 20, "nanolaminate" = 10)
 	build_path = /obj/item/weapon/gun/energy/beam_rifle
 	components = list("plasma modulator" = /obj/item/plasma_modulator, "plasma focus" = /obj/item/plasma_focus, "covenant power cell" = /obj/item/weapon/cell/covenant)
