@@ -346,6 +346,8 @@
 	poison_gas.set_up(reagents, 10, 0, src.loc)
 	poison_gas.start()
 	for(var/mob/living/M in range(7, src))
+		if(M.wear_mask && (M.wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
+			continue
 		M.adjustToxLoss(20)
 
 	if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
