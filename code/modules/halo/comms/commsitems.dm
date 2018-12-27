@@ -51,10 +51,9 @@
 		return
 	if(signal.data["reject"] == 1)
 		return
-		/*
+
 	if(!(signal.frequency in recieving_frequencies))
 		return
-		*/
 
 
 	//This is mostly stolen from all-in-one code, with a few small changes.
@@ -67,6 +66,9 @@
 		original.data["reject"] = 1
 
 	var/datum/radio_frequency/connection = signal.data["connection"]
+	if(!connection)
+		//connection data was sent with this signal, therefore it isnt expecting it to be rebroadcast
+		return
 
 	Broadcast_Message(signal.data["connection"], signal.data["mob"],
 					  signal.data["vmask"], signal.data["vmessage"],
@@ -79,11 +81,11 @@
 
 /obj/item/device/mobilecomms/commsbackpack/unsc
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back."
-	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME,ODST_NAME)
+	recieving_frequencies = list(TEAMCOM_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME,ODST_NAME,ONI_NAME,BERTELS_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
-	recieving_frequencies = list(CIV_NAME,EBAND_NAME)
+	recieving_frequencies = list(URFC_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie/New()
 	..()
@@ -103,7 +105,7 @@
 	return
 
 /obj/item/device/mobilecomms/commsbackpack/sec
-	recieving_frequencies = list(SEC_NAME,EBAND_NAME)
+	recieving_frequencies = list(CIV_NAME,SEC_NAME,EBAND_NAME,MED_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/sec/permanent
 	active = 1
