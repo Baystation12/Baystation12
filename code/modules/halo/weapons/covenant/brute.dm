@@ -337,7 +337,7 @@
 /obj/item/weapon/grenade/toxic_gas/New()
 	. = ..()
 	create_reagents(500)
-	reagents.add_reagent(/datum/reagent/toxin, 500)
+	reagents.add_reagent(/datum/reagent/toxin/phoron, 500)
 
 /obj/item/weapon/grenade/toxic_gas/detonate()
 	playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
@@ -345,9 +345,20 @@
 	var/datum/effect/effect/system/smoke_spread/chem/poison_gas = new()
 	poison_gas.set_up(reagents, 10, 0, src.loc)
 	poison_gas.start()
+	for(var/mob/living/M in range(7, src))
+		M.adjustToxLoss(20)
 
 	if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
 		var/mob/living/carbon/C = loc
 		C.drop_from_inventory(src)
 		C.throw_mode_off()
 	qdel(src)
+
+/obj/item/weapon/grenade/toxic_gas/chlorine
+	name = "chlorine gas grenade"
+
+/obj/item/weapon/grenade/toxic_gas/sulfur_dioxide
+	name = "sulfur dioxide gas grenade"
+
+/obj/item/weapon/grenade/toxic_gas/carbon_monodixe
+	name = "carbon monodixe gas grenade"
