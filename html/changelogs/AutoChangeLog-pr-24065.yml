@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Off-station roles are blacklisted from being on-station antags."
