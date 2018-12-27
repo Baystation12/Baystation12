@@ -135,7 +135,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/weapon/melee/g_dagger/proc/inhand_check()
 	var/mob/living/carbon/human/h = creator_dagger.current_user
 	if(istype(h))
-		if(h.l_hand  || h.r_hand == src)
+		if(h.l_hand == src || h.r_hand == src)
 			return 1
 	return 0
 
@@ -148,7 +148,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		equip_dagger()
 		playsound(usr, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	else
-		playsound(usr, 'sound/weapons/saberoff.ogg', 75, 1)
+		playsound(usr, 'sound/weapons/saberoff.ogg', 50, 1)
 		unequip_dagger()
 
 
@@ -163,11 +163,11 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	w_class = ITEM_SIZE_NORMAL
 	force = 30
 	throwforce = 12
-	edge = 0
-	sharp = 0
+	edge = 1
+	sharp = 1
 	var/obj/item/clothing/gloves/thick/sangheili/creator_dagger
 	var/next_leapwhen
-
+	armor_penetration = 50
 	canremove = 0
 
 	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/energy_dagger_inhand.dmi',slot_r_hand_str = 'code/modules/halo/icons/energy_dagger_inhand.dmi')
