@@ -399,6 +399,45 @@ GLOBAL_LIST_EMPTY(medical_spawns)
 	..()
 	GLOB.medical_spawns += loc
 
+//UNSC Heaven Above Logistics Spawnpoints
+
+//Crew Chief (Logistics)
+
+GLOBAL_LIST_EMPTY(logistics_chief_spawns)
+
+/datum/spawnpoint/logistics_chief
+	display_name = "UNSC Crew Chief (logistics) Spawn"
+	restrict_job = list("Crew Chief (logistics)")
+
+/datum/spawnpoint/logistics_chief/New()
+	..()
+	turfs = GLOB.logistics_chief_spawns
+
+/obj/effect/landmark/start/logistics_chief
+	name = "UNSC Crew Chief (logistics) Spawn"
+
+/obj/effect/landmark/start/logistics_chief/New()
+	..()
+	GLOB.logistics_chief_spawns += loc
+
+//Logistics Specialist
+
+GLOBAL_LIST_EMPTY(logistics_spawns)
+
+/datum/spawnpoint/logistics
+	display_name = "UNSC Logistics Specialist Spawn"
+	restrict_job = list("Logistics Specialist")
+
+/datum/spawnpoint/logisticsf/New()
+	..()
+	turfs = GLOB.logistics_spawns
+
+/obj/effect/landmark/start/logistics
+	name = "UNSC Logistics Specialist Spawn"
+
+/obj/effect/landmark/start/logistics/New()
+	..()
+	GLOB.logistics_spawns += loc
 //UNSC Heaven Above ODST Spawnpoints
 
 GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
