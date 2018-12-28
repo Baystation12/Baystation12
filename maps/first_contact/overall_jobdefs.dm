@@ -97,7 +97,8 @@
 	"UNSC Operations Supervisor Spawn","UNSC Operations Specialist Spawn","UNSC Heaven Above ODST Spawn","UNSC Heaven Above ODST Officer Spawn","Innie Crew","Civilian Ship Crew",\
 	"Civ Ship Cap Crew","UNSC Crew Chief (technical) Spawn","UNSC Technician Spawn","UNSC Master-At-Arms Spawn","UNSC Naval Security Officer Spawn","UNSC Crew Chief (gunnery) Spawn",\
 	"UNSC Gunnery Operator Spawn","UNSC Wing Commander Spawn","UNSC Squadron Commander Spawn","UNSC Pilot Spawn","UNSC Crew Chief (flight) Spawn","UNSC Flight Mechanic Spawn",
-	"Medical Ship Crew","Medical Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Research Facility Spawn","Research Facility Director Spawn",\
+	"Medical Ship Crew","Medical Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Research Facility Spawn","Research Facility Director Spawn","AI","UNSC Chief Hospital Corpsman Spawn",\
+	"UNSC Hospital Corpsman Spawn",
 	"Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn","Sangheili Corvette Spawn",\
 	"Kig-Yar Corvette Spawn","Unggoy Corvette Spawn","UNSC Aegis Ship Crew Spawn","UNSC Aegis ODST Spawn","UNSC Aegis ODST Officer Spawn","Commando Spawn","Commando Officer Spawn",)
 

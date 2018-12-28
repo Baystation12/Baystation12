@@ -359,6 +359,46 @@ GLOBAL_LIST_EMPTY(mechanic_spawns)
 	..()
 	GLOB.mechanic_spawns += loc
 
+//UNSC Heaven Above Medical Spawnpoints
+
+//Medical Chief
+
+GLOBAL_LIST_EMPTY(medical_chief_spawns)
+
+/datum/spawnpoint/medical_chief
+	display_name = "UNSC Chief Hospital Corpsman Spawn"
+	restrict_job = list("Chief Hospital Corpsman")
+
+/datum/spawnpoint/medical_chief/New()
+	..()
+	turfs = GLOB.medical_chief_spawns
+
+/obj/effect/landmark/start/medical_chief
+	name = "UNSC Chief Hospital Corpsman Spawn"
+
+/obj/effect/landmark/start/medical_chief/New()
+	..()
+	GLOB.medical_chief_spawns += loc
+
+//Medical
+
+GLOBAL_LIST_EMPTY(medical_spawns)
+
+/datum/spawnpoint/medical
+	display_name = "UNSC Hospital Corpsman Spawn"
+	restrict_job = list("Hospital Corpsman")
+
+/datum/spawnpoint/medical/New()
+	..()
+	turfs = GLOB.medical_spawns
+
+/obj/effect/landmark/start/medical
+	name = "UNSC Hospital Corpsman Spawn"
+
+/obj/effect/landmark/start/medical/New()
+	..()
+	GLOB.medical_spawns += loc
+
 //UNSC Heaven Above ODST Spawnpoints
 
 GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
@@ -394,3 +434,23 @@ GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 /obj/effect/landmark/start/corvetteodst_officer/New()
 	..()
 	GLOB.corvetteodst_officer_spawns += loc
+
+//UNSC SHIP AI
+
+
+GLOBAL_LIST_EMPTY(AI_spawns)
+
+/datum/spawnpoint/AI
+	display_name = "AI"
+	restrict_job = list("AI")
+
+/datum/spawnpoint/AI/New()
+	..()
+	turfs = GLOB.AI_spawns
+
+/obj/effect/landmark/start/AI
+	name = "AI"
+
+/obj/effect/landmark/start/AI/New()
+	..()
+	GLOB.AI_spawns += loc

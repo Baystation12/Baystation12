@@ -186,6 +186,10 @@
 	name = "AI Core"
 	icon_state = "ai"
 
+/area/unscfrigate/vault
+	name = "Vault"
+	icon_state = "Vault"
+
 /area/unscfrigate/officer_quarters
 	name = "Officer's Quarters"
 	icon_state = "head_quarters"
