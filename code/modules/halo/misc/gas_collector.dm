@@ -23,6 +23,8 @@
 /obj/machinery/portable_atmospherics/gas_collector/New()
 	. = ..()
 	update_gases_ui()
+
+	//10% margin of safety here
 	max_pressure = TANK_LEAK_PRESSURE * 0.9
 
 /obj/machinery/portable_atmospherics/gas_collector/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
@@ -144,6 +146,7 @@
 		var/datum/gas_mixture/newgas = local.remove_volume(CELL_VOLUME * 0.005)
 		recieve_gas(newgas)
 
+	/*
 	if(holding)
 		//copied from process() in code/game/machinery/atmoalter/canister.dm
 		var/datum/gas_mixture/environment = holding.air_contents
@@ -158,6 +161,7 @@
 			var/returnval = pump_gas_passive(src, air_contents, environment, transfer_moles)
 			if(returnval >= 0)
 				update_gases_ui()
+				*/
 
 /obj/machinery/portable_atmospherics/gas_collector/proc/update_gases_ui()
 	gas_inventory = list()

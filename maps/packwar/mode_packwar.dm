@@ -32,6 +32,16 @@
 	var/available_snipers = 0
 	var/respawn_time = 1.5	//minutes
 
+/datum/game_mode/packwar/announce()
+	. = ..()
+	to_world("Each clan starts with little weapons and armour. \
+		You must mine ore from under the ground to process into metals, \
+		grow crops in from soil, and sell what you make to the traders for gekz. \
+		A strong clan has many good weapons and armour. You should wait until your clan is strong before battling the other clan. \
+		Raid the other clan if you must, but a raid means stealing NOT fighting. \
+		Do not hurt the Unggoy if you can as they are valuable slaves to be captured. A desperate clan will force them into battle. \
+		A cunning clan will equip them with advanced weapons and armour, and hire Kig-Yar mercenaries to bolster their forces.")
+
 /datum/game_mode/packwar/post_setup()
 	. = ..()
 
@@ -106,7 +116,11 @@
 			winning_captains = boulder_clan_captains
 
 	if(dead_chieftain)
-		text += "<span class='boldannounce'>Chieftain [dead_chieftain.name] of the [losing_clan_name] Clan has been slain!</span><br>"
+		var/datum/mob_lite/last_attacker = dead_chieftain.last_attacker_
+		var/slayer_text = ""
+		if(last_attacker)
+			slayer_text = " by [last_attacker.name] the [last_attacker.assigned_role]"
+		text += "<span class='boldannounce'>Chieftain [dead_chieftain.name] of the [losing_clan_name] Clan has been slain[slayer_text]!</span><br>"
 	text += "<span class='passive'>The [winning_clan_name] Clan Alphas were:</span><br>"
 	var/none = 1
 	if(winning_chieftain)
@@ -117,7 +131,7 @@
 		none = 0
 	if(none)
 		text += "	<span class='info'>(none)</span><br>"
-	text += "<h1>[winning_clan_name] Clan Major Victory</h1>"
+	text += "<h1>[winning_clan_name] Clan Victory</h1>"
 	to_world(text)
 
 	return 0
