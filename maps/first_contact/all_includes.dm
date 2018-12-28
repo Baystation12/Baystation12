@@ -13,13 +13,15 @@
 	#include "../overmap_ships/nh_overmap.dm"
 	#include "../overmap_ships/om_ship_areas.dm"
 
-	#include "../first_contact/maps/UNSC_Bertels/includes.dm"
+	//#include "../first_contact/maps/UNSC_Bertels/includes.dm"
 
 	#include "../first_contact/maps/URF Commando Ship/includes.dm"
 
 	#include "../first_contact/maps/Asteroid Listening Post/includes.dm"
 
 	#include "../first_contact/maps/UNSC_Thorin/includes.dm"
+
+	#include "../first_contact/maps/UNSC_Heaven_Above/unsc_frigate_base_includes.dm"
 
 	#include "../first_contact/maps/Covenant Corvette/includes.dm"
 
