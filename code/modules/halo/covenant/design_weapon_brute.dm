@@ -70,3 +70,10 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 5, "kemocite" = 5)
 	build_path = /obj/item/weapon/grenade/toxic_gas/sulfur_dioxide
 	components = list("sulfur dioxide gas packet" = /obj/item/gas_packet/sulfurdioxide)
+
+/datun/craft_blueprint/brute_weapon/landmine
+	name = "explosive landmine"
+	id = "landmine_expl"
+	materials = list(DEFAULT_WALL_MATERIAL = 10, "kemocite" = 20)
+	build_path = /obj/item/device/landmine
+	components = list("carbon dioxide gas packet" = /obj/item/gas_packet/carbondioxide)

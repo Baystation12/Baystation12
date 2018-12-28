@@ -94,7 +94,7 @@
 /datun/craft_blueprint/cov_tool/hfuel
 	name = "covenant H-fuel"
 	id = "cov_hfuel"
-	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 10, "kemocite" = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 10, "metallic hydrogen" = 5)
 	build_path = /obj/item/cov_fuel
 	components = list("hydrogen gas packet" = /obj/item/gas_packet/hydrogen)
 
