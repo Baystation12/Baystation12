@@ -74,8 +74,8 @@
 			internal.toggle_valve(user)
 
 /obj/item/weapon/tank/methane
-	name = "methane tank"
-	desc = "A tank of methane."
+	name = "gas tank"
+	desc = "A green gas tank."
 	icon = GRUNT_GEAR_ICON
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "methanetank_green"
@@ -83,20 +83,23 @@
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	var/starting_pressure = 1
 
+/obj/item/weapon/tank/methane/empty
+	starting_pressure = 0
+
 /obj/item/weapon/tank/methane/red
+	desc = "A red gas tank."
 	icon_state = "methanetank_red"
 	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
 
 /obj/item/weapon/tank/methane/red/empty
-	name = "tank"
 	starting_pressure = 0
 
 /obj/item/weapon/tank/methane/blue
+	desc = "A blue gas tank."
 	icon_state = "methanetank_blue"
 	item_state_slots = list(slot_back_str = "methanetank_blue_back", slot_l_hand_str = "methanetank_blue", slot_r_hand_str = "methanetank_blue")
 
 /obj/item/weapon/tank/methane/blue/empty
-	name = "tank"
 	starting_pressure = 0
 
 /obj/item/weapon/tank/methane/New()

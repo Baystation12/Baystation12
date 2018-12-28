@@ -20,13 +20,12 @@
 	id = "cov_gold_pickaxe"
 	materials = list("gold" = 15, "wood" = 30)
 	build_path = /obj/item/weapon/pickaxe/gold
-/*
+
 /datun/craft_blueprint/cov_tool/pickaxe_diamond
 	name = "diamond pickaxe"
 	id = "cov_diamond_pickaxe"
 	materials = list("diamond" = 15, "wood" = 30)
 	build_path = /obj/item/weapon/pickaxe/diamond
-*/
 
 /datun/craft_blueprint/cov_tool/drill
 	name = "mining drill"
@@ -77,34 +76,52 @@
 /datun/craft_blueprint/cov_tool/beaker
 	name = "glass beaker"
 	id = "cov_glassbeaker"
-	materials = list("glass" = 20)
+	materials = list("glass" = 10)
 	build_path = /obj/item/weapon/reagent_containers/glass/beaker
 
 /datun/craft_blueprint/cov_tool/bucket
 	name = "steel bucket"
 	id = "cov_bucket"
-	materials = list(DEFAULT_WALL_MATERIAL = 25)
+	materials = list(DEFAULT_WALL_MATERIAL = 5)
 	build_path = /obj/item/weapon/reagent_containers/glass/bucket
 
 /datun/craft_blueprint/cov_tool/shovel
 	name = "shovel"
 	id = "cov_shovel"
-	materials = list(DEFAULT_WALL_MATERIAL = 15, "wood" = 30)
+	materials = list(DEFAULT_WALL_MATERIAL = 10, "wood" = 30)
 	build_path = /obj/item/weapon/shovel
 
 /datun/craft_blueprint/cov_tool/hfuel
 	name = "covenant H-fuel"
 	id = "cov_hfuel"
-	materials = list(DEFAULT_WALL_MATERIAL = 20, "duridium" = 10, "kemocite" = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 15, "duridium" = 10, "kemocite" = 5)
 	build_path = /obj/item/cov_fuel
 	components = list("hydrogen gas packet" = /obj/item/gas_packet/hydrogen)
 
 /datun/craft_blueprint/cov_tool/powercell
 	name = "covenant powercell"
 	id = "cov_powercell"
-	materials = list(DEFAULT_WALL_MATERIAL = 30, "plasteel" = 15, "nanolaminate" = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 20, "plasteel" = 15, "nanolaminate" = 5)
 	build_path = /obj/item/weapon/cell/covenant
 	components = list("covenant H-fuel" = /obj/item/cov_fuel)
+
+/datun/craft_blueprint/cov_tool/greentank
+	name = "green gas tank"
+	id = "cov_gastankgreen"
+	materials = list(DEFAULT_WALL_MATERIAL = 5)
+	build_path = /obj/item/weapon/tank/methane/empty
+
+/datun/craft_blueprint/cov_tool/redtank
+	name = "red gas tank"
+	id = "cov_gastankred"
+	materials = list(DEFAULT_WALL_MATERIAL = 5)
+	build_path = /obj/item/weapon/tank/methane/red/empty
+
+/datun/craft_blueprint/cov_tool/bluetank
+	name = "blue gas tank"
+	id = "cov_gastankblue"
+	materials = list(DEFAULT_WALL_MATERIAL = 5)
+	build_path = /obj/item/weapon/tank/methane/blue/empty
 
 
 
