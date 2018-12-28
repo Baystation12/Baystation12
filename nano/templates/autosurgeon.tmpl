@@ -20,7 +20,10 @@ Used In File(s): \code\modules\halo\machinery\autosurgeon.dm
 {{:helper.link(data.do_start_delay ? 'Startup delay enabled' : 'Startup delay disabled', data.do_start_delay ? 'check' : 'closethick', {'toggle_start_delay' : 1, 'user' : data.user}, data.do_start_delay ? 'selected' : null)}}
 <br>
 <br>
-{{:helper.link(data.active ? 'Deactivate' : 'Activate', 'heart', {'toggle_active' : data.active, 'user' : data.user}, data.active ? 'selected' : null)}}
+{{:helper.link(data.active ? 'Active' : 'Activate', 'heart', {'toggle_active' : data.active, 'user' : data.user}, data.active ? 'selected' : null)}}
+<br>
+<br>
+{{:helper.link('Deactivate', 'cancel', {'toggle_active' : data.active, 'user' : data.user}, data.active ? null : 'disabled')}}
 <br>
 <br>
 {{:helper.link(data.buckled_mob ? 'Release patient' : 'No patient detected', 'arrowthickstop-1-e', {'release_patient' : 1, 'user' : data.user}, data.buckled_mob ? null : 'disabled')}}
