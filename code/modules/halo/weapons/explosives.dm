@@ -18,6 +18,7 @@
 	var/reset_warning_time = 0
 	var/datum/proximity_trigger/square/prox
 	var/processing = 0
+	throw_range = 0
 
 /obj/item/device/landmine/active/New()
 	..()
@@ -25,10 +26,12 @@
 	arm_landmine()
 
 /obj/item/device/landmine/attack_self(var/mob/user)
-	if(!state)
+	if(!state && do_after(user, 30))
+		user.drop_item()
 		set_state(STATE_ARMING)
 		arm_time = world.time + arm_delay
 		set_processing()
+		to_chat(user,"\icon[src] <span class='notice'>You deploy [src] and place it on the ground.</span>")
 
 /obj/item/device/landmine/attackby()
 	if(state > 1)
