@@ -55,9 +55,6 @@
 	. = ..()
 	atom_types[/obj/structure/geyser] = 1
 	atom_types[/mob/living/simple_animal/hostile/diyaab] = 0.5
-	atom_types[/mob/living/simple_animal/hostile/shantak] = 0.5
-	atom_types[/mob/living/simple_animal/hostile/samak] = 0.5
-	atom_types[/mob/living/simple_animal/hostile/retaliate/goat] = 0.5
 
 /obj/effect/landmark/biome/forest
 	name = "forest doodad generator"
@@ -107,13 +104,7 @@
 /obj/effect/landmark/biome/forest/geysers/New()
 	. = ..()
 	atom_types[/obj/structure/geyser/noble_gas] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/bear] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/giant_spider] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/scarybat] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/diyaab] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/shantak] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/samak] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/retaliate/goat] = 0.05
+	atom_types[/mob/living/simple_animal/hostile/shantak] = 0.01
 
 /obj/effect/landmark/biome/swamp
 	name = "swampy doodad generator"
@@ -128,6 +119,4 @@
 	. = ..()
 	atom_types[/obj/structure/geyser/natural_gas] = 0.1
 	atom_types[/obj/structure/geyser/noble_gas] = 0.1
-	atom_types[/mob/living/simple_animal/hostile/carp] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/creature] = 0.05
-	atom_types[/mob/living/simple_animal/hostile/jelly] = 0.05
+	atom_types[/mob/living/simple_animal/hostile/jelly] = 0.01
