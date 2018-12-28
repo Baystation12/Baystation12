@@ -204,61 +204,160 @@ GLOBAL_LIST_EMPTY(Master_At_Arms_spawns)
 
 //Naval Security
 
-GLOBAL_LIST_EMPTY(security_spawns)
+GLOBAL_LIST_EMPTY(unsc_security_spawns)
 
-/datum/spawnpoint/security
+/datum/spawnpoint/unsc_security
 	display_name = "UNSC Naval Security Officer Spawn"
 	restrict_job = list("Naval Security Officer")
 
-/datum/spawnpoint/security/New()
+/datum/spawnpoint/unsc_security/New()
 	..()
-	turfs = GLOB.security_spawns
+	turfs = GLOB.unsc_security_spawns
 
-/obj/effect/landmark/start/security
+/obj/effect/landmark/start/unsc_security
 	name = "UNSC Naval Security Officer Spawn"
 
-/obj/effect/landmark/start/security/New()
+/obj/effect/landmark/start/unsc_security/New()
 	..()
-	GLOB.security_spawns += loc
+	GLOB.unsc_security_spawns += loc
 
 //UNSC Heaven Above Tactical Spawnpoints
 
 //Gunnery Crew Chief
-GLOBAL_LIST_EMPTY(Crew_Chief_Gunnery_spawns)
+GLOBAL_LIST_EMPTY(gunnery_chief_spawns)
 
-/datum/spawnpoint/Crew_Chief_Gunnery
+/datum/spawnpoint/gunnery_chief
 	display_name = "UNSC Crew Chief (gunnery) Spawn"
 	restrict_job = list("Crew Chief (gunnery)")
 
-/datum/spawnpoint/security/New()
+/datum/spawnpoint/gunnery_chief/New()
 	..()
-	turfs = GLOB.Crew_Chief_Gunnery_spawns
+	turfs = GLOB.gunnery_chief_spawns
 
-/obj/effect/landmark/start/Crew_Chief_Gunnery
+/obj/effect/landmark/start/gunnery_chief
 	name = "UNSC Crew Chief (gunnery) Spawn"
 
-/obj/effect/landmark/start/Crew_Chief_Gunnery/New()
+/obj/effect/landmark/start/gunnery_chief/New()
 	..()
-	GLOB.Crew_Chief_Gunnery_spawns += loc
+	GLOB.gunnery_chief_spawns += loc
 
 //Gunnery
 
-GLOBAL_LIST_EMPTY(Gunnery_Operator_spawns)
+GLOBAL_LIST_EMPTY(gunnery_spawns)
 
-/datum/spawnpoint/Gunnery_Operator
+/datum/spawnpoint/gunnery
 	display_name = "UNSC Gunnery Operator Spawn"
 	restrict_job = list("Gunnery Operator")
 
-/datum/spawnpoint/Gunnery_Operator/New()
+/datum/spawnpoint/gunnery/New()
 	..()
-	turfs = GLOB.Gunnery_Operator_spawns
+	turfs = GLOB.gunnery_spawns
 
-/obj/effect/landmark/start/Gunnery_Operator
+/obj/effect/landmark/start/gunnery
 	name = "UNSC Gunnery Operator Spawn"
 
-/obj/effect/landmark/start/Gunnery_Operator/New()
+/obj/effect/landmark/start/gunnery/New()
 	..()
-	GLOB.Gunnery_Operator_spawns += loc
+	GLOB.gunnery_spawns += loc
+
+//UNSC Heaven Above Pilot Spawnpoints
+
+//Wing Commander
+
+GLOBAL_LIST_EMPTY(Wing_Commander_spawns)
+
+/datum/spawnpoint/Wing_Commander
+	display_name = "UNSC Wing Commander Spawn"
+	restrict_job = list("Wing Commander")
+
+/datum/spawnpoint/Wing_Commander/New()
+	..()
+	turfs = GLOB.Wing_Commander_spawns
+
+/obj/effect/landmark/start/Wing_Commander
+	name = "UNSC Wing Commander Spawn"
+
+/obj/effect/landmark/start/Wing_Commander/New()
+	..()
+	GLOB.Wing_Commander_spawns += loc
+
+//Squadron Commander
+
+GLOBAL_LIST_EMPTY(Squadron_Commander_spawns)
+
+/datum/spawnpoint/Squadron_Commander
+	display_name = "UNSC Squadron Commander Spawn"
+	restrict_job = list("Squadron Commander")
+
+/datum/spawnpoint/Squadron_Commander/New()
+	..()
+	turfs = GLOB.Squadron_Commander_spawns
+
+/obj/effect/landmark/start/Squadron_Commander
+	name = "UNSC Squadron Commander Spawn"
+
+/obj/effect/landmark/start/Squadron_Commander/New()
+	..()
+	GLOB.Squadron_Commander_spawns += loc
+
+//Pilot
+
+GLOBAL_LIST_EMPTY(Pilot_spawns)
+
+/datum/spawnpoint/Pilot
+	display_name = "UNSC Pilot Spawn"
+	restrict_job = list("Pilot")
+
+/datum/spawnpoint/Pilot/New()
+	..()
+	turfs = GLOB.Pilot_spawns
+
+/obj/effect/landmark/start/Pilot
+	name = "UNSC Pilot Spawn"
+
+/obj/effect/landmark/start/Pilot/New()
+	..()
+	GLOB.Pilot_spawns += loc
+
+//UNSC Heaven Above Flight Spawns
+
+//Crew Chief (Flight)
+
+GLOBAL_LIST_EMPTY(mechanic_chief_spawns)
+
+/datum/spawnpoint/mechanic_chief
+	display_name = "UNSC Crew Chief (flight) Spawn"
+	restrict_job = list("Crew Chief (flight)")
+
+/datum/spawnpoint/mechanic_chief/New()
+	..()
+	turfs = GLOB.mechanic_chief_spawns
+
+/obj/effect/landmark/start/mechanic_chief
+	name = "UNSC Crew Chief (flight) Spawn"
+
+/obj/effect/landmark/start/mechanic_chief/New()
+	..()
+	GLOB.mechanic_chief_spawns += loc
+
+//Mechanic
+
+GLOBAL_LIST_EMPTY(mechanic_spawns)
+
+/datum/spawnpoint/mechanic
+	display_name = "UNSC Flight Mechanic Spawn"
+	restrict_job = list("Flight Mechanic")
+
+/datum/spawnpoint/mechanic/New()
+	..()
+	turfs = GLOB.mechanic_spawns
+
+/obj/effect/landmark/start/mechanic
+	name = "UNSC Flight Mechanic Spawn"
+
+/obj/effect/landmark/start/mechanic/New()
+	..()
+	GLOB.mechanic_spawns += loc
 
 //UNSC Heaven Above ODST Spawnpoints
 
@@ -278,7 +377,6 @@ GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
 /obj/effect/landmark/start/corvetteodst_odst/New()
 	..()
 	GLOB.corvetteodst_odst_spawns += loc
-
 
 GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 

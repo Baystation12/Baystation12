@@ -15,14 +15,14 @@
 
 	access = list(access_unsc_crew, access_unsc_navsec)
 
-/datum/job/UNSC_ship/security
+/datum/job/UNSC_ship/unsc_security
 	title = "Naval Security Officer"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM
 	department_flag = SEC
 	total_positions = -1
-	spawn_positions = 3
+	spawn_positions = 2
 	spawnpoint_override = "UNSC Naval Security Officer Spawn"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/security
 	selection_color = "#990000"
