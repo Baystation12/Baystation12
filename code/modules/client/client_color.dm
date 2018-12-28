@@ -2,6 +2,7 @@
 	var/client_color = "" //Any client.color-valid value
 	var/priority = 1 //Since only one client.color can be rendered on screen, we take the one with the highest priority value:
 	//eg: "Bloody screen" > "goggles color" as the former is much more important
+	var/override = FALSE //If set to override we will stop multiplying the moment we get here. NOTE: Priority remains, if your override is on position 4, the other 3 will still have a say.
 
 
 /mob
@@ -54,9 +55,14 @@
 	client.color = null
 	if(!client_colors.len)
 		return
-	var/datum/client_color/CC = client_colors[1]
-	if(CC)
-		animate(client, color = CC.client_color)
+	var/color = list(1,1,1, 1,1,1, 1,1,1) //Star at normal
+	for(var/datum/client_color/CC in client_colors)
+		for(var/i = 1; i <= 9; i += 1) //go over all 9 parts of list
+			color[i] = color[i] * CC.client_color[i]
+		if(CC.override)
+			break
+
+	animate(client, color = color)
 
 /datum/client_color/monochrome
 	client_color = list(0.33,0.33,0.33, 0.33,0.33,0.33, 0.33,0.33,0.33)
@@ -66,6 +72,7 @@
 /datum/client_color/noir
 	client_color = list(0.299,0.299,0.299, 0.587,0.587,0.587, 0.114,0.114,0.114)
 	priority = INFINITY
+	override = TRUE
 
 //Disabilities, could be hooked to brain damage or chargen if so desired.
 /datum/client_color/deuteranopia
