@@ -16,6 +16,7 @@
 	antag_scaling_coeff = 0
 	var/datum/mind/boulder_chief_mind
 	var/datum/mind/ram_chief_mind
+	var/chieftain_slayer_text
 	//
 	var/list/boulder_clan_captains = list()
 	var/list/ram_clan_captains = list()
@@ -78,7 +79,8 @@
 		for(var/datum/mind/check_mind in list(boulder_chief_mind,ram_chief_mind) + ram_clan_captains + boulder_clan_captains)
 			if(check_mind.name == M.real_name)
 				D = check_mind
-				break
+				if(M.last_attacker_)
+					chieftain_slayer_text = " by [M.last_attacker_.name] the [M.last_attacker_.assigned_role]"
 
 	if(D == boulder_chief_mind)
 		objective_state = RAM_VICTORY
@@ -115,12 +117,7 @@
 			winning_chieftain = boulder_chief_mind
 			winning_captains = boulder_clan_captains
 
-	if(dead_chieftain)
-		var/datum/mob_lite/last_attacker = dead_chieftain.last_attacker_
-		var/slayer_text = ""
-		if(last_attacker)
-			slayer_text = " by [last_attacker.name] the [last_attacker.assigned_role]"
-		text += "<span class='boldannounce'>Chieftain [dead_chieftain.name] of the [losing_clan_name] Clan has been slain[slayer_text]!</span><br>"
+	text += "<span class='boldannounce'>Chieftain [dead_chieftain.name] of the [losing_clan_name] Clan has been slain[chieftain_slayer_text]!</span><br>"
 	text += "<span class='passive'>The [winning_clan_name] Clan Alphas were:</span><br>"
 	var/none = 1
 	if(winning_chieftain)
