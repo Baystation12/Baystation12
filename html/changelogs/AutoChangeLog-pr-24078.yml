@@ -1,0 +1,4 @@
+author: "WhiteHusky"
+delete-after: True
+changes: 
+  - rscadd: "RFID card readers firmware has been updated to allow verbose diagnostics checks."
