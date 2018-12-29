@@ -22,7 +22,7 @@
 	var/atom/movable/AM = nano_host()
 	if(!istype(AM))
 		return
-	var/list/zlevels = GetConnectedZlevels(AM.z)
+	var/list/zlevels = get_connected_z_levels(AM.z)
 	for(var/obj/item/weapon/gun/G in GLOB.registered_weapons)
 		if(G.standby)
 			continue

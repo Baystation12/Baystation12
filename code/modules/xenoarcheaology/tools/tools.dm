@@ -247,7 +247,7 @@
 
 /obj/item/weapon/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)
-	var/zlevels = GetConnectedZlevels(T.z)
+	var/zlevels = get_connected_z_levels(T.z)
 	var/cur_dist = world.maxx+world.maxy
 	for(var/obj/item/device/radio/beacon/R in world)
 		if((R.z in zlevels) && R.frequency == tracking_freq)

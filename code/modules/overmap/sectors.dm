@@ -49,7 +49,7 @@
 /obj/effect/overmap/proc/get_areas()
 
 /obj/effect/overmap/proc/find_z_levels()
-	map_z = GetConnectedZlevels(z)
+	map_z = get_connected_z_levels(z)
 
 /obj/effect/overmap/proc/register_z_levels()
 	for(var/zlevel in map_z)

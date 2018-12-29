@@ -48,7 +48,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize()
 	. = ..()
-	connected_zlevels = GetConnectedZlevels(z)
+	connected_zlevels = get_connected_z_levels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
 	if(z in GLOB.using_map.station_levels) //plants on station always tick

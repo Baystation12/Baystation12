@@ -464,7 +464,7 @@
 	if(!connection)	return 0	//~Carn
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
-					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency, verb, speaking,
+					  filter_type, signal.data["compression"], get_connected_z_levels(position.z), connection.frequency, verb, speaking,
 					  "#unkn", channel_color_presets["Menacing Maroon"])
 
 

@@ -37,7 +37,7 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 		return null
 	return HasBelow(turf.z) ? get_step(turf, DOWN) : null
 
-/proc/GetConnectedZlevels(z)
+/proc/get_connected_z_levels(z)
 	. = list(z)
 	for(var/level = z, HasBelow(level), level--)
 		. |= level-1
@@ -45,7 +45,7 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 		. |= level+1
 
 /proc/AreConnectedZLevels(var/zA, var/zB)
-	return zA == zB || (zB in GetConnectedZlevels(zA))
+	return zA == zB || (zB in get_connected_z_levels(zA))
 
 /proc/get_zstep(ref, dir)
 	if(dir == UP)

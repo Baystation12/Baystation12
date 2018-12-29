@@ -125,7 +125,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if(!listening_levels)
 		//Defaults to our Z level!
 		var/turf/position = get_turf(src)
-		listening_levels = GetConnectedZlevels(position.z)
+		listening_levels = get_connected_z_levels(position.z)
 
 	if(autolinkers.len)
 		// Links nearby machines
@@ -356,7 +356,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/relay/forceMove(var/newloc)
 	. = ..(newloc)
-	listening_levels = GetConnectedZlevels(z)
+	listening_levels = get_connected_z_levels(z)
 	update_power()
 
 // Relays on ship's Z levels use less power as they don't have to transmit over such large distances.

@@ -105,13 +105,13 @@
 		executed = 1
 		target.dos_sources.Add(src)
 		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
-	
+
 		var/list/sources_to_show = list(computer.network_card.get_network_tag())
 		var/extra_to_show = 2 * max(operator_skill - SKILL_ADEPT, 0)
 		if(extra_to_show)
 			var/list/candidates = list()
 			for(var/obj/item/modular_computer/C in SSobj.processing) // Apparently the only place these are stored.
-				if(C.network_card && (C.z in GetConnectedZlevels(computer.z)))
+				if(C.network_card && (C.z in get_connected_z_levels(computer.z)))
 					candidates += C
 			for(var/i = 1, i <= extra_to_show, i++)
 				var/obj/item/modular_computer/C = pick_n_take(candidates)

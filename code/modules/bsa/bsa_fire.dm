@@ -30,7 +30,7 @@
 				else
 					A.ex_act(1)
 
-	var/list/relevant_z = GetConnectedZlevels(start.z)
+	var/list/relevant_z = get_connected_z_levels(start.z)
 	for(var/mob/M in GLOB.player_list)
 		var/turf/T = get_turf(M)
 		if(!T || !(T.z in relevant_z))

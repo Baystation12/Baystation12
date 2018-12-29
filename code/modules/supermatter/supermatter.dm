@@ -192,7 +192,7 @@
 	if(!istype(TS))
 		return
 
-	var/list/affected_z = GetConnectedZlevels(TS.z)
+	var/list/affected_z = get_connected_z_levels(TS.z)
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/z in affected_z)

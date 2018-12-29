@@ -145,7 +145,7 @@
 				var/affected_zlevels = GLOB.using_map.contact_levels
 				var/atom/A = host
 				if(istype(A))
-					affected_zlevels = GetConnectedZlevels(A.z)
+					affected_zlevels = get_connected_z_levels(A.z)
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown

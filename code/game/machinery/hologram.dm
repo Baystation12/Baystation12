@@ -97,7 +97,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 			if(last_request + 200 < world.time) //don't spam other people with requests either, you jerk!
 				last_request = world.time
 				var/list/holopadlist = list()
-				var/zlevels = GetConnectedZlevels(z)
+				var/zlevels = get_connected_z_levels(z)
 				if(GLOB.using_map.use_overmap && map_range >= 0)
 					var/obj/effect/overmap/O = map_sectors["[z]"]
 					for(var/obj/effect/overmap/OO in range(O,map_range))
@@ -190,7 +190,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
 			var/ai_text = text
-			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.			
+			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
 				if(speaking)
 					ai_text = speaking.scramble(text)
 				else

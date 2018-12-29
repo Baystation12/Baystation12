@@ -69,7 +69,7 @@
 /proc/pick_area_turf_in_connected_z_levels(var/list/area_predicates, var/list/turf_predicates, var/z_level)
 	area_predicates = area_predicates.Copy()
 
-	var/z_levels = GetConnectedZlevels(z_level)
+	var/z_levels = get_connected_z_levels(z_level)
 	area_predicates[/proc/area_belongs_to_zlevels] = z_levels
 	return pick_area_and_turf(area_predicates, turf_predicates)
 

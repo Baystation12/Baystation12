@@ -53,7 +53,7 @@
 /datum/alarm_handler/proc/alarms(var/z_level)
 	if(z_level)
 		. = list()
-		for(var/z in GetConnectedZlevels(z_level))
+		for(var/z in get_connected_z_levels(z_level))
 			. += alarms_by_z["[z]"] || list()
 	else
 		return alarms

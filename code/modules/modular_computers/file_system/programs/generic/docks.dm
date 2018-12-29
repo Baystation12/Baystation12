@@ -27,7 +27,7 @@
 	if(!istype(AM))
 		return
 	docking_controllers.Cut()
-	var/list/zlevels = GetConnectedZlevels(AM.z)
+	var/list/zlevels = get_connected_z_levels(AM.z)
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
 		if(D.z in zlevels)
 			var/shuttleside = 0

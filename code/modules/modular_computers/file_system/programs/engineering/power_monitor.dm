@@ -88,7 +88,7 @@
 	var/turf/T = get_turf(nano_host())
 	if(!T) // Safety check
 		return
-	var/connected_z_levels = GetConnectedZlevels(T.z)
+	var/connected_z_levels = get_connected_z_levels(T.z)
 	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
 		if((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!

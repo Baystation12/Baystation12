@@ -25,7 +25,7 @@
 		return list()
 
 	var/list/shields = list()
-	var/connected_z_levels = GetConnectedZlevels(T.z)
+	var/connected_z_levels = get_connected_z_levels(T.z)
 	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
 		if(!(S.z in connected_z_levels))
 			continue

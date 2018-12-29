@@ -164,7 +164,7 @@
 
 	..()
 
-	if(channel && !(channel.source_z in GetConnectedZlevels(computer.z)))
+	if(channel && !(channel.source_z in get_connected_z_levels(computer.z)))
 		channel.remove_client(src)
 		channel = null
 
@@ -223,7 +223,7 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
-		var/list/connected_zs = GetConnectedZlevels(C.computer.z)
+		var/list/connected_zs = get_connected_z_levels(C.computer.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
 			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(
