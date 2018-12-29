@@ -106,7 +106,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392)
 	accuracy = 1
 	scoped_accuracy = 2
-	dispersion = 0.2
+	dispersion = list(0.2)
 
 /obj/item/weapon/gun/projectile/m392_dmr/innie/update_icon()
 	if(ammo_magazine)

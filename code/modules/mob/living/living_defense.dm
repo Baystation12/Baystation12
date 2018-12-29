@@ -329,11 +329,11 @@
 	return
 
 /mob/living/update_action_buttons()
-	if(!hud_used) return
-	if(!client) return
+	if(!hud_used) return 0
+	if(!client) return 0
 
 	if(hud_used.hud_shown != 1)	//Hud toggled to minimal
-		return
+		return 0
 
 	client.screen -= hud_used.hide_actions_toggle
 	for(var/datum/action/A in actions)
@@ -380,3 +380,5 @@
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle
+
+	return 1

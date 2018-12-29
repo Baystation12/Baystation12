@@ -1,0 +1,53 @@
+
+/mob/living/simple_animal/mgalekgolo/bullet_act(var/obj/item/projectile/Proj)
+	if(!(get_dir(src,Proj.starting) in get_allowed_attack_dirs()))
+		if((Proj.penetrating >= 5) && (Proj.armor_penetration >= 80)) //Values taken from sniper rifle round.
+			Proj.damage *= 0.5
+			. = ..()
+			Proj.damage = initial(Proj.damage)
+		return
+		if(prob(25))
+			visible_message("<span class = 'danger'>The [Proj.name] is partially reflected by \the [name]'s armor plating.</span>")
+			Proj.damage *= 0.25 //So you can theoretically just shoot the hunter to death from the front.
+			. = ..()
+			Proj.damage = initial(Proj.damage)
+		else
+			visible_message("<span class = 'danger'>The [Proj.name] is stopped by \the [name]'s armor plating.</span>")
+		return
+	. = ..()
+
+/mob/living/simple_animal/mgalekgolo/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
+	if(!(get_dir(src,user) in get_allowed_attack_dirs()))
+		if(prob(25) && O.force >= 35)//40 is force of active energysword.
+			visible_message("<span class = 'danger'>[user] attacks [src.name] with \the [O.name], bypassing the armor plating!</span>")
+			.=..()
+		else
+			visible_message("<span class = 'danger'>The [O.name] bounces off the armor of \the [name]</span>")
+		return
+	. = ..()
+
+/mob/living/simple_animal/mgalekgolo/ex_act(severity)
+	if(!blinded)
+		flash_eyes()
+
+	var/damage
+	switch (severity)
+		if (1.0)
+			damage = 100
+
+		if (2.0)
+			damage = 50
+
+		if(3.0)
+			damage = 20
+
+	adjustBruteLoss(damage)
+
+/mob/living/simple_animal/mgalekgolo/adjustToxLoss(damage)
+	adjustBruteLoss(damage)
+
+/mob/living/simple_animal/mgalekgolo/attackby(var/obj/item/O, var/mob/user)
+	if(!O.force)
+		visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
+	else
+		O.attack(src, user, user.zone_sel.selecting)

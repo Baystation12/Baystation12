@@ -5,8 +5,8 @@
 	/datum/species/brutes,\
 	/datum/species/sangheili,\
 	/datum/species/kig_yar_skirmisher,\
-	/mob/living/simple_animal/lekgolo,\
+	/mob/living/simple_animal/mgalekgolo,\
 	/mob/living/simple_animal/engineer,\
 	/mob/living/simple_animal/hostile/retaliate/done,\
-	/mob/living/simple_animal/lekgolo/mgalekgolo,\
+	/mob/living/simple_animal/mgalekgolo,\
 	/mob/living/carbon/human/covenant/sanshyuum)
