@@ -1,10 +1,10 @@
 /datum/map_template/ruin/exoplanet/playablecolony
 	name = "established colony"
 	id = "playablecolony"
-	description = "a fully functional colony of rednecked frontier hicks"
+	description = "a fully functional colony on the frontier of settled space"
 	suffixes = list("playablecolony/colony.dmm")
 	cost = 2
-	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 
 /decl/submap_archetype/playablecolony
 	descriptor = "playable colony"
