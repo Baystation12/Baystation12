@@ -34,6 +34,7 @@
 	M.set_species(species)
 	if(!mobname)
 		mobname = random_name(M.gender, species)
+	mobname = "[mobname] (NPC)"
 	M.real_name = mobname
 	M.death(1) //Kills the new mob
 	if(src.corpseuniform)

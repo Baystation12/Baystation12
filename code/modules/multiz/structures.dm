@@ -162,27 +162,26 @@
 				above.ChangeTurf(/turf/simulated/open)
 		. = ..()
 
-	Uncross(atom/movable/A)
-		if(A.dir == dir)
-			// This is hackish but whatever.
-			var/turf/target = get_step(GetAbove(A), dir)
-			var/turf/source = A.loc
-			if(target.Enter(A, source))
-				A.loc = target
-				target.Entered(A, source)
-			return 0
-		return 1
+	CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+		if(get_dir(loc, target) == dir && upperStep(mover.loc))
+			return FALSE
+		return ..()
 
-	Uncross(obj/A)
-		if(A.dir == dir)
-			// This is hackish but whatever.
-			var/turf/target = get_step(GetAbove(A), dir)
-			var/turf/source = A.loc
-			if(target.Enter(A, source))
-				A.loc = target
-				target.Entered(A, source)
-			return 0
-		return 1
+	Bumped(atom/movable/A)
+		var/turf/target = get_step(GetAbove(A), dir)
+		var/turf/source = A.loc
+		var/turf/above = GetAbove(A)
+		if(above.CanZPass(source, UP) && target.Enter(A, src))
+			A.forceMove(target)
+			if(isliving(A))
+				var/mob/living/L = A
+				if(L.pulling)
+					L.pulling.forceMove(target)
+		else
+			to_chat(A, "<span class='warning'>Something blocks the path.</span>")
+
+	proc/upperStep(var/turf/T)
+		return (T == loc)
 
 	CanPass(obj/mover, turf/source, height, airflow)
 		return airflow || !density

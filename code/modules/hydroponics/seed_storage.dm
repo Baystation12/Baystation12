@@ -58,6 +58,7 @@
 		/obj/item/seeds/glowshroom = 30,
 		/obj/item/seeds/grapeseed = 30,
 		/obj/item/seeds/grassseed = 30,
+		/obj/item/seeds/cottonseed = 30,
 		/obj/item/seeds/harebell = 30,
 		/obj/item/seeds/lavenderseed = 30,
 		/obj/item/seeds/lemonseed = 30,

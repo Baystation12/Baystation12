@@ -1096,3 +1096,24 @@
 	set_trait(TRAIT_YIELD,-1)
 	set_trait(TRAIT_SPREAD,2)
 	set_trait(TRAIT_POTENCY,50)
+
+/datum/seed/cotton
+	name = "cotton"
+	seed_name = "cotton"
+	display_name = "cotton"
+	chems = list(/datum/reagent/nutriment = list(1,20))
+	kitchen_tag = "cotton"
+	has_mob_product = /obj/item/stack/material/cloth
+
+/datum/seed/cotton/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,2)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_PRODUCT_ICON,"grass")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#09FF00")
+	set_trait(TRAIT_PLANT_COLOUR,"#07D900")
+	set_trait(TRAIT_PLANT_ICON,"grass")
+	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
