@@ -398,25 +398,25 @@
 				<br>
 				<li>Gas in the radiator loop is circulated through the radiator bank, located in space. The radiative cooling provides the temperature differential required for power generation.</li>
 				<br>
-				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 2000 K to 4000 K and generate up to 1 MW of power. Beyond 1 MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
+				<li>The MK 1 Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 2000 K to 4000 K and generate up to 1 MW of power. Beyond 1 MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
 				<br>
 				<li>The crystal structure of the supermatter will begin to delaminate if its temperature exceeds 5000 K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
 				<br>
 				<h2>SUPERMATTER HANDLING</h2>
 				<li>Do not expose supermatter to oxygen.</li>
-				<li>Do not touch the supermatter or allow supermatter to contact any solid object apart from the specially-designed supporting pallet.</li>
+				<li>Do not touch supermatter or allow supermatter to contact any solid object apart from the specially-designed supporting pallet.</li>
 				<li>Do not directly view supermatter without meson goggles.</li>
 				<li>While handles on pallet allow moving the supermatter via pulling, pushing should not be attempted.</li>
 				<br>
 				<h2>STARTUP PROCEDURE</h2>
 				<ol>
-				<li>Fill reactor loop (green and yellow) and radiator loop (cyan) with two (2) standard canisters of hydrogen gas each.</li>
-				<li>Additional canisters of hydrogen gas can be obtained from nearby Atmospherics if required.</li>
-				<li>Ensure that the Thermoelectric Generator (TEG) high-power pumps (on cyan pipes) are switched on at full power.</li>
-				<li><i>IMPORTANT: </i> Set filters (port-side of engine room) to Hydrogen instead of Carbon Dioxide, and afterwards ensure each filter is switched on.</li>
+				<li>Fill the reactor loop (green and yellow) and the radiator loop (cyan) with two (2) standard canisters of hydrogen gas each.</li>
+				<li>Additional canisters of hydrogen can be obtained from Atmospherics or Atmospherics Tank Storage if required.</li>
+				<li>Ensure that the Thermoelectric Generator (TEG) high-power pumps (on cyan pipes) are switched on at maximum pressure.</li>
+				<li><i>IMPORTANT: </i>Set filters (port-side of engine room) to Hydrogen instead of Carbon Dioxide, and afterwards ensure each filter is switched on.</li>
 				<li>Ensure the pump to the phoron canister is set to max.</li>
 				<li>Switch on the waste pump to the engines (connecting black pipes - under blast door near the phoron canister).</li>
-				<li>Monitoring EER with the Supermatter Monitoring program, fire the emitter until EER reaches 150-200 EER. Reactor blast doors must be open for this procedure.</li>
+				<li>Monitoring EER with the Supermatter Monitoring program, fire the emitter until EER reaches 150-200. Reactor blast doors must be open for this procedure.</li>
 				</ol>
 				<br>
 				<h2>OPERATION AND MAINTENANCE</h2>
@@ -432,9 +432,9 @@
 				<h2>EMERGENCY COOLING PROCEDURE</h2>
 				<ol>
 				<li>Open the Emergency Cooling Valve, which allows for Heat Exchangers to cool the reactor loop (green) with the radiator (cyan) loop</li>
-				<li>If reactor temperature does not return to safe operating levels, open both the Emergency Cooling Bypass Valve and TEG Bypass Valve</li>
-				<li>If reactor becomes safe, close the three aforementioned valves to resume power generation</li>
-				<li>If reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
+				<li>If the reactor temperature does not return to safe operating levels, open both the Emergency Cooling Bypass Valve and TEG Bypass Valve</li>
+				<li>If the reactor becomes safe, close the three aforementioned valves to resume power generation</li>
+				<li>If the reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>
 				<h2>EJECTION PROCEDURE</h2>
