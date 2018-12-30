@@ -7,6 +7,7 @@ Thumbs.db
 *.lk
 *.backup
 *.before
+**/MapFXDrawer/*.png
 data/
 cfg/
 build_log.txt

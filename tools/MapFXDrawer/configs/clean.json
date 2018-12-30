@@ -1,0 +1,60 @@
+{
+    "definitions": [
+        {
+            "type": "/obj/effect/landmark",
+            "parent": "/obj/effect",
+            "subtypes": [],
+            "vars": {
+                "alpha": 0
+            }
+        },
+        {
+            "type": "/turf/simulated/floor/plating",
+            "parent": "/turf/simulated/floor",
+            "subtypes": [],
+            "vars": {
+                "plane": -20
+            }
+        },
+        {
+            "type": "/obj/structure/disposalpipe",
+            "parent": "/obj/structure",
+            "subtypes": [],
+            "vars": {
+                "plane": -20
+            }
+        },
+        {
+            "type": "/obj/machinery/atmospherics/pipe/simple/hidden",
+            "parent": "/obj/machinery/atmospherics/pipe/simple",
+            "subtypes": [],
+            "vars": {
+                "plane": -20
+            }
+        },
+        {
+            "type": "/obj/machinery/atmospherics/pipe/manifold/hidden",
+            "parent": "/obj/machinery/atmospherics/pipe/manifold",
+            "subtypes": [],
+            "vars": {
+                "plane": -20
+            }
+        },
+		{
+            "type": "/obj/machinery/atmospherics/pipe/manifold4w/hidden",
+            "parent": "/obj/machinery/atmospherics/pipe/manifold4w",
+            "subtypes": [],
+            "vars": {
+                "plane": -20
+            }
+        },
+        {
+            "type": "/obj/structure/cable",
+            "parent": "/obj/structure",
+            "subtypes": [],
+            "vars": {
+                "plane": -20
+            }
+        }
+    ]
+}
