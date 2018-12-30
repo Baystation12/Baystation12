@@ -132,7 +132,7 @@
 "cB" = (/turf/simulated/floor/stairs/stairsdark/west,/area/commando_ship/urfs_avarice/Bridge)
 "cC" = (/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
 "cD" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
-"cE" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
+"cE" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-2"},/obj/effect/landmark/ghost_spawn,/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
 "cF" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
 "cG" = (/obj/machinery/door/airlock/multi_tile/halo/blast{tag = "icon-door_closed"; name = "Engine"; icon_state = "door_closed"; dir = 2; req_access = list(252)},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
 "cH" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/power/terminal{tag = "icon-term (WEST)"; icon_state = "term"; dir = 8},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)

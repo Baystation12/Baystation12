@@ -289,7 +289,7 @@
 		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & AIRTIGHT)) || (head && (head.item_flags & AIRTIGHT)))))
 			internal = null
 
-		if(internal)
+		if(internal && wear_mask)
 			var/datum/gas_mixture/air_removed = internal.remove_air_volume(volume_needed)
 			wear_mask.post_internals_breathe(air_removed,internal)
 			return air_removed
