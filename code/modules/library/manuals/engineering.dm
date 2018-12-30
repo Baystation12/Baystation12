@@ -404,7 +404,7 @@
 				<br>
 				<h2>SUPERMATTER HANDLING</h2>
 				<li>Do not expose supermatter to oxygen.</li>
-				<li>Do not <del>touch supermatter</del> <del>without gloves</del> allow supermatter to contact any solid object apart from the specially-designed supporting pallet.</li>
+				<li>Do not touch the supermatter or allow supermatter to contact any solid object apart from the specially-designed supporting pallet.</li>
 				<li>Do not directly view supermatter without meson goggles.</li>
 				<li>While handles on pallet allow moving the supermatter via pulling, pushing should not be attempted.</li>
 				<br>
