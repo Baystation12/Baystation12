@@ -10,7 +10,8 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	/datum/reagent/drink,
 	/datum/reagent/crayon_dust,
 	/datum/reagent/random,
-	/datum/reagent/toxin/phoron
+	/datum/reagent/toxin/phoron,
+	/datum/reagent/ethanol // Includes alcoholic beverages
 ))
 
 #define FOR_ALL_EFFECTS \
@@ -31,7 +32,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	return ..(holder)
 
 /datum/reagent/random/initialize_data(var/list/newdata)
-	var/datum/reagent/random/other = SSchemistry.get_prototype(src)
+	var/datum/reagent/random/other = SSchemistry.get_prototype(type)
 	if(istype(newdata))
 		data = newdata.Copy()
 	else
@@ -40,7 +41,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	heating_products = other.heating_products
 	recompute_properties()
 
-/datum/reagent/random/proc/randomize_data()
+/datum/reagent/random/proc/randomize_data(temperature)
 	data = list()
 	var/list/effects_to_get = subtypesof(/decl/random_chem_effect/random_properties)
 	if(length(effects_to_get) > max_effect_number)
@@ -51,7 +52,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	var/list/decls = decls_repository.get_decls_unassociated(effects_to_get)
 	for(var/item in decls)
 		var/decl/random_chem_effect/effect = item
-		effect.prototype_process(src)
+		effect.prototype_process(src, temperature)
 	
 	var/whitelist = subtypesof(/datum/reagent)
 	for(var/bad_type in GLOB.random_chem_interaction_blacklist)
@@ -66,6 +67,10 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	
 	for(var/decl/random_chem_effect/random_properties/effect in decls)
 		effect.set_caches(src, whitelist)
+
+/datum/reagent/random/proc/stable_at_temperature(temperature)
+	if(temperature > chilling_point && temperature < heating_point)
+		return TRUE
 
 /datum/reagent/random/mix_data(var/list/other_data, var/amount)
 	if(volume <= 0)
