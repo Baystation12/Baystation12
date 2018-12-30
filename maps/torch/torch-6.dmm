@@ -2193,20 +2193,17 @@
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_basketball)
 "afr" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 9
 	},
 /area/holodeck/source_beach)
 "afs" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 1
 	},
 /area/holodeck/source_beach)
 "aft" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 5
 	},
 /area/holodeck/source_beach)
@@ -2559,8 +2556,7 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_basketball)
 "afX" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 8
 	},
 /area/holodeck/source_beach)
@@ -2578,8 +2574,7 @@
 	},
 /area/holodeck/source_beach)
 "agb" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 4
 	},
 /area/holodeck/source_beach)
@@ -2718,19 +2713,15 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_meetinghall)
 "agw" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 10
 	},
 /area/holodeck/source_beach)
 "agx" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach"
-	},
+/turf/simulated/floor/holofloor/beach/coastline,
 /area/holodeck/source_beach)
 "agy" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beach";
+/turf/simulated/floor/holofloor/beach/coastline{
 	dir = 6
 	},
 /area/holodeck/source_beach)
@@ -3117,14 +3108,12 @@
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_basketball)
 "ahz" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beachcorner";
+/turf/simulated/floor/holofloor/beach/corner{
 	dir = 8
 	},
 /area/holodeck/source_beach)
 "ahA" = (
-/turf/simulated/floor/holofloor/beach/sand{
-	icon_state = "beachcorner";
+/turf/simulated/floor/holofloor/beach/corner{
 	dir = 4
 	},
 /area/holodeck/source_beach)
@@ -22146,7 +22135,9 @@
 	icon_state = "stoneborder";
 	dir = 1
 	},
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/beach/bathwater{
+	dir = 1
+	},
 /area/holodeck/source_temple)
 "dTZ" = (
 /obj/structure/table/holo_woodentable,
@@ -22299,7 +22290,7 @@
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
 "gnX" = (
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/beach/bathwater,
 /area/holodeck/source_temple)
 "gse" = (
 /obj/structure/table/holo_woodentable,
@@ -22432,7 +22423,11 @@
 	alpha = 204;
 	pixel_x = 0
 	},
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/tiled/stone{
+	icon = 'icons/misc/beach.dmi';
+	icon_state = "seashallow";
+	name = "water"
+	},
 /area/holodeck/source_temple)
 "jps" = (
 /turf/simulated/floor/holofloor/beach/sand{
@@ -22911,7 +22906,7 @@
 /area/syndicate_mothership)
 "pUt" = (
 /obj/effect/floor_decal/stoneborder,
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/beach/bathwater,
 /area/holodeck/source_temple)
 "pWv" = (
 /obj/structure/table/holo_woodentable,
@@ -22922,7 +22917,9 @@
 /area/holodeck/source_cafe)
 "qir" = (
 /obj/effect/floor_decal/stoneborder/corner,
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/beach/water{
+	dir = 4
+	},
 /area/holodeck/source_temple)
 "qoH" = (
 /obj/effect/floor_decal/spline/plain{
@@ -22947,7 +22944,9 @@
 	icon_state = "stoneborder_c";
 	dir = 8
 	},
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/beach/bathwater{
+	dir = 1
+	},
 /area/holodeck/source_temple)
 "qRm" = (
 /turf/simulated/floor/holofloor/beach/sand{
@@ -23119,7 +23118,9 @@
 	icon_state = "stoneborder";
 	dir = 4
 	},
-/turf/simulated/floor/holofloor/beach/water,
+/turf/simulated/floor/holofloor/beach/water{
+	dir = 4
+	},
 /area/holodeck/source_temple)
 "tGT" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -23199,6 +23200,13 @@
 "vbR" = (
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
+"vfl" = (
+/turf/simulated/floor/holofloor/tiled/stone{
+	icon = 'icons/misc/beach.dmi';
+	icon_state = "seashallow";
+	name = "water"
+	},
+/area/holodeck/source_temple)
 "vgY" = (
 /obj/structure/closet{
 	icon_closed = "cabinet_closed";
@@ -45333,7 +45341,7 @@ pgJ
 pUt
 gnX
 gnX
-gnX
+vfl
 gnX
 gnX
 dNG

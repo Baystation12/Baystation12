@@ -330,9 +330,12 @@
 /turf/simulated/floor/beach/water/ocean
 	icon_state = "seadeep"
 
-/turf/simulated/floor/beach/water/New()
-	..()
-	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
+/turf/simulated/floor/beach/water/Initialize()
+	. = ..()
+	var/image/I = image(icon,icon_state="water5")
+	I.plane = ABOVE_HUMAN_PLANE
+	I.layer = ABOVE_HUMAN_LAYER
+	overlays += I
 
 /turf/simulated/floor/crystal
 	name = "crystal floor"

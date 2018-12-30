@@ -17,6 +17,9 @@
 /turf/simulated/floor/holofloor/set_flooring()
 	return
 
+/turf/simulated/floor/holofloor/update_dirt()
+	return
+
 /turf/simulated/floor/holofloor/carpet
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
@@ -105,14 +108,55 @@
 
 /turf/simulated/floor/holofloor/beach/coastline
 	name = "coastline"
-	icon = 'icons/misc/beach2.dmi'
-	icon_state = "sandwater"
-	base_icon_state = "sandwater"
+	icon_state = "beach"
+	base_icon_state = "beach"
+
+/turf/simulated/floor/holofloor/beach/coastline/Initialize()
+	. = ..()
+	var/image/I = image(icon,icon_state="beach_overlay")
+	I.plane = ABOVE_HUMAN_PLANE
+	I.layer = ABOVE_HUMAN_LAYER
+	overlays += I
+
+/turf/simulated/floor/holofloor/beach/corner
+	name = "coastline"
+	icon_state = "beachcorner"
+	base_icon_state = "beachcorner"
+
+/turf/simulated/floor/holofloor/beach/corner/Initialize()
+	. = ..()
+	var/image/I = image(icon,icon_state="beachcorner_overlay")
+	I.plane = ABOVE_HUMAN_PLANE
+	I.layer = ABOVE_HUMAN_LAYER
+	overlays += I
 
 /turf/simulated/floor/holofloor/beach/water
 	name = "water"
+	desc = "Surprisingly wet for a hologram."
+	base_desc = "Surprisingly wet for a hologram."
 	icon_state = "seashallow"
 	base_icon_state = "seashallow"
+
+/turf/simulated/floor/holofloor/beach/water/Initialize()
+	. = ..()
+	var/image/I = image(icon,icon_state="seashallow_overlay")
+	I.plane = ABOVE_HUMAN_PLANE
+	I.layer = ABOVE_HUMAN_LAYER
+	overlays += I
+
+/turf/simulated/floor/holofloor/beach/bathwater
+	name = "water"
+	desc = "Surprisingly wet for a hologram."
+	base_desc = "Surprisingly wet for a hologram."
+	icon_state = "seashallow"
+	base_icon_state = "seashallow"
+
+/turf/simulated/floor/holofloor/beach/bathwater/Initialize()
+	. = ..()
+	var/image/I = image(icon,icon_state="bathwater_overlay")
+	I.plane = ABOVE_HUMAN_PLANE
+	I.layer = ABOVE_HUMAN_LAYER
+	overlays += I
 
 /turf/simulated/floor/holofloor/desert
 	name = "desert sand"
