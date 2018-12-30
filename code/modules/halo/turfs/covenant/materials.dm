@@ -123,3 +123,12 @@
 
 /obj/item/stack/material/kemocite/fifty
 	amount = 50
+
+
+
+/* DRONE BIOMASS */
+
+/material/drone_biomass
+	name = "drone biomass"
+	display_name = "drone biomass"
+	icon_base = "diona"
