@@ -133,7 +133,10 @@
 		//begin this recharge cycle
 		if(armour_state == SHIELD_PROCESS)
 			playsound(user, 'code/modules/halo/sounds/Shields_Recharge.ogg',100,0)
-			user.visible_message("<span class = 'notice'>A faint hum emanates from [user]'s [connectedarmour].</span>")
+			if(user)
+				user.visible_message("<span class = 'notice'>A faint hum emanates from [user]'s [connectedarmour].</span>")
+			else
+				connectedarmour.visible_message("<span class = 'notice'>A faint hum emanates from [connectedarmour].</span>")
 			update_overlay("shield_overlay_recharge")
 			armour_state = SHIELD_RECHARGE
 		nextcharge = world.time + shield_recharge_delay

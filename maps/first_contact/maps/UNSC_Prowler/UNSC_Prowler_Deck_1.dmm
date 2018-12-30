@@ -151,7 +151,7 @@
 "cU" = (/obj/machinery/computer/navigation{icon_keyboard = "holotable"; icon_screen = "holotable"; icon_state = "holotable"; name = "Holotable"; tag = "icon-holotable"},/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Bridge)
 "cV" = (/obj/machinery/computer/navigation{tag = "icon-holotable (NORTH)"; name = "Holotable"; icon_state = "holotable"; dir = 1; icon_keyboard = "holotable"; icon_screen = "holotable"},/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Bridge)
 "cW" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
-"cX" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
+"cX" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/effect/landmark/ghost_spawn,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
 "cY" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{name = "Bridge"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/Bridge)
 "cZ" = (/obj/structure/sign/deck/bridge{pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)
 "da" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/unscfox/deck1/hallway)

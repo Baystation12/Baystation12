@@ -319,7 +319,7 @@
 "gg" = (/obj/machinery/computer/navigation,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "gh" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "gi" = (/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
-"gj" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
+"gj" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "gk" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "gl" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "gm" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)

@@ -66,20 +66,8 @@
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,/datum/job/UNSC_ship/gunnery_chief,/datum/job/UNSC_ship/gunnery,\
 /datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician)
 
-#include "maps/UNSC_Heaven_Above/jobs/command.dm"
-#include "maps/UNSC_Heaven_Above/jobs/flight.dm"
-#include "maps/UNSC_Heaven_Above/jobs/logistics.dm"
-#include "maps/UNSC_Heaven_Above/jobs/marines.dm"
-#include "maps/UNSC_Heaven_Above/jobs/medical.dm"
-#include "maps/UNSC_Heaven_Above/jobs/naval_security.dm"
-#include "maps/UNSC_Heaven_Above/jobs/operations.dm"
-#include "maps/UNSC_Heaven_Above/jobs/pilot.dm"
-#include "maps/UNSC_Heaven_Above/jobs/ship_ai.dm"
-#include "maps/UNSC_Heaven_Above/jobs/tactical.dm"
-#include "maps/UNSC_Heaven_Above/jobs/technical.dm"
 
-
-/datum/map/first_contact
+/*/datum/map/first_contact
 	allowed_jobs = list(/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,/datum/job/UNSC_ship/cag,/datum/job/UNSC_ship/bridge,\
 	/datum/job/UNSC_ship/mechanic_chief,/datum/job/UNSC_ship/mechanic,/datum/job/UNSC_ship/logistics_chief,/datum/job/UNSC_ship/logistics,\
 	/datum/job/UNSC_ship/marine_co,/datum/job/UNSC_ship/marine_xo,/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/weapons,/datum/job/UNSC_ship/marine,\
@@ -112,3 +100,4 @@
 		/datum/species/brutes = list(),\
 		/datum/species/sanshyuum = list()\
 		)
+*/
