@@ -9,6 +9,11 @@
 	var/badgas					//id of gas that is toxic to life here
 
 	var/lightlevel = 0 //This default makes turfs not generate light. Adjust to have exoplanents be lit.
+	var/night = TRUE
+	var/daycycle //How often do we change day and night
+	var/daycolumn = 0 //Which column's light needs to be updated next?
+	var/daycycle_column_delay = 10 SECONDS
+
 	in_space = 0
 	var/maxx
 	var/maxy
@@ -54,6 +59,7 @@
 	generate_features()
 	generate_landing(2)		//try making 4 landmarks
 	update_biome()
+	generate_daycycle()
 	START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
@@ -75,7 +81,7 @@
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/effect/overmap/sector/exoplanet/Process()
+/obj/effect/overmap/sector/exoplanet/Process(wait, tick)
 	if(animals.len < 0.5*max_animal_count && !repopulating)
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
@@ -107,6 +113,23 @@
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
 
+	if(daycycle)
+		if(tick % round(daycycle / wait) == 0)
+			night = !night
+			daycolumn = 1
+		if(daycolumn && tick % round(daycycle_column_delay / wait) == 0)
+			update_daynight()
+
+/obj/effect/overmap/sector/exoplanet/proc/update_daynight()
+	var/light = 0.1
+	if(!night)
+		light = lightlevel
+	for(var/turf/simulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
+		T.set_light(light, 0.1, 2)
+	daycolumn++
+	if(daycolumn > maxx)
+		daycolumn = 0
+
 /obj/effect/overmap/sector/exoplanet/proc/remove_animal(var/mob/M)
 	animals -= M
 	GLOB.death_event.unregister(M, src)
@@ -135,6 +158,14 @@
 
 	for(var/mob/living/simple_animal/A in animals)
 		adapt_animal(A)
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_daycycle()
+	if(lightlevel)
+		night = FALSE //we start with a day if we have light.
+
+		//When you set daycycle ensure that the minimum is larger than [maxx * daycycle_column_delay].
+		//Otherwise the right side of the exoplanet can get stuck in a forever day.
+		daycycle = rand(10 MINUTES, 40 MINUTES)
 
 /obj/effect/overmap/sector/exoplanet/proc/adapt_seed(var/datum/seed/S)
 	S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
