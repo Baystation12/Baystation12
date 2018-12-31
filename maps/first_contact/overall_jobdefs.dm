@@ -66,7 +66,7 @@
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,/datum/job/UNSC_ship/gunnery_chief,/datum/job/UNSC_ship/gunnery,\
 /datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician)
 
-
+/*
 /datum/map/first_contact
 	allowed_jobs = list(/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,/datum/job/UNSC_ship/cag,/datum/job/UNSC_ship/bridge,\
 	/datum/job/UNSC_ship/mechanic_chief,/datum/job/UNSC_ship/mechanic,/datum/job/UNSC_ship/logistics_chief,/datum/job/UNSC_ship/logistics,\
@@ -101,3 +101,4 @@
 		/datum/species/sanshyuum = list()\
 		)
 
+*/
