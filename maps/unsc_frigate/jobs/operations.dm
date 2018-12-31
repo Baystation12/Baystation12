@@ -8,7 +8,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	spawnpoint_override = "UNSC Frigate"
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops_chief
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/BO
 	selection_color = "#33ccff"
 
 	//job_guide = "Your responsibility is to supervise general ship and bridge operations including navigation and helm control. Unfortuantely you don't have much content, but more is coming soon."
@@ -25,7 +25,7 @@
 	total_positions = -1
 	spawn_positions = 2
 	spawnpoint_override = "UNSC Frigate"
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/BO
 	selection_color = "#33ccff"
 	alt_titles = list("Sensor Operator", "Electronic Warfare Specialist","Cryptologic Specialist","Signals Analyst","Navigator","Helmsman")
 	//job_guide = "Your job is general ship and bridge operations like navigation and helm control. Unfortunately you don't have much content but more is coming soon."
