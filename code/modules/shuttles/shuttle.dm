@@ -217,7 +217,7 @@
 				if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
 					if(get_area(TA) in shuttle_area)
 						continue
-					TA.ChangeTurf(ceiling_type, 1, 1)
+					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
 
 	// Remove all powernets that were affected, and rebuild them.
 	var/list/cables = list()
