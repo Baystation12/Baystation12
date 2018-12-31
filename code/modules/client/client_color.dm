@@ -55,10 +55,19 @@
 	client.color = null
 	if(!client_colors.len)
 		return
-	var/color = list(1,1,1, 1,1,1, 1,1,1) //Star at normal
+	var/color = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
 	for(var/datum/client_color/CC in client_colors)
-		for(var/i = 1; i <= 9; i += 1) //go over all 9 parts of list
-			color[i] = color[i] * CC.client_color[i]
+		//Matrix multiplication newcolor * current
+
+		var/current = color
+		for(var/m = 1; m <= 3; m += 1) //For each row
+			for(var/i = 1; i <= 3; i += 1) //go over each column of the second matrix
+				var/sum = 0
+				for(var/j = 1; j <= 3; j += 1) //multiply each pair
+					sum += CC.client_color[(m-1)*3 + j] * current[(j-1)*3 + i]
+
+				color[(m-1)*3 + i] = sum
+
 		if(CC.override)
 			break
 
@@ -66,13 +75,13 @@
 
 /datum/client_color/monochrome
 	client_color = list(0.33,0.33,0.33, 0.33,0.33,0.33, 0.33,0.33,0.33)
-	priority = INFINITY
+	priority = 100
 
 //Similar to monochrome but shouldn't look as flat, same priority
 /datum/client_color/noir
 	client_color = list(0.299,0.299,0.299, 0.587,0.587,0.587, 0.114,0.114,0.114)
-	priority = INFINITY
-	override = TRUE
+	priority = 200
+
 
 //Disabilities, could be hooked to brain damage or chargen if so desired.
 /datum/client_color/deuteranopia
@@ -89,4 +98,5 @@
 
 /datum/client_color/berserk
 	client_color = "#af111c"
-	priority = 100
+	priority = INFINITY //This effect sort of exists on its own you /have/ to be seeing RED
+	override = TRUE //Because multiplying this will inevitably fail
