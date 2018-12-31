@@ -3,7 +3,7 @@
 	name = "CCS Battlecruiser"
 	full_name = "CCS Battlecruiser"
 	path = "covenant_cruiser"
-	lobby_icon = 'code/modules/halo/splashworks/covenant.png'
+	lobby_icon = 'code/modules/halo/splashworks/covenant.jpg'
 	id_hud_icons = 'maps/ccs_battlecruiser/opr_hud_icons.dmi'
 
 	station_name  = ""

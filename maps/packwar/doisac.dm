@@ -3,7 +3,7 @@
 	name = "Doisac"
 	full_name = "Oth Sonin III \'Doisac\'"
 	path = "doisac"
-	lobby_icon = 'code/modules/halo/splashworks/title6.png'
+	lobby_icon = 'code/modules/halo/splashworks/brutes.jpg'
 	id_hud_icons = 'packwar_hud_icons.dmi'
 	station_name  = "Doisac"
 	station_short = "Doisac"
