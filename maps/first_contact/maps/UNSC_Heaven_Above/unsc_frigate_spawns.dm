@@ -428,7 +428,7 @@ GLOBAL_LIST_EMPTY(logistics_spawns)
 	display_name = "UNSC Logistics Specialist Spawn"
 	restrict_job = list("Logistics Specialist")
 
-/datum/spawnpoint/logisticsf/New()
+/datum/spawnpoint/logistics/New()
 	..()
 	turfs = GLOB.logistics_spawns
 
@@ -438,6 +438,104 @@ GLOBAL_LIST_EMPTY(logistics_spawns)
 /obj/effect/landmark/start/logistics/New()
 	..()
 	GLOB.logistics_spawns += loc
+
+//UNSC Heaven Above Marine Spawnpoints
+
+//Marine
+
+GLOBAL_LIST_EMPTY(marine_spawns)
+
+/datum/spawnpoint/marine
+	display_name = "UNSC Marine Spawn"
+	restrict_job = list("Marine")
+
+/datum/spawnpoint/marine/New()
+	..()
+	turfs = GLOB.marine_spawns
+
+/obj/effect/landmark/start/marine
+	name = "UNSC Marine Spawn"
+
+/obj/effect/landmark/start/marine/New()
+	..()
+	GLOB.marine_spawns += loc
+
+//Marine CO
+
+GLOBAL_LIST_EMPTY(marine_co_spawns)
+
+/datum/spawnpoint/marine_co
+	display_name = "UNSC Marine Company Officer Spawn"
+	restrict_job = list("Marine Company Officer")
+
+/datum/spawnpoint/marine_co/New()
+	..()
+	turfs = GLOB.marine_co_spawns
+
+/obj/effect/landmark/start/marine_co
+	name = "UNSC Marine Company Officer Spawn"
+
+/obj/effect/landmark/start/marine_co/New()
+	..()
+	GLOB.marine_co_spawns += loc
+
+//Marine XO
+
+GLOBAL_LIST_EMPTY(marine_xo_spawns)
+
+/datum/spawnpoint/marine_xo
+	display_name = "UNSC Marine Company Sergeant Spawn"
+	restrict_job = list("Marine Company Sergeant")
+
+/datum/spawnpoint/marine_xo/New()
+	..()
+	turfs = GLOB.marine_xo_spawns
+
+/obj/effect/landmark/start/marine_xo
+	name = "UNSC Marine Company Sergeant Spawn"
+
+/obj/effect/landmark/start/marine_xo/New()
+	..()
+	GLOB.marine_xo_spawns += loc
+
+//Marine SL
+
+GLOBAL_LIST_EMPTY(marine_sl_spawns)
+
+/datum/spawnpoint/marine_sl
+	display_name = "UNSC Marine Squad Leader Spawn"
+	restrict_job = list("Marine Squad Leader")
+
+/datum/spawnpoint/marine_sl/New()
+	..()
+	turfs = GLOB.marine_sl_spawns
+
+/obj/effect/landmark/start/marine_sl
+	name = "UNSC Marine Squad Leader Spawn"
+
+/obj/effect/landmark/start/marine_sl/New()
+	..()
+	GLOB.marine_sl_spawns += loc
+
+//Marine Engineer
+
+GLOBAL_LIST_EMPTY(specialist_spawns)
+
+/datum/spawnpoint/specialist
+	display_name = "UNSC Combat Engineer Spawn"
+	restrict_job = list("Combat Engineer")
+
+/datum/spawnpoint/specialist/New()
+	..()
+	turfs = GLOB.specialist_spawns
+
+/obj/effect/landmark/start/specialist
+	name = "UNSC Combat Engineer Spawn"
+
+/obj/effect/landmark/start/specialist/New()
+	..()
+	GLOB.specialist_spawns += loc
+
 //UNSC Heaven Above ODST Spawnpoints
 
 GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
