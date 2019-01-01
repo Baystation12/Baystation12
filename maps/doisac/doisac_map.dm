@@ -35,13 +35,5 @@
 	/datum/job/packwar_merc/jackal/sniper,\
 	/datum/job/packwar_merc/jackal/sniper/ram\
 	)
-	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID)
-	default_spawn = DEFAULT_SPAWNPOINT_ID
-
-/*
-/datum/map/doisac/New()
-	. = ..()
-	lobby_icon = pick(\
-		'code/modules/halo/splashworks/title6.png'\
-	)
-	*/
+	allowed_spawns = list()
+	default_spawn = null
