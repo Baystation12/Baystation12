@@ -4,7 +4,6 @@
 	#include "outfits.dm"
 	#include "turfs_areas.dm"
 	#include "desert_outpost_spawns.dm"
-	#include "unit_test.dm"
 	#include "desert_outpost_map.dm"
 	#include "desert_outpost.dmm"
 

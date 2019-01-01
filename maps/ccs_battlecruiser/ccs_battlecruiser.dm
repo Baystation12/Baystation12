@@ -13,18 +13,18 @@
 
 	#include "ccs_battlecruiser_areas.dm"
 
-	#include "ccs_battlecruiser1.dmm"
-	#include "ccs_battlecruiser2.dmm"
-	#include "ccs_battlecruiser3.dmm"
-	#include "ccs_battlecruiser4.dmm"
-	#include "ccs_battlecruiser5.dmm"
-
 	#include "planet_staging.dm"
 	#include "planet_staging.dmm"
 
 	#include "mapdef.dm"
 
 	#include "../_gamemodes/opredflag.dm"
+
+	#include "ccs_battlecruiser1.dmm"
+	#include "ccs_battlecruiser2.dmm"
+	#include "ccs_battlecruiser3.dmm"
+	#include "ccs_battlecruiser4.dmm"
+	#include "ccs_battlecruiser5.dmm"
 
 	#define using_map_DATUM /datum/map/covenant_cruiser
 

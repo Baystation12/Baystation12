@@ -1,12 +1,11 @@
 #if !defined(using_map_DATUM)
 
-	#include "../_gamemodes/stranded/_all_includes.dm"
-
 	#include "../desert_outpost/jobs.dm"
 	#include "../desert_outpost/outfits.dm"
 	#include "../desert_outpost/desert_outpost_spawns.dm"
-	#include "../desert_outpost/unit_test.dm"
 	#include "../desert_outpost/turfs_areas.dm"
+
+	#include "../_gamemodes/stranded/_all_includes.dm"
 
 	#include "crashsite-zeta.dmm"
 
