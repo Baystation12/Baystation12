@@ -52,6 +52,7 @@
 #define HOME_SYSTEM_LORDANIA   "Lordania"
 #define HOME_SYSTEM_KINGSTON   "Kingston"
 #define HOME_SYSTEM_GAIA       "Gaia"
+#define HOME_SYSTEM_MAGNITKA   "Magnitka"
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
 #define HOME_SYSTEM_DEEP_SPACE "Deep Space"
