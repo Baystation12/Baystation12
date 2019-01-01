@@ -7,6 +7,7 @@
 
 	#include "../_gamemodes/stranded/_all_includes.dm"
 
+	#include "crashsite_zeta_map.dm"
 	#include "crashsite-zeta.dmm"
 
 	#define using_map_DATUM /datum/map/crashsite_zeta
