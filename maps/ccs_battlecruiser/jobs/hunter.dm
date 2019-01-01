@@ -20,17 +20,17 @@
 	*/
 	faction = "Covenant"
 
-	hard_cap = 10
-	initial_spawn_req = 0
-	initial_spawn_target = 0
+	//hard_cap = 10
+	//initial_spawn_req = 0
+	//initial_spawn_target = 0
 
 	landmark_id = "hunter_start"
-	mob_path = /mob/living/simple_animal/lekgolo/mgalekgolo
+	mob_path = /mob/living/simple_animal/mgalekgolo
 	minimum_player_age = 0
-	suspicion_chance = 0
+	//suspicion_chance = 0
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
 
-	min_player_age = 0
+	//min_player_age = 0
 
 	antag_text = "You are Mga'lekgolo, a colony of sentient worms encased in powerful armour and carrying heavy weaponry. Protect the ship and the prophets with all your being."
 
