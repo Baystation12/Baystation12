@@ -24,7 +24,7 @@
 
 	#include "mapdef.dm"
 
-	#include "mode_opredflag.dm"
+	#include "../_gamemodes/opredflag.dm"
 
 	#define using_map_DATUM /datum/map/covenant_cruiser
 
