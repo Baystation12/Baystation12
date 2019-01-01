@@ -50,7 +50,7 @@
 			my_area = G.my_area
 	if(!my_area)
 		my_area = new()
-		my_area.name = "Gravity lift chute"
+		//my_area.name = "Gravity lift chute"
 		my_area.has_gravity = 0
 
 	for(var/turf/T in base_turfs)
