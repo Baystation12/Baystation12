@@ -945,9 +945,9 @@
 "si" = (/obj/structure/closet,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/unscfrigate/brig)
 "sj" = (/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/structure/closet/secure_closet/guncabinet,/turf/simulated/floor/tiled/dark,/area/unscfrigate/brig)
 "sk" = (/obj/machinery/flasher{id = "permflash"; name = "Floor mounted flash"},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"sl" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "pb1"; pixel_y = 32},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"sm" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "pb2"; pixel_y = 32; req_access = list(1)},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"sn" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "pb3"; pixel_y = 32; req_access = list(1)},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
+"sl" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "pb1"; pixel_y = 32; req_access = list(303)},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
+"sm" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "pb2"; pixel_y = 32; req_access = list(303)},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
+"sn" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "pb3"; pixel_y = 32; req_access = list(303)},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "so" = (/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "sp" = (/obj/structure/table/steel,/obj/item/clothing/head/helmet/solgov,/obj/item/clothing/head/helmet/solgov,/obj/item/clothing/suit/storage/vest/solgov,/obj/item/clothing/suit/storage/vest/solgov,/turf/simulated/floor/tiled/dark,/area/unscfrigate/central)
 "sq" = (/obj/structure/table/steel,/obj/item/clothing/accessory/holster/thigh,/obj/item/clothing/accessory/holster/thigh,/turf/simulated/floor/tiled/dark,/area/unscfrigate/central)
@@ -1066,7 +1066,7 @@
 "uz" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "uA" = (/turf/simulated/floor/tiled/white,/area/unscfrigate/brig)
 "uB" = (/obj/structure/bed/chair/office/dark,/obj/effect/landmark/start/Master_At_Arms,/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"uC" = (/obj/machinery/door/airlock/halo{name = "Cell 3"},/obj/machinery/door/blast/shutters{_wifi_id = "PERMABRIG_BLASTDOOR_2"; name = "Cell 3 Shutters"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/brig)
+"uC" = (/obj/machinery/door/airlock/halo{name = "Cell 3"},/obj/machinery/door/blast/shutters{_wifi_id = "PERMABRIG_BLASTDOOR_2"; id = "1010"; name = "Cell 3 Shutters"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/brig)
 "uD" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/tiled/white,/area/unscfrigate/brig)
 "uE" = (/obj/machinery/door/blast/atmos_close/regular{id = "deck2messhall3"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
 "uF" = (/obj/machinery/button/remote/blast_door/atmos_door{id = "deck2messhall3"; pixel_y = 24},/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
@@ -1109,7 +1109,7 @@
 "vq" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "vr" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Naval Security"},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "vs" = (/obj/structure/table/standard,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"vt" = (/obj/machinery/button/toggle/door{_wifi_id = "PERMABRIG_BLASTDOOR_2"; dir = 8; pixel_x = 24},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
+"vt" = (/obj/machinery/button/toggle/door{_wifi_id = "PERMABRIG_BLASTDOOR_2"; dir = 8; id = "1010"; pixel_x = 24},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "vu" = (/obj/machinery/door/airlock/multi_tile/glass{dir = 4; name = "Mess Hall"},/obj/machinery/door/blast/atmos_close/regular{id = "deck2messhall3"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
 "vv" = (/obj/structure/sign/halo_floorsign/engineering{dir = 8},/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
 "vw" = (/obj/item/weapon/stool,/obj/effect/landmark/start/unsc_frigate,/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
@@ -1150,7 +1150,7 @@
 "wf" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "wg" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "wh" = (/obj/structure/table/steel_reinforced,/obj/item/device/megaphone,/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"wi" = (/obj/machinery/button/toggle/door{_wifi_id = "PERMABRIG_BLASTDOOR_1"; dir = 8; pixel_x = 24},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
+"wi" = (/obj/machinery/button/toggle/door{_wifi_id = "PERMABRIG_BLASTDOOR_1"; dir = 8; id = "1001"; pixel_x = 24},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "wj" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
 "wk" = (/obj/structure/table/standard,/obj/item/weapon/material/kitchen/utensil/fork,/obj/machinery/atmospherics/pipe/simple/visible/blue,/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
 "wl" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/turf/simulated/floor/plating,/area/unscfrigate/central)
@@ -1163,7 +1163,7 @@
 "ws" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "wt" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/airlock/halo{name = "Head of Naval Security"},/turf/simulated/floor/tiled,/area/unscfrigate/brig)
 "wu" = (/obj/structure/bed/chair/office/dark{dir = 1},/obj/effect/landmark/start/unsc_security,/turf/simulated/floor/tiled,/area/unscfrigate/brig)
-"ww" = (/obj/machinery/door/airlock/halo{name = "Cell 4"},/obj/machinery/door/blast/shutters{_wifi_id = "PERMABRIG_BLASTDOOR_1"; id = 1001; name = "Cell 4 Shutters"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/brig)
+"wv" = (/obj/machinery/door/airlock/halo{name = "Cell 4"},/obj/machinery/door/blast/shutters{_wifi_id = "PERMABRIG_BLASTDOOR_1"; id = "1001"; name = "Cell 4 Shutters"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/brig)
 "wx" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/unscfrigate/crewmess)
 "wy" = (/obj/machinery/door/airlock/halo_maint{name = "Maintenance"},/turf/simulated/floor/tiled,/area/unscfrigate/central)
 "wz" = (/obj/machinery/atmospherics/valve/digital,/turf/simulated/floor/plating,/area/unscfrigate/central)
@@ -1876,7 +1876,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmuuq
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmumuvdvemumuvfoJvgvhvivjoJvkvlvmvnoJoJnvnwnxvonCnCvpnvnvvqnCvruAuAuAnCnCnCtUtvvstVtVtxnCvtnvqEqEqEpynCnwvuvvvwvxvxvwvyvwvxvxvwvzvAvBvCvwvDvEvFssssuRsssspBuRoUoUoUmPqRrnmQmXmgvGududududududududvHmgmgvInbnbnbncndvJnenevKmlmlmlmlpimlrVrVvLnhmlmlmlmlmlmlmlmlmlmlmlmlqvmloAqwmqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmumumumumumuvMoJmumumumumumumumumumumunvnwvNvOvPodogrfnvnCnCnvqFvQvRnvnCnCvSnvtvtvtvnvnCnCnvnvnvnvpynCvTtCuJvwvxvUvwvyvwvxvxvwvzvwvVvCvwuJtCmPmPmPmPssssvWvXoUoUoUmPqTmdmQmXmgnJmXmXmXmXmXmXmXmXmXmgmgnanbnbnbncnLnMnMnenevYvZnhnhnhvZwawbnhwcmlpLnenenenenepKnepKnenenenenevamqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmumumumumumuwdoJmumumumumumumumumumumunvnwwepynvnvnvnvnvnCnCnvnvtunvnvwfnCnCwgtUwhtUtvnCwinvpZqaqbpynCnwtCwjvwvxvxvwvyvwvxvUvwvzvwvVwkvwuJtCwlwmoomcpcpdpcmcpemPmPmPmPmdmQmXmgmXududududududududmXmgmgphnbnbnbncovowowwnnfmlmlmlmlmlmlwomlnhwpmlnemlmlmlmlmlmlmpmlmlmlmlmloznemqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmumumumumumusdoJmumumumumumumumumumumunvnwnxohsonCnCnCnCnCnCnvwqwrwswtoguBnCnCnCwunCtwnCskwwqEqEqFuDnCnwtCwxvwvxvxvwvyvwvxvxvwvzvwvVvCvwuJwywzojwAmcssssssmcmcmPmPmPmPmdmQmXmgmXmXmXpIpIpIwBmXmXmXmgmgnanbnbnbncovowowwnwCmlrbrbrbrbrbnhmlnhnhmlnemloAnjnjnjwDnenmnmnmnmnemlnemqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmumumumumumusdoJmumumumumumumumumumumunvnwnxohsonCnCnCnCnCnCnvwqwrwswtoguBnCnCnCwunCtwnCskwvqEqEqFuDnCnwtCwxvwvxvxvwvyvwvxvxvwvzvwvVvCvwuJwywzojwAmcssssssmcmcmPmPmPmPmdmQmXmgmXmXmXpIpIpIwBmXmXmXmgmgnanbnbnbncovowowwnwCmlrbrbrbrbrbnhmlnhnhmlnemloAnjnjnjwDnenmnmnmnmnemlnemqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaupmumumumumumupRoJmumumumumumumumumumumunvnwvNodwEwFodododododwtododognvwGtVwHwqnCsRnCtvsRnCnvqEqEqEpynCnwtCuJuJuJwIuJuJuJuJuJuJwJwKwLwMwNuJtCwOoZwPmcmcwQmcmcmcmPmPmPmPmdmQqQmgwRwRwSmXmXmXmXwSwRwRmgmgnanbnbnbncowowownenemlnhnhnhnhnhnhmlnhnhmlnemlwTnRnRnRnRwUnTnRnRnRwUmlnemqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawVwVwVwVwVwVwVwVwVwVwVwWwWwWwWwWwWwXwYwWwWwWwWwWwWwWwWwWwWwWwWwZxapypypypypynvxbnvnvxcxdtVpypypypypypypypypypypypyxexexexexfxgtCtCtCtCtCxhxhxhxhxhtCxitCxjxkxltCtCxmnFxnmcmcmcmcmcmcmPmPmPmPmdmQmRmgmgmgmgmgmgmgmgmgmgmgmgmgnanbnbnbncovowownenemlnhrbrbrbrbrbmltMnhmlnomlxooBoBoBoCnkoDoDoDoDnnmlvamqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxpxqwVwVwVwVwYwYwYxrxsxtxuxvxwxxwYxyxzxAwYxBwWxCxDxCxCxExFxFwWwZxanvnvnvnvpyxGqExHnvxItVxJpynvnvnvnvnvnvnvnvnvnvnvxKxLxMxNxOxPxQuJxRuJxQxSuJuJuJuJuJuJtCxTxUtCtCtCmcmcmcmcmcmcmcmcmcmcmcmcmcmdxVxWmgmgmgmgmgmgmgmgmgmgmgmgmgxXmjmjmjxYmlmlmlmlmlmlwomlmlmlmlmlmlxZugmlmpmlmomlmlmlmlmomlmlmlmlmomlmpmqdidilqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqlqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

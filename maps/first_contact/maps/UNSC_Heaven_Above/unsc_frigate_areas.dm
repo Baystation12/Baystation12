@@ -125,7 +125,7 @@
 
 /area/unscfrigate/hangar_port
 	name = "Port Hangar"
-	icon_state = "aux_hangar"
+	icon_state = "porthang"
 
 /area/unscfrigate/hangar_port/berth1
 	name = "Berth1"
@@ -153,7 +153,7 @@
 
 /area/unscfrigate/hangar_starb
 	name = "Starboard Hangar"
-	icon_state = "aux_hangar"
+	icon_state = "starhang"
 
 /area/unscfrigate/hangar_starb/berth1
 	name = "Berth1"
@@ -288,7 +288,7 @@
 
 /area/unscfrigate/marine_dorms
 	name = "Marine Dormitories"
-	icon_state = "marine"
+	icon_state = "marinebunks"
 
 /area/unscfrigate/garage_4
 	name = "Primary Vehicle Garage"
@@ -296,7 +296,7 @@
 
 /area/unscfrigate/odstcountry
 	name = "ODST Country"
-	icon_state = "marine"
+	icon_state = "odst"
 
 /area/unscfrigate/portguns
 	name = "Port weapon emplacement"
