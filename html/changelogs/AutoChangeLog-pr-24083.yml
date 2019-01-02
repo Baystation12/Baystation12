@@ -1,5 +1,0 @@
-author: "Broseph Stylin"
-delete-after: True
-changes: 
-  - rscadd: "A system to automatically switch clothing icons based on gender has been introduced. It is currently set up to work for humans and human subspecies."
-  - tweak: "Expeditionary Corps, Fleet and Army uniforms as well as EXO and corporate variations of the Torch Research uniforms now have gendered icons."
