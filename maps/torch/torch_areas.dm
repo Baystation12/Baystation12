@@ -506,6 +506,11 @@
 	base_turf = /turf/simulated/floor/plating
 */
 
+/area/turbolift/cargo_lift
+	name = "\improper Cargo Lift"
+	icon_state = "shuttle3"
+	base_turf = /turf/simulated/open
+
 // Ninja areas
 /area/ninja_dojo
 	name = "\improper Ninja Base"
