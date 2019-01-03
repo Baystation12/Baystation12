@@ -33,6 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: ""Temporarily switched around the posisition of inniecomms and cmdocomms on the commando headset. This should allow inniecomms to be used by commandos on the :h key until the issue with inniecomms is fixed""
-  - tweak: ""Made the anti-material rounds exactly the same as the SRS rounds, to reduce Commando crying about it. The weapon also has a scope placement that makes more sense - Weapon tab rather than object.""
-  - rscadd: ""Added Backpacks for commandos to their vendor. Credits to Eluxor for the sprites.""
+  - tweak: "Temporarily switched around the posisition of inniecomms and cmdocomms on the commando headset. This should allow inniecomms to be used by commandos on the :h key until the issue with inniecomms is fixed"
+  - tweak: "Made the anti-material rounds exactly the same as the SRS rounds, to reduce Commando crying about it. The weapon also has a scope placement that makes more sense - Weapon tab rather than object."
+  - rscadd: "Added Backpacks for commandos to their vendor. Credits to Eluxor for the sprites."
