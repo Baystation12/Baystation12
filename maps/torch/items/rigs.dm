@@ -59,7 +59,7 @@
 	suit_type = "advanced command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Expeditionary Corps and their peers."
 	icon_state = "command_XO_rig"
-	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 50)
+	armor = list(melee = 40, bullet = 30, laser = 20, energy = 20, bomb = 35, bio = 100, rad = 90)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/xo
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/xo
@@ -92,7 +92,7 @@
 	suit_type = "advanced command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
 	icon_state = "command_CO_rig"
-	armor = list(melee = 40, bullet = 30, laser = 20, energy = 20, bomb = 35, bio = 100, rad = 50)
+	armor = list(melee = 40, bullet = 30, laser = 20, energy = 20, bomb = 35, bio = 100, rad = 90)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/co
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/co
@@ -161,7 +161,7 @@
 	suit_type = "security command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to ranking security officers of the Expeditionary Corps and their peers."
 	icon_state = "command_sec_rig"
-	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 40)
+	armor = list(melee = 45, bullet = 35, laser = 35, energy = 15, bomb = 35, bio = 100, rad = 40)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/security
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/security
