@@ -180,7 +180,7 @@
 	suit_type = "hazmat hardsuit"
 	desc = "An Anomalous Material Interaction hardsuit, a cutting-edge NanoTrasen design, protects the wearer against the strangest energies the universe can throw at it."
 	icon_state = "science_rig"
-	armor = list(melee = 45, bullet = 5, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
+	armor = list(melee = 40, bullet = 10, laser = 20, energy = 80, bomb = 60, bio = 100, rad = 100)
 	online_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
 
@@ -275,7 +275,7 @@
 	suit_type = "hazard hardsuit"
 	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
-	armor = list(melee = 60, bullet = 40, laser = 40, energy = 15, bomb = 60, bio = 100, rad = 30)
+	armor = list(melee = 40, bullet = 30, laser = 20, energy = 10, bomb = 30, bio = 100, rad = 90)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_BLIND

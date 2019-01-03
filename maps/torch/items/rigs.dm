@@ -92,7 +92,7 @@
 	suit_type = "advanced command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
 	icon_state = "command_CO_rig"
-	armor = list(melee = 50, bullet = 40, laser = 30, energy = 20, bomb = 40, bio = 100, rad = 50)
+	armor = list(melee = 40, bullet = 30, laser = 20, energy = 20, bomb = 35, bio = 100, rad = 50)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/co
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/co
