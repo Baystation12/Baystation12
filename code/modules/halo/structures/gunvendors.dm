@@ -189,12 +189,16 @@
 	products = list(
 	/obj/item/clothing/head/helmet/urfc/engineer = 2,
 	/obj/item/clothing/suit/armor/special/urfc/engineer = 2,
+	/obj/item/weapon/storage/backpack/cmdo/eng = 2,
 	/obj/item/clothing/head/helmet/urfc/medic = 2,
 	/obj/item/clothing/suit/armor/special/urfc/medic = 2,
+	/obj/item/weapon/storage/backpack/cmdo/med = 2,
 	/obj/item/clothing/head/helmet/urfc/sniper = 2,
 	/obj/item/clothing/suit/armor/special/urfc/sniper = 2,
+	/obj/item/weapon/storage/backpack/cmdo = 2,
 	/obj/item/clothing/head/helmet/urfc/cqb = 2,
 	/obj/item/clothing/suit/armor/special/urfc/cqb = 2,
+	/obj/item/weapon/storage/backpack/cmdo/cqc = 2,
 	/obj/item/clothing/under/urfc_jumpsuit = 8,
 	/obj/item/clothing/gloves/thick/swat = 8,
 	/obj/item/clothing/shoes/magboots/urfc = 8
