@@ -48,5 +48,5 @@
 		/area/space\
 		)
 
-	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID)
+	allowed_spawns = list("Arrivals Shuttle")
 	default_spawn = null
