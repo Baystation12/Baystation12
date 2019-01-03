@@ -89,7 +89,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	..()
 
 /obj/item/device/encryptionkey/urfccom/New()
-	channels = list(URFC_NAME = 1,halo_frequencies.innie_channel_name = 1,EBAND_NAME = 1,)
+	channels = list(halo_frequencies.innie_channel_name = 1,URFC_NAME = 1,EBAND_NAME = 1,)
 	..()
 
 /obj/item/device/encryptionkey/onicom

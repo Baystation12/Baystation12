@@ -528,6 +528,8 @@
 	name = "Tactical Webbing"
 	icon_state = "Tactical Webbing"
 
+//BACKPACKS
+
 /obj/item/weapon/storage/backpack/odst/regular
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
