@@ -69,6 +69,9 @@
 		ui.set_initial_data(data)
 		ui.open()
 
+	user.machine = nano_host()
+	user.reset_view(current_camera)
+
 // Intended to be overriden by subtypes to manually add non-station networks to the list.
 /datum/nano_module/camera_monitor/proc/modify_networks_list(var/list/networks)
 	return networks
@@ -120,8 +123,6 @@
 		return 1
 
 	set_current(C)
-	user.machine = nano_host()
-	user.reset_view(C)
 	return 1
 
 /datum/nano_module/camera_monitor/proc/set_current(var/obj/machinery/camera/C)
