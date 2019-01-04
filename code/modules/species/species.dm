@@ -393,6 +393,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
 					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
 
+	if(H != target)
+		H.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
+		target.update_personal_goal(/datum/goal/achievement/gethug, TRUE)
+
 /datum/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
 		for(var/type in base_auras)

@@ -51,6 +51,7 @@
 		return
 
 	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
+	joining.mind.assigned_job = job
 	joining.mind.assigned_role = job.title
 	joining.faction = name
 	job.current_positions++
@@ -75,7 +76,9 @@
 			equip_custom_items(user_human)
 
 		character.job = job.title
-		if(character.mind) character.mind.assigned_role = character.job
+		if(character.mind)
+			character.mind.assigned_job = job
+			character.mind.assigned_role = character.job
 
 		to_chat(character, "<B>You are [job.total_positions == 1 ? "the" : "a"] [job.title] of the [name].</B>")
 

@@ -46,6 +46,10 @@
 	var/maximum_education
 	var/available_by_default = TRUE
 
+	var/list/possible_goals
+	var/min_goals = 1
+	var/max_goals = 3
+
 /datum/job/New()
 	..()
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
@@ -115,7 +119,6 @@
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
 		H.mind.store_memory(remembered_info)
-
 		H.mind.initial_account = M
 
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")

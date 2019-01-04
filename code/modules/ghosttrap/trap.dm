@@ -94,6 +94,7 @@ var/list/ghost_traps
 		return 0
 	target.ckey = candidate.ckey
 	if(target.mind)
+		target.mind.reset()
 		target.mind.assigned_role = "[ghost_trap_role]"
 	announce_ghost_joinleave(candidate, 0, "[ghost_trap_message]")
 	welcome_candidate(target)

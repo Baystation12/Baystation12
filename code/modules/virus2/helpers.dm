@@ -110,6 +110,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 //		log_debug("Adding virus")
 		M.virus2["[D.uniqueID]"] = D
 		BITSET(M.hud_updateflag, STATUS_HUD)
+		M.update_personal_goal(/datum/goal/sickness, TRUE)
 
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)

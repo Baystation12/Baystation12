@@ -217,6 +217,7 @@
 		if(I_HELP)
 			if (health > 0)
 				M.visible_message("<span class='notice'>[M] [response_help] \the [src].</span>")
+				M.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
 		if(I_DISARM)
 			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src].</span>")

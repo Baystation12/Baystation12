@@ -235,6 +235,11 @@ var/global/list/additional_antag_types = list()
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.post_spawn()
 
+	// Update goals, now that antag status and jobs are both resolved.
+	for(var/thing in SSticker.minds)
+		var/datum/mind/mind = thing
+		mind.generate_goals(mind.assigned_job)
+
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
 
@@ -324,6 +329,8 @@ var/global/list/additional_antag_types = list()
 
 	uplink_purchase_repository.print_entries()
 
+	sleep(2)
+
 	var/clients = 0
 	var/surviving_humans = 0
 	var/surviving_total = 0
@@ -346,14 +353,21 @@ var/global/list/additional_antag_types = list()
 			else if(isghost(M))
 				ghosts++
 
-	var/text = ""
+	var/departmental_goal_summary = SSgoals.get_roundend_summary()
+	for(var/thing in GLOB.clients)
+		var/client/client = thing
+		if(client.mob && client.mob.mind)
+			client.mob.mind.show_roundend_summary(departmental_goal_summary)
+
+	var/text = "<br><br>"
 	if(surviving_total > 0)
-		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
+		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
 		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
-	to_world(text)
 
+	to_world(text)
+	
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
 	if(ghosts > 0)

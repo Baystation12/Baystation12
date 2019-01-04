@@ -1,0 +1,6 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added a department goal system. Use Check Goal to view them inround."
+  - rscadd: "Added a personal goal system. Defaults to disabled. Set Crew Goals to something else in your global preferences to start getting them on join."
+  - tweak: "Merged ambitions into goals."
