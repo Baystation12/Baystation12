@@ -106,3 +106,6 @@
 
 /decl/cultural_info/proc/get_qualifications()
 	return
+
+/decl/cultural_info/proc/get_possible_personal_goals(var/department_flag)
+	return

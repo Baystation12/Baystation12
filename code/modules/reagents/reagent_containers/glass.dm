@@ -83,6 +83,9 @@
 
 /obj/item/weapon/reagent_containers/glass/self_feed_message(var/mob/user)
 	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
+		for(var/datum/reagent/R in reagents.reagent_list)
+			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
 /obj/item/weapon/reagent_containers/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!is_open_container() || !proximity) //Is the container open & are they next to whatever they're clicking?

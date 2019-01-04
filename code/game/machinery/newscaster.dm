@@ -777,7 +777,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/scribble=""
 	var/scribble_page = null
 
-obj/item/weapon/newspaper/attack_self(mob/user as mob)
+obj/item/weapon/newspaper/attack_self(mob/user)
+	user.update_personal_goal(/datum/goal/achievement/newshound, TRUE)
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
 		var/dat

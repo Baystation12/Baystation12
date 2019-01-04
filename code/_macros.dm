@@ -13,7 +13,7 @@
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
-#define isatom(A) istype(A, /atom)
+#define isatom(A) isloc(A)
 
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
