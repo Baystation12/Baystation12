@@ -488,6 +488,30 @@
 
 	icon_state = "Odst Armor Maxattacker"
 
+/obj/item/clothing/head/helmet/odst/donator/wehraboo
+	name = "SPI Helmet Mk I"
+
+	item_state = "wehraboo-helmet_worn"
+	icon_state = "wehraboo-helmet_obj"
+
+/obj/item/clothing/head/helmet/odst/donator/wehraboo/verb/Toggle_VISR01()
+	set category = "Helmet"
+	set name = "Toggle VISR"
+	on = !on
+	update_icon()
+	if (on)
+		item_state = "wehraboo-helmet_worn"
+		icon_state = "wehraboo-helmet_obj"
+	else
+		item_state = "wehraboo-helmet_worn"
+		icon_state = "wehraboo-helmet_obj"
+		update_clothing_icon()
+	. = ..()
+
+/obj/item/clothing/suit/armor/special/odst/donator/wehraboo
+	name = "SPI Armour Mk I"
+
+	icon_state = "wehraboo-suit_worn"
 
 //END DONATOR GEAR
 
@@ -503,6 +527,8 @@
 /obj/item/clothing/accessory/storage/odst
 	name = "Tactical Webbing"
 	icon_state = "Tactical Webbing"
+
+//BACKPACKS
 
 /obj/item/weapon/storage/backpack/odst/regular
 	icon = ITEM_INHAND

@@ -236,3 +236,6 @@
 			continue
 		res += initial(R.name)
 	return english_list(res)
+
+/datum/job/proc/assign_player(var/datum/mind/new_mind)
+	assigned_players += new_mind

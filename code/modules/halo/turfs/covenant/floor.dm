@@ -16,3 +16,10 @@
 
 /turf/simulated/floor/covenant/unggoy_den
     initial_gas = list("methane" = (101.325*2500/(293.15*8.31)))
+
+/turf/simulated/floor/drone_biomass
+	name = "biomass"
+	desc = "It is covered in a hardened alien biomass."
+	icon_state = "diona"
+	icon = 'icons/turf/floors.dmi'
+	initial_flooring = /decl/flooring/diona

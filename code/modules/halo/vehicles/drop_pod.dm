@@ -1,7 +1,7 @@
 
 /obj/vehicles/drop_pod
-	name = "Drop Pod"
-	desc = "A drop pod of unknown make, model and manufacturer."
+	name = "SOEIV Drop Pod"
+	desc = "A Single Occupant Exoatmospheric Insertion Vehicle for deployment of personnel or equipment from high orbit insertion onto a planet."
 	icon = 'code/modules/halo/structures/ODST_Droppod.dmi'
 	icon_state = "SOEIV" //Icon state should be set to the closed version of the pod.
 

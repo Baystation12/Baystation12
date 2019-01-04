@@ -98,7 +98,7 @@
 "bT" = (/obj/item/weapon/material/knife/butch,/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/turf/simulated/floor/tiled/white,/area/exo_Ice_facility/ground/interior/sushiems)
 "bU" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/tiled/white,/area/exo_Ice_facility/ground/interior/sushiems)
 "bV" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
-"bW" = (/obj/structure/table/standard,/obj/item/weapon/spacecash/bundle/c1,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
+"bW" = (/obj/structure/table/standard,/obj/item/weapon/spacecash/bundle/credits1,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
 "bX" = (/obj/structure/table/standard,/obj/machinery/button/windowtint{id = "barwindow"},/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
 "bY" = (/obj/structure/table/standard,/obj/random/smokes,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
 "bZ" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/exterior/emsvillepads)
@@ -150,7 +150,7 @@
 "cT" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (NORTH)"; icon_state = "officechair_white_preview"; dir = 1},/turf/simulated/floor/carpet,/area/exo_Ice_facility/ground/interior/library)
 "cU" = (/turf/simulated/floor/carpet,/area/exo_Ice_facility/ground/interior/library)
 "cV" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/ground/interior/corridorentrance)
-"cW" = (/obj/structure/table/woodentable,/obj/item/weapon/spacecash/bundle/c1,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
+"cW" = (/obj/structure/table/woodentable,/obj/item/weapon/spacecash/bundle/credits1,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
 "cX" = (/obj/structure/table/gamblingtable,/turf/simulated/floor/wood,/area/exo_Ice_facility/ground/interior/bar)
 "cY" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/exterior/emsvillepads)
 "cZ" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/exterior/emsvillepads)
@@ -341,6 +341,7 @@
 "gC" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
 "gD" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
 "gE" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data Fuel Depot"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
+"gF" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/exterior/emsvillepads)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababab
@@ -365,7 +366,7 @@ afaFaGcOalaIaiafanafafacacacacacacacacaccPacaccDbrbrbrbrcQbNcRbrcScTcUbraVaVaJcV
 afaiaiaiaiaiaiaAaiaBafacacacacacacacaccPcPacaccDcycycybrczbNbNbrddddddbraVaVaJcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVaQbldedfbldgcxcxblblblbldeblaQacacaccacaacacacacacacacacacacacacacacacacacacahacacacasadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadabab
 afaibpafafauafafataiaoacacacacaeacaccPcPdhacaccDbNbNbNcEbNdidjbrbrdkbrbraVaVaJaJaJaJaJaJaJaJaJaJaJaJaJaJaJaJaQaQaQaQaQaQcrcrcrcrcrcAaQaQaQdlacaccacaacacacacacacacacacacacacacacacdcacacacacacacacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadabab
 afaFaiafakdmamafanaiaoacacacacacacaccPcPcPcPaecDbNbNbNdnbNdodpdqdrdddsbrbuaVaVaWaVaVaVaVaVaWaVaVaVaVaVaWaVaVaVaVaVaVaWdtaVaVaVaVaVaVaWaVaVcacacacacaacacacacacacduacacacacacaqacacdvacacacacacacacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadabab
-afaoaoafafafafafaoaoafacacacacaccPcPcPcPcPcPcPcDdwdxbNbNbNbNbNdydzdddAbraVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVbfcacacacacaacacacacacacacacacacacacacacacacacacacacacacasadadadadadadadadadadadadadadadadadadadadadadadaxaxaxaxaxaxadadadadadayadadadadadadadadadadadadadadadadabab
+afaoaoafafafafafaoaoafacacacacaccPcPcPcPcPcPcPcDdwdxbNbNbNbNbNdydzdddAbraVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVaVbfcacacagFcaacacacacacacacacacacacacacacacacacacacacacacasadadadadadadadadadadadadadadadadadadadadadadadaxaxaxaxaxaxadadadadadayadadadadadadadadadadadadadadadadabab
 aaacacaaaaaaaaaaacacacacacacacacacaccPcPcPcPcPcDbNbNbNbNbNbNbNdqdBdddCbraNaNaNaNaJaJaJaJaNaNaNaJaJaJaJaJaNaNaNaNaJaJaJaJaJaJaJaJaNaNaJaJaJdlacaccacaacacbGbHbIbHbHbIbHbJacacacacacacacacacacacacacadadadadadadadadadadadadadadadadadadadadadadayadadadadadadadadadadadadadadadadadadadadadadadadadadadabadab
 aaacacacaaaaaaaaacacacacacacacacacacacdDcPcPcPcDdEdFbNbNbNbNbNbrdGdddHbracacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaccacaacacbZcacacacacacacbacacacacacacacacacacacacacadadadadadadadadadadadadadadadadadadadaxadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadab
 aaacacacaaaaaaaaaaacacacacacacaracaccPcPcPacacbrdIbNbNcUcUcUcUdkddddddbracacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacaccacaacacbZcacacacacscacbacacacacacacacacacacacacasadadadadadadaddJdJadadadadadadadadadadaxadadadadayadadadadaxadadadadadadadadadadadadadadadadadadadadadadab

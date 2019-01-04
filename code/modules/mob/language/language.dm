@@ -41,7 +41,7 @@
 /datum/language
 	var/list/scramble_cache = list()
 
-/datum/language/proc/scramble(var/input)
+/datum/language/proc/scramble(var/input, var/do_formatting = 1, var/input_size)
 
 	if(!syllables || !syllables.len)
 		return stars(input)
@@ -53,30 +53,33 @@
 		scramble_cache[input] = n
 		return n
 
-	var/input_size = length(input)
+	if(!input_size)
+		input_size = length(input)
 	var/scrambled_text = ""
 	var/capitalize = 1
 
 	while(length(scrambled_text) < input_size)
 		var/next = pick(syllables)
-		if(capitalize)
-			next = capitalize(next)
-			capitalize = 0
+		if(do_formatting)
+			if(capitalize)
+				next = capitalize(next)
+				capitalize = 0
+			var/chance = rand(100)
+			if(chance <= 5)
+				scrambled_text += ". "
+				capitalize = 1
+			else if(chance > 5 && chance <= space_chance)
+				scrambled_text += " "
 		scrambled_text += next
-		var/chance = rand(100)
-		if(chance <= 5)
-			scrambled_text += ". "
-			capitalize = 1
-		else if(chance > 5 && chance <= space_chance)
-			scrambled_text += " "
 
-	scrambled_text = trim(scrambled_text)
-	var/ending = copytext(scrambled_text, length(scrambled_text))
-	if(ending == ".")
-		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
-	var/input_ending = copytext(input, input_size)
-	if(input_ending in list("!","?","."))
-		scrambled_text += input_ending
+	if(do_formatting)
+		scrambled_text = trim(scrambled_text)
+		var/ending = copytext(scrambled_text, length(scrambled_text))
+		if(ending == ".")
+			scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
+		var/input_ending = copytext(input, input_size)
+		if(input_ending in list("!","?","."))
+			scrambled_text += input_ending
 
 	// Add it to cache, cutting old entries if the list is too long
 	scramble_cache[input] = scrambled_text

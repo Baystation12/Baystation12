@@ -616,10 +616,12 @@ var/list/name_to_material
 	is_fusion_fuel = 1
 
 /material/mhydrogen
-	name = "mhydrogen"
+	name = "metallic hydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#E6C5DE"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 	is_fusion_fuel = 1
 
 /material/platinum

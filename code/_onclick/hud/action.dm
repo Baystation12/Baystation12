@@ -183,7 +183,7 @@
 
 //This is the proc used to update all the action buttons. Properly defined in /mob/living/
 /mob/proc/update_action_buttons()
-	return
+	return 0
 
 #define AB_WEST_OFFSET 4
 #define AB_NORTH_OFFSET 26

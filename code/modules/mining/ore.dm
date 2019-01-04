@@ -69,6 +69,15 @@
 /obj/item/weapon/ore/hydrogen
 	ore = /ore/hydrogen
 
+/obj/item/weapon/ore/kemocite
+	ore = /ore/kemocite
+
+/obj/item/weapon/ore/duridium
+	ore = /ore/duridium
+
+/obj/item/weapon/ore/corundum
+	ore = /ore/corundum
+
 /obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/C = W

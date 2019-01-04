@@ -22,3 +22,6 @@
 
 /datum/trade_category/ore
 	name = "ore"
+
+/datum/trade_category/weapon_cov
+	name = "weapon_cov"
