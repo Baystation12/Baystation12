@@ -1554,6 +1554,7 @@
 #include "code\modules\halo\misc\armourspecials\shields.dm"
 #include "code\modules\halo\misc\armourspecials\speed.dm"
 #include "code\modules\halo\misc\armourspecials\strength.dm"
+#include "code\modules\halo\misc\SyetenArbiter\SyetenArbiter.dm"
 #include "code\modules\halo\NPC\npc.dm"
 #include "code\modules\halo\NPC\npc_buysell.dm"
 #include "code\modules\halo\NPC\npc_death.dm"
