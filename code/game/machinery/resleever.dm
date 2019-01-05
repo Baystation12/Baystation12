@@ -6,7 +6,7 @@
 	anchored = 1
 	density = 1
 	idle_power_usage = 4
-	active_power_usage = 4000 // 4 Kw. A CT scan machine uses 1-15 kW depending on the model and equipment involved.
+	active_power_usage = 4 KILOWATTS // A CT scan machine uses 1-15 kW depending on the model and equipment involved.
 	req_access = list(access_medical)
 
 	icon_state = "body_scanner_0"
@@ -61,8 +61,8 @@ obj/machinery/resleever/Process()
 			resleeving = 0
 			update_use_power(POWER_USE_IDLE)
 			eject_occupant()
-			playsound(loc, 'sound/machines/ping.ogg', 100, 1)
-			visible_message("\The [src] pings as it completes its procedure!", 3)
+			playsound(loc, 'sound/machines/ping.ogg', 100, vary = TRUE)
+			visible_message("\The [src] pings as it completes its procedure!", "You hear a ping.", range = 3)
 			return
 	update_use_power(POWER_USE_OFF)
 	return
@@ -132,8 +132,8 @@ obj/machinery/resleever/Process()
 		return TRUE
 	switch(action)
 		if("begin")
-			sleeve()
-			resleeving = 1
+			if(sleeve())
+				resleeving = 1
 		if("eject")
 			eject_occupant()
 		if("ejectlace")
@@ -142,15 +142,17 @@ obj/machinery/resleever/Process()
 	return TRUE
 
 /obj/machinery/resleever/proc/sleeve()
-	if(lace && occupant)
+	if(lace && !lace.prompting && occupant) // Not only check for the lace and occupant, but also if the lace isn't already prompting the dead user.
 		var/obj/item/organ/O = occupant.get_organ(lace.parent_organ)
 		if(istype(O))
 			lace.status &= ~ORGAN_CUT_AWAY //ensure the lace is properly attached
 			lace.replaced(occupant, O)
 			lace = null
 			lace_name = null
-	else
-		return
+			playsound(loc, 'sound/machines/twobeep.ogg', 50, vary = TRUE)
+			visible_message("\The [src] beeps softly as it begins its procedure.", "You hear a beep.", range = 3)
+			return TRUE
+	return FALSE // Return false if the the lace doesn't exist, the lace is busy prompting, no occupant, or the occupant's head (parrent organ) doesn't exist.
 
 /obj/machinery/resleever/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(default_deconstruction_screwdriver(user, W))

@@ -84,7 +84,6 @@
 		icon_state = "c20r-[round(ammo_magazine.stored_ammo.len,4)]"
 	else
 		icon_state = "c20r"
-	return
 
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "assault rifle"
@@ -112,9 +111,13 @@
 		)
 
 /obj/item/weapon/gun/projectile/automatic/sts35/on_update_icon()
-	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
-	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
 	..()
+	if(ammo_magazine)
+		icon_state = "arifle"
+		wielded_item_state = "arifle-wielded"
+	else
+		icon_state = "arifle-empty"
+		wielded_item_state = "arifle-wielded-empty"
 
 /obj/item/weapon/gun/projectile/automatic/wt550
 	name = "9mm submachine gun"
@@ -143,7 +146,6 @@
 		icon_state = "wt550-[round(ammo_magazine.stored_ammo.len,4)]"
 	else
 		icon_state = "wt550"
-	return
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "bullpup assault rifle"
@@ -209,7 +211,6 @@
 			icon_state = "carbine-empty"
 	else
 		icon_state = "carbine"
-	return
 
 /obj/item/weapon/gun/projectile/automatic/z8/examine(mob/user)
 	. = ..()
@@ -275,6 +276,7 @@
 		return ..() //once open, behave like normal
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/on_update_icon()
+	..()
 	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
 		icon_state = "l6[cover_open ? "open" : "closed"][round(ammo_magazine.stored_ammo.len, 25)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"
@@ -284,7 +286,6 @@
 	else
 		icon_state = "l6[cover_open ? "open" : "closed"]-empty"
 		item_state = "l6[cover_open ? "open" : "closed"]-empty"
-	..()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/load_ammo(var/obj/item/A, mob/user)
 	if(!cover_open)

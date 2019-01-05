@@ -46,6 +46,11 @@
 	icon_state = "dark"
 	initial_flooring = /decl/flooring/tiling/dark
 
+/turf/simulated/floor/holofloor/tiled/stone
+	name = "stone floor"
+	icon_state = "stone"
+	initial_flooring = /decl/flooring/tiling/stone
+
 /turf/simulated/floor/holofloor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'

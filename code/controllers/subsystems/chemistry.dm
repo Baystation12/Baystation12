@@ -58,19 +58,21 @@ SUBSYSTEM_DEF(chemistry)
 		if (MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/chemistry/proc/get_prototype(var/datum/reagent/random/reagent)
-	if(!istype(reagent))
+/datum/controller/subsystem/chemistry/proc/get_prototype(given_type, temperature)
+	if(!ispath(given_type, /datum/reagent/random))
 		return
-	. = random_chem_prototypes[reagent.type]
-	if(!.)
-		var/datum/reagent/random/new_prototype = new reagent.type(null, TRUE)
-		new_prototype.randomize_data()
-		. = new_prototype
-		random_chem_prototypes[reagent.type] = .
+	var/datum/reagent/random/prototype = random_chem_prototypes[given_type]
+	if(!prototype)
+		prototype = new given_type(null, TRUE)
+		prototype.randomize_data(temperature)
+		random_chem_prototypes[given_type] = prototype
+	if(temperature && !prototype.stable_at_temperature(temperature))
+		return
+	return prototype
 
-/datum/controller/subsystem/chemistry/proc/get_random_chem(var/only_if_unique = FALSE)
+/datum/controller/subsystem/chemistry/proc/get_random_chem(var/only_if_unique = FALSE, temperature = T20C)
 	for(var/type in typesof(/datum/reagent/random))
 		if(only_if_unique && random_chem_prototypes[type])
 			continue
-		get_prototype(type) // we don't need it, but fill the cache to know it's been assigned
-		return type
+		if(get_prototype(type, temperature)) //returns truthy if it's valid for the given temperature
+			return type

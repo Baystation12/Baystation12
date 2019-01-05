@@ -314,6 +314,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/syringe_cartridge
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/shotgun_holder
+	name = "shotgun ammunition holder"
+	path = /obj/item/ammo_magazine/shotholder/empty
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/shotgun_blanks
 	name = "ammunition (shotgun, blank)"
 	path = /obj/item/ammo_casing/shotgun/blank

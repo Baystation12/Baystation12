@@ -14,8 +14,8 @@
 	var/list/possible_transformations = list()
 	var/list/newVars = list() //what the variables of the new created thing will be.
 
-	cast_sound = 'sound/weapons/emitter2.ogg'
-	var/revert_sound = 'sound/weapons/emitter.ogg' //the sound that plays when something gets turned back.
+	cast_sound = 'sound/magic/charge.ogg'
+	var/revert_sound = 'sound/magic/charge.ogg' //the sound that plays when something gets turned back.
 	var/share_damage = 1 //do we want the damage we take from our new form to move onto our real one? (Only counts for finite duration)
 	var/drop_items = 1 //do we want to drop all our items when we transform?
 	var/toggle = 0 //Can we toggle this?
@@ -163,6 +163,7 @@
 	newVars = list("name" = "corrupted soul")
 
 	hud_state = "wiz_corrupt"
+	cast_sound = 'sound/magic/disintegrate.ogg'
 
 /spell/targeted/shapeshift/corrupt_form/empower_spell()
 	if(!..())

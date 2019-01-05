@@ -41,20 +41,23 @@
 
 // the inlet stage of the gas turbine electricity generator
 
-/obj/machinery/compressor/New()
-	..()
-
+/obj/machinery/compressor/Initialize()
+	. = ..()
 	gas_contained = new
 	inturf = get_step(src, dir)
+	turbine = locate() in get_step(src, get_dir(inturf, src))
+	if(!turbine)
+		set_broken(TRUE)
+	else
+		turbine.compressor = src
 
-	spawn(5)
-		turbine = locate() in get_step(src, get_dir(inturf, src))
-		if(!turbine)
-			stat |= BROKEN
-		else
-			turbine.stat &= !BROKEN
-			turbine.compressor = src
-
+/obj/machinery/compressor/Destroy()
+	if(turbine)
+		turbine.compressor = null
+		turbine.set_broken(TRUE)
+		turbine = null
+	QDEL_NULL(gas_contained)
+	return ..()
 
 #define COMPFRICTION 5e5
 #define COMPSTARTERLOAD 2800
@@ -64,9 +67,6 @@
 		return
 	overlays.Cut()
 	if(stat & BROKEN)
-		return
-	if(!turbine)
-		stat |= BROKEN
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
@@ -98,20 +98,22 @@
 		overlays += image('icons/obj/pipes.dmi', "comp-o1", FLY_LAYER)
 	 //TODO: DEFERRED
 
-/obj/machinery/power/turbine/New()
+/obj/machinery/power/turbine/Initialize()
 	..()
-
 	outturf = get_step(src, dir)
+	return INITIALIZE_HINT_LATELOAD
 
-	spawn(5)
+/obj/machinery/power/turbine/LateInitialize()
+	..()
+	if(!compressor) // It should have found us and subscribed.
+		set_broken(TRUE)
 
-		compressor = locate() in get_step(src, get_dir(outturf, src))
-		if(!compressor)
-			stat |= BROKEN
-		else
-			compressor.stat &= !BROKEN
-			compressor.turbine = src
-
+/obj/machinery/power/turbine/Destroy()
+	if(compressor)
+		compressor.turbine = null
+		compressor.set_broken(TRUE)
+		compressor = null
+	return ..()
 
 #define TURBPRES 9000000
 #define TURBGENQ 20000
@@ -122,9 +124,6 @@
 		return
 	overlays.Cut()
 	if(stat & BROKEN)
-		return
-	if(!compressor)
-		stat |= BROKEN
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
@@ -208,40 +207,10 @@
 		if(P.id == id)
 			doors += P
 
-/*
-/obj/machinery/computer/turbine_computer/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/material/shard( src.loc )
-				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				M.id = src.id
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				qdel(src)
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				M.id = src.id
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				qdel(src)
-	else
-		src.attack_hand(user)
-	return
-*/
+/obj/machinery/computer/turbine_computer/Destroy()
+	doors.Cut()
+	compressor = null
+	return ..()
 
 /obj/machinery/computer/turbine_computer/attack_hand(var/mob/user as mob)
 	user.machine = src

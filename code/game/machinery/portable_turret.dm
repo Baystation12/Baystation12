@@ -434,9 +434,8 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
-	stat |= BROKEN	//enables the BROKEN bit
+	set_broken(TRUE)
 	spark_system.start()	//creates some sparks because they look cool
-	update_icon()
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()

@@ -1,3 +1,24 @@
+{{##def.common_supply_header:
+  <th style="width:65%">Item
+  <th style="width:20%">Cost
+  <th style="width:15%">Order
+#}}
+{{##def.common_request_header:
+  <th style="width:5%">ID
+  <th style="width:25%">Requested item
+  <th style="width:20%">Requested by
+  <th style="width:20%">Reason
+  <th style="width:10%">Cost
+  <th style="width:20%">Options
+#}}
+{{##def.supply_request_item:
+	<tr class="candystripe">
+	<td>{{:value.id}}
+	<td>{{:value.object}}
+	<td>{{:value.orderer}}
+	<td>{{:value.reason || '<i>No reason provided.</i>'}}
+	<td>{{:value.cost}} {{:data.currency_short}}
+#}}
 <div class='notice'>
 	{{if data.is_admin}}
 		You are authenticated. You may access all functions of this program.
@@ -37,7 +58,7 @@
 	{{/for}}
 	{{if data.category}}
 		<table style="width:100%">
-			<tr><th style="width:70%">Item<th style="width:20%">Cost<th style="width:10%">Order
+			<tr>{{#def.common_supply_header}}
 			{{for data.possible_purchases}}
 				<tr class="candystripe">
 				<td>{{:value.name}}
@@ -92,48 +113,50 @@
 	</div>
 {{else data.screen == 4}}
 	{{if data.is_admin}}
+		{{if data.is_NTOS}}
+			<div class="item">
+				<div class="itemLabel">
+					Notifications are: 
+				</div>
+				<div class="itemContent">
+					{{:helper.link((data.notifications_enabled ? 'Enabled' : 'Disabled'), null, {'toggle_notifications': 1})}}
+				</div>
+			</div>
+		{{/if}}
 		<div class="item">
 			<center><h3>Pending orders</h3></span>
 			<table style="width:100%">
-				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				<tr>{{#def.common_request_header}}
 				{{for data.requests}}
-					<tr class="candystripe">
-					<td>{{:value.id}}
-					<td>{{:value.object}}
-					<td>{{:value.orderer}}
-					<td>{{:value.reason}}
-					<td>{{:value.cost}} {{:data.currency_short}}
-					<td>{{:helper.link('Approve', 'check', {'approve_order' : value.id}, value.cost > data.credits ? 'disabled' : null )}}{{:helper.link('Deny', 'cancel', {'deny_order' : value.id})}}
+					{{#def.supply_request_item}}
+					<td>
+					{{:helper.link('Approve', 'check', {'approve_order' : value.id}, value.cost > data.credits ? 'disabled' : null )}}
+					{{:helper.link('Deny', 'cancel', {'deny_order' : value.id})}}
+					{{:helper.link('Print', 'print', {'print_receipt' : value.id, 'list_id' : value.list_id}, data.can_print ? null : 'disabled')}}
 				{{/for}}
 			</table>
 		</div>
 		<div class="item">
 			<center><h3>Approved orders</h3></span>
 			<table style="width:100%">
-				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				<tr>{{#def.common_request_header}}
 				{{for data.cart}}
-					<tr class="candystripe">
-					<td>{{:value.id}}
-					<td>{{:value.object}}
-					<td>{{:value.orderer}}
-					<td>{{:value.reason}}
-					<td>{{:value.cost}} {{:data.currency_short}}
-					<td>{{:helper.link('Cancel', 'cancel', {'cancel_order' : value.id})}}
+					{{#def.supply_request_item}}
+					<td>
+					{{:helper.link('Cancel', 'cancel', {'cancel_order' : value.id})}}
+					{{:helper.link('Print', 'print', {'print_receipt' : value.id, 'list_id' : value.list_id}, data.can_print ? null : 'disabled')}}
 				{{/for}}
 			</table>
 		</div>
 		<div class="item">
 			<center><h3>Filled orders</h3></span>
 			<table style="width:100%">
-				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				<tr>{{#def.common_request_header}}
 				{{for data.done}}
-					<tr class="candystripe">
-					<td>{{:value.id}}
-					<td>{{:value.object}}
-					<td>{{:value.orderer}}
-					<td>{{:value.reason}}
-					<td>{{:value.cost}} {{:data.currency_short}}
-					<td>{{:helper.link('Delete', 'cancel', {'delete_order' : value.id})}}
+					{{#def.supply_request_item}}
+					<td>
+					{{:helper.link('Delete', 'cancel', {'delete_order' : value.id})}}
+					{{:helper.link('Print', 'print', {'print_receipt' : value.id, 'list_id' : value.list_id}, data.can_print ? null : 'disabled')}}
 				{{/for}}
 			</table>
 		</div>

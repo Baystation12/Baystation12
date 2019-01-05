@@ -236,7 +236,7 @@
 		if(!(S.z in affected_z))
 			continue
 		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
-			S.broken()
+			S.set_broken(TRUE)
 
 
 

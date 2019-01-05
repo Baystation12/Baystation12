@@ -66,7 +66,7 @@
 /datum/uplink_item/item/ammo/p10mm
 	name = "10mm Pistol Magazine"
 	item_cost = 6
-	path = /obj/item/ammo_magazine/a10mm
+	path = /obj/item/ammo_magazine/p10mm
 
 /datum/uplink_item/item/ammo/a50
 	name = ".50 AE magazine"

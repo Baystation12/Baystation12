@@ -104,4 +104,4 @@
 /obj/item/clothing/head/soft/sec/corp/guard
 	name = "corporate security cap"
 	desc = "It's field cap in corporate colors."
-	icon_state = "ntwhitesoft"
+	icon_state = "corpsec_soft"

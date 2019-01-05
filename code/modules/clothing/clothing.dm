@@ -715,6 +715,8 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
+	//Whether the clothing item has gender-specific states when worn.
+	var/gender_icons = 0
 	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_HOLSTER,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_HOLSTER,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
 
@@ -729,11 +731,18 @@ BLIND     // can't see anything
 
 /obj/item/clothing/under/get_icon_state(mob/user_mob, slot)
 	var/ret
+	var/bodytype
+	if(ishuman(user_mob))
+		var/mob/living/carbon/human/user_human = user_mob
+		bodytype = user_human.species.get_bodytype(user_human)
 	if(item_state_slots && item_state_slots[slot])
 		ret = item_state_slots[slot]
 	else
 		ret = icon_state
-	return "[ret]_s"
+	if(gender_icons && bodytype == SPECIES_HUMAN && user_mob.gender == FEMALE)
+		return "[ret]_f_s"
+	else
+		return "[ret]_s"
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)

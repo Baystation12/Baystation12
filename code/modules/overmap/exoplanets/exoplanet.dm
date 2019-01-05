@@ -148,6 +148,13 @@
 	for(var/g in atmosphere.gas)
 		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
 			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
+	if(prob(50))
+		var/chem_type = SSchemistry.get_random_chem(TRUE, atmosphere.temperature)
+		if(chem_type)
+			var/nutriment = S.chems[/datum/reagent/nutriment]
+			S.chems.Cut()
+			S.chems[/datum/reagent/nutriment] = nutriment
+			S.chems[chem_type] = list(rand(1,10),rand(10,20))
 
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
 	if(species[A.type])

@@ -19,6 +19,7 @@
 	invocation = "Nouk Fhumm Sacp Risska!"
 	invocation_type = SpI_SHOUT
 	range = 1
+	cast_sound = 'sound/magic/summon_carp.ogg'
 
 	summon_type = list(/mob/living/simple_animal/hostile/carp)
 
@@ -50,6 +51,7 @@
 	invocation = "Nouk Fhunhm Sacp Risska!"
 	invocation_type = SpI_SHOUT
 	range = 1
+	cast_sound = 'sound/magic/summon_carp.ogg'
 
 	duration = 600
 	cooldown_min = 600

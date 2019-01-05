@@ -177,8 +177,8 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen,
 		/obj/item/clothing/shoes/jackboots,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security/exo, /obj/item/weapon/storage/backpack/satchel/sec/exo)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec/exo))
 	)
 
 /obj/structure/closet/secure_closet/xenolife_technician

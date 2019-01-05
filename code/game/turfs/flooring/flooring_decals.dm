@@ -1134,7 +1134,6 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/steeldecal/steel_decals_central7
 	icon_state = "steel_decals_central7"
 
-
 /obj/effect/floor_decal/techfloor
 	name = "techfloor edges"
 	icon_state = "techfloor_edges"
@@ -1159,3 +1158,9 @@ var/list/floor_decals = list()
 	name = "hole right"
 	icon_state = "techfloor_hole_right"
 
+/obj/effect/floor_decal/stoneborder
+	name = "stone border"
+	icon_state = "stoneborder"
+
+/obj/effect/floor_decal/stoneborder/corner
+	icon_state = "stoneborder_c"

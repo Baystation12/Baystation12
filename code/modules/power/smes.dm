@@ -76,7 +76,7 @@
 				term.master = src
 				term.connect_to_network()
 	if(!terminals.len)
-		stat |= BROKEN
+		set_broken(TRUE)
 		return
 	update_icon()
 

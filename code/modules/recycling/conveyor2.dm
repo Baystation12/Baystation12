@@ -112,18 +112,16 @@
 
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same ID
-/obj/machinery/conveyor/proc/broken()
-	stat |= BROKEN
-	update_icon()
+/obj/machinery/conveyor/set_broken(new_state)
+	. = ..()
+	if(. && new_state)
+		var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
+		if(C)
+			C.set_operable(dir, id, 0)
 
-	var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
-	if(C)
-		C.set_operable(dir, id, 0)
-
-	C = locate() in get_step(src, turn(dir,180))
-	if(C)
-		C.set_operable(turn(dir,180), id, 0)
-
+		C = locate() in get_step(src, turn(dir,180))
+		if(C)
+			C.set_operable(turn(dir,180), id, 0)
 
 //set the operable var if ID matches, propagating in the given direction
 
@@ -138,15 +136,7 @@
 	if(C)
 		C.set_operable(stepdir, id, op)
 
-/*
-/obj/machinery/conveyor/verb/destroy()
-	set src in view()
-	src.broken()
-*/
-
 // the conveyor control switch
-//
-//
 
 /obj/machinery/conveyor_switch
 

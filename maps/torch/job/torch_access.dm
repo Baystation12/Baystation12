@@ -134,6 +134,18 @@
 	id = access_commissary
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
+	
+/datum/access/psychiatrist
+	desc = "Mental Health"
+	
+/datum/access/hos
+	desc = "Chief of Security"
+	
+/datum/access/hop
+	desc = "Executive Officer"
+		
+/datum/access/qm
+	desc = "Deck Chief"
 
 /************
 * SEV Torch *

@@ -12068,6 +12068,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
+"BC" = (
+/obj/structure/lattice,
+/obj/machinery/light/navigation/delay3,
+/turf/space,
+/area/space)
 "BG" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14105,6 +14110,11 @@
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
+"KU" = (
+/obj/structure/lattice,
+/obj/machinery/light/navigation,
+/turf/space,
+/area/space)
 "KW" = (
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
@@ -23583,7 +23593,7 @@ aa
 aa
 aa
 aa
-aa
+BC
 aa
 aa
 aa
@@ -23777,6 +23787,7 @@ aa
 aa
 aa
 aa
+KU
 aa
 aa
 aa
@@ -23784,8 +23795,7 @@ aa
 aa
 aa
 aa
-aa
-aa
+ae
 aa
 aa
 aa
@@ -23979,6 +23989,7 @@ fu
 aa
 aa
 aa
+ae
 aa
 aa
 aa
@@ -23986,8 +23997,7 @@ aa
 aa
 aa
 aa
-aa
-aa
+ae
 aa
 aa
 aa
@@ -24181,6 +24191,7 @@ ad
 ad
 aa
 aa
+ae
 aa
 aa
 aa
@@ -24188,8 +24199,7 @@ aa
 aa
 aa
 aa
-aa
-aa
+ae
 aa
 aa
 ad

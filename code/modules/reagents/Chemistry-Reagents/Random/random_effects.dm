@@ -28,7 +28,7 @@
 		if(RANDOM_CHEM_EFFECT_FLOAT)
 			return first_value * first_ratio + second_value * (1 - first_ratio)
 
-/decl/random_chem_effect/proc/prototype_process(var/datum/reagent/random/prototype)
+/decl/random_chem_effect/proc/prototype_process(var/datum/reagent/random/prototype, temperature)
 	prototype.data[type] = get_random_value()
 
 /decl/random_chem_effect/proc/on_property_recompute(var/datum/reagent/random/reagent, var/value)
@@ -97,17 +97,35 @@
 	reagent.metabolism = value
 
 /decl/random_chem_effect/general_properties/chilling_point
-	minimum = T0C - 80
+	minimum = TCMB
+	var/generic_minimum = T0C - 80 // Will be used unless the temperature we're gunning for is too cold
 	maximum = T0C - 10
 	mode = RANDOM_CHEM_EFFECT_FLOAT
+
+/decl/random_chem_effect/general_properties/chilling_point/get_random_value(temperature)
+	var/max = max(min(maximum, temperature - 20), minimum) // Use given max unless that's above the given temp - margin
+	var/min = max(min(generic_minimum, max - 20), minimum) // Use the generic min as min unless that's above the max - margin
+	return rand() * (max - min) + min
+
+/decl/random_chem_effect/general_properties/chilling_point/prototype_process(var/datum/reagent/random/prototype, temperature = T20C)
+	prototype.data[type] = get_random_value(temperature)
 
 /decl/random_chem_effect/general_properties/chilling_point/on_property_recompute(var/datum/reagent/random/reagent, var/value)
 	reagent.chilling_point = value
 
 /decl/random_chem_effect/general_properties/heating_point
 	minimum = T0C + 60
-	maximum = T0C + 180
+	var/generic_maximum = T0C + 180
+	maximum = T0C + 500
 	mode = RANDOM_CHEM_EFFECT_FLOAT
+
+/decl/random_chem_effect/general_properties/heating_point/get_random_value(temperature)
+	var/min = min(max(minimum, temperature + 20), maximum)
+	var/max = min(max(generic_maximum, min + 20), maximum)
+	return rand() * (max - min) + min
+
+/decl/random_chem_effect/general_properties/heating_point/prototype_process(var/datum/reagent/random/prototype, temperature = T20C)
+	prototype.data[type] = get_random_value(temperature)
 
 /decl/random_chem_effect/general_properties/heating_point/on_property_recompute(var/datum/reagent/random/reagent, var/value)
 	reagent.heating_point = value
