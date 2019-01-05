@@ -1358,6 +1358,7 @@
 #include "code\modules\bsa\bsa_console.dm"
 #include "code\modules\bsa\bsa_fire.dm"
 #include "code\modules\client\asset_cache.dm"
+#include "code\modules\client\client_color.dm"
 #include "code\modules\client\client_defines.dm"
 #include "code\modules\client\client_helpers.dm"
 #include "code\modules\client\client_procs.dm"
