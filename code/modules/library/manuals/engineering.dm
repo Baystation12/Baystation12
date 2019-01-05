@@ -388,33 +388,35 @@
 				</style>
 				</head>
 				<body>
-				<h1>OPERATING MANUAL FOR MK 1 PROTOTYPE THERMOELECTRIC SUPERMATTER ENGINE 'TOMBOLA'</h1>
+				<h1>OPERATING MANUAL FOR MK 1 THERMOELECTRIC SUPERMATTER ENGINE "JUPITER"</h1>
 				<br>
 				<h2>OPERATING PRINCIPLES</h2>
 				<br>
-				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out. NOTE: Supermatter radiation will not charge radiation collectors.</li>
+				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out.</li>
 				<br>
-				<li>Air in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
+				<li>Gas in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
 				<br>
-				<li>Air in the radiator loop is circulated through the radiator bank, located in space. This rapidly cools the air, preserving the temperature differential needed for power generation.</li>
+				<li>Gas in the radiator loop is circulated through the radiator bank, located in space. The radiative cooling provides the temperature differential required for power generation.</li>
 				<br>
-				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 3000K to 4000K and generate up to 1MW of power. Beyond 1MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
+				<li>The MK 1 Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 2000 K to 4000 K and generate up to 1 MW of power. Beyond 1 MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
 				<br>
-				<li>The crystal structure of the supermatter will begin to liquefy if its temperature exceeds 5000K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
+				<li>The crystal structure of the supermatter will begin to delaminate if its temperature exceeds 5000 K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
 				<br>
 				<h2>SUPERMATTER HANDLING</h2>
 				<li>Do not expose supermatter to oxygen.</li>
-				<li>Do not <del>touch supermatter</del> <del>without gloves</del> <del>without exosuit protection</del> allow supermatter to contact any solid object apart from specially-designed supporting pallet.</li>
+				<li>Do not touch supermatter or allow supermatter to contact any solid object apart from the specially-designed supporting pallet.</li>
 				<li>Do not directly view supermatter without meson goggles.</li>
 				<li>While handles on pallet allow moving the supermatter via pulling, pushing should not be attempted.</li>
 				<br>
 				<h2>STARTUP PROCEDURE</h2>
 				<ol>
-				<li>Fill reactor loop and radiator loop with two (2) standard canisters of carbon dioxide gas each.</li>
-				<li>Ensure that pumps and filters are on and operating at maximum power.</li>
-				<li><i>IMPORTANT: </i>Ensure the filters are configured for carbon dioxide instead of hydrogen.
+				<li>Fill the reactor loop (green and yellow) and the radiator loop (cyan) with two (2) standard canisters of hydrogen gas each.</li>
+				<li>Additional canisters of hydrogen can be obtained from Atmospherics or Atmospherics Tank Storage if required.</li>
+				<li>Ensure that the Thermoelectric Generator (TEG) high-power pumps (on cyan pipes) are switched on at maximum pressure.</li>
+				<li><i>IMPORTANT: </i>Set filters (port-side of engine room) to Hydrogen instead of Carbon Dioxide, and afterwards ensure each filter is switched on.</li>
 				<li>Ensure the pump to the phoron canister is set to max.</li>
-				<li>Fire <del>5</del> <del>15</del> <del>2</del> <del>UNKNOWN</del> 12-16 pulses from emitter at supermatter crystal, or until the EER reaches about 200. Reactor blast doors must be open for this procedure.</li>
+				<li>Switch on the waste pump to the engines (connecting black pipes - under blast door near the phoron canister).</li>
+				<li>Monitoring EER with the Supermatter Monitoring program, fire the emitter until EER reaches 150-200. Reactor blast doors must be open for this procedure.</li>
 				</ol>
 				<br>
 				<h2>OPERATION AND MAINTENANCE</h2>
@@ -423,15 +425,16 @@
 				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
 				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
 				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
-				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, either pump in more gas to cool the engine, or see EMERGENCY COOLING PROCEDURE.</li>
+				<li>Ensure that reactor temperature does not exceed 5000 K. In event of reactor temperature exceeding 5000 K, either pump in more gas to cool the engine, or see EMERGENCY COOLING PROCEDURE.</li>
 				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>
 				<h2>EMERGENCY COOLING PROCEDURE</h2>
 				<ol>
-				<li>Open the Emergency Cooling Valve and the TEG bypass valve.</li>
-				<li>When reactor temperature returns to safe operating levels, close the Emergency Cooling Valve and TEG Bypass Valve.</li>
-				<li>If reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
+				<li>Open the Emergency Cooling Valve, which allows for Heat Exchangers to cool the reactor loop (green) with the radiator (cyan) loop</li>
+				<li>If the reactor temperature does not return to safe operating levels, open both the Emergency Cooling Bypass Valve and TEG Bypass Valve</li>
+				<li>If the reactor becomes safe, close the three aforementioned valves to resume power generation</li>
+				<li>If the reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>
 				<h2>EJECTION PROCEDURE</h2>
@@ -442,7 +445,6 @@
 				</ol>
 				</body>
 			</html>"}
-
 
 
 /obj/item/weapon/book/manual/rust_engine
