@@ -184,6 +184,8 @@ var/global/list/mining_floors = list()
 			return
 
 		var/obj/item/weapon/pickaxe/P = W
+		if(!P.can_drill())
+			return
 		if(last_act + P.digspeed > world.time)//prevents message spam
 			return
 		last_act = world.time
@@ -228,9 +230,9 @@ var/global/list/mining_floors = list()
 							B.artifact_find = artifact_find
 					else
 						artifact_debris(1)
-				else if(prob(5))
+				/*else if(prob(5))
 					//empty boulder
-					B = new(src)
+					B = new(src)*/
 
 				if(B)
 					GetDrilled(0)
@@ -402,25 +404,46 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
 	icon_state = "rock_mineral"
-	var/mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 5, "Iron" = 35, "Carbon" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5)
+	var/mineralSpawnChanceList = list(\
+		"uranium" = 1, "phoron" = 1, "diamond" = 1, , "corundum" = 1, "kemocite" = 1, \
+		"platinum" = 10, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
+		"iron" = 30, "carbon" = 30 \
+		)
 	var/mineralChance = 10 //means 10% chance of this plot changing to a mineral deposit
+
+/turf/simulated/mineral/random/planet
+	mined_turf = /turf/simulated/floor/asteroid/planet
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
 		var/mineral_name = pickweight(mineralSpawnChanceList) //temp mineral name
-		mineral_name = lowertext(mineral_name)
 		ensure_ore_data_initialised()
 		if (mineral_name && (mineral_name in ore_data))
 			mineral = ore_data[mineral_name]
 			UpdateMineral()
-
+		else if(mineral_name == "crystal")
+			//special handling for crystal caves
+			var/crystal_type = pick(/obj/structure/crystal_deposit,/obj/structure/crystal_deposit/pink,/obj/structure/crystal_deposit/orange)
+			var/cave_size = 4
+			for(var/turf/simulated/mineral/T in circlerange(src, cave_size))
+				var/chance = 25 * (cave_size - get_dist(T,src)) + 50
+				if(prob(chance))
+					T.ChangeTurf(T.mined_turf)
+					if(prob(20))
+						new crystal_type(T)
 	. = ..()
 
 /turf/simulated/mineral/random/high_chance
 	icon_state = "rock_mineral_high"
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 10, "Iron" = 60, "Carbon" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "mhydrogen" = 1)
+	mineralSpawnChanceList = list(\
+		"uranium" = 1, "phoron" = 1, "diamond" = 1, , "corundum" = 1, "kemocite" = 1, \
+		"platinum" = 10, "duridium" = 5, "gold" = 5, "silver" = 5, "mhydrogen" = 5, "crystal" = 1,\
+		"iron" = 5, "carbon" = 5 \
+		)
 
+/turf/simulated/mineral/random/high_chance/planet
+	mined_turf = /turf/simulated/floor/asteroid/planet
 
 /**********************Asteroid**************************/
 

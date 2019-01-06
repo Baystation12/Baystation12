@@ -28,7 +28,7 @@
 			radio_controller.add_object(src,frequency,RADIO_CHAT)
 
 /obj/item/device/mobilecomms/commsbackpack/proc/convert_freq_to_numerical(var/frequency)
-	var/freq_numerical = halo_frequencies.frequencies[frequency]
+	var/freq_numerical = halo_frequencies.all_frequencies[frequency]
 	recieving_frequencies += freq_numerical
 	recieving_frequencies -= frequency //Delete the original text value.
 	return 1
@@ -51,6 +51,7 @@
 		return
 	if(signal.data["reject"] == 1)
 		return
+
 	if(!(signal.frequency in recieving_frequencies))
 		return
 
@@ -65,6 +66,9 @@
 		original.data["reject"] = 1
 
 	var/datum/radio_frequency/connection = signal.data["connection"]
+	if(!connection)
+		//connection data was sent with this signal, therefore it isnt expecting it to be rebroadcast
+		return
 
 	Broadcast_Message(signal.data["connection"], signal.data["mob"],
 					  signal.data["vmask"], signal.data["vmessage"],
@@ -77,16 +81,16 @@
 
 /obj/item/device/mobilecomms/commsbackpack/unsc
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back."
-	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME,ODST_NAME)
+	recieving_frequencies = list(TEAMCOM_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME,ODST_NAME,ONI_NAME,BERTELS_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
-	recieving_frequencies = list(CIV_NAME,EBAND_NAME)
+	recieving_frequencies = list(URFC_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie/New()
 	..()
 	spawn(6) //The convert_freq_to_numerical proc runtimes if this isn't here, it attempts to read the innie frequency
-		recieving_frequencies.Add(halo_frequencies.innie_freq)
+		recieving_frequencies.Add(halo_frequencies.innie_channel_name)
 
 /obj/item/device/mobilecomms/commsbackpack/unsc/permanant
 	active = 1
@@ -101,7 +105,7 @@
 	return
 
 /obj/item/device/mobilecomms/commsbackpack/sec
-	recieving_frequencies = list(SEC_NAME,EBAND_NAME)
+	recieving_frequencies = list(CIV_NAME,SEC_NAME,EBAND_NAME,MED_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/sec/permanent
 	active = 1
@@ -119,3 +123,5 @@
 #undef SEC_NAME
 #undef ODST_NAME
 #undef BERTELS_NAME
+#undef ONI_NAME
+#undef URFC_NAME

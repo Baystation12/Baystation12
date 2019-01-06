@@ -11,7 +11,12 @@ var/list/department_radio_keys = list(
 	  ":g" = "GCPD",		".g" = "GCPD",
 	  ":t" = "TACCOM",		".t" = "TACCOM",
 	  ":b" = "INNIECOM",	".b" = "INNIECOM",
-	  ":c" = "Battlenet",
+	  ":c" = "BattleNet",	".c" = "BattleNet",
+	  ":d" = "BoulderNet",	".d" = "BoulderNet",
+	  ":u" = "RamNet",		".u" = "RamNet",
+	  ":m" = "MEDCOM",		".m" = "MEDCOM",
+	  ":o" = "ONICOM",		".o" = "ONICOM",
+	  ":v" = "CMDOCOM",		".v" = "CMDOCOM",
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -25,8 +30,12 @@ var/list/department_radio_keys = list(
 	  ":G" = "GCPD",		".G" = "GCPD",
 	  ":T" = "TACCOM",		".T" = "TACCOM",
 	  ":B" = "INNIECOM",	".B" = "INNIECOM",
-	  ":C" = "Battlenet",
-
+	  ":C" = "BattleNet",	".B" = "BattleNet",
+	  ":D" = "BoulderNet",	".D" = "BoulderNet",
+	  ":U" = "RamNet",		".U" = "RamNet",
+	  ":M" = "MEDCOM",		".M" = "MEDCOM",
+	  ":O" = "ONICOM",		".O" = "ONICOM",
+	  ":V" = "CMDOCOM",		".V" = "CMDOCOM",
 	/*
 	  ":r" = "right ear",	".r" = "right ear",
 	  ":l" = "left ear",	".l" = "left ear",

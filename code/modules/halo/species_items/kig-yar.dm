@@ -79,7 +79,9 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "jackal_bodysuit_s"
 	worn_state = "jackal_bodysuit"
-	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
+	sprite_sheets = list("Default" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
+		"Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
+		"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
@@ -95,7 +97,9 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "scout"
 	item_state = "scout"
-	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
+	sprite_sheets = list("Default" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
+		"Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
+		"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()

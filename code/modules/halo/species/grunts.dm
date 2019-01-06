@@ -21,7 +21,6 @@
 	item_icon_offsets = list(0,0)
 
 	breath_type = "methane"
-	poison_type = "phoron"
 	exhale_type = "carbon_dioxide"
 
 	warning_low_pressure = 25

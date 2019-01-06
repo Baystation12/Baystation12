@@ -11,12 +11,23 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
-	desc = "The language of the Sangheili"
+	desc = "The ancient language of the Sangheili and common language of the Covenant."
 	native = 1
 	colour = "vox"
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "S"
 	flags = RESTRICTED
+	var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
+	var/list/syllable_names
+
+/datum/language/sangheili/New()
+	. = ..()
+	cov_alphabet = new(cov_alphabet)
+	cov_alphabet.Crop(1,1,24,24)
+	syllables = list()
+	syllable_names = icon_states(cov_alphabet)
+	for(var/symbol_name in syllable_names)
+		syllables.Add("<IMG CLASS=icon SRC=\ref[cov_alphabet] ICONSTATE='[symbol_name]'>")
 
 /obj/item/clothing/under/covenant/sangheili
 	name = "Sangheili Body-suit"
@@ -77,6 +88,165 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+
+//Code for in guantlet energy daggers + the weapon itself ( edited dagger)
+
+	action_button_name = "Toggle Gauntlet Energy Dagger"
+
+	var/obj/item/weapon/melee/g_dagger/connected_dagger = /obj/item/weapon/melee/g_dagger
+	var/mob/current_user
+
+/obj/item/clothing/gloves/thick/sangheili/New()
+	. = ..()
+	connected_dagger = new connected_dagger (src)
+
+/obj/item/clothing/gloves/thick/sangheili/proc/gauntlets_check()
+	var/mob/living/carbon/human/h = current_user
+	if(istype(h))
+		if(h.gloves == src)
+			return 1
+	return 0
+
+/obj/item/clothing/gloves/thick/sangheili/equipped(var/mob/user)
+	current_user = user
+	if(!gauntlets_check())
+		current_user = null
+
+/obj/item/clothing/gloves/thick/sangheili/dropped(var/mob/user)
+	if(!gauntlets_check())
+		current_user = null
+
+/obj/item/clothing/gloves/thick/sangheili/proc/equip_dagger()
+	if(!current_user)
+		return
+	if(!current_user.put_in_active_hand(connected_dagger))
+		if(!current_user.put_in_inactive_hand(connected_dagger))
+			to_chat(current_user,"<span class = 'notice'>You need one hand free to use [src.name]</span>")
+
+	update_inhand_icons()
+
+/obj/item/clothing/gloves/thick/sangheili/proc/unequip_dagger()
+	current_user.drop_from_inventory(connected_dagger)
+	contents += connected_dagger
+	update_inhand_icons()
+
+/obj/item/clothing/gloves/thick/sangheili/proc/update_inhand_icons()
+	if(!current_user)
+		return
+
+	if(current_user.l_hand == connected_dagger)
+		current_user.update_inv_l_hand()
+	if(current_user.r_hand == connected_dagger)
+		current_user.update_inv_r_hand()
+
+
+/obj/item/clothing/gloves/thick/sangheili/proc/on_dagger_dropped()
+	contents += connected_dagger
+
+/obj/item/weapon/melee/g_dagger/proc/inhand_check()
+	var/mob/living/carbon/human/h = creator_dagger.current_user
+	if(istype(h))
+		if(h.l_hand == src || h.r_hand == src)
+			return 1
+	return 0
+
+/obj/item/weapon/melee/g_dagger/dropped()
+	if(!inhand_check())
+		creator_dagger.on_dagger_dropped()
+
+/obj/item/clothing/gloves/thick/sangheili/ui_action_click()
+	if(!connected_dagger.inhand_check())
+		equip_dagger()
+		playsound(usr, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
+	else
+		playsound(usr, 'sound/weapons/saberoff.ogg', 50, 1)
+		unequip_dagger()
+
+
+//Physical dagger object define - this is essentially the dagger but without activate states - can only be 'on'. Had to do it this way due to the inherits from /energy and /elite_sword causing issues//
+
+/obj/item/weapon/melee/g_dagger
+	name = "Internal Energy Dagger"
+	desc = "A wrist-mounted Energy Dagger that extends from sangheili combat gauntlets"
+
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon_state = "en_dag_deploy"
+	w_class = ITEM_SIZE_NORMAL
+	force = 30
+	throwforce = 12
+	edge = 1
+	sharp = 1
+	var/obj/item/clothing/gloves/thick/sangheili/creator_dagger
+	var/next_leapwhen
+	armor_penetration = 50
+	canremove = 0
+
+	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/energy_dagger_inhand.dmi',slot_r_hand_str = 'code/modules/halo/icons/energy_dagger_inhand.dmi')
+	item_state_slots = list(
+	slot_l_hand_str = "en_dag_l_hand",
+	slot_r_hand_str = "en_dag_r_hand" )
+	hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+/obj/item/weapon/melee/g_dagger/New(var/obj/created_by)
+	.=..()
+	creator_dagger = created_by
+
+/obj/item/weapon/melee/g_dagger/attack(var/mob/m,var/mob/user)
+	if(ismob(m))
+		damtype = BURN
+	return ..()
+
+//The lunge code straight from the energy sword, switched to work here.
+
+#define ESWORD_LEAP_DIST 2
+#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili)
+#define LUNGE_DELAY 5 SECONDS
+
+/obj/item/weapon/melee/g_dagger/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
+	if(isnull(mob) || !istype(mob))
+		return 0
+	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
+		return 5
+	return ESWORD_LEAP_DIST
+
+/obj/item/weapon/melee/g_dagger/afterattack(var/atom/target,var/mob/user)
+	if(world.time < next_leapwhen)
+		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
+		return
+	if(!istype(target,/mob))
+		if(istype(target,/turf))
+			var/turf/targ_turf = target
+			var/list/turf_mobs = list()
+			for(var/mob/m in targ_turf.contents)
+				turf_mobs += m
+			if(turf_mobs.len > 0)
+				target = pick(turf_mobs)
+			else
+				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
+				return
+		else
+			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
+			return
+	if(!(target in view(7,user.loc)))
+		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
+		return
+	if(get_dist(user,target) <= get_species_leap_dist(user))
+		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
+		var/image/user_image = image(user)
+		user_image.dir = user.dir
+		for(var/i = 0 to 1)
+			var/obj/after_image = new /obj/effect/esword_path
+			if(i == 0)
+				after_image.loc = user.loc
+			else
+				after_image.loc = get_step(user,get_dir(user,target))
+			after_image.dir = user.dir
+			after_image.overlays += user_image
+			spawn(5)
+				qdel(after_image)
+		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
+		if(user.Adjacent(target) && ismob(target))
+			attack(target,user)
+		next_leapwhen = world.time + LUNGE_DELAY
 
 //Sangheili Armour Subtype Defines//
 

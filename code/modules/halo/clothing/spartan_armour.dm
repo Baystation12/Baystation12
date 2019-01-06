@@ -17,6 +17,7 @@
 	siemens_coefficient = 1
 	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 25,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
+	armor_thickness = 60
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -41,6 +42,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	armor_thickness = 30
 	species_restricted = list("Spartan")
 
 	specials = list(/datum/armourspecials/gear/human_tank,\
@@ -71,7 +73,7 @@
 	..()
 
 	spawn(0)
-		if(user && user.client && specials.len <= 2 && available_abilities.len)
+		if(user && user.client && specials.len <= 3 && available_abilities.len)
 			var/ability_type_string = input(user, "Choose the armour ability of your MJOLNIR","MJOLNIR Armour Ability") in available_abilities
 			var/ability_type = available_abilities[ability_type_string]
 			specials.Add(new ability_type(src))
