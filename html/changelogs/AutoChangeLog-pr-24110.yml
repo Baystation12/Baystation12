@@ -1,0 +1,4 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - tweak: "Radiation resistance now fully blocks radiation levels below its radiation resistance percentage, and thereafter will only allow some radiation leakthrough. Lower resistance suits leak much more readily once  past the threshold, while high resistance suits will only leak a little bit after the threshold is reached. Very highly irradiated environments are still extremely dangerous."
