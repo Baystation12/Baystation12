@@ -1,5 +1,5 @@
 
-/datun/craft_blueprint
+/datum/craft_blueprint
 	var/name
 	var/id
 	var/build_path

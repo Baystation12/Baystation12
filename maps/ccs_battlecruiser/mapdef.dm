@@ -37,9 +37,8 @@
 		/datum/job/opredflag_spartan/commander\
 	)
 
-	//use_overmap = 1
-	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID, "Arrivals Shuttle")
-	default_spawn = "Arrivals Shuttle"
+	allowed_spawns = list("Arrivals Shuttle")
+	default_spawn = null
 
 
 

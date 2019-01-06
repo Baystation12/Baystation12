@@ -1,7 +1,7 @@
 
 /obj/structure/sandbag
 	name = "sandbag"
-	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
 	icon_state = "sandbag"
 	density = 1
 	anchored = 1
@@ -134,7 +134,7 @@
 
 /obj/structure/sandbag_dead
 	name = "sandbag"
-	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
 	icon_state = "sandbag_dead"
 	anchored = 1
 	flags = ON_BORDER
@@ -161,7 +161,7 @@
 /obj/item/empty_sandbags
 	name = "empty sandbags"
 	desc = "Fill them with sand to form a defensive barrier"
-	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
 	icon_state = "empty sandbags"
 
 /obj/item/empty_sandbags/examine(mob/user)
