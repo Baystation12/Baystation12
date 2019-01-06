@@ -255,3 +255,56 @@ ARMCHAIR(yellow)
 	req_amount = 3
 	time = 10
 	send_material_data = 0
+
+/datum/stack_recipe/furniture/fullwindow
+	title = "full-tile window"
+	result_type = /obj/structure/window
+	req_amount = 4
+	time = 15
+	one_per_turf = 0
+
+/datum/stack_recipe/furniture/fullwindow/can_make(mob/user)
+	. = ..()
+	if(.)
+		for(var/obj/structure/window/check_window in user.loc)
+			if(check_window.is_fulltile())
+				to_chat(user, "<span class='warning'>There is already a fll-tile window here!</span>")
+				return FALSE
+
+/datum/stack_recipe/furniture/fullwindow/spawn_result(mob/user, location, amount)
+	return new result_type(user.loc, SOUTHWEST, 1, use_material, use_reinf_material)
+
+/datum/stack_recipe/furniture/borderwindow
+	title = "border window"
+	result_type = /obj/structure/window
+	req_amount = 1
+	time = 5
+	one_per_turf = 0
+
+/datum/stack_recipe/furniture/borderwindow/can_make(mob/user)
+	. = ..()
+	if(.)
+		for(var/obj/structure/window/check_window in user.loc)
+			if(check_window.dir == user.dir)
+				to_chat(user, "<span class='warning'>There is already a window facing that direction here!</span>")
+				return FALSE
+
+/datum/stack_recipe/furniture/borderwindow/spawn_result(mob/user, location, amount)
+	return new result_type(user.loc, user.dir, 1, use_material, use_reinf_material)
+
+/datum/stack_recipe/furniture/windoor
+	title = "windoor assembly"
+	result_type = /obj/structure/windoor_assembly
+	req_amount = 1
+	time = 20
+	one_per_turf = 1
+
+/datum/stack_recipe/furniture/windoor/can_make(mob/user)
+	. = ..()
+	if(.)
+		if(locate(/obj/machinery/door/window) in user.loc)
+			to_chat(user, "<span class='warning'>There is already a windoor here!</span>")
+			return FALSE
+
+/datum/stack_recipe/furniture/windoor/spawn_result(mob/user, location, amount)
+	return new result_type(user.loc, user.dir, 1, use_material, use_reinf_material)

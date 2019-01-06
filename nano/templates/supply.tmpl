@@ -1,7 +1,7 @@
 {{##def.common_supply_header:
   <th style="width:65%">Item
   <th style="width:20%">Cost
-  <th style="width:15%">Order
+  <th style="width:15%">Options
 #}}
 {{##def.common_request_header:
   <th style="width:5%">ID
@@ -26,22 +26,24 @@
 		You are unauthenticated. Some functions may be unavailable.
 	{{/if}}
 </div>
-{{if data.request_length || data.shopping_cart_length}}
-	<div class='notice'>
-		{{if data.request_length}}
-			You have <u>{{:data.request_length}}</u> orders pending.
-		{{/if}}
-		{{if data.request_length && data.shopping_cart_length}}
-			&#32;|&#32;
-		{{/if}}
-		{{if data.shopping_cart_length}}
-			You have <u>{{:data.shopping_cart_length}}</u> orders awaiting shuttle delivery.
-		{{/if}}
-	</div>
-{{else}}
-	<div class='notice info'>
-		All orders caught up.
-	</div>
+{{if data.is_admin}}
+	{{if data.request_length || data.shopping_cart_length}}
+		<div class='notice'>
+			{{if data.request_length}}
+				You have <u>{{:data.request_length}}</u> orders pending.
+			{{/if}}
+			{{if data.request_length && data.shopping_cart_length}}
+				&#32;|&#32;
+			{{/if}}
+			{{if data.shopping_cart_length}}
+				You have <u>{{:data.shopping_cart_length}}</u> orders awaiting shuttle delivery.
+			{{/if}}
+		</div>
+	{{else}}
+		<div class='notice info'>
+			All orders caught up.
+		</div>
+	{{/if}}
 {{/if}}
 <div class="item">
 	{{:helper.link('Browse Goods', 'cart', {'set_screen' : 1}, data.screen == 1 ? 'selected' : null)}}
@@ -63,7 +65,20 @@
 				<tr class="candystripe">
 				<td>{{:value.name}}
 				<td>{{:value.cost}} {{:data.currency}}
-				<td>{{:helper.link('Order', null, {'order' : value.ref})}}
+				<td>
+				{{:helper.link('Order', null, {'order' : value.ref})}}
+				{{if data.showing_contents_of && data.showing_contents_of == value.ref}}
+					{{:helper.link('Close', null, {'hide_contents' : 1})}}
+					<tr class="candystripe"><th colspan="3">Contents
+					{{for data.contents_of_order :content :content_index}}
+						<tr class="candystripe">
+						<td colspan="3">{{:content.name}} × {{:content.amount}}
+					{{/for}}
+          			<hr>
+					<tr>{{#def.common_supply_header}}
+				{{else}}
+					{{:helper.link('Contents', null, {'show_contents' : value.ref})}}
+				{{/if}}
 			{{/for}}
 		</table>
 	{{/if}}

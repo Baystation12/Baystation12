@@ -1,5 +1,5 @@
 /datum/job/rd
-	title = "Research Director"
+	title = "Chief Science Officer"
 	head_position = 1
 	department = "Science"
 	department_flag = COM|SCI
@@ -29,7 +29,7 @@
 
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the research director"
+	supervisors = "the Chief Science Officer"
 	selection_color = "#633d63"
 	economic_power = 7
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
@@ -45,7 +45,7 @@
 
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the research director"
+	supervisors = "the Chief Science Officer"
 	selection_color = "#633d63"
 	economic_power = 7
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
@@ -61,7 +61,7 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "research director"
+	supervisors = "the Chief Science Officer"
 	selection_color = "#633d63"
 	economic_power = 5
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.

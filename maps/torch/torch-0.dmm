@@ -28,7 +28,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/weapon/rig/hazard/guard,
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 2;
 	name = "suit storage";
@@ -4380,7 +4379,7 @@
 	id_tag = "petrov_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = 0;
-	req_one_access = list(13,200);
+	req_one_access = list(1,13,200);
 	tag_airpump = "petrov_shuttle_dock_pump";
 	tag_chamber_sensor = "petrov_shuttle_dock_sensor";
 	tag_exterior_door = "petrov_shuttle_dock_outer";
@@ -12064,11 +12063,12 @@
 "Dz" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/multi_tile/glass/research{
-	name = "Petrov Access";
-	icon_state = "closed";
 	dir = 8;
-	req_access = list(200);
-	id_tag = "PetrovAccess"
+	icon_state = "closed";
+	id_tag = "PetrovAccess";
+	name = "Petrov Access";
+	req_access = newlist();
+	req_one_access = list(1,200)
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
@@ -13415,8 +13415,6 @@
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/maint)
 "Ji" = (
-/obj/machinery/artifact,
-/obj/structure/anomaly_container,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -13842,8 +13840,6 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
 "KN" = (
-/obj/machinery/artifact,
-/obj/structure/anomaly_container,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -16258,7 +16254,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/security/research{
 	name = "Checkpoint";
-	req_access = list(207)
+	req_access = newlist();
+	req_one_access = list(1,207)
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/security)

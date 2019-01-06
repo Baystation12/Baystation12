@@ -2,7 +2,7 @@ var/list/escape_pods = list()
 var/list/escape_pods_by_name = list()
 
 /datum/shuttle/autodock/ferry/escape_pod
-	var/datum/computer/file/embedded_program/docking/simple/escape_pod/arming_controller
+	var/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/arming_controller
 	category = /datum/shuttle/autodock/ferry/escape_pod
 	move_time = 100
 
@@ -49,7 +49,9 @@ var/list/escape_pods_by_name = list()
 //This controller goes on the escape pod itself
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod
 	name = "escape pod controller"
+	program = /datum/computer/file/embedded_program/docking/simple/escape_pod
 	var/datum/shuttle/autodock/ferry/escape_pod/pod
+	var/tag_pump
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -87,15 +89,15 @@ var/list/escape_pods_by_name = list()
 //This controller is for the escape pod berth (station side)
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth
 	name = "escape pod berth controller"
-	program = /datum/computer/file/embedded_program/docking/simple/escape_pod
+	program = /datum/computer/file/embedded_program/docking/simple/escape_pod_berth
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
 	var/armed = null
-	if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
-		var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = docking_program
+	if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth))
+		var/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/P = docking_program
 		armed = P.armed
 
 	data = list(
@@ -116,44 +118,67 @@ var/list/escape_pods_by_name = list()
 	if (!emagged)
 		to_chat(user, "<span class='notice'>You emag the [src], arming the escape pod!</span>")
 		emagged = 1
-		if (istype(program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
-			var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = program
+		if (istype(program, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth))
+			var/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/P = program
 			if (!P.armed)
 				P.arm()
 		return 1
 
 //A docking controller program for a simple door based docking port
-/datum/computer/file/embedded_program/docking/simple/escape_pod
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth
 	var/armed = 0
 	var/eject_delay = 10	//give latecomers some time to get out of the way if they don't make it onto the pod
 	var/eject_time = null
 	var/closing = 0
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/proc/arm()
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/arm()
 	if(!armed)
 		armed = 1
 		open_door()
 
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/receive_user_command(command)
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/receive_user_command(command)
 	if (!armed)
 		return TRUE // Eat all commands.
 	return ..(command)
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/process()
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/process()
 	..()
 	if (eject_time && world.time >= eject_time && !closing)
 		close_door()
 		closing = 1
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/prepare_for_docking()
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/prepare_for_docking()
 	return
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/ready_for_docking()
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/ready_for_docking()
 	return 1
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/finish_docking()
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/finish_docking()
 	return		//don't do anything - the doors only open when the pod is armed.
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/prepare_for_undocking()
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/prepare_for_undocking()
 	eject_time = world.time + eject_delay*10
+
+// The program for the escape pod controller.
+/datum/computer/file/embedded_program/docking/simple/escape_pod
+	var/tag_pump
+
+/datum/computer/file/embedded_program/docking/simple/escape_pod/New(var/obj/machinery/embedded_controller/M)
+	..(M)
+	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod))
+		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller = M
+		tag_pump = controller.tag_pump ? controller.tag_pump : "[id_tag]_pump"
+
+/datum/computer/file/embedded_program/docking/simple/escape_pod/finish_undocking()
+	. = ..()
+	// Send a signal to the vent pumps to repressurize the pod.
+	var/datum/signal/signal = new
+	signal.data = list(
+		"tag" = tag_pump,
+		"sigtype" = "command",
+		"power" = 1,
+		"direction" = 1,
+		"set_external_pressure" = ONE_ATMOSPHERE
+	)
+	post_signal(signal)

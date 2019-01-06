@@ -107,9 +107,12 @@
 
 	if(target && !target.fully_charged())
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
+		if(ishuman(occupant))
+			var/mob/living/carbon/human/H = occupant
+			if(H.species.name == SPECIES_ADHERENT)
+				diff /= 2 //Adherents charge at half the normal rate.
 		var/charge_used = cell.use(diff)
 		target.give(charge_used)
-
 
 /obj/machinery/recharge_station/examine(mob/user)
 	. = ..(user)
@@ -227,7 +230,7 @@
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/carbon/human/H = M		
 		if(H.isSynthetic()) // FBPs and IPCs
 			return 1
 		return H.internal_organs_by_name["cell"]

@@ -25,9 +25,7 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 	minimal_access = list()
-	required_education = EDUCATION_TIER_BASIC
-	maximum_education = EDUCATION_TIER_TRADE
-
+	
 /datum/job/chef
 	title = "Cook"
 	department = "Service"
@@ -57,15 +55,12 @@
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
 	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar, access_commissary)
 	minimal_access = list()
-	required_education = EDUCATION_TIER_TRADE
-	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/bartender
 	department = "Service"
 	department_flag = SRV
 	supervisors = "the Executive Officer and the Corporate Liaison"
 	ideal_character_age = 30
-	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
@@ -75,8 +70,6 @@
 	min_skill = list(   SKILL_COOKING   = SKILL_BASIC,
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
-	required_education = EDUCATION_TIER_DROPOUT
-	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/crew
 	title = "Crewman"
@@ -85,7 +78,6 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
-	selection_color = "#515151"
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
@@ -100,5 +92,3 @@
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
-	required_education = EDUCATION_TIER_BASIC
-	maximum_education = EDUCATION_TIER_TRADE

@@ -132,6 +132,7 @@
 	. = ..()
 	if(.) //We moved
 		handle_exertion()
+		handle_leg_damage()
 
 /mob/living/carbon/human/proc/handle_exertion()
 	if(isSynthetic())
@@ -144,3 +145,18 @@
 				visible_message("<span class='notice'>\The [src] is sweating heavily!</span>", "<span class='notice'>You are sweating heavily!</span>")
 			if(2)
 				visible_message("<span class='notice'>\The [src] looks out of breath!</span>", "<span class='notice'>You are out of breath!</span>")
+
+/mob/living/carbon/human/proc/handle_leg_damage()
+	if(!can_feel_pain())
+		return
+	var/crutches = 0
+	for(var/obj/item/weapon/cane/C in list(l_hand, r_hand))
+		if(istype(C))
+			crutches++
+	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+		var/obj/item/organ/external/E = get_organ(organ_name)
+		if(E && (E.is_dislocated() || E.is_broken()))
+			if(crutches)
+				crutches--
+			else
+				E.add_pain(10)

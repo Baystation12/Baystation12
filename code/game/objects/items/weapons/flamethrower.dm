@@ -78,7 +78,7 @@
 		if(ptank)
 			ptank.dropInto(loc)
 			ptank = null
-		new /obj/item/stack/rods(get_turf(src))
+		new /obj/item/stack/material/rods(get_turf(src))
 		qdel(src)
 		return
 

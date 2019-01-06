@@ -1,6 +1,6 @@
 /obj/structure/railing
 	name = "railing"
-	desc = "A standard steel railing. Prevents from human stupidity."
+	desc = "A simple bar railing designed to protect against careless trespass."
 	icon = 'icons/obj/railing.dmi'
 	density = 1
 	throwpass = 1
@@ -24,7 +24,7 @@
 	. = ..()
 	color = COLOR_GUNMETAL // They're not painted!
 
-/obj/structure/railing/New(var/newloc, var/material_key = MATERIAL_STEEL)
+/obj/structure/railing/New(var/newloc, var/material_key = DEFAULT_FURNITURE_MATERIAL)
 	material = material_key // Converted to datum in initialize().
 	..(newloc)
 
@@ -43,7 +43,7 @@
 		return INITIALIZE_HINT_QDEL
 
 	name = "[material.display_name] [initial(name)]"
-	desc = "An unremarkable [material.display_name] railing. Guards against human stupidity."
+	desc = "A simple [material.display_name] railing designed to protect against careless trespass."
 	maxhealth = round(material.integrity / 5)
 	health = maxhealth
 	color = material.icon_colour

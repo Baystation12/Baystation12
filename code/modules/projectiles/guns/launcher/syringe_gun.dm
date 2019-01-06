@@ -62,6 +62,7 @@
 /obj/item/weapon/gun/launcher/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
+	icon = 'icons/obj/guns/syringegun.dmi'
 	icon_state = "syringegun"
 	item_state = "syringegun"
 	w_class = ITEM_SIZE_LARGE

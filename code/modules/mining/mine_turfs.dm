@@ -363,7 +363,7 @@ var/list/mining_floors = list()
 	for(var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))
 		switch(rand(1,7))
 			if(1)
-				var/obj/item/stack/rods/R = new(src)
+				var/obj/item/stack/material/rods/R = new(src)
 				R.amount = rand(5,25)
 
 			if(2)

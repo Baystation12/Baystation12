@@ -8,9 +8,10 @@
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player(P)
 		text += get_special_objective_text(P)
-		if(P.ambitions)
+		var/datum/goal/ambition = SSgoals.ambitions[P]
+		if(ambition)
 			text += "<br>Their goals for today were..."
-			text += "<br><span class='notice'>[P.ambitions]</span>"
+			text += "<br><span class='notice'>[ambition.summarize()]</span>"
 		if(!global_objectives.len && P.objectives && P.objectives.len)
 			var/failed
 			var/num = 1
@@ -18,10 +19,10 @@
 				text += print_objective(O, num)
 				if(O.check_completion())
 					text += "<font color='green'><B>Success!</B></font>"
-					feedback_add_details(feedback_tag,"[O.type]|SUCCESS")
+					SSstatistics.add_field_details(feedback_tag,"[O.type]|SUCCESS")
 				else
 					text += "<font color='red'>Fail.</font>"
-					feedback_add_details(feedback_tag,"[O.type]|FAIL")
+					SSstatistics.add_field_details(feedback_tag,"[O.type]|FAIL")
 					failed = 1
 				num++
 			if(failed)

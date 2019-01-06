@@ -187,6 +187,13 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	is_stack = 1
 	resources = list(MATERIAL_GLASS = SHEET_MATERIAL_AMOUNT * EXTRA_COST_FACTOR)
 
+/datum/autolathe/recipe/aluminium
+	name = "aluminium sheets"
+	path = /obj/item/stack/material/aluminium
+	category = "General"
+	is_stack = 1
+	resources = list(MATERIAL_ALUMINIUM = SHEET_MATERIAL_AMOUNT * EXTRA_COST_FACTOR)
+
 /datum/autolathe/recipe/rglass
 	name = "reinforced glass sheets"
 	path = /obj/item/stack/material/glass/reinforced
@@ -196,7 +203,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/rods
 	name = "metal rods"
-	path = /obj/item/stack/rods
+	path = /obj/item/stack/material/rods
 	category = "General"
 	is_stack = 1
 
@@ -551,7 +558,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/magazine_c20r
+/datum/autolathe/recipe/magazine_p10mm
 	name = "ammunition (10mm) pistol"
 	path = /obj/item/ammo_magazine/p10mm
 	hidden = 1

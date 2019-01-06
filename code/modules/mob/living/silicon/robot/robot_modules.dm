@@ -381,11 +381,15 @@ var/global/list/robot_modules = list(
 	M.synths = list(metal)
 	src.modules += M
 
+	var/obj/item/stack/material/cyborg/aluminium/AL = new (src)
+	M.synths = list(metal)
+	src.modules += AL
+
 	var/obj/item/stack/material/cyborg/glass/G = new (src)
 	G.synths = list(glass)
 	src.modules += G
 
-	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	var/obj/item/stack/material/rods/cyborg/R = new /obj/item/stack/material/rods/cyborg(src)
 	R.synths = list(metal)
 	src.modules += R
 
@@ -442,6 +446,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/megaphone(src)
 	src.modules += new /obj/item/device/holowarrant(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
+	src.modules += new /obj/item/device/hailer(src)
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	..()
 
@@ -761,7 +766,7 @@ var/global/list/robot_modules = list(
 	G.synths = list(glass)
 	src.modules += G
 
-	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	var/obj/item/stack/material/rods/cyborg/R = new /obj/item/stack/material/rods/cyborg(src)
 	R.synths = list(metal)
 	src.modules += R
 

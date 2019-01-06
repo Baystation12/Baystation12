@@ -47,7 +47,7 @@
 	// Bar, soft
 	ice			spawn_reagent = /datum/reagent/drink/ice
 	tea			spawn_reagent = /datum/reagent/drink/tea
-	icetea		spawn_reagent = /datum/reagent/drink/tea/icetea
+	green_tea	spawn_reagent = /datum/reagent/drink/tea/green
 	cola		spawn_reagent = /datum/reagent/drink/space_cola
 	smw			spawn_reagent = /datum/reagent/drink/spacemountainwind
 	dr_gibb		spawn_reagent = /datum/reagent/drink/dr_gibb

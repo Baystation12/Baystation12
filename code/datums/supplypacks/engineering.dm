@@ -92,7 +92,7 @@
 /decl/hierarchy/supply_pack/engineering/collector
 	name = "Power - Collector"
 	contains = list(/obj/machinery/power/rad_collector = 2)
-	cost = 6
+	cost = 8
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "collector crate"
 	access = access_engine_equip

@@ -1,9 +1,9 @@
 /obj/item/weapon/gun/magnetic
 	name = "improvised coilgun"
 	desc = "A coilgun hastily thrown together out of a basic frame and advanced power storage components. Is it safe for it to be duct-taped together like that?"
+	icon = 'icons/obj/guns/coilgun.dmi'
 	icon_state = "coilgun"
 	item_state = "coilgun"
-	icon = 'icons/obj/railgun.dmi'
 	one_hand_penalty = 5
 	fire_delay = 20
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ILLEGAL = 2, TECH_MAGNET = 4)
@@ -16,7 +16,7 @@
 	var/gun_unreliable = 15                                    // Percentage chance of detonating in your hands.
 
 	var/obj/item/loaded                                        // Currently loaded object, for retrieval/unloading.
-	var/load_type = /obj/item/stack/rods                       // Type of stack to load with.
+	var/load_type = /obj/item/stack/material/rods                       // Type of stack to load with.
 	var/load_sheet_max = 1									   // Maximum number of "sheets" you can load from a stack.
 	var/projectile_type = /obj/item/projectile/bullet/magnetic // Actual fire type, since this isn't throw_at rod launcher.
 

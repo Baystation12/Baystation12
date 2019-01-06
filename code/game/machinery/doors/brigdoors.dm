@@ -101,8 +101,8 @@
 	for(var/obj/structure/closet/secure_closet/brig/C in targets)
 		if(C.broken)	continue
 		if(C.opened && !C.close())	continue
-		C.locked = 1
-		C.icon_state = C.icon_locked
+		C.locked = TRUE
+		C.queue_icon_update()
 	return 1
 
 
@@ -128,7 +128,7 @@
 		if(C.broken)	continue
 		if(C.opened)	continue
 		C.locked = 0
-		C.icon_state = C.icon_closed
+		C.queue_icon_update()
 
 	return 1
 

@@ -360,16 +360,13 @@
 
 /mob/living/silicon/proc/clear_client()
 	//Handle job slot/tater cleanup.
-	var/job = mind.assigned_role
-
-	job_master.ClearSlot(job)
-
-	if(mind.objectives.len)
-		qdel(mind.objectives)
-		mind.special_role = null
-
-	clear_antag_roles(mind)
-
+	if(mind)
+		if(mind.assigned_job)
+			mind.assigned_job.clear_slot()
+		if(mind.objectives.len)
+			qdel(mind.objectives)
+			mind.special_role = null
+		clear_antag_roles(mind)
 	ghostize(0)
 	qdel(src)
 

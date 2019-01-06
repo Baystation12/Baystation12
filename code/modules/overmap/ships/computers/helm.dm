@@ -101,9 +101,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["dest"] = dy && dx
 		data["d_x"] = dx
 		data["d_y"] = dy
-		data["speedlimit"] = speedlimit ? speedlimit : "None"
-		data["speed"] = linked.get_speed()
-		data["accel"] = linked.get_acceleration()
+		data["speedlimit"] = speedlimit ? speedlimit*1000 : "None"
+		data["speed"] = round(linked.get_speed()*1000, 0.01)
+		data["accel"] = round(linked.get_acceleration()*1000, 0.01)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
 		data["manual_control"] = manual_control
@@ -195,9 +195,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		dy = 0
 
 	if (href_list["speedlimit"])
-		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit) as num|null
+		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
-			speedlimit = Clamp(newlimit, 0, 100)
+			speedlimit = Clamp(newlimit/1000, 0, 100)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
@@ -240,8 +240,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
-	data["speed"] = linked.get_speed()
-	data["accel"] = linked.get_acceleration()
+	data["speed"] = round(linked.get_speed()*1000, 0.01)
+	data["accel"] = round(linked.get_acceleration()*1000, 0.01)
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["viewing"] = viewing
 

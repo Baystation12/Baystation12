@@ -20,6 +20,9 @@
 /obj/effect/shuttle_landmark/merc/deck4,
 /turf/space,
 /area/space)
+"af" = (
+/turf/simulated/wall,
+/area/crew_quarters/adherent)
 "ag" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 9
@@ -57,12 +60,29 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/maintenance/fourthdeck/forestarboard)
+"ao" = (
+/turf/simulated/wall/r_wall,
+/area/crew_quarters/adherent)
+"ap" = (
+/turf/simulated/wall/r_wall,
+/area/hallway/primary/fourthdeck/aft)
 "aq" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/starboard)
 "ar" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod6/station)
+"as" = (
+/turf/simulated/wall,
+/area/hallway/primary/fourthdeck/aft)
+"at" = (
+/obj/structure/sign/warning/high_voltage,
+/turf/simulated/wall,
+/area/hallway/primary/fourthdeck/aft)
+"au" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor,
+/area/crew_quarters/adherent)
 "av" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -70,6 +90,16 @@
 "aw" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod7/station)
+"ax" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor,
+/area/hallway/primary/fourthdeck/aft)
+"ay" = (
+/obj/structure/sign/warning/fire{
+	name = "\improper DANGER: BOILING LIQUID"
+	},
+/turf/simulated/wall,
+/area/hallway/primary/fourthdeck/aft)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/fourthdeck)
@@ -625,6 +655,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_6_pump"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "cy" = (
@@ -635,6 +670,11 @@
 	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_6_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
@@ -657,6 +697,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
 "cC" = (
@@ -667,6 +712,11 @@
 	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_7_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
@@ -829,9 +879,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
-"da" = (
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
 "dd" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -1095,6 +1142,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/waterstore)
+"dI" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod7/station)
 "dJ" = (
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
@@ -1126,6 +1186,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_6_pump"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "dP" = (
@@ -1133,6 +1198,11 @@
 	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
@@ -1435,6 +1505,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
+"eO" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod8/station)
 "eP" = (
 /obj/structure/lattice,
 /turf/simulated/open,
@@ -1583,15 +1657,10 @@
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/structure/table/rack,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
+/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod6/station)
 "fs" = (
@@ -1599,6 +1668,7 @@
 	icon_state = "warning";
 	dir = 1
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod6/station)
 "ft" = (
@@ -1657,6 +1727,7 @@
 	icon_state = "warning";
 	dir = 1
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
 "fy" = (
@@ -1664,15 +1735,10 @@
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/structure/table/rack,
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
+/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
 "fA" = (
@@ -1838,10 +1904,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/forestarboard)
 "gi" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/machinery/atmospherics/pipe/tank/air{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod6/station)
 "gj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod6/station)
 "gk" = (
@@ -1879,10 +1951,16 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
 "go" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	icon_state = "intact";
+	dir = 5
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
 "gp" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/machinery/atmospherics/pipe/tank/air{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
 "gr" = (
@@ -2231,6 +2309,19 @@
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
+"hs" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_6_pump"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod6/station)
 "ht" = (
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
@@ -2597,10 +2688,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "iA" = (
-/obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
+/obj/machinery/vending/tool/adherent,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "iC" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -2612,13 +2702,20 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "iD" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
+"iE" = (
+/obj/structure/adherent_bath,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "iM" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -2848,9 +2945,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "jz" = (
-/obj/structure/table/steel,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
+/obj/structure/flora/pottedplant/crystal,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "jB" = (
 /obj/item/modular_computer/console/preset/civilian/professional,
 /obj/structure/noticeboard{
@@ -3042,9 +3139,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
-"kz" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/quartermaster/unused)
 "kA" = (
 /obj/random/junk,
 /obj/structure/cable{
@@ -3247,6 +3341,10 @@
 	},
 /turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
+"lo" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod9/station)
 "lr" = (
 /obj/structure/catwalk,
 /turf/simulated/open,
@@ -3299,14 +3397,15 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/janitor/aux)
 "ly" = (
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
-"lz" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/adherent_bath,
+/obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
+"lz" = (
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "lB" = (
 /obj/machinery/cryopod,
 /obj/machinery/computer/cryopod{
@@ -3756,8 +3855,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
+/obj/structure/adherent_pylon,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "mQ" = (
 /obj/effect/floor_decal/corner/green/half{
 	icon_state = "bordercolorhalf";
@@ -4141,8 +4241,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "oa" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4153,14 +4253,8 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
-"ob" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "oc" = (
 /obj/machinery/door/airlock/civilian{
 	name = "Emergency Storage";
@@ -4455,14 +4549,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/janitor/aux)
-"pl" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
-"pm" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
 "po" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4471,8 +4557,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "pp" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -4784,10 +4870,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
 "qy" = (
-/obj/machinery/door/airlock/civilian{
-	locked = 1;
-	name = "Ready Room"
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -4795,8 +4877,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/crystal{
+	name = "Adherent Maintenence"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/hallway/primary/fourthdeck/aft)
+/area/crew_quarters/adherent)
 "qB" = (
 /obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
@@ -6808,6 +6893,10 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
+"wg" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod9/station)
 "wh" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
@@ -7074,6 +7163,13 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
+"wQ" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod7/station)
 "wS" = (
 /obj/structure/railing/mapped{
 	dir = 4;
@@ -7168,6 +7264,10 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"xy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod9/station)
 "xA" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7887,6 +7987,19 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/aft)
+"Aa" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod9/station)
 "Ab" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8426,6 +8539,10 @@
 /obj/structure/bed/chair/comfy/brown,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
+"CK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod7/station)
 "CN" = (
 /obj/structure/closet/crate,
 /obj/random/junk,
@@ -8576,6 +8693,10 @@
 "Dc" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/foreport)
+"Df" = (
+/obj/structure/table/glass,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "Dq" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -8816,6 +8937,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage/upper)
+"Et" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod6/station)
 "Ew" = (
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -9106,10 +9231,16 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "Fv" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/machinery/atmospherics/pipe/tank/air{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod8/station)
 "Fw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod8/station)
 "Fx" = (
@@ -9135,10 +9266,15 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
 "Fz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
 "FA" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/machinery/atmospherics/pipe/tank/air{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
 "FB" = (
@@ -9277,19 +9413,15 @@
 /area/maintenance/fourthdeck/foreport)
 "Gh" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/table/rack,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
+/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod8/station)
 "Gi" = (
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod8/station)
 "Gj" = (
@@ -9327,19 +9459,15 @@
 /area/shuttle/escape_pod9/station)
 "Gn" = (
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
 "Go" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/table/rack,
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
+/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
 "Gp" = (
@@ -9410,6 +9538,19 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
+"Gw" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_8_pump"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod8/station)
 "GA" = (
 /obj/effect/shuttle_landmark/ninja/deck1,
 /turf/space,
@@ -9524,6 +9665,10 @@
 "GW" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/port)
+"GX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod8/station)
 "GY" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
@@ -9604,6 +9749,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_8_pump"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
 "Hu" = (
@@ -9611,6 +9761,11 @@
 	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
@@ -9846,6 +10001,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
+"Ii" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod6/station)
 "In" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -9875,6 +10034,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_8_pump"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
 "Is" = (
@@ -9885,6 +10049,11 @@
 	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_8_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
@@ -9897,6 +10066,11 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
 "Iu" = (
@@ -9907,6 +10081,11 @@
 	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "escape_pod_9_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
@@ -11698,6 +11877,10 @@
 /obj/machinery/deployable/barrier,
 /turf/simulated/floor/tiled/monotile,
 /area/maintenance/fourthdeck/forestarboard)
+"Oe" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod7/station)
 "Og" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -13179,8 +13362,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "RV" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_coffee/full{
@@ -13385,6 +13568,13 @@
 "Ss" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/fourthdeck/port)
+"St" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod6/station)
 "Su" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/monotile,
@@ -14707,8 +14897,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "VR" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -14815,6 +15005,10 @@
 /obj/structure/sign/warning/moving_parts,
 /turf/simulated/wall/prepainted,
 /area/quartermaster/office)
+"Wj" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/tiled/monotile,
+/area/shuttle/escape_pod8/station)
 "Wk" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -15409,9 +15603,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
-"XJ" = (
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
 "XL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16299,9 +16490,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
-"ZM" = (
-/turf/simulated/wall/prepainted,
-/area/quartermaster/unused)
 "ZN" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -38530,13 +38718,13 @@ fJ
 Zw
 Zw
 iy
-ZM
-ZM
-ZM
-ZM
-ZM
-ZM
-Xn
+af
+af
+af
+af
+af
+af
+as
 RK
 tb
 uH
@@ -38732,13 +38920,13 @@ eb
 eb
 hB
 eb
-ZM
+au
 jz
 ly
-da
-da
-pl
-Xn
+Df
+Df
+ly
+ax
 TH
 tc
 KG
@@ -38934,13 +39122,13 @@ ec
 ec
 eP
 ec
-ZM
+au
 iA
 lz
-XJ
+lz
 VQ
-pm
-Xn
+lz
+ax
 TH
 MI
 Vi
@@ -39136,13 +39324,13 @@ XT
 XT
 XT
 XT
-kz
-kz
-da
+ao
+ao
+lz
 mP
 nZ
-XJ
-Xn
+lz
+at
 TH
 MI
 ql
@@ -39339,7 +39527,7 @@ ar
 ar
 ar
 ar
-kz
+ao
 iC
 RU
 oa
@@ -39535,18 +39723,18 @@ ar
 cZ
 cx
 dj
-dj
+hs
 dj
 fr
 gi
 hj
 ib
-kz
-jz
-ly
-ob
-jz
-Xn
+ao
+iE
+Df
+Df
+iE
+ay
 TH
 MI
 ql
@@ -39561,7 +39749,7 @@ EO
 Fv
 Gh
 GJ
-GJ
+Gw
 GJ
 Ir
 Ix
@@ -39735,20 +39923,20 @@ bf
 ie
 bi
 bP
-bP
-bP
-bP
-bP
+St
+Ii
+Et
+Ii
 fs
 gj
 hj
 ib
-wa
-Xn
-Xn
-Xn
-Xn
-Xn
+ap
+as
+as
+as
+as
+as
 Rr
 UM
 sR
@@ -39762,10 +39950,10 @@ DV
 EO
 Fw
 Gi
-GK
-GK
-GK
-GK
+GX
+eO
+GX
+Wj
 GK
 JU
 By
@@ -41553,10 +41741,10 @@ Tf
 Ji
 nD
 bU
-bU
-bU
-bU
-bU
+wQ
+CK
+Oe
+CK
 fx
 go
 hk
@@ -41580,10 +41768,10 @@ DY
 EQ
 Fz
 Gn
-GR
-GR
-GR
-GR
+xy
+wg
+xy
+lo
 GR
 JX
 wc
@@ -41757,7 +41945,7 @@ aw
 lB
 cC
 dm
-dm
+dI
 dm
 fy
 gp
@@ -41783,7 +41971,7 @@ EQ
 FA
 Go
 GS
-GS
+Aa
 GS
 Iu
 oM

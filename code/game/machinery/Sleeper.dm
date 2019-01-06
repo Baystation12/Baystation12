@@ -52,8 +52,10 @@
 	if(pump > 0)
 		if(beaker && istype(occupant))
 			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-				for(var/datum/reagent/x in occupant.ingested.reagent_list)
-					occupant.ingested.trans_to_obj(beaker, 3)
+				var/datum/reagents/ingested = occupant.get_ingested_reagents()
+				if(ingested)
+					for(var/datum/reagent/x in ingested.reagent_list)
+						ingested.trans_to_obj(beaker, 3)
 		else
 			toggle_pump()
 

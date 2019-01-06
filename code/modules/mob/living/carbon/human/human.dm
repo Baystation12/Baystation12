@@ -62,6 +62,20 @@
 		qdel(organ)
 	return ..()
 
+/mob/living/carbon/human/get_ingested_reagents()
+	if(should_have_organ(BP_STOMACH))
+		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		if(stomach)
+			return stomach.ingested
+	return touching // Kind of a shitty hack, but makes more sense to me than digesting them.
+
+/mob/living/carbon/human/get_fullness()
+	if(!should_have_organ(BP_STOMACH))
+		return ..()
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if(stomach)
+		return nutrition + (stomach.ingested.total_volume * 10)
+	return 0 //Always hungry, but you can't actually eat. :(
 
 /mob/living/carbon/human/Stat()
 	. = ..()
@@ -379,7 +393,10 @@
 
 	for(var/obj/item/organ/external/E in list(floor, init))
 		while(E && E.parent_organ)
-			E = organs_by_name[E.parent_organ]
+			var/candidate = organs_by_name[E.parent_organ]
+			if(!candidate || (candidate in traced_organs))
+				break // Organ parenthood is not guaranteed to be a tree
+			E = candidate
 			traced_organs += E
 			if(E == init)
 				return traced_organs
@@ -636,7 +653,8 @@
 			if(level > 2)
 				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
 				Stun(3)
-				if(nutrition < 40)
+				var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+				if(!istype(stomach) || stomach.ingested.total_volume <= 5)
 					custom_emote(1,"dry heaves.")
 				else
 					for(var/a in stomach_contents)
@@ -651,9 +669,7 @@
 
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, toxvomit)
-					if(ingested)
-						ingested.remove_any(5)
+						location.add_vomit_floor(src, toxvomit, stomach.ingested)
 					nutrition -= 30
 		sleep(350)	//wait 35 seconds before next volley
 		lastpuke = 0
@@ -1327,12 +1343,24 @@
 	if(!current_limb || !S || !U)
 		return
 
+	var/fail_prob = skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
 	if(self)
-		to_chat(src, "<span class='danger'>You pop your [current_limb.joint] back in!</span>")
+		fail_prob += skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
+	var/datum/gender/T = gender_datums[get_gender()]
+	if(prob(fail_prob))
+		visible_message( \
+		"<span class='danger'>[U] pops [self ? "[T.his]" : "[S]'s"] [current_limb.joint] in the WRONG place!</span>", \
+		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!</span>" \
+		)
+		current_limb.add_pain(30)
+		current_limb.take_external_damage(5)
+		shock_stage += 20
 	else
-		to_chat(U, "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>")
-		to_chat(S, "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>")
-	current_limb.undislocate()
+		visible_message( \
+		"<span class='danger'>[U] pops [self ? "[T.his]" : "[S]'s"] [current_limb.joint] back in!</span>", \
+		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!</span>" \
+		)
+		current_limb.undislocate()
 
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
 	..()
@@ -1356,30 +1384,43 @@
 	set category = "IC"
 	species.toggle_stance(src)
 
-//generates realistic-ish pulse output based on preset levels
-/mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
-	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
-	if(!H)
-		return "0"
-	if(H.open && !method)
-		return "muddled and unclear; you can't seem to find a vein"
+// Similar to get_pulse, but returns only integer numbers instead of text.
+/mob/living/carbon/human/proc/get_pulse_as_number()
+	var/obj/item/organ/internal/heart/heart_organ = internal_organs_by_name[BP_HEART]
+	if(!heart_organ)
+		return 0
 
-	var/temp = 0
 	switch(pulse())
 		if(PULSE_NONE)
-			return "0"
+			return 0
 		if(PULSE_SLOW)
-			temp = rand(40, 60)
+			return rand(40, 60)
 		if(PULSE_NORM)
-			temp = rand(60, 90)
+			return rand(60, 90)
 		if(PULSE_FAST)
-			temp = rand(90, 120)
+			return rand(90, 120)
 		if(PULSE_2FAST)
-			temp = rand(120, 160)
+			return rand(120, 160)
 		if(PULSE_THREADY)
-			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
-	return "[method ? temp : temp + rand(-10, 10)]"
-//			output for machines^	^^^^^^^output for people^^^^^^^^^
+			return PULSE_MAX_BPM
+	return 0
+
+//generates realistic-ish pulse output based on preset levels as text
+/mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
+	var/obj/item/organ/internal/heart/heart_organ = internal_organs_by_name[BP_HEART]
+	if(!heart_organ)
+		// No heart, no pulse
+		return "0"
+	if(heart_organ.open && !method)
+		// Heart is a open type (?) and cannot be checked unless it's a machine
+		return "muddled and unclear; you can't seem to find a vein"
+
+	var/bpm = get_pulse_as_number()
+	if(bpm >= PULSE_MAX_BPM)
+		return method ? ">[PULSE_MAX_BPM]" : "extremely weak and fast, patient's artery feels like a thread"
+	
+	return "[method ? bpm : bpm + rand(-10, 10)]"
+// output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
 /mob/living/carbon/human/proc/pulse()
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
@@ -1533,6 +1574,7 @@
 			setOxyLoss(75)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
+		return TRUE
 
 /mob/living/carbon/human/proc/make_reagent(amount, reagent_type)
 	if(stat == CONSCIOUS)
@@ -1614,3 +1656,12 @@
 
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	return cultural_info[token]
+
+/mob/living/carbon/human/proc/seizure()
+	set waitfor = 0
+	sleep(rand(5,10))
+	if(!paralysis && stat == CONSCIOUS)
+		visible_message("<span class='danger'>\The [src] starts having a seizure!</span>")
+		Paralyse(rand(8,16))
+		make_jittery(rand(150,200))
+		adjustHalLoss(rand(50,60))

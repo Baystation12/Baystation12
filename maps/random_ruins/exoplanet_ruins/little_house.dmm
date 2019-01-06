@@ -173,12 +173,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/little_house)
 "D" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
-	name = "Wardrobe"
-	},
+/obj/structure/closet/cabinet,
 /turf/simulated/floor/wood,
 /area/map_template/little_house)
 

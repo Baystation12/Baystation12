@@ -334,7 +334,7 @@ I said no!
 
 /datum/recipe/meatkabob
 	items = list(
-		/obj/item/stack/rods,
+		/obj/item/stack/material/rods,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 	)
@@ -342,7 +342,7 @@ I said no!
 
 /datum/recipe/tofukabob
 	items = list(
-		/obj/item/stack/rods,
+		/obj/item/stack/material/rods,
 		/obj/item/weapon/reagent_containers/food/snacks/tofu,
 		/obj/item/weapon/reagent_containers/food/snacks/tofu,
 	)
@@ -666,6 +666,10 @@ I said no!
 /datum/recipe/boiledrice
 	reagents = list(/datum/reagent/water = 10, /datum/reagent/nutriment/rice = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledrice
+
+/datum/recipe/chazuke
+	reagents = list(/datum/reagent/nutriment/rice/chazuke = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/boiledrice/chazuke
 
 /datum/recipe/katsucurry
 	fruit = list("apple" = 1, "carrot" = 1, "potato" = 1)

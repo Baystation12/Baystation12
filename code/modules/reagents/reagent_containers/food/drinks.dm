@@ -64,6 +64,9 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/self_feed_message(var/mob/user)
 	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
+		for(var/datum/reagent/R in reagents.reagent_list)
+			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
 /obj/item/weapon/reagent_containers/food/drinks/feed_sound(var/mob/user)
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
@@ -173,34 +176,23 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/coffee, 30)
 
-/obj/item/weapon/reagent_containers/food/drinks/tea
-	name = "cup of Duke Purple Tea"
-	desc = "An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea."
-	icon_state = "teacup"
-	item_state = "coffee"
-	center_of_mass = "x=16;y=14"
-	filling_states = "100"
-	base_name = "cup"
-	base_icon = "teacup"
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/drink/tea, 30)
-
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
 	center_of_mass = "x=15;y=10"
+
 /obj/item/weapon/reagent_containers/food/drinks/ice/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/ice, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
-	name = "cup of Dutch hot coco"
-	desc = "Made in Space South America."
+	name = "cup of hot cocoa"
+	desc = "A tall plastic cup of creamy hot chocolate."
 	icon_state = "hot_coco"
 	item_state = "coffee"
 	center_of_mass = "x=15;y=13"
+
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
@@ -336,7 +328,7 @@
 	base_name = "NT cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp
-	name = "\improper Expeditionary Corps Organisation coffee cup"
+	name = "\improper EXO coffee cup"
 	desc = "A tasteful coffee cup in Expeditionary Corps Organisation corporate colours."
 	icon_state = "coffeecup_corp"
 	base_name = "EXO cup"
@@ -411,3 +403,41 @@
 	desc = "A coffee cup imprinted with the stylish logo of Deimos Advanced Information Systems."
 	icon_state = "coffeecup_dais"
 	base_name = "DAIS cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/teacup
+	name = "teacup"
+	desc = "A plain white porcelain teacup."
+	icon_state = "teacup"
+	item_state = "coffee"
+	volume = 20
+	center_of_mass = "x=15;y=13"
+	filling_states = "100"
+	base_name = "teacup"
+	base_icon = "teacup"
+
+//tea and tea accessories
+/obj/item/weapon/reagent_containers/food/drinks/tea
+	name = "cup of tea master item"
+	desc = "A tall plastic cup full of the concept and ideal of tea."
+	icon_state = "coffee"
+	item_state = "coffee"
+	center_of_mass = "x=16;y=14"
+	filling_states = "100"
+	base_name = "cup"
+	base_icon = "cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/tea/black
+	name = "cup of black tea"
+	desc = "A tall plastic cup of hot black tea."
+
+/obj/item/weapon/reagent_containers/food/drinks/tea/black/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/tea, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/tea/green
+	name = "cup of green tea"
+	desc = "A tall plastic cup of hot green tea."
+
+/obj/item/weapon/reagent_containers/food/drinks/tea/green/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/tea/green, 30)

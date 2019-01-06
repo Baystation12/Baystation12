@@ -14,7 +14,7 @@
 	return 1
 
 /mob/living/carbon/alien/diona/proc/wear_hat(var/obj/item/clothing/head/new_hat)
-	if(hat || !istype(new_hat))
+	if(hat || !istype(new_hat) || holding_item == new_hat)
 		return FALSE
 	hat = new_hat
 	hat.forceMove(src)
@@ -30,7 +30,14 @@
 		to_chat(usr, "<span class='warning'>You have nothing to drop.</span>")
 
 /mob/living/carbon/alien/diona/proc/can_collect(var/obj/item/collecting)
-	return (!holding_item && istype(collecting) && !collecting.anchored && collecting.simulated && collecting.w_class <= can_pull_size)
+	return (!holding_item && \
+		istype(collecting) && \
+		collecting != hat && \
+		collecting.loc != src && \
+		!collecting.anchored && \
+		collecting.simulated && \
+		collecting.w_class <= can_pull_size \
+	)
 
 /mob/living/carbon/alien/diona/proc/collect(var/obj/item/collecting)
 	collecting.forceMove(src)
@@ -42,7 +49,7 @@
 	if(holding_item.reagents && holding_item.reagents.total_volume)
 		holding_item.reagents.trans_to_mob(src, holding_item.reagents.total_volume, CHEM_INGEST)
 
-	// It also means they can do the old school cartoon schtick of eating and entire sandwich
+	// It also means they can do the old school cartoon schtick of eating an entire sandwich
 	// and spitting up an empty plate. Ptooie.
 	if(istype(holding_item, /obj/item/weapon/reagent_containers/food))
 		var/obj/item/weapon/reagent_containers/food/food = holding_item

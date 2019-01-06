@@ -1687,9 +1687,6 @@
 /area/holodeck/source_courtroom)
 "aef" = (
 /obj/structure/closet{
-	icon_closed = "syndicate1";
-	icon_opened = "syndicate1open";
-	icon_state = "syndicate1";
 	name = "emergency response team wardrobe"
 	},
 /obj/item/clothing/accessory/solgov/fleet_patch/fifth,
@@ -3190,9 +3187,6 @@
 /area/rescue_base/base)
 "ahI" = (
 /obj/structure/closet{
-	icon_closed = "syndicate1";
-	icon_opened = "syndicate1open";
-	icon_state = "syndicate1";
 	name = "insignias closet"
 	},
 /obj/item/clothing/accessory/solgov/department/security/fleet,
@@ -5876,11 +5870,7 @@
 	},
 /area/wizard_station)
 "anA" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/clothing/suit/wizrobe/red,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/head/wizard/red,
@@ -5890,11 +5880,7 @@
 	},
 /area/wizard_station)
 "anB" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/clothing/suit/wizrobe/marisa,
 /obj/item/clothing/shoes/sandal/marisa,
 /obj/item/clothing/head/wizard/marisa,
@@ -5904,11 +5890,7 @@
 	},
 /area/wizard_station)
 "anC" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/clothing/suit/wizrobe/magusblue,
 /obj/item/clothing/head/wizard/magus,
 /obj/item/weapon/staff,
@@ -5917,11 +5899,7 @@
 	},
 /area/wizard_station)
 "anD" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/pwine,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
@@ -6209,11 +6187,7 @@
 	},
 /area/wizard_station)
 "aop" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/clothing/under/psysuit,
 /obj/item/clothing/suit/wizrobe/psypurple,
 /obj/item/clothing/head/wizard/amp,
@@ -6222,11 +6196,7 @@
 	},
 /area/wizard_station)
 "aoq" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/clothing/shoes/sandal/marisa{
 	desc = "A set of fancy shoes that are as functional as they are comfortable.";
 	name = "Gentlemans Shoes"
@@ -6244,11 +6214,7 @@
 	},
 /area/wizard_station)
 "aor" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/clothing/suit/wizrobe/magusred,
 /obj/item/clothing/head/wizard/magus,
 /obj/item/weapon/staff,
@@ -6257,11 +6223,7 @@
 	},
 /area/wizard_station)
 "aos" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
-	},
+/obj/structure/closet,
 /obj/item/weapon/storage/briefcase,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -11816,9 +11778,6 @@
 /area/centcom/specops)
 "aBB" = (
 /obj/structure/closet{
-	icon_closed = "syndicate1";
-	icon_opened = "syndicate1open";
-	icon_state = "syndicate1";
 	name = "emergency response team wardrobe"
 	},
 /obj/item/clothing/under/syndicate/combat,
@@ -16557,9 +16516,6 @@
 /area/tdome)
 "aMs" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
 	name = "Wardrobe"
 	},
 /obj/item/clothing/shoes/leather,
@@ -16646,9 +16602,6 @@
 /area/merchant_station)
 "aME" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
 	name = "Wardrobe"
 	},
 /obj/item/clothing/shoes/black,
@@ -18511,9 +18464,6 @@
 /area/syndicate_mothership/raider_base)
 "aQX" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
 	name = "Clothing Storage"
 	},
 /obj/effect/floor_decal/carpet,
@@ -20517,16 +20467,16 @@
 /area/merchant_station)
 "aVR" = (
 /obj/structure/table/rack,
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 50
 	},
 /turf/simulated/floor/plating,
@@ -21083,7 +21033,7 @@
 "aXi" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/crossbow,
-/obj/item/stack/rods{
+/obj/item/stack/material/rods{
 	amount = 10
 	},
 /obj/machinery/light/small{
@@ -21650,9 +21600,6 @@
 /area/syndicate_mothership/raider_base)
 "bgb" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
 	name = "Clothing Storage"
 	},
 /obj/item/clothing/head/bandana{
@@ -21665,9 +21612,6 @@
 /area/centcom/holding)
 "bhb" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
 	name = "Clothing Storage"
 	},
 /obj/item/clothing/glasses/sunglasses,
@@ -22203,9 +22147,6 @@
 /area/syndicate_station/start)
 "eRk" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
 	},
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken1"
@@ -22496,9 +22437,6 @@
 /area/holodeck/source_temple)
 "jVW" = (
 /obj/structure/closet{
-	icon_closed = "syndicate1";
-	icon_opened = "syndicate1open";
-	icon_state = "syndicate1";
 	name = "insignias closet"
 	},
 /obj/item/clothing/accessory/solgov/department/medical/fleet,
@@ -22823,9 +22761,6 @@
 /area/holodeck/source_cafe)
 "owz" = (
 /obj/structure/closet{
-	icon_closed = "syndicate1";
-	icon_opened = "syndicate1open";
-	icon_state = "syndicate1";
 	name = "insignias closet"
 	},
 /obj/item/clothing/accessory/solgov/department/engineering/fleet,
@@ -22992,9 +22927,6 @@
 /area/syndicate_station/start)
 "rIb" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
 	},
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken3"
@@ -23201,9 +23133,6 @@
 /area/holodeck/source_cafe)
 "vgY" = (
 /obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed"
 	},
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken2"

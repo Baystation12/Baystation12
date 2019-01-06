@@ -12,12 +12,12 @@
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
-		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/rd, /datum/job/liaison, /datum/job/warden),	//Other jobs unavailable via branch restrictions,
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/officer, /datum/job/bodyguard, /datum/job/rd, /datum/job/liaison, /datum/job/warden),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
-						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
+						/datum/job/liaison, /datum/job/bodyguard, /datum/job/representative, /datum/job/sea,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
@@ -25,7 +25,7 @@
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor, /datum/job/mining,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
-						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/xenolife_technician,
+						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
 						/datum/job/merchant, /datum/job/stowaway
@@ -57,18 +57,29 @@
 				species_blacklist |= job.type
 
 // Some jobs for nabber grades defined here due to map-specific job datums.
-/decl/cultural_info/education/nabber/New()
+/decl/cultural_info/culture/nabber/New()
 	LAZYADD(valid_jobs, /datum/job/scientist_assistant)
 	..()
 
-/decl/cultural_info/education/nabber/b/New()
+/decl/cultural_info/culture/nabber/b/New()
 	LAZYADD(valid_jobs, /datum/job/cargo_contractor)
 	..()
 
-/decl/cultural_info/education/nabber/a/New()
+/decl/cultural_info/culture/nabber/a/New()
 	LAZYADD(valid_jobs, /datum/job/engineer_contractor)
 	..()
 
-/decl/cultural_info/education/nabber/a/plus/New()
+/decl/cultural_info/culture/nabber/a/plus/New()
 	LAZYADD(valid_jobs, /datum/job/doctor_contractor)
 	..()
+
+/datum/job
+	allowed_branches = list(
+		/datum/mil_branch/civilian
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/civ
+	)
+
+/datum/map/torch
+	default_assistant_title = "Passenger"

@@ -65,6 +65,8 @@
 		var/obj/effect/overmap/O = map_sectors[zlevel]
 		if(O.name == torch.name)
 			continue
+		if(istype(O, /obj/effect/overmap/ship/landable)) //Don't show shuttles
+			continue
 		space_things |= O
 
 	var/list/distress_calls

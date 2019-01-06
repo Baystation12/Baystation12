@@ -103,26 +103,26 @@
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi'
 		)
 
 /obj/item/clothing/suit/space/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi'
 		)
 
 /obj/item/clothing/shoes/magboots/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi'
 		)
 
 /obj/item/clothing/gloves/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	siemens_coefficient = 0
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi'
@@ -148,6 +148,7 @@
 	online_slowdown = 0
 	offline_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/rig/ce

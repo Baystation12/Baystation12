@@ -199,7 +199,7 @@
 	add_field(/datum/report_field/pencode_text, "Defense/Offense")
 	add_field(/datum/report_field/pencode_text, "Special Characteristic(s)")
 	add_field(/datum/report_field/pencode_text, "Classification")
-	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Research Director should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
 
 //NT reports, mostly for liason but can be used by any NT personnel.
 
@@ -226,7 +226,7 @@
 	add_header()
 	add_field(/datum/report_field/simple_text, "AO Codename")
 	add_field(/datum/report_field/people/from_manifest, "Reporting Scientist")
-	add_field(/datum/report_field/people/from_manifest, "Overviewing Research Director")
+	add_field(/datum/report_field/people/from_manifest, "Overviewing Chief Science Officer")
 	add_field(/datum/report_field/pencode_text, "Containment Procedures")
 	add_field(/datum/report_field/pencode_text, "Generalized Overview")
 	add_field(/datum/report_field/simple_text, "Approximate Age of AO")

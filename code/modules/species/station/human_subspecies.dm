@@ -1,5 +1,5 @@
 /datum/species/human/gravworlder
-	name = "Grav-Adapted Human"
+	name = SPECIES_GRAVWORLDER
 	name_plural = "Grav-Adapted Humans"
 	description = "Heavier and stronger than a baseline human, gravity-adapted people have \
 	thick radiation-resistant skin with a high lead content, denser bones, and recessed \
@@ -24,7 +24,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/spacer
-	name = "Space-Adapted Human"
+	name = SPECIES_SPACER
 	name_plural = "Space-Adapted Humans"
 	description = "Lithe and frail, these sickly folk were engineered for work in environments that \
 	lack both light and atmosphere. As such, they're quite resistant to asphyxiation as well as \
@@ -48,7 +48,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/vatgrown
-	name = "Vat-Grown Human"
+	name = SPECIES_VATGROWN
 	name_plural = "Vat-Grown Humans"
 	description = "With cloning on the forefront of human scientific advancement, cheap mass production \
 	of bodies is a very real and rather ethically grey industry. Vat-grown humans tend to be paler than \
@@ -59,6 +59,7 @@
 	toxins_mod =   1.1
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_LUNGS =    /obj/item/organ/internal/lungs,
 		BP_LIVER =    /obj/item/organ/internal/liver,
 		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
@@ -74,7 +75,7 @@
 	)
 
 /datum/species/human/tritonian
-	name = "Tritonian"
+	name = SPECIES_TRITONIAN
 	name_plural = "Tritonians"
 	description = "Of all human gene-adapts, the Tritonian genotype is probably the most wildly divergent from \
 	baseline humanity. Conceived alongside dolphin and octopus genetic engineering projects, this genotype \

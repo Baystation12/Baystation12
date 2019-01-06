@@ -52,6 +52,7 @@
 	#include "job/torch_outfits.dm"
 	#include "job/torch_jobs.dm"
 	#include "job/command_jobs.dm"
+	#include "job/corporate_jobs.dm"
 	#include "job/engineering_jobs.dm"
 	#include "job/exploration_jobs.dm"
 	#include "job/medical_jobs.dm"
@@ -112,6 +113,7 @@
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/unishi/unishi.dm"
+	#include "../away/bsl/bsl.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 

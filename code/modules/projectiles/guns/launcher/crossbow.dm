@@ -49,7 +49,7 @@
 /obj/item/weapon/gun/launcher/crossbow
 	name = "powered crossbow"
 	desc = "A 2557AD twist on an old classic. Pick up that can."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/guns/crossbow.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
 	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
@@ -146,8 +146,8 @@
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			update_icon()
 			return
-		else if(istype(W,/obj/item/stack/rods))
-			var/obj/item/stack/rods/R = W
+		else if(istype(W,/obj/item/stack/material/rods))
+			var/obj/item/stack/material/rods/R = W
 			if (R.use(1))
 				bolt = new /obj/item/weapon/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
@@ -205,6 +205,7 @@
 	desc = "A half-finished crossbow."
 	icon_state = "crossbowframe0"
 	item_state = "crossbow-solid"
+	icon = 'icons/obj/guns/crossbow.dmi'
 
 	var/buildstate = 0
 
@@ -221,9 +222,9 @@
 		if(5) to_chat(user, "It has a steel cable loosely strung across the lath.")
 
 /obj/item/weapon/crossbowframe/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack/rods))
+	if(istype(W,/obj/item/stack/material/rods))
 		if(buildstate == 0)
-			var/obj/item/stack/rods/R = W
+			var/obj/item/stack/material/rods/R = W
 			if(R.use(3))
 				to_chat(user, "<span class='notice'>You assemble a backbone of rods around the wooden stock.</span>")
 				buildstate++
@@ -290,7 +291,6 @@
 /obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice
 	name = "rapid crossbow device"
 	desc = "A hacked RCD turns an innocent construction tool into the penultimate deconstruction tool. Flashforges bolts using matter units when the string is drawn back."
-	icon = 'icons/obj/weapons.dmi'
 	icon_state = "rxb"
 	slot_flags = null
 	draw_time = 10

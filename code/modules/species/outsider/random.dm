@@ -9,6 +9,7 @@
 
 	icobase = 'icons/mob/human_races/species/humanoid/body.dmi'
 	deform = 'icons/mob/human_races/species/humanoid/body.dmi'
+	bandages_icon = 'icons/mob/bandage.dmi'
 	appearance_flags = HAS_SKIN_COLOR
 	limb_blend = ICON_MULTIPLY
 

@@ -691,6 +691,40 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/b_green/bordercee
 	icon_state = "bordercolorcee"
 
+/obj/effect/floor_decal/corner/research
+	name = "research corner"
+	color = COLOR_RESEARCH
+
+/obj/effect/floor_decal/corner/research/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/research/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/research/full
+	icon_state = "corner_white_full"
+
+/obj/effect/floor_decal/corner/research/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/research/half
+	icon_state = "bordercolorhalf"
+
+/obj/effect/floor_decal/corner/research/mono
+	icon_state = "bordercolormonofull"
+
+/obj/effect/floor_decal/corner/research/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/research/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/research/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/research/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/spline/plain
 	name = "spline - plain"
 	icon_state = "spline_plain"

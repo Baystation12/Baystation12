@@ -186,7 +186,7 @@
 
 /obj/item/inducer/borg/on_update_icon()
 	. = ..()
-	overlays += image("icons/obj/gun.dmi","safety[safety()]")
+	overlays += image("icons/obj/guns/gui.dmi","safety[safety()]")
 
 /obj/item/inducer/borg/verb/toggle_safety(var/mob/user)
 	set src in usr

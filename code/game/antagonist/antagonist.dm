@@ -250,6 +250,7 @@
 /datum/antagonist/proc/reset_antag_selection()
 	for(var/datum/mind/player in pending_antagonists)
 		if(flags & ANTAG_OVERRIDE_JOB)
+			player.assigned_job = null
 			player.assigned_role = null
 		player.special_role = null
 	pending_antagonists.Cut()

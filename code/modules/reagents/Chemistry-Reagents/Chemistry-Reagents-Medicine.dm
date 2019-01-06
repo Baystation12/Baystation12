@@ -97,9 +97,10 @@
 	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
 	var/removing = (4 * removed)
-	for(var/datum/reagent/R in M.ingested.reagent_list)
+	var/datum/reagents/ingested = M.get_ingested_reagents()
+	for(var/datum/reagent/R in ingested.reagent_list)
 		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
-			M.ingested.remove_reagent(R.type, removing)
+			ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
 		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
@@ -265,13 +266,15 @@
 
 /datum/reagent/tramadol/proc/isboozed(var/mob/living/carbon/M)
 	. = 0
-	var/list/pool = M.reagents.reagent_list | M.ingested.reagent_list
-	for(var/datum/reagent/ethanol/booze in pool)
-		if(M.chem_doses[booze.type] < 2) //let them experience false security at first
-			continue
-		. = 1
-		if(booze.strength < 40) //liquor stuff hits harder
-			return 2
+	var/datum/reagents/ingested = M.get_ingested_reagents()
+	if(ingested)
+		var/list/pool = M.reagents.reagent_list | ingested.reagent_list
+		for(var/datum/reagent/ethanol/booze in pool)
+			if(M.chem_doses[booze.type] < 2) //let them experience false security at first
+				continue
+			. = 1
+			if(booze.strength < 40) //liquor stuff hits harder
+				return 2
 
 /datum/reagent/tramadol/oxycodone
 	name = "Oxycodone"
@@ -448,8 +451,9 @@
 	M.drowsyness = 0
 	M.stuttering = 0
 	M.confused = 0
-	if(M.ingested)
-		for(var/datum/reagent/R in M.ingested.reagent_list)
+	var/datum/reagents/ingested = M.get_ingested_reagents()
+	if(ingested)
+		for(var/datum/reagent/R in ingested.reagent_list)
 			if(istype(R, /datum/reagent/ethanol))
 				M.chem_doses[R.type] = max(M.chem_doses[R.type] - removed * 5, 0)
 
@@ -780,7 +784,9 @@
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
-		M.resuscitate()
+		if(M.resuscitate())
+			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
+			heart.take_internal_damage(heart.max_damage * 0.15)
 
 /datum/reagent/lactate
 	name = "Lactate"

@@ -128,6 +128,7 @@
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
 	desc = "A bulky pistol designed to fire self propelled rounds."
+	icon = 'icons/obj/guns/gyropistol.dmi'
 	icon_state = "gyropistol"
 	max_shells = 8
 	caliber = "75"
@@ -169,6 +170,7 @@
 /obj/item/weapon/gun/projectile/pistol
 	name = "holdout pistol"
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
+	icon = 'icons/obj/guns/holdout_pistol.dmi'
 	icon_state = "pistol"
 	item_state = null
 	w_class = ITEM_SIZE_SMALL
@@ -224,13 +226,14 @@
 /obj/item/weapon/silencer
 	name = "silencer"
 	desc = "A silencer."
-	icon = 'icons/obj/gun.dmi'
+	icon = 'icons/obj/guns/holdout_pistol.dmi'
 	icon_state = "silencer"
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/gun/projectile/pirate
 	name = "zip gun"
 	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in frontier systems."
+	icon = 'icons/obj/guns/zipgun.dmi'
 	icon_state = "zipgun"
 	item_state = "sawnshotgun"
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
@@ -268,6 +271,7 @@
 /obj/item/weapon/zipgunframe
 	name = "zip gun frame"
 	desc = "A half-finished zip gun."
+	icon = 'icons/obj/guns/zipgun.dmi'
 	icon_state = "zipgun0"
 	item_state = "zipgun-solid"
 	var/buildstate = 0

@@ -5,6 +5,12 @@
 
 #define get_turf(A) get_step(A,0)
 
+#define get_x(A) (get_step(A, 0)?.x || 0)
+
+#define get_y(A) (get_step(A, 0)?.y || 0)
+
+#define get_z(A) (get_step(A, 0)?.z || 0)
+
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 
 #define isalien(A) istype(A, /mob/living/carbon/alien)
@@ -13,7 +19,7 @@
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
-#define isatom(A) istype(A, /atom)
+#define isatom(A) isloc(A)
 
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 

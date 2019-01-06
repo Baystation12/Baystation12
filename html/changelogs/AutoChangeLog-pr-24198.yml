@@ -1,0 +1,8 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - maptweak: "Replaces ready room with adherent maintenance. Ding."
+  - tweak: "Adherents now recharge at cyborg rechargers at half the rate."
+  - maptweak: "Removes mineral baths from all other map locations."
+  - tweak: "Adherent pylon will now damage robots."
+  - rscadd: "Adds adherent tool vendor and crystal material airlock."

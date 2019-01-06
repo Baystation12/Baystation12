@@ -138,6 +138,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
 
-	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 

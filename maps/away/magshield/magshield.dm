@@ -87,8 +87,8 @@
 	if (being_stopped)
 		to_chat(user, "<span class='notice'> Somebody is already interacting with \the [src].</span>")
 		return
-	if(istype(W, /obj/item/stack/rods))
-		var/obj/item/stack/rods/R = W
+	if(istype(W, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/R = W
 		to_chat(user, "<span class='notice'> You start to stick [R.singular_name] into rotating hands to make them stuck.</span>")
 		being_stopped = 1
 		if (!do_after(user, 100, src))

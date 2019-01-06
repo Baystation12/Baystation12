@@ -54,55 +54,21 @@
 /obj/structure/wall_frame/attackby(var/obj/item/weapon/W, var/mob/user)
 	src.add_fingerprint(user)
 
-	//grille placing begin
-	if(istype(W, /obj/item/stack/rods))
-		var/obj/item/stack/rods/ST = W
+	//grille placing
+	if(istype(W, /obj/item/stack/material/rods))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == get_dir(src, user))
 				to_chat(user, "<span class='notice'>There is a window in the way.</span>")
 				return
-		if(!in_use)
-			if(ST.get_amount() < 2)
-				to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
-				return
-			to_chat(usr, "<span class='notice'>Assembling grille...</span>")
-			ST.in_use = 1
-			if (!do_after(user, 10))
-				ST.in_use = 0
-				return
-			var/obj/structure/grille/F = new /obj/structure/grille(loc)
-			to_chat(usr, "<span class='notice'>You assemble a grille</span>")
-			ST.in_use = 0
-			F.add_fingerprint(usr)
-			ST.use(2)
+		place_grille(user, loc, W)
 		return
-	//grille placing end
 
-	//window placing begin
+	//window placing
 	else if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
-		if(!ST.material.created_window)
+		if(ST.material.opacity > 0.7)
 			return 0
-
-		for(var/obj/structure/window/WINDOW in loc)
-			if(WINDOW)
-				to_chat(user, "<span class='notice'>There is already a window here.</span>")
-				return
-		to_chat(user, "<span class='notice'>You start placing the window.</span>")
-		if(do_after(user,20,src))
-			for(var/obj/structure/window/WINDOW in loc)
-				if(WINDOW)//checking this for a 2nd time to check if a window was made while we were waiting.
-					to_chat(user, "<span class='notice'>There is already a window here.</span>")
-					return
-
-			var/wtype = ST.material.created_window
-			if (ST.use(4))
-				var/obj/structure/window/WD = new wtype(loc, 5, 1)
-				to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
-				WD.update_connections(1)
-				WD.update_icon()
-		return
-	//window placing end
+		place_window(user, loc, SOUTHWEST, ST)
 
 	if(isWrench(W))
 		for(var/obj/structure/S in loc)

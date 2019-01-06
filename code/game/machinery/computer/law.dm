@@ -18,7 +18,7 @@
 /obj/machinery/computer/upload/attackby(obj/item/weapon/O, mob/user)
 	if(istype(O, /obj/item/weapon/aiModule))
 		var/obj/item/weapon/aiModule/M = O
-		M.install(src)
+		M.install(src, user)
 	else
 		..()
 

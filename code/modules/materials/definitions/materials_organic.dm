@@ -30,7 +30,7 @@
 	lore_text = "A fibrous structural material harvested from trees. Don't get a splinter."
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
-	icon_colour = "#824b28"
+	icon_colour = COLOR_WOOD
 	integrity = 50
 	icon_base = "solid"
 	table_icon_base = "solid"

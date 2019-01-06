@@ -93,47 +93,6 @@ var/hadevent    = 0
 	sleep(100)
 	GLOB.using_map.radiation_detected_announcement()
 
-
-
-//Changing this to affect the main station. Blame Urist. --Pete
-/proc/prison_break() // -- Callagan
-
-
-	var/list/area/areas = list()
-	for(var/area/A in world)
-		if(istype(A, /area/security/prison) || istype(A, /area/security/brig))
-			areas += A
-
-	if(areas && areas.len > 0)
-
-		for(var/area/A in areas)
-			for(var/obj/machinery/light/L in A)
-				L.flicker(10)
-
-		sleep(100)
-
-		for(var/area/A in areas)
-			for (var/obj/machinery/power/apc/temp_apc in A)
-				temp_apc.overload_lighting()
-
-			for (var/obj/structure/closet/secure_closet/brig/temp_closet in A)
-				temp_closet.locked = 0
-				temp_closet.icon_state = temp_closet.icon_closed
-
-			for (var/obj/machinery/door/airlock/security/temp_airlock in A)
-				spawn(0) temp_airlock.prison_open()
-
-			for (var/obj/machinery/door/airlock/glass/security/temp_glassairlock in A)
-				spawn(0) temp_glassairlock.prison_open()
-
-			for (var/obj/machinery/door_timer/temp_timer in A)
-				temp_timer.releasetime = 1
-
-		sleep(150)
-		command_announcement.Announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend AI involvement.", "Security Alert")
-	else
-		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
-
 /proc/carp_migration() // -- Darem
 	for(var/obj/effect/landmark/C in landmarks_list)
 		if(C.name == "carpspawn")

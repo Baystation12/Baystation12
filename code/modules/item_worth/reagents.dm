@@ -554,6 +554,9 @@
 /datum/reagent/acid/polyacid
 	value = 2
 
+/datum/reagent/acid/stomach
+	value = 0
+
 /datum/reagent/lexorin
 	value = 2.4
 

@@ -2649,7 +2649,7 @@
 "eS" = (
 /obj/item/weapon/tape_roll,
 /obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/rods/fifty,
+/obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/plastic/fifty,
 /obj/item/stack/material/steel/fifty,

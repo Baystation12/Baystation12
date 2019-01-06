@@ -3,7 +3,7 @@
 
 /obj/structure/deity/pylon/starlight
 	name = "sun pylon"
-	desc = "A minature sun, floating ontop of a small pillar."
+	desc = "A minature sun, floating on top of a small pillar."
 	icon_state = "star_pylon"
 
 /obj/structure/deity/gateway

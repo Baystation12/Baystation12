@@ -154,9 +154,23 @@
 	job_access_type = /datum/job/nt_pilot
 	detail_color = COLOR_PURPLE
 
-/obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
-	job_access_type = /datum/job/xenolife_technician
-	detail_color = COLOR_PURPLE
+// EC Science
+/obj/item/weapon/card/id/torch/silver/research
+	job_access_type = /datum/job/rd
+	detail_color = COLOR_RESEARCH
+	color = COLOR_WHITE
+
+/obj/item/weapon/card/id/torch/crew/research
+	desc = "A card issued to science personnel aboard the SEV Torch."
+	job_access_type = /datum/job/scientist_assistant
+	detail_color = COLOR_RESEARCH
+
+/obj/item/weapon/card/id/torch/crew/research/senior_scientist
+	job_access_type = /datum/job/senior_scientist
+	extra_details = list("onegoldstripe")
+
+/obj/item/weapon/card/id/torch/crew/research/scientist
+	job_access_type = /datum/job/scientist
 
 //NanoTrasen and Passengers
 
@@ -164,15 +178,11 @@
 	desc = "A card issued to passengers aboard the SEV Torch."
 	job_access_type = /datum/job/assistant
 	detail_color = COLOR_PAKISTAN_GREEN
+
 /obj/item/weapon/card/id/torch/passenger/research
 	desc = "A card issued to corporate personnel aboard the SEV Torch."
 	job_access_type = /datum/job/scientist_assistant
 	detail_color = COLOR_BOTTLE_GREEN
-
-/obj/item/weapon/card/id/torch/silver/research
-	job_access_type = /datum/job/rd
-	detail_color = COLOR_BOTTLE_GREEN
-	color = COLOR_WHITE
 
 /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
 	job_access_type = /datum/job/senior_scientist
@@ -187,13 +197,14 @@
 /obj/item/weapon/card/id/torch/passenger/research/mining
 	job_access_type = /datum/job/mining
 
-/obj/item/weapon/card/id/torch/passenger/research/guard
-	job_access_type = /datum/job/guard
+/obj/item/weapon/card/id/torch/passenger/corporate
+	color = COLOR_BOTTLE_GREEN
+	detail_color = COLOR_OFF_WHITE
+	job_access_type = /datum/job/bodyguard
 
-/obj/item/weapon/card/id/torch/passenger/research/liaison
+/obj/item/weapon/card/id/torch/passenger/corporate/liaison
 	job_access_type = /datum/job/liaison
 	extra_details = list("onegoldstripe")
-
 
 //Merchant
 /obj/item/weapon/card/id/torch/merchant

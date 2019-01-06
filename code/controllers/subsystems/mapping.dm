@@ -4,20 +4,19 @@ SUBSYSTEM_DEF(mapping)
 	flags = SS_NO_FIRE
 
 	var/list/map_templates = list()
-
 	var/list/space_ruins_templates = list()
 	var/list/exoplanet_ruins_templates = list()
 	var/list/away_sites_templates = list()
-
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+	// Load templates and build away sites.
 	preloadTemplates()
 	for(var/atype in subtypesof(/decl/submap_archetype))
 		submap_archetypes[atype] = new atype
 	GLOB.using_map.build_away_sites()
-	..()
+	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT

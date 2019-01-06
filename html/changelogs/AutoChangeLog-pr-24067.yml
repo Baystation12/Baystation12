@@ -1,0 +1,4 @@
+author: "WhiteHusky"
+delete-after: True
+changes: 
+  - rscadd: "You can show the contents of supply products."

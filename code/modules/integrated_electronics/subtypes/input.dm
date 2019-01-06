@@ -146,7 +146,7 @@
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
 		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
-		set_pin_data(IC_OUTPUT, 2, H.get_pulse(1))
+		set_pin_data(IC_OUTPUT, 2, H.get_pulse_as_number())
 		set_pin_data(IC_OUTPUT, 3, (H.stat == 0))
 
 	push_data()
@@ -206,7 +206,7 @@
 		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / H.maxHealth))
 		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss() / H.maxHealth))
 		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / H.maxHealth))
-		set_pin_data(IC_OUTPUT, 8, H.get_pulse(1))
+		set_pin_data(IC_OUTPUT, 8, H.get_pulse_as_number())
 		set_pin_data(IC_OUTPUT, 9, H.get_blood_oxygenation())
 		set_pin_data(IC_OUTPUT, 10, damage_to_severity(H.get_shock()))
 		set_pin_data(IC_OUTPUT, 11, H.radiation)
