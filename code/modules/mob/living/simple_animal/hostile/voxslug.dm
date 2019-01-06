@@ -53,7 +53,12 @@ Small, little HP, poisonous.
 	else return ..()
 
 /mob/living/simple_animal/hostile/voxslug/proc/attach(var/mob/living/carbon/human/H)
-	var/obj/item/organ/external/chest = H.organs_by_name["chest"]
+	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
+	if(istype(S) && !length(S.breaches))
+		S.create_breaches(BRUTE, 20)
+		if(!length(S.breaches)) //unable to make a hole
+			return
+	var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
 	var/obj/item/weapon/holder/voxslug/holder = new(get_turf(src))
 	src.forceMove(holder)
 	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")
