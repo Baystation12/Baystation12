@@ -77,3 +77,9 @@
 	containername = "exploration voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_explorer
+
+/decl/hierarchy/supply_pack/hydroponics/exoticseeds
+	contains = list(/obj/item/seeds/replicapod = 2,
+					/obj/item/seeds/libertymycelium = 2,
+					/obj/item/seeds/reishimycelium = 2,
+					/obj/item/seeds/kudzuseed = 2)

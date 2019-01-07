@@ -12687,10 +12687,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
-"DQ" = (
-/obj/machinery/seed_storage/random,
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/foreport)
 "DR" = (
 /obj/random/junk,
 /turf/simulated/floor/plating,
@@ -34040,7 +34036,7 @@ BN
 lr
 pi
 pi
-DQ
+pi
 Wp
 Wp
 Wp
