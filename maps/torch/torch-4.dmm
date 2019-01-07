@@ -1041,9 +1041,6 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftstarboard)
 "abV" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/machinery/computer/general_air_control/large_tank_control{
 	dir = 2;
 	frequency = 1441;
@@ -1065,13 +1062,6 @@
 	sensors = list("d1so2_sensor" = "Tank")
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d1starboard)
-"abX" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "abZ" = (
@@ -1152,19 +1142,20 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
+/area/thruster/d1starboard)
 "ach" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 4;
+	target_pressure = 15000
+	},
 /turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
+/area/thruster/d1starboard)
 "aci" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -1200,6 +1191,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/light_switch{
+	pixel_x = -24;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "acl" = (
@@ -1228,6 +1223,9 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "acn" = (
@@ -1252,6 +1250,9 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "acq" = (
@@ -1392,7 +1393,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/maintenance/firstdeck/aftstarboard)
+/area/thruster/d1starboard)
 "acX" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -1745,6 +1746,9 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/orange,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adE" = (
@@ -1762,6 +1766,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adH" = (
@@ -2107,6 +2112,9 @@
 /area/security/equipment)
 "aey" = (
 /obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/light/small{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2504,10 +2512,13 @@
 "afv" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
+	frequency = 1447;
+	id = "fuelmode";
 	injecting = 1;
-	use_power = 1
+	use_power = 0;
+	volume_rate = 4000
 	},
-/obj/effect/floor_decal/industrial/outline/orange,
+/obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "afw" = (
@@ -13014,11 +13025,13 @@
 /area/maintenance/firstdeck/aftport)
 "aSg" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
+	frequency = 1447;
+	id = "fuelmode";
 	injecting = 1;
-	use_power = 1;
+	use_power = 0;
 	volume_rate = 4000
 	},
-/obj/effect/floor_decal/industrial/outline/orange,
+/obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aSh" = (
@@ -13187,6 +13200,9 @@
 /area/rnd/xenobiology/xenoflora)
 "aSS" = (
 /obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/light/small{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -13390,7 +13406,7 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/machinery/light/small{
-	dir = 1
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -13415,6 +13431,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTn" = (
@@ -13430,7 +13447,6 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 1
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTo" = (
@@ -13602,12 +13618,11 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/maintenance/firstdeck/aftport)
+/area/thruster/d1port)
 "aTR" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
 	dir = 4
@@ -13753,19 +13768,20 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftport)
+/area/thruster/d1port)
 "aUe" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 4;
+	target_pressure = 15000
+	},
 /turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftport)
+/area/thruster/d1port)
 "aUf" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -13825,6 +13841,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUk" = (
@@ -13845,6 +13862,7 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUn" = (
@@ -13936,9 +13954,6 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
 "aUu" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/machinery/computer/general_air_control/large_tank_control{
 	dir = 1;
 	frequency = 1441;
@@ -13972,7 +13987,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUz" = (
@@ -14758,8 +14772,9 @@
 /area/thruster/d1starboard)
 "bdz" = (
 /obj/machinery/air_sensor{
+	frequency = 1441;
 	id_tag = "d1po2_sensor";
-	output = 2
+	output = 127
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
@@ -16292,8 +16307,9 @@
 /area/security/bo)
 "cHm" = (
 /obj/machinery/air_sensor{
+	frequency = 1441;
 	id_tag = "d1sh_sensor";
-	output = 2
+	output = 127
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1starboard)
@@ -17215,7 +17231,7 @@
 	dir = 1
 	},
 /turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/firstdeck/aftport)
+/area/thruster/d1port)
 "dKb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9;
@@ -18711,7 +18727,8 @@
 "fuV" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 2;
-	id = "ds1o2_in";
+	frequency = 1441;
+	id = "d1so2_in";
 	injecting = 1;
 	use_power = 1
 	},
@@ -19152,6 +19169,9 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "fUb" = (
@@ -20334,8 +20354,9 @@
 /area/security/opscheck)
 "hml" = (
 /obj/machinery/air_sensor{
+	frequency = 1441;
 	id_tag = "d1so2_sensor";
-	output = 2
+	output = 127
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
@@ -22668,7 +22689,8 @@
 "jMx" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
-	id = "dp1o2_in";
+	frequency = 1441;
+	id = "d1po2_in";
 	injecting = 1;
 	use_power = 1
 	},
@@ -23455,6 +23477,21 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
+"kCN" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light_switch{
+	pixel_x = -24;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d1port)
 "kDb" = (
 /obj/structure/closet/medical_wall{
 	pixel_x = 0;
@@ -23763,6 +23800,18 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
+"kVo" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/thruster/d1port)
 "kWb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -24057,8 +24106,9 @@
 /area/rnd/checkpoint)
 "lom" = (
 /obj/machinery/air_sensor{
+	frequency = 1441;
 	id_tag = "d1ph_sensor";
-	output = 2
+	output = 127
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
@@ -24346,9 +24396,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage/aux)
-"lCp" = (
-/turf/simulated/wall/r_wall/hull,
-/area/space)
 "lCN" = (
 /obj/structure/table/standard,
 /obj/random/maintenance/solgov,
@@ -24697,6 +24744,9 @@
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -25253,7 +25303,6 @@
 	dir = 6;
 	icon_state = "intact"
 	},
-/obj/machinery/meter,
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
 "mIb" = (
@@ -26689,7 +26738,7 @@
 	},
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1s";
-	output = 2
+	output = 127
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
@@ -27690,7 +27739,7 @@
 	},
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1p";
-	output = 2
+	output = 127
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -27934,6 +27983,10 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
+"pRO" = (
+/obj/structure/lattice,
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d1port)
 "pSb" = (
 /obj/machinery/computer/general_air_control/large_tank_control{
 	input_tag = "test_in";
@@ -29946,7 +29999,6 @@
 	icon_state = "intact";
 	dir = 5
 	},
-/obj/machinery/meter,
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
 "sqb" = (
@@ -31174,6 +31226,9 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
+"ubt" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/thruster/d1starboard)
 "udY" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
@@ -32041,9 +32096,6 @@
 /obj/item/weapon/storage/box/lights/mixed,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralport)
-"wKJ" = (
-/turf/space,
-/area/thruster/d1port)
 "wMh" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/orange,
@@ -57108,10 +57160,10 @@ aaa
 aaa
 aaa
 aaa
-mpy
-mpy
-mpy
-abL
+abN
+abN
+abN
+ubt
 ady
 aep
 aep
@@ -57153,10 +57205,10 @@ aHQ
 aHQ
 aHQ
 aTf
-aDB
-bDK
-bDK
-bDK
+wEw
+xPU
+xPU
+xPU
 aaa
 aaa
 aaa
@@ -57310,8 +57362,8 @@ aaa
 aaa
 aaa
 aaa
-mpy
-mpy
+abN
+abN
 acg
 acW
 adz
@@ -57357,8 +57409,8 @@ aSd
 aTg
 aTQ
 aUd
-bDK
-bDK
+xPU
+xPU
 aaa
 aaa
 aaa
@@ -57512,10 +57564,10 @@ aaa
 aaa
 aaa
 aaa
-mpy
-mpy
+abN
+abN
 ach
-abL
+ubt
 tVi
 aes
 afs
@@ -57559,8 +57611,8 @@ tgu
 aTh
 dJY
 aUe
-bDK
-bDK
+xPU
+xPU
 aaa
 aaa
 aaa
@@ -57715,9 +57767,9 @@ aaa
 aaa
 aaa
 abM
-mpy
-ach
-abL
+abN
+aci
+ubt
 abL
 abL
 aft
@@ -57759,9 +57811,9 @@ uHz
 aSf
 dIA
 bUZ
-aDB
-aUe
-bDK
+wEw
+kVo
+xPU
 abM
 aaa
 aaa
@@ -57917,9 +57969,9 @@ aaa
 aaa
 aaa
 abM
-abU
-ach
-abL
+iLB
+aci
+ubt
 abL
 abL
 abL
@@ -57961,9 +58013,9 @@ aRf
 tCu
 tCu
 xaC
-aDB
-aUe
-aNB
+wEw
+kVo
+pRO
 abM
 aaa
 aaa
@@ -58119,9 +58171,9 @@ aaa
 aaa
 aaa
 abM
-abU
-ach
-abL
+iLB
+aci
+ubt
 abL
 abL
 abL
@@ -58163,9 +58215,9 @@ aNy
 aDB
 aDB
 aDB
-aDB
-aUe
-aNB
+wEw
+kVo
+pRO
 abM
 aaa
 aaa
@@ -58368,7 +58420,7 @@ bDK
 xPU
 aUf
 xPU
-wKJ
+xPU
 aaa
 aaa
 aaa
@@ -58529,7 +58581,7 @@ abN
 iLB
 abN
 iLB
-abN
+mpy
 mpy
 mpy
 ajI
@@ -58564,8 +58616,8 @@ aOC
 sJr
 aOC
 sOo
-aNB
-aNB
+pRO
+pRO
 ddP
 xPU
 aUg
@@ -58765,12 +58817,12 @@ aNA
 bDK
 bDK
 bDK
-bDK
+xPU
 xPU
 rUh
 pIW
 mer
-aUh
+kCN
 aUu
 xPU
 aaa
@@ -58967,7 +59019,7 @@ bDK
 bDK
 bDK
 bDK
-bDK
+xPU
 lom
 diz
 iej
@@ -59168,8 +59220,8 @@ bDK
 aNB
 aNB
 bDK
-lCp
 bDK
+xPU
 iBT
 tIF
 xSd
@@ -59369,10 +59421,10 @@ bDK
 bDK
 aNB
 aNB
-lCp
+bDK
 acd
-bDK
-bDK
+xPU
+xPU
 xPU
 aTi
 aTS
@@ -59573,7 +59625,7 @@ aNB
 aNB
 abM
 adA
-lCp
+xPU
 aPq
 xPU
 aTj
@@ -59774,7 +59826,7 @@ acd
 acd
 acd
 aLj
-lCp
+xPU
 aPq
 aSg
 byb
@@ -60341,7 +60393,7 @@ aaa
 aaa
 abN
 hml
-abX
+vci
 bqv
 kfG
 adH
@@ -61360,7 +61412,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 acd
 acd
@@ -61965,7 +62017,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aae
 aaa
 aaa
 aaa

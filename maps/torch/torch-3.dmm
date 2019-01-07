@@ -14165,6 +14165,7 @@
 "It" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/button/toggle/valve{
+	desc = "A remote control switch to activate fuel injection for combustion mode.";
 	frequency = 1447;
 	id = "fuelmode";
 	name = "fuel mode control";
@@ -14173,6 +14174,7 @@
 	pixel_y = 4
 	},
 /obj/machinery/button/ignition{
+	desc = "A remote control switch to ignite the combustion mode chambers.";
 	id = "engines";
 	operating = 1;
 	pixel_x = 24;
