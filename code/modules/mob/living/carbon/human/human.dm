@@ -1327,12 +1327,24 @@
 	if(!current_limb || !S || !U)
 		return
 
+	var/fail_prob = skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
 	if(self)
-		to_chat(src, "<span class='danger'>You pop your [current_limb.joint] back in!</span>")
+		fail_prob += skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
+	var/datum/gender/T = gender_datums[get_gender()]
+	if(prob(fail_prob))
+		visible_message( \
+		"<span class='danger'>[U] pops [self ? "[T.his]" : "[S]'s"] [current_limb.joint] in the WRONG place!</span>", \
+		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!</span>" \
+		)
+		current_limb.add_pain(30)
+		current_limb.take_external_damage(5)
+		shock_stage += 20
 	else
-		to_chat(U, "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>")
-		to_chat(S, "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>")
-	current_limb.undislocate()
+		visible_message( \
+		"<span class='danger'>[U] pops [self ? "[T.his]" : "[S]'s"] [current_limb.joint] back in!</span>", \
+		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!</span>" \
+		)
+		current_limb.undislocate()
 
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
 	..()
