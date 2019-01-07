@@ -15178,6 +15178,18 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
+"bvI" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/thruster/d1port)
 "bvY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -21943,6 +21955,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
+"jbk" = (
+/obj/structure/lattice,
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d1port)
 "jbR" = (
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 8;
@@ -23483,21 +23499,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
-"kCN" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/light_switch{
-	pixel_x = -24;
-	pixel_y = -24
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d1port)
 "kDb" = (
 /obj/structure/closet/medical_wall{
 	pixel_x = 0;
@@ -23806,18 +23807,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
-"kVo" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/thruster/d1port)
 "kWb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -25268,6 +25257,9 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/processing)
+"mEV" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/thruster/d1starboard)
 "mFb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -27989,10 +27981,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
-"pRO" = (
-/obj/structure/lattice,
-/turf/simulated/wall/r_wall/hull,
-/area/thruster/d1port)
 "pSb" = (
 /obj/machinery/computer/general_air_control/large_tank_control{
 	input_tag = "test_in";
@@ -31234,9 +31222,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
-"ubt" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/thruster/d1starboard)
 "udY" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
@@ -31782,6 +31767,21 @@
 /obj/item/weapon/shield/riot,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
+"vFF" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light_switch{
+	pixel_x = -24;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d1port)
 "vHB" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/paleblue{
@@ -57171,7 +57171,7 @@ aaa
 abN
 abN
 abN
-ubt
+mEV
 ady
 aep
 aep
@@ -57575,7 +57575,7 @@ aaa
 abN
 abN
 ach
-ubt
+mEV
 tVi
 aes
 afs
@@ -57777,7 +57777,7 @@ aaa
 abM
 abN
 aci
-ubt
+mEV
 abL
 abL
 aft
@@ -57820,7 +57820,7 @@ aSf
 dIA
 bUZ
 wEw
-kVo
+bvI
 xPU
 abM
 aaa
@@ -57979,7 +57979,7 @@ aaa
 abM
 iLB
 aci
-ubt
+mEV
 abL
 abL
 abL
@@ -58022,8 +58022,8 @@ tCu
 tCu
 xaC
 wEw
-kVo
-pRO
+bvI
+jbk
 abM
 aaa
 aaa
@@ -58181,7 +58181,7 @@ aaa
 abM
 iLB
 aci
-ubt
+mEV
 abL
 abL
 abL
@@ -58224,8 +58224,8 @@ aDB
 aDB
 aDB
 wEw
-kVo
-pRO
+bvI
+jbk
 abM
 aaa
 aaa
@@ -58624,8 +58624,8 @@ aOC
 sJr
 aOC
 sOo
-pRO
-pRO
+jbk
+jbk
 ddP
 xPU
 aUg
@@ -58830,7 +58830,7 @@ xPU
 rUh
 pIW
 mer
-kCN
+vFF
 aUu
 xPU
 aaa
