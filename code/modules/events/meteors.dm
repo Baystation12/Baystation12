@@ -121,7 +121,7 @@
 		. = round(. * 0.5)
 	if(victim.is_still()) //Standing still means less shit flies your way
 		. = round(. * 0.25)
-	if(victim.get_speed() < 0.3) //Slow and steady
+	if(victim.get_speed() < victim.min_speed * 5) //Slow and steady
 		. = round(. * 0.6)
-	if(victim.get_speed() > 3) //Sanic stahp
+	if(victim.get_speed() > victim.max_speed * 0.75) //Sanic stahp
 		. *= 2
