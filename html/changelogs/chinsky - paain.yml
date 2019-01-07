@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - soundadd: "Pain has a low chance of heartstop again. High shock levels ('You feel like you can die any moment now!' level) can sometimes cause thready pulse. Countered by giving poor sod some painkillers to prevent shock, or some inapro to stabilize the pulse."
