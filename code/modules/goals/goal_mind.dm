@@ -7,18 +7,19 @@
 	if(LAZYLEN(goals))
 		to_chat(current, SPAN_NOTICE("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
 
-/datum/mind/proc/summarize_goals(var/show_success = FALSE)
+/datum/mind/proc/summarize_goals(var/show_success = FALSE, var/allow_modification = FALSE, var/datum/admins/admin)
 	. = list()
 	if(LAZYLEN(goals))
 		for(var/i = 1 to LAZYLEN(goals))
 			var/datum/goal/goal = goals[i]
-			. += "[i]. [goal.summarize(show_success)]"
+			. += "[i]. [goal.summarize(show_success, allow_modification, admin, position = i)]"
 
 // Create and display personal goals for this round.
-/datum/mind/proc/generate_goals(var/datum/job/job)
+/datum/mind/proc/generate_goals(var/datum/job/job, var/adding_goals = FALSE, var/add_amount)
 
-	goals = null
-	var/has_goals = FALSE
+	if(!adding_goals)
+		goals = null
+
 	var/pref_val = current.get_preference_value(/datum/client_preference/give_personal_goals)
 	if(pref_val != GLOB.PREF_NEVER && (pref_val != GLOB.PREF_NON_ANTAG || player_is_antag(src)))
 		var/list/available_goals = SSgoals.global_personal_goals ? SSgoals.global_personal_goals.Copy() : list()
@@ -30,30 +31,15 @@
 				if(LAZYLEN(new_goals))
 					available_goals |= new_goals
 
-		var/min_goals = 1
-		var/max_goals = 3
-		if(job && LAZYLEN(job.possible_goals))
-			available_goals |= job.possible_goals
-			min_goals = job.min_goals
-			max_goals = job.max_goals
-		for(var/i = 1 to min(LAZYLEN(available_goals), rand(min_goals, max_goals)))
+		if(isnull(add_amount))
+			var/min_goals = 1
+			var/max_goals = 3
+			if(job && LAZYLEN(job.possible_goals))
+				available_goals |= job.possible_goals
+				min_goals = job.min_goals
+				max_goals = job.max_goals
+			add_amount = rand(min_goals, max_goals)
+
+		for(var/i = 1 to min(LAZYLEN(available_goals), add_amount))
 			var/goal = pick_n_take(available_goals)
 			new goal(src)
-
-		if(LAZYLEN(goals))
-			to_chat(current, SPAN_NOTICE("<br><br><b>This round, you have the following personal goals:</b><br>[jointext(summarize_goals(), "<br>")]"))
-			has_goals = TRUE
-		else
-			to_chat(current, SPAN_NOTICE("<br><br><b>You have no personal goals this round.</b>"))
-
-	// Display previously generated departmental goals for this round.
-	if(job && job.department_flag && SSgoals.departments["[job.department_flag]"])
-		var/datum/department/dept = SSgoals.departments["[job.department_flag]"]
-		if(LAZYLEN(dept.goals))
-			to_chat(current, SPAN_NOTICE("<br><br><b>This round, [dept.name] has the following departmental goals:</b><br>[jointext(dept.summarize_goals(), "<br>")]"))
-			has_goals = TRUE
-		else
-			to_chat(current, SPAN_NOTICE("<br><br><b>[dept.name] has no departmental goals this round.</b>"))
-
-	if(has_goals)
-		to_chat(current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb.<br>"))

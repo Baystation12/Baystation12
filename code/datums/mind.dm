@@ -157,7 +157,51 @@
 	out += "<b>Ambitions:</b> [ambition ? ambition.description : "None"] <a href='?src=\ref[src];amb_edit=\ref[src]'>\[edit\]</a></br>"
 	usr << browse(out, "window=edit_memory[src]")
 
+/datum/mind/proc/get_goal_from_href(var/href)
+	var/ind = isnum(href) ? href : text2num(href)
+	if(ind > 0 && ind <= LAZYLEN(goals))
+		return goals[ind]
+
 /datum/mind/Topic(href, href_list)
+
+	if(check_rights(R_ADMIN) || usr == current)
+
+		if(href_list["add_goal"])
+			log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
+			to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
+			generate_goals(assigned_job, TRUE, 1)
+			. = TRUE
+
+		if(href_list["abandon_goal"])
+			var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
+			if(goal)
+				if(usr == current)
+					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				else
+					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				qdel(goal)
+			. = TRUE
+
+		if(href_list["reroll_goal"])
+			var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
+			if(goal)
+				qdel(goal)
+				generate_goals(assigned_job, TRUE, 1)
+				goal = goals[LAZYLEN(goals)]
+				if(usr == current)
+					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				else
+					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			. = TRUE
+
+		if(.)
+			var/datum/admins/admin = GLOB.admins[usr.key]
+			if(istype(admin))
+				admin.show_player_panel(current)
+			return
+
 	if(!check_rights(R_ADMIN))	return
 
 	if(href_list["add_antagonist"])

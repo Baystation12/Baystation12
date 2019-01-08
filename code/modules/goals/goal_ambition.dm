@@ -1,3 +1,6 @@
+/datum/goal/ambition
+	can_reroll = FALSE
+
 /datum/goal/ambition/New()
 	..()
 	if(owner)

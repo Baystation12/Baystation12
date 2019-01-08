@@ -18,17 +18,17 @@
 /datum/submap/proc/setup_submap(var/decl/submap_archetype/_archetype)
 
 	if(!istype(_archetype))
-		to_chat(world.log, "Submap error - [name] - null or invalid archetype supplied ([_archetype]).")
+		to_world_log( "Submap error - [name] - null or invalid archetype supplied ([_archetype]).")
 		qdel(src)
 		return
 
 	// Not much point doing this when it has presumably been done already.
 	if(_archetype == archetype)
-		to_chat(world.log, "Submap error - [name] - submap already set up.")
+		to_world_log( "Submap error - [name] - submap already set up.")
 		return
 
 	archetype = _archetype
-	to_chat(world.log, "Starting submap setup - n'[name]', a'[archetype]', z'[associated_z]'")
+	to_world_log( "Starting submap setup - n'[name]', a'[archetype]', z'[associated_z]'")
 
 	// Instantiate our job list.
 	jobs = list()
@@ -46,20 +46,20 @@
 		if(archetype.map && SSmapping.map_templates[archetype.map])
 			var/datum/map_template/template = SSmapping.map_templates[archetype.map]
 			if (template.loaded && !(template.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
-				to_chat(world.log, "Submap ([template.name]) tried to place duplicate of existing non-duplicate template.")
+				to_world_log( "Submap ([template.name]) tried to place duplicate of existing non-duplicate template.")
 				qdel(src)
 				return
 			var/turf/new_z_centre = template.load_new_z()
 			if(!istype(new_z_centre))
-				to_chat(world.log, "Failed to place submap ([template.name])")
+				to_world_log( "Failed to place submap ([template.name])")
 				qdel(src)
 				return
-			to_chat(world.log, "Submap '[template.name]' placed on zlevel [new_z_centre.z].")
+			to_world_log( "Submap '[template.name]' placed on zlevel [new_z_centre.z].")
 			log_and_message_admins("Submap ([template.name]) has been placed on a new zlevel.", location=new_z_centre)
 			associated_z = new_z_centre.z
 
 	if(!associated_z)
-		to_chat(world.log, "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint placement.")
+		to_world_log( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint placement.")
 		qdel(src)
 		return
 
@@ -78,7 +78,7 @@
 					added_spawnpoint = TRUE
 
 	if(!added_spawnpoint)
-		to_chat(world.log, "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] has no job spawn points.")
+		to_world_log( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] has no job spawn points.")
 		qdel(src)
 		return
 
