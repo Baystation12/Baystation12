@@ -239,6 +239,7 @@ var/global/list/additional_antag_types = list()
 	for(var/thing in SSticker.minds)
 		var/datum/mind/mind = thing
 		mind.generate_goals(mind.assigned_job)
+		mind.current.show_goals()
 
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1

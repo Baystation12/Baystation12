@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(statistics)
 /datum/controller/subsystem/statistics/Shutdown()
 
 	// Create tables.
-	var/database/db = new("data/statistics.db")
+	var/database/db = new("data/statistics.sqlite")
 	var/database/query/query = new(
 		"CREATE TABLE IF NOT EXISTS deaths ( \
 		game_id TEXT NOT NULL, \
@@ -57,17 +57,17 @@ SUBSYSTEM_DEF(statistics)
 		);")
 	query.Execute(db)
 	if(query.Error() || query.ErrorMsg())
-		to_chat(world.log, "SQL error - creating death table - [query.Error()] - [query.ErrorMsg()]")
+		to_world_log( "SQL error - creating death table - [query.Error()] - [query.ErrorMsg()]")
 	
 	query = new("CREATE TABLE IF NOT EXISTS population (game_id TEXT NOT NULL, timestamp TEXT NOT NULL, players INTEGER, admin INTEGER);")
 	query.Execute(db)
 	if(query.Error() || query.ErrorMsg())
-		to_chat(world.log, "SQL error - creating population table - [query.Error()] - [query.ErrorMsg()]")
+		to_world_log( "SQL error - creating population table - [query.Error()] - [query.ErrorMsg()]")
 
 	query = new("CREATE TABLE IF NOT EXISTS feedback (game_id TEXT NOT NULL, field_name TEXT, value TEXT, details TEXT);")
 	query.Execute(db)
 	if(query.Error() || query.ErrorMsg())
-		to_chat(world.log, "SQL error - creating feedback table - [query.Error()] - [query.ErrorMsg()]")
+		to_world_log( "SQL error - creating feedback table - [query.Error()] - [query.ErrorMsg()]")
 
 	// Dump stats.
 	if(LAZYLEN(deaths))
@@ -86,6 +86,7 @@ SUBSYSTEM_DEF(statistics)
 				death.gender,
 				death.bruteloss,
 				death.fireloss,
+				death.brainloss,
 				death.oxyloss,
 				death.using_map_name,
 				death.overmap_location_name,
@@ -93,7 +94,7 @@ SUBSYSTEM_DEF(statistics)
 			)
 			query.Execute(db);
 			if(query.Error() || query.ErrorMsg())
-				to_chat(world.log, "SQL error - logging death - [query.Error()] - [query.ErrorMsg()]")
+				to_world_log( "SQL error - logging death - [query.Error()] - [query.ErrorMsg()]")
 
 	if(LAZYLEN(population_log))
 		for(var/thing in population_log)
@@ -101,7 +102,7 @@ SUBSYSTEM_DEF(statistics)
 			query = new("INSERT INTO population VALUES (?, ?, ?, ?);", game_id, thing, data["players"], data["admin"])
 			query.Execute(db);
 			if(query.Error() || query.ErrorMsg())
-				to_chat(world.log, "SQL error - logging population - [query.Error()] - [query.ErrorMsg()]")
+				to_world_log( "SQL error - logging population - [query.Error()] - [query.ErrorMsg()]")
 
 	// These values are arbitrary and largely unused, so using JSON is far easier than expecting 
 	// people to maintain a hard list of fields and migrate the tables every time they change.
@@ -112,7 +113,7 @@ SUBSYSTEM_DEF(statistics)
 			query = new("INSERT INTO feedback VALUES (?, ?, ?, ?);", game_id, field, val, deets)
 			query.Execute(db);
 			if(query.Error() || query.ErrorMsg())
-				to_chat(world.log, "SQL error - logging values - [query.Error()] - [query.ErrorMsg()]")
+				to_world_log( "SQL error - logging values - [query.Error()] - [query.ErrorMsg()]")
 
 /datum/controller/subsystem/statistics/proc/get_field(var/field)
 	return values[field]
@@ -160,7 +161,7 @@ SUBSYSTEM_DEF(statistics)
 		death.brainloss = dead.getBrainLoss()
 		death.oxyloss =   dead.getOxyLoss()
 		death.using_map_name = GLOB.using_map.full_name
-		var/obj/effect/overmap/cell = map_sectors[dead.z]
+		var/obj/effect/overmap/cell = map_sectors ? map_sectors["[dead.z]"] : null
 		death.overmap_location_name = cell ? cell.name : "Unknown"
 		LAZYADD(deaths, death)
 

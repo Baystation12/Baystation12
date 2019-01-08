@@ -8,7 +8,7 @@
 	..()
 
 /datum/goal/clean/update_strings()
-	description = "This place is disgusting. Clean up at least [need_cleaned] [need_cleaned == 1 ? "mess" : "messes"]."
+	description = "This place is disgusting. Scrub out at least [need_cleaned] [need_cleaned == 1 ? "mess" : "messes"] with soap."
 
 /datum/goal/clean/check_success()
 	return (cleaned >= need_cleaned)
@@ -19,6 +19,9 @@
 		if(cleaned >= need_cleaned)
 			on_completion()
 
+/datum/goal/clean/walk/get_summary_value()
+	return " ([cleaned]/[need_cleaned]so far)"
+
 /datum/goal/money
 	var/target_amount
 
@@ -27,7 +30,7 @@
 	var/datum/mind/mind = owner
 	for(var/datum/money_account/acct in all_money_accounts)
 		if(acct.owner_name == mind.current.real_name)
-			target_amount = acct.get_balance()
+			target_amount = acct.get_balance() * rand(2,3)
 			break
 	description = "End the round with bank balance higher than $[target_amount]."
 
