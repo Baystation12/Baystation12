@@ -176,8 +176,8 @@ var/savefile/Banlistjob
 		log_admin("[key_name_admin(usr)] unjobbanned [key] from [rank]")
 		message_admins("[key_name_admin(usr)] unjobbanned:[key] from [rank]")
 		ban_unban_log_save("[key_name_admin(usr)] unjobbanned [key] from [rank]")
-		feedback_inc("ban_job_unban",1)
-		feedback_add_details("ban_job_unban","- [rank]")
+		SSstatistics.add_field("ban_job_unban",1)
+		SSstatistics.add_field_details("ban_job_unban","- [rank]")
 
 	for (var/A in Banlistjob.dir)
 		Banlistjob.cd = "/base/[A]"

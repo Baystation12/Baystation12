@@ -16,13 +16,10 @@
 	description = "Avoid having more than [max_fatalities] [max_fatalities == 1 ? "fatality" : "fatalities"] this shift."
 
 /datum/goal/medical_fatalities/get_summary_value()
-	var/deaths = SSstatistics.get_field(FEEDBACK_CREW_DEATHS)
-	if(isnull(deaths)) 
-		deaths = 0
-	return " ([deaths] death\s so far)"
+	return " ([SSstatistics.crew_death_count] death\s so far)"
 
 /datum/goal/medical_fatalities/check_success()
-	return (SSstatistics.get_field(FEEDBACK_CREW_DEATHS) <= max_fatalities)
+	return (SSstatistics.crew_death_count <= max_fatalities)
 
 // End the shift with % suit sensors set to at least trackers
 // Perform an autopsy

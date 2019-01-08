@@ -45,7 +45,7 @@ var/global/list/power_update_requests_by_area = list()
 		message_admins("[key_name(src)] toggled area power update profiling on.")
 		log_admin("[key_name(src)] toggled area power update profiling on.")
 
-	feedback_add_details("admin_verb","APUP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","APUP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/view_power_update_stats_machines()
 	set name = "View Area Power Update Statistics By Machines"

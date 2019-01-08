@@ -2856,7 +2856,6 @@
 #include "code\procs\dbcore.dm"
 #include "code\procs\hud.dm"
 #include "code\procs\radio.dm"
-#include "code\procs\statistics.dm"
 #include "code\unit_tests\_includes.dm"
 #include "code\unit_tests\alt_appearances_test.dm"
 #include "code\unit_tests\area_tests.dm"

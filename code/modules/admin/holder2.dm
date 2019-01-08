@@ -145,7 +145,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	else
 		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
-	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #undef STEALTH_OFF
 #undef STEALTH_MANUAL
