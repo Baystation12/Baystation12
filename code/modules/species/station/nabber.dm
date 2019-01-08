@@ -77,6 +77,7 @@
 		BP_TRACH =    /obj/item/organ/internal/lungs/nabber,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_LIVER =    /obj/item/organ/internal/liver/nabber,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_PHORON =   /obj/item/organ/internal/phoron,
 		BP_ACETONE =  /obj/item/organ/internal/acetone,
 		BP_VOICE =    /obj/item/organ/internal/voicebox/nabber

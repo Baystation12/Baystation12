@@ -1,7 +1,6 @@
 /mob/living/carbon/New()
 	//setup reagent holders
 	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_BLOOD)
-	ingested = new/datum/reagents/metabolism(240, src, CHEM_INGEST)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 	reagents = bloodstr
 
@@ -10,7 +9,6 @@
 	..()
 
 /mob/living/carbon/Destroy()
-	QDEL_NULL(ingested)
 	QDEL_NULL(touching)
 	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	QDEL_NULL_LIST(internal_organs)
@@ -20,8 +18,10 @@
 
 /mob/living/carbon/rejuvenate()
 	bloodstr.clear_reagents()
-	ingested.clear_reagents()
 	touching.clear_reagents()
+	var/datum/reagents/R = get_ingested_reagents()
+	if(istype(R)) 
+		R.clear_reagents()
 	nutrition = 400
 	..()
 
@@ -489,3 +489,6 @@
 
 /mob/living/carbon/get_sex()
 	return species.get_sex(src)
+
+/mob/living/carbon/proc/get_ingested_reagents()
+	return reagents

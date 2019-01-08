@@ -212,10 +212,7 @@
 	if(owner.stat)
 		return
 	if((owner.disabilities & EPILEPSY) && prob(1))
-		to_chat(owner, "<span class='warning'>You have a seizure!</span>")
-		owner.visible_message("<span class='danger'>\The [owner] starts having a seizure!</span>")
-		owner.Paralyse(10)
-		owner.make_jittery(1000)
+		owner.seizure()
 	else if((owner.disabilities & TOURETTES) && prob(10))
 		owner.Stun(10)
 		switch(rand(1, 3))

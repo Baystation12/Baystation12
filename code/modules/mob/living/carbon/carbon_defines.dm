@@ -14,7 +14,6 @@
 	var/list/chem_effects = list()
 	var/list/chem_doses = list()
 	var/datum/reagents/metabolism/bloodstr = null
-	var/datum/reagents/metabolism/ingested = null
 	var/datum/reagents/metabolism/touching = null
 	var/losebreath = 0 //if we failed to breathe last tick
 

@@ -2276,6 +2276,7 @@
 #include "code\modules\organs\internal\liver.dm"
 #include "code\modules\organs\internal\lungs.dm"
 #include "code\modules\organs\internal\stack.dm"
+#include "code\modules\organs\internal\stomach.dm"
 #include "code\modules\organs\internal\voice.dm"
 #include "code\modules\organs\internal\species\adherent.dm"
 #include "code\modules\organs\internal\species\borer.dm"

@@ -524,10 +524,10 @@
 
 	if(reagents)
 		if(touching) touching.metabolize()
-		if(ingested) ingested.metabolize()
 		if(bloodstr) bloodstr.metabolize()
 
 	// Trace chemicals
+	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 	for(var/T in chem_doses)
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue
@@ -537,8 +537,6 @@
 			chem_doses -= T
 
 	updatehealth()
-
-	return //TODO: DEFERRED
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
