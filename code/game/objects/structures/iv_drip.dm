@@ -9,11 +9,17 @@
 	var/list/transfer_amounts = list(REM, 1, 2)
 	var/transfer_amount = 1
 
-/obj/structure/iv_drip/verb/set_APTFT()
+/obj/structure/iv_drip/verb/set_amount_per_transfer_from_this()
 	set name = "Set IV transfer amount"
 	set category = "Object"
 	set src in range(1)
+	if(!CanPhysicallyInteract(usr))
+		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in transfer_amounts
+	if(!CanPhysicallyInteract(usr)) // because input takes time and the situation can change
+		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		return
 	if(N)
 		transfer_amount = N
 
@@ -154,14 +160,9 @@
 	set category = "Object"
 	set name = "Toggle IV Mode"
 	set src in view(1)
-
-	if(!istype(usr, /mob/living))
-		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+	if(!CanPhysicallyInteract(usr))
+		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
 		return
-
-	if(usr.incapacitated())
-		return
-
 	mode = !mode
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
