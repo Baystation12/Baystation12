@@ -48,7 +48,7 @@
 	if(!machine_recipes)
 		machine_recipes = autolathe_recipes
 
-/obj/machinery/autolathe/interact(mob/user as mob)
+/obj/machinery/autolathe/interact(mob/user)
 
 	update_recipe_list()
 
@@ -124,7 +124,7 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/autolathe/attackby(var/obj/item/O, var/mob/user)
 
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
