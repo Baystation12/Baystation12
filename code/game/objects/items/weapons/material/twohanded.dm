@@ -136,7 +136,7 @@
 
 //Predefined materials go here.
 /obj/item/weapon/material/twohanded/baseballbat/metal/New(var/newloc)
-	..(newloc,MATERIAL_STEEL)
+	..(newloc,MATERIAL_ALUMINIUM)
 
 /obj/item/weapon/material/twohanded/baseballbat/uranium/New(var/newloc)
 	..(newloc,MATERIAL_URANIUM)

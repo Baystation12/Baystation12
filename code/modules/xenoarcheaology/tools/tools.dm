@@ -5,7 +5,7 @@
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
-	matter = list(MATERIAL_STEEL = 500)
+	matter = list(MATERIAL_STEEL = 500, MATERIAL_PLASTIC= 100)
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
@@ -36,7 +36,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/storage/bag/fossils
-	name = "Fossil Satchel"
+	name = "fossil satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
@@ -59,13 +59,13 @@
 		S.desc = "a bag for holding research samples."
 
 /obj/item/device/ano_scanner
-	name = "Alden-Saraspova counter"
-	desc = "Aids in triangulation of exotic particles."
+	name = "\improper Alden-Saraspova counter"
+	desc = "A device which aids in triangulation of exotic particles."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "flashgun"
 	item_state = "lampgreen"
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
-	matter = list(MATERIAL_STEEL = 10000,MATERIAL_GLASS = 5000)
+	matter = list(MATERIAL_STEEL = 9500, MATERIAL_GLASS = 5000, MATERIAL_PLASTIC= 500)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 
@@ -117,12 +117,12 @@
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
-	desc = "Used to check spatial depth and density of rock outcroppings."
+	desc = "A device used to check spatial depth and density of rock outcroppings."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
-	matter = list(MATERIAL_STEEL = 1000,MATERIAL_GLASS = 1000)
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 800, MATERIAL_PLASTIC= 200)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()

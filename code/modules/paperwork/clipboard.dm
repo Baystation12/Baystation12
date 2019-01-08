@@ -1,5 +1,6 @@
 /obj/item/weapon/clipboard
 	name = "clipboard"
+	desc = "It's a board with a clip used to organise papers."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "clipboard"
 	item_state = "clipboard"
@@ -10,7 +11,7 @@
 	var/obj/item/weapon/pen/haspen		//The stored pen.
 	var/obj/item/weapon/toppaper	//The topmost piece of paper.
 	slot_flags = SLOT_BELT
-	matter = list(MATERIAL_STEEL = 70)
+	matter = list(MATERIAL_PLASTIC = 70)
 
 /obj/item/weapon/clipboard/New()
 	update_icon()

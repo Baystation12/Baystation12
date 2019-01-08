@@ -17,6 +17,12 @@
 	cost = 10
 	containername = "steel sheets crate"
 
+/decl/hierarchy/supply_pack/materials/alum50
+	name = "50 aluminium sheets"
+	contains = list(/obj/item/stack/material/aluminium/fifty)
+	cost = 10
+	containername = "aluminium sheets crate"
+
 /decl/hierarchy/supply_pack/materials/glass50
 	name = "50 glass sheets"
 	contains = list(/obj/item/stack/material/glass/fifty)

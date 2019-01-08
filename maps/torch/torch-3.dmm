@@ -14321,6 +14321,8 @@
 	amount = 50
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/aluminium/fifty,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/locker_room)
 "Jc" = (
@@ -17208,6 +17210,7 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
+/obj/item/stack/material/aluminium/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/expedition)
 "UY" = (

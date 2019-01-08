@@ -63,6 +63,7 @@
 #define COLOR_BRONZE           "#8c7853"
 #define COLOR_BRASS            "#b99d71"
 #define COLOR_INDIGO           "#4b0082"
+#define COLOR_ALUMINIUM        "#c9c9c9"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"
