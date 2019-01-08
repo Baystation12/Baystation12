@@ -342,4 +342,4 @@ SUBSYSTEM_DEF(event)
 	set category = "Admin"
 	if(SSevent)
 		SSevent.Interact(usr)
-	feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

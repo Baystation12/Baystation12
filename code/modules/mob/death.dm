@@ -69,18 +69,9 @@
 	drop_r_hand()
 	drop_l_hand()
 
-	var/feedback_added = FALSE
-	if(mind)
-		if(mind.assigned_job && mind.assigned_job.department_flag)
-			feedback_added = TRUE
-			feedback_inc(FEEDBACK_CREW_DEATHS, 1)
-		if(player_is_antag(mind))
-			feedback_inc(FEEDBACK_ANTAG_DEATHS, 1)
-	if(!feedback_added)
-		feedback_inc(FEEDBACK_OTHER_DEATHS, 1)
+	SSstatistics.report_death(src)
 
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
-
 	if(healths)
 		healths.overlays.Cut() // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
 		if("health7" in icon_states(healths.icon))

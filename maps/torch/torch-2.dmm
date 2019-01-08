@@ -14208,7 +14208,6 @@
 /obj/machinery/camera/network/command{
 	c_tag = "Telecommunications - Server Room Starboard"
 	},
-/obj/machinery/blackbox_recorder,
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "Gi" = (

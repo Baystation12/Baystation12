@@ -98,9 +98,6 @@ SUBSYSTEM_DEF(ticker)
 	if(!length(GLOB.admins))
 		send2adminirc("Round has started with no admins online.")
 
-	if(config.sql_enabled)
-		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
-
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()
 	var/mode_finished = mode_finished()
@@ -127,19 +124,16 @@ SUBSYSTEM_DEF(ticker)
 			callHook("roundend")
 			if (universe_has_ended)
 				if(mode.station_was_nuked)
-					feedback_set_details("end_proper","nuke")
+					SSstatistics.set_field_details("end_proper","nuke")
 				else
-					feedback_set_details("end_proper","universe destroyed")
+					SSstatistics.set_field_details("end_proper","universe destroyed")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
 			else
-				feedback_set_details("end_proper","proper completion")
+				SSstatistics.set_field_details("end_proper","proper completion")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
-
-			if(blackbox)
-				blackbox.save_all_data_to_sql()
 			handle_tickets()
 		if(END_GAME_ENDING)
 			restart_timeout -= (world.time - last_fire)
