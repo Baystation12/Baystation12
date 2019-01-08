@@ -21,7 +21,7 @@
 
 /obj/item/weapon/reagent_containers/spray/New()
 	..()
-	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
+	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_amount_per_transfer_from_this
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
