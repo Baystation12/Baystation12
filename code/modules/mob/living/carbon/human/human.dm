@@ -62,6 +62,20 @@
 		qdel(organ)
 	return ..()
 
+/mob/living/carbon/human/get_ingested_reagents()
+	if(should_have_organ(BP_STOMACH))
+		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		if(stomach)
+			return stomach.ingested
+	return touching // Kind of a shitty hack, but makes more sense to me than digesting them.
+
+/mob/living/carbon/human/get_fullness()
+	if(!should_have_organ(BP_STOMACH))
+		return ..()
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if(stomach)
+		return nutrition + (stomach.ingested.total_volume * 10)
+	return 0 //Always hungry, but you can't actually eat. :(
 
 /mob/living/carbon/human/Stat()
 	. = ..()
@@ -636,7 +650,8 @@
 			if(level > 2)
 				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
 				Stun(3)
-				if(nutrition < 40)
+				var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+				if(!istype(stomach) || stomach.ingested.total_volume <= 5)
 					custom_emote(1,"dry heaves.")
 				else
 					for(var/a in stomach_contents)
@@ -651,9 +666,7 @@
 
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, toxvomit)
-					if(ingested)
-						ingested.remove_any(5)
+						location.add_vomit_floor(src, toxvomit, stomach.ingested)
 					nutrition -= 30
 		sleep(350)	//wait 35 seconds before next volley
 		lastpuke = 0
@@ -1626,3 +1639,12 @@
 
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	return cultural_info[token]
+
+/mob/living/carbon/human/proc/seizure()
+	set waitfor = 0
+	sleep(rand(5,10))
+	if(!paralysis && stat == CONSCIOUS)
+		visible_message("<span class='danger'>\The [src] starts having a seizure!</span>")
+		Paralyse(rand(8,16))
+		make_jittery(rand(150,200))
+		adjustHalLoss(rand(50,60))

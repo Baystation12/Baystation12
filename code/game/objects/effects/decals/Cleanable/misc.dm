@@ -86,6 +86,11 @@
 	generic_filth = TRUE
 	var/list/viruses = list()
 
+/obj/effect/decal/cleanable/vomit/New()
+	..()
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	create_reagents(20, src)
+
 /obj/effect/decal/cleanable/tomato_smudge
 	name = "tomato smudge"
 	desc = "It's red."

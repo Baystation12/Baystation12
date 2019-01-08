@@ -290,6 +290,12 @@
 	power = 10
 	meltdose = 4
 
+/datum/reagent/acid/stomach
+	name = "stomach acid"
+	taste_description = "coppery foulness"
+	power = 1
+	color = "#d8ff00"
+
 /datum/reagent/lexorin
 	name = "Lexorin"
 	description = "Lexorin temporarily stops respiration. Causes tissue damage."

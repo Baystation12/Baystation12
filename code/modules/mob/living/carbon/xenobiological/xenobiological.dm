@@ -51,7 +51,10 @@
 	var/colour = "grey"
 
 	var/core_removal_stage = 0 //For removing cores.
+	var/datum/reagents/metabolism/ingested
 
+/mob/living/carbon/slime/get_ingested_reagents()
+	return ingested
 
 /mob/living/carbon/slime/getToxLoss()
 	return toxloss
@@ -63,7 +66,7 @@
 	adjustToxLoss(amount-getToxLoss())
 
 /mob/living/carbon/slime/New(var/location, var/colour="grey")
-
+	ingested = new(240, src, CHEM_INGEST)
 	verbs += /mob/living/proc/ventcrawl
 
 	src.colour = colour
