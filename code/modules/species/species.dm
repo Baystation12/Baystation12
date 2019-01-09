@@ -241,8 +241,7 @@
 		TAG_CULTURE =   list(CULTURE_OTHER),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
 		TAG_FACTION =   list(FACTION_OTHER),
-		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM),
-		TAG_EDUCATION = list(EDUCATION_NONE)
+		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM)
 	)
 	var/list/force_cultural_info =                list()
 	var/list/default_cultural_info =              list()
