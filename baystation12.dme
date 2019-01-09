@@ -2745,7 +2745,6 @@
 #include "code\unit_tests\~unit_test_types.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\_map_include.dm"
 #include "maps\area_holders\overmap_ship_area_holder.dmm"
 #include "maps\first_contact\all_includes.dm"
 #include "maps\odst_prowler\odst_ship_overmap.dm"
