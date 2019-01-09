@@ -1,3 +1,4 @@
+/*
 /datum/job/ship_crew_civ
 	title = "Civilian Ship Crew"
 	total_positions = 7
@@ -35,7 +36,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/civ_captain
 	selection_color = "#000000"
 	spawnpoint_override = "Medical Ship Cap Crew"
-
+*/
 
 
 /datum/job/ship_crew_innie
@@ -75,11 +76,11 @@
 	/datum/job/UNSC_ship/medical_chief,/datum/job/UNSC_ship/medical,/datum/job/UNSC_ship/security_chief,/datum/job/UNSC_ship/unsc_security,/datum/job/UNSC_ship/ops_chief,\
 	/datum/job/UNSC_ship/ops,/datum/job/UNSC_ship/cmdr_wing,/datum/job/UNSC_ship/cmdr_sqr,/datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,/datum/job/UNSC_ship/gunnery_chief,\
 	/datum/job/UNSC_ship/gunnery,/datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,\
-	/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_medic,/datum/job/ship_cap_medic,\
-	/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,\
+	/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/*/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_medic,/datum/job/ship_cap_medic,*/\
+	/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/*/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,*/\
 	/datum/job/ship_cap_innie,/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/kigyarminor,\
-	/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,/datum/job/unscaegis_co,\
-	/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,/datum/job/covenant/skirmmurmillo,\
+	/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,/*/datum/job/unscaegis_co,\
+	/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI*/,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,/datum/job/covenant/skirmmurmillo,\
 	/datum/job/URF_commando,/datum/job/URF_commando_officer)
 
 	allowed_spawns = list("UNSC Frigate","UNSC Commanding Officer Spawn","UNSC Executive Officer Spawn","UNSC Bridge Officer Spawn","UNSC Commander Air Group Spawn",\
