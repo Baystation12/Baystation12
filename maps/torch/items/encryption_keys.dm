@@ -14,9 +14,9 @@
 	channels = list("Science" = 1)
 
 /obj/item/device/encryptionkey/headset_torchrd
-	name = "research director radio encryption key"
+	name = "chief science officer radio encryption key"
 	icon_state = "nt_cypherkey"
-	channels = list("Science" = 1, "Command" = 1)
+	channels = list("Science" = 1, "Command" = 1, "Exploration" = 1)
 
 /obj/item/device/encryptionkey/headset_torchcl
 	name = "corporate liaison radio encryption key"
@@ -67,7 +67,7 @@
 /obj/item/device/encryptionkey/pathfinder
 	name = "pathfinder's encryption key"
 	icon_state = "com_cypherkey"
-	channels = list("Exploration" = 1, "Command" = 1)
+	channels = list("Exploration" = 1, "Command" = 1, "Science" = 1)
 
 /obj/item/weapon/storage/box/radiokeys
 	name = "box of radio encryption keys"

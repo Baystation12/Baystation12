@@ -1,21 +1,21 @@
 //The following is a list of defs to be used for the Torch loadout.
 
 //For all SolGov personnel, representative included
-#define SOLGOV_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/representative, /datum/job/pathfinder, /datum/job/explorer, /datum/job/engineer_trainee, /datum/job/medical_trainee, /datum/job/nt_pilot, /datum/job/xenolife_technician)
+#define SOLGOV_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/representative, /datum/job/pathfinder, /datum/job/explorer, /datum/job/engineer_trainee, /datum/job/medical_trainee, /datum/job/nt_pilot)
 
 //For EC/Fleet
-#define MILITARY_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/pathfinder, /datum/job/explorer, /datum/job/engineer_trainee, /datum/job/medical_trainee, /datum/job/xenolife_technician)
+#define MILITARY_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/pathfinder, /datum/job/explorer, /datum/job/engineer_trainee, /datum/job/medical_trainee)
 
 //For EC/Fleet Officers
-#define MILITARY_OFFICER_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/senior_doctor, /datum/job/qm, /datum/job/pathfinder, /datum/job/xenolife_technician)
+#define MILITARY_OFFICER_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/senior_doctor, /datum/job/qm, /datum/job/pathfinder)
 
 //For EC/Fleet Enlisted
-#define MILITARY_ENLISTED_ROLES list(/datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/explorer, /datum/job/officer, /datum/job/engineer_trainee, /datum/job/medical_trainee, /datum/job/xenolife_technician)
+#define MILITARY_ENLISTED_ROLES list(/datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/explorer, /datum/job/officer, /datum/job/engineer_trainee, /datum/job/medical_trainee)
 
 //For all civilians or off-duty personnel, regardless of formality of dress or job.
-#define NON_MILITARY_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant,/datum/job/stowaway, /datum/job/biomech)
+#define NON_MILITARY_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant,/datum/job/stowaway, /datum/job/biomech)
 //For jobs that allow for decorative or ceremonial clothing
-#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway, /datum/job/guard, /datum/job/detective)
+#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway, /datum/job/detective)
 
 //For civilian jobs that may have a uniform, but not a strict one
 #define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/stowaway, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective)
@@ -24,7 +24,7 @@
 #define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative,/datum/job/stowaway, /datum/job/detective)
 
 //For contractors
-#define CONTRACTOR_ROLES list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/chef, /datum/job/janitor, /datum/job/detective, /datum/job/guard, /datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/biomech)
+#define CONTRACTOR_ROLES list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/chef, /datum/job/janitor, /datum/job/detective, /datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/biomech)
 
 //For corporate or government representatives
 #define REPRESENTATIVE_ROLES list(/datum/job/representative, /datum/job/liaison)
@@ -45,7 +45,7 @@
 #define ENGINEERING_ROLES list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee)
 
 //For members of Engineering, Cargo, and Research
-#define TECHNICAL_ROLES list(/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/chief_engineer, /datum/job/janitor, /datum/job/engineer_trainee, /datum/job/xenolife_technician, /datum/job/biomech)
+#define TECHNICAL_ROLES list(/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/chief_engineer, /datum/job/janitor, /datum/job/engineer_trainee, /datum/job/biomech)
 
 //For members of the security department
 #define SECURITY_ROLES list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
@@ -57,13 +57,13 @@
 #define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/bartender)
 
 //For members of the research department and jobs that are scientific
-#define RESEARCH_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist, /datum/job/xenolife_technician, /datum/job/biomech)
+#define RESEARCH_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/scientist,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist, /datum/job/biomech)
 
 //For jobs that spawn with weapons in their lockers
-#define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
+#define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/merchant)
 
 //For jobs that spawn with armor in their lockers
-#define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
+#define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/merchant)
 
 #define UNIFORMED_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet)
 

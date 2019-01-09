@@ -114,4 +114,7 @@
 // Used by fluid system.
 #define COLOR_OCEAN "#99f5ff"
 
+// Used to easily change research colour in case of ???
+#define COLOR_RESEARCH COLOR_PURPLE_GRAY
+
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

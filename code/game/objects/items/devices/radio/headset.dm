@@ -198,7 +198,7 @@
 	return ..(freq, level, 1)
 
 /obj/item/device/radio/headset/heads/rd
-	name = "research director's headset"
+	name = "chief science officer's headset"
 	desc = "Headset of the researching God."
 	icon_state = "com_headset"
 	item_state = "headset"

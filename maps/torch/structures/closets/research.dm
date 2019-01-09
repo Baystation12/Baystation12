@@ -3,7 +3,7 @@
  */
 
 /obj/structure/closet/secure_closet/RD_torch
-	name = "research director's locker"
+	name = "chief science officer's locker"
 	req_access = list(access_rd)
 	icon_state = "rdsecure1"
 	icon_closed = "rdsecure"
@@ -18,6 +18,7 @@
 		/obj/item/clothing/under/rank/research_director/dress_rd,
 		/obj/item/clothing/under/suit_jacket/corp,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat/rd,
 		/obj/item/clothing/shoes/white,
@@ -55,6 +56,7 @@
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch/WillContain()
 	return list(
 		/obj/item/clothing/under/rank/scientist,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
@@ -181,8 +183,8 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec/exo))
 	)
 
-/obj/structure/closet/secure_closet/xenolife_technician
-	name = "xenolife technician's locker"
+/obj/structure/closet/secure_closet/ec_scientist
+	name = "scientist locker"
 	req_one_access = list(access_research)
 	icon_state = "torchsol1"
 	icon_closed = "torchsol"
@@ -190,7 +192,7 @@
 	icon_opened = "torchsolopen"
 	icon_off = "torchsoloff"
 
-/obj/structure/closet/secure_closet/xenolife_technician/WillContain()
+/obj/structure/closet/secure_closet/ec_scientist/WillContain()
 	return list(
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/device/radio/headset/torchnanotrasen,
