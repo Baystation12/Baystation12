@@ -14,7 +14,7 @@
 	var/clogged
 	var/filter_water
 	var/gas_filter_strength = 1			//For gas mask filters
-	var/list/filtered_gases = list("phoron", "sleeping_agent")
+	var/list/filtered_gases = list("phoron","sleeping_agent","chlorine","ammonia","carbon_monoxide","methyl_bromide")
 
 /obj/item/clothing/mask/gas/examine(var/mob/user)
 	. = ..()
