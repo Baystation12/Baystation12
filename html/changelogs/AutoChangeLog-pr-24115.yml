@@ -1,0 +1,7 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - rscadd: "Added a waste tank for atmospheric waste gasses next to the fuel bay. Now there's a place for gasses the Torch doesn't have a tank for, as well as storage for engine byproducts, and can be dumped to space or recovered with canisters. Also acts like a good way to clear a backed up atmos system if you know how to configure the pumps and valves, and don't mind spacing the gas."
+  - rscdel: "Engineering thrusters (not nacelles) are now purged from the game. They offered next to no thrust at all and now the engine room is a little bit simpler."
+  - tweak: "All black pipes in engineering ultimately go to the waste tank."
+  - tweak: "Removed redundant fuel bay firedoor (it had two at the entrance)."
