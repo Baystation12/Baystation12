@@ -1,0 +1,5 @@
+author: "comma"
+delete-after: True
+changes: 
+  - tweak: "Only 1 random alien seed in Xenoflora storage now, and can't order them from cargo. Go on expeditions nerds."
+  - maptweak: "No more pre-spawned anomalies on Petrov. Go on expeditions nerds."

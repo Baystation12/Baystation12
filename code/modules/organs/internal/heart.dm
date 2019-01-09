@@ -69,7 +69,9 @@
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
 			pulse = PULSE_NONE
 			return
-	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
+
+	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
+	if(pulse && fibrillation && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY
 		return
 

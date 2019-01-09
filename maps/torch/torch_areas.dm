@@ -1086,6 +1086,10 @@
 	name = "\improper Fuel Bay"
 	icon_state = "engineering"
 
+/area/engineering/wastetank
+	name = "\improper Waste Tank"
+	icon_state = "engineering"
+
 // Command
 
 /area/bridge

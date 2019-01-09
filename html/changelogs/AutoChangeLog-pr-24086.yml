@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - tweak: "IPCs can now use the Command Hardsuits"

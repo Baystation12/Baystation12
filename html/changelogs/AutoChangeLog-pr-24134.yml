@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - tweak: "All speed/acceleration values are now displayed multiplied by 1000. Actual mechanics are still same."

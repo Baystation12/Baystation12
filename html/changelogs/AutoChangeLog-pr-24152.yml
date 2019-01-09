@@ -1,0 +1,6 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - rscadd: "Adds DAIS, Xynergy, EC, and EXO logos to paperwork formatting, adds help information about new logos to nanoword formatting help."
+  - rscadd: "Adds all missing logos to the admin paperwork so that they can be used in fax replies."
+  - tweak: "Changes [tccseal] to [iccgseal], makes the EXO logo take over \"[logo]\" and moves nt logo to [ntlogo]"

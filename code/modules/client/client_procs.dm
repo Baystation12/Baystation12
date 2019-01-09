@@ -354,7 +354,11 @@
 		'html/images/bluentlogo.png',
 		'html/images/sollogo.png',
 		'html/images/terralogo.png',
-		'html/images/talisman.png'
+		'html/images/talisman.png',
+		'html/images/torchltd.png',
+		'html/images/xynlogo.png',
+		'html/images/daislogo.png',
+		'html/images/eclogo.png'
 		)
 
 	spawn (10) //removing this spawn causes all clients to not get verbs.
