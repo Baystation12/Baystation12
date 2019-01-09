@@ -180,6 +180,7 @@ var/list/gamemode_cache = list()
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
+	var/use_discord_bot = 0 //Should the discord bot be used?
 	var/discord_bot_address = "" //The address to push info to the discord bot
 
 	// Event settings
@@ -585,6 +586,9 @@ var/list/gamemode_cache = list()
 
 				if("irc_bot_export")
 					irc_bot_export = 1
+
+				if("use_discord_bot")
+					use_discord_bot = 1
 
 				if("discord_bot_address")
 					discord_bot_address = value
