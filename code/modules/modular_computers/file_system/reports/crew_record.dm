@@ -32,7 +32,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
 
-	// Add education, honorifics, etc.
+	// Add honorifics, etc.
 	var/formal_name = "Unset"
 	if(H)
 		formal_name = H.real_name
