@@ -83,10 +83,18 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/suit/labcoat_ec
+	display_name = "labcoat, Expeditionary Corps"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
+
 /datum/gear/suit/labcoat_corp_rd
-	display_name = "labcoat, research director, corporate colors"
+	display_name = "labcoat, chief science officer, corporate colors"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/suit/labcoat_ec_cso
+	display_name = "labcoat, chief science officer, Expeditionary Corps"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/cso
 
 /datum/gear/suit/coat
 	display_name = "coat, colour select"

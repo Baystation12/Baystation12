@@ -202,7 +202,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_BOTTLE_GREEN
+	stripe_color = COLOR_RESEARCH
 
 /obj/machinery/door/airlock/glass/science
 	door_color = COLOR_WHITE

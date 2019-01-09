@@ -14,7 +14,7 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/security_poncho
-	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
+	allowed_roles = list(/datum/job/merchant)
 
 /datum/gear/suit/medical_poncho
 	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/merchant)

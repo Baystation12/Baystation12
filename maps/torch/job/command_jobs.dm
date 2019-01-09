@@ -87,14 +87,19 @@
 	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
 
 /datum/job/rd
-	title = "Research Director"
-	supervisors = "the Commanding Officer and your employers"
+	title = "Chief Science Officer"
+	supervisors = "the Commanding Officer"
 	economic_power = 20
 	minimal_player_age = 7
 	ideal_character_age = 60
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/cso
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/o3
+	)
+
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_ADEPT,
@@ -108,11 +113,15 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 30
 
-	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
-						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
-						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, access_petrov_security, access_petrov_maint)
+	access = list(
+		access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
+		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
+		access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
+		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, 
+		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew, 
+		access_expedition_shuttle, access_expedition_shuttle_helm
+	)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -121,7 +130,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring the corporate interests of the Expeditionary Corps Organisation are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit your employer. Don't put the Expeditionary Corps Organisation's, or your employer's, position onboard in jeopardy.  Advise the CO on science matters."
+	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liase with the corporate interests of the Expeditionary Corps Organisation. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"

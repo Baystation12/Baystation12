@@ -42,9 +42,6 @@
 /datum/gear/head/surgical
 	allowed_roles = STERILE_ROLES
 
-/datum/gear/head/whitentberet
-	allowed_roles = list(/datum/job/guard)
-
 /datum/gear/head/beret
 	allowed_branches = CIVILIAN_BRANCHES
 

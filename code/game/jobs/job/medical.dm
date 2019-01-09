@@ -66,7 +66,7 @@
 	total_positions = 0
 	spawn_positions = 0
 	minimal_player_age = 7
-	supervisors = "the chief medical officer and research director"
+	supervisors = "the Chief Medical Officer and Chief Science Officer"
 	selection_color = "#013d3b"
 	economic_power = 7
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_research)

@@ -41,7 +41,7 @@
 	)
 
 /obj/structure/closet/secure_closet/RD
-	name = "research director's locker"
+	name = "chief science officer's locker"
 	req_access = list(access_rd)
 	icon_state = "rdsecure1"
 	icon_closed = "rdsecure"

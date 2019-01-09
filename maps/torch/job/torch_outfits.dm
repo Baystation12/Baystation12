@@ -66,15 +66,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/passenger/research/rd
-	name = OUTFIT_JOB_NAME("Research Director - Torch")
-	l_ear = /obj/item/device/radio/headset/heads/torchntdirector
-	uniform = /obj/item/clothing/under/rank/research_director
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	shoes = /obj/item/clothing/shoes/brown
-	id_type = /obj/item/weapon/card/id/torch/silver/research
-	pda_type = /obj/item/modular_computer/pda/heads/rd
-
 /decl/hierarchy/outfit/job/torch/crew/command/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer - Torch")
 	l_ear  =/obj/item/device/radio/headset/heads/cmo
@@ -550,41 +541,11 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
 
-//Crew Research Oufits
-
-/decl/hierarchy/outfit/job/torch/crew/research
-	name = OUTFIT_JOB_NAME("Xenolife Technician")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/research
-	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
-	pda_type = /obj/item/modular_computer/pda/science
-	l_ear = /obj/item/device/radio/headset/torchnanotrasen
-
-/decl/hierarchy/outfit/job/torch/crew/research/commissioned
-	name = OUTFIT_JOB_NAME("Xenolife Technician - Officer")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
-	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/explorer/xenolifetechnician
-	pda_type = /obj/item/modular_computer/pda/science
-	l_ear = /obj/item/device/radio/headset/torchnanotrasen
-
 //Passenger Outfits
 
 /decl/hierarchy/outfit/job/torch/passenger/research
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger/research
 	l_ear = /obj/item/device/radio/headset/torchnanotrasen
-
-/decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
-	name = OUTFIT_JOB_NAME("Senior Researcher")
-	uniform = /obj/item/clothing/under/rank/scientist/executive
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/modular_computer/pda/heads/rd
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
-
-/decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist/New()
-	..()
-	BACKPACK_OVERRIDE_RESEARCH
 
 /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
 	name = OUTFIT_JOB_NAME("Corporate Pilot")
@@ -633,17 +594,6 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
-
-/decl/hierarchy/outfit/job/torch/passenger/research/guard
-	name = OUTFIT_JOB_NAME("Security Guard")
-	uniform = /obj/item/clothing/under/rank/guard
-	shoes = /obj/item/clothing/shoes/jackboots
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
-	pda_type = /obj/item/modular_computer/pda/security
-
-/decl/hierarchy/outfit/job/torch/passenger/research/guard/New()
-	..()
-	BACKPACK_OVERRIDE_SECURITY_EXO
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
@@ -819,3 +769,30 @@ TERRAN OUTFITS
 	head = /obj/item/clothing/head/terran/navy/service/command
 	uniform = /obj/item/clothing/under/terran/navy/service/command
 	suit = /obj/item/clothing/suit/dress/terran/navy/command
+
+//Crew Research Oufits
+
+/decl/hierarchy/outfit/job/torch/crew/research
+	name = OUTFIT_JOB_NAME("Research Assistant - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/research
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/research
+	pda_type = /obj/item/modular_computer/pda/science
+	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+
+/decl/hierarchy/outfit/job/torch/crew/research/cso
+	name = OUTFIT_JOB_NAME("Chief Science Officer - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
+	l_ear = /obj/item/device/radio/headset/heads/torchntdirector
+	id_type = /obj/item/weapon/card/id/torch/silver/research
+	pda_type = /obj/item/modular_computer/pda/heads/rd
+
+/decl/hierarchy/outfit/job/torch/crew/research/senior_scientist
+	name = OUTFIT_JOB_NAME("Senior Scientist - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
+	id_type = /obj/item/weapon/card/id/torch/crew/research/senior_scientist
+
+/decl/hierarchy/outfit/job/torch/crew/research/scientist
+	name = OUTFIT_JOB_NAME("Scientist - Expeditionary Corps")
+	id_type = /obj/item/weapon/card/id/torch/crew/research/scientist
+ 

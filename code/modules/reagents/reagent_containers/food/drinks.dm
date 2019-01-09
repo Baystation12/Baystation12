@@ -339,7 +339,7 @@
 	base_name = "NT cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp
-	name = "\improper Expeditionary Corps Organisation coffee cup"
+	name = "\improper EXO coffee cup"
 	desc = "A tasteful coffee cup in Expeditionary Corps Organisation corporate colours."
 	icon_state = "coffeecup_corp"
 	base_name = "EXO cup"

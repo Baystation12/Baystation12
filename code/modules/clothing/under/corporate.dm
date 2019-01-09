@@ -16,7 +16,7 @@
 		)
 
 /obj/item/clothing/under/rank/scientist
-	name = "\improper Expeditionary Corps Organisation polo and pants"
+	name = "\improper EXO polo and pants"
 	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics."
 	icon_state = "smock"
 	item_state = "w_suit"
@@ -31,7 +31,7 @@
 	starting_accessories = list(/obj/item/clothing/accessory/tunic)
 
 /obj/item/clothing/under/rank/scientist/executive
-	name = "\improper Expeditionary Corps Organisation polo and pants"
+	name = "\improper EXO polo and pants"
 	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Expeditionary Corps Organisation higher-up."
 	icon_state = "smockexec"
 	worn_state = "smockexec"
@@ -63,7 +63,7 @@
 		)
 
 /obj/item/clothing/under/suit_jacket/corp
-	name = "EXO executive suit"
+	name = "\improper EXO executive suit"
 	desc = "A set of Expeditionary Corps Organisation-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit"
 	item_state = "bl_suit"

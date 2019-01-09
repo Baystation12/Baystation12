@@ -82,7 +82,7 @@
 	<img src = torchltd.png>
 	</center>
 	<b>FROM:</b> Hieronimus Blackstone, Overseer of Torch Cooperation Project<br>
-	<b>TO:</b> Research Director of SEV Torch branch<br>
+	<b>TO:</b> Chief Science Officer of SEV Torch branch<br>
 	<b>CC:</b> Liason with SCG services aboard SEV Torch<br>
 	<b>SUBJECT:</b> RE: Testing Materials<br>
 	<hr>
