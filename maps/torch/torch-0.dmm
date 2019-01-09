@@ -13415,8 +13415,6 @@
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/maint)
 "Ji" = (
-/obj/machinery/artifact,
-/obj/structure/anomaly_container,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -13842,8 +13840,6 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
 "KN" = (
-/obj/machinery/artifact,
-/obj/structure/anomaly_container,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
