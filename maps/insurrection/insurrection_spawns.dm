@@ -6,10 +6,6 @@
 
 	default_spawn = "Insurrectionist"
 
-//Ghost spawn landmarks//
-/obj/effect/landmark/ghost_spawn/New()
-	GLOB.latejoin_ghosts += loc
-
 //Insurrectionist Landmarks + datums//
 
 GLOBAL_LIST_EMPTY(Innie_turfs)

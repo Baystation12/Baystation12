@@ -11,12 +11,23 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
-	desc = "The language of the Sangheili"
+	desc = "The ancient language of the Sangheili and common language of the Covenant."
 	native = 1
 	colour = "vox"
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "S"
 	flags = RESTRICTED
+	var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
+	var/list/syllable_names
+
+/datum/language/sangheili/New()
+	. = ..()
+	cov_alphabet = new(cov_alphabet)
+	cov_alphabet.Crop(1,1,24,24)
+	syllables = list()
+	syllable_names = icon_states(cov_alphabet)
+	for(var/symbol_name in syllable_names)
+		syllables.Add("<IMG CLASS=icon SRC=\ref[cov_alphabet] ICONSTATE='[symbol_name]'>")
 
 /obj/item/clothing/under/covenant/sangheili
 	name = "Sangheili Body-suit"
@@ -135,7 +146,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/weapon/melee/g_dagger/proc/inhand_check()
 	var/mob/living/carbon/human/h = creator_dagger.current_user
 	if(istype(h))
-		if(h.l_hand  || h.r_hand == src)
+		if(h.l_hand == src || h.r_hand == src)
 			return 1
 	return 0
 
@@ -148,7 +159,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		equip_dagger()
 		playsound(usr, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	else
-		playsound(usr, 'sound/weapons/saberoff.ogg', 75, 1)
+		playsound(usr, 'sound/weapons/saberoff.ogg', 50, 1)
 		unequip_dagger()
 
 
@@ -163,11 +174,11 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	w_class = ITEM_SIZE_NORMAL
 	force = 30
 	throwforce = 12
-	edge = 0
-	sharp = 0
+	edge = 1
+	sharp = 1
 	var/obj/item/clothing/gloves/thick/sangheili/creator_dagger
 	var/next_leapwhen
-
+	armor_penetration = 50
 	canremove = 0
 
 	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/energy_dagger_inhand.dmi',slot_r_hand_str = 'code/modules/halo/icons/energy_dagger_inhand.dmi')

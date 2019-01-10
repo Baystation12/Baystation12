@@ -1,0 +1,26 @@
+<!-- 
+Title: Mercenary Console UI
+Used In File(s): \maps\packwar\mercenaries.dm
+ -->
+<h3>Mercenaries for hire:</h3>
+{{for data.interact_inventory}}
+	<div class="block">
+		<div class="item">
+			<div class="itemLabel" style="width:100%;">
+				{{:value.title}}<br>
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemContent" style="width:100%;">
+				Mercenaries available: {{:value.available}}<br>
+				Price: {{:value.price}}<br>
+				Mercenaries preparing to depart: {{:value.ready}}<br>
+				Mercenaries departed: {{:value.dispatched}}<br>
+				{{:helper.link('Hire Mercenary', 'bookmark', {'hire' : value.title, 'user' : data.user})}}<br>
+			</div>
+		</div>
+	</div>
+{{empty}}
+	<block>No mercenaries found for hire.</block>
+{{/for}}
+<div class="item">&nbsp;</div>

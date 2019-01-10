@@ -105,7 +105,7 @@ var/global/datum/controller/occupations/job_master
 				unassigned -= player
 				job.current_positions++
 				if(job.track_players)
-					job.assigned_players.Add(player.mind)
+					job.assign_player(player.mind)
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
@@ -433,7 +433,7 @@ var/global/datum/controller/occupations/job_master
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else
-				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, rank)
+				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, job)
 				H.forceMove(pick(spawnpoint.turfs))
 
 			// Moving wheelchair if they have one

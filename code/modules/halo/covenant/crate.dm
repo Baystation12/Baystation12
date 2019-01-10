@@ -7,3 +7,6 @@
 /obj/structure/closet/covenant/open
 	opened = TRUE
 	icon_state = "open"
+
+/obj/structure/ore_box/covenant
+	icon = 'crate.dmi'
