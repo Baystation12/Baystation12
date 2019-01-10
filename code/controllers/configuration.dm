@@ -182,6 +182,7 @@ var/list/gamemode_cache = list()
 
 	var/use_discord_bot = 0 //Should the discord bot be used?
 	var/discord_bot_address = "" //The address to push info to the discord bot
+	var/oni_discord = "" //The channel for ONI messages
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -592,6 +593,9 @@ var/list/gamemode_cache = list()
 
 				if("discord_bot_address")
 					discord_bot_address = value
+
+				if("oni_discord")
+					oni_discord = value
 
 				if("ticklag")
 					var/ticklag = text2num(value)
