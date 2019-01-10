@@ -1,5 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - tweak: "Adjusted waste tank dump port so it goes to the edge of shields, rather than dumping onto the top of D3 pod."
-  - tweak: "Added a pump to the waste tank canister port."
