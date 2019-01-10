@@ -1700,6 +1700,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/tech)
+"dL" = (
+/obj/structure/sign/warning/hot_exhaust,
+/turf/simulated/wall/ocp_wall,
+/area/engineering/wastetank)
 "dM" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -3025,7 +3029,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/engineering/engine_room)
 "gB" = (
 /obj/machinery/power/sensor{
@@ -4662,20 +4666,26 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "kb" = (
-/obj/machinery/button/remote/blast_door{
-	desc = "A control switch to open and close the waste gate.";
-	id = "WasteGate";
-	name = "Waste Gate Control";
-	pixel_x = 0;
-	pixel_y = 25;
-	req_access = list(24)
-	},
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
 	req_one_access = list(24,11)
 	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/machinery/camera/network/engineering{
+	c_tag = "Waste Tank"
+	},
+/obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/wastetank)
 "kc" = (
@@ -9570,10 +9580,6 @@
 /obj/structure/sign/warning/biohazard,
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos/storage)
-"vL" = (
-/obj/structure/sign/warning/hot_exhaust,
-/turf/simulated/wall/r_wall/hull,
-/area/engineering/wastetank)
 "vN" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -11172,9 +11178,6 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/aftport)
-"Au" = (
-/turf/simulated/wall/ocp_wall,
-/area/engineering/engine_room)
 "Aw" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
@@ -12425,32 +12428,27 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "DB" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Waste Tank"
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
 	},
+/obj/machinery/button/remote/blast_door{
+	desc = "A control switch to open and close the waste gate.";
+	id = "WasteGate";
+	name = "Waste Gate Control";
+	pixel_x = 0;
+	pixel_y = 25;
+	req_access = list(24)
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/wastetank)
 "DC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black,
 /obj/structure/cable/green{
 	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+	d2 = 4;
+	icon_state = "1-4"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/black,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/wastetank)
 "DD" = (
@@ -12614,10 +12612,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/wastetank)
 "Eb" = (
-/obj/machinery/atmospherics/portables_connector,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
+	},
+/obj/machinery/atmospherics/binary/pump{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/wastetank)
@@ -13967,7 +13967,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 9
 	},
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/engineering/engine_room)
 "HY" = (
 /obj/structure/lattice,
@@ -40155,7 +40155,7 @@ QN
 Ff
 NC
 Qw
-vL
+Vq
 aa
 aa
 aa
@@ -40356,8 +40356,8 @@ tE
 Ek
 Et
 NC
-uT
-OG
+Qw
+Vq
 aa
 aa
 aa
@@ -40559,7 +40559,7 @@ Hs
 Eu
 DF
 Qw
-vL
+Vq
 aa
 aa
 aa
@@ -40758,9 +40758,9 @@ Fl
 Fl
 Fl
 JY
-JY
-JY
-JY
+Qw
+uT
+Qw
 Vq
 aa
 aa
@@ -40960,9 +40960,9 @@ Fl
 Fr
 Fx
 FE
-JF
-JF
-JF
+Qw
+DF
+dL
 aa
 aa
 aa
@@ -41162,9 +41162,9 @@ Gl
 Fq
 Fw
 FD
-JF
-JF
-JF
+Qw
+DF
+OG
 aa
 aa
 aa
@@ -41364,9 +41364,9 @@ Fo
 OW
 Fz
 FF
-JF
-JF
-JF
+Qw
+Qw
+dL
 aa
 aa
 aa
@@ -44187,7 +44187,7 @@ At
 Bc
 Bc
 Bc
-wU
+Bc
 wU
 wU
 wU
@@ -44386,9 +44386,9 @@ Un
 Zn
 dp
 gA
-Au
-Au
-Zs
+dp
+dp
+dp
 wU
 wU
 wU
@@ -44588,8 +44588,8 @@ Vn
 bo
 mp
 HW
-Au
-Zs
+dp
+dp
 Zs
 wU
 wU
@@ -44789,8 +44789,8 @@ xa
 Wn
 yR
 yR
-Au
-Zs
+dp
+dp
 Zs
 Zs
 Zs
@@ -44991,7 +44991,7 @@ xb
 xT
 mS
 yR
-Zs
+dp
 Zs
 Zs
 Zs
