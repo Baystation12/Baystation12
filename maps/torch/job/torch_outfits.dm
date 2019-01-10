@@ -103,7 +103,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
-/decl/hierarchy/outfit/job/torch/crew/command/cos/New()
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/New()
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
