@@ -1417,6 +1417,9 @@ var/global/floorIsLava = 0
 		log_and_message_admins(msg)
 
 
+
+
+
 /datum/admins/proc/sendFax()
 	set category = "Special Verbs"
 	set name = "Send Fax"
@@ -1486,7 +1489,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 
 
-	if(destination.recievefax(P))
+	if(destination.recievefax(P, P.origin))
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")

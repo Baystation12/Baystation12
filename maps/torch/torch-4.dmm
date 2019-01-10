@@ -5344,10 +5344,16 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/structure/filingcabinet/chestdrawer,
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Forensics";
 	dir = 8
+	},
+/obj/structure/table/steel,
+/obj/machinery/photocopier/faxmachine{
+	department = "Forensic's Office"
+	},
+/obj/structure/filingcabinet/wallcabinet{
+	pixel_x = 30
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)

@@ -8,7 +8,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
-	req_one_access = list(access_lawyer, access_bridge, access_armory, access_qm)
+	req_one_access = null
 
 	idle_power_usage = 30
 	active_power_usage = 200
@@ -18,6 +18,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	var/sendcooldown = 0 // to avoid spamming fax messages
 	var/department = "Unknown" // our department
 	var/destination = null // the department we're sending to
+	var/obj/fax_copy = null
 
 	var/static/list/admin_departments
 
@@ -148,7 +149,9 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	var/success = 0
 	for(var/obj/machinery/photocopier/faxmachine/F in GLOB.allfaxes)
 		if( F.department == destination )
-			success = F.recievefax(copyitem)
+			success = F.recievefax(copyitem, scan.registered_name)
+			
+			
 
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
@@ -156,7 +159,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 
-/obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
+/obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming, var/sender)
 	if(stat & (BROKEN|NOPOWER))
 		return 0
 
@@ -169,17 +172,23 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	// give the sprite some time to flick
 	sleep(20)
 
+	if (sender == null || sender == "")
+		sender = "Remote Source"
 	if (istype(incoming, /obj/item/weapon/paper))
-		copy(incoming)
+		fax_copy = copy(incoming)
+		fax_copy.desc = "a faxed sheet of paper from [sender]"
 	else if (istype(incoming, /obj/item/weapon/photo))
-		photocopy(incoming)
+		fax_copy = photocopy(incoming)
+		fax_copy.desc = "a faxed photo from [sender]"
 	else if (istype(incoming, /obj/item/weapon/paper_bundle))
-		bundlecopy(incoming)
+		fax_copy = bundlecopy(incoming)
+		fax_copy.desc = "a faxed paper bundle from [sender]"
 	else
 		return 0
 
 	use_power_oneoff(active_power_usage)
 	return 1
+
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
 	if(stat & (BROKEN|NOPOWER))
@@ -231,3 +240,4 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')
+
