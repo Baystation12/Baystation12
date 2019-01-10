@@ -1,0 +1,5 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - maptweak: "Nacelles have been reworked."
+  - bugfix: "As a result, combustion mode works again."
