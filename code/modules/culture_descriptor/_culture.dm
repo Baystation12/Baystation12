@@ -12,6 +12,7 @@
 	var/subversive_potential = 0
 	var/hidden
 	var/hidden_from_codex
+	var/list/qualifications
 
 /decl/cultural_info/New()
 
@@ -101,8 +102,8 @@
 /decl/cultural_info/proc/get_formal_name_prefix()
 	return
 
-/decl/cultural_info/proc/get_education_tier()
-	return EDUCATION_TIER_NONE
-
 /decl/cultural_info/proc/get_qualifications()
+	return qualifications
+
+/decl/cultural_info/proc/get_possible_personal_goals(var/department_flag)
 	return

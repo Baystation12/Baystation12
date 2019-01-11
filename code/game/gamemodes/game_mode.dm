@@ -235,13 +235,19 @@ var/global/list/additional_antag_types = list()
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.post_spawn()
 
+	// Update goals, now that antag status and jobs are both resolved.
+	for(var/thing in SSticker.minds)
+		var/datum/mind/mind = thing
+		mind.generate_goals(mind.assigned_job)
+		mind.current.show_goals()
+
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
 
-	feedback_set_details("round_start","[time2text(world.realtime)]")
+	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
 	if(SSticker.mode)
-		feedback_set_details("game_mode","[SSticker.mode]")
-	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
+		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
+	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
 /datum/game_mode/proc/fail_setup()
@@ -324,6 +330,8 @@ var/global/list/additional_antag_types = list()
 
 	uplink_purchase_repository.print_entries()
 
+	sleep(2)
+
 	var/clients = 0
 	var/surviving_humans = 0
 	var/surviving_total = 0
@@ -346,26 +354,33 @@ var/global/list/additional_antag_types = list()
 			else if(isghost(M))
 				ghosts++
 
-	var/text = ""
+	var/departmental_goal_summary = SSgoals.get_roundend_summary()
+	for(var/thing in GLOB.clients)
+		var/client/client = thing
+		if(client.mob && client.mob.mind)
+			client.mob.mind.show_roundend_summary(departmental_goal_summary)
+
+	var/text = "<br><br>"
 	if(surviving_total > 0)
-		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
+		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
 		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
-	to_world(text)
 
+	to_world(text)
+	
 	if(clients > 0)
-		feedback_set("round_end_clients",clients)
+		SSstatistics.set_field("round_end_clients",clients)
 	if(ghosts > 0)
-		feedback_set("round_end_ghosts",ghosts)
+		SSstatistics.set_field("round_end_ghosts",ghosts)
 	if(surviving_humans > 0)
-		feedback_set("survived_human",surviving_humans)
+		SSstatistics.set_field("survived_human",surviving_humans)
 	if(surviving_total > 0)
-		feedback_set("survived_total",surviving_total)
+		SSstatistics.set_field("survived_total",surviving_total)
 	if(escaped_humans > 0)
-		feedback_set("escaped_human",escaped_humans)
+		SSstatistics.set_field("escaped_human",escaped_humans)
 	if(escaped_total > 0)
-		feedback_set("escaped_total",escaped_total)
+		SSstatistics.set_field("escaped_total",escaped_total)
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 

@@ -24,4 +24,4 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 	if(!GLOB.end_credits_title)
 		return
 
-	feedback_add_details("admin_verb","CECT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","CECT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

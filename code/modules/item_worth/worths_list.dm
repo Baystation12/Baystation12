@@ -670,7 +670,6 @@ var/list/worths = list(
 					/obj/machinery/conveyor = 200,
 					/obj/machinery/conveyor_switch = 100,
 					/obj/machinery/disposal = 500,
-					/obj/machinery/blackbox_recorder = -9500,
 					/obj/machinery/r_n_d/protolathe = -15000,
 					/obj/machinery/r_n_d/server = -20000,
 					/obj/machinery/r_n_d = -1000,

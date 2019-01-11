@@ -32,7 +32,6 @@
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 20
-	required_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/scientist
 	title = "Scientist"
@@ -70,7 +69,6 @@
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)
 	minimal_access = list()
 	skill_points = 20
-	required_education = EDUCATION_TIER_MASTERS
 
 /datum/job/guard
 	title = "Security Guard"
@@ -97,8 +95,6 @@
 	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_petrov_helm, access_expedition_shuttle, access_guppy,
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint)
-	required_education = EDUCATION_TIER_DROPOUT
-	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/scientist_assistant
 	title = "Research Assistant"
@@ -129,8 +125,6 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
-	required_education = EDUCATION_TIER_DROPOUT
-	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/xenolife_technician
 	title = "Xenolife Technician"
@@ -165,5 +159,3 @@
 						access_expedition_shuttle, access_guppy, access_hangar,  access_solgov_crew, access_emergency_storage)
 	minimal_access = list()
 	skill_points = 16
-	required_education = EDUCATION_TIER_BACHELOR
-	maximum_education = EDUCATION_TIER_DOCTORATE

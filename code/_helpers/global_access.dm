@@ -65,6 +65,8 @@
 			return global.SSfluids;
 		if("SSgarbage")
 			return global.SSgarbage;
+		if("SSgoals")
+			return global.SSgoals;
 		if("SSicon_update")
 			return global.SSicon_update;
 		if("SSinactivity")
@@ -101,6 +103,8 @@
 			return global.SSshuttle;
 		if("SSskybox")
 			return global.SSskybox;
+		if("SSstatistics")
+			return global.SSstatistics;
 		if("SSsun")
 			return global.SSsun;
 		if("SSsupply")
@@ -267,8 +271,6 @@
 			return global.base_miss_chance;
 		if("basic_robolimb")
 			return global.basic_robolimb;
-		if("blackbox")
-			return global.blackbox;
 		if("blocked")
 			return global.blocked;
 		if("bomb_set")
@@ -1028,6 +1030,8 @@
 			global.SSfluids=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
+		if("SSgoals")
+			global.SSgoals=newval;
 		if("SSicon_update")
 			global.SSicon_update=newval;
 		if("SSinactivity")
@@ -1064,6 +1068,8 @@
 			global.SSshuttle=newval;
 		if("SSskybox")
 			global.SSskybox=newval;
+		if("SSstatistics")
+			global.SSstatistics=newval;
 		if("SSsun")
 			global.SSsun=newval;
 		if("SSsupply")
@@ -1230,8 +1236,6 @@
 			global.base_miss_chance=newval;
 		if("basic_robolimb")
 			global.basic_robolimb=newval;
-		if("blackbox")
-			global.blackbox=newval;
 		if("blocked")
 			global.blocked=newval;
 		if("bomb_set")
@@ -1958,6 +1962,7 @@
 	"SSfastprocess",
 	"SSfluids",
 	"SSgarbage",
+	"SSgoals",
 	"SSicon_update",
 	"SSinactivity",
 	"SSlighting",
@@ -1976,6 +1981,7 @@
 	"SSradiation",
 	"SSshuttle",
 	"SSskybox",
+	"SSstatistics",
 	"SSsun",
 	"SSsupply",
 	"SStemperature",
@@ -2059,7 +2065,6 @@
 	"autolathe_recipes",
 	"base_miss_chance",
 	"basic_robolimb",
-	"blackbox",
 	"blocked",
 	"bomb_set",
 	"cable_list",

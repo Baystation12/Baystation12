@@ -227,6 +227,7 @@
 	signal.source = src
 	signal.frequency = frequency
 	signal.data["tag"] = id
+	signal.data["sigtype"] = "command"
 	signal.data["command"] = "valve_toggle"
 	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 	active = !active

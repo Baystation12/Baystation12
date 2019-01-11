@@ -6,23 +6,11 @@ SUBSYSTEM_DEF(culture)
 	var/list/cultural_info_by_name =      list()
 	var/list/cultural_info_by_path =      list()
 	var/list/tagged_info =                list()
-	var/list/education_tiers_to_strings = list()
 
 /datum/controller/subsystem/culture/proc/get_all_entries_tagged_with(var/token)
 	return tagged_info[token]
 
 /datum/controller/subsystem/culture/Initialize()
-
-	education_tiers_to_strings = list(
-		"[EDUCATION_TIER_NONE]"      = "no education",
-		"[EDUCATION_TIER_DROPOUT]"   = "some schooling",
-		"[EDUCATION_TIER_BASIC]"     = "a high school diploma",
-		"[EDUCATION_TIER_TRADE]"     = "a trade school certificate",
-		"[EDUCATION_TIER_BACHELOR]"  = "a bachelor's degree",
-		"[EDUCATION_TIER_MASTERS]"   = "a master's degree",
-		"[EDUCATION_TIER_DOCTORATE]" = "a doctorate",
-		"[EDUCATION_TIER_MEDSCHOOL]" = "a medical degree"
-	)
 
 	for(var/ftype in subtypesof(/decl/cultural_info))
 		var/decl/cultural_info/culture = ftype
