@@ -21,7 +21,7 @@
 	spawn_positions = 1
 
 /decl/hierarchy/outfit/spartan_two_oprf
-	name = "Spartan II"
+	name = "OPRF Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
