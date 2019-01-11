@@ -3,6 +3,7 @@
 	var/obj/effect/projectile/ship_damage_projectile = /obj/item/projectile/overmap_test_round //This is the projectile used when this impacts a ship on the overmap. This is spawned in a random connected z-level of that overmap ship object.
 	step_delay = 1 SECOND //These will only be traversing overmap tiles.
 	var/obj/effect/overmap/overmap_fired_by
+	accuracy = 100
 
 /obj/item/projectile/overmap/New(var/obj/spawner)
 	if(map_sectors["[spawner.z]"])
@@ -71,8 +72,8 @@
 		end_co_ords = generate_co_ords_y_end(start_co_ords,overmap_object_hit.map_bounds)
 	var/turf/proj_spawn_loc = locate(start_co_ords[1],start_co_ords[2],z_level)
 	var/turf/proj_end_loc = locate(end_co_ords[1],end_co_ords[2],z_level)
-	var/obj/item/projectile/new_proj = new ship_damage_projectile
-	new_proj.loc = proj_spawn_loc
+	var/obj/item/projectile/new_proj = new ship_damage_projectile (proj_spawn_loc)
+	new_proj.starting = proj_spawn_loc
 	new_proj.launch(proj_end_loc)
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
