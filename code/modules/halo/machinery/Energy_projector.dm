@@ -237,15 +237,17 @@
 /obj/item/projectile/projector_laser_damage_proj/proc/create_child_projs()
 	//Spawn 4 child-projectiles
 	var/list/obj/item/projectile/child_projs = list()
-	var/list/adjacent_turfs = range(starting,2) - starting
+	var/list/adjacent_turfs = range(starting,1) - starting
 	var/i //Why do you need to do it this way, DMcode, WHY?!?!
 	for(i=0,i<=4,i++)
 		var/turf/spawnloc = pick(adjacent_turfs)
 		adjacent_turfs =- spawnloc
-		child_projs += new /obj/item/projectile/projector_laser_damage_proj/childproj(spawnloc)
+		var/spawned_proj = new /obj/item/projectile/projector_laser_damage_proj/childproj(spawnloc)
+		child_projs.Add(spawned_proj)
 
 	for(var/obj/item/projectile/childproj in child_projs)
-		childproj.launch(pick(range(original,2)-original))
+		childproj.launch(pick(range(original,1)-original))
+
 
 /obj/item/projectile/projector_laser_damage_proj/childproj/create_child_projs()
 	return
