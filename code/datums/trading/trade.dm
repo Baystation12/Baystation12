@@ -140,7 +140,7 @@
 	. = get_value(item)
 	if(is_wanted)
 		. *= want_multiplier
-	. *= 1 - (margin - 1) * skill_curve(skill) //Trader will underpay at lower skill.
+	. *= max(1 - (margin - 1) * skill_curve(skill), 0.1) //Trader will underpay at lower skill.
 
 /datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_MONEY))
