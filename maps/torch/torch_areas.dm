@@ -511,6 +511,11 @@
 	icon_state = "shuttle3"
 	base_turf = /turf/simulated/open
 
+/area/turbolift/robotics_lift
+  name = "\improper Robotics Lift"
+  icon_state = "shuttle3"
+  base_turf = /turf/simulated/open
+
 // Ninja areas
 /area/ninja_dojo
 	name = "\improper Ninja Base"
@@ -1367,12 +1372,14 @@
 	icon_state = "mechbay"
 
 /area/assembly/robotics
-	name = "\improper Robotics Lab"
+	name = "\improper Fabrication Lab"
 	icon_state = "robotics"
 
-/area/assembly/robotics_surgery
+/area/assembly/robotics/lower
+	name = "\improper Lower Fabrication Lab"
+
+/area/assembly/robotics/surgery
 	name = "\improper Robotics Operating Theatre"
-	icon_state = "robotics"
 
 /area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"
