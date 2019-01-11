@@ -128,14 +128,21 @@ client
 			var/datum/mil_rank/rank = mil_branches.get_rank(R.get_branch(), R.get_rank())
 			if(rank.name_short)
 				used_name = "[rank.name_short] [used_name]"
-		if(prob(90))
-			var/decl/cultural_info/actor_culture = SSculture.get_culture(H.get_cultural_value(TAG_CULTURE))
-			if(!actor_culture || !(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10))
-				actor_culture = SSculture.get_culture(CULTURE_HUMAN)
-			chunk += "[actor_culture.get_random_name(H.gender)]\t \t \t \t[uppertext(used_name)][job]"
+		var/showckey = 0
+		if(H.ckey && H.client)			
+			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW)
+				showckey = 1
+		var/decl/cultural_info/actor_culture = SSculture.get_culture(H.get_cultural_value(TAG_CULTURE))
+		if(!actor_culture || !(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10))
+			actor_culture = SSculture.get_culture(CULTURE_HUMAN)
+		if(!showckey)
+			if(prob(90))
+				chunk += "[actor_culture.get_random_name(H.gender)]\t \t \t \t[uppertext(used_name)][job]"
+			else				
+				var/datum/gender/G = gender_datums[H.gender]
+				chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
 		else
-			var/datum/gender/G = gender_datums[H.gender]
-			chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
+			chunk += "[uppertext(actor_culture.get_random_name(H.gender))] a.k.a. '[uppertext(H.ckey)]'\t \t \t \t[uppertext(used_name)][job]"
 		chunksize++
 		if(chunksize > 2)
 			cast += "<center>[jointext(chunk,"<br>")]</center>"
@@ -162,23 +169,71 @@ client
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"
 
 	var/list/staff = list("PRODUCTION STAFF:")
-	var/list/staffjobs = list("Coffe Fetcher", "Cameraman", "Angry Yeller", "Chair Operator", "Choreographer", "Historical Consultant", "Costume Designer", "Chief Editor", "Executive Assistant")
-	var/list/goodboys = list()
+	var/list/hostjobs = list("CEO", "Corporate Overlord", "Studio Head")
+	var/list/headjobs = list("Executive Producer", "Director", "Senior Investor", "Creative Visionary")
+	var/list/headdevjobs = list("Special Effects Supervisor", "Research and Development Manager", "Senior CGI Animator", "Animatronics Supervisor", "Stunt Director")
+	var/list/loremanagerjobs = list("Historical Consultant", "Written By", "Storyboard Artist", "Based on a Novel by", "Military Consultant", "Medical Consultant")
+	var/list/staffmanagerjobs = list("Casting Director", "Human Resources Manager", "Talent Agent", "Head Recruiter", "Personnel Manager")
+	var/list/adminjobs = list("Cameraman", "Chair Operator", "Choreographer", "Editor", "Stunt Coordinator", "Negative Cutter", "Location Manager", "Music Editor", "Scoring Mixer", "Second Unit Director")
+	var/list/senioradminjobs = list("Senior Editor","Lighting Director","Benefits Coordinator","First Assistant Director", "Sound Designer", "Script Coordinator")
+	var/list/devjobs = list("Special Effects Coordinator", "Sound Engineer", "Set Decorator", "Special Effects Technician", "Animatronics Technician")
+	var/list/trialminjobs = list("Costume Designer", "Best Boy", "Key Grip", "Apprentice Carpenter", "Third Unit Director", "Craft Services Coordinator", "Action Vehicle Cooridnator", "Safety Officer")
+	var/list/modjobs = list("Barista", "Paralegal", "Person with a Bullhorn", "Security Guard", "Angry Yeller", "Executive Assistant")
+	var/list/trialmodjobs = list("Unpaid Intern", "Coffee Fetcher", "Assistant to the Director", "SpaceBurger Employee that Wandered onto Set")	
 	for(var/client/C)
 		if(!C.holder)
 			continue
-		if(C.holder.rights & (R_DEBUG|R_ADMIN))
+		if(C.holder.rank == "Host")
 			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
-		else if(C.holder.rights & R_MOD)
-			goodboys += "[C.key]"
-
+			staff += "[uppertext(pick(hostjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "HeadAdmin")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(headjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "HeadDeveloper")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(headdevjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "LoreManager")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(loremanagerjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "StaffManager")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(staffmanagerjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "SeniorAdmin")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(senioradminjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "GameAdmin")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(adminjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "TrialAdmin")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(trialminjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "Developer" || C.holder.rank == "DevAdmin")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(devjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "Moderator")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(modjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rank == "TrialModerator")
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(trialmodjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
 	titles += "<center>[jointext(staff,"<br>")]</center>"
-	if(goodboys.len)
-		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center>"
 
 	var/disclaimer = "Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>"
-	disclaimer += pick("Use for parody prohibited. Prohibited.", "All stunts were performed by underpaid interns. Do NOT try at home.", "[GLOB.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.")
+	disclaimer += "This motion picture is protected under the copyright laws of the Sol Central Government<br> and other nations throughout the galaxy.<br>"
+	disclaimer += "Colony of First Publication: [pick("Mars", "Luna", "Earth", "Venus", "Phobos", "Ceres", "Tiamat", "Ceti Epsilon", "Eos", 
+				  "Pluto", "Ouere", "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
+	disclaimer += pick("Use for parody prohibited. PROHIBITED.", 
+					   "All stunts were performed by underpaid interns. Do NOT try at home.",
+					   "[GLOB.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.",
+					   "Any unauthorized exhibition, distribution, or copying of this film or any part thereof (including soundtrack)<br>\
+						may result in an ERT being called to storm your home and take it back by force.",
+						"The story, all names, characters, and incidents portrayed in this production are fictitious. No identification with actual<br>\
+						persons (living or deceased), places, buildings, and products is intended or should be inferred.<br>\
+						This film is based on a true story and all individuals depicted are based on real people, despite what we just said.",
+						"No person or entity associated	with this film received payment or anything of value, or entered into any agreement, in connection<br>\
+						with the depiction of tobacco products, despite the copious amounts	of smoking depicted within.<br>\
+						(This disclaimer sponsored by Carcinoma - Carcinogens are our Business!(TM)).",
+						"No animals were harmed in the making of this motion picture except for those listed previously as dead. Do not try this at home.")
 	titles += "<center>[disclaimer]</center>"
 
 	return titles
