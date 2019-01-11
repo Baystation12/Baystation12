@@ -74,6 +74,7 @@
 	var/turf/proj_end_loc = locate(end_co_ords[1],end_co_ords[2],z_level)
 	var/obj/item/projectile/new_proj = new ship_damage_projectile (proj_spawn_loc)
 	new_proj.starting = proj_spawn_loc
+	new_proj.original = proj_end_loc
 	new_proj.launch(proj_end_loc)
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
