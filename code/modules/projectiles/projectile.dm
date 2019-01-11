@@ -256,11 +256,11 @@
 
 	//penetrating projectiles can pass through things that otherwise would not let them
 	if(!passthrough && penetrating > 0)
-		if(check_penetrate(A))
-			passthrough = 1
 		if(penetrating == 999)
 			passthrough = 1
 		else
+			if(check_penetrate(A))
+				passthrough = 1
 			penetrating--
 
 	//the bullet passes through a dense object!
