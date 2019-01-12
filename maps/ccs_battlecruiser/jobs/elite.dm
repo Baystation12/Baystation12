@@ -33,7 +33,7 @@
 /datum/job/opredflag_cov/elite/shipmaster
 	title = "Sangheili Shipmaster"
 	supervisors = "the Prophets"
-	outfit_type = /decl/hierarchy/outfit/sangheili/zealot
+	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	total_positions = 1
 	spawn_positions = 1
 
