@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - rscadd: "Large escape pods will now repressurize themselves after undocking."
