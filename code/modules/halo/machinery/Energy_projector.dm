@@ -1,5 +1,6 @@
 #define ACCELERATOR_OVERLAY_ICON_STATE "lrport1"
-#define MAC_AMMO_LIMIT 3
+#define AMMO_LIMIT 1
+#define LOAD_AMMO_DELAY 140
 #define CAPACITOR_DAMAGE_AMOUNT 0.8
 #define CAPACITOR_MAX_STORED_CHARGE 150000
 #define CAPACITOR_RECHARGE_TIME 15 //This is in seconds.
@@ -36,12 +37,12 @@
 
 /obj/machinery/Energy_projector/energy_loader/examine(var/mob/user)
 	. = ..()
-	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[MAC_AMMO_LIMIT] plasma charges loaded.</span>")
+	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[AMMO_LIMIT] plasma charges loaded.</span>")
 
 /obj/machinery/Energy_projector/energy_loader/attack_hand(var/mob/user)
 	if(loading)
 		return
-	if(contained_rounds.len >= MAC_AMMO_LIMIT)
+	if(contained_rounds.len >= AMMO_LIMIT)
 		to_chat(user,"<span class = 'notice'>The Energy projector cannot load any more plasma.</span>")
 		return
 	visible_message("[user] activates the projector's loading mechanism.")
@@ -216,8 +217,7 @@
 	penetrating = 999
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/projector_laser_proj
-	tracer_delay_time = 2 SECONDS
-
+	tracer_delay_time = 5 SECONDS
 
 /obj/item/projectile/projector_laser_damage_proj/attack_mob()
 	damage_type = BURN
@@ -230,6 +230,31 @@
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
 	. = ..()
 
+/obj/item/projectile/projector_laser_damage_proj/launch()
+	create_child_projs()
+	. = ..()
 
-#undef MAC_AMMO_LIMIT
+/obj/item/projectile/projector_laser_damage_proj/proc/create_child_projs()
+	//Spawn 4 child-projectiles
+	var/list/obj/item/projectile/child_projs = list()
+	var/list/adjacent_turfs = range(starting,1) - starting
+	var/i //Why do you need to do it this way, DMcode, WHY?!?!
+	for(i=0,i<=4,i++)
+		var/turf/spawnloc = pick(adjacent_turfs)
+		adjacent_turfs =- spawnloc
+		var/spawned_proj = new /obj/item/projectile/projector_laser_damage_proj/childproj(spawnloc)
+		child_projs.Add(spawned_proj)
+
+	for(var/obj/item/projectile/childproj in child_projs)
+		childproj.launch(pick(range(original,1)-original))
+
+
+/obj/item/projectile/projector_laser_damage_proj/childproj/create_child_projs()
+	return
+
+#undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE
+#undef LOAD_AMMO_DELAY
+#undef CAPACITOR_DAMAGE_AMOUNT
+#undef CAPACITOR_MAX_STORED_CHARGE
+#undef CAPACITOR_RECHARGE_TIME
