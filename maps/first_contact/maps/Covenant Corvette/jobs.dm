@@ -1,6 +1,8 @@
 
 /datum/job/covenant
 	loadout_allowed = FALSE
+	announced = 0
+	create_record = 0
 
 /datum/job/covenant/sangheili_shipmaster
 	title = "Sangheili - Shipmaster"
