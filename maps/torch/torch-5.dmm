@@ -1227,7 +1227,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/flora/pottedplant/shoot,
+/obj/structure/holoplant,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/xo)
 "dd" = (
@@ -1905,7 +1905,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "eT" = (
-/obj/structure/flora/pottedplant/orientaltree,
 /obj/machinery/light_switch{
 	pixel_x = 24;
 	pixel_y = -6
@@ -1915,6 +1914,7 @@
 	pixel_x = 24;
 	pixel_y = 6
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "eU" = (
@@ -6937,7 +6937,7 @@
 	pixel_x = -24;
 	pixel_y = 6
 	},
-/obj/structure/flora/pottedplant/smelly,
+/obj/structure/holoplant/steve,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "py" = (
@@ -7060,10 +7060,10 @@
 /area/crew_quarters/heads/office/cmo)
 "pM" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
-/obj/structure/flora/pottedplant/overgrown,
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "pQ" = (
@@ -9483,8 +9483,8 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/structure/flora/pottedplant/large,
 /obj/effect/floor_decal/corner/b_green/diagonal,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
 "uk" = (
@@ -9495,7 +9495,7 @@
 	icon_state = "tube1";
 	dir = 8
 	},
-/obj/structure/flora/pottedplant/large,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "ul" = (
@@ -9857,12 +9857,12 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/bridge/fore)
 "uW" = (
-/obj/structure/flora/pottedplant/unusual,
 /obj/effect/floor_decal/corner/b_green/diagonal{
 	tag = "icon-corner_white_diagonal (EAST)";
 	icon_state = "corner_white_diagonal";
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "uX" = (
@@ -12000,8 +12000,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/flora/pottedplant/fern,
 /obj/effect/floor_decal/corner/blue/mono,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Be" = (
@@ -12343,7 +12343,7 @@
 	dir = 4;
 	pixel_x = 26
 	},
-/obj/structure/flora/pottedplant/bamboo,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "Df" = (
@@ -13042,9 +13042,7 @@
 	icon_state = "corner_white";
 	dir = 8
 	},
-/obj/structure/flora/pottedplant/sticky{
-	name = "sticky potted plant"
-	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ho" = (
@@ -13416,7 +13414,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
 	},
-/obj/structure/flora/pottedplant/unusual,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ik" = (

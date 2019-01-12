@@ -1160,6 +1160,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/lino,
 /area/command/captainmess)
 "dU" = (
@@ -1775,7 +1776,6 @@
 	pixel_x = -25;
 	pixel_y = 0
 	},
-/obj/structure/flora/pottedplant/large,
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
 	dir = 1
@@ -1784,6 +1784,7 @@
 	icon_state = "corner_white";
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/fore)
 "gb" = (
@@ -11976,8 +11977,18 @@
 /area/shield/fourthdeck)
 "OZ" = (
 /obj/structure/table/marble,
-/obj/structure/flora/pottedplant/deskferntrim{
-	pixel_y = 4
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+	pixel_x = -5;
+	pixel_y = 9
+	},
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+	pixel_x = 7;
+	pixel_y = 5;
+	pixel_z = 0
+	},
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+	pixel_x = -1;
+	pixel_y = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)

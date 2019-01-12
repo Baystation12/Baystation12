@@ -16655,7 +16655,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/flora/pottedplant/unusual,
+/obj/structure/holoplant,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "VO" = (

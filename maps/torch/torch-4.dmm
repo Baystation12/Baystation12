@@ -6871,10 +6871,10 @@
 	icon_state = "bordercolorhalf";
 	dir = 1
 	},
-/obj/structure/flora/pottedplant/bamboo,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "avL" = (
@@ -9357,7 +9357,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/flora/pottedplant/minitree,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/breakroom)
 "aEx" = (
@@ -17525,7 +17525,6 @@
 /turf/simulated/wall/prepainted,
 /area/security/brig)
 "eeb" = (
-/obj/structure/table/standard,
 /obj/machinery/button/windowtint{
 	id = "recov_windows";
 	pixel_x = -12;
@@ -17538,12 +17537,10 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 5
 	},
-/obj/structure/flora/pottedplant/small{
-	pixel_y = 10
-	},
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "efb" = (
@@ -24577,7 +24574,7 @@
 /turf/simulated/floor/carpet,
 /area/medical/mentalhealth)
 "lTb" = (
-/obj/structure/flora/pottedplant/flower,
+/obj/structure/holoplant,
 /turf/simulated/floor/carpet,
 /area/medical/mentalhealth)
 "lUb" = (
@@ -25045,11 +25042,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/foreport)
 "mwb" = (
-/obj/structure/flora/pottedplant/orientaltree,
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "mww" = (
