@@ -7,15 +7,15 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 	name = "Change End Credits Title"
 
 /datum/admin_secret_item/fun_secret/change_credits_song/do_execute()
-	var/list/sounds = file2list("sound/serversound_list.txt");
-	sounds += "Cancel"
-	sounds += sounds_cache
+	var/list/sounds = subtypesof(/music_track)
+	sounds += "Cancel"	
 
-	GLOB.end_credits_song = input("Select a sound from the server to play", "Server sound list", "Cancel") in sounds
+	var/music_track/selected = input("Select a music track for the credits.", "Server music list", "Cancel") in sounds
 
-	if(GLOB.end_credits_song == "Cancel")
-		GLOB.end_credits_song = null
-
+	if(selected != "Cancel")
+		var/music_track/track = decls_repository.get_decl(selected)
+		GLOB.end_credits_song = track.song
+	
 	SSstatistics.add_field_details("admin_verb","CECS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admin_secret_item/fun_secret/change_credits_title/do_execute()

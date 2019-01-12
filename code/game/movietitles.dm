@@ -28,7 +28,7 @@ client
 			if(GLOB.end_credits_song == null)
 				var/title_song = pick('sound/music/THUNDERDOME.ogg', 'sound/music/europa/Chronox_-_03_-_In_Orbit.ogg', 'sound/music/europa/asfarasitgets.ogg')
 				sound_to(mob, sound(title_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
-			else if(get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
+			else if(get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)				
 				sound_to(mob, sound(GLOB.end_credits_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
 	sleep(50)
 	var/list/_credits = credits
@@ -184,38 +184,27 @@ client
 		if(!C.holder)
 			continue
 		if(C.holder.rank == "Host")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(hostjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, hostjobs)
 		else if(C.holder.rank == "HeadAdmin")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(headjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, headjobs)
 		else if(C.holder.rank == "HeadDeveloper")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(headdevjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
-		else if(C.holder.rank == "LoreManager")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(loremanagerjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, headdevjobs)
 		else if(C.holder.rank == "StaffManager")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(staffmanagerjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C,staffmanagerjobs)
+		else if(C.holder.rank == "LoreManager")
+			staff += GenerateStaffCredits(C, loremanagerjobs)
 		else if(C.holder.rank == "SeniorAdmin")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(senioradminjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, senioradminjobs)
 		else if(C.holder.rank == "GameAdmin")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(adminjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
-		else if(C.holder.rank == "TrialAdmin")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(trialminjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, adminjobs)
 		else if(C.holder.rank == "Developer" || C.holder.rank == "DevAdmin")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(devjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, devjobs)
+		else if(C.holder.rank == "TrialAdmin")
+			staff += GenerateStaffCredits(C, trialminjobs)
 		else if(C.holder.rank == "Moderator")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(modjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, modjobs)
 		else if(C.holder.rank == "TrialModerator")
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-			staff += "[uppertext(pick(trialmodjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+			staff += GenerateStaffCredits(C, trialmodjobs)
 	titles += "<center>[jointext(staff,"<br>")]</center>"
 
 	var/disclaimer = "Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>"
@@ -237,3 +226,7 @@ client
 	titles += "<center>[disclaimer]</center>"
 
 	return titles
+
+/proc/GenerateStaffCredits(var/client/C, var/list/titles)
+	var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+	return "[uppertext(pick(titles))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
