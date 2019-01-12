@@ -2,6 +2,16 @@
 /datum/job/covenant
 	loadout_allowed = FALSE
 
+/datum/job/covenant/sangheili_shipmaster
+	title = "Sangheili - Shipmaster"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
+	access = list(240,250)
+	spawnpoint_override = "Sangheili Corvette Spawn"
+	is_whitelisted = 1
+
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
 	total_positions = 1

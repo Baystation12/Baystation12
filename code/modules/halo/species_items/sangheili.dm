@@ -349,6 +349,31 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "zealot_gloves_obj"
 	item_state = "zealot_gloves"
+/////
+/obj/item/clothing/head/helmet/sangheili/shipmaster
+	name = "Sangheili Helmet (Shipmaster)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "zealot_helm_obj"
+	item_state = "zealot_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/shipmaster
+	name = "Sangheili Combat Harness (Shipmaster)"
+	icon_state = "zealot_chest_obj"
+	item_state = "zealot_chest"
+	totalshields = 200
+
+/obj/item/clothing/shoes/sangheili/shipmaster
+	name = "Sanghelli Leg Armour (Shipmaster)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "zealot_legs_obj"
+	item_state = "zealot_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/shipmaster
+	name = "Sanghelli Combat Gauntlets (Shipmaster)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "zealot_gloves_obj"
+	item_state = "zealot_gloves"
 
 /obj/item/clothing/head/helmet/sangheili/specops
 	name = "Sangheili Helmet (Spec-Ops)"
