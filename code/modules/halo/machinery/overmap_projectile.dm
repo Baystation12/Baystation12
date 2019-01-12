@@ -155,7 +155,7 @@
 	spawn(TRACK_PROJECTILE_IMPACT_RESET_DELAY)
 		source_console.currently_tracked_proj = null
 		if(firer_using_console())
-			firer.reset_view(firer)
+			firer.reset_view(map_sectors["[source_console.z]"])
 		qdel()
 
 //Base Ship Damage Projectile//
