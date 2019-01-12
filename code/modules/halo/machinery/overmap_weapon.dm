@@ -18,11 +18,20 @@
 	set desc = "Toggle the usage of long-range ordinance tracking sensors."
 	set category = "Object"
 
+	set src in view(1)
+
+	var/mob/living/u = usr
+	if(!istype(u))
+		return
+
+	visible_message("[u] switches [name]'s ordinance tracking systems to [do_track_fired_proj ? "off" : "on"].")
+
 	do_track_fired_proj = !do_track_fired_proj
 	currently_tracked_proj = null
-	user.reset_view(null)
+	u.reset_view(null)
 
 /obj/machinery/overmap_weapon_console/attack_hand(var/mob/user)
+	scan_linked_devices()
 	equip_aim_tool(user)
 
 /obj/machinery/overmap_weapon_console/proc/scan_linked_devices() //Overriden on a weapon-by-weapon basis
@@ -89,7 +98,7 @@
 	if(isnull(fire_sound))
 		return
 
-	playsound(loc_sound_origin, fire_sound, 100, 1, 5, 5,1)
+	playsound(loc_sound_origin, fire_sound, 50, 1, 5, 5,1)
 
 /obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
