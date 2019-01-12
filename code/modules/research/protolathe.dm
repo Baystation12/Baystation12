@@ -110,23 +110,23 @@
 		return 1
 
 	var/obj/item/stack/material/stack = O
+
 	var/amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
 
-	var/t = stack.material.name
-	overlays += "protolathe_[t]"
+	var/image/I = image(icon, "protolathe_stack")
+	I.color = stack.material.icon_colour
+	overlays += I
 	spawn(10)
-		overlays -= "protolathe_[t]"
+		overlays -= I
 
 	busy = 1
 	use_power_oneoff(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
-	if(t)
-		if(do_after(user, 16,src))
-			if(stack.use(amount))
-				to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
-				materials[t] += amount * SHEET_MATERIAL_AMOUNT
+	if(do_after(user, 16,src))
+		if(stack.use(amount))
+			to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
+			materials[stack.material.name] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()
-	return
 
 /obj/machinery/r_n_d/protolathe/proc/addToQueue(var/datum/design/D)
 	queue += D
