@@ -11,6 +11,7 @@
 	#include "achlys_overmap.dm"
 	#include "unsc_dante_Z2.dmm"
 	#include "unsc_dante_Z1.dmm"
+	#include "unsc_achlys_Z1.dmm"
 
 	#include "../../code/modules/halo/lobby_music/flood.dm"
 
