@@ -8,8 +8,19 @@
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap
 	var/sound/fire_sound = null
 	var/requires_ammo = 0
+	var/do_track_fired_proj = 0
+	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
+
+/obj/machinery/overmap_weapon_console/verb/toggle_projectile_tracking()
+	set name = "Toggle Ordinance Visual Tracking"
+	set desc = "Toggle the usage of long-range ordinance tracking sensors."
+	set category = "Object"
+
+	do_track_fired_proj = !do_track_fired_proj
+	currently_tracked_proj = null
+	user.reset_view(null)
 
 /obj/machinery/overmap_weapon_console/attack_hand(var/mob/user)
 	equip_aim_tool(user)
