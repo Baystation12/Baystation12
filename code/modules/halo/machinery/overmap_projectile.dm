@@ -82,14 +82,13 @@
 
 	if(console_fired_by.do_track_fired_proj && isnull(console_fired_by.currently_tracked_proj))
 		var/obj/item/projectile/camera_track/camera_track_proj = new /obj/item/projectile/camera_track (proj_spawn_loc)
+		console_fired_by.currently_tracked_proj = camera_track_proj
 		camera_track_proj.firer = firer
 		camera_track_proj.penetrating = new_proj.penetrating
 		camera_track_proj.source_console = console_fired_by
 		camera_track_proj.launch(proj_end_loc)
 
 	new_proj.launch(proj_end_loc)
-
-
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
 	var/obj/effect/overmap/overmap_object = impacted
@@ -126,10 +125,11 @@
 	invisibility = 101
 	step_delay = 0.7
 	nodamage = 1
-	var/obj/source_console
+	var/obj/machinery/overmap_weapon_console/source_console
 
 /obj/item/projectile/camera_track/proc/firer_using_console()
-	if(firer.Adjacent(source_console))
+	var/mob/living/carbon/human/firer_h = firer
+	if(istype(firer_h.l_hand,/obj/item/weapon/gun/aim_tool) || istype(firer_h.r_hand,/obj/item/weapon/gun/aim_tool))
 		return 1
 	return 0
 
@@ -138,11 +138,25 @@
 		firer.reset_view(src)
 	. = ..()
 
-/obj/item/projectile/camera_track/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/camera_track/on_impact(var/atom/impacted)
+	if(impacted.loc == null || loc == null)
+		return ..()
+	var/obj/item/projectile/camera_track/r = new /obj/item/projectile/camera_track/residual (loc)
+	r.firer = firer
+	r.penetrating = penetrating
+	r.source_console = source_console
+	r.original = impacted
+	firer.reset_view(firer)
+	firer.reset_view(r)
+	r.launch(original)
+	. = ..()
+
+/obj/item/projectile/camera_track/residual/launch() //This is left over for a short time when camera_track projectiles impact other objects.
 	spawn(TRACK_PROJECTILE_IMPACT_RESET_DELAY)
+		source_console.currently_tracked_proj = null
 		if(firer_using_console())
-			firer.reset_view(null)
-		. = ..()
+			firer.reset_view(firer)
+		qdel()
 
 //Base Ship Damage Projectile//
 
