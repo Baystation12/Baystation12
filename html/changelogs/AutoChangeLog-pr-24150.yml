@@ -1,5 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - tweak: "The \"Set transfer amount\" verb's range is now one tile, so now you don't have to be carrying them to set it anymore."
-  - bugfix: "ghosts and unconscious can no longer invoke the set transfer amount verb on containers and IVs."

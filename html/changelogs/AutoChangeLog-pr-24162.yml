@@ -1,4 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - tweak: "Gas sensors in atmos and waste tank now display all gas contents that they can identify."

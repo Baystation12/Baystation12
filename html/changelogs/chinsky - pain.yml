@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Falling down zlevels now has a chance to dislocate feet/arms. Athletic skill mitigates it, Trained and above are safe."
-  - tweak: "Setting dislocated limbs now requires Medicine skill to be reliable, especially for self-setting. Basic skill is enough for ~90% success rate, Trained is guaranteed or your money back."
-  - tweak: "Walking on fractured or dislocated limbs now applies additional pain to that limb. Rest a bit for it to clear up or use a cane."
