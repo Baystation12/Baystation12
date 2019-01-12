@@ -16,6 +16,11 @@
 	if(isnull(control_tag))
 		control_tag = "deck_gun_control - [z]"
 
+/obj/machinery/overmap_weapon_console/toggle_projectile_tracking()
+	. = ..()
+	for(var/obj/machinery/overmap_weapon_console/deck_gun_control/console in linked_devices)
+		console.do_track_fired_proj = do_track_fired_proj
+
 /obj/machinery/overmap_weapon_console/deck_gun_control/aim_tool_attackself(var/mob/user)
 	for(var/obj/machinery/overmap_weapon_console/ctrl in linked_devices)
 		ctrl.aim_tool_attackself(user)
