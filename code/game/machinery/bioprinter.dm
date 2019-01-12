@@ -33,9 +33,9 @@
 /obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
-		overlays += "bioprinter_panel_open"
+		overlays += "[icon_state]_panel_open"
 	if(printing)
-		overlays += "bioprinter_working"
+		overlays += "[icon_state]_working"
 
 /obj/machinery/organ_printer/New()
 	..()
