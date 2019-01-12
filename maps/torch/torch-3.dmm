@@ -9092,7 +9092,8 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "co2_sensor"
+	id_tag = "co2_sensor";
+	output = 127
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/engineering/atmos)
@@ -10381,7 +10382,8 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "n2_sensor"
+	id_tag = "n2_sensor";
+	output = 127
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/engineering/atmos)
@@ -10748,7 +10750,8 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "n2o_sensor"
+	id_tag = "n2o_sensor";
+	output = 127
 	},
 /turf/simulated/floor/reinforced/n20,
 /area/engineering/atmos)
@@ -11605,7 +11608,8 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "o2_sensor"
+	id_tag = "o2_sensor";
+	output = 127
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/engineering/atmos)
@@ -13180,7 +13184,8 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "waste_sensor"
+	id_tag = "waste_sensor";
+	output = 127
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/wastetank)
@@ -15847,7 +15852,8 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "tox_sensor"
+	id_tag = "tox_sensor";
+	output = 127
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/engineering/atmos)
