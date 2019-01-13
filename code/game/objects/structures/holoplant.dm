@@ -3,7 +3,7 @@
 	desc = "One of those famous Aster's holoplants! Add to your space a bit of the comfort from old Earth, by buying this blue buddy. A nuclear battery and a rugged case guarantee that your flower will survive journey to another galaxy, and variety of plant types won't let you to get bored along the way!"
 	icon = 'icons/obj/holoplants.dmi'
 	icon_state = "holopot"
-	var/brightness_on = 4
+	var/brightness_on = 0.5
 	var/emaged = FALSE
 	var/interference = FALSE
 	var/icon/plant = null
