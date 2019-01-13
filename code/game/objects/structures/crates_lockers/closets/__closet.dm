@@ -1,17 +1,10 @@
 /obj/structure/closet
 	name = "closet"
 	desc = "It's a basic storage unit."
-	icon = 'icons/obj/closet.dmi'
-	icon_state = "closed"
+	icon = 'icons/obj/closets/bases/closet.dmi'
+	icon_state = "base"
 	density = 1
 	w_class = ITEM_SIZE_NO_CONTAINER
-
-	var/icon_closed = "closed"
-	var/icon_opened = "open"
-
-	var/icon_locked
-	var/icon_broken = "sparks"
-	var/icon_off
 
 	var/welded = 0
 	var/large = 1
@@ -25,6 +18,7 @@
 
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup = CLOSET_CAN_BE_WELDED
+	var/closet_appearance = /decl/closet_appearance
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
 	var/broken = FALSE
@@ -36,6 +30,13 @@
 
 	if((setup & CLOSET_HAS_LOCK))
 		verbs += /obj/structure/closet/proc/togglelock_verb
+
+	if(ispath(closet_appearance))
+		var/decl/closet_appearance/app = decls_repository.get_decl(closet_appearance)
+		if(app)
+			icon = app.icon
+			color = null
+			queue_icon_update()
 
 	return INITIALIZE_HINT_LATELOAD
 
@@ -387,21 +388,19 @@
 	else
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
 
-/obj/structure/closet/on_update_icon()//Putting the welded stuff in update_icon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
-	overlays.Cut()
-
-	if(!opened)
-		if(broken && icon_off)
-			icon_state = icon_off
-			overlays += icon_broken
-		else if((setup & CLOSET_HAS_LOCK) && locked && icon_locked)
-			icon_state = icon_locked
-		else
-			icon_state = icon_closed
-		if(welded)
-			overlays += "welded"
+/obj/structure/closet/on_update_icon()
+	if(opened)
+		icon_state = "open"
+		overlays.Cut()
 	else
-		icon_state = icon_opened
+		if(broken)
+			icon_state = "closed_emagged[welded ? "_welded" : ""]"
+		else
+			if(locked)
+				icon_state = "closed_locked[welded ? "_welded" : ""]"
+			else
+				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
+			overlays.Cut()
 
 /obj/structure/closet/take_damage(damage)
 	health -= damage

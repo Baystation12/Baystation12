@@ -998,6 +998,28 @@ var/global/floorIsLava = 0
 
 	return 0
 
+/datum/admins/proc/mass_debug_closet_icons()
+
+	set name = "Mass Debug Closet Icons"
+	set desc = "Spawn every possible custom closet. Do not do this on live."
+	set category = "Debug"
+
+	if(!check_rights(R_SPAWN))	
+		return
+
+	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")
+		log_admin("[key_name(usr)] mass-spawned closets (icon debug), if this is a live server you should yell at them.")
+		var/x = 0
+		var/y = 0
+		for(var/check_appearance in typesof(/decl/closet_appearance))
+			x++
+			if(x > 10)
+				x = 0
+				y++
+			var/turf/T = locate(usr.x+x, usr.y+y, usr.z)
+			if(T)
+				new /obj/structure/closet/debug(T, check_appearance)
+
 /datum/admins/proc/spawn_fruit(seedtype in SSplants.seeds)
 	set category = "Debug"
 	set desc = "Spawn the product of a seed."

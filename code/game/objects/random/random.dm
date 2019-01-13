@@ -430,8 +430,8 @@
 obj/random/closet //A couple of random closets to spice up maint
 	name = "random closet"
 	desc = "This is a random closet."
-	icon = 'icons/obj/closet.dmi'
-	icon_state = "syndicate1"
+	icon = 'icons/obj/closets/bases/closet.dmi'
+	icon_state = "base"
 
 obj/random/closet/spawn_choices()
 	return list(/obj/structure/closet,

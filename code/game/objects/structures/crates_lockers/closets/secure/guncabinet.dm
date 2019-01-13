@@ -2,12 +2,7 @@
 	name = "gun cabinet"
 	req_access = list(access_armory)
 	icon = 'icons/obj/guncabinet.dmi'
-	icon_state = "base"
-	icon_off ="base"
-	icon_broken ="base"
-	icon_locked ="base"
-	icon_closed ="base"
-	icon_opened = "base"
+	closet_appearance = null
 
 /obj/structure/closet/secure_closet/guncabinet/Initialize()
 	. = ..()
@@ -50,10 +45,9 @@
 		if(welded)
 			overlays += icon(src.icon,"welded")
 
-		if(broken)
-			overlays += icon(src.icon,"broken")
-		else if (locked)
-			overlays += icon(src.icon,"locked")
-		else
-			overlays += icon(src.icon,"open")
+		if(!broken)
+			if(locked)
+				overlays += icon(src.icon,"locked")
+			else
+				overlays += icon(src.icon,"open")
 

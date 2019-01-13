@@ -1,0 +1,4 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "Locker icons now use a runtime-based system. This should have no player-facing impact other than the cosmetic effects of new locker icons."
