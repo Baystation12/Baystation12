@@ -2,10 +2,11 @@
 
 /obj/item/weapon/armor_patch
 	name ="\improper Armor Repair Kit"
-	desc ="A simple, limited-use kit that allows armor to be patched up, restoring a portion of the protection it usually affords."
+	desc ="A small, simple, limited-use kit that allows armor to be patched up, restoring a portion of the protection it usually affords."
 	icon = 'code/modules/halo/clothing/armor_repair/armor_repair_sprites.dmi'
 	icon_state = "armor_patch"
 	w_class = ITEM_SIZE_NORMAL
+	slot_flags = SLOT_BELT | SLOT_POCKET
 	var/repair_supplies = 10 //The amount of armor damage this patch can repair
 
 /obj/item/weapon/armor_patch/examine(var/mob/examiner)
