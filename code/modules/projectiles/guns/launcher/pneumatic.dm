@@ -1,6 +1,7 @@
 /obj/item/weapon/gun/launcher/pneumatic
 	name = "pneumatic cannon"
 	desc = "A large gas-powered cannon."
+	icon = 'icons/obj/guns/pneumatic.dmi'
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
@@ -138,6 +139,7 @@
 /obj/item/weapon/cannonframe
 	name = "pneumatic cannon frame"
 	desc = "A half-finished pneumatic cannon."
+	icon = 'icons/obj/guns/pneumatic.dmi'
 	icon_state = "pneumatic0"
 	item_state = "pneumatic"
 

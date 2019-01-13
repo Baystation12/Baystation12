@@ -49,7 +49,7 @@
 	ammo_name = "spike"
 	ammo_type = /obj/item/weapon/spike
 	release_force = 30
-	icon = 'icons/obj/gun.dmi'
+	icon = 'icons/obj/guns/spikethrower.dmi'
 	icon_state = "spikethrower3"
 	item_state = "spikethrower"
 	fire_sound_text = "a strange noise"
