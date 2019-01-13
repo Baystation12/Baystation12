@@ -45,13 +45,14 @@
 /datum/npc_ship_request/cargo_call/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source)
 	..()
 	if(cargo_call_target)
-		if(on_call)
-			ship_source.target_loc = null
-			return 1
 		if(ship_source.loc == cargo_call_target.loc)
-			to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.\"</span>")
-			ship_source.target_loc = null
-			on_call = 1
+			if(!on_call)
+				to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.\"</span>")
+				ship_source.target_loc = null
+				time_leave_at = world.time + BASE_CARGO_STAY_TIME
+				on_call = 1
+			else
+				ship_source.target_loc = null
 			if(time_leave_at != 0 && !already_warned && world.time > time_leave_at-warn_depart_time)
 				to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.\"</span>")
 			if(time_leave_at != 0 && world.time > time_leave_at)
@@ -62,8 +63,8 @@
 		else
 			ship_source.target_loc = cargo_call_target.loc
 
-		walk(ship_source,get_dir(ship_source,ship_source.target_loc),ship_source.move_delay)
-		ship_source.dir = get_dir(ship_source,ship_source.target_loc)
+			walk(ship_source,get_dir(ship_source,ship_source.target_loc),ship_source.move_delay)
+			ship_source.dir = get_dir(ship_source,ship_source.target_loc)
 
 		return 1 //Don't let any normal move-processing happen.
 
