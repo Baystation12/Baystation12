@@ -442,6 +442,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/megaphone(src)
 	src.modules += new /obj/item/device/holowarrant(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
+	src.modules += new /obj/item/device/hailer(src)
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	..()
 
