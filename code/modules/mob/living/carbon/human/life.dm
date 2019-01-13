@@ -113,14 +113,18 @@
 
 	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
 
+	if(head && (head.item_flags & STOPPRESSUREDAMAGE) && wear_suit && (wear_suit.item_flags & STOPPRESSUREDAMAGE))
+		pressure_adjustment_coefficient -= 0.4 //A full set reduces it to 0
+
 	if(head && head.item_flags & STOPPRESSUREDAMAGE)
-		pressure_adjustment_coefficient -= THERMAL_PROTECTION_HEAD
+		pressure_adjustment_coefficient -= 0.3 //But each one has it's own, lower effect.
+		//Value chosen to reduce the pressure damage down one level but not remove the warning
 
 	if(wear_suit && (wear_suit.item_flags & STOPPRESSUREDAMAGE))
-		if(wear_suit.body_parts_covered & HEAD)
-			pressure_adjustment_coefficient = 1
+		if(wear_suit.cold_protection & HEAD) //Cold protected areas on a sealed suit are also probably pressure-sealed
+			pressure_adjustment_coefficient = 0
 		else
-			pressure_adjustment_coefficient -= (1 - THERMAL_PROTECTION_HEAD)
+			pressure_adjustment_coefficient -= 0.3
 
 		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
 		if(istype(wear_suit,/obj/item/clothing/suit/space))
