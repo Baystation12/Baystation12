@@ -155,7 +155,7 @@
 			crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = get_organ(organ_name)
-		if(E.is_dislocated() || E.is_broken())
+		if(E && (E.is_dislocated() || E.is_broken()))
 			if(crutches)
 				crutches--
 			else
