@@ -64,8 +64,6 @@
 /datum/flood_spawner/proc/spawn_flood()
 	if(!owner || !owner.loc)
 		return 0
-	//disable infector spawning
-	return 0
 
 	var/mob/living/simple_animal/hostile/flood/F
 	var/spawn_type = pick(spawn_pool)
