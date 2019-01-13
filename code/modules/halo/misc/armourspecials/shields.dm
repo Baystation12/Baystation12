@@ -32,12 +32,45 @@
 	var/armour_state = SHIELD_IDLE
 	var/tick_recharge = 30
 	var/intercept_chance = 100
+	var/eva_mode_active = 0
 
 /datum/armourspecials/shields/New(var/obj/item/clothing/suit/armor/special/c) //Needed the type path for typecasting to use the totalshields var.
 	connectedarmour = c
 	totalshields = connectedarmour.totalshields
 	shieldstrength = totalshields
 	armourvalue = connectedarmour.armor
+	add_evamode_verb()
+
+/datum/armourspecials/shields/proc/add_evamode_verb() //Proc-ified to allow subtypes to disable EVA mode.
+	connectedarmour.verbs += /datum/armourspecials/shields/proc/toggle_eva_mode
+
+/datum/armourspecials/shields/proc/toggle_eva_mode()
+	set name = "Toggle Shield EVA Mode"
+	set category = "Object"
+
+	var/mob/living/toggler = usr
+	if(!istype(toggler))
+		return
+
+	eva_mode_active = !eva_mode_active
+	if(eva_mode_active)
+		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising atmospheric and pressure containment.")
+		totalshields = connectedarmour.totalshields /4
+		shieldstrength = 0
+		connectedarmour.item_flags |= STOPPRESSUREDAMAGE
+		connectedarmour.item_flags |= AIRTIGHT
+		connectedarmour.min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+		connectedarmour.cold_protection = FULL_BODY
+		connectedarmour.body_parts_covered = FULL_BODY
+	else
+		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising defense.")
+		totalshields = connectedarmour.totalshields
+		shieldstrength = 0
+		armourvalue = connectedarmour.armor
+		connectedarmour.item_flags = initial(connectedarmour.item_flags)
+		connectedarmour.min_cold_protection_temperature = initial(connectedarmour.min_cold_protection_temperature)
+		connectedarmour.cold_protection = initial(connectedarmour.cold_protection)
+		connectedarmour.body_parts_covered = initial(connectedarmour.body_parts_covered)
 
 /datum/armourspecials/shields/update_mob_overlay(var/image/generated_overlay)
 	mob_overlay = generated_overlay
