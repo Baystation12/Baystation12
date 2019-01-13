@@ -43,6 +43,7 @@
 	name = MATERIAL_QUARTZ
 	ore_compresses_to = MATERIAL_QUARTZ
 	ore_name = "quartz"
+	opacity = 0.5
 	ore_result_amount = 10
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"

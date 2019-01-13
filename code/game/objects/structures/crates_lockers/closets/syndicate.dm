@@ -135,7 +135,7 @@
 		/obj/item/stack/material/uranium,
 		/obj/item/stack/material/diamond,
 		/obj/item/stack/material/plasteel,
-		/obj/item/stack/rods
+		/obj/item/stack/material/rods
 		)
 
 

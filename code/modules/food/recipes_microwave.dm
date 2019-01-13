@@ -334,7 +334,7 @@ I said no!
 
 /datum/recipe/meatkabob
 	items = list(
-		/obj/item/stack/rods,
+		/obj/item/stack/material/rods,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 	)
@@ -342,7 +342,7 @@ I said no!
 
 /datum/recipe/tofukabob
 	items = list(
-		/obj/item/stack/rods,
+		/obj/item/stack/material/rods,
 		/obj/item/weapon/reagent_containers/food/snacks/tofu,
 		/obj/item/weapon/reagent_containers/food/snacks/tofu,
 	)

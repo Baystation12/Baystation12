@@ -527,7 +527,7 @@ obj/random/closet/spawn_choices()
 /obj/random/material //Random materials for building stuff
 	name = "random material"
 	desc = "This is a random material."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/materials.dmi'
 	icon_state = "sheet-metal"
 
 /obj/random/material/spawn_choices()
@@ -537,7 +537,7 @@ obj/random/closet/spawn_choices()
 				/obj/item/stack/material/plastic/ten,
 				/obj/item/stack/material/wood/ten,
 				/obj/item/stack/material/cardboard/ten,
-				/obj/item/stack/rods/ten,
+				/obj/item/stack/material/rods/ten,
 				/obj/item/stack/material/plasteel/ten,
 				/obj/item/stack/material/steel/fifty,
 				/obj/item/stack/material/glass/fifty,
@@ -545,7 +545,7 @@ obj/random/closet/spawn_choices()
 				/obj/item/stack/material/plastic/fifty,
 				/obj/item/stack/material/wood/fifty,
 				/obj/item/stack/material/cardboard/fifty,
-				/obj/item/stack/rods/fifty,
+				/obj/item/stack/material/rods/fifty,
 				/obj/item/stack/material/plasteel/fifty)
 
 /obj/random/soap
