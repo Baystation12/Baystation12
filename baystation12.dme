@@ -1438,6 +1438,8 @@
 #include "code\modules\halo\clothing\urc_commando_variants.dm"
 #include "code\modules\halo\clothing\urf_commando.dm"
 #include "code\modules\halo\clothing\urf_commando_sets.dm"
+#include "code\modules\halo\clothing\armor_repair\armor_patch.dm"
+#include "code\modules\halo\clothing\armor_repair\repair_bench.dm"
 #include "code\modules\halo\comms\channel_keys.dm"
 #include "code\modules\halo\comms\commsitems.dm"
 #include "code\modules\halo\comms\covenant_comms.dm"
