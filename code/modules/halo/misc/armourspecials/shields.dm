@@ -55,11 +55,6 @@
 		connectedarmour.item_flags |= AIRTIGHT
 		connectedarmour.min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 		connectedarmour.cold_protection = FULL_BODY //There's probably a better way to do this, but I'm not sure of the correct use of the operators.
-		connectedarmour.cold_protection |= HEAD
-		connectedarmour.cold_protection |= FACE
-		connectedarmour.body_parts_covered = FULL_BODY
-		connectedarmour.body_parts_covered |= HEAD
-		connectedarmour.body_parts_covered |= FACE
 
 	else
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising defense.")
@@ -69,7 +64,6 @@
 		connectedarmour.item_flags = initial(connectedarmour.item_flags)
 		connectedarmour.min_cold_protection_temperature = initial(connectedarmour.min_cold_protection_temperature)
 		connectedarmour.cold_protection = initial(connectedarmour.cold_protection)
-		connectedarmour.body_parts_covered = initial(connectedarmour.body_parts_covered)
 
 /datum/armourspecials/shields/update_mob_overlay(var/image/generated_overlay)
 	mob_overlay = generated_overlay
