@@ -13,9 +13,9 @@
 	var/set_plant
 	var/global/list/possible_plants = list(
 		"plant-1",
-		"plant-2",
-		"plant-4",
-		"plant-6",
+		"plant-02",
+		"plant-04",
+		"plant-06",
 		"plant-09",
 		"plant-10",
 		"plant-14",
