@@ -42,17 +42,11 @@
 	add_evamode_verb()
 
 /datum/armourspecials/shields/proc/add_evamode_verb() //Proc-ified to allow subtypes to disable EVA mode.
-	connectedarmour.verbs += /datum/armourspecials/shields/proc/toggle_eva_mode
+	connectedarmour.verbs += /obj/item/clothing/suit/armor/special/proc/toggle_eva_mode
 
-/datum/armourspecials/shields/proc/toggle_eva_mode()
-	set name = "Toggle Shield EVA Mode"
-	set category = "Object"
+/datum/armourspecials/shields/proc/toggle_eva_mode(var/mob/toggler)
 
-	var/mob/living/toggler = usr
-	if(!istype(toggler))
-		return
-
-	eva_mode_active = !eva_mode_active
+	src.eva_mode_active = !src.eva_mode_active
 	if(eva_mode_active)
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising atmospheric and pressure containment.")
 		totalshields = connectedarmour.totalshields /4
@@ -60,8 +54,13 @@
 		connectedarmour.item_flags |= STOPPRESSUREDAMAGE
 		connectedarmour.item_flags |= AIRTIGHT
 		connectedarmour.min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-		connectedarmour.cold_protection = FULL_BODY
+		connectedarmour.cold_protection = FULL_BODY //There's probably a better way to do this, but I'm not sure of the correct use of the operators.
+		connectedarmour.cold_protection |= HEAD
+		connectedarmour.cold_protection |= FACE
 		connectedarmour.body_parts_covered = FULL_BODY
+		connectedarmour.body_parts_covered |= HEAD
+		connectedarmour.body_parts_covered |= FACE
+
 	else
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising defense.")
 		totalshields = connectedarmour.totalshields
