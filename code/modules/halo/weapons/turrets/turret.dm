@@ -89,10 +89,10 @@
 
 /obj/structure/turret/proc/remove_manning_gun()
 	if(mob_manning.l_hand && (mob_manning.l_hand.type == turret_gun))
-		mob_manning.drop_from_inventory(l_hand)
+		mob_manning.drop_from_inventory(mob_manning.l_hand)
 		qdel(mob_manning.l_hand)
 	if(mob_manning.r_hand && (mob_manning.r_hand.type == turret_gun))
-		mob_manning.drop_from_inventory(r_hand)
+		mob_manning.drop_from_inventory(mob_manning.r_hand)
 		qdel(mob_manning.r_hand)
 
 
