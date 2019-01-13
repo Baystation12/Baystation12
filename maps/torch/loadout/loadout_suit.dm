@@ -17,10 +17,10 @@
 	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
 
 /datum/gear/suit/medical_poncho
-	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/explorermedic, /datum/job/merchant)
 
 /datum/gear/suit/engineering_poncho
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/explorerengineer, /datum/job/merchant)
 
 /datum/gear/suit/science_poncho
 	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant)

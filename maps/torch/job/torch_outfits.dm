@@ -538,6 +538,38 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	pda_type = /obj/item/modular_computer/pda/explorer
 	l_ear = /obj/item/device/radio/headset/exploration
 
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorermedic
+	name = OUTFIT_JOB_NAME("Exploration Medic")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorermedic
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/exploration/medic
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorerengineer
+	name = OUTFIT_JOB_NAME("Exploration Engineer")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorerengineer
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/exploration/engineer
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorersentinel
+	name = OUTFIT_JOB_NAME("Exploration Sentinel")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorersentinel
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/exploration
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorersentinel/fleet
+	name = OUTFIT_JOB_NAME("Exploration Sentinel - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/exploration
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorersentinel/contractor
+	name = OUTFIT_JOB_NAME("Exploration Sentinel - Contractor")
+	uniform = /obj/item/clothing/under/rank/dispatch
+
 /decl/hierarchy/outfit/job/torch/crew/exploration/pilot
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration

@@ -99,6 +99,16 @@
 	icon_state = "exp_headset_alt"
 	item_state = "exp_headset_alt"
 
+/obj/item/device/radio/headset/exploration/medic
+	name = "exploration medic's headset"
+	desc = "A headset for real tools, with access to the exploration and medical channels. It has an inbuilt subspace antenna for better reception."
+	ks1type = /obj/item/device/encryptionkey/exploration/medic
+
+/obj/item/device/radio/headset/exploration/engineer
+	name = "exploration engineer's headset"
+	desc = "A headset for real tools, with access to the exploration and engineering channels. It has an inbuilt subspace antenna for better reception."
+	ks1type = /obj/item/device/encryptionkey/exploration/engineer
+
 /obj/item/device/radio/headset/pathfinder
 	name = "pathfinder's headset"
 	desc = "A headset with access to the command and exploration channels. It has an inbuilt subspace antenna for better reception."

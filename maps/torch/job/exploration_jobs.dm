@@ -25,7 +25,7 @@
 	                    SKILL_WEAPONS     = SKILL_EXPERT)
 	skill_points = 22
 
-	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_explorermedic, access_explorerengineer, access_explorersentinel, access_cent_creed)
 
 	software_on_spawn = list(/datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
@@ -70,8 +70,8 @@
 	title = "Explorer"
 	department = "Exploration"
 	department_flag = EXP
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
 	ideal_character_age = 20
@@ -95,3 +95,122 @@
 
 /datum/job/explorer/get_description_blurb()
 	return "You are an Explorer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully."
+
+/datum/job/explorermedic
+	title = "Exploration Medic"
+	department = "Exploration"
+	department_flag = EXP
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	selection_color = "#68099e"
+	ideal_character_age = 25
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorermedic
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5
+	)
+	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
+	                    SKILL_MEDICAL = SKILL_ADEPT,
+	                    SKILL_ANATOMY = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT   = SKILL_MAX,
+	                    SKILL_SCIENCE = SKILL_MAX,
+	                    SKILL_COMBAT  = SKILL_EXPERT,
+	                    SKILL_WEAPONS = SKILL_EXPERT,
+	                    SKILL_MEDICAL = SKILL_MAX,
+	                    SKILL_ANATOMY = SKILL_EXPERT)
+
+	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_medical, access_morgue,access_explorermedic, access_cent_creed)
+
+	software_on_spawn = list(
+		/datum/computer_file/program/deck_management,
+		/datum/computer_file/program/suit_sensors
+	)
+
+/datum/job/explorermedic/get_description_blurb()
+	return "You are an Exploration Medic. Your duty is to go on expeditions to away sites and provide medical services to your crew. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully, and remember: Your team's life is in your hands."
+
+/datum/job/explorerengineer
+	title = "Exploration Engineer"
+	department = "Exploration"
+	department_flag = EXP
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	selection_color = "#68099e"
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorerengineer
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5
+	)
+	min_skill = list(   SKILL_EVA          = SKILL_BASIC,
+	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_ELECTRICAL   = SKILL_BASIC,
+	                    SKILL_ATMOS        = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT        = SKILL_MAX,
+	                    SKILL_SCIENCE      = SKILL_MAX,
+	                    SKILL_COMBAT       = SKILL_EXPERT,
+	                    SKILL_WEAPONS      = SKILL_EXPERT,
+	                    SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL   = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_MAX)
+
+	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_teleporter, access_tech_storage, access_construction, access_explorerengineer, access_cent_creed)
+
+	software_on_spawn = list(
+		/datum/computer_file/program/deck_management,
+		/datum/computer_file/program/alarm_monitor
+	)
+
+/datum/job/explorerengineer/get_description_blurb()
+	return "You are an Exploration Engineer. Your duty is to go on expeditions to away sites, provide repairs, and build machines and constructs. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully, and pick up that wrench."
+
+/datum/job/explorersentinel
+	title = "Exploration Sentinel"
+	department = "Exploration"
+	department_flag = EXP
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	selection_color = "#68099e"
+	ideal_character_age = 25
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorersentinel
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps,
+							/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/explorersentinel/fleet,
+							/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/exploration/explorersentinel/contractor
+						)
+
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/civ/contractor
+	)
+
+	min_skill = list(   SKILL_EVA = SKILL_BASIC,
+	                    SKILL_WEAPONS = SKILL_ADEPT,
+	                    SKILL_COMBAT = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT = SKILL_MAX,
+	                    SKILL_SCIENCE = SKILL_MAX,
+	                    SKILL_COMBAT = SKILL_MAX,
+	                    SKILL_WEAPONS = SKILL_MAX)
+
+	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_security, access_explorersentinel, access_cent_creed)
+
+	software_on_spawn = list(
+		/datum/computer_file/program/deck_management
+	)
+
+/datum/job/explorersentinel/get_description_blurb()
+	return "You are an Exploration Sentinel. Your duty is to go on expeditions to away sites and provide safety and security to your team. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems you will either have to neutralize or capture, so tread carefully."
+

@@ -134,16 +134,34 @@
 	id = access_commissary
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
-	
+
+/var/const/access_explorermedic = 97
+/datum/access/explorermedic
+	id = access_explorermedic
+	desc = "Exploration Medic's locker"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_explorerengineer = 98
+/datum/access/explorerengineer
+	id = access_explorerengineer
+	desc = "Exploration Engineer's locker"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_explorersentinel = 99
+/datum/access/explorersentinel
+	id = access_explorersentinel
+	desc = "Exploration Sentinel's locker"
+	region = ACCESS_REGION_GENERAL
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
-	
+
 /datum/access/hos
 	desc = "Chief of Security"
-	
+
 /datum/access/hop
 	desc = "Executive Officer"
-		
+
 /datum/access/qm
 	desc = "Deck Chief"
 

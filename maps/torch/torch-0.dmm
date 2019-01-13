@@ -4551,8 +4551,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/closet/secure_closet/explorer,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/explorersentinel,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "ki" = (
@@ -4563,8 +4563,8 @@
 /area/quartermaster/exploration)
 "kj" = (
 /obj/effect/floor_decal/corner/mauve/mono,
-/obj/structure/closet/secure_closet/explorer,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/explorerengineer,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kk" = (
@@ -5292,6 +5292,12 @@
 /obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
+"lU" = (
+/obj/effect/floor_decal/corner/mauve/mono,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/explorermedic,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/exploration)
 "lV" = (
 /obj/machinery/light/spot,
 /turf/simulated/floor/tiled/monotile,
@@ -32008,7 +32014,7 @@ qw
 eu
 hx
 kj
-kj
+lU
 kh
 hO
 eu

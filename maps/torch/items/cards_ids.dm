@@ -150,6 +150,18 @@
 	job_access_type = /datum/job/explorer
 	detail_color = COLOR_PURPLE
 
+/obj/item/weapon/card/id/torch/crew/explorermedic
+	job_access_type = /datum/job/explorermedic
+	detail_color = COLOR_PURPLE
+
+/obj/item/weapon/card/id/torch/crew/explorerengineer
+	job_access_type = /datum/job/explorerengineer
+	detail_color = COLOR_PURPLE
+
+/obj/item/weapon/card/id/torch/crew/explorersentinel
+	job_access_type = /datum/job/explorersentinel
+	detail_color = COLOR_PURPLE
+
 /obj/item/weapon/card/id/torch/crew/pilot
 	job_access_type = /datum/job/nt_pilot
 	detail_color = COLOR_PURPLE
