@@ -387,7 +387,7 @@
 "hw" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "hx" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/overmap_weapon_console/boarding_beacon_launcher,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "hy" = (/obj/machinery/light,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
-"hz" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
+"hz" = (/obj/machinery/overmap_weapon_console/npc_comms_console/innie,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "hA" = (/obj/structure/table/standard,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "hB" = (/turf/simulated/floor/plating,/area/corvette/unscthorin/starboardcrew)
 "hC" = (/obj/structure/bed,/obj/item/weapon/bedsheet/green,/obj/effect/landmark/start/innie_crew,/turf/simulated/floor/tiled,/area/corvette/unscthorin/starboardcrew)
