@@ -1,4 +1,4 @@
-/obj/item/structure/repair_bench
+/obj/structure/repair_bench
 	name = "\improper Armor Repair Bench"
 	desc = "An armor repair bench outfitted with the tools and materials to repair armor, leaving in a fully combat-ready state."
 	icon = 'code/modules/halo/clothing/armor_repair/armor_repair_sprites.dmi'
@@ -21,7 +21,7 @@
 	else
 		. = ..()
 
-/obj/item/structure/repair_bench/cov
+/obj/structure/repair_bench/cov
 	icon_state = "repair_bench_cov"
 
 #undef ITEM_REPAIR_DELAY
