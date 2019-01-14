@@ -55,10 +55,12 @@
 				ship_source.target_loc = null
 			if(time_leave_at != 0 && !already_warned && world.time > time_leave_at-warn_depart_time)
 				to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.\"</span>")
+				already_warned = 1
 			if(time_leave_at != 0 && world.time > time_leave_at)
 				to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Thanks for the trade! We're leaving now.\"</span>")
 				cargo_call_target = null
 				on_call = 0
+				already_warned = 0
 				ship_source.pick_target_loc()
 		else
 			ship_source.target_loc = cargo_call_target.loc
