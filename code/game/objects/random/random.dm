@@ -1256,6 +1256,14 @@ var/list/random_useful_
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/honey)
 
+/obj/random/mre/spread/vegan
+	name = "random vegan MRE spread"
+	desc = "This is a random vegan spread packet for MREs"
+	icon_state = "packet"
+
+/obj/random/mre/spread/vegan/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly)
+
 /obj/random/mre/sauce
 	name = "random MRE sauce"
 	desc = "This is a random sauce packet for MREs."
