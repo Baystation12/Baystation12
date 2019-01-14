@@ -159,12 +159,10 @@
 	damtype = BRUTE
 	damage = 200
 
-/obj/item/projectile/deck_gun_damage_proj/get_structure_damage()
-	return damage * 10 //Counteract the /10 from wallcode damage processing.
-
 /obj/item/projectile/deck_gun_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)
+		damage *= 10 //counteract the /10 from wallcode damage processing
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
 	. = ..()
 
