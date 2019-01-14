@@ -26,22 +26,24 @@
 		You are unauthenticated. Some functions may be unavailable.
 	{{/if}}
 </div>
-{{if data.request_length || data.shopping_cart_length}}
-	<div class='notice'>
-		{{if data.request_length}}
-			You have <u>{{:data.request_length}}</u> orders pending.
-		{{/if}}
-		{{if data.request_length && data.shopping_cart_length}}
-			&#32;|&#32;
-		{{/if}}
-		{{if data.shopping_cart_length}}
-			You have <u>{{:data.shopping_cart_length}}</u> orders awaiting shuttle delivery.
-		{{/if}}
-	</div>
-{{else}}
-	<div class='notice info'>
-		All orders caught up.
-	</div>
+{{if data.is_admin}}
+	{{if data.request_length || data.shopping_cart_length}}
+		<div class='notice'>
+			{{if data.request_length}}
+				You have <u>{{:data.request_length}}</u> orders pending.
+			{{/if}}
+			{{if data.request_length && data.shopping_cart_length}}
+				&#32;|&#32;
+			{{/if}}
+			{{if data.shopping_cart_length}}
+				You have <u>{{:data.shopping_cart_length}}</u> orders awaiting shuttle delivery.
+			{{/if}}
+		</div>
+	{{else}}
+		<div class='notice info'>
+			All orders caught up.
+		</div>
+	{{/if}}
 {{/if}}
 <div class="item">
 	{{:helper.link('Browse Goods', 'cart', {'set_screen' : 1}, data.screen == 1 ? 'selected' : null)}}
