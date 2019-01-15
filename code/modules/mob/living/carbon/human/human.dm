@@ -393,7 +393,10 @@
 
 	for(var/obj/item/organ/external/E in list(floor, init))
 		while(E && E.parent_organ)
-			E = organs_by_name[E.parent_organ]
+			var/candidate = organs_by_name[E.parent_organ]
+			if(!candidate || (candidate in traced_organs))
+				break // Organ parenthood is not guaranteed to be a tree
+			E = candidate
 			traced_organs += E
 			if(E == init)
 				return traced_organs
