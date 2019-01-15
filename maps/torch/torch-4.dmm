@@ -23395,7 +23395,7 @@
 /area/crew_quarters/safe_room/firstdeck)
 "kAb" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/adherent_bath,
+/obj/machinery/cryopod/robot,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "kBb" = (
