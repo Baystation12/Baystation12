@@ -27,18 +27,6 @@
 					return TRUE
 	return FALSE
 
-/proc/get_x(O)
-	var/turf/loc = get_turf(O)
-	return loc ? loc.x : 0
-
-/proc/get_y(O)
-	var/turf/loc = get_turf(O)
-	return loc ? loc.y : 0
-
-/proc/get_z(O)
-	var/turf/loc = get_turf(O)
-	return loc ? loc.z : 0
-
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
 	if(loc)
