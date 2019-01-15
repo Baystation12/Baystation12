@@ -20,6 +20,9 @@
 /obj/effect/shuttle_landmark/merc/deck4,
 /turf/space,
 /area/space)
+"af" = (
+/turf/simulated/wall,
+/area/crew_quarters/adherent)
 "ag" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 9
@@ -57,12 +60,29 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/maintenance/fourthdeck/forestarboard)
+"ao" = (
+/turf/simulated/wall/r_wall,
+/area/crew_quarters/adherent)
+"ap" = (
+/turf/simulated/wall/r_wall,
+/area/hallway/primary/fourthdeck/aft)
 "aq" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/starboard)
 "ar" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod6/station)
+"as" = (
+/turf/simulated/wall,
+/area/hallway/primary/fourthdeck/aft)
+"at" = (
+/obj/structure/sign/warning/high_voltage,
+/turf/simulated/wall,
+/area/hallway/primary/fourthdeck/aft)
+"au" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/wall,
+/area/crew_quarters/adherent)
 "av" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -70,6 +90,16 @@
 "aw" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod7/station)
+"ax" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor,
+/area/hallway/primary/fourthdeck/aft)
+"ay" = (
+/obj/structure/sign/warning/fire{
+	name = "\improper DANGER: BOILING LIQUID"
+	},
+/turf/simulated/wall,
+/area/hallway/primary/fourthdeck/aft)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/fourthdeck)
@@ -849,9 +879,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
-"da" = (
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
 "dd" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -2661,10 +2688,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "iA" = (
-/obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
+/obj/machinery/vending/tool/adherent,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "iC" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -2676,13 +2702,20 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "iD" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
+"iE" = (
+/obj/structure/adherent_bath,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "iM" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -2912,9 +2945,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "jz" = (
-/obj/structure/table/steel,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
+/obj/structure/flora/pottedplant/crystal,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "jB" = (
 /obj/item/modular_computer/console/preset/civilian/professional,
 /obj/structure/noticeboard{
@@ -3106,9 +3139,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
-"kz" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/quartermaster/unused)
 "kA" = (
 /obj/random/junk,
 /obj/structure/cable{
@@ -3367,14 +3397,15 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/janitor/aux)
 "ly" = (
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
-"lz" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/adherent_bath,
+/obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
+"lz" = (
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "lB" = (
 /obj/machinery/cryopod,
 /obj/machinery/computer/cryopod{
@@ -3824,8 +3855,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
+/obj/structure/adherent_pylon,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "mQ" = (
 /obj/effect/floor_decal/corner/green/half{
 	icon_state = "bordercolorhalf";
@@ -4209,8 +4241,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "oa" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4221,14 +4253,8 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
-"ob" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "oc" = (
 /obj/machinery/door/airlock/civilian{
 	name = "Emergency Storage";
@@ -4523,14 +4549,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/janitor/aux)
-"pl" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/unused)
-"pm" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
 "po" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4539,8 +4557,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "pp" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -4852,10 +4870,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
 "qy" = (
-/obj/machinery/door/airlock/civilian{
-	locked = 1;
-	name = "Ready Room"
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -4863,8 +4877,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/crystal{
+	name = "Adherent Maintenence"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/hallway/primary/fourthdeck/aft)
+/area/crew_quarters/adherent)
 "qB" = (
 /obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
@@ -8676,6 +8693,10 @@
 "Dc" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/foreport)
+"Df" = (
+/obj/structure/table/glass,
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "Dq" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -13341,8 +13362,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "RV" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_coffee/full{
@@ -14876,8 +14897,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "VR" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -15582,9 +15603,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
-"XJ" = (
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
 "XL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16472,9 +16490,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
-"ZM" = (
-/turf/simulated/wall/prepainted,
-/area/quartermaster/unused)
 "ZN" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -38703,13 +38718,13 @@ fJ
 Zw
 Zw
 iy
-ZM
-ZM
-ZM
-ZM
-ZM
-ZM
-Xn
+af
+af
+af
+af
+af
+af
+as
 RK
 tb
 uH
@@ -38905,13 +38920,13 @@ eb
 eb
 hB
 eb
-ZM
+au
 jz
 ly
-da
-da
-pl
-Xn
+Df
+Df
+ly
+ax
 TH
 tc
 KG
@@ -39107,13 +39122,13 @@ ec
 ec
 eP
 ec
-ZM
+au
 iA
 lz
-XJ
+lz
 VQ
-pm
-Xn
+lz
+ax
 TH
 MI
 Vi
@@ -39309,13 +39324,13 @@ XT
 XT
 XT
 XT
-kz
-kz
-da
+ao
+ao
+lz
 mP
 nZ
-XJ
-Xn
+lz
+at
 TH
 MI
 ql
@@ -39512,7 +39527,7 @@ ar
 ar
 ar
 ar
-kz
+ao
 iC
 RU
 oa
@@ -39714,12 +39729,12 @@ fr
 gi
 hj
 ib
-kz
-jz
-ly
-ob
-jz
-Xn
+ao
+iE
+Df
+Df
+iE
+ay
 TH
 MI
 ql
@@ -39916,12 +39931,12 @@ fs
 gj
 hj
 ib
-wa
-Xn
-Xn
-Xn
-Xn
-Xn
+ap
+as
+as
+as
+as
+as
 Rr
 UM
 sR

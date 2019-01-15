@@ -1060,6 +1060,27 @@
 	contraband = list(/obj/item/weapon/weldingtool/hugetank = 2,/obj/item/clothing/gloves/insulated/cheap = 2)
 	premium = list(/obj/item/clothing/gloves/insulated = 1)
 
+/obj/machinery/vending/tool/adherent
+	name = "Adherent Tool Dispenser"
+	desc = "This looks like a heavily modified vending machine. It contains technology that doesn't appear to be human in origin."
+	product_ads = "\[C#\]\[Cb\]\[Db\]. \[Ab\]\[A#\]\[Bb\]. \[E\]\[C\]\[Gb\]\[B#\]. \[C#\].;\[Cb\]\[A\]\[F\]\[Cb\]\[C\]\[E\]\[Cb\]\[E\]\[Fb\]. \[G#\]\[C\]\[Ab\]\[A\]\[C#\]\[B\]. \[Eb\]\[choral\]. \[E#\]\[C#\]\[Ab\]\[E\]\[C#\]\[Fb\]\[Cb\]\[F#\]\[C#\]\[Gb\]."
+	icon_state = "tool"
+	icon_deny = "tool-deny"
+	icon_vend = "tool_vend"
+	vend_delay = 5
+	products = list(/obj/item/weapon/weldingtool/crystal = 5,
+					/obj/item/weapon/wirecutters/crystal = 5,
+					/obj/item/weapon/screwdriver/crystal = 5,
+					/obj/item/weapon/crowbar/crystal = 5,
+					/obj/item/weapon/wrench/crystal = 5,
+					/obj/item/device/multitool/crystal = 5,
+					/obj/item/weapon/storage/belt/utility/vigil = 5)
+/obj/machinery/vending/tool/adherent/vend(var/datum/stored_items/vending_products/R, var/mob/living/carbon/user)
+	if((istype(user) && user.species.name == SPECIES_ADHERENT) || emagged)
+		. = ..()
+	else
+		to_chat(user, "<span class='notice'>The vending machine emits a discordant note, and a small hole blinks several times. It looks like it wants something inserted.</span>")
+
 /obj/machinery/vending/engivend
 	name = "Engi-Vend"
 	desc = "Spare tool vending. What? Did you expect some witty description?"

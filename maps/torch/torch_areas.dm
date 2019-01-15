@@ -829,10 +829,6 @@
 	name = "\improper Flight Control Tower"
 	icon_state = "hangar"
 
-/area/quartermaster/unused
-	name = "\improper Ready Room"
-	icon_state = "auxstorage"
-
 // Research
 /area/rnd/canister
 	name = "\improper Canister Storage"
@@ -921,6 +917,10 @@
 	name = "\improper Diplomatic Quarters"
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/adherent
+	name = "\improper Adherent Maintenence"
+	icon_state = "robotics"
 
 /area/holocontrol
 	name = "\improper Holodeck Control"
