@@ -5,6 +5,7 @@
 	step_delay = 1 SECOND //These will only be traversing overmap tiles.
 	var/obj/effect/overmap/overmap_fired_by
 	var/obj/machinery/overmap_weapon_console/console_fired_by = null
+	var/sound/ship_hit_sound //This sound is played across the entire impacted ship when the overmap projectile spawns the ship_damage_projectile
 	accuracy = 100
 
 /obj/item/projectile/overmap/New(var/obj/spawner)
@@ -89,6 +90,8 @@
 		camera_track_proj.launch(proj_end_loc)
 
 	new_proj.launch(proj_end_loc)
+	if(ship_hit_sound)
+		playsound(locate(new_proj.x,new_proj.y,z_level), ship_hit_sound, 100,1, 255,,1)
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
 	var/obj/effect/overmap/overmap_object = impacted
