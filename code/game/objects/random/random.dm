@@ -1228,9 +1228,15 @@ var/list/random_useful_
 				/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
 				/obj/item/clothing/mask/chewable/candy/gum)
 
+/obj/random/mre/dessert/vegan
+	name = "random vegan MRE dessert"
+	desc = "This is a random vegan dessert for MREs."
+	icon_state = "pouch"
+
 /obj/random/mre/dessert/vegan/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
 				/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit)
 
 /obj/random/mre/drink
