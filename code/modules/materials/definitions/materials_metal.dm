@@ -271,7 +271,7 @@
 	name = MATERIAL_PLATINUM
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	stack_type = /obj/item/stack/material/platinum
-	icon_colour = "#9999ff"
+	icon_colour = "#deddff"
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
