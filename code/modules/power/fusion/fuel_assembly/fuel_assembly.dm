@@ -20,6 +20,12 @@
 
 /obj/item/weapon/fuel_assembly/Initialize()
 	. = ..()
+
+	if(ispath(fuel_type, /datum/reagent))
+		var/datum/reagent/R = fuel_type
+		fuel_type = lowertext(initial(R.name))
+		fuel_colour = initial(R.color)
+
 	var/material/material = SSmaterials.get_material_by_name(fuel_type)
 	if(istype(material))
 		SetName("[material.use_name] fuel rod assembly")
