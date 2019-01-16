@@ -1,0 +1,4 @@
+author: "Eckff"
+delete-after: True
+changes: 
+  - tweak: "The sleep button now keeps you asleep until you press it again. It will not wake you up from other things that cause you to sleep, like chems."
