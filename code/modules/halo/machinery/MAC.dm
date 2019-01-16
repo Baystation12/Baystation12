@@ -256,6 +256,7 @@
 /obj/item/projectile/mac_round
 	name = "MAC Slug"
 	penetrating = 2
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/mac_cannon_impact.wav'
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()

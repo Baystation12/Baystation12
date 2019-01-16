@@ -61,6 +61,7 @@
 	desc = "An explosive warhead on the end of a guided thruster."
 	icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
 	icon_state = "missile"
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'
 	damage = 0 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
