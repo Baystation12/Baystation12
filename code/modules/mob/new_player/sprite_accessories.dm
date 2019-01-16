@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list(SPECIES_HUMAN)
+	var/list/species_allowed = list(SPECIES_HUMAN, SPECIES_ORION)
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -52,7 +52,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 		veryshort = 1
 
 	short
@@ -187,19 +187,19 @@
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
 		gender = FEMALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
 		gender = FEMALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	bobcutalt
 		name = "Chin Length Bob"
 		icon_state = "hair_bobcutalt"
 		gender = FEMALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	bowl
 		name = "Bowl"
@@ -210,7 +210,7 @@
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
 		gender = MALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 		veryshort = 1
 
 	crew
@@ -312,7 +312,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 	jensen
 		name = "Adam Jensen Hair"
 		icon_state = "hair_jensen"
@@ -331,7 +331,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 	kusangi
 		name = "Kusanagi Hair"
 		icon_state = "hair_kusanagi"
@@ -638,7 +638,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_VOX,SPECIES_IPC)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_VOX,SPECIES_IPC,SPECIES_ORION)
 
 	watson
 		name = "Watson Mustache"
@@ -679,7 +679,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	abe
 		name = "Abraham Lincoln Beard"
