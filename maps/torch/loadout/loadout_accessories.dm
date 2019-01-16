@@ -144,6 +144,7 @@
 
 /datum/gear/clothing/scarf
 	allowed_roles = SEMIANDFORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/flannel
 	allowed_roles = SEMIFORMAL_ROLES
@@ -158,9 +159,11 @@
 
 /datum/gear/clothing/wcoat
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/zhongshan
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/dashiki
 	allowed_branches = CIVILIAN_BRANCHES
@@ -170,6 +173,7 @@
 
 /datum/gear/clothing/sherwani
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/qipao
 	allowed_branches = CIVILIAN_BRANCHES

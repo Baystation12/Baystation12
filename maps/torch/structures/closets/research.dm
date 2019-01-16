@@ -13,20 +13,12 @@
 
 /obj/structure/closet/secure_closet/RD_torch/WillContain()
 	return list(
-		/obj/item/clothing/under/rank/research_director,
-		/obj/item/clothing/under/rank/research_director/rdalt,
-		/obj/item/clothing/under/rank/research_director/dress_rd,
-		/obj/item/clothing/under/suit_jacket/corp,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science,
-		/obj/item/clothing/suit/storage/toggle/labcoat/rd,
-		/obj/item/clothing/shoes/white,
-		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science/cso,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
-		/obj/item/device/radio/headset/heads/torchntcommand,
-		/obj/item/device/radio/headset/heads/torchntcommand/alt,
+		/obj/item/device/radio/headset/heads/torchntdirector,
 		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flash,

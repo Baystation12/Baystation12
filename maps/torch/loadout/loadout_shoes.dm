@@ -15,13 +15,14 @@
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/color
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/shoes/flats
 	allowed_roles = SEMIANDFORMAL_ROLES
 
 /datum/gear/shoes/high
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/shoes/sandal
 	allowed_branches = CIVILIAN_BRANCHES
