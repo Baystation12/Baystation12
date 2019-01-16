@@ -19,13 +19,13 @@
 	active_throwforce = 12
 	edge = 0
 	sharp = 0
-	var/failsafe = 1
+	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
 	var/next_leapwhen
 
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
-	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
+	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 
 /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
 	set name = "Enable weapon failsafe"
@@ -51,6 +51,8 @@
 	return ESWORD_LEAP_DIST
 
 /obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user)
+	if(user.loc.Adjacent(target))
+		return
 	if(world.time < next_leapwhen)
 		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
 		return
@@ -122,8 +124,10 @@
 
 /obj/item/weapon/melee/energy/elite_sword/dropped(var/mob/user)
 	. = ..()
+	if(loc == null) //We probably shouldn't be exploding if we're in nullspace.
+		return
 	if(!istype(loc,/mob))
-		if(w_class != ITEM_SIZE_SMALL)
+		if(icon_state == icon_state_deployed)
 			if(failsafe)
 				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
 				flick("blade burnout",src)
@@ -139,7 +143,6 @@
 					qdel(src)
 			else
 				deactivate(user)
-				visible_message("<span class='notice'>\The [src] disappears in a flash of light.</span>")
 
 /obj/item/weapon/melee/energy/elite_sword/attack(var/mob/m,var/mob/user)
 	if(ismob(m))

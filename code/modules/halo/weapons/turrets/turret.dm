@@ -89,8 +89,10 @@
 
 /obj/structure/turret/proc/remove_manning_gun()
 	if(mob_manning.l_hand && (mob_manning.l_hand.type == turret_gun))
+		mob_manning.drop_from_inventory(mob_manning.l_hand)
 		qdel(mob_manning.l_hand)
 	if(mob_manning.r_hand && (mob_manning.r_hand.type == turret_gun))
+		mob_manning.drop_from_inventory(mob_manning.r_hand)
 		qdel(mob_manning.r_hand)
 
 
@@ -139,7 +141,7 @@
 /obj/structure/turret/process()
 	check_user_has_gun()
 	handle_dir()
-	if(mob_manning && mob_manning.incapacitated())
+	if(mob_manning && mob_manning.incapacitated() || !mob_manning.Adjacent(src))
 		unman_turret()
 
 /obj/structure/turret/verb/remove_turret()
@@ -218,8 +220,6 @@
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]_unloaded"
-
-
 
 //Detached Turret Gun Define// Every detachable turret gun needs this.
 /obj/item/weapon/gun/projectile/turret/detached

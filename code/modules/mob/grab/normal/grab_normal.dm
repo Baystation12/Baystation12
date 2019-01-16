@@ -249,7 +249,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if(!W.edge || !W.force || (W.damtype != BRUTE || W.damtype != BURN))
 		return 0 //unsuitable weapon
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
