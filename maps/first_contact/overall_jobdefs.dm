@@ -55,7 +55,7 @@
 	access = list(632,633)
 	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
 	selection_color = "#ff0000"
-	spawnpoint_override = "Innie Crew"
+	spawnpoint_override = "Innie Captain"
 
 
 
@@ -73,8 +73,7 @@
 	/datum/job/ship_cap_innie,/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/sangheili_shipmaster,\
 	/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,\
 	/*/datum/job/unscaegis_co,/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI*/,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,\
-	/datum/job/covenant/skirmmurmillo,\
-	/datum/job/URF_commando,/datum/job/URF_commando_officer)
+	/datum/job/covenant/skirmmurmillo,/datum/job/URF_commando,/datum/job/URF_commando_officer)
 
 	allowed_spawns = list("UNSC Frigate","UNSC Commanding Officer Spawn","UNSC Executive Officer Spawn","UNSC Bridge Officer Spawn","UNSC Commander Air Group Spawn",\
 	"UNSC Operations Supervisor Spawn","UNSC Operations Specialist Spawn","UNSC Heaven Above ODST Spawn","UNSC Heaven Above ODST Officer Spawn","Innie Crew","Civilian Ship Crew",\
@@ -84,7 +83,8 @@
 	"UNSC Hospital Corpsman Spawn","UNSC Crew Chief (logistics) Spawn","UNSC Logistics Specialist Spawn","UNSC Marine Spawn","UNSC Marine Company Officer Spawn",\
 	"UNSC Marine Company Sergeant Spawn","UNSC Marine Squad Leader Spawn","UNSC Combat Engineer Spawn",
 	"Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn","Sangheili Corvette Spawn",\
-	"Kig-Yar Corvette Spawn","Unggoy Corvette Spawn","UNSC Aegis Ship Crew Spawn","UNSC Aegis ODST Spawn","UNSC Aegis ODST Officer Spawn","Commando Spawn","Commando Officer Spawn",)
+	"Kig-Yar Corvette Spawn","Unggoy Corvette Spawn","UNSC Aegis Ship Crew Spawn","UNSC Aegis ODST Spawn","UNSC Aegis ODST Officer Spawn","Commando Spawn","Commando Officer Spawn",\
+	"Innie Spawn", "Innie Commander Spawn")
 
 	species_to_job_whitelist = list(\
 		/datum/species/kig_yar = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain),\
