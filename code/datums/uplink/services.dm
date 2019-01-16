@@ -226,7 +226,7 @@
 		COPY_VALUE(fingerprint)
 		COPY_VALUE(dna)
 		COPY_VALUE(bloodtype)
-	var/datum/job/job = job_master.GetJob(new_record.get_job())
+	var/datum/job/job = SSjobs.get_by_title(new_record.get_job())
 	if(job)
 		var/skills = list()
 		for(var/decl/hierarchy/skill/S in GLOB.skills)

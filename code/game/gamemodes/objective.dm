@@ -145,7 +145,7 @@ datum/objective/anti_revolution/brig
 
 		if(!istype(I)) return 1
 
-		if(I.assignment == "Assistant")
+		if(I.assignment == GLOB.using_map.default_assistant_title)
 			return 1
 		else
 			return 0

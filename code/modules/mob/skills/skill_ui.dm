@@ -260,7 +260,7 @@ Admin version, with debugging options.
 		if(!my_client)
 			to_chat(usr, "Mob client not found.")
 			return 1
-		var/datum/job/job = skillset.owner.mind && job_master.GetJob(skillset.owner.mind.assigned_role)
+		var/datum/job/job = skillset.owner.mind && SSjobs.get_by_title(skillset.owner.mind.assigned_role)
 		if(!job)
 			to_chat(usr, "Valid job not found.")
 			return 1

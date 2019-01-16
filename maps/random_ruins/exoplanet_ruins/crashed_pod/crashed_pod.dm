@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	id_type = null
 	pda_type = null
 
-/datum/job/submap/pod/New(var/datum/submap/_owner)
+/datum/job/submap/pod/New(var/datum/submap/_owner, var/abstract_job = FALSE)
 	..()
 	if(_owner) // Might be called from admin tools, etc
 		info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \

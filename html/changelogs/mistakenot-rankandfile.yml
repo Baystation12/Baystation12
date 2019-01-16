@@ -1,0 +1,7 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "YOU WILL NEED TO UPDATE YOUR RANK AND BRANCH PREFERENCES, READ THIS CHANGELOG."
+  - tweak: "Occupations panel got a visual overhall. Click the link-name of a job to set alt title, and click the never/high/low/medium to cycle between job weights."
+  - tweak: "Rank is now tracked by job, not by save slot. You can set your rank and branch up as you like for each given job."
+  - tweak: "You can now set/save skills for submaps in the occupations panel."

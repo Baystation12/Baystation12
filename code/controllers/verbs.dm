@@ -23,9 +23,6 @@
 		return
 
 	switch(controller)
-		if("Jobs")
-			debug_variables(job_master)
-			SSstatistics.add_field_details("admin_verb","DJobs")
 		if("Sun")
 			debug_variables(GLOB.sun)
 			SSstatistics.add_field_details("admin_verb","DSun")

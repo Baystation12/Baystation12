@@ -6,7 +6,6 @@ var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
-var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
@@ -118,13 +117,6 @@ var/global/list/string_slot_flags = list(
 		var/datum/surgery_step/S = new T
 		surgery_steps += S
 	sort_surgeries()
-
-	//List of job. I can't believe this was calculated multiple times per tick!
-	for(var/jtype in subtypesof(/datum/job))
-		var/datum/job/job = jtype
-		if(initial(job.available_by_default))
-			job = new jtype
-			joblist[job.title] = job
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language

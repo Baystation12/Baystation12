@@ -16,7 +16,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 //returns a reason if M is banned from rank, returns 0 otherwise
 /proc/jobban_isbanned(mob/M, rank)
 	if(M && rank)
-		if (guest_jobbans(rank))
+		if (SSjobs.guest_jobbans(rank))
 			if(config.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"
 			if(config.usewhitelist && !check_whitelist(M))
@@ -34,20 +34,6 @@ var/jobban_keylist[0]		//to store the keys & ranks
 					return text
 			return "Reason Unspecified"
 	return 0
-
-/*
-DEBUG
-/mob/verb/list_all_jobbans()
-	set name = "list all jobbans"
-
-	for(var/s in jobban_keylist)
-		log_debug(s)
-
-/mob/verb/reload_jobbans()
-	set name = "reload jobbans"
-
-	jobban_loadbanfile()
-*/
 
 /hook/startup/proc/loadJobBans()
 	jobban_loadbanfile()
