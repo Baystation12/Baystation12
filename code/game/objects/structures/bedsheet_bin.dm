@@ -7,7 +7,7 @@ LINEN BINS
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
 	desc = "A surprisingly soft linen bedsheet."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/bedsheet.dmi'
 	icon_state = "sheet"
 	item_state = "bedsheet"
 	randpixel = 0
