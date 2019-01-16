@@ -20,6 +20,7 @@
 	damage_mask =             'icons/mob/human_races/species/adherent/damage_mask.dmi'
 	blood_mask =              'icons/mob/human_races/species/adherent/blood_mask.dmi'
 
+	siemens_coefficient =     0
 	rarity_value =            6
 	min_age =                 8000
 	max_age =                 12000
