@@ -43,7 +43,7 @@
 	item_state_slots = list(slot_l_hand_str = "urf_armour", slot_r_hand_str = "urf_armour")
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
 	item_flags = THICKMATERIAL | STOPPRESSUREDAMAGE
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
@@ -60,3 +60,51 @@
 	item_state = "magboots"
 	can_hold_knife = 1
 	force = 5
+
+//BACKPACKS
+
+/obj/item/weapon/storage/backpack/cmdo
+	icon = 'code/modules/halo/clothing/commandopack.dmi'
+	name = "Commando Rifleman Backpack"
+	icon_override = 'code/modules/halo/clothing/commandopack.dmi'
+
+	icon_state = "c_packO_rif"
+	item_state = "c_pack_rif_worn"
+
+	item_state_slots = list(
+	slot_l_hand_str = "c_pack_rif",
+	slot_r_hand_str = "c_pack_rif",
+	)
+
+/obj/item/weapon/storage/backpack/cmdo/cqc
+	name = "Commando CQC Backpack"
+
+	icon_state = "c_packO_cqc"
+	item_state = "c_pack_cqc_worn"
+
+	item_state_slots = list(
+	slot_l_hand_str = "c_pack_cqc",
+	slot_r_hand_str = "c_pack_cqc",
+	)
+
+/obj/item/weapon/storage/backpack/cmdo/eng
+	name = "Commando Engineer Backpack"
+
+	icon_state = "c_packO_eng"
+	item_state = "c_pack_eng_worn"
+
+	item_state_slots = list(
+	slot_l_hand_str = "c_pack_eng",
+	slot_r_hand_str = "c_pack_eng",
+	)
+
+/obj/item/weapon/storage/backpack/cmdo/med
+	name = "Commando Medic Backpack"
+
+	icon_state = "c_packO_med"
+	item_state = "c_pack_med_worn"
+
+	item_state_slots = list(
+	slot_l_hand_str = "c_pack_med",
+	slot_r_hand_str = "c_pack_med",
+	)

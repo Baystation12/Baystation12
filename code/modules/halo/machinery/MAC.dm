@@ -1,8 +1,9 @@
-#define CAPACITOR_DAMAGE_AMOUNT 0.8
+#define CAPACITOR_DAMAGE_AMOUNT 27 //3 Direct MAC shots to down a fully charged shield from a 22-capacitor MAC.
 #define CAPACITOR_MAX_STORED_CHARGE 50000
 #define CAPACITOR_RECHARGE_TIME 10 //This is in seconds.
 #define ACCELERATOR_OVERLAY_ICON_STATE "mac_accelerator_effect"
-#define MAC_AMMO_LIMIT 3
+#define AMMO_LIMIT 3
+#define LOAD_AMMO_DELAY 70
 
 /obj/machinery/mac_cannon
 	name = "MAC Component"
@@ -29,18 +30,18 @@
 
 /obj/machinery/mac_cannon/ammo_loader/examine(var/mob/user)
 	. = ..()
-	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[MAC_AMMO_LIMIT] rounds loaded.</span>")
+	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[AMMO_LIMIT] rounds loaded.</span>")
 
 /obj/machinery/mac_cannon/ammo_loader/attack_hand(var/mob/user)
 	if(loading)
 		return
-	if(contained_rounds.len >= MAC_AMMO_LIMIT)
+	if(contained_rounds.len >= AMMO_LIMIT)
 		to_chat(user,"<span class = 'notice'>The MAC cannot load any more rounds.</span>")
 		return
 	visible_message("[user] activates the MAC's loading mechanism.")
 	loading = 1
 	playsound(loc, 'code/modules/halo/machinery/mac_gun_load.ogg', 100,1, 255)
-	spawn(70) //Loading sound take 70 seconds to complete
+	spawn(LOAD_AMMO_DELAY) //Loading sound take 7 seconds to complete
 		var/obj/new_round = new /obj/overmap_weapon_ammo/mac
 		contents += new_round
 		contained_rounds += new_round
@@ -260,5 +261,9 @@
 	. = ..()
 	explosion(impacted,rand(2,3),rand(4,6),rand(6,8),rand(10,20))
 
-#undef MAC_AMMO_LIMIT
+#undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE
+#undef LOAD_AMMO_DELAY
+#undef CAPACITOR_DAMAGE_AMOUNT
+#undef CAPACITOR_MAX_STORED_CHARGE
+#undef CAPACITOR_RECHARGE_TIME

@@ -60,7 +60,7 @@
 	..()
 
 /obj/item/weapon/gun/projectile/heavysniper/verb/scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope"
 	set popup_menu = 1
 

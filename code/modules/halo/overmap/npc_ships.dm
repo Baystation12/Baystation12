@@ -14,7 +14,7 @@
 "Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
 )
 
-#define STOP_WAIT_TIME 10 MINUTES
+#define STOP_WAIT_TIME 5 MINUTES
 #define STOP_DISEMBARK_TIME 2 MINUTES
 
 #define BROADCAST_ON_HIT_PROB 10 //10
@@ -181,11 +181,12 @@
 	var/already_warned = 0
 
 /datum/npc_ship_request/halt/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
-	ship_source.target_loc = null
 	if(time_leave_at > 0)
 		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Woah, Calm down. We're already waiting on someone's behalf.\"</span>")
 		return
+	ship_source.target_loc = null
 	to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Slowing down.. I can only give you [STOP_WAIT_TIME/600] minutes.\"</span>")
+	request_requires_processing = 1
 	time_leave_at = world.time + STOP_WAIT_TIME
 
 /datum/npc_ship_request/halt/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source)
@@ -194,6 +195,7 @@
 			time_leave_at = 0
 			ship_source.pick_target_loc()
 			already_warned = 0
+			request_requires_processing = 0
 			return
 		already_warned = 1
 		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.\"</span>")

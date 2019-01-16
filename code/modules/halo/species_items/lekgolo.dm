@@ -45,6 +45,7 @@
 
 	var/datum/mgalekgolo_weapon/active_weapon = /datum/mgalekgolo_weapon/fuel_rod_cannon
 	var/atom/current_target
+	var/regeneration = 1
 
 	var/hud_setup = 0
 
@@ -80,7 +81,7 @@
 
 	//heal a little
 	if(stat != DEAD && health < maxHealth)
-		health += 4
+		health += regeneration
 
 	//regain charge
 	if(active_weapon.charge_amount <= active_weapon.charge_max)

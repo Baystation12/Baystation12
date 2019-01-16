@@ -58,14 +58,6 @@
 	spawnpoint_override = "Innie Crew"
 
 
-#define ALL_SHIP_JOBS list(/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,/datum/job/UNSC_ship/cag,\
-/datum/job/UNSC_ship/bridge,/datum/job/UNSC_ship/mechanic_chief,/datum/job/UNSC_ship/mechanic,\
-/datum/job/UNSC_ship/logistics_chief,/datum/job/UNSC_ship/logistics,/datum/job/UNSC_ship/marine_co,/datum/job/UNSC_ship/marine_xo,\
-/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/weapons,/datum/job/UNSC_ship/marine,/datum/job/UNSC_ship/odst,/datum/job/UNSC_ship/odsto,/datum/job/UNSC_ship/marine/driver,\
-/datum/job/UNSC_ship/medical_chief,/datum/job/UNSC_ship/medical,/datum/job/UNSC_ship/security_chief,/datum/job/UNSC_ship/security,\
-/datum/job/UNSC_ship/ops_chief,/datum/job/UNSC_ship/ops,/datum/job/UNSC_ship/cmdr_wing,/datum/job/UNSC_ship/cmdr_sqr,\
-/datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,/datum/job/UNSC_ship/gunnery_chief,/datum/job/UNSC_ship/gunnery,\
-/datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician)
 
 
 /datum/map/first_contact
@@ -78,9 +70,10 @@
 	/datum/job/UNSC_ship/gunnery,/datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,\
 	/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/*/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_medic,/datum/job/ship_cap_medic,*/\
 	/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/*/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,*/\
-	/datum/job/ship_cap_innie,/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/kigyarminor,\
-	/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,/*/datum/job/unscaegis_co,\
-	/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI*/,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,/datum/job/covenant/skirmmurmillo,\
+	/datum/job/ship_cap_innie,/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/sangheili_shipmaster,\
+	/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,\
+	/*/datum/job/unscaegis_co,/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI*/,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,\
+	/datum/job/covenant/skirmmurmillo,\
 	/datum/job/URF_commando,/datum/job/URF_commando_officer)
 
 	allowed_spawns = list("UNSC Frigate","UNSC Commanding Officer Spawn","UNSC Executive Officer Spawn","UNSC Bridge Officer Spawn","UNSC Commander Air Group Spawn",\
@@ -96,7 +89,7 @@
 	species_to_job_whitelist = list(\
 		/datum/species/kig_yar = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain),\
 		/datum/species/unggoy = list(/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major),\
-		/datum/species/sangheili = list(/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra),\
+		/datum/species/sangheili = list(/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/sangheili_shipmaster),\
 		/datum/species/kig_yar_skirmisher = list(/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,/datum/job/covenant/skirmmurmillo,/datum/job/covenant/skirmcommando),\
 		/datum/species/spartan = list(),\
 		/datum/species/brutes = list(),\
