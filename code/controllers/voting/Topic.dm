@@ -40,8 +40,16 @@
 		vote.update_clients_browsing()
 		end_vote(1)
 
+	else if(href_list["extend_vote"])
+		to_world("<font color='purple'><b>[usr.ckey] has extended the vote for 30sec.</b></font>")
+		time_remaining += 300
+
+	else if(href_list["delay_vote"])
+		to_world("<font color='purple'><b>[usr.ckey] has [delayed ? "un":""]delayed the vote.</b></font>")
+		delayed = !delayed
+
 	else if(href_list["end_early"])
-		announce_vote("[usr.ckey] has ended the vote early.")
+		to_world("<span class='notice'><b>[usr.ckey] has ended the vote early.</b></span>")
 		update_clients_browsing()
 		vote.update_clients_browsing()
 		end_vote()
