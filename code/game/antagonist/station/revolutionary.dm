@@ -39,7 +39,7 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 		return
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in GLOB.command_positions))
+		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(COM)))
 			continue
 		var/datum/objective/rev/rev_obj = new
 		rev_obj.target = player.mind

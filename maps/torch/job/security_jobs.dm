@@ -92,7 +92,7 @@
 	economic_power = 4
 	minimal_player_age = 7
 	ideal_character_age = 25
-	alt_titles = list()
+	alt_titles = null
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,

@@ -7,7 +7,7 @@
 	archetype = /decl/submap_archetype/derelict/bearcat
 
 /decl/submap_archetype/derelict/bearcat
-	descriptor = "derelict"
+	descriptor = "derelict cargo vessel"
 	map = "Bearcat Wreck"
 	crew_jobs = list(
 		/datum/job/submap/bearcat_captain,

@@ -72,3 +72,14 @@
 /decl/cultural_info/culture/nabber/a/plus/New()
 	LAZYADD(valid_jobs, /datum/job/doctor_contractor)
 	..()
+
+/datum/job
+	allowed_branches = list(
+		/datum/mil_branch/civilian
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/civ
+	)
+
+/datum/map/torch
+	default_assistant_title = "Passenger"
