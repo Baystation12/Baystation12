@@ -354,28 +354,23 @@ var/global/datum/controller/occupations/job_master
 			CheckHeadPositions(level)
 
 			// Loop through all unassigned players
+			var/list/deferred_jobs
 			for(var/mob/new_player/player in unassigned)
-
 				// Loop through all jobs
 				for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-					if(!job || mode.disabled_jobs.Find(job.title) )
-						continue
+					if(job && !mode.disabled_jobs.Find(job.title) )
+						if(job.defer_roundstart_spawn)
+							LAZYADD(deferred_jobs, job)
+						else if(AttemptRoleAssignment(player, job, level))
+							unassigned -= player
+							deferred_jobs = null
+							break
 
-					if(jobban_isbanned(player, job.title))
-						Debug("DO isbanned failed, Player: [player], Job:[job.title]")
-						continue
-
-					if(!job.player_old_enough(player.client))
-						Debug("DO player not old enough, Player: [player], Job:[job.title]")
-						continue
-
-					// If the player wants that job on this level, then try give it to him.
-					if(player.client.prefs.CorrectLevel(job,level))
-
-						// If the job isn't filled
-						if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
-							Debug("DO pass, Player: [player], Level:[level], Job:[job.title]")
-							AssignRole(player, job.title)
+				// Now try putting us into any deferred roles.
+			if(LAZYLEN(deferred_jobs))
+				for(var/mob/new_player/player in unassigned)
+					for(var/datum/job/job in deferred_jobs)
+						if(AttemptRoleAssignment(player, job, level))
 							unassigned -= player
 							break
 
@@ -406,6 +401,20 @@ var/global/datum/controller/occupations/job_master
 				player.new_player_panel()
 				unassigned -= player
 		return 1
+
+	proc/AttemptRoleAssignment(var/mob/new_player/player, var/datum/job/job, var/level)
+		. = FALSE
+		if(jobban_isbanned(player, job.title))
+			Debug("DO isbanned failed, Player: [player], Job:[job.title]")
+		else if(!job.player_old_enough(player.client))
+			Debug("DO player not old enough, Player: [player], Job:[job.title]")
+		// If the player wants that job on this level, then try give it to him.
+		else if(player.client.prefs.CorrectLevel(job, level))
+			// If the job isn't filled
+			if(job.is_position_available())
+				Debug("DO pass, Player: [player], Level:[level], Job:[job.title]")
+				AssignRole(player, job.title)
+				. = TRUE
 
 	proc/EquipCustomLoadout(var/mob/living/carbon/human/H, var/datum/job/job)
 
@@ -573,6 +582,8 @@ var/global/datum/controller/occupations/job_master
 		BITSET(H.hud_updateflag, ID_HUD)
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
+
+		job.post_equip_rank(H)
 		return H
 
 	proc/LoadJobs(jobsfile) //ran during round setup, reads info from jobs.txt -- Urist

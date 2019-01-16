@@ -47,6 +47,8 @@
 	var/min_goals = 1
 	var/max_goals = 3
 
+	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
+
 /datum/job/New()
 	..()
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
@@ -328,3 +330,6 @@
 
 /datum/job/proc/make_position_available()
 	total_positions++
+
+/datum/job/proc/post_equip_rank(var/mob/person)
+	return
