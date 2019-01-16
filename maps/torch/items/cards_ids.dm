@@ -197,10 +197,14 @@
 /obj/item/weapon/card/id/torch/passenger/research/mining
 	job_access_type = /datum/job/mining
 
-/obj/item/weapon/card/id/torch/passenger/research/liaison
+/obj/item/weapon/card/id/torch/passenger/corporate
+	color = COLOR_BOTTLE_GREEN
+	detail_color = COLOR_OFF_WHITE
+	job_access_type = /datum/job/bodyguard
+
+/obj/item/weapon/card/id/torch/passenger/corporate/liaison
 	job_access_type = /datum/job/liaison
 	extra_details = list("onegoldstripe")
-
 
 //Merchant
 /obj/item/weapon/card/id/torch/merchant

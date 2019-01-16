@@ -39,6 +39,10 @@
 	req_one_access = list(access_brig, access_bridge)
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
+/obj/item/weapon/gun/energy/gun/secure/corporate
+	desc = "An access-locked EXO-branded LAEP90-S. It's designed to please paranoid corporate liaisons. Body cam not included."
+	req_one_access = list(access_liaison)
+
 /obj/item/weapon/gun/energy/revolver/secure
 	name = "smart service revolver"
 	desc = "The LAER680-S, a standard issue service revolver commonly used by higher ranking offcers among the SCG. Fitted with an NT1019 chip which allows remote authorization of the weapon's functionality."

@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - rscadd: "Added a Loss Prevention Associate role. Basically a bodyguard for the Workplace Liaison. They can only spawn with an active Liaison in the round, and get a secure gun with corporate access."
+  - tweak: "Added backend support for deferred roles, please make a bug if this breaks anything in roundstart job allocation."
