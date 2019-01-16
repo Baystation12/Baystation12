@@ -72,37 +72,46 @@
 /datum/detective_gun_skin
 	var/name
 	var/icon_state
+	var/icon
 
 /datum/detective_gun_skin/default/New()
 	..()
 	var/obj/item/weapon/gun/projectile/colt/detective/d = /obj/item/weapon/gun/projectile/colt/detective
 	name = initial(d.name)
+	icon_state = initial(d.icon)
 	icon_state = initial(d.icon_state)
 
 /datum/detective_gun_skin/colt
 	name = "\improper Colt M1911"
 	icon_state = "colt"
+	icon = 'icons/obj/guns/pistols.dmi'
 
 /datum/detective_gun_skin/luger
 	name = "\improper P08 Luger"
 	icon_state = "p08"
+	icon = 'icons/obj/guns/pistols.dmi'
 
 /datum/detective_gun_skin/luger_brown
 	name = "\improper P08 Luger, brown"
 	icon_state = "p08b"
+	icon = 'icons/obj/guns/pistols.dmi'
 
 /datum/detective_gun_skin/mk_standard
 	name = "\improper NT Mk. 58"
 	icon_state = "secguncomp"
+	icon = 'icons/obj/guns/pistols.dmi'
 
 /datum/detective_gun_skin/mk_custom
 	name = "\improper NT Mk. 58 Custom"
 	icon_state = "secgundark"
+	icon = 'icons/obj/guns/pistols.dmi'
 
 /datum/detective_gun_skin/usp
 	name = "\improper USP"
 	icon_state = "usp"
+	icon = 'icons/obj/guns/pistols.dmi'
 
 /datum/detective_gun_skin/vp
 	name = "\improper H&K VP"
 	icon_state = "VP78"
+	icon = 'icons/obj/guns/pistols.dmi'

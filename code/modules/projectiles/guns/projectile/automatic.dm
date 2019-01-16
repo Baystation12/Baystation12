@@ -1,6 +1,7 @@
 /obj/item/weapon/gun/projectile/automatic
 	name = "prototype SMG"
 	desc = "A protoype lightweight, fast firing submachine gun. Uses 4mm rounds."
+	icon = 'icons/obj/guns/machine_pistols.dmi'
 	icon_state = "prototype"
 	w_class = ITEM_SIZE_NORMAL
 	load_method = MAGAZINE
@@ -30,6 +31,7 @@
 /obj/item/weapon/gun/projectile/automatic/machine_pistol
 	name = ".45 machine pistol"
 	desc = "The Lumoco Arms MP6 Vesper, A fairly common machine pistol. Sometimes refered to as an 'uzi' by the backwater spacers it is often associated with. Uses .45 rounds."
+	icon = 'icons/obj/guns/machine_pistols.dmi'
 	icon_state = "mpistolen"
 	item_state = "wt550"
 	w_class = ITEM_SIZE_NORMAL
@@ -57,6 +59,7 @@
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "10mm submachine gun"
 	desc = "The C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Uses 10mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
+	icon = 'icons/obj/guns/c20r.dmi'
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = ITEM_SIZE_LARGE
@@ -88,6 +91,7 @@
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "assault rifle"
 	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. The serial number has been scratched off. Uses 5.56mm rounds."
+	icon = 'icons/obj/guns/assault_rifle.dmi'
 	icon_state = "arifle"
 	item_state = null
 	w_class = ITEM_SIZE_HUGE
@@ -122,6 +126,7 @@
 /obj/item/weapon/gun/projectile/automatic/wt550
 	name = "9mm submachine gun"
 	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use. Uses 9mm rounds."
+	icon = 'icons/obj/guns/wt550.dmi'
 	icon_state = "wt550"
 	item_state = "wt550"
 	w_class = ITEM_SIZE_NORMAL
@@ -150,6 +155,7 @@
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "bullpup assault rifle"
 	desc = "The Z8 Bulldog is an older model bullpup carbine, made by the now defunct Zendai Foundries. Uses armor piercing 7.62mm rounds. Makes you feel like a space marine when you hold it."
+	icon = 'icons/obj/guns/z8carbine.dmi'
 	icon_state = "carbine"
 	item_state = "z8carbine"
 	w_class = ITEM_SIZE_HUGE
@@ -222,6 +228,7 @@
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
 	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever." //probably should refluff this
+	icon = 'icons/obj/guns/saw.dmi'
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = ITEM_SIZE_HUGE

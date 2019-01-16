@@ -6,7 +6,8 @@
 /obj/item/weapon/gun/projectile
 	name = "gun"
 	desc = "A gun that fires bullets."
-	icon_state = "revolver"
+	icon = 'icons/obj/guns/pistols.dmi'
+	icon_state = "colt"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	w_class = ITEM_SIZE_NORMAL
 	matter = list(MATERIAL_STEEL = 1000)

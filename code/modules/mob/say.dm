@@ -9,7 +9,6 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-
 	if(typing_indicator)
 		qdel(typing_indicator)
 	usr.say(message)
