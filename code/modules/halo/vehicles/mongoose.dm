@@ -45,8 +45,10 @@
 		for(var/slot = slot_first to slot_last)
 			var/obj/item/I = occupant.get_equipped_item(slot)
 			if(I)
-				slowdown_amount += I.slowdown_general
-				slowdown_amount += I.slowdown_per_slot[slot]
+				if(I.slowdown_general > 0)
+					slowdown_amount += I.slowdown_general
+				if(I.slowdown_per_slot[slot])
+					slowdown_amount += I.slowdown_per_slot[slot]
 	vehicle_move_delay = initial(vehicle_move_delay) + slowdown_amount
 
 #undef MONGOOSE_BASE_PASSENGER_OFFSETS

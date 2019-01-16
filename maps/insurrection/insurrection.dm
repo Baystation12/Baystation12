@@ -7,7 +7,6 @@
 	#include "insurrection_outfits.dm"
 	#include "insurrection_jobs.dm"
 	#include "insurrection_spawns.dm"
-	#include "../overmap_ships/om_ship_areas.dm"
 	#include "../insurrection/UNSC_Yolotanker/includes.dm"
 
 	#include "innie_base_areas.dm"

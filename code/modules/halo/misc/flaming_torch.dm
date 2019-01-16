@@ -2,7 +2,7 @@
 /obj/item/device/flashlight/flaming_torch
 	name = "wooden torch"
 	desc = "A crude light source at night."
-	icon = 'desert_outpost.dmi'
+	icon = 'flaming_torch.dmi'
 	icon_state = "torch"
 	item_state = "baton"
 	brightness_on = 5

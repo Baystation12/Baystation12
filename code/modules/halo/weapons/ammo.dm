@@ -241,8 +241,8 @@
 	tracer_delay_time = 2 SECONDS
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
-	penetrating = 0
-	armor_penetration = 70
+	penetrating = 5
+	armor_penetration = 80
 	tracer_type = null
 	tracer_delay_time = null
 

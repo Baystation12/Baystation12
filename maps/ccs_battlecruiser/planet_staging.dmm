@@ -72,6 +72,10 @@
 "bt" = (/obj/structure/table/rack,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/obj/item/weapon/material/hatchet,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bu" = (/obj/structure/table/standard,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bv" = (/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bw" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/ccs_battlecruiser/planet_staging)
+"bx" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/ccs_battlecruiser/planet_staging)
+"by" = (/turf/simulated/floor/tiled,/area/ccs_battlecruiser/planet_staging)
+"bz" = (/turf/unsimulated/mineral,/area/space)
 
 (1,1,1) = {"
 aaababababababababababababababababababababababababababababababababababababababab
@@ -91,9 +95,9 @@ abababababababababacacacacacacacajacacaoacacacacacacacacacacacacajajacacacaqabab
 abababababababababaracacacasacacajacacacacacaiacacacacacacacacajajacacacacaqabab
 ababababababababababacacacacacacacajajacacacacacahacacacacacajajacacacacacaqabab
 ababababababababababaracacacacaiacacacajajajacacacacacajajajajacacacaiacacaqabab
-abababababababababababatatacacacacacacacacacajajajajajajacacacacacacacacacababab
-abababababababababababauacacacacacacacasacacacacacacacacacacacacacacacacabababab
-ababababababababababauauauacacavacacacacacawacacacacacacacacacacacacacababababab
+abbybybyabababababababatatacacacacacacacacacajajajajajajacacacacacacacacacababab
+abbybwbyabababababababauacacacacacacacasacacacacacacacacacacacacacacacacabababab
+abbybybyababababababauauauacacavacacacacacawacacacacacacacacacacacacacababababab
 abababababaxaxaxaxaxauauauauacavaracacacacacacacacacacacacayazazazacabababababab
 abababaxaxaxaAauauaBauauauauauabababababababaracaCaCaCaCacababababababababababab
 ababaDauauaEauauauauauauauauabababababababababababababababababababababababababab
@@ -111,7 +115,7 @@ abaxauaubdauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauabbebfbfbeababaxabab
 ababaDauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibjbiaubkblbmauauababauauauauababababab
 ababaxauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibibiaubkblbmauababbnaubnbnaubnabababab
 abababaFauauauauauauauauauauauauauauauauauauauauauauauauababbnaubnbnaubnabababab
-ababababaDauauauauauauauauauauauauauauauauauauauauauaFabababbnaubnbnaubnabababab
-abababababaxaxbobobpbqbrbsbtaAaxaxbubububvbvbvaDaxababababababababababababababab
+abbzababaDauauauauauauauauauauauauauauauauauauauauauaFabababbnaubnbnaubnabababab
+ababbxababaxaxbobobpbqbrbsbtaAaxaxbubububvbvbvaDaxababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababab
 "}

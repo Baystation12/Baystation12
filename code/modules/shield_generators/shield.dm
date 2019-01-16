@@ -207,6 +207,9 @@
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)
+	if(!(proj.penetrating > 0))
+		proj.damage /= 100 //reduces the damage of a deck-gun from 200 to 2.
+	proj.penetrating = 0
 	if(proj.damage_type == BURN)
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_HEAT)
 	else if (proj.damage_type == BRUTE)
