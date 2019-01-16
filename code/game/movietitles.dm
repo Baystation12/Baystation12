@@ -183,34 +183,35 @@ client
 	for(var/client/C)
 		if(!C.holder)
 			continue
-		if(C.holder.rank == "Host")
-			staff += GenerateStaffCredits(C, hostjobs)
-		else if(C.holder.rank == "HeadAdmin")
-			staff += GenerateStaffCredits(C, headjobs)
-		else if(C.holder.rank == "HeadDeveloper")
-			staff += GenerateStaffCredits(C, headdevjobs)
-		else if(C.holder.rank == "StaffManager")
-			staff += GenerateStaffCredits(C,staffmanagerjobs)
-		else if(C.holder.rank == "LoreManager")
-			staff += GenerateStaffCredits(C, loremanagerjobs)
-		else if(C.holder.rank == "SeniorAdmin")
-			staff += GenerateStaffCredits(C, senioradminjobs)
-		else if(C.holder.rank == "GameAdmin")
-			staff += GenerateStaffCredits(C, adminjobs)
-		else if(C.holder.rank == "Developer" || C.holder.rank == "DevAdmin")
-			staff += GenerateStaffCredits(C, devjobs)
-		else if(C.holder.rank == "TrialAdmin")
-			staff += GenerateStaffCredits(C, trialminjobs)
-		else if(C.holder.rank == "Moderator")
-			staff += GenerateStaffCredits(C, modjobs)
-		else if(C.holder.rank == "TrialModerator")
-			staff += GenerateStaffCredits(C, trialmodjobs)
+		switch(C.holder.rank)
+			if("Host")
+				staff += GenerateStaffCredits(C, hostjobs)
+			if("HeadAdmin")
+				staff += GenerateStaffCredits(C, headjobs)
+			if("HeadDeveloper")
+				staff += GenerateStaffCredits(C, headdevjobs)
+			if("StaffManager")
+				staff += GenerateStaffCredits(C,staffmanagerjobs)
+			if("LoreManager")
+				staff += GenerateStaffCredits(C, loremanagerjobs)
+			if("SeniorAdmin")
+				staff += GenerateStaffCredits(C, senioradminjobs)
+			if("GameAdmin")
+				staff += GenerateStaffCredits(C, adminjobs)
+			if("Developer" || "DevAdmin")
+				staff += GenerateStaffCredits(C, devjobs)
+			if("TrialAdmin")
+				staff += GenerateStaffCredits(C, trialminjobs)
+			if("Moderator")
+				staff += GenerateStaffCredits(C, modjobs)
+			if("TrialModerator")
+				staff += GenerateStaffCredits(C, trialmodjobs)
 	titles += "<center>[jointext(staff,"<br>")]</center>"
 
-	var/disclaimer = "Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>"
-	disclaimer += "This motion picture is protected under the copyright laws of the Sol Central Government<br> and other nations throughout the galaxy.<br>"
-	disclaimer += "Colony of First Publication: [pick("Mars", "Luna", "Earth", "Venus", "Phobos", "Ceres", "Tiamat", "Ceti Epsilon", "Eos", 
-				  "Pluto", "Ouere", "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
+	var/disclaimer = "Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>\
+					 This motion picture is protected under the copyright laws of the Sol Central Government<br> and other nations throughout the galaxy.<br>\
+					 Colony of First Publication: [pick("Mars", "Luna", "Earth", "Venus", "Phobos", "Ceres", "Tiamat", "Ceti Epsilon", "Eos", "Pluto", "Ouere",\
+					 "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
 	disclaimer += pick("Use for parody prohibited. PROHIBITED.", 
 					   "All stunts were performed by underpaid interns. Do NOT try at home.",
 					   "[GLOB.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.",
@@ -223,7 +224,7 @@ client
 						with the depiction of tobacco products, despite the copious amounts	of smoking depicted within.<br>\
 						(This disclaimer sponsored by Carcinoma - Carcinogens are our Business!(TM)).",
 						"No animals were harmed in the making of this motion picture except for those listed previously as dead. Do not try this at home.")
-	titles += "<center>[disclaimer]</center>"
+	titles += "<center>[JOINTEXT(disclaimer)]</center>"
 
 	return titles
 
