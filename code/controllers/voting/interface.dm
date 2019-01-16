@@ -15,7 +15,8 @@
 	else
 		. += "<h2>Vote: '[name]'</h2>"
 
-	. += "Time Left: [time_remaining/10] s<hr>"
+	. += "Time Left: [time_remaining/10] s[delayed ? " (delayed)" : ""]<hr>"
+
 	. += "<table width = '100%'>"
 	. += "<tr>"
 	. += "<td align = 'center'><b>Choices</b></td>"
@@ -73,6 +74,8 @@
 	if(admin)
 		. += "(<a href='?src=\ref[src];cancel_vote=1'>Cancel Vote</a>) "
 		. += "(<a href='?src=\ref[src];end_early=1'>End Vote Early</a>) "
+		. += "(<a href='?src=\ref[src];extend_vote=1'>Extend Vote</a>) "
+		. += "(<a href='?src=\ref[src];delay_vote=1'>Delay Vote</a>) "
 
 	. += "<a href='?src=\ref[src];client=\ref[C];close=1'>(Close)</a>"
 
