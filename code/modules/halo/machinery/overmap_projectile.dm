@@ -91,7 +91,8 @@
 
 	new_proj.launch(proj_end_loc)
 	if(ship_hit_sound)
-		playsound(locate(new_proj.x,new_proj.y,z_level), ship_hit_sound, 100,1, 255,,1)
+		for(var/z_level_om in overmap_object_hit.map_z)
+			playsound(locate(new_proj.x,new_proj.y,z_level_om), ship_hit_sound, 100,1, 255,,1)
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
 	var/obj/effect/overmap/overmap_object = impacted
