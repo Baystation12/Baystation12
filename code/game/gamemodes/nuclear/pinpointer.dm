@@ -109,7 +109,7 @@
 	else if(distance > 4*world.view)
 		pointer.color = COLOR_RED
 	else
-		pointer.color = COLOR_BLUE
+		pointer.color = COLOR_YELLOW
 	overlays += pointer
 
 //Nuke ops locator
