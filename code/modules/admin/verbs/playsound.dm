@@ -38,12 +38,11 @@ var/list/sounds_cache = list()
 	if(!check_rights(R_SOUNDS))	return
 
 	var/list/sounds = list("sound/items/bikehorn.ogg","sound/effects/siren.ogg")
-	sounds += sounds_cache
-	sounds += "--CANCEL--"	
+	sounds += sounds_cache	
 
-	var/melody = input("Select a sound from the server to play", "Server sound list", "--CANCEL--") in sounds
+	var/melody = input("Select a sound from the server to play", "Server sound list") as null|anything in sounds
 
-	if(melody == "--CANCEL--")	
+	if(!melody)	
 		return
 		
 	play_sound(melody)

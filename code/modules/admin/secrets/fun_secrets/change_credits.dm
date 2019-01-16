@@ -7,12 +7,11 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 	name = "Change End Credits Title"
 
 /datum/admin_secret_item/fun_secret/change_credits_song/do_execute()
-	var/list/sounds = subtypesof(/music_track)
-	sounds += "Cancel"	
+	var/list/sounds = subtypesof(/music_track)	
 
-	var/music_track/selected = input("Select a music track for the credits.", "Server music list", "Cancel") in sounds
+	var/music_track/selected = input("Select a music track for the credits.", "Server music list") as null|anything in sounds
 
-	if(selected != "Cancel")
+	if(selected)
 		var/music_track/track = decls_repository.get_decl(selected)
 		GLOB.end_credits_song = track.song
 	
