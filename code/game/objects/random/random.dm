@@ -1231,7 +1231,6 @@ var/list/random_useful_
 /obj/random/mre/dessert/vegan
 	name = "random vegan MRE dessert"
 	desc = "This is a random vegan dessert for MREs."
-	icon_state = "pouch"
 
 /obj/random/mre/dessert/vegan/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
@@ -1265,7 +1264,6 @@ var/list/random_useful_
 /obj/random/mre/spread/vegan
 	name = "random vegan MRE spread"
 	desc = "This is a random vegan spread packet for MREs"
-	icon_state = "packet"
 
 /obj/random/mre/spread/vegan/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly)
