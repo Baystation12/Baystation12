@@ -56,6 +56,7 @@
 	damage = 300
 	penetrating = 999
 	step_delay = 0.0 SECONDS
+	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/pulse_laser_dam_proj
 	tracer_delay_time = 2 SECONDS
 
