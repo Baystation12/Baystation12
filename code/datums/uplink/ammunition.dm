@@ -86,3 +86,18 @@
 	name = "Flechette Magazine"
 	item_cost = 8
 	path = /obj/item/weapon/magnetic_ammo
+
+/datum/uplink_item/item/ammo/c45m_emp
+	name = ".45 EMP Ammo Box (10 rounds)"
+	item_cost = 6
+	path = /obj/item/ammo_magazine/box/emp/c45
+
+/datum/uplink_item/item/ammo/p10mm_emp
+	name = "10mm EMP Ammmo Box (10 rounds)"
+	item_cost = 8
+	path = /obj/item/ammo_magazine/box/emp/a10mm
+
+/datum/uplink_item/item/ammo/c38_emp
+	name = ".38 EMP Ammmo Box (10 rounds)"
+	item_cost = 6
+	path = /obj/item/ammo_magazine/box/emp
