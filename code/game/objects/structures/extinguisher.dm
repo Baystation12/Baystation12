@@ -1,8 +1,7 @@
 /obj/structure/extinguisher_cabinet
 	name = "extinguisher cabinet"
 	desc = "A small wall mounted cabinet designed to hold a fire extinguisher."
-	icon = 'icons/obj/closet.dmi'
-	icon_state = "extinguisher_closed"
+	icon = 'icons/obj/extinguisher.dmi'
 	anchored = 1
 	density = 0
 	var/obj/item/weapon/extinguisher/has_extinguisher

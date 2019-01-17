@@ -1,11 +1,7 @@
 /obj/structure/closet/wizard
 	name = "artifact closet"
 	desc = "a special lead lined closet used to hold artifacts of immense power."
-	icon = 'icons/obj/storage.dmi'
-	icon = 'icons/obj/closet.dmi'
-	icon_state = "acloset"
-	icon_closed = "acloset"
-	icon_opened = "aclosetopen"
+	closet_appearance = /decl/closet_appearance/alien
 
 /obj/structure/closet/wizard/New()
 	..()

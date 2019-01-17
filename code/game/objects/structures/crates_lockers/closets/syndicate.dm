@@ -1,10 +1,7 @@
 /obj/structure/closet/syndicate
 	name = "armory closet"
 	desc = "Why is this here?"
-	icon_state = "syndicate"
-	icon_closed = "syndicate"
-	icon_opened = "syndicateopen"
-
+	closet_appearance = /decl/closet_appearance/tactical/alt
 
 /obj/structure/closet/syndicate/personal
 	desc = "It's a storage unit for operative gear."
