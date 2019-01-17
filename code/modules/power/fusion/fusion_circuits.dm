@@ -1,6 +1,6 @@
-/obj/item/weapon/circuitboard/fusion_core_control
+/obj/item/weapon/circuitboard/fusion/core_control
 	name = "circuit board (fusion core controller)"
-	build_path = /obj/machinery/computer/fusion_core_control
+	build_path = /obj/machinery/computer/fusion/core_control
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/circuitboard/kinetic_harvester
@@ -29,12 +29,12 @@
 
 /obj/item/weapon/circuitboard/fusion_fuel_control
 	name = "circuit board (fusion fuel controller)"
-	build_path = /obj/machinery/computer/fusion_fuel_control
+	build_path = /obj/machinery/computer/fusion/fuel_control
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/circuitboard/gyrotron_control
 	name = "circuit board (gyrotron controller)"
-	build_path = /obj/machinery/computer/gyrotron_control
+	build_path = /obj/machinery/computer/fusion/gyrotron
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/circuitboard/fusion_core
@@ -65,8 +65,8 @@
 
 /datum/design/circuit/fusion
 	name = "fusion core control console"
-	id = "fusion_core_control"
-	build_path = /obj/item/weapon/circuitboard/fusion_core_control
+	id = "fusion/core_control"
+	build_path = /obj/item/weapon/circuitboard/fusion/core_control
 	sort_string = "LAAAD"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 

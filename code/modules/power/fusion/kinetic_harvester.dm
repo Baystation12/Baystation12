@@ -6,11 +6,28 @@
 	icon = 'icons/obj/kinetic_harvester.dmi'
 	icon_state = "off"
 
-	var/id_tag
+	var/initial_id_tag
 	var/list/stored =     list()
 	var/list/harvesting = list()
 	var/obj/machinery/power/fusion_core/harvest_from
 	var/conversion_efficiency = 30
+
+/obj/machinery/kinetic_harvester/Initialize()
+	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	if(initial_id_tag)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.set_tag(null, initial_id_tag)
+	find_core()
+	queue_icon_update()
+	. = ..()
+
+/obj/machinery/kinetic_harvester/Destroy()
+	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+	if(fusion)
+		var/datum/fusion_plant/plant = fusion.get_fusion_plant()
+		if(plant)
+			plant.remove_device(src)
+	. = ..()
 
 /obj/machinery/kinetic_harvester/attack_ai(mob/user)
 	attack_hand(user)
@@ -19,28 +36,23 @@
 	add_fingerprint(user)
 	interact(user)
 
-/obj/machinery/kinetic_harvester/Initialize()
-	find_core()
-	queue_icon_update()
-	. = ..()
-
 /obj/machinery/kinetic_harvester/attackby(var/obj/item/thing, var/mob/user)
 	if(isMultitool(thing))
-		var/new_ident = input("Enter a new ident tag.", "Kinetic Harvester", id_tag) as null|text
-		if(new_ident && user.Adjacent(src))
-			id_tag = new_ident
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		if(fusion.get_new_tag(user))
 			find_core()
 		return
 	return ..()
 
 /obj/machinery/kinetic_harvester/proc/find_core()
 	harvest_from = null
-	if(id_tag)
-		for(var/thing in fusion_cores)
-			var/obj/machinery/power/fusion_core/C = thing
-			if(C.id_tag == id_tag && get_dist(src, C) <= 10)
-				harvest_from = C
-				break
+	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
+	if(plant)	
+		for(var/thing in plant.fusion_cores)
+			harvest_from = thing
+			break
+	return harvest_from
 
 /obj/machinery/kinetic_harvester/interact(var/mob/user)
 
@@ -54,17 +66,11 @@
 		user << browse(null, "window=kinetic_harvester")
 		return
 
-	if(!id_tag)
-		to_chat(user, SPAN_WARNING("This machine has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool."))
-		return
-
-	if(!harvest_from)
-		find_core()
-	if(!harvest_from)
+	if(!harvest_from && !find_core())
 		to_chat(user, SPAN_WARNING("This machine cannot locate a fusion core. Please check that one has been installed within ten meters of the machine."))
 		return
 
-	var/dat = "<B>Kinetic Harvester #[id_tag]</B><BR>"
+	var/dat = "<B>Kinetic Harvester</B><BR>"
 	dat += "Harvester is: <a href='?src=\ref[src];toggle_power=1'>[use_power >= POWER_USE_ACTIVE ? "on" : "off"]</a><br>"
 	if(!harvest_from.owned_field)
 		dat += SPAN_DANGER("Core is not currently active.")
@@ -98,7 +104,7 @@
 		harvest_from = null
 
 	if(use_power >= POWER_USE_ACTIVE)
-		if(LAZYLEN(harvesting) && check_core_status(harvest_from) && harvest_from.owned_field)
+		if(LAZYLEN(harvesting) && harvest_from && harvest_from.check_core_status() && harvest_from.owned_field)
 			for(var/mat in harvesting)
 				if(isnull(harvest_from.owned_field.reactants[mat]))
 					harvesting -= mat
