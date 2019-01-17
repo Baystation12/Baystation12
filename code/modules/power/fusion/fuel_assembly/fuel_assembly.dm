@@ -72,5 +72,5 @@
 /obj/item/weapon/fuel_assembly/supermatter/New(var/newloc)
 	..(newloc, MATERIAL_SUPERMATTER)
 
-/obj/item/fuel_assembly/hydrogen/New(var/newloc)
+/obj/item/weapon/fuel_assembly/hydrogen/New(var/newloc)
 	..(newloc, MATERIAL_HYDROGEN)

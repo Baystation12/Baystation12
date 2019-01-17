@@ -1,5 +1,3 @@
-var/list/fuel_injectors = list()
-
 /obj/machinery/fusion_fuel_injector
 	name = "fuel injector"
 	icon = 'icons/obj/machines/power/fusion.dmi'
@@ -11,21 +9,27 @@ var/list/fuel_injectors = list()
 	active_power_usage = 500
 
 	var/fuel_usage = 0.0001
-	var/id_tag
+	var/initial_id_tag
 	var/injecting = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly
 
-/obj/machinery/fusion_fuel_injector/New()
-	..()
-	fuel_injectors += src
-	tag = null
+/obj/machinery/fusion_fuel_injector/Initialize()
+	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	if(initial_id_tag)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.set_tag(null, initial_id_tag)
+	. = ..()
 
 /obj/machinery/fusion_fuel_injector/Destroy()
 	if(cur_assembly)
 		cur_assembly.dropInto(loc)
 		cur_assembly = null
-	fuel_injectors -= src
-	return ..()
+	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+	if(fusion)
+		var/datum/fusion_plant/plant = fusion.get_fusion_plant()
+		if(plant)
+			plant.remove_device(src)
+	. = ..()
 
 /obj/machinery/fusion_fuel_injector/mapped
 	anchored = 1
@@ -40,9 +44,8 @@ var/list/fuel_injectors = list()
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
 	if(isMultitool(W))
-		var/new_ident = input("Enter a new ident tag.", "Fuel Injector", id_tag) as null|text
-		if(new_ident && user.Adjacent(src))
-			id_tag = new_ident
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.get_new_tag(user)
 		return
 
 	if(istype(W, /obj/item/weapon/fuel_assembly))

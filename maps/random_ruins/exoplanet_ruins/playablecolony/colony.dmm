@@ -210,7 +210,7 @@
 /area/map_template/colony/surgery)
 "aH" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/circuitboard/fusion_core_control,
+/obj/item/weapon/circuitboard/fusion/core_control,
 /obj/item/weapon/circuitboard/fusion_core,
 /obj/item/weapon/circuitboard/fusion_fuel_compressor,
 /obj/item/weapon/circuitboard/fusion_fuel_control,

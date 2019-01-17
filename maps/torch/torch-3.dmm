@@ -1956,7 +1956,7 @@
 /area/crew_quarters/safe_room/seconddeck)
 "eh" = (
 /obj/machinery/power/fusion_core/mapped{
-	id_tag = "fusion_core"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -5515,11 +5515,11 @@
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "mf" = (
-/obj/machinery/computer/fusion_fuel_control{
+/obj/machinery/computer/fusion/fuel_control{
 	icon_state = "computer";
 	dir = 4;
 	req_access = list(11);
-	id_tag = "fusion_injector"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /obj/effect/floor_decal/corner/yellow/half{
 	icon_state = "bordercolorhalf";
@@ -7939,7 +7939,7 @@
 	},
 /obj/machinery/power/emitter/gyrotron{
 	dir = 8;
-	id_tag = "fusion_gyrotron"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/reinforced,
 /area/vacant/prototype/engine)
@@ -14942,7 +14942,7 @@
 "Lg" = (
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 0;
-	id_tag = "fusion_injector"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/reinforced,
 /area/vacant/prototype/engine)
@@ -16060,11 +16060,11 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/machinery/computer/gyrotron_control{
+/obj/machinery/computer/fusion/gyrotron{
 	icon_state = "computer";
 	dir = 4;
 	req_access = list(11);
-	id_tag = "fusion_gyrotron"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
@@ -16570,11 +16570,11 @@
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
 "Rf" = (
-/obj/machinery/computer/fusion_core_control{
+/obj/machinery/computer/fusion/core_control{
 	icon_state = "computer";
 	dir = 4;
 	req_access = list(11);
-	id_tag = "fusion_core"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
@@ -18083,7 +18083,7 @@
 	anchored = 0;
 	dir = 1;
 	icon_state = "injector0";
-	id_tag = "fusion_injector"
+	initial_id_tag= "fusion_injector"
 	},
 /turf/simulated/floor/reinforced,
 /area/vacant/prototype/engine)
