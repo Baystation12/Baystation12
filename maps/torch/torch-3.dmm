@@ -2773,6 +2773,12 @@
 	dir = 8;
 	layer = 2.9
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/stack/material/glass{
+	amount = 20;
+	pixel_x = -3;
+	pixel_y = 3
+	},
 /obj/item/stack/material/glass{
 	amount = 20;
 	pixel_x = -3;
@@ -2801,7 +2807,9 @@
 /obj/item/stack/material/plasteel{
 	amount = 20
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/stack/material/plasteel{
+	amount = 20
+	},
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
@@ -10239,6 +10247,9 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
+/obj/machinery/camera/network/engineering{
+	c_tag = "Robotics - Lower"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "xG" = (
@@ -14962,7 +14973,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "Ll" = (
-/obj/structure/table/steel,
 /obj/item/weapon/book/manual/ripley_build_and_repair,
 /obj/item/weapon/book/manual/robotics_cyborgs,
 /obj/structure/filingcabinet/wallcabinet{
@@ -14971,6 +14981,10 @@
 	},
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/machinery/computer/rdconsole/robotics{
+	id = 3;
+	name = "fabrication lab fabrication console"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
