@@ -43,10 +43,10 @@
 	department_flag = SPT
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "your corporate overlords"
+	supervisors = "the Workplace Liaison"
 	selection_color = "#3d3d7f"
 	economic_power = 12
-	minimal_player_age = 0
+	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
