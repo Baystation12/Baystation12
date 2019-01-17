@@ -558,7 +558,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/magazine_c20r
+/datum/autolathe/recipe/magazine_p10mm
 	name = "ammunition (10mm) pistol"
 	path = /obj/item/ammo_magazine/p10mm
 	hidden = 1
