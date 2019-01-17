@@ -1228,9 +1228,14 @@ var/list/random_useful_
 				/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
 				/obj/item/clothing/mask/chewable/candy/gum)
 
+/obj/random/mre/dessert/vegan
+	name = "random vegan MRE dessert"
+	desc = "This is a random vegan dessert for MREs."
+
 /obj/random/mre/dessert/vegan/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
 				/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit)
 
 /obj/random/mre/drink
@@ -1255,6 +1260,13 @@ var/list/random_useful_
 /obj/random/mre/spread/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/honey)
+
+/obj/random/mre/spread/vegan
+	name = "random vegan MRE spread"
+	desc = "This is a random vegan spread packet for MREs"
+
+/obj/random/mre/spread/vegan/spawn_choices()
+	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly)
 
 /obj/random/mre/sauce
 	name = "random MRE sauce"
@@ -1293,4 +1305,4 @@ var/list/random_useful_
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/blue,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/purple,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/grey,
-				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/brown,)
+				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/brown)

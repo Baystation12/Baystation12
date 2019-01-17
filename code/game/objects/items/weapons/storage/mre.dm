@@ -80,7 +80,7 @@ MRE Stuff
 	startswith = list(
 	/obj/item/weapon/storage/mrebag/dessert/menu9,
 	/obj/item/weapon/storage/fancy/crackers,
-	/obj/random/mre/spread,
+	/obj/random/mre/spread/vegan,
 	/obj/random/mre/drink,
 	/obj/random/mre/sauce/vegan,
 	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
