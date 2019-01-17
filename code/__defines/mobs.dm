@@ -240,6 +240,7 @@
 
 #define SPECIES_HUMAN "Human"
 #define SPECIES_ORION "Orion"
+#define SPECIES_SPARTAN "Spartan"
 #define SPECIES_TAJARA "Tajara"
 #define SPECIES_DIONA "Diona"
 #define SPECIES_VOX "Vox"
