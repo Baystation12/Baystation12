@@ -41,7 +41,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Commanding Officer")
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
-	l_ear = /obj/item/device/radio/headset/heads/torchcaptain
+	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/solgov/expedition/co
 	id_type = /obj/item/weapon/card/id/torch/gold
@@ -56,7 +56,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/XO
 	name = OUTFIT_JOB_NAME("Executive Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
-	l_ear = /obj/item/device/radio/headset/heads/torchxo
+	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
@@ -147,7 +147,7 @@ decl/hierarchy/outfit/job/torch/passenger/research/cl/union
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset/heads/torchxo
+	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	id_type = /obj/item/weapon/card/id/torch/crew/sea
 	pda_type = /obj/item/modular_computer/pda/heads
 
