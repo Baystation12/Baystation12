@@ -109,6 +109,7 @@
 				else
 					to_chat(user, "<span class='warning'>\The [src] is used up, but there are more wounds to treat on \the [affecting.name].</span>")
 			use(used)
+			H.update_bandages(1)
 
 /obj/item/stack/medical/ointment
 	name = "ointment"
@@ -199,6 +200,7 @@
 				else
 					to_chat(user, "<span class='warning'>\The [src] is used up, but there are more wounds to treat on \the [affecting.name].</span>")
 			use(used)
+			H.update_bandages(1)
 
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"

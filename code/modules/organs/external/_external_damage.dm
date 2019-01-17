@@ -142,6 +142,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	// sync the organ's damage with its wounds
 	update_damages()
 	owner.updatehealth()
+	if(status & ORGAN_BLEEDING)
+		owner.update_bandages()
 
 	if(owner && update_damstate())
 		owner.UpdateDamageIcon()
