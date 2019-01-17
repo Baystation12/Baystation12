@@ -8,7 +8,7 @@
 	idle_power_usage = 10
 	active_power_usage = 500
 
-	var/fuel_usage = 0.0001
+	var/fuel_usage = 0.001
 	var/initial_id_tag
 	var/injecting = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly
@@ -24,11 +24,6 @@
 	if(cur_assembly)
 		cur_assembly.dropInto(loc)
 		cur_assembly = null
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	if(fusion)
-		var/datum/fusion_plant/plant = fusion.get_fusion_plant()
-		if(plant)
-			plant.remove_device(src)
 	. = ..()
 
 /obj/machinery/fusion_fuel_injector/mapped
@@ -115,12 +110,11 @@
 		for(var/reagent in cur_assembly.rod_quantities)
 			if(cur_assembly.rod_quantities[reagent] > 0)
 				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage
-				var/numparticles = round(amount * 1000)
-				if(numparticles < 1)
-					numparticles = 1
+				if(amount < 1)
+					amount = 1
 				var/obj/effect/accelerated_particle/A = new/obj/effect/accelerated_particle(get_turf(src), dir)
 				A.particle_type = reagent
-				A.additional_particles = numparticles - 1
+				A.additional_particles = amount
 				A.move(1)
 				if(cur_assembly)
 					cur_assembly.rod_quantities[reagent] -= amount

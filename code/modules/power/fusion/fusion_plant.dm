@@ -1,21 +1,5 @@
 GLOBAL_LIST_INIT(fusion_plants, new)
 
-/client/verb/debug_fusion_plants()
-	set name = "Debug Fusion Plants"
-	set category = "Debug"
-
-	if(LAZYLEN(GLOB.fusion_plants))
-		for(var/i = 1 to LAZYLEN(GLOB.fusion_plants))
-			to_chat(src, "Fusion plant #[i]:")
-			var/datum/fusion_plant/plant = GLOB.fusion_plants[GLOB.fusion_plants[i]]
-			to_chat(src, "Id: [plant.id_tag]")
-			to_chat(src, "Obj: [LAZYLEN(plant.all_objects)]")
-			to_chat(src, "Cores: [LAZYLEN(plant.fusion_cores)]")
-			to_chat(src, "Injectors: [LAZYLEN(plant.fuel_injectors)]")
-			to_chat(src, "Gyrotrons: [LAZYLEN(plant.gyrotrons)]")
-	else
-		to_chat(src, "No fusion plants exist.")
-
 /datum/fusion_plant
 	var/id_tag
 	var/list/fusion_cores =   list()
@@ -59,6 +43,6 @@ GLOBAL_LIST_INIT(fusion_plants, new)
 		fusion_cores   -= device
 		fuel_injectors -= device
 		gyrotrons      -= device
-	if(LAZYLEN(all_objects) <= 0)
+	if(all_objects.len <= 0)
 		qdel(src)
 	return isnull(all_objects[device])

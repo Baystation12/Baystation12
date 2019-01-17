@@ -19,6 +19,8 @@
 
 		if(href_list["modifypower"])
 			var/new_val = input("Enter new emission power level (1 - 50)", "Modifying power level", G.mega_energy) as num
+			if(!istype(G))
+				return TOPIC_NOACTION
 			if(!new_val)
 				to_chat(user, SPAN_WARNING("That's not a valid number."))
 				return TOPIC_NOACTION
@@ -28,6 +30,8 @@
 
 		if(href_list["modifyrate"])
 			var/new_val = input("Enter new emission delay between 1 and 10 seconds.", "Modifying emission rate", G.rate) as num
+			if(!istype(G))
+				return TOPIC_NOACTION
 			if(!new_val)
 				to_chat(user, SPAN_WARNING("That's not a valid number."))
 				return TOPIC_NOACTION
@@ -40,7 +44,6 @@
 
 /obj/machinery/computer/fusion/gyrotron/build_ui_data()
 	. = ..()
-	var/list/data = .
 	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
 	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
 	var/list/gyrotrons = list()
@@ -54,5 +57,5 @@
 			gyrotron["firedelay"] = G.rate
 			gyrotron["energy"] = G.mega_energy
 			gyrotrons += list(gyrotron)
-	data["gyrotrons"] = gyrotrons
-	. = data
+	.["gyrotrons"] = gyrotrons
+

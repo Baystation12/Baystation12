@@ -20,7 +20,6 @@
 
 /obj/machinery/computer/fusion/fuel_control/build_ui_data()
 	. = ..()
-	var/list/data = .
 	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
 	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
 	var/list/injectors = list()
@@ -34,4 +33,4 @@
 			injector["fueltype"] =  "[I.cur_assembly ? I.cur_assembly.fuel_type : "no fuel inserted"]"
 			injector["depletion"] = "[I.cur_assembly ? (I.cur_assembly.percent_depleted * 100) : 100]%"
 			injectors += list(injector)
-	data["injectors"] = injectors
+	.["injectors"] = injectors
