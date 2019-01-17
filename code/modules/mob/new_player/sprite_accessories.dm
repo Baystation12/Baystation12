@@ -1250,7 +1250,7 @@
 		icon = 'icons/mob/Spartan_face.dmi'
 		species_allowed = list(SPECIES_SPARTAN)
 		name = "s_Shaved"
-		icon_state = "xhair_shaved"
+		icon_state = "shair_shaved"
 		gender = MALE
 		veryshort = 1
 
