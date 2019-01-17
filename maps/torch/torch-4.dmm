@@ -5338,6 +5338,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/robotics_lift)
 "apo" = (
+/obj/structure/bed/chair/office/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "apG" = (
@@ -6619,16 +6622,6 @@
 	},
 /obj/structure/table/steel,
 /obj/item/stack/material/plastic/ten,
-/obj/item/weapon/disk/tech_disk{
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/weapon/disk/tech_disk{
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/weapon/disk/design_disk,
-/obj/item/weapon/disk/design_disk,
 /obj/item/weapon/reagent_containers/dropper{
 	pixel_y = -4
 	},
@@ -6650,6 +6643,8 @@
 	pixel_y = -24
 	},
 /obj/machinery/light,
+/obj/item/clothing/under/rank/roboticist/skirt,
+/obj/item/clothing/under/rank/roboticist/skirt,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
 "avb" = (
@@ -18244,6 +18239,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"eRQ" = (
+/obj/machinery/computer/rdconsole/robotics{
+	icon_state = "computer";
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/assembly/robotics)
 "eRU" = (
 /turf/simulated/wall/r_wall/hull,
 /area/command/armoury)
@@ -23492,10 +23494,12 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "robotics_external_windows"
+/obj/machinery/door/airlock/engineering{
+	name = "Charging Bay";
+	req_access = list(82)
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/chargebay)
 "kIb" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -23738,6 +23742,7 @@
 /area/assembly/robotics)
 "kXb" = (
 /obj/machinery/r_n_d/protolathe,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "kYM" = (
@@ -25787,12 +25792,10 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/teleporter/firstdeck)
 "npQ" = (
-/obj/machinery/door/airlock/engineering{
-	name = "Charging Bay";
-	req_access = list(82)
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "robotics_external_windows"
 	},
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/tiled/steel_ridged,
+/turf/simulated/floor/plating,
 /area/assembly/chargebay)
 "nqb" = (
 /obj/machinery/hologram/holopad,
@@ -26140,25 +26143,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
-"nSx" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/corner/yellow/half{
-	icon_state = "bordercolorhalf";
-	dir = 1
-	},
-/obj/machinery/computer/rdconsole/robotics,
-/turf/simulated/floor/tiled/monotile,
-/area/assembly/robotics)
 "nUb" = (
 /obj/effect/floor_decal/industrial/shutoff{
 	dir = 4
@@ -26944,8 +26928,13 @@
 	dir = 4;
 	pixel_x = 21
 	},
-/obj/machinery/autolathe,
 /obj/machinery/light,
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/random/powercell,
+/obj/random/powercell,
+/obj/random/powercell,
+/obj/random/powercell,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "oLb" = (
@@ -30960,26 +30949,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
-"ttp" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/corner/yellow/half{
-	icon_state = "bordercolorhalf";
-	dir = 1
-	},
-/obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/weapon/reagent_containers/glass/beaker/sulphuric,
-/turf/simulated/floor/tiled/monotile,
-/area/assembly/robotics)
 "tub" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -50518,7 +50487,7 @@ ikZ
 shQ
 krb
 kyb
-ttp
+atK
 apo
 kdb
 awg
@@ -50720,8 +50689,8 @@ aZy
 shQ
 krb
 kyb
-nSx
-apo
+atK
+eRQ
 oJb
 amA
 koX
