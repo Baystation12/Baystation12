@@ -29,14 +29,6 @@
 		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
 		fusion.set_tag(null, initial_id_tag)
 
-/obj/machinery/power/fusion_core/Destroy()
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	if(fusion)
-		var/datum/fusion_plant/plant = fusion.get_fusion_plant()
-		if(plant)
-			plant.remove_device(src)
-	. = ..()
-
 /obj/machinery/power/fusion_core/Process()
 	if((stat & BROKEN) || !powernet || !owned_field)
 		Shutdown()

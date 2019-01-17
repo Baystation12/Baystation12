@@ -65,7 +65,7 @@
 
 /datum/design/circuit/fusion
 	name = "fusion core control console"
-	id = "fusion/core_control"
+	id = "fusion_core_control"
 	build_path = /obj/item/weapon/circuitboard/fusion/core_control
 	sort_string = "LAAAD"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)

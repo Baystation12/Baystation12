@@ -7,14 +7,6 @@
 	var/ui_template
 	var/initial_id_tag
 
-/obj/machinery/computer/fusion/Destroy()
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	if(fusion)
-		var/datum/fusion_plant/plant = fusion.get_fusion_plant()
-		if(plant)
-			plant.remove_device(src)
-	. = ..()
-
 /obj/machinery/computer/fusion/Initialize()
 	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
 	if(initial_id_tag)

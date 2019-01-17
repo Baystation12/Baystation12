@@ -13,7 +13,7 @@
 		if(!plant || !plant.fusion_cores[C])
 			return TOPIC_NOACTION
 
-		if(!C || !C.check_core_status())
+		if(!C.check_core_status())
 			return TOPIC_NOACTION
 
 		if(href_list["toggle_active"])
@@ -21,7 +21,7 @@
 				C.Shutdown()
 			return TOPIC_REFRESH
 
-		if(href_list["str"])
+		if(href_list["str"] && C)
 			var/val = text2num(href_list["str"])
 			if(!val) //Value is 0, which is manual entering.
 				C.set_strength(input("Enter the new field power density (W.m^-3)", "Fusion Control", C.field_strength) as num)
@@ -31,7 +31,6 @@
 
 /obj/machinery/computer/fusion/core_control/build_ui_data()
 	. = ..()
-	var/list/data = .
 	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
 	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
 	var/list/cores = list()
@@ -57,4 +56,4 @@
 			core["fuel"] = fuel_string
 
 			cores += list(core)
-	data["cores"] = cores
+	.["cores"] = cores

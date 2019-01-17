@@ -18083,7 +18083,7 @@
 	anchored = 0;
 	dir = 1;
 	icon_state = "injector0";
-	initial_id_tag= "fusion_injector"
+	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/reinforced,
 /area/vacant/prototype/engine)
