@@ -13,7 +13,7 @@
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1, "Command" = 1, "Exploration" = 1)
 
- /obj/item/device/encryptionkey/headset_torchcorp
+/obj/item/device/encryptionkey/headset_torchcorp
 	name = "corporate radio encryption key"
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1, "Service" = 1)
