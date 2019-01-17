@@ -1,11 +1,14 @@
-var/datum/controller/vote/vote = new()
+var/datum/controller/subsystem/vote/vote
 GLOBAL_LIST_EMPTY(voting)
 
 #define VOTE_INACTIVE 0
 #define VOTE_ACTIVE 1
 #define VOTE_FINISH 2
 
-/datum/controller/vote
+SUBSYSTEM_DEF(vote)
+	name = "Voting"
+	flags = SS_NO_FIRE
+
 	var/mode = null
 	var/auto_muted = 0
 	var/list/active_votes = list()
@@ -15,30 +18,30 @@ GLOBAL_LIST_EMPTY(voting)
 
 	var/list/voting = list()
 
-/datum/controller/vote/New()
+/datum/controller/subsystem/vote/New()
 	if(vote != src)
 		if(istype(vote))
 			qdel(vote)
 		vote = src
 
-/datum/controller/vote/proc/autotransfer()
+/datum/controller/subsystem/vote/proc/autotransfer()
 	//initiate_vote("crew_transfer","the server", 1)
 	call_vote("crew_transfer")
 
-/datum/controller/vote/proc/autogamemode()
+/datum/controller/subsystem/vote/proc/autogamemode()
 	//initiate_vote("gamemode","the server", 1)
 	call_vote("gamemode")
 
-/datum/controller/vote/proc/automap()
+/datum/controller/subsystem/vote/proc/automap()
 	//initiate_vote("map","the server", 1)
 	call_vote("mapswitch")
 
-/datum/controller/vote/proc/autoaddantag()
+/datum/controller/subsystem/vote/proc/autoaddantag()
 	//auto_add_antag = 1
 	//initiate_vote("add_antagonist","the server", 1)
 	call_vote("autoaddantag")
 
-/datum/controller/vote/proc/call_vote(var/vote_name)
+/datum/controller/subsystem/vote/proc/call_vote(var/vote_name)
 
 	var/datum/vote/curvote = all_votes[vote_name]
 	if(curvote)
@@ -48,10 +51,10 @@ GLOBAL_LIST_EMPTY(voting)
 	else
 		log_debug("ERROR: The server attempted to call nonexistent vote: '[vote_name]'.")
 
-/datum/controller/vote/proc/time_remaining(var/vote_id)
-	log_debug("datum/controller/vote/proc/time_remaining([vote_id])")
+/datum/controller/subsystem/vote/proc/time_remaining(var/vote_id)
+	log_debug("datum/controller/subsystem/vote/proc/time_remaining([vote_id])")
 
-/datum/controller/vote/New()
+/datum/controller/subsystem/vote/New()
 	. = ..()
 	for(var/curtype in typesof(/datum/vote) - /datum/vote)
 		var/datum/vote/curvote = new curtype()
@@ -59,7 +62,7 @@ GLOBAL_LIST_EMPTY(voting)
 		if(!curvote.hidden && !curvote.round_start_hidden)
 			inactive_votes.Add(curvote)
 
-/datum/controller/vote/Initialize()
+/datum/controller/subsystem/vote/Initialize()
 	. = ..()
 
 	for(var/votename in all_votes)
@@ -67,7 +70,7 @@ GLOBAL_LIST_EMPTY(voting)
 		curvote.Initialize()
 
 // Helper proc for determining whether addantag vote can be called.
-/datum/controller/vote/proc/is_addantag_allowed(var/automatic)
+/datum/controller/subsystem/vote/proc/is_addantag_allowed(var/automatic)
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
 	if(!ticker || (ticker.current_state <= 2) || !ticker.mode)
 		return 0
@@ -78,17 +81,17 @@ GLOBAL_LIST_EMPTY(voting)
 	else
 		return (ticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_add_finished
 
-/datum/controller/vote/proc/process()
+/datum/controller/subsystem/vote/proc/process()
 	for(var/datum/vote/curvote in active_votes)
 		curvote.process()
 
-/datum/controller/vote/proc/vote_start(var/datum/vote/curvote)
+/datum/controller/subsystem/vote/proc/vote_start(var/datum/vote/curvote)
 	inactive_votes -= curvote
 	active_votes += curvote
 
 	update_clients_browsing()
 
-/datum/controller/vote/proc/vote_finish(var/datum/vote/curvote)
+/datum/controller/subsystem/vote/proc/vote_finish(var/datum/vote/curvote)
 	active_votes -= curvote
 
 	if(!curvote.hidden)
@@ -104,7 +107,7 @@ GLOBAL_LIST_EMPTY(voting)
 	if(vote)
 		show_browser(client, vote.interface(client), "window=vote")
 
-/datum/controller/vote/proc/interface(var/client/C)
+/datum/controller/subsystem/vote/proc/interface(var/client/C)
 	voting |= C
 	if(active_votes.len)
 		. += "<h2>Currently active votes:</h2>"
@@ -130,25 +133,25 @@ GLOBAL_LIST_EMPTY(voting)
 	. += "<br><br>"
 	. += "<a href='?src=\ref[src];client=\ref[C];close=1'>(Close)</a>"
 
-/datum/controller/vote/proc/delay_round_start()
+/datum/controller/subsystem/vote/proc/delay_round_start()
 	. = 0
 	for(var/datum/vote/active_vote in active_votes)
 		if(active_vote.delay_round_start)
 			return 1
 
-/datum/controller/vote/proc/delay_round_end()
+/datum/controller/subsystem/vote/proc/delay_round_end()
 	. = 0
 	for(var/datum/vote/active_vote in active_votes)
 		if(active_vote.delay_round_end)
 			return 1
 
-/datum/controller/vote/Topic(href,href_list[],hsrc)
+/datum/controller/subsystem/vote/Topic(href,href_list[],hsrc)
 	if(!usr || !usr.client)	return	//not necessary but meh...just in-case somebody does something stupid
 
 	if(href_list["close"])
 		voting -= usr.client
 		show_browser(usr.client, null, "window=vote")
 
-/datum/controller/vote/proc/update_clients_browsing()
+/datum/controller/subsystem/vote/proc/update_clients_browsing()
 	for(var/client/C in GLOB.voting)
 		show_browser(C, interface(C), "window=vote")

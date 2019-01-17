@@ -95,6 +95,8 @@
 			return global.SSgarbage;
 		if("SSlegacy")
 			return global.SSlegacy;
+		if("SSvote")
+			return global.SSvote;
 		if("TELEBLOCK")
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
@@ -521,8 +523,6 @@
 			return global.gear_tweak_free_color_choice_;
 		if("gender_datums")
 			return global.gender_datums;
-		if("orion_password")
-			return global.orion_password;
 		if("ghost_darkness_images")
 			return global.ghost_darkness_images;
 		if("ghost_role_manager")
@@ -797,6 +797,8 @@
 			return global.organ_cache;
 		if("organ_rel_size")
 			return global.organ_rel_size;
+		if("orion_password")
+			return global.orion_password;
 		if("outfits_decls_")
 			return global.outfits_decls_;
 		if("outfits_decls_by_type_")
@@ -1221,7 +1223,7 @@
 			return global.xenomorphs;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1318,6 +1320,8 @@
 			global.SSgarbage=newval;
 		if("SSlegacy")
 			global.SSlegacy=newval;
+		if("SSvote")
+			global.SSvote=newval;
 		if("TELEBLOCK")
 			global.TELEBLOCK=newval;
 		if("TWITCHBLOCK")
@@ -1744,8 +1748,6 @@
 			global.gear_tweak_free_color_choice_=newval;
 		if("gender_datums")
 			global.gender_datums=newval;
-		if("orion_password")
-			global.orion_password=newval;
 		if("ghost_darkness_images")
 			global.ghost_darkness_images=newval;
 		if("ghost_role_manager")
@@ -2020,6 +2022,8 @@
 			global.organ_cache=newval;
 		if("organ_rel_size")
 			global.organ_rel_size=newval;
+		if("orion_password")
+			global.orion_password=newval;
 		if("outfits_decls_")
 			global.outfits_decls_=newval;
 		if("outfits_decls_by_type_")
@@ -2444,7 +2448,7 @@
 			global.xenomorphs=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2493,6 +2497,7 @@
 	"SSatoms",
 	"SSgarbage",
 	"SSlegacy",
+	"SSvote",
 	"TELEBLOCK",
 	"TWITCHBLOCK",
 	"Tier1Runes",
@@ -2706,7 +2711,6 @@
 	"gear_datums",
 	"gear_tweak_free_color_choice_",
 	"gender_datums",
-	"orion_password",
 	"ghost_darkness_images",
 	"ghost_role_manager",
 	"ghost_sightless_images",
@@ -2844,6 +2848,7 @@
 	"ores_by_type",
 	"organ_cache",
 	"organ_rel_size",
+	"orion_password",
 	"outfits_decls_",
 	"outfits_decls_by_type_",
 	"outfits_decls_root_",

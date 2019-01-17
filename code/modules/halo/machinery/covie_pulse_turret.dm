@@ -39,6 +39,7 @@
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/pulse_laser_proj
 	tracer_delay_time = 2 SECONDS
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/plaser_hit_sound.wav'
 
 /obj/item/projectile/overmap/pulse_laser/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 
