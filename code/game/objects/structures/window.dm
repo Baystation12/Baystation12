@@ -538,6 +538,9 @@
 
 	active = !active
 	queue_icon_update()
+	for(var/obj/structure/window/W in range(src,range))
+		if(W.polarized && (W.id == src.id || !W.id))
+			W.toggle()
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
