@@ -1,0 +1,8 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added aluminium. It's the standard material for furniture such as tables and chairs, among other things."
+  - tweak: "Added plastic and aluminium to the autolathe. Many recipes have been adjusted."
+  - tweak: "Smelting bauxite now yields aluminium. Bauxite blocks can still be obtained by compressing."
+  - tweak: "Added aluminium sheets to the supply menu."
+  - maptweak: "Added aluminium sheets to where metal sheets are found."
