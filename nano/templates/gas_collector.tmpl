@@ -13,8 +13,8 @@ Use a wrench to alter the stabilising legs.<br>
 <h1>Storage Tank</h1>
 Tank volume: {{:data.volume}} Litres<br>
 Tank pressure: {{:data.pressure}} kPa<br>
+Tank max safe pressure: {{:data.max_pressure}} kPa<br>
 Tank temperature: {{:data.temperature}} K<br>
-Tank capacity: {{:data.max_pressure}} kPa<br>
 {{:helper.displayBar(data.pressure, 0, data.max_pressure, '', data.fill_percent)}}<br>
 <div class='block'>
 	<div class="itemLabelNarrow" style="width:30%">Gas Name</div>
@@ -41,6 +41,9 @@ Tank capacity: {{:data.max_pressure}} kPa<br>
 			<div class="item">
 			<div class="itemContent">Volume: {{:data.holding_volume}} Litres</div><br>
 			<div class="itemContent">Pressure: {{:data.holding_pressure}} kPa</div><br>
+			<div class="itemContent">Maximum safe pressure: {{:data.max_pressure}} kPa</div><br>
+			<div class="itemContent">{{:helper.displayBar(data.holding_pressure, 0, data.max_pressure, '', data.holding_fill_percent)}}</div><br>
+			<div class="itemContent">{{:helper.link('Drain collector to this', 'refresh', {'drain_to_tank' : 1, 'user' : data.user})}}</div><br>
 			<div class="itemContent">{{:helper.link('Eject', 'extlink', {'eject' : 1, 'user' : data.user})}}</div><br>
 		</div>
 	{{else}}

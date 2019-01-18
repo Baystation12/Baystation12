@@ -34,15 +34,14 @@
 	name = "Sangheili (Ultra)"
 
 	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
-	suit_store = /obj/item/weapon/gun/projectile/type51carbine
-	l_hand = /obj/item/weapon/melee/energy/elite_sword
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra
 	shoes = /obj/item/clothing/shoes/sangheili/ultra
 	head = /obj/item/clothing/head/helmet/sangheili/ultra
 	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = /obj/item/ammo_magazine/type51mag
+	r_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/sangheili/zealot
 	name = "Sangheili (Zealot)"
@@ -56,6 +55,20 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/zealot
 	shoes = /obj/item/clothing/shoes/sangheili/zealot
 	head = /obj/item/clothing/head/helmet/sangheili/zealot
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+
+/decl/hierarchy/outfit/sangheili/shipmaster
+	name = "Sangheili (Shipmaster)"
+
+	suit = /obj/item/clothing/suit/armor/special/combatharness/shipmaster
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	r_hand = /obj/item/weapon/melee/energy/elite_sword
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/shipmaster
+	shoes = /obj/item/clothing/shoes/sangheili/shipmaster
+	head = /obj/item/clothing/head/helmet/sangheili/shipmaster
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 

@@ -1,36 +1,51 @@
 
 /datum/job/covenant
 	loadout_allowed = FALSE
+	announced = 0
+	create_record = 0
+
+/datum/job/covenant/sangheili_shipmaster
+	title = "Sangheili - Shipmaster"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
+	access = list(240,250)
+	spawnpoint_override = "Sangheili Corvette Spawn"
+	is_whitelisted = 1
 
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/sangheilicorvette/sangheili_ultra
+	outfit_type = /decl/hierarchy/outfit/sangheili/ultra
 	access = list(240,250)
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/sangheili_major
 	title = "Sangheili - Major"
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/sangheilicorvette/sangheili_major
+	outfit_type = /decl/hierarchy/outfit/sangheili/major
 	access = list(240,250)
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili - Minor"
 	total_positions = 2
 	spawn_positions = 1
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/sangheilicorvette/sangheili_minor
+	outfit_type = /decl/hierarchy/outfit/sangheili/minor
 	access = list(240,250)
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/skirmminor
 	title = "T-Voan - Minor"
@@ -80,6 +95,7 @@
 	outfit_type = /decl/hierarchy/outfit/kigyarcorvette
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/kigyarmajor
 	title = "Kig-Yar - Major"
@@ -90,7 +106,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
 	faction_whitelist = "Covenant"
-
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/kigyarcorvette/captain
 	title = "Kig-Yar - Shipmistress"
@@ -101,21 +117,24 @@
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/unggoy_minor
 	title = "Unggoy - Minor"
 	total_positions = 16
 	spawn_positions = 16
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/unggoycorvette/minor
+	outfit_type = /decl/hierarchy/outfit/unggoy
 	access = list(230,250)
 	spawnpoint_override = "Unggoy Corvette Spawn"
+	whitelisted_species = list(/datum/species/unggoy)
 
 /datum/job/covenant/unggoy_major
 	title = "Unggoy - Major"
 	total_positions = 4
 	spawn_positions = 4
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/unggoycorvette/major
+	outfit_type = /decl/hierarchy/outfit/unggoy/major
 	access = list(230,250)
 	spawnpoint_override = "Unggoy Corvette Spawn"
+	whitelisted_species = list(/datum/species/unggoy)

@@ -161,6 +161,7 @@
 "de" = (/turf/space,/area/space)
 "df" = (/turf/space,/area/asteroid_listening/dark)
 "dg" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data listen"},/turf/space,/area/asteroid_listening/dark)
+"dh" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -191,7 +192,7 @@ aaaaaaaaaaaaaaacacacacacacacacacacacbabbbcbdbebfbabgaTayayayayaybhbhbhbhbhbhbhbh
 aaaaaaaaaaaaaaacacacacacacacacacacacbabibjbkblbkbabmbnbnbnbnbnbnbobpbqbpbpbpbpbqbpbpbpbpbqbhacacacac
 aaaaaaaaaaaaaaaabrbrbrbrbrbracacacacbabsbibibibtbubvbnbnbnbnbnbwbxbpbpbpbpbybpbpbpbybzbpbpbhacacacac
 aaaaaaaaaaaaaaaabrbAbBbCbDbracacacacbabEbibibibFbabGbGbGbHbnbGbGbhbpbpbIbJbJbJbJbJbJbKbLbpbhacacacac
-aaaaaaaaaaaaaaaabrbMbCbCbNbrbrbrbrbrbababObababababGbGbGbPbnbQbRbhbSbpbTbLbLbLbLbLbLbUbLbVbhacacacac
+aaaaaaaaaaaaaaaabrbMbCbCbNbrbrbrbrbrbababObababababGbGbGbPbnbQbRbhbSdhbTbLbLbLbLbLbLbUbLbVbhacacacac
 aaaaaaaaaaaaaaaabrbCbCbCbCbCbCbWbXbCbCbYbnbnbnbYbnbZbYbGcabnbQbQcbbpbzbTbLbLbLccbLbLbUbLbpbhacacacac
 aaaaaaaaaaaaaaaacdbCbCbCbCcebCcfbCbCcebncgbnbnbnbZbnbnchbZbncicjckbpbpbTbLbLbLbLbLbLbUbLbpbhacacacac
 aaaaaaaaaaaaaaaacdclcmcnbBbrbrbrbrbrcocpcqcococobGcrbGbGcsbZctcuckbpbpbTbLcccvbLbLbLbUbLbpbhacacacac

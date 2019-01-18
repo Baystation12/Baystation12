@@ -488,7 +488,26 @@
 
 	icon_state = "Odst Armor Maxattacker"
 
+/obj/item/clothing/head/helmet/odst/donator/wehraboo
+	name = "SPI Helmet Mk I"
 
+	item_state = "wehraboo-helm_worn"
+	icon_state = "wehraboo-helm_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/wehraboo
+	name = "SPI Armour Mk I"
+
+	icon_state = "wehraboo-suit_worn"
+
+/obj/item/clothing/head/helmet/odst/donator/kozi
+	name = "Kozi's Hassar Helmet"
+	item_state = "kozi-helmet_worn"
+	icon_state = "kozi-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/kozi
+	name = "Kozi's Hassar Armor"
+	icon_state = "kozi-armor_obj"
+	item_state = "kozi-armor_worn"
 //END DONATOR GEAR
 
 /obj/effect/random_ODST_set/New()
@@ -503,6 +522,8 @@
 /obj/item/clothing/accessory/storage/odst
 	name = "Tactical Webbing"
 	icon_state = "Tactical Webbing"
+
+//BACKPACKS
 
 /obj/item/weapon/storage/backpack/odst/regular
 	icon = ITEM_INHAND
@@ -574,6 +595,13 @@
 	name = "Customized's Backpack"
 	item_state = "Odst customized Backpack"
 	icon_state = "Odst customized Backpack"
+
+/obj/item/weapon/storage/backpack/odst/kozi
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Kozi's Hassar Backpack"
+	item_state = "kozi-backpack_worn"
+	icon_state = "kozi-backpack_obj"
 
 //END DONATOR GEAR
 #undef ODST_OVERRIDE

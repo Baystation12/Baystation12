@@ -75,3 +75,7 @@ GLOBAL_VAR(spawntypes)
 	display_name = DEFAULT_SPAWNPOINT_ID
 	msg = "has arrived on the station"
 	always_visible = TRUE
+
+/datum/spawnpoint/default/New()
+	..()
+	turfs = GLOB.latejoin

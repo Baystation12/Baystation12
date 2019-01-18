@@ -14,6 +14,7 @@
 	var/maingas = "watervapour"
 	var/list/optional_gases = list("hydrogen","carbon_dioxide")
 	var/list/smoke_reagent_types = list(/datum/reagent/water)
+	var/emit_temperature = 313
 
 /obj/structure/geyser/New()
 	. = ..()
@@ -21,6 +22,7 @@
 	time_between_vent = rand(30,200)
 	duration_of_vent = rand(10, 100)
 	time_last_vent = world.time - rand(0, time_between_vent)
+	emit_temperature += rand() * 100
 
 	//setup the gas template
 	gas_output = new(100, rand(40,120))
@@ -68,8 +70,6 @@
 					spawn_smoke(target_tur)
 
 /obj/structure/geyser/proc/spawn_smoke(var/turf/target_turf)
-	//disable smoke for now
-	return
 
 	var/obj/effect/effect/smoke/chem/smoke = new (src.loc, duration_of_vent, target_turf)
 
@@ -86,6 +86,7 @@
 		var/datum/gas_mixture/new_gas = new(100, gas_output.temperature)
 		for(var/cur_gas in gas_output.gas)
 			new_gas.adjust_gas(cur_gas, gas_output.gas[cur_gas])
+		new_gas.temperature = emit_temperature
 
 		//send it over
 		return collector.recieve_gas(new_gas)
@@ -111,11 +112,11 @@
 	gas_colour = "black"
 	maingas = "hydrogen"
 	optional_gases = list("carbon_dioxide","watervapour")
-	smoke_reagent_types = list(/datum/reagent/toxin)
+	smoke_reagent_types = list(/datum/reagent/toxin/phoron)
 
 /obj/structure/geyser/toxic_gas
 	name = "toxic gas geyser"
 	gas_colour = "red"
 	maingas = "carbonmonoxide"
 	optional_gases = list("sulfurdioxide","chlorine","watervapour","hydrogen")
-	smoke_reagent_types = list(/datum/reagent/toxin)
+	smoke_reagent_types = list(/datum/reagent/toxin/phoron)

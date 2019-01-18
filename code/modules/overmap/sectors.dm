@@ -9,7 +9,7 @@ var/list/points_of_interest = list()
 	icon_state = "object"
 	var/list/map_z = list()
 	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
-	var/weapon_miss_chance = 35
+	var/weapon_miss_chance = 0
 	var hit // for icon changes  when damaged
 
 	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.

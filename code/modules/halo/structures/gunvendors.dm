@@ -16,7 +16,7 @@
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,/obj/item/ammo_magazine/m127_saphp =20,/obj/item/ammo_magazine/m762_ap/MA5B = 40,/obj/item/ammo_magazine/m762_ap/MA5B/TTR = 15,/obj/item/ammo_magazine/m762_ap/M392 = 30
 					,/obj/item/ammo_magazine/m95_sap = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
 					,/obj/item/weapon/gun/projectile/m6d_magnum = 15,/obj/item/weapon/gun/projectile/ma5b_ar = 15,/obj/item/weapon/gun/projectile/br85 = 2
-					,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 8,/obj/item/weapon/gun/projectile/m7_smg = 8,/obj/item/weapon/gun/projectile/m392_dmr = 5,/obj/item/weapon/grenade/frag/m9_hedp = 5,/obj/item/weapon/grenade/smokebomb = 5 )
+					,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 8,/obj/item/weapon/gun/projectile/m7_smg = 8,/obj/item/weapon/gun/projectile/m392_dmr = 5,/obj/item/weapon/grenade/frag/m9_hedp = 5,/obj/item/weapon/grenade/smokebomb = 5, /obj/item/weapon/armor_patch = 5)
 
 /obj/machinery/vending/armory/heavy // HEAVY WEAPONS
 	name = "UNSC Heavy Weapons Rack"
@@ -25,7 +25,7 @@
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
 	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 5,/obj/item/weapon/gun/projectile/m739_lmg = 2
-	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/launcher/rocket/m41_ssr = 1, /obj/item/ammo_casing/rocket = 4,/obj/item/weapon/plastique = 2)
+	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/launcher/rocket/m41_ssr = 1, /obj/item/ammo_casing/rocket = 4,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
 /obj/machinery/vending/armory/police
 	name = "Shell Vendor"
@@ -41,7 +41,17 @@
 	desc = "A machine full of spare UNSC armor."
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
-	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,/obj/item/clothing/head/helmet/marine = 8,/obj/item/clothing/head/helmet/marine/medic = 6,/obj/item/clothing/head/helmet/marine/visor = 8,/obj/item/clothing/suit/storage/marine = 5,/obj/item/clothing/suit/storage/marine/medic = 3,/obj/item/clothing/shoes/marine = 8,/obj/item/clothing/mask/marine = 5, /obj/item/weapon/storage/belt/marine_ammo = 8,/obj/item/clothing/gloves/thick/unsc = 8)
+	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,
+	/obj/item/clothing/head/helmet/marine = 8,
+	/obj/item/clothing/head/helmet/marine/medic = 6,
+	/obj/item/clothing/head/helmet/marine/visor = 8,
+	/obj/item/clothing/suit/storage/marine = 5,
+	/obj/item/clothing/suit/storage/marine/medic = 3,
+	/obj/item/clothing/shoes/marine = 8,
+	/obj/item/clothing/mask/marine = 5,
+	/obj/item/weapon/storage/belt/marine_ammo = 8,
+	/obj/item/clothing/gloves/thick/unsc = 8,
+	/obj/item/weapon/armor_patch = 10)
 
 /obj/machinery/vending/armory/attachment
 	name = "Attachment Vendor"
@@ -97,7 +107,8 @@
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
 	/obj/item/ammo_magazine/m145_ap = 2,
 	/obj/item/weapon/grenade/smokebomb = 8,
-	/obj/item/weapon/grenade/frag/m9_hedp = 8)
+	/obj/item/weapon/grenade/frag/m9_hedp = 8,
+	/obj/item/weapon/armor_patch = 8)
 
 
 /obj/machinery/vending/armory/odstvend/vend_2
@@ -143,7 +154,8 @@
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
 	/obj/item/weapon/grenade/smokebomb = 8,
-	/obj/item/weapon/grenade/frag/m9_hedp = 8)
+	/obj/item/weapon/grenade/frag/m9_hedp = 8,
+	/obj/item/weapon/armor_patch = 8)
 
 /obj/machinery/vending/armory/commandovend
 	name = "Stolen Armtech 5530"
@@ -182,20 +194,25 @@
 	/obj/item/weapon/handcuffs/ = 5,
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/device/landmine = 2,
-	/obj/item/weapon/grenade/frag/m9_hedp = 4
+	/obj/item/weapon/grenade/frag/m9_hedp = 4,
+	/obj/item/weapon/armor_patch = 2
 	)
 
 /obj/machinery/vending/armory/commandovend/armour
 	products = list(
 	/obj/item/clothing/head/helmet/urfc/engineer = 2,
 	/obj/item/clothing/suit/armor/special/urfc/engineer = 2,
+	/obj/item/weapon/storage/backpack/cmdo/eng = 2,
 	/obj/item/clothing/head/helmet/urfc/medic = 2,
 	/obj/item/clothing/suit/armor/special/urfc/medic = 2,
+	/obj/item/weapon/storage/backpack/cmdo/med = 2,
 	/obj/item/clothing/head/helmet/urfc/sniper = 2,
 	/obj/item/clothing/suit/armor/special/urfc/sniper = 2,
+	/obj/item/weapon/storage/backpack/cmdo = 2,
 	/obj/item/clothing/head/helmet/urfc/cqb = 2,
 	/obj/item/clothing/suit/armor/special/urfc/cqb = 2,
+	/obj/item/weapon/storage/backpack/cmdo/cqc = 2,
 	/obj/item/clothing/under/urfc_jumpsuit = 8,
 	/obj/item/clothing/gloves/thick/swat = 8,
-	/obj/item/clothing/shoes/magboots/urfc = 8
-	)
+	/obj/item/clothing/shoes/magboots/urfc = 8,
+	/obj/item/weapon/armor_patch = 4)
