@@ -292,6 +292,18 @@
 /obj/item/stack/material/steel/fifty
 	amount = 50
 
+/obj/item/stack/material/aluminium
+	name = "aluminium"
+	icon_state = "sheet-aluminium"
+	item_state = "sheet-metal"
+	default_type = MATERIAL_ALUMINIUM
+
+/obj/item/stack/material/aluminium/ten
+	amount = 10
+
+/obj/item/stack/material/aluminium/fifty
+	amount = 50
+
 /obj/item/stack/material/plasteel
 	name = "plasteel"
 	icon_state = "sheet-plasteel"

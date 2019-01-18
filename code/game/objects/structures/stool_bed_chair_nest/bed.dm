@@ -26,7 +26,7 @@
 	..(newloc)
 	color = null
 	if(!new_material)
-		new_material = MATERIAL_STEEL
+		new_material = MATERIAL_ALUMINIUM
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		qdel(src)

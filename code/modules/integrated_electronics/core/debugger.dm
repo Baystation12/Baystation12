@@ -9,6 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/data_to_write = null
 	var/accepting_refs = FALSE
+	matter = list(MATERIAL_ALUMINIUM = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_PLASTIC = 500)
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")

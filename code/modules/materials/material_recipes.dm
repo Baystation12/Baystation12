@@ -132,3 +132,10 @@
 	. += new/datum/stack_recipe/cardborg_suit(src)
 	. += new/datum/stack_recipe/cardborg_helmet(src)
 	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
+
+/material/aluminium/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipies below don't support composite materials
+		return
+	. += new/datum/stack_recipe/furniture/table_frame(src)
+	. += new/datum/stack_recipe/grenade(src) 

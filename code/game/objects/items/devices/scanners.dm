@@ -21,7 +21,7 @@ REAGENT SCANNER
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
-	matter = list(MATERIAL_STEEL = 200)
+	matter = list(MATERIAL_ALUMINIUM = 200)
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
 
@@ -354,7 +354,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	throw_speed = 4
 	throw_range = 20
 
-	matter = list(MATERIAL_STEEL = 30,MATERIAL_GLASS = 20)
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	var/advanced_mode = 0
@@ -401,7 +401,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	throw_speed = 4
 	throw_range = 20
 
-	matter = list(MATERIAL_STEEL = 30,MATERIAL_GLASS = 20)
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
@@ -474,7 +474,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 20
-	matter = list(MATERIAL_STEEL = 30,MATERIAL_GLASS = 20)
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
@@ -518,7 +518,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 3
-	matter = list(MATERIAL_STEEL = 25, MATERIAL_GLASS = 25)
+	matter = list(MATERIAL_ALUMINIUM = 25, MATERIAL_GLASS = 25)
 
 /obj/item/device/price_scanner/afterattack(atom/movable/target, mob/user as mob, proximity)
 	if(!proximity)
@@ -537,7 +537,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	matter = list(MATERIAL_STEEL = 30,MATERIAL_GLASS = 20)
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
 
 /obj/item/device/slime_scanner/proc/list_gases(var/gases)
 	. = list()

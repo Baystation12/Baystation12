@@ -7,7 +7,7 @@
 	can_reinforce = 0
 	flipped = -1
 
-	material = DEFAULT_TABLE_MATERIAL
+	material = DEFAULT_FURNITURE_MATERIAL
 
 /obj/structure/table/rack/New()
 	..()
