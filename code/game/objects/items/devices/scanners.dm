@@ -142,7 +142,7 @@ REAGENT SCANNER
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
 		else
-			pulse_result = H.get_pulse(1)
+			pulse_result = H.get_pulse(GETPULSE_TOOL)
 	else
 		pulse_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
 		pulse_suffix = ""
