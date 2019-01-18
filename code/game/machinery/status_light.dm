@@ -5,7 +5,7 @@
 	icon_state = "doortimer-p"
 	var/frequency = 1439
 	var/id_tag
-	var/alert_temperature = 4000
+	var/alert_temperature = 10000
 	var/alert = 1
 	var/datum/radio_frequency/radio_connection
 
