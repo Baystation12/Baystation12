@@ -2,8 +2,6 @@
 	MERCENARY ROUNDTYPE
 */
 
-var/list/nuke_disks = list()
-
 /datum/game_mode/nuclear
 	name = "Mercenary"
 	round_description = "A mercenary strike force is approaching!"

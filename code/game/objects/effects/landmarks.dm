@@ -90,6 +90,9 @@
 	tag = "start*[name]"
 	return 1
 
+/obj/effect/landmark/start/joinlate
+	name = "JoinLate"
+
 //Costume spawner landmarks
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
 
