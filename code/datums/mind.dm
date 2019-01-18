@@ -164,13 +164,18 @@
 
 /datum/mind/Topic(href, href_list)
 
-	if(check_rights(R_ADMIN) || usr == current)
-
-		if(href_list["add_goal"])
-			log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
+	if(href_list["add_goal"])
+		var/mob/caller = locate(href_list["add_goal_caller"])
+		var/is_admin = check_rights(R_ADMIN)
+		if((caller && caller == current) || is_admin)
+			if(is_admin)
+				log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 			to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
 			generate_goals(assigned_job, TRUE, 1)
 			. = TRUE
+
+
+	if(check_rights(R_ADMIN))
 
 		if(href_list["abandon_goal"])
 			var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
