@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(sangheili_corvette_spawns)
 
 /datum/spawnpoint/sangheili_corvette
 	display_name =  "Sangheili Corvette Spawn"
-	restrict_job = list("Sangheili - Minor","Sangheili - Major","Sangheili - Ultra")
+	restrict_job = list("Sangheili - Minor","Sangheili - Major","Sangheili - Ultra","Sangheili - Shipmaster")
 
 /datum/spawnpoint/sangheili_corvette/New()
 	..()

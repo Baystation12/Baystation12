@@ -35,13 +35,18 @@
 	/datum/job/packwar_merc/jackal/sniper,\
 	/datum/job/packwar_merc/jackal/sniper/ram\
 	)
-	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID)
-	default_spawn = DEFAULT_SPAWNPOINT_ID
 
-/*
-/datum/map/doisac/New()
-	. = ..()
-	lobby_icon = pick(\
-		'code/modules/halo/splashworks/title6.png'\
-	)
-	*/
+	//dont test area coherency, the map file is too large and travis times out
+	//the way biome generation is done also requires some incoherent areas
+	area_coherency_test_exempt_areas = list(\
+		/area/doisac_surface,\
+		/area/doisac_surface/plain,\
+		/area/doisac_surface/swamp,\
+		/area/doisac_surface/forest,\
+		/area/doisac_surface/lava,\
+		/area/doisac_underground,\
+		/area/space\
+		)
+
+	allowed_spawns = list("Arrivals Shuttle")
+	default_spawn = null

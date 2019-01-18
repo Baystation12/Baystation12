@@ -16,6 +16,11 @@
 	if(isnull(control_tag))
 		control_tag = "deck_gun_control - [z]"
 
+/obj/machinery/overmap_weapon_console/toggle_projectile_tracking()
+	. = ..()
+	for(var/obj/machinery/overmap_weapon_console/deck_gun_control/console in linked_devices)
+		console.do_track_fired_proj = do_track_fired_proj
+
 /obj/machinery/overmap_weapon_console/deck_gun_control/aim_tool_attackself(var/mob/user)
 	for(var/obj/machinery/overmap_weapon_console/ctrl in linked_devices)
 		ctrl.aim_tool_attackself(user)
@@ -154,12 +159,10 @@
 	damtype = BRUTE
 	damage = 200
 
-/obj/item/projectile/deck_gun_damage_proj/get_structure_damage()
-	return damage * 10 //Counteract the /10 from wallcode damage processing.
-
 /obj/item/projectile/deck_gun_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)
+		damage *= 10 //counteract the /10 from wallcode damage processing
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
 	. = ..()
 
@@ -169,6 +172,7 @@
 	step_delay = 0.3 SECONDS
 	accuracy = 50 //miss chance of impacted overmap objects halved.
 	ship_damage_projectile = /obj/item/projectile/deck_gun_damage_proj
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/deck_gun_impact.wav'
 
 /obj/item/projectile/overmap/deck_gun_proj/New()
 	. = ..()

@@ -8,8 +8,6 @@
 	#include "geminus_city_spawns.dm"
 	#include "geminus_city_overmap.dm"
 	#include "geminus_city_map.dm"
-	#include "../overmap_ships/nh_overmap.dm"
-	#include "../overmap_ships/om_ship_areas.dm"
 
 	#include "geminuscity_2.dmm"
 	#include "geminuscity_3.dmm"

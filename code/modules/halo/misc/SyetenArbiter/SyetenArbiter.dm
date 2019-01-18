@@ -36,6 +36,10 @@
 	icon = 'icons/syetenarbiter.dmi'
 	icon_state = "dogler-staff_obj"
 	item_state = "dogler-staff_obj"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/misc/SyetenArbiter/inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/misc/SyetenArbiter/inhands_right.dmi'
+		)
 	force = 65
 	throwforce = 12
 	edge = 0

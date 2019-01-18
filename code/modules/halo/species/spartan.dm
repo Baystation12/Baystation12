@@ -14,8 +14,10 @@
 	total_health = 250 //Same base health as sangheili
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
-	pain_mod = 0.75 //But they also feel pain a bit more.
+	pain_mod = 0.40 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(-1,3)
+	slowdown = -1
+	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 
 	metabolism_mod = 1.25 //Faster metabolism
 	breath_pressure = 14.5 //Better lungs!

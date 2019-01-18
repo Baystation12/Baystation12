@@ -1,6 +1,18 @@
 
 /datum/job/covenant
 	loadout_allowed = FALSE
+	announced = 0
+	create_record = 0
+
+/datum/job/covenant/sangheili_shipmaster
+	title = "Sangheili - Shipmaster"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
+	access = list(240,250)
+	spawnpoint_override = "Sangheili Corvette Spawn"
+	is_whitelisted = 1
 
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
@@ -11,6 +23,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/sangheili_major
 	title = "Sangheili - Major"
@@ -21,6 +34,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili - Minor"
@@ -31,6 +45,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Sangheili Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/skirmminor
 	title = "T-Voan - Minor"
@@ -80,6 +95,7 @@
 	outfit_type = /decl/hierarchy/outfit/kigyarcorvette
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/kigyarmajor
 	title = "Kig-Yar - Major"
@@ -90,6 +106,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/kigyarcorvette/captain
 	title = "Kig-Yar - Shipmistress"
@@ -100,6 +117,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Kig-Yar Corvette Spawn"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/unggoy_minor
 	title = "Unggoy - Minor"
@@ -109,6 +127,7 @@
 	outfit_type = /decl/hierarchy/outfit/unggoy
 	access = list(230,250)
 	spawnpoint_override = "Unggoy Corvette Spawn"
+	whitelisted_species = list(/datum/species/unggoy)
 
 /datum/job/covenant/unggoy_major
 	title = "Unggoy - Major"
@@ -118,3 +137,4 @@
 	outfit_type = /decl/hierarchy/outfit/unggoy/major
 	access = list(230,250)
 	spawnpoint_override = "Unggoy Corvette Spawn"
+	whitelisted_species = list(/datum/species/unggoy)
