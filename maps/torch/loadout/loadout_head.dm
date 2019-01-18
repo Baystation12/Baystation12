@@ -65,6 +65,7 @@
 
 /datum/gear/head/formalhat
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/informalhat
 	allowed_roles = SEMIFORMAL_ROLES
