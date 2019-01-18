@@ -61,6 +61,18 @@
 	icon_state = "cargo_headset_alt"
 	max_keys = 3
 
+/obj/item/device/radio/headset/sea
+	name = "senior enlisted advisor's headset"
+	desc = "A headset for the guy or gal who advises the enlisted whilst from a position of seniority."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/heads/sea	
+
+/obj/item/device/radio/headset/sea/alt
+	name = "senior enlisted advisor's bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
+
 /obj/item/device/radio/headset/bridgeofficer
 	name = "bridge officer's headset"
 	desc = "A headset with access to the command, engineering and exploration channels."
@@ -76,14 +88,13 @@
 
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
-	desc = "A headset for real tools, with access to the exploration channel. It has an inbuilt subspace antenna for better reception."
+	desc = "A headset with access to the exploration channel. It has an inbuilt subspace antenna for better reception."
 	icon_state = "exp_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/exploration
 
 /obj/item/device/radio/headset/exploration/alt
 	name = "exploration bowman headset"
-	desc = "A headset for real tools, with access to the exploration channel. It has an inbuilt subspace antenna for better reception."
 	icon_state = "exp_headset_alt"
 	item_state = "exp_headset_alt"
 
@@ -125,13 +136,13 @@
 	item_state = "par_headset_alt"
 
 /obj/item/device/radio/headset/headset_pilot
-	name = "pilot headset"
+	name = "pilot's headset"
 	desc = "A headset for cool-tempered smugglers, cocky flyboys, and bus-drivers like you. It has an inbuilt subspace antenna for better reception."
 	icon_state = "pilot_headset"
 	item_state = "pilot_headset"
 	ks1type = /obj/item/device/encryptionkey/headset_pilot
 
 /obj/item/device/radio/headset/headset_pilot/alt
-	name = "pilot bowman headset"
+	name = "pilot's bowman headset"
 	icon_state = "pilot_headset_alt"
 	item_state = "pilot_headset_alt"
