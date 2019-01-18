@@ -6,8 +6,15 @@
 
 /obj/effect/landmark/map_data/Initialize()
 	. = ..()
-	overmap_object = locate(name)
+	if(name == "Map Data")
+		//oh no! we have a default name. just check nearby
+		//this wont be able to handle multiz ships/planets, but it will work for 1z ships (eg NPCs)
+		overmap_object = locate() in range(src, 7)
+	else
+		overmap_object = locate(name)
+
 	if(overmap_object)
+		name = overmap_object.tag
 		overmap_object.link_zlevel(src)
 
 /proc/HasAbove(var/z)
