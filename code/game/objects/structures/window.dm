@@ -250,7 +250,11 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
-			material.place_sheet(loc, is_fulltile() ? 4 : 2)
+			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
+			if(S && reinf_material)
+				S.reinf_material = reinf_material
+				S.update_strings()
+				S.update_icon()
 			qdel(src)
 	else if(isCoil(W) && reinf_material && !polarized)
 		var/obj/item/stack/cable_coil/C = W

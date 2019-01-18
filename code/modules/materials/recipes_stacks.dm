@@ -4,6 +4,13 @@
 	time = 5
 	difficulty = 1
 
+/datum/stack_recipe/tile/spawn_result(user, location, amount)
+	var/obj/item/stack/S = ..()
+	if(istype(S))
+		S.amount = amount
+		S.add_to_stacks(user, 1)
+	return S
+
 /datum/stack_recipe/tile/metal/floor
 	title = "regular floor tile"
 	result_type = /obj/item/stack/tile/floor
@@ -62,9 +69,6 @@
 	difficulty = 1
 
 /datum/stack_recipe/rod/spawn_result(user, location, amount)
-	if(send_material_data && use_material)
-		. = new result_type(location, amount, use_material)
-	else
-		. = new result_type(location)
-	var/obj/item/stack/S = .
+	var/obj/item/stack/S = new result_type(location, amount, use_material)
 	S.add_to_stacks(user, 1)
+	return S
