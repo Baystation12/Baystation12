@@ -87,7 +87,7 @@
 /obj/item/robot_rack/body_bag
 	name = "stasis bag rack"
 	desc = "A rack for carrying folded stasis bags and body bags."
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	object_type = /obj/item/bodybag
 	interact_type = /obj/structure/closet/body_bag

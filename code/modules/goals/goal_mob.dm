@@ -26,7 +26,7 @@
 	else
 		to_chat(src, SPAN_NOTICE("<b>You have no personal goals this round.</b>"))
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
-		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1'>Add Random Goal</a>"))
+		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
 
 	if(mind.assigned_job && mind.assigned_job.department_flag && SSgoals.departments["[mind.assigned_job.department_flag]"])
 		to_chat(src, " ")

@@ -164,13 +164,26 @@
 
 /datum/mind/Topic(href, href_list)
 
-	if(check_rights(R_ADMIN) || usr == current)
+	if(href_list["add_goal"])
 
-		if(href_list["add_goal"])
-			log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
+		var/mob/caller = locate(href_list["add_goal_caller"])
+
+		var/is_admin =   FALSE
+		var/can_modify = FALSE
+		if(!caller || caller != current)
+			is_admin = check_rights(R_ADMIN)
+			can_modify = is_admin
+		else
+			can_modify = TRUE
+
+		if(can_modify)
+			if(is_admin)
+				log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 			to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
 			generate_goals(assigned_job, TRUE, 1)
-			. = TRUE
+			return TRUE // To avoid 'you are not an admin' spam.
+
+	if(check_rights(R_ADMIN))
 
 		if(href_list["abandon_goal"])
 			var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
@@ -185,7 +198,7 @@
 
 		if(href_list["reroll_goal"])
 			var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
-			if(goal)
+			if(goal && (goal in goals))
 				qdel(goal)
 				generate_goals(assigned_job, TRUE, 1)
 				goal = goals[LAZYLEN(goals)]
