@@ -655,7 +655,7 @@
 "mE" = (/obj/structure/bed,/obj/item/weapon/bedsheet/orange,/turf/simulated/floor/plating{tag = "icon-dmg1"; icon_state = "dmg1"},/area/corvette/unscthorin/cells)
 "mF" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
 "mG" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
-"mH" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Thorin Map Data"},/turf/space,/area/space)
+"mH" = (/obj/effect/landmark/map_data,/turf/space,/area/space)
 "mI" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
 
 (1,1,1) = {"
