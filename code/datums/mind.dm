@@ -190,7 +190,7 @@
 
 		if(href_list["reroll_goal"])
 			var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
-			if(goal)
+			if(goal && (goal in goals))
 				qdel(goal)
 				generate_goals(assigned_job, TRUE, 1)
 				goal = goals[LAZYLEN(goals)]
