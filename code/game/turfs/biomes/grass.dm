@@ -4,7 +4,7 @@
 
 /obj/effect/landmark/biome/grass_turf/New()
 	. = ..()
-	atom_types = list(pick(\
+	turf_types = list(pick(\
 		/turf/unsimulated/floor/grass,\
 		/turf/unsimulated/floor/grass2,\
 		/turf/unsimulated/floor/grass3,\
@@ -20,4 +20,4 @@
 
 /obj/effect/landmark/biome/grass_turf/grass2/New()
 	. = ..()
-	atom_types = list(/turf/unsimulated/floor/grass2)
+	turf_types = list(/turf/unsimulated/floor/grass2)

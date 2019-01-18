@@ -11,12 +11,23 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
-	desc = "The language of the Sangheili"
+	desc = "The ancient language of the Sangheili and common language of the Covenant."
 	native = 1
 	colour = "vox"
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "S"
 	flags = RESTRICTED
+	var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
+	var/list/syllable_names
+
+/datum/language/sangheili/New()
+	. = ..()
+	cov_alphabet = new(cov_alphabet)
+	cov_alphabet.Crop(1,1,24,24)
+	syllables = list()
+	syllable_names = icon_states(cov_alphabet)
+	for(var/symbol_name in syllable_names)
+		syllables.Add("<IMG CLASS=icon SRC=\ref[cov_alphabet] ICONSTATE='[symbol_name]'>")
 
 /obj/item/clothing/under/covenant/sangheili
 	name = "Sangheili Body-suit"
@@ -338,6 +349,31 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "zealot_gloves_obj"
 	item_state = "zealot_gloves"
+/////
+/obj/item/clothing/head/helmet/sangheili/shipmaster
+	name = "Sangheili Helmet (Shipmaster)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "zealot_helm_obj"
+	item_state = "zealot_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/shipmaster
+	name = "Sangheili Combat Harness (Shipmaster)"
+	icon_state = "zealot_chest_obj"
+	item_state = "zealot_chest"
+	totalshields = 200
+
+/obj/item/clothing/shoes/sangheili/shipmaster
+	name = "Sanghelli Leg Armour (Shipmaster)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "zealot_legs_obj"
+	item_state = "zealot_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/shipmaster
+	name = "Sanghelli Combat Gauntlets (Shipmaster)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "zealot_gloves_obj"
+	item_state = "zealot_gloves"
 
 /obj/item/clothing/head/helmet/sangheili/specops
 	name = "Sangheili Helmet (Spec-Ops)"
@@ -440,13 +476,16 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		for(var/datum/wound/w in e.wounds)
 			w.damage -= pick(0,0,1)
 
+/obj/effect/armoursets/Initialize()
+	..()
+	return INITIALIZE_HINT_QDEL
+
 /obj/effect/armoursets/SangheiliMinorSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
 	new /obj/item/clothing/suit/armor/special/combatharness/minor (src.loc)
 	new /obj/item/clothing/shoes/sangheili/minor (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/minor (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/minor (src.loc)
-	qdel(src)
 
 /obj/effect/armoursets/SangheiliMajorSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
@@ -454,7 +493,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	new /obj/item/clothing/shoes/sangheili/major (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/major (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/major (src.loc)
-	qdel(src)
 
 /obj/effect/armoursets/SangheiliZealotSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
@@ -462,7 +500,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	new /obj/item/clothing/shoes/sangheili/zealot (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/zealot (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/zealot (src.loc)
-	qdel(src)
 
 /obj/effect/armoursets/SangheiliUltraSet/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
@@ -470,7 +507,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	new /obj/item/clothing/shoes/sangheili/ultra (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/ultra (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/ultra (src.loc)
-	qdel(src)
 
 /obj/effect/armoursets/SangheiliSpecops/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
@@ -478,7 +514,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	new /obj/item/clothing/shoes/sangheili/specops (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/specops (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/specops (src.loc)
-	qdel(src)
 
 /obj/effect/armoursets/SangheiliRanger/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
@@ -486,6 +521,5 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	new /obj/item/clothing/shoes/sangheili/ranger (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/ranger (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/ranger (src.loc)
-	qdel(src)
 
 #undef SANGHEILI_ARMOUR_ICON

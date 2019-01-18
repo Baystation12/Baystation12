@@ -261,3 +261,6 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
 	name = "kudzu seeds"
+/obj/item/seeds/cottonseed
+	seed_type = "cotton"
+	name = "cotton seeds"

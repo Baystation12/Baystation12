@@ -7,6 +7,7 @@
 	metabolism_mod = 1.15 //Slightly faster metabolism
 	darksight = 3 //Slightly better night vision!
 	slowdown = -1.5 //Increased move speed
+	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 
 	//Spartan 1's have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes

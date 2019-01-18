@@ -34,7 +34,7 @@
 	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
 	var/list/allowed_ranks                // Ditto
 
-	var/announced = TRUE                  //If their arrival is announced on radio
+	var/announced = FALSE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
 	var/generate_email = 1
@@ -236,3 +236,6 @@
 			continue
 		res += initial(R.name)
 	return english_list(res)
+
+/datum/job/proc/assign_player(var/datum/mind/new_mind)
+	assigned_players += new_mind

@@ -90,6 +90,9 @@
 	tag = "start*[name]"
 	return 1
 
+/obj/effect/landmark/start/joinlate
+	name = "JoinLate"
+
 //Costume spawner landmarks
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
 
@@ -232,3 +235,11 @@
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	delete_me = 1
+
+//Ghost spawn landmarks//
+/obj/effect/landmark/ghost_spawn
+	name = "Observer-Start"
+
+/obj/effect/landmark/ghost_spawn/New()
+	. = ..()
+	GLOB.latejoin_ghosts += loc

@@ -3,7 +3,7 @@
 	name = "CCS Battlecruiser"
 	full_name = "CCS Battlecruiser"
 	path = "covenant_cruiser"
-	lobby_icon = 'code/modules/halo/splashworks/covenant.png'
+	lobby_icon = 'code/modules/halo/splashworks/covenant.jpg'
 	id_hud_icons = 'maps/ccs_battlecruiser/opr_hud_icons.dmi'
 
 	station_name  = ""
@@ -37,9 +37,8 @@
 		/datum/job/opredflag_spartan/commander\
 	)
 
-	//use_overmap = 1
-	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID, "Arrivals Shuttle")
-	default_spawn = "Arrivals Shuttle"
+	allowed_spawns = list("Arrivals Shuttle")
+	default_spawn = null
 
 
 

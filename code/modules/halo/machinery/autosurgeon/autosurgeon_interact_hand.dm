@@ -46,6 +46,6 @@
 	add_fingerprint(usr)
 
 	//if someone enters while surgery is ongoing...
-	if(active)
+	if(active && autosurgeon_stage)
 		botch_surgery = 1
 	return 1

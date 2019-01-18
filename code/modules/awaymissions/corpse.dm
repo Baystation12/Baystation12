@@ -6,7 +6,7 @@
 
 /obj/effect/landmark/corpse
 	name = "Unknown"
-	var/mobname = "Unknown"  //Unused now but it'd fuck up maps to remove it now
+	var/mobname// = "Unknown"  //Unused now but it'd fuck up maps to remove it now
 	var/corpseuniform = null //Set this to an object path to have the slot filled with said object on the corpse.
 	var/corpsesuit = null
 	var/corpseshoes = null
@@ -32,7 +32,10 @@
 /obj/effect/landmark/corpse/proc/createCorpse() //Creates a mob and checks for gear in each slot before attempting to equip it.
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)
 	M.set_species(species)
-	M.real_name = src.name
+	if(!mobname)
+		mobname = random_name(M.gender, species)
+	mobname = "[mobname] (NPC)"
+	M.real_name = mobname
 	M.death(1) //Kills the new mob
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)

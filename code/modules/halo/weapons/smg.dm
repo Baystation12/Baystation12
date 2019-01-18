@@ -1,5 +1,6 @@
 
 #define CLEAR_CASINGS 1
+#define CASELESS 4
 
 //M7 submachine gun
 
@@ -16,7 +17,7 @@
 	reload_sound = 'code/modules/halo/sounds/SMG_Reload_Sound_Effect.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m5
-	handle_casings = CLEAR_CASINGS
+	handle_casings = CASELESS
 	burst = 4
 	burst_delay = 2
 	accuracy = -1

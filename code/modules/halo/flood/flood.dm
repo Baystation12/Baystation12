@@ -365,7 +365,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	. = ..()
 	if(ckey || client)
 		return
-	spawn_infestor()
+	//spawn_infestor() //Had too much of a performance hit over the duration of a round.
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)

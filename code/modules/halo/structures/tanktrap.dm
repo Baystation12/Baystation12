@@ -1,7 +1,7 @@
 
 /obj/structure/tanktrap
 	name = "tanktrap"
-	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
 	icon_state = "tanktrap"
 	density = 1
 	anchored = 1
@@ -73,7 +73,7 @@
 
 /obj/structure/tanktrap_dead
 	name = "tanktrap"
-	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
 	icon_state = "tanktrap_dead"
 	density = 0
 	anchored = 1

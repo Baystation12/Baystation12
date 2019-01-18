@@ -6,7 +6,9 @@
 
 	for (var/occ in job_master.occupations)
 		var/datum/job/occupation = occ
-		var/decl/hierarchy/outfit/job/outfit = outfit_by_type(occupation.outfit_type)
+		//this was formerly checking for /decl/hierarchy/outfit/job/outfit
+		//we have more nonstandard "job" types so we dont use the standard outfits
+		var/decl/hierarchy/outfit/outfit = outfit_by_type(occupation.outfit_type)
 		if(!istype(outfit))
 			log_bad("[occupation.title] - [occupation.type]: Invalid outfit type [outfit ? outfit.type : "NULL"].")
 			failed_jobs++

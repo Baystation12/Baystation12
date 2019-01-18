@@ -31,7 +31,7 @@
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
 	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
 	var/projectile_type = /obj/item/projectile
-	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
+	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate(). If 999, always penetrates.
 	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
 		//Effects
 	var/stun = 0
@@ -256,9 +256,12 @@
 
 	//penetrating projectiles can pass through things that otherwise would not let them
 	if(!passthrough && penetrating > 0)
-		if(check_penetrate(A))
+		if(penetrating == 999)
 			passthrough = 1
-		penetrating--
+		else
+			if(check_penetrate(A))
+				passthrough = 1
+			penetrating--
 
 	//the bullet passes through a dense object!
 	if(passthrough)

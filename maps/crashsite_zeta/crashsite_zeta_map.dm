@@ -8,6 +8,6 @@
 	station_short = "Crash-site"
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
-	lobby_icon = 'code/modules/halo/splashworks/title6.png'
+	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
 
 	id_hud_icons = 'maps/desert_outpost/stranded_hud_icons.dmi'

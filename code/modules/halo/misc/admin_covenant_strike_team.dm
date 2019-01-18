@@ -1,5 +1,5 @@
 #define COVENANT_MOBS list(/mob/living/carbon/human/covenant/sangheili,/mob/living/carbon/human/covenant/kigyar,\
-/mob/living/carbon/human/covenant/unggoy,/mob/living/simple_animal/lekgolo/mgalekgolo)
+/mob/living/carbon/human/covenant/unggoy,/mob/living/simple_animal/mgalekgolo)
 
 #define SANGHEILI_RANK_OUTFITS typesof(/decl/hierarchy/outfit/sangheili) - /decl/hierarchy/outfit/sangheili
 #define KIGYAR_RANK_OUTFITS typesof(/decl/hierarchy/outfit/kigyar)

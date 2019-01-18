@@ -1,0 +1,52 @@
+{{if data.anchored}}
+	Stabilising legs extended. Will siphon gas from 
+	{{if data.secured_geyser}}
+		the geyser.
+	{{else}}
+		the atmosphere.
+	{{/if}}
+{{else}}
+	Stabilising legs retracted. Will not collect gas from geysers.
+{{/if}}
+<br>
+Use a wrench to alter the stabilising legs.<br>
+<h1>Storage Tank</h1>
+Tank volume: {{:data.volume}} Litres<br>
+Tank pressure: {{:data.pressure}} kPa<br>
+Tank max safe pressure: {{:data.max_pressure}} kPa<br>
+Tank temperature: {{:data.temperature}} K<br>
+{{:helper.displayBar(data.pressure, 0, data.max_pressure, '', data.fill_percent)}}<br>
+<div class='block'>
+	<div class="itemLabelNarrow" style="width:30%">Gas Name</div>
+	<div class="itemLabelNarrow">Amount</div>
+	{{for data.gas_inventory}}
+		<div class="item">
+			<div class="itemContentNarrow" style="width:30%">{{:value.gasid}}</div>
+			{{if value.venting}}
+				<div class="itemContentNarrow">Venting</div>
+			{{else}}
+				<div class="itemContentNarrow">{{:value.moles}} moles</div>
+			{{/if}}
+			<div class="itemContentNarrow">{{:helper.link(value.venting ? 'Stop Venting' : 'Start Venting', value.venting ? 'cancel' : 'arrow-4-diag', {'expel_gas' : value.gasid, 'user' : data.user}, null)}}</div>
+		</div>
+	{{empty}}
+		<div class="notice">The storage tank is empty.</div>
+	{{/for}}
+</div>
+
+<h1>Inserted tank</h1>
+<div class='block'>
+	{{if data.is_holding}}
+		<div class="itemLabel" style="width:100%">{{:data.holding}}</div><br>
+			<div class="item">
+			<div class="itemContent">Volume: {{:data.holding_volume}} Litres</div><br>
+			<div class="itemContent">Pressure: {{:data.holding_pressure}} kPa</div><br>
+			<div class="itemContent">Maximum safe pressure: {{:data.max_pressure}} kPa</div><br>
+			<div class="itemContent">{{:helper.displayBar(data.holding_pressure, 0, data.max_pressure, '', data.holding_fill_percent)}}</div><br>
+			<div class="itemContent">{{:helper.link('Drain collector to this', 'refresh', {'drain_to_tank' : 1, 'user' : data.user})}}</div><br>
+			<div class="itemContent">{{:helper.link('Eject', 'extlink', {'eject' : 1, 'user' : data.user})}}</div><br>
+		</div>
+	{{else}}
+		<div class="notice">No tank inserted.</div>
+	{{/if}}
+</div>

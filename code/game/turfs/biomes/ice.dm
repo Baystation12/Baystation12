@@ -4,7 +4,7 @@
 
 /obj/effect/landmark/biome/ice_turf/New()
 	. = ..()
-	atom_types = list(pick(\
+	turf_types = list(pick(\
 		/turf/unsimulated/floor/ice,\
 		/turf/unsimulated/floor/ice2\
 	))
@@ -14,4 +14,4 @@
 
 /obj/effect/landmark/biome/ice_turf/ice2/New()
 	. = ..()
-	atom_types = list(/turf/unsimulated/floor/ice2)
+	turf_types = list(/turf/unsimulated/floor/ice2)

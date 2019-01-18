@@ -32,7 +32,7 @@
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
-		to_world("<span class = 'radio'>\[System\] [name]: \"Is their ship disabled?\"</span>")
+		to_world("<span class = 'radio'>\[System\] [name]: \"I think their ship's disabled. Disengaging.\"</span>")
 		target = null
 		return
 
@@ -58,6 +58,7 @@
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
 	target = proj.overmap_fired_by
+	target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	. = ..()
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc

@@ -24,7 +24,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 	spawn_flags =      SPECIES_IS_RESTRICTED
 
 	breath_type = null
-	poison_type = null
+	//poison_type = null
+	poison_gases = list()
 
 	gluttonous =          GLUT_TINY | GLUT_SMALLER | GLUT_ITEM_ANYTHING | GLUT_PROJECTILE_VOMIT
 	virus_immune =        1
