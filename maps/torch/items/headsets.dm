@@ -5,15 +5,27 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchnt
 
-/obj/item/device/radio/headset/heads/torchexec
-	name = "executive headset"
-	desc = "The headset of those brave men and women who command the Torch."
+/obj/item/device/radio/headset/heads/torchcaptain
+	name = "commanding officer's headset"
+	desc = "The skipper's headset."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/torchexec
+	ks1type = /obj/item/device/encryptionkey/heads/torchcaptain
 
-/obj/item/device/radio/headset/heads/torchexec/alt
-	name = "executive bowman headset"
+/obj/item/device/radio/headset/heads/torchcaptain/alt
+	name = "commanding officer's bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
+
+/obj/item/device/radio/headset/heads/torchxo
+	name = "executive officer's headset"
+	desc = "The headset of the guy who will one day be CO."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/heads/torchxo
+
+/obj/item/device/radio/headset/heads/torchxo/alt
+	name = "executive officer's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 
