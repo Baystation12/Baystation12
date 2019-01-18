@@ -9,6 +9,7 @@
 	head = null
 	l_ear = null
 	uniform = /obj/item/clothing/under/covenant/jiralhanae
+	r_hand = /obj/item/weapon/material/hatchet/unathiknife
 	suit = null
 	back = null
 	belt = null

@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list(SPECIES_HUMAN)
+	var/list/species_allowed = list(SPECIES_HUMAN, SPECIES_ORION)
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -52,13 +52,15 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 		veryshort = 1
+
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 		veryshort = 1
+
 
 	twintail
 		name = "Twintail"
@@ -187,19 +189,19 @@
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
 		gender = FEMALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
 		gender = FEMALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	bobcutalt
 		name = "Chin Length Bob"
 		icon_state = "hair_bobcutalt"
 		gender = FEMALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	bowl
 		name = "Bowl"
@@ -210,7 +212,7 @@
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
 		gender = MALE
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 		veryshort = 1
 
 	crew
@@ -312,7 +314,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 	jensen
 		name = "Adam Jensen Hair"
 		icon_state = "hair_jensen"
@@ -331,7 +333,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 	kusangi
 		name = "Kusanagi Hair"
 		icon_state = "hair_kusanagi"
@@ -619,6 +621,767 @@
 		name = "Manbun"
 		icon_state = "hair_manbun"
 		gender = MALE
+/*
+///////////////////////////////////
+/  =---------------------------=  /
+/  == Spartan Hair Definitions==  /
+/  =---------------------------=  /
+///////////////////////////////////
+*/
+
+	spartan_bald
+		name = "s_Bald"
+		icon = 'icons/mob/Spartan_face.dmi'
+		icon_state = "sbald"
+		gender = MALE
+		species_allowed = list(SPECIES_SPARTAN)
+
+	spartan_short
+		name = "s_Short Hair"
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		icon_state = "shair_a"
+		veryshort = 1
+
+	spartan_twintail
+		name = "s_Twintail"
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		icon_state = "shair_twintail"
+
+	spartan_short2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Short Hair 2"
+		icon_state = "shair_shorthair3"
+
+	spartan_cut
+		name = "s_Cut Hair"
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		icon_state = "shair_c"
+		veryshort = 1
+
+	spartan_flair
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Flaired Hair"
+		icon_state = "shair_flair"
+
+	spartan_long
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Shoulder-length Hair"
+		icon_state = "shair_b"
+
+	spartan_longer
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Long Hair"
+		icon_state = "shair_vlong"
+
+	spartan_longest
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Very Long Hair"
+		icon_state = "shair_longest"
+
+	spartan_longfringe
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Long Fringe"
+		icon_state = "shair_longfringe"
+
+	spartan_longestalt
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Longer Fringe"
+		icon_state = "shair_vlongfringe"
+
+	spartan_halfbang
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Half-banged Hair"
+		icon_state = "shair_halfbang"
+
+	spartan_halfbangalt
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Half-banged Hair Alt"
+		icon_state = "shair_halfbang_alt"
+
+	spartan_ponytail1
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ponytail 1"
+		icon_state = "shair_ponytail"
+
+	spartan_ponytail2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ponytail 2"
+		icon_state = "shair_pa"
+		gender = FEMALE
+
+	spartan_ponytail3
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ponytail 3"
+		icon_state = "shair_ponytail3"
+
+	spartan_ponytail4
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ponytail 4"
+		icon_state = "shair_ponytail4"
+		gender = FEMALE
+
+	spartan_ponytail5
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ponytail 5"
+		icon_state = "shair_ponytail5"
+		gender = FEMALE
+
+	spartan_ponytail6
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ponytail 6"
+		icon_state = "shair_ponytail6"
+		gender = FEMALE
+
+	spartan_sideponytail
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Side Ponytail"
+		icon_state = "shair_stail"
+		gender = FEMALE
+
+	spartan_parted
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Parted"
+		icon_state = "shair_parted"
+
+	spartan_pompadour
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Pompadour"
+		icon_state = "shair_pompadour"
+		gender = MALE
+
+	spartan_sleeze
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Sleeze"
+		icon_state = "shair_sleeze"
+		veryshort = 1
+
+	spartan_quiff
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Quiff"
+		icon_state = "shair_quiff"
+		gender = MALE
+
+	spartan_bedhead
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bedhead"
+		icon_state = "shair_bedhead"
+
+	spartan_bedhead2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bedhead 2"
+		icon_state = "shair_bedheadv2"
+
+	spartan_bedhead3
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bedhead 3"
+		icon_state = "shair_bedheadv3"
+
+
+	spartan_beehive2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Beehive 2"
+		icon_state = "shair_beehive2"
+		gender = FEMALE
+
+	spartan_bobcurl
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bobcurl"
+		icon_state = "shair_bobcurl"
+		gender = FEMALE
+
+	spartan_bob
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bob"
+		icon_state = "shair_bobcut"
+		gender = FEMALE
+
+	spartan_bobcutalt
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Chin Length Bob"
+		icon_state = "shair_bobcutalt"
+		gender = FEMALE
+
+	spartan_bowl
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bowl"
+		icon_state = "shair_bowlcut"
+		gender = MALE
+
+	spartan_buzz
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Buzzcut"
+		icon_state = "shair_buzzcut"
+		gender = MALE
+		veryshort = 1
+
+	spartan_crew
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Crewcut"
+		icon_state = "shair_crewcut"
+		gender = MALE
+		veryshort = 1
+
+	spartan_combover
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Combover"
+		icon_state = "shair_combover"
+		gender = MALE
+
+	spartan_father
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Father"
+		icon_state = "shair_father"
+		gender = MALE
+
+	spartan_reversemohawk
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Reverse Mohawk"
+		icon_state = "shair_reversemohawk"
+		gender = MALE
+
+	spartan_devillock
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Devil Lock"
+		icon_state = "shair_devilock"
+
+	spartan_dreadlocks
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Dreadlocks"
+		icon_state = "shair_dreads"
+
+	spartan_curls
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Curls"
+		icon_state = "shair_curls"
+
+	spartan_afro
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Afro"
+		icon_state = "shair_afro"
+
+	spartan_rows
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Rows"
+		icon_state = "shair_rows1"
+		veryshort = 1
+
+	spartan_rows2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Rows 2"
+		icon_state = "shair_rows2"
+		veryshort = 1
+
+	spartan_sargeant
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Flat Top"
+		icon_state = "shair_sargeant"
+		gender = MALE
+		veryshort = 1
+
+	spartan_emo
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Emo"
+		icon_state = "shair_emo"
+
+	spartan_emo2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Emo Alt"
+		icon_state = "shair_emo2"
+
+	spartan_longemo
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Long Emo"
+		icon_state = "shair_emolong"
+		gender = FEMALE
+
+	spartan_shortovereye
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Overeye Short"
+		icon_state = "shair_shortovereye"
+
+	spartan_longovereye
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Overeye Long"
+		icon_state = "shair_longovereye"
+
+	spartan_fag
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Flow Hair"
+		icon_state = "shair_f"
+
+	spartan_feather
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Feather"
+		icon_state = "shair_feather"
+
+	spartan_hitop
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Hitop"
+		icon_state = "shair_hitop"
+		gender = MALE
+
+	spartan_mohawk
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Mohawk"
+		icon_state = "shair_d"
+
+	spartan_jensen
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Adam Jensen Hair"
+		icon_state = "shair_jensen"
+		gender = MALE
+
+	spartan_gelled
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Gelled Back"
+		icon_state = "shair_gelled"
+		gender = FEMALE
+
+	spartan_gentle
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Gentle"
+		icon_state = "shair_gentle"
+		gender = FEMALE
+
+	spartan_spiky
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Spiky"
+		icon_state = "shair_spikey"
+
+	spartan_kusangi
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Kusanagi Hair"
+		icon_state = "shair_kusanagi"
+
+	spartan_kagami
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Pigtails"
+		icon_state = "shair_kagami"
+		gender = FEMALE
+
+	spartan_himecut
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Hime Cut"
+		icon_state = "shair_himecut"
+		gender = FEMALE
+
+	spartan_shorthime
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Short Hime Cut"
+		icon_state = "shair_shorthime"
+		gender = FEMALE
+
+	spartan_grandebraid
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Grande Braid"
+		icon_state = "shair_grande"
+		gender = FEMALE
+
+	spartan_mbraid
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Medium Braid"
+		icon_state = "shair_shortbraid"
+		gender = FEMALE
+
+	spartan_braid2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Long Braid"
+		icon_state = "shair_hbraid"
+		gender = FEMALE
+
+	spartan_braid
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Floorlength Braid"
+		icon_state = "shair_braid"
+		gender = FEMALE
+
+	spartan_odango
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Odango"
+		icon_state = "shair_odango"
+		gender = FEMALE
+
+	spartan_ombre
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ombre"
+		icon_state = "shair_ombre"
+		gender = FEMALE
+
+	spartan_skinhead
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Skinhead"
+		icon_state = "shair_skinhead"
+		veryshort = 1
+
+	spartan_balding
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Balding Hair"
+		icon_state = "shair_e"
+		gender = MALE
+		veryshort = 1
+
+	spartan_familyman
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_The Family Man"
+		icon_state = "shair_thefamilyman"
+		gender = MALE
+
+	spartan_mahdrills
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Drillruru"
+		icon_state = "shair_drillruru"
+		gender = FEMALE
+
+	spartan_fringetail
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Fringetail"
+		icon_state = "shair_fringetail"
+		gender = FEMALE
+
+	spartan_dandypomp
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Dandy Pompadour"
+		icon_state = "shair_dandypompadour"
+		gender = MALE
+
+	spartan_poofy
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Poofy"
+		icon_state = "shair_poofy"
+		gender = FEMALE
+
+	spartan_cia
+		name = "s_CIA"
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		icon_state = "shair_cia"
+		gender = MALE
+
+	spartan_mulder
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Mulder"
+		icon_state = "shair_mulder"
+		gender = MALE
+
+	spartan_scully
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Scully"
+		icon_state = "shair_scully"
+		gender = FEMALE
+
+	spartan_nitori
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Nitori"
+		icon_state = "shair_nitori"
+		gender = FEMALE
+
+	spartan_joestar
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Joestar"
+		icon_state = "shair_joestar"
+		gender = MALE
+
+	spartan_volaju
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Volaju"
+		icon_state = "shair_volaju"
+
+	spartan_longeralt2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Long Hair Alt 2"
+		icon_state = "shair_longeralt2"
+
+	spartan_shortbangs
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Short Bangs"
+		icon_state = "shair_shortbangs"
+
+	spartan_halfshaved
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Half-Shaved Emo"
+		icon_state = "shair_halfshaved"
+
+	spartan_bun
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Low Bun"
+		icon_state = "shair_bun"
+
+	spartan_bun2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_High Bun"
+		icon_state = "shair_bun2"
+
+	spartan_doublebun
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Double-Bun"
+		icon_state = "shair_doublebun"
+
+	spartan_lowfade
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Low Fade"
+		icon_state = "shair_lowfade"
+		gender = MALE
+		veryshort = 1
+
+	spartan_medfade
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Medium Fade"
+		icon_state = "shair_medfade"
+
+	spartan_highfade
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_High Fade"
+		icon_state = "shair_highfade"
+		gender = MALE
+		veryshort = 1
+
+	spartan_baldfade
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Balding Fade"
+		icon_state = "shair_baldfade"
+		gender = MALE
+		veryshort = 1
+
+	spartan_nofade
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Regulation Cut"
+		icon_state = "shair_nofade"
+		gender = MALE
+		veryshort = 1
+
+	spartan_trimflat
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Trimmed Flat Top"
+		icon_state = "shair_trimflat"
+		gender = MALE
+		veryshort = 1
+
+	spartan_shaved
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Shaved"
+		icon_state = "shair_shaved"
+		gender = MALE
+		veryshort = 1
+
+	spartan_trimmed
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Trimmed"
+		icon_state = "shair_trimmed"
+		gender = MALE
+		veryshort = 1
+
+	spartan_tightbun
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Tight Bun"
+		icon_state = "shair_tightbun"
+		gender = FEMALE
+		veryshort = 1
+
+	spartan_coffeehouse
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Coffee House Cut"
+		icon_state = "shair_coffeehouse"
+		gender = MALE
+		veryshort = 1
+
+	spartan_undercut
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Undercut"
+		icon_state = "shair_undercut"
+		gender = MALE
+		veryshort = 1
+
+	spartan_partfade
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Parted Fade"
+		icon_state = "shair_shavedpart"
+		gender = MALE
+		veryshort = 1
+
+	spartan_hightight
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_High and Tight"
+		icon_state = "shair_hightight"
+		gender = MALE
+		veryshort = 1
+
+	spartan_rowbun
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Row Bun"
+		icon_state = "shair_rowbun"
+		gender = FEMALE
+
+	spartan_rowdualbraid
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Row Dual Braid"
+		icon_state = "shair_rowdualtail"
+		gender = FEMALE
+
+	spartan_rowbraid
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Row Braid"
+		icon_state = "shair_rowbraid"
+		gender = FEMALE
+
+	spartan_regulationmohawk
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Regulation Mohawk"
+		icon_state = "shair_shavedmohawk"
+		gender = MALE
+		veryshort = 1
+
+	spartan_topknot
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Topknot"
+		icon_state = "shair_topknot"
+		gender = MALE
+
+	spartan_ronin
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Ronin"
+		icon_state = "shair_ronin"
+		gender = MALE
+
+	spartan_bowlcut2
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Bowl2"
+		icon_state = "shair_bowlcut2"
+		gender = MALE
+
+	spartan_thinning
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Thinning"
+		icon_state = "shair_thinning"
+		gender = MALE
+		veryshort = 1
+
+	spartan_thinningfront
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Thinning Front"
+		icon_state = "shair_thinningfront"
+		gender = MALE
+		veryshort = 1
+
+	spartan_thinningback
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Thinning Back"
+		icon_state = "shair_thinningrear"
+		gender = MALE
+		veryshort = 1
+
+	spartan_manbun
+		icon = 'icons/mob/Spartan_face.dmi'
+		species_allowed = list(SPECIES_SPARTAN)
+		name = "s_Manbun"
+		icon_state = "shair_manbun"
+		gender = MALE
 
 
 /*
@@ -638,7 +1401,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_VOX,SPECIES_IPC)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_VOX,SPECIES_IPC,SPECIES_ORION)
 
 	watson
 		name = "Watson Mustache"
@@ -679,7 +1442,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_ORION)
 
 	abe
 		name = "Abraham Lincoln Beard"
@@ -930,12 +1693,12 @@
 	human
 		name = "Default human skin"
 		icon_state = "default"
-		species_allowed = list(SPECIES_HUMAN)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_ORION)
 
 	human_tatt01
 		name = "Tatt01 human skin"
 		icon_state = "tatt1"
-		species_allowed = list(SPECIES_HUMAN)
+		species_allowed = list(SPECIES_HUMAN,SPECIES_ORION)
 
 	tajaran
 		name = "Default tajaran skin"

@@ -1,11 +1,14 @@
 
 /datum/job/URF_commando
-	title = "URF Commando - Rifleman"
+	title = "URF Commando"
 	outfit_type = /decl/hierarchy/outfit/job/URF_commando
-	alt_titles = list("URF Commando - Engineer",\
-	"URF Commando - Medic",\
-	"URF Commando -  CQB",\
-	"URF Commando - Sniper")
+	alt_titles = list("Recruit",\
+	"Velites",\
+	"Hastari",\
+	"Principes",\
+	"Triarii",\
+	"Decanus",\
+	"Tessearius")
 
 	total_positions = 8
 	spawn_positions = 8
@@ -17,7 +20,11 @@
 /datum/job/URF_commando_officer
 	title = "URF Commando Officer"
 	outfit_type = /decl/hierarchy/outfit/job/URF_commando_officer
-	alt_titles = list()
+	alt_titles = list("Optio",\
+	"Centurion",\
+	"Tribune",\
+	"Legio",\
+	"Legate")
 
 	total_positions = 1
 	spawn_positions = 1

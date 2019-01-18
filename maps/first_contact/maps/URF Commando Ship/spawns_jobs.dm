@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(commando_spawns)
 
 /datum/spawnpoint/commando_spawn
 	display_name = "Commando Spawn"
-	restrict_job = list("URF Commando - Rifleman")
+	restrict_job = list("URF Commando")
 
 /datum/spawnpoint/commando_spawn/New()
 	..()

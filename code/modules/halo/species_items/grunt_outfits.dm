@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/unggoy
-	name = "Unggoy"
+	name = "Unggoy (Minor)"
 
 	l_ear = /obj/item/device/radio/headset/covenant
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness
@@ -39,17 +39,20 @@
 	name = "Unggoy (Major)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
+	back = /obj/item/weapon/tank/methane/unggoy_internal/red
 
 /decl/hierarchy/outfit/unggoy/ultra
 	name = "Unggoy (Ultra)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
+	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 
 /decl/hierarchy/outfit/unggoy/specops
 	name = "Unggoy (Spec-Ops)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	mask = /obj/item/clothing/mask/rebreather/unggoy_spec_ops
+	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 
 /decl/hierarchy/outfit/unggoy/deacon
 	name = "Unggoy (Deacon)"
@@ -57,3 +60,4 @@
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
 	mask = /obj/item/clothing/mask/rebreather/unggoy_deacon
 	l_pocket = /obj/item/weapon/grenade/plasma/heavy_plasma
+	back = /obj/item/weapon/tank/methane/unggoy_internal/blue

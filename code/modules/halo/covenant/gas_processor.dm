@@ -12,7 +12,7 @@
 	var/list/gas_inventory = list()
 	var/held_steel = 0
 	var/steel_per_packet = 10
-	var/moles_per_packet = 1000
+	var/moles_per_packet = 150
 	var/static/list/packet_types = list(\
 		"oxygen" = /obj/item/gas_packet/oxygen,\
 		"watervapour" = /obj/item/gas_packet/water,\

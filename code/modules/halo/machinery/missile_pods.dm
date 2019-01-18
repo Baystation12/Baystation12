@@ -52,6 +52,7 @@
 	//icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
 	//icon_state = "missile"
 	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'
 	step_delay = 0.75 SECOND
 
 /obj/item/projectile/overmap/missile/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
@@ -61,6 +62,7 @@
 	desc = "An explosive warhead on the end of a guided thruster."
 	icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
 	icon_state = "missile"
+	damage = 0 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
 	explosion(loc,-1,1,3,5)
@@ -75,10 +77,9 @@
 /obj/item/projectile/missile_damage_proj/burrowing
 	name = "missile"
 	desc = "An explosive warhead on the end of a guided thruster."
-	damage = 200 //Same damage as a deck gun, but without the armour bypass.
 	penetrating = 2
 
-/obj/item/projectile/missile_damage_proj/Move(var/turf/new_loc,var/dir)
+/obj/item/projectile/missile_damage_proj/burrowing/Move(var/turf/new_loc,var/dir)
 	if(istype(new_loc,/turf/simulated/floor))
 		. = ..()
 		explosion(new_loc,-1,-1.5,10)
