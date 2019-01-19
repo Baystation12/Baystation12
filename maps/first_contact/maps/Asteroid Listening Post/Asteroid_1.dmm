@@ -160,8 +160,8 @@
 "dd" = (/obj/effect/overmap/sector/exo_listen,/turf/space,/area/asteroid_listening/dark)
 "de" = (/turf/space,/area/space)
 "df" = (/turf/space,/area/asteroid_listening/dark)
-"dg" = (/obj/effect/landmark/map_data,/turf/space,/area/asteroid_listening/dark)
 "dh" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
+"RZ" = (/obj/effect/landmark/map_data{name = "Asteroid"},/turf/space,/area/asteroid_listening/dark)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -213,5 +213,6 @@ aaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acacdbdbdbdbdbdbdbdbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ddacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 dfacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-dgacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+RZacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
