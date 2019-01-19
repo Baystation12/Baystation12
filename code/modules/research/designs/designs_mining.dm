@@ -41,6 +41,6 @@
 	desc = "Used to check spatial depth and density of rock outcroppings."
 	id = "depth_scanner"
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
-	materials = list(MATERIAL_STEEL = 1000,MATERIAL_GLASS = 1000)
+	materials = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_ALUMINIUM = 150)
 	build_path = /obj/item/device/depth_scanner
 	sort_string = "KAAAF"
