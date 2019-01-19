@@ -16,7 +16,7 @@
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,/obj/item/ammo_magazine/m127_saphp =20,/obj/item/ammo_magazine/m762_ap/MA5B = 40,/obj/item/ammo_magazine/m762_ap/MA5B/TTR = 15,/obj/item/ammo_magazine/m762_ap/M392 = 30
 					,/obj/item/ammo_magazine/m95_sap = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
 					,/obj/item/weapon/gun/projectile/m6d_magnum = 15,/obj/item/weapon/gun/projectile/ma5b_ar = 15,/obj/item/weapon/gun/projectile/br85 = 2
-					,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 8,/obj/item/weapon/gun/projectile/m7_smg = 8,/obj/item/weapon/gun/projectile/m392_dmr = 5,/obj/item/weapon/grenade/frag/m9_hedp = 5,/obj/item/weapon/grenade/smokebomb = 5, /obj/item/weapon/armor_patch = 5)
+					,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 8,/obj/item/weapon/gun/projectile/m7_smg = 8,/obj/item/weapon/gun/projectile/m392_dmr = 5,/obj/item/weapon/grenade/frag/m9_hedp = 5,/obj/item/weapon/grenade/smokebomb = 5, /obj/item/weapon/armor_patch = 5,/obj/item/drop_pod_beacon = 1)
 
 /obj/machinery/vending/armory/heavy // HEAVY WEAPONS
 	name = "UNSC Heavy Weapons Rack"
@@ -108,7 +108,8 @@
 	/obj/item/ammo_magazine/m145_ap = 2,
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/weapon/grenade/frag/m9_hedp = 8,
-	/obj/item/weapon/armor_patch = 8)
+	/obj/item/weapon/armor_patch = 8,
+	/obj/item/drop_pod_beacon = 3)
 
 
 /obj/machinery/vending/armory/odstvend/vend_2
