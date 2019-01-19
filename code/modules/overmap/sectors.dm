@@ -54,6 +54,7 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z && GLOB.using_map.use_overmap)
 		build_overmap()
 
+	map_z |= loc.z
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	//	map_sectors["[zlevel]"] = src
