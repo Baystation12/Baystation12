@@ -50,7 +50,7 @@
 	if(eva_mode_active)
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising atmospheric and pressure containment.")
 		totalshields = connectedarmour.totalshields /4
-		shieldstrength = 0
+		take_damage(shieldstrenghth) //drop our shields to 0
 		connectedarmour.item_flags |= STOPPRESSUREDAMAGE
 		connectedarmour.item_flags |= AIRTIGHT
 		connectedarmour.min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
@@ -58,8 +58,8 @@
 
 	else
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising defense.")
+		take_damage(shieldstrenghth) //drop our shields to 0
 		totalshields = connectedarmour.totalshields
-		shieldstrength = 0
 		armourvalue = connectedarmour.armor
 		connectedarmour.item_flags = initial(connectedarmour.item_flags)
 		connectedarmour.min_cold_protection_temperature = initial(connectedarmour.min_cold_protection_temperature)
