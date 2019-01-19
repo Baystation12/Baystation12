@@ -159,7 +159,7 @@
 "dc" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/roof/exterior/northeastr)
 "dd" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/roof/exterior/northeastr)
 "de" = (/obj/effect/overmap/sector/exo_research,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/roof/exterior/northeastr)
-"df" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/exo_research_facility/roof/exterior/northeastr)
+"df" = (/obj/effect/landmark/map_data,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/exo_research_facility/roof/exterior/northeastr)
 "dg" = (/turf/unsimulated/floor/rock2,/area/exo_research_facility/roof/exterior/northeastr)
 
 (1,1,1) = {"

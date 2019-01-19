@@ -1221,8 +1221,6 @@
 			return global.wrapped_species_by_ref;
 		if("xenomorphs")
 			return global.xenomorphs;
-		if("z_levels")
-			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
 		
@@ -2448,8 +2446,6 @@
 			global.wrapped_species_by_ref=newval;
 		if("xenomorphs")
 			global.xenomorphs=newval;
-		if("z_levels")
-			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
 		
