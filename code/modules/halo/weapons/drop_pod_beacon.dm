@@ -26,7 +26,7 @@
 		to_chat(user,"<span class = 'notice'>[name] is already active!</span>")
 		return
 	if(is_active == -1)
-		to_chat(user,"<span class = 'notice'>[name] has ran out of charge!/span>")
+		to_chat(user,"<span class = 'notice'>[name] has ran out of charge!</span>")
 		return
 
 	user.visible_message("<span class = 'notice'>[user] primes [src], activating the tracking module!</span>")
