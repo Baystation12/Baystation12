@@ -2815,6 +2815,7 @@
 	pixel_y = 23;
 	req_one_access = list(11,24)
 	},
+/obj/item/stack/material/aluminium/fifty,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "gi" = (
@@ -12179,11 +12180,13 @@
 /area/engineering/locker_room)
 "CD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/gloves{
-	pixel_x = 4;
-	pixel_y = 4
-	},
-/obj/item/weapon/storage/box/masks,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/plasteel/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "CE" = (
@@ -12205,7 +12208,11 @@
 	pixel_x = 24
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/bodybags,
+/obj/item/weapon/storage/box/monkeycubes/stokcubes,
+/obj/item/weapon/storage/box/monkeycubes/neaeracubes,
+/obj/item/weapon/storage/box/monkeycubes/farwacubes,
+/obj/item/weapon/storage/box/monkeycubes/farwacubes,
+/obj/item/weapon/storage/box/monkeycubes,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "CH" = (
@@ -12412,6 +12419,12 @@
 "Dh" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/beakers,
+/obj/item/weapon/storage/box/bodybags,
+/obj/item/weapon/storage/box/masks,
+/obj/item/weapon/storage/box/gloves{
+	pixel_x = 4;
+	pixel_y = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "Di" = (
@@ -12571,15 +12584,6 @@
 "Dz" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/up,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/research)
-"DA" = (
-/obj/structure/table/rack,
-/obj/item/weapon/storage/box/monkeycubes,
-/obj/item/weapon/storage/box/monkeycubes,
-/obj/item/weapon/storage/box/monkeycubes/farwacubes,
-/obj/item/weapon/storage/box/monkeycubes/neaeracubes,
-/obj/item/weapon/storage/box/monkeycubes/stokcubes,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "DB" = (
@@ -15225,11 +15229,6 @@
 /obj/item/device/multitool{
 	pixel_x = 3
 	},
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/plasteel/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/research)
 "Ml" = (
@@ -40196,8 +40195,8 @@ CJ
 Cg
 CF
 Dh
-DA
 DY
+Dg
 Ei
 Eh
 Eh

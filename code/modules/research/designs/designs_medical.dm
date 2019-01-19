@@ -9,7 +9,7 @@
 	desc = "Multipurpose organic life scanner."
 	id = "slime_scanner"
 	req_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
-	materials = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 100)
+	materials = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 150)
 	build_path = /obj/item/device/slime_scanner
 	sort_string = "MACFA"
 
@@ -17,7 +17,7 @@
 	desc = "A hand-held scanner able to diagnose robotic injuries."
 	id = "robot_scanner"
 	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 200)
+	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 200, MATERIAL_PLASTIC = 150)
 	build_path = /obj/item/device/robotanalyzer
 	sort_string = "MACFB"
 

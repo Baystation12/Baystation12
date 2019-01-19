@@ -24,7 +24,7 @@
 	id = "mmi_radio"
 	req_tech = list(TECH_DATA = 2, TECH_BIO = 4)
 	build_type = PROTOLATHE | MECHFAB
-	materials = list(MATERIAL_STEEL = 1200, MATERIAL_GLASS = 500)
+	materials = list(MATERIAL_ALUMINIUM = 1200, MATERIAL_GLASS = 500)
 	build_path = /obj/item/device/mmi/radio_enabled
 	category = "Misc"
 	sort_string = "VACCB"

@@ -23741,8 +23741,6 @@
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "kXb" = (
-/obj/machinery/r_n_d/protolathe,
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "kYM" = (

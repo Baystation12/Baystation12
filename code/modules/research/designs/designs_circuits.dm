@@ -1,7 +1,7 @@
 /datum/design/circuit
 	build_type = IMPRINTER
 	req_tech = list(TECH_DATA = 2)
-	materials = list(MATERIAL_GLASS = 2000)
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
 	chemicals = list(/datum/reagent/acid = 20)
 	time = 5
 
