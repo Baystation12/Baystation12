@@ -19,11 +19,11 @@
 	item_cost = 32
 	path = /obj/item/weapon/melee/energy/sword
 
-/datum/uplink_item/item/visible_weapons/g9mm
+/datum/uplink_item/item/visible_weapons/silenced
 	name = "Silenced Holdout Pistol"
-	desc = "9mm with silencer kit and ammunition."
+	desc = "Holdout pistol with silencer kit and ammunition."
 	item_cost = 32
-	path = /obj/item/weapon/storage/box/syndie_kit/g9mm
+	path = /obj/item/weapon/storage/box/syndie_kit/silenced
 
 /datum/uplink_item/item/badassery/money_cannon
 	name = "Modified Money Cannon"
@@ -42,16 +42,10 @@
 	path = /obj/item/weapon/gun/energy/gun
 
 /datum/uplink_item/item/visible_weapons/revolver
-	name = "Revolver, .357"
-	desc = ".357 revolver, with ammunition."
+	name = "Revolver"
+	desc = "Magnum revolver, with ammunition."
 	item_cost = 56
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
-
-/datum/uplink_item/item/visible_weapons/revolver2
-	name = "Revolver, .44"
-	desc = ".44 magnum revolver, with ammunition."
-	item_cost = 48
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"
@@ -63,12 +57,12 @@
 /datum/uplink_item/item/visible_weapons/submachinegun
 	name = "Submachine Gun"
 	item_cost = 52
-	path = /obj/item/weapon/gun/projectile/automatic/c20r
+	path = /obj/item/weapon/gun/projectile/automatic/merc_smg
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
 	name = "Assault Rifle"
 	item_cost = 60
-	path = /obj/item/weapon/gun/projectile/automatic/sts35
+	path = /obj/item/weapon/gun/projectile/automatic/assault_rifle
 
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
 	name = "Advanced Energy Gun"
@@ -98,22 +92,17 @@
 /datum/uplink_item/item/visible_weapons/deagle
 	name = "Magnum Pistol"
 	item_cost = 52
-	path = /obj/item/weapon/gun/projectile/magnum_pistol
-
-/datum/uplink_item/item/visible_weapons/beretta
-	name = "9mm Pistol"
-	item_cost = 40
-	path = /obj/item/weapon/gun/projectile/beretta
+	path = /obj/item/weapon/gun/projectile/pistol/magnum_pistol
 
 /datum/uplink_item/item/visible_weapons/sigsauer
-	name = "10mm Pistol"
+	name = "Military Pistol"
 	item_cost = 40
-	path = /obj/item/weapon/gun/projectile/sigsauer
+	path = /obj/item/weapon/gun/projectile/pistol/military/alt
 
 /datum/uplink_item/item/visible_weapons/detective_revolver
 	name = "Holdout Revolver"
 	item_cost = 38
-	path = /obj/item/weapon/gun/projectile/revolver/detective
+	path = /obj/item/weapon/gun/projectile/revolver/holdout
 
 /datum/uplink_item/item/visible_weapons/pulserifle
 	name = "Pulse Rifle"

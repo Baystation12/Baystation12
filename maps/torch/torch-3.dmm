@@ -9888,8 +9888,8 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/ammo_magazine/a762/empty,
-/obj/item/ammo_magazine/a762/empty,
+/obj/item/ammo_magazine/mil_rifle/empty,
+/obj/item/ammo_magazine/mil_rifle/empty,
 /turf/simulated/floor/plating,
 /area/vacant/armory)
 "wv" = (
@@ -10140,7 +10140,7 @@
 /turf/simulated/floor/plating,
 /area/vacant/armory)
 "xl" = (
-/obj/item/ammo_magazine/mc9mm/empty,
+/obj/item/ammo_magazine/pistol/small/empty,
 /turf/simulated/floor/plating,
 /area/vacant/armory)
 "xm" = (

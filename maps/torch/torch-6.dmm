@@ -703,10 +703,10 @@
 /area/rescue_base/base)
 "abV" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/box/a556,
-/obj/item/ammo_magazine/box/a556,
-/obj/item/ammo_magazine/box/a556,
-/obj/item/ammo_magazine/box/a556,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -736,9 +736,9 @@
 /area/rescue_base/base)
 "abY" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/automatic/wt550,
-/obj/item/weapon/gun/projectile/automatic/wt550,
-/obj/item/weapon/gun/projectile/automatic/wt550,
+/obj/item/weapon/gun/projectile/automatic/sec_smg,
+/obj/item/weapon/gun/projectile/automatic/sec_smg,
+/obj/item/weapon/gun/projectile/automatic/sec_smg,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -971,15 +971,15 @@
 /area/rescue_base/base)
 "acx" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1220,16 +1220,16 @@
 /area/rescue_base/base)
 "add" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1439,8 +1439,8 @@
 /area/rescue_base/base)
 "adD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/automatic/z8,
-/obj/item/weapon/gun/projectile/automatic/z8,
+/obj/item/weapon/gun/projectile/automatic/bullpup_rifle,
+/obj/item/weapon/gun/projectile/automatic/bullpup_rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1564,12 +1564,12 @@
 /area/rescue_base/base)
 "adT" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -9092,10 +9092,10 @@
 /area/syndicate_mothership)
 "awg" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/box/a556,
-/obj/item/ammo_magazine/box/a556,
-/obj/item/ammo_magazine/box/a556,
-/obj/item/ammo_magazine/box/a556,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
 /obj/item/weapon/gun/projectile/automatic/l6_saw,
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -9117,24 +9117,24 @@
 /area/centcom/specops)
 "awi" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/ammo_magazine/mc9mmt/rubber,
-/obj/item/weapon/gun/projectile/automatic/wt550,
-/obj/item/weapon/gun/projectile/automatic/wt550,
-/obj/item/weapon/gun/projectile/automatic/wt550,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/weapon/gun/projectile/automatic/sec_smg,
+/obj/item/weapon/gun/projectile/automatic/sec_smg,
+/obj/item/weapon/gun/projectile/automatic/sec_smg,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -9160,14 +9160,14 @@
 /area/centcom/specops)
 "awl" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/ammo_magazine/a762,
-/obj/item/weapon/gun/projectile/automatic/z8,
-/obj/item/weapon/gun/projectile/automatic/z8,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/weapon/gun/projectile/automatic/bullpup_rifle,
+/obj/item/weapon/gun/projectile/automatic/bullpup_rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -10326,18 +10326,18 @@
 /area/syndicate_mothership)
 "ayJ" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/pistol,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 8
@@ -11283,12 +11283,12 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/weapon/gun/projectile/automatic/sts35,
-/obj/item/weapon/gun/projectile/automatic/sts35,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/weapon/gun/projectile/automatic/assault_rifle,
+/obj/item/weapon/gun/projectile/automatic/assault_rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 8
@@ -11466,15 +11466,15 @@
 /area/syndicate_mothership)
 "aAW" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/a10mm,
-/obj/item/ammo_magazine/a10mm,
-/obj/item/ammo_magazine/a10mm,
-/obj/item/ammo_magazine/a10mm,
-/obj/item/ammo_magazine/a10mm,
-/obj/item/ammo_magazine/a10mm,
-/obj/item/weapon/gun/projectile/automatic/c20r,
-/obj/item/weapon/gun/projectile/automatic/c20r,
-/obj/item/weapon/gun/projectile/automatic/c20r,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/weapon/gun/projectile/automatic/merc_smg,
+/obj/item/weapon/gun/projectile/automatic/merc_smg,
+/obj/item/weapon/gun/projectile/automatic/merc_smg,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 8
@@ -11631,9 +11631,6 @@
 "aBo" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/holster/security,
-/obj/item/weapon/storage/belt/holster/security,
-/obj/item/ammo_magazine/mc9mm/flash,
-/obj/item/weapon/gun/projectile/pistol/flash,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "aBp" = (
@@ -22147,6 +22144,7 @@
 /area/syndicate_station/start)
 "eRk" = (
 /obj/structure/closet{
+	
 	},
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken1"
@@ -22927,6 +22925,7 @@
 /area/syndicate_station/start)
 "rIb" = (
 /obj/structure/closet{
+	
 	},
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken3"
@@ -23133,6 +23132,7 @@
 /area/holodeck/source_cafe)
 "vgY" = (
 /obj/structure/closet{
+	
 	},
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken2"

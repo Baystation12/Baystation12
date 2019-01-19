@@ -31,11 +31,11 @@
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	corpse = /obj/effect/landmark/corpse/russian/ranged
-	weapon1 = /obj/item/weapon/gun/projectile/revolver/mateba
+	weapon1 = /obj/item/weapon/gun/projectile/revolver
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet
 	projectilesound = 'sound/weapons/gunshot/gunshot2.ogg'
-	casingtype = /obj/item/ammo_casing/a50
+	casingtype = /obj/item/ammo_casing/pistol/magnum
 
 
 /mob/living/simple_animal/hostile/russian/death(gibbed, deathmessage, show_dead_message)

@@ -57,7 +57,7 @@
 	for(var/i=3, i>0, i--)
 		sec_briefcase.contents += new /obj/item/weapon/spacecash/bundle/c1000
 	sec_briefcase.contents += new /obj/item/weapon/gun/energy/crossbow
-	sec_briefcase.contents += new /obj/item/weapon/gun/projectile/revolver/mateba
-	sec_briefcase.contents += new /obj/item/ammo_magazine/c50
+	sec_briefcase.contents += new /obj/item/weapon/gun/projectile/revolver
+	sec_briefcase.contents += new /obj/item/ammo_magazine/speedloader/magnum
 	sec_briefcase.contents += new /obj/item/weapon/plastique
 	H.equip_to_slot_or_del(sec_briefcase, slot_l_hand)

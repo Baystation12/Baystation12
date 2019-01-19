@@ -457,10 +457,10 @@
 /area/unishi/living)
 "bC" = (
 /obj/structure/closet,
-/obj/item/ammo_magazine/a44,
-/obj/item/ammo_magazine/a44,
-/obj/item/ammo_magazine/a44,
-/obj/item/weapon/gun/projectile/revolver/mateba,
+/obj/item/ammo_magazine/speedloader/magnum,
+/obj/item/ammo_magazine/speedloader/magnum,
+/obj/item/ammo_magazine/speedloader/magnum,
+/obj/item/weapon/gun/projectile/revolver,
 /obj/item/weapon/handcuffs,
 /obj/machinery/light/small{
 	dir = 8
@@ -1351,8 +1351,8 @@
 /area/unishi/living)
 "dC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dD" = (
@@ -1404,24 +1404,24 @@
 "dK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dL" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/green,
-/obj/item/weapon/gun/projectile/silenced,
+/obj/item/weapon/gun/projectile/pistol/holdout,
 /obj/item/weapon/storage/secure/briefcase,
 /obj/item/weapon/card/emag_broken,
 /obj/item/weapon/plastique,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
-/obj/item/ammo_casing/c45/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dM" = (
