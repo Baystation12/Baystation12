@@ -679,6 +679,8 @@
 			return global.mannequins_;
 		if("map_count")
 			return global.map_count;
+		if("map_datas")
+			return global.map_datas;
 		if("map_sectors")
 			return global.map_sectors;
 		if("maploader")
@@ -1904,6 +1906,8 @@
 			global.mannequins_=newval;
 		if("map_count")
 			global.map_count=newval;
+		if("map_datas")
+			global.map_datas=newval;
 		if("map_sectors")
 			global.map_sectors=newval;
 		if("maploader")
@@ -2789,6 +2793,7 @@
 	"malf",
 	"mannequins_",
 	"map_count",
+	"map_datas",
 	"map_sectors",
 	"maploader",
 	"mark",
@@ -3060,5 +3065,4 @@
 	"worths",
 	"wrapped_species_by_ref",
 	"xenomorphs",
-	"z_levels",
 	"zone_blocked")
