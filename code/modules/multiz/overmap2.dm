@@ -11,7 +11,9 @@
 		//this wont be able to handle multiz ships/planets, but it will work for 1z ships (eg NPCs)
 		overmap_object = locate() in range(src, 7)
 	else
-		overmap_object = locate(name)
+		for(var/obj/effect/overmap/om in world)
+			if(om.name == name)
+				overmap_object = om
 
 	if(overmap_object)
 		name = overmap_object.tag
