@@ -107,7 +107,6 @@
 			continue
 		attachment.attach_to(src)
 
-
 /obj/item/weapon/gun/proc/get_attachments(var/names_only = 0)
 	var/list/attachments = list()
 	for(var/obj/item/weapon_attachment/attachment in src.contents)
@@ -283,6 +282,16 @@
 		if(!check_z_compatible(target,user)) return
 
 	add_fingerprint(user)
+	var/list/attachments = get_attachments()
+	if(attachments.len > 0)
+		var/have_fired = 0
+		for(var/obj/item/weapon_attachment/secondary_weapon/attachment in get_attachments())
+			if(attachment.alt_fire_active == 1)
+				var/firing_result = attachment.fire_attachment(target,user,src)
+				if(firing_result == 1)
+					have_fired = 1
+		if(have_fired)
+			return //if one of our attachments have fired, let's not fire normally.
 
 	if(!special_check(user))
 		return
@@ -549,6 +558,20 @@
 		mouthshoot = 0
 		return
 
+/obj/item/weapon/gun/proc/calculate_attachment_effects()
+	var/cumulative_dispmod = 0
+	var/cumulative_accmod = 0
+	var/cumulative_slowdownmod = 0
+	for(var/obj/item/weapon_attachment/attachment in get_attachments())
+		var/list/attrib_mods = attachment.get_attribute_mods(src)
+		cumulative_dispmod += attrib_mods[1]
+		cumulative_accmod += attrib_mods[2]
+		cumulative_slowdownmod += attrib_mods[3]
+
+	dispersion += cumulative_dispmod
+	accuracy += cumulative_accmod
+	slowdown_general += cumulative_slowdownmod
+
 /obj/item/weapon/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
 	//looking through a scope limits your periphereal vision
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
@@ -562,12 +585,44 @@
 		if(screen_shake)
 			screen_shake = round(screen_shake*zoom_amount+1) //screen shake is worse when looking through a scope
 
+/obj/item/weapon/gun/proc/toggle_attachment_light()
+	set name = "Toggle Light Attachment"
+	set category = "Weapon"
+	if(!istype(usr,/mob/living))
+		return
+
+	for(var/obj/item/weapon_attachment/light/l in get_attachments())
+		l.on = !l.on
+		if(l.on)
+			if(l.activation_sound)
+				playsound(src.loc, l.activation_sound, 75, 1)
+			set_light(l.intensity)
+		else
+			set_light(0)
+
+/obj/item/weapon/gun/secondary_weapon/proc/toggle_attachment()
+	set name = "Toggle Attachment"
+	set category = "Weapon"
+	set desc = "Toggle a secondary-weapon attachment."
+
+	if(!istype(usr,/mob/living))
+		to_chat(usr,"<span class = 'notice'>You can't use that in your current form!</span>")
+		return
+
+	for(var/obj/item/weapon_attachment/secondary_weapon/wep in get_attachments()) //You probably shouldn't have two secondary-weapon attachment one weapon.
+		if(wep.alt_fire_active == -1)
+			to_chat(usr,"<span class = 'notice'>This is an error in attachment-defines, please report to the github.</span>")
+			return
+		wep.alt_fire_active = !wep.alt_fire_active
+		to_chat(usr,"<span class = 'notice'>You toggle [wep.name] to [wep.alt_fire_active ? "off":"on"]</span>")
+
 //make sure accuracy and screen_shake are reset regardless of how the item is unzoomed.
 /obj/item/weapon/gun/zoom()
 	..()
 	if(!zoom)
 		accuracy = initial(accuracy)
 		screen_shake = initial(screen_shake)
+	calculate_attachment_effects()
 
 /obj/item/weapon/gun/examine(mob/user)
 	. = ..()
