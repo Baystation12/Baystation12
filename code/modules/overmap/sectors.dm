@@ -54,9 +54,9 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z && GLOB.using_map.use_overmap)
 		build_overmap()
 
-	map_z = GetConnectedZlevels(z)
-	for(var/zlevel in map_z)
-		map_sectors["[zlevel]"] = src
+	//map_z = GetConnectedZlevels(z)
+	//for(var/zlevel in map_z)
+	//	map_sectors["[zlevel]"] = src
 
 	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
