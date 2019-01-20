@@ -31,11 +31,12 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		new /obj/item/device/mobilecomms/commsbackpack/covenant (locate(1,1,1))*/
 	setup_com_channels()
 
-/hook/startup/proc/do_dept_keys()
+/hook/startup/proc/reset_innie_dept_key()
 	//this can't be in datum/New() as there it is apparently called before global vars are instantianted
 	for(var/key in department_radio_keys) //Department keys would bork if this isn't done.
 		if(department_radio_keys[key] == "INNIECOM")
 			department_radio_keys[key] = halo_frequencies.innie_channel_name
+	return 1
 
 /datum/halo_frequencies/proc/setup_com_channels()
 	//randomised innie comm channel name
