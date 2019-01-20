@@ -124,12 +124,19 @@
 
 /datum/database/sqlite/GetAllLibraryBooks()
     var/list/books = new
-    q.Add("SELECT author, category, title, content FROM bs12_library")
+    q.Add("SELECT id, author, category, title, content FROM bs12_library")
     CHECK_EXEC(q)
     while(q.NextRow())
         var/list/data = q.GetRowData()
         books |= data
     return books
+
+/datum/database/sqlite/GetLibraryBook(var/id)
+    q.Add("SELECT author, category, title, content FROM bs12_library WHERE id = ?", id)
+    if(!q.Execute())
+        return null
+    if(q.NextRow())
+        return q.GetRowData()
 
 /datum/database/sqlite/CreateLibraryBook(var/ckey, var/category, var/author, var/title, var/content)
     q.Add("INSERT INTO bs12_library(ckey, author, category, title, content) VALUES (?, ?, ?, ?)", ckey, author, category, title, content)

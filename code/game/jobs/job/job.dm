@@ -294,7 +294,7 @@
 
 /datum/job/proc/get_unavailable_reasons(var/client/caller)
 	var/list/reasons = list()
-	if(jobban_isbanned(caller, title))
+	if(caller.is_banned(title))
 		reasons["You are jobbanned."] = TRUE
 	if(!player_old_enough(caller))
 		reasons["Your player age is too low."] = TRUE
@@ -320,7 +320,7 @@
 /datum/job/proc/is_available(var/client/caller)
 	if(!is_position_available())
 		return FALSE
-	if(jobban_isbanned(caller, title))
+	if(caller.is_banned(title))
 		return FALSE
 	if(!player_old_enough(caller))
 		return FALSE

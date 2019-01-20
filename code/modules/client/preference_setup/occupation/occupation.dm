@@ -131,7 +131,7 @@
 		var/bad_message = ""
 		if(job.total_positions == 0 && job.spawn_positions == 0)
 			bad_message = "<b> \[UNAVAILABLE]</b>"
-		else if(jobban_isbanned(user, rank))
+		else if(user.client.is_banned(rank))
 			bad_message = "<b> \[BANNED]</b>"
 		else if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)

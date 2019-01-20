@@ -244,7 +244,6 @@ var/global/list/additional_antag_types = list()
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
 
-	if(SSticker.mode)
 	return 1
 
 /datum/game_mode/proc/fail_setup()
@@ -329,25 +328,17 @@ var/global/list/additional_antag_types = list()
 
 	sleep(2)
 
-	var/clients = 0
-	var/surviving_humans = 0
 	var/surviving_total = 0
 	var/ghosts = 0
-	var/escaped_humans = 0
 	var/escaped_total = 0
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client)
-			clients++
 			if(M.stat != DEAD)
 				surviving_total++
-				if(ishuman(M))
-					surviving_humans++
 				var/area/A = get_area(M)
 				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
 					escaped_total++
-					if(ishuman(M))
-						escaped_humans++
 			else if(isghost(M))
 				ghosts++
 
@@ -365,13 +356,6 @@ var/global/list/additional_antag_types = list()
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
 
 	to_world(text)
-	
-	if(clients > 0)
-	if(ghosts > 0)
-	if(surviving_humans > 0)
-	if(surviving_total > 0)
-	if(escaped_humans > 0)
-	if(escaped_total > 0)
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 

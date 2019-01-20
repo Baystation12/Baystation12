@@ -90,9 +90,6 @@
 		log = runtime_log
 
 	callHook("startup")
-	//Emergency Fix
-	load_mods()
-	//end-emergency fix
 
 	. = ..()
 
@@ -471,10 +468,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	callHook("shutdown")
 	return ..()
 
-/hook/startup/proc/loadMode()
-	world.load_mode()
-	return 1
-
 /world/proc/load_mode()
 	if(!fexists("data/mode.txt"))
 		return
@@ -502,7 +495,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
-	config.loadsql("config/dbconfig.txt")
 	config.load_event("config/custom_event.txt")
 
 /world/proc/update_status()

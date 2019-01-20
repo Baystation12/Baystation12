@@ -136,13 +136,13 @@ var/global/datum/controller/occupations/job_master
 
 	proc/AssignRole(var/mob/new_player/player, var/rank, var/latejoin = 0)
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
-		if(player && player.mind && rank)
+		if(player && player.mind && player.client && rank)
 			var/datum/job/job = GetJob(rank)
 			if(!job)
 				return 0
 			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				return 0
-			if(jobban_isbanned(player, rank))
+			if(player.client.is_banned(rank))
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
@@ -182,7 +182,9 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
 		var/list/candidates = list()
 		for(var/mob/new_player/player in unassigned)
-			if(jobban_isbanned(player, job.title))
+			if(!player.client)
+				continue
+			if(player.client.is_banned(job.title))
 				Debug("FOC isbanned failed, Player: [player]")
 				continue
 			if(!job.player_old_enough(player.client))
@@ -202,7 +204,7 @@ var/global/datum/controller/occupations/job_master
 	proc/GiveRandomJob(var/mob/new_player/player)
 		Debug("GRJ Giving random job, Player: [player]")
 		for(var/datum/job/job in shuffle(occupations))
-			if(!job)
+			if(!job || !player.client)
 				continue
 
 			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
@@ -217,7 +219,7 @@ var/global/datum/controller/occupations/job_master
 			if(job.title in GLOB.command_positions) //If you want a command position, select it!
 				continue
 
-			if(jobban_isbanned(player, job.title))
+			if(player.client.is_banned(job.title))
 				Debug("GRJ isbanned failed, Player: [player], Job: [job.title]")
 				continue
 
@@ -353,13 +355,14 @@ var/global/datum/controller/occupations/job_master
 
 			// Loop through all unassigned players
 			for(var/mob/new_player/player in unassigned)
-
+				if (!player.client)
+					continue
 				// Loop through all jobs
 				for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
 					if(!job || mode.disabled_jobs.Find(job.title) )
 						continue
 
-					if(jobban_isbanned(player, job.title))
+					if(player.client.is_banned(job.title))
 						Debug("DO isbanned failed, Player: [player], Job:[job.title]")
 						continue
 

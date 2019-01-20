@@ -55,7 +55,7 @@
 		return
 
 	// Check for bans properly.
-	if(jobban_isbanned(user, MODE_XENOMORPH))
+	if(user.client.is_banned(BAN_XENO))
 		to_chat(user, "<span class='danger'>You are banned from playing a Xenophage.</span>")
 		return
 

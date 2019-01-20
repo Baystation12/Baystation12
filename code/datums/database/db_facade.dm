@@ -45,11 +45,14 @@
 /datum/database/proc/RecordLogin(var/ckey, var/ip, var/cid, var/round)
     return 0
 
-/datum/database/dmpg/GetPlayerAge(var/ckey)
+/datum/database/proc/GetPlayerAge(var/ckey)
     return null
 
 /datum/database/proc/GetAllLibraryBooks()
     return list()
+
+/datum/database/proc/GetLibraryBook(var/id)
+    return null
 
 /datum/database/proc/CreateLibraryBook(var/ckey, var/category, var/author, var/title, var/content)
     return 0

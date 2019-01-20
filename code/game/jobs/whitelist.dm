@@ -26,8 +26,6 @@ var/list/whitelist = list()
 /proc/is_alien_whitelisted(mob/M, var/species)
 	if(!M || !M.client || !species)
 		return 0
-	if(!config.usealienwhitelist)
-		return 1
 	if(check_rights(R_ADMIN, 0, M))
 		return 1
 

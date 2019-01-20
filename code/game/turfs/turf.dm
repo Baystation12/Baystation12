@@ -275,7 +275,7 @@ var/const/enterloopsanity = 100
 	if(!tool.sharp || !can_engrave() || vandal.a_intent != I_HELP)
 		return FALSE
 
-	if(jobban_isbanned(vandal, "Graffiti"))
+	if(vandal.client && vandal.client.is_banned(BAN_GRAFFITI))
 		to_chat(vandal, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 		return
 

@@ -72,7 +72,6 @@ var/datum/admin_secrets/admin_secrets = new()
 
 	if(log)
 		log_and_message_admins("used secret '[name]'", user)
-	if(feedback)
 	. = TRUE
 	do_execute(user)
 

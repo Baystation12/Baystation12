@@ -9,12 +9,8 @@
 			return global.BSACooldown;
 		if("BUMP_TELEPORTERS")
 			return global.BUMP_TELEPORTERS;
-		if("Banlist")
-			return global.Banlist;
 		if("CENT_FREQS")
 			return global.CENT_FREQS;
-		if("CMinutes")
-			return global.CMinutes;
 		if("DEPT_FREQS")
 			return global.DEPT_FREQS;
 		if("DMPG")
@@ -107,8 +103,6 @@
 			return global.SSshuttle;
 		if("SSskybox")
 			return global.SSskybox;
-		if("SSstatistics")
-			return global.SSstatistics;
 		if("SSsun")
 			return global.SSsun;
 		if("SSsupply")
@@ -241,8 +235,6 @@
 			return global.appearance_manager;
 		if("area_repository")
 			return global.area_repository;
-		if("artefact_feedback")
-			return global.artefact_feedback;
 		if("ascii_esc")
 			return global.ascii_esc;
 		if("ascii_green")
@@ -942,12 +934,8 @@
 			global.BSACooldown=newval;
 		if("BUMP_TELEPORTERS")
 			global.BUMP_TELEPORTERS=newval;
-		if("Banlist")
-			global.Banlist=newval;
 		if("CENT_FREQS")
 			global.CENT_FREQS=newval;
-		if("CMinutes")
-			global.CMinutes=newval;
 		if("DEPT_FREQS")
 			global.DEPT_FREQS=newval;
 		if("DMPG")
@@ -1040,8 +1028,6 @@
 			global.SSshuttle=newval;
 		if("SSskybox")
 			global.SSskybox=newval;
-		if("SSstatistics")
-			global.SSstatistics=newval;
 		if("SSsun")
 			global.SSsun=newval;
 		if("SSsupply")
@@ -1174,8 +1160,6 @@
 			global.appearance_manager=newval;
 		if("area_repository")
 			global.area_repository=newval;
-		if("artefact_feedback")
-			global.artefact_feedback=newval;
 		if("ascii_esc")
 			global.ascii_esc=newval;
 		if("ascii_green")
@@ -1870,9 +1854,7 @@
 	"ANTAG_FREQS",
 	"BSACooldown",
 	"BUMP_TELEPORTERS",
-	"Banlist",
 	"CENT_FREQS",
-	"CMinutes",
 	"DEPT_FREQS",
 	"DMPG",
 	"Debug2",
@@ -1919,7 +1901,6 @@
 	"SSradiation",
 	"SSshuttle",
 	"SSskybox",
-	"SSstatistics",
 	"SSsun",
 	"SSsupply",
 	"SStemperature",
@@ -1986,7 +1967,6 @@
 	"antag_add_finished",
 	"appearance_manager",
 	"area_repository",
-	"artefact_feedback",
 	"ascii_esc",
 	"ascii_green",
 	"ascii_red",

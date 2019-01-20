@@ -177,7 +177,6 @@
 		if(uses < spellbook.spells[path])
 			to_chat(user, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
 			return TOPIC_HANDLED
-		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
 			temp = "You have chosen a new spellbook."
@@ -240,14 +239,6 @@
 /obj/item/weapon/spellbook/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
-
-/obj/item/weapon/spellbook/proc/send_feedback(var/path)
-	if(ispath(path,/datum/spellbook))
-		var/datum/spellbook/S = path
-	else if(ispath(path,/spell))
-		var/spell/S = path
-	else if(ispath(path,/obj))
-
 
 /obj/item/weapon/spellbook/proc/add_spell(var/mob/user, var/spell_path)
 	for(var/spell/S in user.mind.learned_spells)

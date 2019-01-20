@@ -41,7 +41,7 @@ var/list/ghost_traps
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
-			if(jobban_isbanned(candidate, "[bantype]"))
+			if(candidate.client.is_banned(bantype))
 				if(feedback)
 					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
 				return 0

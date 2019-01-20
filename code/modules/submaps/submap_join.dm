@@ -25,7 +25,7 @@
 		to_chat(joining, "<span class='warning'>Unfortunately, that job is no longer available.</span>")
 		return FALSE
 
-	if(jobban_isbanned(joining, "Offstation Roles"))
+	if(joining.client.is_banned(BAN_OFFSTATION))
 		to_chat(joining, "<span class='warning'>You are banned from playing offstation roles.</span>")
 		return FALSE
 

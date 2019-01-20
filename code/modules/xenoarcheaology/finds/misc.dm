@@ -30,7 +30,6 @@
 
 //large finds
 				/*
-				obj/machinery/syndicate_beacon
 				obj/machinery/wish_granter
 			if(18)
 				item_type = "jagged green crystal"

@@ -123,13 +123,19 @@
 
 /datum/database/dmpg/GetAllLibraryBooks()
     var/list/books = new
-    var/list/res = db.Query("SELECT author, category, title, content FROM bs12_library")
+    var/list/res = db.Query("SELECT id, author, category, title, content FROM bs12_library")
     CHECK_ERR(res)
 
     for (var/book in res)
-        books |= list("author"=book[0],"category"=book[1],"title"=book[2],"content"=book[3])
+        books |= list("id"=book[0],"author"=book[1],"category"=book[2],"title"=book[3],"content"=book[4])
 
     return books
+
+/datum/database/dmpg/GetLibraryBook(var/id)
+    var/list/book = db.Query("SELECT id, author, category, title, content FROM bs12_library WHERE id = $1", id)
+    RETURN_ERR(book)
+
+    return list("id"=book[0],"author"=book[1],"category"=book[2],"title"=book[3],"content"=book[4])
 
 /datum/database/dmpg/CreateLibraryBook(var/ckey, var/category, var/author, var/title, var/content)
     var/ckey_id = GetKey(ckey)

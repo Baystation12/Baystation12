@@ -10,4 +10,4 @@ SUBSYSTEM_DEF(database)
     . = ..()
 
 /datum/controller/subsystem/database/stat_entry()
-    ..(db.IsConnected() ? "connected" : "not connected")
+    ..(db.Connected() ? "connected" : "not connected")
