@@ -321,8 +321,6 @@ var/global/datum/controller/occupations/job_master
 		//Shuffle players and jobs
 		unassigned = shuffle(unassigned)
 
-		HandleFeedbackGathering()
-
 		//People who wants to be assistants, sure, go on.
 		Debug("DO, Running Assistant Check 1")
 		var/datum/job/assist = new DEFAULT_JOB_TYPE ()
@@ -608,38 +606,6 @@ var/global/datum/controller/occupations/job_master
 					J.total_positions = 0
 
 		return 1
-
-
-	proc/HandleFeedbackGathering()
-		for(var/datum/job/job in occupations)
-			var/tmp_str = "|[job.title]|"
-
-			var/level1 = 0 //high
-			var/level2 = 0 //medium
-			var/level3 = 0 //low
-			var/level4 = 0 //never
-			var/level5 = 0 //banned
-			var/level6 = 0 //account too young
-			for(var/mob/new_player/player in GLOB.player_list)
-				if(!(player.ready && player.mind && !player.mind.assigned_role))
-					continue //This player is not ready
-				if(jobban_isbanned(player, job.title))
-					level5++
-					continue
-				if(!job.player_old_enough(player.client))
-					level6++
-					continue
-				if(player.client.prefs.CorrectLevel(job, 1))
-					level1++
-				else if(player.client.prefs.CorrectLevel(job, 2))
-					level2++
-				else if(player.client.prefs.CorrectLevel(job, 3))
-					level3++
-				else level4++ //not selected
-
-			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
-			SSstatistics.add_field_details("job_preferences",tmp_str)
-
 
 /**
  *  Return appropriate /datum/spawnpoint for given client and rank

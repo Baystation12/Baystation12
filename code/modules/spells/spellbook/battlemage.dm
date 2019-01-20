@@ -2,7 +2,6 @@
 //Things like utility and mobility come second.
 /datum/spellbook/battlemage
 	name = "\improper Battlemage's Bible"
-	feedback = "BM"
 	desc = "Smells like blood."
 	book_desc = "Mix physical with the mystical in head to head combat."
 	title = "The Art of Magical Combat"

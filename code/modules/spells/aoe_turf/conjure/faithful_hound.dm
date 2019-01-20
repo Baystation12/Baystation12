@@ -1,7 +1,6 @@
 /spell/aoe_turf/conjure/faithful_hound
 	name = "Faithful Hound"
 	desc = "Summon a spectral watchdog with a special password. Anyone without the password is in for a barking and a biting."
-	feedback = "FH"
 
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES

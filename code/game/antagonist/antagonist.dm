@@ -10,8 +10,6 @@
 	var/leader_welcome_text                 // Text shown to the leader, if any.
 	var/victory_text                        // World output at roundend for victory.
 	var/loss_text                           // As above for loss.
-	var/victory_feedback_tag                // Used by the database for end of round loss.
-	var/loss_feedback_tag                   // Used by the database for end of round loss.
 
 	// Role data.
 	var/id = "traitor"                      // Unique datum identifier. Also preferences option for this role.
@@ -45,7 +43,6 @@
 	// Misc.
 	var/landmark_id                         // Spawn point identifier.
 	var/mob_path = /mob/living/carbon/human // Mobtype this antag will use if none is provided.
-	var/feedback_tag = "traitor_objective"  // End of round
 	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
 	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.

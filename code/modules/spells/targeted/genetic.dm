@@ -30,7 +30,6 @@ code\game\dna\genes\goon_powers.dm
 /spell/targeted/genetic/blind
 	name = "Blind"
 	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
-	feedback = "BD"
 	disabilities = 1
 	school = "illusion"
 	duration = 300
@@ -63,7 +62,6 @@ code\game\dna\genes\goon_powers.dm
 /spell/targeted/genetic/mutate
 	name = "Mutate"
 	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
-	feedback = "MU"
 	school = "transmutation"
 	charge_max = 400
 	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
@@ -88,7 +86,6 @@ code\game\dna\genes\goon_powers.dm
 /spell/targeted/genetic/blind/hysteria
 	name = "Hysteria"
 	desc = "A spell used to make someone look like a blind fool, and also makes them a blind fool."
-	feedback = "HY"
 	school = "illusion"
 	spell_flags = SELECTABLE
 	charge_max = 600
@@ -100,7 +97,6 @@ code\game\dna\genes\goon_powers.dm
 /spell/targeted/genetic/blind/starburst
 	name = "Starburst"
 	desc = "Send a jolt of electricity through everyone's nerve center, blinding and stunning them."
-	feedback = "SB"
 	school = "transmutation"
 	invocation = "Tid Caeh Yor!"
 	spell_flags = NOFACTION

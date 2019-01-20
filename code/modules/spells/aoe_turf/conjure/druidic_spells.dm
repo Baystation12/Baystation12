@@ -19,7 +19,6 @@
 /spell/aoe_turf/conjure/summon/bats
 	name = "Summon Space Bats"
 	desc = "This spell summons a flock of spooky space bats."
-	feedback = "SB"
 
 	charge_max = 1200 //2 minutes
 	spell_flags = NEEDSCLOTHES
@@ -46,7 +45,6 @@
 /spell/aoe_turf/conjure/summon/bear
 	name = "Summon Bear"
 	desc = "This spell summons a permanent bear companion that will follow your orders."
-	feedback = "BR"
 	charge_max = 3000 //5 minutes because this is a REALLY powerful spell. May tone it down/up.
 	spell_flags = NEEDSCLOTHES
 	invocation = "REA'YO GOR DAYA!"

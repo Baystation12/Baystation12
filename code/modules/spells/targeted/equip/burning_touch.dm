@@ -1,7 +1,6 @@
 /spell/targeted/equip_item/burning_hand
 	name = "Burning Hand"
 	desc = "Bathes your hand in fire, giving you all the perks and disadvantages that brings."
-	feedback = "BH"
 	school = "conjuration"
 	invocation = "Horila Kiha!"
 	invocation_type = SpI_SHOUT

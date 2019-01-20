@@ -244,10 +244,7 @@ var/global/list/additional_antag_types = list()
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
 
-	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
 	if(SSticker.mode)
-		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
-	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
 /datum/game_mode/proc/fail_setup()
@@ -370,17 +367,11 @@ var/global/list/additional_antag_types = list()
 	to_world(text)
 	
 	if(clients > 0)
-		SSstatistics.set_field("round_end_clients",clients)
 	if(ghosts > 0)
-		SSstatistics.set_field("round_end_ghosts",ghosts)
 	if(surviving_humans > 0)
-		SSstatistics.set_field("survived_human",surviving_humans)
 	if(surviving_total > 0)
-		SSstatistics.set_field("survived_total",surviving_total)
 	if(escaped_humans > 0)
-		SSstatistics.set_field("escaped_human",escaped_humans)
 	if(escaped_total > 0)
-		SSstatistics.set_field("escaped_total",escaped_total)
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 

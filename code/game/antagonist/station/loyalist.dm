@@ -4,12 +4,9 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	id = MODE_LOYALIST
 	role_text = "Head Loyalist"
 	role_text_plural = "Loyalists"
-	feedback_tag = "loyalist_objective"
 	antag_indicator = "hudheadloyalist"
 	victory_text = "The heads of staff remained at their posts! The loyalists win!"
 	loss_text = "The heads of staff did not stop the revolution!"
-	victory_feedback_tag = "win - rev heads killed"
-	loss_feedback_tag = "loss - heads killed"
 	antaghud_indicator = "hudloyalist"
 	flags = 0
 

@@ -98,7 +98,6 @@
 /spell/targeted/shapeshift/baleful_polymorph
 	name = "Baleful Polymorth"
 	desc = "This spell transforms its target into a small, furry animal."
-	feedback = "BP"
 	possible_transformations = list(/mob/living/simple_animal/lizard,/mob/living/simple_animal/mouse,/mob/living/simple_animal/corgi)
 
 	share_damage = 0
@@ -127,7 +126,6 @@
 /spell/targeted/shapeshift/avian
 	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
-	feedback = "AV"
 	possible_transformations = list(/mob/living/simple_animal/parrot)
 
 	drop_items = 0
@@ -145,7 +143,6 @@
 /spell/targeted/shapeshift/corrupt_form
 	name = "Corrupt Form"
 	desc = "This spell shapes the wizard into a terrible, terrible beast."
-	feedback = "CF"
 	possible_transformations = list(/mob/living/simple_animal/hostile/faithless)
 
 	invocation = "mutters something dark and twisted as their form begins to twist..."
@@ -185,7 +182,6 @@
 /spell/targeted/shapeshift/familiar
 	name = "Transform"
 	desc = "Transform into a familiar form. Literally."
-	feedback = "FA"
 	possible_transformations = list()
 	drop_items = 0
 	invocation_type = SpI_EMOTE

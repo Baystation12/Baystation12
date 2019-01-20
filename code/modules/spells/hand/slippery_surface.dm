@@ -2,7 +2,6 @@
 	name = "Slippery Surface"
 	desc = "More of a practical joke than an actual spell."
 	school = "transmutation"
-	feedback = "su"
 	range = 5
 	spell_flags = 0
 	invocation_type = SpI_NONE

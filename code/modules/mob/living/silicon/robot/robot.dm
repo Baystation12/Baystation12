@@ -290,7 +290,6 @@
 	new module_type(src)
 
 	hands.icon_state = lowertext(modtype)
-	SSstatistics.add_field("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
 	if(module)

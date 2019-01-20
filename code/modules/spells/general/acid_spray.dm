@@ -2,7 +2,6 @@
 	name = "Acid Spray"
 	desc = "A common spell used to destroy basically anything in front of the wizard."
 	school = "conjuration"
-	feedback = "as"
 	spell_flags = 0
 	charge_max  = 600
 

@@ -2,7 +2,6 @@
 	name = "Analyze"
 	desc = "Using your wizardly powers, you can detect the inner destructions of a persons body."
 
-	feedback = "AZ"
 	school = "illusion"
 	charge_max = 100
 	spell_flags = INCLUDEUSER|SELECTABLE

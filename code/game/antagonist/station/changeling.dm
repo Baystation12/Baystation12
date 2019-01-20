@@ -4,7 +4,6 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	id = MODE_CHANGELING
 	role_text = "Changeling"
 	role_text_plural = "Changelings"
-	feedback_tag = "changeling_objective"
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
 	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos)
 	welcome_text = "Use say \"#g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them."

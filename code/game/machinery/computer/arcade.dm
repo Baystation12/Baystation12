@@ -208,14 +208,12 @@
 			src.temp = "[src.enemy_name] has fallen! Rejoice!"
 
 			if(emagged)
-				SSstatistics.add_field("arcade_win_emagged")
 				new /obj/effect/spawner/newbomb/timer/syndicate(src.loc)
 				new /obj/item/clothing/head/collectable/petehat(src.loc)
 				log_and_message_admins("has outbombed Cuban Pete and been awarded a bomb.")
 				SetupGame()
 				emagged = 0
 			else
-				SSstatistics.add_field("arcade_win_normal")
 				src.prizevend()
 
 	else if (emagged && (turtle >= 4))
@@ -234,10 +232,8 @@
 			sleep(10)
 			src.temp = "You have been drained! GAME OVER"
 			if(emagged)
-				SSstatistics.add_field("arcade_loss_mana_emagged")
 				explode()
 			else
-				SSstatistics.add_field("arcade_loss_mana_normal")
 
 	else if ((src.enemy_hp <= 10) && (src.enemy_mp > 4))
 		src.temp = "[src.enemy_name] heals for 4 health!"
@@ -253,10 +249,8 @@
 		src.gameover = 1
 		src.temp = "You have been crushed! GAME OVER"
 		if(emagged)
-			SSstatistics.add_field("arcade_loss_hp_emagged")
 			explode()
 		else
-			SSstatistics.add_field("arcade_loss_hp_normal")
 
 	src.blocked = 0
 

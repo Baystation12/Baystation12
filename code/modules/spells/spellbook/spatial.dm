@@ -5,7 +5,6 @@
 
 /datum/spellbook/spatial
 	name = "\improper Spatial Manual"
-	feedback = "SP"
 	desc = "You feel like this might disappear from out of under you."
 	book_desc = "Movement and teleportation. Run from your problems!"
 	title = "Manual of Spatial Transportation"

@@ -181,7 +181,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	to_world("<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>")
 	to_world("[win_msg]")
-	SSstatistics.set_field_details("round_end_result","heist - [win_type] [win_group]")
 
 /datum/antagonist/raider/proc/is_raider_crew_safe()
 

@@ -1,7 +1,6 @@
 /spell/portal_teleport
 	name = "Create Portal"
 	desc = "This spell creates a long lasting portal to an area of your selection."
-	feedback = "TP"
 	school = "conjuration"
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES

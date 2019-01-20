@@ -1,7 +1,6 @@
 /spell/targeted/projectile/dumbfire/fireball
 	name = "Fireball"
 	desc = "This spell fires a fireball at a target and does not require wizard garb."
-	feedback = "FB"
 	proj_type = /obj/item/projectile/spell_projectile/fireball
 
 	school = "conjuration"
@@ -58,7 +57,6 @@
 /spell/targeted/projectile/dumbfire/fireball/firebolt
 	name = "Firebolt"
 	desc = "A quick-casted fireball. Burns the user, and their enemies, but is much faster to shoot."
-	feedback = "FO"
 	charge_type = Sp_HOLDVAR
 	invocation = "Ignus!"
 	holder_var_type = "fireloss"

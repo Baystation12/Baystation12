@@ -2,7 +2,6 @@
 	name = "Burning Grip"
 	desc = "Cause someone to drop a held object by causing it to heat up intensly."
 	school = "transmutation"
-	feedback = "bg"
 	range = 5
 	spell_flags = 0
 	invocation_type = SpI_NONE

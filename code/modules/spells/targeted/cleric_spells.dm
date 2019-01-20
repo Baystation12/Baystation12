@@ -1,7 +1,6 @@
 /spell/targeted/heal_target
 	name = "Cure Light Wounds"
 	desc = "a rudimentary spell used mainly by wizards to heal papercuts. Does not require wizard garb."
-	feedback = "CL"
 	school = "transmutation"
 	charge_max = 20 SECONDS
 	spell_flags = INCLUDEUSER | SELECTABLE
@@ -49,7 +48,6 @@
 /spell/targeted/heal_target/major
 	name = "Cure Major Wounds"
 	desc = "A spell used to fix others that cannot be fixed with regular medicine."
-	feedback = "CM"
 	charge_max = 30 SECONDS
 	spell_flags = INCLUDEUSER | SELECTABLE | NEEDSCLOTHES
 	invocation = "Borv Di'Nath!"
@@ -84,7 +82,6 @@
 /spell/targeted/heal_target/area
 	name = "Cure Area"
 	desc = "This spell heals everyone in an area."
-	feedback = "HA"
 	charge_max = 1 MINUTE
 	spell_flags = INCLUDEUSER
 	invocation = "Nal Di'Nath!"
@@ -115,7 +112,6 @@
 /spell/targeted/heal_target/sacrifice
 	name = "Sacrifice"
 	desc = "This spell heals immensily. For a price. Does not require wizard garb."
-	feedback = "SF"
 	spell_flags = SELECTABLE
 	invocation = "Ei'Nath Borv Di'Nath!"
 	charge_type = Sp_HOLDVAR
@@ -150,7 +146,6 @@
 /spell/targeted/heal_target/trance
 	name = "trance"
 	desc = "A mighty spell of restoration that briefly forces its target into a deep, dreamless sleep, rapidly repairing their body and soul as their senses are dulled. The users of this mighty art are known for being short lived, slowly devolving into raving madness as the power they once relied on fails them with excessive use."
-	feedback = "TC"
 	spell_flags = SELECTABLE
 	invocation = "Di' Dae Nath!"
 	charge_max = 2 MINUTES
@@ -190,7 +185,6 @@
 /spell/targeted/revoke
 	name = "Revoke Death"
 	desc = "Revoke that of death itself. Comes at a cost that may be hard to manage for some."
-	feedback = "RK"
 
 	spell_flags = SELECTABLE
 

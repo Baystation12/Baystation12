@@ -19,10 +19,8 @@
 				text += print_objective(O, num)
 				if(O.check_completion())
 					text += "<font color='green'><B>Success!</B></font>"
-					SSstatistics.add_field_details(feedback_tag,"[O.type]|SUCCESS")
 				else
 					text += "<font color='red'>Fail.</font>"
-					SSstatistics.add_field_details(feedback_tag,"[O.type]|FAIL")
 					failed = 1
 				num++
 			if(failed)

@@ -69,8 +69,7 @@
 	drop_r_hand()
 	drop_l_hand()
 
-	SSstatistics.report_death(src)
-
+	GLOB.crew_death_count += 1
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
 	if(healths)
 		healths.overlays.Cut() // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.

@@ -272,7 +272,6 @@
 
 	spawn_result()
 		..()
-		SSstatistics.add_field("mecha_ripley_created",1)
 		return
 
 
@@ -554,7 +553,6 @@
 
 	spawn_result()
 		..()
-		SSstatistics.add_field("mecha_gygax_created",1)
 		return
 
 /datum/construction/mecha/firefighter_chassis
@@ -777,7 +775,6 @@
 
 	spawn_result()
 		..()
-		SSstatistics.add_field("mecha_firefighter_created",1)
 		return
 
 /datum/construction/mecha/durand_chassis
@@ -1057,7 +1054,6 @@
 
 	spawn_result()
 		..()
-		SSstatistics.add_field("mecha_durand_created",1)
 		return
 
 
@@ -1290,5 +1286,4 @@
 
 	spawn_result()
 		..()
-		SSstatistics.add_field("mecha_odysseus_created",1)
 		return

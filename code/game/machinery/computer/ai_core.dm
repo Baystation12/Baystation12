@@ -195,7 +195,6 @@
 					if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 						A.on_mob_init()
 						A.rename_self("ai", 1)
-				SSstatistics.add_field("cyborg_ais_created",1)
 				qdel(src)
 
 /obj/structure/AIcore/deactivated

@@ -1,7 +1,6 @@
 /spell/aoe_turf/drain_blood
 	name = "Drain Blood"
 	desc = "this spell allows the caster to borrow blood from those around them. Sharing is caring!"
-	feedback = "DB"
 	school = "transmutation"
 	charge_max = 600
 	invocation = "whispers something darkly"
