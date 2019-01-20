@@ -1,0 +1,25 @@
+[package]
+name = "dmpg"
+version = "0.1.0"
+authors = ["Jacob Greenfield <xales@naveria.com>"]
+repository = "https://github.com/xales/dmpg"
+license-file = "LICENSE"
+description = "PostgreSQL for BYOND's DM language"
+edition = "2018"
+
+[lib]
+crate-type = ["lib", "cdylib"]
+
+[profile.release]
+opt-level = 3
+lto = true
+
+[dependencies]
+serde = "1"
+serde_derive = "1"
+serde_json = "1"
+chrono = "0.4"
+
+[dependencies.postgres]
+version = "0.15"
+features = ["with-serde_json", "with-chrono"]

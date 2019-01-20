@@ -1,0 +1,4 @@
+#define FILE_DIR .
+#define DEBUG
+#include "../dmapi/dmpg.dm"
+#include "main.dm"
