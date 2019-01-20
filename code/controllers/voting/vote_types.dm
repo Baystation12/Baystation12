@@ -300,6 +300,8 @@
 
 /datum/vote/custom
 	name = "custom"
+	disabled = 1
+	disable_reason = "Admin only"
 
 /datum/vote/custom/get_announce_text(var/automatic, var/initiator)
 	. = ..(automatic, initiator)
