@@ -65,6 +65,8 @@
 			continue
 		if(istype(t,/turf/unsimulated/wall))
 			continue
+		if(istype(t,/turf/unsimulated/floor/rock2)) //No spawning in rock walls, even if they are subtypes of /floor/
+			continue
 		valid_points += t
 	if(isnull(valid_points))
 		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
