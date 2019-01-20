@@ -23,6 +23,7 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
+#define SS_INIT_DB				 100
 #define SS_INIT_GARBAGE          15
 #define SS_INIT_CHEMISTRY        14
 #define SS_INIT_MATERIALS        13

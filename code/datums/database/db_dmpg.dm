@@ -1,7 +1,7 @@
 /* This is a facade object that enables a real underlying database to be used, now that one is required */
 
 #define CHECK_ERR(x) if(istext(x)) CRASH("db error: [x]")
-#define RETURN_ERR(x) if (istext(x)) world_log(x) ;; return FALSE
+#define RETURN_ERR(x) if (istext(x)) log_world(x) ;; return FALSE
 
 /datum/database/dmpg
     var/datum/DMPG/db
@@ -41,7 +41,7 @@
 /datum/database/dmpg/GetAdmin(var/ckey)
     var/list/res = db.Query("SELECT name, permissions, flags FROM bs12_player INNER JOIN bs12_rank ON bs12_player.rank = bs12_rank.id WHERE ckey = $1", ckey)
     CHECK_ERR(res)
-    if (res.length > 0)
+    if (res.len > 0)
         return res[0]
     return null
 
@@ -62,12 +62,12 @@
         return ckey_cache[ckey]
     var/list/res = db.Query("SELECT id FROM bs12_player WHERE ckey = $1", ckey)
     CHECK_ERR(res)
-    if (res.length > 0)
-        ckey_cache[ckey] = res[0]0]
+    if (res.len > 0)
+        ckey_cache[ckey] = res[0][0]
         return res[0][0]
     res = db.Query("INSERT INTO bs12_player(ckey) VALUES ($1) RETURNING id", ckey)
     CHECK_ERR(res)
-    ckey_cache[ckey] = res[0]0]
+    ckey_cache[ckey] = res[0][0]
     return res[0][0]
 
 /datum/database/dmpg/proc/GetIP(var/ip)
@@ -75,7 +75,7 @@
         return ip_cache[ip]
     var/list/res = db.Query("SELECT id FROM bs12_ip WHERE ip = $1", ip)
     CHECK_ERR(res)
-    if (res.length > 0)
+    if (res.len > 0)
         ip_cache[ip] = res[0][0]
         return res[0][0]
     res = db.Query("INSERT INTO bs12_ip(ip) VALUES ($1) RETURNING id", ip)
@@ -88,7 +88,7 @@
         return cid_cache[cid]
     var/list/res = db.Query("SELECT id FROM bs12_computerid WHERE computerid = $1", cid)
     CHECK_ERR(res)
-    if res.length > 0
+    if (res.len > 0)
         cid_cache[cid] = res[0][0]
         return res[0]
     res = db.Query("INSERT INTO bs12_computerid(computerid) VALUES ($1) RETURNING id", cid)
@@ -103,9 +103,14 @@
     . = db.Execute("INSERT INTO bs12_login(player, ip, computerid) VALUES ($1, $2, $3)", ckey_id, ip_id, cid_id)
     CHECK_ERR(.)
 
+/datum/database/dmpg/GetPlayerAge(var/ckey)
+    var/list/res = db.Query("SELECT EXTRACT(DAY FROM CURRENT_TIMESTAMP - first_seen) FROM bs12_player WHERE ckey = $1", ckey)
+    CHECK_ERR(res)
+    return res[0][0]
+
 /datum/database/dmpg/GetStaffwarn(var/ckey)
     var/ckey_id = GetKey(ckey)
-    var/list/res = db.Query("SELECT staffwarn FROM bs12_player WHERE ckey = $1", ckey)
+    var/list/res = db.Query("SELECT staffwarn FROM bs12_player WHERE ckey = $1", ckey_id)
     CHECK_ERR(res)
     return res[0]
 
@@ -132,10 +137,13 @@
     CHECK_ERR(.)
 
 /datum/database/dmpg/GetWhitelists(var/ckey)
+    var/list/wl = new
     var/ckey_id = GetKey(ckey)
     var/list/res = db.Query("SELECT scope FROM bs12_whitelist WHERE player = $1", ckey_id)
     CHECK_ERR(res)
-    return res
+    for (var/ent in res)
+        wl |= ent[0]
+    return wl
 
 /datum/database/dmpg/SetWhitelist(var/ckey, var/scope)
     var/ckey_id = GetKey(ckey)
@@ -148,7 +156,7 @@
 /datum/database/dmpg/BannedForScope(var/scope, var/ckey, var/ip, var/cid)
     var/list/res = db.Query("SELECT p.ckey, b.reason, TEXT(DATE_TRUNC('minute', b.expiry AT TIME ZONE 'UTC')) FROM bs12_active_ban AS b INNER JOIN bs12_player AS p ON b.admin = p.id WHERE $4 = ANY(b.scope) AND ($1 = ANY(b.target_ckey) OR $2 = ANY(b.target_ip) OR $3 = ANY(b.target_computerid))", ckey, ip, cid, scope)
     CHECK_ERR(res)
-    if (res.length > 0)
+    if (res.len > 0)
         return list(
             "admin" = res[0][0],
             "reason" = res[0][1],
@@ -184,7 +192,7 @@
     if (istext(.))
         db.Execute("DELETE FROM bs12_ban WHERE id = $1", ban)
         return
-    . = db.Execute("INSERT INTO bs12_ban_target (ban, admin, target_ip, target_ckey, target_computerid) VALUES ($1, $2, CASE WHEN $3 IS NULL THEN NULL ELSE ARRAY[$3], CASE WHEN $3 IS NULL THEN NULL ELSE ARRAY[$4], CASE WHEN $3 IS NULL THEN NULL ELSE ARRAY[$5])", ban, admin_id, ckey, ip, cid)
+    . = db.Execute("INSERT INTO bs12_ban_target (ban, admin, target_ip, target_ckey, target_computerid) VALUES ($1, $2, CASE WHEN $3 IS NULL THEN NULL ELSE ARRAY\[$3], CASE WHEN $3 IS NULL THEN NULL ELSE ARRAY\[$4], CASE WHEN $3 IS NULL THEN NULL ELSE ARRAY\[$5])", ban, admin_id, ckey, ip, cid)
     CHECK_ERR(.)
 
 /datum/database/dmpg/RemoveBan(var/id, var/remover_ckey)

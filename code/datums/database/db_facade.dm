@@ -45,6 +45,9 @@
 /datum/database/proc/RecordLogin(var/ckey, var/ip, var/cid, var/round)
     return 0
 
+/datum/database/dmpg/GetPlayerAge(var/ckey)
+    return null
+
 /datum/database/proc/GetAllLibraryBooks()
     return list()
 

@@ -17,6 +17,8 @@
 			return global.CMinutes;
 		if("DEPT_FREQS")
 			return global.DEPT_FREQS;
+		if("DMPG")
+			return global.DMPG;
 		if("Debug2")
 			return global.Debug2;
 		if("Failsafe")
@@ -55,6 +57,8 @@
 			return global.SScodex;
 		if("SSculture")
 			return global.SSculture;
+		if("SSdatabase")
+			return global.SSdatabase;
 		if("SSevac")
 			return global.SSevac;
 		if("SSevent")
@@ -155,8 +159,6 @@
 			return global.admin_datums;
 		if("admin_pm_repository")
 			return global.admin_pm_repository;
-		if("admin_ranks")
-			return global.admin_ranks;
 		if("admin_secrets")
 			return global.admin_secrets;
 		if("admin_verbs_admin")
@@ -301,8 +303,6 @@
 			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
 			return global.chargen_robolimbs;
-		if("checked_for_inactives")
-			return global.checked_for_inactives;
 		if("chemical_reaction_logs")
 			return global.chemical_reaction_logs;
 		if("chicken_count")
@@ -345,10 +345,6 @@
 			return global.custom_items;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
-		if("dbcon")
-			return global.dbcon;
-		if("dbcon_old")
-			return global.dbcon_old;
 		if("debug_verbs")
 			return global.debug_verbs;
 		if("decls_repository")
@@ -405,10 +401,6 @@
 			return global.explosion_in_progress;
 		if("explosion_turfs")
 			return global.explosion_turfs;
-		if("failed_db_connections")
-			return global.failed_db_connections;
-		if("failed_old_db_connections")
-			return global.failed_old_db_connections;
 		if("failed_unit_tests")
 			return global.failed_unit_tests;
 		if("file_uid")
@@ -495,8 +487,6 @@
 			return global.id_card_states;
 		if("image_repository")
 			return global.image_repository;
-		if("inactive_keys")
-			return global.inactive_keys;
 		if("init")
 			return global.init;
 		if("intents")
@@ -509,10 +499,6 @@
 			return global.jobMax;
 		if("job_master")
 			return global.job_master;
-		if("jobban_keylist")
-			return global.jobban_keylist;
-		if("jobban_runonce")
-			return global.jobban_runonce;
 		if("joblist")
 			return global.joblist;
 		if("join_motd")
@@ -795,24 +781,6 @@
 			return global.spells;
 		if("splatter_cache")
 			return global.splatter_cache;
-		if("sqladdress")
-			return global.sqladdress;
-		if("sqldb")
-			return global.sqldb;
-		if("sqlfdbkdb")
-			return global.sqlfdbkdb;
-		if("sqlfdbklogin")
-			return global.sqlfdbklogin;
-		if("sqlfdbkpass")
-			return global.sqlfdbkpass;
-		if("sqllogging")
-			return global.sqllogging;
-		if("sqllogin")
-			return global.sqllogin;
-		if("sqlpass")
-			return global.sqlpass;
-		if("sqlport")
-			return global.sqlport;
 		if("station_account")
 			return global.station_account;
 		if("station_date")
@@ -982,6 +950,8 @@
 			global.CMinutes=newval;
 		if("DEPT_FREQS")
 			global.DEPT_FREQS=newval;
+		if("DMPG")
+			global.DMPG=newval;
 		if("Debug2")
 			global.Debug2=newval;
 		if("Failsafe")
@@ -1020,6 +990,8 @@
 			global.SScodex=newval;
 		if("SSculture")
 			global.SSculture=newval;
+		if("SSdatabase")
+			global.SSdatabase=newval;
 		if("SSevac")
 			global.SSevac=newval;
 		if("SSevent")
@@ -1120,8 +1092,6 @@
 			global.admin_datums=newval;
 		if("admin_pm_repository")
 			global.admin_pm_repository=newval;
-		if("admin_ranks")
-			global.admin_ranks=newval;
 		if("admin_secrets")
 			global.admin_secrets=newval;
 		if("admin_verbs_admin")
@@ -1266,8 +1236,6 @@
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
 			global.chargen_robolimbs=newval;
-		if("checked_for_inactives")
-			global.checked_for_inactives=newval;
 		if("chemical_reaction_logs")
 			global.chemical_reaction_logs=newval;
 		if("chicken_count")
@@ -1310,10 +1278,6 @@
 			global.custom_items=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
-		if("dbcon")
-			global.dbcon=newval;
-		if("dbcon_old")
-			global.dbcon_old=newval;
 		if("debug_verbs")
 			global.debug_verbs=newval;
 		if("decls_repository")
@@ -1370,10 +1334,6 @@
 			global.explosion_in_progress=newval;
 		if("explosion_turfs")
 			global.explosion_turfs=newval;
-		if("failed_db_connections")
-			global.failed_db_connections=newval;
-		if("failed_old_db_connections")
-			global.failed_old_db_connections=newval;
 		if("failed_unit_tests")
 			global.failed_unit_tests=newval;
 		if("file_uid")
@@ -1460,8 +1420,6 @@
 			global.id_card_states=newval;
 		if("image_repository")
 			global.image_repository=newval;
-		if("inactive_keys")
-			global.inactive_keys=newval;
 		if("init")
 			global.init=newval;
 		if("intents")
@@ -1474,10 +1432,6 @@
 			global.jobMax=newval;
 		if("job_master")
 			global.job_master=newval;
-		if("jobban_keylist")
-			global.jobban_keylist=newval;
-		if("jobban_runonce")
-			global.jobban_runonce=newval;
 		if("joblist")
 			global.joblist=newval;
 		if("join_motd")
@@ -1760,24 +1714,6 @@
 			global.spells=newval;
 		if("splatter_cache")
 			global.splatter_cache=newval;
-		if("sqladdress")
-			global.sqladdress=newval;
-		if("sqldb")
-			global.sqldb=newval;
-		if("sqlfdbkdb")
-			global.sqlfdbkdb=newval;
-		if("sqlfdbklogin")
-			global.sqlfdbklogin=newval;
-		if("sqlfdbkpass")
-			global.sqlfdbkpass=newval;
-		if("sqllogging")
-			global.sqllogging=newval;
-		if("sqllogin")
-			global.sqllogin=newval;
-		if("sqlpass")
-			global.sqlpass=newval;
-		if("sqlport")
-			global.sqlport=newval;
 		if("station_account")
 			global.station_account=newval;
 		if("station_date")
@@ -1938,6 +1874,7 @@
 	"CENT_FREQS",
 	"CMinutes",
 	"DEPT_FREQS",
+	"DMPG",
 	"Debug2",
 	"Failsafe",
 	"GLOB",
@@ -1957,6 +1894,7 @@
 	"SScircuit_components",
 	"SScodex",
 	"SSculture",
+	"SSdatabase",
 	"SSevac",
 	"SSevent",
 	"SSfastprocess",
@@ -2007,7 +1945,6 @@
 	"additional_antag_types",
 	"admin_datums",
 	"admin_pm_repository",
-	"admin_ranks",
 	"admin_secrets",
 	"admin_verbs_admin",
 	"admin_verbs_ban",
@@ -2080,7 +2017,6 @@
 	"channel_color_presets",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
-	"checked_for_inactives",
 	"chemical_reaction_logs",
 	"chicken_count",
 	"church_name",
@@ -2102,8 +2038,6 @@
 	"custom_event_msg",
 	"custom_items",
 	"damage_icon_parts",
-	"dbcon",
-	"dbcon_old",
 	"debug_verbs",
 	"decls_repository",
 	"default_material_composition",
@@ -2132,8 +2066,6 @@
 	"exclude_jobs",
 	"explosion_in_progress",
 	"explosion_turfs",
-	"failed_db_connections",
-	"failed_old_db_connections",
 	"failed_unit_tests",
 	"file_uid",
 	"fileaccess_timer",
@@ -2177,15 +2109,12 @@
 	"human_icon_cache",
 	"id_card_states",
 	"image_repository",
-	"inactive_keys",
 	"init",
 	"intents",
 	"intercom_range_display_status",
 	"invalid_zone",
 	"jobMax",
 	"job_master",
-	"jobban_keylist",
-	"jobban_runonce",
 	"joblist",
 	"join_motd",
 	"landmarks_list",
@@ -2327,15 +2256,6 @@
 	"sparring_attack_cache",
 	"spells",
 	"splatter_cache",
-	"sqladdress",
-	"sqldb",
-	"sqlfdbkdb",
-	"sqlfdbklogin",
-	"sqlfdbkpass",
-	"sqllogging",
-	"sqllogin",
-	"sqlpass",
-	"sqlport",
 	"station_account",
 	"station_date",
 	"stool_cache",

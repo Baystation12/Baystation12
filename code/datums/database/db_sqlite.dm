@@ -7,7 +7,7 @@
     var/database/query/q = new
 
 /datum/database/sqlite/proc/migrate_schema(var/oldver)
-    if oldver == null
+    if (isnull(oldver))
         create_schema()
     else
         CRASH("unsupported old version for sqlite migration")
@@ -84,7 +84,7 @@
     q.Add("SELECT version FROM schema_version")
     CHECK_EXEC(q)
     if (q.NextRow())
-        ver = q_schemaver.GetRowData()["version"]
+        ver = q.GetRowData()["version"]
         log_world("Detected sqlite schema [ver]")
     if (isnull(ver) || ver < SCHEMA_VERSION)
         log_world("Detected outdated or nonexistent sqlite database")
@@ -141,7 +141,7 @@
     q.Add("SELECT scope FROM bs12_whitelist WHERE ckey = ?", ckey)
     CHECK_EXEC(q)
     while(q.NextRow())
-        scopes |= list(q.GetRowData()["scope"])
+        scopes |= q.GetRowData()["scope"]
     return scopes
 
 /datum/database/sqlite/SetWhitelist(var/ckey, var/scope)
@@ -171,7 +171,7 @@
 
 /datum/database/sqlite/RecordBan(var/scopes, var/setter_key, var/reason, var/expiry, var/ckey, var/ip, var/cid)
     for (var/scope in scopes)
-        q.Execute("INSERT INTO bs12_ban(ckey, ip, computerid, scope, admin, reason, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)", ckey, ip, cid, scope, admin, reason, expiry)
+        q.Execute("INSERT INTO bs12_ban(ckey, ip, computerid, scope, admin, reason, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)", ckey, ip, cid, scope, setter_key, reason, expiry)
         CHECK_EXEC(q)
     . = 1
 
