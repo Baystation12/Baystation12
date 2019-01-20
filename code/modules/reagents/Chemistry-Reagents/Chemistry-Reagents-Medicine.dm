@@ -86,7 +86,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	var/remove_generic = 1
-	var/static/list/remove_toxins = list(
+	var/list/remove_toxins = list(
 		/datum/reagent/toxin/zombiepowder
 	)
 
@@ -342,7 +342,7 @@
 	color = "#dadd98"
 	metabolism = REM * 2
 	remove_generic = 0
-	var/static/list/remove_toxins = list(
+	remove_toxins = list(
 		/datum/reagent/toxin/venom,
 		/datum/reagent/toxin/carpotoxin
 	)
