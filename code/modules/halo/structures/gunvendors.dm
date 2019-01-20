@@ -156,7 +156,8 @@
 	/obj/item/ammo_box/shotgun/slug = 10,
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/weapon/grenade/frag/m9_hedp = 8,
-	/obj/item/weapon/armor_patch = 8)
+	/obj/item/weapon/armor_patch = 8,
+	/obj/item/drop_pod_beacon = 3)
 
 /obj/machinery/vending/armory/commandovend
 	name = "Stolen Armtech 5530"
@@ -196,7 +197,8 @@
 	/obj/item/weapon/grenade/smokebomb = 8,
 	/obj/item/device/landmine = 2,
 	/obj/item/weapon/grenade/frag/m9_hedp = 4,
-	/obj/item/weapon/armor_patch = 2
+	/obj/item/weapon/armor_patch = 2,
+	/obj/item/drop_pod_beacon = 1
 	)
 
 /obj/machinery/vending/armory/commandovend/armour
