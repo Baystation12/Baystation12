@@ -458,7 +458,7 @@
 "iP" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildss)
 "iQ" = (/turf/simulated/open,/area/exo_research_facility/ground/exterior/Caves)
 "iR" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildss)
-"iS" = (/obj/effect/landmark/map_data{name = "VT0.21428572"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/wildsn)
+"iS" = (/obj/effect/landmark/map_data{name = "VT9-042"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/wildsn)
 "iT" = (/turf/unsimulated/floor/rock2,/area/exo_research_facility/ground/exterior/Caves)
 "iU" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/Caves)
 
