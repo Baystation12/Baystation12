@@ -77,8 +77,7 @@
 
 	set_light(brightness_on, brightness_on/2)
 
-/obj/structure/holoplant/update_icon()
-	..()
+/obj/structure/holoplant/on_update_icon()
 	overlays.Cut()
 	if (!plant)
 		return
