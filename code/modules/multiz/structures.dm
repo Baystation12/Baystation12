@@ -19,6 +19,7 @@
 	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
 
 /obj/structure/ladder/Initialize()
+	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/ladder/LateInitialize()
