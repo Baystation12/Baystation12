@@ -490,14 +490,12 @@
 
 /obj/item/clothing/head/helmet/odst/donator/wehraboo
 	name = "SPI Helmet Mk I"
-
 	item_state = "wehraboo-helm_worn"
 	icon_state = "wehraboo-helm_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/wehraboo
 	name = "SPI Armour Mk I"
-
-    item_state = "wehraboo-suit_worn"
+	item_state = "wehraboo-suit_worn"
 	icon_state = "wehraboo-suit_obj"
 
 /obj/item/clothing/head/helmet/odst/donator/kozi
