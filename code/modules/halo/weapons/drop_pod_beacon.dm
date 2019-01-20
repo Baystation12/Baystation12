@@ -4,6 +4,7 @@
 	desc = "A single-use electronic beacon that broadcasts a signal that provides co-ordinates for drop-pods to use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "ebeacon"
+	w_class = ITEM_SIZE_SMALL
 
 	var/is_active = 0
 	var/time_to_expire = 30 SECONDS
