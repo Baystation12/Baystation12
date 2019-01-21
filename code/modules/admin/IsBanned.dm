@@ -11,8 +11,8 @@ world/IsBanned(key,address,computer_id)
 
 	var/ckeytext = ckey(key)
 
-	var/ban = SSdatabase.db.BannedForScope("server", ckeytext, address, computer_id)
-	if (ban)
+	var/list/ban = SSdatabase.db.BannedForScope("server", ckeytext, address, computer_id)
+	if (ban && ban.len > 0)
 		var/expires = ""
 		if(ban["expires"])
 			expires = " The ban expires on [ban["expires"]] (server time)."

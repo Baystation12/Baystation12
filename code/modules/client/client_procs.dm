@@ -137,13 +137,13 @@
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
-	var/admin = SSdatabase.db.GetAdmin(ckey)
+	var/list/admin = SSdatabase.db.GetAdmin(ckey)
 	if (admin)
 		if (ckey in admin_datums)
-			admin_datums[ckey].rank = admin[0]
-			admin_datums[ckey].permissions = admin[1]
+			admin_datums[ckey].rank = admin[1]
+			admin_datums[ckey].rights = admin[2]
 		else
-			new /datum/admins(admin[0], admin[1], ckey)
+			new /datum/admins(admin[1], admin[2], ckey)
 		GLOB.admins += src
 		holder = admin_datums[ckey]
 		holder.owner = src
@@ -168,7 +168,7 @@
 	SSdatabase.db.RecordLogin(ckey, address, computer_id, game_id)
 	player_age = SSdatabase.db.GetPlayerAge(ckey)
 	whitelist = SSdatabase.db.GetWhitelists(ckey)
-	bans = SSdatabase.db.GetBans(ckey)
+	bans = SSdatabase.db.GetBans(ckey, address, computer_id)
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]

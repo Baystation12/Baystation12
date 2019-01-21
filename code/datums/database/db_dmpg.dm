@@ -1,7 +1,7 @@
 /* This is a facade object that enables a real underlying database to be used, now that one is required */
 
 #define CHECK_ERR(x) if(istext(x)) CRASH("db error: [x]")
-#define RETURN_ERR(x) if (istext(x)) log_world(x) ;; return FALSE
+#define RETURN_ERR(x) if (istext(x)) return db_error(x)
 
 /datum/database/dmpg
     var/datum/DMPG/db
@@ -23,11 +23,11 @@
     var/list/res = db.Query("SELECT name, permissions, flags FROM bs12_rank")
     CHECK_ERR(res)
     for (var/rank in res)
-        ranks |= list(
-            "name" = res[0],
-            "permissions" = res[1],
-            "flags" = res[2]
-        )
+        ranks += list(list(
+            "name" = res[1],
+            "permissions" = res[2],
+            "flags" = res[3]
+        ))
     return ranks
     
 /datum/database/dmpg/RecordAdminRank(var/name, var/permissions, var/flags)
@@ -42,7 +42,7 @@
     var/list/res = db.Query("SELECT name, permissions, flags FROM bs12_player INNER JOIN bs12_rank ON bs12_player.rank = bs12_rank.id WHERE ckey = $1", ckey)
     CHECK_ERR(res)
     if (res.len > 0)
-        return res[0]
+        return res[1]
     return null
 
 /datum/database/dmpg/SetAdminRank(var/ckey, var/rank)
@@ -63,12 +63,12 @@
     var/list/res = db.Query("SELECT id FROM bs12_player WHERE ckey = $1", ckey)
     CHECK_ERR(res)
     if (res.len > 0)
-        ckey_cache[ckey] = res[0][0]
-        return res[0][0]
+        ckey_cache[ckey] = res[1][1]
+        return res[1][1]
     res = db.Query("INSERT INTO bs12_player(ckey) VALUES ($1) RETURNING id", ckey)
     CHECK_ERR(res)
-    ckey_cache[ckey] = res[0][0]
-    return res[0][0]
+    ckey_cache[ckey] = res[1][1]
+    return res[1][1]
 
 /datum/database/dmpg/proc/GetIP(var/ip)
     if (ip in ip_cache)
@@ -76,12 +76,12 @@
     var/list/res = db.Query("SELECT id FROM bs12_ip WHERE ip = $1", ip)
     CHECK_ERR(res)
     if (res.len > 0)
-        ip_cache[ip] = res[0][0]
-        return res[0][0]
+        ip_cache[ip] = res[1][1]
+        return res[1][1]
     res = db.Query("INSERT INTO bs12_ip(ip) VALUES ($1) RETURNING id", ip)
     CHECK_ERR(res)
-    ip_cache[ip] = res[0][0]
-    return res[0][0]
+    ip_cache[ip] = res[1][1]
+    return res[1][1]
 
 /datum/database/dmpg/proc/GetCID(var/cid)
     if (cid in cid_cache)
@@ -89,12 +89,12 @@
     var/list/res = db.Query("SELECT id FROM bs12_computerid WHERE computerid = $1", cid)
     CHECK_ERR(res)
     if (res.len > 0)
-        cid_cache[cid] = res[0][0]
-        return res[0]
+        cid_cache[cid] = res[1][1]
+        return res[1]
     res = db.Query("INSERT INTO bs12_computerid(computerid) VALUES ($1) RETURNING id", cid)
     CHECK_ERR(res)
-    cid_cache[cid] = res[0][0]
-    return res[0][0]
+    cid_cache[cid] = res[1][1]
+    return res[1][1]
 
 /datum/database/dmpg/RecordLogin(var/ckey, var/ip, var/cid, var/round)
     var/ckey_id = GetKey(ckey)
@@ -106,13 +106,13 @@
 /datum/database/dmpg/GetPlayerAge(var/ckey)
     var/list/res = db.Query("SELECT EXTRACT(DAY FROM CURRENT_TIMESTAMP - first_seen) FROM bs12_player WHERE ckey = $1", ckey)
     CHECK_ERR(res)
-    return res[0][0]
+    return res[1][1]
 
 /datum/database/dmpg/GetStaffwarn(var/ckey)
     var/ckey_id = GetKey(ckey)
     var/list/res = db.Query("SELECT staffwarn FROM bs12_player WHERE ckey = $1", ckey_id)
     CHECK_ERR(res)
-    return res[0]
+    return res[1]
 
 /datum/database/dmpg/SetStaffwarn(var/ckey, var/msg)
     . = db.Execute("UPDATE bs12_player SET staffwarn = $2 WHERE ckey = $1", ckey, msg)
@@ -127,7 +127,7 @@
     CHECK_ERR(res)
 
     for (var/book in res)
-        books |= list("id"=book[0],"author"=book[1],"category"=book[2],"title"=book[3],"content"=book[4])
+        books += list(list("id"=book[1],"author"=book[2],"category"=book[3],"title"=book[4],"content"=book[5]))
 
     return books
 
@@ -135,7 +135,7 @@
     var/list/book = db.Query("SELECT id, author, category, title, content FROM bs12_library WHERE id = $1", id)
     RETURN_ERR(book)
 
-    return list("id"=book[0],"author"=book[1],"category"=book[2],"title"=book[3],"content"=book[4])
+    return list("id"=book[1],"author"=book[2],"category"=book[3],"title"=book[4],"content"=book[5])
 
 /datum/database/dmpg/CreateLibraryBook(var/ckey, var/category, var/author, var/title, var/content)
     var/ckey_id = GetKey(ckey)
@@ -148,7 +148,7 @@
     var/list/res = db.Query("SELECT scope FROM bs12_whitelist WHERE player = $1", ckey_id)
     CHECK_ERR(res)
     for (var/ent in res)
-        wl |= ent[0]
+        wl += ent[1]
     return wl
 
 /datum/database/dmpg/SetWhitelist(var/ckey, var/scope)
@@ -164,9 +164,9 @@
     CHECK_ERR(res)
     if (res.len > 0)
         return list(
-            "admin" = res[0][0],
-            "reason" = res[0][1],
-            "expires" = res[0][2]
+            "admin" = res[1][1],
+            "reason" = res[1][2],
+            "expires" = res[1][3]
         )
     return list()
 
@@ -175,20 +175,20 @@
     var/list/res = db.Query("SELECT b.id, p.ckey, b.reason, TEXT(DATE_TRUNC('minute', b.expiry AT TIME ZONE 'UTC')), b.scope FROM bs12_active_ban AS b INNER JOIN bs12_player AS p ON b.admin = p.id WHERE $1 = ANY(b.target_ckey) OR $2 = ANY(b.target_ip) OR $3 = ANY(b.target_computerid)", ckey, ip, cid)
     CHECK_ERR(res)
     for (var/ban in res)
-        bans |= list(
-            "id" = res[0],
-            "admin" = res[1],
-            "reason" = res[2],
-            "expires" = res[3],
-            "scope" = res[4]
-        )
+        bans += list(list(
+            "id" = res[1],
+            "admin" = res[2],
+            "reason" = res[3],
+            "expires" = res[4],
+            "scope" = res[5]
+        ))
     return bans
 
 /datum/database/dmpg/RecordBan(var/scopes, var/setter_key, var/reason, var/expiry, var/ckey, var/ip, var/cid)
     var/admin_id = GetKey(setter_key)
     var/list/res = db.Query("INSERT INTO bs12_ban(admin) VALUES ($1) RETURNIING id", admin_id)
     CHECK_ERR(res)
-    var/ban = res[0][0]
+    var/ban = res[1][1]
 
     . = db.Execute("INSERT INTO bs12_ban_reason (ban, admin, reason) VALUES ($1, $2, $3)", ban, admin_id, reason)
     CHECK_ERR(.)

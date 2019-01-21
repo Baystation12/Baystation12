@@ -77,3 +77,7 @@
 
 /datum/database/proc/RemoveBan(var/id, var/remover_ckey)
     return 0
+
+/datum/database/proc/db_error(var/error)
+    log_world("DB error: [error]")
+    return 0
