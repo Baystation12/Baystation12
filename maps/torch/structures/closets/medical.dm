@@ -92,7 +92,7 @@
 /obj/structure/closet/secure_closet/medical_torch
 	name = "corpsman's locker"
 	req_access = list(access_medical_equip)
-	closet_appearance = /decl/closet_appearance/secure_closet/medical
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
 
 /obj/structure/closet/secure_closet/medical_torch/WillContain()
 	return list(
