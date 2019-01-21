@@ -1,4 +1,0 @@
-author: "xales"
-delete-after: True
-changes: 
-  - tweak: "Torch command (CO, XO, SEA) now share a headset type and encryption key"

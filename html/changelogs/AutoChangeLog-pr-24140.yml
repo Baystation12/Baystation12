@@ -1,8 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - rscadd: "CMOs rejoice! Your hypospray now has a quantity setting, you can administer in 1,2,5,10,15,20, or 30 units per injection!"
-  - rscadd: "CMOs rejoice! You can now pour your hypospray contents into a container without removing the vial! (you can already put reagents in it too without swapping vials)"
-  - rscadd: "CMOs rejoice! You are now coordinated enough to swap vials on the fly. No longer do you have to remove and put away the old vial before you can install a new one."
-  - rscadd: "Medical rejoice! The contractor producing your syringes have heard your cries and installed easier to read graduations on syringes. You now can set transfer amounts in 1, 2, and 5."
-  - rscadd: "Everyone rejoice! When pouring containers, you will now be able to see how many units are remaining."

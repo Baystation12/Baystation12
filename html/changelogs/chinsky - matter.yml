@@ -1,7 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Rods are now material based, can be made from more than just steel. Same with grilles and lattices."
-  - rscadd: "Windows are material based too, any non-opaque material can be used to make them (currently diamonds and quartz)."
-  - rscadd: "You can get back rods from rglass (rphoronglass) by welding them out."
-  - bugfix: "Autolathe now will properly get some steel material on top of glass if you feed it rglass."

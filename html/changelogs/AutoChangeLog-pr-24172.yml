@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes cameras of robots, hardsuits, Thunderdome and similar not being accessable."

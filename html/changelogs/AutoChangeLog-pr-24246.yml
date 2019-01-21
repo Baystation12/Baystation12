@@ -1,5 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - bugfix: "drones and borgs can once again use r-glass."
-  - bugfix: "drones and borgs glass stacks are colored correctly."

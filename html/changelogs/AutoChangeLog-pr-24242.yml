@@ -1,5 +1,0 @@
-author: "ChaosAlpha"
-delete-after: True
-changes: 
-  - bugfix: "Robots and drones should once again be able to drop items from their grippers from the Silicon Commands tab (the verb has been renamed \"Drop Gripped Item\")."
-  - bugfix: "Robots and drones now drop all gripped items on death."
