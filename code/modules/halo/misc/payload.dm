@@ -144,9 +144,10 @@
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
+	qdel(b)
 	qdel(src)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
-	..()
 	radiation_repository.radiate(b.loc,1000,10000)
+	..()
 
