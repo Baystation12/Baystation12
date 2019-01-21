@@ -470,7 +470,8 @@
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
-		P.accuracy += 2
+		//Increased to +3 to add a larger incentive to use it, even if you are stuck in one spot with the fast-paced combat system
+		P.accuracy += 3
 
 //does the actual launching of the projectile
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
