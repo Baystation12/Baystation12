@@ -219,7 +219,7 @@
 "ek" = (/obj/structure/lattice,/obj/machinery/deck_gun/missile_pod{tag = "icon-missile_pod (WEST)"; icon_state = "missile_pod"; dir = 8},/turf/space,/area/unscfrigate/starboardguns{no_air = null; requires_power = 0})
 "el" = (/obj/effect/overmap/ship/unsc_frigate,/turf/space,/area/space)
 "em" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
-"en" = (/obj/effect/landmark/map_data{height = 4},/turf/space,/area/space)
+"en" = (/obj/effect/landmark/map_data,/turf/space,/area/space)
 "eo" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/multi_tile/halo{dir = 1},/turf/simulated/floor/tiled,/area/unscfrigate/bridge)
 "ep" = (/turf/space,/area/unscfrigate/mac)
 "eq" = (/obj/machinery/camera,/turf/simulated/floor/tiled,/area/unscfrigate/mac)
