@@ -58,7 +58,7 @@
 	spawnpoint_override = "Innie Captain"
 
 
-
+/*
 
 /datum/map/first_contact
 	allowed_jobs = list(/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,/datum/job/UNSC_ship/cag,/datum/job/UNSC_ship/bridge,\
@@ -95,3 +95,4 @@
 		/datum/species/brutes = list(),\
 		/datum/species/sanshyuum = list()\
 		)
+*/

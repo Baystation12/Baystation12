@@ -3,7 +3,10 @@
 	desc = "An unknown location."
 	invisibility = 101
 
-	var/height = 1     ///< The number of Z-Levels in the map.
+	//var/height = 1     ///< The number of Z-Levels in the map.
+	var/obj/effect/overmap/overmap_object
+	var/obj/effect/landmark/map_data/above
+	var/obj/effect/landmark/map_data/below
 	var/turf/edge_type ///< What the map edge should be formed with. (null = world.turf)
 
 // FOR THE LOVE OF GOD USE THESE.  DO NOT FUCKING SPAGHETTIFY THIS.

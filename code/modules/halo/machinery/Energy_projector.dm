@@ -169,7 +169,6 @@
 			capacitor[1] = new_stored
 		recharging = world.time + 1 SECOND
 
-
 /obj/item/projectile/overmap/beam
 	name = "Super laser"
 	desc = "An incredibly hot beam of pure light"
@@ -179,6 +178,7 @@
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 2 SECONDS
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/eprojector_hit_sound.wav'
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
@@ -216,6 +216,7 @@
 	damage = 900
 	penetrating = 999
 	step_delay = 0.0 SECONDS
+	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 5 SECONDS
 

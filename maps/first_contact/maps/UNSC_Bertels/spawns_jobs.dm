@@ -145,3 +145,4 @@ GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 /obj/effect/landmark/start/corvetteodst_officer/New()
 	..()
 	GLOB.corvetteodst_officer_spawns += loc
+

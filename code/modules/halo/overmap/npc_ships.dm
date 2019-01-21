@@ -41,6 +41,10 @@
 
 	var/list/projectiles_to_spawn = list()
 
+/obj/effect/overmap/ship/npc_ship/New()
+	generate_ship_name()
+	. = ..()
+
 /obj/effect/overmap/ship/npc_ship/proc/can_board() //So this sort of stuff can be overidden later down the line for things like cargo shuttles.
 	if(hull < initial(hull)/4)
 		return 1
@@ -69,7 +73,6 @@
 	map_z.Cut()
 	forceMove(start_turf)
 	pick_target_loc()
-	generate_ship_name()
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
 

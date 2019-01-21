@@ -21,7 +21,7 @@
 
 	//#include "../first_contact/maps/UNSC_Thorin/includes.dm"
 
-	#include "../first_contact/maps/UNSC_Heaven_Above/unsc_frigate_base_includes.dm"
+	//#include "../first_contact/maps/UNSC_Heaven_Above/unsc_frigate_base_includes.dm"
 
 	#include "../first_contact/maps/Covenant Corvette/includes.dm"
 

@@ -56,6 +56,7 @@
 		c.armor_thickness = initial(c.armor_thickness)
 		repair_supplies -= armor_damage_taken
 
+	c.update_damage_description()
 	if(repair_supplies == 0)
 		var/mob/living/carbon/human/h = user
 		if(istype(h))

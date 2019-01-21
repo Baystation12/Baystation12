@@ -52,6 +52,7 @@
 	//icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
 	//icon_state = "missile"
 	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'
 	step_delay = 0.75 SECOND
 
 /obj/item/projectile/overmap/missile/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
