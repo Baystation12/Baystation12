@@ -25,7 +25,7 @@
 "ay" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "az" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "aA" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
-"aB" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/reagent_containers/chem_disp_cartridge/alkysine,/obj/item/weapon/wrench,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
+"aB" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/beakers,/obj/machinery/power/debug_items/infinite_cable_powersink,/obj/item/weapon/wrench,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "aC" = (/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "aD" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "aE" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
@@ -701,7 +701,7 @@
 "ny" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
 "nz" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
 "nA" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
-"nB" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/reagent_containers/chem_disp_cartridge/alkysine,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
+"nB" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/beakers,/obj/machinery/power/debug_items/infinite_cable_powersink,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
 "nC" = (/obj/machinery/iv_drip,/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
 "nD" = (/obj/structure/bed{tag = "icon-bed2 (EAST)"; icon_state = "bed2"; dir = 4},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
 "nE" = (/obj/structure/table/standard,/obj/random/firstaid,/obj/random/firstaid,/obj/random/firstaid,/obj/machinery/light,/obj/effect/floor_decal/corner/beige{dir = 10},/obj/effect/floor_decal/corner/beige{dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/portmedbay)
@@ -722,6 +722,7 @@
 "nT" = (/obj/structure/closet/crate,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/cargo2)
 "nU" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Mixed''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/machinery/light,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/cargo2)
 "nV" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/porthallwaycentral)
+"wa" = (/obj/effect/landmark/map_data{name = "UNSC Bertels"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -873,5 +874,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

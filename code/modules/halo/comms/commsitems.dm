@@ -22,10 +22,12 @@
 /obj/item/device/mobilecomms/commsbackpack/New()
 	..()
 	telecomms_list += src
-	spawn(5)
-		for(var/frequency in recieving_frequencies)
-			convert_freq_to_numerical(frequency)
-			radio_controller.add_object(src,frequency,RADIO_CHAT)
+
+/obj/item/device/mobilecomms/commsbackpack/Initialize()
+	for(var/frequency in recieving_frequencies)
+		convert_freq_to_numerical(frequency)
+		radio_controller.add_object(src,frequency,RADIO_CHAT)
+	. = ..()
 
 /obj/item/device/mobilecomms/commsbackpack/proc/convert_freq_to_numerical(var/frequency)
 	var/freq_numerical = halo_frequencies.all_frequencies[frequency]
@@ -87,10 +89,10 @@
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
 	recieving_frequencies = list(URFC_NAME)
 
-/obj/item/device/mobilecomms/commsbackpack/innie/New()
-	..()
-	spawn(6) //The convert_freq_to_numerical proc runtimes if this isn't here, it attempts to read the innie frequency
-		recieving_frequencies.Add(halo_frequencies.innie_channel_name)
+/obj/item/device/mobilecomms/commsbackpack/innie/Initialize()
+	//The convert_freq_to_numerical proc runtimes if this isn't here, it attempts to read the innie frequency
+	recieving_frequencies.Add(halo_frequencies.innie_channel_name)
+	. = ..()
 
 /obj/item/device/mobilecomms/commsbackpack/unsc/permanant
 	active = 1

@@ -333,6 +333,7 @@
 "gu" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (WEST)"; icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 "gv" = (/obj/structure/table/standard,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 "gw" = (/obj/structure/flora/pottedplant/aquatic,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"sC" = (/obj/effect/landmark/map_data{name = "Asteroid"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaabababababababababababacacacacacacacacacacacadadadadadadadadadadaeaeafaeaeadadadad
@@ -384,5 +385,6 @@ fyfyfyfyfyfyfyfyfyfyfygggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
 gfgfgfgfgfgfgfgfgfgfgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggigtgubvbwbvbvgi
 gfgfgfgfgfgfgfgfgfgfgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggigvgtbvbvbvgwgi
 gfgfgfgfgfgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggigigigigigigigi
-gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+sCgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
 "}
+

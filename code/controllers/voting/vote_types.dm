@@ -22,6 +22,8 @@
 	.  = ..()
 
 /datum/vote/restart/do_result()
+	. = ..()
+
 	if(.[1] == "Restart Round")
 		to_world("<span class='danger'>>World restarting due to vote...</span>")
 
@@ -72,7 +74,7 @@
 
 /datum/vote/gamemode/initiate_vote(initiator, var/automatic = 0)
 
-	//have to put this here as the list of gamemodes is not setup when vote/New() is called at roundstart
+	//have to put this here as the list of gamemodes is not setup when vote/Initialize() is called at roundstart
 	if(!choices.len)
 		InitGamemodes()
 
@@ -108,7 +110,7 @@
 	if(master_mode != .[1])
 		world.save_mode(.[1])
 		if(ticker && ticker.mode)
-			restart = 0//1
+			restart = 1
 		else
 			master_mode = .[1]
 	secondary_mode = .[2]
@@ -141,6 +143,7 @@
 /datum/vote/crew_transfer
 	name = "crew_transfer"
 	question = "End the shift?"
+	choices = list("Initiate Crew Transfer", "Continue The Round")
 
 /datum/vote/crew_transfer/Initialize()
 	..()
@@ -150,8 +153,7 @@
 		disable_reason = "disabled in config"
 
 /datum/vote/crew_transfer/initiate_vote(var/initiator_key, var/automatic = 0)
-	if(check_rights(R_ADMIN|R_MOD, 0))
-		choices.Add("Initiate Crew Transfer", "Continue The Round")
+	if(check_rights(R_ADMIN|R_MOD, 0) || automatic)
 		if (config.allow_extra_antags && !antag_add_finished)
 			choices.Add("Add Antagonist")
 	else
@@ -172,6 +174,7 @@
 
 	if(.[1] == "Initiate Crew Transfer")
 		init_autotransfer()
+
 	else if(.[1] == "Add Antagonist")
 		spawn(10)
 			vote.autoaddantag()
@@ -290,6 +293,8 @@
 
 /datum/vote/custom
 	name = "custom"
+	disabled = 1
+	disable_reason = "Admin only"
 
 /datum/vote/custom/get_announce_text(var/automatic, var/initiator)
 	. = ..(automatic, initiator)

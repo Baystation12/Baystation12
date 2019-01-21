@@ -295,7 +295,7 @@
 "fI" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue{icon_state = "1-4"},/obj/machinery/power/terminal{dir = 4},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercore)
 "fJ" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 "fK" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
-"fL" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/reagent_containers/chem_disp_cartridge/alkysine,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
+"fL" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/beakers,/obj/machinery/power/debug_items/infinite_cable_powersink,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 "fM" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/corvette/unscthorin/medicalbay)
 "fN" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (WEST)"; icon_state = "sleeper_0"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 "fO" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/corvette/unscthorin/Porthallway)
@@ -655,8 +655,8 @@
 "mE" = (/obj/structure/bed,/obj/item/weapon/bedsheet/orange,/turf/simulated/floor/plating{tag = "icon-dmg1"; icon_state = "dmg1"},/area/corvette/unscthorin/cells)
 "mF" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
 "mG" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
-"mH" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Thorin Map Data"},/turf/space,/area/space)
 "mI" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
+"Gm" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Thorn"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -757,6 +757,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-mHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Gmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 mIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

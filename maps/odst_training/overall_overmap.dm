@@ -49,10 +49,5 @@
 	map_bounds = list(9,52,70,25)
 
 
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
-	deck_gun_area = /area/om_ships/comet
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/comet
-	deck_gun_area = /area/om_ships/comet/cometrockets
 
 

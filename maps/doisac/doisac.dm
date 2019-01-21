@@ -17,8 +17,8 @@
 	#include "doisac_areas.dm"
 	#include "doisac_turfs_doodads.dm"
 	#include "doisac_misc.dm"
-	#include "doisac_underground.dmm"
 	#include "doisac_surface.dmm"
+	#include "doisac_underground.dmm"
 
 	#define using_map_DATUM /datum/map/doisac
 

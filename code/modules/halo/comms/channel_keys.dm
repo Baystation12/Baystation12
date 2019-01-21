@@ -15,13 +15,14 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define ONI_NAME "ONICOM"
 #define URFC_NAME "CMDOCOM"
 #define MED_NAME "MEDCOM"
+#define INNIE_DEFAULT "INNIECOM"
 
 /datum/halo_frequencies
 	var/innie_channel_name = "INNIECOM"
 	var/const/civ_freq = 1459
 	var/list/frequencies_by_number = list()
 	var/list/all_frequencies = list()
-	var/list/frequencies_human = list("INNIECOM",SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,SEC_NAME,ODST_NAME,ONI_NAME,URFC_NAME,MED_NAME)
+	var/list/frequencies_human = list(INNIE_DEFAULT,SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,SEC_NAME,ODST_NAME,ONI_NAME,URFC_NAME,MED_NAME)
 	var/list/frequencies_cov = list("RamNet","BoulderNet","BattleNet")
 
 /datum/halo_frequencies/New()
@@ -29,6 +30,13 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	/*if(GLOB.using_map.use_global_covenant_comms)
 		new /obj/item/device/mobilecomms/commsbackpack/covenant (locate(1,1,1))*/
 	setup_com_channels()
+
+/hook/startup/proc/reset_innie_dept_key()
+	//this can't be in datum/New() as there it is apparently called before global vars are instantianted
+	for(var/key in department_radio_keys) //Department keys would bork if this isn't done.
+		if(department_radio_keys[key] == "INNIECOM")
+			department_radio_keys[key] = halo_frequencies.innie_channel_name
+	return 1
 
 /datum/halo_frequencies/proc/setup_com_channels()
 	//randomised innie comm channel name
@@ -46,9 +54,8 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	"EXCOM","RAMCOM","RANCHCOM"\
 	)
 
-	for(var/key in department_radio_keys) //Department keys would bork if this isn't done.
-		if(department_radio_keys[key] == "INNIECOM")
-			department_radio_keys[key] = "[innie_channel_name]"
+	var/innie_index = frequencies_human.Find(INNIE_DEFAULT)
+	frequencies_human[innie_index] = innie_channel_name
 
 	//randomised the freqs but avoid collisions
 	frequencies_by_number["[civ_freq]"] = CIV_NAME
@@ -80,20 +87,18 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 	return 1
 
-/obj/item/device/encryptionkey/inniecom
-	channels = list("INNIECOM" = 1, EBAND_NAME = 1)
-
 //reset the channel name due to a randomised innie comm channel name
 /obj/item/device/encryptionkey/inniecom/New()
 	channels = list(halo_frequencies.innie_channel_name = 1, EBAND_NAME = 1)
 	..()
 
+//also this one
 /obj/item/device/encryptionkey/urfccom/New()
-	channels = list(halo_frequencies.innie_channel_name = 1,URFC_NAME = 1,EBAND_NAME = 1,)
+	channels = list(URFC_NAME = 1, halo_frequencies.innie_channel_name = 1, EBAND_NAME = 1)
 	..()
 
 /obj/item/device/encryptionkey/onicom
-	channels = list(ONI_NAME = 1,SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1,FLEETCOM = 1,)
+	channels = list(ONI_NAME = 1,SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1,FLEETCOM = 1)
 
 /obj/item/device/encryptionkey/shipcom
 	channels = list(SHIPCOM_NAME = 1,EBAND_NAME = 1)
@@ -153,17 +158,25 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		if("Battlenet")
 			return "sciradio"
 
+		//brute clan
 		if("BoulderNet")
 			return "secradio"
 
+		//brute clan
 		if("RamNet")
 			return "comradio"
 
+		//unsc officers chat
 		if(FLEETCOM_NAME)
 			return "medradio"
 
-		//general ship comms
+		//general unsc ship comms
 		if(SHIPCOM_NAME)
 			return "engradio"
 
+		//innie commando comms
+		if(URFC_NAME)
+			return "supradio"
+
+	//system radio
 	return "radio"
