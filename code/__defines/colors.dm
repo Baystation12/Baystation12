@@ -74,7 +74,7 @@
 #define COLOR_BRASS            "#b99d71"
 #define COLOR_INDIGO           "#4b0082"
 #define COLOR_ALUMINIUM        "#c9c9c9"
-#define COLOR_CRYSTAL          "#00C8A5"
+#define COLOR_CRYSTAL          "#00c8a5"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"
