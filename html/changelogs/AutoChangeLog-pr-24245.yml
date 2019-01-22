@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added aluminium and plastic into the protolathe system. Many recipes have been adjusted."
+  - maptweak: "Removed protolathe from the robotics laboratory."
+  - maptweak: "Added aluminium sheets to the research and robotics storage areas."
