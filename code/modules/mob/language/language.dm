@@ -47,35 +47,33 @@
 
 	var/understand_chance = 0
 	for(var/datum/language/L in known_languages)
-		if(partial_understanding && partial_understanding[L.name]) 
+		if(LAZYACCESS(partial_understanding, L.name))
 			understand_chance += partial_understanding[L.name]
-		if(L.partial_understanding && L.partial_understanding[name]) 
-			understand_chance += L.partial_understanding[name] * 0.5 
 
-	var/scrambled_text = ""
 	var/list/words = splittext(input, " ")
+	var/list/scrambled_text = list()
+	var/new_sentence = 0
 	for(var/w in words)
-		if(prob(understand_chance))
-			scrambled_text += " [w] "
-		else
-			var/nword = scramble_word(w)
-			var/ending = copytext(scrambled_text, length(scrambled_text)-1)
-			if(findtext(ending,"."))
+		var/nword = "[w] "
+		var/input_ending = copytext(w, length(w))
+		var/ends_sentence = findtext(".?!",input_ending)
+		if(!prob(understand_chance))
+			nword = scramble_word(w)
+			if(new_sentence)
 				nword = capitalize(nword)
-			scrambled_text += nword
-	scrambled_text = replacetext(scrambled_text,"  "," ")
+				new_sentence = FALSE
+			if(ends_sentence)
+				nword = trim(nword)
+				nword = "[nword][input_ending] "
 
-	scrambled_text = capitalize(scrambled_text)
-	scrambled_text = trim(scrambled_text)
-	var/ending = copytext(scrambled_text, length(scrambled_text))
-	if(ending == ".")
-		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
+		if(ends_sentence)
+			new_sentence = TRUE
 
-	var/input_ending = copytext(input, length(input))
-	if(input_ending in list("!","?","."))
-		scrambled_text += input_ending
+		scrambled_text += nword
 
-	return scrambled_text
+	. = jointext(scrambled_text, null)
+	. = capitalize(.)
+	. = trim(.)
 
 /datum/language/proc/scramble_word(var/input)
 	if(!syllables || !syllables.len)
