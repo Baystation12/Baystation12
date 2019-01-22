@@ -9,7 +9,7 @@
 	name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
-	item_state = "syringe_0"
+	item_state = "rg0"
 	icon_state = "rg"
 	matter = list(MATERIAL_GLASS = 150)
 	amount_per_transfer_from_this = 5

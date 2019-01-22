@@ -133,7 +133,7 @@
 	name = "Random Medical equipment"
 	desc = "This is a random medical item."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "traumakit"
+	icon_state = "medrandom"
 
 /obj/random/medical/spawn_choices()
 	return list(/obj/random/medical/lite = 21,
@@ -156,7 +156,7 @@
 	name = "Random Medicine"
 	desc = "This is a random simple medical item."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "brutepack"
+	icon_state = "medrandom"
 	spawn_nothing_percentage = 25
 
 /obj/random/medical/lite/spawn_choices()
@@ -552,7 +552,7 @@ obj/random/closet/spawn_choices()
 	name = "Random Cleaning Supplies"
 	desc = "This is a random bar of soap. Soap! SOAP?! SOAP!!!"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "soap"
+	icon_state = "soaprandom"
 
 /obj/random/soap/spawn_choices()
 	return list(/obj/item/weapon/soap = 4,
