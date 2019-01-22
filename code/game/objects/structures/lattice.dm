@@ -2,7 +2,7 @@
 	name = "lattice"
 	desc = "A lightweight support lattice."
 	icon = 'icons/obj/smoothlattice.dmi'
-	icon_state = "latticeblank"
+	icon_state = "lattice0"
 	density = 0
 	anchored = 1
 	w_class = ITEM_SIZE_NORMAL
