@@ -784,7 +784,9 @@
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
-		M.resuscitate()
+		if(M.resuscitate())
+			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
+			heart.take_internal_damage(heart.max_damage * 0.15)
 
 /datum/reagent/lactate
 	name = "Lactate"
