@@ -1574,6 +1574,7 @@
 			setOxyLoss(75)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
+		return TRUE
 
 /mob/living/carbon/human/proc/make_reagent(amount, reagent_type)
 	if(stat == CONSCIOUS)
