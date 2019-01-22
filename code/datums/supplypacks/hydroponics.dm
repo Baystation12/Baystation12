@@ -118,7 +118,7 @@
 					/obj/structure/flora/pottedplant/tropical,
 					/obj/structure/flora/pottedplant/dead,
 					/obj/structure/flora/pottedplant/decorative)
-	cost = 3
+	cost = 8
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "potted plant crate"
 	supply_method = /decl/supply_method/randomized
