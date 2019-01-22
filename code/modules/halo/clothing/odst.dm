@@ -490,13 +490,13 @@
 
 /obj/item/clothing/head/helmet/odst/donator/wehraboo
 	name = "SPI Helmet Mk I"
-	item_state = "wehraboo-helm_worn"
-	icon_state = "wehraboo-helm_obj"
+	item_state = "wehraboo-helmet_worn"
+	icon_state = "wehraboo-helmet_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/wehraboo
 	name = "SPI Armour Mk I"
-	item_state = "wehraboo-suit_worn"
-	icon_state = "wehraboo-suit_obj"
+	item_state = "wehraboo-armor_worn"
+	icon_state = "wehraboo-armor_obj"
 
 /obj/item/clothing/head/helmet/odst/donator/kozi
 	name = "Kozi's Hassar Helmet"
@@ -507,6 +507,8 @@
 	name = "Kozi's Hassar Armor"
 	icon_state = "kozi-armor_obj"
 	item_state = "kozi-armor_worn"
+
+
 //END DONATOR GEAR
 
 /obj/effect/random_ODST_set/New()
