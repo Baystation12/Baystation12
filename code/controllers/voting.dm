@@ -123,11 +123,12 @@ SUBSYSTEM_DEF(vote)
 		for(var/datum/vote/cur_vote in inactive_votes)
 			if(cur_vote.disabled)
 				if(check_rights(R_ADMIN))
-					. += "\t(<a href='?src=\ref[cur_vote];start_vote=1'>[cur_vote.name] (ADMIN OVERRIDE)</a>)"
+					. += "\t<a href='?src=\ref[cur_vote];start_vote=1'>[cur_vote.name]</a> (ADMIN OVERRIDE)"
 				else
 					. += "\t[cur_vote.name] ([cur_vote.disable_reason ? cur_vote.disable_reason : "disabled"])"
 			else
-				. += "\t(<a href='?src=\ref[cur_vote];start_vote=1'>[cur_vote.name]</a>)"
+				. += "\t<a href='?src=\ref[cur_vote];start_vote=1'>[cur_vote.name]</a>"
+			. += "<br>"
 	else
 		. += "<h2>No votes available to be started</h2>"
 	. += "<br><br>"
