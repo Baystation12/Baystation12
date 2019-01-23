@@ -8,7 +8,7 @@
 	density = 1
 	anchored = 1
 	var/obj/effect/overmap/ship/npc_ship/ship_to_spawn
-	var/shuttle_refresh_time = 60 SECONDS
+	var/shuttle_refresh_time = 5 MINUTES
 	var/next_shuttle_at = 0
 
 /obj/machinery/shuttle_spawner/examine(var/mob/examiner)
