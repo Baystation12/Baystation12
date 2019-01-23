@@ -13,6 +13,9 @@
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
 
+/obj/machinery/overmap_weapon_console/ex_act(var/severity)
+	return
+
 /obj/machinery/overmap_weapon_console/verb/toggle_projectile_tracking()
 	set name = "Toggle Ordinance Visual Tracking"
 	set desc = "Toggle the usage of long-range ordinance tracking sensors."
