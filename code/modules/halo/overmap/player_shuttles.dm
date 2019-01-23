@@ -30,7 +30,7 @@
 	if(isnull(om_loc))
 		log_error("[src] tried to spawn a shuttlecraft without having an overmap-object assigned to it's z-level. ([loc.z])")
 		return
-	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (om_loc)
+	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (om_loc.loc)
 	ship.forceMove(om_loc.loc)
 	ship.make_player_controlled()
 
