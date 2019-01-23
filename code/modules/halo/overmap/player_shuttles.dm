@@ -1,6 +1,8 @@
 #define SHUTTLE_REQ_DELAY 5 SECONDS
 
 /obj/machinery/shuttle_spawner
+	name = "Shuttle Requisition Console"
+	desc = "Used to obtain a small transport shuttle for long or short range transportation."
 	var/obj/effect/overmap/ship/npc_ship/ship_to_spawn
 	var/shuttle_refresh_time = 60 SECONDS
 	var/next_shuttle_at = 0
@@ -20,10 +22,12 @@
 	if(!ship_to_spawn)
 		log_error("[src] tried to spawn a shuttle at [map_sectors["[loc.z]"]]'s location, but it doesn't have a ship_to_spawn set!")
 		return
-	if(isnull(map_sectors["[loc.z]"]))
+	var/obj/effect/overmap/om_loc = map_sectors["[loc.z]"]
+	if(isnull(om_loc))
 		log_error("[src] tried to spawn a shuttlecraft without having an overmap-object assigned to it's z-level. ([loc.z])")
 		return
-	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (map_sectors["[loc.z]"])
+	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (om_loc)
+	ship.forceMove(om_loc.loc)
 	ship.make_player_controlled()
 
 /obj/machinery/shuttle_spawner/ex_act(var/severity)
