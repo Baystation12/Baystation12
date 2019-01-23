@@ -1,6 +1,7 @@
 <div class='item'>
     {{:helper.link('Show Map', 'pin-s', {'showMap' : 1})}}
     {{:helper.link('Reset', 'refresh', {'reset' : 1})}}
+	{{:helper.link(data.clicker_status ? 'Disable Camera Interaction' : 'Enable Camera Interaction', 'search', data.clicker_status ? {'disableClicker' : 1}: {'enableClicker' : 1}, null, data.clicker_status ? 'selected' : null)}}
 </div>
 
 <div class='item'>

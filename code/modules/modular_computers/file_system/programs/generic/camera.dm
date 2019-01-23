@@ -38,6 +38,16 @@
 	name = "Camera Monitoring program"
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
+	var/datum/computer_file/program/program = null
+	var/clicker_status = 0
+
+/datum/nano_module/camera_monitor/New(var/host, var/topic_manager, var/program)
+	..()
+	src.program = program
+
+/datum/nano_module/camera_monitor/Destroy()
+	disable_clicker(usr)
+	. = ..()
 
 /datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -58,6 +68,8 @@
 
 	if(current_network)
 		data["cameras"] = camera_repository.cameras_in_network(current_network)
+
+	data["clicker_status"] = clicker_status
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -113,7 +125,16 @@
 		usr.reset_view(current_camera)
 		return 1
 
+	else if(href_list["enableClicker"])
+		enable_clicker(usr)
+		return 1
+	else if(href_list["disableClicker"])
+		disable_clicker(usr)
+		return 1
+
 /datum/nano_module/camera_monitor/proc/switch_to_camera(var/mob/user, var/obj/machinery/camera/C)
+	if(!program.computer)
+		return
 	//don't need to check if the camera works for AI because the AI jumps to the camera location and doesn't actually look through cameras.
 	if(isAI(user))
 		var/mob/living/silicon/ai/A = user
@@ -133,7 +154,7 @@
 		return
 
 	if(current_camera)
-		reset_current()
+		reset_current(0)
 
 	current_camera = C
 	if(current_camera)
@@ -141,12 +162,15 @@
 		if(istype(L))
 			L.tracking_initiated()
 
-/datum/nano_module/camera_monitor/proc/reset_current()
+/datum/nano_module/camera_monitor/proc/reset_current(var/remove_clicker = 1)
 	if(current_camera)
 		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_cancelled()
+
 	current_camera = null
+	if(remove_clicker)
+		disable_clicker(usr)
 
 /datum/nano_module/camera_monitor/check_eye(var/mob/user as mob)
 	if(!current_camera)
@@ -186,3 +210,62 @@
 /datum/nano_module/camera_monitor/remove_visual(mob/M)
 	if(current_camera)
 		current_camera.remove_visual(M)
+
+/datum/nano_module/camera_monitor/proc/enable_clicker(var/mob/user)
+	var/datum/click_handler/handler = user.GetClickHandler()
+	if(handler.type == /datum/click_handler/camera)
+		return
+	if(current_camera)
+		usr.PushClickHandler(/datum/click_handler/camera)
+		var/datum/click_handler/camera/new_handler = user.GetClickHandler()
+		new_handler.parent_monitor = src
+		clicker_status = 1
+
+/datum/nano_module/camera_monitor/proc/disable_clicker(var/mob/user)
+	var/datum/click_handler/handler = user.GetClickHandler()
+	if(handler.type == /datum/click_handler/camera)
+		user.PopClickHandler()
+		clicker_status = 0
+
+//Camera mode click handler
+/datum/click_handler/camera
+	flags = CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT
+	var/datum/nano_module/camera_monitor/parent_monitor
+	var/obj/machinery/door/airlock/current_airlock
+
+/datum/click_handler/camera/Destroy()
+	if(current_airlock)
+		SSnano.close_user_uis(user, current_airlock, "main")
+	. = ..()
+
+/datum/click_handler/camera/proc/can_interact(var/atom/A)
+	if(!parent_monitor.current_camera)
+		return 0
+	if(cameranet.is_turf_visible(A))
+		return 0
+
+	var/obj/machinery/camera/current_camera = parent_monitor.current_camera
+	if(!AreConnectedZLevels(get_z(A), get_z(current_camera)))
+		return 0
+	return 1
+
+/datum/click_handler/camera/OnClick(var/atom/A, var/params)
+	if(!can_interact(A))
+		return
+
+	if(istype(A, /obj/machinery/door/airlock))
+		current_airlock = A
+
+		if(!current_airlock.check_access(user))
+			to_chat(user, "<span class='warning'>Access denied.</span>")
+			return
+
+		if(!current_airlock.canAIControl())
+			return
+
+		if(has_access(list(access_engine), list(), user.GetAccess()))
+			current_airlock.ui_interact(user, "main", null, 1, new /datum/topic_state/remote(user, current_airlock))
+		else
+			current_airlock.toggle_open()
+
+

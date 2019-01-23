@@ -527,3 +527,9 @@
 
 /obj/machinery/door/CanFluidPass(var/coming_from)
 	return !density
+
+/obj/machinery/door/proc/toggle_open()
+	if(density)
+		open()
+	else
+		close()
