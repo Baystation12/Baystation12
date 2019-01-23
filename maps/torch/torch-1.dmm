@@ -81,7 +81,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "au" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/wall,
+/turf/simulated/floor,
 /area/crew_quarters/adherent)
 "av" = (
 /obj/effect/floor_decal/industrial/warning,
