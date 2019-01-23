@@ -60,7 +60,7 @@
 	return 0
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
-	if(hull > initial(hull)/4 && !is_player_controlled())//If they still have more than quarter of their "hull" left, let them drift in space.
+	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
 	for(var/mob/living/player in GLOB.player_list)
 		if(player.z in map_z && player.stat != DEAD)
@@ -100,7 +100,7 @@
 		for(var/datum/npc_ship_request/request in available_ship_requests)
 			if(request.request_requires_processing)
 				stop_normal_operations = request.do_request_process(src)
-		if(stop_normal_operations)
+		if(stop_normal_operations || is_player_controlled())
 			return
 		if(loc == target_loc)
 			pick_target_loc()

@@ -10,4 +10,6 @@
 	request_requires_processing = 1
 
 /datum/npc_ship_request/player_controlled/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source)
+	if(ship_source.hull > initial(ship_source.hull)/4) //Slowly reduce the hull over time to eventually start the lose_to_space processing
+		ship_source.hull--
 	return 1
