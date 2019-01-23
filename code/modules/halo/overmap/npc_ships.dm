@@ -45,7 +45,14 @@
 	generate_ship_name()
 	. = ..()
 
+/obj/effect/overmap/ship/npc_ship/proc/is_player_controlled()
+	for(var/datum/npc_ship_request/player_controlled/pc in available_ship_requests)
+		return 1
+	return 0
+
 /obj/effect/overmap/ship/npc_ship/proc/can_board() //So this sort of stuff can be overidden later down the line for things like cargo shuttles.
+	if(is_player_controlled())
+		return 1
 	if(hull < initial(hull)/4)
 		return 1
 	if(isnull(target_loc))
@@ -55,9 +62,12 @@
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
-	for(var/mob/player in GLOB.player_list)
-		if(player.z in map_z)
+	for(var/mob/living/player in GLOB.player_list)
+		if(player.z in map_z && player.stat != DEAD)
 			return //Don't disappear if there's people aboard.
+	for(var/obj/docking_umbilical/umbi in connectors)//Don't disappear if we're docked with something
+		if(umbi.current_connected)
+			return
 	for(var/z_level in map_z)
 		shipmap_handler.free_map(z_level)
 		map_z -= z_level
@@ -82,7 +92,6 @@
 	target_loc = locate(n_x,n_y,GLOB.using_map.overmap_z)
 
 /obj/effect/overmap/ship/npc_ship/process()
-	is_still() //A way to ensure umbilicals break when we move.
 	if(world.time >= unload_at && unload_at != 0)
 		lose_to_space()
 	if(hull > initial(hull)/4)
@@ -98,6 +107,7 @@
 
 			walk(src,get_dir(src,target_loc),move_delay)
 			dir = get_dir(src,target_loc)
+			is_still() //A way to ensure umbilicals break when we move.
 	else
 		target_loc = null
 		walk(src,0)
@@ -111,6 +121,8 @@
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)
 		projectiles_to_spawn += proj
+	if(is_player_controlled())
+		return
 	hull -= proj.damage
 	if(hull <= initial(hull)/4 && target_loc)
 		broadcast_hit(1)
