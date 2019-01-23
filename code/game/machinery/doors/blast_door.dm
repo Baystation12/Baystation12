@@ -220,6 +220,14 @@
 	maxhealth = 1000
 	block_air_zones = 1
 
+/obj/machinery/door/blast/regular/escape_pod
+	name = "Escape Pod release Door"
+
+/obj/machinery/door/blast/regular/escape_pod/Process()	
+	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
+		src.force_open()
+	. = ..()
+
 /obj/machinery/door/blast/regular/open
 	begins_closed = FALSE
 

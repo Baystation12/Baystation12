@@ -3713,8 +3713,8 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 8
 	},
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
+/obj/structure/bed/chair/office/comfy/blue{
+	icon_state = "comfyofficechair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -5012,8 +5012,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
+/obj/structure/bed/chair/office/comfy/blue{
+	icon_state = "comfyofficechair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -6556,8 +6556,8 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/blue/three_quarters,
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
+/obj/structure/bed/chair/office/comfy/blue{
+	icon_state = "comfyofficechair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -11551,13 +11551,14 @@
 	pixel_y = 6;
 	req_access = list(19)
 	},
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
-	dir = 1
-	},
 /obj/effect/floor_decal/scglogo{
 	tag = "icon-top-right";
 	icon_state = "top-right"
+	},
+/obj/structure/bed/chair/office/comfy/blue{
+	tag = "icon-comfyofficechair_preview (NORTH)";
+	icon_state = "comfyofficechair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11760,11 +11761,11 @@
 	pixel_y = 6;
 	req_access = list(19)
 	},
-/obj/structure/bed/chair/comfy/blue,
 /obj/effect/floor_decal/scglogo{
 	tag = "icon-bottom-right";
 	icon_state = "bottom-right"
 	},
+/obj/structure/bed/chair/office/comfy/blue,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "zi" = (

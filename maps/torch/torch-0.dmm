@@ -7992,8 +7992,8 @@
 /area/maintenance/substation/fifthdeck)
 "rc" = (
 /obj/machinery/power/sensor{
-	name = "Powernet Sensor - Fourth Deck Subgrid";
-	name_tag = "Fourth Deck Subgrid"
+	name = "Powernet Sensor - Fifth Deck Subgrid";
+	name_tag = "Fifth Deck Subgrid"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
