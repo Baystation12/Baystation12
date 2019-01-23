@@ -162,7 +162,8 @@ var/list/admin_verbs_server = list(
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity,
 	/client/proc/nanomapgen_DumpImage,
-	/client/proc/reload_whitelists
+	/client/proc/reload_whitelists,
+	/client/proc/adminmapswitch
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/getruntimelog,                     // allows us to access runtime logs to somebody,

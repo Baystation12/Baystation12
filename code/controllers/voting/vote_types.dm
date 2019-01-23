@@ -306,28 +306,12 @@
 	if(new_map == status_quo)
 		return
 
-	//switch over the world executable
-	fdel("baystation12.dmb")
-	fcopy("[new_map].dmb","baystation12.dmb")
-
-	//do some end server stuff
-	to_world("<span class='danger'>>World restarting due to mapswitch vote...</span>")
-
+	to_world("<span class='danger'>>World restarting to \'[new_map]\' map due to mapswitch vote...</span>")
 	feedback_set_details("end_error","map vote")
-	if(blackbox)	blackbox.save_all_data_to_sql()
-	sleep(50)
 	log_game("Rebooting due to mapswitch vote")
 
-	//formulate the command to manually restart the world
-	/*
-	var/exec_cmd = "DreamDaemon [world.name].dmb [world.port]"
-	for(var/cur_param in world.params)
-		exec_cmd += " -[cur_param]"
-	shell(exec_cmd)
-	*/
-
-	//just reboot as we've kept the same DMB name
-	world.Reboot()
+	sleep(50)
+	switch_maps(new_map)
 
 
 
