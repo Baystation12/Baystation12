@@ -60,7 +60,7 @@
 	return 0
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
-	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
+	if(hull > initial(hull)/4 && !is_player_controlled())//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
 	for(var/mob/living/player in GLOB.player_list)
 		if(player.z in map_z && player.stat != DEAD)
@@ -81,7 +81,8 @@
 	var/turf/start_turf = locate(x,y,z)
 	. = ..()
 	map_z.Cut()
-	forceMove(start_turf)
+	if(!isnull(start_turf))
+		forceMove(start_turf)
 	pick_target_loc()
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()

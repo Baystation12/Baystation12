@@ -4,6 +4,7 @@
 		qdel(request)
 	available_ship_requests.Cut()
 	available_ship_requests = list(/datum/npc_ship_request/player_controlled)
+	load_mapfile()
 
 /datum/npc_ship_request/player_controlled
 	request_requires_processing = 1
