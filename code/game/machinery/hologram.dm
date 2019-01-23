@@ -32,7 +32,7 @@ Possible to do for anyone motivated enough:
 var/const/HOLOPAD_MODE = RANGE_BASED
 
 /obj/machinery/hologram/holopad
-	name = "\improper AI holopad"
+	name = "\improper holopad"
 	desc = "It's a floor-mounted device for projecting holographic images."
 	icon_state = "holopad-B0"
 
@@ -190,7 +190,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
 			var/ai_text = text
-			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.			
+			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
 				if(speaking)
 					ai_text = speaking.scramble(text)
 				else
