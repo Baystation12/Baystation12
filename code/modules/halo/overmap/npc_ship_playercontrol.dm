@@ -3,7 +3,7 @@
 	for(var/datum/request in available_ship_requests)
 		qdel(request)
 	available_ship_requests.Cut()
-	available_ship_requests = list(/datum/npc_ship_request/player_controlled)
+	available_ship_requests = list(new /datum/npc_ship_request/player_controlled)
 	load_mapfile()
 
 /datum/npc_ship_request/player_controlled
