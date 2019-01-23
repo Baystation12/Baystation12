@@ -274,18 +274,60 @@
 
 /datum/vote/mapswitch
 	name = "mapswitch"
+	var/status_quo = "Do not switch"
+	var/list/map_options = list()
 
 /datum/vote/mapswitch/Initialize()
-	..()
+	. = ..()
 
 	if(!config.allow_map_switching)
 		disabled = 1
 		disable_reason = "disabled in config"
 
+/datum/vote/mapswitch/initiate_vote(var/initiator_key, var/automatic = 0)
+	choices = list()
+	var/list/Lines = file2list("switchable_maps")
+
+	if(!Lines)
+		to_world("ERROR: unable to find \'switchable_maps\'")
+
+	for(var/t in Lines)
+		if(t)
+			choices.Add(t)
+	choices.Add(status_quo)
+	reset_choices()
+
+	. = ..()
+
 /datum/vote/mapswitch/do_result()
-	var/datum/map/M = GLOB.all_maps[.[1]]
-	fdel("use_map")
-	text2file(M.path, "use_map")
+	. = ..()
+
+	var/new_map = .[1]
+	if(new_map == status_quo)
+		return
+
+	//switch over the world executable
+	fdel("baystation12.dmb")
+	fcopy("[new_map].dmb","baystation12.dmb")
+
+	//do some end server stuff
+	to_world("<span class='danger'>>World restarting due to mapswitch vote...</span>")
+
+	feedback_set_details("end_error","map vote")
+	if(blackbox)	blackbox.save_all_data_to_sql()
+	sleep(50)
+	log_game("Rebooting due to mapswitch vote")
+
+	//formulate the command to manually restart the world
+	/*
+	var/exec_cmd = "DreamDaemon [world.name].dmb [world.port]"
+	for(var/cur_param in world.params)
+		exec_cmd += " -[cur_param]"
+	shell(exec_cmd)
+	*/
+
+	//just reboot as we've kept the same DMB name
+	world.Reboot()
 
 
 
