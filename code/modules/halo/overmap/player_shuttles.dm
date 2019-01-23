@@ -3,6 +3,10 @@
 /obj/machinery/shuttle_spawner
 	name = "Shuttle Requisition Console"
 	desc = "Used to obtain a small transport shuttle for long or short range transportation."
+	icon = 'code/modules/halo/overmap/icons/consoles.dmi'
+	icon_state = "shuttle_req_console"
+	density = 1
+	anchored = 1
 	var/obj/effect/overmap/ship/npc_ship/ship_to_spawn
 	var/shuttle_refresh_time = 60 SECONDS
 	var/next_shuttle_at = 0
