@@ -2536,13 +2536,11 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/fourthdeck/forestarboard)
 "ie" = (
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
 	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/starboard)
 "ig" = (
@@ -2969,9 +2967,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
 "jX" = (
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/fourthdeck/port)
 "kg" = (
@@ -6850,9 +6846,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "wc" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/aft)
 "wd" = (
@@ -6896,9 +6890,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
 "wp" = (
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/fourthdeck/aft)
 "ww" = (
@@ -7162,9 +7154,7 @@
 /turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "wW" = (
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/fourthdeck/starboard)
 "wX" = (
@@ -8266,9 +8256,7 @@
 /area/maintenance/fourthdeck/aft)
 "By" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/port)
 "BH" = (
@@ -10190,13 +10178,11 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/laundry)
 "Ji" = (
-/obj/machinery/door/blast/regular{
-	name = "Escape Pod Release Door"
-	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
 	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/aft)
 "Jo" = (
