@@ -81,6 +81,12 @@
 
 	if(usr.incapacitated())
 		return 0
+	if(!istype(src)) // This verb is given to our holding clothing item and called on it, so src might not be the bowtie.
+		for(var/obj/item/clothing/accessory/bowtie/tie in accessories)
+			src = tie
+			break
+	if(!istype(src))
+		return
 	do_toggle(usr)
 
 /obj/item/clothing/accessory/bowtie/proc/do_toggle(mob/user)

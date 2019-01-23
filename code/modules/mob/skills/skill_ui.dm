@@ -118,6 +118,8 @@ The generic antag version.
 /datum/nano_module/skill_ui/antag/Topic(href, href_list)
 	if(..())
 		return 1
+	if(!skillset || !skillset.owner)
+		return 1 // This probably means that we are being deleted but fielding badly timed user input or similar.
 
 	if(href_list["add_skill"])
 		if(!can_choose())
