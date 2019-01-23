@@ -149,6 +149,7 @@ var/list/points_of_interest = list()
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
+	layer = TURF_LAYER
 	anchored = 1
 
 /obj/effect/overmap/sector/Initialize()

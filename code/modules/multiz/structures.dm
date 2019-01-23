@@ -160,6 +160,7 @@
 	name = "Stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
 	icon = 'icons/obj/stairs.dmi'
+	layer = TURF_LAYER
 	density = 0
 	opacity = 0
 	anchored = 1

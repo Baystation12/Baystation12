@@ -443,24 +443,25 @@
 "iA" = (/obj/machinery/mineral/stacking_unit_console{machinedir = 1},/turf/simulated/wall,/area/exo_research_facility/ground/interior/commsg)
 "iB" = (/obj/machinery/conveyor{dir = 1; icon_state = "conveyor0"; id = "mining_internal"; tag = "icon-conveyor0 (NORTH)"},/obj/machinery/mineral/input,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
 "iC" = (/obj/machinery/conveyor_switch/oneway{id = "mining_internal"; name = "mining conveyor"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
-"iD" = (/obj/machinery/conveyor{dir = 1; icon_state = "conveyor0"; id = "mining_internal"; tag = "icon-conveyor0 (NORTH)"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
-"iE" = (/obj/machinery/mineral/output,/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
-"iF" = (/obj/machinery/mineral/unloading_machine,/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
-"iG" = (/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/obj/machinery/mineral/input,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
-"iH" = (/obj/structure/inflatable/wall,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
-"iI" = (/obj/structure/inflatable/door,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
-"iJ" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
-"iK" = (/obj/structure/table/steel_reinforced,/obj/item/device/flashlight,/obj/item/device/flashlight,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
-"iL" = (/obj/machinery/floodlight,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
-"iM" = (/obj/structure/ore_box,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
-"iN" = (/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/wildss)
-"iO" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildsn)
-"iP" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildss)
-"iQ" = (/turf/simulated/open,/area/exo_research_facility/ground/exterior/Caves)
-"iR" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildss)
-"iS" = (/obj/effect/landmark/map_data{name = "VT9-042"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/wildsn)
-"iT" = (/turf/unsimulated/floor/rock2,/area/exo_research_facility/ground/exterior/Caves)
-"iU" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/Caves)
+"iD" = (/obj/machinery/suspension_gen,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
+"iE" = (/obj/machinery/conveyor{dir = 1; icon_state = "conveyor0"; id = "mining_internal"; tag = "icon-conveyor0 (NORTH)"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
+"iF" = (/obj/machinery/mineral/output,/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
+"iG" = (/obj/machinery/mineral/unloading_machine,/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
+"iH" = (/obj/machinery/conveyor{dir = 8; id = "mining_internal"},/obj/machinery/mineral/input,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/interior/commsg)
+"iI" = (/obj/structure/inflatable/wall,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
+"iJ" = (/obj/structure/inflatable/door,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
+"iK" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
+"iL" = (/obj/structure/table/steel_reinforced,/obj/item/device/flashlight,/obj/item/device/flashlight,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
+"iM" = (/obj/machinery/floodlight,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
+"iN" = (/obj/structure/ore_box,/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/Caves)
+"iO" = (/turf/simulated/floor/asteroid/planet,/area/exo_research_facility/ground/exterior/wildss)
+"iP" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildsn)
+"iQ" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildss)
+"iR" = (/turf/simulated/open,/area/exo_research_facility/ground/exterior/Caves)
+"iS" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/wildss)
+"iT" = (/obj/effect/landmark/map_data{name = "VT9-042"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/wildsn)
+"iU" = (/turf/unsimulated/floor/rock2,/area/exo_research_facility/ground/exterior/Caves)
+"iV" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/ground/exterior/Caves)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -604,13 +605,13 @@ aaaeaeaeafacacacacacadaeaeaeaeaeaeaeaeafacacacacacacacacacacacacaaacacaaacacaMaa
 aaaeaeaeafacacacacacadaeaeaeaeaeaeaeaeafacacacacacacaMaMacacacacacacacacacacacacacacacacacacacaahuhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhfhfhfhfhfhfhvhvhvhvhvhfhviiiiiiiiiiiiiiiihvhvhvhfhfhfhfhghkhfhfhfhfhfhfhwijhGhGhGidhGikhGhThwhwilhwhwhwimhGhwhfhghghghghghghghghghghghghfhfhfhfhfhfhf
 aaaeaeaedvdwdwdwdwdwaOaeaeaeaeaeaeaeaeafacacacaMaMaMaMaMaccUacacacacacacacacacacacacacacacacacaahuhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhvhfhfhghghghghfhfhfhfhfhfhfhfiiinioipiqirisiiitititiuiuiuiuiuiviviuiuiuiuiuhwhwhwhwhwhwhwhwhwhwhwhwhwhwhfiwixixiwhfhghghghghghghkhghghghghghghfhfhfhfhfhf
 aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacaMacacacacacacacaMacacacacacacacacacacacacacacacaahuhvhvhvhvhvhvhvhvhvhvhvhvhvhvhfhfhfhfhfhfhfhfhfhfhfhfhghghghghghghghfhfhfhfhfhfiiiyiziviAiviviihvhfhfhfhfhfhfhfhghghfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfixixixiwhfhghghfhghghghghghghfhghghfhfhfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacaMacacacacacacacacacacacacacaMacacacacacacacacacaahuhvhvhvhvhvhvhvhvhvhvhvhvhfhfhfhghghghghghghghghghghghghghghghghghghghghfhfhfhfiiiBiCiviviviviihvhvhfhfhfhfhfhfhghghfhfiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwixixixixhfhfhfhfhfhfhfhfhfhfhfhghghghfhfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacaMaMaMacacacacacacacacacacacacacacacacacacacacacaaaahvhvhvhvhvhfhfhfhfhfhfhfhfhfhghghghkhghghghghghghghghghghghfhfhfhghghghfhfhfhfiiiDiEiFiGiviviihvhvhfhfhfhfhfhfhghghfiwiwiwiwiwiwixixixixixixixiwixixixiwiwiwixixixixixixixhfhfhfhfhfhfhfhfhghghfhfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacaMaMacacacacacacacacacacacacacacacacaMaMacacaaaahfhfhfhfhfhfhghghghghfhfhfhfhghghghghghghghghfhfhfhfhghghghfhfhfhghghghfhfhfhfhfiHiHiHiHiIiHhfhfhfhfhfhfhfhfhghghfhfiwixixixixixixixixixixixiwiwixixixixiwiwiwixixixixixixixixhfhfhfhfhfhghghghghfhfhfhfhf
-aaaeaeaeaeaeaeaeaCaeaeaeaeaeaeaeaeaeaeafacacacacacacaMaMacacacacacacacacacacacacacacacacacacacacaahghghghghfhghfhfhfhghghfhfhghghghghghghghghfhfhfhfhfhfhghghfhfhfhghghghfhfhfhfhfiHiJiKiLhghghfhfhfhghfhfhfhfhghghfhfiwixixixixixixixixixixixixixixixixixixixixixixiwixixixiwixixixhfhfhfhfhghghghfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacacacacacacacacaaaaacacacacacacacacacacacachdhdhghghfhghghghfhfhghghghfhghghkhghghghghghghfhfhfhfhfhfhfhghghghfhfhghghghghfhgiHiHiMhghghghghgiHhghghghghghghghghghgixiNixixixixixixiwixixixixixixixixixixixixiwiwiwixixixixixixixiNiNhghghghghghfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaCaCaeafacacacacacacacacacaaacacaaaaaaaaaaaaacacacaccUacacacaciOhdhghghghghghghghghghghghghghghghghfhfhghghghfhfhfhfhfhfhfhghghghghfhghghghghghgiIhghghghghghghgiIhghghghghghghghghghgiNixixixixixixixixixixixixixixixiPixixixixixixixixixixixixixixiNhghghghghfhfhfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacacaaacaaaaaaaaaaaaaaaaaaacacacacacacacacacacachghghkhghghghghghfhghghghghghghfhfhfhfhghghghfhfhfhfhfhghghghkhghghkhghghghghgiHhghghghgiQiQhgiHhghghfhghfhghghghghgiwixixixixixixixixixiwixixixixixixixixixixixixixixiRixixixixiwixixhghghghfhfhfhfhfhfhf
-aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacachghghghghghghghghfhghghghghghghghfhfhfhfhghghghghghghghghghghghghghghghfhfhfhfhfhfhfhfhfhfhfhfiHhghghfhfhfhfhfhghfhfiwiwiwixixiwixixixixixixixixixixixixixixixixixixixixixixixixixiwixhfhfhfhfhfhfhfhfhfhf
-iSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahfhfhfhfhfhfhfhfhfhfhfiTiTiTiThfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfiUhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfiwiwiwiwiwiwixixixixixiRixixixixixixixixixixixixixixixhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacaMacacacacacacacacacacacacacaMacacacacacacacacacaahuhvhvhvhvhvhvhvhvhvhvhvhvhfhfhfhghghghghghghghghghghghghghghghghghghghghfhfhfhfiiiBiCiviviviDiihvhvhfhfhfhfhfhfhghghfhfiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwixixixixhfhfhfhfhfhfhfhfhfhfhfhghghghfhfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacaMaMaMacacacacacacacacacacacacacacacacacacacacacaaaahvhvhvhvhvhfhfhfhfhfhfhfhfhfhghghghkhghghghghghghghghghghghfhfhfhghghghfhfhfhfiiiEiFiGiHiviDiihvhvhfhfhfhfhfhfhghghfiwiwiwiwiwiwixixixixixixixiwixixixiwiwiwixixixixixixixhfhfhfhfhfhfhfhfhghghfhfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacaMaMacacacacacacacacacacacacacacacacaMaMacacaaaahfhfhfhfhfhfhghghghghfhfhfhfhghghghghghghghghfhfhfhfhghghghfhfhfhghghghfhfhfhfhfiIiIiIiIiJiIhfhfhfhfhfhfhfhfhghghfhfiwixixixixixixixixixixixiwiwixixixixiwiwiwixixixixixixixixhfhfhfhfhfhghghghghfhfhfhfhf
+aaaeaeaeaeaeaeaeaCaeaeaeaeaeaeaeaeaeaeafacacacacacacaMaMacacacacacacacacacacacacacacacacacacacacaahghghghghfhghfhfhfhghghfhfhghghghghghghghghfhfhfhfhfhfhghghfhfhfhghghghfhfhfhfhfiIiKiLiMhghghfhfhfhghfhfhfhfhghghfhfiwixixixixixixixixixixixixixixixixixixixixixixiwixixixiwixixixhfhfhfhfhghghghfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacacacacacacacacaaaaacacacacacacacacacacacachdhdhghghfhghghghfhfhghghghfhghghkhghghghghghghfhfhfhfhfhfhfhghghghfhfhghghghghfhgiIiIiNhghghghghghgiIhghghghghghghghghgixiOixixixixixixiwixixixixixixixixixixixixiwiwiwixixixixixixixiOiOhghghghghghfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaCaCaeafacacacacacacacacacaaacacaaaaaaaaaaaaacacacaccUacacacaciPhdhghghghghghghghghghghghghghghghghfhfhghghghfhfhfhfhfhfhfhghghghghfhghghghghghgiJhghghghghghghghgiJhghghghghghghghghgiOixixixixixixixixixixixixixixixiQixixixixixixixixixixixixixixiOhghghghghfhfhfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacacaaacaaaaaaaaaaaaaaaaaaacacacacacacacacacacachghghkhghghghghghfhghghghghghghfhfhfhfhghghghfhfhfhfhfhghghghkhghghkhghghghghgiIhghghghgiRiRhghgiIhghfhghfhghghghghgiwixixixixixixixixixiwixixixixixixixixixixixixixixiSixixixixiwixixhghghghfhfhfhfhfhfhf
+aaaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacachghghghghghghghghfhghghghghghghghfhfhfhfhghghghghghghghghghghghghghghghfhfhfhfhfhfhfhfhfhfhfhfhgiIhghfhfhfhfhfhghfhfiwiwiwixixiwixixixixixixixixixixixixixixixixixixixixixixixixixiwixhfhfhfhfhfhfhfhfhfhf
+iTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahfhfhfhfhfhfhfhfhfhfhfiUiUiUiUhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfiVhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfiwiwiwiwiwiwixixixixixiSixixixixixixixixixixixixixixixhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfhf
 "}
