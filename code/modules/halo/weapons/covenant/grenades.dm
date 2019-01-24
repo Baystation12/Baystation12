@@ -10,7 +10,7 @@
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
-	if(istype(h) && istype(h.species,/datum/species/unggoy))
+	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))
 		playsound(h.loc, 'code/modules/halo/sounds/unggoy_grenade_throw.ogg', 100, 1)
 	. = ..()
 
