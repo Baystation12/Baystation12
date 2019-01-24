@@ -299,3 +299,28 @@
 /obj/item/weapon/storage/box/m5
 	name = "box of 5mm M443 magazines"
 	startswith = list(/obj/item/ammo_magazine/m5 = 7)
+
+//SDSS PROJECTILE
+/obj/item/projectile/SDSS_proj
+	name = "hard sound wave"
+	desc = "It's a wave of sound that's also suprisingly dense."
+	step_delay = 0.1
+	icon = null //No icon on purpose, it's a sound wave.
+	icon_state = ""
+	damtype = PAIN
+	damage = 15
+	//NOTE: Life() calls happen every two seconds, and life() reduces dizziness by one
+	var/stun_time = 2 //This is in seconds.
+	var/suppress_time = 4
+	var/disorient_time = 6
+
+/obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)
+	. = ..()
+	if(!istype(L) || . == 0)
+		return 0
+
+	L.Stun(stun_time/2) // /2 due to the times being in seconds and life() ticks being every 2 seconds.
+	L.confused += disorient_time /2
+	shake_camera(L,suppress_time,1)
+	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
+	return 1
