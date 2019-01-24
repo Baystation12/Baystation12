@@ -120,3 +120,12 @@
 	else
 		icon_state = "innie_M392_unloaded"
 	. = ..()
+
+/obj/item/weapon/gun/energy/SDSR_10
+	name = "SDSR-10"
+	desc = "The Sonic Dispersion Sniper Rifle is a supposed prototype of an ONI Hard Sound Rifle. This prototype has a greatly decreased effectiveness compared to the final product. Construction blueprints were recovered from an ONI prowler. 10 seconds recharge time."
+	fire_sound = 'code/modules/halo/sounds/sound_rifle_firesound.ogg'
+	self_recharge = 1
+	recharge_time = 5 //10 seconds recharge time.
+	max_shots = 1
+	projectile_type = /obj/item/projectile/SDSS_proj
