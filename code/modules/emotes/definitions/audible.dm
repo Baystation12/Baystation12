@@ -132,10 +132,25 @@
 	key = "giggle"
 	emote_message_3p = "USER giggles."
 
+/decl/emote/audible/grunt
+	key = "grunt"
+	emote_message_3p = "USER grunts."
+
 /decl/emote/audible/scream
 	key = "scream"
 	emote_message_3p = "USER screams!"
 
-/decl/emote/audible/grunt
-	key = "grunt"
-	emote_message_3p = "USER grunts."
+/decl/emote/audible/painscream
+	key = "painscream"
+	emote_message_3p = "USER screams in pain!"
+
+/decl/emote/audible/painscream/do_extra(var/atom/user, var/atom/target)
+	var/mob/living/carbon/human/h = user
+	if(!istype(h))
+		return
+	var/datum/species/s = h.species
+	if(isnull(s) || s.pain_scream_sounds.len == 0)
+		return
+	var/scream_sound = pick(s.pain_scream_sounds)
+	playsound(user.loc, scream_sound,100,1,7)
+	return
