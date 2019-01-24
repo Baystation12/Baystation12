@@ -1102,6 +1102,7 @@
 #include "code\modules\admin\verbs\getlogs.dm"
 #include "code\modules\admin\verbs\grief_fixers.dm"
 #include "code\modules\admin\verbs\mapping.dm"
+#include "code\modules\admin\verbs\mapswitch.dm"
 #include "code\modules\admin\verbs\massmodvar.dm"
 #include "code\modules\admin\verbs\modifyvariables.dm"
 #include "code\modules\admin\verbs\playsound.dm"
@@ -2772,6 +2773,7 @@
 #include "maps\~mapsystem\maps_jobs.dm"
 #include "maps\~mapsystem\maps_unit_testing.dm"
 #include "maps\~mapsystem\material_recipes.dm"
+#include "maps\~mapsystem\switch_maps.dm"
 #include "maps\~unit_tests\unit_testing.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
