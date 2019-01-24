@@ -319,8 +319,8 @@
 	if(!istype(L) || . == 0)
 		return 0
 
-	L.Stun(stun_time/2) // /2 due to the times being in seconds and life() ticks being every 2 seconds.
-	L.confused += disorient_time /2
-	shake_camera(L,suppress_time,1)
+	L.Stun(stun_time)
+	L.confused += disorient_time
+	shake_camera(L,disorient_time,1)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
 	return 1
