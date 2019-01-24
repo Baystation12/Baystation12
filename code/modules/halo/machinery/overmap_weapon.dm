@@ -13,6 +13,9 @@
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
 
+/obj/machinery/overmap_weapon_console/ex_act(var/severity)
+	return
+
 /obj/machinery/overmap_weapon_console/verb/toggle_projectile_tracking()
 	set name = "Toggle Ordinance Visual Tracking"
 	set desc = "Toggle the usage of long-range ordinance tracking sensors."
@@ -32,6 +35,9 @@
 
 /obj/machinery/overmap_weapon_console/attack_hand(var/mob/user)
 	scan_linked_devices()
+	if(!powered())
+		visible_message("<span class = 'notice'>[name] beeps a no-power warning.</span>")
+		return
 	equip_aim_tool(user)
 
 /obj/machinery/overmap_weapon_console/proc/scan_linked_devices() //Overriden on a weapon-by-weapon basis
@@ -121,6 +127,9 @@
 	scan_linked_devices()
 	if(!can_fire(target,user,click_params))
 		return 0
+	if(!powered())
+		visible_message("<span class = 'notice'>[name] beeps a no-power warning.</span>")
+		return
 	var/obj/overmap_sector = map_sectors["[z]"]
 	var/directly_above = 0
 	if(target.loc == overmap_sector.loc)
