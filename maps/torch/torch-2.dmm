@@ -9045,45 +9045,20 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ai_monitored/storage/eva)
 "td" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 2
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d3starboardnacelle"
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
 "te" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/sign/warning/fire{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d3starboardnacelle"
-	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
 "tf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 4
-	},
-/obj/structure/grille,
+/obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
 	id = "d3starboardnacelle";
@@ -17034,25 +17009,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_eva)
-"Mi" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d3portnacelle"
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Mj" = (
 /obj/machinery/door/airlock/sol{
 	name = "Diplomatic Quarters"
@@ -17382,21 +17338,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
-"Ni" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d3portnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Nj" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
@@ -17623,25 +17564,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
-"Of" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d3starboardnacelle"
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/turf/simulated/floor/reinforced,
-/area/thruster/d3starboard)
 "Og" = (
 /obj/structure/table/standard,
 /obj/item/weapon/paper_bin{
@@ -17673,22 +17595,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ai_monitored/storage/eva)
-"Oi" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d3portnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3port)
 "Oj" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/steel,
@@ -17986,21 +17892,6 @@
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
-"Pg" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d3starboardnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3starboard)
 "Ph" = (
 /obj/machinery/light{
 	dir = 1
@@ -18308,20 +18199,10 @@
 /turf/space,
 /area/space)
 "Qi" = (
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d3portnacelle"
-	},
 /obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "Qj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -18614,39 +18495,15 @@
 "Rf" = (
 /turf/simulated/floor/wood,
 /area/crew_quarters/gym)
-"Rg" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d3starboardnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d3starboard)
 "Rh" = (
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "Ri" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+/obj/structure/sign/warning/fire{
+	dir = 2
 	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d3portnacelle"
-	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "Rl" = (
 /obj/effect/floor_decal/industrial/hatch,
@@ -18917,19 +18774,11 @@
 /area/space)
 "Si" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced,
+/obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
 	id = "d3portnacelle"
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/grille,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Sj" = (
@@ -50144,9 +49993,9 @@ Jh
 zf
 KO
 KP
-Of
-Pg
-Rg
+KP
+KP
+KP
 bd
 aa
 aa
@@ -50174,9 +50023,9 @@ aa
 aa
 aa
 pI
-Mi
-Ni
-Oi
+La
+La
+La
 La
 Lo
 Jj
