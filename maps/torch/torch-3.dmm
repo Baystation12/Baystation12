@@ -2816,6 +2816,7 @@
 	req_one_access = list(11,24)
 	},
 /obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/plastic/ten,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "gi" = (

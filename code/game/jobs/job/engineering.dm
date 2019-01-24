@@ -41,18 +41,3 @@
 	alt_titles = list("Maintenance Technician","Engine Technician","Electrician",
 		"Atmospheric Technician" = /decl/hierarchy/outfit/job/engineering/atmos)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
-
-/datum/job/atmos
-	title = "Atmospheric Technician"
-	department = "Engineering"
-	department_flag = ENG
-
-	total_positions = 0
-	spawn_positions = 0
-	supervisors = "the chief engineer"
-	selection_color = "#5b4d20"
-	economic_power = 5
-	minimal_player_age = 7
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
-	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
-	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos

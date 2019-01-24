@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Adrenaline now does some heart damage if used to restart the heart."

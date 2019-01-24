@@ -382,8 +382,8 @@
 
 	//Handle job slot/tater cleanup.
 	if(occupant.mind)
-		var/job = occupant.mind.assigned_role
-		job_master.ClearSlot(job)
+		if(occupant.mind.assigned_job)
+			occupant.mind.assigned_job.clear_slot()
 
 		if(occupant.mind.objectives.len)
 			occupant.mind.objectives = null

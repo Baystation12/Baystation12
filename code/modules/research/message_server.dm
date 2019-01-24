@@ -142,7 +142,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		if(!pda)
 			continue
 
-		var/datum/job/J = job_master.GetJob(H.get_authentification_rank())
+		var/datum/job/J = SSjobs.get_by_title(H.get_authentification_rank())
 		if(!J)
 			continue
 

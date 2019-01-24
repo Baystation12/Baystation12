@@ -81,9 +81,10 @@ SUBSYSTEM_DEF(ticker)
 	collect_minds()
 	equip_characters()
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
-		if(!H.mind || player_is_antag(H.mind, only_offstation_roles = 1) || !job_master.ShouldCreateRecords(H.mind.assigned_role))
-			continue
-		CreateModularRecord(H)
+		if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
+			var/datum/job/job = SSjobs.get_by_title(H.mind.assigned_role)
+			if(job && job.create_record)
+				CreateModularRecord(H)
 
 	callHook("roundstart")
 
@@ -236,14 +237,14 @@ Helpers
 		return
 
 	//Deal with jobs and antags, check that we can actually run the mode.
-	job_master.ResetOccupations()
+	SSjobs.reset_occupations()
 	mode_datum.create_antagonists()
 	mode_datum.pre_setup()
-	job_master.DivideOccupations(mode_datum) // Apparently important for new antagonist system to register specific job antags properly.
+	SSjobs.divide_occupations(mode_datum) // Apparently important for new antagonist system to register specific job antags properly.
 
 	if(mode_datum.startRequirements())
 		mode_datum.fail_setup()
-		job_master.ResetOccupations()
+		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
 		return
 
@@ -286,7 +287,7 @@ Helpers
 			if(player.mind.assigned_role == "Captain")
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
-				job_master.EquipRank(player, player.mind.assigned_role, 0)
+				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
 				equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in GLOB.player_list)

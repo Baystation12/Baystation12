@@ -1,15 +1,13 @@
 /datum/submap
 	var/name
+	var/pref_name
 	var/decl/submap_archetype/archetype
 	var/list/jobs
 	var/associated_z
-	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/station/offstation
 
 /datum/submap/New(var/existing_z)
 	SSmapping.submaps[src] = TRUE
 	associated_z = existing_z
-	if(ispath(skill_setter))
-		skill_setter = new skill_setter
 
 /datum/submap/Destroy()
 	SSmapping.submaps -= src
@@ -28,6 +26,9 @@
 		return
 
 	archetype = _archetype
+	if(!pref_name)
+		pref_name = archetype.descriptor
+
 	testing("Starting submap setup - '[name]', [archetype], [associated_z]z.")
 
 	// Instantiate our job list.

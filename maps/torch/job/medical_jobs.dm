@@ -129,7 +129,7 @@
 	supervisors = "the Chief Medical Officer and the Corporate Liaison"
 	selection_color = "#013d3b"
 	economic_power = 6
-	alt_titles = list()
+	alt_titles = null
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/biomech
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
