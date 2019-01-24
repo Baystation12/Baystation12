@@ -320,7 +320,7 @@
 		return 0
 
 	L.Stun(stun_time)
-	L.confused += disorient_time
-	shake_camera(L,disorient_time,1)
+	L.confused += disorient_time/2
+	shake_camera(L,disorient_time,2)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
 	return 1
