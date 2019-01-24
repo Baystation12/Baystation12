@@ -14689,45 +14689,14 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "bbb" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 2
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d1starboardnacelle"
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced,
-/area/thruster/d1starboard)
-"bcb" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d1starboardnacelle"
-	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d1starboard)
 "bdb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 4
-	},
-/obj/structure/grille,
+/obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
 	id = "d1starboardnacelle"
@@ -14745,56 +14714,6 @@
 "bdL" = (
 /obj/structure/lattice,
 /turf/simulated/floor/reinforced/hydrogen,
-/area/thruster/d1starboard)
-"beb" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d1starboardnacelle"
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/turf/simulated/floor/reinforced,
-/area/thruster/d1starboard)
-"bfb" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d1starboardnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d1starboard)
-"bgb" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d1starboardnacelle"
-	},
-/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "bhb" = (
 /obj/machinery/door/blast/regular{
@@ -15118,40 +15037,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/security/detectives_office)
-"bub" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d1portnacelle"
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/turf/simulated/floor/reinforced,
-/area/thruster/d1port)
-"bvb" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d1portnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d1port)
 "bvI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -15170,22 +15055,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/surgery)
-"bwb" = (
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "d1portnacelle"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d1port)
 "bxz" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
@@ -15206,50 +15075,22 @@
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/surgery)
 "byb" = (
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d1portnacelle"
-	},
 /obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "bzb" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular{
-	dir = 1;
-	id = "d1portnacelle"
-	},
-/turf/simulated/floor/reinforced,
+/obj/structure/sign/warning/fire,
+/turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "bAb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/structure/window/phoronreinforced,
+/obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
 	id = "d1portnacelle"
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
-	},
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
-/obj/structure/grille,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "bBb" = (
@@ -59998,7 +59839,7 @@ vci
 acn
 adb
 adF
-bcb
+aet
 afw
 agw
 aet
@@ -60403,9 +60244,9 @@ bqv
 kfG
 adH
 aet
-beb
-bfb
-bgb
+aet
+aet
+aet
 abN
 aaa
 aaa
@@ -60437,9 +60278,9 @@ aaa
 aaa
 aaa
 xPU
-bub
-bvb
-bwb
+aPq
+aPq
+aPq
 wEw
 aTn
 rYd
