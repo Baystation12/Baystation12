@@ -35,7 +35,7 @@
 		list(mode_name="short bursts", 	burst=5, fire_delay=null, move_delay=6,    burst_accuracy=list(-1,-1,-2,-2,-3), dispersion=list(0.6, 1.0, 1.5, 1.5, 1.9)),
 		)
 
-	attachment_slots = list("sight","barrel","underbarrel rail","upper rail","upper stock", "stock")
+	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
 	attachments_on_spawn = list()
 
 /obj/item/weapon/gun/projectile/ma5b_ar/New()

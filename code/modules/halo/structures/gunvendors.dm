@@ -59,6 +59,14 @@
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
+	products = list(\
+	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
+	/obj/item/weapon_attachment/ma5_grip = 3,
+	/obj/item/weapon_attachment/ma5_upper_railed =3,
+	/obj/item/weapon_attachment/barrel/suppressor = 2,
+	/obj/item/weapon_attachment/sight/ma5_scope = 3,
+	/obj/item/weapon_attachment/light/ma5_flashlight = 5,
+	/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun = 2)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
 
 /obj/machinery/vending/armory/odstvend

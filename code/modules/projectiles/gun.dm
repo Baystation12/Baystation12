@@ -614,7 +614,7 @@
 			to_chat(usr,"<span class = 'notice'>This is an error in attachment-defines, please report to the github.</span>")
 			return
 		wep.alt_fire_active = !wep.alt_fire_active
-		to_chat(usr,"<span class = 'notice'>You toggle [wep.name] to [wep.alt_fire_active ? "off":"on"]</span>")
+		to_chat(usr,"<span class = 'notice'>You toggle [wep.name] to [wep.alt_fire_active ? "on":"off"]</span>")
 
 //make sure accuracy and screen_shake are reset regardless of how the item is unzoomed.
 /obj/item/weapon/gun/zoom()

@@ -24,7 +24,9 @@
 		"MA5 underbarrel grip" = "MA5-Grip-Compact",
 		"underslung shotgun" = "MA5-Shotgun",
 		"MA5 basic upper" = "MA5-Top-Basic",
-		"MA5 railed upper" = "MA5-Top-Rails")
+		"MA5 railed upper" = "MA5-Top-Rails",
+		"underslung grenade launcher" = "underslung grenade launcher",
+		"flashlight attachment" = "MA5-Grip-Basic-FlashlightOff")
 
 	weapon_pixel_offsets = list(\
 	"Suppressor" = list(0,0),
@@ -36,7 +38,9 @@
 	"MA5 underbarrel grip" = list(0,0),
 	"underslung shotgun" = list(0,0),
 	"MA5 basic upper" = list(0,0),
-	"MA5 railed upper" = list(0,0)
+	"MA5 railed upper" = list(0,0),
+	"underslung grenade launcher" = list(0,0),
+	"flashlight attachment" = list(0,0)
 	)
 
 	attribute_modifications = list(\
@@ -46,7 +50,9 @@
 		"MA5 basic stock butt" = list(0,0,0),
 		"MA5 extended stock butt" = list(-0.25,0,0.1),
 		"MA5 underbarrel grip" = list(-0.25,0,0.1),
-		"underslung shotgun" = list(0.5,0,0.1),
+		"underslung shotgun" = list(0.5,0,0.2),
 		"MA5 basic upper" = list(0,0,0),
-		"MA5 railed upper" = list(0,0,0.1)
+		"MA5 railed upper" = list(0,0,0.1),
+		"underslung grenade launcher" = list(0,0,0,2),
+		"flashlight attachment" = list(0,0,0.1)
 		)

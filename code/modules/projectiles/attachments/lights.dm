@@ -12,3 +12,7 @@
 
 /obj/item/weapon_attachment/light/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 	gun.verbs -= /obj/item/weapon/gun/proc/toggle_attachment_light
+
+/obj/item/weapon_attachment/light/ma5_flashlight
+	name = "flashlight attachment"
+	icon_state = "MA5-Grip-Basic-FlashlightOff"
