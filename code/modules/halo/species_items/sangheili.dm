@@ -447,6 +447,35 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "ranger_gloves_obj"
 	item_state = "ranger_gloves"
+//DONATOR GEAR
+
+
+/obj/item/clothing/head/helmet/sangheili/pantas
+	name = "Sangheili Helmet (Berzerker)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "pantas_helm_obj"
+	item_state = "pantas_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/pantas
+	name = "Sangheili Combat Harness (Berzerker)"
+	icon_state = "pantas_chest_obj"
+	item_state = "pantas_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/pantas
+	name = "Sanghelli Leg Armour (Berzerker)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas_legs_obj"
+	item_state = "pantas_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/pantas
+	name = "Sanghelli Combat Gauntlets (Berzerker)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas_gloves_obj"
+	item_state = "pantas_gloves"
+
+//END DONATOR GEAR
 
 //Organ Defines + misc//
 
