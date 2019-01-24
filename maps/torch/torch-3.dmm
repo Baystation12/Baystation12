@@ -10242,16 +10242,17 @@
 /area/engineering/atmos)
 "xF" = (
 /obj/structure/table/steel,
-/obj/item/organ/internal/posibrain,
-/obj/item/organ/internal/posibrain,
-/obj/item/organ/internal/posibrain,
-/obj/item/device/robotanalyzer,
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Robotics - Lower"
 	},
+/obj/machinery/cell_charger,
+/obj/item/organ/internal/posibrain,
+/obj/item/organ/internal/posibrain,
+/obj/item/organ/internal/posibrain,
+/obj/item/device/robotanalyzer,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "xG" = (
