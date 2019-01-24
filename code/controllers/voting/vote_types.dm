@@ -173,14 +173,7 @@
 	. = ..()
 
 	if(.[1] == "Initiate Crew Transfer")
-		//init_autotransfer()
-
-		//just restart for now
-		feedback_set_details("end_error","crew transfer vote")
-		if(blackbox)	blackbox.save_all_data_to_sql()
-		sleep(50)
-		log_game("Rebooting due to crew transfer vote")
-		world.Reboot()
+		init_autotransfer()
 
 	else if(.[1] == "Add Antagonist")
 		spawn(10)
@@ -300,6 +293,8 @@
 
 /datum/vote/custom
 	name = "custom"
+	disabled = 1
+	disable_reason = "Admin only"
 
 /datum/vote/custom/get_announce_text(var/automatic, var/initiator)
 	. = ..(automatic, initiator)

@@ -7,7 +7,7 @@
 //Medical ship headsets
 
 /obj/item/device/radio/headset/medship
-	ks2type = /obj/item/device/encryptionkey/medship
+	ks1type = /obj/item/device/encryptionkey/medship
 
 //insurrectionist headset
 /obj/item/device/radio/headset/insurrection
@@ -15,7 +15,7 @@
 
 //URF Commando headset
 /obj/item/device/radio/headset/commando
-	ks2type = /obj/item/device/encryptionkey/urfccom
+	ks1type = /obj/item/device/encryptionkey/urfccom
 
 //unsc crew headset
 /obj/item/device/radio/headset/unsc
@@ -65,7 +65,7 @@
 
 //Oni headset
 /obj/item/device/radio/headset/oni
-	ks2type = /obj/item/device/encryptionkey/onicom
+	ks1type = /obj/item/device/encryptionkey/onicom
 
 //spartan headset
 /obj/item/device/radio/headset/spartan_oprf

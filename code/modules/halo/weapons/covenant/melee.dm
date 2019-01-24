@@ -77,17 +77,18 @@
 		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
 		var/image/user_image = image(user)
 		user_image.dir = user.dir
-		for(var/i = 0 to 1)
+		for(var/i = 0 to get_dist(user,target))
 			var/obj/after_image = new /obj/effect/esword_path
 			if(i == 0)
 				after_image.loc = user.loc
 			else
 				after_image.loc = get_step(user,get_dir(user,target))
+				if(!user.Move(after_image.loc))
+					break
 			after_image.dir = user.dir
 			after_image.overlays += user_image
 			spawn(5)
 				qdel(after_image)
-		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
 		if(user.Adjacent(target) && ismob(target))
 			attack(target,user)
 		next_leapwhen = world.time + LUNGE_DELAY

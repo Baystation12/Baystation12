@@ -15,6 +15,7 @@
 	var/list/optional_gases = list("hydrogen","carbon_dioxide")
 	var/list/smoke_reagent_types = list(/datum/reagent/water)
 	var/emit_temperature = 313
+	layer = TURF_LAYER + 0.5
 
 /obj/structure/geyser/New()
 	. = ..()

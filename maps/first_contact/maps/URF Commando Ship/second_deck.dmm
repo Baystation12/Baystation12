@@ -148,6 +148,7 @@
 "cR" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
 "cS" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
 "cT" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/structure/closet/wall_medical{pixel_y = -32},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercoreaux)
+"SO" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Thorn"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -209,5 +210,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

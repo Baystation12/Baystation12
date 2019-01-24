@@ -29,6 +29,8 @@
 	available_ship_requests = newlist(/datum/npc_ship_request/halt,/datum/npc_ship_request/fire_on_target)
 
 /obj/effect/overmap/ship/npc_ship/combat/proc/fire_at_target()
+	if(is_player_controlled())
+		return
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
@@ -45,6 +47,8 @@
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
 		return
+	if(is_player_controlled())
+		return ..()
 	if(target && (target in view(7,src)))
 		if(world.time > next_fireat)
 			var/obj/effect/overmap/ship/npc_ship/targ_ship = target

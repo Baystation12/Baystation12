@@ -232,6 +232,7 @@
 "ex" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "ey" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "ez" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eA" = (/obj/effect/landmark/map_data{name = "New New Antarctica"},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/east_dorms)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -283,5 +284,5 @@ bJbJbJbJbJbJbJbJbMeaebdjbMbJbJbJbJbJbJbJdidididicbcbcbcbcbcbcbcacacacacbcmeceded
 bJbJbJbJbJbJbJbJbMdtejekbMbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacbccccdBelemeneoepeqerdDcbcaca
 bJbJbJbJbJbJbJbJbMbMbMbMbMbJbJesbJbJbJbJbJbJbJbJcacacacacacacacacacacacbcmcceteueuevewexeyezeycbcaca
 bJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacbcbcbcbcbcbcbcbcbcbcbcbcbcaca
-bJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacacacacacacacacacacacacacacaca
+eAbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJbJcacacacacacacacacacacacacacacacacacacacacacacacacaca
 "}
