@@ -6661,6 +6661,10 @@
 /obj/item/clothing/under/rank/roboticist/skirt,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
+"auY" = (
+/obj/machinery/light,
+/turf/simulated/floor/reinforced,
+/area/rnd/misc_lab)
 "avb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -29765,10 +29769,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
-"sgl" = (
-/obj/machinery/light,
-/turf/simulated/floor/reinforced,
-/area/rnd/misc_lab)
 "shb" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -56793,7 +56793,7 @@ qRb
 rjb
 ryb
 sqb
-sgl
+auY
 aHQ
 aTe
 aTP
