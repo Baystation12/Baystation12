@@ -151,6 +151,10 @@
 	var/datum/species/s = h.species
 	if(isnull(s) || s.pain_scream_sounds.len == 0)
 		return
-	var/scream_sound = pick(s.pain_scream_sounds)
-	playsound(user.loc, scream_sound,100,1,7)
+	var/scream_sound
+	if(s.scream_sounds_female.len > 0 && h.gender == FEMALE)
+		scream_sound = pick(s.scream_sounds_female)
+	else
+		scream_sound = pick(s.pain_scream_sounds)
+	playsound(user.loc, scream_sound,50,1,7)
 	return
