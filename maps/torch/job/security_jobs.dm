@@ -92,7 +92,7 @@
 	economic_power = 4
 	minimal_player_age = 7
 	ideal_character_age = 25
-	alt_titles = null
+	alt_titles = list() // This is a hack. Overriding a list var with null does not actually override it due to the particulars of dm list init. Do not "clean up" without testing.
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
