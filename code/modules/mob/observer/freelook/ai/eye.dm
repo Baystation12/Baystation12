@@ -15,6 +15,8 @@
 	name = "Inactive AI Eye"
 	name_sufix = "AI Eye"
 	icon_state = "AI-eye"
+	var/list/camera_list = list()
+	var/last_loc
 
 /mob/observer/eye/aiEye/New()
 	..()
@@ -22,6 +24,9 @@
 
 /mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	. = ..()
+	if(last_loc != loc)
+		last_loc = loc
+		process_camera_proximity()
 	if(. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
 		if(cancel_tracking)
@@ -41,6 +46,35 @@
 		if(ai.holo && ai.hologram_follow)
 			ai.holo.set_dir_hologram(new_dir, ai)
 		return 1
+
+/mob/observer/eye/aiEye/proc/add_camera(var/obj/machinery/camera/C)
+	if(!camera_list.Find(C))
+		camera_list.Add(C)
+
+/mob/observer/eye/aiEye/proc/remove_camera(var/obj/machinery/camera/C)
+	camera_list.Remove(C)
+/mob/observer/eye/aiEye/proc/process_camera_proximity()
+	ai_near_camera(src)
+	for(var/obj/machinery/camera/C in camera_list)
+		if(!check_ai_in_range(src, C))
+			remove_camera(C)
+			C.ai_stop_watching()
+
+/mob/observer/eye/aiEye/EyeMove(direct)
+	process_camera_proximity()
+	. = ..()
+
+/proc/ai_near_camera(var/mob/observer/eye/aiEye/eye)
+	for(var/obj/machinery/camera/C in range(8, eye))
+		if(C.can_use())
+			C.set_ai_watching(eye)
+			eye.add_camera(C)
+	return
+/proc/check_ai_in_range(var/mob/observer/eye/aiEye/eye, var/obj/machinery/camera/C)
+	if(C in range(8, eye))
+		return TRUE
+	else
+		return FALSE
 
 // AI MOVEMENT
 

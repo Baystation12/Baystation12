@@ -37,8 +37,15 @@
 
 	var/affected_by_emp_until = 0
 
+	var/blocked = 0
+	var/ai_watching = 0
+
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
+	if(ai_watching)
+		to_chat(user, "<span class='warning'>There is a blinking red light.</span>")
+	if(blocked)
+		to_chat(user, "<span class='warning'>Something is obstructing the lens.</span>")
 	if(stat & BROKEN)
 		to_chat(user, "<span class='warning'>It is completely demolished.</span>")
 
@@ -123,6 +130,16 @@
 		update_coverage()
 	return internal_process()
 
+/obj/machinery/camera/proc/set_ai_watching(var/mob/observer/eye/aiEye/ai)
+	if((stat & BROKEN) || (stat & EMPED))
+		return
+	ai_watching = 1
+	queue_icon_update()
+
+/obj/machinery/camera/proc/ai_stop_watching()
+	ai_watching = 0
+	queue_icon_update()
+
 /obj/machinery/camera/proc/internal_process()
 	return
 
@@ -166,7 +183,12 @@
 /obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
 	if(!istype(user))
 		return
-
+	if(blocked)
+		blocked = 0
+		to_chat(user, "<span class='notice'>You remove something obstructing [src]'s lens.</span>")
+		set_broken(FALSE)
+		update_coverage()
+		return
 	if(user.species.can_shred(user))
 		set_status(0)
 		user.do_attack_animation(src)
@@ -179,8 +201,6 @@
 	update_coverage()
 	// DECONSTRUCTION
 	if(isScrewdriver(W))
-//		to_chat(user, "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>")
-		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
 		user.visible_message("<span class='warning'>[user] screws the camera's panel [panel_open ? "open" : "closed"]!</span>",
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
@@ -211,17 +231,26 @@
 			return
 
 	// OTHER
-	else if (can_use() && istype(W, /obj/item/weapon/paper) && isliving(user))
-		var/mob/living/U = user
-		var/obj/item/weapon/paper/X = W
-		var/itemname = X.name
-		var/info = X.info
-		to_chat(U, "You hold \a [itemname] up to the camera ...")
-		for(var/mob/living/silicon/ai/O in GLOB.living_mob_list_)
-			if(!O.client) continue
-			if(U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
-			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
-			O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
+	else if (can_use() && isliving(user) && !blocked)
+		if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/ducttape) || istype(W, /obj/item/weapon/tape_roll))
+			blocked = 1
+			set_broken(TRUE)
+			to_chat(user, "<span class='notice'>You stick [W] on [src]'s lens, causing an obstruction.</span>")
+			if(!istype(W, /obj/item/weapon/tape_roll))
+				qdel(W)
+			update_coverage()
+			return
+		else
+			var/mob/living/U = user
+			var/obj/item/weapon/paper/X = W
+			var/itemname = X.name
+			var/info = X.info
+			to_chat(U, "You hold \a [itemname] up to the camera ...")
+			for(var/mob/living/silicon/ai/O in GLOB.living_mob_list_)
+				if(!O.client) continue
+				if(U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
+				else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
+				O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -305,11 +334,14 @@
 			pixel_x = 10
 		else if(dir == EAST)
 			pixel_x = -10
-
+	if(blocked)
+		icon_state = "[initial(icon_state)]_blocked"
 	if (!status || (stat & BROKEN))
 		icon_state = "[initial(icon_state)]1"
 	else if (stat & EMPED)
 		icon_state = "[initial(icon_state)]emp"
+	else if (ai_watching)
+		icon_state = "[initial(icon_state)]_ai"
 	else
 		icon_state = initial(icon_state)
 
@@ -330,15 +362,17 @@
 		return 0
 	if(stat & (EMPED|BROKEN))
 		return 0
+	if(blocked)
+		return 0
 	return 1
 
-/obj/machinery/camera/proc/can_see()
+/obj/machinery/camera/proc/can_see(var/override_xray = 0)
 	var/list/see = null
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return list()
 
-	if(isXRay())
+	if(isXRay() || override_xray)
 		see = range(view_range, pos)
 	else
 		see = hear(view_range, pos)
