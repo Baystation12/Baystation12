@@ -148,7 +148,7 @@
 	var/mob/living/carbon/human/h = user
 	if(!istype(h))
 		return
-	if(h.last_scream_at + SCREAM_COOLDOWN <= world.time)
+	if(world.time < h.next_scream_at)
 		return
 	var/datum/species/s = h.species
 	if(isnull(s) || s.pain_scream_sounds.len == 0)
@@ -158,6 +158,7 @@
 		scream_sound = pick(s.scream_sounds_female)
 	else
 		scream_sound = pick(s.pain_scream_sounds)
+
 	playsound(user.loc, scream_sound,50,0,7)
-	h.last_scream_at = world.time
+	h.next_scream_at = world.time + SCREAM_COOLDOWN
 	return
