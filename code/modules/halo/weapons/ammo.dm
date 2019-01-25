@@ -320,7 +320,7 @@
 	if(!istype(L) || . == 0)
 		return 0
 
-	L.Stun(stun_time)
+	L.Weaken(stun_time/2)
 	L.confused += disorient_time/2
 	shake_camera(L,disorient_time,2)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
