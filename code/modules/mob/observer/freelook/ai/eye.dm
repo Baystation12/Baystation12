@@ -47,16 +47,16 @@
 			ai.holo.set_dir_hologram(new_dir, ai)
 		return 1
 
-/mob/observer/eye/aiEye/proc/add_camera(var/obj/machinery/camera/C)
-	if(!camera_list.Find(C))
-		camera_list.Add(C)
+/mob/observer/eye/aiEye/proc/add_camera(var/obj/machinery/camera/C)	
+	LAZYDISTINCTADD(camera_list, C)
 
 /mob/observer/eye/aiEye/proc/remove_camera(var/obj/machinery/camera/C)
-	camera_list.Remove(C)
+	LAZYREMOVE(camera_list, C)
+
 /mob/observer/eye/aiEye/proc/process_camera_proximity()
 	ai_near_camera(src)
 	for(var/obj/machinery/camera/C in camera_list)
-		if(!check_ai_in_range(src, C))
+		if(get_dist(src, C) > 8)
 			remove_camera(C)
 			C.ai_stop_watching()
 
@@ -64,17 +64,18 @@
 	process_camera_proximity()
 	. = ..()
 
+/mob/observer/eye/aiEye/purge_cameras()
+	if(camera_list)
+		for(var/obj/machinery/camera/C in camera_list)
+			remove_camera(C)
+			C.ai_stop_watching()
+
 /proc/ai_near_camera(var/mob/observer/eye/aiEye/eye)
 	for(var/obj/machinery/camera/C in range(8, eye))
 		if(C.can_use())
 			C.set_ai_watching(eye)
 			eye.add_camera(C)
 	return
-/proc/check_ai_in_range(var/mob/observer/eye/aiEye/eye, var/obj/machinery/camera/C)
-	if(C in range(8, eye))
-		return TRUE
-	else
-		return FALSE
 
 // AI MOVEMENT
 
@@ -84,13 +85,14 @@
 	var/obj/machinery/hologram/holopad/holo = null
 
 /mob/living/silicon/ai/proc/destroy_eyeobj(var/atom/new_eye)
+	eyeobj.purge_cameras()
 	if(!eyeobj) return
 	if(!new_eye)
 		new_eye = src
 	qdel(eyeobj) // No AI, no Eye
 	eyeobj = null
 	if(client)
-		client.eye = new_eye
+		client.eye = new_eye	
 
 /mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
 	if(eyeobj) destroy_eyeobj()

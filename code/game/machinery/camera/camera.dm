@@ -186,7 +186,7 @@
 	if(blocked)
 		blocked = 0
 		to_chat(user, "<span class='notice'>You remove something obstructing [src]'s lens.</span>")
-		set_broken(FALSE)
+		set_status(1, 1)
 		update_coverage()
 		return
 	if(user.species.can_shred(user))
@@ -234,7 +234,7 @@
 	else if (can_use() && isliving(user) && !blocked)
 		if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/ducttape) || istype(W, /obj/item/weapon/tape_roll))
 			blocked = 1
-			set_broken(TRUE)
+			set_status(0, 1)
 			to_chat(user, "<span class='notice'>You stick [W] on [src]'s lens, causing an obstruction.</span>")
 			if(!istype(W, /obj/item/weapon/tape_roll))
 				qdel(W)
@@ -266,7 +266,7 @@
 	else
 		..()
 
-/obj/machinery/camera/proc/deactivate(user as mob, var/choice = 1)
+/obj/machinery/camera/proc/deactivate(user as mob, var/choice = 1, var/blocking = 0)
 	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
 	if(istype(user, /mob/living/silicon/ai))
 		user = null
@@ -277,7 +277,10 @@
 	set_status(!src.status)
 	if (!(src.status))
 		if(user)
-			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			if(blocking)
+				visible_message("<span class='notice'> [user] has put something in front of [src]'s lens.</span>")
+			else
+				visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
 		else
 			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -285,7 +288,10 @@
 		add_hiddenprint(user)
 	else
 		if(user)
-			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			if(blocking)
+				visible_message("<span class='notice'> [user] removes the obstruction from [src]'s lens.</span>")
+			else
+				visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
 		else
 			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)

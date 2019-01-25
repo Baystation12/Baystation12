@@ -102,6 +102,9 @@
 			return
 		return loc
 
+/mob/observer/eye/proc/purge_cameras()
+	return
+
 /mob
 	var/mob/observer/eye/eyeobj
 
