@@ -151,8 +151,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 			var/obj/item/clothing/accessory/storage/holster/thigh/holster = new(H)
 			if(uniform.can_attach_accessory(holster))
 				var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
-				holster_extension.holstered = firearm
-				firearm.forceMove(holster)
+				holster_extension.holster(firearm, H)
 				uniform.attackby(holster, H)
 			else
 				qdel(holster)
