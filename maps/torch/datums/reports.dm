@@ -357,7 +357,7 @@
 	add_field(/datum/report_field/simple_text, "Intended Procedure(s)")
 	add_field(/datum/report_field/simple_text, "Compensation for Volunteer: (if any)")
 	add_field(/datum/report_field/people/list_from_manifest, "Handling Researcher(s)")
-	add_field(/datum/report_field/instruction, "By signing, the \"Volunteer\" agrees to absolve the Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative of the Corporation, such as a Research Director or Executive - this form is deemed reviewed, but is only approved if so marked.")
+	add_field(/datum/report_field/instruction, "By signing, the \"Volunteer\" agrees to absolve the Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative, this form is deemed reviewed, but is only approved if so marked.")
 	add_field(/datum/report_field/signature, "Volunteer's Signature:")
 	temp_fields += add_field(/datum/report_field/signature, "Corporate Representative's Signature")
 	temp_fields += add_field(/datum/report_field/options/yes_no, "Approved")
