@@ -183,10 +183,8 @@
 /obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
 	if(!istype(user))
 		return
-	if(blocked)
-		blocked = 0
-		to_chat(user, "<span class='notice'>You remove something obstructing [src]'s lens.</span>")
-		set_status(1, 1)
+		unblock(user)
+		deactivate(user, 1, 1)
 		update_coverage()
 		return
 	if(user.species.can_shred(user))
@@ -232,15 +230,19 @@
 
 	// OTHER
 	else if (can_use() && isliving(user) && !blocked)
-		if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/ducttape) || istype(W, /obj/item/weapon/tape_roll))
+		if(istype(W, /obj/item/weapon/paper/sticky) || istype(W, /obj/item/weapon/ducttape) || istype(W, /obj/item/weapon/tape_roll))
 			blocked = 1
-			set_status(0, 1)
+			deactivate(user, 1, 1)
 			to_chat(user, "<span class='notice'>You stick [W] on [src]'s lens, causing an obstruction.</span>")
-			if(!istype(W, /obj/item/weapon/tape_roll))
-				qdel(W)
+			if(!istype(W, /obj/item/weapon/tape_roll))				
+				contents += W
+			else
+				var/obj/item/weapon/ducttape/T = new /obj/item/weapon/ducttape(src)
+				T.add_fingerprint(user)
+				contents += T
 			update_coverage()
 			return
-		else
+		else if (istype(W, /obj/item/weapon/paper))
 			var/mob/living/U = user
 			var/obj/item/weapon/paper/X = W
 			var/itemname = X.name
@@ -273,30 +275,33 @@
 
 	if(choice != 1)
 		return
-
+	log_and_message_admins("blocking = [blocking]")
 	set_status(!src.status)
 	if (!(src.status))
-		if(user)
-			if(blocking)
-				visible_message("<span class='notice'> [user] has put something in front of [src]'s lens.</span>")
-			else
-				visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+		if(user && blocking)
+			log_and_message_admins("Excuted user+blocking")
+			visible_message("<span class='notice'> [user] has put something in front of [src]'s lens.</span>")
+			icon_state = "[initial(icon_state)]_blocked"
+			add_hiddenprint(user)			
+		else if(user)
+			log_and_message_admins("Executed user")
+			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			add_hiddenprint(user)
 		else
 			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
-		add_hiddenprint(user)
 	else
+		if(user && blocking)
+			visible_message("<span class='notice'> [user] removes the obstruction from [src]'s lens.</span>")
+			add_hiddenprint(user)
 		if(user)
-			if(blocking)
-				visible_message("<span class='notice'> [user] removes the obstruction from [src]'s lens.</span>")
-			else
-				visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			add_hiddenprint(user)
 		else
 			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = initial(icon_state)
-		add_hiddenprint(user)
 
 /obj/machinery/camera/proc/take_damage(var/force, var/message)
 	//prob(25) gives an average of 3-4 hits
@@ -306,6 +311,8 @@
 //Used when someone breaks a camera
 /obj/machinery/camera/proc/destroy()
 	set_broken(TRUE)
+	unblock(null, 1) //breaking a blocked camera will unblock it.
+
 	wires.RandomCutAll()
 
 	triggerCameraAlarm()
@@ -342,7 +349,7 @@
 			pixel_x = -10
 	if(blocked)
 		icon_state = "[initial(icon_state)]_blocked"
-	if (!status || (stat & BROKEN))
+	else if (!status || (stat & BROKEN))
 		icon_state = "[initial(icon_state)]1"
 	else if (stat & EMPED)
 		icon_state = "[initial(icon_state)]emp"
@@ -372,17 +379,28 @@
 		return 0
 	return 1
 
-/obj/machinery/camera/proc/can_see(var/override_xray = 0)
+/obj/machinery/camera/proc/can_see()
 	var/list/see = null
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return list()
 
-	if(isXRay() || override_xray)
+	if(isXRay())
 		see = range(view_range, pos)
 	else
 		see = hear(view_range, pos)
 	return see
+
+/obj/machinery/camera/proc/unblock(var/mob/user, var/destroyed = 0)
+	blocked = 0
+	if(destroyed)
+		visible_message("<span class='notice'>The obstructing item falls to the ground as [src] shatters.")
+	else
+		to_chat(user, "<span class='notice'>You remove something obstructing [src]'s lens.</span>")		
+	if(contents)
+		for(var/obj/item/I in contents)
+			if(istype(I, /obj/item/weapon/ducttape) || istype(I, /obj/item/weapon/paper/sticky))
+				I.dropInto(src.loc)
 
 /atom/proc/auto_turn()
 	//Automatically turns based on nearby walls.

@@ -49,9 +49,11 @@
 
 /mob/observer/eye/aiEye/proc/add_camera(var/obj/machinery/camera/C)	
 	LAZYDISTINCTADD(camera_list, C)
+	GLOB.destroyed_event.register(C, src, .proc/remove_camera)
 
 /mob/observer/eye/aiEye/proc/remove_camera(var/obj/machinery/camera/C)
 	LAZYREMOVE(camera_list, C)
+	GLOB.destroyed_event.unregister(C, src, .proc/remove_camera)
 
 /mob/observer/eye/aiEye/proc/process_camera_proximity()
 	ai_near_camera(src)
@@ -64,6 +66,10 @@
 	process_camera_proximity()
 	. = ..()
 
+/mob/observer/eye/aiEye/Destroy()
+	purge_cameras()
+	. = ..()
+
 /mob/observer/eye/aiEye/purge_cameras()
 	if(camera_list)
 		for(var/obj/machinery/camera/C in camera_list)
@@ -72,9 +78,9 @@
 
 /proc/ai_near_camera(var/mob/observer/eye/aiEye/eye)
 	for(var/obj/machinery/camera/C in range(8, eye))
+		eye.add_camera(C)
 		if(C.can_use())
-			C.set_ai_watching(eye)
-			eye.add_camera(C)
+			C.set_ai_watching(eye)			
 	return
 
 // AI MOVEMENT
@@ -85,7 +91,6 @@
 	var/obj/machinery/hologram/holopad/holo = null
 
 /mob/living/silicon/ai/proc/destroy_eyeobj(var/atom/new_eye)
-	eyeobj.purge_cameras()
 	if(!eyeobj) return
 	if(!new_eye)
 		new_eye = src

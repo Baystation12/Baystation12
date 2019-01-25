@@ -184,8 +184,9 @@
 				usr << browse(null, "window=radio")
 		. = 1
 	else if (href_list["talk"])
-		ToggleBroadcast()
-		. = 1
+		ToggleBroadcast()		
+		visible_message("<span class='notice'>The [src] softly beeps.</span>")
+		. = 1		
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)

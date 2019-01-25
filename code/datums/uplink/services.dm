@@ -16,6 +16,12 @@
 	item_cost = 16
 	path = /obj/item/device/uplink_service/jamming/garble
 
+/datum/uplink_item/item/services/comms_blackout
+	name = "Communications Blackout"
+	desc = "Triggers a virus that disables the communications system for a short time, disguised as ion interference."
+	item_cost = 20
+	path = /obj/item/device/uplink_service/comms_blackout
+
 /datum/uplink_item/item/services/fake_rad_storm
 	name = "Radiation Storm Announcement"
 	desc = "Interferes with radiation sensors."
@@ -239,6 +245,14 @@
 
 	if(istype(job) && job.announced)
 		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", get_announcement_frequency(job))
+	. = ..()
+
+/obj/item/device/uplink_service/comms_blackout
+	service_label = "Communications Blackout"
+
+/obj/item/device/uplink_service/comms_blackout/enable(var/mob/user = usr)
+	var/datum/event_meta/CB = new(EVENT_LEVEL_MODERATE, "Triggered Communications Blackout", add_to_queue = 0)
+	new/datum/event/communications_blackout(CB)
 	. = ..()
 
 #undef COPY_VALUE

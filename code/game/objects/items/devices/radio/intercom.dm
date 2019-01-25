@@ -14,6 +14,10 @@
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 
+/obj/item/device/radio/intercom/examine(mob/user)
+	..()
+	to_chat(user, "<span class='warning'>The transmit light is blinking.</span>")
+
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
@@ -137,14 +141,16 @@
 				on = 0
 			else
 				on = A.powered(EQUIP) // set "on" to the power status
-
 		if(!on)
 			icon_state = "intercom-p"
+		else if(broadcasting)
+			icon_state = "intercom_tx"
 		else
-			icon_state = "intercom"
+			icon_state = "intercom"	
 
 /obj/item/device/radio/intercom/broadcasting
 	broadcasting = 1
+	icon_state = "intercom_tx"
 
 /obj/item/device/radio/intercom/locked
 	var/locked_frequency
@@ -160,6 +166,7 @@
 	locked_frequency = AI_FREQ
 	broadcasting = 1
 	listening = 1
+	icon_state = "intercom_tx"
 
 /obj/item/device/radio/intercom/locked/confessional
 	name = "confessional intercom"
