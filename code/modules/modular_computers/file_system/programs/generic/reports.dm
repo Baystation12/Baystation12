@@ -92,12 +92,12 @@
 		var/editing = alert(user, "Would you like to view or edit the report", "Loading Report", "View", "Edit")
 		if(editing == "View")
 			if(!chosen_report.verify_access(get_access(user)))
-				to_chat(user, "<span class='warning'>You lack access to view this report.</span>")
+				to_chat(user, SPAN_WARNING("You lack access to view this report."))
 				return
 			can_view_only = 1
 		else
 			if(!chosen_report.verify_access_edit(get_access(user)))
-				to_chat(user, "<span class='warning'>You lack access to edit this report.</span>")
+				to_chat(user, SPAN_WARNING("You lack access to edit this report."))
 				return
 			can_view_only = 0
 		saved_report = chosen_report
@@ -156,8 +156,7 @@
 			return 1
 		var/with_fields = text2num(href_list["print_mode"])
 		var/text = selected_report.generate_pencode(get_access(user), with_fields)
-		if(!program.computer.nano_printer.print_text(text, selected_report.display_name()))
-			to_chat(user, "Hardware error: Printer was unable to print the file. It may be out of paper.")
+		print_text(user, text, selected_report.display_name())
 		return 1
 	if(href_list["export"])
 		if(!selected_report || !program.computer || !program.computer.hard_drive)

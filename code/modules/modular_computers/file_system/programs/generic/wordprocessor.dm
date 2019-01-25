@@ -41,6 +41,7 @@
 	return 1
 
 /datum/computer_file/program/wordprocessor/Topic(href, href_list)
+	var/datum/nano_module/program/computer_wordprocessor/module = NM
 	if(..())
 		return 1
 
@@ -49,39 +50,8 @@
 		return 1
 
 	if(href_list["PRG_taghelp"])
-		to_chat(usr, "<span class='notice'>The hologram of a googly-eyed paper clip helpfully tells you:</span>")
-		var/help = {"
-		\[br\] : Creates a linebreak.
-		\[center\] - \[/center\] : Centers the text.
-		\[h1\] - \[/h1\] : First level heading.
-		\[h2\] - \[/h2\] : Second level heading.
-		\[h3\] - \[/h3\] : Third level heading.
-		\[b\] - \[/b\] : Bold.
-		\[i\] - \[/i\] : Italic.
-		\[u\] - \[/u\] : Underlined.
-		\[small\] - \[/small\] : Decreases the size of the text.
-		\[large\] - \[/large\] : Increases the size of the text.
-		\[field\] : Inserts a blank text field, which can be filled later. Useful for forms.
-		\[date\] : Current station date.
-		\[time\] : Current station time.
-		\[list\] - \[/list\] : Begins and ends a list.
-		\[*\] : A list item.
-		\[hr\] : Horizontal rule.
-		\[table\] - \[/table\] : Creates table using \[row\] and \[cell\] tags.
-		\[grid\] - \[/grid\] : Table without visible borders, for layouts.
-		\[row\] - New table row.
-		\[cell\] - New table cell.
-		\[logo\] - Inserts EXO logo image.
-		\[ntlogo\] - Inserts the NT logo image.
-		\[bluelogo\] - Inserts blue NT logo image.
-		\[solcrest\] - Inserts SCG crest image.
-		\[eclogo\] - Inserts the Expeditionary Corps logo.
-		\[daislogo\] - Inserts the Deimos Advanced Information Systems logo.
-		\[xynlogo\] - Inserts the Xyngergy logo.
-		\[iccgseal\] - Inserts ICCG seal
-		\[fleetlogo\] - Inserts the logo of the SCG Fleet"}
-
-		to_chat(usr, help)
+		to_chat(usr, SPAN_NOTICE("The hologram of a googly-eyed paper clip helpfully presents some information..."))
+		SScodex.present_codex_entry(usr, SScodex.entries_by_path[/datum/computer_file/data/text])
 		return 1
 
 	if(href_list["PRG_closebrowser"])
@@ -160,7 +130,7 @@
 		if(!computer.nano_printer)
 			error = "Missing Hardware: Your computer does not have the required hardware to complete this operation."
 			return 1
-		if(!computer.nano_printer.print_text(pencode2html(loaded_data)))
+		if(!module.print_text(usr, pencode2html(loaded_data), open_file))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
 

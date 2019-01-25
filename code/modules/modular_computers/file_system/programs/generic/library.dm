@@ -154,7 +154,7 @@ The answer was five and a half years -ZeroBits
 				return 1
 
 		//Regular printing
-		print_text("<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h3>[current_book["title"]]</h3><br>[current_book["content"]]", usr)
+		print_text(usr, "<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h3>[current_book["title"]]</h3><br>[current_book["content"]]", "[current_book["title"]] by [current_book["author"]]")
 		return 1
 	if(href_list["sortby"])
 		sort_by = href_list["sortby"]

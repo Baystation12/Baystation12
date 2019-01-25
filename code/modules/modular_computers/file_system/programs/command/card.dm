@@ -132,7 +132,7 @@
 				module.show_assignments = 1
 		if("print")
 			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer && computer.nano_printer) //This option should never be called if there is no printer
 				if(module.mod_mode)
@@ -154,21 +154,19 @@
 							if(A in known_access_rights)
 								contents += "  [get_access_desc(A)]"
 
-						if(!computer.nano_printer.print_text(contents,"access report"))
-							to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+						if(module.print_text(usr, contents, "access report"))
+							computer.visible_message(SPAN_NOTICE("\The [computer] prints out paper."))
 							return
-						else
-							computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
+							
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
 									[html_crew_manifest()]
 									"}
-					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", stationtime2text())))
-						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+					if(module.print_text(usr, contents, "crew manifest ([stationtime2text()])"))
+						computer.visible_message(SPAN_NOTICE("\The [computer] prints out paper."))
 						return
-					else
-						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
+						
 		if("eject")
 			if(computer)
 				if(computer.card_slot && computer.card_slot.stored_card)
@@ -177,7 +175,7 @@
 					computer.attackby(user.get_active_hand(), user)
 		if("terminate")
 			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer && can_run(user, 1))
 				id_card.assignment = "Terminated"
@@ -185,7 +183,7 @@
 				callHook("terminate_employee", list(id_card))
 		if("edit")
 			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer && can_run(user, 1))
 				if(href_list["name"])
@@ -195,7 +193,7 @@
 						id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
 						id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
 					else
-						computer.visible_message("<span class='notice'>[computer] buzzes rudely.</span>")
+						computer.visible_message(SPAN_NOTICE("[computer] buzzes rudely."))
 				else if(href_list["account"])
 					var/account_num = text2num(input("Enter account number.", "Account", id_card.associated_account_number))
 					id_card.associated_account_number = account_num
@@ -207,7 +205,7 @@
 					id_card.associated_email_login["password"] = email_password
 		if("assign")
 			if(!authorized(user_id_card))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
+				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer && can_run(user, 1) && id_card)
 				var/t1 = href_list["assign_target"]
@@ -228,7 +226,7 @@
 								jobdatum = J
 								break
 						if(!jobdatum)
-							to_chat(usr, "<span class='warning'>No log exists for this job: [t1]</span>")
+							to_chat(usr, SPAN_WARNING("No log exists for this job: [t1]"))
 							return
 
 						access = jobdatum.get_access()
@@ -252,7 +250,7 @@
 								id_card.access += access_type
 							break
 	if(id_card)
-		id_card.SetName(text("[id_card.registered_name]'s ID Card ([id_card.assignment])"))
+		id_card.SetName("[id_card.registered_name]'s ID Card ([id_card.assignment])")
 
 	SSnano.update_uis(NM)
 	return 1

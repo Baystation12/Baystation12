@@ -15,6 +15,7 @@
 	usage_flags = PROGRAM_ALL
 
 /datum/computer_file/program/filemanager/Topic(href, href_list)
+	var/datum/nano_module/program/computer_filemanager/module = NM
 	if(..())
 		return 1
 
@@ -123,7 +124,7 @@
 		if(!computer.nano_printer)
 			error = "Missing Hardware: Your computer does not have required hardware to complete this operation."
 			return 1
-		if(!computer.nano_printer.print_text(pencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
+		if(!module.print_text(usr, pencode2html(F.stored_data), F.filename, F.papertype, F.metadata))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
 	if(href_list["PRG_copytousb"])

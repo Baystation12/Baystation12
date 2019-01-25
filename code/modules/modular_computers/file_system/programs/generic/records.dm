@@ -66,7 +66,7 @@
 	if(!F)
 		return
 	if(!F.verify_access_edit(get_record_access(user)))
-		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN_WARNING("\The [nano_host()] flashes an \"Access Denied\" warning."))
 		return
 	F.ask_value(user)
 
@@ -96,7 +96,7 @@
 	if(href_list["print_active"])
 		if(!active_record)
 			return
-		print_text(record_to_html(active_record, get_record_access(usr)), usr)
+		print_text(usr, record_to_html(active_record, get_record_access(usr)), "record dump: [active_record.get_name()]")
 		return 1
 	if(href_list["search"])
 		var/field_name = href_list["search"]
