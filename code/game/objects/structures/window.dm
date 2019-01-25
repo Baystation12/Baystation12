@@ -592,6 +592,6 @@
 				return
 
 		if (ST.use(1))
-			var/obj/structure/window/WD = new(loc, dir_to_set, 1, ST.material.name, ST.reinf_material && ST.reinf_material.name)
+			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
 			to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
 			WD.update_icon()
