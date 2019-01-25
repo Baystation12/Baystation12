@@ -173,14 +173,7 @@
 	. = ..()
 
 	if(.[1] == "Initiate Crew Transfer")
-		//init_autotransfer()
-
-		//just restart for now
-		feedback_set_details("end_error","crew transfer vote")
-		if(blackbox)	blackbox.save_all_data_to_sql()
-		sleep(50)
-		log_game("Rebooting due to crew transfer vote")
-		world.Reboot()
+		init_autotransfer()
 
 	else if(.[1] == "Add Antagonist")
 		spawn(10)
@@ -281,18 +274,44 @@
 
 /datum/vote/mapswitch
 	name = "mapswitch"
+	var/status_quo = "Do not switch"
+	var/list/map_options = list()
 
 /datum/vote/mapswitch/Initialize()
-	..()
+	. = ..()
 
 	if(!config.allow_map_switching)
 		disabled = 1
 		disable_reason = "disabled in config"
 
+/datum/vote/mapswitch/initiate_vote(var/initiator_key, var/automatic = 0)
+	choices = list()
+	var/list/Lines = file2list("switchable_maps")
+
+	if(!Lines)
+		to_world("ERROR: unable to find \'switchable_maps\'")
+
+	for(var/t in Lines)
+		if(t)
+			choices.Add(t)
+	choices.Add(status_quo)
+	reset_choices()
+
+	. = ..()
+
 /datum/vote/mapswitch/do_result()
-	var/datum/map/M = GLOB.all_maps[.[1]]
-	fdel("use_map")
-	text2file(M.path, "use_map")
+	. = ..()
+
+	var/new_map = .[1]
+	if(new_map == status_quo)
+		return
+
+	to_world("<span class='danger'>>World restarting to \'[new_map]\' map due to mapswitch vote...</span>")
+	feedback_set_details("end_error","map vote")
+	log_game("Rebooting due to mapswitch vote")
+
+	sleep(50)
+	switch_maps(new_map)
 
 
 
@@ -300,6 +319,8 @@
 
 /datum/vote/custom
 	name = "custom"
+	disabled = 1
+	disable_reason = "Admin only"
 
 /datum/vote/custom/get_announce_text(var/automatic, var/initiator)
 	. = ..(automatic, initiator)

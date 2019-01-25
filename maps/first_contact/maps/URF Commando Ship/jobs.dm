@@ -26,7 +26,7 @@
 	"Legio",\
 	"Legate")
 
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 1
 	selection_color = "#0A0A95"
 	access = list(252,632)

@@ -13,6 +13,8 @@
 		src.client.pixel_x = 0
 		return
 
+	src.reset_view(src)
+
 	switch(src.dir)
 		if(NORTH)
 			src.client.pixel_y = ONETILE * 10

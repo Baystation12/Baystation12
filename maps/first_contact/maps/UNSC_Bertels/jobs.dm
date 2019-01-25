@@ -71,8 +71,8 @@
 
 /datum/job/bertelsODST
 	title = "Orbital Drop Shock Trooper"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 8
+	spawn_positions = 8
 	outfit_type = /decl/hierarchy/outfit/job/bertelsfacil_ODST
 	alt_titles = list("Private First Class"= /decl/hierarchy/outfit/job/bertelsODSTCQC,
 	"Lance Corporal"= /decl/hierarchy/outfit/job/bertelsODSTengineer,
@@ -90,8 +90,8 @@
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant
 	alt_titles = list("Second Lieutenant" = /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant,
 	"First Lieutenant" = /decl/hierarchy/outfit/job/bertelsODSTfirstlieutenant,

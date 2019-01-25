@@ -13,11 +13,11 @@
 		return
 	user.visible_message("[user] fully repairs [c].")
 	c.armor_thickness = initial(c.armor_thickness)
+	c.update_damage_description()
 
 /obj/item/structure/repair_bench/attackby(obj/item/I, mob/user)
-	var/obj/item/clothing/c = I
-	if(istype(c))
-		repair_armor(c,user)
+	if(istype(I,/obj/item/clothing/))
+		repair_armor(I,user)
 	else
 		. = ..()
 

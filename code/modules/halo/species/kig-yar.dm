@@ -38,6 +38,13 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
 
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_5.ogg')
+
 /datum/species/kig_yar/create_organs(var/mob/living/carbon/human/H)
 	. = ..()
 

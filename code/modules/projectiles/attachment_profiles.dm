@@ -14,16 +14,45 @@
 /datum/attachment_profile/MA5B
 	weapon_name = "\improper MA5B Assault Rifle"
 
-	on_item_icon_states = list("MA5B stock" = "ma5b_attachment",\
-		"skeletal stock" = "stock_skeletal_attachment",\
-		"Red Dot Sight" = "sight_attachment",\
-		"ACOG Sight" = "acog_attachment"
-		)
-	weapon_pixel_offsets = list(ATTACHMENT_BARREL = list(28,17),ATTACHMENT_SIGHT = list(15,22),ATTACHMENT_STOCK = list(2,9))
+	on_item_icon_states = list(\
+		"Suppressor" = "MA5-Suppressor",
+		"Scope" = "MA5-Scope",
+		"underslung shotgun" = "MA5-Shotgun",
+		"MA5 stock cheekrest" = "MA5-Cheekrest",
+		"MA5 basic stock butt" = "MA5-Butt-Basic",
+		"MA5 extended stock butt" = "MA5-Butt-Extended",
+		"MA5 underbarrel grip" = "MA5-Grip-Compact",
+		"underslung shotgun" = "MA5-Shotgun",
+		"MA5 basic upper" = "MA5-Top-Basic",
+		"MA5 railed upper" = "MA5-Top-Rails",
+		"underslung grenade launcher" = "underslung grenade launcher",
+		"flashlight attachment" = "MA5-Grip-Basic-FlashlightOff")
 
-	attribute_modifications = list("MA5B stock" = list(-2,0.5,0.25),\
-		"skeletal stock" = list(-1.25,0,-0.5),\
-		"Red Dot Sight" = list(-0.5,1,0),\
-		"ACOG Sight" = list(-0.25,0.5,0),\
-		"Suppressor" = list(0.25,0,0)
+	weapon_pixel_offsets = list(\
+	"Suppressor" = list(0,0),
+	"Scope" = list(0,0),
+	"underslung shotgun" = list(0,0), //most of these are pre-aligned for the ma5b and therfore require no modification
+	"MA5 stock cheekrest" = list(0,0),
+	"MA5 basic stock butt" = list(0,0),
+	"MA5 extended stock butt" = list(0,0),
+	"MA5 underbarrel grip" = list(0,0),
+	"underslung shotgun" = list(0,0),
+	"MA5 basic upper" = list(0,0),
+	"MA5 railed upper" = list(0,0),
+	"underslung grenade launcher" = list(0,0),
+	"flashlight attachment" = list(0,0)
+	)
+
+	attribute_modifications = list(\
+		"scope" = list(0,0.5,0.1),
+		"Suppressor" = list(0.5,0,0.1),
+		"MA5 stock cheekrest" = list(0,0,0),
+		"MA5 basic stock butt" = list(0,0,0),
+		"MA5 extended stock butt" = list(-0.25,0,0.1),
+		"MA5 underbarrel grip" = list(-0.25,0,0.1),
+		"underslung shotgun" = list(0.5,0,0.2),
+		"MA5 basic upper" = list(0,0,0),
+		"MA5 railed upper" = list(0,0,0.1),
+		"underslung grenade launcher" = list(0,0,0,2),
+		"flashlight attachment" = list(0,0,0.1)
 		)

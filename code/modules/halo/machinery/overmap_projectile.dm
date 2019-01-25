@@ -81,7 +81,7 @@
 	new_proj.original = proj_end_loc
 	new_proj.firer = firer
 
-	if(console_fired_by.do_track_fired_proj && isnull(console_fired_by.currently_tracked_proj))
+	if(!isnull(console_fired_by) && console_fired_by.do_track_fired_proj && isnull(console_fired_by.currently_tracked_proj))
 		var/obj/item/projectile/camera_track/camera_track_proj = new /obj/item/projectile/camera_track (proj_spawn_loc)
 		console_fired_by.currently_tracked_proj = camera_track_proj
 		camera_track_proj.firer = firer
@@ -98,8 +98,8 @@
 	var/obj/effect/overmap/overmap_object = impacted
 	var/chosen_impact_z
 
-	if(isnull(overmap_object))
-		return
+	if(!istype(overmap_object))
+		return 0
 	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance * (1- accuracy/100))) //accuracy = 1 means miss chance is multiplied by 0.99
 		visible_message("<span class = 'warning'>[src] flies past [impacted].</span>")
 		return 0
