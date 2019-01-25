@@ -525,6 +525,7 @@ About the new airlock wires panel:
 		message = text("The door is unpowered - Cannot electrify the door.")
 		src.electrified_until = 0
 	else if(!duration && electrified_until != 0)
+		visible_message("<span class='notice'>The [src]'s charge dissipates.</span>'")
 		message = "The door is now un-electrified."
 		src.electrified_until = 0
 	else if(duration)	//electrify door for the given duration seconds
@@ -898,13 +899,22 @@ About the new airlock wires panel:
 		if("bolts")
 			if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
 				to_chat(usr, "The door bolt control wire is cut - Door bolts permanently dropped.")
-			else if(activate && src.lock())
-				to_chat(usr, "The door bolts have been dropped.")
+			else if(activate)				
+				if(isrobot(usr))
+					visible_message("<span class='notice'>The [src]'s bolt lights are blinking.</span>")
+					if(do_after(usr, 40, src) && src.lock())						
+						to_chat(usr, "The door bolts have been dropped.")
+				else if(src.lock())
+					to_chat(usr, "The door bolts have been dropped.")
 			else if(!activate && src.unlock())
 				to_chat(usr, "The door bolts have been raised.")
 		if("electrify_temporary")
+			if(isAI(usr) && do_after(usr, 80, src))
+				visible_message("<span class='warning'>Electricity appears to be building up in the [src]!</span>")
 			electrify(30 * activate, 1)
 		if("electrify_permanently")
+			if(isAI(usr) && do_after(usr, 80, src))
+				visible_message("<span class='warning'>Electricity appears to be building up in the [src]!</span>")
 			electrify(-1 * activate, 1)
 		if("open")
 			if(src.welded)
