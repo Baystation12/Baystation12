@@ -124,6 +124,8 @@
 /obj/item/weapon/gun/energy/SDSR_10
 	name = "SDSR-10"
 	desc = "The Sonic Dispersion Sniper Rifle is a supposed prototype of an ONI Hard Sound Rifle. This prototype has a greatly decreased effectiveness compared to the final product. Construction blueprints were recovered from an ONI prowler. 10 seconds recharge time."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "SoundRifle-full"
 	fire_sound = 'code/modules/halo/sounds/sound_rifle_firesound.ogg'
 	self_recharge = 1
 	recharge_time = 10 //10 seconds recharge time.
