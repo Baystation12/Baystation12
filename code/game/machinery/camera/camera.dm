@@ -394,7 +394,7 @@
 /obj/machinery/camera/proc/unblock(var/mob/user, var/destroyed = 0)
 	blocked = 0
 	if(destroyed)
-		visible_message("<span class='notice'>The obstructing item falls to the ground as [src] shatters.")
+		visible_message("<span class='notice'>The obstructing item falls to the ground as [src] shatters.</span>")
 	else
 		to_chat(user, "<span class='notice'>You remove something obstructing [src]'s lens.</span>")		
 	if(contents)
