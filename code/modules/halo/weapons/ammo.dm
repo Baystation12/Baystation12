@@ -125,8 +125,8 @@
 
 /obj/item/ammo_casing/a762_m392
 	desc = "A 7.62mm bullet casing."
-	caliber = "a762"
-	projectile_type = /obj/item/projectile/bullet/a762/M392
+	caliber = "a762dmr"
+	projectile_type = /obj/item/projectile/bullet/a762_M392
 
 /obj/item/projectile/bullet/a762_ap
 	damage = 30
@@ -138,7 +138,7 @@
 	damage_type = PAIN
 	penetrating = 0
 
-/obj/item/projectile/bullet/a762/M392
+/obj/item/projectile/bullet/a762_M392
 	damage = 35
 	armor_penetration = 10
 
