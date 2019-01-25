@@ -287,9 +287,8 @@
 		var/have_fired = 0
 		for(var/obj/item/weapon_attachment/secondary_weapon/attachment in get_attachments())
 			if(attachment.alt_fire_active == 1)
-				var/firing_result = attachment.fire_attachment(target,user,src)
-				if(firing_result == 1)
-					have_fired = 1
+				attachment.fire_attachment(target,user,src)
+				have_fired = 1
 		if(have_fired)
 			return //if one of our attachments have fired, let's not fire normally.
 

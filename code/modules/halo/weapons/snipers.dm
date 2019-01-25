@@ -50,7 +50,7 @@
 	icon_state = "M395"
 	item_state = "m392"
 	load_method = MAGAZINE
-	caliber = "a762"
+	caliber = "a762dmr"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392) //Disallows loading LMG boxmags into the DMR.
