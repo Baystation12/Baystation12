@@ -66,7 +66,8 @@
 				user_human.char_branch = mil_branches.get_branch(job.branch)
 				user_human.char_rank =   mil_branches.get_rank(job.branch, job.rank)
 
-			character.skillset.obtain_from_client(job, character.client)
+			// We need to make sure to use the abstract instance here; it's not the same as the one we were passed.
+			character.skillset.obtain_from_client(SSjobs.get_by_path(job.type), character.client)
 			job.equip(character, "")
 			job.apply_fingerprints(character)
 			var/list/spawn_in_storage = SSjobs.equip_custom_loadout(character, job)
