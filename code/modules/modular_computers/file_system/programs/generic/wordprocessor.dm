@@ -78,7 +78,8 @@
 		\[eclogo\] - Inserts the Expeditionary Corps logo.
 		\[daislogo\] - Inserts the Deimos Advanced Information Systems logo.
 		\[xynlogo\] - Inserts the Xyngergy logo.
-		\[iccgseal\] - Inserts ICCG seal"}
+		\[iccgseal\] - Inserts ICCG seal
+		\[fleetlogo\] - Inserts the logo of the SCG Fleet"}
 
 		to_chat(usr, help)
 		return 1
