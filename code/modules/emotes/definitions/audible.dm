@@ -158,6 +158,6 @@
 		scream_sound = pick(s.scream_sounds_female)
 	else
 		scream_sound = pick(s.pain_scream_sounds)
-	playsound(user.loc, scream_sound,50,1,7)
+	playsound(user.loc, scream_sound,50,0,7)
 	h.last_scream_at = world.time
 	return
