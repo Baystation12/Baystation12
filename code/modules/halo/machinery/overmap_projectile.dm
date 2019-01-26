@@ -53,8 +53,8 @@
 
 /obj/item/projectile/overmap/proc/do_sector_hit(var/z_level,var/obj/effect/overmap/object_hit)
 	var/list/hit_bounds = object_hit.map_bounds
-	if(prob(15))
-		hit_bounds  = pick(object_hit.weapon_locations)
+	/*if(prob(15))
+		hit_bounds  = pick(object_hit.weapon_locations)*/
 
 	sector_hit_effects(z_level,object_hit,hit_bounds)
 
