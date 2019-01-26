@@ -125,7 +125,7 @@
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70))
-				Paralyse(10)
+				confused += 10
 
 		if(3.0)
 			b_loss = 30
@@ -133,7 +133,7 @@
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50))
-				Paralyse(10)
+				confused += 10
 
 	// factor in armour
 	var/protection = blocked_mult(getarmor(null, "bomb"))
