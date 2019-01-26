@@ -106,7 +106,6 @@
 					var/turf/simulated/wall/W = T
 					if(istype(W))
 						W.update_connections(1)
-						W.update_icon()
 				if(success)
 					break
 			if(success)
@@ -131,6 +130,9 @@
 		if(success)
 			dirs += get_dir(src, T)
 			other_dirs += get_dir(src, T)
+
+	for(var/turf/T in orange(src, 1))
+		T.update_icon()
 
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)

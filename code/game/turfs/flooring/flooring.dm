@@ -40,6 +40,29 @@ var/list/flooring_types
 	var/can_paint
 	var/can_engrave = TRUE
 
+	var/smooth_nothing = TRUE //True/false only, optimisation
+	//If true, all smoothing logic is entirely skipped
+
+	//The rest of these x_smooth vars use one of the following options
+	//SMOOTH_NONE: Ignore all of type
+	//SMOOTH_ALL: Smooth with all of type
+	//SMOOTH_WHITELIST: Ignore all except types on this list
+	//SMOOTH_BLACKLIST: Smooth with all except types on this list
+	//SMOOTH_GREYLIST: Objects only: Use both lists
+
+	//How we smooth with other flooring
+	var/floor_smooth = SMOOTH_ALL
+	var/list/flooring_whitelist = list() //Smooth with nothing except the contents of this list
+	var/list/flooring_blacklist = list() //Smooth with everything except the contents of this list
+
+	//How we smooth with walls
+	var/wall_smooth = SMOOTH_ALL
+	//There are no lists for walls at this time
+
+	//How we smooth with space and openspace tiles
+	var/space_smooth = SMOOTH_NONE
+	//There are no lists for spaces
+
 /decl/flooring/proc/on_remove()
 	return
 
@@ -50,8 +73,20 @@ var/list/flooring_types
 	icon_base = "grass"
 	has_base_range = 3
 	damage_temperature = T0C+80
-	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
+	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_SHOVEL
 	build_type = /obj/item/stack/tile/grass
+	can_engrave = FALSE
+	smooth_nothing = FALSE
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_ALL
+
+/decl/flooring/dirt
+	name = "dirt"
+	desc = "Extra dirty."
+	icon = 'icons/turf/flooring/grass.dmi'
+	icon_base = "dirt"
+	has_base_range = 3
+	damage_temperature = T0C+80
 	can_engrave = FALSE
 
 /decl/flooring/asteroid
@@ -70,8 +105,11 @@ var/list/flooring_types
 	icon_base = "brown"
 	build_type = /obj/item/stack/tile/carpet
 	damage_temperature = T0C+200
-	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 	can_engrave = FALSE
+	smooth_nothing = FALSE
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_NONE
 
 /decl/flooring/carpet/blue
 	name = "blue carpet"
@@ -82,6 +120,16 @@ var/list/flooring_types
 	name = "pale blue carpet"
 	icon_base = "blue2"
 	build_type = /obj/item/stack/tile/carpetblue2
+
+/decl/flooring/carpet/blue3
+	name = "sea blue carpet"
+	icon_base = "blue3"
+	build_type = /obj/item/stack/tile/carpetblue3
+
+/decl/flooring/carpet/magenta
+	name = "magenta carpet"
+	icon_base = "purple"
+	build_type = /obj/item/stack/tile/carpetmagenta
 
 /decl/flooring/carpet/purple
 	name = "purple carpet"
