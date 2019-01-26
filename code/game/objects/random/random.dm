@@ -528,7 +528,7 @@ obj/random/closet/spawn_choices()
 	name = "random material"
 	desc = "This is a random material."
 	icon = 'icons/obj/materials.dmi'
-	icon_state = "sheet-metal"
+	icon_state = "sheet"
 
 /obj/random/material/spawn_choices()
 	return list(/obj/item/stack/material/steel/ten,
