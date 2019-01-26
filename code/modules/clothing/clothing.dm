@@ -676,6 +676,9 @@ BLIND     // can't see anything
 		ret.icon_state = icon_state
 	return ret
 
+/obj/item/clothing/suit/handle_shield()
+	return FALSE
+
 /obj/item/clothing/suit/proc/get_collar()
 	var/icon/C = new('icons/mob/collar.dmi')
 	if(icon_state in C.IconStates())
