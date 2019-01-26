@@ -334,7 +334,7 @@
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
 	var/stood_still = round((world.time - user.l_move_time)/15)
 	if(stood_still)
-		acc_mod += 1 * max(2, stood_still)
+		acc_mod += min(2, stood_still)
 		if(stood_still > 5)
 			acc_mod += accuracy
 
