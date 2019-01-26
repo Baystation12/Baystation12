@@ -427,7 +427,7 @@
 	icon_state = "checkpoint1"
 
 /area/shuttle/petrov/rd
-	name = "\improper NSV Petrov - RD's Office"
+	name = "\improper NSV Petrov - CSO's Office"
 	icon_state = "head_quarters"
 
 /area/shuttle/petrov/cockpit
@@ -668,7 +668,7 @@
 	name = "\improper Command - XO's Office"
 
 /area/crew_quarters/heads/office/rd
-	name = "\improper Command - RD's Office"
+	name = "\improper Command - CSO's Office"
 
 /area/crew_quarters/heads/office/cmo
 	name = "\improper Command - CMO's Office"

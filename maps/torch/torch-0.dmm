@@ -12997,12 +12997,6 @@
 /area/shuttle/petrov/maint)
 "Hz" = (
 /obj/structure/table/glass,
-/obj/item/weapon/folder/envelope/blanks,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT{
-	pixel_x = 15;
-	pixel_y = 1
-	},
-/obj/item/weapon/stamp/rd,
 /obj/item/weapon/pen,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
@@ -16656,7 +16650,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/flora/pottedplant/unusual,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "VO" = (
@@ -16796,10 +16789,10 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/cockpit)
 "Wt" = (
-/obj/structure/closet/secure_closet/RD_torch,
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/flora/pottedplant/unusual,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Wy" = (

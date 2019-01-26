@@ -25,17 +25,6 @@
 	material = MATERIAL_STEEL
 	reinforced = MATERIAL_STEEL
 
-/obj/structure/table/woodentable
-	icon_state = "solid_preview"
-	color = COLOR_BROWN_ORANGE
-	material = MATERIAL_WOOD
-
-/obj/structure/table/woodentable_reinforced
-	icon_state = "reinf_preview"
-	color = COLOR_BROWN_ORANGE
-	material = MATERIAL_WOOD
-	reinforced = MATERIAL_WOOD
-
 /obj/structure/table/gamblingtable
 	icon_state = "gamble_preview"
 	carpeted = 1
@@ -65,3 +54,37 @@
 /obj/structure/table/holo_woodentable/New()
 	material = "holo[MATERIAL_WOOD]"
 	..()
+
+//wood wood wood
+/obj/structure/table/woodentable
+	icon_state = "solid_preview"
+	color = WOOD_COLOR_GENERIC
+	material = MATERIAL_WOOD
+
+/obj/structure/table/woodentable_reinforced
+	icon_state = "reinf_preview"
+	color = WOOD_COLOR_GENERIC
+	material = MATERIAL_WOOD
+	reinforced = MATERIAL_WOOD
+
+/obj/structure/table/woodentable_reinforced/walnut
+	icon_state = "reinf_preview"
+	color = WOOD_COLOR_CHOCOLATE
+	material = MATERIAL_WALNUT
+	reinforced = MATERIAL_WALNUT
+
+/obj/structure/table/woodentable/mahogany
+	color = WOOD_COLOR_RICH
+	material = MATERIAL_MAHOGANY
+
+/obj/structure/table/woodentable/maple
+	color = WOOD_COLOR_PALE
+	material = MATERIAL_MAPLE
+
+/obj/structure/table/woodentable/ebony
+	color = WOOD_COLOR_BLACK
+	material = MATERIAL_EBONY
+
+/obj/structure/table/woodentable/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	material = MATERIAL_WALNUT

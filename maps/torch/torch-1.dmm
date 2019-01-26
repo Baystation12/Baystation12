@@ -1289,7 +1289,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/fore)
 "em" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/bed/chair/wood/wings/mahogany{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 8
 	},
@@ -1386,7 +1386,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "eB" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/bed/chair/wood/wings/mahogany{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 4
 	},
@@ -1701,7 +1701,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage/upper)
 "fB" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "fE" = (
@@ -1933,8 +1933,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "gs" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/donut,
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "gu" = (
@@ -2177,7 +2177,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "hm" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/tableflag,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2188,10 +2187,11 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "hn" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/bed/chair/wood/wings/mahogany{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 8
 	},
@@ -11996,7 +11996,6 @@
 /turf/simulated/open,
 /area/hallway/primary/fourthdeck/fore)
 "OI" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
 	pixel_x = 3
 	},
@@ -12004,6 +12003,7 @@
 	pixel_x = -3;
 	pixel_y = 0
 	},
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "OJ" = (
@@ -15307,10 +15307,6 @@
 /turf/simulated/floor,
 /area/crew_quarters/adherent)
 "Xg" = (
-/obj/structure/bed/chair/wood/wings{
-	icon_state = "wooden_chair_wings_preview";
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -15318,6 +15314,10 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/bed/chair/wood/wings/mahogany{
+	icon_state = "wooden_chair_wings_preview";
 	dir = 4
 	},
 /turf/simulated/floor/carpet/blue2,
