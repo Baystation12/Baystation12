@@ -1,0 +1,10 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - rscadd: "Escape pod blast doors now open upon reaching pod launch sequence. You might want to stay out of maint areas near escape pods when pods are getting ready to launch."
+  - maptweak: "After much deliberation, the Health and Safety department decided that Engineering, the misc laboratory, and the tunnels outside the deck 2 escape pods should be more well-lit."
+  - maptweak: "The forensics office and bridge now have chairs that can rotate."
+  - maptweak: "The deck 1 conference room floor has finally been repainted properly."
+  - maptweak: "The R-UST now has its own power monitor installed and a gas injector and a port to allow engineers to inject various gasses into the R-UST chamber if they want."
+  - maptweak: "Deck 3 has more emergency shutters to prevent the spread of fire and decompression and prevent hapless engineers from wandering into unknown danger outside the EVA room."
+  - bugfix: "Fixes deck 5 subgrid configuration."
