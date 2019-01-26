@@ -149,16 +149,12 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 		if(istype(H.w_uniform, /obj/item/clothing))
 			var/obj/item/clothing/uniform = H.w_uniform
 			var/obj/item/clothing/accessory/storage/holster/thigh/holster = new(H)
+			var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
+			holster_extension.holster(firearm, H)
 			if(uniform.can_attach_accessory(holster))
-				var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
-				holster_extension.holster(firearm, H)
 				uniform.attackby(holster, H)
 			else
-				qdel(holster)
-		if(firearm.loc == H)
-			H.put_in_any_hand_if_possible(firearm)
-			if(H.l_hand != firearm && H.r_hand != firearm)
-				firearm.forceMove(get_turf(H))
+				H.put_in_hands(holster)
 
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison/union_rep
 	name = OUTFIT_JOB_NAME("Union Representative")
