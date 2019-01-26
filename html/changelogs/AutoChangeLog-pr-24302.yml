@@ -1,0 +1,4 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - bugfix: "Fixes stasis cages."
