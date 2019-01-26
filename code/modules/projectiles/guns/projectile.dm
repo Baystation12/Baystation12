@@ -117,6 +117,18 @@
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
 //Maybe this should be broken up into separate procs for each load method?
 /obj/item/weapon/gun/projectile/proc/load_ammo(var/obj/item/A, mob/user)
+	var/list/attachments = get_attachments()
+	if(attachments.len > 0)
+		var/load_success = 0
+		for(var/obj/item/weapon_attachment/secondary_weapon/attachment in get_attachments())
+			if(!istype(A,attachment.alt_fire_ammo_typepath))
+				continue
+			var/load_succeed = attachment.load_attachment(A,user)
+			if(load_succeed == 1)
+				load_success = 1
+		if(load_success)
+			return //if one of our attachments have fired, let's not fire normally.
+
 	if(istype(A, /obj/item/ammo_magazine))
 		var/obj/item/ammo_magazine/AM = A
 		if(!(load_method & AM.mag_type) || caliber != AM.caliber)
