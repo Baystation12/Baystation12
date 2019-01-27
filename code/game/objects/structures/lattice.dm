@@ -9,7 +9,6 @@
 	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
-	var/material/material
 	var/init_material = MATERIAL_STEEL
 	//	obj_flags = OBJ_FLAG_CONDUCTIBLE
 

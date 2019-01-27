@@ -9,7 +9,6 @@
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	alpha = 180
-	var/material/material
 	var/material/reinf_material
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
@@ -40,7 +39,7 @@
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	
+
 	if(new_reinf_material)
 		reinf_material = SSmaterials.get_material_by_name(new_reinf_material)
 
@@ -77,7 +76,7 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	if(reinf_material)
-		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>") 
+		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>")
 	if(health == maxhealth)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
@@ -536,7 +535,7 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
- 
+
 /obj/machinery/button/windowtint/proc/toggle_tint()
 	use_power_oneoff(5)
 
