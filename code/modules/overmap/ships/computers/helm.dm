@@ -7,7 +7,7 @@
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
-	var/dx		//desitnation
+	var/dx		//destnation
 	var/dy		//coordinates
 
 /obj/machinery/computer/helm/Initialize()
@@ -16,7 +16,7 @@
 	get_known_sectors()
 
 /obj/machinery/computer/helm/proc/get_known_sectors()
-	if(linked && linked.nav_comp)
+	if(linked && istype(linked,/obj/effect/overmap/ship) && linked.nav_comp)
 		known_sectors = linked.nav_comp.get_known_sectors()
 		return
 	//Original Code left to ensure backwards compatibility
@@ -99,6 +99,8 @@
 	var/list/locations[0]
 	for (var/key in known_sectors)
 		var/datum/data/record/R = known_sectors[key]
+		if(isnull(R))
+			continue
 		var/list/rdata[0]
 		rdata["name"] = R.fields["name"]
 		rdata["x"] = R.fields["x"]

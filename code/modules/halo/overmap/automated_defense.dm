@@ -1,8 +1,10 @@
-#define AUTO_DEFENSE_LOCKON_DELAY 5 SECONDS
-#define AUTO_DEFENSE_FIRE_DELAY 1 SECOND
+#define AUTO_DEFENSE_LOCKON_DELAY 15 SECONDS
+#define AUTO_DEFENSE_FIRE_DELAY 5 SECONDS
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses
 	name = "Automated Defenses"
+	icon = 'code/modules/halo/icons/overmap/human_stations.dmi'
+	icon_state = "s_station_1"
 
 	faction = "civilian"
 	available_ship_requests = newlist(/datum/npc_ship_request/automated_defense_process)
@@ -16,6 +18,7 @@
 	request_auth_levels = list()
 	request_requires_processing = 1
 	var/obj/effect/overmap/ship/current_target
+	var/obj/previous_target
 	var/start_target_fire_at = 0
 	var/firing_on_target = 0
 	var/next_fire_at = 0
@@ -25,6 +28,8 @@
 		return 0
 	var/list/in_range = range(ship_source.defense_range,ship_source)
 	firing_on_target = 0
+	if(previous_target)
+		previous_target.overlays.Cut()
 	if(current_target)
 		current_target.overlays.Cut()
 		if(current_target in in_range)
@@ -43,22 +48,27 @@
 			var/obj/item/projectile/overmap/fired = new ship_source.proj_fired (ship_source.loc)
 			fired.permutated = ship_source
 			fired.launch(current_target)
+			previous_target = current_target
+			current_target = null
 			next_fire_at = world.time + AUTO_DEFENSE_FIRE_DELAY
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
 			if(ship.get_faction() != ship_source.get_faction())
 				unauthed_ships += ship
+		if(unauthed_ships.len == 0)
+			return 1
 		current_target = pick(unauthed_ships)
+		if(current_target == previous_target)
+			start_target_fire_at = world.time //Don't need to lock on again if it's the same ship.
 
 	return 1
 
 /obj/item/projectile/overmap/auto_defense_proj
 	name = "SMAC Round"
 	desc = "A massive ferromagnetic slug propelled to ludicrous speeds."
-	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/mac_cannon_impact.wav'
-	step_delay = 0
+	step_delay = 0.5
 	ship_damage_projectile = /obj/item/projectile/auto_defense_proj
 
 
@@ -75,6 +85,7 @@
 /obj/item/projectile/auto_defense_proj
 	name = "SMAC Round"
 	desc = "A massive ferromagnetic slug propelled to ludicrious speeds."
+	damage = 9999999
 	penetrating = 999
 	kill_count = 999
 

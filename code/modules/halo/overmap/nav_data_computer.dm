@@ -5,8 +5,17 @@
 	desc = "A computer that contains a store of all of a ship's nav-data alongside the Friend Or Foe ID for the vessel."
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
+	density = 1
+	anchored = 1
 
 	var/obj/item/nav_data_chip/data_chip = new /obj/item/nav_data_chip
+
+/obj/machinery/nav_computer/ex_act(var/severity)
+	if(severity > 2)
+		if(prob(50))
+			var/obj/chip_to_remove = data_chip
+			remove_nav_chip()
+			qdel(chip_to_remove)
 
 /obj/machinery/nav_computer/New()
 	. = ..()
@@ -37,6 +46,9 @@
 /obj/machinery/nav_computer/proc/insert_nav_chip(var/obj/item/nav_data_chip/nav_chip,var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return
+	if(data_chip)
+		to_chat(user,"<span class = 'notice'>[src] already has a data-chip.</span>")
+		return
 	user.drop_from_inventory(nav_chip)
 	contents += nav_chip
 	data_chip = nav_chip
@@ -48,7 +60,8 @@
 
 /obj/machinery/nav_computer/proc/remove_nav_chip(var/mob/user)
 	if(!data_chip)
-		to_chat(user,"<span class = 'notice'>[src] doesn't have a data-chip installed.</span>")
+		if(user)
+			to_chat(user,"<span class = 'notice'>[src] doesn't have a data-chip installed.</span>")
 		return
 	var/obj/item/to_remove = data_chip
 	data_chip = null
@@ -71,21 +84,36 @@
 		. = ..()
 
 /obj/machinery/nav_computer/proc/get_faction()
-	return data_chip.chip_faction
+	if(data_chip)
+		return data_chip.get_faction()
+	return ""
 
 /obj/machinery/nav_computer/proc/get_known_sectors()
-	var/list/known_sector_list = data_chip.known_sectors
+	if(!data_chip)
+		return list("error")
+	var/list/known_sector_list = data_chip.get_known_sectors()
 	//Ripped from Helm.dm get_known_sectors()
 	var/list/known_sector_records = list()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
-		if (S.name in known_sector_list)
+		var/add_sector = 0
+		if (known_sector_list.len > 0)
+			if(S.name in known_sector_list)
+				add_sector = 1
+		else
+			if(S.known)
+				add_sector = 1
+
+		if(add_sector)
 			var/datum/data/record/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
 			known_sector_records[S.name] = R
 	return known_sector_records
+
+/obj/machinery/nav_computer/npc
+	data_chip = new /obj/item/nav_data_chip/fragmented //All NPC ships should only contain a "fragmented" version of the original type.
 
 /obj/item/nav_data_chip
 	name = "\improper Nav data-chip"
@@ -94,12 +122,57 @@
 	icon_state = "nav_data_chip"
 	w_class = ITEM_SIZE_SMALL
 
-	var/chip_faction = "civillian"
+	var/chip_faction = "civilian"
 	var/list/known_sectors = list()//This should contain the exact names of the sectors.
 
 /obj/item/nav_data_chip/examine(var/mob/examiner)
 	. = ..()
 	to_chat(examiner,"<span class = 'notice'>It is registered as a [chip_faction] chip</span>")
 
+/obj/item/nav_data_chip/proc/get_faction()
+	return chip_faction
+
+/obj/item/nav_data_chip/proc/get_known_sectors()
+	return known_sectors
+
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
+
+/obj/item/nav_data_chip/fragmented
+	name = "Fragmented Nav Data Chip"
+
+	chip_faction = "civilian"
+	known_sectors = list()
+	//The above two will not function unless the chip has the amount of required fragments.
+
+	var/fragments_have = 1
+	var/fragments_required = 3
+
+/obj/item/nav_data_chip/fragmented/examine(var/mob/examiner)
+	. = ..()
+	to_chat(examiner,"<span class = 'notice'>This chip has been corrupted by automatic mechnisms. Scan other fragmented chips on this one to reconstruct the full chip.</span>")
+/obj/item/nav_data_chip/fragmented/get_faction()
+	if(is_fragmented())
+		return ""
+	return ..()
+
+/obj/item/nav_data_chip/fragmented/get_known_sectors()
+	if(is_fragmented())
+		return list("error")
+	return ..()
+
+/obj/item/nav_data_chip/fragmented/proc/is_fragmented()
+	if(fragments_have >= fragments_required)
+		return 0
+	return 1
+
+/obj/item/nav_data_chip/fragmented/attackby(var/obj/item/I,var/mob/living/carbon/human/user)
+	if(!istype(user) || !is_fragmented())
+		. = ..()
+	var/obj/item/nav_data_chip/fragmented/f = I
+	if(istype(f) && f.type == type)
+		to_chat(user,"<span class = 'notice'>You scan [I] on [src], transferring the nav data and discarding [I] afterwards.</span>")
+		user.visible_message("<span class = 'notice>[user] scans [I] on [src], transferring the nav data.\n[user] discards the now-useless [I]</span>")
+		fragments_have += f.fragments_have
+		user.drop_from_inventory(f)
+		qdel(f)
