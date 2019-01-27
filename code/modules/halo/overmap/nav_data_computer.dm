@@ -1,8 +1,12 @@
+#define DATA_CHIP_REMOVE_DELAY 10 SECONDS
+
 /obj/machinery/nav_computer
 	name = "Nav Computer"
 	desc = "A computer that contains a store of all of a ship's nav-data alongside the Friend Or Foe ID for the vessel."
+	icon = 'code/modules/halo/overmap/nav_computer.dmi'
+	icon_state = "nav_computer"
 
-	var/obj/item/nav_data_chip/data_chip
+	var/obj/item/nav_data_chip/data_chip = new /obj/item/nav_data_chip
 
 /obj/machinery/nav_computer/New()
 	. = ..()
@@ -18,6 +22,13 @@
 		to_chat(examiner,"<span class = 'notice'>\nIt has a data chip installed:\n</span>")
 		data_chip.examine(examiner)
 
+/obj/machinery/nav_computer/update_icon()
+	. = ..()
+	if(data_chip)
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]_empty"
+
 /obj/machinery/nav_computer/proc/update_overmap_obj()
 	var/obj/effect/overmap/ship/om = map_sectors["[z]"]
 	if(istype(om) && om.nav_control)
@@ -31,19 +42,33 @@
 	data_chip = nav_chip
 	user.visible_message("<span class = 'notice'>[user] inserts [nav_chip] into [src].</span>")
 	update_overmap_obj()
+	update_icon()
+	return 1
 
 
 /obj/machinery/nav_computer/proc/remove_nav_chip(var/mob/user)
+	if(!data_chip)
+		to_chat(user,"<span class = 'notice'>[src] doesn't have a data-chip installed.</span>")
+		return
 	var/obj/item/to_remove = data_chip
 	data_chip = null
 	contents -= to_remove
 	to_remove.forceMove(loc)
-	user.visible_message("<span class = 'notice'>[user] removes [to_remove] from [src].</span>")
+	if(user)
+		user.visible_message("<span class = 'notice'>[user] removes [to_remove] from [src].</span>")
 	update_overmap_obj()
+	update_icon()
 
 /obj/machinery/nav_computer/attack_hand(var/mob/user)
+	user.visible_message("<span class = 'notice'>[user] starts removing the data chip from [src]</span>")
+	if(!do_after(user,DATA_CHIP_REMOVE_DELAY,src,1,1))
+		return
 	remove_nav_chip(user)
 
+/obj/machinery/nav_computer/attackby(var/obj/item/I,var/mob/m)
+	. = insert_nav_chip(I,m)
+	if(.)
+		. = ..()
 
 /obj/machinery/nav_computer/proc/get_faction()
 	return data_chip.chip_faction
@@ -65,6 +90,9 @@
 /obj/item/nav_data_chip
 	name = "\improper Nav data-chip"
 	desc = "A data-chip containing all the nav-data and Friend or Foe Id of a vessel."
+	icon = 'code/modules/halo/overmap/nav_computer.dmi'
+	icon_state = "nav_data_chip"
+	w_class = ITEM_SIZE_SMALL
 
 	var/chip_faction = "civillian"
 	var/list/known_sectors = list()//This should contain the exact names of the sectors.
@@ -72,3 +100,6 @@
 /obj/item/nav_data_chip/examine(var/mob/examiner)
 	. = ..()
 	to_chat(examiner,"<span class = 'notice'>It is registered as a [chip_faction] chip</span>")
+
+/obj/item/nav_data_chip/covenant
+	icon_state = "nav_data_chip_cov"
