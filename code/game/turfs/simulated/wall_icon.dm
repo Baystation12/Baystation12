@@ -40,7 +40,7 @@
 	if(!material)
 		return
 
-	if(LAZYLEN(damage_overlays) < 1) //list hasn't been populated
+	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
 
 	// This line apparently causes runtimes during initialization.
