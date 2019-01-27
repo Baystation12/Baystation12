@@ -6,8 +6,8 @@
 
 /obj/machinery/nav_computer/New()
 	. = ..()
-	var/obj/effect/overmap/our_om = map_sectors["[z]"]
-	if(our_om)
+	var/obj/effect/overmap/ship/our_om = map_sectors["[z]"]
+	if(istype(our_om))
 		our_om.nav_comp = src
 
 /obj/machinery/nav_computer/examine(var/mob/examiner)
@@ -19,8 +19,8 @@
 		data_chip.examine(examiner)
 
 /obj/machinery/nav_computer/proc/update_overmap_obj()
-	var/obj/effect/overmap/om = map_sectors["[z]"]
-	if(om && om.nav_control)
+	var/obj/effect/overmap/ship/om = map_sectors["[z]"]
+	if(istype(om) && om.nav_control)
 		om.nav_control.get_known_sectors()
 
 /obj/machinery/nav_computer/proc/insert_nav_chip(var/obj/item/nav_data_chip/nav_chip,var/mob/living/carbon/human/user)
