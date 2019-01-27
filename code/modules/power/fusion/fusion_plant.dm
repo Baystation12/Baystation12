@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(fusion_plants, new)
 	var/list/fuel_injectors = list()
 	var/list/all_objects =    list()
 	var/list/gyrotrons =      list()
-	var/network_size = 10
+	var/const/network_size = 25
 
 /datum/fusion_plant/New(var/_id)
 	id_tag = _id
