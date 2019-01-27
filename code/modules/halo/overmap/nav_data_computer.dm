@@ -122,7 +122,7 @@
 	icon_state = "nav_data_chip"
 	w_class = ITEM_SIZE_SMALL
 
-	var/chip_faction = "civilian"
+	var/chip_faction = "unknown"
 	var/list/known_sectors = list()//This should contain the exact names of the sectors.
 
 /obj/item/nav_data_chip/examine(var/mob/examiner)
@@ -141,7 +141,7 @@
 /obj/item/nav_data_chip/fragmented
 	name = "Fragmented Nav Data Chip"
 
-	chip_faction = "civilian"
+	chip_faction = "unknown"
 	known_sectors = list()
 	//The above two will not function unless the chip has the amount of required fragments.
 
