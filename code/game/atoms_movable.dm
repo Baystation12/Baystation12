@@ -191,25 +191,45 @@
 //Overlays
 /atom/movable/overlay
 	var/atom/master = null
-	anchored = 1
+	var/follow_proc = /atom/movable/proc/move_to_loc_or_null
+	anchored = TRUE
+	simulated = FALSE
 
-/atom/movable/overlay/New()
-	src.verbs.Cut()
-	..()
+/atom/movable/overlay/Initialize()
+	if(!loc)
+		crash_with("[type] created in nullspace.")
+		return INITIALIZE_HINT_QDEL
+	master = loc
+	SetName(master.name)
+	set_dir(master.dir)
+
+	if(istype(master, /atom/movable))
+		GLOB.moved_event.register(master, src, follow_proc)
+		SetInitLoc()
+
+	GLOB.destroyed_event.register(master, src, /datum/proc/qdel_self)
+	GLOB.dir_set_event.register(master, src, /atom/proc/recursive_dir_set)
+
+	. = ..()
+
+/atom/movable/overlay/proc/SetInitLoc()
+	forceMove(master.loc)
 
 /atom/movable/overlay/Destroy()
+	if(istype(master, /atom/movable))
+		GLOB.moved_event.unregister(master, src)
+	GLOB.destroyed_event.unregister(master, src)
+	GLOB.dir_set_event.unregister(master, src)
 	master = null
 	. = ..()
 
-/atom/movable/overlay/attackby(a, b)
-	if (src.master)
-		return src.master.attackby(a, b)
-	return
+/atom/movable/overlay/attackby(obj/item/I, mob/user)
+	if (master)
+		return master.attackby(I, user)
 
-/atom/movable/overlay/attack_hand(a, b, c)
-	if (src.master)
-		return src.master.attack_hand(a, b, c)
-	return
+/atom/movable/overlay/attack_hand(mob/user)
+	if (master)
+		return master.attack_hand(user)
 
 /atom/movable/proc/touch_map_edge()
 	if(!simulated)

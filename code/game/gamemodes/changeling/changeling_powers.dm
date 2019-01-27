@@ -376,10 +376,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.icon = null
 	C.overlays.Cut()
 	C.set_invisibility(101)
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( C.loc )
+	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
 	flick("monkey2h", animation)
 	sleep(48)
 	qdel(animation)
