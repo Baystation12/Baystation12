@@ -1341,7 +1341,7 @@
 	icon_state = "corner_white_diagonal";
 	dir = 4
 	},
-/obj/item/clothing/mask/gas/half,
+/obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/rig/command/medical/equipped,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -3754,6 +3754,9 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
+"iL" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/maintenance/bridge/aftport)
 "iM" = (
 /obj/structure/sign/warning/high_voltage{
 	icon_state = "shock";
@@ -7300,17 +7303,13 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/weapon/rig/command/science,
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 4;
-	name = "suit storage";
-	req_access = list(19)
+	name = "CSO's suit storage";
+	req_access = list(45)
 	},
-/obj/effect/floor_decal/corner/blue/diagonal,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/item/clothing/mask/gas/half,
-/obj/item/weapon/rig/command/equipped,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "qj" = (
@@ -9192,9 +9191,6 @@
 /obj/machinery/computer/rdservercontrol,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
-"tF" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/bridge/aftport)
 "tH" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -11595,7 +11591,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/clothing/mask/gas/half,
+/obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/rig/command/xo/equipped,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -12225,7 +12221,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/clothing/mask/gas/half,
+/obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/rig/command/co/equipped,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -15606,9 +15602,6 @@
 	},
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -16271,7 +16264,7 @@
 	req_access = list(58)
 	},
 /obj/effect/floor_decal/corner/red/full,
-/obj/item/clothing/mask/gas/half,
+/obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/rig/command/security/equipped,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -32287,7 +32280,7 @@ on
 on
 on
 on
-tF
+iL
 uY
 Pc
 wn
@@ -32489,7 +32482,7 @@ qi
 yi
 Ci
 on
-tF
+iL
 uY
 vI
 wo

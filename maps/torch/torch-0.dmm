@@ -10472,9 +10472,6 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "xK" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
 /obj/machinery/photocopier,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
@@ -11559,9 +11556,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "BH" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
@@ -12004,21 +11998,8 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
 "Du" = (
-/obj/item/weapon/rig/hazmat/equipped,
-/obj/structure/table/rack,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced,
-/obj/machinery/door/window/brigdoor/westright{
-	dir = 8;
-	name = "suit storage";
-	req_access = list(206)
-	},
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
+/obj/structure/table/glass,
+/obj/item/device/paicard,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Dv" = (
@@ -15355,9 +15336,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/rnd)
 "QH" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -16159,10 +16137,8 @@
 /area/hallway/primary/fifthdeck/aft)
 "TM" = (
 /obj/structure/table/glass,
-/obj/item/device/paicard,
 /obj/item/weapon/folder/nt,
 /obj/item/weapon/folder/nt,
-/obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "TO" = (
@@ -16345,7 +16321,6 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/analysis)
 "UA" = (
-/obj/effect/floor_decal/industrial/warning/corner,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 8;
