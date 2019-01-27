@@ -317,11 +317,11 @@
 
 /obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)
 	. = ..()
-	if(!istype(L) || . == 0)
+	if(!istype(L) || !isliving(target) || isanimal(target))
 		return 0
 
-	L.Weaken(stun_time/2)
-	L.confused += disorient_time/2
+	L.Weaken(stun_time)
+	L.confused += disorient_time
 	shake_camera(L,disorient_time,2)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
 	return 1
