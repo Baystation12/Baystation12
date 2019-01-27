@@ -309,7 +309,7 @@
 	icon = null //No icon on purpose, it's a sound wave.
 	icon_state = ""
 	damtype = PAIN
-	damage = 15
+	damage = 40
 	//NOTE: Life() calls happen every two seconds, and life() reduces dizziness by one
 	var/stun_time = 2 //This is in seconds.
 	var/suppress_time = 4
