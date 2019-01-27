@@ -1,4 +1,4 @@
-#define AUTO_DEFENSE_LOCKON_DELAY 15 SECONDS
+#define AUTO_DEFENSE_LOCKON_DELAY 12 SECONDS
 #define AUTO_DEFENSE_FIRE_DELAY 5 SECONDS
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses
@@ -54,7 +54,7 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(ship.get_faction() != ship_source.get_faction())
+			if(ship.get_faction() != "civilian" && ship.get_faction() != ship_source.get_faction())
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
 			return 1
