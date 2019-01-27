@@ -14,7 +14,7 @@
 	var/default_reinf_type
 	var/material/reinf_material
 	var/perunit = SHEET_MATERIAL_AMOUNT
-	var/material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 	var/plural_name
 	var/matter_multiplier = 1
 
@@ -141,21 +141,25 @@
 	if(material_flags & USE_MATERIAL_COLOR)
 		color = material.icon_colour
 		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+	if(plural_icon_state && amount > 2)
+		icon_state = plural_icon_state
 
 /obj/item/stack/material/iron
 	name = "iron"
-	icon_state = "sheet-silver"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_IRON
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/sandstone
 	name = "sandstone brick"
-	icon_state = "sheet-sandstone"
+	icon_state = "brick"
+	plural_icon_state = "brick-mult"
 	default_type = MATERIAL_SANDSTONE
 
 /obj/item/stack/material/marble
 	name = "marble brick"
-	icon_state = "sheet-marble"
+	icon_state = "brick"
+	plural_icon_state = "brick-mult"
 	default_type = MATERIAL_MARBLE
 
 /obj/item/stack/material/marble/ten
@@ -166,7 +170,8 @@
 
 /obj/item/stack/material/diamond
 	name = "diamond"
-	icon_state = "sheet-diamond"
+	icon_state = "diamond"
+	plural_icon_state = "diamond-mult"
 	default_type = MATERIAL_DIAMOND
 
 /obj/item/stack/material/diamond/ten
@@ -176,6 +181,7 @@
 	name = "uranium"
 	icon_state = "sheet-uranium"
 	default_type = MATERIAL_URANIUM
+	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/uranium/ten
 	amount = 10
@@ -184,6 +190,7 @@
 	name = "solid phoron"
 	icon_state = "sheet-phoron"
 	default_type = MATERIAL_PHORON
+	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/phoron/ten
 	amount = 10
@@ -193,7 +200,8 @@
 
 /obj/item/stack/material/plastic
 	name = "plastic"
-	icon_state = "sheet-plastic"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
 	default_type = MATERIAL_PLASTIC
 
 /obj/item/stack/material/plastic/ten
@@ -204,7 +212,8 @@
 
 /obj/item/stack/material/gold
 	name = "gold"
-	icon_state = "sheet-gold"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_GOLD
 
 /obj/item/stack/material/gold/ten
@@ -212,7 +221,8 @@
 
 /obj/item/stack/material/silver
 	name = "silver"
-	icon_state = "sheet-silver"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_SILVER
 
 /obj/item/stack/material/silver/ten
@@ -221,7 +231,8 @@
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
 	name = "platinum"
-	icon_state = "sheet-adamantine"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_PLATINUM
 
 /obj/item/stack/material/platinum/ten
@@ -232,6 +243,7 @@
 	name = "metallic hydrogen"
 	icon_state = "sheet-mythril"
 	default_type = MATERIAL_HYDROGEN
+	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/mhydrogen/ten
 	amount = 10
@@ -239,9 +251,9 @@
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
 	name = "tritium"
-	icon_state = "sheet-silver"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_TRITIUM
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/tritium/ten
 	amount = 10
@@ -251,19 +263,19 @@
 
 /obj/item/stack/material/osmium
 	name = "osmium"
-	icon_state = "sheet-silver"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_OSMIUM
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/osmium/ten
 	amount = 10
 
 /obj/item/stack/material/ocp
 	name = "osmium-carbide plasteel"
-	icon_state = "sheet-plasteel"
+	icon_state = "sheet-reinf"
 	item_state = "sheet-metal"
+	plural_icon_state = "sheet-reinf-mult"
 	default_type = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/ocp/ten
 	amount = 10
@@ -274,16 +286,17 @@
 // Fusion fuel.
 /obj/item/stack/material/deuterium
 	name = "deuterium"
-	icon_state = "sheet-silver"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 	default_type = MATERIAL_DEUTERIUM
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/deuterium/fifty
 	amount = 50
 
 /obj/item/stack/material/steel
 	name = "steel"
-	icon_state = "sheet-metal"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
 	default_type = MATERIAL_STEEL
 
 /obj/item/stack/material/steel/ten
@@ -294,7 +307,7 @@
 
 /obj/item/stack/material/aluminium
 	name = "aluminium"
-	icon_state = "sheet-aluminium"
+	icon_state = "sheet"
 	item_state = "sheet-metal"
 	default_type = MATERIAL_ALUMINIUM
 
@@ -306,8 +319,9 @@
 
 /obj/item/stack/material/plasteel
 	name = "plasteel"
-	icon_state = "sheet-plasteel"
+	icon_state = "sheet-reinf"
 	item_state = "sheet-metal"
+	plural_icon_state = "sheet-reinf-mult"
 	default_type = MATERIAL_PLASTEEL
 
 /obj/item/stack/material/plasteel/ten
@@ -319,6 +333,7 @@
 /obj/item/stack/material/wood
 	name = "wooden plank"
 	icon_state = "sheet-wood"
+	plural_icon_state = "sheet-wood-mult"
 	default_type = MATERIAL_WOOD
 
 /obj/item/stack/material/wood/ten
@@ -336,6 +351,7 @@
 	name = "cardboard"
 	icon_state = "sheet-card"
 	default_type = MATERIAL_CARDBOARD
+	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/cardboard/ten
 	amount = 10
@@ -348,19 +364,22 @@
 	desc = "The by-product of mob grinding."
 	icon_state = "sheet-leather"
 	default_type = MATERIAL_LEATHER
+	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/glass
 	name = "glass"
-	icon_state = "sheet-glass"
+	icon_state = "sheet-shiny"
+	plural_icon_state = "sheet-shiny-mult"
 	default_type = MATERIAL_GLASS
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/glass/on_update_icon()
-	..()
 	if(reinf_material) 
-		icon_state = "sheet-rglass"
+		icon_state = "sheet-reinf"
+		plural_icon_state = "sheet-reinf-mult"
 	else
-		icon_state = "sheet-glass"
+		icon_state = "sheet-shiny"
+		plural_icon_state = "sheet-shiny-mult"
+	..()
 
 /obj/item/stack/material/glass/ten
 	amount = 10
@@ -370,7 +389,8 @@
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"
-	icon_state = "sheet-rglass"
+	icon_state = "sheet-reinf"
+	plural_icon_state = "sheet-reinf-mult"
 	default_type = MATERIAL_GLASS
 	default_reinf_type = MATERIAL_STEEL
 
@@ -393,16 +413,16 @@
 	amount = 10
 
 /obj/item/stack/material/aliumium
-	name = "aliumium chunks"
-	icon_state = "sheet-torn"
+	name = "alien alloy"
+	icon_state = "sheet"
 	default_type = MATERIAL_ALIUMIUM
-	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/aliumium/ten
 	amount = 10
 
 /obj/item/stack/material/generic
-	icon_state = "sheet-silver"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
 
 /obj/item/stack/material/generic/Initialize()
 	. = ..()

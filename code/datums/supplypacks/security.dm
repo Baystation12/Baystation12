@@ -199,54 +199,45 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/pdwammo
-	name = "Ammunition - 9mm top mounted"
-	contains = list(/obj/item/ammo_magazine/mc9mmt = 4)
+	name = "Ammunition - SMG top mounted"
+	contains = list(/obj/item/ammo_magazine/smg_top = 4)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "9mm ammunition crate"
+	containername = "SMG ammunition crate"
 	access = access_security
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/pdwammorubber
-	name = "Ammunition - 9mm top mounted rubber"
-	contains = list(/obj/item/ammo_magazine/mc9mmt/rubber = 4)
+	name = "Ammunition - SMG top mounted rubber"
+	contains = list(/obj/item/ammo_magazine/smg_top/rubber = 4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "9mm rubber ammunition crate"
-	access = access_security
-
-
-/decl/hierarchy/supply_pack/security/pdwammoflash
-	name = "Ammunition - 9mm top mounted flash"
-	contains = list(/obj/item/ammo_magazine/mc9mmt/flash = 4)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "9mm stun ammunition crate"
+	containername = "SMG rubber ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/pdwammopractice
-	name = "Ammunition - 9mm top mounted practice"
-	contains = list(/obj/item/ammo_magazine/mc9mmt/practice = 8)
+	name = "Ammunition - SMG top mounted practice"
+	contains = list(/obj/item/ammo_magazine/smg_top/practice = 8)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "9mm practice ammunition crate"
+	containername = "SMG practice ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/bullpupammo
-	name = "Ammunition - 7.62"
-	contains = list(/obj/item/ammo_magazine/a762 = 4)
+	name = "Ammunition - military rifle"
+	contains = list(/obj/item/ammo_magazine/mil_rifle = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "7.62 ammunition crate"
+	containername = "military rifle ammunition crate"
 	access = access_security
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/bullpupammopractice
-	name = "Ammunition - 7.62 practice"
-	contains = list(/obj/item/ammo_magazine/a762/practice = 8)
+	name = "Ammunition - military rifle practice"
+	contains = list(/obj/item/ammo_magazine/mil_rifle/practice = 8)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "7.62 practice ammunition crate"
+	containername = "military rifle practice ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/forensics //Not access-restricted so PIs can use it.

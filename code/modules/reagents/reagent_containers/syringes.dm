@@ -92,7 +92,7 @@
 		icon_state = "broken"
 		return
 
-	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 1, 15)
+	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if (reagents.total_volume == 0)
 		rounded_vol = 0
 	if(ismob(loc))

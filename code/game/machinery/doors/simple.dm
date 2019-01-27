@@ -106,10 +106,10 @@
 /obj/machinery/door/unpowered/simple/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			set_broken()
+			set_broken(TRUE)
 		if(2.0)
 			if(prob(25))
-				set_broken()
+				set_broken(TRUE)
 			else
 				take_damage(300)
 		if(3.0)

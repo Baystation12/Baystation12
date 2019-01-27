@@ -201,6 +201,7 @@
 	req_access = list(access_pathfinder)
 
 /obj/item/clothing/head/helmet/space/rig/command/exploration
+	camera = /obj/machinery/camera/network/exploration
 	icon_state = "command_exp_rig"
 /obj/item/clothing/suit/space/rig/command/exploration
 	icon_state = "command_exp_rig"

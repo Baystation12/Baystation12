@@ -146,18 +146,12 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
+	scope_zoom = 2
 	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/sniperrifle/on_update_icon()
 	..()
 	item_state_slots[slot_back_str] = icon_state //so that the on-back overlay uses the different charged states
-
-/obj/item/weapon/gun/energy/sniperrifle/verb/scope()
-	set category = "Object"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(usr, 2.0)
 
 ////////Laser Tag////////////////////
 

@@ -7992,8 +7992,8 @@
 /area/maintenance/substation/fifthdeck)
 "rc" = (
 /obj/machinery/power/sensor{
-	name = "Powernet Sensor - Fourth Deck Subgrid";
-	name_tag = "Fourth Deck Subgrid"
+	name = "Powernet Sensor - Fifth Deck Subgrid";
+	name_tag = "Fifth Deck Subgrid"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -12622,13 +12622,13 @@
 "Gc" = (
 /obj/structure/table/glass,
 /obj/machinery/photocopier/faxmachine{
-	department = "Research Director's Office"
+	department = "Chief Science Officer's Office"
 	},
 /obj/machinery/requests_console{
 	announcementConsole = 1;
-	department = "Research Director's Desk";
+	department = "Chief Science Officer's Desk";
 	departmentType = 5;
-	name = "Research Director RC";
+	name = "Chief Science Officer RC";
 	pixel_x = -30;
 	pixel_y = 0
 	},
@@ -16402,7 +16402,7 @@
 "UM" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/research{
-	name = "Research Director";
+	name = "Chief Science Officer";
 	req_access = list(206);
 	secured_wires = 1
 	},
@@ -16650,7 +16650,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/camera/network/nanotrasen{
-	c_tag = "Petrov - Research Director";
+	c_tag = "Petrov - Chief Science Officer";
 	dir = 4
 	},
 /obj/machinery/light{

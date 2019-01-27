@@ -49,6 +49,8 @@
 
 	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
 
+	var/list/species_branch_rank_cache_ = list()
+
 /datum/job/New()
 
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
@@ -209,7 +211,34 @@
 	return active
 
 /datum/job/proc/is_species_allowed(var/datum/species/S)
-	return !GLOB.using_map.is_species_job_restricted(S, src)
+	if(GLOB.using_map.is_species_job_restricted(S, src))
+		return FALSE
+	// We also make sure that there is at least one valid branch-rank combo for the species.
+	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+		return TRUE
+	return LAZYLEN(get_branch_rank(S))
+
+// Don't use if the map doesn't use branches but jobs do.
+/datum/job/proc/get_branch_rank(var/datum/species/S)
+	. = species_branch_rank_cache_[S]
+	if(.)
+		return
+
+	species_branch_rank_cache_[S] = list()
+	. = species_branch_rank_cache_[S]
+
+	var/spawn_branches = mil_branches.spawn_branches(S)
+	for(var/branch_type in allowed_branches)
+		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
+		if(branch.name in spawn_branches)
+			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
+				LAZYADD(., branch.name)
+				continue // Screw this rank stuff, we're good.
+			var/spawn_ranks = branch.spawn_ranks(S)
+			for(var/rank_type in allowed_ranks)
+				var/datum/mil_rank/rank = rank_type
+				if(initial(rank.name) in spawn_ranks)
+					LAZYADD(.[branch.name], initial(rank.name))
 
 /**
  *  Check if members of the given branch are allowed in the job

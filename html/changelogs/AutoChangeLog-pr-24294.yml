@@ -1,0 +1,4 @@
+author: "Roland410"
+delete-after: True
+changes: 
+  - bugfix: "Fixed/removed the cap on away site jobs' skills."

@@ -25,6 +25,8 @@ GLOBAL_LIST_EMPTY(skills)
 		else
 			return 0
 
+/decl/hierarchy/skill/proc/update_special_effects(mob/mob, level)
+
 /decl/hierarchy/skill/Initialize()
 	..()
 	if(is_hidden_category())
@@ -84,6 +86,11 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "You can navigate most paperwork thrown at you, even if you are unfamiliar with it. You have a good working understanding of the law and any regulations or procedures relevant to you.",
 						"Experienced"		= "With your experience, you can easily create paperwork for any eventuality, and write reports which are clear and understandable. You have an excellent knowledge of the law, possibly including formal legal training.",
 						"Master"		= "You can make paperwork dance to your bidding, and navigate the most byzantine bureaucratic structures with ease and familiarity. Your reports are works of literature. Your knowledge of the law is both broad and intimate, and you may be certified to practice law.")
+
+/decl/hierarchy/skill/organizational/bureaucracy/update_special_effects(mob/mob, level)
+	mob.remove_language(LANGUAGE_LEGALESE)
+	if(level >= SKILL_EXPERT)
+		mob.add_language(LANGUAGE_LEGALESE)
 
 /decl/hierarchy/skill/organizational/finance
 	ID = "finance"

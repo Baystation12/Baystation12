@@ -365,8 +365,8 @@
 
 	//Command Support (Sky Blue)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='87ceeb'><th colspan='[length(SSjobs.titles_by_department(SUP))]'><a href='?src=\ref[src];jobban3=supportdept;jobban4=\ref[M]'>Command Support Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(SUP))
+		jobs += "<tr bgcolor='87ceeb'><th colspan='[length(SSjobs.titles_by_department(SPT))]'><a href='?src=\ref[src];jobban3=supportdept;jobban4=\ref[M]'>Command Support Positions</a></th></tr><tr align='center'>"
+		for(var/jobPos in SSjobs.titles_by_department(SPT))
 			if(!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if(!job) continue
@@ -663,7 +663,7 @@
 					if(!temp) continue
 					job_list += temp.title
 			if("supportdept")
-				for(var/jobPos in SSjobs.titles_by_department(SUP))
+				for(var/jobPos in SSjobs.titles_by_department(SPT))
 					if(!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if(!temp) continue

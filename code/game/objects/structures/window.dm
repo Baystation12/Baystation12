@@ -261,7 +261,6 @@
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
-			qdel(src)
 	else if(polarized && isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the window.", src.name, null), MAX_NAME_LEN)
 		if(user.incapacitated() || !user.Adjacent(src))
@@ -592,6 +591,6 @@
 				return
 
 		if (ST.use(1))
-			var/obj/structure/window/WD = new(loc, dir_to_set, 1, ST.material.name, ST.reinf_material && ST.reinf_material.name)
+			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
 			to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
 			WD.update_icon()

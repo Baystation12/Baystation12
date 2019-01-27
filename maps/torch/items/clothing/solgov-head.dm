@@ -394,6 +394,9 @@
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	starting_accessories = null
 
+/obj/item/clothing/head/helmet/space/void/exploration
+	camera = /obj/machinery/camera/network/exploration
+	
 //SolGov Hardsuits
 
 /obj/item/clothing/head/helmet/space/void/engineering/alt/sol

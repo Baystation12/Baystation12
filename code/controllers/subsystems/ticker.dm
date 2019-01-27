@@ -89,7 +89,7 @@ SUBSYSTEM_DEF(ticker)
 	callHook("roundstart")
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
-		mode.post_setup()
+		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
 
@@ -237,10 +237,10 @@ Helpers
 		return
 
 	//Deal with jobs and antags, check that we can actually run the mode.
-	SSjobs.reset_occupations()
-	mode_datum.create_antagonists()
-	mode_datum.pre_setup()
-	SSjobs.divide_occupations(mode_datum) // Apparently important for new antagonist system to register specific job antags properly.
+	SSjobs.reset_occupations() // Clears all players' role assignments. Clean slate.
+	mode_datum.create_antagonists() // Init operation on the mode; sets up antag datums and such.
+	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
+	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
 
 	if(mode_datum.startRequirements())
 		mode_datum.fail_setup()

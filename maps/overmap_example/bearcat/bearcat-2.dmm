@@ -79,7 +79,7 @@
 "aI" = (
 /obj/item/weapon/bedsheet/captain,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/weapon/gun/projectile/pistol,
+/obj/item/weapon/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)

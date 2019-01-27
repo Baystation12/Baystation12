@@ -1556,6 +1556,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
+"dI" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "dJ" = (
 /obj/machinery/suit_storage_unit/atmos/alt/sol,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -2284,6 +2292,7 @@
 	name = "Engineering Hard Storage";
 	req_access = list(11)
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/engine_eva)
 "fp" = (
@@ -7878,6 +7887,7 @@
 /area/hallway/primary/thirddeck/center)
 "re" = (
 /obj/machinery/door/airlock/glass/civilian,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/thirddeck/aft)
 "rf" = (
@@ -8920,6 +8930,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/gym)
 "sJ" = (
@@ -9849,6 +9860,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
+"vd" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "ve" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/thirddeck/aftstarboard)
@@ -11556,6 +11577,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/diplomat)
 "yD" = (
@@ -11818,6 +11840,14 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"ze" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/turf/simulated/open,
+/area/maintenance/thirddeck/starboard)
 "zf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -12178,16 +12208,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/hardstorage)
-"Af" = (
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
 "Ag" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/firealarm{
@@ -13034,10 +13054,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
-"Cu" = (
-/obj/structure/railing/mapped,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
 "Cv" = (
 /obj/structure/table/steel,
 /obj/random/tech_supply,
@@ -14208,14 +14224,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
-"Fx" = (
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
-/turf/simulated/open,
-/area/maintenance/thirddeck/starboard)
 "Fy" = (
 /obj/structure/table/rack,
 /obj/random/tech_supply,
@@ -16360,6 +16368,9 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/diplomat)
+"KC" = (
+/turf/simulated/open,
+/area/maintenance/thirddeck/starboard)
 "KE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
@@ -17060,6 +17071,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/diplomat)
 "Mn" = (
@@ -17791,14 +17803,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
-"OD" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
 "OE" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/powered/pump/filled,
@@ -18702,12 +18706,6 @@
 /obj/structure/lattice,
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftport)
-"Rs" = (
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
 "Rt" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 6
@@ -18739,6 +18737,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
+"RB" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "RC" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 10
@@ -19011,6 +19015,18 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/hydroponics)
+"Ss" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/railing/mapped,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "St" = (
 /obj/structure/railing/mapped,
 /obj/structure/lattice,
@@ -19729,9 +19745,6 @@
 /obj/machinery/atmospherics/omni/mixer,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
-"UG" = (
-/turf/simulated/open,
-/area/maintenance/thirddeck/starboard)
 "UI" = (
 /obj/structure/table/steel,
 /obj/random/tech_supply,
@@ -20273,6 +20286,14 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
+"VZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
@@ -21072,14 +21093,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/engine_eva)
-"Yw" = (
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
 "Yx" = (
 /obj/structure/table/standard,
 /obj/machinery/reagentgrinder{
@@ -21330,18 +21343,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/storage/tools)
-"Zk" = (
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/obj/structure/railing/mapped,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
 "Zl" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -21557,6 +21558,10 @@
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
+"ZV" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "ZX" = (
 /obj/structure/table/steel,
 /obj/random/maintenance/solgov,
@@ -40650,7 +40655,7 @@ bA
 fG
 cl
 cl
-Cu
+ZV
 Vv
 nD
 nD
@@ -40853,12 +40858,12 @@ NH
 Ux
 cl
 aY
-Af
-Rs
-Rs
-Rs
-Rs
-Yw
+vd
+RB
+RB
+RB
+RB
+dI
 kY
 cl
 wD
@@ -41056,13 +41061,13 @@ tu
 cl
 Dz
 Eq
-Fx
-Fx
-Fx
-Fx
-Zk
-OD
-Rs
+ze
+ze
+ze
+ze
+Ss
+VZ
+RB
 TO
 rc
 ss
@@ -41258,10 +41263,10 @@ cl
 cl
 OE
 aY
-UG
-UG
-UG
-UG
+KC
+KC
+KC
+KC
 aY
 Eq
 Eq

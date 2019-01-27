@@ -1,9 +1,3 @@
-/*
-	TODO README
-*/
-
-var/list/fusion_cores = list()
-
 #define MAX_FIELD_STR 10000
 #define MIN_FIELD_STR 1
 
@@ -22,7 +16,7 @@ var/list/fusion_cores = list()
 
 	var/obj/effect/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
-	var/id_tag
+	var/initial_id_tag
 
 /obj/machinery/power/fusion_core/mapped
 	anchored = 1
@@ -30,15 +24,10 @@ var/list/fusion_cores = list()
 /obj/machinery/power/fusion_core/Initialize()
 	. = ..()
 	connect_to_network()
-	fusion_cores += src
-
-/obj/machinery/power/fusion_core/Destroy()
-	for(var/obj/machinery/computer/fusion_core_control/FCC in SSmachines.machinery)
-		FCC.connected_devices -= src
-		if(FCC.cur_viewed_device == src)
-			FCC.cur_viewed_device = null
-	fusion_cores -= src
-	return ..()
+	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	if(initial_id_tag)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.set_tag(null, initial_id_tag)
 
 /obj/machinery/power/fusion_core/Process()
 	if((stat & BROKEN) || !powernet || !owned_field)
@@ -104,11 +93,10 @@ var/list/fusion_cores = list()
 		return
 
 	if(isMultitool(W))
-		var/new_ident = input("Enter a new ident tag.", "Fusion Core", id_tag) as null|text
-		if(new_ident && user.Adjacent(src))
-			id_tag = new_ident
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.get_new_tag(user)
 		return
-
+	
 	else if(isWrench(W))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -131,3 +119,10 @@ var/list/fusion_cores = list()
 		return FALSE
 	owned_field.plasma_temperature = field_temperature
 	return TRUE
+
+/obj/machinery/power/fusion_core/proc/check_core_status()
+	if(stat & BROKEN)
+		return FALSE
+	if(idle_power_usage > avail())
+		return FALSE
+	. = TRUE

@@ -1,6 +1,9 @@
 /atom/proc/get_codex_value()
 	return src
 
+/atom/proc/get_specific_codex_entry()
+	return FALSE
+
 /atom/examine(var/mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	. = ..()
 	if(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value()))

@@ -12,6 +12,28 @@
 	allowed_ranks = null
 	allowed_branches = null
 	skill_points = 25
+	max_skill = list(   SKILL_BUREAUCRACY = SKILL_MAX,
+	                    SKILL_FINANCE = SKILL_MAX,
+	                    SKILL_EVA = SKILL_MAX,
+	                    SKILL_MECH = SKILL_MAX,
+	                    SKILL_PILOT = SKILL_MAX,
+	                    SKILL_HAULING = SKILL_MAX,
+	                    SKILL_COMPUTER = SKILL_MAX,
+	                    SKILL_BOTANY = SKILL_MAX,
+	                    SKILL_COOKING = SKILL_MAX,
+	                    SKILL_COMBAT = SKILL_MAX,
+	                    SKILL_WEAPONS = SKILL_MAX,
+	                    SKILL_FORENSICS = SKILL_MAX,
+	                    SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL = SKILL_MAX,
+	                    SKILL_ATMOS = SKILL_MAX,
+	                    SKILL_ENGINES = SKILL_MAX,
+	                    SKILL_DEVICES = SKILL_MAX,
+	                    SKILL_SCIENCE = SKILL_MAX,
+	                    SKILL_MEDICAL = SKILL_MAX,
+	                    SKILL_ANATOMY = SKILL_MAX,
+	                    SKILL_VIROLOGY = SKILL_MAX,
+	                    SKILL_CHEMISTRY = SKILL_MAX)
 
 	var/info = "You have survived a terrible disaster. Make the best of things that you can."
 	var/rank
