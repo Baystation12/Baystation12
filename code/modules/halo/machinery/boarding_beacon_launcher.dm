@@ -20,7 +20,7 @@
 
 /obj/item/projectile/boarding_beacon/on_impact(var/atom/impacted)
 	new /obj/structure/boarding_beacon (loc,null)
-	qdel()
+	. = ..()
 
 #define BOARDING_BEACON_DESTROYDELAY 10 SECONDS
 
