@@ -1877,7 +1877,7 @@
 /area/bridge)
 "eQ" = (
 /obj/structure/displaycase,
-/obj/item/weapon/gun/projectile/revolver/webley/captain{
+/obj/item/weapon/gun/projectile/revolver/medium/captain{
 	pixel_y = -3
 	},
 /turf/simulated/floor/tiled/dark,

@@ -135,7 +135,7 @@
 	id = "wt550"
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_SILVER = 3000, MATERIAL_DIAMOND = 1500)
-	build_path = /obj/item/weapon/gun/projectile/automatic/wt550
+	build_path = /obj/item/weapon/gun/projectile/automatic/sec_smg
 	sort_string = "TAPAA"
 
 /datum/design/item/weapon/smg
@@ -149,26 +149,27 @@
 	id = "bullpup"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 5000, MATERIAL_DIAMOND = 3000)
-	build_path = /obj/item/weapon/gun/projectile/automatic/z8
+	build_path = /obj/item/weapon/gun/projectile/automatic/bullpup_rifle
 	sort_string = "TAPAC"
 
 /datum/design/item/weapon/ammunition/AssembleDesignName()
 	..()
 	name = "Ammunition prototype ([item_name])"
 
-/datum/design/item/weapon/ammunition/ammo_9mm
-	id = "ammo_9mm"
+/datum/design/item/weapon/ammunition/ammo_small
+	id = "ammo_small"
+	desc = "A box of small pistol rounds."
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	materials = list(MATERIAL_STEEL = 3750, MATERIAL_SILVER = 100)
-	build_path = /obj/item/ammo_magazine/box/c9mm
+	build_path = /obj/item/ammo_magazine/box/smallpistol
 	sort_string = "TBAAA"
 
-/datum/design/item/weapon/ammunition/ammo_4mm
-	id = "ammo_4mm"
-	desc = "A high capacity magazine of 4mm armor piercing rounds."
+/datum/design/item/weapon/ammunition/ammo_flechette
+	id = "ammo_flechette"
+	desc = "A high capacity magazine of armor piercing flechette."
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4)
 	materials = list(MATERIAL_STEEL = 2000, MATERIAL_SILVER = 500, MATERIAL_DIAMOND = 200)
-	build_path = /obj/item/ammo_magazine/c4mm
+	build_path = /obj/item/ammo_magazine/proto_smg
 	sort_string = "TBAAB"
 
 /datum/design/item/weapon/ammunition/stunshell
@@ -179,28 +180,20 @@
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
 	sort_string = "TBAAC"
 
-/datum/design/item/weapon/ammunition/ammo_emp_38
-	id = "ammo_emp_38"
-	desc = "A .38 round with an integrated EMP charge."
+/datum/design/item/weapon/ammunition/ammo_emp_small
+	id = "ammo_emp_small"
+	desc = "A box of small pistol rounds with integrated EMP charges."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
-	build_path = /obj/item/ammo_magazine/box/emp
+	build_path = /obj/item/ammo_magazine/box/emp/smallpistol
 	sort_string = "TBAAD"
 
-/datum/design/item/weapon/ammunition/ammo_emp_45
-	id = "ammo_emp_45"
-	desc = "A .45 round with an integrated EMP charge."
+/datum/design/item/weapon/ammunition/ammo_emp_pistol
+	id = "ammo_emp_pistol"
+	desc = "A box of pistol rounds fitted with integrated EMP charges."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
-	build_path = /obj/item/ammo_magazine/box/emp/c45
-	sort_string = "TBAAE"
-
-/datum/design/item/weapon/ammunition/ammo_emp_10
-	id = "ammo_emp_10"
-	desc = "A 10mm round with an integrated EMP charge."
-	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
-	build_path = /obj/item/ammo_magazine/box/emp/a10mm
+	build_path = /obj/item/ammo_magazine/box/emp/pistol
 	sort_string = "TBAAF"
 
 /datum/design/item/weapon/ammunition/ammo_emp_slug

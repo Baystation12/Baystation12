@@ -272,7 +272,7 @@
 //**Chameleon Gun**
 //*****************
 /obj/item/weapon/gun/energy/chameleon
-	name = "revolver"
+	name = "chameleon gun"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
 	icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = "revolver"

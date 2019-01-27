@@ -51,13 +51,12 @@ SUBSYSTEM_DEF(codex)
 				entry_cache[searching] = entries_by_path[entry]
 			else if(istype(entry, /atom))
 				var/atom/entity = entry
-				var/check = entries_by_string[lowertext(entity.name)]
-				if(check)
-					entry_cache[searching] = check
-				else
-					check = entries_by_path[entity.type]
-					if(check)
-						entry_cache[searching] = check
+				if(entries_by_string[lowertext(entity.name)])
+					entry_cache[searching] = entries_by_string[lowertext(entity.name)]
+				else if(entries_by_path[entity.type])
+					entry_cache[searching] = entries_by_path[entity.type]
+				else if(entity.get_specific_codex_entry())
+					entry_cache[searching] = entity.get_specific_codex_entry()
 	return entry_cache[searching]
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(var/mob/presenting_to, var/datum/codex_entry/entry)
