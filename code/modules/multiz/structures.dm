@@ -19,15 +19,24 @@
 	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
 
 /obj/structure/ladder/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/ladder/LateInitialize()
 	. = ..()
+	try_connect()
+	update_icon()
+
+/obj/structure/ladder/proc/try_connect()
+	. = 0
+
 	// the upper will connect to the lower
 	if(allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
 		for(var/obj/structure/ladder/L in GetBelow(src))
 			if(L.allowed_directions & UP)
 				target_down = L
 				L.target_up = src
-				return
-	update_icon()
+				return 1
 
 /obj/structure/ladder/Destroy()
 	if(target_down)
@@ -76,6 +85,9 @@
 		M.forceMove(get_turf(target_ladder))
 
 /obj/structure/ladder/proc/getTargetLadder(var/mob/M)
+	/*if(!target_up || !target_down)
+		try_connect()*/
+
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
 		to_chat(M, "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>")
 		return
@@ -148,6 +160,7 @@
 	name = "Stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
 	icon = 'icons/obj/stairs.dmi'
+	layer = TURF_LAYER
 	density = 0
 	opacity = 0
 	anchored = 1

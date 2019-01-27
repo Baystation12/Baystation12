@@ -50,11 +50,12 @@
 	mode_flag = MODEFLAG_HULL
 	multiplier = 1
 
+/*
 /datum/shield_mode/adaptive
 	mode_name = "Adaptive Field Harmonics"
 	mode_desc = "This mode modulates the shield harmonic frequencies, allowing the field to adapt to various damage types."
 	mode_flag = MODEFLAG_MODULATE
-	multiplier = 2
+	multiplier = 2*/
 
 /datum/shield_mode/bypass
 	mode_name = "Diffuser Bypass"

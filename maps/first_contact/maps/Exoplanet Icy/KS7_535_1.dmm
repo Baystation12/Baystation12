@@ -340,7 +340,7 @@
 "gB" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility/ground/interior/hangar)
 "gC" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
 "gD" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/cryodorm)
-"gE" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data Fuel Depot"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
+"gE" = (/obj/effect/landmark/map_data{name = "KS7-535"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/ground/exterior/south)
 "gF" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor/plating,/area/exo_Ice_facility/ground/exterior/emsvillepads)
 
 (1,1,1) = {"

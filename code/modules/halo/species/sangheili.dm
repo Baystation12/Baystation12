@@ -38,6 +38,19 @@
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
 
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/elitescream_1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_5.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_6.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_7.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_8.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_9.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_10.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_11.ogg')
+
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 

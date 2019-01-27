@@ -18,6 +18,6 @@
 	if(!end_early)
 		do_result()
 
-	update_clients_browsing()
-
 	reset()
+
+	update_clients_browsing()

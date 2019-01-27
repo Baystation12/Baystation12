@@ -2,9 +2,11 @@
 /obj/item/weapon_attachment
 	name = "debug attachment"
 	desc = "Oh boy something broke"
+	icon = 'code/modules/halo/icons/attachments/attachments_general.dmi'
 
 	w_class = ITEM_SIZE_NORMAL
 
+	var/datum/attachment_profile/cached_profile
 	var/weapon_slot = null
 	var/can_remove = 1 //Can this attachment be removed completely?
 
@@ -32,19 +34,24 @@
 	to_chat(user,"<span class = 'notice'>You attach [src.name] to [gun.name]'s [weapon_slot]</span>")
 	user.drop_from_inventory(src)
 	attach_to(gun)
+	gun.calculate_attachment_effects()
 
 /obj/item/weapon_attachment/proc/apply_attachment_effects(var/obj/item/weapon/gun/gun)
-	var/datum/attachment_profile/profile = get_attachment_profile(gun)
-	var/list/attribute_mods = profile.attribute_modifications["[name]"]
-	gun.slowdown_general += attribute_mods[3]
 
 /obj/item/weapon_attachment/proc/remove_attachment_effects(var/obj/item/weapon/gun/gun)
-	var/datum/attachment_profile/profile = get_attachment_profile(gun)
-	var/list/attribute_mods = profile.attribute_modifications["[name]"]
-	gun.slowdown_general -= attribute_mods[3]
+
+/obj/item/weapon_attachment/proc/get_attribute_mods(var/obj/item/gun_caller)
+	if(!(gun_caller.name == cached_profile.weapon_name))
+		var/datum/attachment_profile/profile = get_attachment_profile(gun_caller)
+		if(isnull(profile))
+			return list(0,0,0)
+		cached_profile = profile
+	var/list/attribute_mods = cached_profile.attribute_modifications["[name]"]
+	return attribute_mods
 
 /obj/item/weapon_attachment/proc/on_removal(var/obj/item/weapon/gun/gun)
 	remove_attachment_effects(gun)
+	gun.calculate_attachment_effects()
 	gun.overlays.Cut()
 	gun.update_icon()
 
@@ -63,7 +70,7 @@
 	if(isnull(profile))
 		return 0
 	var/attachment_icon_state = profile.on_item_icon_states["[name]"]
-	var/list/offsets = profile.weapon_pixel_offsets["[weapon_slot]"]
+	var/list/offsets = profile.weapon_pixel_offsets["[name]"]
 	if(isnull(attachment_icon_state) || isnull(offsets))
 		return 0
 	var/image/to_add = image(initial(icon),attachment_icon_state)
