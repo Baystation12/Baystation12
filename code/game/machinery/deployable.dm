@@ -63,7 +63,6 @@ for reference:
 	density = 1
 	var/health = 100
 	var/maxhealth = 100
-	var/material/material
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 

@@ -9,7 +9,6 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
-	var/material/material
 	var/init_material = MATERIAL_STEEL
 	var/health = 10
 	var/destroyed = 0
@@ -28,14 +27,14 @@
 	if(!istype(material))
 		..()
 		return INITIALIZE_HINT_QDEL
-	
+
 	name = "[material.display_name] grille"
 	desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
 	color =  material.icon_colour
 	health = max(1, round(material.integrity/15))
 	update_connections(1)
 	update_icon()
-	
+
 /obj/structure/grille/ex_act(severity)
 	qdel(src)
 
@@ -166,7 +165,7 @@
 				dir_to_set = get_dir(loc, user)
 				if(dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
 					to_chat(user, "<span class='notice'>You can't reach.</span>")
-					return 
+					return
 		place_window(user, loc, dir_to_set, ST)
 		return
 
@@ -275,4 +274,3 @@
 	to_chat(user, "<span class='notice'>You assemble a grille</span>")
 	ST.in_use = 0
 	F.add_fingerprint(user)
-	
