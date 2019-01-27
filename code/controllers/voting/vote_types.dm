@@ -106,26 +106,24 @@
 /datum/vote/gamemode/do_result()
 	. = ..()
 
-	var/restart = 0
 	if(master_mode != .[1])
 		world.save_mode(.[1])
-		if(ticker && ticker.mode)
-			restart = 1
-		else
-			master_mode = .[1]
 	secondary_mode = .[2]
 	tertiary_mode = .[3]
 
 	if(ticker.current_state == GAME_STATE_PREGAME)
+		master_mode = .[1]
 		to_world("<span class='danger'>The round will start soon.</span>")
+	else
+		to_world("<span class='danger'>The gamemode vote result will apply next round.</span>")
 
-	if(restart)
+	/*if(round_started)
 		feedback_set_details("end_error","restart vote")
 		to_world("<span class='danger'>World restarting due to vote...</span>")
 		if(blackbox)	blackbox.save_all_data_to_sql()
 		sleep(50)
 		log_game("Rebooting due to restart vote")
-		world.Reboot()
+		world.Reboot()*/
 
 /datum/vote/gamemode/announce_vote(var/announce_text)
 	. = ..()
