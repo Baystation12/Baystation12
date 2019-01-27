@@ -27,6 +27,7 @@ var/list/points_of_interest = list()
 	var/in_space = 1	//can be accessed via lucky EVA
 
 	var/list/connectors = list() //Used for docking umbilical type-items.
+	var/faction = "Civillian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
 
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
@@ -43,6 +44,9 @@ var/list/points_of_interest = list()
 
 	. = ..()
 	setup_object()
+
+/obj/effect/overmap/proc/get_faction()
+	return faction
 
 /obj/effect/overmap/proc/setup_object()
 
