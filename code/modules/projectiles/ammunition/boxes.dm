@@ -99,7 +99,7 @@
 
 /obj/item/ammo_magazine/smg
 	name = "submachine gun magazine"
-	icon_state = CALIBER_PISTOL
+	icon_state = "smg"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL

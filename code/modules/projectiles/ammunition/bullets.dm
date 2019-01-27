@@ -128,8 +128,8 @@
 	desc = "A rifle bullet casing."
 	caliber = CALIBER_RIFLE
 	projectile_type = /obj/item/projectile/bullet/rifle
-	icon_state = "556casing"
-	spent_icon = "556casing-spent"
+	icon_state = "riflecasing"
+	spent_icon = "riflecasing-spent"
 
 /obj/item/ammo_casing/shell
 	name = "shell casing"
@@ -149,13 +149,13 @@
 	desc = "A military rifle bullet casing."
 	caliber = CALIBER_RIFLE_MILITARY
 	projectile_type = /obj/item/projectile/bullet/rifle/military
-	icon_state = "5mmRcasing"
-	spent_icon = "5mmRcasing-spent"
+	icon_state = "rifle_mil"
+	spent_icon = "rifle_mil-spent"
 
 /obj/item/ammo_casing/rifle/military/practice
 	desc = "A military rifle practice bullet casing."
 	projectile_type = /obj/item/projectile/bullet/rifle/military/practice
-	icon_state = "5mmRcasing_p"
+	icon_state = "rifle_mil_p"
 
 /obj/item/ammo_casing/rocket
 	name = "rocket shell"
