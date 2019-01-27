@@ -16,6 +16,10 @@
 	get_known_sectors()
 
 /obj/machinery/computer/helm/proc/get_known_sectors()
+	if(linked && linked.nav_comp)
+		known_sectors = linked.nav_comp.get_known_sectors()
+		return
+	//Original Code left to ensure backwards compatibility
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
 		if (S.known)

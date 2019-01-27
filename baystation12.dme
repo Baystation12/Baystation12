@@ -1582,6 +1582,7 @@
 #include "code\modules\halo\NPC\NPC_types\weapon_smuggler.dm"
 #include "code\modules\halo\overmap\combat_npc_ship.dm"
 #include "code\modules\halo\overmap\fusion_thruster.dm"
+#include "code\modules\halo\overmap\nav_data_computer.dm"
 #include "code\modules\halo\overmap\npc_cargo_ship.dm"
 #include "code\modules\halo\overmap\npc_ship_playercontrol.dm"
 #include "code\modules\halo\overmap\npc_shipmap_handler.dm"
