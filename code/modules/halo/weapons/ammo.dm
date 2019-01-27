@@ -317,7 +317,7 @@
 
 /obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)
 	. = ..()
-	if(!istype(L) || !isliving(target) || isanimal(target))
+	if(!istype(L) || !isliving(L) || isanimal(L))
 		return 0
 
 	L.Weaken(stun_time)
