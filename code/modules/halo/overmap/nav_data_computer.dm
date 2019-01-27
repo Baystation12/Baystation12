@@ -172,7 +172,7 @@
 	var/obj/item/nav_data_chip/fragmented/f = I
 	if(istype(f) && f.type == type)
 		to_chat(user,"<span class = 'notice'>You scan [I] on [src], transferring the nav data and discarding [I] afterwards.</span>")
-		user.visible_message("<span class = 'notice>[user] scans [I] on [src], transferring the nav data.\n[user] discards the now-useless [I]</span>")
+		user.visible_message("<span class = 'notice'>[user] scans [I] on [src], transferring the nav data.\n[user] discards the now-useless [I]</span>")
 		fragments_have += f.fragments_have
 		user.drop_from_inventory(f)
 		qdel(f)
