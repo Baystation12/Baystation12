@@ -11,7 +11,7 @@
 	hull = 2500
 	messages_on_hit = list("Automated Defense system taking hostile weapons fire.")
 	messages_on_death = list("Automated Defense system has sustained critical damage. Shutting down.")
-	var/defense_range = 5
+	var/defense_range = 7
 	var/obj/item/projectile/overmap/proj_fired = /obj/item/projectile/overmap/auto_defense_proj
 
 /datum/npc_ship_request/automated_defense_process
