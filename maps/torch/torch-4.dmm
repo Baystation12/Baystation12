@@ -9758,7 +9758,7 @@
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/folder/red,
 /obj/item/weapon/pen,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -32216,7 +32216,7 @@
 /area/assembly/robotics)
 "xhX" = (
 /obj/structure/table/steel,
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/folder/red,
 /obj/item/weapon/hand_labeler,
 /obj/machinery/light{

@@ -32,36 +32,46 @@
 
 /material/wood/holographic
 	name = "holo" + MATERIAL_WOOD
+	icon_colour = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
 	sale_price = null
 	hidden_from_codex = TRUE
 
-/material/wood/fancy
-	name = "fancy wood" //giving unique name for sanity - type is only for assigning stuff - do not use
-	lore_text = "A piece of fine wood, prized for its beautiful grain and colour."
-	construction_difficulty = 3
-	sale_price = 3
-
-/material/wood/fancy/mahogany
+/material/wood/mahogany
 	name = MATERIAL_MAHOGANY
+	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	adjective_name = MATERIAL_MAHOGANY
 	icon_colour = WOOD_COLOR_RICH
+	construction_difficulty = 2
+	sale_price = 3
 
-/material/wood/fancy/maple
+/material/wood/maple
 	name = MATERIAL_MAPLE
+	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	adjective_name = MATERIAL_MAPLE
 	icon_colour = WOOD_COLOR_PALE
 
-/material/wood/fancy/ebony
+/material/wood/ebony
 	name = MATERIAL_EBONY
+	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
+				Despite gene modification to produce larger source trees and ample land to plant them on, \
+				genuine ebony remains a luxury for the very wealthy thanks to the price fixing efforts of intergalactic luxuries cartels. \
+				Most people will only ever touch ebony in small items, such as chess pieces, or the accent pieces of a fine musical instrument."
 	adjective_name = MATERIAL_EBONY
 	icon_colour = WOOD_COLOR_BLACK
 	weight = 22
+	construction_difficulty = 4
 	sale_price = 4
 
-/material/wood/fancy/walnut
+/material/wood/walnut
 	name = MATERIAL_WALNUT
+	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
+				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
+				The ultimate aspiration of many professionals is an office with a vintage walnut desk, the bigger and heavier the better."
 	adjective_name = MATERIAL_WALNUT
 	icon_colour = WOOD_COLOR_CHOCOLATE
+	weight = 20
+	construction_difficulty = 2
+	sale_price = 2

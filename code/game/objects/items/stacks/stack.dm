@@ -336,6 +336,7 @@
 	var/use_reinf_material
 	var/difficulty = 1 // higher difficulty requires higher skill level to make.
 	var/send_material_data = 0 //Whether the recipe will send the material name as an argument when creating product.
+	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
 
 /datum/stack_recipe/New(material/material, var/reinforce_material)
 	if(material)
@@ -345,7 +346,7 @@
 		use_reinf_material = reinforce_material
 
 /datum/stack_recipe/proc/display_name()
-	if(!use_material)
+	if(!use_material || !apply_material_name)
 		return title
 	. = "[material_display_name(use_material)] [title]"
 	if(use_reinf_material)

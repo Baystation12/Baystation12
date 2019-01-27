@@ -132,7 +132,7 @@ ARMCHAIR(yellow)
 	result_type = /obj/item/weapon/stool
 
 /datum/stack_recipe/furniture/bar_stool
-	title = "bar_stool"
+	title = "bar stool"
 	result_type = /obj/item/weapon/stool/bar
 
 /datum/stack_recipe/furniture/bed

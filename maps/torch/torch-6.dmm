@@ -3042,7 +3042,7 @@
 /area/centcom/evac)
 "ahp" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/stamp,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/shuttle.dmi';
@@ -4026,7 +4026,7 @@
 	},
 /area/centcom/evac)
 "ajD" = (
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/pen,
 /obj/structure/table/reinforced,
 /turf/unsimulated/floor{
@@ -18793,7 +18793,7 @@
 	pixel_y = 9
 	},
 /obj/item/weapon/pen,
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRJ" = (
@@ -19591,7 +19591,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
 	},
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
 "aTT" = (
@@ -21854,6 +21854,9 @@
 /obj/item/weapon/storage/mirror,
 /turf/unsimulated/wall,
 /area/rescue_base/base)
+"bJQ" = (
+/turf/simulated/floor/wood,
+/area/rescue_base/base)
 "bKb" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -22004,6 +22007,9 @@
 /obj/machinery/hologram/holopad/longrange,
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
+"cHT" = (
+/turf/simulated/floor/wood/walnut,
+/area/rescue_base/base)
 "cMe" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
@@ -22143,9 +22149,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
 "eRk" = (
-/obj/structure/closet{
-	
-	},
+/obj/structure/closet,
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken1"
 	},
@@ -22722,6 +22726,9 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_plaza)
+"nMz" = (
+/turf/simulated/floor/wood/maple,
+/area/rescue_base/base)
 "nUi" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -22924,9 +22931,7 @@
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "rIb" = (
-/obj/structure/closet{
-	
-	},
+/obj/structure/closet,
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken3"
 	},
@@ -22975,6 +22980,9 @@
 	icon_state = "wood_broken3"
 	},
 /area/holodeck/source_temple)
+"sKf" = (
+/turf/simulated/floor/wood/mahogany,
+/area/rescue_base/base)
 "sLL" = (
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
@@ -23059,6 +23067,9 @@
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_meetinghall)
+"tMx" = (
+/turf/simulated/floor/wood/ebony,
+/area/rescue_base/base)
 "tQu" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/effect/floor_decal/spline/plain/grey{
@@ -23131,9 +23142,7 @@
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
 "vgY" = (
-/obj/structure/closet{
-	
-	},
+/obj/structure/closet,
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken2"
 	},
@@ -23429,11 +23438,11 @@ aab
 "}
 (2,1,1) = {"
 aaa
-aad
-aad
-aad
-aad
-aad
+bJQ
+sKf
+nMz
+cHT
+tMx
 aad
 aad
 aad

@@ -85,7 +85,7 @@
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/device/hailer,
-		/obj/item/weapon/clipboard,
+		/obj/item/weapon/material/clipboard,
 		/obj/item/weapon/folder/red,
 		/obj/item/device/holowarrant,
 		/obj/item/clothing/gloves/thick,

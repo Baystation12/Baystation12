@@ -117,7 +117,7 @@
 
 /decl/hierarchy/supply_pack/materials/maple25
 	name = "25 maple planks"
-	contains = list(/obj/item/stack/material/wood/maple/twentyfive)
+	contains = list(/obj/item/stack/material/wood/maple/twentyfive = 2)
 	cost = 10
 	containername = "wooden planks crate"
 
@@ -130,5 +130,5 @@
 /decl/hierarchy/supply_pack/materials/ebony25
 	name = "25 ebony planks"
 	contains = list(/obj/item/stack/material/wood/ebony/twentyfive)
-	cost = 15 //smuggling tax
+	cost = 15 //luxury tax
 	containername = "ebony planks crate"

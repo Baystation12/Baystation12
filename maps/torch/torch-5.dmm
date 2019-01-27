@@ -610,7 +610,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/structure/table/woodentable_reinforced/walnut,
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "bm" = (
@@ -755,6 +755,9 @@
 /obj/machinery/photocopier/faxmachine{
 	department = "CO"
 	},
+/obj/machinery/newscaster/security_unit{
+	pixel_x = -32
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "bN" = (
@@ -893,7 +896,7 @@
 /obj/item/weapon/tableflag{
 	pixel_x = 4
 	},
-/obj/structure/table/woodentable_reinforced/walnut,
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "ck" = (
@@ -926,10 +929,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "cq" = (
-/obj/structure/bed/chair/office/comfy/blue{
-	tag = "icon-comfyofficechair_preview (EAST)";
-	icon_state = "comfyofficechair_preview";
-	dir = 4
+/obj/structure/bed/chair/comfy/captain{
+	icon_state = "capchair_preview";
+	dir = 4;
+	color = "#666666"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
@@ -1199,7 +1202,7 @@
 	icon_state = "spline_fancy";
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "da" = (
 /obj/structure/cable/green{
@@ -1731,18 +1734,14 @@
 	},
 /obj/item/clothing/mask/smokable/cigarette/cigar,
 /obj/item/weapon/storage/box/matches,
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "eq" = (
-/obj/machinery/newscaster/security_unit{
-	pixel_x = 0;
-	pixel_y = -32
-	},
 /obj/structure/displaycase,
-/obj/item/weapon/gun/projectile/revolver/webley/captain{
+/obj/item/weapon/gun/projectile/revolver/medium/captain{
 	pixel_y = -3
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "es" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2376,6 +2375,10 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -4385,7 +4388,6 @@
 /obj/machinery/photocopier/faxmachine{
 	department = "XO"
 	},
-/obj/structure/table/steel,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/requests_console{
@@ -4395,6 +4397,7 @@
 	name = "XO Request Console";
 	pixel_y = 30
 	},
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "ke" = (
@@ -12070,7 +12073,7 @@
 "Bn" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/stamp/cmo,
 /obj/item/device/radio{
 	frequency = 1487;
@@ -12191,7 +12194,7 @@
 	},
 /obj/structure/table/woodentable/walnut,
 /obj/item/weapon/folder/envelope/captain,
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "Cf" = (
 /obj/item/modular_computer/console/preset/command,
@@ -13068,13 +13071,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
-"Hn" = (
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/bridge)
 "Ho" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -13880,7 +13876,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/structure/table/woodentable/maple,
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "Jo" = (
@@ -14416,7 +14412,7 @@
 	icon_state = "spline_fancy";
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "Me" = (
 /obj/structure/table/glass,
@@ -15305,7 +15301,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/structure/table/woodentable/maple,
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "Rx" = (
@@ -15578,7 +15574,7 @@
 	},
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/item/weapon/book/manual/military_law,
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "Te" = (
 /turf/simulated/floor/carpet/blue2,
@@ -16615,7 +16611,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/structure/table/woodentable_reinforced/walnut,
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "Zj" = (
@@ -26257,7 +26253,7 @@ cZ
 dJ
 Ce
 bq
-Hn
+eP
 fS
 gD
 hq

@@ -87,8 +87,8 @@
 	access = access_brig
 
 /decl/hierarchy/supply_pack/operations/bureaucracy
-	contains = list(/obj/item/weapon/clipboard,
-					 /obj/item/weapon/clipboard,
+	contains = list(/obj/item/weapon/material/clipboard,
+					 /obj/item/weapon/material/clipboard,
 					 /obj/item/weapon/pen/red,
 					 /obj/item/weapon/pen/blue,
 					 /obj/item/weapon/pen/green,

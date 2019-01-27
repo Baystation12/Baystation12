@@ -251,3 +251,9 @@
 	title = "candle"
 	result_type = /obj/item/weapon/flame/candle
 	difficulty = 0
+
+/datum/stack_recipe/clipboard
+	title = "clipboard"
+	result_type = /obj/item/weapon/material/clipboard
+	req_amount = 5
+	send_material_data = 1

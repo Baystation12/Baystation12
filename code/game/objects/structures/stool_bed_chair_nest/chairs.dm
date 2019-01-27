@@ -384,13 +384,17 @@
 	icon_state = "wooden_chair_wings_preview"
 
 /obj/structure/bed/chair/wood/wings/mahogany
+	color = WOOD_COLOR_RICH
 	chair_material = MATERIAL_MAHOGANY
 
 /obj/structure/bed/chair/wood/wings/maple
+	color = WOOD_COLOR_PALE
 	chair_material = MATERIAL_MAPLE
 
 /obj/structure/bed/chair/wood/wings/ebony
+	color = WOOD_COLOR_BLACK
 	chair_material = MATERIAL_EBONY
 
 /obj/structure/bed/chair/wood/wings/walnut
+	color = WOOD_COLOR_CHOCOLATE
 	chair_material = MATERIAL_WALNUT

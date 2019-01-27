@@ -60,7 +60,7 @@
 /turf/simulated/floor/holofloor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
-	icon_state = "wood"
+	icon_state = "walnut"
 	initial_flooring = /decl/flooring/wood
 
 /turf/simulated/floor/holofloor/grass
