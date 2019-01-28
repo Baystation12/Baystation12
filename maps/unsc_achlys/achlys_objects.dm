@@ -9,7 +9,7 @@
 	brightness_on = 4 //halved normal flare light
 
 /obj/item/weapon/storage/belt/utility/marine_engineer
-	can_hold = list(/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/device/analyzer,/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary)
+	can_hold = list(/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/device/analyzer,/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary,/obj/item/weapon/armor_patch)
 
 /obj/item/weapon/storage/belt/utility/marine_engineer/New()
 	..()
@@ -80,6 +80,7 @@
 	return list(
 	/obj/item/weapon/storage/box/MRE/Chicken = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
+	/obj/item/weapon/armor_patch = 3,
 	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
 	/obj/item/ammo_magazine/m762_ap/MA5B = 1,
@@ -169,3 +170,43 @@
 
 /obj/machinery/vending/armory/attachment/achlys
 	req_access = list(143)
+
+/obj/structure/navconsole
+	name = "Navagation Console"
+	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
+	icon = 'code/modules/halo/overmap/nav_computer.dmi'
+	icon_state = "nav_computer"
+	light_range = 1
+	light_color = "#ebf7fe"
+	density = 1
+	anchored = 1
+
+/obj/item/weapon/reference
+	name = "gold coin"
+	desc = "This coin isn't as soft as normal gold, and seems to be an improper size. Clearly a fraud."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "coin_gold"
+
+/obj/item/weapon/research //the red herring
+	name = "research documents"
+	desc = "Random useless papers documenting some kind of nerd experiments."
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "envelope_sealed"
+
+/obj/item/weapon/research/sekrits //the mcguffin
+	name = "strange documents"
+	desc = "This folder is sealed shut and coated in way too many warnings. Definitely not safe to open."
+
+/obj/item/weapon/card/id/the_gold
+	name = "Gold Keycard"
+	desc = "This keycard appears to belong to the captain. How it got here and where it's owner is remains unknown."
+	access = list(777)
+	icon_state = "gold"
+	item_state = "gold_id"
+
+/obj/item/weapon/card/id/the_silver
+	name = "Silver Keycard"
+	desc = "This silver keycard seems to belong to someone important. How it got here and who it belongs to is a mystery."
+	access = list(666)
+	icon_state = "silver"
+	item_state = "silver_id"

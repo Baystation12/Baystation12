@@ -11,9 +11,9 @@
 	probability = 0
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
-	var/list/items_to_destroy = list()
+	var/list/items_to_destroy = list(/obj/structure/navconsole)
 	var/item_retrieve_tag = "retrievethis" //Map-set tags for items that need to be retrieved.
-	var/list/items_to_retrieve = list()
+	var/list/items_to_retrieve = list(/obj/item/weapon/research/sekrits)
 	var/list/rank_retrieve_names = list("Commanding Officer")//The name of the job that needs to be holding the items-to-retrieve
 
 /datum/game_mode/achlys/proc/populate_items_destroy()
