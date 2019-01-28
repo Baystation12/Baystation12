@@ -166,6 +166,84 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
+/obj/item/clothing/head/helmet/marine/winter
+	name = "Winter Camo CH252 Helmet"
+	desc = "The standard issue winter camo combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	item_state = "UNSCMarineHelmetNoVisor"
+	icon_state = "UNSCMarineHelmetNoVisor"
+
+/obj/item/clothing/head/helmet/marine/wintervisor
+	name = "Winter Camo CH252-V Helmet"
+	desc = "The standard issue winter camo combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	item_state = "UNSCWinterMarineHelmetVisor"
+	icon_state = "UNSCWinterMarineHelmetVisor"
+
+/obj/item/clothing/suit/storage/marine/winter
+	name = "M52B Winter Body Armor"
+	desc = "The standard issue winter camo combat armor worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	item_state = "UNSCMarineArmor"
+	icon_state = "UNSCMarineArmor"
+
+/obj/item/clothing/shoes/marine/winter
+	name = "VZG7 Armored Winter Boots"
+	desc = "Standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
+	item_state = "UNSCMarineBoots"
+	icon_state = "UNSCMarineBoots"
+
+/obj/item/clothing/gloves/thick/unsc/winter //Combined effect of SWAT gloves and insulated gloves
+	name = "UNSC Winter Combat gloves"
+	desc = "Standard Issue UNSC Marine Winter Gloves."
+	icon_state = "UNSCMarineGloves"
+	item_state = "UNSCMarineGloves"
+
+/obj/item/clothing/under/unsc/marine_fatigues/winter
+	name = "UNSC Marine Winter fatigues"
+	desc = "Standard issue winter uniform for UNSC marine corps."
+	item_state = "UNSCMarineFatigues"
+	icon_state = "UNSCMarineFatigues"
+
+/obj/item/clothing/suit/spaceeva/eva
+	name = "\improper EVA Marine Suit"
+	desc = "A universal suit used in EVA runs on derelicts."
+	icon = 'code/modules/halo/clothing/marine.dmi'
+	body_parts_covered = LOWER_TORSO|UPPER_TORSO|ARMS|HANDS
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "body"
+	icon_state = "body"
+	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
+	siemens_coefficient = 0.6
+	armor_thickness = 20
+	w_class = ITEM_SIZE_HUGE
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
+	armor = list(melee = 55, bullet = 40, laser = 25, energy = 25, bomb = 50, bio = 100, rad = 100)
+
+/obj/item/clothing/head/helmet/eva/marine
+	name = "\improper EVA Marine Helmet"
+	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
+	icon = 'code/modules/halo/clothing/marine.dmi'
+	body_parts_covered = FACE|HEAD
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "eva"
+	icon_state = "eva"
+	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
+	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 20, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/shoes/eva/marine
+	name = "\improper EVA Armoured Boots"
+	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
+	icon = 'code/modules/halo/clothing/marine.dmi'
+	body_parts_covered = LEGS|FEET
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "evalegs"
+	icon_state = "evalegs"
+	item_flags = NOSLIP|STOPPRESSUREDAMAGE|AIRTIGHT
+	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 35, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
 /obj/item/weapon/card/id/unsc
 	name = "identification card"
 	desc = "An identification card worn by members of the UNSC."
@@ -200,21 +278,21 @@
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
-	
-//DONATOR GEAR	
-	
-/obj/item/clothing/suit/storage/marine/donator/liam_gallagher	
+
+//DONATOR GEAR
+
+/obj/item/clothing/suit/storage/marine/donator/liam_gallagher
 	name = "Experimental Marine Armor"
 
 	item_state = "osama-UNSCarmor_worn"
-	
-/obj/item/clothing/head/helmet/marine/donator/liam_gallagher	
+
+/obj/item/clothing/head/helmet/marine/donator/liam_gallagher
 	name = "Experimental Marine Helmet"
 
 	item_state = "osama-UNSChelm_worn"
-	icon_state = "osama-UNSChelm_obj"	
-	
-/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher	
+	icon_state = "osama-UNSChelm_obj"
+
+/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher
 	desc = "A specialized set of fatigues with latches and hooks for a special set of UNSC armor."
 	name = "UNSC Experimental Fatigues"
 	icon = ITEM_INHAND
@@ -222,8 +300,8 @@
 	item_state = "osama-UNSCsuit_worn"
 	icon_state = "osama-UNSCsuit_worn"
 	worn_state = "UNSC Marine Fatigues"
-	
+
 //END DONATOR GEAR
-	
+
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND
