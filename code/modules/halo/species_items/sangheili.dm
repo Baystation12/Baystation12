@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 	action_button_name = "Toggle Gauntlet Energy Dagger"
 
-	var/obj/item/weapon/melee/g_dagger/connected_dagger = /obj/item/weapon/melee/g_dagger
+	var/obj/item/weapon/melee/energy/elite_sword/g_dagger/connected_dagger = /obj/item/weapon/melee/energy/elite_sword/g_dagger
 	var/mob/current_user
 
 /obj/item/clothing/gloves/thick/sangheili/New()
@@ -143,17 +143,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/gloves/thick/sangheili/proc/on_dagger_dropped()
 	contents += connected_dagger
 
-/obj/item/weapon/melee/g_dagger/proc/inhand_check()
-	var/mob/living/carbon/human/h = creator_dagger.current_user
-	if(istype(h))
-		if(h.l_hand == src || h.r_hand == src)
-			return 1
-	return 0
-
-/obj/item/weapon/melee/g_dagger/dropped()
-	if(!inhand_check())
-		creator_dagger.on_dagger_dropped()
-
 /obj/item/clothing/gloves/thick/sangheili/ui_action_click()
 	if(!connected_dagger.inhand_check())
 		equip_dagger()
@@ -165,7 +154,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 //Physical dagger object define - this is essentially the dagger but without activate states - can only be 'on'. Had to do it this way due to the inherits from /energy and /elite_sword causing issues//
 
-/obj/item/weapon/melee/g_dagger
+/obj/item/weapon/melee/energy/elite_sword/g_dagger
 	name = "Internal Energy Dagger"
 	desc = "A wrist-mounted Energy Dagger that extends from sangheili combat gauntlets"
 
@@ -177,7 +166,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	edge = 1
 	sharp = 1
 	var/obj/item/clothing/gloves/thick/sangheili/creator_dagger
-	var/next_leapwhen
 	armor_penetration = 50
 	canremove = 0
 
@@ -186,67 +174,27 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	slot_l_hand_str = "en_dag_l_hand",
 	slot_r_hand_str = "en_dag_r_hand" )
 	hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
-/obj/item/weapon/melee/g_dagger/New(var/obj/created_by)
+
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/New(var/obj/created_by)
 	.=..()
 	creator_dagger = created_by
+	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 
-/obj/item/weapon/melee/g_dagger/attack(var/mob/m,var/mob/user)
-	if(ismob(m))
-		damtype = BURN
-	return ..()
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/proc/inhand_check()
+	var/mob/living/carbon/human/h = creator_dagger.current_user
+	if(istype(h))
+		if(h.l_hand == src || h.r_hand == src)
+			return 1
+	return 0
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()
+	if(!inhand_check())
+		creator_dagger.on_dagger_dropped()
 
-//The lunge code straight from the energy sword, switched to work here.
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/activate(mob/living/user)
+	return
 
-#define ESWORD_LEAP_DIST 2
-#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili)
-#define LUNGE_DELAY 5 SECONDS
-
-/obj/item/weapon/melee/g_dagger/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	if(isnull(mob) || !istype(mob))
-		return 0
-	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 5
-	return ESWORD_LEAP_DIST
-
-/obj/item/weapon/melee/g_dagger/afterattack(var/atom/target,var/mob/user)
-	if(world.time < next_leapwhen)
-		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
-		return
-	if(!istype(target,/mob))
-		if(istype(target,/turf))
-			var/turf/targ_turf = target
-			var/list/turf_mobs = list()
-			for(var/mob/m in targ_turf.contents)
-				turf_mobs += m
-			if(turf_mobs.len > 0)
-				target = pick(turf_mobs)
-			else
-				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-				return
-		else
-			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-			return
-	if(!(target in view(7,user.loc)))
-		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
-		return
-	if(get_dist(user,target) <= get_species_leap_dist(user))
-		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
-		var/image/user_image = image(user)
-		user_image.dir = user.dir
-		for(var/i = 0 to 1)
-			var/obj/after_image = new /obj/effect/esword_path
-			if(i == 0)
-				after_image.loc = user.loc
-			else
-				after_image.loc = get_step(user,get_dir(user,target))
-			after_image.dir = user.dir
-			after_image.overlays += user_image
-			spawn(5)
-				qdel(after_image)
-		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
-		if(user.Adjacent(target) && ismob(target))
-			attack(target,user)
-		next_leapwhen = world.time + LUNGE_DELAY
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/deactivate(mob/living/user)
+	return
 
 //Sangheili Armour Subtype Defines//
 

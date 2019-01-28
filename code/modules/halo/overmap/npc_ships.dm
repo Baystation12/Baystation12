@@ -45,6 +45,14 @@
 	generate_ship_name()
 	. = ..()
 
+/obj/effect/overmap/ship/npc_ship/get_faction()
+	if(!unload_at)
+		return faction
+	else if(nav_comp)
+		return nav_comp.get_faction()
+	else
+		return null
+
 /obj/effect/overmap/ship/npc_ship/proc/is_player_controlled()
 	for(var/datum/npc_ship_request/player_controlled/pc in available_ship_requests)
 		return 1

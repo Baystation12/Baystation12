@@ -188,7 +188,7 @@
 	 //explosion(turf_to_explode,3,5,7,10) original tiny explosion
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
-		if(!istype(turf_to_explode,/turf/simulated/open) && !istype(turf_to_explode,/turf/unsimulated/floor/lava))
+		if(!istype(turf_to_explode,/turf/simulated/open) && !istype(turf_to_explode,/turf/unsimulated/floor/lava) && !istype(turf_to_explode,/turf/space))
 			new /turf/unsimulated/floor/scorched(F)
 
 	for(var/turf/unsimulated/F in circlerange(turf_to_explode,15))

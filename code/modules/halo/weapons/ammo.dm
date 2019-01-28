@@ -309,7 +309,7 @@
 	icon = null //No icon on purpose, it's a sound wave.
 	icon_state = ""
 	damtype = PAIN
-	damage = 15
+	damage = 40
 	//NOTE: Life() calls happen every two seconds, and life() reduces dizziness by one
 	var/stun_time = 2 //This is in seconds.
 	var/suppress_time = 4
@@ -317,11 +317,11 @@
 
 /obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)
 	. = ..()
-	if(!istype(L) || . == 0)
+	if(!istype(L) || !isliving(L) || isanimal(L))
 		return 0
 
-	L.Weaken(stun_time/2)
-	L.confused += disorient_time/2
+	L.Weaken(stun_time)
+	L.confused += disorient_time
 	shake_camera(L,disorient_time,2)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
 	return 1
