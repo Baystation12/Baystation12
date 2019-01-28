@@ -28,6 +28,7 @@
 
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
+	var/message_language = "Galactic Common"
 
 	var/hull = 200 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
@@ -125,7 +126,23 @@
 	var/message_to_use = pick(messages_on_hit)
 	if(ship_disabled)
 		message_to_use = pick(messages_on_death)
-	to_world("<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\"</span>")
+	for(var/mob/living/m in GLOB.player_list)
+		var/have_lang = 0
+		for(var/datum/language/l in m.languages)
+			if(l.name == message_language)
+				to_chat(m,"<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\"</span>")
+				have_lang = 1
+				break
+		if(!have_lang)
+			var/new_message = ""
+			var/datum/language/default = m.get_default_language()
+			var/iter
+			for(iter = 0; iter <= lentext(message_to_use)/2; iter++)
+			if(!isnull(default))
+				new_message += pick(default.syllables)
+			else
+				new_message += pick("a","e","i","o","u")
+			to_chat(m,"<span class = 'radio'>\[EBAND\] [name]: \"[new_message]\"</span>")
 
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)
