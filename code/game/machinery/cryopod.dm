@@ -294,6 +294,11 @@
 
 	return 1
 
+/obj/machinery/cryopod/examine(mob/user)
+	. = ..()
+	if (. && occupant && user.Adjacent(src))
+		occupant.examine(user)
+
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/Process()
 	if(occupant)
