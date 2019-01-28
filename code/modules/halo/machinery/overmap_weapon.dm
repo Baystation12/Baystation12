@@ -93,7 +93,7 @@
 		new_projectile.on_impact(target)
 		qdel(new_projectile)
 	else
-		new_projectile.launch(target,null,rand(0,new_projectile.dispersion),rand(0,new_projectile.dispersion))
+		new_projectile.launch(target,null)
 	play_fire_sound(src)
 	var/obj/effect/overmap/om_targ = target
 	if(istype(om_targ) && om_targ.map_z.len > 0)
