@@ -18,6 +18,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/pilot
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/brown
+	l_pocket = /obj/item/weapon/coin/gear_req
 	pda_slot = null
 
 	flags = 0
@@ -30,6 +31,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/brown
+	l_pocket = /obj/item/weapon/coin/gear_req
 	pda_slot = null
 
 	flags = 0
