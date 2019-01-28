@@ -128,6 +128,7 @@
 	icon_state = "SoundRifle-full"
 	item_state = "SoundRifle-full"
 	fire_sound = 'code/modules/halo/sounds/sound_rifle_firesound.ogg'
+	charge_meter = 0
 	self_recharge = 1
 	recharge_time = 10 //10 seconds recharge time.
 	max_shots = 1
