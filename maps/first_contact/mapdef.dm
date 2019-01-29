@@ -1,7 +1,7 @@
 
 /datum/map/first_contact
-	name = "Outer System"
-	full_name = "Outer System #1445113"
+	name = "KS7-535 \"Elmsville\""
+	full_name = "System KS7-535, Human Colony \"Elmsville\""
 	path = "first_contact"
 	station_levels = list()
 	admin_levels = list()
