@@ -50,7 +50,7 @@
 	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/team_slayer_spartan
-	title = "Team Spartan"
+	title = "Team Spartans"
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
