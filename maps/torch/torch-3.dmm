@@ -15343,7 +15343,8 @@
 /area/maintenance/seconddeck/foreport)
 "Na" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	injecting = 1
+	injecting = 1;
+	use_power = 1
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
