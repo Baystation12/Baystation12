@@ -64,11 +64,12 @@ var/list/points_of_interest = list()
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	//	map_sectors["[zlevel]"] = src
-	var/turf/move_to_loc = pick(GLOB.overmap_tiles_uncontrolled)
+	if(GLOB.using_map.use_overmap)
+		var/turf/move_to_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
-	forceMove(move_to_loc)
+		forceMove(move_to_loc)
 
-	testing("Located sector \"[name]\" at [move_to_loc.x],[move_to_loc.y], containing Z [english_list(map_z)]")
+		testing("Located sector \"[name]\" at [move_to_loc.x],[move_to_loc.y], containing Z [english_list(map_z)]")
 	//points_of_interest += name
 
 	/*
