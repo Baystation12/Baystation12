@@ -155,41 +155,49 @@
 
 /obj/item/weapon/storage/box/practiceshells
 	name = "box of practice shells"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_casing/shotgun/practice = 8)
 
 /obj/item/weapon/storage/box/beanbags
 	name = "box of beanbag shells"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_magazine/shotholder/beanbag = 2)
 
 /obj/item/weapon/storage/box/shotgunammo
 	name = "box of shotgun slugs"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_magazine/shotholder = 2)
 
 /obj/item/weapon/storage/box/shotgunshells
 	name = "box of shotgun shells"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_magazine/shotholder/shell = 2)
 
 /obj/item/weapon/storage/box/flashshells
 	name = "box of illumination shells"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_magazine/shotholder/flash = 2)
 
 /obj/item/weapon/storage/box/stunshells
 	name = "box of stun shells"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_magazine/shotholder/stun = 2)
 
 /obj/item/weapon/storage/box/sniperammo
 	name = "box of 14.5mm shells"
+	icon_state = "ammo"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_casing/shell = 7)
 
 /obj/item/weapon/storage/box/sniperammo/apds
 	name = "box of 14.5mm APDS shells"
+	icon_state = "ammo"
 	startswith = list(/obj/item/ammo_casing/shell/apds = 3)
 
 /obj/item/weapon/storage/box/flashbangs

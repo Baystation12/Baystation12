@@ -203,7 +203,12 @@
 
 	var/damage = Proj.damage
 	if(Proj.damtype == STUN)
-		damage = (Proj.damage / 8)
+		damage = Proj.damage / 6
+	if(Proj.agony)
+		damage += Proj.agony / 6
+		if(health < Proj.agony * 3)
+			Paralyse(Proj.agony / 20)
+			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	adjustBruteLoss(damage)
 	Proj.on_hit(src)

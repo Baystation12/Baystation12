@@ -119,6 +119,7 @@
 //Maybe this should be broken up into separate procs for each load method?
 /obj/item/weapon/gun/projectile/proc/load_ammo(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/ammo_magazine))
+		. = TRUE
 		var/obj/item/ammo_magazine/AM = A
 		if(!(load_method & AM.mag_type) || caliber != AM.caliber)
 			return //incompatible
@@ -155,6 +156,7 @@
 					playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
+		. = TRUE
 		var/obj/item/ammo_casing/C = A
 		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
 			return //incompatible
@@ -205,7 +207,8 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
-	load_ammo(A, user)
+	if(!load_ammo(A, user))
+		return ..()
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
 	if(firemodes.len > 1)
