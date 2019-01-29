@@ -1,3 +1,6 @@
+/area/teamslayer1
+	requires_power = 0
+
 /area/teamslayer1/north_airlock_1
 	name = "\improper North Airlock"
 	icon_state = "eva"
