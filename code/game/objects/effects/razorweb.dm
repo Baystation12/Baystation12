@@ -42,7 +42,7 @@
 
 	. = ..(mapload)
 
-	if(locate(/obj/effect/razorweb) in loc)
+	if((locate(/obj/effect/razorweb) in loc) != src)
 		return INITIALIZE_HINT_QDEL
 
 	web = image(icon = icon, icon_state = "razorweb")
@@ -133,7 +133,7 @@
 			if(!istype(limb) || limb.is_stump() || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
 				continue
 			var/is_vital = FALSE
-			for(var/obj/item/organ/internal/I in E.internal_organs)
+			for(var/obj/item/organ/internal/I in limb.internal_organs)
 				if(I.vital)
 					is_vital = TRUE
 					break
@@ -152,7 +152,7 @@
 		if(!prob(armourval))
 			armourval = armourval/100
 			var/dam = Floor(rand(25,50) * armourval)
-			if(dam) 
+			if(dam)
 				L.adjustBruteLoss(dam)
 				visible_message("<span class='danger'>The crystalline strands cut deeply into \the [L]!</span>")
 
