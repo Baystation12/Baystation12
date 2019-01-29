@@ -2,6 +2,7 @@
 /datum/map/first_contact
 	name = "111 Tauri \"Elmsville\""
 	full_name = "111 Tauri System, Human Colony \"Elmsville\""
+	system_name = "111 Tauri"
 	path = "first_contact"
 	station_levels = list()
 	admin_levels = list()
