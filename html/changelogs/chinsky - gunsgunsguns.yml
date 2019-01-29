@@ -1,0 +1,6 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Added an exploration shotgun. It's in a wall locker on Charon, along with ammo, replacing netgun. What can possibly go wrong?"
+  - rscadd: "It can fire freely off-ship, but onboard you gotta register and get XO or CO to authorize it. Yes it's pain, yes it's intended."
+  - rscadd: "It is only guaranteed to work with types of ammo it ships with - beanbags, flash, net rounds. Loading combat ammo voids warranty and may result in fun."
