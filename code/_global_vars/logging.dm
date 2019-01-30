@@ -1,6 +1,3 @@
-var/runtime_diary = null
-
-
 var/list/combatlog = list()
 var/list/IClog     = list()
 var/list/OOClog    = list()
