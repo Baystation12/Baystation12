@@ -1080,10 +1080,9 @@
 			vessel.maximum_volume = species.blood_volume
 		fixblood()
 
-	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
-	if(client && client.screen)
-		client.screen.len = null
-		InitializeHud()
+	// Rebuild the HUD and visual elements.
+	if(client)
+		Login()
 
 	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack)
 		create_stack()
