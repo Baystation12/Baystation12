@@ -14,6 +14,10 @@
 	var/defense_range = 7
 	var/obj/item/projectile/overmap/proj_fired = /obj/item/projectile/overmap/auto_defense_proj
 
+/obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
+	. = ..()
+	GLOB.overmap_tiles_uncontrolled -= range(defense_range,src)
+
 /datum/npc_ship_request/automated_defense_process
 	request_auth_levels = list()
 	request_requires_processing = 1
