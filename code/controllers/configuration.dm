@@ -157,6 +157,8 @@ var/list/gamemode_cache = list()
 	var/comms_password = ""
 	var/ban_comms_password = null
 	var/list/forbidden_versions = list() // Clients with these byond versions will be autobanned. Format: string "byond_version.byond_build"; separate with ; in config, e.g. 512.1234;512.1235
+	var/minimum_byond_version
+	var/minimum_byond_build
 
 	var/login_export_addr = null
 
@@ -609,6 +611,12 @@ var/list/gamemode_cache = list()
 
 				if("forbidden_versions")
 					config.forbidden_versions = splittext(value, ";")
+				
+				if("minimum_byond_version")
+					config.minimum_byond_version = value
+
+				if("minimum_byond_build")
+					config.minimum_byond_build = value
 
 				if("login_export_addr")
 					config.login_export_addr = value
