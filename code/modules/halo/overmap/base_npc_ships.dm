@@ -70,6 +70,18 @@
 		return 1
 	return 0
 
+/obj/effect/overmap/ship/npc_ship/proc/radio_message(var/mob/target_mob = null,var/message = null) //If no targetmob supplied, broadcasts to all players
+	if(target_mob)
+		if(!istype(target_mob))
+			message = target_mob
+		else
+			to_chat(target_mob,message)
+			return
+
+	for(var/mob/living/m in GLOB.player_list)
+		if(m.stat == CONSCIOUS)
+			to_chat(m,message)
+
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
@@ -95,6 +107,9 @@
 	if(!isnull(start_turf))
 		forceMove(start_turf)
 	pick_target_loc()
+
+/obj/effect/overmap/ship/npc_ship/proc/ship_targetedby_defenses()
+	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
 
@@ -132,7 +147,7 @@
 		var/have_lang = 0
 		for(var/datum/language/l in m.languages)
 			if(l.name == message_language)
-				to_chat(m,"<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\" \[[x]:[y]\]</span>")
+				radio_message(m,"<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\" \[[x]:[y]\]</span>")
 				have_lang = 1
 				break
 		if(!have_lang)
@@ -144,7 +159,7 @@
 				new_message += pick(default.syllables)
 			else
 				new_message += pick("a","e","i","o","u")
-			to_chat(m,"<span class = 'radio'>\[EBAND\] [name]: \"[new_message]\" \[[x]:[y]\]</span>")
+			radio_message(m,"<span class = 'radio'>\[EBAND\] [name]: \"[new_message]\" \[[x]:[y]\]</span>")
 
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)

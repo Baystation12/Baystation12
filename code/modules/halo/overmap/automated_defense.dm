@@ -63,6 +63,9 @@
 		if(unauthed_ships.len == 0)
 			return 1
 		current_target = pick(unauthed_ships)
+		var/obj/effect/overmap/ship/npc_ship/npc = current_target
+		if(istype(npc))
+			npc.ship_targetedby_defenses()
 		if(current_target == previous_target)
 			start_target_fire_at = world.time //Don't need to lock on again if it's the same ship.
 
