@@ -23,6 +23,7 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 55
 	mob_size = MOB_LARGE
+	mob_bump_flag = HEAVY
 	can_escape = 1
 	move_to_delay = 3
 	min_gas = null
@@ -178,12 +179,9 @@
 		phase3_transition()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
-	if(prob(85))
-		visible_message("<span class='cult'>\The light radiating from \the [src]' fleece dims...</span>")
-	else
-		visible_message("<span class='cult'>\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!</span>")
-		new /mob/living/simple_animal/hostile/retaliate/goat/king/phase2(src.loc)
-		Destroy()
+	visible_message("<span class='cult'>\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!</span>")
+	new /mob/living/simple_animal/hostile/retaliate/goat/king/phase2(src.loc)
+	Destroy()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
 	QDEL_NULL(boss_theme)

@@ -197,7 +197,7 @@
 	pixel_x = -38;
 	pixel_y = 0
 	},
-/mob/living/simple_animal/hostile/retaliate/goat/king/hydro,
+/obj/item/clothing/accessory/armband/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aG" = (
@@ -305,6 +305,7 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
+/mob/living/simple_animal/hostile/retaliate/goat/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aV" = (
@@ -395,6 +396,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/mob/living/simple_animal/hostile/retaliate/goat/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "be" = (
@@ -3028,6 +3030,10 @@
 	},
 /turf/template_noop,
 /area/template_noop)
+"TT" = (
+/mob/living/simple_animal/hostile/retaliate/goat/hydro,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/hydrobase/station/goatzone)
 
 (1,1,1) = {"
 aa
@@ -3984,7 +3990,7 @@ aa
 aa
 aa
 aw
-aG
+TT
 aV
 be
 bm
