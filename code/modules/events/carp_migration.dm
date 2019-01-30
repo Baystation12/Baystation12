@@ -1,19 +1,17 @@
 /datum/event/carp_migration
 	announceWhen	= 50
-	endWhen 		= 900
-
-	var/list/spawned_carp = list()
+	endWhen = 55
+	var/spawned_carp //this is only for the announcement logic and for debug count
 
 /datum/event/carp_migration/setup()
 	announceWhen = rand(40, 60)
-	endWhen = rand(600,1200)
 
 /datum/event/carp_migration/announce()
 	var/announcement = ""
 	if(severity == EVENT_LEVEL_MAJOR)
-		announcement = "Massive migration of unknown biological entities has been detected near the [location_name()], please stand-by."
+		announcement = "A massive migration of unknown biological entities has been captured by the [location_name()] gravity well. Exercise external operations with caution."
 	else
-		announcement = "Unknown biological [spawned_carp.len == 1 ? "entity has" : "entities have"] been detected near the [location_name()], please stand-by."
+		announcement = "Unknown biological [spawned_carp == 1 ? "entity has" : "entities have"] been captured by the [location_name()] gravity well."
 	command_announcement.Announce(announcement, "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/carp_migration/start()
@@ -38,18 +36,16 @@
 		var/group_size = rand(group_size_min, group_size_max)
 		if(prob(96))
 			for (var/j = 1, j <= group_size, j++)
-				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp(spawn_locations[i]))
+				new /mob/living/simple_animal/hostile/carp(spawn_locations[i])
+				spawned_carp++
 			i++
 		else
 			group_size = max(1,round(group_size/6))
 			group_size = min(spawn_locations.len-i+1,group_size)
 			for(var/j = 1, j <= group_size, j++)
-				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp/pike(spawn_locations[i+j]))
+				new /mob/living/simple_animal/hostile/carp/pike(spawn_locations[i+j])
+				spawned_carp++
 			i += group_size
 
 /datum/event/carp_migration/end()
-	for(var/mob/living/simple_animal/hostile/C in spawned_carp)
-		if(!C.stat)
-			var/turf/T = get_turf(C)
-			if(istype(T, /turf/space))
-				qdel(C)
+	log_debug("Carp migration event spawned [spawned_carp] carp.")
