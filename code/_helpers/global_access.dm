@@ -745,8 +745,6 @@
 			return global.roundstart_hour;
 		if("rune_list")
 			return global.rune_list;
-		if("runtime_diary")
-			return global.runtime_diary;
 		if("same_wires")
 			return global.same_wires;
 		if("secret_force_mode")
@@ -1700,8 +1698,6 @@
 			global.roundstart_hour=newval;
 		if("rune_list")
 			global.rune_list=newval;
-		if("runtime_diary")
-			global.runtime_diary=newval;
 		if("same_wires")
 			global.same_wires=newval;
 		if("secret_force_mode")
@@ -2282,7 +2278,6 @@
 	"round_start_time",
 	"roundstart_hour",
 	"rune_list",
-	"runtime_diary",
 	"same_wires",
 	"secret_force_mode",
 	"send_emergency_team",

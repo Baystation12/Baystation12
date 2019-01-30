@@ -103,11 +103,6 @@
 	if (config.log_pda)
 		game_log("PDA", text)
 
-/proc/log_to_dd(text)
-	to_world_log(text) //this comes before the config check because it can't possibly runtime
-	if(config.log_world_output)
-		game_log("DD_OUTPUT", text)
-
 /proc/log_misc(text)
 	game_log("MISC", text)
 
@@ -120,11 +115,9 @@
 
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
-	if(config && config.log_runtime)
-		to_world_log(runtime_diary)
-		to_world_log(text)
-	to_world_log(null)
-	to_world_log(text)
+	to_world_log(text) //this comes before the config check because it can't possibly runtime
+	if(config.log_world_output)
+		game_log("DD_OUTPUT", text)
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)

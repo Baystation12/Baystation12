@@ -242,7 +242,7 @@ function run_byond_tests {
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test_ci "check globals build" "python3 tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< '6adc3adf1aaedf47db920dc94e89bc7e *code/_helpers/global_access.dm'"
+    run_test "check globals unchanged" "md5sum -c - <<< '7a06255d881db9fb8a4736b566d115c8 *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"
