@@ -1289,7 +1289,7 @@
 /area/slavers_base/secwing)
 "dm" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1546,7 +1546,7 @@
 /area/slavers_base/secwing)
 "dR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
 /obj/item/weapon/melee/baton,
 /obj/machinery/power/terminal{
 	icon_state = "term";

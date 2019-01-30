@@ -1148,7 +1148,7 @@
 	pixel_y = 0
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/flashshells,
+/obj/item/weapon/storage/box/ammo/flashshells,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dD" = (

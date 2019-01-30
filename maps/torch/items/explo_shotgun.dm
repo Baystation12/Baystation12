@@ -59,13 +59,11 @@
 	net.throw_impact(target)
 	return TRUE
 
-/obj/item/weapon/storage/box/explo_shells
+/obj/item/weapon/storage/box/ammo/explo_shells
 	name = "box of utility shells"
-	icon_state = "ammo"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_magazine/shotholder/beanbag = 2,
-					  /obj/item/ammo_magazine/shotholder/net = 2,
-					  /obj/item/ammo_magazine/shotholder/flash = 2)
+	startswith = list(/obj/item/ammo_magazine/shotholder/beanbag = 1,
+					  /obj/item/ammo_magazine/shotholder/net = 1,
+					  /obj/item/ammo_magazine/shotholder/flash = 1)
 
 /obj/structure/closet/secure_closet/explo_gun
 	name = "gun locker"
@@ -76,9 +74,9 @@
 	anchored = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 
-/obj/structure/closet/secure_closet/WillContain()
+/obj/structure/closet/secure_closet/explo_gun/WillContain()
 	return list(
-		/obj/item/weapon/storage/box/explo_shells = 2,
+		/obj/item/weapon/storage/box/ammo/explo_shells = 3,
 		/obj/item/weapon/gun/projectile/shotgun/pump/exploration
 	)
 

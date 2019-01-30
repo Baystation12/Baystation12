@@ -27,22 +27,22 @@
 /datum/uplink_item/item/ammo/sniperammo
 	name = "Sniper Shells"
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/sniperammo
+	path = /obj/item/weapon/storage/box/ammo/sniperammo
 
 /datum/uplink_item/item/ammo/sniperammo/apds
 	name = "Sniper APDS Shells"
 	item_cost = 12
-	path = /obj/item/weapon/storage/box/sniperammo/apds
+	path = /obj/item/weapon/storage/box/ammo/sniperammo/apds
 
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Shotgun Shells box"
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/shotgunshells
+	path = /obj/item/weapon/storage/box/ammo/shotgunshells
 
 /datum/uplink_item/item/ammo/shotgun_slugs
 	name = "Shotgun Slugs box"
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/shotgunammo
+	path = /obj/item/weapon/storage/box/ammo/shotgunammo
 
 /datum/uplink_item/item/ammo/machine_pistol
 	name = "Machine Pistol Magazine"

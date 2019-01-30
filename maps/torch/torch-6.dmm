@@ -434,14 +434,14 @@
 /area/rescue_base/base)
 "abs" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/stunshells,
-/obj/item/weapon/storage/box/stunshells,
-/obj/item/weapon/storage/box/beanbags,
-/obj/item/weapon/storage/box/beanbags,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunshells,
-/obj/item/weapon/storage/box/shotgunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
+/obj/item/weapon/storage/box/ammo/beanbags,
+/obj/item/weapon/storage/box/ammo/beanbags,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -11090,14 +11090,14 @@
 /area/syndicate_mothership)
 "aAj" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunshells,
-/obj/item/weapon/storage/box/shotgunshells,
-/obj/item/weapon/storage/box/beanbags,
-/obj/item/weapon/storage/box/beanbags,
-/obj/item/weapon/storage/box/stunshells,
-/obj/item/weapon/storage/box/stunshells,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/beanbags,
+/obj/item/weapon/storage/box/ammo/beanbags,
+/obj/item/weapon/storage/box/ammo/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /turf/unsimulated/floor{
