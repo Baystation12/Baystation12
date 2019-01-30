@@ -103,3 +103,22 @@
 	opacity = 0
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 5 SECONDS
+
+//FACTION DEFINES//
+/obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
+	faction = "unsc"
+	ship_name_list = list()
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/unsc/generate_ship_name()
+	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/cov
+	faction = "covenant"
+	proj_fired = /obj/item/projectile/auto_defense_proj/covenant
+	ship_name_list = list(\
+	"Woe of the Treacherous",
+	"Faithful Vanguard",
+	"Ardent Shield",
+	"Unyielding Faith",
+	"Resolute Prophecy"
+	)

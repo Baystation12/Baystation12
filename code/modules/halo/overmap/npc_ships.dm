@@ -10,7 +10,7 @@
 "Do you feel like a hero yet?","Oof-",\
 "You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
 )
-#define ALL_Civilian_SHIPNAMES list(\
+#define ALL_CIVILIANS_SHIPNAMES list(\
 "Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
 )
 
@@ -25,6 +25,8 @@
 
 	icon = 'code/modules/halo/overmap/freighter.dmi'
 	icon_state = "ship"
+
+	var/list/ship_name_list = ALL_CIVILIANS_SHIPNAMES
 
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
@@ -84,7 +86,7 @@
 	qdel(src)
 
 /obj/effect/overmap/ship/npc_ship/proc/generate_ship_name()
-	name = pick(ALL_Civilian_SHIPNAMES)
+	name = pick(ship_name_list)
 
 /obj/effect/overmap/ship/npc_ship/Initialize()
 	var/turf/start_turf = locate(x,y,z)
