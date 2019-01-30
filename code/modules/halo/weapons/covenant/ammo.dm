@@ -95,7 +95,7 @@
 		if (shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,0,1,2,5)
+			explosion(L.loc,-1,1,2,5)
 			for(var/I in embedded_shards)
 				qdel(I)
 	if(prob(30)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
