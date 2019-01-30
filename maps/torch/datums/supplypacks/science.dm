@@ -83,3 +83,19 @@
 					/obj/item/seeds/libertymycelium = 2,
 					/obj/item/seeds/reishimycelium = 2,
 					/obj/item/seeds/kudzuseed = 2)
+
+/decl/hierarchy/supply_pack/science/shotgun
+	name = "Weapons - Ballistic Launcher"
+	contains = list(/obj/item/weapon/gun/projectile/shotgun/pump/exploration = 1)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "ballistic launcher crate"
+	access = access_pathfinder
+
+/decl/hierarchy/supply_pack/science/nets
+	name = "Ammunition - Utility Shells"
+	contains = list(/obj/item/weapon/storage/box/ammo/explo_shells = 2)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "utlity shells crate"
+	access = access_pathfinder
