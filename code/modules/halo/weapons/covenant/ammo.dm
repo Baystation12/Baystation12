@@ -39,9 +39,10 @@
 	desc = ""
 	damage = 75
 	accuracy = 3
+	armor_penetration = 70
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
-	step_delay = 0.1
+	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1 SECOND
 	invisibility = 101
@@ -79,6 +80,8 @@
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
+	var/shards_to_explode = 6
+	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
 
 /obj/item/projectile/bullet/covenant/needles/attack_mob(var/mob/living/carbon/human/L)
@@ -89,16 +92,16 @@
 	for(var/obj/shard in L.contents )
 		if(!istype(shard,/obj/item/weapon/material/shard))
 			continue
-		if (shard.name == "Needle shrapnel")
+		if (shard.name == shard_name)
 			embedded_shards += shard
-		if(embedded_shards.len >5)
-			explosion(L.loc,0,1,2,5)
+		if(embedded_shards.len >=shards_to_explode)
+			explosion(L.loc,-1,1,2,5)
 			for(var/I in embedded_shards)
 				qdel(I)
 	if(prob(30)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
 		var/obj/item/organ/external/embed_organ = pick(L.organs)
-		shard.name = "Needle shrapnel"
+		shard.name = shard_name
 		embed_organ.embed(shard)
 	..()
 
@@ -115,9 +118,12 @@
 	. = ..()
 	locked_target = null //No more homing if we miss.
 
-/obj/item/projectile/bullet/covenant/needles/before_move()
+/obj/item/projectile/bullet/covenant/needles/Move()
+	. = ..()
+	if(kill_count % 2 == 0)
+		return
 	if(locked_target)
-		launch(locate(locked_target.x,locked_target.y,locked_target.z))
+		redirect(locked_target.x, locked_target.y, loc)
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
