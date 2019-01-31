@@ -821,5 +821,6 @@ TERRAN OUTFITS
 
 /decl/hierarchy/outfit/job/torch/crew/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
 	id_type = /obj/item/weapon/card/id/torch/crew/research/scientist
  
