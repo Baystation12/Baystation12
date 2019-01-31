@@ -81,8 +81,8 @@
 
 /decl/hierarchy/supply_pack/medical/cryobag
 	name = "Equipment - Stasis bags"
-	contains = list(/obj/item/bodybag/cryobag = 3)
-	cost = 50
+	contains = list(/obj/item/bodybag/cryobag = 2)
+	cost = 80
 	containername = "stasis bag crate"
 
 /decl/hierarchy/supply_pack/medical/stretcher

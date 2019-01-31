@@ -115,7 +115,7 @@
 
 /obj/item/weapon/storage/firstaid/stab
 	name = "stabilisation first aid"
-	desc = "Stocked with medical pouches and a stasis bag."
+	desc = "Stocked with medical pouches."
 	icon_state = "stabfirstaid"
 	item_state = "firstaid-advanced"
 
@@ -124,7 +124,6 @@
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/med_pouch/oxyloss,
 		/obj/item/weapon/storage/med_pouch/toxin,
-		/obj/item/bodybag/cryobag
 		)
 
 /obj/item/weapon/storage/firstaid/surgery

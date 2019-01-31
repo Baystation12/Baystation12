@@ -64,3 +64,12 @@
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_GLASS = 8000, MATERIAL_SILVER = 2000)
 	build_path = /obj/item/weapon/reagent_containers/hypospray/vial
 	sort_string = "MAEAA"
+
+/datum/design/item/medical/cryobag
+	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
+	a hostile enviroment."
+	id = "cryobag"
+	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
+	materials = list(MATERIAL_PLASTIC = 4000, MATERIAL_GLASS = 4000, MATERIAL_SILVER = 1000)
+	build_path = /obj/item/bodybag/cryobag
+	sort_string = "MAFAA"

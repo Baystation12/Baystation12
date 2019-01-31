@@ -1318,8 +1318,6 @@
 /area/maintenance/firstdeck/aftstarboard)
 "acJ" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /obj/random/medical,
@@ -6699,9 +6697,6 @@
 	pixel_x = 1;
 	pixel_y = 2
 	},
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	dir = 4
 	},
@@ -18080,9 +18075,6 @@
 /area/medical/surgery2)
 "eRb" = (
 /obj/structure/table/standard,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /obj/effect/floor_decal/corner/pink{
 	dir = 5
 	},
@@ -24702,8 +24694,6 @@
 /obj/item/roller{
 	pixel_y = 8
 	},
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
