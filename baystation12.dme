@@ -1444,6 +1444,7 @@
 #include "code\modules\halo\comms\commsitems.dm"
 #include "code\modules\halo\comms\covenant_comms.dm"
 #include "code\modules\halo\comms\headsets.dm"
+#include "code\modules\halo\covenant\ammo_belt.dm"
 #include "code\modules\halo\covenant\antimatter_bomb.dm"
 #include "code\modules\halo\covenant\banshee.dm"
 #include "code\modules\halo\covenant\bed.dm"
