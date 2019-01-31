@@ -6,10 +6,8 @@
 	item_state = "plasmarifle"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
-	charge_meter = 0
-	self_recharge = 1
-	max_shots = 30 //Less shots, more damage. Exactly 10 bursts.
-	recharge_time = 5
+	charge_meter = 1
+	max_shots = 60 //Less shots, more damage. Exactly 20 bursts.
 	burst = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
 	screen_shake = 0
@@ -19,6 +17,12 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
+/obj/item/weapon/gun/energy/plasmarifle/proc/cov_plasma_recharge_tick()
+	if(max_shots > 0)
+		if(power_supply.charge < power_supply.maxcharge)
+			power_supply.give(charge_cost)
+			update_icon()
+			return 1
 
 /obj/item/weapon/gun/energy/plasmarifle/decorative
 	name = "Type-25 Directed Energy Rifle"
@@ -45,5 +49,6 @@
 	name = "Type-25 Directed Energy Rifle (overcharged)"
 	icon_state = "Brute Plasma Rifle"
 	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for extra damage."
-	recharge_time = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle/brute
+	fire_delay = 3
+	burst_delay = 1

@@ -6,9 +6,9 @@
 	icon_state = "Plasma Pistol"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/haloplasmapistol.ogg'
-	charge_meter = 0
-	self_recharge = 1
-	max_shots = 20
+	charge_meter = 1
+	max_shots = 40
+	slowdown_general = 0
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
 	screen_shake = 0
@@ -27,6 +27,12 @@
 		overcharge = 1
 		return
 
+/obj/item/weapon/gun/energy/plasmapistol/proc/cov_plasma_recharge_tick()
+	if(max_shots > 0)
+		if(power_supply.charge < power_supply.maxcharge)
+			power_supply.give(charge_cost/3)
+			update_icon()
+			return 1
 
 /obj/item/weapon/gun/energy/plasmapistol/disabled
 	name = "Type-25 Directed Energy Pistol"
@@ -69,6 +75,7 @@
 	caliber = "needler"
 	load_method = MAGAZINE
 	burst = 3
+	slowdown_general = 0
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
