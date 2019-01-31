@@ -842,7 +842,7 @@
 /obj/structure/table/rack,
 /obj/random/tool,
 /obj/random/tech_supply,
-/obj/item/clothing/gloves/duty,
+/obj/item/clothing/gloves/thick/duty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cq" = (

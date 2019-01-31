@@ -48,6 +48,7 @@
 		/obj/item/clothing/head/hardhat/white,
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
+		/obj/item/clothing/gloves/thick/duty/solgov/eng,
 		/obj/item/device/radio/headset/heads/ce,
 		/obj/item/device/radio/headset/heads/ce/alt,
 		/obj/item/weapon/storage/belt/utility/full,
@@ -92,6 +93,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/taperoll/atmos,
 		/obj/item/clothing/gloves/insulated,
+		/obj/item/clothing/gloves/thick/duty/solgov/eng,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -140,6 +142,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/insulated,
+		/obj/item/clothing/gloves/thick/duty/solgov/eng,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)

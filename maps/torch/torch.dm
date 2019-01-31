@@ -39,6 +39,7 @@
 	#include "items/clothing/solgov-accessory.dm"
 	#include "items/clothing/solgov-armor.dm"
 	#include "items/clothing/solgov-feet.dm"
+	#include "items/clothing/solgov-hands.dm"
 	#include "items/clothing/solgov-head.dm"
 	#include "items/clothing/solgov-suit.dm"
 	#include "items/clothing/solgov-under.dm"
