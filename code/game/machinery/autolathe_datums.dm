@@ -504,7 +504,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/magazine_smg
+/datum/autolathe/recipe/magazine_smg_topmounted
 	name = "ammunition (SMG, top mounted)"
 	path = /obj/item/ammo_magazine/smg_top
 	hidden = 1
