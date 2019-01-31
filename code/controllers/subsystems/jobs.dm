@@ -103,7 +103,9 @@ SUBSYSTEM_DEF(jobs)
 			for(var/alt_title in job.alt_titles)
 				titles_to_datums[alt_title] = job
 			if(job.department_flag)
-				LAZYDISTINCTADD(positions_by_department["[job.department_flag]"], job.title)
+				for (var/i = 0 to 15)
+					if(job.department_flag & (1<<i))
+						LAZYDISTINCTADD(positions_by_department["[(1<<i)]"], job.title)
 
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()
