@@ -199,7 +199,7 @@
 /var/const/access_petrov_rd = 206
 /datum/access/petrov_rd
 	id = access_petrov_rd
-	desc = "Petrov Research Director's Office"
+	desc = "Petrov Chief Science Officer's Office"
 	region = ACCESS_REGION_NT
 
 /var/const/access_petrov_security = 207

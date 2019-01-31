@@ -3,7 +3,7 @@
 	name = "stasis bag"
 	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = list(TECH_BIO = 4)
 	var/stasis_power
@@ -20,7 +20,7 @@
 	name = "stasis bag"
 	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 
 	storage_types = CLOSET_STORAGE_MOBS
@@ -108,7 +108,7 @@
 	name = "used stasis bag"
 	desc = "Pretty useless now.."
 	icon_state = "bodybag_used"
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 
 /obj/structure/closet/body_bag/cryobag/blank
 	stasis_power = 60

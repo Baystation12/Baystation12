@@ -6,7 +6,7 @@ var/list/dreams = list(
 	"a hat","a ruined station","a planet","phoron","air","the medical bay","the bridge","blinking lights",
 	"a blue light","an abandoned laboratory","NanoTrasen", "pirates", "mercenaries","blood","healing","power","respect",
 	"riches","space","a crash","happiness","pride","a fall","water","flames","ice","melons","flying","the eggs","money",
-	"the chief engineer","the research director","the chief medical officer",
+	"the chief engineer","the chief science officer","the chief medical officer",
 	"a station engineer","the janitor","the atmospheric technician",
 	"a cargo technician","the botanist","a shaft miner","the psychologist","the chemist",
 	"the virologist","the roboticist","a chef","the bartender","a chaplain","a librarian","a mouse",

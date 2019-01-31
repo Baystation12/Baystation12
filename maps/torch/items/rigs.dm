@@ -25,22 +25,22 @@
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	camera = /obj/machinery/camera/network/command
-	species_restricted = list(SPECIES_HUMAN) //no available icons for aliens
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC) //no available icons for aliens
 
 /obj/item/clothing/suit/space/rig/command
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/shoes/magboots/rig/command
 	icon = 'maps/torch/icons/obj/obj_feet_solgov.dmi'
 	item_icons = list(slot_shoes_str = 'maps/torch/icons/mob/onmob_feet_solgov.dmi')
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/gloves/rig/command
 	icon = 'maps/torch/icons/obj/obj_hands_solgov.dmi'
 	item_icons = list(slot_gloves_str = 'maps/torch/icons/mob/onmob_hands_solgov.dmi')
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 
 /obj/item/weapon/rig/command/equipped
@@ -201,6 +201,7 @@
 	req_access = list(access_pathfinder)
 
 /obj/item/clothing/head/helmet/space/rig/command/exploration
+	camera = /obj/machinery/camera/network/exploration
 	icon_state = "command_exp_rig"
 /obj/item/clothing/suit/space/rig/command/exploration
 	icon_state = "command_exp_rig"
@@ -221,20 +222,3 @@
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	camera = /obj/machinery/camera/network/supply
-
-
-/obj/item/weapon/rig/hazard/guard
-	name = "hazard hardsuit control module"
-
-	req_access = list(access_sec_guard)
-
-/obj/item/clothing/head/helmet/space/rig/hazard/guard
-	camera = /obj/machinery/camera/network/research
-
-/obj/item/weapon/rig/hazard/guard
-
-	initial_modules = list(
-		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/ai_container,
-		/obj/item/rig_module/mounted/taser
-		)

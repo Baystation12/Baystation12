@@ -83,8 +83,8 @@
 	QDEL_NULL(detergent)
 
 	//Tanning!
-	for(var/obj/item/stack/material/hairlesshide/HH in contents)
-		var/obj/item/stack/material/wetleather/WL = new(src)
+	for(var/obj/item/stack/hairlesshide/HH in contents)
+		var/obj/item/stack/wetleather/WL = new(src)
 		WL.amount = HH.amount
 		qdel(HH)
 
@@ -146,7 +146,7 @@
 				state = 3
 		else
 			..()
-	else if(istype(W,/obj/item/stack/material/hairlesshide) || \
+	else if(istype(W,/obj/item/stack/hairlesshide) || \
 		istype(W,/obj/item/clothing/under)  || \
 		istype(W,/obj/item/clothing/mask)   || \
 		istype(W,/obj/item/clothing/head)   || \

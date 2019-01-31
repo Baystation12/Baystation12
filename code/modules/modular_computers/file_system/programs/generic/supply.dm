@@ -34,8 +34,10 @@
 	name = "Supply Management program"
 	var/screen = 1		// 1: Ordering menu, 2: Statistics, 3: Shuttle control, 4: Orders menu
 	var/selected_category
-	var/list/category_names
-	var/list/category_contents
+	var/list/category_names = list()
+	var/list/category_contents = list()
+	var/showing_contents_of_ref = null
+	var/list/contents_of_order = list()
 	var/emagged = FALSE	// TODO: Implement synchronization with modular computer framework.
 	var/emagged_memory = FALSE // Keeps track if the program has to regenerate the catagories after an emag.
 	var/current_security_level
@@ -45,7 +47,7 @@
 	var/list/data = host.initial_data()
 	var/is_admin = check_access(user, access_cargo)
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	if(!category_names || !category_contents || current_security_level != security_state.current_security_level || emagged_memory != emagged )
+	if(!LAZYLEN(category_names) || !LAZYLEN(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
 		generate_categories()
 		current_security_level = security_state.current_security_level
 		emagged_memory = emagged
@@ -64,6 +66,9 @@
 			if(selected_category)
 				data["category"] = selected_category
 				data["possible_purchases"] = category_contents[selected_category]
+				if(showing_contents_of_ref)
+					data["showing_contents_of"] = showing_contents_of_ref
+					data["contents_of_order"] = contents_of_order
 
 		if(2)// Statistics screen with credit overview
 			var/list/point_breakdown = list()
@@ -123,14 +128,23 @@
 		return 1
 
 	if(href_list["select_category"])
+		clear_order_contents()
 		selected_category = href_list["select_category"]
 		return 1
 
 	if(href_list["set_screen"])
+		clear_order_contents()
 		screen = text2num(href_list["set_screen"])
 		return 1
+	
+	if(href_list["show_contents"])
+		generate_order_contents(href_list["show_contents"])
+	
+	if(href_list["hide_contents"])
+		clear_order_contents()
 
 	if(href_list["order"])
+		clear_order_contents()
 		var/decl/hierarchy/supply_pack/P = locate(href_list["order"]) in SSsupply.master_supply_list
 		if(!istype(P))
 			return 1
@@ -277,8 +291,8 @@
 		return 1
 
 /datum/nano_module/supply/proc/generate_categories()
-	category_names = list()
-	category_contents = list()
+	category_names.Cut()
+	category_contents.Cut()
 	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
 	for(var/decl/hierarchy/supply_pack/sp in root.children)
 		if(!sp.is_category())
@@ -294,6 +308,31 @@
 				"ref" = "\ref[spc]"
 			)))
 		category_contents[sp.name] = category
+
+/datum/nano_module/supply/proc/generate_order_contents(var/order_ref)
+	var/decl/hierarchy/supply_pack/sp = locate(order_ref) in SSsupply.master_supply_list
+	if(!istype(sp))
+		return FALSE
+	contents_of_order.Cut()
+	showing_contents_of_ref = order_ref
+	for(var/item_path in sp.contains) // Thanks to Lohikar for helping me with type paths - CarlenWhite
+		var/obj/item/stack/OB = item_path // Not always a stack, but will always have a name we can fetch.
+		var/name = initial(OB.name)
+		var/amount = sp.contains[item_path] || 1 // If it's just one item (has no number associated), fallback to 1.
+		if(ispath(item_path, /obj/item/stack)) // And if it is a stack, consider the amount
+			amount *= initial(OB.amount)
+		
+		contents_of_order.Add(list(list(
+			"name" = name,
+			"amount" = amount
+		)))
+	
+	return TRUE
+	
+	
+/datum/nano_module/supply/proc/clear_order_contents()
+	contents_of_order.Cut()
+	showing_contents_of_ref = null
 
 /datum/nano_module/supply/proc/get_shuttle_status()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle

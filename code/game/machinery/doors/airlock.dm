@@ -202,7 +202,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_BOTTLE_GREEN
+	stripe_color = COLOR_RESEARCH
 
 /obj/machinery/door/airlock/glass/science
 	door_color = COLOR_WHITE
@@ -272,6 +272,11 @@ var/list/airlock_overlays = list()
 	name = "Gold Airlock"
 	door_color = COLOR_SUN
 	mineral = MATERIAL_GOLD
+
+/obj/machinery/door/airlock/crystal
+	name = "Crystal Airlock"
+	door_color = COLOR_CRYSTAL
+	mineral = MATERIAL_CRYSTAL
 
 /obj/machinery/door/airlock/silver
 	name = "Silver Airlock"

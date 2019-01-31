@@ -169,7 +169,7 @@
 	if(ispath(module))
 		new module(src)
 	if(lawupdate)
-		var/new_ai = select_active_ai_with_fewest_borgs()
+		var/new_ai = select_active_ai_with_fewest_borgs((get_turf(src))?.z)
 		if(new_ai)
 			lawupdate = 1
 			connect_to_ai(new_ai)
@@ -290,7 +290,7 @@
 	new module_type(src)
 
 	hands.icon_state = lowertext(modtype)
-	feedback_inc("cyborg_[lowertext(modtype)]",1)
+	SSstatistics.add_field("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
 	if(module)

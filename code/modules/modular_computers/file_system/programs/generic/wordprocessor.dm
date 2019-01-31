@@ -71,10 +71,15 @@
 		\[grid\] - \[/grid\] : Table without visible borders, for layouts.
 		\[row\] - New table row.
 		\[cell\] - New table cell.
-		\[logo\] - Inserts corporate logo image.
-		\[bluelogo\] - Inserts blue corporate logo image.
+		\[logo\] - Inserts EXO logo image.
+		\[ntlogo\] - Inserts the NT logo image.
+		\[bluelogo\] - Inserts blue NT logo image.
 		\[solcrest\] - Inserts SCG crest image.
-		\[terraseal\] - Inserts TCC seal"}
+		\[eclogo\] - Inserts the Expeditionary Corps logo.
+		\[daislogo\] - Inserts the Deimos Advanced Information Systems logo.
+		\[xynlogo\] - Inserts the Xyngergy logo.
+		\[iccgseal\] - Inserts ICCG seal
+		\[fleetlogo\] - Inserts the logo of the SCG Fleet"}
 
 		to_chat(usr, help)
 		return 1

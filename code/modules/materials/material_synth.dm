@@ -17,7 +17,7 @@
 	default_type = MATERIAL_PLASTIC
 
 /obj/item/stack/material/cyborg/steel
-	icon_state = "sheet-metal"
+	icon_state = "sheet"
 	default_type = MATERIAL_STEEL
 
 /obj/item/stack/material/cyborg/plasteel
@@ -31,8 +31,15 @@
 /obj/item/stack/material/cyborg/glass
 	icon_state = "sheet-glass"
 	default_type = MATERIAL_GLASS
+	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/cyborg/glass/reinforced
-	icon_state = "sheet-rglass"
-	default_type = MATERIAL_REINFORCED_GLASS
+	icon_state = "sheet-reinf"
+	default_type = MATERIAL_GLASS
+	default_reinf_type = MATERIAL_STEEL
 	charge_costs = list(500, 1000)
+
+/obj/item/stack/material/cyborg/aluminium
+	icon_state = "sheet-aluminium"
+	default_type = MATERIAL_ALUMINIUM
+	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME

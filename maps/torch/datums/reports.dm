@@ -199,7 +199,7 @@
 	add_field(/datum/report_field/pencode_text, "Defense/Offense")
 	add_field(/datum/report_field/pencode_text, "Special Characteristic(s)")
 	add_field(/datum/report_field/pencode_text, "Classification")
-	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Research Director should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
 
 //NT reports, mostly for liason but can be used by any NT personnel.
 
@@ -226,7 +226,7 @@
 	add_header()
 	add_field(/datum/report_field/simple_text, "AO Codename")
 	add_field(/datum/report_field/people/from_manifest, "Reporting Scientist")
-	add_field(/datum/report_field/people/from_manifest, "Overviewing Research Director")
+	add_field(/datum/report_field/people/from_manifest, "Overviewing Chief Science Officer")
 	add_field(/datum/report_field/pencode_text, "Containment Procedures")
 	add_field(/datum/report_field/pencode_text, "Generalized Overview")
 	add_field(/datum/report_field/simple_text, "Approximate Age of AO")
@@ -357,7 +357,7 @@
 	add_field(/datum/report_field/simple_text, "Intended Procedure(s)")
 	add_field(/datum/report_field/simple_text, "Compensation for Volunteer: (if any)")
 	add_field(/datum/report_field/people/list_from_manifest, "Handling Researcher(s)")
-	add_field(/datum/report_field/instruction, "By signing, the \"Volunteer\" agrees to absolve the Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative of the Corporation, such as a Research Director or Executive - this form is deemed reviewed, but is only approved if so marked.")
+	add_field(/datum/report_field/instruction, "By signing, the \"Volunteer\" agrees to absolve the Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative, this form is deemed reviewed, but is only approved if so marked.")
 	add_field(/datum/report_field/signature, "Volunteer's Signature:")
 	temp_fields += add_field(/datum/report_field/signature, "Corporate Representative's Signature")
 	temp_fields += add_field(/datum/report_field/options/yes_no, "Approved")

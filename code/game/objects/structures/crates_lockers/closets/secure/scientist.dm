@@ -1,11 +1,7 @@
 /obj/structure/closet/secure_closet/scientist
 	name = "scientist's locker"
 	req_one_access = list(access_tox,access_tox_storage)
-	icon_state = "secureres1"
-	icon_closed = "secureres"
-	icon_locked = "secureres1"
-	icon_opened = "secureresopen"
-	icon_off = "secureresoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	return list(
@@ -21,11 +17,7 @@
 /obj/structure/closet/secure_closet/xenobio
 	name = "xenobiologist's locker"
 	req_access = list(access_xenobiology)
-	icon_state = "secureres1"
-	icon_closed = "secureres"
-	icon_locked = "secureres1"
-	icon_opened = "secureresopen"
-	icon_off = "secureresoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
 /obj/structure/closet/secure_closet/xenobio/WillContain()
 	return list(
@@ -41,13 +33,9 @@
 	)
 
 /obj/structure/closet/secure_closet/RD
-	name = "research director's locker"
+	name = "chief science officer's locker"
 	req_access = list(access_rd)
-	icon_state = "rdsecure1"
-	icon_closed = "rdsecure"
-	icon_locked = "rdsecure1"
-	icon_opened = "rdsecureopen"
-	icon_off = "rdsecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/rd
 
 /obj/structure/closet/secure_closet/RD/WillContain()
 	return list(

@@ -69,6 +69,9 @@
 		ui.set_initial_data(data)
 		ui.open()
 
+	user.machine = nano_host()
+	user.reset_view(current_camera)
+
 // Intended to be overriden by subtypes to manually add non-station networks to the list.
 /datum/nano_module/camera_monitor/proc/modify_networks_list(var/list/networks)
 	return networks
@@ -89,6 +92,9 @@
 		if(!C)
 			return
 		if(!(current_network in C.network))
+			return
+		if(!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
+			to_chat(usr, "Unable to establish a connection.")
 			return
 
 		switch_to_camera(usr, C)
@@ -120,8 +126,6 @@
 		return 1
 
 	set_current(C)
-	user.machine = nano_host()
-	user.reset_view(C)
 	return 1
 
 /datum/nano_module/camera_monitor/proc/set_current(var/obj/machinery/camera/C)

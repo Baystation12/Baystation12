@@ -2,8 +2,8 @@
  * Science
  */
 /obj/item/clothing/under/rank/research_director
-	desc = "It's a jumpsuit worn by those with the know-how to achieve the position of \"Research Director\". Its fabric provides minor protection from biological contaminants."
-	name = "research director's jumpsuit"
+	desc = "It's a jumpsuit worn by those with the know-how to achieve the position of \"Chief Science Officer\". Its fabric provides minor protection from biological contaminants."
+	name = "chief science officer's jumpsuit"
 	icon_state = "director"
 	item_state = "lb_suit"
 	worn_state = "director"
@@ -18,8 +18,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
 /obj/item/clothing/under/rank/research_director/dress_rd
-	name = "research director dress uniform"
-	desc = "Feminine fashion for the style concious RD. Its fabric provides minor protection from biological contaminants."
+	name = "chief science officer dress uniform"
+	desc = "Feminine fashion for the style concious CSO. Its fabric provides minor protection from biological contaminants."
 	icon_state = "dress_rd"
 	item_state = "lb_suit"
 	worn_state = "dress_rd"

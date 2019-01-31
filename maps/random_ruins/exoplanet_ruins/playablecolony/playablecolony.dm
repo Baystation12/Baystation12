@@ -7,7 +7,7 @@
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 
 /decl/submap_archetype/playablecolony
-	descriptor = "playable colony"
+	descriptor = "established colony"
 	crew_jobs = list(/datum/job/submap/colonist)
 
 /datum/job/submap/colonist

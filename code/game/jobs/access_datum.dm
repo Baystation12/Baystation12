@@ -183,7 +183,7 @@
 /var/const/access_rd = 30
 /datum/access/rd
 	id = access_rd
-	desc = "Research Director"
+	desc = "Chief Science Officer"
 	region = ACCESS_REGION_RESEARCH
 
 /var/const/access_cargo = 31

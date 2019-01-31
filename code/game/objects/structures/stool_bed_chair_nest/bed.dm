@@ -17,7 +17,6 @@
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
-	var/material/material
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
@@ -26,7 +25,7 @@
 	..(newloc)
 	color = null
 	if(!new_material)
-		new_material = MATERIAL_STEEL
+		new_material = MATERIAL_ALUMINIUM
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		qdel(src)

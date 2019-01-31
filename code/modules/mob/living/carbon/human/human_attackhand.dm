@@ -52,6 +52,9 @@
 
 			playsound(loc, "punch", 25, 1, -1)
 
+			update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
+			H.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
+
 			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
 
 			apply_damage(damage, PAIN, affecting, armor_block)

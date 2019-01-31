@@ -2,14 +2,37 @@
  * Torch Security
  */
 
+/decl/closet_appearance/secure_closet/torch/security
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_NT_RED,
+		"security" = COLOR_NT_RED
+	)
+
+/decl/closet_appearance/secure_closet/torch/security/forensics
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_NT_RED,
+		"forensics" = COLOR_NT_RED
+	)
+
+/decl/closet_appearance/secure_closet/torch/security/warden
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_NT_RED,
+		"stripe_vertical_right_full" = COLOR_NT_RED,
+		"security" = COLOR_NT_RED
+	)
+
+/decl/closet_appearance/secure_closet/torch/security/hos
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_NT_RED,
+		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_right_full" = COLOR_NT_RED,
+		"security" = COLOR_GOLD
+	)
+
 /obj/structure/closet/secure_closet/security_torch
 	name = "master at arms' locker"
 	req_access = list(access_brig)
-	icon_state = "sec1"
-	icon_closed = "sec"
-	icon_locked = "sec1"
-	icon_opened = "secopen"
-	icon_off = "secoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/security
 
 /obj/structure/closet/secure_closet/security_torch/WillContain()
 	return list(
@@ -40,11 +63,7 @@
 /obj/structure/closet/secure_closet/cos
 	name = "chief of security's locker"
 	req_access = list(access_hos)
-	icon_state = "hossecure1"
-	icon_closed = "hossecure"
-	icon_locked = "hossecure1"
-	icon_opened = "hossecureopen"
-	icon_off = "hossecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/hos
 
 /obj/structure/closet/secure_closet/cos/WillContain()
 	return list(
@@ -80,11 +99,7 @@
 /obj/structure/closet/secure_closet/brigofficer
 	name = "brig officer's locker"
 	req_access = list(access_armory)
-	icon_state = "wardensecure1"
-	icon_closed = "wardensecure"
-	icon_locked = "wardensecure1"
-	icon_opened = "wardensecureopen"
-	icon_off = "wardensecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/warden
 
 /obj/structure/closet/secure_closet/brigofficer/WillContain()
 	return list(
@@ -114,11 +129,7 @@
 /obj/structure/closet/secure_closet/forensics
 	name = "forensics technician's locker"
 	req_access = list(access_forensics_lockers)
-	icon_state = "sec1"
-	icon_closed = "sec"
-	icon_locked = "sec1"
-	icon_opened = "secopen"
-	icon_off = "secoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/forensics
 
 /obj/structure/closet/secure_closet/forensics/WillContain()
 	return list(

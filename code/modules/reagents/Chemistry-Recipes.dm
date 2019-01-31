@@ -111,12 +111,6 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/dylovene = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/silicate
-	name = "Silicate"
-	result = /datum/reagent/silicate
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/silicon = 1, /datum/reagent/acetone = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/mutagen
 	name = "Unstable mutagen"
 	result = /datum/reagent/mutagen
@@ -1582,20 +1576,6 @@
 	result_amount = 2
 	mix_message = "The solution takes on an unpleasant, thick, brown appearance."
 
-/datum/chemical_reaction/icetea
-	name = "Iced Tea"
-	result = /datum/reagent/drink/tea/icetea
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea = 2, /datum/reagent/sugar = 1)
-	result_amount = 3
-	mix_message = "The ice clinks together in the sweat tea."
-
-/datum/chemical_reaction/sweettea
-	name = "Sweet Tea"
-	result = /datum/reagent/drink/tea/icetea
-	required_reagents = list(/datum/chemical_reaction/icetea = 3, /datum/reagent/sugar = 1)
-	result_amount = 4
-	mix_message = "The ice clinks together in the sweat tea."
-
 /datum/chemical_reaction/icecoffee
 	name = "Iced Coffee"
 	result = /datum/reagent/drink/coffee/icecoffee
@@ -2251,3 +2231,55 @@
 	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminum=5)
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
+
+// tea expansion pack content - black tea drinks
+/datum/chemical_reaction/icetea
+	name = "Iced Tea"
+	result = /datum/reagent/drink/tea/icetea
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the tea."
+
+/datum/chemical_reaction/sweettea
+	name = "Sweet Tea"
+	result = /datum/reagent/drink/tea/icetea/sweet
+	required_reagents = list(/datum/reagent/drink/tea/icetea = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
+	mix_message = "The ice clinks together in the sweet tea."
+
+/datum/chemical_reaction/barongrey
+	name = "Baron Grey Tea"
+	result = /datum/reagent/drink/tea/barongrey
+	required_reagents = list(/datum/reagent/drink/tea = 3, /datum/reagent/drink/juice/orange = 1)
+	result_amount = 4
+	mix_message = "The juice swirls into the tea."
+
+//green tea drinks
+/datum/chemical_reaction/icetea_green
+	name = "Iced Green Tea"
+	result = /datum/reagent/drink/tea/icetea/green
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/green = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the tea."
+
+/datum/chemical_reaction/sweettea_green
+	name = "Sweet Green Tea"
+	result = /datum/reagent/drink/tea/icetea/green/sweet
+	required_reagents = list(/datum/reagent/drink/tea/icetea/green = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
+	mix_message = "The ice clinks together in the sweet tea."
+
+/datum/chemical_reaction/maghreb_tea
+	name = "Maghrebi tea"
+	result = /datum/reagent/drink/tea/icetea/green/sweet/mint
+	required_reagents = list(/datum/reagent/drink/tea/icetea/green/sweet = 3)
+	catalysts = list(/datum/reagent/nutriment/mint)
+	result_amount = 3
+	mix_message = "The mint swirls into the drink."
+
+/datum/chemical_reaction/chazuke
+	name = "Chazuke"
+	result = /datum/reagent/nutriment/rice/chazuke
+	required_reagents = list(/datum/reagent/nutriment/rice = 10, /datum/reagent/drink/tea/green = 1)
+	result_amount = 10
+	mix_message = "The tea mingles with the rice."

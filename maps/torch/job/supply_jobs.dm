@@ -35,8 +35,6 @@
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BASIC
-	maximum_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
@@ -70,8 +68,6 @@
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BASIC
-	maximum_education = EDUCATION_TIER_TRADE
 
 /datum/job/cargo_contractor
 	title = "Supply Assistant"
@@ -81,7 +77,6 @@
 	spawn_positions = 1
 	supervisors = "the Deck Chief, the Corporate Liaison and Supply Personnel"
 	ideal_character_age = 20
-	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
@@ -96,8 +91,6 @@
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_DROPOUT
-	maximum_education = EDUCATION_TIER_TRADE
 
 /datum/job/mining
 	title = "Prospector"
@@ -106,7 +99,6 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
-	selection_color = "#515151"
 	economic_power = 7
 	ideal_character_age = 25
 	alt_titles = list(
@@ -125,5 +117,3 @@
 	access = list(access_mining, access_mining_office, access_mining_station,
 						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm, access_solgov_crew, access_eva)
 	minimal_access = list()
-	required_education = EDUCATION_TIER_DROPOUT
-	maximum_education = EDUCATION_TIER_TRADE

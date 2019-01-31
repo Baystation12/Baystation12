@@ -55,7 +55,7 @@
 		if(PAIN)
 			adjustHalLoss(effect * blocked_mult(blocked))
 		if(IRRADIATE)
-			radiation += effect * blocked_mult(blocked)
+			radiation += max(effect - blocked, 0) * blocked_mult(blocked) // set a floor threshold where radiation is completely blocked, and a percentage reduction to exposure after that.
 		if(STUTTER)
 			if(status_flags & CANSTUN) // stun is usually associated with stutter - TODO CANSTUTTER flag?
 				stuttering = max(stuttering, effect * blocked_mult(blocked))

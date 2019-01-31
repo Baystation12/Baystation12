@@ -142,6 +142,7 @@
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GALCOM)
 	distance = "22.5 light years."
 	economic_power = 0.9
+	ruling_body = "Gilgamesh Colonial Confederation"
 
 /decl/cultural_info/location/human/tersten
 	name = HOME_SYSTEM_TERSTEN
@@ -166,7 +167,7 @@
 /decl/cultural_info/location/human/lorriman
 	name = HOME_SYSTEM_LORRIMAN
 	distance = "44 light years"
-	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50°C. \
+	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50Â°C. \
 	Because of this, the planet's cities are either domed or built into mountains. Its economy is built around a technological backbone, providing the technology \
 	and the people skilled to use them.  Its infrastructure is developed enough to support mass transit across the planet. Its capital city is called The Hub, a massive domed structure \
 	that serves both as a spaceport, administrative hub, and habitation zone. It remains the only place on the planet accessible to non-Lorrimanians. \
@@ -256,3 +257,17 @@
 	economic_power = 1.0
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_INDEPENDENT, LANGUAGE_GALCOM)
+
+/decl/cultural_info/location/human/magnitka
+	name = HOME_SYSTEM_MAGNITKA
+	distance = "24 light years"
+	description = "Magnitka is an independent, industrialized mining and ore processing colony located in the Ursa system. \
+	Ruled by an authoritarian government heavily associated with the corporations that founded it, Magnitka's recent history is marked by civil war. Even today, a large number of rebel groups populate the planet. \
+	Founded by German companies in the 2300s, the overwhelming majority of Magnitka's population is descended from Eastern European laborers and their German managers. \
+	Unfortunately, Magnitka's economy is in a decline as its principle export, iron, grows cheaper by the day. The primary careers available to Magnitkans are military service, mining, or organized crime.  \
+	Though historically relatively isolationist, today Magnitka finds itself more and more closely associated with the Gilgamesh Colonial Confederation, in an effort to offset its economic decline."
+	capital = "Labortown"
+	economic_power = 0.8
+	language = LANGUAGE_SOL_COMMON
+	secondary_langs = list(LANGUAGE_GALCOM)
+	ruling_body = "Magnitka"

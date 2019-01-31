@@ -106,7 +106,7 @@
 	brute_armor = 5
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#666666"
+	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	chem_products = list(
 				/datum/reagent/iron = 15,
@@ -117,6 +117,33 @@
 	sale_price = 1
 	ore_smelts_to = MATERIAL_STEEL
 	construction_difficulty = 1
+
+/material/aluminium
+	name = MATERIAL_ALUMINIUM
+	lore_text = "A low-density ductile metal with a silvery-white sheen."
+	stack_type = /obj/item/stack/material/aluminium
+	chem_products = list(
+				/datum/reagent/aluminum = 20
+				)
+	integrity = 125
+	brute_armor = 3
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
+	icon_colour = "#c9c9c9"
+	hitsound = 'sound/weapons/smash.ogg'
+	construction_difficulty = 0.5
+	sale_price = 1
+
+/material/aluminium/holographic
+	name = "holo" + MATERIAL_ALUMINIUM
+	display_name = MATERIAL_ALUMINIUM
+	stack_type = null
+	shard_type = SHARD_NONE
+	conductive = 0
+	alloy_materials = null
+	alloy_product = FALSE
+	sale_price = null
+	hidden_from_codex = TRUE
 
 /material/steel/holographic
 	name = "holo" + MATERIAL_STEEL
@@ -131,7 +158,7 @@
 
 /material/plasteel
 	name = MATERIAL_PLASTEEL
-	lore_text = "When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and an extremely hard platinum metal, osmium."
+	lore_text = "When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
@@ -244,7 +271,7 @@
 	name = MATERIAL_PLATINUM
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	stack_type = /obj/item/stack/material/platinum
-	icon_colour = "#9999ff"
+	icon_colour = "#deddff"
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"

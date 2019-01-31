@@ -1,0 +1,4 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - tweak: "You can now put people onto wall frames with grabs"

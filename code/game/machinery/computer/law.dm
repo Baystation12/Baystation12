@@ -1,92 +1,55 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+/obj/machinery/computer/upload
+	name = "unused upload console"
+	icon_keyboard = "rd_key"
+	icon_screen = "command"
+	var/mob/living/silicon/current
 
-/obj/machinery/computer/aiupload
+/obj/machinery/computer/upload/attack_hand(mob/user)
+	if(..())
+		return TRUE
+
+	if(stat & BROKEN)
+		to_chat(user, "The upload computer is broken!")
+		return TRUE
+	if(stat & NOPOWER)
+		to_chat(user, "The upload computer has no power!")
+		return TRUE
+
+/obj/machinery/computer/upload/attackby(obj/item/weapon/O, mob/user)
+	if(istype(O, /obj/item/weapon/aiModule))
+		var/obj/item/weapon/aiModule/M = O
+		M.install(src, user)
+	else
+		..()
+
+/obj/machinery/computer/upload/ai
 	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
-	icon_keyboard = "rd_key"
-	icon_screen = "command"
 	circuit = /obj/item/weapon/circuitboard/aiupload
-	var/mob/living/silicon/ai/current = null
-	var/opened = 0
 
+/obj/machinery/computer/upload/ai/attack_hand(mob/user)
+	if(..())
+		return TRUE
 
-	verb/AccessInternals()
-		set category = "Object"
-		set name = "Access Computer's Internals"
-		set src in oview(1)
-		if(get_dist(src, usr) > 1 || usr.restrained() || usr.lying || usr.stat || istype(usr, /mob/living/silicon))
-			return
+	current = select_active_ai(user, (get_turf(src))?.z)
 
-		opened = !opened
-		if(opened)
-			to_chat(usr, "<span class='notice'>The access panel is now open.</span>")
-		else
-			to_chat(usr, "<span class='notice'>The access panel is now closed.</span>")
-		return
+	if (!current)
+		to_chat(user, "No active AIs detected.")
+	else
+		to_chat(user, "[current.name] selected for law changes.")
 
-
-	attackby(obj/item/weapon/O as obj, mob/user as mob)
-		if (user.z > 6)
-			to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the [station_name()]!")
-			return
-		if(istype(O, /obj/item/weapon/aiModule))
-			var/obj/item/weapon/aiModule/M = O
-			M.install(src)
-		else
-			..()
-
-
-	attack_hand(var/mob/user as mob)
-		if(src.stat & NOPOWER)
-			to_chat(usr, "The upload computer has no power!")
-			return
-		if(src.stat & BROKEN)
-			to_chat(usr, "The upload computer is broken!")
-			return
-
-		src.current = select_active_ai(user)
-
-		if (!src.current)
-			to_chat(usr, "No active AIs detected.")
-		else
-			to_chat(usr, "[src.current.name] selected for law changes.")
-		return
-
-	attack_ghost(user as mob)
-		return 1
-
-
-/obj/machinery/computer/borgupload
+/obj/machinery/computer/upload/robot
 	name = "cyborg upload console"
 	desc = "Used to upload laws to Cyborgs."
-	icon_keyboard = "rd_key"
-	icon_screen = "command"
 	circuit = /obj/item/weapon/circuitboard/borgupload
-	var/mob/living/silicon/robot/current = null
 
+/obj/machinery/computer/upload/robot/attack_hand(mob/user)
+	if(..())
+		return TRUE
 
-	attackby(obj/item/weapon/aiModule/module as obj, mob/user as mob)
-		if(istype(module, /obj/item/weapon/aiModule))
-			module.install(src)
-		else
-			return ..()
+	current = freeborg((get_turf(src))?.z)
 
-
-	attack_hand(var/mob/user as mob)
-		if(src.stat & NOPOWER)
-			to_chat(usr, "The upload computer has no power!")
-			return
-		if(src.stat & BROKEN)
-			to_chat(usr, "The upload computer is broken!")
-			return
-
-		src.current = freeborg()
-
-		if (!src.current)
-			to_chat(usr, "No free cyborgs detected.")
-		else
-			to_chat(usr, "[src.current.name] selected for law changes.")
-		return
-
-	attack_ghost(user as mob)
-		return 1
+	if (!current)
+		to_chat(user, "No free cyborgs detected.")
+	else
+		to_chat(user, "[current.name] selected for law changes.")

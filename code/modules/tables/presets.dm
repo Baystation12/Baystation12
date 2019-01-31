@@ -1,7 +1,7 @@
 /obj/structure/table/standard
 	icon_state = "plain_preview"
 	color = COLOR_OFF_WHITE
-	material = DEFAULT_TABLE_MATERIAL
+	material = DEFAULT_FURNITURE_MATERIAL
 
 /obj/structure/table/steel
 	icon_state = "plain_preview"
@@ -16,7 +16,7 @@
 /obj/structure/table/reinforced
 	icon_state = "reinf_preview"
 	color = COLOR_OFF_WHITE
-	material = DEFAULT_TABLE_MATERIAL
+	material = DEFAULT_FURNITURE_MATERIAL
 	reinforced = MATERIAL_STEEL
 
 /obj/structure/table/steel_reinforced
@@ -56,7 +56,7 @@
 	color = COLOR_OFF_WHITE
 
 /obj/structure/table/holotable/New()
-	material = "holo[DEFAULT_TABLE_MATERIAL]"
+	material = "holo[DEFAULT_FURNITURE_MATERIAL]"
 	..()
 
 /obj/structure/table/holo_woodentable

@@ -85,6 +85,20 @@
 	icon_open = "labcoat_TL_open"
 	icon_closed = "labcoat_TL"
 
+/obj/item/clothing/suit/storage/toggle/labcoat/science/ec
+	name = "\improper EC labcoat"
+	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat."
+	icon_state = "labcoat_tox_open"
+	icon_open = "labcoat_tox_open"
+	icon_closed = "labcoat_tox"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/cso
+	name = "chief science officer's labcoat"
+	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat, and purple trim to indicate a Chief Science Officer."
+	icon_state = "labcoat_cso_open"
+	icon_open = "labcoat_cso_open"
+	icon_closed = "labcoat_cso"
+
 /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
 	name = "\improper NanoTrasen labcoat"
 	desc = "A suit that protects against minor chemical spills. it has a red stripe on the shoulder and red trim on the sleeves, denoting it as a NanoTrasen labcoat."
@@ -118,7 +132,7 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
-	desc = "A full-body labcoat covered in green and black designs, denoting it as a Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_open"
 	icon_open = "labcoat_rd_open"
 	icon_closed = "labcoat_rd"

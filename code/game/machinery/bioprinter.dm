@@ -33,9 +33,9 @@
 /obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
-		overlays += "bioprinter_panel_open"
+		overlays += "[icon_state]_panel_open"
 	if(printing)
-		overlays += "bioprinter_working"
+		overlays += "[icon_state]_working"
 
 /obj/machinery/organ_printer/New()
 	..()
@@ -116,6 +116,7 @@
 		BP_KIDNEYS  = list(/obj/item/organ/internal/kidneys,    20),
 		BP_EYES     = list(/obj/item/organ/internal/eyes,       20),
 		BP_LIVER    = list(/obj/item/organ/internal/liver,      25),
+		BP_STOMACH  = list(/obj/item/organ/internal/stomach,    25),
 		BP_L_ARM    = list(/obj/item/organ/external/arm,        65),
 		BP_R_ARM    = list(/obj/item/organ/external/arm/right,  65),
 		BP_L_LEG    = list(/obj/item/organ/external/leg,        65),

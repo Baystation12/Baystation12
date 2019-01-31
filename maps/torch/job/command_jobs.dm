@@ -23,7 +23,6 @@
 							 /datum/computer_file/program/card_mod,
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/captain/get_description_blurb()
 	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its space exploration mission. Delegate to your Executive Officer, your department heads, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
@@ -83,20 +82,24 @@
 							 /datum/computer_file/program/card_mod,
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/hop/get_description_blurb()
 	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
 
 /datum/job/rd
-	title = "Research Director"
-	supervisors = "the Commanding Officer and your employers"
+	title = "Chief Science Officer"
+	supervisors = "the Commanding Officer"
 	economic_power = 20
 	minimal_player_age = 7
 	ideal_character_age = 60
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/cso
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/o3
+	)
+
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_ADEPT,
@@ -110,21 +113,24 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 30
 
-	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
-						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
-						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, access_petrov_security, access_petrov_maint)
+	access = list(
+		access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
+		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
+		access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
+		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, 
+		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew, 
+		access_expedition_shuttle, access_expedition_shuttle_helm
+	)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/aidiag,
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring the corporate interests of the Expeditionary Corps Organisation are fulfilled, along with your Corporate Liaison. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit your employer. Don't put the Expeditionary Corps Organisation's, or your employer's, position onboard in jeopardy.  Advise the CO on science matters."
+	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liase with the corporate interests of the Expeditionary Corps Organisation. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -165,7 +171,6 @@
 							 /datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_MEDSCHOOL
 
 /datum/job/cmo/get_description_blurb()
 	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
@@ -221,8 +226,6 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_MASTERS
-	maximum_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/chief_engineer/get_description_blurb()
 	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
@@ -265,46 +268,9 @@
 							 /datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BACHELOR
-	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/hos/get_description_blurb()
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
-
-/datum/job/liaison
-	title = "Workplace Liaison"
-	department = "Support"
-	department_flag = SPT
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
-	selection_color = "#2f2f7f"
-	economic_power = 15
-	minimal_player_age = 0
-	alt_titles = list(
-		"Corporate Liaison",
-		"Union Representative" = /decl/hierarchy/outfit/job/torch/passenger/research/cl/union,
-		"Corporate Representative",
-		"Corporate Executive"
-		)
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERT,
-	                    SKILL_FINANCE		= SKILL_BASIC)
-	skill_points = 20
-
-	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
-						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar,
-						access_petrov, access_petrov_helm, access_maint_tunnels, access_emergency_storage,
-						access_janitor, access_hydroponics, access_kitchen, access_bar, access_commissary)
-
-	software_on_spawn = list(/datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BASIC
-
-/datum/job/liaison/get_description_blurb()
-	return "You are the Workplace Liaison. You are a civilian employee of the Expeditionary Corps Organisation, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -327,7 +293,6 @@
 			            access_bridge, access_cargo, access_solgov_crew, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BASIC
 
 /datum/job/representative/get_description_blurb()
 	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and corporate interests on board. Send faxes back to Sol on mission progress and important events."
@@ -373,8 +338,6 @@
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
-	required_education = EDUCATION_TIER_BASIC
-	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/sea/get_description_blurb()
 	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and “advising” them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
@@ -420,8 +383,6 @@
 							 /datum/computer_file/program/shields_monitor,
 							 /datum/computer_file/program/reports,
 							 /datum/computer_file/program/deck_management)
-	required_education = EDUCATION_TIER_BACHELOR
-	maximum_education = EDUCATION_TIER_MASTERS
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."

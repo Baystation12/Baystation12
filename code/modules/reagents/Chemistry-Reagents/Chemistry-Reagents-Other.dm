@@ -323,20 +323,6 @@
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/blood/oil/streak(T)
 
-/datum/reagent/silicate
-	name = "Silicate"
-	description = "A compound that can be used to reinforce glass."
-	taste_description = "plastic"
-	reagent_state = LIQUID
-	color = "#c7ffff"
-
-/datum/reagent/silicate/touch_obj(var/obj/O)
-	if(istype(O, /obj/structure/window))
-		var/obj/structure/window/W = O
-		W.apply_silicate(volume)
-		remove_self(volume)
-	return
-
 /datum/reagent/glycerol
 	name = "Glycerol"
 	description = "Glycerol is a simple polyol compound. Glycerol is sweet-tasting and of low toxicity."

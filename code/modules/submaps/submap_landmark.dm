@@ -19,9 +19,9 @@
 		submap.setup_submap(SSmapping.submap_archetypes[archetype])
 	else
 		if(SSmapping.submaps[name])
-			to_chat(world.log, "Submap error - mapped landmark is duplicate of existing.")
+			to_world_log( "Submap error - mapped landmark is duplicate of existing.")
 		else
-			to_chat(world.log, "Submap error - mapped landmark had invalid archetype.")
+			to_world_log( "Submap error - mapped landmark had invalid archetype.")
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/submap_landmark/spawnpoint

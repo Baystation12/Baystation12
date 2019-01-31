@@ -506,6 +506,16 @@
 	base_turf = /turf/simulated/floor/plating
 */
 
+/area/turbolift/cargo_lift
+	name = "\improper Cargo Lift"
+	icon_state = "shuttle3"
+	base_turf = /turf/simulated/open
+
+/area/turbolift/robotics_lift
+  name = "\improper Robotics Lift"
+  icon_state = "shuttle3"
+  base_turf = /turf/simulated/open
+
 // Ninja areas
 /area/ninja_dojo
 	name = "\improper Ninja Base"
@@ -819,10 +829,6 @@
 	name = "\improper Flight Control Tower"
 	icon_state = "hangar"
 
-/area/quartermaster/unused
-	name = "\improper Ready Room"
-	icon_state = "auxstorage"
-
 // Research
 /area/rnd/canister
 	name = "\improper Canister Storage"
@@ -911,6 +917,10 @@
 	name = "\improper Diplomatic Quarters"
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/adherent
+	name = "\improper Adherent Maintenence"
+	icon_state = "robotics"
 
 /area/holocontrol
 	name = "\improper Holodeck Control"
@@ -1079,6 +1089,10 @@
 
 /area/engineering/fuelbay
 	name = "\improper Fuel Bay"
+	icon_state = "engineering"
+
+/area/engineering/wastetank
+	name = "\improper Waste Tank"
 	icon_state = "engineering"
 
 // Command
@@ -1358,12 +1372,14 @@
 	icon_state = "mechbay"
 
 /area/assembly/robotics
-	name = "\improper Robotics Lab"
+	name = "\improper Fabrication Lab"
 	icon_state = "robotics"
 
-/area/assembly/robotics_surgery
+/area/assembly/robotics/lower
+	name = "\improper Lower Fabrication Lab"
+
+/area/assembly/robotics/surgery
 	name = "\improper Robotics Operating Theatre"
-	icon_state = "robotics"
 
 /area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"

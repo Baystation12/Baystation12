@@ -166,7 +166,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/Initialize()
 	.=..()
 	if(job_access_type)
-		var/datum/job/j = job_master.GetJobByType(job_access_type)
+		var/datum/job/j = SSjobs.get_by_path(job_access_type)
 		if(j)
 			rank = j.title
 			assignment = rank
@@ -242,7 +242,11 @@ var/const/NO_EMAG_ACT = -50
 
 	id_card.registered_name = real_name
 
-	id_card.sex = capitalize(get_sex())
+	var/gender_term = "Unset"
+	var/datum/gender/G = gender_datums[get_sex()]
+	if(G)
+		gender_term = gender2text(G.formal_term)
+	id_card.sex = gender2text(gender_term)
 	id_card.set_id_photo(src)
 
 	if(dna)
@@ -433,9 +437,6 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A card issued to engineering staff."
 	job_access_type = /datum/job/engineer
 	detail_color = COLOR_SUN
-
-/obj/item/weapon/card/id/engineering/atmos
-	job_access_type = /datum/job/atmos
 
 /obj/item/weapon/card/id/engineering/head
 	name = "identification card"

@@ -56,6 +56,7 @@
 		)
 
 	has_organ = list(
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_HEART =    /obj/item/organ/internal/heart/vox,
 		BP_LUNGS =    /obj/item/organ/internal/lungs/vox,
 		BP_LIVER =    /obj/item/organ/internal/liver/vox,

@@ -179,3 +179,39 @@ The Appraise verb. Used on objects to estimate their value.
 			return 20
 		else
 			return 50
+
+/datum/skill_verb/noirvision
+	the_verb = /mob/proc/noirvision
+
+/datum/skill_verb/noirvision/should_have_verb(datum/skillset/given_skillset)
+	if(!..())
+		return
+	if(!isliving(given_skillset.owner))
+		return
+	return 1
+
+/datum/skill_verb/noirvision/should_see_verb()
+	if(!..())
+		return
+	if(!skillset.owner.skill_check(SKILL_FORENSICS, SKILL_PROF))
+		return
+	return 1
+
+/mob/proc/noirvision()
+	set category = "IC"
+	set name = "Detective instinct"
+	set src = usr
+	set popup_menu = 0
+
+	if(incapacitated())
+		return
+
+	if(!remove_client_color(/datum/client_color/noir))
+		to_chat(src, "You clear your mind and focus on the scene before you.")
+		add_client_color(/datum/client_color/noir)
+	else
+		to_chat(src, "You stop looking for clues.")
+
+
+
+

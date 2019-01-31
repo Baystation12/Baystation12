@@ -1,7 +1,19 @@
-/obj/item/weapon/circuitboard/fusion_core_control
+/obj/item/weapon/circuitboard/fusion/core_control
 	name = "circuit board (fusion core controller)"
-	build_path = /obj/machinery/computer/fusion_core_control
+	build_path = /obj/machinery/computer/fusion/core_control
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+
+/obj/item/weapon/circuitboard/kinetic_harvester
+	name = "internal circuitry (kinetic harvester)"
+	build_path = /obj/machinery/kinetic_harvester
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
+	req_components = list(
+		/obj/item/weapon/stock_parts/manipulator/pico = 2,
+		/obj/item/weapon/stock_parts/matter_bin/super = 1,
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/stack/cable_coil = 5
+		)
 
 /obj/item/weapon/circuitboard/fusion_fuel_compressor
 	name = "circuit board (fusion fuel compressor)"
@@ -17,12 +29,12 @@
 
 /obj/item/weapon/circuitboard/fusion_fuel_control
 	name = "circuit board (fusion fuel controller)"
-	build_path = /obj/machinery/computer/fusion_fuel_control
+	build_path = /obj/machinery/computer/fusion/fuel_control
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/circuitboard/gyrotron_control
 	name = "circuit board (gyrotron controller)"
-	build_path = /obj/machinery/computer/gyrotron_control
+	build_path = /obj/machinery/computer/fusion/gyrotron
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/circuitboard/fusion_core
@@ -54,7 +66,7 @@
 /datum/design/circuit/fusion
 	name = "fusion core control console"
 	id = "fusion_core_control"
-	build_path = /obj/item/weapon/circuitboard/fusion_core_control
+	build_path = /obj/item/weapon/circuitboard/fusion/core_control
 	sort_string = "LAAAD"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 
@@ -87,3 +99,10 @@
 	id = "fusion_injector"
 	build_path = /obj/item/weapon/circuitboard/fusion_injector
 	sort_string = "LAAAI"
+
+/datum/design/circuit/fusion/kinetic_harvester
+	name = "fusion toroid kinetic harvester"
+	id = "fusion_kinetic_harvester"
+	build_path = /obj/item/weapon/circuitboard/kinetic_harvester
+	sort_string = "LAAAJ"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)

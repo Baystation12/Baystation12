@@ -19,7 +19,7 @@
 	create_reagents(initial_capacity)
 
 	if (!possible_transfer_amounts)
-		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
+		src.verbs -= /obj/structure/reagent_dispensers/verb/set_amount_per_transfer_from_this
 
 	for(var/reagent_type in initial_reagent_types)
 		var/reagent_ratio = initial_reagent_types[reagent_type]
@@ -37,11 +37,17 @@
 	else
 		to_chat(user, "<span class='notice'>Nothing.</span>")
 
-/obj/structure/reagent_dispensers/verb/set_APTFT() //set amount_per_transfer_from_this
+/obj/structure/reagent_dispensers/verb/set_amount_per_transfer_from_this()
 	set name = "Set transfer amount"
 	set category = "Object"
 	set src in view(1)
+	if(!CanPhysicallyInteract(usr))
+		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
+	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
+		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		return
 	if (N)
 		amount_per_transfer_from_this = N
 
@@ -65,8 +71,7 @@
 
 /obj/structure/reagent_dispensers/AltClick(var/mob/user)
 	if(possible_transfer_amounts)
-		if(CanPhysicallyInteract(user))
-			set_APTFT()
+		set_amount_per_transfer_from_this()
 	else
 		return ..()
 

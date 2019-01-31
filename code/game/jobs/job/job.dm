@@ -13,7 +13,7 @@
 	var/availablity_chance = 100          // Percentage chance job is available each round
 
 	var/supervisors = null                // Supervisors, who this person answers to directly
-	var/selection_color = "#ffffff"       // Selection screen color
+	var/selection_color = "#515151"       // Selection screen color
 	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.
 	var/req_admin_notify                  // If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
 	var/minimal_player_age = 0            // If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
@@ -41,24 +41,29 @@
 	var/max_skill = list()				  //Maximum skills allowed for the job.
 	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
-
-	var/required_education = EDUCATION_TIER_NONE
-	var/maximum_education
 	var/available_by_default = TRUE
 
+	var/list/possible_goals
+	var/min_goals = 1
+	var/max_goals = 3
+
+	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
+
+	var/list/species_branch_rank_cache_ = list()
+
 /datum/job/New()
-	..()
+
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
 		total_positions = 0
 		spawn_positions = 0
 
-/datum/job/dd_SortValue()
-	return title
-
-/datum/job/New()
-	..()
 	if(!hud_icon)
 		hud_icon = "hud[ckey(title)]"
+
+	..()
+
+/datum/job/dd_SortValue()
+	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
@@ -115,7 +120,6 @@
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
 		H.mind.store_memory(remembered_info)
-
 		H.mind.initial_account = M
 
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
@@ -167,12 +171,12 @@
 		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age].</span>")
 		return TRUE
 
-	if(!is_branch_allowed(prefs.char_branch))
+	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
 		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
 		return TRUE
 
-	if(!is_rank_allowed(prefs.char_branch, prefs.char_rank))
-		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.char_branch] are: [get_ranks(prefs.char_branch)].</span>")
+	if(!isnull(allowed_ranks) && (!prefs.ranks[title] || !is_rank_allowed(prefs.branches[title], prefs.ranks[title])))
+		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
 	var/datum/species/S = all_species[prefs.species]
@@ -181,10 +185,7 @@
 		return TRUE
 
 	if(!S.check_background(src, prefs))
-		var/backgroundreport = list("<span class='boldannounce'>Incompatible education or background for [title]. The required education level for this role is [SSculture.education_tiers_to_strings["[required_education]"]]</span>")
-		if(maximum_education)
-			backgroundreport += ("<span class='boldannounce'>, and the maximum permitted education level is [SSculture.education_tiers_to_strings["[maximum_education]"]]</span>")
-		to_chat(feedback, JOINTEXT(backgroundreport))
+		to_chat(feedback, "<span class='boldannounce'>Incompatible background for [title].</span>")
 		return TRUE
 
 	return FALSE
@@ -210,7 +211,34 @@
 	return active
 
 /datum/job/proc/is_species_allowed(var/datum/species/S)
-	return !GLOB.using_map.is_species_job_restricted(S, src)
+	if(GLOB.using_map.is_species_job_restricted(S, src))
+		return FALSE
+	// We also make sure that there is at least one valid branch-rank combo for the species.
+	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+		return TRUE
+	return LAZYLEN(get_branch_rank(S))
+
+// Don't use if the map doesn't use branches but jobs do.
+/datum/job/proc/get_branch_rank(var/datum/species/S)
+	. = species_branch_rank_cache_[S]
+	if(.)
+		return
+
+	species_branch_rank_cache_[S] = list()
+	. = species_branch_rank_cache_[S]
+
+	var/spawn_branches = mil_branches.spawn_branches(S)
+	for(var/branch_type in allowed_branches)
+		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
+		if(branch.name in spawn_branches)
+			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
+				LAZYADD(., branch.name)
+				continue // Screw this rank stuff, we're good.
+			var/spawn_ranks = branch.spawn_ranks(S)
+			for(var/rank_type in allowed_ranks)
+				var/datum/mil_rank/rank = rank_type
+				if(initial(rank.name) in spawn_ranks)
+					LAZYADD(.[branch.name], initial(rank.name))
 
 /**
  *  Check if members of the given branch are allowed in the job
@@ -284,16 +312,14 @@
 	return ""
 
 /datum/job/proc/get_job_icon()
-	if(!job_master.job_icons[title])
+	if(!SSjobs.job_icons[title])
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		dress_mannequin(mannequin)
 		mannequin.dir = SOUTH
 		var/icon/preview_icon = getFlatIcon(mannequin)
-
 		preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
-		job_master.job_icons[title] = preview_icon
-
-	return job_master.job_icons[title]
+		SSjobs.job_icons[title] = preview_icon
+	return SSjobs.job_icons[title]
 
 /datum/job/proc/get_unavailable_reasons(var/client/caller)
 	var/list/reasons = list()
@@ -303,16 +329,16 @@
 		reasons["Your player age is too low."] = TRUE
 	if(!is_position_available())
 		reasons["There are no positions left."] = TRUE
-	if(!is_branch_allowed(caller.prefs.char_branch))
+	if(!isnull(allowed_branches) && (!caller.prefs.branches[title] || !is_branch_allowed(caller.prefs.branches[title])))
 		reasons["Your branch of service does not allow it."] = TRUE
-	if(!is_rank_allowed(caller.prefs.char_branch, caller.prefs.char_rank))
+	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
 	var/datum/species/S = all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
 		if(!S.check_background(src, caller.prefs))
-			reasons["Your background choices, such as education, do not allow it."] = TRUE
+			reasons["Your background choices do not allow it."] = TRUE
 	if(LAZYLEN(reasons))
 		. = reasons
 
@@ -331,3 +357,73 @@
 
 /datum/job/proc/make_position_available()
 	total_positions++
+
+/datum/job/proc/get_roundstart_spawnpoint()
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != title)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	if(loc_list.len)
+		return pick(loc_list)
+	else
+		return locate("start*[title]") // use old stype
+
+/**
+ *  Return appropriate /datum/spawnpoint for given client
+ *
+ *  Spawnpoint will be the one set in preferences for the client, unless the
+ *  preference is not set, or the preference is not appropriate for the rank, in
+ *  which case a fallback will be selected.
+ */
+/datum/job/proc/get_spawnpoint(var/client/C)
+
+	if(!C)
+		CRASH("Null client passed to get_spawnpoint_for() proc!")
+
+	var/mob/H = C.mob
+	var/spawnpoint = C.prefs.spawnpoint
+	var/datum/spawnpoint/spawnpos
+
+	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
+		spawnpoint = GLOB.using_map.default_spawn
+
+	if(spawnpoint)
+		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
+			if(H)
+				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
+			spawnpos = null
+		else
+			spawnpos = spawntypes()[spawnpoint]
+
+	if(spawnpos && !spawnpos.check_job_spawning(title))
+		if(H)
+			to_chat(H, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead.</span>")
+		spawnpos = null
+
+	if(!spawnpos)
+		// Step through all spawnpoints and pick first appropriate for job
+		for(var/spawntype in GLOB.using_map.allowed_spawns)
+			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
+			if(candidate.check_job_spawning(title))
+				spawnpos = candidate
+				break
+
+	if(!spawnpos)
+		// Pick at random from all the (wrong) spawnpoints, just so we have one
+		warning("Could not find an appropriate spawnpoint for job [title].")
+		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
+
+	return spawnpos
+
+/datum/job/proc/post_equip_rank(var/mob/person)
+	return
+
+/datum/job/proc/get_alt_title_for(var/client/C)
+	return C.prefs.GetPlayerAltTitle(src)
+
+/datum/job/proc/clear_slot()
+	if(current_positions > 0)
+		current_positions -= 1
+		return TRUE
+	return FALSE

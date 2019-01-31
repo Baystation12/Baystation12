@@ -127,7 +127,7 @@
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
 	if(src.parts[BP_L_ARM] && src.parts[BP_R_ARM] && src.parts[BP_L_LEG] && src.parts[BP_R_LEG] && src.parts[BP_CHEST] && src.parts[BP_HEAD])
-		feedback_inc("cyborg_frames_built",1)
+		SSstatistics.add_field("cyborg_frames_built",1)
 		return 1
 	return 0
 
@@ -215,7 +215,7 @@
 				cell_component.wrapped = O.cell
 				cell_component.installed = 1
 
-			feedback_inc("cyborg_birth",1)
+			SSstatistics.add_field("cyborg_birth",1)
 			callHook("borgify", list(O))
 			O.Namepick()
 

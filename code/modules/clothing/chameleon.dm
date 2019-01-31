@@ -272,8 +272,9 @@
 //**Chameleon Gun**
 //*****************
 /obj/item/weapon/gun/energy/chameleon
-	name = "revolver"
+	name = "chameleon gun"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
+	icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = "revolver"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
@@ -318,6 +319,7 @@
 	flags_inv = copy.flags_inv
 	fire_sound = copy.fire_sound
 	fire_sound_text = copy.fire_sound_text
+	icon = copy.icon
 
 	var/obj/item/weapon/gun/energy/E = copy
 	if(istype(E))

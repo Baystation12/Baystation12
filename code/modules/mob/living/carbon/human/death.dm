@@ -63,7 +63,6 @@
 	callHook("death", list(src, gibbed))
 
 	if(SSticker.mode)
-		sql_report_death(src)
 		SSticker.mode.check_win()
 
 	if(wearing_rig)

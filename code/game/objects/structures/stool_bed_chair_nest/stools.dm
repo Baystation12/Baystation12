@@ -21,7 +21,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
 	if(!new_material)
-		new_material = MATERIAL_STEEL
+		new_material = DEFAULT_FURNITURE_MATERIAL
 	material = SSmaterials.get_material_by_name(new_material)
 	if(new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
@@ -32,7 +32,7 @@ var/global/list/stool_cache = list() //haha stool
 	update_icon()
 
 /obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
-	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
+	..(newloc, DEFAULT_FURNITURE_MATERIAL, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/bar
 	name = "bar stool"
@@ -44,7 +44,7 @@ var/global/list/stool_cache = list() //haha stool
 	icon_state = "bar_stool_padded_preview"
 
 /obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
-	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
+	..(newloc, DEFAULT_FURNITURE_MATERIAL, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/on_update_icon()
 	// Prep icon.

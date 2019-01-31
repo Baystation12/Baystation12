@@ -1,25 +1,45 @@
 /*
  * Torch Command
  */
+/decl/closet_appearance/secure_closet/torch/command
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_GOLD
+	)
 
+/decl/closet_appearance/secure_closet/torch/command/bo
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_GOLD,
+		"stripe_vertical_right_full" = COLOR_GOLD
+	)
+
+/decl/closet_appearance/secure_closet/torch/command/xo
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_GOLD,
+		"stripe_vertical_right_full" = COLOR_GOLD,
+		"command" = COLOR_GOLD
+	)
+
+/decl/closet_appearance/secure_closet/torch/command/co
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_OFF_WHITE,
+		"stripe_vertical_right_full" = COLOR_GOLD,
+		"command" = COLOR_OFF_WHITE
+	)
 
 /obj/structure/closet/secure_closet/CO
 	name = "commanding officer's locker"
 	req_access = list(access_captain)
-	icon_state = "capsecure1"
-	icon_closed = "capsecure"
-	icon_locked = "capsecure1"
-	icon_opened = "capsecureopen"
-	icon_off = "capsecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/co
 
 /obj/structure/closet/secure_closet/CO/WillContain()
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/device/radio/headset/heads/torchcaptain,
+		/obj/item/device/radio/headset/heads/torchexec,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/gun/energy/revolver/secure,
-		/obj/item/device/radio/headset/heads/torchcaptain/alt,
+		/obj/item/device/radio/headset/heads/torchexec/alt,
 		/obj/item/weapon/storage/belt/holster/general,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
@@ -35,25 +55,21 @@
 /obj/structure/closet/secure_closet/XO
 	name = "executive officer's locker"
 	req_access = list(access_hop)
-	icon_state = "twosolsecure1"
-	icon_closed = "twosolsecure"
-	icon_locked = "twosolsecure1"
-	icon_opened = "twosolsecureopen"
-	icon_off = "twosolsecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/xo
 
 /obj/structure/closet/secure_closet/XO/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/device/radio/headset/heads/torchxo,
+		/obj/item/device/radio/headset/heads/torchexec,
 		/obj/item/weapon/storage/belt/holster/general,
 		/obj/item/weapon/gun/energy/revolver/secure,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/storage/box/headset,
-		/obj/item/device/radio/headset/heads/torchxo/alt,
+		/obj/item/device/radio/headset/heads/torchexec/alt,
 		/obj/item/weapon/storage/box/radiokeys,
 		/obj/item/weapon/storage/box/large/ids,
 		/obj/item/weapon/storage/box/PDAs,
@@ -68,19 +84,15 @@
 /obj/structure/closet/secure_closet/sea
 	name = "senior enlisted advisor's locker"
 	req_access = list(access_senadv)
-	icon_state = "sol1"
-	icon_closed = "sol"
-	icon_locked = "sol1"
-	icon_opened = "solopen"
-	icon_off = "soloff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/command
 
 /obj/structure/closet/secure_closet/sea/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/device/radio/headset/heads/torchxo,
-		/obj/item/device/radio/headset/heads/torchxo/alt,
+		/obj/item/device/radio/headset/sea,
+		/obj/item/device/radio/headset/sea/alt,
 		/obj/item/weapon/gun/energy/gun/secure,
 		/obj/item/weapon/storage/belt/holster/general,
 		/obj/item/weapon/melee/telebaton,
@@ -96,11 +108,7 @@
 /obj/structure/closet/secure_closet/bridgeofficer
 	name = "bridge officer's locker"
 	req_access = list(access_bridge)
-	icon_state = "sol1"
-	icon_closed = "sol"
-	icon_locked = "sol1"
-	icon_opened = "solopen"
-	icon_off = "soloff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/bo
 
 /obj/structure/closet/secure_closet/bridgeofficer/WillContain()
 	return list(

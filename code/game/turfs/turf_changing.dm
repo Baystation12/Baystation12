@@ -1,7 +1,6 @@
-/turf/proc/ReplaceWithLattice()
+/turf/proc/ReplaceWithLattice(var/material)
 	src.ChangeTurf(get_base_turf_by_area(src))
-	spawn()
-		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
+	new /obj/structure/lattice( locate(src.x, src.y, src.z), material )
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
@@ -16,7 +15,7 @@
 		T.update_icon()
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	if (!N)
 		return
 
@@ -26,7 +25,8 @@
 		if(istype(below) && !istype(below,/turf/space))
 			N = /turf/simulated/open
 
-	var/obj/fire/old_fire = fire
+	var/old_air = air
+	var/old_fire = fire
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_affecting_lights = affecting_lights
@@ -58,6 +58,9 @@
 		A.forceMove(W)
 
 	W.opaque_counter = opaque_counter
+
+	if (keep_air)
+		W.air = old_air
 
 	if(ispath(N, /turf/simulated))
 		if(old_fire)

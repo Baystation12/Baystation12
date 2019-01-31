@@ -412,3 +412,9 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Uncomment this to prevent players from printing copy/pasted circuits
 #DISABLE_CIRCUIT_PRINTING
+
+##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
+#MINIMUM_BYOND_VERSION
+
+## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
+#MINIMUM_BYOND_BUILD

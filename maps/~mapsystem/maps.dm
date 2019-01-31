@@ -129,6 +129,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_LORDANIA,
 			HOME_SYSTEM_KINGSTON,
 			HOME_SYSTEM_GAIA,
+			HOME_SYSTEM_MAGNITKA,
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
@@ -174,16 +175,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			RELIGION_ATHEISM,
 			RELIGION_THELEMA,
 			RELIGION_SPIRITUALISM
-		),
-		TAG_EDUCATION = list(
-			EDUCATION_NONE,
-			EDUCATION_DROPOUT,
-			EDUCATION_HIGH_SCHOOL,
-			EDUCATION_TRADE_SCHOOL,
-			EDUCATION_UNDERGRAD,
-			EDUCATION_MASTERS,
-			EDUCATION_DOCTORATE,
-			EDUCATION_MEDSCHOOL
 		)
 	)
 
@@ -191,8 +182,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		TAG_HOMEWORLD = HOME_SYSTEM_MARS,
 		TAG_FACTION =   FACTION_SOL_CENTRAL,
 		TAG_CULTURE =   CULTURE_HUMAN_MARTIAN,
-		TAG_RELIGION =  RELIGION_AGNOSTICISM,
-		TAG_EDUCATION = EDUCATION_HIGH_SCHOOL
+		TAG_RELIGION =  RELIGION_AGNOSTICISM
 	)
 
 	var/access_modify_region = list(
@@ -203,6 +193,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_COMMAND = list(access_change_ids),
 		ACCESS_REGION_GENERAL = list(access_change_ids),
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
+	)
+
+	// List of /datum/department types to instantiate at roundstart.
+	var/list/departments = list(
+		/datum/department/medbay
 	)
 
 /datum/map/New()

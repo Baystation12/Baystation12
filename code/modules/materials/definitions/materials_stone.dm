@@ -4,7 +4,7 @@
 	stack_type = /obj/item/stack/material/diamond
 	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60
-	icon_colour = "#00ffe1"
+	icon_colour = "#a0fff1"
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
@@ -14,6 +14,7 @@
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
 	construction_difficulty = 3
+	ore_name = "rough diamonds"
 	ore_compresses_to = MATERIAL_DIAMOND
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -21,6 +22,8 @@
 	xarch_source_mineral = "nitrogen"
 	ore_icon_overlay = "gems"
 	sale_price = 5
+	sheet_singular_name = "gem"
+	sheet_plural_name = "gems"
 
 /material/diamond/crystal
 	name = MATERIAL_CRYSTAL

@@ -1,15 +1,37 @@
 /*
  * Torch Medical
  */
+/decl/closet_appearance/secure_closet/torch/medical/contractor
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_BOTTLE_GREEN,
+		"medical" = COLOR_BOTTLE_GREEN
+	)
+
+/decl/closet_appearance/secure_closet/torch/medical
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_BABY_BLUE,
+		"medical" = COLOR_BABY_BLUE
+	)
+
+/decl/closet_appearance/secure_closet/torch/medical/physician
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_BABY_BLUE,
+		"stripe_vertical_right_full" = COLOR_BABY_BLUE,
+		"medical" = COLOR_BABY_BLUE
+	)
+
+/decl/closet_appearance/secure_closet/torch/medical/cmo
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_BABY_BLUE,
+		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_right_full" = COLOR_BABY_BLUE,
+		"medical" = COLOR_GOLD
+	)
 
 /obj/structure/closet/secure_closet/CMO_torch
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
-	icon_state = "cmosecure1"
-	icon_closed = "cmosecure"
-	icon_locked = "cmosecure1"
-	icon_opened = "cmosecureopen"
-	icon_off = "cmosecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/cmo
 
 /obj/structure/closet/secure_closet/CMO_torch/WillContain()
 	return list(
@@ -42,11 +64,7 @@
 /obj/structure/closet/secure_closet/medical_torchsenior
 	name = "physician's locker"
 	req_access = list(access_senmed)
-	icon_state = "securesenmed1"
-	icon_closed = "securesenmed"
-	icon_locked = "securesenmed1"
-	icon_opened = "securesenmedopen"
-	icon_off = "securesenmedoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/physician
 
 /obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
 	return list(
@@ -74,11 +92,7 @@
 /obj/structure/closet/secure_closet/medical_torch
 	name = "corpsman's locker"
 	req_access = list(access_medical_equip)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_off = "securemedoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
 
 /obj/structure/closet/secure_closet/medical_torch/WillContain()
 	return list(
@@ -104,11 +118,8 @@
 /obj/structure/closet/secure_closet/medical_contractor
 	name = "medical contractor's locker"
 	req_access = list(access_medical)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_off = "securemedoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/contractor
+
 
 /obj/structure/closet/secure_closet/medical_contractor/WillContain()
 	return list(
@@ -134,8 +145,7 @@
 
 /obj/structure/closet/wardrobe/medic_torch
 	name = "medical wardrobe"
-	icon_state = "white"
-	icon_closed = "white"
+	closet_appearance = /decl/closet_appearance/wardrobe/white
 
 /obj/structure/closet/wardrobe/medic_torch/WillContain()
 	return list(

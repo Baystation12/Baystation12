@@ -8,9 +8,8 @@
 	if(camera)
 		camera.status = 0
 	if(module)
-		var/obj/item/weapon/gripper/G = locate(/obj/item/weapon/gripper) in module
-		if(G) G.drop_item()
+		for(var/obj/item/weapon/gripper/G in module.modules)
+			G.drop_gripped_item()
 	locked = 0
 	remove_robot_verbs()
-	sql_report_cyborg_death(src)
 	..(gibbed,"shudders violently for a moment, then becomes motionless, its eyes slowly darkening.", "You have suffered a critical system failure, and are dead.")

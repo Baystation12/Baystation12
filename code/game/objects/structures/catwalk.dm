@@ -56,10 +56,10 @@
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
 		if(1)
-			new /obj/item/stack/rods(src.loc)
+			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
 		if(2)
-			new /obj/item/stack/rods(src.loc)
+			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
 
 /obj/structure/catwalk/attack_hand(mob/user)
@@ -73,8 +73,8 @@
 		if(WT.remove_fuel(0, user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
-			new /obj/item/stack/rods(src.loc)
-			new /obj/item/stack/rods(src.loc)
+			new /obj/item/stack/material/rods(src.loc)
+			new /obj/item/stack/material/rods(src.loc)
 			//Lattice would delete itself, but let's save ourselves a new obj
 			if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
 				new /obj/structure/lattice/(src.loc)

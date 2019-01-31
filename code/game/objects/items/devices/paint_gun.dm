@@ -58,6 +58,7 @@
 		"red" = 			COLOR_RED,
 		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
 		"titanium" =     	COLOR_TITANIUM,
+		"aluminium"=        COLOR_ALUMINIUM,
 		"violet" = 			COLOR_VIOLET,
 		"white" =        	COLOR_WHITE,
 		"yellow" =       	COLOR_AMBER,

@@ -10,6 +10,7 @@
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
 		/area/engineering/engine_smes = NO_SCRUBBER|NO_VENT,
 		/area/engineering/fuelbay = NO_SCRUBBER,
+		/area/engineering/wastetank = NO_SCRUBBER,
 		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,
 		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER|NO_VENT,
@@ -20,7 +21,7 @@
 		/area/maintenance/firstdeck/foreport = NO_SCRUBBER,
 		/area/maintenance/firstdeck/forestarboard = NO_SCRUBBER,
 		/area/maintenance/incinerator = NO_SCRUBBER,
-		/area/maintenance/seconddeck/aftport = NO_SCRUBBER,
+		/area/maintenance/seconddeck/aftport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/seconddeck/forestarboard = NO_SCRUBBER,
 		/area/maintenance/seconddeck/hallway = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER|NO_VENT,
@@ -36,6 +37,12 @@
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/merchant = NO_SCRUBBER|NO_APC,
 		/area/shuttle/petrov = 0,
+		/area/shuttle/escape_pod6/station = NO_SCRUBBER|NO_APC,
+		/area/shuttle/escape_pod7/station = NO_SCRUBBER|NO_APC,
+		/area/shuttle/escape_pod8/station = NO_SCRUBBER|NO_APC,
+		/area/shuttle/escape_pod9/station = NO_SCRUBBER|NO_APC,
+		/area/shuttle/escape_pod10/station = NO_SCRUBBER|NO_APC,
+		/area/shuttle/escape_pod11/station = NO_SCRUBBER|NO_APC,
 		/area/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -81,7 +88,8 @@
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/petrov/maint = NO_SCRUBBER,
 		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
+		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT,
+		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(

@@ -68,6 +68,7 @@
 	has_organ = list(
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel,
 		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
@@ -123,6 +124,7 @@
 /datum/species/xenos/handle_post_spawn(var/mob/living/carbon/human/H)
 
 	if(H.mind)
+		H.mind.reset()
 		H.mind.assigned_role = "Alien"
 		H.mind.special_role = "Alien"
 
@@ -209,6 +211,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/queen,
 		BP_ACID =     /obj/item/organ/internal/xeno/acidgland,
 		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
@@ -250,6 +253,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/hunter,
 		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
 		)
@@ -283,6 +287,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/sentinel,
 		BP_ACID =     /obj/item/organ/internal/xeno/acidgland,
 		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
@@ -323,6 +328,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_EGG =      /obj/item/organ/internal/xeno/eggsac,
 		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/queen,
 		BP_ACID =     /obj/item/organ/internal/xeno/acidgland,

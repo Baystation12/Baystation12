@@ -57,6 +57,14 @@
 
 	overlays = new_overlays
 
+/obj/item/weapon/defibrillator/examine(mob/user)
+	. = ..()
+	if(.)
+		if(bcell)
+			to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
+		else
+			to_chat(user, "There is no cell inside.")
+
 /obj/item/weapon/defibrillator/ui_action_click()
 	toggle_paddles()
 
@@ -372,6 +380,7 @@
 	if(istype(potato) && potato.cell)
 		var/obj/item/weapon/cell/C = potato.cell
 		C.give(chargecost)
+	H.AdjustSleeping(-60)
 	log_and_message_admins("used \a [src] to revive [key_name(H)].")
 
 /obj/item/weapon/shockpaddles/proc/lowskill_revive(mob/living/carbon/human/H, mob/living/user)
@@ -423,6 +432,10 @@
 	var/burn_damage = H.electrocute_act(burn_damage_amt*2, src, def_zone = target_zone)
 	if(burn_damage > 15 && H.can_feel_pain())
 		H.emote("scream")
+	var/obj/item/organ/internal/heart/doki = LAZYACCESS(affecting.internal_organs, BP_HEART)
+	if(istype(doki) && doki.pulse && !doki.open && prob(10))
+		to_chat(doki, "<span class='danger'>Your [doki] has stopped!</span>")
+		doki.pulse = PULSE_NONE
 
 	admin_attack_log(user, H, "Electrocuted using \a [src]", "Was electrocuted with \a [src]", "used \a [src] to electrocute")
 

@@ -1,0 +1,4 @@
+author: "Datraen"
+delete-after: True
+changes: 
+  - rscadd: "Adds Skrellian Weapons, currently admin spawn only."

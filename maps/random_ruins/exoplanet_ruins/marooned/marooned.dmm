@@ -7,11 +7,11 @@
 /turf/template_noop,
 /area/template_noop)
 "ac" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/template_noop,
 /area/template_noop)
 "ad" = (
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /obj/item/stack/material/ocp,
 /turf/template_noop,
 /area/template_noop)
@@ -60,7 +60,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/gun/projectile/revolver/webley,
+/obj/item/weapon/gun/projectile/revolver/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "an" = (

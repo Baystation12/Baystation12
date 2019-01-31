@@ -83,11 +83,6 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/suit/labcoat_corp_rd
-	display_name = "labcoat, research director, corporate colors"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
-	flags = GEAR_HAS_TYPE_SELECTION
-
 /datum/gear/suit/coat
 	display_name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
