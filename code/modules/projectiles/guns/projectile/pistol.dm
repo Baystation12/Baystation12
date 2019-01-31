@@ -77,6 +77,7 @@
 /obj/item/weapon/gun/projectile/pistol/throwback/Initialize()
 	. = ..()
 	base_icon = "pistol[rand(1,4)]"
+	update_icon()
 
 /obj/item/weapon/gun/projectile/pistol/throwback/on_update_icon()
 	..()
