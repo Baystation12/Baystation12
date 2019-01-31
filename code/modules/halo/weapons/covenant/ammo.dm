@@ -45,6 +45,7 @@
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1 SECOND
+	penetrating = 2
 	invisibility = 101
 
 /obj/effect/projectile/beam_rifle
