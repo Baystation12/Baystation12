@@ -56,6 +56,7 @@
 	item_state = "pen"
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/gun/projectile/revolver/capgun
 	name = "cap gun"
