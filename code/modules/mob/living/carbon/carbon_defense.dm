@@ -28,5 +28,6 @@
 		//Sharp objects will always embed if they do enough damage.
 		if((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
 			src.embed(I, hit_zone, supplied_wound = created_wound)
+			I.has_embedded()
 
 	return 1

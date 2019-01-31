@@ -112,6 +112,7 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = MATERIAL_GLASS
+	does_spin = FALSE
 
 /obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)

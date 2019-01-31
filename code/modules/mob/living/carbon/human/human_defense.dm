@@ -380,6 +380,7 @@ meteor_act
 				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
 				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
 					affecting.embed(I, supplied_wound = created_wound)
+					I.has_embedded()
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5

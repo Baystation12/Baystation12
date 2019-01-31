@@ -125,3 +125,8 @@
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT + (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6// Only available to traitors if they share TCs.
 	antag_costs = list(MODE_MERCENARY = DEFAULT_TELECRYSTAL_AMOUNT) // This, on the other hand, is to encourage usage specifically by mercs with high budgets.
 	path = /obj/item/weapon/gun/magnetic/railgun/tcc
+
+/datum/uplink_item/item/visible_weapons/harpoonbomb
+	name = "Explosive Harpoon"
+	item_cost = 12
+	path = /obj/item/weapon/material/harpoon/bomb
