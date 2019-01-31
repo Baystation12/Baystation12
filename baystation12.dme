@@ -1707,6 +1707,7 @@
 #include "code\modules\halo\weapons\snipers.dm"
 #include "code\modules\halo\weapons\covenant\ammo.dm"
 #include "code\modules\halo\weapons\covenant\brute.dm"
+#include "code\modules\halo\weapons\covenant\drop_pod_beacon.dm"
 #include "code\modules\halo\weapons\covenant\grenades.dm"
 #include "code\modules\halo\weapons\covenant\handheld_shields.dm"
 #include "code\modules\halo\weapons\covenant\hunter_projectiles.dm"
