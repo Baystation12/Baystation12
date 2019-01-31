@@ -45,7 +45,15 @@
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1 SECOND
+	penetrating = 2
 	invisibility = 101
+
+/obj/item/projectile/bullet/covenant/beamrifle/attack_mob(var/mob/living/carbon/human/L)
+	if(!istype(L))
+		. = ..()
+		return
+	L.radiation += 10
+	. = ..()
 
 /obj/effect/projectile/beam_rifle
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
@@ -154,6 +162,13 @@
 	tracer_type = /obj/effect/projectile/type51carbine
 	tracer_delay_time = 1.5 SECONDS
 	invisibility = 101
+
+/obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
+	if(!istype(L))
+		. = ..()
+		return
+	L.radiation += 15
+	. = ..()
 
 /obj/effect/projectile/type51carbine
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
