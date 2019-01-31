@@ -140,8 +140,8 @@
 	if(H.internal_organs_by_name[BP_LIVER])
 		var/obj/item/organ/user_liver = H.internal_organs_by_name[BP_LIVER]
 		user_liver.take_damage(1,1)
-	H.adjustToxLoss(2)
-	if(prob(5))
+	H.adjustToxLoss(1)
+	if(prob(10))
 		H.emote(pick("twitch", "blink_r", "shiver"))
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)
 	H.add_chemical_effect(CE_PULSE, 2)
