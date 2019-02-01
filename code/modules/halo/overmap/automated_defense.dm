@@ -4,7 +4,7 @@
 /obj/effect/overmap/ship/npc_ship/automated_defenses
 	name = "Automated Defenses"
 	icon = 'code/modules/halo/icons/overmap/human_stations.dmi'
-	icon_state = "s_station_1"
+	icon_state = "SMAC"
 
 	faction = "civilian"
 	available_ship_requests = newlist(/datum/npc_ship_request/automated_defense_process)
