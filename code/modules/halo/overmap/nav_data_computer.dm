@@ -115,6 +115,11 @@
 /obj/machinery/nav_computer/npc
 	data_chip = new /obj/item/nav_data_chip/fragmented //All NPC ships should only contain a "fragmented" version of the original type.
 
+/obj/machinery/nav_computer/npc/remove_nav_chip(var/mob/user)
+	var/obj/item/nav_data_chip/fragmented/f = data_chip
+	if(istype(f) && f.fragments_have == 999)
+		f.fragment_chip()
+
 /obj/item/nav_data_chip
 	name = "\improper Nav data-chip"
 	desc = "A data-chip containing all the nav-data and Friend or Foe Id of a vessel."
@@ -148,9 +153,14 @@
 	var/fragments_have = 1
 	var/fragments_required = 3
 
+/obj/item/nav_data_chip/fragmented/New()
+	. = ..()
+	fragments_have = 999
+
 /obj/item/nav_data_chip/fragmented/examine(var/mob/examiner)
 	. = ..()
 	to_chat(examiner,"<span class = 'notice'>This chip has been corrupted by automatic mechnisms. Scan other fragmented chips on this one to reconstruct the full chip.</span>")
+
 /obj/item/nav_data_chip/fragmented/get_faction()
 	if(is_fragmented())
 		return ""
@@ -166,13 +176,59 @@
 		return 0
 	return 1
 
+/obj/item/nav_data_chip/fragmented/proc/fragment_chip()
+	fragments_have = initial(fragments_have)
+
 /obj/item/nav_data_chip/fragmented/attackby(var/obj/item/I,var/mob/living/carbon/human/user)
 	if(!istype(user) || !is_fragmented())
 		. = ..()
 	var/obj/item/nav_data_chip/fragmented/f = I
 	if(istype(f) && f.type == type)
 		to_chat(user,"<span class = 'notice'>You scan [I] on [src], transferring the nav data and discarding [I] afterwards.</span>")
-		user.visible_message("<span class = 'notice'>[user] scans [I] on [src], transferring the nav data.\n[user] discards the now-useless [I]</span>")
+		user.visible_message("<span class = 'notice'>[user] scans [I] on [src], transferring the FoF ID data.\n[user] discards the now-useless [I]</span>")
 		fragments_have += f.fragments_have
 		user.drop_from_inventory(f)
 		qdel(f)
+
+/obj/item/nav_data_chip/unsc
+	chip_faction = "unsc"
+
+/obj/item/nav_data_chip/covenant
+	icon_state = "nav_data_chip_cov"
+	chip_faction = "covenant"
+
+/obj/item/nav_data_chip/innie
+	chip_faction = "innie"
+
+/obj/item/nav_data_chip/fragmented/unsc
+	name = "Fragmented Nav Data Chip"
+	chip_faction = "unsc"
+
+/obj/item/nav_data_chip/fragmented/covenant
+	name = "Fragmented Nav Data Chip"
+	icon_state = "nav_data_chip_cov"
+	chip_faction = "covenant"
+
+/obj/item/nav_data_chip/fragmented/innie
+	name = "Fragmented Nav Data Chip"
+	chip_faction = "innie"
+
+/obj/machinery/nav_computer/npc/unsc
+	data_chip = new /obj/item/nav_data_chip/fragmented/unsc
+
+/obj/machinery/nav_computer/npc/covenant
+	icon_state = "cov_nav"
+	data_chip = new /obj/item/nav_data_chip/fragmented/covenant
+
+/obj/machinery/nav_computer/npc/innie
+	data_chip = new /obj/item/nav_data_chip/fragmented/innie
+
+/obj/machinery/nav_computer/unsc
+	data_chip = new /obj/item/nav_data_chip/unsc
+
+/obj/machinery/nav_computer/covenant
+	icon_state = "cov_nav"
+	data_chip = new /obj/item/nav_data_chip/covenant
+
+/obj/machinery/nav_computer/innie
+	data_chip = new /obj/item/nav_data_chip/innie
