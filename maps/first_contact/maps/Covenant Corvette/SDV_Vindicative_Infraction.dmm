@@ -307,7 +307,7 @@
 "fU" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/portengine)
 "fV" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/forwardcargo)
 "fW" = (/turf/simulated/floor/drone_biomass,/area/covenant_corvette/yanmee)
-"fX" = (/mob/living/simple_animal/hostile/retaliate/done,/turf/simulated/floor/drone_biomass,/area/covenant_corvette/yanmee)
+"fX" = (/mob/living/simple_animal/hostile/done,/turf/simulated/floor/drone_biomass,/area/covenant_corvette/yanmee)
 "fY" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/portengine)
 "fZ" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/portengine)
 "ga" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/forwardcargo)
