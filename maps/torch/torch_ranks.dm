@@ -644,18 +644,15 @@
  *  Civilians
  *  =========
  */
-
+ 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
-	name_short = "Civ"
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
-	name_short = "Con"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
-	name_short = "Syn"
 
 /*
  *  SolGov Employees
