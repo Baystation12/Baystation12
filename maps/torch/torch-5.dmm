@@ -9483,8 +9483,8 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/structure/flora/pottedplant/large,
 /obj/effect/floor_decal/corner/b_green/diagonal,
+/obj/structure/closet/secure_closet/bodyguard,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
 "uk" = (
@@ -10754,6 +10754,7 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/corner/b_green/diagonal,
+/obj/structure/flora/pottedplant/large,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cl)
 "wH" = (
