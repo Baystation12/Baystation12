@@ -1,0 +1,7 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - bugfix: "After paperwork being filled out in triplicate, lost, found, and buried in peat for two weeks, the CSO now has access to their uniform in the uniform vendor."
+  - bugfix: "You now need to be an EC scientist to select an EC labcoat in loadout. Senior Researchers and Assistants now have access to some of the same stuff as normal scientists that they lacked. Also adds some equipment the biomech should have access to."
+  - bugfix: "Non-senior researcher Ensigns in the science department are now properly considered officers and have an officer's uniform given to them when they wake up instead of an enlisted uniform."
+  - rscadd: "Labcoats can now be issued via the uniform vendor for EC science people."
