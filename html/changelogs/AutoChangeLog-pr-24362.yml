@@ -1,0 +1,4 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - tweak: "Pilot skill description now clarifies random movement occurs until trained or greater, regardless of what ship you are flying."
