@@ -114,10 +114,12 @@
 	if(!(connection in list("seeker", "web")))					//Invalid connection type.
 		return null
 	#if DM_VERSION >= 512
+/*
 	if(byond_version < config.minimum_byond_version || byond_build < config.minimum_byond_build)		//BYOND out of date.
 		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
-		return
+		return 
+*/ 
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
