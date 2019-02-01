@@ -1,0 +1,5 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - maptweak: "Added LPA equipment closet to the Workplace Liason's office."
+  - tweak: "Added \"Asset Protection Agent\" as an alt title to LPA."
