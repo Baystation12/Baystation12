@@ -613,10 +613,10 @@ var/list/gamemode_cache = list()
 					config.forbidden_versions = splittext(value, ";")
 				
 				if("minimum_byond_version")
-					config.minimum_byond_version = value
+					config.minimum_byond_version = text2num(value)
 
 				if("minimum_byond_build")
-					config.minimum_byond_build = value
+					config.minimum_byond_build = text2num(value)
 
 				if("login_export_addr")
 					config.login_export_addr = value
