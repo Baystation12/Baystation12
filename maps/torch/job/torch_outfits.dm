@@ -142,20 +142,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_pocket = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	r_pocket = /obj/item/weapon/flame/lighter/zippo
 
-/decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard/equip(mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
-	. = ..()
-	if(H)
-		var/obj/item/weapon/gun/energy/gun/secure/corporate/firearm = new(H)
-		if(istype(H.w_uniform, /obj/item/clothing))
-			var/obj/item/clothing/uniform = H.w_uniform
-			var/obj/item/clothing/accessory/storage/holster/thigh/holster = new(H)
-			var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
-			holster_extension.holster(firearm, H)
-			if(uniform.can_attach_accessory(holster))
-				uniform.attackby(holster, H)
-			else
-				H.put_in_hands(holster)
-
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison/union_rep
 	name = OUTFIT_JOB_NAME("Union Representative")
 	l_pocket = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
@@ -823,4 +809,3 @@ TERRAN OUTFITS
 	name = OUTFIT_JOB_NAME("Scientist - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
 	id_type = /obj/item/weapon/card/id/torch/crew/research/scientist
- 
