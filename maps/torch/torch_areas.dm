@@ -500,11 +500,6 @@
 /area/turbolift/fourthdeck
 	name = "\improper fourth deck"
 	base_turf = /turf/simulated/floor/plating
-/*
-/area/turbolift/fifthdeck
-	name = "\improper Fifth Deck"
-	base_turf = /turf/simulated/floor/plating
-*/
 
 /area/turbolift/cargo_lift
 	name = "\improper Cargo Lift"
@@ -512,9 +507,9 @@
 	base_turf = /turf/simulated/open
 
 /area/turbolift/robotics_lift
-  name = "\improper Robotics Lift"
-  icon_state = "shuttle3"
-  base_turf = /turf/simulated/open
+	name = "\improper Robotics Lift"
+	icon_state = "shuttle3"
+	base_turf = /turf/simulated/open
 
 // Ninja areas
 /area/ninja_dojo
