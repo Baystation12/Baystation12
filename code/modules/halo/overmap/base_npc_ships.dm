@@ -127,7 +127,7 @@
 			if(request.request_requires_processing)
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
-			return
+			return ..()
 		if(loc == target_loc)
 			pick_target_loc()
 		else
@@ -136,8 +136,9 @@
 			dir = get_dir(src,target_loc)
 			is_still() //A way to ensure umbilicals break when we move.
 	else
+		if(target_loc)
+			walk(src,0)
 		target_loc = null
-		walk(src,0)
 
 /obj/effect/overmap/ship/npc_ship/proc/broadcast_hit(var/ship_disabled = 0)
 	var/message_to_use = pick(messages_on_hit)

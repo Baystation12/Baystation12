@@ -53,7 +53,7 @@
 		else
 			start_target_fire_at = 0
 
-	if(firing_on_target)
+	if(firing_on_target && current_target.get_faction() != ship_source.get_faction())
 		if(world.time > next_fire_at)
 			var/obj/item/projectile/overmap/fired = new ship_source.proj_fired (ship_source.loc)
 			fired.permutated = ship_source
@@ -67,7 +67,6 @@
 			if(ship.get_faction() != ship_source.get_faction() && !istype(ship,/obj/effect/overmap/ship/faction_base))
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
-			start_target_fire_at = world.time + AUTO_DEFENSE_LOCKON_DELAY
 			return 1
 		current_target = pick(unauthed_ships)
 		var/obj/effect/overmap/ship/npc_ship/npc = current_target
