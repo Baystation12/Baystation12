@@ -1289,7 +1289,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/fore)
 "em" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/bed/chair/wood/wings/mahogany{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 8
 	},
@@ -1386,7 +1386,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "eB" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/bed/chair/wood/wings/mahogany{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 4
 	},
@@ -1701,7 +1701,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage/upper)
 "fB" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "fE" = (
@@ -1928,8 +1928,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "gs" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/donut,
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "gu" = (
@@ -2172,7 +2172,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "hm" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/tableflag,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2183,10 +2182,11 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "hn" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/bed/chair/wood/wings/mahogany{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 8
 	},
@@ -2829,7 +2829,7 @@
 	pixel_x = -24;
 	pixel_y = 6
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "ju" = (
 /obj/structure/railing/mapped{
@@ -6352,7 +6352,7 @@
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/pen{
 	pixel_x = 4;
 	pixel_y = 4
@@ -8994,8 +8994,8 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod9/station)
 "ER" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/storage/pill_bottle/dice_nerd,
+/obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "ES" = (
@@ -9020,8 +9020,8 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "EY" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/paper_bin,
+/obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "EZ" = (
@@ -9252,7 +9252,7 @@
 	dir = 8
 	},
 /obj/machinery/vending/snack,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "FK" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -9447,10 +9447,9 @@
 	icon_state = "spline_fancy";
 	dir = 1
 	},
-/obj/structure/table/steel,
-/obj/machinery/recharger,
 /obj/machinery/light/small,
-/turf/simulated/floor/wood,
+/obj/structure/reagent_dispensers/water_cooler,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Gr" = (
 /obj/machinery/power/apc{
@@ -9466,7 +9465,7 @@
 	dir = 8
 	},
 /obj/machinery/vending/cigarette,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Gu" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -9634,13 +9633,13 @@
 	icon_state = "spline_fancy";
 	dir = 1
 	},
-/obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/cups,
-/turf/simulated/floor/wood,
+/obj/structure/table/woodentable,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "GZ" = (
 /obj/machinery/vending/games,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Hg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -10175,7 +10174,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "IZ" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -11122,7 +11121,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Mb" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -11178,7 +11177,7 @@
 /area/maintenance/fourthdeck/aft)
 "Ml" = (
 /obj/machinery/light/small,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Mn" = (
 /obj/effect/catwalk_plated,
@@ -11249,7 +11248,7 @@
 	dir = 1
 	},
 /obj/machinery/libraryscanner,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Mv" = (
 /obj/structure/railing/mapped{
@@ -11406,7 +11405,7 @@
 	pixel_x = -1;
 	pixel_y = 1
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "MR" = (
 /turf/simulated/floor/tiled/steel_ridged,
@@ -11442,7 +11441,7 @@
 	icon_state = "spline_fancy";
 	dir = 1
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "MZ" = (
 /obj/structure/railing/mapped{
@@ -11838,7 +11837,7 @@
 /obj/machinery/newscaster{
 	pixel_x = 32
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Oc" = (
 /obj/machinery/deployable/barrier,
@@ -11991,7 +11990,6 @@
 /turf/simulated/open,
 /area/hallway/primary/fourthdeck/fore)
 "OI" = (
-/obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
 	pixel_x = 3
 	},
@@ -11999,6 +11997,7 @@
 	pixel_x = -3;
 	pixel_y = 0
 	},
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "OJ" = (
@@ -12051,7 +12050,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "OQ" = (
 /obj/structure/table/rack,
@@ -12736,8 +12735,9 @@
 	icon_state = "spline_fancy";
 	dir = 1
 	},
-/obj/structure/reagent_dispensers/water_cooler,
-/turf/simulated/floor/wood,
+/obj/machinery/recharger,
+/obj/structure/table/woodentable,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Qu" = (
 /obj/structure/table/standard,
@@ -13342,14 +13342,14 @@
 	dir = 4;
 	pixel_y = 0
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "RW" = (
 /obj/effect/floor_decal/corner/brown/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "RY" = (
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "RZ" = (
 /obj/machinery/door/blast/shutters{
@@ -13739,7 +13739,7 @@
 	layer = 2.4;
 	level = 2
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "SQ" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -13773,7 +13773,7 @@
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/stamp/deckoff,
 /obj/item/weapon/pen{
 	pixel_x = 4;
@@ -14029,7 +14029,7 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Tz" = (
 /obj/structure/table/standard,
@@ -14412,7 +14412,7 @@
 /obj/machinery/bookbinder{
 	pixel_y = 0
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "UE" = (
 /obj/structure/catwalk,
@@ -15302,10 +15302,6 @@
 /turf/simulated/floor,
 /area/crew_quarters/adherent)
 "Xg" = (
-/obj/structure/bed/chair/wood/wings{
-	icon_state = "wooden_chair_wings_preview";
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -15313,6 +15309,10 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/bed/chair/wood/wings/mahogany{
+	icon_state = "wooden_chair_wings_preview";
 	dir = 4
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -15695,7 +15695,7 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "XX" = (
 /obj/effect/floor_decal/corner/brown{
@@ -15736,6 +15736,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/office)
+"XZ" = (
+/obj/item/device/flashlight/lamp/green,
+/obj/structure/table/woodentable,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "Ya" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -16135,7 +16140,7 @@
 /obj/structure/bed/chair/comfy/brown{
 	dir = 4
 	},
-/turf/simulated/floor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Za" = (
 /obj/structure/table/rack,
@@ -34685,7 +34690,7 @@ aY
 Wf
 WI
 Yd
-NC
+XZ
 FB
 Rf
 Sd

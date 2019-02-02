@@ -17,7 +17,6 @@
 #define COLOR_DEEP_SKY_BLUE    "#00e1ff"
 #define COLOR_LIME             "#00ff00"
 #define COLOR_CYAN             "#00ffff"
-#define COLOR_WOOD             "#824b28"
 #define COLOR_TEAL             "#33cccc"
 #define COLOR_RED              "#ff0000"
 #define COLOR_PINK             "#ff00ff"
@@ -73,7 +72,7 @@
 #define COLOR_BRONZE           "#8c7853"
 #define COLOR_BRASS            "#b99d71"
 #define COLOR_INDIGO           "#4b0082"
-#define COLOR_ALUMINIUM        "#c9c9c9"
+#define COLOR_ALUMINIUM        "#bbbbbb"
 #define COLOR_CRYSTAL          "#00c8a5"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
@@ -99,6 +98,12 @@
 #define	COMMS_COLOR_COMMAND    "#204090"
 #define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+
+#define WOOD_COLOR_GENERIC     "#d5a66e"
+#define WOOD_COLOR_RICH        "#994715"
+#define WOOD_COLOR_PALE        "#d2bc9d"
+#define WOOD_COLOR_BLACK       "#332521"
+#define WOOD_COLOR_CHOCOLATE   "#78523b"
 
 #define GLASS_COLOR            "#74c1ee"
 #define GLASS_COLOR_PHORON     "#7c3a9a"

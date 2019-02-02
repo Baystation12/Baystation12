@@ -162,7 +162,7 @@
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/storage/pill_bottle/citalopram,
 		/obj/item/weapon/reagent_containers/pill/methylphenidate,
-		/obj/item/weapon/clipboard,
+		/obj/item/weapon/material/clipboard,
 		/obj/item/weapon/folder/white,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,

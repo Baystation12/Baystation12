@@ -201,7 +201,7 @@
 					/obj/item/clothing/shoes/laceup,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/shoes/white,
-					/obj/item/weapon/clipboard,
+					/obj/item/weapon/material/clipboard,
 					/obj/item/weapon/folder/white,
 					/obj/item/weapon/pen)
 	cost = 15

@@ -435,9 +435,24 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/pen/green
 	category = "General"
 
-/datum/autolathe/recipe/clipboard
-	name = "clipboard"
-	path = /obj/item/weapon/clipboard
+/datum/autolathe/recipe/clipboard_steel
+	name = "clipboard, steel"
+	path = /obj/item/weapon/material/clipboard/steel
+	category = "General"
+
+/datum/autolathe/recipe/clipboard_alum
+	name = "clipboard, aluminium"
+	path = /obj/item/weapon/material/clipboard/aluminium
+	category = "General"
+
+/datum/autolathe/recipe/clipboard_glass
+	name = "clipboard, glass"
+	path = /obj/item/weapon/material/clipboard/glass
+	category = "General"
+
+/datum/autolathe/recipe/clipboard_alum
+	name = "clipboard, plastic"
+	path = /obj/item/weapon/material/clipboard/plastic
 	category = "General"
 
 /datum/autolathe/recipe/destTagger

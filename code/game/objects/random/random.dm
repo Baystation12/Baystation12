@@ -1172,6 +1172,20 @@ var/list/random_useful_
 	var/lunches = lunchables_lunches()
 	return lunches[pick(lunches)]
 
+/obj/random/clipboard
+	name = "random clipboard"
+	desc = "This is a random material clipboard."
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "clipboard_preview"
+
+/obj/random/clipboard/spawn_choices()
+	return list(/obj/item/weapon/material/clipboard = 300,
+				/obj/item/weapon/material/clipboard/steel = 200,
+				/obj/item/weapon/material/clipboard/aluminium = 200,
+				/obj/item/weapon/material/clipboard/plastic = 200,
+				/obj/item/weapon/material/clipboard/glass = 100,
+				/obj/item/weapon/material/clipboard/ebony = 10)
+
 //Random MRE stuff
 
 /obj/random/mre

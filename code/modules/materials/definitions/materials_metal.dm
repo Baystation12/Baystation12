@@ -118,25 +118,9 @@
 	ore_smelts_to = MATERIAL_STEEL
 	construction_difficulty = 1
 
-/material/aluminium
-	name = MATERIAL_ALUMINIUM
-	lore_text = "A low-density ductile metal with a silvery-white sheen."
-	stack_type = /obj/item/stack/material/aluminium
-	chem_products = list(
-				/datum/reagent/aluminum = 20
-				)
-	integrity = 125
-	brute_armor = 3
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
-	icon_colour = "#c9c9c9"
-	hitsound = 'sound/weapons/smash.ogg'
-	construction_difficulty = 0.5
-	sale_price = 1
-
-/material/aluminium/holographic
-	name = "holo" + MATERIAL_ALUMINIUM
-	display_name = MATERIAL_ALUMINIUM
+/material/steel/holographic
+	name = "holo" + MATERIAL_STEEL
+	display_name = MATERIAL_STEEL
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -145,9 +129,25 @@
 	sale_price = null
 	hidden_from_codex = TRUE
 
-/material/steel/holographic
-	name = "holo" + MATERIAL_STEEL
-	display_name = MATERIAL_STEEL
+/material/aluminium
+	name = MATERIAL_ALUMINIUM
+	lore_text = "A low-density ductile metal with a silvery-white sheen."
+	stack_type = /obj/item/stack/material/aluminium
+	chem_products = list(
+				/datum/reagent/aluminum = 20
+				)
+	integrity = 125
+	weight = 18
+	brute_armor = 3
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
+	icon_colour = "#b5b5b5"
+	hitsound = 'sound/weapons/smash.ogg'
+	sale_price = 1
+
+/material/aluminium/holographic
+	name = "holo" + MATERIAL_ALUMINIUM
+	display_name = MATERIAL_ALUMINIUM
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0

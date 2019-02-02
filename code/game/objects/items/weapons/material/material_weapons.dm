@@ -12,6 +12,7 @@
 	edge = 0
 
 	var/applies_material_colour = 1
+	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'
 	var/unbreakable
 	var/force_divisor = 0.5
 	var/thrown_force_divisor = 0.5
@@ -54,7 +55,6 @@
 	if(!material)
 		qdel(src)
 	else
-		SetName("[material.display_name] [initial(name)]")
 		health = round(material.integrity/10)
 		if(applies_material_colour)
 			color = material.icon_colour
@@ -65,6 +65,8 @@
 		else
 			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 		update_force()
+		if(applies_material_name)
+			SetName("[material.display_name] [initial(name)]")
 
 /obj/item/weapon/material/Destroy()
 	STOP_PROCESSING(SSobj, src)

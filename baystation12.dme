@@ -1780,6 +1780,7 @@
 #include "code\modules\materials\definitions\materials_organic.dm"
 #include "code\modules\materials\definitions\materials_other.dm"
 #include "code\modules\materials\definitions\materials_stone.dm"
+#include "code\modules\materials\definitions\materials_wood.dm"
 #include "code\modules\merchant\merchant_guns.dm"
 #include "code\modules\merchant\merchant_machinery.dm"
 #include "code\modules\merchant\merchant_programs.dm"

@@ -9,7 +9,6 @@
 #define MATERIAL_URANIUM                 "uranium"
 #define MATERIAL_COTTON                  "cotton"
 #define MATERIAL_CRYSTAL                 "crystal"
-#define MATERIAL_WOOD                    "wood"
 #define MATERIAL_SANDSTONE               "sandstone"
 #define MATERIAL_LEATHER                 "leather"
 #define MATERIAL_IRON                    "iron"
@@ -50,6 +49,13 @@
 #define MATERIAL_CLOTH                   "cloth"
 #define MATERIAL_CARPET                  "carpet"
 #define MATERIAL_ALUMINIUM               "aluminium"
+
+//woods
+#define MATERIAL_WOOD                    "wood"
+#define MATERIAL_MAHOGANY                "mahogany"
+#define MATERIAL_MAPLE                   "maple"
+#define MATERIAL_EBONY                   "ebony"
+#define MATERIAL_WALNUT                  "walnut"
 
 #define DEFAULT_WALL_MATERIAL      MATERIAL_STEEL
 #define DEFAULT_FURNITURE_MATERIAL MATERIAL_ALUMINIUM
