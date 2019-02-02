@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "Status indicators on the UI have had a makeover."
+  - rscadd: "You can now click status indicators to get an idea of how things are in your current state."
