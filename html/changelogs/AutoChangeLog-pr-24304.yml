@@ -1,0 +1,9 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added new wood material types: mahogany, maple, walnut, and ebony. These types are largely identical apart from their colour."
+  - rscadd: "Added supply crates to obtain the new woods."
+  - maptweak: "Several tables and chairs across the ship that were previously generic wood are now made from mahogany, maple, or walnut."
+  - maptweak: "Shuffled things around a bit in the captain's quadrant."
+  - maptweak: "Moved the CSO's primary office back to the bridge, from the Petrov."
+  - rscadd: "Clipboards are now a material item and can be constructed from most materials. Clipboards that spawn around the map will be of various materials."
