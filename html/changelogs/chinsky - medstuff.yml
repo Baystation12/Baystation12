@@ -1,0 +1,10 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - rscadd: "CPR changes. It now will help with blood circulation even if it fails to restart the heart, so there's a reason to do it (especially on higher levels). Fake circulation lasts 20 seconds and is better with Anatomy/Medicine skill (highest)."
+  - rscadd: "Can now put IV bags etc on rollerbeds and use them as IV stands for buckled people. Click with beaker to add it. Click with empty hand on empty (no buckled guy) bed to remove it. Drag bed on people to hook/unhook."
+  - rscdel: "Damaged livers no longer generate ammonia. It was creating self-perpetuating damage which wasn't intended, it was for diagnostic memes."
+  - rscadd: "Adds auto-CPR device. Goes into victim's suit slot. It won't do mouth-to-mouth or resusticate them, but it will help with circulation. Needs Basic Anatomy and Medicine skills to use, or risk rib fracture. Basically continuously applies circulation part of CPR. Mapped bunch of them in medbay"
+  - tweak: "Sleepers now have 10x stasis option. Their power usage now also scales with stasis factor greatly, 500 per factor, so ~5000 W at 10x"
