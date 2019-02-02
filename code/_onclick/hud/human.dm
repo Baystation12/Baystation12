@@ -178,18 +178,25 @@
 		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
+		mymob.healths = new /obj/screen()
+		mymob.healths.icon = ui_style
+		mymob.healths.icon_state = "health0"
+		mymob.healths.SetName("health")
+		mymob.healths.screen_loc = ui_health
+		hud_elements |= mymob.healths
+		
 		mymob.oxygen = new /obj/screen()
-		mymob.oxygen.icon = ui_style
+		mymob.oxygen.icon = 'icons/mob/status_indicators.dmi'
 		mymob.oxygen.icon_state = "oxy0"
 		mymob.oxygen.SetName("oxygen")
-		mymob.oxygen.screen_loc = ui_oxygen
+		mymob.oxygen.screen_loc = ui_temp
 		hud_elements |= mymob.oxygen
 
 		mymob.toxin = new /obj/screen()
-		mymob.toxin.icon = ui_style
+		mymob.toxin.icon = 'icons/mob/status_indicators.dmi'
 		mymob.toxin.icon_state = "tox0"
 		mymob.toxin.SetName("toxin")
-		mymob.toxin.screen_loc = ui_toxin
+		mymob.toxin.screen_loc = ui_temp
 		hud_elements |= mymob.toxin
 
 		mymob.fire = new /obj/screen()
@@ -199,24 +206,17 @@
 		mymob.fire.screen_loc = ui_fire
 		hud_elements |= mymob.fire
 
-		mymob.healths = new /obj/screen()
-		mymob.healths.icon = ui_style
-		mymob.healths.icon_state = "health0"
-		mymob.healths.SetName("health")
-		mymob.healths.screen_loc = ui_health
-		hud_elements |= mymob.healths
-
 	if(hud_data.has_pressure)
 		mymob.pressure = new /obj/screen()
-		mymob.pressure.icon = ui_style
+		mymob.pressure.icon = 'icons/mob/status_indicators.dmi'
 		mymob.pressure.icon_state = "pressure0"
 		mymob.pressure.SetName("pressure")
-		mymob.pressure.screen_loc = ui_pressure
+		mymob.pressure.screen_loc = ui_temp
 		hud_elements |= mymob.pressure
 
 	if(hud_data.has_bodytemp)
 		mymob.bodytemp = new /obj/screen()
-		mymob.bodytemp.icon = ui_style
+		mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 		mymob.bodytemp.icon_state = "temp1"
 		mymob.bodytemp.SetName("body temperature")
 		mymob.bodytemp.screen_loc = ui_temp
