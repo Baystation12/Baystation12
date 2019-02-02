@@ -18,7 +18,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
-	irradiate_non_cov = 5
+	irradiate_non_cov = 1
 
 
 /obj/item/weapon/gun/energy/plasmarifle/decorative
@@ -48,4 +48,4 @@
 	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for extra damage."
 	recharge_time = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle/brute
-	irradiate_non_cov = 7
+	irradiate_non_cov = 2

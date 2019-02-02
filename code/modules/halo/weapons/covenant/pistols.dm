@@ -12,7 +12,7 @@
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
 	screen_shake = 0
-	irradiate_non_cov = 10
+	irradiate_non_cov = 2
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(overcharge) //tell user overcharge deactivated, reset stats.
