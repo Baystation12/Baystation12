@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added the CSO's rigsuit."
+  - maptweak: "Removed the AMI rigsuit module from the CSO's Petrov office and added the new rigsuit to the bridge EVA storage."
+  - maptweak: "Resized and reorganised the bridge EVA storage."
