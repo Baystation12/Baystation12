@@ -270,6 +270,7 @@
 		if(A)
 			if(istype(A, /turf))
 				loc = A
+				A.bullet_act(src, def_zone) //We're burrowing through the turf, let's damage it again.
 			else
 				loc = A.loc
 			permutated.Add(A)

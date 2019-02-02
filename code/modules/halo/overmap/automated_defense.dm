@@ -14,6 +14,10 @@
 	var/defense_range = 7
 	var/obj/item/projectile/overmap/proj_fired = /obj/item/projectile/overmap/auto_defense_proj
 
+/obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
+	. = ..()
+	GLOB.overmap_tiles_uncontrolled -= range(defense_range,src)
+
 /datum/npc_ship_request/automated_defense_process
 	request_auth_levels = list()
 	request_requires_processing = 1
@@ -59,6 +63,9 @@
 		if(unauthed_ships.len == 0)
 			return 1
 		current_target = pick(unauthed_ships)
+		var/obj/effect/overmap/ship/npc_ship/npc = current_target
+		if(istype(npc))
+			npc.ship_targetedby_defenses()
 		if(current_target == previous_target)
 			start_target_fire_at = world.time //Don't need to lock on again if it's the same ship.
 
@@ -99,3 +106,22 @@
 	opacity = 0
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 5 SECONDS
+
+//FACTION DEFINES//
+/obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
+	faction = "unsc"
+	ship_name_list = list()
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/unsc/generate_ship_name()
+	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/cov
+	faction = "covenant"
+	proj_fired = /obj/item/projectile/auto_defense_proj/covenant
+	ship_name_list = list(\
+	"Woe of the Treacherous",
+	"Faithful Vanguard",
+	"Ardent Shield",
+	"Unyielding Faith",
+	"Resolute Prophecy"
+	)

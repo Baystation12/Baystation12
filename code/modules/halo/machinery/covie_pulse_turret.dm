@@ -65,6 +65,10 @@
 	damtype = BURN
 	. = ..()
 
+/obj/item/projectile/pulse_laser_damage_proj/check_penetrate(var/atom/a)
+	. = ..()
+	explosion(a,0,1,3,5)
+
 /obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)

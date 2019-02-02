@@ -13,16 +13,21 @@
 	icon_state = "beacon"
 	ship_damage_projectile = /obj/item/projectile/boarding_beacon
 
+/obj/item/projectile/overmap/boarding_beacon/on_impact(var/obj/effect/overmap/ship/npc_ship/ship)
+	if(istype(ship) && ship.unload_at == 0)
+		ship.load_mapfile()
+	. = ..()
+
 /obj/item/projectile/boarding_beacon
 	name = "boarding beacon"
 	icon = 'code/modules/halo/machinery/boarding_beacon_proj.dmi'
 	icon_state = "beacon"
 
 /obj/item/projectile/boarding_beacon/on_impact(var/atom/impacted)
-	new /obj/structure/boarding_beacon (loc,null)
+	new /obj/structure/boarding_beacon (loc)
 	. = ..()
 
-#define BOARDING_BEACON_DESTROYDELAY 10 SECONDS
+#define BOARDING_BEACON_DESTROYDELAY 30 SECONDS
 
 /obj/structure/boarding_beacon
 	name = "Location Beacon"
