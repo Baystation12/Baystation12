@@ -1,0 +1,5 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - bugfix: "Fixed phoron glass sheet's melting temperature so that reinforced phoron glass is consistent with the pre-material overhaul melting temperature. This should stop the random window breakage in the engine core until close to delamination temperatures."
+  - tweak: "Due to the nature of the material overhaul and this change, regular un-reinforced phoron glass also gets its temperature significantly buffed. It's still weak to physical attack by comparison to reinforced phoron glass."
