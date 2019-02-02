@@ -13,6 +13,7 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
 	one_hand_penalty = -1
+	irradiate_non_cov = 10
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -50,6 +51,7 @@
 	recharge_time = 2 SECONDS
 	projectile_type = /obj/item/projectile/covenant/beamrifle
 	one_hand_penalty = -1
+	irradiate_non_cov = 15
 
 	var/next_allowed_fire
 
