@@ -153,6 +153,7 @@
 		/area/lar_maria,
 		/area/map_template,
 		/area/unishi,
+		/area/voxship,
 		/area/exoplanet
 	)
 
