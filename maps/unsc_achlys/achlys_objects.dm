@@ -210,3 +210,10 @@
 	access = list(666)
 	icon_state = "silver"
 	item_state = "silver_id"
+
+/obj/machinery/autolathe/ammo_fabricator/hacked
+	name = "hacked autolathe"
+	desc = "This autolathe was dragged here and hacked together from other machine parts."
+	stored_material =  list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 0)
+	storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
+	machine_recipes = newlist(/datum/autolathe/recipe/m118_ma5b,/datum/autolathe/recipe/m255_sap_hp,/datum/autolathe/recipe/m443_fmj)
