@@ -166,51 +166,27 @@
 	icon_state = "needlerpack"
 	max_ammo = 21
 	ammo_type = /obj/item/ammo_casing/rifleneedle
-	caliber = "cov_carbine"
+	caliber = "needle_rifle"
 	mag_type = MAGAZINE
 
 /obj/item/ammo_casing/rifleneedle
 	name = "Rifle Needle"
 	desc = "A large crystalline needle"
-	caliber = "cov_carbine"
-	projectile_type = /obj/item/projectile/bullet/covenant/rifleneedle
+	caliber = "needle_rifle"
+	projectile_type = /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
-/obj/item/projectile/bullet/covenant/rifleneedle
+/obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
-	desc = "A sharp, pink crystalline shard"
-	damage = 25 // Low damage, special effect would do the most damage.
+	damage = 25
 	accuracy = 2
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
-	icon_state = "Needler Shot"
-	embed = 1
-	sharp = 1
-	tracer_type = /obj/effect/projectile/bullet/covenant/rifleneedle
+	shards_to_explode = 3
+	shard_name = "Rifle Needle shrapnel"
+	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
 
-/obj/effect/projectile/bullet/covenant/rifleneedle
+/obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerifle_trail"
-
-obj/item/projectile/bullet/covenant/rifleneedle/attack_mob(var/mob/living/carbon/human/L)
-	if(!istype(L))
-		. = ..()
-		return
-	var/list/embedded_shards[0]
-	for(var/obj/shard in L.contents )
-		if(!istype(shard,/obj/item/weapon/material/shard))
-			continue
-		if (shard.name == "Rifle Needle shrapnel")
-			embedded_shards += shard
-		if(embedded_shards.len >2)
-			explosion(L.loc,-1,1,2,5)
-			for(var/I in embedded_shards)
-				qdel(I)
-	if(prob(30)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
-		var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
-		var/obj/item/organ/external/embed_organ = pick(L.organs)
-		shard.name = "Rifle Needle shrapnel"
-		embed_organ.embed(shard)
-	..()

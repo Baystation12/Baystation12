@@ -87,7 +87,7 @@ obj/item/weapon/gun/projectile/type31needlerifle
 	fire_sound = 'code/modules/halo/sounds/cov_needlerifle_fire.ogg'
 	magazine_type = /obj/item/ammo_magazine/rifleneedlepack
 	handle_casings = CLEAR_CASINGS
-	caliber = "cov_carbine"
+	caliber = "needle_rifle"
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
 	one_hand_penalty = -1
@@ -103,13 +103,3 @@ obj/item/weapon/gun/projectile/type31needlerifle
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.25)
-
-/obj/item/weapon/gun/projectile/type31needlerifle/load_ammo(var/item/I,var/mob/user)
-	unload_ammo(user,1)
-	. = ..()
-
-/obj/item/weapon/gun/projectile/type31needlerifle/unload_ammo(var/mob/user,var/allow_dump = 0)
-	if(ammo_magazine)
-		to_chat(user,"<span class = 'notice'>The automatic reload mechanism of [src.name] is locked, use a magazine on it to attempt a reload.</span>")
-	if(allow_dump)
-		. = ..()
