@@ -5,7 +5,7 @@
 	var/list/sight_blockers = list()
 
 /obj/machinery/door/airlock/multi_tile/New()
-	..()
+	. = ..()
 	SetBounds()
 
 /obj/machinery/door/airlock/multi_tile/Initialize()
@@ -47,3 +47,7 @@
 	opacity = 0
 	glass = 1
 	assembly_type = /obj/structure/door_assembly/multi_tile
+
+/obj/machinery/door/airlock/multi_tile/set_broken()
+	. = ..()
+	set_opacity(0)
