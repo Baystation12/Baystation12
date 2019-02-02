@@ -3,7 +3,8 @@
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses
 	name = "Automated Defenses"
-	icon = 'code/modules/halo/icons/overmap/human_stations.dmi'
+	desc = "An automated defense emplacment. Stay away."
+	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "SMAC"
 
 	faction = "civilian"
@@ -17,6 +18,11 @@
 /obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
 	. = ..()
 	GLOB.overmap_tiles_uncontrolled -= range(defense_range,src)
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
+	. = ..()
+	for(var/datum/npc_ship_request/automated_defense_process/p in available_ship_requests)
+		p.start_target_fire_at = 1
 
 /datum/npc_ship_request/automated_defense_process
 	request_auth_levels = list()
@@ -58,9 +64,10 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(ship.get_faction() != "civilian" && ship.get_faction() != ship_source.get_faction())
+			if(ship.get_faction() != ship_source.get_faction() && !istype(ship,/obj/effect/overmap/ship/faction_base))
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
+			start_target_fire_at = world.time + AUTO_DEFENSE_LOCKON_DELAY
 			return 1
 		current_target = pick(unauthed_ships)
 		var/obj/effect/overmap/ship/npc_ship/npc = current_target
@@ -108,20 +115,45 @@
 	tracer_delay_time = 5 SECONDS
 
 //FACTION DEFINES//
+/datum/npc_ship/unsc_defenseplatform
+	mapfile_links = list('maps/first_contact/maps/faction_bases/Human_Defense.dmm')
+	fore_dir = EAST
+	map_bounds = list(50,146,165,107)
+
+/datum/npc_ship/cov_defenseplatform
+	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Defense.dmm')
+	fore_dir = WEST
+	map_bounds = list(29,70,66,32)
+
 /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
+	icon_state = "SMAC"
 	faction = "unsc"
 	ship_name_list = list()
+	ship_datums = list(/datum/npc_ship/unsc_defenseplatform)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc/generate_ship_name()
 	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
 
+/obj/effect/overmap/ship/npc_ship/automated_defenses/innie
+	icon_state = "SMAC"
+	faction = "innie"
+	ship_name_list = list()
+	ship_datums = list(/datum/npc_ship/unsc_defenseplatform)
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/innie/generate_ship_name()
+	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+
 /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
+	icon_state = "cov_defenseplatform"
 	faction = "covenant"
-	proj_fired = /obj/item/projectile/auto_defense_proj/covenant
+	proj_fired = /obj/item/projectile/overmap/auto_defense_proj/covenant
+	ship_datums = list(/datum/npc_ship/cov_defenseplatform)
 	ship_name_list = list(\
 	"Woe of the Treacherous",
 	"Faithful Vanguard",
 	"Ardent Shield",
 	"Unyielding Faith",
-	"Resolute Prophecy"
+	"Resolute Prophecy",
+	"Journey's Shield",
+	"Vanguard of Charity"
 	)

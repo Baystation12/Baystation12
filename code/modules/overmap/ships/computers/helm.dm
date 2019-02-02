@@ -62,6 +62,8 @@
 	return 0
 
 /obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
+	if(!linked)
+		linked = map_sectors["[z]"]
 	if(..())
 		user.unset_machine()
 		manual_control = 0

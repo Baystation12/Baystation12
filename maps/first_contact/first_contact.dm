@@ -2,6 +2,16 @@
 
 	#include "overall_overmap.dm"
 
+	#include "../first_contact/maps/faction_bases/base_areas.dm"
+
+	#include "../first_contact/maps/faction_bases/Covenant_Station.dmm"
+
+	#include "../first_contact/maps/faction_bases/Human_Station_1.dmm"
+
+	#include "../first_contact/maps/faction_bases/Human_Station_2.dmm"
+
+	#include "../first_contact/maps/faction_bases/Innie_Base.dmm"
+
 	#include "../first_contact/maps/Exoplanet Research/includes.dm"
 
 	#include "../first_contact/maps/UNSC_Prowler/includes.dm"
