@@ -136,9 +136,11 @@
 			dir = get_dir(src,target_loc)
 			is_still() //A way to ensure umbilicals break when we move.
 	else
+		if(is_player_controlled())
+			. = ..()
 		if(target_loc)
 			walk(src,0)
-		target_loc = null
+			target_loc = null
 
 /obj/effect/overmap/ship/npc_ship/proc/broadcast_hit(var/ship_disabled = 0)
 	var/message_to_use = pick(messages_on_hit)
@@ -190,7 +192,6 @@
 	map_bounds = chosen_ship_datum.map_bounds
 	fore_dir = chosen_ship_datum.fore_dir
 	map_z = list()
-	var/list/data_to_link = list()
 	for(var/link in chosen_ship_datum.mapfile_links)
 		to_world("Loading Ship-Map: [link]... This may cause lag.")
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
@@ -202,7 +203,6 @@
 		create_lighting_overlays_zlevel(z_to_load_at)
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
-		data_to_link += md
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
 	damage_spawned_ship()
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY
