@@ -90,6 +90,8 @@
 	var/is_charged_weapon = 0 //Does the weapon require charging? Defaults to 0 unless it's from /charged weapon sets
 	var/arm_time = 25 //Default charge time for weapons that charge
 	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Charge_Sound_Effect.ogg'
+	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -287,9 +289,8 @@
 		var/have_fired = 0
 		for(var/obj/item/weapon_attachment/secondary_weapon/attachment in get_attachments())
 			if(attachment.alt_fire_active == 1)
-				var/firing_result = attachment.fire_attachment(target,user,src)
-				if(firing_result == 1)
-					have_fired = 1
+				attachment.fire_attachment(target,user,src)
+				have_fired = 1
 		if(have_fired)
 			return //if one of our attachments have fired, let's not fire normally.
 
@@ -410,6 +411,11 @@
 					to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
 				if(4 to INFINITY)
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
+
+	if(irradiate_non_cov > 0 && istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/h = user
+		if(istype(h.species,/datum/species/human))
+			h.radiation += irradiate_non_cov
 
 	if(screen_shake)
 		spawn()

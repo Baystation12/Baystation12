@@ -1,7 +1,7 @@
 
 /datum/map/covenant_cruiser
-	name = "CCS Battlecruiser"
-	full_name = "CCS Battlecruiser"
+	name = "Damaged CCS Battlecruiser"
+	full_name = "Damaged CCS Battlecruiser"
 	path = "covenant_cruiser"
 	lobby_icon = 'code/modules/halo/splashworks/covenant.jpg'
 	id_hud_icons = 'maps/ccs_battlecruiser/opr_hud_icons.dmi'
@@ -44,5 +44,5 @@
 
 /datum/map/covenant_cruiser/New()
 	. = ..()
-	name = pick(GLOB.covenant_ship_names)
-	full_name = "CCS Battlecruiser \"[name]\""
+	name = "Damaged CCS [pick(GLOB.covenant_ship_names)]"
+	full_name = "Damaged CCS Battlecruiser \"[name]\""

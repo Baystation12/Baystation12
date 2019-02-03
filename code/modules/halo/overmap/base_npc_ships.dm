@@ -10,14 +10,14 @@
 "Do you feel like a hero yet?","Oof-",\
 "You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
 )
-#define ALL_Civilian_SHIPNAMES list(\
+#define ALL_CIVILIANS_SHIPNAMES list(\
 "Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
 )
 
 #define STOP_WAIT_TIME 5 MINUTES
 #define STOP_DISEMBARK_TIME 2 MINUTES
 
-#define BROADCAST_ON_HIT_PROB 10 //10
+#define BROADCAST_ON_HIT_PROB 15
 
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
@@ -26,10 +26,13 @@
 	icon = 'code/modules/halo/overmap/freighter.dmi'
 	icon_state = "ship"
 
+	var/list/ship_name_list = ALL_CIVILIANS_SHIPNAMES
+
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
+	var/message_language = "Galactic Common"
 
-	var/hull = 200 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
+	var/hull = 700 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
 	var/move_delay = 6 SECONDS //The amount of ticks to delay for when auto-moving across the system map.
 	var/turf/target_loc
@@ -45,6 +48,14 @@
 	generate_ship_name()
 	. = ..()
 
+/obj/effect/overmap/ship/npc_ship/get_faction()
+	if(!unload_at)
+		return faction
+	else if(nav_comp)
+		return nav_comp.get_faction()
+	else
+		return null
+
 /obj/effect/overmap/ship/npc_ship/proc/is_player_controlled()
 	for(var/datum/npc_ship_request/player_controlled/pc in available_ship_requests)
 		return 1
@@ -58,6 +69,18 @@
 	if(isnull(target_loc))
 		return 1
 	return 0
+
+/obj/effect/overmap/ship/npc_ship/proc/radio_message(var/mob/target_mob = null,var/message = null) //If no targetmob supplied, broadcasts to all players
+	if(target_mob)
+		if(!istype(target_mob))
+			message = target_mob
+		else
+			to_chat(target_mob,message)
+			return
+
+	for(var/mob/living/m in GLOB.player_list)
+		if(m.stat == CONSCIOUS)
+			to_chat(m,message)
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
@@ -75,7 +98,7 @@
 	qdel(src)
 
 /obj/effect/overmap/ship/npc_ship/proc/generate_ship_name()
-	name = pick(ALL_Civilian_SHIPNAMES)
+	name = pick(ship_name_list)
 
 /obj/effect/overmap/ship/npc_ship/Initialize()
 	var/turf/start_turf = locate(x,y,z)
@@ -84,6 +107,9 @@
 	if(!isnull(start_turf))
 		forceMove(start_turf)
 	pick_target_loc()
+
+/obj/effect/overmap/ship/npc_ship/proc/ship_targetedby_defenses()
+	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
 
@@ -117,7 +143,23 @@
 	var/message_to_use = pick(messages_on_hit)
 	if(ship_disabled)
 		message_to_use = pick(messages_on_death)
-	to_world("<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\"</span>")
+	for(var/mob/living/m in GLOB.player_list)
+		var/have_lang = 0
+		for(var/datum/language/l in m.languages)
+			if(l.name == message_language)
+				radio_message(m,"<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\" \[[x]:[y]\]</span>")
+				have_lang = 1
+				break
+		if(!have_lang)
+			var/new_message = ""
+			var/datum/language/default = m.get_default_language()
+			var/iter
+			for(iter = 0; iter <= lentext(message_to_use)/2; iter++)
+			if(!isnull(default))
+				new_message += pick(default.syllables)
+			else
+				new_message += pick("a","e","i","o","u")
+			radio_message(m,"<span class = 'radio'>\[EBAND\] [name]: \"[new_message]\" \[[x]:[y]\]</span>")
 
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)

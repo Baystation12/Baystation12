@@ -53,15 +53,17 @@
 
 /obj/item/projectile/overmap/proc/do_sector_hit(var/z_level,var/obj/effect/overmap/object_hit)
 	var/list/hit_bounds = object_hit.map_bounds
-	if(prob(15))
-		hit_bounds  = pick(object_hit.weapon_locations)
+	/*if(prob(15))
+		hit_bounds  = pick(object_hit.weapon_locations)*/
 
 	sector_hit_effects(z_level,object_hit,hit_bounds)
 
 /obj/item/projectile/overmap/proc/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
-		z_level--
+		var/prev_index = hit.map_z.Find(z_level)
+		if(hit.map_z.len > 1 && prev_index != 1)
+			z_level = hit.map_z[prev_index++]
 	turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	explosion(turf_to_explode,9,15,21,30) //explosion(turf_to_explode,3,5,7,10) original tiny explosion
 

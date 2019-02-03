@@ -1,6 +1,8 @@
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
+GLOBAL_LIST_EMPTY(overmap_tiles_uncontrolled) //This is any overmap sectors that are uncontrolled by any faction
+
 var/list/points_of_interest = list()
 
 /obj/effect/overmap
@@ -27,6 +29,7 @@ var/list/points_of_interest = list()
 	var/in_space = 1	//can be accessed via lucky EVA
 
 	var/list/connectors = list() //Used for docking umbilical type-items.
+	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
 
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
@@ -44,6 +47,9 @@ var/list/points_of_interest = list()
 	. = ..()
 	setup_object()
 
+/obj/effect/overmap/proc/get_faction()
+	return faction
+
 /obj/effect/overmap/proc/setup_object()
 
 	/*
@@ -58,12 +64,12 @@ var/list/points_of_interest = list()
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	//	map_sectors["[zlevel]"] = src
+	if(GLOB.using_map.use_overmap)
+		var/turf/move_to_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
-	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
-	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
+		forceMove(move_to_loc)
 
-	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
-	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+		testing("Located sector \"[name]\" at [move_to_loc.x],[move_to_loc.y], containing Z [english_list(map_z)]")
 	//points_of_interest += name
 
 	/*
@@ -181,6 +187,7 @@ var/list/points_of_interest = list()
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
+	GLOB.overmap_tiles_uncontrolled = turfs
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 

@@ -9,6 +9,7 @@
 #define ARTIFACTSPAWNNUM_UPPER 48
 
 /datum/controller/game_controller/proc/SetupXenoarch()
+	set background = 1
 	for(var/turf/simulated/mineral/M in world)
 		if(!M.density)
 			continue

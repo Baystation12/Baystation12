@@ -8,7 +8,7 @@
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
-	var/last_scream_at = 0
+	var/next_scream_at = 0
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
@@ -125,7 +125,7 @@
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70))
-				Paralyse(10)
+				confused += 10
 
 		if(3.0)
 			b_loss = 30
@@ -133,7 +133,7 @@
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50))
-				Paralyse(10)
+				confused += 10
 
 	// factor in armour
 	var/protection = blocked_mult(getarmor(null, "bomb"))

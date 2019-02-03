@@ -27,7 +27,7 @@
 	species_restricted = list("Orion")
 	icon_state = "orion1"
 	item_state = "orion1"
-	armor_thickness = 50
+	armor_thickness = 30
 	flags_inv = 29
 	breach_threshold = 100
 	flags_inv = HIDESHOES

@@ -18,9 +18,9 @@
 /obj/effect/overmap/ship/covenant_corvette/process()
 	. = ..()
 	if(is_still())
-		animate(src,alpha = 15,time = 2 SECONDS) //Hard to see if sat still.
+		animate(src,alpha = 15,color = rgb(255,255,255),time = 2 SECONDS) //Hard to see if sat still.
 	else
-		animate(src,alpha = 255, time = 2 SECONDS)
+		animate(src,alpha = 255,color = initial(color), time = 2 SECONDS)
 
 //overmap weapons//
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turretport/kig_yar_corvette

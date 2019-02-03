@@ -88,6 +88,7 @@
 /obj/item/ammo_magazine/m762_ap/M392
 	name = "M392 magazine (7.62mm) M118 FMJ-AP"
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 rounds. Specific to the M392."
+	caliber = "a762dmr"
 	ammo_type = /obj/item/ammo_casing/a762_m392
 	max_ammo = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 750)
@@ -125,8 +126,8 @@
 
 /obj/item/ammo_casing/a762_m392
 	desc = "A 7.62mm bullet casing."
-	caliber = "a762"
-	projectile_type = /obj/item/projectile/bullet/a762/M392
+	caliber = "a762dmr"
+	projectile_type = /obj/item/projectile/bullet/a762_M392
 
 /obj/item/projectile/bullet/a762_ap
 	damage = 30
@@ -138,7 +139,7 @@
 	damage_type = PAIN
 	penetrating = 0
 
-/obj/item/projectile/bullet/a762/M392
+/obj/item/projectile/bullet/a762_M392
 	damage = 35
 	armor_penetration = 10
 
@@ -299,3 +300,28 @@
 /obj/item/weapon/storage/box/m5
 	name = "box of 5mm M443 magazines"
 	startswith = list(/obj/item/ammo_magazine/m5 = 7)
+
+//SDSS PROJECTILE
+/obj/item/projectile/SDSS_proj
+	name = "hard sound wave"
+	desc = "It's a wave of sound that's also suprisingly dense."
+	step_delay = 0.1
+	icon = null //No icon on purpose, it's a sound wave.
+	icon_state = ""
+	damtype = PAIN
+	damage = 40
+	//NOTE: Life() calls happen every two seconds, and life() reduces dizziness by one
+	var/stun_time = 2 //This is in seconds.
+	var/suppress_time = 4
+	var/disorient_time = 6
+
+/obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)
+	. = ..()
+	if(!istype(L) || !isliving(L) || isanimal(L))
+		return 0
+
+	L.Weaken(stun_time)
+	L.confused += disorient_time
+	shake_camera(L,disorient_time,2)
+	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
+	return 1
