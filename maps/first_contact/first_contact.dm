@@ -4,6 +4,8 @@
 
 	#include "../first_contact/maps/faction_bases/base_areas.dm"
 
+	#include "../first_contact/maps/faction_bases/faction_spawns.dm"
+
 	#include "../first_contact/maps/faction_bases/Covenant_Station.dmm"
 
 	#include "../first_contact/maps/faction_bases/Human_Station_1.dmm"

@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 
 /datum/spawnpoint/cov_base
 	display_name =  "Covenant Base Spawns"
-	restrict_job = list()
+	//restrict_job = list()
 
 /datum/spawnpoint/cov_base/New()
 	..()
@@ -20,7 +20,7 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 
 /datum/spawnpoint/unsc_base
 	display_name =  "UNSC Base Spawns"
-	restrict_job = list()
+//	restrict_job = list()
 
 /datum/spawnpoint/unsc_base/New()
 	..()
@@ -37,7 +37,7 @@ GLOBAL_LIST_EMPTY(innie_base_spawns)
 
 /datum/spawnpoint/innie_base
 	display_name =  "Innie Base Spawns"
-	restrict_job = list()
+//	restrict_job = list()
 
 /datum/spawnpoint/innie_base/New()
 	..()

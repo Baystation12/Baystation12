@@ -31,9 +31,9 @@
 "aE" = (/turf/space,/area/kigyar_pirate/pulse_lasers)
 "aF" = (/obj/machinery/light/covenant/south,/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "aG" = (/obj/machinery/door/airlock/multi_tile/covenant,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
-"aH" = (/obj/machinery/deck_gun/cov_pulse_turret{tag = "icon-pulse_turret_2"; icon_state = "pulse_turret_2"; dir = 4},/turf/space,/area/kigyar_pirate/pulse_lasers)
-"aI" = (/obj/machinery/door/airlock/covenant{name = "Port Engine Room"},/turf/simulated/floor/covenant,/area/kigyar_pirate)
-"aJ" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/power/shield_generator{field_radius = 50; shield_modes = 65},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
+"aH" = (/obj/machinery/door/airlock/covenant{name = "Port Engine Room"},/turf/simulated/floor/covenant,/area/kigyar_pirate)
+"aI" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/power/shield_generator{field_radius = 50; shield_modes = 65},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
+"aJ" = (/obj/machinery/deck_gun/cov_pulse_turret{tag = "icon-pulse_turret_2"; icon_state = "pulse_turret_2"; dir = 4},/turf/space,/area/kigyar_pirate/pulse_lasers)
 "aK" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "aL" = (/obj/machinery/power/smes/batteryrack,/obj/machinery/light/covenant/north,/obj/structure/cable/blue{dir = 1},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "aM" = (/obj/machinery/power/smes/batteryrack,/obj/structure/cable/blue{dir = 1},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
@@ -99,9 +99,10 @@
 "bU" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (WEST)"; icon_state = "window"; dir = 8},/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "bV" = (/obj/structure/closet/crate/covenant{name = "Covenant Medical Supplies"},/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "bW" = (/obj/structure/closet/crate/covenant{name = "Point Defense Gauntlets Crate"},/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
-"bX" = (/obj/structure/closet/crate/covenant{name = "Type-51 Carbine Crate"},/obj/item/weapon/gun/projectile/type51carbine,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
-"bY" = (/obj/effect/landmark/map_data{name = "Kig-Yar Raider"},/turf/space,/area/space)
-"bZ" = (/obj/effect/overmap/ship/kigyar_pirates,/turf/space,/area/space)
+"bX" = (/obj/structure/closet/crate/covenant{name = "Ammo Belt Crate"},/obj/item/weapon/storage/belt/covenant_ammo,/obj/item/weapon/storage/belt/covenant_ammo,/obj/item/weapon/storage/belt/covenant_ammo,/obj/item/weapon/storage/belt/covenant_ammo,/obj/item/weapon/storage/belt/covenant_ammo,/obj/item/weapon/storage/belt/covenant_ammo,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
+"bY" = (/obj/structure/closet/crate/covenant{name = "Type-51 Carbine Crate"},/obj/item/weapon/gun/projectile/type51carbine,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
+"bZ" = (/obj/effect/landmark/map_data{name = "Kig-Yar Raider"},/turf/space,/area/space)
+"ca" = (/obj/effect/overmap/ship/kigyar_pirates,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -148,8 +149,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauavabaiaiaiabaiaiaiab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayabaiaiaiabaiaiaiabaiaiaiazaAaiaiaiaiaiaiaAababaiamaiaiaiaiaiaiakaiaiaiaiakababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayaBaiaiaiaBaiaiaiabaraiajabababababababababababaCaiaiaDaiamaAazaiaiaiazaiaiababababaEaEababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayabaiaiaiabaiaiaiabaiaiaiaiaiakababababababababababababababababababababaiaiababababaEaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaFabaiaiaiabaiaiaiabababababaiaiababababababababababababababababababababaGaiababababaHaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaiaAaiabaiaAaiaIaiaJababaiaiakaiaiaiaiaiakaiaiaiaiaiakaiaiaiaiaiakaiaiaiakabababaHaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaFabaiaiaiabaiaiaiabababababaiaiababababababababababababababababababababaGaiababababaEaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaiaAaiabaiaAaiaHaiaIababaiaiakaiaiaiaiaiakaiaiaiaiaiakaiaiaiaiaiakaiaiaiakabababaJaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababaiaKababaiaiazaiaiaAaiaAaiaiaiazaiaiaiaiaiaiaiaiaiazaiaiaiabababaEaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababaLaMaiaKababaGaiababababaNabababababaGaiababaOababababababaiaiababababaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayaiakaiabaPaQaiaRababaiaiababaSaTaiaUaUaVababaiaiabaWaXaYabaZabababaAaibaaiakabbbafbcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -159,15 +160,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayaiaiaiabaiaK
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayaiaAaiabbobpbqbrababaiaiababbsbtaibubvbwababaiaiabbxaXbyabbzabababakaibaaiaAabaeafbAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababbBbCaiaKababaGaiababababaNabababababaGaiababaOababababababaiaiababababaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababaibDababaiaiaiaiaiakaiakaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiabababaEaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaiakaiabaiakaibEaibFababaAaiazaiaiaiaiaiaAaiaiazaiaiaiaiaAaiaiaibdaAaiaiaAabababaHaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayabaiaiaiabaiaiaiabababababababababababababababababababaGaiababababababababababababaHaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaiakaiabaiakaibEaibFababaAaiazaiaiaiaiaiaAaiaiazaiaiaiaiaAaiaiaibdaAaiaiaAabababaJaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayabaiaiaiabaiaiaiabababababababababababababababababababaGaiababababababababababababaEaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayabaiaiaiabaiaiaiabababababababababababababababababababaiaiababababababababababababaEaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaybGaiaiaibGaiaiajabababababakaiaiaiaiaiakaiaiaiaiakaiaiaiaiaiakbHbIbJbKbLakababababaEaEababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauayabaiaiaiabaiaiaiabababababaiaiaiaiaiaiaiaiaiaiaiaiaiazaiaAazaiaiaiaiaiaiaiababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauaFabaiaiaiabaiaiaiabababababababbMabababbNabababbNababababababaGaiabbOabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaiaAaiabaiaAaqabababababbPakaiakbMakaiakbNakaiakabababababaiaibQaibRaibSababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababbTaiaiapabalaialabalaialabababababaAaibUaAaiaibVabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababbWaiaibXabalaialabalaialababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababbWaibXbYabalaialabalaialababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaeafagabadabababadabababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -202,6 +203,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 bZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+caaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
