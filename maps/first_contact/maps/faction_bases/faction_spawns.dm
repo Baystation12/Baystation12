@@ -20,7 +20,9 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 
 /datum/spawnpoint/unsc_base
 	display_name =  "UNSC Base Spawns"
-//	restrict_job = list()
+	restrict_job = list("Orbital Drop Shock Trooper","Orbital Drop Shock Trooper Officer","UNSC Bertels Ship Crew",
+	"UNSC Bertels Hospital Corpsman","UNSC Bertels Commanding Officer","UNSC Bertels Executive Officer","UNSC Marine","UNSC Marine Platoon Leader",
+	"Orbital Drop Shock Trooper","Orbital Drop Shock Trooper Officer")
 
 /datum/spawnpoint/unsc_base/New()
 	..()
@@ -37,7 +39,7 @@ GLOBAL_LIST_EMPTY(innie_base_spawns)
 
 /datum/spawnpoint/innie_base
 	display_name =  "Innie Base Spawns"
-//	restrict_job = list()
+	restrict_job = list("Insurrectionist Ship Crew","Insurrectionist Ship Captain")
 
 /datum/spawnpoint/innie_base/New()
 	..()
@@ -48,4 +50,4 @@ GLOBAL_LIST_EMPTY(innie_base_spawns)
 
 /obj/effect/landmark/start/innie_base/New()
 	..()
-	GLOB.unsc_base_spawns += loc
+	GLOB.innie_base_spawns += loc
