@@ -127,7 +127,7 @@
 			if(request.request_requires_processing)
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
-			return
+			return ..()
 		if(loc == target_loc)
 			pick_target_loc()
 		else
@@ -136,8 +136,11 @@
 			dir = get_dir(src,target_loc)
 			is_still() //A way to ensure umbilicals break when we move.
 	else
-		target_loc = null
-		walk(src,0)
+		if(is_player_controlled())
+			. = ..()
+		if(target_loc)
+			walk(src,0)
+			target_loc = null
 
 /obj/effect/overmap/ship/npc_ship/proc/broadcast_hit(var/ship_disabled = 0)
 	var/message_to_use = pick(messages_on_hit)
@@ -194,11 +197,12 @@
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		var/z_to_load_at = shipmap_handler.get_next_usable_z()
 		shipmap_handler.un_free_map(z_to_load_at)
+		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
 		create_lighting_overlays_zlevel(z_to_load_at)
+		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
+		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
-	for(var/zlevel in map_z)
-		map_sectors["[zlevel]"] = src
 	damage_spawned_ship()
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	GLOB.processing_objects += src
@@ -263,7 +267,7 @@
 	var/list/mapfile_links = list('maps/civ_hauler/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
-	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile.
+	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile. Format: Topleft-x,Topleft-y,bottomright-x,bottomright-y
 
 /datum/npc_ship/ccv_star
 	mapfile_links = list('maps/overmap_ships/CCV_Star.dmm')

@@ -13,10 +13,13 @@
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
 	linked = map_sectors["[z]"]
+
+/obj/machinery/computer/helm/LateInitialize()
 	get_known_sectors()
 
 /obj/machinery/computer/helm/proc/get_known_sectors()
-	if(linked && istype(linked,/obj/effect/overmap/ship) && linked.nav_comp)
+	known_sectors.Cut()
+	if(linked && linked.nav_comp)
 		known_sectors = linked.nav_comp.get_known_sectors()
 		return
 	//Original Code left to ensure backwards compatibility
@@ -31,6 +34,8 @@
 	..()
 
 /obj/machinery/computer/helm/process()
+	if(!linked)
+		linked = map_sectors["[z]"]
 	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
@@ -62,6 +67,9 @@
 	return 0
 
 /obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
+	if(!linked)
+		linked = map_sectors["[z]"]
+	get_known_sectors()
 	if(..())
 		user.unset_machine()
 		manual_control = 0
@@ -195,6 +203,7 @@
 
 /obj/machinery/computer/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		linked = map_sectors["[z]"]
 		return
 
 	var/data[0]

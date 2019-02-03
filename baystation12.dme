@@ -1547,6 +1547,7 @@
 #include "code\modules\halo\misc\gas_geyser.dm"
 #include "code\modules\halo\misc\Hunting Rocks.dm"
 #include "code\modules\halo\misc\huragok.dm"
+#include "code\modules\halo\misc\language_teacher.dm"
 #include "code\modules\halo\misc\memorial_statue.dm"
 #include "code\modules\halo\misc\Orion Project.dm"
 #include "code\modules\halo\misc\payload.dm"
