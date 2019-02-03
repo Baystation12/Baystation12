@@ -11,6 +11,7 @@
 	hitscan = 1
 	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 	penetration_modifier = 0.3
+	distance_falloff = 2.5
 
 	muzzle_type = /obj/effect/projectile/laser/muzzle
 	tracer_type = /obj/effect/projectile/laser/tracer
@@ -28,6 +29,7 @@
 /obj/item/projectile/beam/midlaser
 	damage = 50
 	armor_penetration = 20
+	distance_falloff = 1
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
@@ -35,6 +37,7 @@
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	damage = 60
 	armor_penetration = 30
+	distance_falloff = 0.5
 
 	muzzle_type = /obj/effect/projectile/laser/heavy/muzzle
 	tracer_type = /obj/effect/projectile/laser/heavy/tracer
@@ -214,6 +217,7 @@
 	check_armour = "laser"
 	kill_count = 5
 	pass_flags = PASS_FLAG_TABLE
+	distance_falloff = 4
 
 	muzzle_type = /obj/effect/projectile/trilaser/muzzle
 	tracer_type = /obj/effect/projectile/trilaser/tracer

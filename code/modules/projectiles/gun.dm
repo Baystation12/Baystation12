@@ -61,7 +61,9 @@
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/silenced = 0
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
-	var/scoped_accuracy = null
+	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
+	var/last_handled		//time when hand gun's in became active, for purposes of aiming bonuses
+	var/scoped_accuracy = null  //accuracy used when zoomed in a scope
 	var/scope_zoom = 0
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
@@ -284,25 +286,21 @@
 	if(one_hand_penalty)
 		if(!src.is_held_twohanded(user))
 			switch(one_hand_penalty)
-				if(1)
+				if(4 to 6)
 					if(prob(50)) //don't need to tell them every single time
 						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
-				if(2)
-					to_chat(user, "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>")
-				if(3)
+				if(6 to 8)
 					to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
-				if(4 to INFINITY)
+				if(8 to INFINITY)
 					to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
 		else if(!user.can_wield_item(src))
 			switch(one_hand_penalty)
-				if(1)
+				if(4 to 6)
 					if(prob(50)) //don't need to tell them every single time
 						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
-				if(2)
-					to_chat(user, "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>")
-				if(3)
+				if(6 to 8)
 					to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
-				if(4 to INFINITY)
+				if(8 to INFINITY)
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
@@ -340,35 +338,38 @@
 
 	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
-	var/stood_still = round((world.time - user.l_move_time)/15)
-	if(stood_still)
-		acc_mod += min(2, stood_still)
-		if(stood_still > 5)
-			acc_mod += accuracy
+	var/stood_still = last_handled
+	//Not keeping gun active will throw off aim (for non-Masters)
+	if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
+		stood_still = min(user.l_move_time, last_handled)
+	else
+		stood_still = max(user.l_move_time, last_handled)
 
-	if(one_hand_penalty)
-		if(!stood_still)
-			acc_mod -= 1
-		if(!held_twohanded)
-			acc_mod += -ceil(one_hand_penalty/2)
-			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
+	stood_still = max(0,round((world.time - stood_still)/10) - 1)
+	if(stood_still)
+		acc_mod += min(max(2, accuracy), stood_still)
+	else if(w_class > ITEM_SIZE_NORMAL)
+		acc_mod -= 2*w_class - ITEM_SIZE_NORMAL
+
+	if(one_hand_penalty >= 4 && !held_twohanded)
+		acc_mod -= one_hand_penalty/2
+		disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
 
 	if(burst > 1 && !user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
 		acc_mod -= 1
 		disp_mod += 0.5
-
-	//Accuracy modifiers
-	P.accuracy = accuracy + acc_mod
-	P.dispersion = disp_mod
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
-		P.accuracy += 2
+		acc_mod += 2
 
-	P.accuracy += user.ranged_accuracy_mods()
+	acc_mod += user.ranged_accuracy_mods()
+	acc_mod += accuracy
+	P.hitchance_mod = accuracy_power*acc_mod
+	P.dispersion = disp_mod
 
 //does the actual launching of the projectile
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
@@ -459,7 +460,6 @@
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
 	var/zoom_offset = round(world.view * zoom_amount)
 	var/view_size = round(world.view + zoom_amount)
-	var/scoped_accuracy_mod = zoom_offset
 
 	if(zoom)
 		unzoom(user)
@@ -467,7 +467,7 @@
 
 	zoom(user, zoom_offset, view_size)
 	if(zoom)
-		accuracy = scoped_accuracy + scoped_accuracy_mod
+		accuracy = scoped_accuracy
 		if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
 			accuracy += 2
 		if(screen_shake)
@@ -539,9 +539,13 @@
 /obj/item/weapon/gun/proc/safety()
 	return has_safety && safety_state
 
-/obj/item/weapon/gun/attack_hand()
+/obj/item/weapon/gun/equipped()
 	..()
 	update_icon()
+	last_handled = world.time
+
+/obj/item/weapon/gun/on_active_hand()
+	last_handled = world.time
 
 /obj/item/weapon/gun/on_disarm_attempt(mob/target, mob/attacker)
 	var/list/turfs = list()

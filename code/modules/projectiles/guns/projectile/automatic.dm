@@ -73,7 +73,8 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	one_hand_penalty = 1
+	accuracy = 2
+	one_hand_penalty = 4
 
 	//SMG
 	firemodes = list(
@@ -103,7 +104,8 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
 	allowed_magazines = /obj/item/ammo_magazine/rifle
-	one_hand_penalty = 3
+	accuracy = 0
+	one_hand_penalty = 8
 	wielded_item_state = "arifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
@@ -171,12 +173,13 @@
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	one_hand_penalty = 5
+	accuracy = 1
+	accuracy_power = 7
+	one_hand_penalty = 8
 	burst_delay = 4
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
-	//would have one_hand_penalty=4,5 but the added weight of a grenade launcher makes one-handing even harder
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1,    fire_delay=0,    move_delay=null, use_launcher=null, one_hand_penalty=5, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=6, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
@@ -244,7 +247,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/box/machinegun
 	allowed_magazines = list(/obj/item/ammo_magazine/box/machinegun, /obj/item/ammo_magazine/rifle)
-	one_hand_penalty = 6
+	one_hand_penalty = 10
 	wielded_item_state = "gun_wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'

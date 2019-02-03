@@ -13,6 +13,9 @@
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
+	accuracy = 2
+	accuracy_power = 8
+	one_hand_penalty = 2
 
 /obj/item/weapon/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
@@ -48,6 +51,7 @@
 	caliber = CALIBER_PISTOL
 	ammo_type = /obj/item/ammo_casing/pistol
 	desc = "The Lumoco Arms' Solid is a rugged revolver for people who don't keep their guns well-maintained."
+	accuracy = 1
 
 /obj/item/weapon/gun/projectile/revolver/holdout
 	name = "holdout revolver"
@@ -57,6 +61,8 @@
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	w_class = ITEM_SIZE_SMALL
+	accuracy = 1
+	one_hand_penalty = 0
 
 /obj/item/weapon/gun/projectile/revolver/capgun
 	name = "cap gun"
