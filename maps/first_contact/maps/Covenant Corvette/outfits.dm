@@ -2,10 +2,11 @@
 	name = "Kig-Yar Corvette Crew"
 
 	l_ear = /obj/item/device/radio/headset/covenant
-	uniform = null
-	shoes = null
-	head = null
-	suit = null
+	uniform = /obj/item/clothing/under/kigyar
+	suit = /obj/item/clothing/suit/armor/kigyar
+	head = /obj/item/clothing/head/helmet/kigyar
+	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
+	l_hand = /obj/item/language_learner/kigyar_to_common
 
 	flags = 0
 
