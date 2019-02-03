@@ -43,7 +43,6 @@ var/list/points_of_interest = list()
 	. = ..()
 
 /obj/effect/overmap/Initialize()
-
 	. = ..()
 	setup_object()
 
@@ -182,12 +181,12 @@ var/list/points_of_interest = list()
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map/)
+			GLOB.overmap_tiles_uncontrolled += T
 		T.lighting_clear_overlay()
 		turfs += T
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
-	GLOB.overmap_tiles_uncontrolled = turfs
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 

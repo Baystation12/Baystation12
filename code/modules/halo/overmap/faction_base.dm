@@ -4,6 +4,7 @@
 	desc = "The base of a faction."
 	icon = 'code/modules/halo/icons/overmap/faction_bases.dmi'
 	faction = "faction_base" //This should be changed for each faction base overmap object.
+	var/do_ship_relocates = 1
 	var/spawn_defenses_amount = 4
 	var/spawn_defenses_maxrange = 2
 	var/list/ships_spawnnear = list() //Exact typepath of the ship
@@ -21,23 +22,25 @@
 		var/obj/effect/overmap/spawned = new defense_type (loc_spawnat)
 		spawned.faction = faction
 
-/obj/effect/overmap/ship/faction_base/LateInitialize()
+/obj/effect/overmap/ship/faction_base/process()
 	. = ..()
-	for(var/typepath in ships_spawnnear)
-		var/obj/effect/overmap/om = locate(typepath)
-		if(isnull(om))
-			continue
-		var/list/spawn_locs = list()
-		for(var/turf/t in range(spawn_defenses_maxrange,loc))
-			spawn_locs += t
-		om.forceMove(pick(range(1,loc)))
+	if(do_ship_relocates)
+		do_ship_relocates = 0
+		for(var/name in ships_spawnnear)
+			var/obj/effect/overmap/om = locate(name)
+			if(isnull(om))
+				continue
+			var/list/spawn_locs = list()
+			for(var/turf/t in range(1,loc))
+				spawn_locs += t
+			om.forceMove(pick(spawn_locs))
 
 /obj/effect/overmap/ship/faction_base/cov
 	name = "Lesser Charity"
 	icon_state = "base_cov"
 	faction = "covenant"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
-	ships_spawnnear = list("SDV Vindictive Infraction")
+	ships_spawnnear = list("SDV Vindictive Infraction","Kig-Yar Raider")
 
 /obj/effect/overmap/ship/faction_base/unsc
 	name = "Deviance Station"
