@@ -123,6 +123,7 @@
 	var/obj/item/nav_data_chip/fragmented/f = data_chip
 	if(istype(f) && f.fragments_have == 999)
 		f.fragment_chip()
+	. = ..()
 
 /obj/item/nav_data_chip
 	name = "\improper Nav data-chip"
@@ -163,7 +164,7 @@
 
 /obj/item/nav_data_chip/fragmented/examine(var/mob/examiner)
 	. = ..()
-	to_chat(examiner,"<span class = 'notice'>This chip has been corrupted by automatic mechnisms. Scan other fragmented chips on this one to reconstruct the full chip.</span>")
+	to_chat(examiner,"<span class = 'notice'>This chip has embedded automatic corruption mechanisms, triggered by removal from the nav computer it resides in. Scan other fragmented chips on this one to reconstruct the full chip.</span>")
 
 /obj/item/nav_data_chip/fragmented/get_faction()
 	if(is_fragmented())
