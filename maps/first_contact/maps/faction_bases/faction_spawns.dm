@@ -43,7 +43,7 @@ GLOBAL_LIST_EMPTY(innie_base_spawns)
 
 /datum/spawnpoint/innie_base/New()
 	..()
-	turfs = GLOB.unsc_base_spawns
+	turfs = GLOB.innie_base_spawns
 
 /obj/effect/landmark/start/innie_base
 	name = "Innie Base Spawns"
