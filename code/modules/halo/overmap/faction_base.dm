@@ -10,7 +10,7 @@
 
 /obj/effect/overmap/ship/faction_base/Initialize()
 	. = ..()
-	var/list/spawn_locs = range(spawn_defenses_maxrange,src)
+	var/list/spawn_locs = range(spawn_defenses_maxrange,loc)
 	var/iter = 0
 	for(iter = 0; iter <= spawn_defenses_amount;iter++)
 		var/loc_spawnat = pick(spawn_locs)

@@ -17,7 +17,7 @@
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
 	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(defense_range,src)
+	GLOB.overmap_tiles_uncontrolled -= range(defense_range*2,src)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	. = ..()
@@ -34,6 +34,7 @@
 	var/next_fire_at = 0
 
 /datum/npc_ship_request/automated_defense_process/do_request_process(var/obj/effect/overmap/ship/npc_ship/automated_defenses/ship_source) //Return 1 in this to stop normal NPC ship move processing.
+	. = 1
 	if(!istype(ship_source))
 		return 0
 	var/list/in_range = range(ship_source.defense_range,ship_source)
@@ -43,6 +44,10 @@
 	if(current_target)
 		current_target.overlays.Cut()
 		if(current_target in in_range)
+			if(current_target.get_faction() == ship_source.get_faction())
+				previous_target = current_target
+				current_target = null
+				return
 			if(start_target_fire_at != 0 && world.time > start_target_fire_at)
 				firing_on_target = 1
 				current_target.overlays += icon('icons/effects/Targeted.dmi',"locked")
@@ -67,18 +72,18 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(!istype(ship,/obj/effect/overmap/ship/faction_base && ship.get_faction() != ship_source.get_faction()))
+			if(!istype(ship,/obj/effect/overmap/ship/faction_base) && ship.get_faction() != ship_source.get_faction())
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
-			return 1
+			previous_target = current_target
+			current_target = null
+			return
 		current_target = pick(unauthed_ships)
 		var/obj/effect/overmap/ship/npc_ship/npc = current_target
 		if(istype(npc))
 			npc.ship_targetedby_defenses()
 		if(current_target == previous_target)
 			start_target_fire_at = world.time //Don't need to lock on again if it's the same ship.
-
-	return 1
 
 /obj/item/projectile/overmap/auto_defense_proj
 	name = "SMAC Round"
