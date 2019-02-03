@@ -99,14 +99,13 @@
 	//Ripped from Helm.dm get_known_sectors()
 	var/list/known_sector_records = list()
 	var/area/overmap/map = locate() in world
-	for(var/obj/effect/overmap/sector/S in map)
+	for(var/obj/effect/overmap/S in map)
 		var/add_sector = 0
 		if (known_sector_list.len > 0)
 			if(S.name in known_sector_list)
 				add_sector = 1
-		else
-			if(S.known)
-				add_sector = 1
+		if(S.known && known_sector_list.len == 0)
+			add_sector = 1
 
 		if(add_sector)
 			var/datum/data/record/R = new()
@@ -114,6 +113,7 @@
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
 			known_sector_records[S.name] = R
+
 	return known_sector_records
 
 /obj/machinery/nav_computer/npc
@@ -219,6 +219,9 @@
 	chip_faction = "covenant"
 	known_sectors = list("Lesser Charity","KS7-535")
 
+/obj/item/nav_data_chip/fragmented/covenant/kig_yar
+	known_sectors = list("Lesser Charity","Asteroid","KS7-535")
+
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "innie"
@@ -230,6 +233,10 @@
 /obj/machinery/nav_computer/npc/covenant
 	icon_state = "cov_nav"
 	data_chip = new /obj/item/nav_data_chip/fragmented/covenant
+
+/obj/machinery/nav_computer/npc/covenant/kig_yar
+	icon_state = "cov_nav"
+	data_chip = new /obj/item/nav_data_chip/fragmented/covenant/kig_yar
 
 /obj/machinery/nav_computer/npc/innie
 	data_chip = new /obj/item/nav_data_chip/fragmented/innie
