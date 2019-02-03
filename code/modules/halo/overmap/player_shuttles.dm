@@ -55,6 +55,7 @@
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft
 	name = "Shuttle Craft"
+	vessel_mass = 1
 	default_delay = 3 SECONDS //double the speed of a normal ship.
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/generate_ship_name()

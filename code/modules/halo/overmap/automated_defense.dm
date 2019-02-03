@@ -103,8 +103,8 @@
 	kill_count = 999
 
 /obj/item/projectile/auto_defense_proj/check_penetrate(var/atom/A)
-	. = ..()
 	explosion(A.loc,5,10,15,30)
+	. = ..()
 
 /obj/item/projectile/auto_defense_proj/covenant
 	name = "glassing beam"
