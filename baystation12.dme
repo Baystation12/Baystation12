@@ -840,6 +840,7 @@
 #include "code\game\objects\items\latexballoon.dm"
 #include "code\game\objects\items\paintkit.dm"
 #include "code\game\objects\items\plunger.dm"
+#include "code\game\objects\items\rescuebag.dm"
 #include "code\game\objects\items\shooting_range.dm"
 #include "code\game\objects\items\toys.dm"
 #include "code\game\objects\items\trash.dm"

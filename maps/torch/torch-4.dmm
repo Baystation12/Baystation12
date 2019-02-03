@@ -11236,6 +11236,7 @@
 	pixel_y = 4
 	},
 /obj/item/stack/nanopaste,
+/obj/item/bodybag/rescue/loaded,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "aMC" = (
@@ -18095,6 +18096,7 @@
 	pixel_y = 0
 	},
 /obj/item/auto_cpr,
+/obj/item/bodybag/rescue/loaded,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "eRQ" = (
@@ -24711,6 +24713,7 @@
 	},
 /obj/item/auto_cpr,
 /obj/item/auto_cpr,
+/obj/item/bodybag/rescue/loaded,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "moh" = (

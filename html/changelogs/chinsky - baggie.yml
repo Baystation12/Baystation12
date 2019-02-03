@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Added rescue bags. Work like bodybags, but provide atmosphere from attached gas tank. Will set internal atmosphere of the bag to tank's release pressure. Use screwdriver to remove tank."
