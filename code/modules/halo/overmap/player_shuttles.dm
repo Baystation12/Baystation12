@@ -45,6 +45,9 @@
 	user.visible_message("<span class = 'notice'>[user] starts requisitioning a [ship_type_name] from [src]...</span>")
 	if(!do_after(user,SHUTTLE_REQ_DELAY,user))
 		return
+	if(world.time < next_shuttle_at)
+		to_chat(user,"<span class = 'notice'>[ship_type_name] are undergoing refit, currently unavailable.</span>")
+		return
 	user.visible_message("<span class = 'notice'>[user] requisitions a [ship_type_name] from [src].</span>")
 	visible_message("<span class = 'notice'>[src] announces: \"[ship_type_name] Requisitioned. Connect umbilical for access.\"</span>")
 	spawn_shuttlecraft()

@@ -53,7 +53,10 @@
 		else
 			start_target_fire_at = 0
 
-	if(firing_on_target && current_target.get_faction() != ship_source.get_faction())
+	if(firing_on_target)
+		if(current_target.get_faction() == ship_source.get_faction())
+			current_target = null
+			return
 		if(world.time > next_fire_at)
 			var/obj/item/projectile/overmap/fired = new ship_source.proj_fired (ship_source.loc)
 			fired.permutated = ship_source
@@ -64,7 +67,7 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(ship.get_faction() != ship_source.get_faction() && !istype(ship,/obj/effect/overmap/ship/faction_base))
+			if(!istype(ship,/obj/effect/overmap/ship/faction_base && ship.get_faction() != ship_source.get_faction()))
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
 			return 1
