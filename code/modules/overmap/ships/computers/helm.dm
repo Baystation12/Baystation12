@@ -203,6 +203,7 @@
 
 /obj/machinery/computer/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		linked = map_sectors["[z]"]
 		return
 
 	var/data[0]
