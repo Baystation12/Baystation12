@@ -1301,9 +1301,9 @@
 /area/casino/casino_security)
 "dB" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dC" = (

@@ -311,10 +311,10 @@
 	icon_state = "45-10"
 
 /obj/random/ammo/spawn_choices()
-	return list(/obj/item/weapon/storage/box/beanbags = 6,
-				/obj/item/weapon/storage/box/shotgunammo = 2,
-				/obj/item/weapon/storage/box/shotgunshells = 4,
-				/obj/item/weapon/storage/box/stunshells = 1,
+	return list(/obj/item/weapon/storage/box/ammo/beanbags = 6,
+				/obj/item/weapon/storage/box/ammo/shotgunammo = 2,
+				/obj/item/weapon/storage/box/ammo/shotgunshells = 4,
+				/obj/item/weapon/storage/box/ammo/stunshells = 1,
 				/obj/item/ammo_magazine/pistol = 2,
 				/obj/item/ammo_magazine/smg_top = 2,
 				/obj/item/ammo_magazine/smg_top/rubber = 6,
