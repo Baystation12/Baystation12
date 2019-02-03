@@ -54,7 +54,7 @@
 "bb" = (/obj/machinery/door/airlock/multi_tile/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bc" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bd" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
-"be" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/payload/covenant{anchored = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
+"be" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/payload/covenant{anchored = 1; free_explode = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bf" = (/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/machinery/shuttle_spawner/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bg" = (/obj/structure/bed/chair/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bh" = (/obj/docking_umbilical/covenant/west,/turf/simulated/wall/covenant,/area/faction_base/cov)
