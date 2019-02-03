@@ -33,6 +33,8 @@
 
 	#include "../first_contact/maps/Covenant Corvette/includes.dm"
 
+	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
+
 	#include "maps/ccv_star_spawns.dm"
 	#include "maps/CCV_Star.dmm"
 

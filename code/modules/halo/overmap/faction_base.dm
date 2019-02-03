@@ -11,7 +11,9 @@
 
 /obj/effect/overmap/ship/faction_base/Initialize()
 	. = ..()
-	var/list/spawn_locs = range(spawn_defenses_maxrange,loc)
+	var/list/spawn_locs = list()
+	for(var/turf/t in range(spawn_defenses_maxrange,loc))
+		spawn_locs += t
 	var/iter = 0
 	for(iter = 0; iter <= spawn_defenses_amount;iter++)
 		var/loc_spawnat = pick(spawn_locs)
@@ -25,6 +27,9 @@
 		var/obj/effect/overmap/om = locate(typepath)
 		if(isnull(om))
 			continue
+		var/list/spawn_locs = list()
+		for(var/turf/t in range(spawn_defenses_maxrange,loc))
+			spawn_locs += t
 		om.forceMove(pick(range(1,loc)))
 
 /obj/effect/overmap/ship/faction_base/cov
@@ -32,18 +37,18 @@
 	icon_state = "base_cov"
 	faction = "covenant"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
-	ships_spawnnear = list(/obj/effect/overmap/ship/covenant_corvette)
+	ships_spawnnear = list("SDV Vindictive Infraction")
 
 /obj/effect/overmap/ship/faction_base/unsc
 	name = "Deviance Station"
 	icon_state = "base_unsc"
 	faction = "unsc"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
-	ships_spawnnear = list(/obj/effect/overmap/ship/odst_corvette)
+	ships_spawnnear = list("UNSC Bertels")
 
 /obj/effect/overmap/ship/faction_base/innie
 	name = "Camp New Hope"
 	icon_state = "base_innie"
 	faction = "innie"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/innie
-	ships_spawnnear = list(/obj/effect/overmap/ship/urfcommando_prowler,/obj/effect/overmap/ship/unsc_corvette)
+	ships_spawnnear = list("URFS Thorn","URFS Avarice")
