@@ -203,7 +203,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 
-	PrivUpdateListenerLoc(listener, TRUE)
+	PrivUpdateListenerLoc(listener, FALSE)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
 	null_sound = null_sound || new(channel = sound.channel)
@@ -212,7 +212,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
-/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = FALSE)
+/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
 	var/turf/source_turf = get_turf(source)
 	var/turf/listener_turf = get_turf(listener)
 
@@ -238,7 +238,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	for(var/listener in listeners)
 		PrivUpdateListener(listener)
 
-/datum/sound_token/proc/PrivUpdateListener(var/listener, var/update_sound = FALSE)
+/datum/sound_token/proc/PrivUpdateListener(var/listener, var/update_sound = TRUE)
 	sound.environment = PrivGetEnvironment(listener)
 	sound.status = status|listener_status[listener]
 	if(update_sound)
