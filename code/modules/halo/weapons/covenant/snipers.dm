@@ -78,3 +78,30 @@
 	else
 		update_next_allowed_fire()
 		. = ..()
+
+obj/item/weapon/gun/projectile/type31needlerifle
+	name = "Type-31 Needle Rifle"
+	desc = "A unique combination of the Type-33 and Type-51."
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon_state = "Needle rifle"
+	item_state = "Needle rifle"
+	slot_flags = SLOT_BACK
+	fire_sound = 'code/modules/halo/sounds/cov_needlerifle_fire.ogg'
+	magazine_type = /obj/item/ammo_magazine/rifleneedlepack
+	handle_casings = CLEAR_CASINGS
+	caliber = "needle_rifle"
+	load_method = MAGAZINE
+	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
+	one_hand_penalty = -1
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
+/obj/item/weapon/gun/projectile/type31needlerifle/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.25)
