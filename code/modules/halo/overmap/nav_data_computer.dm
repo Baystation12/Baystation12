@@ -133,7 +133,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 	var/chip_faction = "unknown"
-	var/list/known_sectors = list()//This should contain the exact names of the sectors.
+	var/list/known_sectors = list("KS7-535")//This should contain the exact names of the sectors.
 
 /obj/item/nav_data_chip/examine(var/mob/examiner)
 	. = ..()
@@ -197,26 +197,32 @@
 
 /obj/item/nav_data_chip/unsc
 	chip_faction = "unsc"
+	known_sectors = list("Deviance Station","VT9-042","KS7-535")
 
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "covenant"
+	known_sectors = list("Lesser Charity","KS7-535")
 
 /obj/item/nav_data_chip/innie
 	chip_faction = "innie"
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/unsc
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "unsc"
+	known_sectors = list("Deviance Station","VT9-042","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/covenant
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "covenant"
+	known_sectors = list("Lesser Charity","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "innie"
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535")
 
 /obj/machinery/nav_computer/npc/unsc
 	data_chip = new /obj/item/nav_data_chip/fragmented/unsc

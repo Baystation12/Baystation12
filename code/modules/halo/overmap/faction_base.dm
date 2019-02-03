@@ -6,6 +6,7 @@
 	faction = "faction_base" //This should be changed for each faction base overmap object.
 	var/spawn_defenses_amount = 4
 	var/spawn_defenses_maxrange = 2
+	var/list/ships_spawnnear = list() //Exact typepath of the ship
 	var/obj/effect/overmap/ship/npc_ship/automated_defenses/defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses
 
 /obj/effect/overmap/ship/faction_base/Initialize()
@@ -18,20 +19,31 @@
 		var/obj/effect/overmap/spawned = new defense_type (loc_spawnat)
 		spawned.faction = faction
 
+/obj/effect/overmap/ship/faction_base/LateInitialize()
+	. = ..()
+	for(var/typepath in ships_spawnnear)
+		var/obj/effect/overmap/om = locate(typepath)
+		if(isnull(om))
+			continue
+		om.forceMove(pick(range(1,loc)))
+
 /obj/effect/overmap/ship/faction_base/cov
 	name = "Lesser Charity"
 	icon_state = "base_cov"
 	faction = "covenant"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
+	ships_spawnnear = list(/obj/effect/overmap/ship/covenant_corvette)
 
 /obj/effect/overmap/ship/faction_base/unsc
 	name = "Deviance Station"
 	icon_state = "base_unsc"
 	faction = "unsc"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
+	ships_spawnnear = list(/obj/effect/overmap/ship/odst_corvette)
 
 /obj/effect/overmap/ship/faction_base/innie
 	name = "Camp New Hope"
 	icon_state = "base_innie"
 	faction = "innie"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/innie
+	ships_spawnnear = list(/obj/effect/overmap/ship/urfcommando_prowler,/obj/effect/overmap/ship/unsc_corvette)
