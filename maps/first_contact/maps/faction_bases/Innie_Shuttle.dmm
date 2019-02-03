@@ -32,7 +32,7 @@
 "F" = (/obj/machinery/computer/engines{dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-nav (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "G" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "H" = (/obj/machinery/power/apc/infinite{dir = 4; icon_state = "apc0"; pixel_x = 32; tag = "icon-apc0 (EAST)"},/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
-"I" = (/obj/docking_umbilical/west,/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"I" = (/obj/docking_umbilical/east{pixel_x = 0},/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
 "J" = (/obj/machinery/nav_computer/npc/innie,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "K" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "L" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
