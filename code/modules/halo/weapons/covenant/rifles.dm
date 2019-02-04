@@ -7,7 +7,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	charge_meter = 1
-	max_shots = 60 //Less shots, more damage. Exactly 20 bursts.
+	max_shots = 120 //Less shots, more damage. Exactly 40 bursts.
 	burst = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
 	screen_shake = 0
