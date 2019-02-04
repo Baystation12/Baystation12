@@ -4,6 +4,7 @@
 	dir = NORTH
 	width = 2
 	var/covenant_secure = 0
+	maxhealth = 1200
 
 /obj/machinery/door/airlock/multi_tile/covenant/allowed(var/mob/m) //Covenant doors don't run on usual access cards. Internal tech scans the accesser.
 	if(covenant_secure)
@@ -28,6 +29,7 @@
 	icon = 'door96.dmi'
 	dir = NORTH
 	width = 3
+	maxhealth = 1500
 
 
 /obj/machinery/door/airlock/multi_tile/covenant/three/eastwest
@@ -41,6 +43,7 @@
 	icon = 'door128.dmi'
 	dir = NORTH
 	width = 4
+	maxhealth = 2000
 
 
 /obj/machinery/door/airlock/multi_tile/covenant/four/eastwest
