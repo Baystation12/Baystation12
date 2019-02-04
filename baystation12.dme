@@ -1545,6 +1545,7 @@
 #include "code\modules\halo\misc\gas_collector.dm"
 #include "code\modules\halo\misc\gas_collector_interact.dm"
 #include "code\modules\halo\misc\gas_geyser.dm"
+#include "code\modules\halo\misc\human_roomba.dm"
 #include "code\modules\halo\misc\Hunting Rocks.dm"
 #include "code\modules\halo\misc\huragok.dm"
 #include "code\modules\halo\misc\memorial_statue.dm"
