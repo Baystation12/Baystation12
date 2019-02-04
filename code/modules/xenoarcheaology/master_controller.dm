@@ -3,12 +3,13 @@
 	var/list/digsite_spawning_turfs = list()
 
 #define XENOARCH_SPAWN_CHANCE 0.5
-#define DIGSITESIZE_LOWER 4
-#define DIGSITESIZE_UPPER 12
-#define ARTIFACTSPAWNNUM_LOWER 6
-#define ARTIFACTSPAWNNUM_UPPER 12
+#define DIGSITESIZE_LOWER 20
+#define DIGSITESIZE_UPPER 40
+#define ARTIFACTSPAWNNUM_LOWER 24
+#define ARTIFACTSPAWNNUM_UPPER 48
 
 /datum/controller/game_controller/proc/SetupXenoarch()
+	set background = 1
 	for(var/turf/simulated/mineral/M in world)
 		if(!M.density)
 			continue

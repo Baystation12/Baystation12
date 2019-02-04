@@ -227,6 +227,15 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 		slot_l_hand_str = "flag_blue_left",
 		slot_r_hand_str = "flag_blue_right" )
 
+//DONATORS
+
+/obj/item/clothing/head/helmet/jiralhanae/boltersam
+	icon_state = "bolter_helm"
+/obj/item/clothing/suit/armor/jiralhanae/boltersam
+	icon_state = "bolter_armour"
+
+/obj/item/clothing/shoes/jiralhanae/boltersam
+	icon_state = "bolter_greaves"
 
 
 #undef JIRALHANAE_ICON_PATH_MOB

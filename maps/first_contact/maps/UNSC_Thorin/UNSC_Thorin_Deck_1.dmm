@@ -283,7 +283,7 @@
 "fw" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbay)
 "fx" = (/turf/simulated/floor/plating,/area/space)
 "fy" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/grille,/obj/structure/window/reinforced/projresist{dir = 4; icon_state = "rwindow"; tag = "icon-rwindow (WEST)"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
-"fz" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
+"fz" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/machinery/nav_computer/innie,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fA" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fB" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/table/standard,/obj/machinery/photocopier/faxmachine{department = "URFS Thorn"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fC" = (/obj/machinery/computer/telecomms/monitor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
@@ -306,7 +306,7 @@
 "fT" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist,/obj/structure/grille,/obj/structure/window/reinforced/projresist{dir = 4; icon_state = "rwindow"; tag = "icon-rwindow (WEST)"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fU" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fV" = (/obj/machinery/button/remote/blast_door{_wifi_id = "abull"; id = "abull"; name = "Bridge Shutters Blast Door Control"; pixel_x = 32},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
-"fW" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
+"fW" = (/obj/structure/table/standard,/obj/item/weapon/gun/energy/SDSR_10,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fX" = (/obj/structure/bed/chair{tag = "icon-chair_preview (NORTH)"; icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fY" = (/obj/machinery/button/toggle/alarm_button/corvettethorin,/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Bridge)
 "fZ" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Airlock"; req_access = newlist()},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Porthallway)
@@ -655,8 +655,8 @@
 "mE" = (/obj/structure/bed,/obj/item/weapon/bedsheet/orange,/turf/simulated/floor/plating{tag = "icon-dmg1"; icon_state = "dmg1"},/area/corvette/unscthorin/cells)
 "mF" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
 "mG" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
+"mH" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Thorn"},/turf/space,/area/space)
 "mI" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
-"Gm" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Thorn"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -757,7 +757,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-Gmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+mHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 mIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
