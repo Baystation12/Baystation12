@@ -11,10 +11,10 @@
 
 	#include "innie_base_areas.dm"
 	#include "innie_base_overmap.dm"
-	#include "innie_base4.dmm"
-	#include "innie_base3.dmm"
-	#include "innie_base2.dmm"
 	#include "innie_base1.dmm"
+	#include "innie_base2.dmm"
+	#include "innie_base3.dmm"
+	#include "innie_base4.dmm"
 
 
 

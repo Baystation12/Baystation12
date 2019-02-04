@@ -2,6 +2,7 @@
 #define OVERMAP_EDGE 2
 //Dimension of overmap (squares 4 lyfe)
 var/global/list/map_sectors = list()
+var/global/list/map_datas = list()
 
 /area/overmap/
 	name = "System Map"

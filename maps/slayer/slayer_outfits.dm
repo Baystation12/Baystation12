@@ -1,56 +1,33 @@
 
-/*Slayer outfits have a few restrictions to ensure that multiple species can be used.
-A slayer outfit will have to have a corresponding type for any species that is involved in a slayer gamemode
-The name of the outfit will need to be "[job name] [species name]"
- */
-
-/decl/hierarchy/outfit/job/slayer
-	name = "Neutral Team Slayer outfit"
-
-	flags = 0// Stops backpack from spawning on char's back.
-
-	uniform = /obj/item/clothing/under/utility//	/obj/item/clothing/under/unsc/odst
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
-	belt = /obj/item/weapon/grenade/frag/m9_hedp
-	gloves = /obj/item/clothing/gloves/thick/combat
-	shoes = /obj/item/clothing/shoes/marine
-	mask = /obj/item/clothing/mask/gas/syndicate
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/tank/emergency/oxygen
-	suit_store = /obj/item/weapon/gun/projectile/m6d_magnum
-
-/decl/hierarchy/outfit/job/slayer/neutral_spartan
-	name = "Spartan Slayer Spartan"
-	uniform = null
-	suit = /obj/item/clothing/suit/armor/special/spartan
-	head = /obj/item/clothing/head/helmet/spartan
-
-/decl/hierarchy/outfit/job/slayer/red_spartan
-	name = "Red Team Spartan Spartan" //Doubled "Spartan" is due to the jobname being "Red Team Spartan" and the species being "Spartan"
-	uniform = null
+/decl/hierarchy/outfit/spartan_two/red_team
+	name = "Red Team Spartan"
 	suit = /obj/item/clothing/suit/armor/special/spartan/red
 	head = /obj/item/clothing/head/helmet/spartan/red
 
-/decl/hierarchy/outfit/job/slayer/blue_spartan
-	name = "Blue Team Spartan Spartan"
+/decl/hierarchy/outfit/spartan_two/blue_team
+	name = "Blue Team Spartan"
 	uniform = null
 	suit = /obj/item/clothing/suit/armor/special/spartan/blue
 	head = /obj/item/clothing/head/helmet/spartan/blue
 
-/decl/hierarchy/outfit/sangheili_slayer
-	name = "Elites Sangheili"
+/decl/hierarchy/outfit/sangheili/ultra/slayer
+	name = "Slayer Sangheili"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/slayer
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
-	l_ear = /obj/item/device/radio/headset/covenant
-	suit = /obj/item/clothing/suit/armor/special/combatharness/minor
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	shoes = /obj/item/clothing/shoes/sangheili/minor
-	head = /obj/item/clothing/head/helmet/sangheili/minor
+/obj/item/clothing/suit/armor/special/combatharness/ultra/slayer
+	var/list/available_abilities = list(\
+		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
+		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
+		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\
+		"Overshield Emitter" = /datum/armourspecials/overshield,\
+		"Upper Body Strength Enhancements" = /datum/armourspecials/superstrength,\
+		"Leg Speed and Agility Enhancements" = /datum/armourspecials/superspeed\
+		)
 
-/decl/hierarchy/outfit/job/slayer/spartan_slayer_covenant
-	name = "Spartans Spartan"
-	uniform = null
-	suit = /obj/item/clothing/suit/armor/special/spartan/slayer
-	head = /obj/item/clothing/head/helmet/spartan/slayer
+/obj/item/clothing/suit/armor/special/combatharness/ultra/slayer/equipped(var/mob/user, var/slot)
+	..()
+	spawn(0)
+		if(user && user.client && specials.len <= 3 && available_abilities.len)
+			var/ability_type_string = input(user, "Choose the armour ability of your Sangheili combat harness","Sangheili Armour Ability") in available_abilities
+			var/ability_type = available_abilities[ability_type_string]
+			specials.Add(new ability_type(src))

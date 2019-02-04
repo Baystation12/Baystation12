@@ -10,6 +10,7 @@
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
 
 	var/obj/machinery/computer/helm/nav_control
+	var/obj/machinery/nav_computer/nav_comp
 	var/list/engines = list()
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
@@ -34,6 +35,13 @@
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	GLOB.processing_objects.Add(src)
+
+/obj/effect/overmap/ship/get_faction()
+	if(nav_comp)
+		return nav_comp.get_faction()
+	else
+		return null
+
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
