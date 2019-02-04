@@ -47,7 +47,7 @@
 			if(I)
 				if(I.slowdown_general > 0)
 					slowdown_amount += I.slowdown_general
-				if(I.slowdown_per_slot[slot])
+				if(I.slowdown_per_slot[slot] > 0)
 					slowdown_amount += I.slowdown_per_slot[slot]
 	vehicle_move_delay = initial(vehicle_move_delay) + slowdown_amount
 

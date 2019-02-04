@@ -12,6 +12,7 @@
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
 	screen_shake = 0
+	irradiate_non_cov = 2
 	var/overcharge_cost = 1
 
 /obj/item/weapon/gun/energy/plasmapistol/New()

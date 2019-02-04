@@ -283,7 +283,7 @@
 "fw" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Hangarbay)
 "fx" = (/turf/simulated/floor/plating,/area/space)
 "fy" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/grille,/obj/structure/window/reinforced/projresist{dir = 4; icon_state = "rwindow"; tag = "icon-rwindow (WEST)"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
-"fz" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
+"fz" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/machinery/nav_computer/innie,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fA" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fB" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/table/standard,/obj/machinery/photocopier/faxmachine{department = "URFS Thorn"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
 "fC" = (/obj/machinery/computer/telecomms/monitor,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Bridge)
