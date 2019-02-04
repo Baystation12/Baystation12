@@ -10,6 +10,11 @@
 	item_cost = 3
 	path = /obj/item/ammo_magazine/pistol/small
 
+/datum/uplink_item/item/ammo/holdout_speedloader
+	name = "Holdout Revolver Speedloader"
+	item_cost = 3
+	path = /obj/item/ammo_magazine/speedloader/small
+
 /datum/uplink_item/item/ammo/darts
 	name = "Darts"
 	path = /obj/item/ammo_magazine/chemdart
