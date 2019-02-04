@@ -33,6 +33,7 @@
 	user.visible_message("<span class = 'notice'>[user] primes [src], activating the tracking module!</span>")
 	GLOB.processing_objects += src
 	icon_state = "[initial(icon_state)]_on"
+	is_active = 1
 
 /obj/item/drop_pod_beacon/examine(var/mob/examiner)
 	. = ..()

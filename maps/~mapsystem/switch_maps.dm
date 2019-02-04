@@ -6,6 +6,10 @@
 	fdel("baystation12.dmb")
 	fcopy("[new_map_name].dmb","baystation12.dmb")
 
+	//switch over the resource file
+	fdel("baystation12.rsc")
+	fcopy("[new_map_name].rsc","baystation12.rsc")
+
 	if(blackbox)	blackbox.save_all_data_to_sql()
 	sleep(50)
 
