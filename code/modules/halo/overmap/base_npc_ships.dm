@@ -184,7 +184,7 @@
 	chosen_ship_datum = new chosen_ship_datum
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	set background = 1
+	//set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
