@@ -117,7 +117,7 @@
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='danger'>You accidentally hit yourself with the [src]!</span>")
-		user.Weaken(30)
+		user.confused += 20
 		deductcharge(hitcost)
 		return
 	return ..()
@@ -159,7 +159,8 @@
 
 	//stun effects
 	if(status)
-		target.stun_effect_act(stun, agony, hit_zone, src)
+		target.stun_effect_act(stun/2, agony, hit_zone, src)
+		target.confused += stun
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
 
 		deductcharge(hitcost)

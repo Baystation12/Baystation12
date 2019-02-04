@@ -1,6 +1,6 @@
 /datum/map/Insurrection
-	name = "Sector 0442: New Antartica"
-	full_name = "Sector 0442: New Antartica"
+	name = "Sector 0442: New Antarctica"
+	full_name = "Sector 0442: New Antarctica"
 	path = "Insurrection"
 	station_levels = list()
 	admin_levels = list()

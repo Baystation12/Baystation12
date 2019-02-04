@@ -46,7 +46,7 @@
 	access = list(632)
 	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
 	selection_color = "#ff0000"
-	spawnpoint_override = "Innie Crew"
+	spawnpoint_override = "Innie Base Spawns"
 
 /datum/job/ship_cap_innie
 	title = "Insurrectionist Ship Captain"
@@ -55,34 +55,33 @@
 	access = list(632,633)
 	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
 	selection_color = "#ff0000"
-	spawnpoint_override = "Innie Captain"
+	spawnpoint_override = "Innie Base Spawns"
 
+
+	selection_color = "#008000"
+	access = list(142,144,110,309,311)
+	spawnpoint_override = "UNSC Base Spawns"
+	is_whitelisted = 1
+
+/datum/job/ODSTO
+	title = "Orbital Drop Shock Trooper Officer"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/ODSTsecondlieutenant
+	alt_titles = list("Second Lieutenant" = /decl/hierarchy/outfit/job/ODSTsecondlieutenant,
+	"First Lieutenant" = /decl/hierarchy/outfit/job/ODSTfirstlieutenant,
+	"Captain" = /decl/hierarchy/outfit/job/ODSTcaptain,
+	"Major" = /decl/hierarchy/outfit/job/ODSTmajor,
+	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/ODSTltcolonel,
+	"Colonel" = /decl/hierarchy/outfit/job/ODSTcolonel)
+	selection_color = "#008000"
+	access = list(142,144,110,300,306,309,310,311)
+	spawnpoint_override = "UNSC Base Spawns"
+	is_whitelisted = 1
 
 /datum/map/first_contact
-	allowed_jobs = list(/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,/datum/job/UNSC_ship/cag,/datum/job/UNSC_ship/bridge,\
-	/datum/job/UNSC_ship/mechanic_chief,/datum/job/UNSC_ship/mechanic,/datum/job/UNSC_ship/logistics_chief,/datum/job/UNSC_ship/logistics,\
-	/datum/job/UNSC_ship/marine_co,/datum/job/UNSC_ship/marine_xo,/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/weapons,/datum/job/UNSC_ship/marine,\
-	/datum/job/HeavenAbove_ODST,/datum/job/HeavenAbove_ODSTO,/datum/job/UNSC_ship/marine/driver,/datum/job/UNSC_ship/marine/specialist,\
-	/datum/job/UNSC_ship/medical_chief,/datum/job/UNSC_ship/medical,/datum/job/UNSC_ship/security_chief,/datum/job/UNSC_ship/unsc_security,/datum/job/UNSC_ship/ops_chief,\
-	/datum/job/UNSC_ship/ops,/datum/job/UNSC_ship/cmdr_wing,/datum/job/UNSC_ship/cmdr_sqr,/datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,/datum/job/UNSC_ship/gunnery_chief,\
-	/datum/job/UNSC_ship/gunnery,/datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,\
-	/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/*/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_medic,/datum/job/ship_cap_medic,*/\
-	/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/*/datum/job/Asteroidinnieleader,/datum/job/Asteroidinnie,/datum/job/ship_crew_innie,*/\
-	/datum/job/ship_cap_innie,/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/sangheili_shipmaster,\
-	/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,\
-	/*/datum/job/unscaegis_co,/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI*/,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,\
-	/datum/job/covenant/skirmmurmillo,/datum/job/URF_commando,/datum/job/URF_commando_officer)
-
-	allowed_spawns = list("UNSC Frigate","UNSC Commanding Officer Spawn","UNSC Executive Officer Spawn","UNSC Bridge Officer Spawn","UNSC Commander Air Group Spawn",\
-	"UNSC Operations Supervisor Spawn","UNSC Operations Specialist Spawn","UNSC Heaven Above ODST Spawn","UNSC Heaven Above ODST Officer Spawn","Innie Crew","Civilian Ship Crew",\
-	"Civ Ship Cap Crew","UNSC Crew Chief (technical) Spawn","UNSC Technician Spawn","UNSC Master-At-Arms Spawn","UNSC Naval Security Officer Spawn","UNSC Crew Chief (gunnery) Spawn",\
-	"UNSC Gunnery Operator Spawn","UNSC Wing Commander Spawn","UNSC Squadron Commander Spawn","UNSC Pilot Spawn","UNSC Crew Chief (flight) Spawn","UNSC Flight Mechanic Spawn",
-	"Medical Ship Crew","Medical Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Research Facility Spawn","Research Facility Director Spawn","AI","UNSC Chief Hospital Corpsman Spawn",\
-	"UNSC Hospital Corpsman Spawn","UNSC Crew Chief (logistics) Spawn","UNSC Logistics Specialist Spawn","UNSC Marine Spawn","UNSC Marine Company Officer Spawn",\
-	"UNSC Marine Company Sergeant Spawn","UNSC Marine Squad Leader Spawn","UNSC Combat Engineer Spawn",
-	"Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Listening Post Commander Spawn","Sangheili Corvette Spawn",\
-	"Kig-Yar Corvette Spawn","Unggoy Corvette Spawn","UNSC Aegis Ship Crew Spawn","UNSC Aegis ODST Spawn","UNSC Aegis ODST Officer Spawn","Commando Spawn","Commando Officer Spawn",\
-	"Innie Spawn", "Innie Commander Spawn")
+	allowed_jobs = list(/datum/job/unscbertels_co,/datum/job/unscbertels_xo,/datum/job/unscbertels_ship_crew,/datum/job/unscbertels_medical_crew,/datum/job/bertelsunsc_ship_marine,/datum/job/unsc_ship_marineplatoon,/datum/job/bertelsODST,/datum/job/bertelsODSTO,/datum/job/researchdirector,/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,/datum/job/IGUARD,/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_medic,/datum/job/ship_cap_medic,/datum/job/Emsville_Colonist,/datum/job/Emsville_Marshall,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/covenant/sangheili_minor,/datum/job/covenant/sangheili_major,/datum/job/covenant/sangheili_ultra,/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain,/datum/job/covenant/unggoy_minor,/datum/job/covenant/unggoy_major,/datum/job/unscaegis_co,/datum/job/unscaegis_ship_crew,/datum/job/aegisODSTONI,/datum/job/aegisODSTOONI,/datum/job/covenant/skirmminor,/datum/job/covenant/skirmmajor,/datum/job/covenant/skirmmurmillo,/datum/job/URF_commando,/datum/job/URF_commando_officer,/datum/job/covenant/sangheili_shipmaster)
+	allowed_spawns = list("Innie Base Spawns","UNSC Base Spawns","Covenant Base Spawns","Civilian Ship Crew","Civ Ship Cap Crew","Medical Ship Crew","Medical Ship Cap Crew","Emsville Spawn","Emsville Spawn Marshall","Research Facility Spawn","Research Facility Director Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","UNSC Aegis Ship Crew Spawn","UNSC Aegis ODST Spawn","UNSC Aegis ODST Officer Spawn")
 
 	species_to_job_whitelist = list(\
 		/datum/species/kig_yar = list(/datum/job/covenant/kigyarminor,/datum/job/covenant/kigyarmajor,/datum/job/covenant/kigyarcorvette/captain),\

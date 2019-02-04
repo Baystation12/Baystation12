@@ -7,15 +7,22 @@
 	var/autopilot = 0
 	var/manual_control = 0
 	var/list/known_sectors = list()
-	var/dx		//desitnation
+	var/dx		//destnation
 	var/dy		//coordinates
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
 	linked = map_sectors["[z]"]
+
+/obj/machinery/computer/helm/LateInitialize()
 	get_known_sectors()
 
 /obj/machinery/computer/helm/proc/get_known_sectors()
+	known_sectors.Cut()
+	if(linked && linked.nav_comp)
+		known_sectors = linked.nav_comp.get_known_sectors()
+		return
+	//Original Code left to ensure backwards compatibility
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
 		if (S.known)
@@ -27,6 +34,8 @@
 	..()
 
 /obj/machinery/computer/helm/process()
+	if(!linked)
+		linked = map_sectors["[z]"]
 	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
@@ -58,6 +67,9 @@
 	return 0
 
 /obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
+	if(!linked)
+		linked = map_sectors["[z]"]
+	get_known_sectors()
 	if(..())
 		user.unset_machine()
 		manual_control = 0
@@ -95,6 +107,8 @@
 	var/list/locations[0]
 	for (var/key in known_sectors)
 		var/datum/data/record/R = known_sectors[key]
+		if(isnull(R))
+			continue
 		var/list/rdata[0]
 		rdata["name"] = R.fields["name"]
 		rdata["x"] = R.fields["x"]
@@ -189,6 +203,7 @@
 
 /obj/machinery/computer/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		linked = map_sectors["[z]"]
 		return
 
 	var/data[0]

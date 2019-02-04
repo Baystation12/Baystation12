@@ -12,6 +12,8 @@
 	linked = map_sectors["[z]"]
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
+	if(!linked)
+		linked = map_sectors["[z]"]
 	if(..())
 		user.unset_machine()
 		return

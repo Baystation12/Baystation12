@@ -17,6 +17,32 @@
 /obj/vehicles/drop_pod/overmap/boarding_pod/is_on_launchbay()
 	return 1
 
+/obj/vehicles/drop_pod/overmap/boarding_pod/get_drop_turf(var/turf/drop_point)
+	if(isnull(drop_point))
+		visible_message("<span class = 'warning'>[src] blurts a warning: ERROR: NO AVAILABLE DROP-TARGETS.</span>")
+		return
+	var/list/valid_points = list()
+	for(var/turf/t in range(drop_point,drop_accuracy))
+		if(istype(t,/turf/unsimulated/floor/rock2)) //No spawning in rock walls, even if they are subtypes of /floor/
+			continue
+		if(istype(t,/turf/simulated/floor))
+			valid_points += t
+			continue
+		if(istype(t,/turf/unsimulated/floor))
+			valid_points += t
+			continue
+	if(isnull(valid_points))
+		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
+		return
+	return pick(valid_points)
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/post_drop_effects(var/turf/drop_turf)
+	explosion(drop_turf,-1,-1,4,10)
+	var/obj/effect/overmap/om_obj = map_sectors["[drop_turf.z]"]
+	for(var/mob/living/m in GLOB.player_list)
+		if(m.z in om_obj.map_z)
+			to_chat(m,"<span class = 'danger'>EXTERNAL INCURSION WARNING: BOARDING POD COLLISION DETECTED. LOCATION: [drop_turf.loc.name]</span>")
+
 /obj/vehicles/drop_pod/overmap/boarding_pod
 	name = "Class-3 Armoured Boarding Pod"
 	desc = "A modified varient of the \"Bumblebee\" lifeboat, with extra armour plating to survive impact with other spacefaring vessels."

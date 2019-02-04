@@ -7,7 +7,6 @@
 	extended_round_description = "No-one has scored a point yet."
 	config_tag = "FFA Slayer"
 	votable = 1
-	probability = 0
 	var/list/mode_teams = list("Spartan Slayer")		//jobs are used to represent "teams"
 	var/list/team_scores_unsorted = list()
 	var/list/scores_with_names = list()
@@ -15,7 +14,7 @@
 	var/round_length = 6000
 	var/nextrespawn
 	var/species_included = list("Spartan" = list("Spartan Slayer","Blue Team Spartan","Red Team Spartan")) //This has to be an exact name taken from the datum
-	disabled_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue,/datum/job/team_slayer_covenant,/datum/job/slayer_spartan_covenant)
+	disabled_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue, /datum/job/team_slayer_spartan,/datum/job/team_slayer_covenant)
 
 /datum/game_mode/slayer/pre_setup()
 	..()

@@ -498,6 +498,8 @@ cloak disrupt override
 	else if(seconds_since_supression > 10)
 		if(prob(40))
 			visible_message("<span class = 'danger'>The [P.name] whizzes past [src]!</span>")
+	if(prob(SUPRESSION_SCREAM_CHANCE))
+		emote("painscream",AUDIBLE_MESSAGE)
 	time_last_supressed = world.time
 
 /mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message,environment_smash)

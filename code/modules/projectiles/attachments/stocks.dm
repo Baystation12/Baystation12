@@ -8,6 +8,7 @@
 	weapon_slot = "stock"
 	can_remove = 0 //Let's assume you can't entirely remove a stock.
 
+/* //kept for the sake of examples
 /obj/item/weapon_attachment/stock/ma5b
 	name = "MA5B stock"
 	desc = "The standard stock equipped on MA5Bs"
@@ -19,3 +20,5 @@
 	desc = "A stock replacment stripped down to the bare frame."
 
 	icon_state = "stock_skeletal"
+*/
+

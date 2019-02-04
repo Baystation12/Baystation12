@@ -77,17 +77,18 @@
 		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
 		var/image/user_image = image(user)
 		user_image.dir = user.dir
-		for(var/i = 0 to 1)
+		for(var/i = 0 to get_dist(user,target))
 			var/obj/after_image = new /obj/effect/esword_path
 			if(i == 0)
 				after_image.loc = user.loc
 			else
 				after_image.loc = get_step(user,get_dir(user,target))
+				if(!user.Move(after_image.loc))
+					break
 			after_image.dir = user.dir
 			after_image.overlays += user_image
 			spawn(5)
 				qdel(after_image)
-		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
 		if(user.Adjacent(target) && ismob(target))
 			attack(target,user)
 		next_leapwhen = world.time + LUNGE_DELAY
@@ -183,3 +184,47 @@
 		slot_l_hand_str = "en_dag_l_hand",
 		slot_r_hand_str = "en_dag_r_hand" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+
+//DONER
+
+//DOGLER
+
+//Dagger
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler
+
+	name = "Sya'tenee's Energy Dagger"
+	icon_state = "dogler_dag_handle"
+	icon_state_deployed = "dogler_dag_deploy"
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler/change_misc_variables(var/deactivate = 0)
+	if(deactivate)
+		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
+		item_state_slots = null
+		hitsound = "swing_hit"
+	else
+		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
+		item_state_slots = list(
+		slot_l_hand_str = "dogler_dag_l_hand",
+		slot_r_hand_str = "dogler_dag_r_hand" )
+		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+
+//Axe
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe
+
+	name = "Sya'tenee's Energy Axe"
+	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
+	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'
+	force = 65
+	icon_state = "dogler_axe"
+	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
+	item_state_slots = list(
+	slot_l_hand_str = "dogler_axe_l1",
+	slot_r_hand_str = "dogler_axe_r1")
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe/activate(mob/living/user)
+	return
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
+	return

@@ -228,7 +228,7 @@
 "et" = (/turf/simulated/wall/tech,/area/planets/Geminus/indoor/xenoflora)
 "eu" = (/obj/machinery/door/airlock/research{name = "Isolation room one"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "ev" = (/mob/living/simple_animal/npc/colonist,/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/living1sw)
-"ew" = (/obj/structure/table/steel,/obj/item/weapon_attachment/sight/rds,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"ew" = (/obj/structure/table/steel,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "ex" = (/obj/machinery/mecha_part_fabricator,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "ey" = (/obj/machinery/computer/rdconsole/robotics,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "ez" = (/obj/machinery/r_n_d/circuit_imprinter,/obj/item/weapon/reagent_containers/glass/beaker/sulphuric,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)

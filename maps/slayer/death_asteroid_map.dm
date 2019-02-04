@@ -1,10 +1,10 @@
 
 /datum/map/teamslayer_asteroid
-	name = "Team Slayer Asteroid"
+	name = "Death Asteroid"
+	full_name = "Death Asteroid"
 	path = "slayer_asteroid"
-	accessible_z_levels = list("1" = 100)
 	//lobby_icon = 'maps/example/example_lobby.dmi'
-	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
+	lobby_icon = 'code/modules/halo/splashworks/title1.jpg'
 	id_hud_icons = 'maps/slayer/slayer_hud_icons.dmi'
 
 	station_name  = "Experimental Munitions VR Testing"
