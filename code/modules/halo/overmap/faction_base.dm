@@ -36,7 +36,7 @@
 			om.forceMove(pick(spawn_locs))
 
 /obj/effect/overmap/ship/faction_base/cov
-	name = "Lesser Charity"
+	name = "Vanguard's Mantle"
 	icon_state = "base_cov"
 	faction = "covenant"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
