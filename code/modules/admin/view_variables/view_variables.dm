@@ -116,7 +116,7 @@
 /datum/browser/watched_variables/set_content()
 	var/list/dat = list()
 
-	if(!user.client)
+	if(!user || !user.client)
 		return
 
 	dat += "<style>div.var { padding: 5px; } div.var:nth-child(even) { background-color: #555; }</style>"
