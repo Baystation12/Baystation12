@@ -1367,11 +1367,11 @@
 	icon_state = "mechbay"
 
 /area/assembly/robotics
-	name = "\improper Fabrication Lab"
+	name = "\improper Robotics Lab"
 	icon_state = "robotics"
 
 /area/assembly/robotics/lower
-	name = "\improper Lower Fabrication Lab"
+	name = "\improper Lower Robotics Lab"
 
 /area/assembly/robotics/surgery
 	name = "\improper Robotics Operating Theatre"

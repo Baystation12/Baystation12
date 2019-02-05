@@ -6673,9 +6673,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/hallway)
 "pf" = (
-/obj/structure/table/steel,
-/obj/item/weapon/aicard,
-/obj/item/weapon/storage/toolbox/mechanical,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -10250,6 +10247,7 @@
 /obj/item/organ/internal/posibrain,
 /obj/item/organ/internal/posibrain,
 /obj/item/device/robotanalyzer,
+/obj/item/weapon/aicard,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "xG" = (
@@ -14998,7 +14996,7 @@
 	},
 /obj/machinery/computer/rdconsole/robotics{
 	id = 3;
-	name = "fabrication lab fabrication console"
+	name = "robotics fabrication console"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
@@ -15944,6 +15942,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/item/weapon/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
 "OR" = (
@@ -16448,17 +16447,6 @@
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/engineering/fuelbay)
-"Qq" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/assembly/robotics/lower)
 "Qu" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -16958,8 +16946,8 @@
 "Sz" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Fabrication Maintenance";
-	req_access = list(82)
+	name = "Robotics Maintenance";
+	req_access = list(12,82)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -18211,25 +18199,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "XK" = (
-/obj/structure/table/rack{
-	dir = 8;
-	layer = 2.9
+/obj/machinery/r_n_d/circuit_imprinter,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/reagent_dispensers/acid{
+	pixel_x = 0;
+	pixel_y = -32
 	},
-/obj/item/weapon/storage/toolbox/mechanical,
-/obj/item/clothing/head/welding{
-	pixel_x = -3;
-	pixel_y = 5
-	},
-/obj/item/device/multitool{
-	pixel_x = 3
-	},
-/obj/item/clothing/glasses/welding,
-/obj/item/device/integrated_electronics/debugger,
-/obj/item/device/integrated_electronics/wirer,
-/obj/item/device/integrated_electronics/analyzer,
-/obj/item/weapon/storage/belt/utility/full,
-/obj/machinery/light,
-/turf/simulated/floor/tiled/dark,
+/obj/item/weapon/reagent_containers/glass/beaker,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
 "XO" = (
 /obj/structure/cable/green{
@@ -36348,7 +36325,7 @@ Yr
 gg
 UX
 MB
-Qq
+yI
 XK
 gg
 SQ
