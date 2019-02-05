@@ -7342,7 +7342,7 @@
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 4;
 	name = "CSO's suit storage";
-	req_access = list(45)
+	req_access = list(30)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
