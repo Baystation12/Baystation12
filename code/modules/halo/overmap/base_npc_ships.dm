@@ -44,9 +44,30 @@
 
 	var/list/projectiles_to_spawn = list()
 
+	var/list/cargo_contained = list()
+
+	var/list/cargo_containers = list()
+
 /obj/effect/overmap/ship/npc_ship/New()
 	generate_ship_name()
 	. = ..()
+
+/obj/effect/overmap/ship/npc_ship/proc/cargo_init()
+	if(cargo_containers.len == 0 || cargo_contained.len == 0)
+		return
+	var/counter = 0
+	var/objs_per_container = max((cargo_contained.len / cargo_containers.len),1)
+	var/list/valid_containers = cargo_containers
+	for(var/typepath in cargo_contained)
+		var/obj/structure/closet/our_container
+		if(counter >= objs_per_container || isnull(our_container))
+			our_container.store_contents()
+			our_container = pick(valid_containers)
+		if(cargo_contained.Find(typepath) == cargo_contained.len)
+			our_container.store_contents()
+		counter += 1
+		var/obj/new_obj = new typepath
+		new_obj.loc = our_container.loc
 
 /obj/effect/overmap/ship/npc_ship/get_faction()
 	if(!unload_at)
@@ -203,6 +224,7 @@
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+	cargo_init()
 	damage_spawned_ship()
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	GLOB.processing_objects += src

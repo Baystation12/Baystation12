@@ -9,9 +9,6 @@
 
 	available_ship_requests = newlist(/datum/npc_ship_request/halt,/datum/npc_ship_request/cargo_call)
 
-/obj/effect/overmap/ship/npc_ship/cargo/get_requestable_actions(var/authority_level)
-	. = ..()
-
 /datum/npc_ship_request/cargo_call
 	request_name = "Trade With"
 	request_auth_levels = ALL_AUTHORITY_LEVELS
