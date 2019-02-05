@@ -126,6 +126,21 @@
 	src.track = TB
 	return targets
 
+/mob/living/silicon/ai/proc/ai_camera_track(var/target_name in trackable_mobs())
+	set category = "Silicon Commands"
+	set name = "Follow With Camera"
+	set desc = "Select who you would like to track."
+
+	if(src.stat == 2)
+		to_chat(src, "You can't follow [target_name] with cameras because you are dead!")
+		return
+	if(!target_name)
+		src.cameraFollow = null
+
+	var/mob/target = (isnull(track.humans[target_name]) ? track.others[target_name] : track.humans[target_name])
+	src.track = null
+	ai_actual_track(target)
+
 /mob/living/silicon/ai/proc/ai_cancel_tracking(var/forced = 0)
 	if(!cameraFollow)
 		return
@@ -137,11 +152,36 @@
 /mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
 	if(!istype(target))	return
 	var/mob/living/silicon/ai/U = usr
-	if(U.eyeobj)
-		U.eyeobj.setLoc(get_turf(target), 0)
-	else
-		view_core()
+
+	if(target == U.cameraFollow)
 		return
+
+	if(U.cameraFollow)
+		U.ai_cancel_tracking()
+	U.cameraFollow = target
+	to_chat(U, "Tracking target...")
+	target.tracking_initiated()
+
+	spawn (0)
+		while (U.cameraFollow == target)
+			if (U.cameraFollow == null)
+				return
+
+			switch(target.tracking_status())
+				if(TRACKING_NO_COVERAGE)
+					to_chat(U, "Target is not near any active cameras.")
+					sleep(100)
+					continue
+				if(TRACKING_TERMINATE)
+					U.ai_cancel_tracking(1)
+					return
+
+			if(U.eyeobj)
+				U.eyeobj.setLoc(get_turf(target), 0)
+			else
+				view_core()
+				return
+			sleep(10)
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))

@@ -39,6 +39,7 @@
 
 	var/blocked = 0
 	var/ai_watching = 0
+	var/list/ai_list = list()
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
@@ -133,12 +134,16 @@
 /obj/machinery/camera/proc/set_ai_watching(var/mob/observer/eye/aiEye/ai)
 	if((stat & BROKEN) || (stat & EMPED))
 		return
-	ai_watching = 1
+	if(!(ai_list |= ai))
+		ai_list += ai
+	ai_watching = TRUE
 	queue_icon_update()
 
-/obj/machinery/camera/proc/ai_stop_watching()
-	ai_watching = 0
-	queue_icon_update()
+/obj/machinery/camera/proc/ai_stop_watching(var/mob/observer/eye/aiEye/ai)
+	ai_list -= ai
+	if(!ai_list.len)
+		ai_watching = FALSE
+		queue_icon_update()
 
 /obj/machinery/camera/proc/internal_process()
 	return
@@ -275,18 +280,15 @@
 
 	if(choice != 1)
 		return
-	log_and_message_admins("blocking = [blocking]")
 	set_status(!src.status)
 	if (!(src.status))
-		if(user && blocking)
-			log_and_message_admins("Excuted user+blocking")
+		if(user && blocking)			
 			visible_message("<span class='notice'> [user] has put something in front of [src]'s lens.</span>")
 			icon_state = "[initial(icon_state)]_blocked"
-			add_hiddenprint(user)			
-		else if(user)
-			log_and_message_admins("Executed user")
+			add_fingerprint(user)
+		else if(user)			
 			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
-			add_hiddenprint(user)
+			add_fingerprint(user)
 		else
 			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -294,10 +296,10 @@
 	else
 		if(user && blocking)
 			visible_message("<span class='notice'> [user] removes the obstruction from [src]'s lens.</span>")
-			add_hiddenprint(user)
+			add_fingerprint(user)
 		if(user)
 			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
-			add_hiddenprint(user)
+			add_fingerprint(user)
 		else
 			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -324,6 +326,13 @@
 	spark_system.set_up(5, 0, loc)
 	spark_system.start()
 	playsound(loc, "sparks", 50, 1)
+
+	for(var/obj/O in contents)
+		if(istype(O, /obj/item/weapon/paper/sticky) || istype(O, /obj/item/weapon/ducttape))
+			O.forceMove(src.loc)//drop anything sticking on the camera lens to the ground, but leave the components inside.
+			visible_message("<span class='warning'>[O] falls off the camera lens and onto the ground as the [src] breaks!</span>")
+
+	ai_list.Cut()
 
 /obj/machinery/camera/proc/set_status(var/newstatus)
 	if (status != newstatus)

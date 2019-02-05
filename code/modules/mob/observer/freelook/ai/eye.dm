@@ -60,7 +60,7 @@
 	for(var/obj/machinery/camera/C in camera_list)
 		if(get_dist(src, C) > 8)
 			remove_camera(C)
-			C.ai_stop_watching()
+			C.ai_stop_watching(src)
 
 /mob/observer/eye/aiEye/EyeMove(direct)
 	process_camera_proximity()
@@ -74,13 +74,13 @@
 	if(camera_list)
 		for(var/obj/machinery/camera/C in camera_list)
 			remove_camera(C)
-			C.ai_stop_watching()
+			C.ai_stop_watching(src)
 
 /proc/ai_near_camera(var/mob/observer/eye/aiEye/eye)
 	for(var/obj/machinery/camera/C in range(8, eye))
 		eye.add_camera(C)
 		if(C.can_use())
-			C.set_ai_watching(eye)			
+			C.set_ai_watching(eye)
 	return
 
 // AI MOVEMENT
@@ -97,7 +97,7 @@
 	qdel(eyeobj) // No AI, no Eye
 	eyeobj = null
 	if(client)
-		client.eye = new_eye	
+		client.eye = new_eye
 
 /mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
 	if(eyeobj) destroy_eyeobj()
