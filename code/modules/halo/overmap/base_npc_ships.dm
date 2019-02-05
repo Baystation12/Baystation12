@@ -1,5 +1,5 @@
 
-#define NPC_SHIP_LOSE_DELAY 20 MINUTES
+#define NPC_SHIP_LOSE_DELAY 10 MINUTES
 #define ON_PROJECTILE_HIT_MESSAGES list(\
 "We're taking fire. Requesting assistance from nearby ships! Repeat; Taking fire!",\
 "Our hull has been breached! Help!",\
@@ -184,7 +184,7 @@
 	chosen_ship_datum = new chosen_ship_datum
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	set background = 1
+	//set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)

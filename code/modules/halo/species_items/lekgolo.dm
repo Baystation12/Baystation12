@@ -64,6 +64,8 @@
 	for(var/action_type in typesof(/obj/item/hunter_action) - /obj/item/hunter_action)
 		new action_type(src)
 
+	faction = "Covenant"
+
 /mob/living/simple_animal/mgalekgolo/proc/random_name()
  	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
  	var/list/vowels = list("a","e","i","o","u")
@@ -78,7 +80,7 @@
 			hud_setup = update_action_buttons()
 	else if(hud_setup)
 		hud_setup = 0
-	
+
 	. = ..() //Placed here to ensure that it can still check the health before regeneration happens.
 
 	//heal a little
