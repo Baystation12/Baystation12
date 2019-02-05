@@ -9,6 +9,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/on_update_icon()
 	icon_state = "expshotgun[!!chambered]"
+	..()
 	
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/free_fire()
 	var/my_z = get_z(src)
@@ -68,7 +69,7 @@
 /obj/structure/closet/secure_closet/explo_gun
 	name = "gun locker"
 	desc = "Wall locker holding the boomstick."
-	req_access = list(access_pathfinder)
+	req_access = list(access_expedition_shuttle_helm)
 	closet_appearance = /decl/closet_appearance/wall/explo_gun
 	density = 0
 	anchored = 1
