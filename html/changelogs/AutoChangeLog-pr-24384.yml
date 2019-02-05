@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Radiation collector arrays will now fail catastrophically if exposed to extreme temperatures, such as those found within the supermatter core."
