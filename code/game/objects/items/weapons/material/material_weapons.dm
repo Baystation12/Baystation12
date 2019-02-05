@@ -72,9 +72,10 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/material/apply_hit_effect()
+/obj/item/weapon/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	check_shatter()
+	if(material.is_brittle() || target.getarmor(hit_zone, "melee") >= material.hardness/5)
+		check_shatter()
 
 /obj/item/weapon/material/on_parry()
 	check_shatter()
