@@ -508,6 +508,15 @@
 	icon_state = "kozi-armor_obj"
 	item_state = "kozi-armor_worn"
 
+obj/item/clothing/head/helmet/odst/donator/gulag
+	name = "Murmillo Helmet"
+	item_state = "gulag-helmet_worn"
+	icon_state = "gulag-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/gulag
+	name = "Murmillo Armour"
+	icon_state = "gulag-armor_obj"
+	item_state = "gulag-armor_worn"
 
 //END DONATOR GEAR
 
