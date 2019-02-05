@@ -59,9 +59,13 @@
 			if(dist <= round(max_range + world.view - 2, 1))
 				M.playsound_local(epicenter, 'code/modules/halo/sounds/Plasmanadedetonate.ogg', 100, 1)
 
-	mob_containing.embedded_objects -= src //Removing the embedded item from the wound
+	for(var/obj/item/organ/external/o in mob_containing.bad_external_organs)
+		for(var/datum/wound/w in o.wounds)
+			for(var/obj/embedded in w.embedded_objects)
+				if(embedded == src)
+					w.embedded_objects -= embedded //Removing the embedded item from the wound
 	mob_containing.contents -= src
-	loc = M.loc //And placing it on the ground below
+	loc = mob_containing.loc //And placing it on the ground below
 	qdel(src)
 
 /obj/item/weapon/grenade/plasma/heavy_plasma
