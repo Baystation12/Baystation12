@@ -12447,18 +12447,16 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aRb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
-	},
-/obj/machinery/computer/rdconsole/robotics,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "aRd" = (
@@ -12947,9 +12945,7 @@
 	icon_state = "warning";
 	dir = 4
 	},
-/obj/structure/bed/chair/office/light{
-	dir = 1
-	},
+/obj/structure/bed/chair/office/light,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "aSd" = (
@@ -17408,15 +17404,24 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "ehb" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/weapon/reagent_containers/glass/beaker/sulphuric,
-/obj/structure/reagent_dispensers/acid{
-	density = 0;
-	pixel_x = 0;
-	pixel_y = 32
+/obj/structure/table/rack{
+	dir = 8;
+	layer = 2.9
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/clothing/head/welding{
+	pixel_x = -3;
+	pixel_y = 5
+	},
+/obj/item/device/multitool{
+	pixel_x = 3
+	},
+/obj/item/clothing/glasses/welding,
+/obj/item/device/integrated_electronics/debugger,
+/obj/item/device/integrated_electronics/wirer,
+/obj/item/device/integrated_electronics/analyzer,
+/obj/item/weapon/storage/belt/utility/full,
+/turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "ehT" = (
 /obj/structure/railing/mapped,
@@ -17644,8 +17649,8 @@
 "esb" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Fabrication Maintenance";
-	req_access = list(82)
+	name = "Robotics Maintenance";
+	req_access = list(12,82)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/centralstarboard)
@@ -20732,7 +20737,6 @@
 /turf/simulated/open,
 /area/assembly/robotics)
 "hNb" = (
-/obj/machinery/autolathe,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/light{
 	dir = 1
@@ -20748,6 +20752,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/autolathe,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "hOb" = (
@@ -23171,11 +23176,6 @@
 	dir = 1
 	},
 /obj/machinery/photocopier,
-/obj/structure/reagent_dispensers/acid{
-	density = 0;
-	pixel_x = -32;
-	pixel_y = 0
-	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/camera/network/engineering{
 	c_tag = "Engineering - Robotics Laboratory";
@@ -23350,7 +23350,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Charging Bay";
+	name = "Robotics";
 	req_access = list(82)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -23714,7 +23714,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Fabrication Laboratory";
+	name = "Robotics";
 	req_access = list(82)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -31255,8 +31255,8 @@
 "uSl" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Fabrication Maintenance";
-	req_access = list(82)
+	name = "Robotics Maintenance";
+	req_access = list(12,82)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics/surgery)
