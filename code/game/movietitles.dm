@@ -100,16 +100,20 @@ client
 	var/chunksize = 0
 	if(!GLOB.end_credits_title)
 		/* Establish a big-ass list of potential titles for the "episode". */
-		possible_titles += "THE [pick("DOWNFALL OF", "RISE OF", "TROUBLE WITH", "FINAL STAND OF", "DARK SIDE OF")] [pick("SPACEMEN", "HUMANITY", "DIGNITY", "SANITY", "THE CHIMPANZEES", "THE VENDOMAT PRICES","[uppertext(GLOB.using_map.station_name)]")]"
-		possible_titles += "THE CREW GETS [pick("RACIST", "PICKLED", "AN INCURABLE DISEASE", "PIZZA", "A VALUABLE HISTORY LESSON", "A BREAK", "HIGH", "TO LIVE", "TO RELIVE THEIR CHILDHOOD", "EMBROILED IN CIVIL WAR", "SERIOUS ABOUT [pick("DRUG ABUSE", "CRIME", "PRODUCTIVITY", "ANCIENT AMERICAN CARTOONS", "SPACEBALL")]")]"
+		possible_titles += "THE [pick("DOWNFALL OF", "RISE OF", "TROUBLE WITH", "FINAL STAND OF", "DARK SIDE OF", "DESOLATION OF", "DESTRUCTION OF", "CRISIS OF")]\
+							 [pick("SPACEMEN", "HUMANITY", "DIGNITY", "SANITY", "THE CHIMPANZEES", "THE VENDOMAT PRICES", "GIANT ARMORED", "THE GAS JANITOR",\
+							"THE SUPERMATTER CRYSTAL", "MEDICAL", "ENGINEERING", "SECURITY", "RESEARCH", "THE SERVICE DEPARTMENT", "COMMAND", "THE EXPLORERS", "THE PATHFINDER",\
+							"[uppertext(GLOB.using_map.station_name)]")]"
+		possible_titles += "THE CREW GETS [pick("RACIST", "PICKLED", "AN INCURABLE DISEASE", "PIZZA", "A VALUABLE HISTORY LESSON", "A BREAK", "HIGH", "TO LIVE", "TO RELIVE THEIR CHILDHOOD", "EMBROILED IN CIVIL WAR", "A BAD HANGOVER", "SERIOUS ABOUT [pick("DRUG ABUSE", "CRIME", "PRODUCTIVITY", "ANCIENT AMERICAN CARTOONS", "SPACEBALL", "DECOMPRESSION PROCEDURES")]")]"
 		possible_titles += "THE CREW LEARNS ABOUT [pick("LOVE", "DRUGS", "THE DANGERS OF MONEY LAUNDERING", "XENIC SENSITIVITY", "INVESTMENT FRAUD", "KELOTANE ABUSE", "RADIATION PROTECTION", "SACRED GEOMETRY", "STRING THEORY", "ABSTRACT MATHEMATICS", "[pick("UNATHI", "SKRELLIAN", "DIONAN", "KHAARMANI", "VOX", "SERPENTID")] MATING RITUALS", "ANCIENT CHINESE MEDICINE")]"
-		possible_titles += "A VERY [pick("CORPORATE", "EXPEDITIONARY", "DIONA", "PHORON", "MARTIAN")] CHRISTMAS"
-		possible_titles += "[pick("GUNS, GUNS EVERYWHERE", "THE LITTLEST ARMALIS", "WHAT HAPPENS WHEN YOU MIX MAINTENANCE DRONES AND COMMERCIAL-GRADE PACKING FOAM", "ATTACK! ATTACK! ATTACK!", "SEX BOMB")]"
+		possible_titles += "A VERY [pick("CORPORATE", "NANOTRASEN", "FLEET", "HAPHAESTUS", "DAIS", "XENOLIFE", "EXPEDITIONARY", "DIONA", "PHORON", "MARTIAN", "SERPENTID")] [pick("CHRISTMAS", "EASTER", "HOLIDAY", "WEEKEND", "THURSDAY", "VACATION")]"
+		possible_titles += "[pick("GUNS, GUNS EVERYWHERE", "THE LITTLEST ARMALIS", "WHAT HAPPENS WHEN YOU MIX MAINTENANCE DRONES AND COMMERCIAL-GRADE PACKING FOAM", "ATTACK! ATTACK! ATTACK!", "SEX BOMB", "THE LEGEND OF THE ALIEN ARTIFACT: PART [pick("I","II","III","IV","V","VI","VII","VIII","IX", "X", "C","M","L")]")]"
 		possible_titles += "[pick("SPACE", "SEXY", "DRAGON", "WARLOCK", "LAUNDRY", "GUN", "ADVERTISING", "DOG", "CARBON MONOXIDE", "NINJA", "WIZARD", "SOCRATIC", "JUVENILE DELIQUENCY", "POLITICALLY MOTIVATED", "RADTACULAR SICKNASTY")] [pick("QUEST", "FORCE", "ADVENTURE")]"
 		possible_titles += "[pick("THE DAY [uppertext(GLOB.using_map.station_short)] STOOD STILL", "HUNT FOR THE GREEN WEENIE", "ALIEN VS VENDOMAT", "SPACE TRACK")]"
 		titles += "<center><h1>EPISODE [rand(1,1000)]<br>[pick(possible_titles)]<h1></h1></h1></center>"
 	else
 		titles += "<center><h1>EPISODE [rand(1,1000)]<br>[GLOB.end_credits_title]<h1></h1></h1></center>"
+
 	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_|GLOB.dead_mob_list_)
 		if(findtext(H.real_name,"(mannequin)"))
 			continue
@@ -169,46 +173,22 @@ client
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"
 
 	var/list/staff = list("PRODUCTION STAFF:")
-	var/list/hostjobs = list("CEO", "Corporate Overlord", "Studio Head")
-	var/list/headjobs = list("Executive Producer", "Director", "Senior Investor", "Creative Visionary")
-	var/list/headdevjobs = list("Special Effects Supervisor", "Research and Development Manager", "Senior CGI Animator", "Animatronics Supervisor", "Stunt Director")
-	var/list/loremanagerjobs = list("Historical Consultant", "Written By", "Storyboard Artist", "Based on a Novel by", "Military Consultant", "Medical Consultant")
-	var/list/staffmanagerjobs = list("Casting Director", "Human Resources Manager", "Talent Agent", "Head Recruiter", "Personnel Manager")
-	var/list/adminjobs = list("Cameraman", "Chair Operator", "Choreographer", "Editor", "Stunt Coordinator", "Negative Cutter", "Location Manager", "Music Editor", "Scoring Mixer", "Second Unit Director")
-	var/list/senioradminjobs = list("Senior Editor","Lighting Director","Benefits Coordinator","First Assistant Director", "Sound Designer", "Script Coordinator")
-	var/list/devjobs = list("Special Effects Coordinator", "Sound Engineer", "Set Decorator", "Special Effects Technician", "Animatronics Technician")
-	var/list/trialminjobs = list("Costume Designer", "Best Boy", "Key Grip", "Apprentice Carpenter", "Third Unit Director", "Craft Services Coordinator", "Action Vehicle Cooridnator", "Safety Officer")
-	var/list/modjobs = list("Barista", "Paralegal", "Person with a Bullhorn", "Security Guard", "Angry Yeller", "Executive Assistant")
-	var/list/trialmodjobs = list("Unpaid Intern", "Coffee Fetcher", "Assistant to the Director", "SpaceBurger Employee that Wandered onto Set")	
+	var/list/staffjobs = list("Coffe Fetcher", "Cameraman", "Angry Yeller", "Chair Operator", "Choreographer", "Historical Consultant", "Costume Designer", "Chief Editor", "Executive Assistant")
+	var/list/goodboys = list()
 	for(var/client/C)
 		if(!C.holder)
 			continue
-		switch(C.holder.rank)
-			if("Host")
-				staff += GenerateStaffCredits(C, hostjobs)
-			if("HeadAdmin")
-				staff += GenerateStaffCredits(C, headjobs)
-			if("HeadDeveloper")
-				staff += GenerateStaffCredits(C, headdevjobs)
-			if("StaffManager")
-				staff += GenerateStaffCredits(C,staffmanagerjobs)
-			if("LoreManager")
-				staff += GenerateStaffCredits(C, loremanagerjobs)
-			if("SeniorAdmin")
-				staff += GenerateStaffCredits(C, senioradminjobs)
-			if("GameAdmin")
-				staff += GenerateStaffCredits(C, adminjobs)
-			if("Developer" || "DevAdmin")
-				staff += GenerateStaffCredits(C, devjobs)
-			if("TrialAdmin")
-				staff += GenerateStaffCredits(C, trialminjobs)
-			if("Moderator")
-				staff += GenerateStaffCredits(C, modjobs)
-			if("TrialModerator")
-				staff += GenerateStaffCredits(C, trialmodjobs)
-	titles += "<center>[jointext(staff,"<br>")]</center>"
+		if(C.holder.rights & (R_DEBUG|R_ADMIN))
+			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
+		else if(C.holder.rights & R_MOD)
+			goodboys += "[C.key]"
 
-	var/disclaimer = "Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>\
+	titles += "<center>[jointext(staff,"<br>")]</center>"
+	if(goodboys.len)
+		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center><br>"
+
+	var/disclaimer = "<br>Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>\
 					 This motion picture is protected under the copyright laws of the Sol Central Government<br> and other nations throughout the galaxy.<br>\
 					 Colony of First Publication: [pick("Mars", "Luna", "Earth", "Venus", "Phobos", "Ceres", "Tiamat", "Ceti Epsilon", "Eos", "Pluto", "Ouere",\
 					 "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
@@ -227,7 +207,3 @@ client
 	titles += "<center>[JOINTEXT(disclaimer)]</center>"
 
 	return titles
-
-/proc/GenerateStaffCredits(var/client/C, var/list/titles)
-	var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
-	return "[uppertext(pick(titles))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
