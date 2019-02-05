@@ -67,7 +67,7 @@
 
 /obj/item/projectile/pulse_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,0,1,3,5)
+	explosion(a,-1,1,2,3)
 
 /obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted

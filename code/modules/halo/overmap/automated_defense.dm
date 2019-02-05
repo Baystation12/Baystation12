@@ -1,5 +1,5 @@
-#define AUTO_DEFENSE_LOCKON_DELAY 12 SECONDS
-#define AUTO_DEFENSE_FIRE_DELAY 5 SECONDS
+#define AUTO_DEFENSE_LOCKON_DELAY 21 SECONDS
+#define AUTO_DEFENSE_FIRE_DELAY 3 SECONDS
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses
 	name = "Automated Defenses"

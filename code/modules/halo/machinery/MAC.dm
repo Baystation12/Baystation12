@@ -262,7 +262,12 @@
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
-	explosion(impacted,rand(2,3),rand(4,6),rand(6,8),rand(10,20))
+	var/increase_from_damage = (damage/250)
+	if(increase_from_damage > 2)
+		increase_from_damage = (increase_from_damage-2)/4
+	else
+		increase_from_damage = 0
+	explosion(impacted,3 + increase_from_damage,5 + increase_from_damage,7 + increase_from_damage,10 + increase_from_damage)
 
 #undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE
