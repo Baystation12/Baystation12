@@ -5491,8 +5491,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(12,73)
+	req_access = list(12, 73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar)
@@ -6762,8 +6761,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(12,73)
+	req_access = list(12, 73)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
