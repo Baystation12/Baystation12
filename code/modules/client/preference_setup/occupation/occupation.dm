@@ -276,7 +276,7 @@
 			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
 			var/ranks = branch_rank[player_branch.name] || mil_branches.spawn_ranks(player_branch.name, S)
 			if(!player_rank || !(player_rank.name in ranks))
-				player_rank = LAZYLEN(ranks) ? mil_branches.get_rank(player_branch, ranks[1]) : null
+				player_rank = LAZYLEN(ranks) ? mil_branches.get_rank(player_branch.name, ranks[1]) : null
 
 			// Now make the assignments
 			pref.branches[job.title] = player_branch.name
