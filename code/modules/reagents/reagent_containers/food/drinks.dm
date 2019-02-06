@@ -323,7 +323,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT
 	name = "\improper NT coffee cup"
-	desc = "A red NanoTrasen coffee cup. 90% guaranteed to not be laced with mind-control drugs."
+	desc = "A red NanoTrasen coffee cup."
 	icon_state = "coffeecup_NT"
 	base_name = "NT cup"
 
