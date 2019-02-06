@@ -63,6 +63,7 @@
 		if(counter >= objs_per_container || isnull(our_container))
 			our_container.store_contents()
 			our_container = pick(valid_containers)
+			counter = 0
 		if(cargo_contained.Find(typepath) == cargo_contained.len)
 			our_container.store_contents()
 		counter += 1
