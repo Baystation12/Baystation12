@@ -39,6 +39,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/power_equip = 1 // Status
 	var/power_light = 1
 	var/power_environ = 1
+	var/power_camera = 1
 	var/used_equip = 0  // Continuous drain; don't mess with these directly.
 	var/used_light = 0
 	var/used_environ = 0
@@ -72,6 +73,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
+	power_camera = 0
 	has_gravity = 0
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')

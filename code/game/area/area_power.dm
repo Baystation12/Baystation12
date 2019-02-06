@@ -16,6 +16,8 @@
 			return power_light
 		if(ENVIRON)
 			return power_environ
+		if(CAMERA)
+			return power_camera
 
 	return 0
 

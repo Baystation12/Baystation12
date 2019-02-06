@@ -24,7 +24,7 @@ Class Variables:
 		 EQUIP:1 -- Equipment Channel
 		 LIGHT:2 -- Lighting Channel
 		 ENVIRON:3 -- Environment Channel
-
+		 CAMERA:4 -- Camera Channel
    component_parts (list)
 	  A list of component parts of machine used by frame based machines.
 

@@ -4,8 +4,9 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "camera"
 	use_power = POWER_USE_ACTIVE
-	idle_power_usage = 5
-	active_power_usage = 10
+	idle_power_usage = 100
+	active_power_usage = 200
+	power_channel = CAMERA
 	plane = ABOVE_HUMAN_PLANE
 	layer = CAMERA_LAYER
 
@@ -18,7 +19,8 @@
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/weapon/camera_assembly/assembly = null
-
+	var/obj/item/weapon/cell/cell = null
+	var/area/cam_area
 	var/toughness = 5 //sorta fragile
 
 	// WIRES
@@ -82,8 +84,11 @@
 	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
+	if(!cell)
+		var/obj/item/weapon/cell/standard/C = new (src)
+		cell = C
 
-	update_icon()
+	queue_icon_update()
 
 	/* // Use this to look for cameras that have the same c_tag.
 	for(var/obj/machinery/camera/C in cameranet.cameras)
@@ -124,11 +129,26 @@
 	return ..()
 
 /obj/machinery/camera/Process()
+	var/area/A = get_area(src)
+	cam_area = A
 	if((stat & EMPED) && world.time >= affected_by_emp_until)
 		stat &= ~EMPED
 		cancelCameraAlarm()
 		update_icon()
 		update_coverage()
+	else if(!A)
+		return
+	else if(!A.powered(CAMERA))
+		if(!cell || cell.charge <= 0)
+			deactivate(null, 0, 0)
+		else
+			cell.charge -= active_power_usage
+	else
+		if(cell && (cell.charge < cell.maxcharge)) //cell isn't maxed out, recharge cell.
+			update_use_power(POWER_USE_ACTIVE)
+			cell.give(active_power_usage/2)//give half the power usage to the cell
+		else
+			update_use_power(POWER_USE_IDLE)
 	return internal_process()
 
 /obj/machinery/camera/proc/set_ai_watching(var/mob/observer/eye/aiEye/ai)
@@ -137,12 +157,14 @@
 	if(!(ai_list |= ai))
 		ai_list += ai
 	ai_watching = TRUE
+	update_use_power(POWER_USE_ACTIVE)
 	queue_icon_update()
 
 /obj/machinery/camera/proc/ai_stop_watching(var/mob/observer/eye/aiEye/ai)
 	ai_list -= ai
 	if(!ai_list.len)
 		ai_watching = FALSE
+		update_use_power(POWER_USE_IDLE)
 		queue_icon_update()
 
 /obj/machinery/camera/proc/internal_process()
@@ -188,17 +210,16 @@
 /obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
 	if(!istype(user))
 		return
-		unblock(user)
-		deactivate(user, 1, 1)
-		update_coverage()
-		return
 	if(user.species.can_shred(user))
 		set_status(0)
 		user.do_attack_animation(src)
 		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-		add_hiddenprint(user)
+		add_fingerprint(user)
 		destroy()
+	else if(blocked)
+		unblock(user)
+		deactivate(user, 1, 1)
 
 /obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
 	update_coverage()
@@ -234,18 +255,20 @@
 			return
 
 	// OTHER
-	else if (can_use() && isliving(user) && !blocked)
+	else if (can_use() && isliving(user) && !blocked && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/tape_roll) || istype(W, /obj/item/weapon/ducttape)))
 		if(istype(W, /obj/item/weapon/paper/sticky) || istype(W, /obj/item/weapon/ducttape) || istype(W, /obj/item/weapon/tape_roll))
-			blocked = 1
-			deactivate(user, 1, 1)
-			to_chat(user, "<span class='notice'>You stick [W] on [src]'s lens, causing an obstruction.</span>")
-			if(!istype(W, /obj/item/weapon/tape_roll))				
-				contents += W
-			else
-				var/obj/item/weapon/ducttape/T = new /obj/item/weapon/ducttape(src)
-				T.add_fingerprint(user)
-				contents += T
-			update_coverage()
+			visible_message("<span class='notice'>[user] starts to stick something on [src]'s lens.</span>")
+			if(do_after(user, 20 , src, TRUE))
+				blocked = 1
+				deactivate(user, 1, 1)			
+				if(!istype(W, /obj/item/weapon/tape_roll))				
+					W.forceMove(src)
+					contents += W
+
+				else
+					var/obj/item/weapon/ducttape/T = new /obj/item/weapon/ducttape(src)
+					T.add_fingerprint(user)
+					contents += T
 			return
 		else if (istype(W, /obj/item/weapon/paper))
 			var/mob/living/U = user
@@ -283,25 +306,29 @@
 	set_status(!src.status)
 	if (!(src.status))
 		if(user && blocking)			
-			visible_message("<span class='notice'> [user] has put something in front of [src]'s lens.</span>")
+			visible_message("<span class='notice'>[user] has put something in front of [src]'s lens.</span>")
 			icon_state = "[initial(icon_state)]_blocked"
+			set_broken(TRUE)
+			update_coverage()
 			add_fingerprint(user)
 		else if(user)			
-			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			visible_message("<span class='notice'>[user] has deactivated [src]!</span>")
 			add_fingerprint(user)
 		else
-			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
+			visible_message("<span class='notice'>[src] clicks and shuts down. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		icon_state = "[initial(icon_state)]1"
+			icon_state = "[initial(icon_state)]1"
 	else
 		if(user && blocking)
-			visible_message("<span class='notice'> [user] removes the obstruction from [src]'s lens.</span>")
+			visible_message("<span class='notice'>[user] removes the obstruction from [src]'s lens.</span>")
+			set_broken(FALSE)
+			update_coverage()
 			add_fingerprint(user)
 		if(user)
-			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			visible_message("<span class='notice'>[user] has reactivated [src]!</span>")
 			add_fingerprint(user)
 		else
-			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
+			visible_message("<span class='notice'>[src] clicks and reactivates itself. </span>")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = initial(icon_state)
 
@@ -332,7 +359,7 @@
 			O.forceMove(src.loc)//drop anything sticking on the camera lens to the ground, but leave the components inside.
 			visible_message("<span class='warning'>[O] falls off the camera lens and onto the ground as the [src] breaks!</span>")
 
-	ai_list.Cut()
+	ai_list.Cut()//It's broken, clear all the AIs from this camera's proximity list.
 
 /obj/machinery/camera/proc/set_status(var/newstatus)
 	if (status != newstatus)

@@ -89,6 +89,7 @@
 	var/lighting = POWERCHAN_ON_AUTO
 	var/equipment = POWERCHAN_ON_AUTO
 	var/environ = POWERCHAN_ON_AUTO
+	var/cameras = POWERCHAN_ON_AUTO
 	var/operating = 1
 	var/charging = 0
 	var/chargemode = 1
@@ -100,6 +101,7 @@
 	var/lastused_light = 0
 	var/lastused_equip = 0
 	var/lastused_environ = 0
+	var/lastused_cameras = 0
 	var/lastused_charging = 0
 	var/lastused_total = 0
 	var/main_status = 0
@@ -125,6 +127,7 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
+	var/global/list/status_overlays_cameras
 
 
 /obj/machinery/power/apc/get_cell()
@@ -200,6 +203,7 @@
 	area.power_light = 0
 	area.power_equip = 0
 	area.power_environ = 0
+	area.power_camera = 0
 	area.power_change()
 	qdel(wires)
 	wires = null
@@ -282,12 +286,14 @@
 		status_overlays_equipment = new
 		status_overlays_lighting = new
 		status_overlays_environ = new
+		status_overlays_cameras = new
 
 		status_overlays_lock.len = 2
 		status_overlays_charging.len = 3
 		status_overlays_equipment.len = 5
 		status_overlays_lighting.len = 5
 		status_overlays_environ.len = 5
+		status_overlays_cameras.len = 5
 
 		status_overlays_lock[1] = image(icon, "apcox-0")    // 0=blue 1=red
 		status_overlays_lock[2] = image(icon, "apcox-1")
@@ -296,7 +302,7 @@
 		status_overlays_charging[2] = image(icon, "apco3-1")
 		status_overlays_charging[3] = image(icon, "apco3-2")
 
-		var/list/channel_overlays = list(status_overlays_equipment, status_overlays_lighting, status_overlays_environ)
+		var/list/channel_overlays = list(status_overlays_equipment, status_overlays_lighting, status_overlays_environ, status_overlays_cameras)
 		var/channel = 0
 		for(var/list/channel_leds in channel_overlays)
 			channel_leds[POWERCHAN_OFF + 1] = overlay_image(icon,"apco[channel]",COLOR_RED)
@@ -361,6 +367,7 @@
 				overlays += status_overlays_equipment[equipment+1]
 				overlays += status_overlays_lighting[lighting+1]
 				overlays += status_overlays_environ[environ+1]
+				overlays += status_overlays_cameras[cameras+1]
 
 	if(update & 3)
 		if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE))
@@ -424,6 +431,7 @@
 		update_overlay_chan["Equipment"] = equipment
 		update_overlay_chan["Lighting"] = lighting
 		update_overlay_chan["Enviroment"] = environ
+		update_overlay_chan["Cameras"] = cameras
 
 
 	var/results = 0
@@ -743,7 +751,6 @@
 			src.cell = null
 			user.visible_message("<span class='warning'>[user.name] removes the power cell from [src.name]!</span>",\
 								 "<span class='notice'>You remove the power cell.</span>")
-//			to_chat(user, "You remove the power cell.")
 			charging = 0
 			src.update_icon()
 		return
@@ -813,6 +820,16 @@
 					"on"   = list("env" = 1),
 					"off"  = list("env" = 0)
 				)
+			),
+			list(
+				"title" = "Cameras",
+				"powerLoad" = round(lastused_cameras),
+				"status" = cameras,
+				"topicParams" = list(
+					"auto" = list("cam" = 2),
+					"on"   = list("cam" = 1),
+					"off"  = list("cam" = 0)
+				)
 			)
 		)
 	)
@@ -831,7 +848,7 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/power/apc/proc/report()
-	return "[area.name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ]) : [cell? cell.percent() : "N/C"] ([charging])"
+	return "[area.name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ+lastused_cameras]) : [cell? cell.percent() : "N/C"] ([charging])"
 
 /obj/machinery/power/apc/proc/update()
 	if(operating && !shorted && !failure_timer)
@@ -948,6 +965,11 @@
 		environ = setsubsystem(val)
 		update_icon()
 		update()
+	else if (href_list["cam"])
+		var/val = text2num(href_list["cam"])
+		cameras = setsubsystem(val)
+		update_icon()
+		update()
 
 	else if (href_list["overload"])
 		if(istype(usr, /mob/living/silicon))
@@ -1013,14 +1035,16 @@
 	lastused_light = area.usage(LIGHT)
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
+	lastused_cameras = area.usage(CAMERA)
 	area.clear_usage()
 
-	lastused_total = lastused_light + lastused_equip + lastused_environ
+	lastused_total = lastused_light + lastused_equip + lastused_environ + lastused_cameras
 
 	//store states to update icon if any change
 	var/last_lt = lighting
 	var/last_eq = equipment
 	var/last_en = environ
+	var/last_cam = cameras
 	var/last_ch = charging
 
 	var/excess = surplus()
@@ -1108,7 +1132,7 @@
 		autoflag = 0
 
 	// update icon & area power if anything changed
-	if(last_lt != lighting || last_eq != equipment || last_en != environ || force_update)
+	if(last_lt != lighting || last_eq != equipment || last_en != environ || force_update || last_cam != cameras)
 		force_update = 0
 		queue_icon_update()
 		update()

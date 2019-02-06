@@ -11,6 +11,7 @@
 	//	Motion, EMP-Proof, X-Ray
 	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/material/osmium, /obj/item/weapon/stock_parts/scanning_module)
 	var/list/upgrades = list()
+	var/obj/item/weapon/cell/cell
 	var/camera_name
 	var/camera_network
 	var/state = 0
@@ -20,7 +21,8 @@
 				1 = Wrenched in place
 				2 = Welded in place
 				3 = Wires attached to it (you can now attach/dettach upgrades)
-				4 = Screwdriver panel closed and is fully built (you cannot attach upgrades)
+				4 = Power cell installed.
+				5 = Screwdriver panel closed and is fully built (you cannot attach upgrades)
 	*/
 
 /obj/item/weapon/camera_assembly/attackby(obj/item/W as obj, mob/living/user as mob)
@@ -56,7 +58,7 @@
 				return
 
 		if(2)
-			// State 2
+			// State 2						
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(C.use(2))
@@ -74,9 +76,21 @@
 					anchored = 1
 				return
 
-
 		if(3)
-			// State 3
+			if(istype(W, /obj/item/weapon/cell))
+				to_chat(user, "<span class='notice'>You add \the [W] to the assembly.</span>")
+				cell = W
+				state = 4
+				return
+			else if(isWirecutter(W))
+				new/obj/item/stack/cable_coil(get_turf(src), 2)
+				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+				to_chat(user, "You cut the wires from the circuits.")
+				state = 2
+				return
+
+		if(4)
+			// State 4
 			if(isScrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
@@ -94,9 +108,15 @@
 				var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
 				input = sanitizeSafe(input(usr, "How would you like to name the camera?", "Set Camera Name", camera_name ? camera_name : temptag), MAX_LNAME_LEN)
 
-				state = 4
+				state = 5
 				var/obj/machinery/camera/C = new(src.loc)
 				src.forceMove(C)
+				
+				C.cell = cell
+				cell.forceMove(C)
+				
+				cell = null
+
 				C.assembly = src
 
 				C.auto_turn()
@@ -114,14 +134,6 @@
 						if(confirm == "Yes")
 							C.update_icon()
 							break
-				return
-
-			else if(isWirecutter(W))
-
-				new/obj/item/stack/cable_coil(get_turf(src), 2)
-				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-				to_chat(user, "You cut the wires from the circuits.")
-				state = 2
 				return
 
 	// Upgrades!
@@ -151,6 +163,14 @@
 /obj/item/weapon/camera_assembly/attack_hand(mob/user as mob)
 	if(!anchored)
 		..()
+	if(state == 4)
+		if(cell)
+			cell.queue_icon_update()
+			cell.add_fingerprint(user)
+			user.put_in_hands(cell)				
+			user.visible_message("[user.name] removes \the [cell] from [src].", "<span class = 'notice'>You remove \the [cell] from [src].")
+			src.cell = null
+			state = 3
 
 /obj/item/weapon/camera_assembly/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
 

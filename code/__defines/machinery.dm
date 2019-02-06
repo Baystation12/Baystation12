@@ -21,7 +21,8 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define EQUIP   1
 #define LIGHT   2
 #define ENVIRON 3
-#define TOTAL   4 // For total power used only.
+#define CAMERA  4
+#define TOTAL   5 // For total power used only.
 
 // Bitflags for machine stat variable.
 #define BROKEN   0x1
