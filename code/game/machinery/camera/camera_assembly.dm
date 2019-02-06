@@ -168,7 +168,7 @@
 			cell.queue_icon_update()
 			cell.add_fingerprint(user)
 			user.put_in_hands(cell)				
-			user.visible_message("[user.name] removes \the [cell] from [src].", "<span class = 'notice'>You remove \the [cell] from [src].")
+			user.visible_message("[user.name] removes \the [cell] from [src].", "<span class='notice'>You remove \the [cell] from [src].</span>")
 			src.cell = null
 			state = 3
 
