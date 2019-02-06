@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added explosive harpoons to the uplink. These will only explode upon embedding in a target, by throwing it at them or sticking them close up."
+  - tweak: "Increased the base harpoon's throwing force divisor."
