@@ -76,6 +76,8 @@
 		because they have an expanded voice chamber in their throat. Skirmishers serve as Covenant shock troopers \
 		and close-range combatants, attacking in packs and using flanking tactics. Kig'Yar feud with Unggoy for \
 		status as the lowest ranked members of the Covenant."
+	flesh_color = "#FF9463"
+	blood_color = "#4A4A64" //Same blood colour as Elites.
 	default_language = "Sangheili"
 	language = "Sangheili"
 	secondary_langs = list("Tvoai")
