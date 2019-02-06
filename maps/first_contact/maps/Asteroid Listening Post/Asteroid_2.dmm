@@ -264,7 +264,7 @@
 "fd" = (/obj/structure/sign/bluecross_1,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/medical)
 "fe" = (/obj/structure/curtain/medical,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
 "ff" = (/obj/structure/table/steel_reinforced,/obj/item/clothing/suit/surgicalapron,/obj/item/clothing/suit/surgicalapron,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
-"fg" = (/obj/machinery/chemical_dispenser/ert,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
+"fg" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled/white,/area/asteroid_listening/ground/interior/medical)
 "fh" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 "fi" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 "fj" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
