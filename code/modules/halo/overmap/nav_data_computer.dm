@@ -202,7 +202,7 @@
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "covenant"
-	known_sectors = list("Lesser Charity","KS7-535")
+	known_sectors = list("Vanguard's Mantle","KS7-535")
 
 /obj/item/nav_data_chip/innie
 	chip_faction = "innie"
@@ -217,10 +217,10 @@
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "covenant"
-	known_sectors = list("Lesser Charity","KS7-535")
+	known_sectors = list("Vanguard's Mantle","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
-	known_sectors = list("Lesser Charity","Asteroid","KS7-535")
+	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
