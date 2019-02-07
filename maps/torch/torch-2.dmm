@@ -1424,6 +1424,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
 "dq" = (
@@ -1807,6 +1812,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "ei" = (
@@ -1824,6 +1830,11 @@
 /area/tcommsat/storage)
 "ej" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
 "ek" = (
@@ -2126,6 +2137,11 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/dark,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/tcommsat/chamber)
 "eU" = (
@@ -2280,10 +2296,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "fk" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
@@ -2670,10 +2686,12 @@
 /area/maintenance/thirddeck/aftstarboard)
 "ga" = (
 /obj/machinery/telecomms/hub/preset,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "gb" = (
 /obj/machinery/bluespacerelay,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "gc" = (
@@ -2684,6 +2702,11 @@
 	dir = 5
 	},
 /obj/effect/catwalk_plated/dark,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/tcommsat/chamber)
 "gd" = (
@@ -3143,6 +3166,11 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/dark,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/tcommsat/chamber)
 "ha" = (
@@ -3158,11 +3186,6 @@
 "hc" = (
 /obj/machinery/telecomms/server/presets/unused,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "hd" = (
@@ -3537,6 +3560,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "hR" = (
@@ -3557,6 +3581,11 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
 "hT" = (
@@ -3572,11 +3601,6 @@
 "hV" = (
 /obj/machinery/r_n_d/server/core,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "hW" = (
@@ -4314,6 +4338,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"jo" = (
+/turf/simulated/floor/bluegrid,
+/area/tcommsat/chamber)
 "jq" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -4382,23 +4409,13 @@
 "jz" = (
 /obj/machinery/telecomms/processor/preset_four,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "jA" = (
-/obj/structure/cable/cyan{
+/obj/structure/cable/green{
 	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/chamber)
@@ -4418,6 +4435,11 @@
 	icon_state = "0-4"
 	},
 /obj/effect/wallframe_spawn/reinforced,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "jC" = (
@@ -4897,16 +4919,10 @@
 "kw" = (
 /obj/machinery/telecomms/bus/preset_three,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/cable/cyan,
-/obj/machinery/power/terminal{
-	dir = 4
-	},
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "kx" = (
 /obj/machinery/light,
-/obj/structure/cable/cyan,
-/obj/machinery/power/smes/batteryrack,
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/chamber)
 "ky" = (
@@ -10307,11 +10323,6 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -14461,6 +14472,11 @@
 /obj/machinery/camera/network/command{
 	c_tag = "Telecommunications - Server Room Starboard"
 	},
+/obj/machinery/power/smes/batteryrack,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "Gi" = (
@@ -17391,6 +17407,14 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
+"Nt" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tcommsat/chamber)
 "Nu" = (
 /obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
@@ -17434,6 +17458,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
 "NC" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
 "ND" = (
@@ -17762,6 +17791,14 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/diplomat)
+"OM" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tcommsat/chamber)
 "OO" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -20164,7 +20201,14 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/aft)
 "Wi" = (
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "Wj" = (
@@ -30404,7 +30448,7 @@ Wi
 eS
 gb
 gY
-Wi
+jo
 Xi
 aM
 aM
@@ -30607,7 +30651,7 @@ eT
 gc
 gZ
 hS
-NC
+Nt
 jx
 ku
 ll
@@ -30809,7 +30853,7 @@ eU
 gd
 ha
 hT
-NC
+OM
 jy
 kv
 ll
@@ -31011,7 +31055,7 @@ eV
 gd
 hb
 hU
-NC
+OM
 jz
 kw
 ll
