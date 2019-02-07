@@ -3262,6 +3262,9 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
 /turf/simulated/floor/plating,
 /area/engineering/atmos/aux)
 "hk" = (
@@ -4866,11 +4869,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "kl" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 6
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "kn" = (
@@ -5414,8 +5417,8 @@
 	dir = 9;
 	icon_state = "intact"
 	},
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "lI" = (
@@ -6677,7 +6680,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "oB" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "oC" = (
@@ -7514,8 +7517,8 @@
 /area/maintenance/thirddeck/port)
 "ql" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "qn" = (
@@ -17341,9 +17344,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
 "Nu" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Nx" = (
@@ -17982,9 +17985,9 @@
 /area/maintenance/thirddeck/foreport)
 "PC" = (
 /obj/structure/lattice,
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "PD" = (
@@ -18427,9 +18430,9 @@
 /area/maintenance/thirddeck/starboard)
 "QZ" = (
 /obj/structure/lattice,
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Ra" = (
@@ -18654,12 +18657,12 @@
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "RS" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 10;
 	icon_state = "intact"
 	},
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "RT" = (
@@ -20161,7 +20164,7 @@
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftport)
 "Ws" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Wu" = (
@@ -20226,7 +20229,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "WF" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "WG" = (
@@ -21093,11 +21096,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Zd" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 5
 	},
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Ze" = (

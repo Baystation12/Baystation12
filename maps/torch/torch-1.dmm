@@ -390,6 +390,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/disposalpipe/segment,
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
 "bM" = (
@@ -848,7 +852,7 @@
 /turf/simulated/floor/crystal,
 /area/crew_quarters/adherent)
 "dd" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_7_berth_hatch";
@@ -929,6 +933,11 @@
 	dir = 5
 	},
 /obj/structure/disposalpipe/segment,
+/obj/structure/sign/warning/pods/west{
+	dir = 8;
+	icon_state = "podswest";
+	pixel_x = 40
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "ds" = (
@@ -1728,6 +1737,15 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
+"fK" = (
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/disposalpipe/segment,
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/aft)
 "fP" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -2670,6 +2688,7 @@
 	pixel_y = 23;
 	req_access = list(201)
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "iZ" = (
@@ -2943,8 +2962,7 @@
 	},
 /obj/machinery/camera/network/fourth_deck{
 	c_tag = "Fourth Deck - Pathfinder's Office";
-	dir = 1;
-	network = list("First Deck","Exploration")
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
@@ -3373,9 +3391,6 @@
 	dir = 4
 	},
 /obj/item/device/radio/beacon,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "lX" = (
@@ -3708,15 +3723,6 @@
 	},
 /turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
-"mD" = (
-/obj/structure/catwalk,
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -23;
-	pixel_y = 0
-	},
-/turf/simulated/floor/shuttle_ceiling/torch/air,
-/area/quartermaster/hangar/top)
 "mG" = (
 /obj/structure/railing/mapped,
 /turf/simulated/open,
@@ -3853,6 +3859,25 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/aft)
+"mY" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_y = 32
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
 "ng" = (
@@ -4403,16 +4428,6 @@
 	},
 /turf/simulated/open,
 /area/quartermaster/hangar/top)
-"oX" = (
-/obj/structure/catwalk,
-/obj/machinery/alarm{
-	alarm_id = "petrov2";
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
-/turf/simulated/open,
-/area/quartermaster/hangar/top)
 "oZ" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/brigdoor/southright{
@@ -4804,6 +4819,32 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
+"qv" = (
+/obj/structure/catwalk,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_y = -32
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/starboard)
 "qy" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4813,7 +4854,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/crystal{
-	name = "Adherent Maintenence"
+	name = "Adherent Maintenance"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/adherent)
@@ -4835,25 +4876,6 @@
 /obj/structure/bedsheetbin,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
-"qE" = (
-/obj/effect/catwalk_plated,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/floor/plating,
-/area/hallway/primary/fourthdeck/aft)
 "qP" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -5238,6 +5260,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"sd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/effect/catwalk_plated/dark,
+/obj/structure/disposalpipe/segment,
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/aft)
 "sf" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -5614,6 +5645,20 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
+"sU" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/fourthdeck/aft)
 "sW" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -5663,10 +5708,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/flightcontrol)
 "ta" = (
@@ -5685,11 +5726,23 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/flightcontrol)
+"tb" = (
+/obj/effect/catwalk_plated,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/aft)
 "tc" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -6368,9 +6421,6 @@
 	c_tag = "Flight Control Tower";
 	dir = 8
 	},
-/obj/structure/disposalpipe/trunk{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/flightcontrol)
 "uH" = (
@@ -6379,10 +6429,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
@@ -6856,6 +6902,19 @@
 /obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/fourthdeck/aft)
+"wq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated,
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/fore)
 "wt" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/waterstore)
@@ -7239,6 +7298,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
+"xN" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 5
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/sign/warning/pods/east{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/aft)
 "xO" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/paper_bin{
@@ -8223,15 +8294,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
-"Bw" = (
-/obj/structure/catwalk,
-/obj/machinery/firealarm{
-	dir = 4;
-	layer = 3.3;
-	pixel_x = 26
-	},
-/turf/simulated/open,
-/area/quartermaster/hangar/top)
 "By" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/door/blast/regular/escape_pod,
@@ -9007,8 +9069,9 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Lounge Aft"
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Lounge Aft";
+	name = "security camera"
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
@@ -9479,7 +9542,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
 "Gv" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_9_berth_hatch";
@@ -10220,6 +10283,11 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 8
 	},
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_x = -32;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
 "Jy" = (
@@ -10229,6 +10297,11 @@
 	pixel_x = 24
 	},
 /obj/structure/disposalpipe/segment,
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_x = 32;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
 "JA" = (
@@ -10585,6 +10658,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/sign/warning/pods/east{
+	dir = 8;
+	icon_state = "podseast";
+	pixel_x = 40
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "KD" = (
@@ -10617,12 +10695,12 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
 	},
+/obj/structure/disposalpipe/segment,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/disposalpipe/junction,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "KH" = (
@@ -11158,6 +11236,20 @@
 /obj/machinery/light/small,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
+"Mn" = (
+/obj/effect/catwalk_plated,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/aft)
 "Mo" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -11255,6 +11347,10 @@
 /obj/effect/floor_decal/corner/white{
 	icon_state = "corner_white";
 	dir = 8
+	},
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
@@ -11729,6 +11825,7 @@
 	dir = 10
 	},
 /obj/random/junk,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "NT" = (
@@ -11799,6 +11896,18 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
+"Oa" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_y = -32
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/port)
 "Oc" = (
 /obj/machinery/deployable/barrier,
 /turf/simulated/floor/tiled/monotile,
@@ -13028,6 +13137,9 @@
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "Rs" = (
@@ -13364,7 +13476,7 @@
 	department = "Quartermaster's Office"
 	},
 /obj/machinery/camera/network/supply{
-	c_tag = "Supply Office - Deck Chief";
+	c_tag = "Supply Office - Deck Officer";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -13787,6 +13899,12 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
+"SY" = (
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Adherent Maintenance"
+	},
+/turf/simulated/floor/crystal,
+/area/crew_quarters/adherent)
 "Ta" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -13863,9 +13981,6 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
@@ -14271,15 +14386,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
-"Us" = (
-/obj/structure/catwalk,
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24;
-	pixel_y = 0
-	},
-/turf/simulated/floor/shuttle_ceiling/torch/air,
-/area/quartermaster/hangar/top)
 "Uu" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/lounge)
@@ -14562,9 +14668,6 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
@@ -15392,8 +15495,9 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Lounge Fore"
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Lounge Fore";
+	name = "security camera"
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
@@ -15829,14 +15933,13 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "Yw" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "escape_pod_6_berth_hatch";
 	locked = 1;
 	name = "Escape Pod One"
 	},
-/obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "Yx" = (
@@ -16224,7 +16327,7 @@
 	},
 /obj/machinery/door/window/southleft{
 	dir = 1;
-	name = "Deck Chief"
+	name = "Deck Officer"
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -16333,7 +16436,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/command/pathfinder)
 "ZA" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_8_berth_hatch";
@@ -16421,6 +16524,10 @@
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(201)
+	},
+/obj/structure/sign/warning/docking_area{
+	name = "\improper ESCAPE POD LAUNCH PATHWAY";
+	pixel_y = -32
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
@@ -27355,7 +27462,7 @@ oA
 oA
 vo
 oA
-nm
+wq
 Pz
 AG
 BN
@@ -33207,8 +33314,8 @@ WI
 WI
 WI
 oQ
-mD
-Us
+WI
+WI
 WI
 WI
 oQ
@@ -37249,12 +37356,12 @@ lr
 lr
 MU
 ru
-th
+sU
 RW
 wd
 lr
-Bw
-oX
+lr
+lr
 lr
 vQ
 jB
@@ -37451,7 +37558,7 @@ bo
 bo
 Xn
 NY
-UM
+Mn
 Rx
 we
 wa
@@ -38057,7 +38164,7 @@ kB
 kB
 Xn
 Hn
-MI
+tb
 In
 rz
 ZE
@@ -38259,7 +38366,7 @@ Ro
 pi
 Xn
 TH
-MI
+tb
 In
 rz
 yC
@@ -38662,8 +38769,8 @@ ZM
 ZM
 ZM
 CM
-RK
-qE
+xN
+tb
 uH
 wa
 wa
@@ -39250,7 +39357,7 @@ aa
 aj
 aq
 NQ
-bf
+qv
 XT
 XT
 XT
@@ -39263,7 +39370,7 @@ XT
 XT
 kz
 kz
-lz
+SY
 mP
 nZ
 lz
@@ -39289,7 +39396,7 @@ Ds
 Ss
 Ss
 iO
-LO
+Oa
 GT
 Kl
 aa
@@ -40868,7 +40975,7 @@ QM
 aK
 UR
 bJ
-Xc
+sd
 Xc
 Xc
 Xc
@@ -40902,7 +41009,7 @@ Hg
 Xc
 Xc
 IB
-IB
+fK
 Jy
 JQ
 Kh
@@ -42318,7 +42425,7 @@ ah
 ah
 ah
 ah
-JS
+mY
 OB
 Vr
 QU

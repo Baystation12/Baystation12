@@ -79,7 +79,7 @@
 	info = {"
 	<tt><center><b><font color='red'>CONFIDENTIAL: UPPER MANAGEMENT ONLY</font></b>
 	<h3>CORPORATE RESEARCH DIVISION</h3>
-	<img src = torchltd.png>
+	<img src = exologo.png>
 	</center>
 	<b>FROM:</b> Hieronimus Blackstone, Overseer of Torch Cooperation Project<br>
 	<b>TO:</b> Chief Science Officer of SEV Torch branch<br>

@@ -185,9 +185,9 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Shuttle SMES
-/obj/machinery/power/smes/buildable/preset/torch/shuttle/configure_and_install_coils()
+/obj/machinery/power/smes/buildable/preset/torch/shuttle/configure_and_install_coils()	
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
-	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)	
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
