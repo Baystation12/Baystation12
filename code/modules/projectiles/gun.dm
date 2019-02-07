@@ -51,6 +51,7 @@
 	waterproof = FALSE
 
 	var/burst = 1
+	var/can_autofire = FALSE
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
 	var/move_delay = 1
@@ -551,3 +552,16 @@
 		target.visible_message("<span class='danger'>\The [src] goes off during the struggle!</span>")
 		afterattack(shoot_to,target)
 		return 1
+
+/obj/item/weapon/gun/proc/can_autofire()
+	return (can_autofire && world.time >= next_fire_time)
+
+/client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	if(over_object)
+		var/mob/living/M = mob
+		if(istype(M) && !M.incapacitated())
+			var/obj/item/weapon/gun/gun = mob.get_active_hand()
+			if(istype(gun) && gun.can_autofire())
+				M.set_dir(get_dir(M, over_object))
+				gun.Fire(get_turf(over_object), mob, params, (get_dist(over_object, mob) <= 1), FALSE)
