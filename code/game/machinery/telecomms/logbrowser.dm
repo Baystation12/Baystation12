@@ -103,9 +103,9 @@
 				dat += "</ol>"
 
 
-
-		user << browse(dat, "window=comm_monitor;size=575x400")
-		onclose(user, "server_control")
+		var/datum/browser/popup = new(user, "comm_monitor", "Telecommunications Monitor", 575, 400)
+		popup.set_content(JOINTEXT(dat))
+		popup.open()		
 
 		temp = ""
 		return

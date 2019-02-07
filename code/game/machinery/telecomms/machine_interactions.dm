@@ -182,9 +182,10 @@
 
 	dat += "</font>"
 	temp = ""
-	user << browse(dat, "window=tcommachine;size=520x500;can_resize=0")
-	onclose(user, "dormitory")
-
+	
+	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 // Off-Site Relays
 //
