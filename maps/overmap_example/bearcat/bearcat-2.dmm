@@ -5126,7 +5126,7 @@
 /obj/item/device/taperecorder,
 /obj/item/device/camera,
 /obj/item/weapon/storage/backpack/dufflebag/syndie,
-/obj/item/weapon/storage/box/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
 /obj/item/weapon/handcuffs,
 /obj/item/device/boombox,
 /turf/simulated/floor/wood,

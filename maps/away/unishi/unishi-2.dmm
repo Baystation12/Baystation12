@@ -1185,7 +1185,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/weapon/folder/white,
 /obj/item/weapon/pen/reagent/sleepy,
 /turf/simulated/floor/tiled,

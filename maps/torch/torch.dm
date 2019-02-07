@@ -33,6 +33,7 @@
 	#include "items/uniform_vendor.dm"
 	#include "items/rigs.dm"
 	#include "items/solbanner.dm"
+	#include "items/explo_shotgun.dm"
 
 	#include "items/clothing/solgov-accessory.dm"
 	#include "items/clothing/solgov-armor.dm"

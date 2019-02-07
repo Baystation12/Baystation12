@@ -4,6 +4,8 @@ var/list/client_preference_stats_
 	. = list()
 	if(!user)
 		return
+	if(!SScharacter_setup.initialized)
+		return
 	if(!client_preference_stats_)
 		client_preference_stats_ = list()
 		for(var/datum/client_preference/client_pref in get_client_preferences())

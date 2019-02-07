@@ -2011,7 +2011,7 @@
 "fi" = (
 /obj/structure/closet,
 /obj/item/weapon/shield/riot,
-/obj/item/weapon/storage/box/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 4

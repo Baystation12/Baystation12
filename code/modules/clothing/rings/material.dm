@@ -21,7 +21,7 @@
 	return material
 
 /obj/item/clothing/ring/material/wood/New(var/newloc)
-	..(newloc, MATERIAL_WOOD)
+	..(newloc, MATERIAL_WALNUT)
 
 /obj/item/clothing/ring/material/plastic/New(var/newloc)
 	..(newloc, MATERIAL_PLASTIC)

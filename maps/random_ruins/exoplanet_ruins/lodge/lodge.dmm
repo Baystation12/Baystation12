@@ -205,7 +205,7 @@
 "I" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/projectile/pirate,
-/obj/item/weapon/storage/box/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "J" = (

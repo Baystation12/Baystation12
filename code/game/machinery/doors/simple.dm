@@ -223,6 +223,18 @@
 /obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WOOD, complexity)
 
+/obj/machinery/door/unpowered/simple/mahogany/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_MAHOGANY, complexity)
+
+/obj/machinery/door/unpowered/simple/maple/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_MAPLE, complexity)
+
+/obj/machinery/door/unpowered/simple/ebony/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_EBONY, complexity)
+
+/obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_WALNUT, complexity)
+
 /obj/machinery/door/unpowered/simple/wood/saloon
 	icon_base = "saloon"
 	autoclose = 1

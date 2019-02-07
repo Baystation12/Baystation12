@@ -9,6 +9,9 @@
 /obj/item/clothing/gloves/color/white
 	color = COLOR_WHITE
 
+/obj/item/clothing/gloves/color/black
+	color = COLOR_BLACK
+
 /obj/item/clothing/gloves/color/white/modified
 	item_flags = ITEM_FLAG_PREMODIFIED
 

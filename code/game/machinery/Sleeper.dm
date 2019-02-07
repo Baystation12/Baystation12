@@ -34,6 +34,14 @@
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
+/obj/machinery/sleeper/examine(mob/user)
+	. = ..()
+	if (. && user.Adjacent(src))
+		if (beaker)
+			to_chat(user, "It is loaded with a beaker.")
+		if(occupant)
+			occupant.examine(user)
+
 /obj/machinery/sleeper/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return
@@ -223,14 +231,7 @@
 		if(occupant)
 			to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
 			return
-		M.stop_pulling()
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
-		M.forceMove(src)
-		update_use_power(POWER_USE_ACTIVE)
-		occupant = M
-		update_icon()
+		set_occupant(M)
 
 /obj/machinery/sleeper/proc/go_out()
 	if(!occupant)
@@ -239,15 +240,28 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.dropInto(loc)
-	occupant = null
+	set_occupant(null)
 
 	for(var/obj/O in (contents - component_parts)) // In case an object was dropped inside or something. Excludes the beaker and component parts.
 		if(O == beaker)
 			continue
 		O.dropInto(loc)
-	update_use_power(POWER_USE_IDLE)
-	update_icon()
 	toggle_filter()
+
+/obj/machinery/sleeper/proc/set_occupant(var/mob/living/carbon/occupant)
+	src.occupant = occupant
+	update_icon()
+	if(!occupant)
+		SetName(initial(name))
+		update_use_power(POWER_USE_IDLE)
+		return
+	occupant.forceMove(src)
+	occupant.stop_pulling()
+	if(occupant.client)
+		occupant.client.perspective = EYE_PERSPECTIVE
+		occupant.client.eye = src
+	SetName("[name] ([occupant])")
+	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/sleeper/proc/remove_beaker()
 	if(beaker)

@@ -149,7 +149,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	pda_type = /obj/item/modular_computer/pda/cargo
-	l_hand = /obj/item/weapon/clipboard
+	l_hand = /obj/item/weapon/material/clipboard
 
 /decl/hierarchy/outfit/job/bearcat/hand
 	name = BEARCAT_OUTFIT_JOB_NAME("Deck Hand")

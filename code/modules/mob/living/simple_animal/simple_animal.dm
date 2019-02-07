@@ -59,6 +59,7 @@
 	var/resistance		  = 0	// Damage reduction
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
+	var/list/natural_armor //what armor animal has
 	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
 
 	//Null rod stuff
@@ -203,7 +204,12 @@
 
 	var/damage = Proj.damage
 	if(Proj.damtype == STUN)
-		damage = (Proj.damage / 8)
+		damage = Proj.damage / 6
+	if(Proj.agony)
+		damage += Proj.agony / 6
+		if(health < Proj.agony * 3)
+			Paralyse(Proj.agony / 20)
+			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	adjustBruteLoss(damage)
 	Proj.on_hit(src)
@@ -428,3 +434,6 @@
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour
 	drip.update_icon()
+
+/mob/living/simple_animal/getarmor(var/def_zone, var/type)
+	return LAZYACCESS(natural_armor, type)

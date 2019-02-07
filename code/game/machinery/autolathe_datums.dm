@@ -435,9 +435,24 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/pen/green
 	category = "General"
 
-/datum/autolathe/recipe/clipboard
-	name = "clipboard"
-	path = /obj/item/weapon/clipboard
+/datum/autolathe/recipe/clipboard_steel
+	name = "clipboard, steel"
+	path = /obj/item/weapon/material/clipboard/steel
+	category = "General"
+
+/datum/autolathe/recipe/clipboard_alum
+	name = "clipboard, aluminium"
+	path = /obj/item/weapon/material/clipboard/aluminium
+	category = "General"
+
+/datum/autolathe/recipe/clipboard_glass
+	name = "clipboard, glass"
+	path = /obj/item/weapon/material/clipboard/glass
+	category = "General"
+
+/datum/autolathe/recipe/clipboard_alum
+	name = "clipboard, plastic"
+	path = /obj/item/weapon/material/clipboard/plastic
 	category = "General"
 
 /datum/autolathe/recipe/destTagger
@@ -457,7 +472,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/speedloader
-	name = "speed loader (speedloader)"
+	name = "ammunition (speedloader)"
 	path = /obj/item/ammo_magazine/speedloader
 	hidden = 1
 	category = "Arms and Ammunition"
@@ -477,6 +492,24 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/magazine_pistol
 	name = "ammunition (pistol)"
 	path = /obj/item/ammo_magazine/pistol
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_pistol_rubber
+	name = "ammunition (pistol, rubber)"
+	path = /obj/item/ammo_magazine/pistol/rubber
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_pistol_double
+	name = "ammunition (pistol, doublestack)"
+	path = /obj/item/ammo_magazine/pistol/double
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_pistol_double_rubber
+	name = "ammunition (pistol, doublestack. rubber)"
+	path = /obj/item/ammo_magazine/pistol/double/rubber
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -504,7 +537,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/magazine_smg
+/datum/autolathe/recipe/magazine_smg_topmounted
 	name = "ammunition (SMG, top mounted)"
 	path = /obj/item/ammo_magazine/smg_top
 	hidden = 1

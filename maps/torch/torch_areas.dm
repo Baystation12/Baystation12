@@ -427,7 +427,7 @@
 	icon_state = "checkpoint1"
 
 /area/shuttle/petrov/rd
-	name = "\improper NSV Petrov - RD's Office"
+	name = "\improper NSV Petrov - CSO's Office"
 	icon_state = "head_quarters"
 
 /area/shuttle/petrov/cockpit
@@ -500,11 +500,6 @@
 /area/turbolift/fourthdeck
 	name = "\improper fourth deck"
 	base_turf = /turf/simulated/floor/plating
-/*
-/area/turbolift/fifthdeck
-	name = "\improper Fifth Deck"
-	base_turf = /turf/simulated/floor/plating
-*/
 
 /area/turbolift/cargo_lift
 	name = "\improper Cargo Lift"
@@ -512,9 +507,9 @@
 	base_turf = /turf/simulated/open
 
 /area/turbolift/robotics_lift
-  name = "\improper Robotics Lift"
-  icon_state = "shuttle3"
-  base_turf = /turf/simulated/open
+	name = "\improper Robotics Lift"
+	icon_state = "shuttle3"
+	base_turf = /turf/simulated/open
 
 // Ninja areas
 /area/ninja_dojo
@@ -668,7 +663,7 @@
 	name = "\improper Command - XO's Office"
 
 /area/crew_quarters/heads/office/rd
-	name = "\improper Command - RD's Office"
+	name = "\improper Command - CSO's Office"
 
 /area/crew_quarters/heads/office/cmo
 	name = "\improper Command - CMO's Office"
@@ -1372,11 +1367,11 @@
 	icon_state = "mechbay"
 
 /area/assembly/robotics
-	name = "\improper Fabrication Lab"
+	name = "\improper Robotics Lab"
 	icon_state = "robotics"
 
 /area/assembly/robotics/lower
-	name = "\improper Lower Fabrication Lab"
+	name = "\improper Lower Robotics Lab"
 
 /area/assembly/robotics/surgery
 	name = "\improper Robotics Operating Theatre"

@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/projectile/shotgun/pump
-	name = CALIBER_SHOTGUN
+	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "shotgun"

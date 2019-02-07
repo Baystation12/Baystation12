@@ -60,7 +60,8 @@
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	alt_titles = list(
 		"Union Enforcer" = /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard/union,
-		"Executive Assistant"
+		"Executive Assistant",
+		"Asset Protection Agent"
 	)
 	skill_points = 20
 	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,

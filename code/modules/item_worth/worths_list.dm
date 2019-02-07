@@ -143,7 +143,7 @@ var/list/worths = list(
 					/obj/item/weapon/computer_hardware/tesla_link = 350,
 					/obj/item/weapon/computer_hardware = 80,
 					/obj/item/weapon/computer_hardware/hard_drive = 125,
-					/obj/item/weapon/clipboard = 15,
+					/obj/item/weapon/material/clipboard = 15,
 //POWER CELLS,
 					/obj/item/weapon/cell/device = 100,
 					/obj/item/weapon/cell/crap = 30,

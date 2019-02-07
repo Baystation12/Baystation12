@@ -68,7 +68,7 @@
 
 /datum/random_map/winding_dungeon/proc/logging(var/text)
 	if(log)
-		log_to_dd(text)
+		log_world(text)
 
 /datum/random_map/winding_dungeon/proc/get_appropriate_list(var/list/common, var/list/uncommon, var/list/rare, var/x, var/y)
 	var/distance = sqrt((x - round(first_room_x+first_room_width/2)) ** 2 + (y - round(first_room_y+first_room_height/2)) ** 2)

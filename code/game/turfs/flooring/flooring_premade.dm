@@ -44,6 +44,22 @@
 	icon_state = "wood"
 	initial_flooring = /decl/flooring/wood
 
+/turf/simulated/floor/wood/mahogany
+	icon_state = "mahogany"
+	initial_flooring = /decl/flooring/wood/mahogany
+
+/turf/simulated/floor/wood/maple
+	icon_state = "maple"
+	initial_flooring = /decl/flooring/wood/maple
+
+/turf/simulated/floor/wood/ebony
+	icon_state = "ebony"
+	initial_flooring = /decl/flooring/wood/ebony
+
+/turf/simulated/floor/wood/walnut
+	icon_state = "walnut"
+	initial_flooring = /decl/flooring/wood/walnut
+
 /turf/simulated/floor/grass
 	name = "grass patch"
 	icon = 'icons/turf/flooring/grass.dmi'

@@ -342,6 +342,46 @@
 /obj/item/stack/material/wood/fifty
 	amount = 50
 
+/obj/item/stack/material/wood/mahogany
+	name = "mahogany plank"
+	default_type = MATERIAL_MAHOGANY
+
+/obj/item/stack/material/wood/mahogany/ten
+	amount = 10
+
+/obj/item/stack/material/wood/mahogany/twentyfive
+	amount = 25
+
+/obj/item/stack/material/wood/maple
+	name = "maple plank"
+	default_type = MATERIAL_MAPLE
+
+/obj/item/stack/material/wood/maple/ten
+	amount = 10
+
+/obj/item/stack/material/wood/maple/twentyfive
+	amount = 25
+
+/obj/item/stack/material/wood/ebony
+	name = "ebony plank"
+	default_type = MATERIAL_EBONY
+
+/obj/item/stack/material/wood/ebony/ten
+	amount = 10
+
+/obj/item/stack/material/wood/ebony/twentyfive
+	amount = 25
+
+/obj/item/stack/material/wood/walnut
+	name = "walnut plank"
+	default_type = MATERIAL_WALNUT
+
+/obj/item/stack/material/wood/walnut/ten
+	amount = 10
+
+/obj/item/stack/material/wood/walnut/twentyfive
+	amount = 25
+
 /obj/item/stack/material/cloth
 	name = "cloth"
 	icon_state = "sheet-cloth"

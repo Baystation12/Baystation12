@@ -63,7 +63,7 @@
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/weapon/clipboard,
+		/obj/item/weapon/material/clipboard,
 		/obj/item/device/flashlight,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/yellow,

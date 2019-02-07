@@ -262,23 +262,23 @@
 		if(LAZYLEN(removing_ranks))
 			pref.ranks -= removing_ranks
 
+	var/datum/species/S = preference_species()
 	for(var/job_name in SSjobs.titles_to_datums)
 
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 
 		var/datum/mil_branch/player_branch = pref.branches[job.title] ? mil_branches.get_branch(pref.branches[job.title]) : null
-		if(LAZYLEN(job.allowed_branches) && (!player_branch || !(player_branch.type in job.allowed_branches)))
-			player_branch = mil_branches.get_branch(job.allowed_branches[1])
-
-		var/datum/mil_rank/player_rank = (player_branch && pref.ranks[job.title]) ? mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
-		if(player_branch && LAZYLEN(job.allowed_branches) && (!player_rank || !(player_rank.type in job.allowed_ranks)))
-			player_rank = null
-			for(var/rank in job.allowed_ranks)
-				if(rank in player_branch.rank_types)
-					player_rank = mil_branches.get_rank(player_branch.name, rank)
-					break
+		var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+		if(!player_branch || !(player_branch.name in branch_rank))
+			player_branch = LAZYLEN(branch_rank) ? mil_branches.get_branch(branch_rank[1]) : null
 
 		if(player_branch)
+			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
+			var/ranks = branch_rank[player_branch.name] || mil_branches.spawn_ranks(player_branch.name, S)
+			if(!player_rank || !(player_rank.name in ranks))
+				player_rank = LAZYLEN(ranks) ? mil_branches.get_rank(player_branch.name, ranks[1]) : null
+
+			// Now make the assignments
 			pref.branches[job.title] = player_branch.name
 			if(player_rank)
 				pref.ranks[job.title] = player_rank.name

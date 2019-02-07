@@ -634,7 +634,7 @@
 /decl/closet_appearance/cabinet
 	base_icon =  'icons/obj/closets/bases/cabinet.dmi'
 	decal_icon = null
-	color = COLOR_WOOD
+	color = WOOD_COLOR_RICH
 	decals = null
 	extra_decals = null
 

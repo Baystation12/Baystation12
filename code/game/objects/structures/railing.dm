@@ -10,7 +10,6 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	icon_state = "railing0-1"
 
-	var/material/material
 	var/broken =    FALSE
 	var/health =    70
 	var/maxhealth = 70

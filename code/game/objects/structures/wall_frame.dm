@@ -19,7 +19,7 @@
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
-	var/material/material = DEFAULT_WALL_MATERIAL
+	material = DEFAULT_WALL_MATERIAL
 
 /obj/structure/wall_frame/New(var/new_loc, var/materialtype)
 	..(new_loc)
@@ -85,8 +85,7 @@
 			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
 			dismantle()
 
-	..()
-	return
+	return  ..()
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

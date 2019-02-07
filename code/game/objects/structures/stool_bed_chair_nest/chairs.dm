@@ -190,7 +190,7 @@
 	overlays |= I
 
 /obj/structure/bed/chair/comfy/captain/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"blue")
+	..(newloc,MATERIAL_STEEL,"blue")
 
 /obj/structure/bed/chair/armchair
 	name = "armchair"
@@ -314,26 +314,6 @@
 /obj/structure/bed/chair/office/comfy/yellow/New(var/newloc,var/newmaterial)
 	..(newloc,DEFAULT_FURNITURE_MATERIAL,"yellow")
 
-// Chair types
-/obj/structure/bed/chair/wood
-	name = "classic chair"
-	desc = "Old is never too old to not be in fashion."
-	base_icon = "wooden_chair"
-	icon_state = "wooden_chair_preview"
-
-/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
-		return
-	..()
-
-/obj/structure/bed/chair/wood/New(var/newloc)
-	..(newloc, MATERIAL_WOOD)
-
-/obj/structure/bed/chair/wood/wings
-	name = "winged chair"
-	base_icon = "wooden_chair_wings"
-	icon_state = "wooden_chair_wings_preview"
-
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
@@ -358,10 +338,63 @@
 		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"blue")
+	..(newloc,MATERIAL_STEEL,"blue")
 
 /obj/structure/bed/chair/shuttle/black/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"black")
+	..(newloc,MATERIAL_STEEL,"black")
 
 /obj/structure/bed/chair/shuttle/white/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_COTTON)
+	..(newloc,MATERIAL_STEEL,MATERIAL_COTTON)
+
+/obj/structure/bed/chair/wood
+	name = "classic chair"
+	desc = "Old is never too old to not be in fashion."
+	base_icon = "wooden_chair"
+	icon_state = "wooden_chair_preview"
+	color = WOOD_COLOR_GENERIC
+	var/chair_material = MATERIAL_WOOD
+
+/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+		return
+	..()
+
+/obj/structure/bed/chair/wood/New(var/newloc)
+	..(newloc, chair_material)
+
+/obj/structure/bed/chair/wood/mahogany
+	color = WOOD_COLOR_RICH
+	chair_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/wood/maple
+	color = WOOD_COLOR_PALE
+	chair_material = MATERIAL_MAPLE
+
+/obj/structure/bed/chair/wood/ebony
+	color = WOOD_COLOR_BLACK
+	chair_material = MATERIAL_EBONY
+
+/obj/structure/bed/chair/wood/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	chair_material = MATERIAL_WALNUT
+
+/obj/structure/bed/chair/wood/wings
+	name = "winged chair"
+	base_icon = "wooden_chair_wings"
+	icon_state = "wooden_chair_wings_preview"
+
+/obj/structure/bed/chair/wood/wings/mahogany
+	color = WOOD_COLOR_RICH
+	chair_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/wood/wings/maple
+	color = WOOD_COLOR_PALE
+	chair_material = MATERIAL_MAPLE
+
+/obj/structure/bed/chair/wood/wings/ebony
+	color = WOOD_COLOR_BLACK
+	chair_material = MATERIAL_EBONY
+
+/obj/structure/bed/chair/wood/wings/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	chair_material = MATERIAL_WALNUT
