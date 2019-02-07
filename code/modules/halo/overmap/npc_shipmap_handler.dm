@@ -18,13 +18,13 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		return
 	to_world("Clearing unused ship-z level:[z_level]. This may lag.")
 	sleep(10)//Ensure above message is shown.
-	spawn(-1)
-		for(var/n_x = 1 to 255)
-			for(var/n_y = 1 to 255)
-				var/turf/to_remove = locate(n_x,n_y,z_level)
-				for(var/atom/A in to_remove.contents)
-					qdel(A)
-				new /turf/space (to_remove)
+	var/list/z_level_toclear = block(locate(1,1,z_level),locate(255,255,z_level))
+	for(var/to_clear in z_level_toclear)
+		var/turf/t = to_clear
+		if(istype(t))
+			new /turf/space (t)
+		else
+			qdel(to_clear)
 
 /datum/npc_ship_map_handler/proc/un_free_map(var/z_to_un_free)
 	if(z_to_un_free in free_ship_map_zs)

@@ -49,11 +49,12 @@
 	flags = AFFECTS_DEAD
 
 /datum/reagent/biofoam/proc/check_and_stop_bleeding(var/obj/item/organ/external/o)
-	if(o.status & ORGAN_BLEEDING)
-		if(istype(o))
-			o.clamp()
-			o.update_damages()
-			to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
+	if(o.status & ORGAN_BLEEDING || o.status & ORGAN_ARTERY_CUT && istype(o))
+		o.status &= ~ORGAN_ARTERY_CUT
+		o.status &= ~ORGAN_BLEEDING
+		o.clamp()
+		o.update_damages()
+		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
 
 /datum/reagent/biofoam/proc/mend_external(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/o in H.organs)
