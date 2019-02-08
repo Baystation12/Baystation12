@@ -16,7 +16,7 @@
 
 	#include "../first_contact/maps/Exoplanet Research/includes.dm"
 
-	//#include "../first_contact/maps/UNSC_Prowler/includes.dm"
+	#include "../first_contact/maps/UNSC_Prowler/includes.dm"
 
 	#include "../first_contact/maps/Exoplanet Icy/includes.dm"
 
