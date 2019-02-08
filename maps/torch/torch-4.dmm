@@ -22131,11 +22131,12 @@
 	pixel_x = -22
 	},
 /obj/structure/table/steel,
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp,
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
 /obj/effect/floor_decal/corner/research{
 	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
