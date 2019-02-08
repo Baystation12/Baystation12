@@ -201,6 +201,13 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	is_stack = 1
 	resources = list(MATERIAL_GLASS = (SHEET_MATERIAL_AMOUNT/2) * EXTRA_COST_FACTOR, MATERIAL_STEEL = (SHEET_MATERIAL_AMOUNT/2) * EXTRA_COST_FACTOR)
 
+/datum/autolathe/recipe/plastic
+	name = "plastic sheets"
+	path = /obj/item/stack/material/plastic
+	category = "General"
+	is_stack = 1
+	resources = list(MATERIAL_PLASTIC = SHEET_MATERIAL_AMOUNT * EXTRA_COST_FACTOR)
+
 /datum/autolathe/recipe/rods
 	name = "metal rods"
 	path = /obj/item/stack/material/rods

@@ -11850,7 +11850,7 @@
 	dir = 10
 	},
 /obj/machinery/flasher{
-	id = "Cell 2";
+	id = "Cell 1";
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -23680,7 +23680,7 @@
 /obj/machinery/door/window/brigdoor/westleft{
 	dir = 2;
 	id = "Cell 2";
-	name = "Cell two";
+	name = "Cell Two";
 	req_access = list(2)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -24847,7 +24847,7 @@
 	dir = 10
 	},
 /obj/machinery/flasher{
-	id = "Cell 1";
+	id = "Cell 2";
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -26813,7 +26813,7 @@
 /obj/machinery/door/window/brigdoor/eastleft{
 	dir = 2;
 	id = "Cell 1";
-	name = "Cell one";
+	name = "Cell One";
 	req_access = list(2)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -31718,6 +31718,21 @@
 /obj/structure/bed/chair/padded/blue,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
+"whm" = (
+/obj/structure/closet/secure_closet/brig{
+	id = "Cell 2";
+	name = "Cell Locker"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/department/security{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled,
+/area/security/wing)
 "wjP" = (
 /obj/structure/table/rack{
 	dir = 4
@@ -42715,7 +42730,7 @@ taR
 tJM
 jpt
 oby
-nkh
+whm
 wEb
 tkr
 aRp
