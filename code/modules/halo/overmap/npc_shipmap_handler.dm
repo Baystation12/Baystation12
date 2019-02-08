@@ -24,7 +24,7 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		if(istype(t))
 			new /turf/space (t)
 		else
-			qdel(to_clear)
+			del(to_clear) //We *need* this to be clear, so hard delete it
 
 /datum/npc_ship_map_handler/proc/un_free_map(var/z_to_un_free)
 	if(z_to_un_free in free_ship_map_zs)
