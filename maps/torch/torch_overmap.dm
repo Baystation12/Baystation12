@@ -37,7 +37,10 @@
 		"nav_deck2_aquila",
 		"nav_deck3_aquila",
 		"nav_deck4_aquila",
-		"nav_bridge_aquila"
+		"nav_bridge_aquila",
+		"nav_skrellscoutsh_altdock",
+		"nav_ert_dock"
+		
 	)
 
 /obj/effect/overmap/ship/landable/exploration_shuttle

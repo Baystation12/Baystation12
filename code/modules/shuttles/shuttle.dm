@@ -12,6 +12,7 @@
 	var/flags = 0
 	var/process_state = IDLE_STATE //Used with SHUTTLE_FLAGS_PROCESS, as well as to store current state.
 	var/category = /datum/shuttle
+	var/multiz = 0	//how many multiz levels, starts at 0
 
 	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
 

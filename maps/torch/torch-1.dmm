@@ -14253,6 +14253,7 @@
 	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/skrellscoutshuttle/altdock,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "TY" = (

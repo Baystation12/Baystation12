@@ -88,6 +88,8 @@
 	. = generic_waypoints.Copy()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
+	for(var/obj/effect/overmap/contained in src)
+		. += contained.get_waypoints(shuttle_name)
 
 /obj/effect/overmap/sector
 	name = "generic sector"

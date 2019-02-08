@@ -122,7 +122,15 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	machinetype = 6
 	produces_heat = 0
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/allinone
+	var/listening_freqs
+	var/channel_color
+	var/channel_name
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
+	
+/obj/machinery/telecomms/allinone/Initialize()
+	if(!listening_freqs)
+		listening_freqs = ANTAG_FREQS	//Covers any updates to ANTAG_FREQS
+	return ..()
 
 /obj/machinery/telecomms/allinone/receive_signal(datum/signal/signal)
 
@@ -146,13 +154,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		var/datum/radio_frequency/connection = signal.data["connection"]
 
-		if(connection.frequency in ANTAG_FREQS) // if antag broadcast, just
+		if(connection.frequency in listening_freqs) // if antag broadcast, just
 			Broadcast_Message(signal.data["connection"], signal.data["mob"],
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
+							  signal.data["verb"], signal.data["language"], channel_name ? channel_name : signal.data["channel_tag"], channel_color ? channel_color : signal.data["channel_color"])
 		else
 			if(intercept)
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
