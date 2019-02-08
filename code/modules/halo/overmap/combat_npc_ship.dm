@@ -72,11 +72,13 @@
 	. = ..()
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc
+	faction = "unsc"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc)
 
 
 /obj/effect/overmap/ship/npc_ship/combat/innie
+	faction = "innie"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie)
 
