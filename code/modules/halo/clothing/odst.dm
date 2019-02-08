@@ -518,6 +518,15 @@ obj/item/clothing/head/helmet/odst/donator/gulag
 	icon_state = "gulag-armor_obj"
 	item_state = "gulag-armor_worn"
 
+obj/item/clothing/head/helmet/odst/donator/maxattackeralt
+	name = "ODST 'Grasshopper' Helmet"
+	item_state = "maxattackeralt-helmet_worn"
+	icon_state = "maxattackeralt-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/maxattackeralt
+	name = "ODST 'Thorn' Armour"
+	icon_state = "maxattackeralt-armor_obj"
+	item_state = "maxattackeralt-armor_worn"
 //END DONATOR GEAR
 
 /obj/effect/random_ODST_set/New()
