@@ -298,14 +298,14 @@
 /obj/item/device/taperecorder,
 /obj/item/device/camera,
 /obj/item/weapon/storage/backpack/dufflebag/syndie,
-/obj/item/weapon/storage/box/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
 /obj/item/weapon/handcuffs,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "aL" = (
 /obj/item/weapon/bedsheet/captain,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/weapon/gun/projectile/pistol,
+/obj/item/weapon/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
 /obj/effect/submap_landmark/spawnpoint/captain,
 /turf/simulated/floor/wood,

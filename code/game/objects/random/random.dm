@@ -133,7 +133,7 @@
 	name = "Random Medical equipment"
 	desc = "This is a random medical item."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "traumakit"
+	icon_state = "medrandom"
 
 /obj/random/medical/spawn_choices()
 	return list(/obj/random/medical/lite = 21,
@@ -156,7 +156,7 @@
 	name = "Random Medicine"
 	desc = "This is a random simple medical item."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "brutepack"
+	icon_state = "medrandom"
 	spawn_nothing_percentage = 25
 
 /obj/random/medical/lite/spawn_choices()
@@ -273,40 +273,36 @@
 
 /obj/random/projectile/spawn_choices()
 	return list(/obj/item/weapon/gun/projectile/shotgun/pump = 3,
-				/obj/item/weapon/gun/projectile/automatic/c20r = 2,
-				/obj/item/weapon/gun/projectile/automatic/sts35 = 2,
-				/obj/item/weapon/gun/projectile/automatic/z8 = 2,
-				/obj/item/weapon/gun/projectile/beretta = 4,
-				/obj/item/weapon/gun/projectile/sigsauer = 3,
-				/obj/item/weapon/gun/projectile/colt = 4,
-				/obj/item/weapon/gun/projectile/sec = 4,
-				/obj/item/weapon/gun/projectile/sec/wood = 3,
-				/obj/item/weapon/gun/projectile/pistol = 4,
+				/obj/item/weapon/gun/projectile/automatic/merc_smg = 2,
+				/obj/item/weapon/gun/projectile/automatic/assault_rifle = 2,
+				/obj/item/weapon/gun/projectile/automatic/bullpup_rifle = 2,
+				/obj/item/weapon/gun/projectile/pistol/military/alt = 3,
+				/obj/item/weapon/gun/projectile/pistol/sec = 4,
+				/obj/item/weapon/gun/projectile/pistol/holdout = 4,
 				/obj/item/weapon/gun/projectile/pirate = 5,
 				/obj/item/weapon/gun/projectile/revolver = 2,
-				/obj/item/weapon/gun/projectile/automatic/wt550 = 3,
-				/obj/item/weapon/gun/projectile/revolver/detective = 4,
-				/obj/item/weapon/gun/projectile/revolver/mateba = 2,
+				/obj/item/weapon/gun/projectile/automatic/sec_smg = 3,
+				/obj/item/weapon/gun/projectile/revolver/holdout = 4,
+				/obj/item/weapon/gun/projectile/revolver = 2,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel = 4,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/weapon/gun/projectile/heavysniper = 1,
-				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2)
+				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2,
+				/obj/item/weapon/gun/projectile/pistol/throwback = 1)
 
 /obj/random/handgun
 	name = "Random Handgun"
 	desc = "This is a random sidearm."
-	icon = 'icons/obj/guns/pistols.dmi'
+	icon = 'icons/obj/guns/pistol.dmi'
 	icon_state = "secgundark"
 
 /obj/random/handgun/spawn_choices()
-	return list(/obj/item/weapon/gun/projectile/sec = 3,
+	return list(/obj/item/weapon/gun/projectile/pistol/sec = 3,
 				/obj/item/weapon/gun/energy/gun = 2,
-				/obj/item/weapon/gun/projectile/beretta = 2,
-				/obj/item/weapon/gun/projectile/sigsauer = 1,
-				/obj/item/weapon/gun/projectile/colt = 2,
-				/obj/item/weapon/gun/projectile/pistol = 2,
+				/obj/item/weapon/gun/projectile/pistol/military/alt = 1,
+				/obj/item/weapon/gun/projectile/pistol/holdout = 2,
 				/obj/item/weapon/gun/energy/retro = 1,
-				/obj/item/weapon/gun/projectile/sec/wood = 1)
+				/obj/item/weapon/gun/projectile/pistol/throwback = 1)
 
 /obj/random/ammo
 	name = "Random Ammunition"
@@ -315,15 +311,14 @@
 	icon_state = "45-10"
 
 /obj/random/ammo/spawn_choices()
-	return list(/obj/item/weapon/storage/box/beanbags = 6,
-				/obj/item/weapon/storage/box/shotgunammo = 2,
-				/obj/item/weapon/storage/box/shotgunshells = 4,
-				/obj/item/weapon/storage/box/stunshells = 1,
-				/obj/item/ammo_magazine/c45m = 2,
-				/obj/item/ammo_magazine/c45m/rubber = 4,
-				/obj/item/ammo_magazine/c45m/flash = 4,
-				/obj/item/ammo_magazine/mc9mmt = 2,
-				/obj/item/ammo_magazine/mc9mmt/rubber = 6)
+	return list(/obj/item/weapon/storage/box/ammo/beanbags = 6,
+				/obj/item/weapon/storage/box/ammo/shotgunammo = 2,
+				/obj/item/weapon/storage/box/ammo/shotgunshells = 4,
+				/obj/item/weapon/storage/box/ammo/stunshells = 1,
+				/obj/item/ammo_magazine/pistol = 2,
+				/obj/item/ammo_magazine/smg_top = 2,
+				/obj/item/ammo_magazine/smg_top/rubber = 6,
+				/obj/item/ammo_magazine/pistol/throwback = 1)
 
 /obj/random/action_figure
 	name = "random action figure"
@@ -528,7 +523,7 @@ obj/random/closet/spawn_choices()
 	name = "random material"
 	desc = "This is a random material."
 	icon = 'icons/obj/materials.dmi'
-	icon_state = "sheet-metal"
+	icon_state = "sheet"
 
 /obj/random/material/spawn_choices()
 	return list(/obj/item/stack/material/steel/ten,
@@ -552,7 +547,7 @@ obj/random/closet/spawn_choices()
 	name = "Random Cleaning Supplies"
 	desc = "This is a random bar of soap. Soap! SOAP?! SOAP!!!"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "soap"
+	icon_state = "soaprandom"
 
 /obj/random/soap/spawn_choices()
 	return list(/obj/item/weapon/soap = 4,
@@ -1176,6 +1171,20 @@ var/list/random_useful_
 	// 1% chance that we reach here
 	var/lunches = lunchables_lunches()
 	return lunches[pick(lunches)]
+
+/obj/random/clipboard
+	name = "random clipboard"
+	desc = "This is a random material clipboard."
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "clipboard_preview"
+
+/obj/random/clipboard/spawn_choices()
+	return list(/obj/item/weapon/material/clipboard = 300,
+				/obj/item/weapon/material/clipboard/steel = 200,
+				/obj/item/weapon/material/clipboard/aluminium = 200,
+				/obj/item/weapon/material/clipboard/plastic = 200,
+				/obj/item/weapon/material/clipboard/glass = 100,
+				/obj/item/weapon/material/clipboard/ebony = 10)
 
 //Random MRE stuff
 

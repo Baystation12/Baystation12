@@ -144,9 +144,9 @@
 		ViewManifest()
 
 	if(href_list["SelectedJob"])
-		var/datum/job/job = job_master.GetJob(href_list["SelectedJob"])
+		var/datum/job/job = SSjobs.get_by_title(href_list["SelectedJob"])
 
-		if(!job_master.CheckGeneralJoinBlockers(src, job))
+		if(!SSjobs.check_general_join_blockers(src, job))
 			return FALSE
 
 		var/datum/species/S = all_species[client.prefs.species]
@@ -166,13 +166,6 @@
 		show_invalid_jobs = !show_invalid_jobs
 		LateChoices()
 
-/mob/new_player/proc/get_branch_pref()
-	if(client)
-		return client.prefs.char_branch
-
-/mob/new_player/proc/get_rank_pref()
-	if(client)
-		return client.prefs.char_rank
 
 /mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
 
@@ -191,13 +184,13 @@
 	if(job.is_restricted(client.prefs, src))
 		return
 
-	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job.title)
+	var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	if(job.latejoin_at_spawnpoints)
-		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
+		var/obj/S = job.get_roundstart_spawnpoint()
 		spawn_turf = get_turf(S)
 
-	if(!job_master.CheckUnsafeSpawn(src, spawn_turf))
+	if(!SSjobs.check_unsafe_spawn(src, spawn_turf))
 		return
 
 	// Just in case someone stole our position while we were waiting for input from alert() proc
@@ -205,13 +198,13 @@
 		to_chat(src, alert("[job.title] is not available. Please try another."))
 		return 0
 
-	job_master.AssignRole(src, job.title, 1)
+	SSjobs.assign_role(src, job.title, 1)
 
 	var/mob/living/character = create_character(spawn_turf)	//creates the human and transfers vars and mind
 	if(!character)
 		return 0
 
-	character = job_master.EquipRank(character, job.title, 1)					//equips the human
+	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
 	equip_custom_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
@@ -236,7 +229,7 @@
 
 	SSticker.mode.handle_latejoin(character)
 	GLOB.universe.OnPlayerLatejoin(character)
-	if(job_master.ShouldCreateRecords(job.title))
+	if(job.create_record)
 		if(character.mind.assigned_role != "Robot")
 			CreateModularRecord(character)
 			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
@@ -283,7 +276,7 @@
 	// TORCH JOBS
 	var/list/job_summaries
 	var/list/hidden_reasons = list()
-	for(var/datum/job/job in job_master.occupations)
+	for(var/datum/job/job in SSjobs.primary_job_datums)
 		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
 		if(summary && summary != "")
 			LAZYADD(job_summaries, summary)
@@ -339,7 +332,10 @@
 		chosen_species = all_species[client.prefs.species]
 
 	if(!spawn_turf)
-		var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, get_rank_pref())
+		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
+		if(!job)
+			job = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
+		var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
 		spawn_turf = pick(spawnpoint.turfs)
 
 	if(chosen_species)

@@ -58,7 +58,7 @@
 		if(prob(5))
 			AP.overload_lighting()
 		if(prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.
-			AP.set_broken()
+			AP.set_broken(TRUE)
 	user.hacking = 1
 	log_ability_use(user, "electrical pulse")
 	spawn(15 SECONDS)

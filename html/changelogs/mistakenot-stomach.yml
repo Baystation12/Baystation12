@@ -1,5 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - rscadd: "Added a stomach organ. If your stomach is damaged, you can't eat properly and won't metabolize reagents well."
-  - tweak: "Puke now contains some of the reagents you had in your stomach, plus some stomach acid. We are pushing the boundaries of puke simulation technology."

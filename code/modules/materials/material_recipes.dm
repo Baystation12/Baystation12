@@ -27,6 +27,7 @@
 	. += new/datum/stack_recipe/coin(src)
 	. += new/datum/stack_recipe/spoon(src)
 	. += new/datum/stack_recipe/ring(src)
+	. += new/datum/stack_recipe/clipboard(src)
 		
 	if(integrity>50)
 		. += new/datum/stack_recipe/furniture/chair(src) //NOTE: the wood material has it's own special chair recipe
@@ -123,6 +124,30 @@
 	. += new/datum/stack_recipe/coilgun(src)
 	. += new/datum/stack_recipe/stick(src)
 	. += new/datum/stack_recipe/noticeboard(src)
+
+/material/wood/mahogany/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/mahogany(src)
+
+/material/wood/maple/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/maple(src)
+
+/material/wood/ebony/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/ebony(src)
+
+/material/wood/walnut/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/walnut(src)
 
 /material/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()

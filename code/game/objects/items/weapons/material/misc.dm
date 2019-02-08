@@ -1,12 +1,44 @@
 /obj/item/weapon/material/harpoon
 	name = "harpoon"
+	desc = "A short throwing spear with a deep barb, specifically designed to embed itself in its target."
 	sharp = 1
 	edge = 1
-	desc = "Tharr she blows!"
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	force_divisor = 0.3 // 18 with hardness 60 (steel)
+	thrown_force_divisor = 1.8
 	attack_verb = list("jabbed","stabbed","ripped")
+	does_spin = FALSE
+	var/spent
+
+/obj/item/weapon/material/harpoon/bomb
+	name = "explosive harpoon"
+	desc = "A short throwing spear with a deep barb and an explosive fitted in the head. Traditionally fired from some kind of cannon to harvest big game."
+	icon_state = "harpoon_bomb"
+
+/obj/item/weapon/material/harpoon/bomb/has_embedded()
+	if(spent)
+		return
+	audible_message(SPAN_WARNING("\The [src] emits a long, harsh tone!"))
+	playsound(loc, 'sound/weapons/bombwhine.ogg', 100, 0, -3)
+	addtimer(CALLBACK(src, .proc/harpoon_detonate), 4 SECONDS) //for suspense
+	
+/obj/item/weapon/material/harpoon/bomb/proc/harpoon_detonate()
+	audible_message(SPAN_DANGER("\The [src] detonates!")) //an actual sound will be handled by explosion()
+	var/turf/T = get_turf(src)
+	explosion(T, 0, 0, 2, 0, 1, UP|DOWN, 1)
+	fragmentate(T, 4, 2)
+	handle_afterbomb()
+
+/obj/item/weapon/material/harpoon/bomb/proc/handle_afterbomb()
+	spent = TRUE
+	SetName("broken harpoon")
+	desc = "A short spear with just a barb - if it once had a spearhead, it doesn't any more."
+	icon_state = "harpoon_bomb_spent"
+	force_divisor = 0.1
+	thrown_force_divisor = 0.3
+	sharp = FALSE
+	edge = FALSE
 
 /obj/item/weapon/material/hatchet
 	name = "hatchet"

@@ -77,7 +77,6 @@
 	spawn_positions = 1
 	supervisors = "the Deck Chief, the Corporate Liaison and Supply Personnel"
 	ideal_character_age = 20
-	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
@@ -100,7 +99,6 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
-	selection_color = "#515151"
 	economic_power = 7
 	ideal_character_age = 25
 	alt_titles = list(

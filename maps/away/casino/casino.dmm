@@ -424,15 +424,15 @@
 /area/casino/casino_maintenance)
 "bj" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/sec/MK{
+/obj/item/weapon/gun/projectile/pistol/sec/MK{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/weapon/gun/projectile/sec/MK{
+/obj/item/weapon/gun/projectile/pistol/sec/MK{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/weapon/gun/projectile/sec/MK,
+/obj/item/weapon/gun/projectile/pistol/sec/MK,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bk" = (
@@ -1301,9 +1301,9 @@
 /area/casino/casino_security)
 "dB" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dC" = (
@@ -5173,7 +5173,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "pb" = (
-/obj/item/ammo_casing/a50/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "pc" = (
@@ -5190,8 +5190,8 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "qb" = (
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "qc" = (
@@ -5214,10 +5214,10 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "rb" = (
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "rc" = (
@@ -5240,9 +5240,9 @@
 /area/casino/casino_crew_cantina)
 "sb" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "sc" = (
@@ -5259,7 +5259,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "tb" = (
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "tc" = (
@@ -5278,8 +5278,8 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -5297,8 +5297,8 @@
 /area/casino/casino_crew_cantina)
 "vb" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
@@ -5315,10 +5315,10 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "wb" = (
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
 	layer = 2.4;
@@ -5348,8 +5348,8 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -5370,7 +5370,7 @@
 /area/casino/casino_crew_cantina)
 "yb" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/item/ammo_casing/a50/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "yc" = (
@@ -5383,8 +5383,8 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "zb" = (
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /obj/structure/cable{
 	icon_state = "5-8"
 	},
@@ -5410,9 +5410,9 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "Ab" = (
-/obj/item/weapon/gun/projectile/sec/MK,
-/obj/item/ammo_casing/a50/used,
-/obj/item/ammo_casing/a50/used,
+/obj/item/weapon/gun/projectile/pistol/sec/MK,
+/obj/item/ammo_casing/pistol/magnum/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "Ac" = (
@@ -5425,7 +5425,7 @@
 /area/casino/casino_mainfloor)
 "Bb" = (
 /obj/item/weapon/material/shard,
-/obj/item/ammo_casing/a50/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "Bc" = (
@@ -5441,8 +5441,8 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "Cb" = (
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_crew_bathroom)
 "Cc" = (
@@ -5461,9 +5461,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
@@ -5486,16 +5486,16 @@
 /area/casino/casino_kitchen)
 "Eb" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/gun/projectile/magnum_pistol,
+/obj/item/weapon/gun/projectile/pistol/magnum_pistol,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/item/ammo_casing/a50/used,
-/obj/item/ammo_casing/a50/used,
-/obj/item/ammo_casing/a50/used,
+/obj/item/ammo_casing/pistol/magnum/used,
+/obj/item/ammo_casing/pistol/magnum/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -5523,7 +5523,7 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/item/ammo_casing/a50/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -5538,7 +5538,7 @@
 /turf/simulated/wall/r_wall,
 /area/casino/casino_mainfloor)
 "Gb" = (
-/obj/item/ammo_casing/a50/used,
+/obj/item/ammo_casing/pistol/magnum/used,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	layer = 2.4;
@@ -5567,7 +5567,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "Hb" = (
-/obj/item/ammo_casing/a556/used,
+/obj/item/ammo_casing/rifle/used,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "Hc" = (
@@ -5644,7 +5644,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "Kc" = (
-/obj/item/ammo_casing/a556{
+/obj/item/ammo_casing/rifle{
 	pixel_x = 4;
 	pixel_y = -8
 	},
@@ -5668,7 +5668,7 @@
 /turf/space,
 /area/casino/casino_bridge)
 "Lc" = (
-/obj/item/ammo_casing/a556{
+/obj/item/ammo_casing/rifle{
 	pixel_x = 5;
 	pixel_y = -2
 	},

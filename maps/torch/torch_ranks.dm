@@ -32,6 +32,7 @@
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
+				/datum/mil_rank/ec/e7,
 				/datum/mil_rank/ec/o1
 			),
 			/datum/mil_branch/fleet = list(
@@ -40,6 +41,8 @@
 				/datum/mil_rank/fleet/e3,
 				/datum/mil_rank/fleet/e4,
 				/datum/mil_rank/fleet/e5,
+				/datum/mil_rank/fleet/e6,
+				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
 			),
 			/datum/mil_branch/solgov = list(
@@ -50,6 +53,7 @@
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
+				/datum/mil_rank/ec/e7,
 				/datum/mil_rank/ec/o1
 			)
 		),
@@ -92,7 +96,7 @@
 		/datum/mil_rank/ec/o6
 	)
 
-	assistant_job = "Crewman"
+	assistant_job = /datum/job/crew
 
 	min_skill = list(	SKILL_SCIENCE = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
@@ -151,7 +155,7 @@
 		/datum/mil_rank/fleet/o5
 	)
 
-	assistant_job = "Crewman"
+	assistant_job = /datum/job/crew
 	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
 						SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
@@ -187,14 +191,14 @@
 		/datum/mil_rank/army/o10_alt
 	)
 
-	assistant_job = "Crewman"
+	assistant_job = /datum/job/crew
 	min_skill = list(	SKILL_HAULING = SKILL_ADEPT,
 	                    SKILL_WEAPONS = SKILL_BASIC,
 	                    SKILL_COMBAT  = SKILL_BASIC)
 
 /datum/mil_branch/civilian
 	name = "Civilian"
-	name_short = "civ"
+	name_short = "Civ"
 	email_domain = "freemail.net"
 
 	rank_types = list(
@@ -208,8 +212,6 @@
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/synthetic
 	)
-
-	assistant_job = "Passenger"
 
 /datum/mil_branch/solgov
 	name = "SolGov Employee"
@@ -252,8 +254,6 @@
 		/datum/mil_rank/terran/o9,
 		/datum/mil_rank/terran/o10
 	)
-
-	assistant_job = "Sailor"
 	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
 						SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
@@ -644,10 +644,9 @@
  *  Civilians
  *  =========
  */
-
+ 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
-	name_short = null
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
@@ -662,6 +661,7 @@
 
 /datum/mil_rank/sol/gov
 	name = "SolGov Representative"
+	name_short = "SGR"
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
 /datum/mil_rank/sol/agent
@@ -671,6 +671,7 @@
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"
+	name_short = "GOVT"
 
 /*
  *  Terrans

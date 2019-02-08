@@ -93,6 +93,18 @@
 /turf/simulated/wall/wood/New(var/newloc)
 	..(newloc,MATERIAL_WOOD)
 
+/turf/simulated/wall/mahogany/New(var/newloc)
+	..(newloc,MATERIAL_MAHOGANY)
+
+/turf/simulated/wall/maple/New(var/newloc)
+	..(newloc,MATERIAL_MAPLE)
+
+/turf/simulated/wall/ebony/New(var/newloc)
+	..(newloc,MATERIAL_EBONY)
+
+/turf/simulated/wall/walnut/New(var/newloc)
+	..(newloc,MATERIAL_WALNUT)
+
 /turf/simulated/wall/ironphoron/New(var/newloc)
 	..(newloc,MATERIAL_IRON,MATERIAL_PHORON)
 

@@ -17,7 +17,6 @@
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
-	var/material/material
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
@@ -175,7 +174,7 @@
 	..(newloc,MATERIAL_WOOD, MATERIAL_LEATHER)
 
 /obj/structure/bed/padded/New(var/newloc)
-	..(newloc,MATERIAL_PLASTIC,MATERIAL_COTTON)
+	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_COTTON)
 
 /obj/structure/bed/alien
 	name = "resting contraption"

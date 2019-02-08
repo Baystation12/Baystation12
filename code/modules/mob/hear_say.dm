@@ -37,7 +37,7 @@
 				message = pick(S.speak)
 			else
 				if(language)
-					message = language.scramble(message)
+					message = language.scramble(message, languages)
 				else
 					message = stars(message)
 
@@ -124,7 +124,7 @@
 					return
 			else
 				if(language)
-					message = language.scramble(message)
+					message = language.scramble(message, languages)
 				else
 					message = stars(message)
 

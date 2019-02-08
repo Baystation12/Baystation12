@@ -791,16 +791,17 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 	if(holder)
 		var/list/jobs = list()
-		for (var/datum/job/J in job_master.occupations)
+		for (var/datum/job/J in SSjobs.primary_job_datums)
 			if(!J.is_position_available())
-				jobs += J.title
+				jobs[J.title] = J
 		if (!jobs.len)
 			to_chat(usr, "There are no fully staffed jobs.")
 			return
-		var/job = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
-		if (job)
-			job_master.FreeRole(job)
-			message_admins("A job slot for [job] has been opened by [key_name_admin(usr)]")
+		var/job_title = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
+		var/datum/job/job = jobs[job_title]
+		if(job && !job.is_position_available())
+			job.make_position_available()
+			message_admins("A job slot for [job_title] has been opened by [key_name_admin(usr)]")
 			return
 
 /client/proc/toggleghostwriters()

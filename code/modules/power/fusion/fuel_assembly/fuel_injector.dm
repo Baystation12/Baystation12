@@ -1,5 +1,3 @@
-var/list/fuel_injectors = list()
-
 /obj/machinery/fusion_fuel_injector
 	name = "fuel injector"
 	icon = 'icons/obj/machines/power/fusion.dmi'
@@ -10,22 +8,23 @@ var/list/fuel_injectors = list()
 	idle_power_usage = 10
 	active_power_usage = 500
 
-	var/fuel_usage = 0.0001
-	var/id_tag
+	var/fuel_usage = 0.001
+	var/initial_id_tag
 	var/injecting = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly
 
-/obj/machinery/fusion_fuel_injector/New()
-	..()
-	fuel_injectors += src
-	tag = null
+/obj/machinery/fusion_fuel_injector/Initialize()
+	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	if(initial_id_tag)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.set_tag(null, initial_id_tag)
+	. = ..()
 
 /obj/machinery/fusion_fuel_injector/Destroy()
 	if(cur_assembly)
 		cur_assembly.dropInto(loc)
 		cur_assembly = null
-	fuel_injectors -= src
-	return ..()
+	. = ..()
 
 /obj/machinery/fusion_fuel_injector/mapped
 	anchored = 1
@@ -40,9 +39,8 @@ var/list/fuel_injectors = list()
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
 	if(isMultitool(W))
-		var/new_ident = input("Enter a new ident tag.", "Fuel Injector", id_tag) as null|text
-		if(new_ident && user.Adjacent(src))
-			id_tag = new_ident
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.get_new_tag(user)
 		return
 
 	if(istype(W, /obj/item/weapon/fuel_assembly))
@@ -112,12 +110,11 @@ var/list/fuel_injectors = list()
 		for(var/reagent in cur_assembly.rod_quantities)
 			if(cur_assembly.rod_quantities[reagent] > 0)
 				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage
-				var/numparticles = round(amount * 1000)
-				if(numparticles < 1)
-					numparticles = 1
+				if(amount < 1)
+					amount = 1
 				var/obj/effect/accelerated_particle/A = new/obj/effect/accelerated_particle(get_turf(src), dir)
 				A.particle_type = reagent
-				A.additional_particles = numparticles - 1
+				A.additional_particles = amount
 				A.move(1)
 				if(cur_assembly)
 					cur_assembly.rod_quantities[reagent] -= amount

@@ -71,6 +71,8 @@
 			return global.SSicon_update;
 		if("SSinactivity")
 			return global.SSinactivity;
+		if("SSjobs")
+			return global.SSjobs;
 		if("SSlighting")
 			return global.SSlighting;
 		if("SSmachines")
@@ -423,10 +425,6 @@
 			return global.forced_ambiance_list;
 		if("fruit_icon_cache")
 			return global.fruit_icon_cache;
-		if("fuel_injectors")
-			return global.fuel_injectors;
-		if("fusion_cores")
-			return global.fusion_cores;
 		if("fusion_reactions")
 			return global.fusion_reactions;
 		if("game_id")
@@ -457,8 +455,6 @@
 			return global.global_vars_;
 		if("gravity_is_on")
 			return global.gravity_is_on;
-		if("gyrotrons")
-			return global.gyrotrons;
 		if("gzn_check")
 			return global.gzn_check;
 		if("hadevent")
@@ -489,10 +485,6 @@
 			return global.invalid_zone;
 		if("jobMax")
 			return global.jobMax;
-		if("job_master")
-			return global.job_master;
-		if("joblist")
-			return global.joblist;
 		if("join_motd")
 			return global.join_motd;
 		if("landmarks_list")
@@ -731,8 +723,6 @@
 			return global.roundstart_hour;
 		if("rune_list")
 			return global.rune_list;
-		if("runtime_diary")
-			return global.runtime_diary;
 		if("same_wires")
 			return global.same_wires;
 		if("secret_force_mode")
@@ -905,8 +895,6 @@
 			return global.weighted_randomevent_locations;
 		if("whitelist")
 			return global.whitelist;
-		if("whitelisted_species")
-			return global.whitelisted_species;
 		if("wireColours")
 			return global.wireColours;
 		if("world_topic_spam_protect_ip")
@@ -996,6 +984,8 @@
 			global.SSicon_update=newval;
 		if("SSinactivity")
 			global.SSinactivity=newval;
+		if("SSjobs")
+			global.SSjobs=newval;
 		if("SSlighting")
 			global.SSlighting=newval;
 		if("SSmachines")
@@ -1348,10 +1338,6 @@
 			global.forced_ambiance_list=newval;
 		if("fruit_icon_cache")
 			global.fruit_icon_cache=newval;
-		if("fuel_injectors")
-			global.fuel_injectors=newval;
-		if("fusion_cores")
-			global.fusion_cores=newval;
 		if("fusion_reactions")
 			global.fusion_reactions=newval;
 		if("game_id")
@@ -1382,8 +1368,6 @@
 			global.global_vars_=newval;
 		if("gravity_is_on")
 			global.gravity_is_on=newval;
-		if("gyrotrons")
-			global.gyrotrons=newval;
 		if("gzn_check")
 			global.gzn_check=newval;
 		if("hadevent")
@@ -1414,10 +1398,6 @@
 			global.invalid_zone=newval;
 		if("jobMax")
 			global.jobMax=newval;
-		if("job_master")
-			global.job_master=newval;
-		if("joblist")
-			global.joblist=newval;
 		if("join_motd")
 			global.join_motd=newval;
 		if("landmarks_list")
@@ -1656,8 +1636,6 @@
 			global.roundstart_hour=newval;
 		if("rune_list")
 			global.rune_list=newval;
-		if("runtime_diary")
-			global.runtime_diary=newval;
 		if("same_wires")
 			global.same_wires=newval;
 		if("secret_force_mode")
@@ -1830,8 +1808,6 @@
 			global.weighted_randomevent_locations=newval;
 		if("whitelist")
 			global.whitelist=newval;
-		if("whitelisted_species")
-			global.whitelisted_species=newval;
 		if("wireColours")
 			global.wireColours=newval;
 		if("world_topic_spam_protect_ip")
@@ -1885,6 +1861,7 @@
 	"SSgoals",
 	"SSicon_update",
 	"SSinactivity",
+	"SSjobs",
 	"SSlighting",
 	"SSmachines",
 	"SSmapping",
@@ -2061,8 +2038,6 @@
 	"follow_repository",
 	"forced_ambiance_list",
 	"fruit_icon_cache",
-	"fuel_injectors",
-	"fusion_cores",
 	"fusion_reactions",
 	"game_id",
 	"game_version",
@@ -2078,7 +2053,6 @@
 	"global_message_listener",
 	"global_vars_",
 	"gravity_is_on",
-	"gyrotrons",
 	"gzn_check",
 	"hadevent",
 	"hazard_overlays",
@@ -2094,8 +2068,6 @@
 	"intercom_range_display_status",
 	"invalid_zone",
 	"jobMax",
-	"job_master",
-	"joblist",
 	"join_motd",
 	"landmarks_list",
 	"language_keys",
@@ -2215,7 +2187,6 @@
 	"round_start_time",
 	"roundstart_hour",
 	"rune_list",
-	"runtime_diary",
 	"same_wires",
 	"secret_force_mode",
 	"send_emergency_team",
@@ -2302,7 +2273,6 @@
 	"weighted_mundaneevent_locations",
 	"weighted_randomevent_locations",
 	"whitelist",
-	"whitelisted_species",
 	"wireColours",
 	"world_topic_spam_protect_ip",
 	"world_topic_spam_protect_time",

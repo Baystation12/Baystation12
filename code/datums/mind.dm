@@ -242,9 +242,9 @@
 		if(antag) antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
-		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in job_master.occupations_by_title
+		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in SSjobs.titles_to_datums
 		if (!new_role) return
-		var/datum/job/job = job_master.occupations_by_title[new_role]
+		var/datum/job/job = SSjobs.get_by_title(new_role)
 		if(job)
 			assigned_job = job
 			assigned_role = job.title
@@ -575,7 +575,8 @@
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)	mind.assigned_role = "Assistant"	//defualt
+	if(!mind.assigned_role)
+		mind.assigned_role = GLOB.using_map.default_assistant_title
 
 //slime
 /mob/living/carbon/slime/mind_initialize()

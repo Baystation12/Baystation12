@@ -164,7 +164,7 @@
 /obj/item/weapon/paper_bin,
 /obj/item/weapon/stamp/cargo,
 /obj/item/weapon/stamp/denied,
-/obj/item/weapon/clipboard,
+/obj/random/clipboard,
 /obj/item/device/radio,
 /obj/item/device/radio/intercom{
 	dir = 8;

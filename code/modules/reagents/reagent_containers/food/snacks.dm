@@ -1681,6 +1681,14 @@
 	nutriment_amt = 6
 	bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/boiledrice/chazuke
+	name = "chazuke"
+	desc = "An ancient way of using up day-old rice, this dish is composed of plain green tea poured over plain white rice. Hopefully you have something else to put in."
+	icon_state = "chazuke"
+	filling_color = "#f1ffdb"
+	nutriment_desc = list("chazuke" = 2)
+	bitesize = 3
+
 /obj/item/weapon/reagent_containers/food/snacks/katsucurry
 	name = "katsu curry"
 	desc = "An oriental curry dish made from apples, potatoes, and carrots. Served with rice and breaded chicken."

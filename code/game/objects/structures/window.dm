@@ -9,7 +9,6 @@
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	alpha = 180
-	var/material/material
 	var/material/reinf_material
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
@@ -40,7 +39,7 @@
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	
+
 	if(new_reinf_material)
 		reinf_material = SSmaterials.get_material_by_name(new_reinf_material)
 
@@ -77,7 +76,7 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	if(reinf_material)
-		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>") 
+		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>")
 	if(health == maxhealth)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
@@ -261,7 +260,6 @@
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
-			qdel(src)
 	else if(polarized && isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the window.", src.name, null), MAX_NAME_LEN)
 		if(user.incapacitated() || !user.Adjacent(src))
@@ -536,7 +534,7 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
- 
+
 /obj/machinery/button/windowtint/proc/toggle_tint()
 	use_power_oneoff(5)
 
@@ -592,6 +590,6 @@
 				return
 
 		if (ST.use(1))
-			var/obj/structure/window/WD = new(loc, dir_to_set, 1, ST.material.name, ST.reinf_material && ST.reinf_material.name)
+			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
 			to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
 			WD.update_icon()

@@ -203,7 +203,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 
-	PrivUpdateListenerLoc(listener)
+	PrivUpdateListenerLoc(listener, FALSE)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
 	null_sound = null_sound || new(channel = sound.channel)
@@ -212,7 +212,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
-/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener)
+/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
 	var/turf/source_turf = get_turf(source)
 	var/turf/listener_turf = get_turf(listener)
 
@@ -232,15 +232,17 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	// Far as I can tell from testing, sound priority just doesn't work.
 	// Sounds happily steal channels from each other no matter what.
 	sound.priority = Clamp(255 - distance, 0, 255)
-	PrivUpdateListener(listener)
+	PrivUpdateListener(listener, update_sound)
 
 /datum/sound_token/proc/PrivUpdateListeners()
 	for(var/listener in listeners)
 		PrivUpdateListener(listener)
 
-/datum/sound_token/proc/PrivUpdateListener(var/listener)
+/datum/sound_token/proc/PrivUpdateListener(var/listener, var/update_sound = TRUE)
 	sound.environment = PrivGetEnvironment(listener)
-	sound.status = status|listener_status[listener]|SOUND_UPDATE
+	sound.status = status|listener_status[listener]
+	if(update_sound)
+		sound.status |= SOUND_UPDATE
 	sound_to(listener, sound)
 
 /datum/sound_token/proc/PrivGetEnvironment(var/listener)

@@ -88,7 +88,8 @@
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/petrov/maint = NO_SCRUBBER,
 		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
+		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT,
+		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -152,6 +153,7 @@
 		/area/lar_maria,
 		/area/map_template,
 		/area/unishi,
+		/area/voxship,
 		/area/exoplanet
 	)
 

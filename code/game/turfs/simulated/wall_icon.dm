@@ -40,7 +40,7 @@
 	if(!material)
 		return
 
-	if(LAZYLEN(damage_overlays) < 1) //list hasn't been populated
+	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
 
 	// This line apparently causes runtimes during initialization.
@@ -62,12 +62,13 @@
 		return
 
 	for(var/i = 1 to 4)
-		if(other_connections[i] != "0")
-			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
-		else
-			I = image('icons/turf/wall_masks.dmi', "[material.icon_base][wall_connections[i]]", dir = 1<<(i-1))
+		I = image('icons/turf/wall_masks.dmi', "[material.icon_base][wall_connections[i]]", dir = 1<<(i-1))
 		I.color = base_color
 		overlays += I
+		if(other_connections[i] != "0")
+			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
+			I.color = base_color
+			overlays += I
 
 	if(reinf_material)
 		var/reinf_color = paint_color ? paint_color : reinf_material.icon_colour
@@ -161,7 +162,9 @@
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && W.material && material.icon_base == W.material.icon_base)
-		return 1
+		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
+			return 1
+		return 2
 	for(var/wb_type in blend_turfs)
 		if(istype(W, wb_type))
 			return 2

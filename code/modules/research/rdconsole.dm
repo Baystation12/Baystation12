@@ -69,8 +69,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	switch(return_name)
 		if(MATERIAL_STEEL)
 			return_name = "Steel"
+		if(MATERIAL_ALUMINIUM)
+			return_name = "Aluminium"
 		if(MATERIAL_GLASS)
 			return_name = "Glass"
+		if(MATERIAL_PLASTIC)
+			return_name = "Plastic"
 		if(MATERIAL_GOLD)
 			return_name = "Gold"
 		if(MATERIAL_SILVER)

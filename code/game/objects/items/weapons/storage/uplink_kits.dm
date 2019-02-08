@@ -81,23 +81,17 @@
 		/obj/item/device/spy_monitor
 	)
 
-/obj/item/weapon/storage/box/syndie_kit/g9mm
+/obj/item/weapon/storage/box/syndie_kit/silenced
 	startswith = list(
-		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/gun/projectile/pistol/holdout,
 		/obj/item/weapon/silencer,
-		/obj/item/ammo_magazine/mc9mm
+		/obj/item/ammo_magazine/pistol/small
 	)
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
 	startswith = list(
 		/obj/item/weapon/gun/projectile/revolver,
-		/obj/item/ammo_magazine/a44
-	)
-
-/obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2
-	startswith = list(
-		/obj/item/weapon/gun/projectile/revolver/webley,
-		/obj/item/ammo_magazine/c357
+		/obj/item/ammo_magazine/speedloader/magnum
 	)
 
 /obj/item/weapon/storage/box/syndie_kit/toxin
@@ -160,7 +154,7 @@
 /obj/item/weapon/storage/secure/briefcase/heavysniper
 	startswith = list(
 		/obj/item/weapon/gun/projectile/heavysniper,
-		/obj/item/weapon/storage/box/sniperammo
+		/obj/item/weapon/storage/box/ammo/sniperammo
 	)
 
 /obj/item/weapon/storage/secure/briefcase/heavysniper/Initialize()

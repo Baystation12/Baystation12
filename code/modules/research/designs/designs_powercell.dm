@@ -1,6 +1,7 @@
 /datum/design/item/powercell
 	build_type = PROTOLATHE | MECHFAB
 	category = "Misc"
+	materials = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50, MATERIAL_PLASTIC = 20)
 
 /datum/design/item/powercell/AssembleDesignName()
 	name = "Power cell model ([item_name])"
@@ -22,7 +23,6 @@
 	name = "basic"
 	id = "basic_cell"
 	req_tech = list(TECH_POWER = 1)
-	materials = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50)
 	build_path = /obj/item/weapon/cell
 	sort_string = "DAAAA"
 
@@ -30,7 +30,6 @@
 	name = "high-capacity"
 	id = "high_cell"
 	req_tech = list(TECH_POWER = 2)
-	materials = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 60)
 	build_path = /obj/item/weapon/cell/high
 	sort_string = "DAAAB"
 
@@ -38,7 +37,6 @@
 	name = "super-capacity"
 	id = "super_cell"
 	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2)
-	materials = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 70)
 	build_path = /obj/item/weapon/cell/super
 	sort_string = "DAAAC"
 
@@ -46,7 +44,7 @@
 	name = "hyper-capacity"
 	id = "hyper_cell"
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
-	materials = list(MATERIAL_STEEL = 400, MATERIAL_GOLD = 150, MATERIAL_SILVER = 150, MATERIAL_GLASS = 70)
+	materials = list(MATERIAL_STEEL = 400, MATERIAL_GOLD = 150, MATERIAL_SILVER = 150, MATERIAL_GLASS = 70, MATERIAL_ALUMINIUM = 25)
 	build_path = /obj/item/weapon/cell/hyper
 	sort_string = "DAAAD"
 

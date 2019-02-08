@@ -61,7 +61,6 @@
 	department_flag = SRV
 	supervisors = "the Executive Officer and the Corporate Liaison"
 	ideal_character_age = 30
-	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
@@ -79,7 +78,6 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
-	selection_color = "#515151"
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(

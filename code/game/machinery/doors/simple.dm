@@ -106,10 +106,10 @@
 /obj/machinery/door/unpowered/simple/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			set_broken()
+			set_broken(TRUE)
 		if(2.0)
 			if(prob(25))
-				set_broken()
+				set_broken(TRUE)
 			else
 				take_damage(300)
 		if(3.0)
@@ -222,6 +222,18 @@
 
 /obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WOOD, complexity)
+
+/obj/machinery/door/unpowered/simple/mahogany/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_MAHOGANY, complexity)
+
+/obj/machinery/door/unpowered/simple/maple/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_MAPLE, complexity)
+
+/obj/machinery/door/unpowered/simple/ebony/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_EBONY, complexity)
+
+/obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_WALNUT, complexity)
 
 /obj/machinery/door/unpowered/simple/wood/saloon
 	icon_base = "saloon"

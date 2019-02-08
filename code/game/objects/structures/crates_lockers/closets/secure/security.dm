@@ -36,7 +36,6 @@
 		/obj/item/clothing/head/helmet,
 		/obj/item/device/radio/headset/heads/hop,
 		/obj/item/weapon/storage/box/ids = 2,
-		/obj/item/weapon/gun/projectile/sec/flash,
 		/obj/item/device/flash
 	)
 
@@ -193,9 +192,8 @@
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/vest/detective,
-		/obj/item/ammo_magazine/c45m/flash,
 		/obj/item/taperoll/police,
-		/obj/item/weapon/gun/projectile/colt/detective,
+		/obj/item/weapon/gun/projectile/pistol/sec/detective,
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/weapon/reagent_containers/food/drinks/flask/detflask,
 		/obj/item/weapon/storage/briefcase/crimekit,

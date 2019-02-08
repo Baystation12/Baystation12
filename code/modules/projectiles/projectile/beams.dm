@@ -81,6 +81,19 @@
 	if(isturf(target))
 		target.ex_act(2)
 	..()
+	
+/obj/item/projectile/beam/pulse/skrell
+	icon_state = "pu_laser"
+	damage = 20
+	muzzle_type = /obj/effect/projectile/laser/pulse/skrell/muzzle
+	tracer_type = /obj/effect/projectile/laser/pulse/skrell/tracer
+	impact_type = /obj/effect/projectile/laser/pulse/skrell/impact
+	
+/obj/item/projectile/beam/pulse/skrell/heavy
+	damage = 30
+	
+/obj/item/projectile/beam/pulse/skrell/single
+	damage = 50
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"

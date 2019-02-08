@@ -276,6 +276,47 @@
 /obj/effect/shuttle_landmark/escape_pod/out/pod9,
 /turf/space,
 /area/space)
+"W" = (
+/obj/effect/step_trigger/teleporter/random{
+	affect_ghosts = 1;
+	name = "escapeshuttle_leave";
+	teleport_x = 25;
+	teleport_x_offset = 245;
+	teleport_y = 25;
+	teleport_y_offset = 245;
+	teleport_z = 6;
+	teleport_z_offset = 6
+	},
+/turf/space,
+/area/space)
+"X" = (
+/obj/effect/step_trigger/thrower{
+	direction = 1;
+	name = "thrower_throwup";
+	nostop = 0;
+	tiles = 0
+	},
+/turf/space,
+/area/space)
+"Y" = (
+/obj/effect/shuttle_landmark/transit/vox_base/vox_shuttle,
+/turf/space,
+/area/space)
+"Z" = (
+/obj/effect/step_trigger/thrower{
+	direction = 1;
+	name = "thrower_throwup";
+	nostop = 0;
+	tiles = 0
+	},
+/obj/effect/step_trigger/thrower{
+	direction = 1;
+	name = "thrower_throwup";
+	nostop = 0;
+	tiles = 0
+	},
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 a
@@ -337,31 +378,31 @@ a
 a
 a
 a
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
 d
 d
 d
@@ -540,6 +581,22 @@ B
 B
 a
 d
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
 d
 d
 d
@@ -547,23 +604,7 @@ d
 d
 d
 d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -742,6 +783,7 @@ B
 B
 a
 d
+X
 d
 d
 d
@@ -756,16 +798,15 @@ d
 d
 d
 d
+X
+X
+X
+X
+Z
 d
 d
 d
-d
-d
-d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -944,6 +985,7 @@ B
 B
 a
 d
+X
 d
 d
 d
@@ -962,12 +1004,11 @@ d
 d
 d
 d
+X
 d
 d
 d
-d
-d
-d
+W
 d
 d
 d
@@ -1146,6 +1187,9 @@ B
 B
 a
 d
+X
+X
+X
 d
 d
 d
@@ -1162,14 +1206,11 @@ d
 d
 d
 d
+X
+X
 d
 d
-d
-d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -1350,6 +1391,7 @@ a
 d
 d
 d
+X
 d
 d
 d
@@ -1367,11 +1409,10 @@ d
 d
 d
 d
+X
 d
 d
-d
-d
-d
+W
 d
 d
 d
@@ -1552,6 +1593,7 @@ a
 d
 d
 d
+X
 d
 d
 d
@@ -1569,11 +1611,10 @@ d
 d
 d
 d
+X
 d
 d
-d
-d
-d
+W
 d
 d
 d
@@ -1754,6 +1795,7 @@ a
 d
 d
 d
+X
 d
 d
 d
@@ -1764,18 +1806,17 @@ d
 d
 d
 d
+Y
 d
 d
 d
 d
 d
 d
+X
 d
 d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -1956,6 +1997,7 @@ a
 d
 d
 d
+X
 d
 d
 d
@@ -1973,11 +2015,10 @@ d
 d
 d
 d
+X
 d
 d
-d
-d
-d
+W
 d
 d
 d
@@ -2158,6 +2199,7 @@ a
 d
 d
 d
+X
 d
 d
 d
@@ -2175,11 +2217,10 @@ d
 d
 d
 d
+X
 d
 d
-d
-d
-d
+W
 d
 d
 d
@@ -2359,6 +2400,8 @@ C
 a
 d
 d
+X
+X
 d
 d
 d
@@ -2375,13 +2418,11 @@ d
 d
 d
 d
+X
+X
 d
 d
-d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -2561,6 +2602,7 @@ C
 a
 d
 d
+X
 d
 d
 d
@@ -2577,13 +2619,12 @@ d
 d
 d
 d
+X
+X
 d
 d
 d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -2763,29 +2804,29 @@ C
 a
 d
 d
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
 d
 d
 d
 d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
+W
 d
 d
 d
@@ -2987,7 +3028,7 @@ d
 d
 d
 d
-d
+W
 d
 d
 d
@@ -3189,7 +3230,7 @@ d
 d
 d
 d
-d
+W
 d
 d
 d
@@ -3367,31 +3408,31 @@ B
 B
 C
 a
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
 d
 d
 d

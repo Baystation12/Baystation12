@@ -408,6 +408,7 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "\[daislogo\]", "<img src = daislogo.png>")
 	t = replacetext(t, "\[eclogo\]", "<img src = eclogo.png>")
 	t = replacetext(t, "\[xynlogo\]", "<img src = xynlogo.png>")
+	t = replacetext(t, "\[fleetlogo\]", "<img src = fleetlogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 

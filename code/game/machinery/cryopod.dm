@@ -294,6 +294,11 @@
 
 	return 1
 
+/obj/machinery/cryopod/examine(mob/user)
+	. = ..()
+	if (. && occupant && user.Adjacent(src))
+		occupant.examine(user)
+
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/Process()
 	if(occupant)
@@ -382,8 +387,8 @@
 
 	//Handle job slot/tater cleanup.
 	if(occupant.mind)
-		var/job = occupant.mind.assigned_role
-		job_master.ClearSlot(job)
+		if(occupant.mind.assigned_job)
+			occupant.mind.assigned_job.clear_slot()
 
 		if(occupant.mind.objectives.len)
 			occupant.mind.objectives = null

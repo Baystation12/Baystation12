@@ -1,7 +1,5 @@
 #define GYRO_POWER 25000
 
-var/list/gyrotrons = list()
-
 /obj/machinery/power/emitter/gyrotron
 	name = "gyrotron"
 	icon = 'icons/obj/machines/power/fusion.dmi'
@@ -11,7 +9,7 @@ var/list/gyrotrons = list()
 	use_power = POWER_USE_IDLE
 	active_power_usage = GYRO_POWER
 
-	var/id_tag
+	var/initial_id_tag
 	var/rate = 3
 	var/mega_energy = 1
 
@@ -21,13 +19,12 @@ var/list/gyrotrons = list()
 	state = 2
 
 /obj/machinery/power/emitter/gyrotron/Initialize()
-	gyrotrons += src
-	. = ..()
+	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	if(initial_id_tag)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.set_tag(null, initial_id_tag)
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
-
-/obj/machinery/power/emitter/gyrotron/Destroy()
-	gyrotrons -= src
-	return ..()
+	. = ..()
 
 /obj/machinery/power/emitter/gyrotron/Process()
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
@@ -52,9 +49,8 @@ var/list/gyrotrons = list()
 
 /obj/machinery/power/emitter/gyrotron/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
-		var/new_ident = input("Enter a new ident tag.", "Gyrotron", id_tag) as null|text
-		if(new_ident && user.Adjacent(src))
-			id_tag = new_ident
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		fusion.get_new_tag(user)
 		return
 	return ..()
 

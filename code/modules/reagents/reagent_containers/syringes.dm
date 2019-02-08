@@ -9,11 +9,11 @@
 	name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
-	item_state = "syringe_0"
+	item_state = "rg0"
 	icon_state = "rg"
 	matter = list(MATERIAL_GLASS = 150)
 	amount_per_transfer_from_this = 5
-	possible_transfer_amounts = null
+	possible_transfer_amounts = "1;2;5"
 	volume = 15
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
@@ -92,7 +92,7 @@
 		icon_state = "broken"
 		return
 
-	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 1, 15)
+	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if (reagents.total_volume == 0)
 		rounded_vol = 0
 	if(ismob(loc))

@@ -37,7 +37,7 @@
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
-	melting_point = T0C + 2000
+	melting_point = T0C + 4000
 	icon_colour = GLASS_COLOR_PHORON
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	wire_product = null

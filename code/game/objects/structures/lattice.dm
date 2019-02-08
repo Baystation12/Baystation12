@@ -2,14 +2,13 @@
 	name = "lattice"
 	desc = "A lightweight support lattice."
 	icon = 'icons/obj/smoothlattice.dmi'
-	icon_state = "latticeblank"
+	icon_state = "lattice0"
 	density = 0
 	anchored = 1
 	w_class = ITEM_SIZE_NORMAL
 	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
-	var/material/material
 	var/init_material = MATERIAL_STEEL
 	//	obj_flags = OBJ_FLAG_CONDUCTIBLE
 

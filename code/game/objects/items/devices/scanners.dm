@@ -142,7 +142,7 @@ REAGENT SCANNER
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
 		else
-			pulse_result = H.get_pulse(1)
+			pulse_result = H.get_pulse(GETPULSE_TOOL)
 	else
 		pulse_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
 		pulse_suffix = ""
@@ -537,7 +537,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
+	matter = list(MATERIAL_ALUMINIUM = 30 ,MATERIAL_GLASS = 20, MATERIAL_PLASTIC = 15)
 
 /obj/item/device/slime_scanner/proc/list_gases(var/gases)
 	. = list()

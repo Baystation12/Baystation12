@@ -105,6 +105,22 @@
 
 /obj/effect/projectile/laser/pulse/impact
 	icon_state = "impact_u_laser"
+	
+//----------------------------
+// Skrell laser beam
+//----------------------------
+/obj/effect/projectile/laser/pulse/skrell
+	light_max_bright = 1
+	light_color = "#4c00ff"
+
+/obj/effect/projectile/laser/pulse/skrell/tracer
+	icon_state = "pu_laser"
+
+/obj/effect/projectile/laser/pulse/skrell/muzzle
+	icon_state = "muzzle_pu_laser"
+
+/obj/effect/projectile/laser/pulse/skrell/impact
+	icon_state = "impact_pu_laser"
 
 //----------------------------
 // Pulse muzzle effect only

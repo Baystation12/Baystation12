@@ -25,7 +25,7 @@
 		else if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
 		else
-			pulse_result = H.get_pulse(1)
+			pulse_result = H.get_pulse(GETPULSE_TOOL)
 	else
 		pulse_result = -1
 

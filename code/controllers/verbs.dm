@@ -23,8 +23,6 @@
 		return
 
 	switch(controller)
-		if("Jobs")
-			debug_variables(job_master)
 		if("Sun")
 			debug_variables(GLOB.sun)
 		if("Radio")

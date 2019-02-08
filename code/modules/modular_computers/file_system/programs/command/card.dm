@@ -45,16 +45,16 @@
 		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
 		data["id_name"] = id_card ? id_card.name : "-----"
 
-	data["command_jobs"] = format_jobs(GLOB.command_positions)
-	data["support_jobs"] = format_jobs(GLOB.support_positions)
-	data["engineering_jobs"] = format_jobs(GLOB.engineering_positions)
-	data["medical_jobs"] = format_jobs(GLOB.medical_positions)
-	data["science_jobs"] = format_jobs(GLOB.science_positions)
-	data["security_jobs"] = format_jobs(GLOB.security_positions)
-	data["exploration_jobs"] = format_jobs(GLOB.exploration_positions)
-	data["service_jobs"] = format_jobs(GLOB.service_positions)
-	data["supply_jobs"] = format_jobs(GLOB.supply_positions)
-	data["civilian_jobs"] = format_jobs(GLOB.civilian_positions)
+	data["command_jobs"] = format_jobs(SSjobs.titles_by_department(COM))
+	data["support_jobs"] = format_jobs(SSjobs.titles_by_department(SPT))
+	data["engineering_jobs"] = format_jobs(SSjobs.titles_by_department(ENG))
+	data["medical_jobs"] = format_jobs(SSjobs.titles_by_department(MED))
+	data["science_jobs"] = format_jobs(SSjobs.titles_by_department(SCI))
+	data["security_jobs"] = format_jobs(SSjobs.titles_by_department(SEC))
+	data["exploration_jobs"] = format_jobs(SSjobs.titles_by_department(EXP))
+	data["service_jobs"] = format_jobs(SSjobs.titles_by_department(SRV))
+	data["supply_jobs"] = format_jobs(SSjobs.titles_by_department(SUP))
+	data["civilian_jobs"] = format_jobs(SSjobs.titles_by_department(CIV))
 	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
 
 	data["all_centcom_access"] = is_centcom ? get_accesses(1) : null

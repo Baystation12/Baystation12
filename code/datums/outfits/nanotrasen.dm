@@ -13,7 +13,7 @@
 
 /decl/hierarchy/outfit/nanotrasen/representative
 	name = "Corporate Representative"
-	belt = /obj/item/weapon/clipboard
+	belt = /obj/item/weapon/material/clipboard
 	id_pda_assignment = "Corporate Representative"
 
 /decl/hierarchy/outfit/nanotrasen/officer

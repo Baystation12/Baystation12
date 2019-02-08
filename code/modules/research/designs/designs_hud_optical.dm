@@ -1,5 +1,5 @@
 /datum/design/item/hud
-	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50)
+	materials = list(MATERIAL_ALUMINIUM = 50, MATERIAL_GLASS = 50)
 
 /datum/design/item/hud/AssembleDesignName()
 	..()
@@ -32,13 +32,13 @@
 /datum/design/item/optical/AssembleDesignName()
 	..()
 	name = "Optical glasses design ([item_name])"
+	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50)
 
 /datum/design/item/optical/mesons
 	name = "mesons"
 	desc = "Using the meson-scanning technology those glasses allow you to see through walls, floor or anything else."
 	id = "mesons"
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
-	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50)
 	build_path = /obj/item/clothing/glasses/meson
 	sort_string = "GBAAA"
 
@@ -46,7 +46,6 @@
 	name = "material"
 	id = "mesons_material"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50)
 	build_path = /obj/item/clothing/glasses/material
 	sort_string = "GAAAB"
 

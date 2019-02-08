@@ -21,6 +21,7 @@
 	extra_decals = list(
 		"stripe_vertical_left_full" =  COLOR_OFF_WHITE,
 		"stripe_vertical_right_full" = COLOR_OFF_WHITE,
+		"command" = COLOR_OFF_WHITE
 	)
 
 /obj/structure/closet/secure_closet/liaison
@@ -31,7 +32,7 @@
 /obj/structure/closet/secure_closet/liaison/WillContain()
 	return list(
 		/obj/item/device/flash,
-		/obj/item/weapon/clipboard,
+		/obj/item/weapon/material/clipboard,
 		/obj/item/weapon/folder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
@@ -45,6 +46,34 @@
 		/obj/item/weapon/storage/fakebook
 	)
 
+/decl/closet_appearance/secure_closet/torch/corporate/bodyguard
+	extra_decals = list(
+		"stripe_vertical_left_full" =  COLOR_OFF_WHITE,
+		"stripe_vertical_right_full" = COLOR_OFF_WHITE,
+		"security" = COLOR_OFF_WHITE
+	)
+
+/obj/structure/closet/secure_closet/bodyguard
+	name = "\improper corporate protection locker"
+	req_access = list(access_sec_guard)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/corporate/bodyguard
+
+/obj/structure/closet/secure_closet/bodyguard/WillContain()
+	return list(
+		/obj/item/device/flash,
+		/obj/item/clothing/accessory/storage/holster/armpit,
+		/obj/item/weapon/gun/energy/gun/secure/corporate,
+		/obj/item/weapon/storage/secure/briefcase,
+		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
+		/obj/item/clothing/suit/storage/toggle/suit/black,
+		/obj/item/clothing/gloves/color/black,
+		/obj/item/clothing/head/helmet/nt/guard,
+		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
+		/obj/item/clothing/glasses/sunglasses/big,
+		/obj/item/clothing/accessory/badge/nanotrasen
+	)
+
 /obj/structure/closet/secure_closet/representative
 	name = "\improper Sol Central Government representative's locker"
 	req_access = list(access_representative)
@@ -54,7 +83,7 @@
 	return list(
 		/obj/item/device/flash,
 		/obj/item/device/camera_film = 2,
-		/obj/item/weapon/clipboard,
+		/obj/item/weapon/material/clipboard,
 		/obj/item/weapon/folder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,

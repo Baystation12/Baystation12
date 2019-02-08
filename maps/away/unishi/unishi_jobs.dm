@@ -1,5 +1,5 @@
 /datum/job/submap/unishi_crew
-	title = "Crew"
+	title = "Unishi Crew"
 	total_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unishi/crew
 	supervisors = "your survival"
@@ -9,7 +9,7 @@
 	their pursuit of research. "
 
 /datum/job/submap/unishi_researcher
-	title = "Researcher"
+	title = "Unishi Researcher"
 	supervisors = "the crew"
 	total_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/unishi/researcher
@@ -26,7 +26,7 @@
 	r_ear = null
 
 /decl/hierarchy/outfit/job/unishi/crew
-	name = UNISHI_OUTFIT_JOB_NAME("Crewman")
+	name = UNISHI_OUTFIT_JOB_NAME("Unishi Crewman")
 	r_pocket = /obj/item/device/radio
 	shoes = /obj/item/clothing/shoes/black
 	belt = /obj/item/weapon/storage/belt/utility/full
@@ -40,9 +40,9 @@
 	l_pocket = /obj/item/weapon/crowbar/prybar
 
 /obj/effect/submap_landmark/spawnpoint/unishi_crew
-	name = "Crew"
+	name = "Unishi Crew"
 
 /obj/effect/submap_landmark/spawnpoint/unishi_researcher
-	name = "Researcher"
+	name = "Unishi Researcher"
 
 #undef UNISHI_OUTFIT_JOB_NAME

@@ -109,7 +109,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
-	products = list("mydrogen" = 1)
+	products = list("mhydrogen" = 1)
 	minimum_reaction_temperature = 8000
 
 // VERY UNIDEAL REACTIONS.

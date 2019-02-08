@@ -309,7 +309,7 @@
 			if (prob(overload_chance))
 				A.overload_lighting()
 			if (prob(failure_chance))
-				A.set_broken()
+				A.set_broken(TRUE)
 			if(prob(reboot_chance))
 				A.energy_fail(rand(30,60))
 
