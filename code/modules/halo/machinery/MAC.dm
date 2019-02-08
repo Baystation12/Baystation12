@@ -168,7 +168,7 @@
 			play_fire_sound(target)
 
 /obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
-	if(isnull(src.fire_sound))
+	if(isnull(src.fire_sound) || istype(overmap_object))
 		return
 	if(overmap_object.map_z.len ==0)
 		return

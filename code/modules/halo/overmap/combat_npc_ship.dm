@@ -61,7 +61,9 @@
 					fire_at_target()
 			else
 				fire_at_target()
-		target_loc = pick((view(target_range_from,target)-view(target_range_from-1,target))) //Let's emulate a "circling" behaviour.
+		var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
+		if(target_locs.len > 0)
+			target_loc = pick(target_locs) //Let's emulate a "circling" behaviour.
 	..()
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
