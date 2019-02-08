@@ -69,7 +69,7 @@
 "bq" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "br" = (/obj/machinery/power/debug_items/infinite_generator,/obj/structure/cable/blue{icon_state = "0-8"},/obj/structure/cable/blue{icon_state = "0-2"},/obj/structure/cable/blue,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "bs" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
-"bt" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
+"bt" = (/obj/structure/cable/blue{dir = 4; icon_state = "1-2"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "bu" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "bv" = (/obj/machinery/button/remote/blast_door{id = 2615; name = "umbilical blast door"; pixel_x = -7; pixel_y = 25},/obj/machinery/button/remote/blast_door{name = "observation blast door"; pixel_x = 7; pixel_y = 25; id = 8823},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
 "bw" = (/obj/structure/bed/chair/covenant{dir = 4},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/kigyar_pirate)
