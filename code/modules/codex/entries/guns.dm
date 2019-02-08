@@ -7,26 +7,26 @@
 /obj/item/weapon/gun/energy
 	general_codex_key = "energy weapons"
 
-/obj/item/weapon/gun/get_specific_codex_entry()
-	if(SScodex.entries_by_path[type])
-		return SScodex.entries_by_path[type]
+/obj/item/weapon/gun/get_antag_info()
+	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
+	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
+	if(general_entry && general_entry.antag_text)
+		return general_entry.antag_text
+
+/obj/item/weapon/gun/get_lore_info()
+	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
+	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
+	if(general_entry && general_entry.lore_text)
+		return general_entry.lore_text
+
+/obj/item/weapon/gun/get_mechanics_info()
+	var/list/traits = list()
 
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
-	var/datum/codex_entry/entry = new()
+	if(general_entry && general_entry.mechanics_text)
+		traits += general_entry.mechanics_text
 
-	if(general_entry)
-		entry.mechanics_text = general_entry.mechanics_text
-		entry.lore_text =      general_entry.lore_text
-		entry.antag_text =     general_entry.antag_text
-
-	if(!entry.mechanics_text)  entry.mechanics_text = ""
-	if(!entry.lore_text)       entry.lore_text = ""
-
-	entry.display_name = name
-
-	var/list/traits = list()
-	
 	if(one_hand_penalty)
 		traits += "It's best fired with two-handed grip."
 
@@ -41,14 +41,11 @@
 
 	if(LAZYLEN(firemodes) > 1) 
 		traits += "It has multiple firemodes. Click it in hand to cycle them."
-
-	entry.mechanics_text += jointext(traits, "<br>")
-
-	SScodex.entries_by_path[type] = entry
-	return entry
-
-/obj/item/weapon/gun/projectile/get_specific_codex_entry()
-	var/datum/codex_entry/entry = ..()
+	
+	return jointext(traits, "<br>")
+	
+/obj/item/weapon/gun/projectile/get_mechanics_info()
+	. = ..()
 	var/list/traits = list()
 
 	traits += "<br>Caliber: [caliber]"
@@ -68,11 +65,10 @@
 	if(jam_chance)
 		traits += "It's prone to jamming."
 
-	entry.mechanics_text += jointext(traits, "<br>")
-	return entry
+	. += jointext(traits, "<br>")
 
-/obj/item/weapon/gun/energy/get_specific_codex_entry()
-	var/datum/codex_entry/entry = ..()
+/obj/item/weapon/gun/energy/get_mechanics_info()
+	. = ..()
 	var/list/traits = list()
 
 	traits += "<br>Its maximum capacity is [max_shots] shots worth of power."
@@ -80,26 +76,22 @@
 	if(self_recharge)
 		traits += "It recharges itself over time."
 
-	entry.mechanics_text += jointext(traits, "<br>")
-	return entry
+	. += jointext(traits, "<br>")
 
-/obj/item/weapon/gun/projectile/shotgun/pump/get_specific_codex_entry()
-	var/datum/codex_entry/entry = ..()
-	entry.mechanics_text += "<br>To pump it, click it in hand."
-	return entry
+/obj/item/weapon/gun/projectile/shotgun/pump/get_mechanics_info()
+	. = ..()
+	. += "<br>To pump it, click it in hand.<br>"
 
-/obj/item/weapon/gun/energy/crossbow/get_specific_codex_entry()
-	var/datum/codex_entry/entry = ..()
-	entry.antag_text = "This is a stealthy weapon which fires poisoned bolts at your target. When it hits someone, they will suffer a stun effect, in \
-	addition to toxins. The energy crossbow recharges itself slowly, and can be concealed in your pocket or bag."
-	return entry
+/obj/item/weapon/gun/energy/crossbow/get_antag_info()
+	. = ..()
+	. += "This is a stealthy weapon which fires poisoned bolts at your target. When it hits someone, they will suffer a stun effect, in \
+	addition to toxins. The energy crossbow recharges itself slowly, and can be concealed in your pocket or bag.<br>"
 	
-/obj/item/weapon/gun/energy/chameleon/get_specific_codex_entry()
-	var/datum/codex_entry/entry = ..()
-	entry.antag_text = "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
+/obj/item/weapon/gun/energy/chameleon/get_antag_info()
+	. = ..()
+	. += "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
 	the appropriate verb in the chameleon items tab. Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \
-	Projecting these holograms over distance uses a little bit of charge."
-	return entry
+	Projecting these holograms over distance uses a little bit of charge.<br>"
 
 /datum/codex_entry/energy_weapons
 	display_name = "energy weapons"
