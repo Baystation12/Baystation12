@@ -11361,11 +11361,10 @@
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aMO" = (
-/obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/orange,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/machinery/recharge_station,
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aMP" = (
