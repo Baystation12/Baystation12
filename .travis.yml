@@ -1,6 +1,7 @@
 language: generic
 sudo: false
-dist: trusty
+dist: xenial
+jdk: openjdk8
 
 env:
   global:
@@ -21,12 +22,6 @@ cache:
   directories:
     - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-
-before_script:
-  - jdk_switcher use openjdk8
-
-before_install:
-  - unset _JAVA_OPTIONS
 
 addons:
   apt:
