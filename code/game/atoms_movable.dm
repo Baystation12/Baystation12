@@ -2,7 +2,7 @@
 	plane = OBJ_PLANE
 
 	appearance_flags = TILE_BOUND
-	glide_size = 8
+	glide_size = 0
 
 	var/waterproof = TRUE
 	var/movable_flags
