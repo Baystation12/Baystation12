@@ -154,7 +154,7 @@
 				var/bad_message = ""
 				if(job.total_positions == 0 && job.spawn_positions == 0)
 					bad_message = "<b>\[UNAVAILABLE]</b>"
-				else if(user.client.is_banned(title))
+				else if(job.is_banned(user.client))
 					bad_message = "<b>\[BANNED]</b>"
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
@@ -333,7 +333,7 @@
 		if(istype(job))
 			var/datum/species/S = preference_species()
 			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
-			var/choice = input(user, "Choose your branch of ser@vice.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
+			var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
 			if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, S))
 				pref.branches[job.title] = choice
 				pref.ranks -= job.title

@@ -262,6 +262,24 @@
 			if (ban["scope"] == scope)
 				return TRUE
 
+/client/proc/is_rank_banned(var/datum/mil_rank/rank, var/datum/mil_branch/branch, var/client/client)
+	. = FALSE
+	var/grade = rank.grade()
+	if (isnull(grade) || grade == "")
+		return FALSE
+	var/list/check_slugs = list()
+	var/min_sort = 0
+	if (rank.sort_order > 10)
+		min_sort = 10
+	for (var/rankname in branch.ranks)
+		var/datum/mil_rank/check_rank = branch.ranks[rankname]
+		if (check_rank.sort_order > min_sort && check_rank.sort_order <= rank.sort_order)
+			var/slug = "[branch.name_short]_[check_rank.grade()]"
+			check_slugs |= slug
+			log_world("check [slug]")
+	if (is_banned(check_slugs))
+		return TRUE
+
 //checks if a client is afk
 //3000 frames = 5 minutes
 /client/proc/is_afk(duration=3000)

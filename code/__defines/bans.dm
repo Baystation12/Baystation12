@@ -1,3 +1,4 @@
+#define BAN_ANTAG list("Antag")
 #define BAN_ERT list("ERT")
 #define BAN_ROBOT list("Robot")
 #define BAN_MAINTDRONE list("MAINTDRONE") + BAN_ROBOT

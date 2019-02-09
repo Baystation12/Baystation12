@@ -60,6 +60,8 @@ SUBSYSTEM_DEF(database)
 	if (isnull(current_schema) || (current_schema < BAN_SCOPE_VERSION && current_schema != -1)) // -1 means this isn't used
 		RegisterBanScopes()
 
+	. = ..()
+
 /datum/controller/subsystem/database/proc/LoadBanScopes()
 	ban_scope_categories.Cut()
 
@@ -95,6 +97,7 @@ SUBSYSTEM_DEF(database)
 	ban_scope_categories["Channel"] = channel_scopes
 
 	var/list/other_scopes = list()
+	other_scopes |= BAN_ANTAG
 	other_scopes |= BAN_ERT
 	other_scopes |= BAN_ROBOT
 	other_scopes |= BAN_MAINTDRONE

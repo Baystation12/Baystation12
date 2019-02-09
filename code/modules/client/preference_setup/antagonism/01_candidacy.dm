@@ -38,7 +38,7 @@
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
-		if(preference_mob().client.is_banned(antag.id) || (antag.id == MODE_MALFUNCTION && preference_mob().client.is_banned(BAN_AI)))
+		if(preference_mob().client.is_banned(antag.id) || preference_mob().client.is_banned(BAN_ANTAG) || (antag.id == MODE_MALFUNCTION && preference_mob().client.is_banned(BAN_AI)))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
 		else if(antag.id in pref.be_special_role)
 			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];del_special=[antag.id]'>Low</a> <a href='?src=\ref[src];add_never=[antag.id]'>Never</a></br>"
@@ -94,7 +94,7 @@
 		pref.never_be_special_role |= href_list["add_never"]
 		return TOPIC_REFRESH
 
-	if(href_list["select_all"])		
+	if(href_list["select_all"])
 		var/selection = text2num(href_list["select_all"])
 		var/list/roles = valid_special_roles(FALSE)
 
@@ -102,11 +102,11 @@
 			switch(selection)
 				if(0)
 					pref.be_special_role -= id
-					pref.never_be_special_role |= id					
+					pref.never_be_special_role |= id
 				if(1)
 					pref.be_special_role -= id
-					pref.never_be_special_role -= id					
-				if(2)					
+					pref.never_be_special_role -= id
+				if(2)
 					pref.be_special_role |= id
 					pref.never_be_special_role -= id
 		return TOPIC_REFRESH
@@ -118,7 +118,7 @@
 
 	for(var/antag_type in GLOB.all_antag_types_)
 		if(!include_bans)
-			if(preference_mob().client.is_banned(antag_type))
+			if(preference_mob().client.is_banned(antag_type) || preference_mob().client.is_banned(BAN_ANTAG))
 				continue
 			if((antag_type  == MODE_MALFUNCTION) && preference_mob().client.is_banned(BAN_AI))
 				continue
@@ -130,7 +130,7 @@
 		if(!ghost_trap.list_as_special_role)
 			continue
 		if(!include_bans)
-			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
+			if(banned_from_ghost_role(preference_mob(), ghost_trap))
 				continue
 		private_valid_special_roles += ghost_trap.pref_check
 

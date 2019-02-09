@@ -23,6 +23,8 @@ var/list/departments_by_name = list(
 	"Support" = SPT,
 	"Expedition" = EXP)
 
+var/list/department_flag_to_name = list()
+
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
 	init_order = SS_INIT_JOBS
@@ -119,6 +121,11 @@ SUBSYSTEM_DEF(jobs)
 				for (var/I in 1 to GLOB.bitflags.len)
 					if(job.department_flag & GLOB.bitflags[I])
 						LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.title)
+
+	// Update job flag lookup
+	for (var/name in departments_by_name)
+		var/flag = departments_by_name[name]
+		department_flag_to_name["[flag]"] = name
 
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()
@@ -381,7 +388,7 @@ SUBSYSTEM_DEF(jobs)
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/attempt_role_assignment(var/mob/new_player/player, var/datum/job/job, var/level)
-	if(!player.client.is_banned(job.title) && \
+	if(!job.is_banned(player.client) && \
 	 job.player_old_enough(player.client) && \
 	 player.client.prefs.CorrectLevel(job, level) && \
 	 job.is_position_available())

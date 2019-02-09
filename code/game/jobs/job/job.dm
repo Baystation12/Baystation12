@@ -351,6 +351,19 @@
 		return TRUE
 	if (client.is_banned(department))
 		return TRUE
+	if (department_flag)
+		for (var/I in 1 to GLOB.bitflags.len)
+			if (department_flag & GLOB.bitflags[I])
+				if (client.is_banned(department_flag_to_name["[GLOB.bitflags[I]]"]))
+					return TRUE
+	if (!isnull(allowed_branches))
+		var/datum/mil_branch/branch = mil_branches.get_branch(client.prefs.branches[title])
+		if (client.is_banned(branch.name_short))
+			return TRUE
+		if (!isnull(allowed_ranks))
+			var/datum/mil_rank/rank = mil_branches.get_rank(client.prefs.branches[title], client.prefs.ranks[title])
+			if(client.is_rank_banned(rank, branch))
+				return TRUE
 	return FALSE
 
 /datum/job/proc/is_available(var/client/caller)
