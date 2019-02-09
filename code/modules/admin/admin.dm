@@ -1172,6 +1172,8 @@ var/global/floorIsLava = 0
 
 			P.adminbrowse()
 
+			GLOB.adminfaxes += P
+
 /datum/admin/proc/faxCallback(var/obj/item/weapon/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
 	var/customname = input(usr, "Pick a title for the report", "Title") as text|null
 

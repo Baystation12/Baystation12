@@ -250,11 +250,17 @@
 /client/proc/is_whitelisted(var/scope)
 	. = scope in whitelist
 
-/client/proc/is_banned(var/list/scopes)
+/client/proc/is_banned(var/check_scope)
 	. = FALSE
-	for (var/scope in scopes)
-		if (scope in bans)
-			return TRUE
+	var/list/check_scopes
+	if (islist(check_scope))
+		check_scopes = check_scope
+	else
+		check_scopes = list(check_scope)
+	for (var/scope in check_scopes)
+		for (var/list/ban in bans)
+			if (ban["scope"] == scope)
+				return TRUE
 
 //checks if a client is afk
 //3000 frames = 5 minutes
