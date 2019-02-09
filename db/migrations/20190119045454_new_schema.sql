@@ -108,7 +108,7 @@ CREATE INDEX bs12_ban_scope_ts_bt ON bs12_ban_scope (ts);
 CREATE INDEX bs12_ban_expiry_ts_bt ON bs12_ban_expiry (ts);
 CREATE INDEX bs12_ban_target_ts_bt ON bs12_ban_target (ts);
 
-CREATE VIEW bs12_active_ban_reason AS 
+CREATE VIEW bs12_active_ban_reason AS
     SELECT id, ban, reason FROM bs12_ban_reason
     WHERE id IN (SELECT id FROM bs12_ban_expiry WHERE ts IN (SELECT MAX(ts) FROM bs12_ban_expiry GROUP BY ban));
 
@@ -133,6 +133,15 @@ CREATE VIEW bs12_active_ban AS
     INNER JOIN bs12_active_ban_target AS t ON bs12_ban.id = t.ban
     WHERE expiry IS NULL OR expiry > CURRENT_TIMESTAMP;
 
+CREATE TABLE bs12_valid_scope(
+    id SERIAL PRIMARY KEY,
+    scope TEXT NOT NULL,
+    category TEXT NOT NULL,
+    version SMALLINT NOT NULL,
+    UNIQUE(scope, category, version)
+);
+
+CREATE INDEX bs12_valid_scope_version_hash ON bs12_valid_scope USING HASH (version);
 
 INSERT INTO bs12_player(ckey, last_seen) VALUES ('xales', CURRENT_TIMESTAMP);
 INSERT INTO bs12_ban(admin) VALUES (1);

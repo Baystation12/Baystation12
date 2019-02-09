@@ -10,6 +10,19 @@ var/const/SUP               =(1<<8)
 var/const/SPT               =(1<<9)
 var/const/EXP               =(1<<10)
 
+var/list/departments_by_name = list(
+	"Engineering" = ENG,
+	"Security" = SEC,
+	"Medical" = MED,
+	"Science" = SCI,
+	"Civilian" = CIV,
+	"Command" = COM,
+	"Misc" = MSC,
+	"Service" = SRV,
+	"Supply" = SUP,
+	"Support" = SPT,
+	"Expedition" = EXP)
+
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
 	init_order = SS_INIT_JOBS

@@ -206,5 +206,18 @@
     . = db.Execute("INSERT INTO bs12_ban_expiry (ban, admin, expiry) VALUES ($1, $2, CURRENT_TIMESTAMP)", id, admin_id)
     CHECK_ERR(.)
 
+/datum/database/dmpg/GetBanScopeSchemaVersion()
+    var/list/res = db.Query("SELECT MAX(version) FROM bs12_valid_scope")
+    CHECK_ERR(res)
+
+    if (res.len == 0)
+        return null
+
+    return res[1][1]
+
+/datum/database/proc/RegisterBanScope(var/scope, var/category, var/version)
+     . = db.Execute("INSERT INTO bs12_valid_scope(scope, category, version) VALUES ($1, $2, $3)", scope, category, version)
+    CHECK_ERR(.)
+
 #undef RETURN_ERR
 #undef CHECK_ERR
