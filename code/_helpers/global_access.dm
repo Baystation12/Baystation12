@@ -355,8 +355,12 @@
 			return global.delta_index;
 		if("department_accounts")
 			return global.department_accounts;
+		if("department_flag_to_name")
+			return global.department_flag_to_name;
 		if("department_radio_keys")
 			return global.department_radio_keys;
+		if("departments_by_name")
+			return global.departments_by_name;
 		if("diary")
 			return global.diary;
 		if("dna_activity_bounds")
@@ -1266,8 +1270,12 @@
 			global.delta_index=newval;
 		if("department_accounts")
 			global.department_accounts=newval;
+		if("department_flag_to_name")
+			global.department_flag_to_name=newval;
 		if("department_radio_keys")
 			global.department_radio_keys=newval;
+		if("departments_by_name")
+			global.departments_by_name=newval;
 		if("diary")
 			global.diary=newval;
 		if("dna_activity_bounds")
@@ -1999,7 +2007,9 @@
 	"defer_powernet_rebuild",
 	"delta_index",
 	"department_accounts",
+	"department_flag_to_name",
 	"department_radio_keys",
+	"departments_by_name",
 	"diary",
 	"dna_activity_bounds",
 	"dna_genes",

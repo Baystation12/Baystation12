@@ -1,0 +1,2 @@
+# Database used by SSdatabase for connecting with DMPG/other backends
+# DATABASE_URL postgres://user:pass@some_url:port/database
