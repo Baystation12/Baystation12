@@ -215,8 +215,8 @@
 
     return res[1][1]
 
-/datum/database/proc/RegisterBanScope(var/scope, var/category, var/version)
-     . = db.Execute("INSERT INTO bs12_valid_scope(scope, category, version) VALUES ($1, $2, $3)", scope, category, version)
+/datum/database/dmpg/RegisterBanScope(var/scope, var/category, var/version)
+    . = db.Execute("INSERT INTO bs12_valid_scope(scope, category, version) VALUES ($1, $2, $3)", scope, category, version)
     CHECK_ERR(.)
 
 #undef RETURN_ERR

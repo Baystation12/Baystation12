@@ -194,14 +194,14 @@ SUBSYSTEM_DEF(jobs)
 	return TRUE
 
 
-/datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/rank, var/latejoin = 0)
-	if(player && player.mind && rank)
-		var/datum/job/job = get_by_title(rank)
+/datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/role, var/latejoin = 0)
+	if(player && player.mind && role)
+		var/datum/job/job = get_by_title(role)
 		if(!job)
 			return 0
 		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 			return 0
-		if(player.client.is_banned(rank))
+		if(job.is_banned(player.client))
 			return 0
 		if(!job.player_old_enough(player.client))
 			return 0
@@ -213,7 +213,7 @@ SUBSYSTEM_DEF(jobs)
 			position_limit = job.spawn_positions
 		if((job.current_positions < position_limit) || position_limit == -1)
 			player.mind.assigned_job = job
-			player.mind.assigned_role = rank
+			player.mind.assigned_role = role
 			player.mind.role_alt_title = job.get_alt_title_for(player.client)
 			unassigned_roundstart -= player
 			job.current_positions++
@@ -223,7 +223,7 @@ SUBSYSTEM_DEF(jobs)
 /datum/controller/subsystem/jobs/proc/find_occupation_candidates(datum/job/job, level, flag)
 	var/list/candidates = list()
 	for(var/mob/new_player/player in unassigned_roundstart)
-		if(player.client.is_banned(job.title))
+		if(job.is_banned(player.client))
 			continue
 		if(!job.player_old_enough(player.client))
 			continue
@@ -247,7 +247,7 @@ SUBSYSTEM_DEF(jobs)
 			continue
 		if(job.title in titles_by_department(COM)) //If you want a command position, select it!
 			continue
-		if(player.client.is_banned(job.title))
+		if(job.is_banned(player.client))
 			continue
 		if(!job.player_old_enough(player.client))
 			continue

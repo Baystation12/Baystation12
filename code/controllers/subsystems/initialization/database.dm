@@ -65,13 +65,34 @@ SUBSYSTEM_DEF(database)
 
 	ban_scope_categories["Server"] = list("server")
 
+	var/list/department_scopes = list()
+
 	for (var/dept in departments_by_name)
 		var/list/category = list()
+		department_scopes |= dept
 
 		for (var/title in SSjobs.titles_by_department(departments_by_name[dept]))
 			category |= title
 
 		ban_scope_categories[dept] = category
+
+	ban_scope_categories["Department"] = department_scopes
+
+	var/list/antag_scopes = list()
+
+	var/list/all_antag_types = GLOB.all_antag_types_
+	for (var/antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[antag_type]
+		antag_scopes |= antag.id
+
+	ban_scope_categories["Antag"] = antag_scopes
+
+	var/list/channel_scopes = list()
+	var/list/channel_types = decls_repository.get_decls_of_subtype(/decl/communication_channel)
+	for (var/channel_type in channel_types)
+		var/decl/communication_channel/channel = channel_types[channel_type]
+		channel_scopes |= channel.name
+	ban_scope_categories["Channel"] = channel_scopes
 
 	var/list/other_scopes = list()
 	other_scopes |= BAN_ERT
