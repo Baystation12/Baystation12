@@ -22,7 +22,7 @@
 			return FALSE
 
 /decl/communication_channel/ooc/do_communicate(var/client/C, var/message)
-	var/datum/admins/holder = C.holder
+	var/datum/admin/holder = C.holder
 	var/is_stealthed = C.is_stealthed()
 
 	var/ooc_style = "everyone"

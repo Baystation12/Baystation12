@@ -21,7 +21,7 @@
 			return FALSE
 
 /decl/communication_channel/aooc/do_communicate(var/client/C, var/message)
-	var/datum/admins/holder = C.holder
+	var/datum/admin/holder = C.holder
 
 	for(var/client/target in GLOB.clients)
 		if(target.holder)

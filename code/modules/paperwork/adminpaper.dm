@@ -2,7 +2,7 @@
 /obj/item/weapon/paper/admin
 	name = "administrative paper"
 	desc = "If you see this, something has gone horribly wrong."
-	var/datum/admins/admindatum = null
+	var/datum/admin/admindatum = null
 
 	var/interactions = null
 	var/isCrayon = 0
@@ -149,7 +149,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		footerOn = !footerOn
 		updateDisplay()
 		return
-	
+
 	if(href_list["changelogo"])
 		logo = input(usr, "What logo?", "Choose a logo", "") as null|anything in (logo_list)
 		generateHeader()

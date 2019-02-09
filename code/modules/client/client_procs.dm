@@ -139,14 +139,14 @@
 
 	var/list/admin = SSdatabase.db.GetAdmin(ckey)
 	if (admin)
-		if (ckey in admin_datums)
-			admin_datums[ckey].rank = admin[1]
-			admin_datums[ckey].rights = admin[2]
-		else
-			new /datum/admins(admin[1], admin[2], ckey)
+		holder = new(admin[1], admin[2])
+	if (world.host && world.host != "" && key == world.host)
+		holder = new("!HOST!", R_EVERYTHING)
+	if (isnull(address) || address in list("127.0.0.1", "::1"))
+		holder = new("!LOCALHOST!", R_EVERYTHING)
+
+	if (holder)
 		GLOB.admins += src
-		holder = admin_datums[ckey]
-		holder.owner = src
 
 	if(config.player_limit != 0)
 		if((GLOB.clients.len >= config.player_limit) && !(holder))
@@ -225,11 +225,21 @@
 	if(src && watched_variables_window)
 		STOP_PROCESSING(SSprocessing, watched_variables_window)
 	if(holder)
-		holder.owner = null
 		GLOB.admins -= src
+		handle_admin_logout()
 	GLOB.ckey_directory -= ckey
 	GLOB.clients -= src
 	return ..()
+
+/client/proc/handle_admin_logout()
+	var/datum/admin/holder = get_holder()
+	if(holder && GAME_STATE == RUNLEVEL_GAME) //Only report this stuff if we are currently playing.
+		message_staff("Staff logout: [key_name(src)]")
+		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
+			send2adminirc("[key_name(src)] logged out - no more admins online.")
+			if(config.delist_when_no_admins && GLOB.visibility_pref)
+				world.update_hub_visibility()
+				send2adminirc("Toggled hub visibility. The server is now invisible ([GLOB.visibility_pref]).")
 
 /client/Destroy()
 	..()
@@ -312,3 +322,10 @@ client/verb/character_setup()
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
 		vars["fps"] = prefs.clientfps
+
+/client/proc/get_holder()
+	if (holder)
+		return holder
+	if (deadmin_holder)
+		return deadmin_holder
+	return null

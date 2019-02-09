@@ -210,7 +210,7 @@
 			. = TRUE
 
 		if(.)
-			var/datum/admins/admin = GLOB.admins[usr.key]
+			var/datum/admin/admin = GLOB.admins[usr.key]
 			if(istype(admin))
 				admin.show_player_panel(current)
 			return

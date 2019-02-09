@@ -45,7 +45,7 @@
 
 	callproc_targetpicked(1, A)
 
-/datum/admins
+/datum/admin
 	var/datum/callproc/callproc = null // if the user has a callproc datum, it goes here
 
 /client/proc/callproc_targetpicked(hastarget, datum/target)
@@ -92,6 +92,10 @@
 	if(hastarget)
 		if(!target)
 			to_chat(usr, "Your callproc target no longer exists.")
+			clear()
+			return
+		if(!target.CanProcCall(procname))
+			to_chat(usr, "Proccall on [target.type]/proc/[procname] is forbidden")
 			clear()
 			return
 		if(!hascall(target, procname))

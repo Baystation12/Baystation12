@@ -1,5 +1,5 @@
 
-/datum/admins/proc/player_panel_new()//The new one
+/datum/admin/proc/player_panel_new()//The new one
 	if (!usr.client.holder)
 		return
 	var/dat = "<html><head><title>Admin Player Panel</title></head>"
@@ -322,7 +322,7 @@
 	usr << browse(dat, "window=players;size=600x480")
 
 //The old one
-/datum/admins/proc/player_panel_old()
+/datum/admin/proc/player_panel_old()
 	if (!usr.client.holder)
 		return
 
@@ -394,7 +394,7 @@
 
 
 
-/datum/admins/proc/check_antagonists()
+/datum/admin/proc/check_antagonists()
 	if (GAME_STATE >= RUNLEVEL_GAME)
 		var/dat = list()
 		dat += "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"

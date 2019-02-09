@@ -151,8 +151,6 @@
 			return global.account_hack_attempted;
 		if("additional_antag_types")
 			return global.additional_antag_types;
-		if("admin_datums")
-			return global.admin_datums;
 		if("admin_pm_repository")
 			return global.admin_pm_repository;
 		if("admin_secrets")
@@ -1064,8 +1062,6 @@
 			global.account_hack_attempted=newval;
 		if("additional_antag_types")
 			global.additional_antag_types=newval;
-		if("admin_datums")
-			global.admin_datums=newval;
 		if("admin_pm_repository")
 			global.admin_pm_repository=newval;
 		if("admin_secrets")
@@ -1901,7 +1897,6 @@
 	"_client_preferences_by_type",
 	"account_hack_attempted",
 	"additional_antag_types",
-	"admin_datums",
 	"admin_pm_repository",
 	"admin_secrets",
 	"admin_verbs_admin",

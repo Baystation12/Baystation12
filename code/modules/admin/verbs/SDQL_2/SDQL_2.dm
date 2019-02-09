@@ -16,7 +16,7 @@
 	--Lists can be done through [], so say UPDATE /mob SET client.color = [1, 0.75, ...].
 */
 
-// Used by update statements, this is to handle shit like preventing editing the /datum/admins though SDQL but WITHOUT +PERMISSIONS.
+// Used by update statements, this is to handle shit like preventing editing the /datum/admin though SDQL but WITHOUT +PERMISSIONS.
 // Assumes the variable actually exists.
 /datum/proc/SDQL_update(var/const/var_name, var/new_value)
 	vars[var_name] = new_value

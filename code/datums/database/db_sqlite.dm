@@ -13,7 +13,7 @@
         CRASH("unsupported old version for sqlite migration")
 
 /datum/database/sqlite/proc/create_schema()
-    log_world("Creating sqlite schema")
+    to_world_log("Creating sqlite schema")
     q.Add({"
     CREATE TABLE bs12_rank(
         id INTEGER NOT NULL PRIMARY KEY,
@@ -90,9 +90,9 @@
     q.Execute()
     if (q.NextRow())
         ver = q.GetRowData()["version"]
-        log_world("Detected sqlite schema [ver]")
+        to_world_log("Detected sqlite schema [ver]")
     if (isnull(ver) || ver < SCHEMA_VERSION)
-        log_world("Detected outdated or nonexistent sqlite database (ver: [ver])")
+        to_world_log("Detected outdated or nonexistent sqlite database (ver: [ver])")
         migrate_schema(ver)
 
 /datum/database/sqlite/Connected()

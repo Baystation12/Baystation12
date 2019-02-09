@@ -156,7 +156,7 @@ proc/load_unit_test_changes()
 	else
 		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed [skipped_message]****[ascii_reset]")
 
-/datum/admins/proc/run_unit_test(var/datum/unit_test/unit_test_type in get_test_datums())
+/datum/admin/proc/run_unit_test(var/datum/unit_test/unit_test_type in get_test_datums())
 	set name = "Run Unit Test"
 	set desc = "Runs the selected unit test - Remember to enable Debug Log Messages"
 	set category = "Debug"

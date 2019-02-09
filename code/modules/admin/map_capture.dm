@@ -1,4 +1,4 @@
-/datum/admins/proc/capture_map_part(tx as null|num, ty as null|num, tz as null|num, range as null|num)
+/datum/admin/proc/capture_map_part(tx as null|num, ty as null|num, tz as null|num, range as null|num)
 	set category = "Server"
 	set name = "Capture Map Part"
 	set desc = "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range (captures part of a map originating from bottom left corner)"
@@ -28,7 +28,7 @@
 	else
 		to_chat(usr, "Target coordinates are incorrect.")
 
-/datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty, ligths)
+/datum/admin/proc/capture_map_capture_next(currentz, currentx, currenty, ligths)
 	if(locate(currentx, currenty, currentz))
 		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
@@ -51,7 +51,7 @@
 		else
 			to_chat(usr, "End of map, capture is done.")
 
-/datum/admins/proc/capture_map(tz as null|num)
+/datum/admin/proc/capture_map(tz as null|num)
 	set category = "Server"
 	set name = "Capture Map"
 	set desc = "Usage: Capture-Map target_z_cord (captures map)"

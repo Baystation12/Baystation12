@@ -17,7 +17,7 @@
 /datum/antagonist/proc/get_extra_panel_options()
 	return
 
-/datum/antagonist/proc/get_check_antag_output(var/datum/admins/caller)
+/datum/antagonist/proc/get_check_antag_output(var/datum/admin/caller)
 
 	if(!current_antagonists || !current_antagonists.len)
 		return ""
@@ -57,5 +57,5 @@
 	return dat
 
 //Overridden elsewhere.
-/datum/antagonist/proc/get_additional_check_antag_output(var/datum/admins/caller)
+/datum/antagonist/proc/get_additional_check_antag_output(var/datum/admin/caller)
 	return ""

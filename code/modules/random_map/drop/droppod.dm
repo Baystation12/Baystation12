@@ -147,7 +147,7 @@
 				drop.buckled = null
 			drop.forceMove(T)
 
-/datum/admins/proc/call_drop_pod()
+/datum/admin/proc/call_drop_pod()
 	set category = "Fun"
 	set desc = "Call an immediate drop pod on your location."
 	set name = "Call Drop Pod"

@@ -10,7 +10,7 @@
     var/list/ip_cache
 
 /datum/database/dmpg/Init()
-    log_world("Establishing connection using DMPG [db.Version()]")
+    to_world_log("Establishing connection using DMPG [db.Version()]")
     var/res = db.Connect(url)
     if (istext(res))
         CRASH(res)
@@ -29,7 +29,7 @@
             "flags" = res[3]
         ))
     return ranks
-    
+
 /datum/database/dmpg/RecordAdminRank(var/name, var/permissions, var/flags)
     . = db.Execute("INSERT INTO bs12_rank(name, permissions, flags) VALUES ($1, $2, $3)", name, permissions, flags)
     RETURN_ERR(.)

@@ -280,7 +280,7 @@
 	for(var/areatype in areas_without_camera)
 		log_debug("* [areatype]")
 
-/datum/admins/proc/cmd_admin_dress()
+/datum/admin/proc/cmd_admin_dress()
 	set category = "Fun"
 	set name = "Select equipment"
 
@@ -396,7 +396,7 @@
 	else
 		alert("Invalid mob")
 
-/datum/admins/proc/view_runtimes()
+/datum/admin/proc/view_runtimes()
 	set category = "Debug"
 	set name = "View Runtimes"
 	set desc = "Open the Runtime Viewer"

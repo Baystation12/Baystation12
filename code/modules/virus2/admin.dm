@@ -29,7 +29,7 @@
 		<option value='?src=\ref[src];info=1'>Show info</option>
 	"}
 
-/datum/admins/var/datum/virus2_editor/virus2_editor_datum = new
+/datum/admin/var/datum/virus2_editor/virus2_editor_datum = new
 /client/proc/virus2_editor()
 	set name = "Virus Editor"
 	set category = "Admin"

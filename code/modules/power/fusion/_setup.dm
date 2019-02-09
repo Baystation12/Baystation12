@@ -6,14 +6,14 @@
 #define SETUP_ERROR 3		// Something bad happened, and it's important so we won't continue setup.
 #define SETUP_DELAYED 4		// Wait for other things first.
 
-/datum/admins/proc/setup_fusion()
+/datum/admin/proc/setup_fusion()
 	set category = "Debug"
 	set name = "Setup Fusion Core"
 	set desc = "Allows you to start the R-UST engine."
 
-	if (!istype(src,/datum/admins))
+	if (!istype(src,/datum/admin))
 		src = usr.client.holder
-	if (!istype(src,/datum/admins))
+	if (!istype(src,/datum/admin))
 		to_chat(usr, "Error: you are not an admin!")
 		return
 

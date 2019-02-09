@@ -6,8 +6,8 @@
 		////////////////
 		//ADMIN THINGS//
 		////////////////
-	var/datum/admins/holder = null
-	var/datum/admins/deadmin_holder = null
+	var/datum/admin/holder = null
+	var/datum/admin/deadmin_holder = null
 
 		/////////
 		//OTHER//

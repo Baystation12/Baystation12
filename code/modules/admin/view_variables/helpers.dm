@@ -149,7 +149,7 @@
 /client/VV_static()
 	return ..() + list("holder", "prefs")
 
-/datum/admins/VV_static()
+/datum/admin/VV_static()
 	return vars
 
 // The following vars require R_DEBUG to edit
@@ -199,5 +199,5 @@
 
 /proc/forbidden_varedit_object_types()
  	return list(
-		/datum/admins						//Admins editing their own admin-power object? Yup, sounds like a good idea.
+		/datum/admin						//Admins editing their own admin-power object? Yup, sounds like a good idea.
 	)

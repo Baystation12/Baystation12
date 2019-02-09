@@ -1,4 +1,4 @@
-/datum/admins/proc/spawn_fluid_verb()
+/datum/admin/proc/spawn_fluid_verb()
 	set name = "Spawn Water"
 	set desc = "Flood the turf you are standing on."
 	set category = "Debug"
@@ -10,7 +10,7 @@
 			var/turf/T = thing
 			T.add_fluid(2000, /datum/reagent/water)
 
-/datum/admins/proc/jump_to_fluid_source()
+/datum/admin/proc/jump_to_fluid_source()
 
 	set name = "Jump To Fluid Source"
 	set desc = "Jump to an active fluid source."
@@ -24,7 +24,7 @@
 		else
 			to_chat(usr, "No active fluid sources.")
 
-/datum/admins/proc/jump_to_fluid_active()
+/datum/admin/proc/jump_to_fluid_active()
 
 	set name = "Jump To Fluid Activity"
 	set desc = "Jump to an active fluid overlay."

@@ -80,7 +80,7 @@
 //Other log stuff put here for the sake of organisation
 
 //Shows today's server log
-/datum/admins/proc/view_txt_log()
+/datum/admin/proc/view_txt_log()
 	set category = "Admin"
 	set name = "Show Server Log"
 	set desc = "Shows today's server log."
@@ -94,7 +94,7 @@
 	return
 
 //Shows today's attack log
-/datum/admins/proc/view_atk_log()
+/datum/admin/proc/view_atk_log()
 	set category = "Admin"
 	set name = "Show Server Attack Log"
 	set desc = "Shows today's server attack log."

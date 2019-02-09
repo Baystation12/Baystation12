@@ -1,5 +1,5 @@
 /var/create_turf_html = null
-/datum/admins/proc/create_turf(var/mob/user)
+/datum/admin/proc/create_turf(var/mob/user)
 	if (!create_turf_html)
 		var/turfjs = null
 		turfjs = jointext(typesof(/turf), ";")

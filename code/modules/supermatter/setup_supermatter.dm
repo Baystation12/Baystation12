@@ -10,14 +10,14 @@
 #define ENERGY_PHORON 500			// Roughly 40 emitter shots.
 
 
-/datum/admins/proc/setup_supermatter()
+/datum/admin/proc/setup_supermatter()
 	set category = "Debug"
 	set name = "Setup Supermatter"
 	set desc = "Allows you to start the Supermatter engine."
 
-	if (!istype(src,/datum/admins))
+	if (!istype(src,/datum/admin))
 		src = usr.client.holder
-	if (!istype(src,/datum/admins))
+	if (!istype(src,/datum/admin))
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
