@@ -89,9 +89,13 @@
 	SetName(get_visible_name())
 
 /mob/living/carbon/human/set_stat(var/new_stat)
+	var/old_stat = stat
 	. = ..()
 	if(stat)
 		update_skin(1)
+	if(client && client.is_afk())
+		if(old_stat == UNCONSCIOUS && stat == CONSCIOUS)
+			playsound_local(null, 'sound/effects/bells.ogg', 100, is_global=TRUE)
 
 /mob/living/carbon/human/proc/handle_some_updates()
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
