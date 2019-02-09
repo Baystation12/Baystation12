@@ -242,7 +242,7 @@
 	layer = RUNE_LAYER
 
 /obj/effect/golemrune/Initialize()
-	..()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/golemrune/Process()
