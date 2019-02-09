@@ -58,11 +58,13 @@
 	name = "Submachine Gun"
 	item_cost = 52
 	path = /obj/item/weapon/gun/projectile/automatic/merc_smg
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
 	name = "Assault Rifle"
 	item_cost = 60
 	path = /obj/item/weapon/gun/projectile/automatic/assault_rifle
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
 	name = "Advanced Energy Gun"
@@ -73,6 +75,7 @@
 	name = "Anti-materiel Rifle with ammunition"
 	item_cost = 68
 	path = /obj/item/weapon/storage/secure/briefcase/heavysniper
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/machine_pistol
 	name = "Machine Pistol"
@@ -83,6 +86,7 @@
 	name = "Combat Shotgun"
 	item_cost = 52
 	path = /obj/item/weapon/gun/projectile/shotgun/pump/combat
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/sawnoff
 	name = "Sawnoff Shotgun"
@@ -108,22 +112,24 @@
 	name = "Pulse Rifle"
 	item_cost = 68
 	path = /obj/item/weapon/gun/energy/pulse_rifle
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/flechetterifle
 	name = "Flechette Rifle"
 	item_cost = 60
 	path = /obj/item/weapon/gun/magnetic/railgun/flechette
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
 	name = "Railgun"
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	antag_costs = list(MODE_MERCENARY = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6)
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
+	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/weapon/gun/magnetic/railgun
 
 /datum/uplink_item/item/visible_weapons/railguntcc // Only slightly better than the normal railgun; but cooler looking
 	name = "Advanced Railgun"
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT + (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6// Only available to traitors if they share TCs.
-	antag_costs = list(MODE_MERCENARY = DEFAULT_TELECRYSTAL_AMOUNT) // This, on the other hand, is to encourage usage specifically by mercs with high budgets.
+	antag_roles = list(MODE_MERCENARY)
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/gun/magnetic/railgun/tcc
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb

@@ -38,3 +38,4 @@
 	name = "\improper Mounted Laser Cannon"
 	item_cost = 64
 	path = /obj/item/rig_module/mounted
+	antag_roles = list(MODE_MERCENARY)
