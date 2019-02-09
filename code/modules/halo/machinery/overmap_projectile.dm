@@ -83,7 +83,7 @@
 	new_proj.original = proj_end_loc
 	new_proj.firer = firer
 
-	if(!istype(console_fired_by) && console_fired_by.do_track_fired_proj && isnull(console_fired_by.currently_tracked_proj))
+	if(istype(console_fired_by) && console_fired_by.do_track_fired_proj && isnull(console_fired_by.currently_tracked_proj))
 		var/obj/item/projectile/camera_track/camera_track_proj = new /obj/item/projectile/camera_track (proj_spawn_loc)
 		console_fired_by.currently_tracked_proj = camera_track_proj
 		camera_track_proj.firer = firer
