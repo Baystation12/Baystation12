@@ -22565,6 +22565,10 @@
 	icon_state = "wood_broken3"
 	},
 /area/holodeck/source_temple)
+"lLj" = (
+/obj/machinery/recharge_station,
+/turf/simulated/floor/carpet,
+/area/merchant_station)
 "lRq" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -50244,7 +50248,7 @@ aLW
 aMf
 aMs
 aMB
-aMC
+lLj
 aMf
 aNW
 aNU
