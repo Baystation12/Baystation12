@@ -24,7 +24,9 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		if(istype(t))
 			new /turf/space (t)
 		else
-			to_clear.loc = null
+			var/obj/to_clear_obj = to_clear
+			if(istype(to_clear_obj))
+				to_clear_obj.loc = null
 			GLOB.processing_objects -= to_clear
 			qdel(to_clear)
 
