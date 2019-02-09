@@ -1,4 +1,0 @@
-author: "comma"
-delete-after: True
-changes: 
-  - tweak: "Wall of text about clothing items property is moved to a codex entry for the item, instead of being shown on every examine."
