@@ -63,8 +63,9 @@
 	allowed_magazines = /obj/item/ammo_magazine/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
-	accuracy = 1
+	accuracy = 2
 	one_hand_penalty = 2
+	bulk = 3
 
 /obj/item/weapon/gun/projectile/pistol/throwback
 	name = "pistol"

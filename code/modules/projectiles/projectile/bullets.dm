@@ -124,19 +124,19 @@
 /obj/item/projectile/bullet/pistol
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 30
-	distance_falloff = 3.5
+	distance_falloff = 3
 
 /obj/item/projectile/bullet/pistol/holdout
 	damage = 25
 	penetration_modifier = 1.2
-	distance_falloff = 5
+	distance_falloff = 4
 
 /obj/item/projectile/bullet/pistol/strong
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	damage = 50
 	armor_penetration = 20
 	penetration_modifier = 0.8
-	distance_falloff = 3
+	distance_falloff = 2.5
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
@@ -153,7 +153,7 @@
 	penetrating = 1
 	armor_penetration = 70
 	embed = 0
-	distance_falloff = 2.5
+	distance_falloff = 2
 
 /* shotgun projectiles */
 

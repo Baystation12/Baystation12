@@ -62,6 +62,7 @@
 	var/silenced = 0
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
+	var/bulk = 0			//how unwieldy this weapon for its size, affects accuracy when fired without aiming
 	var/last_handled		//time when hand gun's in became active, for purposes of aiming bonuses
 	var/scoped_accuracy = null  //accuracy used when zoomed in a scope
 	var/scope_zoom = 0
@@ -348,8 +349,9 @@
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
 		acc_mod += min(max(2, accuracy), stood_still)
-	else if(w_class > ITEM_SIZE_NORMAL)
-		acc_mod -= 2*w_class - ITEM_SIZE_NORMAL
+	else 
+		acc_mod -= w_class - ITEM_SIZE_NORMAL
+		acc_mod -= bulk
 
 	if(one_hand_penalty >= 4 && !held_twohanded)
 		acc_mod -= one_hand_penalty/2

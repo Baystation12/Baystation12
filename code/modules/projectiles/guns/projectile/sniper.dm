@@ -16,6 +16,7 @@
 	ammo_type = /obj/item/ammo_casing/shell
 	one_hand_penalty = 6
 	accuracy = -2
+	bulk = 8
 	scoped_accuracy = 8 //increased accuracy over the LWAP because only one shot
 	scope_zoom = 2
 	var/bolt_open = 0

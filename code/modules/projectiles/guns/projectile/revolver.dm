@@ -16,6 +16,7 @@
 	accuracy = 2
 	accuracy_power = 8
 	one_hand_penalty = 2
+	bulk = 3
 
 /obj/item/weapon/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
@@ -52,6 +53,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol
 	desc = "The Lumoco Arms' Solid is a rugged revolver for people who don't keep their guns well-maintained."
 	accuracy = 1
+	bulk = 0
 
 /obj/item/weapon/gun/projectile/revolver/holdout
 	name = "holdout revolver"
@@ -63,6 +65,7 @@
 	w_class = ITEM_SIZE_SMALL
 	accuracy = 1
 	one_hand_penalty = 0
+	bulk = 0
 
 /obj/item/weapon/gun/projectile/revolver/capgun
 	name = "cap gun"

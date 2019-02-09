@@ -15,6 +15,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS
 	one_hand_penalty = 8
+	bulk = 6
 	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "gun_wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
@@ -108,6 +109,7 @@
 			w_class = ITEM_SIZE_NORMAL
 			force = 5
 			one_hand_penalty = 4
+			bulk = 2
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
 			SetName("sawn-off shotgun")
@@ -126,3 +128,4 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 5
 	one_hand_penalty = 4
+	bulk = 2

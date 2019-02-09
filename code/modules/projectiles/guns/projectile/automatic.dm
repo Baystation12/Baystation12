@@ -4,6 +4,7 @@
 	icon = 'icons/obj/guns/prototype_smg.dmi'
 	icon_state = "prototype"
 	w_class = ITEM_SIZE_NORMAL
+	bulk = -1
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL_FLECHETTE
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3)
@@ -42,6 +43,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol
 	magazine_type = /obj/item/ammo_magazine/machine_pistol
 	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
+	one_hand_penalty = 2
 
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
@@ -73,7 +75,8 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	accuracy = 2
+	bulk = -1
+	accuracy = 1
 	one_hand_penalty = 4
 
 	//SMG
@@ -104,8 +107,10 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
 	allowed_magazines = /obj/item/ammo_magazine/rifle
-	accuracy = 0
 	one_hand_penalty = 8
+	accuracy_power = 7
+	accuracy = 2
+	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "arifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
@@ -141,6 +146,8 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/smg_top/rubber
 	allowed_magazines = /obj/item/ammo_magazine/smg_top
+	accuracy_power = 7
+	one_hand_penalty = 3
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -173,9 +180,10 @@
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	accuracy = 1
+	accuracy = 2
 	accuracy_power = 7
 	one_hand_penalty = 8
+	bulk = GUN_BULK_RIFLE
 	burst_delay = 4
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
@@ -237,6 +245,7 @@
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = ITEM_SIZE_HUGE
+	bulk = 10
 	force = 10
 	slot_flags = 0
 	max_shells = 50
