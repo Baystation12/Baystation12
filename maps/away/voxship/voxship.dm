@@ -10,7 +10,7 @@
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
 
 /obj/effect/overmap/sector/vox_base
-	name = "Large Asteroid"
+	name = "large asteroid"
 	desc = "Sensor array detects a large asteroid."
 	in_space = 1
 	icon_state = "meteor4"
@@ -53,11 +53,20 @@
 	fore_dir = NORTH
 
 /obj/effect/submap_landmark/joinable_submap/voxship
-	name = "vox base"
 	archetype = /decl/submap_archetype/derelict/voxship
 
+/obj/effect/submap_landmark/joinable_submap/voxship/New()
+	var/datum/language/vox/pidgin = all_languages[LANGUAGE_VOX]
+	if(pidgin)
+		name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
+	else
+		pidgin = new
+		name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
+		qdel(pidgin)
+	..()
+
 /decl/submap_archetype/derelict/voxship
-	descriptor = "Shoal derelict"
+	descriptor = "Shoal forward base"
 	map = "Vox Base"
 	crew_jobs = list(
 		/datum/job/submap/voxship_vox
