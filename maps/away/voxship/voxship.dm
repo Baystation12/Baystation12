@@ -63,6 +63,7 @@
 		/datum/job/submap/voxship_vox
 	)
 	whitelisted_species = list(SPECIES_VOX)
+	blacklisted_species = null
 
 /turf/simulated/floor/plating/vox
 	initial_gas = list("nitrogen" = MOLES_N2STANDARD*1.25)

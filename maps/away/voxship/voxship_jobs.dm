@@ -6,7 +6,6 @@
 	info = "Scrap is thin. Not much food is left, but thankfully the sector is quite rich, and it's time to get some more supplies. \
 	although staying on base is tempting. Plenty of nitrogen, and not much hazards to worry about."
 
-
 #define VOXSHIP_OUTFIT_JOB_NAME(job_name) ("Vox Asteroid Base - Job - " + job_name)
 /decl/hierarchy/outfit/job/voxship
 	hierarchy_type = /decl/hierarchy/outfit/job/voxship
