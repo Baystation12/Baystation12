@@ -222,14 +222,28 @@
 
 // SECURITY
 
-/var/const/access_brig = 300
-/datum/access/brig
-	id = access_brig
-	desc = "Brig Access"
+
+
+/var/const/access_basec = 300 // Basic Security access. Grants access to Security checkpoints and the main security post. Given to Cadets.
+/datum/access/bansec
+	id = access_basec
+	desc = "Basic Security Access"
 	region = ACCESS_REGION_SECURITY
 
 /var/const/access_warden = 301
 /datum/access/warden
 	id = access_warden
 	desc = "Warden's Office"
+	region = ACCESS_REGION_SECURITY
+
+/var/const/access_gensec = 302 // Full Security access. Grants access to Security checkpoints, the main security post and the Brig + Weapon Lockers.
+/datum/access/gensec
+	id = access_gensec
+	desc = "Full Security Access"
+	region = ACCESS_REGION_SECURITY
+
+/var/const/access_cos = 303
+/datum/access/cos
+	id = access_cos
+	desc = "Chief of Security's Office"
 	region = ACCESS_REGION_SECURITY
