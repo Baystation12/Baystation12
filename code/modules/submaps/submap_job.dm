@@ -54,6 +54,11 @@
 		return FALSE
 	if(S.name in blacklisted_species)
 		return FALSE
+	if(owner && owner.archetype)
+		if(LAZYLEN(owner.archetype.whitelisted_species) && !(S.name in owner.archetype.whitelisted_species))
+			return FALSE
+		if(S.name in owner.archetype.blacklisted_species)
+			return FALSE
 	return TRUE
 
 /datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
@@ -61,11 +66,18 @@
 		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age].</span>")
 		return TRUE
 	if(LAZYLEN(whitelisted_species) && !(prefs.species in whitelisted_species))
-		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as crew on \a [owner.archetype.descriptor].</span>")
+		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")
 		return TRUE
 	if(prefs.species in blacklisted_species)
-		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as crew on \a [owner.archetype.descriptor].</span>")
+		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")
 		return TRUE
+	if(owner && owner.archetype)
+		if(LAZYLEN(owner.archetype.whitelisted_species) && !(prefs.species in owner.archetype.whitelisted_species))
+			to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor].</span>")
+			return TRUE
+		if(prefs.species in owner.archetype.blacklisted_species)
+			to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor].</span>")
+			return TRUE
 	return FALSE
 
 /datum/job/submap/check_is_active(var/mob/M)
