@@ -1,4 +1,4 @@
-/datum/map/torch
+/datum/map/sandros
 
 	base_floor_type = /turf/simulated/floor/reinforced/airless
 	base_floor_area = /area/maintenance/exterior
@@ -943,10 +943,6 @@
 	name = "\improper Security Evidence Storage"
 	icon_state = "security"
 
-/area/security/processing
-	name = "\improper Security Processing"
-	icon_state = "security"
-
 /area/security/wing
 	name = "\improper Security Wing"
 	icon_state = "security"
@@ -1575,3 +1571,26 @@
 	name = "\improper Thunderdome (Observer.)"
 	icon_state = "purple"
 
+/*#########
+NEW AREA'S#
+#########*/
+
+/area/sandros/security/brigfoyer
+	name = "\improper Brig Foyer"
+	icon_state = "red"
+
+/area/sandros/security/brig
+	name = "\improper Brig"
+	icon_state = "red2"
+
+/area/sandros/security/warden
+	name = "\improper Warden's Office"
+	icon_state = "Warden"
+
+/area/sandros/security/processing
+	name = "\improper Security Processing"
+	icon_state = "security"
+
+/area/sandros/security/evidence
+	name = "\improper Security Evidence Storage"
+	icon_state = "security"
