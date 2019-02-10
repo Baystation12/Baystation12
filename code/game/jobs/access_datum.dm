@@ -15,13 +15,13 @@
 	id = access_security
 	desc = "Security Equipment"
 	region = ACCESS_REGION_SECURITY
-
+/*
 /var/const/access_brig = 2 // Brig timers and permabrig
 /datum/access/holding
 	id = access_brig
 	desc = "Holding Cells"
 	region = ACCESS_REGION_SECURITY
-
+*/
 /var/const/access_armory = 3
 /datum/access/armory
 	id = access_armory
