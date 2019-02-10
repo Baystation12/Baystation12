@@ -134,16 +134,16 @@
 	id = access_commissary
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
-	
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
-	
+
 /datum/access/hos
 	desc = "Chief of Security"
-	
+
 /datum/access/hop
 	desc = "Executive Officer"
-		
+
 /datum/access/qm
 	desc = "Deck Chief"
 
@@ -217,3 +217,19 @@
 /*************
 * NRV Petrov *
 *************/
+
+// SANDROS ACCESS
+
+// SECURITY
+
+/var/const/access_brig = 300
+/datum/access/brig
+	id = access_brig
+	desc = "Brig Access"
+	region = ACCESS_REGION_SECURITY
+
+/var/const/access_warden = 301
+/datum/access/warden
+	id = access_warden
+	desc = "Warden's Office"
+	region = ACCESS_REGION_SECURITY
