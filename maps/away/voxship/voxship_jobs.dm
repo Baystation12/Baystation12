@@ -1,8 +1,8 @@
 /datum/job/submap/voxship_vox
-	title = "Vox"
+	title = "Shoal Scavenger"
 	total_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/voxship/crew
-	supervisors = "arkship"
+	supervisors = "apex and the arkship"
 	info = "Scrap is thin. Not much food is left, but thankfully the sector is quite rich, and it's time to get some more supplies. \
 	although staying on base is tempting. Plenty of nitrogen, and not much hazards to worry about."
 	whitelisted_species = list(SPECIES_VOX)
@@ -15,7 +15,7 @@
 	r_ear = null
 
 /decl/hierarchy/outfit/job/voxship/crew
-	name = VOXSHIP_OUTFIT_JOB_NAME("Vox")
+	name = VOXSHIP_OUTFIT_JOB_NAME("Shoal Scavenger")
 	uniform = /obj/item/clothing/under/vox/vox_robes
 	r_pocket = /obj/item/device/radio
 	shoes = /obj/item/clothing/shoes/magboots/vox
@@ -24,6 +24,6 @@
 	l_pocket = /obj/item/weapon/crowbar/prybar
 
 /obj/effect/submap_landmark/spawnpoint/voxship_crew
-	name = "Vox"
+	name = "Shoal Scavenger"
 
 #undef VOXSHIP_OUTFIT_JOB_NAME
