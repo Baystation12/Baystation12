@@ -49,6 +49,13 @@
 		owner = _owner
 		..()
 
+/datum/job/submap/is_species_allowed(var/datum/species/S)
+	if(LAZYLEN(whitelisted_species) && !(S.name in whitelisted_species))
+		return FALSE
+	if(S.name in blacklisted_species)
+		return FALSE
+	return TRUE
+
 /datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
 	if(minimum_character_age && (prefs.age < minimum_character_age))
 		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age].</span>")

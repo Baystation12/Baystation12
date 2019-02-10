@@ -220,7 +220,6 @@
 
 // Don't use if the map doesn't use branches but jobs do.
 /datum/job/proc/get_branch_rank(var/datum/species/S)
-	. = species_branch_rank_cache_[S]
 	if(.)
 		return
 
