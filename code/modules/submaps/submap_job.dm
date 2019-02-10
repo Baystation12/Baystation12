@@ -40,8 +40,8 @@
 	var/branch
 	var/list/spawnpoints
 	var/datum/submap/owner
-	var/list/blacklisted_species
-	var/list/whitelisted_species
+	var/list/blacklisted_species = RESTRICTED_SPECIES
+	var/list/whitelisted_species = STATION_SPECIES
 
 /datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)
 	if(!abstract_job)
