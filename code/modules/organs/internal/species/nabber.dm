@@ -148,7 +148,7 @@
 
 	if(breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
 		H.oxygen_alert = 0
-	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_failed_breath + 2 MINUTES))
+	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
 		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
 		if(owner.chem_effects[CE_OXYGENATED])
 			H.oxygen_alert = 1
