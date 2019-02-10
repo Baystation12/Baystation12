@@ -215,40 +215,20 @@
 /obj/machinery/optable,
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
-"aM" = (
-/obj/machinery/atmospherics/pipe/simple/visible/black{
-	icon_state = "intact";
-	dir = 5
-	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
-/area/voxship/ship)
-"aN" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/black,
-/turf/simulated/floor/reinforced/carbon_dioxide,
-/area/voxship/ship)
-"aO" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible/black,
-/turf/simulated/floor/reinforced/carbon_dioxide,
-/area/voxship/ship)
-"aP" = (
-/obj/machinery/atmospherics/pipe/simple/visible/black{
-	icon_state = "intact";
-	dir = 9
-	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
-/area/voxship/ship)
 "aQ" = (
 /turf/simulated/wall/iron,
 /area/voxship/base)
 "aR" = (
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "aS" = (
-/obj/machinery/atmospherics/unary/vent_pump/siphon/on{
-	icon_state = "map_vent_in";
-	dir = 1
-	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/obj/machinery/atmospherics/pipe/manifold4w/visible/black,
+/turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "aT" = (
 /turf/simulated/floor/asteroid,
@@ -274,20 +254,18 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "aX" = (
-/obj/structure/window/phoronreinforced,
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 6
 	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "aY" = (
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
-	icon_state = "intact";
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "aZ" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -297,12 +275,11 @@
 /turf/simulated/floor/airless,
 /area/voxship/ship)
 "ba" = (
-/obj/structure/window/phoronreinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	icon_state = "intact";
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "bb" = (
 /obj/random/junk,
@@ -347,20 +324,16 @@
 /turf/simulated/wall/ocp_wall,
 /area/voxship/ship)
 "bg" = (
-/obj/structure/window/phoronreinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/carbon_dioxide,
+/turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "bh" = (
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
-	icon_state = "intact";
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/wall/ocp_wall,
 /area/voxship/ship)
 "bi" = (
@@ -573,7 +546,6 @@
 /area/voxship/ship)
 "bI" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
-/obj/effect/floor_decal/borderfloor/full,
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "bJ" = (
@@ -873,6 +845,11 @@
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/borderfloor/full,
+/obj/machinery/power/port_gen/pacman/mrs,
+/obj/structure/cable/blue{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "cr" = (
@@ -977,8 +954,9 @@
 /area/voxship/base)
 "cI" = (
 /obj/machinery/atmospherics/binary/pump{
+	dir = 1;
 	icon_state = "map_off";
-	dir = 1
+	target_pressure = 5
 	},
 /obj/machinery/alarm/vox{
 	dir = 4;
@@ -994,8 +972,9 @@
 /area/voxship/base)
 "cK" = (
 /obj/machinery/atmospherics/binary/pump{
+	dir = 1;
 	icon_state = "map_off";
-	dir = 1
+	target_pressure = 5
 	},
 /obj/machinery/light/small{
 	dir = 1
@@ -1152,10 +1131,7 @@
 	},
 /area/voxship/base)
 "dg" = (
-/obj/machinery/atmospherics/unary/engine{
-	icon_state = "nozzle";
-	dir = 1
-	},
+/obj/machinery/atmospherics/unary/engine,
 /turf/simulated/wall/r_wall/hull,
 /area/space)
 "dh" = (
@@ -1252,6 +1228,10 @@
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/borderfloor/full,
+/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/tritium/ten,
+/obj/structure/closet/cabinet,
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "dy" = (
@@ -1891,10 +1871,10 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "fh" = (
-/obj/machinery/atmospherics/binary/pump{
+/obj/effect/floor_decal/borderfloor/cee,
+/obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor/cee,
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "fi" = (
@@ -2011,9 +1991,6 @@
 "fy" = (
 /obj/machinery/light/small{
 	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
 	},
 /obj/effect/floor_decal/borderfloor/full,
 /obj/structure/bed/chair{
@@ -2171,6 +2148,76 @@
 	icon_state = "dmg2"
 	},
 /area/voxship/base)
+"lB" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	injecting = 1;
+	use_power = 1
+	},
+/obj/machinery/sparker{
+	id = "voxship";
+	pixel_x = -20
+	},
+/turf/simulated/floor/airless,
+/area/voxship/ship)
+"pc" = (
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	icon_state = "intact";
+	dir = 9
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating/vox,
+/area/voxship/ship)
+"tD" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/black,
+/turf/simulated/floor/plating/vox,
+/area/voxship/ship)
+"zx" = (
+/obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/borderfloor/full,
+/obj/machinery/power/port_gen/pacman/mrs,
+/obj/structure/cable/blue{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/ship)
+"Er" = (
+/obj/structure/inflatable/door,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/space)
+"Es" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/borderfloor/cee{
+	icon_state = "borderfloorcee_white";
+	dir = 4
+	},
+/obj/machinery/button/ignition{
+	id = "voxship";
+	pixel_x = -28
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/ship)
+"TI" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/ship)
+"Ww" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/black,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating/vox,
+/area/voxship/ship)
 
 (1,1,1) = {"
 aa
@@ -5249,8 +5296,8 @@ aa
 aa
 aa
 aa
+aa
 al
-au
 au
 au
 au
@@ -5264,7 +5311,7 @@ au
 au
 cl
 fb
-fb
+bq
 aa
 aa
 aa
@@ -5351,9 +5398,9 @@ aa
 aa
 aa
 aa
+aa
 am
 av
-aB
 aB
 aB
 aB
@@ -5366,7 +5413,7 @@ aD
 aD
 cm
 eO
-eO
+aD
 aD
 cB
 aa
@@ -5455,14 +5502,14 @@ aa
 aa
 aa
 aa
+aa
 aC
-aM
 aR
 aX
 bh
 bp
 bq
-aZ
+lB
 dI
 cI
 dz
@@ -5557,9 +5604,9 @@ aa
 aa
 aa
 aa
+aa
 aC
-aN
-aR
+Ww
 aY
 bO
 bq
@@ -5570,7 +5617,7 @@ cK
 dA
 eT
 eK
-eK
+bH
 ff
 aD
 aD
@@ -5659,9 +5706,9 @@ aa
 aa
 aa
 aa
+aa
 aC
-aN
-aR
+tD
 bg
 bO
 bt
@@ -5672,7 +5719,7 @@ dk
 dD
 el
 eL
-eL
+bH
 dk
 cC
 aD
@@ -5761,15 +5808,15 @@ aa
 aa
 aa
 aa
+aa
 aC
-aO
 aS
-bg
+TI
 bC
 bK
 bC
 cg
-bK
+Es
 bH
 dE
 el
@@ -5863,16 +5910,16 @@ aa
 aa
 aa
 aa
+aa
 aC
-aN
-aR
+tD
 bg
 bD
 bu
 bW
 ch
 cq
-ch
+zx
 dF
 eH
 bH
@@ -5965,9 +6012,9 @@ aa
 aa
 aa
 aa
+aa
 aC
-aN
-aR
+Ww
 bg
 bH
 bv
@@ -6067,9 +6114,9 @@ aa
 aa
 aa
 aa
+aa
 aC
-aP
-aR
+pc
 ba
 bI
 bw
@@ -6082,7 +6129,7 @@ eJ
 eM
 fd
 aD
-ab
+aD
 aa
 aa
 aa
@@ -6168,7 +6215,7 @@ aa
 aa
 aa
 aa
-ab
+aa
 aD
 aD
 aD
@@ -8313,7 +8360,7 @@ aa
 aa
 ad
 ad
-ad
+aV
 ad
 ad
 ad
@@ -8414,9 +8461,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+ab
+Er
+ab
 aa
 aa
 ab
@@ -8516,9 +8563,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+ab
+Er
+ab
 aa
 aa
 ab
