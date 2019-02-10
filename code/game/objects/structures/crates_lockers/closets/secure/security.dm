@@ -255,7 +255,7 @@
 	)
 
 
-/obj/structure/closet/secure_closet/tempcont
+/obj/structure/closet/secure_closet/sandros/security/tempcont
 	name = "temporary contraband locker"
 	req_access = list(access_brig)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/security
