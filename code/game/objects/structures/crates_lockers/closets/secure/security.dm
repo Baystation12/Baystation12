@@ -253,3 +253,12 @@
 		/obj/item/device/taperecorder = 2,
 		/obj/item/weapon/storage/secure/briefcase = 2,
 	)
+
+
+/obj/structure/closet/secure_closet/tempcont
+	name = "temporary contraband locker"
+	req_access = list(access_brig)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/security
+
+/obj/structure/closet/secure_closet/tempcont/WillContain()
+	return list()
