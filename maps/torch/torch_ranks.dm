@@ -10,7 +10,8 @@
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
-		/datum/mil_branch/army
+		/datum/mil_branch/army,
+		/datum/mil_branch/alien
 	)
 
 	spawn_branch_types = list(
@@ -25,8 +26,8 @@
 		/datum/species/nabber     = list(/datum/mil_branch/civilian),
 		/datum/species/skrell     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/unathi     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/vox        = list(/datum/mil_branch/civilian),
-		/datum/species/adherent   = list(/datum/mil_branch/civilian)
+		/datum/species/adherent   = list(/datum/mil_branch/civilian),
+		/datum/species/vox        = list(/datum/mil_branch/alien)
 	)
 
 	species_to_rank_whitelist = list(
@@ -64,9 +65,13 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5
 			)
+		),
+		/datum/species/vox = list(
+			/datum/mil_branch/alien = list(
+				/datum/mil_rank/alien
+			)
 		)
 	)
-
 
 /*
  *  Branches
@@ -781,3 +786,13 @@
 	name_short = "AdmNvy"
 	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag/o10)
 	sort_order = 20
+
+// Vox/foreign alien branch.
+/datum/mil_branch/alien
+	name = "Alien"
+	name_short = "Alien"
+	rank_types = list(/datum/mil_rank/alien)
+	spawn_rank_types = list(/datum/mil_rank/alien)
+
+/datum/mil_rank/alien
+	name = "Alien"
