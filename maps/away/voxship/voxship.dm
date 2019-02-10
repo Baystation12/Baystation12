@@ -57,7 +57,7 @@
 	archetype = /decl/submap_archetype/derelict/voxship
 
 /decl/submap_archetype/derelict/voxship
-	descriptor = "derelict"
+	descriptor = "Shoal derelict"
 	map = "Vox Base"
 	crew_jobs = list(
 		/datum/job/submap/voxship_vox
