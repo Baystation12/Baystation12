@@ -34,7 +34,7 @@ datum/unit_test/human_breath/start_test()
 			var/obj/item/organ/internal/lungs/L
 			H.apply_effect(20, STUN, 0)
 			L = H.internal_organs_by_name[species_organ]
-			L.last_failed_breath = -INFINITY
+			L.last_successful_breath = -INFINITY
 			test_subjects[S.name] = list(H, damage_check(H, OXY))
 	return 1
 
@@ -180,7 +180,7 @@ datum/unit_test/mob_damage/start_test()
 		if(species_organ)
 			L = H.internal_organs_by_name[species_organ]
 		if(L)
-			L.last_failed_breath = -INFINITY
+			L.last_successful_breath = -INFINITY
 
 	H.apply_damage(damage_amount, damagetype, damage_location)
 
