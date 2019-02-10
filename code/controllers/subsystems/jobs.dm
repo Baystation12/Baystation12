@@ -455,13 +455,13 @@ SUBSYSTEM_DEF(jobs)
 		// EMAIL GENERATION
 		if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
 			var/domain
-			var/desired_name
-			if(H.char_branch && H.char_branch.email_domain)
-				domain = H.char_branch.email_domain
+			if(H.char_branch)
+				if(H.char_branch.email_domain)
+					domain = H.char_branch.email_domain
 			else
 				domain = "freemail.net"
-			desired_name = H.real_name
-			ntnet_global.create_email(H, desired_name, domain)
+			if(domain)
+				ntnet_global.create_email(H, H.real_name, domain)
 		// END EMAIL GENERATION
 
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
