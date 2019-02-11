@@ -5,8 +5,8 @@
 	config_tag = "spyvspy"
 	required_players = 4
 	required_enemies = 4
-	end_on_antag_death = 0
+	end_on_antag_death = FALSE
 	antag_tags = list(MODE_TRAITOR, MODE_RENEGADE)
-	require_all_templates = 1
+	require_all_templates = TRUE
 	antag_scaling_coeff = 5
 	latejoin_antag_tags = list(MODE_TRAITOR)

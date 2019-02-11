@@ -6,31 +6,31 @@ var/global/list/additional_antag_types = list()
 	var/round_description = "How did you even vote this in?"
 	var/extended_round_description = "This roundtype should not be spawned, let alone votable. Someone contact a developer and tell them the game's broken again."
 	var/config_tag = null
-	var/votable = 1
+	var/votable = TRUE
 	var/probability = 0
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/newscaster_announcements = null
-	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
-	var/ert_disabled = 0                     // ERT cannot be called.
-	var/deny_respawn = 0	                 // Disable respawn during this round.
+	var/end_on_antag_death = FALSE           // Round will end when all antagonists are dead.
+	var/ert_disabled = FALSE                 // ERT cannot be called.
+	var/deny_respawn = FALSE	             // Disable respawn during this round.
 
-	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
+	var/list/disabled_jobs = list()          // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
 
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
-	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
+	var/auto_recall_shuttle = FALSE          // Will the shuttle automatically be recalled?
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-	var/list/latejoin_antag_tags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
-	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
+	var/list/latejoin_antag_tags = list()    // Antags that may auto-spawn, latejoin or otherwise come in midround.
+	var/round_autoantag = FALSE              // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
-	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
+	var/require_all_templates = FALSE        // Will only start if all templates are checked and can spawn.
 	var/addantag_allowed = ADDANTAG_ADMIN | ADDANTAG_AUTO
 
-	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
-	var/explosion_in_progress = 0            // Sit back and relax
+	var/station_was_nuked = FALSE            // See nuclearbomb.dm and malfunction.dm.
+	var/explosion_in_progress = FALSE        // Sit back and relax
 
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
