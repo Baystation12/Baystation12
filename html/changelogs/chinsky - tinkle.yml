@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Added a small bells ringing sound playing when you regain consciousness. Will only play if player is considered AFK (currently 5 minutes without activity)"
