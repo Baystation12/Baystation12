@@ -23,6 +23,7 @@
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(0,0)
 	total_health = 150
+	default_faction = "Covenant"
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -85,6 +86,7 @@
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
+	default_faction = "Covenant"
 
 	pain_mod = 0.9
 	brute_mod = 1.1
