@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Mercenary and Raider game modes no longer do early round-end votes when the antagonists leave or die."
