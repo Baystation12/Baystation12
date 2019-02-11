@@ -13,6 +13,7 @@
 	#include "torch_ranks.dm"
 	#include "torch_security_state.dm"
 	#include "torch_shuttles.dm"
+	#include "torch_submaps.dm"
 	#include "torch_unit_testing.dm"
 
 	#include "datums/uniforms.dm"
