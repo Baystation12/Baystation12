@@ -18,7 +18,19 @@
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/solgov
+		/datum/mil_branch/solgov,
+		/datum/mil_branch/alien
+	)
+
+	species_to_branch_blacklist = list(
+		/datum/species/human   = list(/datum/mil_branch/alien),
+		/datum/species/machine = list(/datum/mil_branch/alien),
+		/datum/species/vox     = list(
+			/datum/mil_branch/expeditionary_corps,
+			/datum/mil_branch/fleet,
+			/datum/mil_branch/civilian,
+			/datum/mil_branch/solgov
+		)
 	)
 
 	species_to_branch_whitelist = list(

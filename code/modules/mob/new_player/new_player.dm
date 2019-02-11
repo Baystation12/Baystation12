@@ -397,7 +397,7 @@
 	if(LAZYLEN(job_summaries))
 		dat += job_summaries
 	else
-		dat += "No available positions."
+		dat += "<tr><td>No available positions.</td></tr>"
 	// END TORCH JOBS
 
 	// SUBMAP JOBS
