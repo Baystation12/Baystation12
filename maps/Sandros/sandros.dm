@@ -92,6 +92,12 @@
 
 
 	#include "sandros-1.dmm"
+	#include "sandros-2.dmm"
+	#include "sandros-3.dmm"
+	#include "sandros-4.dmm"
+	#include "sandros-5.dmm"
+	#include "sandros-6.dmm"
+	#include "sandros-7.dmm"
 /*	#include "torch-0.dmm"
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"
