@@ -333,7 +333,7 @@
 		if(istype(job))
 			var/datum/species/S = preference_species()
 			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
-			var/choice = input(user, "Choose your branch of ser@vice.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
+			var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
 			if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, S))
 				pref.branches[job.title] = choice
 				pref.ranks -= job.title

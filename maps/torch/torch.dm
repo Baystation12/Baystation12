@@ -68,8 +68,9 @@
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
 
-	#include "structures/closets.dm"
 	#include "structures/signs.dm"
+	#include "structures/closets.dm"
+	#include "structures/closets/closet_appearances.dm"
 	#include "structures/closets/command.dm"
 	#include "structures/closets/engineering.dm"
 	#include "structures/closets/medical.dm"

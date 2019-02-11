@@ -57,12 +57,7 @@
 
 /obj/effect/submap_landmark/joinable_submap/voxship/New()
 	var/datum/language/vox/pidgin = all_languages[LANGUAGE_VOX]
-	if(pidgin)
-		name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
-	else
-		pidgin = new
-		name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
-		qdel(pidgin)
+	name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
 	..()
 
 /decl/submap_archetype/derelict/voxship
