@@ -107,7 +107,7 @@
 	materials = list(MATERIAL_STEEL = 20000)
 
 /datum/design/item/mechfab/ripley/chassis/firefighter
-	name = "Firefigher chassis"
+	name = "Firefighter chassis"
 	id = "firefighter_chassis"
 	build_path = /obj/item/mecha_parts/chassis/firefighter
 
