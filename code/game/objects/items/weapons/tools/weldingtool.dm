@@ -1,153 +1,5 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
+//Contains ...weapon/weldingtool and ...weapon/welder_tank
 
-/* Tools!
- * Note: Multitools are /obj/item/device
- *
- * Contains:
- * 		Wrench
- * 		Screwdriver
- * 		Wirecutters
- * 		Welding Tool
- * 		Crowbar
- */
-
-/*
- * Wrench
- */
-/obj/item/weapon/wrench
-	name = "wrench"
-	desc = "A good, durable combination wrench, with self-adjusting, universal open- and ring-end mechanisms to match a wide variety of nuts and bolts."
-	icon = 'icons/obj/tools.dmi'
-	icon_state = "wrench"
-	item_state = "wrench"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
-	force = 7
-	throwforce = 7.0
-	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
-	matter = list(MATERIAL_STEEL = 150)
-	center_of_mass = "x=17;y=16"
-	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
-
-/obj/item/weapon/wrench/Initialize()
-	icon_state = "wrench[pick("","_red","_black","_green","_blue")]"
-	. = ..()
-
-/*
- * Screwdriver
- */
-/obj/item/weapon/screwdriver
-	name = "screwdriver"
-	desc = "Your archetypal flathead screwdriver, with a nice, heavy polymer handle."
-	icon = 'icons/obj/tools.dmi'
-	icon_state = "screwdriver"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT | SLOT_EARS
-	force = 4.0
-	w_class = ITEM_SIZE_TINY
-	throwforce = 5.0
-	throw_speed = 3
-	throw_range = 5
-	matter = list(MATERIAL_STEEL = 75)
-	center_of_mass = "x=16;y=7"
-	attack_verb = list("stabbed")
-	lock_picking_level = 5
-	sharp = TRUE
-
-/obj/item/weapon/screwdriver/Initialize()
-	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
-		if ("red")
-			icon_state = "screwdriver2"
-			item_state = "screwdriver"
-		if ("blue")
-			icon_state = "screwdriver"
-			item_state = "screwdriver_blue"
-		if ("purple")
-			icon_state = "screwdriver3"
-			item_state = "screwdriver_purple"
-		if ("brown")
-			icon_state = "screwdriver4"
-			item_state = "screwdriver_brown"
-		if ("green")
-			icon_state = "screwdriver5"
-			item_state = "screwdriver_green"
-		if ("cyan")
-			icon_state = "screwdriver6"
-			item_state = "screwdriver_cyan"
-		if ("yellow")
-			icon_state = "screwdriver7"
-			item_state = "screwdriver_yellow"
-
-	if (prob(75))
-		src.pixel_y = rand(0, 16)
-	. = ..()
-
-/obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M) || user.a_intent == "help")
-		return ..()
-	if(user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_HEAD)
-		return ..()
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		M = user
-	return eyestab(M,user)
-
-/*
- * Wirecutters
- */
-/obj/item/weapon/wirecutters
-	name = "wirecutters"
-	desc = "A special pair of pliers with cutting edges. Various brackets and manipulators built into the handle allow it to repair severed wiring."
-	icon = 'icons/obj/tools.dmi'
-	icon_state = "cutters"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
-	force = 3.0
-	throw_speed = 2
-	throw_range = 9
-	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
-	matter = list(MATERIAL_STEEL = 80)
-	center_of_mass = "x=18;y=10"
-	attack_verb = list("pinched", "nipped")
-	sharp = 1
-	edge = 1
-
-/obj/item/weapon/wirecutters/Initialize()
-	switch(pick("red","yellow","green","blue","black"))
-		if ("red")
-			icon_state = "cutters"
-			item_state = "cutters"
-		if ("yellow")
-			icon_state = "cutters_yellow"
-			item_state = "cutters_yellow"
-		if ("green")
-			icon_state = "cutters_green"
-			item_state = "cutters_green"
-		if ("blue")
-			icon_state = "cutters_blue"
-			item_state = "cutters_blue"
-		if ("black")
-			icon_state = "cutters_black"
-			item_state = "cutters_black"
-	. = ..()
-
-/obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
-	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
-		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
-		"You cut \the [C]'s restraints with \the [src]!",\
-		"You hear cable being cut.")
-		C.handcuffed = null
-		if(C.buckled && C.buckled.buckle_require_restraints)
-			C.buckled.unbuckle_mob()
-		C.update_inv_handcuffed()
-		return
-	else
-		..()
-
-/*
- * Welding Tool
- */
 /obj/item/weapon/weldingtool
 	name = "welding tool"
 	icon = 'icons/obj/tools.dmi'
@@ -461,6 +313,71 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
+/obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+
+		if(!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+			return ..()
+
+		if(BP_IS_BRITTLE(S))
+			to_chat(user, "<span class='warning'>\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it.</span>")
+			return 1
+
+		if(!welding)
+			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>")
+			return 1
+
+		if(S.robo_repair(15, BRUTE, "some dents", src, user))
+			remove_fuel(1, user)
+
+	else
+		return ..()
+
+/obj/item/weapon/weldingtool/mini
+	name = "miniature welding tool"
+	icon_state = "welder_s"
+	item_state = "welder"
+	desc = "A smaller welder, meant for quick or emergency use."
+	origin_tech = list(TECH_ENGINEERING = 2)
+	matter = list(MATERIAL_STEEL = 15, MATERIAL_GLASS = 5)
+	w_class = ITEM_SIZE_SMALL
+	tank = /obj/item/weapon/welder_tank/mini
+
+/obj/item/weapon/weldingtool/largetank
+	name = "industrial welding tool"
+	icon_state = "welder_l"
+	item_state = "welder"
+	desc = "A heavy-duty portable welder, made to ensure it won't suddenly go cold on you."
+	origin_tech = list(TECH_ENGINEERING = 2)
+	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 60)
+	w_class = ITEM_SIZE_LARGE
+	tank = /obj/item/weapon/welder_tank/large
+
+/obj/item/weapon/weldingtool/hugetank
+	name = "upgraded welding tool"
+	icon_state = "welder_h"
+	item_state = "welder"
+	desc = "A sizable welding tool with room to accomodate the largest of fuel tanks."
+	w_class = ITEM_SIZE_HUGE
+	origin_tech = list(TECH_ENGINEERING = 3)
+	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 120)
+	tank = /obj/item/weapon/welder_tank/huge
+
+/obj/item/weapon/weldingtool/experimental
+	name = "experimental welding tool"
+	icon_state = "welder_l"
+	item_state = "welder"
+	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
+	w_class = ITEM_SIZE_LARGE
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
+	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 120)
+	tank = /obj/item/weapon/welder_tank/experimental
+
+///////////////////////
+//Welding tool tanks//
+/////////////////////
 /obj/item/weapon/welder_tank
 	name = "welding fuel tank"
 	desc = "An interchangeable fuel tank meant for a welding tool."
@@ -483,16 +400,6 @@
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 
-/obj/item/weapon/weldingtool/mini
-	name = "miniature welding tool"
-	icon_state = "welder_s"
-	item_state = "welder"
-	desc = "A smaller welder, meant for quick or emergency use."
-	origin_tech = list(TECH_ENGINEERING = 2)
-	matter = list(MATERIAL_STEEL = 15, MATERIAL_GLASS = 5)
-	w_class = ITEM_SIZE_SMALL
-	tank = /obj/item/weapon/welder_tank/mini
-
 /obj/item/weapon/welder_tank/mini
 	name = "small welding fuel tank"
 	icon_state = "fuel_s"
@@ -500,47 +407,17 @@
 	max_fuel = 5
 	can_remove = 0
 
-/obj/item/weapon/weldingtool/largetank
-	name = "industrial welding tool"
-	icon_state = "welder_l"
-	item_state = "welder"
-	desc = "A heavy-duty portable welder, made to ensure it won't suddenly go cold on you."
-	origin_tech = list(TECH_ENGINEERING = 2)
-	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 60)
-	w_class = ITEM_SIZE_LARGE
-	tank = /obj/item/weapon/welder_tank/large
-
 /obj/item/weapon/welder_tank/large
 	name = "large welding fuel tank"
 	icon_state = "fuel_l"
 	w_class = ITEM_SIZE_NORMAL
 	max_fuel = 40
 
-/obj/item/weapon/weldingtool/hugetank
-	name = "upgraded welding tool"
-	icon_state = "welder_h"
-	item_state = "welder"
-	desc = "A sizable welding tool with room to accomodate the largest of fuel tanks."
-	w_class = ITEM_SIZE_HUGE
-	origin_tech = list(TECH_ENGINEERING = 3)
-	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 120)
-	tank = /obj/item/weapon/welder_tank/huge
-
 /obj/item/weapon/welder_tank/huge
 	name = "huge welding fuel tank"
 	icon_state = "fuel_h"
 	w_class = ITEM_SIZE_LARGE
 	max_fuel = 80
-
-/obj/item/weapon/weldingtool/experimental
-	name = "experimental welding tool"
-	icon_state = "welder_l"
-	item_state = "welder"
-	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
-	w_class = ITEM_SIZE_LARGE
-	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
-	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 120)
-	tank = /obj/item/weapon/welder_tank/experimental
 
 /obj/item/weapon/welder_tank/experimental
 	name = "experimental welding fuel tank"
@@ -563,131 +440,3 @@
 		var/gen_amount = ((world.time-last_gen)/25)
 		reagents.add_reagent(/datum/reagent/fuel, gen_amount)
 		last_gen = world.time
-
-/obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
-
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
-
-		if(!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
-			return ..()
-
-		if(BP_IS_BRITTLE(S))
-			to_chat(user, "<span class='warning'>\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it.</span>")
-			return 1
-
-		if(!welding)
-			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>")
-			return 1
-
-		if(S.robo_repair(15, BRUTE, "some dents", src, user))
-			remove_fuel(1, user)
-
-	else
-		return ..()
-
-/*
- * Crowbar
- */
-
-/obj/item/weapon/crowbar
-	name = "crowbar"
-	desc = "A heavy crowbar of solid steel, good and solid in your hand."
-	icon = 'icons/obj/tools.dmi'
-	icon_state = "crowbar"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
-	force = 14
-	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
-	melee_accuracy_bonus = -20
-	throwforce = 7.0
-	throw_range = 3
-	item_state = "crowbar"
-	w_class = ITEM_SIZE_NORMAL
-	origin_tech = list(TECH_ENGINEERING = 1)
-	matter = list(MATERIAL_STEEL = 140)
-	center_of_mass = "x=16;y=20"
-	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-
-/obj/item/weapon/crowbar/red
-	icon_state = "red_crowbar"
-	item_state = "crowbar_red"
-
-/obj/item/weapon/crowbar/prybar
-	name = "pry bar"
-	desc = "A steel bar with a wedge. It comes in a variety of configurations - collect them all."
-	icon_state = "prybar"
-	item_state = "crowbar"
-	force = 4.0
-	throwforce = 6.0
-	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
-	matter = list(MATERIAL_STEEL = 80)
-
-/obj/item/weapon/crowbar/prybar/Initialize()
-	icon_state = "prybar[pick("","_red","_green","_aubergine","_blue")]"
-	. = ..()
-
-/*
- * Combitool
- */
-
-
-/*/obj/item/weapon/combitool
-	name = "combi-tool"
-	desc = "It even has one of those nubbins for doing the thingy."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "combitool"
-	w_class = ITEM_SIZE_SMALL
-
-	var/list/spawn_tools = list(
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/material/kitchen/utensil/knife,
-		/obj/item/weapon/material/kitchen/utensil/fork,
-		/obj/item/weapon/material/hatchet
-		)
-	var/list/tools = list()
-	var/current_tool = 1
-
-/obj/item/weapon/combitool/examine()
-	..()
-	if(loc == usr && tools.len)
-		to_chat(usr, "It has the following fittings:")
-		for(var/obj/item/tool in tools)
-			to_chat(usr, "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]")
-
-/obj/item/weapon/combitool/New()
-	..()
-	for(var/type in spawn_tools)
-		tools |= new type(src)
-
-/obj/item/weapon/combitool/attack_self(mob/user as mob)
-	if(++current_tool > tools.len) current_tool = 1
-	var/obj/item/tool = tools[current_tool]
-	if(!tool)
-		to_chat(user, "You can't seem to find any fittings in \the [src].")
-	else
-		to_chat(user, "You switch \the [src] to the [tool.name] fitting.")
-	return 1
-
-/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!M.Adjacent(user))
-		return 0
-	var/obj/item/tool = tools[current_tool]
-	if(!tool) return 0
-	return (tool ? tool.attack(M,user) : 0)
-
-/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
-	if(!proximity)
-		return 0
-	var/obj/item/tool = tools[current_tool]
-	if(!tool) return 0
-	tool.loc = user
-	var/resolved = target.attackby(tool,user)
-	if(!resolved && tool && target)
-		tool.afterattack(target,user,1)
-	if(tool)
-		tool.loc = src*/
