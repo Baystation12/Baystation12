@@ -14,6 +14,7 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	clear_z(z_to_free)
 
 /datum/npc_ship_map_handler/proc/clear_z(var/z_level)
+	set background = 1
 	if(isnull(z_level))
 		return
 	to_world("Clearing unused ship-z level:[z_level]. This may lag.")
