@@ -23,6 +23,7 @@
 	pixel_offset_x = -8
 	item_icon_offsets = list(0,2)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
+	default_faction = "Covenant"
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
