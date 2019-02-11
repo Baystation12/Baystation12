@@ -4,6 +4,7 @@
 	caliber = CALIBER_PISTOL
 	magazine_type = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
+	accuracy_power = 7
 	var/empty_icon = TRUE  //If it should change icon when empty
 
 /obj/item/weapon/gun/projectile/pistol/on_update_icon()
@@ -62,6 +63,9 @@
 	allowed_magazines = /obj/item/ammo_magazine/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
+	accuracy = 2
+	one_hand_penalty = 2
+	bulk = 3
 
 /obj/item/weapon/gun/projectile/pistol/throwback
 	name = "pistol"
@@ -69,7 +73,8 @@
 	icon = 'icons/obj/guns/pistol_throwback.dmi'
 	icon_state = "pistol1"
 	magazine_type = /obj/item/ammo_magazine/pistol/throwback
-	accuracy = -2
+	accuracy_power = 5
+	one_hand_penalty = 2
 	fire_delay = 5
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	var/base_icon = "pistol1"
