@@ -310,7 +310,8 @@
 
 	if(combustion)
 		var/turf/curloc = get_turf(src)
-		curloc.hotspot_expose(700, 5)
+		if(curloc)
+			curloc.hotspot_expose(700, 5)
 
 	update_icon()
 

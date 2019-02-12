@@ -228,6 +228,8 @@
 
 	if(usr.incapacitated())
 		return
+	if(!mytape)
+		return
 	if(emagged || mytape.ruined)
 		audible_message("<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return

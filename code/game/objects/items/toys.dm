@@ -74,7 +74,7 @@
 	return
 
 /obj/item/toy/water_balloon/throw_impact(atom/hit_atom)
-	if(src.reagents.total_volume >= 1)
+	if(reagents && reagents.total_volume >= 1)
 		src.visible_message("<span class='warning'>\The [src] bursts!</span>","You hear a pop and a splash.")
 		src.reagents.touch_turf(get_turf(hit_atom))
 		for(var/atom/A in get_turf(hit_atom))
