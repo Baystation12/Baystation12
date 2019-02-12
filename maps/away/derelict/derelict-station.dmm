@@ -2558,10 +2558,6 @@
 /obj/random/medical/lite,
 /turf/space,
 /area/constructionsite/medical)
-"is" = (
-/obj/structure/girder,
-/turf/simulated/floor/airless,
-/area/constructionsite/hallway/aft)
 "it" = (
 /obj/effect/shuttle_landmark/derelict/nav5,
 /turf/space,
@@ -23006,7 +23002,7 @@ ii
 gS
 gS
 gO
-is
+hA
 gO
 gQ
 gQ
@@ -25431,7 +25427,7 @@ hP
 hP
 hr
 hr
-hr
+iu
 hs
 hr
 hr

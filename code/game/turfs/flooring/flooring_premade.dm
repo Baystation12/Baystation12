@@ -11,7 +11,7 @@
 	icon_state = "bcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit
 	light_outer_range = 2
-	light_max_bright = 3
+	light_max_bright = 1
 	light_color = COLOR_BLUE
 
 /turf/simulated/floor/bluegrid/airless

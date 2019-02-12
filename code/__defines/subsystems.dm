@@ -2,9 +2,10 @@
 #define FLIGHTSUIT_PROCESSING_NONE 0
 #define FLIGHTSUIT_PROCESSING_FULL 1
 
-#define INITIALIZATION_INSSATOMS     0	//New should not call Initialize
-#define INITIALIZATION_INNEW_MAPLOAD 1	//New should call Initialize(TRUE)
-#define INITIALIZATION_INNEW_REGULAR 2	//New should call Initialize(FALSE)
+#define INITIALIZATION_INSSATOMS      0	//New should not call Initialize
+#define INITIALIZATION_INSSATOMS_LATE 1	//New should not call Initialize; after the first pass is complete (handled differently)
+#define INITIALIZATION_INNEW_MAPLOAD  2	//New should call Initialize(TRUE)
+#define INITIALIZATION_INNEW_REGULAR  3	//New should call Initialize(FALSE)
 
 #define INITIALIZE_HINT_NORMAL   0  //Nothing happens
 #define INITIALIZE_HINT_LATELOAD 1  //Call LateInitialize

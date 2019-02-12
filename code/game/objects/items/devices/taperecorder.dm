@@ -516,7 +516,8 @@
 	used_capacity = min(used_capacity,index)
 
 //Random colour tapes
-/obj/item/device/tape/random/New()
+/obj/item/device/tape/random/Initialize()
+	. = ..()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
 
 /obj/item/device/tape/loose

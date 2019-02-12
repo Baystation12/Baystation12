@@ -408,7 +408,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	if(GLOB.use_preloader && .)//second preloader pass, for those atoms that don't ..() in New()
 		GLOB._preloader.load(.)
 
-	//custom CHECK_TICK here because we don't want things created while we're sleeping to not initialize
+	//custom CHECK_TICK here because we don't want things created while we're sleeping to delay initialization.
 	if(TICK_CHECK)
 		SSatoms.map_loader_stop()
 		stoplag()
