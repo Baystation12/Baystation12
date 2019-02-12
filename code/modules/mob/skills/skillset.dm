@@ -117,6 +117,10 @@
 	else
 		return fail_chance * 2 ** (factor*(SKILL_MIN - points))
 
+// Simple prob using above
+/mob/proc/skill_fail_prob(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
+	return prob(skill_fail_chance(skill_path, fail_chance, no_more_fail, factor ))
+
 // Show skills verb
 
 mob/living/verb/show_skills()

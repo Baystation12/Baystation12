@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Accidental gun discharge chances upped, and now it can happen when aggressively unholstering (hurt intent). Chance is now 20% at unskilled, 5% at Basic and 1% at Trained."
+  - tweak: "When unholstering or trying to fire a safetied gun on hurt intent, there's now a chance you automatically unsafety it. Chance is 0% at unskilled, 25% at Basic and 50% at Trained, guaranteed above."
