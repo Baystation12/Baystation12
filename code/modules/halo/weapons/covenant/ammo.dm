@@ -167,9 +167,41 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.radiation += 15
+	L.radiation += 7
 	. = ..()
 
 /obj/effect/projectile/type51carbine
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_trail"
+
+/obj/item/ammo_magazine/rifleneedlepack
+	name = "Rifle Needles"
+	desc = "A pack of fewer, larger crystalline needles. For T-31 rifle."
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "needlerpack"
+	max_ammo = 21
+	ammo_type = /obj/item/ammo_casing/rifleneedle
+	caliber = "needle_rifle"
+	mag_type = MAGAZINE
+
+/obj/item/ammo_casing/rifleneedle
+	name = "Rifle Needle"
+	desc = "A large crystalline needle"
+	caliber = "needle_rifle"
+	projectile_type = /obj/item/projectile/bullet/covenant/needles/rifleneedle
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "needle"
+
+/obj/item/projectile/bullet/covenant/needles/rifleneedle
+	name = "Rifle Needle"
+	damage = 25
+	accuracy = 2
+	shards_to_explode = 3
+	shard_name = "Rifle Needle shrapnel"
+	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
+	tracer_delay_time = 0.5 SECONDS
+	invisibility = 101
+
+/obj/effect/projectile/bullet/covenant/needles/rifleneedle
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "needlerifle_trail"

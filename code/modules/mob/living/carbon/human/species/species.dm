@@ -195,6 +195,8 @@
 	var/list/pain_scream_sounds = list()
 	var/list/scream_sounds_female = list()
 
+	var/default_faction
+
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
 
@@ -303,6 +305,9 @@
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
+
+	if(default_faction && (!H.faction || H.faction == "neutral"))
+		H.faction = default_faction
 
 /datum/species/proc/handle_pre_spawn(var/mob/living/carbon/human/H)
 	return

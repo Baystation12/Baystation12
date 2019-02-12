@@ -7,7 +7,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
-	faction = "Covenant"
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
@@ -423,6 +422,34 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "pantas_gloves_obj"
 	item_state = "pantas_gloves"
+
+
+//PANTASTHEDARK2
+
+/obj/item/clothing/head/helmet/sangheili/pantas2
+	name = "Sangheili Helmet (Scribe-Minor)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "pantas2_helm_obj"
+	item_state = "pantas2_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/pantas2
+	name = "Sangheili Combat Harness (Scribe-Minor)"
+	icon_state = "pantas2_chest_obj"
+	item_state = "pantas2_chest"
+	totalshields = 100
+
+/obj/item/clothing/shoes/sangheili/pantas2
+	name = "Sanghelli Leg Armour (Scribe-Minor)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas2_legs_obj"
+	item_state = "pantas2_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/pantas2
+	name = "Sanghelli Combat Gauntlets (Scribe-Minor)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas2_gloves_obj"
+	item_state = "pantas2_gloves"
 
 //DOGLER
 

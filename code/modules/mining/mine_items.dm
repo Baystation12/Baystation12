@@ -75,15 +75,18 @@
 
 /obj/item/weapon/pickaxe/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, repair_material))
-		var/obj/item/stack/material/S = W
-		var/obj/item/stack/material/new_stack = S.split(5)
-		durability += new_stack.amount * 4
-		qdel(new_stack)
-		if(S.amount <= 0)
-			user.drop_item()
-			qdel(S)
+		if(durability < max_durability)
+			var/obj/item/stack/material/S = W
+			var/obj/item/stack/material/new_stack = S.split(5)
+			durability += new_stack.amount * 4
+			qdel(new_stack)
+			if(S.amount <= 0)
+				user.drop_item()
+				qdel(S)
 
-		to_chat(user,"\icon[src] <span class='info'>You repair [src] with [W]. It now has [100*durability/max_durability]% durability.</span>")
+			to_chat(user,"\icon[src] <span class='info'>You repair [src] with [W]. It now has [100*durability/max_durability]% durability.</span>")
+		else
+			to_chat(user,"\icon[src] <span class='notice'>You cannot repair [src] any more.</span>")
 
 /obj/item/weapon/pickaxe/proc/can_drill()
 	return (durability > 0)

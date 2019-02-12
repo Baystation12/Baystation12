@@ -5,7 +5,6 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 
 /mob/living/carbon/human/covenant/jiralhanae/New(var/new_loc)
 	..(new_loc,"Jiralhanae")
-	faction = "Covenant"
 
 /datum/language/doisacci
 	name = "Doisacci"
