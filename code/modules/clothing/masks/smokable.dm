@@ -83,11 +83,13 @@
 			extinguish(no_message = TRUE)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
-	if(!src.lit)
+	if(QDELETED(src))
+		return
+	if(!lit)
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
-		src.lit = 1
+		lit = 1
 		damtype = "fire"
 		if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
 			var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -652,11 +654,11 @@
 	name = "empty [initial(name)]"
 
 /obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights the [name].")
-	if(!src.lit && src.smoketime)
+	if(!lit && smoketime)
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
-		src.lit = 1
+		lit = 1
 		damtype = "fire"
 		icon_state = icon_on
 		item_state = icon_on
