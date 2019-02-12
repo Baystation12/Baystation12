@@ -42,6 +42,7 @@
 /area/asteroid_base/east_dorms
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
+	base_turf = /turf/unsimulated/floor/snow5
 
 /area/asteroid_base/mess_hall
 	name = "\improper Cafeteria"
@@ -50,10 +51,12 @@
 /area/asteroid_base/kitchen
 	name = "\improper Kitchen"
 	icon_state = "kitchen"
+	base_turf = /turf/unsimulated/floor/snow5
 
 /area/asteroid_base/medbay
 	name = "\improper Medbay"
 	icon_state = "medbay"
+	base_turf = /turf/unsimulated/floor/snow5
 
 /area/asteroid_base/storage_medbay
 	name = "\improper Medbay Storage"
@@ -85,6 +88,7 @@
 /area/asteroid_base/main_hangar
 	name = "\improper Main Hangar"
 	icon_state = "hangar"
+	base_turf = /turf/unsimulated/floor/snow5
 
 /area/asteroid_base/shuttle_dock
 	name = "\improper Shuttle Dock"
