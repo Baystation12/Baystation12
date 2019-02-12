@@ -34,13 +34,9 @@
 
 /obj/structure/closet/secure_closet/CO/WillContain()
 	return list(
-		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchexec,
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/weapon/gun/energy/revolver/secure,
 		/obj/item/device/radio/headset/heads/torchexec/alt,
-		/obj/item/weapon/storage/belt/holster/general,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
@@ -60,11 +56,8 @@
 /obj/structure/closet/secure_closet/XO/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchexec,
-		/obj/item/weapon/storage/belt/holster/general,
-		/obj/item/weapon/gun/energy/revolver/secure,
+		/obj/item/weapon/storage/belt/general,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
@@ -89,12 +82,9 @@
 /obj/structure/closet/secure_closet/sea/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/sea,
 		/obj/item/device/radio/headset/sea/alt,
-		/obj/item/weapon/gun/energy/gun/secure,
-		/obj/item/weapon/storage/belt/holster/general,
+		/obj/item/weapon/storage/belt/general,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
@@ -115,8 +105,6 @@
 		/obj/item/device/radio,
 		/obj/item/weapon/pen,
 		/obj/item/device/tape/random,
-		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/taperecorder,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,

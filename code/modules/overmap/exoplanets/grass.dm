@@ -69,7 +69,7 @@
 	flora_prob = 30
 	large_flora_prob = 50
 	flora_diversity = 6
-	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/jelly)
+	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 
 	var/grass_color
 

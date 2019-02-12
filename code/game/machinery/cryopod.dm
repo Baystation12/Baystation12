@@ -139,10 +139,6 @@
 	anchored = 1
 	dir = WEST
 
-/obj/structure/cryofeed/brig
-	name = "wimp feed"
-	desc = "A bewildering tangle of machinery and pipes. It is rumored to transport wimps towards cryogenics storage."
-
 //Cryopods themselves.
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
@@ -186,19 +182,6 @@
 		/obj/item/clothing/head/helmet/space,
 		/obj/item/weapon/storage/internal
 	)
-
-/obj/machinery/cryopod/brig
-	name = "wimp freezer"
-	desc = "A man-sized pod for wimping out on your punishment in the brig. The audacity Security has to lock you up!"
-	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
-	base_icon_state = "body_scanner_0"
-	occupied_icon_state = "body_scanner_1"
-	on_store_message = "has pussied out on their punishment in the brig."
-	on_store_name = "Wimp Detector"
-	on_enter_occupant_message = "You feel cool air surround you. You go numb as your senses turn inward."
-	allow_occupant_types = list(/mob/living/carbon/human)
-	disallow_occupant_types = list()
 
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"

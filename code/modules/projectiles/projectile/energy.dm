@@ -4,6 +4,7 @@
 	damage = 0
 	damage_type = BURN
 	check_armour = "energy"
+	distance_falloff = 2.5
 
 
 //releases a burst of light on impact or after travelling a distance

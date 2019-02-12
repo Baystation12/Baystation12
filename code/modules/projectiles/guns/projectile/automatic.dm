@@ -4,6 +4,7 @@
 	icon = 'icons/obj/guns/prototype_smg.dmi'
 	icon_state = "prototype"
 	w_class = ITEM_SIZE_NORMAL
+	bulk = -1
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL_FLECHETTE
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3)
@@ -42,6 +43,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol
 	magazine_type = /obj/item/ammo_magazine/machine_pistol
 	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
+	one_hand_penalty = 2
 
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
@@ -73,7 +75,9 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	one_hand_penalty = 1
+	bulk = -1
+	accuracy = 1
+	one_hand_penalty = 4
 
 	//SMG
 	firemodes = list(
@@ -103,7 +107,10 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
 	allowed_magazines = /obj/item/ammo_magazine/rifle
-	one_hand_penalty = 3
+	one_hand_penalty = 8
+	accuracy_power = 7
+	accuracy = 2
+	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "arifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
@@ -139,6 +146,8 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/smg_top/rubber
 	allowed_magazines = /obj/item/ammo_magazine/smg_top
+	accuracy_power = 7
+	one_hand_penalty = 3
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -171,12 +180,14 @@
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	one_hand_penalty = 5
+	accuracy = 2
+	accuracy_power = 7
+	one_hand_penalty = 8
+	bulk = GUN_BULK_RIFLE
 	burst_delay = 4
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
-	//would have one_hand_penalty=4,5 but the added weight of a grenade launcher makes one-handing even harder
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1,    fire_delay=0,    move_delay=null, use_launcher=null, one_hand_penalty=5, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=6, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
@@ -234,6 +245,7 @@
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = ITEM_SIZE_HUGE
+	bulk = 10
 	force = 10
 	slot_flags = 0
 	max_shells = 50
@@ -244,7 +256,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/box/machinegun
 	allowed_magazines = list(/obj/item/ammo_magazine/box/machinegun, /obj/item/ammo_magazine/rifle)
-	one_hand_penalty = 6
+	one_hand_penalty = 10
 	wielded_item_state = "gun_wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'

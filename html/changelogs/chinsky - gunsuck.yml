@@ -1,0 +1,12 @@
+author: Chinsky
+delete-after: True
+
+changes: 
+  - rscadd: "Guns suck now."
+  - tweak: "When you have a gun in activa hand, you're considered to be 'aiming'. Moving or changing active hand resets timer."
+  - tweak: "Aiming gives bonuses to accuracy, longer you aim, capped by accuracy of the gun - so no point in aiming longer than few secs with pistol, but with sniper rifle, take your time."
+  - tweak: "If you haven't stood still for at least a second, you get penalties based on size of your gun. Pistols are almost not affected, but rifles are affected greatly."
+  - tweak: "Accuracy falloff differs for different calibers. Pistol rounds are best used 4 tiles or closer, rifles can be used from any range without ok results. Lasers mirror that setup, with higher range."
+  - tweak: "Overall, pistols are now useless at range, but don't suffer much if you move around or change hand to do something else."
+  - tweak: "Rifles are oppsite, can hit if you aim even from other end of screen, but if you move around, you're not going to hit shit."
+  - tweak: "Moving around (not towards gun) will make you harder to hit now. Yakkety sax away."

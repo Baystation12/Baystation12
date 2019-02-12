@@ -142,5 +142,6 @@
 		/obj/item/weapon/gun/energy/gun/small/secure = 2,
 		/obj/item/weapon/storage/belt/holster/general = 2,
 		/obj/item/weapon/gun/energy/gun/secure = 2,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/gun/energy/gun/secure, /obj/item/weapon/gun/energy/gun/small/secure))
+		/obj/item/clothing/suit/armor/pcarrier/medium/command = 3,
+		/obj/item/clothing/head/helmet/solgov/command = 3
 	)

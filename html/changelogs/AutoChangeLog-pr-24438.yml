@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscdel: "Guns and armor are no longer available in personal command lockers."
+  - tweak: "The bridge sidearms closet now also has three sets of command armor."

@@ -5,6 +5,6 @@
 	config_tag = "lizard"
 	required_players = 15
 	required_enemies = 4
-	end_on_antag_death = 0
+	end_on_antag_death = FALSE
 	antag_tags = list(MODE_WIZARD, MODE_CHANGELING)
-	require_all_templates = 1
+	require_all_templates = TRUE

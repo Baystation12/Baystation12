@@ -18651,6 +18651,7 @@
 "aRs" = (
 /obj/structure/table/steel,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRt" = (
@@ -21705,6 +21706,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
 	},
+/obj/machinery/recharger,
 /obj/item/device/eftpos,
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
@@ -22565,6 +22567,10 @@
 	icon_state = "wood_broken3"
 	},
 /area/holodeck/source_temple)
+"lLj" = (
+/obj/machinery/recharge_station,
+/turf/simulated/floor/carpet,
+/area/merchant_station)
 "lRq" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -50244,7 +50250,7 @@ aLW
 aMf
 aMs
 aMB
-aMC
+lLj
 aMf
 aNW
 aNU

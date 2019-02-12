@@ -368,10 +368,6 @@
 	name = "\improper Security Wing"
 	icon_state = "direction_sec"
 
-/obj/structure/sign/directions/perm
-	name = "\improper Permanent Confinement"
-	icon_state = "direction_perm"
-
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
 	icon_state = "direction_med"

@@ -51,9 +51,7 @@
 		visible_message("\The [attached] is taken off \the [src]")
 		attached = null
 	else if(ishuman(over_object))
-		visible_message("<span class = 'warning'>\The [usr] starts hooking \the [over_object] up to \the [src].</span>")
-		if(do_after(usr, 30))
-			to_chat(usr, "You hook \the [over_object] up to \the [src].")
+		if(do_IV_hookup(over_object, usr, src))
 			attached = over_object
 			START_PROCESSING(SSobj,src)
 	update_icon()

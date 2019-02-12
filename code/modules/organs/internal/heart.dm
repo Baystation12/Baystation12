@@ -11,6 +11,7 @@
 	relative_size = 15
 	max_damage = 45
 	var/open
+	var/list/external_pump
 
 /obj/item/organ/internal/heart/open
 	open = 1

@@ -3,6 +3,7 @@
 	desc = "An ironing board to unwrinkle your wrinkled clothing."
 	icon = 'icons/obj/ironing.dmi'
 	item_form_type = /obj/item/roller/ironingboard
+	iv_stand = FALSE
 
 	var/obj/item/clothing/cloth // the clothing on the ironing board
 	var/obj/item/weapon/ironingiron/holding // ironing iron on the board

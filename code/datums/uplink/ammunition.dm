@@ -28,16 +28,19 @@
 	name = "Assault Rifle Magazine"
 	item_cost = 8
 	path = /obj/item/ammo_magazine/rifle
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/sniperammo
 	name = "Sniper Shells"
 	item_cost = 8
 	path = /obj/item/weapon/storage/box/ammo/sniperammo
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/sniperammo/apds
 	name = "Sniper APDS Shells"
 	item_cost = 12
 	path = /obj/item/weapon/storage/box/ammo/sniperammo/apds
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Shotgun Shells box"
@@ -58,6 +61,7 @@
 	name = "SMG Magazine"
 	item_cost = 8
 	path = /obj/item/ammo_magazine/smg
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/pistol
 	name = "Pistol Magazine"
@@ -78,6 +82,7 @@
 	name = "Flechette Rifle Magazine"
 	item_cost = 8
 	path = /obj/item/weapon/magnetic_ammo
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/pistol_emp
 	name = "Pistol EMP Ammmo Box (10 rounds)"

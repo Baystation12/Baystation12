@@ -785,6 +785,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 
+/obj/item/proc/on_active_hand()
+
 /obj/item/is_burnable()
 	return simulated
 

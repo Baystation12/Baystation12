@@ -1594,3 +1594,7 @@ NEW AREA'S#
 /area/sandros/security/evidence
 	name = "\improper Security Evidence Storage"
 	icon_state = "security"
+
+/area/sandros/security/brigcells
+	name = "\improper Brig Cells"
+	icon_state = "brig"

@@ -8,6 +8,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_sound_text = "laser blast"
+	accuracy = 1
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 20 //How much energy is needed to fire.
