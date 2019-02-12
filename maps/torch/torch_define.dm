@@ -1,6 +1,6 @@
 /datum/map/torch
-	name = "Torch"
-	full_name = "SEV Torch"
+	name = "Sandros"
+	full_name = "UNCV Sandros"
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
@@ -9,20 +9,20 @@
 	accessible_z_levels = list("1"=1,"2"=3,"3"=1,"4"=1,"5"=1,"6"=1,"9"=30)
 	overmap_size = 35
 	overmap_event_areas = 34
-	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.net", "torch.scg")
+	usable_email_tlds = list("sandros.fleet.mil", "freemail.net", "sandros.usn")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
-	station_name  = "SEV Torch"
-	station_short = "Torch"
+	station_name  = "U.N.C.V. Sandros"
+	station_short = "Sandros"
 	dock_name     = "TBD"
-	boss_name     = "Expeditionary Command"
+	boss_name     = "United Nations Command"
 	boss_short    = "Command"
-	company_name  = "Sol Central Government"
-	company_short = "SolGov"
+	company_name  = "United Solarian Nations"
+	company_short = "SolNat"
 
-	map_admin_faxes = list("Corporate Central Office")
+	map_admin_faxes = list("United Nations Command")
 
 	//These should probably be moved into the evac controller...
 	shuttle_docked_message = "Attention all hands: Jump preparation complete. The bluespace drive is now spooling up, secure all stations for departure. Time to jump: approximately %ETD%."
