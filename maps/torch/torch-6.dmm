@@ -241,7 +241,9 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_theatre)
 "aaU" = (
-/obj/machinery/door/window/holowindoor,
+/obj/machinery/door/window/holowindoor{
+	dir = 4
+	},
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_courtroom)
 "aaV" = (
@@ -377,6 +379,7 @@
 /area/holodeck/source_courtroom)
 "abn" = (
 /obj/machinery/door/window/holowindoor{
+	dir = 4;
 	name = "Red Team"
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
@@ -1522,6 +1525,7 @@
 "adN" = (
 /obj/machinery/door/window/holowindoor{
 	base_state = "right";
+	dir = 4;
 	icon_state = "right"
 	},
 /turf/simulated/floor/holofloor/tiled,
@@ -1541,6 +1545,7 @@
 "adQ" = (
 /obj/machinery/door/window/holowindoor{
 	base_state = "right";
+	dir = 4;
 	icon_state = "right";
 	name = "Green Team"
 	},
@@ -2551,6 +2556,7 @@
 /area/holodeck/source_meetinghall)
 "afW" = (
 /obj/machinery/door/window/holowindoor{
+	dir = 4;
 	name = "Red Team"
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
@@ -2582,6 +2588,7 @@
 /area/holodeck/source_beach)
 "agc" = (
 /obj/machinery/door/window/holowindoor{
+	dir = 4;
 	name = "Red Team"
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
@@ -3521,6 +3528,7 @@
 "aiv" = (
 /obj/machinery/door/window/holowindoor{
 	base_state = "right";
+	dir = 4;
 	icon_state = "right";
 	name = "Green Team"
 	},
@@ -3549,6 +3557,7 @@
 "aiA" = (
 /obj/machinery/door/window/holowindoor{
 	base_state = "right";
+	dir = 4;
 	icon_state = "right";
 	name = "Green Team"
 	},
