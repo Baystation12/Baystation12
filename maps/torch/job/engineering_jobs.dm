@@ -67,7 +67,7 @@
 		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civilian/sv
+		/datum/mil_rank/civ/sv
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,

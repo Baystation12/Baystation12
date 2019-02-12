@@ -86,6 +86,5 @@
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3
 	)
-	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)

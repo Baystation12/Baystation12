@@ -199,7 +199,7 @@
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/sv,
-		v/datum/mil_rank/civ/sc,
+		/datum/mil_rank/civ/sc,
 		/datum/mil_rank/civ/synthetic
 	)
 

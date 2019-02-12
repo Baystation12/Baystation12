@@ -57,7 +57,6 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/e10,
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/fleet/e7,
