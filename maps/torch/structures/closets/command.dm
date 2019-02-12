@@ -37,6 +37,7 @@
 		/obj/item/device/radio/headset/heads/torchexec,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/device/radio/headset/heads/torchexec/alt,
+		/obj/item/weapon/storage/belt/general,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,

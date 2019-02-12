@@ -18,10 +18,9 @@
 /obj/structure/dispenser/phoron
 	oxygentanks = 0
 
-
-/obj/structure/dispenser/New()
+/obj/structure/dispenser/Initialize()
+	. = ..()
 	update_icon()
-
 
 /obj/structure/dispenser/on_update_icon()
 	overlays.Cut()

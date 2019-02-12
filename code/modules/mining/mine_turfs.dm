@@ -37,7 +37,8 @@ var/list/mining_floors = list()
 
 	has_resources = 1
 
-/turf/simulated/mineral/New()
+/turf/simulated/mineral/Initialize()
+	. = ..()
 	if (!mining_walls["[src.z]"])
 		mining_walls["[src.z]"] = list()
 	mining_walls["[src.z]"] += src
@@ -428,7 +429,8 @@ var/list/mining_floors = list()
 	var/overlay_detail
 	has_resources = 1
 
-/turf/simulated/floor/asteroid/New()
+/turf/simulated/floor/asteroid/Initialize()
+	. = ..()
 	if (!mining_floors["[src.z]"])
 		mining_floors["[src.z]"] = list()
 	mining_floors["[src.z]"] += src

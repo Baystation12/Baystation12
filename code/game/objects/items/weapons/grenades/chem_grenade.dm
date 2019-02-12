@@ -16,6 +16,7 @@
 	var/affected_area = 3
 
 	New()
+		..()
 		create_reagents(1000)
 
 	attack_self(mob/user as mob)

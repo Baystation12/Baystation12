@@ -19,9 +19,9 @@
 	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		GLOB._preloader.load(src)
 
-	var/do_initialize = SSatoms.initialized
+	var/do_initialize = SSatoms.init_state
 	var/list/created = SSatoms.created_atoms
-	if(do_initialize != INITIALIZATION_INSSATOMS)
+	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
 		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
 		if(SSatoms.InitAtom(src, args))
 			//we were deleted
@@ -30,6 +30,7 @@
 		var/list/argument_list
 		if(length(args) > 1)
 			argument_list = args.Copy(2)
+		if(argument_list || do_initialize == INITIALIZATION_INSSATOMS_LATE)
 			created[src] = argument_list
 
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)

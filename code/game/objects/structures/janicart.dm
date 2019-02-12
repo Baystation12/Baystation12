@@ -176,9 +176,9 @@
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
 
-/obj/structure/bed/chair/janicart/New()
+/obj/structure/bed/chair/janicart/Initialize()
+	. = ..()
 	create_reagents(100)
-
 
 /obj/structure/bed/chair/janicart/examine(mob/user)
 	if(!..(user, 1))
