@@ -18,12 +18,12 @@
 	)
 
 	species_to_branch_whitelist = list(
-		/datum/species/diona      = list(/datum/mil_branch/civilian),
-		/datum/species/nabber     = list(/datum/mil_branch/civilian),
-		/datum/species/skrell     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/unathi     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/diona      = list(),
+		/datum/species/nabber     = list(),
+		/datum/species/skrell     = list(),
+		/datum/species/unathi     = list(),
 		/datum/species/vox        = list(),
-		/datum/species/adherent   = list(/datum/mil_branch/civilian)
+		/datum/species/adherent   = list()
 	)
 
 	species_to_rank_whitelist = list(
@@ -198,13 +198,15 @@
 
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/sv,
+		v/datum/mil_rank/civ/sc,
 		/datum/mil_rank/civ/synthetic
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/sv,
+		/datum/mil_rank/civ/sc,
 		/datum/mil_rank/civ/synthetic
 	)
 
