@@ -77,8 +77,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/proc/setPatrol(var/obj/effect/landmark/flood_patrol_target/Pa)
-	if(isnull(PA))
-   		return
+	if(isnull(Pa))
+		return
 
 	if(stance==HOSTILE_STANCE_IDLE && pbol==0)
 		walkPoint=Pa.nextPoint
