@@ -7,7 +7,7 @@
 	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
 	economic_power = 6
-	minimal_player_age = 3
+	minimal_player_age = 4
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer
 	allowed_branches = list(
@@ -15,10 +15,8 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e5
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_ADEPT,
@@ -50,8 +48,8 @@
 
 /datum/job/engineer
 	title = "Engineer"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Engineer"
 	economic_power = 5
 	minimal_player_age = 0
@@ -66,16 +64,10 @@
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/fleet/e2
+		/datum/mil_rank/civilian/sv
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
@@ -110,8 +102,8 @@
 	title = "Engineering Contractor"
 	department = "Engineering"
 	department_flag = ENG
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the Chief Engineer, the Corporate Liaison and Engineering Personnel"
 	minimal_player_age = 0
 	selection_color = "#5b4d20"
@@ -157,20 +149,18 @@
 	title = "Engineer Trainee"
 	department = "Engineering"
 	department_flag = ENG
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the Chief Engineer and Engineering Personnel"
 	selection_color = "#5b4d20"
 	ideal_character_age = 20
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/civ/sv
 	)
 
 	skill_points = 4

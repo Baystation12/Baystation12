@@ -1,23 +1,20 @@
 /datum/job/qm
-	title = "Deck Chief"
+	title = "Logistics Agent"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Executive Officer"
+	supervisors = "the First Officer"
 	economic_power = 5
 	minimal_player_age = 0
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e8
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/fleet/e6
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -37,23 +34,21 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cargo_tech
-	title = "Deck Technician"
+	title = "Requisitions Attendant"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Deck Chief and Executive Officer"
+	supervisors = "the Logistics Agent and First Officer"
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -70,16 +65,21 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cargo_contractor
-	title = "Supply Assistant"
+	title = "Logistics Analyst"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Deck Chief, the Corporate Liaison and Supply Personnel"
+	supervisors = "the Logistics Agent and the First Officer"
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(
+		/datum/mil_branch/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5
+	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
 	                    SKILL_HAULING     = SKILL_BASIC)

@@ -50,6 +50,8 @@
 		"Anomalist",
 		"Researcher",
 		"Xenobiologist",
+		"Xenoform Life Specialist",
+		"Xeno Archeological Specialist",
 		"Xenobotanist",
 		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -63,14 +65,10 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/scientist
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov
 	)
 	allowed_ranks = list(,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
-		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
+		/datum/mil_rank/civ/sv = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	)
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
@@ -81,12 +79,12 @@
 	skill_points = 20
 
 /datum/job/scientist_assistant
-	title = "Research Assistant"
+	title = "Research Associate"
 	department = "Science"
 	department_flag = SCI
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Chief Science Officer, the Workplace Liaison and science personnel"
+	supervisors = "the Chief Science Officer and science personnel"
 	selection_color = "#633d63"
 	economic_power = 3
 	ideal_character_age = 30
@@ -96,19 +94,16 @@
 		"Laboratory Technician",
 		"Intern",
 		"Clerk",
-		"Field Assistant")
+		"Field Assistant",
+		"Assistant Xeno Archeological Specialist",
+		"Assistant Xenoform Life Specialist")
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/civilian,
-		/datum/mil_branch/solgov
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/assist,
-		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov
+		/datum/mil_rank/civ/sv = /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	)
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,

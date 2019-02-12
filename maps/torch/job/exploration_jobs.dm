@@ -1,18 +1,19 @@
 /datum/job/pathfinder
-	title = "Pathfinder"
+	title = "Chief Exploration Officer"
 	department = "Exploration"
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Commanding Officer and the Executive Officer"
+	supervisors = "the Captain and First Officer (if military)"
 	selection_color = "#68099e"
 	minimal_player_age = 1
-	economic_power = 7
+	economic_power = 4
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o1
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_ADEPT,
@@ -26,10 +27,10 @@
 	skill_points = 22
 
 	access = list(
-		access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage, 
-		access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, 
+		access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage,
+		access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm,
 		access_guppy, access_hangar, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-		access_petrov_toxins, access_petrov_chemistry, access_petrov_maint, access_tox, access_tox_storage, access_research, 
+		access_petrov_toxins, access_petrov_chemistry, access_petrov_maint, access_tox, access_tox_storage, access_research,
 		access_xenobiology, access_xenoarch
 	)
 
@@ -41,33 +42,33 @@
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
-	supervisors = "the Pathfinder"
+	supervisors = "the Chief Exploration Officer"
 	department = "Exploration"
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#68099e"
 	economic_power = 10
-	minimal_player_age = 0
+	minimal_player_age = 2
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
 	allowed_branches = list(
-		/datum/mil_branch/civilian,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
-		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/fleet/e7
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/e10,
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e6
 	)
 
 	access = list(
-		access_mining_office, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron, 
+		access_mining_office, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
 		access_petrov_toxins, access_petrov_chemistry, access_petrov_maint, access_mining_station, access_expedition_shuttle,
-		access_expedition_shuttle_helm, access_guppy, access_hangar, access_guppy_helm, access_mining, access_pilot, 
-		access_solgov_crew, access_eva, access_explorer, access_tox, access_tox_storage, access_research, access_xenobiology, 
+		access_expedition_shuttle_helm, access_guppy, access_hangar, access_guppy_helm, access_mining, access_pilot,
+		access_solgov_crew, access_eva, access_explorer, access_tox, access_tox_storage, access_research, access_xenobiology,
 		access_xenoarch
 	)
 	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
@@ -77,20 +78,19 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
 /datum/job/explorer
-	title = "Explorer"
+	title = "Exploration Specialist"
 	department = "Exploration"
 	department_flag = EXP
-	total_positions = 3
-	spawn_positions = 3
-	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Captain, First Officer and Chief Exploration Officer"
 	selection_color = "#68099e"
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_branches = list(/datum/mil_branch/fleet)
 
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/ec/e5
+		/datum/mil_rank/fleet/e7
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC)
 
@@ -102,7 +102,7 @@
 	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage,
 		access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
 		access_petrov, access_petrov_analysis, access_petrov_phoron, access_petrov_toxins,
-		access_petrov_chemistry, access_petrov_maint, access_tox, access_tox_storage, access_research, 
+		access_petrov_chemistry, access_petrov_maint, access_tox, access_tox_storage, access_research,
 		access_xenobiology, access_xenoarch
 	)
 

@@ -1,26 +1,24 @@
 /datum/job/senior_doctor
-	title = "Physician"
+	title = "Senior Medical Doctor"
 	department = "Medical"
 	department_flag = MED
 
 	minimal_player_age = 2
 	ideal_character_age = 45
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 8
 	alt_titles = list(
 		"Surgeon",
+		"Senior Medical Technician",
 		"Trauma Surgeon")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/senior/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -43,9 +41,9 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/doctor
-	title = "Corpsman"
-	total_positions = 3
-	spawn_positions = 3
+	title = "Medical Doctor"
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	economic_power = 7
 	ideal_character_age = 40
@@ -53,19 +51,14 @@
 	alt_titles = list(
 		"Field Medic" = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic,
 		"Medical Technician",
-		"Nursing Assistant")
+		"Nursing Assistant",
+		"Assistant Surgeon")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/doctor,
-		/datum/mil_branch/fleet
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/fleet/e6
+		/datum/mil_rank/civ/sv
 	)
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
 	                    SKILL_MEDICAL = SKILL_BASIC,
@@ -85,12 +78,12 @@
 	skill_points = 26
 
 /datum/job/doctor_contractor
-	title = "Medical Contractor"
+	title = "Medical Technician"
 	department = "Medical"
 	department_flag = MED
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 3
 	ideal_character_age = 30
@@ -101,7 +94,7 @@
 		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_ranks = list(/datum/mil_rank/civ/sv)
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
 	                    SKILL_MEDICAL = SKILL_BASIC,
 	                    SKILL_ANATOMY = SKILL_BASIC)
@@ -151,23 +144,21 @@
 	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI�s and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
 
 /datum/job/medical_trainee
-	title = "Corpsman Trainee"
+	title = "Medical Resident"
 	department = "Medical"
 	department_flag = MED
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
 	ideal_character_age = 20
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/fleet/e2
+		/datum/mil_rank/civ/sv
 	)
 
 	skill_points = 4
@@ -193,7 +184,7 @@
 	return "You are a Corpsman Trainee. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
 
 /datum/job/chemist
-	title = "Chemist"
+	title = "Pharmacist"
 	department = "Medical"
 	department_flag = MED
 	total_positions = 1
@@ -204,8 +195,10 @@
 	ideal_character_age = 30
 	minimal_player_age = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(
+		/datum/mil_branch/civilian)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/sv)
 	min_skill = list(   SKILL_MEDICAL   = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_ADEPT)
 
@@ -217,7 +210,7 @@
 	minimal_access = list()
 
 /datum/job/psychiatrist
-	title = "Counselor"
+	title = "Psychiatrist"
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40
@@ -230,14 +223,9 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	allowed_branches = list(
-		/datum/mil_branch/civilian,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet)
+		/datum/mil_branch/civilian)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/ec/o1)
+		/datum/mil_rank/civ/sv)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_BASIC)
 
