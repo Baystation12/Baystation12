@@ -23,7 +23,7 @@
 	)
 
 /obj/structure/closet/secure_closet/decktech
-	name = "deck technician's locker"
+	name = "requisition attendant's locker"
 	req_access = list(access_cargo)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo/worker
 
@@ -46,8 +46,32 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)
 
+/obj/structure/closet/secure_closet/logan
+	name = "requisitions analyst's locker"
+	req_access = list(access_cargo)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo/worker
+
+/obj/structure/closet/secure_closet/logan/WillContain()
+	return list(
+		/obj/item/device/radio/headset/headset_cargo,
+		/obj/item/device/radio/headset/headset_cargo/alt,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/clothing/suit/storage/hazardvest,
+		/obj/item/clothing/accessory/storage/webbing_large,
+		/obj/item/weapon/storage/belt/utility/atmostech,
+		/obj/item/weapon/hand_labeler,
+		/obj/item/weapon/material/clipboard,
+		/obj/item/weapon/folder/yellow,
+		/obj/item/stack/package_wrap/twenty_five,
+		/obj/item/weapon/marshalling_wand,
+		/obj/item/weapon/marshalling_wand,
+		/obj/item/weapon/storage/belt/general,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel/grey = 25)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
+	)
+
 /obj/structure/closet/secure_closet/deckofficer
-	name = "deck chief's locker"
+	name = "logistics agent's locker"
 	req_access = list(access_qm)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo/deck_officer
 

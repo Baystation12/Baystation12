@@ -191,8 +191,8 @@ obj/structure/icarus/broken_cryo/attack_hand(mob/user)
 
 //to pass tests and make vesrion not depending on Torch code. Sol gov floor decal had to go though :(
 /obj/structure/sign/icarus/solgov
-	name = "\improper SolGov Seal"
-	desc = "A familiar seal showing this vessel is SolGov property."
+	name = "\improper TAR Seal"
+	desc = "A familiar seal showing this vessel is TAR property."
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
 	icon_state = "solgovseal"
 

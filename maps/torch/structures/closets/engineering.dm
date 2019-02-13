@@ -97,7 +97,7 @@
 	)
 
 /obj/structure/closet/secure_closet/engineering_contractor
-	name = "engineering contractor's locker"
+	name = "engineering trainee's locker"
 	req_access = list(access_engine)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/engineering/contractor
 

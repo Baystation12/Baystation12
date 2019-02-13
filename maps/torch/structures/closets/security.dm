@@ -30,7 +30,7 @@
 	)
 
 /obj/structure/closet/secure_closet/security_torch
-	name = "master at arms' locker"
+	name = "military police officer's locker"
 	req_access = list(access_brig)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/security
 
@@ -97,7 +97,7 @@
 	)
 
 /obj/structure/closet/secure_closet/brigofficer
-	name = "brig officer's locker"
+	name = "master at arm's locker"
 	req_access = list(access_armory)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/warden
 
