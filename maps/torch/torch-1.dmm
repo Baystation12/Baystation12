@@ -3730,6 +3730,15 @@
 	},
 /turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
+"mD" = (
+/obj/structure/catwalk,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -23;
+	pixel_y = 0
+	},
+/turf/simulated/floor/shuttle_ceiling/torch/air,
+/area/quartermaster/hangar/top)
 "mG" = (
 /obj/structure/railing/mapped,
 /turf/simulated/open,
@@ -4413,6 +4422,16 @@
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/quartermaster/hangar/top)
+"oX" = (
+/obj/structure/catwalk,
+/obj/machinery/alarm{
+	alarm_id = "petrov2";
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
 	},
 /turf/simulated/open,
 /area/quartermaster/hangar/top)
@@ -8243,6 +8262,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"Bw" = (
+/obj/structure/catwalk,
+/obj/machinery/firealarm{
+	dir = 4;
+	layer = 3.3;
+	pixel_x = 26
+	},
+/turf/simulated/open,
+/area/quartermaster/hangar/top)
 "By" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/door/blast/regular/escape_pod,
@@ -14325,6 +14353,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"Us" = (
+/obj/structure/catwalk,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/turf/simulated/floor/shuttle_ceiling/torch/air,
+/area/quartermaster/hangar/top)
 "Uu" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/lounge)
@@ -33263,8 +33300,8 @@ WI
 WI
 WI
 oQ
-WI
-WI
+mD
+Us
 WI
 WI
 oQ
@@ -37309,8 +37346,8 @@ th
 RW
 wd
 lr
-lr
-lr
+Bw
+oX
 lr
 vQ
 jB
