@@ -120,11 +120,6 @@
 		/datum/mil_rank/fleet/e9_alt2,
 		/datum/mil_rank/fleet/e9_alt3,
 		/datum/mil_rank/fleet/e9_alt4,
-		/datum/mil_rank/fleet/w1,
-		/datum/mil_rank/fleet/w2,
-		/datum/mil_rank/fleet/w3,
-		/datum/mil_rank/fleet/w4,
-		/datum/mil_rank/fleet/w5,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -347,31 +342,6 @@
 	name_short = "MCPOF"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt4, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 9
-
-/datum/mil_rank/fleet/w1
-	name = "Warrant Officer 1"
-	name_short = "WO1"
-	sort_order = -1
-
-/datum/mil_rank/fleet/w2
-	name = "Chief Warrant Officer 2"
-	name_short = "CWO2"
-	sort_order = -2
-
-/datum/mil_rank/fleet/w3
-	name = "Chief Warrant Officer 3"
-	name_short = "CWO3"
-	sort_order = -3
-
-/datum/mil_rank/fleet/w4
-	name = "Chief Warrant Officer 4"
-	name_short = "CWO4"
-	sort_order = -4
-
-/datum/mil_rank/fleet/w5
-	name = "Chief Warrant Officer 5"
-	name_short = "CWO5"
-	sort_order = -5
 
 /datum/mil_rank/fleet/o1
 	name = "Ensign"
