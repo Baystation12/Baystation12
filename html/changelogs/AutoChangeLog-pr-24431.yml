@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "Added Pilot Voidsuit to bridge deck's EVA Storage that Bridge Officers and Senior Enlisted Advisors can access."
+  - maptweak: "Re-arranged the bridge deck's EVA storage."
