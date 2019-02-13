@@ -37,11 +37,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e1,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/fleet/e3
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/civ/sv
 	)
 	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
 	                    SKILL_BOTANY    = SKILL_BASIC,
