@@ -69,14 +69,14 @@
 	max_keys = 3
 
 /obj/item/device/radio/headset/sea
-	name = "senior enlisted advisor's headset"
+	name = "senior naval advisor's headset"
 	desc = "A headset for the guy or gal who advises the enlisted whilst from a position of seniority."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/sea	
+	ks1type = /obj/item/device/encryptionkey/heads/sea
 
 /obj/item/device/radio/headset/sea/alt
-	name = "senior enlisted advisor's bowman headset"
+	name = "senior naval advisor's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 
@@ -106,14 +106,14 @@
 	item_state = "exp_headset_alt"
 
 /obj/item/device/radio/headset/pathfinder
-	name = "pathfinder's headset"
+	name = "chief exploration officer's headset"
 	desc = "A headset with access to the command and exploration channels. It has an inbuilt subspace antenna for better reception."
 	icon_state = "exp_headset"
 	item_state = "exp_headset"
 	ks1type = /obj/item/device/encryptionkey/pathfinder
 
 /obj/item/device/radio/headset/pathfinder/alt
-	name = "pathfinder's bowman headset"
+	name = "chief exploration officer's bowman headset"
 	icon_state = "exp_headset_alt"
 	item_state = "exp_headset_alt"
 
