@@ -1,8 +1,8 @@
 /obj/structure/solbanner
-	name = "\improper SCG banner"
+	name = "\improper TAR banner"
 	icon = 'maps/torch/icons/obj/solbanner.dmi'
 	icon_state = "wood"
-	desc = "A wooden pole bearing a banner of Sol Central Government. Ave."
+	desc = "A wooden pole bearing a banner of TAR. Ave."
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	plane = ABOVE_HUMAN_PLANE
@@ -13,7 +13,7 @@
 	icon_state = "steel"
 	obj_flags = 0
 	var/plantedby
-	
+
 /obj/structure/solbanner/exo/Initialize()
 	. = ..()
 	flick("deploy",src)
