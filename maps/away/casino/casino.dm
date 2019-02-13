@@ -5,9 +5,9 @@
 	name = "passenger liner"
 	desc = "Sensors detect an undamaged vessel without any signs of activity."
 	color = "#bd6100"
-	vessel_mass = 100
+	vessel_mass = 5000
 	max_speed = 1/(2 SECONDS)
-	burn_delay = 20 SECONDS
+	burn_delay = 1 SECOND
 	initial_generic_waypoints = list(
 		"nav_casino_1",
 		"nav_casino_2",
