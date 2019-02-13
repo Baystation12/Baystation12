@@ -51,11 +51,11 @@
 /obj/item/weapon/card/id/torch/contractor/chemist
 	job_access_type = /datum/job/chemist
 	detail_color = COLOR_PALE_BLUE_GRAY
-
+/*
 /obj/item/weapon/card/id/torch/contractor/biomech
 	job_access_type = /datum/job/biomech
 	detail_color = COLOR_PALE_BLUE_GRAY
-
+*/
 /obj/item/weapon/card/id/torch/contractor/medical/counselor
 	job_access_type = /datum/job/psychiatrist
 
@@ -87,11 +87,11 @@
 /obj/item/weapon/card/id/torch/crew/engineering/senior
 	job_access_type = /datum/job/senior_engineer
 	extra_details = list("onegoldstripe")
-
+/*
 /obj/item/weapon/card/id/torch/contractor/engineering
 	job_access_type = /datum/job/engineer_contractor
 	detail_color = COLOR_SUN
-
+*/
 /obj/item/weapon/card/id/torch/contractor/engineering/roboticist
 	job_access_type = /datum/job/roboticist
 

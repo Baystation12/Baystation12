@@ -42,9 +42,7 @@
 	minimal_player_age = 7
 	ideal_character_age = 35
 	skill_points = 14
-	alt_titles = list(
-		"Criminal Investigator"
-	)
+//	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	allowed_branches = list(
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet

@@ -89,12 +89,6 @@
 	economic_power = 3
 	ideal_character_age = 30
 	alt_titles = list(
-		"Custodian" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor,
-		"Testing Assistant" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject,
-		"Laboratory Technician",
-		"Intern",
-		"Clerk",
-		"Field Assistant",
 		"Assistant Xeno Archeological Specialist",
 		"Assistant Xenoform Life Specialist")
 

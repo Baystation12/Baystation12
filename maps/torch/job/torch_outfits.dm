@@ -352,7 +352,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus
 	name = OUTFIT_JOB_NAME("Mortician")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
-
+/*
 /decl/hierarchy/outfit/job/torch/crew/medical/biomech
 	name = OUTFIT_JOB_NAME("Biomechanical Engineer")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
@@ -360,7 +360,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/torchroboticist
 	id_type = /obj/item/weapon/card/id/torch/contractor/biomech
 	pda_type = /obj/item/modular_computer/pda/roboticist
-
+*/
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
 	uniform = /obj/item/clothing/under/rank/virologist

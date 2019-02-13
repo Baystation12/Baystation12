@@ -6,8 +6,7 @@
 	spawn_positions = 2
 	supervisors = "the Executive Officer"
 	ideal_character_age = 20
-	alt_titles = list(
-		"Janitor")
+//	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
 	allowed_branches = list(
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet

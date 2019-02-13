@@ -30,15 +30,9 @@ Civilian
 	announced = FALSE
 	alt_titles = list(
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
-		"Historian",
 		"Botanist",
-		"Investor" = /decl/hierarchy/outfit/job/torch/passenger/passenger/investor,
-		"Naturalist",
-		"Ecologist",
 		"Entertainer",
-		"Independent Observer",
-		"Sociologist",
-		"Trainer")
+		"Independent Observer",)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(
@@ -68,7 +62,7 @@ Civilian
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 24
-
+/*
 /datum/job/stowaway
 	title = "Stowaway"
 	department = "Civilian"
@@ -85,4 +79,4 @@ Civilian
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
-	announced = FALSE
+	announced = FALSE */

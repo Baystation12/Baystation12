@@ -54,14 +54,7 @@
 	economic_power = 5
 	minimal_player_age = 0
 	ideal_character_age = 30
-	alt_titles = list(
-		"Maintenance Technician",
-		"Engine Technician",
-		"Damage Control Technician",
-		"EVA Technician",
-		"Electrician",
-		"Atmospheric Technician",
-		)
+//	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
 		/datum/mil_branch/civilian
@@ -97,7 +90,7 @@
 
 /datum/job/engineer/get_description_blurb()
 	return "You are an Engineer. You operate under one of many titles and may be highly specialised in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
-
+/*
 /datum/job/engineer_contractor
 	title = "Engineering Contractor"
 	department = "Engineering"
@@ -144,7 +137,7 @@
 
 /datum/job/engineer_contractor/get_description_blurb()
 	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the Corporate Liaison and the rest of the engineering team."
-
+*/
 /datum/job/engineer_trainee
 	title = "Engineer Trainee"
 	department = "Engineering"
@@ -193,7 +186,7 @@
 
 /datum/job/engineer_trainee/get_description_blurb()
 	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
-
+/*
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
@@ -227,3 +220,4 @@
 
 /datum/job/roboticist/get_description_blurb()
 	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics (like robots). You are also responsible for the production of exosuits(mechs) and bots for various departments. You answer to the Corporate Liaison and the Chief Engineer."
+*/

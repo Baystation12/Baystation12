@@ -91,7 +91,7 @@
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
-
+/*
 /datum/job/mining
 	title = "Prospector"
 	department = "Supply"
@@ -117,3 +117,4 @@
 	access = list(access_mining, access_mining_office, access_mining_station,
 						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm, access_solgov_crew, access_eva)
 	minimal_access = list()
+*/

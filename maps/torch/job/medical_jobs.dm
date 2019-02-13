@@ -11,9 +11,7 @@
 	selection_color = "#013d3b"
 	economic_power = 8
 	alt_titles = list(
-		"Surgeon",
-		"Senior Medical Technician",
-		"Trauma Surgeon")
+		"Senior Medical Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	allowed_branches = list(
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/senior/fleet
@@ -49,9 +47,6 @@
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
-		"Field Medic" = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic,
-		"Medical Technician",
-		"Nursing Assistant",
 		"Assistant Surgeon")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	allowed_branches = list(
@@ -88,9 +83,6 @@
 	economic_power = 3
 	ideal_character_age = 30
 	alt_titles = list(
-		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
-		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
-		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
 		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -110,7 +102,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
-
+/*
 /datum/job/biomech
 	title = "Biomechanical Engineer"
 	department = "Medical"
@@ -142,7 +134,7 @@
 
 /datum/job/biomech/get_description_blurb()
 	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI�s and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
-
+*/
 /datum/job/medical_trainee
 	title = "Medical Resident"
 	department = "Medical"

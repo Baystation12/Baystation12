@@ -56,10 +56,6 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6
 	)
 

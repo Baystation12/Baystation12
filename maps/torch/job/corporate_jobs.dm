@@ -8,12 +8,7 @@
 	selection_color = "#2f2f7f"
 	economic_power = 15
 	minimal_player_age = 0
-	alt_titles = list(
-		"Corporate Liaison",
-		"Union Representative" = /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison/union_rep,
-		"Corporate Representative",
-		"Corporate Executive"
-		)
+	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
@@ -58,11 +53,7 @@
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX,
 	                    SKILL_FORENSICS   = SKILL_MAX)
-	alt_titles = list(
-		"Union Enforcer" = /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard/union,
-		"Executive Assistant",
-		"Asset Protection Agent"
-	)
+//	alt_titles = list()
 	skill_points = 20
 	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
