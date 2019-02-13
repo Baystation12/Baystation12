@@ -507,6 +507,16 @@
 	name = "Kozi's Hassar Armor"
 	icon_state = "kozi-armor_obj"
 	item_state = "kozi-armor_worn"
+//Kozi's sword
+
+/obj/item/weapon/material/machete/kozi
+	name = "Hassar Sabre"
+	icon_state = "kozi-sabre_obj"
+	item_state = "kozi-sabre"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
 
 obj/item/clothing/head/helmet/odst/donator/gulag
 	name = "Murmillo Helmet"
@@ -527,6 +537,16 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	name = "ODST 'Thorn' Armour"
 	icon_state = "maxattackeralt-armor_obj"
 	item_state = "maxattackeralt-armor_worn"
+
+obj/item/clothing/head/helmet/odst/donator/pinstripe
+	name = "Pinstripe's ODST Helmet"
+	item_state = "pinstripe-helmet_worn"
+	icon_state = "pinstripe-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/pinstripe
+	name = "Pinstripe's ODST Armour"
+	icon_state = "pinstripe-armor_obj"
+	item_state = "pinstripe-armor_worn"
 //END DONATOR GEAR
 
 /obj/effect/random_ODST_set/New()
