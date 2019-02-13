@@ -118,3 +118,15 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
 	)
+
+/obj/structure/closet/secure_closet/capequipment
+	name = "command arms locker"
+	req_one_access = list(access_captain, access_hop, access_senadv)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/command
+
+/obj/structure/closet/secure_closet/capequipment/WillContain()
+	return list(
+		/obj/item/weapon/gun/energy/pulse_rifle/carbine,
+		/obj/item/weapon/gun/energy/pulse_rifle/pistol
+	)
+
