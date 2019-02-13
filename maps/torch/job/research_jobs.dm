@@ -14,10 +14,10 @@
 		"Research Supervisor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/senior_scientist
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o1
+		/datum/mil_rank/cov/sv
 	)
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
@@ -65,7 +65,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/scientist
 	allowed_branches = list(
-		/datum/mil_branch/solgov
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(,
 		/datum/mil_rank/civ/sv = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
