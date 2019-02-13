@@ -17,7 +17,7 @@
 		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/cov/sv
+		/datum/mil_rank/civ/sv
 	)
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
