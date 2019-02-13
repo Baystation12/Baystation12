@@ -228,3 +228,29 @@
 
 /obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
 	return
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler
+
+
+//PANTAS
+
+//Dagger
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler
+
+	name = "Old Plasma Chainblade"
+	desc = "A chain of rotating energy blades make this a fearsome ripping weapon."
+	icon_state = "pantas_weapon"
+	icon_state_deployed = "pantas_weapon_active"
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler/change_misc_variables(var/deactivate = 0)
+	if(deactivate)
+		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
+		item_state_slots = null
+		hitsound = "swing_hit"
+	else
+		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/pantas_weapon_sprites_inhand.dmi')
+		item_state_slots = list(
+		slot_l_hand_str = "left_berz_chain_l",
+		slot_r_hand_str = "right_berz_chain_r" )
+		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
