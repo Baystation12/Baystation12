@@ -312,7 +312,7 @@
 /datum/mil_rank/fleet/e7_alt1
 	name = "Munitions Petty Officer"
 	name_short = "MPO"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e7, /obj/item/clothing/accessory/solgov/specialty/enlisted)
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e7_alt1, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 7
 
 /datum/mil_rank/fleet/e8
@@ -324,7 +324,7 @@
 /datum/mil_rank/fleet/e8_alt1
 	name = "Chief Munitions Petty Officer"
 	name_short = "CMPO"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e8, /obj/item/clothing/accessory/solgov/specialty/enlisted)
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e8_alt1, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 8
 
 /datum/mil_rank/fleet/e9
@@ -337,6 +337,12 @@
 	name = "Command Master Chief Petty Officer"
 	name_short = "CMCPO"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt1, /obj/item/clothing/accessory/solgov/specialty/enlisted)
+	sort_order = 9
+
+/datum/mil_rank/fleet/e10
+	name = "Master Chief Petty Officer of the Navy"
+	name_short = "MCPON"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e10, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 9
 
 /datum/mil_rank/fleet/w1
@@ -391,7 +397,7 @@
 /datum/mil_rank/fleet/o4_alt1
 	name = "Sub Commander"
 	name_short = "SCdr"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/o4, /obj/item/clothing/accessory/solgov/specialty/officer)
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/o4_alt1, /obj/item/clothing/accessory/solgov/specialty/officer)
 	sort_order = 14
 
 /datum/mil_rank/fleet/o5
