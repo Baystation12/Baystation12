@@ -49,6 +49,8 @@
 	sound_env = LARGE_ENCLOSED
 	name = "wide open areas"
 /area/achlys/one/z1main
+/area/achlys/one/z2main1
+/area/achlys/one/z2main2
 /area/achlys/three
 	sound_env = HALLWAY
 	name = "long hallways"
@@ -69,6 +71,8 @@
 /area/achlys/five/z1laundry
 /area/achlys/five/z1ladder1
 /area/achlys/five/z1ladder2
+/area/achlys/five/z2freezer
+/area/achlys/five/z2secpoint1
 /area/achlys/two
 	sound_env = SPACE
 	name = "enclosed rooms"
@@ -77,25 +81,38 @@
 /area/achlys/two/z1malelocker
 /area/achlys/two/z1hos
 /area/achlys/two/z1morgue
+/area/achlys/two/z2maintroom1
+/area/achlys/two/z2maintroom2
+/area/achlys/two/z2maintroom3
+/area/achlys/two/z2maintroom4
+/area/achlys/two/z2maintroom5
+/area/achlys/two/z2maintroom6
+/area/achlys/two/z2maintroom7
+/area/achlys/two/z2barbackroom
 /area/achlys/six
 	sound_env = HANGAR
 	name = "medium sized rooms"
 /area/achlys/six/z1infirmary
 /area/achlys/six/z1offices
+/area/achlys/six/z2cafeterias
+/area/achlys/six/z2breakroom
 /area/achlys/seven
 	sound_env = STONE_CORRIDOR
 	name = "bridge hallway"
 /area/achlys/seven/z1bridgewalkway
 	requires_power = 0
+/area/achlys/seven/z2mainthalls
 /area/achlys/eight
 	sound_env = ALLEY
 	name = "spacious hallways"
 /area/achlys/eight/z1cargohallway
 /area/achlys/eight/z1meetinghall
 /area/achlys/eight/z1hangerhallway
+/area/achlys/eight/z2cargoandhalls
 /area/achlys/nine
 	name = "small rooms"
 	sound_env = SMALL_SOFTFLOOR
 /area/achlys/nine/z1bridge
 	requires_power = 0
 /area/achlys/nine/z1commandhallway
+/area/achlys/nine/z2bar
