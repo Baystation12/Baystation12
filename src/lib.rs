@@ -1,4 +1,3 @@
-#![feature(try_trait)]
 mod error;
 #[macro_use]
 mod byond;

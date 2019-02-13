@@ -1579,7 +1579,7 @@
 #include "code\modules\detectivework\tools\storage.dm"
 #include "code\modules\detectivework\tools\swabs.dm"
 #include "code\modules\detectivework\tools\uvlight.dm"
-#include "code\modules\dmpg\dmapi\dmpg.dm"
+#include "lib\dmpg\dmapi\dmpg.dm"
 #include "code\modules\economy\_economy_misc.dm"
 #include "code\modules\economy\Accounts.dm"
 #include "code\modules\economy\Accounts_DB.dm"

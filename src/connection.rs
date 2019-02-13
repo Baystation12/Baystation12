@@ -96,19 +96,19 @@ fn convert_date(v: Option<NaiveTime>) -> Value {
 fn get_row_val(ty: &Type, row: &Row, n: usize) -> Result<Value, FromSqlError> {
     use postgres::types::*;
     Ok(match *ty {
-        BOOL => convert_bool(row.get_opt(n)??),
-        CHAR => convert_number::<i8>(row.get_opt(n)??),
-        INT2 => convert_number::<i16>(row.get_opt(n)??),
-        INT4 => convert_number::<i32>(row.get_opt(n)??),
-        INT8 => convert_number::<i64>(row.get_opt(n)??),
-        OID => convert_number::<u32>(row.get_opt(n)??),
-        FLOAT4 => convert_float(row.get_opt::<usize, Option<f32>>(n)??.map(|x| x as f64)),
-        FLOAT8 => convert_float(row.get_opt(n)??),
-        VARCHAR | TEXT | BPCHAR | NAME | UNKNOWN => convert_string(row.get_opt(n)??),
-        JSON | JSONB => convert_json(row.get_opt(n)??),
-        TIMESTAMP => convert_datetime(row.get_opt(n)??),
-        TIME => convert_time(row.get_opt(n)??),
-        DATE => convert_date(row.get_opt(n)??),
+        BOOL => convert_bool(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        CHAR => convert_number::<i8>(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        INT2 => convert_number::<i16>(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        INT4 => convert_number::<i32>(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        INT8 => convert_number::<i64>(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        OID => convert_number::<u32>(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        FLOAT4 => convert_float(row.get_opt::<usize, Option<f32>>(n).ok_or(FromSqlError::with_msg("got NULL"))??.map(|x| x as f64)),
+        FLOAT8 => convert_float(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        VARCHAR | TEXT | BPCHAR | NAME | UNKNOWN => convert_string(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        JSON | JSONB => convert_json(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        TIMESTAMP => convert_datetime(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        TIME => convert_time(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
+        DATE => convert_date(row.get_opt(n).ok_or(FromSqlError::with_msg("got NULL"))??),
         _ => return Err(FromSqlError::with_msg(format!("unimplemented type {}", ty.name())))
     })
 }

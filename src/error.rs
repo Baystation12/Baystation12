@@ -39,14 +39,6 @@ impl Error for FromSqlError {
     }
 }
 
-impl From<std::option::NoneError> for FromSqlError {
-    fn from(_: std::option::NoneError) -> FromSqlError {
-        FromSqlError {
-            cause: Cause::Msg("None value returned".to_string()),
-        }
-    }
-}
-
 impl From<postgres::Error> for FromSqlError {
     fn from(o: postgres::Error) -> FromSqlError {
         FromSqlError {
