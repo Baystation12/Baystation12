@@ -1,4 +1,0 @@
-author: "RyanSmake"
-delete-after: True
-changes: 
-  - bugfix: "Holodeck windoors now actually face the right direction."
