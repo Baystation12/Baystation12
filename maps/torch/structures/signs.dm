@@ -57,7 +57,7 @@
 	icon_state = "center"
 
 /obj/structure/sign/solgov
-	name = "\improper SolGov Seal"
+	name = "\improper TAR Seal"
 	desc = "A sign which signifies who this vessel belongs to."
 	icon = 'maps/torch/icons/obj/solgov-decals.dmi'
 	icon_state = "solgovseal"
