@@ -102,8 +102,8 @@
 
 /datum/mil_branch/fleet
 	name = "Fleet"
-	name_short = "SCGF"
-	email_domain = "torch.fleet.mil"
+	name_short = "TRDF"
+	email_domain = "sandros.fleet.mil"
 
 	rank_types = list(
 		/datum/mil_rank/fleet/e1,
