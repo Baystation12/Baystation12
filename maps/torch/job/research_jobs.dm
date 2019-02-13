@@ -38,7 +38,7 @@
 	skill_points = 20
 
 /datum/job/scientist
-	title = "Scientist"
+	title = "Researcher"
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "the Chief Science Officer and the Workplace Liaison"
@@ -46,10 +46,7 @@
 	ideal_character_age = 45
 	minimal_player_age = 0
 	alt_titles = list(
-		"Xenoarcheologist",
 		"Anomalist",
-		"Researcher",
-		"Xenobiologist",
 		"Xenoform Life Specialist",
 		"Xeno Archeological Specialist",
 		"Xenobotanist",
