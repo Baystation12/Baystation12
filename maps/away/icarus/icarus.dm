@@ -205,8 +205,8 @@ obj/structure/icarus/broken_cryo/attack_hand(mob/user)
 	item_icons = list(slot_w_uniform_str = 'maps/away/icarus/icarus_sprites.dmi')
 
 /obj/structure/sign/double/icarus/solgovflag
-	name = "Sol Central Government Flag"
-	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
+	name = "TAR Flag"
+	desc = "The iconic flag of the Terran Amalgamated Republics, a symbol with many different meanings."
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
 
 /obj/structure/sign/double/icarus/solgovflag/left
