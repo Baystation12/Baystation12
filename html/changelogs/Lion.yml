@@ -37,5 +37,7 @@ changes:
   - bugfix: "Fixed Fleet being displayed wrong in occupation selection."
   - bugfix: "Fixes Cook not being able to be Civilian."
   - rscdel: "Removed a bunch of alt titles from Scientist."
+  - rscdel: "Removed alt titles from Synthetics."
+  - rscdel: "Removed Custodian alt title for janitor."
   - tweak: "Renamed Scientist to Researcher."
   - tweak: "Altered Exploration Specialist's ranks from E-7 to accept E-1 through E-4."

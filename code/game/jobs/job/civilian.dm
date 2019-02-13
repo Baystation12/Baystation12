@@ -82,7 +82,7 @@
 	supervisors = "the head of personnel"
 	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
-	alt_titles = list("Custodian","Sanitation Technician")
+	alt_titles = list("Sanitation Technician")
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 
 //More or less assistants
