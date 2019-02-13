@@ -1,9 +1,9 @@
 /datum/job/liaison
-	title = "Workplace Liaison"
+	title = "Foreign Diplomat"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
 	selection_color = "#2f2f7f"
 	economic_power = 15
@@ -23,7 +23,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Workplace Liaison. You are a civilian employee of the Expeditionary Corps Organisation, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
+	return "You are the Foreign Diplomat. You are a civilian employee of the Expeditionary Corps Organisation, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/liaison/post_equip_rank(var/mob/person)
 	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Loss Prevention Associate")]"]"
@@ -33,12 +33,12 @@
 				to_chat(M, SPAN_NOTICE("<b>One of your employers, [my_title] named [person.real_name], is present on [GLOB.using_map.full_name].</b>"))
 
 /datum/job/bodyguard
-	title = "Loss Prevention Associate"
+	title = "Foreign Protection Agent"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 0
-	spawn_positions = 0
-	supervisors = "the Workplace Liaison"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Foreign Diplomat"
 	selection_color = "#3d3d7f"
 	economic_power = 12
 	minimal_player_age = 7

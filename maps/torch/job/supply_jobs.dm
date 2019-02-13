@@ -34,7 +34,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cargo_tech
-	title = "Requisitions Attendant"
+	title = "Logistics Attendant"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 2
@@ -43,12 +43,14 @@
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/fleet/e5
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/civ/sv
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -74,11 +76,13 @@
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/fleet/e5
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/civ/sv
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,

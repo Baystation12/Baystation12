@@ -47,7 +47,8 @@
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
-		"Assistant Surgeon")
+		"Assistant Surgeon",
+		"Surgeon")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	allowed_branches = list(
 		/datum/mil_branch/civilian

@@ -137,11 +137,13 @@
 	ideal_character_age = 48
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/cmo
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/fleet/o3
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/civ/sc
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_ADEPT,
@@ -178,11 +180,13 @@
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o2
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/civ/sc
 	)
 	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
 	                    SKILL_COMPUTER     = SKILL_ADEPT,

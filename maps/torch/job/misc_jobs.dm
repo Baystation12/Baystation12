@@ -22,10 +22,10 @@ Civilian
 *******/
 
 /datum/job/assistant
-	title = "Passenger"
+	title = "Colonist"
 	total_positions = 12
 	spawn_positions = 12
-	supervisors = "the Executive Officer"
+	supervisors = "the First Officer"
 	economic_power = 6
 	announced = FALSE
 	alt_titles = list(
@@ -36,8 +36,7 @@ Civilian
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/contractor
+		/datum/mil_rank/civ/sv
 	)
 
 /datum/job/merchant

@@ -9,12 +9,14 @@
 //	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e1,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/fleet/e3
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/civ/sv
 	)
 	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
 
@@ -54,12 +56,14 @@
 	ideal_character_age = 30
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e1,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/fleet/e3
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/civ/sv
 	)
 
 	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen, access_commissary)
@@ -78,12 +82,14 @@
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet,
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e1,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/fleet/e3
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/civ/sv
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)

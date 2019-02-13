@@ -528,7 +528,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	name = OUTFIT_JOB_NAME("Pathfinder")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/pathfinder
 	pda_type = /obj/item/modular_computer/pda/explorer
@@ -536,7 +536,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	name = OUTFIT_JOB_NAME("Explorer")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/exploration
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/explorer
 	pda_type = /obj/item/modular_computer/pda/explorer
@@ -795,7 +795,7 @@ TERRAN OUTFITS
 
 /decl/hierarchy/outfit/job/torch/crew/research/cso
 	name = OUTFIT_JOB_NAME("Chief Science Officer - Expeditionary Corps")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
+	uniform = /obj/item/clothing/under/suit_jacket/navy
 	l_ear = /obj/item/device/radio/headset/heads/torchntdirector
 	id_type = /obj/item/weapon/card/id/torch/silver/research
 	pda_type = /obj/item/modular_computer/pda/heads/rd

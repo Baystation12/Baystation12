@@ -68,8 +68,6 @@
 		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/gloves/color/black,
-		/obj/item/clothing/head/helmet/nt/guard,
-		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
 		/obj/item/clothing/glasses/sunglasses/big,
 		/obj/item/clothing/accessory/badge/nanotrasen
 	)
