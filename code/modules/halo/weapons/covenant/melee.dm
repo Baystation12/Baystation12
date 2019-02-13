@@ -47,7 +47,7 @@
 	if(isnull(mob) || !istype(mob))
 		return 0
 	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 5
+		return 4
 	return ESWORD_LEAP_DIST
 
 /obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user)

@@ -167,7 +167,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.radiation += 15
+	L.radiation += 7
 	. = ..()
 
 /obj/effect/projectile/type51carbine

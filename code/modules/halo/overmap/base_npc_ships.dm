@@ -107,9 +107,12 @@
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
-	for(var/mob/living/player in GLOB.player_list)
-		if(player.z in map_z && player.stat != DEAD)
-			return //Don't disappear if there's people aboard.
+	unload_at = world.time + NPC_SHIP_LOSE_DELAY / 2
+	for(var/mob/player in GLOB.player_list)
+		if(player.stat != DEAD)
+			for(var/z_level in map_z)
+				if("[player.z]" == "[z_level]")
+					return//Don't disappear if there's people aboard.
 	for(var/obj/docking_umbilical/umbi in connectors)//Don't disappear if we're docked with something
 		if(umbi.current_connected)
 			return

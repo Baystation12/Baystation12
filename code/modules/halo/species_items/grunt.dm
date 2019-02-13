@@ -2,9 +2,6 @@
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
-	name = species.get_random_name()
-	real_name = name
-	faction = "Covenant"
 
 /datum/language/balahese
 	name = "Balahese"

@@ -22,6 +22,7 @@
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
+	default_faction = "Covenant"
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
