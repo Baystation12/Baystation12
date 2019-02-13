@@ -1399,10 +1399,8 @@ obj/item/organ/external/proc/remove_clamps()
 			var/obj/item/weapon/implant/imp = I
 			if(istype(imp) && imp.known)
 				. += "[capitalize(imp.name)] implanted"
-			else
-				unknown_body++
 		if(unknown_body)
-			. += "Unknown body present"
+			. += "Foreign body present"
 
 /obj/item/organ/external/proc/inspect(mob/user)
 	if(is_stump())
