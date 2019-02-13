@@ -1,0 +1,5 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - maptweak: "The battery backup PSU in telecomms has been moved after many Chief Engineers and Senior Engineers have complained about its disruptive location. The battery backup PSU also now recharges off of the deck 3 subgrid rather than making a loopback off of the telecomms subgrid. Grey outlines have been moved around in telecomms to be more consistent with the rest of telecomms' appearance."
+  - tweak: "All telecomms machinery and computers have been updated to use NanoUI style interfaces, bringing them in line with the majority of UI interfaces on the Torch."
