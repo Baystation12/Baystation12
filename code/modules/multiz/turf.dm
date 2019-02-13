@@ -141,7 +141,7 @@
 	return PROCESS_KILL
 
 
-/turf/simulated/open/attackby(obj/item/C as obj, mob/user as mob)
+/turf/simulated/open/attackby(obj/item/C, mob/user)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
@@ -174,7 +174,15 @@
 		var/obj/item/stack/cable_coil/coil = C
 		coil.turf_place(src, user)
 		return
-	return
+
+	for(var/atom/movable/M in below)
+		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+			return M.attackby(C, user)
+
+/turf/simulated/open/attack_hand(mob/user)
+	for(var/atom/movable/M in below)
+		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+			return M.attack_hand(user)
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
 /turf/simulated/open/is_plating()
