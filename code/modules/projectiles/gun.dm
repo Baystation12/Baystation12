@@ -181,12 +181,7 @@
 		return ..() //Pistolwhippin'
 
 /obj/item/weapon/gun/dropped(var/mob/living/user)
-	if(istype(user))
-		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && special_check(user))
-			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
-			var/list/targets = list(user)
-			targets += trange(2, src)
-			afterattack(pick(targets), user)
+	check_accidents(user)
 	update_icon()
 	return ..()
 
@@ -200,8 +195,11 @@
 		return
 
 	if(safety())
-		handle_click_empty(user)
-		return
+		if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
+			toggle_safety(user)
+		else
+			handle_click_empty(user)
+			return
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
@@ -572,3 +570,11 @@
 			if(istype(gun) && gun.can_autofire())
 				M.set_dir(get_dir(M, over_object))
 				gun.Fire(get_turf(over_object), mob, params, (get_dist(over_object, mob) <= 1), FALSE)
+
+/obj/item/weapon/gun/proc/check_accidents(mob/living/user)
+	if(istype(user))
+		if(!safety() && user.skill_fail_prob(SKILL_WEAPONS, 20, SKILL_EXPERT, 2) && special_check(user))
+			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
+			var/list/targets = list(user)
+			targets += trange(2, src)
+			afterattack(pick(targets), user)
