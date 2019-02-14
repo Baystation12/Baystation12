@@ -5,7 +5,7 @@
 ---
 
 ### LICENSE
-The code for Baystation12 is licensed under the [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), which can be found in full in LICENSE-AGPL3.txt.
+The code for Baystation12 is licensed under the [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), which can be found in full in LICENSE.txt.
 
 Code with a git authorship date prior to `1420675200 +0000` (2015/01/08 00:00) is licensed under the GNU General Public License version 3, which can be found in full in LICENSE-GPL3.txt.
 
