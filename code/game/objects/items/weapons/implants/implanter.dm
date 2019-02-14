@@ -68,6 +68,10 @@
 	if (!istype(M, /mob/living/carbon))
 		return
 	if (user && src.imp)
+		if (M == user && !imp.can_implant_self)
+			log_and_message_admins("attempted to implant themselves with the [imp], which is not allowed", user)
+			to_chat(user, "<span class='warning'>On second thought, you don't think implanting yourself with that would be a very good idea.</span>")
+			return
 		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")
 
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)

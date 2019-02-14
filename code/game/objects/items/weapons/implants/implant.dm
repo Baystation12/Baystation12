@@ -13,6 +13,7 @@
 	var/implant_color = "b"
 	var/malfunction = 0
 	var/known //if advanced scanners would name these in results
+	var/can_implant_self = TRUE // if you can self-implant this
 
 /obj/item/weapon/implant/proc/trigger(emote, source)
 	return
@@ -59,10 +60,6 @@
 		part.implants -= src
 		part = null
 	implanted = 0
-
-//Called in surgery when incision is retracted open / ribs are opened - basically before you can take implant out
-/obj/item/weapon/implant/proc/exposed()
-	return
 
 /obj/item/weapon/implant/proc/get_data()
 	return "No information available"

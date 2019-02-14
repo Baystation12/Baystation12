@@ -1001,10 +1001,6 @@ obj/item/organ/external/proc/remove_clamps()
 	if(!W)	return
 	W.open_wound(min(W.damage * 2, W.damage_list[1] - W.damage))
 
-	if(!encased)
-		for(var/obj/item/weapon/implant/I in implants)
-			I.exposed()
-
 /obj/item/organ/external/proc/fracture()
 	if(!config.bones_can_break)
 		return

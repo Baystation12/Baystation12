@@ -4,12 +4,12 @@
 	desc = "A military grade micro bio-explosive. Highly dangerous."
 	icon_state = "implant_evil"
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
+	can_implant_self = FALSE
 	var/elevel
 	var/phrase
 	var/code = 13
 	var/frequency = 1443
 	var/datum/radio_frequency/radio_connection
-	var/warning_message = "Tampering detected. Tampering detected."
 
 /obj/item/weapon/implant/explosive/get_data()
 	. = {"
@@ -39,10 +39,7 @@
 		<A href='byond://?src=\ref[src];code=-1'>-</A>
 		<A href='byond://?src=\ref[src];code=set'>[src.code]</A>
 		<A href='byond://?src=\ref[src];code=1'>+</A>
-		<A href='byond://?src=\ref[src];code=5'>+</A><BR>
-		<B>Tampering warning message:</B><BR>
-		This will be broadcasted on radio if implant is exposed during surgery.<BR>
-		<A href='byond://?src=\ref[src];msg=1'>[warning_message ? warning_message : "NONE SET"]</A>
+		<A href='byond://?src=\ref[src];code=5'>+</A>
 		"}
 
 /obj/item/weapon/implant/explosive/Initialize()
@@ -70,11 +67,6 @@
 		if(mod)
 			elevel = mod
 		interact(usr)
-	if (href_list["msg"])
-		var/msg = input("Set tampering message, or leave blank for no broadcasting.", "Anti-tampering", warning_message) as text|null
-		if(msg)
-			warning_message = msg
-		interact(usr)
 	if (href_list["phrase"])
 		var/talk = input("Set activation phrase", "Audio activation", phrase) as text|null
 		if(talk)
@@ -99,10 +91,6 @@
 	if(findtext(sanitize_phrase(msg),phrase))
 		activate()
 		qdel(src)
-
-/obj/item/weapon/implant/explosive/exposed()
-	if(warning_message)
-		GLOB.global_headset.autosay(warning_message, "Anti Tampering System")
 
 /obj/item/weapon/implant/explosive/proc/sanitize_phrase(phrase)
 	var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
