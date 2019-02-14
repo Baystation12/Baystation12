@@ -22,6 +22,7 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 /datum/species/human/spacer
 	name = SPECIES_SPACER
@@ -46,6 +47,7 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 /datum/species/human/vatgrown
 	name = SPECIES_VATGROWN

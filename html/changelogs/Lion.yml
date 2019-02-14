@@ -48,6 +48,7 @@ changes:
   - spellcheck: "Fixed engineering contractor's locker."
   - spellcheck: "Fixed windoor names in Bridge EVA."
   - spellcheck: "Fixed SCG Flags now displaying proper name and description."
+  - spellcheck: "Fixed SolGov seals on the edges of the ship displaying proper name."
   - rscdel: "Removed a bunch of alt titles from Scientist."
   - rscdel: "Removed alt titles from Synthetics."
   - rscdel: "Removed Custodian alt title for janitor."
