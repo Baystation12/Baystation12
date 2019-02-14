@@ -10793,7 +10793,7 @@
 /area/command/captainmess)
 "KZ" = (
 /obj/machinery/door/airlock/mining{
-	name = "Deck Officer";
+	name = "Deck Chief";
 	req_access = list(41);
 	req_one_access = newlist()
 	},
@@ -13440,7 +13440,7 @@
 	department = "Quartermaster's Office"
 	},
 /obj/machinery/camera/network/supply{
-	c_tag = "Supply Office - Deck Officer";
+	c_tag = "Supply Office - Deck Chief";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -15290,7 +15290,7 @@
 /area/command/captainmess)
 "WW" = (
 /obj/machinery/door/airlock/mining{
-	name = "Deck Officer";
+	name = "Deck Chief";
 	req_access = list(41);
 	req_one_access = newlist()
 	},
@@ -16311,12 +16311,12 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/brigdoor/northleft{
 	dir = 2;
-	name = "Deck Officer";
+	name = "Deck Chief";
 	req_access = list(41)
 	},
 /obj/machinery/door/window/southleft{
 	dir = 1;
-	name = "Deck Officer"
+	name = "Deck Chief"
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
