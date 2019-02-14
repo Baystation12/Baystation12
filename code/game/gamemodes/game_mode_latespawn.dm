@@ -50,7 +50,7 @@
 
 		if(spawn_antag.attempt_auto_spawn())
 			message_admins("[uppertext(name)]: Auto-added a new [spawn_antag.role_text].")
-			message_admins("There are now [spawn_antag.get_active_antag_count()]/[spawn_antag.cur_max] active [spawn_antag.role_text_plural].")
+			message_admins("There are now [spawn_antag.lifetime_spawned]/[spawn_antag.lifetime_max] active [spawn_antag.role_text_plural].")
 			next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
 			return
 

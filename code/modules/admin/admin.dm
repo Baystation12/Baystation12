@@ -1199,7 +1199,7 @@ var/global/floorIsLava = 0
 		for(var/datum/antagonist/antag in SSticker.mode.antag_templates)
 			antag.update_current_antag_max(SSticker.mode)
 			out += " <a href='?src=\ref[SSticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
-			out += " ([antag.get_antag_count()]/[antag.cur_max]) "
+			out += " ([antag.get_antag_count()]/[antag.lifetime_max]) "
 			out += " <a href='?src=\ref[SSticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
 	else
 		out += " None."

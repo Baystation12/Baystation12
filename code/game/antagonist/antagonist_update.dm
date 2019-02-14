@@ -79,9 +79,9 @@
 							qdel(I)
 
 /datum/antagonist/proc/update_current_antag_max(datum/game_mode/mode)
-	cur_max = hard_cap
-	if(mode.antag_tags && (mode.antag_tags))
-		cur_max = hard_cap_round
+	lifetime_max = hard_cap
+	if(id in mode.antag_tags)
+		lifetime_max = hard_cap_round
 
 	if(mode.antag_scaling_coeff)
 
@@ -92,4 +92,4 @@
 
 		// Minimum: initial_spawn_target
 		// Maximum: hard_cap or hard_cap_round
-		cur_max = max(initial_spawn_target,min(round(count/mode.antag_scaling_coeff),cur_max))
+		lifetime_max = max(initial_spawn_target,min(round(count/mode.antag_scaling_coeff),lifetime_max))

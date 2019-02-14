@@ -58,7 +58,8 @@
 
 	// Runtime vars.
 	var/datum/mind/leader                   // Current leader, if any.
-	var/cur_max = 0                         // Autotraitor current effective maximum.
+	var/lifetime_spawned = 0                // Number spawned in this round
+	var/lifetime_max                        // Number allowed to spawn
 	var/spawned_nuke                        // Has a bomb been spawned?
 	var/nuke_spawn_loc                      // If so, where should it be placed?
 	var/list/current_antagonists = list()   // All marked antagonists for this type.
@@ -87,7 +88,7 @@
 	..()
 
 /datum/antagonist/proc/Initialize()
-	cur_max = hard_cap
+	lifetime_max = hard_cap
 	get_starting_locations()
 	if(!role_text_plural)
 		role_text_plural = role_text
@@ -154,10 +155,9 @@
 		return 0
 
 	update_current_antag_max(SSticker.mode)
-	var/active_antags = get_active_antag_count()
-	log_debug("[uppertext(id)]: Found [active_antags]/[cur_max] active [role_text_plural].")
+	log_debug("[uppertext(id)]: There are [lifetime_spawned]/[lifetime_max] active [role_text_plural].")
 
-	if(active_antags >= cur_max)
+	if(lifetime_spawned >= lifetime_max)
 		log_debug("Could not auto-spawn a [role_text], active antag limit reached.")
 		return 0
 

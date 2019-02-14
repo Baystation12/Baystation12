@@ -19,6 +19,9 @@
 			equip(player.current)
 
 	player.current.faction = faction
+
+	lifetime_spawned++
+
 	return 1
 
 /datum/antagonist/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
