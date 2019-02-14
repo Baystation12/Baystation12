@@ -1,6 +1,6 @@
 
 #define COMMS_CUTIN_EVENT_CHANCE 10
-#define COMMS_CUTIN_EVENT_DURATION 5 MINUTES
+#define COMMS_CUTIN_EVENT_DURATION 1 MINUTES
 
 /datum/game_mode/achlys
 	name = "ONI Investigation: Achlys"
@@ -9,6 +9,7 @@
 	config_tag = "achlys"
 	votable = 1
 	probability = 0
+	antag_tags = list(MODE_ACHLYS)
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
 	var/list/items_to_destroy = list(/obj/structure/navconsole)
@@ -55,6 +56,7 @@
 
 /datum/game_mode/achlys/proc/do_special_event_handling() //Currently handles the "Comms cut-in event"
 	special_event_starttime = 0
+	command_announcement.Announce("There is a brief burst of static across the ship's intercomms as the Fresnel zone clears up, allowing radio communications.")
 	for(var/z_level = 0,z_level <= world.maxz, z_level += 1)
 		var/turf/item_spawn_turf = locate(0,0,z_level)
 		var/area/spawned_nopower_area = new /area (item_spawn_turf)
