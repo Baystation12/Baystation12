@@ -1,7 +1,7 @@
 /datum/game_mode/var/next_spawn = 0
 /datum/game_mode/var/min_autotraitor_delay = 4200  // Approx 7 minutes.
 /datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
-/datum/game_mode/var/process_count = 0
+/datum/game_mode/var/last_spawn_time = 2 HOURS // last time we'll consider spawning
 
 ///process()
 ///Called by the gameticker
@@ -11,6 +11,8 @@
 
 /datum/game_mode/proc/shall_process_autoantag()
 	if(!round_autoantag || world.time < next_spawn)
+		return FALSE
+	if(world.time > last_spawn_time)
 		return FALSE
 	if(evacuation_controller.is_evacuating() || evacuation_controller.has_evacuated())
 		return FALSE
