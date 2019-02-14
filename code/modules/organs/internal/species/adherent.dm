@@ -5,42 +5,8 @@
 	desc = "The self-contained, self-supporting internal 'brain' of an Adherent unit."
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
 	icon_state = "brain"
-	action_button_name = "Reset Ident"
 	var/next_rename
 	var/rename_delay = 15 MINUTES
-
-/obj/item/organ/internal/brain/adherent/refresh_action_button()
-	. = ..()
-	if(.)
-		action.button_icon_state = "adherent-brain"
-		if(action.button) action.button.UpdateIcon()
-
-/obj/item/organ/internal/brain/adherent/attack_self(var/mob/user)
-	. = ..()
-	if(.)
-
-		var/regex/name_regex = regex("\[A-Z\]{2}-\[A-Z\]{1} \[0-9\]{4}")
-		name_regex.Find(owner.real_name)
-
-		if(world.time < next_rename)
-			to_chat(owner, "<span class='warning'>[PROTOCOL_ARTICLE] forbids changing your ident again so soon.</span>")
-			return
-
-		var/res = name_regex.match
-		if(isnull(res))
-			to_chat(user, "<span class='warning'>Nonstandard names are not subject to real-time modification under [PROTOCOL_ARTICLE].</span>")
-			return
-
-		var/newname = sanitizeSafe(input(user, "Enter a new ident.", "Reset Ident") as text, MAX_NAME_LEN)
-		if(newname)
-			var/confirm = input(user, "Are you sure you wish your name to become [newname] [res]?","Reset Ident") as anything in list("No", "Yes")
-			if(confirm == "Yes" && owner && user == owner && !owner.incapacitated() && world.time >= next_rename)
-				next_rename = world.time + rename_delay
-				owner.real_name = "[newname] [res]"
-				if(owner.mind)
-					owner.mind.name = owner.real_name
-				owner.SetName(owner.real_name)
-				to_chat(user, "<span class='notice'>You are now designated <b>[owner.real_name]</b>.</span>")
 
 /obj/item/organ/internal/powered
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
