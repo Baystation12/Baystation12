@@ -74,7 +74,7 @@
 			loaded_pill_bottle.dropInto(loc)
 			loaded_pill_bottle = null
 	else if(href_list["close"])
-		show_browser(user, null, "window=chemmaster")
+		show_browser(user, null, "window=chem_master")
 		user.unset_machine()
 		return
 
