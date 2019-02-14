@@ -53,6 +53,7 @@ changes:
   - rscdel: "Removed alt titles from Synthetics."
   - rscdel: "Removed Custodian alt title for janitor."
   - rscdel: "Removed a few problematic random item spawns on the Aquila."
+  - rscdel: "Removed human sub-species, nabber, adherent, diona as selectable species."
   - tweak: "Renamed Scientist to Researcher."
   - tweak: "Altered Exploration Specialist's ranks from E-7 to accept E-1 through E-4."
   - maptweak: "Renamed Officer's Mess to Command Galley."
