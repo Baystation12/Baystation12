@@ -24,7 +24,7 @@
 	icon = 'code/modules/halo/turfs/covenant/floors.dmi'
 	icon_base = "Nanolaminate Flooring"
 	build_type = null
-	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_WRENCH
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
 	can_paint = null
 
 /turf/simulated/floor/drone_biomass
