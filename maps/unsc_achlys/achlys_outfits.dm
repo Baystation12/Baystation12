@@ -38,6 +38,11 @@
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
+/decl/hierarchy/outfit/job/unsc_achlys/marine/equip_id(mob/living/carbon/human/H)
+	var/obj/item/weapon/card/id/C = ..()
+	C.assignment = "Marine"
+	H.set_id_info(C)
+
 /decl/hierarchy/outfit/job/unsc_achlys/pilot
 	name = "Pilot"
 

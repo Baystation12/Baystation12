@@ -9,7 +9,6 @@
 	config_tag = "achlys"
 	votable = 1
 	probability = 0
-	antag_tags = list(MODE_ACHLYS)
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
 	var/list/items_to_destroy = list(/obj/structure/navconsole)

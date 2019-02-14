@@ -37,7 +37,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 
 /datum/spawnpoint/dante_enlisted
 	display_name =  "Dante Enlisted"
-	restrict_job = list("Marine","Squad Leader")
+	restrict_job = list("Marine","Squad Leader","ONI Operative")
 
 /datum/spawnpoint/dante_enlisted/New()
 	..()
@@ -54,6 +54,16 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	title = "Marine"
 	total_positions = 18
 	spawn_positions = 18
+	selection_color = "#0A0A95"
+	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine
+	access = list(142)
+	spawnpoint_override = "Dante Enlisted"
+	latejoin_at_spawnpoints = TRUE
+
+/datum/job/achlys/marine/operative
+	title = "ONI Operative"
+	total_positions = 6
+	spawn_positions = 6
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine
 	access = list(142)
@@ -125,7 +135,7 @@ GLOBAL_LIST_EMPTY(dante_officer_spawns)
 	latejoin_at_spawnpoints = TRUE
 
 /datum/map/unsc_achlys
-	allowed_jobs = list(/datum/job/achlys/CO,/datum/job/achlys/pilot,/datum/job/achlys/SL,/datum/job/achlys/marine,/datum/job/achlys/prisoner,/datum/job/achlys/sangheili)
+	allowed_jobs = list(/datum/job/achlys/CO,/datum/job/achlys/pilot,/datum/job/achlys/SL,/datum/job/achlys/marine,/datum/job/achlys/marine/operative,/datum/job/achlys/prisoner,/datum/job/achlys/sangheili)
 	allowed_spawns = list("Dante Officer","Dante Pilot","Dante Enlisted","Achlys Prison")
 
 	species_to_job_whitelist = list(/datum/species/sangheili = list(/datum/job/achlys/sangheili))
