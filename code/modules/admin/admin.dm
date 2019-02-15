@@ -911,10 +911,10 @@ var/global/floorIsLava = 0
 		return //alert("Round end delayed", null, null, null, null, null)
 	SSticker.round_progressing = !SSticker.round_progressing
 	if (!SSticker.round_progressing)
-		to_world("<b>The game start has been delayed.</b>")
+		to_world("<span class='centerbold'><b>***<br><br>The game start has been delayed by an admin.<br><br>***</b></span>")
 		log_admin("[key_name(usr)] delayed the game.")
 	else
-		to_world("<b>The game will start soon.</b>")
+		to_world("<span class='centerbold'><b>***<br><br>The game will start soon.<br><br>***</b></span>")
 		log_admin("[key_name(usr)] removed the delay.")
 	SSstatistics.add_field_details("admin_verb","DELAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -1004,7 +1004,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")
