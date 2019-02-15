@@ -55,7 +55,8 @@
 	to_chat(M, msg)
 	if(M.mind)
 		M.mind.store_memory("<hr>[msg]")
-
+	if(brainwashing)
+		message_admins("[key_name_admin(M)] was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].")
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
