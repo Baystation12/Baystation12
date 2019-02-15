@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	total_positions = 6
 	spawn_positions = 6
 	selection_color = "#0A0A95"
-	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine
+	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine/operative
 	access = list(142)
 	spawnpoint_override = "Dante Enlisted"
 	latejoin_at_spawnpoints = TRUE

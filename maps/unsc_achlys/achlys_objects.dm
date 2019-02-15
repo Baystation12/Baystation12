@@ -217,3 +217,6 @@
 	stored_material =  list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 0)
 	storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
 	machine_recipes = newlist(/datum/autolathe/recipe/m118_ma5b,/datum/autolathe/recipe/m255_sap_hp,/datum/autolathe/recipe/m443_fmj)
+
+/obj/item/weapon/paper/crumpled/orders
+	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means.<BR><BR>You know what must be done."

@@ -43,6 +43,20 @@
 	C.assignment = "Marine"
 	H.set_id_info(C)
 
+/decl/hierarchy/outfit/job/unsc_achlys/marine/operative
+	name = "Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/brown
+	l_pocket = /obj/item/weapon/coin/gear_req
+	r_pocket = /obj/item/weapon/paper/crumpled/orders
+	pda_slot = null
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
 /decl/hierarchy/outfit/job/unsc_achlys/pilot
 	name = "Pilot"
 
