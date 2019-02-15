@@ -170,8 +170,9 @@
 	if (get_dist(user, src) > 1)
 		to_chat(user, "<span class='warning'>You can't reach \the [src] from here.</span>")
 		return
-	if(ishuman(user) && user:gloves)
-		to_chat(user, "<b>You touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
+	var/bodypart = user.hand ? BP_R_HAND : BP_L_HAND
+	if(ishuman(user) && user.get_covering_equipped_item(bodypart))
+		to_chat(user, "<b>You touch [src]</b> with your covered hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
 		return
 
 	src.add_fingerprint(user)
