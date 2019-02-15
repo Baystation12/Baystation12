@@ -260,3 +260,15 @@
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat.This one appears to have been heavily modified per the user's tactical needs."
 	icon_state = "stingray-spartanarmor_obj"
 	item_state = "stingray-spartanarmor_worn"
+
+//PinStripe Donator item
+
+/obj/item/clothing/head/helmet/spartan/pinstripe
+	name = "MJOLNIR Powered Assault Armor Helmet Mark VI"
+	icon_state = "pinstripe-spartanhelm_obj"
+	item_state = "pinstripe-spartanhelm_worn"
+
+/obj/item/clothing/suit/armor/special/spartan/pinstripe
+	name = "MJOLNIR Powered Assault Armor Mark VI"
+	icon_state = "pinstripe-spartanarmor_obj"
+	item_state = "pinstripe-spartanarmor_worn"
