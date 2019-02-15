@@ -22,7 +22,7 @@
 	syllables = list("squick","croak")
 	shorthand = "SM"
 
-/datum/language/tajaran/monkey
+/datum/language/xenos/monkey
 	name = "Farwa"
 	desc = "Meow meow meow."
 	key = "9"
