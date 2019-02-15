@@ -353,7 +353,9 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/notify_delay()
 	if(!delay_notified)
-		to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+		to_world("<hr>")
+		to_world("<span class='centerbold'>An admin has delayed the round end</span>")
+		to_world("<hr>")
 	delay_notified = 1
 
 /datum/controller/subsystem/ticker/proc/handle_tickets()
