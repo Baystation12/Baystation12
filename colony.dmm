@@ -304,6 +304,7 @@
 "fR" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 8},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
 "fS" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 4},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
 "fT" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 1},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
+"fU" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/structure/table/marble,/obj/item/weapon/reagent_containers/food/condiment/flour,/obj/item/weapon/material/kitchen/rollingpin,/obj/item/weapon/material/kitchen/utensil/knife,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
 "fV" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 5},/obj/effect/floor_decal/corner/green{dir = 8},/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
 "fW" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 8},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
 "fX" = (/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 1},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
@@ -520,8 +521,7 @@
 "ka" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/table/marble,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/reagent_containers/food/condiment/ketchup,/obj/item/weapon/reagent_containers/food/condiment/soysauce,/obj/item/weapon/reagent_containers/food/condiment/barbecue,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
 "kb" = (/obj/effect/floor_decal/techfloor{icon_state = "techfloor_edges"; dir = 10},/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/tiled/techfloor,/area/map_template/colony)
 "kc" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1; layer = 2.4; level = 2},/obj/structure/table/marble,/obj/machinery/microwave,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
-"kd" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/structure/table/marble,/obj/item/weapon/reagent_containers/food/condiment/flour,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
-"ke" = (/obj/machinery/light,/obj/item/device/radio/intercom{dir = 1; pixel_y = -28},/obj/structure/table/marble,/obj/item/weapon/material/kitchen/rollingpin,/obj/item/weapon/material/kitchen/utensil/knife,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
+"kd" = (/obj/machinery/light,/obj/item/device/radio/intercom{dir = 1; pixel_y = -28},/obj/machinery/gibber,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
 "kf" = (/obj/machinery/power/apc{dir = 2; locked = 0; name = "south bump"; operating = 1; pixel_y = -28},/obj/structure/cable,/turf/simulated/floor/tiled/freezer,/area/map_template/colony/commons)
 "kg" = (/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/door/airlock/glass/security,/turf/simulated/floor/lino,/area/map_template/colony)
 "kh" = (/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/obj/machinery/meter,/obj/effect/floor_decal/corner_techfloor_grid{icon_state = "corner_techfloor_grid"; dir = 5},/turf/simulated/floor/tiled/techfloor,/area/map_template/colony/atmospherics)
@@ -815,8 +815,8 @@ hqkDgMgkgOkJiliBgZhaiNiKhdaFhEhGhJhkhnhfhphhhthvhNfafbhOaIaIiOiPaIiRaIaKaKjKaacs
 aFaFaFaFaFaFaFaFaFaFaFaFaFaFaOhwhAaPaPaPaPaPaPaPjRaohWhYaQjajbjbjcjeaSfcfcfcaacs
 aUjvhLaUieifhRhChQiniuivixhMlsicibaPjkaPidaPijaPksaodtiEaQjjjljsjtjulyfcaaaaaacs
 aUiAishViGiTiziUiHiIiXiJkFiZhRiLihaPbyaPOtaPbyaPjdjpdphOaQkajbjEjbjGlyfcaaaaaacs
-aUiiiSaUkXjfhRjhjijmjojrjyjzlsjgirjFjHjIjJjwjLjnjMkTjqjNaQkdjbjEjbkcaSfcajaaaacs
-aUkpjxaUjOjShRhRhRhRhRjAhRhRhRjBjPaPioiyipjDlIaPjQlkaoyNaQkejbkfjbkEkubaajajaacs
+aUiiiSaUkXjfhRjhjijmjojrjyjzlsjgirjFjHjIjJjwjLjnjMkTjqjNaQfUjbjEjbkcaSfcajaaaacs
+aUkpjxaUjOjShRhRhRhRhRjAhRhRhRjBjPaPioiyipjDlIaPjQlkaoyNaQkdjbkfjbkEkubaajajaacs
 aUkrjWaUjXjVhRjZoNkOhrlfljoDljllhAaPaPaPaPaPaPaPlmaolphOklklkmklkxklklbabaajaacs
 aUaUitaUjXjYhRlWdulOjTlPoEoFgDdulYiCdqdrfXoGoHiDmydugaiEjUkUmFlEmHlqldMdlBfcaacs
 aUmImJaUmKmLhRmMmNkvhrmAoIlrhomRmSkbhodwhuoIoJiFmTmUmVmWngoKoLoMmXkWYVKKlBfcaacs
