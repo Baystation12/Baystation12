@@ -10499,7 +10499,7 @@
 	dir = 2;
 	pixel_y = 22
 	},
-/mob/living/silicon/decoy{
+/obj/structure/decoy{
 	name = "A.L.I.C.E."
 	},
 /turf/unsimulated/floor{
@@ -15151,7 +15151,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/syndicate_elite/mothership)
 "aJq" = (
-/mob/living/silicon/decoy{
+/obj/structure/decoy{
 	icon_state = "ai-malf";
 	name = "GLaDOS"
 	},

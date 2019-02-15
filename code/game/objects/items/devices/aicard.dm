@@ -10,13 +10,6 @@
 
 	var/mob/living/silicon/ai/carded_ai
 
-/obj/item/weapon/aicard/attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
-	if (!istype (M, /mob/living/silicon/decoy))
-		return ..()
-	else
-		M.death()
-		to_chat(user, "<b>ERROR ERROR ERROR</b>")
-
 /obj/item/weapon/aicard/attack_self(mob/user)
 
 	ui_interact(user)
