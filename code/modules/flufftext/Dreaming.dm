@@ -11,7 +11,7 @@ var/list/dreams = list(
 	"a cargo technician","the botanist","a shaft miner","the psychologist","the chemist",
 	"the virologist","the roboticist","a chef","the bartender","a chaplain","a librarian","a mouse",
 	"a beach","the holodeck","a smokey room","a voice","the cold","a mouse","an operating table","the rain","a skrell",
-	"an unathi","the ai core","a beaker of strange liquid","the supermatter", "a creature built completely of stolen flesh",
+	"an unathi","a tajaran","the ai core","a beaker of strange liquid","the supermatter", "a creature built completely of stolen flesh",
 	"a GAS", "a IPC", "a Dionaea", "a being made of light", "the commanding officer", "the executive officer", "the chief of security", "the corporate liason",
 	"the representative", "the senior advisor", "the bridge officer", "the senior engineer", "the physician", "the corpsman", "the counselor",
 	"the medical contractor", "the security contractor", "the stowaway", "an old friend", "the prospector", "the pilot", "the passenger", "the chief of security",

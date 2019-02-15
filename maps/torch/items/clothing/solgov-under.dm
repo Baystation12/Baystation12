@@ -46,7 +46,12 @@
 	item_state = "bl_suit"
 	worn_state = "blackutility"
 	sprite_sheets = list(
+<<<<<<< HEAD
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+=======
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+>>>>>>> parent of 3a4d0fbae8... Removes Tajaran
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary
@@ -55,7 +60,12 @@
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
 	sprite_sheets = list(
+<<<<<<< HEAD
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+=======
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+>>>>>>> parent of 3a4d0fbae8... Removes Tajaran
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt
@@ -64,7 +74,12 @@
 	icon_state = "blackservicefem"
 	worn_state = "blackservicefem"
 	sprite_sheets = list(
+<<<<<<< HEAD
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+=======
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/uniform.dmi'
+>>>>>>> parent of 3a4d0fbae8... Removes Tajaran
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer

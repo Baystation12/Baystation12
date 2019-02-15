@@ -11,7 +11,15 @@
 
 	antaghud_offset_y = 8
 
+<<<<<<< HEAD:code/modules/species/station/nabber.dm
 	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
+=======
+	language = LANGUAGE_NABBER
+	default_language = LANGUAGE_NABBER
+	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
+	additional_langs = list(LANGUAGE_GALCOM)
+	name_language = LANGUAGE_NABBER
+>>>>>>> parent of 3a4d0fbae8... Removes Tajaran:code/modules/mob/living/carbon/human/species/station/nabber.dm
 	min_age = 8
 	max_age = 40
 

@@ -103,7 +103,7 @@
 	..()
 	H.item_state = lowertext(name)
 
-/datum/species/monkey/alien
+/datum/species/monkey/tajaran
 	name = "Farwa"
 	name_plural = "Farwa"
 	health_hud_intensity = 2
@@ -111,6 +111,11 @@
 	icobase = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
 	deform = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
 
+<<<<<<< HEAD:code/modules/species/station/monkey.dm
+=======
+	greater_form = "Tajaran"
+	default_language = "Farwa"
+>>>>>>> parent of 3a4d0fbae8... Removes Tajaran:code/modules/mob/living/carbon/human/species/station/monkey.dm
 	flesh_color = "#afa59e"
 	base_color = "#333333"
 	tail = "farwatail"

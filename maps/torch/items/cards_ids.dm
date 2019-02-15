@@ -223,7 +223,7 @@
 	..()
 	var/species = SPECIES_HUMAN
 	if(prob(10))
-		species = pick(SPECIES_SKRELL,SPECIES_IPC)
+		species = pick(SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_IPC)
 	var/datum/species/S = all_species[species]
 	var/decl/cultural_info/culture/C = SSculture.get_culture(S.default_cultural_info[TAG_CULTURE])
 	var/gender = pick(MALE,FEMALE)

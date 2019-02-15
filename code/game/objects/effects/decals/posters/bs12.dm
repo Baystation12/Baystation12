@@ -217,7 +217,7 @@
 /decl/poster/bay_44
 	icon_state="bsposter44"
 	name = "Time for a drink?"
-	desc = "This poster depicts a friendly-looking alien holding a tray of drinks."
+	desc = "This poster depicts a friendly-looking Tajara holding a tray of drinks."
 
 /decl/poster/bay_45
 	icon_state="bsposter45"

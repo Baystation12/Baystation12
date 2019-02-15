@@ -30,6 +30,17 @@
 		/decl/emote/human/stopsway
 		)
 
+/datum/species/tajaran
+	default_emotes = list(
+		/decl/emote/human/swish,
+		/decl/emote/human/wag,
+		/decl/emote/human/sway,
+		/decl/emote/human/qwag,
+		/decl/emote/human/fastsway,
+		/decl/emote/human/swag,
+		/decl/emote/human/stopsway
+		)
+
 /datum/species/nabber
 	default_emotes = list(
 		/decl/emote/audible/bug_hiss,

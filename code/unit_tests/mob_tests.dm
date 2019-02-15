@@ -292,6 +292,40 @@ datum/unit_test/mob_damage/unathi/halloss
 	damagetype = PAIN
 
 // =================================================================
+// SpessKahjit aka Tajaran
+// =================================================================
+
+datum/unit_test/mob_damage/tajaran
+	name = "MOB: Tajaran damage check template"
+	mob_type = /mob/living/carbon/human/tajaran
+
+datum/unit_test/mob_damage/tajaran/brute
+	name = "MOB: Tajaran Brute Damage Check"
+	damagetype = BRUTE
+	expected_vulnerability = EXTRA_VULNERABLE
+
+datum/unit_test/mob_damage/tajaran/fire
+	name = "MOB: Tajaran Fire Damage Check"
+	damagetype = BURN
+	expected_vulnerability = EXTRA_VULNERABLE
+
+datum/unit_test/mob_damage/tajaran/tox
+	name = "MOB: Tajaran Toxins Damage Check"
+	damagetype = TOX
+
+datum/unit_test/mob_damage/tajaran/oxy
+	name = "MOB: Tajaran Oxygen Damage Check"
+	damagetype = OXY
+
+datum/unit_test/mob_damage/tajaran/clone
+	name = "MOB: Tajaran Clone Damage Check"
+	damagetype = CLONE
+
+datum/unit_test/mob_damage/tajaran/halloss
+	name = "MOB: Tajaran Halloss Damage Check"
+	damagetype = PAIN
+
+// =================================================================
 // Skrell
 // =================================================================
 

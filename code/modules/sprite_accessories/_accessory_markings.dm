@@ -12,7 +12,7 @@
 	var/layer_blend = ICON_OVERLAY
 
 	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
-	//like IPC optics overlay stuff.
+	//like Tajara inner-ear coloring overlay stuff.
 	species_allowed = list()
 
 	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines

@@ -38,6 +38,10 @@
 	h_style = "Skrell Male Tentacles"
 	..(new_loc, SPECIES_SKRELL)
 
+/mob/living/carbon/human/tajaran/New(var/new_loc)
+	h_style = "Tajaran Ears"
+	..(new_loc, SPECIES_TAJARA)
+
 /mob/living/carbon/human/unathi/New(var/new_loc)
 	h_style = "Unathi Horns"
 	..(new_loc, SPECIES_UNATHI)
