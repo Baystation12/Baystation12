@@ -160,3 +160,7 @@
 
 /datum/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL|ORGAN_ROBOTIC)
+
+/datum/species/adherent/check_can_slip(mob/living/carbon/human/H)
+	if(!can_fall(H))
+		return TRUE
