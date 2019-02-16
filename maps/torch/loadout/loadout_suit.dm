@@ -25,11 +25,11 @@
 /datum/gear/suit/science_poncho
 	allowed_roles = list(/datum/job/scientist, /datum/job/senior_scientist, /datum/job/scientist_assistant)
 	allowed_branches = CIVILIAN_BRANCHES
-
+/*
 /datum/gear/suit/nanotrasen_poncho
 	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant, /datum/job/senior_scientist, /datum/job/merchant)
 	allowed_branches = CIVILIAN_BRANCHES
-
+*/
 /datum/gear/suit/cargo_poncho
 	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
 
@@ -53,7 +53,7 @@
 /datum/gear/suit/labcoat_corp
 	allowed_roles = STERILE_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
-
+/*
 /datum/gear/suit/labcoat_ec
 	display_name = "labcoat, Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
@@ -69,7 +69,7 @@
 	display_name = "winter coat, DAIS"
 	allowed_roles = list(/datum/job/scientist_assistant, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/rd)
 	allowed_branches = CIVILIAN_BRANCHES
-
+*/
 /datum/gear/suit/coat
 	allowed_branches = CIVILIAN_BRANCHES
 

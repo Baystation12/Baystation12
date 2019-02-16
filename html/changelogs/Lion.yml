@@ -45,3 +45,4 @@ changes:
   - bugfix: "Fixes civilian crewman spawning with incorrect outfit."
   - wip: "Added a foundation for autoreplies. Frequently asked questions will receive their own autoreplies for the convenience of staff."
   - rscdel: "Disables foreign jobs."
+  - rscdel: "Removes a bunch of unnecessary loadout options."
