@@ -43,7 +43,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
-	head = /obj/item/clothing/head/soft/solgov/expedition/co
+//	head = /obj/item/clothing/head/soft/solgov/expedition/co
 	id_type = /obj/item/weapon/card/id/torch/gold
 	pda_type = /obj/item/modular_computer/pda/captain
 
@@ -82,6 +82,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
 	name = OUTFIT_JOB_NAME("Chief Medical Officer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/cmo/civilian
+	name = OUTFIT_JOB_NAME("Chief Medical Officer - Civilian")
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/lilac
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
