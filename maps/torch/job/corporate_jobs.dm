@@ -2,8 +2,8 @@
 	title = "Foreign Diplomat"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
 	selection_color = "#2f2f7f"
 	economic_power = 15
@@ -36,8 +36,8 @@
 	title = "Foreign Protection Agent"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the Foreign Diplomat"
 	selection_color = "#3d3d7f"
 	economic_power = 12

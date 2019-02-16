@@ -35,4 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Adds a new type of RIPLEY, specifically used in warehouses. Does not have a drill, and exclusively spawns near them only."
   - tweak: "Made the delay round notification noticeable."
-  
+  - rscdel: "Disables foreign jobs."
