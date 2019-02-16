@@ -103,6 +103,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/civ
+	name = OUTFIT_JOB_NAME("Chief Engineer - Civilian")
+	uniform = /obj/item/clothing/under/rank/chief_engineer
+	shoes = /obj/item/clothing/shoes/workboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/cos
 	name = OUTFIT_JOB_NAME("Chief of Security")
 	l_ear = /obj/item/device/radio/headset/heads/cos

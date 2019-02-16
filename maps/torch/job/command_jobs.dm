@@ -181,7 +181,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	allowed_branches = list(
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet,
-		/datum/mil_branch/civilian
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/civ
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o3,
