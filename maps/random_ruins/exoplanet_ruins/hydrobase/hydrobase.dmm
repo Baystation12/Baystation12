@@ -1390,8 +1390,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/mob/living/silicon/decoy{
-	faction = "farmbots";
+/obj/structure/decoy{
 	icon_state = "ai-crash";
 	name = "inactive AI"
 	},
