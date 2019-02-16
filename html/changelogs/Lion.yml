@@ -38,4 +38,5 @@ changes:
   - tweak: "Alters join text."
   - soundadd: "New sound for votes. Less ear-rape."
   - soundadd: "New sound for incoming adminhelps and received replies. Less ear-rape."
+  - bugfix: "Fixed senior researcher spawning with the incorrect uniform."
   - rscdel: "Disables foreign jobs."
