@@ -388,6 +388,10 @@
 	name = "\improper Infirmary"
 	icon_state = "direction_infirm"
 
+/obj/structure/sign/directions/wh
+	name = "\improper Warehouse"
+	icon_state = "direction_wh"
+
 /obj/structure/sign/directions/examroom
 	name = "\improper Exam Room"
 	icon_state = "examroom"
