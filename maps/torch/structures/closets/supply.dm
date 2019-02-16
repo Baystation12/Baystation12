@@ -146,6 +146,6 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 
-/obj/structure/closet/medical_wall/filled/WillContain()
+/obj/structure/closet/jacket_wall/filled/WillContain()
 	return list(
 		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo = 2)
