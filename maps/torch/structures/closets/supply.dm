@@ -124,3 +124,28 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
+
+
+/obj/structure/closet/secure_closet/sandros/rations
+	name = "rations locker"
+	req_access = list(access_cargo)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo
+
+/obj/structure/closet/secure_closet/sandros/rations/WillContain()
+	return list(
+		/obj/random/mre = 10
+	)
+
+/obj/structure/closet/jacket_wall //wall mounted jacket closet
+	name = "jacket closet"
+	desc = "It's a wall-mounted storage unit for jackets to protect against the cold."
+	closet_appearance =/decl/closet_appearance/wall/shipping
+	anchored = 1
+	density = 0
+	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
+	setup = 0
+
+/obj/structure/closet/medical_wall/filled/WillContain()
+	return list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo = 2)
