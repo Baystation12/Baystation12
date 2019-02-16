@@ -37,9 +37,7 @@
 	salary_modifier = 0.2
 
 /datum/map/overmap_example/map_info(victim)
-	to_chat(victim, "Welcome aboard the TRCV Sandros, a Colony Vessel with the purpose of colonizing a new planetary body in undiscovered space. Something strange happened though...
-The Vessel is staffed by a mixture of Civilian and TRDF Personnel.
-This area of space is uncharged, and away from TRDF territories. The likelihood of encountering any civilized humans in this part of space is null, and no known governments or species hold these systems.")
+	to_chat(victim, "Welcome aboard the TRCV Sandros, a Colony Vessel with the purpose of colonizing a new planetary body in undiscovered space. Something strange happened though... <br>The Vessel is staffed by a mixture of Civilian and TRDF Personnel.<br> This area of space is uncharged, and away from TRDF territories. The likelihood of encountering any civilized humans in this part of space is null, and no known governments or species hold these systems.")
 
 /datum/map/overmap_example/setup_map()
 	..()
