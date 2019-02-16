@@ -36,4 +36,6 @@ changes:
   - rscadd: "Adds a new type of RIPLEY, specifically used in warehouses. Does not have a drill, and exclusively spawns near them only."
   - tweak: "Made the delay round notification noticeable."
   - tweak: "Alters join text."
+  - soundadd: "New sound for votes. Less ear-rape."
+  - soundadd: "New sound for incoming adminhelps and received replies. Less ear-rape."
   - rscdel: "Disables foreign jobs."

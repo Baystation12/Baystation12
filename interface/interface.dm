@@ -22,7 +22,7 @@
 	else
 		to_chat(src, "<span class='warning'>The github URL is not set in the server configuration.</span>")
 	return
-
+/*
 /client/verb/bugreport()
 	set name = "Bug Report"
 	set desc = "Visit the GitHub repository to report an issue or bug."
@@ -34,7 +34,7 @@
 	else
 		to_chat(src, "<span class='warning'>The issue report URL is not set in the server configuration.</span>")
 	return
-
+*/
 /client/verb/forum()
 	set name = "Forum"
 	set desc = "Visit the forum."
