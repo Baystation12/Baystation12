@@ -42,5 +42,6 @@ changes:
   - bugfix: "Fixed senior researcher spawning with the incorrect uniform."
   - bugfix: "Fixes chief engineer spawning with regular fleet outfit on civilian rank."
   - bugfix: "Fixes chief medical officer now spawning with scrubs on civilian rank."
+  - bugfix: "Fixes civilian crewman spawning with incorrect outfit."
   - wip: "Added a foundation for autoreplies. Frequently asked questions will receive their own autoreplies for the convenience of staff."
   - rscdel: "Disables foreign jobs."

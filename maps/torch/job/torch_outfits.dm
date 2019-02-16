@@ -31,6 +31,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger
 	uniform = /obj/item/clothing/under/solgov/utility
 
+/decl/hierarchy/outfit/job/torch/passenger/civ
+	name = OUTFIT_JOB_NAME("Torch Passenger")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger
+	uniform = /obj/item/clothing/under/solgov/utility
+
 //Command Outfits
 /decl/hierarchy/outfit/job/torch/crew/command
 	name = OUTFIT_JOB_NAME("Torch Command Outfit")
@@ -527,6 +532,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
 	name = OUTFIT_JOB_NAME("Crewman - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/crewman/civilian
+	name = OUTFIT_JOB_NAME("Crewman - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/civilian
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Exploration Outfits

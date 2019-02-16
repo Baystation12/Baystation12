@@ -73,6 +73,8 @@
 	icon_state = "blackservicefem_com"
 	worn_state = "blackservicefem_com"
 
+/obj/item/clothing/under/solgov/utility/civilian
+
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command)
 
@@ -133,6 +135,9 @@
 	icon_state = "navyutility"
 	item_state = "jensensuit"
 	worn_state = "navyutility"
+
+/obj/item/clothing/under/solgov/utility/fleet/civilian
+	starting_accessories = list()
 
 /obj/item/clothing/under/solgov/utility/fleet/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)

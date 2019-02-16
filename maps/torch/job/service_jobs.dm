@@ -85,7 +85,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet,
-		/datum/mil_branch/civilian
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/service/crewman/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e1,
