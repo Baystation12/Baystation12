@@ -400,6 +400,10 @@
 	name = "\improper Bridge Deck"
 	icon_state = "deck-b"
 
+/obj/structure/sign/deck/shuttle
+	name = "\improper Shuttle Deck"
+	icon_state = "deck-s"
+
 /obj/structure/sign/deck/first
 	name = "\improper First Deck"
 	icon_state = "deck-1"
