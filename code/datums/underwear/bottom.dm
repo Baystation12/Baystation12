@@ -75,19 +75,19 @@
 	underwear_name = "thong"
 	icon_state = "thong"
 	has_color = TRUE
-
+/*
 /datum/category_item/underwear/bottom/expedition_pt_shorts
 	name = "PT shorts, Expeditionary Corps"
 	icon_state = "expedition_shorts"
-
+*/
 /datum/category_item/underwear/bottom/fleet_pt_shorts
 	name = "PT shorts, Fleet"
 	icon_state = "fleet_shorts"
-
+/*
 /datum/category_item/underwear/bottom/army_pt_shorts
 	name = "PT shorts, Army"
 	icon_state = "army_shorts"
-
+*/
 /datum/category_item/underwear/bottom/longjon
 	name = "Long John Bottoms"
 	underwear_name = "long johns"

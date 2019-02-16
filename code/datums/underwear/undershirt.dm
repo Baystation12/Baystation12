@@ -59,15 +59,15 @@
 	name = "Shirt, button down"
 	icon_state = "shirt_long_s"
 	has_color = TRUE
-
+/*
 /datum/category_item/underwear/undershirt/shirt_expedition
 	name = "Shirt, Expeditionary Corps"
 	icon_state = "expedition_s"
-
+*/
 /datum/category_item/underwear/undershirt/shirt_heart
 	name = "Shirt, heart"
 	icon_state = "lover_s"
-
+/*
 /datum/category_item/underwear/undershirt/shirt_love_nt
 	name = "Shirt, I<3NT"
 	icon_state = "lover_s"
@@ -79,7 +79,7 @@
 /datum/category_item/underwear/undershirt/shirt_nt
 	name = "Shirt, NT"
 	icon_state = "shirt_nano_s"
-
+*/
 /datum/category_item/underwear/undershirt/shortsleeve_shirt
 	name = "Shortsleeve shirt"
 	icon_state = "shortsleeve"
@@ -174,7 +174,7 @@
 	name = "Tank top, Fleet, Female"
 	underwear_name = "tanktop"
 	icon_state = "tank_fleet_female_s"
-
+/*
 /datum/category_item/underwear/undershirt/army_female
 	name = "Shirt, Army, Female"
 	icon_state = "army_female_s"
@@ -182,15 +182,15 @@
 /datum/category_item/underwear/undershirt/expedition_female
 	name = "Shirt, Expeditionary Corps, Female"
 	icon_state = "expedition_female_s"
-
+*/
 /datum/category_item/underwear/undershirt/polo_corp
-	name = "Polo, corporate"
+	name = "Polo, Science"
 	icon_state = "corp_polo"
-
+/*
 /datum/category_item/underwear/undershirt/polo_nt
 	name = "Polo, NanoTrasen"
 	icon_state = "ntpolo"
 
 /datum/category_item/underwear/undershirt/polo_dais
 	name = "Polo, Deimos Advanced Information Systems"
-	icon_state = "dais_polo"
+	icon_state = "dais_polo" */
