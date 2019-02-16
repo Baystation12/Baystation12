@@ -21,7 +21,7 @@
 		/datum/species/diona      = list(),
 		/datum/species/nabber     = list(),
 		/datum/species/skrell     = list(),
-		/datum/species/unathi     = list(),
+		/datum/species/unathi     = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian),
 		/datum/species/vox        = list(),
 		/datum/species/adherent   = list()
 	)

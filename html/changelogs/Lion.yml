@@ -38,6 +38,7 @@ changes:
   - tweak: "Alters join text."
   - tweak: "Captain now spawns without a hat."
   - tweak: "All patches were renamed to a proper alternative."
+  - tweak: "Unathi can now join jobs again."
   - soundadd: "New sound for votes. Less ear-rape."
   - soundadd: "New sound for incoming adminhelps and received replies. Less ear-rape."
   - bugfix: "Fixed senior researcher spawning with the incorrect uniform."
