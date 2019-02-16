@@ -823,3 +823,6 @@ default behaviour is:
 		var/atom/movable/A = thing
 		if(A.simulated && !A.waterproof)
 			A.water_act(depth)
+
+/mob/living/proc/needs_wheelchair()
+	return FALSE
