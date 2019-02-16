@@ -87,7 +87,7 @@
 	#include "loadout/loadout_shoes.dm"
 	#include "loadout/loadout_suit.dm"
 	#include "loadout/loadout_uniform.dm"
-	#include "loadout/loadout_xeno.dm"
+//	#include "loadout/loadout_xeno.dm"
 	#include "loadout/~defines.dm"
 
 	#include "torch-0.dmm"

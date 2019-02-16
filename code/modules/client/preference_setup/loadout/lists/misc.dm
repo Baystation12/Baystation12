@@ -1,7 +1,7 @@
 /datum/gear/cane
 	display_name = "cane"
 	path = /obj/item/weapon/cane
-
+/*
 /datum/gear/union_card
 	display_name = "union membership"
 	path = /obj/item/weapon/card/union
@@ -11,7 +11,7 @@
 	if(.)
 		var/obj/item/weapon/card/union/card = .
 		card.signed_by = H.real_name
-
+*/
 /datum/gear/dice
 	display_name = "dice pack"
 	path = /obj/item/weapon/storage/pill_bottle/dice
@@ -102,12 +102,12 @@
 	plushes["spider plush"] = /obj/item/toy/plushie/spider
 	plushes["farwa plush"] = /obj/item/toy/plushie/farwa
 	gear_tweaks += new /datum/gear_tweak/path(plushes)
-
+/*
 /datum/gear/workvisa
 	display_name = "work visa"
 	description = "A work visa issued by the Sol Central Government for the purpose of work."
 	path = /obj/item/weapon/paper/workvisa
-
+*/
 /datum/gear/mirror/
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"

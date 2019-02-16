@@ -536,7 +536,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/crewman/civilian
 	name = OUTFIT_JOB_NAME("Crewman - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/civilian
+	uniform = /datum/gear/uniform/utility
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Exploration Outfits

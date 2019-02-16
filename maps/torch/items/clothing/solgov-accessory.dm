@@ -68,15 +68,15 @@ medals
 	icon_state = "white_heart"
 
 /obj/item/clothing/accessory/solgov/torch_patch
-	name = "\improper Torch mission patch"
-	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
+	name = "\improper mission patch"
+	desc = "A Patch given to all personnel from the fleet working on the Sandros Mission. Worn on the left sleeve of your utility uniform."
 	icon_state = "torchpatch"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)
-
+/*
 /obj/item/clothing/accessory/solgov/ec_patch
 	name = "\improper Observatory patch"
 	desc = "A laminated shoulder patch, carrying the symbol of the Sol Central Government Expeditionary Corpss Observatory, or SCGEO for short, the eyes and ears of the Expeditionary Corps' missions."
@@ -88,32 +88,32 @@ medals
 	name = "\improper Field Operations patch"
 	desc = "A radiation-shielded shoulder patch, carrying the symbol of the Sol Central Government Expeditionary Corps Field Operations, or SCGECFO for short, the hands-on workers of every Expeditionary Corps mission."
 	icon_state = "ecpatch2"
-
+*/
 /obj/item/clothing/accessory/solgov/fleet_patch
-	name = "\improper First Fleet patch"
-	desc = "A fancy shoulder patch carrying insignia of First Fleet, the Sol Guard, stationed in Sol."
+	name = "\improper TF73 patch"
+	desc = "A Patch denoting service in Task Force 73, famous for their bulwark to defend human colonies during the First Contact War."
 	icon_state = "fleetpatch1"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/solgov/fleet_patch/second
-	name = "\improper Second Fleet patch"
-	desc = "A well-worn shoulder patch carrying insignia of Second Fleet, the Home Guard, tasked with defense of Sol territories."
+	name = "\improper 11th AC Patch"
+	desc = "A Patch denoting service in the 11th Assault Corps, primarily known for their ground assault training."
 	icon_state = "fleetpatch2"
 
 /obj/item/clothing/accessory/solgov/fleet_patch/third
-	name = "\improper Third Fleet patch"
-	desc = "A scuffed shoulder patch carrying insignia of Third Fleet, the Border Guard, guarding borders of Sol territory against Vox and pirates."
+	name = "\improper 1st SF Patch"
+	desc = "A Patch denoting service in the 1st Surveyor Fleet. Famed for their explorations and science personnel, and for their advancement of technology and requisitions fields."
 	icon_state = "fleetpatch3"
 
 /obj/item/clothing/accessory/solgov/fleet_patch/fourth
-	name = "\improper Fourth Fleet patch"
-	desc = "A pristine shoulder patch carrying insignia of Fourth Fleet, stationed on Skrell border."
+	name = "\improper 214th SOG Patch"
+	desc = "A Patch denoting service in the 214th Special Operations Group. Famed for their hit-and-run tactics behind enemy lines, Force Recon tactics, and defensive holds."
 	icon_state = "fleetpatch4"
 
 /obj/item/clothing/accessory/solgov/fleet_patch/fifth
-	name = "\improper Fifth Fleet patch"
-	desc = "A tactical shoulder patch carrying insignia of Fifth Fleet, the Quick Reaction Force, recently formed and outfited with last tech."
+	name = "\improper Lucky 7th Patch"
+	desc = "A Patch denoting service in the ''Lucky'' 7th Fleet. Famed for their spearhead into enemy lines during the First Contact War. The best that Humanity has to offer."
 	icon_state = "fleetpatch5"
 
 /******

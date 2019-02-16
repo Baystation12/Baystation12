@@ -304,28 +304,28 @@
 	icon_state = "beret_whiterim_com"
 
 /obj/item/clothing/head/beret/solgov/fleet/branch
-	name = "first fleet beret"
-	desc = "An SCG Fleet beret carrying insignia of First Fleet, the Sol Guard, stationed in Sol. For personnel that are more inclined towards style than safety."
+	name = "TF73 beret"
+	desc = "A Beret denoting service in the fleet. It has the Insignia of Task Force 73 upon it."
 	icon_state = "beret_navy_first"
 
 /obj/item/clothing/head/beret/solgov/fleet/branch/second
-	name = "second fleet beret"
-	desc = "An SCG Fleet beret carrying insignia of Second Fleet, the Home Guard, tasked with defense of Sol territories. For personnel that are more inclined towards style than safety."
+	name = "11th AC Beret"
+	desc = "A Beret denoting service in the fleet. It has the Insignia of the 11th Assault Corps on it."
 	icon_state = "beret_navy_second"
 
 /obj/item/clothing/head/beret/solgov/fleet/branch/third
-	name = "third fleet beret"
-	desc = "An SCG Fleet beret carrying insignia of Third Fleet, the Border Guard, guarding borders of Sol territory against Vox and pirates. For personnel that are more inclined towards style than safety."
+	name = "1st SF Beret"
+	desc = "A Beret denoting service in the fleet. It has the insignia of the 1st Surveyor Fleet on it."
 	icon_state = "beret_navy_third"
 
 /obj/item/clothing/head/beret/solgov/fleet/branch/fourth
-	name = "fourth fleet beret"
-	desc = "An SCG Fleet beret carrying insignia of Fourth Fleet, stationed on Skrell border. For personnel that are more inclined towards style than safety."
+	name = "214th SOG Beret"
+	desc = "A Beret denoting service in the fleet. It has the insignia of the 214th Special Operations Group on it."
 	icon_state = "beret_navy_fourth"
 
 /obj/item/clothing/head/beret/solgov/fleet/branch/fifth
-	name = "fifth fleet beret"
-	desc = "An SCG Fleet beret carrying insignia of Fifth Fleet, the Quick Reaction Force, recently formed and outfited with last tech. For personnel that are more inclined towards style than safety."
+	name = "Lucky 7th Beret"
+	desc = "A Beret denoting service in the fleet. IT has the insignia of the ''Lucky'' 7th Fleet on it."
 	icon_state = "beret_navy_fifth"
 
 //ushanka
@@ -396,7 +396,7 @@
 
 /obj/item/clothing/head/helmet/space/void/exploration
 	camera = /obj/machinery/camera/network/exploration
-	
+
 //SolGov Hardsuits
 
 /obj/item/clothing/head/helmet/space/void/engineering/alt/sol
