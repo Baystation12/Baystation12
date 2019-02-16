@@ -16,7 +16,7 @@
 		)
 
 /obj/item/clothing/under/rank/scientist
-	name = "\improper EXO polo and pants"
+	name = "\improper scientific polo and pants"
 	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics."
 	icon_state = "smock"
 	item_state = "w_suit"
