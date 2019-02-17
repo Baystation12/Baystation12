@@ -14994,7 +14994,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/rdconsole/robotics{
-	id = 3;
+	id = 2;
 	name = "robotics fabrication console"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
