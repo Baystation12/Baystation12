@@ -12338,9 +12338,6 @@
 /area/bridge/disciplinary_board_room)
 "Dl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/table/rack,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /obj/random/medical,
@@ -13620,7 +13617,7 @@
 	},
 /obj/random/firstaid,
 /obj/random/firstaid,
-/obj/item/bodybag/cryobag,
+/obj/random/medical,
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
 /obj/structure/cable/green{
 	d1 = 4;

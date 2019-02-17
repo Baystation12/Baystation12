@@ -8437,7 +8437,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
 "sL" = (
-/obj/item/bodybag/cryobag,
 /obj/random/firstaid,
 /obj/random/medical,
 /obj/random/medical,

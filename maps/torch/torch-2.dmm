@@ -13482,7 +13482,6 @@
 /turf/simulated/floor/plating,
 /area/command/bsa)
 "DK" = (
-/obj/item/bodybag/cryobag,
 /obj/random/firstaid,
 /obj/random/medical,
 /obj/random/medical,

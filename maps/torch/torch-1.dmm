@@ -538,7 +538,6 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_x = 32
 	},
-/obj/item/bodybag/cryobag,
 /obj/random/firstaid,
 /obj/random/medical,
 /obj/random/medical,
@@ -1841,7 +1840,7 @@
 /area/crew_quarters/laundry)
 "gh" = (
 /obj/structure/closet/crate/medical,
-/obj/item/bodybag/cryobag,
+/obj/random/medical,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
