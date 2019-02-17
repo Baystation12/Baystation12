@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - tweak: "Autopsy scanner can now be used on severed organs to get some information. No trace chems or time of death though, need body for that."
