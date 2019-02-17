@@ -131,7 +131,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/list/modholders = list()
 	var/list/adminholders = list()
 	for(var/client/X in GLOB.admins)
-		if(R_MENTOR & X.holder.rights && !(R_ADMIN & X.holder.rights)) // we don't want to count admins twice. This list should be JUST mentors
+		if(R_MENTOR & X.holder.rights && !(R_MENTOR & X.holder.rights)) // we don't want to count admins twice. This list should be JUST mentors
 			mentorholders += X
 			if(X.is_afk())
 				admin_number_afk++
@@ -141,7 +141,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				if(X.is_afk())
 					admin_number_afk++
 
-		if(R_MOD & X.holder.rights || R_BAN & X.holder.rights) // Looking for anyone with +Ban which will be full mods and admins.
+		if(R_MOD & X.holder.rights || R_MOD & X.holder.rights) // Looking for anyone with +Ban which will be full mods and admins.
 			if(!(R_ADMIN & X.holder.rights))
 				modholders += X
 				if(X.is_afk())
@@ -154,11 +154,16 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	switch(selected_type)
 		if("Gameplay and Rules")
+			if(adminholders.len)
+				for(var/client/X in adminholders) // Mentors get a message without buttons and no character name
+					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
+						X << 'sound/effects/adminhelp_new.ogg'
+					X << msg
 			if(modholders.len)
 				for(var/client/X in modholders) // Mentors get a message without buttons and no character name
 					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
 						X << 'sound/effects/adminhelp_new.ogg'
-					X << msg
+					X << mentor_msg
 		if("Development and Bugs")
 			if(debugholders.len)
 				for(var/client/X in debugholders) // Devs
@@ -166,8 +171,13 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 						X << 'sound/effects/adminhelp_new.ogg'
 					X << mentor_msg
 		if("Other")
-			if(mentorholders.len)
-				for(var/client/X in mentorholders) // This adminhelp category won't automatically display the person's stuff, to avoid accidental peeks.
+			if(adminholders.len)
+				for(var/client/X in adminholders) // Mentors get a message without buttons and no character name
+					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
+						X << 'sound/effects/adminhelp_new.ogg'
+					X << msg
+			if(modholders.len)
+				for(var/client/X in modholders) // This adminhelp category won't automatically display the person's stuff, to avoid accidental peeks.
 					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
 						X << 'sound/effects/adminhelp_new.ogg'
 					X << mentor_msg
