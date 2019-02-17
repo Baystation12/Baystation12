@@ -108,15 +108,15 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/salary_modifier	= 1			//Multiplier to starting character money
 	var/station_departments = list()//Gets filled automatically depending on jobs allowed
 
-	var/supply_currency_name = "Credits"
-	var/supply_currency_name_short = "Cr."
+	var/supply_currency_name = "Supply Points"
+	var/supply_currency_name_short = "SPs."
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_MARS,
-			HOME_SYSTEM_LUNA,
+/*			HOME_SYSTEM_MARS,
+			HOME_SYSTEM_LUNA,*/
 			HOME_SYSTEM_EARTH,
-			HOME_SYSTEM_VENUS,
+/*			HOME_SYSTEM_VENUS,
 			HOME_SYSTEM_CERES,
 			HOME_SYSTEM_PLUTO,
 			HOME_SYSTEM_TAU_CETI,
@@ -130,10 +130,10 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_KINGSTON,
 			HOME_SYSTEM_GAIA,
 			HOME_SYSTEM_MAGNITKA,
-			HOME_SYSTEM_OTHER
+			HOME_SYSTEM_OTHER*/
 		),
 		TAG_FACTION = list(
-			FACTION_SOL_CENTRAL,
+/*			FACTION_SOL_CENTRAL,
 			FACTION_INDIE_CONFED,
 			FACTION_CORPORATE,
 			FACTION_NANOTRASEN,
@@ -143,11 +143,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			FACTION_DAIS,
 			FACTION_EXPEDITIONARY,
 			FACTION_FLEET,
-			FACTION_PCRC,
+			FACTION_PCRC,*/
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(
-			CULTURE_HUMAN_MARTIAN,
+/*			CULTURE_HUMAN_MARTIAN,
 			CULTURE_HUMAN_MARSTUN,
 			CULTURE_HUMAN_LUNAPOOR,
 			CULTURE_HUMAN_LUNARICH,
@@ -159,9 +159,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_HUMAN_CETI,
 			CULTURE_HUMAN_SPACER,
 			CULTURE_HUMAN_SPAFRO,
-			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_CONFED,*/
 			CULTURE_HUMAN_OTHER,
-			CULTURE_OTHER
+//			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(
 			RELIGION_OTHER,
@@ -179,9 +179,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 	var/list/default_cultural_info = list(
-		TAG_HOMEWORLD = HOME_SYSTEM_MARS,
-		TAG_FACTION =   FACTION_SOL_CENTRAL,
-		TAG_CULTURE =   CULTURE_HUMAN_MARTIAN,
+		TAG_HOMEWORLD = HOME_SYSTEM_EARTH,
+		TAG_FACTION =   FACTION_OTHER,
+		TAG_CULTURE =   CULTURE_HUMAN_OTHER,
 		TAG_RELIGION =  RELIGION_AGNOSTICISM
 	)
 

@@ -31,7 +31,7 @@
 	#undef LTR
 	#undef NUM
 	#undef NAME
-
+/*
 /decl/cultural_info/culture/human/martian_surfacer
 	name = CULTURE_HUMAN_MARTIAN
 	description = "You are from the surface of Mars. Raised in one of the many farming communities or one of the great cities such as Olympus. Most of the surfacers \
@@ -152,7 +152,7 @@
 	resentful about their loss in the Gaia Conflict. An upbringing on Terra emphasises an odd mix of service to the state, liberalism and militarism."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_INDEPENDENT)
 	economic_power = 0.9
-
+*/
 /decl/cultural_info/culture/human/other
 	name = CULTURE_HUMAN_OTHER
 	description = "Some people are from places no one has ever heard of or places too wild and fantastical to make it into Encyclopedia Galactica. You are one of these. "

@@ -11,6 +11,7 @@
 	)
 
 // Cultural IDs.
+
 #define FACTION_SOL_CENTRAL    "Sol Central Government"
 #define FACTION_INDIE_CONFED  "Gilgamesh Colonial Confederation"
 #define FACTION_NANOTRASEN     "NanoTrasen"
