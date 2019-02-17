@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Can now place auto-cpr device on people by clicking on them with it on help intent."
