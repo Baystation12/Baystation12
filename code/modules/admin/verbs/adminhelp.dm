@@ -122,19 +122,19 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
 	var/mentor_msg = "<span class='notice'><b><font color=red>[selected_type]: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>) (<a href='?_src_=holder;autoresponse=\ref[mob]'>AutoResponse...</a>):</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>) (<a href='?_src_=holder;autoresponse=\ref[mob]'>AutoResponse...</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>[selected_type]: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>) (<a href='?_src_=holder;autoresponse=\ref[mob]'>AutoResponse...</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
-//	var/list/mentorholders = list()
+	var/list/mentorholders = list()
 	var/list/debugholders = list()
 	var/list/modholders = list()
 	var/list/adminholders = list()
 	for(var/client/X in GLOB.admins)
-/*		if(R_MENTOR & X.holder.rights && !(R_ADMIN & X.holder.rights)) // we don't want to count admins twice. This list should be JUST mentors
+		if(R_MENTOR & X.holder.rights && !(R_ADMIN & X.holder.rights)) // we don't want to count admins twice. This list should be JUST mentors
 			mentorholders += X
 			if(X.is_afk())
-				admin_number_afk++*/
+				admin_number_afk++
 		if(R_DEBUG & X.holder.rights || R_DEBUG & X.holder.rights) // Looking for anyone with +Debug which will be admins, developers, and developer mentors
 			debugholders += X
 			if(!(R_ADMIN & X.holder.rights))
@@ -159,35 +159,15 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
 						X << 'sound/effects/adminhelp_new.ogg'
 					X << msg
-			if(adminholders.len)
-				for(var/client/X in adminholders) // Admins get the full monty
-					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
-						X << 'sound/effects/adminhelp_new.ogg'
-					X << msg
 		if("Development and Bugs")
 			if(debugholders.len)
-				for(var/client/X in debugholders) // Mods
+				for(var/client/X in debugholders) // Devs
 					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
 						X << 'sound/effects/adminhelp_new.ogg'
 					X << mentor_msg
-			if(adminholders.len)
-				for(var/client/X in adminholders) // Admins get the full monty
-					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
-						X << 'sound/effects/adminhelp_new.ogg'
-					X << msg
 		if("Other")
-			if(modholders.len)
-				for(var/client/X in modholders) // Admins of course get everything in their helps
-					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
-						X << 'sound/effects/adminhelp_new.ogg'
-					X << msg
-			if(adminholders.len)
-				for(var/client/X in adminholders) // Admins get the full monty
-					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
-						X << 'sound/effects/adminhelp_new.ogg'
-					X << msg
-			if(debugholders.len)
-				for(var/client/X in debugholders) // Mods
+			if(mentorholders.len)
+				for(var/client/X in mentorholders) // This adminhelp category won't automatically display the person's stuff, to avoid accidental peeks.
 					if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping))
 						X << 'sound/effects/adminhelp_new.ogg'
 					X << mentor_msg

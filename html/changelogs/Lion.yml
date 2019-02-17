@@ -37,3 +37,4 @@ changes:
   - rscdel: "Removed a lot of options in the background menu for character creation. Not permanent, meant to be temporary."
   - rscdel: "Removes Tritonians as a species."
   - tweak: "Renamed Credits to Supply Points on the cargo terminals."
+  - bugfix: "Fixes duplicating adminhelps."
