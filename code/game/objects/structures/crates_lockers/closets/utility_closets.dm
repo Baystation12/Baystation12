@@ -63,10 +63,6 @@
 			new /obj/item/clothing/head/helmet/space/emergency(src)
 			new /obj/item/device/oxycandle(src)
 
-/obj/structure/closet/emcloset/legacy/New()
-	new /obj/item/weapon/tank/oxygen(src)
-	new /obj/item/clothing/mask/gas(src)
-
 /*
  * Fire Closet
  */
