@@ -1,7 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - experiment: "No stasis bags are available on spawn on the Torch, except one on the Charon."
-  - tweak: "Stasis bags can now be printed from the protolathe."
-  - tweak: "Stasis bags are now more expensive when ordered from supply."
-  - tweak: "Rollerbeds can now be placed in backpacks."
