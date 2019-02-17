@@ -32,7 +32,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 			if(!admin_skip)
 				return "[job.faction_whitelist] ONLY"
 
-		if(whitelist_check && !check_whitelist(M,rank))
+		if(whitelist_check && !check_whitelist(M,rank) && !check_rights(R_ADMIN, 0))
 			return "Whitelisted Job"
 
 		for (var/s in jobban_keylist)
