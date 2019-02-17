@@ -1,12 +1,14 @@
 <!--
-	If a specific field doesn't apply, remove it!
 	Anything inside tags like these is a comment and will not be displayed in the final issue.
 	Be careful not to write inside them!
-	Joke or spammed issues can and will result in punishment.
+	Joke or spammed issues can and will result in punishment. 
+
+	All fields are required.
+	Omitting a field will result in your issue being closed.
 	
 	PUT YOUR ANSWERS ON THE BLANK LINES BELOW THE HEADERS 
 	(The lines with four #'s) 
-	Don't edit them or delete them it's part of the formatting
+	Don't edit them or delete them - it's part of the formatting
 -->
 
 #### Description of issue
@@ -17,7 +19,7 @@
 
 
 
-#### Steps to reproduce 
+#### Steps to reproduce
 
 
 
@@ -41,9 +43,6 @@
 
 
 #### Issue bingo
-
-Please check whatever applies. More checkboxes checked increase your chances of the issue being looked at sooner.
-
 <!-- Check these by writing an x inside the [ ] (like this: [x])-->
 <!-- Don't forget to remove the space between the brackets, or it won't work! -->
 - [ ] Issue could be reproduced at least once
