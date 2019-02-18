@@ -644,7 +644,7 @@ var/global/datum/controller/occupations/job_master
 			return candidate
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
-		spawnpoint = GLOB.using_map.default_spawn
+		spawnpoint = GLOB.using_map.get_default_spawn(C, job_datum)
 
 	if(spawnpoint)
 		if(!(spawnpoint in GLOB.using_map.allowed_spawns))

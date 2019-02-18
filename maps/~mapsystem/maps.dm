@@ -156,3 +156,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		world.maxz++
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
+
+/datum/map/proc/get_default_spawn(var/client/C, var/datum/job/job_datum)
+	return default_spawn
