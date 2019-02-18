@@ -101,8 +101,8 @@
 
 
 /obj/aura/regenerating/human/unathi
-	brute_mult = 2
-	organ_mult = 4
+	brute_mult = 4
+	organ_mult = 6
 	regen_message = "<span class='warning'>You feel a soothing sensation as your ORGAN mends...</span>"
 	grow_chance = 2
 	grow_threshold = 150
