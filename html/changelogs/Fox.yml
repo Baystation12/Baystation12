@@ -33,4 +33,8 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
+  - imageadd: "Changed flag sprites to fit a bit more."
+  - imageadd: "Changed banner sprites to fit more with the setting."
+  - imageadd: "Maybe a pen somewhere is different? ;)"
+  - imageadd: "Changed the peacekeeper armband sprite into a TAR armband sprite. Woo."
   - imageadd: "Replaced first through fifth fleet patches with their correct equivalent sprites."
