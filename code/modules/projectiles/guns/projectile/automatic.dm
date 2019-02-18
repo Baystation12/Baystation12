@@ -60,7 +60,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/merc_smg
 	name = "submachine gun"
-	desc = "The SI-14 Shark, a lightweight and rapidfiring SMG, for when murder is what's on the mind. States "Lamina per daemones" in script along the side."
+	desc = "The SI-14 Shark, a lightweight and rapidfiring SMG, for when murder is what's on the mind. States ''Lamina per daemones'' in script along the side."
 	icon = 'icons/obj/guns/merc_smg.dmi'
 	icon_state = "c20r"
 	item_state = "c20r"
