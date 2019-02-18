@@ -1064,7 +1064,7 @@
 	id_tag = "escape_pod_1_recovery";
 	pixel_x = 25;
 	pixel_y = 30;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_door = "escape_pod_1_recovery_hatch"
 	},
 /turf/unsimulated/floor{
@@ -1117,7 +1117,7 @@
 	id_tag = "escape_pod_2_recovery";
 	pixel_x = -25;
 	pixel_y = 30;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_door = "escape_pod_2_recovery_hatch"
 	},
 /turf/unsimulated/floor{
@@ -1961,7 +1961,7 @@
 	id_tag = "escape_pod_5_recovery";
 	pixel_x = -25;
 	pixel_y = 25;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_door = "escape_pod_5_recovery_hatch"
 	},
 /turf/unsimulated/floor{
@@ -1984,7 +1984,7 @@
 	id_tag = "escape_pod_3_recovery";
 	pixel_x = 25;
 	pixel_y = -25;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_door = "escape_pod_3_recovery_hatch"
 	},
 /turf/unsimulated/floor{
@@ -8940,7 +8940,7 @@
 	id_tag = "admin_shuttle";
 	pixel_x = -25;
 	pixel_y = 0;
-	req_one_access = list(101);
+	req_access = list(list(101));
 	tag_door = "admin_shuttle_hatch"
 	},
 /turf/simulated/floor/plating,
@@ -16536,7 +16536,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /turf/simulated/floor/carpet,
 /area/merchant_station)
@@ -16618,7 +16618,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
@@ -17123,7 +17123,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /turf/simulated/floor/wood,
 /area/merchant_station)
@@ -18156,7 +18156,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
@@ -18323,7 +18323,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
@@ -18383,7 +18383,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -19559,7 +19559,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -19781,7 +19781,7 @@
 	command = "cycle_exterior";
 	frequency = 1331;
 	master_tag = "vox_west_control";
-	req_one_access = list(150)
+	req_access = list(150)
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/voxshuttle,
@@ -20045,7 +20045,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
@@ -20435,7 +20435,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(301)
+	req_access = list(301)
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
@@ -20500,7 +20500,7 @@
 	frequency = 1331;
 	master_tag = "vox_west_control";
 	pixel_x = -22;
-	req_one_access = list(150)
+	req_access = list(150)
 	},
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)

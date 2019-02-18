@@ -2367,7 +2367,7 @@
 "hD" = (
 /obj/machinery/door/airlock/glass/medical{
 	name = "Medbay";
-	req_one_access = list(65,5)
+	req_access = list(list(65,5))
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
@@ -2509,7 +2509,7 @@
 "ii" = (
 /obj/machinery/door/airlock/glass/medical{
 	name = "Medbay Storage";
-	req_one_access = list(65,5)
+	req_access = list(list(65,5))
 	},
 /turf/simulated/wall,
 /area/constructionsite/hallway/aft)
@@ -2687,7 +2687,7 @@
 "iJ" = (
 /obj/machinery/door/airlock/glass/medical{
 	name = "Medbay";
-	req_one_access = list(65,5)
+	req_access = list(list(65,5))
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)

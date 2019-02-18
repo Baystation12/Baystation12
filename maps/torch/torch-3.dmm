@@ -1311,8 +1311,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/engineering{
 	name = "Utility Up";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
@@ -1402,8 +1401,7 @@
 "cY" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
-	req_access = list(12);
-	req_one_access = list(48,65)
+	req_access = list(12, list(48,65))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -2103,8 +2101,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
@@ -2385,8 +2382,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
@@ -2609,8 +2605,7 @@
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
-	req_access = list(12);
-	req_one_access = list(48,65)
+	req_access = list(12, list(48,65))
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2813,7 +2808,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /obj/item/stack/material/aluminium/fifty,
 /obj/item/stack/material/plastic/ten,
@@ -3768,8 +3763,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -4575,7 +4569,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(24,11)
+	req_access = list(list(24,11))
 	},
 /obj/structure/cable/green{
 	d2 = 8;
@@ -4645,8 +4639,7 @@
 "kg" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
-	req_access = list(12);
-	req_one_access = list(48,65)
+	req_access = list(12, list(48,65))
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -4963,7 +4956,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(12,23)
+	req_access = list(list(12,23))
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/aftstarboard)
@@ -4971,8 +4964,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass/engineering{
 	name = "Monitoring Room";
-	req_access = list(10);
-	req_one_access = newlist()
+	req_access = list(10)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 4;
@@ -5246,7 +5238,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/seconddeck/center)
@@ -5333,8 +5325,7 @@
 "lJ" = (
 /obj/machinery/door/airlock/glass/engineering{
 	name = "Engineering Hard Storage";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -5955,8 +5946,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -7532,7 +7522,7 @@
 "qK" = (
 /obj/machinery/door/airlock/glass/engineering{
 	name = "Engineering Bay";
-	req_one_access = list(10)
+	req_access = list(10)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
@@ -8002,8 +7992,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -8017,8 +8006,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
@@ -8361,8 +8349,7 @@
 "sA" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Second Deck Substation";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11377,7 +11364,7 @@
 	name = "Incinerator Vent Control";
 	pixel_x = 0;
 	pixel_y = -24;
-	req_one_access = list(12,5)
+	req_access = list(list(12,5))
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/manifold/visible{
@@ -13297,7 +13284,7 @@
 "Fc" = (
 /obj/machinery/door/airlock/glass/engineering{
 	name = "Engineering Storage";
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -14530,7 +14517,7 @@
 /obj/machinery/door/window/northright{
 	dir = 2;
 	name = "engineering front desk";
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14539,8 +14526,7 @@
 	},
 /obj/machinery/door/window/brigdoor/northleft{
 	name = "engineering front desk";
-	req_access = newlist();
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -15260,7 +15246,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/hatch/maintenance{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
@@ -15492,7 +15478,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(24,11)
+	req_access = list(list(24,11))
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
@@ -17998,8 +17984,7 @@
 "Xa" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Second Deck Substation";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable{
@@ -18113,8 +18098,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	req_access = newlist();
-	req_one_access = list(14,23)
+	req_access = list(list(14,23))
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/aftport)
@@ -18829,7 +18813,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bluespace)

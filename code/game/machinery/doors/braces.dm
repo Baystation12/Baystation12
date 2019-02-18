@@ -145,9 +145,6 @@
 /obj/item/weapon/airlock_brace/proc/update_access()
 	if(!electronics)
 		return
+	req_access = electronics.conf_access
 	if(electronics.one_access)
-		req_access = list()
-		req_one_access = electronics.conf_access
-	else
-		req_access = electronics.conf_access
-		req_one_access = list()
+		req_access = list(req_access)

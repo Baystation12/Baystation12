@@ -10,14 +10,13 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 	var/core_skill = SKILL_COMPUTER       // The skill which is checked
 	var/skill_needed = SKILL_EXPERT       // How much skill the user needs to use this. This is not for critical failure effects at unskilled; those are handled globally.
 	var/req_access = list()               // Stores access needed, if any
-	var/req_one_access = list()           // Like for objects
 
 /datum/terminal_command/New()
 	regex = new (pattern, regex_flags)
 	..()
 
 /datum/terminal_command/proc/check_access(mob/user)
-	return has_access(req_access, req_one_access, user.GetAccess())
+	return has_access(req_access, user.GetAccess())
 
 // null return: continue. "" return will break and show a blank line. Return list() to break and not show anything.
 /datum/terminal_command/proc/parse(text, mob/user, datum/terminal/terminal)

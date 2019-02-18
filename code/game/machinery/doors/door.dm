@@ -527,3 +527,11 @@
 
 /obj/machinery/door/CanFluidPass(var/coming_from)
 	return !density
+
+// Most doors will never be deconstructed over the course of a round,
+// so as an optimization defer the creation of electronics until
+// the airlock is deconstructed
+/obj/machinery/door/proc/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
+	var/obj/item/weapon/airlock_electronics/electronics = new electronics_type(loc)
+	electronics.set_access(src)
+	return electronics

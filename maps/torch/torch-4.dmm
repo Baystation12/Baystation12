@@ -25,8 +25,7 @@
 /area/medical/virology)
 "aag" = (
 /obj/machinery/smartfridge/secure/virology{
-	req_access = null;
-	req_one_access = list(39,45)
+	req_access = list(list(39,45))
 	},
 /obj/machinery/requests_console{
 	department = "Virology";
@@ -3027,8 +3026,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/engineering{
 	name = "First Deck Substation";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4165,8 +4163,7 @@
 "akg" = (
 /obj/machinery/door/airlock/engineering{
 	name = "First Deck Substation";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable{
@@ -4856,8 +4853,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/engineering{
 	name = "Utility Down";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4889,8 +4885,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/engineering{
 	name = "Auxiliary Power Storage";
-	req_access = list(11);
-	req_one_access = newlist()
+	req_access = list(11)
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -6316,7 +6311,7 @@
 /area/medical/equipstorage)
 "auc" = (
 /obj/machinery/smartfridge/secure/medbay{
-	req_one_access = list(33,66)
+	req_access = list(list(33,66))
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
@@ -8435,7 +8430,7 @@
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/airlock/command{
 	name = "Emergency Armory Access";
-	req_one_access = list(83,19);
+	req_access = list(list(83,19));
 	secured_wires = 1
 	},
 /obj/structure/cable/green{
@@ -8488,7 +8483,7 @@
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/airlock/highsecurity{
 	name = "Emergency Armory";
-	req_one_access = list(83,19)
+	req_access = list(list(83,19))
 	},
 /obj/machinery/door/blast/regular/open{
 	density = 1;
@@ -11192,7 +11187,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
@@ -13213,7 +13208,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(47,12)
+	req_access = list(list(47,12))
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -13251,7 +13246,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_one_access = list(47,12)
+	req_access = list(list(47,12))
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14779,8 +14774,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/glass/research{
 	name = "Research Suites";
-	req_access = "";
-	req_one_access = list(47,81)
+	req_access = list(list(47,81))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/breakroom)
@@ -15068,7 +15062,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/surgery)
@@ -15596,14 +15590,14 @@
 	name = "Armory Entry Lockdown Shutter Control";
 	pixel_x = 24;
 	pixel_y = 6;
-	req_one_access = list(83,19)
+	req_access = list(list(83,19))
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "armory_lock";
 	name = "Armory Lockdown Shutter Control";
 	pixel_x = 24;
 	pixel_y = -6;
-	req_one_access = list(83,19)
+	req_access = list(list(83,19))
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -17587,8 +17581,7 @@
 /obj/effect/floor_decal/corner/paleblue,
 /obj/machinery/door/window/northleft{
 	name = "Morgue";
-	req_access = newlist();
-	req_one_access = list(6,5)
+	req_access = list(list(6,5))
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/dark,
@@ -17609,8 +17602,7 @@
 	},
 /obj/machinery/door/window/northright{
 	name = "Morgue";
-	req_access = newlist();
-	req_one_access = list(6,5)
+	req_access = list(list(6,5))
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/autopsy)
@@ -18754,7 +18746,7 @@
 /area/maintenance/firstdeck/centralstarboard)
 "fEb" = (
 /obj/machinery/smartfridge/secure/medbay{
-	req_one_access = list(33,66)
+	req_access = list(list(33,66))
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
@@ -18793,7 +18785,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/medical{
 	id_tag = "MedbayFoyer";
 	name = "Infirmary";
-	req_one_access = list(5,80)
+	req_access = list(list(5,80))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/infirmreception)
@@ -19312,7 +19304,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/medical{
 	name = "Operating Theater 2";
-	req_one_access = list(82,45)
+	req_access = list(list(82,45))
 	},
 /obj/machinery/holosign/surgery{
 	id = "operating2"
@@ -21649,8 +21641,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security/research{
 	name = "Checkpoint";
-	req_access = newlist();
-	req_one_access = list(81,47)
+	req_access = list(list(81,47))
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/rnd/checkpoint)
@@ -21675,7 +21666,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/research{
 	id_tag = "researchdoor_interior";
 	name = "Research Division";
-	req_one_access = list(47,81)
+	req_access = list(list(47,81))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/entry)
@@ -22924,7 +22915,7 @@
 	dir = 8;
 	id_tag = null;
 	name = "Infirmary Wing";
-	req_one_access = list(5,8,6)
+	req_access = list(list(5,8,6))
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -24020,16 +24011,14 @@
 	name = "Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = 6;
-	req_access = newlist();
-	req_one_access = list(1,47)
+	req_access = list(list(1,47))
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "outercheckwindow";
 	name = "Outer Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3;
-	req_access = newlist();
-	req_one_access = list(1,47)
+	req_access = list(list(1,47))
 	},
 /obj/machinery/button/remote/airlock{
 	desc = "A remote control-switch for airlocks.";
@@ -25606,7 +25595,7 @@
 	dir = 8;
 	id_tag = "BrigFoyer";
 	name = "Security Wing";
-	req_one_access = list(63,80)
+	req_access = list(list(63,80))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -28863,7 +28852,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security/research{
 	name = "Checkpoint";
-	req_one_access = list(1,81,47)
+	req_access = list(list(1,81,47))
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
@@ -29918,7 +29907,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(201)
+	req_access = list(201)
 	},
 /obj/machinery/light,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -31393,7 +31382,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_one_access = list(11,24)
+	req_access = list(list(11,24))
 	},
 /obj/structure/cable/green{
 	d2 = 4;

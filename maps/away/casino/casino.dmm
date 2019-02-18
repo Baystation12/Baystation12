@@ -363,7 +363,7 @@
 	id_tag = "casino_dock_airlock";
 	pixel_x = -24;
 	pixel_y = 6;
-	req_one_access = list(13);
+	req_access = list(13);
 	tag_airpump = "casino_dock_pump";
 	tag_chamber_sensor = "casino_dock_sensor";
 	tag_exterior_door = "casino_dock_outer";
@@ -2495,7 +2495,7 @@
 	name = "exterior access button";
 	pixel_x = 28;
 	pixel_y = 24;
-	req_one_access = list(13)
+	req_access = list(13)
 	},
 /turf/simulated/floor/airless,
 /area/space)

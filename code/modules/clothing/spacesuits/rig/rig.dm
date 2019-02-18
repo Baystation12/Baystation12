@@ -12,8 +12,6 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
-	req_one_access = list()
-	req_access = list()
 	w_class = ITEM_SIZE_HUGE
 	center_of_mass = null
 
@@ -114,7 +112,7 @@
 	item_state = icon_state
 	wires = new(src)
 
-	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
+	if(!length(req_access))
 		locked = 0
 
 	spark_system = new()

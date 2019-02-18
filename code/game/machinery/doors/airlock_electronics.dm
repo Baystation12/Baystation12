@@ -12,7 +12,7 @@
 
 	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
 	var/list/conf_access = list()
-	var/one_access = 0 //if set to 1, door would receive req_one_access instead of req_access
+	var/one_access = 0 //if set to 1, door would receive OR instead of AND on the access restrictions.
 	var/last_configurator = null
 	var/locked = 1
 	var/lockable = 1
@@ -118,3 +118,12 @@
 	if(!ui)
 		ui = new(user, src, ui_key, "airlock_electronics", src.name, 1000, 500, master_ui, state)
 		ui.open()
+
+/obj/item/weapon/airlock_electronics/proc/set_access(var/obj/object)
+	if(!object.req_access)
+		object.check_access()
+	if(object.req_access.len)
+		conf_access = list()
+		for(var/entry in object.req_access)
+			conf_access |= entry // This flattens the list, turning everything into AND
+			// Can be reworked to have the electronics inherit a precise access set, but requires UI changes.

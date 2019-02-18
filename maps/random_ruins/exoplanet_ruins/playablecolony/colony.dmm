@@ -2771,7 +2771,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engineering{
-	req_one_access = list()
+	req_access = list()
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -2860,7 +2860,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engivend{
-	req_one_access = list()
+	req_access = list()
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)

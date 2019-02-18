@@ -36,18 +36,10 @@
 	CC.amount = 2
 	var/obj/item/weapon/airlock_electronics/ae
 	if(!electronics)
-		ae = new/obj/item/weapon/airlock_electronics( src.loc )
-		if(!src.req_access)
-			src.check_access()
-		if(src.req_access.len)
-			ae.conf_access = src.req_access
-		else if (src.req_one_access.len)
-			ae.conf_access = src.req_one_access
-			ae.one_access = 1
-	else
-		ae = electronics
-		electronics = null
-		ae.dropInto(loc)
+		create_electronics()
+	ae = electronics
+	electronics = null
+	ae.dropInto(loc)
 	if(operating == -1)
 		ae.icon_state = "door_electronics_smoked"
 		operating = 0
@@ -219,18 +211,10 @@
 
 			var/obj/item/weapon/airlock_electronics/ae
 			if(!electronics)
-				ae = new/obj/item/weapon/airlock_electronics( src.loc )
-				if(!src.req_access)
-					src.check_access()
-				if(src.req_access.len)
-					ae.conf_access = src.req_access
-				else if (src.req_one_access.len)
-					ae.conf_access = src.req_one_access
-					ae.one_access = 1
-			else
-				ae = electronics
-				electronics = null
-				ae.dropInto(loc)
+				create_electronics()
+			ae = electronics
+			electronics = null
+			ae.dropInto(loc)
 			ae.icon_state = "door_electronics_smoked"
 
 			operating = 0
@@ -259,9 +243,9 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-	return
-
-
+/obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
+	electronics = ..()
+	return electronics	
 
 /obj/machinery/door/window/brigdoor
 	name = "secure door"

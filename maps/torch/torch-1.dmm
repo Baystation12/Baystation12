@@ -224,7 +224,7 @@
 	id_tag = "admin_shuttle_dock_airlock";
 	pixel_x = -24;
 	pixel_y = 26;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_airpump = "admin_shuttle_dock_pump";
 	tag_chamber_sensor = "admin_shuttle_dock_sensor";
 	tag_exterior_door = "admin_shuttle_dock_outer";
@@ -1278,7 +1278,7 @@
 	id_tag = "merchant_shuttle_station_dock";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_airpump = "merchant_shuttle_station_pump";
 	tag_chamber_sensor = "merchant_shuttle_station_sensor";
 	tag_exterior_door = "merchant_shuttle_station_exterior";
@@ -1426,7 +1426,7 @@
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
 	req_access = newlist();
-	req_one_access = list(12,73)
+	req_access = list(12,73)
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/port)
@@ -2150,8 +2150,7 @@
 "hl" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Officer's Mess Maintenance";
-	req_access = list(12);
-	req_one_access = list(19,28,91)
+	req_access = list(12, list(19,28,91))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -2686,7 +2685,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(201)
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
@@ -5696,7 +5695,7 @@
 "ta" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Flight Control Tower";
-	req_one_access = list(13,80)
+	req_access = list(list(13,80))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -6031,7 +6030,7 @@
 	name = "interior access button";
 	pixel_x = -23;
 	pixel_y = -22;
-	req_one_access = list(13,80)
+	req_access = list(list(13,80))
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	icon_state = "corner_white";
@@ -6849,8 +6848,7 @@
 "wd" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(73,12)
+	req_access = list(list(73,12))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
@@ -6913,7 +6911,7 @@
 	display_name = "Fore Dock";
 	frequency = 1331;
 	id_tag = "nuke_shuttle_dock_airlock";
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_airpump = "nuke_shuttle_dock_pump";
 	tag_chamber_sensor = "nuke_shuttle_dock_sensor";
 	tag_exterior_door = "nuke_shuttle_dock_outer";
@@ -6954,7 +6952,7 @@
 	},
 /obj/machinery/door/airlock/glass/command{
 	name = "Primary Docking Port Control";
-	req_one_access = list(13,80)
+	req_access = list(list(13,80))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -9556,7 +9554,7 @@
 	id_tag = "skipjack_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = -24;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_airpump = "skipjack_shuttle_dock_pump";
 	tag_chamber_sensor = "skipjack_shuttle_dock_sensor";
 	tag_exterior_door = "skipjack_shuttle_dock_outer";
@@ -9910,7 +9908,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(201)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10151,7 +10149,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(201)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10381,7 +10379,7 @@
 	id_tag = "rescue_shuttle_dock_airlock";
 	pixel_x = -24;
 	pixel_y = -24;
-	req_one_access = list(13,80);
+	req_access = list(list(13,80));
 	tag_airpump = "rescue_shuttle_dock_pump";
 	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
 	tag_exterior_door = "rescue_shuttle_dock_outer";
@@ -10793,8 +10791,7 @@
 "KZ" = (
 /obj/machinery/door/airlock/mining{
 	name = "Deck Chief";
-	req_access = list(41);
-	req_one_access = newlist()
+	req_access = list(41)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment,
@@ -11001,7 +10998,7 @@
 	name = "exterior access button";
 	pixel_x = -6;
 	pixel_y = -19;
-	req_one_access = list(13,80)
+	req_access = list(list(13,80))
 	},
 /turf/simulated/floor,
 /area/hallway/primary/fourthdeck/fore)
@@ -11439,8 +11436,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(73,12)
+	req_access = list(list(73,12))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
@@ -11448,8 +11444,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(73,12)
+	req_access = list(list(73,12))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/center)
@@ -11994,7 +11989,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
 	name = "Expedition Storage";
-	req_one_access = list(48,65,93)
+	req_access = list(list(48,65,93))
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fourthdeck/forestarboard)
@@ -12082,9 +12077,8 @@
 	id = "shop_shutters";
 	name = "Counter Shutters";
 	pixel_x = 0;
-	pixel_y = 24;
-	req_access = newlist();
-	req_one_access = list(67,96)
+	pixel_y = 24
+	req_access = list(list(67,96))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12187,9 +12181,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(12,73)
+	name = "Hangar Maintenance"
+	req_access = list(list(12,73))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar/top)
@@ -12999,9 +12992,8 @@
 "Rj" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_one_access = list(12,73)
+	name = "Hangar Maintenance"
+	req_access = list(list(12,73))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar/top)
@@ -14193,7 +14185,7 @@
 "TU" = (
 /obj/machinery/door/airlock/civilian{
 	name = "Commissary Counter";
-	req_one_access = list(67,96)
+	req_access = list(list(67,96))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/commissary)
@@ -15290,8 +15282,7 @@
 "WW" = (
 /obj/machinery/door/airlock/mining{
 	name = "Deck Chief";
-	req_access = list(41);
-	req_one_access = newlist()
+	req_access = list(41)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -15579,7 +15570,7 @@
 "XD" = (
 /obj/machinery/door/airlock/civilian{
 	name = "Commissary Counter";
-	req_one_access = list(67,96)
+	req_access = list(list(67,96))
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -16167,7 +16158,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(201)
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
@@ -16512,7 +16503,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = list(201)
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)

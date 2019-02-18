@@ -435,7 +435,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineering)
@@ -475,7 +475,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/vending/engivend{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -507,7 +507,7 @@
 	dir = 4
 	},
 /obj/machinery/vending/engineering{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -548,7 +548,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)

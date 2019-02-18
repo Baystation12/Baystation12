@@ -119,7 +119,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
@@ -162,7 +162,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
@@ -375,7 +375,7 @@
 /area/unishi/common)
 "ba" = (
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/common)
@@ -395,7 +395,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
@@ -791,7 +791,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
@@ -1258,7 +1258,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
@@ -1358,7 +1358,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/unishi/toxins)
@@ -1614,7 +1614,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/item/stack/material/diamond/ten,
 /obj/item/stack/material/steel/fifty,
@@ -1962,7 +1962,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/xenobio)
@@ -2034,7 +2034,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
@@ -2073,7 +2073,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
@@ -2369,7 +2369,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/smresearch)
