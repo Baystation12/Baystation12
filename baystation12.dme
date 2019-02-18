@@ -2309,7 +2309,7 @@
 #include "code\modules\overmap\exoplanets\exoplanet.dm"
 #include "code\modules\overmap\exoplanets\garbage.dm"
 #include "code\modules\overmap\exoplanets\grass.dm"
-#include "code\modules\overmap\exoplanets\mountain.dm"
+#include "code\modules\overmap\exoplanets\planet_theme.dm"
 #include "code\modules\overmap\exoplanets\shrouded.dm"
 #include "code\modules\overmap\exoplanets\snow.dm"
 #include "code\modules\overmap\exoplanets\volcanic.dm"
