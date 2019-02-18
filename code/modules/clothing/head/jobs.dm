@@ -146,8 +146,8 @@
 	icon_state = "beret_corporate_navy"
 
 /obj/item/clothing/head/beret/centcom/captain
-	name = "asset protection command beret"
-	desc = "A white beret adorned with the crest of corporate asset protection. For asset protection leaders that are more inclined towards style than safety."
+	name = "TRCS Artemis Beret"
+	desc = "A pure white beret with a blue shield. For High Command more interested in style than safety."
 	icon_state = "beret_corporate_white"
 
 /obj/item/clothing/head/beret/deathsquad
