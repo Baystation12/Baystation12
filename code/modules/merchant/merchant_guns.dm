@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/projectile/pistol/sec/MK
-	desc = "Similar in both appearance and use of the NT Mk58, the MK pistol is an cheap knock off that preys on the unsuspecting firearm buyers."
+	desc = "The SI-2 handgun, produced on the frontier systems for easy access to defend against pirates by Serent Industries."
 	jam_chance = 35
 
 /obj/item/weapon/gun/projectile/heavysniper/ant
@@ -9,7 +9,7 @@
 	caliber = CALIBER_PISTOL_SMALL
 
 /obj/item/weapon/gun/energy/laser/dogan
-	desc = "This carbine works just as well as a normal carbine. Most of the time." //removed reference to Dogan, since only the merchant is likely to know who that is.
+	desc = "This is an extremely outdated NE-10 model by Nelwen Electronics. Bulkier, less reliable, and more likely to explode in your face. Does it still even work?" //removed reference to Dogan, since only the merchant is likely to know who that is.
 
 /obj/item/weapon/gun/energy/laser/dogan/consume_next_projectile()
 	projectile_type = pick(/obj/item/projectile/beam/midlaser, /obj/item/projectile/beam/lastertag/red, /obj/item/projectile/beam)

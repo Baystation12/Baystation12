@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/gun/small/secure
 	name = "compact smartgun"
-	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
+	desc = "The secure variant of the NE-15C, the NE-15CS is the best way to keep yourself safe and not piss off your gun controlling senators. Uses an N.E Smart Chip to prevent unauthorized use of lethal force."
 	icon = 'icons/obj/guns/small_egun_secure.dmi'
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
@@ -11,7 +11,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver/secure
 	name = "smart stun revolver"
-	desc = "This A&M X6 is fitted with an NT1019 chip which allows remote authorization of weapon functionality. It has an SCG emblem on the grip."
+	desc = "The A6 Vortex, a weapon primarily used by police agencies until Nelwen Electronics, fires stun rounds at targets."
 	icon = 'icons/obj/guns/stunrevolver_secure.dmi'
 	icon_state = "revolverstun100"
 	modifystate= "revolverstun"
@@ -29,7 +29,7 @@
 
 /obj/item/weapon/gun/energy/gun/secure
 	name = "smartgun"
-	desc = "A more secure LAEP90, the LAEP90-S is designed to please paranoid constituents. Body cam not included."
+	desc = "The more secured variant of the NE-15, primarily used to please gun-regulated police departments in Terran space. Uses an N.E. Smart Chip to prevent unauthorized use of lethal force."
 	icon = 'icons/obj/guns/energy_gun_secure.dmi'
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
@@ -76,6 +76,6 @@
 
 /obj/item/weapon/gun/energy/laser/secure
 	name = "laser carbine"
-	desc = "A Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts. Fitted with an NT1019 chip to make sure killcount is tracked appropriately."
+	desc = "The NE-12, mass produced by Nelwen Electronics. The forefront of modern energy weaponry. This one looks older and a little worn."
 	icon_state = "lasersec"
 	req_one_access = list(access_brig, access_bridge)

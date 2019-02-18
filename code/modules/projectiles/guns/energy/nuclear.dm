@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
-	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
+	desc = "The NEPDW, later named the NE-15, the earliest of designed from Nelwen Electronics. This model is capable of switching from low, medium, and high beam power. AKA; Stun, shock, kill."
 	icon = 'icons/obj/guns/energy_gun.dmi'
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
@@ -16,7 +16,7 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
-		
+
 /obj/item/weapon/gun/energy/gun/skrell
 	name = "skrellian handgun"
 	desc = "A common Skrellian side-arm, the Xuxquu*'Voom-5, or XV-5, is a more traditional energy weapon, tuned to dispense beams in three different wavelengths."
@@ -41,7 +41,7 @@
 
 /obj/item/weapon/gun/energy/gun/small
 	name = "small energy gun"
-	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
+	desc = "A smaller variant of the NE-15, the N-15C is designed and produced by Nelwen Electronics for the civilian market with less energy capacity."
 	icon = 'icons/obj/guns/small_egun.dmi'
 	icon_state = "smallgunstun"
 	max_shots = 5

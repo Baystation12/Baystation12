@@ -114,7 +114,7 @@ Weapons
 ******/
 
 /obj/item/weapon/gun/energy/gun/secure/corporate
-	desc = "An access-locked EXO-branded LAEP90-S. It's designed to please paranoid corporate liaisons. Body cam not included."
+	desc = "An NE-15S, painted a brighter sheen of white with green markings to show it's totally scientific. Uses an N.E. Smart Chip to prevent unauthorized use of lethal force."
 	req_one_access = list(access_liaison)
 
 /obj/item/weapon/gun/projectile/revolver/medium/captain
@@ -129,7 +129,7 @@ Weapons
 
 /obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen
 	name = "corporate stun revolver"
-	desc = "This A&M X6 is fitted with an NT1019 chip which allows remote authorization of weapon functionality. It has a NanoTrasen logo on the grip."
+	desc = "The A6 Vortex-S, a secure design produced primarily for security guards in corporate facilities, where shocks could be deadly to tests. Uses an N.E. Smart Chip to lock firemodes."
 	req_one_access = list(access_brig, access_heads, access_rd, access_sec_guard)
 
 /obj/item/weapon/gun/projectile/pistol/holdout/liaison

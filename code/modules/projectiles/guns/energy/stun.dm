@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design. It can switch between high and low intensity stun shots."
+	desc = "The A-4 Thunder, created by the Terran Defense Forces for non-lethal takedowns of lightly armored targets. Capable of low and medium intensity fire."
 	icon = 'icons/obj/guns/taser.dmi'
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
@@ -15,7 +15,7 @@
 
 /obj/item/weapon/gun/energy/taser/carbine
 	name = "taser carbine"
-	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
+	desc = "The A7 Lightning, created by the Terran Defense Forces is the most modern variant of stunsticking your foes from a distance. Capable of low and medium intensity stunning."
 	icon = 'icons/obj/guns/taser_carbine.dmi'
 	icon_state = "tasercarbine"
 	w_class = ITEM_SIZE_LARGE
@@ -58,7 +58,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
-	desc = "An A&M X10 Thor. A vastly oversized variant of the A&M X6 Zeus. Fires overcharged electrodes to take down hostile armored targets without harming them too much."
+	desc = "The A12 Kraken, a heavy piece of brute force machinery, capable of stunning about anything through anything short of a tank."
 	icon = 'icons/obj/guns/stunrifle.dmi'
 	icon_state = "stunrifle"
 	item_state = "stunrifle"

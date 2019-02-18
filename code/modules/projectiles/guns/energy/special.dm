@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/ionrifle
 	name = "ion rifle"
-	desc = "The NT Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats, produced by NT. Not the best of its type."
+	desc = "The I6 Epherius, a rifle capable of disabling mechanical threats like mechs and rogue synthetics at a range."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
@@ -21,7 +21,7 @@
 
 /obj/item/weapon/gun/energy/ionrifle/small
 	name = "ion pistol"
-	desc = "The NT Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."
+	desc = "The I10 Rhine, a pistol capable of disabling mechanical threats such as mechs and rogue synthetics on the go. Can also fit in a holster."
 	icon = 'icons/obj/guns/ion_pistol.dmi'
 	icon_state = "ionpistol"
 	item_state = "ionpistol"

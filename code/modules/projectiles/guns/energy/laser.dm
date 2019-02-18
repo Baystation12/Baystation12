@@ -131,7 +131,7 @@ obj/item/weapon/gun/energy/retro
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
-	desc = "The HI DMR 9E is an older design of Hephaestus Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
+	desc = "The NE-171 'Killcatch'. A long ranged rifle by Nelwen Electronics that's slightly outdated, able to pick off targets with pinpoint accuracy."
 	icon = 'icons/obj/guns/laser_sniper.dmi'
 	icon_state = "sniper"
 	item_state = "laser"

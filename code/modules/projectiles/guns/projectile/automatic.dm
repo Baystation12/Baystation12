@@ -60,7 +60,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/merc_smg
 	name = "submachine gun"
-	desc = "The NanoTrasen C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Has a 'Per falcis, per pravitas' buttstamp."
+	desc = "The SI-14 Shark, a lightweight and rapidfiring SMG, for when murder is what's on the mind. States "Lamina per daemones" in script along the side."
 	icon = 'icons/obj/guns/merc_smg.dmi'
 	icon_state = "c20r"
 	item_state = "c20r"
@@ -95,7 +95,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/assault_rifle
 	name = "assault rifle"
-	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. Originally produced by Hephaestus. The serial number has been scratched off."
+	desc = "The outdated SI-12 assault rifle, cheaply mass produced by Serent Industries in the Resource Wars. Looks like it was shoddily put together."
 	icon = 'icons/obj/guns/assault_rifle.dmi'
 	icon_state = "arifle"
 	item_state = null
@@ -133,7 +133,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/sec_smg
 	name = "submachine gun"
-	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use."
+	desc = "The KH-771 Tapper, a cheap self-defense weapon mass produced by Kerwyn-Hensen Industries for paramilitary and governmental use."
 	icon = 'icons/obj/guns/sec_smg.dmi'
 	icon_state = "wt550"
 	item_state = "wt550"
@@ -165,7 +165,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/bullpup_rifle
 	name = "bullpup assault rifle"
-	desc = "The Hephaestus Industries Z8 Bulldog is an older model bullpup carbine. Makes you feel like a space marine when you hold it."
+	desc = "The KH-15 Thumper, a military grade assault rifle mass produced for use during the Resource Wars by Kerwyn-Hensen. A built in underslung grenade launcher rests as a grip."
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	icon_state = "carbine"
 	item_state = "z8carbine"
@@ -240,7 +240,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
-	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2281' engraved on the reciever." //probably should refluff this
+	desc = "The KH-11 Pounder, aptly given it's name from the rains of hellfire it spews. A futuristic take on the L6 Saw produced in small numbers by Kerwyn-Hensen."
 	icon = 'icons/obj/guns/saw.dmi'
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"

@@ -17,7 +17,7 @@
 
 /obj/item/weapon/gun/projectile/pistol/military
 	name = "military pistol"
-	desc = "The Hephaestus Industries P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
+	desc = "The KH-6, a standard-issue service sidearm given to all personnel in the Terran Army, mass produced my Kerywn-Hensen."
 	magazine_type = /obj/item/ammo_magazine/pistol/double
 	allowed_magazines = /obj/item/ammo_magazine/pistol/double
 	icon = 'icons/obj/guns/military_pistol.dmi'
@@ -27,7 +27,7 @@
 	fire_delay = 7
 
 /obj/item/weapon/gun/projectile/pistol/military/alt
-	desc = "The HelTek Optimus, best known as the standard-issue sidearm for the ICCG Navy."
+	desc = "The KH-8, a pistol with a built-in laser sight given to Special Forces personnel in the Terran Armed Forces. Produced by Kerwyn-Hensen."
 	icon = 'icons/obj/guns/military_pistol2.dmi'
 	icon_state = "military-alt"
 	safety_icon = "safety"
@@ -36,7 +36,7 @@
 
 /obj/item/weapon/gun/projectile/pistol/sec
 	name = "pistol"
-	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are."
+	desc = "The SI-2 handgun, produced on the frontier systems for easy access to defend against pirates by Serent Industries."
 	icon = 'icons/obj/guns/pistol.dmi'
 	icon_state = "secguncomp"
 	safety_icon = "safety"
@@ -50,7 +50,7 @@
 
 /obj/item/weapon/gun/projectile/pistol/magnum_pistol
 	name = "magnum pistol"
-	desc = "The HelTek Magnus, a robust Terran handgun that uses high-caliber ammo."
+	desc = "The SI-2 handgun, produced on the frontier systems for easy access to defend against pirates by Serent Industries."
 	icon = 'icons/obj/guns/magnum_pistol.dmi'
 	icon_state = "magnum"
 	item_state = "revolver"
