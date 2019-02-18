@@ -146,8 +146,7 @@
 	icon_state = "closed";
 	id_tag = "admin_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
@@ -257,9 +256,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
 "bm" = (
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -286,8 +283,7 @@
 /area/quartermaster/hangar/top)
 "bt" = (
 /obj/machinery/door/airlock/civilian{
-	name = "Emergency Storage";
-	req_access = list(14)
+	name = "Emergency Storage"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
@@ -601,8 +597,7 @@
 	icon_state = "closed";
 	id_tag = "merchant_shuttle_station_exterior";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -707,9 +702,7 @@
 /area/maintenance/fourthdeck/starboard)
 "cK" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/maintenance,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -858,8 +851,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_7_berth_hatch";
 	locked = 1;
-	name = "Escape Pod Two";
-	req_access = list(13)
+	name = "Escape Pod Two"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -1124,8 +1116,7 @@
 	icon_state = "closed";
 	id_tag = "merchant_shuttle_station_interior";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
@@ -1324,8 +1315,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_6_hatch";
 	locked = 1;
-	name = "Escape Pod One Hatch";
-	req_access = list(13)
+	name = "Escape Pod One Hatch"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
@@ -1369,8 +1359,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_7_hatch";
 	locked = 1;
-	name = "Escape Pod Two Hatch";
-	req_access = list(13)
+	name = "Escape Pod Two Hatch"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod7/station)
@@ -1424,9 +1413,7 @@
 "eJ" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance";
-	req_access = newlist();
-	req_access = list(12,73)
+	name = "Hangar Maintenance"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/fourthdeck/port)
@@ -1588,9 +1575,7 @@
 /area/crew_quarters/commissary)
 "fq" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/maintenance,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -1953,8 +1938,7 @@
 /area/maintenance/fourthdeck/aft)
 "gz" = (
 /obj/machinery/door/airlock/civilian{
-	name = "Cyborg Charging Station";
-	req_access = list(14)
+	name = "Cyborg Charging Station"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fourthdeck/starboard)
@@ -2040,8 +2024,7 @@
 	id = "starboardaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = 24;
-	pixel_y = 6;
-	req_access = list(31)
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/storage/auxillary/starboard)
@@ -2062,8 +2045,7 @@
 	id = "starboardaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
-	pixel_y = 6;
-	req_access = list(31)
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/fore)
@@ -2149,8 +2131,7 @@
 /area/shuttle/escape_pod7/station)
 "hl" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Officer's Mess Maintenance";
-	req_access = list(12, list(19,28,91))
+	name = "Officer's Mess Maintenance"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -2885,8 +2866,7 @@
 	id = "sup_office";
 	name = "Desk Shutter Control";
 	pixel_x = 26;
-	pixel_y = 28;
-	req_access = list(31)
+	pixel_y = 28
 	},
 /obj/effect/floor_decal/corner/brown/half{
 	icon_state = "bordercolorhalf";
@@ -3092,8 +3072,7 @@
 "kF" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/civilian{
-	name = "Custodial Closet";
-	req_access = list(26)
+	name = "Custodial Closet"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -3192,8 +3171,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Starboard Auxiliary Storage";
-	req_access = list(31)
+	name = "Starboard Auxiliary Storage"
 	},
 /obj/effect/floor_decal/techfloor/corner{
 	icon_state = "techfloor_corners";
@@ -3220,8 +3198,7 @@
 /area/hallway/primary/fourthdeck/fore)
 "lf" = (
 /obj/machinery/door/airlock/science{
-	name = "Pathfinder's Office";
-	req_access = list(94)
+	name = "Pathfinder's Office"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -3747,8 +3724,7 @@
 "mJ" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/civilian{
-	name = "Water Stores";
-	req_access = list(14,73)
+	name = "Water Stores"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/waterstore)
@@ -4195,8 +4171,7 @@
 /area/crew_quarters/adherent)
 "oc" = (
 /obj/machinery/door/airlock/civilian{
-	name = "Emergency Storage";
-	req_access = list(14)
+	name = "Emergency Storage"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
@@ -4276,8 +4251,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Docking Maintenance";
-	req_access = list(12)
+	name = "Docking Maintenance"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4;
@@ -4437,8 +4411,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/brigdoor/southright{
 	dir = 8;
-	name = "Supply Desk";
-	req_access = list(31)
+	name = "Supply Desk"
 	},
 /obj/machinery/door/window/southleft{
 	dir = 4;
@@ -4815,9 +4788,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/safe_room/fourthdeck)
 "qr" = (
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable{
 	d1 = 1;
@@ -5320,8 +5291,7 @@
 	icon_state = "closed";
 	id_tag = "nuke_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/fore)
@@ -5694,8 +5664,7 @@
 /area/quartermaster/flightcontrol)
 "ta" = (
 /obj/machinery/door/airlock/glass/command{
-	name = "Flight Control Tower";
-	req_access = list(list(13,80))
+	name = "Flight Control Tower"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -5820,9 +5789,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "tk" = (
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -5959,8 +5926,7 @@
 	icon_state = "closed";
 	id_tag = "nuke_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor,
 /area/hallway/primary/fourthdeck/fore)
@@ -6161,8 +6127,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/civilian{
-	name = "Emergency Storage";
-	req_access = list(14)
+	name = "Emergency Storage"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6419,8 +6384,7 @@
 	id = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = -6;
-	pixel_y = 24;
-	req_access = list(31)
+	pixel_y = 24
 	},
 /obj/machinery/light_switch{
 	pixel_x = 10;
@@ -6616,8 +6580,7 @@
 "vo" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/command{
-	name = "Fourth Deck Teleporter";
-	req_access = list(17)
+	name = "Fourth Deck Teleporter"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -6785,7 +6748,6 @@
 "vE" = (
 /obj/machinery/door/airlock/security{
 	name = "Security Checkpoint";
-	req_access = list(1);
 	secured_wires = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6847,8 +6809,7 @@
 /area/maintenance/fourthdeck/aft)
 "wd" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance";
-	req_access = list(list(73,12))
+	name = "Hangar Maintenance"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
@@ -6951,8 +6912,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/command{
-	name = "Primary Docking Port Control";
-	req_access = list(list(13,80))
+	name = "Primary Docking Port Control"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -7057,16 +7017,14 @@
 	id = "hangar_checkpoint_shutters";
 	name = "Checkpoint Window Shutters";
 	pixel_x = -3;
-	pixel_y = 7;
-	req_access = list(1)
+	pixel_y = 7
 	},
 /obj/machinery/button/remote/blast_door{
 	desc = "A remote control-switch for shutters.";
 	id = "hangar_hallway_shutters";
 	name = "Hallway Checkpoint Shutters";
 	pixel_x = -3;
-	pixel_y = -3;
-	req_access = list(1)
+	pixel_y = -3
 	},
 /obj/effect/floor_decal/corner/red/mono,
 /obj/machinery/light_switch{
@@ -8105,8 +8063,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Port Auxiliary Storage";
-	req_access = list(31)
+	name = "Port Auxiliary Storage"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -8136,9 +8093,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/fore)
 "AL" = (
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -8344,8 +8299,7 @@
 	id = "portaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = 24;
-	pixel_y = -6;
-	req_access = list(31)
+	pixel_y = -6
 	},
 /obj/machinery/firealarm{
 	dir = 2;
@@ -8362,8 +8316,7 @@
 	id = "portaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
-	pixel_y = -6;
-	req_access = list(31)
+	pixel_y = -6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -8684,8 +8637,7 @@
 "Dq" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Cargo Maintenance";
-	req_access = list(12,31,73)
+	name = "Cargo Maintenance"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/office)
@@ -9523,8 +9475,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_9_berth_hatch";
 	locked = 1;
-	name = "Escape Pod Four";
-	req_access = list(13)
+	name = "Escape Pod Four"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -9613,8 +9564,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_8_hatch";
 	locked = 1;
-	name = "Escape Pod Three Hatch";
-	req_access = list(13)
+	name = "Escape Pod Three Hatch"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
@@ -9634,8 +9584,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_9_hatch";
 	locked = 1;
-	name = "Escape Pod Four Hatch";
-	req_access = list(13)
+	name = "Escape Pod Four Hatch"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
@@ -9726,8 +9675,7 @@
 	icon_state = "closed";
 	id_tag = "skipjack_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
@@ -10020,8 +9968,7 @@
 	icon_state = "closed";
 	id_tag = "skipjack_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -10353,9 +10300,7 @@
 /area/maintenance/fourthdeck/port)
 "JO" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -10426,9 +10371,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "JR" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -10520,8 +10463,7 @@
 	icon_state = "closed";
 	id_tag = "rescue_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
@@ -10646,8 +10588,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Mail Room";
-	req_access = list(31)
+	name = "Mail Room"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -10790,8 +10731,7 @@
 /area/command/captainmess)
 "KZ" = (
 /obj/machinery/door/airlock/mining{
-	name = "Deck Chief";
-	req_access = list(41)
+	name = "Deck Chief"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment,
@@ -10988,8 +10928,7 @@
 	icon_state = "closed";
 	id_tag = "nuke_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -11435,16 +11374,14 @@
 "MU" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance";
-	req_access = list(list(73,12))
+	name = "Hangar Maintenance"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
 "MW" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance";
-	req_access = list(list(73,12))
+	name = "Hangar Maintenance"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/center)
@@ -11809,8 +11746,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Fourth Deck Substation";
-	req_access = list(11)
+	name = "Fourth Deck Substation"
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -11988,8 +11924,7 @@
 "OA" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
-	name = "Expedition Storage";
-	req_access = list(list(48,65,93))
+	name = "Expedition Storage"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fourthdeck/forestarboard)
@@ -12132,8 +12067,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Fourth Deck Shield Generator";
-	req_access = list(11)
+	name = "Fourth Deck Shield Generator"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shield/fourthdeck)
@@ -12333,8 +12267,7 @@
 	id = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = 26;
-	pixel_y = -24;
-	req_access = list(31)
+	pixel_y = -24
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
@@ -12399,8 +12332,7 @@
 	icon_state = "closed";
 	id_tag = "nuke_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/fore)
@@ -12656,8 +12588,7 @@
 /area/quartermaster/storage/upper)
 "Qg" = (
 /obj/machinery/door/airlock/civilian{
-	name = "Emergency Storage";
-	req_access = list(14)
+	name = "Emergency Storage"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -12800,8 +12731,7 @@
 "QI" = (
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Warehouse";
-	req_access = list(31)
+	name = "Warehouse"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -13013,8 +12943,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/window/brigdoor/northleft{
 	dir = 4;
-	name = "Security Checkpoint";
-	req_access = list(63)
+	name = "Security Checkpoint"
 	},
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/southleft{
@@ -13218,8 +13147,7 @@
 /area/maintenance/fourthdeck/aft)
 "RH" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Cargo Maintenance";
-	req_access = list(12,31)
+	name = "Cargo Maintenance"
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -13277,8 +13205,7 @@
 	id = "starboardaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
-	pixel_y = 6;
-	req_access = list(31)
+	pixel_y = 6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -13409,8 +13336,7 @@
 "Sg" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/civilian{
-	name = "Cistern";
-	req_access = list(14)
+	name = "Cistern"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13458,8 +13384,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Fourth Deck Substation";
-	req_access = list(11)
+	name = "Fourth Deck Substation"
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -13767,8 +13692,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Supply Office";
-	req_access = list(31)
+	name = "Supply Office"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13799,8 +13723,7 @@
 	id = "do_office";
 	name = "DO Shutter Control";
 	pixel_x = 6;
-	pixel_y = 24;
-	req_access = list(31)
+	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner/brown/mono,
 /obj/item/device/radio/intercom/department/security{
@@ -14128,8 +14051,7 @@
 	icon_state = "closed";
 	id_tag = "rescue_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -14184,8 +14106,7 @@
 /area/command/pathfinder)
 "TU" = (
 /obj/machinery/door/airlock/civilian{
-	name = "Commissary Counter";
-	req_access = list(list(67,96))
+	name = "Commissary Counter"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/commissary)
@@ -14206,8 +14127,7 @@
 	icon_state = "closed";
 	id_tag = "admin_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -14446,9 +14366,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "UH" = (
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14492,8 +14410,7 @@
 /area/maintenance/fourthdeck/forestarboard)
 "UL" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Cargo Maintenance";
-	req_access = list(12,31)
+	name = "Cargo Maintenance"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
@@ -15274,15 +15191,13 @@
 "WV" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/civilian{
-	name = "Galley";
-	req_access = list(28)
+	name = "Galley"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "WW" = (
 /obj/machinery/door/airlock/mining{
-	name = "Deck Chief";
-	req_access = list(41)
+	name = "Deck Chief"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -15569,8 +15484,7 @@
 /area/maintenance/fourthdeck/forestarboard)
 "XD" = (
 /obj/machinery/door/airlock/civilian{
-	name = "Commissary Counter";
-	req_access = list(list(67,96))
+	name = "Commissary Counter"
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -15777,8 +15691,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "Yc" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Laundry Maintenance";
-	req_access = list(12,14)
+	name = "Laundry Maintenance"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -15914,8 +15827,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_6_berth_hatch";
 	locked = 1;
-	name = "Escape Pod One";
-	req_access = list(13)
+	name = "Escape Pod One"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -16301,8 +16213,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/brigdoor/northleft{
 	dir = 2;
-	name = "Deck Chief";
-	req_access = list(41)
+	name = "Deck Chief"
 	},
 /obj/machinery/door/window/southleft{
 	dir = 1;
@@ -16420,8 +16331,7 @@
 	icon_state = "closed";
 	id_tag = "escape_pod_8_berth_hatch";
 	locked = 1;
-	name = "Escape Pod Three";
-	req_access = list(13)
+	name = "Escape Pod Three"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,

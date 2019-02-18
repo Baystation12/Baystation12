@@ -1978,8 +1978,7 @@
 	icon_state = "door_locked";
 	id_tag = "solars_outer";
 	locked = 1;
-	name = "EVA External Access";
-	req_access = list(13)
+	name = "EVA External Access"
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
@@ -2787,8 +2786,7 @@
 	icon_state = "door_locked";
 	id_tag = "hydrodock_inner";
 	locked = 1;
-	name = "Shipping Internal Access";
-	req_access = list(13)
+	name = "Shipping Internal Access"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -3012,8 +3010,7 @@
 	icon_state = "door_locked";
 	id_tag = "hydrodock_outer";
 	locked = 1;
-	name = "Shipping Access";
-	req_access = list(13)
+	name = "Shipping Access"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/dockport)

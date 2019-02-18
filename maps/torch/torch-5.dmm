@@ -334,9 +334,7 @@
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -598,9 +596,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/forestarboard)
 "bj" = (
@@ -767,16 +763,14 @@
 	id = "captaindoor";
 	name = "Aft Office Door Control";
 	pixel_x = 6;
-	pixel_y = 24;
-	req_access = list(20)
+	pixel_y = 24
 	},
 /obj/machinery/button/remote/airlock{
 	desc = "A remote control-switch for the office door.";
 	id = "captaindoorfore";
 	name = "Fore Office Door Control";
 	pixel_x = -6;
-	pixel_y = 24;
-	req_access = list(20)
+	pixel_y = 24
 	},
 /obj/machinery/button/windowtint{
 	id = "xo_windows";
@@ -1002,8 +996,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Bridge Substation";
-	req_access = list(11)
+	name = "Bridge Substation"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -1312,7 +1305,6 @@
 /obj/machinery/door/airlock/sol{
 	id_tag = "hopdoor";
 	name = "Executive Officer";
-	req_access = list(57);
 	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -1339,8 +1331,7 @@
 	},
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 4;
-	name = "CMO's suit storage";
-	req_access = list(40)
+	name = "CMO's suit storage"
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
@@ -1780,7 +1771,6 @@
 /obj/machinery/door/airlock/sol{
 	id_tag = "captaindoor";
 	name = "Commanding Officer";
-	req_access = list(20);
 	secured_wires = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1837,8 +1827,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/brigdoor/eastright{
 	dir = 1;
-	name = "Executive Officer's Desk";
-	req_access = list(57)
+	name = "Executive Officer's Desk"
 	},
 /obj/machinery/door/window/westleft{
 	base_state = "right";
@@ -2198,7 +2187,6 @@
 /obj/machinery/door/airlock/sol{
 	id_tag = "captaindoorfore";
 	name = "Commanding Officer";
-	req_access = list(20);
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -2977,8 +2965,7 @@
 	icon_state = "closed";
 	id_tag = "bridge_eva_outer";
 	locked = 1;
-	name = "Bridge EVA External Access";
-	req_access = list(13)
+	name = "Bridge EVA External Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
@@ -2989,8 +2976,7 @@
 	icon_state = "closed";
 	id_tag = "bridge_eva_outer";
 	locked = 1;
-	name = "Bridge EVA External Access";
-	req_access = list(13)
+	name = "Bridge EVA External Access"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -3023,8 +3009,7 @@
 /area/aquila/cockpit)
 "hb" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Cockpit";
-	req_access = list(78)
+	name = "Cockpit"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3094,7 +3079,6 @@
 /obj/machinery/door/airlock/glass/command{
 	id_tag = "starboardbridgedoor";
 	name = "Bridge";
-	req_access = list(19);
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -3130,8 +3114,7 @@
 /area/bridge/meeting_room)
 "hr" = (
 /obj/machinery/door/airlock/command{
-	name = "Conference Room";
-	req_access = list(19)
+	name = "Conference Room"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3192,7 +3175,6 @@
 	},
 /obj/machinery/door/airlock/engineering{
 	name = "Chief Engineer";
-	req_access = list(56);
 	secured_wires = 1
 	},
 /obj/structure/cable/green{
@@ -4073,8 +4055,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 1;
-	name = "AI Core Access";
-	req_access = list(16)
+	name = "AI Core Access"
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/turret_protected/ai)
@@ -4316,9 +4297,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/catwalk,
@@ -4331,8 +4310,7 @@
 	icon_state = "closed";
 	id_tag = "bridge_eva_inner";
 	locked = 1;
-	name = "Bridge EVA Internal Access";
-	req_access = list(13)
+	name = "Bridge EVA Internal Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
@@ -4342,8 +4320,7 @@
 	icon_state = "closed";
 	id_tag = "bridge_eva_inner";
 	locked = 1;
-	name = "Bridge EVA Internal Access";
-	req_access = list(13)
+	name = "Bridge EVA Internal Access"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4482,8 +4459,7 @@
 	icon_state = "closed";
 	id_tag = "ai_core_outer";
 	locked = 1;
-	name = "AI Core Internal Access";
-	req_access = list(16)
+	name = "AI Core Internal Access"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/turret_protected/ai_foyer)
@@ -4538,8 +4514,7 @@
 /area/turret_protected/ai)
 "kr" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "AI Outer Ring Access";
-	req_access = list(16)
+	name = "AI Outer Ring Access"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/turret_protected/ai_outer_chamber)
@@ -4677,8 +4652,7 @@
 	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/westright{
-	name = "suit storage";
-	req_access = list(56)
+	name = "suit storage"
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -5055,8 +5029,7 @@
 "lq" = (
 /obj/machinery/door/airlock/command{
 	id_tag = "captaindoor";
-	name = "Command Chair";
-	req_access = list(19)
+	name = "Command Chair"
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -5227,7 +5200,6 @@
 /obj/machinery/door/airlock/glass/command{
 	id_tag = null;
 	name = "Aquila Dock";
-	req_access = list(78);
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -5392,8 +5364,7 @@
 	icon_state = "closed";
 	id_tag = "ai_core_inner";
 	locked = 1;
-	name = "AI Internal Access";
-	req_access = list(16)
+	name = "AI Internal Access"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/turret_protected/ai_foyer)
@@ -5446,8 +5417,7 @@
 	id = "AICore";
 	name = "AI Core Shutter Control";
 	pixel_x = 24;
-	pixel_y = 24;
-	req_access = list(16)
+	pixel_y = 24
 	},
 /obj/machinery/flasher{
 	pixel_x = 24;
@@ -5584,8 +5554,7 @@
 /area/turret_protected/ai_outer_chamber)
 "mv" = (
 /obj/machinery/door/airlock/vault/bolted{
-	name = "AI Core External Access";
-	req_access = list(16)
+	name = "AI Core External Access"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/turret_protected/ai_outer_chamber)
@@ -5607,7 +5576,6 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/security{
 	name = "Security Checkpoint";
-	req_access = list(1);
 	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -5736,8 +5704,7 @@
 	},
 /obj/machinery/door/window/brigdoor/northleft{
 	dir = 8;
-	name = "Security Checkpoint";
-	req_access = list(63)
+	name = "Security Checkpoint"
 	},
 /obj/machinery/door/window/southleft{
 	dir = 4;
@@ -6409,16 +6376,14 @@
 	id = "bridge_checkpoint_shutters";
 	name = "Checkpoint Window Shutters";
 	pixel_x = -3;
-	pixel_y = 6;
-	req_access = list(1)
+	pixel_y = 6
 	},
 /obj/machinery/button/remote/blast_door{
 	desc = "A remote control-switch for shutters.";
 	id = "bridge_hallway_shutters";
 	name = "Hallway Checkpoint Shutters";
 	pixel_x = -3;
-	pixel_y = -4;
-	req_access = list(1)
+	pixel_y = -4
 	},
 /obj/item/weapon/folder/red{
 	pixel_x = 6
@@ -6506,9 +6471,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/aftport)
@@ -6538,8 +6501,7 @@
 	icon_state = "closed";
 	id_tag = "ai_core_outer";
 	locked = 1;
-	name = "AI Core Internal Access";
-	req_access = list(16)
+	name = "AI Core Internal Access"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/turret_protected/ai_foyer)
@@ -7291,8 +7253,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/command{
 	dir = 8;
 	id_tag = "starboardbridgeaccess";
-	name = "Bridge Access";
-	req_access = list(list(19,80))
+	name = "Bridge Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge)
@@ -7325,8 +7286,7 @@
 /obj/item/weapon/rig/command/science,
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 4;
-	name = "CSO's suit storage";
-	req_access = list(30)
+	name = "CSO's suit storage"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -7334,7 +7294,6 @@
 /obj/machinery/door/airlock/glass/command{
 	id_tag = "portbridgedoor";
 	name = "Bridge";
-	req_access = list(19);
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -7359,8 +7318,7 @@
 /area/bridge)
 "qk" = (
 /obj/machinery/door/airlock/command{
-	name = "Conference Room";
-	req_access = list(19)
+	name = "Conference Room"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -7396,7 +7354,6 @@
 /obj/machinery/door/airlock/security{
 	id_tag = "cosdoor";
 	name = "Chief of Security";
-	req_access = list(58);
 	secured_wires = 1
 	},
 /obj/structure/cable/green{
@@ -7474,7 +7431,6 @@
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/machinery/door/airlock/medical{
 	name = "Chief Medical Officer";
-	req_access = list(40);
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -8065,8 +8021,7 @@
 /area/bridge/storage)
 "rK" = (
 /obj/machinery/door/airlock/command{
-	name = "Bridge Storage";
-	req_access = list(19)
+	name = "Bridge Storage"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8517,8 +8472,7 @@
 /area/aux_eva)
 "sn" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Secure Storage";
-	req_access = list(78)
+	name = "Secure Storage"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -8688,7 +8642,6 @@
 /obj/machinery/door/airlock/research{
 	id_tag = "liaisondoor";
 	name = "Corporate Liaison";
-	req_access = list(84);
 	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -8717,7 +8670,6 @@
 /obj/machinery/door/airlock/sol{
 	id_tag = "repdoor";
 	name = "SolGov Representative";
-	req_access = list(85);
 	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -8786,7 +8738,6 @@
 	},
 /obj/machinery/door/airlock/research{
 	name = "Chief Science Officer";
-	req_access = list(30);
 	secured_wires = 1
 	},
 /obj/structure/cable/green{
@@ -8955,7 +8906,6 @@
 /obj/machinery/door/airlock/sol{
 	id_tag = "seaforedoor";
 	name = "Senior Enlisted Advisor";
-	req_access = list(92);
 	secured_wires = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -9327,7 +9277,6 @@
 	name = "safe room door-control";
 	pixel_x = 0;
 	pixel_y = 32;
-	req_access = newlist();
 	specialfunctions = 4
 	},
 /obj/structure/bed/chair/padded/blue,
@@ -9392,7 +9341,6 @@
 /obj/machinery/door/airlock/sol{
 	id_tag = "seaaftdoor";
 	name = "Senior Enlisted Advisor";
-	req_access = list(92);
 	secured_wires = 1
 	},
 /obj/structure/disposalpipe/segment{
@@ -10267,8 +10215,7 @@
 	id = "liaisondoor";
 	name = "Office Door Control";
 	pixel_x = 6;
-	pixel_y = 24;
-	req_access = list(84)
+	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner/b_green/diagonal,
 /obj/structure/bed/chair/office/comfy/green{
@@ -10290,8 +10237,7 @@
 	id = "repdoor";
 	name = "Office Door Control";
 	pixel_x = -6;
-	pixel_y = 24;
-	req_access = list(85)
+	pixel_y = 24
 	},
 /obj/structure/bed/chair/office/comfy/blue{
 	tag = "icon-comfyofficechair_preview (NORTH)";
@@ -10453,8 +10399,7 @@
 /obj/machinery/door/airlock/engineering{
 	icon_state = "closed";
 	locked = 0;
-	name = "Bridge Solar Access";
-	req_access = list(11)
+	name = "Bridge Solar Access"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -10532,8 +10477,7 @@
 	icon_state = "closed";
 	id_tag = "solar_bridge_inner";
 	locked = 1;
-	name = "Engineering External Access";
-	req_access = list(11,13)
+	name = "Engineering External Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/auxsolarbridge)
@@ -10557,8 +10501,7 @@
 	icon_state = "closed";
 	id_tag = "solar_bridge_outer";
 	locked = 1;
-	name = "Engineering External Access";
-	req_access = list(11,13)
+	name = "Engineering External Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/auxsolarbridge)
@@ -10643,16 +10586,14 @@
 	id = "seaforedoor";
 	name = "Fore Office Door Control";
 	pixel_x = -6;
-	pixel_y = -24;
-	req_access = list(92)
+	pixel_y = -24
 	},
 /obj/machinery/button/remote/airlock{
 	desc = "A remote control-switch for the office door.";
 	id = "seaaftdoor";
 	name = "Aft Office Door Control";
 	pixel_x = 6;
-	pixel_y = -24;
-	req_access = list(92)
+	pixel_y = -24
 	},
 /obj/machinery/button/windowtint{
 	id = "sea_windows";
@@ -10998,9 +10939,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/foreport)
 "xl" = (
@@ -11081,9 +11020,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/hatch/maintenance{
-	req_access = list(12)
-	},
+/obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/foreport)
@@ -11500,22 +11437,19 @@
 	id = "starboardbridgedoor";
 	name = "Bridge Starboard Door Control";
 	pixel_x = 26;
-	pixel_y = 6;
-	req_access = list(19)
+	pixel_y = 6
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "bridge blast";
 	name = "Bridge Window Lockdown Control";
 	pixel_x = 26;
-	pixel_y = -6;
-	req_access = list(19)
+	pixel_y = -6
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "bridge entry star";
 	name = "Starboard Bridge Entrance Lockdown Control";
 	pixel_x = 38;
-	pixel_y = -6;
-	req_access = list(19)
+	pixel_y = -6
 	},
 /obj/machinery/button/remote/airlock{
 	id = "starboardbridgeaccess";
@@ -11694,22 +11628,19 @@
 	id = "portbridgedoor";
 	name = "Bridge Port Door Control";
 	pixel_x = 26;
-	pixel_y = -6;
-	req_access = list(19)
+	pixel_y = -6
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "bridge blast";
 	name = "Bridge Window Lockdown Control";
 	pixel_x = 26;
-	pixel_y = 6;
-	req_access = list(19)
+	pixel_y = 6
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "bridge entry port";
 	name = "Port Bridge Entrance Lockdown Control";
 	pixel_x = 38;
-	pixel_y = 6;
-	req_access = list(19)
+	pixel_y = 6
 	},
 /obj/effect/floor_decal/scglogo{
 	tag = "icon-bottom-right";
@@ -12230,8 +12161,7 @@
 /area/crew_quarters/heads/cobed)
 "Db" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Head";
-	req_access = list()
+	name = "Head"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12306,7 +12236,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/sol{
 	name = "XO's Quarters";
-	req_access = list(57);
 	secured_wires = 1
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -12329,8 +12258,7 @@
 "Dj" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Disciplinary Board Room Maintenance Access";
-	req_access = list(12,19)
+	name = "Disciplinary Board Room Maintenance Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge/disciplinary_board_room)
@@ -12382,8 +12310,7 @@
 /obj/item/weapon/rig/command/xo/equipped,
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 8;
-	name = "XO's suit storage";
-	req_access = list(57)
+	name = "XO's suit storage"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -12880,7 +12807,6 @@
 "Ha" = (
 /obj/machinery/door/airlock/sol{
 	name = "CO's Quarters";
-	req_access = list(20);
 	secured_wires = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -13944,8 +13870,7 @@
 /area/crew_quarters/heads/office/cmo)
 "Kg" = (
 /obj/machinery/door/airlock/vault/bolted{
-	name = "AI Core Backup Access";
-	req_access = list(16)
+	name = "AI Core Backup Access"
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
@@ -14238,7 +14163,6 @@
 "Lp" = (
 /obj/machinery/door/airlock/security{
 	name = "Security Checkpoint";
-	req_access = list(1);
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -14561,8 +14485,7 @@
 /area/crew_quarters/heads/office/ce)
 "Ni" = (
 /obj/machinery/door/airlock/engineering{
-	name = "Bridge Deck Shield Generator";
-	req_access = list(11)
+	name = "Bridge Deck Shield Generator"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14652,8 +14575,7 @@
 /area/maintenance/bridge/foreport)
 "Ob" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Crew Area";
-	req_access = list(80)
+	name = "Crew Area"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -14788,8 +14710,7 @@
 	id = "cosdoor";
 	name = "Office Door Control";
 	pixel_x = -12;
-	pixel_y = 0;
-	req_access = list(58)
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cos)
@@ -14807,8 +14728,7 @@
 /area/aquila/passenger)
 "Pb" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Passenger Seating";
-	req_access = list()
+	name = "Passenger Seating"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14897,8 +14817,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/command{
 	dir = 8;
 	id_tag = "portbridgeaccess";
-	name = "Bridge Access";
-	req_access = list(list(19,80))
+	name = "Bridge Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge)
@@ -14962,7 +14881,6 @@
 "Qc" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "Auxiliary E.V.A.";
-	req_access = list(18);
 	secured_wires = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -15123,8 +15041,7 @@
 /area/hallway/primary/bridge/fore)
 "Rb" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Infirmary";
-	req_access = list()
+	name = "Infirmary"
 	},
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -15267,8 +15184,7 @@
 /area/aquila/medical)
 "Sb" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Storage";
-	req_access = list(80)
+	name = "Storage"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -15471,8 +15387,7 @@
 /area/hallway/primary/bridge/fore)
 "Tb" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Infirmary";
-	req_access = list()
+	name = "Infirmary"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -15569,8 +15484,7 @@
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15610,7 +15524,6 @@
 "Tj" = (
 /obj/machinery/door/airlock/sol{
 	name = "Disciplinary Board Room";
-	req_access = list(19);
 	secured_wires = 0
 	},
 /obj/structure/cable/green{
@@ -15658,8 +15571,7 @@
 /area/bridge/disciplinary_board_room)
 "Ub" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Engineering";
-	req_access = list(80)
+	name = "Engineering"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -15724,8 +15636,7 @@
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock";
-	req_access = list(13)
+	name = "Docking Port Airlock"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15751,8 +15662,7 @@
 	},
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 8;
-	name = "CO's suit storage";
-	req_access = list(20)
+	name = "CO's suit storage"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/blue/diagonal{
@@ -15923,8 +15833,7 @@
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_outer";
 	locked = 1;
-	name = "Aquila External Access";
-	req_access = newlist()
+	name = "Aquila External Access"
 	},
 /obj/machinery/shield_diffuser,
 /obj/structure/cable{
@@ -16083,8 +15992,7 @@
 	id = "hopdoor";
 	name = "Office Door Control";
 	pixel_x = -12;
-	pixel_y = 0;
-	req_access = list(37)
+	pixel_y = 0
 	},
 /obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/tiled/dark,
@@ -16114,8 +16022,7 @@
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_inner";
 	locked = 1;
-	name = "Aquila External Access";
-	req_access = newlist()
+	name = "Aquila External Access"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -16287,8 +16194,7 @@
 	},
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 4;
-	name = "CoS' suit storage";
-	req_access = list(58)
+	name = "CoS' suit storage"
 	},
 /obj/effect/floor_decal/corner/red/full,
 /obj/item/weapon/tank/emergency/oxygen/double,
