@@ -44,3 +44,4 @@ changes:
   - tweak: "Renamed Credits to Supply Points on the cargo terminals."
   - tweak: "Buffed Unathi's healing aura mildly."
   - bugfix: "Fixes duplicating adminhelps."
+  - bugfix: "Fixes Captain spawning with the wrong suit."
