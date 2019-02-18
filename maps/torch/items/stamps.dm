@@ -19,7 +19,7 @@
 	icon_state = "stamp-ward"
 
 /obj/item/weapon/stamp/solgov
-	name = "\improper Sol Central Government rubber stamp"
+	name = "\improper High Command rubber stamp"
 	icon_state = "stamp-intaff"
 
 /obj/item/weapon/stamp/nt

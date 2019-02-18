@@ -36,6 +36,7 @@ changes:
   - spellcheck: "Fixed join text."
   - spellcheck: "Renames a few berets and their descriptions to a lore friendly variant."
   - spellcheck: "Renames ERT backpacks and their descriptions to lore friendly variants."
+  - spellcheck: "Renames solgov stamp appearing on admin faxes."
   - rscdel: "Removed a lot of options in the background menu for character creation. Not permanent, meant to be temporary."
   - rscdel: "Removes Tritonians as a species."
   - tweak: "Renamed Credits to Supply Points on the cargo terminals."
