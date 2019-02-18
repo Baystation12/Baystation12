@@ -76,21 +76,19 @@ var/global/ntnet_card_uid = 1
 		if(!ethernet || specific_action) // Wired connection ensures a basic connection to NTNet, however no usage of disabled network services.
 			return 0
 
-	if(ethernet) // Computer is connected via wired connection.
-		return 3
+	var/strength = 1
+	if(ethernet)
+		strength = 3
+	else if(long_range)
+		strength = 2
 
-	if(holder2)
-		var/turf/T = get_turf(holder2)
-		if(!istype(T)) //no reception in nullspace
-			return 0
-		if(T.z in GLOB.using_map.station_levels)
-			// Computer is on station. Low/High signal depending on what type of network card you have
-			if(long_range)
-				return 2
-			else
-				return 1
-		if(T.z in GLOB.using_map.contact_levels) //not on station, but close enough for radio signal to travel
-			if(long_range) // Computer is not on station, but it has upgraded network card. Low signal.
-				return 1
+	var/turf/T = get_turf(holder2)
+	if(!istype(T)) //no reception in nullspace
+		return 0
+	if(T.z in GLOB.using_map.station_levels)
+		// Computer is on station. Low/High signal depending on what type of network card you have
+		return strength
+	if(T.z in GLOB.using_map.contact_levels) //not on station, but close enough for radio signal to travel
+		return strength - 1
 
 	return 0 // Computer is not on station and does not have upgraded network card. No signal.
