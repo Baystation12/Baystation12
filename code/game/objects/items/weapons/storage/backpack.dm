@@ -384,7 +384,7 @@
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
-	name = "emergency response team backpack"
+	name = "Crisis Response Force Backpack"
 	desc = "A spacious backpack with lots of pockets, used by members of the Emergency Response Team."
 	icon_state = "ert_commander"
 	item_state_slots = list(
@@ -394,24 +394,24 @@
 
 //Commander
 /obj/item/weapon/storage/backpack/ert/commander
-	name = "emergency response team commander backpack"
+	name = "Crisis Response Force Commander Backpack"
 	desc = "A spacious backpack with lots of pockets, worn by the commander of an Emergency Response Team."
 
 //Security
 /obj/item/weapon/storage/backpack/ert/security
-	name = "emergency response team security backpack"
+	name = "Crisis Response Force Security Backpack"
 	desc = "A spacious backpack with lots of pockets, worn by security members of an Emergency Response Team."
 	icon_state = "ert_security"
 
 //Engineering
 /obj/item/weapon/storage/backpack/ert/engineer
-	name = "emergency response team engineer backpack"
+	name = "Crisis Response Force Engineer Backpack"
 	desc = "A spacious backpack with lots of pockets, worn by engineering members of an Emergency Response Team."
 	icon_state = "ert_engineering"
 
 //Medical
 /obj/item/weapon/storage/backpack/ert/medical
-	name = "emergency response team medical backpack"
+	name = "Crisis Response Force Medical Backpack"
 	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
 	icon_state = "ert_medical"
 
