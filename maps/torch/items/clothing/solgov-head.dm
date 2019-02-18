@@ -374,7 +374,7 @@
 
 /obj/item/clothing/head/helmet/solgov/command
 	name = "command helmet"
-	desc = "A helmet with 'SOL CENTRAL GOVERNMENT' printed on the back in gold lettering."
+	desc = "A helmet with 'TERRAN DEFENSE FORCE' printed on the back in gold lettering."
 	icon_state = "helmet_command"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
