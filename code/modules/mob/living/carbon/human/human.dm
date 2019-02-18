@@ -933,7 +933,7 @@
 
 /mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/external/organ, var/obj/item/O)
 	// All kinds of embedded objects cause bleeding.
-	if(!can_feel_pain())
+	if(!organ.can_feel_pain())
 		to_chat(src, "<span class='warning'>You feel [O] moving inside your [organ.name].</span>")
 	else
 		var/msg = pick( \
@@ -942,10 +942,7 @@
 			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
 		custom_pain(msg,40,affecting = organ)
 
-	organ.take_external_damage(rand(1,3), 0, 0)
-	if(!BP_IS_ROBOTIC(organ) && (should_have_organ(BP_HEART))) //There is no blood in protheses.
-		organ.status |= ORGAN_BLEEDING
-		src.adjustToxLoss(rand(1,3))
+	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
