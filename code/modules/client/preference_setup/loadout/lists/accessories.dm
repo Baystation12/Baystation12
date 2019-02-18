@@ -51,7 +51,7 @@
 	display_name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
-
+/*
 /datum/gear/accessory/ntaward
 	display_name = "corporate award selection"
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
@@ -65,7 +65,7 @@
 	ntawards["distinguished service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
 	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
 	gear_tweaks += new/datum/gear_tweak/path(ntawards)
-
+*/
 //have to break up armbands to restrict access
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
@@ -92,11 +92,11 @@
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
 	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/assistant)
-
+/*
 /datum/gear/accessory/armband_nt
 	display_name = "corporate armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-
+*/
 /datum/gear/accessory/ftupin
 	display_name = "Free Trade Union pin"
 	path = /obj/item/clothing/accessory/ftupin

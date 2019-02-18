@@ -29,10 +29,10 @@
 	name = "\improper PCRC helmet"
 	desc = "A helmet with 'PRIVATE SECURITY' printed on the back in cyan lettering."
 	icon_state = "helmet_pcrc"
-
+/*
 /obj/item/clothing/head/helmet/nt/guard
 	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/nt)
-
+*/
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"
 	desc = "A tan helmet made from advanced ceramic. Comfortable and robust."

@@ -206,7 +206,7 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "null"
 	slot = ACCESSORY_SLOT_ARMOR_M
-
+/*
 /obj/item/clothing/accessory/armor/tag/nt
 	name = "\improper CORPORATE SECURITY tag"
 	desc = "An armor tag with the words CORPORATE SECURITY printed in bottle green lettering on it."
@@ -221,7 +221,7 @@
 	name = "\improper SAARE tag"
 	desc = "An armor tag with the acronym SAARE printed in olive-green lettering on it."
 	icon_state = "saaretag"
-
+*/
 /obj/item/clothing/accessory/armor/tag/press
 	name = "\improper PRESS tag"
 	desc = "A tag with the word PRESS printed in white lettering on it."
@@ -296,7 +296,7 @@
 	name = "tan helmet cover"
 	desc = "A fabric cover for armored helmets. This one has a desert camouflage pattern."
 	icon_state = "helmcover_tan"
-
+/*
 /obj/item/clothing/accessory/armor/helmcover/nt
 	name = "corporate helmet cover"
 	desc = "A fabric cover for armored helmets. This one has corporate colors."
@@ -311,3 +311,4 @@
 	name = "\improper SAARE helmet cover"
 	desc = "A fabric cover for armored helmets. This one has SAARE's colors."
 	icon_state = "helmcover_saare"
+*/

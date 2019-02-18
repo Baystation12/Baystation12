@@ -357,10 +357,10 @@
 	icon_state_up = "mcushankaup"
 
 //helmets and other such trash
-
+/*
 /obj/item/clothing/head/helmet/solgov
 	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/blue/sol)
-
+*/
 /obj/item/clothing/head/helmet/solgov/security
 	name = "security helmet"
 	desc = "A helmet with 'POLICE' printed on the back in silver lettering."

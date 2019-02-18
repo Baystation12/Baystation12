@@ -36,10 +36,10 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "command armor crate"
 	access = access_heads
-
+/*
 /decl/hierarchy/supply_pack/security/nanoarmor
 	name = "Armor - Corporate"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/nt = 2,
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium = 2,
 					/obj/item/clothing/head/helmet/nt/guard =2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -54,7 +54,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "corporate light armor crate"
 	access = access_nanotrasen
-
+*/
 /decl/hierarchy/supply_pack/security/pistol
 	name = "Weapons - Ballistic sidearms"
 	contains = list(/obj/item/weapon/gun/projectile/pistol/military = 4)
