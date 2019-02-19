@@ -18,7 +18,7 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 	message = "Entered id successfully banned!"
 
 /datum/terminal_skill_fail/random_ban/can_run(mob/user, datum/terminal/terminal)
-	if(!has_access(list(access_network), list(), user.GetAccess()))
+	if(!has_access(list(access_network), user.GetAccess()))
 		return
 	return ..()
 
