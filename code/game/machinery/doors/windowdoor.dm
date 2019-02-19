@@ -25,10 +25,13 @@
 		set_dir(assembly.dir)
 		set_density(0)
 		if(assembly.electronics)
-			req_access = assembly.electronics.conf_access
-			if(assembly.electronics.one_access)
-				req_access = list(req_access)
-			autoset_access = FALSE
+			if(assembly.electronics.autoset)
+				autoset_access = TRUE // Being careful in case of subtypes or something.
+			else
+				req_access = assembly.electronics.conf_access
+				if(assembly.electronics.one_access)
+					req_access = list(req_access)
+				autoset_access = FALSE
 			electronics = assembly.electronics
 			electronics.forceMove(src)
 	. = ..()

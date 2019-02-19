@@ -1298,11 +1298,14 @@ About the new airlock wires panel:
 		electronics.forceMove(src)
 
 		//update the door's access to match the electronics'
+		if(electronics.autoset)
+			autoset_access = TRUE
+		else
+			req_access = electronics.conf_access
+			if(electronics.one_access)
+				req_access = list(req_access)
+			autoset_access = FALSE // We just set it, so don't try and do anything fancy later.
 		secured_wires = electronics.secure
-		req_access = electronics.conf_access
-		if(electronics.one_access)
-			req_access = list(req_access)
-		autoset_access = FALSE // We just set it, so don't try and do anything fancy later.
 
 		//get the name from the assembly
 		if(assembly.created_name)

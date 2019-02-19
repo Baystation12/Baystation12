@@ -16,7 +16,7 @@
 	var/last_configurator = null
 	var/locked = 1
 	var/lockable = 1
-
+	var/autoset = FALSE // Whether the door should inherit access from surrounding areas
 
 /obj/item/weapon/airlock_electronics/attack_self(mob/user as mob)
 	if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
@@ -55,6 +55,7 @@
 	data["oneAccess"] = one_access
 	data["locked"] = locked
 	data["lockable"] = lockable
+	data["autoset"] = autoset
 
 	return data
 
@@ -68,6 +69,9 @@
 			return TRUE
 		if("one_access")
 			one_access = !one_access
+			return TRUE
+		if("autoset")
+			autoset = !autoset
 			return TRUE
 		if("set")
 			var/access = text2num(params["access"])

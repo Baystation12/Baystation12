@@ -547,6 +547,7 @@
 /obj/machinery/door/proc/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
 	var/obj/item/weapon/airlock_electronics/electronics = new electronics_type(loc)
 	electronics.set_access(src)
+	electronics.autoset = autoset_access
 	return electronics
 
 /obj/machinery/door/proc/inherit_access_from_area()
