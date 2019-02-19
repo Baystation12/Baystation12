@@ -8,7 +8,8 @@
 	base_name = "Nanolaminate Framework"
 	base_desc = ""
 	base_icon = 'code/modules/halo/turfs/covenant/floors.dmi'
-	base_icon_state = "Nanolaminate Flooring"
+	base_icon_state = "Nanolaminate Framework"
+	initial_flooring = /decl/flooring/reinforced/covenant
 
 	mineral = DEFAULT_WALL_MATERIAL
 
@@ -16,6 +17,15 @@
 
 /turf/simulated/floor/covenant/unggoy_den
     initial_gas = list("methane" = (101.325*2500/(293.15*8.31)))
+
+/decl/flooring/reinforced/covenant
+	name = "Nanolaminate Flooring"
+	desc = ""
+	icon = 'code/modules/halo/turfs/covenant/floors.dmi'
+	icon_base = "Nanolaminate Flooring"
+	build_type = null
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
+	can_paint = null
 
 /turf/simulated/floor/drone_biomass
 	name = "biomass"
