@@ -68,7 +68,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		if(laser || BP_IS_ROBOTIC(src))
 			damage_amt += burn
 			cur_damage += burn_dam
-		var/organ_damage_threshold = 10
+		var/organ_damage_threshold = 5
 		if(sharp)
 			organ_damage_threshold *= 0.5
 		var/organ_damage_prob = 5 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
