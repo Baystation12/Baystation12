@@ -210,7 +210,7 @@ obj/structure/windoor_assembly/Destroy()
 
 					var/obj/machinery/door/window/windoor
 					if(secure)
-						windoor = new /obj/machinery/door/window/brigdoor(loc)
+						windoor = new /obj/machinery/door/window/brigdoor(loc, src)
 						if(facing == "l")
 							windoor.icon_state = "leftsecureopen"
 							windoor.base_state = "leftsecure"
@@ -218,20 +218,13 @@ obj/structure/windoor_assembly/Destroy()
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
 					else
-						windoor = new (loc)
+						windoor = new (loc, src)
 						if(src.facing == "l")
 							windoor.icon_state = "leftopen"
 							windoor.base_state = "left"
 						else
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
-					windoor.set_dir(src.dir)
-					windoor.set_density(0)
-					windoor.req_access = electronics.conf_access
-					if(electronics.one_access)
-						windoor.req_access = list(windoor.req_access)
-					windoor.electronics = src.electronics
-					electronics.forceMove(windoor)
 					qdel(src)
 
 			else

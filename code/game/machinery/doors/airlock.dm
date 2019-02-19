@@ -1302,6 +1302,7 @@ About the new airlock wires panel:
 		req_access = electronics.conf_access
 		if(electronics.one_access)
 			req_access = list(req_access)
+		autoset_access = FALSE // We just set it, so don't try and do anything fancy later.
 
 		//get the name from the assembly
 		if(assembly.created_name)
