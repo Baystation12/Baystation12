@@ -48,7 +48,7 @@
 /area/achlys/one
 	sound_env = LARGE_ENCLOSED
 	name = "wide open areas"
-/area/achlys/one/z1main
+/area/achlys/eight/z1main
 /area/achlys/one/z2main1
 /area/achlys/one/z2main2
 /area/achlys/three
@@ -107,7 +107,7 @@
 	name = "spacious hallways"
 /area/achlys/eight/z1cargohallway
 /area/achlys/eight/z1meetinghall
-/area/achlys/eight/z1hangerhallway
+/area/achlys/one/z1hangerhallway
 /area/achlys/eight/z2cargoandhalls
 /area/achlys/nine
 	name = "small rooms"
