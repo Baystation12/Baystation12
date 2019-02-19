@@ -17,13 +17,10 @@
 	access = list(access_bearcat, access_bearcat_captain)
 
 /obj/machinery/door/airlock/autoname/bearcat
-	req_access = list(access_bearcat)
 
 /obj/machinery/door/airlock/autoname/engineering/bearcat
-	req_access = list(access_bearcat)
 
 /obj/machinery/door/airlock/autoname/command/bearcat
-	req_access = list(access_bearcat_captain)
 
 /obj/structure/closet/secure_closet/engineering_electrical/bearcat
 	req_access = list(access_bearcat)

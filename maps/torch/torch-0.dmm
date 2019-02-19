@@ -5020,7 +5020,6 @@
 "lo" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Cargo Maintenance"
-	req_access = list(12, 31)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -14580,7 +14579,6 @@
 /obj/machinery/door/airlock/research{
 	id_tag = null;
 	name = "Custodial Closet"
-	req_access = list(list(206,207))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
