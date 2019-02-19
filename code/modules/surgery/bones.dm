@@ -9,7 +9,7 @@
 
 /decl/surgery_step/bone/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.stage == required_stage)
+	if(affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
 		return affected
 
 //////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@
 	max_duration = 70
 	shock_level = 40
 	delicate = 1
-	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 	required_stage = 1
 
 /decl/surgery_step/bone/set_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -132,6 +132,7 @@
 		"<span class='notice'>You have mended [bone] with \the [tool].</span>" )
 	affected.status &= ~ORGAN_BROKEN
 	affected.stage = 0
+	affected.update_wounds()
 
 /decl/surgery_step/bone/finish/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

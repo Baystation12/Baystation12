@@ -7,7 +7,7 @@
 	blood_level = 1
 	shock_level = 40
 	delicate = 1
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 //////////////////////////////////////////////////////////////////
 //	Organ mending surgery step
@@ -37,17 +37,13 @@
 		tool_name = "regenerative membrane"
 	else if (istype(tool, /obj/item/stack/medical/bruise_pack))
 		tool_name = "the bandaid"
-
-	if (!hasorgans(target))
-		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || affected.how_open() < 2)
-		return
+	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
+	"You start treating damage within \the [target]'s [affected.name] with [tool_name]." )
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (!I.status & ORGAN_DEAD || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? 3 : 2)))
+		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (!I.status & ORGAN_DEAD || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
-
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
 	..()
 
@@ -57,42 +53,32 @@
 		tool_name = "regenerative membrane"
 	if (istype(tool, /obj/item/stack/medical/bruise_pack))
 		tool_name = "the bandaid"
-
-	if (!hasorgans(target))
-		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || affected.how_open() < 2)
-		return
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			if(I.status & ORGAN_DEAD && I.can_recover())
-				user.visible_message("<span class='notice'>[user] treats damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.</span>", \
+				user.visible_message("<span class='notice'>\The [user] treats damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.</span>", \
 				"<span class='notice'>You treat damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.</span>" )
 			else
 				user.visible_message("<span class='notice'>[user] treats damage to [target]'s [I.name] with [tool_name].</span>", \
 				"<span class='notice'>You treat damage to [target]'s [I.name] with [tool_name].</span>" )
 			I.surgical_fix(user)
+	user.visible_message("\The [user] finishes treating damage within \the [target]'s [affected.name] with [tool_name].", \
+	"You finish treating damage within \the [target]'s [affected.name] with [tool_name]." )
 
 /decl/surgery_step/internal/fix_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
-	if (!hasorgans(target))
-		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
 	user.visible_message("<span class='warning'>[user]'s hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>")
 	var/dam_amt = 2
-
-	if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
+	if(istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 		target.adjustToxLoss(5)
-
 	else
 		dam_amt = 5
 		target.adjustToxLoss(10)
 		affected.take_external_damage(dam_amt, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
-
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? 3 : 2)))
+		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			I.take_internal_damage(dam_amt)
 
 //////////////////////////////////////////////////////////////////
@@ -289,6 +275,7 @@
 	)
 	min_duration = 100
 	max_duration = 120
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/internal/attach_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 

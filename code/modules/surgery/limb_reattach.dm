@@ -35,6 +35,10 @@
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
 	else if(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
+	else if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
+		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a crystalline body."))
+	else if(!BP_IS_CRYSTAL(P) && BP_IS_CRYSTAL(E))
+		to_chat(user, SPAN_WARNING("You cannot attach a crystalline part to a flesh body."))
 	else
 		. = TRUE
 
