@@ -16,11 +16,13 @@ var/global/datum/controller/occupations/job_master
 		//Debug info
 	var/list/job_debug = list()
 
+	var/alt_titled_jobs = 0
 
 	proc/SetupOccupations(var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
 		occupations_by_title = list()
+		alt_titled_jobs = 0
 		var/list/all_jobs = /*list(/datum/job/assistant) | */GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
@@ -54,6 +56,10 @@ var/global/datum/controller/occupations/job_master
 				civilian_positions |= job.title
 			if(job.department_flag & MSC)
 				nonhuman_positions |= job.title
+
+			//count how many jobs have alt titles so we can format the character setup screen more nicely
+			if(job.alt_titles && job.alt_titles.len > 1)
+				alt_titled_jobs += 1
 
 		return 1
 
@@ -644,7 +650,7 @@ var/global/datum/controller/occupations/job_master
 			return candidate
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
-		spawnpoint = GLOB.using_map.default_spawn
+		spawnpoint = GLOB.using_map.get_default_spawn(C, job_datum)
 
 	if(spawnpoint)
 		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
