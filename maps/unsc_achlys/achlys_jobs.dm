@@ -1,6 +1,6 @@
 GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 
-/datum/spawnpoint/achlys_prisoner
+/datum/spawnpoint/achlys_prison
 	display_name =  "Achlys Prison"
 	restrict_job = list("Prisoner","Sangheili Prisoner")
 
@@ -8,10 +8,10 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	..()
 	turfs = GLOB.achlys_prison_spawns
 
-/obj/effect/landmark/start/achlys_prisoner
+/obj/effect/landmark/start/achlys_prison
 	name = "Achlys Prison"
 
-/obj/effect/landmark/start/achlys_prisoner/New()
+/obj/effect/landmark/start/achlys_prison/New()
 	..()
 	GLOB.achlys_prison_spawns += loc
 
@@ -31,6 +31,7 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	spawn_positions = 10
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/prisoner
+	spawnpoint_override = "Achlys Prison"
 	latejoin_at_spawnpoints = TRUE
 
 GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
