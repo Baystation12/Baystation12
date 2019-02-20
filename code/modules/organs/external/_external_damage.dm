@@ -61,6 +61,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 				if(attempt_dismemberment(pure_brute, burn, edge, used_weapon, spillover, total_damage > threshold*6))
 					return
 
+	//blunt damage is gud at fracturing
+	if(brute_dam + brute > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) 
+		fracture()
+
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs && internal_organs.len)
 		var/damage_amt = brute
@@ -94,9 +98,6 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
 			owner.emote("scream")	//getting hit on broken hand hurts
-
-	if(brute_dam > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) //blunt damage is gud at fracturing
-		fracture()
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
