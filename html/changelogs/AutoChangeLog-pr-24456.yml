@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Added chevaux de frise, or spiky barriers. They're constructed by first building a barricade of any valid material, and then attaching rods of any material to the barricade. It will damage anyone who walks into it."
