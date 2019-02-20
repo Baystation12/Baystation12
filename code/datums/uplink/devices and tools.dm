@@ -85,6 +85,11 @@
 	item_cost = 40
 	path = /obj/item/device/powersink
 
+/datum/uplink_item/item/tools/ttv
+	name = "Binary Gas Bomb"
+	item_cost = 30
+	path = /obj/effect/spawner/newbomb/timer/syndicate
+
 /datum/uplink_item/item/tools/teleporter
 	name = "Teleporter Circuit Board"
 	item_cost = 40
