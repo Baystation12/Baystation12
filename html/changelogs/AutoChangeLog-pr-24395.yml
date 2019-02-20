@@ -1,0 +1,4 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - tweak: "XO now has CSO access."
