@@ -54,9 +54,9 @@
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
-	if(!gibbed)
+	. = ..()
+	if(. && !gibbed)
 		gib()
-		..()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
 	. = ..()
