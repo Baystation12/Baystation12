@@ -813,7 +813,12 @@ var/global/floorIsLava = 0
 	set desc="Start the round RIGHT NOW"
 	set name="Start Now"
 	if(GAME_STATE < RUNLEVEL_LOBBY)
-		alert("Unable to start the game as it is not set up.")
+		to_chat(usr, "<span class='danger'>Unable to start the game as it is not yet set up.</span>")
+		SSticker.start_ASAP = !SSticker.start_ASAP
+		if(SSticker.start_ASAP)
+			to_chat(usr, "<span class='warning'>The game will begin as soon as possible.</span>")
+		else
+			to_chat(usr, "<span class='warning'>The game will begin as normal.</span>")
 		return 0
 	if(SSticker.start_now())
 		log_admin("[usr.key] has started the game.")

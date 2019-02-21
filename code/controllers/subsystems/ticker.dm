@@ -7,6 +7,7 @@ SUBSYSTEM_DEF(ticker)
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
 	var/pregame_timeleft = 3 MINUTES
+	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense
 	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
 	var/bypass_gamemode_vote = 0    //Intended for use with admin tools. Will avoid voting and ignore any results.
 
@@ -43,6 +44,9 @@ SUBSYSTEM_DEF(ticker)
 			post_game_tick()
 
 /datum/controller/subsystem/ticker/proc/pregame_tick()
+	if(start_ASAP)
+		start_now()
+		return
 	if(round_progressing && last_fire)
 		pregame_timeleft -= world.time - last_fire
 	if(pregame_timeleft <= 0)
