@@ -372,26 +372,38 @@
 	requires_power = 1
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_aquila)
 
 /area/aquila/cockpit
 	name = "\improper SEV Aquila - Cockpit"
+	req_access = list(access_aquila)
+
 /area/aquila/maintenance
 	name = "\improper SEV Aquila - Maintenance"
+	req_access = list(access_solgov_crew)
+
 /area/aquila/storage
 	name = "\improper SEV Aquila - Storage"
+	req_access = list(access_solgov_crew)
+
 /area/aquila/secure_storage
 	name = "\improper SEV Aquila - Secure Storage"
+	req_access = list(access_aquila)
+
 /area/aquila/mess
 	name = "\improper SEV Aquila - Mess Hall"
+
 /area/aquila/passenger
 	name = "\improper SEV Aquila - Passenger Compartment"
+
 /area/aquila/medical
 	name = "\improper SEV Aquila - Medical"
+
 /area/aquila/head
 	name = "\improper SEV Aquila - Head"
+
 /area/aquila/airlock
 	name = "\improper SEV Aquila - Airlock Compartment"
+	req_access = list(access_solgov_crew)
 
 //Guppy
 
@@ -736,7 +748,7 @@
 	name = "\improper Engineering Hard Storage"
 	icon_state = "engineering_storage"
 	sound_env = SMALL_ENCLOSED
-	req_access = list(access_emergency_storage)
+	req_access = list(access_engine_equip)
 
 /area/engineering/hardstorage/aux
 	name = "\improper Auxiliary Engineering Hard Storage"
@@ -820,11 +832,13 @@
 	name = "Medical Storage"
 	icon_state = "medbay4"
 	sound_env = SMALL_ENCLOSED
+	req_access = list(access_medical)
 
 /area/storage/research
 	name = "Research Storage"
 	icon_state = "toxstorage"
 	sound_env = SMALL_ENCLOSED
+	req_access = list(access_research)
 
 // Supply
 
@@ -938,6 +952,7 @@
 /area/crew_quarters/commissary
 	name = "\improper Commissary"
 	icon_state = "crew_quarters"
+	req_access = list(access_commissary)
 
 /area/crew_quarters/lounge
 	name = "\improper Lounge"
@@ -1085,6 +1100,7 @@
 	name = "\improper Shield Generator"
 	icon_state = "engineering"
 	sound_env = SMALL_ENCLOSED
+	req_access = list(access_engine_equip)
 
 /area/shield/bridge
 	name = "\improper Bridge Shield Generator"
@@ -1409,7 +1425,7 @@
 /area/engineering/storage
 	name = "\improper Engineering Storage"
 	icon_state = "engineering_storage"
-	req_access = list(access_engine_equip)
+	req_access = list(list(access_engine_equip, access_atmospherics))
 
 /area/engineering/atmos
 	name = "\improper Atmospherics"
@@ -1445,7 +1461,7 @@
 /area/medical/surgery2
 	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
-	req_access = list(access_surgery)
+	req_access = list(list(access_surgery, access_robotics_engineering))
 
 /area/medical/autopsy
 	name = "\improper Autopsy"
@@ -1454,7 +1470,7 @@
 
 // Research
 /area/assembly
-	req_access = list(access_robotics)
+	req_access = list(access_robotics_engineering)
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"
@@ -1548,6 +1564,7 @@
 /area/security/range
 	name = "\improper Security - Firing Range"
 	icon_state = "firingrange"
+	req_access = list(access_solgov_crew)
 
 // Cargo
 /area/quartermaster
@@ -1556,7 +1573,6 @@
 /area/quartermaster/office
 	name = "\improper Supply Office"
 	icon_state = "quartoffice"
-	req_access = list(access_qm)
 
 /area/quartermaster/storage
 	name = "\improper Warehouse"
@@ -1565,7 +1581,6 @@
 
 /area/quartermaster/storage/upper
 	name = "\improper Upper Warehouse"
-	req_access = list(access_cargo)
 
 // Crew
 

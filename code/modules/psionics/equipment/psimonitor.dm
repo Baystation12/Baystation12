@@ -6,7 +6,7 @@
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE
-	req_one_access = list(access_psychiatrist, access_captain, access_cmo, access_hos)
+	req_access = list(list(access_psychiatrist, access_captain, access_cmo, access_hos))
 
 	var/list/psi_violations = list()
 	var/show_violations = FALSE
@@ -20,7 +20,7 @@
 	if(!emagged)
 		emagged = TRUE
 		remaining_charges--
-		req_one_access.Cut()
+		req_access.Cut()
 		to_chat(user, "<span class='notice'>You short out the access protocols.</span>")
 		return TRUE
 	return FALSE
