@@ -1084,7 +1084,7 @@
 	icon_deny = "tool-deny"
 	icon_vend = "tool_vend"
 	vend_delay = 5
-	products = list(/obj/item/weapon/weldingtool/crystal = 5,
+	products = list(/obj/item/weapon/weldingtool/electric/crystal = 5,
 					/obj/item/weapon/wirecutters/crystal = 5,
 					/obj/item/weapon/screwdriver/crystal = 5,
 					/obj/item/weapon/crowbar/crystal = 5,

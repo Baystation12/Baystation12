@@ -222,21 +222,21 @@
 
 /obj/item/weapon/weldingtool/on_update_icon()
 	..()
-
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	icon_state = welding ? "[bis.base_icon_state]1" : "[bis.base_icon_state]"
 	item_state = welding ? "welder1" : "welder"
+	update_tank_underlay()
+	var/mob/M = loc
+	if(istype(M))
+		M.update_inv_l_hand()
+		M.update_inv_r_hand()
 
+/obj/item/weapon/weldingtool/proc/update_tank_underlay()
 	underlays.Cut()
 	if(tank)
 		var/image/tank_image = image(tank.icon, icon_state = tank.icon_state)
 		tank_image.pixel_z = 0
 		underlays += tank_image
-
-	var/mob/M = loc
-	if(istype(M))
-		M.update_inv_l_hand()
-		M.update_inv_r_hand()
 
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly
