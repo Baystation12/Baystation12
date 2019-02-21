@@ -247,7 +247,7 @@
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/fuel
 	pipe_class = PIPE_CLASS_UNARY
 
-	/datum/pipe/pipe_dispenser/he
+/datum/pipe/pipe_dispenser/he
 	category = "Heat Exchange Pipes"
 	colorable = FALSE
 	connect_types = CONNECT_TYPE_HE
