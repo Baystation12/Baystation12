@@ -211,6 +211,10 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
+"aB" = (
+/obj/structure/closet/secure_closet/CO,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/cobed)
 "aC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -331,6 +335,15 @@
 /obj/structure/grille,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
+"aM" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/weapon/reagent_containers/food/drinks/flask{
+	pixel_x = 8
+	},
+/obj/item/clothing/mask/smokable/cigarette/cigar,
+/obj/item/weapon/storage/box/matches,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/office/co)
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -454,10 +467,24 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "aY" = (
-/obj/structure/closet/secure_closet/CO,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/crew_quarters/heads/cobed)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/random/firstaid,
+/obj/random/firstaid,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_x = -32;
+	req_access = newlist()
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/aquila/medical)
 "aZ" = (
 /obj/item/modular_computer/console/preset/civilian,
 /obj/machinery/alarm{
@@ -1720,18 +1747,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
-"ep" = (
-/obj/item/weapon/reagent_containers/food/drinks/flask{
-	pixel_x = 8
-	},
-/obj/structure/table/woodentable/walnut,
-/obj/item/weapon/reagent_containers/food/drinks/flask{
-	pixel_x = 8
-	},
-/obj/item/clothing/mask/smokable/cigarette/cigar,
-/obj/item/weapon/storage/box/matches,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/crew_quarters/heads/office/co)
 "eq" = (
 /obj/structure/displaycase,
 /obj/item/weapon/gun/projectile/revolver/medium/captain{
@@ -12336,30 +12351,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge/disciplinary_board_room)
-"Dl" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/random/firstaid,
-/obj/random/firstaid,
-/obj/random/medical,
-/obj/random/medical,
-/obj/random/medical,
-/obj/machinery/vending/wallmed1{
-	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
-	},
-/obj/machinery/vending/wallmed1{
-	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/white,
-/area/aquila/medical)
 "Dq" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack{
@@ -14862,19 +14853,6 @@
 /obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/co)
-"Pe" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/bridge/fore)
 "Pf" = (
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/dark,
@@ -24642,7 +24620,7 @@ aK
 GW
 bH
 cV
-aY
+aB
 dE
 Jh
 Hf
@@ -25856,7 +25834,7 @@ bM
 cp
 cX
 dI
-ep
+aM
 bq
 fw
 fQ
@@ -28081,7 +28059,7 @@ He
 aO
 Ee
 Le
-Pe
+bT
 gL
 hx
 if
@@ -36577,7 +36555,7 @@ vn
 Rb
 pj
 qc
-Dl
+aY
 yl
 st
 te
