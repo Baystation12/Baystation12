@@ -23,10 +23,13 @@
 	var/fullblock = (effective_armor*effective_armor) * ARMOR_BLOCK_CHANCE_MULT
 
 	if(fullblock >= 1 || prob(fullblock*100))
-		if(absorb_text)
-			show_message("<span class='warning'>[absorb_text]</span>")
+		if(psi && psi.use_psi_armour && psi.last_armor_check == world.time)
+			show_message(SPAN_WARNING("You block the blow with your mind!"))
+			psi.spend_power(10)
+		else if(absorb_text)
+			show_message(SPAN_WARNING("[absorb_text]"))
 		else
-			show_message("<span class='warning'>Your armor absorbs the blow!</span>")
+			show_message(SPAN_WARNING("Your armor absorbs the blow!"))
 		return 100
 
 	//this makes it so that X armour blocks X% damage, when including the chance of hard block.
@@ -38,11 +41,15 @@
 
 	if(blocked > 20)
 		//Should we show this every single time?
-		if(soften_text)
-			show_message("<span class='warning'>[soften_text]</span>")
+		if(psi && psi.use_psi_armour && psi.last_armor_check == world.time)
+			show_message(SPAN_WARNING("You soften the blow with your mind!"))
+		else if(soften_text)
+			show_message(SPAN_WARNING("[soften_text]"))
 		else
-			show_message("<span class='warning'>Your armor softens the blow!</span>")
+			show_message(SPAN_WARNING("Your armor softens the blow!"))
 
+	if(psi && psi.use_psi_armour && psi.last_armor_check == world.time)
+		psi.spend_power(round(blocked/10))
 	return round(blocked, 1)
 
 //Adds two armor values together.
@@ -57,7 +64,7 @@
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
 /mob/living/proc/getarmor(var/def_zone, var/type)
-	return 0
+	return (psi ? psi.get_armour(type) : 0)
 
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)

@@ -266,29 +266,10 @@
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
-									switch(breathes)
-																		//These tanks we're sure of their contents
-										if("nitrogen") 							//So we're a bit more picky about them.
-
-											if(t.air_contents.gas["nitrogen"] && !t.air_contents.gas["oxygen"])
-												contents.Add(t.air_contents.gas["nitrogen"])
-											else
-												contents.Add(0)
-
-										if ("oxygen")
-											if(t.air_contents.gas["oxygen"] && !t.air_contents.gas["phoron"])
-												contents.Add(t.air_contents.gas["oxygen"])
-											else
-												contents.Add(0)
-
-										// No races breath this, but never know about downstream servers.
-										if ("carbon dioxide")
-											if(t.air_contents.gas["carbon_dioxide"] && !t.air_contents.gas["phoron"])
-												contents.Add(t.air_contents.gas["carbon_dioxide"])
-											else
-												contents.Add(0)
-
-
+									if(t.air_contents.gas[breathes] && !t.air_contents.gas["phoron"])
+										contents.Add(t.air_contents.gas[breathes])
+									else
+										contents.Add(0)
 								else
 									//no tank so we set contents to 0
 									contents.Add(0)
@@ -317,7 +298,7 @@
 								if(C.internals)
 									C.internals.icon_state = "internal1"
 							else
-								to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
+								to_chat(C, "<span class='notice'>You don't have \a [breathes] tank.</span>")
 		if("act_intent")
 			usr.a_intent_change("right")
 
@@ -391,11 +372,17 @@
 		if("r_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.activate_hand("r")
+				if(C.hand)
+					C.activate_hand("r")
+				else
+					C.attack_empty_hand(BP_R_HAND)
 		if("l_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.activate_hand("l")
+				if(!C.hand)
+					C.activate_hand("l")
+				else
+					C.attack_empty_hand(BP_L_HAND)
 		if("swap")
 			usr:swap_hand()
 		if("hand")

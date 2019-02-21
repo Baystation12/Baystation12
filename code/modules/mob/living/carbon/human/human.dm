@@ -313,8 +313,10 @@
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
 	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(wear_mask))
+		if(istype(wear_mask) && wear_mask.visible_name)
 			return wear_mask.visible_name
+		else if(istype(wearing_rig) && wearing_rig.visible_name)
+			return wearing_rig.visible_name
 		else
 			return "Unknown"
 	return real_name
@@ -1588,7 +1590,7 @@
 	return "[Floor((120+rand(-5,5))*(blood_result/100))]/[Floor((80+rand(-5,5))*(blood_result/100))]"
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
-/mob/living/carbon/human/proc/nervous_system_failure()
+/mob/living/carbon/human/nervous_system_failure()
 	return getBrainLoss() >= maxHealth * 0.75
 
 /mob/living/carbon/human/melee_accuracy_mods()

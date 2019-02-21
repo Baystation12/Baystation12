@@ -256,6 +256,13 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/ert
 
+/obj/item/device/radio/headset/foundation
+	name = "\improper Foundation radio headset"
+	desc = "The headeset of the occult cavalry."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/ert
+
 /obj/item/device/radio/headset/ia
 	name = "internal affair's headset"
 	desc = "The headset of your worst enemy."

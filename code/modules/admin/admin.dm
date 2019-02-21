@@ -108,6 +108,26 @@ var/global/floorIsLava = 0
 		body += "<br>"
 		body += "<a href='?src=\ref[M.mind];add_goal=1'>Add Random Goal</a>"
 
+	body += "<br><br>"
+	body += "<b>Psionics:</b><br/>"
+	if(isliving(M))
+		var/mob/living/psyker = M
+		if(psyker.psi)
+			body += "<a href='?src=\ref[psyker.psi];remove_psionics=1'>Remove psionics.</a><br/><br/>"
+			body += "<a href='?src=\ref[psyker.psi];trigger_psi_latencies=1'>Trigger latencies.</a><br/>"
+		body += "<table width = '100%'>"
+		for(var/faculty in list(PSI_COERCION, PSI_PSYCHOKINESIS, PSI_REDACTION, PSI_ENERGISTICS))
+			var/decl/psionic_faculty/faculty_decl = SSpsi.get_faculty(faculty)
+			var/faculty_rank = psyker.psi ? psyker.psi.get_rank(faculty) : 0
+			body += "<tr><td><b>[faculty_decl.name]</b></td>"
+			for(var/i = 1 to LAZYLEN(GLOB.psychic_ranks_to_strings))
+				var/psi_title = GLOB.psychic_ranks_to_strings[i]
+				if(i == faculty_rank)
+					psi_title = "<b>[psi_title]</b>"
+				body += "<td><a href='?src=\ref[psyker.mind];set_psi_faculty_rank=[i];set_psi_faculty=[faculty]'>[psi_title]</a></td>"
+			body += "</tr>"
+		body += "</table>"
+
 	if (M.client)
 		if(!istype(M, /mob/new_player))
 			body += "<br><br>"

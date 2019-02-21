@@ -76,6 +76,7 @@
 	accuracy_power = 5
 	one_hand_penalty = 2
 	fire_delay = 5
+	caliber = CALIBER_PISTOL_ANTIQUE
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	var/base_icon = "pistol1"
 
