@@ -23,10 +23,10 @@
 	use_ranged =     TRUE
 	use_melee =      TRUE
 	min_rank =       PSI_RANK_OPERANT
-	use_description = "Target the head, eyes or mouth on disarm intent and click yourself to use a radial attack that blinds, deafens and disorients everyone near you."
+	use_description = "Target the head, eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
 
 /decl/psionic_power/coercion/blindstrike/invoke(var/mob/living/user, var/mob/living/target)
-	if(target != user || (user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES))
+	if(user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
@@ -42,7 +42,7 @@
 				var/mob/living/carbon/C = M
 				if(C.can_feel_pain())
 					M.emote("scream")
-			to_chat(M, SPAN_DANGER("Your sense are blasted into oblivion by a burst of mental static!"))
+			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a burst of mental static!"))
 			M.flash_eyes()
 			M.eye_blind = max(M.eye_blind,3)
 			M.ear_deaf = max(M.ear_deaf,6)
