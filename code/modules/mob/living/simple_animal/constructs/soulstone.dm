@@ -69,15 +69,10 @@
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
 		is_evil = 0
 		return
-	if(I.force > 10)
-		if(!smashing)
-			to_chat(user, "<span class='notice'>\The [src] looks fragile. Are you sure you want to smash it? If so, hit it again.</span>")
-			smashing = 1
-			spawn(20)
-				smashing = 0
-			return
+	if(I.force >= 5)
 		if(full != SOULSTONE_CRACKED)
 			user.visible_message("<span class='warning'>\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]</span>", "<span class='warning'>You hit \the [src] with \the [I], and it cracks.[shade.client ? " You hear a terrible scream!" : ""]</span>", shade.client ? "You hear a scream." : null)
+			playsound(loc, 'sound/effects/Glasshit.ogg', 75)
 			set_full(SOULSTONE_CRACKED)
 		else
 			user.visible_message("<span class='danger'>\The [user] shatters \the [src] with \the [I]!</span>")
