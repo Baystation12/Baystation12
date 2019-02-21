@@ -43,7 +43,7 @@
 	var/obj/item/weapon/handcuffs/HC = handcuffed
 
 	//A default in case you are somehow handcuffed with something that isn't an obj/item/weapon/handcuffs type
-	var/breakouttime = 1200
+	var/breakouttime = 2 MINUTES
 	//If you are handcuffed with actual handcuffs... Well what do I know, maybe someone will want to handcuff you with toilet paper in the future...
 	if(istype(HC))
 		breakouttime = HC.breakouttime
@@ -57,7 +57,7 @@
 
 	visible_message(
 		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
-		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [breakouttime MINUTES] minutes and you need to stand still)</span>"
+		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [ceil(breakouttime / (1 MINUTE))] minute\s and you need to stand still)</span>"
 		)
 
 	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
@@ -113,14 +113,15 @@
 	if(!restrained())
 		..()
 	else
-		visible_message(
-			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
-			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"
-			)
-
 		var/unbuckle_time = 2 MINUTES
 		if(psi && psi.can_use())
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
+
+		visible_message(
+			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
+			"<span class='warning'>You attempt to unbuckle yourself. (This will take around [ceil(unbuckle_time / (1 MINUTE))]] minute\s and you need to stand still)</span>"
+			)
+
 
 		if(!unbuckle_time || do_after(usr, unbuckle_time, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
 			if(!buckled)
