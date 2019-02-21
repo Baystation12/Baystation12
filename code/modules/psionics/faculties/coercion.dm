@@ -7,6 +7,15 @@
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
 
+/decl/psionic_power/coercion/invoke(var/mob/living/user, var/mob/living/target)
+	. = ..()
+	if(.)
+		var/blocked = target.run_armor_check(target_zone, "psi")
+		if(prob(blocked))
+			to_chat(user, SPAN_WARNING("Your mental attack is deflected by \the [target]'s defenses!"))
+			to_chat(user, SPAN_DANGER("\The [user] strikes out with a mental attack, but you deflect it!"))
+			return FALSE
+
 /decl/psionic_power/coercion/blindstrike
 	name =           "Blindstrike"
 	cost =           8
