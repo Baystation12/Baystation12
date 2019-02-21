@@ -232,7 +232,6 @@
 	var/pressure_difference = pressure - environment.return_pressure()
 
 	if(pressure_difference > maximum_pressure)
-		log_and_message_admins("Notice: [src] has burst at [src.loc]. Pressure difference: [pressure_difference]")
 		burst()
 
 	else if(pressure_difference > fatigue_pressure)
@@ -306,7 +305,7 @@
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
 
-/obj/machinery/atmospherics/pipe/simple/atmos_init(var/debug = FALSE)
+/obj/machinery/atmospherics/pipe/simple/atmos_init()
 	..()
 	normalize_dir()
 	var/node1_dir
@@ -314,38 +313,20 @@
 
 	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
-			if (!node1_dir)				
+			if (!node1_dir)
 				node1_dir = direction
 			else if (!node2_dir)
 				node2_dir = direction
-	if(debug)
-		log_and_message_admins("dir1 = [node1_dir]")
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(debug)
-			log_and_message_admins("dir1: [target] detected.")
-			log_and_message_admins("dir1: [target].initialize directions: [target.initialize_directions]")
-			log_and_message_admins("dir1: get_dir([target],[src]): [get_dir(target,src)]")
 		if(target.initialize_directions & get_dir(target,src))
-			if(debug)
-				log_and_message_admins("dir1: node [target] detected in dir [get_dir(target,src)]")
 			if (check_connect_types(target,src))
-				if(debug)
-					log_and_message_admins("dir1: connection types compatible.")
 				node1 = target
-				if(debug)
-					log_and_message_admins("dir1: node1 is now [node1]")
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			if(debug)
-				log_and_message_admins("dir2: node [target] detected in dir [get_dir(target,src)]")
 			if (check_connect_types(target,src))
-				if(debug)
-					log_and_message_admins("dir2: connection types compatible.")
 				node2 = target
-				if(debug)
-					log_and_message_admins("dir2: node2 is now [node2]")
 				break
 
 	if(!node1 && !node2)

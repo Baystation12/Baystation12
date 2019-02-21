@@ -24,6 +24,10 @@
 	// Reagent path resulting from condesation.
 	var/list/condensation_products = list()
 
+	//Holds the symbols
+	var/list/symbol_html = list()
+	var/list/symbol = list()
+
 /decl/xgm_gas
 	var/id = ""
 	var/name = "Unnamed Gas"
@@ -38,6 +42,9 @@
 	var/breathed_product
 	var/condensation_point = INFINITY
 	var/condensation_product
+	var/symbol_html = "X"
+	var/symbol = "X"
+
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
@@ -58,6 +65,9 @@
 		if(gas.overlay_limit) gas_data.overlay_limit[gas.id] = gas.overlay_limit
 		gas_data.flags[gas.id] = gas.flags
 		gas_data.burn_product[gas.id] = gas.burn_product
+
+		gas_data.symbol_html[gas.id] = gas.symbol_html
+		gas_data.symbol[gas.id] = gas.symbol
 
 		if(!isnull(gas.condensation_product) && !isnull(gas.condensation_point))
 			gas_data.condensation_points[gas.id] = gas.condensation_point
