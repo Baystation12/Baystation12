@@ -244,19 +244,6 @@
 "aQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/starboard)
-"aR" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/structure/sign/deck/third{
-	pixel_y = 32
-	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Firing Range"
-	},
-/obj/effect/floor_decal/corner/green{
-	dir = 5
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/thirddeck/center)
 "aS" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -307,15 +294,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"bc" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Ladders"
-	},
-/obj/effect/floor_decal/corner/yellow{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/thirddeck/aft)
 "bd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d3starboard)
@@ -7910,6 +7888,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
+"rd" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/sign/deck/third{
+	pixel_y = 32
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Ladders"
+	},
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/center)
 "re" = (
 /obj/machinery/door/airlock/glass/civilian,
 /obj/machinery/door/firedoor,
@@ -7944,6 +7935,15 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/thirddeck/aft)
+"rj" = (
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Firing Range"
+	},
+/obj/effect/floor_decal/corner/yellow{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "rk" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -41163,7 +41163,7 @@ aY
 Eq
 Eq
 wD
-aR
+rd
 sk
 tO
 va
@@ -42779,7 +42779,7 @@ gR
 SL
 FT
 Wl
-bc
+rj
 Ja
 Je
 gU
