@@ -1,3 +1,26 @@
+//GLOB.all_pipe_datums_by_category and GLOB.all_disposal_pipe_datums_by_category are in _global_vars\misc.dm
+
+/proc/initialize_pipe_datum_category_list()
+	var/list/categories = list(
+		/datum/pipe/pipe_dispenser/simple,
+		/datum/pipe/pipe_dispenser/supply,
+		/datum/pipe/pipe_dispenser/scrubber,
+		/datum/pipe/pipe_dispenser/fuel,
+		/datum/pipe/pipe_dispenser/he,
+		/datum/pipe/pipe_dispenser/device
+		)
+	for(var/category_type in categories)
+		for(var/recipe_type in subtypesof(category_type))
+			LAZYADD(GLOB.all_pipe_datums_by_category[category_type], new recipe_type(src))
+
+	var/disposal_categories = list(
+		/datum/pipe/disposal_dispenser/simple,
+		/datum/pipe/disposal_dispenser/device)
+
+	for(var/category_type in disposal_categories)
+		for(var/recipe_type in subtypesof(category_type))
+			LAZYADD(GLOB.all_disposal_pipe_datums_by_category[category_type], new recipe_type(src))
+
 /obj/machinery/pipedispenser
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
@@ -5,47 +28,41 @@
 	density = 1
 	anchored = 1
 	var/unwrenched = 0
-	var/list/categories = list(
-		/datum/pipe/pipe_dispenser/simple,
-		/datum/pipe/pipe_dispenser/scrubber,
-		/datum/pipe/pipe_dispenser/supply,
-		/datum/pipe/pipe_dispenser/fuel,
-		/datum/pipe/pipe_dispenser/device,
-		/datum/pipe/pipe_dispenser/he)
 	var/pipe_color = "white"
 
 /obj/machinery/pipedispenser/Initialize()
-	. = ..()
-	for(var/category_type in categories)
-		for(var/recipe_type in subtypesof(category_type))
-			LAZYADD(categories[category_type], new recipe_type(src))
+	. = ..()	
 
-/obj/machinery/pipedispenser/proc/get_console_data()
+/obj/machinery/pipedispenser/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
 	. = list()
-	. += "<table><tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
-	for(var/category in categories)
+	. += "<table>"
+	if(color_options)
+		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
+	for(var/category in pipe_categories)
 		var/datum/pipe/cat = category
 		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
-		for(var/datum/pipe/pipe in categories[category])
+		for(var/datum/pipe/pipe in pipe_categories[category])
 			var/line = "[pipe.name]</td>"
 			. += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[pipe]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[pipe]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[pipe]'>10x</a></td></tr>"
 	.+= "</table>"
 	. = JOINTEXT(.)
+
+/obj/machinery/pipedispenser/proc/build_quantity(var/datum/pipe/P, var/quantity)
+	for(var/I = quantity;I > 0;I -= 1)
+		P.Build(P, loc, pipe_color)
 
 /obj/machinery/pipedispenser/Topic(href, href_list)
 	if((. = ..()))
 		return
 	if(href_list["build"])
 		var/datum/pipe/P = locate(href_list["build"])
-		P.Build(P, pipe_color, src.loc)
+		P.Build(P, loc, pipe_color)
 	if(href_list["buildfive"])
 		var/datum/pipe/P = locate(href_list["buildfive"])
-		for(var/I = 5;I > 0;I -= 1)
-			P.Build(P, pipe_color, src.loc)
+		build_quantity(P, 5)
 	if(href_list["buildten"])
 		var/datum/pipe/P = locate(href_list["buildten"])
-		for(var/I = 10;I > 0;I -= 1)
-			P.Build(P, pipe_color, src.loc)
+		build_quantity(P, 10)
 	if(href_list["color"])
 		var/choice = input(usr, "What color do you want pipes to have?") as null|anything in pipe_colors
 		if(!choice)
@@ -55,7 +72,7 @@
 
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
-	popup.set_content(jointext(get_console_data(),"<br>"))
+	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
@@ -102,9 +119,6 @@
 	icon_state = "pipe_d"
 	density = 1
 	anchored = 1.0
-	categories = list(
-		/datum/pipe/disposal_dispenser/simple,
-		/datum/pipe/disposal_dispenser/device)
 
 //Allow you to drag-drop disposal pipes into it
 /obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
@@ -120,38 +134,9 @@
 	qdel(pipe)
 
 /obj/machinery/pipedispenser/disposal/attack_hand(user as mob)
-	//if(..())
-	//	return
 	var/datum/browser/popup = new (user, "Disposal Pipe List", "[src] Control Panel")
-	popup.set_content(jointext(get_console_data(),"<br>"))
+	popup.set_content(get_console_data(GLOB.all_disposal_pipe_datums_by_category))
 	popup.open()
-
-/obj/machinery/pipedispenser/disposal/get_console_data()
-	. = list()
-	. += "<table>"
-	for(var/category in categories)
-		var/datum/pipe/disposal_dispenser/cat = category
-		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
-		for(var/datum/pipe/pipe in categories[category])
-			var/line = "[pipe.name]</td>"
-			. += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[pipe]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[pipe]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[pipe]'>10x</a></td></tr>"
-	.+= "</table>"
-	. = JOINTEXT(.)
-
-/obj/machinery/pipedispenser/Topic(href, href_list)
-	if((. = ..()))
-		return
-	if(href_list["build"])
-		var/datum/pipe/disposal_dispenser/P = locate(href_list["build"])
-		P.Build(P, src.loc)
-	if(href_list["buildfive"])
-		var/datum/pipe/disposal_dispenser/P = locate(href_list["buildfive"])
-		for(var/I = 5;I > 0;I -= 1)
-			P.Build(P, src.loc)
-	if(href_list["buildten"])
-		var/datum/pipe/disposal_dispenser/P = locate(href_list["buildten"])
-		for(var/I = 10;I > 0;I -= 1)
-			P.Build(P, src.loc)
 
 // adding a pipe dispensers that spawn unhooked from the ground
 /obj/machinery/pipedispenser/orderable

@@ -9,18 +9,21 @@
 	var/id_tag
 	var/frequency = 1441
 
-	var/on = 1
-
 	var/datum/radio_frequency/radio_connection
 	var/datum/gas_mixture/sample
 
 	var/constructed_path = /obj/machinery/air_sensor
 
+	use_power = 1
+
 /obj/machinery/air_sensor/on_update_icon()
-	icon_state = "gsensor[on]"
+	if(!powered())
+		icon_state = "gsensor0"
+	else
+		icon_state = "gsensor[use_power]"
 
 /obj/machinery/air_sensor/Process()
-	if(on)
+	if(powered() && use_power)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal
 		signal.data["tag"] = id_tag
@@ -38,9 +41,8 @@
 
 		if(total_moles > 0)
 			for(var/gas in air_sample.gas)				
-				var/gassymbol = convert_gas_id_to_html_symbol("[gas]")
 				var/gaspercent = round(air_sample.gas["[gas]"]*100/total_moles,0.01)
-				var/gas_list = list("symbol" = gassymbol, "percent" = gaspercent)
+				var/gas_list = list("symbol" = gas_data.symbol_html["[gas]"], "percent" = gaspercent)
 				signal.data["gas"] += list(gas_list)
 
 		signal.data["sigtype"] = "status"

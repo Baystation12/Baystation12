@@ -55,20 +55,15 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/proc/initialize_directions()
-	log_and_message_admins("Tvalve init_directions started.")
 	switch(dir)
 		if(NORTH)
 			initialize_directions = SOUTH|NORTH|EAST
-			log_and_message_admins("North. Value: [initialize_directions]")
 		if(SOUTH)
 			initialize_directions = NORTH|SOUTH|WEST
-			log_and_message_admins("South. Value: [initialize_directions]")
 		if(EAST)
 			initialize_directions = WEST|EAST|SOUTH
-			log_and_message_admins("East. Value: [initialize_directions]")
 		if(WEST)
-			initialize_directions = EAST|WEST|NORTH
-			log_and_message_admins("West. Value: [initialize_directions]")
+			initialize_directions = EAST|WEST|NORTH	
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -193,7 +188,6 @@
 /obj/machinery/atmospherics/tvalve/atmos_init()
 	..()
 	initialize_directions()
-	log_and_message_admins("Initialize_directions: [initialize_directions]")
 
 	var/node1_dir
 	var/node2_dir
