@@ -1,0 +1,6 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - rscadd: "Adds new global preference to opt into having your ckey displayed in the credits. This is set to hide your ckey by default."
+  - tweak: "Adds additional snark to the end of the credits and some new randomly generated title possibilities."
+  - tweak: "Changes some awkward wording in play global sounds command, makes the change end credits song command not suck anymore."
