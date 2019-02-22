@@ -125,6 +125,8 @@
 
 /obj/structure/barricade/spike/Bumped(mob/living/victim)
 	. = ..()
+	if(!isliving(victim))
+		return
 	if(world.time - victim.last_bumped <= 15) //spam guard
 		return FALSE
 	victim.last_bumped = world.time
