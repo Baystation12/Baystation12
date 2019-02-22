@@ -7621,7 +7621,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Engineering Bay";
-	sortType = "Engineering Bay"
+	sort_type = "Engineering Bay"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16011,7 +16011,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Drone Fabrication";
-	sortType = "Drone Fabrication"
+	sort_type = "Drone Fabrication"
 	},
 /obj/structure/cable{
 	d1 = 4;

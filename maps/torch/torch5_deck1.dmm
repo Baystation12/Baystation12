@@ -7368,7 +7368,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Forensics Office";
-	sortType = "Forensics Office"
+	sort_type = "Forensics Office"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
@@ -7680,7 +7680,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Xenobotany";
-	sortType = "Xenobotany"
+	sort_type = "Xenobotany"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -7698,7 +7698,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Research Development";
-	sortType = "Research and Development"
+	sort_type = "Research and Development"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -7719,7 +7719,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Miscellaneous Research";
-	sortType = "Miscellaneous Research"
+	sort_type = "Miscellaneous Research"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -7739,7 +7739,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Chemistry";
-	sortType = "Chemistry"
+	sort_type = "Chemistry"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
@@ -7797,7 +7797,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Chapel";
-	sortType = "Chapel"
+	sort_type = "Chapel"
 	},
 /obj/effect/landmark{
 	name = "lightsout"
@@ -10002,7 +10002,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
 	name = "Brig Chief";
-	sortType = "Brig Chief"
+	sort_type = "Brig Chief"
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
@@ -19879,7 +19879,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Virology";
-	sortType = "Virology"
+	sort_type = "Virology"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -19939,7 +19939,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Research Equipment";
-	sortType = "Research Equipment"
+	sort_type = "Research Equipment"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
@@ -19981,7 +19981,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Medical Equipment";
-	sortType = "Medical Equipment"
+	sort_type = "Medical Equipment"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -23595,7 +23595,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Robotics";
-	sortType = "Robotics"
+	sort_type = "Robotics"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -25642,7 +25642,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Brig Storage";
-	sortType = "Brig Storage"
+	sort_type = "Brig Storage"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,

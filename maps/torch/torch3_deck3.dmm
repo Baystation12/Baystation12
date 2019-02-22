@@ -6977,7 +6977,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Bar";
-	sortType = "Bar"
+	sort_type = "Bar"
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -8538,7 +8538,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Cryogenic Storage";
-	sortType = "Cryogenic Storage"
+	sort_type = "Cryogenic Storage"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -15345,7 +15345,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Auxiliary Tool Storage";
-	sortType = "Auxiliary Tool Storage"
+	sort_type = "Auxiliary Tool Storage"
 	},
 /obj/structure/cable/green{
 	d1 = 2;
@@ -18902,7 +18902,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Galley";
-	sortType = "Galley"
+	sort_type = "Galley"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -19945,7 +19945,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Hydroponics";
-	sortType = "Hydroponics"
+	sort_type = "Hydroponics"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4

@@ -15,8 +15,10 @@
 	plane = ABOVE_TURF_PLANE
 	layer = DISPOSALS_PIPE_LAYER
 	var/base_icon_state	// initial icon state on map
-	var/sortType = ""
+	var/sort_type = ""
 	var/subtype = 0
+	var/ptype = DISPOSAL_STRAIGHT
+	var/turn = DISPOSAL_FLIP_NONE
 	// new pipe, set the icon_state as on map
 
 /obj/structure/disposalpipe/Initialize()
@@ -231,40 +233,8 @@ obj/structure/disposalpipe/Destroy()
 
 	// called when pipe is cut with welder
 /obj/structure/disposalpipe/proc/welded()
-
-	var/obj/structure/disposalconstruct/C = new (src.loc)
-	switch(base_icon_state)
-		if("pipe-s")
-			C.ptype = DISPOSAL_STRAIGHT
-		if("pipe-c")
-			C.ptype = DISPOSAL_BENT
-		if("pipe-j1")
-			C.ptype = DISPOSAL_JUNCTION1
-		if("pipe-j2")
-			C.ptype = DISPOSAL_JUNCTION2
-		if("pipe-y")
-			C.ptype = DISPOSAL_JUNCTION_Y
-		if("pipe-t")
-			C.ptype = DISPOSAL_TRUNK
-		if("pipe-j1s")
-			C.ptype = DISPOSAL_JUNCTION_SORT1
-			C.sortType = sortType
-		if("pipe-j2s")
-			C.ptype = DISPOSAL_JUNCTION_SORT2
-			C.sortType = sortType
-///// Z-Level stuff
-		if("pipe-u")
-			C.ptype = DISPOSAL_UP
-		if("pipe-d")
-			C.ptype = DISPOSAL_DOWN
-///// Z-Level stuff
-		if("pipe-tagger")
-			C.ptype = DISPOSAL_TAGGER
-		if("pipe-tagger-partial")
-			C.ptype = DISPOSAL_TAGGER_PARTIAL
-	C.subtype = src.subtype
+	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)
-	C.set_dir(dir)
 	C.set_density(0)
 	C.anchored = 1
 	C.update()
@@ -305,6 +275,7 @@ obj/structure/disposalpipe/Destroy()
 // a straight or bent segment
 /obj/structure/disposalpipe/segment
 	icon_state = "pipe-s"
+	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/segment/Initialize()
 	. = ..()
@@ -312,6 +283,7 @@ obj/structure/disposalpipe/Destroy()
 		dpdir = dir | turn(dir, 180)
 	else
 		dpdir = dir | turn(dir, -90)
+		turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 
 	update()
 	return
@@ -319,6 +291,7 @@ obj/structure/disposalpipe/Destroy()
 ///// Z-Level stuff
 /obj/structure/disposalpipe/up
 	icon_state = "pipe-u"
+	ptype = DISPOSAL_UP
 
 /obj/structure/disposalpipe/up/Initialize()
 	. = ..()
@@ -369,6 +342,7 @@ obj/structure/disposalpipe/Destroy()
 
 /obj/structure/disposalpipe/down
 	icon_state = "pipe-d"
+	ptype = DISPOSAL_DOWN
 
 /obj/structure/disposalpipe/down/Initialize()
 	. = ..()
@@ -417,19 +391,26 @@ obj/structure/disposalpipe/Destroy()
 
 /obj/structure/disposalpipe/junction/yjunction
 	icon_state = "pipe-y"
+	ptype = DISPOSAL_JUNCTION_Y
+	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_RIGHT
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
 	icon_state = "pipe-j1"
+	ptype = DISPOSAL_JUNCTION1
+	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/junction/Initialize()
 	. = ..()
 	if(icon_state == "pipe-j1")
 		dpdir = dir | turn(dir, -90) | turn(dir,180)
+		turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 	else if(icon_state == "pipe-j2")
 		dpdir = dir | turn(dir, 90) | turn(dir,180)
+		turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
 	else // pipe-y
 		dpdir = dir | turn(dir,90) | turn(dir, -90)
+		turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_RIGHT
 	update()
 	return
 
@@ -467,6 +448,8 @@ obj/structure/disposalpipe/Destroy()
 	icon_state = "pipe-tagger"
 	var/sort_tag = ""
 	var/partial = 0
+	ptype = DISPOSAL_TAGGER
+	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/tagger/proc/updatedesc()
 	desc = initial(desc)
@@ -513,6 +496,8 @@ obj/structure/disposalpipe/Destroy()
 	name = "partial package tagger"
 	icon_state = "pipe-tagger-partial"
 	partial = 1
+	ptype = DISPOSAL_TAGGER_PARTIAL
+	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/diversion_junction
 	name = "diversion junction"
@@ -525,10 +510,12 @@ obj/structure/disposalpipe/Destroy()
 	var/sortdir = 0
 	var/id_tag
 	var/obj/machinery/disposal_switch/linked
+	ptype = DISPOSAL_DIVERSION
+	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/diversion_junction/proc/updatedesc()
 	desc = initial(desc)
-	if(sortType)
+	if(sort_type)
 		desc += "\nIt's currently [active ? "" : "un"]active!"
 
 /obj/structure/disposalpipe/diversion_junction/proc/updatedir()
@@ -605,32 +592,34 @@ obj/structure/disposalpipe/Destroy()
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0
+	ptype = DISPOSAL_JUNCTION_SORT1
+	subtype = DISPOSAL_SUB_SORT_NORMAL
 
-	proc/updatedesc()
-		desc = initial(desc)
-		if(sortType)
-			desc += "\nIt's filtering objects with the '[sortType]' tag."
+/obj/structure/disposalpipe/sortjunction/proc/updatedesc()
+	desc = initial(desc)
+	if(sort_type)
+		desc += "\nIt's filtering objects with the '[sort_type]' tag."
 
-	proc/updatename()
-		if(sortType)
-			SetName("[initial(name)] ([sortType])")
-		else
-			SetName(initial(name))
+/obj/structure/disposalpipe/sortjunction/proc/updatename()
+	if(sort_type)
+		SetName("[initial(name)] ([sort_type])")
+	else
+		SetName(initial(name))
 
-	proc/updatedir()
-		posdir = dir
-		negdir = turn(posdir, 180)
+/obj/structure/disposalpipe/sortjunction/proc/updatedir()
+	posdir = dir
+	negdir = turn(posdir, 180)
 
-		if(icon_state == "pipe-j1s")
-			sortdir = turn(posdir, -90)
-		else if(icon_state == "pipe-j2s")
-			sortdir = turn(posdir, 90)
+	if(icon_state == "pipe-j1s")
+		sortdir = turn(posdir, -90)
+	else if(icon_state == "pipe-j2s")
+		sortdir = turn(posdir, 90)
 
-		dpdir = sortdir | posdir | negdir
+	dpdir = sortdir | posdir | negdir
 
 /obj/structure/disposalpipe/sortjunction/Initialize()
 	. = ..()
-	if(sortType) GLOB.tagger_locations |= sortType
+	if(sort_type) GLOB.tagger_locations |= sort_type
 
 	updatedir()
 	updatename()
@@ -645,14 +634,14 @@ obj/structure/disposalpipe/Destroy()
 		var/obj/item/device/destTagger/O = I
 
 		if(O.currTag)// Tag set
-			sortType = O.currTag
+			sort_type = O.currTag
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>Changed filter to '[sortType]'.</span>")
+			to_chat(user, "<span class='notice'>Changed filter to '[sort_type]'.</span>")
 			updatename()
 			updatedesc()
 
 /obj/structure/disposalpipe/sortjunction/proc/divert_check(var/checkTag)
-	return sortType == checkTag
+	return sort_type == checkTag
 
 	// next direction to move
 	// if coming in from negdir, then next is primary dir or sortdir
@@ -692,7 +681,8 @@ obj/structure/disposalpipe/Destroy()
 /obj/structure/disposalpipe/sortjunction/wildcard
 	name = "wildcard sorting junction"
 	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
-	subtype = 1
+	subtype = DISPOSAL_SUB_SORT_WILD
+	ptype = DISPOSAL_JUNCTION_SORT1
 	divert_check(var/checkTag)
 		return checkTag != ""
 
@@ -700,7 +690,7 @@ obj/structure/disposalpipe/Destroy()
 /obj/structure/disposalpipe/sortjunction/untagged
 	name = "untagged sorting junction"
 	desc = "An underfloor disposal pipe which filters all untagged items."
-	subtype = 2
+	subtype = DISPOSAL_SUB_SORT_UNTAGGED
 	divert_check(var/checkTag)
 		return checkTag == ""
 
@@ -717,6 +707,7 @@ obj/structure/disposalpipe/Destroy()
 /obj/structure/disposalpipe/trunk
 	icon_state = "pipe-t"
 	var/obj/linked 	// the linked obj/machinery/disposal or obj/disposaloutlet
+	ptype = DISPOSAL_TRUNK
 
 /obj/structure/disposalpipe/trunk/Initialize()
 	. = ..()
