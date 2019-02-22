@@ -1655,15 +1655,6 @@
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	return cultural_info[token]
 
-/mob/living/carbon/human/proc/seizure()
-	set waitfor = 0
-	sleep(rand(5,10))
-	if(!paralysis && stat == CONSCIOUS)
-		visible_message("<span class='danger'>\The [src] starts having a seizure!</span>")
-		Paralyse(rand(8,16))
-		make_jittery(rand(150,200))
-		adjustHalLoss(rand(50,60))
-
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))

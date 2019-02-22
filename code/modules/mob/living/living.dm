@@ -861,3 +861,11 @@ default behaviour is:
 /mob/living/proc/needs_wheelchair()
 	return FALSE
 
+/mob/living/proc/seizure()
+	set waitfor = 0
+	sleep(rand(5,10))
+	if(!paralysis && stat == CONSCIOUS)
+		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
+		Paralyse(rand(8,16))
+		make_jittery(rand(150,200))
+		adjustHalLoss(rand(50,60))

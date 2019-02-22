@@ -43,21 +43,19 @@
 	var/obj/item/weapon/handcuffs/HC = handcuffed
 
 	//A default in case you are somehow handcuffed with something that isn't an obj/item/weapon/handcuffs type
-	var/breakouttime = 1200
-	var/displaytime = 2 //Minutes to display in the "this will take X minutes."
-	//If you are handcuffed with actual handcuffs... Well what do I know, maybe someone will want to handcuff you with toilet paper in the future...
-	if(istype(HC))
-		breakouttime = HC.breakouttime
-		displaytime = breakouttime / 600 //Minutes
+	var/breakouttime = istype(HC) ? HC.breakouttime : 2 MINUTES
 
 	var/mob/living/carbon/human/H = src
 	if(istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
 		breakouttime /= 2
-		displaytime /= 2
+
+	if(psi && psi.can_use())
+		var/psi_mod = (1 - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2))
+		breakouttime = max(5, breakouttime * psi_mod)
 
 	visible_message(
 		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
-		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
+		"<span class='warning'>You attempt to remove \the [HC] (This will take around [breakouttime / (1 SECOND)] second\s and you need to stand still).</span>"
 		)
 
 	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
@@ -69,9 +67,11 @@
 			)
 		drop_from_inventory(handcuffed)
 
-/mob/living/carbon/proc/can_break_cuffs()
-	if(MUTATION_HULK in mutations)
-		return 1
+/mob/living/proc/can_break_cuffs()
+	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= 5)
+
+/mob/living/carbon/can_break_cuffs()
+	. = ..() || (MUTATION_HULK in mutations)
 
 /mob/living/carbon/proc/break_handcuffs()
 	visible_message(
@@ -88,7 +88,8 @@
 			"<span class='warning'>You successfully break your [handcuffed.name].</span>"
 			)
 
-		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
+		if(MUTATION_HULK in mutations)
+			say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 
 		qdel(handcuffed)
 		handcuffed = null
@@ -97,9 +98,7 @@
 		update_inv_handcuffed()
 
 /mob/living/carbon/human/can_break_cuffs()
-	if(species.can_shred(src,1))
-		return 1
-	return ..()
+	. = ..() || species.can_shred(src,1)
 
 /mob/living/carbon/escape_buckle()
 	if(src.handcuffed && istype(src.buckled, /obj/effect/energy_net))
@@ -113,13 +112,17 @@
 	if(!restrained())
 		..()
 	else
+		var/unbuckle_time = 2 MINUTES
+		if(psi && psi.can_use())
+			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
+
 		visible_message(
 			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
-			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"
+			"<span class='warning'>You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)</span>"
 			)
 
 
-		if(do_after(usr, 2 MINUTES, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
+		if(!unbuckle_time || do_after(usr, unbuckle_time, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
 			if(!buckled)
 				return
 			visible_message("<span class='danger'>\The [usr] manages to unbuckle themself!</span>",

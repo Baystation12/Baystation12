@@ -20,6 +20,10 @@
 	difficulty = 1
 	apply_material_name = FALSE
 
+/datum/stack_recipe/tile/nullglass
+	title = "nullglass floor tile"
+	result_type = /obj/item/stack/tile/floor_nullglass
+
 /datum/stack_recipe/tile/spawn_result(user, location, amount)
 	var/obj/item/stack/S = ..()
 	if(istype(S))

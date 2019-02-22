@@ -17,6 +17,7 @@
 		create_powersupply()
 
 	handle_stunned()	// Handle EMP-stun
+	handle_paralysed()	// Just in case something snuck in a Paralyse() call.
 	lying = 0			// Handle lying down
 
 	malf_process()
