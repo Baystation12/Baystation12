@@ -1,4 +1,0 @@
-author: "comma"
-delete-after: True
-changes: 
-  - rscdel: "Stasis bags are no longer orderable from cargo."

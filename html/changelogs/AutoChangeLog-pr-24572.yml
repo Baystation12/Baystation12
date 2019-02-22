@@ -1,5 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "The merchant can now use the merchant program again."
-  - tweak: "The merchant program cannot be downloaded on NTnet."
