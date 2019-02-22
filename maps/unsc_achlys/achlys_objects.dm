@@ -199,7 +199,7 @@
 
 /obj/item/weapon/card/id/the_gold
 	name = "Gold Keycard"
-	desc = "This keycard appears to belong to the captain. How it got here and where it's owner is remains unknown."
+	desc = "This keycard appears to belong to a bridge crewman. How it got here and where it's owner is remains unknown."
 	access = list(777)
 	icon_state = "gold"
 	item_state = "gold_id"
