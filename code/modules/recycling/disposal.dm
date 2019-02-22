@@ -30,6 +30,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	var/ptype = DISPOSAL_BIN
+	var/turn = DISPOSAL_FLIP_NONE
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
@@ -571,6 +573,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	var/ptype = DISPOSAL_OUTLET
 
 /obj/structure/disposaloutlet/Initialize()
 	. = ..()
@@ -623,12 +626,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			if(do_after(user,20, src))
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the disposal outlet.")
-				var/obj/structure/disposalconstruct/C = new (src.loc)
-				src.transfer_fingerprints_to(C)
-				C.ptype = DISPOSAL_OUTLET
-				C.update()
+				var/obj/structure/disposalconstruct/C = new (src.loc, src)
+				src.transfer_fingerprints_to(C)								
 				C.anchored = 1
 				C.set_density(1)
+				C.update()
 				qdel(src)
 				return
 		else

@@ -8447,7 +8447,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 2;
 	name = "Pilot's Lounge";
-	sortType = "Pilot's Lounge"
+	sort_type = "Pilot's Lounge"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fifthdeck/fore)
@@ -8606,7 +8606,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Expedition Prep";
-	sortType = "Expedition Prep"
+	sort_type = "Expedition Prep"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
@@ -9488,7 +9488,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Mining";
-	sortType = "Mining"
+	sort_type = "Mining"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4

@@ -101,6 +101,11 @@
 #define DISPOSAL_SUB_SORT_WILD      1
 #define DISPOSAL_SUB_SORT_UNTAGGED  2
 
+#define DISPOSAL_FLIP_NONE          0
+#define DISPOSAL_FLIP_FLIP          1
+#define DISPOSAL_FLIP_LEFT          2
+#define DISPOSAL_FLIP_RIGHT         4
+
 //Pipe classifications
 #define PIPE_CLASS_OTHER            0
 #define PIPE_CLASS_UNARY            1

@@ -3250,7 +3250,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Commissary";
-	sortType = "Commissary"
+	sort_type = "Commissary"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -5417,7 +5417,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
 	name = "Pathfinder's Office";
-	sortType = "Pathfinder's Office"
+	sort_type = "Pathfinder's Office"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
@@ -6140,7 +6140,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Primary Tool Storage";
-	sortType = "Primary Tool Storage"
+	sort_type = "Primary Tool Storage"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/fore)
@@ -7028,7 +7028,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
 	name = "Security Checkpoint - Deck 4";
-	sortType = "Security Checkpoint - Deck 4"
+	sort_type = "Security Checkpoint - Deck 4"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/fore)
@@ -10747,7 +10747,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 8;
 	name = "Sorting Office";
-	sortType = "Sorting Office"
+	sort_type = "Sorting Office"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12892,7 +12892,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 8;
 	name = "Lounge";
-	sortType = "Lounge"
+	sort_type = "Lounge"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
@@ -16562,7 +16562,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 2;
 	name = "Deck Chief";
-	sortType = "Deck Chief"
+	sort_type = "Deck Chief"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckofficer)
