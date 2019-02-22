@@ -273,6 +273,16 @@
 	maximum_temperature = -25 CELCIUS
 	mix_message = "The solution becomes sludge-like."
 
+/datum/chemical_reaction/venaxilin
+	name = "Venaxilin"
+	result = /datum/reagent/dylovene/venaxilin
+	required_reagents = list(/datum/reagent/dylovene = 1, /datum/reagent/spaceacillin = 1, /datum/reagent/toxin/venom = 1)
+	result_amount = 1
+	minimum_temperature = 50 CELCIUS
+	maximum_temperature = 100 CELCIUS
+	mix_message = "The solution steams and becomes cloudy."
+
+
 /datum/chemical_reaction/clonexadone
 	name = "Clonexadone"
 	result = /datum/reagent/clonexadone
