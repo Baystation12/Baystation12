@@ -55,6 +55,22 @@
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 	shorthand = "SK"
 
+/datum/language/skrell/can_be_spoken_properly_by(var/mob/living/speaker)
+	if(ishuman(speaker))
+		var/mob/living/carbon/human/H = speaker
+		if(H.species.name == SPECIES_SKRELL)
+			return TRUE
+	if(speaker.isSynthetic())
+		return TRUE
+	return FALSE
+
+/datum/language/skrell/muddle(var/message)
+	. = replacetext(message, "a", "o")
+	. = replacetext(., "e", "o")
+	. = replacetext(., "i", "o")
+	. = replacetext(., "u", "o")
+	. = replacetext(., "y", "o")
+
 /datum/language/human
 	name = LANGUAGE_SOL_COMMON
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
