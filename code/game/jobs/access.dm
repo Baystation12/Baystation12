@@ -230,6 +230,9 @@
 		var/obj/item/weapon/card/id = I ? I.GetIdCard() : null
 		if(id)
 			return id
+	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
+	if(istype(controller) && controller.id_card && !controller.is_broken())
+		return controller.id_card
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
@@ -237,6 +240,9 @@
 		var/obj/item/I = item_slot
 		if(I)
 			. |= I.GetAccess()
+	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
+	if(istype(controller) && controller.id_card && !controller.is_broken())
+		. |= controller.id_card.GetAccess()
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()

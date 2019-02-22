@@ -172,7 +172,7 @@
 		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 
 /obj/item/organ/external/attack_self(var/mob/user)
-	if(!contents.len)
+	if((owner && loc == owner) || !contents.len)
 		return ..()
 	var/list/removable_objects = list()
 	for(var/obj/item/organ/external/E in (contents + src))

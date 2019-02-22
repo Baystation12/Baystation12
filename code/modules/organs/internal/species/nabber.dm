@@ -12,7 +12,6 @@
 	phoron_guard = 1
 	action_button_name = "Toggle Eye Shields"
 	eye_icon = 'icons/mob/human_races/species/nabber/eyes.dmi'
-
 	var/eyes_shielded
 
 /obj/item/organ/internal/eyes/insectoid/nabber/get_special_overlay()
