@@ -36,7 +36,10 @@
 			if(!E || E.is_stump() || BP_IS_ROBOTIC(E))
 				return
 			if(BP_IS_CRYSTAL(E))
-				E.heal_damage(rand(3,5), rand(3,5))
+				if((E.brute_dam + E.burn_dam) > 0)
+					if(prob(15))
+						to_chat(M, SPAN_NOTICE("You feel a crawling sensation as fresh crystal grows over your [E.name]."))
+					E.heal_damage(rand(3,5), rand(3,5))
 				if(BP_IS_BRITTLE(E) && prob(5))
 					E.status &= ~ORGAN_BRITTLE
 			else if(E.organ_tag != BP_CHEST && E.organ_tag != BP_GROIN)
@@ -51,9 +54,8 @@
 					E.take_external_damage(rand(20,30), 0)
 					E.status |= ORGAN_CRYSTAL
 					E.status |= ORGAN_BRITTLE
-			return
-
-	to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
-	M.adjustBruteLoss(rand(3,6))
-	if(prob(10))
-		new /obj/item/weapon/material/shard(get_turf(M), result_mat)
+	else
+		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
+		M.adjustBruteLoss(rand(3,6))
+		if(prob(10))
+			new /obj/item/weapon/material/shard(get_turf(M), result_mat)

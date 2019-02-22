@@ -200,12 +200,14 @@
 #define BP_HINDTONGUE "hindtongue"
 
 // Robo Organs.
-#define BP_POSIBRAIN	"posibrain"
-#define BP_VOICE		"vocal synthesiser"
-#define BP_STACK		"stack"
-#define BP_FLOAT		"floatation disc"
-#define BP_JETS			"maneuvering jets"
-#define BP_COOLING_FINS "cooling fins"
+#define BP_POSIBRAIN         "posibrain"
+#define BP_VOICE             "vocal synthesiser"
+#define BP_STACK             "stack"
+#define BP_OPTICS            "optics"
+#define BP_FLOAT             "floatation disc"
+#define BP_JETS              "maneuvering jets"
+#define BP_COOLING_FINS      "cooling fins"
+#define BP_SYSTEM_CONTROLLER "system controller"
 
 //Augmetations
 #define BP_AUGMENT_R_ARM         "right arm augment"
@@ -288,7 +290,6 @@
 #define SPECIES_IPC         "Machine"
 #define SPECIES_UNATHI      "Unathi"
 #define SPECIES_SKRELL      "Skrell"
-#define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
@@ -300,7 +301,13 @@
 #define SPECIES_GRAVWORLDER "Grav-Adapted Human"
 
 #define STATION_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER)
-#define RESTRICTED_SPECIES list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM)
+#define RESTRICTED_SPECIES list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN)
+
+#define SPECIES_NABBER         "giant armoured serpentid"
+#define SPECIES_MONARCH_WORKER "Monarch Serpentid Worker"
+#define SPECIES_MONARCH_QUEEN  "Monarch Serpentid Queen"
+#define SPECIES_MANTID_ALATE   "Kharmaan Alate"
+#define SPECIES_MANTID_GYNE    "Kharmaan Gyne"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

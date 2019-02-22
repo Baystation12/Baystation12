@@ -3,7 +3,6 @@
 	desc = "A wad of crystalline monofilament."
 	icon = 'icons/effects/razorweb.dmi'
 	icon_state = "wad"
-
 	var/web_type = /obj/effect/razorweb
 
 /obj/item/razorweb/throw_impact(var/atom/hit_atom)
@@ -28,7 +27,12 @@
 	var/last_light
 	var/image/gleam
 	var/image/web
-	var/global/species_immunity_list = list()
+	var/global/species_immunity_list = list(
+		SPECIES_MANTID_ALATE   = TRUE,
+		SPECIES_MANTID_GYNE    = TRUE,
+		SPECIES_MONARCH_QUEEN  = TRUE,
+		SPECIES_MONARCH_WORKER = TRUE
+	)
 
 /obj/effect/razorweb/tough
 	name = "tough razorweb"
