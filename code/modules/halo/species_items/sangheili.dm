@@ -16,9 +16,9 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "S"
 	flags = RESTRICTED
-	var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
-	var/list/syllable_names
-
+	//var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
+	//var/list/syllable_names
+/*
 /datum/language/sangheili/New()
 	. = ..()
 	cov_alphabet = new(cov_alphabet)
@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	syllable_names = icon_states(cov_alphabet)
 	for(var/symbol_name in syllable_names)
 		syllables.Add("<IMG CLASS=icon SRC=\ref[cov_alphabet] ICONSTATE='[symbol_name]'>")
-
+*/
 /obj/item/clothing/under/covenant/sangheili
 	name = "Sangheili Body-suit"
 	desc = "A sealed, airtight bodysuit. Meant to be worn underneath combat harnesses."

@@ -31,4 +31,3 @@ GLOBAL_LIST_EMPTY(ship_cap_medic_spawns)
 /obj/effect/landmark/start/ship_cap_medic/New()
 	..()
 	GLOB.ship_cap_medic_spawns += loc
-kook

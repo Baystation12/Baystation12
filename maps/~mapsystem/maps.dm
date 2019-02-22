@@ -76,7 +76,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/allowed_spawns = list("Test Spawn")
+	var/list/allowed_spawns = list("Test Spawn")
 	var/default_spawn = "Test Spawn"
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
@@ -156,3 +156,31 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		world.maxz++
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
+
+/datum/map/proc/get_default_spawn(var/client/C, var/datum/job/job_datum)
+
+	//i've rewritten this proc to get the first working spawnpoint using all the checks from the job controller and new player spawning
+	//this should be safety proof
+	//no more rejected spawns and spawn runtimes (see you in 10 more years)
+	//cael february 2019
+
+	//start with the default spawn id
+	var/datum/spawnpoint/candidate = spawntypes()[default_spawn]
+	var/list/spawn_candidates = allowed_spawns.Copy()
+
+	do
+		//get the next possible candidate
+		if(!candidate)
+			candidate = spawntypes()[spawn_candidates[1]]
+		//check if its viable to spawn in with this job
+		if(candidate.check_job_spawning(job_datum.title))
+			break
+
+		//reject this candidate
+		spawn_candidates -= candidate.display_name
+		candidate = null
+
+		//only continue the loop if there are more candidates
+	while(spawn_candidates.len > 0)
+
+	return candidate.display_name

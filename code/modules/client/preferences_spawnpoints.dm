@@ -16,13 +16,26 @@ GLOBAL_VAR(spawntypes)
 	var/display_name //Name used in preference setup.
 	var/always_visible = FALSE	// Whether this spawn point is always visible in selection, ignoring map-specific settings.
 	var/list/restrict_job = null
+	var/list/restrict_job_type = null
 	var/list/disallow_job = null
+	var/list/disallow_job_type = null
 
 /datum/spawnpoint/proc/check_job_spawning(job)
 	if(restrict_job && !(job in restrict_job))
 		return 0
 
 	if(disallow_job && (job in disallow_job))
+		return 0
+
+	//this is a bit hacky but its a convenience job
+	var/datum/job/cur_job = job_master.GetJob(job)
+	if(restrict_job_type && !(cur_job.type in restrict_job_type))
+		return 0
+
+	if(disallow_job_type && (cur_job.type in disallow_job_type))
+		return 0
+
+	if(!turfs || !turfs.len)
 		return 0
 
 	return 1

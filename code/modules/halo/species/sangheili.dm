@@ -18,8 +18,8 @@
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
-	pain_mod = 0.75 //Pain has half an effect on them.
-	slowdown = -1 //negates noshoes
+	pain_mod = 0.75 //Pain has quarter an effect on them
+	slowdown = -0.5
 	pixel_offset_x = -8
 	item_icon_offsets = list(0,2)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)

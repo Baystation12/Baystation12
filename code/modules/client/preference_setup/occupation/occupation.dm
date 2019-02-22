@@ -88,7 +88,8 @@
 	. += "<table width='100%' cellpadding='1' cellspacing='0'>"
 	var/index = -1
 	if(splitLimit)
-		limit = round((job_master.occupations.len+1)/2)
+		var/numLines = job_master.occupations.len + job_master.alt_titled_jobs
+		limit = round((numLines+1)/2)
 
 	//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 	var/datum/job/lastJob
@@ -96,6 +97,11 @@
 	for(var/datum/job/job in job_master.occupations)
 
 		index += 1
+
+		//increment extra to make them line up nicely
+		if(job.alt_titles && job.alt_titles.len)
+			index += 1
+
 		if((index >= limit) || (job.title in splitJobs))
 			if((index < limit) && (lastJob != null))
 				//If the cells were broken up by a job in the splitJob list then it will fill in the rest of the cells with

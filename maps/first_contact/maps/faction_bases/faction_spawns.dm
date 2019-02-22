@@ -1,9 +1,21 @@
 
+
+
+/* COVENANT BASE */
+
 GLOBAL_LIST_EMPTY(covenant_base_spawns)
 
 /datum/spawnpoint/cov_base
-	display_name =  "Covenant Base Spawns"
-	//restrict_job = list()
+	display_name = "Covenant Base Spawns"
+	restrict_job_type = list(\
+		/datum/job/covenant/sangheili_minor,\
+		/datum/job/covenant/sangheili_major,\
+		/datum/job/covenant/sangheili_ultra,\
+		/datum/job/covenant/kigyarminor,\
+		/datum/job/covenant/kigyarmajor,
+		/datum/job/covenant/kigyarcorvette/captain,\
+		/datum/job/covenant/unggoy_minor,\
+		/datum/job/covenant/unggoy_major)
 
 /datum/spawnpoint/cov_base/New()
 	..()
@@ -16,13 +28,23 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 	..()
 	GLOB.covenant_base_spawns += loc
 
+
+
+/* UNSC BASE */
+
 GLOBAL_LIST_EMPTY(unsc_base_spawns)
 
 /datum/spawnpoint/unsc_base
-	display_name =  "UNSC Base Spawns"
-	restrict_job = list("Orbital Drop Shock Trooper","Orbital Drop Shock Trooper Officer","UNSC Bertels Ship Crew",
-	"UNSC Bertels Hospital Corpsman","UNSC Bertels Commanding Officer","UNSC Bertels Executive Officer","UNSC Marine","UNSC Marine Platoon Leader",
-	"Orbital Drop Shock Trooper","Orbital Drop Shock Trooper Officer")
+	display_name = "UNSC Base Spawns"
+	restrict_job_type = list(\
+		/datum/job/unscbertels_co,\
+		/datum/job/unscbertels_xo,\
+		/datum/job/unscbertels_ship_crew,\
+		/datum/job/unscbertels_medical_crew,\
+		/datum/job/bertelsunsc_ship_marine,\
+		/datum/job/unsc_ship_marineplatoon,\
+		/datum/job/bertelsODST,\
+		/datum/job/bertelsODSTO)
 
 /datum/spawnpoint/unsc_base/New()
 	..()
@@ -35,11 +57,19 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 	..()
 	GLOB.unsc_base_spawns += loc
 
+
+
+/* INNIE BASE */
+
 GLOBAL_LIST_EMPTY(innie_base_spawns)
 
 /datum/spawnpoint/innie_base
-	display_name =  "Innie Base Spawns"
-	restrict_job = list("Insurrectionist Ship Crew","Insurrectionist Ship Captain")
+	display_name = "Innie Base Spawns"
+	restrict_job_type = list(\
+		/datum/job/ship_crew_innie,\
+		/datum/job/ship_cap_innie,\
+		/datum/job/URF_commando,\
+		/datum/job/URF_commando_officer)
 
 /datum/spawnpoint/innie_base/New()
 	..()

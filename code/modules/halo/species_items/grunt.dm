@@ -111,6 +111,7 @@
 	icon = GRUNT_GEAR_ICON
 	icon_state = "methane_tank_orange"
 	item_state_slots = list(slot_back_str = "methanetank_red_back", slot_l_hand_str = "methanetank_red", slot_r_hand_str = "methanetank_red")
+	slot_flags = SLOT_BACK
 
 /obj/item/weapon/tank/methane/unggoy_internal/red
 	icon_state = "methane_tank_red"
