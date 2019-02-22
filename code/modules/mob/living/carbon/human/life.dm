@@ -592,11 +592,7 @@
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
-				if(prob(2) && !failed_last_breath && !isSynthetic())
-					if(!paralysis)
-						emote("snore")
-					else
-						emote("groan")
+				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
 				visible_message(src, "<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
 		//CONSCIOUS
