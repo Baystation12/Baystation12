@@ -1,0 +1,5 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - rscadd: "Added Venaxilin, a powerful antivenom made with spider venom."
+  - rscadd: "Added leporazine variants, which are made by either heating up or cooling down leporazine. Heating it up makes a chem that raises body temperature, cooling it down makes one that lowers it."
