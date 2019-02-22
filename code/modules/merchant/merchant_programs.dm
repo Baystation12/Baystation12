@@ -5,8 +5,6 @@
 	program_icon_state = "comm"
 	program_menu_icon = "cart"
 	nanomodule_path = /datum/nano_module/program/merchant
-	requires_ntnet = 1
-	available_on_ntnet = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE
 	required_access = access_merchant
