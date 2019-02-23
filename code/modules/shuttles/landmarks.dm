@@ -62,7 +62,8 @@
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
-/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O)
+/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O, shuttle_name)
+	shuttle_restricted = shuttle_name
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
