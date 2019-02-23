@@ -1,4 +1,0 @@
-author: "RyanSmake"
-delete-after: True
-changes: 
-  - bugfix: "Shuttles no longer steal asteroid tiles when undocking."
