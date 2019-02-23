@@ -319,6 +319,7 @@
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	base_icon = "shuttle_chair"
 	icon_state = "shuttle_chair_preview"
+	buckling_sound = 'sound/effects/metal_close.ogg'
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
