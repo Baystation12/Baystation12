@@ -2,12 +2,6 @@
  * Torch Engineering
  */
 
-/decl/closet_appearance/secure_closet/torch/engineering/contractor
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_BOTTLE_GREEN,
-		"exped" = COLOR_BOTTLE_GREEN
-	)
-
 /decl/closet_appearance/secure_closet/torch/engineering
 	extra_decals = list(
 		"stripe_vertical_mid_full" = COLOR_WARM_YELLOW,
@@ -91,28 +85,6 @@
 		/obj/item/taperoll/engineering,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll/atmos,
-		/obj/item/clothing/gloves/insulated,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
-	)
-
-/obj/structure/closet/secure_closet/engineering_contractor
-	name = "engineering contractor's locker"
-	req_access = list(access_engine)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/engineering/contractor
-
-/obj/structure/closet/secure_closet/engineering_contractor/WillContain()
-	return list(
-		/obj/item/clothing/head/soft/orange,
-		/obj/item/clothing/under/rank/engineer,
-		/obj/item/clothing/accessory/storage/webbing,
-		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/device/radio/headset/headset_eng,
-		/obj/item/device/radio/headset/headset_eng/alt,
-		/obj/item/clothing/suit/storage/hazardvest,
-		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
-		/obj/item/taperoll/engineering,
 		/obj/item/clothing/gloves/insulated,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))

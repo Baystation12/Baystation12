@@ -1,12 +1,6 @@
 /*
  * Torch Medical
  */
-/decl/closet_appearance/secure_closet/torch/medical/contractor
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_BOTTLE_GREEN,
-		"medical" = COLOR_BOTTLE_GREEN
-	)
-
 /decl/closet_appearance/secure_closet/torch/medical
 	extra_decals = list(
 		"stripe_vertical_mid_full" = COLOR_BABY_BLUE,
@@ -108,34 +102,6 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/weapon/storage/box/autoinjectors,
-		/obj/item/device/healthanalyzer,
-		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/adv,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
-	)
-
-/obj/structure/closet/secure_closet/medical_contractor
-	name = "medical contractor's locker"
-	req_access = list(access_medical)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/contractor
-
-
-/obj/structure/closet/secure_closet/medical_contractor/WillContain()
-	return list(
-		/obj/item/clothing/under/sterile,
-		/obj/item/clothing/head/soft/mime,
-		/obj/item/clothing/under/rank/orderly,
-		/obj/item/clothing/accessory/storage/white_vest,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_med,
-		/obj/item/device/radio/headset/headset_med/alt,
-		/obj/item/taperoll/medical,
-		/obj/item/weapon/storage/belt/medical/emt,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/storage/firstaid/adv,

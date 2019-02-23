@@ -16925,11 +16925,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "Sr" = (
-/obj/structure/closet/secure_closet/engineering_torch{
-	name = "engineering contractor's locker"
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/structure/closet/secure_closet/engineering_torch,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
 "Ss" = (

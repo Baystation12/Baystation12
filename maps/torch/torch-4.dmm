@@ -16363,7 +16363,6 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/wardrobe/chemistry_white,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -16374,6 +16373,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/structure/closet/secure_closet/medical_torch,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "cYb" = (
@@ -16747,11 +16747,11 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dqb" = (
-/obj/structure/closet/secure_closet/medical_contractor,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/wardrobe/chemistry_white,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dqU" = (
@@ -16988,7 +16988,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
-/obj/structure/closet/secure_closet/medical_contractor,
+/obj/structure/closet/secure_closet/medical_torchsenior,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dFb" = (
