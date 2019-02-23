@@ -102,6 +102,6 @@
 
 /datum/gear/uniform/corp_flight
 	allowed_roles = list(/datum/job/nt_pilot)
-
+/*
 /datum/gear/uniform/corp_exec_jacket
-	allowed_roles = list(/datum/job/liaison, /datum/job/bodyguard)
+	allowed_roles = list(/datum/job/liaison, /datum/job/bodyguard)*/

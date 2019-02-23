@@ -49,10 +49,10 @@
 
 /datum/gear/suit/labcoat
 	allowed_roles = STERILE_ROLES
-
+/*
 /datum/gear/suit/labcoat_corp
 	allowed_roles = STERILE_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
+	allowed_branches = CIVILIAN_BRANCHES */
 /*
 /datum/gear/suit/labcoat_ec
 	display_name = "labcoat, Expeditionary Corps"
