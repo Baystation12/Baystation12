@@ -758,7 +758,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/gloves/thick/combat = 3,
 				/obj/item/clothing/gloves/white = 5,
 				/obj/item/clothing/gloves/rainbow = 1,
-				/obj/item/clothing/gloves/duty = 5,
+				/obj/item/clothing/gloves/thick/duty = 5,
 				/obj/item/clothing/gloves/guards = 3,
 				/obj/item/clothing/gloves/tactical = 3,
 				/obj/item/clothing/gloves/insulated/cheap = 5)
