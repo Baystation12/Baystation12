@@ -334,5 +334,5 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 		for(var/datum/reagent/blood/B in vessel.reagent_list)
 			var/list/viruses = list()
 			viruses = B.data["virus2"]
-			viruses.Remove(virus_uuid)
+			viruses.Remove("[virus_uuid]")
 			B.data["virus2"] = viruses
