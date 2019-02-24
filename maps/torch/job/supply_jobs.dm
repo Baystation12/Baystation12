@@ -14,10 +14,9 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e8
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_FINANCE     = SKILL_BASIC,

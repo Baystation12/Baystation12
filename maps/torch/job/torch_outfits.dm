@@ -426,7 +426,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
 	name = OUTFIT_JOB_NAME("Deck Chief")
 	l_ear = /obj/item/device/radio/headset/headset_deckofficer
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	pda_type = /obj/item/modular_computer/pda/cargo
