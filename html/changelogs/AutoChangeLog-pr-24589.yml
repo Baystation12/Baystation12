@@ -1,0 +1,4 @@
+author: "afirpo"
+delete-after: True
+changes: 
+  - bugfix: "viruses weren't correctly cleaned up from the human-like mobs' bloodstream."
