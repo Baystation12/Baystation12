@@ -30,7 +30,6 @@
 		if(RIG_SECURITY)
 			if(mended)
 				rig.req_access = initial(rig.req_access)
-				rig.req_one_access = initial(rig.req_one_access)
 		if(RIG_INTERFACE_SHOCK)
 			rig.electrified = mended ? 0 : -1
 			rig.shock(usr,100)

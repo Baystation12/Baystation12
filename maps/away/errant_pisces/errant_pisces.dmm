@@ -3314,7 +3314,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = list(list(24,11))
 	},
 /obj/structure/bed/chair/comfy/brown{
 	dir = 4
@@ -3722,7 +3722,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = list(list(24,11))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4030,7 +4030,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = list(list(24,11))
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -4736,7 +4736,7 @@
 /area/errant_pisces/science_wing)
 "lL" = (
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4926,7 +4926,7 @@
 /area/errant_pisces/science_wing)
 "mi" = (
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -5074,7 +5074,7 @@
 	icon_state = "0-8"
 	},
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)

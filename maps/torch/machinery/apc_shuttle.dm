@@ -1,25 +1,20 @@
 /obj/machinery/power/apc/shuttle
-	req_access = list()
-	req_one_access = list(access_engine_equip)
+	req_access = list(access_engine_equip)
 
 /obj/machinery/power/apc/high/shuttle
-	req_access = list()
-	req_one_access = list(access_engine_equip)
+	req_access = list(access_engine_equip)
 
 /obj/machinery/power/apc/hyper/shuttle
-	req_access = list()
-	req_one_access = list(access_engine_equip)
-
+	req_access = list(access_engine_equip)
 
 /obj/machinery/power/apc/shuttle/charon
-	req_one_access = list(access_engine_equip, access_expedition_shuttle_helm)
+	req_access = list(list(access_engine_equip, access_expedition_shuttle_helm))
 
 /obj/machinery/power/apc/high/shuttle/charon
-	req_one_access = list(access_engine_equip, access_expedition_shuttle_helm)
-
+	req_access = list(list(access_engine_equip, access_expedition_shuttle_helm))
 
 /obj/machinery/power/apc/shuttle/aquila
-	req_one_access = list(access_engine_equip, access_aquila_helm)
+	req_access = list(list(access_engine_equip, access_aquila_helm))
 
 /obj/machinery/power/apc/hyper/shuttle/aquila
-	req_one_access = list(access_engine_equip, access_aquila_helm)
+	req_access = list(list(access_engine_equip, access_aquila_helm))

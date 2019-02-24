@@ -15,7 +15,8 @@
 	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'
 	var/welded_file = 'icons/obj/doors/hazard/welded.dmi'
 	icon_state = "open"
-	req_one_access = list(access_atmospherics, access_engine_equip)
+	req_access = list(list(access_atmospherics, access_engine_equip))
+	autoset_access = FALSE
 	opacity = 0
 	density = 0
 	layer = BELOW_DOOR_LAYER

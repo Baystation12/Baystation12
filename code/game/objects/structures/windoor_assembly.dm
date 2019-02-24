@@ -205,52 +205,27 @@ obj/structure/windoor_assembly/Destroy()
 				user.visible_message("[user] pries the windoor into the frame.", "You start prying the windoor into the frame.")
 
 				if(do_after(user, 40,src))
-
-					if(!src) return
-
 					set_density(1) //Shouldn't matter but just incase
 					to_chat(user, "<span class='notice'>You finish the windoor!</span>")
 
+					var/obj/machinery/door/window/windoor
 					if(secure)
-						var/obj/machinery/door/window/brigdoor/windoor = new /obj/machinery/door/window/brigdoor(src.loc)
-						if(src.facing == "l")
+						windoor = new /obj/machinery/door/window/brigdoor(loc, src)
+						if(facing == "l")
 							windoor.icon_state = "leftsecureopen"
 							windoor.base_state = "leftsecure"
 						else
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
-						windoor.set_dir(src.dir)
-						windoor.set_density(0)
-
-						if(src.electronics.one_access)
-							windoor.req_access = null
-							windoor.req_one_access = src.electronics.conf_access
-						else
-							windoor.req_access = src.electronics.conf_access
-						windoor.electronics = src.electronics
-						src.electronics.forceMove(windoor)
 					else
-						var/obj/machinery/door/window/windoor = new /obj/machinery/door/window(src.loc)
+						windoor = new (loc, src)
 						if(src.facing == "l")
 							windoor.icon_state = "leftopen"
 							windoor.base_state = "left"
 						else
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
-						windoor.set_dir(src.dir)
-						windoor.set_density(0)
-
-						if(src.electronics.one_access)
-							windoor.req_access = null
-							windoor.req_one_access = src.electronics.conf_access
-						else
-							windoor.req_access = src.electronics.conf_access
-						windoor.electronics = src.electronics
-						src.electronics.forceMove(windoor)
-
-
 					qdel(src)
-
 
 			else
 				..()

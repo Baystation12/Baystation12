@@ -115,7 +115,7 @@ Weapons
 
 /obj/item/weapon/gun/energy/gun/secure/corporate
 	desc = "An access-locked EXO-branded LAEP90-S. It's designed to please paranoid corporate liaisons. Body cam not included."
-	req_one_access = list(access_liaison)
+	req_access = list(access_liaison)
 
 /obj/item/weapon/gun/projectile/revolver/medium/captain
 	name = "\improper Final Argument"
@@ -130,7 +130,7 @@ Weapons
 /obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen
 	name = "corporate stun revolver"
 	desc = "This A&M X6 is fitted with an NT1019 chip which allows remote authorization of weapon functionality. It has a NanoTrasen logo on the grip."
-	req_one_access = list(access_brig, access_heads, access_rd, access_sec_guard)
+	req_access = list(list(access_brig, access_heads, access_rd, access_sec_guard))
 
 /obj/item/weapon/gun/projectile/pistol/holdout/liaison
 	magazine_type = /obj/item/ammo_magazine/pistol/small/oneway

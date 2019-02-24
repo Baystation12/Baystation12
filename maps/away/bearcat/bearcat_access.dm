@@ -17,41 +17,28 @@
 	access = list(access_bearcat, access_bearcat_captain)
 
 /obj/machinery/door/airlock/autoname/bearcat
-	req_one_access = null
-	req_access = list(access_bearcat)
 
 /obj/machinery/door/airlock/autoname/engineering/bearcat
-	req_one_access = null
-	req_access = list(access_bearcat)
 
 /obj/machinery/door/airlock/autoname/command/bearcat
-	req_one_access = null
-	req_access = list(access_bearcat_captain)
 
 /obj/structure/closet/secure_closet/engineering_electrical/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)
 
 /obj/structure/closet/secure_closet/engineering_welding/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)
 
 /obj/structure/closet/secure_closet/freezer/fridge/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)
 
 /obj/structure/closet/secure_closet/freezer/meat/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)
 
 /obj/machinery/vending/engineering/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)
 
 /obj/machinery/vending/tool/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)
 
 /obj/machinery/suit_storage_unit/engineering/salvage/bearcat
-	req_one_access = null
 	req_access = list(access_bearcat)

@@ -8,7 +8,7 @@
 	hitsound = 'sound/weapons/genhit.ogg'
 	var/datum/lock/lock
 	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
-
+	autoset_access = FALSE // Doesn't even use access
 
 /obj/machinery/door/unpowered/simple/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	TemperatureAct(exposed_temperature)

@@ -111,7 +111,6 @@
 	if (src.emagged == 0)
 		src.emagged = 1
 		src.req_access.Cut()
-		src.req_one_access.Cut()
 		to_chat(user, "You break the ID authentication lock on \the [src].")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(2, 1, src)

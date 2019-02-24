@@ -506,6 +506,7 @@
 #include "code\game\antagonist\station\rogue_ai.dm"
 #include "code\game\antagonist\station\thrall.dm"
 #include "code\game\antagonist\station\traitor.dm"
+#include "code\game\area\area_access.dm"
 #include "code\game\area\area_power.dm"
 #include "code\game\area\areas.dm"
 #include "code\game\area\Space Station 13 areas.dm"

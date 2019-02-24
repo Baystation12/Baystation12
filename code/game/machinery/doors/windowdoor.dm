@@ -19,10 +19,22 @@
 /obj/machinery/door/window/New()
 	..()
 	update_nearby_tiles()
-	if (src.req_access && src.req_access.len)
-		src.icon_state = "[src.icon_state]"
-		src.base_state = src.icon_state
-	return
+
+/obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
+	if(assembly)
+		set_dir(assembly.dir)
+		set_density(0)
+		if(assembly.electronics)
+			if(assembly.electronics.autoset)
+				autoset_access = TRUE // Being careful in case of subtypes or something.
+			else
+				req_access = assembly.electronics.conf_access
+				if(assembly.electronics.one_access)
+					req_access = list(req_access)
+				autoset_access = FALSE
+			electronics = assembly.electronics
+			electronics.forceMove(src)
+	. = ..()
 
 /obj/machinery/door/window/on_update_icon()
 	if(density)
@@ -36,18 +48,10 @@
 	CC.amount = 2
 	var/obj/item/weapon/airlock_electronics/ae
 	if(!electronics)
-		ae = new/obj/item/weapon/airlock_electronics( src.loc )
-		if(!src.req_access)
-			src.check_access()
-		if(src.req_access.len)
-			ae.conf_access = src.req_access
-		else if (src.req_one_access.len)
-			ae.conf_access = src.req_one_access
-			ae.one_access = 1
-	else
-		ae = electronics
-		electronics = null
-		ae.dropInto(loc)
+		create_electronics()
+	ae = electronics
+	electronics = null
+	ae.dropInto(loc)
 	if(operating == -1)
 		ae.icon_state = "door_electronics_smoked"
 		operating = 0
@@ -219,18 +223,10 @@
 
 			var/obj/item/weapon/airlock_electronics/ae
 			if(!electronics)
-				ae = new/obj/item/weapon/airlock_electronics( src.loc )
-				if(!src.req_access)
-					src.check_access()
-				if(src.req_access.len)
-					ae.conf_access = src.req_access
-				else if (src.req_one_access.len)
-					ae.conf_access = src.req_one_access
-					ae.one_access = 1
-			else
-				ae = electronics
-				electronics = null
-				ae.dropInto(loc)
+				create_electronics()
+			ae = electronics
+			electronics = null
+			ae.dropInto(loc)
 			ae.icon_state = "door_electronics_smoked"
 
 			operating = 0
@@ -259,16 +255,15 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-	return
-
-
+/obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
+	electronics = ..()
+	return electronics	
 
 /obj/machinery/door/window/brigdoor
 	name = "secure door"
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	req_access = list(access_security)
 	var/id = null
 	maxhealth = 300
 	health = 300.0 //Stronger doors for prison (regular window door health is 150)

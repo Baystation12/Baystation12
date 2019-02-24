@@ -121,20 +121,24 @@
 /area/ship/scrap/maintenance/engineering
 	name = "\improper Engineering Bay"
 	icon_state = "engineering_supply"
+	req_access = list(access_engine)
 
 /area/ship/scrap/maintenance/atmos
 	name = "\improper Atmospherics Comparment"
 	icon_state = "atmos"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambiatm1.ogg')
+	req_access = list(access_engine)
 
 /area/ship/scrap/maintenance/power
 	name = "\improper Power Compartment"
 	icon_state = "engine_smes"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	req_access = list(access_engine)
 
 /area/ship/scrap/maintenance/engine
 	icon_state = "engine"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	req_access = list(access_engine)
 
 /area/ship/scrap/maintenance/engine/aft
 	name = "\improper Main Engine Bay"
@@ -148,14 +152,17 @@
 /area/ship/scrap/command/hallway
 	name = "\improper Command Deck"
 	icon_state = "centcom"
+	req_access = list(access_heads)
 
 /area/ship/scrap/command/bridge
 	name = "\improper Bridge"
 	icon_state = "bridge"
+	req_access = list(access_heads)
 
 /area/ship/scrap/command/captain
 	name = "\improper Captain's Quarters"
 	icon_state = "captain"
+	req_access = list(access_captain)
 
 /area/ship/scrap/comms
 	name = "\improper Communications Relay"

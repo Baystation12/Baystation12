@@ -4,7 +4,7 @@
 	icon = 'maps/torch/icons/obj/explshotgun.dmi'
 	icon_state = "expshotgun0"
 	starts_loaded = 0
-	req_one_access = list(access_hop)
+	req_access = list(access_hop)
 	authorized_modes = list(UNAUTHORIZED)
 
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/on_update_icon()
