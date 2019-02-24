@@ -582,7 +582,9 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat{
+	req_access = list(list(19, 25, 28))
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "cr" = (
