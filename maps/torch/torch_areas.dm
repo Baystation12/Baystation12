@@ -194,7 +194,7 @@
 /area/maintenance/bluespace
 	name = "Bluespace Drive"
 	icon_state = "engineering"
-
+	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
 
 //First Deck (Z-4)
 /area/maintenance/firstdeck
@@ -348,18 +348,23 @@
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_expedition_shuttle)
 
 /area/exploration_shuttle/cockpit
 	name = "\improper Charon - Cockpit"
+	req_access = list(access_expedition_shuttle)
+
 /area/exploration_shuttle/atmos
 	name = "\improper Charon - Atmos Compartment"
+
 /area/exploration_shuttle/power
 	name = "\improper Charon - Power Compartment"
+
 /area/exploration_shuttle/crew
 	name = "\improper Charon - Crew Compartment"
+
 /area/exploration_shuttle/cargo
 	name = "\improper Charon - Cargo Bay"
+
 /area/exploration_shuttle/airlock
 	name = "\improper Charon - Airlock Compartment"
 
@@ -646,7 +651,6 @@
 	name = "Briefing Room"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
-	req_access = list(access_bridge)
 
 /area/command/captainmess
 	name = "Officer's Mess"
@@ -783,6 +787,9 @@
 	name = "\improper Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
 
+/area/vacant/prototype
+	req_access = list(access_engine)
+
 /area/vacant/prototype/control
 	name = "\improper Prototype Fusion Reactor Control Room"
 	icon_state = "engine_monitoring"
@@ -808,6 +815,9 @@
 	icon_state = "bar"
 
 // Storage
+/area/storage/auxillary
+	req_access = list(access_cargo)
+
 /area/storage/auxillary/port
 	name = "Port Auxillary Storage"
 	icon_state = "auxstorage"
@@ -906,6 +916,7 @@
 /area/rnd/xenobiology/entry
 	name = "\improper Xenobiology Access"
 	icon_state = "xeno_lab"
+	req_access = list() // This is a separate vestibule thing, needs low access.
 
 /area/rnd/checkpoint
 	name = "\improper Research Security Checkpoint"
@@ -1269,6 +1280,7 @@
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
+	req_access = list(list(access_engine, access_medical, access_cargo))
 
 /area/maintenance/waterstore
 	name = "\improper Cistern"
@@ -1383,7 +1395,7 @@
 	name = "\improper Engine Room"
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
-	req_access = list(access_engine)
+	req_access = list(access_engine, access_engine_equip)
 
 /area/engineering/drone_fabrication
 	name = "\improper Engineering Drone Fabrication"
@@ -1399,13 +1411,13 @@
 /area/engineering/engine_monitoring
 	name = "\improper Engine Monitoring Room"
 	icon_state = "engine_monitoring"
-	req_access = list(access_engine)
+	req_access = list(access_engine, access_engine_equip)
 
 /area/engineering/engine_smes
 	name = "\improper Engineering SMES"
 	icon_state = "engine_smes"
 	sound_env = SMALL_ENCLOSED
-	req_access = list(access_engine)
+	req_access = list(access_engine, access_engine_equip)
 
 /area/engineering/engineering_monitoring
 	name = "\improper Engineering Monitoring Room"

@@ -1219,7 +1219,9 @@
 /area/storage/tech)
 "cz" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Secure Tech Storage"
+	name = "Secure Tech Storage";
+	autoset_access = 0
+	req_access = list(23, 19)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,

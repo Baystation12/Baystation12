@@ -15893,7 +15893,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/techfloor,
-/area/rnd/locker)
+/area/maintenance/firstdeck/centralport)
 "cAb" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -22289,10 +22289,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
-"jEb" = (
-/obj/structure/railing/mapped,
-/turf/simulated/floor/plating,
-/area/rnd/locker)
 "jGb" = (
 /obj/effect/floor_decal/corner/research{
 	tag = "icon-corner_white (NORTHEAST)";
@@ -24284,7 +24280,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/rnd/locker)
+/area/maintenance/firstdeck/centralport)
 "mcb" = (
 /obj/machinery/door/airlock/glass/medical{
 	name = "Infirmary Reception";
@@ -24966,7 +24962,7 @@
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
-/area/rnd/locker)
+/area/maintenance/firstdeck/centralport)
 "mLb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -30612,7 +30608,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/techfloor,
-/area/rnd/locker)
+/area/maintenance/firstdeck/centralport)
 "twb" = (
 /obj/machinery/light{
 	dir = 4
@@ -30751,7 +30747,7 @@
 	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
-/area/rnd/locker)
+/area/maintenance/firstdeck/centralport)
 "tTA" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/box/donkpockets,
@@ -50994,7 +50990,7 @@ aHh
 tRX
 mKw
 mbM
-aHn
+aJS
 czN
 cQo
 tzg
@@ -51193,10 +51189,10 @@ auN
 aJS
 aJS
 jXp
-aHn
-jEb
+aJS
+ehT
 mbM
-aHn
+aJS
 tvV
 cQo
 lfM

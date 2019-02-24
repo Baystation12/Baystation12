@@ -2964,6 +2964,7 @@
 /area/command/pathfinder)
 "kj" = (
 /obj/machinery/door/airlock/glass/civilian{
+	autoset_access = 0;
 	name = "Commissary"
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -3730,6 +3731,7 @@
 /area/maintenance/waterstore)
 "mK" = (
 /obj/machinery/door/airlock/glass/civilian{
+	autoset_access = 0;
 	name = "Commissary"
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -4251,7 +4253,9 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Docking Maintenance"
+	name = "Docking Maintenance";
+	autoset_access = 0;
+	req_access = list(12)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4;
@@ -6912,7 +6916,9 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass/command{
-	name = "Primary Docking Port Control"
+	name = "Primary Docking Port Control";
+	autoset_access = 0;
+	req_access = list(13,80)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12012,7 +12018,7 @@
 	id = "shop_shutters";
 	name = "Counter Shutters";
 	pixel_x = 0;
-	pixel_y = 24
+	pixel_y = 24;
 	req_access = list(list(67,96))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
