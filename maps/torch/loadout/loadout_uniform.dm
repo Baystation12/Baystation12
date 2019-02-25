@@ -93,7 +93,7 @@
 
 /datum/gear/uniform/frontier
 	allowed_branches = CIVILIAN_BRANCHES
-
+/*
 /datum/gear/uniform/corp_exec
 	allowed_roles = list(/datum/job/senior_scientist)
 
@@ -102,6 +102,6 @@
 
 /datum/gear/uniform/corp_flight
 	allowed_roles = list(/datum/job/nt_pilot)
-/*
+
 /datum/gear/uniform/corp_exec_jacket
 	allowed_roles = list(/datum/job/liaison, /datum/job/bodyguard)*/

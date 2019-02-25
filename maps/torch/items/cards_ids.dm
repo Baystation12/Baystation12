@@ -2,7 +2,7 @@
 
 /obj/item/weapon/card/id/torch
 	name = "identification card"
-	desc = "An identification card issued to personnel aboard the SEV Torch."
+	desc = "An identification card issued to personnel aboard the TRCV Sandros."
 	job_access_type = /datum/job/assistant
 
 /obj/item/weapon/card/id/torch/silver
@@ -13,7 +13,7 @@
 	color = "#ccecff"
 
 /obj/item/weapon/card/id/torch/gold
-	desc = "A golden identification card belonging to the Commanding Officer."
+	desc = "A golden identification card belonging to the Captain."
 	item_state = "gold_id"
 	job_access_type = /datum/job/captain
 	color = "#d4c780"
@@ -21,14 +21,14 @@
 
 // SolGov Crew and Contractors
 /obj/item/weapon/card/id/torch/crew
-	desc = "An identification card issued to SolGov crewmembers aboard the SEV Torch."
+	desc = "An identification card issued to Terran crewmembers aboard the TRCV Sandros."
 	color = "#d3e3e1"
 	job_access_type = /datum/job/crew
 	color = "#ccecff"
 
 
 /obj/item/weapon/card/id/torch/contractor
-	desc = "An identification card issued to private contractors aboard the SEV Torch."
+	desc = "An identification card issued to private contractors aboard the TRCV Sandros."
 	job_access_type = /datum/job/assistant
 	color = COLOR_GRAY80
 
@@ -161,7 +161,7 @@
 	color = COLOR_WHITE
 
 /obj/item/weapon/card/id/torch/crew/research
-	desc = "A card issued to science personnel aboard the SEV Torch."
+	desc = "A card issued to science personnel aboard the TRCV Sandros."
 	job_access_type = /datum/job/scientist_assistant
 	detail_color = COLOR_RESEARCH
 
@@ -175,12 +175,12 @@
 //NanoTrasen and Passengers
 
 /obj/item/weapon/card/id/torch/passenger
-	desc = "A card issued to passengers aboard the SEV Torch."
+	desc = "A card issued to colonists aboard the TRCV Sandros."
 	job_access_type = /datum/job/assistant
 	detail_color = COLOR_PAKISTAN_GREEN
 
 /obj/item/weapon/card/id/torch/passenger/research
-	desc = "A card issued to corporate personnel aboard the SEV Torch."
+	desc = "A card issued to corporate personnel aboard the TRCV Sandros."
 	job_access_type = /datum/job/scientist_assistant
 	detail_color = COLOR_BOTTLE_GREEN
 
@@ -215,7 +215,7 @@
 
 //Stowaway
 /obj/item/weapon/card/id/torch/stowaway
-	desc = "An identification card issued to personnel aboard the SEV Torch. Looks like the photo fell off this one."
+	desc = "An identification card issued to personnel aboard the TRCV Sandros. Looks like the photo fell off this one."
 	job_access_type = /datum/job/crew
 	color = "#b4cbd7"
 

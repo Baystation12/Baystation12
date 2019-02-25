@@ -1,6 +1,6 @@
 /datum/map/torch
 	name = "Sandros"
-	full_name = "UNCV Sandros"
+	full_name = "TRCV Sandros"
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
@@ -14,19 +14,19 @@
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
-	station_name  = "U.N.C.V. Sandros"
+	station_name  = "T.R.C.V. Sandros"
 	station_short = "Sandros"
 	dock_name     = "TBD"
-	boss_name     = "United Nations Command"
+	boss_name     = "T.R.C.S. Artemis"
 	boss_short    = "Command"
-	company_name  = "United Solarian Nations"
+	company_name  = "Terran Amalgamated Republics"
 	company_short = "SolNat"
 
-	map_admin_faxes = list("United Nations Command")
+	map_admin_faxes = list("TRCS Artemis")
 
 	//These should probably be moved into the evac controller...
 	shuttle_docked_message = "Attention all hands: Jump preparation complete. The jump drive is now spooling up, secure all stations for departure. Time to jump: approximately %ETD%."
-	shuttle_leaving_dock = "Attention all hands: Jump initiated, exiting bluespace in %ETA%."
+	shuttle_leaving_dock = "Attention all hands: Jump initiated, please do not move during the duration. Exiting sublight in %ETA%."
 	shuttle_called_message = "Attention all hands: Jump sequence initiated. Transit procedures are now in effect. Jump in %ETA%."
 	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
 
@@ -52,12 +52,12 @@
 	to_chat(victim, "This area of space is uncharted, and away from TRDF territories. The likelihood of encountering any civilized humans in this part of space is null, and no known governments or species hold these systems.")
 
 /datum/map/torch/send_welcome()
-	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><br>"
+	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>TRCV Sandros</b> Sensor Readings:</font><br>"
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
 	welcome_text += "<hr>Current system:<br /><b>[system_name()]</b><br /><br>"
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br /><br>"
-	welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br /><br>"
-	welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br /><hr>"
+	welcome_text += "Travel time to Sol:<br /><b>[rand(105,115)] years</b><br /><br>"
+	welcome_text += "Time since last port visit:<br /><b>[rand(110,115)] years</b><br /><hr>"
 	welcome_text += "Scan results show the following points of interest:<br />"
 	var/list/space_things = list()
 	var/obj/effect/overmap/torch = map_sectors["1"]
@@ -87,7 +87,7 @@
 		welcome_text += "<br>No distress calls logged.<br />"
 	welcome_text += "<hr>"
 
-	post_comm_message("SEV Torch Sensor Readings", welcome_text)
+	post_comm_message("TRCV Sandros Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
 
 /turf/simulated/wall //landlubbers go home

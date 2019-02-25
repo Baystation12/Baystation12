@@ -75,13 +75,13 @@ Unique items
 ***********/
 
 /obj/item/weapon/pen/multi/cmd/xo
-	name = "executive officer's pen"
+	name = "First Officer's pen"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "pen_xo"
 	desc = "A slightly bulky pen with a silvery case. Twisting the top allows you to switch the nib for different colors."
 
 /obj/item/weapon/pen/multi/cmd/co
-	name = "commanding officer's pen"
+	name = "Captain's pen"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "pen_co"
 	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."

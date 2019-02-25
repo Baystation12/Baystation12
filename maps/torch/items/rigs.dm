@@ -9,7 +9,7 @@
 	name = "command HCM"
 	suit_type = "command hardsuit"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
-	desc = "A specialized hardsuit rig control module issued to command staff of the Expeditionary Corps and their peers."
+	desc = "A specialized hardsuit rig control module issued to command staff of the Terran Government and their peers."
 	icon_state = "command_rig"
 	armor = list(melee = 25, bullet = 25, laser = 15, energy = 25, bomb = 40, bio = 100, rad = 40)
 	online_slowdown = 0.50
@@ -66,7 +66,7 @@
 /obj/item/weapon/rig/command/xo
 	name = "officer's command HCM"
 	suit_type = "advanced command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Expeditionary Corps and their peers."
+	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Terran Defence Force and their peers."
 	icon_state = "command_XO_rig"
 	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 50)
 
@@ -96,9 +96,9 @@
  * COMMANDING OFFICER
  */
 /obj/item/weapon/rig/command/co
-	name = "commanding officer's command HCM"
+	name = "Captain's command HCM"
 	suit_type = "advanced command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
+	desc = "A specialized hardsuit rig control module issued to Captains of the Terran Government."
 	icon_state = "command_CO_rig"
 	armor = list(melee = 50, bullet = 40, laser = 30, energy = 20, bomb = 40, bio = 100, rad = 50)
 
@@ -131,7 +131,7 @@
 /obj/item/weapon/rig/command/medical
 	name = "medical command HCM"
 	suit_type = "medical command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking medical officers of the Expeditionary Corps and their peers."
+	desc = "A specialized hardsuit rig control module issued to ranking medical officers of the Terran Government and their peers."
 	icon_state = "command_med_rig"
 	armor = list(melee = 35, bullet = 25, laser = 25, energy = 25, bomb = 40, bio = 100, rad = 100)
 
@@ -173,7 +173,7 @@
 /obj/item/weapon/rig/command/security
 	name = "security command HCM"
 	suit_type = "security command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking security officers of the Expeditionary Corps and their peers."
+	desc = "A specialized hardsuit rig control module issued to Fleet Security Officers of the Terran Government and their peers."
 	icon_state = "command_sec_rig"
 	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 40)
 
@@ -181,7 +181,7 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/security
 
 	allowed = list(/obj/item/weapon/gun,
-	 			  /obj/item/ammo_magazine, 
+	 			  /obj/item/ammo_magazine,
 	  			  /obj/item/weapon/handcuffs,
 	   			  /obj/item/device/flashlight,
 	    		  /obj/item/weapon/tank,
@@ -211,7 +211,7 @@
 /obj/item/weapon/rig/command/exploration
 	name = "exploration command HCM"
 	suit_type = "exploration command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to Pathfinders of the Expeditionary Corps."
+	desc = "A specialized hardsuit rig control module issued to Exploration Officers of the Terran Defense Force."
 	icon_state = "command_exp_rig"
 	armor = list(melee = 35, bullet = 25, laser = 25, energy = 35, bomb = 15, bio = 100, rad = 100)
 
@@ -249,7 +249,7 @@
 /obj/item/weapon/rig/command/science
 	name = "research command HCM"
 	suit_type = "research command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking research officers of the Expeditionary Corps."
+	desc = "A specialized hardsuit rig control module issued to ranking research officers of the Terran Government."
 	icon_state = "command_sci_rig"
 	armor = list(melee = 25, bullet = 15, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
 

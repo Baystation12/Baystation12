@@ -46,9 +46,9 @@
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 */
 /datum/gear/accessory/torch_patch
-	display_name = "Torch mission patch"
+	display_name = "Sandros mission patch"
 	path = /obj/item/clothing/accessory/solgov/torch_patch
-	description = "A shoulder patch representing the SEV Torch and its mission. Given to all the oddjobs pulled from various branches to work on the Torch."
+	description = "A shoulder patch representing the TRCV Sandros and its mission. Looks new and shiny."
 
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
@@ -64,6 +64,11 @@
 /datum/gear/accessory/armband_ma
 	display_name = "master at arms brassard"
 	path = /obj/item/clothing/accessory/armband/solgov/ma
+	allowed_roles = SECURITY_ROLES
+
+/datum/gear/accessory/armband_ma
+	display_name = "military police brassard"
+	path = /obj/item/clothing/accessory/armband/solgov/mp
 	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_security
@@ -129,12 +134,12 @@
 /*
 /datum/gear/tactical/armor_deco
 	allowed_roles = ARMORED_ROLES
-*/
+
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
 	path = /obj/item/clothing/accessory/armor/tag/press
 	allowed_roles = list(/datum/job/assistant)
-/*
+
 /datum/gear/tactical/helm_covers
 	allowed_roles = ARMORED_ROLES
 */

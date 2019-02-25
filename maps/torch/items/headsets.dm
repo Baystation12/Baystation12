@@ -73,7 +73,7 @@
 	desc = "A headset for the guy or gal who advises the enlisted whilst from a position of seniority."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/sea
+	ks1type = /obj/item/device/encryptionkey/heads/torchexec
 
 /obj/item/device/radio/headset/sea/alt
 	name = "senior naval advisor's bowman headset"

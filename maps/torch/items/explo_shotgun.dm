@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration
 	name = "ballistic launcher"
-	desc = "As the user's handbook will tell you, the Xynergy XP-3 is /not/ a shotgun, it just launches payloads of same caliber at high speed towards targets. Nicknamed 'Boomstick' for the way it behaves when full-power ammunition is loaded."
+	desc = "As the user's handbook will tell you, the Terran Patent CC-5 is /not/ a shotgun, it just launches payloads of same caliber at high speed towards targets. Nicknamed 'Boomstick' for the way it behaves when full-power ammunition is loaded."
 	icon = 'maps/torch/icons/obj/explshotgun.dmi'
 	icon_state = "expshotgun0"
 	starts_loaded = 0
@@ -10,7 +10,7 @@
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/on_update_icon()
 	icon_state = "expshotgun[!!chambered]"
 	..()
-	
+
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/free_fire()
 	var/my_z = get_z(src)
 	if(!GLOB.using_map.station_levels.Find(my_z))

@@ -8,8 +8,8 @@
 	plane = ABOVE_HUMAN_PLANE
 
 /obj/structure/solbanner/exo
-	name = "exoplanet SCG banner"
-	desc = "A rugged metal frame with a banner of Sol Central Government on it. Resistant to radiation bleaching."
+	name = "exoplanet TAR banner"
+	desc = "A rugged metal frame with a banner of Terran Amalgamated Republics on it. Resistant to radiation bleaching."
 	icon_state = "steel"
 	obj_flags = 0
 	var/plantedby
@@ -24,8 +24,8 @@
 		to_chat(user, "<span class='notice'>[plantedby]</span>")
 
 /obj/item/solbanner
-	name = "\improper SCG banner capsule"
-	desc = "SCG banner packed in a rapid deployment capsule. Used for staking claims on new worlds in the name of Sol Central Government."
+	name = "\improper TAR banner capsule"
+	desc = "TAR banner packed in a rapid deployment capsule. Used for staking claims on new worlds in the name of Terran Amalgamated Republics."
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "banner_stowed"
 	w_class = ITEM_SIZE_HUGE

@@ -71,9 +71,9 @@
  */
 
 /datum/mil_branch/expeditionary_corps
-	name = "Expeditionary Corps"
-	name_short = "SCGEC"
-	email_domain = "torch.ec.scg"
+	name = "Xenocorps"
+	name_short = "XC"
+	email_domain = "Sandros.XC.scg"
 
 	rank_types = list(
 		/datum/mil_rank/ec/e3,
@@ -157,7 +157,7 @@
 
 /datum/mil_branch/army
 	name = "Army"
-	name_short = "SCGA"
+	name_short = "TDA"
 	email_domain = "army.mil"
 
 	rank_types = list(
@@ -168,6 +168,7 @@
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
 		/datum/mil_rank/army/e7,
+		/datum/mil_rank/army/e7_alt,
 		/datum/mil_rank/army/e8,
 		/datum/mil_rank/army/e8_alt,
 		/datum/mil_rank/army/e9,
@@ -211,9 +212,9 @@
 	)
 
 /datum/mil_branch/solgov
-	name = "SolGov Employee"
-	name_short = "SCG"
-	email_domain = "torch.scg"
+	name = "Terran Employee"
+	name_short = "SAR"
+	email_domain = "torch.TAR"
 
 	rank_types = list(
 		/datum/mil_rank/sol/gov,
@@ -442,56 +443,56 @@
  *  =====
  */
 /datum/mil_rank/ec/e1
-	name = "Apprentice Explorer"
-	name_short = "AXPL"
+	name = "Auxiliary"
+	name_short = "AUX"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted)
 	sort_order = 1
 
 /datum/mil_rank/ec/e3
-	name = "Explorer"
-	name_short = "XPL"
+	name = "Legionnaire"
+	name_short = "LGN"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e3)
 	sort_order = 3
 
 /datum/mil_rank/ec/e5
-	name = "Senior Explorer"
-	name_short = "SXPL"
+	name = "Decanus"
+	name_short = "DCN"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e5)
 	sort_order = 5
 
 /datum/mil_rank/ec/e7
-	name = "Chief Explorer"
-	name_short = "CXPL"
+	name = "Tessarius"
+	name_short = "TRS"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e7)
 	sort_order = 7
 
 /datum/mil_rank/ec/o1
-	name = "Ensign"
-	name_short = "ENS"
+	name = "Aspirant"
+	name_short = "ASP"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer)
 	sort_order = 11
 
 /datum/mil_rank/ec/o3
-	name = "Lieutenant"
-	name_short = "LT"
+	name = "Optio"
+	name_short = "OPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o3)
 	sort_order = 13
 
 /datum/mil_rank/ec/o5
-	name = "Commander"
-	name_short = "CDR"
+	name = "Centurion"
+	name_short = "CNT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o5)
 	sort_order = 15
 
 /datum/mil_rank/ec/o6
-	name = "Captain"
-	name_short = "CAPT"
+	name = "Legatus"
+	name_short = "LGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o6)
 	sort_order = 16
 
 /datum/mil_rank/ec/o8
-	name = "Admiral"
-	name_short = "ADM"
+	name = "Legatus Praetore"
+	name_short = "LPRT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
 	sort_order = 16
 
@@ -506,50 +507,56 @@
 	sort_order = 1
 
 /datum/mil_rank/army/e2
-	name = "Private Second Class"
-	name_short = "PV2"
+	name = "Private First Class"
+	name_short = "PFC"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e2)
 	sort_order = 2
 
 /datum/mil_rank/army/e3
-	name = "Private First Class"
-	name_short = "PV1"
+	name = "Corporal"
+	name_short = "CPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e3)
 	sort_order = 3
 
 /datum/mil_rank/army/e4
-	name = "Corporal"
-	name_short = "CPL"
+	name = "Sergeant"
+	name_short = "SGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4)
 	sort_order = 4
 
 /datum/mil_rank/army/e5
-	name = "Sergeant"
-	name_short = "SGT"
+	name = "Technical Sergeant"
+	name_short = "TSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e5)
 	sort_order = 5
 
 /datum/mil_rank/army/e6
-	name = "Staff Sergeant"
-	name_short = "SSG"
+	name = "Senior Technical Sergeant"
+	name_short = "TSGT2"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e6)
 	sort_order = 6
 
 /datum/mil_rank/army/e7
-	name = "Sergeant First Class"
-	name_short = "SFC"
+	name = "Command Sergeant"
+	name_short = "CSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7)
 	sort_order = 7
 
+/datum/mil_rank/army/e7_alt
+	name = "Munitions Sergeant"
+	name_short = "MSGT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8_alt)
+	sort_order = 7
+
 /datum/mil_rank/army/e8
-	name = "Master Sergeant"
-	name_short = "MSG"
+	name = "Senior Command Sergeant"
+	name_short = "CSGT2"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8)
 	sort_order = 8
 
 /datum/mil_rank/army/e8_alt
-	name = "First Sergeant"
-	name_short = "1SG"
+	name = "Senior Munitions Sergeant"
+	name_short = "MSGT2"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8_alt)
 	sort_order = 8
 
@@ -572,14 +579,14 @@
 	sort_order = 9
 
 /datum/mil_rank/army/o1
-	name = "Second Lieutenant"
-	name_short = "2LT"
+	name = "Junior Lieutenant"
+	name_short = "JLT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer)
 	sort_order = 11
 
 /datum/mil_rank/army/o2
-	name = "First Lieutenant"
-	name_short = "1LT"
+	name = "Lieutenant"
+	name_short = "LT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o2)
 	sort_order = 12
 
@@ -608,32 +615,32 @@
 	sort_order = 16
 
 /datum/mil_rank/army/o7
-	name = "Brigadier General"
-	name_short = "BG"
+	name = "Minor Praetor"
+	name_short = "MPRT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag)
 	sort_order = 17
 
 /datum/mil_rank/army/o8
-	name = "Major General"
-	name_short = "MG"
+	name = "Praetor Second Grade"
+	name_short = "PRT2"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o8)
 	sort_order = 18
 
 /datum/mil_rank/army/o9
-	name = "Lieutenant General"
-	name_short = "LTG"
+	name = "Praetor First Grade"
+	name_short = "PRT1"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o9)
 	sort_order = 19
 
 /datum/mil_rank/army/o10
-	name = "General"
-	name_short = "GEN"
+	name = "Grand Praetor"
+	name_short = "GPRT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o10)
 	sort_order = 20
 
 /datum/mil_rank/army/o10_alt
-	name = "General of the Army"
-	name_short = "GA"
+	name = "Grand Praetor of the Army"
+	name_short = "GPTRA"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o10_alt)
 	sort_order = 20
 
