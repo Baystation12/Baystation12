@@ -19297,7 +19297,9 @@
 /area/crew_quarters/diplomat)
 "TZ" = (
 /obj/machinery/door/airlock/command{
-	name = "Officer's Mess"
+	autoset_access = 0;
+	name = "Officer's Mess";
+	req_access = list(list(19,28))
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
