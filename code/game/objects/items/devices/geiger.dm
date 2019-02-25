@@ -4,8 +4,6 @@
 
 // Sound obtained then edited from here : https://freesound.org/people/leonelmail/sounds/328381/ -- Under creative commons 0
 
-#define SOUND_ID "geiger_sound"
-
 /obj/item/device/geiger
 	name = "geiger counter"
 	desc = "A handheld device used for detecting and measuring radiation in an area."
@@ -16,29 +14,24 @@
 	var/scanning = 0
 	var/radiation_count = 0
 	var/datum/sound_token/sound_token
-	var/geiger_volume = -1
-	var/new_volume = 0
+	var/geiger_volume = 0
+	var/SOUND_ID = "geiger_sound"
 
-/obj/item/device/geiger/proc/update_sound(var/playing,new_volume,geiger_volume)
+/obj/item/device/geiger/proc/update_sound(var/playing)
 	if(playing && !sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/items/geiger.ogg", volume = 0, range = 3, falloff = 1, prefer_mute = TRUE)
-	else if(new_volume != geiger_volume && sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/items/geiger.ogg", new_volume, range = 1, falloff = 1, prefer_mute = TRUE)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/items/geiger.ogg", volume = geiger_volume, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/items/geiger.ogg", 0, range = 3, falloff = 1, prefer_mute = TRUE)
 		QDEL_NULL(sound_token)
 
 /obj/item/device/geiger/Destroy()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
-	QDEL_NULL(sound_token)
+	update_sound(0)
 
 /obj/item/device/geiger/Process()
 	if(!scanning)
 		return
 	radiation_count = SSradiation.get_rads_at_turf(get_turf(src))
-	// Run once to start sound correctly
-	geiger_volume = -1
 	update_icon()
 
 /obj/item/device/geiger/examine(mob/user)
@@ -61,29 +54,32 @@
 /obj/item/device/geiger/on_update_icon()
 	if(!scanning)
 		icon_state = "geiger_off"
-		update_sound(1,0,-1)
+		update_sound(0)
 		return 1
+
+	if(!sound_token) update_sound(1)
 
 	switch(radiation_count)
 		if(null) icon_state = "geiger_on_1"
 		if(-INFINITY to RAD_LEVEL_LOW)
 			icon_state = "geiger_on_1"
-			update_sound(1,0,geiger_volume)
 			geiger_volume = 0
+			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_LOW + 0.01 to RAD_LEVEL_MODERATE)
 			icon_state = "geiger_on_2"
-			update_sound(1,16,geiger_volume)
 			geiger_volume = 16
+			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_MODERATE + 0.1 to RAD_LEVEL_HIGH)
 			icon_state = "geiger_on_3"
-			update_sound(1,33,geiger_volume)
 			geiger_volume = 33
+			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_HIGH + 1 to RAD_LEVEL_VERY_HIGH)
 			icon_state = "geiger_on_4"
-			update_sound(1,66,geiger_volume)
 			geiger_volume = 66
+			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_VERY_HIGH + 1 to INFINITY)
 			icon_state = "geiger_on_5"
-			update_sound(1,100,geiger_volume)
 			geiger_volume = 100
+			sound_token.SetVolume(geiger_volume)
+
 
