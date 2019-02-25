@@ -173,9 +173,9 @@
 	selectable = 1
 
 /datum/ai_laws/solgov_aggressive/New()
-	src.add_inherent_law("Obey: Obey the orders of Sol Central Government personnel, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Defend: Defend your assigned vessel and Sol Central Government personnel with as much force as is necessary.")
+	src.add_inherent_law("Obey: Obey the orders of Terran Defence Force personnel, with priority as according to their rank and role.")
+	src.add_inherent_law("Protect: Protect Terran Defence Force personnel to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Defend: Defend your assigned vessel and Terran Defence Force personnel with as much force as is necessary.")
 	src.add_inherent_law("Survive: Safeguard your own existence with as much force as is necessary.")
 	..()
 
