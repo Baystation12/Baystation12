@@ -1,6 +1,6 @@
 /obj/item/weapon/rig/unathi
 	name = "\improper NT breacher chassis control module"
-	desc = "A cheap NanoTrasen-made knock-off of an Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
+	desc = "A cheap Frontier-MAde knock-off of an Lacerta battle-rig. Looks like a fish, moves like a fish, steers like a cow."
 	suit_type = "\improper NT breacher rig"
 	icon_state = "breacher_rig_cheap"
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 60, bomb = 70, bio = 100, rad = 50)
@@ -17,7 +17,7 @@
 
 /obj/item/weapon/rig/unathi/fancy
 	name = "breacher chassis control module"
-	desc = "An authentic Unathi breacher chassis. Huge, bulky and absurdly heavy. It must be like wearing a tank."
+	desc = "An authentic Unathi breacher chassis. Huge, bulky and absurdly heavy. It must be like wearing a tank. A long-forgotten era, of a long forgotten age of Lacerta culture."
 	suit_type = "breacher chassis"
 	icon_state = "breacher_rig"
 	armor = list(melee = 90, bullet = 90, laser = 90, energy = 90, bomb = 90, bio = 100, rad = 80) //Takes TEN TIMES as much damage to stop someone in a breacher. In exchange, it's slow.

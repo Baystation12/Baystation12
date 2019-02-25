@@ -1,6 +1,6 @@
 /obj/item/weapon/rig/ert
-	name = "emergency response command hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has blue highlights. Armoured and space ready."
+	name = "qrf command hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental Quick Reactionary Forces. Has blue highlights. Armoured and space ready."
 	suit_type = "emergency response command"
 	icon_state = "ert_commander_rig"
 
@@ -41,8 +41,8 @@
 
 
 /obj/item/weapon/rig/ert/engineer
-	name = "emergency response engineering hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has orange highlights. Armoured and space ready."
+	name = "qrf engineering hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental Quick Reactionary Forces. Has orange highlights. Armoured and space ready."
 	suit_type = "emergency response engineer"
 	icon_state = "ert_engineer_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 100)
@@ -61,8 +61,8 @@
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ert/janitor
-	name = "emergency response sanitation hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has purple highlights. Armoured and space ready."
+	name = "qrf sanitation hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental Quick Reactionary Forces. Has purple highlights. Armoured and space ready."
 	suit_type = "emergency response sanitation"
 	icon_state = "ert_janitor_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
@@ -77,8 +77,8 @@
 		)
 
 /obj/item/weapon/rig/ert/medical
-	name = "emergency response medical hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has white highlights. Armoured and space ready."
+	name = "qrf medical hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental Quick Reactionary Forces. Has white highlights. Armoured and space ready."
 	suit_type = "emergency response medic"
 	icon_state = "ert_medical_rig"
 
@@ -91,8 +91,8 @@
 		)
 
 /obj/item/weapon/rig/ert/security
-	name = "emergency response security hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has red highlights. Armoured and space ready."
+	name = "qrf security hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental Quick Reactionary Forces. Has red highlights. Armoured and space ready."
 	suit_type = "emergency response security"
 	icon_state = "ert_security_rig"
 
@@ -105,11 +105,11 @@
 		)
 
 /obj/item/weapon/rig/ert/assetprotection
-	name = "heavy emergency response suit control module"
-	desc = "A heavy, modified version of a common emergency response hardsuit. Has blood red highlights.  Armoured and space ready."
+	name = "heavy qrf suit control module"
+	desc = "A heavy, modified version of a common QRF hardsuit. Has blood red highlights.  Armoured and space ready."
 	suit_type = "heavy emergency response"
 	icon_state = "asset_protection_rig"
-	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
+	armor = list(melee = 95, bullet = 95, laser = 95,energy = 95, bomb = 95, bio = 100, rad = 100)
 
 	glove_type = /obj/item/clothing/gloves/rig/ert/assetprotection
 

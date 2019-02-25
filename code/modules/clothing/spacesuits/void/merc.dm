@@ -1,7 +1,7 @@
 //Syndicate rig
 /obj/item/clothing/head/helmet/space/void/merc
 	name = "blood-red voidsuit helmet"
-	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders."
+	desc = "An advanced helmet designed for work in special operations. The back seems to have writing in an unknown language."
 	icon_state = "rig0-syndie"
 	item_state = "syndie_helm"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 35, bio = 100, rad = 60)
@@ -13,7 +13,7 @@
 /obj/item/clothing/suit/space/void/merc
 	icon_state = "rig-syndie"
 	name = "blood-red voidsuit"
-	desc = "An advanced suit that protects against injuries during special operations. Property of Gorlex Marauders."
+	desc = "An advanced suit that protects against injuries during special operations. The back seems to have writing in an unknown language.."
 	item_state_slots = list(
 		slot_l_hand_str = "syndie_voidsuit",
 		slot_r_hand_str = "syndie_voidsuit",

@@ -419,8 +419,8 @@
 	icon_closed = "mu_hoodie"
 
 /obj/item/clothing/suit/storage/toggle/hoodie/nt
-	name = "\improper NanoTrasen hoodie"
-	desc = "A warm, blue sweatshirt. It proudly bears the NanoTrasen logo on the back. The edges are trimmed with silver."
+	name = "\improper Private Corporate hoodie"
+	desc = "A warm, blue sweatshirt. It proudly bears a Corporate logo on the back. The edges are trimmed with silver."
 	icon_state = "nt_hoodie"
 	icon_open = "nt_hoodie_open"
 	icon_closed = "nt_hoodie"
@@ -472,8 +472,8 @@
 	item_state = "sciponcho"
 
 /obj/item/clothing/suit/poncho/roles/science/nanotrasen
-	name = "\improper NanoTrasen poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, colors of NanoTrasen. Go NanoTrasen!"
+	name = "\improper Private Corporate poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, colors of a private corporation. Go Capitalism!"
 	icon_state = "sciponcho_nt"
 	item_state = "sciponcho_nt"
 

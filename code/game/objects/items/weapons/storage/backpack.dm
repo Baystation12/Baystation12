@@ -385,7 +385,7 @@
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
 	name = "Crisis Response Force Backpack"
-	desc = "A spacious backpack with lots of pockets, used by members of the Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, used by members of the Quick Reactionary Force."
 	icon_state = "ert_commander"
 	item_state_slots = list(
 		slot_l_hand_str = "securitypack",
@@ -395,24 +395,24 @@
 //Commander
 /obj/item/weapon/storage/backpack/ert/commander
 	name = "Crisis Response Force Commander Backpack"
-	desc = "A spacious backpack with lots of pockets, worn by the commander of an Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by the commander of an Quick Reactionary Force."
 
 //Security
 /obj/item/weapon/storage/backpack/ert/security
 	name = "Crisis Response Force Security Backpack"
-	desc = "A spacious backpack with lots of pockets, worn by security members of an Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by security members of an Quick Reactionary Force."
 	icon_state = "ert_security"
 
 //Engineering
 /obj/item/weapon/storage/backpack/ert/engineer
 	name = "Crisis Response Force Engineer Backpack"
-	desc = "A spacious backpack with lots of pockets, worn by engineering members of an Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by engineering members of an Quick Reactionary Force."
 	icon_state = "ert_engineering"
 
 //Medical
 /obj/item/weapon/storage/backpack/ert/medical
 	name = "Crisis Response Force Medical Backpack"
-	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
+	desc = "A spacious backpack with lots of pockets, worn by medical members of an Quick Reactionary Force."
 	icon_state = "ert_medical"
 
 /*

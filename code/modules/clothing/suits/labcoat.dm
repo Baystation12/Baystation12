@@ -94,35 +94,35 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/cso
 	name = "chief science officer's labcoat"
-	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat, and purple trim to indicate a Chief Science Officer."
+	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as a Terran Republic labcoat, and purple trim to indicate a Chief Science Officer."
 	icon_state = "labcoat_cso_open"
 	icon_open = "labcoat_cso_open"
 	icon_closed = "labcoat_cso"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
 	name = "\improper NanoTrasen labcoat"
-	desc = "A suit that protects against minor chemical spills. it has a red stripe on the shoulder and red trim on the sleeves, denoting it as a NanoTrasen labcoat."
+	desc = "A suit that protects against minor chemical spills. it has a red stripe on the shoulder and red trim on the sleeves, denoting it as a Private Corporate labcoat."
 	icon_state = "labcoat_nt_open"
 	icon_open = "labcoat_nt_open"
 	icon_closed = "labcoat_nt"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/heph
 	name = "\improper Hephaestus Industries labcoat"
-	desc = "A suit that protects against minor chemical spills. It has a cyan stripe on the shoulder and cyan trim on the sleeves, denoting it as a Hephaestus Industries labcoat."
+	desc = "A suit that protects against minor chemical spills. It has a cyan stripe on the shoulder and cyan trim on the sleeves, denoting it as a Nelwen Electronics labcoat."
 	icon_state = "labcoat_heph_open"
 	icon_open = "labcoat_heph_open"
 	icon_closed = "labcoat_heph"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/zeng
 	name = "\improper Zeng-Hu labcoat"
-	desc = "A suit that protects against minor chemical spills. It has a cyan stripe on the shoulder and cyan trim on the sleeves, denoting it as a Zeng-Hu Pharmaceuticals labcoat."
+	desc = "A suit that protects against minor chemical spills. It has a cyan stripe on the shoulder and cyan trim on the sleeves, denoting it as a Fellien Healthcare labcoat."
 	icon_state = "labcoat_zeng_open"
 	icon_open = "labcoat_zeng_open"
 	icon_closed = "labcoat_zeng"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
-	name = "\improper DAIS labcoat"
-	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
+	name = "\improper Nelwen technician labcoat"
+	desc = "A labcoat with a the logo of Nelwen Electronics emblazoned on the back. It has a stylish blue \
 	trim and the pockets are reinforced to hold tools. It seems to have an insulated material woven in to prevent static shocks."
 	icon_state = "labcoat_dais"
 	icon_open = "labcoat_dais_open"
@@ -132,29 +132,29 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
-	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	desc = "A full-body labcoat covered in green and black designs, denoting it as an Terran Research Initiative management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_open"
 	icon_open = "labcoat_rd_open"
 	icon_closed = "labcoat_rd"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
-	name = "\improper NT research director's labcoat"
-	desc = "A full-body labcoat covered in red and black designs, denoting it as a NanoTrasen management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	name = "\improper PS research director's labcoat"
+	desc = "A full-body labcoat covered in red and black designs, denoting it as a Private Corporate management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_nt_open"
 	icon_open = "labcoat_rd_nt_open"
 	icon_closed = "labcoat_rd_nt"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd/heph
-	name = "\improper HI research director's labcoat"
-	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Hephaestus Industries management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	name = "\improper NE research director's labcoat"
+	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Nelwen Electronics management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_heph_open"
 	icon_open = "labcoat_rd_heph_open"
 	icon_closed = "labcoat_rd_heph"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd/heph
-	name = "\improper Z-H research director's labcoat"
-	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Zeng-Hu Pharmaceuticals management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	name = "\improper FH research director's labcoat"
+	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Fellien Healthcare management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_zeng_open"
 	icon_open = "labcoat_rd_zeng_open"
 	icon_closed = "labcoat_rd_zeng"
