@@ -15,11 +15,15 @@
 	var/radiation_count = 0
 	var/datum/sound_token/sound_token
 	var/geiger_volume = 0
-	var/SOUND_ID = "geiger_sound"
+	var/sound_id
+
+/obj/item/device/geiger/Initialize()
+	. = ..()
+	sound_id = "[type]_[sequential_id(type)]"
 
 /obj/item/device/geiger/proc/update_sound(var/playing)
 	if(playing && !sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/items/geiger.ogg", volume = geiger_volume, range = 3, falloff = 1, prefer_mute = TRUE)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, "sound/items/geiger.ogg", volume = geiger_volume, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 
