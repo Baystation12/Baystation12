@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscdel: "Removes Medical Contractor job. It's merged into Physician/Corpsman, number of slots for those bumped. GAS can join Corpsman only."
-  - rscadd: "Physician and Corpsman jobs can now be joined with Contractor rank."
-  - rscadd: "Engineering Contractor and Supply Assistant were merged into Engineer and Deck Technician respectively, pick Civilian branch to join as contractor"
