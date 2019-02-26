@@ -1,5 +1,6 @@
 author: MistakeNot4892
 delete-after: True
 changes: 
+  - tweak: "Removing organs from a robotic bodypart (ie. FBP or IPC) will now use Devices skill."
   - tweak: "A longstanding bug with amputated/severed limbs has been fixed and new limbs will once again require reattachment with a hemostat after replacement."
   - tweak: "Surgery will now present a list of possible surgeries (if skilled enough) rather than using a priority system."

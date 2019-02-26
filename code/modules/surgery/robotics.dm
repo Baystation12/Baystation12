@@ -70,8 +70,8 @@
 
 /decl/surgery_step/robotics/unscrew_hatch/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s [tool.name] slips, failing to unscrew [target]'s [affected.name].</span>", \
-	"<span class='warning'>Your [tool] slips, failing to unscrew [target]'s [affected.name].</span>")
+	user.visible_message("<span class='warning'>\The [user]'s [tool.name] slips, failing to unscrew \the [target]'s [affected.name].</span>", \
+	"<span class='warning'>Your [tool.name] slips, failing to unscrew [target]'s [affected.name].</span>")
 
 //////////////////////////////////////////////////////////////////
 //	 screw robotic limb hatch surgery step
@@ -564,3 +564,15 @@
 /decl/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips.</span>", \
 	"<span class='warning'>Your hand slips.</span>")
+
+/decl/surgery_step/internal/remove_organ/robotic
+	name = "Remove robotic component"
+	robotic_surgery = TRUE
+	can_infect = 0
+	core_skill = SKILL_DEVICES
+
+/decl/surgery_step/internal/replace_organ/robotic
+	name = "Replace robotic component"
+	robotic_surgery = TRUE
+	can_infect = 0
+	core_skill = SKILL_DEVICES

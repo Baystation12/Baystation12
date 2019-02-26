@@ -180,9 +180,9 @@
 		/obj/item/weapon/material/knife = 75,
 		/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
-
 	min_duration = 60
 	max_duration = 80
+	var/robotic_surgery = FALSE
 
 /decl/surgery_step/internal/remove_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -200,18 +200,21 @@
 	return FALSE
 
 /decl/surgery_step/internal/remove_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	return ..() && target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(affected)
+		return ..() && robotic_surgery == BP_IS_ROBOTIC(affected)
+	return FALSE
 
 /decl/surgery_step/internal/remove_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts removing [target]'s [target.op_stage.current_organ] with \the [tool].", \
-	"You start removing [target]'s [target.op_stage.current_organ] with \the [tool].")
+	user.visible_message("\The [user] starts removing [target]'s [target.op_stage.current_organ] with \the [tool].", \
+	"You start removing \the [target]'s [target.op_stage.current_organ] with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
 	..()
 
 /decl/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] has removed [target]'s [target.op_stage.current_organ] with \the [tool].</span>", \
-	"<span class='notice'>You have removed [target]'s [target.op_stage.current_organ] with \the [tool].</span>")
+	user.visible_message("<span class='notice'>\The [user] has removed \the [target]'s [target.op_stage.current_organ] with \the [tool].</span>", \
+	"<span class='notice'>You have removed \the [target]'s [target.op_stage.current_organ] with \the [tool].</span>")
 
 	// Extract the organ!
 	var/obj/item/organ/O = target.op_stage.current_organ
@@ -249,6 +252,7 @@
 	)
 	min_duration = 60
 	max_duration = 80
+	var/robotic_surgery = FALSE
 
 /decl/surgery_step/internal/replace_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = FALSE
@@ -281,19 +285,19 @@
 
 /decl/surgery_step/internal/replace_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && istype(tool, /obj/item/organ/internal) && ..()
+	return ..() && affected && istype(tool, /obj/item/organ/internal) && robotic_surgery == BP_IS_ROBOTIC(affected)
 
 /decl/surgery_step/internal/replace_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts transplanting \the [tool] into [target]'s [affected.name].", \
-	"You start transplanting \the [tool] into [target]'s [affected.name].")
+	user.visible_message("[user] starts [robotic_surgery ? "reinstalling" : "transplanting"] \the [tool] into [target]'s [affected.name].", \
+	"You start [robotic_surgery ? "reinstalling" : "transplanting"] \the [tool] into [target]'s [affected.name].")
 	target.custom_pain("Someone's rooting around in your [affected.name]!",100,affecting = affected)
 	..()
 
 /decl/surgery_step/internal/replace_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] has transplanted \the [tool] into [target]'s [affected.name].</span>", \
-	"<span class='notice'>You have transplanted \the [tool] into [target]'s [affected.name].</span>")
+	user.visible_message("<span class='notice'>\The [user] has [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>", \
+	"<span class='notice'>You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name].</span>")
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.unEquip(O, target))
 		affected.implants |= O //move the organ into the patient. The organ is properly reattached in the next step
