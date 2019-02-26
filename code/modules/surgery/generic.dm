@@ -259,7 +259,7 @@
 	. = FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
-		if(affected.get_incision(1))
+		if(affected.get_incision())
 			to_chat(user, SPAN_WARNING("There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!"))
 		else
 			. = TRUE
