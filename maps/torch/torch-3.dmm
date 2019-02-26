@@ -336,20 +336,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/auxsolarstarboard)
 "aM" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/table/rack,
-/obj/item/weapon/rig/medical/equipped,
-/obj/machinery/door/window/brigdoor/southleft{
-	name = "suit storage"
-	},
+/obj/machinery/suit_storage_unit/medical/alt/sol,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
 "aN" = (
@@ -666,6 +653,9 @@
 	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
@@ -15050,6 +15040,12 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
+"KR" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "KT" = (
 /obj/structure/closet/crate,
 /obj/random/single{
@@ -40448,7 +40444,7 @@ ag
 aa
 aB
 aB
-bq
+KR
 bq
 aN
 de

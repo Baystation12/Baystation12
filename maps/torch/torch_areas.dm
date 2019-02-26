@@ -1163,7 +1163,7 @@
 	icon_state = "panelsS"
 
 /area/aux_eva
-	name = "\improper Command EVA Storage"
+	name = "\improper HCM Storage"
 	icon_state = "eva"
 	req_access = list(access_eva)
 

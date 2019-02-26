@@ -5183,27 +5183,16 @@
 /turf/simulated/open,
 /area/crew_quarters/mess)
 "lg" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/weapon/rig/eva/equipped,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/machinery/door/window/brigdoor/southleft{
-	dir = 8;
-	name = "suit storage"
-	},
-/obj/structure/window/reinforced,
 /obj/effect/floor_decal/corner/yellow/mono,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/table/rack{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
 "li" = (
