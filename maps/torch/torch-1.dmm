@@ -4420,6 +4420,7 @@
 	name = "Supply Desk"
 	},
 /obj/machinery/door/window/southleft{
+	autoset_access = 0;
 	dir = 4;
 	name = "Supply Desk"
 	},

@@ -1330,8 +1330,10 @@
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/westright{
+	autoset_access = 0;
 	dir = 4;
-	name = "CMO's suit storage"
+	name = "CMO's suit storage";
+	req_access = list(40)
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
@@ -7251,9 +7253,11 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/command{
+	autoset_access = 0;
 	dir = 8;
 	id_tag = "starboardbridgeaccess";
-	name = "Bridge Access"
+	name = "Bridge Access";
+	req_access = list(list(19,80))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge)
@@ -7285,8 +7289,10 @@
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/rig/command/science,
 /obj/machinery/door/window/brigdoor/westright{
+	autoset_access = 0;
 	dir = 4;
-	name = "CSO's suit storage"
+	name = "CSO's suit storage";
+	req_access = list(30)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -12309,8 +12315,10 @@
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/rig/command/xo/equipped,
 /obj/machinery/door/window/brigdoor/westright{
+	autoset_access = 0;
 	dir = 8;
-	name = "XO's suit storage"
+	name = "XO's suit storage";
+	req_access = list(57)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -14815,9 +14823,11 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/command{
+	autoset_access = 0;
 	dir = 8;
 	id_tag = "portbridgeaccess";
-	name = "Bridge Access"
+	name = "Bridge Access";
+	req_access = list(list(19,80))
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge)
@@ -15261,7 +15271,7 @@
 	id_tag = "aquila_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(0, list(13,80));
+	req_access = list(0,list(13,80));
 	tag_airpump = "aquila_shuttle_dock_pump";
 	tag_chamber_sensor = "aquila_shuttle_dock_sensor";
 	tag_exterior_door = "aquila_shuttle_dock_outer";
@@ -15480,11 +15490,13 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	frequency = 1331;
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_inner";
 	locked = 1;
-	name = "Docking Port Airlock"
+	name = "Docking Port Airlock";
+	req_access = list(80)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15632,11 +15644,13 @@
 "Ug" = (
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	frequency = 1331;
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_outer";
 	locked = 1;
-	name = "Docking Port Airlock"
+	name = "Docking Port Airlock";
+	req_access = list(80)
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15661,8 +15675,10 @@
 	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/westright{
+	autoset_access = 0;
 	dir = 8;
-	name = "CO's suit storage"
+	name = "CO's suit storage";
+	req_access = list(20)
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/blue/diagonal{
@@ -15828,12 +15844,14 @@
 /area/crew_quarters/heads/office/rd)
 "Vg" = (
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	density = 1;
 	frequency = 1331;
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_outer";
 	locked = 1;
-	name = "Aquila External Access"
+	name = "Aquila External Access";
+	req_access = list(80)
 	},
 /obj/machinery/shield_diffuser,
 /obj/structure/cable{
@@ -16018,11 +16036,13 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	frequency = 1331;
 	icon_state = "closed";
 	id_tag = "aquila_shuttle_inner";
 	locked = 1;
-	name = "Aquila External Access"
+	name = "Aquila External Access";
+	req_access = list(80)
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -16193,8 +16213,10 @@
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/westright{
+	autoset_access = 0;
 	dir = 4;
-	name = "CoS' suit storage"
+	name = "CoS' suit storage";
+	req_access = list(58)
 	},
 /obj/effect/floor_decal/corner/red/full,
 /obj/item/weapon/tank/emergency/oxygen/double,

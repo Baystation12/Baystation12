@@ -522,9 +522,11 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	frequency = 1431;
 	id_tag = "guppy_shuttle_outer";
-	name = "Guppy External Access"
+	name = "Guppy External Access";
+	req_access = list(89)
 	},
 /obj/machinery/shield_diffuser,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -790,9 +792,11 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	frequency = 1431;
 	id_tag = "guppy_shuttle_outer";
-	name = "Guppy External Access"
+	name = "Guppy External Access";
+	req_access = list(89)
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1254,7 +1258,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
 "cS" = (
-/turf/simulated/floor/tiled/dark,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -1382,6 +1385,7 @@
 /area/exploration_shuttle/airlock)
 "dd" = (
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	density = 1;
 	frequency = 1331;
 	id_tag = "calypso_shuttle_outer";
@@ -1431,6 +1435,7 @@
 /area/exploration_shuttle/airlock)
 "dh" = (
 /obj/machinery/door/airlock/external{
+	autoset_access = 0;
 	frequency = 1331;
 	id_tag = "calypso_shuttle_inner";
 	name = "Charon External Access"
