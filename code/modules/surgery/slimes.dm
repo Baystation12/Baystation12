@@ -18,6 +18,7 @@
 //	slime flesh cutting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/cut_flesh
+	name = "Make incision"
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/material/knife = 75,	\
@@ -47,6 +48,7 @@
 //	slime innards cutting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/cut_innards
+	name = "Dissect innards"
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/material/knife = 75,	\
@@ -76,6 +78,7 @@
 //	slime core removal surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/saw_core
+	name = "Remove slime core"
 	allowed_tools = list(
 	/obj/item/weapon/scalpel/manager = 100, \
 	/obj/item/weapon/circular_saw = 100, \

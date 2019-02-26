@@ -21,6 +21,7 @@
 //	facial tissue cutting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cut_face
+	name = "Make facial incision"
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/material/knife = 75,	\
@@ -54,6 +55,7 @@
 //	vocal cord mending surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/face/mend_vocal
+	name = "Repair vocal chords"
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100, 	\
 	/obj/item/stack/cable_coil = 75, 	\
@@ -85,6 +87,7 @@
 //	facial reconstruction surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/face/fix_face
+	name = "Repair face"
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
 	/obj/item/weapon/crowbar = 55,	\
@@ -116,6 +119,7 @@
 //	facial skin cauterization surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/face/cauterize
+	name = "Cauterize face incision"
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
 	/obj/item/clothing/mask/smokable/cigarette = 75,	\

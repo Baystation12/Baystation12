@@ -23,6 +23,7 @@
 //	ribcage sawing surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/open_encased/saw
+	name = "Saw through bone"
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100,
 	/obj/item/weapon/material/knife = 50,

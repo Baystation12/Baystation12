@@ -119,45 +119,35 @@
 //	 Organ detatchment surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/detatch_organ
-
+	name = "Detach organ"
 	allowed_tools = list(
-	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/material/knife = 75,	\
-	/obj/item/weapon/material/kitchen/utensil/knife = 75,	\
-	/obj/item/weapon/material/shard = 50, 		\
+		/obj/item/weapon/scalpel = 100,
+		/obj/item/weapon/material/knife = 75,
+		/obj/item/weapon/material/kitchen/utensil/knife = 75,
+		/obj/item/weapon/material/shard = 50
 	)
-
 	min_duration = 90
 	max_duration = 110
 
-/decl/surgery_step/internal/detatch_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
-	if (!..())
-		return 0
-
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
-	if(!affected)
-		return 0
-
-	if(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
-		return 0
-
-	target.op_stage.current_organ = null
-
+/decl/surgery_step/internal/detatch_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/list/attached_organs = list()
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 			attached_organs |= organ
-
 	var/organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
-	if(!organ_to_remove)
-		return 0
+	if(organ_to_remove)
+		target.op_stage.current_organ = organ_to_remove
+		return TRUE
+	else
+		target.op_stage.current_organ = null
+	return FALSE
 
-	target.op_stage.current_organ = organ_to_remove
-
-	return ..() && organ_to_remove
+/decl/surgery_step/internal/detatch_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		return affected && !BP_IS_ROBOTIC(affected) && !BP_IS_CRYSTAL(affected)
 
 /decl/surgery_step/internal/detatch_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to separate [target]'s [target.op_stage.current_organ] with \the [tool].", \
@@ -183,41 +173,34 @@
 //	 Organ removal surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/remove_organ
+	name = "Remove internal organ"
 	allowed_tools = list(
-	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/weapon/wirecutters = 75,
-	/obj/item/weapon/material/knife = 75,	\
-	/obj/item/weapon/material/kitchen/utensil/fork = 20
+		/obj/item/weapon/hemostat = 100,
+		/obj/item/weapon/wirecutters = 75,
+		/obj/item/weapon/material/knife = 75,
+		/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
 	min_duration = 60
 	max_duration = 80
 
-/decl/surgery_step/internal/remove_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
-	if (!..())
-		return 0
-
-	target.op_stage.current_organ = null
-
+/decl/surgery_step/internal/remove_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected)
-		return 0
+	if(affected)
+		var/list/removable_organs = list()
+		for(var/obj/item/organ/internal/I in affected.implants)
+			if(I.status & ORGAN_CUT_AWAY)
+				removable_organs |= I
+		var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
+		if(organ_to_remove)
+			target.op_stage.current_organ = organ_to_remove
+			return TRUE
+		else
+			target.op_stage.current_organ = null
+	return FALSE
 
-	if(!affected)
-		return 0
-
-	var/list/removable_organs = list()
-	for(var/obj/item/organ/internal/I in affected.implants)
-		if(I.status & ORGAN_CUT_AWAY)
-			removable_organs |= I
-
-	var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
-	if(!organ_to_remove)
-		return 0
-
-	target.op_stage.current_organ = organ_to_remove
-	return ..()
+/decl/surgery_step/internal/remove_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	return ..() && target.get_organ(target_zone)
 
 /decl/surgery_step/internal/remove_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -260,58 +243,45 @@
 //	 Organ inserting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/replace_organ
+	name = "Replace internal organ"
 	allowed_tools = list(
-	/obj/item/organ = 100
+		/obj/item/organ = 100
 	)
-
 	min_duration = 60
 	max_duration = 80
 
-/decl/surgery_step/internal/replace_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
+/decl/surgery_step/internal/replace_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = FALSE
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected) return
+	if(istype(O) && istype(affected))
+		if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
+			to_chat(user, SPAN_WARNING("You cannot install a crystalline organ into a non-crystalline bodypart."))
+		else if(!BP_IS_CRYSTAL(O) && BP_IS_CRYSTAL(affected))
+			to_chat(user, SPAN_WARNING("You cannot install a non-crystalline organ into a crystalline bodypart."))
+		else if(BP_IS_ROBOTIC(affected) && !BP_IS_ROBOTIC(O))
+			to_chat(user, SPAN_WARNING("You cannot install a naked organ into a robotic body."))
+		else if(!target.species)
+			CRASH("Target ([target]) of surgery [type] has no species!")
+		else
+			var/o_is = (O.gender == PLURAL) ? "are" : "is"
+			var/o_a =  (O.gender == PLURAL) ? "" : "a "
+			if(O.organ_tag == BP_POSIBRAIN && !target.species.has_organ[BP_POSIBRAIN])
+				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
+			else if(O.damage > (O.max_damage * 0.75))
+				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] in no state to be transplanted."))
+			else if(O.w_class > affected.cavity_max_w_class)
+				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] too big for [affected.cavity_name] cavity!"))
+			else 
+				var/obj/item/organ/internal/I = target.internal_organs_by_name[O.organ_tag]
+				if(I && (I.parent_organ == affected.organ_tag || istype(O, /obj/item/organ/internal/stack)))
+					to_chat(user, SPAN_WARNING("\The [target] already has [o_a][O.name]."))
+				else
+					. = TRUE
 
-	if(!istype(O))
-		return 0
-
-	if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
-		to_chat(user, "<span class='warning'>You cannot install a crystalline organ into a non-crystalline bodypart.</span>")
-		return SURGERY_FAILURE
-
-	if(!BP_IS_CRYSTAL(O) && BP_IS_CRYSTAL(affected))
-		to_chat(user, "<span class='warning'>You cannot install a non-crystalline organ into a crystalline bodypart.</span>")
-		return SURGERY_FAILURE
-
-	if(BP_IS_ROBOTIC(affected) && !BP_IS_ROBOTIC(O))
-		to_chat(user, "<span class='warning'>You cannot install a naked organ into a robotic body.</span>")
-		return SURGERY_FAILURE
-
-	if(!target.species)
-		CRASH("Target ([target]) of surgery [type] has no species!")
-		return SURGERY_FAILURE
-
-	var/o_is = (O.gender == PLURAL) ? "are" : "is"
-	var/o_a =  (O.gender == PLURAL) ? "" : "a "
-
-	if(O.organ_tag == BP_POSIBRAIN && !target.species.has_organ[BP_POSIBRAIN])
-		to_chat(user, "<span class='warning'>There's no place in [target] to fit \the [O.organ_tag].</span>")
-		return SURGERY_FAILURE
-
-	if(O.damage > (O.max_damage * 0.75))
-		to_chat(user, "<span class='warning'>\The [O.name] [o_is] in no state to be transplanted.</span>")
-		return SURGERY_FAILURE
-	if(O.w_class > affected.cavity_max_w_class)
-		to_chat(user, "<span class='warning'>\The [O.name] [o_is] too big for [affected.cavity_name] cavity!</span>")
-		return SURGERY_FAILURE
-
-	var/obj/item/organ/internal/I = target.internal_organs_by_name[O.organ_tag]
-	if(I && (I.parent_organ == affected.organ_tag || istype(O, /obj/item/organ/internal/stack)))
-		to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.name].</span>")
-		return SURGERY_FAILURE
-
-	return ..()
+/decl/surgery_step/internal/replace_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	return affected && istype(tool, /obj/item/organ/internal) && ..()
 
 /decl/surgery_step/internal/replace_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -344,53 +314,54 @@
 //	 Organ attachment surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/attach_organ
+	name = "Attach internal organ"
 	allowed_tools = list(
-	/obj/item/weapon/FixOVein = 100, \
-	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+		/obj/item/weapon/FixOVein = 100,
+		/obj/item/stack/cable_coil = 75,
+		/obj/item/weapon/tape_roll = 50
 	)
-
 	min_duration = 100
 	max_duration = 120
 
-/decl/surgery_step/internal/attach_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/internal/attach_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-	if (!..())
-		return 0
-
-	target.op_stage.current_organ = null
-
+	var/list/attachable_organs
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))
-		// robotic attachment handled via screwdriver
-		return 0
 
-	var/list/attachable_organs = list()
 	for(var/obj/item/organ/I in affected.implants)
 		if(I && (I.status & ORGAN_CUT_AWAY))
-			attachable_organs |= I
+			LAZYADD(attachable_organs, I)
+
+	if(!LAZYLEN(attachable_organs))
+		return FALSE
 
 	var/obj/item/organ/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in attachable_organs
 	if(!organ_to_replace)
-		return 0
+		return FALSE
+
 	if(organ_to_replace.parent_organ != affected.organ_tag)
-		to_chat(user, "<span class='warning'>You can't find anywhere to attach [organ_to_replace] to!</span>")
-		return SURGERY_FAILURE
+		to_chat(user, SPAN_WARNING("You can't find anywhere to attach \the [organ_to_replace] to!"))
+		return FALSE
 
-	var/obj/item/organ/internal/augment/A = organ_to_replace
-	if(istype(A))
+	if(istype(organ_to_replace, /obj/item/organ/internal/augment))
+		var/obj/item/organ/internal/augment/A = organ_to_replace
 		if(!(A.augment_flags & AUGMENTATION_ORGANIC))
-			to_chat(user, SPAN_WARNING("\the [A] cannot function within a non-robotic limb"))
-
-	var/o_a =  (organ_to_replace.gender == PLURAL) ? "" : "a "
+			to_chat(user, SPAN_WARNING("\The [A] cannot function within a non-robotic limb."))
+			return FALSE
 
 	var/obj/item/organ/internal/I = target.internal_organs_by_name[organ_to_replace.organ_tag]
 	if(I && (I.parent_organ == affected.organ_tag || istype(organ_to_replace, /obj/item/organ/internal/stack)))
-		to_chat(user, "<span class='warning'>\The [target] already has [o_a][organ_to_replace.name].</span>")
-		return SURGERY_FAILURE
+		to_chat(user, SPAN_WARNING("\The [target] already has \a [organ_to_replace]."))
+		return FALSE
 
 	target.op_stage.current_organ = organ_to_replace
-	return ..()
+	return TRUE
+
+/decl/surgery_step/internal/attach_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		return affected && !BP_IS_ROBOTIC(affected) && !BP_IS_CRYSTAL(affected)
 
 /decl/surgery_step/internal/attach_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] begins reattaching [target]'s [target.op_stage.current_organ] with \the [tool].", \
@@ -419,6 +390,7 @@
 //	 Peridaxon necrosis treatment surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/treat_necrosis
+	name = "Treat necrosis"
 	allowed_tools = list(
 		/obj/item/weapon/reagent_containers/dropper = 100,
 		/obj/item/weapon/reagent_containers/glass/bottle = 75,

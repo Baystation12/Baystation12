@@ -11,6 +11,7 @@
 //	bone gelling surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/glue_bone
+	name = "Begin bone repair"
 	allowed_tools = list(
 	/obj/item/weapon/bonegel = 100,	\
 	/obj/item/weapon/tape_roll = 75
@@ -56,6 +57,7 @@
 //	bone setting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/set_bone
+	name = "Set bone"
 	allowed_tools = list(
 	/obj/item/weapon/bonesetter = 100,	\
 	/obj/item/weapon/wrench = 75		\
@@ -104,6 +106,7 @@
 //	skull mending surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/mend_skull
+	name = "Repair skull"
 	allowed_tools = list(
 	/obj/item/weapon/bonesetter = 100,	\
 	/obj/item/weapon/wrench = 75		\
@@ -143,6 +146,7 @@
 //	post setting bone-gelling surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/finish_bone
+	name = "Finish bone repair"
 	allowed_tools = list(
 	/obj/item/weapon/bonegel = 100,	\
 	/obj/item/weapon/tape_roll = 75

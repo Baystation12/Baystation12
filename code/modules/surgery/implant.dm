@@ -32,6 +32,7 @@
 //	 create implant space surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/make_space
+	name = "Hollow out cavity"
 	allowed_tools = list(
 	/obj/item/weapon/surgicaldrill = 100,	\
 	/obj/item/weapon/pen = 75,	\
@@ -63,6 +64,7 @@
 //	 implant cavity sealing surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/close_space
+	name = "Close cavity"
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
 	/obj/item/clothing/mask/smokable/cigarette = 75,	\
@@ -95,6 +97,7 @@
 //	 implanting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/place_item
+	name = "Place item in cavity"
 	allowed_tools = list(/obj/item = 100)
 	min_duration = 80
 	max_duration = 100
@@ -121,7 +124,6 @@
 				return FALSE
 			return TRUE
 
-
 /decl/surgery_step/cavity/place_item/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts putting \the [tool] inside [target]'s [affected.cavity_name] cavity.", \
@@ -146,6 +148,7 @@
 //	 implant removal surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/implant_removal
+	name = "Remove foreign body"
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/weapon/wirecutters = 75,	\
@@ -203,7 +206,7 @@
 
 		if (prob(find_prob))
 			user.visible_message("<span class='notice'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool].</span>", \
-			"<span class='notice'>You take [obj] out of incision on [target]'s [affected.name]s with \the [tool].</span>" )
+			"<span class='notice'>You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].</span>" )
 			target.remove_implant(obj, TRUE, affected)
 
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)

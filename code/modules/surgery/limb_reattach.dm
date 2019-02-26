@@ -25,25 +25,28 @@
 //	 limb attachment surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/limb/attach
+	name = "Replace limb"
 	allowed_tools = list(/obj/item/organ/external = 100)
-
 	min_duration = 50
 	max_duration = 70
 
-/decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!..())
-		return 0
+/decl/surgery_step/limb/attach/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = FALSE
 	var/obj/item/organ/external/E = tool
 	var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
 	if(!P || P.is_stump())
-		to_chat(user, "<span class='danger'>The [E.amputation_point] is missing!</span>")
-		return SURGERY_FAILURE
-	if(target.isSynthetic())
-		var/obj/item/organ/external/using = tool
-		if(!BP_IS_ROBOTIC(using))
-			to_chat(user, "<span class='danger'>You cannot attach a flesh part to a robotic body.</span>")
-			return SURGERY_FAILURE
-	return 1
+		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
+	else if(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
+		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
+	else
+		. = TRUE
+
+/decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/E = tool
+		var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
+		. = (P && !P.is_stump() && !(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E)))
 
 /decl/surgery_step/limb/attach/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
@@ -71,6 +74,7 @@
 //	 limb connecting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/limb/connect
+	name = "Connect limb"
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/stack/cable_coil = 75, 	\
@@ -112,6 +116,7 @@
 //	 robotic limb attachment surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/limb/mechanize
+	name = "Attach prosthetic limb"
 	allowed_tools = list(/obj/item/robot_parts = 100)
 	core_skill = SKILL_DEVICES
 

@@ -30,6 +30,7 @@
 //	acts as both cutting and bleeder clamping surgery steps
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cut_with_laser
+	name = "Make laser incision"
 	allowed_tools = list(
 	/obj/item/weapon/scalpel/laser3 = 95, \
 	/obj/item/weapon/scalpel/laser2 = 85, \
@@ -70,8 +71,9 @@
 //	acts as the cutting, bleeder clamping, and retractor surgery steps
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/incision_manager
+	name = "Make managed incision"
 	allowed_tools = list(
-	/obj/item/weapon/scalpel/manager = 100
+		/obj/item/weapon/scalpel/manager = 100
 	)
 	min_duration = 80
 	max_duration = 120
@@ -108,27 +110,32 @@
 //	 scalpel surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cut_open
+	name = "Make incision"
 	allowed_tools = list(
-	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/material/knife = 75,	\
-	/obj/item/weapon/material/kitchen/utensil/knife = 75,	\
-	/obj/item/weapon/broken_bottle = 50,
-	/obj/item/weapon/material/shard = 50, 		\
+		/obj/item/weapon/scalpel = 100,
+		/obj/item/weapon/material/knife = 75,
+		/obj/item/weapon/material/kitchen/utensil/knife = 75,
+		/obj/item/weapon/broken_bottle = 50,
+		/obj/item/weapon/material/shard = 50
 	)
 
 	min_duration = 90
 	max_duration = 110
 
+/decl/surgery_step/generic/cut_open/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = FALSE
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(istype(affected))
+		if(affected.how_open())
+			var/datum/wound/cut/incision = affected.get_incision()
+			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access, another incision isn't needed."))
+		else
+			. = TRUE
+
 /decl/surgery_step/generic/cut_open/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!istype(affected))
-			return
-		if(affected.how_open())
-			var/datum/wound/cut/incision = affected.get_incision()
-			to_chat(user, "<span class='notice'>The [incision.desc] provides enough access, another incision isn't needed.</span>")
-			return SURGERY_FAILURE
-		return target_zone != BP_MOUTH
+		return istype(affected) && target_zone != BP_MOUTH
 
 /decl/surgery_step/generic/cut_open/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -159,6 +166,7 @@
 //	 bleeder clamping surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/clamp_bleeders
+	name = "Clamp bleeders"
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
 	/obj/item/stack/cable_coil = 75, 	\
@@ -198,6 +206,7 @@
 //	 retractor surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/retract_skin
+	name = "Widen incision"
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
 	/obj/item/weapon/crowbar = 75,
@@ -235,6 +244,7 @@
 //	 skin cauterization surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cauterize
+	name = "Cauterize incision"
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
 	/obj/item/clothing/mask/smokable/cigarette = 75,	\
@@ -244,6 +254,15 @@
 
 	min_duration = 70
 	max_duration = 100
+
+/decl/surgery_step/generic/cauterize/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = FALSE
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(affected)
+		if(affected.get_incision(1))
+			to_chat(user, SPAN_WARNING("There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!"))
+		else
+			. = TRUE
 
 /decl/surgery_step/generic/cauterize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -256,9 +275,6 @@
 		return FALSE
 	if(BP_IS_ROBOTIC(affected))
 		return FALSE
-	if(!affected.get_incision(1))
-		to_chat(user, "<span class='warning'>There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!</span>")
-		return SURGERY_FAILURE
 	if(affected.is_stump()) // Copypasting some stuff here to avoid having to modify ..() for a single surgery
 		return affected.status & ORGAN_ARTERY_CUT
 	else
@@ -295,6 +311,7 @@
 //	 limb amputation surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/amputate
+	name = "Amputate limb"
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100, \
 	/obj/item/weapon/material/hatchet = 75
@@ -303,18 +320,22 @@
 	min_duration = 110
 	max_duration = 160
 
+/decl/surgery_step/generic/amputate/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = FALSE
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(affected)
+		if(affected.how_open())
+			to_chat(user, SPAN_WARNING("You can't get a clean cut with incisions getting in the way."))
+		else
+			. = TRUE
+
 /decl/surgery_step/generic/amputate/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (target_zone == BP_EYES)	//there are specific steps for eye surgery
 		return 0
 	if (!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if (affected == null)
-		return 0
-	if (affected.how_open())
-		to_chat(user,"<span class='warning'>You can't get a clean cut with incisions getting in the way.</span>")
-		return SURGERY_FAILURE
-	return (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
+	return affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
 
 /decl/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
