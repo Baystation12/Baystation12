@@ -38,7 +38,6 @@
 #define SS_INIT_CIRCUIT          5
 #define SS_INIT_OPEN_SPACE       4
 #define SS_INIT_ATOMS            3
-#define SS_INIT_ICON_UPDATE      2
 #define SS_INIT_MACHINES         1
 #define SS_INIT_DEFAULT          0
 #define SS_INIT_AIR             -1
@@ -49,6 +48,7 @@
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20
+#define SS_INIT_ICON_UPDATE     -50
 #define SS_INIT_UNIT_TESTS      -100
 
 // SS runlevels

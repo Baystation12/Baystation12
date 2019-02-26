@@ -6,13 +6,15 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 	init_order = SS_INIT_ICON_UPDATE
 
 	var/list/queue = list()
+	var/initialization_begun = FALSE
 
 /datum/controller/subsystem/processing/icon_update/stat_entry()
 	..("QU:[queue.len]")
 
 /datum/controller/subsystem/processing/icon_update/Initialize()
+	initialization_begun = TRUE // helps things to not recursively queue.
 	fire(FALSE, TRUE)
-	..()
+	return ..()
 
 /datum/controller/subsystem/processing/icon_update/fire(resumed = FALSE, no_mc_tick = FALSE)
 	var/list/curr = queue

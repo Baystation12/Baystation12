@@ -40,6 +40,13 @@
 	else
 		luminosity = 1
 
+// This is being done in response to some byond or allocation limit issues we experience with our unit test setup.
+/turf/update_icon()
+	if(!SSicon_update.initialization_begun)
+		queue_icon_update(arglist(args))
+		return
+	..()
+
 /turf/on_update_icon()
 	update_flood_overlay()
 
