@@ -31,16 +31,16 @@
 
 /decl/surgery_step/glue_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
+	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
 	if (affected.stage == 0)
-		user.visible_message("[user] starts applying \the [tool] to the [bone]." , \
-		"You start applying \the [tool] to the [bone].")
+		user.visible_message("\The [user] starts applying \the [tool] to [bone]." , \
+		"You start applying \the [tool] to [bone].")
 	target.custom_pain("Something in your [affected.name] is causing you a lot of pain!",50, affecting = affected)
 	..()
 
 /decl/surgery_step/glue_bone/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
+	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
 	user.visible_message("<span class='notice'>[user] applies some [tool.name] to [bone]</span>", \
 		"<span class='notice'>You apply some [tool.name] to [bone].</span>")
 	if(affected.stage == 0)
@@ -84,20 +84,20 @@
 
 /decl/surgery_step/set_bone/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
+	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
 	if (affected.status & ORGAN_BROKEN)
-		user.visible_message("<span class='notice'>[user] sets the [bone] n place with \the [tool].</span>", \
-			"<span class='notice'>You set the [bone] in place with \the [tool].</span>")
+		user.visible_message("<span class='notice'>\The [user] sets [bone] in place with \the [tool].</span>", \
+			"<span class='notice'>You set [bone] in place with \the [tool].</span>")
 		affected.stage = 2
 	else
-		user.visible_message("<span class='notice'>[user] sets the [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>", \
-			"<span class='notice'>You set the [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>")
+		user.visible_message("<span class='notice'>\The [user] sets [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>", \
+			"<span class='notice'>You set [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>")
 		affected.fracture()
 
 /decl/surgery_step/set_bone/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, damaging the [affected.encased ? affected.encased : "bones"] in [target]'s [affected.name] with \the [tool]!</span>" , \
-		"<span class='warning'>Your hand slips, damaging the [affected.encased ? affected.encased : "bones"] in [target]'s [affected.name] with \the [tool]!</span>")
+	user.visible_message("<span class='warning'>\The [user]'s hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>" , \
+		"<span class='warning'>Your hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>")
 	affected.fracture()
 	affected.take_external_damage(5, used_weapon = tool)
 
@@ -166,16 +166,16 @@
 
 /decl/surgery_step/finish_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
-	user.visible_message("[user] starts to finish mending the damaged [bone] with \the [tool].", \
-	"You start to finish mending the damaged [bone] with \the [tool].")
+	var/bone = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged bones in \the [target]'s [affected.name]"
+	user.visible_message("[user] starts to finish mending [bone] with \the [tool].", \
+	"You start to finish mending [bone] with \the [tool].")
 	..()
 
 /decl/surgery_step/finish_bone/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
-	user.visible_message("<span class='notice'>[user] has mended the damaged [bone] with \the [tool].</span>"  , \
-		"<span class='notice'>You have mended the damaged [bone] with \the [tool].</span>" )
+	var/bone = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged bones in [target]'s [affected.name]"
+	user.visible_message("<span class='notice'>[user] has mended [bone] with \the [tool].</span>"  , \
+		"<span class='notice'>You have mended [bone] with \the [tool].</span>" )
 	affected.status &= ~ORGAN_BROKEN
 	affected.stage = 0
 
