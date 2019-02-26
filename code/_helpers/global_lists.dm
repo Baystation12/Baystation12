@@ -3,7 +3,6 @@
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 
@@ -110,13 +109,6 @@ var/global/list/string_slot_flags = list(
 	for(var/path in paths)
 		var/datum/sprite_accessory/marking/M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
-
-	//Surgery Steps - Initialize all /datum/surgery_step into a list
-	paths = typesof(/datum/surgery_step)-/datum/surgery_step
-	for(var/T in paths)
-		var/datum/surgery_step/S = new T
-		surgery_steps += S
-	sort_surgeries()
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language
