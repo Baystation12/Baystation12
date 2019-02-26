@@ -6,14 +6,13 @@
 //////////////////////////////////////////////////////////////////
 //	generic ribcage surgery step datum
 //////////////////////////////////////////////////////////////////
-/datum/surgery_step/open_encased
-	priority = 2
+/decl/surgery_step/open_encased
 	can_infect = 1
 	blood_level = 1
 	shock_level = 40
 	delicate = 1
 
-/datum/surgery_step/open_encased/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/open_encased/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
 		return 0
 
@@ -23,7 +22,7 @@
 //////////////////////////////////////////////////////////////////
 //	ribcage sawing surgery step
 //////////////////////////////////////////////////////////////////
-/datum/surgery_step/open_encased/saw
+/decl/surgery_step/open_encased/saw
 	allowed_tools = list(
 	/obj/item/weapon/circular_saw = 100,
 	/obj/item/weapon/material/knife = 50,
@@ -34,13 +33,13 @@
 	max_duration = 70
 	shock_level = 60
 
-/datum/surgery_step/open_encased/saw/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/open_encased/saw/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	return ..() && affected && affected.how_open() == SURGERY_RETRACTED
 
-/datum/surgery_step/open_encased/saw/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/open_encased/saw/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 	if (!hasorgans(target))
 		return
@@ -51,7 +50,7 @@
 	target.custom_pain("Something hurts horribly in your [affected.name]!",60, affecting = affected)
 	..()
 
-/datum/surgery_step/open_encased/saw/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/open_encased/saw/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 	if (!hasorgans(target))
 		return
@@ -61,7 +60,7 @@
 	"<span class='notice'>You have cut [target]'s [affected.encased] open with \the [tool].</span>")
 	affected.fracture()
 
-/datum/surgery_step/open_encased/saw/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/open_encased/saw/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 	if (!hasorgans(target))
 		return
