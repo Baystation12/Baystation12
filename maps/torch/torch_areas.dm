@@ -173,7 +173,7 @@
 	name = "Second Deck Central Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/seconddeck/hallway
+/area/hallway/primary/seconddeck
 	name = "Second Deck Central Hallway"
 	icon_state = "hallC2"
 
@@ -183,7 +183,6 @@
 
 /area/hallway/primary/seconddeck/center
 	name = "\improper Second Deck Central Stairwell"
-	icon_state = "hallC2"
 
 /area/maintenance/substation/seconddeck
 	name = "Second Deck Substation"

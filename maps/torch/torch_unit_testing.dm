@@ -23,7 +23,6 @@
 		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/seconddeck/aftport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/seconddeck/forestarboard = NO_SCRUBBER,
-		/area/maintenance/seconddeck/hallway = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/fifthdeck/aftstarboard = NO_SCRUBBER,
 		/area/maintenance/waterstore = 0,
