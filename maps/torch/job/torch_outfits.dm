@@ -337,18 +337,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/white
 	id_type = /obj/item/weapon/card/id/torch/contractor/medical
 
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly
-	name = OUTFIT_JOB_NAME("Orderly")
-	uniform = /obj/item/clothing/under/rank/orderly
-
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/resident
-	name = OUTFIT_JOB_NAME("Medical Resident")
-	uniform = /obj/item/clothing/under/color/white
-
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon
-	name = OUTFIT_JOB_NAME("Xenosurgeon")
-	uniform = /obj/item/clothing/under/rank/medical/scrubs/purple
-
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus
 	name = OUTFIT_JOB_NAME("Mortician")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
@@ -361,20 +349,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/contractor/biomech
 	pda_type = /obj/item/modular_computer/pda/roboticist
 
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
-	name = OUTFIT_JOB_NAME("Virologist - Torch")
-	uniform = /obj/item/clothing/under/rank/virologist
-
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist/New()
-	..()
-	BACKPACK_OVERRIDE_VIROLOGY
-
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic - Torch")
 	uniform = /obj/item/clothing/under/rank/medical/paramedic
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
 	shoes = /obj/item/clothing/shoes/jackboots
-	l_hand = /obj/item/weapon/storage/firstaid/adv
 	belt = /obj/item/weapon/storage/belt/medical/emt
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
