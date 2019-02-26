@@ -25,13 +25,12 @@
 		spawn(0)
 			var/mobloc = get_turf(target.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
-			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
+			var/atom/movable/overlay/animation = new /atom/movable/overlay(holder)
 			animation.SetName("water")
 			animation.set_density(0)
 			animation.anchored = 1
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.layer = 5
-			animation.master = holder
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null

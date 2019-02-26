@@ -13,7 +13,7 @@
 	. = ..()
 	if(force || !istype(H) || slot != slot_wear_suit)
 		return
-	if(H.species.name in list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_ALIEN)) //non-humanoids btfo
+	if(H.species.get_bodytype() in list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_ALIEN)) //non-humanoids btfo
 		return
 	else
 		return FALSE

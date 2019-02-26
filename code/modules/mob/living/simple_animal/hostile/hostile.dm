@@ -31,6 +31,7 @@
 												/obj/machinery/door/window,
 												/obj/structure/table,
 												/obj/structure/grille,
+												/obj/structure/barricade,
 												/obj/structure/wall_frame,
 												/obj/structure/railing)
 

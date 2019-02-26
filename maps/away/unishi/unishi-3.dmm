@@ -180,7 +180,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/bridge)
@@ -772,7 +772,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
@@ -797,7 +797,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -1483,7 +1483,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
@@ -1991,7 +1991,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/light/small{
 	dir = 8

@@ -33,6 +33,8 @@
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/blend_objects = list(/obj/structure/wall_frame, /obj/structure/window, /obj/structure/grille) // Objects which to blend with
 
+	var/autoset_access = TRUE // Determines whether the door will automatically set its access from the areas surrounding it. Can be used for mapping.
+
 	//Multi-tile doors
 	dir = SOUTH
 	var/width = 1
@@ -79,6 +81,17 @@
 /obj/machinery/door/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	. = ..()
+	if(autoset_access)
+#ifdef UNIT_TEST
+		if(length(req_access))
+			crash_with("A door with mapped access restrictions was set to autoinitialize access.")
+#endif
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/door/LateInitialize()
+	..()
+	if(autoset_access) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
+		inherit_access_from_area()
 
 /obj/machinery/door/Destroy()
 	set_density(0)
@@ -527,3 +540,23 @@
 
 /obj/machinery/door/CanFluidPass(var/coming_from)
 	return !density
+
+// Most doors will never be deconstructed over the course of a round,
+// so as an optimization defer the creation of electronics until
+// the airlock is deconstructed
+/obj/machinery/door/proc/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
+	var/obj/item/weapon/airlock_electronics/electronics = new electronics_type(loc)
+	electronics.set_access(src)
+	electronics.autoset = autoset_access
+	return electronics
+
+/obj/machinery/door/proc/inherit_access_from_area()
+	var/area/fore = get_area(get_step(src, dir))
+	var/area/aft = get_area(get_step(src, GLOB.reverse_dir[dir])) || fore
+	if(!fore || (fore == aft))
+		req_access = (aft && aft.secure) ? aft.req_access.Copy() : list()
+		return
+	if(fore.secure || aft.secure)
+		req_access = req_access_union(fore, aft)
+		return
+	req_access = req_access_diff(fore, aft)

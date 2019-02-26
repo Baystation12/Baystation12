@@ -31,9 +31,7 @@
 	stripe_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/hatch/autoname/command
-	req_access = list(access_heads)
 	stripe_color = COLOR_COMMAND_BLUE
 
 /obj/machinery/door/airlock/hatch/autoname/engineering
-	req_access = list(access_engine)
 	stripe_color = COLOR_AMBER

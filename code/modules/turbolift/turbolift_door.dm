@@ -1,7 +1,6 @@
 /obj/machinery/door/airlock/lift
 	name = "Elevator Door"
 	desc = "Ding."
-	req_access = list(access_maint_tunnels)
 	opacity = 0
 	autoclose = 0
 	glass = 1

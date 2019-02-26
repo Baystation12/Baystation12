@@ -313,8 +313,10 @@
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
 	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(wear_mask))
+		if(istype(wear_mask) && wear_mask.visible_name)
 			return wear_mask.visible_name
+		else if(istype(wearing_rig) && wearing_rig.visible_name)
+			return wearing_rig.visible_name
 		else
 			return "Unknown"
 	return real_name
@@ -933,7 +935,7 @@
 
 /mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/external/organ, var/obj/item/O)
 	// All kinds of embedded objects cause bleeding.
-	if(!can_feel_pain())
+	if(!organ.can_feel_pain())
 		to_chat(src, "<span class='warning'>You feel [O] moving inside your [organ.name].</span>")
 	else
 		var/msg = pick( \
@@ -942,10 +944,7 @@
 			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
 		custom_pain(msg,40,affecting = organ)
 
-	organ.take_external_damage(rand(1,3), 0, 0)
-	if(!BP_IS_ROBOTIC(organ) && (should_have_organ(BP_HEART))) //There is no blood in protheses.
-		organ.status |= ORGAN_BLEEDING
-		src.adjustToxLoss(rand(1,3))
+	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
@@ -1655,15 +1654,6 @@
 
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	return cultural_info[token]
-
-/mob/living/carbon/human/proc/seizure()
-	set waitfor = 0
-	sleep(rand(5,10))
-	if(!paralysis && stat == CONSCIOUS)
-		visible_message("<span class='danger'>\The [src] starts having a seizure!</span>")
-		Paralyse(rand(8,16))
-		make_jittery(rand(150,200))
-		adjustHalLoss(rand(50,60))
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0

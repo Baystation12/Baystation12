@@ -255,8 +255,6 @@
 			return global.ascii_reset;
 		if("ascii_yellow")
 			return global.ascii_yellow;
-		if("asset_cache")
-			return global.asset_cache;
 		if("asset_datums")
 			return global.asset_datums;
 		if("assigned")
@@ -1210,8 +1208,6 @@
 			global.ascii_reset=newval;
 		if("ascii_yellow")
 			global.ascii_yellow=newval;
-		if("asset_cache")
-			global.asset_cache=newval;
 		if("asset_datums")
 			global.asset_datums=newval;
 		if("assigned")
@@ -2037,7 +2033,6 @@
 	"ascii_red",
 	"ascii_reset",
 	"ascii_yellow",
-	"asset_cache",
 	"asset_datums",
 	"assigned",
 	"assigned_blocks",

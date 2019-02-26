@@ -40,12 +40,14 @@
 /datum/psi_complexus/proc/can_use_passive()
 	return (owner.stat == CONSCIOUS && !suppressed && !stun)
 
-/datum/psi_complexus/proc/can_use()
-	return (owner.stat == CONSCIOUS && !owner.incapacitated() && !suppressed && !stun && world.time >= next_power_use)
+/datum/psi_complexus/proc/can_use(var/incapacitation_flags)
+	return (owner.stat == CONSCIOUS && (!incapacitation_flags || !owner.incapacitated(incapacitation_flags)) && !suppressed && !stun && world.time >= next_power_use)
 
-/datum/psi_complexus/proc/spend_power(var/value = 0)
+/datum/psi_complexus/proc/spend_power(var/value = 0, var/check_incapacitated)
 	. = FALSE
-	if(can_use())
+	if(isnull(check_incapacitated))
+		check_incapacitated = (INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
+	if(can_use(check_incapacitated))
 		value = max(1, ceil(value * cost_modifier))
 		if(value <= stamina)
 			stamina -= value

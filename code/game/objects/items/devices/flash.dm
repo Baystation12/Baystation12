@@ -106,12 +106,11 @@
 
 	if(isrobot(user))
 		spawn(0)
-			var/atom/movable/overlay/animation = new(user.loc)
+			var/atom/movable/overlay/animation = new(user)
 			animation.plane = user.plane
 			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
 			qdel(animation)

@@ -6,6 +6,7 @@
   {{else}}
   <ui-section>
     <ui-button icon='{{data.oneAccess ? "unlock" : "lock"}}' action='one_access'>{{data.oneAccess ? "One" : "All"}} Required</ui-button>
+    <ui-button icon='{{data.autoset ? "lock" : "unlock"}}' action='autoset'>Access Setup: {{data.autoset ? "AUTO" : "MANUAL"}}</ui-button>
     <ui-button icon='refresh' action='clear'>Clear</ui-button>
     {{#if data.lockable}}
     	<ui-button icon='lock' action='lock'>Lock</ui-button>

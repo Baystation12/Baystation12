@@ -124,9 +124,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/little_house)
 "v" = (
-/obj/machinery/door/airlock{
-	req_access = list(5)
-	},
+/obj/machinery/door/airlock,
 /turf/simulated/floor/wood,
 /area/map_template/little_house)
 "w" = (

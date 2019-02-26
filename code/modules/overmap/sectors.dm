@@ -71,7 +71,7 @@
 
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.
 /obj/effect/overmap/proc/add_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
-	landmark.sector_set(src)
+	landmark.sector_set(src, shuttle_name)
 	if(shuttle_name)
 		LAZYADD(restricted_waypoints[shuttle_name], landmark)
 	else

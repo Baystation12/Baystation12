@@ -208,8 +208,7 @@
 	icon_state = "door_locked";
 	id_tag = "solar_outer";
 	locked = 1;
-	name = "Solar External Access";
-	req_access = list(11,13)
+	name = "Solar External Access"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -261,8 +260,7 @@
 	icon_state = "door_locked";
 	id_tag = "solar_inner";
 	locked = 1;
-	name = "Solar Access";
-	req_access = list(11,13)
+	name = "Solar Access"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/cable/yellow{
@@ -1383,8 +1381,7 @@
 	icon_state = "door_locked";
 	id_tag = "centcom_shuttle_hatch";
 	locked = 1;
-	name = "Shuttle Hatch";
-	req_access = list(13)
+	name = "Shuttle Hatch"
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/space)

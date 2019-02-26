@@ -7,27 +7,46 @@
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
 
+/decl/psionic_power/coercion/invoke(var/mob/living/user, var/mob/living/target)
+	. = ..()
+	if(.)
+		var/blocked = target.run_armor_check(null, "psi")
+		if(prob(blocked))
+			to_chat(user, SPAN_WARNING("Your mental attack is deflected by \the [target]'s defenses!"))
+			to_chat(user, SPAN_DANGER("\The [user] strikes out with a mental attack, but you deflect it!"))
+			return FALSE
+
 /decl/psionic_power/coercion/blindstrike
 	name =           "Blindstrike"
 	cost =           8
-	cooldown =       50
+	cooldown =       120
 	use_ranged =     TRUE
 	use_melee =      TRUE
 	min_rank =       PSI_RANK_OPERANT
-	use_description = "Target the head, eyes or mouth on disarm intent to use a ranged attack that blinds, deafens and disorients the target."
+	use_description = "Target the head, eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
 
 /decl/psionic_power/coercion/blindstrike/invoke(var/mob/living/user, var/mob/living/target)
-	if(!istype(target) || (user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES) || target.stat != CONSCIOUS)
+	if(user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
-		to_chat(user, "<span class='danger'>You overwhelm \the [target]'s senses with a blast of mental white noise!</span>")
-		if(prob(60)) target.emote("scream")
-		to_chat(target, "<span class='danger'>Your sense are blasted into oblivion by a burst of mental static!</span>")
-		target.flash_eyes()
-		target.eye_blind = max(target.eye_blind,3)
-		target.ear_deaf = max(target.ear_deaf,6)
-		target.confused = rand(3,8)
+		to_chat(user, SPAN_DANGER("You open the gate and release a deafening psionic scream, striking at everyone near you with a blast of mental white noise!"))
+		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
+			if(M == user)
+				continue
+			var/blocked = M.run_armor_check(null, "psi")
+			if(prob(blocked))
+				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
+				continue
+			if(prob(60) && iscarbon(M))
+				var/mob/living/carbon/C = M
+				if(C.can_feel_pain())
+					M.emote("scream")
+			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a burst of mental static!"))
+			M.flash_eyes()
+			M.eye_blind = max(M.eye_blind,3)
+			M.ear_deaf = max(M.ear_deaf,6)
+			M.confused = rand(3,8)
 		return TRUE
 
 /decl/psionic_power/coercion/agony
@@ -75,7 +94,7 @@
 			target.emote("scream")
 		if(prob(75) && target.l_hand && target.l_hand.simulated && target.unEquip(target.l_hand))
 			target.visible_message("<span class='danger'>\The [target] drops what they were holding as their left hand spasms!</span>")
-		if(prob(75) && target.r_hand && target.l_hand.simulated && target.unEquip(target.r_hand))
+		if(prob(75) && target.r_hand && target.r_hand.simulated && target.unEquip(target.r_hand))
 			target.visible_message("<span class='danger'>\The [target] drops what they were holding as their right hand spasms!</span>")
 		return TRUE
 

@@ -198,7 +198,7 @@
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/escape_port)
@@ -322,7 +322,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/escape_star)
@@ -783,7 +783,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/item/weapon/hand/missing_card,
 /obj/item/weapon/hand/missing_card,
@@ -806,7 +806,7 @@
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/closet/crate,
 /obj/random/soap,
@@ -872,7 +872,7 @@
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/closet,
 /obj/random/clothing,
@@ -1345,7 +1345,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/item/stack/cable_coil/random,
 /turf/simulated/floor/usedup,
@@ -1366,7 +1366,7 @@
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/closet,
 /obj/random/gloves,
@@ -1818,7 +1818,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1856,7 +1856,7 @@
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/closet,
 /obj/random/clothing,
@@ -2114,7 +2114,7 @@
 	},
 /obj/machinery/alarm{
 	pixel_y = 32;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/usedup,
@@ -2139,7 +2139,7 @@
 /obj/item/weapon/cell/high,
 /obj/machinery/alarm{
 	pixel_y = 32;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/item/weapon/tape_roll,
 /obj/machinery/light_switch{
@@ -2688,7 +2688,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)

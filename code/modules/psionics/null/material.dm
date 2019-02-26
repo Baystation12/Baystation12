@@ -8,8 +8,8 @@
 	is_psionic_nullifier = TRUE
 
 /material/nullglass
-	name = "nullglass"
-	icon_colour = "#ff6088"
+	name = MATERIAL_NULLGLASS
+	icon_colour = COLOR_NULLGLASS
 	conductive = 1
 	stack_type = /obj/item/stack/material/nullglass
 	flags = MATERIAL_BRITTLE
@@ -25,4 +25,4 @@
 
 /material/nullglass/generate_recipes()
 	. = ..()
-	recipes += new/datum/stack_recipe("nullglass floor tile", /obj/item/weapon/stack/tile/floor/nullglass, 1, 1, 20)
+	. += new /datum/stack_recipe/tile/nullglass(src)
