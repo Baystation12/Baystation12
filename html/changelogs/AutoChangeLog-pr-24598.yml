@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "The Officer's Mess booze-o-mat is now accessible by officers. If you can open the door, you can vend things."
