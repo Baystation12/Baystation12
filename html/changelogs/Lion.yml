@@ -45,6 +45,5 @@ changes:
   - rscdel: "Removed NanoTrasen armor to be ordered through Logistics."
   - tweak: "Renamed Credits to Supply Points on the cargo terminals."
   - tweak: "Buffed Unathi's healing aura mildly."
-  - maptweak: "Adherent maintenance removed and replaced with Primary Metal Storage."
   - bugfix: "Fixes duplicating adminhelps."
   - bugfix: "Fixes Captain spawning with the wrong suit."
