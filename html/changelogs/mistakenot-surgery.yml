@@ -1,0 +1,4 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "Surgery will now present a list of possible surgeries (if skilled enough) rather than using a priority system."
