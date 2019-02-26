@@ -7,6 +7,7 @@
 //	 Tendon fix surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/fix_tendon
+	name = "Repair tendon"
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
 	/obj/item/stack/cable_coil = 75,	\
@@ -50,10 +51,11 @@
 //	 IB fix surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/fix_vein
+	name = "Repair arterial bleeding"
 	allowed_tools = list(
-	/obj/item/weapon/FixOVein = 100, \
-	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+		/obj/item/weapon/FixOVein = 100,
+		/obj/item/stack/cable_coil = 75,
+		/obj/item/weapon/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1
@@ -95,6 +97,7 @@
 //	 Hardsuit removal surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/hardsuit
+	name = "Remove hardsuit"
 	allowed_tools = list(
 		/obj/item/weapon/weldingtool = 80,
 		/obj/item/weapon/circular_saw = 60,
@@ -141,6 +144,7 @@
 //	 Disinfection step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/sterilize
+	name = "Sterilize wound"
 	allowed_tools = list(
 		/obj/item/weapon/reagent_containers/spray = 100,
 		/obj/item/weapon/reagent_containers/dropper = 100,
@@ -156,26 +160,23 @@
 	min_duration = 50
 	max_duration = 60
 
-/decl/surgery_step/sterilize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!hasorgans(target))
-		return 0
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!istype(affected))
-		return 0
-	if(affected.is_disinfected())
-		return 0
+/decl/surgery_step/sterilize/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/weapon/reagent_containers/container = tool
-	if(!istype(container))
-		return 0
-	if(!container.is_open_container())
-		return 0
-	var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
-	if(istype(booze) && booze.strength >= 40)
-		to_chat(user, "<span class='warning'>[booze] is too weak, you need something of higher proof for this...</span>")
-		return 0
-	if(!istype(booze) && !container.reagents.has_reagent(/datum/reagent/sterilizine))
-		return 0
-	return 1
+	if(istype(container) && container.is_open_container())
+		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
+			return TRUE
+		else
+			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
+			if(istype(booze))
+				if(booze.strength < 40)
+					to_chat(user, SPAN_WARNING("<span class='warning'>[capitalize(booze.name)] is too weak, you need something of higher proof for this..."))
+				else
+					return TRUE
+	return FALSE
+
+/decl/surgery_step/sterilize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	return hasorgans(target) && affected && !affected.is_disinfected()
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

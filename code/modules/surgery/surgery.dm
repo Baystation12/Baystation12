@@ -1,5 +1,6 @@
 /* SURGERY STEPS */
 /decl/surgery_step
+	var/name
 	var/list/allowed_tools         // type path referencing tools that can be used for this step, and how well are they suited for it
 	var/list/allowed_species       // type paths referencing races that this step applies to.
 	var/list/disallowed_species    // type paths referencing races that this step applies to.
@@ -17,6 +18,9 @@
 		if (istype(tool,T))
 			return allowed_tools[T]
 	return 0
+
+/decl/surgery_step/proc/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	return TRUE
 
 // Checks if this step applies to the user mob at all
 /decl/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
@@ -109,55 +113,52 @@
 /obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
 
 	if(istype(M) && user.a_intent == I_HURT)
-		return 0
+		return FALSE
 
 	var/zone = user.zone_sel.selecting
 	if(zone in M.op_stage.in_progress)
 		to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
-		return 1
+		return TRUE
 
 	var/list/possible_surgeries
 	var/list/all_surgeries = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/decl in all_surgeries)
 		var/decl/surgery_step/S = all_surgeries[decl]
-		if(S.tool_quality(src) && S.can_use(user, M, zone, src))
+		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))
 			LAZYSET(possible_surgeries, S, TRUE)
 
 	var/decl/surgery_step/S
 	if(LAZYLEN(possible_surgeries) == 1)
 		S = possible_surgeries[1]
 	else if(LAZYLEN(possible_surgeries) >= 1)
-		S = input(user, "Which surgery would you like to perform?", "Surgery") as null|anything in possible_surgeries
+		if(user.client) // In case of future autodocs.
+			S = input(user, "Which surgery would you like to perform?", "Surgery") as null|anything in possible_surgeries
 		if(S && !user.skill_check(S.core_skill, SKILL_BASIC))
 			S = pick(possible_surgeries)
 
-	. = 0
-	if(istype(S))
-
-		if(!istype(M) || user.a_intent == I_HURT || (user.l_hand != src && user.r_hand != src))
-			return 0
+	if(!istype(S))
+		to_chat(user, SPAN_WARNING("You aren't sure what you could do to \the [M] with \the [src]."))
+		return TRUE
+	else if(istype(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
 		if(zone in M.op_stage.in_progress)
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
-			return 1
-
-		var/step_is_valid = S.can_use(user, M, zone, src)
-		if(step_is_valid && S.is_valid_target(M))
-			. = 1
-			if(step_is_valid != SURGERY_FAILURE)
-				M.op_stage.in_progress += zone
-				S.begin_step(user, M, zone, src)
-				var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
-				if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, duration))
-					S.end_step(user, M, zone, src)
-				else if ((src in user.contents) && user.Adjacent(M))
-					S.fail_step(user, M, zone, src)
-				else
-					to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
-				if (M)
-					M.op_stage.in_progress -= zone // Clear the in-progress flag.
-				if(ishuman(M))
-					var/mob/living/carbon/human/H = M
-					H.update_surgery()
+		else if(S.can_use(user, M, zone, src) && S.is_valid_target(M) && S.pre_surgery_step(user, M, zone, src))
+			M.op_stage.in_progress += zone
+			S.begin_step(user, M, zone, src)
+			var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
+			if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, duration))
+				S.end_step(user, M, zone, src)
+			else if ((src in user.contents) && user.Adjacent(M))
+				S.fail_step(user, M, zone, src)
+			else
+				to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
+			if (M)
+				M.op_stage.in_progress -= zone // Clear the in-progress flag.
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				H.update_surgery()
+		return TRUE
+	return FALSE
 
 /datum/surgery_status
 	var/eyes =             0

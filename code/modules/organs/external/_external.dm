@@ -1073,7 +1073,7 @@ obj/item/organ/external/proc/remove_clamps()
 
 	if(company)
 		var/datum/robolimb/R = all_robolimbs[company]
-		if(!R || (species && (species.name in R.species_cannot_use)) || \
+		if(!istype(R) || (species && (species.name in R.species_cannot_use)) || \
 		 (R.restricted_to.len && !(species.name in R.restricted_to)) || \
 		 (R.applies_to_part.len && !(organ_tag in R.applies_to_part)))
 			R = basic_robolimb
@@ -1221,6 +1221,9 @@ obj/item/organ/external/proc/remove_clamps()
 	if(parent)
 		parent.children -= src
 		parent = null
+
+	if(!is_robotic)
+		status |= ORGAN_CUT_AWAY
 
 	release_restraints(victim)
 	victim.organs -= src
