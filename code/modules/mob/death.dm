@@ -8,11 +8,9 @@
 	UpdateLyingBuckledAndVerbStatus()
 	remove_from_dead_mob_list()
 
-	var/atom/movable/overlay/animation = null
-	animation = new(loc)
+	var/atom/movable/overlay/animation = new(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
 
 	flick(anim, animation)
 	if(do_gibs) gibs(loc, dna)
