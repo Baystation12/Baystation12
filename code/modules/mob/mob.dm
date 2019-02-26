@@ -696,7 +696,7 @@
 		reset_plane_and_layer()
 
 /mob/proc/facedir(var/ndir)
-	if(!canface() || moving)
+	if(!canface() || moving || (buckled && !buckled.buckle_movable))
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
