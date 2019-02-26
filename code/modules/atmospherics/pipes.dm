@@ -1057,7 +1057,7 @@
 /obj/machinery/atmospherics/pipe/cap/visible/scrubbers
 	name = "scrubbers pipe endcap"
 	desc = "An endcap for scrubbers pipes."
-	icon_state = "cap-scrubbers"
+	icon_state = "cap"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -1065,7 +1065,7 @@
 /obj/machinery/atmospherics/pipe/cap/visible/supply
 	name = "supply pipe endcap"
 	desc = "An endcap for supply pipes."
-	icon_state = "cap-supply"
+	icon_state = "cap"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -1083,7 +1083,7 @@
 /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
 	name = "scrubbers pipe endcap"
 	desc = "An endcap for scrubbers pipes."
-	icon_state = "cap-f-scrubbers"
+	icon_state = "cap"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -1091,7 +1091,7 @@
 /obj/machinery/atmospherics/pipe/cap/hidden/supply
 	name = "supply pipe endcap"
 	desc = "An endcap for supply pipes."
-	icon_state = "cap-f-supply"
+	icon_state = "cap"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
