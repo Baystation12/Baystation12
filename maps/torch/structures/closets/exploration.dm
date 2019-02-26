@@ -97,6 +97,8 @@
 		/obj/item/clothing/head/helmet/solgov/pilot,
 		/obj/item/clothing/head/helmet/solgov/pilot/fleet,
 		/obj/item/clothing/head/helmet/nt/pilot,
+		/obj/item/weapon/storage/belt/holster/machete,
+		/obj/item/weapon/material/hatchet/machete,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
