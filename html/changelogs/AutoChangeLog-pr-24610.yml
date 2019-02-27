@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Fixed access flags for bridge foyer, charon guppy and aquila airlocks, communal brig, and supply office windoor."
-  - bugfix: "Counselors can now access medical storage again"
-  - bugfix: "Bridge EVA storage windoors have the proper access restrictions again"
