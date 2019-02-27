@@ -41,7 +41,7 @@
 	title = "Researcher"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Chief Science Officer and the Workplace Liaison"
+	supervisors = "the Chief Science Officer"
 	economic_power = 10
 	ideal_character_age = 45
 	minimal_player_age = 0
