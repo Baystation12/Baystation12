@@ -42,6 +42,8 @@
 		/obj/item/weapon/marshalling_wand,
 		/obj/item/weapon/marshalling_wand,
 		/obj/item/weapon/storage/belt/general,
+		/obj/item/weapon/stamp/cargo,
+		/obj/item/weapon/stamp/denied,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel/grey = 25)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)
