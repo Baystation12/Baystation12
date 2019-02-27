@@ -168,7 +168,7 @@
 		else
 			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
 			if(istype(booze))
-				if(booze.strength < 40)
+				if(booze.strength >= 40)
 					to_chat(user, SPAN_WARNING("[capitalize(booze.name)] is too weak, you need something of higher proof for this..."))
 				else
 					return TRUE

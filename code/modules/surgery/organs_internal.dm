@@ -25,17 +25,16 @@
 //	Organ mending surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/fix_organ
+	name = "Repair internal organ"
 	allowed_tools = list(
-	/obj/item/stack/medical/advanced/bruise_pack= 100,		\
-	/obj/item/stack/medical/bruise_pack = 40,	\
-	/obj/item/weapon/tape_roll = 20
+		/obj/item/stack/medical/advanced/bruise_pack= 100,
+		/obj/item/stack/medical/bruise_pack = 40,
+		/obj/item/weapon/tape_roll = 20
 	)
-
 	min_duration = 70
 	max_duration = 90
 
 /decl/surgery_step/internal/fix_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
 	if (!hasorgans(target))
 		return FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -130,17 +129,20 @@
 	max_duration = 110
 
 /decl/surgery_step/internal/detatch_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/list/attached_organs = list()
+	var/list/attached_organs
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
-			attached_organs |= organ
-	var/organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
-	if(organ_to_remove)
-		target.op_stage.current_organ = organ_to_remove
-		return TRUE
+			LAZYDISTINCTADD(attached_organs, organ)
+	if(!LAZYLEN(attached_organs))
+		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
 	else
-		target.op_stage.current_organ = null
+		var/organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
+		if(organ_to_remove)
+			target.op_stage.current_organ = organ_to_remove
+			return TRUE
+		else
+			target.op_stage.current_organ = null
 	return FALSE
 
 /decl/surgery_step/internal/detatch_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -187,16 +189,19 @@
 /decl/surgery_step/internal/remove_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
-		var/list/removable_organs = list()
+		var/list/removable_organs
 		for(var/obj/item/organ/internal/I in affected.implants)
 			if(I.status & ORGAN_CUT_AWAY)
-				removable_organs |= I
-		var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
-		if(organ_to_remove)
-			target.op_stage.current_organ = organ_to_remove
-			return TRUE
+				LAZYDISTINCTADD(removable_organs, I)
+		if(!LAZYLEN(removable_organs))
+			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
 		else
-			target.op_stage.current_organ = null
+			var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
+			if(organ_to_remove)
+				target.op_stage.current_organ = organ_to_remove
+				return TRUE
+			else
+				target.op_stage.current_organ = null
 	return FALSE
 
 /decl/surgery_step/internal/remove_organ/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

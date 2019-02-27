@@ -76,9 +76,9 @@
 
 /decl/surgery_step/set_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
-	user.visible_message("[user] is beginning to set the [bone] in place with \the [tool]." , \
-		"You are beginning to set the [bone] in place with \the [tool].")
+	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
+	user.visible_message("[user] is beginning to set [bone] in place with \the [tool]." , \
+		"You are beginning to set [bone] in place with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is going to make you pass out!",50, affecting = affected)
 	..()
 
