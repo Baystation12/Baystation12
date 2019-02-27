@@ -10524,6 +10524,7 @@
 /area/security/brig)
 "aJC" = (
 /obj/machinery/door/airlock/civilian{
+	autoset_access = 0;
 	name = "Head"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -18144,6 +18145,7 @@
 /area/medical/infirmary)
 "fbQ" = (
 /obj/machinery/door/airlock/glass/civilian{
+	autoset_access = 0;
 	name = "Brig Bunk Room"
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -31688,6 +31690,7 @@
 /area/maintenance/firstdeck/aftstarboard)
 "wAK" = (
 /obj/machinery/door/airlock/civilian{
+	autoset_access = 0;
 	name = "Stall"
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
