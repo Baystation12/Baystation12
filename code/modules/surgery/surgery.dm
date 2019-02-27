@@ -112,7 +112,7 @@
 
 /obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
 
-	if(istype(M) && user.a_intent == I_HURT)
+	if(!istype(M) || user.a_intent == I_HURT)
 		return FALSE
 
 	var/zone = user.zone_sel.selecting

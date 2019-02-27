@@ -246,12 +246,11 @@
 /decl/surgery_step/generic/cauterize
 	name = "Cauterize incision"
 	allowed_tools = list(
-	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/smokable/cigarette = 75,	\
-	/obj/item/weapon/flame/lighter = 50,			\
-	/obj/item/weapon/weldingtool = 25
+		/obj/item/weapon/cautery = 100,
+		/obj/item/clothing/mask/smokable/cigarette = 75,
+		/obj/item/weapon/flame/lighter = 50,
+		/obj/item/weapon/weldingtool = 25
 	)
-
 	min_duration = 70
 	max_duration = 100
 
@@ -259,7 +258,7 @@
 	. = FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
-		if(affected.get_incision())
+		if(!affected.get_incision(1))
 			to_chat(user, SPAN_WARNING("There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!"))
 		else
 			. = TRUE
