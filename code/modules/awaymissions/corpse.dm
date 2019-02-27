@@ -135,7 +135,7 @@
 
 
 /obj/effect/landmark/corpse/bridgeofficer
-	name = "Bridge Officer"
+	name = "Helmsman"
 	corpse_outfits = list(/decl/hierarchy/outfit/nanotrasen/officer)
 
 /obj/effect/landmark/corpse/commander

@@ -37,7 +37,7 @@ obj/effect/icarus/irradiate/Destroy()
 	QDEL_NULL(S)
 
 /datum/map_template/ruin/away_site/icarus
-	name = "Fallen Icarus"
+	name = "Fallen Soteria"
 	id = "awaysite_icarus"
 	description = "The crashlanding site of the TRCV Soteria."
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
@@ -60,7 +60,7 @@ obj/effect/icarus/irradiate/Destroy()
 
 obj/structure/icarus/broken_cryo
 	name = "destroyed cryo sleeper"
-	desc = "A mangled cryo sleeper with evidence that someone was inside when it was crushed. It looks like you could pry it open with a crowbar."
+	desc = "A mangled cryo sleeper with evidence that someone was inside when it was crushed. It looks like you could pry it open."
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
 	icon_state = "broken_cryo"
 	anchored = 1
@@ -192,13 +192,13 @@ obj/structure/icarus/broken_cryo/attack_hand(mob/user)
 //to pass tests and make vesrion not depending on Torch code. Sol gov floor decal had to go though :(
 /obj/structure/sign/icarus/solgov
 	name = "\improper TAR Seal"
-	desc = "A familiar seal showing this vessel is TAR property."
+	desc = "A familiar seal showing this vessel is TAR property. This one looks like it's gone through hell."
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
 	icon_state = "solgovseal"
 
 /obj/item/clothing/under/icarus/ec_uniform
 	name = "terran uniform"
-	desc = "An older model of the utility uniform of the Terran Defence Force, later modified for the Xenoforce. It has a patch on the left sleeve signifying the wearer served on the TRCV Artemis."
+	desc = "An older model of the utility uniform of the Terran Defence Force, later modified for the Xenocorps. It has a patch on the left sleeve signifying the wearer served on the TRCV Soteria."
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
@@ -206,7 +206,7 @@ obj/structure/icarus/broken_cryo/attack_hand(mob/user)
 
 /obj/structure/sign/double/icarus/solgovflag
 	name = "TAR Flag"
-	desc = "The iconic flag of the Terran Amalgamated Republics, a symbol with many different meanings."
+	desc = "The iconic flag of the Terran Amalgamated Republics, a symbol with many different meanings. This one looks like it's gone through hell. It's amazing it's still relatively intact."
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
 
 /obj/structure/sign/double/icarus/solgovflag/left
