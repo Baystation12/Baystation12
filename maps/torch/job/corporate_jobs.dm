@@ -4,7 +4,7 @@
 	department_flag = SPT
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
+	supervisors = "The Foreign Government of your species"
 	selection_color = "#2f2f7f"
 	economic_power = 15
 	minimal_player_age = 0
@@ -23,7 +23,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Foreign Diplomat. You are a civilian employee of the Expeditionary Corps Organisation, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
+	return "You are the Foreign Diplomat. You are a liason to your foreign Government, to aid the Sandros and assist it in regards to your government's interests. You are not internal affairs for your government, you simply advise the Captain on the best courses of action that could aid your homeland."
 
 /datum/job/liaison/post_equip_rank(var/mob/person)
 	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Loss Prevention Associate")]"]"
@@ -47,7 +47,7 @@
 	allowed_ranks = list(/datum/mil_rank/civ/sv)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_BASIC,
-	                    SKILL_COMBAT      = SKILL_BASIC,
+	                    SKILL_COMBAT      = SKILL_ADEPT,
 	                    SKILL_WEAPONS     = SKILL_ADEPT,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
@@ -70,7 +70,7 @@
 	return FALSE
 
 /datum/job/bodyguard/get_description_blurb()
-	return "You are the Loss Prevention Associate. You are an employee of one of the corporations that make up the Expeditionary Corps Organisation, and your job is to prevent the loss of the Liason's life - even at the cost of your own. Good luck."
+	return "You are the Foreign Protection Agent. You are employed by one of the multitude of governments to protect their ambassadors, and your job is to prevent the loss of that Ambassador's life - even at the cost of your own. Good luck."
 
 /datum/job/bodyguard/post_equip_rank(var/mob/person)
 	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Loss Prevention Associate")]"]"

@@ -1,6 +1,6 @@
 /datum/job/captain
 	title = "Captain"
-	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
+	supervisors = "the Terran Republics and the Terran Justice System"
 	minimal_player_age = 10
 	economic_power = 15
 	ideal_character_age = 50
@@ -24,7 +24,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/captain/get_description_blurb()
-	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its space exploration mission. Delegate to your Executive Officer, your department heads, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
+	return "You are the Captain. You are the top dog. You are an experienced professional in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its colonization initative. Delegate to your First Officer, your department heads, and your Senior Naval Advisor to effectively manage the ship, and listen to and trust their expertise."
 
 /datum/job/hop
 	title = "First Officer"
@@ -81,7 +81,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hop/get_description_blurb()
-	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
+	return "You are the First Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Captain. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Naval Advisor your delegated advisor, and the Helmsmen tools at your disposal."
 
 /datum/job/rd
 	title = "Chief Science Officer"
@@ -127,7 +127,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liase with the corporate interests of the Expeditionary Corps Organisation. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the CO on science matters."
+	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liase with the scientific interests of the Terran Republics. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the Captain on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -170,11 +170,11 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cmo/get_description_blurb()
-	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
+	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
 
 /datum/job/chief_engineer
 	title = "Chief Engineer"
-	supervisors = "the Captain and the Executive Officer (if military)"
+	supervisors = "the Captain and the First Officer (if military)"
 	economic_power = 9
 	ideal_character_age = 40
 	minimal_player_age = 7
@@ -225,11 +225,11 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/chief_engineer/get_description_blurb()
-	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
+	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the Captain on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
 
 /datum/job/hos
 	title = "Chief of Security"
-	supervisors = "the Captain and the First Officer (if military)"
+	supervisors = "the Captain and the First Officer"
 	economic_power = 8
 	minimal_player_age = 7
 	ideal_character_age = 35
@@ -264,7 +264,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hos/get_description_blurb()
-	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
+	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the Captain and the First Officer. You are expected to know the Terran Code of Military Justice and Terran Law and Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/representative
 	title = "Human Resources Official"
@@ -289,7 +289,7 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/representative/get_description_blurb()
-	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and corporate interests on board. Send faxes back to Sol on mission progress and important events."
+	return "You are the Human Resources Jockey. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, Terran Law or other ethical or legal issues aboard and informing and advising the Captain of them. You are a mid-level bureaucrat. You liaise between the crew and coommand interests on board. Send faxes back to the TRCV Artemis on mission progress and important events."
 
 /datum/job/sea
 	title = "Senior Naval Advisor"
@@ -297,7 +297,7 @@
 	department_flag = SPT
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Captain and the First Officer (if military)"
+	supervisors = "the Captain and the First Officer"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 7
 	economic_power = 8
@@ -333,7 +333,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/sea/get_description_blurb()
-	return "You are the Senior Naval Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and “advising” them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
+	return "You are the Senior Naval Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the Captain. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and advising them on mistakes they make. You also handle various duties on behalf of the Captain and First Officer. You are an experienced enlisted person, very likely equal only in experience to the Captain and First Officer. You know the regulations better than anyone."
 
 /datum/job/bridgeofficer
 	title = "Helmsman"
@@ -376,4 +376,4 @@
 							 /datum/computer_file/program/deck_management)
 
 /datum/job/bridgeofficer/get_description_blurb()
-	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+	return "You are a Helmsman. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the Captain and first officer. You take the Sandros' helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
