@@ -73,7 +73,7 @@
 		return
 
 	// Do not allow player facing change in fixed chairs
-	if(!istype(src.buckled) || src.buckled.buckle_movable)
+	if(!istype(buckled) || buckled.buckle_movable)
 		face_atom(A) // change direction to face what you clicked on
 
 	if(!canClick()) // in the year 2000...
