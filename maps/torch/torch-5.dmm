@@ -211,6 +211,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
+"aB" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/weapon/reagent_containers/food/drinks/flask{
+	pixel_x = 8
+	},
+/obj/item/clothing/mask/smokable/cigarette/cigar,
+/obj/item/weapon/storage/box/matches,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/office/co)
 "aC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -331,6 +340,25 @@
 /obj/structure/grille,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
+"aM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/random/firstaid,
+/obj/random/firstaid,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_x = -32;
+	req_access = newlist()
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/aquila/medical)
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1710,18 +1738,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
-"ep" = (
-/obj/item/weapon/reagent_containers/food/drinks/flask{
-	pixel_x = 8
-	},
-/obj/structure/table/woodentable/walnut,
-/obj/item/weapon/reagent_containers/food/drinks/flask{
-	pixel_x = 8
-	},
-/obj/item/clothing/mask/smokable/cigarette/cigar,
-/obj/item/weapon/storage/box/matches,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/crew_quarters/heads/office/co)
 "eq" = (
 /obj/structure/displaycase,
 /obj/item/weapon/gun/projectile/revolver/medium/captain{
@@ -12262,30 +12278,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge/disciplinary_board_room)
-"Dl" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/random/firstaid,
-/obj/random/firstaid,
-/obj/random/medical,
-/obj/random/medical,
-/obj/random/medical,
-/obj/machinery/vending/wallmed1{
-	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
-	},
-/obj/machinery/vending/wallmed1{
-	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/white,
-/area/aquila/medical)
 "Dq" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack{
@@ -15261,7 +15253,7 @@
 	id_tag = "aquila_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(0, list(13,80));
+	req_access = list(0,list(13,80));
 	tag_airpump = "aquila_shuttle_dock_pump";
 	tag_chamber_sensor = "aquila_shuttle_dock_sensor";
 	tag_exterior_door = "aquila_shuttle_dock_outer";
@@ -25758,7 +25750,7 @@ bM
 cp
 cX
 dI
-ep
+aB
 bq
 fw
 fQ
@@ -36479,7 +36471,7 @@ vn
 Rb
 pj
 qc
-Dl
+aM
 yl
 st
 te
