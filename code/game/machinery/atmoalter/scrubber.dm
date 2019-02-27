@@ -186,12 +186,6 @@
 	else
 		icon_state = "scrubber:0"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/power_change()
-	var/old_stat = stat
-	..()
-	if (old_stat != stat)
-		queue_icon_update()
-
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/Process()
 	if(!on || (stat & (NOPOWER|BROKEN)))
 		update_use_power(POWER_USE_OFF)
