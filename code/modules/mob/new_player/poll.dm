@@ -15,7 +15,7 @@
 		privacy_poll()
 
 /mob/new_player/proc/privacy_poll()
-	var/output = "<div align='center'><B>Player poll</B>"
+	var/output = "<div align='center'><B>Player poll</B> - Link: TBD"
 	output +="<hr>"
 	output += "<b>We would like to expand our stats gathering.</b>"
 	output += "<br>This however involves gathering data about player behavior, play styles, unique player numbers, play times, etc. Data like that cannot be gathered fully anonymously, which is why we're asking you how you'd feel if player-specific data was gathered. Prior to any of this actually happening, a privacy policy will be discussed, but before that can begin, we'd preliminarily like to know how you feel about the concept."
@@ -84,7 +84,7 @@
 	establish_db_connection()
 	if(dbcon.IsConnected())
 
-		var/DBQuery/select_query = dbcon.NewQuery("SELECT starttime, endtime, question, polltype, multiplechoiceoptions FROM erro_poll_question WHERE id = [pollid]")
+		var/DBQuery/select_query = dbcon.NewQuery("SELECT starttime, endtime, question, polltype FROM erro_poll_question WHERE id = [pollid]")
 		select_query.Execute()
 
 		var/pollstarttime = ""
@@ -345,18 +345,18 @@
 	establish_db_connection()
 	if(dbcon.IsConnected())
 
-		var/DBQuery/select_query = dbcon.NewQuery("SELECT starttime, endtime, question, polltype, multiplechoiceoptions FROM erro_poll_question WHERE id = [pollid] AND Now() BETWEEN starttime AND endtime")
+		var/DBQuery/select_query = dbcon.NewQuery("SELECT starttime, endtime, question, polltype FROM erro_poll_question WHERE id = [pollid] AND Now() BETWEEN starttime AND endtime")
 		select_query.Execute()
 
 		var/validpoll = 0
-		var/multiplechoiceoptions = 0
+//		var/multiplechoiceoptions = 0
 
 		while(select_query.NextRow())
-			if(select_query.item[4] != "OPTION" && select_query.item[4] != "MULTICHOICE")
+			if(select_query.item[4] != "OPTION"/* && select_query.item[4] != "MULTICHOICE"*/)
 				return
 			validpoll = 1
-			if(select_query.item[5])
-				multiplechoiceoptions = text2num(select_query.item[5])
+/*			if(select_query.item[5])
+				multiplechoiceoptions = text2num(select_query.item[5])*/
 			break
 
 		if(!validpoll)
@@ -390,9 +390,9 @@
 			to_chat(usr, "<span class='warning'>You already voted in this poll.</span>")
 			return
 
-		if(multichoice && (alreadyvoted >= multiplechoiceoptions))
+/*		if(multichoice && (alreadyvoted >= multiplechoiceoptions))
 			to_chat(usr, "<span class='warning'>You already have more than [multiplechoiceoptions] logged votes on this poll. Enough is enough. Contact the database admin if this is an error.</span>")
-			return
+			return*/
 
 		var/adminrank = "Player"
 		if(usr && usr.client && usr.client.holder)
