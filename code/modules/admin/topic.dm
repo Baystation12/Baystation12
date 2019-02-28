@@ -39,7 +39,7 @@
 				msgplayer = "\blue <b>NOTICE: <font color=red>[usr.key]</font> is autoresponding with <font color='#009900'>'[choice]'</font>. The issue is already fixed. Thank you for reporting it.</b>"
 			if("Thanks!")
 				msgplayer = "\blue <b>NOTICE: <font color=red>[usr.key]</font> is autoresponding with <font color='#009900'>'[choice]'</font>. Have a great round!</b>"
-			if("A: Directions/Lost"
+			if("A: Directions/Lost")
 				msgplayer = "\blue <b>NOTICE: <font color=red>[usr.key]</font> is autoresponding with <font color='#009900'>'[choice]'</font>. If you are lost, it is useful to find which deck you are on, and finding the nearest staircase or elevator. These will have directional signs towards each individual department."
 /*			if("Thanks")
 				msgplayer = "\blue <b>NOTICE: <font color=red>[usr.key]</font> is autoresponding with <font color='#009900'>'[choice]'</font>! Have a CM day!</b>"
