@@ -187,7 +187,7 @@
 	                    SKILL_MEDICAL      = SKILL_EXPERT)
 	skill_points = 20
 
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew, access_medical_equip)
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()
