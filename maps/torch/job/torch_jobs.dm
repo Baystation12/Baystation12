@@ -7,13 +7,13 @@
 		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant)
 	)
 
-#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder
+#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/pathfinder
 	species_to_job_blacklist = list(
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
 		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/officer, /datum/job/bodyguard, /datum/job/rd, /datum/job/liaison, /datum/job/warden),
-		/datum/species/human/vatgrown = list(HUMAN_ONLY_JOBS, /datum/job/rd, /datum/job/bridgeofficer, /datum/job/pathfinder),	//Other jobs unavailable via branch restrictions,
+		/datum/species/human/vatgrown = list(HUMAN_ONLY_JOBS, /datum/job/rd, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/senior_doctor, /datum/job/roboticist),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 

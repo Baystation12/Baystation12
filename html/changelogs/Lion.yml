@@ -35,3 +35,6 @@ delete-after: True
 changes: 
   - bugfix: "Fixed an overlooked change to the adminhelp system. Upon reply, the correct sound is now played."
   - experiment: "Adds backwards compatibility with the player poll system to gain better insight. Webpage to be released in a later update."
+  - rscadd: "Temporarily re-added Roboticist while awaiting map overhaul to turn Robotics into general science and not a specific sub-job."
+  - rscdel: "Removes all scientific, senior medical doctor, roboticist occupations from Vat-Grown humans."
+  - rscadd: "Vat-Grown humans can now be Senior Naval Advisor."
