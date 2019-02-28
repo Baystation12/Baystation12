@@ -72,7 +72,9 @@
 	if(stat || paralysis || stunned || weakened)
 		return
 
-	face_atom(A) // change direction to face what you clicked on
+	// Do not allow player facing change in fixed chairs
+	if(!istype(buckled) || buckled.buckle_movable)
+		face_atom(A) // change direction to face what you clicked on
 
 	if(!canClick()) // in the year 2000...
 		return
