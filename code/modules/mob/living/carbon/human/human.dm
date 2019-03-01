@@ -1504,8 +1504,9 @@
 	if(src != M)
 		..()
 	else
+		var/datum/gender/T = gender_datums[get_gender()]
 		visible_message( \
-			"<span class='notice'>[src] examines [gender==MALE ? "himself" : gender==FEMALE ? "herself" : "themselves"].</span>", \
+			"<span class='notice'>[src] examines [T.self].</span>", \
 			"<span class='notice'>You check yourself for injuries.</span>" \
 			)
 
