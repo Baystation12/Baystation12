@@ -312,27 +312,25 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/senior
+	name = OUTFIT_JOB_NAME("Physician - Contractor")
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/senior
+
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor
-	name = OUTFIT_JOB_NAME("Corpsman")
+	name = OUTFIT_JOB_NAME("Medical Technician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/medical
 	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
-	name = OUTFIT_JOB_NAME("Corpsman - Fleet")
+	name = OUTFIT_JOB_NAME("Medical Technician - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
-/decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic
-	name = OUTFIT_JOB_NAME("Corpsman - Medic")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/medical
-	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset/headset_corpsman
-
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor
-	name = OUTFIT_JOB_NAME("Medical Contractor")
+	name = OUTFIT_JOB_NAME("Medical Technician - Contractor")
 	uniform = /obj/item/clothing/under/rank/medical
 	shoes = /obj/item/clothing/shoes/white
 	id_type = /obj/item/weapon/card/id/torch/contractor/medical

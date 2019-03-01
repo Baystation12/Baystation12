@@ -79,7 +79,7 @@
 	allowed_roles = list(/datum/job/doctor)
 
 /datum/gear/accessory/armband_corpsman
-	display_name = "medical corps armband"
+	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/medblue
 	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor)
 
