@@ -335,7 +335,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Medical Contractor")
 	uniform = /obj/item/clothing/under/rank/medical
 	shoes = /obj/item/clothing/shoes/white
-	id_type = /obj/item/weapon/card/id/torch/contractor/medical
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/senior
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus
 	name = OUTFIT_JOB_NAME("Mortician")

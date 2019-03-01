@@ -45,6 +45,10 @@
 	job_access_type = /datum/job/doctor
 	detail_color = COLOR_PALE_BLUE_GRAY
 
+/obj/item/weapon/card/id/torch/contractor/medical/senior
+	job_access_type = /datum/job/senior_doctor
+	detail_color = COLOR_PALE_BLUE_GRAY
+
 /obj/item/weapon/card/id/torch/crew/medical/senior
 	job_access_type = /datum/job/senior_doctor
 
