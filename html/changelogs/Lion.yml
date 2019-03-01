@@ -38,3 +38,4 @@ changes:
   - rscadd: "Temporarily re-added Roboticist while awaiting map overhaul to turn Robotics into general science and not a specific sub-job."
   - rscdel: "Removes all scientific, senior medical doctor, roboticist occupations from Vat-Grown humans."
   - rscadd: "Vat-Grown humans can now be Senior Naval Advisor."
+  - maptweak: "Made the Nuke harder to get to. Requires First Officer access, and requires two people from the department heads to activate, making it more of a cooperative effort."
