@@ -654,7 +654,7 @@ default behaviour is:
 	set name = "Rest"
 	set category = "IC"
 
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+	to_chat(src, "<span class='notice'>You are now [resting ? "getting up" : "resting"]</span>")
 	if(resting)
 		sleep(2 SECONDS) //Wait for two seconds if we're going from resting to non-resting.
 	resting = !resting

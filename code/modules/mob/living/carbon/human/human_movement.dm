@@ -6,7 +6,7 @@
 
 	tally += species.handle_movement_delay_special(src)
 
-	if(lying)
+	if(lying || resting)
 		tally *= 1.5
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
