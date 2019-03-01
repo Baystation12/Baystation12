@@ -82,7 +82,7 @@
 	                    SKILL_VIROLOGY    = SKILL_MAX)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
+			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar, access_virology)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
