@@ -55,7 +55,7 @@
 			var/transmitter_count = 0
 			for(var/obj/item/integrated_circuit/power/transmitter in A.GetAllContents())
 				transmitter_count++
-			if(!number)
+			if(!transmitter_count)
 				return FALSE
 			transfer_amount /= transmitter_count
 			set_pin_data(IC_OUTPUT, 1, cell.charge)
