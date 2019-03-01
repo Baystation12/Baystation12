@@ -654,8 +654,10 @@ default behaviour is:
 	set name = "Rest"
 	set category = "IC"
 
+	to_chat(src, "<span class='notice'>You are now [resting ? "getting up" : "resting"]</span>")
+	if(resting)
+		sleep(2 SECONDS) //Wait for two seconds if we're going from resting to non-resting.
 	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash, duration = 25)
