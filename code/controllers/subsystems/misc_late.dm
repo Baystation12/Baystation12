@@ -8,5 +8,9 @@ SUBSYSTEM_DEF(misc_late)
 
 /datum/controller/subsystem/misc_late/Initialize()
 	GLOB.using_map.build_exoplanets()
+
+	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
+	asset_cache.load()
+
 	populate_lathe_recipes() // This creates and deletes objects; could use improvement.
 	. = ..()
