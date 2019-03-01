@@ -25,12 +25,6 @@ REAGENT SCANNER
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
 
-/obj/item/device/healthanalyzer/do_surgery(mob/living/M, mob/living/user)
-	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-		return ..()
-	medical_scan_action(M, user, src, mode) //default surgery behaviour is just to scan as usual
-	return 1
-
 /obj/item/device/healthanalyzer/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return

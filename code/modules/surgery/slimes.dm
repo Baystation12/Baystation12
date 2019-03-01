@@ -9,22 +9,24 @@
 /decl/surgery_step/slime
 
 /decl/surgery_step/slime/is_valid_target(mob/living/carbon/slime/target)
-	return istype(target, /mob/living/carbon/slime/)
+	return isslime(target)
 
-/decl/surgery_step/slime/can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-	return target.stat == 2
+/decl/surgery_step/slime/assess_bodypart(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	return TRUE
+
+/decl/surgery_step/slime/assess_surgery_candidate(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	return isslime(target) && target.stat == DEAD
 
 //////////////////////////////////////////////////////////////////
 //	slime flesh cutting surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/cut_flesh
-	name = "Make incision"
+	name = "Make incision in slime"
 	allowed_tools = list(
-	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/material/knife = 75,	\
-	/obj/item/weapon/material/shard = 50, 		\
+		/obj/item/weapon/scalpel = 100,
+		/obj/item/weapon/material/knife = 75,
+		/obj/item/weapon/material/shard = 50
 	)
-
 	min_duration = 5
 	max_duration = 2 SECONDS
 
@@ -50,11 +52,10 @@
 /decl/surgery_step/slime/cut_innards
 	name = "Dissect innards"
 	allowed_tools = list(
-	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/material/knife = 75,	\
-	/obj/item/weapon/material/shard = 50, 		\
+		/obj/item/weapon/scalpel = 100,
+		/obj/item/weapon/material/knife = 75,
+		/obj/item/weapon/material/shard = 50
 	)
-
 	min_duration = 5
 	max_duration = 2 SECONDS
 
@@ -80,11 +81,10 @@
 /decl/surgery_step/slime/saw_core
 	name = "Remove slime core"
 	allowed_tools = list(
-	/obj/item/weapon/scalpel/manager = 100, \
-	/obj/item/weapon/circular_saw = 100, \
-	/obj/item/weapon/material/hatchet = 75
+		/obj/item/weapon/scalpel/manager = 100,
+		/obj/item/weapon/circular_saw = 100,
+		/obj/item/weapon/material/hatchet = 75
 	)
-
 	min_duration = 1 SECOND
 	max_duration = 3 SECONDS
 
@@ -99,13 +99,11 @@
 	target.cores--
 	user.visible_message("<span class='notice'>[user] cuts out one of [target]'s cores with \the [tool].</span>",,	\
 	"<span class='notice'>You cut out one of [target]'s cores with \the [tool]. [target.cores] cores left.</span>")
-
 	if(target.cores >= 0)
 		var/coreType = target.GetCoreType()
 		new coreType(target.loc)
 	if(target.cores <= 0)
 		target.icon_state = "[target.colour] baby slime dead-nocore"
-
 
 /decl/surgery_step/slime/saw_core/fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, causing \him to miss the core!</span>", \
