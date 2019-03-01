@@ -890,7 +890,7 @@
 	for(var/obj/item/organ/external/organ in organs)
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.gunshot_residue = null
-	
+
 	if(clean_feet && !shoes)
 		feet_blood_color = null
 		feet_blood_DNA = null
@@ -1416,7 +1416,7 @@
 	var/bpm = get_pulse_as_number()
 	if(bpm >= PULSE_MAX_BPM)
 		return method ? ">[PULSE_MAX_BPM]" : "extremely weak and fast, patient's artery feels like a thread"
-	
+
 	return "[method ? bpm : bpm + rand(-10, 10)]"
 // output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
@@ -1505,7 +1505,7 @@
 		..()
 	else
 		visible_message( \
-			"<span class='notice'>[src] examines [gender==MALE ? "himself" : "herself"].</span>", \
+			"<span class='notice'>[src] examines [gender==MALE ? "himself" : gender==FEMALE ? "herself" : "themselves"].</span>", \
 			"<span class='notice'>You check yourself for injuries.</span>" \
 			)
 
