@@ -57,9 +57,49 @@
 /obj/item/weapon/gun/energy/plasmapistol/disabled
 	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact. This one appears to be disabled"
 	max_shots = 0
+	
+	/obj/item/weapon/gun/energy/trainingpistol
+	name = "Type-25B Directed Energy Pistol"
+	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact. This one appears to be modified to fire very weak bolts of energy."
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon_state = "Training Pistol"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
+	fire_sound = 'code/modules/halo/sounds/haloplasmapistol.ogg'
+	charge_meter = 1
+	max_shots = 80
+	slowdown_general = 0
+	var/overcharge = 0
+	projectile_type = /obj/item/projectile/bullet/trainingshot
+	screen_shake = 0
+	irradiate_non_cov = 2
+	var/overcharge_cost = 1
 
-/obj/item/weapon/gun/energy/plasmapistol/disabled/attack_self(var/mob/user)
-	return
+/obj/item/weapon/gun/energy/trainingpistol
+	. = ..()
+	overcharge_cost = initial(charge_cost)*(max_shots/2)
+
+/obj/item/weapon/gun/energy/trainingpistol/attack_self(var/mob/user)
+	if(power_supply.charge >= overcharge_cost)
+		set_overcharge(!overcharge, user)
+
+/obj/item/weapon/gun/energy/trainingpistol/proc/cov_plasma_recharge_tick()
+	if(max_shots > 0)
+		if(power_supply.charge < power_supply.maxcharge)
+			power_supply.give(charge_cost/3)
+			update_icon()
+			return 1
+
+/obj/item/weapon/gun/energy/trainingpistol/consume_next_projectile()
+	.  = ..()
+	if(overcharge)
+		set_overcharge(0)
+
+/obj/item/weapon/gun/energy/trainingpistol/proc/set_overcharge(var/new_overcharge = 1, var/mob/user = null)
+	if(new_overcharge != overcharge)
+
+/obj/item/weapon/gun/energy/trainingpistol/disabled/attack_self(var/mob/user)
+	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact. This one appears to be modified to fire very weak bolts of energy. It is disabled"
+	max_shots = 0
 
 /obj/item/weapon/gun/projectile/needler // Uses "magazines" to reload rather than inbuilt cells.
 	name = "Type-33 Guided Munitions Launcher"
