@@ -21985,7 +21985,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
 "eRk" = (
-/obj/structure/closet,
+/obj/structure/table/rack/holorack,
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken1"
 	},
@@ -22771,7 +22771,7 @@
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "rIb" = (
-/obj/structure/closet,
+/obj/structure/table/rack/holorack,
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken3"
 	},
@@ -22982,7 +22982,7 @@
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
 "vgY" = (
-/obj/structure/closet,
+/obj/structure/table/rack/holorack,
 /turf/simulated/floor/holofloor/wood{
 	icon_state = "wood_broken2"
 	},
