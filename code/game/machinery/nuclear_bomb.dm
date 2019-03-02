@@ -540,11 +540,11 @@ var/bomb_set
 		priority_announcement.Announce("The option to override automatic detonation has now expired.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpireshortnocountdown.ogg'))
 		announced = 3
 
-	else if(timeleft <= 60 && announced < 5)  // 1 min
+	else if(timeleft <= 60 && announced < 4)  // 1 min
 		priority_announcement.Announce("The ship will automatically destruct in one minute.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestruct1min.ogg'))
 		announced = 4
 
-	else if(timeleft <= 20 && announced < 6) // 20 seconds
+	else if(timeleft <= 20 && announced < 5) // 20 seconds
 		priority_announcement.Announce("The ship will automatically destruct in 20 seconds.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestruct20secs.ogg'))
 		announced = 5
 
