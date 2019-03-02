@@ -137,8 +137,7 @@
 			S = pick(possible_surgeries)
 
 	if(!istype(S))
-		to_chat(user, SPAN_WARNING("You aren't sure what you could do to \the [M] with \the [src]."))
-		return TRUE
+		return FALSE
 	else if(istype(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
 		if(zone in M.op_stage.in_progress)
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
