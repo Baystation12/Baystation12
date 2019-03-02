@@ -9614,6 +9614,7 @@
 /obj/random/technology_scanner,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/weapon/hand_labeler,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "uE" = (
