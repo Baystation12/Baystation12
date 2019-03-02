@@ -529,11 +529,11 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/station/proc/make_announcements()
 	if(timeleft <= (self_destruct_cutoff + 180) && announced < 1) // 3 mins before cutoff , so 8 mins.
-		priority_announcement.Announce("The option to override automatic detonation expires in three minutes.\nDetonation will commence in 8 minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpire1min.ogg'))
+		priority_announcement.Announce("The option to override automatic detonation expires in three minutes.\nDetonation will commence in 8 minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpire3mins.ogg'))
 		announced = 1
 
 	else if(timeleft <= (self_destruct_cutoff + 60) && announced < 2) // at the time of writing 5 mins = cutoff, so 6 mins
-		priority_announcement.Announce("The option to override automatic detonation expires in one minute.\nDetonation will commence in 6 minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpire3mins.ogg'))
+		priority_announcement.Announce("The option to override automatic detonation expires in one minute.\nDetonation will commence in 6 minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpire1min.ogg'))
 		announced = 2
 
 	else if(timeleft <= self_destruct_cutoff && announced < 3) // 5 minutes
