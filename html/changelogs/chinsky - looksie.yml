@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Examining things now shows message about it to people in 4 tile range. If you don't wanna see it, you can disable it with a preference."
