@@ -260,14 +260,6 @@ var/bomb_set
 						if(length(code) > 5)
 							code = "ERROR"
 		if(yes_code)
-			if(href_list["time"])
-				if(timing)
-					to_chat(usr, "<span class='warning'>Cannot alter the timing during countdown.</span>")
-					return
-
-				var/time = text2num(href_list["time"])
-				timeleft += time
-				timeleft = Clamp(timeleft, 120, 600)
 			if(href_list["timer"])
 				if(timing == -1)
 					return 1
@@ -329,7 +321,7 @@ var/bomb_set
 	bomb_set--
 	safety = TRUE
 	timing = 0
-	timeleft = Clamp(timeleft, 120, 600)
+	timeleft = Clamp(timeleft, 600, 600)
 	update_icon()
 
 /obj/machinery/nuclearbomb/ex_act(severity)
@@ -453,6 +445,7 @@ var/bomb_set
 	anchored = 1
 	deployable = 1
 	extended = 1
+	timeleft = 600
 
 	var/list/flash_tiles = list()
 	var/list/inserters = list()
@@ -460,7 +453,7 @@ var/bomb_set
 
 	var/announced = 0
 	var/time_to_explosion = 0
-	var/self_destruct_cutoff = 60 //Seconds
+	var/self_destruct_cutoff = 300 //Seconds
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
@@ -489,7 +482,7 @@ var/bomb_set
 			return
 		var/time = text2num(href_list["time"])
 		timeleft += time
-		timeleft = Clamp(timeleft, 300, 900)
+		timeleft = Clamp(timeleft, 600, 900)
 		return 1
 
 /obj/machinery/nuclearbomb/station/start_bomb()
@@ -499,6 +492,7 @@ var/bomb_set
 			to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
 			return
 	visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
+	priority_announcement.Announce("The ship will automatically detonate in 10 minutes.\nThe option to override the automatic detonationw will expire in five minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestruct10mins.ogg'))
 	..()
 
 /obj/machinery/nuclearbomb/station/check_cutoff()
@@ -514,10 +508,8 @@ var/bomb_set
 /obj/machinery/nuclearbomb/station/Process()
 	..()
 	if(timeleft > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
+		make_announcements()
 		if(timeleft <= self_destruct_cutoff)
-			if(!announced)
-				priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
-				announced = 1
 			if(world.time >= time_to_explosion)
 				var/range
 				var/high_intensity
@@ -534,6 +526,27 @@ var/bomb_set
 					time_to_explosion = world.time + 5 SECONDS
 				var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
 				explosion(T, range, high_intensity, low_intensity)
+
+/obj/machinery/nuclearbomb/station/proc/make_announcements()
+	if(timeleft <= (self_destruct_cutoff + 180) && announced < 1) // 3 mins before cutoff , so 8 mins.
+		priority_announcement.Announce("The option to override automatic detonation expires in three minutes.\nDetonation will commence in 8 minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpire1min.ogg'))
+		announced = 1
+
+	else if(timeleft <= (self_destruct_cutoff + 60) && announced < 2) // at the time of writing 5 mins = cutoff, so 6 mins
+		priority_announcement.Announce("The option to override automatic detonation expires in one minute.\nDetonation will commence in 6 minutes.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpire3mins.ogg'))
+		announced = 2
+
+	else if(timeleft <= self_destruct_cutoff && announced < 3) // 5 minutes
+		priority_announcement.Announce("The option to override automatic detonation has now expired.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestructoverrideexpireshortnocountdown.ogg'))
+		announced = 3
+
+	else if(timeleft <= 60 && announced < 5)  // 1 min
+		priority_announcement.Announce("The ship will automatically destruct in one minute.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestruct1min.ogg'))
+		announced = 4
+
+	else if(timeleft <= 20 && announced < 6) // 20 seconds
+		priority_announcement.Announce("The ship will automatically destruct in 20 seconds.", "Self-Destruct Control Computer", new_sound=sound('sound/AI/nuke/selfdestruct20secs.ogg'))
+		announced = 5
 
 /obj/machinery/nuclearbomb/station/secure_device()
 	..()
