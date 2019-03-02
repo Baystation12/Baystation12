@@ -18,4 +18,7 @@
 
 /datum/gear/head/skrell_helmet
 	allowed_roles = ARMORED_ROLES
+
+/datum/gear/uniform/harness
+	allowed_branches = null
 	
