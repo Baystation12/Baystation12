@@ -117,7 +117,7 @@
 	if(!airtank)
 		return
 	var/env_pressure = atmo.return_pressure()
-	var/pressure_delta = airtank.distribute_pressure - env_pressure
+	var/pressure_delta = max(airtank.distribute_pressure, 51) - env_pressure
 	if(airtank.air_contents.temperature > 0 && pressure_delta > 0)
 		var/transfer_moles = calculate_transfer_moles(airtank.air_contents, atmo, pressure_delta)
 		pump_gas_passive(airtank, airtank.air_contents, atmo, transfer_moles)
