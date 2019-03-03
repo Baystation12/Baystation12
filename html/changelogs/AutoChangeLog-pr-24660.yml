@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "The job slot formerly known as Corpsman is now Medical Technician by default, with the former name as an alt-title."
+  - tweak: "The job slot formerly known as Corpsman Trainee is now Trainee Medical Technician by default, with the former name as an alt-title."
