@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Adherents can no longer slip if they're floating."
+  - rscadd: "Added two new colours to the adherent colour selection."
