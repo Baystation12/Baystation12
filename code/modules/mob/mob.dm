@@ -300,7 +300,7 @@
 			if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
 				if(M.is_blind() || is_invisible_to(M))
 					continue
-				to_chat(M, "<b>[src]</b> looks at \the [A].")
+				to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
 
 	A.examine(src)
 
