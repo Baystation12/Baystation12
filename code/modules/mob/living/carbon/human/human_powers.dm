@@ -173,19 +173,6 @@
 			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
 			H.drip(1)
 
-/mob/living/carbon/human/proc/regurgitate()
-	set name = "Regurgitate"
-	set desc = "Empties the contents of your stomach"
-	set category = "Abilities"
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if(stomach && stomach.contents.len)
-		for(var/atom/movable/M in stomach.contents)
-			M.dropInto(loc)
-		var/datum/gender/G = gender_datums[gender]
-		visible_message(SPAN_DANGER("\The [src] hurls up the contents of [G.his] stomach!"))
-		return
-	visible_message(SPAN_DANGER("\The [src] dry-heaves!"))
-
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."

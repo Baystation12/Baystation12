@@ -1,3 +1,5 @@
+#define PUKE_ACTION_NAME "Empty Stomach"
+
 /obj/item/organ/internal/stomach
 	name = "stomach"
 	desc = "Gross. This is hard to stomach."
@@ -18,6 +20,8 @@
 	ingested = new/datum/reagents/metabolism(240, owner, CHEM_INGEST)
 	if(!ingested.my_atom)
 		ingested.my_atom = src
+	if(species.gluttonous)
+		action_button_name = PUKE_ACTION_NAME
 
 /obj/item/organ/internal/stomach/removed()
 	. = ..()
@@ -67,6 +71,18 @@
 			else if(species.gluttonous & GLUT_ITEM_ANYTHING)
 				return DEVOUR_FAST
 
+/obj/item/organ/internal/stomach/refresh_action_button()
+	. = ..()
+	if(.)
+		action.button_icon_state = "puke"
+		if(action.button) action.button.UpdateIcon()
+
+/obj/item/organ/internal/stomach/attack_self(mob/user)
+	. = ..()
+	if(. && action_button_name == PUKE_ACTION_NAME && owner && !owner.incapacitated())
+		owner.empty_stomach(FALSE)
+		refresh_action_button()
+
 /obj/item/organ/internal/stomach/Process()
 
 	..()
@@ -85,3 +101,5 @@
 
 		if(ingested.total_volume > 60 || ((alcohol_threshold_met || ingested.total_volume > 35) && prob(15)))
 			owner.vomit()
+
+#undef PUKE_ACTION_NAME

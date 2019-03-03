@@ -13,6 +13,12 @@
 	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	QDEL_NULL_LIST(internal_organs)
 	QDEL_NULL_LIST(hallucinations)
+	if(loc)
+		for(var/mob/M in contents)
+			M.dropInto(loc)
+	else
+		for(var/mob/M in contents)
+			qdel(M)
 	return ..()
 
 /mob/living/carbon/rejuvenate()
@@ -60,19 +66,12 @@
 				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
-					for(var/atom/movable/A in contents)
-						A.dropInto(loc)
-						contents.Remove(A)
-					src.gib()
+					gib()
 
 /mob/living/carbon/gib()
-	for(var/mob/M in src)
-		if(M in contents)
-			contents.Remove(M)
+	for(var/mob/M in contents)
 		M.dropInto(loc)
-		for(var/mob/N in viewers(src, null))
-			if(N.client)
-				N.show_message(text("<span class='danger'>[M] bursts out of [src]!</span>"), 2)
+		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
@@ -434,11 +433,12 @@
 		var/atom/movable/stomach_content = e
 		if(stomach_content.contains(AM))
 			if(can_devour(AM))
-				contents += AM
+				AM.forceMove(src)
 				return null
 			src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
 			return loc
 	return ..()
+
 /mob/living/carbon/proc/should_have_organ(var/organ_check)
 	return 0
 

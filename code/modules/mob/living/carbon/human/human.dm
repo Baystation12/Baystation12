@@ -638,6 +638,44 @@
 		return 0
 	return 1
 
+/mob/living/proc/empty_stomach(var/toxvomit)
+	return
+
+/mob/living/carbon/human/empty_stomach(var/toxvomit)
+
+	Stun(3)
+
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	var/nothing_to_puke = FALSE
+	if(should_have_organ(BP_STOMACH))
+		if(!istype(stomach) || (stomach.ingested.total_volume <= 5 && stomach.contents.len == 0))
+			nothing_to_puke = TRUE
+	else if(!(locate(/mob) in contents))
+		nothing_to_puke = TRUE
+
+	if(nothing_to_puke)
+		custom_emote(1,"dry heaves.")
+		return
+
+	if(should_have_organ(BP_STOMACH))
+		for(var/a in stomach.contents)
+			var/atom/movable/A = a
+			A.dropInto(get_turf(src))
+			if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
+				A.throw_at(get_edge_target_turf(src,dir),7,7,src)
+	else
+		for(var/mob/M in contents)
+			M.dropInto(get_turf(src))
+			if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
+				M.throw_at(get_edge_target_turf(src,dir),7,7,src)
+
+	visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	var/turf/location = loc
+	if (istype(location, /turf/simulated))
+		location.add_vomit_floor(src, toxvomit, stomach.ingested)
+	nutrition -= 30
+
 /mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3)
 	set waitfor = 0
 	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
@@ -654,25 +692,7 @@
 			to_chat(src, SPAN_WARNING("You feel like you are about to throw up!"))
 			if(level > 2)
 				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
-				Stun(3)
-				var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-				if(should_have_organ(BP_STOMACH) && (!istype(stomach) || (stomach.ingested.total_volume <= 5 && stomach.contents.len == 0)))
-					custom_emote(1,"dry heaves.")
-				else
-					if(stomach)
-						for(var/a in stomach.contents)
-							var/atom/movable/A = a
-							A.dropInto(get_turf(src))
-							if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
-								A.throw_at(get_edge_target_turf(src,dir),7,7,src)
-
-					visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
-					playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-					var/turf/location = loc
-					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, toxvomit, stomach.ingested)
-					nutrition -= 30
+				empty_stomach(toxvomit)
 		sleep(350)	//wait 35 seconds before next volley
 		lastpuke = 0
 
@@ -1449,7 +1469,10 @@
 
 /mob/living/carbon/human/move_to_stomach(atom/movable/victim)
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	victim.forceMove(stomach)
+	if(istype(stomach))
+		victim.forceMove(stomach)
+	else
+		..()
 
 /mob/living/carbon/human/should_have_organ(var/organ_check)
 
