@@ -71,6 +71,7 @@
 	var/can_eat = can_devour(victim)
 	if(!can_eat)
 		return FALSE
+
 	var/eat_speed = 100
 	if(can_eat == DEVOUR_FAST)
 		eat_speed = 30
@@ -85,7 +86,9 @@
 		admin_attack_log(src, victim, "Devoured.", "Was devoured by.", "devoured")
 	else
 		src.drop_from_inventory(victim)
-	victim.forceMove(src)
-	src.stomach_contents.Add(victim)
+	move_to_stomach(victim)
 
 	return TRUE
+
+/mob/living/carbon/proc/move_to_stomach(atom/movable/victim)
+	victim.forceMove(src)

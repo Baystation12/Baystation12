@@ -5,6 +5,7 @@
 	dead_icon = "stomach"
 	organ_tag = BP_STOMACH
 	parent_organ = BP_GROIN
+	var/stomach_capacity
 	var/datum/reagents/metabolism/ingested
 	var/next_cramp = 0
 
@@ -15,7 +16,8 @@
 /obj/item/organ/internal/stomach/New()
 	..()
 	ingested = new/datum/reagents/metabolism(240, owner, CHEM_INGEST)
-	if(!ingested.my_atom) ingested.my_atom = src
+	if(!ingested.my_atom)
+		ingested.my_atom = src
 
 /obj/item/organ/internal/stomach/removed()
 	. = ..()
@@ -26,6 +28,44 @@
 	. = ..()
 	ingested.my_atom = owner
 	ingested.parent = owner
+
+/obj/item/organ/internal/stomach/proc/can_eat_atom(var/atom/movable/food)
+	return !isnull(get_devour_time(food))
+
+/obj/item/organ/internal/stomach/proc/is_full(var/atom/movable/food)
+	var/total = Floor(ingested.total_volume / 10)
+	for(var/a in contents + food)
+		if(ismob(a))
+			var/mob/M = a
+			total += M.mob_size
+		else if(isobj(a))
+			var/obj/item/I = a
+			total += I.get_storage_cost()
+		else
+			continue
+		if(total > species.stomach_capacity)
+			return TRUE
+	return FALSE
+
+/obj/item/organ/internal/stomach/proc/get_devour_time(var/atom/movable/food)
+	if(iscarbon(food) || isanimal(food))
+		var/mob/living/L = food
+		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(food)) // Anything MOB_TINY or smaller
+			return DEVOUR_SLOW
+		else if((species.gluttonous & GLUT_SMALLER) && owner.mob_size > L.mob_size) // Anything we're larger than
+			return DEVOUR_SLOW
+		else if(species.gluttonous & GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	else if(istype(food, /obj/item) && !istype(food, /obj/item/weapon/holder)) //Don't eat holders. They are special.
+		var/obj/item/I = food
+		var/cost = I.get_storage_cost()
+		if(cost != ITEM_SIZE_NO_CONTAINER)
+			if((species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
+				return DEVOUR_SLOW
+			else if((species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)
+				return DEVOUR_SLOW
+			else if(species.gluttonous & GLUT_ITEM_ANYTHING)
+				return DEVOUR_FAST
 
 /obj/item/organ/internal/stomach/Process()
 

@@ -12,7 +12,6 @@
 	QDEL_NULL(touching)
 	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	QDEL_NULL_LIST(internal_organs)
-	QDEL_NULL_LIST(stomach_contents)
 	QDEL_NULL_LIST(hallucinations)
 	return ..()
 
@@ -42,7 +41,7 @@
 		germ_level++
 
 /mob/living/carbon/relaymove(var/mob/living/user, direction)
-	if((user in src.stomach_contents) && istype(user))
+	if((user in contents) && istype(user))
 		if(user.last_special <= world.time)
 			user.last_special = world.time + 50
 			src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
@@ -61,15 +60,15 @@
 				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
-					for(var/atom/movable/A in stomach_contents)
+					for(var/atom/movable/A in contents)
 						A.dropInto(loc)
-						stomach_contents.Remove(A)
+						contents.Remove(A)
 					src.gib()
 
 /mob/living/carbon/gib()
 	for(var/mob/M in src)
-		if(M in src.stomach_contents)
-			src.stomach_contents.Remove(M)
+		if(M in contents)
+			contents.Remove(M)
 		M.dropInto(loc)
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
@@ -428,15 +427,14 @@
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
 	if((MUTATION_FAT in mutations) && issmall(victim))
 		return DEVOUR_FAST
-
 	return FALSE
 
 /mob/living/carbon/onDropInto(var/atom/movable/AM)
-	for(var/e in stomach_contents)
+	for(var/e in contents)
 		var/atom/movable/stomach_content = e
 		if(stomach_content.contains(AM))
 			if(can_devour(AM))
-				stomach_contents += AM
+				contents += AM
 				return null
 			src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
 			return loc

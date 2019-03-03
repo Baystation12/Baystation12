@@ -850,22 +850,16 @@
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
 
 /mob/living/carbon/human/handle_stomach()
-	spawn(0)
-		for(var/a in stomach_contents)
-			if(!(a in contents) || isnull(a))
-				stomach_contents.Remove(a)
+	set waitfor = 0
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if(stomach && stomach.is_usable())
+		for(var/mob/living/M in stomach.contents)
+			if(M.stat == DEAD)
+				qdel(M)
 				continue
-			if(iscarbon(a)|| isanimal(a))
-				var/mob/living/M = a
-				if(M.stat == DEAD)
-					M.death(1)
-					stomach_contents.Remove(M)
-					qdel(M)
-					continue
-				if(life_tick % 3 == 1)
-					if(!(M.status_flags & GODMODE))
-						M.adjustBruteLoss(5)
-					nutrition += 10
+			if(life_tick % 3 == 1)
+				M.adjustBruteLoss(5)
+				nutrition += 10
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

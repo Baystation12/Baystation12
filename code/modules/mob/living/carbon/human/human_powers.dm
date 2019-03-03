@@ -177,14 +177,14 @@
 	set name = "Regurgitate"
 	set desc = "Empties the contents of your stomach"
 	set category = "Abilities"
-
-	if(stomach_contents.len)
-		for(var/mob/M in src)
-			if(M in stomach_contents)
-				stomach_contents.Remove(M)
-				M.forceMove(loc)
-		src.visible_message("<span class='danger'>[src] hurls out the contents of their stomach!</span>")
-	return
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if(stomach && stomach.contents.len)
+		for(var/atom/movable/M in stomach.contents)
+			M.dropInto(loc)
+		var/datum/gender/G = gender_datums[gender]
+		visible_message(SPAN_DANGER("\The [src] hurls up the contents of [G.his] stomach!"))
+		return
+	visible_message(SPAN_DANGER("\The [src] dry-heaves!"))
 
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
