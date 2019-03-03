@@ -111,8 +111,12 @@
 			to_chat(user, "<span class='danger'> Your account is not old enough to play as a maintenance drone.</span>")
 			return
 
-	if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
-		return
+	if(user.client.IsByondMember())
+		if(!user.MayRespawn(1, MEMBER_SPAWN_DELAY))
+			return
+	else
+		if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
+			return
 
 	if(!fabricator)
 
