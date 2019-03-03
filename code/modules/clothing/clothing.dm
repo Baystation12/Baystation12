@@ -605,8 +605,6 @@ BLIND     // can't see anything
 
 	if(!holding)
 		verbs -= /obj/item/clothing/shoes/proc/draw_knife
-
-	update_icon()
 	return
 
 /obj/item/clothing/shoes/attack_hand(var/mob/living/M)
@@ -625,14 +623,11 @@ BLIND     // can't see anything
 		holding = I
 		user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>", range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/draw_knife
-		update_icon()
 	else
 		return ..()
 
 /obj/item/clothing/shoes/on_update_icon()
 	overlays.Cut()
-	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
