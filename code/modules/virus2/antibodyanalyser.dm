@@ -43,7 +43,7 @@
 				var/list/unknown_antibodies = common_antibodies ^ given_antibodies
 				if(unknown_antibodies.len)
 					var/payout = unknown_antibodies.len * 45
-					SSsupply.add_points_from_source(payout, "virology")
+					SSsupply.add_points_from_source(payout, "virology_antibodies")
 					ping("\The [src] pings, \"Successfully uploaded new antibodies to the ExoNet.\"")
 					known_antibodies |= unknown_antibodies //Add the new antibodies to list
 				else
