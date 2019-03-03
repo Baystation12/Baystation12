@@ -94,9 +94,8 @@
 					owner.nutrition += inedible_nutriment_amount
 
 		// Do we have any objects to digest?
+		var/list/check_materials
 		for(var/obj/item/food in contents)
-			var/list/check_materials
-			var/updated_stacks
 			for(var/mat in food.matter)
 				if(!can_digest_matter[mat] && !can_process_matter[mat])
 					continue
@@ -117,35 +116,37 @@
 				else if(can_process_matter[mat])
 					LAZYDISTINCTADD(check_materials, mat)
 					stored_matter[mat] += digested
-			
-			for(var/mat in check_materials)
-				var/material/M = SSmaterials.get_material_by_name(mat)
-				if(M && M.stack_type && stored_matter[mat] >= M.units_per_sheet)
 
-					// Remove as many sheets as possible from the gizzard.
-					var/sheets = Floor(stored_matter[mat]/M.units_per_sheet)
-					stored_matter[mat] -= M.units_per_sheet * sheets
-					if(stored_matter[mat] <= 0)
-						stored_matter -= mat
+		// Convert stored matter into sheets.
+		var/updated_stacks
+		for(var/mat in check_materials)
+			var/material/M = SSmaterials.get_material_by_name(mat)
+			if(M && M.stack_type && stored_matter[mat] >= M.units_per_sheet)
 
-					// Merge them into other stacks.
-					for(var/obj/item/stack/material/mat_stack in contents)
-						if(mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
-							var/taking_sheets = min(stacks, mat_stack.max_amount - mat_stack.amount)
-							mat_stack.set_amount(mat_stack.amount + taking_sheets)
-							sheets -= taking_sheets
-							updated_stacks = TRUE
-						
-					// Create new stacks if needed.
-					while(sheets > 0)
-						var/obj/item/stack/material/mat_stack = new M.stack_type(src)
+				// Remove as many sheets as possible from the gizzard.
+				var/sheets = Floor(stored_matter[mat]/M.units_per_sheet)
+				stored_matter[mat] -= M.units_per_sheet * sheets
+				if(stored_matter[mat] <= 0)
+					stored_matter -= mat
+
+				// Merge them into other stacks.
+				for(var/obj/item/stack/material/mat_stack in contents)
+					if(mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
 						var/taking_sheets = min(sheets, mat_stack.max_amount - mat_stack.amount)
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
-							updated_stacks = TRUE
+						updated_stacks = TRUE
+						
+				// Create new stacks if needed.
+				while(sheets > 0)
+					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
+					var/taking_sheets = min(sheets, mat_stack.max_amount)
+					mat_stack.set_amount(mat_stack.amount + taking_sheets)
+					sheets -= taking_sheets
+					updated_stacks = TRUE
 
-			if(updated_stacks && prob(5))
-				to_chat(owner, SPAN_NOTICE("Your [name] churns as it digests some material into a usable form."))
+		if(updated_stacks && prob(5))
+			to_chat(owner, SPAN_NOTICE("Your [name] churns as it digests some material into a usable form."))
 
 /obj/item/organ/internal/stack/vox
 	name = "cortical stack"
@@ -153,7 +154,7 @@
 
 /obj/item/organ/internal/hindtongue
 	name = "hindtongue"
-	description = "Some kind of severed bird tongue."
+	desc = "Some kind of severed bird tongue."
 	parent_organ = BP_HEAD
 	icon_state = "hindtongue"
 	organ_tag = BP_HINDTONGUE

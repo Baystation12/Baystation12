@@ -195,6 +195,9 @@
 #define BP_PHORON   "phoron filter"
 #define BP_ACETONE  "acetone reactor"
 
+// Vox bits.
+#define BP_HINDTONGUE "hindtongue"
+
 // Robo Organs.
 #define BP_POSIBRAIN	"posibrain"
 #define BP_VOICE		"vocal synthesiser"
@@ -218,7 +221,6 @@
 //Augment flags
 #define AUGMENTATION_MECHANIC 1
 #define AUGMENTATION_ORGANIC  2
-
 
 // Limbs.
 #define BP_L_FOOT "l_foot"
