@@ -45,25 +45,25 @@
 		)
 
 	var/list/preset_colors = list(
-		"beasty brown" = 	COLOR_BEASTY_BROWN,
-		"blue" = 			COLOR_BLUE_GRAY,
-		"civvie green" =   	COLOR_CIVIE_GREEN,
-		"command blue" = 	COLOR_COMMAND_BLUE,
-		"cyan" =        	COLOR_CYAN,
-		"green" =      		COLOR_GREEN,
-		"bottle green" =	COLOR_PALE_BTL_GREEN,
-		"nanotrasen red" =  COLOR_NT_RED,
-		"orange" = 			COLOR_ORANGE,
-		"pale orange" =   	COLOR_PALE_ORANGE,
-		"red" = 			COLOR_RED,
-		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
-		"titanium" =     	COLOR_TITANIUM,
-		"aluminium"=        COLOR_ALUMINIUM,
-		"violet" = 			COLOR_VIOLET,
-		"white" =        	COLOR_WHITE,
-		"yellow" =       	COLOR_AMBER,
-		"hull blue" = 		COLOR_HULL,
-		"bulkhead black" =	COLOR_GUNMETAL
+		"beasty brown" =   COLOR_BEASTY_BROWN,
+		"blue" =           COLOR_BLUE_GRAY,
+		"civvie green" =   COLOR_CIVIE_GREEN,
+		"command blue" =   COLOR_COMMAND_BLUE,
+		"cyan" =           COLOR_CYAN,
+		"green" =          COLOR_GREEN,
+		"bottle green" =   COLOR_PALE_BTL_GREEN,
+		"nanotrasen red" = COLOR_NT_RED,
+		"orange" =         COLOR_ORANGE,
+		"pale orange" =    COLOR_PALE_ORANGE,
+		"red" =            COLOR_RED,
+		"sky blue" =       COLOR_DEEP_SKY_BLUE,
+		"titanium" =       COLOR_TITANIUM,
+		"aluminium"=       COLOR_ALUMINIUM,
+		"violet" =         COLOR_VIOLET,
+		"white" =          COLOR_WHITE,
+		"yellow" =         COLOR_AMBER,
+		"hull blue" =      COLOR_HULL,
+		"bulkhead black" = COLOR_GUNMETAL
 		)
 
 
