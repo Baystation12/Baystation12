@@ -34,7 +34,7 @@
 		if (N.z in map_z)
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
-	GLOB.processing_objects.Add(src)
+	GLOB.processing_objects += src
 
 /obj/effect/overmap/ship/get_faction()
 	if(nav_comp)
@@ -111,6 +111,7 @@
 			adjust_speed(0, -get_burn_acceleration())
 
 /obj/effect/overmap/ship/process()
+	. = ..()
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
