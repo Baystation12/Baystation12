@@ -890,7 +890,7 @@
 	for(var/obj/item/organ/external/organ in organs)
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.gunshot_residue = null
-	
+
 	if(clean_feet && !shoes)
 		feet_blood_color = null
 		feet_blood_DNA = null
@@ -1293,7 +1293,7 @@
 	return 0
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
-	if((species.species_flags & SPECIES_FLAG_NO_SLIP) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
+	if((species.check_can_slip(usr)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
 		return 0
 	return !!(..(slipped_on,stun_duration))
 
@@ -1416,7 +1416,7 @@
 	var/bpm = get_pulse_as_number()
 	if(bpm >= PULSE_MAX_BPM)
 		return method ? ">[PULSE_MAX_BPM]" : "extremely weak and fast, patient's artery feels like a thread"
-	
+
 	return "[method ? bpm : bpm + rand(-10, 10)]"
 // output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
@@ -1504,8 +1504,9 @@
 	if(src != M)
 		..()
 	else
+		var/datum/gender/T = gender_datums[get_gender()]
 		visible_message( \
-			"<span class='notice'>[src] examines [gender==MALE ? "himself" : "herself"].</span>", \
+			"<span class='notice'>[src] examines [T.self].</span>", \
 			"<span class='notice'>You check yourself for injuries.</span>" \
 			)
 

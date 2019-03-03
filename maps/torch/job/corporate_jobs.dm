@@ -20,15 +20,14 @@
 	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERT,
 	                    SKILL_FINANCE		= SKILL_BASIC)
 	skill_points = 20
-	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
-						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar,
-						access_petrov, access_petrov_helm, access_maint_tunnels, access_emergency_storage,
-						access_janitor, access_hydroponics, access_kitchen, access_bar, access_commissary)
+	access = list(access_liaison, access_security, access_medical,
+						access_engine, access_research, access_bridge,
+						access_cargo, access_solgov_crew, access_hangar,
+						access_nanotrasen, access_commissary, access_petrov)
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Workplace Liaison. You are a civilian employee of the Expeditionary Corps Organisation, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
+	return "You are the Workplace Liaison. You are a civilian employee of EXO, the Expeditionary Corps Organisation, the government-owned corporate conglomerate that partially funds the Torch. You are on board the vessel to promote corporate interests and protect the rights of the contractors on board as their union leader. You are not internal affairs. You advise command on corporate and union matters and contractors on their rights and obligations. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/liaison/post_equip_rank(var/mob/person)
 	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Loss Prevention Associate")]"]"
@@ -64,11 +63,11 @@
 		"Asset Protection Agent"
 	)
 	skill_points = 20
-	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
-						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar,
-						access_petrov, access_petrov_helm, access_maint_tunnels, access_emergency_storage,
-						access_janitor, access_hydroponics, access_kitchen, access_bar, access_commissary)
+	access = list(access_liaison, access_security, access_medical,
+						access_engine, access_research, access_bridge,
+						access_cargo, access_solgov_crew, access_hangar,
+						access_nanotrasen, access_commissary, access_petrov,
+						access_sec_guard)
 	defer_roundstart_spawn = TRUE
 
 /datum/job/bodyguard/is_position_available()

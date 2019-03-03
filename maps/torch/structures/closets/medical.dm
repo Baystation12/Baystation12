@@ -84,7 +84,7 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_torch
-	name = "corpsman's locker"
+	name = "medical technician's locker"
 	req_access = list(access_medical_equip)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
 

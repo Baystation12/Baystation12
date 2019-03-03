@@ -224,6 +224,11 @@ var/list/_client_preferences_by_type
 	key = "DEPT_GOALS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/examine_messages
+	description ="Examining messages"
+	key = "EXAMINE_MESSAGES"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
 /********************
 * General Staff Preferences *
 ********************/

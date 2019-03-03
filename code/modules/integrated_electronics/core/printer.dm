@@ -275,6 +275,7 @@
 				else if(fast_clone)
 					if(debug || metal >= program["metal_cost"])
 						cloning = TRUE
+						metal -= program["metal_cost"]
 						print_program(usr)
 					else
 						to_chat(usr, "<span class='warning'>You need [program["metal_cost"]] metal to build that!</span>")
@@ -285,6 +286,7 @@
 					var/cloning_time = round(program["metal_cost"] / 15)
 					cloning_time = min(cloning_time, MAX_CIRCUIT_CLONE_TIME)
 					cloning = TRUE
+					metal -= program["metal_cost"]
 					to_chat(usr, "<span class='notice'>You begin printing a custom assembly. This will take approximately [round(cloning_time/10)] seconds. You can still print \
 					off normal parts during this time.</span>")
 					playsound(src, 'sound/items/poster_being_created.ogg', 50, TRUE)

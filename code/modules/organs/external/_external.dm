@@ -1223,6 +1223,9 @@ obj/item/organ/external/proc/remove_clamps()
 		parent.children -= src
 		parent = null
 
+	if(!is_robotic)
+		status |= ORGAN_CUT_AWAY
+
 	release_restraints(victim)
 	victim.organs -= src
 	victim.organs_by_name[organ_tag] = null // Remove from owner's vars.

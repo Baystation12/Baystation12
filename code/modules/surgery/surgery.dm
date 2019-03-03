@@ -1,35 +1,29 @@
 /* SURGERY STEPS */
-
-/datum/surgery_step
-	var/priority = 0	//steps with higher priority would be attempted first
-
-	// type path referencing tools that can be used for this step, and how well are they suited for it
-	var/list/allowed_tools = null
-	// type paths referencing races that this step applies to.
-	var/list/allowed_species = null
-	var/list/disallowed_species = null
-
-	// duration of the step
-	var/min_duration = 0
-	var/max_duration = 0
-
-	// evil infection stuff that will make everyone hate me
-	var/can_infect = 0
-	//How much blood this step can get on surgeon. 1 - hands, 2 - full body.
-	var/blood_level = 0
-	var/shock_level = 0	//what shock level will this step put patient on
-	var/delicate = 0  //if this step NEEDS stable optable or can be done on any valid surface with no penalty
-	var/core_skill = SKILL_ANATOMY //The skill that's checked for speed modifiers.
+/decl/surgery_step
+	var/name
+	var/list/allowed_tools         // type path referencing tools that can be used for this step, and how well are they suited for it
+	var/list/allowed_species       // type paths referencing races that this step applies to.
+	var/list/disallowed_species    // type paths referencing races that this step applies to.
+	var/min_duration = 0           // duration of the step
+	var/max_duration = 0           // duration of the step
+	var/can_infect = 0             // evil infection stuff that will make everyone hate me
+	var/blood_level = 0            // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
+	var/shock_level = 0	           // what shock level will this step put patient on
+	var/delicate = 0               // if this step NEEDS stable optable or can be done on any valid surface with no penalty
+	var/core_skill = SKILL_ANATOMY // The skill that's checked for speed modifiers.
 
 //returns how well tool is suited for this step
-/datum/surgery_step/proc/tool_quality(obj/item/tool)
+/decl/surgery_step/proc/tool_quality(obj/item/tool)
 	for (var/T in allowed_tools)
 		if (istype(tool,T))
 			return allowed_tools[T]
 	return 0
 
+/decl/surgery_step/proc/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	return TRUE
+
 // Checks if this step applies to the user mob at all
-/datum/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
+/decl/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
 	if(!hasorgans(target))
 		return 0
 
@@ -47,11 +41,11 @@
 
 
 // checks whether this step can be applied with the given user and target
-/datum/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return 0
 
 // does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
-/datum/surgery_step/proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
@@ -66,14 +60,14 @@
 	return
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
-/datum/surgery_step/proc/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return
 
 // stuff that happens when the step fails
-/datum/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return null
 
-/datum/surgery_step/proc/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+/decl/surgery_step/proc/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = tool_quality(tool)
 	if(user == target)
 		. -= 10
@@ -117,58 +111,57 @@
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
 /obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
-	if(!istype(M))
-		return 0
-	if (user.a_intent == I_HURT)	//check for Hippocratic Oath
-		return 0
+
+	if(!istype(M) || user.a_intent == I_HURT)
+		return FALSE
+
 	var/zone = user.zone_sel.selecting
-	if(zone in M.op_stage.in_progress) //Can't operate on someone repeatedly.
-		to_chat(user, "<span class='warning'>You can't operate on this area while surgery is already in progress.</span>")
-		return 1
-	for(var/datum/surgery_step/S in surgery_steps)
-		//check if tool is right or close enough and if this step is possible
-		if(S.tool_quality(src))
-			var/step_is_valid = S.can_use(user, M, zone, src)
-			if(step_is_valid && S.is_valid_target(M))
-				if(step_is_valid == SURGERY_FAILURE) // This is a failure that already has a message for failing.
-					return 1
-				M.op_stage.in_progress += zone
-				S.begin_step(user, M, zone, src)		//start on it
-				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
-				if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, duration))
-					S.end_step(user, M, zone, src)		//finish successfully
-				else if ((src in user.contents) && user.Adjacent(M))			//or
-					S.fail_step(user, M, zone, src)		//malpractice~
-				else // This failing silently was a pain.
-					to_chat(user, "<span class='warning'>You must remain close to your patient to conduct surgery.</span>")
-				if (M)
-					M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
-				if (ishuman(M))
-					var/mob/living/carbon/human/H = M
-					H.update_surgery()
-				return	1	  												//don't want to do weapony things after surgery
-	return 0
+	if(zone in M.op_stage.in_progress)
+		to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
+		return TRUE
 
-/proc/sort_surgeries()
-	var/gap = surgery_steps.len
-	var/swapped = 1
-	while (gap > 1 || swapped)
-		swapped = 0
-		if(gap > 1)
-			gap = round(gap / 1.247330950103979)
-		if(gap < 1)
-			gap = 1
-		for(var/i = 1; gap + i <= surgery_steps.len; i++)
-			var/datum/surgery_step/l = surgery_steps[i]		//Fucking hate
-			var/datum/surgery_step/r = surgery_steps[gap+i]	//how lists work here
-			if(l.priority < r.priority)
-				surgery_steps.Swap(i, gap + i)
-				swapped = 1
+	var/list/possible_surgeries
+	var/list/all_surgeries = decls_repository.get_decls_of_subtype(/decl/surgery_step)
+	for(var/decl in all_surgeries)
+		var/decl/surgery_step/S = all_surgeries[decl]
+		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))
+			LAZYSET(possible_surgeries, S, TRUE)
 
-/datum/surgery_status/
-	var/eyes	=	0
-	var/face	=	0
-	var/head_reattach = 0
-	var/current_organ = "organ"
+	var/decl/surgery_step/S
+	if(LAZYLEN(possible_surgeries) == 1)
+		S = possible_surgeries[1]
+	else if(LAZYLEN(possible_surgeries) >= 1)
+		if(user.client) // In case of future autodocs.
+			S = input(user, "Which surgery would you like to perform?", "Surgery") as null|anything in possible_surgeries
+		if(S && !user.skill_check(S.core_skill, SKILL_BASIC))
+			S = pick(possible_surgeries)
+
+	if(!istype(S))
+		return FALSE
+	else if(istype(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
+		if(zone in M.op_stage.in_progress)
+			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
+		else if(S.can_use(user, M, zone, src) && S.is_valid_target(M) && S.pre_surgery_step(user, M, zone, src))
+			M.op_stage.in_progress += zone
+			S.begin_step(user, M, zone, src)
+			var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
+			if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, duration))
+				S.end_step(user, M, zone, src)
+			else if ((src in user.contents) && user.Adjacent(M))
+				S.fail_step(user, M, zone, src)
+			else
+				to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
+			if (M)
+				M.op_stage.in_progress -= zone // Clear the in-progress flag.
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				H.update_surgery()
+		return TRUE
+	return FALSE
+
+/datum/surgery_status
+	var/eyes =             0
+	var/face =             0
+	var/head_reattach =    0
+	var/current_organ =    "organ"
 	var/list/in_progress = list()

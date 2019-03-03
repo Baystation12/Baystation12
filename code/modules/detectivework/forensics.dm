@@ -208,5 +208,3 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		//Noticing wiped blood is a bit harder
 		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && LAZYLEN(A.blood_DNA))
 			to_chat(src, "<span class='warning'>You notice faint blood traces on \The [A]</span>")
-
-
