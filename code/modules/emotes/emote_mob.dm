@@ -47,7 +47,6 @@
 		return
 
 	if(m_type != use_emote.message_type && use_emote.conscious && stat != CONSCIOUS)
-		to_chat(src, "<span class='warning'>You cannot currently [use_emote.message_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
 		return
 
 	if(use_emote.message_type == AUDIBLE_MESSAGE && is_muzzled())

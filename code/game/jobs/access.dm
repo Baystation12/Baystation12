@@ -12,8 +12,12 @@
 	return check_access_list(M.GetAccess())
 
 /atom/movable/proc/GetAccess()
+	. = list()
 	var/obj/item/weapon/card/id/id = GetIdCard()
-	return id ? id.GetAccess() : list()
+	if(id)
+		. += id.GetAccess()
+	if(maint_all_access)
+		. |= access_maint_tunnels
 
 /atom/movable/proc/GetIdCard()
 	return null

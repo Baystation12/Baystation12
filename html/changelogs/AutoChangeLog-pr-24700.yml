@@ -1,0 +1,4 @@
+author: "Crystalnole"
+delete-after: True
+changes: 
+  - bugfix: "Securing microwaves gives the right securing verbs"

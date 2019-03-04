@@ -20593,8 +20593,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	req_access = list(301)
+	pixel_y = 24
 	},
 /obj/structure/cable/green{
 	d2 = 2;
@@ -25874,8 +25873,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	req_access = list(301)
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/surgery)
