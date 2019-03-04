@@ -51,7 +51,7 @@ var/list/points_of_interest = list()
 	. = ..()
 	setup_object()
 
-/obj/effect/overmap/proc/get_superstructure_strengths() //Returns a list containing [current hull strength],[max hull strength]
+/obj/effect/overmap/proc/get_superstructure_strength() //Returns a list containing [current hull strength],[max hull strength]
 	var/list/hull_strengths = list(0,0)
 	for(var/obj/effect/hull_segment/hull_segment in hull_segments)
 		if(hull_segment.is_segment_destroyed() == 0)
@@ -61,7 +61,7 @@ var/list/points_of_interest = list()
 	if(hull_strengths[2] == 0)
 		return null
 
-	return hull_strengths
+	return (hull_strengths[1]/hull_strengths[2])
 
 /obj/effect/overmap/proc/get_faction()
 	return faction
@@ -170,11 +170,11 @@ var/list/points_of_interest = list()
 /obj/effect/overmap/process()
 	if(superstructure_failing)
 		return
-	var/list/superstructure_strengths = get_superstructure_strengths()
-	if(isnull(superstructure_strengths))
+	var/list/superstructure_strength = get_superstructure_strength()
+	if(isnull(superstructure_strength))
 		superstructure_failing = 1
 		return
-	if((superstructure_strengths[1]/superstructure_strengths[2]) <= SUPERSTRUCTURE_FAIL_PERCENT)
+	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
 		for(var/mob/player in GLOB.player_list)
 			for(var/z_level in map_z)
 				if("[player.z]" == "[z_level]")
