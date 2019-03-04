@@ -4,4 +4,7 @@
 		if(!species.hidden_from_codex)
 			var/datum/codex_entry/entry = new(_display_name = "[species.name] (species)")
 			entry.lore_text = species.codex_description
-			SScodex.entries_by_string[species.name] = entry
+			entry.mechanics_text = species.ooc_codex_information
+			entry.update_links()
+			SScodex.add_entry_by_string(entry.display_name, entry)
+			SScodex.add_entry_by_string(species.name, entry)

@@ -9,6 +9,7 @@
 	var/name_plural                                      // Pluralized name (since "[name]s" is not always valid)
 	var/description
 	var/codex_description
+	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
 
