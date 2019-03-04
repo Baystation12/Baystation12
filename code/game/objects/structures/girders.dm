@@ -10,10 +10,15 @@
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
+	var/dismantle_material = MATERIAL_STEEL
 
 /obj/structure/girder/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/simple, 100)
 	. = ..()
+	if(dismantle_material)
+		var/material/mat = SSmaterials.get_material_by_name(dismantle_material)
+		if(mat)
+			name = "[mat.display_name] girder"
 
 /obj/structure/girder/displaced
 	icon_state = "displaced"
@@ -236,8 +241,13 @@
 	icon_state= "cultgirder"
 	health = 250
 	cover = 70
+	dismantle_material = MATERIAL_CULT
 
 /obj/structure/girder/cult/dismantle()
+	if(dismantle_material)
+		var/material/mat = SSmaterials.get_material_by_name(dismantle_material)
+		if(mat)
+			mat.place_sheet(get_turf(src), rand(1,3))
 	qdel(src)
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
