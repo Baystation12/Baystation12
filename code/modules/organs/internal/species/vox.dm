@@ -95,6 +95,7 @@
 
 		// Do we have any objects to digest?
 		var/list/check_materials
+		var/updated_stacks
 		for(var/obj/item/food in contents)
 			for(var/mat in food.matter)
 				if(!can_digest_matter[mat] && !can_process_matter[mat])
@@ -118,7 +119,6 @@
 					stored_matter[mat] += digested
 
 		// Convert stored matter into sheets.
-		var/updated_stacks
 		for(var/mat in check_materials)
 			var/material/M = SSmaterials.get_material_by_name(mat)
 			if(M && M.stack_type && stored_matter[mat] >= M.units_per_sheet)

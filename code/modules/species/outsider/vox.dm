@@ -10,13 +10,24 @@
 	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
 	alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human crews often \
 	refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
-	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
+	smell. \
+	<br/><br/> \
+	Most humans will never meet a Vox raider, instead learning of this insular species through \
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
-	codex_description = "The Vox are a species from the edges of human space. They prey on isolated stations, ships \
-	or planets without any apparent logic or reason, and tend to refuse communications or negotiations except \
-	when their backs are to the wall. They are four to five feet tall, reptillian, beaked, tailed and quilled; \
-	crews often refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
-	smell."
+	codex_description = "The Vox are a hostile, deeply untrustworthy species from the edges of human space. They prey \
+	on isolated stations, ships or settlements without any apparent logic or reason, and tend to refuse communications \
+	or negotiations except when their backs are to the wall or they are in dire need of resources. They are four to five \
+	feet tall, reptillian, beaked, tailed and quilled; human crews often refer to them as 'shitbirds' for their violent \
+	and offensive nature, as well as their horrible smell. \
+	<br/><br/> \
+	Standard procedure when dealing with a Vox: \
+	<ol> \
+	<li>Block your nose.</li> \
+	<li>Block your ears.</li> \
+	<li>Find an airlock.</li> \
+	<li>Space them.</li> \
+	</ol> \
+	Under no circumstances should you allow a Vox to sell you home, vessel or life insurance."
 	hidden_from_codex = FALSE
 
 	taste_sensitivity = TASTE_DULL
