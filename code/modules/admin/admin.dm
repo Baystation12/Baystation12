@@ -1312,21 +1312,6 @@ var/global/floorIsLava = 0
 	if(istype(H))
 		H.regenerate_icons()
 
-
-/*
-	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.
-*/
-/proc/is_mentor(client/C)
-
-	if(!istype(C))
-		return 0
-	if(!C.holder)
-		return 0
-
-	if(C.holder.rights == R_MENTOR)
-		return 1
-	return 0
-
 /proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1, var/datum/ticket/ticket = null)
 	if(!whom)
 		return "<b>(*null*)</b>"
@@ -1354,10 +1339,6 @@ var/global/floorIsLava = 0
 		if(3)	//Devs
 			var/ref_mob = "\ref[M]"
 			return "<b>[key_name(C, link, name, highlight_special, ticket)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M, src)])</b>"
-
-		if(4)	//Mentors
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special, ticket)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)])</b>"
 
 /proc/ishost(var/client/C)
 	return check_rights(R_HOST, 0, C)

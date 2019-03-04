@@ -47,7 +47,7 @@
 		return FALSE
 	if(istype(C) && M.is_key_ignored(C.key))
 		return FALSE
-	if(M.client.holder && !is_mentor(M.client))
+	if (M.client.holder)
 		return TRUE
 	if(M.stat != DEAD)
 		return FALSE

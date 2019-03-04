@@ -223,6 +223,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		medHUD = 1
 		to_chat(src, "<span class='notice'>Medical HUD Enabled</span>")
+
 /mob/observer/ghost/verb/toggle_antagHUD()
 	set category = "Ghost"
 	set name = "Toggle AntagHUD"
@@ -230,26 +231,26 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(!client)
 		return
-	var/mentor = is_mentor(usr.client)
-	if(!config.antag_hud_allowed && (!client.holder || mentor))
-		to_chat(src, "<span class='warning'>Admins have disabled this for this round.</span>")
+	if(!config.antag_hud_allowed && !client.holder)
+		to_chat(src, SPAN_WARNING("Admins have disabled this for this round"))
 		return
 	var/mob/observer/ghost/M = src
 	if(jobban_isbanned(M, "AntagHUD"))
-		to_chat(src, "<span class='danger'>You have been banned from using this feature</span>")
+		to_chat(src, SPAN_WARNING("You have been banned from using this feature"))
 		return
-	if(config.antag_hud_restricted && !M.has_enabled_antagHUD && (!client.holder || mentor))
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD && !client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
 		if(response == "No") return
 		M.can_reenter_corpse = 0
-	if(!M.has_enabled_antagHUD && (!client.holder || mentor))
+	if(!M.has_enabled_antagHUD && !client.holder)
 		M.has_enabled_antagHUD = 1
 	if(M.antagHUD)
 		M.antagHUD = 0
-		to_chat(src, "<span class='notice'>AntagHUD Disabled</span>")
+		to_chat(src, SPAN_NOTICE("AntagHUD Disabled"))
 	else
 		M.antagHUD = 1
-		to_chat(src, "<span class='notice'>AntagHUD Enabled</span>")
+		to_chat(src, SPAN_NOTICE("AntagHUD Enabled"))
+
 /mob/observer/ghost/verb/dead_tele(A in area_repository.get_areas_by_z_level())
 	set category = "Ghost"
 	set name = "Teleport"
@@ -563,19 +564,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "OOC"
 
 	if (!(config.abandon_allowed))
-		to_chat(usr, "<span class='notice'>Respawn is disabled.</span>")
+		to_chat(usr, SPAN_WARNING("Respawn is disabled."))
 		return
 	if (!SSticker.mode)
-		to_chat(usr, "<span class='notice'><B>You may not attempt to respawn yet.</B></span>")
+		to_chat(usr, SPAN_WARNING("<b>You may not attempt to respawn yet.</b>"))
 		return
 	if (SSticker.mode.deny_respawn)
-		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
+		to_chat(usr, SPAN_WARNING("Respawn is disabled for this roundtype."))
 		return
 	else if(!MayRespawn(1, config.respawn_delay))
 		return
 
-	to_chat(usr, "You can respawn now, enjoy your new life!")
-	to_chat(usr, "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>")
+	to_chat(usr, SPAN_NOTICE("You can respawn now, enjoy your new life!"))
+	to_chat(usr, SPAN_NOTICE("<b>Make sure to play a different character, and please roleplay correctly!</b>"))
 	announce_ghost_joinleave(client, 0)
 
 	var/mob/new_player/M = new /mob/new_player()
