@@ -182,10 +182,10 @@ var/list/points_of_interest = list()
 					break
 		superstructure_failing = 1
 		spawn(SUPERSTRUCTURE_FAIL_TIME)
-			for(var/mob/mob in GLOB.mob_list)
+			for(var/mob/player in GLOB.player_list)
 				for(var/z_level in map_z)
-					if("[mob.z]" == "[z_level]")
-						mob.dust()
+					if("[player.z]" == "[z_level]")
+						player.dust()
 			loc = null
 			to_world("An overmap object has been destroyed. Please wait as it is deleted.")
 			sleep(10)//To allow the previous message to actually be seen
