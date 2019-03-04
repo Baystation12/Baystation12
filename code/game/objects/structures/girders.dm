@@ -10,7 +10,7 @@
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
-	var/dismantle_material = MATERIAL_STEEL
+	var/dismantle_material = material
 
 /obj/structure/girder/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/simple, 100)
