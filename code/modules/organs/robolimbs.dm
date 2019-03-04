@@ -24,7 +24,7 @@ var/datum/robolimb/basic_robolimb
 	var/list/species_cannot_use = list()
 	var/list/restricted_to = list()
 	var/list/applies_to_part = list() //TODO.
-	var/list/allowed_bodytypes
+	var/list/allowed_bodytypes = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SKRELL, SPECIES_UNATHI)
 
 /datum/robolimb/bishop
 	company = "Bishop"
