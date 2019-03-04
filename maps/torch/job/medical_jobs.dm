@@ -135,10 +135,12 @@
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2
+		/datum/mil_rank/civ/contractor
 	)
 
 	skill_points = 4
