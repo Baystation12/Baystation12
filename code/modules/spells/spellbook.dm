@@ -250,6 +250,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(uses > spellbook.max_uses)
 			spellbook.max_uses = uses
 		investing_time = 0
+		has_sacrificed = 0
 		STOP_PROCESSING(SSobj, src)
 	return 1
 
