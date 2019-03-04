@@ -14,7 +14,7 @@
 
 	var/stored_matter = 0
 	var/max_stored_matter = 0
-	var/print_delay = 100
+	var/print_delay = 300
 	var/printing
 
 	// These should be subtypes of /obj/item/organ
