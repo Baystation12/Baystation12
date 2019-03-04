@@ -223,7 +223,7 @@
 	frequency = 1379;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
-	req_access = list(13);
+	req_access = newlist();
 	tag_airpump = "solar_starboard_pump";
 	tag_chamber_sensor = "solar_starboard_sensor";
 	tag_exterior_door = "solar_starboard_outer";
@@ -349,7 +349,7 @@
 	name = "interior access button";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(11,13)
+	req_access = newlist()
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -616,7 +616,7 @@
 	name = "interior access button";
 	pixel_x = -24;
 	pixel_y = 24;
-	req_access = list(11,13)
+	req_access = newlist()
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -755,7 +755,7 @@
 	frequency = 1379;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
-	req_access = list(13);
+	req_access = newlist();
 	tag_airpump = "solar_starboard_pump";
 	tag_chamber_sensor = "solar_starboard_sensor";
 	tag_exterior_door = "solar_starboard_outer";
@@ -1229,7 +1229,7 @@
 "dg" = (
 /obj/structure/closet/crate/secure/phoron{
 	name = "mineral crate";
-	req_access = list(19)
+	req_access = newlist()
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -1239,7 +1239,7 @@
 	},
 /obj/structure/closet/crate/secure/phoron{
 	name = "mineral crate";
-	req_access = list(19)
+	req_access = newlist()
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -2211,7 +2211,7 @@
 	frequency = 1379;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
-	req_access = list(13);
+	req_access = newlist();
 	tag_airpump = "solar_starboard_pump";
 	tag_chamber_sensor = "solar_starboard_sensor";
 	tag_exterior_door = "solar_starboard_outer";

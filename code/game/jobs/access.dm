@@ -185,7 +185,7 @@
 
 /proc/get_access_by_id(id)
 	var/list/AS = priv_all_access_datums_id || get_all_access_datums_by_id()
-	return AS[num2text(id)]
+	return AS[id]
 
 /proc/get_all_jobs()
 	var/list/all_jobs = list()

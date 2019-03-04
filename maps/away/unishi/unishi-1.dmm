@@ -34,7 +34,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_access = newlist()
 	},
 /obj/structure/closet/crate/uranium,
 /obj/structure/cable{
@@ -294,7 +294,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_access = newlist()
 	},
 /obj/structure/cable/yellow{
 	d2 = 2;

@@ -73,7 +73,7 @@
 			message = "RFID card is not present in the device. Operation aborted."
 			return
 
-		var/access = text2num(href_list["PRG_execute"])
+		var/access = href_list["PRG_execute"]
 		var/obj/item/weapon/card/id/id_card = RFID.stored_card
 		if(access in id_card.access)
 			return 1
