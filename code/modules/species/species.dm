@@ -612,7 +612,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			return
 
 	var/randn = rand(1, 100) - skill_mod + state_mod
-	if(!(check_can_slip(target)) && randn <= 25)
+	if(!(check_no_slip(target)) && randn <= 25)
 		var/armor_check = target.run_armor_check(affecting, "melee")
 		target.apply_effect(3, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -775,5 +775,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	return
 
-/datum/species/proc/check_can_slip(mob/living/carbon/human)
+/datum/species/proc/check_no_slip(var/mob/living/carbon/human/H)
+	if(can_overcome_gravity(H))
+		return TRUE
 	return (species_flags & SPECIES_FLAG_NO_SLIP)

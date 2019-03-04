@@ -69,7 +69,7 @@
 	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
 	id = "cryobag"
-	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
-	materials = list(MATERIAL_PLASTIC = 4000, MATERIAL_GLASS = 4000, MATERIAL_SILVER = 1000)
+	req_tech = list(TECH_MATERIAL = 6, TECH_BIO = 6)
+	materials = list(MATERIAL_PLASTIC = 15000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 5000, MATERIAL_GOLD = 1000)
 	build_path = /obj/item/bodybag/cryobag
 	sort_string = "MAFAA"

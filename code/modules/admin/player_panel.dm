@@ -372,17 +372,13 @@
 
 
 		if(usr.client)
-			var/client/C = usr.client
-			if(is_mentor(C))
-				dat += {"<td align=center> N/A </td>"}
-			else
-				switch(is_special_character(M))
-					if(0)
-						dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
-					if(1)
-						dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
-					if(2)
-						dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
+			switch(is_special_character(M))
+				if(0)
+					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
+				if(1)
+					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
+				if(2)
+					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
 		else
 			dat += {"<td align=center> N/A </td>"}
 
