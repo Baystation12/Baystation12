@@ -1,16 +1,30 @@
+// A list of types that will not attempt to perform surgery if the user is on help intent.
+GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
+	/obj/item/auto_cpr,
+	/obj/item/device/healthanalyzer,
+	/obj/item/weapon/shockpaddles,
+	/obj/item/weapon/reagent_containers/hypospray,
+	/obj/item/modular_computer,
+	/obj/item/weapon/reagent_containers/syringe,
+	/obj/item/device/antibody_scanner
+))
+GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
+
 /* SURGERY STEPS */
 /decl/surgery_step
 	var/name
-	var/list/allowed_tools         // type path referencing tools that can be used for this step, and how well are they suited for it
-	var/list/allowed_species       // type paths referencing races that this step applies to.
-	var/list/disallowed_species    // type paths referencing races that this step applies to.
-	var/min_duration = 0           // duration of the step
-	var/max_duration = 0           // duration of the step
-	var/can_infect = 0             // evil infection stuff that will make everyone hate me
-	var/blood_level = 0            // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
-	var/shock_level = 0	           // what shock level will this step put patient on
-	var/delicate = 0               // if this step NEEDS stable optable or can be done on any valid surface with no penalty
-	var/core_skill = SKILL_ANATOMY // The skill that's checked for speed modifiers.
+	var/list/allowed_tools               // type path referencing tools that can be used for this step, and how well are they suited for it
+	var/list/allowed_species             // type paths referencing races that this step applies to.
+	var/list/disallowed_species          // type paths referencing races that this step applies to.
+	var/min_duration = 0                 // duration of the step
+	var/max_duration = 0                 // duration of the step
+	var/can_infect = 0                   // evil infection stuff that will make everyone hate me
+	var/blood_level = 0                  // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
+	var/shock_level = 0	                 // what shock level will this step put patient on
+	var/delicate = 0                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
+	var/core_skill = SKILL_ANATOMY       // The skill that's checked for speed modifiers.
+	var/surgery_candidate_flags = 0      // Various bitflags for requirements of the surgery.
+	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements. 
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
@@ -42,14 +56,49 @@
 
 // checks whether this step can be applied with the given user and target
 /decl/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	return 0
+	return assess_bodypart(user, target, target_zone, tool) && assess_surgery_candidate(user, target, target_zone, tool)
+
+/decl/surgery_step/proc/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	if(istype(target) && target_zone)
+		var/obj/item/organ/external/affected = target.get_organ(target_zone)
+		if(affected)
+			// Check various conditional flags.
+			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
+			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
+			 ((surgery_candidate_flags & SURGERY_NO_STUMP) && affected.is_stump())         || \
+			 ((surgery_candidate_flags & SURGERY_NO_FLESH) && !BP_IS_ROBOTIC(affected)))
+				return FALSE
+			// Check if the surgery target is accessible.
+			if(BP_IS_ROBOTIC(affected))
+				if(((surgery_candidate_flags & SURGERY_NEEDS_ENCASEMENT) || \
+				 (surgery_candidate_flags & SURGERY_NEEDS_INCISION)      || \
+				 (surgery_candidate_flags & SURGERY_NEEDS_RETRACTED))    && \
+				 affected.hatch_state != HATCH_OPENED)
+					return FALSE
+			else
+				var/open_threshold = 0
+				if(surgery_candidate_flags & SURGERY_NEEDS_INCISION)
+					open_threshold = SURGERY_OPEN
+				else if(surgery_candidate_flags & SURGERY_NEEDS_RETRACTED)
+					open_threshold = SURGERY_RETRACTED
+				else if(surgery_candidate_flags & SURGERY_NEEDS_ENCASEMENT)
+					open_threshold = (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
+				if(open_threshold                                                      && \
+				 ((strict_access_requirement && affected.how_open() != open_threshold) || \
+				 affected.how_open() < open_threshold))
+					return FALSE
+			return affected
+	return FALSE
+
+/decl/surgery_step/proc/assess_surgery_candidate(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	return ishuman(target)
 
 // does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
 /decl/surgery_step/proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
-	if (ishuman(user) && prob(60))
+	if(ishuman(user) && prob(60))
 		var/mob/living/carbon/human/H = user
 		if (blood_level)
 			H.bloody_hands(target,0)
@@ -112,14 +161,17 @@
 
 /obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
 
+	// Check for the Hippocratic oath.
 	if(!istype(M) || user.a_intent == I_HURT)
 		return FALSE
 
+	// Check for multi-surgery drifting.
 	var/zone = user.zone_sel.selecting
-	if(zone in M.op_stage.in_progress)
+	if(LAZYACCESS(M.surgeries_in_progress, zone))
 		to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
 		return TRUE
 
+	// What surgeries does our tool/target enable?
 	var/list/possible_surgeries
 	var/list/all_surgeries = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/decl in all_surgeries)
@@ -127,6 +179,7 @@
 		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))
 			LAZYSET(possible_surgeries, S, TRUE)
 
+	// Which surgery, if any, do we actually want to do?
 	var/decl/surgery_step/S
 	if(LAZYLEN(possible_surgeries) == 1)
 		S = possible_surgeries[1]
@@ -136,32 +189,41 @@
 		if(S && !user.skill_check(S.core_skill, SKILL_BASIC))
 			S = pick(possible_surgeries)
 
+	// We didn't find a surgery, or decided not to perform one.
 	if(!istype(S))
-		return FALSE
-	else if(istype(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
-		if(zone in M.op_stage.in_progress)
+		// If we're on an optable, we are protected from some surgery fails. Bypass this for some items (like health analyzers).
+		if((locate(/obj/machinery/optable) in get_turf(M)) && user.a_intent == I_HELP)
+			// Keep track of which tools we know aren't appropriate for surgery on help intent.
+			if(GLOB.surgery_tool_exception_cache[type])
+				return FALSE
+			for(var/tool in GLOB.surgery_tool_exceptions)
+				if(istype(src, tool))
+					GLOB.surgery_tool_exception_cache[type] = TRUE
+					return FALSE
+			to_chat(user, SPAN_WARNING("You aren't sure what you could do to \the [M] with \the [src]."))
+			return TRUE
+
+	// Otherwise we can make a start on surgery!
+	else if(istype(M) && !QDELETED(M) && user.a_intent == I_HURT && user.get_active_hand() == src)
+		// Double-check this in case it changed between initial check and now. 
+		if(zone in M.surgeries_in_progress)
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
-		else if(S.can_use(user, M, zone, src) && S.is_valid_target(M) && S.pre_surgery_step(user, M, zone, src))
-			M.op_stage.in_progress += zone
-			S.begin_step(user, M, zone, src)
-			var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
-			if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, duration))
-				S.end_step(user, M, zone, src)
-			else if ((src in user.contents) && user.Adjacent(M))
-				S.fail_step(user, M, zone, src)
-			else
-				to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
-			if (M)
-				M.op_stage.in_progress -= zone // Clear the in-progress flag.
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				H.update_surgery()
+		else if(S.can_use(user, M, zone, src) && S.is_valid_target(M))
+			var/operation_data = S.pre_surgery_step(user, M, zone, src)
+			if(operation_data)
+				LAZYSET(M.surgeries_in_progress, zone, operation_data)
+				S.begin_step(user, M, zone, src)
+				var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
+				if(prob(S.success_chance(user, M, src)) && do_mob(user, M, duration))
+					S.end_step(user, M, zone, src)
+				else if ((src in user.contents) && user.Adjacent(M))
+					S.fail_step(user, M, zone, src)
+				else
+					to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
+				if(!QDELETED(M))
+					LAZYREMOVE(M.surgeries_in_progress, zone) // Clear the in-progress flag.
+					if(ishuman(M))
+						var/mob/living/carbon/human/H = M
+						H.update_surgery()
 		return TRUE
 	return FALSE
-
-/datum/surgery_status
-	var/eyes =             0
-	var/face =             0
-	var/head_reattach =    0
-	var/current_organ =    "organ"
-	var/list/in_progress = list()

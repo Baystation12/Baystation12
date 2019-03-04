@@ -173,17 +173,24 @@
 	name = "Second Deck Central Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/seconddeck/hallway
+/area/hallway/primary/seconddeck
 	name = "Second Deck Central Hallway"
 	icon_state = "hallC2"
+
+/area/hallway/primary/seconddeck/center
+	name = "\improper Second Deck Stairwell"
+
+/area/hallway/primary/seconddeck/elevator
+	name = "Second Deck Elevator Landing"
+	icon_state = "hallC2_e"
+
+/area/hallway/primary/seconddeck/fore
+	name = "Second Deck Fore Hallway"
+	icon_state = "hallF2"
 
 /area/teleporter/seconddeck
 	name = "\improper Second Deck Teleporter"
 	icon_state = "teleporter"
-
-/area/hallway/primary/seconddeck/center
-	name = "\improper Second Deck Central Stairwell"
-	icon_state = "hallC2"
 
 /area/maintenance/substation/seconddeck
 	name = "Second Deck Substation"
@@ -764,7 +771,7 @@
 	icon_state = "construction"
 
 /area/vacant/armory
-	name = "\improper Marine Armory"
+	name = "\improper Vacant Armory"
 	icon_state = "Tactical"
 
 /area/vacant/cabin
@@ -1213,7 +1220,7 @@
 
 /area/maintenance/exterior
 	name = "\improper Exterior Reinforcements"
-	icon_state = "maint_security_starboard"
+	icon_state = "maint_exterior"
 	area_flags = AREA_FLAG_EXTERNAL
 	has_gravity = FALSE
 	turf_initializer = /decl/turf_initializer/maintenance/space

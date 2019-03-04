@@ -10,17 +10,7 @@
 /decl/surgery_step/cavity
 	shock_level = 40
 	delicate = 1
-
-/decl/surgery_step/cavity/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!hasorgans(target))
-		return 0
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected)
-		return FALSE
-	if(BP_IS_ROBOTIC(affected))
-		return affected.hatch_state == HATCH_OPENED
-	else
-		return affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/cavity/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
@@ -34,25 +24,24 @@
 /decl/surgery_step/cavity/make_space
 	name = "Hollow out cavity"
 	allowed_tools = list(
-	/obj/item/weapon/surgicaldrill = 100,	\
-	/obj/item/weapon/pen = 75,	\
-	/obj/item/stack/material/rods = 50
+		/obj/item/weapon/surgicaldrill = 100,
+		/obj/item/weapon/pen = 75,
+		/obj/item/stack/material/rods = 50
 	)
-
 	min_duration = 60
 	max_duration = 80
 
-/decl/surgery_step/cavity/make_space/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected && !affected.cavity
+/decl/surgery_step/cavity/make_space/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = ..()
+	if(affected && affected.cavity_name && !affected.cavity)
+		return affected
 
 /decl/surgery_step/cavity/make_space/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts making some space inside [target]'s [affected.cavity_name] cavity with \the [tool].", \
 	"You start making some space inside [target]'s [affected.cavity_name] cavity with \the [tool]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
-	affected.cavity = 1
+	affected.cavity = TRUE
 	..()
 
 /decl/surgery_step/cavity/make_space/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -66,32 +55,31 @@
 /decl/surgery_step/cavity/close_space
 	name = "Close cavity"
 	allowed_tools = list(
-	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/smokable/cigarette = 75,	\
-	/obj/item/weapon/flame/lighter = 50,			\
-	/obj/item/weapon/weldingtool = 25
+		/obj/item/weapon/cautery = 100,
+		/obj/item/clothing/mask/smokable/cigarette = 75,
+		/obj/item/weapon/flame/lighter = 50,
+		/obj/item/weapon/weldingtool = 25
 	)
-
 	min_duration = 60
 	max_duration = 80
 
-/decl/surgery_step/cavity/close_space/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected && affected.cavity
+/decl/surgery_step/cavity/close_space/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = ..()
+	if(affected && affected.cavity)
+		return affected
 
 /decl/surgery_step/cavity/close_space/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts mending [target]'s [affected.cavity_name] cavity wall with \the [tool].", \
 	"You start mending [target]'s [affected.cavity_name] cavity wall with \the [tool]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
-	affected.cavity = 0
 	..()
 
 /decl/surgery_step/cavity/close_space/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] mends [target]'s [affected.cavity_name] cavity walls with \the [tool].</span>", \
 	"<span class='notice'>You mend [target]'s [affected.cavity_name] cavity walls with \the [tool].</span>" )
+	affected.cavity = FALSE
 
 //////////////////////////////////////////////////////////////////
 //	 implanting surgery step
@@ -103,26 +91,31 @@
 	max_duration = 100
 
 /decl/surgery_step/cavity/place_item/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(istype(user,/mob/living/silicon/robot))
+	if(istype(user,/mob/living/silicon/robot))
+		return FALSE
+	. = ..()
+
+/decl/surgery_step/cavity/place_item/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = ..()
+	if(affected && affected.cavity)
+		return affected
+
+/decl/surgery_step/cavity/place_item/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(affected && affected.cavity)
+		var/max_volume = base_storage_capacity(affected.cavity_max_w_class)
+		if(tool.w_class > affected.cavity_max_w_class)
+			to_chat(user, SPAN_WARNING("\The [tool] is too big for [affected.cavity_name] cavity."))
 			return FALSE
-		if(affected && affected.cavity)
-			var/max_volume = base_storage_capacity(affected.cavity_max_w_class)
-
-			if(tool.w_class > affected.cavity_max_w_class)
-				to_chat(user, "<span class='warning'>\The [tool] is too big for [affected.cavity_name] cavity.</span>")
-				return FALSE
-
-			var/total_volume = tool.get_storage_cost()
-			for(var/obj/item/I in affected.implants)
-				if(istype(I,/obj/item/weapon/implant))
-					continue
-				total_volume += I.get_storage_cost()
-			if(total_volume > max_volume)
-				to_chat(user, "<span class='warning'>There isn't enough space left in [affected.cavity_name] cavity for [tool].</span>")
-				return FALSE
-			return TRUE
+		var/total_volume = tool.get_storage_cost()
+		for(var/obj/item/I in affected.implants)
+			if(istype(I,/obj/item/weapon/implant))
+				continue
+			total_volume += I.get_storage_cost()
+		if(total_volume > max_volume)
+			to_chat(user, SPAN_WARNING("There isn't enough space left in [affected.cavity_name] cavity for [tool]."))
+			return FALSE
+		return TRUE
 
 /decl/surgery_step/cavity/place_item/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -150,27 +143,17 @@
 /decl/surgery_step/cavity/implant_removal
 	name = "Remove foreign body"
 	allowed_tools = list(
-	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/weapon/wirecutters = 75,	\
-	/obj/item/weapon/material/kitchen/utensil/fork = 20
+		/obj/item/weapon/hemostat = 100,
+		/obj/item/weapon/wirecutters = 75,
+		/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
-
 	min_duration = 80
 	max_duration = 100
-
-/decl/surgery_step/cavity/implant_removal/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected)
-		return FALSE
-	if(!BP_IS_ROBOTIC(affected))
-		return affected.how_open() >= SURGERY_RETRACTED
-	else
-		return affected.hatch_state == HATCH_OPENED
 
 /decl/surgery_step/cavity/implant_removal/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts poking around inside [target]'s [affected.name] with \the [tool].", \
-	"You start poking around inside [target]'s [affected.name] with \the [tool]" )
+	"You start poking around inside [target]'s [affected.name] with \the [tool]." )
 	target.custom_pain("The pain in your [affected.name] is living hell!",1,affecting = affected)
 	..()
 

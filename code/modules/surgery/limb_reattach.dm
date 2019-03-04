@@ -13,13 +13,10 @@
 	delicate = 1
 
 /decl/surgery_step/limb/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if (!hasorgans(target))
-		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if (affected)
-		return 0
-	var/list/organ_data = target.species.has_limbs["[target_zone]"]
-	return !isnull(organ_data)
+	if(!affected)
+		var/list/organ_data = target.species.has_limbs["[target_zone]"]
+		return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////
 //	 limb attachment surgery step
@@ -76,12 +73,11 @@
 /decl/surgery_step/limb/connect
 	name = "Connect limb"
 	allowed_tools = list(
-	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/stack/cable_coil = 75, 	\
-	/obj/item/device/assembly/mousetrap = 20
+		/obj/item/weapon/hemostat = 100,
+		/obj/item/stack/cable_coil = 75,
+		/obj/item/device/assembly/mousetrap = 20
 	)
 	can_infect = 1
-
 	min_duration = 100
 	max_duration = 120
 
