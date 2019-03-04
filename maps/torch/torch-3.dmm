@@ -2882,8 +2882,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "gn" = (
-/obj/structure/table/rack,
-/obj/item/weapon/extinguisher,
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 8
@@ -2893,6 +2891,7 @@
 	c_tag = "Second Deck Hallway - Safe Room Foyer";
 	dir = 1
 	},
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
 "go" = (
@@ -4555,14 +4554,6 @@
 "jV" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/seconddeck)
-"jW" = (
-/obj/structure/sign/directions/bridge{
-	dir = 1;
-	pixel_y = 12;
-	pixel_z = 0
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/teleporter/seconddeck)
 "jX" = (
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -6716,6 +6707,9 @@
 	icon_state = "warningcorner";
 	dir = 4
 	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
 "ph" = (
@@ -8168,6 +8162,11 @@
 /obj/structure/sign/directions/engineering{
 	dir = 4;
 	pixel_y = 3;
+	pixel_z = 0
+	},
+/obj/structure/sign/directions/bridge{
+	dir = 1;
+	pixel_y = 10;
 	pixel_z = 0
 	},
 /turf/simulated/wall/r_wall/prepainted,
@@ -16078,6 +16077,27 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/bluespace)
+"Os" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/catwalk,
+/obj/structure/sign/warning/pods/east{
+	dir = 4;
+	icon_state = "podseast";
+	pixel_x = -32
+	},
+/obj/structure/sign/warning/pods/west{
+	dir = 4;
+	icon_state = "podswest";
+	pixel_x = -44
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/seconddeck/fore)
 "Ot" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	icon_state = "intact";
@@ -31555,7 +31575,7 @@ bd
 GY
 Gs
 Wf
-Wf
+Os
 Mu
 Wh
 Ji
@@ -40045,7 +40065,7 @@ rq
 IK
 qC
 SI
-jW
+qu
 kh
 kB
 FV
