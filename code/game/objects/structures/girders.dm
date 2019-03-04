@@ -10,15 +10,15 @@
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
-	var/dismantle_material = material
+	var/dismantle_material = MATERIAL_STEEL
 
 /obj/structure/girder/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/simple, 100)
 	. = ..()
-	if(dismantle_material)
-		var/material/mat = SSmaterials.get_material_by_name(dismantle_material)
-		if(mat)
-			name = "[mat.display_name] girder"
+	if(material && !istype(material))
+		material = SSmaterials.get_material_by_name(material)
+	if(istype(material))
+		name = "[material.display_name] girder
 
 /obj/structure/girder/displaced
 	icon_state = "displaced"
@@ -208,9 +208,9 @@
 	icon_state = "reinforced"
 	reinforcing = 0
 
-/obj/structure/girder/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src))
-	qdel(src)
+/obj/structure/girder/dismantle()
+	if(material)
+		material.place_sheet(get_turf(src))
 
 /obj/structure/girder/attack_hand(mob/user as mob)
 	if (MUTATION_HULK in user.mutations)
