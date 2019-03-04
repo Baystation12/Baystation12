@@ -11,7 +11,7 @@
 
 	var/segment_strength = 1 //How important is this segment of the hull?
 
-/obj/effect/hull_segment/New()
+/obj/effect/hull_segment/Initialize()
 	. = ..()
 	var/obj/effect/overmap/om_obj = map_sectors["[z]"]
 	if(!isnull(om_obj))
