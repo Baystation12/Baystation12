@@ -14,7 +14,7 @@
 /obj/effect/hull_segment/Initialize()
 	. = ..()
 	var/obj/effect/overmap/om_obj = map_sectors["[z]"]
-	if(!isnull(om_obj))
+	if(om_obj)
 		om_obj.hull_segments += src
 
 /obj/effect/hull_segment/examine(var/mob/examiner)
