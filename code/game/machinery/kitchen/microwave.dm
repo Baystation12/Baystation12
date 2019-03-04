@@ -134,6 +134,7 @@
 		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
 	else if(isCrowbar(O))
+		src.anchored = !src.anchored
 		user.visible_message( \
 			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
@@ -143,7 +144,6 @@
 			"<span class='notice'>\The [user] [src.anchored ? "secures" : "unsecures"] the microwave.</span>", \
 			"<span class='notice'>You [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
-			src.anchored = !src.anchored
 		else
 			to_chat(user, "<span class='notice'>You decide not to do that.</span>")
 	else
