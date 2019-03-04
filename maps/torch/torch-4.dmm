@@ -25422,9 +25422,11 @@
 /area/security/armoury)
 "nmb" = (
 /obj/machinery/door/airlock/multi_tile/glass/security{
+	autoset_access = 0;
 	dir = 8;
 	id_tag = "BrigFoyer";
-	name = "Security Wing"
+	name = "Security Wing";
+	req_access = list(list(63,80))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{

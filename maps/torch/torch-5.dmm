@@ -817,6 +817,9 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
+"bQ" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/bridge/hallway/starboard)
 "bT" = (
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -2190,7 +2193,7 @@
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fx" = (
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
@@ -2200,7 +2203,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fy" = (
 /obj/machinery/door/airlock/sol{
 	id_tag = "captaindoorfore";
@@ -2333,8 +2336,13 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fQ" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	icon_state = "corner_white_diagonal";
@@ -2345,8 +2353,13 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fR" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	icon_state = "corner_white_diagonal";
@@ -2362,7 +2375,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fS" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	icon_state = "corner_white_diagonal";
@@ -2382,7 +2395,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fT" = (
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
@@ -2397,7 +2410,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fU" = (
 /obj/machinery/camera/network/command{
 	c_tag = "Bridge - Entry Starboard"
@@ -2416,7 +2429,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fV" = (
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
@@ -2441,7 +2454,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "fX" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
@@ -2750,7 +2763,7 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gB" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -2767,7 +2780,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gC" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -2779,7 +2792,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gD" = (
 /obj/item/device/radio/intercom{
 	dir = 1;
@@ -2793,7 +2806,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gE" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -2809,7 +2822,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gF" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -2820,7 +2833,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gG" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -2837,7 +2850,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "gI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5971,7 +5984,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "nh" = (
 /obj/effect/floor_decal/scglogo{
 	tag = "icon-center-right";
@@ -7269,14 +7282,12 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/command{
-	autoset_access = 0;
 	dir = 8;
 	id_tag = "starboardbridgeaccess";
-	name = "Bridge Access";
-	req_access = list(list(19,80))
+	name = "Bridge Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "qh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -7649,7 +7660,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "qT" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -7659,7 +7670,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "qU" = (
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -7672,7 +7683,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "qV" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -7685,7 +7696,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "qW" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/light{
@@ -7698,7 +7709,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "qX" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -7710,7 +7721,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "qY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -7722,7 +7733,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "ra" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -8078,8 +8089,13 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rM" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8102,7 +8118,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rN" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -8125,7 +8141,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rO" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -8140,7 +8156,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rP" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
@@ -8161,7 +8177,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rQ" = (
 /obj/machinery/camera/network/command{
 	c_tag = "Bridge - Entry Port";
@@ -8187,7 +8203,7 @@
 	req_access = list(list(24,11))
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rR" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
@@ -8206,7 +8222,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rS" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
@@ -8225,7 +8241,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "rU" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -8576,7 +8592,7 @@
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "sz" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
@@ -8589,7 +8605,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "sB" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/sea)
@@ -12915,8 +12931,17 @@
 	icon_state = "tube1";
 	dir = 8
 	},
+/obj/machinery/power/apc/high{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "Ho" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -12926,7 +12951,7 @@
 	id = "co_windows"
 	},
 /turf/simulated/floor/plating,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "Hp" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12956,7 +12981,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/starboard)
 "Hu" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
@@ -13194,7 +13219,7 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "Id" = (
 /obj/structure/sign/warning/high_voltage{
 	icon_state = "shock";
@@ -13291,7 +13316,7 @@
 	},
 /obj/structure/flora/pottedplant/unusual,
 /turf/simulated/floor/tiled/dark,
-/area/bridge)
+/area/bridge/hallway/port)
 "Ik" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
@@ -14631,7 +14656,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/bridge)
+/area/bridge/hallway/port)
 "Oh" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -14815,14 +14840,12 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/command{
-	autoset_access = 0;
 	dir = 8;
 	id_tag = "portbridgeaccess";
-	name = "Bridge Access";
-	req_access = list(list(19,80))
+	name = "Bridge Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/bridge)
+/area/bridge/hallway/port)
 "Pi" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/bridge/disciplinary_board_room)
@@ -15184,6 +15207,21 @@
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
 /area/aquila/medical)
+"RT" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/light{
+	icon_state = "tube1";
+	dir = 8
+	},
+/obj/machinery/power/apc/high{
+	dir = 2;
+	name = "south bump";
+	pixel_y = -24
+	},
+/obj/structure/cable/green,
+/turf/simulated/floor/tiled/dark,
+/area/bridge/hallway/port)
 "Sb" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Storage"
@@ -25588,7 +25626,7 @@ HY
 Hu
 Ic
 rL
-Hm
+RT
 ti
 tW
 Iq
@@ -26178,7 +26216,7 @@ cZ
 dJ
 Ce
 bq
-eP
+bQ
 fS
 gD
 hq
