@@ -691,6 +691,9 @@
 	dir = 2
 	},
 /area/rescue_base/base)
+"abT" = (
+/turf/simulated/floor/carpet,
+/area/rescue_base/base)
 "abU" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Showers";
@@ -2586,6 +2589,24 @@
 /obj/structure/window/reinforced/holowindow,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_boxingcourt)
+"agf" = (
+/turf/simulated/floor/carpet/blue,
+/area/rescue_base/base)
+"agg" = (
+/turf/simulated/floor/carpet/blue2,
+/area/rescue_base/base)
+"agh" = (
+/turf/simulated/floor/carpet/green,
+/area/rescue_base/base)
+"agi" = (
+/turf/simulated/floor/carpet/orange,
+/area/rescue_base/base)
+"agj" = (
+/turf/simulated/floor/carpet/purple,
+/area/rescue_base/base)
+"agk" = (
+/turf/simulated/floor/carpet/red,
+/area/rescue_base/base)
 "agl" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/glass{
@@ -23480,13 +23501,13 @@ aab
 "}
 (3,1,1) = {"
 aaa
-aad
-aad
-aad
-aad
-aad
-aad
-aad
+abT
+agf
+agg
+agh
+agi
+agj
+agk
 aad
 aad
 aad
