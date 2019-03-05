@@ -20,7 +20,7 @@
 	burst = 10
 	burst_delay = 3
 	burst_accuracy = list(3,2,2,1,0,-1,-1,-3,-4,-5)
-	dispersion = list(0,0,1,1,2,2,3,4,4,5)
+	dispersion = list(0,0,0.5,0.5,1,1,1.5,2,2,2.5)
 
 	load_time = 7
 
@@ -31,4 +31,4 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
 	burst_accuracy = list(0,-1,-1,-1,-2,-3,-3,-5,-5,-6)
-	dispersion = list(1,1,2,2,3,4,4,4,5,5)
+	dispersion = list(0.5,0.5,1,1,1.5,1.5,2,2.5,2.5,3)

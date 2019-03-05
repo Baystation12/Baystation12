@@ -19,6 +19,7 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	item_icon_offsets = list(0,0)
+	default_faction = "Covenant"
 
 	breath_type = "methane"
 	exhale_type = "carbon_dioxide"

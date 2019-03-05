@@ -236,7 +236,7 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,1,2,4,8)
+	explosion(a,1,2,4,5)
 
 /obj/item/projectile/projector_laser_damage_proj/launch()
 	create_child_projs()

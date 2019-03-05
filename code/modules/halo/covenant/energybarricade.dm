@@ -17,9 +17,7 @@
 				user.visible_message("<span class='info'>[user] finishes setting up [src].</span>")
 				user.drop_item()
 				T = get_turf(user)
-				E = new(T)
-				E.dir = user.dir
-				E.overload()
+				E = new(T, newdir = user.dir)
 				qdel(src)
 
 
@@ -29,18 +27,52 @@
 	name = "energy barricade"
 	desc = "A shimmering curved shield for Covenant footsoldiers to take cover behind."
 	icon = 'energybarricade.dmi'
-	icon_state = "1"
+	icon_state = "3"
 	anchored = 1
-	var/active = 1
-	var/time_recharged = 0
+	var/shield_health = 0
+	var/max_shield = 750
 	var/recharge_time = 50
+	var/time_recharged = 50
 	var/can_deconstruct = 1
+	var/processing = 0
+	var/recharge_per_tick = 34
+
+/obj/structure/energybarricade/New(var/newdir)
+	dir = newdir
+	. = ..()
+	if(src.dir == NORTH)
+		src.plane = OBJ_PLANE
+	else
+		src.plane = ABOVE_HUMAN_PLANE
+	icon_state = "0"
+	processing = 1
+	GLOB.processing_objects.Add(src)
+
+/obj/structure/energybarricade/process()
+	if(world.time >= time_recharged)
+		//come back to full after being dropped
+		if(shield_health <= 0)
+			shield_health = max_shield
+			update_icon()
+			processing = 0
+			GLOB.processing_objects.Remove(src)
+
+		//recharge a little
+		else if(shield_health < max_shield)
+			shield_health += recharge_per_tick
+			update_icon()
+
+		//we are done recharging
+		if(shield_health >= max_shield)
+			shield_health = max_shield
+			processing = 0
+			GLOB.processing_objects.Remove(src)
 
 /obj/structure/energybarricade/CanPass(atom/A, turf/T)
 	. = ..()
 
 	//block movement from some directions if we are active
-	if(active && A && T)
+	if(shield_health > 0 && A && T)
 		var/turf/front_turf = get_step(src, dir)
 
 		//movement in front of the shield
@@ -69,23 +101,39 @@
 		else
 			to_chat(user,"<span class='info'>You must be behind [src] to do this.</span>")
 	else
-		to_chat(user,"<span class='info'>This one has been secured and cannot be deactivated.</span>")
+		to_chat(user,"<span class='info'>This one has been permanently secured and cannot be deactivated.</span>")
 
-/obj/structure/energybarricade/process()
-	if(world.time > time_recharged)
-		recharge()
+/obj/structure/energybarricade/bullet_act(obj/item/projectile/P, def_zone)
+	. = ..()
+	take_damage(P.damage)
 
-/obj/structure/energybarricade/proc/overload()
-	icon_state = "0"
-	active = 0
-	GLOB.processing_objects.Add(src)
-	time_recharged = world.time + recharge_time
+/obj/structure/energybarricade/attackby(var/obj/item/I, var/mob/living/user)
+	. =  ..()
+	take_damage(I.force)
 
-/obj/structure/energybarricade/proc/recharge()
-	icon_state = "1"
-	active = 1
-	if(src.dir == NORTH)
-		src.plane = OBJ_PLANE
+/obj/structure/energybarricade/proc/take_damage(var/damage)
+	if(damage > 0)
+		shield_health -= damage
+		time_recharged = world.time + recharge_time
+		update_icon()
+
+		if(shield_health < 0)
+			shield_health = 0
+
+			//longer time to come back up
+			time_recharged += recharge_time * 2
+
+		if(!processing)
+			processing = 1
+			GLOB.processing_objects.Add(src)
+
+/obj/structure/energybarricade/update_icon()
+	var/shield_ratio = shield_health/max_shield
+	if(shield_ratio > 0.66)
+		icon_state = "3"
+	else if(shield_ratio > 0.33)
+		icon_state = "2"
+	else if(shield_ratio > 0)
+		icon_state = "1"
 	else
-		src.plane = ABOVE_HUMAN_PLANE
-	GLOB.processing_objects.Remove(src)
+		icon_state = "0"

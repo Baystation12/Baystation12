@@ -1,5 +1,5 @@
 
-#define NPC_SHIP_LOSE_DELAY 20 MINUTES
+#define NPC_SHIP_LOSE_DELAY 10 MINUTES
 #define ON_PROJECTILE_HIT_MESSAGES list(\
 "We're taking fire. Requesting assistance from nearby ships! Repeat; Taking fire!",\
 "Our hull has been breached! Help!",\
@@ -44,9 +44,31 @@
 
 	var/list/projectiles_to_spawn = list()
 
+	var/list/cargo_contained = list()
+
+	var/list/cargo_containers = list()
+
 /obj/effect/overmap/ship/npc_ship/New()
 	generate_ship_name()
 	. = ..()
+
+/obj/effect/overmap/ship/npc_ship/proc/cargo_init()
+	if(cargo_containers.len == 0 || cargo_contained.len == 0)
+		return
+	var/counter = 0
+	var/objs_per_container = max((cargo_contained.len / cargo_containers.len),1)
+	var/list/valid_containers = cargo_containers
+	for(var/typepath in cargo_contained)
+		var/obj/structure/closet/our_container
+		if(counter >= objs_per_container || isnull(our_container))
+			our_container.store_contents()
+			our_container = pick(valid_containers)
+			counter = 0
+		if(cargo_contained.Find(typepath) == cargo_contained.len)
+			our_container.store_contents()
+		counter += 1
+		var/obj/new_obj = new typepath
+		new_obj.loc = our_container.loc
 
 /obj/effect/overmap/ship/npc_ship/get_faction()
 	if(!unload_at)
@@ -85,9 +107,12 @@
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
-	for(var/mob/living/player in GLOB.player_list)
-		if(player.z in map_z && player.stat != DEAD)
-			return //Don't disappear if there's people aboard.
+	unload_at = world.time + NPC_SHIP_LOSE_DELAY / 2
+	for(var/mob/player in GLOB.player_list)
+		if(player.stat != DEAD)
+			for(var/z_level in map_z)
+				if("[player.z]" == "[z_level]")
+					return//Don't disappear if there's people aboard.
 	for(var/obj/docking_umbilical/umbi in connectors)//Don't disappear if we're docked with something
 		if(umbi.current_connected)
 			return
@@ -184,7 +209,7 @@
 	chosen_ship_datum = new chosen_ship_datum
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	set background = 1
+	//set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
@@ -203,6 +228,7 @@
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+	cargo_init()
 	damage_spawned_ship()
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	GLOB.processing_objects += src

@@ -388,12 +388,14 @@
 "hx" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 "hy" = (/obj/machinery/light/spot,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 "hz" = (/obj/effect/landmark/map_data{name = "New New Antarctica"},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/armoury_3)
+"hA" = (/obj/item/device/mobilecomms/commsbackpack/innie/permanant,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/armoury_4)
+"hB" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/armoury_4)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacacacacacacacacacacacacabababababababababababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaeadadacacacafagahaiaiajahakalagacamanananabababababababab
-aaaaaaaaadadadadadadadadaaaaaaaaadaoaoaoapaqapaoararacasagataiauavahawaxayazaAaAaBanabababababababab
+aahAaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaeadadacacacafagahaiaiajahakalagacamanananabababababababab
+aahBaaaaadadadadadadadadaaaaaaaaadaoaoaoapaqapaoararacasagataiauavahawaxayazaAaAaBanabababababababab
 aaaaaaaaadaCaDaEaFaGaHadadadaeadadaoaoaoaoaqaoaoararacaIavahaiauavataJaKagacanaAaLanabananananananab
 aaaaaaaaadaMaGaNaFaDaHadadaOaPaQadaoaoaqaqaqaqaqararacaRagahaiauagataSaTagacanaUaAanananaVanaWaXanab
 aaaaaaaaadaYaGaZbaaDbbadadbcbdbcadaqaqaqaobeaoaqbfbfacbgagatauawavahbhbibjacanbkblaAbmanbnanaLaAanab

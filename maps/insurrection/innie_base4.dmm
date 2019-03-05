@@ -233,6 +233,8 @@
 "ey" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "ez" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "eA" = (/obj/effect/landmark/map_data{name = "New New Antarctica"},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/east_dorms)
+"eB" = (/obj/item/device/mobilecomms/commsbackpack/innie/permanant,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/kitchen)
+"eC" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/kitchen)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -240,8 +242,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababacacacacacac
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaeadadafafafabababababababacagahahagagahahahahacababababab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaiajajakalamalahahafabababababababacagacacacacacacacagacababababab
 aaaaaaaaaaaaaaaaaaaaaaaaadadaeadadajanajajajajajagahafacacacacacababacahacabababababacagacababababab
-aaaaaaaaaaaaaaaaaaaaaaaaadaiaoaladajajajajajajajagagafacapagahacacacacahacabababababacagacacacacacab
-aaaaaaaaaaaaaaaaaaaaaaaaadajaqajadanajajajarajajasagafacatauavahahagagahacabababababacahahahagagacab
+aaaaeBaaaaaaaaaaaaaaaaaaadaiaoaladajajajajajajajagagafacapagahacacacacahacabababababacagacacacacacab
+aaaaeCaaaaaaaaaaaaaaaaaaadajaqajadanajajajarajajasagafacatauavahahagagahacabababababacahahahagagacab
 aaaaaaaaaaaaaaaaaaaaaaaaadalawajadaxalajajajajajasayafacahahahacacacacacacabababababacacacacacagacab
 aaaaaaaaaaaaaaaaaaaaaaadadadajadadalazajajajajajaAagafacacacacacababababababababababababababacahacab
 aaaaaaaaaaaaadaBadadadadadadaCadadadaDadaEaEaFadafafafafafafaGafafafafafafaHafafafafafafababacahacab
