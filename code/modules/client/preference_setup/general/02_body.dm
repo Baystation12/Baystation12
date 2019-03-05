@@ -593,6 +593,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 						continue
 					if(M.applies_to_part.len && !(limb in M.applies_to_part))
 						continue
+					if(M.allowed_bodytypes && !(tmp_species in M.allowed_bodytypes))
+						continue
 					usable_manufacturers[company] = M
 				if(!usable_manufacturers.len)
 					return
