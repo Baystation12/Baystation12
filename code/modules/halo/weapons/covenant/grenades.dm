@@ -4,7 +4,7 @@
 	desc = "When activated, the coating of this grenade becomes a powerful adhesive, sticking to anyone it is thrown at."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
-	throw_speed = 1
+	throw_speed = 1.2
 	var/alt_explosion_damage_max = 70 //The amount of damage done when grenade is stuck inside someone
 	var/alt_explosion_range = 2
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
@@ -59,7 +59,13 @@
 			if(dist <= round(max_range + world.view - 2, 1))
 				M.playsound_local(epicenter, 'code/modules/halo/sounds/Plasmanadedetonate.ogg', 100, 1)
 
-	loc.contents -= src
+	for(var/obj/item/organ/external/o in mob_containing.bad_external_organs)
+		for(var/datum/wound/w in o.wounds)
+			for(var/obj/embedded in w.embedded_objects)
+				if(embedded == src)
+					w.embedded_objects -= embedded //Removing the embedded item from the wound
+	mob_containing.contents -= src
+	loc = mob_containing.loc //And placing it on the ground below
 	qdel(src)
 
 /obj/item/weapon/grenade/plasma/heavy_plasma

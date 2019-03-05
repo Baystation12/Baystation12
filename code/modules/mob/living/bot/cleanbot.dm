@@ -12,6 +12,7 @@
 	var/screwloose = 0
 	var/oddbutton = 0
 	var/blood = 1
+	var/bullets = 1
 	var/list/target_types = list()
 
 /mob/living/bot/cleanbot/New()
@@ -40,6 +41,11 @@
 		if(confirmTarget(D))
 			target = D
 			return
+	if(bullets)
+		for(var/obj/item/ammo_casing/D in view(world.view, src))
+			if(confirmTarget(D))
+				target = D
+			return
 
 /mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
 	if(!..())
@@ -57,7 +63,7 @@
 	if(!..())
 		return
 
-	if(!istype(D))
+	if(!D.type in target_types)
 		return
 
 	if(D.loc != loc)
@@ -107,6 +113,7 @@
 
 /mob/living/bot/cleanbot/GetInteractPanel()
 	. = "Cleans blood: <a href='?src=\ref[src];command=blood'>[blood ? "Yes" : "No"]</a>"
+	. = "Cleans bullets: <a href='?src=\ref[src];command=bullets'>[bullets ? "Yes" : "No"]</a>"
 	. += "<br>Patrol station: <a href='?src=\ref[src];command=patrol'>[will_patrol ? "Yes" : "No"]</a>"
 
 /mob/living/bot/cleanbot/GetInteractMaintenance()
@@ -119,6 +126,9 @@
 		switch(command)
 			if("blood")
 				blood = !blood
+				get_targets()
+			if("bullets")
+				bullets = !bullets
 				get_targets()
 			if("patrol")
 				will_patrol = !will_patrol
@@ -152,6 +162,9 @@
 
 	if(blood)
 		target_types += /obj/effect/decal/cleanable/blood
+
+	if(bullets)
+		target_types += /obj/item/ammo_casing
 
 /* Assembly */
 

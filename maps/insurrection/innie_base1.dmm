@@ -152,12 +152,14 @@
 "cV" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
 "cW" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
 "cX" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
+"cY" = (/obj/item/device/mobilecomms/commsbackpack/innie/permanant,/turf/space,/area/space)
+"cZ" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
-aaadadadaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
+aaadadcYaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
 aaadaeadaaabababababababababababafafafafafagafafahahahacacacacacacacacacacacacacacacacacacacacacacac
-aaadadadaaabababababababababababafaiajajakalakajamamahacacacacacacacacacacacacacacacacacacacacacacac
+aaadadcZaaabababababababababababafaiajajakalakajamamahacacacacacacacacacacacacacacacacacacacacacacac
 aaaaaaaaaaabababababababafafagafafajajajajalajajamamahahahahahahacacacacacanananananacacacacacacacac
 ababababababababababababafaoapaqafajajalalalalalamamaharasatauahananananananavawaxanacacacacacacacac
 ababababababababababababafaoayaoafalalalajazajalaAaAahaBaCaDaDaEanawawavavawaFaGaHanacacacacacacacac

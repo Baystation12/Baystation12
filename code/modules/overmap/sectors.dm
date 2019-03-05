@@ -62,7 +62,7 @@ var/list/points_of_interest = list()
 	map_z |= loc.z
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
-	//	map_sectors["[zlevel]"] = src
+	map_sectors["[z]"] = src
 	if(GLOB.using_map.use_overmap)
 		var/turf/move_to_loc = pick(GLOB.overmap_tiles_uncontrolled)
 

@@ -68,7 +68,7 @@
 "bp" = (/obj/structure/closet/secure_closet/personal/empty,/obj/item/squad_manager,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/clothing/head/helmet/odst/squadleader,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/weapon/storage/backpack/odst/squadlead,/obj/item/device/radio/headset/unsc/odsto,/obj/item/clothing/suit/armor/special/odst/squadleader,/obj/item/clothing/suit/armor/special/odst/squadleader,/obj/item/clothing/suit/armor/special/odst/squadleader,/turf/simulated/floor/tiled/dark,/area/corvette/unscbertels/deck3/odstquarters)
 "bq" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/corvette/unscbertels/deck3/odstbathroomstarboard)
 "br" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/cargo5)
-"bs" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/soeiv)
+"bs" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/SOEIV,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/soeiv)
 "bt" = (/obj/machinery/door/blast/regular/triple{_wifi_id = "bertelsstarboardairlock"; id = "bertelsstarboardairlock"; opacity = 0},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck3/starboardumbilical)
 "bu" = (/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; name = "intercom"; pixel_x = 0; pixel_y = -32; tag = "icon-intercom (NORTH)"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/centralhallway)
 "bv" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/centralhallway)
@@ -458,6 +458,7 @@
 "iP" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/odstquarters)
 "iQ" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/forehallway)
 "iR" = (/obj/effect/landmark/map_data{name = "UNSC Yolotanker"},/turf/space,/area/space)
+"iS" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -609,5 +610,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-iRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+iRiSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

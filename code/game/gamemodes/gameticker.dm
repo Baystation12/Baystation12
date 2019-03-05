@@ -284,7 +284,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					if(player.create_character())
+					if(player.create_character(job_master.get_roundstart_spawnpoint(player.mind.assigned_role)))
 						qdel(player)
 
 
