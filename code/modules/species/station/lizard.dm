@@ -20,7 +20,7 @@
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	slowdown = 0.5
-	brute_mod = 0.8
+	brute_mod = 0.95
 	flash_mod = 1.2
 	blood_volume = 800
 

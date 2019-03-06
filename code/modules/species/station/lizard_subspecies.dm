@@ -8,7 +8,7 @@
 	darksight_range = 5
 	darksight_tint = DARKTINT_GOOD
 	slowdown = 0.4
-	brute_mod = 0.6
+	brute_mod = 0.85
 	flash_mod = 1.4
 	blood_volume = 700
 	water_soothe_amount = 5
