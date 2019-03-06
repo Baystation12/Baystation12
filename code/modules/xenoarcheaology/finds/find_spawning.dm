@@ -499,6 +499,7 @@
 	return I
 
 /obj/item/weapon/archaeological_find/remains/robot
+	icon = 'icons/mob/robots_gibs.dmi'
 	icon_state = "remainsrobot"
 	find_type = ARCHAEO_REMAINS_ROBOT
 	descs = list("Almost mistakeable for the remains of a modern cyborg.",\

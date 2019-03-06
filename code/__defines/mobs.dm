@@ -333,3 +333,4 @@
 #define MOB_FACTION_NEUTRAL "neutral"
 
 #define ROBOT_MODULE_TYPE_GROUNDED "grounded"
+#define ROBOT_MODULE_TYPE_FLYING   "flying"

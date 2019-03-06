@@ -14,6 +14,7 @@
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
+	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -22,6 +23,7 @@
 	var/integrated_light_max_bright = 0.75
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
+	var/dismantle_type = /obj/item/robot_parts/robot_suit
 
 //Icon stuff
 
@@ -555,15 +557,7 @@
 
 				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
 				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You damage some parts of the chassis, but eventually manage to rip out [mmi]!</span>")
-					var/obj/item/robot_parts/robot_suit/C = new/obj/item/robot_parts/robot_suit(loc)
-					C.parts[BP_L_LEG] = new/obj/item/robot_parts/l_leg(C)
-					C.parts[BP_R_LEG] = new/obj/item/robot_parts/r_leg(C)
-					C.parts[BP_L_ARM] = new/obj/item/robot_parts/l_arm(C)
-					C.parts[BP_R_ARM] = new/obj/item/robot_parts/r_arm(C)
-					C.update_icon()
-					new/obj/item/robot_parts/chest(loc)
-					qdel(src)
+					dismantle(user)
 
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
@@ -1140,3 +1134,9 @@
 	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("actuator"))
 		return 1
 	return ..()
+
+/mob/living/silicon/robot/proc/dismantle(var/mob/user)
+	to_chat(user, SPAN_NOTICE("You damage some parts of the chassis, but eventually manage to rip out the central processor."))
+	var/obj/item/robot_parts/robot_suit/C = new dismantle_type(loc)
+	C.dismantled_from(src)
+	qdel(src)
