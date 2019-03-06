@@ -71,14 +71,14 @@
 	display_name = "female headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	flags = GEAR_HAS_COLOR_SELECTION
-	
+
 /datum/gear/head/skrell_helmet
 	display_name = "Skrellian helmet"
 	path = /obj/item/clothing/head/helmet/skrell
 	whitelisted = list(SPECIES_SKRELL)
 	sort_category = "Xenowear"
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/officer, /datum/job/detective)
-	
+
 /datum/gear/accessory/skrell_badge
 	display_name = "skrellian SDTF badge"
 	path = /obj/item/clothing/accessory/badge/tags/skrell
@@ -167,3 +167,4 @@
 	path = /obj/item/clothing/mask/gas/vox
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_VOX)
+
