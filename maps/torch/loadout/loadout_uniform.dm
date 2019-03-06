@@ -20,6 +20,7 @@
 
 /datum/gear/uniform/scrubs
 	allowed_roles = STERILE_ROLES
+	allowed_branches = null
 
 /datum/gear/uniform/dress
 	allowed_roles = FORMAL_ROLES
