@@ -137,6 +137,12 @@
 	var/oxygen_amt = 18
 	var/carbon_amt = 0
 
+/obj/effect/spawner/newbomb/traitor
+	name = "TTV bomb - traitor"
+	assembly_type = /obj/item/device/assembly/signaler
+	phoron_amt = 14
+	oxygen_amt = 21
+
 /obj/effect/spawner/newbomb/timer
 	name = "TTV bomb - timer"
 	assembly_type = /obj/item/device/assembly/timer
