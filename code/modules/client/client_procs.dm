@@ -358,7 +358,7 @@
 		'html/images/sollogo.png',
 		'html/images/terralogo.png',
 		'html/images/talisman.png',
-		'html/images/torchltd.png',
+		'html/images/exologo.png',
 		'html/images/xynlogo.png',
 		'html/images/daislogo.png',
 		'html/images/eclogo.png',

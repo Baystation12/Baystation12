@@ -2882,8 +2882,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "gn" = (
-/obj/structure/table/rack,
-/obj/item/weapon/extinguisher,
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 8
@@ -2893,6 +2891,7 @@
 	c_tag = "Second Deck Hallway - Safe Room Foyer";
 	dir = 1
 	},
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
 "go" = (
@@ -4516,7 +4515,7 @@
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
 "jQ" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_11_berth_hatch";
@@ -4555,14 +4554,6 @@
 "jV" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/seconddeck)
-"jW" = (
-/obj/structure/sign/directions/bridge{
-	dir = 1;
-	pixel_y = 12;
-	pixel_z = 0
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/teleporter/seconddeck)
 "jX" = (
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -5932,6 +5923,7 @@
 	icon_state = "warningcorner";
 	dir = 4
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/seconddeck/center)
 "mY" = (
@@ -6714,6 +6706,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
@@ -8063,7 +8058,10 @@
 /area/engineering/engineering_monitoring)
 "rs" = (
 /obj/structure/sign/deck/second{
-	pixel_y = 32
+	pixel_y = 38
+	},
+/obj/structure/sign/warning/pods/west{
+	pixel_y = 25
 	},
 /turf/simulated/open,
 /area/hallway/primary/seconddeck/center)
@@ -8164,6 +8162,11 @@
 /obj/structure/sign/directions/engineering{
 	dir = 4;
 	pixel_y = 3;
+	pixel_z = 0
+	},
+/obj/structure/sign/directions/bridge{
+	dir = 1;
+	pixel_y = 10;
 	pixel_z = 0
 	},
 /turf/simulated/wall/r_wall/prepainted,
@@ -9171,14 +9174,12 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "uL" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1380;
-	icon_state = "closed";
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external/escapepod{
 	id_tag = "escape_pod_10_berth_hatch";
 	locked = 1;
 	name = "Escape Pod Five"
 	},
-/obj/machinery/shield_diffuser,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/foreport)
 "uM" = (
@@ -13753,6 +13754,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
+/obj/machinery/portable_atmospherics/canister/phoron/engine_setup,
 /turf/simulated/floor/tiled/techfloor,
 /area/vacant/prototype/engine)
 "Gk" = (
@@ -15538,6 +15540,8 @@
 /area/maintenance/seconddeck/foreport)
 "Na" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
+	frequency = 1441;
+	id = "rust_injector";
 	injecting = 1;
 	use_power = 1
 	},
@@ -16073,6 +16077,27 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/bluespace)
+"Os" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/catwalk,
+/obj/structure/sign/warning/pods/east{
+	dir = 4;
+	icon_state = "podseast";
+	pixel_x = -32
+	},
+/obj/structure/sign/warning/pods/west{
+	dir = 4;
+	icon_state = "podswest";
+	pixel_x = -44
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/seconddeck/fore)
 "Ot" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	icon_state = "intact";
@@ -17976,9 +18001,11 @@
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
 "Vf" = (
-/obj/item/modular_computer/console/preset/engineering{
-	icon_state = "console";
-	dir = 8
+/obj/machinery/computer/general_air_control/large_tank_control{
+	dir = 8;
+	input_tag = "rust_injector";
+	name = "R-UST Gas Injection Controls";
+	output_tag = null
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
@@ -18008,6 +18035,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
+/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup,
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "Vj" = (
@@ -31547,7 +31575,7 @@ bd
 GY
 Gs
 Wf
-Wf
+Os
 Mu
 Wh
 Ji
@@ -40037,7 +40065,7 @@ rq
 IK
 qC
 SI
-jW
+qu
 kh
 kB
 FV

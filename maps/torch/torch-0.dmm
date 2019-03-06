@@ -6784,6 +6784,11 @@
 	dir = 4
 	},
 /obj/machinery/vending/cigarette,
+/obj/structure/sign/deck/fifth{
+	dir = 8;
+	icon_state = "deck-5";
+	pixel_x = 40
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "oR" = (
@@ -6820,6 +6825,11 @@
 /obj/effect/floor_decal/corner/mauve{
 	icon_state = "corner_white";
 	dir = 8
+	},
+/obj/structure/sign/deck/fifth{
+	dir = 1;
+	icon_state = "deck-5";
+	pixel_y = -38
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
@@ -7589,6 +7599,9 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/sign/deck/fifth{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "qB" = (
@@ -7623,7 +7636,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fifthdeck/aft)
 "qD" = (
-/obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/brown/half,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,
@@ -7632,6 +7644,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "qE" = (
@@ -8582,6 +8595,11 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/structure/sign/deck/fifth{
+	dir = 8;
+	icon_state = "deck-5";
+	pixel_x = 40
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "sn" = (
@@ -8590,6 +8608,9 @@
 /area/hallway/primary/fifthdeck/fore)
 "so" = (
 /obj/effect/floor_decal/corner/brown/mono,
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
 "sp" = (
@@ -12469,6 +12490,12 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/cockpit)
+"FZ" = (
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "Gb" = (
 /obj/machinery/door/window/southright{
 	dir = 1;
@@ -13298,6 +13325,13 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/petrov/cell1)
+"Jn" = (
+/obj/effect/catwalk_plated,
+/obj/structure/closet/hydrant{
+	pixel_x = -32
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Jo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -16483,6 +16517,12 @@
 	},
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
+"VN" = (
+/obj/structure/closet/hydrant{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "VO" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/archaeology,
@@ -33041,7 +33081,7 @@ jB
 aX
 kU
 aX
-aX
+Jn
 aX
 oM
 zf
@@ -35458,7 +35498,7 @@ vf
 fi
 hp
 aJ
-UH
+FZ
 aX
 ee
 bk
@@ -35484,7 +35524,7 @@ xC
 AO
 fS
 Bm
-UH
+VN
 aJ
 mR
 nd

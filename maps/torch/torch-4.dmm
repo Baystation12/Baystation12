@@ -2744,7 +2744,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "afV" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_12_berth_hatch";
@@ -2755,7 +2755,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "afW" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_13_berth_hatch";
@@ -2766,7 +2766,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "afX" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_14_berth_hatch";
@@ -4396,7 +4396,7 @@
 /area/crew_quarters/safe_room/firstdeck)
 "akV" = (
 /obj/machinery/camera/network/first_deck{
-	c_tag = "Command Hallway - Fore Staboard";
+	c_tag = "First Deck Fore Hallway - Starboard Maintenence";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -8000,6 +8000,11 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/green/mono,
+/obj/structure/sign/warning/pods/west{
+	dir = 4;
+	icon_state = "podswest";
+	pixel_x = -40
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
 "azM" = (
@@ -8654,10 +8659,6 @@
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/hallway/primary/firstdeck/center)
-"aBK" = (
-/obj/structure/sign/warning/pods,
-/turf/simulated/wall/prepainted,
 /area/hallway/primary/firstdeck/center)
 "aBM" = (
 /obj/structure/railing/mapped{
@@ -11626,6 +11627,7 @@
 /area/maintenance/firstdeck/aftport)
 "aOD" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
+	id = "rust_injector";
 	injecting = 1;
 	use_power = 1
 	},
@@ -12329,7 +12331,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aQI" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_15_berth_hatch";
@@ -12340,7 +12342,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aQJ" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_16_berth_hatch";
@@ -12351,7 +12353,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aQK" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/escapepod{
 	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "escape_pod_17_berth_hatch";
@@ -16668,9 +16670,9 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "dsd" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "dtb" = (
@@ -17797,7 +17799,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/autopsy)
 "eJy" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "eKb" = (
@@ -20869,7 +20871,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "iej" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "iey" = (
@@ -21308,8 +21310,8 @@
 /area/rnd/checkpoint)
 "izd" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "iAb" = (
@@ -21990,6 +21992,15 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/command/armoury/access)
+"jsa" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "jsb" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -24081,12 +24092,12 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/security/detectives_office)
 "lJj" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 10;
 	icon_state = "intact"
 	},
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "lKb" = (
@@ -24420,7 +24431,7 @@
 	dir = 4
 	},
 /obj/machinery/camera/network/first_deck{
-	c_tag = "Command Hallway - Starboard";
+	c_tag = "First Deck Fore Hallway - Starboard";
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
@@ -25957,7 +25968,7 @@
 	dir = 4
 	},
 /obj/machinery/camera/network/first_deck{
-	c_tag = "Command Hallway - Port"
+	c_tag = "First Deck Fore Hallway - Port"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -25984,8 +25995,8 @@
 	dir = 9;
 	icon_state = "intact"
 	},
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "nZZ" = (
@@ -27452,9 +27463,9 @@
 /area/hallway/primary/firstdeck/fore)
 "pIW" = (
 /obj/structure/lattice,
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "pJb" = (
@@ -27562,9 +27573,9 @@
 /area/rnd/xenobiology/xenoflora)
 "pRm" = (
 /obj/structure/lattice,
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "pSb" = (
@@ -30560,11 +30571,11 @@
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "trC" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 6
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "tsb" = (
@@ -31137,7 +31148,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/processing)
 "vci" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "vcy" = (
@@ -32042,11 +32053,11 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "xSd" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 5
 	},
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "xTc" = (
@@ -50984,7 +50995,7 @@ umI
 ayg
 ure
 awd
-aBK
+auN
 aFl
 aGw
 aHh
@@ -56838,7 +56849,7 @@ ati
 aug
 avu
 aqU
-ivT
+jsa
 hnN
 cgu
 awX
