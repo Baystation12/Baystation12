@@ -1,0 +1,14 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - bugfix: "You are able to construct glass and material airlocks again."
+  - bugfix: "Airlocks that have their control circuits removed will remember their paint jobs after the circuit is re-inserted."
+  - tweak: "Atmospheric tanks now hold more CO2, H2, and O2 in the tanks due to increased usage on board."
+  - maptweak: "Camera networks have been adjusted to reflect reality. The lounge is now located in the deck 4 camera network, as is the pathfinder's office camera. The deck 1 fore hallway cameras have been renamed to reflect their location better. The Adherent room now has a camera."
+  - maptweak: "Adds deck 5 signage and warning signs to the escape pod launch areas on deck 4, in addition to more escape pod direction signs to make sure confused passengers know where to go to find pods on decks 2 and 4, and the deck 2 stairwell is now more well-lit."
+  - maptweak: "The R-UST now has an atmos control console in the control room so engineers can adjust the injector port for gas. Don't forget to refresh the input."
+  - maptweak: "New emergency shutters have been added to deck 4 to limit the decompression caused by escape pod launch procedures."
+  - maptweak: "At the direction of the Expeditionary Command Fire Marshal, there are now more fire closets on board the Torch."
+  - maptweak: "All the nacelles now have phoron windows installed on half-walls to conform with the aesthetic on the rest of the ship."
+  - rscadd: "After evaluating flaws in  evacuation procedures, all escape pod outer hatches now have a manual bolt override that can be manipulated with a wrench after opening the cover in the event that the power is offline. As a reminder, the outer hatch must be closed and the bolts re-engaged before the pod will launch."
+  - tweak: "Code Delta announcement no longer specifically mentions self destruct due to rare cases in which it is engaged without the destruct mechanism being online. Code Delta procedures have not changed."
