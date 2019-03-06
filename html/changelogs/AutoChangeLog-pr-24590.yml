@@ -1,0 +1,4 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - rscadd: "Added a moderately weak TTV to the traitor uplink. 40 TC cost."
