@@ -1,7 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Security lobby door is now accessible by Sol Gov crew"
-  - bugfix: "Bridge safe room is now all-access"
-  - bugfix: "Merchant shuttle doors and windoors now require merchant access"
-  - maptweak: "Bridge access hallways now have their own area tags - Bridge Port Access Hallway and Bridge Starboard Access Hallway"

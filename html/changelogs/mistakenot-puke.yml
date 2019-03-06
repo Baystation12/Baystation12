@@ -1,5 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - tweak: "Species who can eat mobs or items will now get an action button to puke it back up."
-  - rscdel: "Removed Regurgitate verb in favour of above."
