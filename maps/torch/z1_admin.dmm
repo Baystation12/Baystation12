@@ -3898,7 +3898,6 @@
 /area/rescue_base/base)
 "ajq" = (
 /obj/structure/table/reinforced,
-/obj/prefab/hand_teleporter,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -10364,7 +10363,6 @@
 "ayS" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/gun/energy/gun/nuclear,
-/obj/prefab/hand_teleporter,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1

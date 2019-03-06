@@ -246,7 +246,6 @@ var/list/worths = list(
 					/obj/item/weapon/FixOVein = 500,
 					/obj/item/weapon/bonesetter = 150,
 					/obj/item/weapon/locator = 100,
-					/obj/item/integrated_circuit/manipulation/bluespace_rift = 7600,
 					/obj/item/weapon/wrench = 30,
 					/obj/item/weapon/screwdriver = 15,
 					/obj/item/weapon/wirecutters = 25,
@@ -768,4 +767,3 @@ var/list/worths = list(
 					/obj/machinery/bookbinder = -1200,
 					/obj/machinery = -1000,
 					) //Must be in descending order. Child before parents, otherwise it doesn't work.,
-

@@ -408,7 +408,6 @@ datum/objective/steal
 
 	var/global/possible_items[] = list(
 		"the captain's antique laser gun" = /obj/item/weapon/gun/energy/captain,
-		"a bluespace rift generator" = /obj/item/integrated_circuit/manipulation/bluespace_rift,
 		"an RCD" = /obj/item/weapon/rcd,
 		"a jetpack" = /obj/item/weapon/tank/jetpack,
 		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
@@ -864,4 +863,3 @@ datum/objective/heist/salvage
 			rval = 2
 		return 0
 	return rval
-

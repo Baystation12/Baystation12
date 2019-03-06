@@ -1549,7 +1549,6 @@
 /turf/simulated/floor/airless,
 /area/space)
 "dE" = (
-/obj/prefab/hand_teleporter,
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "CO's Desk";

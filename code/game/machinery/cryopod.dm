@@ -168,7 +168,6 @@
 
 	// These items are preserved when the process() despawn proc occurs.
 	var/list/preserve_items = list(
-		/obj/item/integrated_circuit/manipulation/bluespace_rift,
 		/obj/item/integrated_circuit/input/teleporter_locator,
 		/obj/item/weapon/card/id/captains_spare,
 		/obj/item/weapon/aicard,
