@@ -571,6 +571,7 @@
 /area/shuttle/merchant/home
 	name = "\improper Merchant Vessel"
 	icon_state = "shuttlegrn"
+	req_access = list(access_merchant)
 
 //Merc
 
@@ -1198,9 +1199,20 @@
 	icon_state = "bridge"
 	req_access = list(access_bridge)
 
+/area/bridge/hallway
+	name = "\improper Bridge Access Hallway"
+	icon_state = "bridge_hallway"
+	req_access = list(access_solgov_crew)
+
+/area/bridge/hallway/port
+	name = "\improper Bridge Port Access Hallway"
+
+/area/bridge/hallway/starboard
+	name = "\improper Bridge Starboard Access Hallway"
+
 /area/bridge/meeting_room
 	name = "\improper Heads of Staff Meeting Room"
-	icon_state = "bridge"
+	icon_state = "bridge_meeting"
 	ambience = list()
 	sound_env = MEDIUM_SOFTFLOOR
 
