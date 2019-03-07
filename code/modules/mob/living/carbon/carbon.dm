@@ -424,20 +424,7 @@
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
  */
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
-	if((MUTATION_FAT in mutations) && issmall(victim))
-		return DEVOUR_FAST
 	return FALSE
-
-/mob/living/carbon/onDropInto(var/atom/movable/AM)
-	for(var/e in contents)
-		var/atom/movable/stomach_content = e
-		if(stomach_content.contains(AM))
-			if(can_devour(AM))
-				AM.forceMove(src)
-				return null
-			src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
-			return loc
-	return ..()
 
 /mob/living/carbon/proc/should_have_organ(var/organ_check)
 	return 0

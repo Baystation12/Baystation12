@@ -1471,8 +1471,6 @@
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if(istype(stomach))
 		victim.forceMove(stomach)
-	else
-		..()
 
 /mob/living/carbon/human/should_have_organ(var/organ_check)
 
