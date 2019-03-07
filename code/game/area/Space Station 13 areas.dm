@@ -173,6 +173,7 @@ area/space/atmosalert()
 /area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 	req_access = list(access_cent_specops)
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
@@ -186,6 +187,7 @@ area/space/atmosalert()
 	name = "\improper Skipjack"
 	icon_state = "yellow"
 	req_access = list(access_syndicate)
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/supply
 	name = "Supply Shuttle"
