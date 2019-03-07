@@ -52,11 +52,13 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_production = 2
 	products = list("helium" = 1)
 
+/* this reaction is interfering with other, more interesting reactions because it's reacting with itself. unless someone wants to add in a reaction priority, this needs to be removed.
 /decl/fusion_reaction/deuterium_deuterium
 	p_react = "deuterium"
 	s_react = "deuterium"
 	energy_consumption = 1
 	energy_production = 2
+*/
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
