@@ -572,6 +572,7 @@
 	name = "\improper Merchant Vessel"
 	icon_state = "shuttlegrn"
 	req_access = list(access_merchant)
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 //Merc
 
@@ -1545,6 +1546,7 @@
 	name = "\improper Administration Shuttle"
 	icon_state = "shuttlered"
 	req_access = list(access_cent_general)
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/escape_pod1/centcom
 	icon_state = "shuttle"
