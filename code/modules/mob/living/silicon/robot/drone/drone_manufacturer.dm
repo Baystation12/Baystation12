@@ -33,15 +33,14 @@
 /obj/machinery/drone_fabricator/unify	//NonSpecific dronetype
 	drone_type = null
 	fabricator_tag = "Unified Drone Fabricator"
-
-/obj/machinery/drone_fabricator/unify/create_drone(var/client/player)
-	choose_dronetype() //Call Drone choice before executing create_drone
-	..()
-
-/obj/machinery/drone_fabricator/proc/choose_dronetype()
 	var/list/possible_drones = list("Construction Module" = /mob/living/silicon/robot/drone/construction,
 	"Maintenance Module" = /mob/living/silicon/robot/drone,) //List of drone types to choose from.
-	
+
+/obj/machinery/drone_fabricator/unify/create_drone(var/client/player)
+	choose_dronetype(possible_drones) //Call Drone choice before executing create_drone
+	..()
+
+/obj/machinery/drone_fabricator/proc/choose_dronetype(possible_drones)
 	var/choice
 	choice = input(usr,"What module would you like to use?") as null|anything in possible_drones
 	if(!choice) return
