@@ -44,37 +44,40 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 //  lithium
 //  boron
 
-// Basic power production reactions.
-// This is not necessarily realistic, but it makes a basic failure more spectacular.
+// Power Production Cycle -- Loosely based on the Proton-Proton chain.
 /decl/fusion_reaction/hydrogen_hydrogen
 	p_react = "hydrogen"
 	s_react = "hydrogen"
 	energy_consumption = 1
 	energy_production = 2
-	products = list("helium" = 1)
+	products = list("deuterium" = 2)
 	priority = 10
+	radiation = 5
 
-/decl/fusion_reaction/deuterium_deuterium
+/decl/fusion_reaction/deuterium_hydrogen
 	p_react = "deuterium"
-	s_react = "deuterium"
+	s_react = "hydrogen"
 	energy_consumption = 1
 	energy_production = 2
+	products = list("tritium" = 2)
 	priority = 0
+	radiation = 5
 
-// Advanced production reactions (todo)
-/decl/fusion_reaction/deuterium_helium
-	p_react = "deuterium"
-	s_react = "helium"
-	energy_consumption = 1
-	energy_production = 5
-	radiation = 2
-
-/decl/fusion_reaction/deuterium_tritium
-	p_react = "deuterium"
+/decl/fusion_reaction/tritium_tritium
+	p_react = "tritium"
 	s_react = "tritium"
 	energy_consumption = 1
 	energy_production = 1
-	products = list("helium" = 1)
+	products = list("hydrogen" = 2, "helium" = 1)
+	instability = 0.5
+	radiation = 3
+
+/decl/fusion_reaction/helium_hyrdogen
+	p_react = "helium"
+	s_react = "hydrogen"
+	energy_consumption = 1
+	energy_production = 1
+	products = list("lithium" = 1)
 	instability = 0.5
 	radiation = 3
 
@@ -84,7 +87,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_consumption = 2
 	energy_production = 0
 	radiation = 3
-	products = list("tritium"= 1)
+	products = list("tritium"= 2)
 	instability = 1
 
 // Unideal/material production reactions
