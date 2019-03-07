@@ -90,6 +90,10 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	products = list("tritium"= 2)
 	instability = 1
 
+// Phoron-based Heavy Elements Synthesis
+
+
+
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
 	p_react = "oxygen"

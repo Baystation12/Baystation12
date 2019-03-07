@@ -50,9 +50,9 @@
 							/obj/item/stack/cable_coil = 5
 							)
 
-/datum/design/circuit/fusion/core/bluespace_confinement
+/obj/item/weapon/circuitboard/bluespace_core
 	name = "internal circuitry (bluespace-confined fusion core)"
-	build_path = /obj/machinery/power/fusion_core/bluespace_confinement
+	build_path = /obj/machinery/power/fusion_core/bluespace_core
 	board_type = "machine"
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 5, TECH_POWER = 5)
 	req_components = list(
@@ -143,10 +143,10 @@
 	build_path = /obj/item/weapon/circuitboard/fusion_core
 	sort_string = "LAAAH"
 
-/datum/design/circuit/fusion/core/bluespace_confinement
+/datum/design/circuit/fusion/core/bluespace_core
 	name = "bluespace-confinement fusion core"
 	id = "fusion_core"
-	build_path = /obj/item/weapon/circuitboard/fusion_core/bluespace_confinement
+	build_path = /obj/item/weapon/circuitboard/bluespace_core
 	sort_string = "LAAAI"
 
 /datum/design/circuit/fusion/injector

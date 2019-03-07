@@ -1,7 +1,7 @@
 #define FUSION_ENERGY_PER_K        20
 #define FUSION_INSTABILITY_DIVISOR 50000
 #define FUSION_RUPTURE_THRESHOLD   10000
-#define FUSION_REACTANT_CAP        10000
+#define FUSION_FIELD_CAP_COEFF	   200
 
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
@@ -20,7 +20,7 @@
 	var/tick_instability = 0
 	var/percent_unstable = 0
 	var/confinement_stability = 1 // adjustment to instability per tick due to core upgrades
-
+	var/fusion_reactant_cap = 0
 	var/obj/machinery/power/fusion_core/owned_core
 	var/list/reactants = list()
 	var/list/particle_catchers = list()
@@ -125,7 +125,7 @@
 		var/amount = reactants[reactant]
 		if(amount < 1)
 			reactants.Remove(reactant)
-		else if(amount >= FUSION_REACTANT_CAP)
+		else if(amount >= fusion_reactant_cap)
 			var/radiate = rand(3 * amount / 4, amount / 4)
 			reactants[reactant] -= radiate
 			radiation += radiate
@@ -237,6 +237,7 @@
 		calc_size = 13
 	field_strength = new_strength
 	change_size(calc_size)
+	fusion_reactant_cap = field_strength * FUSION_FIELD_CAP_COEFF // Excess reactants will be ejected over the next few calls to Process()
 
 /obj/effect/fusion_em_field/proc/AddEnergy(var/a_energy, var/a_plasma_temperature)
 	energy += a_energy
@@ -403,8 +404,10 @@
 					if(max_num_reactants < 1)
 						continue
 
-				//randomly determined amount to react
-				var/amount_reacting = rand(1, max_num_reactants)
+				// //randomly determined amount to react
+				//var/amount_reacting = rand(1, max_num_reactants)
+				// Removed the random reactants amount, to be possibly replaced by an amount_reacting dependent on properties of the reactor environment
+				var/amount_reacting = max_num_reactants
 
 				//removing the reacting substances from the list of substances that are primed to react this cycle
 				//if there aren't enough of that substance (there should be) then modify the reactant amounts accordingly
@@ -471,4 +474,4 @@
 #undef FUSION_HEAT_CAP
 #undef FUSION_INSTABILITY_DIVISOR
 #undef FUSION_RUPTURE_THRESHOLD
-#undef FUSION_REACTANT_CAP
+#undef FUSION_FIELD_CAP_COEFF
