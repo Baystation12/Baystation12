@@ -14,8 +14,6 @@
 	hidden_from_codex = FALSE
 	bandages_icon = 'icons/mob/bandage.dmi'
 
-	gluttonous = GLUT_TINY
-
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
