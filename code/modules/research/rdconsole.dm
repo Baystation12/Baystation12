@@ -95,7 +95,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	for(var/obj/machinery/r_n_d/D in range(4, src))
 		if(D.linked_console != null || D.panel_open)
 			continue
-		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer))
+		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && id == 1) // Prevents robotics R&D console from linking to a destructive analyzer
 			if(linked_destroy == null)
 				linked_destroy = D
 				D.linked_console = src
@@ -675,7 +675,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_destroy)
 				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A>"
 			else
-				dat += "<LI>(No Destructive Analyzer Linked)"
+				if (id == 1) dat += "<LI>(No Destructive Analyzer Linked)"
 			if(linked_lathe)
 				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A>"
 			else
