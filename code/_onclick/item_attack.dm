@@ -45,12 +45,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return I.attack(src, user, user.zone_sel.selecting)
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && src.zone_sel.selecting == BP_MOUTH)
+	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
-		else if(devour(I))
+		if(devour(I))
 			return TRUE
 	return ..()
 
