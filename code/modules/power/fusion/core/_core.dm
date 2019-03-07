@@ -18,6 +18,13 @@
 	var/field_strength = 1//0.01
 	var/initial_id_tag
 
+/obj/machinery/power/fusion_core/bluespace_confined
+	name = "\improper R-UST Mk. 9 Bluespace-Confined Tokamak core"
+	desc = "An enormous solenoid for generating extremely high power electromagnetic fields. This upgraded form utilizes a bubble of bluespace to assist with containment, enabling greater instability control at a power cost."
+	idle_power_usage = 1000
+	active_power_usage = 2000
+	anchored = 0
+
 /obj/machinery/power/fusion_core/mapped
 	anchored = 1
 

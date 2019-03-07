@@ -19,6 +19,7 @@
 	var/field_strength = 0.01
 	var/tick_instability = 0
 	var/percent_unstable = 0
+	var/confinement_stability = 1 // adjustment to instability per tick due to core upgrades
 
 	var/obj/machinery/power/fusion_core/owned_core
 	var/list/reactants = list()
@@ -38,6 +39,12 @@
 
 	var/last_range
 	var/last_power
+
+/obj/effect/fusion_em_field/bluespace_confined
+	name = "bluespace-confined electromagnetic field"
+	desc = "A coruscating, barely visible field of energy. It is shaped like a slightly flattened torus, held within a bluespace confinement bottle for added stability."
+	confinement_stability = 0.9
+	// Add different lighting / effects for the bluespace part
 
 /obj/effect/fusion_em_field/New(loc, var/obj/machinery/power/fusion_core/new_owned_core)
 	..()
@@ -149,7 +156,7 @@
 
 /obj/effect/fusion_em_field/proc/check_instability()
 	if(tick_instability > 0)
-		percent_unstable += (tick_instability*size)/FUSION_INSTABILITY_DIVISOR
+		percent_unstable += (confinement_stability*tick_instability*size)/FUSION_INSTABILITY_DIVISOR
 		tick_instability = 0
 	else
 		if(percent_unstable < 0)

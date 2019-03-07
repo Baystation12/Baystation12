@@ -12,7 +12,21 @@
 	var/initial_id_tag
 	var/rate = 3
 	var/mega_energy = 1
+	var/min_power = 1
+	var/max_power = 50
+	var/power_consumption = 1500
 
+/obj/machinery/power/emitter/gyrotron/efficient
+	name = "high-efficiency gyrotron"
+	desc = "It is a more efficient heavy duty industrial gyrotron suited for powering fusion reactors."
+	power_consumption = 1000
+	max_power = 40
+
+/obj/machinery/power/emitter/gyrotron/overclocked
+	name = "overclocked gyrotron"
+	desc = "It is a more powerful heavy duty industrial gyrotron suited for powering fusion reactors."
+	max_power = 75
+	power_consumption = 1750
 
 /obj/machinery/power/emitter/gyrotron/anchored
 	anchored = 1
