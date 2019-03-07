@@ -676,25 +676,36 @@
 		location.add_vomit_floor(src, toxvomit, stomach.ingested)
 	nutrition -= 30
 
-/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3)
+/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3, var/deliberate = FALSE)
+
 	set waitfor = 0
-	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
+
+	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || stat == DEAD || lastpuke)
 		return
-	level = Clamp(level, 1, 3)
+
+	if(deliberate)
+		if(incapacitated())
+			to_chat(src, SPAN_WARNING("You cannot do that right now."))
+			return
+		var/datum/gender/G = gender_datums[gender]
+		visible_message(SPAN_DANGER("\The [src] starts sticking a finger down [G.his] own throat. It looks like [G.he] [G.is] trying to throw up!"))
+		if(!do_after(src, 30))
+			return
+		timevomit = max(timevomit, 5)
+
 	timevomit = Clamp(timevomit, 1, 10)
-	if(stat == DEAD)
-		return
-	if(!lastpuke)
-		lastpuke = 1
-		to_chat(src, SPAN_WARNING("You feel nauseous..."))
-		if(level > 1)
-			sleep(150 / timevomit)	//15 seconds until second warning
-			to_chat(src, SPAN_WARNING("You feel like you are about to throw up!"))
-			if(level > 2)
-				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
-				empty_stomach(toxvomit)
-		sleep(350)	//wait 35 seconds before next volley
-		lastpuke = 0
+	level = Clamp(level, 1, 3)
+
+	lastpuke = TRUE
+	to_chat(src, SPAN_WARNING("You feel nauseous..."))
+	if(level > 1)
+		sleep(150 / timevomit)	//15 seconds until second warning
+		to_chat(src, SPAN_WARNING("You feel like you are about to throw up!"))
+		if(level > 2)
+			sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
+			empty_stomach(toxvomit)
+	sleep(350)	//wait 35 seconds before next volley
+	lastpuke = FALSE
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
