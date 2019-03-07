@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "Antag shuttles, merchant shuttle, and admin shuttles are now shielded against rad and ion storms."
