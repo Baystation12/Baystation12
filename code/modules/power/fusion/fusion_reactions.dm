@@ -10,6 +10,7 @@ var/list/fusion_reactions
 	var/instability = 0
 	var/list/products = list()
 	var/minimum_reaction_temperature = 100
+	var/priority = 100
 
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
@@ -51,12 +52,14 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_consumption = 1
 	energy_production = 2
 	products = list("helium" = 1)
+	priority = 10
 
 /decl/fusion_reaction/deuterium_deuterium
 	p_react = "deuterium"
 	s_react = "deuterium"
 	energy_consumption = 1
 	energy_production = 2
+	priority = 0
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
