@@ -547,7 +547,7 @@
 					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the local north. \
 					A direction value of 0 will open the rift on top of the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
 	icon_state = "bluespace"
-	complexity = 25
+	complexity = 100
 	size = 3
 	cooldown_per_use = 10 SECONDS
 	power_draw_per_use = 300
@@ -558,11 +558,13 @@
 	action_flags = IC_ACTION_LONG_RANGE
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
-	matter = list(MATERIAL_STEEL = 10000)
+	matter = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 200)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
+	if(!(get(z) in GetConnectedZlevels(get_z(tporter))))
+		tporter = null
 
 	var/turf/rift_location = get_turf(src)
 	if(!rift_location || !isPlayerLevel(rift_location.z))
