@@ -1,0 +1,7 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "The IC printer can now take any materials as inputs."
+  - bugfix: "Circuits properly init their steel cost now; this means that some are much more expensive than previously."
+  - tweak: "The TP circuit now costs more and rarer materials, and has a very high complexity: you're going to need the medium assembly or larger to house it."
+  - tweak: "The TP circuit will not function properly if the slaved computer is on a z level not connected to its location."
