@@ -91,4 +91,4 @@
 	return TRUE
 
 /mob/living/carbon/proc/move_to_stomach(atom/movable/victim)
-	victim.forceMove(src)
+	return
