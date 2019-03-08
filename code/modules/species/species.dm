@@ -752,7 +752,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 					dat += "</br><b>Resistant to [kind].</b>"
 			dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
 			dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
-			dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
+			if(LAZYLEN(poison_types))
+				dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
 		dat += "</td>"
 	dat += "</tr>"
