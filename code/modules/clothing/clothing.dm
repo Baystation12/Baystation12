@@ -572,6 +572,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_FEET
 
 	var/can_hold_knife
+	var/image/knife_overlay
 	var/obj/item/holding
 
 	permeability_coefficient = 0.50
@@ -600,7 +601,7 @@ BLIND     // can't see anything
 		holding = null
 		playsound(get_turf(src), 'sound/effects/holster/sheathout.ogg', 25)
 	else
-		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
+		to_chat(usr, "<span class='warning'>You need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
 
 	if(!holding)
@@ -630,9 +631,13 @@ BLIND     // can't see anything
 		return ..()
 
 /obj/item/clothing/shoes/on_update_icon()
-	overlays.Cut()
+	if (knife_overlay == null)
+		knife_overlay = image(icon, "[icon_state]_knife")
+
 	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
+		overlays |= knife_overlay
+	if(holding == null)
+		overlays -= knife_overlay
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
