@@ -157,7 +157,7 @@
 		var/hide_item = !has_edge(W) || !can_slice_here
 
 		if (hide_item)
-			if (W.w_class >= src.w_class || is_robot_module(W))
+			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/weapon/reagent_containers/food/condiment))
 				return
 			if(!user.unEquip(W, src))
 				return
