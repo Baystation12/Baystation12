@@ -1,6 +1,0 @@
-author: "afirpo"
-delete-after: True
-changes: 
-  - rscadd: "now it is possible to export virus dishes to earn credits (supply points)."
-  - bugfix: "now Toxicity related to a virus dish (Incubator) works again."
-  - tweak: "checking for virus dishes already exported in the past or not analyzed at all (those MUST NOT be exported!)."

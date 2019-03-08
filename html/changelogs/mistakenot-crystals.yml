@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - rscadd: "Adamantine golem extracts now contain crystalizing agent."
-  - rscadd: "Crystalizing agent can be used to produce resin globules that work like medpacks for adherent and golems."
-  - tweak: "Golems can now be operated on by substituting a surgical drill for a scalpel, and resin packs for bone gel/fixovein/medpacks/cautery."
