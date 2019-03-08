@@ -394,10 +394,12 @@
 	else if(M.chem_doses[type] < 5 * threshold)
 		if(prob(50))
 			M.Weaken(2)
+			M.add_chemical_effect(CE_SEDATE, 1)
 		M.drowsyness = max(M.drowsyness, 20)
 	else
 		M.sleeping = max(M.sleeping, 20)
 		M.drowsyness = max(M.drowsyness, 60)
+		M.add_chemical_effect(CE_SEDATE, 1)
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/chloralhydrate
@@ -423,8 +425,10 @@
 	else if(M.chem_doses[type] < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
+		M.add_chemical_effect(CE_SEDATE, 1)
 	else
 		M.sleeping = max(M.sleeping, 30)
+		M.add_chemical_effect(CE_SEDATE, 1)
 
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
