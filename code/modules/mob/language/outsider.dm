@@ -87,6 +87,16 @@
 	machine_understands = 0
 	shorthand = "Vox"
 
+/datum/language/vox/can_speak_special(var/mob/speaker)
+	if(!ishuman(speaker))
+		return FALSE
+	var/mob/living/carbon/human/H = speaker
+	var/obj/item/organ/internal/hindtongue/tongue = H.internal_organs_by_name[BP_HINDTONGUE]
+	if(!istype(tongue) || !tongue.is_usable())
+		to_chat(speaker, SPAN_WARNING("You are not capable of speaking [name]!"))
+		return FALSE
+	return TRUE
+
 /datum/language/vox/get_random_name()
 	return ..(FEMALE,1,6)
 
