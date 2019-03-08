@@ -56,7 +56,7 @@ var/datum/robolimb/basic_robolimb
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
-/datum/robolimb/hesphiastos/alt/monitor
+/datum/robolimb/hephaestus/alt/monitor
 	company = "Hephaestus Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_monitor.dmi'
 	allowed_bodytypes = list(SPECIES_IPC)
@@ -147,7 +147,7 @@ var/datum/robolimb/basic_robolimb
 	can_eat = 1
 	skintone = 1
 	unavailable_at_fab = 1
-	allowed_bodytypes = list(SPECIES_IPC)
+	species_cannot_use = list(SPECIES_IPC)
 
 /datum/robolimb/grayson
 	company = "Grayson"
