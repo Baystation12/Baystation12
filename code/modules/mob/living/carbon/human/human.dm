@@ -638,10 +638,10 @@
 		return 0
 	return 1
 
-/mob/living/proc/empty_stomach(var/toxvomit)
+/mob/living/proc/empty_stomach()
 	return
 
-/mob/living/carbon/human/empty_stomach(var/toxvomit)
+/mob/living/carbon/human/empty_stomach()
 
 	Stun(3)
 
@@ -672,11 +672,14 @@
 	visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 	var/turf/location = loc
-	if (istype(location, /turf/simulated))
-		location.add_vomit_floor(src, toxvomit, stomach.ingested)
-	nutrition -= 30
+	if(istype(location, /turf/simulated))
+		var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(location)
+		if(stomach.ingested.total_volume)
+			stomach.ingested.trans_to_obj(splat, min(15, stomach.ingested.total_volume))
+		handle_additional_vomit_reagents(splat)
+		splat.update_icon()
 
-/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3, var/deliberate = FALSE)
+/mob/living/carbon/human/proc/vomit(var/timevomit = 1, var/level = 3, var/deliberate = FALSE)
 
 	set waitfor = 0
 
@@ -703,7 +706,7 @@
 		to_chat(src, SPAN_WARNING("You feel like you are about to throw up!"))
 		if(level > 2)
 			sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
-			empty_stomach(toxvomit)
+			empty_stomach()
 	sleep(350)	//wait 35 seconds before next volley
 	lastpuke = FALSE
 
@@ -1693,7 +1696,7 @@
 /mob/living/carbon/human/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
 	..()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
+		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
 			if(should_have_organ(BP_HEART))
 				vessel.trans_to_obj(vomit, 5)
