@@ -9,7 +9,7 @@
 	spawn_positions = 1
 	selection_color = "#667700"
 	req_admin_notify = 1
-	spawnpoint_override = "UNSC Marine Company Officer Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_co
 	is_whitelisted = 1
 	//job_guide = "Your responsibility is to command the shipboard complement of marines. Nominally you answer to the captain, but he has limited control over you once deployed. Remember that a good soldier leads from the front, but you can't lead if you're dead."
@@ -25,7 +25,7 @@
 	department_flag = MARXO
 	total_positions = 1
 	spawn_positions = 1
-	spawnpoint_override = "UNSC Marine Company Sergeant Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_xo
 	selection_color = "#667700"
 	req_admin_notify = 1
@@ -42,7 +42,7 @@
 	department_flag = MARSL
 	total_positions = 2
 	spawn_positions = 6
-	spawnpoint_override = "UNSC Marine Squad Leader Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_sl
 	selection_color = "#667700"
 	//job_guide = "You lead a squad of marines (not yet implemented, so pick some guys to be in your squad and try to RP it). Your marines are the best of the best, but they're only human."
@@ -54,7 +54,7 @@
 	title = "Infantry Weapons Officer"
 	total_positions = 2
 	spawn_positions = 4
-	spawnpoint_override = "UNSC Frigate"
+	spawnpoint_override = "UNSC Base Spawns"
 	min_rank = RANK_GYSGT
 	default_rank = RANK_GYSGT
 	max_rank = RANK_MGYSGT
@@ -74,7 +74,7 @@
 	department_flag = MAR
 	total_positions = -1
 	spawn_positions = 12
-	spawnpoint_override = "UNSC Marine Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine
 	selection_color = "#667700"
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
@@ -89,7 +89,7 @@
 	department_flag = MARDR
 	total_positions = 3
 	spawn_positions = 5
-	spawnpoint_override = "UNSC Frigate"
+	spawnpoint_override = "UNSC Base Spawns"
 	alt_titles = list("Light Armored Vehicle Operator","Heavy Armored Vehicle Operator","Support Vehicle Operator","Tilt-rotor/VTOL Operator")
 
 /datum/job/UNSC_ship/marine/specialist
@@ -97,7 +97,7 @@
 	department_flag = MARSPEC
 	total_positions = 3
 	spawn_positions = 8
-	spawnpoint_override = "UNSC Combat Engineer Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	alt_titles = list("Field Radio Operator","Explosive Ordnance Disposal Marine","Hazardous Materials Marine")
 
 /obj/structure/closet/unsc_wardrobe/marine
@@ -118,7 +118,7 @@
 	new /obj/item/clothing/suit/storage/marine(src)
 
 //UNSC Heaven Above ODST Jobs
-
+/*
 /datum/job/HeavenAbove_ODST
 	title = "Orbital Drop Shock Trooper"
 	total_positions = 5
@@ -153,3 +153,4 @@
 	access = list(142,144,145,110,192,300,306,309,310,311)
 	//spawnpoint_override = "UNSC Bertels ODST Officer Spawn"
 	is_whitelisted = 1
+*/
