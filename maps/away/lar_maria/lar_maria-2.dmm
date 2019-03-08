@@ -1466,7 +1466,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)

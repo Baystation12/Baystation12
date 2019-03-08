@@ -490,7 +490,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -526,7 +526,7 @@
 	frequency = 1431;
 	id_tag = "guppy_shuttle_outer";
 	name = "Guppy External Access";
-	req_access = list(89)
+	req_access = list("ACCESS_TORCH_GUP")
 	},
 /obj/machinery/shield_diffuser,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -796,7 +796,7 @@
 	frequency = 1431;
 	id_tag = "guppy_shuttle_outer";
 	name = "Guppy External Access";
-	req_access = list(89)
+	req_access = list("ACCESS_TORCH_GUP")
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1167,7 +1167,7 @@
 	id_tag = "calypso_shuttle";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(88);
+	req_access = list("ACCESS_TORCH_EXPLO");
 	tag_exterior_sensor = "calypso_shuttle_sensor_external"
 	},
 /obj/machinery/light/small{
@@ -3058,7 +3058,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
@@ -4348,7 +4348,7 @@
 	id_tag = "petrov_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = 0;
-	req_access = list(list(1,13,200));
+	req_access = list(list("ACCESS_SECURITY","ACCESS_EXTERNAL","ACCESS_TORCH_PETROV"));
 	tag_airpump = "petrov_shuttle_dock_pump";
 	tag_chamber_sensor = "petrov_shuttle_dock_sensor";
 	tag_exterior_door = "petrov_shuttle_dock_outer";
@@ -5326,7 +5326,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -5594,7 +5594,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -7304,7 +7304,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /obj/structure/cable/green{
 	d2 = 2;
@@ -7589,7 +7589,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/aft)
@@ -7617,7 +7617,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/aft)
@@ -10483,7 +10483,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
@@ -11790,7 +11790,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
@@ -13184,7 +13184,7 @@
 /obj/machinery/computer/shuttle_control{
 	dir = 4;
 	icon_state = "computer";
-	req_access = list(201);
+	req_access = list("ACCESS_TORCH_PETROV_HELM");
 	shuttle_tag = "Petrov"
 	},
 /obj/machinery/newscaster{
@@ -13456,7 +13456,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -13821,7 +13821,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	
 	},
 /obj/structure/handrai,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -15043,7 +15043,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
@@ -15110,7 +15110,7 @@
 	name = "Petrov Interior Door Control";
 	pixel_x = -5;
 	pixel_y = 6;
-	req_access = list(207)
+	req_access = list("ACCESS_TORCH_PETROV_SEC")
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "PetrovBiohazard";
@@ -15589,7 +15589,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/computer/atmoscontrol/laptop{
 	monitored_alarm_ids = list("petrov1","petrov2","petrov3");
-	req_access = list(74)
+	req_access = list("ACCESS_TORCH_PETROV_MAINT")
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -17331,7 +17331,7 @@
 	id_tag = "petrov_shuttle_airlock";
 	pixel_x = -24;
 	pixel_y = 0;
-	req_access = list(200);
+	req_access = list("ACCESS_TORCH_PETROV");
 	tag_airpump = "petrov_shuttle_pump";
 	tag_chamber_sensor = "petrov_shuttle_sensor";
 	tag_exterior_door = "petrov_shuttle_outer";
@@ -17526,7 +17526,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /obj/structure/cable/cyan{
 	d1 = 2;

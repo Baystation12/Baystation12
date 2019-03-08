@@ -1478,7 +1478,7 @@
 	master_tag = "constructionsite_airlock";
 	pixel_x = 20;
 	pixel_y = 0;
-	req_access = list(10)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
@@ -1490,7 +1490,7 @@
 	master_tag = "constructionsite_airlock";
 	pixel_x = -20;
 	pixel_y = 0;
-	req_access = list(10)
+	req_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -1608,7 +1608,7 @@
 	id_tag = "constructionsite_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	req_access = list(10);
+	req_access = newlist();
 	tag_airpump = "constructionsite_vent";
 	tag_chamber_sensor = "constructionsite_sensor";
 	tag_exterior_door = "constructionsite_outer";

@@ -241,7 +241,7 @@
 				callHook("reassign_employee", list(id_card))
 		if("access")
 			if(href_list["allowed"] && computer && can_run(user, 1))
-				var/access_type = text2num(href_list["access_target"])
+				var/access_type = href_list["access_target"]
 				var/access_allowed = text2num(href_list["allowed"])
 				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
 					for(var/access in user_id_card.access)

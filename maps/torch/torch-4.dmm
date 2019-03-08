@@ -25,7 +25,7 @@
 /area/medical/virology)
 "aag" = (
 /obj/machinery/smartfridge/secure/virology{
-	req_access = list(list(39,45))
+	req_access = list(list("ACCESS_VIROLOGY","ACCESS_SURGERY"))
 	},
 /obj/machinery/requests_console{
 	department = "Virology";
@@ -803,7 +803,7 @@
 	name = "Virology Access Console";
 	pixel_x = -24;
 	pixel_y = -24;
-	req_access = list(39);
+	req_access = list("ACCESS_VIRO");
 	tag_exterior_door = "virology_airlock_exterior";
 	tag_interior_door = "virology_airlock_interior"
 	},
@@ -947,7 +947,7 @@
 	name = "exterior access button";
 	pixel_x = 24;
 	pixel_y = -24;
-	req_access = list(13)
+	req_access = list("ACCESS_MAINT")
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -1488,7 +1488,7 @@
 	id_tag = "bridgestarboard_airlock";
 	pixel_x = 25;
 	pixel_y = 8;
-	req_access = list(13);
+	req_access = list("ACCESS_MAINT");
 	tag_airpump = "bridgestarboard_pump";
 	tag_chamber_sensor = "bridgestarboard_sensor";
 	tag_exterior_door = "bridgestarboard_outer";
@@ -2124,7 +2124,7 @@
 	specialfunctions = 4
 	},
 /obj/item/weapon/airlock_brace{
-	req_access = list(53)
+	req_access = list("ACCESS_VAULT")
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/nuke_storage)
@@ -2213,7 +2213,7 @@
 	name = "interior access button";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(13)
+	req_access = list("ACCESS_MAINT")
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -6267,7 +6267,7 @@
 /area/medical/equipstorage)
 "auc" = (
 /obj/machinery/smartfridge/secure/medbay{
-	req_access = list(list(33,66))
+	req_access = list(list("ACCESS_CHEMISTRY","ACCESS_MEDICAL_EQUIP"))
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
@@ -9006,7 +9006,7 @@
 "aDz" = (
 /obj/structure/closet/secure_closet{
 	name = "Security Equipment Locker";
-	req_access = list(1)
+	req_access = list("ACCESS_SECURITY")
 	},
 /obj/item/device/radio/intercom/department/security{
 	dir = 8;
@@ -9238,7 +9238,7 @@
 "aEA" = (
 /obj/structure/closet/secure_closet{
 	name = "Security Equipment Locker";
-	req_access = list(1)
+	req_access = list("ACCESS_SECURITY")
 	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
@@ -10145,21 +10145,21 @@
 	name = "Exit Doors";
 	pixel_x = 6;
 	pixel_y = 24;
-	req_access = list(2)
+	req_access = list("ACCESS_BRIG")
 	},
 /obj/machinery/button/remote/airlock{
 	id = "prisonentry";
 	name = "Entry Doors";
 	pixel_x = -6;
 	pixel_y = 24;
-	req_access = list(2)
+	req_access = list("ACCESS_BRIG")
 	},
 /obj/machinery/button/flasher{
 	id = "permflash";
 	name = "Brig Flash Control";
 	pixel_x = -6;
 	pixel_y = 40;
-	req_access = list(2)
+	req_access = list("ACCESS_BRIG")
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "Secure Gate";
@@ -11118,7 +11118,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
@@ -11220,7 +11220,7 @@
 	name = "entry flash";
 	pixel_x = 22;
 	pixel_y = 24;
-	req_access = list(2)
+	req_access = list("ACCESS_BRIG")
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 10
@@ -12527,7 +12527,7 @@
 	name = "interior access button";
 	pixel_x = 24;
 	pixel_y = -24;
-	req_access = list(13)
+	req_access = list("ACCESS_MAINT")
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/catwalk,
@@ -13351,7 +13351,7 @@
 	name = "Xenobiology Access Console";
 	pixel_x = -24;
 	pixel_y = -24;
-	req_access = list(55);
+	req_access = list("ACCESS_XENOBIO");
 	tag_exterior_door = "xeno_airlock_exterior";
 	tag_interior_door = "xeno_airlock_interior"
 	},
@@ -13736,7 +13736,7 @@
 	name = "exterior access button";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(13)
+	req_access = list("ACCESS_MAINT")
 	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -13981,7 +13981,7 @@
 	},
 /obj/machinery/computer/atmoscontrol/laptop{
 	monitored_alarm_ids = list("xenobio1_alarm","xenobio2_alarm","xenobio3_alarm","xenobio4_alarm");
-	req_access = list(47)
+	req_access = list("ACCESS_RESEARCH")
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology)
@@ -14506,7 +14506,7 @@
 	name = "Virology Access Console";
 	pixel_x = -24;
 	pixel_y = 24;
-	req_access = list(39);
+	req_access = list("ACCESS_VIRO");
 	tag_exterior_door = "virology_airlock_exterior";
 	tag_interior_door = "virology_airlock_interior"
 	},
@@ -14960,7 +14960,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/surgery)
@@ -15718,7 +15718,7 @@
 "crA" = (
 /obj/structure/closet/secure_closet{
 	name = "Secure Evidence Locker";
-	req_access = list(1)
+	req_access = list("ACCESS_SECURITY")
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/device/radio/intercom{
@@ -18624,7 +18624,7 @@
 /area/maintenance/firstdeck/centralstarboard)
 "fEb" = (
 /obj/machinery/smartfridge/secure/medbay{
-	req_access = list(list(33,66))
+	req_access = list(list("ACCESS_CHEMISTRY","ACCESS_MEDICAL_EQUIP"))
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
@@ -19251,7 +19251,7 @@
 	name = "Infirmary Entrance Control";
 	pixel_x = -24;
 	pixel_y = 6;
-	req_access = list(5)
+	req_access = list("ACCESS_MEDICAL")
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "infirmaryentrylock";
@@ -23604,7 +23604,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(11)
+	req_access = list("ACCESS_ENGINE_EQUIP")
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
@@ -24297,7 +24297,7 @@
 /obj/machinery/door/airlock/glass/medical{
 	name = "Infirmary Reception";
 	autoset_access = 0;
-	req_access = list(5)
+	req_access = list("ACCESS_MEDICAL")
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
@@ -24812,7 +24812,7 @@
 "mCe" = (
 /obj/structure/closet/secure_closet{
 	name = "Secure Evidence Locker";
-	req_access = list(4)
+	req_access = list("ACCESS_FORENSICS")
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/security/detectives_office)
@@ -29732,7 +29732,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_access = list(201)
+	
 	},
 /obj/machinery/light,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -29819,7 +29819,7 @@
 	frequency = 1379;
 	id_tag = "bridgeport_airlock";
 	pixel_x = 25;
-	req_access = list(13);
+	req_access = list("ACCESS_MAINT");
 	tag_airpump = "bridgeport_pump";
 	tag_chamber_sensor = "bridgeport_sensor";
 	tag_exterior_door = "bridgeport_outer";
@@ -30124,7 +30124,7 @@
 	name = "Xenobiology Access Console";
 	pixel_x = 8;
 	pixel_y = 24;
-	req_access = list(55);
+	req_access = list("ACCESS_XENOBIO");
 	tag_exterior_door = "xeno_airlock_exterior";
 	tag_interior_door = "xeno_airlock_interior"
 	},
@@ -31192,7 +31192,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /obj/structure/cable/green{
 	d2 = 4;

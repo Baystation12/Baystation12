@@ -3314,7 +3314,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_access = list(list(24,11))
+	req_access = newlist()
 	},
 /obj/structure/bed/chair/comfy/brown{
 	dir = 4
@@ -3722,7 +3722,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_access = list(list(24,11))
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4030,7 +4030,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_access = list(list(24,11))
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
