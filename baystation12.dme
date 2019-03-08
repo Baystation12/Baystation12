@@ -2781,6 +2781,7 @@
 #include "code\modules\supermatter\supermatter.dm"
 #include "code\modules\surgery\__surgery_setup.dm"
 #include "code\modules\surgery\bones.dm"
+#include "code\modules\surgery\crystal.dm"
 #include "code\modules\surgery\encased.dm"
 #include "code\modules\surgery\face.dm"
 #include "code\modules\surgery\generic.dm"

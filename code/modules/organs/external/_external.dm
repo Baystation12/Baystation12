@@ -669,16 +669,21 @@ Note that amputating the affected organ does in fact remove the infection from t
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()
 
-	if(BP_IS_ROBOTIC(src)) //Robotic limbs don't heal or get worse.
+	var/update_surgery
+	if(BP_IS_ROBOTIC(src) || BP_IS_CRYSTAL(src)) //Robotic limbs don't heal or get worse.
 		for(var/datum/wound/W in wounds) //Repaired wounds disappear though
 			if(W.damage <= 0)  //and they disappear right away
 				wounds -= W    //TODO: robot wounds for robot limbs
+				update_surgery = TRUE
+		if(owner && update_surgery)
+			owner.update_surgery()
 		return
 
 	for(var/datum/wound/W in wounds)
 		// wounds can disappear after 10 minutes at the earliest
 		if(W.damage <= 0 && W.created + (10 MINUTES) <= world.time)
 			wounds -= W
+			update_surgery = TRUE
 			continue
 			// let the GC handle the deletion of the wound
 
@@ -703,9 +708,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 			W.heal_damage(heal_amt)
 
 	// sync the organ's damage with its wounds
-	src.update_damages()
-	if (update_damstate())
-		owner.UpdateDamageIcon(1)
+	update_damages()
+	if(owner)
+		if(update_surgery)
+			owner.update_surgery()
+		if (update_damstate())
+			owner.UpdateDamageIcon(1)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /obj/item/organ/external/proc/update_damages()
@@ -722,6 +730,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	//update damage counts
 	var/bleeds = (!BP_IS_ROBOTIC(src) && !BP_IS_CRYSTAL(src))
 	for(var/datum/wound/W in wounds)
+
+		if(W.damage <= 0)
+			qdel(W)
+			continue
+
 		if(W.damage_type == BURN)
 			burn_dam += W.damage
 		else
@@ -1262,39 +1275,49 @@ obj/item/organ/external/proc/remove_clamps()
 	status |= ORGAN_DISFIGURED
 
 /obj/item/organ/external/proc/get_incision(var/strict)
-	var/datum/wound/cut/incision
-	for(var/datum/wound/cut/W in wounds)
-		if(W.bandaged || W.current_stage > W.max_bleeding_stage) // Shit's unusable
-			continue
-		if(strict && !W.is_surgical()) //We don't need dirty ones
-			continue
-		if(!incision)
-			incision = W
-			continue
-		var/same = W.is_surgical() == incision.is_surgical()
-		if(same) //If they're both dirty or both are surgical, just get bigger one
-			if(W.damage > incision.damage)
+
+	var/datum/wound/incision
+	if(BP_IS_CRYSTAL(src))
+		for(var/datum/wound/shatter/other in wounds)
+			if(!incision || incision.damage < other.damage)
+				incision = other
+	else
+		for(var/datum/wound/cut/W in wounds)
+			if(W.bandaged || W.current_stage > W.max_bleeding_stage) // Shit's unusable
+				continue
+			if(strict && !W.is_surgical()) //We don't need dirty ones
+				continue
+			if(!incision)
 				incision = W
-		else if(W.is_surgical()) //otherwise surgical one takes priority
-			incision = W
+				continue
+			var/same = W.is_surgical() == incision.is_surgical()
+			if(same) //If they're both dirty or both are surgical, just get bigger one
+				if(W.damage > incision.damage)
+					incision = W
+			else if(W.is_surgical()) //otherwise surgical one takes priority
+				incision = W
 	return incision
 
 /obj/item/organ/external/proc/how_open()
-	var/datum/wound/cut/incision = get_incision()
 	. = 0
-	if(!incision)
-		return 0
-	var/smol_threshold = min_broken_damage * 0.4
-	var/beeg_threshold = min_broken_damage * 0.6
-	if(!incision.autoheal_cutoff == 0) //not clean incision
-		smol_threshold *= 1.5
-		beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger
-	if(incision.damage >= smol_threshold) //smol incision
-		. = SURGERY_OPEN
-	if(incision.damage >= beeg_threshold) //beeg incision
-		. = SURGERY_RETRACTED
-	if(. == SURGERY_RETRACTED && encased && (status & ORGAN_BROKEN))
-		. = SURGERY_ENCASED
+	var/datum/wound/incision = get_incision()
+	if(incision)
+		if(BP_IS_CRYSTAL(src))
+			. = SURGERY_RETRACTED
+			if(encased && (status & ORGAN_BROKEN))
+				. = SURGERY_ENCASED
+		else
+			var/smol_threshold = min_broken_damage * 0.4
+			var/beeg_threshold = min_broken_damage * 0.6
+			if(!incision.autoheal_cutoff == 0) //not clean incision
+				smol_threshold *= 1.5
+				beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger
+			if(incision.damage >= smol_threshold) //smol incision
+				. = SURGERY_OPEN
+			if(incision.damage >= beeg_threshold) //beeg incision
+				. = SURGERY_RETRACTED
+			if(. == SURGERY_RETRACTED && encased && (status & ORGAN_BROKEN))
+				. = SURGERY_ENCASED
 
 /obj/item/organ/external/proc/jostle_bone(force)
 	if(!(status & ORGAN_BROKEN)) //intact bones stay still

@@ -2266,7 +2266,7 @@
 		/datum/reagent/mindbreaker = 2,
 		/datum/reagent/toxin/phoron = 1,
 		/datum/reagent/blood = 1
-		)
+	)
 
 // tea expansion pack content - black tea drinks
 /datum/chemical_reaction/icetea
@@ -2319,3 +2319,24 @@
 	required_reagents = list(/datum/reagent/nutriment/rice = 10, /datum/reagent/drink/tea/green = 1)
 	result_amount = 10
 	mix_message = "The tea mingles with the rice."
+
+/datum/chemical_reaction/resin_pack
+	name = "Resin Globule"
+	result = null
+	required_reagents = list(
+		/datum/reagent/crystal = 1, 
+		/datum/reagent/silicon = 2
+	)
+	catalysts = list(
+		/datum/reagent/toxin/phoron = 1
+	)
+	result_amount = 3
+	mix_message = "The solution hardens and begins to crystallize."
+
+/datum/chemical_reaction/resin_pack/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+	..()
+	var/turf/T = get_turf(holder.my_atom)
+	if(istype(T))
+		var/create_stacks = Floor(created_volume)
+		if(create_stacks > 0)
+			new /obj/item/stack/medical/resin/handmade(T, create_stacks)

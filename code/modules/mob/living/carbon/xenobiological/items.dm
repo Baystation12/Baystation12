@@ -27,9 +27,9 @@
 			qdel(O)
 
 /obj/item/slime_extract/New()
-	..()
 	create_reagents(100)
 	reagents.add_reagent(/datum/reagent/slimejelly, 30)
+	..()
 
 /obj/item/slime_extract/grey
 	name = "grey slime extract"
@@ -98,6 +98,10 @@
 /obj/item/slime_extract/adamantine
 	name = "adamantine slime extract"
 	icon_state = "adamantine slime extract"
+
+/obj/item/slime_extract/adamantine/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/crystal, 10)
 
 /obj/item/slime_extract/bluespace
 	name = "bluespace slime extract"

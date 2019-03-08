@@ -66,7 +66,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
 			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
 			 ((surgery_candidate_flags & SURGERY_NO_STUMP) && affected.is_stump())         || \
-			 ((surgery_candidate_flags & SURGERY_NO_FLESH) && !BP_IS_ROBOTIC(affected)))
+			 ((surgery_candidate_flags & SURGERY_NO_FLESH) && !(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))))
 				return FALSE
 			// Check if the surgery target is accessible.
 			if(BP_IS_ROBOTIC(affected))
@@ -216,6 +216,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
 				if(prob(S.success_chance(user, M, src)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
+					handle_post_surgery()
 				else if ((src in user.contents) && user.Adjacent(M))
 					S.fail_step(user, M, zone, src)
 				else
@@ -227,3 +228,9 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 						H.update_surgery()
 		return TRUE
 	return FALSE
+
+/obj/item/proc/handle_post_surgery()
+	return
+
+/obj/item/stack/handle_post_surgery()
+	use(1)
