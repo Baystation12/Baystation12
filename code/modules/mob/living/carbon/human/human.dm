@@ -1688,3 +1688,14 @@
 
 /mob/living/carbon/human/get_digestion_product()
 	return species.get_digestion_product(src)
+
+// A damaged stomach can put blood in your vomit.
+/mob/living/carbon/human/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
+	..()
+	if(should_have_organ(BP_STOMACH))
+		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
+		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
+			if(should_have_organ(BP_HEART))
+				vessel.trans_to_obj(vomit, 5)
+			else
+				reagents.trans_to_obj(vomit, 5)
