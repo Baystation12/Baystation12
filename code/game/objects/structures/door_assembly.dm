@@ -119,9 +119,9 @@
 	else if(isWrench(W) && state == 0)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		if(anchored)
-			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You starts unsecuring the airlock assembly from the floor.")
+			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You begin unsecuring the airlock assembly from the floor.")
 		else
-			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You starts securing the airlock assembly to the floor.")
+			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You begin securing the airlock assembly to the floor.")
 
 		if(do_after(user, 40,src))
 			if(!src) return

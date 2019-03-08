@@ -25437,7 +25437,7 @@
 	dir = 8;
 	id_tag = "BrigFoyer";
 	name = "Security Wing";
-	req_access = list(list(63,80))
+	req_access = list(list("ACCESS_SEC_DOORS","ACCESS_TORCH_CREW"))
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
