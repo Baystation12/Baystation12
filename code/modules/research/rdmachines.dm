@@ -23,7 +23,7 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
 			new /obj/item/stack/material(loc, round(materials[f] / SHEET_MATERIAL_AMOUNT), f)
-	..()
+	return ..()
 
 
 /obj/machinery/r_n_d/proc/eject(var/material, var/amount)
