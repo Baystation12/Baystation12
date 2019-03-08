@@ -1685,3 +1685,6 @@
 		if(!E || !E.is_usable())
 			stance_damage += 2
 	return stance_damage >= 4
+
+/mob/living/carbon/human/get_digestion_product()
+	return species.get_digestion_product(src)
