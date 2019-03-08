@@ -30,7 +30,7 @@
 	var/list/possible_themes = list(/datum/exoplanet_theme/mountains,/datum/exoplanet_theme)
 	var/list/themes = list()
 
-	var/features_budget = 2
+	var/features_budget = 4
 	//pre-defined list of features templates to pick from
 	var/list/possible_features = list(
 									/datum/map_template/ruin/exoplanet/monolith,
