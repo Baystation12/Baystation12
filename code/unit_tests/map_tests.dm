@@ -750,5 +750,29 @@ datum/unit_test/ladder_check/start_test()
 		current_dir = next_pipe.nextdir(current_dir, sort.sortType)
 		our_pipe = next_pipe
 
+/datum/unit_test/check_for_numeric_req_access
+	name = "MAP: Check for numbers in mapped objs' req_access"
+
+/datum/unit_test/check_for_numeric_req_access/start_test()
+	var/list/objs_with_numeric_req_access = list()
+	for(var/obj/O in world)
+		if(O.req_access)
+			for(var/req in O.req_access)
+				if(islist(req))
+					for(var/req_one in req)
+						if(isnum(req_one))
+							objs_with_numeric_req_access |= O
+				else if(isnum(req))
+					objs_with_numeric_req_access |= O
+			
+	if(objs_with_numeric_req_access.len)
+		for(var/entry in objs_with_numeric_req_access)
+			log_bad("[log_info_line(entry)] has a numeric value in req_access.")
+		fail("Mapped objs with numeric req_access must be set up to use strings instead.")
+	else
+		pass("All mapped objs have correctly set req_access.")
+
+	return 1
+
 #undef SUCCESS
 #undef FAILURE

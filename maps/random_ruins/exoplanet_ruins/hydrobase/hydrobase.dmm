@@ -2321,7 +2321,7 @@
 /obj/structure/closet/crate/secure/weapon{
 	desc = "A heavy-duty crate with a suite of firearms safety instructions plastered on the side. The ID scanner is unlike anything you've seen before.";
 	name = "weapons crate";
-	req_access = list(150)
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/random/projectile,
 /obj/item/weapon/material/hatchet/tacknife,
