@@ -7,11 +7,11 @@
 	icon_state = "map_injector"
 
 	name = "air injector"
-	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
+	desc = "Injects air into its surroundings using a passive or injection mode. Passive mode will only inject when internal pressure is greater."
 
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 15000	//15000 W ~ 20 HP
+	power_rating = 45000	//45000 W ~ 60 HP
 
 	var/injecting = 0
 
