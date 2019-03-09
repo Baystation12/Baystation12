@@ -28,7 +28,7 @@
 /obj/structure/table/gamblingtable
 	icon_state = "gamble_preview"
 	carpeted = 1
-	material = MATERIAL_WOOD
+	material = MATERIAL_WALNUT
 
 /obj/structure/table/glass
 	icon_state = "plain_preview"
