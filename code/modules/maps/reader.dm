@@ -447,7 +447,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		. = copytext(text,2,findtext(text,"\"",3,0))
 
 	//Check for number
-	else if(isnum(text2num(text)))
+	else if(isnum(text2num(text)) && text == "[text2num(text)]") //text2num will parse truthy false positives; this demands that the only numbers parsed as such are properly formatted ones.
 		. = text2num(text)
 
 	//Check for null
