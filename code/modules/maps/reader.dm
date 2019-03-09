@@ -482,16 +482,23 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		//check if this is a simple variable (as in list(var1, var2)) or an associative one (as in list(var1="foo",var2=7))
 		var/equal_position = findtext(text,"=",old_position, position)
 
-		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)),1)//the name of the variable, must trim quotes to build a BYOND compliant associatives list
+		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)), 0)
 		old_position = position + 1
 
+		if(!length(trim_left))
+			continue
+		var/left = readlistitem(trim_left)
+		if(!left && equal_position && trim_left != "null")
+			left = trim_left // This is dm behavior: unindentifiable keys in associative lists are parsed as literal strings.
+		to_return.len++
+		to_return[list_index++] = left
+
 		if(equal_position)//associative var, so do the association
+			if(isnum(left))
+				crash_with("Numerical key in associative list.")
+				break // This is invalid; apparently dm will runtime in this situation.
 			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
-			to_return[trim_left] = readlistitem(trim_right)
-			list_index++
-		else if (length(trim_left))	//simple var
-			to_return.len++
-			to_return[list_index++] = readlistitem(trim_left)
+			to_return[left] = readlistitem(trim_right)
 
 	while(position != 0)
 
