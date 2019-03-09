@@ -1,0 +1,4 @@
+author: "SierraKomodo & Anticept"
+delete-after: True
+changes: 
+  - tweak: "Flight manifest input box no longer shows the rank to make it easier to find personel in the list. The report itself will show the rank."
