@@ -20,6 +20,7 @@
 	var/default_material = MATERIAL_STEEL
 	var/material/material
 	var/drops_debris = 1
+	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
 	..(newloc)
@@ -56,8 +57,6 @@
 		qdel(src)
 	else
 		health = round(material.integrity/10)
-		if(applies_material_colour)
-			color = material.icon_colour
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
@@ -67,6 +66,17 @@
 		update_force()
 		if(applies_material_name)
 			SetName("[material.display_name] [initial(name)]")
+		update_icon()
+
+/obj/item/weapon/material/on_update_icon()
+	overlays.Cut()
+	if(applies_material_colour)
+		color = material.icon_colour
+		alpha = 100 + material.opacity * 255
+	if(furniture_icon)
+		var/image/I = image(icon, icon_state = furniture_icon)
+		I.appearance_flags = RESET_COLOR
+		overlays += I
 
 /obj/item/weapon/material/Destroy()
 	STOP_PROCESSING(SSobj, src)
