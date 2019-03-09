@@ -81,12 +81,6 @@
 	grass_color = pick(colors)
 	..()
 
-/datum/random_map/noise/exoplanet/grass/spawn_fauna(var/turf/T, value)
-	if(prob(5))
-		new/mob/living/simple_animal/hostile/giant_spider/nurse(T)
-	else
-		..()
-
 /datum/random_map/noise/exoplanet/grass/get_additional_spawns(var/value, var/turf/T)
 	..()
 	if(istype(T,/turf/simulated/floor/exoplanet/grass))
