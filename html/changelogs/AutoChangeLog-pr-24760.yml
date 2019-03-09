@@ -1,5 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - tweak: "Atmos pumps have all had their power limits increased considerably. This means atmospherics will operate faster, but at the cost of much more power at peak performance. In addition, vents and scrubbers will operate faster when stressed, but they too will cause a tremendous power spike in a ship wide atmos contamination emergency where a huge number of scrubbers have to work hard (from a badly clogged waste line, for example). A flooded deck can also overload a deck substation, so bypass switching may be required in such cases. Beware of extreme scrubber overload!"
-  - tweak: "Filter pressure limits raised to 15,000 kpa. They are still not powerful devices when pumping from low to high pressures. You should put pumps around them if you intend them to work quickly with moving pressures in a non-passive manner."
