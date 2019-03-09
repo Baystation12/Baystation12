@@ -47,7 +47,7 @@
 	icon_state = "base_unsc"
 	faction = "unsc"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
-	ships_spawnnear = list("UNSC Bertels")
+	ships_spawnnear = list("UNSC Bertels","UNSC Heavens Above")
 
 /obj/effect/overmap/ship/faction_base/innie
 	name = "Camp New Hope"

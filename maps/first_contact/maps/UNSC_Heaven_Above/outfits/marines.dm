@@ -1,108 +1,9 @@
-//UNSC BERTELS Crew Outfits
 
-/decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician
-	name = "UNSC Bertels Engineer"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/technician
-	shoes = /obj/item/clothing/shoes/workboots
-	belt = /obj/item/weapon/storage/belt/utility/full
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman
-	name = "UNSC Bertels Helmsman"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes =  /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew
-	name = "UNSC Bertels Bridge Crew"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes =  /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelspilot
-	name = "UNSC Bertels Pelican Pilot"
-
-	l_ear = /obj/item/device/radio/headset/unsc/pilot
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes = /obj/item/clothing/shoes/black
-	head = /obj/item/clothing/head/helmet/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor
-	name = "UNSC Bertels Janitor"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/logistics
-	shoes = /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelscrew
-	name = "UNSC Bertels Ship Crew"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/tactical
-	shoes = /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
-	name = "UNSC Bertels Commanding Officer"
-
-	l_ear = /obj/item/device/radio/headset/unsc/commander
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes = /obj/item/clothing/shoes/brown
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o4)
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
-	name = "UNSC Bertels Executive Officer"
-
-	l_ear = /obj/item/device/radio/headset/unsc/officer
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes = /obj/item/clothing/shoes/brown
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o3)
-
-	flags = 0
-
-//UNSC BERTELS Medical Staff Outfits
-
-/decl/hierarchy/outfit/job/UNSC_ship/medical
-	name = "UNSC Bertels Medical Staff"
-
-	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/medical
-	shoes = /obj/item/clothing/shoes/white
-	l_hand = /obj/item/weapon/storage/firstaid/adv
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
-
-	flags = 0
-
-
-//MARINE Outfits
-
-/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
-	name = "UNSC Marine"
+/decl/hierarchy/outfit/job/UNSC_ship/marine_co
+	name = "Marine Company Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_hand = /obj/item/squad_manager
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
@@ -110,12 +11,12 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o2)
 
 	flags = 0
 
-/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
-	name = "Marine Platoon Leader"
+/decl/hierarchy/outfit/job/UNSC_ship/marine_xo
+	name = "Marine Company Sergeant"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	l_hand = /obj/item/squad_manager
@@ -130,6 +31,42 @@
 
 	flags = 0
 
+/decl/hierarchy/outfit/job/UNSC_ship/marine_sl
+	name = "Marine Squad Leader"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_hand = /obj/item/squad_manager
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e5)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/marine
+	name = "Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/marine/proc/equip_special(mob/living/carbon/human/H)
+	if(prob(25))
+		H.equip_to_slot_or_del(/obj/item/clothing/mask/marine)
+	if(prob(25))
+		H.equip_to_slot_or_del(/obj/item/clothing/head/helmet/marine/visor)
 
 //ODST Outfits
 
@@ -389,32 +326,3 @@
 	flags = 0
 
 	hierarchy_type = /decl/hierarchy/outfit/job
-
-
-/decl/hierarchy/outfit/job/URF_commando
-	name = "URF Commando"
-
-	//Actual Commando gear is spawned on their ship.
-	//head = /obj/item/clothing/head/helmet/urfc
-	//suit = /obj/item/clothing/suit/armor/special/urfc
-	//gloves = /obj/item/clothing/gloves/thick/swat
-	l_ear = /obj/item/device/radio/headset/commando
-	uniform = /obj/item/clothing/under/tactical
-	shoes =  /obj/item/clothing/shoes/black
-	starting_accessories = list()
-
-	flags = 0
-
-/decl/hierarchy/outfit/job/URF_commando_officer
-	name = "URF Commando Officer"
-
-	head = /obj/item/clothing/head/helmet/urfc/squadleader
-	suit = /obj/item/clothing/suit/armor/special/urfc/squadleader
-	gloves = /obj/item/clothing/gloves/thick/swat
-	l_ear = /obj/item/device/radio/headset/commando
-	uniform = /obj/item/clothing/under/urfc_jumpsuit
-	shoes = /obj/item/clothing/shoes/magboots/urfc
-	starting_accessories = list()
-
-	flags = 0
-

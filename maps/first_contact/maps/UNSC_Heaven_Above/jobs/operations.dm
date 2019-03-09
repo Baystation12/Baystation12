@@ -7,8 +7,8 @@
 	department_flag = OPSCO
 	total_positions = 1
 	spawn_positions = 1
-	spawnpoint_override = "UNSC Frigate"
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/BO
+	spawnpoint_override = "UNSC Base Spawns"
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops_chief
 	selection_color = "#33ccff"
 
 	//job_guide = "Your responsibility is to supervise general ship and bridge operations including navigation and helm control. Unfortuantely you don't have much content, but more is coming soon."
@@ -24,8 +24,8 @@
 	department_flag = OPS
 	total_positions = -1
 	spawn_positions = 2
-	spawnpoint_override = "UNSC Frigate"
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/BO
+	spawnpoint_override = "UNSC Base Spawns"
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops
 	selection_color = "#33ccff"
 	alt_titles = list("Sensor Operator", "Electronic Warfare Specialist","Cryptologic Specialist","Signals Analyst","Navigator","Helmsman")
 	//job_guide = "Your job is general ship and bridge operations like navigation and helm control. Unfortunately you don't have much content but more is coming soon."
@@ -47,7 +47,7 @@
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/device/radio/headset/unsc(src)
 
-/*
+
 //coordinates fighter and shuttle traffic around the ship, including docking and departing
 /datum/job/UNSC_ship/ops_traffic
 	title = "Strike Traffic Controller"
@@ -137,4 +137,3 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_l_store)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		return 1
-*/
