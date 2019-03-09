@@ -18661,8 +18661,10 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/medical{
+	autoset_access = 0;
 	id_tag = "MedbayFoyer";
-	name = "Infirmary"
+	name = "Infirmary";
+	req_access = list(list("ACCESS_MEDICAL","ACCESS_MORGUE","ACCESS_TORCH_CREW"))
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/infirmreception)
@@ -29731,8 +29733,7 @@
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	pixel_y = -25;
-	
+	pixel_y = -25
 	},
 /obj/machinery/light,
 /obj/machinery/atmospherics/unary/vent_pump/on{

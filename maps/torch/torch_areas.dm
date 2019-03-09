@@ -1079,13 +1079,13 @@
 /area/medical/infirmary
 	name = "\improper Infirmary Hallway"
 	icon_state = "medbay"
-	req_access = list()
+	req_access = list(list(access_medical, access_morgue))
 
 /area/medical/infirmreception
 	name = "\improper Infirmary Reception"
 	icon_state = "medbay2"
 	ambience = list('sound/ambience/signal.ogg')
-	req_access = list()
+	req_access = list(access_medical)
 
 /area/medical/locker
 	name = "\improper Infirmary Locker Room"
