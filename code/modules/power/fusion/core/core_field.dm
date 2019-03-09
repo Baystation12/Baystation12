@@ -1,7 +1,7 @@
 #define FUSION_ENERGY_PER_K        20
 #define FUSION_INSTABILITY_DIVISOR 50000
 #define FUSION_RUPTURE_THRESHOLD   10000
-#define FUSION_FIELD_CAP_COEFF	   200
+#define FUSION_FIELD_CAP_COEFF	   5000
 
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
@@ -97,8 +97,8 @@
 	// Take some gas up from our environment.
 	var/added_particles = FALSE
 	var/datum/gas_mixture/uptake_gas = owned_core.loc.return_air()
-	if(uptake_gas)
-		uptake_gas = uptake_gas.remove_by_flag(XGM_GAS_FUSION_FUEL, rand(50,100))
+	//if(uptake_gas)
+	//	uptake_gas = uptake_gas.remove_by_flag(XGM_GAS_FUSION_FUEL, rand(50,100))
 	if(uptake_gas && uptake_gas.total_moles)
 		for(var/gasname in uptake_gas.gas)
 			if(uptake_gas.gas[gasname]*10 > reactants[gasname])

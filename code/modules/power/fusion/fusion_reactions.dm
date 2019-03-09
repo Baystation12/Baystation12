@@ -51,7 +51,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_consumption = 1
 	energy_production = 2
 	products = list("deuterium" = 2)
-	priority = 10
+	priority = 7
 	radiation = 5
 
 /decl/fusion_reaction/deuterium_hydrogen
@@ -60,7 +60,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_consumption = 1
 	energy_production = 2
 	products = list("tritium" = 2)
-	priority = 0
+	priority = 8
 	radiation = 5
 
 /decl/fusion_reaction/tritium_tritium
@@ -71,8 +71,9 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	products = list("hydrogen" = 2, "helium" = 1)
 	instability = 0.5
 	radiation = 3
+	priority = 9
 
-/decl/fusion_reaction/helium_hyrdogen
+/decl/fusion_reaction/helium_hydrogen
 	p_react = "helium"
 	s_react = "hydrogen"
 	energy_consumption = 1
@@ -80,6 +81,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	products = list("lithium" = 1)
 	instability = 0.5
 	radiation = 3
+	priority = 10
 
 /decl/fusion_reaction/deuterium_lithium
 	p_react = "deuterium"
@@ -89,6 +91,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	radiation = 3
 	products = list("tritium"= 2)
 	instability = 1
+	priority = 11
 
 // Phoron-based Heavy Elements Synthesis
 

@@ -84,7 +84,7 @@
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
 	req_components = list(
 		/obj/item/weapon/stock_parts/manipulator/nano = 2,
-		/obj/item/weapon/gun/energy/gun/nuclear = 1
+		/obj/item/weapon/gun/energy/gun/nuclear = 1,
 		/obj/item/stack/cable_coil = 5
 		)
 
@@ -95,7 +95,7 @@
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5, TECH_MATERIAL = 5)
 	req_components = list(
 		/obj/item/weapon/stock_parts/manipulator/pico = 2,
-		/obj/item/weapon/gun/energy/gun/nuclear = 1
+		/obj/item/weapon/gun/energy/gun/nuclear = 1,
 		/obj/item/stack/cable_coil = 5
 		// some advanced fusion product material
 		)
@@ -107,7 +107,7 @@
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5, TECH_MATERIAL = 5)
 	req_components = list(
 		/obj/item/weapon/stock_parts/manipulator/pico = 2,
-		/obj/item/weapon/gun/energy/gun/nuclear = 1
+		/obj/item/weapon/gun/energy/gun/nuclear = 1,
 		/obj/item/stack/cable_coil = 5
 		// some advanced fusion product material
 		)
