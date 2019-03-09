@@ -63,7 +63,7 @@
 		"white" =          COLOR_WHITE,
 		"yellow" =         COLOR_AMBER,
 		"hull blue" =      COLOR_HULL,
-		"bulkhead black" = COLOR_GUNMETAL
+		"bulkhead black" = COLOR_WALL_GUNMETAL
 		)
 
 
