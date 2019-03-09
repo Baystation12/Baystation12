@@ -488,8 +488,11 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		if(!length(trim_left))
 			continue
 		var/left = readlistitem(trim_left)
-		if(!left && equal_position && trim_left != "null")
-			left = trim_left // This is dm behavior: unindentifiable keys in associative lists are parsed as literal strings.
+		if(equal_position)
+			if(!left && trim_left != "null")
+				left = trim_left // This is dm behavior: unindentifiable keys in associative lists are parsed as literal strings.
+			if(left == 1.#INF || left == -1.#INF)
+				left = trim_left // This is not valid as a list index; we could let it runtime, but if associative it should be parsed as "inf" or "-inf" instead.
 		to_return.len++
 		to_return[list_index++] = left
 
