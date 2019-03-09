@@ -2,6 +2,7 @@
 	title = "AI"
 	department_flag = SHIPAI
 	spawn_positions = 1
+	is_whitelisted = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ship_ai
 	selection_color = "#ccffcc"
 	req_admin_notify = 1

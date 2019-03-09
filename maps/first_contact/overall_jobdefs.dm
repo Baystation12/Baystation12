@@ -88,7 +88,8 @@
 		"Depot Guard Spawn",\
 		"UNSC Aegis Ship Crew Spawn",\
 		"UNSC Aegis ODST Spawn",\
-		"UNSC Aegis ODST Officer Spawn")
+		"UNSC Aegis ODST Officer Spawn",\
+		"AI")
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID
 
