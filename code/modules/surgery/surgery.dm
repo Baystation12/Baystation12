@@ -202,6 +202,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 					return FALSE
 			to_chat(user, SPAN_WARNING("You aren't sure what you could do to \the [M] with \the [src]."))
 			return TRUE
+		return FALSE
 
 	// Otherwise we can make a start on surgery!
 	else if(istype(M) && !QDELETED(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
