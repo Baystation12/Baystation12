@@ -138,7 +138,7 @@
 
 /turf/simulated/mineral/volcanic
 	name = "volcanic rock"
-	icon = 'icons/turf/flooring/lava.dmi'
+	color = COLOR_DARK_GRAY
 
 /turf/simulated/mineral/random/volcanic
 	name = "volcanic rock"
