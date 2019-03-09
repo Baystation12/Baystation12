@@ -75,15 +75,15 @@
 			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_MODERATE + 0.1 to RAD_LEVEL_HIGH)
 			icon_state = "geiger_on_3"
-			geiger_volume = 33
+			geiger_volume = 25
 			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_HIGH + 1 to RAD_LEVEL_VERY_HIGH)
 			icon_state = "geiger_on_4"
-			geiger_volume = 66
+			geiger_volume = 40
 			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_VERY_HIGH + 1 to INFINITY)
 			icon_state = "geiger_on_5"
-			geiger_volume = 100
+			geiger_volume = 60
 			sound_token.SetVolume(geiger_volume)
 
 
