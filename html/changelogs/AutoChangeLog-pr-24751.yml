@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "Disassembling research machines should now work. Upgrading circuit printers should be more consistent."
