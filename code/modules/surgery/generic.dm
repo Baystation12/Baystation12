@@ -102,15 +102,14 @@
 	var/fail_string = "slicing open"
 	var/access_string = "an incision"
 
-/decl/surgery_step/generic/cut_open/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	. = FALSE
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(istype(affected))
+/decl/surgery_step/generic/cut_open/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/affected = .
 		if(affected.how_open())
 			var/datum/wound/cut/incision = affected.get_incision()
-			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access, another incision isn't needed."))
-		else
-			. = TRUE
+			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access."))
+			return FALSE
 
 /decl/surgery_step/generic/cut_open/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
