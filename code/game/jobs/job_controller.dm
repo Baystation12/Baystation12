@@ -669,6 +669,10 @@ var/global/datum/controller/occupations/job_master
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in GLOB.using_map.allowed_spawns)
 			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
+			if(!candidate)
+				log_debug("JOB CONTROLLER ERROR: spawntype \'[spawntype]\' is enabled for the current map \'[GLOB.using_map]\' but does not exist!")
+				message_admins("JOB CONTROLLER ERROR: spawntype \'[spawntype]\' is enabled for the current map \'[GLOB.using_map]\' but does not exist!")
+				continue
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break

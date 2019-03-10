@@ -8,7 +8,7 @@
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
-	id_hud_icons = 'frigate_hud_icons.dmi'
+	id_hud_icons = 'maps/first_contact/maps/UNSC_Heaven_Above/frigate_hud_icons.dmi'
 
 	station_name  = "UNSC Frigate"
 	station_short = "Frigate"

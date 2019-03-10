@@ -97,3 +97,9 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
+
+/**
+ * Game initialize hook.
+ * Called in gameticker.dm when the game initializations finish
+ */
+/hook/game_initialised
