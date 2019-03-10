@@ -20,19 +20,4 @@
 	system_name = "Uncharted System"
 
 	allowed_spawns = list(\
-		DEFAULT_SPAWNPOINT_ID,\
-		"Innie Base Spawns",\
-		"UNSC Base Spawns",\
-		"Covenant Base Spawns",\
-		"Emsville Spawn",\
-		"Emsville Spawn Marshall",\
-		"Research Facility Spawn",\
-		"Research Facility Director Spawn",\
-		"Research Facility Security Spawn",\
-		"Listening Post Spawn",\
-		"Listening Post Commander Spawn",\
-		"Depot Guard Spawn",\
-		"UNSC Aegis Ship Crew Spawn",\
-		"UNSC Aegis ODST Spawn",\
-		"UNSC Aegis ODST Officer Spawn",\
-		"AI")
+		DEFAULT_SPAWNPOINT_ID)
