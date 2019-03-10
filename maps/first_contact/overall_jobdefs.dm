@@ -1,7 +1,6 @@
 
 /datum/map/first_contact
 	allowed_jobs = list(\
-		/*
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/unscbertels_ship_crew,\
@@ -14,20 +13,15 @@
 		/datum/job/unscaegis_ship_crew,\
 		/datum/job/aegisODSTONI,\
 		/datum/job/aegisODSTOONI,\
-		*/
 		/datum/job/researchdirector,\
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
 		/datum/job/IGUARD,\
-		/datum/job/ODST,\
-		/datum/job/ODSTO,\
-		/*
 		/datum/job/ship_crew_civ,\
 		/datum/job/ship_cap_civ,\
 		/datum/job/ship_crew_medic,\
 		/datum/job/ship_cap_medic,\
-		*/
 		/datum/job/Emsville_Colonist,\
 		/datum/job/Emsville_Marshall,\
 		/datum/job/ship_crew_innie,\
@@ -80,21 +74,22 @@
 		"Innie Base Spawns",\
 		"UNSC Base Spawns",\
 		"Covenant Base Spawns",\
-		/*"Civilian Ship Crew",\
+		"Civilian Ship Crew",\
 		"Civ Ship Cap Crew",\
 		"Medical Ship Crew",\
-		"Medical Ship Cap Crew",\*/
+		"Medical Ship Cap Crew",\
 		"Emsville Spawn",\
 		"Emsville Spawn Marshall",\
 		"Research Facility Spawn",\
 		"Research Facility Director Spawn",\
-		"Depot Guard Spawn",\
 		"Research Facility Security Spawn",\
-		/*"Listening Post Spawn",\
+		"Listening Post Spawn",\
 		"Listening Post Commander Spawn",\
+		"Depot Guard Spawn",\
 		"UNSC Aegis Ship Crew Spawn",\
 		"UNSC Aegis ODST Spawn",\
-		"UNSC Aegis ODST Officer Spawn"*/)
+		"UNSC Aegis ODST Officer Spawn",\
+		"AI")
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID
 
