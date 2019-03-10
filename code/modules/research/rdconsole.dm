@@ -61,6 +61,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
+	var/can_analyze = FALSE //If the console is allowed to use destructive analyzers
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
@@ -95,7 +96,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	for(var/obj/machinery/r_n_d/D in range(4, src))
 		if(D.linked_console != null || D.panel_open)
 			continue
-		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && id == 1) // Only science R&D consoles can do research
+		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && can_analyze == TRUE) // Only science R&D consoles can do research
 			if(linked_destroy == null)
 				linked_destroy = D
 				D.linked_console = src
@@ -675,7 +676,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_destroy)
 				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A>"
 			else
-				if (id == 1) 
+				if (can_analyze == TRUE) 
 					dat += "<LI>(No Destructive Analyzer Linked)"
 			if(linked_lathe)
 				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A>"
@@ -889,6 +890,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 /obj/machinery/computer/rdconsole/core
 	name = "core fabricator console"
 	id = 1
+	can_analyze = TRUE
 
 #undef CHECK_LATHE
 #undef CHECK_IMPRINTER
