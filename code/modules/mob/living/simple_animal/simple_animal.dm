@@ -73,6 +73,11 @@
 	// contained in a cage
 	var/in_stasis = 0
 
+/mob/living/simple_animal/Initialize()
+	. = ..()
+	if(LAZYLEN(natural_armor))
+		set_extension(src, /datum/extension/armor, /datum/extension/armor, natural_armor)
+
 /mob/living/simple_animal/Life()
 	. = ..()
 	if(!.)
