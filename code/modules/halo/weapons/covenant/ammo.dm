@@ -9,6 +9,14 @@
 	damtype = BURN
 	return ..()
 
+/obj/item/projectile/covenant/trainingpistol
+	armor_penetration = 1
+	nodamage = 1
+	agony = 10
+	damage_type = PAIN
+	penetrating = 0
+	icon_state = "Trainingpistol Shot"
+
 /obj/item/projectile/covenant/plasmapistol
 	damage = 25
 	accuracy = 1
