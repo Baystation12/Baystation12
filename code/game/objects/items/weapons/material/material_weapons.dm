@@ -74,7 +74,7 @@
 
 /obj/item/weapon/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	if(material.is_brittle() || target.getarmor(hit_zone, "melee") >= material.hardness/5)
+	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE) * 100 >= material.hardness/5)
 		check_shatter()
 
 /obj/item/weapon/material/on_parry()
@@ -99,30 +99,3 @@
 	if(!consumed && drops_debris)
 		material.place_shard(T)
 	qdel(src)
-/*
-Commenting this out pending rebalancing of radiation based on small objects.
-/obj/item/weapon/material/process()
-	if(!material.radioactivity)
-		return
-	for(var/mob/living/L in range(1,src))
-		L.apply_effect(round(material.radioactivity/30),IRRADIATE, blocked = L.getarmor(null, "rad"))
-*/
-
-/*
-// Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
-/obj/item/weapon/material/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	TemperatureAct(exposed_temperature)
-
-// This might need adjustment. Will work that out later.
-/obj/item/weapon/material/proc/TemperatureAct(temperature)
-	health -= material.combustion_effect(get_turf(src), temperature, 0.1)
-	check_health(1)
-
-/obj/item/weapon/material/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(material.ignition_point && WT.remove_fuel(0, user))
-			TemperatureAct(150)
-	else
-		return ..()
-*/

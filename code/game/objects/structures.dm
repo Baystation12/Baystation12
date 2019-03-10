@@ -70,10 +70,10 @@
 		return TRUE
 	if (G.assailant.a_intent == I_HURT)
 		// Slam their face against the table.
-		var/blocked = G.affecting.run_armor_check(BP_HEAD, "melee")
-		if (prob(30 * blocked_mult(blocked)))
+		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE)
+		if (prob(30 * (1 - blocked)))
 			G.affecting.Weaken(5)
-		G.affecting.apply_damage(8, BRUTE, BP_HEAD, blocked)
+		G.affecting.apply_damage(8, BRUTE, BP_HEAD)
 		visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 		if (material)
 			playsound(loc, material.tableslam_noise, 50, 1)
@@ -83,7 +83,7 @@
 		for(var/obj/item/weapon/material/shard/S in L)
 			if(S.sharp && prob(50))
 				G.affecting.visible_message("<span class='danger'>\The [S] slices into [G.affecting]'s face!</span>", "<span class='danger'>\The [S] slices into your face!</span>")
-				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, BP_HEAD)
+				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
 		qdel(G)
 	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()

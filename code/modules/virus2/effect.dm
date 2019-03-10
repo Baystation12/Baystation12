@@ -94,7 +94,7 @@
 	multiplier_max = 3
 	badness = VIRUS_COMMON
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.apply_effect(2*multiplier, IRRADIATE, blocked = 0)
+		mob.apply_damage(2*multiplier, IRRADIATE, armor_pen = 100)
 
 /datum/disease2/effect/deaf
 	name = "Dead Ear Syndrome"

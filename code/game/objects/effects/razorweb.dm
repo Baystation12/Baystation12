@@ -131,17 +131,15 @@
 				E = thing
 				break
 
-		if(E && !prob(L.getarmor(E, "melee")))
+		if(E && !prob(100 * L.get_blocked_ratio(null, BRUTE)))
 			E = H.organs_by_name[E]
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
 			E.droplimb()
 			severed = TRUE
 
-	if(!severed)
-		var/armourval = L.getarmor(null, "melee")
-		if(!prob(armourval))
-			L.apply_damage(rand(25, 50), blocked = armourval, used_weapon = src)
-			visible_message(SPAN_DANGER("The crystalline strands cut deeply into \the [L]!"))
+	if(!severed && !prob(100 * L.get_blocked_ratio(null, BRUTE)))
+		L.apply_damage(rand(25, 50), used_weapon = src)
+		visible_message(SPAN_DANGER("The crystalline strands cut deeply into \the [L]!"))
 
 	if(prob(break_chance))
 		visible_message(SPAN_DANGER("\The [src] breaks apart!"))

@@ -8,37 +8,48 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/used_weapon = null)
-	if(!damage || (blocked >= 100))	return 0
+/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
+	if(!damage)
+		return 0
+
+	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
+	damage = after_armor[1]
+	damagetype = after_armor[2]
+	damage_flags = after_armor[3] // args modifications in case of parent calls
+	if(!damage)
+		return 0
+
 	switch(damagetype)
 		if(BRUTE)
-			adjustBruteLoss(damage * blocked_mult(blocked))
+			adjustBruteLoss(damage)
 		if(BURN)
-			if(MUTATION_COLD_RESISTANCE in mutations)	damage = 0
-			adjustFireLoss(damage * blocked_mult(blocked))
+			if(MUTATION_COLD_RESISTANCE in mutations)
+				damage = 0
+			adjustFireLoss(damage)
 		if(TOX)
-			adjustToxLoss(damage * blocked_mult(blocked))
+			adjustToxLoss(damage)
 		if(OXY)
-			adjustOxyLoss(damage * blocked_mult(blocked))
+			adjustOxyLoss(damage)
 		if(CLONE)
-			adjustCloneLoss(damage * blocked_mult(blocked))
+			adjustCloneLoss(damage)
 		if(PAIN)
-			adjustHalLoss(damage * blocked_mult(blocked))
+			adjustHalLoss(damage)
 		if(ELECTROCUTE)
-			electrocute_act(damage, used_weapon, 1.0, def_zone)
+			electrocute_act(damage, used_weapon, 1, def_zone)
+		if(IRRADIATE)
+			radiation += damage
 
 	updatehealth()
 	return 1
 
 
-/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/blocked = 0, var/damage_flags = 0)
-	if(blocked >= 100)	return 0
-	if(brute)	apply_damage(brute, BRUTE, def_zone, blocked)
-	if(burn)	apply_damage(burn, BURN, def_zone, blocked)
-	if(tox)		apply_damage(tox, TOX, def_zone, blocked)
-	if(oxy)		apply_damage(oxy, OXY, def_zone, blocked)
-	if(clone)	apply_damage(clone, CLONE, def_zone, blocked)
-	if(halloss) apply_damage(halloss, PAIN, def_zone, blocked)
+/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/damage_flags = 0)
+	if(brute)	apply_damage(brute, BRUTE, def_zone)
+	if(burn)	apply_damage(burn, BURN, def_zone)
+	if(tox)		apply_damage(tox, TOX, def_zone)
+	if(oxy)		apply_damage(oxy, OXY, def_zone)
+	if(clone)	apply_damage(clone, CLONE, def_zone)
+	if(halloss) apply_damage(halloss, PAIN, def_zone)
 	return 1
 
 
@@ -54,8 +65,6 @@
 			Paralyse(effect * blocked_mult(blocked))
 		if(PAIN)
 			adjustHalLoss(effect * blocked_mult(blocked))
-		if(IRRADIATE)
-			radiation += max(effect - blocked, 0) * blocked_mult(blocked) // set a floor threshold where radiation is completely blocked, and a percentage reduction to exposure after that.
 		if(STUTTER)
 			if(status_flags & CANSTUN) // stun is usually associated with stutter - TODO CANSTUTTER flag?
 				stuttering = max(stuttering, effect * blocked_mult(blocked))
@@ -72,7 +81,6 @@
 	if(stun)		apply_effect(stun,      STUN, blocked)
 	if(weaken)		apply_effect(weaken,    WEAKEN, blocked)
 	if(paralyze)	apply_effect(paralyze,  PARALYZE, blocked)
-	if(irradiate)	apply_effect(irradiate, IRRADIATE, blocked)
 	if(stutter)		apply_effect(stutter,   STUTTER, blocked)
 	if(eyeblur)		apply_effect(eyeblur,   EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy,    DROWSY, blocked)

@@ -621,7 +621,7 @@
 	if(Proj.damage_type == PAIN && !(src.r_deflect_coeff > 1))
 		use_power(Proj.agony * 5)
 
-	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
+	src.log_message("Hit by projectile. Type: [Proj.name]([get_armor_key(Proj.damage_type, Proj.damage_flags())]).",1)
 	if(deflect_hit(is_melee=0))
 		src.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
 		src.visible_message("The [src.name] armor deflects the projectile.")
@@ -632,7 +632,7 @@
 		var/ignore_threshold
 		if(istype(Proj, /obj/item/projectile/beam/pulse))
 			ignore_threshold = 1
-		src.hit_damage(Proj.damage, Proj.check_armour, is_melee=0)
+		src.hit_damage(Proj.damage, get_armor_key(Proj.damage_type, Proj.damage_flags()), is_melee=0)
 		if(prob(25)) spark_system.start()
 		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
 

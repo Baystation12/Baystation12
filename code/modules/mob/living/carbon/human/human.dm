@@ -125,16 +125,8 @@
 		if (1.0)
 			b_loss = 400
 			f_loss = 100
-			if (!prob(getarmor(null, "bomb")))
-				gib()
-				return
-			else
-				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
-				throw_at(target, 200, 4)
-			//return
-//				var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
-				//user.throw_at(target, 200, 4)
-
+			var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
+			throw_at(target, 200, 4)
 		if (2.0)
 			b_loss = 60
 			f_loss = 60
@@ -153,29 +145,14 @@
 			if (prob(50))
 				Paralyse(10)
 
-	// factor in armour
-	var/protection = blocked_mult(getarmor(null, "bomb"))
-	b_loss *= protection
-	f_loss *= protection
-
 	// focus most of the blast on one organ
-	var/obj/item/organ/external/take_blast = pick(organs)
-	take_blast.take_external_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
+	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+	apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
 
 	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
-	b_loss *= 0.3
-	f_loss *= 0.3
+	apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
 
-	var/weapon_message = "Explosive Blast"
-	for(var/obj/item/organ/external/temp in organs)
-		var/loss_val
-		if(temp.organ_tag  == BP_HEAD)
-			loss_val = 0.2
-		else if(temp.organ_tag == BP_CHEST)
-			loss_val = 0.4
-		else
-			loss_val = 0.05
-		temp.take_external_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
@@ -1085,6 +1062,9 @@
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health
+	remove_extension(src, /datum/extension/armor)
+	if(species.natural_armour_values)
+		set_extension(src, /datum/extension/armor, /datum/extension/armor, species.natural_armour_values)
 
 	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
 	default_pixel_y = initial(pixel_y) + species.pixel_offset_y

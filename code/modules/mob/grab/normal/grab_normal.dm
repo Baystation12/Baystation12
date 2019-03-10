@@ -177,11 +177,11 @@
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
-	var/armor = target.run_armor_check(BP_HEAD, "melee")
-	target.apply_damage(damage, BRUTE, BP_HEAD, armor, damage_flags)
-	attacker.apply_damage(10, BRUTE, BP_HEAD, attacker.run_armor_check(BP_HEAD, "melee"))
+	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE)
+	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
+	attacker.apply_damage(10, BRUTE, BP_HEAD)
 
-	if(armor < 50 && target.headcheck(BP_HEAD) && prob(damage))
+	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
 		target.visible_message("<span class='danger'>[target] [target.species.get_knockout_message(target)]</span>")
 

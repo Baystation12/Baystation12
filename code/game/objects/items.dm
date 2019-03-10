@@ -88,6 +88,14 @@
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 
+/obj/item/Initialize()
+	. = ..()
+	if(islist(armor))
+		for(var/type in armor)
+			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
+				set_extension(src, /datum/extension/armor, /datum/extension/armor, armor)
+				break
+
 /obj/item/Destroy()
 	QDEL_NULL(hidden_uplink)
 	if(ismob(loc))

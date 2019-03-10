@@ -1501,7 +1501,7 @@ obj/item/organ/external/proc/remove_clamps()
 	if(!can_feel_pain())
 		return
 
-	var/armor = owner.run_armor_check(owner, "melee")
+	var/armor = 100 * owner.get_blocked_ratio(owner, BRUTE)
 	if(armor < 100)
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 

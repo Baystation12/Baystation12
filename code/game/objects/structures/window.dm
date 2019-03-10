@@ -291,17 +291,16 @@
 		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
 		return TRUE
 	var/def_zone = ran_zone(BP_HEAD, 20)
-	var/blocked = G.affecting.run_armor_check(def_zone, "melee")
 	if(G.damage_stage() < 2)
 		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
 		if (prob(50))
 			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, BRUTE, def_zone, blocked, used_weapon = src)
+		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, BRUTE, def_zone, blocked, used_weapon = src)
+		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
 	return TRUE
 

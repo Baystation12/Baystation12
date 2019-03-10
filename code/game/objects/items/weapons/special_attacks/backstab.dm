@@ -77,8 +77,7 @@ Proc returns a boolean if successful.
 
 			H = target
 			var/obj/item/organ/external/stabbed_part = H.get_organ(target_zone)
-
-			if( !prob(target.run_armor_check(target_zone, "melee")) && !isnull(stabbed_part) && length(stabbed_part.internal_organs) )
+			if( !prob(H.get_blocked_ratio(target_zone, BRUTE) * 100) && !isnull(stabbed_part) && length(stabbed_part.internal_organs) )
 
 				var/obj/item/organ/internal/damaged_organ = pick(stabbed_part.internal_organs) //This could be improved by checking the size of an internal organ.
 
@@ -88,7 +87,7 @@ Proc returns a boolean if successful.
 				H.custom_pain("<span class = 'danger' font size='10'>You feel a stabbing pain in the back of your [stabbed_part]!</span>") //Only the stabber and stabbed should know how bad this is.
 
 		else
-			target.apply_damage(damage, damage_type, target_zone, target.run_armor_check(target_zone, "melee"), DAM_SHARP, src) //Backstabbing. Does extra damage to simple mobs only.
+			target.apply_damage(damage, damage_type, target_zone, DAM_SHARP, src) //Backstabbing. Does extra damage to simple mobs only.
 			to_chat(user, "<span class = 'danger'>You stab [target] in the back!</span>")
 
 	return TRUE //Returns a value in case you want to layer additional behavior on this.

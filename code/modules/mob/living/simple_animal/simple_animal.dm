@@ -282,7 +282,7 @@
 
 	if(O.force <= resistance)
 		to_chat(user, "<span class='danger'>This weapon is ineffective; it does no damage.</span>")
-		return 2
+		return 0
 
 	var/damage = O.force
 	if (O.damtype == PAIN)
@@ -296,7 +296,7 @@
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
-	return 0
+	return 1
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = ..() //Incase I need to add stuff other than "speed" later
@@ -329,18 +329,16 @@
 
 	var/damage
 	switch (severity)
-		if (1.0)
+		if (1)
 			damage = 500
-			if(!prob(getarmor(null, "bomb")))
-				gib()
 
-		if (2.0)
+		if (2)
 			damage = 120
 
-		if(3.0)
+		if(3)
 			damage = 30
 
-	adjustBruteLoss(damage * blocked_mult(getarmor(null, "bomb")))
+	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
@@ -434,9 +432,6 @@
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour
 	drip.update_icon()
-
-/mob/living/simple_animal/getarmor(var/def_zone, var/type)
-	return LAZYACCESS(natural_armor, type)
 
 /mob/living/simple_animal/get_digestion_product()
 	return /datum/reagent/nutriment
