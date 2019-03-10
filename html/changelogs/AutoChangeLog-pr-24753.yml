@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Adds the proxy command to terminals. This lets you obfuscate your nid by routing through another computer. Requires access_network and experienced skill. Generates local logs on the machine you route through, stored as a file on the hard drive."
