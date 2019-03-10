@@ -143,6 +143,7 @@
 			filled_bag.overlays += I
 			filled_bag.overlays += "evidence"
 			filled_bag.w_class = ITEM_SIZE_TINY
+			filled_bag.stored_item = R
 
 			to_chat(user, "<span class='notice'>You take a core sample of the [item_to_sample].</span>")
 	else
