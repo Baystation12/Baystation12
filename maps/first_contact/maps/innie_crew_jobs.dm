@@ -7,7 +7,30 @@
 	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
 	selection_color = "#ff0000"
 	spawnpoint_override = "Innie Base Spawns"
-	alt_titles = list("Insurrectionist Ship Crew","Insurrectionist Technician","Insurrectionist Smuggler","Insurrectionist Broker","Insurrectionist Recruiter","Insurrectionist Saboteur","Insurrectionist Infiltrator")
+	alt_titles = list(\
+	"Insurrectionist Ship Crew",
+	"Insurrectionist Technician",
+	"Insurrectionist Machine Gunner",
+	"Insurrectionist Field Medic",
+	"Insurrectionist Bartender",
+	"Insurrectionist Janitor",
+	"Insurrectionist Breacher",
+	"Insurrectionist Engineer",
+	"Insurrectionist Guard",
+	"Insurrectionist Negotiator",
+	"Insurrectionist Interrogator",
+	"Insurrectionist Tracker",
+	"Insurrectionist Trainer",
+	"Insurrectionist Bombmaker",
+	"Insurrectionist Mechanic",
+	"Insurrectionist Pilot",
+	"Insurrectionist Marksman",
+	"Insurrectionist Trooper",
+	"Insurrectionist Smuggler",\
+	"Insurrectionist Broker",\
+	"Insurrectionist Recruiter",\
+	"Insurrectionist Saboteur",\
+	"Insurrectionist Infiltrator")
 
 /datum/job/ship_cap_innie
 	title = "Insurrectionist Commander"
