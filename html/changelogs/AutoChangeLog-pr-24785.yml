@@ -1,0 +1,4 @@
+author: "afirpo"
+delete-after: True
+changes: 
+  - bugfix: "now the Core Sampler (Xenoarcheologist and perhaps Anomalist related) works again - the sample is spitted out from its sample \\ evidence bag."
