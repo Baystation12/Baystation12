@@ -66,3 +66,8 @@ GLOBAL_LIST_EMPTY(unsc_leader_spawns)
 /obj/effect/landmark/start/unsc/leader/New()
 	..()
 	GLOB.unsc_leader_spawns += loc
+
+//UNSC SHIP AI
+
+/obj/effect/landmark/start/colony_AI
+	name = "UEG Colonial AI"

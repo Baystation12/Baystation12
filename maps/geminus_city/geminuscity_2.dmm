@@ -300,7 +300,7 @@
 "afN" = (/obj/effect/landmark/start{name = "Shaft Miner"},/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/planets/Geminus/outdoor/north)
 "afO" = (/obj/structure/window/reinforced,/obj/structure/closet/secure_closet/security,/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/police_station)
 "afP" = (/obj/machinery/door/airlock/diamond{name = "Bathroom"},/turf/simulated/floor/tiled,/area/planets/Geminus/outdoor/north)
-"afQ" = (/obj/effect/landmark/start/AI,/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/science)
+"afQ" = (/obj/effect/landmark/start/colony_AI,/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/science)
 "afR" = (/obj/structure/curtain{color = "#4C0000"; name = "burgandy curtain"},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/north)
 "afS" = (/obj/machinery/door/airlock/diamond{name = "Bedroom"},/turf/simulated/floor/tiled,/area/planets/Geminus/outdoor/north)
 "afT" = (/obj/structure/closet/secure_closet,/turf/simulated/floor/tiled,/area/planets/Geminus/outdoor/north)
