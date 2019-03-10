@@ -71,6 +71,7 @@ var/global/datum/controller/gameticker/ticker
 			if(pregame_timeleft <= 0 || ((initialization_stage & INITIALIZATION_NOW_AND_COMPLETE) == INITIALIZATION_NOW_AND_COMPLETE))
 				current_state = GAME_STATE_SETTING_UP
 				Master.SetRunLevel(RUNLEVEL_SETUP)
+				callHook("game_initialised")
 
 	while (!setup())
 

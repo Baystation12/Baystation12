@@ -237,17 +237,36 @@
 /hook/startup/proc/buildPowernets()
 	return makepowernets()
 
+var/global/list/cable_list_late_init = list()
+
 // rebuild all power networks from scratch - only called at world creation or by the admin verb
 /proc/makepowernets()
 	for(var/datum/powernet/PN in GLOB.powernets)
 		qdel(PN)
 	GLOB.powernets.Cut()
+	cable_list_late_init.Cut()
 
 	for(var/obj/structure/cable/PC in cable_list)
-		if(!PC.powernet)
+		if(PC.d1 == UP || PC.d1 == DOWN)
+			cable_list_late_init.Add(PC)
+		else if(!PC.powernet)
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
+
+	if(ticker && ticker.current_state >= GAME_STATE_SETTING_UP)
+		makepowernets_late_init()
+
+	return 1
+
+/hook/game_initialised/proc/buildPowernets_late_init()
+	return makepowernets_late_init()
+
+/proc/makepowernets_late_init()
+	for(var/obj/structure/cable/PC in cable_list_late_init)
+		//just connect both directions, this proc safety checks if its already connected
+		PC.mergeConnectedNetworks(PC.d1)
+		PC.mergeConnectedNetworks(PC.d2)
 	return 1
 
 //remove the old powernet and replace it with a new one throughout the network.
