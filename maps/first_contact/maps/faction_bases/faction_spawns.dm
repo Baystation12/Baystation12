@@ -37,16 +37,6 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 /datum/spawnpoint/unsc_base
 	display_name = "UNSC Base Spawns"
 	restrict_job_type = list(\
-		/*
-		/datum/job/unscbertels_co,\
-		/datum/job/unscbertels_xo,\
-		/datum/job/unscbertels_ship_crew,\
-		/datum/job/unscbertels_medical_crew,\
-		/datum/job/bertelsunsc_ship_marine,\
-		/datum/job/unsc_ship_marineplatoon,\
-		/datum/job/bertelsODST,\
-		/datum/job/bertelsODSTO,\
-		*/
 		/datum/job/ODST,\
 		/datum/job/ODSTO,\
 		/datum/job/UNSC_ship/commander,\
