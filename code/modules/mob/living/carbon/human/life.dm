@@ -835,7 +835,7 @@
 	if(chem_effects[CE_ALCOHOL])
 		vomit_score += 10
 	if(stat != DEAD && vomit_score > 25 && prob(10))
-		spawn vomit(1, vomit_score, vomit_score/25)
+		vomit(vomit_score, vomit_score/25)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
@@ -848,18 +848,6 @@
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
-
-/mob/living/carbon/human/handle_stomach()
-	set waitfor = 0
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if(stomach && stomach.is_usable())
-		for(var/mob/living/M in stomach.contents)
-			if(M.stat == DEAD)
-				qdel(M)
-				continue
-			if(life_tick % 3 == 1)
-				M.adjustBruteLoss(5)
-				nutrition += 10
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

@@ -437,3 +437,6 @@
 
 /mob/living/simple_animal/getarmor(var/def_zone, var/type)
 	return LAZYACCESS(natural_armor, type)
+
+/mob/living/simple_animal/get_digestion_product()
+	return /datum/reagent/nutriment

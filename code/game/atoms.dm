@@ -238,15 +238,12 @@ its easier to just keep the beam vertical.
 /atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
-	if(blood_DNA && !istype(src, /obj/effect/decal))
+	if(blood_color && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
 			f_name = "some "
 		else
 			f_name = "a "
-		if(blood_color != SYNTH_BLOOD_COLOUR)
-			f_name += "<span class='danger'>blood-stained</span> [name][infix]!"
-		else
-			f_name += "oil-stained [name][infix]."
+		f_name += "<font color ='[blood_color]'>stained</font> [name][infix]!"
 
 	to_chat(user, "\icon[src] That's [f_name] [suffix]")
 	to_chat(user, desc)
@@ -323,25 +320,19 @@ its easier to just keep the beam vertical.
 	. = 1
 	return 1
 
-/atom/proc/add_vomit_floor(var/mob/living/carbon/M, var/toxvomit = 0, var/datum/reagents/inject_reagents)
-	if(istype(src, /turf/simulated))
-		var/obj/effect/decal/cleanable/vomit/this = new /obj/effect/decal/cleanable/vomit(src)
-		if(istype(inject_reagents) && inject_reagents.total_volume)
-			inject_reagents.trans_to_obj(this, min(15, inject_reagents.total_volume))
-			this.reagents.add_reagent(/datum/reagent/acid/stomach, 5)
-		// Make toxins vomit look different
-		if(toxvomit)
-			this.icon_state = "vomittox_[pick(1,4)]"
+/mob/living/proc/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
+	vomit.reagents.add_reagent(/datum/reagent/acid/stomach, 5)
 
 /atom/proc/clean_blood()
 	if(!simulated)
 		return
 	fluorescent = 0
-	src.germ_level = 0
+	germ_level = 0
+	blood_color = null
+	gunshot_residue = null
 	if(istype(blood_DNA, /list))
 		blood_DNA = null
 		return 1
-	gunshot_residue = null
 
 /atom/proc/get_global_map_pos()
 	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return
