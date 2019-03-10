@@ -16,7 +16,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if(istype(H) && H.species.get_virus_immune(H))
 		return 0
 
-	var/protection = M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED)	//gets the full body bio armour value, weighted by body part coverage.
+	var/protection = M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO)	//gets the full body bio armour value, weighted by body part coverage.
 	var/score = round(6 * protection) 			//scales 100% protection to 6.
 
 	switch(vector)
@@ -57,12 +57,12 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (!istype(M))
 		return 0
 
-	var/protection = M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED)	//gets the full body bio armour value, weighted by body part coverage.
+	var/protection = M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO)	//gets the full body bio armour value, weighted by body part coverage.
 
 	if (vector == "Airborne")	//for airborne infections face-covering items give non-weighted protection value.
 		if(M.internal)
 			return 1
-		protection = max(protection, M.get_blocked_ratio(FACE, TOX))
+		protection = max(protection, M.get_blocked_ratio(FACE, TOX, damage_flags = DAM_BIO))
 
 	return prob(100 * protection + 15*M.chem_effects[CE_ANTIVIRAL])
 

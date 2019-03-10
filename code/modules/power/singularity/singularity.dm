@@ -414,8 +414,7 @@
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
-		toxdamage = (toxdamage - (toxdamage*M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED)))
-		M.apply_effect(toxdamage, TOX)
+		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
 
 /obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))

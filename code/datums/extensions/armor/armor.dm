@@ -56,7 +56,11 @@
 	//In particular, blocked will increase from 0 to 50 as effective_armor increases from 0 to 0.999 (if it is 1 then we never get here because ofc)
 	//and the average damage absorption = (blocked/100)*(1-fullblock) + 1.0*(fullblock) = effective_armor
 	var/blocked
+#ifndef UNIT_TEST // Removes the probablity of full blocks for the purposes of testing innate armor.
 	if(fullblock >= 1  || prob(fullblock*100))
+#else
+	if(fullblock >= 1)
+#endif
 		blocked = 1
 	else
 		blocked = (effective_armor - fullblock)/(1 - fullblock)
@@ -84,7 +88,8 @@
 			else
 				key = "energy"
 		if(TOX)
-			key = "bio"
+			if(damage_flags & DAM_BIO)
+				key = "bio" // Otherwise just not blocked by default.
 		if(IRRADIATE)
 			key = "rad"
 		if("psi")
