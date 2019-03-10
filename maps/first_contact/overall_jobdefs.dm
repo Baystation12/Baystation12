@@ -58,10 +58,6 @@
 		"Innie Base Spawns",\
 		"UNSC Base Spawns",\
 		"Covenant Base Spawns",\
-		"Civilian Ship Crew",\
-		"Civ Ship Cap Crew",\
-		"Medical Ship Crew",\
-		"Medical Ship Cap Crew",\
 		"Emsville Spawn",\
 		"Emsville Spawn Marshall",\
 		"Research Facility Spawn",\
