@@ -9,7 +9,7 @@
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
-	id_hud_icons = 'maps/unsc_frigate/frigate_hud_icons.dmi'
+	id_hud_icons = 'maps/UNSC_Heaven_Above/frigate_hud_icons.dmi'
 	station_networks = list("Exodus")
 	station_name  = ""
 	station_short = ""
@@ -19,6 +19,6 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Uncharted System"
-	overmap_size= 60
+	overmap_size= 100
 
 	use_overmap = 1

@@ -45,10 +45,8 @@
 	item_state = "beam rifle"
 	slot_flags = SLOT_BACK | SLOT_BELT
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
-	charge_meter = 0
-	self_recharge = 1
-	max_shots = 5
-	recharge_time = 2 SECONDS
+	charge_meter = 1
+	max_shots = 10
 	projectile_type = /obj/item/projectile/covenant/beamrifle
 	one_hand_penalty = -1
 	irradiate_non_cov = 10
@@ -78,6 +76,13 @@
 	else
 		update_next_allowed_fire()
 		. = ..()
+
+/obj/item/weapon/gun/energy/beam_rifle/proc/cov_plasma_recharge_tick()
+	if(max_shots > 0)
+		if(power_supply.charge < power_supply.maxcharge)
+			power_supply.give(charge_cost)
+			update_icon()
+			return 1
 
 obj/item/weapon/gun/projectile/type31needlerifle
 	name = "Type-31 Needle Rifle"

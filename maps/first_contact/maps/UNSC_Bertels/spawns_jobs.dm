@@ -107,7 +107,7 @@ GLOBAL_LIST_EMPTY(corvetteodst_marineplatoon_spawns)
 
 
 //UNSC BERTELS ODST Spawnpoints
-
+/*
 GLOBAL_LIST_EMPTY(corvetteodst_odst_spawns)
 
 /datum/spawnpoint/corvetteodst_odst
@@ -145,3 +145,4 @@ GLOBAL_LIST_EMPTY(corvetteodst_officer_spawns)
 /obj/effect/landmark/start/corvetteodst_officer/New()
 	..()
 	GLOB.corvetteodst_officer_spawns += loc
+*/
