@@ -105,7 +105,9 @@
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
 	else
-		var/organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
+		var/obj/item/organ/organ_to_remove = attached_organs[1]
+		if(attached_organs.len > 1)
+			organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
 		if(organ_to_remove)
 			return organ_to_remove
 	return FALSE
@@ -154,7 +156,9 @@
 		if(!LAZYLEN(removable_organs))
 			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
 		else
-			var/organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
+			var/obj/item/organ/organ_to_remove = removable_organs[1]
+			if(removable_organs.len > 1)
+				organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
 			if(organ_to_remove)
 				return organ_to_remove
 	return FALSE

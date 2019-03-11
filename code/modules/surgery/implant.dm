@@ -150,6 +150,14 @@
 	min_duration = 80
 	max_duration = 100
 
+/decl/surgery_step/cavity/implant_removal/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = ..()
+	if(affected)
+		for(var/obj/O in affected.implants)
+			if(!istype(O, /obj/item/organ/internal))
+				return affected
+	return FALSE
+
 /decl/surgery_step/cavity/implant_removal/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts poking around inside [target]'s [affected.name] with \the [tool].", \
