@@ -222,6 +222,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	lobby_track = decls_repository.get_decl(lobby_track_type)
 	world.update_status()
 
+/datum/map/proc/setup_job_lists()
+	return
+
 /datum/map/proc/send_welcome()
 	return
 
@@ -312,9 +315,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		station_account = create_account("[station_name()] Primary Account", starting_money)
 
 	for(var/job in allowed_jobs)
-		var/datum/job/J = decls_repository.get_decl(job)
-		if(J.department)
-			station_departments |= J.department
+		var/datum/job/J = job
+		var/dept = initial(J.department)
+		if(dept)
+			station_departments |= dept
+
 	for(var/department in station_departments)
 		department_accounts[department] = create_account("[department] Account", department_money)
 

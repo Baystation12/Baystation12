@@ -91,6 +91,11 @@ SUBSYSTEM_DEF(jobs)
 		if(LAZYLEN(submap_job_datums))
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
+	// Update global map blacklists and whitelists.
+	for(var/mappath in GLOB.all_maps)
+		var/datum/map/M = GLOB.all_maps[mappath]
+		M.setup_job_lists()
+
 	// Update valid job titles.
 	titles_to_datums = list()
 	types_to_datums = list()

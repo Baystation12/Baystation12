@@ -333,7 +333,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<tr><td width='50%' align='right'><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
 	output += "<td width='50%' align='right'><b>Job:</b><select name='dbbanaddjob'>"
 	output += "<option value=''>--</option>"
-	for(var/j in get_all_jobs())
+	for(var/j in SSjobs.titles_to_datums)
 		output += "<option value='[j]'>[j]</option>"
 	for(var/j in SSjobs.titles_by_department(MSC))
 		output += "<option value='[j]'>[j]</option>"
