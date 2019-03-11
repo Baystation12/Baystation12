@@ -484,9 +484,10 @@ datum/unit_test/robot_module_icons/start_test()
 	if(!valid_states.len)
 		return 1
 
-	for(var/i=1, i<=robot_modules.len, i++)
-		var/bad_msg = "[ascii_red]--------------- [robot_modules[i]]"
-		if(!(lowertext(robot_modules[i]) in valid_states))
+	for(var/i=1, i<=SSrobots.all_module_names.len, i++)
+		var/modname = lowertext(SSrobots.all_module_names[i])
+		var/bad_msg = "[ascii_red]--------------- [modname]"
+		if(!(modname in valid_states))
 			log_unit_test("[bad_msg] does not contain a valid icon state in [icon_file][ascii_reset]")
 			failed=1
 

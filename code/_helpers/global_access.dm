@@ -735,8 +735,6 @@
 			return global.robot_hud_colours;
 		if("robot_inventory")
 			return global.robot_inventory;
-		if("robot_modules")
-			return global.robot_modules;
 		if("round_start_time")
 			return global.round_start_time;
 		if("roundstart_hour")
@@ -1684,8 +1682,6 @@
 			global.robot_hud_colours=newval;
 		if("robot_inventory")
 			global.robot_inventory=newval;
-		if("robot_modules")
-			global.robot_modules=newval;
 		if("round_start_time")
 			global.round_start_time=newval;
 		if("roundstart_hour")
@@ -2265,7 +2261,6 @@
 	"robot_custom_icons",
 	"robot_hud_colours",
 	"robot_inventory",
-	"robot_modules",
 	"round_start_time",
 	"roundstart_hour",
 	"rune_list",

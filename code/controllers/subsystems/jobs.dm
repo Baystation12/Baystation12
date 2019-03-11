@@ -507,7 +507,7 @@ SUBSYSTEM_DEF(jobs)
 
 		switch(rank)
 			if("Robot")
-				return H.Robotize()
+				return H.Robotize(SSrobots.get_mob_type_by_title(alt_title ? alt_title : job.title))
 			if("AI")
 				return H
 			if("Captain")

@@ -70,9 +70,8 @@
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		//this proc also automatically computes and updates points_by_job
 
-	var/jobs_by_type = decls_repository.get_decls(GLOB.using_map.allowed_jobs)
-	for(var/job_type in jobs_by_type)
-		var/datum/job/job = jobs_by_type[job_type]
+	for(var/job_type in SSjobs.types_to_datums)
+		var/datum/job/job = SSjobs.types_to_datums[job_type]
 		var/alt_title = pref.player_alt_titles[job.title]
 		if(alt_title && !(alt_title in job.alt_titles))
 			pref.player_alt_titles -= job.title
@@ -508,9 +507,9 @@
  */
 /datum/category_item/player_setup_item/proc/prune_job_prefs()
 	var/allowed_titles = list()
-	var/jobs_by_type = decls_repository.get_decls(GLOB.using_map.allowed_jobs)
-	for(var/job_type in jobs_by_type)
-		var/datum/job/job = jobs_by_type[job_type]
+
+	for(var/job_type in SSjobs.types_to_datums)
+		var/datum/job/job = SSjobs.types_to_datums[job_type]
 		allowed_titles += job.title
 
 		if(job.title == pref.job_high)
