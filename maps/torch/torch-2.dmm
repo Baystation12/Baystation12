@@ -19303,7 +19303,7 @@
 /obj/machinery/door/airlock/command{
 	autoset_access = 0;
 	name = "Officer's Mess";
-	req_access = list(list("ACCESS_HEADS","ACCESS_TORCH_SENIOR_MED","ACCESS_PSYCHIATRIST"))
+	req_access = list(list("ACCESS_BRIDGE","ACCESS_KITCHEN","ACCESS_TORCH_SENIOR_MED","ACCESS_PSYCHIATRIST"))
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
