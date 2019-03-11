@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Petrov and research access can now only be granted by the XO and CO. You can now build/adjust access on Petrov doors."
