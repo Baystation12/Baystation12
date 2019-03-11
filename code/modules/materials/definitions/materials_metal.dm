@@ -164,7 +164,7 @@
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#777777"
+	icon_colour = "#a8a9b2"
 	explosion_resistance = 25
 	brute_armor = 6
 	burn_armor = 10
