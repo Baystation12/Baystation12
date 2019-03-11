@@ -33,8 +33,9 @@
 	var/list/added_networks = list()
 
 	var/display_name
-	var/crisis_locked = FALSE
-	var/upgrade_locked = FALSE
+	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
+	var/crisis_locked =   FALSE
+	var/upgrade_locked =  FALSE
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
 	..()
@@ -410,8 +411,6 @@
 	..()
 
 /obj/item/weapon/robot_module/security
-	name = "security robot module"
-	display_name = "Security"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
@@ -419,6 +418,8 @@
 	supported_upgrades = list(/obj/item/borg/upgrade/weaponcooler)
 
 /obj/item/weapon/robot_module/security/general
+	name = "security robot module"
+	display_name = "Security"
 	sprites = list(
 					"Basic" = "secborg",
 					"Red Knight" = "Security",

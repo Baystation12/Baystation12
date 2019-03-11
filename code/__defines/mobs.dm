@@ -331,3 +331,5 @@
 #define MOB_CLIMB_TIME_MEDIUM 50
 
 #define MOB_FACTION_NEUTRAL "neutral"
+
+#define ROBOT_MODULE_TYPE_GROUNDED "grounded"

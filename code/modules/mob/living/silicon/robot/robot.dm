@@ -21,6 +21,7 @@
 	var/crisis_override = 0
 	var/integrated_light_max_bright = 0.75
 	var/datum/wires/robot/wires
+	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 
 //Icon stuff
 

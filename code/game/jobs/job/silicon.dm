@@ -40,7 +40,7 @@
 	no_skill_buffs = TRUE
 
 /datum/job/cyborg/equip(var/mob/living/carbon/human/H)
-	return H
+	return !!H
 
 /datum/job/cyborg/New()
 	..()

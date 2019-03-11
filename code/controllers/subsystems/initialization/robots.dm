@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(robots)
 
 	var/list/mob_types_by_title = list()
 	var/list/mmi_types_by_title = list(
+		"cyborg" = /obj/item/device/mmi,
 		"robot" =  /obj/item/organ/internal/posibrain,
 		"drone" =  /obj/item/device/mmi/digital/robot
 	)
@@ -28,27 +29,20 @@ SUBSYSTEM_DEF(robots)
 		var/module_name = initial(module.display_name)
 		if(module_name && module_category)
 			if(!initial(module.upgrade_locked))
-				var/list/modules_in_category
 				if(initial(module.crisis_locked))
 					LAZYINITLIST(crisis_modules_by_category[module_category])
-					modules_in_category = crisis_modules_by_category[module_category]
+					LAZYSET(crisis_modules_by_category[module_category], module_name, module)
 				else
 					LAZYINITLIST(modules_by_category[module_category])
-					modules_in_category = modules_by_category[module_category]
-				modules_in_category[module_name] = module
+					LAZYSET(modules_by_category[module_category], module_name, module)
 			all_module_names |= module_name
 	all_module_names = sortTim(all_module_names, /proc/cmp_text_asc)
 
 /datum/controller/subsystem/robots/proc/get_available_modules(var/module_category, var/crisis_mode)
-	var/list/modules = list()
-	var/list/checking = modules_by_category[module_category]
-	for(var/mod in checking)
-		modules[mod] = checking[mod]
+	. = list()
+	. += modules_by_category[module_category]
 	if(crisis_mode)
-		checking = crisis_modules_by_category[module_category]
-		for(var/mod in checking)
-			modules[mod] = checking[mod]
-	return modules
+		. |= crisis_modules_by_category[module_category	]
 
 /datum/controller/subsystem/robots/proc/get_mmi_type_by_title(var/check_title)
 	. = mmi_types_by_title[lowertext(trim(check_title))] || /obj/item/device/mmi
