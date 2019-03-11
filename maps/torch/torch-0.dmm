@@ -3397,6 +3397,7 @@
 	id = "qm_warehouse";
 	name = "Warehouse Shutters"
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage)
 "hF" = (
@@ -5593,8 +5594,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	
+	pixel_y = 24
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -7616,8 +7616,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/aft)
@@ -13820,8 +13819,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	
+	pixel_y = 24
 	},
 /obj/structure/handrai,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
