@@ -106,30 +106,35 @@
 
 /mob/living/carbon/human/var/step_count
 
-/mob/living/carbon/human/proc/handle_footsteps()
-	var/turf/simulated/T = get_turf(src)
-	if(!istype(T))
-		return
-
+/mob/living/carbon/human/proc/has_footsteps()
 	if(buckled || lying || throwing)
 		return //people flying, lying down or sitting do not step
-
-	if(MOVING_QUICKLY(src))
-		if(step_count % 2) //every other turf makes a sound
-			return
-
+	
 	if(species.silent_steps)
 		return //species is silent
 
 	if(shoes && (shoes.item_flags & ITEM_FLAG_SILENT))
 		return // quiet shoes
 
+	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
+		return //no feet no footsteps
+	
+	return TRUE
+
+/mob/living/carbon/human/proc/handle_footsteps()
+	var/turf/simulated/T = get_turf(src)
+	if(!istype(T))
+		return
+	if(!has_footsteps())
+		return
+
+	if(MOVING_QUICKLY(src))
+		if(step_count % 2) //every other turf makes a sound
+			return
+	
 	if(!has_gravity(src))
 		if(step_count % 3) // don't need to step as often when you hop around
 			return
-
-	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
-		return //no feet no footsteps
 
 	var/footsound
 	for(var/obj/structure/S in T)

@@ -13,6 +13,9 @@
 	var/recent_fault = 0
 	var/power_output = 1
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	var/datum/sound_token/sound_token
+	var/sound_id
+	var/working_sound
 
 /obj/machinery/power/port_gen/proc/IsBroken()
 	return (stat & (BROKEN|EMPED))
@@ -29,6 +32,20 @@
 /obj/machinery/power/port_gen/proc/handleInactive()
 	return
 
+/obj/machinery/power/port_gen/proc/update_sound()
+	if(!working_sound)
+		return
+	if(!sound_id)
+		sound_id = "[type]_[sequential_id(/obj/machinery/power/port_gen)]"
+	if(active && HasFuel() && !IsBroken())
+		var/volume = 10 + 15*power_output
+		if(!sound_token)
+			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume)
+		sound_token.SetVolume(volume)
+	else if(sound_token)
+		QDEL_NULL(sound_token)
+
+
 /obj/machinery/power/port_gen/Process()
 	if(active && HasFuel() && !IsBroken() && anchored && powernet)
 		add_avail(power_gen * power_output)
@@ -38,6 +55,7 @@
 		active = 0
 		handleInactive()
 	update_icon()
+	update_sound()
 
 /obj/machinery/power/port_gen/on_update_icon()
 	if(!active)
@@ -103,6 +121,7 @@
 		Setting to 5 or higher can only be done temporarily before the generator overheats.
 	*/
 	power_gen = 20000			//Watts output per power_output level
+	working_sound = 'sound/machines/engine.ogg'
 	var/max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.
 	var/time_per_sheet = 96		//fuel efficiency - how long 1 sheet lasts at power level 1
