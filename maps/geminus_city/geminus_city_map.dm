@@ -18,3 +18,6 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Uncharted System"
+
+	allowed_spawns = list(\
+		DEFAULT_SPAWNPOINT_ID)
