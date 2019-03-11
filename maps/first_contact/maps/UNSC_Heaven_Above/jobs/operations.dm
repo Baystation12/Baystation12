@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/ops_chief
-	title = "Operations Supervisor"
+	title = "UNSC Heavens Above Operations Supervisor"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -17,7 +17,7 @@
 
 //specialist technicians for the bridge
 /datum/job/UNSC_ship/ops
-	title = "Operations Specialist"
+	title = "UNSC Heavens Above Operations Specialist"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM

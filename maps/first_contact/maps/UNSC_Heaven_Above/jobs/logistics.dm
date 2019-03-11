@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/logistics_chief
-	title = "Crew Chief (logistics)"
+	title = "UNSC Heavens Above Crew Chief (logistics)"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -16,7 +16,7 @@
 	access = list(access_unsc_crew, access_unsc_shuttles, access_unsc_supplies)
 
 /datum/job/UNSC_ship/logistics
-	title = "Logistics Specialist"
+	title = "UNSC Heavens Above Logistics Specialist"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM
