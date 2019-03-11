@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/medical_chief
-	title = "Chief Hospital Corpsman"
+	title = "UNSC Heavens Above Chief Hospital Corpsman"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -16,7 +16,7 @@
 	access = list(access_unsc_crew, access_unsc_medical)
 
 /datum/job/UNSC_ship/medical
-	title = "Hospital Corpsman"
+	title = "UNSC Heavens Above Hospital Corpsman"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM

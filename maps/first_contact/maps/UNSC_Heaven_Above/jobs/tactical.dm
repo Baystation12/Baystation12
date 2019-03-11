@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/gunnery_chief
-	title = "Crew Chief (gunnery)"
+	title = "UNSC Heavens Above Crew Chief (gunnery)"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -16,7 +16,7 @@
 	access = list(access_unsc_crew, access_unsc_gunnery)
 
 /datum/job/UNSC_ship/gunnery
-	title = "Gunnery Operator"
+	title = "UNSC Heavens Above Gunnery Operator"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM

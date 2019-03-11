@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/cmdr_wing
-	title = "Wing Commander"
+	title = "UNSC Heavens Above Wing Commander"
 	min_rank = RANK_LT
 	default_rank = RANK_CDR
 	max_rank = OFFICER_MAX
@@ -18,7 +18,7 @@
 		access_unsc_officers)
 
 /datum/job/UNSC_ship/cmdr_sqr
-	title = "Squadron Commander"
+	title = "UNSC Heavens Above Squadron Commander"
 	min_rank = RANK_LT
 	default_rank = RANK_LCDR
 	max_rank = OFFICER_MAX
@@ -35,7 +35,7 @@
 		access_unsc_officers)
 
 /datum/job/UNSC_ship/pilot
-	title = "Pilot"
+	title = "UNSC Heavens Above Pilot"
 	min_rank = OFFICER_MIN
 	default_rank = RANK_LT
 	max_rank = RANK_LCDR

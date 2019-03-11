@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/mechanic_chief
-	title = "Crew Chief (flight)"
+	title = "UNSC Heavens Above Crew Chief (flight)"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -17,7 +17,7 @@
 		access_unsc_shuttles, access_unsc_supplies)
 
 /datum/job/UNSC_ship/mechanic
-	title = "Flight Mechanic"
+	title = "UNSC Heavens Above Flight Mechanic"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM

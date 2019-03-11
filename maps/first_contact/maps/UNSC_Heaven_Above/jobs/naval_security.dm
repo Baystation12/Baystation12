@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/security_chief
-	title = "Master-At-Arms"
+	title = "UNSC Heavens Above Master-At-Arms"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -16,7 +16,7 @@
 	access = list(access_unsc_crew, access_unsc_navsec)
 
 /datum/job/UNSC_ship/unsc_security
-	title = "Naval Security Officer"
+	title = "UNSC Heavens Above Naval Security Officer"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM

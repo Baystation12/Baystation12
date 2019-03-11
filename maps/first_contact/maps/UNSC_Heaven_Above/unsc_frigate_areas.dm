@@ -26,176 +26,176 @@
 //Top Deck
 
 /area/unscfrigate/bridge
-	name = "Bridge"
+	name = "UNSC Heavens Above Bridge"
 	icon_state = "bridge"
 
 /area/unscfrigate/mac
-	name = "MAC Cannon Maintenance"
+	name = "UNSC Heavens Above MAC Cannon Maintenance"
 
 /area/unscfrigate/mac/cannon
-	name = "MAC Cannon"
+	name = "UNSC Heavens Above MAC Cannon"
 
 //Engineering
 
 /area/unscfrigate/aft_port_engineering
-	name = "Aft Port Engineering"
+	name = "UNSC Heavens Above Aft Port Engineering"
 	icon_state = "engineering_workshop"
 
 /area/unscfrigate/aft_starb_engineering
-	name = "Aft Starboard Engineering"
+	name = "UNSC Heavens Above Aft Starboard Engineering"
 	icon_state = "engineering_storage"
 
 /area/unscfrigate/mid_port_engineering
-	name = "Mid Port Engineering"
+	name = "UNSC Heavens Above Mid Port Engineering"
 	icon_state = "substation"
 
 /area/unscfrigate/mid_starb_engineering
-	name = "Mid Starboard Engineering"
+	name = "UNSC Heavens Above Mid Starboard Engineering"
 	icon_state = "substation"
 
 /area/unscfrigate/aft_engineering
-	name = "Aft Engineering"
+	name = "UNSC Heavens Above Aft Engineering"
 	icon_state = "engine_monitoring"
 
 /area/unscfrigate/central_cooling
-	name = "Central Cooling"
+	name = "UNSC Heavens Above Central Cooling"
 	icon_state = "engine_waste"
 
 /area/unscfrigate/reactor1
-	name = "Reactor One"
+	name = "UNSC Heavens Above Reactor One"
 	icon_state = "engine"
 
 /area/unscfrigate/reactor2
-	name = "Reactor Two"
+	name = "UNSC Heavens Above Reactor Two"
 	icon_state = "engine"
 
 /area/unscfrigate/reactor3
-	name = "Reactor Three"
+	name = "UNSC Heavens Above Reactor Three"
 	icon_state = "engine"
 
 /area/unscfrigate/reactor4
-	name = "Reactor Four"
+	name = "UNSC Heavens Above Reactor Four"
 	icon_state = "engine"
 
 /area/unscfrigate/engine_power_storage
-	name = "Engine Power Storage"
+	name = "UNSC Heavens Above Engine Power Storage"
 
 //Misc
 
 /area/unscfrigate/tcomms
-	name = "Telecomms"
+	name = "UNSC Heavens Above Telecomms"
 	icon_state = "tcomsatcham"
 
 /area/unscfrigate/central
-	name = "Central"
+	name = "UNSC Heavens Above Central"
 	icon_state = "hallC1"
 
 /area/unscfrigate/crewmess
-	name = "Crew Mess"
+	name = "UNSC Heavens Above Crew Mess"
 	icon_state = "kitchen"
 
 /area/unscfrigate/battlebridge
-	name = "Battle Bridge"
+	name = "UNSC Heavens Above Battle Bridge"
 	icon_state = "bridge"
 
 /area/unscfrigate/brig
-	name = "Naval Security Compound"
+	name = "UNSC Heavens Above Naval Security Compound"
 	icon_state = "security"
 
 /area/unscfrigate/port_dorms
-	name = "Port Crew Dormitories"
+	name = "UNSC Heavens Above Port Crew Dormitories"
 	icon_state = "crew_quarters"
 
 /area/unscfrigate/starb_dorms
-	name = "Starboard Crew Dormitories"
+	name = "UNSC Heavens Above Starboard Crew Dormitories"
 	icon_state = "crew_quarters"
 
 
 // Hangar, mechanics, flight crew
 
 /area/unscfrigate/flight/vehicle_shop
-	name = "Vehicle Shop"
+	name = "UNSC Heavens Above Vehicle Shop"
 	icon_state = "vehicleshop"
 
 /area/unscfrigate/flight/office
-	name = "Flight Crew Office"
+	name = "UNSC Heavens Above Flight Crew Office"
 	icon_state = "flightoffice"
 
 //Strike craft hangars
 
 /area/unscfrigate/hangar_port
-	name = "Port Hangar"
+	name = "UNSC Heavens Above Port Hangar"
 	icon_state = "porthang"
 
 /area/unscfrigate/hangar_port/berth1
-	name = "Berth1"
+	name = "UNSC Heavens Above Berth1"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_port/berth2
-	name = "Berth2"
+	name = "UNSC Heavens Above Berth2"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_port/berth3
-	name = "Berth3"
+	name = "UNSC Heavens Above Berth3"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_port/berth4
-	name = "Berth4"
+	name = "UNSC Heavens Above Berth4"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_port/berth5
-	name = "Berth5"
+	name = "UNSC Heavens Above Berth5"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_port/berth6
-	name = "Berth6"
+	name = "UNSC Heavens Above Berth6"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_starb
-	name = "Starboard Hangar"
+	name = "UNSC Heavens Above Starboard Hangar"
 	icon_state = "starhang"
 
 /area/unscfrigate/hangar_starb/berth1
-	name = "Berth1"
+	name = "UNSC Heavens Above Berth1"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_starb/berth2
-	name = "Berth2"
+	name = "UNSC Heavens Above Berth2"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_starb/berth3
-	name = "Berth3"
+	name = "UNSC Heavens Above Berth3"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_starb/berth4
-	name = "Berth4"
+	name = "UNSC Heavens Above Berth4"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_starb/berth5
-	name = "Berth5"
+	name = "UNSC Heavens Above Berth5"
 	icon_state = "hangar"
 
 /area/unscfrigate/hangar_starb/berth6
-	name = "Berth6"
+	name = "UNSC Heavens Above Berth6"
 	icon_state = "hangar"
 
 
 //Miscellaneous
 
 /area/unscfrigate/ai_core
-	name = "AI Core"
+	name = "UNSC Heavens Above AI Core"
 	icon_state = "ai"
 
 /area/unscfrigate/vault
-	name = "Vault"
+	name = "UNSC Heavens Above Vault"
 	icon_state = "Vault"
 
 /area/unscfrigate/officer_quarters
-	name = "Officer's Quarters"
+	name = "UNSC Heavens Above Officer's Quarters"
 	icon_state = "head_quarters"
 
 /area/unscfrigate/armoury
-	name = "Marine Armoury"
+	name = "UNSC Heavens Above Marine Armoury"
 	icon_state = "Warden"
 
 
@@ -203,106 +203,106 @@
 // Hangar, cargo and mechanics
 
 /area/unscfrigate/logistics/hangar_aftport
-	name = "huttle Hangar Aft Port"
+	name = "UNSC Heavens Above Shuttle Hangar Aft Port"
 	icon_state = "shuttlegrn"
 
 /area/unscfrigate/logistics/hangar_foreport
-	name = "huttle Hangar Fore Port"
+	name = "UNSC Heavens Above Shuttle Hangar Fore Port"
 	icon_state = "shuttlegrn"
 
 /area/unscfrigate/logistics/hangar_aftstarb
-	name = "Shuttle Hangar Aft Starboard"
+	name = "UNSC Heavens Above Shuttle Hangar Aft Starboard"
 	icon_state = "shuttle"
 
 /area/unscfrigate/logistics/hangar_forestarb
-	name = "Shuttle Hangar Fore Starboard"
+	name = "UNSC Heavens Above Shuttle Hangar Fore Starboard"
 	icon_state = "shuttle"
 
 /area/unscfrigate/logistics/transit
-	name = "Transit"
+	name = "UNSC Heavens Above Transit"
 	icon_state = "hallC2"
 
 /area/unscfrigate/logistics/recieving_port
-	name = "Port Recieving"
+	name = "UNSC Heavens Above Port Recieving"
 	icon_state = "yellow"
 
 /area/unscfrigate/logistics/recieving_starb
-	name = "Starboard Recieving"
+	name = "UNSC Heavens Above Starboard Recieving"
 	icon_state = "yellow"
 
 /area/unscfrigate/logistics/hub
-	name = "Hub"
+	name = "UNSC Heavens Above Hub"
 	icon_state = "entry_1"
 
 /area/unscfrigate/logistics/office
-	name = "Hub"
+	name = "UNSC Heavens Above Hub"
 	icon_state = "quartoffice"
 
 /area/unscfrigate/logistics/store
-	name = "Logistics Storage"
+	name = "UNSC Heavens Above Logistics Storage"
 	icon_state = "quartstorage"
 
 //Medbay
 
 /area/unscfrigate/medbay
-	name = "Medbay"
+	name = "UNSC Heavens Above Medbay"
 	icon_state = "medbay"
 
 /area/unscfrigate/medbay/recovery
-	name = "Surgery Recovery"
+	name = "UNSC Heavens Above Surgery Recovery"
 	icon_state = "medbay3"
 
 /area/unscfrigate/medbay/surgeryprep
-	name = "Surgery preparation"
+	name = "UNSC Heavens Above Surgery preparation"
 	icon_state = "medbay2"
 
 /area/unscfrigate/medbay/surgery1
-	name = "Surgery One"
+	name = "UNSC Heavens Above Surgery One"
 	icon_state = "surgery"
 
 /area/unscfrigate/medbay/surgery2
-	name = "Surgery Two"
+	name = "UNSC Heavens Above Surgery Two"
 	icon_state = "surgery"
 
 /area/unscfrigate/medbay/exam
-	name = "Examination"
+	name = "UNSC Heavens Above Examination"
 	icon_state = "exam_room"
 
 /area/unscfrigate/medbay/patient1
-	name = "Patient Room One"
+	name = "UNSC Heavens Above Patient Room One"
 	icon_state = "Sleep"
 
 /area/unscfrigate/medbay/patient2
-	name = "Patient Room Two"
+	name = "UNSC Heavens Above Patient Room Two"
 	icon_state = "Sleep"
 
 /area/unscfrigate/medbay/pharmacy
-	name = "Pharmacy"
+	name = "UNSC Heavens Above Pharmacy"
 	icon_state = "chem"
 
 /area/unscfrigate/medbay/storage
-	name = "Storage"
+	name = "UNSC Heavens Above Storage"
 	icon_state = "medbay4"
 
 //Marines
 
 /area/unscfrigate/marine_dorms
-	name = "Marine Dormitories"
+	name = "UNSC Heavens Above Marine Dormitories"
 	icon_state = "marinebunks"
 
 /area/unscfrigate/garage_4
-	name = "Primary Vehicle Garage"
+	name = "UNSC Heavens Above Primary Vehicle Garage"
 	icon_state = "garage"
 
 /area/unscfrigate/odstcountry
-	name = "ODST Country"
+	name = "UNSC Heavens Above ODST Country"
 	icon_state = "odst"
 
 /area/unscfrigate/portguns
-	name = "Port weapon emplacement"
+	name = "UNSC Heavens Above Port weapon emplacement"
 
 /area/unscfrigate/starboardguns
-	name = "Starboard weapon emplacement"
+	name = "UNSC Heavens Above Starboard weapon emplacement"
 
 
 //Overmap Weapon Console Defines//
