@@ -43,7 +43,7 @@
 	plantcolors = list("#eba487", "#ceeb87", "#eb879c", "#ebd687", "#f6d6c9", "#f2b3e0")
 	fauna_prob = 2
 	flora_prob = 30
-	large_flora_prob = 10
+	large_flora_prob = 0
 	flora_diversity = 5
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/samak/alt, /mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 
