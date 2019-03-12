@@ -429,8 +429,6 @@
 			return global.floor_light_cache;
 		if("flooring_cache")
 			return global.flooring_cache;
-		if("flooring_types")
-			return global.flooring_types;
 		if("fluidtrack_cache")
 			return global.fluidtrack_cache;
 		if("follow_repository")
@@ -1376,8 +1374,6 @@
 			global.floor_light_cache=newval;
 		if("flooring_cache")
 			global.flooring_cache=newval;
-		if("flooring_types")
-			global.flooring_types=newval;
 		if("fluidtrack_cache")
 			global.fluidtrack_cache=newval;
 		if("follow_repository")
@@ -2108,7 +2104,6 @@
 	"floor_decals",
 	"floor_light_cache",
 	"flooring_cache",
-	"flooring_types",
 	"fluidtrack_cache",
 	"follow_repository",
 	"forced_ambiance_list",

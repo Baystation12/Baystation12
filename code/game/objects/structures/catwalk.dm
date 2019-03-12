@@ -105,8 +105,9 @@
 			ST.in_use = 0
 			src.add_fingerprint(user)
 			if(ST.use(1))
-				for(var/flooring_type in flooring_types)
-					var/decl/flooring/F = flooring_types[flooring_type]
+				var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
+				for(var/flooring_type in decls)
+					var/decl/flooring/F = decls[flooring_type]
 					if(!F.build_type)
 						continue
 					if(ispath(C.type, F.build_type))
