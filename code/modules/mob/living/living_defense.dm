@@ -74,7 +74,7 @@
 		apply_effect(stun_amount, EYE_BLUR)
 
 	if (agony_amount)
-		apply_damage(agony_amount, PAIN, def_zone, 0, used_weapon)
+		apply_damage(agony_amount, PAIN, def_zone, used_weapon)
 		apply_effect(agony_amount/10, STUTTER)
 		apply_effect(agony_amount/10, EYE_BLUR)
 
