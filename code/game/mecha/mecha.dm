@@ -1018,15 +1018,15 @@
 		return
 
 	var/mob/living/carbon/human/H = usr
-	if (H.species.name == SPECIES_NABBER)
-		to_chat(usr, "<span class='warning'>You're too big to fit in the exosuit!</span>")
+	if (H.mob_size >= MOB_LARGE)
+		to_chat(usr, SPAN_WARNING("You're too big to fit in the exosuit!"))
 		return
 
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
+			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed, don't you think?</span>")
 			return
 	if (src.occupant)
 		to_chat(usr, "<span class='danger'>The [src.name] is already occupied!</span>")
