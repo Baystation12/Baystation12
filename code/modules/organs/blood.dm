@@ -110,9 +110,7 @@
 /mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
 	var/datum/reagent/blood/B = get_blood(container.reagents)
 	if(!B)
-		B = new /datum/reagent/blood
-		B.sync_to(src)
-		container.reagents.add_reagent(/datum/reagent/blood, amount, B.data)
+		container.reagents.add_reagent(/datum/reagent/blood, amount, get_blood_data())
 	else
 		B.sync_to(src)
 		B.volume += amount
@@ -148,22 +146,17 @@
 	chems = injected.data["trace_chem"]
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
-	reagents.update_total()
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
-
 	if(!should_have_organ(BP_HEART))
 		reagents.add_reagent(/datum/reagent/blood, amount, injected.data)
-		reagents.update_total()
 		return
 
 	if(blood_incompatible(injected.data["blood_type"], injected.data["species"]))
 		reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
-		reagents.update_total()
 	else
 		vessel.add_reagent(/datum/reagent/blood, amount, injected.data)
-		vessel.update_total()
 	..()
 
 //Gets human's own blood.
@@ -197,16 +190,32 @@
 		//AB is a universal receiver.
 	return 0
 
-/mob/living/carbon/human/proc/regenerate_blood(var/amount, var/volume_scale = TRUE)
+/mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
 	var/blood_volume_raw = vessel.get_reagent_amount(/datum/reagent/blood)
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
-		var/datum/reagent/blood/B = get_blood(vessel)
-		if(istype(B))
-			B.volume += amount
-			vessel.update_total()
+		vessel.add_reagent(/datum/reagent/blood, amount, get_blood_data())
 	return amount
+
+/mob/living/carbon/proc/get_blood_data()
+	var/data = list()
+	data["donor"] = weakref(src)
+	if (!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= virus_copylist(virus2)
+	data["antibodies"] = antibodies
+	data["blood_DNA"] = dna.unique_enzymes
+	data["blood_type"] = dna.b_type
+	data["species"] = species.name
+	data["has_oxy"] = species.blood_oxy
+	var/list/temp_chem = list()
+	for(var/datum/reagent/R in reagents.reagent_list)
+		temp_chem[R.type] = R.volume
+	data["trace_chem"] = temp_chem
+	data["dose_chem"] = chem_doses.Copy()
+	data["blood_colour"] = species.get_blood_colour(src)
+	return data
 
 proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 
