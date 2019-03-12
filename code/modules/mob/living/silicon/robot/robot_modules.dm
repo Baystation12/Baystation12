@@ -1,18 +1,3 @@
-var/global/list/robot_modules = list(
-	"Standard"		= /obj/item/weapon/robot_module/standard,
-	"Service" 		= /obj/item/weapon/robot_module/clerical/butler,
-	"Clerical" 		= /obj/item/weapon/robot_module/clerical/general,
-	"Research" 		= /obj/item/weapon/robot_module/research,
-	"Miner" 		= /obj/item/weapon/robot_module/miner,
-	"Crisis" 		= /obj/item/weapon/robot_module/medical/crisis,
-	"Surgeon" 		= /obj/item/weapon/robot_module/medical/surgeon,
-	"Security" 		= /obj/item/weapon/robot_module/security/general,
-	"Combat" 		= /obj/item/weapon/robot_module/security/combat,
-	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
-	"Janitor" 		= /obj/item/weapon/robot_module/janitor,
-	"Party"         = /obj/item/weapon/robot_module/uncertified/party
-	)
-
 /obj/item/weapon/robot_module
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
@@ -46,6 +31,11 @@ var/global/list/robot_modules = list(
 	// Bookkeeping
 	var/list/original_languages = list()
 	var/list/added_networks = list()
+
+	var/display_name
+	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
+	var/crisis_locked =   FALSE
+	var/upgrade_locked =  FALSE
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
 	..()
@@ -174,6 +164,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
+	display_name = "Standard"
 	sprites = list(	"Basic" = "robot_old",
 					"Android" = "droid",
 					"Default" = "robot",
@@ -200,6 +191,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/medical/surgeon
 	name = "surgeon robot module"
+	display_name = "Surgeon"
 	sprites = list(
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
@@ -255,6 +247,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/medical/crisis
 	name = "crisis robot module"
+	display_name = "Crisis"
 	sprites = list(
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
@@ -324,6 +317,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
+	display_name = "Engineering"
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/datum/nano_module/power_monitor, /datum/nano_module/supermatter_monitor)
@@ -417,7 +411,6 @@ var/global/list/robot_modules = list(
 	..()
 
 /obj/item/weapon/robot_module/security
-	name = "security robot module"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
@@ -425,6 +418,8 @@ var/global/list/robot_modules = list(
 	supported_upgrades = list(/obj/item/borg/upgrade/weaponcooler)
 
 /obj/item/weapon/robot_module/security/general
+	name = "security robot module"
+	display_name = "Security"
 	sprites = list(
 					"Basic" = "secborg",
 					"Red Knight" = "Security",
@@ -466,6 +461,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/janitor
 	name = "janitorial robot module"
+	display_name = "Janitor"
 	channels = list("Service" = 1)
 	sprites = list(
 					"Basic" = "JanBot2",
@@ -499,7 +495,6 @@ var/global/list/robot_modules = list(
 		S.reagents.add_reagent(/datum/reagent/lube, 20 * amount)
 
 /obj/item/weapon/robot_module/clerical
-	name = "service robot module"
 	channels = list("Service" = 1)
 	languages = list(
 					LANGUAGE_SOL_COMMON	= 1,
@@ -512,6 +507,8 @@ var/global/list/robot_modules = list(
 					)
 
 /obj/item/weapon/robot_module/clerical/butler
+	name = "service robot module"
+	display_name = "Service"
 	sprites = list(	"Waitress" = "Service",
 					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
@@ -556,6 +553,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/clerical/general
 	name = "clerical robot module"
+	display_name = "Clerical"
 	channels = list("Service" = 1, "Supply" = 1)
 	sprites = list(
 					"Waitress" = "Service",
@@ -598,6 +596,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
+	display_name = "Miner"
 	subsystems = list(/datum/nano_module/supply)
 	channels = list("Supply" = 1, "Science" = 1)
 	networks = list(NETWORK_MINE)
@@ -626,6 +625,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/research
 	name = "research module"
+	display_name = "Research"
 	channels = list("Science" = 1)
 	networks = list(NETWORK_RESEARCH)
 	sprites = list(
@@ -666,7 +666,9 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
+	display_name = "Illegal"
 	hide_on_manifest = 1
+	upgrade_locked = TRUE
 	sprites = list(
 					"Dread" = "securityrobot",
 				)
@@ -694,6 +696,8 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
+	display_name = "Combat"
+	crisis_locked = TRUE
 	hide_on_manifest = 1
 	sprites = list("Combat Android" = "droid-combat")
 
@@ -820,9 +824,11 @@ var/global/list/robot_modules = list(
 	name = "uncertified robot module"
 	sprites = list(	"Roller" = "omoikane"
 			  )
+	upgrade_locked = TRUE
 
 /obj/item/weapon/robot_module/uncertified/party/Initialize()
 	name = "Madhouse Productions Official Party Module"
+	display_name = "Party"
 	channels = list("Service" = 1, "Entertainment" = 1)
 	networks = list(NETWORK_THUNDER)
 	modules += new /obj/item/device/boombox(src)

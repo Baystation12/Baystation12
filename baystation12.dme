@@ -202,6 +202,7 @@
 #include "code\controllers\subsystems\initialization\materials.dm"
 #include "code\controllers\subsystems\initialization\misc.dm"
 #include "code\controllers\subsystems\initialization\persistence.dm"
+#include "code\controllers\subsystems\initialization\robots.dm"
 #include "code\controllers\subsystems\processing\airflow.dm"
 #include "code\controllers\subsystems\processing\circuit.dm"
 #include "code\controllers\subsystems\processing\fast_process.dm"

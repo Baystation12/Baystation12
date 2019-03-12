@@ -24,7 +24,7 @@
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
 	for(var/decl_type in decl_types)
-		.[decl_type] =  get_decl(decl_type)
+		.[decl_type] = get_decl(decl_type)
 
 /repository/decls/proc/get_decls_unassociated(var/list/decl_types)
 	. = list()

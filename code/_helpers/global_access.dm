@@ -103,6 +103,8 @@
 			return global.SSpsi;
 		if("SSradiation")
 			return global.SSradiation;
+		if("SSrobots")
+			return global.SSrobots;
 		if("SSshuttle")
 			return global.SSshuttle;
 		if("SSskybox")
@@ -399,8 +401,6 @@
 			return global.event_last_fired;
 		if("eventchance")
 			return global.eventchance;
-		if("exclude_jobs")
-			return global.exclude_jobs;
 		if("explosion_in_progress")
 			return global.explosion_in_progress;
 		if("explosion_turfs")
@@ -735,8 +735,6 @@
 			return global.robot_hud_colours;
 		if("robot_inventory")
 			return global.robot_inventory;
-		if("robot_modules")
-			return global.robot_modules;
 		if("round_start_time")
 			return global.round_start_time;
 		if("roundstart_hour")
@@ -1052,6 +1050,8 @@
 			global.SSpsi=newval;
 		if("SSradiation")
 			global.SSradiation=newval;
+		if("SSrobots")
+			global.SSrobots=newval;
 		if("SSshuttle")
 			global.SSshuttle=newval;
 		if("SSskybox")
@@ -1348,8 +1348,6 @@
 			global.event_last_fired=newval;
 		if("eventchance")
 			global.eventchance=newval;
-		if("exclude_jobs")
-			global.exclude_jobs=newval;
 		if("explosion_in_progress")
 			global.explosion_in_progress=newval;
 		if("explosion_turfs")
@@ -1684,8 +1682,6 @@
 			global.robot_hud_colours=newval;
 		if("robot_inventory")
 			global.robot_inventory=newval;
-		if("robot_modules")
-			global.robot_modules=newval;
 		if("round_start_time")
 			global.round_start_time=newval;
 		if("roundstart_hour")
@@ -1949,6 +1945,7 @@
 	"SSprocessing",
 	"SSpsi",
 	"SSradiation",
+	"SSrobots",
 	"SSshuttle",
 	"SSskybox",
 	"SSstatistics",
@@ -2097,7 +2094,6 @@
 	"evacuation_controller",
 	"event_last_fired",
 	"eventchance",
-	"exclude_jobs",
 	"explosion_in_progress",
 	"explosion_turfs",
 	"failed_db_connections",
@@ -2265,7 +2261,6 @@
 	"robot_custom_icons",
 	"robot_hud_colours",
 	"robot_inventory",
-	"robot_modules",
 	"round_start_time",
 	"roundstart_hour",
 	"rune_list",

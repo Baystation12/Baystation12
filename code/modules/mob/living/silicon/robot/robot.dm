@@ -21,6 +21,7 @@
 	var/crisis_override = 0
 	var/integrated_light_max_bright = 0.75
 	var/datum/wires/robot/wires
+	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 
 //Icon stuff
 
@@ -265,26 +266,25 @@
 
 	updatename("Default")
 
-/mob/living/silicon/robot/proc/pick_module(var/override = null)
+/mob/living/silicon/robot/proc/pick_module(var/override)
 	if(module && !override)
 		return
 
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/is_crisis_mode = crisis_override || (crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
+	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode)
+
 	if(!override)
-		var/list/modules = list()
-		modules.Add(GLOB.robot_module_types)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-		if((crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)) || crisis_override) //Leaving this in until it's balanced appropriately.
-			to_chat(src, "<span class='warning'>Crisis mode active. Combat module available.</span>")
-			modules+="Combat"
-		modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules
-
-		if(module)
-			return
-		if(!(modtype in robot_modules))
-			return
-
+		if(is_crisis_mode)
+			to_chat(src, SPAN_WARNING("Crisis mode active. Additional modules available."))
+		modtype = input("Please select a module!", "Robot module", null, null) as null|anything in robot_modules
 	else
+		if(module)
+			QDEL_NULL(module)
 		modtype = override
+
+	if(module || !modtype)
+		return
 
 	var/module_type = robot_modules[modtype]
 	new module_type(src)

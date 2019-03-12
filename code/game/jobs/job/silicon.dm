@@ -26,13 +26,11 @@
 /datum/job/cyborg
 	title = "Robot"
 	department_flag = MSC
-
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "your laws and the AI"	//Nodrak
+	supervisors = "your laws and the AI"
 	selection_color = "#254c25"
 	minimal_player_age = 7
-	alt_titles = list("Drone", "Cyborg")
 	account_allowed = 0
 	economic_power = 0
 	loadout_allowed = FALSE
@@ -42,5 +40,9 @@
 	no_skill_buffs = TRUE
 
 /datum/job/cyborg/equip(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	return 1
+	return !!H
+
+/datum/job/cyborg/New()
+	..()
+	alt_titles = SSrobots.robot_alt_titles.Copy()
+	alt_titles -= title // So the unit test doesn't flip out if a mob or mmi type is declared for our main title.
