@@ -5,7 +5,7 @@
 
 //ship commanding officer
 /datum/job/UNSC_ship/commander
-	title = "Commanding Officer"
+	title = "UNSC Heavens Above Commanding Officer"
 	min_rank = RANK_LCDR
 	default_rank = RANK_CPT
 	max_rank = RANK_CPT
@@ -24,11 +24,11 @@
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
 		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
 		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids, 60)
+		access_unsc_gunnery, access_unsc_ids, 60,308)
 
 //ship 2ic officer
 /datum/job/UNSC_ship/exo
-	title = "Executive Officer"
+	title = "UNSC Heavens Above Executive Officer"
 	min_rank = RANK_LT
 	default_rank = RANK_CDR
 	max_rank = RANK_CDR
@@ -46,11 +46,11 @@
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
 		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
 		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids, 60)
+		access_unsc_gunnery, access_unsc_ids, 60,308)
 
 //overall commander of strike craft
 /datum/job/UNSC_ship/cag
-	title = "Commander Air Group"
+	title = "UNSC Heavens Above Commander Air Group"
 	min_rank = RANK_LT
 	default_rank = RANK_CDR
 	max_rank = RANK_CDR
@@ -68,7 +68,7 @@
 
 //misc officers
 /datum/job/UNSC_ship/bridge
-	title = "Bridge Officer"
+	title = "UNSC Heavens Above Bridge Officer"
 	min_rank = RANK_ENSIGN
 	default_rank = RANK_LT
 	max_rank = RANK_CDR

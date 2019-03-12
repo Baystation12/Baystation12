@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/marine_co
-	title = "Marine Company Officer"
+	title = "UNSC Heavens Above Marine Company Officer"
 	min_rank = RANK_CAPT
 	default_rank = RANK_COL
 	max_rank = MARINE_CO_MAX
@@ -15,10 +15,10 @@
 	//job_guide = "Your responsibility is to command the shipboard complement of marines. Nominally you answer to the captain, but he has limited control over you once deployed. Remember that a good soldier leads from the front, but you can't lead if you're dead."
 
 	access = list(access_unsc_bridge, access_unsc_crew, access_unsc_shuttles,
-		access_unsc_armoury, access_unsc_officers, access_unsc_marine)
+		access_unsc_armoury, access_unsc_officers, access_unsc_marine,308)
 
 /datum/job/UNSC_ship/marine_xo
-	title = "Marine Company Sergeant"
+	title = "UNSC Heavens Above Marine Company Sergeant"
 	min_rank = MARINE_CO_MIN
 	default_rank = RANK_1LT
 	max_rank = RANK_CAPT
@@ -32,10 +32,10 @@
 	//job_guide = "You are the 2IC of the shipboard marine complement, and what the marine CO says to you is gospel. Remember that a good soldier leads from the front, but you can't lead if you're dead."
 
 	access = list(access_unsc_bridge, access_unsc_crew, access_unsc_shuttles,
-		access_unsc_armoury, access_unsc_officers, access_unsc_marine)
+		access_unsc_armoury, access_unsc_officers, access_unsc_marine,308)
 
 /datum/job/UNSC_ship/marine_sl
-	title = "Marine Squad Leader"
+	title = "UNSC Heavens Above Marine Squad Leader"
 	min_rank = MARINE_SL_MIN
 	default_rank = RANK_SGT
 	max_rank = MARINE_SL_MAX
@@ -48,10 +48,10 @@
 	//job_guide = "You lead a squad of marines (not yet implemented, so pick some guys to be in your squad and try to RP it). Your marines are the best of the best, but they're only human."
 
 	access = list(access_unsc_crew, access_unsc_shuttles,
-		access_unsc_armoury, access_unsc_marine)
+		access_unsc_armoury, access_unsc_marine,308)
 
 /datum/job/UNSC_ship/weapons
-	title = "Infantry Weapons Officer"
+	title = "UNSC Heavens Above Infantry Weapons Officer"
 	total_positions = 2
 	spawn_positions = 4
 	spawnpoint_override = "UNSC Base Spawns"
@@ -63,11 +63,11 @@
 	selection_color = "#667700"
 	//job_guide = "You, master guns, know your weaponry better than almost any human alive. It's too bad you get treated like a glorified desk jockey whose main responsibility is doling out responsible portions of weaponry to needy marines."
 	access = list(access_unsc_crew,
-		access_unsc_armoury, access_unsc_marine)
+		access_unsc_armoury, access_unsc_marine,308)
 	latejoin_at_spawnpoints = TRUE
 
 /datum/job/UNSC_ship/marine
-	title = "Marine"
+	title = "UNSC Heavens Above Marine"
 	min_rank = MARINE_MIN
 	default_rank = RANK_PVT
 	max_rank = MARINE_MAX
@@ -82,10 +82,10 @@
 	"EVA Combat Marine")
 	//job_guide = "Ooh rah marines! You're tha hardest son of a bitch this side of Terra and don't you know it! Other navy personnel just can't compare. Don't forget to follow orders and listen to your squad leader though."
 
-	access = list(access_unsc_crew, access_unsc_marine)
+	access = list(access_unsc_crew, access_unsc_marine,308)
 
 /datum/job/UNSC_ship/marine/driver
-	title = "Ground Vehicle Operator"
+	title = "UNSC Heavens Above Ground Vehicle Operator"
 	department_flag = MARDR
 	total_positions = 3
 	spawn_positions = 5
@@ -93,7 +93,7 @@
 	alt_titles = list("Light Armored Vehicle Operator","Heavy Armored Vehicle Operator","Support Vehicle Operator","Tilt-rotor/VTOL Operator")
 
 /datum/job/UNSC_ship/marine/specialist
-	title = "Combat Engineer"
+	title = "UNSC Heavens Above Combat Engineer"
 	department_flag = MARSPEC
 	total_positions = 3
 	spawn_positions = 8

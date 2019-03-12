@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/technician_chief
-	title = "Crew Chief (technical)"
+	title = "UNSC Heavens Above Crew Chief (technical)"
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
@@ -17,7 +17,7 @@
 		access_unsc_ops, access_unsc_supplies)
 
 /datum/job/UNSC_ship/technician
-	title = "Technician"
+	title = "UNSC Heavens Above Technician"
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM
