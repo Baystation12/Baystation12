@@ -175,7 +175,7 @@
 			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(!F.flooring)
-					F.set_flooring(get_flooring_data(floor_build_type))
+					F.set_flooring(decls_repository.get_decl(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
 			target = null
