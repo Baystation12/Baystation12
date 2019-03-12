@@ -315,7 +315,7 @@
 	..()
 
 
-/obj/item/weapon/robot_module/engineering
+/obj/item/weapon/robot_module/engineering/general
 	name = "engineering robot module"
 	display_name = "Engineering"
 	channels = list("Engineering" = 1)
