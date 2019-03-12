@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - maptweak: "The firing range on deck 3 has been removed due to consistently causing crashes."
