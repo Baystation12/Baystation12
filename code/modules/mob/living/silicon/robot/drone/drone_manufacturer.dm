@@ -30,7 +30,7 @@
 	drone_type = /mob/living/silicon/robot/drone/construction
 
 //UNIFY start
-/obj/machinery/drone_fabricator/unify	//NonSpecific dronetype
+/obj/machinery/drone_fabricator/unify	//Non-Specific dronetype
 	drone_type = null
 	fabricator_tag = "Unified Drone Fabricator"
 	var/list/possible_drones = list("Construction Module" = /mob/living/silicon/robot/drone/construction,
