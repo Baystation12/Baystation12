@@ -192,7 +192,7 @@
 
 	var/list/L = list()
 	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
-		if(istype(RB, /mob/living/silicon/robot/drone))
+		if(is_drone(RB))
 			continue
 		if(RB.connected_ai == A)
 			continue
