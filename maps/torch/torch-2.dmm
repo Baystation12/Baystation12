@@ -5449,6 +5449,12 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
+"lM" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/generic,
+/turf/simulated/floor/tiled/monotile,
+/area/security/range)
 "lN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -9799,6 +9805,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/range)
 "vc" = (
@@ -10219,25 +10226,17 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/machinery/light{
-	dir = 8
-	},
+/obj/effect/decal/cleanable/cobweb,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "wb" = (
 /obj/structure/table/reinforced,
-/obj/item/clothing/ears/earmuffs,
-/obj/item/clothing/ears/earmuffs{
-	pixel_x = -3;
-	pixel_y = -2
-	},
 /turf/simulated/floor/tiled,
 /area/security/range)
 "we" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
-/obj/structure/closet/crate,
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -10250,14 +10249,6 @@
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Firing Range";
 	dir = 8
-	},
-/obj/item/target,
-/obj/item/target,
-/obj/item/target,
-/obj/item/target,
-/obj/item/target,
-/obj/machinery/light{
-	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/security/range)
@@ -10743,9 +10734,6 @@
 	dir = 9
 	},
 /obj/structure/table/reinforced,
-/obj/machinery/magnetic_controller{
-	autolink = 1
-	},
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
@@ -10779,12 +10767,14 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "xj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "xk" = (
@@ -11822,6 +11812,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "zn" = (
@@ -12108,28 +12099,15 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/port)
-"Aa" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/turf/simulated/floor/tiled,
-/area/security/range)
 "Ab" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/security/range)
 "Ac" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/random/trash,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "Ae" = (
@@ -13045,30 +13023,24 @@
 /area/storage/tools)
 "Cz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
+/obj/random/trash,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "CA" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/target_stake,
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/security/range)
 "CB" = (
 /obj/machinery/magnetic_module,
+/obj/effect/decal/cleanable/spiderling_remains,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "CC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
@@ -13301,6 +13273,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "Dm" = (
@@ -13719,6 +13692,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/bsa)
+"El" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/weapon/gun/energy/laser/practice,
+/turf/simulated/floor/tiled/monotile,
+/area/security/range)
 "Em" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/sign/directions/supply{
@@ -16796,6 +16774,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
+"LL" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/blood/oil,
+/turf/simulated/floor/tiled,
+/area/security/range)
 "LM" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -16936,6 +16921,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/engine_eva)
+"Me" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/structure/barricade,
+/turf/simulated/floor/plating,
+/area/security/range)
 "Mf" = (
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/techfloor,
@@ -18174,17 +18164,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/bsa)
 "Qk" = (
-/obj/structure/closet/crate/secure/weapon{
-	name = "range crate";
-	req_access = list("ACCESS_TORCH_CREW")
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/weapon/gun/energy/laser/practice,
-/obj/item/weapon/gun/energy/laser/practice,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "Qm" = (
@@ -18727,8 +18711,7 @@
 	name = "exterior access button";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"))
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -20193,6 +20176,11 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
+"WA" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/random/trash,
+/turf/simulated/floor/tiled/monotile,
+/area/security/range)
 "WB" = (
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
@@ -40472,8 +40460,8 @@ wa
 xc
 va
 zi
-Aa
 zi
+LL
 BG
 Cz
 Dl
@@ -40669,15 +40657,15 @@ wD
 Xn
 sj
 Pw
-va
+Me
 wb
 xh
 yn
 zj
-Ab
-Ab
+lM
+El
 BH
-CA
+Ab
 Ab
 ym
 UZ
@@ -41073,7 +41061,7 @@ wD
 aR
 sk
 tO
-va
+Me
 Qk
 xj
 yn
@@ -41082,7 +41070,7 @@ Ab
 Ab
 BJ
 CA
-Ab
+WA
 ym
 Vw
 wf
