@@ -34,7 +34,8 @@
 	drone_type = null
 	fabricator_tag = "Unified Drone Fabricator"
 	var/list/possible_drones = list("Construction Module" = /mob/living/silicon/robot/drone/construction,
-	"Maintenance Module" = /mob/living/silicon/robot/drone,) //List of drone types to choose from.
+									"Maintenance Module" = /mob/living/silicon/robot/drone,
+									) //List of drone types to choose from.
 
 /obj/machinery/drone_fabricator/unify/create_drone(var/client/player)
 	choose_dronetype(possible_drones) //Call Drone choice before executing create_drone
