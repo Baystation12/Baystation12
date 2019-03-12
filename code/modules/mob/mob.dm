@@ -293,14 +293,15 @@
 
 	face_atom(A)
 
-	if(A.loc != src || A == l_hand || A == r_hand)
-		for(var/mob/M in viewers(4, src))
-			if(M == src)
-				continue
-			if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
-				if(M.is_blind() || is_invisible_to(M))
+	if(!isghost(src))
+		if(A.loc != src || A == l_hand || A == r_hand)
+			for(var/mob/M in viewers(4, src))
+				if(M == src)
 					continue
-				to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
+				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
+					if(M.is_blind() || is_invisible_to(M))
+						continue
+					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
 
 	A.examine(src)
 
