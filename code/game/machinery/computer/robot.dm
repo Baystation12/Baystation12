@@ -115,7 +115,7 @@
 
 	for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
 		// Ignore drones
-		if(istype(R, /mob/living/silicon/robot/drone))
+		if(is_drone(R))
 			continue
 		// Ignore antagonistic cyborgs
 		if(R.scrambledcodes)
