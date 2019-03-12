@@ -70,7 +70,6 @@
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/command/security,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/clothing/head/HoS/dermal,
 		/obj/item/device/radio/headset/heads/cos,
 		/obj/item/device/radio/headset/heads/cos/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
