@@ -1,8 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "Unathi brute mod for the subspecies has been decreased a lot."
-  - tweak: "Unathi healing can only be toggled once every two minutes. It cannot be toggled within a minute of being hit in combat."
-  - tweak: "Unathi limb and organ regeneration is only possible when the heal can be toggled."
-  - tweak: "When an unathi is at extreme levels of hunger, it no longer receives healing from the passive heal ability. Instead, it takes internal organ damage, converting it into nutrition. This is inefficient, so if the healing ability is left on, it will die quickly."
-  - tweak: "Unathi passive healing is less nutrition-efficient now."
