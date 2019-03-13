@@ -630,3 +630,15 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "plunger"
 	path = /obj/item/clothing/mask/plunger
 	category = "General"
+
+/datum/autolathe/recipe/skrellian_rifle_flechette
+	name = "ammunition (skrellian rifle, flechette)"
+	path = /obj/item/weapon/magnetic_ammo/skrell
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/skrellian_rifle_slug
+	name = "ammunition (skrellian rifle, slug)"
+	path = /obj/item/weapon/magnetic_ammo/skrell/slug
+	hidden = 1
+	category = "Arms and Ammunition"

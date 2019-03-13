@@ -21,6 +21,7 @@
 	
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship
 	name = "Qrri-Zuumqix"
+	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 	
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader
 	name = "Qrri-Vuxix"
@@ -77,11 +78,13 @@
 		),
 		"Kanin-Katish" = list(
 			"Xiqarr-Ketish", 
-			"Mero'tol-Ketish"
+			"Mero'tol-Ketish",
+			"Goxo’i-Ketish"
 		),
 		"Raskinta-Katish" = list(
 			"Me'kerr-Ketish", 
-			"Qi'kerr-Ketish"
+			"Qi'kerr-Ketish",
+			"Me’xoal-Ketish"
 		)
 	)
 		
@@ -95,10 +98,17 @@
 /obj/item/clothing/gloves/thick/swat/skrell
 	name = "black gloves"
 	desc = "A pair of black, reinforced gloves. The tag on the inner stitching appears to be written in some form of Skrellian."
+	
+/obj/item/clothing/under/skrelljumpsuit
+	name = "black bodysuit"
+	desc = "A sleek, skin-tight bodysuit designed to not wick moisture away from the body. The inner stitching appears to contain something written in Skrellian."
+	icon_state = "skrell_suit"
+	item_state = "black"
+	worn_state = "skrell_suit"
 
 /decl/hierarchy/outfit/job/skrellscoutship
 	name = "Xilvuxix Crew"
-	uniform = /obj/item/clothing/under/color/black
+	uniform = /obj/item/clothing/under/skrelljumpsuit
 	shoes = /obj/item/clothing/shoes/dutyboots
 	gloves = /obj/item/clothing/gloves/thick/swat/skrell
 	pda_type = /obj/item/modular_computer/pda
@@ -112,7 +122,7 @@
 
 /obj/machinery/telecomms/allinone/skrellscoutship
 	listening_freqs = list(SKRELL_FREQ)
-	channel_color = "#7331c4"
+	channel_color = COMMS_COLOR_SKRELL
 	channel_name = "Recon"
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/allinone/skrellscoutship
 	
@@ -122,13 +132,13 @@
 	ks1type = /obj/item/device/encryptionkey/skrellian
 	
 /obj/item/device/radio/headset/skrellian/Initialize()
-	..()
+	. = ..()
 	set_frequency(SKRELL_FREQ)	//Not going to be random or just set to the common frequency, but can be set later.
 	
 /obj/item/device/encryptionkey/skrellian
 	name = "recon radio encryption key"
 	icon_state = "medsci_cypherkey"
-	channels = list("Skrell" = 1)
+	channels = list("Recon" = 1)
 
 /obj/item/weapon/reagent_containers/food/condiment/psilocybin
 	label_text = "Psilocybin"
