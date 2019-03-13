@@ -81,6 +81,7 @@
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
+	. += new/datum/stack_recipe/furniture/coffin(src)
 
 /material/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -116,7 +117,7 @@
 	. += new/datum/stack_recipe/tile/wood(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
 	. += new/datum/stack_recipe/crossbowframe(src)
-	. += new/datum/stack_recipe/furniture/coffin(src)
+	. += new/datum/stack_recipe/furniture/coffin/wooden(src)
 	. += new/datum/stack_recipe/beehive_assembly(src)
 	. += new/datum/stack_recipe/beehive_frame(src)
 	. += new/datum/stack_recipe/furniture/bookcase(src)
