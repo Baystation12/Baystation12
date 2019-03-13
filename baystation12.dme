@@ -3002,6 +3002,7 @@
 #include "maps\random_ruins\exoplanet_ruins\oldpod\oldpod.dm"
 #include "maps\random_ruins\exoplanet_ruins\playablecolony\playablecolony.dm"
 #include "maps\random_ruins\exoplanet_ruins\radshrine\radshrine.dm"
+#include "maps\random_ruins\exoplanet_ruins\science_vessel\science_vessel.dm"
 #include "maps\random_ruins\exoplanet_ruins\spider_nest\spider_nest.dm"
 #include "maps\random_ruins\exoplanet_ruins\tar_anomaly\tar_anomaly.dm"
 #include "maps\random_ruins\space_ruins\space_ruins.dm"

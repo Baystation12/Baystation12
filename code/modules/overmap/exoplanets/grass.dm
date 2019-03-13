@@ -15,7 +15,8 @@
 							 /datum/map_template/ruin/exoplanet/crashed_pod,
 							 /datum/map_template/ruin/exoplanet/hut,
 							 /datum/map_template/ruin/exoplanet/playablecolony,
-							 /datum/map_template/ruin/exoplanet/datacapsule)
+							 /datum/map_template/ruin/exoplanet/datacapsule,
+							 /datum/map_template/ruin/exoplanet/science_vessel)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
 	..()
