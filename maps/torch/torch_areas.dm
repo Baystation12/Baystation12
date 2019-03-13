@@ -457,6 +457,7 @@
 	req_access = list(access_petrov_security)
 
 /area/shuttle/petrov/rd
+	icon_state = "heads_rd"
 	name = "\improper SRV Petrov - CSO's Office"
 	icon_state = "head_quarters"
 	req_access = list(access_petrov_rd)
@@ -698,48 +699,58 @@
 	req_access = list(access_bridge)
 
 /area/crew_quarters/heads
-	icon_state = "head_quarters"
+	icon_state = "heads"
 	req_access = list(access_heads)
 
 /area/crew_quarters/heads/cobed
+	icon_state = "heads_cap"
 	name = "\improper Command - CO's Quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_captain)
 
 /area/crew_quarters/heads/office/co
+	icon_state = "heads_cap"
 	name = "\improper Command - CO's Office"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_captain)
 
 /area/crew_quarters/heads/office/xo
+	icon_state = "heads_hop"
 	name = "\improper Command - XO's Office"
 	req_access = list(access_hop)
 
 /area/crew_quarters/heads/office/rd
+	icon_state = "heads_rd"
 	name = "\improper Command - CSO's Office"
 	req_access = list(access_rd)
 
 /area/crew_quarters/heads/office/cmo
+	icon_state = "heads_cmo"
 	name = "\improper Command - CMO's Office"
 	req_access = list(access_cmo)
 
 /area/crew_quarters/heads/office/ce
+	icon_state = "heads_ce"
 	name = "\improper Engineering - CE's Office"
 	req_access = list(access_ce)
 
 /area/crew_quarters/heads/office/cos
+	icon_state = "heads_hos"
 	name = "\improper Command - CoS' Office"
 	req_access = list(access_hos)
 
 /area/crew_quarters/heads/office/cl
+	icon_state = "heads_cl"
 	name = "\improper Command - CL's Office"
 	req_access = list(access_liaison)
 
 /area/crew_quarters/heads/office/sgr
+	icon_state = "heads_sr"
 	name = "\improper Command - SCGR's Office"
 	req_access = list(access_representative)
 
 /area/crew_quarters/heads/office/sea
+	icon_state = "heads_sea"
 	name = "\improper Command - SEA's Office"
 	req_access = list(access_senadv)
 

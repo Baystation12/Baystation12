@@ -1,12 +1,3 @@
-var/list/flooring_types
-
-/proc/get_flooring_data(var/flooring_path)
-	if(!flooring_types)
-		flooring_types = list()
-	if(!flooring_types["[flooring_path]"])
-		flooring_types["[flooring_path]"] = new flooring_path
-	return flooring_types["[flooring_path]"]
-
 // State values:
 // [icon_base]: initial base icon_state without edges or corners.
 // if has_base_range is set, append 0-has_base_range ie.
@@ -299,6 +290,25 @@ var/list/flooring_types
 
 /decl/flooring/reinforced/shuttle/black
 	icon_base = "floor7"
+	
+/decl/flooring/reinforced/shuttle/skrell
+	icon = 'icons/turf/skrellturf.dmi'
+	icon_base = "skrellblack"
+
+/decl/flooring/reinforced/shuttle/skrell/white
+	icon_base = "skrellwhite"
+
+/decl/flooring/reinforced/shuttle/skrell/red
+	icon_base = "skrellred"
+
+/decl/flooring/reinforced/shuttle/skrell/blue
+	icon_base = "skrellblue"
+
+/decl/flooring/reinforced/shuttle/skrell/orange
+	icon_base = "skrellorange"
+
+/decl/flooring/reinforced/shuttle/skrell/green
+	icon_base = "skrellgreen"
 
 /decl/flooring/crystal
 	name = "crystal floor"
@@ -306,3 +316,4 @@ var/list/flooring_types
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	color = "#00ffe1"
+	

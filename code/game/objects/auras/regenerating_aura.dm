@@ -18,6 +18,7 @@
 	var/grow_threshold = 0
 	var/ignore_tag//organ tag to ignore
 	var/last_nutrition_warning = 0
+	var/innate_heal = TRUE // Whether the aura is on, basically.
 
 
 /obj/aura/regenerating/human/proc/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/carbon/human/H)
@@ -28,7 +29,7 @@
 	if(!istype(H))
 		CRASH("Someone gave [user.type] a [src.type] aura. This is invalid.")
 		return 0
-	if(!H.innate_heal || H.InStasis() || H.stat == DEAD)
+	if(!innate_heal || H.InStasis() || H.stat == DEAD)
 		return 0
 	if(H.nutrition < nutrition_damage_mult)
 		low_nut_warning()
@@ -44,6 +45,8 @@
 		H.adjustToxLoss(-tox_mult * config.organ_regeneration_multiplier)
 		H.nutrition -= nutrition_damage_mult
 
+	if(!can_regenerate_organs())
+		return 1
 	if(organ_mult)
 		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
 			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
@@ -99,14 +102,54 @@
 		return 1
 	return 0
 
+/obj/aura/regenerating/human/proc/toggle()
+	innate_heal = !innate_heal
+
+/obj/aura/regenerating/human/proc/can_toggle()
+	return TRUE
+
+/obj/aura/regenerating/human/proc/can_regenerate_organs()
+	return TRUE
 
 /obj/aura/regenerating/human/unathi
+	nutrition_damage_mult = 2
 	brute_mult = 2
 	organ_mult = 4
 	regen_message = "<span class='warning'>You feel a soothing sensation as your ORGAN mends...</span>"
 	grow_chance = 2
 	grow_threshold = 150
 	ignore_tag = BP_HEAD
+	var/toggle_blocked_until = 0 // A time
+
+/obj/aura/regenerating/human/unathi/toggle()
+	..()
+	toggle_blocked_until = max(world.time + 2 MINUTES, toggle_blocked_until)
+
+/obj/aura/regenerating/human/unathi/can_toggle()
+	if(world.time < toggle_blocked_until)
+		return FALSE
+	return ..()
+
+// Default return; we're just logging.
+/obj/aura/regenerating/human/unathi/attackby()
+	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
+
+/obj/aura/regenerating/human/unathi/hitby()
+	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
+
+/obj/aura/regenerating/human/unathi/bullet_act()
+	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
+
+/obj/aura/regenerating/human/unathi/life_tick()
+	var/mob/living/carbon/human/H = user
+	if(istype(H) && H.stat != DEAD && H.nutrition < 50)
+		H.apply_damage(5, TOX)
+		H.nutrition += 3
+		return 1
+	return ..()
+
+/obj/aura/regenerating/human/unathi/can_regenerate_organs()
+	return can_toggle()
 
 /obj/aura/regenerating/human/unathi/external_regeneration_effect(var/obj/item/organ/external/O, var/mob/living/carbon/human/H)
 	to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
