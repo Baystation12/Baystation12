@@ -29,6 +29,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	player.psi.update(TRUE)
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/psysuit(player), slot_w_uniform)
+	create_id("Visitor", player)
 	player.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe/psypurple(player), slot_wear_suit)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(player), slot_shoes)
 	player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(player), slot_back)
