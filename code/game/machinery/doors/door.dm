@@ -550,13 +550,20 @@
 	electronics.autoset = autoset_access
 	return electronics
 
+/obj/machinery/door/proc/access_area_by_dir(direction)
+	var/turf/T = get_turf(get_step(src, direction))
+	if (T && !T.density)
+		return get_area(T)
+
 /obj/machinery/door/proc/inherit_access_from_area()
-	var/area/fore = get_area(get_step(src, dir))
-	var/area/aft = get_area(get_step(src, GLOB.reverse_dir[dir])) || fore
-	if(!fore || (fore == aft))
-		req_access = (aft && aft.secure) ? aft.req_access.Copy() : list()
-		return
-	if(fore.secure || aft.secure)
+	var/area/fore = access_area_by_dir(dir)
+	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
+	fore = fore || aft
+	aft = aft || fore
+	
+	if (!fore && !aft)
+		req_access = list()
+	else if (fore.secure || aft.secure)
 		req_access = req_access_union(fore, aft)
-		return
-	req_access = req_access_diff(fore, aft)
+	else
+		req_access = req_access_diff(fore, aft)
