@@ -131,6 +131,7 @@
 	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/unishi/unishi.dm"
 	#include "../away/voxship/voxship.dm"
+	#include "../away/skrellscoutship/skrellscoutship.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 

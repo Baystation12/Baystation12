@@ -52,9 +52,12 @@ SUBSYSTEM_DEF(shuttle)
 	initialize_sectors()
 
 /datum/controller/subsystem/shuttle/proc/initialize_shuttles()
+	var/list/shuttles_made = list()
 	for(var/shuttle_type in shuttles_to_initialize)
-		initialize_shuttle(shuttle_type)
-	hook_up_motherships(shuttles_to_initialize)
+		var/shuttle = initialize_shuttle(shuttle_type)
+		if(shuttle)
+			shuttles_made += shuttle
+	hook_up_motherships(shuttles_made)
 	shuttles_to_initialize = null
 
 /datum/controller/subsystem/shuttle/proc/initialize_sectors()
@@ -119,6 +122,7 @@ SUBSYSTEM_DEF(shuttle)
 	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
 		shuttle_areas |= shuttle.shuttle_area
+		return shuttle
 
 /datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
 	for(var/datum/shuttle/S in shuttles_list)
