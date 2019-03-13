@@ -133,6 +133,8 @@
 			return global.SSvines;
 		if("SSvote")
 			return global.SSvote;
+		if("SSwebhooks")
+			return global.SSwebhooks;
 		if("SSxenoarch")
 			return global.SSxenoarch;
 		if("Tier1Runes")
@@ -1048,6 +1050,8 @@
 			global.SSvines=newval;
 		if("SSvote")
 			global.SSvote=newval;
+		if("SSwebhooks")
+			global.SSwebhooks=newval;
 		if("SSxenoarch")
 			global.SSxenoarch=newval;
 		if("Tier1Runes")
@@ -1896,6 +1900,7 @@
 	"SSturf",
 	"SSvines",
 	"SSvote",
+	"SSwebhooks",
 	"SSxenoarch",
 	"Tier1Runes",
 	"Tier2Runes",

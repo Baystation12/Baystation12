@@ -3,6 +3,7 @@
 	var/descriptor = "generic ship archetype"
 	var/list/whitelisted_species = STATION_SPECIES
 	var/list/blacklisted_species = RESTRICTED_SPECIES
+	var/call_webhook
 	var/list/crew_jobs = list(
 		/datum/job/submap
 	)

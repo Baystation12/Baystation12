@@ -177,7 +177,6 @@
 		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
 		to_chat(src, "<br>")
 
-
 	if(holder)
 		add_admin_verbs()
 		admin_memo_show()

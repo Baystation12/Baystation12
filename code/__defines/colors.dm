@@ -167,3 +167,5 @@
 #define CODEX_COLOR_LORE      "#abdb9b"
 #define CODEX_COLOR_MECHANICS "#9ebcd8"
 #define CODEX_COLOR_ANTAG     "#e5a2a2"
+
+#define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
