@@ -169,18 +169,28 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/spawn_candidates = allowed_spawns.Copy()
 
 	do
+		var/display_name = spawn_candidates[1]
 		//get the next possible candidate
 		if(!candidate)
-			candidate = spawntypes()[spawn_candidates[1]]
-		//check if its viable to spawn in with this job
-		if(candidate.check_job_spawning(job_datum.title))
+			candidate = spawntypes()[display_name]
+
+		if(!candidate)
+			log_debug("MAP ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
+			message_admins("MAP ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
+
+		else if(candidate.check_job_spawning(job_datum.title))
+			//check if its viable to spawn in with this job
 			break
 
 		//reject this candidate
-		spawn_candidates -= candidate.display_name
+		spawn_candidates -= display_name
 		candidate = null
 
 		//only continue the loop if there are more candidates
 	while(spawn_candidates.len > 0)
 
-	return candidate.display_name
+	if(candidate)
+		return candidate.display_name
+	else
+		log_debug("MAP WARNING: map \'[src]\' is not returning a global default spawn.")
+		message_admins("MAP WARNING: map \'[src]\' is not returning a global default spawn.")
