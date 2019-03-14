@@ -156,6 +156,7 @@
 /obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
 	if(default_deconstruction_screwdriver(user, I))
 		updateUsrDialog()
+		go_out()
 		return
 	if(default_deconstruction_crowbar(user, I))
 		return
@@ -182,6 +183,9 @@
 	if(target.buckled)
 		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
 		return
+	if(panel_open)
+		to_chat(user, "<span class='warning'>Close the maintenance panel before attempting to place the subject in the sleeper.</span>")
+		return
 	go_in(target, user)
 
 /obj/machinery/sleeper/relaymove(var/mob/user)
@@ -196,8 +200,7 @@
 		..(severity)
 		return
 
-	if(occupant)
-		go_out()
+	go_out()
 
 	..(severity)
 /obj/machinery/sleeper/proc/toggle_filter()
