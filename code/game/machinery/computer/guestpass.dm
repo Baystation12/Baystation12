@@ -130,7 +130,7 @@
 					else
 						to_chat(user, "<span class='warning'>Invalid duration.</span>")
 			if ("access")
-				var/A = text2num(href_list["access"])
+				var/A = href_list["access"]
 				if (A in accesses)
 					accesses.Remove(A)
 				else if(giver && (A in giver.access))
