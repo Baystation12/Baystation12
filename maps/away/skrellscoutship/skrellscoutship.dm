@@ -8,7 +8,6 @@
 	suffixes = list("skrellscoutship/skrellscoutship-1.dmm", "skrellscoutship/skrellscoutship-2.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/skrellscoutship, /datum/shuttle/autodock/overmap/skrellscoutshuttle)
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED 
 	
 /obj/effect/overmap/sector/skrellscoutspace
 	name = "Empty Sector"
