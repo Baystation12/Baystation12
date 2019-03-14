@@ -304,6 +304,8 @@
 #include "code\datums\music_tracks\elevator.dm"
 #include "code\datums\music_tracks\elibao.dm"
 #include "code\datums\music_tracks\endless_space.dm"
+#include "code\datums\music_tracks\epicintro2015.dm"
+#include "code\datums\music_tracks\epicintro2017.dm"
 #include "code\datums\music_tracks\europa.dm"
 #include "code\datums\music_tracks\floating.dm"
 #include "code\datums\music_tracks\human.dm"
