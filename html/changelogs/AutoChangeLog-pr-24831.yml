@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Prone mobs can no longer buckle other mobs to beds/chairs. This prevents crawling bucklespam during combat."
