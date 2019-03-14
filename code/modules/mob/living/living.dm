@@ -575,6 +575,18 @@ default behaviour is:
 		for(var/mob/living/carbon/slime/M in view(1,src))
 			M.UpdateFeed()
 
+	if(z != last_z)
+		var/obj/om_obj_old = map_sectors["[last_z]"]
+		var/obj/om_obj_new = map_sectors["[z]"]
+		if(om_obj_old == om_obj_new) //Some overmap objects span multiple z's.
+			return
+		if(om_obj_old)
+			mobs_in_sectors[om_obj_old] -= src
+		if(om_obj_new)
+			mobs_in_sectors[om_obj_new] |= list(src) // |= is used instead of += to avoid duplication
+
+		last_z = z
+
 /mob/living/verb/resist()
 	set name = "Resist"
 	set category = "IC"

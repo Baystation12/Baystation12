@@ -41,6 +41,9 @@ var/list/points_of_interest = list()
 	if(name == "map object")
 		name = "invalid-\ref[src]"
 
+	if(!(src in mobs_in_sectors))
+		mobs_in_sectors[src] = list()
+
 	//custom tags are allowed to be set in map or elsewhere
 	if(!tag)
 		tag = name
@@ -175,17 +178,12 @@ var/list/points_of_interest = list()
 		superstructure_failing = 1
 		return
 	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
-		for(var/mob/player in GLOB.player_list)
-			for(var/z_level in map_z)
-				if("[player.z]" == "[z_level]")
-					to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
-					break
+		for(var/mob/player in mobs_in_sectors[src])
+			to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
 		superstructure_failing = 1
 		spawn(SUPERSTRUCTURE_FAIL_TIME)
-			for(var/mob/player in GLOB.player_list)
-				for(var/z_level in map_z)
-					if("[player.z]" == "[z_level]")
-						player.dust()
+			for(var/mob/player in mobs_in_sectors[src])//but all mobs are dusted.
+				player.dust()
 			loc = null
 			to_world("An overmap object has been destroyed. Please wait as it is deleted.")
 			sleep(10)//To allow the previous message to actually be seen
