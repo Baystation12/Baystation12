@@ -24,9 +24,13 @@
 #define DROWSY    "drowsy"
 
 // Damage flags
-#define DAM_SHARP (1<<0)
-#define DAM_EDGE  (1<<1)
-#define DAM_LASER (1<<2)
+#define DAM_SHARP     1
+#define DAM_EDGE      2
+#define DAM_LASER     4
+#define DAM_BULLET    8
+#define DAM_EXPLODE   16
+#define DAM_DISPERSED 32 // Makes apply_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
+#define DAM_BIO       64 // Toxin damage that should be mitigated by biological (i.e. sterile) armor
 
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)

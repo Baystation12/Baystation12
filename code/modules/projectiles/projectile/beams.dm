@@ -6,7 +6,7 @@
 	damage = 40
 	damage_type = BURN
 	sharp = 1 //concentrated burns
-	check_armour = "laser"
+	damage_flags = DAM_LASER
 	eyeblur = 4
 	hitscan = 1
 	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
@@ -115,7 +115,6 @@
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
-	check_armour = "laser"
 
 	muzzle_type = /obj/effect/projectile/laser/blue/muzzle
 	tracer_type = /obj/effect/projectile/laser/blue/tracer
@@ -135,7 +134,6 @@
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
-	check_armour = "laser"
 
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
@@ -150,7 +148,6 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	damage_type = BURN
-	check_armour = "laser"
 
 	muzzle_type = /obj/effect/projectile/laser/omni/muzzle
 	tracer_type = /obj/effect/projectile/laser/omni/tracer
@@ -181,7 +178,7 @@
 	name = "stun beam"
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	check_armour = "energy"
+	damage_flags = 0
 	sharp = 0 //not a laser
 	agony = 40
 	damage_type = STUN
@@ -214,7 +211,6 @@
 	sharp = 1
 	edge = 1
 	damage_type = BURN
-	check_armour = "laser"
 	kill_count = 5
 	pass_flags = PASS_FLAG_TABLE
 	distance_falloff = 4

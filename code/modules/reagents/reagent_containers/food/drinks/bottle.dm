@@ -114,22 +114,20 @@
 		set_light(0)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
-	var/blocked = ..()
+	. = ..()
 
 	if(user.a_intent != I_HURT)
 		return
 	if(!smash_check(1))
 		return //won't always break on the first hit
 
-	// You are going to knock someone out for longer if they are not wearing a helmet.
-	var/weaken_duration = 0
-	if(blocked < 100)
-		weaken_duration = smash_duration + min(0, force - target.getarmor(hit_zone, "melee") + 10)
-
 	var/mob/living/carbon/human/H = target
 	if(istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = H.get_organ(hit_zone) //headcheck should ensure that affecting is not null
 		user.visible_message("<span class='danger'>[user] smashes [src] into [H]'s [affecting.name]!</span>")
+		// You are going to knock someone out for longer if they are not wearing a helmet.
+		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE) * 100 
+		var/weaken_duration = smash_duration + min(0, force - blocked + 10)
 		if(weaken_duration)
 			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked) // Never weaken more than a flash!
 	else
@@ -143,8 +141,6 @@
 	//Finally, smash the bottle. This kills (qdel) the bottle.
 	var/obj/item/weapon/broken_bottle/B = smash(target.loc, target)
 	user.put_in_active_hand(B)
-
-	return blocked
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/weapon/broken_bottle

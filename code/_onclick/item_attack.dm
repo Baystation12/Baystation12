@@ -82,7 +82,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	return 1
 
-//Called when a weapon is used to make a successful melee attack on a mob. Returns the blocked result
+//Called when a weapon is used to make a successful melee attack on a mob. Returns whether damage was dealt.
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	if(hitsound)
 		playsound(loc, hitsound, 50, 1, -1)

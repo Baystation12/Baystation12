@@ -91,12 +91,12 @@ var/global/list/stool_cache = list() //haha stool
 		user.do_attack_animation(target)
 		dismantle() //This deletes self.
 
-		var/blocked = target.run_armor_check(hit_zone, "melee")
-		target.Weaken(10 * blocked_mult(blocked))
-		target.apply_damage(20, BRUTE, hit_zone, blocked, src)
-		return
+		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE)
+		target.Weaken(10 * (1 - blocked))
+		target.apply_damage(20, BRUTE, hit_zone, src)
+		return 1
 
-	..()
+	return ..()
 
 /obj/item/weapon/stool/ex_act(severity)
 	switch(severity)
