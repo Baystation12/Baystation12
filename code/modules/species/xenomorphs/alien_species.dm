@@ -174,25 +174,36 @@
 				to_chat(H, "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>")
 			return 1
 
+	//next mend broken bones, approx 10 ticks each
+	for(var/obj/item/organ/external/E in H.bad_external_organs)
+		if(prob(mend_prob))
+			if(E.status & ORGAN_ARTERY_CUT)
+				E.status &= ~ORGAN_ARTERY_CUT
+				. = 1
+			else if((E.status & ORGAN_BROKEN) && E.mend_fracture())
+				. = 1
+			else if(E.status & ORGAN_TENDON_CUT)
+				E.status &= ~ORGAN_TENDON_CUT
+				. = 1
+		if(.)
+			to_chat(H, "<span class='alium'>You feel something mend itself inside your [E.name].</span>")
+			return TRUE
+
 	//heal damages
-	if (H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
+	if (H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss())
 		H.adjustBruteLoss(-heal_rate)
 		H.adjustFireLoss(-heal_rate)
 		H.adjustOxyLoss(-heal_rate)
-		H.adjustToxLoss(-heal_rate)
 		if (prob(5))
 			to_chat(H, "<span class='alium'>You feel a soothing sensation come over you...</span>")
-		return 1
+		return TRUE
 
-	//next mend broken bones, approx 10 ticks each
-	for(var/obj/item/organ/external/E in H.bad_external_organs)
-		if (E.status & ORGAN_BROKEN)
-			if (prob(mend_prob))
-				if (E.mend_fracture())
-					to_chat(H, "<span class='alium'>You feel something mend itself inside your [E.name].</span>")
-			return 1
+	// Recover blood.
+	if(H.vessel.total_volume < H.vessel.maximum_volume)
+		H.regenerate_blood(rand(heal_rate))
+		return TRUE
 
-	return 0
+	return FALSE
 
 /datum/species/xenos/drone
 	name = "Xenophage Drone"
