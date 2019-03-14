@@ -200,7 +200,8 @@
 
 	// Recover blood.
 	if(H.vessel.total_volume < H.vessel.maximum_volume)
-		H.vessel.add_reagent(/datum/reagent/blood, min(rand(heal_rate), H.vessel.maximum_volume-H.vessel.total_volume))
+		H.regenerate_blood(rand(heal_rate))
+		return TRUE
 
 	return FALSE
 
