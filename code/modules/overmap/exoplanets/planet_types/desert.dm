@@ -17,15 +17,12 @@
 							 /datum/map_template/ruin/exoplanet/radshrine,
 							 /datum/map_template/ruin/exoplanet/playablecolony,
 							 /datum/map_template/ruin/exoplanet/datacapsule)
+	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
-	..()
 	if(prob(70))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
-	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/desert(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		get_biostuff(M)
-		new /datum/random_map/noise/ore/rich(null,1,1,zlevel,maxx,maxy,0,1,1)
+	..()
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_atmosphere()
 	..()
@@ -56,6 +53,8 @@
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
+	if(is_edge_turf(T))
+		return
 	var/v = noise2value(value)
 	if(v > 6)
 		T.icon_state = "desert[v-1]"

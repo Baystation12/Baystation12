@@ -15,13 +15,7 @@
 							/datum/map_template/ruin/exoplanet/deserted_lab,
 							/datum/map_template/ruin/exoplanet/playablecolony,
 							/datum/map_template/ruin/exoplanet/datacapsule)
-
-/obj/effect/overmap/sector/exoplanet/shrouded/generate_map()
-	..()
-	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/shrouded(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		get_biostuff(M)
-		new /datum/random_map/noise/ore/poor(null,1,1,zlevel,maxx,maxy,0,1,1)
+	map_generators = list(/datum/random_map/noise/exoplanet/shrouded, /datum/random_map/noise/ore/poor)
 
 /obj/effect/overmap/sector/exoplanet/shrouded/generate_atmosphere()
 	..()

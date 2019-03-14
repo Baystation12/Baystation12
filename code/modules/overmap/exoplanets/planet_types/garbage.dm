@@ -3,15 +3,12 @@
 	desc = "An arid exoplanet with unnatural formations covering the surface. Hotspots of radiation detected."
 	color = "#a5a18b"
 	planetary_area = /area/exoplanet/garbage
+	map_generators = list(/datum/random_map/noise/exoplanet/garbage, /datum/random_map/noise/ore/poor)
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_map()
-	..()
 	if(prob(50))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
-	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/garbage/M = new /datum/random_map/noise/exoplanet/garbage(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		get_biostuff(M)
-		new /datum/random_map/noise/ore/poor(null,1,1,zlevel,maxx,maxy,0,1,1)
+	..()
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_atmosphere()
 	..()
@@ -53,6 +50,8 @@
 
 /datum/random_map/noise/exoplanet/garbage/get_additional_spawns(var/value, var/turf/T)
 	..()
+	if(is_edge_turf(T))
+		return
 	var/v = noise2value(value)
 	if(v > 5)
 		new/obj/structure/rubble/house(T)

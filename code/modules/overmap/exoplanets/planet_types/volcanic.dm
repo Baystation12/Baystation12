@@ -5,21 +5,7 @@
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
 	possible_themes = list()
-
-/obj/effect/overmap/sector/exoplanet/volcanic/generate_map()
-	..()
-	for(var/zlevel in map_z)
-		new /datum/random_map/automata/cave_system/mountains/volcanic(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/volcanic(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		get_biostuff(M)
-		new /datum/random_map/noise/ore/filthy_rich(null,1,1,zlevel,maxx,maxy,0,1,1)
-		for(var/_x = 1 to maxx)
-			for(var/_y = 1 to maxy)
-				var/turf/T = locate(_x,_y,zlevel)
-				planetary_area.contents.Add(T)
-				if(istype(T,/turf/simulated/mineral))
-					var/turf/simulated/mineral/MT = T
-					MT.mined_turf = prob(90) ? planetary_area.base_turf : /turf/simulated/floor/exoplanet/lava
+	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 
 /obj/effect/overmap/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
@@ -87,6 +73,11 @@
 	wall_type =  /turf/simulated/mineral/volcanic
 	mineral_turf =  /turf/simulated/mineral/random/volcanic
 	rock_color = COLOR_DARK_GRAY
+
+/datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
+	..()
+	if(planetary_area)	
+		T.mined_turf = prob(90) ? planetary_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
 	name = "lava"
