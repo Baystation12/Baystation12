@@ -182,7 +182,7 @@ var/list/points_of_interest = list()
 			to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
 		superstructure_failing = 1
 		spawn(SUPERSTRUCTURE_FAIL_TIME)
-			for(var/mob/player in mobs_in_sectors[src])//but all mobs are dusted.
+			for(var/mob/player in mobs_in_sectors[src])
 				player.dust()
 			loc = null
 			to_world("An overmap object has been destroyed. Please wait as it is deleted.")
