@@ -13,8 +13,7 @@
 							/datum/map_template/ruin/exoplanet/radshrine,
 							/datum/map_template/ruin/exoplanet/deserted_lab,
 							/datum/map_template/ruin/exoplanet/playablecolony,
-							/datum/map_template/ruin/exoplanet/datacapsule,
-							/datum/map_template/ruin/exoplanet/science_vessel)
+							/datum/map_template/ruin/exoplanet/datacapsule)
 
 /obj/effect/overmap/sector/exoplanet/chlorine/generate_map()
 	..()
