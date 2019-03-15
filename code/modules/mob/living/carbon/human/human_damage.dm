@@ -322,9 +322,9 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/burn_avg = burn / parts.len
 	for(var/obj/item/organ/external/E in parts)
 		if(brute_avg)
-			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, given_organ = E)
+			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 		if(burn_avg)
-			apply_damage(damage = burn_avg, damagetype = BURN, damage_flags = dam_flags, used_weapon = used_weapon, given_organ = E)
+			apply_damage(damage = burn_avg, damagetype = BURN, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
@@ -374,20 +374,20 @@ This function restores all organs.
 				if(damage_flags & DAM_DISPERSED)
 					var/old_damage = damage
 					var/tally
+					silent = TRUE // Will damage a lot of organs, probably, so avoid spam.
 					for(var/zone in organ_rel_size)
 						tally += organ_rel_size[zone]
 					for(var/zone in organ_rel_size)
 						damage = old_damage * organ_rel_size[zone]/tally
 						def_zone = zone
-						.()
+						. = .() || .
 					return
 				def_zone = ran_zone(def_zone)
 			organ = get_organ(check_zone(def_zone))
 
 	//Handle other types of damage
 	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
-		..(damage, damagetype, def_zone)
-		return 1
+		return ..()
 
 	handle_suit_punctures(damagetype, damage, def_zone)
 

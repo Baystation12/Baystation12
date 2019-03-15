@@ -17,7 +17,7 @@
 		return args.Copy()
 
 	var/blocked = get_blocked(damage_type, damage_flags, armor_pen)
-	if(prob(blocked))
+	if(prob(blocked * 100))
 		if(damage_flags & DAM_LASER)
 			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
 		damage_flags &= ~(DAM_SHARP | DAM_EDGE | DAM_LASER)
@@ -25,7 +25,7 @@
 	on_blocking(damage, blocked)
 
 	if(damage_type == IRRADIATE)
-		damage = max(0, damage - blocked)
+		damage = max(0, damage - 100 * blocked)
 		silent = TRUE
 	damage *= 1 - blocked
 

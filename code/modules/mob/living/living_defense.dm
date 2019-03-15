@@ -33,12 +33,12 @@
 	//Armor
 	var/damage = P.damage
 	var/flags = P.damage_flags()
-	var/absorb = 100 * get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration)
+	var/damaged
 	if(!P.nodamage)
-		apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
-	P.on_hit(src, absorb, def_zone)
-
-	return absorb
+		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
+	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
+		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration)
+	P.on_hit(src, ., def_zone)
 
 /mob/living/proc/aura_check(var/type)
 	if(!auras)
