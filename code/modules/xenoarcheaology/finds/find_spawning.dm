@@ -25,7 +25,7 @@
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
 	if(istype(I, /obj/item/weapon/material))
 		var/obj/item/weapon/material/M = I
-		M.set_material(MATERIAL_ALIUMIUM)
+		M.set_material(MATERIAL_ALIENALLOY)
 		source_material = "alien alloy"
 	else
 		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")

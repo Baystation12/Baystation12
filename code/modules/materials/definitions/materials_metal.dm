@@ -324,7 +324,7 @@
 	hidden_from_codex = TRUE
 
 /material/aliumium
-	name = MATERIAL_ALIUMIUM
+	name = MATERIAL_ALIENALLOY
 	display_name = "alien alloy"
 	stack_type = null
 	icon_base = "jaggy"
