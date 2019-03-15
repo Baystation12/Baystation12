@@ -1,0 +1,4 @@
+author: Datraen
+delete-after: True
+changes: 
+  - bugfix: "Fixes prosthetics not being selected by subspecies."
