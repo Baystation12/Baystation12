@@ -43,7 +43,7 @@
 	uniform = /obj/item/clothing/under/rank/ntwork
 	shoes = /obj/item/clothing/shoes/workboots
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
-	pda_type = /obj/item/modular_computer/pda/science
+	pda_type = /obj/item/modular_computer/pda/mining
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 	l_ear = /obj/item/device/radio/headset/headset_mining
 
