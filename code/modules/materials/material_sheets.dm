@@ -457,7 +457,7 @@
 /obj/item/stack/material/aliumium
 	name = "alien alloy"
 	icon_state = "sheet"
-	default_type = MATERIAL_ALIUMIUM
+	default_type = MATERIAL_ALIENALLOY
 
 /obj/item/stack/material/aliumium/ten
 	amount = 10

@@ -28,7 +28,7 @@
 #define MATERIAL_HYDROGEN                "hydrogen"
 #define MATERIAL_WASTE                   "waste"
 #define MATERIAL_ELEVATORIUM             "elevatorium"
-#define MATERIAL_ALIUMIUM                "aliumium"
+#define MATERIAL_ALIENALLOY              "aliumium"
 #define MATERIAL_SAND                    "sand"
 #define MATERIAL_GRAPHENE                "graphene"
 #define MATERIAL_DEUTERIUM               "deuterium"
