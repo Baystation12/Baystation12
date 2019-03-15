@@ -15,6 +15,10 @@
 	broken_damage = 100
 	w_class = ITEM_SIZE_NORMAL
 	var/icon_state_closed = "laptop-closed"
+	
+/obj/item/modular_computer/laptop/Initialize()
+	. = ..()
+	screen_on = anchored
 
 /obj/item/modular_computer/laptop/AltClick(var/mob/user)
 // Prevents carrying of open laptops inhand.
