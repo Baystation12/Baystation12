@@ -587,7 +587,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/vending/boozeomat{
-	req_access = list(list("ACCESS_BRIDGE", "ACCESS_BAR", "ACCESS_KITCHEN"))
+	req_access = list(list("ACCESS_BRIDGE","ACCESS_BAR","ACCESS_KITCHEN"))
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
@@ -2685,8 +2685,7 @@
 	},
 /obj/machinery/alarm{
 	frequency = 1439;
-	pixel_y = 23;
-	
+	pixel_y = 23
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -3324,8 +3323,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/janitor/aux)
@@ -4766,6 +4764,9 @@
 "qf" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
+	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
@@ -8313,8 +8314,7 @@
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
-	pixel_y = 24;
-	
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/port)
@@ -9927,8 +9927,7 @@
 "Ib" = (
 /obj/machinery/alarm{
 	frequency = 1439;
-	pixel_y = 23;
-	
+	pixel_y = 23
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10167,8 +10166,7 @@
 /obj/structure/catwalk,
 /obj/machinery/alarm{
 	frequency = 1439;
-	pixel_y = 23;
-	
+	pixel_y = 23
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11024,8 +11022,7 @@
 	name = "exterior access button";
 	pixel_x = -6;
 	pixel_y = -19;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"))
 	},
 /turf/simulated/floor,
 /area/hallway/primary/fourthdeck/fore)
@@ -16181,8 +16178,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/alarm{
 	frequency = 1439;
-	pixel_y = 23;
-	
+	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
@@ -16524,8 +16520,7 @@
 	},
 /obj/machinery/alarm{
 	frequency = 1439;
-	pixel_y = 23;
-	
+	pixel_y = 23
 	},
 /obj/structure/sign/warning/docking_area{
 	name = "\improper ESCAPE POD LAUNCH PATHWAY";
