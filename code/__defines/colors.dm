@@ -53,6 +53,7 @@
 #define COLOR_BOTTLE_GREEN     "#1f6b4f"
 #define COLOR_PALE_BTL_GREEN   "#57967f"
 #define COLOR_GUNMETAL         "#545c68"
+#define COLOR_WALL_GUNMETAL    "#353a42"
 #define COLOR_STEEL            "#a8b0b2"
 #define COLOR_MUZZLE_FLASH     "#ffffb2"
 #define COLOR_CHESTNUT         "#996633"
