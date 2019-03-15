@@ -37,13 +37,10 @@
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/XO
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
+		/datum/mil_branch/expeditionary_corps
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o5,
-		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/fleet/o4
+		/datum/mil_rank/ec/o5
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
