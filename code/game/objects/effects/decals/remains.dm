@@ -19,7 +19,7 @@
 
 /obj/item/remains/robot
 	desc = "They look like the remains of something mechanical. They have a strange aura about them."
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robots_gibs.dmi'
 	icon_state = "remainsrobot"
 
 /obj/item/remains/mouse
