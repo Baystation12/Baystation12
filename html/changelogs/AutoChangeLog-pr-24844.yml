@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Chairs and stools now have the correct materials when constructed and deconstructed."
