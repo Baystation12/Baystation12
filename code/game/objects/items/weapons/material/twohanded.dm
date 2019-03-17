@@ -79,6 +79,7 @@
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
+	worth_multiplier = 31
 
 /obj/item/weapon/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -113,6 +114,7 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = MATERIAL_GLASS
 	does_spin = FALSE
+	worth_multiplier = 7
 
 /obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)

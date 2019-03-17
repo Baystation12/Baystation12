@@ -11,6 +11,7 @@
 	heating_products = list(/datum/reagent/toxin/denatured)
 	heating_point = 100 CELSIUS
 	heating_message = "goes clear."
+	value = 2
 
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit

@@ -28,6 +28,7 @@
 	heating_products = list(/datum/reagent/coagulated_blood)
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
+	value = 2
 
 /datum/reagent/blood/initialize_data(var/newdata)
 	..()
@@ -111,6 +112,7 @@
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#0050f0"
+	value = 6
 
 /datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(src.data)
@@ -132,6 +134,7 @@
 	chilling_point = T0C
 	heating_products = list(/datum/reagent/water/boiling)
 	heating_point = T100C
+	value = 0
 
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
@@ -236,6 +239,7 @@
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
+	value = 6.8
 
 /datum/reagent/fuel/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)

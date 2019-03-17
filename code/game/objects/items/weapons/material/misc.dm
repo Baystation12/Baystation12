@@ -9,6 +9,7 @@
 	thrown_force_divisor = 1.8
 	attack_verb = list("jabbed","stabbed","ripped")
 	does_spin = FALSE
+	worth_multiplier = 15
 	var/spent
 
 /obj/item/weapon/material/harpoon/bomb
@@ -54,6 +55,7 @@
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
 	hitsound = "chop"
+	worth_multiplier = 6
 
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"
@@ -111,5 +113,4 @@
 	slot_flags = SLOT_BACK
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
-
-
+	worth_multiplier = 20

@@ -119,6 +119,7 @@
 	taste_description = "expensive metal"
 	reagent_state = SOLID
 	color = "#f7c430"
+	value = 7
 
 /datum/reagent/silver
 	name = "Silver"
@@ -126,6 +127,7 @@
 	taste_description = "expensive yet reasonable metal"
 	reagent_state = SOLID
 	color = "#d0d0d0"
+	value = 5
 
 /datum/reagent/uranium
 	name = "Uranium"
@@ -133,6 +135,7 @@
 	taste_description = "the inside of a reactor"
 	reagent_state = SOLID
 	color = "#b8b8c0"
+	value = 7
 
 /datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)

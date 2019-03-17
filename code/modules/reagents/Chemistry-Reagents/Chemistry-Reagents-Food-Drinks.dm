@@ -9,6 +9,7 @@
 	var/nutriment_factor = 10 // Per unit
 	var/injectable = 0
 	color = "#664330"
+	value = 0.1
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
@@ -326,14 +327,16 @@
 	reagent_state = SOLID
 	color = "#ffffff"
 	overdose = REAGENTS_OVERDOSE
-
+	value = 0.01
+	
 /datum/reagent/blackpepper
 	name = "Black Pepper"
 	description = "A powder ground from peppercorns. *AAAACHOOO*"
 	taste_description = "pepper"
 	reagent_state = SOLID
 	color = "#000000"
-
+	value = 0.01
+	
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
 	description = "A universal enzyme used in the preperation of certain chemicals and foods."
@@ -342,7 +345,8 @@
 	reagent_state = LIQUID
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
-
+	value = 0.01
+	
 /datum/reagent/frostoil
 	name = "Frost Oil"
 	description = "A special oil that noticably chills the body. Extracted from Ice Peppers."
@@ -350,7 +354,8 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#07aab2"
-
+	value = 0.01
+	
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
@@ -368,6 +373,8 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#b31008"
+	value = 0.01
+	
 	var/agony_dose = 5
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
@@ -501,6 +508,7 @@
 	description = "Uh, some kind of drink."
 	reagent_state = LIQUID
 	color = "#e78108"
+	value = 0.01
 	var/nutrition = 0 // Per unit
 	var/adj_dizzy = 0 // Per tick
 	var/adj_drowsy = 0

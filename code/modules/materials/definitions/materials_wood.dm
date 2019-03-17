@@ -29,6 +29,7 @@
 				/datum/reagent/water = 5
 				)
 	sale_price = 1
+	value = 3
 
 /material/wood/holographic
 	name = "holo" + MATERIAL_WOOD
@@ -38,6 +39,7 @@
 	shard_type = SHARD_NONE
 	sale_price = null
 	hidden_from_codex = TRUE
+	value = 0
 
 /material/wood/mahogany
 	name = MATERIAL_MAHOGANY
@@ -46,6 +48,7 @@
 	icon_colour = WOOD_COLOR_RICH
 	construction_difficulty = 2
 	sale_price = 3
+	value = 9
 
 /material/wood/maple
 	name = MATERIAL_MAPLE
@@ -64,6 +67,7 @@
 	weight = 22
 	construction_difficulty = 4
 	sale_price = 4
+	value = 34
 
 /material/wood/walnut
 	name = MATERIAL_WALNUT
@@ -75,3 +79,4 @@
 	weight = 20
 	construction_difficulty = 2
 	sale_price = 2
+	value = 8

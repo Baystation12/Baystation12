@@ -43,6 +43,7 @@
 	var/heating_sound = 'sound/effects/bubbles.ogg'
 
 	var/temperature_multiplier = 1
+	var/value = 0.10 //per unit
 
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))

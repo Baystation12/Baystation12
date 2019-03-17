@@ -13,9 +13,10 @@
 	edge = 0
 	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	worth_multiplier = 1.1
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
-
+	
 /obj/item/weapon/material/kitchen/utensil/New()
 	..()
 	if (prob(60))
