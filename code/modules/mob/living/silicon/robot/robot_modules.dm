@@ -38,9 +38,12 @@
 	var/crisis_locked =   FALSE
 	var/upgrade_locked =  FALSE
 
-/obj/item/weapon/robot_module/Initialize(var/mob/living/silicon/robot/R)
-	. = ..()
-	if (!istype(R))
+/obj/item/weapon/robot_module/Initialize(var/mapload)
+
+	. = ..(mapload)
+
+	var/mob/living/silicon/robot/R = loc
+	if(!istype(R))
 		return
 
 	R.module = src
