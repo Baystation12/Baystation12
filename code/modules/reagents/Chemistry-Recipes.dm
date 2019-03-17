@@ -134,8 +134,8 @@
 	result = /datum/reagent/space_drugs
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/sugar = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
-	minimum_temperature = 50 CELCIUS
-	maximum_temperature = (50 CELCIUS) + 100
+	minimum_temperature = 50 CELSIUS
+	maximum_temperature = (50 CELSIUS) + 100
 
 /datum/chemical_reaction/lube
 	name = "Space Lube"
@@ -155,8 +155,8 @@
 	result = /datum/reagent/synaptizine
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/lithium = 1, /datum/reagent/water = 1)
 	result_amount = 3
-	minimum_temperature = 30 CELCIUS
-	maximum_temperature = (30 CELCIUS) + 100
+	minimum_temperature = 30 CELSIUS
+	maximum_temperature = (30 CELSIUS) + 100
 
 /datum/chemical_reaction/hyronalin
 	name = "Hyronalin"
@@ -208,8 +208,8 @@
 	name = "Cryptobiolin"
 	result = /datum/reagent/cryptobiolin
 	required_reagents = list(/datum/reagent/potassium = 1, /datum/reagent/acetone = 1, /datum/reagent/sugar = 1)
-	minimum_temperature = 30 CELCIUS
-	maximum_temperature = 60 CELCIUS
+	minimum_temperature = 30 CELSIUS
+	maximum_temperature = 60 CELSIUS
 	result_amount = 3
 
 /datum/chemical_reaction/tricordrazine
@@ -236,8 +236,8 @@
 	result = /datum/reagent/dermaline
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/phosphorus = 1, /datum/reagent/kelotane = 1)
 	result_amount = 3
-	minimum_temperature = (-50 CELCIUS) - 100
-	maximum_temperature = -50 CELCIUS
+	minimum_temperature = (-50 CELSIUS) - 100
+	maximum_temperature = -50 CELSIUS
 
 /datum/chemical_reaction/dexalinp
 	name = "Dexalin Plus"
@@ -269,8 +269,8 @@
 	result = /datum/reagent/cryoxadone
 	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/drink/ice = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
-	minimum_temperature = (-25 CELCIUS) - 100
-	maximum_temperature = -25 CELCIUS
+	minimum_temperature = (-25 CELSIUS) - 100
+	maximum_temperature = -25 CELSIUS
 	mix_message = "The solution becomes sludge-like."
 
 /datum/chemical_reaction/venaxilin
@@ -278,8 +278,8 @@
 	result = /datum/reagent/dylovene/venaxilin
 	required_reagents = list(/datum/reagent/dylovene = 1, /datum/reagent/spaceacillin = 1, /datum/reagent/toxin/venom = 1)
 	result_amount = 1
-	minimum_temperature = 50 CELCIUS
-	maximum_temperature = 100 CELCIUS
+	minimum_temperature = 50 CELSIUS
+	maximum_temperature = 100 CELSIUS
 	mix_message = "The solution steams and becomes cloudy."
 
 
@@ -288,8 +288,8 @@
 	result = /datum/reagent/clonexadone
 	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1)
 	result_amount = 2
-	minimum_temperature = -100 CELCIUS
-	maximum_temperature = -75 CELCIUS
+	minimum_temperature = -100 CELSIUS
+	maximum_temperature = -75 CELSIUS
 	mix_message = "The solution thickens into translucent slime."
 
 /datum/chemical_reaction/spaceacillin
@@ -327,8 +327,8 @@
 	name = "Potassium Chloride"
 	result = /datum/reagent/toxin/potassium_chloride
 	required_reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/potassium = 1)
-	minimum_temperature = 60 CELCIUS
-	maximum_temperature = (60 CELCIUS) + 100
+	minimum_temperature = 60 CELSIUS
+	maximum_temperature = (60 CELSIUS) + 100
 	result_amount = 2
 
 /datum/chemical_reaction/potassium_chlorophoride
@@ -342,8 +342,8 @@
 	result = /datum/reagent/toxin/zombiepowder
 	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5, /datum/reagent/soporific = 5, /datum/reagent/copper = 5)
 	result_amount = 2
-	minimum_temperature = 90 CELCIUS
-	maximum_temperature = 99 CELCIUS
+	minimum_temperature = 90 CELSIUS
+	maximum_temperature = 99 CELSIUS
 	mix_message = "The solution boils off to form a fine powder."
 
 /datum/chemical_reaction/mindbreaker
@@ -352,8 +352,8 @@
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
-	minimum_temperature = 75 CELCIUS
-	maximum_temperature = (75 CELCIUS) + 25
+	minimum_temperature = 75 CELSIUS
+	maximum_temperature = (75 CELSIUS) + 25
 
 /datum/chemical_reaction/lipozine
 	name = "Lipozine"
@@ -482,8 +482,8 @@
 	result = null
 	required_reagents = list(/datum/reagent/iron = 5, /datum/reagent/toxin/phoron = 20)
 	result_amount = 1
-	minimum_temperature = (-80 CELCIUS) - 100
-	maximum_temperature = -80 CELCIUS
+	minimum_temperature = (-80 CELSIUS) - 100
+	maximum_temperature = -80 CELSIUS
 	mix_message = "The solution hardens and begins to crystallize."
 
 /datum/chemical_reaction/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
@@ -1378,8 +1378,8 @@
 	result = /datum/reagent/drink/coffee
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coffee = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELCIUS
-	maximum_temperature = (70 CELCIUS) + 100
+	minimum_temperature = 70 CELSIUS
+	maximum_temperature = (70 CELSIUS) + 100
 	mix_message = "The solution thickens into a steaming dark brown beverage."
 
 /datum/chemical_reaction/tea
@@ -1387,8 +1387,8 @@
 	result = /datum/reagent/drink/tea
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/tea = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELCIUS
-	maximum_temperature = (70 CELCIUS) + 100
+	minimum_temperature = 70 CELSIUS
+	maximum_temperature = (70 CELSIUS) + 100
 	mix_message = "The solution thickens into a steaming black beverage."
 
 /datum/chemical_reaction/hot_coco
@@ -1396,8 +1396,8 @@
 	result = /datum/reagent/drink/hot_coco
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coco = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELCIUS
-	maximum_temperature = (70 CELCIUS) + 100
+	minimum_temperature = 70 CELSIUS
+	maximum_temperature = (70 CELSIUS) + 100
 	mix_message = "The solution thickens into a steaming brown beverage."
 
 /datum/chemical_reaction/grapejuice
@@ -1470,8 +1470,8 @@
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 1
 	mix_message = "The solution thickens and curdles into a rich yellow substance."
-	minimum_temperature = 40 CELCIUS
-	maximum_temperature = (40 CELCIUS) + 100
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS) + 100
 
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
@@ -1818,8 +1818,8 @@
 	name = "Hooch"
 	result = /datum/reagent/ethanol/hooch
 	required_reagents = list (/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/fuel = 1)
-	minimum_temperature = 30 CELCIUS
-	maximum_temperature = (30 CELCIUS) + 100
+	minimum_temperature = 30 CELSIUS
+	maximum_temperature = (30 CELSIUS) + 100
 	result_amount = 3
 
 /datum/chemical_reaction/irish_coffee
@@ -1929,8 +1929,8 @@
 	name = "Anti-freeze"
 	result = /datum/reagent/ethanol/antifreeze
 	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/drink/milk/cream = 1, /datum/reagent/drink/ice = 1)
-	minimum_temperature = (0 CELCIUS) - 100
-	maximum_temperature = 0 CELCIUS
+	minimum_temperature = (0 CELSIUS) - 100
+	maximum_temperature = 0 CELSIUS
 	result_amount = 3
 	mix_message = "The solution thickens sluggishly."
 
@@ -2253,7 +2253,7 @@
 	result = /datum/reagent/three_eye
 	result_amount = 2
 	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
-	minimum_temperature = 100 CELCIUS
+	minimum_temperature = 100 CELSIUS
 	reaction_sound = 'sound/effects/psi/power_used.ogg'
 	hidden_from_codex = TRUE
 

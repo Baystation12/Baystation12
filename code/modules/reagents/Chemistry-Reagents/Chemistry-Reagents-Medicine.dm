@@ -185,7 +185,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	heating_products = list(/datum/reagent/cryoxadone, /datum/reagent/sodium)
-	heating_point = 50 CELCIUS
+	heating_point = 50 CELSIUS
 	heating_message = "turns back to sludge."
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -564,10 +564,10 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	chilling_products = list(/datum/reagent/leporazine/cold)
-	chilling_point = -10 CELCIUS
+	chilling_point = -10 CELSIUS
 	chilling_message = "Takes on the consistency of slush."
 	heating_products = list(/datum/reagent/leporazine/hot)
-	heating_point = 110 CELCIUS
+	heating_point = 110 CELSIUS
 	heating_message = "starts swirling, glowing occasionally."
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -579,7 +579,7 @@
 /datum/reagent/leporazine/hot
 	name = "Pyrogenic Leporazine"
 	chilling_products = list(/datum/reagent/leporazine)
-	chilling_point = 0 CELCIUS
+	chilling_point = 0 CELSIUS
 	chilling_message = "Stops swirling and glowing."
 	heating_products = null
 	heating_point = null
@@ -596,7 +596,7 @@
 	chilling_point = null
 	chilling_message = null
 	heating_products = list(/datum/reagent/leporazine)
-	heating_point = 100 CELCIUS
+	heating_point = 100 CELSIUS
 	heating_message = "Becomes clear and smooth."
 	scannable = 0
 

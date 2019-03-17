@@ -9,7 +9,7 @@
 	color = "#cf3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
 	heating_products = list(/datum/reagent/toxin/denatured)
-	heating_point = 100 CELCIUS
+	heating_point = 100 CELSIUS
 	heating_message = "goes clear."
 
 	var/target_organ
@@ -493,7 +493,7 @@
 	color = "#000055"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
-	heating_point = 61 CELCIUS
+	heating_point = 61 CELSIUS
 	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/sugar)
 
 
@@ -754,7 +754,7 @@
 	reagent_state = LIQUID
 	color = "#535e66"
 	hidden_from_codex = TRUE
-	heating_point = 100 CELCIUS
+	heating_point = 100 CELSIUS
 
 /datum/reagent/toxin/hair_remover
 	name = "Hair Remover"
@@ -847,5 +847,5 @@
 	color = "#140b30"
 	strength = 4
 	heating_products = list(/datum/reagent/acetone, /datum/reagent/carbon, /datum/reagent/ethanol)
-	heating_point = 145 CELCIUS
+	heating_point = 145 CELSIUS
 	heating_message = "separates."

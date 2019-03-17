@@ -202,7 +202,7 @@
 /datum/reagent/water/boiling
 	name = "Boiling water"
 	chilling_products = list(/datum/reagent/water)
-	chilling_point =   99 CELCIUS
+	chilling_point =   99 CELSIUS
 	chilling_message = "stops boiling."
 	heating_products =  list(null)
 	heating_point =    null
