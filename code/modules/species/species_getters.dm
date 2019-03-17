@@ -87,3 +87,6 @@
 
 /datum/species/proc/get_surgery_overlay_icon(var/mob/living/carbon/human/H)
 	return 'icons/mob/surgery.dmi'
+
+/datum/species/proc/get_footstep(var/mob/living/carbon/human/H, var/footstep_type)
+	return

@@ -54,8 +54,8 @@
 	movement_delay = 12
 	reagent_type = /datum/reagent/toxin/tar
 
-/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound()
-	return safepick(footstep_sounds[FOOTSTEP_WATER])
+/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)
+	return get_footstep(FOOTSTEP_WATER, caller)
 
 
 /turf/simulated/floor/exoplanet/shrouded
