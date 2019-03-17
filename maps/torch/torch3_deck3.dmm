@@ -2536,7 +2536,9 @@
 "fJ" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
-	name = "Expedition Storage Maintenance"
+	autoset_access = 0;
+	name = "Expedition Storage Maintenance";
+	req_access = list(list("ACCESS_MINING","ACCESS_XENOARCH"),"ACCESS_MAINT")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/starboard)
