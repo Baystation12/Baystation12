@@ -307,7 +307,8 @@
 			C.SetStasis(2)
 
 		//Allow a ten minute gap between entering the pod and actually despawning.
-		if(world.time - time_entered < time_till_despawn)
+		// Only provide the gap if the occupant hasn't ghosted
+		if ((world.time - time_entered < time_till_despawn) && (occupant.ckey))
 			return
 
 		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
