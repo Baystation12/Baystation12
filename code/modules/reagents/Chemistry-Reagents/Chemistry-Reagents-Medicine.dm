@@ -322,7 +322,7 @@
 	reagent_state = LIQUID
 	color = "#99ccff"
 	metabolism = REM * 0.05
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE / 6 // 5
 	scannable = 1
 
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
