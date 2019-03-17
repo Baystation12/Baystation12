@@ -15,5 +15,7 @@
 		/music_track/asfarasitgets,
 		/music_track/eighties,
 		/music_track/torn,
-		/music_track/nebula
+		/music_track/nebula,
+		/music_track/epicintro2015,
+		/music_track/epicintro2017
 	)
