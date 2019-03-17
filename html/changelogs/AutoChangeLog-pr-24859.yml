@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added bamboo seeds to the vendors. Their produce can be chopped up into wood."
+  - tweak: "You can place wrenches onto tables if you're on help intent. Use harm intent if you want to disassemble them."
+  - tweak: "Halved the number of seeds stored in machines from 30 of each type to 15. Use the seed extractor if you need more."
