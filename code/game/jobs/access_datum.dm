@@ -118,6 +118,12 @@
 	desc = "Bridge"
 	region = ACCESS_REGION_COMMAND
 
+/var/const/access_docking = "ACCESS_DOCKING" // Access to docking controllers and docking control program
+/datum/access/docking
+	id = access_docking
+	desc = "Docking"
+	region = ACCESS_REGION_COMMAND
+
 /var/const/access_captain = "ACCESS_CAPTAIN" //20
 /datum/access/captain
 	id = access_captain
