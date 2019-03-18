@@ -174,6 +174,13 @@
 	if(AM == user)
 		user.visible_message("<span class='warning'>[user] starts climbing into [src].</span>", \
 							 "<span class='notice'>You start climbing into [src].</span>")
+	else if(istype(AM, /obj))
+		var/obj/O = AM
+		if(O.w_class >= ITEM_SIZE_NO_CONTAINER)
+			user.visible_message("<span class='[is_dangerous ? "warning" : "notice"]'>[user] tries stuffing [AM] into [src], but it doesn't fit.</span>", \
+							 "<span class='notice'>You try to stuff [AM] into [src] but it doesn't fit.</span>")
+			return
+
 	else
 		user.visible_message("<span class='[is_dangerous ? "warning" : "notice"]'>[user] starts stuffing [AM] into [src].</span>", \
 							 "<span class='notice'>You start stuffing [AM] into [src].</span>")
