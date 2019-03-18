@@ -1107,3 +1107,6 @@
 				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
 		return TRUE
 	return FALSE
+
+/mob/proc/get_footstep(var/footstep_type)
+	return

@@ -2,19 +2,15 @@
 	icon = 'icons/obj/structures.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER
+
 	var/breakable
 	var/parts
-
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
 	var/list/blend_objects = newlist() // Objects which to blend with
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
-
-	var/list/footstep_sounds	//footstep sounds when stepped on
 	var/material/material = null
-
-/obj/structure/proc/get_footstep_sound()
-	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
+	var/footstep_type
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)

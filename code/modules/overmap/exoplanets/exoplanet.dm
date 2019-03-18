@@ -468,6 +468,7 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	has_resources = 1
+	footstep_type = FOOTSTEP_CARPET
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
 
@@ -522,6 +523,7 @@
 	icon_state = "seashallow"
 	movement_delay = 2
 	mudpit = 1
+	footstep_type = FOOTSTEP_WATER
 	var/reagent_type = /datum/reagent/water
 
 /turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)

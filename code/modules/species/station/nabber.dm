@@ -8,6 +8,7 @@
 	average person. Even so, they do their jobs well and are thriving in this \
 	new environment."
 	hidden_from_codex = FALSE
+	silent_steps = TRUE
 
 	antaghud_offset_y = 8
 
