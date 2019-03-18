@@ -440,3 +440,14 @@
 
 /mob/living/simple_animal/get_digestion_product()
 	return /datum/reagent/nutriment
+
+/mob/living/simple_animal/eyecheck()
+	switch(flash_vulnerability)
+		if(2 to INFINITY)
+			return FLASH_PROTECTION_REDUCED
+		if(1)
+			return FLASH_PROTECTION_NONE
+		if(0)
+			return FLASH_PROTECTION_MAJOR
+		else 
+			return FLASH_PROTECTION_MAJOR

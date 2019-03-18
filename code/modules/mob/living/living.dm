@@ -872,3 +872,6 @@ default behaviour is:
 
 /mob/living/proc/get_digestion_product()
 	return null
+
+/mob/living/proc/eyecheck()
+	return FLASH_PROTECTION_NONE

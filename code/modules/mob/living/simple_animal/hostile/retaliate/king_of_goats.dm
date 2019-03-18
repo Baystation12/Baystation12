@@ -30,7 +30,7 @@
 	max_gas = null
 	minbodytemp = 0
 	break_stuff_probability = 35
-
+	flash_vulnerability = 0
 	var/stun_chance = 5 //chance per attack to Weaken target
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
@@ -45,13 +45,13 @@
 	melee_damage_upper = 60
 	default_pixel_y = 5
 	break_stuff_probability = 40
+	stun_chance = 7
 
 	var/spellscast = 0
 	var/phase3 = FALSE
 	var/datum/sound_token/boss_theme
 	var/sound_id = "goat"
 	var/special_attacks = 0
-	stun_chance = 7
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Initialize()
 	. = ..()
@@ -61,6 +61,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
+	icon = 'icons/mob/king_of_goats.dmi'
 	icon_state = "goat_guard"
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"
@@ -210,3 +211,6 @@
 	..()
 	if(damtype != BRUTE)
 		special_attacks++
+	
+/mob/living/simple_animal/hostile/retaliate/goat/king/Allow_Spacemove(check_drift = 0)
+	return 1
