@@ -250,14 +250,11 @@
 	name = "crisis robot module"
 	display_name = "Crisis"
 	sprites = list(
-					"Basic" = "Medbot",
-					"Standard" = "surgeon",
-					"Advanced Droid" = "droid-medical",
-					"Needles" = "medicalrobot",
-					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry",
-					"Doot" = "eyebot-medical"
-					)
+		"Basic" = "Medbot",
+		"Standard" = "surgeon",
+		"Advanced Droid" = "droid-medical",
+		"Needles" = "medicalrobot"
+	)
 
 /obj/item/weapon/robot_module/medical/crisis/Initialize()
 	src.modules += new /obj/item/weapon/crowbar(src)
@@ -323,12 +320,11 @@
 	subsystems = list(/datum/nano_module/power_monitor, /datum/nano_module/supermatter_monitor)
 	supported_upgrades = list(/obj/item/borg/upgrade/rcd)
 	sprites = list(
-					"Basic" = "Engineering",
-					"Antique" = "engineerrobot",
-					"Landmate" = "landmate",
-					"Landmate - Treaded" = "engiborg+tread",
-					"Doot" = "eyebot-engineering"
-					)
+		"Basic" = "Engineering",
+		"Antique" = "engineerrobot",
+		"Landmate" = "landmate",
+		"Landmate - Treaded" = "engiborg+tread",
+	)
 	no_slip = 1
 
 /obj/item/weapon/robot_module/engineering/general/Initialize()
@@ -420,14 +416,13 @@
 	name = "security robot module"
 	display_name = "Security"
 	sprites = list(
-					"Basic" = "secborg",
-					"Red Knight" = "Security",
-					"Black Knight" = "securityrobot",
-					"Bloodhound" = "bloodhound",
-					"Bloodhound - Treaded" = "secborg+tread",
-					"Doot" = "eyebot-security",
-					"Tridroid" = "orb-security"
-				)
+		"Basic" = "secborg",
+		"Red Knight" = "Security",
+		"Black Knight" = "securityrobot",
+		"Bloodhound" = "bloodhound",
+		"Bloodhound - Treaded" = "secborg+tread",
+		"Tridroid" = "orb-security"
+	)
 
 /obj/item/weapon/robot_module/security/general/Initialize()
 	src.modules += new /obj/item/device/flash(src)
@@ -462,11 +457,10 @@
 	display_name = "Janitor"
 	channels = list("Service" = 1)
 	sprites = list(
-					"Basic" = "JanBot2",
-					"Mopbot"  = "janitorrobot",
-					"Mop Gear Rex" = "mopgearrex",
-					"Doot" = "eyebot-janitor"
-					)
+		"Basic" = "JanBot2",
+		"Mopbot"  = "janitorrobot",
+		"Mop Gear Rex" = "mopgearrex"
+	)
 
 /obj/item/weapon/robot_module/janitor/Initialize()
 	src.modules += new /obj/item/device/flash(src)
@@ -506,15 +500,13 @@
 /obj/item/weapon/robot_module/clerical/butler
 	name = "service robot module"
 	display_name = "Service"
-	sprites = list(	"Waitress" = "Service",
-					"Kent" = "toiletbot",
-					"Bro" = "Brobot",
-					"Rich" = "maximillion",
-					"Default" = "Service2",
-					"Drone - Service" = "drone-service",
-					"Drone - Hydro" = "drone-hydro",
-					"Doot" = "eyebot-standard"
-					)
+	sprites = list(
+		"Waitress" = "Service",
+		"Kent" = "toiletbot",
+		"Bro" = "Brobot",
+		"Rich" = "maximillion",
+		"Default" = "Service2"
+	)
 
 /obj/item/weapon/robot_module/clerical/butler/Initialize()
 	src.modules += new /obj/item/device/flash(src)
@@ -553,13 +545,12 @@
 	display_name = "Clerical"
 	channels = list("Service" = 1, "Supply" = 1)
 	sprites = list(
-					"Waitress" = "Service",
-					"Kent" = "toiletbot",
-					"Bro" = "Brobot",
-					"Rich" = "maximillion",
-					"Default" = "Service2",
-					"Doot" = "eyebot-standard"
-					)
+		"Waitress" = "Service",
+		"Kent" = "toiletbot",
+		"Bro" = "Brobot",
+		"Rich" = "maximillion",
+		"Default" = "Service2"
+	)
 
 /obj/item/weapon/robot_module/clerical/general/Initialize()
 	src.modules += new /obj/item/device/flash(src)
@@ -596,11 +587,10 @@
 	channels = list("Supply" = 1, "Science" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
-					"Basic" = "Miner_old",
-					"Advanced Droid" = "droid-miner",
-					"Treadhead" = "Miner",
-					"Doot" = "eyebot-miner"
-				)
+		"Basic" = "Miner_old",
+		"Advanced Droid" = "droid-miner",
+		"Treadhead" = "Miner"
+	)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
 /obj/item/weapon/robot_module/miner/Initialize()
