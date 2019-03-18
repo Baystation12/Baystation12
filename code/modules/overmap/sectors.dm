@@ -170,27 +170,35 @@ var/list/points_of_interest = list()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
 
+/obj/effect/overmap/proc/do_superstructure_fail()
+	for(var/mob/player in mobs_in_sectors[src])
+		player.dust()
+	loc = null
+	to_world("An overmap object has been destroyed. Please wait as it is deleted.")
+	sleep(10)//To allow the previous message to actually be seen
+	for(var/z_level in map_z)
+		shipmap_handler.free_map(z_level)
+	qdel(src)
+
+/obj/effect/overmap/proc/pre_superstructure_failing()
+	for(var/mob/player in mobs_in_sectors[src])
+		to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
+	superstructure_failing = 1
+	spawn(SUPERSTRUCTURE_FAIL_TIME)
+		do_superstructure_fail()
+
 /obj/effect/overmap/process()
-	if(superstructure_failing)
+	if(superstructure_failing == -1)
+		return
+	if(superstructure_failing == 1)
+		//TODO: Special messages/other effects whilst the superstructure fails.
 		return
 	var/list/superstructure_strength = get_superstructure_strength()
 	if(isnull(superstructure_strength))
-		superstructure_failing = 1
+		superstructure_failing = -1
 		return
 	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
-		for(var/mob/player in mobs_in_sectors[src])
-			to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
-		superstructure_failing = 1
-		spawn(SUPERSTRUCTURE_FAIL_TIME)
-			for(var/mob/player in mobs_in_sectors[src])
-				player.dust()
-			loc = null
-			to_world("An overmap object has been destroyed. Please wait as it is deleted.")
-			sleep(10)//To allow the previous message to actually be seen
-			for(var/z_level in map_z)
-				shipmap_handler.free_map(z_level)
-			qdel(src)
-
+		pre_superstructure_failing()
 
 /obj/effect/overmap/sector
 	name = "generic sector"
