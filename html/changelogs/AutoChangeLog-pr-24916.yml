@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - bugfix: "Fixes IPCs becoming blind after being revived in surgery."
-  - bugfix: "IPCs are no longer immune to sources of eye damage such as flashes and welders."

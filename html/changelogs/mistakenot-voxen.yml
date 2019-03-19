@@ -1,7 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - rscadd: "Added a humanoid species for the Vox Armalis, representing a larger, slower voxform. It is not currently accessible outside of adminbus."
-  - rscdel: "Removed armalis simple_animal and icon."
-  - tweak: "Vox now have their own damage masks, blood masks and damage overlays."
-  - tweak: "Vox wizard spell will now transform into a lesser version of the giant space parrot."
