@@ -2051,6 +2051,10 @@
 /obj/random/clothing,
 /turf/simulated/floor/wood,
 /area/unishi/living)
+"ur" = (
+/obj/machinery/hologram/holopad/longrange/remoteship,
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
 "vn" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
@@ -7299,7 +7303,7 @@ aa
 aa
 af
 ak
-aq
+ur
 as
 au
 aq

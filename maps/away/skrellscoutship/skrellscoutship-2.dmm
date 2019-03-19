@@ -1910,7 +1910,7 @@
 /area/ship/skrellscoutship/crew/rec)
 "Lg" = (
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader,
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/hologram/holopad/longrange/remoteship,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/command/bridge)
 "Mg" = (
