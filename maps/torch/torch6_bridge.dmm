@@ -15751,6 +15751,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Ut" = (
+/obj/effect/landmark{
+	name = "carpspawn"
+	},
+/turf/space,
+/area/space)
 "UP" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -21575,7 +21581,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -21818,7 +21824,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -22201,7 +22207,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -26411,7 +26417,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -26675,7 +26681,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -33286,7 +33292,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -33337,7 +33343,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -37512,7 +37518,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -37594,7 +37600,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -41769,7 +41775,7 @@ aa
 aa
 aa
 aa
-aa
+Ut
 aa
 ad
 ad
@@ -42024,7 +42030,7 @@ ad
 ae
 aa
 aa
-aa
+Ut
 aa
 aa
 aa
@@ -46630,6 +46636,7 @@ aa
 aa
 aa
 aa
+Ut
 aa
 aa
 aa
@@ -46654,8 +46661,7 @@ aa
 aa
 aa
 aa
-aa
-aa
+Ut
 aa
 aa
 aa
