@@ -62,7 +62,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (vector == "Airborne")	//for airborne infections face-covering items give non-weighted protection value.
 		if(M.internal)
 			return 1
-		protection = max(protection, M.get_blocked_ratio(FACE, TOX, damage_flags = DAM_BIO))
+		protection = max(protection, M.get_blocked_ratio(BP_HEAD, TOX, damage_flags = DAM_BIO))
 
 	return prob(100 * protection + 15*M.chem_effects[CE_ANTIVIRAL])
 

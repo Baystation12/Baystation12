@@ -57,7 +57,7 @@
 		if(psychic.owner.client && !psychic.suppressed)
 			psychic.owner.client.images += aura_image
 	SSpsi.all_aura_images[aura_image] = TRUE
-	set_extension(src, /datum/extension/armor/psionic, /datum/extension/armor)
+	set_extension(src, /datum/extension/armor, /datum/extension/armor/psionic)
 
 /datum/psi_complexus/Destroy()
 

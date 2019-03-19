@@ -10,7 +10,7 @@
 	. = 0
 	for(var/armor in armors)
 		var/datum/extension/armor/armor_datum = armor
-		. += armor_datum.get_blocked(damage_type, damage_flags, armor_pen)
+		. = 1 - (1 - .) * (1 - armor_datum.get_blocked(damage_type, damage_flags, armor_pen)) // multiply the amount we let through
 	. = min(1, .)
 
 /mob/living/proc/get_armors_by_zone(def_zone, damage_type, damage_flags)
