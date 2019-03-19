@@ -25,7 +25,7 @@
 /area/medical/virology)
 "aag" = (
 /obj/machinery/smartfridge/secure/virology{
-	req_access = list(list("ACCESS_VIROLOGY","ACCESS_SURGERY"))
+	req_access = list(list("ACCESS_VIRO","ACCESS_SURGERY"))
 	},
 /obj/machinery/requests_console{
 	department = "Virology";
