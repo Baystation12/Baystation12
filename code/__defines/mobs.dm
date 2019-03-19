@@ -202,7 +202,6 @@
 #define BP_POSIBRAIN	"posibrain"
 #define BP_VOICE		"vocal synthesiser"
 #define BP_STACK		"stack"
-#define BP_OPTICS		"optics"
 #define BP_FLOAT		"floatation disc"
 #define BP_JETS			"maneuvering jets"
 #define BP_COOLING_FINS "cooling fins"
