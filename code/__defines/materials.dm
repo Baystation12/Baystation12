@@ -57,6 +57,7 @@
 #define MATERIAL_MAPLE                   "maple"
 #define MATERIAL_EBONY                   "ebony"
 #define MATERIAL_WALNUT                  "walnut"
+#define MATERIAL_BAMBOO                  "bamboo"
 
 #define DEFAULT_WALL_MATERIAL      MATERIAL_STEEL
 #define DEFAULT_FURNITURE_MATERIAL MATERIAL_ALUMINIUM

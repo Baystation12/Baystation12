@@ -224,6 +224,10 @@
 	icon_base = "walnut"
 	build_type = /obj/item/stack/tile/walnut
 
+/decl/flooring/wood/bamboo
+	icon_base = "maple"
+	build_type = /obj/item/stack/tile/bamboo
+
 /decl/flooring/reinforced
 	name = "reinforced floor"
 	desc = "Heavily reinforced with steel plating."

@@ -79,6 +79,13 @@
 	icon_state = "tile-walnut"
 	matter = list(MATERIAL_WOOD = 450)
 
+/obj/item/stack/tile/bamboo
+	name = "bamboo floor tile"
+	singular_name = "bamboo floor tile"
+	desc = "An easy to fit bamboo wood floor tile."
+	icon_state = "tile-maple"
+	matter = list(MATERIAL_WOOD = 450)
+
 /obj/item/stack/tile/floor
 	name = "steel floor tile"
 	singular_name = "steel floor tile"
