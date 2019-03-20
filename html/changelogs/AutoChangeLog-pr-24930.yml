@@ -1,4 +1,0 @@
-author: "RyanSmake"
-delete-after: True
-changes: 
-  - bugfix: "Touching anomalies now works properly."
