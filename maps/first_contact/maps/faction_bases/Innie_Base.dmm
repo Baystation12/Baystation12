@@ -259,7 +259,7 @@
 "eY" = (/obj/structure/janitorialcart,/turf/simulated/floor/plating,/area/faction_base/innie)
 "eZ" = (/obj/machinery/light/small{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/innie)
 "fa" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"fb" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/floor_decal/industrial/warning,/turf/simulated/wall/r_wall,/area/faction_base/innie)
+"fb" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "fc" = (/obj/structure/sign/hydro,/turf/simulated/wall/r_wall,/area/faction_base/innie)
 "fd" = (/obj/structure/sign/hydrostorage,/turf/simulated/wall/r_wall,/area/faction_base/innie)
 "ff" = (/obj/structure/sign/directions/engineering{dir = 4; pixel_x = 32},/turf/simulated/wall/r_wall,/area/faction_base/innie)
