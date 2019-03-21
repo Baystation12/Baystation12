@@ -41,8 +41,8 @@ var/list/points_of_interest = list()
 	if(name == "map object")
 		name = "invalid-\ref[src]"
 
-	if(!(src in mobs_in_sectors))
-		mobs_in_sectors[src] = list()
+	if(!(src in GLOB.mobs_in_sectors))
+		GLOB.mobs_in_sectors[src] = list()
 
 	//custom tags are allowed to be set in map or elsewhere
 	if(!tag)
@@ -171,7 +171,7 @@ var/list/points_of_interest = list()
 		. += restricted_waypoints[shuttle_name]
 
 /obj/effect/overmap/proc/do_superstructure_fail()
-	for(var/mob/player in mobs_in_sectors[src])
+	for(var/mob/player in GLOB.mobs_in_sectors[src])
 		player.dust()
 	loc = null
 	to_world("An overmap object has been destroyed. Please wait as it is deleted.")
@@ -181,13 +181,14 @@ var/list/points_of_interest = list()
 	qdel(src)
 
 /obj/effect/overmap/proc/pre_superstructure_failing()
-	for(var/mob/player in mobs_in_sectors[src])
+	for(var/mob/player in GLOB.mobs_in_sectors[src])
 		to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
 	superstructure_failing = 1
 	spawn(SUPERSTRUCTURE_FAIL_TIME)
 		do_superstructure_fail()
 
 /obj/effect/overmap/process()
+	. = ..()
 	if(superstructure_failing == -1)
 		return
 	if(superstructure_failing == 1)

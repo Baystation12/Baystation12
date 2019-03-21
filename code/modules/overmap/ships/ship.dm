@@ -34,7 +34,7 @@
 		if (N.z in map_z)
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
-	GLOB.processing_objects += src
+	GLOB.processing_objects.Add(src)
 
 /obj/effect/overmap/ship/get_faction()
 	if(nav_comp)

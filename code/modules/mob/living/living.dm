@@ -581,9 +581,9 @@ default behaviour is:
 		if(om_obj_old == om_obj_new) //Some overmap objects span multiple z's.
 			return
 		if(om_obj_old)
-			mobs_in_sectors[om_obj_old] -= src
+			GLOB.mobs_in_sectors[om_obj_old] -= src
 		if(om_obj_new)
-			mobs_in_sectors[om_obj_new] |= list(src) // |= is used instead of += to avoid duplication
+			GLOB.mobs_in_sectors[om_obj_new] |= list(src) // |= is used instead of += to avoid duplication
 
 		last_z = z
 
