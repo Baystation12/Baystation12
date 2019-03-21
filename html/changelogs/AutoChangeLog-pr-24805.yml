@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - maptweak: "Removes the disposal bin from the brig."
