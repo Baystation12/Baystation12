@@ -9368,25 +9368,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
-"aEQ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/catwalk_plated,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/disposalpipe/junction{
-	icon_state = "pipe-j1";
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/hallway/primary/firstdeck/fore)
 "aEU" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -10218,7 +10199,6 @@
 /obj/structure/table/standard,
 /obj/machinery/recharger,
 /obj/item/weapon/newspaper,
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aIi" = (
@@ -10470,7 +10450,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "aJw" = (
-/obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
@@ -10715,7 +10694,6 @@
 /obj/item/device/radio/beacon,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aKK" = (
@@ -10975,12 +10953,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
-"aLJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/monotile,
-/area/security/brig)
 "aLK" = (
 /turf/simulated/floor/tiled/monotile,
 /area/security/brig)
@@ -11277,7 +11249,6 @@
 	dir = 9;
 	pixel_y = 0
 	},
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aMO" = (
@@ -20000,10 +19971,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "hjk" = (
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
 /obj/structure/closet/secure_closet/brig,
 /obj/item/device/radio/headset,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -26150,13 +26117,6 @@
 /obj/machinery/recharger,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/opscheck)
-"ohb" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 10
-	},
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled,
-/area/hallway/primary/firstdeck/fore)
 "ohy" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -28968,15 +28928,18 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "rGU" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
-/obj/machinery/disposal,
 /obj/machinery/newscaster{
 	pixel_x = 0;
 	pixel_y = -32
 	},
+/obj/structure/closet{
+	name = "Prisoner's Locker"
+	},
+/obj/item/weapon/book/manual/solgov_law{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/weapon/book/manual/solgov_law,
 /turf/simulated/floor/tiled/monotile,
 /area/security/brig)
 "rHb" = (
@@ -31059,14 +31022,6 @@
 /area/thruster/d1starboard)
 "uVw" = (
 /obj/structure/table/standard,
-/obj/item/weapon/book/manual/solgov_law{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/weapon/book/manual/solgov_law,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/machinery/vending/wallmed1{
 	pixel_y = -32
 	},
@@ -31878,7 +31833,6 @@
 	name = "Security Blast Door";
 	opacity = 0
 	},
-/obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -43911,13 +43865,13 @@ nob
 oyb
 aDN
 axR
-aEQ
-ohb
+obZ
+aFV
 xoo
 aIg
 aJw
 aKJ
-aLJ
+aKN
 aMN
 hjk
 aGP
