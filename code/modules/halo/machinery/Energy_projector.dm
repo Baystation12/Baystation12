@@ -205,6 +205,8 @@
 	for(var/mob/living/m in range(30,turf_to_explode))
 		m.adjustFireLoss(90)
 
+	hit.glassed = 1
+
 /obj/effect/projectile/projector_laser_proj
 	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"

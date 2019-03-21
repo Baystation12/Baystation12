@@ -41,6 +41,8 @@
 	#include "../../code/modules/halo/lobby_music/odst_music.dm"
 	#include "../../code/modules/halo/lobby_music/halo_music.dm"
 
+	#include "../_gamemodes/invasion/invasion.dm"
+
 	#define using_map_DATUM /datum/map/first_contact
 
 #elif !defined(MAP_OVERRIDE)

@@ -31,6 +31,9 @@ var/list/points_of_interest = list()
 	var/list/connectors = list() //Used for docking umbilical type-items.
 	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
 
+	var/glassed = 0
+	var/nuked = 0
+
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
 	if(name == "map object")
