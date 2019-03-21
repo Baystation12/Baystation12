@@ -425,7 +425,7 @@
 	var/tools = "<B>Tools and devices</B><BR>"
 	var/resources = "<BR><B>Resources</B><BR>"
 
-	for (var/O in module.modules)
+	for (var/O in module.equipment)
 
 		var/module_string = ""
 

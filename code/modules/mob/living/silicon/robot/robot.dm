@@ -227,8 +227,9 @@
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null
+	QDEL_NULL(module)
 	QDEL_NULL(wires)
-	return ..()
+	. = ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
 	if(new_sprites && new_sprites.len)
@@ -255,17 +256,15 @@
 	// Clear hands and module icon.
 	uneq_all()
 	modtype = initial(modtype)
-	hands.icon_state = initial(hands.icon_state)
-
+	if(hands)
+		hands.icon_state = initial(hands.icon_state)
 	// If the robot had a module and this wasn't an uncertified change, let the AI know.
-	if (module)
+	if(module)
 		if (!suppress_alert)
 			notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, module.name)
-
 		// Delete the module.
 		module.Reset(src)
 		QDEL_NULL(module)
-
 	updatename("Default")
 
 /mob/living/silicon/robot/proc/pick_module(var/override)
@@ -274,7 +273,7 @@
 
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	var/is_crisis_mode = crisis_override || (crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode)
+	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode, override)
 
 	if(!override)
 		if(is_crisis_mode)
@@ -289,9 +288,14 @@
 		return
 
 	var/module_type = robot_modules[modtype]
+	if(!module_type)
+		to_chat(src, SPAN_WARNING("You are unable to select a module."))
+		return
+
 	new module_type(src)
 
-	hands.icon_state = lowertext(modtype)
+	if(hands)
+		hands.icon_state = lowertext(modtype)
 	SSstatistics.add_field("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
@@ -450,7 +454,7 @@
 // this function returns the robots jetpack, if one is installed
 /mob/living/silicon/robot/proc/installed_jetpack()
 	if(module)
-		return (locate(/obj/item/weapon/tank/jetpack) in module.modules)
+		return (locate(/obj/item/weapon/tank/jetpack) in module.equipment)
 	return 0
 
 
@@ -793,7 +797,7 @@
 	<B>Installed Modules</B><BR><BR>"}
 
 
-	for (var/obj in module.modules)
+	for (var/obj in module.equipment)
 		if (!obj)
 			dat += text("<B>Resource depleted</B><BR>")
 		else if(activated(obj))
@@ -835,7 +839,7 @@
 		if (!istype(O))
 			return 1
 
-		if(!((O in src.module.modules) || (O == src.module.emag)))
+		if(!((O in module.equipment) || (O == src.module.emag)))
 			return 1
 
 		if(activated(O))
@@ -977,6 +981,7 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
+	set waitfor = 0
 	if(!module_sprites.len)
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
 		return
@@ -998,9 +1003,10 @@
 			choose_icon(icon_selection_tries, module_sprites)
 			return
 
-	icon_selected = 1
+	icon_selected = TRUE
 	icon_selection_tries = 0
 	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
+
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"
 	set category = "Silicon Commands"
@@ -1074,8 +1080,9 @@
 			to_chat(user, "The cover is already unlocked.")
 		return
 
-	if(opened)//Cover is open
-		if(emagged)	return//Prevents the X has hit Y with Z message also you cant emag them twice
+	if(opened) //Cover is open
+		if(emagged)
+			return //Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
 			to_chat(user, "You must close the panel first")
 			return
@@ -1113,20 +1120,13 @@
 					to_chat(src, "<b>Obey these laws:</b>")
 					laws.show_laws(src)
 					to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>")
-					if(src.module)
-						var/rebuild = 0
-						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
-							qdel(D)
-							rebuild = 1
-						if(rebuild)
-							src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
-							src.module.rebuild()
+					if(module)
+						module.handle_emagged()
 					update_icon()
 			else
 				to_chat(user, "You fail to hack [src]'s interface.")
 				to_chat(src, "Hack attempt detected.")
 			return 1
-		return
 
 /mob/living/silicon/robot/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator")))
