@@ -171,7 +171,7 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.use_overmap)
 		return 1
 
-	testing("Building overmap...")
+	report_progress("Building overmap...")
 	world.maxz++
 	GLOB.using_map.overmap_z = world.maxz
 	var/list/turfs = list()
@@ -190,7 +190,7 @@ var/list/points_of_interest = list()
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
-	testing("Overmap build complete.")
+	report_progress("Overmap build complete.")
 	return 1
 
 
