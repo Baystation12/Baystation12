@@ -431,6 +431,11 @@ default behaviour is:
 	eye_blurry = 0
 	ear_deaf = 0
 	ear_damage = 0
+	drowsyness = 0
+	druggy = 0
+	jitteriness = 0
+	confused = 0
+		
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
 	// fix all of our organs
