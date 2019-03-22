@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Butchering simple animals now relies on your cooking skill, requires a butcher's cleaver, and must be done on a table."
+  - tweak: "Added cleavers to the dinnerware vendors."
