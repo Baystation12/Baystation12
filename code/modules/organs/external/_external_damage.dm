@@ -62,7 +62,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 					return
 
 	//blunt damage is gud at fracturing
-	if(brute_dam + brute > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) 
+	if(brute_dam + brute > min_broken_damage && prob(brute_dam + brute * (1+blunt)) )
 		fracture()
 
 	// High brute damage or sharp objects may damage internal organs
@@ -92,6 +92,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 				if(laser)
 					burn /= 2
 				damage_amt /= 2
+				if (victim.organ_tag == BP_BRAIN) //full damage to squishy brains
+					damage_amt *= 4
 				victim.take_internal_damage(damage_amt)
 
 	if(status & ORGAN_BROKEN && brute)
