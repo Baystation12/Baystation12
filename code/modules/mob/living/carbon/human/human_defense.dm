@@ -61,7 +61,7 @@ meteor_act
 			def_zone = zone
 			. += .() * organ_rel_size/tally
 		return
-	return ..()		
+	return ..()
 
 /mob/living/carbon/human/get_armors_by_zone(obj/item/organ/external/def_zone, damage_type, damage_flags)
 	. = ..()
@@ -199,8 +199,8 @@ meteor_act
 						visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
 			else
 				//Easier to score a stun but lasts less time
-				if(prob(effective_force + 10))
-					apply_effect(6, WEAKEN, blocked)
+				if(prob(effective_force + 5))
+					apply_effect(3, WEAKEN, blocked)
 					if(lying)
 						visible_message("<span class='danger'>[src] has been knocked down!</span>")
 

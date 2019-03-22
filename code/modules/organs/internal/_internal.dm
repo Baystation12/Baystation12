@@ -6,6 +6,7 @@
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
+	var/damage_reduction = 0.5     //modifier for internal organ injury
 
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	if(max_damage)
