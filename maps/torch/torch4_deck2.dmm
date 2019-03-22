@@ -6919,8 +6919,6 @@
 /obj/structure/closet/crate/medical,
 /obj/item/bodybag,
 /obj/item/bodybag,
-/obj/item/clothing/suit/straight_jacket,
-/obj/item/clothing/mask/muzzle,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
