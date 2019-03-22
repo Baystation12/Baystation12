@@ -13986,7 +13986,7 @@
 	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
-/area/space)
+/area/maintenance/bridge/aftstarboard)
 "KN" = (
 /obj/machinery/power/port_gen/pacman{
 	anchored = 1;
