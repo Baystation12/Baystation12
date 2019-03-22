@@ -1,0 +1,9 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - balance: "Blobs will now spread and attack diagonally."
+  - balance: "Blob attacks now take into account armour."
+  - tweak: "Blob attack damage now depends on the individual blob segment attacking you. The core defends itself the most vigorously."
+  - tweak: "Blobs now attack with a random damage type."
+  - rscadd: "You can now attempt to remove a sample from blobs by attacking it with wire cutters. The regular blobs produce fairly powerful weapons in various damage types, and the nuclei produce cores which can be disassembled for research points."
+  - tweak: "Cigarettes and the like can now be lit by more hot objects such as plasma cutters, and some tendrils snipped from the blob."
