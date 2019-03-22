@@ -683,7 +683,7 @@ datum/unit_test/ladder_check/start_test()
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
-	var/speed = 100
+	speed = 100
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
