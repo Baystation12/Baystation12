@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Viruses no longer infinitely increase the duration of effects like deafness and drowsiness."
