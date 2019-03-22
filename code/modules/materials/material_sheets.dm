@@ -384,6 +384,16 @@
 /obj/item/stack/material/wood/walnut/twentyfive
 	amount = 25
 
+/obj/item/stack/material/wood/bamboo
+	name = "bamboo plank"
+	default_type = MATERIAL_BAMBOO
+
+/obj/item/stack/material/wood/bamboo/ten
+	amount = 10
+
+/obj/item/stack/material/wood/bamboo/fifty
+	amount = 50
+
 /obj/item/stack/material/cloth
 	name = "cloth"
 	icon_state = "sheet-cloth"
