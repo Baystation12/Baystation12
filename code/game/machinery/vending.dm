@@ -1043,10 +1043,11 @@
 	/obj/item/weapon/storage/lunchbox/cti = 3,
 	/obj/item/weapon/storage/lunchbox/nymph = 3,
 	/obj/item/weapon/storage/lunchbox/syndicate = 3,
-	/obj/item/weapon/storage/lunchbox/dais = 3)
+	/obj/item/weapon/storage/lunchbox/dais = 3,
+	/obj/item/weapon/material/knife/butch = 1)
 
 
-	contraband = list(/obj/item/weapon/material/knife/butch = 2)
+	contraband = list(/obj/item/weapon/material/knife/butch/bronze = 1)
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
