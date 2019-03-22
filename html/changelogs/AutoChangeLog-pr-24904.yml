@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Characters that have ghosted (NOT aghosted) will be immediately flushed when placed into cryo."
