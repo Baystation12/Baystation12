@@ -9,6 +9,7 @@
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
+	var/genericmes = "<span class='notice'>USER lights their NAME with the FLAME.</span>"
 	var/matchmes = "USER lights NAME with FLAME"
 	var/lightermes = "USER lights NAME with FLAME"
 	var/zippomes = "USER lights NAME with FLAME"
@@ -120,7 +121,7 @@
 
 /obj/item/clothing/mask/smokable/attackby(var/obj/item/weapon/W, var/mob/user)
 	..()
-	if(isflamesource(W))
+	if(isflamesource(W) || is_hot(W))
 		var/text = matchmes
 		if(istype(W, /obj/item/weapon/flame/match))
 			text = matchmes
@@ -132,6 +133,8 @@
 			text = weldermes
 		else if(istype(W, /obj/item/device/assembly/igniter))
 			text = ignitermes
+		else
+			text = genericmes
 		text = replacetext(text, "USER", "[user]")
 		text = replacetext(text, "NAME", "[name]")
 		text = replacetext(text, "FLAME", "[W.name]")
