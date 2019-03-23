@@ -145,7 +145,8 @@
 
 /decl/flooring/tiling/dark/mono
 	icon_base = "monotile"
-
+	build_type = null
+	
 /decl/flooring/tiling/freezer
 	desc = "Don't slip."
 	icon_base = "freezer"
@@ -167,13 +168,16 @@
 /decl/flooring/tiling/new_tile
 	icon_base = "tile_full"
 	color = null
-
+	build_type = null
+	
 /decl/flooring/tiling/new_tile/cargo_one
 	icon_base = "cargo_one_full"
-
+	build_type = null
+	
 /decl/flooring/tiling/new_tile/kafel
 	icon_base = "kafel_full"
-
+	build_type = null
+	
 /decl/flooring/tiling/stone
 	icon_base = "stone"
 	build_type = /obj/item/stack/tile/stone
