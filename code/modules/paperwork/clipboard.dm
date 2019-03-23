@@ -41,7 +41,7 @@
 			return
 
 /obj/item/weapon/material/clipboard/on_update_icon()
-	overlays.Cut()
+	..()
 	if(toppaper)
 		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
 		overlays += toppaper.overlays
@@ -189,7 +189,6 @@
 /obj/item/weapon/material/clipboard/glass
 	default_material = MATERIAL_GLASS
 	matter = list(MATERIAL_GLASS = 70)
-	alpha = 230
 
 /obj/item/weapon/material/clipboard/plastic
 	default_material = MATERIAL_PLASTIC
