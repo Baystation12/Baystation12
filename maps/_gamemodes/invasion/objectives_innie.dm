@@ -26,7 +26,7 @@
 
 /datum/objective/assassinate/kill_unsc_leader
 	short_text = "Kill UNSC commander"
-	explanation_text = "We must cut the head off the snake to delay the UNSC efforts in this system."
+	explanation_text = "We must cut the head off the snake to delay the UNSC efforts in this system. Kill the UNSC commander."
 	win_points = 50
 	find_specific_target = 1
 
@@ -38,13 +38,15 @@
 			else if(check_mind.assigned_role == "UNSC Bertels Commanding Officer")
 				target = check_mind
 			if(target)
-				return 1
+				. = 1
 	else
 		find_target_by_role("UNSC Heavens Above Commanding Officer")
 		if(!target)
 			find_target_by_role("UNSC Bertels Commanding Officer")
 		if(target)
-			return 1
+			. = 1
+	if(explanation_text == "Free Objective")
+		explanation_text  = "Kill the UNSC commander."
 
 /datum/objective/assassinate/kill_unsc_leader/check_completion()
 	if(target && target.current)
@@ -54,7 +56,7 @@
 
 /datum/objective/protect_colony/innie
 	short_text = "Protect the human colony"
-	explanation_text = "Earth has abandoned us, but we will never stop fighting. Someone has to save these civilians"
+	explanation_text = "Earth has abandoned us, but we will never stop fighting. Someone has to save these civilians."
 
 /datum/objective/destroy_cov_ship/innie
 	short_text = "Destroy the Covenant warship"
@@ -62,7 +64,7 @@
 
 /datum/objective/protect/protect_innie_leader
 	short_text = "Protect the Insurrectionist commander"
-	explanation_text = "Without their inspirational lead, the Insurrection will fall apart."
+	explanation_text = "Without their inspirational lead, the Insurrection will fall apart. Protect the Insurrectionist Commander."
 	lose_points = 50
 	find_specific_target = 1
 
@@ -72,8 +74,11 @@
 			if(check_mind.assigned_role == "Insurrectionist Commander")
 				target = check_mind
 			if(target)
-				return 1
+				. = 1
 	else
 		find_target_by_role("Insurrectionist Commander")
 		if(target)
-			return 1
+			. = 1
+
+	if(explanation_text == "Free Objective")
+		explanation_text  = "Protect the Insurrectionist Commander."
