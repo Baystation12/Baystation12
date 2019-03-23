@@ -142,7 +142,7 @@
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
-	req_access = list(access_psychiatrist,access_chapel_office)
+	req_access = list(access_chapel_office)
 	closet_appearance = /decl/closet_appearance/secure_closet/chaplain
 
 /obj/structure/closet/secure_closet/counselor/WillContain()
@@ -204,7 +204,6 @@
 
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(
-		/obj/item/clothing/suit/straight_jacket,
 		/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/storage/pill_bottle/citalopram,

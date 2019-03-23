@@ -62,3 +62,20 @@
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor
 	name = OUTFIT_JOB_NAME("Custodian - Torch")
 	uniform = /obj/item/clothing/under/rank/janitor
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	name = OUTFIT_JOB_NAME("Chaplain - Torch")
+	uniform = /obj/item/clothing/under/rank/chaplain
+	shoes = /obj/item/clothing/shoes/black
+	id_type = /obj/item/weapon/card/id/torch/crew/service/chaplain
+	pda_type = /obj/item/modular_computer/pda
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec
+	name = OUTFIT_JOB_NAME("Chaplain - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/fleet
+	name = OUTFIT_JOB_NAME("Chaplain - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
+	shoes = /obj/item/clothing/shoes/dutyboots

@@ -25,7 +25,7 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 	minimal_access = list()
-	
+
 /datum/job/chef
 	title = "Cook"
 	department = "Service"
@@ -70,6 +70,30 @@
 	min_skill = list(   SKILL_COOKING   = SKILL_BASIC,
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
+
+/datum/job/chaplain
+	department = "Service"
+	department_flag = SRV
+	supervisors = "the Executive Officer"
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/civ,
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2
+	)
+
+	access = list(access_chapel_office, access_solgov_crew, access_morgue, access_medical, access_crematorium)
+	min_skill = list(SKILL_BUREAUCRACY = SKILL_ADEPT)
+
+/datum/job/chaplain/get_description_blurb()
+	return "You are the Chaplain. Your job is to provide religious services and counseling to the crew. You can practice a pre-existing or new religion. You can pray to the gods for assistance or favors."
 
 /datum/job/crew
 	title = "Crewman"

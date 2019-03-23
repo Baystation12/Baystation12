@@ -73,26 +73,22 @@
 	..()
 	BACKPACK_OVERRIDE_CHEMISTRY
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor
-	name = OUTFIT_JOB_NAME("Counselor")
-	uniform = /obj/item/clothing/under/rank/psych/turtleneck
-	shoes = /obj/item/clothing/shoes/white
-	id_type = /obj/item/weapon/card/id/torch/contractor/medical/counselor
-
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist
 	name = OUTFIT_JOB_NAME("Psychiatrist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
+	shoes = /obj/item/clothing/shoes/white
+	id_type = /obj/item/weapon/card/id/torch/crew/medical/psychiatrist
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain
-	name = OUTFIT_JOB_NAME("Chaplain - Torch")
-	uniform = /obj/item/clothing/under/rank/chaplain
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/psychologist
+	name = OUTFIT_JOB_NAME("Psychologist - Torch")
+	uniform = /obj/item/clothing/under/rank/psych/turtleneck
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
-	name = OUTFIT_JOB_NAME("Counselor - Expeditionary Corps")
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/ec
+	name = OUTFIT_JOB_NAME("Psychiatrist - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet
-	name = OUTFIT_JOB_NAME("Counselor - Fleet")
+/decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/fleet
+	name = OUTFIT_JOB_NAME("Psychiatrist - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots

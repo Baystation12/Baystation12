@@ -188,7 +188,7 @@
 	minimal_access = list()
 
 /datum/job/psychiatrist
-	title = "Counselor"
+	title = "Psychiatrist"
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40
@@ -196,14 +196,13 @@
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	alt_titles = list(
-		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist,
-		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain,
+		"Psychologist"
 	)
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet)
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/ec,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/psychiatrist/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/o2,
@@ -214,8 +213,11 @@
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX)
 
-	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew, access_medical_equip)
+	access = list(access_medical, access_psychiatrist, access_solgov_crew)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/psychiatrist/get_description_blurb()
+	return "You are the Psychiatrist. Your job is to provide therapeutic programming and counseling to the crew. You can prescribe psychiatric medication to patients to help them heal. If you are a Psychologist, you cannot prescribe medication. You can admit patients to the Psychiatric Ward if they pose a threat to others or are unable to perform their work."

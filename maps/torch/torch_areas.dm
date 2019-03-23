@@ -1006,11 +1006,6 @@
 	name = "\improper First Deck Cryogenic Storage"
 	icon_state = "Sleep"
 
-/area/crew_quarters/diplomat
-	name = "\improper Diplomatic Quarters"
-	icon_state = "Sleep"
-	sound_env = SMALL_SOFTFLOOR
-
 /area/crew_quarters/adherent
 	name = "\improper Adherent Maintenence"
 	icon_state = "robotics"
@@ -1021,6 +1016,11 @@
 
 /area/hydroponics/storage
 	name = "\improper Hydroponics Storage"
+
+/area/chapel/office
+	name = "\improper Chapel Office"
+	icon_state = "chapel"
+	req_access = list(access_chapel_office)
 
 // Tcomms
 /area/tcommsat/storage
@@ -1113,16 +1113,20 @@
 	ambience = list('sound/ambience/signal.ogg')
 	req_access = list(access_psychiatrist)
 
+/area/medical/psychward
+	name = "\improper Psychiatric Ward"
+	icon_state = "patients"
+	req_access = list(access_psychiatrist)
+
 /area/medical/washroom
 	name = "\improper Infirmary Washroom"
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
 	req_access = list()
 
-// Chapel
-/area/chapel/crematorium
+/area/medical/crematorium
 	name = "\improper Crematorium"
-	icon_state = "chapel"
+	icon_state = "morgue"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_crematorium)
 
@@ -1691,14 +1695,6 @@
 	ambience = list('sound/ambience/ambimalf.ogg')
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_ai_upload)
-
-// Chapel
-
-/area/chapel/main
-	name = "\improper Chapel"
-	icon_state = "chapel"
-	ambience = list('sound/ambience/ambicha1.ogg','sound/ambience/ambicha2.ogg','sound/ambience/ambicha3.ogg','sound/ambience/ambicha4.ogg','sound/music/traitor.ogg')
-	sound_env = LARGE_ENCLOSED
 
 // Merchant
 

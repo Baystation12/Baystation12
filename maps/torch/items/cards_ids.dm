@@ -44,6 +44,9 @@
 /obj/item/weapon/card/id/torch/crew/medical/senior
 	job_access_type = /datum/job/senior_doctor
 
+/obj/item/weapon/card/id/torch/crew/medical/psychiatrist
+	job_access_type = /datum/job/psychiatrist
+
 /obj/item/weapon/card/id/torch/contractor/medical
 	job_access_type = /datum/job/doctor
 	detail_color = COLOR_PALE_BLUE_GRAY
@@ -58,9 +61,6 @@
 /obj/item/weapon/card/id/torch/contractor/biomech
 	job_access_type = /datum/job/biomech
 	detail_color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/weapon/card/id/torch/contractor/medical/counselor
-	job_access_type = /datum/job/psychiatrist
 
 
 /obj/item/weapon/card/id/torch/silver/security
@@ -121,6 +121,9 @@
 
 /obj/item/weapon/card/id/torch/crew/service/chef
 	job_access_type = /datum/job/chef
+
+/obj/item/weapon/card/id/torch/crew/service/chaplain
+	job_access_type = /datum/job/chaplain
 
 /obj/item/weapon/card/id/torch/contractor/service //unused
 	job_access_type = /datum/job/assistant
