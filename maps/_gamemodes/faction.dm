@@ -2,8 +2,6 @@
 /datum/faction
 	var/name = "Unknown faction"
 	var/points = 0
-	var/datum/objective/main_objective
-	var/list/other_objectives = list()
 	var/list/all_objectives = list()
 	var/list/assigned_minds = list()
 	var/list/living_minds = list()

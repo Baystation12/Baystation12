@@ -114,7 +114,6 @@
 /datum/game_mode/invasion/proc/setup_faction_objectives(var/datum/faction/faction, var/list/objective_types)
 	for(var/objective_type in objective_types)
 		var/datum/objective/objective = new objective_type()
-		faction.other_objectives.Add(objective)
 		faction.all_objectives.Add(objective)
 		faction.max_points += objective.get_award_points()
 		if(objective.find_specific_target)
@@ -210,7 +209,7 @@
 
 	//these victory tiers will need balancing depending on objectives and points
 	if(second_faction.points == winning_faction.points)
-		text += "<h2>Tie! [winning_faction.name] and [winning_faction.name] ([winning_faction.points] points)</h2>"
+		text += "<h2>Tie! [winning_faction.name] and [second_faction.name] ([winning_faction.points] points)</h2>"
 	else if(all_points <= 0)
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
