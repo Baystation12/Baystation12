@@ -96,7 +96,7 @@
 	return 1
 
 /obj/aura/regenerating/human/proc/low_nut_warning(var/wound_type)
-	if (last_nutrition_warning + 1 MINUTE < world.time)
+	if (last_nutrition_warning + 2 MINUTE < world.time)
 		to_chat(user, "<span class='warning'>You need more energy to regenerate your [wound_type || "wounds"].</span>")
 		last_nutrition_warning = world.time
 		return 1
@@ -112,12 +112,13 @@
 	return TRUE
 
 /obj/aura/regenerating/human/unathi
-	nutrition_damage_mult = 2
-	brute_mult = 2
-	organ_mult = 4
+	nutrition_damage_mult = 1
+	brute_mult = 1
+	fire_mult = 0.5
+	organ_mult = 2
 	regen_message = "<span class='warning'>You feel a soothing sensation as your ORGAN mends...</span>"
 	grow_chance = 2
-	grow_threshold = 150
+	grow_threshold = 400
 	ignore_tag = BP_HEAD
 	var/toggle_blocked_until = 0 // A time
 
@@ -143,8 +144,8 @@
 /obj/aura/regenerating/human/unathi/life_tick()
 	var/mob/living/carbon/human/H = user
 	if(istype(H) && H.stat != DEAD && H.nutrition < 50)
-		H.apply_damage(5, TOX)
-		H.nutrition += 3
+		H.apply_damage(2, TOX)
+		H.nutrition += 2
 		return 1
 	return ..()
 
@@ -176,6 +177,6 @@
 	H.nutrition -= external_nutrition_mult
 
 /obj/aura/regenerating/human/unathi/yeosa
-	brute_mult = 1.5
+	brute_mult = 0.5
 	organ_mult = 3
 	tox_mult = 2
