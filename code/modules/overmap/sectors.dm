@@ -28,6 +28,8 @@ var/list/points_of_interest = list()
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
+	var/list/hull_segments = list()
+	var/superstructure_failing = 0
 	var/list/connectors = list() //Used for docking umbilical type-items.
 	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
 
@@ -39,6 +41,9 @@ var/list/points_of_interest = list()
 	if(name == "map object")
 		name = "invalid-\ref[src]"
 
+	if(!(src in GLOB.mobs_in_sectors))
+		GLOB.mobs_in_sectors[src] = list()
+
 	//custom tags are allowed to be set in map or elsewhere
 	if(!tag)
 		tag = name
@@ -48,6 +53,18 @@ var/list/points_of_interest = list()
 /obj/effect/overmap/Initialize()
 	. = ..()
 	setup_object()
+
+/obj/effect/overmap/proc/get_superstructure_strength() //Returns a list containing [current hull strength],[max hull strength]
+	var/list/hull_strengths = list(0,0)
+	for(var/obj/effect/hull_segment/hull_segment in hull_segments)
+		if(hull_segment.is_segment_destroyed() == 0)
+			hull_strengths[1] += hull_segment.segment_strength
+		hull_strengths[2] += hull_segment.segment_strength
+
+	if(hull_strengths[2] == 0)
+		return null
+
+	return (hull_strengths[1]/hull_strengths[2])
 
 /obj/effect/overmap/proc/get_faction()
 	return faction
@@ -153,6 +170,36 @@ var/list/points_of_interest = list()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
 
+/obj/effect/overmap/proc/do_superstructure_fail()
+	for(var/mob/player in GLOB.mobs_in_sectors[src])
+		player.dust()
+	loc = null
+	to_world("An overmap object has been destroyed. Please wait as it is deleted.")
+	sleep(10)//To allow the previous message to actually be seen
+	for(var/z_level in map_z)
+		shipmap_handler.free_map(z_level)
+	qdel(src)
+
+/obj/effect/overmap/proc/pre_superstructure_failing()
+	for(var/mob/player in GLOB.mobs_in_sectors[src])
+		to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
+	superstructure_failing = 1
+	spawn(SUPERSTRUCTURE_FAIL_TIME)
+		do_superstructure_fail()
+
+/obj/effect/overmap/process()
+	if(superstructure_failing == -1)
+		return
+	if(superstructure_failing == 1)
+		//TODO: Special messages/other effects whilst the superstructure fails.
+		return
+	var/list/superstructure_strength = get_superstructure_strength()
+	if(isnull(superstructure_strength))
+		superstructure_failing = -1
+		return
+	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
+		pre_superstructure_failing()
+
 /obj/effect/overmap/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
@@ -167,6 +214,7 @@ var/list/points_of_interest = list()
 		H.get_known_sectors()
 
 /obj/effect/overmap/sector/process()
+	. = ..()
 	if(15<=hit)
 		src.icon_state="bombed"
 

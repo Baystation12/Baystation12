@@ -111,6 +111,7 @@
 			adjust_speed(0, -get_burn_acceleration())
 
 /obj/effect/overmap/ship/process()
+	. = ..()
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
