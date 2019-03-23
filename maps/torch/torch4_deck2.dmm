@@ -190,13 +190,6 @@
 "as" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/disposal)
-"au" = (
-/obj/structure/sign/warning/vent_port{
-	icon_state = "securearea";
-	dir = 1
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/maintenance/disposal)
 "av" = (
 /turf/simulated/floor/airless,
 /area/space)
@@ -259,11 +252,14 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/medical)
 "aG" = (
+/obj/structure/disposalpipe/segment,
 /obj/machinery/door/blast/regular{
-	id = "trash";
-	name = "disposal mass driver"
+	density = 1;
+	icon_state = "pdoor1";
+	id = "RubbishOuter";
+	name = "Disposal Exit Vent";
+	opacity = 1
 	},
-/obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "aH" = (
@@ -356,44 +352,16 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/disposal)
 "aO" = (
-/obj/machinery/button/remote/blast_door{
-	id = "Disposal Exit";
-	name = "Disposal Vent Control";
-	pixel_x = -25;
-	pixel_y = 4
-	},
-/obj/machinery/button/remote/driver{
-	id = "trash";
-	pixel_x = -26;
-	pixel_y = -6
-	},
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
 "aP" = (
-/obj/structure/disposalpipe/trunk,
-/obj/structure/disposaloutlet{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "aQ" = (
-/obj/machinery/mass_driver{
-	dir = 1;
-	id = "trash"
-	},
-/obj/structure/window/reinforced,
-/obj/effect/floor_decal/industrial/warning/full,
-/obj/random/junk,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "aR" = (
@@ -672,23 +640,11 @@
 "bs" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
-"bt" = (
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/maintenance/disposal)
 "bu" = (
 /obj/machinery/disposal/deliveryChute,
 /obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "bv" = (
@@ -958,7 +914,7 @@
 /obj/machinery/door/blast/regular{
 	density = 1;
 	icon_state = "pdoor1";
-	id = "Disposal Exit";
+	id = "RubbishInner";
 	name = "Disposal Exit Vent";
 	opacity = 1
 	},
@@ -6963,8 +6919,6 @@
 /obj/structure/closet/crate/medical,
 /obj/item/bodybag,
 /obj/item/bodybag,
-/obj/item/clothing/suit/straight_jacket,
-/obj/item/clothing/mask/muzzle,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
@@ -15254,6 +15208,14 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/foyer)
+"LN" = (
+/obj/structure/disposaloutlet{
+	dir = 4
+	},
+/obj/structure/disposalpipe/trunk,
+/obj/structure/lattice,
+/turf/space,
+/area/space)
 "LO" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -15526,6 +15488,14 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/seconddeck/foreport)
+"MW" = (
+/obj/structure/lattice,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/grille,
+/turf/space,
+/area/space)
 "Na" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	frequency = 1441;
@@ -15835,6 +15805,11 @@
 "NQ" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
+"NR" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/grille,
+/turf/simulated/floor/reinforced/airless,
+/area/maintenance/exterior)
 "NS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -18092,6 +18067,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
+"VB" = (
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
+/obj/structure/lattice,
+/obj/structure/grille,
+/turf/space,
+/area/space)
 "VE" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/bluespace)
@@ -18655,6 +18639,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
+"XJ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/obj/structure/lattice,
+/obj/structure/grille,
+/turf/space,
+/area/space)
 "XK" = (
 /obj/machinery/r_n_d/circuit_imprinter,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -18720,6 +18713,23 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
+"XV" = (
+/obj/machinery/button/remote/blast_door{
+	desc = "A remote-control switch.";
+	id = "RubbishInner";
+	name = "Rubbish Ejection";
+	pixel_x = -24;
+	pixel_y = -10
+	},
+/obj/machinery/button/remote/blast_door{
+	desc = "A remote-control switch.";
+	id = "RubbishOuter";
+	name = "Rubbish Venting Control";
+	pixel_x = -24;
+	pixel_y = 10
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/disposal)
 "XY" = (
 /obj/random/obstruction,
 /obj/machinery/door/firedoor/border_only,
@@ -41039,7 +41049,7 @@ aa
 fb
 aO
 Yu
-bs
+XV
 bs
 dg
 dh
@@ -41236,11 +41246,11 @@ aa
 aa
 aa
 aa
-au
+PC
 PC
 PC
 aP
-bt
+aP
 bU
 cv
 dh
@@ -41437,9 +41447,9 @@ aa
 aa
 aa
 aa
-aa
-ky
-lk
+XJ
+NR
+NR
 aG
 aQ
 bu
@@ -41638,8 +41648,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+af
+MW
 PC
 PC
 PC
@@ -41839,9 +41849,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+af
+af
+MW
 GW
 GW
 GW
@@ -42041,9 +42051,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+af
+LN
+VB
 GW
 GW
 GW

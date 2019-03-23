@@ -1253,7 +1253,7 @@
 	name = "bamboo"
 	seed_name = "bamboo"
 	display_name = "bamboo"
-	chems = list(/datum/reagent/woodpulp = list(6,1))
+	chems = list(/datum/reagent/bamboo = list(6,1))
 	mutants = null
 
 /datum/seed/bamboo/New()

@@ -382,8 +382,15 @@
 	name = "Wood Pulp"
 	description = "A mass of wood fibers."
 	taste_description = "wood"
-	reagent_state = LIQUID
-	color = "#b97a57"
+	reagent_state = SOLID
+	color = WOOD_COLOR_GENERIC
+
+/datum/reagent/bamboo
+	name = "Bamboo Pulp"
+	description = "A mass of bamboo fibers."
+	taste_description = "grass"
+	reagent_state = SOLID
+	color = WOOD_COLOR_PALE2
 
 /datum/reagent/luminol
 	name = "Luminol"

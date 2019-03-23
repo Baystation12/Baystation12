@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Robot organs in meat bodies can be repaired with nanopaste in surgery."
