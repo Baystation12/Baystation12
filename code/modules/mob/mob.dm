@@ -45,6 +45,8 @@
 /mob/New()
 	GLOB.mob_list += src
 	..()
+
+/mob/LateInitialize()
 	last_z = z
 	var/obj/om_obj = map_sectors["[z]"]
 	if(om_obj)

@@ -188,7 +188,6 @@ var/list/points_of_interest = list()
 		do_superstructure_fail()
 
 /obj/effect/overmap/process()
-	. = ..()
 	if(superstructure_failing == -1)
 		return
 	if(superstructure_failing == 1)
