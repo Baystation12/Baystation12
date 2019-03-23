@@ -22,11 +22,7 @@
 	burn_delay = 10 SECONDS
 
 /obj/effect/overmap/ship/bearcat/New()
-	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
-	for(var/area/ship/scrap/A)
-		A.name = "\improper [name] - [A.name]"
-		GLOB.using_map.area_purity_test_exempt_areas += A.type
-	name = "[name], \a [initial(name)]"
+	renameAreas(/area/ship/scrap, "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]")
 	..()
 
 /datum/map_template/ruin/away_site/bearcat_wreck

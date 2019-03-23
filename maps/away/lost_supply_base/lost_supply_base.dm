@@ -14,6 +14,10 @@
 		"nav_lost_supply_base_antag"
 	)
 
+/obj/effect/overmap/sector/lost_supply_base/New()
+	renameAreas(/area/lost_supply_base, "[pick("FTS", "ITS", "ISS", "FSS")] [pick("Hermes", "Troy", "Farpoint")]")
+	..()
+
 /datum/map_template/ruin/away_site/lost_supply_base
 	name = "Lost Supply Base"
 	id = "awaysite_lost_supply_base"

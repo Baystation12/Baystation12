@@ -1,11 +1,15 @@
 #include "errant_pisces_areas.dm"
 
 /obj/effect/overmap/ship/errant_pisces
-	name = "XCV Ahab's Harpoon"
+	name = "carp trawler"
 	desc = "Sensors detect civilian vessel with unusual signs of life aboard."
 	color = "#bd6100"
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 15 SECONDS
+
+/obj/effect/overmap/ship/errant_pisces/New()
+	renameAreas(/area/errant_pisces, "XCV [pick("Ahab's Harpoon", "Errant Pisces")]")
+	..()
 
 /datum/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"

@@ -1,10 +1,14 @@
 #include "lar_maria_areas.dm"
 
 /obj/effect/overmap/sector/lar_maria
-	name = "Lar Maria space station"
+	name = "medical research station"
 	desc = "Sensors detect an orbital station with low energy profile and sporadic life signs."
 	icon_state = "object"
 	known = 0
+
+/obj/effect/overmap/sector/lar_maria/New()
+	renameAreas(/area/lar_maria, "ZSS Lar Maria")
+	..()
 
 /datum/map_template/ruin/away_site/lar_maria
 	name = "Lar Maria"
@@ -275,7 +279,7 @@
 	name = "paper note"
 	info = {"<center><b><font color='green'>Zeng-Hu Pharmaceuticals</font></b></center>
 			<center><font color='red'><small>CONFIDENTIAL USE ONLY</small></font></center>
-			<i>Tedd, don't get into the cells with the Type 8 subjects anymore, something's off about them the last couple days. They haven't been moving right, and they seem distracted nearly constantly, and not in a normal way. They also look like they're turning kinda... green? One of the other guys says it's probably just a virus or something reacting with it, but I don't know, something seems off.</i>
+			<i>Tedd, don't get into the cells with the Type 8 subjects anymore, something's off about them the last couple days. They haven't been moving right, and they seem distracted nearly constantly, and not in a normal way. They also look like they're turning kinda green? One of the other guys says it's probably just a virus or something reacting with it, but I don't know, something seems off.</i>
 			"}
 
 /obj/item/weapon/paper/lar_maria/note_5

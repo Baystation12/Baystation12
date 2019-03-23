@@ -14,7 +14,7 @@
 	)
 
 /obj/effect/overmap/ship/unishi
-	name = "SRV Verne"
+	name = "research vessel"
 	desc = "Sensor array detects unknown class medium size vessel. The vessel appears unarmed.\
 	A small amount of radiation has been detected at the aft of the ship"
 	vessel_mass = 5000
@@ -24,6 +24,10 @@
 		"nav_unishi_2",
 		"nav_unishi_3",
 	)
+
+/obj/effect/overmap/ship/unishi/New()
+	renameAreas(/area/unishi, "SRV [pick("Verne", "Unishi")]")
+	..()
 
 /datum/map_template/ruin/away_site/unishi
 	name = "University Ship"

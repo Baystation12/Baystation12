@@ -14,7 +14,7 @@
 	)
 
 /obj/effect/overmap/ship/yacht/New(nloc, max_x, max_y)
-	name = "IPV [pick("Razorshark", "Aurora", "Lighting", "Pequod", "Anansi")], \a [name]"
+	renameAreas(/area/yacht, "IPV [pick("Razorshark", "Aurora", "Lightning", "Pequod", "Anansi")]")
 	..()
 
 /datum/map_template/ruin/away_site/yacht

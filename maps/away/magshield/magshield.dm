@@ -14,6 +14,10 @@
 		"nav_magshield_antag"
 	)
 
+/obj/effect/overmap/sector/magshield/New()
+	renameAreas(/area/ship/scrap, "[pick("FTS", "ITS", "ISS", "FSS")] [pick("Aegis", "Magneto", "Pulsar", "Demeter")]")
+	..()
+
 /datum/map_template/ruin/away_site/magshield
 	name = "Magshield"
 	id = "awaysite_magshield"

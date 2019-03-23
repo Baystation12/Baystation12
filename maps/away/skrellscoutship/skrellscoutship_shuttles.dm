@@ -23,7 +23,7 @@
 
 
 /obj/effect/overmap/ship/landable/skrellscoutship/New()
-	name = "SSV [pick("Xilvuxix", "Zuuvixix", "Quizuu", "Vulzxixvuu","Quumzoox","Quuvuzxuu")]"
+	renameAreas(/area/ship/skrellscoutship, "SSV [pick("Xilvuxix", "Zuuvixix", "Quizuu", "Vulzxixvuu","Quumzoox","Quuvuzxuu")]")
 	..()
 	
 /obj/effect/overmap/ship/landable/skrellscoutshuttle

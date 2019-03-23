@@ -1,4 +1,5 @@
 area/errant_pisces
+	name = "XCV Ahab's Harpoon"
 	icon = 'maps/away/errant_pisces/errant_pisces_areas_sprites.dmi'//24 areas so sprites are in a separate .dmi
 
 area/errant_pisces/bow_port
