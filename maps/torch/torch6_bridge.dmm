@@ -15542,7 +15542,7 @@
 	id_tag = "aquila_shuttle_dock_inner";
 	locked = 1;
 	name = "Docking Port Airlock";
-	req_access = list("ACCESS_CREW")
+	req_access = list("ACCESS_TORCH_CREW")
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15696,7 +15696,7 @@
 	id_tag = "aquila_shuttle_dock_outer";
 	locked = 1;
 	name = "Docking Port Airlock";
-	req_access = list("ACCESS_CREW")
+	req_access = list("ACCESS_TORCH_CREW")
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15897,7 +15897,7 @@
 	id_tag = "aquila_shuttle_outer";
 	locked = 1;
 	name = "Aquila External Access";
-	req_access = list("ACCESS_CREW")
+	req_access = list("ACCESS_TORCH_CREW")
 	},
 /obj/machinery/shield_diffuser,
 /obj/structure/cable{
@@ -16088,7 +16088,7 @@
 	id_tag = "aquila_shuttle_inner";
 	locked = 1;
 	name = "Aquila External Access";
-	req_access = list("ACCESS_CREW")
+	req_access = list("ACCESS_TORCH_CREW")
 	},
 /obj/structure/cable{
 	d1 = 4;

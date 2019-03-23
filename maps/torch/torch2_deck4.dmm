@@ -12129,7 +12129,7 @@
 	name = "Counter Shutters";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(list("ACCESS_HEADS","ACCESS_SHOP"))
+	req_access = list(list("ACCESS_HEADS","ACCESS_TORCH_SHOP"))
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
