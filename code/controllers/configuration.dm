@@ -339,6 +339,9 @@ var/list/gamemode_cache = list()
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
+				
+				if ("log_runtime")
+					config.log_runtime = 1
 
 				if ("generate_asteroid")
 					config.generate_map = 1
