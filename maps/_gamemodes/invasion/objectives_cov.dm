@@ -73,7 +73,7 @@
 
 /datum/objective/retrieve_artifact
 	short_text = "Retrieve the Forerunner artifact"
-	explanation_text = "The humans are hiding a Forerunner artifact somewhere in this system. Locate it and bring it home."
+	explanation_text = "The humans are hiding a Forerunner artifact somewhere in this system. Locate it and bring it to High Charity."
 	var/artifacts_recovered = 0
 	var/points_per_artifact = 200
 
