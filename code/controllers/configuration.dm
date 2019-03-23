@@ -620,6 +620,9 @@ var/list/gamemode_cache = list()
 				if("main_irc")
 					config.main_irc = value
 
+				if ("log_runtime")
+					config.log_runtime = 1
+
 				if("admin_irc")
 					config.admin_irc = value
 
