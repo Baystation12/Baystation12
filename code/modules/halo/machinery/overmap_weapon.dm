@@ -8,10 +8,36 @@
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap
 	var/sound/fire_sound = null
 	var/requires_ammo = 0
+	var/do_track_fired_proj = 0
+	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
 
+/obj/machinery/overmap_weapon_console/ex_act(var/severity)
+	return
+
+/obj/machinery/overmap_weapon_console/verb/toggle_projectile_tracking()
+	set name = "Toggle Ordinance Visual Tracking"
+	set desc = "Toggle the usage of long-range ordinance tracking sensors."
+	set category = "Object"
+
+	set src in view(1)
+
+	var/mob/living/u = usr
+	if(!istype(u))
+		return
+
+	visible_message("[u] switches [name]'s ordinance tracking systems to [do_track_fired_proj ? "off" : "on"].")
+
+	do_track_fired_proj = !do_track_fired_proj
+	currently_tracked_proj = null
+	u.reset_view(null)
+
 /obj/machinery/overmap_weapon_console/attack_hand(var/mob/user)
+	scan_linked_devices()
+	if(!powered())
+		visible_message("<span class = 'notice'>[name] beeps a no-power warning.</span>")
+		return
 	equip_aim_tool(user)
 
 /obj/machinery/overmap_weapon_console/proc/scan_linked_devices() //Overriden on a weapon-by-weapon basis
@@ -58,16 +84,16 @@
 	return 0
 
 /obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
-	var/obj/item/projectile/new_projectile = new fired_projectile (src)
+	var/obj/om_obj = map_sectors["[z]"]
+	var/obj/item/projectile/new_projectile = new fired_projectile (om_obj.loc)
 	new_projectile.damage += get_linked_device_damage_mod()
-	new_projectile.loc = map_sectors["[z]"]
 	new_projectile.permutated = map_sectors["[z]"] //Ensuring we don't hit ourselves somehow
 	new_projectile.firer = user
 	if(directly_above)
 		new_projectile.on_impact(target)
 		qdel(new_projectile)
 	else
-		new_projectile.launch(target,null,rand(0,new_projectile.dispersion),rand(0,new_projectile.dispersion))
+		new_projectile.launch(target,null)
 	play_fire_sound(src)
 	var/obj/effect/overmap/om_targ = target
 	if(istype(om_targ) && om_targ.map_z.len > 0)
@@ -78,7 +104,7 @@
 	if(isnull(fire_sound))
 		return
 
-	playsound(loc_sound_origin, fire_sound, 100, 1, 5, 5,1)
+	playsound(loc_sound_origin, fire_sound, 50, 1, 5, 5,1)
 
 /obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
@@ -101,6 +127,9 @@
 	scan_linked_devices()
 	if(!can_fire(target,user,click_params))
 		return 0
+	if(!powered())
+		visible_message("<span class = 'notice'>[name] beeps a no-power warning.</span>")
+		return
 	var/obj/overmap_sector = map_sectors["[z]"]
 	var/directly_above = 0
 	if(target.loc == overmap_sector.loc)

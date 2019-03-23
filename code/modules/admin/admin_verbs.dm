@@ -91,7 +91,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/makePAI,
 	/datum/admins/proc/paralyze_mob,
 	/client/proc/fixatmos,
-	/client/proc/minorfixatmos,
+	/client/proc/minorfixatmos, //resets atmos without additional changes a full reset would make,
 	/client/proc/list_traders,
 	/client/proc/add_trader,
 	/client/proc/remove_trader,
@@ -162,7 +162,8 @@ var/list/admin_verbs_server = list(
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity,
 	/client/proc/nanomapgen_DumpImage,
-	/client/proc/reload_whitelists
+	/client/proc/reload_whitelists,
+	/client/proc/adminmapswitch
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/getruntimelog,                     // allows us to access runtime logs to somebody,

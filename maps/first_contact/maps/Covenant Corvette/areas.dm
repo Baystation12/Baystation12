@@ -53,6 +53,9 @@
 /area/covenant_corvette/holdingcell
 	name = "SDV Vindicative Infraction Holding Cells"
 
+/area/covenant_corvette/toolstore
+	name = "SDV Vindicative Infraction Tool Storage"
+
 /area/covenant_corvette/centralengine
 	name = "SDV Vindicative Infraction Central Engine"
 

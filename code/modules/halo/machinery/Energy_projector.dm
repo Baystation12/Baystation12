@@ -1,5 +1,6 @@
 #define ACCELERATOR_OVERLAY_ICON_STATE "lrport1"
-#define MAC_AMMO_LIMIT 3
+#define AMMO_LIMIT 1
+#define LOAD_AMMO_DELAY 140
 #define CAPACITOR_DAMAGE_AMOUNT 0.8
 #define CAPACITOR_MAX_STORED_CHARGE 150000
 #define CAPACITOR_RECHARGE_TIME 15 //This is in seconds.
@@ -36,12 +37,12 @@
 
 /obj/machinery/Energy_projector/energy_loader/examine(var/mob/user)
 	. = ..()
-	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[MAC_AMMO_LIMIT] plasma charges loaded.</span>")
+	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[AMMO_LIMIT] plasma charges loaded.</span>")
 
 /obj/machinery/Energy_projector/energy_loader/attack_hand(var/mob/user)
 	if(loading)
 		return
-	if(contained_rounds.len >= MAC_AMMO_LIMIT)
+	if(contained_rounds.len >= AMMO_LIMIT)
 		to_chat(user,"<span class = 'notice'>The Energy projector cannot load any more plasma.</span>")
 		return
 	visible_message("[user] activates the projector's loading mechanism.")
@@ -168,7 +169,6 @@
 			capacitor[1] = new_stored
 		recharging = world.time + 1 SECOND
 
-
 /obj/item/projectile/overmap/beam
 	name = "Super laser"
 	desc = "An incredibly hot beam of pure light"
@@ -178,16 +178,19 @@
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 2 SECONDS
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/eprojector_hit_sound.wav'
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
-		z_level--
+		var/prev_index = hit.map_z.Find(z_level)
+		if(hit.map_z.len > 1 && prev_index != 1)
+			z_level = hit.map_z[prev_index++]
 	turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	 //explosion(turf_to_explode,3,5,7,10) original tiny explosion
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
-		if(!istype(turf_to_explode,/turf/simulated/open) && !istype(turf_to_explode,/turf/unsimulated/floor/lava))
+		if(!istype(turf_to_explode,/turf/simulated/open) && !istype(turf_to_explode,/turf/unsimulated/floor/lava) && !istype(turf_to_explode,/turf/space))
 			new /turf/unsimulated/floor/scorched(F)
 
 	for(var/turf/unsimulated/F in circlerange(turf_to_explode,15))
@@ -202,6 +205,8 @@
 	for(var/mob/living/m in range(30,turf_to_explode))
 		m.adjustFireLoss(90)
 
+	hit.glassed = 1
+
 /obj/effect/projectile/projector_laser_proj
 	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"
@@ -215,9 +220,9 @@
 	damage = 900
 	penetrating = 999
 	step_delay = 0.0 SECONDS
+	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj
-	tracer_delay_time = 2 SECONDS
-
+	tracer_delay_time = 5 SECONDS
 
 /obj/item/projectile/projector_laser_damage_proj/attack_mob()
 	damage_type = BURN
@@ -231,5 +236,35 @@
 	. = ..()
 
 
-#undef MAC_AMMO_LIMIT
+/obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
+	. = ..()
+	explosion(a,1,2,4,5)
+
+/obj/item/projectile/projector_laser_damage_proj/launch()
+	create_child_projs()
+	. = ..()
+
+/obj/item/projectile/projector_laser_damage_proj/proc/create_child_projs()
+	//Spawn 4 child-projectiles
+	var/list/obj/item/projectile/child_projs = list()
+	var/list/adjacent_turfs = orange(starting,1)
+	var/i = 0//Why do you need to do it this way, DMcode, WHY?!?!
+	for(i=0,i<=4,i++)
+		var/turf/spawnloc = pick(adjacent_turfs)
+		adjacent_turfs =- spawnloc
+		var/spawned_proj = new /obj/item/projectile/projector_laser_damage_proj/childproj(spawnloc)
+		child_projs.Add(spawned_proj)
+
+	for(var/obj/item/projectile/childproj in child_projs)
+		childproj.launch(pick(range(original,1)-original))
+
+
+/obj/item/projectile/projector_laser_damage_proj/childproj/create_child_projs()
+	return
+
+#undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE
+#undef LOAD_AMMO_DELAY
+#undef CAPACITOR_DAMAGE_AMOUNT
+#undef CAPACITOR_MAX_STORED_CHARGE
+#undef CAPACITOR_RECHARGE_TIME

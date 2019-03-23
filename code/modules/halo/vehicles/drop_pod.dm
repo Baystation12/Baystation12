@@ -1,3 +1,4 @@
+#define POD_FAIL_CHANCE 5 //This is the chance a drop-pod will fail on impact and auto-eject the user + exploding.
 
 /obj/vehicles/drop_pod
 	name = "SOEIV Drop Pod"
@@ -59,10 +60,17 @@
 		visible_message("<span class = 'warning'>[src] blurts a warning: ERROR: NO AVAILABLE DROP-TARGETS.</span>")
 		return
 	var/list/valid_points = list()
+	for(var/turf/l in range(drop_point,drop_accuracy))
+		if(istype(l,/turf/simulated/floor))
+			valid_points += l
+		if(istype(l,/turf/unsimulated/floor))
+			valid_points += l
 	for(var/turf/t in view(drop_point,drop_accuracy))
 		if(istype(t,/turf/simulated/wall))
 			continue
 		if(istype(t,/turf/unsimulated/wall))
+			continue
+		if(istype(t,/turf/unsimulated/floor/rock2)) //No spawning in rock walls, even if they are subtypes of /floor/
 			continue
 		valid_points += t
 	if(isnull(valid_points))
@@ -72,8 +80,16 @@
 
 /obj/vehicles/drop_pod/proc/get_drop_point()
 	var/list/valid_points = list()
+	var/beacons_present = 0
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		valid_points += l
+	for(var/obj/item/drop_pod_beacon/b in world)
+		if(b.is_active == 1)
+			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
+				valid_points.Cut()
+				visible_message("<span class = 'notice'>Electronic Locator beacon detected. Overriding landing systems.</span>")
+			beacons_present = 1
+			valid_points += b.loc
 	if(isnull(valid_points) || valid_points.len == 0)
 		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
 		return
@@ -115,6 +131,9 @@
 			post_drop_effects(drop_turf)
 
 /obj/vehicles/drop_pod/proc/post_drop_effects(var/turf/drop_turf)
+	if(prob(POD_FAIL_CHANCE))
+		on_death()//do death effects
+		return
 	explosion(drop_turf,0,0,2,5)
 
 /obj/vehicles/drop_pod/Move() //We're a drop pod, we don't move normally.
@@ -156,10 +175,29 @@
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		if(l.z in om_targ_zs)
 			valid_points += l
+	var/beacons_present = 1
+	for(var/obj/item/drop_pod_beacon/b in world)
+		if(!(b.z  in om_targ_zs))
+			continue
+		if(b.is_active == 1)
+			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
+				valid_points.Cut()
+				visible_message("<span class = 'notice'>Electronic Locator beacon detected. Overriding landing systems.</span>")
+			beacons_present = 1
+			valid_points += b.loc
 	if(isnull(valid_points) || valid_points.len == 0)
 		return null
 	else
 		return pick(valid_points)
+
+/obj/vehicles/drop_pod/overmap/post_drop_effects(var/turf/drop_turf)
+	var/obj/effect/overmap/our_om_obj = map_sectors["[drop_turf.z]"]
+	if(!isnull(our_om_obj))
+		var/landing_depth = our_om_obj.map_z.Find(drop_turf.z)
+		if(prob(POD_FAIL_CHANCE * landing_depth))
+			on_death()//do death effects
+			return
+	. = ..()
 
 /datum/component_profile/drop_pod
 

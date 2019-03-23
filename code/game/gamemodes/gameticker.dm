@@ -60,17 +60,18 @@ var/global/datum/controller/gameticker/ticker
 				vote.process()
 			if(round_progressing)
 				pregame_timeleft--
-			if(pregame_timeleft == config.vote_autogamemode_timeleft && !gamemode_voted)
+			if(pregame_timeleft <= config.vote_autogamemode_timeleft && !gamemode_voted)
 				gamemode_voted = 1
-				if(!vote.time_remaining)
+				if(!vote.delay_round_start())
 					vote.autogamemode()	//Quit calling this over and over and over and over.
-					while(vote.time_remaining)
+					while(vote.delay_round_start())
 						for(var/i=0, i<10, i++)
 							sleep(1)
 							vote.process()
 			if(pregame_timeleft <= 0 || ((initialization_stage & INITIALIZATION_NOW_AND_COMPLETE) == INITIALIZATION_NOW_AND_COMPLETE))
 				current_state = GAME_STATE_SETTING_UP
 				Master.SetRunLevel(RUNLEVEL_SETUP)
+				callHook("game_initialised")
 
 	while (!setup())
 
@@ -284,7 +285,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					if(player.create_character())
+					if(player.create_character(job_master.get_roundstart_spawnpoint(player.mind.assigned_role)))
 						qdel(player)
 
 
@@ -339,7 +340,7 @@ var/global/datum/controller/gameticker/ticker
 			spawn(50)
 				if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
 					vote.automap()
-					while(vote.time_remaining)
+					while(vote.delay_round_end())
 						sleep(50)
 
 				callHook("roundend")

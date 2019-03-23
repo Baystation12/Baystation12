@@ -6,6 +6,14 @@
 
 	tally += species.handle_movement_delay_special(src)
 
+	if(lying || resting)
+		tally += 4
+		if(species.slowdown < 0)
+			var/slowdown_added = (species.slowdown * -1)/2
+			tally += slowdown_added
+		else
+			tally *= 1.5
+
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
 	if(embedded_flag || (stomach_contents && stomach_contents.len))

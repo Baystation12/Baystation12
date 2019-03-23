@@ -28,11 +28,17 @@
 
 	available_ship_requests = newlist(/datum/npc_ship_request/halt,/datum/npc_ship_request/fire_on_target)
 
+/obj/effect/overmap/ship/npc_ship/combat/ship_targetedby_defenses()
+	target_disengage_at = 1
+	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
+
 /obj/effect/overmap/ship/npc_ship/combat/proc/fire_at_target()
+	if(is_player_controlled())
+		return
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
-		to_world("<span class = 'radio'>\[System\] [name]: \"Is their ship disabled?\"</span>")
+		radio_message("<span class = 'radio'>\[System\] [name]: \"I think their ship's disabled. Disengaging.\"</span>")
 		target = null
 		return
 
@@ -45,6 +51,8 @@
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
 		return
+	if(is_player_controlled())
+		return ..()
 	if(target && (target in view(7,src)))
 		if(world.time > next_fireat)
 			var/obj/effect/overmap/ship/npc_ship/targ_ship = target
@@ -53,19 +61,24 @@
 					fire_at_target()
 			else
 				fire_at_target()
-		target_loc = pick((view(target_range_from,target)-view(target_range_from-1,target))) //Let's emulate a "circling" behaviour.
+		var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
+		if(target_locs.len > 0)
+			target_loc = pick(target_locs) //Let's emulate a "circling" behaviour.
 	..()
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
 	target = proj.overmap_fired_by
+	target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	. = ..()
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc
+	faction = "unsc"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc)
 
 
 /obj/effect/overmap/ship/npc_ship/combat/innie
+	faction = "innie"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie)
 
@@ -74,9 +87,9 @@
 	request_auth_levels = list(AUTHORITY_LEVEL_UNSC,AUTHORITY_LEVEL_ONI)
 
 /datum/npc_ship_request/halt_fake/do_request(var/obj/effect/overmap/ship/npc_ship/combat/ship_source,var/mob/requester)
-	to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Slowing dow- DIE UNSC SCUM! FOR THE URF!\"</span>")
+	ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"Slowing dow- DIE UNSC SCUM! FOR THE URF!\"</span>")
 	for(var/obj/effect/overmap/ship/npc_ship/combat/innie/ship in view(7,src))
-		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"FOR THE URF!</span>\"")
+		ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"FOR THE URF!</span>\"")
 		ship.target = map_sectors["[requester.z]"]
 	ship_source.target = map_sectors["[requester.z]"]
 	. = ..()
@@ -100,9 +113,9 @@
 			ship_source.target = object
 			return
 
-	to_chat(requester,"<span class = 'radio'>\[Direct Comms\] [ship_source.name]: \"We can't find any nearby object with that name. Ensure name accuracy.\"</span>")
+	ship_source.radio_message(requester,"<span class = 'radio'>\[Direct Comms\] [ship_source.name]: \"We can't find any nearby object with that name. Ensure name accuracy.\"</span>")
 	if(ship_source.target)
-		to_chat(requester,"<span class = 'radio'>\[Direct Comms\] [ship_source.name]: \"Disengaging from current target.\"</span>")
+		ship_source.radio_message(requester,"<span class = 'radio'>\[Direct Comms\] [ship_source.name]: \"Disengaging from current target.\"</span>")
 		ship_source.target = null
 
 /datum/npc_ship_request/fire_on_target/unsc

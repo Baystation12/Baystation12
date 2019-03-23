@@ -34,7 +34,7 @@
 	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
 	var/list/allowed_ranks                // Ditto
 
-	var/announced = TRUE                  //If their arrival is announced on radio
+	var/announced = FALSE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
 	var/generate_email = 1
@@ -64,6 +64,14 @@
 
 	if(spawn_faction)
 		H.faction = spawn_faction
+		if(ticker.mode)
+			var/datum/faction/F = ticker.mode.factions_by_name[spawn_faction]
+			if(F && H.mind)
+				F.assigned_minds.Add(H.mind)
+				F.living_minds.Add(H.mind)
+				for(var/datum/objective/O in F.all_objectives)
+					H.mind.objectives.Add(O)
+				show_objectives(H.mind)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	if(alt_title && alt_titles)

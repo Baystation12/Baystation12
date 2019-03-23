@@ -1,13 +1,13 @@
 /datum/map/Insurrection
-	name = "Sector 0442: New Antartica"
-	full_name = "Sector 0442: New Antartica"
+	name = "Sector 0442: New Antarctica"
+	full_name = "Sector 0442: New Antarctica"
 	path = "Insurrection"
 	station_levels = list()
 	admin_levels = list()
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
-	id_hud_icons = 'maps/unsc_frigate/frigate_hud_icons.dmi'
+	id_hud_icons = 'maps/first_contact/maps/UNSC_Heaven_Above/frigate_hud_icons.dmi'
 	station_networks = list("Exodus")
 	station_name  = ""
 	station_short = ""
@@ -17,9 +17,9 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Sector 0442: New Antartica"
-	overmap_size= 3
+	overmap_size= 0
 
-	use_overmap = 1
+	use_overmap = 0
 
 
 

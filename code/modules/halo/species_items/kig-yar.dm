@@ -3,7 +3,6 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 
 /mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
 	..(new_loc,"Kig-Yar")
-	faction = "Covenant"
 
 /datum/language/ruuhti
 	name = "Ruuhti"

@@ -19,13 +19,13 @@
 	active_throwforce = 12
 	edge = 0
 	sharp = 0
-	var/failsafe = 1
+	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
 	var/next_leapwhen
 
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
-	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
+	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 
 /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
 	set name = "Enable weapon failsafe"
@@ -47,10 +47,12 @@
 	if(isnull(mob) || !istype(mob))
 		return 0
 	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 5
+		return 4
 	return ESWORD_LEAP_DIST
 
 /obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user)
+	if(user.loc.Adjacent(target))
+		return
 	if(world.time < next_leapwhen)
 		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
 		return
@@ -75,17 +77,18 @@
 		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
 		var/image/user_image = image(user)
 		user_image.dir = user.dir
-		for(var/i = 0 to 1)
+		for(var/i = 0 to get_dist(user,target))
 			var/obj/after_image = new /obj/effect/esword_path
 			if(i == 0)
 				after_image.loc = user.loc
 			else
 				after_image.loc = get_step(user,get_dir(user,target))
+				if(!user.Move(after_image.loc))
+					break
 			after_image.dir = user.dir
 			after_image.overlays += user_image
 			spawn(5)
 				qdel(after_image)
-		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
 		if(user.Adjacent(target) && ismob(target))
 			attack(target,user)
 		next_leapwhen = world.time + LUNGE_DELAY
@@ -122,8 +125,10 @@
 
 /obj/item/weapon/melee/energy/elite_sword/dropped(var/mob/user)
 	. = ..()
+	if(loc == null) //We probably shouldn't be exploding if we're in nullspace.
+		return
 	if(!istype(loc,/mob))
-		if(w_class != ITEM_SIZE_SMALL)
+		if(icon_state == icon_state_deployed)
 			if(failsafe)
 				src.visible_message("<span class='warning'>[src] bursts into a superheated flash of plasma!</span>")
 				flick("blade burnout",src)
@@ -139,7 +144,6 @@
 					qdel(src)
 			else
 				deactivate(user)
-				visible_message("<span class='notice'>\The [src] disappears in a flash of light.</span>")
 
 /obj/item/weapon/melee/energy/elite_sword/attack(var/mob/m,var/mob/user)
 	if(ismob(m))
@@ -180,3 +184,47 @@
 		slot_l_hand_str = "en_dag_l_hand",
 		slot_r_hand_str = "en_dag_r_hand" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+
+//DONER
+
+//DOGLER
+
+//Dagger
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler
+
+	name = "Sya'tenee's Energy Dagger"
+	icon_state = "dogler_dag_handle"
+	icon_state_deployed = "dogler_dag_deploy"
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler/change_misc_variables(var/deactivate = 0)
+	if(deactivate)
+		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
+		item_state_slots = null
+		hitsound = "swing_hit"
+	else
+		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
+		item_state_slots = list(
+		slot_l_hand_str = "dogler_dag_l_hand",
+		slot_r_hand_str = "dogler_dag_r_hand" )
+		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+
+//Axe
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe
+
+	name = "Sya'tenee's Energy Axe"
+	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
+	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'
+	force = 65
+	icon_state = "dogler_axe"
+	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
+	item_state_slots = list(
+	slot_l_hand_str = "dogler_axe_l1",
+	slot_r_hand_str = "dogler_axe_r1")
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe/activate(mob/living/user)
+	return
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
+	return

@@ -7,7 +7,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
-	faction = "Covenant"
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
@@ -17,9 +16,9 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "S"
 	flags = RESTRICTED
-	var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
-	var/list/syllable_names
-
+	//var/icon/cov_alphabet = 'code/modules/halo/covenant/cov_language.dmi'
+	//var/list/syllable_names
+/*
 /datum/language/sangheili/New()
 	. = ..()
 	cov_alphabet = new(cov_alphabet)
@@ -28,7 +27,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	syllable_names = icon_states(cov_alphabet)
 	for(var/symbol_name in syllable_names)
 		syllables.Add("<IMG CLASS=icon SRC=\ref[cov_alphabet] ICONSTATE='[symbol_name]'>")
-
+*/
 /obj/item/clothing/under/covenant/sangheili
 	name = "Sangheili Body-suit"
 	desc = "A sealed, airtight bodysuit. Meant to be worn underneath combat harnesses."
@@ -58,7 +57,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
-	armor = list(melee = 95, bullet = 80, laser = 60, energy = 60, bomb = 60, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
+	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 60, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
 	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
 
@@ -93,7 +92,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 	action_button_name = "Toggle Gauntlet Energy Dagger"
 
-	var/obj/item/weapon/melee/g_dagger/connected_dagger = /obj/item/weapon/melee/g_dagger
+	var/obj/item/weapon/melee/energy/elite_sword/g_dagger/connected_dagger = /obj/item/weapon/melee/energy/elite_sword/g_dagger
 	var/mob/current_user
 
 /obj/item/clothing/gloves/thick/sangheili/New()
@@ -143,17 +142,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/gloves/thick/sangheili/proc/on_dagger_dropped()
 	contents += connected_dagger
 
-/obj/item/weapon/melee/g_dagger/proc/inhand_check()
-	var/mob/living/carbon/human/h = creator_dagger.current_user
-	if(istype(h))
-		if(h.l_hand == src || h.r_hand == src)
-			return 1
-	return 0
-
-/obj/item/weapon/melee/g_dagger/dropped()
-	if(!inhand_check())
-		creator_dagger.on_dagger_dropped()
-
 /obj/item/clothing/gloves/thick/sangheili/ui_action_click()
 	if(!connected_dagger.inhand_check())
 		equip_dagger()
@@ -165,7 +153,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 //Physical dagger object define - this is essentially the dagger but without activate states - can only be 'on'. Had to do it this way due to the inherits from /energy and /elite_sword causing issues//
 
-/obj/item/weapon/melee/g_dagger
+/obj/item/weapon/melee/energy/elite_sword/g_dagger
 	name = "Internal Energy Dagger"
 	desc = "A wrist-mounted Energy Dagger that extends from sangheili combat gauntlets"
 
@@ -177,7 +165,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	edge = 1
 	sharp = 1
 	var/obj/item/clothing/gloves/thick/sangheili/creator_dagger
-	var/next_leapwhen
 	armor_penetration = 50
 	canremove = 0
 
@@ -186,67 +173,27 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	slot_l_hand_str = "en_dag_l_hand",
 	slot_r_hand_str = "en_dag_r_hand" )
 	hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
-/obj/item/weapon/melee/g_dagger/New(var/obj/created_by)
+
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/New(var/obj/created_by)
 	.=..()
 	creator_dagger = created_by
+	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 
-/obj/item/weapon/melee/g_dagger/attack(var/mob/m,var/mob/user)
-	if(ismob(m))
-		damtype = BURN
-	return ..()
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/proc/inhand_check()
+	var/mob/living/carbon/human/h = creator_dagger.current_user
+	if(istype(h))
+		if(h.l_hand == src || h.r_hand == src)
+			return 1
+	return 0
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()
+	if(!inhand_check())
+		creator_dagger.on_dagger_dropped()
 
-//The lunge code straight from the energy sword, switched to work here.
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/activate(mob/living/user)
+	return
 
-#define ESWORD_LEAP_DIST 2
-#define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili)
-#define LUNGE_DELAY 5 SECONDS
-
-/obj/item/weapon/melee/g_dagger/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	if(isnull(mob) || !istype(mob))
-		return 0
-	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 5
-	return ESWORD_LEAP_DIST
-
-/obj/item/weapon/melee/g_dagger/afterattack(var/atom/target,var/mob/user)
-	if(world.time < next_leapwhen)
-		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
-		return
-	if(!istype(target,/mob))
-		if(istype(target,/turf))
-			var/turf/targ_turf = target
-			var/list/turf_mobs = list()
-			for(var/mob/m in targ_turf.contents)
-				turf_mobs += m
-			if(turf_mobs.len > 0)
-				target = pick(turf_mobs)
-			else
-				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-				return
-		else
-			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-			return
-	if(!(target in view(7,user.loc)))
-		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
-		return
-	if(get_dist(user,target) <= get_species_leap_dist(user))
-		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
-		var/image/user_image = image(user)
-		user_image.dir = user.dir
-		for(var/i = 0 to 1)
-			var/obj/after_image = new /obj/effect/esword_path
-			if(i == 0)
-				after_image.loc = user.loc
-			else
-				after_image.loc = get_step(user,get_dir(user,target))
-			after_image.dir = user.dir
-			after_image.overlays += user_image
-			spawn(5)
-				qdel(after_image)
-		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
-		if(user.Adjacent(target) && ismob(target))
-			attack(target,user)
-		next_leapwhen = world.time + LUNGE_DELAY
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/deactivate(mob/living/user)
+	return
 
 //Sangheili Armour Subtype Defines//
 
@@ -349,6 +296,31 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "zealot_gloves_obj"
 	item_state = "zealot_gloves"
+/////
+/obj/item/clothing/head/helmet/sangheili/shipmaster
+	name = "Sangheili Helmet (Shipmaster)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "zealot_helm_obj"
+	item_state = "zealot_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/shipmaster
+	name = "Sangheili Combat Harness (Shipmaster)"
+	icon_state = "zealot_chest_obj"
+	item_state = "zealot_chest"
+	totalshields = 200
+
+/obj/item/clothing/shoes/sangheili/shipmaster
+	name = "Sanghelli Leg Armour (Shipmaster)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "zealot_legs_obj"
+	item_state = "zealot_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/shipmaster
+	name = "Sanghelli Combat Gauntlets (Shipmaster)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "zealot_gloves_obj"
+	item_state = "zealot_gloves"
 
 /obj/item/clothing/head/helmet/sangheili/specops
 	name = "Sangheili Helmet (Spec-Ops)"
@@ -422,6 +394,91 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "ranger_gloves_obj"
 	item_state = "ranger_gloves"
+//DONATOR GEAR
+
+//PANTASTHEDARK
+
+/obj/item/clothing/head/helmet/sangheili/pantas
+	name = "Sangheili Helmet (Berzerker)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "pantas_helm_obj"
+	item_state = "pantas_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/pantas
+	name = "Sangheili Combat Harness (Berzerker)"
+	icon_state = "pantas_chest_obj"
+	item_state = "pantas_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/pantas
+	name = "Sanghelli Leg Armour (Berzerker)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas_legs_obj"
+	item_state = "pantas_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/pantas
+	name = "Sanghelli Combat Gauntlets (Berzerker)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas_gloves_obj"
+	item_state = "pantas_gloves"
+
+
+//PANTASTHEDARK2
+
+/obj/item/clothing/head/helmet/sangheili/pantas2
+	name = "Sangheili Helmet (Scribe-Minor)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "pantas2_helm_obj"
+	item_state = "pantas2_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/pantas2
+	name = "Sangheili Combat Harness (Scribe-Minor)"
+	icon_state = "pantas2_chest_obj"
+	item_state = "pantas2_chest"
+	totalshields = 100
+
+/obj/item/clothing/shoes/sangheili/pantas2
+	name = "Sanghelli Leg Armour (Scribe-Minor)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas2_legs_obj"
+	item_state = "pantas2_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/pantas2
+	name = "Sanghelli Combat Gauntlets (Scribe-Minor)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "pantas2_gloves_obj"
+	item_state = "pantas2_gloves"
+
+//DOGLER
+
+/obj/item/clothing/head/helmet/sangheili/dogler
+	name = "Sya'tenee's Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "dogler_helm_obj"
+	item_state = "dogler_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/dogler
+	name = "Sya'tenee's Sangheili Combat Harness"
+	icon_state = "dogler_chest_obj"
+	item_state = "dogler_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/dogler
+	name = "Sya'tenee's Sanghelli Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "dogler_legs_obj"
+	item_state = "dogler_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/dogler
+	name = "Sya'tenee's Sanghelli Combat Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "dogler_gloves_obj"
+	item_state = "dogler_gloves"
+
+//END DONATOR GEAR
 
 //Organ Defines + misc//
 

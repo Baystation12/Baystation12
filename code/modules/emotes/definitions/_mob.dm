@@ -87,6 +87,7 @@
 		/decl/emote/audible/groan,
 		/decl/emote/audible/moan,
 		/decl/emote/audible/grunt,
+		/decl/emote/audible/painscream,
 		/decl/emote/human,
 		/decl/emote/human/deathgasp,
 		/decl/emote/audible/giggle,

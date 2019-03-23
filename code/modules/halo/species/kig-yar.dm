@@ -23,6 +23,7 @@
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(0,0)
 	total_health = 150
+	default_faction = "Covenant"
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -37,6 +38,13 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/hollow_bones),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
+
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_5.ogg')
 
 /datum/species/kig_yar/create_organs(var/mob/living/carbon/human/H)
 	. = ..()
@@ -69,6 +77,8 @@
 		because they have an expanded voice chamber in their throat. Skirmishers serve as Covenant shock troopers \
 		and close-range combatants, attacking in packs and using flanking tactics. Kig'Yar feud with Unggoy for \
 		status as the lowest ranked members of the Covenant."
+	flesh_color = "#FF9463"
+	blood_color = "#4A4A64" //Same blood colour as Elites.
 	default_language = "Sangheili"
 	language = "Sangheili"
 	secondary_langs = list("Tvoai")
@@ -76,6 +86,7 @@
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
+	default_faction = "Covenant"
 
 	pain_mod = 0.9
 	brute_mod = 1.1
@@ -99,6 +110,13 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
+
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/kiggyscream_5.ogg')
 
 /datum/species/kig_yar_skirmisher/get_random_name(var/gender)
 	return pick(GLOB.first_names_kig_yar)

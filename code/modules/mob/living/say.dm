@@ -30,7 +30,7 @@ var/list/department_radio_keys = list(
 	  ":G" = "GCPD",		".G" = "GCPD",
 	  ":T" = "TACCOM",		".T" = "TACCOM",
 	  ":B" = "INNIECOM",	".B" = "INNIECOM",
-	  ":C" = "BattleNet",	".B" = "BattleNet",
+	  ":C" = "BattleNet",	".C" = "BattleNet",
 	  ":D" = "BoulderNet",	".D" = "BoulderNet",
 	  ":U" = "RamNet",		".U" = "RamNet",
 	  ":M" = "MEDCOM",		".M" = "MEDCOM",

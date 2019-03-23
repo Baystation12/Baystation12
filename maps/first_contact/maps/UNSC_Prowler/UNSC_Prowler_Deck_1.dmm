@@ -51,7 +51,7 @@
 "aY" = (/obj/machinery/light{dir = 1},/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Crewmess)
 "aZ" = (/obj/structure/bed/chair,/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled,/area/corvette/unscfox/deck1/Crewmess)
 "ba" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/storage)
-"bb" = (/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/storage)
+"bb" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/repair_bench,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/storage)
 "bc" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/largecrate/animal/cat/jade,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/storage)
 "bd" = (/obj/structure/closet/crate/medical{name = "Medical Kits Crate"},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/storage)
 "be" = (/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/light/colored/orange{tag = "icon-orange1 (NORTH)"; icon_state = "orange1"; dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/hallway)
@@ -309,8 +309,8 @@
 "fW" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
 "fX" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
 "fY" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscfox/deck1/portengine)
-"fZ" = (/obj/effect/landmark/map_data{height = 2; name = "UNSC Aegis Map Data"},/turf/space,/area/space)
-"ga" = (/obj/effect/overmap/ship/unsc_aegis,/turf/space,/area/space)
+"sU" = (/obj/effect/overmap/ship/unsc_aegis{name = "UNSC Aegis"},/turf/space,/area/space)
+"IC" = (/obj/effect/landmark/map_data{name = "UNSC Aegis"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -371,6 +371,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-fZaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ICaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

@@ -490,15 +490,63 @@
 
 /obj/item/clothing/head/helmet/odst/donator/wehraboo
 	name = "SPI Helmet Mk I"
-
-	item_state = "wehraboo-helm_worn"
-	icon_state = "wehraboo-helm_obj"
+	item_state = "wehraboo-helmet_worn"
+	icon_state = "wehraboo-helmet_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/wehraboo
 	name = "SPI Armour Mk I"
+	item_state = "wehraboo-armor_worn"
+	icon_state = "wehraboo-armor_obj"
 
-	icon_state = "wehraboo-suit_worn"
+/obj/item/clothing/head/helmet/odst/donator/kozi
+	name = "Kozi's Hassar Helmet"
+	item_state = "kozi-helmet_worn"
+	icon_state = "kozi-helmet_obj"
 
+/obj/item/clothing/suit/armor/special/odst/donator/kozi
+	name = "Kozi's Hassar Armor"
+	icon_state = "kozi-armor_obj"
+	item_state = "kozi-armor_worn"
+//Kozi's sword
+
+/obj/item/weapon/material/machete/kozi
+	name = "Hassar Sabre"
+	icon_state = "kozi-sabre_obj"
+	item_state = "kozi-sabre"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
+obj/item/clothing/head/helmet/odst/donator/gulag
+	name = "Murmillo Helmet"
+	item_state = "gulag-helmet_worn"
+	icon_state = "gulag-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/gulag
+	name = "Murmillo Armour"
+	icon_state = "gulag-armor_obj"
+	item_state = "gulag-armor_worn"
+
+obj/item/clothing/head/helmet/odst/donator/maxattackeralt
+	name = "ODST 'Grasshopper' Helmet"
+	item_state = "maxattackeralt-helmet_worn"
+	icon_state = "maxattackeralt-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/maxattackeralt
+	name = "ODST 'Thorn' Armour"
+	icon_state = "maxattackeralt-armor_obj"
+	item_state = "maxattackeralt-armor_worn"
+
+obj/item/clothing/head/helmet/odst/donator/pinstripe
+	name = "Pinstripe's ODST Helmet"
+	item_state = "pinstripe-helmet_worn"
+	icon_state = "pinstripe-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/pinstripe
+	name = "Pinstripe's ODST Armour"
+	icon_state = "pinstripe-armor_obj"
+	item_state = "pinstripe-armor_worn"
 //END DONATOR GEAR
 
 /obj/effect/random_ODST_set/New()
@@ -586,6 +634,13 @@
 	name = "Customized's Backpack"
 	item_state = "Odst customized Backpack"
 	icon_state = "Odst customized Backpack"
+
+/obj/item/weapon/storage/backpack/odst/kozi
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Kozi's Hassar Backpack"
+	item_state = "kozi-backpack_worn"
+	icon_state = "kozi-backpack_obj"
 
 //END DONATOR GEAR
 #undef ODST_OVERRIDE

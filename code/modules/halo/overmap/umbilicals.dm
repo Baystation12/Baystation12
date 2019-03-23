@@ -25,6 +25,14 @@
 		broke = FALSE
 	GLOB.processing_objects += src
 
+/obj/docking_umbilical/ex_act()
+	if(current_connected)
+		visible_message("<span class = 'notice'>The explosion disconnects the umbilical!</span>")
+		current_connected.visual_umbi_change(1)
+		current_connected.current_connected = null
+		visual_umbi_change(1)
+		current_connected = null
+
 /obj/docking_umbilical/proc/ship_setup()
 	our_ship = map_sectors["[z]"]
 	if(!isnull(our_ship))

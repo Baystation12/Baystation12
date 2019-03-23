@@ -19,6 +19,7 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	item_icon_offsets = list(0,0)
+	default_faction = "Covenant"
 
 	breath_type = "methane"
 	exhale_type = "carbon_dioxide"
@@ -28,6 +29,14 @@
 	equipment_slowdown_multiplier = 0.75
 	ignore_equipment_threshold = 2
 	slowdown = 1
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_5.ogg',
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_6.ogg',
+	'code/modules/halo/sounds/species_pain_screams/gruntscream_7.ogg')
 
 /datum/species/unggoy/create_organs(var/mob/living/carbon/human/H)
 	. = ..()

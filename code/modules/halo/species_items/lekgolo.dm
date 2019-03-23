@@ -64,6 +64,8 @@
 	for(var/action_type in typesof(/obj/item/hunter_action) - /obj/item/hunter_action)
 		new action_type(src)
 
+	faction = "Covenant"
+
 /mob/living/simple_animal/mgalekgolo/proc/random_name()
  	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
  	var/list/vowels = list("a","e","i","o","u")
@@ -79,6 +81,8 @@
 	else if(hud_setup)
 		hud_setup = 0
 
+	. = ..() //Placed here to ensure that it can still check the health before regeneration happens.
+
 	//heal a little
 	if(stat != DEAD && health < maxHealth)
 		health += regeneration
@@ -86,7 +90,6 @@
 	//regain charge
 	if(active_weapon.charge_amount <= active_weapon.charge_max)
 		active_weapon.charge_amount += active_weapon.charge_recharge_amount
-	return ..()
 
 /mob/living/simple_animal/mgalekgolo/verb/set_name()
 	set name = "Set Name"

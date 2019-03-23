@@ -49,11 +49,12 @@
 	flags = AFFECTS_DEAD
 
 /datum/reagent/biofoam/proc/check_and_stop_bleeding(var/obj/item/organ/external/o)
-	if(o.status & ORGAN_BLEEDING)
-		if(istype(o))
-			o.clamp()
-			o.update_damages()
-			to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
+	if(o.status & ORGAN_BLEEDING || o.status & ORGAN_ARTERY_CUT && istype(o))
+		o.status &= ~ORGAN_ARTERY_CUT
+		o.status &= ~ORGAN_BLEEDING
+		o.clamp()
+		o.update_damages()
+		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
 
 /datum/reagent/biofoam/proc/mend_external(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/o in H.organs)
@@ -94,6 +95,7 @@
 				if(!prob(BIOFOAM_PROB_REMOVE_EMBEDDED))
 					continue
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
+				M.contents -= embedded
 				embedded.loc = M.loc //And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
 
@@ -140,8 +142,8 @@
 	if(H.internal_organs_by_name[BP_LIVER])
 		var/obj/item/organ/user_liver = H.internal_organs_by_name[BP_LIVER]
 		user_liver.take_damage(1,1)
-	H.adjustToxLoss(2)
-	if(prob(5))
+	H.adjustToxLoss(1)
+	if(prob(10))
 		H.emote(pick("twitch", "blink_r", "shiver"))
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)
 	H.add_chemical_effect(CE_PULSE, 2)

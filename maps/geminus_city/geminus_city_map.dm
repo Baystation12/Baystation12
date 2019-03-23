@@ -2,10 +2,11 @@
 /datum/map/geminus_city
 	name = "Geminus"
 	full_name = "Geminus City"
+
 	path = "geminus_city"
-	station_levels = list(1,2,3)
+	station_levels = list()
 	admin_levels = list()
-	accessible_z_levels = list(1,2,3)
+	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
 	id_hud_icons = 'maps/geminus_city/geminus_hud_icons.dmi'
@@ -18,3 +19,8 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Uncharted System"
+	overmap_size= 100
+
+	use_overmap = 1
+	allowed_spawns = list(\
+		DEFAULT_SPAWNPOINT_ID)

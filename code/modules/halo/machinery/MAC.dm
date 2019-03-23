@@ -1,8 +1,7 @@
-#define CAPACITOR_DAMAGE_AMOUNT 0.8
+#define CAPACITOR_DAMAGE_AMOUNT 27 //3 Direct MAC shots to down a fully charged shield from a 22-capacitor MAC.
 #define CAPACITOR_MAX_STORED_CHARGE 50000
-#define CAPACITOR_RECHARGE_TIME 10 //This is in seconds.
-#define ACCELERATOR_OVERLAY_ICON_STATE "mac_accelerator_effect"
-#define MAC_AMMO_LIMIT 3
+#define BASE_AMMO_LIMIT 3
+#define LOAD_AMMO_DELAY 70
 
 /obj/machinery/mac_cannon
 	name = "MAC Component"
@@ -13,12 +12,19 @@
 	anchored = 1
 
 /obj/machinery/mac_cannon/ammo_loader
-	name = "MAC ammunition loading console"
-	desc = "A console used for the management of loading MAC rounds."
+	var/weapon_name = "MAC"
+	name = "ammunition loading console"
+	desc = "A console used for the management of loading ammunition"
 	icon_state = "mac_ammo_loader"
+	var/load_sound = 'code/modules/halo/machinery/mac_gun_load.ogg'
+	var/load_delay = 7 SECONDS //This should ideally be the same length as the loading sound clip.
+	var/ammo_cap = BASE_AMMO_LIMIT
 	var/list/linked_consoles = list()
 	var/list/contained_rounds = list()
 	var/loading = 0
+
+/obj/machinery/mac_cannon/ammo_loader/New()
+	name = "[weapon_name] [name]"
 
 /obj/machinery/mac_cannon/ammo_loader/proc/update_ammo()
 	for(var/obj/machinery/overmap_weapon_console/console in linked_consoles)
@@ -29,18 +35,18 @@
 
 /obj/machinery/mac_cannon/ammo_loader/examine(var/mob/user)
 	. = ..()
-	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[MAC_AMMO_LIMIT] rounds loaded.</span>")
+	to_chat(user,"<span class = 'notice'>[contained_rounds.len]/[ammo_cap] rounds loaded.</span>")
 
 /obj/machinery/mac_cannon/ammo_loader/attack_hand(var/mob/user)
 	if(loading)
 		return
-	if(contained_rounds.len >= MAC_AMMO_LIMIT)
-		to_chat(user,"<span class = 'notice'>The MAC cannot load any more rounds.</span>")
+	if(contained_rounds.len >= ammo_cap)
+		to_chat(user,"<span class = 'notice'>The [weapon_name] cannot load any more rounds.</span>")
 		return
-	visible_message("[user] activates the MAC's loading mechanism.")
+	visible_message("[user] activates the [weapon_name]'s loading mechanism.")
 	loading = 1
-	playsound(loc, 'code/modules/halo/machinery/mac_gun_load.ogg', 100,1, 255)
-	spawn(70) //Loading sound take 70 seconds to complete
+	playsound(loc,load_sound, 100,1, 255)
+	spawn(load_delay) //Loading sound take 7 seconds to complete
 		var/obj/new_round = new /obj/overmap_weapon_ammo/mac
 		contents += new_round
 		contained_rounds += new_round
@@ -58,6 +64,7 @@
 	icon_state = "mac_capacitor"
 
 	var/list/capacitor = list(0,CAPACITOR_MAX_STORED_CHARGE) //Format: (Current, MAX)
+	var/charge_time = 10 //This is in seconds.
 	//Each capacitor contributes a certain amount of damage, modeled after the frigate's MAC.
 	var/recharging = 0
 
@@ -82,7 +89,7 @@
 
 /obj/machinery/mac_cannon/capacitor/process()
 	if(recharging && (world.time > recharging))
-		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/CAPACITOR_RECHARGE_TIME)
+		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/charge_time)
 		var/new_stored = capacitor[1] + drained
 		if(new_stored > capacitor[2])
 			capacitor[1] = capacitor[2]
@@ -100,7 +107,8 @@
 	icon_state = "mac_fire_control"
 	fire_sound = 'code/modules/halo/machinery/mac_gun_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/mac
-	requires_ammo = 1 //RESET THIS TO 1 WHEN TESTING DONE
+	requires_ammo = 1
+	var/accelerator_overlay_icon_state = "mac_accelerator_effect"
 
 /obj/machinery/overmap_weapon_console/mac/proc/clear_linked_devices()
 	for(var/obj/machinery/mac_cannon/ammo_loader/loader in linked_devices)
@@ -141,7 +149,7 @@
 
 /obj/machinery/overmap_weapon_console/mac/proc/acceleration_rail_effects()
 	for(var/obj/machinery/mac_cannon/accelerator/a in linked_devices)
-		a.overlays += image(icon,icon_state = ACCELERATOR_OVERLAY_ICON_STATE)
+		a.overlays += image(icon,icon_state = accelerator_overlay_icon_state)
 		spawn(5)
 			a.overlays.Cut()
 
@@ -167,11 +175,13 @@
 			play_fire_sound(target)
 
 /obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
-	if(isnull(src.fire_sound))
+	if(isnull(src.fire_sound) || istype(overmap_object))
+		return
+	if(overmap_object.map_z.len ==0)
 		return
 
 	for(var/z_level in overmap_object.map_z)
-		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 100,1, 255)
+		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 100,1, 255,,1)
 
 /obj/machinery/overmap_weapon_console/mac/get_linked_device_damage_mod()
 	var/damage_mod = 0
@@ -250,6 +260,7 @@
 	name = "MAC Slug"
 	step_delay = 0.5 SECONDS
 	ship_damage_projectile = /obj/item/projectile/mac_round
+	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/mac_cannon_impact.wav'
 
 //MAC SHIPHIT PROJECTILE//
 /obj/item/projectile/mac_round
@@ -258,7 +269,16 @@
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
-	explosion(impacted,rand(2,3),rand(4,6),rand(6,8),rand(10,20))
+	var/increase_from_damage = (damage/250)
+	if(increase_from_damage > 2)
+		increase_from_damage = (increase_from_damage-2)/4
+	else
+		increase_from_damage = 0
+	explosion(impacted,3 + increase_from_damage,5 + increase_from_damage,7 + increase_from_damage,10 + increase_from_damage)
 
-#undef MAC_AMMO_LIMIT
+#undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE
+#undef LOAD_AMMO_DELAY
+#undef CAPACITOR_DAMAGE_AMOUNT
+#undef CAPACITOR_MAX_STORED_CHARGE
+#undef CAPACITOR_RECHARGE_TIME

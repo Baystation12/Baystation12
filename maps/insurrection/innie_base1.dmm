@@ -148,16 +148,18 @@
 "cR" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/vault)
 "cS" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
 "cT" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/west_dorms)
-"cU" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
+"cU" = (/obj/effect/landmark/map_data{name = "New New Antarctica"},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
 "cV" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
 "cW" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
 "cX" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
+"cY" = (/obj/item/device/mobilecomms/commsbackpack/innie/permanant,/turf/space,/area/space)
+"cZ" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
-aaadadadaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
+aaadadcYaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
 aaadaeadaaabababababababababababafafafafafagafafahahahacacacacacacacacacacacacacacacacacacacacacacac
-aaadadadaaabababababababababababafaiajajakalakajamamahacacacacacacacacacacacacacacacacacacacacacacac
+aaadadcZaaabababababababababababafaiajajakalakajamamahacacacacacacacacacacacacacacacacacacacacacacac
 aaaaaaaaaaabababababababafafagafafajajajajalajajamamahahahahahahacacacacacanananananacacacacacacacac
 ababababababababababababafaoapaqafajajalalalalalamamaharasatauahananananananavawaxanacacacacacacacac
 ababababababababababababafaoayaoafalalalajazajalaAaAahaBaCaDaDaEanawawavavawaFaGaHanacacacacacacacac

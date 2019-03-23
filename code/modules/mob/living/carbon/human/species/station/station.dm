@@ -18,6 +18,28 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_1.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_2.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_3.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_4.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_5.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_6.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_male_7.wav')
+
+	scream_sounds_female = list(\
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_1.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_2.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_3.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_4.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_5.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_6.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_7.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_8.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_9.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_10.wav',
+	'code/modules/halo/sounds/species_pain_screams/humscream_fem_11.wav')
+
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
