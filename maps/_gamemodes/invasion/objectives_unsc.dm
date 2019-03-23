@@ -3,7 +3,7 @@
 
 /datum/objective/protect/protect_unsc_leader
 	short_text = "Protect the UNSC commander"
-	explanation_text = "Without a strong chain of command, everything is lost."
+	explanation_text = "Without a strong chain of command, everything is lost. Protect the UNSC executive officer."
 	lose_points = 50
 	find_specific_target = 1
 
@@ -15,17 +15,20 @@
 			else if(check_mind.assigned_role == "UNSC Bertels Commanding Officer")
 				target = check_mind
 			if(target)
-				return 1
+				. = 1
 	else
 		find_target_by_role("UNSC Heavens Above Commanding Officer")
 		if(!target)
 			find_target_by_role("UNSC Bertels Commanding Officer")
 		if(target)
-			return 1
+			. = 1
+
+	if(explanation_text == "Free Objective")
+		explanation_text  = "Protect your executive officer."
 
 /datum/objective/protect_unsc_ship
 	short_text = "Protect the UNSC warship"
-	explanation_text = "Although it might not cost as much as a MJOLNIR suit, even the Spartans need a way to leave atmosphere."
+	explanation_text = "Although cheaper than a MJOLNIR suit, even Spartans need a way to leave atmosphere. Protect the UNSC ship."
 	lose_points = 100
 
 /datum/objective/protect_unsc_ship/check_completion()
@@ -38,7 +41,7 @@
 //see objectives_cov.dm
 /datum/objective/steal_nav_data/cole_protocol
 	short_text = "Do not allow Covenant capture of human nav data"
-	explanation_text = "We're losing more colonies every year. Soon, Earth will be all we have left. Do not allow the Covenant to discover any more colonies."
+	explanation_text = "We lose more colonies every year. Soon Earth will be all we have left. Do not allow navchips to be captured by the Covenant."
 	points_per_nav = 60
 
 /datum/objective/steal_nav_data/cole_protocol/check_completion()
@@ -72,7 +75,7 @@
 
 /datum/objective/capture_innies
 	short_text = "Capture Insurrectionists for ONI interrogation"
-	explanation_text = "Projections indicate the  Insurrection is worsening. Left unchecked, the UEG will be torn apart in a few decades."
+	explanation_text = "The Insurrection worsens every year. Put them on ice in ONI cryopods for later black site interrogation."
 	var/points_per_capture = 25
 	var/points_per_kill = 10
 	var/list/minds_captured = list()
@@ -88,7 +91,7 @@
 
 /datum/objective/retrieve_artifact/unsc
 	short_text = "Secure the alien artifact"
-	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured to prevent it falling into the wrong hands."
+	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured by the UNSC to prevent falling into the wrong hands."
 
 /datum/objective/retrieve_artifact/unsc/check_completion()
 	var/datum/game_mode/invasion/game_mode = ticker.mode
@@ -103,7 +106,7 @@
 
 /datum/objective/protect_colony
 	short_text = "Protect the UEG colony"
-	explanation_text = "Earth. Soon it's all we'll have left. Stop them here so we don't have to fight them there."
+	explanation_text = "There are a million innocent civilians on that colony. Prevent its destruction by any means necessary."
 	lose_points = 100
 
 /datum/objective/protect_colony/check_completion()
@@ -115,7 +118,7 @@
 
 /datum/objective/destroy_cov_ship
 	short_text = "Destroy the Covenant warship"
-	explanation_text = "We cannot allow this warship to escape to threaten Earth. Take it out by any means necessary."
+	explanation_text = "We cannot allow the Covenant warship to escape to threaten Earth. Take it out before it retreats from the system."
 	win_points = 100
 
 /datum/objective/destroy_cov_ship/check_completion()
