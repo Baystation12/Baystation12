@@ -75,7 +75,7 @@
 
 /datum/objective/capture_innies
 	short_text = "Capture Insurrectionists for ONI interrogation"
-	explanation_text = "The Insurrection worsens every year. Put them on ice in ONI cryopoads for later black site interrogation."
+	explanation_text = "The Insurrection worsens every year. Put them on ice in ONI cryopods for later black site interrogation."
 	var/points_per_capture = 25
 	var/points_per_kill = 10
 	var/list/minds_captured = list()
@@ -106,7 +106,7 @@
 
 /datum/objective/protect_colony
 	short_text = "Protect the UEG colony"
-	explanation_text = "There are a million innocent civilians on that colony. Prevent it's destruction by any means necessary."
+	explanation_text = "There are a million innocent civilians on that colony. Prevent its destruction by any means necessary."
 	lose_points = 100
 
 /datum/objective/protect_colony/check_completion()
