@@ -28,8 +28,6 @@
 
 	#include "../first_contact/maps/Covenant Corvette/includes.dm"
 
-	#include "../first_contact/maps/kig_yar_pirates/includes.dm"
-
 	#include "maps/innie_crew_jobs.dm"
 	#include "maps/innie_crew_spawns.dm"
 	#include "maps/odst_crew_jobs.dm"

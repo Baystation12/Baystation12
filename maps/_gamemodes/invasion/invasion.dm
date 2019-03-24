@@ -14,14 +14,17 @@
 	var/covenant_ship_area_parent
 	var/list/covenant_ship_areas = list()
 	var/list/unsc_base_areas = list()
+
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES
+	var/safe_expire_warning = 0
 
 	var/obj/effect/overmap/cov_ship
 	var/obj/effect/overmap/unsc_ship
 	var/obj/effect/overmap/human_colony
 
 	var/list/objectives_specific_target = list()
+	var/list/round_end_reasons = list()
 
 	var/covenant_ship_slipspaced = 0
 
@@ -119,36 +122,67 @@
 		if(objective.find_specific_target)
 			objectives_specific_target.Add(objective)
 
-/datum/game_mode/invasion/post_setup()
+/datum/game_mode/invasion/post_setup(var/announce = 0)
 	. = ..()
 	faction_safe_time = world.time + faction_safe_duration
 
 /datum/game_mode/invasion/check_finished()
 
-	//if 2 of these are true, end the game:
-	var/end_conditions = 0
+	//if 2 or more end conditions are met, end the game
+	round_end_reasons = list()
 
 	//the cov ship has been destroyed or gone to slipspace
-	if(covenant_ship_slipspaced || !cov_ship)
-		end_conditions += 1
+	if(!cov_ship)
+		if(covenant_ship_slipspaced)
+			round_end_reasons += "the Covenant ship has gone to slipspace and left the system"
+			var/datum/faction/covenant/C = locate() in factions
+			C.ignore_players_dead = 1
+		else
+			round_end_reasons += "the Covenant ship has been destroyed"
 
 	//the UNSC ship has been destroyed
 	if(!unsc_ship)
-		end_conditions += 1
+		round_end_reasons += "the UNSC ship has been destroyed"
 
 	//the colony has been destroyed (nuked/glassed)
-	if(human_colony && (human_colony.nuked || human_colony.glassed))
-		end_conditions += 1
+	if(human_colony)
+		if(human_colony.nuked)
+			round_end_reasons += "the human colony has been nuked"
+		if(human_colony.glassed)
+			round_end_reasons += "the human colony has been glassed"
 
-	//all innie players have been killed/captured
-	if(world.time > faction_safe_time)
+	//if all faction players have been killed/captured... only check 1 faction
+	var/factions_destroyed = 0
+	if (faction_safe_time - world.time < 2 MINUTES)
+		var/safe_expire_warning_check = 0
 		for(var/datum/faction/F in factions)
-			if(!F.players_alive())
-				end_conditions += 1
+			if(!F.players_alive() && !F.ignore_players_dead)
+				if(world.time >= faction_safe_time)
+					round_end_reasons += "the [F.name] presence in the system has been destroyed"
+					factions_destroyed++
 
-	return end_conditions >= 2
+				else if(!safe_expire_warning)
+					safe_expire_warning_check = 1
+					message_admins("GAMEMODE WARNING: Faction safe time expiring in 2 minutes and the [F.name] have no living players.")
+		if(safe_expire_warning_check)
+			safe_expire_warning = 1
+
+	if(factions_destroyed > 1)
+		factions_destroyed -= 1
+
+	return (round_end_reasons.len - factions_destroyed) >= 2
 
 /datum/game_mode/invasion/declare_completion()
+
+	var/announce_text = ""
+
+	//english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
+	announce_text += "<h4>The round ended because "
+	announce_text += english_list(round_end_reasons)
+	announce_text += "</h4>"
+
+	to_world(announce_text)
+
 	//work out survivors
 	var/clients = 0
 	var/surviving_humans = 0

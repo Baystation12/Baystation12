@@ -40,6 +40,7 @@
 "N" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "O" = (/obj/structure/table/rack,/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "P" = (/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"Q" = (/obj/effect/hull_segment,/turf/simulated/shuttle/wall,/area/faction_base/innie_shuttle)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -53,8 +54,8 @@ aaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaabbbbbbbbbbaaaa
 aaaaaaaaaaaaaabbbbaaabbbccccccbaabbbbbbbbbbbaaaa
 aaaaaaaaaaaaabbddeaabbccccccccbaabbfdddddfdeaaaa
 aaaaaaaaaaaaabfddeaabcccccccccbaabbddddddddeaaaa
-aaaaaaaaabbbbbdbbbbbbbbbbbbbbbbbbbbddbbbbbbbaaaa
-aaaaaabbbbbbbbgbbbbbbhhhhihhhhbbbbbgbbbaaaaaaaaa
+aaaaaaaaabbbbbdbbbbbbbbbbbbbbbbQbbbddbbbbbbbaaaa
+aaaaaabbbbbbQbgbbbbbbhhhhihhhhbbbbbgbbbaaaaaaaaa
 aaaaabbbbbbjklmnoooonooooooooonoooopkkbbbaaaaaaa
 aaaqqbbrstbjkkuvwwwwwwwwwwwwwwwwwwxykklkbbaaaaaa
 aaqqzAlkkBbCkkuwwwwwwwwwwwwwwwwwwwwykkkkcbaaaaaa
@@ -62,7 +63,7 @@ aaqqDkkkkkEkkkuwwwwwwwwwwwwwwwwwwwwykkkkcbaaaaaa
 aaqqFAGkkHbCkkuwwwwwwwwwwwwwwwwwwwwykkkkIbaaaaaa
 aaaqqbbkJkbjkkuxwwwwwwwwwwwwwwwwwwvykkGkbbaaaaaa
 aaaaabbbbbbjkGKLMMMMLMMMMMMMMMLMMMMNkkbbbaaaaaaa
-aaaaaabbbbbbbbgbbbbbbhhhhOhhhhbbbbbgbbbaaaaaaaaa
+aaaaaabbbbbbQbgbbbbbbhhhhOhhhhbQbbbgbbbaaaaaaaaa
 aaaaaaaaabbbbbdbbbbbbbbbbbbbbbbbbbbddbbbbbbbaaaa
 aaaaaaaaaaaaabPddeaabcccccccccbaabbddddddddeaaaa
 aaaaaaaaaaaaabbddeaabbccccccccbaabbPdddddPdeaaaa
