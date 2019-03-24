@@ -58,34 +58,33 @@
 	return ..()
 
 // Handles user's GUI input
-/obj/item/modular_computer/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/item/modular_computer/OnTopic(href, href_list)
 	if( href_list["PC_exit"] )
 		kill_program()
-		return 1
+		return TOPIC_HANDLED
 	if( href_list["PC_enable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
-		. = 1
+		. = TOPIC_HANDLED
 	if( href_list["PC_disable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
-		. = 1
+		. = TOPIC_HANDLED
 	if( href_list["PC_enable_update"] )
 		receives_updates = TRUE
-		. = 1
+		. = TOPIC_HANDLED
 	if( href_list["PC_disable_update"] )
 		receives_updates = FALSE
-		. = 1
+		. = TOPIC_HANDLED
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
-		return 1
+		return TOPIC_HANDLED
 	if( href_list["PC_minimize"] )
 		var/mob/user = usr
 		minimize_program(user)
+		. = TOPIC_HANDLED
 
 	if( href_list["PC_killprogram"] )
 		var/prog = href_list["PC_killprogram"]
@@ -95,22 +94,24 @@
 			P = hard_drive.find_file_by_name(prog)
 
 		if(!istype(P) || P.program_state == PROGRAM_STATE_KILLED)
-			return
+			return TOPIC_HANDLED
 
 		P.kill_program(1)
 		update_uis()
 		to_chat(user, "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>")
+		return TOPIC_HANDLED
 
 	if( href_list["PC_runprogram"] )
 		return run_program(href_list["PC_runprogram"])
 
 	if( href_list["PC_setautorun"] )
 		if(!hard_drive)
-			return
+			return TOPIC_HANDLED
 		set_autorun(href_list["PC_setautorun"])
+		return TOPIC_HANDLED
 	if( href_list["PC_terminal"] )
 		open_terminal(usr)
-		return 1
+		return TOPIC_HANDLED
 
 	if(.)
 		update_uis()
