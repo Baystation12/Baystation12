@@ -2315,7 +2315,7 @@
 /area/map_template/hydrobase/station/processing)
 "fr" = (
 /obj/structure/catwalk,
-/obj/item/weapon/material/butterfly/switchblade,
+/obj/item/weapon/material/kitchen/utensil/knife/folding/balisong/switchblade,
 /obj/random/coin,
 /obj/random/coin,
 /obj/structure/closet/crate/secure/weapon{

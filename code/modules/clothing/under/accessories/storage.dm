@@ -112,7 +112,6 @@
 		/obj/item/weapon/material/hatchet,
 		/obj/item/weapon/material/kitchen/utensil/knife,
 		/obj/item/weapon/material/knife,
-		/obj/item/weapon/material/butterfly,
 	)
 
 	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)

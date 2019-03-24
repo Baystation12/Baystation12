@@ -83,18 +83,6 @@
 	sharp = 1
 	edge = 1
 
-// Identical to the tactical knife but nowhere near as stabby.
-// Kind of like the toy esword compared to the real thing.
-//Making the sprite clear that this is a small knife
-/obj/item/weapon/material/kitchen/utensil/knife/boot
-	name = "small knife"
-	desc = "A small, easily concealed knife."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "pocketknife_open"
-	item_state = "knife"
-	applies_material_colour = 0
-	unbreakable = 1
-
 /obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You accidentally cut yourself with \the [src].</span>")
