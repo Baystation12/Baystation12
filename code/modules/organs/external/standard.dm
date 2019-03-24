@@ -11,6 +11,7 @@
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
+	cavity_max_w_class = ITEM_SIZE_NORMAL
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -45,6 +46,7 @@
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_LARGE
+	cavity_max_w_class = ITEM_SIZE_SMALL
 	body_part = LOWER_TORSO
 	parent_organ = BP_CHEST
 	amputation_point = "lumbar"

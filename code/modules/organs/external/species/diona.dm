@@ -12,6 +12,7 @@
 	max_damage = 200
 	min_broken_damage = 50
 	w_class = ITEM_SIZE_HUGE
+	cavity_max_w_class = ITEM_SIZE_NORMAL
 	body_part = UPPER_TORSO
 	vital = 1
 	parent_organ = null
@@ -24,6 +25,7 @@
 	max_damage = 100
 	min_broken_damage = 50
 	w_class = ITEM_SIZE_LARGE
+	cavity_max_w_class = ITEM_SIZE_SMALL
 	body_part = LOWER_TORSO
 	parent_organ = BP_CHEST
 
@@ -122,6 +124,7 @@
 	eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
 	apply_eye_colour = FALSE
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
+	cavity_max_w_class = ITEM_SIZE_SMALL
 
 /obj/item/organ/external/head/diona/removed()
 	if(BP_IS_ROBOTIC(src))
