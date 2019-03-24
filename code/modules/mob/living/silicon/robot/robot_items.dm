@@ -531,7 +531,6 @@
 /obj/item/bioreactor/attack_self(var/mob/user)
 	if(contents)
 		var/obj/item/removing = contents[1]
-		removing.dropInto(user.loc)
 		user.put_in_hands(removing)
 		to_chat(user, SPAN_NOTICE("You remove \the [removing] from \the [src]."))
 	else
@@ -542,11 +541,8 @@
 		return
 
 	var/is_fuel = istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown)
-	if(!is_fuel)
-		for(var/fuel_type in fuel_types)
-			if(istype(target, fuel_type))
-				is_fuel = TRUE
-				break
+	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
+
 	if(!is_fuel)
 		to_chat(user, SPAN_WARNING("\The [target] cannot be used as fuel by \the [src]."))
 		return

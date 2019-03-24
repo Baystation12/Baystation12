@@ -13,6 +13,13 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "netshell"
 
+/obj/item/weapon/net_shell/attackby(obj/item/weapon/gun/launcher/net/I, mob/user)
+	if(istype(I) && I.can_load(src, user))
+		I.load(src, user)
+		to_chat(usr, "You load \the [src] into \the [I].")
+	else
+		..()
+
 /obj/item/weapon/gun/launcher/net/examine(mob/user)
 	if(..(user, 2))
 		if(chambered)
@@ -63,22 +70,22 @@
 		return new /obj/item/weapon/energy_net/safari(src)
 
 /obj/item/weapon/gun/launcher/net/borg
-	var/list/shells = list()
+	var/list/shells
 	var/list/max_shells = 3
 
 /obj/item/weapon/gun/launcher/net/borg/can_load(var/obj/item/weapon/net_shell/S, var/mob/user)
-	if(shells.len >= max_shells)
+	if(LAZYLEN(shells) >= 3)
 		to_chat(user, SPAN_WARNING("\The [src] already has the maximum number of shells loaded."))
 		return FALSE
 	return TRUE
 
 /obj/item/weapon/gun/launcher/net/borg/proc/update_chambered_shell()
-	if(!chambered && shells.len)
+	if(!chambered && LAZYLEN(shells))
 		chambered = shells[1]
-		shells -= chambered
+		LAZYREMOVE(shells, chambered)
 
 /obj/item/weapon/gun/launcher/net/borg/finish_loading(var/obj/item/weapon/net_shell/S, var/mob/user)
-	shells |= S
+	LAZYDISTINCTADD(shells, S)
 	update_chambered_shell()
 
 /obj/item/weapon/gun/launcher/net/borg/unload(var/mob/user)
@@ -90,5 +97,5 @@
 	. = ..()
 
 /obj/item/weapon/gun/launcher/net/borg/examine(mob/user)
-	if(..(user, 2))
-		to_chat(user, "It has [shells.len] additional shell\s loaded.")
+	. = ..()
+	to_chat(user, "There are [LAZYLEN(shells)] shell\s loaded.")

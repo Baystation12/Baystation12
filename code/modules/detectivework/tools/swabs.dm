@@ -12,7 +12,7 @@
 	if(proximity)
 		var/obj/item/weapon/forensics/swab/swab = new(user)
 		var/resolved = swab.resolve_attackby(A, user, params)
-		if(!resolved && A && !QDELETED(swab))
+		if(!resolved && A && !QDELETED(A))
 			swab.afterattack(A, user, TRUE, params)
 		if(swab.is_used())
 			swab.dropInto(user.loc)
