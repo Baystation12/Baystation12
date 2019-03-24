@@ -183,36 +183,29 @@
 			generate_goals(assigned_job, TRUE, 1)
 			return TRUE // To avoid 'you are not an admin' spam.
 
-	if(check_rights(R_ADMIN))
+	if(href_list["abandon_goal"])
+		var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
+		if(goal)
+			if(usr == current)
+				to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			else
+				to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			qdel(goal)
+			return TRUE
 
-		if(href_list["abandon_goal"])
-			var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
-			if(goal)
-				if(usr == current)
-					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				else
-					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
-					to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				qdel(goal)
-			. = TRUE
-
-		if(href_list["reroll_goal"])
-			var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
-			if(goal && (goal in goals))
-				qdel(goal)
-				generate_goals(assigned_job, TRUE, 1)
-				goal = goals[LAZYLEN(goals)]
-				if(usr == current)
-					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				else
-					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-					to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-			. = TRUE
-
-		if(.)
-			var/datum/admins/admin = GLOB.admins[usr.key]
-			if(istype(admin)) admin.show_player_panel(current)
-			return
+	if(href_list["reroll_goal"])
+		var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
+		if(goal && (goal in goals))
+			qdel(goal)	
+			generate_goals(assigned_job, TRUE, 1)
+			goal = goals[LAZYLEN(goals)]
+			if(usr == current)
+				to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			else
+				to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			return TRUE
 
 	if(!check_rights(R_ADMIN))	return
 
