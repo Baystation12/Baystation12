@@ -33,7 +33,7 @@ I IS TYPIN'!'
 	forceMove(get_turf(master))
 
 /mob/proc/create_typing_indicator()
-	if(client && !stat && get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_SHOW)
+	if(client && !stat && get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_SHOW && !src.is_cloaked() && isturf(src.loc))
 		if(typing_indicator)
 			qdel(typing_indicator)
 
