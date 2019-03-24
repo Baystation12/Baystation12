@@ -8,6 +8,7 @@
 	invisibility = 0
 	anchored = 1
 	density = 0
+	alpha = 64
 
 	var/segment_strength = 1 //How important is this segment of the hull?
 
