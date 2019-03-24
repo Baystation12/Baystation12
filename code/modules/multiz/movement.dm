@@ -60,7 +60,7 @@
 	if(!pulling)
 		return 0
 
-	var/turf/start = loc
+	var/turf/start = pulling.loc
 	var/turf/destination = (direction == UP) ? GetAbove(pulling) : GetBelow(pulling)
 
 	if(!start.CanZPass(pulling, direction))
