@@ -65,15 +65,18 @@
 
 	if(!start.CanZPass(pulling, direction))
 		to_chat(src, "<span class='warning'>\The [start] blocked your pulled object!</span>")
+		stop_pulling()
 		return 0
 
 	if(!destination.CanZPass(pulling, direction))
-		to_chat(src, "<span class='warning'>Your pulled object bumbs up against \the [destination].</span>")
+		to_chat(src, "<span class='warning'>The [pulling] you were pulling bumps up against \the [destination].</span>")
+		stop_pulling()
 		return 0
 
 	for(var/atom/A in destination)
 		if(!A.CanMoveOnto(pulling, start, 1.5, direction))
-			to_chat(src, "<span class='warning'>\The [A] blocks your pulled object.</span>")
+			to_chat(src, "<span class='warning'>\The [A] blocks the [pulling] you were pulling.</span>")
+			stop_pulling()
 			return 0
 
 	pulling.forceMove(destination)
