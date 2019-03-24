@@ -1,5 +1,6 @@
 /datum/job/unscbertels_ship_crew
 	title = "UNSC Bertels Ship Crew"
+	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelscrew
 	alt_titles = list("UNSC Bertels Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
 	"UNSC Bertels Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
@@ -14,6 +15,7 @@
 
 /datum/job/unscbertels_medical_crew
 	title = "UNSC Bertels Hospital Corpsman"
+	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical
 	total_positions = 4
 	spawn_positions = 4
@@ -23,6 +25,7 @@
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
+	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
 	spawn_positions = 1
@@ -33,6 +36,7 @@
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
+	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1
 	spawn_positions = 1
@@ -46,6 +50,7 @@
 
 /datum/job/bertelsunsc_ship_marine
 	title = "UNSC Marine"
+	spawn_faction = "UNSC"
 	total_positions = 16
 	spawn_positions = 16
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
@@ -58,6 +63,7 @@
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
+	spawn_faction = "UNSC"
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
@@ -71,6 +77,7 @@
 
 /datum/job/bertelsODST
 	title = "Orbital Drop Shock Trooper"
+	spawn_faction = "UNSC"
 	total_positions = 8
 	spawn_positions = 8
 	outfit_type = /decl/hierarchy/outfit/job/bertelsfacil_ODST
@@ -90,6 +97,7 @@
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
+	spawn_faction = "UNSC"
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant

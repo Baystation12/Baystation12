@@ -40,6 +40,9 @@ var/global/list/additional_antag_types = list()
 
 	var/list/allowed_ghost_roles = list(/datum/ghost_role/mouse)
 
+	var/list/factions = list()
+	var/list/factions_by_name = list()
+
 /datum/game_mode/New()
 	..()
 	// Enforce some formatting.
@@ -451,6 +454,7 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/check_victory()
 	return
 
+//This can be overriden in case a game mode needs to do stuff but just remember to do . = ..()
 /datum/game_mode/proc/handle_mob_death(var/mob/M, var/list/args = list())
 	if(M.mind)
 		var/assigned_role = M.mind.assigned_role

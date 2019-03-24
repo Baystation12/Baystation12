@@ -1,6 +1,7 @@
 
 /datum/job/ship_crew_innie
 	title = "Insurrectionist"
+	spawn_faction = "Insurrection"
 	total_positions = 6
 	spawn_positions = 6
 	access = list(632)
@@ -34,6 +35,7 @@
 
 /datum/job/ship_cap_innie
 	title = "Insurrectionist Commander"
+	spawn_faction = "Insurrection"
 	total_positions = 1
 	spawn_positions = 1
 	access = list(632,633)

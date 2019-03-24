@@ -26,8 +26,11 @@
 /area/covenant_corvette/mainmedicalbay
 	name = "SDV Vindicative Infraction Main Medical Bay"
 
-/area/covenant_corvette/yanmee
-	name = "SDV Vindicative Infraction Yanme'e Quarters"
+/area/covenant_corvette/escape_port
+	name = "SDV Vindicative Infraction Escape Pods Port"
+
+/area/covenant_corvette/escape_starboard
+	name = "SDV Vindicative Infraction Escape Pods Starboard"
 
 /area/covenant_corvette/forwardcargo
 	name = "SDV Vindicative Infraction Forward Cargo Bay"

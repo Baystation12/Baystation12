@@ -40,6 +40,8 @@
 		/datum/job/UNSC_ship/gunnery,\
 		/datum/job/UNSC_ship/technician_chief,\
 		/datum/job/UNSC_ship/technician,\
+		/datum/job/ODST,\
+		/datum/job/ODSTO,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_ultra,\

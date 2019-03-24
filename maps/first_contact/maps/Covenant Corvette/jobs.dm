@@ -1,6 +1,8 @@
 
 /datum/job/covenant
 	loadout_allowed = FALSE
+	faction_flag = COVENANT
+	spawn_faction = "Covenant"
 	announced = 0
 	create_record = 0
 

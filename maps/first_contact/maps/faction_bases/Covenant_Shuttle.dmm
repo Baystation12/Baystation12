@@ -26,6 +26,7 @@
 "z" = (/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
 "A" = (/obj/machinery/door/airlock/covenant{name = "Engine Room 2"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
 "B" = (/obj/docking_umbilical/covenant/south,/turf/simulated/wall/covenant,/area/faction_base/covenant_shuttle)
+"C" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/faction_base/covenant_shuttle)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -35,22 +36,22 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaabbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaabbbbbbbbbcbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaa
-aaaaaaabbbbbbbbdddddbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaabbbbbbbCbcbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabbbbbbbbdddddbbbbbbCbbbbbbbbbaaaaaaaaaaaaaa
 aaaaaabbbbbbbbedddddebbbfddbbbbbbbbbbbbbbbbaaaaaaa
 aaaaabbbbbbbbdddddddddbbddddedbbbbbbbbbbbbbbbbaaaa
 aaaabbbbbbbbdgddddddgddbdddddddedbddddddddhiaaaaaa
 aaaabbbbbbbbjbddddddbkdbdddddddddbddgddddghiaaaaaa
-aaaabbbblmbfdbnoooopbdqbfddrdddddbsbbbbbbbbbaaaaaa
+aaaabbbblmbfdbnoooopbdqbfddrdddddbsbbbbbbbbCaaaaaa
 aaaabbtudddddbbbbbbbbddddddddddddeddbbbbaaaaaaaaaa
 aaaabbvoddwddbbbbbbbbddxdddddddddgddbbbbaaaaaaaaaa
-aaaabbbbyzbfdbnoooopbdqbfddrdddddbAbbbbbbbbbaaaaaa
+aaaabbbbyzbfdbnoooopbdqbfddrdddddbAbbbbbbbbCaaaaaa
 aaaabbbbbbbbjbddddddbkdbdddddddddbddeddddehiaaaaaa
 aaaabbbbbbbbdeddddddeddbdddddddgdbddddddddhiaaaaaa
 aaaaabbbbbbbbdddddddddbbddddgdbbbbbbbbbbbbbbbbaaaa
 aaaaaabbbbbbbbgdddddgbbbfddbbbbbbbbbbbbbbbbaaaaaaa
-aaaaaaabbbbbbbbdddddbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa
-aaaaaaaabbbbbbbbbBbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabbbbbbbbdddddbbbbbbCbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaabbbbbbbCbBbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaabbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -1,6 +1,7 @@
 /datum/job/UNSC_ship
 	title = "unknown" //For travis
 	faction_flag = UNSC //Defining here rather than in every job
+	spawn_faction = "UNSC"
 	req_admin_notify = 1
 
 //ship commanding officer
