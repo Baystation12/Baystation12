@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "Added carp spawn zones to Torch bridge deck, Bearcat, and Unishi for overmap events."
+  - maptweak: "Moved a Torch deck 2 carp spawn from outside the reactor area to avoid carp spawning inside the shields."
