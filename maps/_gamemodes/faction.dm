@@ -6,6 +6,7 @@
 	var/list/assigned_minds = list()
 	var/list/living_minds = list()
 	var/max_points = 0
+	var/ignore_players_dead = 0
 
 /datum/faction/proc/players_alive()
 	return living_minds.len

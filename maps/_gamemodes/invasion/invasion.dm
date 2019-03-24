@@ -135,6 +135,8 @@
 	if(!cov_ship)
 		if(covenant_ship_slipspaced)
 			round_end_reasons += "the Covenant ship has gone to slipspace and left the system"
+			var/datum/faction/covenant/C = locate() in factions
+			C.ignore_players_dead = 1
 		else
 			round_end_reasons += "the Covenant ship has been destroyed"
 
@@ -146,27 +148,41 @@
 	if(human_colony)
 		if(human_colony.nuked)
 			round_end_reasons += "the human colony has been nuked"
-		else if(human_colony.glassed)
+		if(human_colony.glassed)
 			round_end_reasons += "the human colony has been glassed"
 
-	//all faction players have been killed/captured... only check 1 faction
-
+	//if all faction players have been killed/captured... only check 1 faction
+	var/factions_destroyed = 0
 	if (faction_safe_time - world.time < 2 MINUTES)
 		var/safe_expire_warning_check = 0
 		for(var/datum/faction/F in factions)
-			if(!F.players_alive())
+			if(!F.players_alive() && !F.ignore_players_dead)
 				if(world.time >= faction_safe_time)
 					round_end_reasons += "the [F.name] presence in the system has been destroyed"
-					break
+					factions_destroyed++
+
 				else if(!safe_expire_warning)
 					safe_expire_warning_check = 1
-					message_admins("WARNING: Faction safe time expiring in 2 minutes and the [F.name] have no living players.")
+					message_admins("GAMEMODE WARNING: Faction safe time expiring in 2 minutes and the [F.name] have no living players.")
 		if(safe_expire_warning_check)
 			safe_expire_warning = 1
 
-	return round_end_reasons.len >= 2
+	if(factions_destroyed > 1)
+		factions_destroyed -= 1
+
+	return (round_end_reasons.len - factions_destroyed) >= 2
 
 /datum/game_mode/invasion/declare_completion()
+
+	var/announce_text = ""
+
+	//english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
+	announce_text += "<h4>The round ended because "
+	announce_text += english_list(round_end_reasons)
+	announce_text += "</h4>"
+
+	to_world(announce_text)
+
 	//work out survivors
 	var/clients = 0
 	var/surviving_humans = 0
