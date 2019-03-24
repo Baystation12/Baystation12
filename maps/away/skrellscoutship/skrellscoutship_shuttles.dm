@@ -46,7 +46,7 @@
 		/area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/dock/alt, 
 		/area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/robotics, /area/ship/skrellscoutship/maintenance/atmos, 
 		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/command/bridge, /area/ship/skrellscoutship/crew/fit, 
-		/area/ship/skrellscoutship/command/armory
+		/area/ship/skrellscoutship/command/armory, /area/ship/skrellscoutship/crew/rec
 		)
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS

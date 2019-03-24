@@ -1922,6 +1922,9 @@
 /obj/machinery/door/firedoor/autoset,
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/rec)
+"NS" = (
+/turf/simulated/open,
+/area/ship/skrellscoutship/crew/hallway/d1)
 "OH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -7846,7 +7849,7 @@ cw
 cC
 dp
 cJ
-at
+NS
 ah
 ah
 aa

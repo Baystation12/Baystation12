@@ -183,6 +183,20 @@
 	fringe = "solgovflag_fringe"
 	desc = "A portable flag with the Sol Government symbol on it. I claim this land for Sol!"
 	light_color = COLOR_BLUE
+	
+/obj/item/stack/flag/blue
+	name = "blue flags"
+	singular_name = "blue flag"
+	icon_state = "blueflag"
+	fringe = "blueflag_fringe"
+	light_color = COLOR_BLUE
+	
+/obj/item/stack/flag/teal
+	name = "teal flags"
+	singular_name = "teal flag"
+	icon_state = "tealflag"
+	fringe = "tealflag_fringe"
+	light_color = COLOR_TEAL
 
 /obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
 	if(upright)
