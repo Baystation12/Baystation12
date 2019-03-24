@@ -164,17 +164,15 @@
 
 /datum/mind/Topic(href, href_list)
 
+	var/is_admin =   FALSE
+	var/can_modify = FALSE
+	is_admin = check_rights(R_ADMIN, FALSE)
+	can_modify = is_admin
+
 	if(href_list["add_goal"])
 
 		var/mob/caller = locate(href_list["add_goal_caller"])
-
-		var/is_admin =   FALSE
-		var/can_modify = FALSE
-		if(!caller || caller != current)
-			is_admin = check_rights(R_ADMIN)
-			can_modify = is_admin
-		else
-			can_modify = TRUE
+		if(caller && caller == current) can_modify = TRUE
 
 		if(can_modify)
 			if(is_admin)
@@ -187,15 +185,7 @@
 		var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
 
 		var/mob/caller = locate(href_list["abandon_goal_caller"])
-
-		var/is_admin = FALSE
-		var/can_modify = FALSE
-
-		if(!caller || caller != current)
-			is_admin = check_rights(R_ADMIN)
-			can_modify = is_admin
-		else
-			can_modify = TRUE
+		if(caller && caller == current) can_modify = TRUE
 
 		if(goal && can_modify)
 			if(usr == current)
@@ -210,18 +200,10 @@
 		var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
 
 		var/mob/caller = locate(href_list["reroll_goal_caller"])
-
-		var/is_admin = FALSE
-		var/can_modify = FALSE
-
-		if(!caller || caller != current)
-			is_admin = check_rights(R_ADMIN)
-			can_modify = is_admin
-		else
-			can_modify = TRUE
+		if(caller && caller == current) can_modify = TRUE
 
 		if(goal && (goal in goals) && can_modify)
-			qdel(goal)	
+			qdel(goal) 
 			generate_goals(assigned_job, TRUE, 1)
 			goal = goals[LAZYLEN(goals)]
 			if(usr == current)
@@ -231,7 +213,7 @@
 				to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 		return TRUE
 
-	if(!check_rights(R_ADMIN))	return
+	if(!is_admin) return
 
 	if(current && isliving(current))
 		if(href_list["set_psi_faculty"] && href_list["set_psi_faculty_rank"])
