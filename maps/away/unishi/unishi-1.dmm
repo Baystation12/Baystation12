@@ -838,6 +838,12 @@
 /obj/effect/shuttle_landmark/nav_unishi/nav3,
 /turf/space,
 /area/space)
+"lB" = (
+/obj/effect/landmark{
+	name = "carpspawn"
+	},
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 aa
@@ -4444,7 +4450,7 @@ aa
 aa
 aa
 aa
-aa
+lB
 aa
 aa
 aa
@@ -7697,7 +7703,7 @@ aa
 aa
 aa
 aa
-aa
+lB
 aa
 aa
 aa
