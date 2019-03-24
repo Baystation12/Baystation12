@@ -35,7 +35,7 @@
 		/obj/item/weapon/storage/plants,
 		/obj/item/weapon/robot_harvester,
 		/obj/item/weapon/material/kitchen/rollingpin,
-		/obj/item/weapon/material/knife,
+		/obj/item/weapon/material/knife/kitchen,
 		/obj/item/weapon/crowbar,
 		/obj/item/weapon/rsf,
 		/obj/item/weapon/reagent_containers/dropper/industrial,

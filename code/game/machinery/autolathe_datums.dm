@@ -216,7 +216,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/knife
 	name = "kitchen knife"
-	path = /obj/item/weapon/material/knife
+	path = /obj/item/weapon/material/knife/kitchen
 	category = "General"
 
 /datum/autolathe/recipe/taperecorder
@@ -576,7 +576,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/tacknife
 	name = "tactical knife"
-	path = /obj/item/weapon/material/hatchet/tacknife
+	path = /obj/item/weapon/material/knife/combat
 	hidden = 1
 	category = "Arms and Ammunition"
 

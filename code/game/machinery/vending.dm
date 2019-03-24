@@ -1025,9 +1025,9 @@
 	/obj/item/weapon/reagent_containers/glass/beaker/bowl =2,
 	/obj/item/weapon/tray = 8,
 	/obj/item/weapon/material/kitchen/utensil/fork = 6,
-	/obj/item/weapon/material/kitchen/utensil/knife = 6,
+	/obj/item/weapon/material/knife/table = 6,
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
-	/obj/item/weapon/material/knife = 3,
+	/obj/item/weapon/material/knife/kitchen = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/pitcher = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/coffeecup = 8,
@@ -1044,10 +1044,10 @@
 	/obj/item/weapon/storage/lunchbox/nymph = 3,
 	/obj/item/weapon/storage/lunchbox/syndicate = 3,
 	/obj/item/weapon/storage/lunchbox/dais = 3,
-	/obj/item/weapon/material/knife/butch = 1)
+	/obj/item/weapon/material/knife/kitchen/cleaver = 1)
 
 
-	contraband = list(/obj/item/weapon/material/knife/butch/bronze = 1)
+	contraband = list(/obj/item/weapon/material/knife/kitchen/cleaver/bronze = 1)
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"

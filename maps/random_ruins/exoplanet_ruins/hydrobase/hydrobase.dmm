@@ -941,7 +941,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "ct" = (
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/kitchen,
 /obj/structure/table/glass/pglass,
 /obj/item/weapon/material/ashtray/bronze,
 /turf/simulated/floor/tiled,
@@ -1711,7 +1711,7 @@
 "eh" = (
 /obj/structure/catwalk,
 /obj/item/weapon/material/kitchen/rollingpin,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/kitchen,
 /obj/structure/table/glass/pglass,
 /obj/item/weapon/material/ashtray/bronze,
 /turf/simulated/floor/fixed/alium,
@@ -2315,7 +2315,7 @@
 /area/map_template/hydrobase/station/processing)
 "fr" = (
 /obj/structure/catwalk,
-/obj/item/weapon/material/kitchen/utensil/knife/folding/balisong/switchblade,
+/obj/item/weapon/material/knife/folding/combat/switchblade,
 /obj/random/coin,
 /obj/random/coin,
 /obj/structure/closet/crate/secure/weapon{
@@ -2324,7 +2324,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/random/projectile,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /obj/item/weapon/spacecash/bundle/c100,
 /obj/random/cash,
 /obj/random/cash,
