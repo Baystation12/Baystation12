@@ -132,7 +132,7 @@
 	round_end_reasons = list()
 
 	//the cov ship has been destroyed or gone to slipspace
-	if(!cov_ship)
+	if(!cov_ship || cov_ship.loc = null)
 		if(covenant_ship_slipspaced)
 			round_end_reasons += "the Covenant ship has gone to slipspace and left the system"
 			var/datum/faction/covenant/C = locate() in factions
@@ -141,7 +141,7 @@
 			round_end_reasons += "the Covenant ship has been destroyed"
 
 	//the UNSC ship has been destroyed
-	if(!unsc_ship)
+	if(!unsc_ship || unsc_ship.loc = null)
 		round_end_reasons += "the UNSC ship has been destroyed"
 
 	//the colony has been destroyed (nuked/glassed)
@@ -168,7 +168,7 @@
 			safe_expire_warning = 1
 
 	if(factions_destroyed > 1)
-		factions_destroyed -= 1
+		factions_destroyed = 1
 
 	return (round_end_reasons.len - factions_destroyed) >= 2
 
@@ -297,3 +297,8 @@
 				else
 					capture_innies.minds_killed.Add(M.mind)
 
+	if(M.mind)
+		for(var/datum/faction/F in factions)
+			if(M.mind in F.assigned_minds)
+				F.living_minds -= M.mind
+				break
