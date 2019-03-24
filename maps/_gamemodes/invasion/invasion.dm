@@ -73,11 +73,11 @@
 			/datum/objective/protect/protect_innie_leader,\
 			/datum/objective/destroy_unsc_ship/innie,\
 			/datum/objective/assassinate/kill_unsc_leader,\
-			/datum/objective/recruit_pirates,\
-			/datum/objective/recruit_scientists,\
+			///datum/objective/recruit_pirates,
+			///datum/objective/recruit_scientists,
 			/datum/objective/protect_colony/innie,\
-			/datum/objective/destroy_cov_ship/innie,\
-			/datum/objective/takeover_colony)
+			/datum/objective/destroy_cov_ship/innie)
+			///datum/objective/takeover_colony)
 		setup_faction_objectives(I, objective_types)
 
 /datum/game_mode/invasion/pre_setup()
