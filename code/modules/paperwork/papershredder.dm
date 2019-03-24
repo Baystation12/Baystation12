@@ -10,8 +10,6 @@
 	var/max_paper = 10
 	var/paperamount = 0
 
-	var/obj/item/weapon/shred_temp = null
-
 	var/list/shred_amounts = list(
 		/obj/item/weapon/photo = 1,
 		/obj/item/weapon/shreddedp = 1,
@@ -77,28 +75,23 @@
 			to_chat(user, "<span class='notice'>You cannot put shredded paper into the [empty_into].</span>")
 			return
 
-		if(!istype(shred_temp)) // Assuming we could insert it, check out cached item
-			shred_temp = new /obj/item/weapon/shreddedp() // Could leave paper laying about?
+		// Move papers one by one as they fit; stop when we are empty or can't fit any more
+		while(paperamount > 0)
 
-		if(!empty_into.can_be_inserted(shred_temp, user, 0)) // No space in the container
-			to_chat(user, "<span class='notice'>\The [empty_into] is too full to hold any shredded paper.</span>")
-			return
+			var/obj/item/weapon/shred_temp = get_shredded_paper()
 
-		// Move papers one by one as they fit
-		while(paperamount > 0 && empty_into.can_be_inserted(shred_temp, user, 0))
-			if(paperamount > 1)
-				var/obj/item/weapon/shreddedp/shreddedPaper = get_shredded_paper()
-				empty_into.handle_item_insertion(shreddedPaper)
-			else
+			if(empty_into.can_be_inserted(shred_temp, user, 0))
 				empty_into.handle_item_insertion(shred_temp)
-				paperamount = 0
-				shred_temp = null
+			else
+				qdel(shred_temp)
+				paperamount++
+				break
 
 		// Report on how we did
 		if(paperamount == 0)
 			to_chat(user, "<span class='notice'>You empty \the [src] into \the [empty_into].</span>")
 		if(paperamount > 0)
-			to_chat(user, "<span class='notice'>You fill \the [empty_into] with as much shredded paper as it will carry.</span>")
+			to_chat(user, "<span class='notice'>\The [empty_into] will not fit any more shredded paper.</span>")
 
 	else // Just dump the paper out on the floor
 		while(paperamount > 0)
@@ -107,10 +100,9 @@
 	update_icon()
 
 /obj/machinery/papershredder/proc/get_shredded_paper()
-	if(!paperamount)
-		return
-	paperamount--
-	return new /obj/item/weapon/shreddedp(get_turf(src))
+	if(paperamount)
+		paperamount--
+		return new /obj/item/weapon/shreddedp(get_turf(src))		
 
 /obj/machinery/papershredder/on_update_icon()
 	icon_state = "papershredder[max(0,min(5,Floor(paperamount/2)))]"
