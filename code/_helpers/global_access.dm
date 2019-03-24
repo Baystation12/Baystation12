@@ -55,6 +55,8 @@
 			return global.SScodex;
 		if("SSculture")
 			return global.SSculture;
+		if("SSdisposals")
+			return global.SSdisposals;
 		if("SSevac")
 			return global.SSevac;
 		if("SSevent")
@@ -1000,6 +1002,8 @@
 			global.SScodex=newval;
 		if("SSculture")
 			global.SSculture=newval;
+		if("SSdisposals")
+			global.SSdisposals=newval;
 		if("SSevac")
 			global.SSevac=newval;
 		if("SSevent")
@@ -1917,6 +1921,7 @@
 	"SScircuit_components",
 	"SScodex",
 	"SSculture",
+	"SSdisposals",
 	"SSevac",
 	"SSevent",
 	"SSfastprocess",
