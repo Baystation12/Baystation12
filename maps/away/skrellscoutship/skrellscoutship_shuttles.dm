@@ -42,11 +42,11 @@
 	current_dock_target = "xil_dock"
 	shuttle_area = list(
 		/area/ship/skrellscoutship/solars, /area/ship/skrellscoutship/crew/quarters, /area/ship/skrellscoutship/crew/hallway/d1,
-		/area/ship/skrellscoutship/crew/hallway/d2, /area/ship/skrellscoutship/crew/kitchen, /area/ship/skrellscoutship/crew/rec,
-		/area/ship/skrellscoutship/crew/toilets, /area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/dock,
-		/area/ship/skrellscoutship/dock/alt, /area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/robotics, 
-		/area/ship/skrellscoutship/maintenance/atmos, /area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/command/bridge,
-		/area/ship/skrellscoutship/crew/fit, /area/ship/skrellscoutship/command/armory
+		/area/ship/skrellscoutship/crew/hallway/d2, /area/ship/skrellscoutship/crew/kitchen, /area/ship/skrellscoutship/crew/toilets, 
+		/area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/dock/alt, 
+		/area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/robotics, /area/ship/skrellscoutship/maintenance/atmos, 
+		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/command/bridge, /area/ship/skrellscoutship/crew/fit, 
+		/area/ship/skrellscoutship/command/armory
 		)
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
@@ -75,7 +75,7 @@
 	landmark_tag = "nav_skrellscoutsh_dock"
 	base_area = /area/ship/skrellscoutship/hangar
 	base_turf = /turf/simulated/floor/tiled/skrell
-	flags = SLANDMARK_FLAG_MOBILE
+	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 	
 /obj/effect/shuttle_landmark/skrellscoutshuttle/altdock
 	name = "Docking Port"

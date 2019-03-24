@@ -101,6 +101,7 @@
 #define	COMMS_COLOR_COMMAND    "#204090"
 #define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define	COMMS_COLOR_SKRELL     "#7331c4"
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#994715"

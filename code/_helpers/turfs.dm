@@ -152,10 +152,10 @@
 	for(var/obj/O in source)
 		if(O.simulated)
 			O.forceMove(new_turf)
-		else if(istype(O,/obj/effect/shuttle_landmark))
-			var/obj/effect/shuttle_landmark/L = O
-			if(L.flags & SLANDMARK_FLAG_MOBILE)
-				L.forceMove(new_turf)
+		else if(istype(O,/obj/effect))
+			var/obj/effect/E = O
+			if(E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
+				E.forceMove(new_turf)
 
 	for(var/mob/M in source)
 		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
