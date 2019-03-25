@@ -167,9 +167,15 @@
 /datum/unarmed_attack/bite/venom
 	attack_verb = list("bit", "sank their fangs into")
 	attack_sound = 'sound/weapons/bite.ogg'
-	damage = 5
-	delay = 120
+	damage = 3
 	attack_name = "venomous bite"
 
-/datum/unarmed_attack/bite/venom/get_damage_type()
-	return TOX
+/datum/unarmed_attack/bite/venom/proc/injectvictim(mob/living/carbon/human/target)
+	if(target.can_inject())
+		target.reagents.add_reagent(/datum/reagent/toxin/yeosa, rand(1,4))
+		to_chat(target, "<span class='warning'>You feel a numbing stab!</span>")
+	
+/datum/unarmed_attack/bite/venom/apply_effects(mob/living/carbon/human/user, mob/living/carbon/human/target, attack_damage, zone)
+	. = ..()
+	injectvictim(target)
+	

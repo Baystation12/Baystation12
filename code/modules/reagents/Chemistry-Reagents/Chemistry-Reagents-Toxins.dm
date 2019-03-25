@@ -850,3 +850,24 @@
 	heating_products = list(/datum/reagent/acetone, /datum/reagent/carbon, /datum/reagent/ethanol)
 	heating_point = 145 CELSIUS
 	heating_message = "separates."
+
+/datum/reagent/toxin/yeosa
+	name = "venomous ichor"
+	description = "a vile, black, ichor. Smells of pungent acid and makes your sniffer bit numb."
+	taste_description = "a numbing sensation"
+	color = "#241c3f"
+	metabolism = REM * 0.10
+	strength = 3
+	heating_products = list(/datum/reagent/toxin/denatured, /datum/reagent/carbon, /datum/reagent/ethanol, /datum/reagent/toxin/tar)
+	heating_point = 80 CELSIUS
+	heating_message = "deforms and loses cohesion with a numbing smell."
+
+/datum/reagent/toxin/yeosa/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	M.add_chemical_effect(CE_PAINKILLER, 60)
+	M.add_chemical_effect(CE_PULSE, -1)
+	..()
+	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
+		data = world.time
+		to_chat(M, "<span class='warning'>You feel numb and tingly and in a bit of a haze.</span>")

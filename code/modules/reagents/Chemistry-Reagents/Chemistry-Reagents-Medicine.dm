@@ -909,3 +909,20 @@
 	if(do_giggle && prob(20))
 		M.emote(pick("giggle", "laugh"))
 	M.add_chemical_effect(CE_PULSE, -1)
+
+
+//-*- Unathi stuff -*-
+/datum/reagent/mogine
+	name = "Mogine"
+	description = "an almost rusty colored slurry of small micro-organisms found within Unathi physiology. Responsible for most of their renowned durability."
+	taste_description = "overwhelming bitterness"
+	reagent_state = LIQUID
+	color = "#8e7a72"
+	metabolism = REM * 0.7
+	scannable = 0
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/mogine/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	M.add_chemical_effect(CE_BLOODRESTORE, 3)

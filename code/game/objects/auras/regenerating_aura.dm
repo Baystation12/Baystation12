@@ -74,13 +74,14 @@
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
+			if(E && E.organ_tag != BP_HEAD && E.organ_tag != BP_GROIN && !E.vital && !E.is_usable())	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
 					E.removed()			//...because no one wants their head to explode to make way for a new one.
 					qdel(E)
 					E= null
 				else
 					low_nut_warning(E.name)
+					return
 			if(!E)
 				var/list/organ_data = H.species.has_limbs[limb_type]
 				var/limb_path = organ_data["path"]
@@ -91,7 +92,7 @@
 				return
 			else if (H.nutrition > grow_threshold) //We don't subtract any nut here, but let's still only heal wounds when we have nut.
 				for(var/datum/wound/W in E.wounds)
-					if(W.wound_damage() == 0 && prob(50))
+					if(W.wound_damage() == 0 && prob(50))	
 						qdel(W)
 	return 1
 
@@ -112,13 +113,16 @@
 	return TRUE
 
 /obj/aura/regenerating/human/unathi
-	nutrition_damage_mult = 2
-	brute_mult = 2
-	organ_mult = 4
+	nutrition_damage_mult = 0.5
+	brute_mult = 0.4
+	fire_mult = 0.3
+	organ_mult = 0.5
 	regen_message = "<span class='warning'>You feel a soothing sensation as your ORGAN mends...</span>"
 	grow_chance = 2
-	grow_threshold = 150
-	ignore_tag = BP_HEAD
+
+	grow_threshold = 400
+	external_nutrition_mult = 150
+	ignore_tag = (BP_HEAD)
 	var/toggle_blocked_until = 0 // A time
 
 /obj/aura/regenerating/human/unathi/toggle()
@@ -142,9 +146,14 @@
 
 /obj/aura/regenerating/human/unathi/life_tick()
 	var/mob/living/carbon/human/H = user
+
 	if(innate_heal && istype(H) && H.stat != DEAD && H.nutrition < 50)
-		H.apply_damage(5, TOX)
-		H.nutrition += 3
+
+		if (last_cannibalism_alarm + 0.25 MINUTE < world.time)
+			to_chat(user, "<span class='warning'>You can feel your body breaking down under the strain...</span>")
+			to_chat(user, pick( list( "<span class='danger'>YOU MUST FEED</span>", "<span class='danger'>FEED FEED FEED</span>", "<span class='danger'>WE HUNGER ALL IS HUNGER</span>", "<span class='danger'>MAIM THEM THEY ARE FOOD</span>")))
+			last_cannibalism_alarm = world.time
+			return 1
 		return 1
 	return ..()
 
@@ -176,6 +185,8 @@
 	H.nutrition -= external_nutrition_mult
 
 /obj/aura/regenerating/human/unathi/yeosa
-	brute_mult = 1.5
-	organ_mult = 3
+
+	brute_mult = 0.3
+	fire_mult = 0.2
+	organ_mult = 1
 	tox_mult = 2

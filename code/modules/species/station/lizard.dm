@@ -20,9 +20,45 @@
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	slowdown = 0.5
-	brute_mod = 0.8
+	radiation_mod = 0.3
 	flash_mod = 1.2
+	weaken_mod = 1.1
 	blood_volume = 800
+	natural_armour_values = list(melee = 25, bullet = 15, laser = 10, energy = 0, bomb = 30, bio = 0, rad = 0)
+	breath_pressure = 20
+
+	has_organ = list(
+		BP_HEAD =     /obj/item/organ/external/head/unathi,
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/unathi,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain/unathi,
+		BP_EYES =     /obj/item/organ/internal/eyes,
+		BP_MOGENDRIX = /obj/item/organ/internal/mogendrix,
+		BP_CARDIOASYLANT = /obj/item/organ/internal/cardioasylant
+		)
+	
+	bioprint_products = list(
+		BP_HEART    = list(/obj/item/organ/internal/heart,      45),
+		BP_LUNGS    = list(/obj/item/organ/internal/lungs/unathi,      50),
+		BP_KIDNEYS  = list(/obj/item/organ/internal/kidneys,    30),
+		BP_EYES     = list(/obj/item/organ/internal/eyes,       30),
+		BP_LIVER    = list(/obj/item/organ/internal/liver,      35),
+		BP_GROIN    = list(/obj/item/organ/external/groin,      80),
+		BP_L_ARM    = list(/obj/item/organ/external/arm,        75),
+		BP_R_ARM    = list(/obj/item/organ/external/arm/right,  75),
+		BP_L_LEG    = list(/obj/item/organ/external/leg,        75),
+		BP_R_LEG    = list(/obj/item/organ/external/leg/right,  75),
+		BP_L_FOOT   = list(/obj/item/organ/external/foot,       50),
+		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 50),
+		BP_L_HAND   = list(/obj/item/organ/external/hand,       50),
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 50),
+		BP_MOGENDRIX = list(/obj/item/organ/internal/mogendrix, 70),
+		BP_CARDIOASYLANT = list(/obj/item/organ/internal/cardioasylant, 80)
+		)
+
 
 	health_hud_intensity = 2
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
@@ -46,6 +82,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
+	species_flags = SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
@@ -58,11 +95,11 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
-	heat_discomfort_level = 295
+	heat_discomfort_level = 400
 	heat_discomfort_strings = list(
-		"You feel soothingly warm.",
+		"You feel unpleasantly warm.",
 		"You feel the heat sink into your bones.",
-		"You feel warm enough to take a nap."
+		"Your muscles feel tired from the heat."
 		)
 
 	cold_discomfort_level = 292
@@ -102,7 +139,12 @@
 			FACTION_UNATHI_DESERT,
 			FACTION_UNATHI_SAVANNAH,
 			FACTION_UNATHI_DIAMOND_PEAK,
-			FACTION_UNATHI_SALT_SWAMP
+			FACTION_UNATHI_SALT_SWAMP,
+			FACTION_NANOTRASEN,
+			FACTION_PCRC,
+			FACTION_HEPHAESTUS,
+			FACTION_CORPORATE,
+			FACTION_OTHER
 		),
 		TAG_RELIGION =  list(
 			RELIGION_UNATHI_STRATAGEM,

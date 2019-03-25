@@ -2325,6 +2325,7 @@
 #include "code\modules\organs\internal\species\gills.dm"
 #include "code\modules\organs\internal\species\golem.dm"
 #include "code\modules\organs\internal\species\ipc.dm"
+#include "code\modules\organs\internal\species\lizard.dm"
 #include "code\modules\organs\internal\species\nabber.dm"
 #include "code\modules\organs\internal\species\promethean.dm"
 #include "code\modules\organs\internal\species\starborn.dm"
