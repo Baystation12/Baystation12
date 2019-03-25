@@ -34,7 +34,7 @@
 /datum/objective/protect_unsc_ship/check_completion()
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	if(istype(game_mode))
-		if(game_mode.unsc_ship)
+		if(game_mode.unsc_ship && game_mode.unsc_ship.loc)
 			return 1
 	return 0
 
@@ -43,8 +43,14 @@
 	short_text = "Do not allow Covenant capture of human nav data"
 	explanation_text = "We lose more colonies every year. Soon Earth will be all we have left. Do not allow navchips to be captured by the Covenant."
 	points_per_nav = 60
+	slipspace_affected = 1
 
 /datum/objective/steal_nav_data/cole_protocol/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	. = ..()
 
 	lose_points = win_points
@@ -59,8 +65,14 @@
 	points_per_ai = 200
 	short_text = "Do not allow Covenant capture of UNSC AI"
 	explanation_text = "Destruction or capture of shipboard AI is absolutely unacceptable. They'll learn everything: weapons research, force deployments, Earth."
+	slipspace_affected = 1
 
 /datum/objective/steal_ai/cole_protocol/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	. = ..()
 
 	lose_points = win_points
@@ -75,7 +87,7 @@
 
 /datum/objective/capture_innies
 	short_text = "Capture Insurrectionists for ONI interrogation"
-	explanation_text = "The Insurrection worsens every year. Put them on ice in ONI cryopods for later black site interrogation."
+	explanation_text = "The Insurrection worsens every year. Put some on ice in ONI cryopods for later black site interrogation. Kill the rest"
 	var/points_per_capture = 25
 	var/points_per_kill = 10
 	var/list/minds_captured = list()
@@ -120,8 +132,14 @@
 	short_text = "Destroy the Covenant warship"
 	explanation_text = "We cannot allow the Covenant warship to escape to threaten Earth. Take it out before it retreats from the system."
 	win_points = 100
+	slipspace_affected = 1
 
 /datum/objective/destroy_cov_ship/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	if(istype(game_mode))
 		if(!game_mode.cov_ship)
