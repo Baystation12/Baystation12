@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "Various areas on the SEV Torch have been renamed to be more descriptive of their purpose/location."
