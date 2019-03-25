@@ -67,9 +67,9 @@
 				for(var/i=0, i<6, i++)
 					T = get_step(T,headingdir)
 				new /obj/effect/slipspace_rupture(T)
-				for(var/i=0, i<6, i++)
-					ship.loc = get_step(ship, headingdir)
-					sleep(1)
+
+				//rapidly move into the portal
+				walk_to(ship,T,0,1,0)
 
 				//despawn the ship
 				ship.do_superstructure_fail()
@@ -80,9 +80,15 @@
 	icon_state = "slipspace_effect"
 	pixel_x = -16
 	pixel_y = -16
+	var/time_to_die = 0
 
 /obj/effect/slipspace_rupture/New()
-	spawn(6)
+	time_to_die = world.time + 6
+	GLOB.processing_objects += src
+
+/obj/effect/slipspace_rupture/process()
+	if(world.time > time_to_die)
+		GLOB.processing_objects -= src
 		qdel(src)
 
 /datum/game_mode/proc/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
