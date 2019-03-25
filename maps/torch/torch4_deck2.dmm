@@ -5174,6 +5174,9 @@
 	pixel_y = 0
 	},
 /obj/machinery/power/apc/super{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable/green{
