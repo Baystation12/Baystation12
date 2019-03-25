@@ -51,6 +51,7 @@
 #define MODE_REVOLUTIONARY "revolutionary"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
+#define MODE_TREASONIST "treasonist"
 #define MODE_DEITY "deity"
 #define MODE_GODCULTIST "god cultist"
 #define MODE_THRALL "mind thrall"
