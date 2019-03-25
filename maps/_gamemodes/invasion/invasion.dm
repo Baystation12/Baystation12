@@ -167,10 +167,14 @@
 		if(safe_expire_warning_check)
 			safe_expire_warning = 1
 
-	if(factions_destroyed > 1)
-		factions_destroyed = 1
+	var/end_round_triggers = round_end_reasons.len
 
-	return (round_end_reasons.len - factions_destroyed) >= 2
+	//only count 1 destroyed faction towards the end round triggers
+	if(factions_destroyed > 0)
+		end_round_triggers -= factions_destroyed
+		end_round_triggers += 1
+
+	return end_round_triggers >= 2
 
 /datum/game_mode/invasion/declare_completion()
 
