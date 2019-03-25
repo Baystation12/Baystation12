@@ -1,4 +1,0 @@
-author: "ajkrupka"
-delete-after: True
-changes: 
-  - bugfix: "Fixed an oversight to make armbands and webbing hide when jumpsuits are rolled down."
