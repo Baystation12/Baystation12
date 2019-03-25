@@ -50,8 +50,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	..()
 	if(client)
 		target_mob = null
-	setPatrol(listPatrol())
-	patrol(detectPatrol())
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
 		wander = 0
@@ -75,40 +73,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(flood_spawner)
 		flood_spawner.flood_die(src)
 		flood_spawner = null
-
-/mob/living/simple_animal/hostile/flood/proc/setPatrol(var/obj/effect/landmark/flood_patrol_target/Pa)
-	if(isnull(Pa))
-		return
-
-	if(stance==HOSTILE_STANCE_IDLE && pbol==0)
-		walkPoint=Pa.nextPoint
-		wander=0
-		pbol=1
-
-/mob/living/simple_animal/hostile/flood/proc/listPatrol()
-	if(stance==HOSTILE_STANCE_IDLE && pbol==0)
-		for(var/obj/effect/landmark/flood_patrol_target/L in range(src))
-			patrol_points += L
-		if(isnull(patrol_points) || patrol_points.len == 0)
-			wander = 1
-			return
-	return pick(patrol_points)
-
-/mob/living/simple_animal/hostile/flood/proc/detectPatrol()
-	if(stance==HOSTILE_STANCE_IDLE && pbol==1)
-		for(var/obj/effect/landmark/flood_patrol_target/L in range(src,0))
-			return L
-
-/mob/living/simple_animal/hostile/flood/proc/patrol(var/obj/effect/landmark/flood_patrol_target/Pa)
-	if(stance==HOSTILE_STANCE_IDLE && pbol==1)
-		var/obj/effect/landmark/flood_patrol_target/flood_point=locate(walkPoint)
-		dir = get_dir(src,flood_point)
-		var/turf/walk_target = get_step_towards(src,flood_point)
-		Move(walk_target)
-		if(walk_target == src.loc)
-			walkPoint=Pa.nextPoint
-
-	else pbol=0
 
 /mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
