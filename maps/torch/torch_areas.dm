@@ -290,7 +290,7 @@
 	name = "\improper Bridge Safe Room"
 
 /area/bridge/storage
-	name = "\improper Bridge Storage Room"
+	name = "\improper Bridge Storage"
 	req_access = list(access_bridge)
 
 // Shuttles
@@ -853,7 +853,7 @@
 	req_access = list(access_cargo)
 
 /area/storage/expedition
-	name = "Expedition Storage"
+	name = "Auxiliary Expedition Storage"
 	icon_state = "storage"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(list(access_mining, access_xenoarch))
@@ -872,8 +872,8 @@
 
 // Supply
 
-/area/quartermaster/deckofficer
-	name = "\improper Deck Chief"
+/area/quartermaster/deckchief
+	name = "\improper Deck Chief's Office"
 	icon_state = "quart"
 	req_access = list(access_qm)
 
@@ -888,7 +888,7 @@
 	req_access = list(list(access_mining, access_xenoarch))
 
 /area/quartermaster/expedition/storage
-	name = "\improper Expedition Storage"
+	name = "\improper Hangar Expedition Storage"
 	icon_state = "mining"
 	req_access = list(list(access_mining, access_explorer, access_xenoarch))
 
@@ -909,7 +909,7 @@
 	req_access = list(access_hangar)
 
 /area/quartermaster/hangar/top
-	name = "\improper Hangar Maintenance"
+	name = "\improper Hangar Upper Walkway"
 
 /area/quartermaster/flightcontrol
 	name = "\improper Flight Control Tower"
@@ -955,12 +955,12 @@
 	icon_state = "locker"
 
 /area/crew_quarters/head
-	name = "\improper Head"
+	name = "\improper Third Deck Head"
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/head/aux
-	name = "\improper Auxiliary Head"
+	name = "\improper First Deck Head"
 
 /area/crew_quarters/gym
 	name = "\improper Gym"
@@ -1003,7 +1003,7 @@
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/crew_quarters/sleep/cryo/aux
-	name = "\improper Auxiliary Cryogenic Storage"
+	name = "\improper First Deck Cryogenic Storage"
 	icon_state = "Sleep"
 
 /area/crew_quarters/diplomat
@@ -1082,7 +1082,7 @@
 // Medbay
 
 /area/medical/equipstorage
-	name = "\improper Equipment Storage"
+	name = "\improper Infirmary Equipment Storage"
 	icon_state = "medbay4"
 	ambience = list('sound/ambience/signal.ogg')
 	req_access = list(access_medical_equip)
@@ -1223,7 +1223,7 @@
 	name = "\improper Bridge Starboard Access Hallway"
 
 /area/bridge/meeting_room
-	name = "\improper Heads of Staff Meeting Room"
+	name = "\improper Command Meeting Room"
 	icon_state = "bridge_meeting"
 	ambience = list()
 	sound_env = MEDIUM_SOFTFLOOR
@@ -1534,7 +1534,7 @@
 	icon_state = "misclab"
 
 /area/rnd/research
-	name = "\improper Research and Development"
+	name = "\improper Research Hallway"
 	icon_state = "research"
 
 /area/rnd/breakroom
@@ -1606,7 +1606,7 @@
 	req_access = list(access_heads_vault)
 
 /area/security/range
-	name = "\improper Security - Firing Range"
+	name = "\improper Decommissioned Firing Range"
 	icon_state = "firingrange"
 	req_access = list(access_solgov_crew)
 
@@ -1619,17 +1619,17 @@
 	icon_state = "quartoffice"
 
 /area/quartermaster/storage
-	name = "\improper Warehouse"
+	name = "\improper Supply Warehouse"
 	icon_state = "quartstorage"
 	sound_env = LARGE_ENCLOSED
 
 /area/quartermaster/storage/upper
-	name = "\improper Upper Warehouse"
+	name = "\improper Supply Upper Warehouse"
 
 // Crew
 
 /area/crew_quarters/sleep/cryo
-	name = "\improper Cryogenic Storage"
+	name = "\improper Third Deck Cryogenic Storage"
 	icon_state = "Sleep"
 
 /area/hydroponics
