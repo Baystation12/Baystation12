@@ -230,8 +230,7 @@
 /obj/random/achlock/spawn_choices()
 	return list(/obj/structure/doorwreckage,
 				/obj/machinery/door/airlock/maintenance,
-				/obj/machinery/door/airlock/maintenance/welded,
-				/obj/structure/foamedmetal)
+				/obj/machinery/door/airlock/maintenance/welded)
 
 /obj/structure/doorwreckage
 	name = "wrecked airlock"
