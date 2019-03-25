@@ -19,6 +19,8 @@ GLOBAL_VAR(spawntypes)
 	var/list/restrict_job_type = null
 	var/list/disallow_job = null
 	var/list/disallow_job_type = null
+	var/disable_atmos_unsafe = 1
+	var/list/unsafe_turfs
 
 /datum/spawnpoint/proc/check_job_spawning(job)
 	if(restrict_job && !(job in restrict_job))
@@ -35,7 +37,26 @@ GLOBAL_VAR(spawntypes)
 	if(disallow_job_type && (cur_job.type in disallow_job_type))
 		return 0
 
-	if(!turfs || !turfs.len)
+	if(!turfs)
+		return 0
+
+	if(disable_atmos_unsafe)
+		var/list/newly_dangerous_turfs = list()
+		if(!unsafe_turfs)
+			unsafe_turfs = list()
+		if(turfs)
+			for(var/turf/T in turfs)
+				if(IsTurfAtmosUnsafe(T))
+					newly_dangerous_turfs += T
+
+			for(var/turf/T in unsafe_turfs)
+				if(IsTurfAtmosSafe(T))
+					unsafe_turfs -= T
+					turfs += T
+
+			unsafe_turfs.Add(newly_dangerous_turfs)
+
+	if(!turfs.len)
 		return 0
 
 	return 1
