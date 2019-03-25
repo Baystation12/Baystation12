@@ -8,6 +8,7 @@
 	var/obj/item/weapon/storage/internal/pockets/hold
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
+	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/storage/Initialize()
 	. = ..()
