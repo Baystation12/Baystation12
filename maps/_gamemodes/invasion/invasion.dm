@@ -19,11 +19,12 @@
 	var/faction_safe_duration = 10 MINUTES
 	var/safe_expire_warning = 0
 
-	var/obj/effect/overmap/cov_ship
-	var/obj/effect/overmap/unsc_ship
+	var/obj/effect/overmap/ship/cov_ship
+	var/obj/effect/overmap/ship/unsc_ship
 	var/obj/effect/overmap/human_colony
 
 	var/list/objectives_specific_target = list()
+	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
 
 	var/covenant_ship_slipspaced = 0
@@ -48,7 +49,7 @@
 			/datum/objective/glass_colony,\
 			/datum/objective/steal_ai,\
 			/datum/objective/steal_nav_data,\
-			/datum/objective/destroy_unsc_ship,\
+			///datum/objective/destroy_unsc_ship,
 			/datum/objective/retrieve_artifact)
 		setup_faction_objectives(C, objective_types)
 
@@ -119,8 +120,14 @@
 		var/datum/objective/objective = new objective_type()
 		faction.all_objectives.Add(objective)
 		faction.max_points += objective.get_award_points()
+
+		//these ones might not be able to do all their setup prior to round start
 		if(objective.find_specific_target)
 			objectives_specific_target.Add(objective)
+
+		//these objectives are affected when a ship goes into slipspace and despawns
+		if(objective.slipspace_affected)
+			objectives_slipspace_affected.Add(objective)
 
 /datum/game_mode/invasion/post_setup(var/announce = 0)
 	. = ..()
@@ -306,3 +313,18 @@
 			if(M.mind in F.assigned_minds)
 				F.living_minds -= M.mind
 				break
+
+/datum/game_mode/invasion/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
+	if(ship.faction == "Covenant")
+		//record a round end condition
+		covenant_ship_slipspaced = 1
+
+		//lock in any covenant objectives now so they arent failed by the ship despawning
+		for(var/datum/objective/objective in objectives_slipspace_affected)
+
+			//a 1 here means the objective was successful
+			objective.override = objective.check_completion()
+
+			//a 0 means it fails so we set -1 to lock in a 0 result
+			if(!objective.override)
+				objective.override = -1
