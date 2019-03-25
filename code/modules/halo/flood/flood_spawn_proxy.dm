@@ -21,3 +21,26 @@
 	if(istype(triggering, /mob/living/carbon))
 		flood_spawner.destroy()
 		qdel(src)
+
+/obj/effect/step_trigger/floodspawner
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x2"
+	var/spawn_spot_x
+	var/spawn_spot_y
+	var/uses = 1
+
+/obj/effect/step_trigger/floodspawner/Trigger(mob/M as mob)
+	playsound(src.loc, 'sound/effects/grillehit.ogg', 50, 0, 0)
+	var/dest = locate(spawn_spot_x, spawn_spot_y, z)
+	src.loc.visible_message("<span class='danger'>A swarm of monsters bursts from the vent!</span>")
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	uses--
+	if(uses == 0)
+		qdel(src)
