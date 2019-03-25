@@ -28,6 +28,7 @@
 	desc = "A small embedded cutter in your finger."
 	icon_state = "wirecutter_finger"
 	icon = 'icons/obj/augment_tools.dmi'
+	build_from_parts = FALSE
 
 /obj/item/weapon/wirecutters/finger/Initialize()
 	. = ..()
@@ -39,6 +40,7 @@
 	desc = "A nifty powertool at your literal fingertips."
 	icon_state = "screwdriver_finger"
 	icon = 'icons/obj/augment_tools.dmi'
+	build_from_parts = FALSE
 
 /obj/item/weapon/screwdriver/finger/Initialize()
 	. = ..()
