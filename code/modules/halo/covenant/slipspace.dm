@@ -47,13 +47,19 @@
 	if(slipspace_jump_time && world.time > slipspace_jump_time)
 		slipspace_jump_time = 0
 		GLOB.processing_objects -= src
-		var/datum/game_mode/invasion = ticker.mode
-		//this is hacky but it will work without invasion gamemode compiled
-		if(istype(invasion) && hasvar(invasion,"covenant_ship_slipspaced"))
-			invasion:covenant_ship_slipspaced = 1
 		var/obj/effect/overmap/ship/ship = map_sectors["[z]"]
 		if(istype(ship))
+			//hard brake the ship to avoid visual bugs with the slipspace effect
+			ship.speed = list(0,0)
+
+			//tell the gamemode handler
+			var/datum/game_mode/game_mode = ticker.mode
+			if(istype(game_mode))
+				game_mode.handle_slipspace_jump(ship)
+
+			//dont block here, we're going to do some time sensitive stuff
 			spawn(0)
+				//animate the slipspacejump
 				var/headingdir = ship.get_heading()
 				if(!headingdir)
 					headingdir = ship.dir
@@ -64,6 +70,8 @@
 				for(var/i=0, i<6, i++)
 					ship.loc = get_step(ship, headingdir)
 					sleep(1)
+
+				//despawn the ship
 				ship.do_superstructure_fail()
 
 /obj/effect/slipspace_rupture
@@ -76,3 +84,5 @@
 /obj/effect/slipspace_rupture/New()
 	spawn(6)
 		qdel(src)
+
+/datum/game_mode/proc/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
