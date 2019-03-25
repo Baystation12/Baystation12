@@ -16,7 +16,7 @@
 	var/mob/living/carbon/human/h = user
 	if(istype(h) && h.species.type in COVENANT_SPECIES_AND_MOBS)
 		return 1
-	if(user.type in COVENANT_SPECIES_AND_MOBS)
+	if(user && user.type in COVENANT_SPECIES_AND_MOBS)
 		return 1
 	return 0
 
