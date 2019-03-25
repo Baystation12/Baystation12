@@ -22,16 +22,21 @@
 		flood_spawner.destroy()
 		qdel(src)
 
-/obj/effect/step_trigger/floodspawner //TODO: add way to link multiple together so if one gets stepped on, all linked triggers will lose a use too
+/obj/effect/step_trigger/floodspawner
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x2"
-	var/spawn_spot_x //location x
-	var/spawn_spot_y //location y //if these aren't set it defaults to null and won't do anything
-	var/uses = 1	 //how many times flood will spawn from the location. setting to 0 means unlimited. //don't do this.
+	var/spawn_spot_x //location x //<
+	var/spawn_spot_y //location y //<if these aren't set it defaults to null and won't do anything
+	var/uses = 0	 //how many times flood will spawn from the location
+
+/obj/effect/step_trigger/floodspawner/New()
+	uses+= pick(0,1) //decides to either delete itself or spawn with one use
+	if(uses == 0)
+		qdel(src) //deletes itself if there are no uses
 
 /obj/effect/step_trigger/floodspawner/Trigger(mob/M as mob)
-	playsound(src.loc, 'sound/effects/grillehit.ogg', 50, 0, 0) //sound played at location
 	var/dest = locate(spawn_spot_x, spawn_spot_y, z)			//picks the location based on x and y. automatically chooses the z the trigger is on.
+	playsound(src.loc, 'sound/effects/grillehit.ogg', 50, 0, 0) //sound played at step trigger
 	src.loc.visible_message("<span class='danger'>A swarm of monsters bursts from the vent!</span>")
 	new /mob/living/simple_animal/hostile/flood/infestor(dest)
 	new /mob/living/simple_animal/hostile/flood/infestor(dest)
