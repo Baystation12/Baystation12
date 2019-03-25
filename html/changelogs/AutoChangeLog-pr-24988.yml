@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Typing indicator bubbles no longer appear for hidden mobs (Cloaked or inside objects such as lockers). Indicators after you say or emote still appear."
