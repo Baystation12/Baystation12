@@ -37,7 +37,7 @@
 /obj/effect/step_trigger/floodspawner/Trigger(mob/M as mob)
 	var/dest = locate(spawn_spot_x, spawn_spot_y, z)			//picks the location based on x and y. automatically chooses the z the trigger is on.
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 50, 0, 0) //sound played at step trigger
-	src.loc.visible_message("<span class='danger'>A swarm of monsters bursts from the vent!</span>")
+	src.loc.visible_message("<span class='danger'>A swarm of monsters bursts from a nearby air vent!</span>")
 	new /mob/living/simple_animal/hostile/flood/infestor(dest)
 	new /mob/living/simple_animal/hostile/flood/infestor(dest)
 	new /mob/living/simple_animal/hostile/flood/infestor(dest)
