@@ -70,8 +70,8 @@
 	name = "slipspace rupture"
 	icon = 'code/modules/halo/covenant/slipspace.dmi'
 	icon_state = "slipspace_effect"
-	pixel_x = -32
-	pixel_y = -32
+	pixel_x = -16
+	pixel_y = -16
 
 /obj/effect/slipspace_rupture/New()
 	spawn(6)
