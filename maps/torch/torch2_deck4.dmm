@@ -1301,7 +1301,7 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/structure/plasticflaps/mining,
+/obj/structure/plasticflaps/airtight,
 /turf/simulated/floor/plating,
 /area/quartermaster/office)
 "ep" = (
@@ -12026,7 +12026,7 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/structure/plasticflaps/mining,
+/obj/structure/plasticflaps/airtight,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
 /area/quartermaster/office)
