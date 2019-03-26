@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Added colour selection to the suit vest and waistcoat in the loadout."
