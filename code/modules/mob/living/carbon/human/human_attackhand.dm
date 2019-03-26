@@ -138,6 +138,9 @@
 			return H.species.attempt_grab(H, src)
 
 		if(I_HURT)
+			if(H.incapacitated())
+				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
+				return
 
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
