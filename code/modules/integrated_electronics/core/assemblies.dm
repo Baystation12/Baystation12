@@ -104,6 +104,7 @@
 	STOP_PROCESSING(SScircuit, src)
 	for(var/circ in assembly_components)
 		remove_component(circ)
+		qdel(circ)
 	return ..()
 
 /obj/item/device/electronic_assembly/Process()
