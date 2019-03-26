@@ -33,12 +33,9 @@
 	var/list/map_generators = list()
 	var/features_budget = 4
 	//pre-defined list of features templates to pick from
-	var/list/possible_features = list(
-									/datum/map_template/ruin/exoplanet/monolith,
-									/datum/map_template/ruin/exoplanet/hydrobase,
-									/datum/map_template/ruin/exoplanet/crashed_pod,
-									/datum/map_template/ruin/exoplanet/hut,
-									/datum/map_template/ruin/exoplanet/playablecolony)
+	var/list/ruin_tags_whitelist
+	var/list/ruin_tags_blacklist
+	var/list/possible_features = list()
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -57,10 +54,12 @@
 		var/datum/exoplanet_theme/T = pick(possible_themes)
 		themes += new T
 
-	var/list/feature_types = possible_features.Copy()
-	possible_features.Cut()
-	for(var/T in feature_types)
+	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
 		var/datum/map_template/ruin/exoplanet/ruin = new T
+		if(LAZYLEN(ruin_tags_whitelist) && !length(ruin_tags_whitelist & ruin.ruin_tags))
+			continue
+		if(LAZYLEN(ruin_tags_blacklist) && length(ruin_tags_blacklist & ruin.ruin_tags))
+			continue
 		possible_features += ruin
 	..()
 

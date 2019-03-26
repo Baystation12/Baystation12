@@ -4,19 +4,6 @@
 	color = "#d6cca4"
 	planetary_area = /area/exoplanet/desert
 	rock_colors = list(COLOR_BEIGE, COLOR_PALE_YELLOW, COLOR_GRAY80, COLOR_BROWN)
-	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-							 /datum/map_template/ruin/exoplanet/oasis,
-							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
-							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
-							 /datum/map_template/ruin/exoplanet/fountain,
-							 /datum/map_template/ruin/exoplanet/marooned,
-							 /datum/map_template/ruin/exoplanet/hydrobase,
-							 /datum/map_template/ruin/exoplanet/lodge,
-							 /datum/map_template/ruin/exoplanet/crashed_pod,
-							 /datum/map_template/ruin/exoplanet/drill_site,
-							 /datum/map_template/ruin/exoplanet/radshrine,
-							 /datum/map_template/ruin/exoplanet/playablecolony,
-							 /datum/map_template/ruin/exoplanet/datacapsule)
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()

@@ -4,17 +4,6 @@
 	color = "#3e3960"
 	planetary_area = /area/exoplanet/shrouded
 	rock_colors = list(COLOR_INDIGO, COLOR_DARK_BLUE_GRAY, COLOR_NAVY_BLUE)
-	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-							/datum/map_template/ruin/exoplanet/hydrobase,
-							/datum/map_template/ruin/exoplanet/tar_anomaly,
-							/datum/map_template/ruin/exoplanet/hut,
-							/datum/map_template/ruin/exoplanet/drill_site,
-							/datum/map_template/ruin/exoplanet/crashed_pod,
-							/datum/map_template/ruin/exoplanet/radshrine,
-							/datum/map_template/ruin/exoplanet/spider_nest,
-							/datum/map_template/ruin/exoplanet/deserted_lab,
-							/datum/map_template/ruin/exoplanet/playablecolony,
-							/datum/map_template/ruin/exoplanet/datacapsule)
 	map_generators = list(/datum/random_map/noise/exoplanet/shrouded, /datum/random_map/noise/ore/poor)
 
 /obj/effect/overmap/sector/exoplanet/shrouded/generate_atmosphere()
