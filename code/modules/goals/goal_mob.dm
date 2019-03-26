@@ -30,7 +30,7 @@
 
 	to_chat(src, "<hr>")
 	if(LAZYLEN(mind.goals))
-		to_chat(src, SPAN_NOTICE("<b>This round, you have the following personal goals:</b><br>[jointext(mind.summarize_goals(show_success, allow_modification), "<br>")]"))
+		to_chat(src, SPAN_NOTICE("<b>This round, you have the following personal goals:</b><br>[jointext(mind.summarize_goals(show_success, allow_modification, mind.current), "<br>")]"))
 	else
 		to_chat(src, SPAN_NOTICE("<b>You have no personal goals this round.</b>"))
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
