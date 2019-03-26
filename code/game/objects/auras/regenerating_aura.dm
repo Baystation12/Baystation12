@@ -142,7 +142,7 @@
 
 /obj/aura/regenerating/human/unathi/life_tick()
 	var/mob/living/carbon/human/H = user
-	if(istype(H) && H.stat != DEAD && H.nutrition < 50)
+	if(innate_heal && istype(H) && H.stat != DEAD && H.nutrition < 50)
 		H.apply_damage(5, TOX)
 		H.nutrition += 3
 		return 1
