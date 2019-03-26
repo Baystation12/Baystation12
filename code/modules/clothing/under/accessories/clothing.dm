@@ -1,8 +1,11 @@
 /obj/item/clothing/accessory/wcoat
 	name = "waistcoat"
-	desc = "For some classy, murderous fun."
+	desc = "A classy waistcoat."
 	icon_state = "vest"
 	item_state = "wcoat"
+
+/obj/item/clothing/accessory/wcoat/black
+	color = COLOR_GRAY15
 
 /obj/item/clothing/accessory/suspenders
 	name = "suspenders"
@@ -149,8 +152,11 @@
 
 /obj/item/clothing/accessory/toggleable/vest
 	name = "black vest"
-	desc = "Slick black suit vest."
+	desc = "A slick suit vest."
 	icon_state = "det_vest"
+
+/obj/item/clothing/accessory/toggleable/vest/black
+	color = COLOR_GRAY15
 
 /obj/item/clothing/accessory/toggleable/tan_jacket
 	name = "tan suit jacket"
