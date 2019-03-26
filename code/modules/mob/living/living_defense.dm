@@ -187,7 +187,7 @@
 	var/i = 1
 
 	while(i>0 && i<=distance)
-		if(T.density) //Turf is a wall!
+		if(!T || T.density) //Turf is a wall or map edge.
 			return last_turf
 		i++
 		last_turf = T
