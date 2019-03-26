@@ -5452,11 +5452,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "lM" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/generic,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "lN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -9454,6 +9451,12 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"ud" = (
+/obj/structure/bed/chair/comfy{
+	dir = 8
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "ue" = (
 /obj/effect/floor_decal/corner/green/half,
 /obj/item/device/radio/intercom{
@@ -9790,15 +9793,11 @@
 /area/maintenance/thirddeck/port)
 "uZ" = (
 /turf/simulated/wall/prepainted,
-/area/security/range)
+/area/crew_quarters/terranbar)
 "va" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/security/range)
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "vb" = (
-/obj/machinery/door/airlock/glass/security{
-	name = "Firing Range"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -9808,8 +9807,11 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/decal/cleanable/blood/oil,
+/obj/machinery/door/airlock/civilian{
+	name = "The Rodina"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/security/range)
+/area/crew_quarters/terranbar)
 "vc" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -10222,23 +10224,19 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/structure/table/reinforced,
-/obj/machinery/recharger,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/woodentable/maple,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "wb" = (
-/obj/structure/table/reinforced,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/woodentable/maple,
+/obj/item/weapon/newspaper,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "we" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -10252,8 +10250,10 @@
 	c_tag = "Firing Range";
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/machinery/vending/sovietsoda,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "wf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -10292,8 +10292,8 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "wj" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10735,22 +10735,23 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/structure/table/reinforced,
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -22;
 	pixel_y = 0
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/machinery/recharger,
+/obj/structure/table/woodentable/maple,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "xf" = (
-/obj/machinery/door/airlock/maintenance{
-	name = "Firing Range Maintenance"
-	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/civilian{
+	name = "The Rodina"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/security/range)
+/area/crew_quarters/terranbar)
 "xg" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/closet/emcloset,
@@ -10760,8 +10761,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "xi" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -10769,16 +10770,15 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/blood/oil,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/bed/chair/comfy,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "xj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "xk" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/reagent_dispensers/fueltank,
@@ -11101,6 +11101,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
+"xK" = (
+/obj/effect/floor_decal/corner/red/half,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/thirddeck/center)
 "xL" = (
 /obj/structure/sign/warning/secure_area{
 	icon_state = "securearea";
@@ -11399,18 +11404,19 @@
 /area/crew_quarters/sleep/cryo)
 "ym" = (
 /turf/simulated/wall/r_wall/prepainted,
-/area/security/range)
+/area/crew_quarters/terranbar)
 "yn" = (
-/obj/structure/table/reinforced,
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/obj/structure/bed/chair/comfy{
+	dir = 4
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "yo" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plating,
-/area/security/range)
+/obj/structure/table/woodentable/maple,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "yp" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/corner/brown{
@@ -11792,31 +11798,24 @@
 /turf/simulated/floor/plating,
 /area/command/bsa)
 "zi" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/turf/simulated/floor/tiled,
-/area/security/range)
-"zj" = (
-/obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/obj/machinery/vending/snix,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "zk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/woodentable/maple,
+/obj/item/weapon/deck/cards,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "zl" = (
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
-/obj/effect/decal/cleanable/cobweb2,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "zn" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Vacant Offices";
@@ -12101,17 +12100,10 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/port)
-"Ab" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
 "Ac" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
-/obj/random/trash,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "Ae" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -12707,32 +12699,35 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/gamblingtable,
+/obj/structure/disposalpipe/segment,
+/obj/item/weapon/dice{
+	step_x = 1;
+	step_y = 0
+	},
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "BG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/glass,
+/obj/item/weapon/book/manual/barman_recipes,
+/obj/item/toy/desk/fan,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "BH" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/obj/structure/table/glass,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "BI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -12740,15 +12735,17 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/glass,
+/obj/item/toy/plushie/spider,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "BJ" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/obj/item/weapon/stool/padded,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "BK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -13025,29 +13022,27 @@
 /area/storage/tools)
 "Cz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/obj/random/trash,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "CA" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/obj/item/weapon/stool/padded,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "CB" = (
 /obj/machinery/magnetic_module,
-/obj/effect/decal/cleanable/spiderling_remains,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/table/glass,
+/obj/machinery/light_switch,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "CC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/red{
-	dir = 6
+/obj/structure/table/gamblingtable,
+/obj/structure/disposalpipe/segment,
+/obj/item/weapon/dice{
+	step_y = 1
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "CE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -13272,21 +13267,16 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/machinery/vending/boozeomat,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "Dm" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/machinery/disposal,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "Dn" = (
 /turf/simulated/wall/prepainted,
 /area/vacant/cabin)
@@ -13327,6 +13317,10 @@
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"Dr" = (
+/obj/structure/sign/double/barsign,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/terranbar)
 "Dt" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
@@ -13694,11 +13688,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/bsa)
-"El" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/weapon/gun/energy/laser/practice,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
 "Em" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/sign/directions/supply{
@@ -14715,6 +14704,14 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
+"GY" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "GZ" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -15189,6 +15186,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/bsa)
+"Iu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/chair/comfy{
+	dir = 1
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "Iw" = (
 /obj/effect/floor_decal/industrial/hatch/red,
 /obj/structure/ship_munition/bsa_charge/explosive,
@@ -16777,12 +16782,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
 "LL" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/obj/effect/decal/cleanable/blood/oil,
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/item/weapon/stool/bar/padded,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "LM" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -16923,11 +16925,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/engine_eva)
-"Me" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/barricade,
-/turf/simulated/floor/plating,
-/area/security/range)
 "Mf" = (
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/techfloor,
@@ -17188,6 +17185,24 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/engine_eva)
+"MV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/junction{
+	icon_state = "pipe-j1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/thirddeck/center)
 "MW" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 1;
@@ -18171,8 +18186,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/coatrack,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "Qm" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -18452,6 +18468,10 @@
 	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
+"Rj" = (
+/obj/structure/disposalpipe/segment,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/terranbar)
 "Rl" = (
 /obj/effect/floor_decal/industrial/hatch,
 /obj/structure/closet/crate{
@@ -18511,11 +18531,10 @@
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftport)
 "Rt" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/disposalpipe/segment,
+/obj/item/weapon/stool/padded,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "Rv" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -18581,11 +18600,9 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "RM" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
@@ -18678,6 +18695,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
+"RY" = (
+/obj/machinery/media/jukebox/old,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "Sb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
@@ -20080,6 +20101,12 @@
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
+"Wd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/item/weapon/stool/bar/padded,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "Wh" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -20179,10 +20206,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
 "WA" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/random/trash,
-/turf/simulated/floor/tiled/monotile,
-/area/security/range)
+/obj/item/trash/chips,
+/turf/simulated/floor/wood/usedup,
+/area/crew_quarters/terranbar)
 "WB" = (
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
@@ -21246,8 +21272,9 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "ZC" = (
-/turf/simulated/floor/tiled,
-/area/security/range)
+/obj/machinery/light/small,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/terranbar)
 "ZD" = (
 /obj/machinery/power/emitter,
 /obj/effect/floor_decal/corner/yellow/half{
@@ -40457,12 +40484,12 @@ wD
 qP
 RQ
 tP
-uZ
+Dr
 wa
 xc
 va
 zi
-zi
+RY
 LL
 BG
 Cz
@@ -40659,16 +40686,16 @@ wD
 Xn
 sj
 Pw
-Me
+uZ
 wb
 xh
 yn
-zj
+yn
 lM
-El
+LL
 BH
-Ab
-Ab
+lM
+lM
 ym
 UZ
 TQ
@@ -40866,8 +40893,8 @@ wi
 xi
 yo
 zk
-zk
-zk
+Iu
+Wd
 BI
 CB
 ZC
@@ -41063,13 +41090,13 @@ wD
 aR
 sk
 tO
-Me
+uZ
 Qk
 xj
-yn
-zj
-Ab
-Ab
+ud
+ud
+lM
+va
 BJ
 CA
 WA
@@ -41263,12 +41290,12 @@ Wb
 Wb
 Wb
 VC
-RQ
-tP
-uZ
+MV
+xK
+Rj
 we
 RL
-va
+GY
 zl
 Ac
 Rt

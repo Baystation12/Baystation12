@@ -1011,6 +1011,10 @@
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
 
+/area/crew_quarters/terranbar
+	name = "\improper The Rodina"
+	icon_state = "Rodina"
+
 /area/crew_quarters/adherent
 	name = "\improper Adherent Maintenence"
 	icon_state = "robotics"
