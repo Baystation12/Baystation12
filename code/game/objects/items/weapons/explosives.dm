@@ -80,6 +80,11 @@
 			W.dismantle_wall(1)
 		else if(istype(target, /mob/living))
 			target.ex_act(2) // c4 can't gib mobs anymore.
+		else if(istype(target, /obj/structure/window))
+			var/window_turf = get_turf(target)
+			for(var/obj/structure/S in window_turf)
+				if(istype(S, /obj/structure/window) || istype(S, /obj/structure/grille) || istype(S, /obj/structure/wall_frame))
+					S.ex_act(1)
 		else
 			target.ex_act(1)
 	if(target)
