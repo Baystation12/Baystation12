@@ -817,6 +817,8 @@ default behaviour is:
 
 /mob/living/proc/melee_accuracy_mods()
 	. = 0
+	if(incapacitated())
+		. += 100
 	if(eye_blind)
 		. += 75
 	if(eye_blurry)
