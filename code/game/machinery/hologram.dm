@@ -57,6 +57,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	var/holopadType = HOLOPAD_SHORT_RANGE //Whether the holopad is short-range or long-range.
 	var/base_icon = "holopad-B"
 
+	var/allow_ai = TRUE
+
 /obj/machinery/hologram/holopad/New()
 	..()
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[loc.loc]'"
@@ -79,7 +81,12 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 		audible_message("Severing connection to distant holopad.")
 		end_call(user)
 		return
-	switch(alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel"))
+	
+	var/handle_type = "Holocomms"
+	if(allow_ai)
+		handle_type = alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel")
+	
+	switch(handle_type)
 		if("AI")
 			if(last_request + 200 < world.time) //don't spam the AI with requests you jerk!
 				last_request = world.time
@@ -158,6 +165,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	This may change in the future but for now will suffice.*/
 	if(user.eyeobj && (user.eyeobj.loc != src.loc))//Set client eye on the object if it's not already.
 		user.eyeobj.setLoc(get_turf(src))
+	else if (!allow_ai)
+		to_chat(user, SPAN_WARNING("Access denied."))
 	else if(!masters[user])//If there is no hologram, possibly make one.
 		activate_holo(user)
 	else//If there is a hologram, remove it.
@@ -411,6 +420,10 @@ Holographic project of everything else.
 	power_per_hologram = 1000 //per usage per hologram
 	holopadType = HOLOPAD_LONG_RANGE
 	base_icon = "holopad-Y"
+
+// Used for overmap capable ships that should have communications, but not be AI accessible
+/obj/machinery/hologram/holopad/longrange/remoteship
+	allow_ai = FALSE
 
 #undef RANGE_BASED
 #undef AREA_BASED
