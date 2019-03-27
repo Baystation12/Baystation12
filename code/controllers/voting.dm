@@ -26,7 +26,8 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/proc/autotransfer()
 	//initiate_vote("crew_transfer","the server", 1)
-	call_vote("crew_transfer")
+	//call_vote("crew_transfer")
+	call_vote("end_round_early")		//a generic replacement
 
 /datum/controller/subsystem/vote/proc/autogamemode()
 	//initiate_vote("gamemode","the server", 1)

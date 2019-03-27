@@ -136,8 +136,52 @@
 	pregame_vote = 0
 
 
-/* CREW TRANSFER */
 
+/* END ROUND EARLY */
+//a generic replacement for crew transfer vote, use this instead
+/datum/vote/end_round_early
+	name = "end_round_early"
+	question = "End the round early?"
+	choices = list("End Round Early", "Continue The Round")
+
+/datum/vote/end_round_early/Initialize()
+	..()
+
+	if(!config.allow_vote_restart)
+		disabled = 1
+		disable_reason = "disabled in config"
+
+/datum/vote/end_round_early/calculate_result()
+	//default-vote for everyone who didn't vote
+	if(!config.vote_no_default)
+		var/non_voters = (GLOB.clients.len - total_votes)
+		if(non_voters > 0)
+			var/factor = 0.5
+			switch(world.time / (10 * 60)) // minutes
+				if(0 to 60)
+					factor = 0.5
+				if(61 to 120)
+					factor = 0.8
+				if(121 to 240)
+					factor = 1
+				if(241 to 300)
+					factor = 1.2
+				else
+					factor = 1.4
+			choices["End Round Early"] = round(choices["End Round Early"] * factor)
+			to_world("<font color='purple'>Time multiplier factor: [factor]</font>")
+	. = ..()
+
+/datum/vote/end_round_early/do_result()
+	. = ..()
+
+	if(.[1] == "End Round Early")
+		evacuation_controller.finish_evacuation()
+
+
+
+/* CREW TRANSFER */
+//don't use this, we're not on a single ship or station any more
 /datum/vote/crew_transfer
 	name = "crew_transfer"
 	question = "End the shift?"

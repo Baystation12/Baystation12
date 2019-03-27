@@ -174,6 +174,9 @@
 		if(safe_expire_warning_check)
 			safe_expire_warning = 1
 
+	if(evacuation_controller.round_over())
+		round_end_reasons += "an early round end was voted for"
+
 	var/end_round_triggers = round_end_reasons.len
 
 	//only count 1 destroyed faction towards the end round triggers
@@ -181,7 +184,7 @@
 		end_round_triggers -= factions_destroyed
 		end_round_triggers += 1
 
-	return end_round_triggers >= 2
+	return (end_round_triggers >= 2 || evacuation_controller.round_over())
 
 /datum/game_mode/invasion/declare_completion()
 
