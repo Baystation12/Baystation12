@@ -15,6 +15,7 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_ultra,\
+		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/kigyarminor,\
 		/datum/job/covenant/kigyarmajor,
 		/datum/job/covenant/kigyarcorvette/captain,\
