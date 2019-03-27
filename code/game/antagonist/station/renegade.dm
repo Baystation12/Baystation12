@@ -24,7 +24,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	hard_cap_round = 12
 	initial_spawn_req = 3
 	initial_spawn_target = 6
-	antaghud_indicator = "hudrenegade"
+	antaghud_indicator = "hud_renegade"
 	skill_setter = /datum/antag_skill_setter/station
 
 	var/list/spawn_guns = list(
