@@ -1,5 +1,0 @@
-author: Datraen
-delete-after: True
-changes: 
-  - tweak: "Changes renegade spawn list to allow for any bag to conceal a spawned weapon."
-  - bugfix: "Gyrojet no longer drops casings, now accepts magazines properly."
