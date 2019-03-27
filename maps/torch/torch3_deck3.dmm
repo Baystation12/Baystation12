@@ -6224,10 +6224,6 @@
 	departmentType = 5;
 	pixel_y = -32
 	},
-/obj/machinery/recharger/wallcharger{
-	pixel_x = 32;
-	pixel_y = -28
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -10922,7 +10918,7 @@
 	dir = 4
 	},
 /obj/machinery/recharger/wallcharger{
-	pixel_x = 6;
+	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -12991,8 +12987,9 @@
 /obj/random/tech_supply,
 /obj/machinery/light,
 /obj/machinery/recharger/wallcharger{
-	pixel_x = 6;
-	pixel_y = -32
+	dir = 1;
+	icon_state = "wrecharger0";
+	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/storage/tools)
@@ -13003,8 +13000,9 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/machinery/recharger/wallcharger{
-	pixel_x = 6;
-	pixel_y = -32
+	dir = 1;
+	icon_state = "wrecharger0";
+	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/storage/tools)
@@ -20631,6 +20629,11 @@
 	},
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/recharger/wallcharger{
+	dir = 1;
+	icon_state = "wrecharger0";
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "XK" = (
