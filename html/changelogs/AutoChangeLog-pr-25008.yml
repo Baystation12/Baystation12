@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Crawlers who are weakened (forced down) will crawl slower. Being confused will now additionally reduce their crawl speed."
+  - tweak: "You can no longer attack with harm intent while incapacitated."
+  - tweak: "Being incapacitated in any way will drastically reduce your melee accuracy."
