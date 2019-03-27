@@ -109,8 +109,8 @@
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
 		if(ishuman(occupant))
 			var/mob/living/carbon/human/H = occupant
-			if(H.species.name == SPECIES_ADHERENT)
-				diff /= 2 //Adherents charge at half the normal rate.
+			if(H.species.name == SPECIES_ADHERENT || if(isSynthetic(M) && (locate(/obj/item/device/mmi) in M.implants)))
+				diff /= 2 //Adherents and FBPs charge at half the normal rate.
 		var/charge_used = cell.use(diff)
 		target.give(charge_used)
 
