@@ -15,6 +15,7 @@ GLOBAL_VAR(spawntypes)
 	var/list/turfs   //List of turfs to spawn on.
 	var/display_name //Name used in preference setup.
 	var/always_visible = FALSE	// Whether this spawn point is always visible in selection, ignoring map-specific settings.
+	var/restrict_spawn_faction
 	var/list/restrict_job = null
 	var/list/restrict_job_type = null
 	var/list/disallow_job = null
@@ -37,6 +38,9 @@ GLOBAL_VAR(spawntypes)
 	if(disallow_job_type && (cur_job.type in disallow_job_type))
 		return 0
 
+	if(restrict_spawn_faction && cur_job.spawn_faction != restrict_spawn_faction)
+		return 0
+
 	if(!turfs)
 		return 0
 
@@ -55,6 +59,8 @@ GLOBAL_VAR(spawntypes)
 					turfs += T
 
 			unsafe_turfs.Add(newly_dangerous_turfs)
+			if(newly_dangerous_turfs.len)
+				message_admins("NOTICE: spawnpoint \'[src.type]\' has new atmos unsafe turfs.")
 
 	if(!turfs.len)
 		return 0
