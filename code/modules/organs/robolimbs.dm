@@ -148,7 +148,6 @@ var/datum/robolimb/basic_robolimb
 	skintone = 1
 	unavailable_at_fab = 1
 	species_cannot_use = list(SPECIES_IPC)
-	applies_to_part = list(BP_CHEST, BP_GROIN, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT) // All except head. Needs a resprite
 
 /datum/robolimb/grayson
 	company = "Grayson"

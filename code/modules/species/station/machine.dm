@@ -1,4 +1,8 @@
 /datum/species/machine
+
+	virus_immune = 1
+
+/datum/species/machine/ipc
 	name = SPECIES_IPC
 	name_plural = "machines"
 
@@ -9,7 +13,7 @@
 	inhuman in outlook and perspective."
 	cyborg_noun = null
 
-	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
+	preview_icon = 'icons/mob/human_races/species/machine/ipc/preview.dmi'
 
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
@@ -38,7 +42,6 @@
 
 	blood_color = "#1f181f"
 	flesh_color = "#575757"
-	virus_immune = 1
 
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
@@ -84,6 +87,29 @@
 		TAG_FACTION = FACTION_POSITRONICS
 	)
 
+/datum/species/machine/prosthetic
+	name = SPECIES_PROSTHETIC
+	name_plural = "Human (Full Body Prosthesis)"
+	description = ""
+	preview_icon = 'icons/mob/human_races/species/machine/ipc/preview.dmi'
+	health_hud_intensity = 3
+
+	descriptors = list(
+		/datum/mob_descriptor/height = -1,
+		/datum/mob_descriptor/build = 1
+		)
+
+	has_organ = list(
+		BP_CELL = /obj/item/organ/internal/cell,
+		BP_EYES = /obj/item/organ/internal/eyes/robot,
+		BP_BRAIN = /obj/item/organ/internal/mmi_holder
+		// BP_FBP_STOMACH = 
+		)
+
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
+	spawn_flags = SPECIES_CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))
@@ -102,3 +128,4 @@
 /datum/species/machine/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
+

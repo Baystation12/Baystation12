@@ -26,7 +26,7 @@
 
 	species_to_branch_blacklist = list(
 		/datum/species/human   = list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
-		/datum/species/machine = list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
+		/datum/species/machine/ipc= list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
 		/datum/species/vox     = list(
 			/datum/mil_branch/expeditionary_corps,
 			/datum/mil_branch/fleet,
@@ -46,7 +46,7 @@
 	)
 
 	species_to_rank_whitelist = list(
-		/datum/species/machine = list(
+		/datum/species/machine/ipc= list(
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,

@@ -33,7 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscdel: "Removes Vey-Med FBP head, pending a resprite. Makes it more visually obvious that the person is an FBP."
   - wip: "Makes the FBP's MMI degrade when out of power or under critical body conditions."
   - wip: "Adds robotic organs to the FBP, making them distinct from robots and IPCs. Adds accompanying surgery steps."
   - wip: "Adds a robotic stomach that processes chemical fuel to recharge the FBP."
@@ -41,3 +40,5 @@ changes:
   - tweak: "Reduces the effectiveness of cyborg rechargers for FBPs."
   - wip: "Makes FBPs MMI vulnerable to radiation damage, and head trauma."
   - wip: "Changes FBP construction to make it distinct from cyborg construction."
+  - rscadd: "Adds a Human (Full Body Prosthesis) subspecies under machine category."
+  - rscdel: "Humans can no longer choose to be an FBP on chargen. Use new Machine -> Human(FBP) subspecies instead."
