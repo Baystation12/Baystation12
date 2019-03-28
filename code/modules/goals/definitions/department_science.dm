@@ -4,9 +4,7 @@
 /datum/department/science
 	name = "Science"
 	flag = SCI
-	goals = list(
-		/datum/goal/department/extract_slime_cores
-	)
+	goals = list(/datum/goal/department/extract_slime_cores)
 
 /datum/goal/department/extract_slime_cores
 	var/min_cores
@@ -16,7 +14,7 @@
 	..()
 
 /datum/goal/department/extract_slime_cores/update_strings()
-	description = "Extract more than [min_cores] [min_cores == 1 ? "slime core" : "slime cores"] this shift."
+	description = "Extract more than [min_cores] slime core\s this shift."
 
 /datum/goal/department/extract_slime_cores/get_summary_value()
 	return " ([SSstatistics.extracted_slime_cores_amount] core\s so far)"
