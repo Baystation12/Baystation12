@@ -97,6 +97,7 @@
 	new /obj/effect/slipspace_rupture(T)
 	play_jump_sound(T)
 	//rapidly move into the portal
+	om_obj.break_umbilicals()
 	walk_to(om_ship,T,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
 		om_obj.loc = null
