@@ -115,8 +115,8 @@
 /area/hallway/primary/fifthdeck/fore)
 "av" = (
 /obj/item/weapon/stool/bar,
-/turf/simulated/floor/holofloor/wood{
-	icon_state = "wood_broken1"
+/turf/simulated/floor/wood/walnut{
+	icon_state = "walnut_broken3"
 	},
 /area/vacant/bar)
 "aw" = (
@@ -2645,6 +2645,9 @@
 /obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
+"fz" = (
+/turf/simulated/wall/walnut,
+/area/vacant/bar)
 "fB" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -8729,6 +8732,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/shield/fifthdeck)
+"sA" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/table/steel,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftstarboard)
 "sC" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10978,8 +10991,8 @@
 "zL" = (
 /obj/structure/table/steel,
 /obj/item/device/flashlight/lamp/green,
-/turf/simulated/floor/holofloor/wood{
-	icon_state = "wood_broken3"
+/turf/simulated/floor/wood/walnut{
+	icon_state = "walnut_broken0"
 	},
 /area/vacant/bar)
 "zO" = (
@@ -11024,7 +11037,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/holofloor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
 "zZ" = (
 /obj/structure/disposalpipe/segment{
@@ -11255,7 +11268,7 @@
 "AT" = (
 /obj/structure/table/steel,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/turf/simulated/floor/holofloor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
 "AU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -11875,8 +11888,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/holofloor/wood{
-	icon_state = "wood_broken6"
+/turf/simulated/floor/wood/walnut{
+	icon_state = "walnut_broken5"
 	},
 /area/vacant/bar)
 "Dn" = (
@@ -12897,7 +12910,7 @@
 /area/shuttle/petrov/rnd)
 "HE" = (
 /obj/structure/table/steel,
-/turf/simulated/floor/holofloor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
 "HG" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -13862,8 +13875,8 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/phoron)
 "Lj" = (
-/turf/simulated/floor/holofloor/wood{
-	icon_state = "wood_broken2"
+/turf/simulated/floor/wood/walnut{
+	icon_state = "walnut_broken5"
 	},
 /area/vacant/bar)
 "Lm" = (
@@ -14056,8 +14069,8 @@
 	pixel_x = 22;
 	pixel_y = -22
 	},
-/turf/simulated/floor/holofloor/wood{
-	icon_state = "wood_broken4"
+/turf/simulated/floor/wood/walnut{
+	icon_state = "walnut_broken0"
 	},
 /area/vacant/bar)
 "LU" = (
@@ -14271,7 +14284,7 @@
 /area/shuttle/petrov/cockpit)
 "MG" = (
 /obj/item/weapon/stool/bar,
-/turf/simulated/floor/holofloor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
 "ML" = (
 /obj/machinery/door/airlock/external{
@@ -14357,7 +14370,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/cockpit)
 "Ne" = (
-/turf/simulated/floor/holofloor/wood,
+/turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
 "Nf" = (
 /obj/structure/table/standard,
@@ -15957,8 +15970,8 @@
 /obj/structure/table/steel,
 /obj/item/weapon/storage/box/glasses,
 /obj/item/weapon/storage/box/glasses/rocks,
-/turf/simulated/floor/holofloor/wood{
-	icon_state = "wood_broken2"
+/turf/simulated/floor/wood/walnut{
+	icon_state = "walnut_broken3"
 	},
 /area/vacant/bar)
 "TD" = (
@@ -39126,11 +39139,11 @@ aa
 aa
 Qd
 Qd
-XI
+fz
 NL
-XI
-XI
-XI
+fz
+fz
+fz
 EX
 Es
 Qn
@@ -39332,7 +39345,7 @@ yI
 Ne
 Lj
 zL
-XI
+fz
 EX
 Xb
 tp
@@ -39534,7 +39547,7 @@ MG
 av
 Ne
 Ia
-XI
+fz
 EX
 Es
 Qn
@@ -40139,7 +40152,7 @@ Qd
 Qd
 Dl
 AT
-XI
+fz
 HU
 Nh
 yz
@@ -40340,9 +40353,9 @@ Qd
 Qd
 Qd
 Qd
-XI
-XI
-PG
+fz
+fz
+sA
 yQ
 Ek
 Nv
