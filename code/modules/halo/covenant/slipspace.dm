@@ -1,9 +1,9 @@
 
 /obj/structure/covenant_slipspace
-	name = "Slipspace Generator"
+	name = "Long RangeSlipspace Generator"
 	icon = 'slipspace.dmi'
 	icon_state = "slipspace"
-	desc = "An incredibly advanced machine capable of precise slipspace jumps."
+	desc = "An incredibly advanced machine capable of precise slipspace jumps, modified for single-purpose fast transportation to a pre-set endpoint."
 	anchored = 1
 	density = 1
 	bound_width = 64
@@ -73,22 +73,5 @@
 
 				//despawn the ship
 				ship.do_superstructure_fail()
-
-/obj/effect/slipspace_rupture
-	name = "slipspace rupture"
-	icon = 'code/modules/halo/covenant/slipspace.dmi'
-	icon_state = "slipspace_effect"
-	pixel_x = -16
-	pixel_y = -16
-	var/time_to_die = 0
-
-/obj/effect/slipspace_rupture/New()
-	time_to_die = world.time + 6
-	GLOB.processing_objects += src
-
-/obj/effect/slipspace_rupture/process()
-	if(world.time > time_to_die)
-		GLOB.processing_objects -= src
-		qdel(src)
 
 /datum/game_mode/proc/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
