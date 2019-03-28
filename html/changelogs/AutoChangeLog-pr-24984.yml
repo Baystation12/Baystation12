@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "All knives have been unified under one type. Please report any irregularities."
-  - rscadd: "Added an additional folding knife to the loadout: 'tactical folding knife'"
-  - rscdel: "Butterfly knives and switchblades can no longer backstab, temporarily at least."
