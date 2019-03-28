@@ -14,10 +14,10 @@
 	..()
 
 /datum/goal/department/extract_slime_cores/update_strings()
-	description = "Extract more than [min_cores] slime core\s this shift."
+	description = "Extract at least [min_cores] slime core\s this shift."
 
 /datum/goal/department/extract_slime_cores/get_summary_value()
-	return " ([SSstatistics.extracted_slime_cores_amount] core\s so far)"
+	return " ([SSstatistics.extracted_slime_cores_amount] core\s extracted so far)"
 
 /datum/goal/department/extract_slime_cores/check_success()
 	return (SSstatistics.extracted_slime_cores_amount >= min_cores)
