@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Intercom sprites now reflect the on/off status of microphone and speaker switches."
