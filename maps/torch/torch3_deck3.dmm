@@ -5201,8 +5201,10 @@
 	dir = 5
 	},
 /obj/machinery/door/window/brigdoor/southleft{
+	autoset_access = 0;
 	dir = 8;
-	name = "suit storage"
+	name = "SE's suit storage";
+	req_access = list("ACCESS_TELECOMS")
 	},
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/corner/yellow/mono,
