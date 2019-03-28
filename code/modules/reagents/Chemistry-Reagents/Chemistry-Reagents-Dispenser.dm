@@ -126,6 +126,11 @@
 		strength_mod *= 5
 	if(alien == IS_DIONA)
 		strength_mod = 0
+	if(alien == IS_PROSTHETIC)
+		if (M.cell)
+			M.cell.give(removed * 100)
+		adj_temp = 10 // ethanol increases temperature, discourages drinking the entire bar
+		strength_mod = 0
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
@@ -198,6 +203,11 @@
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 	remove_self(volume)
 	return
+
+/datum/reagent/hydrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if (IS_PROSTHETIC && M.cell)
+		M.cell.give(removed * 100)
+		// damage stomach
 
 /datum/reagent/iron
 	name = "Iron"

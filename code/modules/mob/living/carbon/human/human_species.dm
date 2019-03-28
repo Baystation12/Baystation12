@@ -49,8 +49,11 @@
 /mob/living/carbon/human/diona/New(var/new_loc)
 	..(new_loc, SPECIES_DIONA)
 
-/mob/living/carbon/human/machine/New(var/new_loc)
+/mob/living/carbon/human/machine/ipc/New(var/new_loc)
 	..(new_loc, SPECIES_IPC)
+
+/mob/living/carbon/human/machine/prosthetic/New(var/new_loc)
+	..(new_loc, SPECIES_PROSTHETIC)
 
 /mob/living/carbon/human/nabber/New(var/new_loc)
 	pulling_punches = 1
