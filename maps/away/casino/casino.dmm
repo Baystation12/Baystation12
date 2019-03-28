@@ -486,7 +486,7 @@
 /area/space)
 "bu" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bv" = (
@@ -1270,7 +1270,7 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/item/weapon/material/kitchen/utensil/knife/folding,
+/obj/item/weapon/material/knife/folding,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_crew_bathroom)
@@ -3130,7 +3130,7 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 4
 	},
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iq" = (

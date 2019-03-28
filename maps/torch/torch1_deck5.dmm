@@ -1964,7 +1964,7 @@
 	dir = 4
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /obj/item/weapon/beartrap,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/cargo)

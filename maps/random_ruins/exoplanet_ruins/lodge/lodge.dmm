@@ -50,7 +50,7 @@
 /obj/item/weapon/material/kitchen/utensil/fork/plastic,
 /obj/item/weapon/material/kitchen/utensil/fork/plastic,
 /obj/item/weapon/material/kitchen/utensil/fork/plastic,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
@@ -58,8 +58,8 @@
 /area/template_noop)
 "l" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
+/obj/item/weapon/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
 	dir = 1
@@ -115,7 +115,7 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "t" = (

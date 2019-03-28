@@ -25,7 +25,7 @@
 	l_ear = /obj/item/device/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/apron
-	l_pocket = /obj/item/weapon/material/hatchet/tacknife
+	l_pocket = /obj/item/weapon/material/knife/combat
 	r_pocket = /obj/item/weapon/scalpel
 	r_hand = /obj/item/weapon/material/twohanded/fireaxe
 

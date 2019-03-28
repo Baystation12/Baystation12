@@ -142,7 +142,7 @@
 	if(prob(25))
 		new_item = new /obj/item/weapon/material/kitchen/utensil/fork(loc)
 	else if(prob(50))
-		new_item = new /obj/item/weapon/material/kitchen/utensil/knife(loc)
+		new_item = new /obj/item/weapon/material/knife/table(loc)
 	else
 		new_item = new /obj/item/weapon/material/kitchen/utensil/spoon(loc)
 	additional_desc = "[pick("It's like no [item_type] you've ever seen before",\
@@ -194,7 +194,7 @@
 
 /obj/item/weapon/archaeological_find/knife/spawn_item()
 	item_type = "[pick("bladed knife","serrated blade","sharp cutting implement")]"
-	var/obj/item/new_item = new /obj/item/weapon/material/knife(loc)
+	var/obj/item/new_item = new /obj/item/weapon/material/knife/combat(loc)
 	additional_desc = "[pick("It doesn't look safe.",\
 	"It looks wickedly jagged",\
 	"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains along the edges")]."
