@@ -1,9 +1,9 @@
 
 /obj/structure/covenant_slipspace
-	name = "Slipspace Generator"
+	name = "Long RangeSlipspace Generator"
 	icon = 'slipspace.dmi'
 	icon_state = "slipspace"
-	desc = "An incredibly advanced machine capable of precise slipspace jumps."
+	desc = "An incredibly advanced machine capable of precise slipspace jumps, modified for single-purpose fast transportation to a pre-set endpoint."
 	anchored = 1
 	density = 1
 	bound_width = 64
