@@ -2,6 +2,19 @@
 
 	virus_immune = 1
 
+	warning_low_pressure = 50
+	hazard_low_pressure = -1
+
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
+
+	heat_level_1 = SYNTH_HEAT_LEVEL_1		// Gives them about 25 seconds in space before taking damage
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
+
+	body_temperature = null
+
 /datum/species/machine/ipc
 	name = SPECIES_IPC
 	name_plural = "machines"
@@ -22,18 +35,6 @@
 	min_age = 1
 	max_age = 90
 
-	warning_low_pressure = 50
-	hazard_low_pressure = -1
-
-	cold_level_1 = SYNTH_COLD_LEVEL_1
-	cold_level_2 = SYNTH_COLD_LEVEL_2
-	cold_level_3 = SYNTH_COLD_LEVEL_3
-
-	heat_level_1 = SYNTH_HEAT_LEVEL_1		// Gives them about 25 seconds in space before taking damage
-	heat_level_2 = SYNTH_HEAT_LEVEL_2
-	heat_level_3 = SYNTH_HEAT_LEVEL_3
-
-	body_temperature = null
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
@@ -93,39 +94,69 @@
 	description = ""
 	preview_icon = 'icons/mob/human_races/species/machine/ipc/preview.dmi'
 	health_hud_intensity = 3
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+	min_age = 17
+	max_age = 100
+	hidden_from_codex = FALSE
 
 	descriptors = list(
 		/datum/mob_descriptor/height = -1,
 		/datum/mob_descriptor/build = 1
 		)
 
+	passive_temp_gain = 3
+
 	has_organ = list(
 		BP_CELL = /obj/item/organ/internal/cell,
 		BP_EYES = /obj/item/organ/internal/eyes/robot,
 		BP_BRAIN = /obj/item/organ/internal/mmi_holder
-		// BP_FBP_STOMACH = 
+		BP_FBP_STOMACH = /obj/item/organ/internal/stomach/fuel_processor
 		)
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
-/datum/species/machine/handle_death(var/mob/living/carbon/human/H)
+
+	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+
+	available_cultural_info = list(
+		TAG_CULTURE = list(
+			CULTURE_HUMAN_MARTIAN,
+			CULTURE_HUMAN_MARSTUN,
+			CULTURE_HUMAN_LUNAPOOR,
+			CULTURE_HUMAN_LUNARICH,
+			CULTURE_HUMAN_VENUSIAN,
+			CULTURE_HUMAN_VENUSLOW,
+			CULTURE_HUMAN_BELTER,
+			CULTURE_HUMAN_PLUTO,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_CETI,
+			CULTURE_HUMAN_SPACER,
+			CULTURE_HUMAN_SPAFRO,
+			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_OTHER
+		)
+
+/datum/species/machine/ipc/handle_death(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))
 		var/obj/item/clothing/mask/monitor/M = H.wear_mask
 		M.monitor_state_index = "blank"
 		M.update_icon()
 
-/datum/species/machine/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/datum/species/machine/ipc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_ROBOTIC(E))
 		E.robotize("Morpheus")
 
-/datum/species/machine/get_blood_name()
+/datum/species/machine/ipc/get_blood_name()
 	return "oil"
 
-/datum/species/machine/disfigure_msg(var/mob/living/carbon/human/H)
+/datum/species/machine/ipc/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
 
+/datum/species/machine/prosthetic/get_digestion_product()
+	var/digested_energy = 0
+	return 
