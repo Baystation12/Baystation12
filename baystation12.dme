@@ -1522,6 +1522,7 @@
 #include "code\modules\halo\machinery\overmap_weapon.dm"
 #include "code\modules\halo\machinery\overmap_weapon_ammo.dm"
 #include "code\modules\halo\machinery\proj_deck_gun.dm"
+#include "code\modules\halo\machinery\slipspace_engine.dm"
 #include "code\modules\halo\machinery\telecomms_relays.dm"
 #include "code\modules\halo\machinery\autosurgeon\_defines.dm"
 #include "code\modules\halo\machinery\autosurgeon\autosurgeon.dm"
