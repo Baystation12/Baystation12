@@ -3365,6 +3365,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/pitcher,
 /obj/item/weapon/reagent_containers/glass/beaker/bowl,
 /obj/item/weapon/reagent_containers/food/condiment/salt,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
