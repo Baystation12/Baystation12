@@ -94,6 +94,9 @@
 			var/obj/effect/vine/P = A
 			P.die_off()
 
+/obj/item/weapon/material/twohanded/fireaxe/ishatchet()
+	return TRUE
+
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear
 	icon_state = "spearglass0"
