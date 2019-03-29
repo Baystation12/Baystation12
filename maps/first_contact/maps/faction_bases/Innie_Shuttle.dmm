@@ -1,9 +1,9 @@
 "a" = (/turf/space,/area/space)
-"b" = (/turf/simulated/shuttle/wall,/area/faction_base/innie_shuttle)
-"c" = (/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
-"d" = (/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
-"e" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
-"f" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"b" = (/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"c" = (/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"d" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"e" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"f" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
 "g" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "h" = (/obj/structure/table/rack,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "i" = (/obj/structure/table/rack,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
@@ -40,7 +40,6 @@
 "N" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "O" = (/obj/structure/table/rack,/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
 "P" = (/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
-"Q" = (/obj/effect/hull_segment,/turf/simulated/shuttle/wall,/area/faction_base/innie_shuttle)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -51,23 +50,23 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaabbbbbbbbbbaaaa
-aaaaaaaaaaaaaabbbbaaabbbccccccbaabbbbbbbbbbbaaaa
-aaaaaaaaaaaaabbddeaabbccccccccbaabbfdddddfdeaaaa
-aaaaaaaaaaaaabfddeaabcccccccccbaabbddddddddeaaaa
-aaaaaaaaabbbbbdbbbbbbbbbbbbbbbbQbbbddbbbbbbbaaaa
-aaaaaabbbbbbQbgbbbbbbhhhhihhhhbbbbbgbbbaaaaaaaaa
+aaaaaaaaaaaaaabbbbaaabbbbbbbbbbaabbbbbbbbbbbaaaa
+aaaaaaaaaaaaabbccdaabbbbbbbbbbbaabbecccccecdaaaa
+aaaaaaaaaaaaabeccdaabbbbbbbbbbbaabbccccccccdaaaa
+aaaaaaaaabbbbbcbbbbbbbbbbbbbbbbfbbbccbbbbbbbaaaa
+aaaaaabbbbbbfbgbbbbbbhhhhihhhhbbbbbgbbbaaaaaaaaa
 aaaaabbbbbbjklmnoooonooooooooonoooopkkbbbaaaaaaa
 aaaqqbbrstbjkkuvwwwwwwwwwwwwwwwwwwxykklkbbaaaaaa
-aaqqzAlkkBbCkkuwwwwwwwwwwwwwwwwwwwwykkkkcbaaaaaa
-aaqqDkkkkkEkkkuwwwwwwwwwwwwwwwwwwwwykkkkcbaaaaaa
+aaqqzAlkkBbCkkuwwwwwwwwwwwwwwwwwwwwykkkkbbaaaaaa
+aaqqDkkkkkEkkkuwwwwwwwwwwwwwwwwwwwwykkkkbbaaaaaa
 aaqqFAGkkHbCkkuwwwwwwwwwwwwwwwwwwwwykkkkIbaaaaaa
 aaaqqbbkJkbjkkuxwwwwwwwwwwwwwwwwwwvykkGkbbaaaaaa
 aaaaabbbbbbjkGKLMMMMLMMMMMMMMMLMMMMNkkbbbaaaaaaa
-aaaaaabbbbbbQbgbbbbbbhhhhOhhhhbQbbbgbbbaaaaaaaaa
-aaaaaaaaabbbbbdbbbbbbbbbbbbbbbbbbbbddbbbbbbbaaaa
-aaaaaaaaaaaaabPddeaabcccccccccbaabbddddddddeaaaa
-aaaaaaaaaaaaabbddeaabbccccccccbaabbPdddddPdeaaaa
-aaaaaaaaaaaaaabbbbaaabbbccccccbaabbbbbbbbbbbaaaa
+aaaaaabbbbbbfbgbbbbbbhhhhOhhhhbfbbbgbbbaaaaaaaaa
+aaaaaaaaabbbbbcbbbbbbbbbbbbbbbbbbbbccbbbbbbbaaaa
+aaaaaaaaaaaaabPccdaabbbbbbbbbbbaabbccccccccdaaaa
+aaaaaaaaaaaaabbccdaabbbbbbbbbbbaabbPcccccPcdaaaa
+aaaaaaaaaaaaaabbbbaaabbbbbbbbbbaabbbbbbbbbbbaaaa
 aaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaabbbbbbbbbbaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
