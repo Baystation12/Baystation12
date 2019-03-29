@@ -54,10 +54,9 @@
 					Stun(2)
 
 				//Moving makes open wounds get infected much faster
-				if (E.wounds.len)
-					for(var/datum/wound/W in E.wounds)
-						if (W.infection_check())
-							W.germ_level += 1
+				for(var/datum/wound/W in E.wounds)
+					if (W.infection_check())
+						W.germ_level += 1
 
 /mob/living/carbon/human/proc/handle_stance()
 	// Don't need to process any of this if they aren't standing anyways

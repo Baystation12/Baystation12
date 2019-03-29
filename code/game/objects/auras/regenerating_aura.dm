@@ -92,7 +92,7 @@
 			else if (H.nutrition > grow_threshold) //We don't subtract any nut here, but let's still only heal wounds when we have nut.
 				for(var/datum/wound/W in E.wounds)
 					if(W.wound_damage() == 0 && prob(50))
-						E.wounds -= W
+						qdel(W)
 	return 1
 
 /obj/aura/regenerating/human/proc/low_nut_warning(var/wound_type)
