@@ -1241,6 +1241,7 @@
 #include "code\modules\admin\secrets\admin_secrets\toggle_circuits.dm"
 #include "code\modules\admin\secrets\admin_secrets\toggle_overmap_movement.dm"
 #include "code\modules\admin\secrets\admin_secrets\traitors_and_objectives.dm"
+#include "code\modules\admin\secrets\debug\toggle_harddel.dm"
 #include "code\modules\admin\secrets\debug\world_types.dm"
 #include "code\modules\admin\secrets\fun_secrets\break_all_lights.dm"
 #include "code\modules\admin\secrets\fun_secrets\break_some_lights.dm"
