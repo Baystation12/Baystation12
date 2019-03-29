@@ -52,7 +52,8 @@
 
 /* OTHER */
 
-/obj/item/weapon/storage/belt/covenant
+/obj/item/weapon/storage/belt/utility/covenant
+	name = "Covenant utility belt"
 	icon = 'tools.dmi'
 	//species_restricted = list("Unggoy","Jiralhanae","San-Shyuum","Sangheili","Kig-Yar","Tvaoan Kig-Yar")
 
