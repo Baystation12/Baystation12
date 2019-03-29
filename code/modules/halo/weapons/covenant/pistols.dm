@@ -14,6 +14,11 @@
 	screen_shake = 0
 	irradiate_non_cov = 2
 	var/overcharge_cost = 1
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Jiralhanae" = null,\
+		"Sangheili" = null\
+		)
 
 /obj/item/weapon/gun/energy/plasmapistol/New()
 	. = ..()
@@ -86,4 +91,9 @@
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Jiralhanae" = null,\
+		"Sangheili" = null\
 		)

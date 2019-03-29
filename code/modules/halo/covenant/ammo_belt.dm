@@ -3,7 +3,12 @@
 	name = "Covenant martial belt"
 	desc = "A belt with many various pouches to hold ammunition and weaponry"
 	icon = 'tools.dmi'
+	item_state = "securitybelt"
 	color = "#ff99ff"
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Sangheili" = null\
+		)
 
 	can_hold = list(/obj/item/ammo_magazine,\
 		/obj/item/ammo_box,\
