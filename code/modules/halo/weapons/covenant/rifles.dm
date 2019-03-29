@@ -18,6 +18,11 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 	irradiate_non_cov = 1
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Jiralhanae" = null,\
+		"Sangheili" = null\
+		)
 
 /obj/item/weapon/gun/energy/plasmarifle/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)
