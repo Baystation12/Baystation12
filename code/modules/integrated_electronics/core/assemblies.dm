@@ -14,6 +14,7 @@
 	var/max_components = IC_MAX_SIZE_BASE
 	var/max_complexity = IC_COMPLEXITY_BASE
 	var/opened = TRUE
+	var/hatch_locked = FALSE
 	var/obj/item/weapon/cell/battery // Internal cell which most circuits need to work.
 	var/cell_type = /obj/item/weapon/cell
 	var/can_charge = TRUE //Can it be charged in a recharger?
@@ -459,6 +460,10 @@
 		detail_color = D.detail_color
 		update_icon()
 	else if(istype(I, /obj/item/weapon/screwdriver))
+		if(hatch_locked)
+			to_chat(user, "<span class='notice'>The screws are covered by a locking mechanism!</span>")
+			return FALSE
+
 		playsound(src, 'sound/items/Screwdriver.ogg', 25)
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")

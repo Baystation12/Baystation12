@@ -700,3 +700,38 @@
 		set_pin_data(IC_OUTPUT, 1, assembly.anchored)
 		push_data()
 		activate_pin(2)
+
+/obj/item/integrated_circuit/manipulation/hatchlock
+	name = "maintenance hatch lock"
+	desc = "An electronically controlled lock for the assembly's maintenance hatch."
+	extended_desc = "WARNING: If you lock the hatch with no circuitry to reopen it, there is no way to open the hatch again!"
+	icon_state = "hatch_lock"
+
+	outputs = list(
+		"enabled" = IC_PINTYPE_BOOLEAN
+	)
+	activators = list(
+		"toggle" = IC_PINTYPE_PULSE_IN,
+		"on toggle" = IC_PINTYPE_PULSE_OUT
+	)
+
+	complexity = 4
+	cooldown_per_use = 2 SECOND
+	power_draw_per_use = 50
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	origin_tech = list(TECH_ENGINEERING = 2)
+
+/obj/item/integrated_circuit/manipulation/hatchlock/do_work(ord)
+	if(ord == 1)
+		assembly.hatch_locked = !assembly.hatch_locked
+
+		visible_message(
+			assembly.hatch_locked ? \
+			"<span class='notice'>\The [get_object()] whirrs. The screws are now covered.</span>" \
+			: \
+			"<span class='notice'>\The [get_object()] whirrs. The screws are now exposed!</span>"
+		)
+
+		set_pin_data(IC_OUTPUT, 1, assembly.hatch_locked)
+		push_data()
+		activate_pin(2)
