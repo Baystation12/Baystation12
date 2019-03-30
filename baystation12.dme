@@ -1713,6 +1713,7 @@
 #include "code\modules\integrated_electronics\core\wirer.dm"
 #include "code\modules\integrated_electronics\core\prefab\prefab.dm"
 #include "code\modules\integrated_electronics\core\prefab\prefabs.dm"
+#include "code\modules\integrated_electronics\core\prefab\test\testprefabs.dm"
 #include "code\modules\integrated_electronics\core\special_pins\boolean_pin.dm"
 #include "code\modules\integrated_electronics\core\special_pins\char_pin.dm"
 #include "code\modules\integrated_electronics\core\special_pins\color_pin.dm"
