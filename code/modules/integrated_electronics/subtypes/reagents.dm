@@ -551,7 +551,7 @@
 	var/mode = IC_HEATER_MODE_HEAT
 
 /obj/item/integrated_circuit/reagent/temp/Initialize()
-	..()
+	. = ..()
 
 	set_pin_data(IC_OUTPUT, 2, temperature - T0C)
 	push_data()
