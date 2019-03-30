@@ -122,4 +122,18 @@
 		if(ingested.total_volume > 60 || ((alcohol_threshold_met || ingested.total_volume > 35) && prob(15)))
 			owner.vomit()
 
+/obj/item/organ/internal/stomach/robot
+	name = "fuel processor"
+
+/obj/item/organ/internal/stomach/robot/New()
+	..()
+	robotize()
+
+/obj/item/organ/internal/stomach/robotize()
+	..()
+	name = "stomach"
+	icon = 'icons/obj/robot_component.dmi'
+	icon_state = "motor"
+	dead_icon = "motor_broken"
+
 #undef PUKE_ACTION_NAME

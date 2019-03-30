@@ -99,18 +99,13 @@
 	max_age = 100
 	hidden_from_codex = FALSE
 
-	descriptors = list(
-		/datum/mob_descriptor/height = -1,
-		/datum/mob_descriptor/build = 1
-		)
-
 	passive_temp_gain = 3
 
 	has_organ = list(
 		BP_CELL = /obj/item/organ/internal/cell,
 		BP_EYES = /obj/item/organ/internal/eyes/robot,
-		BP_BRAIN = /obj/item/organ/internal/mmi_holder
-		BP_FBP_STOMACH = /obj/item/organ/internal/stomach/fuel_processor
+		BP_BRAIN = /obj/item/organ/internal/mmi_holder,
+		BP_FBP_STOMACH = /obj/item/organ/internal/stomach/robot
 		)
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
@@ -137,6 +132,7 @@
 			CULTURE_HUMAN_CONFED,
 			CULTURE_HUMAN_OTHER
 		)
+	)
 
 /datum/species/machine/ipc/handle_death(var/mob/living/carbon/human/H)
 	..()
@@ -157,6 +153,3 @@
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
 
-/datum/species/machine/prosthetic/get_digestion_product()
-	var/digested_energy = 0
-	return 

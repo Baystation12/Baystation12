@@ -24,7 +24,7 @@ var/datum/robolimb/basic_robolimb
 	var/list/species_cannot_use = list()
 	var/list/restricted_to = list()
 	var/list/applies_to_part = list() //TODO.
-	var/list/allowed_bodytypes = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SKRELL, SPECIES_UNATHI)
+	var/list/allowed_bodytypes = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_PROSTHETIC)
 
 /datum/robolimb/bishop
 	company = "Bishop"
@@ -69,7 +69,7 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_main.dmi'
 	can_eat = 1
 	unavailable_at_fab = 1
-	allowed_bodytypes = list(SPECIES_HUMAN,SPECIES_IPC)
+	allowed_bodytypes = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_PROSTHETIC)
 
 /datum/robolimb/xion
 	company = "Xion"
