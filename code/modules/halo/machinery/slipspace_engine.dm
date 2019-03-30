@@ -82,33 +82,30 @@
 	return 1
 
 /obj/machinery/slipspace_engine/proc/do_slipspace_enter_effects()
+	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS, MODIFIED.//
 	var/obj/effect/overmap/ship/om_ship = om_obj
-	if(!istype(om_ship))
-		return
-	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS//
-	om_ship.speed = list(0,0)
+	if(istype(om_ship))
+		om_ship.speed = list(0,0)
+		om_ship.break_umbilicals()
 	//animate the slipspacejump
-	var/headingdir = om_ship.get_heading()
-	if(!headingdir)
-		headingdir = om_ship.dir
-	var/turf/T = om_ship.loc
+	var/headingdir = om_obj.dir
+	var/turf/T = om_obj.loc
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
 	play_jump_sound(T)
 	//rapidly move into the portal
-	om_ship.break_umbilicals()
-	walk_to(om_ship,T,0,1,0)
+	walk_to(om_obj,T,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
 		om_obj.loc = null
-		walk_to(om_ship,null)
+		walk_to(om_obj,null)
 
 /obj/machinery/slipspace_engine/proc/do_slipspace_exit_effects(var/exit_loc)
 	var/obj/effect/overmap/ship/om_ship = om_obj
-	if(!istype(om_ship))
-		return
-	om_ship.speed = list(0,0)
-	var/headingdir = om_ship.dir
+	if(istype(om_ship))
+		om_ship.speed = list(0,0)
+
+	var/headingdir = om_obj.dir
 	var/turf/T = exit_loc
 	//Below code should flip the dirs.
 	T = get_step(T,headingdir)
@@ -118,10 +115,10 @@
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
 	play_jump_sound(T)
-	om_ship.loc = T
-	walk_to(om_ship,exit_loc,0,1,0)
+	om_obj.loc = T
+	walk_to(om_obj,exit_loc,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
-		walk_to(om_ship,null)
+		walk_to(om_obj,null)
 
 /obj/machinery/slipspace_engine/proc/slipspace_to_location(var/turf/location)
 	do_slipspace_exit_effects(location)
