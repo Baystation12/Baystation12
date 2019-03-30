@@ -98,6 +98,7 @@
 	min_age = 17
 	max_age = 100
 	hidden_from_codex = FALSE
+	reagent_tag = IS_PROSTHETIC
 
 	passive_temp_gain = 3
 
@@ -152,4 +153,3 @@
 /datum/species/machine/ipc/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
-
