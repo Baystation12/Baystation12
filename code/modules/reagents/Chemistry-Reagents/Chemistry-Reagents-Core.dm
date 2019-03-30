@@ -250,8 +250,10 @@
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
 
 /datum/reagent/fuel/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if (IS_PROSTHETIC && M.cell)
-		M.cell.give(removed * 100)
+	if (alien == IS_PROSTHETIC)
+		var/cell = M.internal_organs_by_name[BP_CELL]
+		if (cell)
+			cell.give(removed * 10000)
 		// damage stomach
 
 /datum/reagent/fuel/ex_act(obj/item/weapon/reagent_containers/holder, severity)

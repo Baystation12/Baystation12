@@ -127,8 +127,9 @@
 	if(alien == IS_DIONA)
 		strength_mod = 0
 	if(alien == IS_PROSTHETIC)
-		if (M.cell)
-			M.cell.give(removed * 100)
+		var/cell = M.internal_organs_by_name[BP_CELL]
+		if (cell)
+			cell.give(removed * 10000)
 		adj_temp = 10 // ethanol increases temperature, discourages drinking the entire bar
 		strength_mod = 0
 
@@ -205,8 +206,10 @@
 	return
 
 /datum/reagent/hydrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if (IS_PROSTHETIC && M.cell)
-		M.cell.give(removed * 100)
+	if (alien == IS_PROSTHETIC)
+		var/cell = M.internal_organs_by_name[BP_CELL]
+		if (cell)
+			cell.give(removed * 10000)
 		// damage stomach
 
 /datum/reagent/iron
