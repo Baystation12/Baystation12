@@ -4,7 +4,7 @@
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Commanding Officer and the Executive Officer"
+	supervisors = "the Chief Science Officer"
 	selection_color = "#68099e"
 	minimal_player_age = 1
 	economic_power = 7
