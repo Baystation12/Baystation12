@@ -658,3 +658,45 @@
 /obj/item/integrated_circuit/manipulation/ai/Destroy()
 	unload_ai()
 	return ..()
+
+/obj/item/integrated_circuit/manipulation/anchoring
+	name = "anchoring bolts"
+	desc = "Pop-out anchoring bolts which can secure an assembly to the floor."
+	icon_state = "anchoring_bolts"
+
+	outputs = list(
+		"enabled" = IC_PINTYPE_BOOLEAN
+	)
+	activators = list(
+		"toggle" = IC_PINTYPE_PULSE_IN,
+		"on toggle" = IC_PINTYPE_PULSE_OUT
+	)
+
+	complexity = 8
+	cooldown_per_use = 2 SECOND
+	power_draw_per_use = 50
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	origin_tech = list(TECH_ENGINEERING = 2)
+
+/obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
+	if(!isturf(assembly.loc))
+		return
+
+	// Doesn't work with anchorable assemblies
+	if(assembly.circuit_flags & IC_FLAG_ANCHORABLE)
+		visible_message("<span class='warning'>\The [get_object()]'s anchoring bolt circuitry blinks red. The preinstalled assembly anchoring bolts are in the way of the pop-out bolts!</span>")
+		return
+
+	if(ord == 1)
+		assembly.anchored = !assembly.anchored
+
+		visible_message(
+			assembly.anchored ? \
+			"<span class='notice'>\The [get_object()] deploys a set of anchoring bolts!</span>" \
+			: \
+			"<span class='notice'>\The [get_object()] retracts its anchoring bolts</span>"
+		)
+
+		set_pin_data(IC_OUTPUT, 1, assembly.anchored)
+		push_data()
+		activate_pin(2)

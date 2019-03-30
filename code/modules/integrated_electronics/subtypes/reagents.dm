@@ -492,11 +492,10 @@
 
 	inputs = list(
 		"target" = IC_PINTYPE_REF
-		)
-	outputs = list()
+	)
 	activators = list(
 		"on transfer" = IC_PINTYPE_PULSE_OUT
-		)
+	)
 
 	unacidable = 1
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
