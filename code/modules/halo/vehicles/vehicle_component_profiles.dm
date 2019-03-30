@@ -69,7 +69,7 @@
 	else if(remove)
 		contained_vehicle.contents -= object
 		current_cargo -= object
-		object.loc = pick(contained_vehicle.locs)
+		object.loc = contained_vehicle.pick_valid_exit_loc()
 		return object
 	else
 		var/obj/vehicles/vehicle = object
