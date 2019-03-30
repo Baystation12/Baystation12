@@ -483,5 +483,42 @@
 	activate_pin(2)
 	push_data()
 
+// This is an input circuit because attackby_react is only called for input circuits
+/obj/item/integrated_circuit/input/funnel
+	category_text = "Reagent"
+	name = "reagent funnel"
+	desc = "A funnel with a small pump that lets you refill an internal reagent storage."
+	icon_state = "reagent_funnel"
+
+	inputs = list(
+		"target" = IC_PINTYPE_REF
+		)
+	outputs = list()
+	activators = list(
+		"on transfer" = IC_PINTYPE_PULSE_OUT
+		)
+
+	unacidable = 1
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	complexity = 4
+	power_draw_per_use = 5
+
+/obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/living/user, intent)
+	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
+	var/obj/item/weapon/reagent_containers/container = I
+
+	if(!check_target(target))
+		return FALSE
+
+	if(!istype(container))
+		return FALSE
+
+	// Messages are provided by standard_pour_into
+	if(container.standard_pour_into(user, target))
+		activate_pin(1)
+		return TRUE
+
+	return FALSE
+
 #undef IC_REAGENTS_DRAW
 #undef IC_REAGENTS_INJECT
