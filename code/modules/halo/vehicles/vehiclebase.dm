@@ -56,7 +56,7 @@
 	return 0
 
 /obj/vehicles/proc/pick_valid_exit_loc()
-	var/list/valid_exit_locs = locs
+	var/list/valid_exit_locs = list()
 	for(var/turf/t in locs)
 		for(var/turf/t_2 in range(1,t))
 			if(!(t_2 in locs))
