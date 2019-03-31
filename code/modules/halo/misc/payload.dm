@@ -32,6 +32,7 @@
 				explode_at = world.time + seconds_to_explode SECONDS
 				exploding = 1
 				GLOB.processing_objects += src
+				message2discord(config.oni_discord, "@here, Payload device armed by [user.real_name] ([user.ckey]) @ ([loc.x],[loc.y],[loc.z])")
 				set_anchor(1)
 				checkoverlay(1)
 	else
