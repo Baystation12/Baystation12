@@ -95,7 +95,7 @@
 /obj/machinery/deck_gun
 	name = "Deck Gun"
 	desc = "The firing mechanism of a deck gun."
-	icon = 'code/modules/halo/machinery/deck_gun.dmi'
+	icon = 'code/modules/halo/overmap/weapons/deck_gun.dmi'
 	icon_state = "deck_gun"
 	anchored = 1
 	var/sound/fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
@@ -136,7 +136,7 @@
 /obj/machinery/deck_gun/chaingun
 	name = "Deck Chaingun"
 	desc = "A deck gun modified to fire multiple times per fire-input."
-	icon = 'code/modules/halo/machinery/deck_chaingun.dmi'
+	icon = 'code/modules/halo/overmap/weapons/deck_chaingun.dmi'
 	icon_state = "deck_gatling3"
 	max_rounds_loadable = 12
 	rounds_loaded = 12

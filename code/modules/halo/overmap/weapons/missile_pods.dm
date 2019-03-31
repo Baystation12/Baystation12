@@ -20,7 +20,7 @@
 /obj/machinery/deck_gun/missile_pod
 	name = "Missile Pod"
 	desc = "Holds the machinery for loading and firing missiles."
-	icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
+	icon = 'code/modules/halo/overmap/weapons/deck_missile_pod.dmi'
 	icon_state = "missile_pod"
 	fire_sound = 'code/modules/halo/sounds/rocket_pod_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/missile

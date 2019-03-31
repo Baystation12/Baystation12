@@ -18,7 +18,7 @@
 /obj/machinery/deck_gun/cov_pulse_turret
 	name = "Pulse Turret"
 	desc = "Fires beams of pure light at opposing vessels"
-	icon = 'code/modules/halo/machinery/pulse_turret.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret.dmi'
 	icon_state = "pulse_turret_2"
 	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/pulse_laser
@@ -33,7 +33,7 @@
 /obj/item/projectile/overmap/pulse_laser
 	name = "laser"
 	desc = "An incredibly hot beam of pure light"
-	icon = 'code/modules/halo/machinery/pulse_turret.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret.dmi'
 	icon_state = ""
 	ship_damage_projectile = /obj/item/projectile/pulse_laser_damage_proj
 	step_delay = 0.0 SECONDS
