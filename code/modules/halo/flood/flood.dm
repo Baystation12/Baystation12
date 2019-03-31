@@ -91,7 +91,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	new_combat_form.forceMove(h.loc)
 	new_combat_form.ckey = h.ckey
 	new_combat_form.name = h.real_name
-	if(prob(25))
+	if(prob(50))
 		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
 	if(new_combat_form.ckey)
 		new_combat_form.stop_automated_movement = 1
@@ -151,15 +151,26 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
-		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
+		if((mob_healthdam > h.maxHealth/4) || h.stat != CONSCIOUS) //Less than quarter health or unconscious/dead? Jump 'em.
 			if(infect_mob(h))
-				return //No more than one at a time.
+				return 1//No more than one at a time.
+
+/mob/living/simple_animal/hostile/flood/infestor/proc/revive_nearby_combatforms()
+	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
+		var/mob/living/simple_animal/hostile/flood/combat_form/newform = new floodform.type (floodform.loc)
+		if(floodform.ckey || floodform.client)
+			newform.ckey = floodform.ckey
+
+		qdel(floodform)
+		adjustBruteLoss(1)
+		return //One at a time.
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
 	if(ckey || client)
 		return
-	attempt_nearby_infect()
+	if(!attempt_nearby_infect())
+		revive_nearby_combatforms()
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()
