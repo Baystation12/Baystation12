@@ -13308,7 +13308,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/bed/chair/padded/blue,
+/obj/structure/closet/secure_closet/bridgeofficer,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Ii" = (
