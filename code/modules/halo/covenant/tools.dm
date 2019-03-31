@@ -59,6 +59,7 @@
 	description_fluff = "Good hide is hard to come by in certain regions of the galaxy. When they can't come across it, most TSCs will outfit their crews with toolbelts made of synthesized leather."
 	description_antag = "Only amateurs skip grabbing a tool-belt."
 	icon = 'tools.dmi'
+	item_state = "securitybelt"
 	//species_restricted = list("Unggoy","Jiralhanae","San-Shyuum","Sangheili","Kig-Yar","Tvaoan Kig-Yar")
 	can_hold = list(
 		///obj/item/weapon/combitool,
@@ -80,6 +81,10 @@
 		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/clothing/gloves/insulated
+		)
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Sangheili" = null\
 		)
 
 /obj/item/weapon/cell/covenant

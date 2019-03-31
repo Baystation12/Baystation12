@@ -118,6 +118,7 @@
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
 	play_jump_sound(T)
+	send_jump_alert(T)
 	om_ship.loc = T
 	walk_to(om_ship,exit_loc,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
