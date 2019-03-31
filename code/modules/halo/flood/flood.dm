@@ -160,17 +160,33 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		var/mob/living/simple_animal/hostile/flood/combat_form/newform = new floodform.type (floodform.loc)
 		if(floodform.ckey || floodform.client)
 			newform.ckey = floodform.ckey
-
+		newform.name = floodform.name
+		newform.icon = floodform.icon
+		newform.icon_state = initial(floodform.icon_state)
+		visible_message("<span class = 'notice'>[src] leaps at [floodform]'s chest cavity and burrows in.</span>")
+		visible_message("<span class = 'danger'>[floodform] lurches back to life, the new infection form twitching in place...</span>")
 		qdel(floodform)
 		adjustBruteLoss(1)
-		return //One at a time.
+		return 1 //One at a time.
+
+/mob/living/simple_animal/hostile/flood/infestor/proc/heal_nearby_combatforms()
+	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
+		if(floodform.health < floodform.maxHealth)
+			visible_message("<span class = 'danger'>[src] leaps at [floodform], melding into its flesh...</span>")
+			var/newhealth = floodform.health + (floodform.maxHealth/4)
+			if(newhealth > floodform.maxHealth)
+				floodform.health = floodform.maxHealth
+			else
+				floodform.health = newhealth
+		return 1 //One at a time.
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
 	if(ckey || client)
 		return
 	if(!attempt_nearby_infect())
-		revive_nearby_combatforms()
+		if(!revive_nearby_combatforms())
+			heal_nearby_combatforms()
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()
