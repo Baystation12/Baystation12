@@ -225,7 +225,7 @@
 	desc = "A self-contained device allowing for traversal of slipspace, providing methods of quick travel across large distances without sacrificing accuracy. Can perform slipspace jumps within the gravity wells of large objects."
 	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
 	icon_state = "slipspace"
-	bounds = "64;64"
+	bounds = "64,64"
 	core_to_spawn = null
 	precise_jump = 1
 
@@ -242,13 +242,13 @@
 	desc = "A self-contained device allowing for traversal of slipspace, providing methods of quick travel across large distances. Calculation inaccuracies lead to endpoints being offset from the targeted position. Gravity wells of large objects halt the drive's ability to function."
 	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
 	icon_state = "slipspace"
-	bounds = "64;64"
+	bounds = "64,64"
 	core_to_spawn = null
 
 //SLIPSPACE RUPTURE EFFECT//
 /obj/effect/slipspace_rupture
 	name = "slipspace rupture"
-	icon = 'code/modules/halo/covenant/slipspace.dmi'
+	icon = 'code/modules/halo/icons/machinery/slipspace_jump_effects.dmi'
 	icon_state = "slipspace_effect"
 	pixel_x = -16
 	pixel_y = -16
