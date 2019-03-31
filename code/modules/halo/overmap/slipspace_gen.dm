@@ -2,7 +2,7 @@
 /obj/machinery/slipspace_gen
 	name = "Slipspace Generator"
 	desc = "A device for thrusting the ship into the slipspace dimension."
-	icon = 'code/modules/halo/icons/machinery/engine2.dmi'
+	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
 	icon_state = "Still_Off"
 	density = 1
 	anchored = 1
