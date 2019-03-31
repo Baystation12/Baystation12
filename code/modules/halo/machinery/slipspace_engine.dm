@@ -228,7 +228,7 @@
 	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
 	icon_state = "slipspace"
 	bounds = "64,64"
-	core_to_spawn = null
+	core_to_spawn = /obj/payload/slipspace_core/cov
 	precise_jump = 1
 
 /obj/machinery/slipspace_engine/covenant/allow_user_operate(var/mob/user)
@@ -245,17 +245,18 @@
 	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
 	icon_state = "slipspace"
 	bounds = "64,64"
-	core_to_spawn = null
+	core_to_spawn = /obj/payload/slipspace_core/human
 
 //CORE PAYLOADS//
 /obj/payload/slipspace_core
 	name = "Slipspace Core"
 	desc = "The core of a slipspace device, detached and armed. Slipspace cores are unstable and cannot be disarmed."
 	explodetype = /datum/explosion/slipspace_core
+	seconds_to_explode = 300 //5 minutes
 
 /obj/payload/slipspace_core/Initialize()
 	. = ..()
-	explode_at = world.time + seconds_to_explode*10
+	explode_at = world.time + seconds_to_explode SECONDS
 	exploding = 1
 	GLOB.processing_objects += src
 
@@ -269,6 +270,14 @@
 		for(var/obj in a.contents)
 			qdel(obj)
 		new /area/space/ (a.loc)
+
+/obj/payload/slipspace_core/cov
+	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
+	icon_state = "core"
+
+/obj/payload/slipspace_core/human
+	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
+	icon_state = "core"
 
 //SLIPSPACE RUPTURE EFFECT//
 /obj/effect/slipspace_rupture

@@ -29,7 +29,7 @@
 				u = user
 				u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
 				admin_attack_log("([user.name]) primed a nuke/anti-matter charge.")
-				explode_at = world.time + seconds_to_explode*10
+				explode_at = world.time + seconds_to_explode SECONDS
 				exploding = 1
 				GLOB.processing_objects += src
 				set_anchor(1)
