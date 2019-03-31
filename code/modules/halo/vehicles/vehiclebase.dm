@@ -55,6 +55,17 @@
 				return 1
 	return 0
 
+/obj/vehicles/proc/pick_valid_exit_loc()
+	var/list/valid_exit_locs = list()
+	for(var/turf/t in locs)
+		for(var/turf/t_2 in range(1,t))
+			if(!(t_2 in locs))
+				valid_exit_locs |= t
+				break
+	if(valid_exit_locs.len == 0)
+		return null
+	return pick(valid_exit_locs)
+
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
 	. = ..()
@@ -205,9 +216,13 @@
 		return
 	if(user.incapacitated() && !ignore_incap_check)
 		return
+	var/loc_moveto = pick_valid_exit_loc()
+	if(isnull(loc_moveto))
+		to_chat(user,"<span class = 'notice'>There is no valid location to exit at.</span>")
+		return
 	occupants -= user
 	contents -= user
-	user.loc = pick(src.locs)
+	user.loc = loc_moveto
 	update_object_sprites()
 	if(user.client)
 		user.client.view = world.view

@@ -223,6 +223,7 @@
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 5 SECONDS
+	var/warned = 0
 
 /obj/item/projectile/projector_laser_damage_proj/attack_mob()
 	damage_type = BURN
@@ -239,6 +240,10 @@
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
 	explosion(a,1,2,4,5, adminlog = 0)
+	if(!warned)
+		warned = 1
+		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
+		S.adminwarn_attack()
 
 /obj/item/projectile/projector_laser_damage_proj/launch()
 	create_child_projs()
