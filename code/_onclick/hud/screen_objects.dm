@@ -287,6 +287,12 @@
 
 
 							//We've determined the best container now we set it as our internals
+	
+										if ("methyl_bromide")
+											if(t.air_contents.gas["methyl_bromide"])
+												contents.Add(t.air_contents.gas["methyl_bromide"])
+											else
+												contents.Add(0)
 
 							if(best)
 								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
