@@ -108,6 +108,7 @@
 	the secrets of their empire to their allies."
 	assisted_langs = list(LANGUAGE_NABBER)
 	health_hud_intensity = 1.75
+
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
 	genders = list(PLURAL)
 	hidden_from_codex = FALSE

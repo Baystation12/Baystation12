@@ -22,6 +22,10 @@
 #define LANGUAGE_YEOSA          "Yeosa'unathi"
 #define LANGUAGE_LEGALESE       "Legalese"
 
+#define LANGUAGE_MANTID_NONVOCAL  "Ascent-Glow"
+#define LANGUAGE_MANTID_VOCAL     "Ascent-Voc"
+#define LANGUAGE_MANTID_BROADCAST "Worldnet"
+
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
 #define RESTRICTED   2   // Language can only be acquired by spawning or an admin.

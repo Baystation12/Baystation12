@@ -1,0 +1,1 @@
+#define SCRAMBLE_CACHE_LEN 20

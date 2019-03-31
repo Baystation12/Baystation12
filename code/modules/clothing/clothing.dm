@@ -3,7 +3,14 @@
 	siemens_coefficient = 0.9
 	var/flash_protection = FLASH_PROTECTION_NONE	// Sets the item's level of flash protection.
 	var/tint = TINT_NONE							// Sets the item's level of visual impairment tint.
-	var/list/species_restricted = list("exclude", SPECIES_NABBER) //Only these species can wear this kit.
+	var/list/species_restricted = list(
+		"exclude",
+		SPECIES_NABBER,
+		SPECIES_MANTID_ALATE,
+		SPECIES_MANTID_GYNE,
+		SPECIES_MONARCH_WORKER,
+		SPECIES_MONARCH_QUEEN
+	) //everyone except for these species can wear this kit.
 
 	var/list/accessories = list()
 	var/list/valid_accessory_slots

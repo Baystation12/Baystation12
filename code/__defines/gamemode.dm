@@ -53,6 +53,7 @@
 #define MODE_TRAITOR "traitor"
 #define MODE_DEITY "deity"
 #define MODE_GODCULTIST "god cultist"
+#define MODE_HUNTER "hunter"
 #define MODE_THRALL "mind thrall"
 #define MODE_PARAMOUNT "paramount"
 #define MODE_FOUNDATION "foundation agent"

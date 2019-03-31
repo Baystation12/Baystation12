@@ -11,7 +11,7 @@
 	. = ..()
 	if(isliving(hit_atom))
 		web.buckle_mob(hit_atom)
-		web.visible_message(SPAN_DANGER("\The [hit_atom] is tangled in \the [web]!"))
+		web.visible_message("<span class='danger'>\The [hit_atom] is tangled in \the [web]!</span>")
 	web.entangle(hit_atom, TRUE)
 	qdel(src)
 
@@ -27,7 +27,12 @@
 	var/last_light
 	var/image/gleam
 	var/image/web
-	var/global/species_immunity_list = list()
+	var/global/species_immunity_list = list(
+		SPECIES_MANTID_ALATE = TRUE,
+		SPECIES_MANTID_GYNE = TRUE,
+		SPECIES_MONARCH_WORKER = TRUE,
+		SPECIES_MONARCH_QUEEN = TRUE
+	)
 
 /obj/effect/razorweb/tough
 	name = "tough razorweb"
@@ -53,6 +58,15 @@
 
 /obj/effect/razorweb/attackby(var/obj/item/thing, var/mob/user)
 
+	var/item_force = thing.force
+	var/destroy_self
+	if(item_force)
+		visible_message("<span class='danger'>\The [user] breaks \the [src] with \the [thing]!</span>")
+		destroy_self = TRUE
+
+	if(user.unEquip(thing))
+		visible_message("<span class='danger'>\The [thing] is sliced apart!</span>")
+
 	var/destroy_self
 	if(thing.force)
 		visible_message(SPAN_DANGER("\The [user] breaks \the [src] with \the [thing]!"))
@@ -70,6 +84,11 @@
 	web.alpha = 255 * last_light
 	overlays = list(web, gleam)
 
+/obj/effect/razorweb/Destroy()
+	QDEL_NULL(gleam)
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
 /obj/effect/razorweb/Process()
 	var/turf/T = get_turf(src)
 	if(T)
@@ -82,10 +101,13 @@
 	var/mob/living/M = unbuckle_mob()
 	if(M)
 		if(M != user)
-			visible_message(SPAN_NOTICE("\The [user] drags \the [M] free of \the [src]!"))
+			visible_message("<span class='notice'>\The [user] drags \the [M] free of \the [src]!</span>")
 			entangle(user, silent = TRUE)
 		else
-			visible_message(SPAN_NOTICE("\The [M] writhes free of \the [src]!"))
+			visible_message("<span class='notice'>\The [M] writhes free of \the [src]!</span>")
+			visible_message(SPAN_NOTICE("\The [user] drags \the [M] free of \the [src]!"))
+			entangle(user, silent = TRUE)
+
 		entangle(M, silent = TRUE)
 		add_fingerprint(user)
 	return M
@@ -98,6 +120,7 @@
 
 	if(istype(L, /obj/mecha))
 		var/obj/mecha/mech = L
+		visible_message("<span class='danger'>\The [mech] stomps through \the [src], breaking it apart!</span>")
 		visible_message(SPAN_DANGER("\The [mech] stomps through \the [src], breaking it apart!"))
 		mech.take_damage(rand(30, 50))
 		qdel(src)
@@ -113,6 +136,7 @@
 			return
 
 	if(!silent)
+		visible_message("<span class='danger'>\The [L] blunders into \the [src]!</span>")
 		visible_message(SPAN_DANGER("\The [L] blunders into \the [src]!"))
 
 	var/severed
@@ -131,6 +155,23 @@
 				E = thing
 				break
 
+		if(E && !prob(L.getarmor(E, "melee")))
+			E = H.organs_by_name[E]
+			visible_message("<span class='danger'>The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!</span>")
+			E.droplimb()
+			severed = TRUE
+
+	if(!severed)
+		var/armourval = L.getarmor(null, "melee")
+		if(!prob(armourval))
+			armourval = armourval/100
+			var/dam = Floor(rand(25,50) * armourval)
+			if(dam)
+				L.adjustBruteLoss(dam)
+				visible_message("<span class='danger'>The crystalline strands cut deeply into \the [L]!</span>")
+
+	if(prob(break_chance))
+		visible_message("<span class='danger'>\The [src] breaks apart!</span>")
 		if(E && !prob(100 * L.get_blocked_ratio(null, BRUTE)))
 			E = H.organs_by_name[E]
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))

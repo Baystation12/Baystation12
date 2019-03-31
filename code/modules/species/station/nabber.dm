@@ -85,35 +85,35 @@
 		)
 
 	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/nabber),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/nabber),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/nabber),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/nabber),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/nabber),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/nabber),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/nabber),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/nabber),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/nabber),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/nabber),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/nabber)
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid/nabber),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin/insectoid/nabber),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/insectoid/nabber),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/insectoid),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
 		)
 
 	bioprint_products = list(
-		BP_EYES =    list(/obj/item/organ/internal/eyes/nabber,         30),
-		BP_TRACH =   list(/obj/item/organ/internal/lungs/nabber,        40),
-		BP_HEART =   list(/obj/item/organ/internal/heart/open,          15),
-		BP_LIVER =   list(/obj/item/organ/internal/liver/nabber,        35),
-		BP_ACETONE = list(/obj/item/organ/internal/acetone,             50),
-		BP_HEAD    = list(/obj/item/organ/external/head/nabber,         90),
-		BP_GROIN    = list(/obj/item/organ/external/groin/nabber,   	90),
-		BP_L_ARM   = list(/obj/item/organ/external/arm/nabber,          75),
-		BP_R_ARM   = list(/obj/item/organ/external/arm/right/nabber,    75),
-		BP_L_LEG   = list(/obj/item/organ/external/leg/nabber,          75),
-		BP_R_LEG   = list(/obj/item/organ/external/leg/right/nabber,    75),
-		BP_L_FOOT   = list(/obj/item/organ/external/foot/nabber,        45),
-		BP_R_FOOT   = list(/obj/item/organ/external/foot/right/nabber,  45),
-		BP_L_HAND   = list(/obj/item/organ/external/hand/nabber,        45),
-		BP_R_HAND   = list(/obj/item/organ/external/hand/right/nabber,  45)
+		BP_EYES =     list(/obj/item/organ/internal/eyes/nabber,            30),
+		BP_TRACH =    list(/obj/item/organ/internal/lungs/nabber,           40),
+		BP_HEART =    list(/obj/item/organ/internal/heart/open,             15),
+		BP_LIVER =    list(/obj/item/organ/internal/liver/nabber,           35),
+		BP_ACETONE =  list(/obj/item/organ/internal/acetone,                50),
+		BP_HEAD    =  list(/obj/item/organ/external/head/insectoid/nabber,  90),
+		BP_GROIN    = list(/obj/item/organ/external/groin/insectoid/nabber, 90),
+		BP_L_ARM   =  list(/obj/item/organ/external/arm/insectoid,          75),
+		BP_R_ARM   =  list(/obj/item/organ/external/arm/insectoid,          75),
+		BP_L_LEG   =  list(/obj/item/organ/external/leg/insectoid,          75),
+		BP_R_LEG   =  list(/obj/item/organ/external/leg/right/insectoid,    75),
+		BP_L_FOOT   = list(/obj/item/organ/external/foot/insectoid,         45),
+		BP_R_FOOT   = list(/obj/item/organ/external/foot/right/insectoid,   45),
+		BP_L_HAND   = list(/obj/item/organ/external/hand/insectoid,         45),
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right/insectoid,   45)
 		)
 
 	base_skin_colours = list(
