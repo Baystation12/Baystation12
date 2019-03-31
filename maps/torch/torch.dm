@@ -15,7 +15,7 @@
 	#include "torch_shuttles.dm"
 	#include "torch_submaps.dm"
 	#include "torch_unit_testing.dm"
-
+	#include "torch_immersion.dm"
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
 	#include "datums/uniforms_fleet.dm"
