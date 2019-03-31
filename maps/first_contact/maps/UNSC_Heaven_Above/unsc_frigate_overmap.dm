@@ -6,7 +6,7 @@
 	fore_dir = EAST
 
 	icon = 'maps/first_contact/maps/UNSC_Heaven_Above/frigate.dmi'
-	icon_state = "base"
+	icon_state = "ship"
 
 	pixel_x = -32
 	pixel_y = -32
