@@ -97,3 +97,17 @@
 		return "R"
 	else
 		return "D"
+
+/datum/random_map/noise/ore/filthy_rich
+	deep_val = 0.6
+	rare_val = 0.4
+
+/datum/random_map/noise/ore/rich
+	deep_val = 0.7
+	rare_val = 0.5
+	
+/datum/random_map/noise/ore/poor
+	deep_val = 0.8
+	rare_val = 0.7
+	min_rare_ratio = 0.02
+	min_rare_ratio = 0.01

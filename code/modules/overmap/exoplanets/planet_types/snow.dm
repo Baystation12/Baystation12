@@ -27,12 +27,6 @@
 	ambience = list('sound/effects/wind/tundra0.ogg','sound/effects/wind/tundra1.ogg','sound/effects/wind/tundra2.ogg','sound/effects/wind/spooky0.ogg','sound/effects/wind/spooky1.ogg')
 	base_turf = /turf/simulated/floor/exoplanet/snow/
 
-/datum/random_map/noise/ore/poor
-	deep_val = 0.8
-	rare_val = 0.7
-	min_rare_ratio = 0.02
-	min_rare_ratio = 0.01
-
 /turf/simulated/floor/exoplanet/ice
 	name = "ice"
 	icon = 'icons/turf/snow.dmi'

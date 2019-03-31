@@ -48,10 +48,6 @@
 		if(prob(10))
 			new/obj/structure/quicksand(T)
 
-/datum/random_map/noise/ore/rich
-	deep_val = 0.7
-	rare_val = 0.5
-
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
 	base_turf = /turf/simulated/floor/exoplanet/desert
