@@ -97,6 +97,10 @@
 	icon_state = "sector"
 	anchored = 1
 
+// Because of the way these are spawned, they will potentially have their invisibility adjusted by the turfs they are mapped on
+// prior to being moved to the overmap. This blocks that. Use set_invisibility to adjust invisibility as needed instead.
+/obj/effect/overmap/sector/hide()
+
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
 	if(known)
