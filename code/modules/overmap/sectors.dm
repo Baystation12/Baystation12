@@ -36,6 +36,8 @@ var/list/points_of_interest = list()
 	var/glassed = 0
 	var/nuked = 0
 
+	var/last_adminwarn_attack = 0
+
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
 	if(name == "map object")
@@ -218,6 +220,14 @@ var/list/points_of_interest = list()
 	. = ..()
 	if(15<=hit)
 		src.icon_state="bombed"
+
+
+/obj/effect/overmap/proc/adminwarn_attack(var/attacker)
+	if(world.time > last_adminwarn_attack + 1 MINUTE)
+		last_adminwarn_attack = world.time
+		var/msg = "[src] is under attack[attacker ? " by [attacker]" : ""]"
+		log_admin(msg)
+		message_admins(msg)
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)

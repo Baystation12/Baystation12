@@ -53,8 +53,39 @@
 /* OTHER */
 
 /obj/item/weapon/storage/belt/covenant
+	name = "Covenant utility belt"
+	desc = "A belt of durable leather, festooned with hooks, slots, and pouches."
+	description_info = "The tool-belt has enough slots to carry a full engineer's toolset: screwdriver, crowbar, wrench, welder, cable coil, and multitool. Simply click the belt to move a tool to one of its slots."
+	description_fluff = "Good hide is hard to come by in certain regions of the galaxy. When they can't come across it, most TSCs will outfit their crews with toolbelts made of synthesized leather."
+	description_antag = "Only amateurs skip grabbing a tool-belt."
 	icon = 'tools.dmi'
+	item_state = "securitybelt"
 	//species_restricted = list("Unggoy","Jiralhanae","San-Shyuum","Sangheili","Kig-Yar","Tvaoan Kig-Yar")
+	can_hold = list(
+		///obj/item/weapon/combitool,
+		/obj/item/weapon/crowbar,
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/weldingtool,
+		/obj/item/weapon/wirecutters,
+		/obj/item/weapon/wrench,
+		/obj/item/device/multitool,
+		/obj/item/device/flashlight,
+		/obj/item/stack/cable_coil,
+		/obj/item/device/t_scanner,
+		/obj/item/device/analyzer,
+		/obj/item/taperoll/engineering,
+		/obj/item/device/robotanalyzer,
+		/obj/item/weapon/material/minihoe,
+		/obj/item/weapon/material/hatchet,
+		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/taperoll,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/clothing/gloves/insulated
+		)
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Sangheili" = null\
+		)
 
 /obj/item/weapon/cell/covenant
 	name = "covenant power cell"

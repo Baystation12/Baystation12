@@ -59,6 +59,7 @@
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/pulse_laser_dam_proj
 	tracer_delay_time = 2 SECONDS
+	var/warned = 0
 
 /obj/item/projectile/pulse_laser_damage_proj/attack_mob()
 	damage_type = BURN
@@ -67,7 +68,11 @@
 
 /obj/item/projectile/pulse_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,-1,1,2,3)
+	explosion(a,-1,1,2,3, adminlog = 0)
+	if(!warned)
+		warned = 1
+		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
+		S.adminwarn_attack()
 
 /obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
