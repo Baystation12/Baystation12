@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/scientist
 	name = "scientist's locker"
-	req_one_access = list(access_tox,access_tox_storage)
+	req_access = list(list(access_tox,access_tox_storage))
 	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
 /obj/structure/closet/secure_closet/scientist/WillContain()

@@ -242,7 +242,6 @@ var/global/datum/ntnet/ntnet_global = new()
 		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
 		EA.password = GenerateKey()
 		EA.login = login
-		to_chat(user, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
 		if(user.mind)
 			user.mind.initial_email_login["login"] = EA.login
 			user.mind.initial_email_login["password"] = EA.password

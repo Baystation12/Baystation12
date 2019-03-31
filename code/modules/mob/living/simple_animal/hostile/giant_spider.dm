@@ -38,7 +38,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 
-	var/poison_per_bite = 8
+	var/poison_per_bite = 6
 	var/poison_type = /datum/reagent/toxin/venom
 	var/busy = 0
 	var/eye_colour
@@ -54,13 +54,13 @@
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	melee_damage_lower = 13
+	melee_damage_upper = 18
 	poison_per_bite = 5
 	speed = 2
 	move_to_delay = 4
 	break_stuff_probability = 15
-	pry_time = 7 SECONDS
+	pry_time = 6 SECONDS
 
 	var/vengance
 	var/berserking
@@ -74,8 +74,8 @@
 	icon_dead = "beige_dead"
 	maxHealth = 80
 	health = 80
-	melee_damage_lower = 8
-	melee_damage_upper = 12
+	melee_damage_lower = 10
+	melee_damage_upper = 14
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -101,21 +101,21 @@
 	icon_dead = "black_dead"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 15
-	melee_damage_upper = 15
+	melee_damage_lower = 17
+	melee_damage_upper = 20
 	poison_per_bite = 10
 	speed = -1
 	move_to_delay = 2
 	break_stuff_probability = 30
 	hunt_chance = 25
 	can_escape = TRUE
-	pry_time = 6 SECONDS
+	pry_time = 5 SECONDS
 	flash_vulnerability = 2 //sensitive eyes for stalking prey
 	does_spin = FALSE
 
 	var/leap_range = 5
 	var/last_leapt
-	var/leap_cooldown = 5 MINUTES
+	var/leap_cooldown = 3 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter
@@ -125,15 +125,15 @@
 	icon_dead = "purple_dead"
 	maxHealth = 90
 	health = 90
-	melee_damage_lower = 8
-	melee_damage_upper = 12
+	melee_damage_lower = 10
+	melee_damage_upper = 14
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2
 	projectiletype = /obj/item/projectile/venom
 	projectilesound = 'sound/effects/hypospray.ogg'
 	fire_desc = "spits venom"
-	ranged_range = 5
+	ranged_range = 6
 	pry_time = 7 SECONDS
 	flash_vulnerability = 2
 
@@ -149,7 +149,7 @@
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
 	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
-	maxHealth = rand(initial(maxHealth), (1.3 * initial(maxHealth)))
+	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
 	if(eye_colour)

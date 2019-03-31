@@ -1,10 +1,3 @@
-// Used by robots and robot preferences.
-GLOBAL_LIST_INIT(robot_module_types, list(
-	"Standard", "Engineering", "Surgeon",  "Crisis",
-	"Miner",    "Janitor",     "Service",  "Clerical", "Security",
-	"Research"
-)) // This shouldn't be a static list. Am I the only one who cares about extendability around here?
-
 // Noises made when hit while typing.
 GLOBAL_LIST_INIT(hit_appends, list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF"))
 

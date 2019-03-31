@@ -28,7 +28,8 @@
 		MATERIAL_OSMIUM =   /obj/item/weapon/ore/osmium,
 		MATERIAL_HYDROGEN = /obj/item/weapon/ore/hydrogen,
 		MATERIAL_SAND =     /obj/item/weapon/ore/glass,
-		MATERIAL_GRAPHENE = /obj/item/weapon/ore/coal
+		MATERIAL_GRAPHENE = /obj/item/weapon/ore/coal,
+		MATERIAL_ALUMINIUM = /obj/item/weapon/ore/aluminium
 		)
 
 	//Upgrades

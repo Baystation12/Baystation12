@@ -12,10 +12,9 @@
 	set_invisibility(101)
 	for(var/t in organs)
 		qdel(t)
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( loc )
+	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
 	flick("h2monkey", animation)
 	sleep(48)
 	//animation = null
@@ -106,7 +105,7 @@
 	return O
 
 //human -> robot
-/mob/living/carbon/human/proc/Robotize()
+/mob/living/carbon/human/proc/Robotize(var/supplied_robot_type = /mob/living/silicon/robot)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
@@ -119,24 +118,19 @@
 	for(var/t in organs)
 		qdel(t)
 
-	var/mob/living/silicon/robot/O = new /mob/living/silicon/robot( loc )
+	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
 
 	O.gender = gender
 	O.set_invisibility(0)
 
-	if(mind)		//TODO
+	if(mind)
 		mind.transfer_to(O)
 		if(O.mind && O.mind.assigned_role == "Robot")
 			O.mind.original = O
-			if(O.mind.role_alt_title == "Drone")
-				O.mmi = new /obj/item/device/mmi/digital/robot(O)
-			else if(O.mind.role_alt_title == "Cyborg")
-				O.mmi = new /obj/item/device/mmi(O)
-			else
-				O.mmi = new /obj/item/organ/internal/posibrain(O)
-			O.mmi.transfer_identity(src)
-		else if(mind && mind.special_role)
-			O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
+			var/mmi_type = SSrobots.get_mmi_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
+			if(mmi_type)
+				O.mmi = new mmi_type(O)
+				O.mmi.transfer_identity(src)
 	else
 		O.key = key
 

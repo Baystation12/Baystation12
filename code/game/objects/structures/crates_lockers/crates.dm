@@ -127,7 +127,7 @@
 /obj/structure/closet/crate/freezer
 	name = "freezer"
 	desc = "A freezer."
-	temperature = -16 CELCIUS
+	temperature = -16 CELSIUS
 	closet_appearance = /decl/closet_appearance/crate/freezer
 
 	var/target_temp = T0C - 40

@@ -477,7 +477,7 @@
 	user.drop_from_inventory(W)
 	Consume(W)
 
-	user.apply_effect(150, IRRADIATE, blocked = user.getarmor(null, "rad"))
+	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)

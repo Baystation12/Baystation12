@@ -16,7 +16,7 @@
 	var/footer = null
 	var/footerOn = FALSE
 
-	var/logo_list = list("sollogo.png","eclogo.png","fleetlogo.png","torchltd.png","ntlogo.png","daislogo.png","xynlogo.png","terralogo.png")
+	var/logo_list = list("sollogo.png","eclogo.png","fleetlogo.png","exologo.png","ntlogo.png","daislogo.png","xynlogo.png","terralogo.png", "ocielogo.png")
 	var/logo = ""
 
 /obj/item/weapon/paper/admin/New()
@@ -149,7 +149,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		footerOn = !footerOn
 		updateDisplay()
 		return
-	
+
 	if(href_list["changelogo"])
 		logo = input(usr, "What logo?", "Choose a logo", "") as null|anything in (logo_list)
 		generateHeader()

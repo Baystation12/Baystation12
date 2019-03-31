@@ -42,7 +42,7 @@
 	safety_icon = "safety"
 	magazine_type = /obj/item/ammo_magazine/pistol/rubber
 	accuracy = -1
-	fire_delay = 5
+	fire_delay = 6
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 
 /obj/item/weapon/gun/projectile/pistol/sec/lethal
@@ -75,7 +75,8 @@
 	magazine_type = /obj/item/ammo_magazine/pistol/throwback
 	accuracy_power = 5
 	one_hand_penalty = 2
-	fire_delay = 5
+	fire_delay = 7
+	caliber = CALIBER_PISTOL_ANTIQUE
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	var/base_icon = "pistol1"
 
@@ -99,8 +100,9 @@
 	max_shells = 8
 	caliber = CALIBER_GYROJET
 	origin_tech = list(TECH_COMBAT = 3)
-	ammo_type = /obj/item/ammo_casing/gyrojet
 	magazine_type = /obj/item/ammo_magazine/gyrojet
+	allowed_magazines = /obj/item/ammo_magazine/gyrojet
+	handle_casings = CLEAR_CASINGS	//the projectile is the casing
 	fire_delay = 25
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
@@ -124,7 +126,7 @@
 	w_class = ITEM_SIZE_SMALL
 	caliber = CALIBER_PISTOL_SMALL
 	silenced = 0
-	fire_delay = 1
+	fire_delay = 4
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small

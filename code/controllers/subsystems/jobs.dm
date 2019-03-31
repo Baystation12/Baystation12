@@ -91,6 +91,11 @@ SUBSYSTEM_DEF(jobs)
 		if(LAZYLEN(submap_job_datums))
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
+	// Update global map blacklists and whitelists.
+	for(var/mappath in GLOB.all_maps)
+		var/datum/map/M = GLOB.all_maps[mappath]
+		M.setup_job_lists()
+
 	// Update valid job titles.
 	titles_to_datums = list()
 	types_to_datums = list()
@@ -480,6 +485,7 @@ SUBSYSTEM_DEF(jobs)
 		else
 			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
 			H.forceMove(pick(spawnpoint.turfs))
+			spawnpoint.after_join(H)
 
 		// Moving wheelchair if they have one
 		if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
@@ -506,7 +512,7 @@ SUBSYSTEM_DEF(jobs)
 
 		switch(rank)
 			if("Robot")
-				return H.Robotize()
+				return H.Robotize(SSrobots.get_mob_type_by_title(alt_title ? alt_title : job.title))
 			if("AI")
 				return H
 			if("Captain")

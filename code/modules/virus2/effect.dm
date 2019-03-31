@@ -94,14 +94,14 @@
 	multiplier_max = 3
 	badness = VIRUS_COMMON
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.apply_effect(2*multiplier, IRRADIATE, blocked = 0)
+		mob.apply_damage(2*multiplier, IRRADIATE, armor_pen = 100)
 
 /datum/disease2/effect/deaf
 	name = "Dead Ear Syndrome"
 	stage = 4
 	badness = VIRUS_COMMON
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.ear_deaf += 20
+		mob.ear_deaf = min(mob.ear_deaf + 10, 50)
 
 /datum/disease2/effect/monkey
 	name = "Two Percent Syndrome"
@@ -230,7 +230,7 @@
 	stage = 3
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
 		to_chat(mob, "<span class='notice'>You have trouble telling right and left apart all of a sudden.</span>")
-		mob.confused += 10
+		mob.confused = min(mob.confused + 10, 50)
 
 /datum/disease2/effect/mutation
 	name = "DNA Degradation"
@@ -271,7 +271,7 @@
 	name = "Automated Sleeping Syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.drowsyness += 10
+		mob.drowsyness = min(mob.drowsyness + 10, 50)
 
 /datum/disease2/effect/sleepy
 	name = "Resting Syndrome"
@@ -333,7 +333,7 @@
 		if (mob.reagents.get_reagent_amount(/datum/reagent/hyperzine) < 10)
 			mob.reagents.add_reagent(/datum/reagent/hyperzine, 4)
 		if (prob(30))
-			mob.jitteriness += 10
+			mob.jitteriness = min(mob.jitteriness + 10, 500)
 
 ////////////////////////STAGE 1/////////////////////////////////
 

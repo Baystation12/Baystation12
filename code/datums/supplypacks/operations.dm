@@ -1,13 +1,6 @@
 /decl/hierarchy/supply_pack/operations
 	name = "Operations"
 
-/decl/hierarchy/supply_pack/operations/mule
-	name = "Equipment - MULEbot"
-	contains = list()
-	cost = 20
-	containertype = /obj/structure/largecrate/animal/mulebot
-	containername = "mulebot crate"
-
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Equipment - Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
@@ -27,6 +20,7 @@
 	contains = list(/obj/item/seeds/bloodtomatoseed,
 					/obj/item/weapon/storage/pill_bottle/zoom,
 					/obj/item/weapon/storage/pill_bottle/happy,
+					/obj/item/weapon/storage/pill_bottle/three_eye,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "UNLISTED - Contraband crate"

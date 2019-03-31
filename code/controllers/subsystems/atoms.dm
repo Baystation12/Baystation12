@@ -8,40 +8,42 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE
 
-	var/old_initialized
+	var/init_state
+	var/old_init_state
 
 	var/list/late_loaders
 	var/list/created_atoms = list()
-	var/list/atoms_to_init
 
 	var/list/BadInitializeCalls = list()
 
 /datum/controller/subsystem/atoms/Initialize(timeofday)
-	initialized = INITIALIZATION_INNEW_MAPLOAD
+	init_state = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 	return ..()
 
-/datum/controller/subsystem/atoms/proc/InitializeAtoms(list/atoms)
-	if(initialized == INITIALIZATION_INSSATOMS)
+/datum/controller/subsystem/atoms/proc/InitializeAtoms()
+	if(init_state <= INITIALIZATION_INSSATOMS_LATE)
 		return
 
-	initialized = INITIALIZATION_INNEW_MAPLOAD
+	init_state = INITIALIZATION_INNEW_MAPLOAD
 
 	LAZYINITLIST(late_loaders)
 
 	var/list/mapload_arg = list(TRUE)
-	atoms_to_init = atoms || created_atoms
 
-	var/count = atoms_to_init.len
-	while(atoms_to_init.len)
-		var/atom/A = atoms_to_init[atoms_to_init.len]
-		var/list/arguments = mapload_arg + atoms_to_init[A]
-		atoms_to_init.len--
+	var/count = created_atoms.len
+	while(created_atoms.len)
+		var/atom/A = created_atoms[created_atoms.len]
+		var/list/arguments = created_atoms[A] ? mapload_arg + created_atoms[A] : mapload_arg
+		created_atoms.len--
 		if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
 			InitAtom(A, arguments)
 			CHECK_TICK
 
-	if(!atoms)
+	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
+	// Instead, atoms without extra arguments in New created on server start are fished out of world directly.
+	// We do this exactly once.
+	if(!initialized) 
 		for(var/atom/A in world)
 			if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
 				InitAtom(A, mapload_arg)
@@ -51,12 +53,12 @@ SUBSYSTEM_DEF(atoms)
 	report_progress("Initialized [count] atom\s")
 	pass(count)
 
-	initialized = INITIALIZATION_INNEW_REGULAR
+	init_state = INITIALIZATION_INNEW_REGULAR
 
 	if(late_loaders.len)
 		for(var/I in late_loaders)
 			var/atom/A = I
-			A.LateInitialize(arglist(mapload_arg))
+			A.LateInitialize(arglist(late_loaders[A]))
 		report_progress("Late initialized [late_loaders.len] atom\s")
 		late_loaders.Cut()
 
@@ -79,7 +81,7 @@ SUBSYSTEM_DEF(atoms)
 		switch(result)
 			if(INITIALIZE_HINT_LATELOAD)
 				if(arguments[1])	//mapload
-					late_loaders += A
+					late_loaders[A] = arguments
 				else
 					A.LateInitialize(arglist(arguments))
 			if(INITIALIZE_HINT_QDEL)
@@ -99,17 +101,17 @@ SUBSYSTEM_DEF(atoms)
 	..("Bad Initialize Calls:[BadInitializeCalls.len]")
 
 /datum/controller/subsystem/atoms/proc/map_loader_begin()
-	old_initialized = initialized
-	initialized = INITIALIZATION_INSSATOMS
+	old_init_state = init_state
+	init_state = INITIALIZATION_INSSATOMS_LATE
 
 /datum/controller/subsystem/atoms/proc/map_loader_stop()
-	initialized = old_initialized
+	init_state = old_init_state
 
 /datum/controller/subsystem/atoms/Recover()
-	initialized = SSatoms.initialized
-	if(initialized == INITIALIZATION_INNEW_MAPLOAD)
+	init_state = SSatoms.init_state
+	if(init_state == INITIALIZATION_INNEW_MAPLOAD)
 		InitializeAtoms()
-	old_initialized = SSatoms.old_initialized
+	old_init_state = SSatoms.old_init_state
 	BadInitializeCalls = SSatoms.BadInitializeCalls
 
 /datum/controller/subsystem/atoms/proc/InitLog()

@@ -45,7 +45,6 @@
 				visible_message("<span class='danger'>\The [H] has attempted to punch \the [src]!</span>")
 				return 0
 			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
 
 			if(MUTATION_HULK in H.mutations)
 				damage += 5
@@ -57,9 +56,10 @@
 
 			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
 
-			apply_damage(damage, PAIN, affecting, armor_block)
+			apply_damage(damage, PAIN, affecting)
 			if(damage >= 9)
 				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
+				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE)
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
@@ -76,7 +76,7 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
-			if(istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath))
+			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath))
 				if (!cpr_time)
 					return 0
 
@@ -138,6 +138,9 @@
 			return H.species.attempt_grab(H, src)
 
 		if(I_HURT)
+			if(H.incapacitated())
+				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
+				return
 
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
@@ -243,13 +246,11 @@
 				real_damage *= 2 // Hulks do twice the damage
 				rand_damage *= 2
 			real_damage = max(1, real_damage)
-
-			var/armour = run_armor_check(hit_zone, "melee")
 			// Apply additional unarmed effects.
-			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
+			attack.apply_effects(H, src, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, attack.get_damage_type(), hit_zone, armour, damage_flags=attack.damage_flags())
+			apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
 
 		if(I_DISARM)
 			if(H.species)
@@ -271,8 +272,7 @@
 
 	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	var/armor_block = run_armor_check(affecting, armorcheck)
-	apply_damage(damage, damtype, affecting, armor_block)
+	apply_damage(damage, damtype, affecting)
 	updatehealth()
 	return 1
 

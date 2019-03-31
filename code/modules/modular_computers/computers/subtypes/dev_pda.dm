@@ -106,6 +106,10 @@
 	icon_state = "pda-sup"
 	icon_state_unpowered = "pda-sup"
 
+/obj/item/modular_computer/pda/mining
+	icon_state = "pda-nt"
+	icon_state_unpowered = "pda-nt"
+
 /obj/item/modular_computer/pda/syndicate
 	icon_state = "pda-syn"
 	icon_state_unpowered = "pda-syn"

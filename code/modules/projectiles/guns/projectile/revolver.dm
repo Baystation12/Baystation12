@@ -8,7 +8,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	handle_casings = CYCLE_CASINGS
 	max_shells = 6
-	fire_delay = 6.75 //Revolvers are naturally slower-firing
+	fire_delay = 12 //Revolvers are naturally slower-firing
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
@@ -54,6 +54,7 @@
 	desc = "The Lumoco Arms' Solid is a rugged revolver for people who don't keep their guns well-maintained."
 	accuracy = 1
 	bulk = 0
+	fire_delay = 9
 
 /obj/item/weapon/gun/projectile/revolver/holdout
 	name = "holdout revolver"
@@ -66,6 +67,7 @@
 	accuracy = 1
 	one_hand_penalty = 0
 	bulk = 0
+	fire_delay = 7
 
 /obj/item/weapon/gun/projectile/revolver/capgun
 	name = "cap gun"

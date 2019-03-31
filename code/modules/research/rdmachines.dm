@@ -22,11 +22,8 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 			reagents.trans_to_obj(I, reagents.total_volume)
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
-			var/path = SSmaterials.get_material_by_name(f)
-			if(path)
-				var/obj/item/stack/S = new f(loc)
-				S.amount = round(materials[f] / SHEET_MATERIAL_AMOUNT)
-	..()
+			new /obj/item/stack/material(loc, round(materials[f] / SHEET_MATERIAL_AMOUNT), f)
+	return ..()
 
 
 /obj/machinery/r_n_d/proc/eject(var/material, var/amount)

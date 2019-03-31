@@ -8,6 +8,7 @@
 	average person. Even so, they do their jobs well and are thriving in this \
 	new environment."
 	hidden_from_codex = FALSE
+	silent_steps = TRUE
 
 	antaghud_offset_y = 8
 
@@ -245,8 +246,7 @@
 /obj/item/grab/nab/special/init()
 	if(!(. = ..()))
 		return
-	var/armor = affecting.run_armor_check(BP_CHEST, "melee")
-	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
+	affecting.apply_damage(15, BRUTE, BP_CHEST, DAM_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 

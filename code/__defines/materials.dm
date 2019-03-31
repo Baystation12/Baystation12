@@ -28,7 +28,7 @@
 #define MATERIAL_HYDROGEN                "hydrogen"
 #define MATERIAL_WASTE                   "waste"
 #define MATERIAL_ELEVATORIUM             "elevatorium"
-#define MATERIAL_ALIUMIUM                "aliumium"
+#define MATERIAL_ALIENALLOY              "aliumium"
 #define MATERIAL_SAND                    "sand"
 #define MATERIAL_GRAPHENE                "graphene"
 #define MATERIAL_DEUTERIUM               "deuterium"
@@ -49,6 +49,7 @@
 #define MATERIAL_CLOTH                   "cloth"
 #define MATERIAL_CARPET                  "carpet"
 #define MATERIAL_ALUMINIUM               "aluminium"
+#define MATERIAL_NULLGLASS               "nullglass"
 
 //woods
 #define MATERIAL_WOOD                    "wood"
@@ -56,6 +57,7 @@
 #define MATERIAL_MAPLE                   "maple"
 #define MATERIAL_EBONY                   "ebony"
 #define MATERIAL_WALNUT                  "walnut"
+#define MATERIAL_BAMBOO                  "bamboo"
 
 #define DEFAULT_WALL_MATERIAL      MATERIAL_STEEL
 #define DEFAULT_FURNITURE_MATERIAL MATERIAL_ALUMINIUM

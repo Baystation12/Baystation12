@@ -10,7 +10,7 @@ var/list/sounds_cache = list()
 
 	sounds_cache += S
 
-	if(alert("Do you ready?\nSong: [S]\nNow you can also play this sound using \"Play Server Sound\".", "Confirmation request" ,"Play", "Cancel") == "Cancel")
+	if(alert("Song: [S]\n.", "Confirmation request" ,"Play", "Cancel") == "Cancel")
 		return
 
 	log_admin("[key_name(src)] played sound [S]")
@@ -37,13 +37,13 @@ var/list/sounds_cache = list()
 	set name = "Play Server Sound"
 	if(!check_rights(R_SOUNDS))	return
 
-	var/list/sounds = file2list("sound/serversound_list.txt");
-	sounds += "--CANCEL--"
-	sounds += sounds_cache
+	var/list/sounds = list("sound/items/bikehorn.ogg","sound/effects/siren.ogg")
+	sounds += sounds_cache	
 
-	var/melody = input("Select a sound from the server to play", "Server sound list", "--CANCEL--") in sounds
+	var/melody = input("Select a sound from the server to play", "Server sound list") as null|anything in sounds
 
-	if(melody == "--CANCEL--")	return
-
+	if(!melody)	
+		return
+		
 	play_sound(melody)
 	SSstatistics.add_field_details("admin_verb","PSS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

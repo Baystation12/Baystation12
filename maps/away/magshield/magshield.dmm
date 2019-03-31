@@ -2353,7 +2353,14 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fR" = (
-/obj/machinery/atmospherics/omni/mixer,
+/obj/machinery/atmospherics/omni/mixer{
+	tag_east = 1;
+	tag_east_con = 0.21;
+	tag_north = 2;
+	tag_south = 1;
+	tag_south_con = 0.79;
+	
+	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fS" = (
@@ -2372,7 +2379,11 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fT" = (
-/obj/machinery/atmospherics/omni/filter,
+/obj/machinery/atmospherics/omni/filter{
+	tag_east = 2;
+	tag_south = 1;
+	tag_west = 3
+	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fU" = (
@@ -3468,7 +3479,6 @@
 /area/magshield/south)
 "jb" = (
 /obj/machinery/door/airlock,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "jc" = (
@@ -3623,7 +3633,7 @@
 /area/magshield/south)
 "jy" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jz" = (
@@ -3776,7 +3786,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
@@ -4079,7 +4089,7 @@
 /area/magshield/south)
 "kJ" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
@@ -4146,7 +4156,7 @@
 /area/magshield/south)
 "kT" = (
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kU" = (
@@ -4378,6 +4388,15 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
+"Eo" = (
+/obj/machinery/atmospherics/omni/filter{
+	tag_east = 0;
+	tag_north = 2;
+	tag_south = 1;
+	tag_west = 4
+	},
+/turf/simulated/floor/airless,
+/area/magshield/east)
 
 (1,1,1) = {"
 aa
@@ -28713,7 +28732,7 @@ fi
 fi
 fT
 ge
-fT
+Eo
 ge
 gz
 gE

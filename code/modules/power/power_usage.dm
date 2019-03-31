@@ -85,6 +85,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 			old_area.power_use_change(power, 0, power_channel)
 		if(new_area)
 			new_area.power_use_change(0, power, power_channel)
+		power_change() // Force check in case the old area was powered and the new one isn't or vice versa.
 
 // The three procs below are the only allowed ways of modifying the corresponding variables.
 /obj/machinery/proc/update_use_power(new_use_power)

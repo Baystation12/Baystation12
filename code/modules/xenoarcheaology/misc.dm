@@ -49,7 +49,6 @@
 	new /obj/item/device/core_sampler(src)
 	new /obj/item/device/gps(src)
 	new /obj/item/weapon/pinpointer/radio(src)
-	new /obj/item/device/radio/beacon(src)
 	new /obj/item/clothing/glasses/meson(src)
 	new /obj/item/weapon/pickaxe(src)
 	new /obj/item/device/measuring_tape(src)
@@ -59,7 +58,7 @@
 	new /obj/item/taperoll/research(src)
 
 /obj/machinery/alarm/isolation
-	req_one_access = list(access_research, access_atmospherics, access_engine_equip)
+	req_access = list(list(access_research, access_atmospherics, access_engine_equip))
 
 /obj/machinery/alarm/monitor/isolation
-	req_one_access = list(access_research, access_atmospherics, access_engine_equip)
+	req_access = list(list(access_research, access_atmospherics, access_engine_equip))

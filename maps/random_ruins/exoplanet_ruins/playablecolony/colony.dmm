@@ -2771,7 +2771,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engineering{
-	req_one_access = list()
+	req_access = list()
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -2860,7 +2860,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engivend{
-	req_one_access = list()
+	req_access = list()
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -6974,13 +6974,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/structure/closet/emcloset/legacy,
+/obj/structure/closet/emcloset,
+/obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mb" = (
@@ -7926,11 +7923,9 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/structure/closet/emcloset/legacy,
+/obj/structure/closet/emcloset,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/tiled/techfloor/grid,

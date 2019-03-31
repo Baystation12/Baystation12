@@ -73,3 +73,5 @@
 	..(newloc, MATERIAL_WASTE)
 /obj/item/weapon/ore/phoron/New(var/newloc)
 	..(newloc, MATERIAL_PHORON)
+/obj/item/weapon/ore/aluminium/New(var/newloc)
+	..(newloc, MATERIAL_BAUXITE)

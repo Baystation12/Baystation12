@@ -20,12 +20,11 @@
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
+	var/buckling_sound = 'sound/effects/buckle.ogg'
 
-/obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
+/obj/structure/bed/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	..(newloc)
 	color = null
-	if(!new_material)
-		new_material = MATERIAL_ALUMINIUM
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		qdel(src)
@@ -135,6 +134,11 @@
 				qdel(W)
 	else
 		..()
+
+/obj/structure/bed/buckle_mob(mob/living/M)
+	. = ..()
+	if(. && buckling_sound)
+		playsound(src, buckling_sound, 20)
 
 /obj/structure/bed/Move()
 	. = ..()
@@ -309,7 +313,7 @@
 	icon_state = "folded"
 	item_state = "rbed"
 	slot_flags = SLOT_BACK
-	w_class = ITEM_SIZE_HUGE // Can't be put in backpacks. Oh well. For now.
+	w_class = ITEM_SIZE_LARGE
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
 /obj/item/roller/attack_self(mob/user)

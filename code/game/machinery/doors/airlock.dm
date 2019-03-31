@@ -18,7 +18,7 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock
 	name = "airlock"
 	icon = 'icons/obj/doors/station/door.dmi'
-	icon_state = "closed"
+	icon_state = "preview"
 	power_channel = ENVIRON
 
 	explosion_resistance = 10
@@ -166,6 +166,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
+	icon_state = "preview_glass"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 300
 	explosion_resistance = 5
@@ -238,6 +239,31 @@ var/list/airlock_overlays = list()
 	door_color = COLOR_NT_RED
 	paintable = AIRLOCK_PAINTABLE
 
+/obj/machinery/door/airlock/external/inherit_access_from_area()
+	..()
+	if(is_station_area(get_area(src)))
+		add_access_requirement(req_access, access_external_airlocks)
+
+/obj/machinery/door/airlock/external/escapepod
+	name = "Escape Pod"
+	frequency =  1380
+	locked = 1
+
+/obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)	
+	if(p_open && !arePowerSystemsOn())
+		if(isWrench(C))
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
+			if(do_after(user, 160) && locked)
+				visible_message("\The [src] bolts disengage!")
+				locked = 0
+				return
+			else
+				visible_message("\The [src] bolts engage!")
+				locked = 1
+				return
+	..()
+
 /obj/machinery/door/airlock/external/bolted
 	locked = 1
 
@@ -245,7 +271,6 @@ var/list/airlock_overlays = list()
 	frequency = 1379
 
 /obj/machinery/door/airlock/external/bolted_open
-	icon_state = "open"
 	density = 0
 	locked = 1
 	opacity = 0
@@ -263,7 +288,6 @@ var/list/airlock_overlays = list()
 	frequency = 1379
 
 /obj/machinery/door/airlock/external/glass/bolted_open
-	icon_state = "open"
 	density = 0
 	locked = 1
 	opacity = 0
@@ -940,7 +964,7 @@ About the new airlock wires panel:
 	return 1
 
 //returns 1 on success, 0 on failure
-/obj/machinery/door/airlock/proc/cut_bolts(item, var/mob/user)
+/obj/machinery/door/airlock/proc/cut_bolts(var/obj/item/item, var/mob/user)
 	var/cut_delay = (15 SECONDS)
 	var/cut_verb
 	var/cut_sound
@@ -1027,7 +1051,7 @@ About the new airlock wires panel:
 			to_chat(user, "<span class='warning'>You must close \the [src] before installing \the [A]!</span>")
 			return
 
-		if((!A.req_access.len && !A.req_one_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
+		if(!length(A.req_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
 			return
 
 		if(do_after(user, 50, src) && density && A && user.unEquip(A, src))
@@ -1149,6 +1173,11 @@ About the new airlock wires panel:
 	else if(glass && !da.glass)
 		da.glass = 1
 
+	da.paintable = paintable
+	da.door_color = door_color
+	da.stripe_color = stripe_color
+	da.symbol_color = symbol_color
+
 	if(moved)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
@@ -1163,7 +1192,8 @@ About the new airlock wires panel:
 		new /obj/item/weapon/circuitboard/broken(src.loc)
 		operating = 0
 	else
-		if (!electronics) create_electronics()
+		if (!electronics) 
+			create_electronics()
 
 		electronics.dropInto(loc)
 		electronics = null
@@ -1297,13 +1327,14 @@ About the new airlock wires panel:
 		electronics.forceMove(src)
 
 		//update the door's access to match the electronics'
-		secured_wires = electronics.secure
-		if(electronics.one_access)
-			req_access.Cut()
-			req_one_access = src.electronics.conf_access
+		if(electronics.autoset)
+			autoset_access = TRUE
 		else
-			req_one_access.Cut()
-			req_access = src.electronics.conf_access
+			req_access = electronics.conf_access
+			if(electronics.one_access)
+				req_access = list(req_access)
+			autoset_access = FALSE // We just set it, so don't try and do anything fancy later.
+		secured_wires = electronics.secure
 
 		//get the name from the assembly
 		if(assembly.created_name)
@@ -1313,6 +1344,13 @@ About the new airlock wires panel:
 
 		//get the dir from the assembly
 		set_dir(assembly.dir)
+
+		if(assembly)
+			paintable = assembly.paintable
+			door_color = assembly.door_color
+			stripe_color = assembly.stripe_color
+			symbol_color = assembly.symbol_color
+		queue_icon_update()
 
 	//wires
 	var/turf/T = get_turf(newloc)
@@ -1335,11 +1373,9 @@ About the new airlock wires panel:
 		brace = A
 		brace.airlock = src
 		brace.forceMove(src)
-		if(length(req_one_access) == 0)
-			brace.electronics.conf_access = req_access
-		else
-			brace.electronics.conf_access = req_one_access
-			brace.electronics.one_access = 1
+		if(brace.electronics)
+			brace.electronics.set_access(src)
+			brace.update_access()
 		update_icon()
 	. = ..()
 
@@ -1352,24 +1388,11 @@ About the new airlock wires panel:
 		qdel(brace)
 	return ..()
 
-// Most doors will never be deconstructed over the course of a round,
-// so as an optimization defer the creation of electronics until
-// the airlock is deconstructed
-/obj/machinery/door/airlock/proc/create_electronics()
-	//create new electronics
+/obj/machinery/door/airlock/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
 	if (secured_wires)
-		src.electronics = new/obj/item/weapon/airlock_electronics/secure( src.loc )
-	else
-		src.electronics = new/obj/item/weapon/airlock_electronics( src.loc )
-
-	//update the electronics to match the door's access
-	if(!src.req_access)
-		src.check_access()
-	if(src.req_access.len)
-		electronics.conf_access = src.req_access
-	else if (src.req_one_access.len)
-		electronics.conf_access = src.req_one_access
-		electronics.one_access = 1
+		electronics_type = /obj/item/weapon/airlock_electronics/secure
+	electronics = ..()
+	return electronics
 
 /obj/machinery/door/airlock/emp_act(var/severity)
 	if(prob(20/severity))

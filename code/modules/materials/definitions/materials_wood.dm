@@ -4,7 +4,7 @@
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = WOOD_COLOR_GENERIC
-	integrity = 50
+	integrity = 75
 	icon_base = "solid"
 	table_icon_base = "wood"
 	explosion_resistance = 2
@@ -62,6 +62,7 @@
 	adjective_name = MATERIAL_EBONY
 	icon_colour = WOOD_COLOR_BLACK
 	weight = 22
+	integrity = 100
 	construction_difficulty = 4
 	sale_price = 4
 
@@ -75,3 +76,12 @@
 	weight = 20
 	construction_difficulty = 2
 	sale_price = 2
+
+/material/wood/bamboo
+	name = MATERIAL_BAMBOO
+	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
+				and high strength, various species of bamboo area common building materials in developing societies."
+	adjective_name = MATERIAL_BAMBOO
+	icon_colour = WOOD_COLOR_PALE2
+	weight = 16
+	hardness = 40

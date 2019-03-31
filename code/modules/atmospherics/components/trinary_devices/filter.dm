@@ -8,7 +8,7 @@
 
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
+	power_rating = 15000	//This also doubles as a measure of how powerful the filter is, in Watts. 15000 W ~ 20 HP
 
 	var/temp = null // -- TLE
 

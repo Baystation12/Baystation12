@@ -683,7 +683,7 @@ datum/unit_test/ladder_check/start_test()
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
-	var/speed = 100
+	speed = 100
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
@@ -749,6 +749,44 @@ datum/unit_test/ladder_check/start_test()
 		traversed += next_pipe
 		current_dir = next_pipe.nextdir(current_dir, sort.sortType)
 		our_pipe = next_pipe
+
+/datum/unit_test/req_access_shall_have_valid_strings
+	name = "MAP: every obj shall have valid access strings in req_access"
+	var/list/accesses
+
+/datum/unit_test/req_access_shall_have_valid_strings/start_test()
+	if(!accesses)
+		accesses = get_all_access_datums()
+
+	var/list/obj_access_pairs = list()
+	for(var/obj/O in world)
+		if(O.req_access)
+			for(var/req in O.req_access)
+				if(islist(req))
+					for(var/req_one in req)
+						if(is_invalid(req_one))
+							obj_access_pairs += list(list(O, req_one))
+				else if(is_invalid(req))
+					obj_access_pairs += list(list(O, req))
+
+	if(obj_access_pairs.len)
+		for(var/entry in obj_access_pairs)
+			log_bad("[log_info_line(entry[1])] has an invalid value ([entry[2]]) in req_access.")
+		fail("Mapped objs with req_access must be set up to use existing access strings.")
+	else
+		pass("All mapped objs have correctly set req_access.")
+
+	return 1
+
+/datum/unit_test/req_access_shall_have_valid_strings/proc/is_invalid(var/value)
+	if(!istext(value))
+		return TRUE //Someone tried to use a non-string as an access. There is no case where this is allowed.
+
+	for(var/datum/access/A in accesses)
+		if(value == A.id)
+			return FALSE
+
+	return TRUE
 
 #undef SUCCESS
 #undef FAILURE

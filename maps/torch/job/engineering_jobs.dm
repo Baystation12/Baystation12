@@ -50,8 +50,8 @@
 
 /datum/job/engineer
 	title = "Engineer"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 6
+	spawn_positions = 6
 	supervisors = "the Chief Engineer"
 	economic_power = 5
 	minimal_player_age = 0
@@ -67,7 +67,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet,
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e5,
@@ -75,7 +76,8 @@
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/fleet/e2
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/civ/contractor
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
@@ -105,53 +107,6 @@
 
 /datum/job/engineer/get_description_blurb()
 	return "You are an Engineer. You operate under one of many titles and may be highly specialised in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
-
-/datum/job/engineer_contractor
-	title = "Engineering Contractor"
-	department = "Engineering"
-	department_flag = ENG
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Chief Engineer, the Corporate Liaison and Engineering Personnel"
-	minimal_player_age = 0
-	selection_color = "#5b4d20"
-	alt_titles = list(
-		"Maintenance Assistant",
-		"Structural Integrity Specialist",
-		"Electrical Systems Specialist",
-		"Information Systems Technician",
-		"Reactor Technician",
-		"Life Support Systems Specialist")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_COMPUTER      = SKILL_BASIC,
-	                    SKILL_EVA           = SKILL_BASIC,
-	                    SKILL_CONSTRUCTION	= SKILL_ADEPT,
-	                    SKILL_ELECTRICAL    = SKILL_BASIC,
-	                    SKILL_ATMOS         = SKILL_BASIC,
-	                    SKILL_ENGINES       = SKILL_BASIC)
-
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX,
-	                    SKILL_ENGINES      = SKILL_MAX)
-	skill_points = 20
-
-	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew, access_hangar)
-
-	software_on_spawn = list(/datum/computer_file/program/power_monitor,
-							 /datum/computer_file/program/supermatter_monitor,
-							 /datum/computer_file/program/alarm_monitor,
-							 /datum/computer_file/program/atmos_control,
-							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor,
-							 /datum/computer_file/program/shields_monitor)
-
-/datum/job/engineer_contractor/get_description_blurb()
-	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the Corporate Liaison and the rest of the engineering team."
 
 /datum/job/engineer_trainee
 	title = "Engineer Trainee"

@@ -20,21 +20,26 @@
 		to_chat(src, SPAN_WARNING("You are mindless and cannot have goals."))
 		return
 
+	var/datum/department/dept
+	if(mind.assigned_job && mind.assigned_job.department_flag && SSgoals.departments["[mind.assigned_job.department_flag]"])
+		dept = SSgoals.departments["[mind.assigned_job.department_flag]"]
+
+	//No goals to display
+	if(!(allow_modification || LAZYLEN(mind.goals)) && !(dept && LAZYLEN(dept.goals)))
+		return
+
 	to_chat(src, "<hr>")
 	if(LAZYLEN(mind.goals))
-		to_chat(src, SPAN_NOTICE("<b>This round, you have the following personal goals:</b><br>[jointext(mind.summarize_goals(show_success, allow_modification), "<br>")]"))
+		to_chat(src, SPAN_NOTICE("<b>This round, you have the following personal goals:</b><br>[jointext(mind.summarize_goals(show_success, allow_modification, mind.current), "<br>")]"))
 	else
 		to_chat(src, SPAN_NOTICE("<b>You have no personal goals this round.</b>"))
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
 		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
-
-	if(mind.assigned_job && mind.assigned_job.department_flag && SSgoals.departments["[mind.assigned_job.department_flag]"])
-		to_chat(src, " ")
-		var/datum/department/dept = SSgoals.departments["[mind.assigned_job.department_flag]"]
+	if(dept)
 		if(LAZYLEN(dept.goals))
-			to_chat(src, SPAN_NOTICE("<b>This round, [dept.name] has the following departmental goals:</b><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
+			to_chat(src, SPAN_NOTICE("<br><b>This round, [dept.name] has the following departmental goals:</b><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
 		else
-			to_chat(src, SPAN_NOTICE("<b>[dept.name] has no departmental goals this round.</b>"))
+			to_chat(src, SPAN_NOTICE("<br><b>[dept.name] has no departmental goals this round.</b>"))
 
 	if(LAZYLEN(mind.goals))
 		to_chat(mind.current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb."))

@@ -109,6 +109,7 @@
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
 	phoron_guard = TRUE
+	innate_flash_protection = FLASH_PROTECTION_MAJOR
 
 /obj/item/organ/internal/eyes/adherent/Initialize()
 	. = ..()

@@ -1,5 +1,6 @@
 /obj/item/organ/external/groin/insectoid/nabber
 	action_button_name = "Toggle Active Camo"
+	cavity_max_w_class = ITEM_SIZE_LARGE
 
 /obj/item/organ/external/groin/insectoid/nabber/refresh_action_button()
 	. = ..()

@@ -71,7 +71,6 @@
 //Step one - dehairing.
 /obj/item/stack/animalhide/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(	istype(W, /obj/item/weapon/material/knife) || \
-		istype(W, /obj/item/weapon/material/kitchen/utensil/knife) || \
 		istype(W, /obj/item/weapon/material/twohanded/fireaxe) || \
 		istype(W, /obj/item/weapon/material/hatchet) )
 

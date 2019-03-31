@@ -129,9 +129,9 @@
 			protected += 1
 
 	if(istype(H.wear_suit,/obj/item/clothing/suit/bio_suit/anomaly))
-		protected += 0.6
+		protected += 0.7
 	else if(istype(H.wear_suit,/obj/item/clothing/suit/space/void/excavation))
-		protected += 0.5
+		protected += 0.6
 
 	if(istype(H.head,/obj/item/clothing/head/bio_hood/anomaly))
 		protected += 0.3

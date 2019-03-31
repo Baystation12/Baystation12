@@ -138,7 +138,7 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_effect(5 * removed, IRRADIATE, blocked = 0)
+	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
 	if(volume >= 3)
@@ -382,8 +382,15 @@
 	name = "Wood Pulp"
 	description = "A mass of wood fibers."
 	taste_description = "wood"
-	reagent_state = LIQUID
-	color = "#b97a57"
+	reagent_state = SOLID
+	color = WOOD_COLOR_GENERIC
+
+/datum/reagent/bamboo
+	name = "Bamboo Pulp"
+	description = "A mass of bamboo fibers."
+	taste_description = "grass"
+	reagent_state = SOLID
+	color = WOOD_COLOR_PALE2
 
 /datum/reagent/luminol
 	name = "Luminol"
@@ -403,7 +410,7 @@
 	description = "A noble gas. It makes your voice squeaky."
 	taste_description = "nothing"
 	reagent_state = LIQUID
-	color = "#cccccc"
+	color = COLOR_GRAY80
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 
 /datum/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -418,7 +425,7 @@
 	description = "An ubiquitous oxidizing agent."
 	taste_description = "nothing"
 	reagent_state = LIQUID
-	color = "#cccccc"
+	color = COLOR_GRAY80
 
 /datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
@@ -429,7 +436,7 @@
 	description = "A dangerous carbon comubstion byproduct."
 	taste_description = "stale air"
 	reagent_state = LIQUID
-	color = "#cccccc"
+	color = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
 
 /datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)

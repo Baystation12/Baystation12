@@ -88,6 +88,14 @@
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 
+/obj/item/Initialize()
+	. = ..()
+	if(islist(armor))
+		for(var/type in armor)
+			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
+				set_extension(src, /datum/extension/armor, /datum/extension/armor, armor)
+				break
+
 /obj/item/Destroy()
 	QDEL_NULL(hidden_uplink)
 	if(ismob(loc))
@@ -777,8 +785,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /obj/item/proc/get_examine_line()
-	if(blood_DNA)
-		. = "<span class='warning'>\icon[src] [gender==PLURAL?"some":"a"] [(blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [src]</span>"
+	if(blood_color)
+		. = SPAN_WARNING("\icon[src] [gender==PLURAL?"some":"a"] <font color='[blood_color]'>stained</font> [src]")
 	else
 		. = "\icon[src] \a [src]"
 	var/ID = GetIdCard()

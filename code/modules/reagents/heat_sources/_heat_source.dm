@@ -21,8 +21,8 @@
 
 	var/heater_mode =          HEATER_MODE_HEAT
 	var/list/permitted_types = list(/obj/item/weapon/reagent_containers/glass)
-	var/max_temperature =      200 CELCIUS
-	var/min_temperature =      40  CELCIUS
+	var/max_temperature =      200 CELSIUS
+	var/min_temperature =      40  CELSIUS
 	var/heating_power =        10 // K
 	var/last_temperature
 	var/target_temperature
@@ -34,8 +34,8 @@
 	desc = "A small electric cooler, used to chill beakers and vials of chemicals."
 	icon_state = "coldplate"
 	heater_mode =      HEATER_MODE_COOL
-	max_temperature =  30 CELCIUS
-	min_temperature = -80 CELCIUS
+	max_temperature =  30 CELSIUS
+	min_temperature = -80 CELSIUS
 	circuit_type =     /obj/item/weapon/circuitboard/reagent_heater/cooler
 
 /obj/machinery/reagent_temperature/Initialize()

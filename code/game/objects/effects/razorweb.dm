@@ -42,8 +42,9 @@
 
 	. = ..(mapload)
 
-	if((locate(/obj/effect/razorweb) in loc) != src)
-		return INITIALIZE_HINT_QDEL
+	for(var/obj/effect/razorweb/otherweb in loc)
+		if(otherweb != src)
+			return INITIALIZE_HINT_QDEL
 
 	web = image(icon = icon, icon_state = "razorweb")
 	gleam = image(icon = icon, icon_state = "razorweb-gleam")
@@ -65,6 +66,14 @@
 
 	if(user.unEquip(thing))
 		visible_message("<span class='danger'>\The [thing] is sliced apart!</span>")
+
+	var/destroy_self
+	if(thing.force)
+		visible_message(SPAN_DANGER("\The [user] breaks \the [src] with \the [thing]!"))
+		destroy_self = TRUE
+
+	if(user.unEquip(thing))
+		visible_message(SPAN_DANGER("\The [thing] is sliced apart!"))
 		qdel(thing)
 
 	if(destroy_self)
@@ -96,6 +105,9 @@
 			entangle(user, silent = TRUE)
 		else
 			visible_message("<span class='notice'>\The [M] writhes free of \the [src]!</span>")
+			visible_message(SPAN_NOTICE("\The [user] drags \the [M] free of \the [src]!"))
+			entangle(user, silent = TRUE)
+
 		entangle(M, silent = TRUE)
 		add_fingerprint(user)
 	return M
@@ -109,6 +121,7 @@
 	if(istype(L, /obj/mecha))
 		var/obj/mecha/mech = L
 		visible_message("<span class='danger'>\The [mech] stomps through \the [src], breaking it apart!</span>")
+		visible_message(SPAN_DANGER("\The [mech] stomps through \the [src], breaking it apart!"))
 		mech.take_damage(rand(30, 50))
 		qdel(src)
 		return
@@ -124,6 +137,7 @@
 
 	if(!silent)
 		visible_message("<span class='danger'>\The [L] blunders into \the [src]!</span>")
+		visible_message(SPAN_DANGER("\The [L] blunders into \the [src]!"))
 
 	var/severed
 	if(H)
@@ -158,6 +172,18 @@
 
 	if(prob(break_chance))
 		visible_message("<span class='danger'>\The [src] breaks apart!</span>")
+		if(E && !prob(100 * L.get_blocked_ratio(null, BRUTE)))
+			E = H.organs_by_name[E]
+			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
+			E.droplimb()
+			severed = TRUE
+
+	if(!severed && !prob(100 * L.get_blocked_ratio(null, BRUTE)))
+		L.apply_damage(rand(25, 50), used_weapon = src)
+		visible_message(SPAN_DANGER("The crystalline strands cut deeply into \the [L]!"))
+
+	if(prob(break_chance))
+		visible_message(SPAN_DANGER("\The [src] breaks apart!"))
 		qdel(src)
 	else
 		break_chance = min(break_chance+10, 100)

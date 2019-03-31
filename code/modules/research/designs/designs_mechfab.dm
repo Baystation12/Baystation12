@@ -13,10 +13,17 @@
 		return new build_path(newloc, mechfab.manufacturer)
 	return ..()
 
-/datum/design/item/mechfab/robot/exoskeleton
-	name = "Robot exoskeleton"
+/datum/design/item/mechfab/robot/exoskeleton_ground
+	name = "Robot frame, standard"
 	id = "robot_exoskeleton"
 	build_path = /obj/item/robot_parts/robot_suit
+	time = 50
+	materials = list(MATERIAL_STEEL = 50000)
+
+/datum/design/item/mechfab/robot/exoskeleton_flying
+	name = "Robot frame, hover"
+	id = "robot_exoskeleton_hover"
+	build_path = /obj/item/robot_parts/robot_suit/flyer
 	time = 50
 	materials = list(MATERIAL_STEEL = 50000)
 

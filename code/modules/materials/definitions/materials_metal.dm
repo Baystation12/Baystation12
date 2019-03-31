@@ -164,7 +164,7 @@
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#777777"
+	icon_colour = "#a8a9b2"
 	explosion_resistance = 25
 	brute_armor = 6
 	burn_armor = 10
@@ -324,7 +324,7 @@
 	hidden_from_codex = TRUE
 
 /material/aliumium
-	name = MATERIAL_ALIUMIUM
+	name = MATERIAL_ALIENALLOY
 	display_name = "alien alloy"
 	stack_type = null
 	icon_base = "jaggy"

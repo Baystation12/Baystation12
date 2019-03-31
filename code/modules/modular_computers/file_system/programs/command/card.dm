@@ -221,12 +221,7 @@
 					if(module.is_centcom)
 						access = get_centcom_access(t1)
 					else
-						var/datum/job/jobdatum
-						for(var/jobtype in typesof(/datum/job))
-							var/datum/job/J = new jobtype
-							if(ckey(J.title) == ckey(t1))
-								jobdatum = J
-								break
+						var/datum/job/jobdatum = SSjobs.get_by_title(t1)
 						if(!jobdatum)
 							to_chat(usr, "<span class='warning'>No log exists for this job: [t1]</span>")
 							return
@@ -241,7 +236,7 @@
 				callHook("reassign_employee", list(id_card))
 		if("access")
 			if(href_list["allowed"] && computer && can_run(user, 1))
-				var/access_type = text2num(href_list["access_target"])
+				var/access_type = href_list["access_target"]
 				var/access_allowed = text2num(href_list["allowed"])
 				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
 					for(var/access in user_id_card.access)

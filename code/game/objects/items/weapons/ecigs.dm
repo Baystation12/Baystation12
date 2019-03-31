@@ -220,9 +220,6 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/weapon/reagent_containers/ecig_cartridge/New()
-	create_reagents(volume)
-
 /obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left
 	..()
 	to_chat(user, "The cartridge has [reagents.total_volume] units of liquid remaining.")

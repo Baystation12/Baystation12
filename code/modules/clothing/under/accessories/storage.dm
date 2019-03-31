@@ -8,6 +8,7 @@
 	var/obj/item/weapon/storage/internal/pockets/hold
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
+	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/storage/Initialize()
 	. = ..()
@@ -101,7 +102,7 @@
 
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
-	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
+	desc = "A heavily decorated harness of sinew and leather with two knife loops."
 	icon_state = "unathiharness2"
 	slots = 2
 	max_w_class = ITEM_SIZE_NORMAL //for knives
@@ -110,13 +111,11 @@
 	. = ..()
 	hold.can_hold = list(
 		/obj/item/weapon/material/hatchet,
-		/obj/item/weapon/material/kitchen/utensil/knife,
 		/obj/item/weapon/material/knife,
-		/obj/item/weapon/material/butterfly,
 	)
 
-	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
-	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
+	new /obj/item/weapon/material/knife/table/unathi(hold)
+	new /obj/item/weapon/material/knife/table/unathi(hold)
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
@@ -130,8 +129,6 @@
 	hold.can_hold = list(
 		/obj/item/ammo_casing,
 		/obj/item/weapon/grenade,
-		/obj/item/weapon/material/hatchet/tacknife,
-		/obj/item/weapon/material/kitchen/utensil/knife,
 		/obj/item/weapon/material/knife,
 		/obj/item/weapon/material/star,
 		/obj/item/weapon/rcd_ammo,

@@ -80,25 +80,30 @@
 			continue
 
 		var/flash_time = strength
-		if (istype(O, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = O
-			if(!H.eyecheck() <= 0)
+		if(isliving(O))
+			if(O.eyecheck() > FLASH_PROTECTION_NONE)
 				continue
-			flash_time = round(H.species.flash_mod * flash_time)
-			if(flash_time <= 0)
-				return
-			var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[BP_EYES]
-			if(!E)
-				return
-			if(E.is_bruised() && prob(E.damage + 50))
-				H.flash_eyes()
-				E.damage += rand(1, 5)
+			if(ishuman(O))
+				var/mob/living/carbon/human/H = O
+				flash_time = round(H.species.flash_mod * flash_time)
+				if(flash_time <= 0)
+					return
+				var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[H.species.vision_organ]
+				if(!E)
+					return
+				if(E.is_bruised() && prob(E.damage + 50))
+					H.flash_eyes()
+					E.damage += rand(1, 5)
+
 		if(!O.blinded)
-			O.flash_eyes()
-			O.eye_blurry += flash_time
-			O.confused += (flash_time + 2)
-			O.Stun(flash_time / 2)
-			O.Weaken(3)
+			do_flash(O, flash_time)
+
+/obj/machinery/flasher/proc/do_flash(var/mob/living/victim, var/flash_time)
+			victim.flash_eyes()
+			victim.eye_blurry += flash_time
+			victim.confused += (flash_time + 2)
+			victim.Stun(flash_time / 2)
+			victim.Weaken(3)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

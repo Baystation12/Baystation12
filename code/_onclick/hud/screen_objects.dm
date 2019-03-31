@@ -294,6 +294,10 @@
 											else
 												contents.Add(0)
 
+									if(t.air_contents.gas[breathes] && !t.air_contents.gas["phoron"])
+										contents.Add(t.air_contents.gas[breathes])
+									else
+										contents.Add(0)
 								else
 									//no tank so we set contents to 0
 									contents.Add(0)
@@ -312,6 +316,12 @@
 
 							//We've determined the best container now we set it as our internals
 
+										if ("methyl_bromide")
+											if(t.air_contents.gas["methyl_bromide"])
+												contents.Add(t.air_contents.gas["methyl_bromide"])
+											else
+												contents.Add(0)
+
 							if(best)
 								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
 								playsound(usr, 'sound/effects/internals.ogg', 50, 0)
@@ -322,7 +332,7 @@
 								if(C.internals)
 									C.internals.icon_state = "internal1"
 							else
-								to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
+								to_chat(C, "<span class='notice'>You don't have \a [breathes] tank.</span>")
 		if("act_intent")
 			usr.a_intent_change("right")
 
@@ -396,11 +406,17 @@
 		if("r_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.activate_hand("r")
+				if(C.hand)
+					C.activate_hand("r")
+				else
+					C.attack_empty_hand(BP_R_HAND)
 		if("l_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.activate_hand("l")
+				if(!C.hand)
+					C.activate_hand("l")
+				else
+					C.attack_empty_hand(BP_L_HAND)
 		if("swap")
 			usr:swap_hand()
 		if("hand")

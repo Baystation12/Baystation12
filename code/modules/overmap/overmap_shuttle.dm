@@ -121,8 +121,9 @@
 	var/opened = 0
 	var/parent_shuttle
 
-/obj/structure/fuel_port/New()
-	src.contents.Add(new/obj/item/weapon/tank/hydrogen)
+/obj/structure/fuel_port/Initialize()
+	. = ..()
+	new /obj/item/weapon/tank/hydrogen(src)
 
 /obj/structure/fuel_port/attack_hand(mob/user as mob)
 	if(!opened)
@@ -158,3 +159,7 @@
 		if(contents.len == 0)
 			user.unEquip(W, src)
 	update_icon()
+
+// Walls hide stuff inside them, but we want to be visible.
+/obj/structure/fuel_port/hide()
+	return

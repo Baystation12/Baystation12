@@ -842,7 +842,7 @@
 /obj/structure/table/rack,
 /obj/random/tool,
 /obj/random/tech_supply,
-/obj/item/clothing/gloves/duty,
+/obj/item/clothing/gloves/thick/duty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cq" = (
@@ -3314,7 +3314,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
 /obj/structure/bed/chair/comfy/brown{
 	dir = 4
@@ -3506,7 +3506,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ih" = (
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ii" = (
@@ -3722,7 +3722,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4030,7 +4030,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -4471,7 +4471,7 @@
 /area/errant_pisces/general_storage)
 "kQ" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kR" = (
@@ -4736,7 +4736,7 @@
 /area/errant_pisces/science_wing)
 "lL" = (
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4803,7 +4803,7 @@
 "lT" = (
 /obj/structure/table/steel,
 /obj/item/weapon/storage/firstaid/surgery,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /obj/item/weapon/material/twohanded/fireaxe,
 /obj/structure/window/reinforced{
 	dir = 1
@@ -4926,7 +4926,7 @@
 /area/errant_pisces/science_wing)
 "mi" = (
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -5074,7 +5074,7 @@
 	icon_state = "0-8"
 	},
 /obj/structure/closet/secure_closet/scientist{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -6057,7 +6057,7 @@
 /area/errant_pisces/fishing_wing)
 "ov" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -6789,8 +6789,8 @@
 /area/errant_pisces/bridge)
 "qD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/hatchet/tacknife,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
+/obj/item/weapon/material/knife/combat,
 /obj/item/stack/net/thirty,
 /obj/item/stack/net/thirty,
 /turf/simulated/floor/plating,
@@ -6974,7 +6974,7 @@
 /area/errant_pisces/fishing_wing)
 "ra" = (
 /obj/structure/net,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /turf/space,
 /area/space)
 "rb" = (

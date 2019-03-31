@@ -21,7 +21,7 @@
 	if (!can_touch(usr) || ismouse(usr))
 		return
 
-	if(flipped < 0 || !flip(get_cardinal_dir(usr,src)))
+	if(reinforced || flipped < 0 || !flip(get_cardinal_dir(usr,src)))
 		to_chat(usr, "<span class='notice'>It won't budge.</span>")
 		return
 

@@ -143,7 +143,7 @@
 
 	data["cellTemperature"] = round(air_contents.temperature)
 	data["cellTemperatureStatus"] = "good"
-	if(air_contents.temperature > T0C) // if greater than 273.15 kelvin (0 celcius)
+	if(air_contents.temperature > T0C) // if greater than 273.15 kelvin (0 celsius)
 		data["cellTemperatureStatus"] = "bad"
 	else if(air_contents.temperature > 225)
 		data["cellTemperatureStatus"] = "average"

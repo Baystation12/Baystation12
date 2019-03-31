@@ -22,6 +22,7 @@
 	var/bolt_open = 0
 	wielded_item_state = "heavysniper-wielded" //sort of placeholder
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
+	fire_delay = 12
 
 /obj/item/weapon/gun/projectile/heavysniper/on_update_icon()
 	..()

@@ -634,7 +634,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/tea/black = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 5,
@@ -1025,9 +1025,9 @@
 	/obj/item/weapon/reagent_containers/glass/beaker/bowl =2,
 	/obj/item/weapon/tray = 8,
 	/obj/item/weapon/material/kitchen/utensil/fork = 6,
-	/obj/item/weapon/material/kitchen/utensil/knife = 6,
+	/obj/item/weapon/material/knife/table = 6,
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
-	/obj/item/weapon/material/knife = 3,
+	/obj/item/weapon/material/knife/kitchen = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/pitcher = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/coffeecup = 8,
@@ -1043,10 +1043,11 @@
 	/obj/item/weapon/storage/lunchbox/cti = 3,
 	/obj/item/weapon/storage/lunchbox/nymph = 3,
 	/obj/item/weapon/storage/lunchbox/syndicate = 3,
-	/obj/item/weapon/storage/lunchbox/dais = 3)
+	/obj/item/weapon/storage/lunchbox/dais = 3,
+	/obj/item/weapon/material/knife/kitchen/cleaver = 1)
 
 
-	contraband = list(/obj/item/weapon/material/knife/butch = 2)
+	contraband = list(/obj/item/weapon/material/knife/kitchen/cleaver/bronze = 1)
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
@@ -1084,7 +1085,7 @@
 	icon_deny = "tool-deny"
 	icon_vend = "tool_vend"
 	vend_delay = 5
-	products = list(/obj/item/weapon/weldingtool/crystal = 5,
+	products = list(/obj/item/weapon/weldingtool/electric/crystal = 5,
 					/obj/item/weapon/wirecutters/crystal = 5,
 					/obj/item/weapon/screwdriver/crystal = 5,
 					/obj/item/weapon/crowbar/crystal = 5,
@@ -1104,7 +1105,7 @@
 	icon_deny = "engivend-deny"
 	icon_vend = "engivend-vend"
 	vend_delay = 21
-	req_one_access = list(access_atmospherics,access_engine_equip)
+	req_access = list(list(access_atmospherics,access_engine_equip))
 	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/device/geiger = 4,/obj/item/weapon/airlock_electronics = 10,/obj/item/weapon/module/power_control = 10,/obj/item/weapon/airalarm_electronics = 10,/obj/item/weapon/cell = 10,/obj/item/clamp = 10)
 	contraband = list(/obj/item/weapon/cell/high = 3)
 	premium = list(/obj/item/weapon/storage/belt/utility = 3)
@@ -1115,7 +1116,7 @@
 	desc = "Everything you need for do-it-yourself repair."
 	icon_state = "engi"
 	icon_deny = "engi-deny"
-	req_one_access = list(access_atmospherics,access_engine_equip)
+	req_access = list(list(access_atmospherics,access_engine_equip))
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/oiljug = 6,
 					/obj/item/weapon/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/weapon/screwdriver = 12,
 					/obj/item/weapon/crowbar = 12,/obj/item/weapon/wirecutters = 12,/obj/item/device/multitool = 12,/obj/item/weapon/wrench = 12,/obj/item/device/t_scanner = 12,

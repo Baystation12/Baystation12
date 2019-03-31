@@ -167,7 +167,6 @@
 				/obj/item/stack/medical/advanced/bruise_pack = 2,
 				/obj/item/stack/medical/advanced/ointment = 2,
 				/obj/item/stack/medical/splint = 1,
-				/obj/item/bodybag/cryobag = 1,
 				/obj/item/weapon/reagent_containers/hypospray/autoinjector = 3,
 				/obj/item/weapon/storage/pill_bottle/kelotane = 2,
 				/obj/item/weapon/storage/pill_bottle/antitox = 2,
@@ -209,14 +208,15 @@
 				/obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin = 1,
 				/obj/item/weapon/reagent_containers/glass/beaker/sulphuric = 1,
 				/obj/item/weapon/contraband/poster = 5,
-				/obj/item/weapon/material/butterfly = 2,
 				/obj/item/weapon/material/butterflyblade = 3,
 				/obj/item/weapon/material/butterflyhandle = 3,
 				/obj/item/weapon/material/wirerod = 3,
 				/obj/item/weapon/melee/baton/cattleprod = 1,
-				/obj/item/weapon/material/butterfly/switchblade = 1,
-				/obj/item/weapon/material/hatchet/tacknife = 1,
-				/obj/item/weapon/material/kitchen/utensil/knife/boot = 2,
+				/obj/item/weapon/material/knife/combat = 1,
+				/obj/item/weapon/material/knife/folding = 1,
+				/obj/item/weapon/material/knife/folding/wood = 1,
+				/obj/item/weapon/material/knife/folding/combat/balisong = 2,
+				/obj/item/weapon/material/knife/folding/combat/switchblade = 1,
 				/obj/item/weapon/storage/secure/briefcase/money = 1,
 				/obj/item/weapon/storage/box/syndie_kit/cigarette = 1,
 				/obj/item/stack/telecrystal = 1,
@@ -759,7 +759,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/gloves/thick/combat = 3,
 				/obj/item/clothing/gloves/white = 5,
 				/obj/item/clothing/gloves/rainbow = 1,
-				/obj/item/clothing/gloves/duty = 5,
+				/obj/item/clothing/gloves/thick/duty = 5,
 				/obj/item/clothing/gloves/guards = 3,
 				/obj/item/clothing/gloves/tactical = 3,
 				/obj/item/clothing/gloves/insulated/cheap = 5)
@@ -887,9 +887,12 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "docs_generic"
 
 /obj/random/documents/spawn_choices()
-	return list (/obj/item/documents/scg/verified = 10,
-	/obj/item/documents/scg/red = 10,
-	/obj/item/documents/scg/blue = 10)
+	return list (
+		/obj/item/documents/scg/verified = 7,
+		/obj/item/documents/scg/red =      7,
+		/obj/item/documents/scg/blue =     7,
+		/obj/item/documents/scg/brains =   7
+	)
 
 /obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"

@@ -192,6 +192,8 @@
 			var/turf/T = get_turf(user)
 			if(T)
 				for(var/obj/item/ammo_casing/C in loaded)
+					if(LAZYLEN(C.fall_sounds))
+						playsound(loc, pick(C.fall_sounds), 50, 1)
 					C.forceMove(T)
 					count++
 				loaded.Cut()

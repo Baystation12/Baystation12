@@ -5,16 +5,11 @@
 	icon_state = "catwalk"
 	density = 0
 	anchored = 1.0
-	var/obj/item/stack/tile/mono/plated_tile
 	plane = ABOVE_TURF_PLANE
 	layer = CATWALK_LAYER
+	footstep_type = FOOTSTEP_CATWALK
 	var/hatch_open = FALSE
-	footstep_sounds= list(
-		'sound/effects/footstep/catwalk1.ogg',
-		'sound/effects/footstep/catwalk2.ogg',
-		'sound/effects/footstep/catwalk3.ogg',
-		'sound/effects/footstep/catwalk4.ogg',
-		'sound/effects/footstep/catwalk5.ogg')
+	var/obj/item/stack/tile/mono/plated_tile
 
 /obj/structure/catwalk/Initialize()
 	. = ..()
@@ -105,8 +100,9 @@
 			ST.in_use = 0
 			src.add_fingerprint(user)
 			if(ST.use(1))
-				for(var/flooring_type in flooring_types)
-					var/decl/flooring/F = flooring_types[flooring_type]
+				var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
+				for(var/flooring_type in decls)
+					var/decl/flooring/F = decls[flooring_type]
 					if(!F.build_type)
 						continue
 					if(ispath(C.type, F.build_type))

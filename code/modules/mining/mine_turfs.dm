@@ -19,6 +19,7 @@ var/list/mining_floors = list()
 	density = 1
 	blocks_air = 1
 	temperature = T0C
+	color = COLOR_ASTEROID_ROCK
 	var/mined_turf = /turf/simulated/floor/asteroid
 	var/material/mineral
 	var/mined_ore = 0
@@ -37,7 +38,8 @@ var/list/mining_floors = list()
 
 	has_resources = 1
 
-/turf/simulated/mineral/New()
+/turf/simulated/mineral/Initialize()
+	. = ..()
 	if (!mining_walls["[src.z]"])
 		mining_walls["[src.z]"] = list()
 	mining_walls["[src.z]"] += src
@@ -147,6 +149,7 @@ var/list/mining_floors = list()
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
 	ore_overlay = image('icons/turf/mining_decals.dmi', "[mineral.ore_icon_overlay]")
+	ore_overlay.appearance_flags = RESET_COLOR
 	if(prob(50))
 		var/matrix/M = matrix()
 		M.Scale(-1,1)
@@ -245,7 +248,7 @@ var/list/mining_floors = list()
 			if(!archaeo_overlay && finds && finds.len)
 				var/datum/find/F = finds[1]
 				if(F.excavation_required <= excavation_level + F.view_range)
-					archaeo_overlay = "overlay_archaeo[rand(1,3)]"
+					archaeo_overlay = image('icons/turf/excavation_overlays.dmi',"overlay_archaeo[rand(1,3)]")
 					updateIcon = 1
 
 			else if(archaeo_overlay && (!finds || !finds.len))
@@ -267,7 +270,7 @@ var/list/mining_floors = list()
 			//update overlays displaying excavation level
 			if( !(excav_overlay && excavation_level > 0) || update_excav_overlay )
 				var/excav_quadrant = round(excavation_level / 50) + 1
-				excav_overlay = "overlay_excv[excav_quadrant]_[rand(1,3)]"
+				excav_overlay = image('icons/turf/excavation_overlays.dmi',"overlay_excv[excav_quadrant]_[rand(1,3)]")
 				updateIcon = 1
 
 			if(updateIcon)
@@ -420,6 +423,7 @@ var/list/mining_floors = list()
 	base_desc = "Gritty and unpleasant."
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	base_icon_state = "asteroid"
+	footstep_type = FOOTSTEP_ASTEROID
 
 	initial_flooring = null
 	initial_gas = null
@@ -428,7 +432,8 @@ var/list/mining_floors = list()
 	var/overlay_detail
 	has_resources = 1
 
-/turf/simulated/floor/asteroid/New()
+/turf/simulated/floor/asteroid/Initialize()
+	. = ..()
 	if (!mining_floors["[src.z]"])
 		mining_floors["[src.z]"] = list()
 	mining_floors["[src.z]"] += src

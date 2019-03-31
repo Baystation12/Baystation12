@@ -180,7 +180,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/bridge)
@@ -772,7 +772,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
@@ -797,7 +797,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -1483,7 +1483,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
@@ -1991,7 +1991,7 @@
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -2017,6 +2017,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"nC" = (
+/obj/effect/landmark{
+	name = "carpspawn"
+	},
+/turf/space,
+/area/space)
 "pd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2045,6 +2051,10 @@
 /obj/random/clothing,
 /turf/simulated/floor/wood,
 /area/unishi/living)
+"ur" = (
+/obj/machinery/hologram/holopad/longrange/remoteship,
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
 "vn" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
@@ -5384,7 +5394,7 @@ aa
 aa
 aa
 aa
-aa
+nC
 aa
 aa
 aa
@@ -7148,7 +7158,7 @@ aa
 aa
 aa
 aa
-aa
+nC
 aa
 aa
 aa
@@ -7293,7 +7303,7 @@ aa
 aa
 af
 ak
-aq
+ur
 as
 au
 aq
@@ -8304,7 +8314,7 @@ aa
 aa
 aa
 aa
-aa
+nC
 aa
 aa
 aa
@@ -9354,7 +9364,7 @@ aa
 aa
 aa
 aa
-aa
+nC
 aa
 aa
 aa

@@ -41,16 +41,6 @@
 	siemens_coefficient = 0.8
 	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/head/wizard/amp
-	name = "psychic amplifier"
-	desc = "A crown-of-thorns psychic amplifier. Kind of looks like a tiara having sex with an industrial robot."
-	icon_state = "amp"
-	item_state_slots = list(
-		slot_l_hand_str = "helmet",
-		slot_r_hand_str = "helmet",
-		)
-	siemens_coefficient = 0.8
-
 /obj/item/clothing/head/wizard/cap
 	name = "Gentlemans Cap"
 	desc = "A checkered gray flat cap woven together with the rarest of threads."
@@ -105,6 +95,7 @@
 	desc = "Heavy, royal purple robes threaded with psychic amplifiers and weird, bulbous lenses. Do not machine wash."
 	icon_state = "psyamp"
 	item_state = "psyamp"
+	gender = PLURAL
 
 /obj/item/clothing/suit/wizrobe/gentlecoat
 	name = "Gentlemans Coat"

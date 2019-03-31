@@ -44,5 +44,5 @@
 
 /obj/machinery/computer/atmoscontrol/ui_interact(var/mob/user)
 	if(!atmos_control)
-		atmos_control = new(src, req_access, req_one_access, monitored_alarm_ids)
+		atmos_control = new(src, req_access, monitored_alarm_ids)
 	atmos_control.ui_interact(user)

@@ -22,8 +22,8 @@
 	response_harm   = "stamps on"
 	density = 0
 	var/body_color //brown, gray and white, leave blank for random
-	minbodytemp = 223		//Below -50 Degrees Celcius
-	maxbodytemp = 323	//Above 50 Degrees Celcius
+	minbodytemp = 223		//Below -50 Degrees Celsius
+	maxbodytemp = 323	//Above 50 Degrees Celsius
 	universal_speak = 0
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/mouse

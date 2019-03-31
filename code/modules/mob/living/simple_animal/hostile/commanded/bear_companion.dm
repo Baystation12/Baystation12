@@ -27,7 +27,7 @@
 
 /mob/living/simple_animal/hostile/commanded/bear/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	. = ..()
-	if(!.)
+	if(.)
 		src.emote("roars in rage!")
 
 /mob/living/simple_animal/hostile/commanded/bear/attack_hand(mob/living/carbon/human/M as mob)

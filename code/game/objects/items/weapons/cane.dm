@@ -17,9 +17,8 @@
 
 /obj/item/weapon/cane/concealed/New()
 	..()
-	var/obj/item/weapon/material/butterfly/switchblade/temp_blade = new(src)
+	var/obj/item/weapon/material/knife/folding/combat/switchblade/temp_blade = new(src)
 	concealed_blade = temp_blade
-	temp_blade.attack_self()
 
 /obj/item/weapon/cane/concealed/attack_self(var/mob/user)
 	if(concealed_blade)
@@ -36,7 +35,7 @@
 	else
 		..()
 
-/obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/material/butterfly/W, var/mob/user)
+/obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/material/knife/folding/W, var/mob/user)
 	if(!src.concealed_blade && istype(W) && user.unEquip(W, src))
 		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [src]!</span>", "You sheathe \the [W] into [src].")
 		src.concealed_blade = W
@@ -53,5 +52,5 @@
 		item_state = initial(item_state)
 	else
 		SetName("cane shaft")
-		icon_state = "nullrod"
+		icon_state = "cane_noknife"
 		item_state = "foldcane"

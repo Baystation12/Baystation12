@@ -37,9 +37,9 @@
 		return 1
 	if(!islist(access))
 		access = list(access) //listify a single access code.
-	if(has_access(access, list(), using_access))
+	if(has_access(access, using_access))
 		return 1 //This is faster, and often enough.
-	return has_access(access, list(), get_access(user)) //Also checks the mob's ID.
+	return has_access(access, get_access(user)) //Also checks the mob's ID.
 
 /datum/nano_module/Topic(href, href_list)
 	if(topic_manager && topic_manager.Topic(href, href_list))

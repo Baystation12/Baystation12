@@ -16,10 +16,15 @@ var/list/solars_list = list()
 	var/health = 10
 	var/obscured = 0
 	var/sunfrac = 0
+	var/efficiency = 1
 	var/adir = SOUTH // actual dir
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
+	
+/obj/machinery/power/solar/improved
+	name = "improved solar panel"
+	efficiency = 2
 
 /obj/machinery/power/solar/drain_power()
 	return -1
@@ -121,7 +126,7 @@ var/list/solars_list = list()
 		if(powernet == control.powernet)//check if the panel is still connected to the computer
 			if(obscured) //get no light from the sun, so don't generate power
 				return
-			var/sgen = solar_gen_rate * sunfrac
+			var/sgen = solar_gen_rate * sunfrac * efficiency
 			add_avail(sgen)
 			control.gen += sgen
 		else //if we're no longer on the same powernet, remove from control computer
@@ -396,7 +401,7 @@ var/list/solars_list = list()
 
 	return
 
-/obj/machinery/power/solar_control/attackby(I as obj, user as mob)
+/obj/machinery/power/solar_control/attackby(var/obj/item/I, var/mob/user)
 	if(isScrewdriver(I))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20,src))

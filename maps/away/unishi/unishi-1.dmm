@@ -34,7 +34,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_access = newlist()
 	},
 /obj/structure/closet/crate/uranium,
 /obj/structure/cable{
@@ -294,7 +294,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(201)
+	req_access = newlist()
 	},
 /obj/structure/cable/yellow{
 	d2 = 2;
@@ -435,7 +435,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineering)
@@ -475,7 +475,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/vending/engivend{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -507,7 +507,7 @@
 	dir = 4
 	},
 /obj/machinery/vending/engineering{
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -548,7 +548,7 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -836,6 +836,12 @@
 /area/space)
 "cj" = (
 /obj/effect/shuttle_landmark/nav_unishi/nav3,
+/turf/space,
+/area/space)
+"lB" = (
+/obj/effect/landmark{
+	name = "carpspawn"
+	},
 /turf/space,
 /area/space)
 
@@ -4444,7 +4450,7 @@ aa
 aa
 aa
 aa
-aa
+lB
 aa
 aa
 aa
@@ -7697,7 +7703,7 @@ aa
 aa
 aa
 aa
-aa
+lB
 aa
 aa
 aa

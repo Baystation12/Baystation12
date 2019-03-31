@@ -15,10 +15,13 @@
 	return entry
 
 /atom/proc/get_mechanics_info()
+	return
 
 /atom/proc/get_antag_info()
+	return
 
 /atom/proc/get_lore_info()
+	return
 
 /atom/examine(var/mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	. = ..()

@@ -941,7 +941,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "ct" = (
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/kitchen,
 /obj/structure/table/glass/pglass,
 /obj/item/weapon/material/ashtray/bronze,
 /turf/simulated/floor/tiled,
@@ -1390,8 +1390,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/mob/living/silicon/decoy{
-	faction = "farmbots";
+/obj/structure/decoy{
 	icon_state = "ai-crash";
 	name = "inactive AI"
 	},
@@ -1712,7 +1711,7 @@
 "eh" = (
 /obj/structure/catwalk,
 /obj/item/weapon/material/kitchen/rollingpin,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/kitchen,
 /obj/structure/table/glass/pglass,
 /obj/item/weapon/material/ashtray/bronze,
 /turf/simulated/floor/fixed/alium,
@@ -1979,8 +1978,7 @@
 	icon_state = "door_locked";
 	id_tag = "solars_outer";
 	locked = 1;
-	name = "EVA External Access";
-	req_access = list(13)
+	name = "EVA External Access"
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
@@ -2317,16 +2315,16 @@
 /area/map_template/hydrobase/station/processing)
 "fr" = (
 /obj/structure/catwalk,
-/obj/item/weapon/material/butterfly/switchblade,
+/obj/item/weapon/material/knife/folding/combat/switchblade,
 /obj/random/coin,
 /obj/random/coin,
 /obj/structure/closet/crate/secure/weapon{
 	desc = "A heavy-duty crate with a suite of firearms safety instructions plastered on the side. The ID scanner is unlike anything you've seen before.";
 	name = "weapons crate";
-	req_one_access = list(150)
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/random/projectile,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /obj/item/weapon/spacecash/bundle/c100,
 /obj/random/cash,
 /obj/random/cash,
@@ -2788,8 +2786,7 @@
 	icon_state = "door_locked";
 	id_tag = "hydrodock_inner";
 	locked = 1;
-	name = "Shipping Internal Access";
-	req_access = list(13)
+	name = "Shipping Internal Access"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -2935,7 +2932,7 @@
 	name = "Shipping Airlock Console";
 	pixel_x = 24;
 	pixel_y = 0;
-	req_one_access = newlist();
+	req_access = newlist();
 	tag_airpump = "hydrodock_pump";
 	tag_chamber_sensor = "hydrodock_sensor";
 	tag_exterior_door = "hydrodock_outer";
@@ -3013,8 +3010,7 @@
 	icon_state = "door_locked";
 	id_tag = "hydrodock_outer";
 	locked = 1;
-	name = "Shipping Access";
-	req_access = list(13)
+	name = "Shipping Access"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/dockport)
@@ -3026,7 +3022,7 @@
 	name = "exterior access button";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_one_access = newlist()
+	req_access = newlist()
 	},
 /turf/template_noop,
 /area/template_noop)

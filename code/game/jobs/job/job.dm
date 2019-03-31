@@ -48,8 +48,9 @@
 	var/max_goals = 3
 
 	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
-
 	var/list/species_branch_rank_cache_ = list()
+	var/list/psi_faculties                // Starting psi faculties, if any.
+	var/psi_latency_chance = 0            // Chance of an additional psi latency, if any.
 
 /datum/job/New()
 
@@ -66,10 +67,18 @@
 	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+
+	if(psi_latency_chance && prob(psi_latency_chance))
+		H.set_psi_rank(pick(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS), 1, defer_update = TRUE)
+	if(islist(psi_faculties))
+		for(var/psi in psi_faculties)
+			H.set_psi_rank(psi, psi_faculties[psi], take_larger = TRUE, defer_update = TRUE)
+	if(H.psi)
+		H.psi.update()
+		H.give_psi_implant()
+
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
-	if(!outfit)
-		return FALSE
-	. = outfit.equip(H, title, alt_title)
+	if(outfit) . = outfit.equip(H, title, alt_title)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
@@ -121,8 +130,6 @@
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
 		H.mind.store_memory(remembered_info)
 		H.mind.initial_account = M
-
-	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)

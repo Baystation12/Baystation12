@@ -97,15 +97,8 @@ var/datum/admin_secrets/admin_secrets = new()
 /datum/admin_secret_category/investigation
 	name = "Investigation"
 
-/datum/admin_secret_category/random_events
-	name = "'Random' Events"
-
 /datum/admin_secret_category/fun_secrets
 	name = "Fun Secrets"
-
-/datum/admin_secret_category/final_solutions
-	name = "Final Solutions"
-	desc = "(Warning, these will end the round!)"
 
 /*************************
 * Pre-defined base items *
@@ -125,16 +118,7 @@ var/datum/admin_secrets/admin_secrets = new()
 	log = 0
 	permissions = R_INVESTIGATE
 
-/datum/admin_secret_item/random_event
-	category = /datum/admin_secret_category/random_events
-	permissions = R_FUN
-	warn_before_use = 1
-
 /datum/admin_secret_item/fun_secret
 	category = /datum/admin_secret_category/fun_secrets
 	permissions = R_FUN
 	warn_before_use = 1
-
-/datum/admin_secret_item/final_solution
-	category = /datum/admin_secret_category/final_solutions
-	permissions = R_FUN|R_SERVER|R_ADMIN

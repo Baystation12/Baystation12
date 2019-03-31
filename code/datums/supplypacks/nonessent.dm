@@ -89,7 +89,7 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/accessory/wcoat,
+					/obj/item/clothing/accessory/wcoat/black,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
@@ -136,7 +136,7 @@
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/leather,
-					/obj/item/clothing/accessory/wcoat)
+					/obj/item/clothing/accessory/wcoat/black)
 	name = "Costume - Formalwear"
 	cost = 30
 	containertype = /obj/structure/closet

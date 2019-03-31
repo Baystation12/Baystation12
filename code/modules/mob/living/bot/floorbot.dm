@@ -3,7 +3,7 @@
 	desc = "A little floor repairing robot, he looks so excited!"
 	icon = 'icons/mob/bot/floorbot.dmi'
 	icon_state = "floorbot0"
-	req_one_access = list(access_construction, access_robotics)
+	req_access = list(list(access_construction, access_robotics))
 	wait_if_pulled = 1
 	min_target_dist = 0
 
@@ -175,7 +175,7 @@
 			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(!F.flooring)
-					F.set_flooring(get_flooring_data(floor_build_type))
+					F.set_flooring(decls_repository.get_decl(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
 			target = null
@@ -220,7 +220,7 @@
 	var/list/shrapnel = list()
 
 	for(var/I = 3, I<3 , I++) //Toolbox shatters.
-		shrapnel += new /obj/item/weapon/material/shrapnel(Tsec)
+		shrapnel += new /obj/item/weapon/material/shard/shrapnel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
 		shrapnel += new /obj/item/stack/tile/floor(Tsec)

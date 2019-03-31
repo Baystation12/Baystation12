@@ -52,8 +52,12 @@
 		if(A.Adjacent(B))
 			if(O.loc != assembly)
 				transfer_amount *= 0.8 // Losses due to distance.
-			var/list/U=A.GetAllContents(/obj/item/integrated_circuit/power/transmitter)
-			transfer_amount *= 1 / U.len
+			var/transmitter_count = 0
+			for(var/obj/item/integrated_circuit/power/transmitter in A.GetAllContents())
+				transmitter_count++
+			if(!transmitter_count)
+				return FALSE
+			transfer_amount /= transmitter_count
 			set_pin_data(IC_OUTPUT, 1, cell.charge)
 			set_pin_data(IC_OUTPUT, 2, cell.maxcharge)
 			set_pin_data(IC_OUTPUT, 3, cell.percent())

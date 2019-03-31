@@ -38,6 +38,7 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
 	var/material/implicit_material
+	autoset_access = FALSE // Uses different system with buttons.
 
 /obj/machinery/door/blast/Initialize()
 	. = ..()

@@ -10,7 +10,7 @@
 	darksight_tint = DARKTINT_GOOD
 	siemens_coefficient = 0
 
-	blood_color = "#cccccc"
+	blood_color = COLOR_GRAY80
 	flesh_color = "#aaaaaa"
 
 	remains_type = /obj/effect/decal/cleanable/ash

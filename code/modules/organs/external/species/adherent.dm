@@ -37,6 +37,7 @@
 	dislocated =              -1
 	max_damage =              50
 	min_broken_damage =       25
+	cavity_max_w_class =      ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
 	encased = "ceramic hull"
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC

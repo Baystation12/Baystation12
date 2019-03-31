@@ -12,11 +12,11 @@
 
 	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
 	var/list/conf_access = list()
-	var/one_access = 0 //if set to 1, door would receive req_one_access instead of req_access
+	var/one_access = 0 //if set to 1, door would receive OR instead of AND on the access restrictions.
 	var/last_configurator = null
 	var/locked = 1
 	var/lockable = 1
-
+	var/autoset = FALSE // Whether the door should inherit access from surrounding areas
 
 /obj/item/weapon/airlock_electronics/attack_self(mob/user as mob)
 	if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
@@ -39,7 +39,7 @@
 	var/list/data = list()
 	var/list/regions = list()
 
-	for(var/i in ACCESS_REGION_SECURITY to ACCESS_REGION_SUPPLY) //code/game/jobs/_access_defs.dm
+	for(var/i in ACCESS_REGION_SECURITY to ACCESS_REGION_NT) //code/game/jobs/_access_defs.dm
 		var/list/region = list()
 		var/list/accesses = list()
 		for(var/j in get_region_accesses(i))
@@ -55,6 +55,7 @@
 	data["oneAccess"] = one_access
 	data["locked"] = locked
 	data["lockable"] = lockable
+	data["autoset"] = autoset
 
 	return data
 
@@ -69,8 +70,11 @@
 		if("one_access")
 			one_access = !one_access
 			return TRUE
+		if("autoset")
+			autoset = !autoset
+			return TRUE
 		if("set")
-			var/access = text2num(params["access"])
+			var/access = params["access"]
 			if (!(access in conf_access))
 				conf_access += access
 			else
@@ -118,3 +122,12 @@
 	if(!ui)
 		ui = new(user, src, ui_key, "airlock_electronics", src.name, 1000, 500, master_ui, state)
 		ui.open()
+
+/obj/item/weapon/airlock_electronics/proc/set_access(var/obj/object)
+	if(!object.req_access)
+		object.check_access()
+	if(object.req_access.len)
+		conf_access = list()
+		for(var/entry in object.req_access)
+			conf_access |= entry // This flattens the list, turning everything into AND
+			// Can be reworked to have the electronics inherit a precise access set, but requires UI changes.

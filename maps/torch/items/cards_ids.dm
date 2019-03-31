@@ -45,8 +45,11 @@
 	job_access_type = /datum/job/senior_doctor
 
 /obj/item/weapon/card/id/torch/contractor/medical
-	job_access_type = /datum/job/doctor_contractor
+	job_access_type = /datum/job/doctor
 	detail_color = COLOR_PALE_BLUE_GRAY
+
+/obj/item/weapon/card/id/torch/contractor/medical/senior
+	job_access_type = /datum/job/senior_doctor
 
 /obj/item/weapon/card/id/torch/contractor/chemist
 	job_access_type = /datum/job/chemist
@@ -89,7 +92,7 @@
 	extra_details = list("onegoldstripe")
 
 /obj/item/weapon/card/id/torch/contractor/engineering
-	job_access_type = /datum/job/engineer_contractor
+	job_access_type = /datum/job/engineer
 	detail_color = COLOR_SUN
 
 /obj/item/weapon/card/id/torch/contractor/engineering/roboticist
@@ -106,9 +109,8 @@
 	detail_color = COLOR_BROWN
 
 /obj/item/weapon/card/id/torch/contractor/supply
-	job_access_type = /datum/job/cargo_contractor
+	job_access_type = /datum/job/cargo_tech
 	detail_color = COLOR_BROWN
-
 
 /obj/item/weapon/card/id/torch/crew/service //unused
 	job_access_type = /datum/job/assistant

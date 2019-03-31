@@ -155,12 +155,12 @@
 
 /obj/item/rig_module/mounted/Initialize()
 	. = ..()
-	if(gun)
+	if(ispath(gun))
 		gun = new gun(src)
 
 /obj/item/rig_module/mounted/engage(atom/target)
 
-	if(!..())
+	if(!..() || !gun)
 		return 0
 
 	if(!target)

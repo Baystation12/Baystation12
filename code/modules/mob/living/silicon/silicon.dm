@@ -262,22 +262,14 @@
 		if(1.0)
 			brute = 400
 			burn = 100
-			if(!anchored && !prob(getarmor(null, "bomb")))
-				gib()
 		if(2.0)
 			brute = 60
 			burn = 60
 		if(3.0)
 			brute = 30
 
-	var/protection = blocked_mult(getarmor(null, "bomb"))
-	brute *= protection
-	burn *= protection
-
-	adjustBruteLoss(brute)
-	adjustFireLoss(burn)
-
-	updatehealth()
+	apply_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
+	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	if(!next_alarm_notice)
@@ -373,3 +365,6 @@
 /mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(affect_silicon)
 		return ..()
+
+/mob/living/silicon/seizure()
+	flash_eyes(affect_silicon = TRUE)

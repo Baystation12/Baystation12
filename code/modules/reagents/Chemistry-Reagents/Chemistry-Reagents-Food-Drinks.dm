@@ -1296,10 +1296,6 @@
 	glass_name = "vodka"
 	glass_desc = "The glass contain wodka. Xynta."
 
-/datum/reagent/ethanol/vodka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.apply_effect(max(M.radiation - 1 * removed, 0), IRRADIATE, blocked = 0)
-
 /datum/reagent/ethanol/vodka/premium
 	name = "Premium Vodka"
 	description = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."

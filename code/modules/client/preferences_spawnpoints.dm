@@ -27,6 +27,10 @@ GLOBAL_VAR(spawntypes)
 
 	return 1
 
+//Called after mob is created, moved to a turf and equipped.
+/datum/spawnpoint/proc/after_join(mob/victim)
+	return
+
 #ifdef UNIT_TEST
 /datum/spawnpoint/Del()
 	crash_with("Spawn deleted: [log_info_line(src)]")
@@ -61,6 +65,17 @@ GLOBAL_VAR(spawntypes)
 /datum/spawnpoint/cryo/New()
 	..()
 	turfs = GLOB.latejoin_cryo
+
+/datum/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
+	if(!istype(victim))
+		return
+	var/area/A = get_area(victim)
+	for(var/obj/machinery/cryopod/C in A)
+		if(!C.occupant)
+			C.set_occupant(victim, 1)
+			victim.Sleeping(rand(1,3))
+			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [GLOB.using_map.full_name]. It might take a few seconds."))
+			return
 
 /datum/spawnpoint/cyborg
 	display_name = "Cyborg Storage"
