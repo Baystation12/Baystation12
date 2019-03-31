@@ -183,7 +183,7 @@
 "dA" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor,/area/faction_base/innie)
 "dB" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate/hydroponics/prespawned,/turf/simulated/floor,/area/faction_base/innie)
 "dC" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate,/turf/simulated/floor,/area/faction_base/innie)
-"dD" = (/obj/structure/reagent_dispensers/watertank,/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/faction_base/innie)
+"dD" = (/obj/structure/closet/secure_closet/medical3,/obj/machinery/light{dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "dE" = (/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor/plating,/area/faction_base/innie)
 "dF" = (/obj/structure/table/rack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/turf/simulated/floor/plating,/area/faction_base/innie)
 "dG" = (/obj/structure/closet{name = "Tools Closet"},/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor,/area/faction_base/innie)
@@ -227,8 +227,8 @@
 "es" = (/obj/machinery/atmospherics/binary/fusion_cooling,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/faction_base/innie)
 "et" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/faction_base/innie)
 "eu" = (/mob/living/simple_animal/npc/colonist/crop_trader,/turf/simulated/floor,/area/faction_base/innie)
-"ev" = (/obj/structure/table/steel,/obj/random/masks,/turf/simulated/floor/plating,/area/faction_base/innie)
-"ew" = (/obj/structure/table/steel,/obj/random/snack,/turf/simulated/floor/plating,/area/faction_base/innie)
+"ev" = (/obj/structure/closet/secure_closet/medical3,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"ew" = (/obj/structure/reagent_dispensers/watertank,/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/faction_base/innie)
 "ex" = (/mob/living/simple_animal/npc/colonist/mineral_trader,/turf/simulated/floor/plating,/area/faction_base/innie)
 "ey" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/faction_base/innie)
 "ez" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor,/area/faction_base/innie)
@@ -242,9 +242,9 @@
 "eH" = (/obj/structure/curtain/open/bed,/obj/structure/bed/padded,/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "eI" = (/obj/structure/sign/neon/sale,/turf/simulated/wall/r_wall,/area/faction_base/innie)
 "eJ" = (/obj/structure/table/steel,/obj/random/clothing,/turf/simulated/floor,/area/faction_base/innie)
-"eK" = (/obj/structure/table/steel,/obj/random/accessory,/turf/simulated/floor/plating,/area/faction_base/innie)
+"eK" = (/obj/structure/table/steel,/obj/random/masks,/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/innie)
 "eL" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/faction_base/innie)
-"eM" = (/obj/structure/table/steel,/obj/random/smokes,/turf/simulated/floor/plating,/area/faction_base/innie)
+"eM" = (/obj/structure/table/steel,/obj/random/snack,/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/innie)
 "eN" = (/obj/structure/table/steel,/turf/simulated/floor/plating,/area/faction_base/innie)
 "eO" = (/obj/structure/table/steel,/obj/random/glasses,/turf/simulated/floor,/area/faction_base/innie)
 "eP" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/light,/turf/simulated/floor,/area/faction_base/innie)
@@ -270,11 +270,11 @@
 "fj" = (/obj/machinery/door/airlock/halo,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "fk" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "fl" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/faction_base/innie)
-"fm" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
+"fm" = (/obj/structure/table/steel,/obj/random/accessory,/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/innie)
 "fn" = (/obj/structure/closet/jcloset,/turf/simulated/floor/plating,/area/faction_base/innie)
 "fo" = (/obj/structure/closet/l3closet/janitor,/turf/simulated/floor/plating,/area/faction_base/innie)
 "fp" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"fq" = (/obj/item/stack/material/phoron/ten,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
+"fq" = (/obj/effect/floor_decal/corner/red/full,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "fr" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor,/area/faction_base/innie)
 "fs" = (/obj/structure/table/steel,/obj/random/firstaid,/turf/simulated/floor,/area/faction_base/innie)
 "ft" = (/obj/structure/table/steel,/obj/random/ammo,/turf/simulated/floor/plating,/area/faction_base/innie)
@@ -283,7 +283,7 @@
 "fw" = (/obj/structure/table/steel,/obj/random/soap,/turf/simulated/floor/plating,/area/faction_base/innie)
 "fx" = (/obj/structure/table/rack,/obj/random/handgun,/obj/random/handgun,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/innie)
 "fy" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "Salvaged Antique Hardsuit"},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "Salvaged Antique Hardsuit"},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"fz" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
+"fz" = (/obj/structure/table/steel,/obj/random/smokes,/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/innie)
 "fA" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "fB" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/effect/floor_decal/industrial/outline,/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/faction_base/innie)
 "fC" = (/obj/machinery/light{dir = 1},/obj/machinery/vending/engivend,/turf/simulated/floor/plating,/area/faction_base/innie)
@@ -319,14 +319,14 @@
 "gg" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/faction_base/innie)
 "gh" = (/obj/vehicle/train/cargo/engine,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/faction_base/innie)
 "gi" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"gj" = (/obj/structure/ore_box,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
+"gj" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor,/area/faction_base/innie)
 "gk" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gl" = (/obj/effect/floor_decal/asteroid,/turf/simulated/mineral,/area/faction_base/innie)
-"gm" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; req_access = list(309); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor,/area/faction_base/innie)
+"gm" = (/obj/structure/table/glass,/obj/item/weapon/storage/firstaid/fire,/obj/item/weapon/storage/firstaid/fire,/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "gn" = (/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "go" = (/obj/item/weapon/stool/padded,/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gp" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"gq" = (/obj/structure/closet/secure_closet/medical2,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"gq" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gr" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "gs" = (/obj/machinery/light{dir = 1},/obj/machinery/organ_printer/flesh,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "gt" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
@@ -341,7 +341,7 @@
 "gC" = (/obj/item/weapon/stool/padded,/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/obj/effect/landmark/start/innie_base,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gD" = (/obj/item/weapon/stool/padded,/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gE" = (/obj/effect/landmark/start/innie_base,/turf/simulated/floor/wood,/area/faction_base/innie)
-"gF" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"gF" = (/obj/machinery/telecomms/allinone,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gG" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "gH" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "gI" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
@@ -352,9 +352,9 @@
 "gN" = (/obj/structure/sign/neon/close,/turf/simulated/wall/r_wall,/area/faction_base/innie)
 "gO" = (/turf/simulated/floor/tiled,/area/faction_base/innie)
 "gP" = (/obj/item/device/mass_spectrometer/adv,/obj/item/clothing/glasses/science,/obj/item/clothing/glasses/science,/obj/item/clothing/glasses/science,/obj/structure/table/glass,/obj/item/weapon/storage/box/beakers,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
-"gQ" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"gQ" = (/obj/structure/dispenser/oxygen,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gR" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate/large,/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/obj/item/weapon/storage/belt/utility/full,/turf/simulated/floor/plating,/area/faction_base/innie)
-"gS" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate{name = "Glass Crate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/faction_base/innie)
+"gS" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "gT" = (/obj/structure/girder,/turf/simulated/floor,/area/faction_base/innie)
 "gU" = (/obj/structure/bedsheetbin,/turf/simulated/floor,/area/faction_base/innie)
 "gV" = (/obj/structure/grille,/turf/simulated/floor,/area/faction_base/innie)
@@ -362,7 +362,7 @@
 "gX" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled,/area/faction_base/innie)
 "gY" = (/obj/structure/table/glass,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/obj/item/stack/material/phoron/ten,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "gZ" = (/obj/structure/sign/warning/nosmoking_2,/turf/simulated/wall/r_wall,/area/faction_base/innie)
-"ha" = (/obj/machinery/chemical_dispenser,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"ha" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/plating,/area/faction_base/innie)
 "hb" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor,/area/faction_base/innie)
 "hc" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate{name = "Plasteel Crate"},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/plating,/area/faction_base/innie)
 "hd" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate{name = "Steel Crate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/plating,/area/faction_base/innie)
@@ -373,17 +373,17 @@
 "hi" = (/obj/structure/window/reinforced{dir = 1},/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "hj" = (/obj/structure/stairs_decorative{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "hk" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
-"hl" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"hl" = (/obj/structure/ore_box,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "hm" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate/large,/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/stack/material/cloth{amount = 50},/obj/item/weapon/shovel,/obj/item/weapon/shovel,/obj/item/weapon/shovel,/obj/item/weapon/shovel,/turf/simulated/floor/plating,/area/faction_base/innie)
 "hn" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/faction_base/innie)
 "ho" = (/obj/structure/computerframe{anchored = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/turf/simulated/floor,/area/faction_base/innie)
 "hp" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/faction_base/innie)
 "hq" = (/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/floor_decal/corner/pink/diagonal,/obj/machinery/light/colored/purple,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "hr" = (/obj/structure/sign/neon/beer{pixel_x = -32},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"hs" = (/obj/structure/closet/crate/medical{name = "Blood Packs Crate"},/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/BPlus,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"hs" = (/obj/structure/ore_box,/obj/machinery/light,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "ht" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (WEST)"; icon_state = "sleeper_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
-"hu" = (/obj/structure/closet/crate/medical{name = "Medical Kits Crate"},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
-"hv" = (/obj/structure/skele_stand,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"hu" = (/obj/structure/closet/secure_closet/medical2,/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"hv" = (/obj/machinery/optable,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "hw" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "hx" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 "hy" = (/obj/structure/table/glass,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
@@ -467,7 +467,7 @@
 "iY" = (/obj/structure/sign/neon/pizza,/turf/simulated/wall/r_wall,/area/faction_base/innie)
 "iZ" = (/obj/structure/sign/double/barsign,/turf/simulated/wall/r_wall,/area/faction_base/innie)
 "ja" = (/obj/structure/sign/neon/hotel,/turf/simulated/wall/r_wall,/area/faction_base/innie)
-"jb" = (/obj/structure/sign/halo_floorsign/cargobay{tag = "icon-cargobay (NORTH)"; icon_state = "cargobay"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie)
+"jb" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/effect/floor_decal/industrial/outline,/obj/effect/floor_decal/industrial/warning/full,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/innie)
 "jc" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/innie)
 "jd" = (/obj/structure/sign/neon/bar_alt{pixel_y = 32},/turf/simulated/floor/tiled,/area/faction_base/innie)
 "je" = (/obj/structure/sign/directions/medical{dir = 8; icon_state = "direction_med"; pixel_x = -32; pixel_y = -32; pixel_z = 0},/turf/simulated/floor/tiled,/area/faction_base/innie)
@@ -500,7 +500,7 @@
 "jF" = (/obj/structure/table/woodentable,/obj/item/toy/cultsword,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/carpet,/area/faction_base/innie)
 "jG" = (/obj/structure/table/rack,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "jH" = (/obj/structure/table/rack,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
-"jI" = (/obj/structure/bed/chair,/turf/simulated/floor/carpet,/area/faction_base/innie)
+"jI" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/effect/floor_decal/industrial/outline,/obj/effect/floor_decal/industrial/warning/full,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/plating,/area/faction_base/innie)
 "jJ" = (/obj/item/trash/candy,/turf/simulated/floor/carpet/blue,/area/faction_base/innie)
 "jK" = (/obj/structure/table/woodentable,/obj/item/toy/snappop,/obj/item/toy/snappop,/obj/item/toy/snappop,/turf/simulated/floor/carpet,/area/faction_base/innie)
 "jL" = (/obj/structure/mopbucket,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
@@ -534,6 +534,28 @@
 "kn" = (/obj/docking_umbilical/south,/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
 "ko" = (/obj/effect/landmark/map_data{name = "Camp New Hope"},/turf/space,/area/faction_base/innie)
 "kp" = (/obj/effect/overmap/ship/faction_base/innie,/turf/space,/area/faction_base/innie)
+"kq" = (/obj/machinery/chem_master,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"kr" = (/obj/structure/skele_stand,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"ks" = (/turf/simulated/floor/tiled/dark,/area/space)
+"kt" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; req_access = list(309); tag = "icon-door_closed (NORTH)"},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor,/area/faction_base/innie)
+"ku" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor,/area/faction_base/innie)
+"kv" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/faction_base/innie)
+"kw" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate{name = "Glass Crate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/plating,/area/faction_base/innie)
+"kx" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor,/area/faction_base/innie)
+"ky" = (/obj/effect/floor_decal/industrial/loading{tag = "icon-loadingarea (NORTH)"; icon_state = "loadingarea"; dir = 1},/turf/simulated/floor,/area/faction_base/innie)
+"kz" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/faction_base/innie)
+"kA" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/faction_base/innie)
+"kB" = (/obj/structure/sign/halo_floorsign/cargobay{tag = "icon-cargobay (NORTH)"; icon_state = "cargobay"; dir = 1},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie)
+"kC" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie)
+"kD" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/faction_base/innie)
+"kE" = (/obj/structure/table/rack,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/obj/random/handgun,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
+"kF" = (/obj/structure/table/rack,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/item/clothing/mask/balaclava/tactical,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/faction_base/innie)
+"kG" = (/obj/structure/bed/chair,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/carpet,/area/faction_base/innie)
+"kH" = (/obj/machinery/chemical_dispenser,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"kI" = (/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminum,/obj/item/weapon/reagent_containers/chem_disp_cartridge/ammonia,/obj/item/weapon/reagent_containers/chem_disp_cartridge/carbon,/obj/item/weapon/reagent_containers/chem_disp_cartridge/copper,/obj/item/weapon/reagent_containers/chem_disp_cartridge/ethanol,/obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrazine,/obj/item/weapon/reagent_containers/chem_disp_cartridge/hclacid,/obj/item/weapon/reagent_containers/chem_disp_cartridge/lithium,/obj/item/weapon/reagent_containers/chem_disp_cartridge/iron,/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/structure/closet/crate/medical{desc = "A medical crate. This one has a chemical cartridges label on it."},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"kJ" = (/obj/structure/closet/crate/medical{name = "Blood Packs Crate"},/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"kK" = (/obj/structure/closet/crate/medical{name = "Medical Kits Crate"},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
+"kL" = (/obj/item/weapon/reagent_containers/chem_disp_cartridge/mercury,/obj/item/weapon/reagent_containers/chem_disp_cartridge/phosphorus,/obj/item/weapon/reagent_containers/chem_disp_cartridge/potassium,/obj/item/weapon/reagent_containers/chem_disp_cartridge/radium,/obj/item/weapon/reagent_containers/chem_disp_cartridge/silicon,/obj/item/weapon/reagent_containers/chem_disp_cartridge/sodium,/obj/item/weapon/reagent_containers/chem_disp_cartridge/sugar,/obj/item/weapon/reagent_containers/chem_disp_cartridge/sulfur,/obj/item/weapon/reagent_containers/chem_disp_cartridge/sacid,/obj/item/weapon/reagent_containers/chem_disp_cartridge/tungsten,/obj/item/weapon/reagent_containers/chem_disp_cartridge/water,/obj/structure/closet/crate/medical{desc = "A medical crate. This one has a chemical cartridges label on it."},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/faction_base/innie)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -551,7 +573,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadadadadadad
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadafafafafafafafafafafafaffeafafafafafafadadadadadadadadadadadadadadadadadadadadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacabadadafagahafagahafagahafaiaiaiaiafajakalafadadadadadadadadadadadadadadadadadadadadadadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadafamanafamanafamanafaoaoaoaoapaqaqaqafadadadadadadadadadadadadadadadadadadadadadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadafamanafamanafamanaffqaoaoaoapaqaqaqafadadadadadadadadadadadadadadadadadadadadadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadadadadadafarasafarasafarasafafatauafafavawaxafafafafafafafafafafafafafafafafafaffeafafafafafafafadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadadadadafafaffeayazazazazazazazasaAaBaoaCafafafafafaDaEaEaEaEaEaEaEaEaEaFaGaGaHaIaGaJaGaGaKaGaLaMaNafadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadafagaOarazazazazazazazazasaAaBaoaPaQaRaSaTafaUaDaEaEaEaEaEaEaEaEaFaVaVaVaVaVaVaVaVaVaVaVaVaWafadadadadabaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -560,64 +582,64 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeadadadadadadafafafafafafafafafasbgasas
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadadafafafafafafafafafbhaoaoaoaoaoaoaPaPafafafafafafafafafafafafaUaEaEaEaEaFaVaVaVaVaVaVaVaVbdaVbebfbiafadadadadababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadafbjafafbkafafafafblaoaoaoaoaoaoaoaPaPafafbmbnbobpbqbmbqbrafafaDaEaEaEaEaFaVaVbsbtbubvaVaVbwaVaVaVaVafadadadadabababaeabababababaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadafafbxbybzbAbBbCafafafbDbEafblafafafafafafafbFbFbGbGbFbFbFbFafbHafafafafafafafafafafafafbIaZafafafafafafadadadadadabababaeacababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeadadafbJbKbKbKbKbKbKbLbMbLbFbFbFbFbFbFbFbFcxafafbNbObobPbQbmbQbFbFbFbRazazazazazazazazazazazazazazazazazafafadadadadadabababaeabababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeadadafbJbKbKbKbKbKbKbLbMbLbFbFbFbFbFbFbFbFcxafafbNbObobPbQbmbQbFbFbFbRazeXazazazazazazazazazazazazazazazafafadadadadadabababaeabababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadafbSbKbTbKbKbKbKbLbMbUbFbFbFbFbFbFbFbFbFafafbFbObPbobQbQbmbFbFbVbRazazazazazazazazazazbWazazazazazazafadadadadadadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadafafbXbYbKbKbZcaafafcbbGbGafafafafafafafafafbFbFbGbGbFbFbFbFafafazazazazazazafcccdcecfafcgchciafazazafafafafafafadadadabababababababaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadafafafcbcjckafafafafafbGbGafclcmclaoclcmclafbrbnbGbGbmcnbqbmafafafafafafaycoafafafafafafafafafafayazcpcqcrcsctafadadadadabababacabaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadafafafcbcjckafafafafafbGbGafclcmclaoclcmclafbrbnbGbGbmcnbqbmafafafafafafaycoafafafafafafafafafafayazcpcqdDevctafadadadadabababacabaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababacababadadadadafcucvbKbKbBcwafafafbFcxafaPaPaPaPaPaPaPafafafcybFafafafafafafczcAcBafazazafcCcBcAczafczcAcBafazazcDcqcqcqcqafadadadadadadababaeabaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaababababababadadadadadfecEbKbKbKbKcFafafafbFbFafcGcHcGaPcGcHcGafafafbFbFafafafafafafcIazazcJazazcJazazazcIafcIazazcJazazcDcKcLcMcNafadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaababababababadadadadadfecEbKbKbKbKcFafafafbFbFafcGcHcGaPcGcHcGafafafbFbFafafafafafafcIazazcJazazcJazazazcIafcIazazcJazazcDcKgmcMcNafadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaabababadadadadadadadadadafcObKbKbKbKcPafafafcQbGafafafafcJafafafafbHafbFbFafcRcScTcUafcVazcWafazazafazcWazcVafcVazcWafazazcXafafafafafadadadadadadadadadababaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaababadadadadadadadadadadafcYcZdadabZdbafafafbFbFbFbFbFbFbFbFbFbFbFbFbFbGbGafdccSdddeafafafafafaycoafafafafafafafafafafayazafadadadadadadadadadadadadadadadabaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaababadabababadadadadadafafafafafafafafafafafbFbFbFdfbFbFbFbFbFbFbFdfbFbGbGafdccSdddgafczcAcBafazazafcCcBcAczafczcAcBafazazafadadadadadadadadadadadadadadadadabaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaabababaeabacabadadadadafdhdidjdkafdldmdndoafcybFafafafafafafafafafafafafdpafdccSdqdrafcIazazcJazazcJazazazcIafcIazazcJazazafafafafafafafafafafafafafafabadacabaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaababababababadadadadafdsdtdtduafdvdvdvdwafbFbFafdxdxdxdydzdAcSdBdCafdDcSdEdFamdqdGafcVazcWafazazafazcWazcVafcVazcWafazazafcSdHcScSdIdJcScScScSdHdKdLabababababaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaababababababadadadadafdsdtdtduafdvdvdvdwafbFbFafdxdxdxdydzdAcSdBdCafewcSdEdFamdqdGafcVazcWafazazafazcWazcVafcVazcWafazazafcSdHcScSdIdJcScScScSdHdKdLabababababaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadadafdMdtdNdtafdvdOdPdOafbNbFafcScScScScScScSdQdRafdScScScScSdqdTafafafafafaycoafafafafafafafafafafayazafcScScScScScScScScScScScSdLabaeabababaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeababadadadadafafafdUcJafcJafbHafafbFbFafdxcSdVdWdXdxcSdBdCafdDcSdYdZeaebecafczcAcBafazazafazedeeefafczcAcBafazazafcSegeheieieieieieiejamcSekabababababaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadafbFbFbFelbFbFbFbFbFbGbGafdxcSdVdWdXdxcSdQemafencSeoepeqeresafcIazazcJazazcJazazazchafcIazazcJazazafeteuevamamamamamamewexeyekababababaeabaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeababadadadadafbFbFbFbFbFbFbFbFbVbGbGafcScScScScScScSdBezafeAcSeBeCeDeEeFafcVazcWafazazafazeGazeHafcVazcWafazazeIcSeJeKamamameLamameMeNeOekabacababababaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadafafafafcJafafafafafbFbFafdxdxdxePdxdxcSdQemafeQcScSeReScSeTbkafafafafaycoafafafafafafafafafafayazeUcScSeVamamamamamameWamcSekababababababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeababadadadadafafafdUcJafcJafbHafafbFbFafdxcSdVdWdXdxcSdBdCafewcSdYdZeaebecafczcAcBafazazafazedeeefafczcAcBafazazafcSegeheieieieieieiejamcSekabababababaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadafbFbFbFelbFbFbFbFbFbGbGafdxcSdVdWdXdxcSdQemafencSeoepeqeresafcIazazcJazazcJazazazchafcIazazcJazazafeteueKamamamamamameMexeyekababababaeabaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeababadadadadafbFdfbFbFbFbFbFbFbVbGbGafcScScScScScScSdBezafeAcSeBeCeDeEeFafcVazcWafazazafazeGazeHafcVazcWafazazeIcSeJfmamamameLamamfzeNeOekabacababababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadafafafafcJafafafafafbFbFafdxdxdxePdxdxcSdQemafeQgjcSeReScSeTbkafafafafaycoafafafafafafafafafafayazeUcScSeVamamamamamameWamcSekababababababaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadafazazeXazazafeYeZaffafbfcafafafaffdbkfrafafffafcJafbkafafafafazazazazazazafcccdcecfafcgchfgafazazafcScSeVameLamfhamameWamcSekababaeababacaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadafazazazazazaffiamfjazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazfkazcScSeVamamamamamamflamcSekababababababaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadafazazazfmazaffnfoafazazbWazazazfpazazazazbWazazazazazazazazfpazazazbWazazazazazazazbWfqazazazazfkfpcScSeVeLamamamamameWamcSekababababababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadafazazazazazaffiamfjazazazazazazazazazazazazazazgqazazazazazazazazazazazazazazazazazazazazazazazfkazcScSeVamamamamamamflamcSekababababababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadafazazbWgFazaffnfoafazazbWazazazfpazazazazbWazazazazazazazazfpazazazbWazazazazazazazbWazazazazazfkfpcScSeVeLamamamamameWamcSekababababababaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadafaffeafafafafafafafafafafafazazafafafcJafafafafafafafafcJafafafafafafazazafafaffrafafafafafafazazafetfsftfufufvfvfvfvfwamfxekabaeabababaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadadafafaffyfyazfzaffAazaffBfBazfBfBaffCfDdEdEfEfFfGfHfIfJafafazazafeYcScSfKafczcAcBafazazbkcSfLfMcScScScScScSfNfLfOekababacababaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadaeabababaefPazfPazazazazcJazazaffBfBazfBfBafamamamamameCfQfQfQfRafbkazazaffiamcSfSafcIazazcJazazeIfTfTfUdHcScScScScSfUcSfOekababababaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadafaffVfWazazazafazazaffBfBazfBfBaffXfYamfZgafFamfZgbgcafgdazcoaffnfogegfafcVazcWafazazafggggggghcScScScScScSdHamekababababaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadadadafgigjgjgkafayazafafafcJafafafafafafafafcJafafafafafafazazafafafafafafafafafafazazafafafafafafeIaffeafafafafafafababaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaababababadadadadadadadadafafafafafcXazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazazafafadadadadadgladadgladadabababaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadadafafaffyfygSgQaffAazafhahaazhahaaffCfDdEdEfEfFfGfHfIfJafafazazafeYcScSfKafczcAcBafazazbkcSfLfMcScScScScScSfNfLfOekababacababaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadaeabababaefPbWfPazazazazcJazazafjbhaazhajIafamamamamameCfQfQfQfRafbkazazaffiamcSfSafcIazazcJazazeIfTfTfUdHcScScScScSfUcSfOekababababaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadafaffVfWazazazafazazafhahaazhahaaffXfYamfZgafFamfZgbgcafgdazcoaffnfogegfafcVazcWafazcoafggggggghcScScScScScSdHamekababababaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadadadafgihlhsgkafayazafafafcJafafafafafafafafcJafafafafafafazazafafafafafafafafafafazazafafafafafafeIaffeafafafafafafababaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaababababadadadadadadadadafafafafafcXazazazazazazazazazazazazazazazazazeXazazazazazazazazazazazazazeXazazazafafadadadadadgladadgladadabababaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaabababababadadadadadadadadadadafctcrcscqcpazazfpazazazazazbWazazazazazazazazazazazfpazazazbWazazazazazazazazaZaZafafadadgladgladadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaababababaaaaabababadadadadadadadadadadadadafcqcqcqcqcDazazafafafafafafafafafafafaffAazafafafafafbkafafafafafafaffAfqafafgmcSafafadabacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaabababababaeabababababadadadadafafafafafafcKcLcMcNcDazazafgngogngngogngpdtdtdtafazazafgqgrgqgrgsgtgugvgwgvgxafazfqafcSgygycSgzabaeabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaeabababababababababadadadafafafafafafafafafafafafazazafgAgBgngCgBgngDdtgEdtafazazcXcqgFcqgFgGgHgugIgJgJgKcXazazafcScScScSgzabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaabaaabababababadadadadafafafcSgLcScSgMcScScSazgNazazgOgngngngngngngDdtdtduafazazazcqcqcqcqcqgPgugQcqcqcqazazazafcSgRgScSgzababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeadadadadadafafafgMgMcSgTcSgUgVgVgWafayazgXgngngngngngngDdtdtdtafazazfpcqcqcqcqcqgYgZhacqcqcqfpazcoafhbhchdcSgzababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadadadadadafaffecScSgMcScSgTgTcSazhehfazhggAgBgngCgBgnhhhihjhiafazazcXhkcqcqcqcqcqcqcqcqcqhlcXazazafcShmhncSgzababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadafafafhocScScSgMhpcScScSazbRazafgngAhqgngAhqhhgngngnafhrazafhshthuhvhwhxhyhwhxhzcqafazazafcShAhBcSgzaeabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaababababaaaaabababadadadadadadadadadadadadafcqcqcqcqcDazazafafafafafafafafafafafaffAazafafafafafbkafafafafafafaffAksafafktkuafafadabacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaabababababaeabababababadadadadafafafafafafcKcLcMcNcDazazafgngogngngogngpdtdtdtafazazafhugrhugrgsgtgugvgwgvgxafazazafcSgygykvgzabaeabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaeabababababababababadadadafafafafafafafafafafafafazazafgAgBgngCgBgngDdtgEdtafazazcXcqhvcqhvgGgHgugIgJgJgKcXazazafcScScScSgzabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabaaabababababadadadadafafafcSgLcScSgMcScScSazgNazazgOgngngngngngngDdtdtduafazazazcqcqcqcqcqgPgukqcqcqcqazazazafcSgRkwcSgzababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeadadadadadafafafgMgMcSgTcSgUgVgVgWafayazgXgngngngngngngDdtdtdtafazazfpcqcqkrcqcqgYgZkHcqcqcqfpazcoafhbhchdcSgzababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababadadadadadadafaffekxcSgMcScSgTgTcSazhehfazhggAgBgngCgBgnhhhihjhiafazazcXhkcqcqcqcqcqcqcqcqcqkIcXazazafcShmhncSgzababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadafafafhocScScSgMhpcScScSazbRazafgngAhqgngAhqhhgngngnafhrazafkJhtkKhwhxhyhwhxhzcqkLafazazafcShAhBcSgzaeabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadafafafcSgTcScScScScScScSgMbRazafafhCafafafafafafafafaffAazhDafafafhEafafafafafafafafazazafcShFhFcSgzabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacadadadadafafafhGgMcScSgTcScScShHgMbRazafhIhChJhKhLafhMhNhOhPafdtdthQhRdkhRdthSafhIhChJhKhLafazazafcShFhFcSgzababacabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacadadadadafafafhGgMcScSgTcScScShHgMbRcoafhIhChJhKhLafhMhNhOhPafdtdthQhRdkhRdthSafhIhChJhKhLafazazafcShFhFcSgzababacabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadafafcScScScScScScSgTazcSbRhHafhThChUhVhVafhWhWhWhWafdtdtdtdtdtdtdthXafhThChUhVhVafazazafcShFhFcSgzgzgzgzababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadafcSgMgMgTcScSgMgTazhebRazafhThYhZhKhLafiaafafafibdtdtdtdkicdtdtidafhThYhZhKhLafazazafcShFhFcSieififigabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabadadadadadadafkxgMgMgTcScSgMgTazhebRazafhThYhZhKhLafiaafafafibdtdtdtdkicdtdtidafhThYhZhKhLafazazafcShFhFcSieififigabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadafcScScScShpcScScScSgNazazafafafcJafafafdtdtihdkhRdtdtdtdtdtdtdtdtbkafcJafafafafazcoafhbhFiicSieififigabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababacabadadadafijcSgMcScScSgTcSikafazazafilimimimilafindtdtdkicdtdtdtioipiqiripafilimimimilafazazafcSisiscSgzgzgzgzabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadadafafafafafafafafafafafitazafiuimimimivafiwdtdtdkhRdtdtdtipiriqiripafiuimimimixafazazafcSisiscSgzabababacababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaeadadadadafafafafafafafafafafafaffAazafiyimimimizafiAdtdtdkicdtdtdtipiripiBioafizimimimiCafazazafcSiDiscSgzadgladadadadadadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeababadadadafafafafafafafafafafafafafgOgOafiuimimimiuafdtdtdtdkhRdtdtdtdtdtdtdtdubkiEimimimiuafazazafcSiFiFcSafafafafafafafafafadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadafafgOgOiGgOgOiGgOiHgOgOgOgOgOafiIimimimiJafdtdkiKdkdtdtdtdtdthRdtdtdtafiJimimimiLafazcoafhbiFiFcSafgOgOiHgOiGgOgOafadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadafazgOgOgOgOgOgOgOiMgOgOgOgOgOafiEimimimixafdtdtdtdtdtdtdticdkdtdthRiNafiuimimimivafazazafcScScScSafgOgOiMgOgOgOgOafadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababiOabacadadafiPgOgOgOgOgOgOgOiHgOgOgOgOgOafiQimimimiRafiSiciTichQdtdtdtdtdthRdkhSafiQimimimiRafazazafafbIaZafafgOgOiHgOgOgOgOiUadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadafafafafaffeafafafafafafafgOgOafafiViWiXafbkafafafafiYfAazafiZafafafafafafafiWjaafaffAazafgOjbgOgOgOgOgOafaffeafafafadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadadadadadadadadadadadadadafjcgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOjdgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOafadadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaeadadabadadadadadadadadadadadadafgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOjegOgOgOgOafadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadafafgOiGgOgOgOiGgOiHgOgOgOgOgOafiIimimimiJafdtdkiKdkdtdtdtdtdthRdtdtdtafiJimimimiLafazcoafhbiFiFcSafgOgOiHgOiGgOgOafadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadafazgOgOgOgOgOgOgOiMgOgOgOgOgOafiEimimimixafdtdtdtdtdtdtdticdkdtdthRiNafiuimimimivafazazafcSkykycSafkzgOiMgOgOgOgOafadadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababiOabacadadafiPgOgOgOkAgOgOgOiHgOkAgOgOgOafiQimimimiRafiSiciTichQdtdtdtdtdthRdkhSafiQimimimiRafazazafafbIaZafafgOgOiHgOgOgOgOiUadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadafafafafaffeafafafafafafafgOgOafafiViWiXafbkafafafafiYfAazafiZafafafafafafafiWjaafaffAazafgOkBkCgOgOgOgOafaffeafafafadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadadadadadadadadadadadadadafjcgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOjdgOgOgOgOiGgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOkDafadadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaeadadabadadadadadadadadadadadadafgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOgOkAgOjegOgOgOgOafadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababacababadadadadadadadadafaffAazafbkafbHcJafafgOgOgOafafafafafiWafafafafafafafafiWbHaffAazafafafafafafafafafadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeabababababadadadadadadadafjfjgjhjijjafjkazjlafgOgOgOafjmcqcqcqcqcqjnjojpjqjmafjkazjlafhHhHafazeXfBfBafadadadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeabababababadadadadadadadafjfjgjhjijjafjkazjlafkzgOgOafjmcqcqcqcqcqjnjojpjqjmafjkazjlafhHhHafazeXfBfBafadadadadadadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababadadadadadadfejrjsjgjtjuafjvhHjwafgOgOgOafjxcqcqcqcqcqcqcqcqjycqafjzhHjwafhHhHafazazjAjBafadadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadadadadafjCjDjgjEjFafjGazjHafjcgOgOafcqcqcqcqcqcqcqcqcqcqcqafjGazjHafhHhHafazazfBfBafadadadadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadadadafjIjgjJjtjKafazbWjLafgOgOgOafjMcqcqjycqjxcqcqcqjNjOafazbWazafhHhHcJazazfBfBafadadadadadadababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadadafjPjgjgjtjQafafafafafgOgOgOafafafafafafafafafafafafafafafafafjRjSafazazfBfBafadadadadadadadababacabababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababadadadadadadafjCjDjgjEjFafkEazkFafgOgOgOafcqcqcqcqcqcqcqcqcqcqcqafjGazjHafhHhHafazazfBfBafadadadadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadadadafkGjgjJjtjKafazazjLafgOgOgOafjMcqcqjycqjxcqcqcqjNjOafazbWazafhHhHcJazazfBfBafadadadadadadababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababadadadadadadafjPjgjgjtjQafafafafafgOgOkDafafafafafafafafafafafafafafafafafjRjSafazazfBfBafadadadadadadadababacabababaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababadadadadadafjCjgjsjgjgjTjUjVjgazgOjWjWazjXhHjYjZhHkakbhHkckdkekfkdkgkakhkahHafazazfBjBafadadadadadadababaeababababababaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeabadadadadadafjrjgkikjkkjgjgjgjgfpgOjWjWfphHhHklhHkakbjXkchHkmkfkdkekgkckakhhHafazazfBfBafadadadadadadadabababababaaababaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababacababadadadafafafafafafafafafafafiHiMiHafafafafafafafafafadafadafadadafafafafafaffeafafafadadadadadadabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadadadadadadadadadadadadadafjcgOgOfeadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababadadadadadadadadadadadadadadafjcgOkDfeadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaababaeababiOadadadadadadadadadadadadadadadafgOgOgOafadadadadadadadadadadadadadadadadadadadadadadadadadadadadadabababaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaabababababadadadadadadadadadadadadadadadadafafknafafadadadadadadadadadadadadadadabadadadadadadadadadadadadadadabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababadadadadadadadadadadadadadabadadadadafafafafafadadadadadadadadadadabababacababadadadadadadadadadadadadadabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
