@@ -130,6 +130,11 @@
 	fore_dir = EAST
 	map_bounds = list(50,146,165,107)
 
+/datum/npc_ship/innie_defenseplatform
+	mapfile_links = list('maps/first_contact/maps/faction_bases/Innie_Defense.dmm')
+	fore_dir = EAST
+	map_bounds = list(50,146,165,107)
+
 /datum/npc_ship/cov_defenseplatform
 	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Defense.dmm')
 	fore_dir = WEST
@@ -148,7 +153,7 @@
 	icon_state = "SMAC"
 	faction = "innie"
 	ship_name_list = list()
-	ship_datums = list(/datum/npc_ship/unsc_defenseplatform)
+	ship_datums = list(/datum/npc_ship/innie_defenseplatform)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/innie/generate_ship_name()
 	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
