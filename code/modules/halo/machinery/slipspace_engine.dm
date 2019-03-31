@@ -52,8 +52,9 @@
 	mobs_to_alert += GLOB.mobs_in_sectors[om_obj]
 	for(var/obj/effect/overmap/om in range(SLIPSPACE_JUMP_ALERT_RANGE,alert_origin))
 		mobs_to_alert |= GLOB.mobs_in_sectors[om]
+	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
 	for(var/mob/m in mobs_to_alert)
-		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [get_dir(map_sectors["[m.z]"],alert_origin)]</span>")
+		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[get_dir(map_sectors["[m.z]"],alert_origin)]]</span>")
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
@@ -68,6 +69,7 @@
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY * 3, src, same_direction = 1))
 		return
 	visible_message("<span class = 'notice'>[user] preps [src] for mobile core detonation..</span>")
+	message2discord(config.oni_discord, "@here, [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
 	overload_engine(user)
 
 /obj/machinery/slipspace_engine/proc/set_next_jump_allowed(var/to_add)

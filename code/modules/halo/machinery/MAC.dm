@@ -259,7 +259,7 @@
 //MAC OVERMAP PROJECTILE//
 /obj/item/projectile/overmap/mac
 	name = "MAC Slug"
-	step_delay = 0.5 SECONDS
+	step_delay = 0.5
 	ship_damage_projectile = /obj/item/projectile/mac_round
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/mac_cannon_impact.wav'
 
