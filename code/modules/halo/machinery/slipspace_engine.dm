@@ -268,7 +268,8 @@
 		message2discord(config.oni_discord, "@here, slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
 	for(var/area/a in range(50,b.loc))
 		for(var/obj in a.contents)
-			qdel(obj)
+			spawn(0)
+				qdel(obj)
 		new /area/space/ (a.loc)
 
 /obj/payload/slipspace_core/cov
