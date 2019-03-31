@@ -292,6 +292,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form
 	var/next_infestor_spawn = 0
+	var/our_infestor
 
 	var/obj/item/weapon/gun/our_gun
 
@@ -301,7 +302,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 			to_chat(src,"<span class = 'notice'>Your biomass hasn't recovered from the previous formation.</span>")
 		return
 	next_infestor_spawn = world.time + COMBAT_FORM_INFESTOR_SPAWN_DELAY
-	new /mob/living/simple_animal/hostile/flood/infestor (src.loc)
+	our_infestor = new /mob/living/simple_animal/hostile/flood/infestor (src.loc)
 	visible_message("<span class = 'warning'>[src]'s flesh writhes for a moment, blood-red feelers emerging, followed by a singular infection form.</span>")
 
 /mob/living/simple_animal/hostile/flood/combat_form/verb/create_infestor_form()
@@ -356,7 +357,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	. = ..()
 	if(ckey || client)
 		return
-	//spawn_infestor() //Had too much of a performance hit over the duration of a round.
+	if(locate(/mob/living/carbon/human) in view(1,src) && isnull(our_infestor))
+		spawn_infestor()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
