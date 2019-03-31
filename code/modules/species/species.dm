@@ -605,6 +605,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	var/skill_mod = 10 * attacker.get_skill_difference(SKILL_COMBAT, target)
 	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()
+	var/push_mod = min(max(1 + attacker.get_skill_difference(SKILL_COMBAT, target), 1), 3)
 	if(target.a_intent == I_HELP)
 		state_mod -= 30
 	//Handle unintended consequences
@@ -616,7 +617,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	var/randn = rand(1, 100) - skill_mod + state_mod
 	if(!(check_no_slip(target)) && randn <= 25)
 		var/armor_check = 100 * target.get_blocked_ratio(affecting, BRUTE)
-		target.apply_effect(3, WEAKEN, armor_check)
+		target.apply_effect(push_mod, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		if(armor_check < 100)
 			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
