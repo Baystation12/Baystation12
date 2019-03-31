@@ -103,9 +103,9 @@
 /obj/machinery/overmap_weapon_console/mac
 	name = "MAC Fire Control"
 	desc = "A console used to control the firing of MAC rounds in ship-to-ship combat."
-	icon = 'code/modules/halo/machinery/mac_cannon.dmi'
+	icon = 'code/modules/halo/overmap/weapons/mac_cannon.dmi'
 	icon_state = "mac_fire_control"
-	fire_sound = 'code/modules/halo/machinery/mac_gun_fire.ogg'
+	fire_sound = 'code/modules/halo/overmap/weapons/mac_gun_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/mac
 	requires_ammo = 1
 	var/accelerator_overlay_icon_state = "mac_accelerator_effect"

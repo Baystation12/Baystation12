@@ -6,7 +6,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control
 	name = "Global Deck Gun Control"
 	desc = "Allows simultaneous control of all connected deck guns via local consoles."
-	icon = 'code/modules/halo/machinery/deck_gun.dmi'
+	icon = 'code/modules/halo/overmap/weapons/deck_gun.dmi'
 	icon_state = "deck_gun_control_global"
 	anchored = 1
 	density = 1

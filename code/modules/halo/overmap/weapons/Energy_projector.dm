@@ -57,7 +57,7 @@
 /obj/machinery/overmap_weapon_console/Projector
 	name = "Energy Fire Control"
 	desc = "A console used to control the firing of powerful plasma beams"
-	icon = 'code/modules/halo/machinery/plasma_cannon.dmi'
+	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
 	icon_state = "covie_console"
 	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/beam
@@ -238,7 +238,7 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,1,2,4,5)
+	explosion(a,1,2,4,5, adminlog = 0)
 
 /obj/item/projectile/projector_laser_damage_proj/launch()
 	create_child_projs()

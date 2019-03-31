@@ -1,6 +1,6 @@
 
 /obj/machinery/overmap_weapon_console
-	icon = 'code/modules/halo/machinery/overmap_weapon_base.dmi'
+	icon = 'code/modules/halo/overmap/weapons/overmap_weapon_base.dmi'
 	icon_state = "wep_base"
 	anchored = 1
 	density = 1
