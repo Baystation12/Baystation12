@@ -153,8 +153,6 @@
 	spawn(jump_delay)
 		visible_message("<span class = 'notice'>[src] momentarily glows bright, then activates!</span>")
 		slipspace_to_location(input_loc)
-		set_next_jump_allowed(jump_cooldown)
-		jump_charging = 1
 
 /obj/machinery/slipspace_engine/proc/user_slipspace_to_nullspace(var/mob/user)
 	if(!precise_jump && !check_jump_allowed(om_obj.loc))
@@ -163,16 +161,20 @@
 	visible_message("<span class = 'notice'>[user] starts prepping [src] for a jump to slipspace...</span>")
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY, src, same_direction = 1))
 		return
+	set_next_jump_allowed(jump_cooldown/4) //Smaller delay when jumping to nullspace than when jumping back to realspace.
+	jump_charging = 2
 	visible_message("<span class = 'notice'>[user] preps [src] for a jump to slipspace.</span>")
 	log_admin("[user] the [user.mind.assigned_role] (CKEY: [user.ckey]) activated a slipspace engine, transporting [om_obj] to nullspace. Jump timer: [jump_delay / 10] seconds.")
 	spawn(jump_delay)
 		visible_message("<span class = 'notice'>[src] momentarily glows bright, then activates!</span>")
 		slipspace_to_nullspace()
-		set_next_jump_allowed(jump_cooldown/4) //Smaller delay when jumping to nullspace than when jumping back to realspace.
-		jump_charging = 1
 
 /obj/machinery/slipspace_engine/process()
-	if(jump_charging == 1)
+	if(jump_charging == 2)
+		var/obj/effect/overmap/ship/om_ship = om_obj
+		if(istype(om_ship))
+			om_ship.speed = list(0,0)
+	if(jump_charging == (1 || 2))
 		var/area/area_contained = loc.loc
 		if(!istype(area_contained))
 			return
@@ -244,6 +246,29 @@
 	icon_state = "slipspace"
 	bounds = "64,64"
 	core_to_spawn = null
+
+//CORE PAYLOADS//
+/obj/payload/slipspace_core
+	name = "Slipspace Core"
+	desc = "The core of a slipspace device, detached and armed. Slipspace cores are unstable and cannot be disarmed."
+	explodetype = /datum/explosion/slipspace_core
+
+/obj/payload/slipspace_core/Initialize()
+	. = ..()
+	explode_at = world.time + seconds_to_explode*10
+	exploding = 1
+	GLOB.processing_objects += src
+
+/obj/payload/slipspace_core/attack_hand(var/attacker)
+	to_chat(attacker,"<span class = 'danger'>[src] is armed and beeping. </span>")
+
+/datum/explosion/slipspace_core/New(var/obj/payload/b)
+	if(config.oni_discord)
+		message2discord(config.oni_discord, "@here, slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
+	for(var/area/a in range(50,b.loc))
+		for(var/obj in a.contents)
+			qdel(obj)
+		new /area/space/ (a.loc)
 
 //SLIPSPACE RUPTURE EFFECT//
 /obj/effect/slipspace_rupture

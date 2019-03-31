@@ -145,7 +145,7 @@
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
 	if(config.oni_discord)
-		message2discord(config.oni_discord, "@here, nuclear detonation detected. [b.name] @ [b.loc]")
+		message2discord(config.oni_discord, "@here, nuclear detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
 	qdel(src)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
