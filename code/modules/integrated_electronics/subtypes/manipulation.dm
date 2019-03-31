@@ -673,15 +673,19 @@
 	activators = list(
 		"interact" = IC_PINTYPE_PULSE_IN,
 		"on interact" = IC_PINTYPE_PULSE_OUT
+	)
 
+	matter = list(
+		MATERIAL_SILVER = 1000,
+		MATERIAL_GOLD = 200
 	)
 
 	spawn_flags = IC_SPAWN_RESEARCH
-	power_draw_per_use = 30
-	ext_cooldown = 1
+	power_draw_per_use = 100
+	cooldown_per_use = 4 SECONDS
+	ext_cooldown = 1 SECONDS
 	complexity = 20
 	w_class = ITEM_SIZE_SMALL
-	size = 3
 
 	var/obj/item/installed_item = null
 
@@ -711,9 +715,10 @@
 /obj/item/integrated_circuit/manipulation/interactor/attack_self(var/mob/user)
 	if(installed_item)
 		installed_item.dropInto(loc)
+		
 		to_chat(user, "<span class='notice'>You slide \the [installed_item] out of the interactor.</span>")
-		size = initial(size)
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
+
 		installed_item = null
 		set_pin_data(IC_OUTPUT, 1, weakref(null))
 		push_data()
@@ -746,7 +751,7 @@
 	complexity = 8
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
-	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	spawn_flags = IC_SPAWN_DEFAULT
 	origin_tech = list(TECH_ENGINEERING = 2)
 
 /obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
@@ -789,7 +794,7 @@
 	complexity = 4
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
-	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	spawn_flags = IC_SPAWN_DEFAULT
 	origin_tech = list(TECH_ENGINEERING = 2)
 
 /obj/item/integrated_circuit/manipulation/hatchlock/do_work(ord)

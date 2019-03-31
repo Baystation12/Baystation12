@@ -528,13 +528,13 @@
 	outputs = list(
 		"volume used" = IC_PINTYPE_NUMBER,
 		"temperature" = IC_PINTYPE_NUMBER,
+		"enabled" = IC_PINTYPE_BOOLEAN,
 		"self reference" = IC_PINTYPE_REF
 	)
 	activators = list(
-		"activate heating" = IC_PINTYPE_PULSE_IN,
-		"on heat" = IC_PINTYPE_PULSE_OUT,
-		"update temperature" = IC_PINTYPE_PULSE_IN,
-		"push ref" = IC_PINTYPE_PULSE_IN,
+		"toggle" = IC_PINTYPE_PULSE_IN,
+		"on toggle" = IC_PINTYPE_PULSE_OUT,
+		"push ref" = IC_PINTYPE_PULSE_IN
 	)
 
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
@@ -543,6 +543,7 @@
 	power_draw_per_use = 50
 	volume = 30
 
+	var/active = 0
 	var/min_temp = 40 CELSIUS
 	var/max_temp = 200 CELSIUS
 	var/heating_power = 5
@@ -567,18 +568,28 @@
 			target_temp = Clamp(target_temp + T0C, min_temp, max_temp)
 			set_pin_data(IC_INPUT, 1, target_temp - T0C)
 
-			update_temperature()
-		if(3)
-			set_pin_data(IC_OUTPUT, 2, temperature - T0C)
+			active = !active
+			set_pin_data(IC_OUTPUT, 3, active)
 			push_data()
-		if(4)
-			set_pin_data(IC_OUTPUT, 3, weakref(src))
+			activate_pin(2)
+
+			// begin processing temperature
+			if(active)
+				QUEUE_TEMPERATURE_ATOMS(src)
+		if(3)
+			set_pin_data(IC_OUTPUT, 4, weakref(src))
 			push_data()
 
 /obj/item/integrated_circuit/reagent/temp/on_reagent_change()
 	push_vol()
 
-/obj/item/integrated_circuit/reagent/temp/proc/update_temperature()
+/obj/item/integrated_circuit/reagent/temp/power_fail()
+	active = 0
+
+/obj/item/integrated_circuit/reagent/temp/ProcessAtomTemperature()
+	if(!active)
+		return PROCESS_KILL
+
 	last_temperature = temperature
 
 	if(mode == IC_HEATER_MODE_HEAT && temperature < target_temp)
@@ -587,11 +598,15 @@
 		temperature = max(temperature - heating_power, min_temp)
 
 	if(temperature != last_temperature)
-		QUEUE_TEMPERATURE_ATOMS(src)
-
+		// Lost power
+		if(!check_power())
+			power_fail()
+			return ..()
+	
 		set_pin_data(IC_OUTPUT, 2, temperature - T0C)
 		push_data()
-		activate_pin(2)
+
+	return TRUE
 
 /obj/item/integrated_circuit/reagent/temp/heater
 	name = "reagent heater"
@@ -606,13 +621,6 @@
 	desc = "A small reagent container capable of cooling reagents. It can hold up to 30u."
 	icon_state = "reagent_cooler"
 	extended_desc = "This is effectively an internal beaker. It has a cooling mechanism wrapped around it, which allows it to cool the contents of the beaker. Temperature is given in celsius."
-
-	activators = list(
-		"activate cooling" = IC_PINTYPE_PULSE_IN,
-		"on cool" = IC_PINTYPE_PULSE_OUT,
-		"update temperature" = IC_PINTYPE_PULSE_IN,
-		"push ref" = IC_PINTYPE_PULSE_IN
-	)
 
 	spawn_flags = IC_SPAWN_RESEARCH
 
