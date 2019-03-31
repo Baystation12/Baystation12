@@ -198,13 +198,14 @@
 	S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
 	if(S.exude_gasses)
 		S.exude_gasses -= badgas
-	if(S.consume_gasses)
-		S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
-	for(var/g in atmosphere.gas)
-		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
-			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
+	if(atmosphere)
+		if(S.consume_gasses)
+			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
+		for(var/g in atmosphere.gas)
+			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
+				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 	if(prob(50))
-		var/chem_type = SSchemistry.get_random_chem(TRUE, atmosphere.temperature)
+		var/chem_type = SSchemistry.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
 		if(chem_type)
 			var/nutriment = S.chems[/datum/reagent/nutriment]
 			S.chems.Cut()
@@ -219,14 +220,18 @@
 		A.SetName("alien creature")
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
-	A.minbodytemp = atmosphere.temperature - 20
-	A.maxbodytemp = atmosphere.temperature + 30
-	A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
-	if(A.min_gas)
-		A.min_gas = breathgas.Copy()
-	if(A.max_gas)
-		A.max_gas = list()
-		A.max_gas[badgas] = 5
+	if(atmosphere)
+		A.minbodytemp = atmosphere.temperature - 20
+		A.maxbodytemp = atmosphere.temperature + 30
+		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
+		if(A.min_gas)
+			A.min_gas = breathgas.Copy()
+		if(A.max_gas)
+			A.max_gas = list()
+			A.max_gas[badgas] = 5
+	else
+		A.min_gas = null
+		A.max_gas = null
 
 /obj/effect/overmap/sector/exoplanet/proc/get_random_species_name()
 	return pick("nol","shan","can","fel","xor")+pick("a","e","o","t","ar")+pick("ian","oid","ac","ese","inian","rd")

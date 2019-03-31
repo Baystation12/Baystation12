@@ -73,8 +73,9 @@
 				spawn_flora(T, 1)
 
 /datum/random_map/noise/exoplanet/proc/spawn_fauna(var/turf/T)
-	var/beastie = pick(fauna_types)
-	new beastie(T)
+	if(LAZYLEN(fauna_types))
+		var/beastie = pick(fauna_types)
+		new beastie(T)
 
 /datum/random_map/noise/exoplanet/proc/generate_flora()
 	for(var/i = 1 to flora_diversity)
@@ -113,6 +114,8 @@
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
 	if(big)
-		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(big_flora_types), 1)
+		if(LAZYLEN(big_flora_types))
+			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(big_flora_types), 1)
 	else
-		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(small_flora_types), 1)
+		if(LAZYLEN(small_flora_types))
+			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(small_flora_types), 1)
