@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - bugfix: "Torch is now facing upper side of the map."
