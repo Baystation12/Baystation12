@@ -38,6 +38,7 @@ addons:
       - libstdc++6:i386
       - python
       - python-pip
+      - uchardet
 
 script:
   - test/run-test.sh
