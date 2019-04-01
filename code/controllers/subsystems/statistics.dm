@@ -22,6 +22,7 @@ SUBSYSTEM_DEF(statistics)
 	init_order = SS_INIT_MISC_LATE
 	flags = SS_NO_INIT
 
+	var/extracted_slime_cores_amount = 0
 	var/crew_death_count = 0
 	var/list/deaths
 	var/list/values = list()
