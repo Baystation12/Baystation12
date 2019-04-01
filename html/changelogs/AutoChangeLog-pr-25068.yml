@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Being cured of a virus now correctly adds its antigens where appropriate."
